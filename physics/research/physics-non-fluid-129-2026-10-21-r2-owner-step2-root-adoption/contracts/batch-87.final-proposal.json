@@ -1,0 +1,1698 @@
+{
+  "version": 1,
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "batch": "87",
+  "level": 2,
+  "scope": [
+    "lem-csm-frontier-polymer-tree-majorant",
+    "thm-csm-frontier-polymer-analyticity",
+    "lem-csm-frontier-stable-mayer-tree-bound",
+    "thm-csm-frontier-dilute-mayer-domain",
+    "ex-csm-frontier-hard-core-dilute-bound"
+  ],
+  "contracts": {
+    "lem-csm-frontier-polymer-tree-majorant": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-csm-frontier-abstract-polymer",
+          "source_section": "Definition",
+          "quote": "An abstract polymer model consists of an at most countable set $\\Gamma$ (finite or in bijection with $\\mathbb N$), a reflexive symmetric relation $\\sim$ on $\\Gamma$ (so $\\gamma\\sim\\gamma$ and $\\gamma\\sim\\eta$ implies $\\eta\\sim\\gamma$), and an activity function $z:\\Gamma\\to\\mathbb C$. Its elements are called polymers, and $\\gamma\\sim\\eta$ means that the two polymers are incompatible. A subset $X\\subseteq\\Gamma$ is compatible when no two distinct elements of $X$ are related by $\\sim$. For real and natural summands, finite-index sums and products are enumeration-independent. For complex summands, define a finite sum or product by any enumeration and repeated addition or multiplication in $\\mathbb C$; associativity and commutativity make the result independent of the enumeration. The empty sum is $0$ and the empty product is $1$. For each finite $V\\subseteq\\Gamma$, define the finite-volume partition polynomial\n\n$$Z_V(z):=\\sum_{\\substack{X\\subseteq V\\\\X\\text{ compatible}}}\\ \\prod_{\\gamma\\in X}z_\\gamma,$$\n\nwhere the empty subset contributes $1$.\n\nWrite $[n]:=\\{1,\\ldots,n\\}$ and $\\binom{[n]}2:=\\{\\{i,j\\}:i,j\\in[n],\\ i\\ne j\\}$. A simple graph on $[n]$ is a pair $([n],E)$ with $E\\subseteq\\binom{[n]}2$; a path is a finite vertex list with distinct vertices and each consecutive pair an edge. A graph is connected when every two vertices are joined by a path. A cycle is a vertex list $(v_0,\\ldots,v_k)$ with $k\\geq3$, $v_k=v_0$, $v_0,\\ldots,v_{k-1}$ distinct, and each consecutive pair an edge; a tree is a connected simple graph with no cycle. For $n\\in\\mathbb N$ with $n\\geq1$, let $\\mathcal C_n$ be the set of connected simple graphs on $[n]$ and let $\\mathcal T_n$ be the set of trees on $[n]$. The set $[n]$ is finite; its power set is finite, so its subset $\\binom{[n]}2$ is finite; the power set of that edge set is finite as well. Each simple graph on $[n]$ is determined by an edge set in this last power set, so $\\mathcal C_n$ and $\\mathcal T_n$ are finite.\n\nFor an ordered tuple $(\\gamma_1,\\ldots,\\gamma_n)\\in\\Gamma^n$, put $f_{ij}:=-\\mathbf 1_{\\{\\gamma_i\\sim\\gamma_j\\}}$ and define the connected coefficient\n\n$$U_n(\\gamma_1,\\ldots,\\gamma_n):=\\sum_{G\\in\\mathcal C_n}\\ \\prod_{\\{i,j\\}\\in E(G)}f_{ij}.$$\n\nFor $n=1$, $\\mathcal C_1$ contains the one-vertex graph and the empty edge product equals $1$. These are finite polynomial and coefficient definitions; they assert no convergence.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-finite-simple-graph",
+          "source_section": "Definition",
+          "quote": "A **finite simple graph** is an ordered pair $G=(V,E)$ in which $V$ is a finite\nset and\n\n$$E\\subseteq [V]^2:=\\{\\,\\{u,v\\}\\subseteq V: u\\ne v\\,\\}.$$\n\nThe elements of $V=V(G)$ are the **vertices** and the elements of $E=E(G)$ are\nthe **edges**. Thus every edge has two distinct endpoints, there are no loops,\nand an unordered pair of vertices occurs as at most one edge. Finiteness and the\nnotation $|V|$ and $|E|$ are those of [[def-finite-cardinality]].\n\nWhen no qualifier is present, the word **graph** has this meaning.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define\n$$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$\nprovided by the all-real convergence proved in The exponential series converges absolutely for every real argument. Here $n!\\in\\mathbb N$ is the factorial of The factorial $n!$ and the falling factorial $n^{\\underline{k}}$, defined by recursion in $\\mathbb{N}$, $\\iota(n!)$ is its nonzero real image (The canonical natural $\\iota(n) = n \\cdot 1_F$ of a field, Canonical naturals are positive and strictly increasing), and powers and series are those of Integer powers $a^m$ and Series, partial sums, convergence and the sum, divergence, and the tail series.\n\nThis is a real power series centred at $0$ (A real power series about a centre, its interval of convergence, and its radius in $[0,+\\infty]$). No logarithm, irrational power, or differential equation enters the definition.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-exponential-is-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "The exponential function is continuous and strictly increasing on $\\mathbb R$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "source_section": "Definition",
+          "quote": "Every $z\\in\\mathbb C$ has unique coordinates $z=a+bi$\n([[thm-complex-numbers-form-a-field]]). Define\n$$\\operatorname{Re}z=a,\\qquad \\operatorname{Im}z=b,\\qquad \\overline z=a-bi,$$\nand define its **modulus** by\n$$|z|=\\sqrt{a^2+b^2}.$$\nThe real numbers are least-upper-bound complete\n([[cor-cauchy-reals-lub-complete]]), so the nonnegative square root exists and\nis unique by [[thm-of-square-roots]].",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-complex-conjugation-and-modulus-laws",
+          "source_section": "Statement",
+          "quote": "Complex conjugation is a real-field automorphism satisfying\n$$\\overline{z+w}=\\overline z+\\overline w,\\qquad \\overline{zw}=\\overline z\\,\\overline w,\\qquad \\overline{\\overline z}=z.$$\nFor every $z,w\\in\\mathbb C$,\n$$z\\overline z=|z|^2,\\qquad |z|\\ge0,\\qquad |z|=0\\Longleftrightarrow z=0,$$\n$$|zw|=|z||w|,\\qquad |z+w|\\le |z|+|w|.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-abs-value",
+          "source_section": "Definition",
+          "quote": "Let $F$ be an ordered field (Ordered field). The **absolute value** of\n$x \\in F$ is\n\n$$|x| \\;:=\\; \\begin{cases} x & \\text{if } x \\ge 0, \\\\ -x & \\text{if } x < 0. \\end{cases}$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-of-abs-value",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field (Ordered field) and let $x, y \\in F$, with\n$|x|$ the absolute value (Absolute value in an ordered field). Then\n\n$$|x| \\ge 0; \\quad |x| = 0 \\iff x = 0; \\quad -|x| \\le x \\le |x|; \\quad |-x| = |x|; \\quad |xy| = |x|\\,|y|;$$\n\nand, for every $c > 0$, one has $|x| < c \\iff -c < x < c$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-of-triangle-inequality",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field (Ordered field) and let $x, y \\in F$. Then\n\n$$|x + y| \\le |x| + |y|.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-factorial-and-falling-factorial",
+          "source_section": "Definition",
+          "quote": "**The factorial.** By the recursion theorem (The recursion theorem) applied to the\nset $\\mathbb{N}\\times\\mathbb{N}$, the starting element $(0,1)$ and the function\n$f(k, v) = (\\sigma(k),\\, v \\cdot \\sigma(k))$, and by the same induction on the\nfirst coordinate as in Finite sums and finite products of natural numbers, $\\sum_{k<n} a_k$ and $\\prod_{k<n} a_k$ in $\\mathbb{N}$, there is a unique\n$F : \\mathbb{N} \\to \\mathbb{N}$ with\n\n$$F(0) = 1, \\qquad F(\\sigma(n)) = F(n)\\cdot\\sigma(n) \\quad (n \\in \\mathbb{N}).$$\n\nWe write $n! := F(n)$. Thus $0! = 1$, $1! = 0!\\cdot 1 = 1$, $2! = 1!\\cdot 2 = 2$,\n$3! = 6$, $4! = 24$, $5! = 120$, $6! = 720$.\n\n**$0! = 1$ is the base clause of this recursion**, not a convention imported from\nelsewhere. Nothing about empty products is presupposed; the agreement with the\nempty product is proved below, in clause (a), rather than assumed.\n\n**Truncated difference.** Throughout, $n - k$ is the operation fixed in\nFinite sums and finite products of natural numbers, $\\sum_{k<n} a_k$ and $\\prod_{k<n} a_k$ in $\\mathbb{N}$: the unique $j$ with $k + j = n$ when\n$k \\le n$, and $0$ when $n < k$.\n\n**The falling factorial.** For $n \\in \\mathbb{N}$ define $n^{\\underline{k}}$ by\nrecursion on $k$, by the recursion theorem applied to\n$\\mathbb{N}\\times\\mathbb{N}$ with starting element $(0,1)$ and\n$f(k, v) = (\\sigma(k),\\, v \\cdot (n-k))$:\n\n$$n^{\\underline{0}} = 1, \\qquad n^{\\underline{\\sigma(k)}} = n^{\\underline{k}}\\cdot(n-k) .$$\n\nSo $n^{\\underline{1}} = 1\\cdot(n-0) = n$ and $n^{\\underline{2}} = n\\,(n-1)$, and\nfor $k \\le n$ the value is the product $n(n-1)\\cdots(n-k+1)$ of the $k$ topmost\nfactors.\n\n**Four facts, proved here because the page uses each of them.**\n\n**(a) The factorial is the product of the first $n$ positive naturals.**\n$n! = \\prod_{j<n}\\sigma(j) = \\prod_{j<n}(j+1)$, the $\\mathbb{N}$-valued product of\nFinite sums and finite products of natural numbers, $\\sum_{k<n} a_k$ and $\\prod_{k<n} a_k$ in $\\mathbb{N}$. Induction (The principle of mathematical induction): at\n$n = 0$ both sides are $1$, the empty product and the base clause agreeing; and\n$\\prod_{j<\\sigma(n)}\\sigma(j) = \\big(\\prod_{j<n}\\sigma(j)\\big)\\cdot\\sigma(n) = n!\\cdot\\sigma(n) = \\sigma(n)!$.\n**So the empty-product reading and the base-clause reading are the same reading**,\nand neither was assumed.\n\n**(b) $n! \\ne 0$, and $\\iota(n!) = \\prod^{\\mathbb{R}}_{j<n}\\iota(j+1)$.** For the\nfirst, $0! = 1 \\ne 0$ (The von Neumann naturals form a Peano system) and\n$\\sigma(n)! = n!\\cdot\\sigma(n)$ is a product of two nonzero naturals, which is\nnonzero: if $xy = 0$ with $y \\ne 0$ then $xy = 0\\cdot y$\n(Zero and one under multiplication) and cancellation gives $x = 0$\n(Cancellation for multiplication by a nonzero factor). So $n! \\ne 0$ for every $n$ by induction. For the second, apply the bridge clause\n6 of that lemma to clause (a) above. This is what makes the factorial of this\npage and the real-valued product $\\prod_{j<n}(j+1)$ used elsewhere in the library\n**one object seen twice**, rather than two unrelated notions.\n\n**(c) $n^{\\underline{k}}\\cdot(n-k)! = n!$ for $k \\le n$.** Induction on $k$, for\nall $n$ at once. At $k = 0$ this reads $1 \\cdot n! = n!$. Assume it at $k$ and\nlet $\\sigma(k) \\le n$; then $k \\le n$, and writing $d := n - k$ we have\n$k + d = n$ and $d \\ne 0$, since $k + 0 = k \\ne n$; so $d = \\sigma(e)$ for a\nunique $e$ (Every nonzero natural number is a successor), and $\\sigma(k) + e = n$, that is\n$e = n - \\sigma(k)$ (Addition is cancellative). Therefore\n$n^{\\underline{\\sigma(k)}}\\cdot\\big(n-\\sigma(k)\\big)! = n^{\\underline{k}}\\cdot(n-k)\\cdot e! = n^{\\underline{k}}\\cdot\\big(e!\\cdot\\sigma(e)\\big) = n^{\\underline{k}}\\cdot\\sigma(e)! = n^{\\underline{k}}\\cdot(n-k)! = n!$,\nusing commutativity and associativity of multiplication\n(Multiplication is associative, Multiplication is commutative) and the recursion\nclause for the factorial.\n\n**(d) Boundary values.** $n^{\\underline{0}} = 1$ for every $n$, by the base\nclause; $n^{\\underline{n}} = n!$, since clause (c) at $k = n$ gives\n$n^{\\underline{n}}\\cdot 0! = n!$ and $0! = 1$; and\n$n^{\\underline{k}} = 0$ whenever $k > n$. For the last, $n - n = 0$ gives\n$n^{\\underline{\\sigma(n)}} = n^{\\underline{n}}\\cdot 0 = 0$, the clause\n$x \\cdot 0 = 0$ being definitional (Multiplication of natural numbers), and if\n$n^{\\underline{k}} = 0$ then\n$n^{\\underline{\\sigma(k)}} = 0$ as well, so $n^{\\underline{k}} = 0$ for every\n$k \\ge \\sigma(n)$ by induction.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-nonnegative-extended-series",
+          "source_section": "Definition",
+          "quote": "Let $a=(a_k)_{k\\in\\mathbb N}$ take values in $[0,+\\infty]\\subseteq\\overline{\\mathbb R}$ (The extended real line $\\overline{\\mathbb{R}} = \\mathbb{R} \\cup \\{-\\infty, +\\infty\\}$, its order, and the arithmetic that is left undefined). Its **partial sums** are the unique sequence $(s_n)$ in $[0,+\\infty]$ satisfying\n\n$$s_0=0,\\qquad s_{n+1}=s_n+a_n.$$\n\nTo apply The recursion theorem with a fixed successor function, use the state space $\\mathbb N\\times[0,+\\infty]$ and the self-map $T(n,s)=(n+1,s+a_n)$, starting from $(0,0)$. Recursion gives a unique state sequence; induction makes its first coordinate $n$, and its second coordinates are exactly the unique $(s_n)$ satisfying the displayed recurrence. Addition of two nonnegative extended reals is always defined, including when either is $+\\infty$. The sequence $(s_n)$ is nondecreasing, and its **nonnegative extended sum** is\n\n$$\\sum_{k=0}^{\\infty}a_k:=\\sup_{n\\in\\mathbb N}s_n\\in[0,+\\infty],$$\n\nwhose existence follows from completeness of the extended real line (Every subset of $\\overline{\\mathbb{R}}$ has a least upper bound and a greatest lower bound in $\\overline{\\mathbb{R}}$, agreeing with the real supremum and infimum on nonempty sets bounded in $\\mathbb{R}$). More generally, for $m\\in\\mathbb N$,\n\n$$\\sum_{k\\ge m}a_k:=\\sum_{j=0}^{\\infty}a_{m+j}.$$\n\nFinite sums use the same recursion: $\\sum_{k<n}a_k=s_n$, so the empty sum at $n=0$ is $0$. A double sum such as $\\sum_i\\sum_j a_{ij}$ means that the inner nonnegative extended sum is formed first and the resulting nonnegative extended sequence is then summed.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-finite-sum",
+          "source_section": "Definition",
+          "quote": "Throughout this page $\\mathbb{R}$ is the complete ordered field\n(Complete ordered field (least-upper-bound property)), in particular an ordered field\n(Ordered field) and a field (Field), and $\\mathbb{N}$ is the set\nof natural numbers (The natural numbers $\\mathbb{N}$ (von Neumann)) with successor $\\sigma(n) = n + 1$\n(Addition of natural numbers).\n\nLet $a : \\mathbb{N} \\to \\mathbb{R}$ be a sequence of reals, written $a_k$ for\n$a(k)$. **Finite sums and finite products of $a$ are defined by recursion on the\nupper index**, which is legitimate because of the recursion theorem\n(The recursion theorem). That theorem produces a function of one variable, so the\nrunning index has to be carried along inside the value: applying it to the set\n$A = \\mathbb{N} \\times \\mathbb{R}$, the starting element $(0, 0)$ and the function\n$f(n, s) = (\\sigma(n),\\, s + a_n)$ gives a unique\n$g : \\mathbb{N} \\to \\mathbb{N} \\times \\mathbb{R}$ with\n\n$$g(0) = (0, 0), \\qquad g(\\sigma(n)) = f(g(n)) \\quad (n \\in \\mathbb{N}).$$\n\nWrite $g(n) = \\big(\\pi_1(g(n)),\\, \\Sigma_n\\big)$ for its two coordinates.\n\n**The first coordinate is the index itself, and that is a small induction, not an\nobservation** (The principle of mathematical induction). Indeed $\\pi_1(g(0)) = 0$; and if\n$\\pi_1(g(n)) = n$, then\n$g(\\sigma(n)) = f\\big(\\pi_1(g(n)), \\Sigma_n\\big) = \\big(\\sigma(\\pi_1(g(n))),\\, \\Sigma_n + a_{\\pi_1(g(n))}\\big) = \\big(\\sigma(n),\\, \\Sigma_n + a_n\\big)$,\nso $\\pi_1(g(\\sigma(n))) = \\sigma(n)$. By induction $\\pi_1(g(n)) = n$ for every\n$n \\in \\mathbb{N}$. Only now may the second coordinate of the two displayed\nclauses be read off, and doing so gives\n\n$$\\Sigma_0 = 0, \\qquad \\Sigma_{\\sigma(n)} = \\Sigma_n + a_n .$$\n\n$\\Sigma$ is moreover the **unique** function $\\mathbb{N} \\to \\mathbb{R}$ with those\ntwo properties: if $\\Sigma'$ also has them then $n \\mapsto (n, \\Sigma'_n)$ satisfies\nthe two clauses defining $g$, hence equals $g$ by the uniqueness clause of\nThe recursion theorem, so $\\Sigma' = \\Sigma$.\n\nWe write $\\sum_{k < n} a_k := \\Sigma_n$. The same construction with starting\nelement $(0, 1)$ and $f(n, p) = (\\sigma(n),\\, p \\cdot a_n)$, with the same\ninduction on the first coordinate and the same uniqueness argument, gives the\nunique $\\Pi : \\mathbb{N} \\to \\mathbb{R}$ with\n\n$$\\Pi_0 = 1, \\qquad \\Pi_{\\sigma(n)} = \\Pi_n \\cdot a_n ,$$\n\nand we write $\\prod_{k < n} a_k := \\Pi_n$.\n\n**Notation.** For $m, n \\in \\mathbb{N}$ we abbreviate\n\n$$\\sum_{k=0}^{n} a_k := \\sum_{k < n+1} a_k, \\qquad \\prod_{k=0}^{n} a_k := \\prod_{k < n+1} a_k,$$\n\nand, for a general lower index $m$ with $m \\le n + 1$, let $d$ be the\nunique natural number satisfying $m+d=n+1$. Existence is the definition of\nnatural order (Order on the natural numbers); if $m+d=m+e$, commutativity\n(Addition is commutative) gives $d+m=e+m$, so cancellation\n(Addition is cancellative) gives $d=e$. On these admissible bounds only,\nwe may write this unique additive gap as $d=n+1-m$; no total natural subtraction\noperation is presupposed. With $d$ thus fixed, define\n\n$$\\sum_{k=m}^{n} a_k := \\sum_{j < d} a_{m+j}, \\qquad \\prod_{k=m}^{n} a_k := \\prod_{j < d} a_{m+j} .$$\n\nWhen $m = n + 1$ we have $d = 0$ and the sum is **empty**, with value $0$, while\nthe empty product has value $1$. In the same spirit $\\sum_{k=0}^{-1} a_k$ is\nnotation for the empty sum $\\Sigma_0 = 0$ and $\\prod_{k=0}^{-1} a_k$ for the\nempty product $\\Pi_0 = 1$; the index $-1$ never occurs as an element of\n$\\mathbb{N}$ and is only a way of writing \"no terms\".\n\nEquivalently, for naturals $m \\le r$, the half-open endpoint notation\n$\\sum_{k=m}^{r-1}a_k$ and $\\prod_{k=m}^{r-1}a_k$ means\n$\\sum_{j<d}a_{m+j}$ and $\\prod_{j<d}a_{m+j}$, respectively, where $d$ is the\nunique natural with $m+d=r$. Here $r-1$ is an endpoint label for the terms\nbefore $r$, so this notation needs no total subtraction operation. For $m=r$,\nthe unique gap is $0$ because $m+0=m$, giving the empty sum and product; the\ncase $m=r=0$ is the $-1$ endpoint convention just stipulated.\n\nOnly finitely many values of $a$ enter $\\sum_{k<n} a_k$, so the notation\n$\\sum_{k<n} a_k$ and $\\prod_{k<n} a_k$ is also used for a list\n$a_0, \\dots, a_{n-1}$ of reals given without reference to any extension of the\nlist to all of $\\mathbb{N}$: extend the list by $a_k = 0$ (respectively\n$a_k = 1$) for $k \\ge n$ and apply the definition above.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-finite-sum-laws",
+          "source_section": "Statement",
+          "quote": "Let $a, b, c : \\mathbb{N} \\to \\mathbb{R}$ be sequences of reals, let\n$\\lambda \\in \\mathbb{R}$, and let $m, n \\in \\mathbb{N}$, with finite sums and\nfinite products as in Finite sums and finite products, by recursion. Then:\n\n1. **Additivity.** $\\displaystyle\\sum_{k<n}(a_k + b_k) = \\sum_{k<n} a_k + \\sum_{k<n} b_k$.\n2. **Scaling.** $\\displaystyle\\sum_{k<n} \\lambda a_k = \\lambda \\sum_{k<n} a_k$; in particular $\\displaystyle\\sum_{k<n} \\lambda = n\\lambda$, where $n$ denotes the canonical field image $n\\cdot1_{\\mathbb{R}}$ of the natural n (The unique embedding of ℚ into an ordered field, Canonical naturals are positive and strictly increasing).\n3. **Splitting.** If $m \\le n$ then $\\displaystyle\\sum_{k<n} a_k = \\sum_{k<m} a_k + \\sum_{k=m}^{n-1} a_k$, and $\\displaystyle\\prod_{k<n} a_k = \\Big(\\prod_{k<m} a_k\\Big)\\Big(\\prod_{k=m}^{n-1} a_k\\Big)$.\n4. **Monotonicity.** If $a_k \\le b_k$ for all $k < n$ then $\\displaystyle\\sum_{k<n} a_k \\le \\sum_{k<n} b_k$. In particular, if $a_k \\ge 0$ for all $k < n$ then $\\sum_{k<n} a_k \\ge 0$, every single term satisfies $a_j \\le \\sum_{k<n} a_k$ for $j < n$, and $\\sum_{k<n} a_k = 0$ forces $a_k = 0$ for every $k < n$.\n5. **Telescoping.** $\\displaystyle\\sum_{k<n}\\big(c_{k+1} - c_k\\big) = c_n - c_0$.\n6. **Products.** $\\displaystyle\\prod_{k<n}(a_k b_k) = \\Big(\\prod_{k<n} a_k\\Big)\\Big(\\prod_{k<n} b_k\\Big)$; if $a_k \\ge 0$ for all $k < n$ then $\\prod_{k<n} a_k \\ge 0$, and if $a_k > 0$ for all $k < n$ then $\\prod_{k<n} a_k > 0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-sum-over-a-finite-index-set",
+          "source_section": "Definition",
+          "quote": "Let $S$ be a finite set, $n := \\lvert S\\rvert$ (The cardinality $\\lvert A\\rvert$ of a finite set), and\nlet $a : S \\to \\mathbb{R}$ or $a : S \\to \\mathbb{N}$, written $a_i$ for $a(i)$.\nChoose a bijection $\\varphi : n \\to S$, which exists because $S \\approx n$\n(Equinumerous sets, $A \\approx B$ and $A \\preceq B$), and set\n\n$$\\sum_{i \\in S} a_i := \\sum_{k<n} a_{\\varphi(k)}, \\qquad \\prod_{i \\in S} a_i := \\prod_{k<n} a_{\\varphi(k)},$$\n\nthe right-hand sides being the iterated operations of Finite sums and finite products, by recursion when the\nvalues are real and of Finite sums and finite products of natural numbers, $\\sum_{k<n} a_k$ and $\\prod_{k<n} a_k$ in $\\mathbb{N}$ when they are natural.\n\n**Independence of the enumeration, which is the content of the definition.** Let\n$\\varphi, \\psi : n \\to S$ be two bijections. Then $\\pi := \\varphi^{-1} \\circ \\psi$\nis a bijection $n \\to n$ (Injection, surjection, bijection), and\n$a_{\\psi(k)} = a_{\\varphi(\\pi(k))}$ for every $k < n$. Applying\nA finite sum is unchanged by a permutation of its index range: $\\sum_{k<n} a_{\\pi(k)} = \\sum_{k<n} a_k$ for every bijection $\\pi : n \\to n$ to the list $c_k := a_{\\varphi(k)}$\ngives\n\n$$\\sum_{k<n} a_{\\psi(k)} = \\sum_{k<n} c_{\\pi(k)} = \\sum_{k<n} c_k = \\sum_{k<n} a_{\\varphi(k)},$$\n\nand identically for products. So the value does not depend on which bijection is\nused, and $\\sum_{i \\in S} a_i$ is a single well-determined element.\n\n**No choice principle is involved.** The definition does not select an\nenumeration: it asserts that all enumerations give the same value, and that value\nis what the notation names. Only one bijection is ever produced at a time, from a\nset already known to be nonempty.\n\n**Three clauses, recorded here because the page uses them constantly.**\n\n**(a) The bridge to the old notation.** Taking $S = n$ and $\\varphi = \\mathrm{id}_n$,\nwhich is legitimate since $\\lvert n\\rvert = n$, gives\n\n$$\\sum_{i \\in n} a_i = \\sum_{k<n} a_k, \\qquad \\prod_{i \\in n} a_i = \\prod_{k<n} a_k .$$\n\nSo the new notation **extends** the sum over an initial segment rather than\ncompeting with it, and every law proved for the latter is available for the\nformer whenever the index set is a natural number.\n\n**(b) Reindexing along a bijection.** If $h : T \\to S$ is a bijection of finite\nsets, then $\\sum_{j \\in T} a_{h(j)} = \\sum_{i \\in S} a_i$, and likewise for\nproducts. Indeed $\\lvert T\\rvert = \\lvert S\\rvert = n$ by transport\n(The cardinality $\\lvert A\\rvert$ of a finite set), and if $\\varphi : n \\to S$ is a bijection then\n$h^{-1} \\circ \\varphi : n \\to T$ is one, so\n$\\sum_{j \\in T} a_{h(j)} = \\sum_{k<n} a_{h(h^{-1}(\\varphi(k)))} = \\sum_{k<n} a_{\\varphi(k)} = \\sum_{i \\in S} a_i$.\n\n**(c) The empty index set and a constant summand.** $\\lvert\\varnothing\\rvert = 0$,\nso $\\sum_{i \\in \\varnothing} a_i = 0$ and $\\prod_{i \\in \\varnothing} a_i = 1$ by\nthe base clause of the recursion. And for a constant $c$, clause (a) together\nwith the constant clause of Laws of finite sums and products in $\\mathbb{N}$, and $\\iota\\big(\\sum_{k<n} a_k\\big) = \\sum_{k<n} \\iota(a_k)$\nin $\\mathbb{N}$, or clause 2 of Laws of finite sums and finite products in $\\mathbb{R}$, gives\n\n$$\\sum_{i \\in S} c = \\lvert S\\rvert \\cdot c \\quad (c \\in \\mathbb{N}), \\qquad \\sum_{i \\in S} c = \\iota(\\lvert S\\rvert)\\cdot c \\quad (c \\in \\mathbb{R}),$$\n\nthe second with $\\iota$ written out because $\\lvert S\\rvert$ is a natural number\nand not an element of $\\mathbb{R}$ (The canonical natural $\\iota(n) = n \\cdot 1_F$ of a field).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-spanning-tree",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a graph. A **spanning tree** of $G$ is a spanning subgraph $T$ of $G$ that is a tree ([[def-subgraph-induced-subgraph-and-spanning-subgraph]], [[def-tree-forest-and-leaf]]). Equivalently,\n\n$$V(T)=V(G),\\qquad E(T)\\subseteq E(G),$$\n\nand $T$ is connected and acyclic.\n\nThe null graph has no spanning tree under the library convention that a tree is nonempty and connected.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-connected-iff-has-spanning-tree",
+          "source_section": "Statement",
+          "quote": "A finite graph $G$ is connected if and only if it has a spanning tree.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-spanning-tree-set-is-finite",
+          "source_section": "Statement",
+          "quote": "Every finite graph has only finitely many spanning trees.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-max-min",
+          "source_section": "Definition",
+          "quote": "Let $S \\subseteq \\mathbb{R}$ and $m \\in \\mathbb{R}$.\n\n- $m$ is a **maximum** (or *greatest element*) of $S$ if $m \\in S$ and $s \\le m$\n  for every $s \\in S$.\n- $m$ is a **minimum** (or *least element*) of $S$ if $m \\in S$ and $m \\le s$\n  for every $s \\in S$.\n\nA set has at most one maximum: if $m_1$ and $m_2$ are both maxima then\n$m_1 \\in S$ gives $m_1 \\le m_2$ and $m_2 \\in S$ gives $m_2 \\le m_1$, so\n$m_1 = m_2$ by antisymmetry of the order, which is immediate from the trichotomy\naxiom of an ordered field (Ordered field, Complete ordered field (least-upper-bound property)).\nThe same argument applies to minima, so we may write $\\max S$ and $\\min S$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-finite-set-has-max",
+          "source_section": "Statement",
+          "quote": "For every $n \\in \\mathbb{N}$ and all $a_0, a_1, \\dots, a_n \\in \\mathbb{R}$, the\nset $\\{a_0, a_1, \\dots, a_n\\}$ has a maximum and a minimum (Maximum and minimum of a set).\n\nWhat is proved below is exactly the displayed statement, by induction on $n$.\n\nThe usual reading, that *every nonempty finite subset of $\\mathbb{R}$ has a\nmaximum and a minimum*, follows once one identifies the nonempty finite subsets\nof $\\mathbb{R}$ with the sets listable as $\\{a_0, \\dots, a_n\\}$. That\nidentification is recorded as a stipulation in the Given below, because this page\nhas no definition of finiteness to prove it against. **It is discharged, not\nmerely assumed**: The nonempty finite subsets of $\\mathbb{R}$ are exactly the listable ones proves that the two\ndescriptions of a nonempty finite subset of $\\mathbb{R}$ agree. That lemma is\nrecorded in `justified_by` rather than in `deps`, since it is about the sets this\nlemma quantifies over and therefore depends on this one. This is what licenses\nthe notation\n$\\max\\{a_1, \\dots, a_n\\}$ and $\\min\\{a_1, \\dots, a_n\\}$ for finite sets of\n**real** numbers from this page onwards.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-canonical-natural",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field (Field) with additive identity $0_F$ and\nmultiplicative identity $1_F$. Define\n$\\iota : \\mathbb{N} \\to F$ by recursion on $\\mathbb{N}$\n(The natural numbers $\\mathbb{N}$ (von Neumann), The recursion theorem):\n\n$$\\iota(0) \\;:=\\; 0_F, \\qquad \\iota(n+1) \\;:=\\; \\iota(n) + 1_F .$$\n\n$\\iota(n)$ is the **canonical natural** of $n$ in $F$. It is also written\n$n \\cdot 1_F$, and for $n \\ge 1$ it is $1_F$ added to itself $n$ times.\n\n**Why the notation is needed at all.** A natural number in this library is a von\nNeumann natural, that is a set (The natural numbers $\\mathbb{N}$ (von Neumann)), and a set is not an\nelement of $F$. So $1/n$, $n^{\\alpha}$ and $x/n$ are not expressions of $F$ when\n$n$ is a natural: what they mean is $1/\\iota(n)$, $\\iota(n)^{\\alpha}$ and\n$x/\\iota(n)$. The map $\\iota$ is what carries a counting number into the field,\nand writing it is the whole reason a reader meets $1/\\iota(k+1)$ where an\ninformal text would write $1/(k+1)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-of-naturals-positive",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field, with field structure as in Field, and for\n$n \\ge 1$ let $n \\cdot 1_F$ denote the canonical natural number\n$\\underbrace{1_F + \\cdots + 1_F}_{n}$, defined recursively by $1 \\cdot 1_F = 1_F$\nand $(n+1) \\cdot 1_F = n \\cdot 1_F + 1_F$. Then for every $n \\ge 1$:\n\n- $n \\cdot 1_F > 0$ and $(n+1) \\cdot 1_F > n \\cdot 1_F$;\n- the map $n \\mapsto n \\cdot 1_F$ is strictly increasing, hence injective, on $\\{1, 2, 3, \\dots\\}$;\n- $(m+n) \\cdot 1_F = m \\cdot 1_F + n \\cdot 1_F$ and $(mn) \\cdot 1_F = (m \\cdot 1_F)(n \\cdot 1_F)$ for all $m, n \\ge 1$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-ordered-field",
+          "source_section": "Definition",
+          "quote": "An **ordered field** is a field $F$ (Field) together with a subset\n$P \\subseteq F$, the set of **positive** elements (the *positive cone*),\nsatisfying:\n\n- **(O1) Trichotomy.** For each $x \\in F$, exactly one of the following holds:\n  $x \\in P$, or $x = 0$, or $-x \\in P$.\n- **(O2) Closure.** If $x, y \\in P$ then $x + y \\in P$ and $x \\cdot y \\in P$.\n\nWe write $x > 0$ for $x \\in P$ (read \"$x$ is positive\"), and define the order by\n\n$$a < b \\;:\\Longleftrightarrow\\; b - a \\in P, \\qquad a \\le b \\;:\\Longleftrightarrow\\; a < b \\text{ or } a = b.$$\n\nThus $a > b$ means $b < a$, and $a \\ge b$ means $b \\le a$. An element $x$ with\n$-x \\in P$ (equivalently $x < 0$) is called **negative**.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-of-add-order",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]) with positive cone $P$, and\nlet $a, b, c, d \\in F$.\n\n1. **Translation invariance.** If $a < b$ then $a + c < b + c$.\n2. **Adding inequalities.** If $a < b$ and $c < d$ then $a + c < b + d$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Fix $n\\geq2$ and a tuple $(\\gamma_1,\\ldots,\\gamma_n)$, and let $H$ be the simple graph on $[n]$ whose edge $\\{i,j\\}$ is present exactly when $\\gamma_i\\sim\\gamma_j$. By [F1], $U_n=\\sum_{G\\subseteq H,\\ G\\text{ connected}}(-1)^{|E(G)|}$. Here the complete graph on $[n]$ has edge set $\\binom{[n]}2$, and $G\\subseteq H$ means that $G$ has the same vertex set and $E(G)\\subseteq E(H)$. Represent each edge $\\{i,j\\}$ with $i<j$ by $(i,j)$ and order these pairs lexicographically, first by $i$ and then by $j$; list the edges as $e_1<_{\\rm lex}\\cdots<_{\\rm lex}e_m$ and assign rank $\\rho(e_k)=k\\cdot1_{\\mathbb R}$. For a tree $T$, its rank sum is $\\sum_{e\\in E(T)}\\rho(e)$. By [F8], each connected graph $G$ has a spanning tree; by [F9], its spanning trees form a finite nonempty set, so their finite real rank sums have a minimum. A tree has a unique path between any two vertices: connectedness gives a path, and two distinct paths would contain a cycle between their first divergence and next common vertex, contradicting acyclicity. Here is the cut and exchange argument used below. Let $f=\\{u,v\\}$ be an edge of a tree $T$. There is no $u$-$v$ path in $T-f$, since such a path together with $f$ would be a cycle in $T$. For any vertex $w$, the unique $T$-path from $u$ to $w$ either avoids $f$, or crosses $f$ from $u$ to $v$ and then has a suffix from $v$ to $w$ avoiding $f$. Thus every vertex is reachable from $u$ or from $v$ in $T-f$, but not both: reachability from both would concatenate to a $u$-$v$ walk avoiding $f$, and deleting repeated-vertex portions of a finite walk gives a path, contradicting the preceding observation. Vertices reachable from the same endpoint are joined by concatenating their endpoint paths and deleting repetitions. Hence $T-f$ has exactly two connected components, with vertex sets $C_u,C_v$, and no remaining tree edge crosses this partition; call it the cut of $f$. If $e=\\{x,y\\}\\notin E(T)$ and $f$ lies on its unique $T$-path, then $x,y$ lie in opposite components, for otherwise a path in $T-f$ would contradict uniqueness of the $T$-path. Adding $e$ to $T-f$ joins the two components, so $T-f+e$ is connected. It is acyclic: a cycle would have to use $e$ since $T-f$ is acyclic, and removing $e$ from that cycle would give a path in $T-f$ between opposite components. Thus $T-f+e$ is a spanning tree on the same vertex set. Every path from one side of any such cut to the other has a crossing edge, by considering the first vertex at which its finite vertex list changes sides. The minimum-rank-sum spanning tree is unique: if distinct minimizing trees $T,S$ existed, take the least-ranked edge $e$ in their symmetric difference and, after swapping their names if needed, take $e\\in T\\setminus S$. Deleting $e$ from $T$ gives a cut crossed by the $S$-path between the endpoints of $e$; a crossing edge $f$ on that path lies in $S\\setminus T$, and replacing $f$ by the earlier edge $e$ lowers the rank sum of $S$ by [F10], a contradiction. For a tree $T$, let $A(T)\\subseteq\\binom{[n]}2\\setminus E(T)$ consist of the edges later than every edge on their unique $T$-path. If $G$ contains $T$ and a non-tree edge $e$ is earlier than a path edge $f$, then $T-f+e$ is a spanning tree of lower rank sum by [F10], so $T$ is not minimum. Conversely, if every non-tree edge of $G$ is later than every edge on its $T$-path, then for each $f\\in T$ every other edge of $G$ crossing the cut made by deleting $f$ is later than $f$. Choose a minimum-rank-sum spanning tree $S$ of $G$, which exists by [F8]–[F9]. If $S$ omitted $f$, the $S$-path between the endpoints of $f$ crosses this cut at an edge $e$; adding $f$ to $S$ and deleting that path edge $e$ gives a spanning tree with lower rank sum by [F10], contradicting minimality of $S$. Hence $S$ contains every edge $f$ of $T$ and equals $T$: any additional edge would form a cycle with its $T$-path. Thus $T$ is the unique minimum tree of $G$ exactly when $T\\subseteq G\\subseteq T\\cup A(T)$. Consequently, connected subgraphs of $H$ split into disjoint classes indexed by trees $T\\subseteq H$, each class consisting of $T\\cup A$ for $A\\subseteq A(T)\\cap E(H)$. The signed sum in one class is $(-1)^{n-1}(1-1)^{|A(T)\\cap E(H)|}$, whose real absolute value is at most $1$. Applying the finite-sum triangle inequality from [F5, F7] to the class contributions gives $|U_n(\\gamma_1,\\ldots,\\gamma_n)|\\leq\\sum_{T\\in\\mathcal T_n}\\prod_{\\{i,j\\}\\in E(T)}\\mathbf 1_{\\{\\gamma_i\\sim\\gamma_j\\}}$. For $n=1$ both sides equal $1$.",
+          "inputs": [
+            "F1",
+            "F5",
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "A rooted tree means a tree with one distinguished vertex; its height is the greatest number of edges in a path from that root. A size-$n$ labelled tree here has vertex set $[n]$, and in $S_\\gamma^{(k)}$ its root is label $1$; removing the root separates it into child subtrees. For fixed root label $1$ of type $\\gamma$, let $S_\\gamma^{(k)}$ be the nonnegative sum over all such finite rooted labelled trees of height at most $k$, with all other vertex types summed over $\\Gamma$, each non-root vertex of type $\\eta$ weighted by $|z_\\eta|$, each edge weighted by $\\mathbf 1_{\\{\\eta\\sim\\eta'\\}}$, and each size-$n$ sum divided by $(n-1)!$. The root has weight $1$, so $S_\\gamma^{(0)}=1$. At height at most $k+1$, the root has $m$ child subtrees of height at most $k$. For ordered subtree sizes $n_1,\\ldots,n_m$, assigning the $n-1$ labels to the ordered branch vertex sets contributes $(n-1)!/(n_1!\\cdots n_m!)$. In each branch there are $n_j$ choices for its child-root label; with the fixed-root subtree sum normalized by $(n_j-1)!$, the factor $n_j(n_j-1)!/n_j!$ is $1$. The parent normalization $(n-1)!$ therefore leaves the product of the branch weights, and division by $m!$ removes the ordering of the branches. Therefore, as an identity of nonnegative countable sums, $S_\\gamma^{(k+1)}=\\sum_{m=0}^\\infty\\frac1{m!}(\\sum_{\\eta\\sim\\gamma}|z_\\eta|S_\\eta^{(k)})^m=\\exp(\\sum_{\\eta\\sim\\gamma}|z_\\eta|S_\\eta^{(k)})$. If $\\Gamma$ is infinite, its at-most-countability supplies a bijection with $\\mathbb N$; if finite, use $\\Gamma$ itself. Thus finite type and size cutoffs exhaust all choices, and increasing limits give the stated countable-sum identity. By [F2], $S_\\gamma^{(0)}=1\\leq e^{a_\\gamma}$. If $S_\\eta^{(k)}\\leq e^{a_\\eta}$ for every $\\eta$, the assumed majorant [A1] gives $0\\leq\\sum_{\\eta\\sim\\gamma}|z_\\eta|S_\\eta^{(k)}\\leq a_\\gamma$; [F3] then gives $S_\\gamma^{(k+1)}\\leq e^{a_\\gamma}$. The nonnegative sums increase with $k$ and every finite tree has finite height, so their limit is the full rooted tree sum and is at most $e^{a_\\gamma}$.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply the pointwise graph-to-tree bound of step 1.1 to each tuple in the definition of $R_\\gamma$. All weights are nonnegative after taking absolute values, so summing over the countable polymer labels and then over $n$ preserves the inequality; the right side is the rooted tree sum bounded in step 1.2. Hence $R_\\gamma\\leq e^{a_\\gamma}$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "If Γ is empty there is no fixed root, so the universal rooted statement is vacuous; for a fixed root, n=1 is checked in step 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: When all activities are zero, the n=1 term is 1 and every n≥2 rooted term vanishes; the majorant condition and step 2.1 still give Rγ=1≤e^{aγ}."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Proof1.1 explicitly checks U1=1 and the one-vertex tree bound. Proof1.2 (not2.1) defines the height-zero tree sum Sgamma^(0)=1; the n=1 product has no nonroot activities and equals1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: If the incompatibility graph has no edges, U_n=0 for n≥2; step 1.1 has no spanning tree contained in H and its bound is zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The rooted sum is a nonnegative extended series and the proof bounds it by e^{aγ} in step 2.1, including equality in the majorant criterion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The only quantified root is a specified γ∈Γ; all graph and type sums are countable nonnegative sums, and no selection from an arbitrary nonempty family is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement gives a one-way upper bound, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement gives a one-way upper bound, not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "connected graph sums through three labels",
+          "inputs": "n=1,2,3; H ranges over every simple graph on the labels; edge weight is -1.",
+          "method": "Enumerate connected subgraphs and labelled spanning trees for each H.",
+          "result": "n=1 gives |U1|=1; for n=2, |U2| is 1 exactly when H has its edge; for n=3 the connected cases with 2 or 3 edges give |U3|=1 or 2, bounded by the 1 or 3 spanning trees of H.",
+          "limitation": "Finite combinatorial sanity check only; step 1.1 proves the bound for every n."
+        }
+      ],
+      "current_boundary_worksheet": {
+        "proposal": "research/physics-non-fluid-129-2026-10-21-r2-owner-step2-boundary-proposal-3/proposal.json",
+        "source_sha256": "e46e51f2a719e9a1e4a9d8f10c49cc145d1919b9468f0e320da44f0b3eb14705",
+        "qualification": "Released complete current source/eight-case semantic worksheet; root transcribed exact current rows. No independent acceptance or finite computation asserted."
+      }
+    },
+    "thm-csm-frontier-polymer-analyticity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-csm-frontier-abstract-polymer",
+          "source_section": "Definition",
+          "quote": "An abstract polymer model consists of an at most countable set $\\Gamma$ (finite or in bijection with $\\mathbb N$), a reflexive symmetric relation $\\sim$ on $\\Gamma$ (so $\\gamma\\sim\\gamma$ and $\\gamma\\sim\\eta$ implies $\\eta\\sim\\gamma$), and an activity function $z:\\Gamma\\to\\mathbb C$. Its elements are called polymers, and $\\gamma\\sim\\eta$ means that the two polymers are incompatible. A subset $X\\subseteq\\Gamma$ is compatible when no two distinct elements of $X$ are related by $\\sim$. For real and natural summands, finite-index sums and products are enumeration-independent. For complex summands, define a finite sum or product by any enumeration and repeated addition or multiplication in $\\mathbb C$; associativity and commutativity make the result independent of the enumeration. The empty sum is $0$ and the empty product is $1$. For each finite $V\\subseteq\\Gamma$, define the finite-volume partition polynomial\n\n$$Z_V(z):=\\sum_{\\substack{X\\subseteq V\\\\X\\text{ compatible}}}\\ \\prod_{\\gamma\\in X}z_\\gamma,$$\n\nwhere the empty subset contributes $1$.\n\nWrite $[n]:=\\{1,\\ldots,n\\}$ and $\\binom{[n]}2:=\\{\\{i,j\\}:i,j\\in[n],\\ i\\ne j\\}$. A simple graph on $[n]$ is a pair $([n],E)$ with $E\\subseteq\\binom{[n]}2$; a path is a finite vertex list with distinct vertices and each consecutive pair an edge. A graph is connected when every two vertices are joined by a path. A cycle is a vertex list $(v_0,\\ldots,v_k)$ with $k\\geq3$, $v_k=v_0$, $v_0,\\ldots,v_{k-1}$ distinct, and each consecutive pair an edge; a tree is a connected simple graph with no cycle. For $n\\in\\mathbb N$ with $n\\geq1$, let $\\mathcal C_n$ be the set of connected simple graphs on $[n]$ and let $\\mathcal T_n$ be the set of trees on $[n]$. The set $[n]$ is finite; its power set is finite, so its subset $\\binom{[n]}2$ is finite; the power set of that edge set is finite as well. Each simple graph on $[n]$ is determined by an edge set in this last power set, so $\\mathcal C_n$ and $\\mathcal T_n$ are finite.\n\nFor an ordered tuple $(\\gamma_1,\\ldots,\\gamma_n)\\in\\Gamma^n$, put $f_{ij}:=-\\mathbf 1_{\\{\\gamma_i\\sim\\gamma_j\\}}$ and define the connected coefficient\n\n$$U_n(\\gamma_1,\\ldots,\\gamma_n):=\\sum_{G\\in\\mathcal C_n}\\ \\prod_{\\{i,j\\}\\in E(G)}f_{ij}.$$\n\nFor $n=1$, $\\mathcal C_1$ contains the one-vertex graph and the empty edge product equals $1$. These are finite polynomial and coefficient definitions; they assert no convergence.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-csm-frontier-polymer-tree-majorant",
+          "source_section": "Statement",
+          "quote": "Let $(\\Gamma,\\sim,z)$ be an abstract polymer model, and let $a:\\Gamma\\to[0,\\infty)$. Interpret each countable sum over polymer labels of nonnegative terms as the supremum of its finite subsums in $[0,+\\infty]$, and interpret a nonnegative series as the supremum of its increasing partial sums in $[0,+\\infty]$. Suppose\n\n$$\\sum_{\\eta\\sim\\gamma}|z_\\eta|e^{a_\\eta}\\leq a_\\gamma\\qquad(\\gamma\\in\\Gamma).$$\n\nFor each fixed root $\\gamma\\in\\Gamma$, define the nonnegative rooted connected-cluster sum\n\n$$R_\\gamma:=\\sum_{n=1}^{\\infty}\\frac1{(n-1)!}\\sum_{\\gamma_2,\\ldots,\\gamma_n\\in\\Gamma}|U_n(\\gamma,\\gamma_2,\\ldots,\\gamma_n)|\\prod_{j=2}^n|z_{\\gamma_j}|$$\n\nThen $R_\\gamma$ is well-defined as a possibly extended nonnegative series and satisfies $R_\\gamma\\leq e^{a_\\gamma}$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-complex-exponential",
+          "source_section": "Definition",
+          "quote": "Let $\\iota_{\\mathbb R}\\colon\\mathbb N\\to\\mathbb R$ be the canonical-natural map\nof [[def-canonical-natural]], and let $j\\colon\\mathbb R\\to\\mathbb C$ be the real\nembedding $j(x)=x+i0$ from [[def-complex-numbers-and-arithmetic]]. For every\n$n\\in\\mathbb N$, the factorial $n!$ is nonzero by\n[[def-factorial-and-falling-factorial]], so\n$\\iota_{\\mathbb R}(n!)>0$ by [[lem-of-naturals-positive]] and consequently\n$j(\\iota_{\\mathbb R}(n!))\\ne0$ in the complex field\n[[thm-complex-numbers-form-a-field]].\n\nFor $z\\in\\mathbb C$, define\n$$ \\exp z:=\\sum_{n=0}^{\\infty}\\frac{z^n}{j(\\iota_{\\mathbb R}(n!))}. $$\nwhenever this complex series converges. Inside a complex expression we\nabbreviate the embedded denominator $j(\\iota_{\\mathbb R}(n!))$ by $n!$, so the\nsame definition may be written $\\exp z=\\sum z^n/n!$ without identifying a\nnatural number with a complex number. Powers and series are those of\n[[def-complex-integer-powers]] and\n[[def-complex-series-power-series-and-absolute-convergence]]. The convergence\nfor every $z\\in\\mathbb C$ is discharged by\n[[lem-complex-exponential-series-converges-everywhere]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-complex-exponential-addition-and-real-extension",
+          "source_section": "Statement",
+          "quote": "For all $z,w\\in\\mathbb C$, $\\exp(z+w)=\\exp z\\exp w$. For real $x$, the complex value $\\exp(x+0i)$ equals the published real exponential $e^x$. The conventions and prerequisite facts used below are recorded in [[def-complex-exponential]], [[lem-complex-exponential-series-converges-everywhere]], [[lem-cauchy-product-of-absolutely-convergent-complex-series]], [[def-real-exponential-function-and-e]], [[lem-binomial-theorem-over-complex-numbers]], [[thm-binomial-closed-formula]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-termwise-differentiation-of-complex-power-series",
+          "source_section": "Statement",
+          "quote": "Let $f(z)=\\sum_{n\\ge0}c_n(z-a)^n$ have radius $R$. If $|z-a|<R$, then $f$ is complex differentiable at $z$ and\n$$f'(z)=\\sum_{n\\ge1}n c_n(z-a)^{n-1}.$$\nConsequently $f$ is holomorphic on its open disc of convergence ([[def-complex-differentiability-holomorphic-and-entire]]).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "source_section": "Definition",
+          "quote": "Every $z\\in\\mathbb C$ has unique coordinates $z=a+bi$\n([[thm-complex-numbers-form-a-field]]). Define\n$$\\operatorname{Re}z=a,\\qquad \\operatorname{Im}z=b,\\qquad \\overline z=a-bi,$$\nand define its **modulus** by\n$$|z|=\\sqrt{a^2+b^2}.$$\nThe real numbers are least-upper-bound complete\n([[cor-cauchy-reals-lub-complete]]), so the nonnegative square root exists and\nis unique by [[thm-of-square-roots]].",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-complex-conjugation-and-modulus-laws",
+          "source_section": "Statement",
+          "quote": "Complex conjugation is a real-field automorphism satisfying\n$$\\overline{z+w}=\\overline z+\\overline w,\\qquad \\overline{zw}=\\overline z\\,\\overline w,\\qquad \\overline{\\overline z}=z.$$\nFor every $z,w\\in\\mathbb C$,\n$$z\\overline z=|z|^2,\\qquad |z|\\ge0,\\qquad |z|=0\\Longleftrightarrow z=0,$$\n$$|zw|=|z||w|,\\qquad |z+w|\\le |z|+|w|.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-complex-modulus-of-real-embedding-equals-real-absolute-value",
+          "source_section": "Statement",
+          "quote": "For every real $r$, write $\\lambda_r$ for its canonical image in $\\mathbb C$. Then\n$$\n|\\lambda_r|_{\\mathbb C}=|r|_{\\mathbb R}.\n$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-sum-over-a-finite-index-set",
+          "source_section": "Definition",
+          "quote": "Let $S$ be a finite set, $n := \\lvert S\\rvert$ (The cardinality $\\lvert A\\rvert$ of a finite set), and\nlet $a : S \\to \\mathbb{R}$ or $a : S \\to \\mathbb{N}$, written $a_i$ for $a(i)$.\nChoose a bijection $\\varphi : n \\to S$, which exists because $S \\approx n$\n(Equinumerous sets, $A \\approx B$ and $A \\preceq B$), and set\n\n$$\\sum_{i \\in S} a_i := \\sum_{k<n} a_{\\varphi(k)}, \\qquad \\prod_{i \\in S} a_i := \\prod_{k<n} a_{\\varphi(k)},$$\n\nthe right-hand sides being the iterated operations of Finite sums and finite products, by recursion when the\nvalues are real and of Finite sums and finite products of natural numbers, $\\sum_{k<n} a_k$ and $\\prod_{k<n} a_k$ in $\\mathbb{N}$ when they are natural.\n\n**Independence of the enumeration, which is the content of the definition.** Let\n$\\varphi, \\psi : n \\to S$ be two bijections. Then $\\pi := \\varphi^{-1} \\circ \\psi$\nis a bijection $n \\to n$ (Injection, surjection, bijection), and\n$a_{\\psi(k)} = a_{\\varphi(\\pi(k))}$ for every $k < n$. Applying\nA finite sum is unchanged by a permutation of its index range: $\\sum_{k<n} a_{\\pi(k)} = \\sum_{k<n} a_k$ for every bijection $\\pi : n \\to n$ to the list $c_k := a_{\\varphi(k)}$\ngives\n\n$$\\sum_{k<n} a_{\\psi(k)} = \\sum_{k<n} c_{\\pi(k)} = \\sum_{k<n} c_k = \\sum_{k<n} a_{\\varphi(k)},$$\n\nand identically for products. So the value does not depend on which bijection is\nused, and $\\sum_{i \\in S} a_i$ is a single well-determined element.\n\n**No choice principle is involved.** The definition does not select an\nenumeration: it asserts that all enumerations give the same value, and that value\nis what the notation names. Only one bijection is ever produced at a time, from a\nset already known to be nonempty.\n\n**Three clauses, recorded here because the page uses them constantly.**\n\n**(a) The bridge to the old notation.** Taking $S = n$ and $\\varphi = \\mathrm{id}_n$,\nwhich is legitimate since $\\lvert n\\rvert = n$, gives\n\n$$\\sum_{i \\in n} a_i = \\sum_{k<n} a_k, \\qquad \\prod_{i \\in n} a_i = \\prod_{k<n} a_k .$$\n\nSo the new notation **extends** the sum over an initial segment rather than\ncompeting with it, and every law proved for the latter is available for the\nformer whenever the index set is a natural number.\n\n**(b) Reindexing along a bijection.** If $h : T \\to S$ is a bijection of finite\nsets, then $\\sum_{j \\in T} a_{h(j)} = \\sum_{i \\in S} a_i$, and likewise for\nproducts. Indeed $\\lvert T\\rvert = \\lvert S\\rvert = n$ by transport\n(The cardinality $\\lvert A\\rvert$ of a finite set), and if $\\varphi : n \\to S$ is a bijection then\n$h^{-1} \\circ \\varphi : n \\to T$ is one, so\n$\\sum_{j \\in T} a_{h(j)} = \\sum_{k<n} a_{h(h^{-1}(\\varphi(k)))} = \\sum_{k<n} a_{\\varphi(k)} = \\sum_{i \\in S} a_i$.\n\n**(c) The empty index set and a constant summand.** $\\lvert\\varnothing\\rvert = 0$,\nso $\\sum_{i \\in \\varnothing} a_i = 0$ and $\\prod_{i \\in \\varnothing} a_i = 1$ by\nthe base clause of the recursion. And for a constant $c$, clause (a) together\nwith the constant clause of Laws of finite sums and products in $\\mathbb{N}$, and $\\iota\\big(\\sum_{k<n} a_k\\big) = \\sum_{k<n} \\iota(a_k)$\nin $\\mathbb{N}$, or clause 2 of Laws of finite sums and finite products in $\\mathbb{R}$, gives\n\n$$\\sum_{i \\in S} c = \\lvert S\\rvert \\cdot c \\quad (c \\in \\mathbb{N}), \\qquad \\sum_{i \\in S} c = \\iota(\\lvert S\\rvert)\\cdot c \\quad (c \\in \\mathbb{R}),$$\n\nthe second with $\\iota$ written out because $\\lvert S\\rvert$ is a natural number\nand not an element of $\\mathbb{R}$ (The canonical natural $\\iota(n) = n \\cdot 1_F$ of a field).",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-csm-frontier-abstract-polymer",
+          "source_section": "Definition",
+          "quote": "An abstract polymer model consists of an at most countable set $\\Gamma$ (finite or in bijection with $\\mathbb N$), a reflexive symmetric relation $\\sim$ on $\\Gamma$ (so $\\gamma\\sim\\gamma$ and $\\gamma\\sim\\eta$ implies $\\eta\\sim\\gamma$), and an activity function $z:\\Gamma\\to\\mathbb C$. Its elements are called polymers, and $\\gamma\\sim\\eta$ means that the two polymers are incompatible. A subset $X\\subseteq\\Gamma$ is compatible when no two distinct elements of $X$ are related by $\\sim$. For real and natural summands, finite-index sums and products are enumeration-independent. For complex summands, define a finite sum or product by any enumeration and repeated addition or multiplication in $\\mathbb C$; associativity and commutativity make the result independent of the enumeration. The empty sum is $0$ and the empty product is $1$. For each finite $V\\subseteq\\Gamma$, define the finite-volume partition polynomial\n\n$$Z_V(z):=\\sum_{\\substack{X\\subseteq V\\\\X\\text{ compatible}}}\\ \\prod_{\\gamma\\in X}z_\\gamma,$$\n\nwhere the empty subset contributes $1$.\n\nWrite $[n]:=\\{1,\\ldots,n\\}$ and $\\binom{[n]}2:=\\{\\{i,j\\}:i,j\\in[n],\\ i\\ne j\\}$. A simple graph on $[n]$ is a pair $([n],E)$ with $E\\subseteq\\binom{[n]}2$; a path is a finite vertex list with distinct vertices and each consecutive pair an edge. A graph is connected when every two vertices are joined by a path. A cycle is a vertex list $(v_0,\\ldots,v_k)$ with $k\\geq3$, $v_k=v_0$, $v_0,\\ldots,v_{k-1}$ distinct, and each consecutive pair an edge; a tree is a connected simple graph with no cycle. For $n\\in\\mathbb N$ with $n\\geq1$, let $\\mathcal C_n$ be the set of connected simple graphs on $[n]$ and let $\\mathcal T_n$ be the set of trees on $[n]$. The set $[n]$ is finite; its power set is finite, so its subset $\\binom{[n]}2$ is finite; the power set of that edge set is finite as well. Each simple graph on $[n]$ is determined by an edge set in this last power set, so $\\mathcal C_n$ and $\\mathcal T_n$ are finite.\n\nFor an ordered tuple $(\\gamma_1,\\ldots,\\gamma_n)\\in\\Gamma^n$, put $f_{ij}:=-\\mathbf 1_{\\{\\gamma_i\\sim\\gamma_j\\}}$ and define the connected coefficient\n\n$$U_n(\\gamma_1,\\ldots,\\gamma_n):=\\sum_{G\\in\\mathcal C_n}\\ \\prod_{\\{i,j\\}\\in E(G)}f_{ij}.$$\n\nFor $n=1$, $\\mathcal C_1$ contains the one-vertex graph and the empty edge product equals $1$. These are finite polynomial and coefficient definitions; they assert no convergence.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Write $f_{ij}=-\\mathbf 1_{\\{\\gamma_i\\sim\\gamma_j\\}}$. Reflexivity makes $\\prod_{i<j}(1+f_{ij})$ zero when a tuple repeats a polymer, and otherwise this product is one exactly for a compatible subset. Hence $Z_V(t)=\\sum_{n\\geq0}\\frac{t^n}{n!}\\sum_{\\vec\\gamma\\in V^n}(\\prod_iw_{\\gamma_i})\\prod_{i<j}(1+f_{ij})$ as a formal series. Expanding the pair product gives all simple graphs. A set partition of $[n]$ is a finite family of nonempty pairwise-disjoint blocks whose union is $[n]$; write $\\Pi_n$ for the set of such partitions. This set is finite since it is contained in $\\mathcal P(\\mathcal P([n]))$. The connected components of each finite graph give its unique partition into connected graph blocks. Each graph's edge weight factors over these blocks. The coefficient of $t^n$ in $\\exp(L_V(t))$ is $\\frac1{n!}\\sum_{\\pi\\in\\Pi_n}\\sum_{\\vec\\gamma\\in V^n}(\\prod_{B\\in\\pi}U_{|B|}(\\vec\\gamma_B))(\\prod_{i=1}^nw_{\\gamma_i})$: for ordered block sizes $m_1,\\ldots,m_k$, assigning the $n$ labels to those blocks contributes $n!/(m_1!\\cdots m_k!)$, and the exponential's factor $1/k!$ removes the ordering of the $k$ blocks. These factors leave exactly the connected-component expansion of the all-graph coefficient. Thus $Z_V$ and $\\exp(L_V)$ have identical formal coefficients.",
+          "inputs": [
+            "F1",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "Let $d_n$ be the coefficient of $t^n$ in $L_V$, and apply [F2] to the finite polymer set $V$ with activities $r w_\\eta$. Since $r>0$, [F5] gives $|r w_\\eta|=r|w_\\eta|$, so [A1] implies the rooted criterion. For each fixed root $\\gamma_1$, the $n$th nonnegative term of that rooted sum is at most $e^{a_{\\gamma_1}}$. The finite-sum triangle inequality, multiplicativity in [F5], and agreement of the complex modulus with real absolute value give $r^n|d_n|\\leq\\frac1{n!}\\sum_{\\gamma_1\\in V}r|w_{\\gamma_1}|\\sum_{\\gamma_2,\\ldots,\\gamma_n\\in V}|U_n(\\gamma_1,\\ldots,\\gamma_n)|\\prod_{j=2}^n|r w_{\\gamma_j}|\\leq\\frac1n\\sum_{\\gamma\\in V}r|w_\\gamma|e^{a_\\gamma}$. Thus on $|t|\\leq s<r$, the series is dominated by a constant times $\\sum_{n\\geq1}(s/r)^n/n$, and its derivative series by a constant times $\\sum_{n\\geq1}(s/r)^{n-1}$. Both converge uniformly on every such closed subdisc.",
+          "inputs": [
+            "A1",
+            "F2",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F4], $L_V$ differentiates term by term throughout $|t|<r$. For each fixed $t$ with $|t|<r$, step 1.2 gives $\\sum_{n\\geq1}|d_n||t|^n<\\infty$, so the total absolute sum after expanding $\\exp(L_V(t))$ is at most $\\sum_{k\\geq0}(\\sum_{n\\geq1}|d_n||t|^n)^k/k!<\\infty$. The products may therefore be regrouped by total degree; their coefficients are the formal coefficients identified in step 1.1, so $Z_V(t)=\\exp(L_V(t))$ on the disc. By [F3], $\\exp(L_V(t))\\exp(-L_V(t))=1$, so $Z_V(t)$ is nonzero and $L_V$ is its analytic logarithm with $L_V(0)=0$.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: If V is empty, ZV=1 and LV=0; the condition is vacuous and the identity holds."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: If all wγ=0, then ZV=1 and every coefficient of LV is zero, so the identity and derivative bounds hold."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: For n=1 the coefficient is Σγ∈V wγ; the rooted majorant includes U1=1, as used in step 1.2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Repeated polymer labels vanish in the partition product by reflexivity, exactly as step 1.1 handles; zero weights and zero aγ are allowed by the criterion."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The conclusion is on the open disc |t|<r and uniformity is claimed only on closed subdiscs |t|≤s<r; no boundary value at |t|=r is asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "V is finite and every proof sum over V is finite; no nonempty-family selection is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The finite polymer partition polynomial equals exp of its convergent connected series inside the open radius; repeated labels vanish by reflexivity and absolute regrouping proves zero-freeness. The public claim does not assert a converse characterization; the displayed construction or estimate is the one-way conclusion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The finite polymer partition polynomial equals exp of its convergent connected series inside the open radius; repeated labels vanish by reflexivity and absolute regrouping proves zero-freeness. The public claim does not assert a converse characterization; the displayed construction or estimate is the one-way conclusion."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "single self-incompatible polymer",
+          "inputs": "V={γ}, γ~γ, activity weight w, and scalar t.",
+          "method": "Compute the finite partition polynomial and connected coefficients for n=1,2,3 directly.",
+          "result": "ZV(t)=1+tw; U1=1, U2=-1, U3=2, so the first three terms of LV are tw-(tw)^2/2+(tw)^3/3, agreeing with log(1+tw).",
+          "limitation": "Checks initial coefficients only; the rooted majorant and absolute convergence proof establish the full disc identity."
+        }
+      ],
+      "current_boundary_worksheet": {
+        "proposal": "research/physics-non-fluid-129-2026-10-21-r2-owner-step2-boundary-proposal-6/proposal.json",
+        "source_sha256": "338007ceba039ffcb14df50019092da28257b78c0ffd52745ad4ba8b55bcd0cd",
+        "qualification": "Released complete current source/eight-case semantic worksheet; root transcribed exact current rows. No independent acceptance or finite computation asserted."
+      }
+    },
+    "lem-csm-frontier-stable-mayer-tree-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-csm-stable-superstable-continuum-interaction",
+          "source_section": "Definition",
+          "quote": "Fix $d\\geq1$. A pair potential is an even Borel function $\\phi:\\mathbb R^d\\to\\mathbb R\\cup\\{+\\infty\\}$. For a finite list of positions $X=(x_1,\\ldots,x_N)$, set $U_0=U_1=0$ and\n$$U_N(X)=\\sum_{1\\leq i<j\\leq N}\\phi(x_i-x_j).$$\nThe value $+\\infty$ is allowed and represents a forbidden configuration; $-\\infty$ is not allowed.\n\nThe potential is **stable** if some finite $B\\geq0$ satisfies $U_N(X)\\geq-BN$ for every $N$ and every $X$. Fix a cell side $\\ell>0$ and the half-open cubic tiling $C_k=\\ell(k+[0,1)^d)$, $k\\in\\mathbb Z^d$, and let $n_k(X)$ count the positions of $X$ in $C_k$. The potential is **cell-superstable** if there are constants $A_*>0$ and $B_*\\geq0$ such that\n$$U_N(X)\\geq A_*\\sum_{k\\in\\mathbb Z^d}n_k(X)^2-B_*N$$\nfor every finite configuration; the sum is finite for finite $X$.\n\nFor disjoint finite cell-index sets $I,J$, let $W_{I,J}(X)$ be the sum of pair terms with one point in a cell indexed by $I$ and the other in a cell indexed by $J$. The potential is **lower regular** for this tiling if a nonnegative envelope $\\Psi:\\mathbb Z^d\\setminus\\{0\\}\\to[0,\\infty)$ exists with $\\sum_{k\\ne0}\\Psi(k)<\\infty$ and\n$$W_{I,J}(X)\\geq-\\sum_{k\\in I}\\sum_{l\\in J}\\Psi(k-l)n_k(X)n_l(X)$$\nfor all such $I,J,X$. The ordered-pair convention in this formula is fixed as written.\n\nA **decreasing-integrable tail bound** means that for some $R_0\\geq0$ there is a nonnegative nonincreasing function $\\psi:[R_0,\\infty)\\to[0,\\infty)$ such that $|\\phi(x)|\\leq\\psi(|x|)$ for $|x|\\geq R_0$ and $\\int_{R_0}^{\\infty}\\psi(r)r^{d-1}\\,dr<\\infty$. This explicit envelope condition is stronger than bare Lebesgue integrability of an arbitrary signed tail. Stability, cell-superstability, lower regularity, and a tail bound are separate properties; none is inferred from finite range alone.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define\n$$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$\nprovided by the all-real convergence proved in The exponential series converges absolutely for every real argument. Here $n!\\in\\mathbb N$ is the factorial of The factorial $n!$ and the falling factorial $n^{\\underline{k}}$, defined by recursion in $\\mathbb{N}$, $\\iota(n!)$ is its nonzero real image (The canonical natural $\\iota(n) = n \\cdot 1_F$ of a field, Canonical naturals are positive and strictly increasing), and powers and series are those of Integer powers $a^m$ and Series, partial sums, convergence and the sum, divergence, and the tail series.\n\nThis is a real power series centred at $0$ (A real power series about a centre, its interval of convergence, and its radius in $[0,+\\infty]$). No logarithm, irrational power, or differential equation enters the definition.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-exponential-addition-formula",
+          "source_section": "Statement",
+          "quote": "For all real $x,y$,\n$$\\exp(x+y)=\\exp(x)\\exp(y).$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-exponential-is-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "The exponential function is continuous and strictly increasing on $\\mathbb R$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$ and **assume the Axiom of Countable Choice**\n([[def-countable-choice]]). Then:\n\n1. $\\lambda_n$ is sigma-finite ([[def-finite-sigma-finite-and-semifinite-measures]]):\n   the cubes $(-k,k]^n$ are Lebesgue measurable with\n   $\\lambda_n\\big((-k,k]^n\\big) = (2k)^n < +\\infty$, they increase with $k$, and\n   their union over $k \\in \\mathbb{N}$ is $\\mathbb{R}^n$.\n2. Every bounded subset $E \\subseteq \\mathbb{R}^n$\n   ([[def-metric-bounded-diameter]]) has $\\lambda_n^*(E) < +\\infty$; a bounded\n   Lebesgue measurable set therefore has finite measure, and every compact\n   subset of $\\mathbb{R}^n$ is Lebesgue measurable of finite measure.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-borel-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal T)$ be a topological space (Topology on a set, open and closed sets, clopen sets, the closed-set axiomatisation, and the coarser/finer comparison). The\n**Borel sigma-algebra of $X$** is the sigma-algebra generated by its open sets:\n\n$$\\mathcal B(X):=\\sigma_X(\\mathcal T).$$\n\nIts members are the **Borel subsets** of $X$. The generated sigma-algebra exists\nand is minimal by Nonempty intersections of sigma-algebras are sigma-algebras, so the generated sigma-algebra exists and is minimal.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-extended-real-valued-measurable-function",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space (Measure spaces). Equip\n$\\overline{\\mathbb R}$ (The extended real line $\\overline{\\mathbb{R}} = \\mathbb{R} \\cup \\{-\\infty, +\\infty\\}$, its order, and the arithmetic that is left undefined) with its order topology and let\n$\\mathcal B(\\overline{\\mathbb R})$ be the corresponding Borel sigma-algebra\n(The Borel sigma-algebra of a topological space).\n\nA function $f:X\\to\\overline{\\mathbb R}$ is **measurable** when\n$f^{-1}(B)\\in\\mathcal A$ for every $B\\in\\mathcal B(\\overline{\\mathbb R})$.\n\nEquivalently, it is enough to require\n$$\\{x\\in X:f(x)>a\\}\\in\\mathcal A \\qquad \\text{for every } a\\in\\mathbb R,$$\nbecause the rays $(a,+\\infty]$ generate $\\mathcal B(\\overline{\\mathbb R})$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-borel-sigma-algebra-on-the-extended-real-line",
+          "source_section": "Definition",
+          "quote": "The **extended real line** is\n\n$$\\overline{\\mathbb{R}} := \\mathbb{R} \\cup \\{-\\infty,+\\infty\\}$$\n\nwith the total order extending the usual order on $\\mathbb{R}$ and satisfying\n$-\\infty < x < +\\infty$ for every real $x$\n([[def-extended-reals]]).\n\nIts **Borel sigma-algebra** is the Borel sigma-algebra of that ordered\ntopological line in the sense of [[def-borel-sigma-algebra]]. On this page it is\ndenoted $\\mathcal{B}(\\overline{\\mathbb{R}})$ and is generated by the rays\n\n$$\\{\\, (a,+\\infty] : a \\in \\mathbb{R} \\,\\}.$$\n\nIn particular, $\\{+\\infty\\}$ and $\\{-\\infty\\}$ are Borel sets.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-continuous-functions-are-borel-measurable",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $n,m\\ge1$. Every continuous map\n$f : \\mathbb{R}^n \\to \\mathbb{R}^m$ is Borel measurable in\nthe sense of Borel measurable and Lebesgue measurable functions on $\\mathbb{R}^n$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-composition-with-borel-functions-preserves-measurability",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal{A})$, $(Y,\\mathcal{B})$, and $(Z,\\mathcal{C})$ be measurable\nspaces. If $f : (X,\\mathcal{A}) \\to (Y,\\mathcal{B})$ is measurable and\n$g : (Y,\\mathcal{B}) \\to (Z,\\mathcal{C})$ is measurable, then\n$g \\circ f : (X,\\mathcal{A}) \\to (Z,\\mathcal{C})$ is measurable.\n\nIn particular, if $f$ is measurable and $g$ is a Borel measurable function on\nits codomain, then $g \\circ f$ is measurable.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A)$ be a measurable space and let\n$f,g:X\\to\\overline{\\mathbb R}$ be measurable for the Borel sigma-algebra on\nthe extended real line. Products of functions use\n$\\odot_X$ from A total pointwise product for extended-real-valued functions, and $cf$\nabbreviates $\\underline c\\odot_X f$ for the constant function $\\underline c$.\nThe magnitude function is $|f|=\\max(f,-f)$ as in\nThe positive and negative parts of a function. Then:\n\n1. $cf$ is measurable for every real scalar $c$;\n2. $\\max(f,g)$, $\\min(f,g)$, $|f|$, $f^+$, and $f^-$ are measurable;\n3. if the partial pointwise sum $f+g$ is defined at every point, then it is measurable;\n4. the pointwise product $fg:=f\\odot_X g$ is measurable.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-borel-products-of-euclidean-spaces-are-euclidean-borel",
+          "source_section": "Statement",
+          "quote": "Let $m,n \\ge 1$. Under the identification\n$$\\mathbb R^{m+n}=\\mathbb R^m \\times \\mathbb R^n,$$\none has\n$$\\mathcal B(\\mathbb R^m)\\otimes\\mathcal B(\\mathbb R^n) = \\mathcal B(\\mathbb R^{m+n}).$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-borel-sets-are-lebesgue-measurable",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$ and **assume the Axiom of Countable Choice**\n(The Axiom of Countable Choice ($\\mathrm{AC}_\\omega$)). Then\n\n$$\\mathcal{B}(\\mathbb{R}^n) \\;\\subseteq\\; \\mathcal{L}(\\mathbb{R}^n) :$$\n\nevery Borel subset of $\\mathbb{R}^n$ (The Borel sigma-algebra of a topological space) is Lebesgue\nmeasurable (Lebesgue measurable sets, the family $\\mathcal{L}(\\mathbb{R}^n)$, and the restricted set function $\\lambda_n$). In\nparticular every open set, every closed set and every countable intersection of\nopen sets is Lebesgue measurable.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand\n\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, let $h \\in \\mathbb{R}^n$, and let $E + h$ be the translate of\n$E \\subseteq \\mathbb{R}^n$ (Translation of a subset of $\\mathbb{R}^n$). Then:\n\n1. $\\lambda_n^*(E+h) = \\lambda_n^*(E)$ for **every** subset $E$;\n2. $E$ is Lebesgue measurable if and only if $E+h$ is;\n3. $\\lambda_n(E+h) = \\lambda_n(E)$ for every Lebesgue measurable $E$.\n\n**No choice principle is used.** Lebesgue outer measure is defined as an infimum\nand the Carathéodory condition is a family of equations between its values, so\nall three clauses are statements about objects that exist in ZF; countable\nchoice is needed to know that $\\lambda_n$ is a measure, not to know that it is\ntranslation invariant.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f,g:X\\to[0,+\\infty]$ be measurable and let $c\\ge0$.\n\n1. If $f\\le g$, then $\\int f\\,d\\mu\\le\\int g\\,d\\mu$.\n2. If $c>0$, then $\\int cf\\,d\\mu=c\\int f\\,d\\mu$. For $c=0$,\n   the integral of the zero function is $0$. Neither clause forms the\n   undefined extended-real product $0\\cdot(+\\infty)$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "cor-additivity-of-the-nonnegative-lebesgue-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. If $f,g:X\\to[0,+\\infty]$ are measurable, then\n$$\\int(f+g)\\,d\\mu=\\int f\\,d\\mu+\\int g\\,d\\mu.$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-simple-graph-without-a-finiteness-hypothesis",
+          "source_section": "Definition",
+          "quote": "A **simple graph** is an ordered pair $G=(V,E)$ in which $V$ is a set and\n\n$$E \\subseteq [V]^2 := \\{\\, \\{u,v\\} \\subseteq V : u \\ne v \\,\\}.$$\n\nThe elements of $V=V(G)$ are the **vertices** and the elements of $E=E(G)$ are\nthe **edges**. Thus a simple graph has no loops and no parallel edges.\n\nThis is the same incidence convention as [[def-finite-simple-graph]], with the\nword \"finite\" removed from the hypothesis on $V$. Whenever a statement on this\npage is made for a simple graph, it allows an arbitrary vertex set unless\nfiniteness is stated separately.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-finite-simple-graph",
+          "source_section": "Definition",
+          "quote": "A **finite simple graph** is an ordered pair $G=(V,E)$ in which $V$ is a finite\nset and\n\n$$E\\subseteq [V]^2:=\\{\\,\\{u,v\\}\\subseteq V: u\\ne v\\,\\}.$$\n\nThe elements of $V=V(G)$ are the **vertices** and the elements of $E=E(G)$ are\nthe **edges**. Thus every edge has two distinct endpoints, there are no loops,\nand an unordered pair of vertices occurs as at most one edge. Finiteness and the\nnotation $|V|$ and $|E|$ are those of [[def-finite-cardinality]].\n\nWhen no qualifier is present, the word **graph** has this meaning.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-walks-paths-and-connectedness-in-a-simple-graph",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,E)$ be a simple graph in the sense of\n[[def-simple-graph-without-a-finiteness-hypothesis]].\n\nA **walk**, **closed walk**, **trail**, **path**, and **cycle** in $G$ are\ndefined exactly as in [[def-graph-walk-trail-path-and-cycle]], with no\nfiniteness hypothesis on $V$. In particular, a walk is a finite vertex list\n$$(v_0,\\dots,v_\\ell)$$\nwith $\\{v_{i-1},v_i\\}\\in E$ for each $1 \\le i \\le \\ell$, and a path is a walk\nwith distinct vertices.\n\nVertices $u,v \\in V$ are **connected** when some path in $G$ has endpoints $u$\nand $v$. The graph $G$ is **connected** when $V \\ne \\emptyset$ and every two\nvertices of $G$ are connected.\n\nFor $v \\in V$, the **connected component** of $v$ is the induced subgraph on\n$$C_G(v) := \\{\\, u \\in V : u \\text{ is connected to } v \\,\\}.$$\n\nThese are the same notions as in [[def-connected-graph-and-connected-component]],\nagain with the finiteness hypothesis removed.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-cycles-trees-and-forests-in-a-simple-graph",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a simple graph.\n\nA **cycle** in $G$ is a cycle in the sense of\n[[def-graph-walk-trail-path-and-cycle]], that is, a closed walk of length at\nleast $3$ whose vertices are distinct except for the repeated endpoint.\n\nThe graph $G$ is **acyclic** if it contains no cycle.\n\nA **tree** is a connected acyclic simple graph.\n\nA **forest** is an acyclic simple graph.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-spanning-tree",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a graph. A **spanning tree** of $G$ is a spanning subgraph $T$ of $G$ that is a tree ([[def-subgraph-induced-subgraph-and-spanning-subgraph]], [[def-tree-forest-and-leaf]]). Equivalently,\n\n$$V(T)=V(G),\\qquad E(T)\\subseteq E(G),$$\n\nand $T$ is connected and acyclic.\n\nThe null graph has no spanning tree under the library convention that a tree is nonempty and connected.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-abs-value",
+          "source_section": "Definition",
+          "quote": "Let $F$ be an ordered field (Ordered field). The **absolute value** of\n$x \\in F$ is\n\n$$|x| \\;:=\\; \\begin{cases} x & \\text{if } x \\ge 0, \\\\ -x & \\text{if } x < 0. \\end{cases}$$",
+          "uses": [
+            "1.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "lem-of-abs-value",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field (Ordered field) and let $x, y \\in F$, with\n$|x|$ the absolute value (Absolute value in an ordered field). Then\n\n$$|x| \\ge 0; \\quad |x| = 0 \\iff x = 0; \\quad -|x| \\le x \\le |x|; \\quad |-x| = |x|; \\quad |xy| = |x|\\,|y|;$$\n\nand, for every $c > 0$, one has $|x| < c \\iff -c < x < c$.",
+          "uses": [
+            "1.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "lem-of-triangle-inequality",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field (Ordered field) and let $x, y \\in F$. Then\n\n$$|x + y| \\le |x| + |y|.$$",
+          "uses": [
+            "1.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "def-sum-over-a-finite-index-set",
+          "source_section": "Definition",
+          "quote": "Let $S$ be a finite set, $n := \\lvert S\\rvert$ (The cardinality $\\lvert A\\rvert$ of a finite set), and\nlet $a : S \\to \\mathbb{R}$ or $a : S \\to \\mathbb{N}$, written $a_i$ for $a(i)$.\nChoose a bijection $\\varphi : n \\to S$, which exists because $S \\approx n$\n(Equinumerous sets, $A \\approx B$ and $A \\preceq B$), and set\n\n$$\\sum_{i \\in S} a_i := \\sum_{k<n} a_{\\varphi(k)}, \\qquad \\prod_{i \\in S} a_i := \\prod_{k<n} a_{\\varphi(k)},$$\n\nthe right-hand sides being the iterated operations of Finite sums and finite products, by recursion when the\nvalues are real and of Finite sums and finite products of natural numbers, $\\sum_{k<n} a_k$ and $\\prod_{k<n} a_k$ in $\\mathbb{N}$ when they are natural.\n\n**Independence of the enumeration, which is the content of the definition.** Let\n$\\varphi, \\psi : n \\to S$ be two bijections. Then $\\pi := \\varphi^{-1} \\circ \\psi$\nis a bijection $n \\to n$ (Injection, surjection, bijection), and\n$a_{\\psi(k)} = a_{\\varphi(\\pi(k))}$ for every $k < n$. Applying\nA finite sum is unchanged by a permutation of its index range: $\\sum_{k<n} a_{\\pi(k)} = \\sum_{k<n} a_k$ for every bijection $\\pi : n \\to n$ to the list $c_k := a_{\\varphi(k)}$\ngives\n\n$$\\sum_{k<n} a_{\\psi(k)} = \\sum_{k<n} c_{\\pi(k)} = \\sum_{k<n} c_k = \\sum_{k<n} a_{\\varphi(k)},$$\n\nand identically for products. So the value does not depend on which bijection is\nused, and $\\sum_{i \\in S} a_i$ is a single well-determined element.\n\n**No choice principle is involved.** The definition does not select an\nenumeration: it asserts that all enumerations give the same value, and that value\nis what the notation names. Only one bijection is ever produced at a time, from a\nset already known to be nonempty.\n\n**Three clauses, recorded here because the page uses them constantly.**\n\n**(a) The bridge to the old notation.** Taking $S = n$ and $\\varphi = \\mathrm{id}_n$,\nwhich is legitimate since $\\lvert n\\rvert = n$, gives\n\n$$\\sum_{i \\in n} a_i = \\sum_{k<n} a_k, \\qquad \\prod_{i \\in n} a_i = \\prod_{k<n} a_k .$$\n\nSo the new notation **extends** the sum over an initial segment rather than\ncompeting with it, and every law proved for the latter is available for the\nformer whenever the index set is a natural number.\n\n**(b) Reindexing along a bijection.** If $h : T \\to S$ is a bijection of finite\nsets, then $\\sum_{j \\in T} a_{h(j)} = \\sum_{i \\in S} a_i$, and likewise for\nproducts. Indeed $\\lvert T\\rvert = \\lvert S\\rvert = n$ by transport\n(The cardinality $\\lvert A\\rvert$ of a finite set), and if $\\varphi : n \\to S$ is a bijection then\n$h^{-1} \\circ \\varphi : n \\to T$ is one, so\n$\\sum_{j \\in T} a_{h(j)} = \\sum_{k<n} a_{h(h^{-1}(\\varphi(k)))} = \\sum_{k<n} a_{\\varphi(k)} = \\sum_{i \\in S} a_i$.\n\n**(c) The empty index set and a constant summand.** $\\lvert\\varnothing\\rvert = 0$,\nso $\\sum_{i \\in \\varnothing} a_i = 0$ and $\\prod_{i \\in \\varnothing} a_i = 1$ by\nthe base clause of the recursion. And for a constant $c$, clause (a) together\nwith the constant clause of Laws of finite sums and products in $\\mathbb{N}$, and $\\iota\\big(\\sum_{k<n} a_k\\big) = \\sum_{k<n} \\iota(a_k)$\nin $\\mathbb{N}$, or clause 2 of Laws of finite sums and finite products in $\\mathbb{R}$, gives\n\n$$\\sum_{i \\in S} c = \\lvert S\\rvert \\cdot c \\quad (c \\in \\mathbb{N}), \\qquad \\sum_{i \\in S} c = \\iota(\\lvert S\\rvert)\\cdot c \\quad (c \\in \\mathbb{R}),$$\n\nthe second with $\\iota$ written out because $\\lvert S\\rvert$ is a natural number\nand not an element of $\\mathbb{R}$ (The canonical natural $\\iota(n) = n \\cdot 1_F$ of a field).",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "cor-cardinality-of-the-power-set",
+          "source_section": "Statement",
+          "quote": "Let $A$ be a finite set and $n := \\lvert A\\rvert$. Then the power set\n$\\mathcal{P}(A)$ is finite and\n\n$$\\lvert\\mathcal{P}(A)\\rvert = 2^{\\,n},$$\n\nthe power being the $\\mathbb{N}$-valued exponentiation of [[def-nat-power]].\nMoreover $n < 2^{\\,n}$.\n\nThe last inequality is the quantitative form, for finite $A$, of Cantor's\ntheorem $A \\prec \\mathcal{P}(A)$ ([[thm-cantor-powerset]]), which holds for every\nset whatsoever. The two statements are consistent and the proof below derives the\ninequality from Cantor's theorem rather than leaving them side by side.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "thm-subset-of-a-finite-set",
+          "source_section": "Statement",
+          "quote": "Let $A$ be a finite set ([[def-countable]]) and let $B \\subseteq A$. Then:\n\n1. $B$ is finite;\n2. $\\lvert B\\rvert \\le \\lvert A\\rvert$ ([[def-finite-cardinality]]);\n3. $\\lvert B\\rvert = \\lvert A\\rvert$ if and only if $B = A$;\n4. every injection $f : A \\to A$ is a bijection, and every surjection\n   $f : A \\to A$ is a bijection.\n\nClause 3 is the finite form of the Dedekind statement: a finite set is not\nequinumerous with a proper subset of itself. Clause 4 is its working form, and\n**finiteness is exactly the hypothesis that fails in general**: the successor map\nis an injection of $\\mathbb{N}$ into itself that is not surjective, which is the\nfalse statement recorded on this page's companion.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix $n\\geq2$ and positions $x_1,\\ldots,x_n$, and put $f_{ij}=f_\\beta(x_i-x_j)$. For each nonempty label set $I$, let $U_I=\\sum_{i<j,\\ i,j\\in I}v(x_i-x_j)$. If $U_I=+\\infty$, the adopted convention gives $e^{-2\\beta U_I}=0$; otherwise all pair values in the sum are finite. In either case the exponential definition and addition law [F2], together with evenness of $v$, give $\\prod_{i\\in I}\\prod_{j\\in I\\setminus\\{i\\}}|1+f_{ij}|=e^{-2\\beta U_I}$. Stability and monotonicity [F1, F2] imply this product is at most $e^{2\\beta B|I|}$. Writing $q_i=\\prod_{j\\in I\\setminus\\{i\\}}|1+f_{ij}|$, all $q_i$ are nonnegative and their product is at most $e^{2\\beta B|I|}$; hence some $r\\in I$ has $q_r\\leq e^{2\\beta B}$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F12",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The maps $(x_1,\\ldots,x_n)\\mapsto x_i-x_j$ are continuous and hence Borel under [A1, F4]. Since $v$ is Borel [F1], composition with $v$ is Borel [F4]. The adopted map $u\\mapsto e^{-\\beta u}$ on $\\mathbb R\\cup\\{+\\infty\\}$ is Borel: on $\\mathbb R$ it is continuous by [F2], and its value at the Borel singleton $+\\infty$ is $0$ by [F4]. Thus $f_\\beta$ is Borel, and $U_n$ is a finite sum of finite products of Borel factors [F4]. The same composition and arithmetic facts on $\\mathbb R^{dn}$ make each tree weight Borel. Repeated application of the two-factor identity in [F5] identifies the finite product Borel sigma-algebra, and the Borel-to-Lebesgue clause in [F5] makes the tree weight measurable for product Lebesgue measure.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "A1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "For disjoint label sets $I,J$, define $g(I,J)$ as the finite sum of $\\prod_{\\{i,j\\}\\in E(G)}f_{ij}$ over simple graphs on $I\\cup J$ in which every connected component meets $I$; set $g(\\varnothing,\\varnothing)=1$ and $g(\\varnothing,J)=0$ for nonempty $J$. Evenness in [F1] makes each unordered-edge weight independent of which endpoint is written first. Choose $r\\in I$ as in step 1.1 and put $I'=I\\setminus\\{r\\}$. In each graph let $K\\subseteq J$ be the neighbors of $r$ in $J$. Edges from $r$ to $I'$ are independently present or absent, and summing their two weights gives $\\prod_{j\\in I'}(1+f_{rj})$. Deleting $r$ leaves a graph all of whose components meet $I'\\cup K$, and conversely any such graph reconstructs exactly one original graph after adjoining the chosen $r$-edges. Thus $g(I,J)=\\left(\\prod_{j\\in I'}(1+f_{rj})\\right)\\sum_{K\\subseteq J}\\left(\\prod_{k\\in K}f_{rk}\\right)g(I'\\cup K,J\\setminus K)$.",
+          "inputs": [
+            "F1",
+            "F10",
+            "F13",
+            "F14",
+            "step 1.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "step": "2.2",
+          "claim": "Under Countable Choice [A1], the product Lebesgue spaces are sigma-finite by [F3], so Tonelli [F6] applies. Root a labelled tree $T$ at $1$. A finite tree with at least two vertices has at least two leaves: a longest simple path exists in a finite graph, and each endpoint has exactly one incident edge, since another incident edge would either extend the path or create a cycle. At least one of the two leaves differs from the root. Deleting a leaf preserves connectedness and acyclicity on the remaining vertices, so the remaining graph is a tree unless only the root remains. Delete such a leaf and integrate its coordinate first. Translation invariance [F7] and evenness of $f_\\beta$ give $\\int_{\\mathbb R^d}|f_\\beta(x_\\ell-x_j)|\\,dx_\\ell=C_\\beta$. Repeating after each leaf deletion proves that the pinned tree integral is $C_\\beta^{n-1}$.",
+          "inputs": [
+            "A1",
+            "F3",
+            "F6",
+            "F7",
+            "F10",
+            "F12",
+            "step 1.2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Let $\\mathcal F_I(J)$ be the forests on $I\\cup J$ with exactly one vertex from $I$ in each tree, and define $h(I,J)=e^{2\\beta B(|I|+|J|)}\\sum_{F\\in\\mathcal F_I(J)}\\prod_{\\{i,j\\}\\in E(F)}|f_{ij}|$, with the same empty-root convention as $g$. For nonempty $I$, delete the root $r$ selected in step 1.1. Its component cannot contain another vertex of $I$, and the set $K\\subseteq J$ of its neighbors gives exactly the roots of the resulting branches; this is a bijection with forests in $\\mathcal F_{I'\\cup K}(J\\setminus K)$. The exponential addition law [F2] factors the size weight, so $h(I,J)=e^{2\\beta B}\\sum_{K\\subseteq J}(\\prod_{k\\in K}|f_{rk}|)h(I'\\cup K,J\\setminus K)$. If $I=\\varnothing$, both $g$ and $h$ are $1$ for $J=\\varnothing$ and $0$ otherwise. Induct on $|I|+|J|$ from these base cases. Step 1.1 supplies the root bound and step 2.1 supplies the graph recurrence; applying the finite-sum real triangle inequality from [F12, F13] gives $|g(I,J)|\\leq q_r\\sum_K(\\prod_{k\\in K}|f_{rk}|)|g(I'\\cup K,J\\setminus K)|$. The induction hypothesis and $q_r\\leq e^{2\\beta B}$ bound this by $h(I,J)$. At $I=\\{1\\}$, $J=\\{2,\\ldots,n\\}$, $g(I,J)=U_n$ and every forest in $\\mathcal F_I(J)$ is a spanning tree. This proves the pointwise tree bound.",
+          "inputs": [
+            "F2",
+            "F10",
+            "F12",
+            "F13",
+            "step 1.1",
+            "step 2.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "In the Prüfer encoding, repeatedly delete the least-labelled leaf and record its neighbor; after $n-2$ deletions this gives a word of length $n-2$ over $\\{1,\\ldots,n\\}$. Step 2.2 guarantees a leaf other than the root at every stage with at least two vertices, and deleting a leaf leaves a tree until the final vertex pair. At each stage a vertex occurs in the remaining word exactly once for each incident edge deleted before that vertex; it is recorded when a neighboring leaf is removed, and the vertex itself is deleted once it becomes a leaf, except for the final two vertices. Thus its occurrence count is its current degree minus one, and absence from the word is equivalent to being a current leaf. Conversely, from any such word, repeatedly join the least label absent from the remaining word to its first symbol and delete that label and symbol, then join the last two labels. Adding a new vertex with one edge to a tree makes the new vertex a leaf and preserves connectedness and acyclicity; induction on the word length therefore shows this constructs a tree. In the resulting tree the least absent label is a leaf and the first symbol is its neighbor, so encoding reverses every decoding step. The procedures give a bijection with all $n^{n-2}$ words. Integrating the pointwise tree bound of step 3.1 and using monotonicity, homogeneity and finite additivity [F8, F9] with the tree integral from step 2.2 yields $\\int|U_n(0,x_2,\\ldots,x_n)|\\,dx_2\\cdots dx_n\\leq e^{2\\beta Bn}n^{n-2}C_\\beta^{n-1}$.",
+          "inputs": [
+            "F8",
+            "F9",
+            "step 3.1",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 3.1 explicitly sets h(∅,∅)=1 and h(∅,J)=0 for nonempty J, matching the graph recurrence boundary."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: if Cβ=0, the pinned integral bound is zero for n≥2; the pointwise tree estimate remains valid."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Public statement and its supplied argument: The asserted coefficient inequalities require n≥2. At n=2 the Prüfer word has length zero, there is exactly one labelled tree, and the pinned bound is e^(4βB) Cβ. Singleton/empty-edge products occur in the auxiliary recurrence with value 1; this does not extend the stated n≥2 integral claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Public statement and its supplied argument: If every Mayer bond f_ij is zero for the fixed configuration, each connected n≥2 graph and each spanning tree has a zero edge factor, so both sides of the pointwise inequality vanish. Empty-root auxiliary states instead have the explicitly separate values g(∅,∅)=h(∅,∅)=1 and g(∅,J)=h(∅,J)=0 for J nonempty. An arbitrary edgeless term alone does not make all other connected-graph terms vanish."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: stability may hold with equality in the lower bound and the finite Cβ hypothesis includes Cβ=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.2: Countable Choice is an explicit A1 input to sigma-finite product Lebesgue measure and Tonelli."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement asserts upper bounds, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement asserts upper bounds, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "two-particle tree estimate",
+          "inputs": "n=2, arbitrary finite v(x1-x2), β>0, stable B≥0.",
+          "method": "There is one connected graph and one labelled tree; compare the two sides directly.",
+          "result": "|U2|=|fβ(x1-x2)|≤e^(4βB)|fβ(x1-x2)|; the pinned integral is Cβ≤e^(4βB)Cβ.",
+          "limitation": "Checks the base particle count only; the rooted deletion induction proves every n≥2."
+        }
+      ],
+      "current_boundary_worksheet": {
+        "proposal": "research/physics-non-fluid-129-2026-10-21-r2-owner-step2-boundary-proposal-4/proposal.json",
+        "source_sha256": "8aefa4dc0329f10a61308bcf7bf5cdf3c20788bfe518cdb365370ee8a8ce4f67",
+        "qualification": "Released complete current source/eight-case semantic worksheet; root transcribed exact current rows. No independent acceptance or finite computation asserted."
+      }
+    },
+    "thm-csm-frontier-dilute-mayer-domain": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-csm-stable-superstable-continuum-interaction",
+          "source_section": "Definition",
+          "quote": "Fix $d\\geq1$. A pair potential is an even Borel function $\\phi:\\mathbb R^d\\to\\mathbb R\\cup\\{+\\infty\\}$. For a finite list of positions $X=(x_1,\\ldots,x_N)$, set $U_0=U_1=0$ and\n$$U_N(X)=\\sum_{1\\leq i<j\\leq N}\\phi(x_i-x_j).$$\nThe value $+\\infty$ is allowed and represents a forbidden configuration; $-\\infty$ is not allowed.\n\nThe potential is **stable** if some finite $B\\geq0$ satisfies $U_N(X)\\geq-BN$ for every $N$ and every $X$. Fix a cell side $\\ell>0$ and the half-open cubic tiling $C_k=\\ell(k+[0,1)^d)$, $k\\in\\mathbb Z^d$, and let $n_k(X)$ count the positions of $X$ in $C_k$. The potential is **cell-superstable** if there are constants $A_*>0$ and $B_*\\geq0$ such that\n$$U_N(X)\\geq A_*\\sum_{k\\in\\mathbb Z^d}n_k(X)^2-B_*N$$\nfor every finite configuration; the sum is finite for finite $X$.\n\nFor disjoint finite cell-index sets $I,J$, let $W_{I,J}(X)$ be the sum of pair terms with one point in a cell indexed by $I$ and the other in a cell indexed by $J$. The potential is **lower regular** for this tiling if a nonnegative envelope $\\Psi:\\mathbb Z^d\\setminus\\{0\\}\\to[0,\\infty)$ exists with $\\sum_{k\\ne0}\\Psi(k)<\\infty$ and\n$$W_{I,J}(X)\\geq-\\sum_{k\\in I}\\sum_{l\\in J}\\Psi(k-l)n_k(X)n_l(X)$$\nfor all such $I,J,X$. The ordered-pair convention in this formula is fixed as written.\n\nA **decreasing-integrable tail bound** means that for some $R_0\\geq0$ there is a nonnegative nonincreasing function $\\psi:[R_0,\\infty)\\to[0,\\infty)$ such that $|\\phi(x)|\\leq\\psi(|x|)$ for $|x|\\geq R_0$ and $\\int_{R_0}^{\\infty}\\psi(r)r^{d-1}\\,dr<\\infty$. This explicit envelope condition is stronger than bare Lebesgue integrability of an arbitrary signed tail. Stability, cell-superstability, lower regularity, and a tail bound are separate properties; none is inferred from finite range alone.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-borel-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal T)$ be a topological space (Topology on a set, open and closed sets, clopen sets, the closed-set axiomatisation, and the coarser/finer comparison). The\n**Borel sigma-algebra of $X$** is the sigma-algebra generated by its open sets:\n\n$$\\mathcal B(X):=\\sigma_X(\\mathcal T).$$\n\nIts members are the **Borel subsets** of $X$. The generated sigma-algebra exists\nand is minimal by Nonempty intersections of sigma-algebras are sigma-algebras, so the generated sigma-algebra exists and is minimal.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-borel-sigma-algebra-on-the-extended-real-line",
+          "source_section": "Definition",
+          "quote": "The **extended real line** is\n\n$$\\overline{\\mathbb{R}} := \\mathbb{R} \\cup \\{-\\infty,+\\infty\\}$$\n\nwith the total order extending the usual order on $\\mathbb{R}$ and satisfying\n$-\\infty < x < +\\infty$ for every real $x$\n([[def-extended-reals]]).\n\nIts **Borel sigma-algebra** is the Borel sigma-algebra of that ordered\ntopological line in the sense of [[def-borel-sigma-algebra]]. On this page it is\ndenoted $\\mathcal{B}(\\overline{\\mathbb{R}})$ and is generated by the rays\n\n$$\\{\\, (a,+\\infty] : a \\in \\mathbb{R} \\,\\}.$$\n\nIn particular, $\\{+\\infty\\}$ and $\\{-\\infty\\}$ are Borel sets.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-csm-frontier-stable-mayer-tree-bound",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. All displayed integrals use Lebesgue measure. Let $n\\in\\mathbb N$ with $n\\geq2$ and write $[n]=\\{1,\\ldots,n\\}$. A simple graph on $[n]$ is $([n],E)$ with $E$ a set of unordered two-element subsets of $[n]$; a path is a finite vertex list with distinct vertices and consecutive pairs in $E$; connected means every two vertices are joined by a path; a cycle is a vertex list $(v_0,\\ldots,v_k)$ with $k\\geq3$, $v_k=v_0$, $v_0,\\ldots,v_{k-1}$ distinct, and consecutive pairs in $E$; a tree is a connected graph with no cycle; a forest is a graph with no cycle. Finite sums and products over graph, edge, vertex, and subset sets below are enumeration-independent; the empty sum is $0$ and the empty product is $1$. Fix $d\\in\\mathbb N$ with $d\\geq1$, let $v:\\mathbb R^d\\to\\mathbb R\\cup\\{+\\infty\\}$ be an even Borel pair potential with no $-\\infty$ values, and suppose it is stable with constant $B\\in\\mathbb R$, $B\\geq0$. Fix $\\beta\\in\\mathbb R$ with $\\beta>0$, set $e^{-c(+\\infty)}:=0$ for every $c>0$, define the Mayer function $f_\\beta(x):=e^{-\\beta v(x)}-1$, and suppose\n\n$$C_\\beta:=\\int_{\\mathbb R^d}|f_\\beta(x)|\\,dx<\\infty.$$\n\nLet $\\mathcal C_n$ be the connected simple graphs on $[n]$ and let $\\mathcal T_n$ be the trees on $[n]$. These families are finite because $[n]$ has finitely many unordered two-element subsets and each graph is determined by a subset of those edges. A spanning tree of a finite graph is a tree with the same vertex set and a subset of its edges. A leaf is a vertex incident to exactly one edge. Put\n\n$$U_n(x_1,\\ldots,x_n):=\\sum_{G\\in\\mathcal C_n}\\ \\prod_{\\{i,j\\}\\in E(G)}f_\\beta(x_i-x_j).$$\n\nFor every configuration $(x_1,\\ldots,x_n)\\in(\\mathbb R^d)^n$,\n\n$$|U_n(x_1,\\ldots,x_n)|\\leq e^{2\\beta Bn}\\sum_{T\\in\\mathcal T_n}\\ \\prod_{\\{i,j\\}\\in E(T)}|f_\\beta(x_i-x_j)|,$$\n\nwhere $\\mathcal T_n$ is the set of labelled trees on $\\{1,\\ldots,n\\}$. In particular,\n\n$$\\int_{(\\mathbb R^d)^{n-1}}|U_n(0,x_2,\\ldots,x_n)|\\,dx_2\\cdots dx_n\\leq e^{2\\beta Bn}n^{n-2}C_\\beta^{\\,n-1}.$$",
+          "uses": [
+            "1.2",
+            "1.3",
+            "1.4",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$ and **assume the Axiom of Countable Choice**\n([[def-countable-choice]]). Then:\n\n1. $\\lambda_n$ is sigma-finite ([[def-finite-sigma-finite-and-semifinite-measures]]):\n   the cubes $(-k,k]^n$ are Lebesgue measurable with\n   $\\lambda_n\\big((-k,k]^n\\big) = (2k)^n < +\\infty$, they increase with $k$, and\n   their union over $k \\in \\mathbb{N}$ is $\\mathbb{R}^n$.\n2. Every bounded subset $E \\subseteq \\mathbb{R}^n$\n   ([[def-metric-bounded-diameter]]) has $\\lambda_n^*(E) < +\\infty$; a bounded\n   Lebesgue measurable set therefore has finite measure, and every compact\n   subset of $\\mathbb{R}^n$ is Lebesgue measurable of finite measure.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-tdmath-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\Sigma,\\mu)$ be a measure space and let $f_n:X\\to\\mathbb C$ be measurable with $f_n\\to f$ almost everywhere. Suppose $g\\ge0$ is measurable and $\\int g\\,d\\mu<\\infty$, and $|f_n|\\le g$ almost everywhere for every $n$. Let $f_0(x)$ be the finite complex pointwise limit of $(f_n(x))$ where it exists, and $0$ elsewhere. Then $f_0$ is measurable, equals $f$ almost everywhere, is integrable, and $\\int f_n\\,d\\mu\\to\\int f_0\\,d\\mu$ and $\\int|f_n-f_0|\\,d\\mu\\to0$. If the specified $f$ is measurable, these same conclusions hold with $f$ in place of $f_0$. In particular this is automatic when $\\mu$ is complete. On a noncomplete measure space an arbitrary almost-everywhere representative need not be measurable, so no integral of such a nonmeasurable $f$ is asserted.",
+          "uses": [
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to \\mathbb C$ belong to\n$L^1(\\mu \\times \\nu)$. Then:\n\n1. for $\\mu$-almost every $x$, the section $f_x$ belongs to $L^1(\\nu)$;\n2. for $\\nu$-almost every $y$, the section $f^y$ belongs to $L^1(\\mu)$;\n3. after assigning the value $0$ on the exceptional parameter sets, the\n   section-integral functions are integrable; and\n4. the three integrals agree:\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "1.2",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, let $h \\in \\mathbb{R}^n$, and let $E + h$ be the translate of\n$E \\subseteq \\mathbb{R}^n$ (Translation of a subset of $\\mathbb{R}^n$). Then:\n\n1. $\\lambda_n^*(E+h) = \\lambda_n^*(E)$ for **every** subset $E$;\n2. $E$ is Lebesgue measurable if and only if $E+h$ is;\n3. $\\lambda_n(E+h) = \\lambda_n(E)$ for every Lebesgue measurable $E$.\n\n**No choice principle is used.** Lebesgue outer measure is defined as an infimum\nand the Carathéodory condition is a family of equations between its values, so\nall three clauses are statements about objects that exist in ZF; countable\nchoice is needed to know that $\\lambda_n$ is a measure, not to know that it is\ntranslation invariant.",
+          "uses": [
+            "1.3",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define\n$$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$\nprovided by the all-real convergence proved in The exponential series converges absolutely for every real argument. Here $n!\\in\\mathbb N$ is the factorial of The factorial $n!$ and the falling factorial $n^{\\underline{k}}$, defined by recursion in $\\mathbb{N}$, $\\iota(n!)$ is its nonzero real image (The canonical natural $\\iota(n) = n \\cdot 1_F$ of a field, Canonical naturals are positive and strictly increasing), and powers and series are those of Integer powers $a^m$ and Series, partial sums, convergence and the sum, divergence, and the tail series.\n\nThis is a real power series centred at $0$ (A real power series about a centre, its interval of convergence, and its radius in $[0,+\\infty]$). No logarithm, irrational power, or differential equation enters the definition.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-exponential-addition-formula",
+          "source_section": "Statement",
+          "quote": "For all real $x,y$,\n$$\\exp(x+y)=\\exp(x)\\exp(y).$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-complex-numbers-and-arithmetic",
+          "source_section": "Definition",
+          "quote": "Form the polynomial ring $\\mathbb R[x]$\n([[def-polynomial-ring-over-a-commutative-ring]]) and define the **complex\nnumbers** by the quotient ring\n$$\\mathbb C:=\\mathbb R[x]/(x^2+1)$$\n([[def-quotient-ring]]). Write $a$ for the constant class $a+(x^2+1)$ and set\n$$i:=x+(x^2+1).$$\nThus $i^2=-1$ in the quotient. The constant-class map\n$\\mathbb R\\to\\mathbb C$ is the specified real map; its injectivity and the\nfield structure are proved in [[thm-complex-numbers-form-a-field]], after which\n$\\mathbb C/\\mathbb R$ is a field extension in the sense of\n[[def-field-extension-generated-subfields-and-simple-extension]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-complex-exponential",
+          "source_section": "Definition",
+          "quote": "Let $\\iota_{\\mathbb R}\\colon\\mathbb N\\to\\mathbb R$ be the canonical-natural map\nof [[def-canonical-natural]], and let $j\\colon\\mathbb R\\to\\mathbb C$ be the real\nembedding $j(x)=x+i0$ from [[def-complex-numbers-and-arithmetic]]. For every\n$n\\in\\mathbb N$, the factorial $n!$ is nonzero by\n[[def-factorial-and-falling-factorial]], so\n$\\iota_{\\mathbb R}(n!)>0$ by [[lem-of-naturals-positive]] and consequently\n$j(\\iota_{\\mathbb R}(n!))\\ne0$ in the complex field\n[[thm-complex-numbers-form-a-field]].\n\nFor $z\\in\\mathbb C$, define\n$$ \\exp z:=\\sum_{n=0}^{\\infty}\\frac{z^n}{j(\\iota_{\\mathbb R}(n!))}. $$\nwhenever this complex series converges. Inside a complex expression we\nabbreviate the embedded denominator $j(\\iota_{\\mathbb R}(n!))$ by $n!$, so the\nsame definition may be written $\\exp z=\\sum z^n/n!$ without identifying a\nnatural number with a complex number. Powers and series are those of\n[[def-complex-integer-powers]] and\n[[def-complex-series-power-series-and-absolute-convergence]]. The convergence\nfor every $z\\in\\mathbb C$ is discharged by\n[[lem-complex-exponential-series-converges-everywhere]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-complex-exponential-addition-and-real-extension",
+          "source_section": "Statement",
+          "quote": "For all $z,w\\in\\mathbb C$, $\\exp(z+w)=\\exp z\\exp w$. For real $x$, the complex value $\\exp(x+0i)$ equals the published real exponential $e^x$. The conventions and prerequisite facts used below are recorded in [[def-complex-exponential]], [[lem-complex-exponential-series-converges-everywhere]], [[lem-cauchy-product-of-absolutely-convergent-complex-series]], [[def-real-exponential-function-and-e]], [[lem-binomial-theorem-over-complex-numbers]], [[thm-binomial-closed-formula]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-termwise-differentiation-of-complex-power-series",
+          "source_section": "Statement",
+          "quote": "Let $f(z)=\\sum_{n\\ge0}c_n(z-a)^n$ have radius $R$. If $|z-a|<R$, then $f$ is complex differentiable at $z$ and\n$$f'(z)=\\sum_{n\\ge1}n c_n(z-a)^{n-1}.$$\nConsequently $f$ is holomorphic on its open disc of convergence ([[def-complex-differentiability-holomorphic-and-entire]]).",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand\n\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "1.3",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-composition-with-borel-functions-preserves-measurability",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal{A})$, $(Y,\\mathcal{B})$, and $(Z,\\mathcal{C})$ be measurable\nspaces. If $f : (X,\\mathcal{A}) \\to (Y,\\mathcal{B})$ is measurable and\n$g : (Y,\\mathcal{B}) \\to (Z,\\mathcal{C})$ is measurable, then\n$g \\circ f : (X,\\mathcal{A}) \\to (Z,\\mathcal{C})$ is measurable.\n\nIn particular, if $f$ is measurable and $g$ is a Borel measurable function on\nits codomain, then $g \\circ f$ is measurable.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A)$ be a measurable space and let\n$f,g:X\\to\\overline{\\mathbb R}$ be measurable for the Borel sigma-algebra on\nthe extended real line. Products of functions use\n$\\odot_X$ from A total pointwise product for extended-real-valued functions, and $cf$\nabbreviates $\\underline c\\odot_X f$ for the constant function $\\underline c$.\nThe magnitude function is $|f|=\\max(f,-f)$ as in\nThe positive and negative parts of a function. Then:\n\n1. $cf$ is measurable for every real scalar $c$;\n2. $\\max(f,g)$, $\\min(f,g)$, $|f|$, $f^+$, and $f^-$ are measurable;\n3. if the partial pointwise sum $f+g$ is defined at every point, then it is measurable;\n4. the pointwise product $fg:=f\\odot_X g$ is measurable.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-exponential-is-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "The exponential function is continuous and strictly increasing on $\\mathbb R$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "cor-continuous-functions-are-borel-measurable",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $n,m\\ge1$. Every continuous map\n$f : \\mathbb{R}^n \\to \\mathbb{R}^m$ is Borel measurable in\nthe sense of Borel measurable and Lebesgue measurable functions on $\\mathbb{R}^n$.",
+          "uses": [
+            "1.1",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "def-extended-real-valued-measurable-function",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space (Measure spaces). Equip\n$\\overline{\\mathbb R}$ (The extended real line $\\overline{\\mathbb{R}} = \\mathbb{R} \\cup \\{-\\infty, +\\infty\\}$, its order, and the arithmetic that is left undefined) with its order topology and let\n$\\mathcal B(\\overline{\\mathbb R})$ be the corresponding Borel sigma-algebra\n(The Borel sigma-algebra of a topological space).\n\nA function $f:X\\to\\overline{\\mathbb R}$ is **measurable** when\n$f^{-1}(B)\\in\\mathcal A$ for every $B\\in\\mathcal B(\\overline{\\mathbb R})$.\n\nEquivalently, it is enough to require\n$$\\{x\\in X:f(x)>a\\}\\in\\mathcal A \\qquad \\text{for every } a\\in\\mathbb R,$$\nbecause the rays $(a,+\\infty]$ generate $\\mathcal B(\\overline{\\mathbb R})$.",
+          "uses": [
+            "1.1",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "def-borel-sigma-algebra-on-the-extended-real-line",
+          "source_section": "Definition",
+          "quote": "The **extended real line** is\n\n$$\\overline{\\mathbb{R}} := \\mathbb{R} \\cup \\{-\\infty,+\\infty\\}$$\n\nwith the total order extending the usual order on $\\mathbb{R}$ and satisfying\n$-\\infty < x < +\\infty$ for every real $x$\n([[def-extended-reals]]).\n\nIts **Borel sigma-algebra** is the Borel sigma-algebra of that ordered\ntopological line in the sense of [[def-borel-sigma-algebra]]. On this page it is\ndenoted $\\mathcal{B}(\\overline{\\mathbb{R}})$ and is generated by the rays\n\n$$\\{\\, (a,+\\infty] : a \\in \\mathbb{R} \\,\\}.$$\n\nIn particular, $\\{+\\infty\\}$ and $\\{-\\infty\\}$ are Borel sets.",
+          "uses": [
+            "1.1",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F15",
+          "source": "thm-borel-products-of-euclidean-spaces-are-euclidean-borel",
+          "source_section": "Statement",
+          "quote": "Let $m,n \\ge 1$. Under the identification\n$$\\mathbb R^{m+n}=\\mathbb R^m \\times \\mathbb R^n,$$\none has\n$$\\mathcal B(\\mathbb R^m)\\otimes\\mathcal B(\\mathbb R^n) = \\mathcal B(\\mathbb R^{m+n}).$$",
+          "uses": [
+            "1.1",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F16",
+          "source": "thm-borel-sets-are-lebesgue-measurable",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$ and **assume the Axiom of Countable Choice**\n(The Axiom of Countable Choice ($\\mathrm{AC}_\\omega$)). Then\n\n$$\\mathcal{B}(\\mathbb{R}^n) \\;\\subseteq\\; \\mathcal{L}(\\mathbb{R}^n) :$$\n\nevery Borel subset of $\\mathbb{R}^n$ (The Borel sigma-algebra of a topological space) is Lebesgue\nmeasurable (Lebesgue measurable sets, the family $\\mathcal{L}(\\mathbb{R}^n)$, and the restricted set function $\\lambda_n$). In\nparticular every open set, every closed set and every countable intersection of\nopen sets is Lebesgue measurable.",
+          "uses": [
+            "1.1",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F17",
+          "source": "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, **assume the Axiom of Countable Choice**\n(The Axiom of Countable Choice ($\\mathrm{AC}_\\omega$)), and let $a_i \\le b_i$ be reals for $i<n$. Write\n\n$$R^{\\circ} := \\{\\, x \\in \\mathbb{R}^n : a_i < x_i < b_i \\text{ for every } i<n \\,\\}, \\qquad \\overline{R} := [a,b] = \\{\\, x \\in \\mathbb{R}^n : a_i \\le x_i \\le b_i \\text{ for every } i<n \\,\\}$$\n\n(Axis-parallel rectangles in $\\mathbb{R}^m$ and their volume). Then $R^{\\circ}$ is open and\n$\\overline{R}$ is closed, so both are Borel and Lebesgue measurable, and **every**\nset $R$ with $R^{\\circ} \\subseteq R \\subseteq \\overline{R}$ is Lebesgue\nmeasurable with\n\n$$\\lambda_n(R) \\;=\\; \\prod_{i<n}(b_i-a_i).$$\n\nIn particular this covers the four one-dimensional face conventions in each\ncoordinate — the open box, the closed box $[a,b]$, the half-open box\n$B(a,b) = \\prod_{i<n}(a_i,b_i]$ of Half-open boxes in $\\mathbb{R}^n$ and their volume, and every mixture of\nthem, in any combination of coordinates — and it gives measure $0$ to all of them\nwhenever $a_i = b_i$ for some $i<n$. For a half-open box with infinite\nparameters the value is already\n$\\lambda_n(B) = \\operatorname{vol}(B)$ (Assuming countable choice, $\\mathcal{L}(\\mathbb{R}^n)$ is a sigma-algebra containing every elementary set and $\\lambda_n$ is a complete measure extending elementary volume).",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F18",
+          "source": "thm-integral-triangle-inequality",
+          "source_section": "Statement",
+          "quote": "If $f\\in L^1(\\mu)$, then\n$$\\left|\\int f\\,d\\mu\\right|\\le\\int |f|\\,d\\mu.$$",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F19",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f,g:X\\to[0,+\\infty]$ be measurable and let $c\\ge0$.\n\n1. If $f\\le g$, then $\\int f\\,d\\mu\\le\\int g\\,d\\mu$.\n2. If $c>0$, then $\\int cf\\,d\\mu=c\\int f\\,d\\mu$. For $c=0$,\n   the integral of the zero function is $0$. Neither clause forms the\n   undefined extended-real product $0\\cdot(+\\infty)$.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F20",
+          "source": "cor-additivity-of-the-nonnegative-lebesgue-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. If $f,g:X\\to[0,+\\infty]$ are measurable, then\n$$\\int(f+g)\\,d\\mu=\\int f\\,d\\mu+\\int g\\,d\\mu.$$",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F21",
+          "source": "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "source_section": "Definition",
+          "quote": "Every $z\\in\\mathbb C$ has unique coordinates $z=a+bi$\n([[thm-complex-numbers-form-a-field]]). Define\n$$\\operatorname{Re}z=a,\\qquad \\operatorname{Im}z=b,\\qquad \\overline z=a-bi,$$\nand define its **modulus** by\n$$|z|=\\sqrt{a^2+b^2}.$$\nThe real numbers are least-upper-bound complete\n([[cor-cauchy-reals-lub-complete]]), so the nonnegative square root exists and\nis unique by [[thm-of-square-roots]].",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F21",
+          "source": "lem-complex-conjugation-and-modulus-laws",
+          "source_section": "Statement",
+          "quote": "Complex conjugation is a real-field automorphism satisfying\n$$\\overline{z+w}=\\overline z+\\overline w,\\qquad \\overline{zw}=\\overline z\\,\\overline w,\\qquad \\overline{\\overline z}=z.$$\nFor every $z,w\\in\\mathbb C$,\n$$z\\overline z=|z|^2,\\qquad |z|\\ge0,\\qquad |z|=0\\Longleftrightarrow z=0,$$\n$$|zw|=|z||w|,\\qquad |z+w|\\le |z|+|w|.$$",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F21",
+          "source": "lem-complex-modulus-of-real-embedding-equals-real-absolute-value",
+          "source_section": "Statement",
+          "quote": "For every real $r$, write $\\lambda_r$ for its canonical image in $\\mathbb C$. Then\n$$\n|\\lambda_r|_{\\mathbb C}=|r|_{\\mathbb R}.\n$$",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F22",
+          "source": "def-abs-value",
+          "source_section": "Definition",
+          "quote": "Let $F$ be an ordered field (Ordered field). The **absolute value** of\n$x \\in F$ is\n\n$$|x| \\;:=\\; \\begin{cases} x & \\text{if } x \\ge 0, \\\\ -x & \\text{if } x < 0. \\end{cases}$$",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F22",
+          "source": "lem-of-abs-value",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field (Ordered field) and let $x, y \\in F$, with\n$|x|$ the absolute value (Absolute value in an ordered field). Then\n\n$$|x| \\ge 0; \\quad |x| = 0 \\iff x = 0; \\quad -|x| \\le x \\le |x|; \\quad |-x| = |x|; \\quad |xy| = |x|\\,|y|;$$\n\nand, for every $c > 0$, one has $|x| < c \\iff -c < x < c$.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F23",
+          "source": "def-sum-over-a-finite-index-set",
+          "source_section": "Definition",
+          "quote": "Let $S$ be a finite set, $n := \\lvert S\\rvert$ (The cardinality $\\lvert A\\rvert$ of a finite set), and\nlet $a : S \\to \\mathbb{R}$ or $a : S \\to \\mathbb{N}$, written $a_i$ for $a(i)$.\nChoose a bijection $\\varphi : n \\to S$, which exists because $S \\approx n$\n(Equinumerous sets, $A \\approx B$ and $A \\preceq B$), and set\n\n$$\\sum_{i \\in S} a_i := \\sum_{k<n} a_{\\varphi(k)}, \\qquad \\prod_{i \\in S} a_i := \\prod_{k<n} a_{\\varphi(k)},$$\n\nthe right-hand sides being the iterated operations of Finite sums and finite products, by recursion when the\nvalues are real and of Finite sums and finite products of natural numbers, $\\sum_{k<n} a_k$ and $\\prod_{k<n} a_k$ in $\\mathbb{N}$ when they are natural.\n\n**Independence of the enumeration, which is the content of the definition.** Let\n$\\varphi, \\psi : n \\to S$ be two bijections. Then $\\pi := \\varphi^{-1} \\circ \\psi$\nis a bijection $n \\to n$ (Injection, surjection, bijection), and\n$a_{\\psi(k)} = a_{\\varphi(\\pi(k))}$ for every $k < n$. Applying\nA finite sum is unchanged by a permutation of its index range: $\\sum_{k<n} a_{\\pi(k)} = \\sum_{k<n} a_k$ for every bijection $\\pi : n \\to n$ to the list $c_k := a_{\\varphi(k)}$\ngives\n\n$$\\sum_{k<n} a_{\\psi(k)} = \\sum_{k<n} c_{\\pi(k)} = \\sum_{k<n} c_k = \\sum_{k<n} a_{\\varphi(k)},$$\n\nand identically for products. So the value does not depend on which bijection is\nused, and $\\sum_{i \\in S} a_i$ is a single well-determined element.\n\n**No choice principle is involved.** The definition does not select an\nenumeration: it asserts that all enumerations give the same value, and that value\nis what the notation names. Only one bijection is ever produced at a time, from a\nset already known to be nonempty.\n\n**Three clauses, recorded here because the page uses them constantly.**\n\n**(a) The bridge to the old notation.** Taking $S = n$ and $\\varphi = \\mathrm{id}_n$,\nwhich is legitimate since $\\lvert n\\rvert = n$, gives\n\n$$\\sum_{i \\in n} a_i = \\sum_{k<n} a_k, \\qquad \\prod_{i \\in n} a_i = \\prod_{k<n} a_k .$$\n\nSo the new notation **extends** the sum over an initial segment rather than\ncompeting with it, and every law proved for the latter is available for the\nformer whenever the index set is a natural number.\n\n**(b) Reindexing along a bijection.** If $h : T \\to S$ is a bijection of finite\nsets, then $\\sum_{j \\in T} a_{h(j)} = \\sum_{i \\in S} a_i$, and likewise for\nproducts. Indeed $\\lvert T\\rvert = \\lvert S\\rvert = n$ by transport\n(The cardinality $\\lvert A\\rvert$ of a finite set), and if $\\varphi : n \\to S$ is a bijection then\n$h^{-1} \\circ \\varphi : n \\to T$ is one, so\n$\\sum_{j \\in T} a_{h(j)} = \\sum_{k<n} a_{h(h^{-1}(\\varphi(k)))} = \\sum_{k<n} a_{\\varphi(k)} = \\sum_{i \\in S} a_i$.\n\n**(c) The empty index set and a constant summand.** $\\lvert\\varnothing\\rvert = 0$,\nso $\\sum_{i \\in \\varnothing} a_i = 0$ and $\\prod_{i \\in \\varnothing} a_i = 1$ by\nthe base clause of the recursion. And for a constant $c$, clause (a) together\nwith the constant clause of Laws of finite sums and products in $\\mathbb{N}$, and $\\iota\\big(\\sum_{k<n} a_k\\big) = \\sum_{k<n} \\iota(a_k)$\nin $\\mathbb{N}$, or clause 2 of Laws of finite sums and finite products in $\\mathbb{R}$, gives\n\n$$\\sum_{i \\in S} c = \\lvert S\\rvert \\cdot c \\quad (c \\in \\mathbb{N}), \\qquad \\sum_{i \\in S} c = \\iota(\\lvert S\\rvert)\\cdot c \\quad (c \\in \\mathbb{R}),$$\n\nthe second with $\\iota$ written out because $\\lvert S\\rvert$ is a natural number\nand not an element of $\\mathbb{R}$ (The canonical natural $\\iota(n) = n \\cdot 1_F$ of a field).",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "For every $N$-point configuration, the energy $E_N=\\sum_{i<j}v(x_i-x_j)$ is an extended-real Borel function: coordinate differences are continuous and hence Borel [F13], composition with $v$ preserves Borel measurability [F11], and finite sums preserve it wherever defined. The map $u\\mapsto e^{-\\beta u}$ on the extended real line, assigned $0$ at $+\\infty$ and $+\\infty$ at $-\\infty$, is Borel because it is continuous on $\\mathbb R$ [F12] and the endpoints are Borel [F14]. Thus the Boltzmann integrand is Borel on $\\mathbb R^{dN}$. For $N\\geq2$, repeated application of the two-factor product identity [F15] identifies the finite product Borel sigma-algebra; the Borel-to-Lebesgue inclusion [F16] then makes the integrand product-measurable. For $N=0$ or $1$ the same measurability is immediate from the empty or one-factor product. The same extended exponential map and the Borel potential show that $f_\\beta$ is Borel. Stability [F1] gives $E_N\\geq-BN$, so the Boltzmann integrand is real, nonnegative and at most $e^{\\beta BN}$, with a forbidden $+\\infty$ configuration contributing $0$. Since $|\\Lambda_L|=(2L)^d<\\infty$ [F17], multiplicativity of complex modulus and its agreement with real absolute value [F21] bound the modulus of the $N$th term of $\\Xi_L(z)$ by $(|z|e^{\\beta B}|\\Lambda_L|)^N/N!$. The sum of these bounds is finite for every $z$ by [F7], so $\\Xi_L$ is entire.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "F7",
+            "F11",
+            "F12",
+            "F13",
+            "F14",
+            "F15",
+            "F16",
+            "F17",
+            "F21",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "Stability at $N=2$ gives $v(x)\\geq-2B$ for every $x\\in\\mathbb R^d$; hence $-1\\leq f_\\beta(x)\\leq e^{2\\beta B}-1$ by [F12]. Thus for each fixed $N$ every graph term in the finite expansion $\\prod_{i<j}(1+f_\\beta(x_i-x_j))$ is bounded and measurable on the finite-measure box $\\Lambda_L^N$. Expanding the product gives a sum over all simple graphs; each graph decomposes uniquely into connected components as in [F2]. If the component sizes are $m_1,\\ldots,m_k$, assigning the $N$ labels to an ordered list of blocks contributes $N!/\\prod_jm_j!$, and division by $k!$ removes block order. Integrating a product over disjoint coordinate blocks factorizes by Fubini [F5], since the factors are bounded on finite-measure boxes. Therefore the coefficient of $z^N$ in $\\Xi_L$ equals that in the formal exponential of $A_L(z):=\\sum_{n\\geq1}\\frac{z^n}{n!}\\int_{\\Lambda_L^n}U_n(x_1,\\ldots,x_n)\\,dx_1\\cdots dx_n$.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F5",
+            "F11",
+            "F12",
+            "F17",
+            "F23",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "step": "1.3",
+          "claim": "For $n\\geq2$, integrate the pointwise tree estimate [F2] over $\\Lambda_L^n$. Root each tree at vertex $1$, then remove leaves other than the root. At each removal the leaf integral over $\\Lambda_L$ is at most the whole-space integral $C_\\beta$ by monotonicity [F19] and translation invariance [F6]; Tonelli [F10] applies to the nonnegative tree products. The final root integral is $|\\Lambda_L|$. The labelled-tree count in [F2] is $n^{n-2}$. Finite additivity [F20] sums those tree integrals, giving $\\int_{\\Lambda_L^n}|U_n|\\leq e^{2\\beta Bn}|\\Lambda_L|n^{n-2}C_\\beta^{n-1}$. Thus $U_n$ is integrable on $\\Lambda_L^n$. Regard its real values as complex values by the real embedding; [F21] identifies the complex modulus with real absolute value, so the integral triangle inequality [F18] gives $|b_n(L)|\\leq e^{2\\beta Bn}n^{n-2}C_\\beta^{n-1}/n!$. The same bound holds for $|b_n|$ by the pinned estimate [F2].",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "F6",
+            "F10",
+            "F18",
+            "F19",
+            "F20",
+            "F21",
+            "F22",
+            "F17",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "claim": "Fix $n\\geq2$ and write $y_1=0$, $y_i=x_i-x_1$ for $i\\geq2$. Translation invariance of $U_n$ gives $U_n(x_1,\\ldots,x_n)=U_n(0,y_2,\\ldots,y_n)$. By Tonelli [F10], translation invariance [F6], and the pinned integrability from [F2], $\\int_{\\Lambda_L^n}|U_n(x)|dx=\\int_{(\\mathbb R^d)^{n-1}}|U_n(0,y)|\\,|\\Lambda_L\\cap(\\Lambda_L-y_2)\\cap\\cdots\\cap(\\Lambda_L-y_n)|dy\\leq|\\Lambda_L|\\int|U_n(0,y)|dy<\\infty$, using the finite cube volume [F17]. Thus the integrand is absolutely integrable and Fubini [F5] applies. Translating each remaining coordinate in its section gives $b_n(L)=\\frac1{n!}\\int_{(\\mathbb R^d)^{n-1}}U_n(0,y_2,\\ldots,y_n)\\theta_L(y)\\,dy_2\\cdots dy_n$, where $\\theta_L(y)=\\frac{|\\Lambda_L\\cap(\\Lambda_L-y_2)\\cap\\cdots\\cap(\\Lambda_L-y_n)|}{|\\Lambda_L|}=\\prod_{j=1}^d(1-\\frac{\\max_i y_{i,j}-\\min_i y_{i,j}}{2L})_+$, with $r_+=\\max(r,0)$. For each fixed $y$, $0\\leq\\theta_L(y)\\leq1$ and $\\theta_L(y)\\to1$. The cube-intersection volume formula follows from [F17]; $U_n$ is Borel by [F11, F13, F14, F15, F16], hence measurable. For every sequence $L_m\\to\\infty$, dominated convergence [F4] with majorant $|U_n(0,\\cdot)|$ gives $b_n(L_m)\\to b_n$. If the limit as a real variable $L\\to\\infty$ failed, some $\\epsilon>0$ would have $|b_n(L)-b_n|\\geq\\epsilon$ for arbitrarily large $L$; Countable Choice [A1] selects such an $L_m\\geq m$ for each $m$, contradicting the sequential conclusion. Hence $b_n(L)\\to b_n$.",
+          "step": "1.4",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F10",
+            "F11",
+            "F13",
+            "F14",
+            "F15",
+            "F16",
+            "F17",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "For every integer $n\\geq2$, the positive series for $e^n$ in [F7] contains the term $n^n/n!$, so $n^{n-2}/n!\\leq e^n/n^2$. If $C_\\beta>0$, put $q(r)=rC_\\beta e^{2\\beta B+1}$. For $0<r$ with $q(r)<1$, step 1.3 yields $|b_n(L)|r^n\\leq r e^{2\\beta B+1}q(r)^{n-1}/n^2$ and $n|b_n(L)|r^{n-1}\\leq e^{2\\beta B+1}q(r)^{n-1}/n$; the same bounds hold for $b_n$. Both majorant series converge. If $C_\\beta=0$, step 1.3 gives $b_n(L)=b_n=0$ for $n\\geq2$. Each $U_n$ is real-valued by [F2], so each coefficient $b_n(L),b_n$ is real; [F21] identifies its complex-embedding modulus with its real absolute value and gives $|z^n|=|z|^n$. Hence the coefficient and derivative majorants bound the complex power-series terms on the corresponding closed subdiscs. Thus the pressure series and their formal derivative series converge uniformly on every closed subdisc strictly inside $\\mathcal D$; [F9] identifies the derivatives with the termwise derivatives.",
+          "inputs": [
+            "F2",
+            "F7",
+            "F9",
+            "F21",
+            "step 1.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The coefficient identity in step 1.2 is the formal identity $\\Xi_L=\\exp(A_L)$, and $A_L(z)=|\\Lambda_L|p_L(z)$ by the definitions of $b_n(L)$. Fix a volume $L>0$ and a radius $r$ strictly inside $\\mathcal D$. Step 2.1 gives $\\sum_n|b_n(L)|r^n<\\infty$, so $\\sum_n|[z^n]A_L|r^n=|\\Lambda_L|\\sum_n|b_n(L)|r^n<\\infty$ for this fixed volume. Expanding the complex exponential in [F8], the sum of absolute values of all terms is bounded by $\\exp(\\sum_n|[z^n]A_L|r^n)$; hence its products and coefficient sums may be regrouped, so the formal identity is an equality of convergent series and $\\Xi_L(z)=\\exp(|\\Lambda_L|p_L(z))$. To pass to the limit on a compact subdisc $|z|\\leq r$ inside $\\mathcal D$, the pressure and derivative tails are uniformly bounded in $L$ by the convergent majorants of step 2.1. For each fixed $n$, step 1.4 gives coefficient convergence; finite partial sums and their derivatives therefore converge uniformly, and the uniform tail bounds give $p_L\\to p$ and $p_L'\\to p'$ uniformly there. [F8, F9, step 1.1, step 1.2, step 1.4, step 2.1] ∎\n\n\nThis result gives a sufficient dilute analyticity domain. It does not assert liquid-vapor coexistence, identify a physical phase boundary, or establish pressure limits along arbitrary shapes.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.2",
+            "step 2.1",
+            "F8",
+            "step 1.4",
+            "F9",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: The N=0 term of XiL is defined as 1; b1(L)=1 corresponds to the single-particle term, and step 1.2 includes singleton graph components.",
+          "case_reasoning": "Statement: The N=0 term of XiL is defined as 1; b1(L)=1 corresponds to the single-particle term, and step 1.2 includes singleton graph components. The sufficient Mayer disk is strict; the zero C_beta branch is treated separately without dividing by C_beta. The graph-component identity includes singleton components and the empty grand-canonical configuration."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: When Cβ=0, step 2.1 gives bn(L)=bn=0 for every n≥2, so D=C and pL=p=z.",
+          "case_reasoning": "Statement: When Cβ=0, step 2.1 gives bn(L)=bn=0 for every n≥2, so D=C and pL=p=z. The sufficient Mayer disk is strict; the zero C_beta branch is treated separately without dividing by C_beta. The graph-component identity includes singleton components and the empty grand-canonical configuration."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The coefficients b1(L)=b1=1 are specified separately and produce the ideal-gas linear pressure term.",
+          "case_reasoning": "Statement: The coefficients b1(L)=b1=1 are specified separately and produce the ideal-gas linear pressure term. The sufficient Mayer disk is strict; the zero C_beta branch is treated separately without dividing by C_beta. The graph-component identity includes singleton components and the empty grand-canonical configuration."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The proof handles B=0 and Cβ=0 without division by Cβ; the latter is an explicit separate case in step 2.1.",
+          "case_reasoning": "Statement: The proof handles B=0 and Cβ=0 without division by Cβ; the latter is an explicit separate case in step 2.1. The sufficient Mayer disk is strict; the zero C_beta branch is treated separately without dividing by C_beta. The graph-component identity includes singleton components and the empty grand-canonical configuration."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: For Cβ>0, D is the strict open disk |z|e^(2βB+1)Cβ<1; compact convergence is claimed only on subdiscs strictly inside it.",
+          "case_reasoning": "Statement: For Cβ>0, D is the strict open disk |z|e^(2βB+1)Cβ<1; compact convergence is claimed only on subdiscs strictly inside it. The sufficient Mayer disk is strict; the zero C_beta branch is treated separately without dividing by C_beta. The graph-component identity includes singleton components and the empty grand-canonical configuration."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Countable Choice is an explicit [A1] input for sigma-finite product Lebesgue measure and the Tonelli/Fubini applications in steps 1.3–1.4.",
+          "case_reasoning": "Statement: Countable Choice is an explicit [A1] input for sigma-finite product Lebesgue measure and the Tonelli/Fubini applications in steps 1.3–1.4. The sufficient Mayer disk is strict; the zero C_beta branch is treated separately without dividing by C_beta. The graph-component identity includes singleton components and the empty grand-canonical configuration."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement proves sufficient convergence and an identity, not a necessary-and-sufficient condition.",
+          "case_reasoning": "The Statement proves sufficient convergence and an identity, not a necessary-and-sufficient condition. The sufficient Mayer disk is strict; the zero C_beta branch is treated separately without dividing by C_beta. The graph-component identity includes singleton components and the empty grand-canonical configuration."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement proves sufficient convergence and an identity, not a necessary-and-sufficient condition.",
+          "case_reasoning": "The Statement proves sufficient convergence and an identity, not a necessary-and-sufficient condition. The sufficient Mayer disk is strict; the zero C_beta branch is treated separately without dividing by C_beta. The graph-component identity includes singleton components and the empty grand-canonical configuration."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "ideal gas branch Cβ=0",
+          "inputs": "v(x)=0 for all x, β>0, B=0, any d≥1 and L>0.",
+          "method": "Compute fβ, every connected Mayer coefficient for n≥2, XiL and pL.",
+          "result": "fβ=0, Cβ=0, bn(L)=bn=0 for n≥2, XiL(z)=exp(|ΛL|z), and pL(z)=p(z)=z on all of C.",
+          "limitation": "Checks the explicit zero-integral branch only; the proof handles every stable potential with finite Cβ."
+        }
+      ],
+      "current_boundary_worksheet": {
+        "proposal": "research/physics-non-fluid-129-2026-10-21-r2-owner-step2-boundary-proposal-5/proposal.json",
+        "source_sha256": "3d43758c27c52b842fb58c197da05368152cd9cb41c47a7a6d17fef5e770ec24",
+        "qualification": "Released complete current source/eight-case semantic worksheet; root transcribed exact current rows. No independent acceptance or finite computation asserted."
+      }
+    },
+    "ex-csm-frontier-hard-core-dilute-bound": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-csm-stable-superstable-continuum-interaction",
+          "source_section": "Definition",
+          "quote": "Fix $d\\geq1$. A pair potential is an even Borel function $\\phi:\\mathbb R^d\\to\\mathbb R\\cup\\{+\\infty\\}$. For a finite list of positions $X=(x_1,\\ldots,x_N)$, set $U_0=U_1=0$ and\n$$U_N(X)=\\sum_{1\\leq i<j\\leq N}\\phi(x_i-x_j).$$\nThe value $+\\infty$ is allowed and represents a forbidden configuration; $-\\infty$ is not allowed.\n\nThe potential is **stable** if some finite $B\\geq0$ satisfies $U_N(X)\\geq-BN$ for every $N$ and every $X$. Fix a cell side $\\ell>0$ and the half-open cubic tiling $C_k=\\ell(k+[0,1)^d)$, $k\\in\\mathbb Z^d$, and let $n_k(X)$ count the positions of $X$ in $C_k$. The potential is **cell-superstable** if there are constants $A_*>0$ and $B_*\\geq0$ such that\n$$U_N(X)\\geq A_*\\sum_{k\\in\\mathbb Z^d}n_k(X)^2-B_*N$$\nfor every finite configuration; the sum is finite for finite $X$.\n\nFor disjoint finite cell-index sets $I,J$, let $W_{I,J}(X)$ be the sum of pair terms with one point in a cell indexed by $I$ and the other in a cell indexed by $J$. The potential is **lower regular** for this tiling if a nonnegative envelope $\\Psi:\\mathbb Z^d\\setminus\\{0\\}\\to[0,\\infty)$ exists with $\\sum_{k\\ne0}\\Psi(k)<\\infty$ and\n$$W_{I,J}(X)\\geq-\\sum_{k\\in I}\\sum_{l\\in J}\\Psi(k-l)n_k(X)n_l(X)$$\nfor all such $I,J,X$. The ordered-pair convention in this formula is fixed as written.\n\nA **decreasing-integrable tail bound** means that for some $R_0\\geq0$ there is a nonnegative nonincreasing function $\\psi:[R_0,\\infty)\\to[0,\\infty)$ such that $|\\phi(x)|\\leq\\psi(|x|)$ for $|x|\\geq R_0$ and $\\int_{R_0}^{\\infty}\\psi(r)r^{d-1}\\,dr<\\infty$. This explicit envelope condition is stronger than bare Lebesgue integrability of an arbitrary signed tail. Stability, cell-superstability, lower regularity, and a tail bound are separate properties; none is inferred from finite range alone.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-csm-frontier-dilute-mayer-domain",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. All displayed integrals use Lebesgue measure. All indices $n,N$ below range over $\\mathbb N$. Fix $d\\in\\mathbb N$ with $d\\geq1$, an even Borel pair potential $v:\\mathbb R^d\\to\\mathbb R\\cup\\{+\\infty\\}$ with no $-\\infty$ values, stable with constant $B\\in\\mathbb R$, $B\\geq0$, and inverse parameter $\\beta\\in\\mathbb R$ with $\\beta>0$. Put $e^{-c(+\\infty)}=0$ for every $c>0$, $f_\\beta(x)=e^{-\\beta v(x)}-1$, and $C_\\beta=\\int_{\\mathbb R^d}|f_\\beta(x)|\\,dx<\\infty$. For each $n\\in\\mathbb N$ with $n\\geq2$, use\n\n$$U_n(x_1,\\ldots,x_n):=\\sum_{G\\in\\mathcal C_n}\\prod_{\\{i,j\\}\\in E(G)}f_\\beta(x_i-x_j),$$\n\nwhere $\\mathcal C_n$ is the set of connected simple graphs on $\\{1,\\ldots,n\\}$; set $U_1=1$. For $L\\in\\mathbb R$ with $L>0$, let $\\Lambda_L=[-L,L]^d$ and write $|\\Lambda_L|:=\\lambda_d(\\Lambda_L)=(2L)^d$; define\n\n$$\\Xi_L(z):=\\sum_{N=0}^{\\infty}\\frac{z^N}{N!}\\int_{\\Lambda_L^N}\\exp\\!\\left(-\\beta\\sum_{1\\leq i<j\\leq N}v(x_i-x_j)\\right)\\,dx_1\\cdots dx_N,$$\n\nwith the $N=0$ term equal to $1$. Set $b_1(L)=1$ and, for $n\\geq2$,\n\n$$b_n(L):=\\frac1{n!|\\Lambda_L|}\\int_{\\Lambda_L^n}U_n(x_1,\\ldots,x_n)\\,dx_1\\cdots dx_n.$$\n\nAlso set $b_1=1$ and, for $n\\geq2$,\n\n$$b_n:=\\frac1{n!}\\int_{(\\mathbb R^d)^{n-1}}U_n(0,x_2,\\ldots,x_n)\\,dx_2\\cdots dx_n.$$\n\nLet $\\mathcal D=\\{z\\in\\mathbb C:|z|e^{2\\beta B+1}C_\\beta<1\\}$ when $C_\\beta>0$, and let $\\mathcal D=\\mathbb C$ when $C_\\beta=0$. On $\\mathcal D$, the finite-volume connected pressure series $p_L(z):=\\sum_{n\\geq1}b_n(L)z^n$ and the limiting Mayer pressure series $p(z):=\\sum_{n\\geq1}b_nz^n$ converge absolutely and locally uniformly, are differentiable term by term, and satisfy\n\n$$\\Xi_L(z)=\\exp\\!\\bigl(|\\Lambda_L|p_L(z)\\bigr),\\qquad \\lim_{L\\to\\infty}p_L(z)=p(z).$$\n\nThe convergence and derivative limits are uniform on every compact subdisc of $\\mathcal D$. The pressure limit here is along centered cubes only.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-euclidean-balls-have-positive-finite-lebesgue-measure",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]).\n\nLet $n\\ge1$, let $x\\in\\mathbb{R}^n$, and let $r>0$. Then the Euclidean ball $B(x,r)$ is\nLebesgue measurable and satisfies\n$$0<\\lambda(B(x,r))<\\infty.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-metric-ball",
+          "source_section": "Definition",
+          "quote": "Let $(X,d)$ be a metric space (Metric space: $d(x,y) = 0$ iff $x = y$, symmetry, and the triangle inequality; pseudometric and ultrametric), let $x \\in X$ and let\n$r \\in \\mathbb{R}$ with $r > 0$ (Order on the reals). Define\n\n$$B(x,r) := \\{\\, y \\in X : d(x,y) < r \\,\\}, \\qquad \\bar B(x,r) := \\{\\, y \\in X : d(x,y) \\le r \\,\\}, \\qquad S(x,r) := \\{\\, y \\in X : d(x,y) = r \\,\\}.$$\n\n$B(x,r)$ is the **open ball**, $\\bar B(x,r)$ the **closed ball** and $S(x,r)$ the\n**sphere** of **centre** $x$ and **radius** $r$. The radius is always a strictly\npositive real; a ball of radius $0$ or of negative radius is never written in\nthis library.\n\n**Immediate consequences of the definitions.** For every $x \\in X$ and $r > 0$:\n\n- $x \\in B(x,r)$, because $d(x,x) = 0 < r$ (axiom (M1) of Metric space: $d(x,y) = 0$ iff $x = y$, symmetry, and the triangle inequality; pseudometric and ultrametric);\n  in particular open and closed balls are nonempty.\n- $B(x,r) \\subseteq \\bar B(x,r)$ and $S(x,r) \\subseteq \\bar B(x,r)$, and\n  $\\bar B(x,r)$ is the disjoint union of $B(x,r)$ and $S(x,r)$, by trichotomy of\n  the order of $\\mathbb{R}$ (Complete ordered field (least-upper-bound property), Ordered field):\n  each $y$ satisfies exactly one of $d(x,y) < r$, $d(x,y) = r$, $d(x,y) > r$.\n- If $0 < s \\le r$ then $B(x,s) \\subseteq B(x,r)$ and\n  $\\bar B(x,s) \\subseteq \\bar B(x,r)$, by transitivity of the order.\n- Nonnegativity of the metric (Nonnegativity of a metric is a consequence of the other axioms, not an axiom) is what forces the\n  radius convention, and it forces it for the **open** ball only: if $r \\le 0$\n  then $B(x,r) = \\{y : d(x,y) < r\\}$ is empty, because $d(x,y) \\ge 0 \\ge r$\n  for every $y$. The other two sets behave differently at $r = 0$, and the\n  convention $r > 0$ excludes them for uniformity rather than for emptiness:\n  $\\bar B(x,0) = S(x,0) = \\{x\\}$, since $d(x,y) \\le 0$ together with\n  $d(x,y) \\ge 0$ gives $d(x,y) = 0$ and hence $y = x$ by (M1). For $r < 0$ all\n  three sets are empty.\n\n**A sphere may be empty, and so the three sets are not on a par.** For $r > 0$\nthe open and closed balls always contain $x$, but nothing in the definition\nproduces a point at distance exactly $r$ from $x$. If a metric takes only the\nvalues $0$ and $1$, as the discrete metric on the companion page does, then\n$S(x,2) = \\emptyset$ while $B(x,2) = \\bar B(x,2)$ is the whole space. So\nnonemptiness of a sphere is never available by convention: where it is used, it\nis proved.\n\n**The ambient space is part of the notation.** $B(x,r)$ depends on $(X,d)$ and\nnot on $x$ and $r$ alone. When more than one space or more than one metric is in\nplay we write $B_X(x,r)$, or $B_d(x,r)$, and likewise for $\\bar B$ and $S$. This\nmatters as soon as subspaces appear (Isometry, isometric embedding, and the subspace metric on a subset): a\nball of a subspace is the trace on it of a ball of the ambient space, and the two\nare different sets.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-metrics-on-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$. A von Neumann natural is the set of its\npredecessors, $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]]), so it can be\nused directly as an index set. Define\n\n$$\\mathbb{R}^n := \\{\\, x : x \\text{ is a function } n \\to \\mathbb{R} \\,\\},$$\n\nand write $x_k$ for $x(k)$, $k < n$. Two elements of $\\mathbb{R}^n$ are equal\nexactly when they agree at every $k < n$, functions being equal when they have\nthe same values. For $x, y \\in \\mathbb{R}^n$ put\n\n$$d_1(x,y) := \\sum_{k<n} |x_k - y_k|, \\qquad d_2(x,y) := \\sqrt{\\ \\sum_{k<n} (x_k - y_k)^2\\ }, \\qquad d_\\infty(x,y) := \\max\\{\\, |x_k - y_k| : k < n \\,\\}.$$\n\nAll three are well defined: the finite sums are those of [[def-finite-sum]]; the\nsum of squares is nonnegative ([[lem-finite-sum-laws]], [[lem-of-square-positive]])\nso it has a unique nonnegative square root ([[thm-of-square-roots]]); and\n$\\{|x_k - y_k| : k < n\\}$ is a nonempty finite subset of $\\mathbb{R}$, because\n$n \\ge 1$, so it has a maximum ([[lem-finite-set-has-max]], [[def-max-min]]).\n\n**Then $d_1$, $d_2$ and $d_\\infty$ are metrics on $\\mathbb{R}^n$**\n([[def-metric-space]]).\n\n**Why $n \\ge 1$.** For $n = 0$ the set $\\mathbb{R}^0$ has exactly one element,\nthe empty function, and $d_1$ and $d_2$ are the empty sum $0$ and its root; but\n$d_\\infty$ would be the maximum of the empty set, which does not exist. The\nhypothesis $n \\ge 1$ is therefore not decoration, and it is carried by every\nstatement about $d_\\infty$ in this library.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-metric-open-set-algebra",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]), with open and closed sets\nas in [[def-metric-topology]] and balls as in [[def-metric-ball]]. Then:\n\n1. **Balls are open.** $B(x,r)$ is open, for every $x \\in X$ and every $r > 0$.\n2. **Arbitrary unions.** If $\\mathcal{U}$ is any collection of open subsets of\n   $X$, then $\\bigcup \\mathcal{U}$ is open.\n3. **Finite intersections.** If $n \\ge 1$ and $U_0, \\dots, U_{n-1}$ are open,\n   then $U_0 \\cap \\dots \\cap U_{n-1}$ is open.\n4. **Closed balls are closed.** $\\bar B(x,r)$ is closed, for every $x \\in X$ and\n   every $r > 0$.\n\nTogether with the fact that $\\emptyset$ and $X$ are open, recorded already in\n[[def-metric-topology]], claims 2 and 3 say that $\\mathcal{T}_d$ has exactly the\nclosure properties that the word *topology* names.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-borel-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal T)$ be a topological space (Topology on a set, open and closed sets, clopen sets, the closed-set axiomatisation, and the coarser/finer comparison). The\n**Borel sigma-algebra of $X$** is the sigma-algebra generated by its open sets:\n\n$$\\mathcal B(X):=\\sigma_X(\\mathcal T).$$\n\nIts members are the **Borel subsets** of $X$. The generated sigma-algebra exists\nand is minimal by Nonempty intersections of sigma-algebras are sigma-algebras, so the generated sigma-algebra exists and is minimal.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-borel-sigma-algebra-on-the-extended-real-line",
+          "source_section": "Definition",
+          "quote": "The **extended real line** is\n\n$$\\overline{\\mathbb{R}} := \\mathbb{R} \\cup \\{-\\infty,+\\infty\\}$$\n\nwith the total order extending the usual order on $\\mathbb{R}$ and satisfying\n$-\\infty < x < +\\infty$ for every real $x$\n([[def-extended-reals]]).\n\nIts **Borel sigma-algebra** is the Borel sigma-algebra of that ordered\ntopological line in the sense of [[def-borel-sigma-algebra]]. On this page it is\ndenoted $\\mathcal{B}(\\overline{\\mathbb{R}})$ and is generated by the rays\n\n$$\\{\\, (a,+\\infty] : a \\in \\mathbb{R} \\,\\}.$$\n\nIn particular, $\\{+\\infty\\}$ and $\\{-\\infty\\}$ are Borel sets.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ (The natural numbers $\\mathbb{N}$ (von Neumann),\nOn $\\mathbb{N}$ the order is membership: $m < n \\iff m \\in n$), so\n\n$$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n \\to \\mathbb{R} \\,\\}$$\n\nis the function space of The vector space $F^{X}$ of all functions $X \\to F$ with pointwise operations, and $F^{n}$ as the case $X = n = \\{0, 1, \\dots, n-1\\}$ at $F = \\mathbb{R}$ and $X = n$,\na vector space over $\\mathbb{R}$ under the pointwise operations\n(Vector space over a field). We write $x_k := x(k)$ for $k < n$, and two elements of\n$\\mathbb{R}^{n}$ are equal exactly when they agree at every $k < n$. This is the\nsame set that $\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it calls $\\mathbb{R}^{n}$.\n\nThe **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number\n\n$$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$\n\nthe finite sum of Finite sums and finite products, by recursion applied to the list $k \\mapsto x_k y_k$\n(extended by $0$ beyond $n$, as every finite list in this library is). The\n**Euclidean norm** of $x$ is\n\n$$\\lVert x\\rVert_2 \\;:=\\; \\sqrt{\\langle x, x\\rangle},$$\n\nwhich is defined because $\\langle x,x\\rangle = \\sum_{k<n} x_k^{2} \\ge 0$ (a sum\nof nonnegative terms, Laws of finite sums and finite products clause 4 and\nSquares of nonzero elements are positive, the case $x_k = 0$ giving $x_k^2 = 0$ by\nInteger powers $a^m$) and every nonnegative real has a unique nonnegative square\nroot (Square roots exist: a unique $\\sqrt{a} \\ge 0$ with $(\\sqrt{a})^2 = a$; the positives are $\\{x^2 : x \\neq 0\\}$).\n\n### Both are defined for every $n$, including $n = 0$\n\nAt $n = 0$ the set $\\mathbb{R}^{0}$ has exactly one element, the empty function,\nand it is the zero vector space (The standard list $e : n \\to F^{n}$ with $e_i(i) = 1_F$ and $e_i(j) = 0_F$ for $j \\ne i$ is an ordered basis of $F^{n}$; hence $\\dim_F F^{n} = n$, and $F^{0}$ is the zero space with basis $\\varnothing$ and dimension $0$ clause 5); the sum\nabove is the empty sum, so $\\langle x,y\\rangle = 0$ and $\\lVert x\\rVert_2 = 0$.\n**This is the first place on this page where the two index regimes diverge, and\nthe divergence is deliberate.** The published metrics $d_1$, $d_2$, $d_\\infty$ of\n$\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it are defined only for $n \\ge 1$, because $d_\\infty$ would\notherwise be a maximum over the empty index set; the algebra above needs no such\nrestriction. The boundary in this page runs between the algebra and the metric,\nnot where a reader would guess, and Conventions of this page, the standing $n \\ge 1$ hypothesis, and what is taken up elsewhere in the reading order lists\nexactly which items inherit $n \\ge 1$.\n\n### The algebra of the inner product\n\nFor all $x, y, z \\in \\mathbb{R}^{n}$ and $\\lambda \\in \\mathbb{R}$:\n\n1. **Symmetry.** $\\langle x,y\\rangle = \\langle y,x\\rangle$, since $x_ky_k = y_kx_k$\n   termwise.\n2. **Additivity in the first argument.**\n   $\\langle x + y, z\\rangle = \\langle x,z\\rangle + \\langle y,z\\rangle$: the list\n   $k \\mapsto (x_k+y_k)z_k$ is the termwise sum of $k \\mapsto x_kz_k$ and\n   $k \\mapsto y_kz_k$, so Laws of finite sums and finite products clause 1 applies.\n3. **Homogeneity in the first argument.**\n   $\\langle \\lambda x, y\\rangle = \\lambda\\langle x,y\\rangle$, by\n   Laws of finite sums and finite products clause 2.\n4. **Bilinearity.** Clauses 2 and 3 together with symmetry give the same two laws\n   in the second argument.\n5. **Positive definiteness.** $\\langle x,x\\rangle \\ge 0$, and\n   $\\langle x,x\\rangle = 0$ if and only if $x = 0$. Indeed a vanishing sum of\n   nonnegative terms has every term $0$ (Laws of finite sums and finite products clause 4), so\n   $x_k^{2} = 0$ for every $k < n$, and a nonzero real has a positive square\n   (Squares of nonzero elements are positive), whence $x_k = 0$ for every $k < n$ and $x = 0$.\n6. **Agreement with the published Euclidean metric.** For $n \\ge 1$ and\n   $x, y \\in \\mathbb{R}^{n}$,\n   $\\lVert x - y\\rVert_2 = \\sqrt{\\sum_{k<n}(x_k-y_k)^{2}} = d_2(x,y)$, the two\n   sides being the same expression ($\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it). In particular\n   $\\lVert x\\rVert_2 = d_2(x, 0)$.\n\nThat $\\lVert\\cdot\\rVert_2$ is a norm in the sense of A norm on a real vector space, the induced metric, and the dictionary with the metric axioms\nis proved in Cauchy-Schwarz $\\lvert\\langle x,y\\rangle\\rvert \\le \\lVert x\\rVert_2\\lVert y\\rVert_2$ with its equality case, the triangle inequality for $\\lVert\\cdot\\rVert_2$, the parallelogram law and polarisation, where the triangle\ninequality is obtained from the Cauchy-Schwarz inequality; it is not assumed\nhere.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "prop-the-nonnegative-integral-agrees-with-the-simple-integral",
+          "source_section": "Statement",
+          "quote": "If $s$ is a nonnegative simple measurable function, then its nonnegative\nLebesgue integral equals its simple integral:\n$$\\int s\\,d\\mu=\\int_{\\mathrm{simple}} s\\,d\\mu.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-integral-of-a-nonnegative-simple-function",
+          "source_section": "Definition",
+          "quote": "Let $s=\\sum_{j=1}^m c_j\\chi_{E_j}$ be a simple representation of a\nnonnegative simple measurable function\n(Nonnegative simple measurable functions) on a measure space\n$(X,\\mathcal A,\\mu)$, so the $E_j\\in\\mathcal A$ are pairwise disjoint and\n$c_j\\ge0$. Its\n**simple integral** is\n$$\\int s\\,d\\mu:=\\sum_{j=1}^m c_j\\mu(E_j),$$\nwhere $\\mu$ is the given measure (Measures on sigma-algebras) and the convention\n$0\\cdot(+\\infty)=0$ is fixed once and for all.\n\nThe next lemma proves that this value is independent of the chosen simple\nrepresentation.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "source_section": "Definition",
+          "quote": "Every $z\\in\\mathbb C$ has unique coordinates $z=a+bi$\n([[thm-complex-numbers-form-a-field]]). Define\n$$\\operatorname{Re}z=a,\\qquad \\operatorname{Im}z=b,\\qquad \\overline z=a-bi,$$\nand define its **modulus** by\n$$|z|=\\sqrt{a^2+b^2}.$$\nThe real numbers are least-upper-bound complete\n([[cor-cauchy-reals-lub-complete]]), so the nonnegative square root exists and\nis unique by [[thm-of-square-roots]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-abs-value",
+          "source_section": "Definition",
+          "quote": "Let $F$ be an ordered field (Ordered field). The **absolute value** of\n$x \\in F$ is\n\n$$|x| \\;:=\\; \\begin{cases} x & \\text{if } x \\ge 0, \\\\ -x & \\text{if } x < 0. \\end{cases}$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-of-abs-value",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field (Ordered field) and let $x, y \\in F$, with\n$|x|$ the absolute value (Absolute value in an ordered field). Then\n\n$$|x| \\ge 0; \\quad |x| = 0 \\iff x = 0; \\quad -|x| \\le x \\le |x|; \\quad |-x| = |x|; \\quad |xy| = |x|\\,|y|;$$\n\nand, for every $c > 0$, one has $|x| < c \\iff -c < x < c$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The Euclidean norm is even by [F5], so $v_a(-x)=v_a(x)$. The ball $B(0,a)$ is open, hence Borel, by [F4]; its complement is Borel as well. The target singleton $\\{+\\infty\\}$ is Borel by [F4], and $\\{0\\}=\\bigcap_{m\\geq1}(-1/m,1/m)$ is Borel by the extended-real topology and sigma-algebra closure in [F4]. Since $v_a$ takes the constant value $+\\infty$ on the ball and $0$ on its complement, the preimage of any target Borel set is among the empty set, the ball, its complement, and all of $\\mathbb R^d$; hence $v_a$ is Borel. Every pair energy is either $0$ or $+\\infty$, so every finite total energy is at least zero; therefore the stability inequality holds with $B=0$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "Under the stated convention, $e^{-\\beta v_a(x)}-1=-1$ on $B(0,a)$ and $0$ elsewhere, so $|f_\\beta|=\\mathbf1_{B(0,a)}$ by [F8]. The ball lemma [F3] gives measurability and finite measure, and [F6] gives $C_\\beta=\\int\\mathbf1_{B(0,a)}dx=\\lambda_d(B(0,a))\\in(0,\\infty)$.",
+          "inputs": [
+            "A1",
+            "F3",
+            "F6",
+            "F8",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The hypotheses of [F2] hold by steps 1.1–1.2 and [A1]. Substituting $B=0$ and $C_\\beta=\\lambda_d(B(0,a))$ into its sufficient disk gives $e|z|\\lambda_d(B(0,a))<1$. This is a sufficient analytic domain; it is not asserted to be necessary and implies no freezing or coexistence point.",
+          "inputs": [
+            "A1",
+            "F2",
+            "F7",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes d≥1 and a>0; the zero-dimensional or zero-radius ball is outside the stated model."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero hard-core radius is excluded by a>0, but zero activity z=0 is included: the sufficient inequality in Proof 2.1 reads 0<1. The stability constant is exactly B=0 by Proof 1.1, independently of activity."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: In d=1, B(0,a)=(-a,a) has Lebesgue measure 2a, giving the concrete sufficient condition 2ea|z|<1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: For every d≥1 and a>0 the ball has positive finite measure by step 1.2; B=0 exactly, so the sufficient disk has nonzero radius."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The derived domain is the strict disk e|z||B(0,a)|<1; the item makes no claim at equality."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Countable Choice is explicitly assumed in [A1] and the ball-measure supplier; the application inherits the theorem’s sigma-finite Lebesgue hypothesis."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Proof 2.1 substitutes B=0 and the positive ball volume into a sufficient analytic disk. It expressly declines necessity, freezing or coexistence conclusions."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Proof 2.1 substitutes B=0 and the positive ball volume into a sufficient analytic disk. It expressly declines necessity, freezing or coexistence conclusions."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "one-dimensional hard-core interval",
+          "inputs": "d=1, a>0, β>0; v_a(x)=+∞ for |x|<a and 0 otherwise.",
+          "method": "Use Lebesgue length of the interval (-a,a) to compute Cβ and substitute B=0 in the theorem disk.",
+          "result": "Cβ=2a and the sufficient condition is 2ea|z|<1.",
+          "limitation": "One-dimensional specialization only; step 1.2 and the ball lemma cover every d≥1."
+        }
+      ],
+      "current_boundary_worksheet": {
+        "proposal": "research/physics-non-fluid-129-2026-10-21-r2-owner-step2-boundary-proposal-2/proposal.json",
+        "source_sha256": "90875e8294da4e9d1a0112c78127babc2d4eb0f737a0ac680bb7b74dc79b2670",
+        "qualification": "Released complete current source/eight-case semantic worksheet; root transcribed exact current rows. No independent acceptance or finite computation asserted."
+      }
+    }
+  }
+}

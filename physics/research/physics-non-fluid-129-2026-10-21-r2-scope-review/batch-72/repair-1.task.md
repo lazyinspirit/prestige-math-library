@@ -1,0 +1,15 @@
+# Batch 72: repair 1
+
+Run: physics-non-fluid-129-2026-10-21-r2
+Batch: 72
+Round: 1
+Read the complete assigned A/B pages and items, approved scope and actual supplier claims/proofs. Review the whole batch before reporting.
+Pages: qftx-photon-angular-momentum, qftx-photon-angular-momentum-examples
+Items: lem-qftx-measurable-helicity-scalarization, def-qftx-photon-projected-angular, lem-qftx-photon-rotation-test-core, thm-qftx-photon-projected-commutators, prop-qftx-photon-fock-angular-lift, ex-qftx-nonparaxial-spin-projection
+Consolidated findings: [{"id":"lem-qftx-measurable-helicity-scalarization","type":"local","reason":"The Remark invokes nonzero helicity-line Chern numbers without linking the relevant proposition or giving a locator for that claim. Add a contextual link to [[prop-qftx-helicity-chern-obstruction]] or an exact source locator; this aside is not needed by the scalarization proof. The cited paper treats the nontrivial line bundles in §II and computes their Chern numbers in §III, Theorem 18 ([Photon topology](https://arxiv.org/pdf/2308.11147#page=21))."},{"id":"ex-qftx-nonparaxial-spin-projection","type":"local","reason":"The final sentence’s “generalized amplitude” and “smaller fixed-radius conical shell” are not mathematically specified. The proof establishes the precise claim that any L² field vanishing almost everywhere off the null cone represents zero. State that claim directly, or define the generalized amplitude and shell precisely."}]
+Authorized source files: ["items/lem-qftx-measurable-helicity-scalarization.md","items/def-qftx-photon-projected-angular.md","items/lem-qftx-photon-rotation-test-core.md","items/thm-qftx-photon-projected-commutators.md","items/prop-qftx-photon-fock-angular-lift.md","items/ex-qftx-nonparaxial-spin-projection.md","library/quantum-field-theory-mathematics/qftx-photon-angular-momentum.md","library/quantum-field-theory-mathematics/qftx-photon-angular-momentum-examples.md"]. Edit these assigned source files directly. Resolve prerequisite gaps locally on the same page where possible.
+Repair suppliers before their affected consumers; pair dispatch has no prerequisite-completion requirement. Preserve sound approved claims and avoid Statement/Definition changes when possible. If a public interface changes, the same repairer owns all affected direct/indirect consumer checks and authorized repairs.
+Your duties are review, repair and escalation only. Do not hash, recertify, reconcile dependency levels, maintain manifests/coverage/contracts/ledgers, or run formatting/gate batteries. The owner orchestrator handles that work.
+Return only the result schema with prepared reviewed_items/reviewed_pages, verdict, concise findings and consumer_checks. Do not edit reports or engine state.
+Escalate to the owner if the final second review remains unsatisfied, or a significant prerequisite gap cannot be resolved locally on the same page. Otherwise use the single local repair and final review.
+Previous repair consumers: [].

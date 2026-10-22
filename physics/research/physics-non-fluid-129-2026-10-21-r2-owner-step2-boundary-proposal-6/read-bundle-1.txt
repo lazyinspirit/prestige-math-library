@@ -1,0 +1,871 @@
+ITEM 5 prop-emg-fx-rn-photon-trapping
+---
+id: prop-emg-fx-rn-photon-trapping
+kind: proposition
+title: RN circular null radius and exterior instability
+status: draft
+origin: pipeline
+pipeline_run: physics-non-fluid-129-2026-10-21-r2
+domain: mathematics
+library: mathematics
+dependency_level: 0
+deps:
+  - def-emg-xs-rn-data
+  - ex-the-round-metric-on-the-sphere-as-an-induced-metric
+  - prop-emg-xs-rn-horizon-data
+  - def-geodesic-of-an-affine-connection
+  - thm-gr-nondegenerate-levi-civita-and-tensor-derivative
+  - def-emg-explicit-power-regimes
+  - def-countable-choice
+dependency_roles:
+  def-emg-xs-rn-data: mathematical-premise
+  ex-the-round-metric-on-the-sphere-as-an-induced-metric: mathematical-premise
+  prop-emg-xs-rn-horizon-data: mathematical-premise
+  def-geodesic-of-an-affine-connection: mathematical-premise
+  thm-gr-nondegenerate-levi-civita-and-tensor-derivative: mathematical-premise
+  def-emg-explicit-power-regimes: mathematical-premise
+  def-countable-choice: mathematical-premise
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-generated
+sources:
+  references:
+    - title: "David Tong, General Relativity, Cambridge Part III Mathematical Tripos, Michaelmas 2019, complete author-hosted lecture notes"
+      url: https://davidtong.org/pdfs/teaching/general-relativity/gr.pdf
+      locator: "PDF pp. 50–51: the Schwarzschild null effective potential, its photon-sphere maximum at 3GM/c^2 and radial instability. Section 6.2.5, printed pp. 266–268 (PDF pp. 273–275), treats the distinct extremal RN throat limit. Tong's charge normalization is not imported."
+    - title: "Max Weissenbacher, Decay and non-decay for the massless Vlasov equation on subextremal and extremal Reissner–Nordström black holes, Arch. Rational Mech. Anal. 248, 118 (2024)"
+      url: https://arxiv.org/pdf/2303.15338
+      locator: "arXiv:2303.15338v2, Section 1.3.5, equation (35), for the surface-gravity definition; Section 2.1, equations (45)–(48), for the local surface-gravity formula, photon-sphere radius, and Schwarzschild/extremal special cases; Sections 2.3.1–2.3.5 for conserved geodesic quantities and null trapping. The paper's geodesic-flow estimates are not used as the proof here."
+physical_scope: null
+verification:
+  precheck: pass
+---
+
+## Statement
+
+Let $m>0$ and $q_e,q_m\in\mathbb R$ be length parameters, put $Q^2=q_e^2+q_m^2$, and assume $0\le Q^2<m^2$. Use the asymptotically flat dyonic Reissner–Nordström metric with $M=m$ and $f(r)=1-2m/r+Q^2/r^2$ on the exterior $r>r_+:=m+\sqrt{m^2-Q^2}$. Here $r_-$ denotes the other algebraic horizon root $m-\sqrt{m^2-Q^2}$; when $Q^2>0$, $r_\pm$ are the local null Killing horizons of the selected RN model, and when $Q^2=0$, $r_+=2m$ is the larger root. An equatorial circular null geodesic means a smooth nonconstant affinely parametrized geodesic $\gamma(s)=(x^0(s),r_c,\pi/2,\phi(s))$ with $g(\dot\gamma,\dot\gamma)=0$ and nonzero angular momentum $\ell=r_c^2\dot\phi$. Its effective radial function is $h(r)=f(r)/r^2$. The outer circular null radius is
+
+$$r_{\mathrm{ph}+}=\frac{3m+\sqrt{9m^2-8Q^2}}{2}.$$
+
+It lies strictly above $r_+$ and is a strict local maximum of $h$. Along an equatorial geodesic, define the conserved quantities $E:=f(r)\dot x^0$ and $\ell:=r^2\dot\phi$. At fixed $E,\ell$, the null radial geodesic equation is $\ddot r=-\tfrac12\ell^2h'(r)$. Its radial linearization at $r=r_{\mathrm{ph}+}$, defined by writing $r=r_{\mathrm{ph}+}+\epsilon\rho(s)$ and retaining the terms of first order in $\epsilon$, is $\ddot\rho-\nu^2\rho=0$, where $\nu^2:=-\tfrac12\ell^2h''(r_{\mathrm{ph}+})>0$; it has the growing mode $\rho(s)=e^{\nu s}$. The other algebraic stationary radius is $r_{\mathrm{ph}-}=(3m-\sqrt{9m^2-8Q^2})/2$; this proposition assigns it no exterior-orbit interpretation. Coordinates $x^0,r,m,q_e,q_m$ have length units, angular coordinates are dimensionless, and the affine parameter has arbitrary normalization. This is a null-ray calculation for the exact RN metric; it proves no wave-decay or Morawetz estimate.
+
+## Statement references
+
+[[def-emg-xs-rn-data]]
+
+[[prop-emg-xs-rn-horizon-data]]
+
+[[def-geodesic-of-an-affine-connection]]
+
+## Facts & Assumptions
+
+**Given:** The dyonic RN metric with $m>0$, $0\le Q^2<m^2$, and a smooth equatorial affinely parametrized null geodesic in the static exterior with nonzero angular momentum.
+
+[F1] [[def-emg-xs-rn-data]]: for $Q^2=q_e^2+q_m^2$ and $f(r)=1-2m/r+Q^2/r^2$, the static metric is $g=-f(dx^0)^2+f^{-1}dr^2+r^2\gamma_{S^2}$ on each open set where $f\ne0$.
+
+[F2] [[ex-the-round-metric-on-the-sphere-as-an-induced-metric]]: in spherical coordinates the unit round metric is $\gamma_{S^2}=d\theta^2+\sin^2\theta\,d\phi^2$.
+
+[F3] [[prop-emg-xs-rn-horizon-data]]: when $Q^2>0$ and $m^2\ge Q^2$, the positive roots are $r_\pm=m\pm\sqrt{m^2-Q^2}$ and are local null constant-radius Killing horizons. Its theorem's $Q^2>0$ hypothesis is used only for this horizon interpretation; the $Q^2=0$ root is handled directly below.
+
+[F4] [[def-geodesic-of-an-affine-connection]]: an affinely parametrized geodesic satisfies $D_s\dot\gamma=0$ on its interval.
+
+[F5] [[thm-gr-nondegenerate-levi-civita-and-tensor-derivative]]: assuming $\mathrm{AC}_\omega$, the metric-selected connection of a smooth nondegenerate metric has coordinate coefficients $\Gamma^a{}_{bc}=\tfrac12g^{ad}(\partial_bg_{dc}+\partial_cg_{bd}-\partial_dg_{bc})$.
+
+[F6] [[def-emg-explicit-power-regimes]]: for $a>0$, $\sqrt a$ is the unique positive real $s$ with $s^2=a$.
+
+[F7] [[def-countable-choice]]: $\mathrm{AC}_\omega$ asserts that every sequence of nonempty sets has a choice function. This is the assumption explicitly used by [F5].
+
+[A1] $m>0$, $q_e,q_m\in\mathbb R$, and $0\le Q^2=q_e^2+q_m^2<m^2$.
+
+[A2] Adopt $\mathrm{AC}_\omega$ as required by [F5]. No further choice principle is used.
+
+## Proof
+
+1.1 Let $x=\sqrt{m^2-Q^2}$. By [F6] and [A1], $0<x\le m$, so $r_-=m-x\ge0$ and $r_+=m+x>0$. Factoring gives $f(r)=(r-r_+)(r-r_-)/r^2>0$ on $r>r_+$. From [F1]–[F2] the equatorial metric components are $g_{00}=-f$, $g_{rr}=f^{-1}$, $g_{\theta\theta}=r^2$, and $g_{\phi\phi}=r^2\sin^2\theta$. Substitution in [F5] gives $\Gamma^0{}_{0r}=f'/(2f)$, $\Gamma^\phi{}_{r\phi}=1/r$, $\Gamma^r{}_{00}=ff'/2$, $\Gamma^r{}_{rr}=-f'/(2f)$, $\Gamma^r{}_{\phi\phi}=-fr\sin^2\theta$, $\Gamma^\theta{}_{r\theta}=1/r$, and $\Gamma^\theta{}_{\phi\phi}=-\sin\theta\cos\theta$. The $x^0$ and $\phi$ geodesic equations of [F4] are therefore $\ddot x^0+(f'/f)\dot r\dot x^0=0$ and $\ddot\phi+2(\dot r/r)\dot\phi=0$. The $\theta$ equation is $\ddot\theta+2(\dot r/r)\dot\theta-\sin\theta\cos\theta\dot\phi^2=0$, so $\theta=\pi/2$, $\dot\theta=0$ is invariant. Differentiating the $x^0$ and $\phi$ equations shows that $E:=f\dot x^0$ and $\ell:=r^2\dot\phi$ are constant along the geodesic. [given, F1, F2, F4, F5, F6, F7, A1, A2, algebra]
+
+2.1 The null condition is $-f(\dot x^0)^2+f^{-1}\dot r^2+r^2\dot\phi^2=0$. Multiplying by $f>0$ and using the constants from 1.1 gives $\dot r^2+\ell^2h(r)=E^2$, where $h=f/r^2$. [given, F1, A1, step 1.1, algebra]
+
+2.2 For a circular orbit $r=r_c$, the radial geodesic equation from 1.1 has $\dot r=\ddot r=0$ and reads $\tfrac12ff'(\dot x^0)^2-fr_c(\dot\phi)^2=0$. The null equation and $\ell\ne0$ imply $r_cf'(r_c)-2f(r_c)=0$, equivalently $h'(r_c)=0$. Direct differentiation gives $h'(r)=-2(r^2-3mr+2Q^2)/r^5$, so its algebraic roots are $r_{\mathrm{ph}\pm}=(3m\pm\sqrt{9m^2-8Q^2})/2$. They are real because $9m^2-8Q^2=m^2+8(m^2-Q^2)>0$. [given, F1, F4, F5, A1, step 1.1, algebra]
+
+3.1 Put $x=\sqrt{m^2-Q^2}$, so $0<x\le m$. Then $\sqrt{9m^2-8Q^2}=\sqrt{m^2+8x^2}>x$, and
+$$r_{\mathrm{ph}+}-r_+=\frac{m+\sqrt{m^2+8x^2}-2x}{2}=\frac{(m-x)+(\sqrt{m^2+8x^2}-x)}2>0.$$
+For $Q^2>0$, [F3] identifies $r_+$ as the outer local horizon. For $Q^2=0$, [F1] gives $f=1-2m/r$, whose larger root is $r_+=2m$; the same inequality applies. Thus $f(r_{\mathrm{ph}+})>0$ and the outer root lies in the static exterior. [given, F1, F3, F6, A1, step 2.2, algebra]
+
+3.2 At the outer root, $r^2-3mr+2Q^2=0$ and $2r_{\mathrm{ph}+}-3m=\sqrt{9m^2-8Q^2}$, so $h''(r_{\mathrm{ph}+})=-2\sqrt{9m^2-8Q^2}/r_{\mathrm{ph}+}^5<0$. Hence $h$ has a strict local maximum there. [given, A1, step 2.2, algebra]
+
+4.1 Since $f(r_{\mathrm{ph}+})>0$, [F6] defines $\sqrt{h(r_{\mathrm{ph}+})}$. Choose $\ell>0$ and $E=\ell\sqrt{h(r_{\mathrm{ph}+})}$. The explicit curve $x^0(s)=Es/f(r_{\mathrm{ph}+})$, $r(s)=r_{\mathrm{ph}+}$, $\theta(s)=\pi/2$, and $\phi(s)=\ell s/r_{\mathrm{ph}+}^2$ is null and satisfies the $x^0,\phi,\theta$ geodesic equations from 1.1. Its radial geodesic equation is exactly the circular condition in 2.2, so it is an affinely parametrized circular null geodesic. For a general equatorial null geodesic, the radial geodesic equation from 1.1 and the constants in 1.1 give
+$$\ddot r=-\frac{E^2f'(r)}{2f(r)}+\frac{f'(r)}{2f(r)}\dot r^2+\frac{f(r)\ell^2}{r^3}.$$
+Using the null first integral 2.1, $E^2=\dot r^2+\ell^2f(r)/r^2$, cancels the two $\dot r^2$ terms and yields $\ddot r=-\frac{\ell^2}{2}h'(r)$. Thus the first radial variation $\rho$ at the outer circular orbit, with $E,\ell$ fixed, satisfies $\ddot\rho+\tfrac12\ell^2h''(r_{\mathrm{ph}+})\rho=0$, equivalently $\ddot\rho-\nu^2\rho=0$, where $\nu^2=-\tfrac12\ell^2h''(r_{\mathrm{ph}+})>0$ by 3.2. This equation has the growing solution $\rho(s)=e^{\nu s}$, as asserted. [given, F1, F4, F5, F6, A1, step 1.1, step 2.1, step 2.2, step 3.1, step 3.2, algebra, construct] ∎
+
+## Remarks
+
+The smaller algebraic stationary radius is not used to infer an additional exterior trapping orbit. Radial null geodesics have $\ell=0$ and are a separate class. The argument establishes only the exact metric's circular-ray trapping and instability; no wave estimate follows from it.
+
+The diagram is a schematic ordering of areal radii, not a distance scale. Panel (a) depicts $0<Q^2<m^2$; the proven exterior is $r>r_+$, and the proof above—not the drawing—establishes $r_{\mathrm{ph}+}>r_+$. Panel (b) is the excluded extremal endpoint: the algebraic horizon roots coalesce at $m$, while the continuous limit of the outer stationary-radius formula is $2m$.
+
+~~~tikz
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \draw[->] (0,0) -- (8,0) node[right] {$r$};
+  \draw[densely dashed] (1.35,-0.18) -- (1.35,0.18);
+  \draw[densely dashed] (3.15,-0.18) -- (3.15,0.18);
+  \draw[very thick] (3.15,0) -- (8,0);
+  \draw[fill=black] (5.55,0) circle (1.6pt);
+  \node[below] at (1.35,-0.2) {$r_-$};
+  \node[below] at (3.15,-0.2) {$r_+$};
+  \node[above] at (5.55,0.12) {$r_{\mathrm{ph}+}$};
+  \node[above] at (5.3,0.65) {subextremal exterior};
+  \node[below] at (0,-0.48) {0};
+  \node[below] at (3.15,-0.72) {$r>r_+$};
+  \draw[->] (0,-1.55) -- (8,-1.55) node[right] {$r$};
+  \draw[densely dashed] (3.15,-1.73) -- (3.15,-1.37);
+  \draw[fill=black] (5.55,-1.55) circle (1.6pt);
+  \node[below] at (3.15,-1.77) {$r_-=r_+=m$};
+  \node[above] at (5.55,-1.42) {$r_{\mathrm{ph}+}=2m$};
+  \node[above] at (5.2,-0.95) {extremal endpoint};
+\end{tikzpicture}
+~~~
+
+OLD BOUNDARIES
+[{"case": "empty", "status": "not_applicable", "reason": "m>0 makes r+ positive and the open exterior (r+, infinity) nonempty."}, {"case": "zero", "status": "checked", "evidence": "Step 3.1 handles Q^2=0 directly: r+=2m, r_ph+=3m, and the gap is m>0; the horizon proposition is used only for Q^2>0."}, {"case": "one", "status": "not_applicable", "reason": "The proposition concerns a single explicitly defined circular orbit and makes no cardinality claim."}, {"case": "degenerate", "status": "checked", "evidence": "Step 1.1 gives x=sqrt(m^2-Q^2)>0 for the subextremal horizons, and step 3.1 proves the outer-radius comparison is strict."}, {"case": "endpoints", "status": "checked", "evidence": "Step 1.1 identifies the exterior r>r+; r=0 is excluded, and step 2.2 gives the uncharged inner algebraic root r_ph-=0 without treating it as an exterior orbit."}, {"case": "nonempty-choice", "status": "checked", "evidence": "Step 1.1 records AC_omega explicitly because the metric-connection supplier assumes it; the coordinate calculations use no further choice principle."}, {"case": "iff-forward", "status": "not_applicable", "reason": "The proposition is a one-way conditional classification, not an equivalence."}, {"case": "iff-reverse", "status": "not_applicable", "reason": "The proposition is a one-way conditional classification, not an equivalence."}]
+FLAGS
+{"reference": [{"id": "prop-emg-fx-rn-photon-trapping", "batch": 19, "case": "zero", "evidence": "Step 3.1 handles Q^2=0 directly: r+=2m, r_ph+=3m, and the gap is m>0; the horizon proposition is used only for Q^2>0.", "unresolved_step_references": ["3.1"]}, {"id": "prop-emg-fx-rn-photon-trapping", "batch": 19, "case": "degenerate", "evidence": "Step 1.1 gives x=sqrt(m^2-Q^2)>0 for the subextremal horizons, and step 3.1 proves the outer-radius comparison is strict.", "unresolved_step_references": ["1.1", "3.1"]}, {"id": "prop-emg-fx-rn-photon-trapping", "batch": 19, "case": "endpoints", "evidence": "Step 1.1 identifies the exterior r>r+; r=0 is excluded, and step 2.2 gives the uncharged inner algebraic root r_ph-=0 without treating it as an exterior orbit.", "unresolved_step_references": ["1.1", "2.2"]}, {"id": "prop-emg-fx-rn-photon-trapping", "batch": 19, "case": "nonempty-choice", "evidence": "Step 1.1 records AC_omega explicitly because the metric-connection supplier assumes it; the coordinate calculations use no further choice principle.", "unresolved_step_references": ["1.1"]}], "audit": []}
+ITEM 6 cex-emg-fx-neutral-no-amplification
+---
+id: cex-emg-fx-neutral-no-amplification
+kind: counterexample
+title: A charged RN background does not amplify a neutral test scalar
+status: draft
+origin: pipeline
+pipeline_run: physics-non-fluid-129-2026-10-21-r2
+domain: mathematics
+library: mathematics
+dependency_level: 5
+proof_strategy: direct
+deps:
+  - def-emg-fx-charged-radial-scattering
+  - lem-emg-fx-charged-radial-equation
+  - prop-emg-fx-superradiant-wronskian
+dependency_roles:
+  def-emg-fx-charged-radial-scattering: mathematical-premise
+  lem-emg-fx-charged-radial-equation: mathematical-premise
+  prop-emg-fx-superradiant-wronskian: mathematical-premise
+generation:
+  role: counterexample
+provenance:
+  statement: ai-generated
+  proof: ai-generated
+sources:
+  references:
+    - title: "Richard Brito, Vitor Cardoso, and Paolo Pani, Superradiance -- the 2020 Edition, Lecture Notes in Physics 971, second edition"
+      url: https://arxiv.org/pdf/1501.06570
+      locator: "Section 4.6.1, equation (4.56): the reflected amplitude depends on the test-field charge through the horizon frequency. The neutral specialization is verified locally."
+    - title: "Visakan Balakumar, Aspects of quantum charged scalar field theory in curved spacetime: Black hole superradiance and Hadamard renormalisation, PhD thesis, University of Sheffield (2022)"
+      url: https://inspirehep.net/files/c9d9d32ca091d580007a1fee1bb44dc0
+      locator: "Chapter 3, Section 3.3.4, equations (3.83)-(3.84): classical charge superradiance requires the sign-changing product of field and black-hole charges. The exact neutral case below follows from the local flux identity."
+verification:
+  precheck: pass
+---
+
+## Statement refuted
+
+Every admitted scattering mode on a nonzero charged subextremal electric
+Reissner--Nordström background is amplified, regardless of the test scalar's
+charge.
+
+## Statement references
+
+[[def-emg-fx-charged-radial-scattering]]
+
+## Facts & Assumptions
+
+**Given:** The charged radial scattering model on a fixed subextremal electric
+RN exterior. We construct an admitted solution for the neutral spherical mode;
+no scattering-solution existence is assumed.
+
+[F1] [[lem-emg-fx-charged-radial-equation]]: for a smooth separated solution,
+$u''+[(\omega-eQ/r)^2-f(\ell(\ell+1)/r^2+f'/r)]u=0$, with derivatives in
+$r_*$.
+
+[F2] [[prop-emg-fx-superradiant-wronskian]]: every admitted scattering
+solution satisfies $|R|^2=1-(\omega-eQ/r_+)|T|^2/\omega$.
+
+[F3] [[def-emg-fx-charged-radial-scattering]]: $x=r_*$ is a smooth
+coordinate from the exterior onto $\mathbb R$ with $dr/dx=f$; the separated
+field is $A_{\mathrm{in}}e^{-i\omega t}Y u/r$. For $e=0$,
+$\Theta=\omega x$ and $\omega_H=\omega$, and admissibility requires
+$$u=e^{-i\omega x}+Re^{i\omega x}+o(1),\quad
+u'=-i\omega e^{-i\omega x}+i\omega Re^{i\omega x}+o(1)\quad(x\to+\infty),$$
+$$u=Te^{-i\omega x}+o(1),\quad
+u'=-i\omega Te^{-i\omega x}+o(1)\quad(x\to-\infty).$$
+
+[A1] Choose any $M>0$, $0<|Q|<M$, and $\omega>0$, and set $e=0$ and
+$\ell=0$.
+
+[A2] For the $\ell=0$ angular mode choose
+$Y(\Omega)=(4\pi)^{-1/2}$ on the unit round sphere. It is smooth, satisfies
+$\Delta_{\gamma_{S^2}}Y=0$. Since
+$d\omega_{S^2}=\sin\theta\,d\theta\,d\phi$,
+$$\int_{S^2}Y^2\,d\omega_{S^2}
+=(4\pi)^{-1}\int_0^{2\pi}\!\int_0^\pi\sin\theta\,d\theta\,d\phi=1.$$
+
+## Counterexample
+
+1.1 Write $x=r_*$ and use the choices in [A1]--[A2]. By [F3], $x$ ranges over
+all of $\mathbb R$ and $dr/dx=f$. The charged radial
+equation [F1] becomes
+$$u''(x)+\bigl(\omega^2-V(x)\bigr)u(x)=0,\qquad
+V(x):=\frac{f(r(x))f'(r(x))}{r(x)}.$$
+The definition gives $dr/dx=f$ and $f(r)=(r-r_+)(r-r_-)/r^2$. Since
+$r_+>M>r_-$ and $r_+r_-=Q^2$, we have $f(r)>0$ and $Mr>Mr_+>Q^2$
+for $r>r_+$, so $f'(r)=2(Mr-Q^2)/r^3>0$ and $V>0$. Thus $V$ is smooth
+and real. Moreover,
+$$\int_{\mathbb R}|V(x)|\,dx=\int_{r_+}^{\infty}\frac{f'(r)}r\,dr
+=\int_{r_+}^{\infty}\frac{2(Mr-Q^2)}{r^4}\,dr<\infty.$$
+[given, F1, A1, A2, algebra]
+
+1.2 Define $u_-$ by the Volterra equation
+$$u_-(x)=e^{-i\omega x}+\frac1\omega\int_{-\infty}^{x}
+\sin\!\bigl(\omega(x-y)\bigr)V(y)u_-(y)\,dy.$$
+Iteration gives a uniformly convergent Neumann series: the absolute value of
+its $n$th iterated term is at most
+$\|V\|_{L^1(\mathbb R)}^n/(\omega^n n!)$, using $|\sin z|\le1$ for real $z$
+and the ordered integration region. The sum is bounded on $\mathbb R$; differentiating
+the integral equation shows it is a smooth solution of the equation in step
+1.1. The tail integrals tend to zero as $x\to-\infty$, and differentiation
+under the integral gives
+$$u_-(x)=e^{-i\omega x}+o(1),\qquad
+u_-'(x)=-i\omega e^{-i\omega x}+o(1)\quad(x\to-\infty).$$
+[given, step 1.1, algebra, construct]
+
+2.1 Since $V u_-\in L^1(\mathbb R)$, expanding the sine in step 1.2 into
+exponentials and replacing the upper integration limit by $+\infty$ gives
+$$u_-(x)=a e^{-i\omega x}+b e^{i\omega x}+o(1),\qquad
+u_-'(x)=-i\omega a e^{-i\omega x}+i\omega b e^{i\omega x}+o(1)$$
+as $x\to+\infty$, where
+$$a=1-\frac1{2i\omega}\int_{\mathbb R}e^{i\omega y}V(y)u_-(y)\,dy,
+\qquad b=\frac1{2i\omega}\int_{\mathbb R}e^{-i\omega y}V(y)u_-(y)\,dy.$$
+The same tail estimate after differentiating the integral equation proves the
+displayed derivative asymptotic. [given, step 1.2, algebra]
+
+2.2 For $j=\operatorname{Im}(\overline{u_-}u_-')$, the real-coefficient
+equation in step 1.1 gives $j'=0$. The horizon asymptotics in step 1.2 yield
+$j=-\omega$, while step 2.1 yields $j=\omega(|b|^2-|a|^2)$ at infinity;
+the two oscillatory cross terms have real sum and contribute no imaginary part.
+Hence $|a|^2=|b|^2+1$, so $a\ne0$. Put $u=u_-/a$, $R=b/a$, and $T=1/a$.
+Then $u$ has the asymptotics in [F3], with unit incoming amplitude and only
+the ingoing branch at the horizon. The separated-wave substitution in the
+proof of [F1] is reversible here: $Y$ is a nonzero constant, $A_{\mathrm{in}}$
+and $fr$ are nonzero, and each displayed step is an equality. Therefore
+$\psi=A_{\mathrm{in}}e^{-i\omega t}Y u/r$ solves $\Box_{g,A}\psi=0$ and is
+an admitted scattering solution for any fixed nonzero allowed
+$A_{\mathrm{in}}$. [given, F1, F3, step 1.1, step 1.2, step 2.1, algebra]
+
+3.1 Apply [F2] to this constructed solution. Since $e=0$ and $T=1/a\ne0$,
+$$|R|^2=1-|T|^2=1-|a|^{-2}<1.$$
+Thus this nonzero-charge background admits a neutral mode whose reflected
+radial flux is less than the incident flux, contradicting the universal
+amplification statement. [given, F2, A1, step 2.2, algebra] ∎
+
+## Remarks
+
+The construction proves existence for the neutral $\ell=0$ mode under the
+stated subextremal real-frequency assumptions. It does not assert existence
+for every charged mode or for other boundary-value problems.
+
+OLD BOUNDARIES
+[{"case": "empty", "status": "checked", "evidence": "The refuted statement and counterexample are restricted to the nonempty subextremal exterior of Definition."}, {"case": "zero", "status": "checked", "evidence": "The counterexample is exactly the allowed zero-coupling case e=0; step 1.1 evaluates it."}, {"case": "one", "status": "checked", "evidence": "Statement refuted: the Proposition is independent of ell, so the neutral specialization includes the lowest harmonic mode whenever supplied."}, {"case": "degenerate", "status": "not_applicable", "reason": "The counterexample uses the strict subextremal domain and does not include extremality."}, {"case": "endpoints", "status": "checked", "evidence": "With e=0 and omega>0, omega_H=omega>0; step 1.1 shows there is no threshold amplification."}, {"case": "nonempty-choice", "status": "not_applicable", "reason": "The counterexample assumes any admitted scattering solution and makes no selection or existence claim."}, {"case": "iff-forward", "status": "not_applicable", "reason": "The Counterexample refutes a universal assertion and contains no biconditional."}, {"case": "iff-reverse", "status": "not_applicable", "reason": "The Counterexample refutes a universal assertion and contains no converse classification."}]
+FLAGS
+{"reference": [{"id": "cex-emg-fx-neutral-no-amplification", "batch": 23, "case": "zero", "evidence": "The counterexample is exactly the allowed zero-coupling case e=0; step 1.1 evaluates it.", "unresolved_step_references": ["1.1"]}, {"id": "cex-emg-fx-neutral-no-amplification", "batch": 23, "case": "endpoints", "evidence": "With e=0 and omega>0, omega_H=omega>0; step 1.1 shows there is no threshold amplification.", "unresolved_step_references": ["1.1"]}], "audit": []}
+ITEM 7 lem-gr-fx-null-focal-boundary-exclusion
+---
+id: lem-gr-fx-null-focal-boundary-exclusion
+kind: lemma
+title: "Null focal points exclude later horismos generators"
+status: draft
+origin: pipeline
+domain: mathematics
+library: physics
+dependency_level: 3
+physical_scope: "Local causal-geometric deduction; no completeness, curvature singularity, or empirical statement is asserted."
+deps:
+  - def-gr-fx-null-screen-geometry
+  - lem-gr-fx-null-screen-index-form
+  - def-gr-smooth-lorentzian-objects
+  - def-embedded-submanifold-and-slice-chart
+  - def-gr-curvature-tensor-and-derived-tensors
+  - def-covariant-derivative-along-a-curve
+  - def-gr-causal-curves-and-reachability
+  - def-countable-choice
+  - def-dependent-choice
+  - thm-gr-jacobi-equation-and-geodesic-deviation
+  - thm-gr-local-geodesics-and-exponential-map
+  - thm-gr-convex-normal-neighborhoods
+  - thm-gr-normal-neighborhood-causal-cone
+  - thm-smooth-dependence-of-ode-solutions-on-parameters
+  - thm-smooth-inverse-function-theorem-on-manifolds
+  - thm-intermediate-value
+  - lem-gr-push-up-rule
+dependency_roles:
+  def-gr-fx-null-screen-geometry: mathematical-premise
+  lem-gr-fx-null-screen-index-form: mathematical-premise
+  def-gr-smooth-lorentzian-objects: mathematical-premise
+  def-embedded-submanifold-and-slice-chart: mathematical-premise
+  def-gr-curvature-tensor-and-derived-tensors: mathematical-premise
+  def-covariant-derivative-along-a-curve: mathematical-premise
+  def-gr-causal-curves-and-reachability: mathematical-premise
+  def-countable-choice: mathematical-premise
+  def-dependent-choice: mathematical-premise
+  thm-gr-jacobi-equation-and-geodesic-deviation: mathematical-premise
+  thm-gr-local-geodesics-and-exponential-map: mathematical-premise
+  thm-gr-convex-normal-neighborhoods: mathematical-premise
+  thm-gr-normal-neighborhood-causal-cone: mathematical-premise
+  thm-smooth-dependence-of-ode-solutions-on-parameters: mathematical-premise
+  thm-smooth-inverse-function-theorem-on-manifolds: mathematical-premise
+  thm-intermediate-value: mathematical-premise
+  lem-gr-push-up-rule: mathematical-premise
+aliases: []
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-generated
+sources:
+  references:
+    - title: "E. Gourgoulhon and J. L. Jaramillo, A 3+1 perspective on null hypersurfaces and isolated horizons, Physics Reports 423 (2006), arXiv:gr-qc/0503113v2: §§2.6-2.7 and 5.5-5.8"
+      url: "https://arxiv.org/pdf/gr-qc/0503113"
+    - title: "Edward Witten, Light Rays, Singularities, and All That, Clay Mathematics Institute lecture notes, full 106-page PDF: §§8.2 and 8.4-8.5"
+      url: "https://www.claymath.org/wp-content/uploads/2022/03/WittenLectures.pdf"
+verification:
+  precheck: pending
+---
+
+## Statement
+
+Assume Countable Choice and Dependent Choice, as required by the supplied
+causal-curve and push-up results. Let $(M,g,N)$ be a smooth time-oriented
+Lorentzian four-manifold. Let $S$ be a smooth embedded two-manifold without
+boundary whose induced metric $q:=g|_{TS}$ is positive definite, and let
+$p\in S$. Choose an open neighborhood $U\subseteq S$ of $p$ and a smooth
+future null normal field $\ell$ along $U$, so
+$g(\ell_q,Y)=0$ for every $q\in U$ and $Y\in T_qS$.
+Let $\gamma:[0,L_1]\to M$ be smooth up to its endpoints, with
+$$\gamma(0)=p,\qquad \dot\gamma(0)=\ell_p,\qquad g(\dot\gamma,\dot\gamma)=0,\qquad g(\dot\gamma,N)<0,\qquad D_\lambda\dot\gamma=0.$$
+Here $D_\lambda$ is covariant differentiation along the curve. Put
+$\chi_\ell(X,Y):=g(\nabla_X\ell,Y)$ as in
+[[def-gr-fx-null-screen-geometry]], and set $B_0:T_pS\to T_pS$ by
+$q(B_0X,Y)=\chi_\ell(X,Y)$ for all $X,Y\in T_pS$.
+The screen along $\gamma$ is
+$$\mathscr S_\lambda:=\dot\gamma(\lambda)^\perp/\mathbb R\dot\gamma(\lambda),$$
+with its positive metric and screen derivative $\mathcal D_\lambda$ from
+[[def-gr-fx-null-screen-geometry]]. Define
+$$\mathcal R_\lambda[X]:=[R(X,\dot\gamma)\dot\gamma].$$
+A **normal screen Jacobi field** is a smooth section $J$ of $\mathscr S$ that
+satisfies $\mathcal D_\lambda^2J+\mathcal R_\lambda J=0$ and the initial
+conditions $J(0)=[X]$, $\mathcal D_\lambda J(0)=B_0X$ for some
+$X\in T_pS$. A **focal instant** $\lambda_0\in(0,L_1]$ is a parameter at
+which such a field with $X\ne0$ has $J(\lambda_0)=0$.
+
+Put $I^+(S):=\bigcup_{p\in S}I^+(p)$,
+$J^+(S):=\bigcup_{p\in S}J^+(p)$, and
+$E^+(S):=J^+(S)\setminus I^+(S)$, using the causal-reachability conventions
+of [[def-gr-causal-curves-and-reachability]].
+
+If $\lambda_0$ is a focal instant, there is $\varepsilon>0$ such that
+$$\gamma(\lambda)\in I^+(S)\qquad (\lambda_0<\lambda<\lambda_0+\varepsilon).$$
+Consequently, no point on this portion of the generator belongs to
+$E^+(S)$. The conclusion is local along the generator and does not assert
+geodesic incompleteness or curvature blow-up. In an SI interpretation take
+$x^0=ct$ and $\lambda$ in metres; the proof itself is independent of units.
+
+## Statement references
+
+[[def-gr-fx-null-screen-geometry]]
+
+[[lem-gr-fx-null-screen-index-form]]
+
+[[def-gr-smooth-lorentzian-objects]]
+
+[[def-embedded-submanifold-and-slice-chart]]
+
+[[def-gr-curvature-tensor-and-derived-tensors]]
+
+[[def-covariant-derivative-along-a-curve]]
+
+[[def-gr-causal-curves-and-reachability]]
+
+[[thm-gr-jacobi-equation-and-geodesic-deviation]]
+
+[[thm-gr-convex-normal-neighborhoods]]
+
+[[thm-gr-normal-neighborhood-causal-cone]]
+
+[[lem-gr-push-up-rule]]
+
+[[def-countable-choice]]
+
+[[def-dependent-choice]]
+
+## Facts & Assumptions
+
+**Given:** The spacelike initial surface, future null geodesic normal to it,
+the focal screen Jacobi field, and Countable Choice and Dependent Choice.
+
+[F1] On the positive screen $\ell^\perp/\mathbb R\ell$, the null second
+fundamental form is symmetric and its endomorphism is
+$B_0=q^{-1}\chi_\ell$ ([[def-gr-fx-null-screen-geometry]]).
+
+[F2] A geodesic variation field satisfies the Jacobi equation
+$D_\ell^2J=R(\ell,J)\ell$; its initial value and derivative determine it
+uniquely ([[thm-gr-jacobi-equation-and-geodesic-deviation]]).
+
+[F3] The symmetric screen index form with the $+\chi_\ell$ initial boundary
+term equals the energy second variation for variations starting on $S$ and
+ending at $\gamma(L)$. The proof realizes an admissible orthogonal screen lift
+$V$ by a family with actual variation field $\partial_sF_s|_{s=0}=V$
+([[lem-gr-fx-null-screen-index-form]], proof step 3.1).
+
+[F4] Every point has arbitrarily small strictly convex normal neighborhoods;
+in one such neighborhood, causal and timelike reachability are characterized
+by future causal and future timelike position vectors, respectively
+([[thm-gr-convex-normal-neighborhoods]],
+[[thm-gr-normal-neighborhood-causal-cone]]).
+
+[F5] A future causal curve containing a future timelike subcurve has
+chronologically related endpoints, under Countable Choice and Dependent
+Choice ([[lem-gr-push-up-rule]] clause (c),
+[[def-countable-choice]], [[def-dependent-choice]]).
+
+[F6] $q\in I^+(p)$ means a future timelike curve joins $p$ to $q$;
+$I^+(S)$, $J^+(S)$ and $E^+(S)$ have the unions and set difference in the
+Statement ([[def-gr-causal-curves-and-reachability]]).
+
+[F7] The exponential map is smooth on a neighborhood of the zero section,
+and its differential there is invertible, giving the local exponential
+charts used to realize and adjust variations
+([[thm-gr-local-geodesics-and-exponential-map]]).
+
+[F8] Solutions of a smooth local ordinary differential equation exist on a
+common short interval and depend smoothly on the initial data and parameters
+([[thm-smooth-dependence-of-ode-solutions-on-parameters]]).
+
+[F9] A smooth geodesic on an interval with an included finite endpoint extends
+to an open interval about that endpoint by the local geodesic initial-value
+theorem; its proof extends the endpoint position-velocity data using the
+geodesic ODE and uniqueness. The geodesic evaluation depends smoothly on
+initial data, so a smooth normal field on a neighborhood of $p$ generates a
+smooth geodesic variation on a common interval about any compact segment
+([[thm-gr-local-geodesics-and-exponential-map]], clauses (a)-(b)). The
+Jacobi initial-value theorem gives uniqueness and continuation of the screen
+Jacobi field along this extension
+([[thm-gr-jacobi-equation-and-geodesic-deviation]], clause (c)).
+
+[F10] A smooth map with invertible differential has a smooth local inverse
+([[thm-smooth-inverse-function-theorem-on-manifolds]]).
+
+[F11] A continuous real-valued function on a closed bounded interval takes
+every value between its endpoint values
+([[thm-intermediate-value]]).
+
+## Proof
+
+**Given:** [F1]–[F11] and the hypotheses in the Statement.
+
+1.1 By [F9], the geodesic extends to an open interval containing $[0,\lambda_0]$.
+Choose a smooth curve $\eta(s)\subset U$ with $\eta(0)=p$ and $\eta'(0)=X$.
+The geodesics with initial data $(\eta(s),\ell(\eta(s)))$ form a smooth
+variation on a common interval containing $[0,\lambda_0]$. Its variation
+field $Z$ satisfies $Z(0)=X$ and
+$D_\lambda Z(0)=D_X\ell$ by torsion-freeness. For each $Y\in T_pS$,
+$\bar q([D_X\ell],[Y])=g(D_X\ell,Y)=\chi_\ell(X,Y)=q(B_0X,Y)$, so its
+screen initial derivative is $B_0X$. Uniqueness in [F2] identifies its screen
+field with the focal field in the Statement, so that field extends as well.
+Choose a parallel
+orthonormal frame of the positive screen along this extended geodesic segment
+and write $\mathcal R[X]:=[R(X,\dot\gamma)\dot\gamma]$. In this frame the
+focal field satisfies $J''+\mathcal RJ=0$. In the parallel frame the pair
+$(J,J')$ solves a first-order linear system with continuous coefficient
+matrix. On the compact interval the matrix norm is bounded by some $M$.
+Choose adjacent subintervals of length $h$ with $hM<1$ (any $h>0$ if $M=0).
+For zero initial data at one endpoint, the integral equation bounds the
+solution's supremum on such a subinterval by $hM$ times the same supremum,
+so the solution vanishes there. A finite subdivision in each direction proves
+uniqueness on $[0,\lambda_0]$. Thus zero value and screen derivative at
+$\lambda_0$ would force $J$ to vanish identically, contrary to
+$J(0)=[X]\ne0$; hence $J'(\lambda_0)\ne0$. Since $J(0)=[X]$ and
+$J'(0)=B_0X$,
+$\langle J'(0),X\rangle=\chi_\ell(X,X)$. [F1, F2, F3, F9, construct, algebra]
+
+2.1 Fix any $L\in(\lambda_0,\lambda_0+\delta)$, where $\delta>0$ is small
+enough that the extension in step 1.1 is defined through $\lambda_0+\delta$.
+On $[0,L]$ let
+$Y=J$ up to $\lambda_0$ and $Y=0$ after $\lambda_0$. This continuous
+piecewise-smooth screen field has $Y(0)=X$ and $Y(L)=0$. Let $I$ be the
+screen index form supplied by [F3]. Its displayed formula extends
+continuously to piecewise-smooth $H^1$ fields: in a parallel frame the
+curvature coefficients are bounded on $[0,L]$, the integral terms are
+continuous in $H^1$, and the endpoint trace is continuous because
+$$|V(0)|\le L^{-1/2}\|V\|_{L^2}+L^{1/2}\|D_\ell V\|_{L^2},$$
+obtained by integrating $V(0)=V(t)-\int_0^tD_\ell V\,d\lambda$ over
+$0\le t\le L$. Thus $I(Y,Y)$ is defined. Integrating the Jacobi equation on
+$[0,\lambda_0]$ gives
+$$I(Y,Y)=\langle J'(\lambda_0),J(\lambda_0)\rangle- \langle J'(0),X\rangle+\chi_\ell(X,X)=0,$$
+since the screen value at $\lambda_0$ is zero and
+$\langle J'(0),X\rangle=\chi_\ell(X,X)$. [F1, F2, F3, step 1.1, algebra]
+
+3.1 Choose a smooth screen field $W$ supported in a small interval about
+$\lambda_0$ contained in $(0,L)$, zero at both endpoints, and with
+$W(\lambda_0)=-J'(\lambda_0)$. Integration by parts on each side of
+$\lambda_0$ yields
+$$I(Y,W)=\langle J'(\lambda_0),W(\lambda_0)\rangle =-|J'(\lambda_0)|^2<0.$$
+Therefore $I(Y+\delta W,Y+\delta W)<0$ for sufficiently small $\delta>0$.
+In the parallel frame, smooth the single derivative corner of $Y$ on
+$[\lambda_0-\epsilon,\lambda_0+\epsilon]$ by a cubic interpolant matching
+the values and first derivatives at the two endpoints, leaving the field
+unchanged near $0$ and $L$. Since $Y$ is continuous and piecewise smooth,
+the interpolant and its derivative stay bounded as $\epsilon\downarrow0$;
+the $H^1$ error tends to zero because its support has length $2\epsilon$.
+Adding $\delta W$ preserves smoothness, so continuity of $I$ gives a smooth
+field $V$ with $V(0)=X\in T_pS$, $V(L)=0$ and $I(V,V)<0$. [F1, F2, F3,
+step 1.1, step 2.1, algebra]
+
+4.1 By [F3], realize the orthogonal lift $V$ itself by a smooth curve
+variation $F_s$ with $F_s(0)\in S$, $F_s(L)=\gamma(L)$ and
+$\partial_sF_s|_{s=0}=V$; the construction in the proof of [F3] preserves
+this first variation when it corrects the initial endpoint. Its energy
+$E(s):=\frac12\int_0^L g(\partial_\lambda F_s,\partial_\lambda F_s)\,d\lambda$
+satisfies $E''(0)=I(V,V)<0$. The first-variation formula gives $E'(0)=0$,
+and $E(0)=0$ because $\gamma$ is null. Pointwise,
+$$\left.\partial_s g(\partial_\lambda F_s,\partial_\lambda F_s)\right|_{s=0}=2g(D_\lambda V,\dot\gamma)=0,$$
+since $V$ is orthogonal to $\dot\gamma$, $D_\lambda\dot\gamma=0$, and the
+connection is metric-compatible. Smoothness on the compact interval now gives
+a uniform Taylor expansion
+$$g(\partial_\lambda F_s,\partial_\lambda F_s)=s^2h(\lambda)+O(s^3),\qquad \int_0^L h(\lambda)\,d\lambda=I(V,V)<0,$$
+where $h(\lambda):=\frac12\left.\partial_s^2g(\partial_\lambda F_s,\partial_\lambda F_s)\right|_{s=0}$. [F1, F3, step 3.1, algebra]
+
+5.1 Choose a convex normal neighborhood $C$ of $\gamma(\lambda_0)$ and
+$0<\rho<\lambda_0$ small enough that
+$\gamma((\lambda_0-\rho,\lambda_0+\rho))\subset C$. For the fixed $L$,
+choose $w\in C_c^\infty((0,L))$ with $w\ge0$, support in
+$(\lambda_0-\rho,\lambda_0+\rho)\cap(0,L)$, $w>0$ on an interval about
+$\lambda_0$, and $\int_0^Lw=-I(V,V)$. This is possible since $I(V,V)<0$.
+Along $\gamma$, put $T=N/\sqrt{-g(N,N)}$,
+$\alpha=-g(\dot\gamma,T)>0$, and
+$$n:=\frac{1}{\alpha}T-\frac{1}{2\alpha^2}\dot\gamma.$$
+Then $n$ is smooth, future null, and $g(\dot\gamma,n)=-1$. Since this
+pairing is constant and $D_\lambda\dot\gamma=0$, metric compatibility gives
+$g(\dot\gamma,D_\lambda n)=0$. Extend $n$ smoothly to a field $n_s(\lambda)$
+along the variation $F_s$, with $n_0=n$, using local trivializations over a
+finite cover of the compact parameter interval. The explicit exponential-chart
+construction in the proof of [F3] extends $F_s$ smoothly a little past both
+endpoints (the endpoint constraints are imposed only at $0$ and $L$); together
+with [F9], this lets the speed equation below be posed on an open parameter
+neighborhood of $[0,L]$.
+For small $s$ and bounded $u$, define in the local exponential charts
+$$\Psi(s,\lambda,u):=\exp_{F_s(\lambda)}\!\bigl(s^2u n_s(\lambda)\bigr).$$
+The maps are defined on all of $[0,L]$ for sufficiently small $s$, by [F7]
+and compactness. For $v\in\mathbb R$, set
+$$Q(s,\lambda,u,v):=g_{\Psi(s,\lambda,u)}\bigl(\partial_\lambda\Psi+v\partial_u\Psi,\partial_\lambda\Psi+v\partial_u\Psi\bigr),$$
+where $\partial_\lambda\Psi$ holds $u$ fixed. If $a$ is a differentiable
+function of $\lambda$, the squared speed of $\Psi(s,\lambda,a(\lambda))$ is
+$Q(s,\lambda,a,a')$. By step 4.1, $Q(0,\lambda,u,v)=0$ and
+$\partial_sQ(0,\lambda,u,v)=0$. Thus $\widehat Q:=Q/s^2$ for $s\ne0$ extends
+smoothly to $s=0$ by Taylor's integral remainder. The term in $Q$ independent
+of $u,v$ is $s^2h+O(s^3)$ by step 4.1. The exponential differential at its
+zero vector is the identity [F7], so $\partial_u\Psi=s^2n+O(s^3)$; the
+$u$-dependent second-order cross term is
+$2s^2u\,g(\dot\gamma,D_\lambda n)=0$, while the $v$-dependent one is
+$2s^2v\,g(\dot\gamma,n)=-2s^2v$. Therefore
+$$\widehat Q(0,\lambda,u,v)=h(\lambda)-2v,\qquad \partial_v\widehat Q(0,\lambda,u,v)=-2.$$
+For a scalar parameter $\zeta>0$, apply [F10] to the smooth map
+$$\mathcal G(s,\lambda,u,\zeta,v):=(s,\lambda,u,\zeta,\widehat Q(s,\lambda,u,v)+\zeta w(\lambda)).$$
+At every $s=0$ solution point $v=(h(\lambda)+\zeta w(\lambda))/2$, its
+differential is block triangular with last diagonal entry $-2$, hence
+invertible. The local inverse supplied by [F10] therefore gives a smooth
+local root function $v=\Phi(s,\lambda,u,\zeta)$. At $s=0$,
+$$\Phi(0,\lambda,u,\zeta)=\frac{h(\lambda)+\zeta w(\lambda)}2.$$
+Fix $0<\eta<1$. For each $\zeta\in[1-\eta,1+\eta]$, the scalar initial-value
+problem
+$$a_{s,\zeta}'(\lambda)=\Phi(s,\lambda,a_{s,\zeta}(\lambda),\zeta),\qquad a_{s,\zeta}(0)=0$$
+has, for $s$ sufficiently small, a solution on $[0,L]$ depending continuously
+on $(s,\zeta)$. Indeed at $s=0$ its explicit solution is
+$$a_{0,\zeta}(\lambda)=\frac12\int_0^\lambda(h(t)+\zeta w(t))\,dt;$$
+its graphs for $\zeta\in[1-\eta,1+\eta]$ form a compact set. The local root
+functions above agree near this graph by their local uniqueness and therefore
+patch to one smooth $\Phi$ on a neighborhood of it. The local ODE existence
+and smooth-dependence theorem [F8] applies on a finite subdivision covering
+that set; compactness gives one common small $|s|$ for all
+$\zeta\in[1-\eta,1+\eta]$, with continuous dependence of $a_{s,\zeta}(L)$ on
+$(s,\zeta)$. At the endpoint,
+$$a_{0,\zeta}(L)=\frac12\left(I(V,V)+\zeta\int_0^Lw\right)=\frac{I(V,V)}2(1-\zeta).$$
+Because $I(V,V)<0$, these endpoint values have opposite signs at
+$\zeta=1-\eta$ and $\zeta=1+\eta$. Continuity in $s$ preserves those signs
+for all sufficiently small positive $s$. For each such $s$, the continuous
+function $\zeta\mapsto a_{s,\zeta}(L)$ therefore has a zero
+$\zeta_s\in(1-\eta,1+\eta)$ by [F11].
+Set $\widetilde F_s(\lambda):=\Psi(s,\lambda,a_{s,\zeta_s}(\lambda))$.
+The defining equation gives its squared speed exactly
+$$g(\partial_\lambda\widetilde F_s,\partial_\lambda\widetilde F_s)=-s^2\zeta_s w(\lambda).$$
+Also $a_{s,\zeta_s}(0)=a_{s,\zeta_s}(L)=0$, so
+$\widetilde F_s(0)=F_s(0)\in S$ and $\widetilde F_s(L)=F_s(L)=\gamma(L)$.
+The solutions and their first derivatives stay bounded on $[0,L]$ as
+$s\to0$, so $\widetilde F_s$ converges in $C^1$ to $\gamma$. On the compact
+interval, $g(\dot\gamma,N)<0$ has a uniform negative bound, so the corrected
+velocity remains future-directed and nonzero for small $s$; the displayed
+norm makes the whole curve future causal and makes it strictly timelike where
+$w>0$. On a closed subinterval where $w>0$, its image lies in $C$ for small
+$s$. The local cone result [F4] identifies the endpoints of that subcurve as
+chronologically related (and supplies the radial timelike replacement).
+Thus the endpoint-fixed path from $S$ to $\gamma(L)$ is future causal with a
+timelike subcurve. [F1, F3, F4, F7, F8, F9, F10, F11, step 3.1, step 4.1, construct,
+algebra]
+
+6.1 The push-up rule [F5] applied to the corrected path in step 5.1 gives
+$F_s(0)\ll\gamma(L)$. Since $F_s(0)\in S$, this means
+$\gamma(L)\in I^+(S)$ by [F6]. [F5, F6, step 5.1]
+
+7.1 By [F9], the geodesic and its normal variation extend through some
+$\lambda_0+\delta_0$, with $\delta_0>0$. Choose $C$ and $\rho$ as in
+step 5.1 and put $\varepsilon:=\min\{\delta_0,\rho\}$. For every
+$L\in(\lambda_0,\lambda_0+\varepsilon)$ the construction applies, with its
+bump and variation allowed to depend on $L$. Hence
+$\gamma(\lambda)\in I^+(S)$ for every
+$\lambda\in(\lambda_0,\lambda_0+\varepsilon)$. Since
+$E^+(S)=J^+(S)\setminus I^+(S)$, no such point lies in $E^+(S)$. This is a
+causal-boundary conclusion and contains no completeness or curvature-divergence
+assertion. [F6, F9, step 6.1] ∎
+
+## Remarks
+
+The screen index form has a positive boundary contribution $+\chi_\ell$ for
+the convention $\chi_\ell(X,Y)=g(\nabla_X\ell,Y)$. Reversing that sign would
+invalidate the Jacobi boundary cancellation in step 2.1. The proof is local
+and uses only a short interval after the focal instant.
+
+OLD BOUNDARIES
+[{"case": "empty", "status": "not_applicable", "reason": "The Statement supplies a basepoint p in the spacelike two-surface and a null geodesic from it, so that surface is nonempty. Admissible screen fields include the zero field; no theorem about an empty initial surface or empty geodesic interval is invoked."}, {"case": "zero", "status": "checked", "evidence": "Fact A1 excludes the zero Jacobi witness; step 1.1 shows a zero screen derivative as well would force the field to vanish."}, {"case": "one", "status": "not_applicable", "reason": "No one-object parameter or sequence is asserted."}, {"case": "degenerate", "status": "checked", "evidence": "Steps 2.1 and 3.1 use the positive screen quotient and its nonzero derivative at rank loss."}, {"case": "endpoints", "status": "checked", "evidence": "Steps 6.1 and 7.1 treat every lambda strictly greater than lambda-zero in a short interval; lambda-zero itself is excluded."}, {"case": "nonempty-choice", "status": "checked", "evidence": "Fact F5 and step 6.1 state and use the exact Countable/Dependent Choice assumptions for the push-up inference."}, {"case": "iff-forward", "status": "not_applicable", "reason": "The conclusion is an implication, not a biconditional."}, {"case": "iff-reverse", "status": "not_applicable", "reason": "The conclusion is an implication, not a biconditional."}]
+FLAGS
+{"reference": [{"id": "lem-gr-fx-null-focal-boundary-exclusion", "batch": 29, "case": "zero", "evidence": "Fact A1 excludes the zero Jacobi witness; step 1.1 shows a zero screen derivative as well would force the field to vanish.", "unresolved_step_references": ["1.1"]}, {"id": "lem-gr-fx-null-focal-boundary-exclusion", "batch": 29, "case": "degenerate", "evidence": "Steps 2.1 and 3.1 use the positive screen quotient and its nonzero derivative at rank loss.", "unresolved_step_references": ["2.1", "3.1"]}, {"id": "lem-gr-fx-null-focal-boundary-exclusion", "batch": 29, "case": "endpoints", "evidence": "Steps 6.1 and 7.1 treat every lambda strictly greater than lambda-zero in a short interval; lambda-zero itself is excluded.", "unresolved_step_references": ["6.1", "7.1"]}, {"id": "lem-gr-fx-null-focal-boundary-exclusion", "batch": 29, "case": "nonempty-choice", "evidence": "Fact F5 and step 6.1 state and use the exact Countable/Dependent Choice assumptions for the push-up inference.", "unresolved_step_references": ["6.1"]}], "audit": []}
+ITEM 8 prop-gr-fx-schwarzschild-test-energy
+---
+id: prop-gr-fx-schwarzschild-test-energy
+kind: proposition
+title: "Nonnegative exterior scalar Killing flux"
+status: draft
+origin: pipeline
+domain: mathematics
+library: physics
+dependency_level: 2
+physical_scope: "A finite-region conservation identity for a mathematical test scalar on the fixed Schwarzschild exterior and its regular advanced extension; it proves no decay or gravitational backreaction."
+provenance:
+  statement: literature-derived
+  proof: ai-generated
+proof_strategy: direct
+deps:
+  - def-countable-choice
+  - def-gr-fx-scalar-wave-stress
+  - def-gr-killing-field
+  - def-gr-metric-volume-form-and-current-flux
+  - def-gr-observer-and-rest-space
+  - def-gr-schwarzschild-exterior-model
+  - lem-gr-fx-scalar-dominant-energy
+  - lem-gr-schwarzschild-extension-chart
+  - lem-gr-schwarzschild-metric-properties
+  - prop-gr-fx-wave-multiplier-identity
+  - thm-gr-density-divergence-and-finite-chain-flux
+dependency_roles:
+  def-countable-choice: mathematical-premise
+  def-gr-fx-scalar-wave-stress: mathematical-premise
+  def-gr-killing-field: mathematical-premise
+  def-gr-metric-volume-form-and-current-flux: mathematical-premise
+  def-gr-observer-and-rest-space: mathematical-premise
+  def-gr-schwarzschild-exterior-model: mathematical-premise
+  lem-gr-fx-scalar-dominant-energy: mathematical-premise
+  lem-gr-schwarzschild-extension-chart: mathematical-premise
+  lem-gr-schwarzschild-metric-properties: mathematical-premise
+  prop-gr-fx-wave-multiplier-identity: mathematical-premise
+  thm-gr-density-divergence-and-finite-chain-flux: mathematical-premise
+sources:
+  references:
+    - title: "M. Dafermos and I. Rodnianski, Lectures on black holes and linear waves, arXiv:0811.0354v1 (2008), §3.2.2 and §3.2.4, PDF pp. 29–32"
+      url: "https://arxiv.org/pdf/0811.0354"
+    - title: "H. S. Reall, Black Holes (Part III lecture notes, 15 March 2024), §§7.3–7.4 and 9.1, PDF pp. 94–96 and 113–114"
+      url: "https://www.damtp.cam.ac.uk/user/hsr1000/black_holes_lectures_2024.pdf"
+verification:
+  precheck: pass
+---
+
+## Statement
+
+Assume $\mathrm{AC}_\omega$. Let $s>0$ and let $g_{\mathrm{ext}}$ be the
+regular advanced-chart extension of the Schwarzschild exterior, with
+$f(r)=1-s/r$ and stationary field $T=\partial_v$. Give its domain
+$M_{\mathrm{ext}}=\mathbb R_v\times(0,\infty)_r\times S^2$ the product
+orientation determined by $dv\wedge dr\wedge\omega_{S^2}$, where
+$\omega_{S^2}$ is the positive area form of the unit round sphere in its
+outward orientation; write $d\Omega$ for its associated positive area measure.
+In this orientation,
+$\mathrm{vol}_{g_{\mathrm{ext}}}=r^2\,dv\wedge dr\wedge\omega_{S^2}$. Let $C$ be a compact finite
+smooth singular four-chain in the exterior closure $r\geq s$, with oriented
+boundary
+$\partial C=\Sigma_2-\Sigma_1+\mathcal H^++B_{\mathrm{out}}$, where
+$\Sigma_1,\Sigma_2$ are spacelike faces with future unit normals $n_1,n_2$,
+$\mathcal H^+$ is a future-horizon face, and $B_{\mathrm{out}}$ is the
+remaining signed outer boundary. Let $\psi$ be smooth on a neighborhood of
+$C$ and solve $\Box_{g_{\mathrm{ext}}}\psi=0$. Define
+$j_T^a:=-Q^{a}{}_{b}[\psi]T^b$. Orient each spacelike face $\Sigma_j$ so
+that its adapted unit normal is the future unit normal $n_j$, and define
+
+$$E_j:=\Phi_{j_T}(\Sigma_j)=\int_{\Sigma_j}Q_{ab}[\psi]n_j^aT^b\,d\mu_{\Sigma_j}.$$
+
+Define $F_{\mathrm{out}}$ as the signed flux of
+$j_T$ through $B_{\mathrm{out}}$ and
+$F_H:=\int_{\mathcal H^+}(T\psi)^2\,d\mu_H$, where
+$d\mu_H=s^2\,dv\,d\Omega$ is the positive horizon measure in the advanced
+chart. Then $E_1,E_2,F_H\geq0$ and
+
+$$E_2+F_H+F_{\mathrm{out}}=E_1.$$
+
+The signed outer flux need not be nonnegative. On the exterior static slices
+$x^0=\text{constant}$, $n=f^{-1/2}T$ and
+$Q(n,T)=\sqrt f\,Q(n,n)$; this stationary slice energy degenerates as
+$r\downarrow s$, where $T$ becomes null in the regular extension.
+
+## Statement references
+
+[[def-gr-fx-scalar-wave-stress]]
+
+[[def-gr-schwarzschild-exterior-model]]
+
+[[lem-gr-schwarzschild-extension-chart]]
+
+[[prop-gr-fx-wave-multiplier-identity]]
+
+[[lem-gr-fx-scalar-dominant-energy]]
+
+[[def-gr-metric-volume-form-and-current-flux]]
+
+
+[[thm-gr-density-divergence-and-finite-chain-flux]]
+
+## Facts & Assumptions
+
+**Given:** The chain, boundary decomposition, smooth wave, and Schwarzschild
+extension in the Statement.
+
+[F1] [[def-gr-fx-scalar-wave-stress]]: $J_a^T=Q_{ab}T^b$ and the energy-current vector is $j_T^a=-g^{ab}J_b^T$.
+
+[F2] [[prop-gr-fx-wave-multiplier-identity]]: on a solution of $\Box_g\psi=0$, a Killing multiplier $T$ gives $\nabla^aJ_a^T=0$.
+
+[F3] [[def-gr-killing-field]]: $T$ is Killing when $\mathcal L_Tg=0$.
+
+[F4] [[def-gr-schwarzschild-exterior-model]] and [[lem-gr-schwarzschild-metric-properties]]: in the exterior $T=\partial_0$ is future timelike, $g(T,T)=-f$, and the metric coefficients are independent of $x^0$.
+
+[F5] [[lem-gr-schwarzschild-extension-chart]]: the advanced extension has $g_{\mathrm{ext}}=-f\,dv^2+2\,dv\,dr+r^2d\Omega^2$, the exterior is isometric to $r>s$, and $r=s$ is a future null hypersurface generated by $T=\partial_v$.
+
+[F6] [[lem-gr-fx-scalar-dominant-energy]]: for a future unit timelike $n$ and future causal $X$, $Q(n,X)\geq0$.
+
+[F7] [[def-gr-metric-volume-form-and-current-flux]] and [[thm-gr-density-divergence-and-finite-chain-flux]]: for a smooth vector field $j$, $d(\iota_j\mathrm{vol}_g)=(\nabla_a j^a)\mathrm{vol}_g$ and $\Phi_j(\partial C)=\int_C(\nabla_a j^a)\mathrm{vol}_g$.
+
+[F8] [[thm-gr-density-divergence-and-finite-chain-flux]] clause (c): its face formula gives flux density $\varepsilon g(j,\nu^*)\sqrt{|\det(g(v_i,v_j))|}$ for the adapted unit normal $\nu^*$; on a spacelike face oriented with future unit normal $n$, this is $-g(j,n)\,d\mu_\Sigma$ for the induced positive volume measure.
+
+[A1] $\mathrm{AC}_\omega$ is the only choice principle used in the smooth Schwarzschild extension and tangent-bundle conventions ([[def-countable-choice]]).
+
+## Proof
+
+1.1 In the advanced coordinates all coefficients of $g_{\mathrm{ext}}$ are independent of $v$, so the coordinate formula for $\mathcal L_{\partial_v}g_{\mathrm{ext}}$ gives $\mathcal L_Tg_{\mathrm{ext}}=0$ and $T$ is Killing by [F3]. The multiplier identity [F2] therefore gives $\nabla^aJ_a^T=0$ on $C$. Since $j_T^a=-g^{ab}J_b^T$, its divergence also vanishes. [given, A1, F2, F3, F5, algebra]
+
+1.2 The Statement orients each spacelike face so its adapted unit normal is the future unit normal $n_j$. By [F8] its current flux density is $-g(j_T,n_j)\,d\mu_{\Sigma_j}$. The definition $j_T^a=-g^{ab}Q_{bc}T^c$ gives $g(j_T,n_j)=-Q_{ab}n_j^aT^b$, so integration yields $\Phi_{j_T}(\Sigma_j)=\int_{\Sigma_j}Q_{ab}n_j^aT^b\,d\mu_{\Sigma_j}=E_j$. [F1, F8, algebra]
+
+1.3 The isometric exterior has $T$ future timelike for $r>s$, and [F5] makes $T$ future null on $\mathcal H^+$. Thus $T$ is future causal throughout the stated closure. Applying [F6] to each spacelike face gives $E_1,E_2\geq0$. [given, F4, F5, F6]
+
+2.1 On $\mathcal H^+$, the inverse of the $(v,r)$ metric block has $g^{rv}=1$ and $g^{rr}=f=0$. Hence $j_T^r=-g^{rb}Q_{bv}=-Q_{vv}=-(T\psi)^2$, since $g_{vv}=0$ there. With
+$\mathrm{vol}_{g_{\mathrm{ext}}}=r^2\,dv\wedge dr\wedge\omega_{S^2}$ and the outward boundary orientation at the inner face $r=s$, the pullback of $\iota_{j_T}\mathrm{vol}_{g_{\mathrm{ext}}}$ is $(T\psi)^2s^2\,dv\wedge\omega_{S^2}$. Therefore this face flux is exactly $F_H\geq0$. [F1, F5, F7, step 1.3, algebra]
+
+3.1 By [F7] and step 1.1, $\Phi_{j_T}(\partial C)=0$. The stated boundary decomposition and additivity of flux give $\Phi_{j_T}(\Sigma_2)-\Phi_{j_T}(\Sigma_1)+F_H+F_{\mathrm{out}}=0$. Using step 1.2 to identify the two face fluxes with $E_2$ and $E_1$ gives the asserted balance. [given, F7, step 1.1, step 1.2, step 2.1, algebra]
+
+4.1 On the static exterior slices $g(T,T)=-f$ and $n=f^{-1/2}T$, so $T=\sqrt f\,n$ and bilinearity gives $Q(n,T)=\sqrt f\,Q(n,n)$. By [F6] with $X=n$, $Q(n,n)\geq0$, while the coefficient $\sqrt f$ tends to zero as $r\downarrow s$. In the regular extension $g(T,T)=-f$ vanishes at $r=s$ by [F5], so $T$ becomes null there and the static Killing slice density loses its transverse coercivity. [F4, F5, F6, step 1.3, algebra] ∎
+
+## Remarks
+
+The calculation proves conservation with the stated side flux and the
+degeneracy of the stationary Schwarzschild energy at the horizon. A redshift
+estimate remains deferred: its proof route requires a multiplier vector field
+that is timelike across the horizon and has positive deformation tensor near
+the nonextremal horizon. A Morawetz estimate also remains deferred: its proof
+route requires a radial multiplier whose bulk term degenerates at the photon
+sphere $r=3s/2$ (here $s=2M$), together with a controlled far-region
+$r$-weighted estimate. This finite-region stationary balance proves none of
+those estimates. The item does not supply a Kerr scalar-decay theorem or any
+gravitational perturbation stability result.
+
+OLD BOUNDARIES
+[{"case": "empty", "status": "checked", "evidence": "Statement permits a finite smooth singular chain, and the chain flux identity in proof 3.1 is additive. The zero chain gives zero signed boundary flux and 0=0; one simplex is included by the same finite-chain supplier."}, {"case": "zero", "status": "checked", "evidence": "Steps 2.1 and 3.1 give zero horizon and slice flux when the test scalar vanishes identically."}, {"case": "one", "status": "not_applicable", "reason": "A supplied smooth wave and finite chain obey a signed energy balance and horizon degeneracy; no converse wave equation or no-flux boundary condition is asserted. The input is already one specified scalar field/current or mode; no number of fields or singleton index set is a theorem parameter."}, {"case": "degenerate", "status": "checked", "evidence": "step 4.1 exhibits the exact sqrt(f) coefficient tending to zero at r=s."}, {"case": "endpoints", "status": "checked", "evidence": "The chain boundary is the exact signed sum Sigma_2-Sigma_1+H+B_out in the Statement; step 3.1 preserves the outer signed flux."}, {"case": "nonempty-choice", "status": "checked", "evidence": "A1 and step 1.1 record the sole AC_omega convention used by the extension; no further selection is made."}, {"case": "iff-forward", "status": "not_applicable", "reason": "A supplied smooth wave and finite chain obey a signed energy balance and horizon degeneracy; no converse wave equation or no-flux boundary condition is asserted. This public claim is not a biconditional requiring a separate forward implication."}, {"case": "iff-reverse", "status": "not_applicable", "reason": "A supplied smooth wave and finite chain obey a signed energy balance and horizon degeneracy; no converse wave equation or no-flux boundary condition is asserted. This public claim is not a biconditional requiring a separate reverse implication."}]
+FLAGS
+{"reference": [{"id": "prop-gr-fx-schwarzschild-test-energy", "batch": 36, "case": "zero", "evidence": "Steps 2.1 and 3.1 give zero horizon and slice flux when the test scalar vanishes identically.", "unresolved_step_references": ["2.1"]}], "audit": []}
+ITEM 9 prop-gr-fx-kasner-vacuum
+---
+id: prop-gr-fx-kasner-vacuum
+kind: proposition
+title: "Kasner vacuum constraints"
+status: draft
+origin: pipeline
+domain: mathematics
+dependency_level: 3
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+proof_strategy: direct
+deps:
+  - def-gr-fx-bianchi-i-data
+  - def-gr-fx-bianchi-i-curvature
+  - lem-gr-fx-bianchi-i-curvature-components
+dependency_roles:
+  def-gr-fx-bianchi-i-data: mathematical-premise
+  def-gr-fx-bianchi-i-curvature: mathematical-premise
+  lem-gr-fx-bianchi-i-curvature-components: mathematical-premise
+sources:
+  references:
+    - title: "Rishabh Jha, Introduction to Hamiltonian Formulation of General Relativity and Homogeneous Cosmologies, SciPost Physics Lecture Notes 73 (2023), arXiv:2204.03537v2, Section 4.3.1, equations (159)–(172), printed pp. 36–38 (PDF pp. 37–39)"
+      url: "https://arxiv.org/pdf/2204.03537"
+verification:
+  precheck: pending
+---
+
+## Statement
+
+Let $a_i(t)=A_i(t/t_0)^{p_i}$ on a nonempty open interval $I\subseteq(0,\infty)$, where $A_i>0$ are lengths in metres, $t_0>0$ is a time in seconds, and $p_i\in\mathbb R$ are dimensionless exponents. These $p_i$ are called Kasner exponents for this power-law branch; define their sums $P:=\sum_{i=1}^3p_i$ and $Q:=\sum_{i=1}^3p_i^2$. For a nonstatic datum, meaning that not all $p_i$ vanish, the geometric vacuum equation $\operatorname{Ric}=0$ in the $C^2$ curvature definition of this page holds exactly when $P=Q=1$. If all $p_i=0$, then the full curvature tensor vanishes, so the metric is flat in the curvature sense. These are exact statements about the specified finite-dimensional metrics; no singularity or generic cosmological conclusion follows.
+
+## Statement references
+
+[[def-gr-fx-bianchi-i-data]]
+
+[[def-gr-fx-bianchi-i-curvature]]
+
+[[lem-gr-fx-bianchi-i-curvature-components]]
+
+## Facts & Assumptions
+
+**Given:** A diagonal Bianchi I datum, the power-law scale factors in the Statement, and the mathematical vacuum condition $\operatorname{Ric}=0$ where invoked. The inherited foundational context assumes $\mathrm{AC}_\omega$ only.
+
+[A1] The Bianchi I product and quotient construction carries $\mathrm{AC}_\omega$ and no stronger choice principle ([[def-gr-fx-bianchi-i-data]]).
+
+[F1] The scale factors are positive $C^2$ lengths on $I\subseteq(0,\infty)$, and the definitions of $H_i$, $H$ and $V$ are those of the diagonal Bianchi I datum ([[def-gr-fx-bianchi-i-data]]).
+
+[F2] The local Ricci components are $\operatorname{Ric}_{00}=-\sum_i(\dot H_i+H_i^2)$ and $\operatorname{Ric}_{ii}=a_i^2(\dot H_i+H_iH_\Sigma)/c^2$, with zero off-diagonal components; the only potentially nonzero curvature components are the two displayed families ([[lem-gr-fx-bianchi-i-curvature-components]]).
+
+## Proof
+
+**Proof technique:** direct substitution into the local curvature components.
+
+1.1 Work in the inherited $\mathrm{AC}_\omega$ context [A1]; the calculation itself uses only finite sums and differentiation. Put $P=\sum_i p_i$ and $Q=\sum_i p_i^2$. The power laws give $H_i=p_i/t$, $\dot H_i=-p_i/t^2$, and $H_\Sigma=P/t$, so [F2] yields $\operatorname{Ric}_{00}=(P-Q)/t^2$ and $\operatorname{Ric}_{ii}=a_i^2p_i(P-1)/(c^2t^2)$. [given, A1, F1, F2, algebra]
+
+2.1 Suppose not all $p_i$ vanish and $\operatorname{Ric}=0$. Choose an index $k$ with $p_k\ne0$. Since $a_k,c,t$ are positive, the equation $\operatorname{Ric}_{kk}=0$ from step 1.1 implies $P=1$. The equation $\operatorname{Ric}_{00}=0$ then implies $Q=P=1$. [step 1.1, algebra]
+
+2.2 Conversely, if $P=Q=1$, step 1.1 makes every diagonal Ricci component zero, and [F2] makes every off-diagonal component zero; hence $\operatorname{Ric}=0$. [step 1.1, F2, algebra]
+
+3.1 If $p_1=p_2=p_3=0$, then every $H_i$ and $\dot H_i$ is zero. Both curvature-component families in [F2] therefore vanish, and every other component is zero by that lemma, so the full curvature tensor vanishes. [given, F1, F2, algebra] ∎
+
+OLD BOUNDARIES
+[{"case": "empty", "status": "not_applicable", "reason": "The Bianchi I datum fixes precisely three spatial indices i=1,2,3 on a nonempty time interval and four spacetime indices 0,1,2,3. The displayed sums have those fixed nonempty index sets; an empty-dimensional metric is outside this datum."}, {"case": "zero", "status": "checked", "evidence": "Step 3.1 handles the all-zero exponent triple separately and proves full curvature vanishes."}, {"case": "one", "status": "not_applicable", "reason": "The Kasner exponents belong to exactly three spatial directions."}, {"case": "degenerate", "status": "not_applicable", "reason": "A_i>0 and t,t_0>0 keep every scale factor positive; degenerate metrics are outside the statement."}, {"case": "endpoints", "status": "checked", "evidence": "Step 1.1 is pointwise for every t>0; t=0 is outside I."}, {"case": "nonempty-choice", "status": "not_applicable", "reason": "Only finite sums and scalar algebra are used; AC_omega is inherited from the datum and no choice is used in the proof."}, {"case": "iff-forward", "status": "checked", "evidence": "Step 2.2 proves P=Q=1 implies Ricci flatness for the nonstatic branch."}, {"case": "iff-reverse", "status": "checked", "evidence": "Step 2.1 proves Ricci flatness implies P=Q=1 when at least one exponent is nonzero."}]
+FLAGS
+{"reference": [], "audit": []}

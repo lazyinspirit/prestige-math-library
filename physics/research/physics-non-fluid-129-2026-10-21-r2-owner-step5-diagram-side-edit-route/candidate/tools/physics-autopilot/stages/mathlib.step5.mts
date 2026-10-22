@@ -1,0 +1,201 @@
+// Explicit Step 5 repair rounds. Every mathematical writer drains before the
+// one controller certification; only the engine routes or launches judgments.
+// Explicit remaining gate referrals must survive collection without interface changes.
+import { existsSync, readFileSync, statSync } from 'node:fs';
+import { join, relative } from 'node:path';
+import { MODEL_PROFILE_NAMES } from '../../physics-support/models.mjs';
+import { authorizeOwnerGate } from '../src/owner-gate-recertification.mjs';
+import { runGates } from '../src/gates.mts';
+const HISTORICAL_URL=new URL('../../physics-support/step5-historical-manifest.mjs',import.meta.url),HISTORICAL_STAT=statSync(HISTORICAL_URL);
+const {validateCurrentHistoricalManifestGate,historicalManifestPredecessor,recordHistoricalManifestPreparation}=await import(
+  HISTORICAL_URL.href+'?v='+HISTORICAL_STAT.mtimeMs+':'+HISTORICAL_STAT.size);
+// The live controller must load a repaired frontier adapter along with this
+// versioned stage module, rather than retain its original static ESM import.
+const FRONTIER_GATE_URL = new URL('../../physics-support/step5-frontier-gate.mjs', import.meta.url);
+const FRONTIER_GATE_STAT = statSync(FRONTIER_GATE_URL);
+const { frontierGateBattery } = await import(
+  `${FRONTIER_GATE_URL.href}?v=${FRONTIER_GATE_STAT.mtimeMs}:${FRONTIER_GATE_STAT.size}`
+);
+
+// The live controller has already cached the workflow's original ESM exports.
+// Version this composed dependency as the root stage loader does for Step 5.
+// Collection runs the workflow CLI in a fresh subprocess and sees the same code.
+const WORKFLOW_URL=new URL('../../physics-support/step5-workflow.mjs',import.meta.url),WORKFLOW_STAT=statSync(WORKFLOW_URL);
+const { prepareAdjudication, prepareImpact, advanceImpact, adjudicationCorrectionWork, advanceAdjudicationCorrection, impactWork, maintenanceLabel, maintenancePack, workerLabel, workerReport, workflowDir, digest, emptyAdjudicationAssignment, emptyAdjudicationLabel, hasAdjudicatorArtifacts } = await import(
+  `${WORKFLOW_URL.href}?v=${WORKFLOW_STAT.mtimeMs}:${WORKFLOW_STAT.size}`
+);
+
+export function step5Stages({ gate, repoWide, contractGates, ledgerGate, closureGate, auditorCreatedGate, step5GuardGate }: any): any[] {
+  const SOL61_HIGH = MODEL_PROFILE_NAMES.sol61High ?? 'gpt-6.1-sol-high';
+  const round=(ctx:any,id:string)=>ctx.stageRounds?.[id]??1;
+  const tool=(ctx:any,command:string,phase:string,n:number)=>['node','tools/physics-support/step5-workflow.mjs',command,'--run',ctx.run,'--phase',phase,'--round',String(n)];
+  const pattern=(phase:string,id:string)=>(ctx:any)=>new RegExp(`^(?:alpha-adjudicate|alpha-repair|tool)-step5-v2-${phase}(?:-pass-[0-9]+)?-r${round(ctx,id)}-(?:u[^.]+|all)\\.result\\.json$`);
+  const report=(ctx:any,phase:string,n:number,unit:string)=>workerReport(ctx.repo,ctx.run,phase,n,unit);
+  const decode=(phase:string,u:string)=>u.includes(':')?u.split(':'):[phase,u];
+  const ownerUnits=(ctx:any,phase:string,id:string)=>impactWork(ctx.repo,ctx.run,phase,round(ctx,id))
+    .flatMap((work:any)=>['1','2','3'].map(u=>work.kind==='maintenance'?`maintenance:${work.id}:${u}`:work.phase===phase?u:`${work.phase}:${u}`));
+  const outsideLane=(ctx:any,u:string)=>{const [,pack,lane]=u.split(':');return maintenancePack(ctx.repo,ctx.run,pack).lanes.find((row:any)=>String(row.lane)===lane);};
+  const adjudicationBaseUnits=(ctx:any)=>existsSync(join(workflowDir(ctx.repo,ctx.run),'frontier.json'))
+    ? JSON.parse(readFileSync(join(workflowDir(ctx.repo,ctx.run),'frontier.json'),'utf8')).batches.map((b:any)=>String(b.id)) : ['1'];
+  const adjudicationUnits=(ctx:any,phase:string,id:string)=>[...adjudicationBaseUnits(ctx),
+    ...adjudicationCorrectionWork(ctx.repo,ctx.run,phase,round(ctx,id))];
+  const workerStage=(id:string,phase:string,adjudication:boolean):any=>({
+    id,label:`${id.split('-')[0]} ${adjudication?'batch adjudication and repair':'three owner agents repair downstream consumers'}`,
+    modelProfile:SOL61_HIGH,
+    units:(ctx:any)=>adjudication ? adjudicationUnits(ctx,phase,id) : ownerUnits(ctx,phase,id),
+    pattern:(ctx:any)=>adjudication?new RegExp('(?:'+pattern(phase,id)(ctx).source+')|^tool-step5-v2-empty-'+phase+'-r'+round(ctx,id)+'-u[^.]+\\.result\\.json$|^alpha-repair-step5-v2-(?:(?:scientific|owner-finding)-)?correction-'+phase+'-r'+round(ctx,id)+'-u[123]\\.result\\.json$'+(phase==='initial'?'|^alpha-repair-step5-v2-(?:(?:page|review)-correction|explanatory-review)-initial-r'+round(ctx,id)+'-u1\\.result\\.json$':'')):new RegExp('(?:'+pattern(phase,id)(ctx).source+')|^alpha-repair-'+maintenanceLabel(phase,round(ctx,id),'pack-[0-9]+','[123]')+'\\.result\\.json$'),concurrency:adjudication?24:3,
+    // Sibling owners run concurrently. Shared metadata edits use a short
+    // critical section; a new pass waits for the entire preceding pass.
+    ...(!adjudication?{
+      unitPrerequisites:(ctx:any,u:string)=>{const units=ownerUnits(ctx,phase,id),i=units.indexOf(u),start=Math.floor(i/3)*3;return start>0?units.slice(start-3,start):[];},
+      onProgress:({ctx,executor,stage}:any)=>{
+        // Deferred collection and bound pre-gate repair requests queue fresh native reviews.
+        if([...executor.inflight.values()].some((d:any)=>d.meta.stage===id)||executor.hasAdoptedWork(stage))return;
+        const complete=executor.unitsComplete(stage,ctx);
+        if(ownerUnits(ctx,phase,id).every((u:string)=>complete.has(u)))advanceImpact(ctx.repo,ctx.run,phase,round(ctx,id));
+      },
+    }:{
+      onProgress:({ctx,executor,stage}:any)=>{
+        if([...executor.inflight.values()].some((d:any)=>d.meta.stage===id)||executor.hasAdoptedWork(stage))return;
+        const complete=executor.unitsComplete(stage,ctx);
+        if(adjudicationBaseUnits(ctx).every((u:string)=>complete.has(u))){
+          const progress=advanceAdjudicationCorrection(ctx.repo,ctx.run,phase,round(ctx,id));
+          if(progress?.explanatory_review_completed&&executor.state){
+            const handoff=executor.state.stage(id);
+            if(!handoff.explanatoryReviewPausedAt){
+              handoff.explanatoryReviewPausedAt=new Date().toISOString();executor.state.paused=true;
+              executor.reporter.notify('paused','User explanatory edits received genuine native review; Root may add later owner findings before the initial parent collects.',{stage:id});
+            }
+          }
+          if(progress?.parent_collected&&executor.state){
+            const handoff=executor.state.stage(id);
+            if(!handoff.ownerFindingCollectionPausedAt){
+              handoff.ownerFindingCollectionPausedAt=new Date().toISOString();
+              executor.state.paused=true;
+              executor.reporter.notify('paused','Native owner findings collected; Root closes canonical findings before the next gate snapshot.',{stage:id});
+            }
+          }
+        }
+      },
+    }),
+    artifacts:(ctx:any,u:string)=>{if(u.startsWith('maintenance:'))return outsideLane(ctx,u).report;const [pass,unit]=decode(phase,u);return relative(ctx.repo,report(ctx,pass,round(ctx,id),unit));},
+    plan:(ctx:any,pending:string[])=>{
+      const n=round(ctx,id);
+      let adjudicationPack:any;
+      if(adjudication&&!ctx.doctor)adjudicationPack=prepareAdjudication(ctx.repo,ctx.run,phase,n);
+      else {
+        const failures=phase==='gate'?(ctx.stageFailures?.['5.10-gate']??ctx.stageFailures?.['5.8-gate']):null;
+        if(phase==='gate'&&!failures&&!ctx.doctor)throw Error('5.9 requires actual failed gate diagnostics');
+        if(!ctx.doctor)prepareImpact(ctx.repo,ctx.run,phase,n,{failures});
+      }
+      return pending.map(u=>{
+        if(u.startsWith('maintenance:')){
+          const [,pack,lane]=u.split(':'),input=outsideLane(ctx,u);
+          return {role:'alpha-repair',label:maintenanceLabel(phase,n,pack,lane),job:'authoring',covers:[u],profile:SOL61_HIGH,
+            brief:'briefs/consumer-maintenance.md',task:input.task,timeout:21600};
+        }
+        const [pass,unit]=decode(phase,u);
+        if(pass==='correction-'+phase||pass==='scientific-correction-'+phase||pass==='owner-finding-correction-'+phase
+          ||phase==='initial'&&['page-correction-initial','review-correction-initial','explanatory-review-initial'].includes(pass)){
+          return {role:'alpha-repair',label:workerLabel(pass,n,unit),job:'authoring',covers:[u],profile:SOL61_HIGH,
+            brief:'briefs/step5-owner-repair.md',task:relative(ctx.repo,report(ctx,pass,n,unit).replace(/\.json$/,'.task.md')),timeout:21600};
+        }
+        if(adjudicationPack&&emptyAdjudicationAssignment(adjudicationPack,unit)
+          &&(!existsSync(report(ctx,pass,n,unit))||JSON.parse(readFileSync(report(ctx,pass,n,unit),'utf8')).completion==='mechanical-zero-work')
+          &&!hasAdjudicatorArtifacts(ctx.repo,ctx.run,pass,n,unit)){
+          return {role:'tool',label:emptyAdjudicationLabel(pass,n,unit),covers:[u],job:'bookkeeping-mechanical',
+            argv:[...tool(ctx,'close-empty-adjudication',pass,n),'--unit',unit,'--input-sha256',digest(adjudicationPack)],timeout:60};
+        }
+        return {role:adjudication?'alpha-adjudicate':'alpha-repair',label:workerLabel(pass,n,unit),
+        job:adjudication?'adjudication':'authoring',covers:[u],profile:SOL61_HIGH,
+        brief:`briefs/step5-${adjudication?'adjudicator':'owner-repair'}.md`,
+        task:relative(ctx.repo,report(ctx,pass,n,unit).replace(/\.json$/,'.task.md')),timeout:21600};});
+    },
+    gates:(ctx:any)=>[gate('step5-wave-evidence',tool(ctx,'collect',phase,round(ctx,id)))],
+  });
+  const certifyStage=(id:string,phase:string):any=>({
+    id,label:`${id.split('-')[0]} orchestrator certifies complete stable repair wave`,units:()=>['all'],
+    onProgress:async({ctx,executor,stage}:any)=>{
+      if(ctx.doctor||!existsSync(join(workflowDir(ctx.repo,ctx.run),'owner-historical-manifest-request.json')))return;
+      if(executor.inflight.size||executor.hasAdoptedWork(stage)||executor.liveDispatchLabels?.().length)return;
+      const n=round(ctx,id);
+      try{validateCurrentHistoricalManifestGate(ctx.repo,ctx.run,phase,n);return;}catch{}
+      const predecessor=phase==='impact-initial'?'5.2-impact':'5.6-impact';
+      const prior=executor.stages.find((candidate:any)=>candidate.id===predecessor),gates=prior?.gates?.(ctx);
+      if(!ctx.config.ownerGateRecertification||!Array.isArray(gates)||!gates.length
+        ||!['physics-content','frontier-dependency-ledger','step5-wave-evidence'].every(key=>gates.some((g:any)=>g.id===key)))
+        throw Error('historical manifest certification requires the complete composed predecessor battery and native owner recertification');
+      const authorization=authorizeOwnerGate({ctx,gates,stages:[id],writers:[]});
+      if(!authorization.ok){
+        executor.state.paused=true;
+        executor.reporter.notify('paused','Fresh pre-certification formatting/metadata checks required before the complete predecessor battery: '+authorization.why,{stage:id});
+        return;
+      }
+      const predecessorHistory=historicalManifestPredecessor(ctx.repo,ctx.run,phase);
+      const result=await runGates(authorization.gates,{cwd:ctx.repo,signal:executor.signal,logger:()=>{}});
+      for(const row of result.results)executor.reporter.event('gate',row);
+      if(!result.ok)throw Error('fresh native pre-certification predecessor battery failed: '+JSON.stringify(result.results.at(-1)));
+      recordHistoricalManifestPreparation(ctx.repo,ctx.run,phase,n,{attempt:authorization.attempt,results:result.results,predecessor:predecessorHistory});
+      validateCurrentHistoricalManifestGate(ctx.repo,ctx.run,phase,n);
+      executor.reporter.notify('pre-certification-checked','Fresh complete predecessor battery passed under current source and code.',{stage:id});
+    },
+    pattern:pattern(`certify-${phase}`,id),concurrency:1,
+    artifacts:(ctx:any)=>relative(ctx.repo,join(workflowDir(ctx.repo,ctx.run),`certification-${phase}-${round(ctx,id)}.json`)),
+    plan:(ctx:any)=>[{role:'tool',label:`step5-v2-certify-${phase}-r${round(ctx,id)}-all`,covers:['all'],job:'bookkeeping-mechanical',
+      argv:tool(ctx,'certify',phase,round(ctx,id))}],
+    gates:(ctx:any)=>[gate('step5-wave-certification',tool(ctx,'verify-wave',phase,round(ctx,id)))],
+  });
+  const recert=certifyStage('5.7-certify','impact-repeat');
+  recert.routeTargets=['5.4-rejudge'];
+  recert.route=({ctx,outcome}:any)=>{
+    if(outcome!=='passed')return null;
+    const p=join(workflowDir(ctx.repo,ctx.run),`threshold-${round(ctx,'5.7-certify')}.json`);
+    const threshold=JSON.parse(readFileSync(p,'utf8'));
+    if(threshold.errors?.length||typeof threshold.belowThreshold!=='boolean'
+      ||!Number.isSafeInteger(threshold.fatalCount)||threshold.fatalCount<0
+      ||!Number.isSafeInteger(threshold.originalCount)||threshold.originalCount<1)throw Error('invalid fatal threshold evidence');
+    return threshold.belowThreshold&&threshold.fatalCount===0?null:{next:'5.4-rejudge'};
+  };
+  const battery=(ctx:any)=>{
+    const gates=[
+    gate('step5-round-certification',tool(ctx,'check','final',1)),
+    ...(step5GuardGate?[step5GuardGate(ctx)]:[]),
+    ...repoWide(ctx),...contractGates(ctx,{reviewed:true}),
+    gate('proof-contract-coverage', ['node', 'tools/physics-support/proof-contract-coverage.mjs',
+      '--run', ctx.run, '--contracts', `research/${ctx.run}-proof-contracts.json`]),
+    // Published maintenance and auditor additions are outside the immutable
+    // original frontier; their maintenance evidence remains separately owned and validated.
+    closureGate(ctx),ledgerGate(ctx),
+    ];
+    // Doctor inspects future command descriptors before 7-scope creates the
+    // frontier. Actual execution always scopes the complete battery.
+    return ctx.doctor ? gates : frontierGateBattery(ctx,gates);
+  };
+  const gateStage=(id:string):any=>({id,label:`${id.split('-')[0]} complete Step 5 gate battery`,units:()=>['all'],
+    concurrency:1,
+    plan:(ctx:any)=>[{role:'tool',label:`step5-v2-gate-check-r${round(ctx,id)}-${id}-all`,covers:['all'],job:'bookkeeping-mechanical',argv:['node','-e','console.log("Step 5 gate battery ready")']}],
+    // Include stage ID to distinguish 7.8's first gate from 7.10's first retry.
+    pattern:(ctx:any)=>new RegExp(`^tool-step5-v2-gate-check-r${round(ctx,id)}-${id.replace('.','\\.')}-all\\.result\\.json$`),
+    gates:battery,routeTargets:id==='5.8-gate'?['5.9-repair','5-freeze']:['5.9-repair'],
+    route:({outcome}:any)=>outcome==='failed'?{next:'5.9-repair'}:id==='5.8-gate'?{next:'5-freeze'}:null,
+  });
+  const repair=workerStage('5.9-repair','gate',false);
+  // This stage's join performs precisely one recertification after all three
+  // repair workers complete; 7.10 then reruns the entire battery.
+  repair.gates=(ctx:any)=>[gate('step5-gate-recertify',tool(ctx,'certify','gate',round(ctx,'5.9-repair')))];
+  return [
+    {id:'5-scope',label:'freeze original Step 5 frontier',units:()=>['all'],
+      pattern:/^tool-step5-v2-init\.result\.json$/,concurrency:1,
+      artifacts:(ctx:any)=>relative(ctx.repo,join(workflowDir(ctx.repo,ctx.run),'frontier.json')),
+      plan:(ctx:any)=>[{role:'tool',label:'step5-v2-init',covers:['all'],job:'bookkeeping-mechanical',argv:tool(ctx,'init','initial',1)}],
+      gatesWaived:'Initialization freezes the original frontier and Step 4 evidence; every later round validates these immutable inputs.'},
+    workerStage('5.1-adjudicate','initial',true),workerStage('5.2-impact','impact-initial',false),certifyStage('5.3-certify','impact-initial'),
+    {id:'5.4-rejudge',label:'5.4 Sol 6.1 high judges repaired items',modelProfile:SOL61_HIGH,units:()=>['all'],pattern:pattern('judge','5.4-rejudge'),concurrency:1,maxAttempts:1,
+      artifacts:(ctx:any)=>relative(ctx.repo,join(workflowDir(ctx.repo,ctx.run),`judge-${round(ctx,'5.4-rejudge')}.json`)),
+      plan:(ctx:any)=>[{role:'tool',label:`step5-v2-judge-r${round(ctx,'5.4-rejudge')}-all`,covers:['all'],job:'judgement',timeout:43200,
+        argv:tool(ctx,'judge','repeat',round(ctx,'5.4-rejudge'))}],
+      gatesWaived:'The judge command requires a complete current Sol verdict for each frozen repaired target before writing its round receipt.'},
+    workerStage('5.5-adjudicate','repeat',true),workerStage('5.6-impact','impact-repeat',false),recert,
+    gateStage('5.8-gate'),repair,gateStage('5.10-gate'),
+  ];
+}

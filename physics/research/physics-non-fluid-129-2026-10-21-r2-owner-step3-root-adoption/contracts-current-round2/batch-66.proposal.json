@@ -1,0 +1,504 @@
+{
+  "version": 1,
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "batch": "66",
+  "level": 0,
+  "scope": [
+    "lem-qftx-spinor-factorization",
+    "thm-qftx-rational-bcfw-residue",
+    "prop-qftx-helicity-polarization-ward",
+    "cex-qftx-bcfw-contact-boundary"
+  ],
+  "contracts": {
+    "lem-qftx-spinor-factorization": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qftx-spinor-helicity",
+          "source_section": "Definition",
+          "quote": "Define the linear map $\\kappa:V\\to M_2(\\mathbb C)$ by\n\n$$\\kappa(p)=p^0I_2+p^1\\sigma_1+p^2\\sigma_2+p^3\\sigma_3=\\begin{pmatrix}p^0+p^3&p^1-ip^2\\\\p^1+ip^2&p^0-p^3\\end{pmatrix},$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qftx-spinor-helicity",
+          "source_section": "Definition",
+          "quote": "Let $V=\\mathbb C^4$ with complex-bilinear form $h(p,q)=p^0q^0-p^1q^1-p^2q^2-p^3q^3$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qftx-spinor-helicity",
+          "source_section": "Definition",
+          "quote": "For a matrix $M$ whose image is one-dimensional (rank one), a spinor factorization is a pair $(\\lambda,\\widetilde\\lambda)\\in(\\mathbb C^2\\setminus\\{0\\})\\times(\\widetilde{\\mathbb C}^2\\setminus\\{0\\})$ satisfying $M_{a\\dot a}=\\lambda_a\\widetilde\\lambda_{\\dot a}$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qftx-spinor-helicity",
+          "source_section": "Definition",
+          "quote": "$$\\kappa^{-1}(M)=\\left(\\frac{M_{1\\dot1}+M_{2\\dot2}}2,\\frac{M_{1\\dot2}+M_{2\\dot1}}2,\\frac{M_{2\\dot1}-M_{1\\dot2}}{2i},\\frac{M_{1\\dot1}-M_{2\\dot2}}2\\right).$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Direct expansion gives $\\det\\kappa(p)=(p^0)^2-(p^1)^2-(p^2)^2-(p^3)^2=h(p,p)=0$. The explicit inverse formula in [F4] shows $\\kappa(p)\\ne0$ because $p\\ne0$. A nonzero $2\\times2$ matrix with determinant zero has rank one.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Choose a nonzero column $v$ of $\\kappa(p)$. Rank one means each of its two columns is a scalar multiple $a_{\\dot a}v$; setting $\\lambda=v$ and $\\widetilde\\lambda_{\\dot a}=a_{\\dot a}$ gives the factorization required by [F3]. Both factors are nonzero because their product matrix is nonzero.",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "step 1.1",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Any second factorization has the same one-dimensional column space, so $\\lambda'=t\\lambda$ for a unique nonzero scalar $t$. Equality of the outer products then gives $\\widetilde\\lambda'=t^{-1}\\widetilde\\lambda$ by comparing a nonzero component of $\\lambda$. This proves uniqueness of the class.",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement concerns one specified nonzero momentum, not an empty momentum family."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The zero vector is expressly excluded because its matrix has rank zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 2.1 covers the case where only one matrix column is nonzero; choose that column."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 use only nonzero rank one, including matrices with a zero column."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval, limit, or endpoint is used."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 2.1 chooses one nonzero column from a finite two-column matrix; no arbitrary-family choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is an existence and uniqueness assertion, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is an existence and uniqueness assertion, not a biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-66",
+        "notes": "Independently checked current Definition, Pauli convention supplier and Proof 1.1–3.1 against reader/refuter evidence. Determinant expansion holds for all p, including zero; nonzero null p gives a nonzero rank-one matrix by the explicit inverse. Choosing one of two nonzero columns constructs both nonzero factors; comparing a nonzero lambda component proves the unique nonzero rescaling. Zero-column cases are included and no arbitrary choice is used. Repaired the final Statement sentence: the set of factorizations forms one equivalence class, rather than that equivalence class having one representative. For p=(1,0,0,1), factors (2,0),(1,0) and (4,0),(1/2,0) are distinct representatives of that same class. Definition discharge and both direct theorem/proposition consumers use existence/determinant only and need no change. Marzolla §3 equations (3.1),(3.4),(3.8), arxiv.org/pdf/1705.09678 PDF pp.12–13, checked; local uniqueness argument supplies the complete proof. No unresolved proof or citation issue."
+      }
+    },
+    "thm-qftx-rational-bcfw-residue": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qftx-spinor-helicity",
+          "source_section": "Definition",
+          "quote": "For a matrix $M$ whose image is one-dimensional (rank one), a spinor factorization is a pair $(\\lambda,\\widetilde\\lambda)\\in(\\mathbb C^2\\setminus\\{0\\})\\times(\\widetilde{\\mathbb C}^2\\setminus\\{0\\})$ satisfying $M_{a\\dot a}=\\lambda_a\\widetilde\\lambda_{\\dot a}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qftx-spinor-helicity",
+          "source_section": "Definition",
+          "quote": "Let $V=\\mathbb C^4$ with complex-bilinear form $h(p,q)=p^0q^0-p^1q^1-p^2q^2-p^3q^3$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qftx-spinor-factorization",
+          "source_section": "Statement",
+          "quote": "For every $p\\in\\mathbb C^4$, $\\det\\kappa(p)=h(p,p)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qftx-spinor-factorization",
+          "source_section": "Statement",
+          "quote": "Thus for every nonzero $p$ with $h(p,p)=0$, $\\kappa(p)$ has a spinor factorization.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The finite collection of initial spinor factors exists by [F4]; since $n$ is finite, choose them successively without an arbitrary-family choice principle. In matrix coordinates, $\\kappa(p_i(z))=(\\lambda_i+z\\lambda_j)\\widetilde\\lambda_i=\\kappa(p_i)+z\\lambda_j\\widetilde\\lambda_i$ and $\\kappa(p_j(z))=\\lambda_j(\\widetilde\\lambda_j-z\\widetilde\\lambda_i)=\\kappa(p_j)-z\\lambda_j\\widetilde\\lambda_i$. Each shifted matrix is an outer product by [F1], hence has determinant zero; [F3] and [F2] then give nullness, and the two added terms cancel. Thus $\\sum_a p_a(z)=0$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "A1",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "Set $r_\\alpha=\\operatorname{Res}_{z=z_\\alpha}A(z)$. The rational function $A(z)-\\sum_{\\alpha=1}^m r_\\alpha/(z-z_\\alpha)$ has no finite pole, so it is a polynomial; it tends to zero at infinity by [A2], so that polynomial is zero. Evaluating the resulting partial-fraction identity at $z=0$ gives $A(0)=-\\sum_\\alpha r_\\alpha/z_\\alpha$.",
+          "inputs": [
+            "A2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Since $z_\\alpha\\ne0$, the factor $1/z$ is regular there and $\\operatorname{Res}_{z=z_\\alpha}(A(z)/z)=r_\\alpha/z_\\alpha$. This proves the residue form. Under [A3], substitute each stated factorization for $r_\\alpha$ to obtain the claimed recursion. No contour or large-z model estimate is used beyond the explicit decay hypothesis.",
+          "inputs": [
+            "A2",
+            "A3",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 1.2 gives A(0)=0 when there are no finite poles and A tends to zero at infinity."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement requires regularity at z=0 and every listed pole z_alpha≠0; evaluation at zero in step 1.2 is therefore valid."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For A(z)=1/(z-1), the single residue gives -1 and A(0)=-1, matching step 1.2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement excludes coincident or higher-order poles by requiring distinct simple poles."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The hypotheses separately control z=0 and the limit at infinity; step 1.2 uses both."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The proof in step 1.2 uses the finite pole list and no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem gives a direct identity, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem gives a direct identity, not an equivalence."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-66",
+        "notes": "Read the complete current Statement/Facts/Proof 1.1–2.1, exact Definition and repaired factorization supplier; checked four quotations and reader/refuter evidence. Shifted matrices are outer products even at a parameter where a shifted factor vanishes: rank zero is still determinant zero, so no unasserted nonzero-shift hypothesis is used. Equal/opposite added matrices preserve total momentum. Subtracting each simple-pole principal part removes all finite poles; a reduced complex rational function with no finite pole is polynomial, by polynomial factorization. Its limit zero forces the polynomial to be identically zero. All poles are nonzero so evaluation and the A/z residue substitution are valid. Empty pole set gives A=0; one-pole example A=1/(z-1) gives A(0)=-1; constant nonzero A fails decay, agreeing with the unchanged contact example. Distinct simple poles and nonzero Q-prime exclude the relevant singular denominators. The supplied finite helicity sum is substituted only under the stated residue premise, with no derived dynamics or empirical assertion. No arbitrary choice. BCFW §2 equations (2.1)–(2.7), PDF pp.3–6; Elvang–Huang §3.1–3.2 equations (3.1)–(3.8), PDF pp.35–37; Marzolla §5 equations (5.1)–(5.6), PDF pp.30–32 checked. Model decay estimates/factorization are not imported as universal results. No defect or needed repair."
+      }
+    },
+    "prop-qftx-helicity-polarization-ward": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qftx-spinor-helicity",
+          "source_section": "Definition",
+          "quote": "For a matrix $M$ whose image is one-dimensional (rank one), a spinor factorization is a pair $(\\lambda,\\widetilde\\lambda)\\in(\\mathbb C^2\\setminus\\{0\\})\\times(\\widetilde{\\mathbb C}^2\\setminus\\{0\\})$ satisfying $M_{a\\dot a}=\\lambda_a\\widetilde\\lambda_{\\dot a}$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qftx-spinor-helicity",
+          "source_section": "Definition",
+          "quote": "Let $V=\\mathbb C^4$ with complex-bilinear form $h(p,q)=p^0q^0-p^1q^1-p^2q^2-p^3q^3$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qftx-spinor-helicity",
+          "source_section": "Definition",
+          "quote": "Define angle and square brackets by $\\langle\\lambda r\\rangle=\\epsilon^{ab}\\lambda_a r_b$ and $[\\widetilde\\lambda\\widetilde r]=\\epsilon^{\\dot a\\dot b}\\widetilde\\lambda_{\\dot a}\\widetilde r_{\\dot b}$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qftx-spinor-factorization",
+          "source_section": "Statement",
+          "quote": "Thus for every nonzero $p$ with $h(p,p)=0$, $\\kappa(p)$ has a spinor factorization.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qftx-spinor-helicity",
+          "source_section": "Definition",
+          "quote": "$$\\kappa^{-1}(M)=\\left(\\frac{M_{1\\dot1}+M_{2\\dot2}}2,\\frac{M_{1\\dot2}+M_{2\\dot1}}2,\\frac{M_{2\\dot1}-M_{1\\dot2}}{2i},\\frac{M_{1\\dot1}-M_{2\\dot2}}2\\right).$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The factorization exists by [F4]. For undotted references, put $w^a=r^a/\\langle\\lambda r\\rangle-s^a/\\langle\\lambda s\\rangle$. Then $\\lambda_aw^a=1-1=0$ by [F3]. The nonzero covector $\\lambda_a$ has a one-dimensional kernel. Since the alternating tensor is invertible, $\\lambda^a$ is nonzero and lies in that kernel; hence $w^a=c\\lambda^a$ for some $c\\in\\mathbb C$. Substitution in the displayed polarization formula gives $E_+(p;r)-E_+(p;s)=\\sqrt2c\\lambda^a\\widetilde\\lambda^{\\dot a}$, which is a scalar multiple of the momentum tensor.",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F4",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "For dotted references, put $\\widetilde w^{\\dot a}=\\widetilde r^{\\dot a}/[\\widetilde\\lambda\\widetilde r]-\\widetilde s^{\\dot a}/[\\widetilde\\lambda\\widetilde s]$. Then $\\widetilde\\lambda_{\\dot a}\\widetilde w^{\\dot a}=1-1=0$ by [F3]. The kernel is spanned by $\\widetilde\\lambda^{\\dot a}$ because the dotted alternating tensor is invertible, so $\\widetilde w^{\\dot a}=d\\widetilde\\lambda^{\\dot a}$ and $E_-(p;\\widetilde r)-E_-(p;\\widetilde s)=\\sqrt2d\\lambda^a\\widetilde\\lambda^{\\dot a}$, again proportional to $p$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F4",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The explicit inverse formula in [F5] makes $\\kappa$ a linear isomorphism, and each alternating tensor has determinant one, so the raised-index Pauli map is also an isomorphism. Each tensor identity therefore gives the same proportionality for the associated four-vectors. Pairing either difference with $J$ gives a scalar multiple of $h(p,J)=0$ under [F2, A2]. Thus both polarization contractions are reference independent.",
+          "inputs": [
+            "F2",
+            "F5",
+            "A2",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Two admissible references are compared; an empty reference set is not in the statement."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The zero momentum is excluded because it has no nonzero spinor-helicity representative."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "When the two references agree, the normalized difference in steps 1.1 and 1.2 is zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement and A1 exclude a reference proportional to the momentum spinor because its denominator would vanish; step 1.1 handles all remaining references."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or limiting endpoint is involved."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "steps 1.1 and 2.1 use only the explicitly given finite spinor vectors and no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The proposition gives a conditional implication, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The proposition gives a conditional implication, not a biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-66",
+        "notes": "Read complete current Statement/Facts/Proof 1.1–2.1, exact Definition and repaired factorization supplier; checked all five contract quotations against those carriers and reader/refuter evidence. Under epsilon12=1, lambda_a r^a equals the bracket, so normalized reference differences annihilate lambda. Its nonzero covector kernel has dimension one and contains the nonzero raised lambda; dotted case is identical. Both epsilon maps and kappa are invertible; the tensor proportionalities therefore map to multiples of the same p. Complex-bilinear h(p,J)=0 then kills the difference without a Hermitian-conjugation assumption. Identical references give zero difference; proportional references with zero denominator are expressly excluded. For lambda=(1,0), r=(0,1), s=(1,1), raised normalized difference=(0,1), proportional to raised lambda=(0,-1). No arbitrary choice or limit occurs. Elvang–Huang §2.4 equation (2.49) and accompanying gauge-shift discussion, PDF pp.17–18, and BCFW §3.1 equation (3.2), PDF p.8, were checked; sign/normalization conventions are defined locally. Current conservation remains a supplied condition, not a proved model Ward identity. No defect or needed consumer repair."
+      }
+    },
+    "cex-qftx-bcfw-contact-boundary": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-qftx-rational-bcfw-residue",
+          "source_section": "Statement",
+          "quote": "Assume $A$ is regular at $z=0$, has distinct simple finite poles $z_1,\\ldots,z_m\\ne0$ and no other finite poles, and $A(z)\\to0$ as $z\\to\\infty$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The constant $A(z)=c$ is rational, regular at $0$, and has no finite poles. Hence every finite-pole residue vanishes and the proposed boundary-free sum equals $0$.",
+          "inputs": [
+            "given",
+            "F1",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "But $A(0)=c\\ne0$. At infinity $A(z)/z=c/z$, so by [A2] the residue at infinity is $-c$ and the boundary correction is $c$. Omitting it gives the contradiction.",
+          "inputs": [
+            "given",
+            "A1",
+            "A2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 is exactly the empty finite-pole set; its residue sum is zero.",
+          "case_reasoning": "Finite poles of A are absent, so the finite nonzero-pole contribution sum is exactly empty and zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "A1 requires c≠0; if c=0, the example would not contradict the proposed rule.",
+          "case_reasoning": "c!=0 is essential to contradiction; c=0 would give zero boundary correction as well."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The example is one nonzero constant coefficient, evaluated directly in steps 1.1 and 2.1.",
+          "case_reasoning": "A single supplied constant already refutes universal rule; no singleton-pole assumption is needed."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The coefficient has no finite poles or degeneracies; its only omitted contribution is at infinity in step 2.1.",
+          "case_reasoning": "No finite poles of A; A/z has its zero-origin pole and infinity residue -c, distinguished from the omitted finite factorization poles."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 2.1 computes the nonzero boundary correction at infinity while A(0)=c.",
+          "case_reasoning": "2.1 computes Laurent coefficient at infinity and value at 0, retaining boundary correction c."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choices or indexed families occur in this explicit constant example.",
+          "case_reasoning": "Supplied nonzero complex c and finite direct algebra require no choice family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The counterexample refutes an implication, not a biconditional.",
+          "case_reasoning": "Refutes sufficiency of rational/simple-pole premises without decay, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The counterexample refutes an implication, not a biconditional.",
+          "case_reasoning": "Does not claim nondecay always forces nonzero boundary term."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-66 author",
+        "notes": "Finite exact check: with c=1, A(0)=1 and the finite residue sum is 0; A(z)/z=1/z has boundary correction 1. This is a formal scalar contact coefficient, not a claim about a full interacting theory."
+      },
+      "current_boundary_worksheet": {
+        "proposal": "research/physics-non-fluid-129-2026-10-21-r2-owner-step2-boundary-proposal-7/proposal.json",
+        "source_sha256": "b0d79cc5906f7731fa662d542a7437d0e77fa2921474d1a091ba468ea25c14b0",
+        "qualification": "Released complete current source/eight-case semantic worksheet; root transcribed exact current rows. No independent acceptance or finite computation asserted."
+      }
+    }
+  }
+}

@@ -1,0 +1,663 @@
+{
+  "version": 1,
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "batch": "118",
+  "level": "physics-non-fluid-129-2026-10-21-r2",
+  "scope": [
+    "lem-tgrx-modular-kms-time-rescaling",
+    "post-tgrx-wedge-modular-model",
+    "pthm-tgrx-wedge-unruh-clock",
+    "ex-tgrx-wedge-typeiii-warning"
+  ],
+  "contracts": {
+    "lem-tgrx-modular-kms-time-rescaling": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.\n\n",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qsmx-von-neumann-kms-state",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. Let $M\\ne\\{0\\}$ be a concrete von Neumann algebra on a complex Hilbert space. Use the predual $M_*=Q$ of [[lem-qsmx-von-neumann-predual]]; its elements are the normal linear functionals, and the induced topology $\\sigma(M,Q)$ is the ultraweak topology. A **normal state** on $M$ is a bounded complex-linear functional $\\omega:M\\to\\mathbb C$ with $\\omega(I)=1$, $\\omega(a)\\geq0$ for every positive $a\\in M$, and\n$$\\omega\\!\\left(\\sup_i a_i\\right)=\\sup_i\\omega(a_i)$$\nfor every increasing net $(a_i)$ of positive elements with $0\\leq a_i\\leq C I$ for a common finite $C$ and supremum taken in $M$.\nAn automorphism of $M$ is **normal** when it preserves the suprema of all such bounded increasing positive nets.\nA **point-ultraweakly continuous one-parameter automorphism group** is a family $(\\alpha_t)_{t\\in\\mathbb R}$ of bijective unital complex-linear maps $M\\to M$ preserving multiplication and adjoints, with $\\alpha_0=\\operatorname{id}_M$, $\\alpha_s\\alpha_t=\\alpha_{s+t}$, and $t\\mapsto\\varphi(\\alpha_t(x))$ continuous for every $x\\in M$ and every normal linear functional $\\varphi\\in Q$.\nFor dimensionless $t$ and dimensionless $\\beta>0$, the normal state $\\omega$ satisfies the **upper-strip $(\\alpha,\\beta)$ KMS condition** when, for every $A,B\\in M$, there is a bounded scalar function $F_{A,B}$ on $S_\\beta=\\{z\\in\\mathbb C:0\\leq\\operatorname{Im}z\\leq\\beta\\}$ that is continuous on $S_\\beta$, holomorphic in its interior, and satisfies\n$$F_{A,B}(t)=\\omega(A\\alpha_t(B)),\\qquad F_{A,B}(t+i\\beta)=\\omega(\\alpha_t(B)A)\\quad(t\\in\\mathbb R).$$\n\n",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The rescaled maps satisfy\n$\\widetilde\\alpha_{\\tau_1}\\widetilde\\alpha_{\\tau_2}\n=\\alpha_{\\tau_1/\\lambda+\\tau_2/\\lambda}\n=\\widetilde\\alpha_{\\tau_1+\\tau_2}$ and\n$\\widetilde\\alpha_0=\\operatorname{id}_M$. For each $X\\in M$ and normal\nlinear functional $\\varphi$, the map\n$\\tau\\mapsto\\varphi(\\widetilde\\alpha_\\tau(X))\n=\\varphi(\\alpha_{\\tau/\\lambda}(X))$ is continuous because it is the\ncomposition of the continuous map $t\\mapsto\\varphi(\\alpha_t(X))$ with\n$\\tau\\mapsto\\tau/\\lambda$. Thus $\\widetilde\\alpha$ is a\npoint-ultraweakly continuous one-parameter group.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For each $A,B\\in M$, choose the strip function $F_{A,B}$ supplied by\n[F1] and define $G_{A,B}(z)=F_{A,B}(z/\\lambda)$. Since $\\lambda>0$, the\nmap $z\\mapsto z/\\lambda$ sends the closed strip of width $\\lambda\\theta$\nbijectively to $S_\\theta$ and its interior to the interior. Therefore\n$G_{A,B}$ is bounded and continuous on the closed rescaled strip and\nholomorphic inside.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For real $\\tau$, the boundaries are\n$G_{A,B}(\\tau)=\\omega(A\\alpha_{\\tau/\\lambda}(B))\n=\\omega(A\\widetilde\\alpha_\\tau(B))$ and\n$G_{A,B}(\\tau+i\\lambda\\theta)\n=\\omega(\\alpha_{\\tau/\\lambda}(B)A)\n=\\omega(\\widetilde\\alpha_\\tau(B)A)$. These are precisely the required\nupper-strip boundary values at width $\\lambda\\theta$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes a nonzero unital von Neumann algebra and quantifies over its elements."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The hypotheses require theta>0 and lambda>0; zero strip width or zero rescaling is excluded."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 remain valid at lambda=1, where the parameter and strip width are unchanged."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 do not require a nontrivial automorphism group; they also apply to the identity group and to a one-dimensional algebra when the stated KMS functions exist."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.2–2.1 map the closed strip, including both boundary lines, and verify each boundary value."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The premise is explicit in A1; step 1.2 uses the supplied function separately for each fixed A,B and does not assert a uniform choice beyond the hypothesis."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is an implication about positive rescaling and contains no iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is an implication about positive rescaling and contains no iff claim."
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "def-axiom-of-choice",
+          "carrier": "items/def-axiom-of-choice.md",
+          "status": "published",
+          "source_section": "Definition",
+          "exact_statement": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.\n\n",
+          "relevant_hypotheses_and_conventions": "The lemma carries the explicitly adopted Axiom of Choice premise.",
+          "supplier_proof_status": "Imported mathematical axiom definition; the axiom is adopted, not proved.",
+          "consumer_use": [
+            "The lemma carries the explicitly adopted Axiom of Choice premise."
+          ]
+        },
+        {
+          "supplier": "def-qsmx-von-neumann-kms-state",
+          "carrier": "items/def-qsmx-von-neumann-kms-state.md",
+          "status": "current inspected carrier",
+          "source_section": "Definition",
+          "exact_statement": "Assume the Axiom of Choice. Let $M\\ne\\{0\\}$ be a concrete von Neumann algebra on a complex Hilbert space. Use the predual $M_*=Q$ of [[lem-qsmx-von-neumann-predual]]; its elements are the normal linear functionals, and the induced topology $\\sigma(M,Q)$ is the ultraweak topology. A **normal state** on $M$ is a bounded complex-linear functional $\\omega:M\\to\\mathbb C$ with $\\omega(I)=1$, $\\omega(a)\\geq0$ for every positive $a\\in M$, and\n$$\\omega\\!\\left(\\sup_i a_i\\right)=\\sup_i\\omega(a_i)$$\nfor every increasing net $(a_i)$ of positive elements with $0\\leq a_i\\leq C I$ for a common finite $C$ and supremum taken in $M$.\nAn automorphism of $M$ is **normal** when it preserves the suprema of all such bounded increasing positive nets.\nA **point-ultraweakly continuous one-parameter automorphism group** is a family $(\\alpha_t)_{t\\in\\mathbb R}$ of bijective unital complex-linear maps $M\\to M$ preserving multiplication and adjoints, with $\\alpha_0=\\operatorname{id}_M$, $\\alpha_s\\alpha_t=\\alpha_{s+t}$, and $t\\mapsto\\varphi(\\alpha_t(x))$ continuous for every $x\\in M$ and every normal linear functional $\\varphi\\in Q$.\nFor dimensionless $t$ and dimensionless $\\beta>0$, the normal state $\\omega$ satisfies the **upper-strip $(\\alpha,\\beta)$ KMS condition** when, for every $A,B\\in M$, there is a bounded scalar function $F_{A,B}$ on $S_\\beta=\\{z\\in\\mathbb C:0\\leq\\operatorname{Im}z\\leq\\beta\\}$ that is continuous on $S_\\beta$, holomorphic in its interior, and satisfies\n$$F_{A,B}(t)=\\omega(A\\alpha_t(B)),\\qquad F_{A,B}(t+i\\beta)=\\omega(\\alpha_t(B)A)\\quad(t\\in\\mathbb R).$$\n\n",
+          "relevant_hypotheses_and_conventions": "The lemma uses the exact upper-strip W*-KMS boundary convention and point-ultraweak group hypotheses.",
+          "supplier_proof_status": "Current draft supplier statement and complete proof were inspected; use is limited to the actual stated hypotheses and proof status recorded in the batch notes.",
+          "consumer_use": [
+            "The lemma uses the exact upper-strip W*-KMS boundary convention and point-ultraweak group hypotheses."
+          ]
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "lambda=1.",
+          "result": "G(z)=F(z), so the interval and both boundary values are unchanged.",
+          "verifies": "Steps 1.2–2.1 and the identity-rescaling case."
+        },
+        {
+          "check": "lambda=2.",
+          "result": "The map z -> z/2 sends the width-2-theta strip to width theta and returns the original upper boundary at tau/2+i theta.",
+          "verifies": "The positive strip-width scaling formula."
+        }
+      ]
+    },
+    "post-tgrx-wedge-modular-model": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [],
+      "physics_review": {
+        "formulation": {
+          "verdict": "pass",
+          "evidence": "The carrier explicitly defines the massive scalar shell and invariant measure, symmetric Fock space and vacuum, smeared Weyl generators, double-commutant wedge algebra, pairing convention, boost action, and modular/boost interface."
+        },
+        "scope": {
+          "verdict": "pass",
+          "evidence": "One selected massive, noninteracting real scalar vacuum representation on four-dimensional affine Minkowski spacetime, its right-wedge local Weyl algebra, and the assumed modular/boost bridge. This scope includes neither a detector model nor an empirical temperature measurement, an interacting QFT, or a general curved-spacetime result."
+        },
+        "sources": {
+          "verdict": "pass",
+          "evidence": "The carrier identifies the original Bisognano–Wichmann paper and Guido’s complete lecture notes as independent treatments, records their assumptions and convention differences, and labels the geometric bridge here as an adopted input."
+        },
+        "non_derivation": {
+          "verdict": "pass",
+          "evidence": "Cyclic-separating status and the geometric identity Delta_W^{it}=U(Lambda_W(-2 pi t)) are expressly assumed. Tomita–Takesaki is used only for the abstract modular framework; no detector response, observed temperature, or continuum tensor factorization is claimed."
+        }
+      },
+      "supplier_excerpts": [
+        {
+          "supplier": "def-axiom-of-choice",
+          "carrier": "items/def-axiom-of-choice.md",
+          "status": "published",
+          "source_section": "Definition",
+          "exact_statement": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.\n\n",
+          "relevant_hypotheses_and_conventions": "Explicit adopted set-theoretic premise.",
+          "supplier_proof_status": "Imported mathematical axiom definition; the axiom is adopted, not proved.",
+          "consumer_use": [
+            "Explicit adopted set-theoretic premise."
+          ]
+        },
+        {
+          "supplier": "def-countable-choice",
+          "carrier": "items/def-countable-choice.md",
+          "status": "published",
+          "source_section": "Definition",
+          "exact_statement": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.\n\n",
+          "relevant_hypotheses_and_conventions": "Explicit adopted premise inherited from the selected scalar QFT construction.",
+          "supplier_proof_status": "Imported mathematical axiom definition; the axiom is adopted, not proved.",
+          "consumer_use": [
+            "Explicit adopted premise inherited from the selected scalar QFT construction."
+          ]
+        },
+        {
+          "supplier": "def-qft-framework-units",
+          "carrier": "items/def-qft-framework-units.md",
+          "status": "published",
+          "source_section": "Definition",
+          "exact_statement": "Fix the oriented, time-oriented affine Minkowski spacetime and an inertial\nchart of [[def-sr-affine-minkowski-model]] and\n[[def-inertial-frame-and-inertial-chart]]. Use signature\n$\\eta=\\operatorname{diag}(-1,1,1,1)$, length coordinates\n$x^0=ct$ and $x^i$ in metres, and coordinate time $t$ in seconds as in\n[[def-sr-si-units-and-coordinate-conventions]]. Greek spacetime indices run\nfrom $0$ to $3$; spatial indices run from $1$ to $3$ and are contracted with\nthe Euclidean spatial metric. The coordinates $x^a$ have unit metre and\n$\\partial_a:=\\partial/\\partial x^a$ has unit $\\mathrm m^{-1}$.\n\nThe positive constants $c$, $h$ and $e_{\\rm SI}$ have the exact SI defining\nvalues; write $\\hbar:=h/(2\\pi)$. The magnetic constant $\\mu_0>0$ has SI unit\n$\\mathrm{N\\,A^{-2}}$ and is experimentally determined under the current SI;\nno exact numerical value or current estimate for it is adopted. Put\n$\\varepsilon_0=(\\mu_0c^2)^{-1}$ when that symbol is used. These are SI\nnormalization inputs, not empirical claims about a selected QFT model.\n\nFor a species with rest mass $m_{\\rm rest,SI}>0$ in kilograms define its\ninverse-length mass parameter\n\n$$\\mu:=\\frac{m_{\\rm rest,SI}c}{\\hbar}\\quad[\\mathrm m^{-1}].$$\n\nFor a spatial wave vector $\\mathbf k\\in\\mathbb R^3$, with each component in\n$\\mathrm m^{-1}$ and the Euclidean norm, define\n$\\omega_\\mu(\\mathbf k):=\\sqrt{|\\mathbf k|^2+\\mu^2}\\in\\mathbb R_{>0}$, with\nunit $\\mathrm m^{-1}$. Here $\\omega_\\mu$ is the temporal wave number, not the\nSI angular frequency; the corresponding SI angular frequency is\n$c\\omega_\\mu$. Energy and momentum are $E=\\hbar c\\omega_\\mu$ in joules and\n$\\mathbf p=\\hbar\\mathbf k$ in $\\mathrm{kg\\,m\\,s^{-1}}$. With\n$p=(\\omega_\\mu(\\mathbf k),\\mathbf k)\\in\\mathbb R^4$ and\n$x=(x^0,\\mathbf x)\\in\\mathbb R^4$, the phase convention is\n\n$$p\\mathbin{\\circ}x:=\\omega_\\mu(\\mathbf k)x^0-\\mathbf k\\cdot\\mathbf x=-\\eta(p,x).$$\n\nFor a selected local action represented on a chart region\n$\\mathcal U\\subseteq\\mathbb R^4$ by\n$$\\frac{S}{\\hbar}=\\int_{\\mathcal U}\\mathcal L_{\\mathrm{nat}}(x)\\,d^4x,\\quad d^4x:=dx^0dx^1dx^2dx^3,$$\nthe natural Lagrangian density $\\mathcal L_{\\mathrm{nat}}$ has unit\n$\\mathrm m^{-4}$. Since $x^0=ct$, the corresponding SI Lagrangian density is\n$\\mathcal L_{\\mathrm{SI}}:=\\hbar c\\,\\mathcal L_{\\mathrm{nat}}$ and has unit\n$\\mathrm{J\\,m^{-3}}$. This unit conversion alone does not identify a\nLagrangian density with the model's Hamiltonian energy density.\n\nFor canonical engineering dimensions in this four-dimensional normalization,\nuse the formal field symbols $\\phi_{\\rm n}$ and $\\psi_{\\rm n}$ in the selected\nscalar and Dirac kinetic terms, assigning them length degrees $-1$ and\n$-3/2$, respectively. These are the dimensions fixed by those free kinetic\nterms, not exact scaling dimensions of interacting fields: anomalous\ndimensions, when present, are separate quantities. These symbols do not\nassert pointwise field maps or operator fields; a model supplies its field\nspace and regularity. Let $A^\\mu_{\\rm SI}=(\\varphi/c,\\mathbf A)$ and\n$F^{\\mu\\nu}_{\\rm SI}$ use the component convention of\n[[def-em-electromagnetic-tensor]], namely\n$F_{0i}=-E_i/c$ and $F_{ij}=\\epsilon_{ijk}B_k$, with\n$F_{\\mu\\nu}=\\partial_\\mu A_\\nu-\\partial_\\nu A_\\mu$ only when a potential is\nsupplied. Define the normalized photon potential and field strength by\n\n$$a^\\mu:=\\frac{A^\\mu_{\\rm SI}}{\\sqrt{\\mu_0\\hbar c}},\\qquad f^{\\mu\\nu}:=\\frac{F^{\\mu\\nu}_{\\rm SI}}{\\sqrt{\\mu_0\\hbar c}}.$$\n\nThey have length degrees $-1$ and $-2$, respectively. The EM supplier is used\nonly for SI units and tensor components: no classical Maxwell equation,\nLorentz-force law, or classical-to-quantum identification is adopted here.\n\nFor any separately declared SI charge parameter $q_{\\rm SI}$ in coulombs put\n\n$$q_{\\rm n}:=q_{\\rm SI}\\sqrt{\\frac{\\mu_0c}{\\hbar}}.$$\n\nIt is dimensionless. For the positive exact SI elementary charge use\n$e_{\\rm n}:=e_{\\rm SI}\\sqrt{\\mu_0c/\\hbar}$ and define the rationalized\ndimensionless coupling $\\alpha:=e_{\\rm n}^2/(4\\pi)$. Since $\\mu_0$ is\nmeasured, these formulas do not assign an exact numerical value to\n$e_{\\rm n}$ or $\\alpha$. If the model uses minimal coupling, its convention is\n$D_\\mu=\\partial_\\mu-iq_{\\rm n}a_\\mu$; for an electron with\n$q_{\\rm SI}=-e_{\\rm SI}$ this reads $D_\\mu=\\partial_\\mu+ie_{\\rm n}a_\\mu$.\nBare, renormalized-at-scale, and measured effective charges are separately\nlabelled model parameters; applying the conversion to one label does not\nidentify it with either of the others or specify a running law.\n\nIn a supplied four-component spinor representation, let\n$\\gamma^a\\in\\operatorname{End}_{\\mathbb C}(\\mathbb C^4)$, $a=0,1,2,3$, be\ndimensionless linear maps satisfying\n$\\{\\gamma^a,\\gamma^b\\}:=\\gamma^a\\gamma^b+\\gamma^b\\gamma^a\n=-2\\eta^{ab}I_4$, where $I_4$ is the identity map. Set $\\beta:=\\gamma^0$\nand $\\alpha^i:=\\beta\\gamma^i$; then $\\beta^2=I_4$ and\n$\\gamma^i=\\beta\\alpha^i$. For a supplied four-component spinor $\\psi$ write\n$\\bar\\psi:=\\psi^\\dagger\\beta$. The effective Clifford metric is $-\\eta$.\nA supplied free Dirac model may use\n$(i\\gamma^a\\partial_a-\\mu)\\psi=0$ for its model-supplied spinor field\n$\\psi$; that model supplies its field domain and regularity. The phase and\nClifford choices are conventions; this item proves no representation or field\nequation.\n\nFor the autonomous evolution convention, assume Countable Choice\n[[def-countable-choice]]: every sequence of nonempty sets has a choice\nfunction. Let a selected model supply a complex Hilbert space $\\mathscr H$\nas in [[def-hilbert-space]] and a time-independent complex-linear Hamiltonian\n$H:D(H)\\to\\mathscr H$ with a specified dense linear domain\n$D(H)\\subseteq\\mathscr H$ and SI energy\nunit joules. Require self-adjointness as in\n[[def-symmetric-self-adjoint-and-essentially-self-adjoint]]: $H=H^*$,\nincluding equality of domains and values. Here $y\\in D(H^*)$ precisely when\nthere is a $z\\in\\mathscr H$ such that\n$\\langle Hx,y\\rangle=\\langle x,z\\rangle$ for every $x\\in D(H)$, and\n$H^*y=z$; density makes $z$ unique.\n\nThe published mathematical supplier\n[[lem-nrqm-controlled-dynamics-cc-arbitrary-hilbert-spectral-calculus]]\nthen supplies the spectral measure $E_H$ on the Borel subsets of\n$\\mathbb R$. This is a normalized projection-valued measure as in\n[[def-projection-valued-measure]]: its values are bounded orthogonal\nprojections, $E_H(\\mathbb R)=I$, $E_H(B\\cap C)=E_H(B)E_H(C)$, and it is\ncountably additive in norm on every vector. For $\\xi\\in\\mathscr H$ put\n$\\nu_\\xi(B):=\\langle E_H(B)\\xi,\\xi\\rangle$, a finite positive measure.\nThe spectral integral of $\\lambda$ represents $H$, on exactly the domain\n$D(H)=\\{\\xi\\in\\mathscr H:\\int_{\\mathbb R}\\lambda^2\\,d\\nu_\\xi(\\lambda)<\\infty\\}$.\nFor real $t$ in seconds define the autonomous evolution by bounded Borel\nfunctional calculus,\n$$U(t):=\\exp(-itH/\\hbar):=\\int_{\\mathbb R}e^{-it\\lambda/\\hbar}\\,dE_H(\\lambda).$$\nThe spectral variable $\\lambda$ carries unit joule. This exponential is a\nbounded operator on all of $\\mathscr H$, even when $H$ is unbounded; it\ndoes not mean an operator power series on arbitrary vectors. The supplier\ngives a strongly continuous unitary group: $U(0)=I$,\n$U(t+s)=U(t)U(s)$ and $\\|U(t)\\xi-U(t_0)\\xi\\|\\to0$ as $t\\to t_0$ for\neach $\\xi\\in\\mathscr H$. A model may restrict it to a declared\n$I\\subseteq\\mathbb R$. Each $U(t)$ is a surjective complex-linear map\nsatisfying $\\langle U(t)\\xi,U(t)\\zeta\\rangle=\\langle\\xi,\\zeta\\rangle$\nfor all $\\xi,\\zeta\\in\\mathscr H$; write $U(t)^*:=U(t)^{-1}$. The exponent\nis dimensionless because $\\hbar$ has unit $\\mathrm{J\\,s}$. For any\nmodel-supplied complex-linear operator $O:D(O)\\to\\mathscr H$, with specified\nlinear domain $D(O)\\subseteq\\mathscr H$, define its Heisenberg conjugate by\n$$O_H(t):=U(t)^*O\\,U(t),\\quad D(O_H(t)):=\\{\\xi\\in\\mathscr H:U(t)\\xi\\in D(O)\\}.$$\nThe model supplies the Hamiltonian and operator domains; the spectral supplier\njustifies this evolution only for those data and hypotheses. This dictionary\nconstructs no model-specific Hamiltonian or field representation and does not\nadopt a physical dynamics law. Where a free-field\nmodule uses an inner product linear in its second variable, convert to the\nrepository's first-variable-linear pairing by\n$\\langle u,v\\rangle_{\\rm FF}=(v,u)_{\\rm root}$.\n\nFor precision about domains, let $\\mathcal H$ be a complex Hilbert space with\ninner product linear in its first variable and let\n$\\mathscr D\\subseteq\\mathcal H$ be a dense complex linear subspace. A **weak operator-valued distribution\non the common domain $\\mathscr D$** means a complex-linear assignment\n$g\\mapsto\\Phi(g)$ for $g\\in\\mathcal D(\\mathbb R^4)$, where each\n$\\Phi(g):\\mathscr D\\to\\mathcal H$ is linear and, for every\n$u,v\\in\\mathscr D$, the scalar map\n$g\\mapsto\\langle\\Phi(g)u,v\\rangle$ is a continuous complex-linear functional\non the test-function space with the topology of\n[[def-test-function-topology]], hence a distribution as in [[def-distribution]].\nThis definition gives no pointwise field $\\Phi(x)$ and no product\n$\\Phi(x)\\Phi(x)$; a product or extension needs a separate construction. It\nasserts only matrix-element continuity and the stated linear maps; all further\noperator properties, locality, local observable algebras, graded locality,\nand gauge-specific potential behavior must be supplied by a constructed\nmodel. Test-function units can be chosen so a specified smeared observable is\ndimensionless; there is no universal test-function unit asserted here.\n\nPrimitive data for a selected model include its species and rest masses,\ndeclared charge parameters, regulator geometry, couplings, state and any\nconstructed measurement data. Vacuum-subtracted Hamiltonians, regulator\neigenvalues, distributions, correlations and outcome probabilities are\nderived only when their constructions supply the required domains and\nwell-definedness. This dictionary neither constructs an interacting\nfour-dimensional QED Hilbert space nor asserts pointwise field products,\nscattering, an LSZ limit, asymptotic completeness, or removal of a regulator.\n\n",
+          "relevant_hypotheses_and_conventions": "Fixes coordinate and SI-unit conventions used in the model statement.",
+          "supplier_proof_status": "Published supplier; its current statement and complete proof were inspected; use is limited to the stated interface.",
+          "consumer_use": [
+            "Fixes coordinate and SI-unit conventions used in the model statement."
+          ]
+        },
+        {
+          "supplier": "def-qft-scalar-mass-shell",
+          "carrier": "items/def-qft-scalar-mass-shell.md",
+          "status": "published",
+          "source_section": "Definition",
+          "exact_statement": "Assume Countable Choice [[def-countable-choice]]. Here\n$\\mathscr S(\\mathbb R^4)$ is the Schwartz space of smooth complex functions\nwhose coordinate-weighted derivatives are all bounded, as defined in\n[[def-schwartz-space-and-its-seminorms]].\nFix an oriented, time-oriented affine Minkowski space and an inertial coordinate\nchart as in [[def-sr-affine-minkowski-model]] and\n[[def-inertial-frame-and-inertial-chart]]. Use coordinates\n$x=(x^0,\\mathbf x)$ and metric $\\eta=\\mathrm{diag}(-1,1,1,1)$, matching the\n$(-+++)$ convention of the SR suppliers. Some QFT sources use its negative\n$(+---)$; the Lorentz group is unchanged, and the phase is fixed explicitly\nbelow.\nCoordinates $x$ have length units, momenta have inverse-length units, and the\nFourier phase below is dimensionless. A parameter $\\mu\\ge0$ has inverse-length\nunits and is only a mathematical shell parameter; it is not identified with a\nphysical rest mass. For $\\mathbf k\\in\\mathbb R^3$, set\n$$\\omega_\\mu(\\mathbf k)=\\sqrt{|\\mathbf k|^2+\\mu^2},\\qquad p_\\mu(\\mathbf k)=(\\omega_\\mu(\\mathbf k),\\mathbf k).$$\nThe future mass shell is\n$$H_\\mu^+=\\{(p^0,\\mathbf p): (p^0)^2-|\\mathbf p|^2=\\mu^2,\\ p^0>0\\}.$$\nWhen $\\mu=0$, its apex is omitted; thus $\\mathbf k\\ne0$ in the massless\nparameterization. The scalar shell pairing is\n$$p\\circ x:=p^0x^0-\\mathbf p\\cdot\\mathbf x=-\\eta(p,x).$$\nDefine the measure and one-particle Hilbert space by\n$$d\\nu_\\mu(p_\\mu(\\mathbf k))= \\frac{d^3\\mathbf k}{(2\\pi)^3\\,2\\omega_\\mu(\\mathbf k)},\\qquad H_\\mu=L^2(H_\\mu^+,d\\nu_\\mu;\\mathbb C),$$\nwhere the omitted massless apex has measure zero. For $f\\in\\mathscr S(\\mathbb\nR^4)$ define its pointwise shell Fourier restriction by\n$$K_\\mu f(p)=\\int_{\\mathbb R^4}f(x)e^{ip\\circ x}\\,d^4x.$$\nThe Fourier convention is exactly the displayed integral, with no prefactor.\nIf $\\widehat f(\\xi^0,\\boldsymbol\\xi)=\n\\int f(x)e^{-2\\pi i(x^0\\xi^0+\\mathbf x\\cdot\\boldsymbol\\xi)}\\,d^4x$ denotes\nthe standard transform in\n[[cor-fourier-transform-is-a-topological-automorphism-of-schwartz-space]],\nthen\n$$\\mathcal F_+f(p^0,\\mathbf p):=\\int f(x)e^{i(p^0x^0-\\mathbf p\\cdot\\mathbf x)}\\,d^4x =\\widehat f\\!\\left(-\\frac{p^0}{2\\pi},\\frac{\\mathbf p}{2\\pi}\\right).$$\nIts inverse is\n$$f(x)=(2\\pi)^{-4}\\int_{\\mathbb R^4} \\mathcal F_+f(p^0,\\mathbf p)e^{-i(p^0x^0-\\mathbf p\\cdot\\mathbf x)} \\,dp^0\\,d^3\\mathbf p.$$\nThus this convention is a time reflection and rescaling of the cited\nSchwartz automorphism and has the stated reciprocal normalization.\nThe proper orthochronous Lorentz group consists of linear maps preserving\n$\\eta$, orientation and the chosen future cone. A Poincare map is\n$x\\mapsto a+\\Lambda x$ with $a\\in\\mathbb R^4$ and $\\Lambda$ in that group.\n\nThis is a mathematical free scalar one-particle construction. It adopts the\nchosen coordinates, measure and Fourier convention; it asserts no experimental\nobservation, physical mass identification or measurement outcome.\n",
+          "relevant_hypotheses_and_conventions": "Supplies the massive future shell and invariant one-particle measure convention.",
+          "supplier_proof_status": "Published supplier; its current statement and complete proof were inspected; use is limited to the stated interface.",
+          "consumer_use": [
+            "Supplies the massive future shell and invariant one-particle measure convention."
+          ]
+        },
+        {
+          "supplier": "def-qft-fock-and-test-spaces",
+          "carrier": "items/def-qft-fock-and-test-spaces.md",
+          "status": "published",
+          "source_section": "Definition",
+          "exact_statement": "For an integer $d\\ge1$, let $\\mathcal S(\\mathbb R^d)$ be the complex Schwartz space with seminorms\n$p_{\\alpha\\beta}(f)=\\sup_{x\\in\\mathbb R^d}|x^\\alpha\\partial^\\beta f(x)|$\nfor all multi-indices $\\alpha,\\beta$; this is exactly\n[[def-schwartz-space-and-its-seminorms]]. Let\n$\\mathcal D(\\mathbb R^d)=C_c^\\infty(\\mathbb R^d;\\mathbb C)$ with the support convention of\n[[def-test-function-space-d-of-an-open-set]] and the locally convex LF topology of\n[[def-test-function-topology]]. The tempered-distribution space $\\mathcal S'(\\mathbb R^d)$\nis the space of continuous complex-linear functionals on this topological\n$\\mathcal S(\\mathbb R^d)$, paired bilinearly with test functions, as in\n[[def-tempered-distribution]].\n\nFor every complex Hilbert space $H$, use the second-variable-linear pairing\n$\\langle u,v\\rangle_2:=(v,u)_1$, where $(\\cdot,\\cdot)_1$ is the first-variable-linear\nHilbert pairing of [[def-real-and-complex-inner-product-space]]. Thus\n$\\langle u,v\\rangle_2$ is linear in $v$ and conjugate-linear in $u$.\nFor each tensor product, use the same norm completion as\n[[lem-nrqm-composites-hilbert-tensor-construction]], but equip it with the\nsecond-variable-linear pairing obtained by conjugating that supplier's\nfirst-variable-linear pairing. This leaves the norm and completion unchanged;\non elementary tensors it gives the product of the second-variable pairings.\nLet $H^{\\widehat\\otimes n}$ be the iterated Hilbert tensor completion, with\n$H^{\\widehat\\otimes0}:=\\mathbb C$; the tensor inner product is the product of\nthe factor pairings. Identify parenthesizations by the isometry fixing\nelementary tensors: the product pairing is the same on their dense span,\nso the map and its inverse extend to the completions. For $n\\ge1$, let\n$P_{s,n}=n!^{-1}\\sum_{\\pi\\in S_n}U_\\pi$ and\n$P_{a,n}=n!^{-1}\\sum_{\\pi\\in S_n}\\operatorname{sgn}(\\pi)U_\\pi$, using the\npermutation action and the orthogonal projections of\n[[lem-nrqm-composites-permutation-sector-projections]]. Define\n$H_s^{(n)}=\\operatorname{ran}P_{s,n}$ and\n$H_a^{(n)}=\\operatorname{ran}P_{a,n}$, with\n$H_s^{(0)}=H_a^{(0)}=\\mathbb C$. These are the symmetric and antisymmetric\n$n$-particle sectors.\n\nThe bosonic and fermionic Fock Hilbert spaces are the square-summable direct\nsums\n$\\mathcal F_s(H)=\\{(\\Psi_n)_{n\\ge0}:\\Psi_n\\in H_s^{(n)},\\\n\\sum_n\\|\\Psi_n\\|^2<\\infty\\}$ and\n$\\mathcal F_a(H)=\\{(\\Psi_n)_{n\\ge0}:\\Psi_n\\in H_a^{(n)},\\\n\\sum_n\\|\\Psi_n\\|^2<\\infty\\}$, with the componentwise inner product.\nTheir vacuum is $\\Omega=(1,0,0,\\ldots)$. The finite-particle subspace\n$\\mathcal D_{\\rm fin}$ consists of sequences with only finitely many nonzero\ncomponents.\n\nFor $h\\in H$, the map $C_h:H\\to\\mathbb C$, $C_h(v)=\\langle h,v\\rangle_2$, is linear and bounded:\n$|C_h(v)|=|(v,h)_1|\\le\\|h\\|\\,\\|v\\|$ by\n[[thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces]].\nFor any Hilbert space $K$, identify $\\mathbb C\\widehat\\otimes K$ with $K$\nby $J_K(z\\otimes v)=zv$. Every algebraic tensor is $1\\otimes w$;\nthe tensor norm is then $\\|w\\|$, so $J_K$ extends to a surjective isometry\non the completion (with inverse $w\\mapsto1\\otimes w$).\nThroughout the following formulas, $C_h\\otimes I^{\\otimes(n-1)}$ means\n$J_{H^{\\widehat\\otimes(n-1)}}\\circ(C_h\\widehat\\otimes I)$, with\n$I$ the identity on $H^{\\widehat\\otimes(n-1)}$.\nThe bounded tensor-map supplier therefore applies and gives norm at most\n$\\|h\\|$. This includes $n=1$, where $H^{\\widehat\\otimes0}=\\mathbb C$.\nContraction commutes with permutations of the remaining $n-1$ factors,\nso it takes symmetric or antisymmetric tensors to the corresponding\n$(n-1)$-particle sector (and to $\\mathbb C$ for $n=1$).\n\nFor $n\\ge0$, bosonic creation on sector $n$ is\n$a_n^\\dagger(h)\\Psi_n=\\sqrt{n+1}P_{s,n+1}(h\\otimes\\Psi_n)$; for $n\\ge1$,\nbosonic annihilation is\n$a_n(h)\\Psi_n=\\sqrt n(C_h\\otimes I^{\\otimes(n-1)})\\Psi_n$, where\n$C_h$ is the bounded functional above, its tensor extension is supplied by\n[[lem-nrqm-composites-bounded-tensor-maps]], and $a(h)\\Omega=0$. Define fermionic creation\nby $c_n^\\dagger(h)\\Psi_n=\\sqrt{n+1}P_{a,n+1}(h\\otimes\\Psi_n)$; for $n\\ge1$,\nfermionic annihilation is the corresponding first-factor contraction\n$c_n(h)\\Psi_n=\\sqrt n(C_h\\otimes I^{\\otimes(n-1)})\\Psi_n$, and\n$c(h)\\Omega=0$. The annihilation maps are conjugate-linear in $h$; the\ncreation maps are linear in $h$. These formulas define sector maps on the\nfinite-particle subspace; their maximal closed domains and operator relations are proved in\n[[lem-qft-fock-ccr-car]]. No physical statistics assignment or spin–statistics\ntheorem is part of these mathematical definitions.\n\n",
+          "relevant_hypotheses_and_conventions": "Supplies the scalar test-function and symmetric-Fock framework used for the field.",
+          "supplier_proof_status": "Published supplier; its current statement and complete proof were inspected; use is limited to the stated interface.",
+          "consumer_use": [
+            "Supplies the scalar test-function and symmetric-Fock framework used for the field."
+          ]
+        },
+        {
+          "supplier": "post-qft-free-field-model",
+          "carrier": "items/post-qft-free-field-model.md",
+          "status": "published",
+          "source_section": "Postulate",
+          "exact_statement": "Fix four-dimensional affine Minkowski spacetime with metric\n$\\eta=\\operatorname{diag}(-1,1,1,1)$, an inertial length-coordinate chart\n$x=(x^0,\\mathbf x)$, $x^0=ct$, and coordinates measured in metres, as specified\nby [[def-qft-framework-units]]. Write\n$\\Box=\\eta^{ab}\\partial_a\\partial_b$. The mass-shell parameter $\\mu\\ge0$ has\nunit $\\mathrm m^{-1}$ and\n$\\omega_\\mu(\\mathbf k)=\\sqrt{|\\mathbf k|^2+\\mu^2}$ has the same unit. For a\nmassive species, $\\mu=m_{\\mathrm{rest,SI}}c/\\hbar$; $\\mu=0$ is the separately\nadmitted massless branch of the mathematical free-field construction. Thus\n$\\hbar c\\omega_\\mu$ is physical energy and $\\hbar\\mathbf k$ is physical\nmomentum. The natural-unit action is written $S/\\hbar$.\n\nThe scalar one-particle space is\n$\\mathcal H_\\mu=L^2(H_\\mu^+,d\\nu_\\mu;\\mathbb C)$, where\n$H_\\mu^+=\\{(\\omega_\\mu(\\mathbf k),\\mathbf k):\\mathbf k\\in\\mathbb R^3,\\ \\omega_\\mu(\\mathbf k)>0\\}$ and\n$d\\nu_\\mu=d^3\\mathbf k/((2\\pi)^3\\,2\\omega_\\mu(\\mathbf k))$; at $\\mu=0$ the\nmeasure-zero apex $\\mathbf k=0$ is omitted. These are the shell conventions\nof [[lem-qft-smeared-free-scalar]].\n\nFor a smooth real classical scalar $\\phi_{\\mathrm n}:\\mathbb R^4\\to\\mathbb R$\nwith the canonical free-field length degree $-1$, adopt\n$$\\frac{S_\\phi}{\\hbar}=-\\frac12\\int_{\\mathbb R^4}\\left(\\eta^{ab}\\partial_a\\phi_{\\mathrm n}\\partial_b\\phi_{\\mathrm n}+\\mu^2\\phi_{\\mathrm n}^2\\right)\\,d^4x.$$\nFor a smooth commuting classical Dirac spinor\n$\\psi_{\\mathrm n}:\\mathbb R^4\\to\\mathbb C^4$ with canonical free-field length\ndegree $-3/2$, put $\\bar\\psi_{\\mathrm n}=\\psi_{\\mathrm n}^\\dagger\\beta$ and\nuse the Clifford convention\n$\\{\\gamma^a,\\gamma^b\\}=-2\\eta^{ab}I_4$ from\n[[def-qft-framework-units]]. Adopt\n$$\\frac{S_D}{\\hbar}=\\int_{\\mathbb R^4}\\bar\\psi_{\\mathrm n}(i\\gamma^a\\partial_a-\\mu)\\psi_{\\mathrm n}\\,d^4x.$$\nThe smooth classical variables in these functionals commute; no Grassmann\nalgebra or path-integral construction is being adopted. These formulas specify\nlocal action densities: for arbitrary smooth global fields the total\nintegrals need not converge. Only compactly supported variations are used;\nthe action difference under such a variation is an integral over a compact\nset and is finite for smooth fields. With these variations on the fixed\nbackground, the intended Euler–Lagrange equations are\n$(\\Box-\\mu^2)\\phi_{\\mathrm n}=0$ and\n$(i\\gamma^a\\partial_a-\\mu)\\psi_{\\mathrm n}=0$, conditional on the exact\nmathematical supplier recorded as [L1] below.\n\nAs the physical interpretation of this selected free model, assign the real\nscalar species to the bosonic symmetric Fock representation and assign the\nDirac field to the particle/antiparticle CAR representation on\n$\\mathcal H_+\\oplus\\overline{\\mathcal H_-}$. Choose the zero-particle Fock\nvectors as the scalar and Dirac vacuum states. This is an adopted species and\nstatistics assignment. The CCR/CAR and operator properties of the specified\nrepresentations are mathematical model consequences; they do not prove a\ngeneral spin-statistics theorem or establish that nature realizes this model.\n\nThe scalar construction is the Schwartz-smeared field\n$\\Phi_\\mu(f)=a(K_\\mu\\overline f)+a^\\dagger(K_\\mu f)$ on the finite-particle\ndomain, with the future-shell phase\n$p\\circ x=\\omega_\\mu x^0-\\mathbf k\\cdot\\mathbf x$, exactly as in\n[[lem-qft-smeared-free-scalar]]. The Dirac construction is the bounded\nspacetime-smeared CAR field of\n[[lem-qft-free-dirac-car-locality]], using the positive and negative\nprojections of the specified free Dirac matrix. In that carrier,\n$\\mathcal H_D=L^2(\\mathbb R^3,d^3\\mathbf k/(2\\pi)^3;\\mathbb C^4)$,\n$h_D(\\mathbf k)=\\boldsymbol\\alpha\\cdot\\mathbf k+\\beta\\mu$, and\n$P_\\pm(\\mathbf k)=(I_4\\pm h_D(\\mathbf k)/\\omega_\\mu(\\mathbf k))/2$; the\nparticle and antiparticle one-particle spaces are the closed ranges\n$\\mathcal H_+$ and $\\overline{\\mathcal H_-}$. These carriers state their\nmathematical hypotheses and construction domains; their draft status is not an\nindependent physics or proof approval.\n\nTong's lecture notes and Srednicki's book draft provide independent\npresentations of the scalar and Dirac free-field formulations. Their formal\nmode notation supplies context for this adoption, not a proof of the\noperator-domain claims and not evidence that the adopted model describes\nnature.\n\n",
+          "relevant_hypotheses_and_conventions": "Selects the free massive scalar vacuum representation as a model postulate.",
+          "supplier_proof_status": "Published supplier; its current statement and complete proof were inspected; use is limited to the stated interface.",
+          "consumer_use": [
+            "Selects the free massive scalar vacuum representation as a model postulate."
+          ]
+        },
+        {
+          "supplier": "def-qft-free-field-observables",
+          "carrier": "items/def-qft-free-field-observables.md",
+          "status": "published",
+          "source_section": "Definition",
+          "exact_statement": "Use the fields, Fock spaces, vacua, coordinate conventions, and natural/SI\nnormalizations adopted in [[post-qft-free-field-model]]. For an open spacetime\nregion $O\\subseteq\\mathbb R^4$, a scalar test is a real\n$f\\in C_c^\\infty(O;\\mathbb R)$ and a Dirac test is a\n$F\\in C_c^\\infty(O;\\mathbb C^4)$. These are compactly supported smooth test\nfunctions on the fixed inertial Minkowski chart.\n\nFor scalar tests use the bounded Weyl operators\n$$W_\\mu(f)=W_{\\rm Segal}(\\sqrt2 K_\\mu f),$$\nwhere $K_\\mu$ is the future-shell restriction and\n$W_{\\rm Segal}$ is the unitary generated by the closed Segal field, with the\nnormalization and phase convention of\n[[lem-qft-smeared-free-scalar]]. Define the scalar bounded observable algebra\n$\\mathfrak A_s(O)$ to be the norm closure of the unital $*$-algebra generated\nby these $W_\\mu(f)$. The real smeared field is symmetric on\n$\\mathcal D_{\\rm fin}$ and its self-adjoint closure has the exact multiplier\ndomain supplied by [[lem-qft-free-domain-observables]] and\n[[lem-qft-segal-weyl-domain]].\n\nFor Dirac tests, $\\Psi(F)$ is the bounded smeared CAR field of\n[[lem-qft-free-dirac-car-locality]]. Define $\\mathfrak A_D(O)$ as the norm\nclosure of the unital algebra generated by products containing an even number\nof these field operators and their adjoints, with all test supports in $O$.\n“Even” here means even field parity, or equivalently an even number of odd\nCAR field generators in each product. The even algebra is the selected local\nDirac observable algebra; an odd charged field is not included as a commuting\nlocal observable.\n\nThe selected vacuum states on bounded operators are the vector states\n$\\omega_s(A)=\\langle\\Omega_s,A\\Omega_s\\rangle$ and\n$\\omega_D(B)=\\langle\\Omega_D,B\\Omega_D\\rangle$. For the scalar Fock space,\ndefine the total number, Hamiltonian, and physical momentum components by\n$$N_s=d\\Gamma_s(1),\\qquad H_s=\\hbar c\\,d\\Gamma_s(\\omega_\\mu),\\qquad P_{s,j}=\\hbar\\,d\\Gamma_s(k_j).$$\nHere $d\\Gamma_s$ acts on the $n$-particle sector by summing the displayed\none-particle multiplier over its $n$ arguments. Their maximal domains are\nthe square-integrability domains of those sector sums; in particular,\n$$D(N_s)=\\left\\{\\Psi=(\\Psi_n):\\sum_{n\\ge1}n^2\\|\\Psi_n\\|^2<\\infty\\right\\}.$$\nThese physical components have one-particle momentum $+\\hbar k_j$, as in\n[[def-qft-framework-units]]. The mathematical spatial generators in\n[[lem-qft-smeared-free-scalar]] and [[lem-qft-free-domain-observables]] use\n$G_{s,j}=d\\Gamma_s(-k_j)$ with the positive-exponent convention;\nthus $P_{s,j}=-\\hbar G_{s,j}$. For a translation increment\n$a=(a^0,\\mathbf a)$ in length coordinates, the scalar translation unitary\nis the sectorwise phase\n$\\exp(i(a^0H_s/(\\hbar c)-\\sum_j a^jP_{s,j}/\\hbar))$.\nChanging the sign does not change the maximal domain, since the squared\nsector multiplier is unchanged. This also follows directly from\n[[lem-qft-second-quantized-spectrum]] with multiplier $k_j$. For the Dirac Fock space, let $H$\nand $P_j$ be the mathematical translation generators of\n[[lem-qft-dirac-fermionic-translation-spectrum]]. Their one-particle\nmultipliers are respectively $(\\omega_\\mu,\\mathbf k)$ for particles and\n$(\\omega_\\mu,-\\mathbf k)$ for antiparticles, and the sector multiplier is\ntheir sum. Define the physical Dirac Hamiltonian and momentum by\n$H_D=\\hbar cH$ and $P_{D,j}=\\hbar P_j$, using the positive SI constants from\n[[def-qft-framework-units]]. Their exact domains are unchanged by these\nnonzero scale factors; their multipliers have units joules and momentum,\nrespectively.\n\nFor any of these self-adjoint operators $A$, a normalized state\n$\\Psi\\in D(A)$ has model mean $\\langle\\Psi,A\\Psi\\rangle$ and variance\n$\\operatorname{Var}_\\Psi(A)=\\|(A-\\langle\\Psi,A\\Psi\\rangle)\\Psi\\|^2$.\nThis requires the second spectral moment but does not require\n$\\Psi\\in D(A^2)$. Products of unbounded operators use their composition\ndomains.\n\nIf a signed charge parameter $q_{\\rm SI}\\in\\mathbb R$ measured in coulombs is supplied, the intended\nDirac charge-number operator is $Q_{\\rm SI}=q_{\\rm SI}(N_p-N_{\\bar p})$.\nHere $\\Pi_p$ and $\\Pi_{\\bar p}$ are the orthogonal projections onto\n$\\mathcal H_+$ and $\\overline{\\mathcal H_-}$; on the $n$-particle sector,\n$N_p$ and $N_{\\bar p}$ are the sums of the corresponding projections over\nthe $n$ tensor factors. Its candidate maximal direct-sum domain is\n$$D(Q_{\\rm SI})=\\left\\{\\Psi=(\\Psi_n):\\sum_{n\\ge0}\\left\\|q_{\\rm SI}\\sum_{r=1}^n(\\Pi_p-\\Pi_{\\bar p})^{(r)}\\Psi_n\\right\\|^2<\\infty\\right\\}.$$\nThis is a candidate definition only; no self-adjointness or proved-domain\nclaim is asserted here.\n\nMeasurements in this model are assigned only when a state and a normalized\nfinite bounded Kraus instrument have actually been constructed. For such an\ninstrument, the adopted outcome probabilities and positive-probability\nconditional states are exactly those of\n[[post-qft-constructed-model-and-measurement]]. They are model probabilities,\nnot observed outcomes. The field definitions are test-smeared: neither\n$\\Phi_\\mu(x)$ nor $\\Psi(x)$ is a pointwise operator supplied here, and the\nsmearing results do not define coincident products or a diagonal restriction.\n\n",
+          "relevant_hypotheses_and_conventions": "Supplies the scalar Weyl-observable convention used to generate the local algebra.",
+          "supplier_proof_status": "Published supplier; its current statement and complete proof were inspected; use is limited to the stated interface.",
+          "consumer_use": [
+            "Supplies the scalar Weyl-observable convention used to generate the local algebra."
+          ]
+        },
+        {
+          "supplier": "lem-qft-scalar-poincare-action",
+          "carrier": "items/lem-qft-scalar-poincare-action.md",
+          "status": "published",
+          "source_section": "Statement",
+          "exact_statement": "Assume Countable Choice [[def-countable-choice]]. Use the proper\northochronous Poincare group\n$G=\\mathbb R^4\\rtimes SO^+(1,3)$ in the coordinates of\n[[def-qft-scalar-mass-shell]]. Give $SO^+(1,3)$ the matrix subspace topology\nfrom $M_4(\\mathbb R)$ and $G$ the product topology on\n$\\mathbb R^4\\times SO^+(1,3)$, with the group law below. A unitary\nrepresentation of this topological group is a homomorphism into the unitary\noperators on $H_\\mu$; it is strongly continuous when each orbit map\n$g\\mapsto U_\\mu(g)h$ is norm-continuous for $h\\in H_\\mu$. For\n$g=(a,\\Lambda)\\in G$, define\n$$f_g(x)=f(\\Lambda^{-1}(x-a)),\\qquad [U_\\mu(g)h](p)=e^{ip\\circ a}h(\\Lambda^{-1}p).$$\nThen $f_g\\in\\mathscr S(\\mathbb R^4)$, $U_\\mu(g)$ is a well-defined unitary\non $H_\\mu$, $g\\mapsto U_\\mu(g)$ is a strongly continuous representation, and\n$$K_\\mu f_g=U_\\mu(g)K_\\mu f \\qquad(f\\in\\mathscr S(\\mathbb R^4)).$$\nThe group product convention is\n$(a,\\Lambda)(b,\\Gamma)=(a+\\Lambda b,\\Lambda\\Gamma)$.\n\n",
+          "relevant_hypotheses_and_conventions": "Supplies the scalar Poincare/Fock implementation convention used for boosts.",
+          "supplier_proof_status": "Published supplier; its current statement and complete proof were inspected; use is limited to the stated interface.",
+          "consumer_use": [
+            "Supplies the scalar Poincare/Fock implementation convention used for boosts."
+          ]
+        },
+        {
+          "supplier": "lem-qft-smeared-free-scalar",
+          "carrier": "items/lem-qft-smeared-free-scalar.md",
+          "status": "published",
+          "source_section": "Statement",
+          "exact_statement": "Assume Countable Choice [[def-countable-choice]], let $\\mu\\ge0$, let\n$H_\\mu$ and $K_\\mu$ be as in [[def-qft-scalar-mass-shell]], and form\n$\\mathcal F_s(H_\\mu)$ with vacuum $\\Omega$ and finite-particle domain\n$\\mathcal D_{\\rm fin}$. For $f\\in\\mathscr S(\\mathbb R^4)$ define on\n$\\mathcal D_{\\rm fin}$\n$$\\Phi_\\mu(f)=a(K_\\mu\\overline f)+a^\\dagger(K_\\mu f).$$\nThis is a complex-linear map of test functions into operators\n$\\mathcal D_{\\rm fin}\\to\\mathcal D_{\\rm fin}$. For real $f$ it is symmetric\nand equals $\\sqrt2\\,\\Phi_{\\rm Segal}(K_\\mu f)|_{\\mathcal D_{\\rm fin}}$, where the Segal field of\n[[lem-qft-segal-weyl-domain]] is\n$\\Phi_{\\rm Segal}(h)=\\overline{(a^\\dagger(h)+a(h))/\\sqrt2}$.\nThus its Weyl unitary is\n$W_\\mu(f):=W_{\\rm Segal}(\\sqrt2 K_\\mu f)$ and, for real $f,g$,\n$$W_\\mu(f)W_\\mu(g)= e^{-i\\,\\operatorname{Im}\\langle K_\\mu f,K_\\mu g\\rangle_2}W_\\mu(f+g).$$\nFor every real $f$ the vacuum Weyl expectation is\n$$\\langle\\Omega,W_\\mu(f)\\Omega\\rangle_2 =e^{-\\|K_\\mu f\\|_2^2/2}.$$\nHere the inner product is second-variable-linear as fixed in\n[[def-qft-fock-and-test-spaces]]. The vacuum has zero one-point function and\ntwo-point function\n$$\\langle\\Omega,\\Phi_\\mu(f)\\Phi_\\mu(g)\\Omega\\rangle_2 =\\langle K_\\mu\\overline f,K_\\mu g\\rangle_2,$$\nwhich obeys $\\langle\\Omega,\\Phi_\\mu(\\overline f)\\Phi_\\mu(f)\\Omega\\rangle_2=\\|K_\\mu f\\|_2^2\\ge0$ for every complex test $f$ (ordinary diagonal positivity holds for real tests); higher vacuum moments of ordered real smeared\nfields obey the CCR pairing recursion and hence the free-field Wick pairing\nrule. The field is a weak operator-valued tempered distribution on $\\mathcal D_{\\rm fin}$: every matrix coefficient $f\\mapsto\\langle\\Psi,\\Phi_\\mu(f)\\Theta\\rangle_2$ for $\\Psi,\\Theta\\in\\mathcal D_{\\rm fin}$ is a continuous complex-linear functional on Schwartz space. Its adjoint satisfies $\\Phi_\\mu(f)^*|_{\\mathcal D_{\\rm fin}}=\\Phi_\\mu(\\overline f)$, and its normalized vacuum defines a positive state on the finite polynomial $*$-algebra generated by these fields.\n\nThe relative-coordinate two-point tempered distribution is\n$$W_\\mu(z)=\\int_{H_\\mu^+}e^{-ip\\circ z}\\,d\\nu_\\mu(p),$$\nunderstood by pairing with Schwartz tests. Its translation-invariant bidistribution is the shell integral of $e^{-ip\\circ x}e^{ip\\circ y}$; on product tests it is the displayed vacuum covariance.\n\nFor $g=(a,\\Lambda)$, let $f_g$ and $U_\\mu(g)$ be the affine test pullback\nand one-particle action of [[lem-qft-scalar-poincare-action]]. Their Fock\nlifts implement the same covariance for $\\Phi_\\mu$ on $\\mathcal D_{\\rm fin}$\nand for the bounded Weyl operators.\n\nFor translations, the joint spectral measure on Fock space is the\nsecond-quantized multiplier measure with one-particle vector\n$(\\omega_\\mu(\\mathbf k),-\\mathbf k)$. Its support is contained in the closed\nfuture cone $\\{(E,\\mathbf P):E\\ge|\\mathbf P|\\}$; the vacuum is an eigenvector\nat $(0,\\mathbf0)$. These are conditional mathematical model deductions.\nNo point field, empirical observation or measurement claim is made.\n\n",
+          "relevant_hypotheses_and_conventions": "Supplies the well-defined scalar smearing result used by the Weyl generators.",
+          "supplier_proof_status": "Published supplier; its current statement and complete proof were inspected; use is limited to the stated interface.",
+          "consumer_use": [
+            "Supplies the well-defined scalar smearing result used by the Weyl generators."
+          ]
+        },
+        {
+          "supplier": "def-qsmx-von-neumann-algebra",
+          "carrier": "items/def-qsmx-von-neumann-algebra.md",
+          "status": "current inspected carrier",
+          "source_section": "Definition",
+          "exact_statement": "Assume the Axiom of Choice. Let $H$ be a complex Hilbert space and\n$\\mathcal B(H)$ the space of bounded linear operators on $H$\n([[def-space-of-bounded-linear-operators]]). For a set\n$\\mathcal S\\subseteq\\mathcal B(H)$, write\n\n$$\\mathcal S':=\\{T\\in\\mathcal B(H):Ts=sT\\text{ for every }s\\in\\mathcal S\\}, \\qquad \\mathcal S'':=(\\mathcal S')'.$$\n\nThe strong operator topology on $\\mathcal B(H)$ is the topology of pointwise\nnorm convergence: $T_\\alpha\\to T$ strongly exactly when\n$\\|(T_\\alpha-T)\\xi\\|\\to0$ for every $\\xi\\in H$. The weak operator topology is\nthe topology of pointwise matrix-coefficient convergence: $T_\\alpha\\to T$\nweakly exactly when $\\langle T_\\alpha\\xi,\\eta\\rangle\\to\\langle T\\xi,\\eta\\rangle$\nfor every $\\xi,\\eta\\in H$. Use the linear-first inner-product convention.\n\nA **concrete von Neumann algebra** on $H$ is a unital star subalgebra\n$M\\subseteq\\mathcal B(H)$ satisfying $M=M''$. Under Choice, the double\ncommutant theorem makes this equivalent to being closed in the weak operator\ntopology.\n\nAn operator $a\\in\\mathcal B(H)$ is **positive** when $a=a^*$ and\n$\\langle a\\xi,\\xi\\rangle\\ge0$ for every $\\xi\\in H$, using the bounded\nadjoint convention of [[thm-hilbert-adjoint-properties]]. Write $M_+$ for the\npositive operators in $M$ and $a\\le b$ when $b-a$ is positive.\n\nA vector $\\Omega\\in H$ is **cyclic** for $M$ when\n$\\overline{M\\Omega}=H$, and is **separating** for $M$ when\n$x\\Omega=0$ for $x\\in M$ implies $x=0$. For a unit vector $\\Omega$, define its\nvector functional by $\\omega_\\Omega(x)=\\langle x\\Omega,\\Omega\\rangle$.\nIt is **faithful** when $\\omega_\\Omega(x^*x)=0$ implies $x=0$; this is\nequivalent to $\\Omega$ being separating because\n$\\omega_\\Omega(x^*x)=\\|x\\Omega\\|^2$.\n\nFor a bounded linear functional $\\varphi:M\\to\\mathbb C$, **positive** means\n$\\varphi(a)\\ge0$ for every $a\\in M_+$. A positive functional is **normal**\nwhen $\\varphi(\\sup_\\alpha x_\\alpha)=\\sup_\\alpha\\varphi(x_\\alpha)$ for each\nbounded increasing net $(x_\\alpha)$ in $M_+$ whose supremum is taken in $M$.\n\n",
+          "relevant_hypotheses_and_conventions": "Supplies the concrete double-commutant von Neumann-algebra convention.",
+          "supplier_proof_status": "Current draft supplier statement and complete proof were inspected; use is limited to the actual stated hypotheses and proof status recorded in the batch notes.",
+          "consumer_use": [
+            "Supplies the concrete double-commutant von Neumann-algebra convention."
+          ]
+        },
+        {
+          "supplier": "def-qsmx-standard-modular-data",
+          "carrier": "items/def-qsmx-standard-modular-data.md",
+          "status": "current inspected carrier",
+          "source_section": "Definition",
+          "exact_statement": "Assume the Axiom of Choice. Let $H$ be a complex Hilbert space with inner product linear in its first argument, let $M\\subseteq\\mathcal B(H)$ be a concrete von Neumann algebra, and let $\\Omega$ be a unit vector cyclic and separating for $M$. Define $D(S_0)=M\\Omega$ and $S_0(x\\Omega)=x^*\\Omega$ for $x\\in M$. Let $S=\\overline{S_0}$ and write its polar decomposition as $S=J\\Delta^{1/2}$. The preceding Tomita-operator lemma ensures this closure and polar data are well defined, with $\\Delta$ positive self-adjoint and injective. For $x\\in\\mathcal B(H)$ and dimensionless $t\\in\\mathbb R$, define\n$$\\sigma_t(x):=\\Delta^{it}x\\Delta^{-it}.$$\nSet $\\omega(x)=\\langle x\\Omega,\\Omega\\rangle$. The powers $\\Delta^{it}$ are the bounded unitary imaginary powers from the unbounded Borel functional calculus. At this definition stage $\\sigma_t$ is defined on $\\mathcal B(H)$; preservation of $M$ is established by a separate theorem.\n\n",
+          "relevant_hypotheses_and_conventions": "Supplies the Tomita operator and polar modular-data convention.",
+          "supplier_proof_status": "Current draft supplier statement and complete proof were inspected; use is limited to the actual stated hypotheses and proof status recorded in the batch notes.",
+          "consumer_use": [
+            "Supplies the Tomita operator and polar modular-data convention."
+          ]
+        },
+        {
+          "supplier": "thm-qsmx-tomita-takesaki",
+          "carrier": "items/thm-qsmx-tomita-takesaki.md",
+          "status": "current inspected carrier",
+          "source_section": "Statement",
+          "exact_statement": "Assume the Axiom of Choice. Let $M\\subseteq\\mathcal B(H)$ be a concrete von Neumann algebra and $\\Omega$ a unit cyclic-separating vector with standard modular data $(J,\\Delta,\\sigma_t)$ and vector state $\\omega(x)=\\langle x\\Omega,\\Omega\\rangle$. Then $\\sigma_t(x)=\\Delta^{it}x\\Delta^{-it}$ restricts to a one-parameter group of normal $*$-automorphisms of $M$ that is point-ultraweakly continuous, and $JMJ=M'$. The state $\\omega$ is an upper-strip $(\\alpha,1)$ KMS state, in the definition of the preceding item, for $\\alpha_t=\\sigma_{-t}$. This is a dimensionless W*-algebra KMS assertion; it does not assert norm continuity of $\\sigma_t$ on all of $M$.\n\n",
+          "relevant_hypotheses_and_conventions": "Supplies abstract modular automorphisms and KMS; it does not supply the adopted geometric boost identity.",
+          "supplier_proof_status": "Current draft supplier statement and complete proof were inspected; use is limited to the actual stated hypotheses and proof status recorded in the batch notes.",
+          "consumer_use": [
+            "Supplies abstract modular automorphisms and KMS; it does not supply the adopted geometric boost identity."
+          ]
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Dimensions of mu and the plane-wave phase.",
+          "result": "m_rest c / hbar has units m^-1; each p^j x^j and p^0 x^0 is dimensionless.",
+          "verifies": "The stated SI and length-coordinate convention."
+        },
+        {
+          "check": "Boost parameter.",
+          "result": "s is dimensionless and the matrix preserves -(x^0)^2+(x^1)^2 while mapping the right wedge to itself.",
+          "verifies": "The stated Lorentz-sign and boost convention."
+        }
+      ]
+    },
+    "pthm-tgrx-wedge-unruh-clock": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "post-tgrx-wedge-modular-model",
+          "source_section": "Postulate",
+          "quote": "Assume both the Axiom of Choice and the Axiom of Countable Choice. Fix a\nmassive real scalar species with rest mass $m_{\\mathrm{rest}}>0$ in kilograms.\nUse four-dimensional affine Minkowski spacetime with metric\n$\\eta=\\operatorname{diag}(-1,1,1,1)$ and length coordinates\n$x=(x^0,x^1,x^2,x^3)$, where $x^0=ct$ and $c>0$ has units\n$\\mathrm{m\\,s^{-1}}$. Set $\\mu=m_{\\mathrm{rest}}c/\\hbar>0$ in\n$\\mathrm{m^{-1}}$, where $\\hbar>0$ is in $\\mathrm{J\\,s}$. The future shell,\none-particle space, and measure are\n$$H_\\mu^+=\\{(p^0,\\mathbf p):(p^0)^2-|\\mathbf p|^2=\\mu^2,\\ p^0>0\\},\\qquad \\mathcal H_\\mu=L^2(H_\\mu^+,d\\nu_\\mu),\\qquad d\\nu_\\mu=\\frac{d^3\\mathbf p}{(2\\pi)^3\\,2\\sqrt{|\\mathbf p|^2+\\mu^2}}.$$\nTake the scalar Hilbert space to be the bosonic symmetric Fock space\n$\\mathcal H=\\mathcal F_s(\\mathcal H_\\mu)$ and its unit zero-particle vector\nto be $\\Omega$.\n\nFor an open set $O\\subseteq\\mathbb R^4$ and real\n$f\\in C_c^\\infty(O;\\mathbb R)$, define\n$$K_\\mu f(p)=\\int_{\\mathbb R^4}f(x)e^{i(p^0x^0-\\mathbf p\\cdot\\mathbf x)}\\,d^4x, \\qquad W_\\mu(f)=W_{\\mathrm{Segal}}(\\sqrt2\\,K_\\mu f).$$\nLet $\\mathfrak A_s(O)$ be the operator-norm closure of the unital\n$*$-algebra generated by all these bounded Weyl unitaries, and set\n$W_R=\\{x\\in\\mathbb R^4:x^1>|x^0|\\}$ and\n$M(W_R)=\\mathfrak A_s(W_R)''\\subseteq\\mathcal B(\\mathcal H)$. Here\n$\\mathcal B(\\mathcal H)$ denotes the bounded linear operators;\n$\\mathcal S'$ is the set of bounded operators commuting with every member of\n$\\mathcal S$, and $\\mathcal S''=(\\mathcal S')'$. Thus $M(W_R)$ is a concrete\nvon Neumann algebra in the chosen double-commutant convention.\n\nFor dimensionless rapidity $s\\in\\mathbb R$, define the future-directed boost\nby\n$$\\Lambda_W(s)(x^0,x^1,x^2,x^3) =(x^0\\cosh s+x^1\\sinh s,\\ x^0\\sinh s+x^1\\cosh s,\\ x^2,\\ x^3).$$\nUse its scalar Fock implementation: on the one-particle space\n$[u_\\mu(\\Lambda)\\psi](p)=\\psi(\\Lambda^{-1}p)$, and on the $n$-particle\nsymmetric sector $U(\\Lambda)=u_\\mu(\\Lambda)^{\\otimes_s n}$, with the vacuum\nsector fixed. The QFT Fock pairing is linear in its second argument; for the\nmodular definitions use the equivalent first-variable-linear pairing\n$\\langle u,v\\rangle_1:=\\langle v,u\\rangle_2$. Thus the vacuum vector state\nis $\\omega_W(X)=\\langle X\\Omega,\\Omega\\rangle_1\n=\\langle\\Omega,X\\Omega\\rangle_2$. Assume explicitly that $\\Omega$ is cyclic and separating for\n$M(W_R)$, meaning $\\overline{M(W_R)\\Omega}=\\mathcal H$ and\n$X\\Omega=0$ for $X\\in M(W_R)$ implies $X=0$. The Tomita operator is the\nclosure of $S_{W,0}(X\\Omega)=X^*\\Omega$ on $M(W_R)\\Omega$; write its polar\ndecomposition as $S_W=J_W\\Delta_W^{1/2}$, in the standard modular-data\nconvention.\n\nAs an additional model interface, adopt\n$$\\Delta_W^{it}=U(\\Lambda_W(-2\\pi t))\\qquad(t\\in\\mathbb R).$$\nThis geometric identity and cyclic-separating property are explicit adopted\nassumptions for this selected model. The abstract Tomita–Takesaki theorem\nsupplies modular automorphisms and their KMS property, but this carrier does\nnot use it as a proof that the modular unitaries equal spacetime boosts. No\ntensor-product factorization of the continuum Hilbert space across the wedge\nand its complement is assumed.\n\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-qsmx-tomita-takesaki",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $M\\subseteq\\mathcal B(H)$ be a concrete von Neumann algebra and $\\Omega$ a unit cyclic-separating vector with standard modular data $(J,\\Delta,\\sigma_t)$ and vector state $\\omega(x)=\\langle x\\Omega,\\Omega\\rangle$. Then $\\sigma_t(x)=\\Delta^{it}x\\Delta^{-it}$ restricts to a one-parameter group of normal $*$-automorphisms of $M$ that is point-ultraweakly continuous, and $JMJ=M'$. The state $\\omega$ is an upper-strip $(\\alpha,1)$ KMS state, in the definition of the preceding item, for $\\alpha_t=\\sigma_{-t}$. This is a dimensionless W*-algebra KMS assertion; it does not assert norm continuity of $\\sigma_t$ on all of $M$.\n\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-tgrx-modular-kms-time-rescaling",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $H$ be a complex Hilbert space and let\n$M\\subseteq\\mathcal B(H)$ be a nonzero unital $*$-subalgebra with $M=M''$,\nwhere $\\mathcal B(H)$ is the bounded-operator algebra and $M'$ is its\ncommutant. Let $\\omega$ be a normal state, meaning a bounded positive linear\nfunctional with $\\omega(I)=1$ that preserves suprema of bounded increasing\nnets of positive elements. Let $t\\mapsto\\alpha_t$ be a one-parameter group\nof bijective unital $*$-automorphisms of $M$, with dimensionless parameter\n$t$, such that $t\\mapsto\\varphi(\\alpha_t(X))$ is continuous for every\n$X\\in M$ and every normal linear functional $\\varphi$ on $M$ (an element of\nthe predual). Suppose\nthat for some dimensionless $\\theta>0$, for every $A,B\\in M$ there is a\nbounded continuous function $F_{A,B}$ on\n$S_\\theta=\\{z\\in\\mathbb C:0\\le\\operatorname{Im}z\\le\\theta\\}$, holomorphic\ninside, with\n$$F_{A,B}(t)=\\omega(A\\alpha_t(B)),\\qquad F_{A,B}(t+i\\theta)=\\omega(\\alpha_t(B)A).$$\nThis is the upper-strip convention of the preceding von Neumann KMS\ndefinition. For any scalar $\\lambda>0$, set\n$\\widetilde\\alpha_\\tau=\\alpha_{\\tau/\\lambda}$ for $\\tau\\in\\mathbb R$.\nThen $\\widetilde\\alpha$ is again a point-ultraweakly continuous\none-parameter group, and $\\omega$ satisfies the same upper-strip boundary\ncondition for $\\widetilde\\alpha$ on the strip of width $\\lambda\\theta$.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-tgr-framework-units",
+          "source_section": "Definition",
+          "quote": "Use a smooth, oriented and time-oriented Lorentzian four-manifold $(M,g)$ of signature $(-,+,+,+)$ with its metric-selected Levi-Civita connection $\\nabla$, as defined in [[def-gr-smooth-lorentzian-objects]] and [[thm-gr-nondegenerate-levi-civita-and-tensor-derivative]]. A chart is a smooth coordinate map; an observer congruence is a smooth future-directed unit timelike vector field $u$ with $g(u,u)=-1$; its integral curves, an adapted chart, and a tetrad field are distinct objects. The exact regularity and rest-space conventions of [[def-tgr-local-fluid-state]] and the chart/congruence distinction of [[thm-sr-local-congruence-adapted-charts-and-frobenius]] apply. An orthogonal family of rest slices is not available for every congruence.\n\nFor physical unit assignments use length coordinates $x^0=ct_{\\rm phys}$ and spatial coordinates in metres, where $c>0$ has units $\\mathrm{m\\,s^{-1}}$. In this convention the metric components, a unit observer $u$, and a length-normalized Killing field $\\xi$ are dimensionless. Other coordinate choices transform component units by their coordinate Jacobians. State maps and geometric currents have the types and units in [[def-tgr-local-fluid-state]]: a formal marker density $n$ is $\\mathrm{marker\\,m^{-3}}$; entropy density $s$ is $\\mathrm{J\\,K^{-1}\\,m^{-3}}$; a $C^1$ entropy current $S^a$ has components $\\mathrm{J\\,K^{-1}\\,m^{-3}}$; and its physical flux is $cS^a$ in $\\mathrm{J\\,K^{-1}\\,m^{-2}\\,s^{-1}}$. Its geometric divergence $\\nabla_aS^a$ has units $\\mathrm{J\\,K^{-1}\\,m^{-4}}$, so $c\\nabla_aS^a$ is entropy production per physical volume per second. The symmetric stress tensor $\\mathsf T^{ab}$ has components in pascals in length coordinates; it is a tensor, not an observer-independent array of energy densities. The state-function energy density $\\varepsilon$ and the observer projection $\\mathsf T^{ab}u_a u_b$ remain distinct unless a material model identifies them.\n\nThe constant $c$ supplies the spacetime length/time conversion. In a branch with dynamical Einstein gravity, $G$ is an independent coupling parameter in $\\mathrm{m^3\\,kg^{-1}\\,s^{-2}}$. The Boltzmann constant $k_B$ has units $\\mathrm{J\\,K^{-1}}$ and is used when a statistical entropy/temperature calibration is adopted. Planck's constant $h_{\\rm P}=2\\pi\\hbar$ has units $\\mathrm{J\\,s}$; $\\hbar$ is used only in a quantum branch. Under the current SI definition, $c$, $h_{\\rm P}$ and $k_B$ have exact defining numerical values; this metrological fact does not make them derived predictions of a thermodynamic or gravitational model. $G$ is experimentally adjusted and carries measurement uncertainty. The roles of these quantities as primitive model inputs are framework-specific. The local energy function, pressure, temperature and chemical potential in [[def-tgr-local-fluid-state]] are derived from the supplied state function; no particle mass or universal equation of state is derived from gravity alone.\n\nFor a smooth Killing field $\\xi$ on an open domain, meaning $\\mathcal L_\\xi g=0$ by [[def-gr-killing-field]], restrict attention to a domain where $\\xi$ is future timelike and choose a positive normalization at infinity or at a specified wall/observer. Define the lapse $N_\\xi:=\\sqrt{-g(\\xi,\\xi)}>0$ and unit observer $u_\\xi:=\\xi/N_\\xi$. For a supplied proper-temperature scalar $T>0$ in kelvins, define the Killing-normalized temperature field $T_\\xi:=N_\\xi T$. It is not assumed constant; if a separate equilibrium argument proves constancy on its stated domain, denote that value by $T_K$. The finite matter charge and its side-flux convention are those in [[lem-tgr-killing-energy-normalization]] and [[def-tgr-spacelike-current-slab]]; their charge-balance clause retains its explicitly conditional finite-slab hypotheses. This charge is not a general gravitational energy.\n\nKeep covector types separate. A mechanical momentum covector $p_a$ has units $\\mathrm{kg\\,m\\,s^{-1}}$; its Killing energy is $E_\\xi(p):=-c\\,p_a\\xi^a$ in joules. An energy-valued covector $\\pi_a$ already has units joules and pairs as $E_\\xi(\\pi):=-\\pi_a\\xi^a$, without another factor of $c$. An inverse-length wave covector $k_a$ has units $\\mathrm{m^{-1}}$ and pairs as $E_\\xi(k):=-\\hbar c\\,k_a\\xi^a$. For a specified charged stationary gauge, charge $q$ has coulombs and a potential covector $A_a$ in length coordinates has units $\\mathrm{V\\,s\\,m^{-1}}$; when a global stationary potential is actually defined, $\\Phi_\\xi:=-cA_a\\xi^a$ has volts and $q\\Phi_\\xi$ has joules. A charged energy or chemical-potential convention requires its stated gauge and reference; no global potential, electrochemical equilibrium, or constancy is asserted here.\n\nWhen $T_K>0$ is supplied, distinguish the inverse-temperature vector $\\beta^a:=u_\\xi^a/(k_BT)=\\xi^a/(k_BT_K)$, with units $\\mathrm{J^{-1}}$, from the scalar $\\beta_K:=1/(k_BT_K)$, also in $\\mathrm{J^{-1}}$. For a quantum statistical model, let $\\mathcal A$ be a unital complex $C^*$-algebra: an associative complex algebra with nonzero identity $1$, a complete norm satisfying $\\|AB\\|\\leq\\|A\\|\\,\\|B\\|$, and a conjugate-linear involution $A\\mapsto A^*$ satisfying $(A^*)^*=A$, $(AB)^*=B^*A^*$, and $\\|A^*A\\|=\\|A\\|^2$. Its elements represent bounded observables. Let $\\{\\alpha_t:t\\in\\mathbb R\\}$ be bijective complex-linear maps $\\alpha_t:\\mathcal A\\to\\mathcal A$ preserving multiplication and involution, with $\\alpha_t(1)=1$, $\\alpha_0=\\operatorname{id}$, and $\\alpha_{s+t}=\\alpha_s\\circ\\alpha_t$; require $t\\mapsto\\alpha_t(A)$ to be norm-continuous for every $A\\in\\mathcal A$. A state is a bounded complex-linear functional $\\omega:\\mathcal A\\to\\mathbb C$ with $\\omega(1)=1$ and $\\omega(A^*A)\\geq0$ for every $A\\in\\mathcal A$. For $b>0$ in the chosen flow-parameter units, define $S_b:=\\{z\\in\\mathbb C:0\\leq\\operatorname{Im}z\\leq b\\}$. The state $\\omega$ satisfies the KMS condition at width $b$ when for every $A,B\\in\\mathcal A$ there is a function $F_{A,B}:S_b\\to\\mathbb C$ with $\\sup_{z\\in S_b}|F_{A,B}(z)|<\\infty$, continuous on $S_b$ and complex-differentiable at every point of its interior, such that\n\n$$F_{A,B}(t)=\\omega(A\\alpha_t(B)),\\qquad F_{A,B}(t+ib)=\\omega(\\alpha_t(B)A)\\quad(t\\in\\mathbb R).$$\n\nThis all-observable boundary-value definition uses no separately declared analytic subalgebra. With the quantum statistical calibration $\\beta_K=(k_BT_K)^{-1}$, a physical-time parameter $t$ in seconds has KMS width $b_t=\\hbar\\beta_K$ seconds. If the flow parameter is length $\\lambda=ct$, use the reparameterized group $\\widetilde\\alpha_\\lambda:=\\alpha_{\\lambda/c}$; its KMS width is $b_\\lambda=c\\hbar\\beta_K$ metres. These are unit and parameter-convention assignments only. This definition introduces no Hilbert-space operator $H_K$ and does not identify the abstract automorphism flow or its strip width with the finite matter charge $H_\\xi$ of [[lem-tgr-killing-energy-normalization]]. This item asserts neither the existence of an observable algebra or flow for a given thermodynamic-gravity model nor the existence of a KMS state or equilibrium.\n\nOn a specified smooth embedded null hypersurface $\\mathcal H\\subset M$,\nwrite $i:\\mathcal H\\hookrightarrow M$ for the inclusion. A generator $\\chi$\nhere is a smooth section of $i^*TM$ with $\\chi_p\\in T_p\\mathcal H$\nnonzero and null at each $p\\in\\mathcal H$. For a smooth tangent field $X$\non $\\mathcal H$ and a smooth vector field $V$ along it, define\n$\\nabla_XV:=(i^*\\nabla)_XV$ by [[def-pullback-connection]], applied to the\nambient tangent bundle and its metric-selected connection. The prescription\nis independent of frames by\n[[thm-pullback-connection-is-well-defined-and-functorial]]. In particular,\n$\\nabla_\\chi\\chi$ is a vector field along $\\mathcal H$ and needs no chosen\nambient extension. If $\\chi$ is the restriction of a smooth ambient field\n$\\widetilde\\chi$, the same theorem gives\n$\\nabla_\\chi\\chi=(\\nabla_{\\widetilde\\chi}\\widetilde\\chi)|_{\\mathcal H}$;\nthus this convention also covers the supplied ambient Killing generators.\nThe generator may admit a scalar $\\kappa_{\\rm geom}$ defined by\n$\\nabla_\\chi\\chi=\\kappa_{\\rm geom}\\chi$. When the flow parameter has length units, $\\kappa_{\\rm geom}$ has units $\\mathrm{m^{-1}}$; the corresponding acceleration-unit quantity $\\kappa_{\\rm acc}:=c^2\\kappa_{\\rm geom}$ has units $\\mathrm{m\\,s^{-2}}$. This definition does not assert a horizon exists, that $\\kappa$ is constant, or that a temperature law follows. The formula $T_K=\\hbar c\\kappa_{\\rm geom}/(2\\pi k_B)$ requires a specified quantum/semiclassical model, and an area-entropy formula requires a separate thermodynamic identification. In particular, equal units do not identify local material entropy, finite statistical entropy, and area entropy, and no generalized second law is asserted here.\n\n",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [A2], $\\Delta_W^{it}=U(\\Lambda_W(-2\\pi t))$. Since\n$\\alpha_t=\\sigma_{-t}$, we have\n$\\alpha_t(X)=\\Delta_W^{-it}X\\Delta_W^{it}\n=U(\\Lambda_W(2\\pi t))XU(\\Lambda_W(2\\pi t))^*$ for $X\\in M$. Thus\n$\\alpha_t$ is the future-boost action with rapidity $2\\pi t$; the minus\nsign in the adopted modular identity is essential for this direction.",
+          "step": "1.1",
+          "inputs": [
+            "A2",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Put $\\rho=c^2/a$ and differentiate the curve in the Statement. Then\n$\\dot\\gamma_a(\\tau)=(c\\cosh(a\\tau/c),c\\sinh(a\\tau/c),0,0)$ and\n$\\ddot\\gamma_a(\\tau)=(a\\sinh(a\\tau/c),a\\cosh(a\\tau/c),0,0)$. Direct\ncontraction with $\\eta$ gives\n$\\eta(\\dot\\gamma_a,\\dot\\gamma_a)=-c^2$ and\n$\\eta(\\ddot\\gamma_a,\\ddot\\gamma_a)=a^2$; also\n$\\dot x^0=c\\cosh(a\\tau/c)>0$. Therefore $\\tau$ is proper time, the curve\nis future timelike with proper acceleration magnitude $a$, and its boost\nrapidity is $a\\tau/c$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $\\lambda=2\\pi c/a>0$, which has seconds as its unit by [F3]. Then\n$\\tau/\\lambda=a\\tau/(2\\pi c)$ and, by step 1.1,\n$\\widetilde\\alpha_\\tau=\\alpha_{\\tau/\\lambda}$. Apply [F1] and [F2] with\ndimensionless width $\\theta=1$: $\\omega_W$ has the required bounded\ncontinuous upper-strip functions on width $\\lambda=2\\pi c/a$ seconds for\nevery $A,B\\in M$. By [F3],\n$\\beta_U=\\lambda/\\hbar=2\\pi c/(a\\hbar)$ and\n$T_U=(k_B\\beta_U)^{-1}=\\hbar a/(2\\pi c k_B)$. The displayed units give\n$[\\beta_U]=\\mathrm{J^{-1}}$ and $[T_U]=\\mathrm K$. No density matrix or\ndetector statement is used.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "M is the nonzero unital wedge von Neumann algebra fixed in the postulate; the theorem is not a claim about an empty algebra."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The acceleration hypothesis is a>0; zero acceleration and zero strip width are outside the stated orbit."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 applies the supplier width theta=1 and rescales it to lambda=2 pi c/a seconds."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No inertial or zero-acceleration limit is asserted; the selected massive scalar model and a>0 are fixed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 inherits bounded continuity on the closed strip and states both boundary identities at every real tau."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A1 records Choice and A2 records the model assumptions; step 2.1 applies the supplied KMS functions for arbitrary fixed A,B in M."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement gives a conditional KMS deduction and no iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement gives a conditional KMS deduction and no iff claim."
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "def-axiom-of-choice",
+          "carrier": "items/def-axiom-of-choice.md",
+          "status": "published",
+          "source_section": "Definition",
+          "exact_statement": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.\n\n",
+          "relevant_hypotheses_and_conventions": "Explicit inherited set-theoretic premise.",
+          "supplier_proof_status": "Imported mathematical axiom definition; the axiom is adopted, not proved.",
+          "consumer_use": [
+            "Explicit inherited set-theoretic premise."
+          ]
+        },
+        {
+          "supplier": "post-tgrx-wedge-modular-model",
+          "carrier": "items/post-tgrx-wedge-modular-model.md",
+          "status": "current inspected carrier",
+          "source_section": "Postulate",
+          "exact_statement": "Assume both the Axiom of Choice and the Axiom of Countable Choice. Fix a\nmassive real scalar species with rest mass $m_{\\mathrm{rest}}>0$ in kilograms.\nUse four-dimensional affine Minkowski spacetime with metric\n$\\eta=\\operatorname{diag}(-1,1,1,1)$ and length coordinates\n$x=(x^0,x^1,x^2,x^3)$, where $x^0=ct$ and $c>0$ has units\n$\\mathrm{m\\,s^{-1}}$. Set $\\mu=m_{\\mathrm{rest}}c/\\hbar>0$ in\n$\\mathrm{m^{-1}}$, where $\\hbar>0$ is in $\\mathrm{J\\,s}$. The future shell,\none-particle space, and measure are\n$$H_\\mu^+=\\{(p^0,\\mathbf p):(p^0)^2-|\\mathbf p|^2=\\mu^2,\\ p^0>0\\},\\qquad \\mathcal H_\\mu=L^2(H_\\mu^+,d\\nu_\\mu),\\qquad d\\nu_\\mu=\\frac{d^3\\mathbf p}{(2\\pi)^3\\,2\\sqrt{|\\mathbf p|^2+\\mu^2}}.$$\nTake the scalar Hilbert space to be the bosonic symmetric Fock space\n$\\mathcal H=\\mathcal F_s(\\mathcal H_\\mu)$ and its unit zero-particle vector\nto be $\\Omega$.\n\nFor an open set $O\\subseteq\\mathbb R^4$ and real\n$f\\in C_c^\\infty(O;\\mathbb R)$, define\n$$K_\\mu f(p)=\\int_{\\mathbb R^4}f(x)e^{i(p^0x^0-\\mathbf p\\cdot\\mathbf x)}\\,d^4x, \\qquad W_\\mu(f)=W_{\\mathrm{Segal}}(\\sqrt2\\,K_\\mu f).$$\nLet $\\mathfrak A_s(O)$ be the operator-norm closure of the unital\n$*$-algebra generated by all these bounded Weyl unitaries, and set\n$W_R=\\{x\\in\\mathbb R^4:x^1>|x^0|\\}$ and\n$M(W_R)=\\mathfrak A_s(W_R)''\\subseteq\\mathcal B(\\mathcal H)$. Here\n$\\mathcal B(\\mathcal H)$ denotes the bounded linear operators;\n$\\mathcal S'$ is the set of bounded operators commuting with every member of\n$\\mathcal S$, and $\\mathcal S''=(\\mathcal S')'$. Thus $M(W_R)$ is a concrete\nvon Neumann algebra in the chosen double-commutant convention.\n\nFor dimensionless rapidity $s\\in\\mathbb R$, define the future-directed boost\nby\n$$\\Lambda_W(s)(x^0,x^1,x^2,x^3) =(x^0\\cosh s+x^1\\sinh s,\\ x^0\\sinh s+x^1\\cosh s,\\ x^2,\\ x^3).$$\nUse its scalar Fock implementation: on the one-particle space\n$[u_\\mu(\\Lambda)\\psi](p)=\\psi(\\Lambda^{-1}p)$, and on the $n$-particle\nsymmetric sector $U(\\Lambda)=u_\\mu(\\Lambda)^{\\otimes_s n}$, with the vacuum\nsector fixed. The QFT Fock pairing is linear in its second argument; for the\nmodular definitions use the equivalent first-variable-linear pairing\n$\\langle u,v\\rangle_1:=\\langle v,u\\rangle_2$. Thus the vacuum vector state\nis $\\omega_W(X)=\\langle X\\Omega,\\Omega\\rangle_1\n=\\langle\\Omega,X\\Omega\\rangle_2$. Assume explicitly that $\\Omega$ is cyclic and separating for\n$M(W_R)$, meaning $\\overline{M(W_R)\\Omega}=\\mathcal H$ and\n$X\\Omega=0$ for $X\\in M(W_R)$ implies $X=0$. The Tomita operator is the\nclosure of $S_{W,0}(X\\Omega)=X^*\\Omega$ on $M(W_R)\\Omega$; write its polar\ndecomposition as $S_W=J_W\\Delta_W^{1/2}$, in the standard modular-data\nconvention.\n\nAs an additional model interface, adopt\n$$\\Delta_W^{it}=U(\\Lambda_W(-2\\pi t))\\qquad(t\\in\\mathbb R).$$\nThis geometric identity and cyclic-separating property are explicit adopted\nassumptions for this selected model. The abstract Tomita–Takesaki theorem\nsupplies modular automorphisms and their KMS property, but this carrier does\nnot use it as a proof that the modular unitaries equal spacetime boosts. No\ntensor-product factorization of the continuum Hilbert space across the wedge\nand its complement is assumed.\n\n",
+          "relevant_hypotheses_and_conventions": "Supplies the chosen wedge algebra, state, boost sign, and explicitly adopted modular/boost bridge.",
+          "supplier_proof_status": "Current draft supplier statement and complete proof were inspected; use is limited to the actual stated hypotheses and proof status recorded in the batch notes.",
+          "consumer_use": [
+            "Supplies the chosen wedge algebra, state, boost sign, and explicitly adopted modular/boost bridge."
+          ]
+        },
+        {
+          "supplier": "thm-qsmx-tomita-takesaki",
+          "carrier": "items/thm-qsmx-tomita-takesaki.md",
+          "status": "current inspected carrier",
+          "source_section": "Statement",
+          "exact_statement": "Assume the Axiom of Choice. Let $M\\subseteq\\mathcal B(H)$ be a concrete von Neumann algebra and $\\Omega$ a unit cyclic-separating vector with standard modular data $(J,\\Delta,\\sigma_t)$ and vector state $\\omega(x)=\\langle x\\Omega,\\Omega\\rangle$. Then $\\sigma_t(x)=\\Delta^{it}x\\Delta^{-it}$ restricts to a one-parameter group of normal $*$-automorphisms of $M$ that is point-ultraweakly continuous, and $JMJ=M'$. The state $\\omega$ is an upper-strip $(\\alpha,1)$ KMS state, in the definition of the preceding item, for $\\alpha_t=\\sigma_{-t}$. This is a dimensionless W*-algebra KMS assertion; it does not assert norm continuity of $\\sigma_t$ on all of $M$.\n\n",
+          "relevant_hypotheses_and_conventions": "Supplies the upper-strip dimensionless KMS condition for the modular flow.",
+          "supplier_proof_status": "Current draft supplier statement and complete proof were inspected; use is limited to the actual stated hypotheses and proof status recorded in the batch notes.",
+          "consumer_use": [
+            "Supplies the upper-strip dimensionless KMS condition for the modular flow."
+          ]
+        },
+        {
+          "supplier": "lem-tgrx-modular-kms-time-rescaling",
+          "carrier": "items/lem-tgrx-modular-kms-time-rescaling.md",
+          "status": "current inspected carrier",
+          "source_section": "Statement",
+          "exact_statement": "Assume the Axiom of Choice. Let $H$ be a complex Hilbert space and let\n$M\\subseteq\\mathcal B(H)$ be a nonzero unital $*$-subalgebra with $M=M''$,\nwhere $\\mathcal B(H)$ is the bounded-operator algebra and $M'$ is its\ncommutant. Let $\\omega$ be a normal state, meaning a bounded positive linear\nfunctional with $\\omega(I)=1$ that preserves suprema of bounded increasing\nnets of positive elements. Let $t\\mapsto\\alpha_t$ be a one-parameter group\nof bijective unital $*$-automorphisms of $M$, with dimensionless parameter\n$t$, such that $t\\mapsto\\varphi(\\alpha_t(X))$ is continuous for every\n$X\\in M$ and every normal linear functional $\\varphi$ on $M$ (an element of\nthe predual). Suppose\nthat for some dimensionless $\\theta>0$, for every $A,B\\in M$ there is a\nbounded continuous function $F_{A,B}$ on\n$S_\\theta=\\{z\\in\\mathbb C:0\\le\\operatorname{Im}z\\le\\theta\\}$, holomorphic\ninside, with\n$$F_{A,B}(t)=\\omega(A\\alpha_t(B)),\\qquad F_{A,B}(t+i\\theta)=\\omega(\\alpha_t(B)A).$$\nThis is the upper-strip convention of the preceding von Neumann KMS\ndefinition. For any scalar $\\lambda>0$, set\n$\\widetilde\\alpha_\\tau=\\alpha_{\\tau/\\lambda}$ for $\\tau\\in\\mathbb R$.\nThen $\\widetilde\\alpha$ is again a point-ultraweakly continuous\none-parameter group, and $\\omega$ satisfies the same upper-strip boundary\ncondition for $\\widetilde\\alpha$ on the strip of width $\\lambda\\theta$.\n\n",
+          "relevant_hypotheses_and_conventions": "Supplies the proved W*-strip reparameterization for positive clock scaling.",
+          "supplier_proof_status": "Local draft lemma with complete proof inspected; its current Step 1 readiness is recorded in this batch; that record is not independent proof approval.",
+          "consumer_use": [
+            "Supplies the proved W*-strip reparameterization for positive clock scaling."
+          ]
+        },
+        {
+          "supplier": "def-tgr-framework-units",
+          "carrier": "items/def-tgr-framework-units.md",
+          "status": "published",
+          "source_section": "Definition",
+          "exact_statement": "Use a smooth, oriented and time-oriented Lorentzian four-manifold $(M,g)$ of signature $(-,+,+,+)$ with its metric-selected Levi-Civita connection $\\nabla$, as defined in [[def-gr-smooth-lorentzian-objects]] and [[thm-gr-nondegenerate-levi-civita-and-tensor-derivative]]. A chart is a smooth coordinate map; an observer congruence is a smooth future-directed unit timelike vector field $u$ with $g(u,u)=-1$; its integral curves, an adapted chart, and a tetrad field are distinct objects. The exact regularity and rest-space conventions of [[def-tgr-local-fluid-state]] and the chart/congruence distinction of [[thm-sr-local-congruence-adapted-charts-and-frobenius]] apply. An orthogonal family of rest slices is not available for every congruence.\n\nFor physical unit assignments use length coordinates $x^0=ct_{\\rm phys}$ and spatial coordinates in metres, where $c>0$ has units $\\mathrm{m\\,s^{-1}}$. In this convention the metric components, a unit observer $u$, and a length-normalized Killing field $\\xi$ are dimensionless. Other coordinate choices transform component units by their coordinate Jacobians. State maps and geometric currents have the types and units in [[def-tgr-local-fluid-state]]: a formal marker density $n$ is $\\mathrm{marker\\,m^{-3}}$; entropy density $s$ is $\\mathrm{J\\,K^{-1}\\,m^{-3}}$; a $C^1$ entropy current $S^a$ has components $\\mathrm{J\\,K^{-1}\\,m^{-3}}$; and its physical flux is $cS^a$ in $\\mathrm{J\\,K^{-1}\\,m^{-2}\\,s^{-1}}$. Its geometric divergence $\\nabla_aS^a$ has units $\\mathrm{J\\,K^{-1}\\,m^{-4}}$, so $c\\nabla_aS^a$ is entropy production per physical volume per second. The symmetric stress tensor $\\mathsf T^{ab}$ has components in pascals in length coordinates; it is a tensor, not an observer-independent array of energy densities. The state-function energy density $\\varepsilon$ and the observer projection $\\mathsf T^{ab}u_a u_b$ remain distinct unless a material model identifies them.\n\nThe constant $c$ supplies the spacetime length/time conversion. In a branch with dynamical Einstein gravity, $G$ is an independent coupling parameter in $\\mathrm{m^3\\,kg^{-1}\\,s^{-2}}$. The Boltzmann constant $k_B$ has units $\\mathrm{J\\,K^{-1}}$ and is used when a statistical entropy/temperature calibration is adopted. Planck's constant $h_{\\rm P}=2\\pi\\hbar$ has units $\\mathrm{J\\,s}$; $\\hbar$ is used only in a quantum branch. Under the current SI definition, $c$, $h_{\\rm P}$ and $k_B$ have exact defining numerical values; this metrological fact does not make them derived predictions of a thermodynamic or gravitational model. $G$ is experimentally adjusted and carries measurement uncertainty. The roles of these quantities as primitive model inputs are framework-specific. The local energy function, pressure, temperature and chemical potential in [[def-tgr-local-fluid-state]] are derived from the supplied state function; no particle mass or universal equation of state is derived from gravity alone.\n\nFor a smooth Killing field $\\xi$ on an open domain, meaning $\\mathcal L_\\xi g=0$ by [[def-gr-killing-field]], restrict attention to a domain where $\\xi$ is future timelike and choose a positive normalization at infinity or at a specified wall/observer. Define the lapse $N_\\xi:=\\sqrt{-g(\\xi,\\xi)}>0$ and unit observer $u_\\xi:=\\xi/N_\\xi$. For a supplied proper-temperature scalar $T>0$ in kelvins, define the Killing-normalized temperature field $T_\\xi:=N_\\xi T$. It is not assumed constant; if a separate equilibrium argument proves constancy on its stated domain, denote that value by $T_K$. The finite matter charge and its side-flux convention are those in [[lem-tgr-killing-energy-normalization]] and [[def-tgr-spacelike-current-slab]]; their charge-balance clause retains its explicitly conditional finite-slab hypotheses. This charge is not a general gravitational energy.\n\nKeep covector types separate. A mechanical momentum covector $p_a$ has units $\\mathrm{kg\\,m\\,s^{-1}}$; its Killing energy is $E_\\xi(p):=-c\\,p_a\\xi^a$ in joules. An energy-valued covector $\\pi_a$ already has units joules and pairs as $E_\\xi(\\pi):=-\\pi_a\\xi^a$, without another factor of $c$. An inverse-length wave covector $k_a$ has units $\\mathrm{m^{-1}}$ and pairs as $E_\\xi(k):=-\\hbar c\\,k_a\\xi^a$. For a specified charged stationary gauge, charge $q$ has coulombs and a potential covector $A_a$ in length coordinates has units $\\mathrm{V\\,s\\,m^{-1}}$; when a global stationary potential is actually defined, $\\Phi_\\xi:=-cA_a\\xi^a$ has volts and $q\\Phi_\\xi$ has joules. A charged energy or chemical-potential convention requires its stated gauge and reference; no global potential, electrochemical equilibrium, or constancy is asserted here.\n\nWhen $T_K>0$ is supplied, distinguish the inverse-temperature vector $\\beta^a:=u_\\xi^a/(k_BT)=\\xi^a/(k_BT_K)$, with units $\\mathrm{J^{-1}}$, from the scalar $\\beta_K:=1/(k_BT_K)$, also in $\\mathrm{J^{-1}}$. For a quantum statistical model, let $\\mathcal A$ be a unital complex $C^*$-algebra: an associative complex algebra with nonzero identity $1$, a complete norm satisfying $\\|AB\\|\\leq\\|A\\|\\,\\|B\\|$, and a conjugate-linear involution $A\\mapsto A^*$ satisfying $(A^*)^*=A$, $(AB)^*=B^*A^*$, and $\\|A^*A\\|=\\|A\\|^2$. Its elements represent bounded observables. Let $\\{\\alpha_t:t\\in\\mathbb R\\}$ be bijective complex-linear maps $\\alpha_t:\\mathcal A\\to\\mathcal A$ preserving multiplication and involution, with $\\alpha_t(1)=1$, $\\alpha_0=\\operatorname{id}$, and $\\alpha_{s+t}=\\alpha_s\\circ\\alpha_t$; require $t\\mapsto\\alpha_t(A)$ to be norm-continuous for every $A\\in\\mathcal A$. A state is a bounded complex-linear functional $\\omega:\\mathcal A\\to\\mathbb C$ with $\\omega(1)=1$ and $\\omega(A^*A)\\geq0$ for every $A\\in\\mathcal A$. For $b>0$ in the chosen flow-parameter units, define $S_b:=\\{z\\in\\mathbb C:0\\leq\\operatorname{Im}z\\leq b\\}$. The state $\\omega$ satisfies the KMS condition at width $b$ when for every $A,B\\in\\mathcal A$ there is a function $F_{A,B}:S_b\\to\\mathbb C$ with $\\sup_{z\\in S_b}|F_{A,B}(z)|<\\infty$, continuous on $S_b$ and complex-differentiable at every point of its interior, such that\n\n$$F_{A,B}(t)=\\omega(A\\alpha_t(B)),\\qquad F_{A,B}(t+ib)=\\omega(\\alpha_t(B)A)\\quad(t\\in\\mathbb R).$$\n\nThis all-observable boundary-value definition uses no separately declared analytic subalgebra. With the quantum statistical calibration $\\beta_K=(k_BT_K)^{-1}$, a physical-time parameter $t$ in seconds has KMS width $b_t=\\hbar\\beta_K$ seconds. If the flow parameter is length $\\lambda=ct$, use the reparameterized group $\\widetilde\\alpha_\\lambda:=\\alpha_{\\lambda/c}$; its KMS width is $b_\\lambda=c\\hbar\\beta_K$ metres. These are unit and parameter-convention assignments only. This definition introduces no Hilbert-space operator $H_K$ and does not identify the abstract automorphism flow or its strip width with the finite matter charge $H_\\xi$ of [[lem-tgr-killing-energy-normalization]]. This item asserts neither the existence of an observable algebra or flow for a given thermodynamic-gravity model nor the existence of a KMS state or equilibrium.\n\nOn a specified smooth embedded null hypersurface $\\mathcal H\\subset M$,\nwrite $i:\\mathcal H\\hookrightarrow M$ for the inclusion. A generator $\\chi$\nhere is a smooth section of $i^*TM$ with $\\chi_p\\in T_p\\mathcal H$\nnonzero and null at each $p\\in\\mathcal H$. For a smooth tangent field $X$\non $\\mathcal H$ and a smooth vector field $V$ along it, define\n$\\nabla_XV:=(i^*\\nabla)_XV$ by [[def-pullback-connection]], applied to the\nambient tangent bundle and its metric-selected connection. The prescription\nis independent of frames by\n[[thm-pullback-connection-is-well-defined-and-functorial]]. In particular,\n$\\nabla_\\chi\\chi$ is a vector field along $\\mathcal H$ and needs no chosen\nambient extension. If $\\chi$ is the restriction of a smooth ambient field\n$\\widetilde\\chi$, the same theorem gives\n$\\nabla_\\chi\\chi=(\\nabla_{\\widetilde\\chi}\\widetilde\\chi)|_{\\mathcal H}$;\nthus this convention also covers the supplied ambient Killing generators.\nThe generator may admit a scalar $\\kappa_{\\rm geom}$ defined by\n$\\nabla_\\chi\\chi=\\kappa_{\\rm geom}\\chi$. When the flow parameter has length units, $\\kappa_{\\rm geom}$ has units $\\mathrm{m^{-1}}$; the corresponding acceleration-unit quantity $\\kappa_{\\rm acc}:=c^2\\kappa_{\\rm geom}$ has units $\\mathrm{m\\,s^{-2}}$. This definition does not assert a horizon exists, that $\\kappa$ is constant, or that a temperature law follows. The formula $T_K=\\hbar c\\kappa_{\\rm geom}/(2\\pi k_B)$ requires a specified quantum/semiclassical model, and an area-entropy formula requires a separate thermodynamic identification. In particular, equal units do not identify local material entropy, finite statistical entropy, and area entropy, and no generalized second law is asserted here.\n\n",
+          "relevant_hypotheses_and_conventions": "Supplies SI constants and the physical-time strip-width/inverse-temperature conversion.",
+          "supplier_proof_status": "Published supplier; its current statement and complete proof were inspected; use is limited to the stated interface.",
+          "consumer_use": [
+            "Supplies SI constants and the physical-time strip-width/inverse-temperature conversion."
+          ]
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Choose a=2 pi c/(1 s).",
+          "result": "lambda=2 pi c/a=1 s, beta_U=(1 s)/hbar and T_U=hbar/(k_B (1 s)); the displayed units are J^-1 and K.",
+          "verifies": "The proper-time rescaling and SI conversion in step 2.1."
+        },
+        {
+          "check": "At tau=0.",
+          "result": "The proper-time curve is (0,c^2/a,0,0), its tangent is (c,0,0,0), and the proper acceleration magnitude is a.",
+          "verifies": "The orbit and acceleration calculation in step 1.2."
+        }
+      ]
+    },
+    "ex-tgrx-wedge-typeiii-warning": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "post-tgrx-wedge-modular-model",
+          "source_section": "Postulate",
+          "quote": "Assume both the Axiom of Choice and the Axiom of Countable Choice. Fix a\nmassive real scalar species with rest mass $m_{\\mathrm{rest}}>0$ in kilograms.\nUse four-dimensional affine Minkowski spacetime with metric\n$\\eta=\\operatorname{diag}(-1,1,1,1)$ and length coordinates\n$x=(x^0,x^1,x^2,x^3)$, where $x^0=ct$ and $c>0$ has units\n$\\mathrm{m\\,s^{-1}}$. Set $\\mu=m_{\\mathrm{rest}}c/\\hbar>0$ in\n$\\mathrm{m^{-1}}$, where $\\hbar>0$ is in $\\mathrm{J\\,s}$. The future shell,\none-particle space, and measure are\n$$H_\\mu^+=\\{(p^0,\\mathbf p):(p^0)^2-|\\mathbf p|^2=\\mu^2,\\ p^0>0\\},\\qquad \\mathcal H_\\mu=L^2(H_\\mu^+,d\\nu_\\mu),\\qquad d\\nu_\\mu=\\frac{d^3\\mathbf p}{(2\\pi)^3\\,2\\sqrt{|\\mathbf p|^2+\\mu^2}}.$$\nTake the scalar Hilbert space to be the bosonic symmetric Fock space\n$\\mathcal H=\\mathcal F_s(\\mathcal H_\\mu)$ and its unit zero-particle vector\nto be $\\Omega$.\n\nFor an open set $O\\subseteq\\mathbb R^4$ and real\n$f\\in C_c^\\infty(O;\\mathbb R)$, define\n$$K_\\mu f(p)=\\int_{\\mathbb R^4}f(x)e^{i(p^0x^0-\\mathbf p\\cdot\\mathbf x)}\\,d^4x, \\qquad W_\\mu(f)=W_{\\mathrm{Segal}}(\\sqrt2\\,K_\\mu f).$$\nLet $\\mathfrak A_s(O)$ be the operator-norm closure of the unital\n$*$-algebra generated by all these bounded Weyl unitaries, and set\n$W_R=\\{x\\in\\mathbb R^4:x^1>|x^0|\\}$ and\n$M(W_R)=\\mathfrak A_s(W_R)''\\subseteq\\mathcal B(\\mathcal H)$. Here\n$\\mathcal B(\\mathcal H)$ denotes the bounded linear operators;\n$\\mathcal S'$ is the set of bounded operators commuting with every member of\n$\\mathcal S$, and $\\mathcal S''=(\\mathcal S')'$. Thus $M(W_R)$ is a concrete\nvon Neumann algebra in the chosen double-commutant convention.\n\nFor dimensionless rapidity $s\\in\\mathbb R$, define the future-directed boost\nby\n$$\\Lambda_W(s)(x^0,x^1,x^2,x^3) =(x^0\\cosh s+x^1\\sinh s,\\ x^0\\sinh s+x^1\\cosh s,\\ x^2,\\ x^3).$$\nUse its scalar Fock implementation: on the one-particle space\n$[u_\\mu(\\Lambda)\\psi](p)=\\psi(\\Lambda^{-1}p)$, and on the $n$-particle\nsymmetric sector $U(\\Lambda)=u_\\mu(\\Lambda)^{\\otimes_s n}$, with the vacuum\nsector fixed. The QFT Fock pairing is linear in its second argument; for the\nmodular definitions use the equivalent first-variable-linear pairing\n$\\langle u,v\\rangle_1:=\\langle v,u\\rangle_2$. Thus the vacuum vector state\nis $\\omega_W(X)=\\langle X\\Omega,\\Omega\\rangle_1\n=\\langle\\Omega,X\\Omega\\rangle_2$. Assume explicitly that $\\Omega$ is cyclic and separating for\n$M(W_R)$, meaning $\\overline{M(W_R)\\Omega}=\\mathcal H$ and\n$X\\Omega=0$ for $X\\in M(W_R)$ implies $X=0$. The Tomita operator is the\nclosure of $S_{W,0}(X\\Omega)=X^*\\Omega$ on $M(W_R)\\Omega$; write its polar\ndecomposition as $S_W=J_W\\Delta_W^{1/2}$, in the standard modular-data\nconvention.\n\nAs an additional model interface, adopt\n$$\\Delta_W^{it}=U(\\Lambda_W(-2\\pi t))\\qquad(t\\in\\mathbb R).$$\nThis geometric identity and cyclic-separating property are explicit adopted\nassumptions for this selected model. The abstract Tomita–Takesaki theorem\nsupplies modular automorphisms and their KMS property, but this carrier does\nnot use it as a proof that the modular unitaries equal spacetime boosts. No\ntensor-product factorization of the continuum Hilbert space across the wedge\nand its complement is assumed.\n\n",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $\\psi_{z,N}=\\sqrt{1-z}\\sum_{n=0}^N z^{n/2}\n|n\\rangle_R\\otimes|n\\rangle_L$. Orthogonality gives, for $M>N$,\n$\\|\\psi_{z,M}-\\psi_{z,N}\\|^2=(1-z)\\sum_{n=N+1}^M z^n\n\\le (1-z)\\sum_{n=N+1}^{\\infty}z^n=z^{N+1}\\to0$.\nThus the partial sums converge in $\\mathcal H_R\\otimes\\mathcal H_L$ to\n$\\psi_z$. Also $(1-z)\\sum_{n=0}^N z^n=1-z^{N+1}$, so continuity of the\nnorm gives $\\langle\\psi_z|\\psi_z\\rangle\n=(1-z)\\sum_{n=0}^\\infty z^n=1$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The product-basis coefficients are\n$\\langle m,k|\\psi_z\\rangle=\\sqrt{1-z}\\,z^{k/2}\\delta_{mk}$.\nSubstitution in the defining partial-trace sum gives\n$\\langle m|\\rho_R|n\\rangle\n=(1-z)\\sum_{k=0}^\\infty z^k\\delta_{mk}\\delta_{nk}\n=(1-z)z^n\\delta_{mn}$. Therefore the eigenvalues are exactly\n$p_n=(1-z)z^n$, they are positive, and their sum is one by step 1.1.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Put $a_n=nz^n$ for $n\\ge1$. Since\n$a_{n+1}/a_n=z(1+1/n)\\to z<1$, choose $q$ with $z<q<1$; for all\nsufficiently large $n$, $a_{n+1}\\le q a_n$, so $a_n\\to0$ and the tail\n$\\sum a_n$ is bounded by a geometric series. Differentiating\n$\\sum_{n=0}^N z^n=(1-z^{N+1})/(1-z)$ gives\n$\\sum_{n=1}^N n z^{n-1}\n=\\bigl(1-(N+1)z^N+Nz^{N+1}\\bigr)/(1-z)^2$. Since $Nz^N\\to0$,\ntaking $N\\to\\infty$ gives $\\sum_{n=0}^\\infty n z^n=z/(1-z)^2$. Hence\n$\\sum_{n=0}^\\infty n p_n=z/(1-z)$, and\n$-\\sum_{n=0}^\\infty p_n\\ln p_n\n=-\\ln(1-z)-(\\ln z)\\sum_{n=0}^\\infty n p_n\n=-\\ln(1-z)-z\\ln z/(1-z)$. The series converges because\n$\\sum z^n$ and $\\sum n z^n$ converge for $0<z<1$. In particular,\n$\\sum_{n=0}^\\infty p_n|\\ln p_n|\n=|\\ln(1-z)|+|\\ln z|\\,z/(1-z)<\\infty$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Steps 1.1–3.1 construct only a vector and its reduced operator on the\ntwo declared oscillator factors. The continuum postulate [F1] instead\ndefines a scalar Fock representation and a right-wedge von Neumann algebra;\nno map identifying those two constructions is defined or used here.\nConsequently this example proves the stated oscillator identities but no\ncontinuum wedge factorization or density-matrix claim.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes the nonempty oscillator Hilbert spaces ell^2(N_0) and their number bases."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The parameter satisfies 0<z<1; z=0 is excluded from the declared family."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The endpoint z=1 is excluded; the geometric vector series would not be normalizable there."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 apply for every 0<z<1; all reduced eigenvalues are positive and the finite-mode entropy is finite."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 include the n=0 coefficient, and step 3.1 sums over all n>=0 with convergence shown."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The countable number bases are part of the stated Hilbert spaces; step 1.1 proves the coefficient series converges in norm."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example asserts explicit oscillator identities, not an iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example asserts explicit oscillator identities, not an iff claim."
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "post-tgrx-wedge-modular-model",
+          "carrier": "items/post-tgrx-wedge-modular-model.md",
+          "status": "current inspected carrier",
+          "source_section": "Postulate",
+          "exact_statement": "Assume both the Axiom of Choice and the Axiom of Countable Choice. Fix a\nmassive real scalar species with rest mass $m_{\\mathrm{rest}}>0$ in kilograms.\nUse four-dimensional affine Minkowski spacetime with metric\n$\\eta=\\operatorname{diag}(-1,1,1,1)$ and length coordinates\n$x=(x^0,x^1,x^2,x^3)$, where $x^0=ct$ and $c>0$ has units\n$\\mathrm{m\\,s^{-1}}$. Set $\\mu=m_{\\mathrm{rest}}c/\\hbar>0$ in\n$\\mathrm{m^{-1}}$, where $\\hbar>0$ is in $\\mathrm{J\\,s}$. The future shell,\none-particle space, and measure are\n$$H_\\mu^+=\\{(p^0,\\mathbf p):(p^0)^2-|\\mathbf p|^2=\\mu^2,\\ p^0>0\\},\\qquad \\mathcal H_\\mu=L^2(H_\\mu^+,d\\nu_\\mu),\\qquad d\\nu_\\mu=\\frac{d^3\\mathbf p}{(2\\pi)^3\\,2\\sqrt{|\\mathbf p|^2+\\mu^2}}.$$\nTake the scalar Hilbert space to be the bosonic symmetric Fock space\n$\\mathcal H=\\mathcal F_s(\\mathcal H_\\mu)$ and its unit zero-particle vector\nto be $\\Omega$.\n\nFor an open set $O\\subseteq\\mathbb R^4$ and real\n$f\\in C_c^\\infty(O;\\mathbb R)$, define\n$$K_\\mu f(p)=\\int_{\\mathbb R^4}f(x)e^{i(p^0x^0-\\mathbf p\\cdot\\mathbf x)}\\,d^4x, \\qquad W_\\mu(f)=W_{\\mathrm{Segal}}(\\sqrt2\\,K_\\mu f).$$\nLet $\\mathfrak A_s(O)$ be the operator-norm closure of the unital\n$*$-algebra generated by all these bounded Weyl unitaries, and set\n$W_R=\\{x\\in\\mathbb R^4:x^1>|x^0|\\}$ and\n$M(W_R)=\\mathfrak A_s(W_R)''\\subseteq\\mathcal B(\\mathcal H)$. Here\n$\\mathcal B(\\mathcal H)$ denotes the bounded linear operators;\n$\\mathcal S'$ is the set of bounded operators commuting with every member of\n$\\mathcal S$, and $\\mathcal S''=(\\mathcal S')'$. Thus $M(W_R)$ is a concrete\nvon Neumann algebra in the chosen double-commutant convention.\n\nFor dimensionless rapidity $s\\in\\mathbb R$, define the future-directed boost\nby\n$$\\Lambda_W(s)(x^0,x^1,x^2,x^3) =(x^0\\cosh s+x^1\\sinh s,\\ x^0\\sinh s+x^1\\cosh s,\\ x^2,\\ x^3).$$\nUse its scalar Fock implementation: on the one-particle space\n$[u_\\mu(\\Lambda)\\psi](p)=\\psi(\\Lambda^{-1}p)$, and on the $n$-particle\nsymmetric sector $U(\\Lambda)=u_\\mu(\\Lambda)^{\\otimes_s n}$, with the vacuum\nsector fixed. The QFT Fock pairing is linear in its second argument; for the\nmodular definitions use the equivalent first-variable-linear pairing\n$\\langle u,v\\rangle_1:=\\langle v,u\\rangle_2$. Thus the vacuum vector state\nis $\\omega_W(X)=\\langle X\\Omega,\\Omega\\rangle_1\n=\\langle\\Omega,X\\Omega\\rangle_2$. Assume explicitly that $\\Omega$ is cyclic and separating for\n$M(W_R)$, meaning $\\overline{M(W_R)\\Omega}=\\mathcal H$ and\n$X\\Omega=0$ for $X\\in M(W_R)$ implies $X=0$. The Tomita operator is the\nclosure of $S_{W,0}(X\\Omega)=X^*\\Omega$ on $M(W_R)\\Omega$; write its polar\ndecomposition as $S_W=J_W\\Delta_W^{1/2}$, in the standard modular-data\nconvention.\n\nAs an additional model interface, adopt\n$$\\Delta_W^{it}=U(\\Lambda_W(-2\\pi t))\\qquad(t\\in\\mathbb R).$$\nThis geometric identity and cyclic-separating property are explicit adopted\nassumptions for this selected model. The abstract Tomita–Takesaki theorem\nsupplies modular automorphisms and their KMS property, but this carrier does\nnot use it as a proof that the modular unitaries equal spacetime boosts. No\ntensor-product factorization of the continuum Hilbert space across the wedge\nand its complement is assumed.\n\n",
+          "relevant_hypotheses_and_conventions": "Contrasts the finite oscillator construction with the explicitly non-factorizing continuum model interface.",
+          "supplier_proof_status": "Current draft supplier statement and complete proof were inspected; use is limited to the actual stated hypotheses and proof status recorded in the batch notes.",
+          "consumer_use": [
+            "Contrasts the finite oscillator construction with the explicitly non-factorizing continuum model interface."
+          ]
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Set z=1/2.",
+          "result": "p_n=2^(-n-1), sum_n p_n=1, and S=2 ln 2 nats.",
+          "verifies": "The normalization, partial trace, and entropy formulas in steps 1.1–3.1."
+        }
+      ]
+    }
+  }
+}

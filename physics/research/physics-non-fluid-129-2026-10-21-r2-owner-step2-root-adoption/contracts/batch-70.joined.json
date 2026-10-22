@@ -1,0 +1,757 @@
+{
+  "version": 1,
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "batch": "70",
+  "scope": [
+    "lem-qftx-finite-cross-wick-covariance",
+    "lem-qftx-two-dimensional-covariance-log-integrability",
+    "thm-qftx-two-dimensional-wick-l2",
+    "cex-qftx-l2-not-exponential-control"
+  ],
+  "contracts": {
+    "lem-qftx-finite-cross-wick-covariance": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-qft-finite-gaussian-wick-moments",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $N\\ge1$ be finite, let $C$ be a real symmetric positive-semidefinite $N\\times N$ covariance matrix, and let $Q\\sim\\gamma_C=N_N(0,C)$ be the law of [[def-qft-finite-euclidean-interacting-measure]]. For $k\\ge0$ and vectors $u_1,\\ldots,u_k\\in\\mathbb R^N$, every product $\\prod_{j=1}^k(u_j^{\\mathsf T}Q)$ is integrable. For $k=0$ its expectation is $1$. If $k$ is odd, its expectation is $0$; if $k=2m$, then\n\n$$\\mathbb E\\!\\left[\\prod_{j=1}^{2m}u_j^{\\mathsf T}Q\\right]=\\sum_{\\pi\\in\\operatorname{Pair}(2m)}\\prod_{\\{a,b\\}\\in\\pi}u_a^{\\mathsf T}Cu_b,$$\n\nwhere $\\operatorname{Pair}(2m)$ is the finite set of partitions of $\\{1,\\ldots,2m\\}$ into unordered two-element subsets. Thus every real polynomial $P$ in $Q$ satisfies $\\mathbb E|P(Q)|<\\infty$, and its expectation $\\mathbb E[P(Q)]$ is computed by expanding $P$ into monomials and applying finitely many covariance pairings.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qft-finite-wick-normal-powers",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice, let $Q\\sim N_N(0,C)$ be the centered finite-dimensional Gaussian vector of [[lem-qft-finite-gaussian-wick-moments]], and write $C_{jj}=\\mathbb E[Q_j^2]\\ge0$ for the variance of its $j$th coordinate. For each coordinate $j$ and integer $n\\ge0$, its **finite covariance Wick normal power** is the polynomial $:Q_j^n:_C$ defined by the formal generating identity\n\n$$\\exp\\!\\left(tQ_j-\\frac12t^2C_{jj}\\right)=\\sum_{n=0}^{\\infty}:Q_j^n:_C\\,\\frac{t^n}{n!}.$$\n\nEquivalently,\n\n$$:Q_j^n:_C=n!\\sum_{s=0}^{\\lfloor n/2\\rfloor}\\frac{(-C_{jj}/2)^sQ_j^{n-2s}}{s!(n-2s)!},\\qquad :Q_j^4:_C=Q_j^4-6C_{jj}Q_j^2+3C_{jj}^2.$$\n\nThis is a finite-dimensional polynomial definition; it does not define a product of unsmeared continuum fields.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In the formal power-series ring $\\mathbb R\\llbracket s,t\\rrbracket$, set $M(s,t)=\\sum_{a,b\\ge0}\\mathbb E[X^aY^b]s^at^b/(a!b!)$. By [F1], a pairing with $j$ $X$-self-pairs, $k$ $Y$-self-pairs, and $\\ell$ cross-pairs can occur only when $a=2j+\\ell$ and $b=2k+\\ell$. The number of such pairings is $a!b!/(2^j j!\\,2^k k!\\,\\ell!)$: choose the $\\ell$ cross-indices on each side, match them in $\\ell!$ ways, then pair the remaining indices on each side. Thus coefficient-by-coefficient $M(s,t)=\\exp(\\sigma^2s^2/2)\\exp(cst)\\exp(\\tau^2t^2/2)$. This is an identity of formal series, so no moment-generating-function convergence is assumed.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Multiplying the series in step 1.1 by $\\exp(-\\sigma^2s^2/2)\\exp(-\\tau^2t^2/2)$ leaves $\\exp(cst)=\\sum_{r\\ge0}c^r s^rt^r/r!$. By [F2], the coefficient of $s^nt^m$ on the multiplied left side is $\\mathbb E[:X^n:_{\\sigma^2}:Y^m:_{\\tau^2}]/(n!m!)$. The right side has zero coefficient when $n\\ne m$ and coefficient $c^n/n!$ when $n=m$, giving the claimed formula. For $n=m=0$ the constant coefficient is $1$, including when $c=0$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and step 2.1 include n=m=0 and the constant coefficient 1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 gives zero for unequal orders and n!c^n=0 for equal positive orders when c=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Set n=m=1 in step 2.1 to obtain E[:X::Y:]=c."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement permits singular positive-semidefinite covariance; step 1.1 uses pairings without nonsingularity."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval, cutoff, or endpoint parameter in this finite-vector identity."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Axiom of Choice is explicit in the Statement and [A1]; no additional family is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The result is an identity, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The result is an identity, not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Take n=m=0.",
+          "result": "Both Wick powers equal 1 and the expectation is 1, matching c^0.",
+          "verifies": "Step 2.1; constant coefficient."
+        },
+        {
+          "check": "Take n=m=1.",
+          "result": "The Wick powers are X and Y, and their covariance is c.",
+          "verifies": "Step 2.1; first cross coefficient."
+        },
+        {
+          "check": "Take n=m=2.",
+          "result": "The formula gives E[(X²−σ²)(Y²−τ²)]=2c².",
+          "verifies": "Steps 1.1–2.1; fourth Gaussian moment pairings."
+        }
+      ],
+      "finite_checks_disposition": "These hand checks verify low-order arithmetic and boundary cases only; the numbered proof establishes the general claim.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-70 author",
+        "notes": "The generating functions are used coefficientwise as formal series; no analytic moment-generating-function convergence is assumed. Singular covariance is retained."
+      }
+    },
+    "lem-qftx-two-dimensional-covariance-log-integrability": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-qftx-tempered-massive-gaussian-field",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice and let $m>0$. Write $\\mathcal S_\\mathbb R(\\mathbb R^2)$ for the real-valued Schwartz test functions and define $\\widehat f(p)=\\int_{\\mathbb R^2}e^{-ip\\cdot x}f(x)\\,d^2x$; this convention has inverse factor $(2\\pi)^{-2}$. For real $f,g\\in\\mathcal S_\\mathbb R(\\mathbb R^2)$ set\n\n$$C_m(f,g):=\\int_{\\mathbb R^2}\\frac{\\overline{\\widehat f(p)}\\,\\widehat g(p)}{|p|^2+m^2}\\,\\frac{d^2p}{(2\\pi)^2}.$$\n\nLet $\\mathcal S'_\\mathbb R(\\mathbb R^2)$ be the continuous real-linear dual of $\\mathcal S_\\mathbb R(\\mathbb R^2)$, and give it the cylinder $\\sigma$-algebra generated by the evaluation maps $u\\mapsto u(f)$. There is a probability measure on this cylinder $\\sigma$-algebra, equivalently a measurable $\\mathcal S'_\\mathbb R(\\mathbb R^2)$-valued random variable $\\Phi$, such that every finite vector $(\\Phi(f_1),\\ldots,\\Phi(f_k))$ is centered jointly Gaussian and $\\mathbb E[\\Phi(f)\\Phi(g)]=C_m(f,g)$. The construction gives tempered-distribution samples on one common full-measure set; it makes no pointwise-sample-field or interaction-measure claim.\n\n",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-euclidean-gaussian-fourier-transform-with-two-pi-normalization",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. For $n\\ge1$, $t>0$, and $\\xi\\in\\mathbb R^n$,\n$$\\mathcal F(e^{-\\pi t|x|^2})(\\xi)=t^{-n/2}e^{-\\pi|\\xi|^2/t}.$$\nEvery polynomial times a positive real Gaussian is absolutely integrable.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to \\mathbb C$ belong to\n$L^1(\\mu \\times \\nu)$. Then:\n\n1. for $\\mu$-almost every $x$, the section $f_x$ belongs to $L^1(\\nu)$;\n2. for $\\nu$-almost every $y$, the section $f^y$ belongs to $L^1(\\mu)$;\n3. after assigning the value $0$ on the exceptional parameter sets, the\n   section-integral functions are integrable; and\n4. the three integrals agree:\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$\n\n",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. All functions below have domain $X$. Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$\n\n",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-gaussian-integral",
+          "source_section": "Statement",
+          "quote": "$$\\int_{-\\infty}^{\\infty}e^{-x^2}\\,dx=\\sqrt\\pi.$$\n\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-substitution-for-improper-integrals",
+          "source_section": "Statement",
+          "quote": "Let $I$ and $J$ be intervals, possibly open at finite or infinite singular ends, and let $\\phi:I\\to J$ be a monotone differentiable surjection. Assume $\\phi'$ is locally Riemann integrable and the proper change-of-variable hypotheses hold on every compact truncation. If $f$ is locally Riemann integrable on $J$, then\n$$\\int_J f(x)\\,dx\\quad\\text{and}\\quad\\int_I f(\\phi(t))|\\phi'(t)|\\,dt$$\nconverge simultaneously and, when convergent, are equal. At several singular ends this assertion is applied separately to the corresponding ends; orientation is retained for decreasing parametrizations.\n\n",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-derivative-of-exponential",
+          "source_section": "Statement",
+          "quote": "The real exponential function is $C^\\infty$, and for every $m\\in\\mathbb N$,\n$$\\exp^{(m)}=\\exp.$$\nIn particular $(\\exp)'=\\exp$.\n\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define\n$$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$\nprovided by the all-real convergence proved in The exponential series converges absolutely for every real argument. Here $n!\\in\\mathbb N$ is the factorial of The factorial $n!$ and the falling factorial $n^{\\underline{k}}$, defined by recursion in $\\mathbb{N}$, $\\iota(n!)$ is its nonzero real image (The canonical natural $\\iota(n) = n \\cdot 1_F$ of a field, Canonical naturals are positive and strictly increasing), and powers and series are those of Integer powers $a^m$ and Series, partial sums, convergence and the sum, divergence, and the tail series.\n\nThis is a real power series centred at $0$ (A real power series about a centre, its interval of convergence, and its radius in $[0,+\\infty]$). No logarithm, irrational power, or differential equation enters the definition.\n\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and\n$$\\exp(-x)=\\frac1{\\exp(x)}.$$\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-exponential-beats-every-polynomial",
+          "source_section": "Statement",
+          "quote": "For every $m\\in\\mathbb N$ and every real $a>0$,\n$$\\frac{x^m}{\\exp(ax)}\\longrightarrow0\\qquad(x\\to+\\infty).$$\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-newton-leibniz-with-interior-derivative",
+          "source_section": "Statement",
+          "quote": "Let $a<b$. Suppose $G:[a,b]\\to\\mathbb R$ is continuous on $[a,b]$ and differentiable on $(a,b)$. If $f:[a,b]\\to\\mathbb R$ is Riemann integrable and\n\n$$f(x)=G'(x)\\qquad(a<x<b),$$\n\nthen\n\n$$\\int_a^b f=G(b)-G(a).$$\n\nNo derivative of $G$ at either endpoint is assumed, and the two endpoint values assigned to the integrable extension $f$ do not enter the conclusion.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-nonnegative-improper-riemann-integral-agrees-with-the-lebesgue-integral-on-a-half-line",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $a\\in\\mathbb R$ and let\n$f:[a,\\infty)\\to[0,\\infty)$ be Riemann integrable on every compact interval\n$[a,R]$ with $R>a$. If the improper Riemann integral\n$$\\int_a^\\infty f(x)\\,dx$$\nconverges in the sense of [[def-improper-integral-at-infinity]], then $f$ is\nLebesgue integrable on $[a,\\infty)$ and\n$$\\int_{[a,\\infty)} f\\,d\\lambda_1=\\int_a^\\infty f(x)\\,dx.$$\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-continuous-on-a-rectangle-is-riemann-integrable",
+          "source_section": "Statement",
+          "quote": "Every continuous real function on a closed nondegenerate rectangle $Q\\subseteq\\mathbb R^m$, $m\\ge1$, is Riemann integrable.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "cor-fourier-transform-is-a-topological-automorphism-of-schwartz-space",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. The Fourier transform is a topological automorphism of $\\mathcal S(\\mathbb R^n)$, with $\\mathcal F^2=R$ and $\\mathcal F^{-1}=R\\mathcal F$, where $Rf(x)=f(-x)$.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "def-fourier-transform-on-l-one-of-rn",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$ and $f\\in L^1(\\mathbb R^n;\\mathbb C)$, with the componentwise integral and quotient conventions of [[def-complex-lp-and-euclidean-test-function-conventions]], [[def-l-p-space-as-a-quotient-by-null-functions]] and [[def-l-one-of-a-measure]]. Define\n$$\\widehat f(\\xi)=\\mathcal Ff(\\xi):=\\int_{\\mathbb R^n}f(x)\\exp(-2\\pi i x\\cdot\\xi)\\,dx,\\qquad \\xi\\in\\mathbb R^n.$$\nHere $x\\cdot\\xi=\\sum_{j=1}^n x_j\\xi_j$, Lebesgue measure is used, and the exponential is [[def-complex-exponential]]. Its unit modulus follows from [[cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]]. The integral is evaluated using any measurable representative. Absolute convergence and representative independence are the obligations discharged by [[lem-l-one-fourier-transform-is-well-defined]]. The output is a function defined at every frequency, not merely an almost-everywhere class. At frequency zero the formula reads $\\widehat f(0)=\\int f$. No choice selection of representatives for a family of classes is part of this definition.\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F15",
+          "source": "cor-c-one-change-of-variables-for-l-one-functions",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $U,V \\subseteq \\mathbb R^n$ be open and let $T : U \\to V$ be a\n$C^1$ diffeomorphism. If $f : V \\to \\mathbb C$ belongs to $L^1(\\lambda_n)$,\nthen\n$$ \\int_V f(y)\\,d\\lambda_n(y) = \\int_U f(T(x))\\,|\\det DT(x)|\\,d\\lambda_n(x). $$\n\n",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $a>0$ and $T>0$, substitute $u=-at$ by [F6]. The function $u\\mapsto\\exp(u)$ is continuous and has derivative $\\exp(u)$ by [F7], and this derivative is Riemann integrable on $[-aT,0]$ by [F12]; hence [F10] gives $\\int_0^T\\exp(-at)dt=a^{-1}(1-\\exp(-aT))$. By [F9] with power $1$ and scale $a$, $T/\\exp(aT)\\to0$; for $T\\ge1$, [F8] gives $0<\\exp(-aT)\\le T/\\exp(aT)$, so $\\exp(-aT)\\to0$. Thus $\\int_0^\\infty\\exp(-at)dt=1/a$ as a nonnegative improper Riemann integral, and as a Lebesgue integral by [F11]. Next, [F2] and [F14] with $s=t/\\pi$ and $\\xi=-z/(2\\pi)$ give $(2\\pi)^{-2}\\int e^{ip\\cdot z}e^{-t|p|^2}d^2p=(2\\pi)^{-2}(\\pi/t)e^{-|z|^2/(4t)}=(4\\pi t)^{-1}e^{-|z|^2/(4t)}=:h_t(z)$. Its integral is one: [F5] in each coordinate and $x=2\\sqrt t\\,u$ by [F6] give $\\int h_t(z)d^2z=1$. For every $p$, the Laplace identity gives $(|p|^2+m^2)^{-1}=\\int_0^\\infty e^{-t(|p|^2+m^2)}dt$. If $\\psi\\in\\mathcal S(\\mathbb R^2)$, the displayed inverse-kernel formula and Fubini give $\\int h_t(z)\\psi(z)d^2z=(2\\pi)^{-2}\\int e^{-t|p|^2}\\widehat\\psi(-p)d^2p$; the exchanges are absolute because $e^{-t|p|^2}\\in L^1$ and $\\psi\\in L^1$. Therefore $\\int_0^\\infty e^{-m^2t}\\int h_t(z)|\\psi(z)|d^2zdt\\le\\|\\psi\\|_\\infty/m^2$, while the Fourier-side integral is absolutely convergent since [F13] makes $\\widehat\\psi$ Schwartz and $m>0$. Integrating the Fourier identity over $t$ and applying Fubini [F3] in $(t,z)$ and $(t,p)$ gives the heat-kernel superposition's pairing $(2\\pi)^{-2}\\int\\widehat\\psi(-p)(|p|^2+m^2)^{-1}d^2p$; reflection $p\\mapsto-p$ preserves Lebesgue measure by [F15] and yields the covariance pairing. For real Schwartz $f,g$, set $\\Psi(z)=\\int\\overline{f(y+z)}g(y)d^2y$. Differentiation under this integral is justified locally in $z$ by bounded derivatives of $f$ and the integrability of $g$. For multiindices $\\alpha,\\beta$, write $x=y+z$ and expand $z^\\alpha=(x-y)^\\alpha$; each term of $z^\\alpha\\partial^\\beta\\Psi(z)$ is bounded uniformly in $z$ by a finite product of seminorms $\\sup_x|x^\\gamma\\partial^\\beta f(x)|$ and integrals $\\int|y^{\\alpha-\\gamma}g(y)|d^2y$, which are finite because $f,g$ are Schwartz. Thus $\\Psi\\in\\mathcal S(\\mathbb R^2)$. Absolute Fubini and the substitution $x=y+z$ give $\\widehat\\Psi(-p)=\\int\\!\\!\\int e^{ip\\cdot(x-y)}\\overline{f(x)}g(y)d^2x\\,d^2y=\\overline{\\widehat f(p)}\\widehat g(p)$; absolute integrability follows from $\\|f\\|_1\\|g\\|_1<\\infty$. Applying the just-proved kernel pairing to this Schwartz test $\\Psi$ recovers exactly the covariance $C_m(f,g)$ in [F1]. Thus the heat-kernel superposition is the a.e. spatial density of the covariance distribution, and its value for each $z\\ne0$ is the defining integral for $G_m(z)$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "F11",
+            "F12",
+            "F13",
+            "F14",
+            "F15",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $0<r=|z|\\le1$, the part of the defining $t$-integral over $t\\ge1$ is bounded by $\\int_1^\\infty e^{-m^2t}dt<\\infty$ by step 1.1. On $0<t<1$, drop $e^{-m^2t}\\le1$ and substitute $u=r^2/(4t)$ by [F6] to bound the remaining integral by $\\int_{r^2/4}^\\infty e^{-u}du/u\\le\\log(4/r^2)+\\int_1^\\infty e^{-u}du/u$; the last tail is finite because $1/u\\le1$ and step 1.1 gives $\\int_1^\\infty e^{-u}du<\\infty$. This gives $|G_m(z)|\\le K_m(1+|\\log r|)$. For $r\\ge1$, substitute $t=(r/(2m))e^v$ in [F6]; then $m^2t+r^2/(4t)=mr\\cosh v$ and $dt/t=dv$. Define $\\cosh v=(\\exp(v)+\\exp(-v))/2$. The exponential power series gives $\\cosh v=\\sum_{j\\ge0}v^{2j}/(2j)!\\ge1+v^2/2$. [F5] and a further scaling substitution from [F6] give $G_m(z)\\le (4\\pi)^{-1}e^{-mr}\\int_{\\mathbb R}e^{-mr v^2/2}dv\\le K_m e^{-mr}/\\sqrt{mr}$. Together with the almost-everywhere density from step 1.1, this proves that $G_m$ is a locally integrable representative of the covariance distribution.",
+          "step": "2.1",
+          "inputs": [
+            "F5",
+            "F6",
+            "F7",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For every finite $p\\ge1$ and $0<s\\le1$, the same annuli scaled to $s$ show $\\int_{|z|\\le s}(1+|\\log|z||)^p d^2z\\le K_p s^2(1+|\\log s|)^p$: on $s2^{-j-1}<|z|\\le s2^{-j}$ the area is at most $\\pi s^22^{-2j}$ and the logarithmic factor is at most $(1+|\\log s|+(j+1)\\log2)^p$. Put $A=1+|\\log s|\\ge1$; then this factor is at most $A^p(1+(j+1)\\log2)^p$. The ratio of successive terms $4^{-j}(1+(j+1)\\log2)^p$ tends to $1/4$, so after an index depending only on $p$ it is at most $1/2$; the remaining series is bounded by its finite initial sum plus a geometric tail. This proves the bound with $K_p$ independent of $s$, hence $G_m^p\\in L^1_{\\mathrm{loc}}$. The integral formula is continuous for $z\\ne0$: for any sequence $z_k\\to z\\ne0$, choose $c>0$ so $|z_k|^2/4\\ge c$ for all sufficiently large $k$. On $0<t\\le1$, substitution $u=c/t$ by [F6] gives $\\int_0^1t^{-1}e^{-c/t}dt=\\int_c^\\infty u^{-1}e^{-u}du<\\infty$; the finite interval up to $1$ is bounded and the tail is at most $\\int_1^\\infty e^{-u}du$, finite by step 1.1. On $t\\ge1$, $t^{-1}e^{-m^2t}\\le e^{-m^2t}$, integrable by step 1.1. Thus [F4] applies and gives sequential continuity.",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "F6",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Let $R_\\rho>0$ satisfy $\\operatorname{supp}\\rho\\subseteq B(0,R_\\rho)$. For $f_{\\epsilon,x}(u)=\\rho_\\epsilon(x-u)$ and $f_{\\delta,y}(v)=\\rho_\\delta(y-v)$, the Gaussian covariance [F1] and the kernel representation in steps 1.1–2.1 give $\\mathbb E[\\Phi_\\epsilon(x)\\Phi_\\delta(y)]=\\int\\!\\!\\int f_{\\epsilon,x}(u)f_{\\delta,y}(v)G_m(u-v)d^2u\\,d^2v$. This integral is absolute because the tests are bounded and compactly supported and $G_m\\in L^1_{\\mathrm{loc}}$. Put $z=x-y$, $a=x-u$, and $b=y-v$; [F15] preserves Lebesgue measure and yields $\\int\\!\\!\\int\\rho_\\epsilon(a)\\rho_\\delta(b)G_m(z-a+b)d^2a\\,d^2b$. With $w=a-b$, Fubini [F3] gives this as $\\int G_m(z-w)\\kappa_{\\epsilon,\\delta}(w)d^2w=C_{\\epsilon,\\delta}(z)$. The nonnegative correlation kernel $\\kappa_{\\epsilon,\\delta}$ has integral one, support in a disk of radius $2R_\\rho q$ for $q=\\max(\\epsilon,\\delta)$, and $\\|\\kappa_{\\epsilon,\\delta}\\|_\\infty\\le\\|\\rho\\|_\\infty q^{-2}$. Its support shrinks to zero, so continuity of $G_m$ away from zero gives $C_{\\epsilon,\\delta}(z)\\to G_m(z)$ for each $z\\ne0$. To get the uniform bound, fix bounded $|z|\\le R$. If $|z|$ exceeds twice the support radius, then $|z-w|\\ge|z|/2$ throughout the convolution and step 2.1 bounds the integrand by $K_{m,R}(1+|\\log|z||)$. Otherwise $|z|\\le4R_\\rho q$ and $|z-w|\\le6R_\\rho q$; the scaled dyadic-annulus estimate in step 3.1 gives $\\int_{|u|\\le6R_\\rho q}|G_m(u)|d^2u\\le K_mq^2(1+|\\log q|)$. Multiplying by $\\|\\kappa\\|_\\infty$ bounds the convolution by $K_m(1+|\\log q|)\\le K_{m,R}(1+|\\log|z||)$ because $q\\ge|z|/(4R_\\rho)$. Choose $\\epsilon_{m,R}$ small enough that $6R_\\rho q\\le1$. This proves the uniform estimate for all $0<\\epsilon,\\delta\\le\\epsilon_{m,R}$.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F15",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The covariance kernel is on R² with m>0; no empty-domain case occurs.",
+          "reviewed": {
+            "upheld": true,
+            "by": "same-owner-qft-green-maps scoped boundary review",
+            "reason": "The countable-family phrase records the assumed Choice consequence, not an input index set over which the kernel theorem quantifies. The fixed positive mass and unit-integral mollifier determine the heat-kernel integral, covariance convolution and logarithmic bounds; an empty family changes none of these objects."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The pointwise formula excludes z=0, and step 3.1 proves the logarithmic singularity is locally integrable."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At |z|=1 the local and large-distance estimates in step 2.1 are both finite."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The claim concerns a massive resolvent kernel and has no finite covariance-rank parameter."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 controls t→0 and t→∞; step 4.1 states the ε,δ→0 limit."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Choice and Countable Choice are explicit in the Statement and [A1]–[A2]; no unspecified selection is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The result is a representation and list of bounds, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The result is a representation and list of bounds, not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Set m=1 and r=1 in the displayed heat-kernel formula.",
+          "result": "The local logarithmic and large-distance estimates are finite at the common boundary radius.",
+          "verifies": "Step 2.1; boundary between the two regions."
+        },
+        {
+          "check": "Use ε=δ for the fixed nonnegative unit-mass mollifier.",
+          "result": "κ is nonnegative, has unit integral, support radius at most 2Rρε, and sup norm at most ||ρ||∞ε⁻².",
+          "verifies": "Step 4.1; symmetric cutoff check."
+        }
+      ],
+      "finite_checks_disposition": "These hand checks verify low-order arithmetic and boundary cases only; the numbered proof establishes the general claim.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-70 author",
+        "notes": "The pointwise formula excludes z=0 but proves local L^p control there. The smoothing estimate is uniform only for sufficiently small ε,δ and the fixed nonnegative mollifier."
+      }
+    },
+    "thm-qftx-two-dimensional-wick-l2": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.\n\n",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qftx-two-dimensional-wick-cutoff",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice, its countable-family consequence, and $m>0$. Let $\\Phi$ be the real centered Gaussian random tempered distribution on $\\mathbb R^2$ with covariance $C_m(f,g)=(2\\pi)^{-2}\\int_{\\mathbb R^2}\\overline{\\widehat f(p)}\\widehat g(p)(|p|^2+m^2)^{-1}\\,d^2p$ for real Schwartz tests and $\\widehat f(p)=\\int e^{-ip\\cdot x}f(x)\\,d^2x$. Write $\\mu_C$ for the Gaussian probability measure on the cylinder $\\sigma$-algebra of $\\mathcal S'_\\mathbb R(\\mathbb R^2)$ supplied by [[thm-qftx-tempered-massive-gaussian-field]], equivalently the law of $\\Phi$; all expectations below are with respect to $\\mu_C$. Fix one nonnegative $\\rho\\in C_c^\\infty(\\mathbb R^2)$ with $\\int\\rho(x)\\,d^2x=1$, set $\\rho_\\epsilon(x)=\\epsilon^{-2}\\rho(x/\\epsilon)$ for $\\epsilon>0$, and define $\\Phi_\\epsilon(x)=\\Phi(u\\mapsto\\rho_\\epsilon(x-u))$. For each $n\\ge0$, define the finite-cutoff Wick polynomial $:\\!\\Phi_\\epsilon(x)^n\\!:$ by\n\n$$\\exp\\!\\left(t\\Phi_\\epsilon(x)-\\tfrac12t^2\\mathbb E[\\Phi_\\epsilon(x)^2]\\right)=\\sum_{n=0}^{\\infty}:\\!\\Phi_\\epsilon(x)^n\\!:\\,\\frac{t^n}{n!}$$\n\nas an identity of formal power series. For a bounded measurable $f:\\mathbb R^2\\to\\mathbb C$ that vanishes outside a bounded set, define its cutoff smearing by the samplewise Lebesgue integral $W_{\\epsilon,n}(f)=\\int f(x):\\!\\Phi_\\epsilon(x)^n\\!:\\,d^2x$. Every tempered sample gives a smooth $x\\mapsto\\Phi_\\epsilon(x)$, so this integral is finite for each sample; its $L^2(\\mu_C)$ limit as $\\epsilon\\downarrow0$ is a separate theorem, not part of this definition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qftx-two-dimensional-covariance-log-integrability",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice, its countable-family consequence, $m>0$, and the fixed mollifier from the earlier cutoff definition. Let $C_m$ be the translation-invariant covariance distribution whose Fourier multiplier is $(|p|^2+m^2)^{-1}$ in the convention $\\widehat f(p)=\\int e^{-ip\\cdot x}f(x)\\,d^2x$. It is represented by the even locally integrable function\n\n$$G_m(z)=\\frac1{4\\pi}\\int_0^\\infty t^{-1}\\exp\\!\\left(-m^2t-\\frac{|z|^2}{4t}\\right)dt,\\qquad z\\ne0.$$\n\nThere are constants $K_m,K_{m,R}<\\infty$ such that $|G_m(z)|\\le K_m(1+|\\log|z||)$ for $0<|z|\\le1$, $|G_m(z)|\\le K_m e^{-m|z|}/\\sqrt{m|z|}$ for $|z|\\ge1$, and $G_m^q\\in L^1_{\\mathrm{loc}}(\\mathbb R^2)$ for every finite $q\\ge1$. For the mollified fields of the earlier cutoff definition, $\\kappa_{\\epsilon,\\delta}(w)=\\int\\rho_\\epsilon(a)\\rho_\\delta(a-w)\\,d^2a$ and $C_{\\epsilon,\\delta}=G_m*\\kappa_{\\epsilon,\\delta}$ satisfy $\\mathbb E[\\Phi_\\epsilon(x)\\Phi_\\delta(y)]=C_{\\epsilon,\\delta}(x-y)$. Moreover, $C_{\\epsilon,\\delta}(z)\\to G_m(z)$ for every $z\\ne0$ as $\\epsilon,\\delta\\downarrow0$, and for every $R>0$ there are $K_{m,R},\\epsilon_{m,R}>0$ with\n\n$$|C_{\\epsilon,\\delta}(z)|\\le K_{m,R}(1+|\\log|z||)\\quad(0<|z|\\le R,\\ 0<\\epsilon,\\delta\\le\\epsilon_{m,R}).$$\n\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qftx-finite-cross-wick-covariance",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $(X,Y)$ have a centered, possibly degenerate, jointly Gaussian law with covariance matrix $\\begin{pmatrix}\\sigma^2&c\\\\c&\\tau^2\\end{pmatrix}$, where $\\sigma^2,\\tau^2\\ge0$ and the matrix is positive semidefinite. Define $:X^n:_{\\sigma^2}$ and $:Y^m:_{\\tau^2}$ by the finite covariance Wick-power generating identity. For all integers $n,m\\ge0$,\n\n$$\\mathbb E\\bigl[:X^n:_{\\sigma^2}:Y^m:_{\\tau^2}\\bigr]=\\begin{cases}n!c^n,&n=m,\\\\0,&n\\ne m,\\end{cases}$$\n\nwith $c^0:=1$.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to \\mathbb C$ belong to\n$L^1(\\mu \\times \\nu)$. Then:\n\n1. for $\\mu$-almost every $x$, the section $f_x$ belongs to $L^1(\\nu)$;\n2. for $\\nu$-almost every $y$, the section $f^y$ belongs to $L^1(\\mu)$;\n3. after assigning the value $0$ on the exceptional parameter sets, the\n   section-integral functions are integrable; and\n4. the three integrals agree:\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$\n\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. All functions below have domain $X$. Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-complex-lp-completeness-and-almost-everywhere-subsequences",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. For every measure space and $1\\le p\\le\\infty$, $L^p(\\mu;\\mathbb C)$ is complete. Every sequence converging in this norm has a subsequence of measurable representatives converging a.e. to a measurable representative of its norm limit. For finite $p$ no pointwise convergence of the whole sequence is asserted.\n\n",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-cauchy-schwarz-in-an-inner-product-space",
+          "source_section": "Statement",
+          "quote": "For all vectors $x,y$ in a real or complex inner-product space,\n\n$$|\\langle x,y\\rangle|\\le\\|x\\|\\,\\|y\\| ,$$\n\nwith equality if and only if $x$ and $y$ are linearly dependent.\n\n",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For fixed $\\epsilon,\\delta>0$, the smoothed fields at $x,y$ are jointly centered Gaussian by [F1], and their cross-covariance is $C_{\\epsilon,\\delta}(x-y)$ by [F2]. Apply [F3] to obtain $\\mathbb E[\\overline{:\\!\\Phi_\\epsilon(x)^n\\!:}:\\!\\Phi_\\delta(y)^n\\!:]=n!C_{\\epsilon,\\delta}(x-y)^n$. For fixed cutoffs, each variance is finite and independent of $x$ by translation invariance; Cauchy–Schwarz [F7] therefore bounds the absolute expected product by a finite constant on the bounded support of $f(x)g(y)$. Fubini [F4] applies and yields $\\mathbb E[\\overline{W_{\\epsilon,n}(f)}W_{\\delta,n}(g)]=n!\\int\\!\\!\\int\\overline{f(x)}g(y)C_{\\epsilon,\\delta}(x-y)^n\\,d^2x\\,d^2y$. For measurability of the samplewise smearing, on a fixed bounded box containing the support replace the continuous function $x\\mapsto:\\!\\Phi_\\epsilon(x)^n\\!:$ on each fine grid cell by its value at one fixed point of that cell. Its integral against $f$ is a finite sum of measurable evaluations with deterministic coefficients $\\int_{\\text{cell}}f$; uniform continuity on the box makes the sums converge to the samplewise integral. The same approximations make the field jointly measurable in sample and position, so Fubini applies to measurable functions.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F7",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $K_f,K_g$ be bounded supports of $f,g$. By [F2], $C_{\\epsilon,\\delta}(z)^n\\to G_m(z)^n$ for every $z\\ne0$ and, on the bounded difference set $K_f-K_g$, its absolute value is bounded by $K(1+|\\log|z||)^n$ for all sufficiently small cutoffs. This majorant is locally integrable: on the annulus $2^{-j-1}<|z|\\le2^{-j}$ its integral is at most $\\pi2^{-2j}(1+(j+1)\\log2)^n$, and the resulting series converges by the ratio test. Consequently $(x,y)\\mapsto |f(x)g(y)|(1+|\\log|x-y||)^n$ is integrable on $K_f\\times K_g$: for fixed $x$, the translated bounded set $x-K_g$ lies in one fixed disk on which the logarithmic power is integrable, uniformly in $x$, and $K_f$ has finite area. For every sequence $(\\epsilon_k,\\delta_k)\\to(0,0)$, apply [F5] on this product to get $\\mathbb E[\\overline{W_{\\epsilon_k,n}(f)}W_{\\delta_k,n}(g)]\\to n!\\int\\!\\!\\int\\overline{f(x)}g(y)G_m(x-y)^n\\,d^2x\\,d^2y$. Sequential characterization of limits in $\\mathbb R^2$ gives the same joint limit as $\\epsilon,\\delta\\downarrow0$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "F5",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Take $g=f$. The right side of step 2.1 is a fixed finite real number, being the limit of the nonnegative diagonal covariances. Expanding the squared norm gives $\\|W_{\\epsilon,n}(f)-W_{\\delta,n}(f)\\|_2^2=\\mathbb E|W_{\\epsilon,n}(f)|^2+\\mathbb E|W_{\\delta,n}(f)|^2-2\\operatorname{Re}\\mathbb E[\\overline{W_{\\epsilon,n}(f)}W_{\\delta,n}(f)]$, which tends to zero by step 2.1. Thus the cutoff family is Cauchy in $L^2(\\mu_C)$, and [F6] supplies its limit $W_n(f)$. Applying the mixed covariance convergence in step 2.1 and [F7] to pass both factors to their $L^2$ limits proves the displayed covariance formula for $W_n(f),W_n(g)$. For real $f$, each cutoff smearing is real; continuity of the imaginary-part map in $L^2$ gives $\\|\\operatorname{Im}W_n(f)\\|_2\\le\\|W_n(f)-W_{\\epsilon,n}(f)\\|_2\\to0$, so the limit class is real.",
+          "step": "3.1",
+          "inputs": [
+            "A2",
+            "F6",
+            "F7",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For f=0 the cutoff smearing, limit, and covariance formula are zero by steps 1.1 and 3.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 includes zero smearing; its L² difference is identically zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At n=1 the cross-Wick identity in step 1.1 reduces to the ordinary covariance of the smoothed Gaussian field."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The finite Gaussian pairing supplier permits degenerate joint laws; step 1.1 applies it to dependent smoothed tests."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 2.1–3.1 prove the joint ε,δ→0 limit; changes on support boundaries are Lebesgue-null."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Choice and Countable Choice are explicit; Countable Choice is used for L² completeness in step 3.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is a conditional convergence assertion, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem is a conditional convergence assertion, not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Take n=1 and real compactly supported smooth f,g.",
+          "result": "The Wick powers are the smoothed Gaussian fields, so the covariance limit is the ordinary covariance-kernel pairing.",
+          "verifies": "Steps 1.1–3.1; low-order compatibility."
+        },
+        {
+          "check": "Take f=0.",
+          "result": "Every cutoff smearing, its L² limit, and the covariance are zero.",
+          "verifies": "Steps 1.1 and 3.1; zero-smearing boundary."
+        }
+      ],
+      "finite_checks_disposition": "These hand checks verify low-order arithmetic and boundary cases only; the numbered proof establishes the general claim.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-70 author",
+        "notes": "The result is only an L² limit of smeared free-field Wick powers. It does not establish exponential integrability, an interacting probability measure, or an infinite-volume interacting theory."
+      }
+    },
+    "cex-qftx-l2-not-exponential-control": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qftx-p-phi-two-construction-contract",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice and its countable-family consequence, fix $m>0$, and let $P(s)=\\sum_{j=0}^{2k}a_js^j$ be a real polynomial of even degree $2k\\ge2$ with $a_{2k}>0$. Let $\\Phi_\\epsilon$, $W_{\\epsilon,j}$, and their real $L^2(\\mu_C)$ limits $W_j$ for real smearings be as in the earlier cutoff definition and Wick-limit theorem. Here $\\epsilon$ is the smoothing cutoff, and $\\Lambda$ is a bounded Lebesgue-measurable set with finite Lebesgue area $|\\Lambda|$. An exhaustion $\\Lambda\\nearrow\\mathbb R^2$ means a directed family of such sets whose union is $\\mathbb R^2$ and such that every compact subset of $\\mathbb R^2$ is contained in some member. Define $U_{\\Lambda,\\epsilon}=a_0|\\Lambda|+\\sum_{j=1}^{2k}a_jW_{\\epsilon,j}(\\mathbf1_\\Lambda)$ and $U_\\Lambda=a_0|\\Lambda|+\\sum_{j=1}^{2k}a_jW_j(\\mathbf1_\\Lambda)$; $\\mathbf1_\\Lambda$ is bounded and compactly supported, so the Wick-limit theorem applies. For coupling $\\lambda\\ge0$, put $X_{\\Lambda,\\epsilon}=\\exp(-\\lambda U_{\\Lambda,\\epsilon})$, $X_\\Lambda=\\exp(-\\lambda U_\\Lambda)$ and define the extended nonnegative normalization $Z_\\Lambda=\\mathbb E_{\\mu_C}X_\\Lambda\\in[0,+\\infty]$. Only if $0<Z_\\Lambda<\\infty$ does the formula $d\\mu_{\\Lambda,\\lambda}=Z_\\Lambda^{-1}X_\\Lambda\\,d\\mu_C$ define a normalized probability measure.\n\nA construction contract for a specified polynomial, mass, coupling regime, region class, and ultraviolet/infinite-volume cutoff family is complete only after a proof establishes all of the following: (i) each $X_{\\Lambda,\\epsilon}$ is integrable and the family is uniformly integrable, meaning $\\lim_{R\\to\\infty}\\sup_{0<\\epsilon\\le1}\\mathbb E_{\\mu_C}[X_{\\Lambda,\\epsilon}\\mathbf1_{\\{X_{\\Lambda,\\epsilon}>R\\}}]=0$; (ii) the cutoff normalizations converge to a strictly positive finite $Z_\\Lambda$ and, for every stated polynomial/test insertion $F$, the integrals $\\mathbb E_{\\mu_C}[F X_{\\Lambda,\\epsilon}]$ converge with the bounds needed to normalize them; and (iii) as $\\Lambda$ exhausts $\\mathbb R^2$, the Schwinger hierarchy exists as tempered distributions, is Euclidean-invariant, permutation-symmetric, reflection-positive in the exact sense given by the earlier Euclidean-limit data, and has the required clustering and explicit per-order and uniform-order growth estimates. Any later reconstruction claim must name its precise theorem and prove that theorem's exact regularity and growth hypotheses; this contract does not identify the separately defined uniform-order bound with any reconstruction theorem's growth hypothesis. This contract asserts none of these interaction or infinite-volume conclusions. In particular, $L^2$ convergence of $U_{\\Lambda,\\epsilon}$ alone is not an exponential-integrability estimate.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-exponential-beats-every-polynomial",
+          "source_section": "Statement",
+          "quote": "For every $m\\in\\mathbb N$ and every real $a>0$,\n$$\\frac{x^m}{\\exp(ax)}\\longrightarrow0\\qquad(x\\to+\\infty).$$\n\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The set $A_n$ has Lebesgue measure $e^{-n/2}$, so $\\|U_n\\|_2^2=\\int_{A_n}n^2\\,d\\ell=n^2e^{-n/2}$. By [F2] with power $2$ and scale $1/2$, this tends to $0$; hence $U_n\\to0$ in $L^2$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "On $A_n$, $e^{-U_n}=e^n$, and on its complement $e^{-U_n}=1$. Therefore $\\mathbb E[e^{-U_n}]=e^n e^{-n/2}+1-e^{-n/2}=e^{n/2}+1-e^{-n/2}$, which tends to $+\\infty$ by [F2]. Thus these $L^2$-convergent variables have unbounded exponential normalizers, contradicting the refuted implication.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The construction is a sequence indexed by n≥1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Each A_n has positive measure; step 1.1 computes a strictly positive L² norm."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At n=1 the exact L² norm and normalizer are finite by steps 1.1–2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No operator, covariance matrix, or rank-degenerate case occurs."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 identifies A_n as an interval; its singleton endpoint is null, so inclusion does not change either integral."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement defines a concrete sequence, and steps 1.1–2.1 use no selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The refuted claim is a one-way implication, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The refuted claim is a one-way implication, not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Evaluate at n=1.",
+          "result": "||U₁||²₂=e⁻¹ and E[e⁻U₁]=e^{1/2}+1−e^{-1/2}.",
+          "verifies": "Steps 1.1–2.1; single-index arithmetic."
+        }
+      ],
+      "finite_checks_disposition": "These hand checks verify low-order arithmetic and boundary cases only; the numbered proof establishes the general claim.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-70 author",
+        "notes": "This is a general probability-space counterexample, not a model-specific P(φ)₂ construction or a Gaussian-field claim."
+      }
+    }
+  }
+}

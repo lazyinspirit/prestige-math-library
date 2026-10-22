@@ -1,0 +1,126 @@
+[
+  {
+    "order": 915,
+    "id": "qsmx-open-entropy-production",
+    "kind": "A",
+    "category": "quantum-statistical-mechanics",
+    "library": "physics",
+    "title": "Noncommuting entropy production and thermal secular models",
+    "companion": "qsmx-open-entropy-production-examples",
+    "requires": [
+      "qsm-dt-channels",
+      "qsm-dt-relaxation",
+      "qsmx-entropy-entanglement"
+    ],
+    "items": [
+      {
+        "id": "def-qsmx-secular-thermal-generator",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Finite energy-resolved GKSL thermal model",
+        "reference": "research/frontier-expansion-2026-10-19/quantum-statistical-mechanics/prose-scaffold.md#def-qsmx-secular-thermal-generator",
+        "design_state": "draft-research",
+        "dependency_level": 0,
+        "deps": [
+          "lem-qsm-matrix-state-calculus"
+        ],
+        "dependency_roles": {
+          "lem-qsm-matrix-state-calculus": "mathematical-premise"
+        },
+        "physical_scope": null,
+        "statement": "Let $d\\geq1$ and let $\\mathcal H=\\mathbb C^d$ with its standard complex inner product. Let $H=H^*$ on $\\mathcal H$ be a Hamiltonian matrix with entries in joules, let $\\hbar>0$ have units joule-seconds, and let $S_1,\\ldots,S_m$ be a finite family of dimensionless Hermitian matrices, where $m\\geq0$. Write the finite spectral decomposition $H=\\sum_{E\\in\\operatorname{spec}(H)} E P_E$, where $P_E$ are pairwise orthogonal spectral projections and $\\sum_E P_E=I_d$. The Bohr-frequency set is\n\n$$\\Omega_H:=\\{(E'-E)/\\hbar:E,E'\\in\\operatorname{spec}(H)\\}\\subset\\mathbb R,$$\n\nwhose frequencies have units seconds$^{-1}$. For each $\\omega\\in\\Omega_H$ and $1\\leq a\\leq m$, define the dimensionless energy-resolved coupling\n\n$$S_a(\\omega):=\\sum_{\\substack{E,E'\\in\\operatorname{spec}(H)\\\\E'-E=\\hbar\\omega}}P_E S_a P_{E'}.$$\n\nLet $\\beta\\in\\mathbb R$ have units joules$^{-1}$. For each $\\omega\\in\\Omega_H$, choose a finite rate matrix $\\Gamma(\\omega)=(\\gamma_{ab}(\\omega))_{a,b=1}^m$, with entries in seconds$^{-1}$, that is positive semidefinite in the explicit sense that $\\Gamma(\\omega)=\\Gamma(\\omega)^*$ and $v^*\\Gamma(\\omega)v\\geq0$ for every $v\\in\\mathbb C^m$, and require the thermal balance relation\n\n$$\\gamma_{ab}(-\\omega)=e^{-\\beta\\hbar\\omega}\\gamma_{ba}(\\omega).$$\n\nLet $H_{\\rm LS}=H_{\\rm LS}^*$ be a Hermitian matrix with units joules satisfying $[H_{\\rm LS},H]=0$. For dimensionless $X\\in M_d(\\mathbb C)$, the finite energy-resolved generator is the linear map\n\n$$\\mathcal L(X)=-\\frac{i}{\\hbar}[H+H_{\\rm LS},X]+\\sum_{\\omega\\in\\Omega_H}\\sum_{a,b=1}^{m}\\gamma_{ab}(\\omega)\\left(S_b(\\omega)X S_a(\\omega)^*-\\frac12\\{S_a(\\omega)^*S_b(\\omega),X\\}\\right),$$\n\nwhere $[A,B]=AB-BA$, $\\{A,B\\}=AB+BA$, and $A^*$ is the conjugate transpose. The finite sums define a linear map with units seconds$^{-1}$. This is an adopted finite effective model specification; the definition asserts no microscopic weak-coupling convergence or physical applicability.\n\n"
+      },
+      {
+        "id": "thm-qsmx-secular-gibbs-stationarity",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Thermal balance makes Gibbs stationary",
+        "reference": "research/frontier-expansion-2026-10-19/quantum-statistical-mechanics/prose-scaffold.md#thm-qsmx-secular-gibbs-stationarity",
+        "design_state": "draft-research",
+        "dependency_level": 1,
+        "deps": [
+          "def-qsmx-secular-thermal-generator",
+          "def-qsm-dt-channel-definition",
+          "def-qsm-dt-gksl-definition",
+          "thm-qsm-dt-gksl-sufficient",
+          "lem-qsm-matrix-state-calculus"
+        ],
+        "dependency_roles": {
+          "def-qsmx-secular-thermal-generator": "mathematical-premise",
+          "def-qsm-dt-channel-definition": "mathematical-premise",
+          "def-qsm-dt-gksl-definition": "mathematical-premise",
+          "thm-qsm-dt-gksl-sufficient": "mathematical-premise",
+          "lem-qsm-matrix-state-calculus": "mathematical-premise"
+        },
+        "physical_scope": null,
+        "statement": "Let $d\\geq1$, let $H=H^*\\in M_d(\\mathbb C)$ have entries in joules and a finite spectral decomposition $H=\\sum_E E P_E$ with pairwise orthogonal projections summing to $I_d$, and let $S_1,\\ldots,S_m$ be a finite family of dimensionless Hermitian matrices, where $m\\geq0$. Set $\\Omega_H=\\{(E'-E)/\\hbar:E,E'\\in\\operatorname{spec}(H)\\}$ and, for each $\\omega\\in\\Omega_H$, define $S_a(\\omega)=\\sum_{E'-E=\\hbar\\omega}P_E S_aP_{E'}$. Suppose that the rate matrices $\\Gamma(\\omega)=(\\gamma_{ab}(\\omega))$, $\\omega\\in\\Omega_H$, have entries in seconds$^{-1}$, are positive semidefinite in the explicit sense that $\\Gamma(\\omega)=\\Gamma(\\omega)^*$ and $v^*\\Gamma(\\omega)v\\geq0$ for every $v\\in\\mathbb C^m$, and satisfy $\\gamma_{ab}(-\\omega)=e^{-\\beta\\hbar\\omega}\\gamma_{ba}(\\omega)$, with $\\beta\\in\\mathbb R$ in joules$^{-1}$ and $\\hbar>0$ in joule-seconds. Let $H_{\\rm LS}=H_{\\rm LS}^*$ have entries in joules and commute with $H$, and let $\\mathcal L$ be the finite generator\n\n$$\\mathcal L(X)=-\\frac{i}{\\hbar}[H+H_{\\rm LS},X]+\\sum_{\\omega\\in\\Omega_H}\\sum_{a,b=1}^{m}\\gamma_{ab}(\\omega)\\left(S_b(\\omega)X S_a(\\omega)^*-\\frac12\\{S_a(\\omega)^*S_b(\\omega),X\\}\\right).$$\n\nFor $\\rho\\in M_d(\\mathbb C)$, being a density matrix means $\\rho=\\rho^*$, $v^*\\rho v\\geq0$ for every $v\\in\\mathbb C^d$, and $\\operatorname{Tr}\\rho=1$; it is faithful when it is positive definite. For $Z_\\beta:=\\operatorname{Tr}(e^{-\\beta H})>0$, define the faithful Gibbs density $\\sigma_\\beta:=e^{-\\beta H}/Z_\\beta$. For time $t\\geq0$ measured in seconds, $T_t:=e^{t\\mathcal L}$ is completely positive and trace-preserving, and $T_t(\\sigma_\\beta)=\\sigma_\\beta$. This statement asserts stationarity only; it asserts neither uniqueness of the stationary density nor convergence to $\\sigma_\\beta$.\n\n"
+      },
+      {
+        "id": "thm-qsmx-spohn-finite-inequality",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Stationary finite quantum semigroups decrease relative entropy",
+        "reference": "research/frontier-expansion-2026-10-19/quantum-statistical-mechanics/prose-scaffold.md#thm-qsmx-spohn-finite-inequality",
+        "design_state": "draft-research",
+        "dependency_level": 2,
+        "deps": [
+          "def-qsm-dt-channel-definition",
+          "thm-qsmx-cmi-and-channel-dpi",
+          "lem-qsm-matrix-state-calculus",
+          "cor-finite-dimensional-normed-spaces-are-banach",
+          "lem-exponential-series-of-a-bounded-operator"
+        ],
+        "dependency_roles": {
+          "def-qsm-dt-channel-definition": "mathematical-premise",
+          "thm-qsmx-cmi-and-channel-dpi": "mathematical-premise",
+          "lem-qsm-matrix-state-calculus": "mathematical-premise",
+          "cor-finite-dimensional-normed-spaces-are-banach": "mathematical-premise",
+          "lem-exponential-series-of-a-bounded-operator": "mathematical-premise"
+        },
+        "physical_scope": null,
+        "statement": "Let $d\\geq1$ and let $\\mathcal L:M_d(\\mathbb C)\\to M_d(\\mathbb C)$ be complex-linear. Define $T_t:=e^{t\\mathcal L}:=\\sum_{n=0}^{\\infty}t^n\\mathcal L^n/n!$ for $t\\geq0$, and assume that each $T_t$ is completely positive and trace-preserving; the exponential gives $T_{t+s}=T_t\\circ T_s$. Let $\\sigma=\\sigma^*>0$ satisfy $\\operatorname{Tr}\\sigma=1$ and $T_t(\\sigma)=\\sigma$ for every $t\\geq0$. A density matrix $\\rho$ means $\\rho=\\rho^*$, $v^*\\rho v\\geq0$ for every $v\\in\\mathbb C^d$, and $\\operatorname{Tr}\\rho=1$. For such a density matrix $\\rho$, define the finite quantum relative entropy\n\n$$D(\\rho\\|\\sigma):=\\operatorname{Tr}(\\rho\\log\\rho)-\\operatorname{Tr}(\\rho\\log\\sigma),$$\n\nusing the natural logarithm, the finite spectral logarithm on the support of $\\rho$, and $0\\log0:=0$. Since $\\sigma$ is positive definite, $D(\\rho\\|\\sigma)$ is finite for every density $\\rho$. Then $t\\mapsto D(T_t\\rho\\|\\sigma)$ is nonincreasing on $[0,\\infty)$. If $t$ is interpreted as seconds, $\\mathcal L$ has units seconds$^{-1}$; the statement is mathematical and asserts no physical applicability. At every $t\\geq0$ for which $\\rho_t:=T_t\\rho$ is positive definite, its derivative exists (as a right derivative at $t=0$) and\n\n$$\\frac{d}{dt}D(\\rho_t\\|\\sigma)=\\operatorname{Tr}\\!\\left(\\mathcal L(\\rho_t)(\\log\\rho_t-\\log\\sigma)\\right)\\leq0.$$\n\nAt singular $\\rho_t$ this logarithmic derivative is not asserted; the extended-real upper right Dini derivative is at most zero. No detailed-balance assumption, strict decay, unique stationary state, or convergence to $\\sigma$ is asserted.\n\n"
+      }
+    ]
+  },
+  {
+    "order": 916,
+    "id": "qsmx-open-entropy-production-examples",
+    "kind": "B",
+    "category": "quantum-statistical-mechanics",
+    "library": "physics",
+    "title": "Noncommuting entropy production and thermal secular models — Examples",
+    "companion": "qsmx-open-entropy-production",
+    "requires": [
+      "qsmx-open-entropy-production"
+    ],
+    "items": [
+      {
+        "id": "cex-qsmx-stationarity-without-relaxation",
+        "kind": "counterexample",
+        "domain": "mathematics",
+        "title": "A two-level generator fixes many states",
+        "reference": "research/frontier-expansion-2026-10-19/quantum-statistical-mechanics/prose-scaffold.md#cex-qsmx-stationarity-without-relaxation",
+        "design_state": "draft-research",
+        "dependency_level": 3,
+        "deps": [
+          "def-qsm-dt-channel-definition",
+          "def-qsm-dt-gksl-definition",
+          "thm-qsmx-spohn-finite-inequality",
+          "thm-qsm-dt-gksl-sufficient",
+          "cor-finite-dimensional-normed-spaces-are-banach",
+          "lem-exponential-series-of-a-bounded-operator"
+        ],
+        "dependency_roles": {
+          "def-qsm-dt-channel-definition": "mathematical-premise",
+          "def-qsm-dt-gksl-definition": "mathematical-premise",
+          "thm-qsmx-spohn-finite-inequality": "mathematical-premise",
+          "thm-qsm-dt-gksl-sufficient": "mathematical-premise",
+          "cor-finite-dimensional-normed-spaces-are-banach": "mathematical-premise",
+          "lem-exponential-series-of-a-bounded-operator": "mathematical-premise"
+        },
+        "physical_scope": null,
+        "statement": "Let $d\\geq1$ and let $(T_t)_{t\\geq0}$ be complex-linear maps on $M_d(\\mathbb C)$ that are completely positive (each finite ancilla amplification preserves positive matrices) and trace-preserving ($\\operatorname{Tr}(T_t(X))=\\operatorname{Tr}X$ for every $X$), with $T_0=\\operatorname{id}$ and $T_{t+s}=T_t\\circ T_s$ for all $s,t\\geq0$. A density matrix $\\rho$ means $\\rho=\\rho^*$, $v^*\\rho v\\geq0$ for every $v\\in\\mathbb C^d$, and $\\operatorname{Tr}\\rho=1$; it is faithful when $v^*\\rho v>0$ for every nonzero $v\\in\\mathbb C^d$. For a Hermitian matrix $H\\in M_d(\\mathbb C)$ and $\\beta\\in\\mathbb R$, define $Z_\\beta:=\\operatorname{Tr}(e^{-\\beta H})>0$ and the Gibbs density $\\sigma_\\beta:=e^{-\\beta H}/Z_\\beta$. A density matrix $\\sigma$ is stationary for $(T_t)$ when $T_t(\\sigma)=\\sigma$ for every $t\\geq0$. For a density matrix $\\rho$ and faithful density $\\sigma$, let $D(\\rho\\|\\sigma):=\\operatorname{Tr}(\\rho\\log\\rho)-\\operatorname{Tr}(\\rho\\log\\sigma)$, using the natural logarithm, the finite spectral logarithm on the support of $\\rho$, and $0\\log0:=0$. The claim refuted here is that nonincrease of relative entropy to a faithful stationary Gibbs density is sufficient to guarantee that the Gibbs density is the unique stationary density and that every initial density converges to it.\n\n"
+      }
+    ]
+  }
+]

@@ -1,0 +1,490 @@
+{
+  "version": 1,
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "scope": [
+    "def-tgrx-sector-code",
+    "prop-tgrx-code-area-entropy",
+    "ex-tgrx-two-sector-area"
+  ],
+  "contracts": {
+    "def-tgrx-sector-code": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Definition explicitly requires a finite nonempty index set; an empty sector family is outside this interface."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition requires nonzero factor spaces and faithful ancillary matrices; zero-dimensional factors and zero ancillary eigenvalues are excluded."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Definition permits a singleton index set, which produces one block and one probability equal to one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Definition imposes no distinct-eigenvalue condition; repeated eigenvalues are permitted by the finite density-matrix interface."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This is a static finite-algebra definition and introduces no parameter interval or endpoint limit."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The index set is finite and all sector data are supplied as inputs in the Definition; no arbitrary-family selection is asserted."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition introduces notation and a finite model; it states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition introduces notation and a finite model; it states no reverse implication."
+        }
+      ],
+      "finite_checks": [],
+      "supplier_excerpts": [
+        {
+          "supplier": "prop-tgrx-finite-modular-balance",
+          "carrier": "items/prop-tgrx-finite-modular-balance.md",
+          "status": "Current R2 batch 122 draft carrier; its complete current proof was inspected and loadStep1Record/step1Decision report ready. No independent proof acceptance is claimed.",
+          "source_section": "Statement",
+          "exact_statement": "Let $H$ be a nonzero finite-dimensional complex inner-product space. Let $\\rho,\\sigma:H\\to H$ be self-adjoint linear maps with nonnegative eigenvalues and trace one, and suppose every eigenvalue of $\\sigma$ is strictly positive. Define $K_\\sigma:=-\\log\\sigma$ by spectral calculus, and for any self-adjoint $\\tau:H\\to H$ with nonnegative eigenvalues and trace one define $s(\\tau):=-\\operatorname{tr}(\\tau\\log\\tau)=-\\sum_{\\lambda_j(\\tau)>0}\\lambda_j(\\tau)\\log\\lambda_j(\\tau)$, with the zero-eigenvalue term $0\\log0:=0$ and natural logarithms, so the entropy is in nats. Define the modular-energy difference relative to $\\sigma$ by $\\Delta_K(\\rho,\\sigma):=\\operatorname{tr}((\\rho-\\sigma)K_\\sigma)$. Then\n\n$$D(\\rho\\|\\sigma)=\\Delta_K(\\rho,\\sigma)-(s(\\rho)-s(\\sigma)).$$\n\nFor any nonzero finite-dimensional complex inner-product spaces $H_A,H_B$ with $H=H_A\\otimes H_B$, partial tracing both states over $H_B$ cannot increase relative entropy:\n\n$$D(\\operatorname{Tr}_{B}\\rho\\|\\operatorname{Tr}_{B}\\sigma)\\le D(\\rho\\|\\sigma).$$\n\nThe identity and inequality are finite-dimensional mathematical statements; no Hamiltonian, physical energy, physical units, continuum limit, or gravitational entropy is assumed.\n\n",
+          "relevant_hypotheses_and_conventions": "Use its finite-dimensional faithful-reference identity and density/entropy conventions. Its separate partial-trace inequality is not used by these claims.",
+          "supplier_proof_status": "Draft item; current complete conditional proof inspected. Readiness, if present, is not independent approval.",
+          "consumer_use": "Supplies the finite density-matrix and natural-log entropy/relative-entropy convention used in the definition."
+        },
+        {
+          "supplier": "def-qc-tensor-register-and-permutation",
+          "carrier": "items/def-qc-tensor-register-and-permutation.md",
+          "status": "Published mathematical import; current Definition inspected and snapshot pinned in research/math-imports.json. No source bytes were edited.",
+          "source_section": "Definition",
+          "exact_statement": "An **ordered tensor register** consists of a finite ordered list of\nfinite-dimensional complex inner-product spaces $H_0,\\ldots,H_{n-1}$, each\nequipped with a specified ordered orthonormal basis. Its space is\n$H_0\\otimes\\cdots\\otimes H_{n-1}$, with factors retained in the displayed\norder. The product basis is ordered lexicographically by its tuple of factor\nindices. The empty tensor product is $\\mathbb C$ with basis $\\{1\\}$. A\nzero-dimensional factor is allowed in this mathematical construction and makes\nthe tensor space zero; it is not a register under\n[[def-qc-register-and-computational-basis]].\n\nThe inner product is linear in the first argument and conjugate-linear in the\nsecond, and on elementary tensors it is\n\n$$\\left\\langle\\bigotimes_{k<n}x_k,\\bigotimes_{k<n}y_k\\right\\rangle_{\\otimes}:=\\prod_{k<n}\\langle x_k,y_k\\rangle_{{\\rm root},k}.$$ \n\nFor the empty tensor, the right side is the empty product $1$, giving the\nstandard inner product on $\\mathbb C$.\n\nFor a permutation $\\sigma$ of the $n$ factor positions, the **wire permutation**\n$P_\\sigma$ maps the product basis vector indexed by\n$(i_0,\\ldots,i_{n-1})$ to the product basis vector whose output factor order is\n$(\\sigma(0),\\ldots,\\sigma(n-1))$. It is extended linearly; for $n=0$ it is the\nidentity on $\\mathbb C$. The extension is a linear map in the sense of\n[[def-linear-map]].\n\n",
+          "relevant_hypotheses_and_conventions": "The finite Hilbert tensor product has product inner product and ordered product bases; the two-factor product basis is orthonormal.",
+          "supplier_proof_status": "Published definition; no proof is supplied or required.",
+          "consumer_use": "Supplies the finite Hilbert tensor product and its product inner product."
+        },
+        {
+          "supplier": "def-qc-tensor-map",
+          "carrier": "items/def-qc-tensor-map.md",
+          "status": "Published mathematical import; current Definition inspected and snapshot pinned in research/math-imports.json. No source bytes were edited.",
+          "source_section": "Definition",
+          "exact_statement": "For a finite ordered family of finite-dimensional complex vector spaces\n$H_k,K_k$ and complex-linear maps $T_k:H_k\\to K_k$, the **tensor map**\n$\\bigotimes_{k<n}T_k:H_0\\otimes\\cdots\\otimes H_{n-1}\\to\nK_0\\otimes\\cdots\\otimes K_{n-1}$ is the unique linear map satisfying\n\n$$\\left(\\bigotimes_{k<n}T_k\\right)(x_0\\otimes\\cdots\\otimes x_{n-1})=T_0x_0\\otimes\\cdots\\otimes T_{n-1}x_{n-1}.$$\n\nFor $n=0$, the tensor map is the identity map $z\\mapsto z$ on the empty tensor\nproduct $\\mathbb C$.\n\n",
+          "relevant_hypotheses_and_conventions": "The tensor map acts on elementary tensors by applying each factor map; this fixes the meaning of rho tensor chi and sigma tensor chi.",
+          "supplier_proof_status": "Published definition; no proof is supplied or required.",
+          "consumer_use": "Supplies the action of tensor-product endomorphisms on elementary tensors."
+        },
+        {
+          "supplier": "def-linear-map",
+          "carrier": "items/def-linear-map.md",
+          "status": "Published mathematical import; current Definition inspected and snapshot pinned in research/math-imports.json. No source bytes were edited.",
+          "source_section": "Definition",
+          "exact_statement": "Let $V$ and $W$ be vector spaces over the same field $F$. A function\n$T:V\\to W$ is **linear** when\n\n$$T(au+bv)=aT(u)+bT(v)$$\n\nfor all $a,b\\in F$ and $u,v\\in V$. Such a function is a **linear map**, or\n**linear transformation**.\n",
+          "relevant_hypotheses_and_conventions": "A linear map preserves the vector-space operations; an endomorphism is a linear map from a space to itself.",
+          "supplier_proof_status": "Published definition; no proof is supplied or required.",
+          "consumer_use": "Supplies the linear-map meaning of endomorphism."
+        },
+        {
+          "supplier": "def-trace-of-an-endomorphism",
+          "carrier": "items/def-trace-of-an-endomorphism.md",
+          "status": "Published mathematical import; current Definition inspected and snapshot pinned in research/math-imports.json. No source bytes were edited.",
+          "source_section": "Definition",
+          "exact_statement": "Let $V$ be a finite-dimensional vector space over $F$ and let $T:V\\to V$ be\nlinear. Choose any ordered basis $\\mathcal B$ of $V$ and define the **trace of\nthe endomorphism $T$** by\n\n$$\\operatorname{tr}(T):=\\operatorname{tr}([T]_{\\mathcal B}^{\\mathcal B}).$$\n\nThis is independent of the chosen basis: matrices of the same endomorphism in\ntwo ordered bases are similar, and similar matrices have equal trace. When\n$V$ is the zero space, the empty basis gives trace $0$.\n",
+          "relevant_hypotheses_and_conventions": "Trace is the basis-independent finite sum of diagonal matrix entries, used for normalizations and trace pairings.",
+          "supplier_proof_status": "Published definition; no proof is supplied or required.",
+          "consumer_use": "Supplies the trace convention in the definition of density matrix."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-125-beta-self-review",
+        "notes": "Self-review checked the finite nonempty index set, nonzero factor spaces, direct-sum and tensor conventions, density/faithful definitions, and the fixed-ancilla/reference interface. The definition asserts no gravitational interpretation; this is authoring evidence, not independent proof approval."
+      }
+    },
+    "prop-tgrx-code-area-entropy": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "prop-tgrx-finite-modular-balance",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space. Let $\\rho,\\sigma:H\\to H$ be self-adjoint linear maps with nonnegative eigenvalues and trace one, and suppose every eigenvalue of $\\sigma$ is strictly positive. Define $K_\\sigma:=-\\log\\sigma$ by spectral calculus, and for any self-adjoint $\\tau:H\\to H$ with nonnegative eigenvalues and trace one define $s(\\tau):=-\\operatorname{tr}(\\tau\\log\\tau)=-\\sum_{\\lambda_j(\\tau)>0}\\lambda_j(\\tau)\\log\\lambda_j(\\tau)$, with the zero-eigenvalue term $0\\log0:=0$ and natural logarithms, so the entropy is in nats. Define the modular-energy difference relative to $\\sigma$ by $\\Delta_K(\\rho,\\sigma):=\\operatorname{tr}((\\rho-\\sigma)K_\\sigma)$. Then\n\n$$D(\\rho\\|\\sigma)=\\Delta_K(\\rho,\\sigma)-(s(\\rho)-s(\\sigma)).$$\n\nFor any nonzero finite-dimensional complex inner-product spaces $H_A,H_B$ with $H=H_A\\otimes H_B$, partial tracing both states over $H_B$ cannot increase relative entropy:\n\n$$D(\\operatorname{Tr}_{B}\\rho\\|\\operatorname{Tr}_{B}\\sigma)\\le D(\\rho\\|\\sigma).$$\n\nThe identity and inequality are finite-dimensional mathematical statements; no Hamiltonian, physical energy, physical units, continuum limit, or gravitational entropy is assumed.\n\n",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qsm-matrix-state-calculus",
+          "source_section": "Statement",
+          "quote": "Use the following conventions on a complex inner-product space $H$ of dimension $D\\geq1$, with inner product linear in its first argument. For an endomorphism $A$, define $\\operatorname{Tr}A:=\\sum_{j=1}^D\\langle Ae_j,e_j\\rangle$ in an orthonormal basis; step 3.1 proves basis independence. For any Hermitian $M$, its **positive spectral subspace** (called its positive support here) is $S_M:=\\bigoplus_{\\lambda>0}\\ker(M-\\lambda I)$; when $M\\geq0$ this equals $(\\ker M)^\\perp$. Its support logarithm is $\\log(M|_{S_M}):=\\sum_{\\lambda>0}(\\log\\lambda)P_\\lambda|_{S_M}$, where $P_\\lambda$ is the orthogonal projection onto that eigenspace. No value $\\log0$ is assigned; for $M=0$ this is the unique endomorphism of the zero space. For the set $\\mathcal D(H)$ of positive semidefinite Hermitian endomorphisms with trace one, a point $\\rho$ is **extreme** if every equality $\\rho=t\\sigma+(1-t)\\tau$ with $\\sigma,\\tau\\in\\mathcal D(H)$ and $0<t<1$ implies $\\sigma=\\tau=\\rho$.\n\nLet $H$ be a complex inner-product space of finite dimension $D\\geq1$, with inner product linear in its first argument. Every Hermitian endomorphism $M$ has an orthonormal eigenbasis with real eigenvalues. For a real function $f$ on its finite spectrum, define $f(M)$ by its spectral projections; this definition is independent of the choice of eigenbasis. In particular positive square roots, exponentials, and logarithms on positive supports are well defined.\n\nFor a density matrix $\\rho$ on $H$, meaning a Hermitian positive semidefinite operator with $\\operatorname{Tr}\\rho=1$, $\\operatorname{Tr}(\\rho A)=\\sum_jp_j\\langle Au_j,u_j\\rangle$ for bounded $A$, where $\\rho=\\sum_jp_j|u_j\\rangle\\langle u_j|$. The weighted form $(X,Y)_\\rho=\\operatorname{Tr}(\\rho X^*Y)$ satisfies Cauchy–Schwarz, $|(X,Y)_\\rho|^2\\leq(X,X)_\\rho(Y,Y)_\\rho$. Finally, $\\operatorname{Tr}(\\rho^2)\\leq1$, with equality exactly for rank-one densities, and those are exactly the extreme points of the finite density-matrix set.\n\n",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-trace-of-an-endomorphism",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a finite-dimensional vector space over $F$ and let $T:V\\to V$ be\nlinear. Choose any ordered basis $\\mathcal B$ of $V$ and define the **trace of\nthe endomorphism $T$** by\n\n$$\\operatorname{tr}(T):=\\operatorname{tr}([T]_{\\mathcal B}^{\\mathcal B}).$$\n\nThis is independent of the chosen basis: matrices of the same endomorphism in\ntwo ordered bases are similar, and similar matrices have equal trace. When\n$V$ is the zero space, the empty basis gives trace $0$.\n",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.\n\n",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-tgrx-sector-code",
+          "source_section": "Definition",
+          "quote": "Let $I$ be a finite nonempty index set. For each $\\alpha\\in I$, let $H_\\alpha$ and $K_\\alpha$ be nonzero finite-dimensional complex inner-product spaces, and give\n\n$$H_A:=\\bigoplus_{\\alpha\\in I}(H_\\alpha\\otimes K_\\alpha)$$\n\nthe orthogonal direct-sum inner product: distinct summands are orthogonal and the inner product within a summand is the Hilbert tensor-product inner product. On elementary tensors that inner product is $\\langle x\\otimes y,x'\\otimes y'\\rangle=\\langle x,x'\\rangle\\langle y,y'\\rangle$. A map $T\\otimes U$ acts by $(T\\otimes U)(x\\otimes y)=Tx\\otimes Uy$, and a direct-sum map acts blockwise with zero off-diagonal blocks.\n\nA complex-linear endomorphism is a linear map from a vector space to itself. A density matrix on a finite-dimensional complex inner-product space is a self-adjoint endomorphism with nonnegative eigenvalues and trace one; it is faithful when all eigenvalues are strictly positive. These are the conventions used for the finite density matrices in the earlier modular-balance result. The summand indexed by $\\alpha$ is called the $\\alpha$ sector. For each $\\alpha$, fix a faithful density matrix $\\chi_\\alpha$ on $K_\\alpha$. Let $\\mathbf p=(p_\\alpha)_{\\alpha\\in I}$ satisfy $p_\\alpha>0$ and $\\sum_{\\alpha\\in I}p_\\alpha=1$, and let $\\rho_\\alpha$ be density matrices on $H_\\alpha$. Define the encoded endomorphism\n\n$$\\mathcal E_\\chi(\\mathbf p,\\rho):=\\bigoplus_{\\alpha\\in I}p_\\alpha\\,\\rho_\\alpha\\otimes\\chi_\\alpha.$$\n\nWhen this encoded endomorphism is a density matrix, call it the encoded reduced state. The logical data are $\\mathbf p$ and $\\{\\rho_\\alpha\\}$; the ancillary matrices $\\{\\chi_\\alpha\\}$ are held fixed. For a second strictly positive probability vector $\\mathbf q$ and faithful density matrices $\\sigma_\\alpha$ on the same $H_\\alpha$, write $\\sigma_A:=\\mathcal E_\\chi(\\mathbf q,\\sigma)$ for the encoded reference endomorphism.\n\nThis is a finite-dimensional algebraic model. The definition makes no gravitational interpretation and does not identify a matrix entropy term with a geometric area.\n\n",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Choose orthonormal eigenbases for each $\\rho_\\alpha$, $\\sigma_\\alpha$, and $\\chi_\\alpha$ using [F2]. Write their eigenvalues as $r_{\\alpha i}$, $t_{\\alpha i}$, and $c_{\\alpha j}$, respectively. In each block, the tensor products of the factor eigenvectors form an orthonormal basis and have eigenvalues $p_\\alpha r_{\\alpha i}c_{\\alpha j}$ for $p_\\alpha\\rho_\\alpha\\otimes\\chi_\\alpha$ and $q_\\alpha t_{\\alpha i}c_{\\alpha j}$ for $q_\\alpha\\sigma_\\alpha\\otimes\\chi_\\alpha$. Thus every block is positive semidefinite, the finite orthogonal sum is positive semidefinite, and its trace is $\\sum_\\alpha p_\\alpha(\\sum_i r_{\\alpha i})(\\sum_j c_{\\alpha j})=\\sum_\\alpha p_\\alpha=1$; the same calculation with $q_\\alpha,t_{\\alpha i}$ proves $\\operatorname{tr}\\sigma_A=1$. Since $q_\\alpha,t_{\\alpha i},c_{\\alpha j}$ are all strictly positive, every eigenvalue of $\\sigma_A$ is positive, so the reference is faithful.",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The eigenvalues of $\\rho_A$ are exactly $p_\\alpha r_{\\alpha i}c_{\\alpha j}$ over its orthogonal block eigenbases. Terms with $r_{\\alpha i}=0$ contribute $0$ by the entropy convention; all other terms satisfy $\\log(p_\\alpha r_{\\alpha i}c_{\\alpha j})=\\log p_\\alpha+\\log r_{\\alpha i}+\\log c_{\\alpha j}$ by [F4]. Substituting in $s(\\rho_A)$ and summing the finite products, using $\\sum_i r_{\\alpha i}=\\sum_j c_{\\alpha j}=1$, gives $s(\\rho_A)=-\\sum_\\alpha p_\\alpha\\log p_\\alpha+\\sum_\\alpha p_\\alpha s(\\rho_\\alpha)+\\sum_\\alpha p_\\alpha s(\\chi_\\alpha)$, which is the asserted entropy identity.",
+          "inputs": [
+            "given",
+            "F2",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "step": "2.2",
+          "claim": "Write $u_{\\alpha i}$ for the chosen eigenbasis of $\\sigma_\\alpha$ and $v_{\\alpha j}$ for that of $\\chi_\\alpha$, and put $a_{\\alpha i}:=\\langle\\rho_\\alpha u_{\\alpha i},u_{\\alpha i}\\rangle$. By [F4], the block-$\\alpha$ eigenvalues of $K_{\\sigma_A}:=-\\log\\sigma_A$ on $u_{\\alpha i}\\otimes v_{\\alpha j}$ are $-\\log q_\\alpha-\\log t_{\\alpha i}-\\log c_{\\alpha j}$; the diagonal entries of $\\rho_\\alpha\\otimes\\chi_\\alpha$ in that basis are $a_{\\alpha i}c_{\\alpha j}$. Its block trace against $K_{\\sigma_A}$ is therefore $p_\\alpha\\sum_{i,j}a_{\\alpha i}c_{\\alpha j}(-\\log q_\\alpha-\\log t_{\\alpha i}-\\log c_{\\alpha j})$. Factoring the finite sums and using $\\sum_i a_{\\alpha i}=\\operatorname{tr}\\rho_\\alpha=1$, $\\sum_jc_{\\alpha j}=1$, $\\sum_i a_{\\alpha i}(-\\log t_{\\alpha i})=\\operatorname{tr}(\\rho_\\alpha(-\\log\\sigma_\\alpha))$, and $-\\sum_jc_{\\alpha j}\\log c_{\\alpha j}=s(\\chi_\\alpha)$, summing over $\\alpha$ gives $\\operatorname{tr}(\\rho_AK_{\\sigma_A})=\\sum_\\alpha p_\\alpha[-\\log q_\\alpha+\\operatorname{tr}(\\rho_\\alpha(-\\log\\sigma_\\alpha))+s(\\chi_\\alpha)]$.",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "By [F1] and faithfulness from step 1.1, $D(\\rho_A\\|\\sigma_A)=\\operatorname{tr}(\\rho_AK_{\\sigma_A})-s(\\rho_A)$, since $\\operatorname{tr}(\\sigma_AK_{\\sigma_A})=s(\\sigma_A)$ by the spectral entropy definition. Applying the same identity [F1] sectorwise gives $D(\\rho_\\alpha\\|\\sigma_\\alpha)=\\operatorname{tr}(\\rho_\\alpha(-\\log\\sigma_\\alpha))-s(\\rho_\\alpha)$. Subtract the entropy expression in step 2.1 from the trace expression in step 2.2; the ancillary terms cancel and $-\\sum_\\alpha p_\\alpha\\log q_\\alpha-H(\\mathbf p)=\\sum_\\alpha p_\\alpha\\log(p_\\alpha/q_\\alpha)$. This is the claimed relative-entropy identity.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement assumes a finite nonempty sector set and strictly positive probabilities summing to one."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly excludes zero rho eigenvalues from the logarithm sum and uses the stated 0 log 0 convention."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "With a singleton sector, steps 2.1 and 3.1 reduce to tensor entropy/relative-entropy cancellation and H(1)=D_cl(1||1)=0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 use spectral sums with multiplicity and no distinct-eigenvalue division, so repeated eigenvalues require no separate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement is a static finite-dimensional identity and uses no limiting parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement uses a finite sector family; step 1.1 selects finite-dimensional orthonormal eigenbases only."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The conclusions are equalities, not an if-and-only-if characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The conclusions are equalities, not a reverse implication about physical holography."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "single-sector cancellation",
+          "inputs": "I={1}, p_1=q_1=1, arbitrary density rho_1, faithful sigma_1 and chi_1",
+          "expected": "s(rho_1 tensor chi_1)=s(rho_1)+s(chi_1) and D(rho_1 tensor chi_1||sigma_1 tensor chi_1)=D(rho_1||sigma_1)",
+          "result": "H(1)=0 and D_cl(1||1)=0; both identities reduce to the corresponding tensor-product factorization with the common ancillary state canceling.",
+          "scope": "Exact singleton specialization; it checks the finite identity only."
+        },
+        {
+          "case": "two one-dimensional logical sectors",
+          "inputs": "I={1,2}, p=q=(1/2,1/2), H_1=H_2=C, rho_alpha=sigma_alpha=[1], chi_1=[1], chi_2=I_2/2",
+          "expected": "s(rho_A)=(3/2) log(2) and D(rho_A||sigma_A)=0",
+          "result": "H(p)=log(2), s(chi_1)=0, s(chi_2)=log(2), and all within-sector relative entropies vanish.",
+          "scope": "Exact finite spectral calculation; no numerical approximation or geometric interpretation."
+        },
+        {
+          "case": "singular logical state",
+          "inputs": "I={1}, p_1=q_1=1, rho_1=|0><0|, sigma_1=I_2/2, chi_1=[1]",
+          "expected": "s(rho_A)=0 and D(rho_A||sigma_A)=log(2)",
+          "result": "The zero eigenvalue contributes 0 log 0=0; the faithful reference gives finite relative entropy log(2).",
+          "scope": "Exact finite spectral check of the allowed singular first state."
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "def-tgrx-sector-code",
+          "carrier": "items/def-tgrx-sector-code.md",
+          "status": "Current batch 125 draft definition authored in this batch; it gives the exact block, tensor, density-matrix, and fixed-ancilla conventions used by the consuming proposition.",
+          "source_section": "Definition",
+          "exact_statement": "Let $I$ be a finite nonempty index set. For each $\\alpha\\in I$, let $H_\\alpha$ and $K_\\alpha$ be nonzero finite-dimensional complex inner-product spaces, and give\n\n$$H_A:=\\bigoplus_{\\alpha\\in I}(H_\\alpha\\otimes K_\\alpha)$$\n\nthe orthogonal direct-sum inner product: distinct summands are orthogonal and the inner product within a summand is the Hilbert tensor-product inner product. On elementary tensors that inner product is $\\langle x\\otimes y,x'\\otimes y'\\rangle=\\langle x,x'\\rangle\\langle y,y'\\rangle$. A map $T\\otimes U$ acts by $(T\\otimes U)(x\\otimes y)=Tx\\otimes Uy$, and a direct-sum map acts blockwise with zero off-diagonal blocks.\n\nA complex-linear endomorphism is a linear map from a vector space to itself. A density matrix on a finite-dimensional complex inner-product space is a self-adjoint endomorphism with nonnegative eigenvalues and trace one; it is faithful when all eigenvalues are strictly positive. These are the conventions used for the finite density matrices in the earlier modular-balance result. The summand indexed by $\\alpha$ is called the $\\alpha$ sector. For each $\\alpha$, fix a faithful density matrix $\\chi_\\alpha$ on $K_\\alpha$. Let $\\mathbf p=(p_\\alpha)_{\\alpha\\in I}$ satisfy $p_\\alpha>0$ and $\\sum_{\\alpha\\in I}p_\\alpha=1$, and let $\\rho_\\alpha$ be density matrices on $H_\\alpha$. Define the encoded endomorphism\n\n$$\\mathcal E_\\chi(\\mathbf p,\\rho):=\\bigoplus_{\\alpha\\in I}p_\\alpha\\,\\rho_\\alpha\\otimes\\chi_\\alpha.$$\n\nWhen this encoded endomorphism is a density matrix, call it the encoded reduced state. The logical data are $\\mathbf p$ and $\\{\\rho_\\alpha\\}$; the ancillary matrices $\\{\\chi_\\alpha\\}$ are held fixed. For a second strictly positive probability vector $\\mathbf q$ and faithful density matrices $\\sigma_\\alpha$ on the same $H_\\alpha$, write $\\sigma_A:=\\mathcal E_\\chi(\\mathbf q,\\sigma)$ for the encoded reference endomorphism.\n\nThis is a finite-dimensional algebraic model. The definition makes no gravitational interpretation and does not identify a matrix entropy term with a geometric area.\n\n",
+          "relevant_hypotheses_and_conventions": "The finite direct-sum space, factorwise tensor map, sector blocks, encoded input, and fixed faithful ancillary state are exactly as in its Definition.",
+          "supplier_proof_status": "Draft definition; no proof is supplied or claimed.",
+          "consumer_use": "Supplies the exact sector block construction and tensor/direct-sum conventions."
+        },
+        {
+          "supplier": "prop-tgrx-finite-modular-balance",
+          "carrier": "items/prop-tgrx-finite-modular-balance.md",
+          "status": "Current R2 batch 122 draft carrier; its complete current proof was inspected and loadStep1Record/step1Decision report ready. No independent proof acceptance is claimed.",
+          "source_section": "Statement",
+          "exact_statement": "Let $H$ be a nonzero finite-dimensional complex inner-product space. Let $\\rho,\\sigma:H\\to H$ be self-adjoint linear maps with nonnegative eigenvalues and trace one, and suppose every eigenvalue of $\\sigma$ is strictly positive. Define $K_\\sigma:=-\\log\\sigma$ by spectral calculus, and for any self-adjoint $\\tau:H\\to H$ with nonnegative eigenvalues and trace one define $s(\\tau):=-\\operatorname{tr}(\\tau\\log\\tau)=-\\sum_{\\lambda_j(\\tau)>0}\\lambda_j(\\tau)\\log\\lambda_j(\\tau)$, with the zero-eigenvalue term $0\\log0:=0$ and natural logarithms, so the entropy is in nats. Define the modular-energy difference relative to $\\sigma$ by $\\Delta_K(\\rho,\\sigma):=\\operatorname{tr}((\\rho-\\sigma)K_\\sigma)$. Then\n\n$$D(\\rho\\|\\sigma)=\\Delta_K(\\rho,\\sigma)-(s(\\rho)-s(\\sigma)).$$\n\nFor any nonzero finite-dimensional complex inner-product spaces $H_A,H_B$ with $H=H_A\\otimes H_B$, partial tracing both states over $H_B$ cannot increase relative entropy:\n\n$$D(\\operatorname{Tr}_{B}\\rho\\|\\operatorname{Tr}_{B}\\sigma)\\le D(\\rho\\|\\sigma).$$\n\nThe identity and inequality are finite-dimensional mathematical statements; no Hamiltonian, physical energy, physical units, continuum limit, or gravitational entropy is assumed.\n\n",
+          "relevant_hypotheses_and_conventions": "Use its finite-dimensional faithful-reference identity and density/entropy conventions. Its separate partial-trace inequality is not used by these claims.",
+          "supplier_proof_status": "Draft item; current complete conditional proof inspected. Readiness, if present, is not independent approval.",
+          "consumer_use": "Supplies the faithful-reference modular identity used globally and within each sector."
+        },
+        {
+          "supplier": "lem-qsm-matrix-state-calculus",
+          "carrier": "items/lem-qsm-matrix-state-calculus.md",
+          "status": "Published local mathematical item; complete current Statement and Proof inspected. No independent review is claimed by this contract.",
+          "source_section": "Statement",
+          "exact_statement": "Use the following conventions on a complex inner-product space $H$ of dimension $D\\geq1$, with inner product linear in its first argument. For an endomorphism $A$, define $\\operatorname{Tr}A:=\\sum_{j=1}^D\\langle Ae_j,e_j\\rangle$ in an orthonormal basis; step 3.1 proves basis independence. For any Hermitian $M$, its **positive spectral subspace** (called its positive support here) is $S_M:=\\bigoplus_{\\lambda>0}\\ker(M-\\lambda I)$; when $M\\geq0$ this equals $(\\ker M)^\\perp$. Its support logarithm is $\\log(M|_{S_M}):=\\sum_{\\lambda>0}(\\log\\lambda)P_\\lambda|_{S_M}$, where $P_\\lambda$ is the orthogonal projection onto that eigenspace. No value $\\log0$ is assigned; for $M=0$ this is the unique endomorphism of the zero space. For the set $\\mathcal D(H)$ of positive semidefinite Hermitian endomorphisms with trace one, a point $\\rho$ is **extreme** if every equality $\\rho=t\\sigma+(1-t)\\tau$ with $\\sigma,\\tau\\in\\mathcal D(H)$ and $0<t<1$ implies $\\sigma=\\tau=\\rho$.\n\nLet $H$ be a complex inner-product space of finite dimension $D\\geq1$, with inner product linear in its first argument. Every Hermitian endomorphism $M$ has an orthonormal eigenbasis with real eigenvalues. For a real function $f$ on its finite spectrum, define $f(M)$ by its spectral projections; this definition is independent of the choice of eigenbasis. In particular positive square roots, exponentials, and logarithms on positive supports are well defined.\n\nFor a density matrix $\\rho$ on $H$, meaning a Hermitian positive semidefinite operator with $\\operatorname{Tr}\\rho=1$, $\\operatorname{Tr}(\\rho A)=\\sum_jp_j\\langle Au_j,u_j\\rangle$ for bounded $A$, where $\\rho=\\sum_jp_j|u_j\\rangle\\langle u_j|$. The weighted form $(X,Y)_\\rho=\\operatorname{Tr}(\\rho X^*Y)$ satisfies Cauchy–Schwarz, $|(X,Y)_\\rho|^2\\leq(X,X)_\\rho(Y,Y)_\\rho$. Finally, $\\operatorname{Tr}(\\rho^2)\\leq1$, with equality exactly for rank-one densities, and those are exactly the extreme points of the finite density-matrix set.\n\n",
+          "relevant_hypotheses_and_conventions": "Finite-dimensional Hermitian matrices admit orthonormal eigenbases and spectral calculus; nonnegative matrices have nonnegative eigenvalues.",
+          "supplier_proof_status": "Published item; current complete proof inspected where supplied. This is not a new independent approval.",
+          "consumer_use": "Supplies finite-dimensional spectral decompositions and positive-spectrum facts."
+        },
+        {
+          "supplier": "def-trace-of-an-endomorphism",
+          "carrier": "items/def-trace-of-an-endomorphism.md",
+          "status": "Published mathematical import; current Definition inspected and snapshot pinned in research/math-imports.json. No source bytes were edited.",
+          "source_section": "Definition",
+          "exact_statement": "Let $V$ be a finite-dimensional vector space over $F$ and let $T:V\\to V$ be\nlinear. Choose any ordered basis $\\mathcal B$ of $V$ and define the **trace of\nthe endomorphism $T$** by\n\n$$\\operatorname{tr}(T):=\\operatorname{tr}([T]_{\\mathcal B}^{\\mathcal B}).$$\n\nThis is independent of the chosen basis: matrices of the same endomorphism in\ntwo ordered bases are similar, and similar matrices have equal trace. When\n$V$ is the zero space, the empty basis gives trace $0$.\n",
+          "relevant_hypotheses_and_conventions": "Trace is the basis-independent finite sum of diagonal matrix entries, used for normalizations and trace pairings.",
+          "supplier_proof_status": "Published definition; no proof is supplied or required.",
+          "consumer_use": "Supplies the finite trace used to prove normalization and expand the modular pairing."
+        },
+        {
+          "supplier": "thm-natural-logarithm-laws",
+          "carrier": "items/thm-natural-logarithm-laws.md",
+          "status": "Published mathematical import; current Statement and complete Proof inspected and snapshot pinned in research/math-imports.json. No source bytes were edited.",
+          "source_section": "Statement",
+          "exact_statement": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.\n\n",
+          "relevant_hypotheses_and_conventions": "For positive scalar factors, log products split into sums and log(x/y)=log x-log y; local entropy uses natural logarithms and nats.",
+          "supplier_proof_status": "Published item; current complete proof inspected where supplied. This is not a new independent approval.",
+          "consumer_use": "Supplies the scalar logarithm product rule in the tensor eigenvalue calculation."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-125-3a",
+        "notes": "Independent batch-125 Step-3a review: read all four proof steps, F1–F5 and their exact current suppliers. Step 1.1 uses finite orthonormal tensor eigenbases to prove positivity, trace one and strict reference positivity. Step 2.1 expands only positive eigenvalues and treats zero logical eigenvalues by 0 log 0=0. Step 2.2 uses the reference eigenbasis and diagonal entries of rho, so no simultaneous diagonalization or commutativity is assumed. Step 3.1 applies only the faithful-reference identity of the current batch-122 supplier and cancels the identical ancillary terms. Checked singleton sectors, dimension one, repeated spectra, singular rho, and strict exclusions of empty/zero-dimensional data and zero weights; finite choices require no AC. Read Harlow v2 Appendix A.7.2–A.7.3 (A.9–A.22) and Watrous draft §§5.2.1–5.2.2 relevant definitions and Propositions 5.20–5.21, (5.94)–(5.99); the local arbitrary faithful-ancilla proof and natural-log convention supply the exact stated extension. Published spectral supplier has a missing publication audit marker and an immediately recoverable Rayleigh calculation, separately recorded as nonfatal maintenance; its consumed spectral conclusion was checked independently. No physical or empirical inference, limit, infinite choice, or diagram is asserted. Review complete for the actual owned deduction, not publication certification."
+      }
+    },
+    "ex-tgrx-two-sector-area": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "prop-tgrx-code-area-entropy",
+          "source_section": "Statement",
+          "quote": "Let $I$ be a finite nonempty set. For each $\\alpha\\in I$, let $H_\\alpha,K_\\alpha$ be nonzero finite-dimensional complex inner-product spaces. A density matrix is a self-adjoint endomorphism with nonnegative eigenvalues and trace one; it is faithful when all its eigenvalues are strictly positive. Let $p_\\alpha,q_\\alpha>0$ with $\\sum_\\alpha p_\\alpha=\\sum_\\alpha q_\\alpha=1$, let $\\rho_\\alpha$ be a density matrix on $H_\\alpha$, let $\\sigma_\\alpha$ be a faithful density matrix on $H_\\alpha$, and let $\\chi_\\alpha$ be a fixed faithful density matrix on $K_\\alpha$. Form the finite orthogonal direct sums\n\n$$\\rho_A:=\\bigoplus_{\\alpha\\in I}p_\\alpha\\rho_\\alpha\\otimes\\chi_\\alpha,\\qquad \\sigma_A:=\\bigoplus_{\\alpha\\in I}q_\\alpha\\sigma_\\alpha\\otimes\\chi_\\alpha.$$\n\nFor a density matrix $\\tau$, set $s(\\tau):=-\\sum_{\\lambda_j(\\tau)>0}\\lambda_j(\\tau)\\log\\lambda_j(\\tau)$, with $0\\log0:=0$, so entropy is in nats. For density matrices $\\tau,\\omega$ with faithful reference $\\omega$, set $D(\\tau\\|\\omega):=\\operatorname{tr}(\\tau\\log\\tau)-\\operatorname{tr}(\\tau\\log\\omega)$ using spectral logarithms on positive eigenvalues. Also define $H(\\mathbf p):=-\\sum_\\alpha p_\\alpha\\log p_\\alpha$ and $D_{\\rm cl}(\\mathbf p\\|\\mathbf q):=\\sum_\\alpha p_\\alpha\\log(p_\\alpha/q_\\alpha)$. Then $\\rho_A$ and $\\sigma_A$ are density matrices, $\\sigma_A$ is faithful, and\n\n$$s(\\rho_A)=H(\\mathbf p)+\\sum_{\\alpha\\in I}p_\\alpha\\bigl(s(\\rho_\\alpha)+s(\\chi_\\alpha)\\bigr),$$\n\n$$D(\\rho_A\\|\\sigma_A)=D_{\\rm cl}(\\mathbf p\\|\\mathbf q)+\\sum_{\\alpha\\in I}p_\\alpha D(\\rho_\\alpha\\|\\sigma_\\alpha).$$\n\nThese are exact finite-dimensional matrix identities; no literal black-hole area, universal Ryu–Takayanagi formula, continuum limit, or gravitational entropy claim follows.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.\n\n",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The one-dimensional matrix $\\chi_1=[1]$ has the single eigenvalue $1$, so $s(\\chi_1)=-1\\log1=0$ by [F2].",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "The eigenvalues of $\\chi_2=I_d/d$ are $1/d$ with multiplicity $d$, hence $s(\\chi_2)=-d(1/d)\\log(1/d)=\\log d$ by [F2]; for $d=1$ this is $\\log1=0$.",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Substitute $s(\\chi_1)=0$ and $s(\\chi_2)=\\log d$ from steps 1.1–1.2 into [F1] with $I=\\{1,2\\}$. The result is $s(\\rho_A)=H(p_1,p_2)+p_1s(\\rho_1)+p_2s(\\rho_2)+p_2\\log d$, with the sector-probability and ancillary contributions as stated.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes exactly two sectors and does not define the empty-sector model."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The logical density matrices may be singular; the entropy formula and step 2.1 use the finite 0 log 0 convention. The ancillary matrices remain faithful because d is positive."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 covers d=1 and obtains log(1)=0, so the ancillary contribution vanishes."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 handles the repeated eigenvalue 1/d with multiplicity d directly."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example has no continuous parameter or limiting endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The example has two fixed sectors and finite-dimensional inputs; no infinite selection is involved."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is an exact specialization and states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example is an exact specialization and states no reverse implication."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "d=1 ancillary factor",
+          "inputs": "d=1 and arbitrary p_1,p_2>0 with p_1+p_2=1",
+          "expected": "ancillary contribution is 0",
+          "result": "Step 1.2 gives s(chi_2)=log(1)=0.",
+          "scope": "Exact endpoint of the positive integer dimension parameter."
+        },
+        {
+          "case": "maximally mixed qubit ancilla",
+          "inputs": "d=2, p=q=(1/2,1/2), H_1=H_2=C, rho_1=rho_2=sigma_1=sigma_2=[1], chi_1=[1], chi_2=I_2/2",
+          "expected": "ancillary term=(1/2)log(2), sector-probability term=log(2)",
+          "result": "The spectrum of chi_2 is (1/2,1/2), so its entropy is log(2); the sector probability vector has entropy log(2).",
+          "scope": "Exact finite check of the displayed decomposition."
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "prop-tgrx-code-area-entropy",
+          "carrier": "items/prop-tgrx-code-area-entropy.md",
+          "status": "Current batch 125 draft proposition authored in this batch; its finite conditional proof is mapped step by step below. No independent proof approval is claimed.",
+          "source_section": "Statement",
+          "exact_statement": "Let $I$ be a finite nonempty set. For each $\\alpha\\in I$, let $H_\\alpha,K_\\alpha$ be nonzero finite-dimensional complex inner-product spaces. A density matrix is a self-adjoint endomorphism with nonnegative eigenvalues and trace one; it is faithful when all its eigenvalues are strictly positive. Let $p_\\alpha,q_\\alpha>0$ with $\\sum_\\alpha p_\\alpha=\\sum_\\alpha q_\\alpha=1$, let $\\rho_\\alpha$ be a density matrix on $H_\\alpha$, let $\\sigma_\\alpha$ be a faithful density matrix on $H_\\alpha$, and let $\\chi_\\alpha$ be a fixed faithful density matrix on $K_\\alpha$. Form the finite orthogonal direct sums\n\n$$\\rho_A:=\\bigoplus_{\\alpha\\in I}p_\\alpha\\rho_\\alpha\\otimes\\chi_\\alpha,\\qquad \\sigma_A:=\\bigoplus_{\\alpha\\in I}q_\\alpha\\sigma_\\alpha\\otimes\\chi_\\alpha.$$\n\nFor a density matrix $\\tau$, set $s(\\tau):=-\\sum_{\\lambda_j(\\tau)>0}\\lambda_j(\\tau)\\log\\lambda_j(\\tau)$, with $0\\log0:=0$, so entropy is in nats. For density matrices $\\tau,\\omega$ with faithful reference $\\omega$, set $D(\\tau\\|\\omega):=\\operatorname{tr}(\\tau\\log\\tau)-\\operatorname{tr}(\\tau\\log\\omega)$ using spectral logarithms on positive eigenvalues. Also define $H(\\mathbf p):=-\\sum_\\alpha p_\\alpha\\log p_\\alpha$ and $D_{\\rm cl}(\\mathbf p\\|\\mathbf q):=\\sum_\\alpha p_\\alpha\\log(p_\\alpha/q_\\alpha)$. Then $\\rho_A$ and $\\sigma_A$ are density matrices, $\\sigma_A$ is faithful, and\n\n$$s(\\rho_A)=H(\\mathbf p)+\\sum_{\\alpha\\in I}p_\\alpha\\bigl(s(\\rho_\\alpha)+s(\\chi_\\alpha)\\bigr),$$\n\n$$D(\\rho_A\\|\\sigma_A)=D_{\\rm cl}(\\mathbf p\\|\\mathbf q)+\\sum_{\\alpha\\in I}p_\\alpha D(\\rho_\\alpha\\|\\sigma_\\alpha).$$\n\nThese are exact finite-dimensional matrix identities; no literal black-hole area, universal Ryu–Takayanagi formula, continuum limit, or gravitational entropy claim follows.\n\n",
+          "relevant_hypotheses_and_conventions": "Its Statement supplies the general finite sector entropy formula specialized in the B example.",
+          "supplier_proof_status": "Draft item; current complete conditional proof inspected. Readiness, if present, is not independent approval.",
+          "consumer_use": "Supplies the exact general encoded entropy identity specialized to two sectors."
+        },
+        {
+          "supplier": "thm-natural-logarithm-laws",
+          "carrier": "items/thm-natural-logarithm-laws.md",
+          "status": "Published mathematical import; current Statement and complete Proof inspected and snapshot pinned in research/math-imports.json. No source bytes were edited.",
+          "source_section": "Statement",
+          "exact_statement": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.\n\n",
+          "relevant_hypotheses_and_conventions": "For positive scalar factors, log products split into sums and log(x/y)=log x-log y; local entropy uses natural logarithms and nats.",
+          "supplier_proof_status": "Published item; current complete proof inspected where supplied. This is not a new independent approval.",
+          "consumer_use": "Supplies log(1/d)=-log(d) and log(1)=0 for the ancillary spectra."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-125-3a",
+        "notes": "Read all three verification steps after completing the level-2 supplier review. The specified ancillas have eigenvalues 1 and 1/d (multiplicity d), with d an integer >=1, so both are faithful trace-one matrices. Natural logarithm laws give entropies 0 and log d; substitution in the exact finite-sector proposition gives the displayed formula. Checked d=1, repeated spectrum, singular logical states, positive weights and nonzero factor spaces; no arbitrary choice, limit or empirical premise occurs. Reader replacement of central sector contribution by sector-probability contribution is precise because no operator algebra center is defined. Exact preimage recovered by reversing only those two wording edits and reproducing the immutable pre hash; current bytes equal the post hash. Checked the sole B-page placement and found no item consumers; no propagated repair is needed. Harlow A.10/A.20 and Watrous Proposition 5.20 provide relevant source context, with arbitrary ancilla specialization proved locally. No TikZ/tikzcd occurs or is needed."
+      }
+    }
+  }
+}

@@ -1,0 +1,3555 @@
+Maxwell’s Equations: Continuous and
+Discrete
+R. Hiptmair
+Research Report No. 2015-18
+June 2015
+Seminar für Angewandte Mathematik
+Eidgenössische Technische Hochschule
+CH-8092 Zürich
+Switzerland
+____________________________________________________________________________________________________
+To appear in A. Bermdez de Castro, A. Valli (eds.), Computational Electromagnetism, Springer Lecture Notes in Mathematics 2148
+
+
+Maxwell’s Equations: Continuous and Discrete
+Ralf Hiptmair
+Abstract This is an introduction to the spatial Galerkin discretization of Maxwell’s
+equations on bounded domains covering both modeling in the framework of exterior
+calculus, the construction of discrete differential forms, and a glimpse of a priori
+discretization error estimates. The presentation focuses on central ideas, skipping
+technical details for the sake of lucid presentation.
+1 Introduction
+These lecture notes are meant to be a gentle introduction to the spatial discretization
+of electromagnetic ﬁeld problems. To a large extent, emphasis is on lucidity and
+intuitive understanding, sometimes at the expense of rigorous developments. The
+reader can be assured that there is a rigorous underpinning for all results mentioned
+in these notes, but the details may be outside their scope and can be found in the
+references supplied in the beginning of each of the following sections.
+A geometric perspective is favored with emphasis on structural properties of the
+Maxwell equations. Those become most apparent when using exterior calculus as a
+tool for mathematical modeling. Thus, differential forms, their discrete counterparts,
+and related numerical analysis techniques will play a prominent role throughout this
+text.
+The notes are organized in three sections. The ﬁrst presents Maxwell’s equations
+from the angle of exterior calculus covering the basic equations up to variational
+formulations. The second section introduces ﬁnite element exterior calculus aiming
+for a spatial Galerkin discretization of Maxwell’s equations in variational form. The
+R. Hiptmair
+SAM, D-MATH, ETH Zurich, Switzerland e-mail: ralfh@ethz.ch
+To appear in A. Bermdez de Castro, A. Valli (eds.), Computational Electromagnetism, Springer
+Lecture Notes in Mathematics 2148, DOI 10.1007/978-3-319-19306-9 1
+1
+
+
+2
+Ralf Hiptmair
+ﬁnal section then delves into the numerical analysis of the discretized equations in
+order to establish a priori convergence estimates.
+2 Maxwell’s Equations
+Bibliographical notes
+In this section Maxwell’s equations are ﬁrst put in the framework of exterior calculus
+of differential forms. This calculus is a core subject in differential geometry and
+covered in standard textbooks, see, for instance, [38, Ch. V,X,XI,XII] and [39, Ch. 8
+& 9]. In these books it is mainly presented from a formal algebraic and differential
+calculus perspective. A more geometric approach is adopted in [21, Ch. IV] and,
+in particular, in the work of A. Bossavit, see the original articles [13–16], and the
+review articles [18], [19, Ch. I & II]. Since the author has been much inspired by
+A. Bossavit, he recommends these latter two works as supplementary reading and
+as a source for many more useful references. Moreover, in parts this section follows
+[35, Sect. 2] and some more details can be found in that survey.
+2.1 Fields
+Electrodynamics is a continuum ﬁeld theory and, from a classical non-relativistic
+perspective, its key quantities, the various ﬁelds, are functions of spatial position
+x and time t. In this section I will try to explain in intuitive terms why viewing
+electromagnetic quantities as mere vectorﬁelds R3 →R3 fails to capture important
+structural aspects and differences.
+2.1.1 The electric ﬁeld
+To grasp the nature of a physical quantity, we recommend to study ways how it
+is measured. There are two ways to measure the ﬁrst fundamental electrodynamic
+quantity, the electric ﬁeld e (units 1 V
+m):
+(i) (Hypothetical) local measurement in point x at time t by determining the virtual
+work it takes to displace a test charge q by δx:
+δW = qe(x,t)·δx .
+From this perspective
+e(x,t) is a linear mapping from displacements into R.
+
+
+Maxwell’s Equations: Continuous and Discrete
+3
+(ii) (Almost practical) non-local measurement from the work required to move a
+test charge along a directed path γ
+W = q
+Z
+γ e·ds .
+This formula reveals that
+e is a quantity that can be integrated along directed curves.
+2.1.2 The magnetic induction
+The second fundamental electrodynamic quantity, the magnetic induction b (units
+1 Vs
+m2 ) can also be measured in two ways:
+(i) (Hypothetical) local measurement at (x,t) from the virtual work needed to turn
+a tiny magnetic needle (magnetic moment m)
+δw = (b(x,t)× m)·δr = b(x,t)·(m× δr) ,
+where the vector δr ∈R3 is directed along the axis of rotation and its length
+represents the angle of rotation, see Figure 1a. We may conclude that
+b(x,t) should be read as an anti-symmetric bilinear mapping (δr,m) →R.
+(ii) (Almost practical) non-local measurement that relies on the work required to
+move a current carrying wire loop:
+W = I
+Z
+Σ b·ndS ,
+where I is the current and Σ is the orientable surface swept by the loop with unit
+normal vector ﬁeld n, see Figure 1b. This leads to the interpretation that
+b is a quantity that assigns a total ﬂux to oriented bounded surfaces.
+2.2 Differential and Integral Forms
+Now we learn about classes of functions on a piecewise smooth n-dimensional mani-
+fold Ωthat ﬁt quantities like the electric ﬁeld e and the magnetic induction b as
+introduced above. Of course, in classical electrodynamics Ωis a domain in R3, but
+the manifold perspective is necessary for dealing with boundary conditions properly.
+
+
+4
+Ralf Hiptmair
+m
+|δr|
+δr
+(a) Turning a magnetic needle
+Σ
+(b) moving a wire loop
+Fig. 1: Local (a) and non-local measurement (b) of the magnetic induction b
+2.2.1 Fundamental concepts
+The ﬁrst concept is related to “non-local maesurements”. To state it we denote
+Mℓ(Ω):
+the set of piecewise smooth compact oriented ℓ-dimensional sub-manifolds
+of Ω, 0 ≤ℓ≤n.
+Notion 1 (Integral form [35, Def. 1]) An (integral) ℓ-form ω, 0 ≤ℓ≤n on Ωis a
+continuous (∗) and additive (∗∗) mapping ω : Mℓ(Ω) →K (K = R or K = C).
+The vector space of ℓ-forms on Ωwill be denoted by F ℓ(Ω).
+(∗) Continuity of ω is with respect to a “deformation topology”, made precise in
+the special ﬁeld of “geometric integration theory”, cf. [19, p. 125].
+(∗∗) Additivity of ω means that its value for the union of disjoint sub-manifolds is
+the sum of the values for each of them.
+The evaluation of an ℓ-form for a sub-manifold of suitable dimension is usually
+written as integration:
+ω ∈F ℓ(Ω) :
+Z
+Σ ω := ω(Σ) ,
+Σ ∈Mℓ(Ω) .
+In light of Notion 1, the considerations of Sections 2.1.1 and 2.1.2 teach us that
+• the electric ﬁeld e should be viewed as a 1-form, and
+• the magnetic induction can be regarded as a 2-form.
+Already Maxwell had this insight, since in his 1891 “Treatise on Electricity and
+Magnetism” he wrote
+Physical vector quantities may be divided into two classes, in one of which the quantity is
+deﬁned with reference with respect to a line, while in the other the quantity is deﬁned with
+reference to an area.
+
+
+Maxwell’s Equations: Continuous and Discrete
+5
+Now we turn to a concept of ℓ-forms corresponding to the local measurement
+procedures described above. This is the usual approach in differential geometry as
+in [38, Sect. V.3] or [22, Sect. 2.1], because its rigorous mathematical handling is
+easier than that of integral forms.
+Deﬁnition 1. A (continuous) differential ℓ-form ω on a C1-manifold Ωis a (con-
+tinuous) mapping ω : Ω→Λℓ(TΩ(·)), that is, ω assigns to every x ∈Ωa unique
+alternating ℓ-multilinear form on the tangent space TΩ(x) at Ωin x.
+We write C0Λℓ(Ω)/C∞Λℓ(Ω) for the vector space of continuous/smooth differ-
+ential ℓ-forms on Ω.
+For a domain (open subset) Ω⊂Rn we ﬁnd TΩ(x) = Rn for every x ∈Ωso that
+an ℓ-form on Ωis a function with values in Λℓ(Rn).
+Simple formal considerations establish the connection between integral and dif-
+ferential ℓ-forms and connect the non-local and local point of view. Tacitly smooth-
+ness is assumed.
+Differential form →integral form:
+The integration of continuous differential forms is a standard technique, see [38,
+Ch. XI] and often introduced using charts (coordinates). Here, we follow [19,
+Rem. 6.1] and give a lucid explanation for the transition from differential forms
+to integral forms for ℓ= 1,2 and a domain Ω⊂Rn. It goes without saying that
+there is a close link between the local and integral point of view: every piecewise
+smooth curve can be arbitrarily well approximated by tiny line segments. Similarly,
+any oriented surface can be tiled with ﬂat triangles, which inherit its orientation, cf.
+Figure 2 for n = 3. The next step can be viewed as Riemann summation. For ℓ= 1
+we just sum up the values that ω assigns to the line segments, where the position
+arguments are taken as their midpoints. For ℓ= 2, we feed the vectors spanning the
+parallelograms to the differential 2-form ω evaluated at their centers of gravity, and
+then add the values returned.
+Fig. 2: Flat tilings plus Riemann integration switch from local to integral forms,
+cf. [19, Fig. 6.1]
+
+
+6
+Ralf Hiptmair
+Integral form →differential form:
+Again, we restrict ourselves to a domain Ω⊂Rn with the simple tangent space
+TΩ(x) = Rn for all x ∈Ω. Then we can perform localization as follows: For “con-
+tinuous (∗)” ω ∈F ℓ(Ω) we can deﬁne for any v j ∈Rn, j = 1,...,ℓ,
+ω(x)(v1,...,vℓ) := lim
+t→0
+ℓ!
+tℓ
+Z
+Σt
+ω ,
+Σt = convex{x,x+tv1,...,x+tvℓ} ,
+(1)
+where the integral is set to zero, in case Σt collapses to a lower-dimensional patch. If
+the limit exists, obviously ω(x) ∈Λℓ(Rn), because swapping two spanning vectors
+changes the orientation of Σt.
+2.2.2 Euclidean vector proxies in 3D
+For a domain Ω⊂Rn consider ω ∈C0Λℓ(Ω) := {Ω→Λℓ(Rn) continuous}. From
+linear algebra we know that dimΛℓ(Rn) =
+ n
+ℓ
+
+. Hence, after picking an arbitrary ba-
+sis of Λℓ(Rn), ω can be represented by its
+ n
+ℓ
+
+coefﬁcient functions. In other words,
+(continuous) vector ﬁelds provide an isomorphic model of C0Λℓ(Ω). Clearly, the
+concrete vector ﬁeld representative for ω ∈C0Λℓ(Ω) will depend on the choice of
+basis. In other words, it will depend on coordinates. Admittedly, the vector ﬁeld
+model captures entire exterior calculus. However, the involvement of coordinates
+often conceals essential coordinate-independent properties and the different nature
+of quantities like the electric ﬁeld and magnetic induction.
+A special choice of basis for n = 3 is stipulated by orthogonality requirements
+and the resulting vector ﬁeld representatives have been dubbed “vector proxies”
+by A. Bossavit [14, Sect. 1.4]. The concrete deﬁnition of the underlying isomor-
+phism can be inferred from Table 1. Usually, vector proxies will be distinguished
+by an overset arrow (−→e ,−→b ,−→h ,−→d ,−→u etc.). Occasionally, we will use the notation
+V.P.(ω) for the Euclidean vector proxy of a differential form ω.
+Table 1: Relationship between differential forms and vectorﬁelds in three-
+dimensional Euclidean space (v,v1,v2,v3 ∈R3), cf. Table 2.1 in [35]. The operation
+“·” is the canonical inner product in Euclidean space, “×” the cross product. See
+also [6, Tab. 2.2].
+Differential form
+Related function u/vectorﬁeld u
+ℓ= 0
+x 7→ω(x)
+−→u (x) := ω(x)
+−→u : Ω→R
+ℓ= 1
+x 7→{v 7→ω(x)(v)}
+−→u (x) ·v := ω(x)(v)
+−→u : Ω→R3
+ℓ= 2
+x 7→{(v1,v2) 7→ω(x)(v1,v2)}
+−→u (x) ·(v1 ×v2) := ω(x)(v1,v2)
+−→u : Ω→R3
+ℓ= 3 x 7→{(v1,v2,v3) 7→ω(x)(v1,v2,v3)} −→u (x)det(v1,v2,v3) := ω(x)(v1,v2,v3) −→u : Ω→R
+
+
+Maxwell’s Equations: Continuous and Discrete
+7
+The integration of differential forms expressed in terms of their vector proxies
+u/u according to Table 1 gives rise to familiar integrals:
+0-form
+ω ∈C0Λ0(Ω)
+:
+R
+x
+ω = u(x)
+∀x ∈Ω,
+1-form
+ω ∈C0Λ1(Ω)
+:
+R
+γ
+ω =
+R
+γ
+u·ds
+∀γ ∈M1(Ω) ,
+2-form
+ω ∈C0Λ2(Ω)
+:
+R
+Σ
+ω =
+R
+Σ
+u·ndS
+∀Σ ∈M2(Ω) ,
+3-form
+ω ∈C0Λ3(Ω)
+:
+R
+V
+ω =
+R
+V
+u(x)dx
+∀V ∈M3(Ω) .
+(2)
+Here, n is a unit normal vector ﬁeld to Σ, whose direction is induced by the orienta-
+tion of Σ.
+2.2.3 Transformation of forms
+Let Φ stand for a diffeomorphism mapping the n-dimensional manifold bΩonto Ω.
+It can be used to “pull back” any integral form on Ωto bΩaccording to the following
+deﬁnition [39, Sect. 8.2.1]:
+Deﬁnition 2. Given ω ∈F ℓ(Ω) its pullback Φ∗ω ∈F ℓ( bΩ) is deﬁned by
+Z
+bΣ Φ∗ω :=
+Z
+Φ(bΣ) ω
+∀bΣ ∈Mℓ( bΩ) .
+This induces a linear isomorphism Φ∗: F ℓ(Ω) →F ℓ( bΩ).
+There is a local version of the pullback for differential forms and it reads
+(Φ∗ω)(bx)(bv1,...,bvℓ) := ω(Φ(bx))(DΦ(bx)bv1,...,DΦ(bx)bvℓ)
+bx ∈bΩ,
+bv j ∈TbΩ(bx) ,
+(3)
+where DΦ is the differential of Φ. The pullback for Euclidean vector proxies in
+3D can be computed from (3) and the corresponding vector analytic operations are
+listed in Table 2.
+Table 2: Pullback and trace of Euclidean vector proxies differential forms of degree
+ℓon Ω⊂R3, [35, (2.16)-(2.19)]
+forms/vector proxies
+Pullback
+trace onto ∂Ω
+ℓ= 0 u = V.P.(ω), −→v = V.P.(Φ∗ω)
+−→v (bx) = −→u (x)
+t∂Ω−→u (x) = −→u (x)
+ℓ= 1 −→u = V.P.(ω), −→v = V.P.(Φ∗ω)
+−→v (bx) = DΦ(bx)⊤−→u (x)
+t∂Ω−→u (x) = −→u t(x)
+ℓ= 2 −→u = V.P.(ω), −→v = V.P.(Φ∗ω) −→v (bx) = detDΦ(bx)DΦ(bx)−1−→u (x) t∂Ω−→u (x) = −→u (x)·n(x)
+ℓ= 3 −→u = V.P.(ω), −→v = V.P.(Φ∗ω)
+−→v (bx) = detDΦ(bx)−→u (x)
+—
+
+
+8
+Ralf Hiptmair
+If Σ ⊂Ωis a sub-manifold of Ω, the pullback associated with the canonical
+embedding ιΣ : Σ →Ωprovides the trace operators tΣ := ι∗
+Σ : F ℓ(Ω) →F ℓ(Σ).
+For Euclidean vector proxies in 3D they become point trace, tangential trace, and
+normal component, respectively, see Table 2. The notation tΣ is used for forms and
+vector proxies, alike.
+Equality of traces on interfaces supplies suitable compatibility conditions that
+make it possible to glue integral forms across the interface.
+Lemma 1 (Compatibility condition for integral forms [19, Sect. 7], [32, Thm. 8]).
+Given a partition Ω= Ω1 ∪Ω2 of a manifold Ωinto “nice” sub-manifolds Ω1 and
+Ω2, Ω1 ∩Ω2 = /0, and two integral forms ω1 ∈F ℓ(Ω1), ω2 ∈F ℓ(Ω2), we have for
+ω :=
+(
+ω1
+on Ω1
+ω2
+on Ω2
+that
+ω ∈F ℓ(Ω)
+⇔
+tΓ ω1 = tΓ ω2 ,
+where Γ := Ω1 ∩Ω2.
+The idea behind Lemma 1 is to consider ℓ-dimensional oriented sub-manifolds
+of Ωthat are contained in Γ . The value ω assigns to those must be unique.
+2.3 Topological Electrodynamic Laws
+2.3.1 Circulation and Flux Laws
+Let {Σ(t)}t∈R, be a family of orientable, compact, and piecewise smooth 2-surfaces,
+whose elements vary smoothly with time t, thus forming a “space-time tube”. Then
+the ﬁrst “axiom” of electrodynamics, Faraday’s law can be stated as (for any t1,t2 ∈
+R)
+t2
+Z
+t1
+Z
+∂Σ(τ)
+e(τ)dτ =
+Z
+Σ(t1)
+b(t1)−
+Z
+Σ(t2)
+b(t2)
+⇔
+Z
+∂Σ(t)
+e(t) = −d
+dt
+Z
+Σ(t)
+b(t) .
+(FL)
+Faraday’s law links electric ﬁeld and magnetic induction through integrals that per-
+fectly ﬁt the integral forms interpretation of the ﬁelds, recall Section 2.2.
+The second law, that we treat as another “axiom” is Ampere’s law and it links two
+electrodynamic quantities that have not been mentioned so far, the magnetic ﬁeld h
+(units 1 A
+m), the electric displacement d (units 1 As
+m2 ), and the electric current j (units
+1 A
+m2 ):
+t2
+Z
+t1
+Z
+∂Σ(τ)
+h(τ)dτ =
+Z
+Σ(t2)
+d(t2)−
+Z
+Σ(t1)
+d(t1)+
+t2
+Z
+t1
+Z
+Σ(τ)
+j(τ)dτ
+
+
+Maxwell’s Equations: Continuous and Discrete
+9
+⇔
+Z
+∂Σ(t)
+h(t) = d
+dt
+Z
+Σ(t)
+d(t)+
+Z
+Σ(t)
+j(t) .
+(AL)
+Ampere’s law expects us to consider integrals of the magnetic ﬁeld h along curves,
+whereas d and j enter through their ﬂuxes through surfaces. Matching this with our
+notion of (integral) forms, we ﬁnd
+• that the magnetic ﬁeld h should be regarded as a 1-form,
+• that 2-forms are the right device to describe both d and j.
+Remark 1. The electric current can play the role of sources in electrodynamic mod-
+els. Then j will be a prescribed quantity reﬂecting the interaction of electromagnetic
+ﬁelds with other physical systems. Hence, from now, think of j as given.
+Remark 2. Another subtle distinction can be made labeling the quantities in Am-
+pere’s law twisted forms, see [16, Sect. 2] and [21, Sect. 28]. This is not needed for
+our purposes and I am not going to dwell on this.
+2.3.2 Exterior Derivative
+Integration of forms over boundaries features prominently both in (FL) and (AL).
+Recall that the boundary of an oriented piecewise smooth manifold of dimension d
+is an orientable d −1-dimensional manifold that can be equipped with an induced
+orientation, see Figure 3. This induced orientation is implicitly imposed through the
+boundary operator ∂. For an in-depth discussion of orientation refer to [19, Sect. 4].
++
+−
+Fig. 3: 1-, 2-, and 3-dimensional submanifolds of R3 and the induced orientation of
+their boundaries. Remember that the orientation of a path is given by its direction,
+the orientation of a surface by an internal sense of turning, and the orientation of a
+volume by a corkscrew rule.
+Deﬁnition 3 (Exterior derivative). Let Ωbe an n-dimensional manifold. Then the
+exterior derivative dℓ: F ℓ(Ω) →F ℓ+1(Ω), 0 ≤ℓ< n, is deﬁned by
+
+
+10
+Ralf Hiptmair
+Z
+Σ dℓω :=
+Z
+∂Σ ω
+∀Σ ∈Mℓ+1(Ω) ,
+and dn ω := 0 for ω ∈F n(Ω).
+By the very deﬁnition of d1 we can now state (FL) and (AL) concisely as
+Faraday’s law
+d1 e = −∂tb ,
+Ampere’s law
+d1 h = ∂td+ j .
+(FL)
+(AL)
+We highlight an immediate consequence of Deﬁnition 3:
+Corollary 1. The exterior derivative dℓ: F ℓ(Ω) →F ℓ+1(Ω) is a linear operator
+and commutes with the pullback: Φ∗◦dℓ= bdℓ◦Φ∗for any diffeomorphism Φ : bΩ→
+Ω(bdℓis the exterior derivative on F ℓ( bΩ)).
+Hence, if e, b solve (FL) and h, d satisfy (AL), then the transformed ﬁelds Φ∗e,
+Φ∗b, and Φ∗h, Φ∗d again solve (FL) and (AL), respectively, where Φ : R3 →R3
+is any diffeomorphism. In other words, we can warp space in arbitrary ways and the
+induced transformations take solutions of Maxwell’s equations to other solutions
+of Maxwell’s equations. Therefore (FL) and (AL) have been labelled “topological
+laws”; their set of solutions is invariant under arbitrary pullbacks connected with
+diffeomorphic deformations of space.
+The evident fact that “the boundary of a boundary is empty”, ∂◦∂= /0, permits
+us to conclude a fundamental property of the exterior derivative:
+Theorem 2.
+For ℓ∈{0,...,n −1} holds
+dℓ+1◦dℓ= 0 .
+Thus, a simple consequence of applying d2 to (AL) is the continuity equation
+0 = ∂t d2 d+ d2 j = ∂tρ + d2 j ,
+(4)
+where ρ := d2 d ∈F 3(Ω) is a 3-form modeling the density of electric charges.
+Assuming “smoothness” of an (integral) form, the exterior derivative can be lo-
+calized [22, Sect. 2.3], [38, Sect. V.3]:
+Theorem 3 (Generalized Stokes’ theorem). On a domain Ω⊂Rn the exterior
+derivative of a differential ℓ-form ω ∈C1Λℓ(Ω) is
+(dℓω)(x)(v1,...,vℓ+1) :=
+ℓ+1
+∑
+k=1
+(−1)k(Dω)(x)vk(v1,...,vk−1,vk+1,...,vℓ+1) ,
+for all x ∈Ωand “tangent vectors” vk ∈Rn. Here Dω : Ω→L(Rn,Λℓ(Rn)) is the
+(Fr´echet) derivative of ω.
+This paves the way for computing the vector proxy incarnations of the exterior
+derivatives [6, Sect. 2.3]:
+
+
+Maxwell’s Equations: Continuous and Discrete
+11
+V.P.(dℓω) =
+
+
+
+
+
+gradu
+, for ℓ= 0,
+curlu
+, for ℓ= 1,
+divu
+, for ℓ= 2,
+,
+u/u := V.P.(ω), ω ∈C1Λℓ(Ω) .
+(5)
+The classical Gauss’ and Stokes’ theorem conﬁrm that these operators comply with
+Deﬁnition 3. By (5), for vector proxies −→e , −→b , −→h , −→d , and −→j of the various electro-
+magnetic ﬁelds, the local versions Faraday’s and Ampere’s law read
+(FL)
+⇒
+curl−→e = −∂t
+−→b ,
+(AL)
+⇒
+curl−→h = ∂t
+−→d + −→j .
+(6)
+(7)
+This is the classical form of Maxwell’s equations written as ﬁrst order partial differ-
+ential equations for vector ﬁelds with three components.
+Remark 3. The use of exterior calculus for the description of electromagnetic ﬁelds
+and the statement of electromagnetic models is well established, see [8], [39,
+Sect. 9.8], [21, Ch. VI], or [31, Sect .3.5]. Surprisingly, as discovered in [37], the
+perspective of differential forms also sheds fresh light on boundary integral formu-
+lations for acoustics and electromagnetics.
+2.3.3 Potentials
+The converse of Theorem 2 holds under some assumption on the topological class
+of the manifold on which the forms are deﬁned.
+Theorem 4 (Existence of potentials). If the manifold Ωhas trivial topology, that
+is, all Betti numbers except the ﬁrst vanish, then
+Ker(dℓ) := {ω ∈F ℓ(Ω) : dℓω = 0} = dℓ−1F ℓ−1(Ω) .
+The ℓ−1-form whose exterior derivative yields an ℓ-form ω with dℓω = 0, is
+called a potential for ω. The proof of this theorem for differential forms makes use
+of so-called Poincar´e liftings, see [38, Sect. V.4].
+Let us sketch a formal justiﬁcation of Theorem 4 for Ω= Rn and ℓ= 1. For
+every x ∈Ωlet γ(x) be the line segment connecting x and 0. Given η ∈F 1(Ω),
+deﬁne ω ∈F 0(Ω) (a plain function) by ω(x) :=
+R
+γ(x) η. For any directed path π
+with endpoints x0,x1 this 0-form satisﬁes
+Z
+π d0 ω = ω(x1)−ω(x0) =
+Z
+γ(x1) η −
+Z
+γ(x0) η =
+Z
+π η ,
+since
+0 =
+Z
+Σ d1 η =
+Z
+∂Σ η =
+Z
+π η −
+Z
+γ(x1) η +
+Z
+γ(x0) η ,
+where Σ is the 2-surface bounded by π, γ(x0), and γ(x1) (with suitable orientation).
+For general Ωthis surface may not exist owing to topological obstructions.
+
+
+12
+Ralf Hiptmair
+A similar argument settles the case ℓ= 2 for Ω= Rn. Now, write Σ(γ) for the
+oriented surface generated by retracting the directed path γ to 0. By the retract of a
+set to 0 we mean the union of all line segments connecting points of the set with 0.
+Given η ∈F 2(Ω) with d2 η = 0 we ﬁx ω ∈F 1(Ω) by
+Z
+γ ω :=
+Z
+Σ(γ) η
+∀γ ∈M1(Ω) .
+For an arbitrary Γ ∈M2(Ω) let V stand for the volume deﬁned by its retract to 0.
+Then
+Z
+Γ d1 ω =
+Z
+∂Γ ω =
+Z
+Σ(∂Γ ) η =
+Z
+∂V η +
+Z
+Γ η =
+Z
+V d2 η
+| {z }
+=0
++
+Z
+Γ η .
+Also here, topology may thwart the existence of a suitable V.
+There is also a local version of Theorem 4 for differential forms, and in terms of
+Euclidean vector proxies it tells us that in Ω= R3
+curlu = 0
+⇒
+∃f : Ω→R :
+u = grad f
+(f is a scalar potential.), (8)
+divu = 0
+⇒
+∃f : Ω→R3 :
+u = curlf
+(f is a vector potential.) (9)
+Remark 4. For general Ωan ℓ-form in Ker(dℓ) is still the exterior derivative of
+some η ∈F ℓ−1(Ω) after adding a correction from a ﬁnite-dimensional cohomology
+space. Since Ω= R3 for Maxwell’s equations, we need not worry about topological
+obstructions. The situation is completely different in the case of so-called magneto-
+quasistatic models (eddy current models), where scalar potentials for curl-free mag-
+netic ﬁelds outside conductors may fail to exist.
+Electromagnetic potentials
+Another axiom in electrodynamics is the non-existence of magnetic monopoles, that
+is, d2 b = 0 at “initial time” t = 0. Then we conclude from Theorem 2 and Faraday’s
+law (FL) that
+d1 e = −∂tb
+d2
+=⇒
+∂t d2 b = 0
+d2 b(0)=0
+=⇒
+d2 b = 0
+∀t .
+As a consequence, there exists a magnetic vector potential a ∈F 1(Ω) such that
+b = d1 a. Plugging the vector potential into Faraday’s law, we arrive at
+d1 e = −∂t d1 a
+=⇒
+d1(e+ ∂ta) = 0
+Thm. 4
+=⇒
+∃v ∈F 0(Ω) : e = −∂ta −d0 v .
+This 0-form (= function) v is known as electric scalar potential. In vector proxy
+notation the two potentials satisfy
+
+
+Maxwell’s Equations: Continuous and Discrete
+13
+−→b = curl−→a
+,
+−→e + ∂t−→a = −gradv ,
+(10)
+where we identiﬁed the function v and 0-form v.
+Gauge freedom
+Even for given ﬁelds e and b, the potentials will not be unique, because for any
+w ∈F 0(Ω) holds
+b = d1 a ,
+e = −∂ta −d0 v
+,
+v′ = v+ w
+a′ = a +
+Z t
+0 wdt
+⇒
+b = d1 a′ ,
+e = −∂ta′ −d0 v′ .
+(11)
+This possibility to modify the potentials without affecting the ﬁelds proper is known
+as gauge freedom. It takes so-called gauge conditions, that is, extra constraints on
+the potentials, to render them unique [17].
+2.4 Energies and Material Laws
+2.4.1 The exterior product
+There is a special bilinear way to combine two alternating forms into another al-
+ternating form whose degree is the sum of the degrees of the factors. This binary
+operation is called the exterior product (wedge product). By pointwise deﬁnition it
+can be extended to continuous differential forms on a manifold Ω[6, Sect. 2.1]
+∧:
+
+C0Λℓ(Ω)×C0Λm(Ω) →C0Λℓ+m(Ω)
+(ω,η)
+7→ω ∧η .
+The most important formulas connecting the exterior product and other operations
+on differential forms are (ω ∈C0Λℓ(Ω) ,η ∈C0Λm(Ω), 0 ≤ℓ,m ≤n)
+(Anti-)commutativity:
+ω ∧η = (−1)ℓm(η ∧ω) ,
+(12)
+Commutes with pullback:
+Φ∗ω ∧Φ∗η = Φ∗(ω ∧η) ,
+(13)
+Leibniz rule:
+dℓ+m(ω ∧η) = dℓω ∧η + (−1)ℓ(ω ∧dm η) .
+(14)
+Standard bilinear pointwise operations are recovered when considering ∧on the
+side of Euclidean vector proxies:
+V.P.(ω ∧η) =
+
+
+
+−→u × −→v , for ℓ= m = 1,
+−→u ·−→v
+, for ℓ= 2, m = 1
+−→u −→v
+, for ℓ= 0, m = 1,2
+,
+−→u /−→u := V.P.(ω), ω ∈C1Λℓ(Ω) ,
+−→v := V.P.(η), η ∈C1Λm(Ω) .
+(15)
+
+
+14
+Ralf Hiptmair
+Following [6, Sect. 2.2], we introduce Hilbert spaces of ℓ-forms on a piecewise
+smooth manifold Ω
+L2Λℓ(Ω) :=
+
+ω ∈F ℓ(Ω) : x 7→ω(x)(v) ∈L2(Ω)
+for every smooth vectorﬁeld v on Ω
+
+.
+For a domain Ω⊂R3 a form on Ωis in L2Λℓ(Ω), if and only if its vector proxy
+belongs to (L2(Ω))(n
+ℓ).
+As a consequence of the Riesz representation theorem the exterior product allows
+to express duality in spaces of differential forms:
+Theorem 5. The exterior product ∧: C0Λℓ(Ω)×C0Λm(Ω) →C0Λℓ+m(Ω) can be
+extended to L2Λℓ(Ω) × L2Λm(Ω) by continuity. This extension provides a duality
+pairing between L2Λℓ(Ω) and L2Λn−ℓ(Ω) through the bilinear form
+(ω,η) 7→
+Z
+Ωω ∧η .
+2.4.2 Field energies
+Mathematically speaking, in electrodynamics an energy is a mapping from ﬁelds to
+non-negative numbers. Therefore, for a bounded domain Ω⊂R3 we introduce
+electric ﬁeld energy:
+Eel : L2Λ2(Ω) →R≥0 ,
+magnetic ﬁeld energy:
+Emag : L2Λ2(Ω) →R≥0 .
+Then, the values Eel(d) and Emag(b) (unit J) provide the energy content of the ﬁelds
+d and b.
+Assumption 6 (Properties of ﬁeld energies)
+Both Eel and Emag are Fr´echet-differentiable and strictly convex.
+This ensures that the Fr´echet derivatives
+DEel,DEmag :L2Λ2(Ω) →(L2Λ2(Ω))′ = L2Λ1(Ω)
+(by Thm. 5)
+are strictly monotone operators and, hence, isomorphisms, see [44, Sect. 10.3.2].
+In many settings the ﬁeld energies are localized in the sense that there are two
+functions (“energy densities”)
+Eel,Emag : Ω×Λ2(R3) →R
+such that
+Eel(d) =
+Z
+ΩEel(x,d(x))dx
+,
+Emag(b) =
+Z
+ΩEmag(x,b(x))dx .
+
+
+Maxwell’s Equations: Continuous and Discrete
+15
+If Eel and Emag are differentiable and x-uniformly strictly convex in their second
+argument, Assumption 6 is satisﬁed. Moreover, the Fr´echet derivatives with respect
+to the second argument D2Eel(x,d) and D2Emag(x,b) are isomorphisms Λ2(R3) →
+Λ1(R3).
+Finally, writing ⟨·,·⟩for the duality pairings in L2Λ2(Ω)/Λ2(R3), and appealing
+to Theorem 5 we ﬁnd that for all d′ ∈C∞Λ2(Ω)
+
+DEel(d),d′
+=
+Z
+Ω
+
+D2Eel(x,d(x)),d′(x)
+
+dx =
+Z
+ΩD2Eel(x,d(x))∧d′(x)dx .
+A very special, but common case, is local quadratic ﬁeld energies, where
+Eel(x,d(x)) = 1
+2βel(x)(d(x),d(x)) ,
+Emag(x,b(x)) = 1
+2βmag(x)(b(x),b(x)) ,
+x ∈Ω,
+(16a)
+(16b)
+with x-uniformly positive deﬁnite bilinear forms βel,βmag : Ω→L(Λ2(R3) ×
+Λ2(R3),R). In this case, switching to Euclidean vector proxies, we may write
+Eel(x,d(x)) = 1
+2
+−→d (x)⊤ε−1(x)−→d (x) ,
+Emag(x,b(x)) = 1
+2
+−→b (x)⊤µ−1(x)−→b (x) ,
+x ∈Ω,
+(17a)
+(17b)
+where ε : Ω→R3,3 and µ : Ω→R3,3 are position dependent symmetric positive
+deﬁnite (spd) 3 × 3-matrices, the dielectric tensor and the magnetic permeability
+tensor, respectively.
+Remark 5. The concept of energy content of a ﬁeld in the presence of matter is
+inherently macroscropic (phenomenological), because it ignores very complex in-
+teractions at the atomic level.
+2.4.3 Material laws
+Material laws state a one-to-one correspondence between the electric ﬁeld e and
+the displacement current d, and between the magnetic induction b and the magnetic
+ﬁeld h. In concrete terms we stipulate
+e = e(d) = DEel(d) ∈L2Λ1(Ω) ,
+h = h(b) = DEmag(b) ∈L2Λ1(Ω) .
+(18a)
+(18b)
+The inverses of these material laws can be stated as
+d(e) = DE ∗
+el(e)
+,
+b(e) = DE ∗
+mag(h) ,
+(19)
+where E ∗
+el : L2Λ1(Ω) →R and E ∗
+mag : L2Λ1(Ω) →R are the strictly convex Fenchel
+conjugates of Eel and Emag, called co-energies in physics [19, Def. 12.2].
+
+
+16
+Ralf Hiptmair
+Relying on the duality from Theorem 5, we can cast the material laws (18a),
+(18b), and (19) into variational form.
+Z
+Ωe(d)∧d′ =
+
+DEel(d),d′
+∀d′ ∈L2Λ2(Ω) ,
+(20a)
+Z
+Ωh(b)∧b′ =
+
+DEmag(b),b′
+∀b′ ∈L2Λ2(Ω) ,
+(20b)
+Z
+Ωd(e)∧e′ =
+
+DE ∗
+el(e),e′
+∀e′ ∈L2Λ1(Ω) ,
+(20c)
+Z
+Ωb(h)∧h′ =
+
+DE ∗
+mag(h),h′
+∀h′ ∈L2Λ1(Ω) ,
+(20d)
+Special case: Local quadratic energies
+For energies given by (16a) and (16b), which are still continuous on L2Λ2(Ω), the
+general formulas (18a), (18b), and (19) become
+e(x) = Mel(d(x))
+⇔
+d(x) = M−1
+el (d(x)) ,
+h(x) = Mmag(b(x))
+⇔
+b(x) = M−1
+mag(h(x)) ,
+for almost all x ∈Ω,
+(21a)
+(21b)
+where both Mel and Mmag are bounded linear operators Λ2(R3) →Λ1(R3). They
+are specimens of Hodge operators, which, in the general case, induce isomorphisms
+Λℓ(Rn) ∼= Λn−ℓ(Rn). By pointwise application Hodge operators can be deﬁned for
+continuous differential forms, and then can be extended to L2Λℓ(Ω). For these
+Hodge operators we adopt the customary notation ⋆and write for (21a) (21b)
+e = ⋆ε−1d ⇔d = ⋆εe
+,
+h = ⋆µ−1b ⇔b = ⋆µh .
+(22)
+Then the ﬁeld energies can be expressed by
+Eel = 1
+2
+Z
+Ω⋆ε−1d∧d = 1
+2
+Z
+Ω
+⋆εe∧e ,
+Emag = 1
+2
+Z
+Ω⋆µ−1b∧b = 1
+2
+Z
+Ω
+⋆µh∧h .
+Remark 6. The notation in (22) hints that the Hodge operators emerge from the ma-
+terial tensors ε and µ introduced in (17a) and (17b). These tensors can be viewed
+as coordinate representations of a Riemannian metric on Ω. Indeed, the usual deﬁ-
+nition of Hodge operators on Λℓ(Rn) relies on inner products in Rn [18, Sect. 4].
+The vector proxy form of (22) is immediate from (17):
+−→d (x) = ε(x)−→e (x)
+⇔
+−→e (x) = ε(x)−1−→d (x) ,
+−→b (x) = µ(x)−→h (x)
+⇔
+−→h (x) = µ(x)−1−→b (x) ,
+a.e. in Ω.
+(23a)
+(23b)
+
+
+Maxwell’s Equations: Continuous and Discrete
+17
+Thus, the variational material laws (20) can be expressed as
+Z
+Ω
+−→d (x)·−→e ′(x)dx =
+Z
+Ωε(x)−→e (x)·−→e ′(x)dx
+∀−→e ′ ∈(L2(Ω))3 ,
+⇔
+Z
+Ω
+−→e (x)·−→d ′(x)dx =
+Z
+Ωε−1(x)−→d (x)·−→d ′(x)dx
+∀−→d ′ ∈(L2(Ω))3 ,
+(24a)
+Z
+Ω
+−→b (x)·−→h ′(x)dx =
+Z
+Ωµ(x)−→h (x)·−→h ′(x)dx
+∀−→h ′ ∈(L2(Ω))3 ,
+⇔
+Z
+Ω
+−→h (x)·−→b ′(x)dx =
+Z
+Ωµ−1(x)−→b (x)·−→b ′(x)dx
+∀−→b ′ ∈(L2(Ω))3 .
+(24b)
+Remark 7. There is another local material law that is often encountered in electro-
+magnetic ﬁeld models, known as Ohm’s law. It links the electric ﬁeld e and the
+current j according to
+j = ⋆σe .
+(25)
+Here, σ = σ(x) is another metric tensor called the conductivity. Expressed in terms
+of vector proxies (25) reads
+−→j (x) = σ(x)−→e (x)
+a.e. in Ω,
+(26)
+with σ : Ω→R3,3 uniformly spd.
+2.4.4 Energy balance (Poynting’s theorem)
+If the ﬁelds e, b, d, and h satisfy Maxwell’s equations, the total ﬁeld energy Etot :=
+Eel + Emag fulﬁlls [19, Prop 12.1]
+d
+dt Etot(t) = d
+dt
+ Eel(d(t))+ Emag(b(t))
+
+= ⟨DEel(d(t)),∂td(t)⟩+
+
+DEmag(b(t)),∂tb(t)
+
+=
+Z
+Ωe(t)∧∂td(t)+ h(t)∧∂tb(t) ,
+using Ampere’s law (AL) to eliminate ∂td and Faraday’s law (FL) on ∂tb,
+=
+Z
+Ωe(t)∧(d1 h(t)−j)+ h(t)∧(−d1 e)
+=
+Z
+Ω(e∧d1 h−h∧d1 e)(t)−(e∧j)(t) =
+Z
+∂Ω(e∧h)(t) −
+Z
+Ω(e∧j)(t) .
+In the last step we used integration by parts, that is, we combined Deﬁnition 3 and
+the Leibniz rule (14). The ﬁrst term is the Poynting vector 2-form, whose integral
+
+
+18
+Ralf Hiptmair
+supplies the ﬂow of electromagnetic energy through a surface. The second term is
+the power consumed by dissipation.
+2.5 Maxwell’s Equations: Variational Approach
+Next, we derive the weak form of well-posed boundary value problems for Maxwell’s
+equations (FL) and (AL) equipped with general material laws in weak form given
+in (20). Throughout we focus on a bounded domain Ω⊂R3. Analogous considera-
+tions for time-harmonic ﬁelds can be found in [35, Sect.2.3]. As a key tool we recall
+the integration by parts formula for ω ∈C1Λℓ(Ω), η ∈C1Λk(Ω):
+Z
+Ωdℓω ∧η + (−1)ℓ(ω ∧dk η) =
+Z
+∂Ωω ∧η .
+(27)
+2.5.1 a-based variational formulation
+As in Section 2.3.3 we employ the electromagnetic potentials, but do so in a par-
+ticular way, using the gauge freedom (11) to drop the scalar electric potential v
+(“temporal gauge”, v = 0), which leaves us with a vector potential a ∈F 1(Ω) that
+is just a temporal primitive of the electric ﬁeld and satisﬁes
+e(t) = −∂ta(t)
+and
+b(t) = d1 a(t)
+in Ω.
+(28)
+First, test (AL) with a′ ∈C∞Λ1(Ω) (independent of time) and integrate by parts
+according to (27), which yields
+Z
+Ωh(t)∧d1 a′ +
+Z
+∂Ωh(t)∧a′ = ∂t
+Z
+Ωd(t)∧a′ +
+Z
+Ωj(t)∧a′ .
+Next, use (20b) and (20c) to rewrite the ﬁrst terms on both sides,
+
+DEmag(b(t)),d1 a′
++
+Z
+∂Ωh(t)∧a′ = ∂t
+
+DE ∗
+el(e(t)),a′
++
+Z
+Ωj(t)∧a′ ,
+and then plug in (28):
+
+DEmag(d1 a(t)),d1 a′
++
+Z
+∂Ωh(t)∧a′
+= ∂t
+
+DE ∗
+el(−∂ta(t)),a′
++
+Z
+Ωj(t)∧a′ ,
+(29)
+which is supposed to hold for all a′ ∈C∞Λ1(Ω). Formally, this is a non-linear
+second-order evolution problem for the unknown 1-form valued function a = a(t).
+Initial conditions a(0) and ∂ta(0) have to be supplied.
+
+
+Maxwell’s Equations: Continuous and Discrete
+19
+For local linear material laws (22) we seek a = a(t) such that
+Z
+Ω(⋆µ−1 d1 a(t))∧d1 a′ + ∂2
+t
+Z
+Ω(⋆εa(t))∧a′
+= −
+Z
+∂Ωh(t)∧a′ +
+Z
+Ωj(t)∧a′ .
+(30)
+This is a linear 2nd-order evolution problem, posed on the “energy space”
+HΛℓ(Ω) := {ω ∈L2Λℓ(Ω) : dℓω ∈L2Λℓ+1(Ω)}
+for ℓ= 1 .
+(31)
+The spaces HΛℓ(Ω) are Sobolev spaces of differential forms on Ω[6]. They are
+Hilbert spaces with inner product (⋆is the Euclidean Hodge operator)
+(ω,η)HΛℓ(Ω) :=
+Z
+Ω(⋆ω)∧η + (⋆dℓω)∧dℓη ,
+ω,η ∈HΛℓ(Ω) .
+(32)
+The spaces C∞Λℓ(Ω) are dense in HΛℓ(Ω). For a domain Ω⊂R3 and ℓ= 1 the
+Hilbert space of vector proxies isomorphic to HΛ1(Ω) is the well-known Sobolev
+space H(curl,Ω), for ℓ= 2 we get H(div,Ω), and for ℓ= 0 the function space
+H1(Ω), see [35, Sect. 2.4].
+Thus, in terms of vector proxies the electrodynamic evolution problem in the
+a-based formulation reads: ﬁnd −→a (t) ∈H(curl,Ω) with
+Z
+Ω
+µ−1 curl−→a (t)·curl−→a ′ dx+ ∂2
+t
+Z
+Ω
+ε−→a (t)·−→a ′ dx
+= −
+Z
+∂Ω
+(−→h (t)× −→a ′)·ndS+
+Z
+Ω
+−→j (t)·−→a ′ dx
+(33)
+for all −→a ′ ∈H(curl,Ω).
+2.5.2 h-based variational formulation
+Alternatively, we may test Faraday’s law (FL) with h′ ∈C∞Λ1(Ω) (independent of
+time), which, after integration by parts (27), yields
+Z
+Ωe(t)∧d1 h′ +
+Z
+∂Ωe(t)∧h′ = −∂t
+Z
+Ωb(t)∧h′ .
+(34)
+We use the material laws (20a) and (20d) to replace the two integrals over Ω:
+
+DEel(d(t)),d1 h′
++
+Z
+∂Ωe(t)∧h′ = −∂t
+
+DE ∗
+mag(h(t)),h′
+.
+Then replace d by means of Ampere’s law (integrated in time) and obtain the varia-
+tional problem: seek eh = eh(t) such that
+
+
+20
+Ralf Hiptmair
+
+DEel(d(0)+ d1 eh(t)−
+Z t
+0 j(τ)dτ),d1 h′
+
++
+Z
+∂Ωe(t)∧h′
+= −∂t
+D
+DE ∗
+mag(∂teh(t)),h′E
+,
+(35)
+for all h′ ∈C∞Λ1(Ω). The unknown ﬁeld eh(t) is a temporal primitive of h: eh(t) =
+R t
+0 h(τ)dτ; in particular eh(0) = 0.
+Using the local linear material laws (22) we recover a special variant of (35):
+Seek eh(t) ∈HΛ1(Ω) such that
+Z
+Ω(⋆ε−1 d1 eh(t))∧d1 h′ + ∂2
+t
+Z
+Ω(⋆µeh(t))∧h′ dx =
+−
+Z
+∂Ωe(t)∧h′ −
+Z
+Ω⋆ε−1
+ d(0)+
+Z t
+0 j(τ)dτ
+
+∧d1 h′
+(36)
+for all h′ ∈HΛ1(Ω). Rewriting this for vector proxies gives us: Find e−→h (t) ∈
+H(curl,Ω) with
+Z
+Ω
+ε−1 curl e−→h (t)·curl−→h ′ dx+ ∂2
+t
+Z
+Ω
+µ e−→h (t)·−→h ′ dx =
+−
+Z
+∂Ω
+(−→e (t)× −→h ′)·ndS +
+Z
+Ω
+ε−1 −→d (0)+
+Z t
+0
+−→j (τ)dτ
+
+·curl−→h ′ dx
+(37)
+for all −→h ′ ∈H(curl,Ω).
+Remark 8. We frequently have the possibility to cast a single boundary value prob-
+lem or evolution problem into several variational forms. The standard example is
+the standard (primal) and mixed (dual) variational formulation of scalar second-
+order elliptic boundary value problems. For a more general discussion refer to [11,
+Sect. 1.3].
+2.5.3 Boundary conditions
+Both variational formulations (29) and (35) feature undetermined boundary terms
+and have to be supplemented with boundary conditions. To that end, we partition
+Γ := ∂Ωinto three parts Γ = Γe ˙∪Γm ˙∪Γi with disjoint interiors. Each part may not
+be present and collapse to /0.
+On these parts of Γ different boundary conditions on the ﬁelds are imposed by
+means of the trace operators tΓ from Section 2.2.3:
+
+
+Maxwell’s Equations: Continuous and Discrete
+21
+• Electric boundary conditions on Γe:
+tΓee(t) = ge(t) ∈F 1(Γe) .
+• Magnetic boundary conditions on Γm: tΓmh(t) = gm(t) ∈F 1(Γm) .
+• Impedance boundary conditions on Γi: tΓih(t) = Z(tΓie(t)) ,
+where Z : F 1(Γi) →F 1(Γi) is a local or non-local impedance map, which boils
+down to a surface Hodge operator in the simplest case.
+➊For the a-based variational formulation (29)
+☞
+electric boundary conditions are essential and have to be enforced on the trial
+1-forms and (in their homogeneous variant) on the test 1-forms,
+☞
+magnetic boundary conditions are natural and taken into account on the right
+hand side of the variational formulation,
+☞
+impedance boundary conditions give rise to another term on the left hand side
+of (29).
+Assuming benign nonlinearity of DEel and DEmag, we arrive at the following
+variational evolution problem: seek a(t) ∈HΛ1(Ω) with (tΓea)(t) = −
+R t
+0 ge(τ)dτ
+such that
+
+DEmag(d1 a(t)),d1 a′
+−∂t
+
+DE ∗
+el(−∂ta(t)),a′
++
+Z
+Γi
+Z(−∂ttΓia(t))∧a′ =
+−
+Z
+Γm
+gm(t)∧a′ +
+Z
+Ωj(t)∧a′ ,
+(38)
+for all a′ ∈HΛ1(Ω) satisfying tΓea′ = 0.
+➋In the case of the h-based variational formulation (35)
+☞
+electric boundary conditions become natural boundary conditions and show
+up on the right hand side of the variational formulation,
+☞
+magnetic boundary conditions have to be imposed on trial and test 1-forms,
+that is, they are essential,
+☞
+impedance boundary conditions engender another contribution to the left hand
+side of the variational formulation.
+Hence, taking into account the various boundary conditions, the variational for-
+mulation becomes: Seek a temporal primitive eh(t) ∈HΛ1(Ω) of the magnetic ﬁeld
+with tΓmeh(t) =
+tR
+0
+gm(τ)dτ, such that
+
+DEel(d(0)+ d1 eh(t)−
+Z t
+0 j(τ)dτ),d1 h′
+
++ ∂t
+D
+DE ∗
+mag(∂teh(t)),h′E
++
+Z
+Γi
+Z−1(∂teh(t))∧h′ = −
+Z
+Γe
+ge(t)∧h′ ,
+(39)
+for all h′ ∈HΛ1(Ω) with tΓmh′ = 0.
+
+
+22
+Ralf Hiptmair
+Remark 9. When viewing electric boundary conditions as Dirichlet boundary condi-
+tions, magnetic boundary conditions as Neumann boundary conditions, and relating
+impedance boundary conditions to Robin boundary conditions, striking similarities
+between Maxwell’s equations and scalar second-order elliptic evolution problems
+become apparent. This is not a coincidence, because both Maxwell’s equations and
+the scalar wave equation belong to a single family of evolution problems. Using
+exterior calculus, they can even be stated in a uniﬁed way. Some details are give in
+Section 4.1 and a comprehensive discussion can be found in [33, Sect. 2].
+3 Co-chains and Whitney Forms
+Now we are concerned with the discretization of electromagnetic ﬁelds. The key
+insight from Section 2.1 was that, from a non-local point of view, ﬁelds are integral
+ℓ-forms, cf. Deﬁnition 1, assigning (real/complex) values to oriented ℓ-dimensional
+submanifolds of R3. Discretization means that we switch to a description of the
+ﬁelds involving only ﬁnitely many degrees of freedom. To begin with, the choice
+of these degrees of freedom will be guided by our understanding of integral forms.
+Then, in the spirit of Finite Element Exterior Calculus (FEEC), we pursue the con-
+struction of discrete differential forms that are valid integral forms, uniquely deter-
+mined by the degrees of freedom, and satisfy fundamental algebraic properties with
+respect to the exterior derivative. We also study a key tool in FEEC: commuting
+projectors.
+Bibliographical notes
+The topics of these section are covered in [6, Sects. 2-5], and [35, Sect. 3], and some
+aspects are addressed in [19, Ch. IV]. A complete survey of discrete differential
+forms is given in the Periodic Table of Finite Elements by D. Arnold [4]. Using
+vector proxies, discrete differential forms can be treated as classical (mixed, vector
+valued) ﬁnite element functions. This is the perspective adopted in [11, Sects. 2.3-
+2.6] and [40, Ch. 5-6]. Some of the ideas and results presented below are fairly
+recent and covered only in research articles, which are cited locally.
+3.1 Meshes
+We aim for discrete ﬁelds that are mappings from a ﬁnite number of oriented
+ℓ-dimensional submanifolds of R3 to R (or C). However, arbitrary sets of sub-
+manifolds will usually not be eligible, because Maxwell’s equations in integral form
+as stated in (FL) and (AL) rely on the concept of a boundary of a surface. Thus, the
+
+
+Maxwell’s Equations: Continuous and Discrete
+23
+set of submanifolds in the representation of discrete ﬁelds must be closed with re-
+spect to the boundary operator ∂. Such special sets are given in the next deﬁnition,
+cf. [12, Sect. 5.2.1], [19, Sect. 14]. In fact, it describes special instances of so-called
+cell complexes [7, Sect. 3.1].
+Deﬁnition 4 (Mesh/triangulation [35, Def. 3]). A mesh/triangulation Th of a
+bounded domain Ω⊂R3 is a ﬁnite collection of oriented cells (→set F3(Th)
+of 3-facets), faces (→set F2(Th) of 2-facets), edges (→set F1(Th) of 1-facets),
+and vertices (→set F0(Th) of 0-facets) such that
+(i) every ℓ-facet f ∈Fℓ(Th) is the diffeomorphic image of an open non-degenerate
+polytope in Rℓ,
+(ii) F0(Th)∪F1(Th)∪F2(Th)∪F3(Th) is a partition of Ω,
+(iii) for every F ∈Fℓ(Th), 0 < ℓ≤3, there are f1,..., fm ∈Fℓ−1(Th) such that
+∂F = f 1 ∪···∪f m,
+(iv) for each f ∈Fℓ(Th), 0 ≤ℓ< 3, there is a F ∈Fℓ+1(Th) such that f ⊂∂F.
+The generic term for the elements of Fℓ(Th) is ℓ-facets.
+A special type of meshes are tetrahedral meshes, whose faces are (ﬂat) triangles,
+whereas all cells are tetrahedra, see Figure 4. Another special case are tensor product
+meshes, for which the cells are axis aligned bricks and the faces are squares. Of
+course, all the meshes can be subject to global homeomorphisms of R3 and will
+remain valid meshes under this transformation.
+Fig. 4 Oriented tetrahedron:
+cell of a tetrahedral mesh.
+The orientation of the edges
+is given by their directions,
+the orientation of the face
+by “sense to turn on the
+tangential plane”, the orien-
+tation of the tetrahedron by a
+corkscrew rule [19, Fig. 14.2].
+3.2 Co-chains
+3.2.1 Deﬁnition
+Sloppily speaking, co-chains are discrete versions of integral forms [35, Sect. 3.1].
+
+
+24
+Ralf Hiptmair
+Deﬁnition 5 (Co-chain [35, Def. 4]). An ℓ-co-chain ˇω, ℓ∈{0,1,2,3}, on a mesh
+Th of Ωis a mapping ˇω : Fℓ(Th) →R.
+The values an ℓ-co-chain assigns to ℓ-facets are sometimes called coefﬁcients or
+degrees of freedom (d.o.f.). Figure 5 illustrates the phrase “the d.o.f. of an ℓ-co-
+chain are located on the ℓ-facets”. Obviously, the ℓ-co-chains on a ﬁxed mesh Th
+form a vector space C ℓ(Th) with dimension
+dimC ℓ(Th) = ♯Fℓ(Th) .
+(40)
+Thus, after ordering the ℓ-facets of Th, we can identify C ℓ(Th) ∼= R♯Fℓ(Th).
+0-co-chain:
+1-co-chain:
+2-co-chain:
+3-co-chain:
+Fig. 5: “Locations” of degrees of freedoms for different co-chains
+3.2.2 Co-chain calculus
+In Sections 2.2.3 and 2.3.2 we learned about fundamental concepts in the calculus of
+(differential) forms, the trace and the exterior derivative. Those remain meaningful
+for co-chains. For instance, the trace of a co-chain ˇω ∈C ℓ(Th), ℓ∈{0,1,2}, onto
+∂Ωis just the restriction of ˇω to { f ∈Fℓ(Th) : f ⊂∂Ω}.
+To deﬁne the (discrete) exterior derivative of co-chains, we need the notion of
+relative orientation of two facets F ∈Fℓ(Th) and f ∈Fℓ−1(Th), 0 < ℓ≤3:
+σr(f,F) :=
+
+
+
+
+
+1
+, if f ⊂∂F and orientations of f and ∂F match,
+−1
+, if f ⊂∂F and orientations of f and ∂F do not match,
+0
+, if f ̸⊂∂F.
+(41)
+
+
+Maxwell’s Equations: Continuous and Discrete
+25
+Deﬁnition 6 (Discrete exterior derivative). The discrete exterior derivative of co-
+chains is a mapping dℓ: C ℓ(Th) →C ℓ+1(Th), 0 ≤ℓ< 3, deﬁned by
+(dℓˇω)(F) :=
+∑
+f∈Fℓ(Th)
+σr(f,F) ˇω(f) ,
+F ∈Fℓ+1(Th) .
+Discrete gradient
+-1
++1
+-1
+-1
+D0: vertex-edge incidence
+matrix
+Discrete rotation
++1
++1
+-1
+D1: edge-face incidence matrix
+Discrete divergence
++1
++1
++1
++1
+D2: face-cell incidence matrix
+Fig. 6: Visualization of the action of the discrete exterior derivatives of co-chains on
+a 3D mesh through local stencils [35, Fig. 3.1]
+Figure 6 illustrates the action of the discrete exterior derivatives on the d.o.f.s of
+co-chains. Obviously, dℓ: C ℓ(Th) →C ℓ+1(Th) is a linear operator. Thus, assuming
+an ordering of the facets, dℓcan be represented by a matrix Dℓ∈{−1,0,1}Nℓ+1,Nℓ,
+Nj := dimC j(Th) = ♯Fj(Th). These matrices are the so-called incidence matrices
+of the mesh [19, Sect. 14], see also Figure 6.
+A simple computation shows that the analogue of Theorem 2 holds for the dis-
+crete exterior derivative:
+Theorem 7.
+dℓ+1 ◦dℓ= 0
+⇔
+Dℓ+1Dℓ= 0,
+ℓ∈{0,1,2}.
+There is also a counterpart of Theorem 4 for co-chains [35, Thm. 3.1]:
+Theorem 8 (Co-chain potentials). If Ωhas trivial topology, then
+Ker(dℓ) := { ˇω ∈C ℓ(Th) : dℓˇω = 0} = dℓ−1 C ℓ−1(Th) ⇔KerDℓ= ImDℓ−1.
+3.3 Discrete electrodynamic laws
+Since the co-chain calculus furnishes a counterpart of the exterior derivative, the
+topological electrodynamic laws (FL) and (AL) can be lifted to the discrete setting.
+To do so, we consider a mesh Th of a bounded domain Ω⊂R3 and introduce the
+co-chain sampling operators (also called de Rham maps)
+
+
+26
+Ralf Hiptmair
+Sℓ:
+(F ℓ(Ω) →C ℓ(Th)
+ω
+7→
+R
+f ω
+
+f∈Fℓ(Th)
+,
+ℓ∈{0,1,2,3} .
+(42)
+These operators evaluate integral forms for the special submanifolds provided by
+the mesh Th. Owing to the compatibility of the exterior derivative dℓ(Deﬁnition 3)
+and of its co-chain version dℓ(Deﬁnition 6), there holds
+dℓ◦Sℓ= Sℓ+1 ◦dℓ
+on
+F ℓ(Ω) .
+(43)
+This renders Sℓthe perfect tool for “projecting” Maxwell’s equations (FL), (AL)
+onto co-chains. To do this, let the (integral) forms e,b,h,d,j solve (FL) and (AL)
+on Ω. Then we may deﬁne their co-chain interpolants:
+ˇe := S1e ,
+ˇb := S2b ,
+ˇh := S1h ,
+ˇd := S2d ,
+ˇj := S2j .
+From the integral forms (FL) and (AL) and (42) it is immediate that these co-chains
+fulﬁll:
+D1ˇe = −∂t ˇb ,
+(44a)
+D1 ˇh = ∂t ˇd+ ˇj .
+(44b)
+Here, the co-chains are viewed as vectors of d.o.f.s and the discrete exterior deriva-
+tives have been replaced with the corresponding incidence matrices. The equations
+(44) may be regarded as circuit equations; for instance, (44a) is an electric network
+formed by the edges of the mesh with faces deﬁning the loops. Sometimes the fact
+that the interpolants exactly satisfy the circuit equations is advertised as “perfect
+consistency of the co-chain model”.
+It goes without saying that Theorems 7 and 8 lead to co-chain versions of the con-
+tinuity equation (4) and discrete electromagnetic potentials in C 1(Th) and C 0(Th),
+respectively, satisfying (10) on the co-chain side. Also for co-chain potentials we
+have gauge freedom similar to (11).
+3.4 Whitney forms
+3.4.1 Whitney map
+Co-chain calculus could capture the topological electrodynamic laws, but cannot
+accommodate the material laws (18), which require square integrable differential
+form arguments deﬁned almost everywhere in Ω. Thus we need an “interpolation”
+device for reconstructing (integral) forms ∈L2Λℓ(Ω) from co-chains ∈C ℓ(Th).
+This will be accomplished by linear “extension operators”
+Wℓ: C ℓ(Th) →L2Λℓ(Ω) ,
+(45)
+
+
+Maxwell’s Equations: Continuous and Discrete
+27
+called Whitney maps in [47]. We dub its range the space of Whitney ℓ-forms and
+write
+W ℓ(Th) := Wℓ(C ℓ(Th)) .
+(46)
+Before we delve into concrete constructions, we state a few fundamental alge-
+braic properties of Wℓas guidelines [35, Sect. 3.2]
+(W1)
+Extension property:
+Sℓ◦Wℓ= Id
+on
+C ℓ(Th) .
+(47)
+(If one interpolates an extended co-chain, the same co-chain is recovered.)
+(W2)
+Compatibility with exterior derivatives:
+dℓ◦Wℓ= Wℓ+1 ◦dℓ
+on
+C ℓ(Th) .
+(48)
+(Extending the discrete exterior derivative of a co-chain yields the same as the
+exterior derivative of the extended co-chain.)
+(W3)
+Locality: for all T ∈Th and ˇω ∈C ℓ(Th)
+ˇω(f) = 0 ∀f ∈Fℓ(Th), f ⊂T
+⇒
+Wℓˇω|T = 0 .
+(49)
+(If a co-chain is zero on all ℓ-facets contained in the boundary of a mesh cell, its
+extension must vanish on the whole cell.)
+(W4)
+Polynomial:
+∀ˇω ∈C ℓ(Th), T ∈Th :
+Wℓˇω|T ∈C∞Λℓ(T)
+and
+x ∈T 7→
+ (Wℓˇω)(x)
+
+(v) afﬁne linear ∀v ∈R3 .
+(50)
+(On each cell of the mesh the extended form is a valid smooth differential form
+according to Deﬁnition 1 with afﬁne linear vector proxies.)
+A projection, called the nodal interpolation operator is obtain by combining
+extension with sampling
+Iℓ: F ℓ(Ω) →W ℓ
+,
+Iℓ:= Wℓ◦Sℓ.
+(51)
+The projection property is straightforward from (47). From (48) and (43) we infer
+that nodal interpolation meshes well with the exterior derivative.
+Lemma 2 (Commuting diagram property for nodal interpolation).
+dℓ◦Iℓ= Iℓ+1 ◦dℓ
+on
+F ℓ(Ω) .
+The locality property (W3) of the Whitney map implies strict locality of nodal
+interpolation.
+
+
+28
+Ralf Hiptmair
+Lemma 3 (Locality of nodal interpolation).
+∀ω ∈F ℓ(Ω), T ∈Th :
+ω|T = 0
+⇒
+(Iℓω)|T = 0 .
+3.4.2 Local construction of simplicial Whitney forms
+We consider a simplicial mesh, whose cells are tetrahedra and single out a tetra-
+hedron T := convex{a1,a2,a3,a4}. On T we build concrete instances of Whitney
+maps Wℓ, 0 ≤ℓ< 3, following an idea of A. Bossavit [19, Sect. 23].
+➊ℓ= 0: We are given values ˇω(a j), j = 1,2,3,4, for a 0-co-chain in the vertices
+of T and seek to extend them linearly. Of course, this will boil down to standard
+linear interpolation, but we are going to view it from a different angle.
+A point x ∈T can be written as a “weighted combination of the vertices”:
+x =
+4
+∑
+j=1
+λ j(x) ,
+(52)
+where the functions λ j : T →[0,1] are the barycentric coordinates of T: λ j(ak) =
+δjk, δ the Kronecker symbol [6, Sect. 4.1]. Inspired by this formula, we express
+W0 ˇω as a corresponding linear combination of vertex values:
+(W0 ˇω)(x) :=
+4
+∑
+j=1
+λ j(x) ˇω(a j) ,
+(53)
+which results in plain old linear interpolation.
+➋ℓ= 1: Now we are given edge values ˇω([ai,a j]), where [ai,a j] stands for the
+edge connecting ai and a j. Adapting the idea from ℓ= 0, in analogy to (52), we
+write an arbitrary line segment [x,y] ⊂T as a “weighted sum of edges of T”, see
+Figure 7:
+[x,y] ={tx+ (1 −t)y; 0 ≤t ≤1}
+=
+(
+∑
+i
+(tλi(x)+ (1 −t)λi(y))ai ; 0 ≤t ≤1
+)
+=
+(
+∑
+i
+ 
+t∑
+j
+λ j(y)λi(x)+ (1 −t)∑
+j
+λ j(x)λi(y)
+!
+ai ; 0 ≤t ≤1
+)
+=
+(
+∑
+i ∑
+j
+λi(x)λ j(y)(tai + (1 −t)aj) ; 0 ≤t ≤1
+)
+.
+(54)
+Taking the cue from (53) this suggests the deﬁnition
+
+
+Maxwell’s Equations: Continuous and Discrete
+29
+Z
+[x,y]
+W1 ˇω :=∑
+i ∑
+j
+λi(x)λ j(y) ˇω([ai,a j])
+:=∑
+i< j
+(λi(x)λ j(y)−λi(y)λ j(x)) ˇω([ai,aj]) .
+(55)
+Fig. 7 A line segment [x,y]
+inside the tetrahedron T. The
+set equation (54) writes it as a
+weighted sum of edges of T.
+a1
+a2
+a3
+a4
+x
+y
+[x,y]
+➌ℓ= 2: The 2-co-chain ˇω is determined on T by the values ˇω([ai,a j,ak]) it
+assigns to the faces of T, here designated by a triple of vertices. Similar to (54)
+we may write an oriented triangle [x,y,z] as a combination of faces of T weighted
+with products barycentric coordinate functions. The formula, which we skip here,
+suggests the deﬁnition
+Z
+[x,y,z]
+W2 ˇω :=
+4
+∑
+i=1
+4
+∑
+j=1
+4
+∑
+k=1
+λi(x)λ j(y)λk(z) ˇω([ai,a j,ak])
+:= ∑
+i< j<k
+(λi(x)λ j(y)λk(z)+ λk(x)λi(y)λ j(z)+ λ j(x)λk(y)λi(z)) ˇω([ai,aj,ak])
+(56)
+The forms obtained through (55) and (56) are clearly smooth and by Formula 1
+we can recover the associated differential forms according to Deﬁnition 1. For in-
+stance, from (55) we obtain for x ∈T and all v ∈R3
+(W1 ˇω)(x)(v) = lim
+t→0
+1
+t
+Z
+[x,x+tv]
+W1 ˇω
+= lim
+t→0∑
+i< j
+(λi(x)λ j(x+tv)−λ j(x)
+t
+−λ j(x)λi(x+tv)−λi(x)
+t
+) ˇω([ai,a j])
+= ∑
+i< j
+(λi(x)d0 λ j(x)(v)−λ j(x)d0 λi(x)(v)) ˇω([ai,a j]) .
+
+
+30
+Ralf Hiptmair
+The 1-forms β 1
+i,j := λi d0 λ j −λ j d0 λi play the role of “local shape functions” or “lo-
+cal basis forms”. They arise from extending a “unit 1-co-chain” and their Euclidean
+vector proxies read, see (5) and (15),
+V.P.(β 1
+i,j) = λi gradλ j −λ j gradλi .
+(57)
+The same manipulation succeeds for (56) yield for x ∈T and any two vectors
+v,w ∈R3
+(W2 ˇω)(x)(v,w) = lim
+t→0
+2
+t2
+Z
+[x,x+tv,x+tw]
+W2 ˇω
+= 2 ∑
+i< j<k
+
+λi(x)
+ d0 λ j(x)∧d0 λk(x)
+
+(v,w)−
+λ j(x)
+ d0 λi(x)∧d0 λk(x)
+
+(v,w)+
+λk(x)
+ d0 λi(x)∧d0 λ j(x)
+
+(v,w)
+
+ˇω([ai,a j,ak]) .
+We can read off the local basis 2-forms
+β 2
+i,j,k := λi
+ d0 λ j ∧d0 λk
+
+−λ j
+ d0 λi ∧d0 λk
+
++ λk
+ d0 λi ∧d0 λ j
+
+,
+whose vector proxies are
+V.P.(β 2
+i,j,k) = λi gradλ j × gradλk + λ j gradλk × gradλi + λk gradλi × gradλ j .
+(58)
+From the vector proxies of the local basis forms we get alternative vector analytic
+representations of the spaces spanned by them, see Table 3. We point out that all
+the local spaces contain the constant functions and all the vector proxies are linear
+functions, as we demanded in property (W4).
+Table 3 also gives the linear functionals underlying the sampling operators Sℓ,
+the so-called “local degrees of freedom”. Their form in vector proxy notation can
+be deduced from (2).
+Degree
+Local spaces
+Local d.o.f.
+ℓ= 0
+W 0(T) = {x 7→a·x+β, a ∈R3,β ∈R} −→u 7→−→u (ai)
+ℓ= 1
+W 1(T) = {x 7→a×x+b, a,b ∈R3}
+−→u 7→
+R
+[ai,aj] −→u ·ds
+ℓ= 2
+W 2(T) = {x 7→αx+b, α ∈R,b ∈R3}
+−→u 7→
+R
+[ai,aj,ak] −→u ·ndS
+ℓ= 3
+W 3(T) = {x 7→α, α ∈R}
+−→u 7→
+R
+T −→u dx
+Table 3: Vector analytic (vector proxy) formulas for the local spaces on a tetrahedron
+spanned by the local basis forms
+Remark 10. This procedure can even be generalized to ℓ-co-chains in arbitrary di-
+mension n and an n-simplex T ⊂Rn, n ∈N:
+
+
+Maxwell’s Equations: Continuous and Discrete
+31
+(Wℓˇω)(x) = ∑
+I
+ℓ
+∑
+j=0
+(−1)j
+λij d0 λi0 ∧...∧d0 λij ∧...∧d0 λiℓ
+|
+{z
+}
+β ℓ
+I
+
+· ˇω([aI])
+where I = (i0,...,iℓ), 0 ≤l ≤n, runs through all ℓ+1-subsets of {0,...,n} and the
+ordering is induced by the orientation of the corresponding ℓ-facet [ai0,...,aiℓ]. The
+symbol ˇω([aI]) stands for value assigned by the ℓ-co-chain coefﬁcient associated
+with that facet. Of course, the β ℓ
+I can be regarded as local basis forms.
+3.4.3 Local commuting diagram property
+Let us examine the commuting property (48) for the extensions deﬁned by (53), (55),
+and (56). We do this locally on a tetrahedron T. First, for ℓ= 0, given a 0-co-chain
+ˇω ∈C 0(Th) and x,y ∈T, we ﬁnd, thanks to ∑4
+j=1λ j ≡1,
+Z
+[x,y]
+W1(d0 ˇω) =
+4
+∑
+i=1
+4
+∑
+j=1
+λi(x)λ j(y)(d0 ˇω)([ai,a j])
+=
+4
+∑
+i=1
+4
+∑
+j=1
+λi(x)λ j(y)
+  ˇω(a j)−ˇω(ai)
+
+=
+4
+∑
+j=1
+λ j(y) ˇω(a j)−
+4
+∑
+i=1
+λi(x) ˇω(ai)
+= (W0( ˇω))(y)−(W0( ˇω))(x) =
+Z
+∂[x,y]
+W0 ˇω =
+Z
+[x,y]
+d0 W0 ˇω ,
+by deﬁnition of the exterior derivative. This amounts to (48) for ℓ= 0, because x
+and y have been arbitrary.
+In the case ℓ= 1 we proceed along similar lines and pick x,y,z ∈T, write △:=
+[x,y,z] and get on T for ˇω ∈C 2(Th)
+Z
+△
+W2(d1 ˇω) = ∑
+i,j,k
+λi(x)λ j(y)λk(z)
+ d1( ˇω)
+
+([ai,a j,ak])
+= ∑
+i,j,k
+λi(x)λ j(y)λk(z)( ˇω([ai.a j])+ ˇω([a j.ak])+ ˇω([ak.ai]))
+= ∑
+i,j
+λi(x)λ j(y) ˇω([ai,a j])+
+∑
+j,k
+λ j(y)λk(z) ˇω([a j,ak])+
+∑
+k,i
+λk(z)λi(x) ˇω([ak,ai])
+
+
+32
+Ralf Hiptmair
+=
+Z
+[x,y]
+W1 ˇω +
+Z
+[y,z]
+W1 ˇω +
+Z
+[z,x]
+W1 ˇω =
+Z
+∂[x,y,z]
+W1 ˇω =
+Z
+[x,y,z]
+d1 W1 ˇω .
+Since this holds for any triangle inside T we conclude (48) for ℓ= 1. Of course,
+when adopting the above construction of Wℓin any dimension, (48) will always
+hold.
+3.4.4 Global Whitney forms
+Thus far, the construction of Wℓhas been utterly local. We aim for a integral form
+on the entire domain Ω, however. According to Lemma 1 we have to verify that the
+traces of the local co-chain extensions agree on both sides of all faces of the mesh.
+This is ensured, once we can demonstrate that the trace of Wℓ, 0 ≤ℓ< 3, onto a face
+f ∈F2(Th) depends only on the (unique) co-chain coefﬁcients associated with that
+face.
+To discuss this for ℓ= 1 we pick a tetrahedron T = [a1,a2,a3,a4] and, without
+loss of generality, the face f = [a1,a2,a3]. For any x,y ∈f the construction gives
+∑
+[x,y]
+W1( ˇω) =
+4
+∑
+i=1
+4
+∑
+j=1
+λi(x)λ j(y) ˇω([ai,aj]) = ∑
+i:ai∈f ∑
+j:aj∈f
+λi(x)λ j(y) ˇω([ai,a j]) ,
+because barycentric coordinate functions not belonging to vertices of f vanish on
+that face. Hence t f W1 ˇω depends only on ˇω|f and will be independent of the adja-
+cent tetrahedron on which we have built the Whitney map, cf. Figure 8.
+Fig. 8 The compatibility
+of local extensions of 1-co-
+chains in 2D by means of the
+Whitney map. The underlying
+co-chain had coefﬁcient 1
+for the vertical edge, 0 on all
+other edges. The tangential
+continuity of the vector prox-
+ies hints at the agreement of
+traces of the local extensions.
+Summing up, the local constructions introduced in the previous section deﬁne
+integral forms on Ωand, thus, spaces W ℓ(Th) ⊂L2Λℓ(Ω) of Whitney ℓ-forms
+on the tetrahedral mesh Th. By construction, the elements of W ℓ(Th) are valid
+integral forms, because their integrals make sense for any ℓ-dimensional oriented
+sub-manifold of Ω.
+
+
+Maxwell’s Equations: Continuous and Discrete
+33
+3.4.5 Afﬁne equivalence
+There is a unique afﬁne map Φ between any two non-degenerate tetrahedra T and bT
+such that T = Φ(bT). To begin with, since the pullback operator Φ∗from Deﬁnition 2
+commutes with both the exterior derivative and the wedge product, we readily infer
+from the formulas for the local basis forms given in Section 3.4.2 that those are
+mapped onto each other under pullback
+bβ ℓ
+bf = Φ∗β ℓ
+f ,
+f = Φ( bf ) .
+Here ˆβ ℓ
+bf is the basis form on bT associated with the ℓ-dimensional facet bf of bT,
+and β ℓ
+f a basis form on T belonging to the ℓ-facet f of T. This is a key property,
+known as “afﬁne equivalence” in the theory of ﬁnite elements [24, Sect. 2.3]. As a
+consequence the pullback also transforms local spaces of Whitney forms into each
+other.
+Remark 11. Invariance under pullback paves the way for deﬁning parametric Whit-
+ney forms, cf. [24, Sect. 4.3]. If the cells of a mesh are obtained as diffeomorphic
+images of a single simplex, inverse pullbacks of Whitney forms on that simplex sup-
+ply the building blocks for piecewise smooth integral forms with facet integrals as
+degrees of freedom.
+3.4.6 General discrete differential forms
+The Whitney forms introduced above are just the simplest (lowest order) represen-
+tatives of families of discrete differential forms on meshes that comprise members
+of any local polynomial degree, the higher order discrete differential forms.
+There is a uniﬁed way to obtain generalizations of Whitney forms on simpli-
+cial meshes in any dimension and of arbitrarily high polynomial degree. This was
+pioneered in [32] and fully elaborated in [6, Section 4], using a device from co-
+homology theory, the Koszul lifting. Possible degrees of freedom for these discrete
+differential forms are weighted traces on suitable facets of the mesh (“moments”),
+but there might be more “geometric” choices, see [19, Sect. 25] and [43]. Yet, the
+principal concern when choosing local basis functions for higher order discrete dif-
+ferential are computational aspects like ease of evaluation [1], conditioning of the
+resulting linear systems [2], or separation of functions in the kernel of dℓ[34,48].
+Counterparts of Whitney forms have been found for tensor product meshes,
+see [5] for their construction, and even on hybrid meshes comprising tetrahedra,
+hexahedra, and prisms [9,10,41]. Suitable higher order extensions are also described
+in these articles.
+
+
+34
+Ralf Hiptmair
+3.5 Commuting projections
+3.5.1 Nodal interpolation
+The nodal interpolation operators Iℓfrom (51) for Whitney forms satisfy the very
+special properties of perfect locality (Lemma 3) and that they commute with the
+exterior derivative (Lemma 2). These extraordinary features are somewhat marred
+by the fact that, in 3D,
+except for ℓ= 3, the nodal interpolation operators Iℓare not
+bounded on the energy space HΛℓ(Ω), as deﬁned in (31).
+This is well known for ℓ= 0: the point sampling operator S0 is not bounded on
+the standard Sobolev space H1(Ω), because there is no continuous embedding of
+H1(Ω) into C0(Ω), as H1(Ω) contains unbounded functions. In 3D counterexam-
+ples can easily be constructed for ℓ= 1,2, too. Even worse, for ℓ= 1 the operator
+I1 fails to be bounded even on the space of vectorﬁelds with components in H1(Ω),
+though the norm of this space is clearly stronger than that of H(curl,Ω).
+This ﬂaw thwarts interpolation error estimates of the form
+−→u −I1−→u
+
+L2(Ω) ≤
+Ch
+−→u
+
+H1(Ω) with a constant independent of −→u (h is the mesh width of Th). We
+have to settle for estimates like [35, Thm. 3.14]
+−→u −I1−→u
+
+L2(Ω) ≤Ch
+−→u
+
+H1(Ω) +
+curl−→u
+
+H1(Ω)
+
+∀−→u sufﬁciently smooth ,
+(59)
+where C > 0 depends only on the shape regularity of the mesh (The notion of shape
+regularity of a mesh is presented, e.g., in [35, Section 3.6] following [24, Sec-
+tion 3.1].). Yet, for many purposes in numerical analysis (59) is not sufﬁcient.
+Fortunately, there is a very special interpolation error estimate for ℓ= 1 that often
+comes handy [35, Lemma 4.6]:
+Lemma 4. The interpolation operator I1 : C∞(Λ1(Ω)) →W 1 can be extended to a
+bounded operator on {−→u ∈(H1(Ω))3 : curl−→u ∈W 2(Th)} (a space of vectorﬁelds
+with components in H1(Ω), whose curls are piecewise constant) and satisﬁes
+−→u −I1−→u
+
+L2(Ω) ≤Ch
+−→u
+
+H1(Ω)
+∀−→u ∈(H1(Ω))3, curl−→u ∈W 2(Th) ,
+with a constant C > 0 depending only on the shape regularity of the mesh Th.
+Proof. Pick one tetrahedron T ∈Th and, without loss of generality, assume 0 ∈T.
+Then deﬁne the lifting operator, cf. the “Koszul lifting” [6, Sect. 3.2],
+−→
+w 7→K−→
+w ,
+K−→
+w(x) := 1
+3
+−→
+w(x)× x ,
+x ∈T .
+(60)
+Elementary calculations reveal that for any constant vectorﬁeld −→
+w ≡const.
+curlK−→
+w = −→
+w ,
+(61)
+
+
+Maxwell’s Equations: Continuous and Discrete
+35
+K−→
+w
+
+L2(T) ≤hT
+−→
+w
+
+L2(T) ,
+(62)
+K−→
+w ∈W 1(T) .
+(63)
+Here hT is the size of T. The continuity (62) permits us to extend K to (L2(T))3.
+Given −→u ∈(H1(T))3 with curl−→u ≡const3, by (63) we know that Kcurl−→u is a
+linear function. Thus, an inverse inequality yields
+Kcurl−→u
+
+H1(T) ≤Ch−1
+T
+Kcurl−→u
+
+L2(T)
+(62)
+≤C
+curl−→u
+
+L2(T) ,
+(64)
+with C > 0 depending only on shape regularity of T. Next, by (61) and the existence
+of a scalar potential, see (8),
+curl(−→u −Kcurl−→u ) = 0
+⇒
+∃−→p ∈H1(T) :
+−→u −Kcurl−→u = grad−→p .
+(65)
+From (64) we conclude that −→p ∈H2(T) and |−→p |H2(T) ≤C
+−→u
+
+H1(T). Moreover,
+thanks to the commuting diagram property we have
+−→u −I1−→u = Kcurl−→u −I1Kcurl−→u
+|
+{z
+}
+=0 by (63)
++grad(−→p −I0−→p ) .
+(66)
+Next, recall that I0 agrees with standard linear interpolation on a tetrahedron.
+That is bounded on H2(T) and its interpolation error satisﬁes |−→p −I0−→p |H1(T) ≤
+ChT|−→p |H2(T). Thus, we arrive at
+−→u −I1−→u
+
+L2(T) = |−→p −I0−→p |H1(T) ≤ChT|−→p |H2(T) ≤ChT
+−→u
+
+H1(T) .
+Summation over all tetrahedra of the mesh ﬁnishes the proof.
+3.5.2 Decomposition based projections
+If boundedness on HΛℓ(Ω) (deﬁned in (31)) and the commuting diagram property
+matter most and one can dispense with locality (Lemma 3), there is a simple re-
+placement for nodal interpolation. We review its construction for a bounded domain
+Ω⊂R3 with trivial topology, cf. Theorem 4, equipped with a tetrahedral mesh Th.
+As tools we use
+(i) the L2Λℓ(Ω)-orthogonal Helmholtz decomposition [40, Sect. 3.7]:
+L2Λℓ(Ω) = dℓ−1 HΛℓ−1(Ω)
+|
+{z
+}
+=Ker(dℓ)∩W ℓ(Th)
+⊕X ℓ(Ω) .
+(67)
+For ℓ= 0, the ﬁrst space should be replaced by the set of constant functions. On
+the complement of Ker(dℓ) there holds, cf. [35, Cor. 4.4],
+
+
+36
+Ralf Hiptmair
+∥ω∥L2Λℓ(Ω) ≤C∥dℓω∥L2Λℓ+1(Ω)
+∀ω ∈X ℓ(Ω) ,
+(68)
+with constants C > 0 depending only on Ω.
+(ii) the L2Λℓ(Ω)-orthogonal discrete Helmholtz decomposition
+W ℓ(Th) = dℓ−1W ℓ−1(Th)⊕X ℓ(Th) ,
+(69)
+where the ﬁrst space coincides with the kernel of dℓin W ℓfor ℓ> 0, and, again,
+is the constant functions for ℓ= 0.
+The estimate (68) remains true for Whitney forms. As a tool the proof uses
+Lemma 4 and so-called regular decompositions that will be introduced later in Sec-
+tion 4.4, Page 42.
+Lemma 5 (Discrete Friedrichs inequality [35, Thm. 4.7]). With a constant de-
+pending only on Ωand the shape regularity of the mesh Th
+∥ωh∥L2Λℓ(Ω) ≤C∥dℓωh∥L2Λℓ+1(Ω)
+∀ωh ∈X ℓ(Th) .
+Next, we introduce a lifting operator Lℓ: HΛℓ(Ω) →X ℓ−1(Th) by
+(dℓ−1Lℓω −ω,dℓ−1ηh)L2Λℓ(Ω) = 0
+∀ηh ∈X ℓ−1(Th) .
+(70)
+Since the kernel of dℓ−1 has been removed from X ℓ−1(Th), this is a valid deﬁnition.
+It is the key ingredient in
+Pℓ:= dℓ−1◦Lℓ+ Lℓ+1 ◦dℓ.
+(71)
+Lemma 6 (“Helmholtz projection”). The linear operator Pℓaccording to (71) is a
+bounded projector HΛℓ(Ω) →W ℓ(Th) and commutes with the exterior derivative.
+Proof. To see that P2
+ℓ= Pℓnote that dℓ−1(Lℓωh) = ωh for all ωh ∈Ker(dℓ) ∩
+W ℓ(Th) and Lℓ+1dℓωh = ωh for all ωh ∈X ℓ(Th).
+Clearly, ∥dℓ−1Lℓω∥L2Λℓ(Ω) ≤∥ω∥L2Λℓ(Ω) for every ω ∈L2Λℓ(Ω). Then, by
+virtue of Lemma 5, Lℓ: HΛℓ(Ω) →HΛℓ−1(Ω) is bounded. The boundedness of
+Pℓ: HΛℓ(Ω) →HΛℓ(Ω) is an immediate consequence.
+The commuting diagram property follows from dℓ◦dℓ−1 = 0:
+dℓ◦Pℓ= dℓ◦Lℓ+1 ◦dℓ= (dℓ◦Lℓ+1 + Lℓ+2 ◦dℓ+1)◦dℓ= Pℓ+1 ◦dℓ.
+Evidently, both Helmholtz decompositions have a distinctly non-local character,
+because they both rely on the L2Λℓ(Ω) inner product on Ω. Thus, Pℓcannot be local
+in the sense that Pℓω|T for T ∈Th depends only on ω restricted to a neighborhood
+of T.
+
+
+Maxwell’s Equations: Continuous and Discrete
+37
+3.5.3 Local quasi-interpolation
+The ﬁrst to achieve a breakthrough was J. Sch¨oberl in [46], a manuscript that was
+published only as a technical report. He was inspired by the well-known so-called
+quasi-interpolation operator, see [42, Sect. 2.1.1]
+Q0 :
+(L2Λ0(Ω) →W 0(Th) ,
+ω
+7→
+∑
+p∈F0(Th)
+R
+Tp wp(x)ω(x)dx·β 0
+p ,
+(72)
+where Tp ∈F3(Th) is a cell abutting the vertex p, and wp ∈L∞(Ω) is a function
+supported on Tp that satisﬁes
+Z
+Ωwpβ 0
+q dx =
+(
+1
+, if p = q ,
+0
+, otherwise,
+p,q ∈F0(Th) .
+(73)
+These properties ensure that Q0 is a bounded projector: Q2
+0 = Q0. Moreover, func-
+tions that are constant in a local neighborhood of T are preserved on T.
+Sch¨oberl’s feat was to generalize Q0 to a family of bounded operators Qℓ:
+L2Λℓ(Ω) →W ℓ(Th) deﬁned as
+Q1ω :=
+∑
+[x,y]∈F1(Th)
+
+
+
+Z
+Tx
+Z
+Ty
+wx(x′)wy(y′){
+Z
+[x′,y′]
+ω} dy′ dx′
+
+
+·β 1
+[x,y] ,
+(74)
+Q2ω :=
+∑
+[x,y,z]∈F2(Th)
+
+
+
+Z
+Tx
+Z
+Ty
+Z
+Tz
+wx(x′)wy(y′)wz(z′){
+Z
+[x′,y′,z′]
+ω} dz′ dy′ dx′
+
+
+·β 2
+[x,y,z] .
+(75)
+All these operators satisfy dℓ◦Qℓ= Qℓ+1 ◦dℓand enjoy the approximation property
+∥ω −Qℓω∥L2Λℓ(Ω) ≤Ch|ω|H1Λℓ(Ω) ,
+∀ω ∈H1Λℓ(Ω) ,
+(76)
+with C > 0 depending only on shape regularity. Here H1Λℓ(Ω) designates the space
+of ℓ-forms with vector proxy components in H1(Ω). However, except for Q0 the
+other quasi-interpolation operators are no projections. The same ﬂaw also marred a
+molliﬁer based construction presented in [23].
+The ultimate solution, an explicit formula providing bounded, local, commuting,
+projectors that map HΛℓ(Ω) →W ℓ(Th) for any simplicial mesh in any dimension
+n and 0 ≤ℓ≤n, was only recently discovered by R. Falk and R. Winther in [29,
+Eq. (4.2)]. As Sch¨oberl’s invention, it is a quasi-interpolation based on weighted
+local integrals. Unfortunately, the scheme is too complicated to be covered here in
+detail and we merely summarize the result, which is an immensely powerful tool in
+the numerical analysis of discrete differential forms.
+
+
+38
+Ralf Hiptmair
+Theorem 9 (Falk-Winther local commuting projections [29, Thms. 4.5, 4.7,
+5.2]). For any simplicial mesh Th of Ω⊂Rn there is a family of linear bounded
+projection operators Qℓ: HΛℓ(Ω) →W ℓ(Th), ℓ∈{0,...,n}, such that
+(i) they commute with the exterior derivative
+Qℓ+1 ◦dℓ= dℓ◦Qℓ
+on
+HΛℓ(Ω) ,
+(77)
+(ii) they are quasi-local: for all T ∈Th the restriction Qω|T depends only on ω
+restricted to a mesh-neighborhood ΩT of T,
+(iii) they satisfy the approximation property
+∥ω −Qℓω∥L2Λℓ(T) ≤ChT |ω|H1Λℓ(ΩT ) ,
+∀ω ∈H1Λℓ(ΩT) ,
+(78)
+where C > 0 depends only on the shape regularity of Th and ℓ.
+Indeed, the construction in [29] even covers higher-order generalizations of
+Whitney forms. A simpliﬁed presentation for Whitney forms in 2D is given in [30].
+4 Whitney Form Galerkin Discretization of the Maxwell Cavity
+Problem
+In this section we perform an a priori convergence analysis for the Galerkin dis-
+cretization of a particular Maxwell boundary value problem in frequency domain.
+Trial and test spaces are supplied by Whitney 1-forms, aka lowest order edge el-
+ements. This will allow us to discuss a few fundamental considerations and tech-
+niques. Of course, only a tiny fraction of the numerical analysis developed for com-
+putational electromagnetism can be covered.
+Throughout this section Ω⊂R3 is a Lipschitz polyhedron, equipped with a sim-
+plicial mesh Th.
+Bibliographical notes
+The main references for this section are [35, Sect. 5] and [40, Ch. 7]. Reﬁned duality
+estimates are given in [50], whereas for the analysis of edge element discretizations
+of the time-dependent linear Maxwell equations like (33) we refer to [25] and [49].
+4.1 Maxwell cavity problem
+We consider Maxwell’s equations on Ωwith local linear material laws (22) that
+can be expressed by means of Hodge operators. Their vector proxy representation is
+
+
+Maxwell’s Equations: Continuous and Discrete
+39
+given in (23). Moreover, we rely on a frequency domain model, that is, the evolution
+equations are subject to a continuous Fourier transform in time, which amounts to
+replacing every temporal derivative ∂t with a multiplication with ıω, ω the angular
+frequency and ı the imaginary unit. The unknowns will be complex valued forms on
+Ω(“phasors”), for which we retain the same symbols as in Section 2.3:
+dℓe = −ıω ⋆µ h
+d2−ℓh = ıω ⋆ε e+ j
+
+in Ω
+,
+ℓ= 1 .
+(79a)
+(79b)
+We impose impedance boundary conditions as a simple version of so-called absorb-
+ing (transparent) boundary conditions:
+t∂Ωh = ⋆λt∂Ωe
+on ∂Ω,
+(80)
+with an impedance λ, which is a Riemannian metric on ∂Ω.
+For the remainder of this section we switch to the vector proxy perspective intro-
+duced in Section 2.2.2. Then the a-based variational formulation (33) (in frequency
+domain) reads: seek −→a ∈V such that
+aM(−→a ,−→a ′) :=
+Z
+Ω
+µ−1(x)curl−→a ·curl−→a ′ −ω2ε(x)−→a ·−→a ′ dx−
+ıω
+Z
+∂Ω
+λ(x)−→a t ·−→a ′
+t dS = ıω
+Z
+Ω
+−→j ·−→a ′ dx
+∀−→a ′ ∈V ,
+(81)
+posed on the Hilbert space (subscript t tags a tangential component trace, cf. Table 2)
+V = H∂Ω(curl,Ω) := {−→
+w ∈H(curl,Ω) : −→
+w t ∈(L2(∂Ω))3} ,
+(82)
+with norm
+−→
+w
+2
+H∂Ω(curl,Ω) :=
+−→
+w
+2
+L2(Ω) +
+curl−→
+w
+2
+L2(Ω) +
+−→
+w t
+2
+L2(∂Ω) .
+(83)
+This is the maximal Hilbert space on which the bilinear form aM of (81) is still
+continuous. We remind that µ, ε, and λ are bounded and uniformly positive deﬁnite
+tensor coefﬁcients.
+Deliberately, the degree of the form e (and, indirectly, h) was retained as param-
+eter ℓin (79a). When we set ℓ= 0, that is, e is read as a 0-form, h as a 2-form, and
+j as a 3-form, then we arrive at the equations of the acoustic cavity problem in fre-
+quency domain. Its “a-based” variational formulations reads in vector proxies: seek
+−→u ∈H1(Ω)
+aH(−→u ,−→u ′) :=
+Z
+Ω
+µ−1(x)grad−→u ·grad−→u ′ −ω2ε(x)−→u −→u ′ dx+
+
+
+40
+Ralf Hiptmair
+ıω
+Z
+∂Ω
+λ(x)−→u −→u ′ dS =
+Z
+Ω
+f−→u ′ dx
+∀−→u ′ ∈H1(Ω) .
+(84)
+Evidently, there are sweeping structural similarities between (81) and (84), of
+course. Yet, in one respect the acoustic boundary value problem will be substan-
+tially simpler than its electromagnetic counterpart. Hence, it makes didactic sense,
+to discuss (84) before addressing the more difﬁcult (81).
+For the sake of simplicity, in the sequel we restrict ourselves to the case µ = ε =
+λ ≡1 of constant coefﬁcients scaled to unity. This does not affect the gist of any
+argument.
+4.2 Splittings of H(curl,Ω)
+In this section we provide decompositions of vectorﬁelds in H(curl,Ω) into curl-
+free components and some complement spaces. They have turned out to be pivotal
+tools in the mathematical and numerical analysis of Maxwell’s equations. For the
+sake of simplicity, we assume trivial topology of Ωthroughout, cf. Theorem 4.
+4.3 Helmholtz decomposition
+The Helmholtz decomposition of (67) can be restricted to HΛℓ(Ω) and then pro-
+vides an HΛℓ(Ω)-orthogonal splitting of HΛℓ(Ω). The important observation is
+that the X ℓ-component will enjoy some smoothness. Let us look at Helmholtz de-
+compositions from the angle of vector proxies in 3D: For ℓ= 1 we get
+H(curl,Ω) = gradH1(Ω)⊕(H(curl,Ω)∩H0(div0,Ω))
+|
+{z
+}
+=:XT (Ω)
+,
+(85)
+where
+H0(div0,Ω) := {−→
+w ∈(L2(Ω))3 : div−→
+w = 0, −→
+w ·n = 0 on ∂Ω} ,
+(86)
+and for ℓ= 2 the Helmholtz decomposition becomes
+H(div,Ω) = curlH(curl,Ω)⊕(H(div,Ω)∩H0(curl0,Ω)) ,
+(87)
+with
+H0(curl0,Ω) := {−→
+w ∈(L2(Ω))3 : curl−→
+w = 0, −→
+w t = 0 on ∂Ω} .
+(88)
+The enhanced smoothness of the complement spaces like XT(Ω) is asserted in the
+following result, see [3, Section 2]:
+
+
+Maxwell’s Equations: Continuous and Discrete
+41
+Theorem 10 (Regularity of complements in Helmholtz decomposition). If Ωhas
+C1,1-smooth boundary or Ωis convex, then XT(Ω) := H(curl,Ω) ∩H0(div0,Ω)
+(equipped with the norm of H(curl,Ω)) is continuously embedded into (H1(Ω))3.
+Proof. (outline) For Ωwith smooth boundary, integration by parts and manipula-
+tions of surface differential operators lead to the identity
+−→
+w
+2
+H1(Ω) +
+Z
+∂ΩB(−→
+w × n,−→
+w × n)dS =
+curl−→
+w
+2
+L2(Ω) +
+div−→
+w
+2
+L2(Ω) ,
+where B is the curvature tensor on ∂Ω. The second ingredient for the proof is
+the density of (H1(Ω))3 in XT(Ω). This holds true, provided that the Neumann
+problem for −∆is 2-regular on Ω, which is guaranteed under the assumptions of
+the theorem, see [3, Lemma 2.10].
+A simple counterexample demonstrates that the assumptions of the theorem are
+necessary:
+Fig. 9 A domain Ωgenerated
+by forming the tensor product
+of a 2D polygon with a re-
+entrant corner (angle φ ∗>
+π) with an interval (in z-
+direction). The shaded planes
+correspond to ∂Ω.
+z
+r
+φ ∗
+Ω
+In the geometric setting depicted in Figure 9, consider the function, given in
+cylindrical coordinates,
+ψ(r,φ,z) = rπ/ω cos( π
+φ∗φ) ,
+0 ≤φ ≤φ∗, r > 0 .
+We ﬁnd that in a neighborhood of the edge −→
+w := gradψ satisﬁes
+• curl−→
+w = 0 and div−→
+w = 0,
+• −→
+w ·n = 0 on ∂Ω,
+• but −→
+w ̸∈(H1(Ω))3, because “
+R
+Ω|grad−→
+w|2 dx = ∞”.
+As a consequence, functions in XT(Ω) may fail to belong to (H1(Ω))3 in case of
+non-smooth Ωwith reentrant (“non-convex”) edges.
+
+
+42
+Ralf Hiptmair
+4.4 Regular decomposition
+To remedy the potential loss of H1(Ω)-regularity of functions in XT(Ω), we can
+sacriﬁce the strict L2(Ω)-orthogonality of the Helmholtz decomposition (85) and
+settle for decompositions that are “merely” stable. Those will be dubbed “regular
+decompositions” in the sequel [35, Lemma 2.4].
+Theorem 11 (Regular decomposition). There are continuous linear mappings R :
+H(curl,Ω) →(H1(Ω))3 and N : H(curl,Ω) →H(curl0,Ω) := H(curl,Ω) ∩
+Ker(curl) such that
+Id = R+ N
+and
+R−→
+w
+
+H1(Ω) ≤C
+curl−→
+w
+
+L2(Ω) .
+This theorem can be remembered as
+“
+H(curl,Ω) = (H1(Ω))3 + curl-free
+” .
+Existence of regular decompositions can be established easily using a powerful
+lifting operator that has been discovered recently [27]:
+Theorem 12 (Regularized Poincar´e lifting). There is a continuous operator Y :
+(L2(Ω))3 →(H1(Ω))3 that satisﬁes
+curlY(−→
+w) = −→
+w
+∀−→
+w ∈H(div0,Ω) .
+Proof (of Theorem 11). We simply deﬁne R := Y ◦curl and N := Id−R. The map-
+ping properties of R are immediate from those of Y.
+To demonstrate an application of regular decompositions, we use them to prove
+the discrete Friedrichs inequality from Lemma 5 for ℓ= 1.
+Proof (of Lemma 5 for ℓ= 1). Pick −→x h ∈X 1(Th) and rewrite
+−→x h
+2
+L2(Ω) =
+ −→x h −I1R−→x h,−→x h
+
+L2(Ω) +
+ (I1 −Id)R−→x h,−→x h
+
+L2(Ω)
++
+ R−→x h,−→x h
+
+L2(Ω) .
+(89)
+Since, by the commuting diagram property for nodal interpolation from Lemma 2,
+curl(−→x h −I1R−→x h) = curl−→x h −I2(curlR−→x h) = curl−→x h −I2(curl−→x h) = 0 ,
+the ﬁrst term in (89) vanishes, because −→x h is orthogonal to Ker(curl)∩W 1(Th). To
+estimate the second term Lemma 4 and the continuity of R come handy and yield
+(I1 −Id)R−→x h
+
+L2(Ω) ≤Ch
+R−→x h
+
+H1(Ω) ≤Ch
+curl−→x h
+
+L2(Ω) .
+(90)
+Again citing the continuity of R to bound the third term, we ﬁnally arrive at
+
+
+Maxwell’s Equations: Continuous and Discrete
+43
+−→x h
+2
+L2(Ω) ≤C(h + 1)
+curl−→x h
+
+L2(Ω)
+−→x h
+
+L2(Ω) .
+All constants may depend only on the shape regularity of the mesh and the domain
+Ω.
+Remark 12. Since tangential traces of vectorﬁelds in (H1(Ω))3 are contained in
+(L2(∂Ω))3, we ﬁnd that R(H(curl,Ω)) ⊂H∂Ω(curl,Ω) for the operator R from
+Theorem 11. This enables us to restrict regular decompositions to H∂Ω(curl,Ω)
+using the restrictions of the operators of Theorem 11 to H∂Ω(curl,Ω). Below we
+will tacitly use these “H∂Ω(curl,Ω)-restricted” regular decomposition operators
+when needed.
+4.5 Helmholtz cavity problem: Well-posedness
+We ﬁrst tackle the well-posedness of the simpler Helmholtz cavity variational prob-
+lem (84). The key tool will be a Fredholm alternative argument [28, Theorem D.5],
+[40, Sect. 2.2.4].
+Theorem 13 (Fredholm alternative). Let X,Y be Banach spaces, T : X →Y a bi-
+jective bounded linear operator, and K : X →Y a compact linear operator. Then for
+T + K it is equivalent
+T + K injective
+⇔
+T + K bijective
+⇔
+T + K surjective .
+In order to apply this theorem we split the bilinear form aH into
+tH(−→u ,−→u ′) :=
+Z
+Ω
+grad−→u ·grad−→u ′ + −→u −→u ′ dx ,
+kH(−→u ,−→u ′) := −
+Z
+Ω
+(ω2 + 1)−→u −→u ′ dx+ ıω
+Z
+∂Ω
+−→u −→u ′ dS ,
+−→u ,−→u ′ ∈H1(Ω) .
+Obviously, aH = tH +kH and the operator TH : H1(Ω) →(H1(Ω))′ associated with
+tH clearly is an isomorphism. To see the compactness of the operator KH : H1(Ω) →
+(H1(Ω))′ induced by kH we appeal to (generalized) Rellich compactness theorems
+[28, Section 5.7]:
+Theorem 14 ((Generalized) Rellich compactness theorem). The following em-
+beddings are compact:
+H1(Ω) ⊂L2(Ω) and H
+1
+2 (∂Ω) ⊂L2(∂Ω).
+Since the two parts of kH are continuous on L2(Ω) and L2(∂Ω), respectively, and
+the point trace H1(Ω) →H
+1
+2 (∂Ω) is continuous, from Theorem 14 we conclude
+the compactness of KH. Thus, the assumptions of the Fredholm alternative from
+Theorem 13 are satisﬁed for TH + KH : H1(Ω) →(H1(Ω))′.
+
+
+44
+Ralf Hiptmair
+Lemma 7 (Injectivity of aH). The operator AH : H1(Ω) →(H1(Ω))′ induced by
+the bilinear form aH of the Helmholtz cavity problem is injective.
+Proof. We have to show that AHu = 0 implies u = 0, or, equivalently
+aH(−→u ,−→u ′) = 0
+∀−→u ′ ∈H1(Ω)
+⇒
+−→u = 0 .
+If, for all −→u ′ ∈H1(Ω),
+Z
+Ω
+grad−→u ·grad−→u ′ −ω2−→u −→u ′ dx+ ıω
+Z
+∂Ω
+−→u −→u ′ dS = 0 ,
+then we can infer
+(i) −→u ∈H1
+0(Ω), when choosing −→u ′ = −→u and considering the imaginary part,
+(ii) −∆−→u −ω2−→u = 0 in the sense of distributions, by testing with −→u ′ ∈C∞
+0 (Ω),
+(iii) grad−→u ·n = 0 on ∂Ωfrom (ii) and testing with −→u ′ ∈C∞(Ω).
+Thus, since both −→u = 0 and grad−→u ·n = 0 on ∂Ω, extension by zero to R3 gives a
+solution e−→u ∈H1(R3) of −∆−→u −ω2−→u = 0. It is known that such a function must
+vanish everywhere, see [26, Sect. 3.2] for a discussion of the the uniqueness of
+solutions of acoustic scattering problems.
+Summing up, AH : H1(Ω) →(H1(Ω))′ is an isomorphism, which implies the
+continuous dependence of the solution u ∈H1(Ω) of (84) on the data f ∈L2(Ω)
+(even f ∈(H1(Ω))′).
+Remark 13. What we have established for aH is often stated as a so-called G˚arding
+inequality:
+Corollary 2 (G˚arding inequality). There is a compact operator KH : H1(Ω) →
+(H1(Ω))′ such that
+∃C > 0 :
+Re{aH(−→u ,−→u )+
+D
+KH−→u ,−→u
+E
+} ≥C∥−→u ∥2
+H1(Ω)
+∀−→u ∈H1(Ω) .
+4.6 Maxwell cavity problem: Well-posedness
+Contrasting the bilinear form aM from (81) for the Maxwell cavity problem with its
+Helmholtz counterpart aH from (84), we ﬁnd a striking difference. When separating
+the three parts of aM
+aC(−→
+w,−→
+w ′) :=
+Z
+Ω
+curl−→
+w ·curl−→
+w ′ + −→
+w ·−→
+w ′ dx ,
+aZ(−→
+w,−→
+w ′) := −
+Z
+Ω
+(ω2 + 1)−→
+w ·−→
+w ′ dx ,
+
+
+Maxwell’s Equations: Continuous and Discrete
+45
+a∂(−→
+w,−→
+w ′) := ıω
+Z
+∂Ω
+−→
+w t ·−→
+w ′
+t dS
+with aM = aC + aZ + a∂, and writing C,Z,B : H∂Ω(curl,Ω) →H∂Ω(curl,Ω)′
+(H∂Ω(curl,Ω) deﬁned in (82)) for the associated operators, we discover that nei-
+ther Z nor B are compact! The reason is that Ker(curl) has inﬁnite dimension so
+that H(curl,Ω) cannot be compactly embedded in (L2(Ω))3.
+4.6.1 Generalized G˚arding inequality
+The ﬁrst insight is that Ker(curl) requires a special treatment in the analysis of aM,
+because on Ker(curl) the “zero-order” aZ-part of the bilinear form will have to be
+taken into account in the bijective operator T when applying the Fredholm alterna-
+tive of Theorem 13. The most elementary criterion for invertibility in a variational
+framework (in Banach spaces) is uniform positivity of (the real part) of a bilinear
+form. Awkwardly, the reversed sign of aZ compared to the “second-order” aC-part
+initially foils this simple argument. Sloppily speaking, on Ker(curl) the sign of aZ
+has to be “corrected” ﬁrst. This can be accomplished by the regular decomposition
+from Theorem 11, because it can serve as a tool to separate Ker(curl) ⊂H(curl,Ω)
+of a complement space, on which a bilinear form that is continuous on (L2(Ω))3
+gives rise to a compact operator.
+The details are as follows: recall that Theorem 11 together with Remark 12 pro-
+vides bounded operators R : H∂Ω(curl,Ω) →(H1(Ω))3 and N : H∂Ω(curl,Ω) →
+H∂Ω(curl,Ω)∩Ker(curl) such that R+N = Id. Based on these operators, we deﬁne
+the sign-ﬂip isomorphism
+F := R−N = 2R−Id : H∂Ω(curl,Ω) →H∂Ω(curl,Ω) .
+(91)
+For the sake of brevity, we choose the following tags for the components of a regular
+decomposition of −→
+w ∈H(curl,Ω):
+−→
+w ∗:= R−→
+w ,
+−→
+w 0 := N−→
+w
+⇒
+−→
+w = −→
+w ∗+ −→
+w 0 .
+(92)
+In this notation we have — mind the −-sign! —
+F−→
+w = F(−→
+w ∗+ −→
+w 0) = −→
+w ∗−−→
+w 0 .
+(93)
+Now, let us scrutinize the parts of aM under the lens of a regular decomposition after
+the sign-ﬂip isomorphism has been applied to the test function:
+(C)
+From curlR(−→
+w) = curl−→
+w and curl−→
+w 0 = 0 it is immediate that
+aC(−→
+w,F−→q ) =
+ curl−→
+w ∗,curl−→q ∗
+L2(Ω) .
+(94)
+(Z)
+By (93) and bilinearity
+
+
+46
+Ralf Hiptmair
+aZ(−→
+w,F(−→q )) = ω2 −
+ −→
+w ∗,−→q ∗
+L2(Ω) +
+−→
+w ∗,−→q 0
+L2(Ω) −
+−→
+w 0,−→q ∗
+L2(Ω) +
+−→
+w 0,−→q 0
+L2(Ω)
+
+.
+(95)
+The key conclusion from the continuity of R : H∂Ω(curl,Ω) →(H1(Ω))3 and
+the Rellich compactness theorem (Theorem 14) is that the bilinear form on
+H∂Ω(curl,Ω), given by
+(−→
+w,−→q ) 7→−
+ −→
+w ∗,−→q ∗
+L2(Ω) +
+−→
+w ∗,−→q 0
+L2(Ω) −
+−→
+w 0,−→q ∗
+L2(Ω) ,
+(96)
+spawns a compact operator, because at least one of the arguments in the L2(Ω)
+inner products belongs to (H1(Ω))3.
+(B)
+Similarly, for the boundary part we obtain
+a∂(−→
+w,F(−→q )) = ıω
+  −→
+w ∗
+t ,−→q ∗
+t
+
+L2(∂Ω) −
+−→
+w ∗
+t ,−→q 0
+t
+
+L2(∂Ω) +
+−→
+w 0
+t ,−→q ∗
+t
+
+L2(∂Ω) −
+−→
+w 0
+t ,−→q 0
+t
+
+L2(∂Ω)
+
+.
+(97)
+Observe that −→
+w ∗
+t and −→q ∗
+t are tangential traces of vector ﬁelds in (H1(Ω))3.
+They belong to a space of tangential vector ﬁelds on ∂Ωthat is compactly em-
+bedded in (L2(∂Ω))3. Consequently, invoking Theorem 14 again, the operator
+H∂Ω(curl,Ω) →(H∂Ω(curl,Ω))′ induced by the bilinear form on H∂Ω(curl,Ω)
+(−→
+w,−→q ) 7→
+ −→
+w ∗
+t ,−→q ∗
+t
+
+L2(∂Ω) −
+−→
+w ∗
+t ,−→q 0
+t
+
+L2(∂Ω) +
+−→
+w 0
+t ,−→q ∗
+t
+
+L2(∂Ω)
+(98)
+will be compact.
+Reassembling the parts, we ﬁnd
+aM(−→
+w,F(−→q )) =
+ curl−→
+w ∗,curl−→q ∗
+L2(Ω) + ω2−→
+w 0,−→q 0
+L2(Ω) −
+ıω
+−→
+w 0
+t ,−→q 0
+t
+
+L2(∂Ω) + kM(−→
+w,−→q ) ,
+(99)
+where kM collects the “compact remainders” from (96) and (98). This means
+aM(−→
+w,F(−→
+w)) =
+curl−→
+w ∗
+L2(Ω) + ω2−→
+w 0
+L2(Ω) −ıω
+−→
+w 0
+L2(∂Ω) + kM(−→
+w,−→
+w) ,
+and, since from
+R−→
+w
+
+L2(Ω) ≤C
+curl−→
+w
+
+L2(Ω) we can conclude that
+curl−→
+w ∗
+L2(Ω) +
+−→
+w 0
+L2(Ω) ≥C
+−→
+w
+
+H(curl,Ω) ,
+we have a more general version of G˚arding’s inequality:
+
+
+Maxwell’s Equations: Continuous and Discrete
+47
+Theorem 15 (Generalized G˚arding inequality for Maxwell cavity problem).
+There is a compact operator KM : H∂Ω(curl,Ω) →(H∂Ω(curl,Ω))′ such that
+∃C > 0 :
+aM(−→
+w,F(−→
+w))+
+D
+KM−→
+w,−→
+w
+E ≥C
+−→
+w
+2
+H∂Ω(curl,Ω)
+for all −→
+w ∈H∂Ω(curl,Ω), where F is the sign-ﬂip isomorphism deﬁned in (91) and
+C > 0 depends on Ωonly.
+4.6.2 Existence and uniqueness of solutions
+Together with the Lax-Milgram theorem about the invertibility of operators rising
+from elliptic bilinear forms [40, Lemma 2.21], Theorem 15 tells us that F′ ◦AM +
+KM : H∂Ω(curl,Ω) →H∂Ω(curl,Ω)′ is bijective. Here, AM is the operator associ-
+ated with aM and F′ : H∂Ω(curl,Ω)′ →H∂Ω(curl,Ω)′ is the adjoint of F. Hence,
+AM + (F′)−1 ◦KM is bijective as well and, thus, AM has been identiﬁed as a com-
+pact perturbation of an invertible operator; the Fredholm alternative of Theorem 13
+applies!
+Parallel to Section 4.5 we have to establish injectivity of aM.
+Lemma 8 (Injectivity of aM [40, Thm. 4.12]). The operator AM : H∂Ω(curl,Ω) →
+H∂Ω(curl,Ω)′ associated with the bilinear form aM of the Maxwell cavity problem
+is injective.
+Proof. Along the lines of proof of Lemma 7 we conclude from
+ curl−→
+w,curl−→
+w ′
+L2(Ω) −ω2 −→
+w,−→
+w ′
+L2(Ω) + ıω
+ −→
+wt,−→
+w ′
+t
+
+L2(∂Ω) = 0
+for all −→
+w ′ ∈H∂Ω(curl,Ω) that
+(i) −→
+wt = 0 on ∂Ω(through testing with −→
+w ′ = −→
+w),
+(ii) curlcurl−→
+w −ω2−→
+w = 0 (through testing with −→
+w ∈(C∞
+0 (Ω))3),
+(iii) curl−→
+w × n = 0 (through testing with −→
+w ∈(C∞(Ω))3).
+Then extending −→
+w by zero outside Ωgives an entire solution of Maxwell’s equa-
+tions on R3 vanishing at ∞. Then necessarily −→
+w = 0 thanks to uniqueness results for
+electromagnetic scattering problems [26, Thm. 6.10].
+Eventually, Lemma 8 together with a Fredholm alternative argument shows
+that (81) has a unique solution, which depends continuously on the data −→j ∈
+H∂Ω(curl,Ω)′.
+4.7 Quasi-optimality of Whitney form Galerkin discretization
+The Whitney form Galerkin discretization of the variational Maxwell cavity prob-
+lem (81) seeks an edge element vectorﬁeld −→a h ∈W 1(Th), Th a simplicial mesh of
+
+
+48
+Ralf Hiptmair
+Ω⊂R3, such that
+aM(−→a h,−→a ′
+h) = ıω
+Z
+Ω
+−→j ·−→a ′
+h dx
+−→a ′
+h ∈W 1(Th) .
+(100)
+As we saw in Section 3.4.4 this is a conforming Galerkin method in the sense that
+W 1(Th) ⊂H∂Ω(curl,Ω).
+Our a priori convergence results will be asymptotic and be valid only on “suf-
+ﬁciently ﬁne” meshes. This forces us to examine the behavior of the discretization
+error for some inﬁnite family of meshes {Th}h∈H, where H is a sequence of mesh
+widths tending to 0. A key assumption is the h-uniform shape regularity of {Th}h∈H,
+which makes it possible for us to demand that below none of the constants may de-
+pend on h ∈H.
+4.7.1 Discrete inf-sup conditions
+In Section 4.6.2 we learned that the continuous variational problem (81) is well
+posed. As explained in [45, Sect. 2.1.6], this is equivalent to a continuous inf-
+sup condition, namely the existence of a constant γ > 0 such that, for all −→
+w ∈
+H∂Ω(curl,Ω)
+sup
+−→
+w ′∈H∂Ω(curl,Ω)
+|aM(−→
+w,−→
+w ′)|
+−→
+w ′
+H∂Ω(curl,Ω)
+≥γ
+−→
+w
+
+H∂Ω(curl,Ω) .
+(101)
+On the other hand, existence, uniqueness, and quasi-optimality of Galerkin solutions
+of (100) can be concluded from a discrete inf-sup condition that asserts the existence
+of γh > 0 depending only on the shape regularity of the mesh Th such that for all
+−→
+w h ∈W 1(Th)
+sup
+−→
+w ′
+h∈W 1(Th)
+|aM(−→
+w h,−→
+w ′
+h)|
+−→
+w ′
+h
+
+H∂Ω(curl,Ω)
+≥γh
+−→
+w h
+
+H∂Ω(curl,Ω) .
+(102)
+More precisely we have the result [45, Thm. 4.2.1]
+Theorem 16 (Generalized Cea lemma). If (102) holds, a unique solution −→a h ∈
+W 1(Th) of (100) exists and is quasi-optimal:
+−→a −−→a h
+
+H∂Ω(curl,Ω) ≤C
+inf
+−→
+w h∈W 1(Th)
+−→a −−→
+w
+
+H∂Ω(curl,Ω) ,
+where −→a ∈H(curl,Ω) is the solution of (81) and C > 0 depends only on the norm
+of aM and γh.
+The customary attack on (102) picks an arbitrary −→
+w h ∈W 1(Th) and looks for a
+“candidate function” −→
+w ′
+h = −→
+w ′
+h(−→
+w h) ∈W 1(Th) such that, with constants enjoying
+the usual (in)dependencies,
+
+
+Maxwell’s Equations: Continuous and Discrete
+49
+(i)
+|aM(−→
+w h,−→
+w ′
+h)| ≥C
+−→
+w
+2
+H∂Ω(curl,Ω) ,
+(103)
+(ii)
+−→
+w ′
+h
+
+H∂Ω(curl,Ω) ≤C
+−→
+w h
+
+H∂Ω(curl,Ω) .
+(104)
+The search for this discrete candidate function can be guided by ﬁnding an analo-
+gous continuous candidate function for (101). It will be a gift of the Generalized
+G˚arding inequality from Theorem 15, because, given −→
+w ∈H∂Ω(curl,Ω) we may
+choose the complex conjugate of
+−→
+w ′ := F−→
+w + (A∗
+M)−1(KM−→
+w) ,
+(105)
+where A∗
+M : H∂Ω(curl,Ω) →H∂Ω(curl,Ω)′ is the (invertible) formal adjoint of AM.
+Since
+−→
+w ′
+H∂Ω(curl,Ω) ≤C
+−→
+w
+
+H∂Ω(curl,Ω) we conclude (101) from Theorem 15 by
+simply evaluating aM(−→
+w,−→
+w
+′):
+Re{aM(−→
+w,−→
+w
+′)} = Re{aM(−→
+w,F−→
+w + (A∗
+M)−1(KM−→
+w))}
+= Re{aM(−→
+w,F−→
+w)+
+D
+K−→
+w,−→
+w
+E
+} ≥C
+−→
+w
+2
+H∂Ω(curl,Ω) .
+Now, the challenge is that
+−→
+w ′(−→
+w h) will usually not belong to W 1(Th), even for −→
+w h ∈W 1(Th).
+4.7.2 Discrete Helmholtz cavity problem
+Let us ﬁrst elucidate the strategy for the Helmholtz cavity problem (84), for which
+we can rely on the G˚arding inequality from Corollary 2. Here, for a ﬁxed −→u ∈
+H1(Ω), the continuous candidate function is
+−→u ′(−→u ) := −→u + (A∗
+H)−1(KH−→u ) .
+(106)
+Please note the difference between (105) and (106); a counterpart of the sign-
+ﬂipping isomorphism F is conspicuously absent in (106). This makes it possible
+to obtain a suitable discrete candidate function by plain projection.
+For the Helmholtz cavity problem we have to employ discrete 0-forms for
+Galerkin discretization, that is, the space W 0(Th) of piecewise linear Lagrangian
+ﬁnite element functions. Let GH
+h stand for the H1(Ω)-orthogonal projection GH
+h :
+H1(Ω) →W 0(Th). Asymptotic density of W 0(Th) in H1(Ω) for h →0 implies
+that GH
+h →Id pointwise in H1(Ω) for h →0. This is an important observation thanks
+to the following result [36, Lemma 7.1].
+Lemma 9. Let
+
+T j
+	
+j∈N be a sequence of bounded operators X →Y, X,Y Banach
+spaces, with lim j→∞T jx = 0 for all x ∈X (pointwise convergence). If, for another
+Banach space Z, K : Z →X is compact, then
+lim
+j→∞
+T j ◦K
+
+Z→Y = 0 .
+
+
+50
+Ralf Hiptmair
+This tells us that “compactness promotes pointwise convergence to uniform con-
+vergence”. We apply this lemma with X =Y = Z = H1(Ω), K = (A∗
+H)−1◦KH, which
+inherits compactness from KH, and T j ↔Id−GH
+h . Thus, we infer that
+lim
+h→0
+sup
+−→v ∈H1(Ω)
+GH
+h ((A∗
+H)−1(KH−→v ))
+
+H1(Ω)
+∥−→v ∥H1(Ω)
+= 0 .
+(107)
+This makes it possible to pick as a discrete candidate function
+−→u ′
+h(−→u h) := −→u h + GH
+h ((A∗
+H)−1(KH−→u h)) ∈W 0(Th) ,
+(108)
+because
+aH(−→u h,−→u ′
+h) = aH(−→u h,(A∗
+H)−1(KH−→u h)+ (GH
+h −Id)(A∗
+H)−1(KH−→u h)) ,
+(109)
+and limit (107) ensures that for any c > 0 there is a sufﬁciently small hc > 0 with
+(Id−GH
+h )((A∗
+H)−1(KH−→u h))
+
+H1(Ω) ≤c∥−→u h∥H1(Ω)
+∀−→u h ∈W 0(Th), ∀h < hc .
+(110)
+Thus by picking h smaller than some threshold, we can make the constant c in
+Re{aH(−→u h,−→u ′
+h)} ≥C∥−→u h∥2
+H1(Ω) −c
+A−1
+H
+∥KH∥∥−→u h∥2
+H1(Ω)
+(111)
+smaller than 1
+2C/(
+A−1
+H
+∥KH∥), C > 0 from Corollary 2. This yields an asymptotic
+discrete inf-sup condition in the sense that it will hold on sufﬁciently ﬁne meshes
+only.
+4.7.3 Discrete Maxwell cavity problem
+As pointed out above, in contrast to (106), neither summand in (105) lies in the
+ﬁnite element space W 1(Th). Hence, both terms have to be projected onto W 1(Th)
+in order to obtain an admissible discrete candidate function. Reusing notations from
+Section 4.7.1, let us opt for
+−→
+w ′
+h(−→
+w h) := I1(F(−→
+w h))+ GM
+h
+ (A∗
+M)−1(KM−→
+w h)
+
+,
+(112)
+where GM
+h : H∂Ω(curl,Ω) →W 1(Th) is the H∂Ω(curl,Ω)-orthogonal projection
+onto W 1(Th). As all operators involved in (112) are continuous,
+−→
+w ′
+h
+
+H∂Ω(curl,Ω)
+can be bounded by
+−→
+w h
+
+H∂Ω(curl,Ω), thus satisfying (104).
+In order to establish (103), we try to recover the continuous candidate function
+−→
+w ′(−→
+w h) from (105) by “adding zero” in a clever way.
+
+
+Maxwell’s Equations: Continuous and Discrete
+51
+aM(−→
+w h,−→
+w ′
+h(−→
+w h)) = aM
+ −→
+w h,I1(F(−→
+w h))+ GM
+h
+ (A∗
+M)−1(KM−→
+w h)
+
+= aM(−→
+w h,−→
+w ′(−→
+w h))+ aM
+ −→
+w h,(I1 −Id)F(−→
+w h)+
+(GM
+h −Id)
+ (A∗
+M)−1(KM−→
+w h)
+
+.
+Since (A∗
+M)−1 ◦KM : H∂Ω(curl,Ω) →H∂Ω(curl,Ω) is compact and GM
+h −Id →0
+pointwise in H∂Ω(curl,Ω) for h →0, we can copy the approach of Section 4.7.2 for
+the last term and appeal to Lemma 9. This conﬁrms the existence of c : R+ →R+
+with limh→0 c(h) = 0 such that
+(GM
+h −Id)
+ (A∗
+M)−1(KM−→
+w h)
+
+H∂Ω(curl,Ω) ≤c(h)
+−→
+w h
+
+H∂Ω(curl,Ω) .
+(113)
+To deal with the other terms we use F = 2R−Id and the projector property of I1:
+(I1 −Id)F(−→
+w h) = (I1 −Id)(2R(−→
+w h)−−→
+w h) = 2(I1 −Id)R−→
+w h .
+Since curlR−→
+w h = curl−→
+w h ∈W 2(Th) and R maps into (H1(Ω))3, the assumptions
+of Lemma 4 are fulﬁlled and we can use its interpolation error estimate:
+(I1 −Id)F(−→
+w h)
+
+L2(Ω) ≤Ch
+R−→
+w h
+
+H1(Ω) ≤Ch
+curl−→
+w h
+
+L2(Ω) .
+(114)
+Moreover, by the commuting diagram property of I1 and the projector property of I2
+curl(I1 −Id)F(−→
+w h) = 2(I2 −Id)(curlR(−→
+w h)) = 0 .
+(115)
+The estimate for the boundary contribution to the H∂Ω(curl,Ω)-norm is more sub-
+tle. Here we merely cite a consequence of [20, Lemma 16], which can be proved by
+interpolation in Sobolev scales.
+Lemma 10. If −→
+w ∈{−→u ∈(H1(Ω))3 : curl−→u ∈W 2(Th)} then
+−→
+w −I1−→
+w
+
+L2(∂Ω) ≤Ch
+1
+2 −→
+w
+
+H1(Ω) ,
+with C > 0 depending only on Ωand the shape regularity of the mesh.
+Applying this estimate and the same reasoning that led to (114), we end up with
+(I1 −Id)F(−→
+w h)
+
+L2(∂Ω) ≤Ch
+1
+2 curl−→
+w h
+
+L2(Ω) .
+(116)
+Eventually, combining (114), (115), and (116), we conclude
+(I1 −Id)F(−→
+w h)
+
+H∂Ω(curl,Ω) ≤Ch
+1
+2 curl−→
+w h
+
+L2(Ω) .
+(117)
+This, together with (113) shows that existence of a function c′ : R+ →R+ such that
+|aM(−→
+w h,−→
+w ′
+h(−→
+w h)−−→
+w ′(−→
+w h))| ≤c′(h)
+−→
+w h
+2
+H∂Ω(curl,Ω) ,
+and
+
+
+52
+Ralf Hiptmair
+lim
+h→0c′(h) = 0 .
+This, via (103), permits us to infer the discrete inf-sup condition (102) from the con-
+tinuous inf-sup condition (101) for sufﬁciently small h. Thus we have veriﬁed the
+assumptions of Theorem 16, whose concrete assertion for the Galerkin discretiza-
+tion of the Maxwell cavity boundary value problem is given as a ﬁnal result.
+Theorem 17 (Asymptotic Quasi-optimality of Whitney form Galerkin discretiza-
+tion of the Maxwell cavity problem). For any shape-regular family of meshes
+{Th}h∈H there is a threshold h∗> 0 and a constant C > 0 depending only on the
+(material) coefﬁcients in aM, ω, Ω, and shape-regularity, such that
+−→a −−→a h
+
+H∂Ω(curl,Ω) ≤C
+inf
+−→
+w∈W 1(Th)
+−→a −−→
+w
+
+∀h ≤h∗,
+where −→a ∈H∂Ω(curl,Ω) and −→a h ∈W 1(Th) solve (81) and (100), respectively.
+References
+1. M. AINSWORTH, G. ANDRIAMARO, AND O. DAVYDOV, A Bernstein-B´ezier basis for arbi-
+trary order Raviart-Thomas ﬁnite elements, Report NI12079-AMM, Newton Institute, Cam-
+bridge, UK, 2012.
+2. M. AINSWORTH AND J. COYLE, Hierarchic ﬁnite element bases on unstructured tetrahedral
+meshes, Int. J. Numer. Meth. Engr., 58 (2003), pp. 2103–2130.
+3. C. AMROUCHE, C. BERNARDI, M. DAUGE, AND V. GIRAULT, Vector potentials in three–
+dimensional nonsmooth domains, Math. Meth. Appl. Sci., 21 (1998), pp. 823–864.
+4. D. ARNOLD, Periodic table of ﬁnite elements, SIAM News, 47 (2014), pp. 1,8.
+5. D. ARNOLD, D. BOFFI, AND F. BONIZZONI, Finite element differential forms on curvilinear
+cubic meshes and their approximation properties, Preprint arXiv:1212.6559v4 [math.NA],
+arXiv, April 2014.
+6. D. ARNOLD, R. FALK, AND R. WINTHER, Finite element exterior calculus, homological
+techniques, and applications, Acta Numerica, 15 (2006), pp. 1–155.
+7. B. AUCHMANN AND S. KURZ, de Rham currents in discrete electromagnetism, COMPEL,
+26 (2007), pp. 743–757.
+8. D. BALDOMIR AND P. HAMMOND, Geometry of Electromagnetic Systems, Clarendon Press,
+Oxford, 1996.
+9. M. BERGOT AND M. DURUFL´E, Approximation of H(div) with high-order optimal ﬁnite
+elements for pyramids, prisms and hexahedra, Comm. Comput. Phys., 14 (2013), pp. 1372–
+1414.
+10. M. BERGOT AND M. DURUFL, High-order optimal edge elements for pyramids, prisms and
+hexahedra, Journal of Computational Physics, 232 (2013), pp. 189 – 213.
+11. D. BOFFI, F. BREZZI, AND M. FORTIN, Mixed ﬁnite element methods and applications,
+vol. 44 of Springer Series in Computational Mathematics, Springer, Heidelberg, 2013.
+12. A. BOSSAVIT, Computational Electromagnetism. Variational Formulation, Complementarity,
+Edge Elements, vol. 2 of Electromagnetism Series, Academic Press, San Diego, CA, 1998.
+13.
+, On the geometry of electromagnetism I: Afﬁne space, J. Japan Soc. Appl. Electromag-
+netics & Mech., 6 (1998), pp. 17–28.
+14.
+, On the geometry of electromagnetism II: Geometrical objects, J. Japan Soc. Appl.
+Electromagnetics & Mech., 6 (1998), pp. 114–123.
+
+
+Maxwell’s Equations: Continuous and Discrete
+53
+15.
+, On the geometry of electromagnetism III: Integration, Stokes’, Faraday’s law, J. Japan
+Soc. Appl. Electromagnetics & Mech., 6 (1998), pp. 233–240.
+16.
+, On the geometry of electromagnetism IV: “Maxwell’s house”, J. Japan Soc. Appl.
+Electromagntics & Mech., 6 (1998), pp. 318–326.
+17.
+, On the Lorenz gauge, COMPEL, 18 (1999), pp. 323–336.
+18.
+, Applied differential geometry: A compendium. Unpublished Lecture Notes, 2002.
+19.
+, Discretization of electromagnetic problems: The “generalized ﬁnite differences”, in
+Numerical Methods in Electromagnetics, W. Schilders and W. ter Maten, eds., vol. XIII of
+Handbook of numerical analysis, Elsevier, Amsterdam, 2005, pp. 443–522.
+20. A. BUFFA AND R. HIPTMAIR, Galerkin boundary element methods for electromagnetic
+scattering, in Topics in Computational Wave Propagation. Direct and inverse Problems,
+M. Ainsworth, P. Davis, D. Duncan, P. Martin, and B. Rynne, eds., vol. 31 of Lecture Notes
+in Computational Science and Engineering, Springer, Berlin, 2003, pp. 83–124.
+21. W. BURKE, Applied Differential Geometry, Cambridge University Press, Cambridge, 1985.
+22. H. CARTAN, Formes Diff´erentielles, Hermann, Paris, 1967.
+23. S. H. CHRISTIANSEN AND R. WINTHER, Smoothed projections in ﬁnite element exterior
+calculus, Math. Comp., 77 (2008), pp. 813–829.
+24. P. CIARLET, The Finite Element Method for Elliptic Problems, vol. 4 of Studies in Mathemat-
+ics and its Applications, North-Holland, Amsterdam, 1978.
+25. P. CIARLET, JR. AND J. ZOU, Fully discrete ﬁnite element approaches for time-dependent
+Maxwell equations, Numer. Math., 82 (1999), pp. 193–219.
+26. D. COLTON AND R. KRESS, Inverse Acoustic and Electromagnetic Scattering Theory, vol. 93
+of Applied Mathematical Sciences, Springer, Heidelberg, 2nd ed., 2013.
+27. M. COSTABEL AND A. MCINTOSH, On Bogovskii and regularized Poincar´e integral opera-
+tors for de Rham complexes on Lipschitz domains, Math. Z., 265 (2010), pp. 297–320.
+28. L. EVANS, Partial differential equations, vol. 19 of Graduate Studies in Mathematics, Amer-
+ican Mathematical Society, Providence, RI, 1998.
+29. R. FALK AND R. WINTHER, Local bounded cochain projection, Preprint arXiv:1211.5893,
+arXiv, 2012.
+30. R. S. FALK AND R. WINTHER, Double complexes and local cochain projections, Numerical
+Methods for Partial Differential Equations, 31 (2015), pp. 541–551.
+31. T. FRANKEL, The geometry of physics, Cambridge University Press, Cambridge, second ed.,
+2004.
+32. R. HIPTMAIR, Canonical construction of ﬁnite elements, Math. Comp., 68 (1999), pp. 1325–
+1346.
+33.
+, Discrete Hodge operators, Numer. Math., 90 (2001), pp. 265–289.
+34.
+, Higher order Whitney forms, in Geometric Methods for Computational Electromag-
+netics, F. Teixeira, ed., vol. 32 of PIER, EMW Publishing, Cambridge, MA, 2001, pp. 271–
+299.
+35.
+, Finite elements in computational electromagnetism, Acta Numerica, 11 (2002),
+pp. 237–339.
+36. R. HIPTMAIR AND C. SCHWAB, Natural boundary element methods for the electric ﬁeld
+integral equation on polyhedra, SIAM J. Numer. Anal., 40 (2002), pp. 66–86.
+37. S. KURZ AND B. AUCHMANN, Differential forms and boundary integral equations for
+maxwell-type problems, in Fast Boundary Element Methods in Engineering and Industrial Ap-
+plications, U. Langer, M. Schanz, O. Steinbach, and W. L. Wendland, eds., vol. 63 of Lecture
+Notes in Applied and Computational Mechanics, Springer Berlin / Heidelberg, 2012, pp. 1–62.
+38. S. LANG, Differential and Riemannian Manifolds, vol. 160 of Graduate Texts in Mathematics,
+Springer-Verlag, New York, 1995.
+39. J. M. LEE, Manifolds and differential geometry, vol. 107 of Graduate Studies in Mathematics,
+American Mathematical Society, Providence, RI, 2009.
+40. P. MONK, Finite Element Methods for Maxwell’s Equations, Clarendon Press, Oxford, UK,
+2003.
+41. N. NIGAM AND J. PHILLIPS, High-order conforming ﬁnite elements on pyramids, IMA J.
+Numer. Anal., 32 (2012), pp. 448–483.
+
+
+54
+Ralf Hiptmair
+42. P. OSWALD, Multilevel ﬁnite element approximation, Teubner Skripten zur Numerik, B.G.
+Teubner, Stuttgart, 1994.
+43. F. RAPETTI, High-order edge elements on simplicial meshes, Math. Model. Numer. Anal.,
+(2007). Submitted.
+44. M. RENARDY AND R. C. ROGERS, An introduction to partial differential equations, vol. 13
+of Texts in Applied Mathematics, Springer-Verlag, New York, second ed., 2004.
+45. S. SAUTER AND C. SCHWAB, Boundary Element Methods, vol. 39 of Springer Series in
+Computational Mathematics, Springer, Heidelberg, 2010.
+46. J. SCH ¨OBERL, Commuting quasi-interpolation operators for mixed ﬁnite elements, Preprint
+ISC-01-10-MATH, Texas A&M University, College Station, TX, 2001.
+47. T. TARHASAARI, L. KETTUNEN, AND A. BOSSAVIT, Some realizations of a discrete Hodge:
+A reinterpretation of ﬁnite element techniques, IEEE Trans. Mag., 35 (1999), pp. 1494–1497.
+48. S. ZAGLMAYR, High Order Finite Element Methods for Electromagnetic Field Computation,
+PhD thesis, Johannes Kepler Universit¨at Linz, Linz, Austria, 2006.
+49. J. ZHAO, Analysis of ﬁnite element approximation for time-dependent Maxwell problems,
+Math. Comp., 73 (2004), pp. 1089–1105.
+50. L. ZHONG, S. SHU, G. WITTUM, AND J. XU, Optimal error estimates for Nedelec edge
+elements for time-harmonic Maxwell’s equations, J. Comput. Math., 27 (2009), pp. 563–572.
+
+
+Recent Research Reports
+Nr.
+Authors/Title
+2015-08
+P. Chen and Ch. Schwab
+Adaptive Sparse Grid Model Order Reduction for Fast Bayesian Estimation and
+Inversion
+2015-09
+J.-L. Bouchot and B. Bykowski and H. Rauhut and Ch. Schwab
+Compressed Sensing Petrov-Galerkin Approximations for Parametric PDEs
+2015-10
+A. Jentzen and P. Pusnik
+Strong convergence rates for an explicit numerical
+approximation method for stochastic evolution equations with
+non-globally Lipschitz continuous nonlinearities
+2015-11
+R. Bourquin
+Exhaustive search for higher-order Kronrod-Patterson Extensions
+2015-12
+R. Bourquin and V. Gradinaru
+Numerical Steepest Descent for Overlap Integrals of Semiclassical Wavepackets
+2015-13
+A. Hiltebrand and S. Mishra
+Entropy stability and well-balancedness of space-time DG for the shallow water
+equations with bottom topography
+2015-14
+B. Ayuso de Dios and R. Hiptmair and C. Pagliantini
+Auxiliary Space Preconditioners for SIP-DG Discretizations of H(curl)-elliptic
+Problems with Discontinuous Coefficients
+2015-15
+A. Paganini and S. Sargheini and R. Hiptmair and C. Hafner
+Shape Optimization of microlenses

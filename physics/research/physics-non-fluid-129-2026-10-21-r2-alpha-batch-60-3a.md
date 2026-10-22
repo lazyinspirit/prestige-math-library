@@ -1,0 +1,40 @@
+# Batch 60 Step-3a adjudication
+
+Run: `physics-non-fluid-129-2026-10-21-r2`; group: `batch-60`.
+
+Scope: one touched obligation for `lem-qftx-finite-graph-scaling-degree`; no reader, refuter or page obligations. Eight critical-risk reviews are required. No judge, stamp or engine gate is performed here.
+
+## Completed item reviews (dependency order)
+
+- `lem-qftx-balanced-local-functional-representatives`: reviewed all four steps, the actual off-shell definition and exact Fourier/choice suppliers. The tensor decomposition, Fourier uniqueness, local support argument, Lorentz convention and derivative extension are sound, including degree one and constants. Source checked: [Duetsch–Fredenhagen](https://arxiv.org/pdf/hep-th/0403213), Section 3.2, equations (3.3)–(3.4), Proposition 2 and following construction, printed pp.24–25. Risk review complete; no repair.
+- `lem-qftx-local-polynomial-functionals-are-microcausal`: checked all three steps and four actual definition suppliers. Finite diagonal delta derivatives have center Fourier decay; the calculation works in every chart with smooth density coefficients. Pointed causal cones exclude the prohibited tuples. Constants, r=1 and derivatives above field degree are covered. Risk review complete; no repair.
+
+- `lem-qftx-transverse-center-scaling-bound`: all five steps and twelve exact suppliers checked. Baire gives the uniform fixed-support estimate, dyadic rescaling gives uniform tempered bounds, cone splitting gives regular-direction bounds and the final Fourier integral has an integrable uniform majorant. Checked zero/one factors, empty cones, nonnegative zero endpoints and infimum limits. [Brunetti–Fredenhagen](https://arxiv.org/pdf/math-ph/9903028), Section 6.2, Lemma 6.6 is a microlocal estimate; this item supplies its own ordinary-to-directional argument. Risk review complete; no repair.
+
+- `lem-qftx-finite-graph-scaling-degree`: checked all five steps and exact suppliers. Block momentum conservation and oriented cross-edge covectors give transversality at the full center. The homogeneous causal partition preserves the finite bound. Checked the zero distribution (degree −∞), edgeless and two-vertex graphs, singleton blocks, derivative orders, parallel edges and the divergence threshold. Risk review complete. **accepted_repair** for `touched:60:lem-qftx-finite-graph-scaling-degree`, repair confidence 1. Restoring only the old title reproduces pre-reader raw SHA256 `539ffeaad96832139981f913f6f84dcd01c5e0c90cb925bf3ee9d74ef30cbdae`; current raw SHA256 equals the frozen post-reader `fe99479bb24dd9cf00d83aa64f824511e7d518692599852a9c2ba5de02cebb36`. Thus the exact delta is the title, with Statement and Proof unchanged. The old title asserted finite real degree where only a finite upper bound is proved; the new title states the precise claim. No Statement/Definition change or consumer repair is needed.
+
+- `prop-qftx-finite-renormalization-composition`: all five steps checked. The identity linear coefficient gives the unique triangular residual; causal polarization plus dense product tests gives diagonal support. Translation-invariant point jets give local outputs, and balanced representatives give presentation independence. Composition/inversion are finite at each degree; no new extension choices are made. Checked zero, first and second degree and inverse/support cases. Compared [Fredenhagen–Rejzner](https://arxiv.org/html/1208.1428), Section 7, equations (79)–(80). Risk review complete; no repair.
+- `cex-qftx-exact-differentiated-scaling-degree`: all four steps and ten exact prerequisite statements checked. The mass-shell witness, damping formula, null covector sign, homogeneity, Lorentz extension uniqueness and time derivative jump verify admissibility and `P h_F=-i delta_0`. The zero punctured derivative has degree −∞ and the forced contact term degree 4. This contradicts precisely the stronger refuted requirement, and obeys the corrected engineering bound. Risk review complete; no repair.
+
+- `thm-qftx-scalar-eg-induction`: all ten steps and nineteen direct prerequisite statements checked, including the current star-product and Lorentz-cocycle suppliers. The causal cover and overlap refinement, linear balanced-label extension, separate degree −∞ annular construction, translation lift, output wavefront exclusion, finite-dimensional Lorentz correction and self-adjoint unitarity correction are consistent. Checked constant/empty blocks, n=2, zero and subcritical coefficients, threshold jet orders and recursive Choice uses. The theorem remains conditional on admissible free data and formal at each finite order. Risk review complete; no repair.
+
+- `ex-qftx-two-vertex-log`: all three proof steps and six suppliers checked, including the exact cutoff definition of `T_mu` in the published anomaly proposition. Squaring the kernel, degree four, delta-only ambiguity and positive coefficient `1/(8 pi^2)` agree. Checked equal/reversed scales. The TikZ diagram correctly has two vertices, two parallel internal lines and two external slots at each vertex; no missing diagram is needed. Risk review complete; no repair.
+
+## Evidence, scope and limits
+
+The exact scope/order, frozen pre/post snapshots, reader report and empty findings, refuter report, current ten carriers, batch proof contract and cross-batch edge records were inspected. Direct prerequisite statements were checked in their current carriers; the full transitive published mathematics closure was not re-audited. External reading was limited to the relevant passages: Duetsch–Fredenhagen Section 3.2, printed pp.24–25; Brunetti–Fredenhagen Section 4 causal cover/gluing, Section 6.2 Lemma 6.6 and Section 7 equations (54)–(56); Fredenhagen–Rejzner Section 7, Theorem 7.2 and equations (79)–(89). These source comparisons supplement the local proofs and confer no source or proof certification. No complete-book reading is claimed.
+
+All eight routed risk reviews are recorded in the owning contract. Only its risk-review fields and this dispatch's report/decisions and ledger entries are authored by Alpha; no item, manifest, imported supplier or published carrier is edited. The single accepted reader repair is title-only. No public interface or prerequisite edge changes, withdrawal, affected outside consumer, published defect or unresolved blocker was found. Reader/refuter findings remain empty and receive no invented decisions.
+
+## Local checks
+
+- `node tools/physics-support/risk-report.mjs research/physics-non-fluid-129-2026-10-21-r2-batch-60.proof-contracts.json`: initial run succeeded, identifying all eight critical items. Final `--require-reviewed` run succeeded with 0 errors, 8 routed items.
+- `node tools/physics-support/proof-contract.mjs research/physics-non-fluid-129-2026-10-21-r2-batch-60.proof-contracts.json --strict`: 0 errors, 0 warnings, 8/8 items checked. Literal citation-quote comparison also found all recorded quotes in their current supplier carriers.
+- `node tools/tsx-run.mjs tools/physics-support/precheck.mts items/lem-qftx-finite-graph-scaling-degree.md`: PASS, 1 checked, 0 failing.
+- `node tools/physics-support/rendercheck.mjs items/lem-qftx-finite-graph-scaling-degree.md`: OK, 1 file.
+- `node tools/physics-support/proof-layout.mjs items/lem-qftx-finite-graph-scaling-degree.md`: 1 item, 5 steps, 0 defects, run after all item edits (Alpha made none).
+- Decision inventory matches exactly the sole frozen touched obligation. Its defect ID resolves to one closed (`fixed`) ledger row owned at `3a-adjudicate`. All ten current raw item hashes still match the frozen post-reader snapshot.
+
+Two exploratory validator launches failed before validation: direct Node invocation cannot load `.mts`, and `proof-contracts.mjs` does not exist. The actual checks above used the TypeScript runner and singular `proof-contract.mjs` successfully; these launch failures are mechanical and create no defect rows.
+
+Completed with no blockers. No judge cycle, engine decision stamping or gate battery was initiated.

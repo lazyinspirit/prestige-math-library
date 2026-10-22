@@ -7,7 +7,7 @@ origin: pipeline
 domain: physics
 library: physics
 physical_scope: A constructed pair of smooth one-component Gibbs charts; the example verifies the regular equation-set rank and dimension only, and does not assert a stable or realized coexistence endpoint.
-dependency_level: 9
+dependency_level: 1
 deps:
   - thm-chain-rule-for-total-derivatives
   - thm-ck-euclidean-maps-closed-under-algebra-and-composition
@@ -57,7 +57,11 @@ g_1(T,p)=g_0-s_0(T-T_0)-\frac{c}{2T_0}(T-T_0)^2+v_1(p-p_0)-\frac{\kappa}{2}(p-p_
 $$
 where $g_0$ is in $\mathrm{J\,mol^{-1}}$, $s_0,c>0$ are in $\mathrm{J\,mol^{-1}K^{-1}}$, $v_1,v_2>0$ are distinct molar volumes in $\mathrm{m^3\,mol^{-1}}$, and $\kappa>0$ is in $\mathrm{m^3\,mol^{-1}Pa^{-1}}$. Set $G_i=n_i g_i$ with natural Gibbs assignments $S_i=-\partial_TG_i$, $V_i=\partial_pG_i$, and $\mu_i=\partial_{n_i}G_i$; define $U_i=G_i+TS_i-pV_i$. The derivative-defined chemical potentials are $\mu_i=g_i$, and they agree at $(T_0,p_0)$. This is a candidate equation-map solution, not a claim of entropy-maximizing coexistence.
 
-For each branch, fix a reference amount $n_*>0$ in moles and an open interval $J_n\subset(0,\infty)$ around it. Initially take $\mathcal O=O_{Tp}\times J_n$, where $O_{Tp}$ is the displayed open $(T,p)$ chart about $(T_0,p_0)$, and shrink it about $(T_0,p_0,n_*)$ to the inverse-function neighborhood verified below, retaining $T,p,n>0$. The full derivative of $(T,p,n)\mapsto(U,V,n)$ is block triangular with the last diagonal entry $1$, so the displayed fixed-amount determinant is also its full determinant. The constructed branch's local physical state map is $\chi:(T,p,n)\mapsto(U,V,n)$ (using the positive amount and interior composition coordinates displayed here). On the inverse patch verified below, define its numerical domain $O_c=\Phi_c^{-1}(\chi(\mathcal O))$ and declare this patch to be the local model's $D_c$ patch, where $\Phi_c(\hat U,\hat V,\hat n)=(\hat U\,\mathrm J,\hat V\,\mathrm{m^3},\hat n\,\mathrm{mol})$ is the unit map of [[def-td-temperature-pressure-chemical-potential]]. Define the numerical entropy by $S_c=S^{\rm SI}\circ\Phi_c$, with $S^{\rm SI}$ supplied by the Gibbs assignments through this inverse. Thus the displayed derivatives are derivatives in physical SI coordinates on $\Phi_c(O_c)$; the model patch is not an empirical claim about an independently specified material domain.
+For each branch, fix a reference amount $n_*>0$ in moles and an open interval $J_n\subset(0,\infty)$ around it. Initially take $\mathcal O=O_{Tp}\times J_n$, where $O_{Tp}$ is the displayed open $(T,p)$ chart about $(T_0,p_0)$, and shrink it about $(T_0,p_0,n_*)$ to the inverse-function neighborhood verified below, retaining $T,p,n>0$. The full derivative of $(T,p,n)\mapsto(U,V,n)$ is block triangular with the last diagonal entry $1$, so the displayed fixed-amount determinant is also its full determinant. The constructed branch's local physical state map is $\chi:(T,p,n)\mapsto(U,V,n)$ (using the positive amount and interior composition coordinates displayed here). On the inverse patch verified below, define its numerical domain $O_c=\Phi_c^{-1}(\chi(\mathcal O))$ and declare this patch to be the local model's $D_c$ patch, where $\Phi_c(\hat U,\hat V,\hat n)=(\hat U\,\mathrm J,\hat V\,\mathrm{m^3},\hat n\,\mathrm{mol})$ is the unit map of *Entropic temperature, pressure, and molar chemical potentials*. Define the numerical entropy by $S_c=S^{\rm SI}\circ\Phi_c$, with $S^{\rm SI}$ supplied by the Gibbs assignments through this inverse. Thus the displayed derivatives are derivatives in physical SI coordinates on $\Phi_c(O_c)$; the model patch is not an empirical claim about an independently specified material domain.
+
+## Example references
+
+[[def-td-temperature-pressure-chemical-potential]]
 
 ## Facts & Assumptions
 

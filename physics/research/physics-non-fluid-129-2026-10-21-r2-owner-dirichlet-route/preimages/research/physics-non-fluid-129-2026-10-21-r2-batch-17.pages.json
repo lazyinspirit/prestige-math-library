@@ -1,0 +1,342 @@
+[
+  {
+    "order": 731,
+    "id": "emg-fx02",
+    "kind": "A",
+    "category": "einstein-maxwell-models-mathematics",
+    "library": "mathematics",
+    "title": "Local nonlinear constraint construction with explicit analytic obligations",
+    "companion": "emg-fx02-examples",
+    "requires": [
+      "emg-fx01",
+      "lax-milgram-and-weak-elliptic-solutions",
+      "completeness-and-uniform-continuity"
+    ],
+    "items": [
+      {
+        "id": "def-emg-fx-dirichlet-constraint-problem",
+        "kind": "definition",
+        "domain": "mathematics",
+        "library": "mathematics",
+        "title": "Bounded-domain charged conformal problem",
+        "reference": "items/def-emg-fx-dirichlet-constraint-problem.md#definition",
+        "design_state": "Defines the bounded smooth domain, Hölder spaces, zero-boundary trace, fixed source profile, dimensionless charge parameter, and exact time-symmetric flat-seed scalar equation.",
+        "inventory_expansion_required": true,
+        "physical_scope": null,
+        "statement": "Let $\\Omega\\subset\\mathbb R^3$ be a nonempty, bounded, connected open set with smooth boundary, meaning each boundary point has Euclidean coordinates in which $\\Omega$ is one side of a smooth graph. Use Euclidean coordinates $x=(x^1,x^2,x^3)$, and set $\\Delta=\\sum_{i=1}^3\\partial_i^2$. Fix $0<\\alpha<1$, a real function $S\\in C^{0,\\alpha}(\\overline\\Omega)$ with $S\\geq0$, and a real dimensionless parameter $\\varepsilon$. For $g:\\overline\\Omega\\to\\mathbb R$, define $[g]_{0,\\alpha}:=\\sup_{x\\ne y}|g(x)-g(y)|/|x-y|^\\alpha$ and $\\|g\\|_{C^{0,\\alpha}}:=\\sup_{\\overline\\Omega}|g|+[g]_{0,\\alpha}$. Define $C^{2,\\alpha}(\\overline\\Omega)$ to consist of functions whose derivatives through order $2$ on $\\Omega$ extend continuously to $\\overline\\Omega$ and whose norm\n\n$$\\|u\\|_{C^{2,\\alpha}}:=\\sum_{|\\beta|\\leq2}\\sup_{\\overline\\Omega}|D^\\beta u|+\\sum_{|\\beta|=2}[D^\\beta u]_{0,\\alpha}$$\n\nis finite, where $\\beta$ is a multi-index. Write $X:=\\{u\\in C^{2,\\alpha}(\\overline\\Omega):u|_{\\partial\\Omega}=0\\}$, with its inherited norm, and $Y:=C^{0,\\alpha}(\\overline\\Omega)$. The bounded-domain charged conformal problem is to find $u\\in X$ such that $\\psi:=1+u>0$ on $\\overline\\Omega$ and\n\n$$-8\\Delta\\psi=2\\varepsilon^2 S\\psi^{-3}\\quad\\hbox{in }\\Omega,\\qquad \\psi|_{\\partial\\Omega}=1.$$\n\nIn the time-symmetric flat-seed specialization $h=\\psi^4\\delta$, $K=0$, and $\\Lambda=0$, the scalar equation is the Hamiltonian constraint from the conformal electrovacuum transformation when $S=|\\bar E_0|_\\delta^2+|\\bar B_0|_\\delta^2$ for independently prescribed divergence-free base fields and the actual seed fields are $\\bar E=\\varepsilon\\bar E_0$, $\\bar B=\\varepsilon\\bar B_0$. In geometric length coordinates, $\\psi,\\varepsilon$ are dimensionless, $\\bar E_0,\\bar B_0$ have units of inverse length, and $S$ has units of inverse length squared. The definition does not assert existence, uniqueness, a momentum constraint, or an asymptotically Euclidean or puncture solution.",
+        "deps": [
+          "def-emg-fx-conformal-seed",
+          "lem-emg-fx-conformal-constraints"
+        ],
+        "dependency_roles": {
+          "def-emg-fx-conformal-seed": "mathematical-premise",
+          "lem-emg-fx-conformal-constraints": "mathematical-premise"
+        },
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "A. I. Alcubierre, J. C. Degollado and M. Salgado, The Einstein-Maxwell system in 3+1 form and initial data for multiple charged black holes, arXiv:0907.1151v2 (2009)",
+              "url": "https://arxiv.org/pdf/0907.1151",
+              "locator": "Section III.A, equations (3.1)-(3.12); the local definition specializes the Hamiltonian constraint to a flat time-symmetric seed."
+            },
+            {
+              "title": "Eric Gourgoulhon, 3+1 Formalism and Bases of Numerical Relativity, Lecture Notes in Physics 846 (2012), author preprint arXiv:gr-qc/0703035v1",
+              "url": "https://arxiv.org/pdf/gr-qc/0703035",
+              "locator": "Sections 6.2.3 and 6.4.2, equations (6.14)-(6.22) and (6.81); conformal metric and constraint conventions."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-emg-fx-banach-implicit-constraint",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "library": "mathematics",
+        "title": "Local Banach implicit-function supplier",
+        "reference": "items/lem-emg-fx-banach-implicit-constraint.md#statement",
+        "design_state": "Local contraction proof of the one-parameter Banach implicit-function result used by the nonlinear branch.",
+        "inventory_expansion_required": true,
+        "physical_scope": null,
+        "statement": "Let $X,Y$ be real Banach spaces, let $U\\subset X\\times\\mathbb R$ be open in the max product norm, and let $F:U\\to Y$ be continuously Fréchet differentiable. Assume $F(0,0)=0$ and that $L:=D_xF(0,0):X\\to Y$ is a bounded linear isomorphism. Then there are $\\rho,\\epsilon_0>0$ and a unique $C^1$ map $x:(-\\epsilon_0,\\epsilon_0)\\to B_X(0,\\rho)$ such that $x(0)=0$ and $F(x(\\epsilon),\\epsilon)=0$; every zero in $B_X(0,\\rho)\\times(-\\epsilon_0,\\epsilon_0)$ lies on this graph. Its derivative is\n\n$$x'(\\epsilon)=-D_xF(x(\\epsilon),\\epsilon)^{-1}D_\\epsilon F(x(\\epsilon),\\epsilon).$$",
+        "deps": [
+          "def-banach-space",
+          "def-frechet-derivative-between-banach-spaces",
+          "def-c-k-map-between-banach-spaces",
+          "def-operator-norm",
+          "def-space-of-bounded-linear-operators",
+          "lem-mean-value-inequality-for-a-differentiable-banach-valued-curve",
+          "thm-complete-subspace-iff-closed",
+          "thm-banach-fixed-point",
+          "thm-chain-sum-product-and-composition-rules-for-banach-derivatives"
+        ],
+        "dependency_roles": {
+          "def-banach-space": "mathematical-premise",
+          "def-frechet-derivative-between-banach-spaces": "mathematical-premise",
+          "def-c-k-map-between-banach-spaces": "mathematical-premise",
+          "def-operator-norm": "mathematical-premise",
+          "def-space-of-bounded-linear-operators": "mathematical-premise",
+          "lem-mean-value-inequality-for-a-differentiable-banach-valued-curve": "mathematical-premise",
+          "thm-complete-subspace-iff-closed": "mathematical-premise",
+          "thm-banach-fixed-point": "mathematical-premise",
+          "thm-chain-sum-product-and-composition-rules-for-banach-derivatives": "mathematical-premise"
+        },
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Chin-Lung Wang, Banach Calculus, National Taiwan University lecture notes (2012; complete 16-page PDF)",
+              "url": "https://www.math.ntu.edu.tw/~dragon/Lecture%20Notes/Banach%20Calculus%202012.pdf",
+              "locator": "§3.1 and §3.3, PDF pp. 9-11; contraction mapping and the Banach implicit-function theorem."
+            },
+            {
+              "title": "John B. Conway, Functional Analysis, Chapter XII (University of Colorado lecture chapter)",
+              "url": "https://spot.colorado.edu/~baggett/funcchap12.pdf",
+              "locator": "Chapter XII, Theorem 12.8 and its contraction-mapping proof, printed pp. 256-257."
+            }
+          ]
+        },
+        "strategy": "direct"
+      },
+      {
+        "id": "lem-emg-fx-dirichlet-holder-inverse",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "library": "mathematics",
+        "title": "Dirichlet Hölder inverse required by the constraint branch",
+        "reference": "items/lem-emg-fx-dirichlet-holder-inverse.md#statement",
+        "design_state": "Constructs the weak zero-boundary solution by Poincare and Lax-Milgram, then applies the exact published weak-to-strong Dirichlet Schauder supplier; the design-required local Schauder reconstruction is escalated in batch notes.",
+        "inventory_expansion_required": true,
+        "physical_scope": null,
+        "statement": "Assume the Axiom of Choice and Countable Choice. For the domain $\\Omega$ and exponent $\\alpha$ of [[def-emg-fx-dirichlet-constraint-problem]], let $X=\\{u\\in C^{2,\\alpha}(\\overline\\Omega):u|_{\\partial\\Omega}=0\\}$ and $Y=C^{0,\\alpha}(\\overline\\Omega)$ with the full norms specified there; the zero subscript denotes zero boundary restriction, not compact support. Then\n\n$$-\\Delta:X\\longrightarrow Y$$\n\nis a bounded linear isomorphism. Consequently $A:=-8\\Delta:X\\to Y$ is a bounded linear isomorphism and its inverse obeys $\\|A^{-1}f\\|_{C^{2,\\alpha}}\\leq C(\\Omega,\\alpha)\\|f\\|_{C^{0,\\alpha}}$.",
+        "deps": [
+          "def-emg-fx-dirichlet-constraint-problem",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "def-weak-dirichlet-solution-for-a-divergence-form-operator",
+          "def-countable-choice",
+          "def-axiom-of-choice",
+          "cor-cauchy-schwarz-inequality-for-l-two",
+          "lem-w-one-two-is-a-hilbert-space",
+          "thm-lax-milgram",
+          "thm-poincare-inequality-for-w-one-p-zero",
+          "thm-global-schauder-regularity-for-the-weak-dirichlet-laplacian",
+          "thm-weak-maximum-principle-for-the-laplacian"
+        ],
+        "dependency_roles": {
+          "def-emg-fx-dirichlet-constraint-problem": "mathematical-premise",
+          "def-sobolev-space-wkp-and-its-norm": "mathematical-premise",
+          "def-wkp-zero-as-a-sobolev-closure": "mathematical-premise",
+          "def-weak-dirichlet-solution-for-a-divergence-form-operator": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise",
+          "cor-cauchy-schwarz-inequality-for-l-two": "mathematical-premise",
+          "lem-w-one-two-is-a-hilbert-space": "mathematical-premise",
+          "thm-lax-milgram": "mathematical-premise",
+          "thm-poincare-inequality-for-w-one-p-zero": "mathematical-premise",
+          "thm-global-schauder-regularity-for-the-weak-dirichlet-laplacian": "mathematical-premise",
+          "thm-weak-maximum-principle-for-the-laplacian": "mathematical-premise"
+        },
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Gilbarg and Neil S. Trudinger, Elliptic Partial Differential Equations of Second Order (2001)",
+              "url": "https://djvu.online/file/jxRRleAzbYjsl",
+              "locator": "Chapter 4, Theorems 4.6 and 4.8 on Poisson Hölder estimates; Chapter 6, Lemma 6.18 and Theorem 6.19, printed pp. 111-112."
+            },
+            {
+              "title": "Armin Schikorra, Partial Differential Equations I & II (version October 1, 2025; complete 281-page graduate lecture notes)",
+              "url": "https://sites.pitt.edu/~armin/pde2022/pde.pdf",
+              "locator": "§8.8, Theorem 8.28, and §8.9, Theorem 8.30, printed pp. 151-153; §8.8 states the boundary estimate and refers to Gilbarg-Trudinger for the flattening proof."
+            },
+            {
+              "title": "Xu-Jia Wang, Schauder Estimates for Elliptic and Parabolic Equations (Australian National University, 2006; complete 7-page note)",
+              "url": "https://maths-people.anu.edu.au/~wang/publications/3-Schauder-esti.pdf",
+              "locator": "§1, Theorems 1 and 10, printed pp. 1-2; Theorem 10 gives the half-ball zero-boundary estimate by odd reflection for an already classical solution."
+            }
+          ]
+        },
+        "strategy": "direct"
+      },
+      {
+        "id": "lem-emg-fx-holder-cubic-map",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "library": "mathematics",
+        "title": "Positive Hölder cubic map is continuously differentiable",
+        "reference": "items/lem-emg-fx-holder-cubic-map.md#statement",
+        "design_state": "Local Hölder-algebra estimate proving C1 regularity of the positive cubic source map needed by the branch theorem.",
+        "inventory_expansion_required": true,
+        "physical_scope": null,
+        "statement": "Let $X$ and $Y=C^{0,\\alpha}(\\overline\\Omega)$ be the Hölder spaces with the norms specified in [[def-emg-fx-dirichlet-constraint-problem]], and let $S\\in Y$ be its source. The inclusion $X\\hookrightarrow Y$ is bounded. The set $\\mathcal U:=\\{u\\in Y:\\min_{\\overline\\Omega}(1+u)>0\\}$ is open, and\n\n$$N_S:\\mathcal U\\to Y,\\qquad N_S(u):=S(1+u)^{-3},$$\n\nis continuously Fréchet differentiable with $DN_S(u)[h]=-3S(1+u)^{-4}h$ for every $u\\in\\mathcal U$ and $h\\in Y$.",
+        "deps": [
+          "def-emg-fx-dirichlet-constraint-problem",
+          "def-frechet-derivative-between-banach-spaces",
+          "def-c-k-map-between-banach-spaces",
+          "cor-mean-value-theorem",
+          "thm-extreme-value-metric",
+          "thm-heine-borel-rn",
+          "thm-holder-spaces-on-bounded-domains-are-banach-spaces"
+        ],
+        "dependency_roles": {
+          "def-emg-fx-dirichlet-constraint-problem": "mathematical-premise",
+          "def-frechet-derivative-between-banach-spaces": "mathematical-premise",
+          "def-c-k-map-between-banach-spaces": "mathematical-premise",
+          "cor-mean-value-theorem": "mathematical-premise",
+          "thm-extreme-value-metric": "mathematical-premise",
+          "thm-heine-borel-rn": "mathematical-premise",
+          "thm-holder-spaces-on-bounded-domains-are-banach-spaces": "mathematical-premise"
+        },
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Chin-Lung Wang, Banach Calculus, National Taiwan University lecture notes (2012; complete 16-page PDF)",
+              "url": "https://www.math.ntu.edu.tw/~dragon/Lecture%20Notes/Banach%20Calculus%202012.pdf",
+              "locator": "§2.1-2.4, PDF pp. 4-8; Fréchet derivatives, parameter derivatives, and the Banach chain rule."
+            },
+            {
+              "title": "John B. Conway, Functional Analysis, Chapter XII (University of Colorado lecture chapter)",
+              "url": "https://spot.colorado.edu/~baggett/funcchap12.pdf",
+              "locator": "Chapter XII, the Banach calculus and operator-norm framework preceding Theorem 12.8, printed pp. 248-254."
+            }
+          ]
+        },
+        "strategy": "direct"
+      },
+      {
+        "id": "thm-emg-fx-small-dirichlet-data",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "library": "mathematics",
+        "title": "Small charged Dirichlet conformal branch",
+        "reference": "items/thm-emg-fx-small-dirichlet-data.md#statement",
+        "design_state": "Establishes the unique local small-amplitude Dirichlet branch, positivity, and the second-order expansion with a C2,alpha O(epsilon^4) remainder.",
+        "inventory_expansion_required": true,
+        "physical_scope": null,
+        "statement": "Assume the Axiom of Choice and Countable Choice. For the problem of [[def-emg-fx-dirichlet-constraint-problem]], there are $\\rho>0$, $\\varepsilon_0>0$, and $C<\\infty$ such that for each $|\\varepsilon|<\\varepsilon_0$ there is exactly one solution $u_\\varepsilon\\in X$ with $\\|u_\\varepsilon\\|_{C^{2,\\alpha}}<\\rho$. The corresponding $\\psi_\\varepsilon=1+u_\\varepsilon$ satisfies $\\psi_\\varepsilon\\geq1$ on $\\overline\\Omega$. If $v\\in X$ is the unique solution of $-8\\Delta v=2S$ in $\\Omega$, $v=0$ on $\\partial\\Omega$, then\n\n$$\\|u_\\varepsilon-\\varepsilon^2v\\|_{C^{2,\\alpha}(\\overline\\Omega)}\\leq C|\\varepsilon|^4.$$\n\nThe constants may depend on $\\Omega,\\alpha,S$, and the uniqueness is only in the fixed neighborhood $\\|u\\|_{C^{2,\\alpha}}<\\rho$; no global uniqueness, asymptotically Euclidean solution, puncture solution, or non-CMC result is asserted. The $O(\\varepsilon^4)$ statement means the displayed bound for all $|\\varepsilon|<\\varepsilon_0$.",
+        "deps": [
+          "def-emg-fx-dirichlet-constraint-problem",
+          "lem-emg-fx-dirichlet-holder-inverse",
+          "lem-emg-fx-banach-implicit-constraint",
+          "lem-emg-fx-holder-cubic-map",
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "thm-holder-spaces-on-bounded-domains-are-banach-spaces",
+          "thm-weak-maximum-principle-for-the-laplacian"
+        ],
+        "dependency_roles": {
+          "def-emg-fx-dirichlet-constraint-problem": "mathematical-premise",
+          "lem-emg-fx-dirichlet-holder-inverse": "mathematical-premise",
+          "lem-emg-fx-banach-implicit-constraint": "mathematical-premise",
+          "lem-emg-fx-holder-cubic-map": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "thm-holder-spaces-on-bounded-domains-are-banach-spaces": "mathematical-premise",
+          "thm-weak-maximum-principle-for-the-laplacian": "mathematical-premise"
+        },
+        "dependency_level": 4,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Gilbarg and Neil S. Trudinger, Elliptic Partial Differential Equations of Second Order (2001)",
+              "url": "https://djvu.online/file/jxRRleAzbYjsl",
+              "locator": "Chapter 6, Lemma 6.18 and Theorem 6.19, printed pp. 111-112; boundary Hölder regularity for classical Dirichlet solutions."
+            },
+            {
+              "title": "Armin Schikorra, Partial Differential Equations I & II (version October 1, 2025; complete 281-page graduate lecture notes)",
+              "url": "https://sites.pitt.edu/~armin/pde2022/pde.pdf",
+              "locator": "§8.9, Theorem 8.30, printed pp. 151-153; weak-to-strong regularity from a global Schauder estimate."
+            },
+            {
+              "title": "Chin-Lung Wang, Banach Calculus, National Taiwan University lecture notes (2012; complete 16-page PDF)",
+              "url": "https://www.math.ntu.edu.tw/~dragon/Lecture%20Notes/Banach%20Calculus%202012.pdf",
+              "locator": "§3.1 and §3.3, PDF pp. 9-11; contraction and implicit-function methods in Banach spaces."
+            },
+            {
+              "title": "John B. Conway, Functional Analysis, Chapter XII (University of Colorado lecture chapter)",
+              "url": "https://spot.colorado.edu/~baggett/funcchap12.pdf",
+              "locator": "Chapter XII, Theorem 12.8, printed pp. 256-257; implicit-function theorem proved from contraction mapping."
+            }
+          ]
+        },
+        "strategy": "direct"
+      }
+    ]
+  },
+  {
+    "order": 732,
+    "id": "emg-fx02-examples",
+    "kind": "B",
+    "category": "einstein-maxwell-models-mathematics",
+    "library": "mathematics",
+    "title": "Local nonlinear constraint construction with explicit analytic obligations — Examples",
+    "companion": "emg-fx02",
+    "requires": [
+      "emg-fx02"
+    ],
+    "items": [
+      {
+        "id": "ex-emg-fx-small-constant-field-ball",
+        "kind": "example",
+        "domain": "mathematics",
+        "library": "mathematics",
+        "title": "Constant-field branch on a ball",
+        "reference": "items/ex-emg-fx-small-constant-field-ball.md#example",
+        "design_state": "Checks the local theorem on a ball with constant divergence-free base field and computes the leading Dirichlet coefficient exactly.",
+        "inventory_expansion_required": true,
+        "physical_scope": null,
+        "statement": "Let $\\Omega=B_R(0)\\subset\\mathbb R^3$ for a fixed length $R>0$, let $\\bar E_0=a\\,e_1$ be a constant Euclidean base vector with $a\\geq0$ of units inverse length, and let $\\bar B_0=0$. The actual fields are $\\bar E_\\varepsilon=\\varepsilon\\bar E_0$, $\\bar B_\\varepsilon=\\varepsilon\\bar B_0$, so $S=|\\bar E_0|^2+|\\bar B_0|^2=a^2$ is nonnegative and Hölder continuous, both actual seed fields are divergence-free, and $\\varepsilon$ is dimensionless. Under the hypotheses of [[thm-emg-fx-small-dirichlet-data]], the bounded-domain equation has a unique local branch with\n\n$$\\psi_\\varepsilon(x)=1+\\varepsilon^2\\frac{a^2}{24}\\bigl(R^2-|x|^2\\bigr)+O_{C^{2,\\alpha}}(\\varepsilon^4),\\qquad \\psi_\\varepsilon\\geq1.$$\n\nThis example concerns only the fixed ball and its Dirichlet data.",
+        "deps": [
+          "thm-emg-fx-small-dirichlet-data",
+          "def-emg-fx-dirichlet-constraint-problem"
+        ],
+        "dependency_roles": {
+          "thm-emg-fx-small-dirichlet-data": "mathematical-premise",
+          "def-emg-fx-dirichlet-constraint-problem": "mathematical-premise"
+        },
+        "dependency_level": 5,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "A. I. Alcubierre, J. C. Degollado and M. Salgado, The Einstein-Maxwell system in 3+1 form and initial data for multiple charged black holes, arXiv:0907.1151v2 (2009)",
+              "url": "https://arxiv.org/pdf/0907.1151",
+              "locator": "Section III.A, equations (3.1)-(3.12); geometric-normalized seed fields and the time-symmetric scalar constraint."
+            },
+            {
+              "title": "David Gilbarg and Neil S. Trudinger, Elliptic Partial Differential Equations of Second Order (2001)",
+              "url": "https://djvu.online/file/jxRRleAzbYjsl",
+              "locator": "Chapter 4, Theorems 4.6 and 4.8; the local example's linear Dirichlet coefficient is computed directly."
+            }
+          ]
+        },
+        "strategy": "direct"
+      }
+    ]
+  }
+]

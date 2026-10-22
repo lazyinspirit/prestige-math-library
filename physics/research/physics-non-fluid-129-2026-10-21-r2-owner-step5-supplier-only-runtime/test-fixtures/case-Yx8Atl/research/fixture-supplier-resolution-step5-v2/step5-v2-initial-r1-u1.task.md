@@ -1,0 +1,1 @@
+Frozen inputs: /home/lazyinspirit/Projects/prestige-math-library/physics/research/physics-non-fluid-129-2026-10-21-r2-owner-step5-supplier-only-runtime/test-fixtures/case-Yx8Atl/research/fixture-supplier-resolution-step5-v2/initial-1.json

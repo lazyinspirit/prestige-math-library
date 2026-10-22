@@ -1,0 +1,1147 @@
+{
+  "version": 1,
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "batch": "92",
+  "scope": [
+    "def-csm-frontier-ssep-current-action",
+    "def-csm-frontier-bernoulli-relative-free-energy",
+    "def-csm-frontier-ssep-quasipotential",
+    "thm-csm-frontier-mft-reversal-identity",
+    "lem-csm-frontier-mft-small-action-bridge",
+    "thm-csm-frontier-equilibrium-quasipotential",
+    "ex-csm-frontier-mft-nonlocal-warning"
+  ],
+  "contracts": {
+    "def-csm-frontier-ssep-current-action": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Definition assumes d>=1 and the torus is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition and its supplied argument: Density rho=0 is excluded by epsilon<=rho, but current j=0 is allowed. For a constant admissible rho in (0,1), j=0 obeys the continuity equation and gives action 0 directly from the displayed numerator."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition and its supplied argument: Density rho=1 is excluded by rho<=1-epsilon. Spatial dimension d=1 is included: the norm and divergence become their one-coordinate forms and the positive mobility denominator remains bounded below by epsilon(1-epsilon)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The constant profile rho=bar with j=0 has zero integrand by the Definition."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Definition specifies smooth extension to both finite time endpoints and integrates over the closed interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The Definition constructs a functional from explicit smooth fields and makes no choice assumption."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition assigns a finite integral to smooth admissible density/current pairs with density bounded away from 0 and 1. It asserts no microscopic LDP or equivalence with a path probability."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition assigns a finite integral to smooth admissible density/current pairs with density bounded away from 0 and 1. It asserts no microscopic LDP or equivalence with a path probability."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "constant equilibrium path",
+          "status": "checked",
+          "evidence": "The Definition gives zero action for rho constant and j=0."
+        }
+      ],
+      "finite_checks_disposition": "All applicable finite and boundary cases are recorded above. The remaining argument is symbolic; no unrecorded numerical, simulated, or experimental checks are used.",
+      "supplier_excerpts": [],
+      "risk_review": {
+        "status": "complete",
+        "notes": "Step 1 authoring check compared the exact supplier interfaces and actual hypotheses to each recorded consumer use, inspected the proof argument, and reviewed the stated boundary cases. This is not independent proof approval."
+      },
+      "repair_confidence": 1,
+      "current_boundary_worksheet": {
+        "proposal": "research/physics-non-fluid-129-2026-10-21-r2-owner-step2-boundary-proposal-2/proposal.json",
+        "source_sha256": "bb8220ec51a94ade25fd5506f823e478ae9aeb14da22be498d54c367763747d3",
+        "qualification": "Released complete current source/eight-case semantic worksheet; root transcribed exact current rows. No independent acceptance or finite computation asserted."
+      }
+    },
+    "def-csm-frontier-bernoulli-relative-free-energy": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Definition assumes d>=1 and a nonempty torus."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: rho=bar_rho gives h=0 pointwise and H=0; other profiles can also have zero linear correction when their mean is bar_rho. The values rho=0 and bar_rho=0 are excluded, so no logarithm at zero is used."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition includes d=1 with normalized circle Haar measure. Profile or reference density equal to 1 is excluded; the upper profile bound 1-epsilon is still strictly below 1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: For rho=bar the integrand is zero pointwise by the defining formula."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: The profile values stay in a compact subinterval of (0,1), making every logarithm finite."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The Definition uses no selections or choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Bernoulli functional is defined on profiles bounded inside (0,1); matching the mean cancels its linear correction. Equality of those integrals is not claimed to force the mean constraint, in particular when bar_rho is one half."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Bernoulli functional is defined on profiles bounded inside (0,1); matching the mean cancels its linear correction. Equality of those integrals is not claimed to force the mean constraint, in particular when bar_rho is one half."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "reference profile",
+          "status": "checked",
+          "evidence": "At rho=bar the defining density h(bar|bar) is zero."
+        }
+      ],
+      "finite_checks_disposition": "All applicable finite and boundary cases are recorded above. The remaining argument is symbolic; no unrecorded numerical, simulated, or experimental checks are used.",
+      "supplier_excerpts": [
+        {
+          "supplier": "def-natural-logarithm",
+          "carrier": "items/def-natural-logarithm.md",
+          "status": "Published Definition interface inspected for this use; no proof is applicable. This records Step 1 use only and is not independent approval.",
+          "source_section": "Definition",
+          "exact_statement": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because The exponential is a continuous bijection from $\\mathbb{R}$ onto $(0,\\infty)$ states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.\n\n",
+          "relevant_hypotheses_and_conventions": "The Definition states the positive-real domain and inverse-exponential convention for every logarithm argument.",
+          "supplier_proof_status": "Published Definition interface inspected for this use; no proof is applicable. This records Step 1 use only and is not independent approval.",
+          "consumer_use": "The Definition states the positive-real domain and inverse-exponential convention for every logarithm argument."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "notes": "Step 1 authoring check compared the exact supplier interfaces and actual hypotheses to each recorded consumer use, inspected the proof argument, and reviewed the stated boundary cases. This is not independent proof approval."
+      },
+      "repair_confidence": 1,
+      "current_boundary_worksheet": {
+        "proposal": "research/physics-non-fluid-129-2026-10-21-r2-owner-step2-boundary-proposal-1/proposal.json",
+        "source_sha256": "acfc844d503d3ce98f44476820802fef9e970ea12ea6235c41a074feb4703313",
+        "qualification": "Released complete current source/eight-case semantic worksheet; root transcribed exact current rows. No independent acceptance or finite computation asserted."
+      }
+    },
+    "def-csm-frontier-ssep-quasipotential": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The path family may be empty, and the Definition explicitly assigns its infimum +infinity. For a target with mean unequal to barrho no admissible fixed-mean connection can exist; the convention therefore handles an actual case, not only an empty spatial torus."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Targets and connection paths are strictly interior and bounded away from zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Targets and connection paths are strictly interior and bounded away from one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: For the homogeneous target, the constant path with zero current has zero action for any T>0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The connection definition gives its exact initial and terminal profiles."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition and its supplied argument: The extended-real infimum is defined for the set of all admissible positive-duration connections, including the empty set; no minimizer, near-minimizer sequence, or choice from every duration is asserted."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition states no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "homogeneous target",
+          "status": "checked",
+          "evidence": "The constant connection has zero cost for every positive horizon by the action Definition."
+        }
+      ],
+      "finite_checks_disposition": "All applicable finite and boundary cases are recorded above. The remaining argument is symbolic; no unrecorded numerical, simulated, or experimental checks are used.",
+      "supplier_excerpts": [
+        {
+          "supplier": "def-csm-frontier-ssep-current-action",
+          "carrier": "items/def-csm-frontier-ssep-current-action.md",
+          "status": "Draft Definition interface inspected for this use, including its hypotheses and declared dependencies; current readiness is recorded separately. This is not independent approval.",
+          "source_section": "Definition",
+          "exact_statement": "Fix an integer $d\\ge1$ and let $\\mathbb T^d=(\\mathbb R/\\mathbb Z)^d$ carry normalized product Haar measure $dx$, with $dx(\\mathbb T^d)=1$. Coordinates and time are dimensionless in the diffusive normalization $D=1$. For $r\\in(0,1)$ set the mobility function $\\chi(r):=r(1-r)$. For any finite interval $[a,b]$ with $a<b$, let $\\rho:[a,b]\\times\\mathbb T^d\\to\\mathbb R$ be a scalar density and let $j:[a,b]\\times\\mathbb T^d\\to\\mathbb R^d$ be a vector current. Require both fields to be smooth up to the time endpoints and periodic in space, and require that for some $\\varepsilon\\in(0,1/2)$, $\\varepsilon\\le\\rho(t,x)\\le1-\\varepsilon$ for every $(t,x)$. Call $(\\rho,j)$ admissible when it also satisfies the continuity equation $\\partial_t\\rho+\\nabla\\cdot j=0$. Define its dimensionless action by\n\n$$\\mathcal I_{[a,b]}(\\rho,j):=\\frac14\\int_a^b\\int_{\\mathbb T^d}\\frac{|j(t,x)+\\nabla\\rho(t,x)|^2}{\\rho(t,x)(1-\\rho(t,x))}\\,dx\\,dt.$$\n\nThis is the macroscopic fluctuation functional in the stated normalized SSEP coefficient convention. It is a definition of a functional and does not assert a microscopic path-space large-deviation principle or a probability estimate.\n\n",
+          "relevant_hypotheses_and_conventions": "The connection cost is exactly the previously defined normalized action on its finite time interval.",
+          "supplier_proof_status": "Draft Definition interface inspected for this use, including its hypotheses and declared dependencies; current readiness is recorded separately. This is not independent approval.",
+          "consumer_use": "The connection cost is exactly the previously defined normalized action on its finite time interval."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "notes": "Step 1 authoring check compared the exact supplier interfaces and actual hypotheses to each recorded consumer use, inspected the proof argument, and reviewed the stated boundary cases. This is not independent proof approval."
+      },
+      "repair_confidence": 1,
+      "current_boundary_worksheet": {
+        "proposal": "research/physics-non-fluid-129-2026-10-21-r2-owner-step2-boundary-proposal-3/proposal.json",
+        "source_sha256": "ad8a9a1214d8ef009a66f3fe46e438b7cd32a357da52e2c95ba10272f45b1b8a",
+        "qualification": "Released complete current source/eight-case semantic worksheet; root transcribed exact current rows. No independent acceptance or finite computation asserted."
+      }
+    },
+    "thm-csm-frontier-mft-reversal-identity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-csm-frontier-ssep-current-action",
+          "source_section": "Definition",
+          "quote": "Fix an integer $d\\ge1$ and let $\\mathbb T^d=(\\mathbb R/\\mathbb Z)^d$ carry normalized product Haar measure $dx$, with $dx(\\mathbb T^d)=1$. Coordinates and time are dimensionless in the diffusive normalization $D=1$. For $r\\in(0,1)$ set the mobility function $\\chi(r):=r(1-r)$. For any finite interval $[a,b]$ with $a<b$, let $\\rho:[a,b]\\times\\mathbb T^d\\to\\mathbb R$ be a scalar density and let $j:[a,b]\\times\\mathbb T^d\\to\\mathbb R^d$ be a vector current. Require both fields to be smooth up to the time endpoints and periodic in space, and require that for some $\\varepsilon\\in(0,1/2)$, $\\varepsilon\\le\\rho(t,x)\\le1-\\varepsilon$ for every $(t,x)$. Call $(\\rho,j)$ admissible when it also satisfies the continuity equation $\\partial_t\\rho+\\nabla\\cdot j=0$. Define its dimensionless action by\n\n$$\\mathcal I_{[a,b]}(\\rho,j):=\\frac14\\int_a^b\\int_{\\mathbb T^d}\\frac{|j(t,x)+\\nabla\\rho(t,x)|^2}{\\rho(t,x)(1-\\rho(t,x))}\\,dx\\,dt.$$\n\nThis is the macroscopic fluctuation functional in the stated normalized SSEP coefficient convention. It is a definition of a functional and does not assert a microscopic path-space large-deviation principle or a probability estimate.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because The exponential is a continuous bijection from $\\mathbb{R}$ onto $(0,\\infty)$ states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-chain-rule",
+          "source_section": "Statement",
+          "quote": "Let $A, B \\subseteq \\mathbb{R}$, let $g : A \\to \\mathbb{R}$ with\n$g[A] \\subseteq B$ and let $f : B \\to \\mathbb{R}$, so that the composite\n$f \\circ g : A \\to \\mathbb{R}$ is defined. Let $c \\in A$ be a limit point of\n$A$ (Limit point, isolated point, adherent point, derived set, and dense subset of $\\mathbb{R}$) at which $g$ is differentiable\n(The derivative $f'(c) = \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c}$ of $f : A \\to \\mathbb{R}$ at a point $c \\in A$ that is a limit point of $A$, and differentiability on a set), put $b := g(c)$, and suppose $b$ is a limit point of $B$\nat which $f$ is differentiable. Then $f \\circ g$ is differentiable at $c$ and\n\n$$(f \\circ g)'(c) \\;=\\; f'\\bigl(g(c)\\bigr)\\,g'(c) .$$\n\n**Both limit-point hypotheses are needed, and neither is automatic.** That $c$\nis a limit point of $A$ is what makes $g'(c)$ and $(f \\circ g)'(c)$ defined\nsymbols; that $b = g(c)$ is a limit point of $B$ is what makes $f'(b)$ one.\nNothing forces the second: $g$ may be differentiable at $c$ and send $c$ to an\nisolated point of $B$, and there $f'(b)$ is not defined and the formula asserts\nnothing.\n\n**No case analysis appears anywhere.** The naive difference-quotient proof\nwrites $\\frac{f(g(x)) - f(g(c))}{g(x) - g(c)} \\cdot \\frac{g(x) - g(c)}{x - c}$\nand then has to say what happens where $g(x) = g(c)$, which may occur at points\narbitrarily close to $c$. Carathéodory's factorisation never divides by the\ninner increment, so the difficulty does not arise.\n\n",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "For $0<u<1$ and sufficiently small nonzero $h$, the first product quotient is $\\frac{(u+h)\\log(u+h)-u\\log u}{h}=u\\frac{\\log(u+h)-\\log u}{h}+\\log(u+h)$, which tends to $1+\\log u$ by [F3]. With $v=1-u$, the second quotient is $\\frac{(v-h)\\log(v-h)-v\\log v}{h}=v\\frac{\\log(v-h)-\\log v}{h}-\\log(v-h)$, which tends to $-1-\\log v$ by the same derivative formula. Thus $f'(u)=\\log u-\\log(1-u)$. By [F4] applied to $\\log$ composed with $u\\mapsto1-u$, the derivative of $\\log(1-u)$ is $-1/(1-u)$; [F3] gives the derivative of $\\log u$ as $1/u$. Hence $f''(u)=1/u+1/(1-u)=1/[u(1-u)]$.",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "The reversed fields remain smooth, periodic, and in the same density range. Also $\\partial_t\\rho^\\theta+\\nabla\\cdot j^\\theta=-(\\partial_t\\rho+\\nabla\\cdot j)(T-t,x)=0$, so they are admissible for the same action.",
+          "inputs": [
+            "A1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "By the reversed-path definitions, $\\mathcal I_{[0,T]}(\\rho^\\theta,j^\\theta)=\\frac14\\int_0^T\\int_{\\mathbb T^d}\\frac{|-j(T-t,x)+\\nabla\\rho(T-t,x)|^2}{\\chi(\\rho(T-t,x))}\\,dx\\,dt$. Substitute $s=T-t$: $dt=-ds$ and the limits $t=0,T$ become $s=T,0$, so this equals $\\frac14\\int_0^T\\int_{\\mathbb T^d}\\frac{|-j(s,x)+\\nabla\\rho(s,x)|^2}{\\chi(\\rho(s,x))}\\,dx\\,ds$. After renaming $s$ to $t$, subtract this expression from the forward action. At the common point $(t,x)$, the resulting integrand is $\\frac{|j+\\nabla\\rho|^2-|-j+\\nabla\\rho|^2}{4\\chi(\\rho)}=\\frac{j\\cdot\\nabla\\rho}{\\chi(\\rho)}=\\nabla f'(\\rho)\\cdot j$, by quadratic expansion and the coordinatewise chain rule with $f''(\\rho)=1/\\chi(\\rho)$. All integrands are continuous on the compact cylinder since $\\chi(\\rho)\\ge\\varepsilon(1-\\varepsilon)>0$.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F4",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "step": "2.2",
+          "claim": "For each coordinate $i$, the integral of $\\partial_i(f'(\\rho)j_i)$ over $[0,1]^d$ is zero because its endpoint values in the $i$th coordinate agree by periodicity. Summing gives $\\int_{\\mathbb T^d}\\nabla f'(\\rho)\\cdot j\\,dx=-\\int_{\\mathbb T^d}f'(\\rho)\\nabla\\cdot j\\,dx=\\int_{\\mathbb T^d}f'(\\rho)\\partial_t\\rho\\,dx$. By [F4] this last integrand is the time derivative of $f(\\rho)$; it is continuous on the compact cylinder, so the fundamental theorem of calculus makes its time difference quotients converge uniformly in space and justifies differentiating the spatial integral. Hence the expression is $\\frac{d}{dt}\\int_{\\mathbb T^d}f(\\rho(t,x))\\,dx$.",
+          "inputs": [
+            "A1",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Integrating the identity from step 2.2 over $t\\in[0,T]$ and using the integrand difference from step 2.1 gives the stated endpoint formula.",
+          "inputs": [
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes d>=1 and a nonempty torus.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step5_qsm_referrals (focused scientific boundary review; no native or whole-item acceptance)",
+            "reason": "The current hypotheses have integer d≥1 and T>0, hence the spatial torus contains the zero class, has normalized volume one, and the time cylinder contains both endpoints and all intermediate times. Since 0<epsilon<1/2, the allowed density interval [epsilon,1−epsilon] is nonempty and the admissible class itself is witnessed by rho=1/2,j=0. The coordinate sum in periodic integration by parts contains exactly d directions. Current proof 2.1 explicitly substitutes s=T−t in the reversed action before comparing the common-time integrands, on the same nonempty cylinder; reversal does not create an empty index family. Proof 2.2 and 3.1 integrate continuous quantities over this fixed domain. Zero fields or constant density change values, not the domain, so the claimed empty-case exclusion is correct.",
+            "item_sha256": "3c346f94f507b7d8f7c7c92d9feb5f245bd709b70b615b63758b2dc5de516d04",
+            "row_sha256": "32247551b4971ddaa2f5f36b68dd2c2bed1f5362db8a9ed2321473fcc45508a6"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/step5_qsm_referrals (focused scientific boundary review; no native or whole-item acceptance)",
+            "reason": "The current hypotheses have integer d≥1 and T>0, hence the spatial torus contains the zero class, has normalized volume one, and the time cylinder contains both endpoints and all intermediate times. Since 0<epsilon<1/2, the allowed density interval [epsilon,1−epsilon] is nonempty and the admissible class itself is witnessed by rho=1/2,j=0. The coordinate sum in periodic integration by parts contains exactly d directions. Current proof 2.1 explicitly substitutes s=T−t in the reversed action before comparing the common-time integrands, on the same nonempty cylinder; reversal does not create an empty index family. Proof 2.2 and 3.1 integrate continuous quantities over this fixed domain. Zero fields or constant density change values, not the domain, so the claimed empty-case exclusion is correct.",
+            "item_sha256": "3c346f94f507b7d8f7c7c92d9feb5f245bd709b70b615b63758b2dc5de516d04",
+            "row_sha256": "32247551b4971ddaa2f5f36b68dd2c2bed1f5362db8a9ed2321473fcc45508a6"
+          },
+          "historical_boundary_reviews": [
+            {
+              "at": "2026-10-22T09:22:24.047Z",
+              "root_adoption": "Focused actual scientific boundary review successor; preserve prior row and old acceptance history without current native/whole-item proof claims.",
+              "proposal": "research/physics-non-fluid-129-2026-10-21-r2-owner-step5-final-boundary-csm/proposal.json",
+              "previous": {
+                "case": "empty",
+                "status": "not_applicable",
+                "reason": "The Statement assumes d>=1 and a nonempty torus.",
+                "template_review": {
+                  "upheld": true,
+                  "by": "/root adopting /root/csm_boundary",
+                  "reason": "Root adopts /root/csm_boundary current case review in research/physics-non-fluid-129-2026-10-21-r2-owner-step3-boundary-current-csm_boundary/proposal.json: The Statement fixes d>=1, T>0, smooth fields on the nonempty cylinder[0,T]xT^d and density in[epsilon,1-epsilon]. The spatial coordinate sum has exactly d terms. Periodic integration by parts and time integration produce an endpoint identity on this fixed carrier; zero current or constant density does not make the domain empty. The repeated nonempty-torus reason is truthful for this exact action identity. Source reading limits and exact support remain in the sealed proposal; no independent native proof acceptance is asserted.",
+                  "item_sha256": "4867f345314f8dae6e8ef8ca8841070094be01130b99f45eaa327263aa5bceea",
+                  "row_sha256": "32247551b4971ddaa2f5f36b68dd2c2bed1f5362db8a9ed2321473fcc45508a6"
+                },
+                "reviewed": {
+                  "upheld": true,
+                  "by": "/root adopting /root/csm_boundary",
+                  "reason": "Root adopts /root/csm_boundary current case review in research/physics-non-fluid-129-2026-10-21-r2-owner-step3-boundary-current-csm_boundary/proposal.json: The Statement fixes d>=1, T>0, smooth fields on the nonempty cylinder[0,T]xT^d and density in[epsilon,1-epsilon]. The spatial coordinate sum has exactly d terms. Periodic integration by parts and time integration produce an endpoint identity on this fixed carrier; zero current or constant density does not make the domain empty. The repeated nonempty-torus reason is truthful for this exact action identity. Source reading limits and exact support remain in the sealed proposal; no independent native proof acceptance is asserted.",
+                  "item_sha256": "4867f345314f8dae6e8ef8ca8841070094be01130b99f45eaa327263aa5bceea",
+                  "row_sha256": "32247551b4971ddaa2f5f36b68dd2c2bed1f5362db8a9ed2321473fcc45508a6"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "In the Statement constant density in [epsilon,1-epsilon] with j=0 is a zero-action admissible path. Both actions and the endpoint free-energy difference vanish; every admitted mobility denominator is at least epsilon(1-epsilon)>0.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/csm_boundary",
+            "reason": "In the Statement constant density in [epsilon,1-epsilon] with j=0 is a zero-action admissible path. Both actions and the endpoint free-energy difference vanish; every admitted mobility denominator is at least epsilon(1-epsilon)>0.",
+            "item_sha256": "4867f345314f8dae6e8ef8ca8841070094be01130b99f45eaa327263aa5bceea",
+            "row_sha256": "58237584e5d32ba0e4d9576766860ce5d1e3ffe15fbe634e23c02ffcd1cae0b6"
+          }
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The strict interior bound 1-epsilon excludes unit density."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: For a constant density and zero current both sides of the identity vanish."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The endpoint terms are evaluated at the stated smooth times 0 and T."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof is deterministic calculus and uses no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is an identity, not a biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/csm_boundary",
+            "reason": "Quadratic expansion and periodic integration by parts give an action difference equal to an endpoint free-energy difference. This numerical identity is not a biconditional; the torus has mass one and the mobility is bounded below by epsilon(1-epsilon).",
+            "item_sha256": "4867f345314f8dae6e8ef8ca8841070094be01130b99f45eaa327263aa5bceea",
+            "row_sha256": "7c0d046f5058fa5cb9f50a209d876ed3b146168ac9b47657725c7432e6d98a73"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is an identity, not a biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/csm_boundary",
+            "reason": "Quadratic expansion and periodic integration by parts give an action difference equal to an endpoint free-energy difference. This numerical identity is not a biconditional; the torus has mass one and the mobility is bounded below by epsilon(1-epsilon).",
+            "item_sha256": "4867f345314f8dae6e8ef8ca8841070094be01130b99f45eaa327263aa5bceea",
+            "row_sha256": "55e508de66b3012d27e1e4bc756f9f052b9ea737ffd5addb805a65fc05accce1"
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "constant path",
+          "status": "checked",
+          "evidence": "The action integrand difference and endpoint entropy difference both vanish for constant rho and zero current."
+        }
+      ],
+      "finite_checks_disposition": "All applicable finite and boundary cases are recorded above. The remaining argument is symbolic; no unrecorded numerical, simulated, or experimental checks are used.",
+      "supplier_excerpts": [
+        {
+          "supplier": "def-csm-frontier-ssep-current-action",
+          "carrier": "items/def-csm-frontier-ssep-current-action.md",
+          "status": "Draft Definition interface inspected for this use, including its hypotheses and declared dependencies; current readiness is recorded separately. This is not independent approval.",
+          "source_section": "Definition",
+          "exact_statement": "Fix an integer $d\\ge1$ and let $\\mathbb T^d=(\\mathbb R/\\mathbb Z)^d$ carry normalized product Haar measure $dx$, with $dx(\\mathbb T^d)=1$. Coordinates and time are dimensionless in the diffusive normalization $D=1$. For $r\\in(0,1)$ set the mobility function $\\chi(r):=r(1-r)$. For any finite interval $[a,b]$ with $a<b$, let $\\rho:[a,b]\\times\\mathbb T^d\\to\\mathbb R$ be a scalar density and let $j:[a,b]\\times\\mathbb T^d\\to\\mathbb R^d$ be a vector current. Require both fields to be smooth up to the time endpoints and periodic in space, and require that for some $\\varepsilon\\in(0,1/2)$, $\\varepsilon\\le\\rho(t,x)\\le1-\\varepsilon$ for every $(t,x)$. Call $(\\rho,j)$ admissible when it also satisfies the continuity equation $\\partial_t\\rho+\\nabla\\cdot j=0$. Define its dimensionless action by\n\n$$\\mathcal I_{[a,b]}(\\rho,j):=\\frac14\\int_a^b\\int_{\\mathbb T^d}\\frac{|j(t,x)+\\nabla\\rho(t,x)|^2}{\\rho(t,x)(1-\\rho(t,x))}\\,dx\\,dt.$$\n\nThis is the macroscopic fluctuation functional in the stated normalized SSEP coefficient convention. It is a definition of a functional and does not assert a microscopic path-space large-deviation principle or a probability estimate.\n\n",
+          "relevant_hypotheses_and_conventions": "The forward and reversed costs use the exact same mobility and action coefficient.",
+          "supplier_proof_status": "Draft Definition interface inspected for this use, including its hypotheses and declared dependencies; current readiness is recorded separately. This is not independent approval.",
+          "consumer_use": "The forward and reversed costs use the exact same mobility and action coefficient."
+        },
+        {
+          "supplier": "def-natural-logarithm",
+          "carrier": "items/def-natural-logarithm.md",
+          "status": "Published Definition interface inspected for this use; no proof is applicable. This records Step 1 use only and is not independent approval.",
+          "source_section": "Definition",
+          "exact_statement": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because The exponential is a continuous bijection from $\\mathbb{R}$ onto $(0,\\infty)$ states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.\n\n",
+          "relevant_hypotheses_and_conventions": "The entropy density uses the natural logarithm only at positive arguments in (0,1).",
+          "supplier_proof_status": "Published Definition interface inspected for this use; no proof is applicable. This records Step 1 use only and is not independent approval.",
+          "consumer_use": "The entropy density uses the natural logarithm only at positive arguments in (0,1)."
+        },
+        {
+          "supplier": "thm-chain-rule",
+          "carrier": "items/thm-chain-rule.md",
+          "status": "Published Statement and complete current Proof inspected for this use. This records Step 1 use only and is not independent proof approval.",
+          "source_section": "Statement",
+          "exact_statement": "Let $A, B \\subseteq \\mathbb{R}$, let $g : A \\to \\mathbb{R}$ with\n$g[A] \\subseteq B$ and let $f : B \\to \\mathbb{R}$, so that the composite\n$f \\circ g : A \\to \\mathbb{R}$ is defined. Let $c \\in A$ be a limit point of\n$A$ (Limit point, isolated point, adherent point, derived set, and dense subset of $\\mathbb{R}$) at which $g$ is differentiable\n(The derivative $f'(c) = \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c}$ of $f : A \\to \\mathbb{R}$ at a point $c \\in A$ that is a limit point of $A$, and differentiability on a set), put $b := g(c)$, and suppose $b$ is a limit point of $B$\nat which $f$ is differentiable. Then $f \\circ g$ is differentiable at $c$ and\n\n$$(f \\circ g)'(c) \\;=\\; f'\\bigl(g(c)\\bigr)\\,g'(c) .$$\n\n**Both limit-point hypotheses are needed, and neither is automatic.** That $c$\nis a limit point of $A$ is what makes $g'(c)$ and $(f \\circ g)'(c)$ defined\nsymbols; that $b = g(c)$ is a limit point of $B$ is what makes $f'(b)$ one.\nNothing forces the second: $g$ may be differentiable at $c$ and send $c$ to an\nisolated point of $B$, and there $f'(b)$ is not defined and the formula asserts\nnothing.\n\n**No case analysis appears anywhere.** The naive difference-quotient proof\nwrites $\\frac{f(g(x)) - f(g(c))}{g(x) - g(c)} \\cdot \\frac{g(x) - g(c)}{x - c}$\nand then has to say what happens where $g(x) = g(c)$, which may occur at points\narbitrarily close to $c$. Carathéodory's factorisation never divides by the\ninner increment, so the difficulty does not arise.\n\n",
+          "relevant_hypotheses_and_conventions": "The composition rule is applied to the smooth density in the time variable at interior times; the resulting derivative extends continuously to the closed interval.",
+          "supplier_proof_status": "Published Statement and complete current Proof inspected for this use. This records Step 1 use only and is not independent proof approval.",
+          "consumer_use": "The composition rule is applied to the smooth density in the time variable at interior times; the resulting derivative extends continuously to the closed interval."
+        },
+        {
+          "supplier": "thm-logarithm-derivative-and-integral",
+          "carrier": "items/thm-logarithm-derivative-and-integral.md",
+          "status": "Published Statement and complete current Proof inspected for this use. This records Step 1 use only and is not independent proof approval.",
+          "source_section": "Statement",
+          "exact_statement": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$\n\n",
+          "relevant_hypotheses_and_conventions": "Its x>0 derivative hypothesis is applied at u and 1-u under the strict interior bound.",
+          "supplier_proof_status": "Published Statement and complete current Proof inspected for this use. This records Step 1 use only and is not independent proof approval.",
+          "consumer_use": "Its x>0 derivative hypothesis is applied at u and 1-u under the strict interior bound."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-92",
+        "notes": "Independently checked all five proof steps and F1-F4 against current suppliers. On the compact smooth periodic cylinder, chi>=epsilon(1-epsilon)>0. Difference quotients give f prime=log u-log(1-u), f double-prime=1/chi. Reversal negates the current and time derivative and preserves continuity and range. Substitution t->T-t in the reversed integral and quadratic expansion give j dot grad rho/chi; periodic coordinate integration has no boundary term, and uniform continuity justifies differentiation under the spatial integral. The sign is the final-minus-initial free energy. Constant density/zero current gives zero on both sides; d=1 and endpoints 0,T are included, T=0 and density 0,1 are excluded. No choice, empirical premise or microscopic path-LDP is used. Reader/refuter report no defect here. Source comparison: Bertini 1404.6466 II.C (2.12)-(2.16) and V.D coefficients; local calculus supplies the proof, rather than an imported general stochastic reversal claim."
+      },
+      "repair_confidence": 1
+    },
+    "lem-csm-frontier-mft-small-action-bridge": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.\n\n",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-csm-frontier-ssep-current-action",
+          "source_section": "Definition",
+          "quote": "Fix an integer $d\\ge1$ and let $\\mathbb T^d=(\\mathbb R/\\mathbb Z)^d$ carry normalized product Haar measure $dx$, with $dx(\\mathbb T^d)=1$. Coordinates and time are dimensionless in the diffusive normalization $D=1$. For $r\\in(0,1)$ set the mobility function $\\chi(r):=r(1-r)$. For any finite interval $[a,b]$ with $a<b$, let $\\rho:[a,b]\\times\\mathbb T^d\\to\\mathbb R$ be a scalar density and let $j:[a,b]\\times\\mathbb T^d\\to\\mathbb R^d$ be a vector current. Require both fields to be smooth up to the time endpoints and periodic in space, and require that for some $\\varepsilon\\in(0,1/2)$, $\\varepsilon\\le\\rho(t,x)\\le1-\\varepsilon$ for every $(t,x)$. Call $(\\rho,j)$ admissible when it also satisfies the continuity equation $\\partial_t\\rho+\\nabla\\cdot j=0$. Define its dimensionless action by\n\n$$\\mathcal I_{[a,b]}(\\rho,j):=\\frac14\\int_a^b\\int_{\\mathbb T^d}\\frac{|j(t,x)+\\nabla\\rho(t,x)|^2}{\\rho(t,x)(1-\\rho(t,x))}\\,dx\\,dt.$$\n\nThis is the macroscopic fluctuation functional in the stated normalized SSEP coefficient convention. It is a definition of a functional and does not assert a microscopic path-space large-deviation principle or a probability estimate.\n\n",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-csm-frontier-ssep-heat-flow",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $d\\ge1$ and let $\\rho_0:\\mathbb T^d\\to\\mathbb R$ be measurable with $0\\le\\rho_0\\le1$ almost everywhere, using normalized product Haar measure $dx$. For $k\\in\\mathbb Z^d$ define $e_k(x)=\\exp(2\\pi i k\\cdot x)$ and $\\widehat f(k)=\\int_{\\mathbb T^d}f(x)e_{-k}(x)\\,dx$. For $t>0$ set\n\n$$\\rho_t(x):=\\sum_{k\\in\\mathbb Z^d}e^{-4\\pi^2|k|^2t}\\widehat\\rho_0(k)e_k(x),$$\n\nand at $t=0$ set $\\rho_t=\\rho_0$ as an almost-everywhere class. For smooth periodic $G$, define\n\n$$P_tG(x):=\\sum_{k\\in\\mathbb Z^d}e^{-4\\pi^2|k|^2t}\\widehat G(k)e_k(x)\\quad(t>0),\\qquad P_0G:=G.$$\n\nThen on every strip $[\\epsilon,T]\\times\\mathbb T^d$ with $0<\\epsilon<T<\\infty$, the series for $\\rho_t$ and all its space and time derivatives converge absolutely and uniformly; in particular $\\rho_t$ is real and smooth for each $t>0$ and $\\partial_t\\rho_t=\\Delta\\rho_t$. For every finite $T$ and every smooth $G$, $P_tG$ is smooth on $[0,T]\\times\\mathbb T^d$, satisfies $\\partial_tP_tG=\\Delta P_tG$, has uniformly bounded derivatives of every fixed order there, and $P_tG\\to G$ uniformly as $t\\downarrow0$. Moreover\n\n$$\\int_{\\mathbb T^d}\\rho_tG\\,dx=\\int_{\\mathbb T^d}\\rho_0P_tG\\,dx,$$\n\nso $(\\rho_t)_{0\\le t\\le T}$ is the unique weak heat solution with datum $\\rho_0$ in the stated weak formulation. It preserves $0\\le\\rho_t\\le1$ almost everywhere and the mass $\\int\\rho_t\\,dx=\\int\\rho_0\\,dx$.\n\n",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Since $\\rho$ is smooth and periodic, repeated integration by parts gives $(1+4\\pi^2|k|^2)^m\\widehat\\rho(k)=\\widehat{(1-\\Delta)^m\\rho}(k)$, so $|\\widehat\\rho(k)|\\le C_m(1+|k|^2)^{-m}$ for every integer $m\\ge1$. The number of lattice points with $\\|k\\|_\\infty=r$ is at most $(2r+1)^d-(2r-1)^d\\le C_dr^{d-1}$. Thus for every multi-index $\\alpha$, choosing $m>(d+|\\alpha|)/2$ makes $\\sum_k(2\\pi|k|)^{|\\alpha|}|\\widehat\\rho(k)|$ finite, so the Fourier series and its differentiated series converge uniformly on compact time intervals including $s=0$. For $s\\ge1$, the same shell bound and the Fourier formula in [F2] give $\\|\\partial^\\alpha(\\rho_s-\\bar\\rho)\\|_\\infty\\le e^{-4\\pi^2s}\\sum_{k\\ne0}(2\\pi|k|)^{|\\alpha|}|\\widehat\\rho(k)|e^{-4\\pi^2(|k|^2-1)}\\le C_{\\alpha,\\rho}e^{-4\\pi^2s}$. The zero Fourier coefficient is $\\widehat\\rho(0)=\\bar\\rho$, proving the asserted smoothness and $C^\\infty$ convergence.",
+          "inputs": [
+            "A1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The heat profile stays in $[\\varepsilon,1-\\varepsilon]$: the affine rescaling $v_0=(\\rho-\\varepsilon)/(1-2\\varepsilon)$ lies in $[0,1]$, and its Fourier heat profile $v_s$ preserves $[0,1]$ by [F2]. The multiplier is linear and fixes constants, so $\\rho_s=\\varepsilon+(1-2\\varepsilon)v_s$; its mean is $\\bar\\rho$ by the zero-mode calculation in step 1.1.",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Define $a(t)=0$ for $t\\le0$ and $a(t)=e^{-1/t}$ for $t>0$, and set $\\zeta(t)=a(t)/(a(t)+a(1-t))$ on $[0,1]$. For each derivative order, the right derivatives of $a$ at zero are sums of terms $t^{-m}e^{-1/t}$, which tend to zero; hence $a$ is smooth and flat at zero. The denominator is positive on $[0,1]$, $\\zeta(0)=0$, $\\zeta(1)=1$, and $\\zeta$ is flat at both endpoints in the sense that all derivatives of $\\zeta$ vanish at zero and all derivatives of $\\zeta-1$ vanish at one. Define $\\sigma_t^S=\\bar\\rho+\\zeta(t)(\\rho_{S+1-t}-\\bar\\rho)$. This is smooth by [F2], has mean $\\bar\\rho$, has values in $[\\varepsilon,1-\\varepsilon]$ by step 2.1, starts at $\\bar\\rho$, and ends at $\\rho_S$.",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "Put $g_t=\\partial_t\\sigma_t^S$, which has zero mean. Define the smooth periodic potential $\\phi_t$ by its Fourier coefficients $\\widehat\\phi_t(0)=0$ and $\\widehat\\phi_t(k)=\\widehat g_t(k)/(4\\pi^2|k|^2)$ for $k\\ne0$, and set $\\kappa_t^S=\\nabla\\phi_t$. Repeated integration by parts applied to the smooth $g_t$ gives rapid coefficient decay, so the series for $\\phi_t$ and all its space and time derivatives converge uniformly. Termwise differentiation gives $\\Delta\\phi_t=-g_t$, hence $\\partial_t\\sigma^S+\\nabla\\cdot\\kappa^S=0$. At $t=1$, $g_1=-\\Delta\\rho_S$, so $\\phi_1=\\rho_S-\\bar\\rho$ and $\\kappa_1^S=\\nabla\\rho_S$. Flatness of $\\zeta-1$ at $1$ makes every derivative of $\\sigma^S$ agree there with the reversed heat segment; the fixed linear Fourier inverse gives the same matching for $\\kappa^S$.",
+          "inputs": [
+            "F2",
+            "step 3.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "step": "5.1",
+          "claim": "For $k\\ne0$, the Fourier coefficient of $\\nabla\\phi_t$ has magnitude $|\\widehat g_t(k)|/(2\\pi|k|)$. Repeated integration by parts gives $|\\widehat g_t(k)|\\le C_m\\|g_t\\|_{C^{2m}}(1+|k|^2)^{-m}$; choosing $m$ with $2m>d-1$ makes $\\sum_{k\\ne0}(1+|k|^2)^{-m}/|k|$ finite by the lattice-shell bound in step 1.1, hence $\\|\\kappa_t^S\\|_\\infty\\le C_m'\\|g_t\\|_{C^{2m}}$. The formula for $g_t$ and the $C^\\infty$ decay in step 1.1, together with $\\partial_s\\rho_s=\\Delta\\rho_s$ from [F2], imply $\\sup_{0\\le t\\le1}\\|g_t\\|_{C^{2m}}\\to0$ and $\\sup_{0\\le t\\le1}\\|\\nabla\\sigma_t^S\\|_\\infty\\to0$ as $S\\to\\infty$. By step 2.1, $\\chi(\\sigma_t^S)\\ge\\varepsilon(1-\\varepsilon)$; since the space-time domain has measure one, [F1] bounds the connector action by $\\frac{1}{4\\varepsilon(1-\\varepsilon)}\\sup_{t,x}|\\kappa_t^S+\\nabla\\sigma_t^S|^2$, which tends to zero.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes d>=1 and a nonempty torus.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root adopting /root/csm_boundary",
+            "reason": "Root adopts /root/csm_boundary current case review in research/physics-non-fluid-129-2026-10-21-r2-owner-step3-boundary-current-csm_boundary/proposal.json: The carrier is the nonempty unit-mass torus T^d with d>=1 and the connector interval[0,1]. Fourier coefficients form a fixed nonempty Z^d family; omitting k=0 in the inverse-Laplacian formula is an explicit zero-mean condition, not an empty spatial carrier. If all nonzero coefficients vanish, the target is constant, g and kappa vanish, and the same formulas give the constant zero-action connector. The proof constructs the required connector rather than selecting from an empty family. Source reading limits and exact support remain in the sealed proposal; no independent native proof acceptance is asserted.",
+            "item_sha256": "fe878cddabd2b82f12c888942d8b403ecb3349026c5c402ef92b25f2a2d6fdc8",
+            "row_sha256": "32247551b4971ddaa2f5f36b68dd2c2bed1f5362db8a9ed2321473fcc45508a6"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root adopting /root/csm_boundary",
+            "reason": "Root adopts /root/csm_boundary current case review in research/physics-non-fluid-129-2026-10-21-r2-owner-step3-boundary-current-csm_boundary/proposal.json: The carrier is the nonempty unit-mass torus T^d with d>=1 and the connector interval[0,1]. Fourier coefficients form a fixed nonempty Z^d family; omitting k=0 in the inverse-Laplacian formula is an explicit zero-mean condition, not an empty spatial carrier. If all nonzero coefficients vanish, the target is constant, g and kappa vanish, and the same formulas give the constant zero-action connector. The proof constructs the required connector rather than selecting from an empty family. Source reading limits and exact support remain in the sealed proposal; no independent native proof acceptance is asserted.",
+            "item_sha256": "fe878cddabd2b82f12c888942d8b403ecb3349026c5c402ef92b25f2a2d6fdc8",
+            "row_sha256": "32247551b4971ddaa2f5f36b68dd2c2bed1f5362db8a9ed2321473fcc45508a6"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "In the Statement a homogeneous target rho=bar_rho has all nonzero Fourier coefficients zero. The constructed connector is then sigma=bar_rho,kappa=0 with action zero and positive mobility bar_rho(1-bar_rho).",
+          "case_reasoning": "In the Statement a homogeneous target rho=bar_rho has all nonzero Fourier coefficients zero. The constructed connector is then sigma=bar_rho,kappa=0 with action zero and positive mobility bar_rho(1-bar_rho). The flat cutoff and mean-zero inverse Laplacian give a connector with all jets matching the reverse heat path. Positive mobility is protected by epsilon, including endpoint density values epsilon and 1-epsilon."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A profile taking value 1 is excluded by the range [epsilon,1-epsilon] with epsilon>0; dimension d=1 is nevertheless allowed. The Fourier inverse in step 4.1 divides only nonzero modes by 4 pi^2 |k|^2, so the one-dimensional case has no extra singularity.",
+          "case_reasoning": "A profile taking value 1 is excluded by the range [epsilon,1-epsilon] with epsilon>0; dimension d=1 is nevertheless allowed. The Fourier inverse in step 4.1 divides only nonzero modes by 4 pi^2 |k|^2, so the one-dimensional case has no extra singularity. The flat cutoff and mean-zero inverse Laplacian give a connector with all jets matching the reverse heat path. Positive mobility is protected by epsilon, including endpoint density values epsilon and 1-epsilon."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: For rho=bar the heat profile and connector are constant, with zero action.",
+          "case_reasoning": "Statement: For rho=bar the heat profile and connector are constant, with zero action. The flat cutoff and mean-zero inverse Laplacian give a connector with all jets matching the reverse heat path. Positive mobility is protected by epsilon, including endpoint density values epsilon and 1-epsilon."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 3.1 and 4.1 give sigma_0=bar_rho, sigma_1=rho_S and all jet matching at t=1 through flatness of zeta-1. Step 2.1 includes the allowed density endpoints epsilon and 1-epsilon; step 5.1 retains mobility at least epsilon(1-epsilon)>0.",
+          "case_reasoning": "Steps 3.1 and 4.1 give sigma_0=bar_rho, sigma_1=rho_S and all jet matching at t=1 through flatness of zeta-1. Step 2.1 includes the allowed density endpoints epsilon and 1-epsilon; step 5.1 retains mobility at least epsilon(1-epsilon)>0. The flat cutoff and mean-zero inverse Laplacian give a connector with all jets matching the reverse heat path. Positive mobility is protected by epsilon, including endpoint density values epsilon and 1-epsilon."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: A1 states exactly AC_omega, matching the Fourier heat-flow supplier; no full Choice step is added.",
+          "case_reasoning": "Statement: A1 states exactly AC_omega, matching the Fourier heat-flow supplier; no full Choice step is added. The flat cutoff and mean-zero inverse Laplacian give a connector with all jets matching the reverse heat path. Positive mobility is protected by epsilon, including endpoint density values epsilon and 1-epsilon."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement contains no biconditional.",
+          "case_reasoning": "The Statement contains no biconditional. The flat cutoff and mean-zero inverse Laplacian give a connector with all jets matching the reverse heat path. Positive mobility is protected by epsilon, including endpoint density values epsilon and 1-epsilon.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root, binding released delegated semantic worksheet",
+            "reason": "Released complete-source/eight-case worksheet research/physics-non-fluid-129-2026-10-21-r2-owner-step2-boundary-proposal-5/proposal.json: The Statement contains no biconditional. The flat cutoff and mean-zero inverse Laplacian give a connector with all jets matching the reverse heat path. Positive mobility is protected by epsilon, including endpoint density values epsilon and 1-epsilon. Exact current Statement scope: Assume the Axiom of Countable Choice. Fix $d\\ge1$, $0<\\varepsilon<1/2$, and $\\bar\\rho\\in[\\varepsilon,1-\\varepsilon]$. Let $\\rho:\\mathbb T^d\\to[\\varepsilon,1-\\varepsilon]$ be a smooth real periodic profile with $\\int_{\\mathbb T^d}\\rho\\,dx=\\bar\\rho$. Use normalized product Haar measure and the Fourier conventions $e_k(x)=\\exp(2\\pi i k\\cdot x)$ and $\\widehat\\rho(k)=\\int_{\\mathbb T^d}\\rho(x)e_{-k}(x)\\,dx$. Define $\\rho_0=\\rho$ and, for $s>0$, define the heat profile\n\n$$\\rho_s(x):=\\sum_{k\\in\\mathbb Z^d}e^{-4\\pi^2|k|^2s}\\widehat\\rho(k)e_k(x).$$\n\nThen $\\rho_s$ is smooth up to $s=0$ on every compact time interval and $\\rho_s\\to\\bar\\rho$ in $C^\\infty(\\mathbb T^d)$ as $s\\to\\infty$. For every $S\\ge1$ there is a smooth connector $(\\sigma^S,\\kappa^S)$ on $[0,1]\\times\\mathbb T^d$ from the constant profile $\\bar\\rho$ to $\\rho_S$, with fixed mean $\\bar\\rho$, values in $[\\varepsilon,1-\\varepsilon]$, and $\\partial_t\\sigma^S+\\nabla\\cdot\\kappa^S=0$. At $t=. Root adopts and binds this actual semantic disposition to the current item and row; this is not independent proof acceptance.",
+            "item_sha256": "fe878cddabd2b82f12c888942d8b403ecb3349026c5c402ef92b25f2a2d6fdc8",
+            "row_sha256": "b5418604072e4d20720cfe4a39cf0838dc85680201091986c51f484580ce84f6"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement contains no biconditional.",
+          "case_reasoning": "The Statement contains no biconditional. The flat cutoff and mean-zero inverse Laplacian give a connector with all jets matching the reverse heat path. Positive mobility is protected by epsilon, including endpoint density values epsilon and 1-epsilon.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root, binding released delegated semantic worksheet",
+            "reason": "Released complete-source/eight-case worksheet research/physics-non-fluid-129-2026-10-21-r2-owner-step2-boundary-proposal-5/proposal.json: The Statement contains no biconditional. The flat cutoff and mean-zero inverse Laplacian give a connector with all jets matching the reverse heat path. Positive mobility is protected by epsilon, including endpoint density values epsilon and 1-epsilon. Exact current Statement scope: Assume the Axiom of Countable Choice. Fix $d\\ge1$, $0<\\varepsilon<1/2$, and $\\bar\\rho\\in[\\varepsilon,1-\\varepsilon]$. Let $\\rho:\\mathbb T^d\\to[\\varepsilon,1-\\varepsilon]$ be a smooth real periodic profile with $\\int_{\\mathbb T^d}\\rho\\,dx=\\bar\\rho$. Use normalized product Haar measure and the Fourier conventions $e_k(x)=\\exp(2\\pi i k\\cdot x)$ and $\\widehat\\rho(k)=\\int_{\\mathbb T^d}\\rho(x)e_{-k}(x)\\,dx$. Define $\\rho_0=\\rho$ and, for $s>0$, define the heat profile\n\n$$\\rho_s(x):=\\sum_{k\\in\\mathbb Z^d}e^{-4\\pi^2|k|^2s}\\widehat\\rho(k)e_k(x).$$\n\nThen $\\rho_s$ is smooth up to $s=0$ on every compact time interval and $\\rho_s\\to\\bar\\rho$ in $C^\\infty(\\mathbb T^d)$ as $s\\to\\infty$. For every $S\\ge1$ there is a smooth connector $(\\sigma^S,\\kappa^S)$ on $[0,1]\\times\\mathbb T^d$ from the constant profile $\\bar\\rho$ to $\\rho_S$, with fixed mean $\\bar\\rho$, values in $[\\varepsilon,1-\\varepsilon]$, and $\\partial_t\\sigma^S+\\nabla\\cdot\\kappa^S=0$. At $t=. Root adopts and binds this actual semantic disposition to the current item and row; this is not independent proof acceptance.",
+            "item_sha256": "fe878cddabd2b82f12c888942d8b403ecb3349026c5c402ef92b25f2a2d6fdc8",
+            "row_sha256": "cb3270b358350459a2265f8060a8b95b1014291534dda82ce7b6e01df30ae0cd"
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "zero Fourier mode",
+          "status": "checked",
+          "evidence": "step 1.1 identifies the zero coefficient with the fixed mean and applies the inverse Laplacian only to mean-zero modes."
+        },
+        {
+          "name": "constant target",
+          "status": "checked",
+          "evidence": "For rho=bar, steps 2.1–3.1 give the constant connector and zero action."
+        }
+      ],
+      "finite_checks_disposition": "All applicable finite and boundary cases are recorded above. The remaining argument is symbolic; no unrecorded numerical, simulated, or experimental checks are used.",
+      "supplier_excerpts": [
+        {
+          "supplier": "def-countable-choice",
+          "carrier": "items/def-countable-choice.md",
+          "status": "Published Definition interface inspected for this use; no proof is applicable. This records Step 1 use only and is not independent approval.",
+          "source_section": "Definition",
+          "exact_statement": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.\n\n",
+          "relevant_hypotheses_and_conventions": "The Fourier heat-flow supplier assumes AC_omega; no stronger choice axiom is used.",
+          "supplier_proof_status": "Published Definition interface inspected for this use; no proof is applicable. This records Step 1 use only and is not independent approval.",
+          "consumer_use": "The Fourier heat-flow supplier assumes AC_omega; no stronger choice axiom is used."
+        },
+        {
+          "supplier": "def-csm-frontier-ssep-current-action",
+          "carrier": "items/def-csm-frontier-ssep-current-action.md",
+          "status": "Draft Definition interface inspected for this use, including its hypotheses and declared dependencies; current readiness is recorded separately. This is not independent approval.",
+          "source_section": "Definition",
+          "exact_statement": "Fix an integer $d\\ge1$ and let $\\mathbb T^d=(\\mathbb R/\\mathbb Z)^d$ carry normalized product Haar measure $dx$, with $dx(\\mathbb T^d)=1$. Coordinates and time are dimensionless in the diffusive normalization $D=1$. For $r\\in(0,1)$ set the mobility function $\\chi(r):=r(1-r)$. For any finite interval $[a,b]$ with $a<b$, let $\\rho:[a,b]\\times\\mathbb T^d\\to\\mathbb R$ be a scalar density and let $j:[a,b]\\times\\mathbb T^d\\to\\mathbb R^d$ be a vector current. Require both fields to be smooth up to the time endpoints and periodic in space, and require that for some $\\varepsilon\\in(0,1/2)$, $\\varepsilon\\le\\rho(t,x)\\le1-\\varepsilon$ for every $(t,x)$. Call $(\\rho,j)$ admissible when it also satisfies the continuity equation $\\partial_t\\rho+\\nabla\\cdot j=0$. Define its dimensionless action by\n\n$$\\mathcal I_{[a,b]}(\\rho,j):=\\frac14\\int_a^b\\int_{\\mathbb T^d}\\frac{|j(t,x)+\\nabla\\rho(t,x)|^2}{\\rho(t,x)(1-\\rho(t,x))}\\,dx\\,dt.$$\n\nThis is the macroscopic fluctuation functional in the stated normalized SSEP coefficient convention. It is a definition of a functional and does not assert a microscopic path-space large-deviation principle or a probability estimate.\n\n",
+          "relevant_hypotheses_and_conventions": "The connector cost is the action with denominator rho(1-rho), bounded below on [epsilon,1-epsilon].",
+          "supplier_proof_status": "Draft Definition interface inspected for this use, including its hypotheses and declared dependencies; current readiness is recorded separately. This is not independent approval.",
+          "consumer_use": "The connector cost is the action with denominator rho(1-rho), bounded below on [epsilon,1-epsilon]."
+        },
+        {
+          "supplier": "lem-csm-frontier-ssep-heat-flow",
+          "carrier": "items/lem-csm-frontier-ssep-heat-flow.md",
+          "status": "Draft Statement and complete current Proof inspected for this use; current readiness is recorded separately. This is not independent proof approval.",
+          "source_section": "Statement",
+          "exact_statement": "Assume the Axiom of Countable Choice. Let $d\\ge1$ and let $\\rho_0:\\mathbb T^d\\to\\mathbb R$ be measurable with $0\\le\\rho_0\\le1$ almost everywhere, using normalized product Haar measure $dx$. For $k\\in\\mathbb Z^d$ define $e_k(x)=\\exp(2\\pi i k\\cdot x)$ and $\\widehat f(k)=\\int_{\\mathbb T^d}f(x)e_{-k}(x)\\,dx$. For $t>0$ set\n\n$$\\rho_t(x):=\\sum_{k\\in\\mathbb Z^d}e^{-4\\pi^2|k|^2t}\\widehat\\rho_0(k)e_k(x),$$\n\nand at $t=0$ set $\\rho_t=\\rho_0$ as an almost-everywhere class. For smooth periodic $G$, define\n\n$$P_tG(x):=\\sum_{k\\in\\mathbb Z^d}e^{-4\\pi^2|k|^2t}\\widehat G(k)e_k(x)\\quad(t>0),\\qquad P_0G:=G.$$\n\nThen on every strip $[\\epsilon,T]\\times\\mathbb T^d$ with $0<\\epsilon<T<\\infty$, the series for $\\rho_t$ and all its space and time derivatives converge absolutely and uniformly; in particular $\\rho_t$ is real and smooth for each $t>0$ and $\\partial_t\\rho_t=\\Delta\\rho_t$. For every finite $T$ and every smooth $G$, $P_tG$ is smooth on $[0,T]\\times\\mathbb T^d$, satisfies $\\partial_tP_tG=\\Delta P_tG$, has uniformly bounded derivatives of every fixed order there, and $P_tG\\to G$ uniformly as $t\\downarrow0$. Moreover\n\n$$\\int_{\\mathbb T^d}\\rho_tG\\,dx=\\int_{\\mathbb T^d}\\rho_0P_tG\\,dx,$$\n\nso $(\\rho_t)_{0\\le t\\le T}$ is the unique weak heat solution with datum $\\rho_0$ in the stated weak formulation. It preserves $0\\le\\rho_t\\le1$ almost everywhere and the mass $\\int\\rho_t\\,dx=\\int\\rho_0\\,dx$.\n\n",
+          "relevant_hypotheses_and_conventions": "The actual draft Statement and complete Proof were inspected; its AC_omega, normalized torus, Fourier heat profile, range, mean and heat-equation hypotheses match this smooth special case, and its current Step 1 record is closed-ready rather than independent proof approval.",
+          "supplier_proof_status": "Draft Statement and complete current Proof inspected for this use; current readiness is recorded separately. This is not independent proof approval.",
+          "consumer_use": "The actual draft Statement and complete Proof were inspected; its AC_omega, normalized torus, Fourier heat profile, range, mean and heat-equation hypotheses match this smooth special case, and its current Step 1 record is closed-ready rather than independent proof approval."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-92",
+        "notes": "Independently checked all five steps, A1 and F1-F2, and the current batch-91 heat-flow proof and weak-solution/Fourier interfaces. Repeated periodic integration gives rapid decay; shell count O(r^(d-1)) gives all spatial/time derivative summability, including s=0 for smooth datum, and e^(-4 pi^2 s) decay after removal of the mean. Affine rescaling transfers [0,1] preservation to [epsilon,1-epsilon]. The flat cutoff stays in [0,1] and makes the density a convex combination with fixed mean. g=partial_t sigma has zero mean, so phi_hat(k)=g_hat(k)/(4 pi^2 |k|^2) defines a real smooth mean-zero potential with Delta phi=-g. Thus kappa=grad phi enforces continuity; at t=1 g=-Delta rho_S and flatness matches all density/current jets. The Fourier gradient inverse bound is summable for 2m>d-1. It makes current and density gradient uniformly small, while chi>=epsilon(1-epsilon), proving action->0. S=1 uses only heat times >=1; d=1 and constant targets work, including means epsilon or 1-epsilon (then the target is constant). AC_omega is carried from the Fourier supplier; no full Choice or empirical data is used. Reader/refuter identify no bridge defect. Derrida 2505.15618 section 14.1 (158)-(160) supplies reverse-relaxation context, not the local connector proof. Fourier reader objection is independently refuted by zero-based product factors in the published torus Definition."
+      },
+      "repair_confidence": 1,
+      "current_boundary_worksheet": {
+        "proposal": "research/physics-non-fluid-129-2026-10-21-r2-owner-step2-boundary-proposal-5/proposal.json",
+        "source_sha256": "b7183b4e6d73729aff30c716940619b01fec51b11078c9821eed09f14194c054",
+        "qualification": "Released complete current source/eight-case semantic worksheet; root transcribed exact current rows. No independent acceptance or finite computation asserted."
+      }
+    },
+    "thm-csm-frontier-equilibrium-quasipotential": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.\n\n",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-csm-frontier-ssep-current-action",
+          "source_section": "Definition",
+          "quote": "Fix an integer $d\\ge1$ and let $\\mathbb T^d=(\\mathbb R/\\mathbb Z)^d$ carry normalized product Haar measure $dx$, with $dx(\\mathbb T^d)=1$. Coordinates and time are dimensionless in the diffusive normalization $D=1$. For $r\\in(0,1)$ set the mobility function $\\chi(r):=r(1-r)$. For any finite interval $[a,b]$ with $a<b$, let $\\rho:[a,b]\\times\\mathbb T^d\\to\\mathbb R$ be a scalar density and let $j:[a,b]\\times\\mathbb T^d\\to\\mathbb R^d$ be a vector current. Require both fields to be smooth up to the time endpoints and periodic in space, and require that for some $\\varepsilon\\in(0,1/2)$, $\\varepsilon\\le\\rho(t,x)\\le1-\\varepsilon$ for every $(t,x)$. Call $(\\rho,j)$ admissible when it also satisfies the continuity equation $\\partial_t\\rho+\\nabla\\cdot j=0$. Define its dimensionless action by\n\n$$\\mathcal I_{[a,b]}(\\rho,j):=\\frac14\\int_a^b\\int_{\\mathbb T^d}\\frac{|j(t,x)+\\nabla\\rho(t,x)|^2}{\\rho(t,x)(1-\\rho(t,x))}\\,dx\\,dt.$$\n\nThis is the macroscopic fluctuation functional in the stated normalized SSEP coefficient convention. It is a definition of a functional and does not assert a microscopic path-space large-deviation principle or a probability estimate.\n\n",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-csm-frontier-ssep-quasipotential",
+          "source_section": "Definition",
+          "quote": "Fix $d\\ge1$, $\\bar\\rho\\in(0,1)$, and normalized product Haar measure $dx$ on $\\mathbb T^d$. Let $\\rho:\\mathbb T^d\\to(0,1)$ be a smooth target profile whose values are bounded away from $0$ and $1$. A connection of duration $T>0$ from the homogeneous profile $\\bar\\rho$ to $\\rho$ is a smooth pair $(u,j)$ on $[0,T]\\times\\mathbb T^d$, smooth up to the time endpoints and periodic in space, such that for some $\\varepsilon_T\\in(0,1/2)$ one has $\\varepsilon_T\\le u(t,x)\\le1-\\varepsilon_T$, $\\int_{\\mathbb T^d}u(t,x)\\,dx=\\bar\\rho$ for all $t$, $\\partial_tu+\\nabla\\cdot j=0$, $u(0,x)=\\bar\\rho$, and $u(T,x)=\\rho(x)$. Define\n\n$$\\mathcal V_{\\bar\\rho}(\\rho):=\\inf\\left\\{\\mathcal I_{[0,T]}(u,j):T>0,\\ (u,j)\\text{ is a connection of duration }T\\text{ from }\\bar\\rho\\text{ to }\\rho\\right\\},$$\n\nwith the infimum of the empty set defined to be $+\\infty$. The action is the functional defined in the preceding item.\n\n",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-csm-frontier-bernoulli-relative-free-energy",
+          "source_section": "Definition",
+          "quote": "For $u\\in(0,1)$ define the Bernoulli free-energy density $f(u):=u\\log u+(1-u)\\log(1-u)$. For a reference density $\\bar\\rho\\in(0,1)$ define $h(u\\mid\\bar\\rho):=f(u)-f(\\bar\\rho)-\\bigl(\\log\\bar\\rho-\\log(1-\\bar\\rho)\\bigr)(u-\\bar\\rho)$. For $d\\ge1$, a smooth profile $\\rho:\\mathbb T^d\\to[\\varepsilon,1-\\varepsilon]$ with some $0<\\varepsilon<1/2$, and normalized product Haar measure $dx$ on $\\mathbb T^d$, define $\\mathcal H_{\\bar\\rho}(\\rho):=\\int_{\\mathbb T^d}h(\\rho(x)\\mid\\bar\\rho)\\,dx$. If $\\int_{\\mathbb T^d}\\rho\\,dx=\\bar\\rho$, then $\\mathcal H_{\\bar\\rho}(\\rho)=\\int_{\\mathbb T^d}f(\\rho(x))\\,dx-f(\\bar\\rho)$ because the linear term integrates to zero. All logarithm arguments are positive on the stated domains.\n\n",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-csm-frontier-mft-reversal-identity",
+          "source_section": "Statement",
+          "quote": "Let $d\\ge1$, $T>0$, and $0<\\varepsilon<1/2$. Let $\\rho:[0,T]\\times\\mathbb T^d\\to[\\varepsilon,1-\\varepsilon]$ be a scalar field and $j:[0,T]\\times\\mathbb T^d\\to\\mathbb R^d$ a vector field, both smooth up to the time endpoints and periodic in space. Assume $\\partial_t\\rho+\\nabla\\cdot j=0$. Set $f(u):=u\\log u+(1-u)\\log(1-u)$ for $0<u<1$, and define the reversed paths by $\\rho^\\theta(t,x):=\\rho(T-t,x)$ and $j^\\theta(t,x):=-j(T-t,x)$. Then\n\n$$\\mathcal I_{[0,T]}(\\rho,j)-\\mathcal I_{[0,T]}(\\rho^\\theta,j^\\theta)=\\int_{\\mathbb T^d}f(\\rho(T,x))\\,dx-\\int_{\\mathbb T^d}f(\\rho(0,x))\\,dx.$$\n\nHere $\\mathcal I$ is the normalized SSEP action with $\\chi(u)=u(1-u)$.\n\n",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-csm-frontier-mft-small-action-bridge",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Fix $d\\ge1$, $0<\\varepsilon<1/2$, and $\\bar\\rho\\in[\\varepsilon,1-\\varepsilon]$. Let $\\rho:\\mathbb T^d\\to[\\varepsilon,1-\\varepsilon]$ be a smooth real periodic profile with $\\int_{\\mathbb T^d}\\rho\\,dx=\\bar\\rho$. Use normalized product Haar measure and the Fourier conventions $e_k(x)=\\exp(2\\pi i k\\cdot x)$ and $\\widehat\\rho(k)=\\int_{\\mathbb T^d}\\rho(x)e_{-k}(x)\\,dx$. Define $\\rho_0=\\rho$ and, for $s>0$, define the heat profile\n\n$$\\rho_s(x):=\\sum_{k\\in\\mathbb Z^d}e^{-4\\pi^2|k|^2s}\\widehat\\rho(k)e_k(x).$$\n\nThen $\\rho_s$ is smooth up to $s=0$ on every compact time interval and $\\rho_s\\to\\bar\\rho$ in $C^\\infty(\\mathbb T^d)$ as $s\\to\\infty$. For every $S\\ge1$ there is a smooth connector $(\\sigma^S,\\kappa^S)$ on $[0,1]\\times\\mathbb T^d$ from the constant profile $\\bar\\rho$ to $\\rho_S$, with fixed mean $\\bar\\rho$, values in $[\\varepsilon,1-\\varepsilon]$, and $\\partial_t\\sigma^S+\\nabla\\cdot\\kappa^S=0$. At $t=1$, all time and space derivatives of this connector agree with those of the reversed heat segment $(\\rho_{S+1-t},+\\nabla\\rho_{S+1-t})$. Its action satisfies $\\mathcal I_{[0,1]}(\\sigma^S,\\kappa^S)\\to0$ as $S\\to\\infty$.\n\n",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-csm-frontier-ssep-heat-flow",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $d\\ge1$ and let $\\rho_0:\\mathbb T^d\\to\\mathbb R$ be measurable with $0\\le\\rho_0\\le1$ almost everywhere, using normalized product Haar measure $dx$. For $k\\in\\mathbb Z^d$ define $e_k(x)=\\exp(2\\pi i k\\cdot x)$ and $\\widehat f(k)=\\int_{\\mathbb T^d}f(x)e_{-k}(x)\\,dx$. For $t>0$ set\n\n$$\\rho_t(x):=\\sum_{k\\in\\mathbb Z^d}e^{-4\\pi^2|k|^2t}\\widehat\\rho_0(k)e_k(x),$$\n\nand at $t=0$ set $\\rho_t=\\rho_0$ as an almost-everywhere class. For smooth periodic $G$, define\n\n$$P_tG(x):=\\sum_{k\\in\\mathbb Z^d}e^{-4\\pi^2|k|^2t}\\widehat G(k)e_k(x)\\quad(t>0),\\qquad P_0G:=G.$$\n\nThen on every strip $[\\epsilon,T]\\times\\mathbb T^d$ with $0<\\epsilon<T<\\infty$, the series for $\\rho_t$ and all its space and time derivatives converge absolutely and uniformly; in particular $\\rho_t$ is real and smooth for each $t>0$ and $\\partial_t\\rho_t=\\Delta\\rho_t$. For every finite $T$ and every smooth $G$, $P_tG$ is smooth on $[0,T]\\times\\mathbb T^d$, satisfies $\\partial_tP_tG=\\Delta P_tG$, has uniformly bounded derivatives of every fixed order there, and $P_tG\\to G$ uniformly as $t\\downarrow0$. Moreover\n\n$$\\int_{\\mathbb T^d}\\rho_tG\\,dx=\\int_{\\mathbb T^d}\\rho_0P_tG\\,dx,$$\n\nso $(\\rho_t)_{0\\le t\\le T}$ is the unique weak heat solution with datum $\\rho_0$ in the stated weak formulation. It preserves $0\\le\\rho_t\\le1$ almost everywhere and the mass $\\int\\rho_t\\,dx=\\int\\rho_0\\,dx$.\n\n",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.\n\n",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Let $(u,j)$ be any admissible connection of duration $T$ from $\\bar\\rho$ to $\\rho$. By [F4], $\\mathcal I_{[0,T]}(u,j)=\\mathcal H_{\\bar\\rho}(\\rho)+\\mathcal I_{[0,T]}(u^\\theta,j^\\theta)$, because both endpoints have mean $\\bar\\rho$ and [F3] identifies the endpoint free-energy difference with $\\mathcal H_{\\bar\\rho}(\\rho)$. The reversed action is nonnegative by [F1], so every admissible connection has action at least $\\mathcal H_{\\bar\\rho}(\\rho)$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "Let $\\rho_s$ be the Fourier heat profile with datum $\\rho$. Under [A1], [F6] applies; because $\\rho$ is smooth, its Fourier multiplier profile is smooth up to $s=0$, solves $\\partial_s\\rho_s=\\Delta\\rho_s$, and preserves mean $\\bar\\rho$. Apply the range-preservation assertion of [F6] to $v=(\\rho-\\varepsilon)/(1-2\\varepsilon)$, which lies in $[0,1]$. Linearity of the Fourier multiplier and its fixing constants give $\\rho_s=\\varepsilon+(1-2\\varepsilon)v_s$, hence $\\varepsilon\\le\\rho_s\\le1-\\varepsilon$ for every $s\\ge0$.",
+          "inputs": [
+            "A1",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Taking the infimum over all finite-duration connections in [F2] yields $\\mathcal V_{\\bar\\rho}(\\rho)\\ge\\mathcal H_{\\bar\\rho}(\\rho)$.",
+          "inputs": [
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "step": "2.2",
+          "claim": "On the forward heat path $(\\rho_s,-\\nabla\\rho_s)$, $0\\le s\\le S$, the continuity equation holds because $\\partial_s\\rho_s=\\Delta\\rho_s$ and $\\nabla\\cdot(-\\nabla\\rho_s)=-\\Delta\\rho_s$, and the action is zero because $-\\nabla\\rho_s+\\nabla\\rho_s=0$. Its time reverse on $[0,S]$ has current $+\\nabla\\rho_{S-t}$, and [F4] gives its action as $\\int f(\\rho)\\,dx-\\int f(\\rho_S)\\,dx$. Shift this reversed path to $[1,S+1]$ by $t\\mapsto t-1$; substitution in the action integral shows that its action is unchanged, and the resulting path has density $\\rho_{S+1-t}$ and current $+\\nabla\\rho_{S+1-t}$. The heat equation verifies continuity on the shifted interval.",
+          "inputs": [
+            "F1",
+            "F4",
+            "F6",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Prepend the connector from [F5] on $[0,1]$. Its endpoint derivatives match the reversed heat segment, so the concatenation is a smooth admissible fixed-mean connection from $\\bar\\rho$ to $\\rho$ of duration $S+1$. By [F2], $\\mathcal V_{\\bar\\rho}(\\rho)\\le\\mathcal I_{[0,1]}(\\sigma^S,\\kappa^S)+\\int f(\\rho)\\,dx-\\int f(\\rho_S)\\,dx$.",
+          "inputs": [
+            "F2",
+            "F5",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "As $S\\to\\infty$, [F5] gives $\\mathcal I_{[0,1]}(\\sigma^S,\\kappa^S)\\to0$ and $\\rho_S\\to\\bar\\rho$ uniformly; continuity of $f$ on $[\\varepsilon,1-\\varepsilon]$ then gives $\\int f(\\rho_S)\\,dx\\to f(\\bar\\rho)$. By [F7], the fixed-mean identity in [F3] is $\\mathcal H_{\\bar\\rho}(\\rho)=\\int_{\\mathbb T^d}[\\rho(\\log\\rho-\\log\\bar\\rho)+(1-\\rho)(\\log(1-\\rho)-\\log(1-\\bar\\rho))]dx=\\int_{\\mathbb T^d}[\\rho\\log(\\rho/\\bar\\rho)+(1-\\rho)\\log((1-\\rho)/(1-\\bar\\rho))]dx$. Thus $\\mathcal V_{\\bar\\rho}(\\rho)\\le\\mathcal H_{\\bar\\rho}(\\rho)$; combining with the lower bound in step 2.1 proves the claimed equality. The constructed horizons tend to infinity; no finite-time minimizer is asserted.",
+          "inputs": [
+            "F3",
+            "F5",
+            "F7",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes d>=1 and a nonempty torus.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root adopting /root/csm_boundary",
+            "reason": "Root adopts /root/csm_boundary current case review in research/physics-non-fluid-129-2026-10-21-r2-owner-step3-boundary-current-csm_boundary/proposal.json: The spatial torus has d>=1 and normalized mass one. The variational infimum is not justified by silently assuming its path family nonempty: the proof explicitly prepends the constructed small-action connector to reversed heat relaxation, producing an admissible finite-duration connection for every target under the stated Countable Choice and strict density bounds. Constant targets are also allowed. Thus empty indexed supports or an empty admissible family do not contradict the nonempty-carrier row under these hypotheses. Source reading limits and exact support remain in the sealed proposal; no independent native proof acceptance is asserted.",
+            "item_sha256": "cb270be1f4ee9233ceec88300994759ec90202cf510494d36d7f62c5081f62e1",
+            "row_sha256": "32247551b4971ddaa2f5f36b68dd2c2bed1f5362db8a9ed2321473fcc45508a6"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root adopting /root/csm_boundary",
+            "reason": "Root adopts /root/csm_boundary current case review in research/physics-non-fluid-129-2026-10-21-r2-owner-step3-boundary-current-csm_boundary/proposal.json: The spatial torus has d>=1 and normalized mass one. The variational infimum is not justified by silently assuming its path family nonempty: the proof explicitly prepends the constructed small-action connector to reversed heat relaxation, producing an admissible finite-duration connection for every target under the stated Countable Choice and strict density bounds. Constant targets are also allowed. Thus empty indexed supports or an empty admissible family do not contradict the nonempty-carrier row under these hypotheses. Source reading limits and exact support remain in the sealed proposal; no independent native proof acceptance is asserted.",
+            "item_sha256": "cb270be1f4ee9233ceec88300994759ec90202cf510494d36d7f62c5081f62e1",
+            "row_sha256": "32247551b4971ddaa2f5f36b68dd2c2bed1f5362db8a9ed2321473fcc45508a6"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The target is bounded below by epsilon>0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The target is bounded above by 1-epsilon."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: For rho=bar, the constant zero-action connection and relative free energy both equal zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The finite-interval path endpoints are the homogeneous profile and the target profile."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: A1 carries only the AC_omega hypothesis required by the Fourier heat-flow input."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is an equality, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is an equality, not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "homogeneous target",
+          "status": "checked",
+          "evidence": "The constant path realizes zero action and the relative Bernoulli free energy vanishes at rho=bar."
+        }
+      ],
+      "finite_checks_disposition": "All applicable finite and boundary cases are recorded above. The remaining argument is symbolic; no unrecorded numerical, simulated, or experimental checks are used.",
+      "supplier_excerpts": [
+        {
+          "supplier": "def-countable-choice",
+          "carrier": "items/def-countable-choice.md",
+          "status": "Published Definition interface inspected for this use; no proof is applicable. This records Step 1 use only and is not independent approval.",
+          "source_section": "Definition",
+          "exact_statement": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.\n\n",
+          "relevant_hypotheses_and_conventions": "The heat-flow result used in the construction assumes AC_omega, which the theorem carries explicitly.",
+          "supplier_proof_status": "Published Definition interface inspected for this use; no proof is applicable. This records Step 1 use only and is not independent approval.",
+          "consumer_use": "The heat-flow result used in the construction assumes AC_omega, which the theorem carries explicitly."
+        },
+        {
+          "supplier": "def-csm-frontier-bernoulli-relative-free-energy",
+          "carrier": "items/def-csm-frontier-bernoulli-relative-free-energy.md",
+          "status": "Draft Definition interface inspected for this use, including its hypotheses and declared dependencies; current readiness is recorded separately. This is not independent approval.",
+          "source_section": "Definition",
+          "exact_statement": "For $u\\in(0,1)$ define the Bernoulli free-energy density $f(u):=u\\log u+(1-u)\\log(1-u)$. For a reference density $\\bar\\rho\\in(0,1)$ define $h(u\\mid\\bar\\rho):=f(u)-f(\\bar\\rho)-\\bigl(\\log\\bar\\rho-\\log(1-\\bar\\rho)\\bigr)(u-\\bar\\rho)$. For $d\\ge1$, a smooth profile $\\rho:\\mathbb T^d\\to[\\varepsilon,1-\\varepsilon]$ with some $0<\\varepsilon<1/2$, and normalized product Haar measure $dx$ on $\\mathbb T^d$, define $\\mathcal H_{\\bar\\rho}(\\rho):=\\int_{\\mathbb T^d}h(\\rho(x)\\mid\\bar\\rho)\\,dx$. If $\\int_{\\mathbb T^d}\\rho\\,dx=\\bar\\rho$, then $\\mathcal H_{\\bar\\rho}(\\rho)=\\int_{\\mathbb T^d}f(\\rho(x))\\,dx-f(\\bar\\rho)$ because the linear term integrates to zero. All logarithm arguments are positive on the stated domains.\n\n",
+          "relevant_hypotheses_and_conventions": "The consumer uses the explicit Bernoulli relative functional and the fixed-mean cancellation of its linear term.",
+          "supplier_proof_status": "Draft Definition interface inspected for this use, including its hypotheses and declared dependencies; current readiness is recorded separately. This is not independent approval.",
+          "consumer_use": "The consumer uses the explicit Bernoulli relative functional and the fixed-mean cancellation of its linear term."
+        },
+        {
+          "supplier": "def-csm-frontier-ssep-current-action",
+          "carrier": "items/def-csm-frontier-ssep-current-action.md",
+          "status": "Draft Definition interface inspected for this use, including its hypotheses and declared dependencies; current readiness is recorded separately. This is not independent approval.",
+          "source_section": "Definition",
+          "exact_statement": "Fix an integer $d\\ge1$ and let $\\mathbb T^d=(\\mathbb R/\\mathbb Z)^d$ carry normalized product Haar measure $dx$, with $dx(\\mathbb T^d)=1$. Coordinates and time are dimensionless in the diffusive normalization $D=1$. For $r\\in(0,1)$ set the mobility function $\\chi(r):=r(1-r)$. For any finite interval $[a,b]$ with $a<b$, let $\\rho:[a,b]\\times\\mathbb T^d\\to\\mathbb R$ be a scalar density and let $j:[a,b]\\times\\mathbb T^d\\to\\mathbb R^d$ be a vector current. Require both fields to be smooth up to the time endpoints and periodic in space, and require that for some $\\varepsilon\\in(0,1/2)$, $\\varepsilon\\le\\rho(t,x)\\le1-\\varepsilon$ for every $(t,x)$. Call $(\\rho,j)$ admissible when it also satisfies the continuity equation $\\partial_t\\rho+\\nabla\\cdot j=0$. Define its dimensionless action by\n\n$$\\mathcal I_{[a,b]}(\\rho,j):=\\frac14\\int_a^b\\int_{\\mathbb T^d}\\frac{|j(t,x)+\\nabla\\rho(t,x)|^2}{\\rho(t,x)(1-\\rho(t,x))}\\,dx\\,dt.$$\n\nThis is the macroscopic fluctuation functional in the stated normalized SSEP coefficient convention. It is a definition of a functional and does not assert a microscopic path-space large-deviation principle or a probability estimate.\n\n",
+          "relevant_hypotheses_and_conventions": "All path costs are the previously defined normalized continuum action.",
+          "supplier_proof_status": "Draft Definition interface inspected for this use, including its hypotheses and declared dependencies; current readiness is recorded separately. This is not independent approval.",
+          "consumer_use": "All path costs are the previously defined normalized continuum action."
+        },
+        {
+          "supplier": "def-csm-frontier-ssep-quasipotential",
+          "carrier": "items/def-csm-frontier-ssep-quasipotential.md",
+          "status": "Draft Definition interface inspected for this use, including its hypotheses and declared dependencies; current readiness is recorded separately. This is not independent approval.",
+          "source_section": "Definition",
+          "exact_statement": "Fix $d\\ge1$, $\\bar\\rho\\in(0,1)$, and normalized product Haar measure $dx$ on $\\mathbb T^d$. Let $\\rho:\\mathbb T^d\\to(0,1)$ be a smooth target profile whose values are bounded away from $0$ and $1$. A connection of duration $T>0$ from the homogeneous profile $\\bar\\rho$ to $\\rho$ is a smooth pair $(u,j)$ on $[0,T]\\times\\mathbb T^d$, smooth up to the time endpoints and periodic in space, such that for some $\\varepsilon_T\\in(0,1/2)$ one has $\\varepsilon_T\\le u(t,x)\\le1-\\varepsilon_T$, $\\int_{\\mathbb T^d}u(t,x)\\,dx=\\bar\\rho$ for all $t$, $\\partial_tu+\\nabla\\cdot j=0$, $u(0,x)=\\bar\\rho$, and $u(T,x)=\\rho(x)$. Define\n\n$$\\mathcal V_{\\bar\\rho}(\\rho):=\\inf\\left\\{\\mathcal I_{[0,T]}(u,j):T>0,\\ (u,j)\\text{ is a connection of duration }T\\text{ from }\\bar\\rho\\text{ to }\\rho\\right\\},$$\n\nwith the infimum of the empty set defined to be $+\\infty$. The action is the functional defined in the preceding item.\n\n",
+          "relevant_hypotheses_and_conventions": "The target functional is the infimum over all finite-duration smooth fixed-mean connections.",
+          "supplier_proof_status": "Draft Definition interface inspected for this use, including its hypotheses and declared dependencies; current readiness is recorded separately. This is not independent approval.",
+          "consumer_use": "The target functional is the infimum over all finite-duration smooth fixed-mean connections."
+        },
+        {
+          "supplier": "lem-csm-frontier-mft-small-action-bridge",
+          "carrier": "items/lem-csm-frontier-mft-small-action-bridge.md",
+          "status": "Draft Statement and complete current Proof inspected for this use; current readiness is recorded separately. This is not independent proof approval.",
+          "source_section": "Statement",
+          "exact_statement": "Assume the Axiom of Countable Choice. Fix $d\\ge1$, $0<\\varepsilon<1/2$, and $\\bar\\rho\\in[\\varepsilon,1-\\varepsilon]$. Let $\\rho:\\mathbb T^d\\to[\\varepsilon,1-\\varepsilon]$ be a smooth real periodic profile with $\\int_{\\mathbb T^d}\\rho\\,dx=\\bar\\rho$. Use normalized product Haar measure and the Fourier conventions $e_k(x)=\\exp(2\\pi i k\\cdot x)$ and $\\widehat\\rho(k)=\\int_{\\mathbb T^d}\\rho(x)e_{-k}(x)\\,dx$. Define $\\rho_0=\\rho$ and, for $s>0$, define the heat profile\n\n$$\\rho_s(x):=\\sum_{k\\in\\mathbb Z^d}e^{-4\\pi^2|k|^2s}\\widehat\\rho(k)e_k(x).$$\n\nThen $\\rho_s$ is smooth up to $s=0$ on every compact time interval and $\\rho_s\\to\\bar\\rho$ in $C^\\infty(\\mathbb T^d)$ as $s\\to\\infty$. For every $S\\ge1$ there is a smooth connector $(\\sigma^S,\\kappa^S)$ on $[0,1]\\times\\mathbb T^d$ from the constant profile $\\bar\\rho$ to $\\rho_S$, with fixed mean $\\bar\\rho$, values in $[\\varepsilon,1-\\varepsilon]$, and $\\partial_t\\sigma^S+\\nabla\\cdot\\kappa^S=0$. At $t=1$, all time and space derivatives of this connector agree with those of the reversed heat segment $(\\rho_{S+1-t},+\\nabla\\rho_{S+1-t})$. Its action satisfies $\\mathcal I_{[0,1]}(\\sigma^S,\\kappa^S)\\to0$ as $S\\to\\infty$.\n\n",
+          "relevant_hypotheses_and_conventions": "The connector starts at the homogeneous mean, ends at the late heat profile, matches all reverse-heat jets, and has action tending to zero.",
+          "supplier_proof_status": "Draft Statement and complete current Proof inspected for this use; current readiness is recorded separately. This is not independent proof approval.",
+          "consumer_use": "The connector starts at the homogeneous mean, ends at the late heat profile, matches all reverse-heat jets, and has action tending to zero."
+        },
+        {
+          "supplier": "lem-csm-frontier-ssep-heat-flow",
+          "carrier": "items/lem-csm-frontier-ssep-heat-flow.md",
+          "status": "Draft Statement and complete current Proof inspected for this use; current readiness is recorded separately. This is not independent proof approval.",
+          "source_section": "Statement",
+          "exact_statement": "Assume the Axiom of Countable Choice. Let $d\\ge1$ and let $\\rho_0:\\mathbb T^d\\to\\mathbb R$ be measurable with $0\\le\\rho_0\\le1$ almost everywhere, using normalized product Haar measure $dx$. For $k\\in\\mathbb Z^d$ define $e_k(x)=\\exp(2\\pi i k\\cdot x)$ and $\\widehat f(k)=\\int_{\\mathbb T^d}f(x)e_{-k}(x)\\,dx$. For $t>0$ set\n\n$$\\rho_t(x):=\\sum_{k\\in\\mathbb Z^d}e^{-4\\pi^2|k|^2t}\\widehat\\rho_0(k)e_k(x),$$\n\nand at $t=0$ set $\\rho_t=\\rho_0$ as an almost-everywhere class. For smooth periodic $G$, define\n\n$$P_tG(x):=\\sum_{k\\in\\mathbb Z^d}e^{-4\\pi^2|k|^2t}\\widehat G(k)e_k(x)\\quad(t>0),\\qquad P_0G:=G.$$\n\nThen on every strip $[\\epsilon,T]\\times\\mathbb T^d$ with $0<\\epsilon<T<\\infty$, the series for $\\rho_t$ and all its space and time derivatives converge absolutely and uniformly; in particular $\\rho_t$ is real and smooth for each $t>0$ and $\\partial_t\\rho_t=\\Delta\\rho_t$. For every finite $T$ and every smooth $G$, $P_tG$ is smooth on $[0,T]\\times\\mathbb T^d$, satisfies $\\partial_tP_tG=\\Delta P_tG$, has uniformly bounded derivatives of every fixed order there, and $P_tG\\to G$ uniformly as $t\\downarrow0$. Moreover\n\n$$\\int_{\\mathbb T^d}\\rho_tG\\,dx=\\int_{\\mathbb T^d}\\rho_0P_tG\\,dx,$$\n\nso $(\\rho_t)_{0\\le t\\le T}$ is the unique weak heat solution with datum $\\rho_0$ in the stated weak formulation. It preserves $0\\le\\rho_t\\le1$ almost everywhere and the mass $\\int\\rho_t\\,dx=\\int\\rho_0\\,dx$.\n\n",
+          "relevant_hypotheses_and_conventions": "The actual draft Statement and complete Proof were inspected; the target is a smooth strictly interior datum, and the current readiness record is closed-ready, not independent approval.",
+          "supplier_proof_status": "Draft Statement and complete current Proof inspected for this use; current readiness is recorded separately. This is not independent proof approval.",
+          "consumer_use": "The actual draft Statement and complete Proof were inspected; the target is a smooth strictly interior datum, and the current readiness record is closed-ready, not independent approval."
+        },
+        {
+          "supplier": "thm-csm-frontier-mft-reversal-identity",
+          "carrier": "items/thm-csm-frontier-mft-reversal-identity.md",
+          "status": "Draft Statement and complete current Proof inspected for this use; current readiness is recorded separately. This is not independent proof approval.",
+          "source_section": "Statement",
+          "exact_statement": "Let $d\\ge1$, $T>0$, and $0<\\varepsilon<1/2$. Let $\\rho:[0,T]\\times\\mathbb T^d\\to[\\varepsilon,1-\\varepsilon]$ be a scalar field and $j:[0,T]\\times\\mathbb T^d\\to\\mathbb R^d$ a vector field, both smooth up to the time endpoints and periodic in space. Assume $\\partial_t\\rho+\\nabla\\cdot j=0$. Set $f(u):=u\\log u+(1-u)\\log(1-u)$ for $0<u<1$, and define the reversed paths by $\\rho^\\theta(t,x):=\\rho(T-t,x)$ and $j^\\theta(t,x):=-j(T-t,x)$. Then\n\n$$\\mathcal I_{[0,T]}(\\rho,j)-\\mathcal I_{[0,T]}(\\rho^\\theta,j^\\theta)=\\int_{\\mathbb T^d}f(\\rho(T,x))\\,dx-\\int_{\\mathbb T^d}f(\\rho(0,x))\\,dx.$$\n\nHere $\\mathcal I$ is the normalized SSEP action with $\\chi(u)=u(1-u)$.\n\n",
+          "relevant_hypotheses_and_conventions": "The exact local action reversal identity is applied only to smooth strict-interior periodic paths.",
+          "supplier_proof_status": "Draft Statement and complete current Proof inspected for this use; current readiness is recorded separately. This is not independent proof approval.",
+          "consumer_use": "The exact local action reversal identity is applied only to smooth strict-interior periodic paths."
+        },
+        {
+          "supplier": "thm-natural-logarithm-laws",
+          "carrier": "items/thm-natural-logarithm-laws.md",
+          "status": "Published theorem statement and proof inspected as the exact logarithm quotient-law input; this is not an independent audit.",
+          "source_section": "Statement",
+          "exact_statement": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.\n\n",
+          "relevant_hypotheses_and_conventions": "For positive real arguments, the natural logarithm quotient law is log(x/y)=log x-log y.",
+          "supplier_proof_status": "Published proved theorem; current statement and proof inspected, not independently re-audited.",
+          "consumer_use": "Rewrites the entropy density in the final displayed formula of the quasi-potential theorem."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-92",
+        "notes": "Independently checked all six steps, A1/F1-F7, and current actual supplier Definitions/Statements/Proofs. Fixed mean cancels the entropy linear term; action reversal and nonnegative reversed action bound every finite-time connection below by H, including an initially empty infimum. Mean of a target in [epsilon,1-epsilon] lies in the same interval, so the bridge hypotheses hold. Smooth target Fourier estimates justify heat regularity through time zero; affine rescaling preserves the interior range. The forward heat current is -grad rho and has zero action; its reversed current is +grad rho, with action F(rho)-F(rho_S). Time translation preserves that action. The bridge matches every time/space density/current jet at t=1, so concatenation is globally smooth, has duration S+1 and proves the connection class nonempty. The bridge cost tends to zero and uniform convergence plus continuity of f on a compact interior interval gives integral f(rho_S)->f(bar). Both bounds therefore give V=H. Reader F7 correctly supplies log(a/b)=log a-log b with strictly positive arguments and explicit algebra identifies the relative-entropy display. Constant target gives zero; d=1 works; density endpoints 0,1 are excluded; no finite-time minimizer, nonequilibrium local formula or microscopic LDP is asserted. AC_omega inherited through Fourier/heat input is retained and full Choice is not introduced. Reader/refuter evidence checked; the published Fourier j<n objection is false because factors are indexed 0,...,n-1. Bertini IV.A (4.8)-(4.9), V.A (5.1)-(5.3) and Derrida 13.1 (147)-(148), 14.1 (158)-(160) provide source context with general/infinite-time qualifications; the finite-time connector proof supplies the required local closure."
+      },
+      "repair_confidence": 1
+    },
+    "ex-csm-frontier-mft-nonlocal-warning": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "For the coordinate observables, the generator gives $L\\eta_1=\\alpha+\\eta_2-2\\eta_1$ and $L\\eta_2=\\beta+\\eta_1-2\\eta_2$. If $\\pi$ is stationary and $m_i:=\\mathbb E_\\pi\\eta_i$, then $\\mathbb E_\\pi L\\eta_i=0$, so $2m_1-m_2=\\alpha$ and $2m_2-m_1=\\beta$. Solving gives $m_1=(2\\alpha+\\beta)/3$ and $m_2=(\\alpha+2\\beta)/3$.",
+          "inputs": [
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Let $q:=\\mathbb E_\\pi(\\eta_1\\eta_2)$. The swap does not change $\\eta_1\\eta_2$, and the two reservoir flips give $L(\\eta_1\\eta_2)=\\alpha\\eta_2+\\beta\\eta_1-2\\eta_1\\eta_2$. Stationarity therefore yields $2q=\\alpha m_2+\\beta m_1$, hence $q=(\\alpha^2+4\\alpha\\beta+\\beta^2)/6$.",
+          "inputs": [
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Substituting the moments from steps 1.1 and 2.1 gives $q-m_1m_2=\\frac{\\alpha^2+4\\alpha\\beta+\\beta^2}{6}-\\frac{(2\\alpha+\\beta)(\\alpha+2\\beta)}{9}=-\\frac{(\\alpha-\\beta)^2}{18}$. If $\\alpha\\ne\\beta$, this covariance is nonzero, whereas two independent Bernoulli occupations have zero covariance; thus $\\pi$ is not a product law.",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "step": "3.2",
+          "claim": "Define probabilities by $\\pi_{11}=q$, $\\pi_{10}=m_1-q$, $\\pi_{01}=m_2-q$, and $\\pi_{00}=1-m_1-m_2+q$. They sum to one; $\\pi_{11}>0$ and $\\pi_{00}=[(1-\\alpha)^2+4(1-\\alpha)(1-\\beta)+(1-\\beta)^2]/6>0$. For fixed $\\beta$, $6\\pi_{10}=g(\\alpha)$ where $g(a)=a(4-4\\beta-a)+\\beta(2-\\beta)$ is concave on $[0,1]$ and has positive endpoint values $g(0)=\\beta(2-\\beta)$ and $g(1)=(1-\\beta)(3+\\beta)$; hence $\\pi_{10}>0$. By interchanging $\\alpha$ and $\\beta$ the same argument gives $\\pi_{01}>0$.",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "The probabilities in step 3.2 have the moments in steps 1.1 and 2.1, so their expectation of $L$ vanishes on $1,\\eta_1,\\eta_2,\\eta_1\\eta_2$. These four functions form a basis of all real functions on $\\Omega$, hence the probability vector is stationary. Conversely, every stationary law must satisfy the same three moment equations, which determine $m_1,m_2,q$ uniquely and then determine all four atom probabilities; therefore this stationary law is unique. If $\\alpha=\\beta=r$, the same probabilities reduce to $\\pi_{00}=(1-r)^2$, $\\pi_{10}=\\pi_{01}=r(1-r)$, and $\\pi_{11}=r^2$, the product Bernoulli law. Step 3.1 gives the claimed covariance.",
+          "inputs": [
+            "A1",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "step 3.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The state space Omega has exactly four states."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example and its supplied argument: The state 00 and the zero occupation values are included in Ω; its stationary atom probability is explicitly positive. Reservoir parameters α=0 or β=0 are excluded by α,β∈(0,1), so no boundary-rate stationary assertion is made."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example and its supplied argument: The occupied coordinate value 1 and the states 10,01,11 are included. Reservoir parameters equal to 1 are excluded by the open interval, and the state space remains the fixed four-state two-site space."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "At alpha=beta=r, the invariant probabilities reduce to the product Bernoulli law and covariance zero in step 4.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example and its supplied argument: The claimed stationary law is restricted to α,β strictly between 0 and 1. The proof of positivity of π10 evaluates its auxiliary polynomial g(a) at a=0,1 and uses concavity on that closed interval; this is not an assertion of strict positivity or uniqueness for a boundary-rate chain."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All states and transitions are explicitly enumerated; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example states no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "equal reservoir densities",
+          "status": "checked",
+          "evidence": "At alpha=beta=r, step 4.1 gives the explicit product Bernoulli atom probabilities and covariance zero."
+        }
+      ],
+      "finite_checks_disposition": "All applicable finite and boundary cases are recorded above. The remaining argument is symbolic; no unrecorded numerical, simulated, or experimental checks are used.",
+      "supplier_excerpts": [],
+      "risk_review": {
+        "status": "complete",
+        "notes": "Step 1 authoring check compared the exact supplier interfaces and actual hypotheses to each recorded consumer use, inspected the proof argument, and reviewed the stated boundary cases. This is not independent proof approval."
+      },
+      "repair_confidence": 1,
+      "current_boundary_worksheet": {
+        "proposal": "research/physics-non-fluid-129-2026-10-21-r2-owner-step2-boundary-proposal-4/proposal.json",
+        "source_sha256": "d6a6abb7cb5aaad98a62c5134108908afbee04e4270851a4f129ae912f5d493c",
+        "qualification": "Released complete current source/eight-case semantic worksheet; root transcribed exact current rows. No independent acceptance or finite computation asserted."
+      }
+    }
+  }
+}

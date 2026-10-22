@@ -1,0 +1,598 @@
+--- a/tools/physics-support/step5-workflow.mjs
++++ b/tools/physics-support/step5-workflow.mjs
+@@ -10,6 +10,7 @@
+ import { freezeFrontier, validateFrontier, readLibraryItems, discoverDownstream, assessFatalThreshold } from './step5-rounds.mjs';
+ import { isPublishedItem } from './published-repair-policy.mjs';
+ import { publishedMaintenance, isPublishedMaintenance } from './step5-published-maintenance.mjs';
++import { explanatoryReviewPhase, explanatoryReviewProgressPath, prepareExplanatoryReview, explanatoryReviewCompletion, isExplanatoryReviewCompletion, verifyExplanatoryReviewReplay } from './step5-explanatory-edit-review.mjs';
+ import { itemHashGuard } from './item-hash.mjs';
+ import { currentHashesMany } from './step5-terminal-resolution.mjs';
+ import { MODELS } from './models.mjs';
+@@ -400,9 +401,18 @@
+   }
+ }
+ 
+-export function validateReports(pack,reports,now,{root=null,scientificCorrection=null,ownerFindingCorrection=null,publishedLocalMaintenance=null}={}) {
+-  const childReview=id=>ownerFindingCorrection?.token===ownerFindingCollectionToken
+-    ?ownerFindingCorrection.reviews.find(row=>row.id===id):null;
++function currentExplanatoryReview(root,run){
++  const progress=explanatoryReviewProgressPath(root,run);if(!existsSync(progress))return null;
++  const sealed=existsSync(join(workflowDir(root,run),explanatoryReviewPhase+'-1-collected.json'));
++  return explanatoryReviewCompletion(root,run,sealed?{}:reviewContextHashes(root,read(progress).subjects));
++}
++
++export function validateReports(pack,reports,now,{root=null,scientificCorrection=null,ownerFindingCorrection=null,publishedLocalMaintenance=null,explanatoryEditReview=null}={}) {
++  explanatoryEditReview??=root&&pack.phase==='initial'&&pack.round===1?currentExplanatoryReview(root,pack.run):null;
++  const childReview=id=>(ownerFindingCorrection?.token===ownerFindingCollectionToken
++    ?ownerFindingCorrection.reviews.find(row=>row.id===id):null)
++    ??(isExplanatoryReviewCompletion(explanatoryEditReview)&&explanatoryEditReview.guards[id]===now[id]
++      ?explanatoryEditReview.reviews.find(row=>row.id===id):null);
+   const corrected=id=>(scientificCorrection?.token===scientificValidationToken&&scientificCorrection.subject===id)||!!childReview(id);
+   const errors=[],decisions=[],reviews=[],createdItems=[],creatorById=new Map();
+   for(const unit of pack.units) {
+@@ -502,7 +512,8 @@
+     ...(existsSync(scientificCorrectionProgressPath(workflowDir(root,run),phase,round))?[scientificCorrectionPhase(phase)+':1']:[]),
+     ...(existsSync(ownerFindingProgressPath(root,run,phase,round))?['1','2','3'].map(unit=>ownerFindingPhase(phase)+':'+unit):[]),
+     ...(phase==='initial'&&existsSync(pageCorrectionProgressPath(root,run,round))?[pageCorrectionPhase+':1']:[]),
+-    ...(phase==='initial'&&round===1&&existsSync(reviewCorrectionProgressPath(root,run))?[reviewCorrectionPhase+':1']:[])];
++    ...(phase==='initial'&&round===1&&existsSync(reviewCorrectionProgressPath(root,run))?[reviewCorrectionPhase+':1']:[]),
++    ...(phase==='initial'&&round===1&&existsSync(explanatoryReviewProgressPath(root,run))?[explanatoryReviewPhase+':1']:[])];
+ }
+ 
+ function reviewCorrectionContext(root,run,phase,round){
+@@ -709,6 +720,17 @@
+ }
+ 
+ export function advanceAdjudicationCorrection(root,run,phase,round) {
++  let explanatory=null;
++  if(phase==='initial'&&round===1&&!existsSync(join(workflowDir(root,run),'initial-1-collected.json'))){
++    explanatory=prepareExplanatoryReview(root,run,phase,round);
++    if(explanatory){
++      const completion=currentExplanatoryReview(root,run);
++      if(!completion)return explanatory;
++      const {sha256:priorSeal,...payload}=completion;
++      frozen(join(workflowDir(root,run),explanatoryReviewPhase+'-1-collected.json'),{...payload,sha256:digest(payload)});
++    }
++  }
++
+   // Pending writers retain their frozen authority. Full scientific current-
+   // state authentication belongs at the drained completion join, not mid-edit.
+   if(phase==='initial'&&(existsSync(pageCorrectionProgressPath(root,run,round))||round===1&&existsSync(reviewCorrectionProgressPath(root,run)))
+@@ -760,7 +782,7 @@
+   const review=advanceReviewCorrection(root,run,phase,round);
+   if(review){if(!review.completion)return review;collect(root,run,phase,round);return {...review,parent_collected:true};}
+   const context=inheritedContext(root,run,phase,round);
+-  if(!context)return null;
++  if(!context)return explanatory?{...explanatory,explanatory_review_completed:true}:null;
+   assertCorrectionDrained(root,context);
+   const dir=workflowDir(root,run),path=correctionProgressPath(dir,phase,round);
+   const correction=correctionPhase(phase),request=context.payload;
+@@ -819,7 +841,7 @@
+     }
+     verifyHistoricalEvidence(root,run,prior.evidence);
+     if(prior.published_local_repairs?.length)publishedMaintenance(root,run,readPack(root,run,phase,round),hashes(root),{replay:prior.published_local_repairs});
+-    if(phase==='initial'){verifyPageCorrectionReplay(root,run,round,prior);verifyReviewCorrectionReplay(root,run,prior);}
++    if(phase==='initial'){verifyPageCorrectionReplay(root,run,round,prior);verifyReviewCorrectionReplay(root,run,prior);verifyExplanatoryReviewReplay(root,run,prior);}
+     syncMaintenance(root,run,prior.statement_events??[]);return prior;
+   }
+   const pack=readPack(root,run,phase,round);
+@@ -827,6 +849,16 @@
+   const reports=pack.units.map(unit=>read(workerReport(root,run,phase,round,unit)));
+   const collectionItems=pack.scientific_repair?readLibraryItems(root):null;
+   const current=hashes(root,collectionItems??undefined),reported={...current};
++  // Authenticate the actual current published state once before validating
++  // preserved intermediate owner/scientific snapshots as well as the final map.
++  const publishedLocalMaintenance=phase==='initial'&&round===1?publishedMaintenance(root,run,pack,current):null;
++  const explanatoryProgress=phase==='initial'&&round===1?explanatoryReviewProgressPath(root,run):null;
++  const explanatoryEditReview=explanatoryProgress&&existsSync(explanatoryProgress)
++    ?currentExplanatoryReview(root,run):null;
++  if(phase==='initial'&&round===1&&existsSync(join(workflowDir(root,run),'owner-explanatory-edit-review-request.json')))
++    requireValue(explanatoryEditReview&&existsSync(join(workflowDir(root,run),explanatoryReviewPhase+'-1-collected.json')),
++      'explicit explanatory edit awaits genuine sealed native review');
++
+   const pageProgress=phase==='initial'?pageCorrectionProgressPath(root,run,round):null;
+   const pageCompletion=pageProgress&&existsSync(pageProgress)
+     ?pageCorrectionCompletion(root,run,round,pageCorrectionRequest(root,run,phase,round,{continuation:true})):null;
+@@ -864,7 +896,7 @@
+       'missing or stale scientific correction request');
+     assertScientificCorrectionDrained(root,context);verifyEvidence(progress.evidence);
+     const historical={...(ownerPack?.before??reported),[context.payload.subject]:context.payload.narrowed_content_sha256};
+-    const originalValidation=validateReports(pack,historicalReports,historical,{root});
++    const originalValidation=validateReports(pack,historicalReports,historical,{root,publishedLocalMaintenance,explanatoryEditReview});
+     requireValue(!originalValidation.errors.length,originalValidation.errors.join('\n'));
+     const childPhase=scientificCorrectionPhase(phase),child=read(workerReport(root,run,childPhase,round,'1'));
+     scientificAdopted=scientificCorrectionCompletion(child,context.payload,current,
+@@ -888,7 +920,7 @@
+     // current map. Every original report must validate before any projection.
+     const historical={...ownerPack.before};
+     if(scientificContext)historical[scientificContext.payload.subject]=scientificContext.payload.narrowed_content_sha256;
+-    const originals=validateReports(pack,historicalReports,historical,{root});
++    const originals=validateReports(pack,historicalReports,historical,{root,publishedLocalMaintenance,explanatoryEditReview});
+     requireValue(!originals.errors.length,originals.errors.join('\n'));
+     ownerCorrection=collect(root,run,childPhase,round,{correctionToken:ownerFindingCollectionToken});
+     const decisions=new Map(ownerCompletion.decisions.map(row=>[key(row),row]));
+@@ -897,10 +929,10 @@
+       decisions:report.decisions.map(row=>decisions.get(key(row))??row),
+       reviews:report.reviews.map(row=>reviews.get(row.id)??row)}));
+   }
+-  const publishedLocalMaintenance=phase==='initial'&&round===1?publishedMaintenance(root,run,pack,current):null;
+-  const result=validateReports(pack,effectiveReports,reported,{root,publishedLocalMaintenance,
++  const result=validateReports(pack,effectiveReports,reported,{root,publishedLocalMaintenance,explanatoryEditReview,
+     scientificCorrection:scientificAdopted?{token:scientificValidationToken,subject:scientificAdopted.subject}:null,
+     ownerFindingCorrection:ownerCompletion?{token:ownerFindingCollectionToken,reviews:ownerCompletion.reviews}:null});
++  if(explanatoryEditReview)result.reviews.push(...explanatoryEditReview.reviews);
+   if(ownerCompletion){
+     const assigned=new Set(result.reviews.map(row=>row.id));
+     result.reviews.push(...ownerCompletion.reviews.filter(row=>!assigned.has(row.id)));
+@@ -983,6 +1015,12 @@
+   }
+   const receipt={...result,created_items:result.created_items.map(row=>({...row,author_result:creationAuthors.get(row.id)})),version:2,run,phase,round,evidence,post:hashes(root),downstream:[...new Set(reports.flatMap(row=>row.downstream))],ledger_updates:reports.flatMap(row=>row.ledger_updates??[])};
+   if(publishedLocalMaintenance?.repairs.length)receipt.published_local_repairs=publishedLocalMaintenance.repairs;
++  if(explanatoryEditReview){
++    const path=join(workflowDir(root,run),explanatoryReviewPhase+'-1-collected.json');
++    Object.assign(receipt.evidence,explanatoryEditReview.evidence,{[path]:digest(readFileSync(path,'utf8'))});
++    receipt.native_explanatory_edit_review=explanatoryEditReview;
++  }
++
+   if(external.repairs.length)receipt.external_owner_repairs=external.repairs;
+   if(scientificCompletion)receipt.scientific_repair_completion=scientificCompletion;
+   if(correction){
+--- /dev/null
++++ b/tools/physics-support/step5-explanatory-edit-review.mjs
+@@ -0,0 +1,184 @@
++// Explicitly authorized, already-applied Remarks edits get actual fresh native
++// review. This never licenses source editing or invents an original judge tuple.
++import {existsSync,readFileSync,writeFileSync,readdirSync,realpathSync} from 'node:fs';
++import {join,resolve,relative,isAbsolute,basename} from 'node:path';
++import {createHash} from 'node:crypto';
++import {isDeepStrictEqual as equal} from 'node:util';
++import {itemHashGuard} from './item-hash.mjs';
++import {validateFrontier} from './step5-rounds.mjs';
++import {MODELS} from './models.mjs';
++
++const hash=bytes=>createHash('sha256').update(bytes).digest('hex');
++const digest=value=>hash(JSON.stringify(value));
++const read=path=>JSON.parse(readFileSync(path,'utf8'));
++const need=(ok,why)=>{if(!ok)throw Error('explanatory edit review: '+why);};
++const reason=value=>typeof value==='string'&&value.trim().length>=40;
++const sha=value=>/^[a-f0-9]{64}$/.test(value??'');
++const evidence=row=>row&&reason(row.reason)&&row.uncertain===false&&Array.isArray(row.source_urls)
++  &&row.source_urls.every(url=>typeof url==='string'&&/^https:\/\//.test(url))&&(row.source_urls.length>0||row.familiar===true);
++const authenticated=new WeakSet();
++export const explanatoryReviewPhase='explanatory-review-initial';
++const directory=(root,run)=>join(root,'research',run+'-step5-v2');
++const label='step5-v2-'+explanatoryReviewPhase+'-r1-u1';
++const artifact=(root,run,suffix)=>join(directory(root,run),label+suffix);
++export const explanatoryReviewProgressPath=(root,run)=>join(directory(root,run),explanatoryReviewPhase+'-1-progress.json');
++export const isExplanatoryReviewCompletion=value=>value!==null&&typeof value==='object'&&authenticated.has(value);
++const immutable=(path,value)=>{const bytes=JSON.stringify(value,null,2)+'\n';if(existsSync(path))need(readFileSync(path,'utf8')===bytes,'immutable artifact differs: '+path);else writeFileSync(path,bytes,{flag:'wx'});};
++function binder(root,run,inputs){
++ const research=realpathSync(join(root,'research'));
++ return ref=>{
++  need(ref&&typeof ref.path==='string'&&!isAbsolute(ref.path)&&sha(ref.sha256),'invalid evidence reference');
++  const file=resolve(root,ref.path),rel=relative(research,realpathSync(file));
++  need(!isAbsolute(rel)&&!rel.startsWith('..')&&rel.startsWith(run+'-'),'evidence escapes run-local research');
++  need(hash(readFileSync(file))===ref.sha256,'bound evidence changed: '+ref.path);inputs[file]=ref.sha256;return file;
++ };
++}
++/** Exact non-Remarks prefix and TikZ suffix preserve definitions, claims,
++ * physical qualifications, proofs, dependencies, metadata and diagram bytes.
++ * No new heading, fence or wikilink can hide inside the explanatory prose. */
++export function remarksOnly(before,current){
++ const split=text=>{
++  need((text.match(/^## Remarks\s*$/gm)??[]).length===1,'requires one exact Remarks section');
++  const match=/^([\s\S]*?\n## Remarks\n\n)([\s\S]*?)(\n```tikz\n[\s\S]*)$/.exec(text);
++  need(match&&!/^[ \t]{0,3}#{1,6}(?:[ \t]|$)|^[ \t]*(?:`{3,}|~{3,})|\[\[|\][ \t]*(?:\(|\[)|^[ \t]*\[[^\]\n]+\]:|<https?:\/\//m.test(match[2]),'requires plain explanation before the existing TikZ diagram');
++  return match;
++ };
++ const a=split(before),b=split(current);
++ need(a[1]===b[1]&&a[3]===b[3]&&a[2]!==b[2],'only existing Remarks explanatory prose may change');
++}
++function guards(root,run){
++ const dir=directory(root,run),paths=readdirSync(dir).filter(name=>!name.startsWith(explanatoryReviewPhase+'-')&&!name.startsWith('step5-v2-'+explanatoryReviewPhase+'-')
++  &&(name.endsWith('.json')||name.endsWith('.task.md'))).map(name=>join(dir,name));
++ const research=join(root,'research');
++ for(const name of readdirSync(research))if(name.startsWith(run+'-batch-')&&/^[1-9][0-9]*\.(?:pages|proof-contracts)\.json$/.test(name.slice((run+'-batch-').length)))paths.push(join(research,name));
++ for(const name of ['defect-ledger.jsonl',run+'-judge.jsonl',run+'-judge-adjudications.jsonl',run+'-proof-contracts.json',run+'-pages.json']){const path=join(research,name);if(existsSync(path))paths.push(path);}
++ return Object.fromEntries(paths.sort().map(path=>[relative(root,path),hash(readFileSync(path))]));
++}
++export function explanatoryReviewRequest(root,run,{verificationRefresh=false}={}){
++ root=resolve(root);const dir=directory(root,run),pointerPath=join(dir,'owner-explanatory-edit-review-request.json');
++ if(!existsSync(pointerPath))return null;
++ const pointer=read(pointerPath),inputs={},bound=binder(root,run,inputs);
++ need(pointer.version===1&&pointer.run===run,'invalid explicit root advertisement');
++ const requestPath=bound(pointer.request),request=read(requestPath);
++ need(resolve(requestPath,'..')===resolve(dir)&&/^owner-explanatory-edit-review-[A-Za-z0-9._-]+\.json$/.test(basename(requestPath))
++  &&requestPath!==pointerPath,'request must be immutable workflow evidence');
++ need(request.version===1&&request.run===run&&request.phase==='initial'&&request.round===1&&request.reviewer==='/root'
++  &&request.kind==='user-authorized-preapplied-remarks-edit'&&request.source_edit_authority===false
++  &&request.native_execution_coverage_adopted===false&&reason(request.reason)
++  &&Array.isArray(request.entries)&&request.entries.length>0,'invalid user-side-edit review authority');
++ bound(request.user_authorization);
++ const frontierPath=join(dir,'frontier.json'),frontier=read(frontierPath);validateFrontier(frontier);need(frontier.run===run,'wrong frozen frontier');
++ const packPath=join(dir,'initial-1.json'),pack=read(packPath),baselinePath=join(root,'research',run+'-step5-auditor-baseline.json'),baseline=read(baselinePath);
++ need(baseline.version===1&&baseline.run===run&&pack.run===run&&pack.phase==='initial'&&pack.round===1&&pack.repair_scope==='frontier'
++  &&equal(pack.frontier_ids,frontier.ids),'wrong immutable original pack');
++ const assigned=new Set(Object.values(pack.assignments).flat().map(row=>row.id)),seen=new Set();
++ const importsPath=join(root,'research/math-imports.json'),imports=new Set(existsSync(importsPath)?read(importsPath).files.map(row=>row.path):[]);
++ for(const entry of request.entries){
++  const id=entry.id;
++  need(typeof id==='string'&&frontier.ids.includes(id)&&!assigned.has(id)&&!seen.has(id)&&!imports.has('items/'+id+'.md'),
++   'subject must be unique, unassigned, local and inside frozen frontier');seen.add(id);
++  const before=readFileSync(bound(entry.before_source),'utf8'),current=readFileSync(bound(entry.current_source),'utf8');
++  need(/^id:\s*["']?([^\n"']+)["']?\s*$/m.exec(before)?.[1]===id&&/^status:\s*draft\s*$/m.test(before)
++   &&baseline.item_carriers?.[id]?.item_file_sha256===hash(before)&&baseline.item_carriers[id].guard_sha256===pack.before[id]
++   &&itemHashGuard(before)===pack.before[id]&&itemHashGuard(current)!==pack.before[id]
++   &&(verificationRefresh?itemHashGuard(readFileSync(join(root,'items',id+'.md'),'utf8'))===itemHashGuard(current)
++    :readFileSync(join(root,'items',id+'.md'),'utf8')===current),'wrong authenticated before/current draft carrier');
++  remarksOnly(before,current);
++ }
++ for(const path of [frontierPath,packPath,baselinePath,pointerPath])inputs[path]=hash(readFileSync(path));
++ return {request:{path:requestPath,sha256:pointer.request.sha256},payload:request,evidence:inputs};
++}
++function stageDrained(root,run){
++ const state=read(join(root,'.physics-autopilot',run,'state.json'));
++ need(state.run===run&&state.stage==='5.1-adjudicate'&&!state.finishedAt&&!state.stages?.['5.1-adjudicate']?.doneAt,'outside unfinished initial stage');
++ need(state.dispatches&&typeof state.dispatches==='object'&&!Array.isArray(state.dispatches)
++  &&Object.values(state.dispatches).every(row=>row&&(!row.startedAt||row.endedAt)),'native source writers have not drained');
++ need(!existsSync(join(root,'.physics-autopilot','step5-shared-write.lock')),'shared metadata writer active');
++}
++export function prepareExplanatoryReview(root,run,phase,round){
++ if(phase!=='initial'||round!==1)return null;
++ const sealed=existsSync(join(directory(root,run),explanatoryReviewPhase+'-1-collected.json'));
++ const context=explanatoryReviewRequest(root,run,{verificationRefresh:sealed});if(!context)return null;
++ stageDrained(root,run);const dir=directory(root,run),progressPath=explanatoryReviewProgressPath(root,run);
++ need(!existsSync(join(dir,'initial-1-collected.json'))&&!existsSync(join(dir,'certification-impact-initial-1.json')),'parent collection/certification already immutable');
++ if(existsSync(progressPath)){const prior=read(progressPath);need(equal(prior.request,context.request),'review request changed');return prior;}
++ const ids=context.payload.entries.map(row=>row.id),pack={version:1,run,phase:explanatoryReviewPhase,round:1,unit:'1',
++  repair_scope:'read-only-user-side-edit-adoption',request:context.request,payload:context.payload,before_protected:guards(root,run)};
++ const packPath=join(dir,explanatoryReviewPhase+'-1.json'),taskPath=artifact(root,run,'.task.md');
++ immutable(packPath,pack);
++ const task=[
++  '# Fresh native review of an explicitly authorized user explanatory edit',
++  'Read CLAUDE.md, WORKFLOW.md and '+packPath+'. Native phase '+explanatoryReviewPhase+', round1, unit1.',
++  'READ ONLY. Assigned current sources: '+ids.join(', ')+'. The user already changed these Remarks explanations. Do not revert or edit any source, diagram, metadata, contract, original pack/report, ledger, tool or state.',
++  'Authenticate the preserved original and exact current sources. Their complete non-Remarks prefix and TikZ suffix must be byte-identical. Examine the changed explanations mathematically, their consistency with the actual definition/example and diagram, and the actual current suppliers. Retain rich claims, empirical qualifications and rigorous definitions. Verify actual current context. Reuse genuine completed proof review only with attribution; an unchanged diagram-independent proof is not an authoring task.',
++  'Run the focused precheck/rendercheck/proof-layout as appropriate for these exact source paths; record actual results as structured checks. No software tests or broader corpus checks. Report unresolved uncertainty or required source repairs; this read-only continuation cannot provide them.',
++  'Return JSON {version:1,run:"'+run+'",phase:"'+explanatoryReviewPhase+'",round:1,unit:"1",input_sha256:"'+digest(pack)+'",decisions:[],created_items:[],downstream:[],reviews:[...],adoptions:[...],supporting_evidence:{},checks:[...]}.',
++  'One reviews row per assigned ID: {id,disposition:"unaffected",post_sha256,review_context_sha256,reason,uncertain:false,source_urls:[],familiar:true}. After actual review obtain current stamps from node tools/physics-support/step5-workflow.mjs review-contexts --run '+run+' --items '+ids.join(',')+'. Never fabricate source reading or hashes.',
++  'One adoptions row per assigned ID: {id,disposition:"adopted",origin:"user-authorized-side-edit",reason,uncertain:false,source_urls:[],familiar:true}. Every reason must contain at least40characters of specific actual checks. Bind every immutable research evidence file actually read by raw SHA256 in supporting_evidence. No original judge tuple, adjudication, native authorship, independent acceptance, certificate or gate waiver is claimed.',
++  ''
++ ].join('\n');
++ if(existsSync(taskPath))need(readFileSync(taskPath,'utf8')===task,'immutable native task changed');else writeFileSync(taskPath,task,{flag:'wx'});
++ const evidence={...context.evidence,[packPath]:hash(readFileSync(packPath)),[taskPath]:hash(readFileSync(taskPath))};
++ const progress={version:1,run,phase:'initial',round:1,correction_phase:explanatoryReviewPhase,request:context.request,subjects:ids,evidence};
++ immutable(progressPath,progress);return progress;
++}
++export function explanatoryReviewCompletion(root,run,currentReviews){
++ const sealedPath=join(directory(root,run),explanatoryReviewPhase+'-1-collected.json');
++ if(existsSync(sealedPath)){
++  const saved=read(sealedPath),{sha256,...payload}=saved,context=explanatoryReviewRequest(root,run,{verificationRefresh:true});
++  need(sha256===digest(payload),'sealed native review payload changed');
++  need(saved.run===run&&saved.phase===explanatoryReviewPhase&&saved.round===1&&equal(saved.request,context.request),'wrong sealed native review');
++  for(const [path,expected]of Object.entries(saved.evidence))need(hash(readFileSync(path))===expected,'sealed native review evidence changed: '+path);
++  const reportPath=artifact(root,run,'.json'),report=read(reportPath),ids=context.payload.entries.map(row=>row.id).sort();
++  need(equal(Object.keys(saved.guards).sort(),ids)&&equal(saved.reviews,report.reviews)&&equal(saved.adoptions,report.adoptions)
++    &&saved.evidence[reportPath]===hash(readFileSync(reportPath)),'sealed receipt lost exact actual native reviews or target guards');
++  for(const entry of context.payload.entries){const expected=itemHashGuard(readFileSync(resolve(root,entry.current_source.path),'utf8'));
++    need(saved.guards[entry.id]===expected&&itemHashGuard(readFileSync(join(root,'items',entry.id+'.md'),'utf8'))===expected,'adopted source changed: '+entry.id);}
++
++  // The review was actually current when sealed. Later supplier changes retain
++  // its genuine old context; ordinary impact closure must requeue stale rows.
++  const result=Object.freeze({...saved,guards:Object.freeze(saved.guards),reviews:Object.freeze(saved.reviews.map(Object.freeze))});
++  authenticated.add(result);return result;
++ }
++ const progressPath=explanatoryReviewProgressPath(root,run);if(!existsSync(progressPath))return null;
++ const reportPath=artifact(root,run,'.json'),dispatchPath=join(root,'research',run+'-dispatch','alpha-repair-'+label+'.result.json');
++ if(!existsSync(reportPath)||!existsSync(dispatchPath))return null;
++ const context=explanatoryReviewRequest(root,run),progress=read(progressPath),inputs={...context.evidence},bound=binder(root,run,inputs);
++ need(equal(progress.request,context.request),'frozen authority changed');
++ for(const [path,expected]of Object.entries(progress.evidence))bound({path:relative(root,path),sha256:expected});
++ const packPath=join(directory(root,run),explanatoryReviewPhase+'-1.json'),pack=read(packPath),report=read(reportPath),ids=context.payload.entries.map(row=>row.id);
++ need(pack.run===run&&pack.phase===explanatoryReviewPhase&&pack.round===1&&pack.unit==='1'
++  &&pack.repair_scope==='read-only-user-side-edit-adoption'&&equal(pack.request,context.request)&&equal(pack.payload,context.payload),'wrong read-only native pack');
++ const currentProtected=guards(root,run);
++ need(equal(currentProtected,pack.before_protected),'protected original reports, metadata inventory or ledger changed during review');
++ need(report.version===1&&report.run===run&&report.phase===explanatoryReviewPhase&&report.round===1&&String(report.unit)==='1'
++  &&report.input_sha256===digest(pack)&&['decisions','created_items','downstream'].every(field=>Array.isArray(report[field])&&report[field].length===0)
++  &&Array.isArray(report.reviews)&&report.reviews.length===ids.length&&Array.isArray(report.adoptions)&&report.adoptions.length===ids.length,
++  'read-only child cannot edit, adjudicate, author or omit a target');
++ const reviews=[],guardsNow={};
++ for(const id of ids){
++  const rows=report.reviews.filter(row=>row.id===id),adoptions=report.adoptions.filter(row=>row.id===id),now=currentReviews[id];
++  need(rows.length===1&&rows[0].disposition==='unaffected'&&evidence(rows[0])&&sha(rows[0].review_context_sha256)
++   &&rows[0].post_sha256===now?.post_sha256&&rows[0].review_context_sha256===now?.review_context_sha256,
++   'missing actual current native source/context review: '+id);
++  need(adoptions.length===1&&adoptions[0].disposition==='adopted'&&adoptions[0].origin==='user-authorized-side-edit'&&evidence(adoptions[0]),'missing truthful external-edit adoption: '+id);
++  guardsNow[id]=now.post_sha256;reviews.push(Object.freeze({...rows[0]}));
++ }
++ const dispatch=read(dispatchPath);
++ need(dispatch.ok===true&&dispatch.run===run&&dispatch.role==='alpha-repair'&&dispatch.label===label&&dispatch.model===MODELS.sol61.id
++  &&dispatch.provider_effort==='high'&&equal(dispatch.covers,[explanatoryReviewPhase+':1'])
++  &&typeof dispatch.ended_at==='string'&&!Number.isNaN(Date.parse(dispatch.ended_at)),'fresh review lacks completed native Sol6.1high authority');
++ const supporting=report.supporting_evidence??{};need(supporting&&typeof supporting==='object'&&!Array.isArray(supporting),'invalid supporting evidence');
++ for(const [path,expected]of Object.entries(supporting))bound({path:relative(root,isAbsolute(path)?path:resolve(root,path)),sha256:expected});
++ for(const path of [progressPath,reportPath,dispatchPath])bound({path:relative(root,path),sha256:hash(readFileSync(path))});
++ const result=Object.freeze({version:1,run,phase:explanatoryReviewPhase,round:1,request:context.request,
++  reviews:Object.freeze(reviews),adoptions:report.adoptions,guards:Object.freeze(guardsNow),evidence:Object.freeze(inputs),
++  attribution:'Fresh native current review of Root-authorized user Remarks edits; no original adjudication or native source authorship'});
++ authenticated.add(result);return result;
++}
++export function verifyExplanatoryReviewReplay(root,run,parent){
++ const completion=parent.native_explanatory_edit_review;if(!completion)return;
++ const path=join(directory(root,run),explanatoryReviewPhase+'-1-collected.json');
++ need(parent.evidence?.[path]===hash(readFileSync(path))&&equal(read(path),completion),'parent lost exact native explanatory review');
++ for(const [path,expected]of Object.entries(completion.evidence))need(parent.evidence[path]===expected&&hash(readFileSync(path))===expected,'native explanatory review evidence changed');
++}
+--- /dev/null
++++ b/tools/physics-support/step5-explanatory-edit-review.test.mjs
+@@ -0,0 +1,184 @@
++// Synthetic authority/check/dispatch fixtures, never actual native coverage.
++import test from 'node:test';
++import assert from 'node:assert/strict';
++import {mkdtempSync,mkdirSync,readFileSync,writeFileSync,rmSync,existsSync} from 'node:fs';
++import {join,relative,dirname} from 'node:path';
++import {tmpdir} from 'node:os';
++import {remarksOnly,explanatoryReviewRequest,explanatoryReviewCompletion,explanatoryReviewPhase,isExplanatoryReviewCompletion} from './step5-explanatory-edit-review.mjs';
++import {advanceAdjudicationCorrection,adjudicationCorrectionWork,collect,validateReports,digest,workerLabel,workerReport,workflowDir,reviewContextHashes,prepareImpact,advanceImpact,reviewMatchesCurrent} from './step5-workflow.mjs';
++import {freezeFrontier,readLibraryItems} from './step5-rounds.mjs';
++import {itemHashGuard} from './item-hash.mjs';
++import {statementHash} from './step5-statement.mjs';
++import {MODELS} from './models.mjs';
++const ev={reason:'Checked the exact current explanation against the unchanged procedure, diagram and actual supplier context.',uncertain:false,source_urls:[],familiar:true};
++const source=(id,body='A sound claim.',status='draft')=>`---\nid: ${id}\nkind: theorem\nstatus: ${status}\ndeps: []\n---\n## Statement\n${body}\n\n## Proof\n1.1 A complete argument. [given] ∎\n`;
++const caption=id=>source(id).replace('deps: []','deps: [thm-referred]')+'\n## Remarks\n\nThe horizontal coordinate is the time index divided by h. No proof uses the diagram.\n\n```tikz\n\\begin{tikzpicture}\\node {$t/h$};\\end{tikzpicture}\n```\n';
++export function fixture(t,{published=false}={}){
++ const root=mkdtempSync(join(tmpdir(),'explanatory-edit-')),run='demo',dir=workflowDir(root,run),local=join(root,'research',run+'-side-edit');
++ t.after(()=>rmSync(root,{recursive:true,force:true}));
++ for(const path of [dir,local,join(root,'items'),join(root,'research',run+'-dispatch'),join(root,'.physics-autopilot',run)])mkdirSync(path,{recursive:true});
++ const save=(path,value)=>{mkdirSync(dirname(path),{recursive:true});writeFileSync(path,JSON.stringify(value,null,2)+'\n');};
++ const ref=path=>({path:relative(root,path),sha256:digest(readFileSync(path,'utf8'))});
++ const ids=['thm-assigned','thm-referred','thm-unrelated','alg-caption',...(published?['thm-published']:[])];
++ const beforeCaption=caption('alg-caption'),currentCaption=beforeCaption.replace('The horizontal coordinate is the time index divided by h.','Set t_n=nh. The horizontal coordinate is normalized time t/h.');
++ for(const id of ids)writeFileSync(join(root,'items',id+'.md'),id==='alg-caption'?beforeCaption:id==='thm-published'?source(id,'A published claim.','published').replace('deps: []','deps: []\nverification:\n  audited: 2026-10-01'):source(id));
++ const current=()=>Object.fromEntries(readLibraryItems(root).map(row=>[row.id,itemHashGuard(readFileSync(join(root,'items',row.id+'.md'),'utf8'))]));
++ const statements=()=>Object.fromEntries(readLibraryItems(root).map(row=>[row.id,row.statement_sha256]));
++ const frontier=freezeFrontier({run,batches:[{id:'19',items:ids}]});save(join(dir,'frontier.json'),frontier);save(join(dir,'baseline.json'),current());
++ const tuple={id:'thm-assigned',model:MODELS.sol61.id,context_sha256:'a'.repeat(64),keep:false};save(join(dir,'step4-verdicts.json'),[tuple]);
++ const pack={version:2,run,phase:'initial',round:1,repair_scope:'frontier',frontier_ids:frontier.ids,units:['19'],assignments:{'19':[tuple]},rejected:[tuple],before:current(),before_statements:statements(),judge_model:MODELS.sol61.id};
++ save(join(dir,'initial-1.json'),pack);
++ save(join(root,'research',run+'-batch-19.pages.json'),[{id:'page',items:ids.map(id=>({id}))}]);
++ save(join(root,'research',run+'-batch-19.proof-contracts.json'),{contracts:{}});
++ save(join(root,'research',run+'-proof-contracts.json'),{contracts:{}});
++ const originalPath=workerReport(root,run,'initial',1,'19'),label=workerLabel('initial',1,'19');
++ writeFileSync(originalPath.replace(/\.json$/,'.task.md'),'Frozen inputs: '+join(dir,'initial-1.json')+'\n');
++ const originalReport={run,phase:'initial',round:1,unit:'19',input_sha256:digest(pack),decisions:[{id:tuple.id,model:tuple.model,context_sha256:tuple.context_sha256,outcome:'false_positive',...ev}],
++  reviews:[{id:tuple.id,disposition:'unaffected',...reviewContextHashes(root,[tuple.id])[tuple.id],...ev}],downstream:['thm-referred'],created_items:[]};save(originalPath,originalReport);
++ save(join(root,'research',run+'-dispatch','alpha-adjudicate-'+label+'.result.json'),{ok:true,run,role:'alpha-adjudicate',label,model:MODELS.sol61.id,provider_effort:'high',covers:['19'],ended_at:'2026-10-22T00:00:00Z'});
++ const baseline={version:1,run,item_carriers:{'alg-caption':{item_file_sha256:digest(beforeCaption),guard_sha256:pack.before['alg-caption']}}};save(join(root,'research',run+'-step5-auditor-baseline.json'),baseline);
++ const beforeFile=join(local,'before.md'),currentFile=join(local,'current.md');writeFileSync(beforeFile,beforeCaption);writeFileSync(currentFile,currentCaption);writeFileSync(join(root,'items/alg-caption.md'),currentCaption);
++ const authorization=join(local,'user-authorization.json');save(authorization,{run,reviewer:'/root',request:'User explicitly authorized the already-applied two diagram explanation changes and needed recertification.'});
++ const request={version:1,run,phase:'initial',round:1,reviewer:'/root',kind:'user-authorized-preapplied-remarks-edit',source_edit_authority:false,native_execution_coverage_adopted:false,
++  reason:'The user explicitly authorized these already-applied explanatory edits; perform actual current native review.',user_authorization:ref(authorization),entries:[{id:'alg-caption',before_source:ref(beforeFile),current_source:ref(currentFile)}]};
++ const requestPath=join(dir,'owner-explanatory-edit-review-current.json');
++ const bind=()=>{save(requestPath,request);save(join(dir,'owner-explanatory-edit-review-request.json'),{version:1,run,request:ref(requestPath)});};bind();
++ const state={run,stage:'5.1-adjudicate',paused:false,stages:{'5.1-adjudicate':{}},dispatches:{original:{startedAt:'earlier',endedAt:'now'}}};
++ const saveState=()=>save(join(root,'.physics-autopilot',run,'state.json'),state);saveState();
++ if(published){
++  const id='thm-published',before=readFileSync(join(root,'items',id+'.md'),'utf8'),receiptPath='research/'+run+'-published-local.json';
++  const after=before.replace('  audited: 2026-10-01','  repair: '+receiptPath).replace('A complete argument.','A complete argument with a corrected proof explanation.');writeFileSync(join(root,'items',id+'.md'),after);
++  const beforeFile=join(local,'published-before.md');writeFileSync(beforeFile,before);
++  const claim={version:1,run,id,group:'g',pre_sha256:itemHashGuard(before),claimed_at:'2026-10-22T00:00:00Z'};writeFileSync(join(root,'research',run+'-step3-published-claims.jsonl'),JSON.stringify(claim)+'\n');
++  const content=itemHashGuard(after),ledger=`\n${id}: exact current ${content}, local correction only.\n`,marker=run+':'+id;
++  writeFileSync(join(root,'research/published-consumer-supplier-ledger.md'),`<!-- local-published-repair:${marker}:begin -->${ledger}<!-- local-published-repair:${marker}:end -->\n`);
++  const receipt={version:1,kind:'recorded-local-published-repair',id,run,group:'g',correction:'Corrected proof explanation in this synthetic fixture.',content_sha256:content,before_file:relative(root,beforeFile),before_raw_sha256:digest(before),pre_sha256:itemHashGuard(before),recorded_at:'2026-10-22T00:02:00Z',ledger_marker:marker,ledger_sha256:digest(ledger),
++   local_checks:Object.fromEntries(['precheck','rendercheck'].map(tool=>[tool,{checked_at:'2026-10-22T00:01:00Z',content_sha256:content,exit_code:0,command:['node','tools/physics-support/'+tool+(tool==='precheck'?'.mts':'.mjs'),'items/'+id+'.md'],output:tool==='precheck'?'PASS items/'+id+'.md\n1 checked, 0 failing':'OK — 1 file(s)'}]))};save(join(root,receiptPath),receipt);
++  const drained=join(local,'published-drained-state.json');save(drained,{...state,paused:true});
++  save(join(dir,'owner-published-maintenance.json'),{version:1,run,phase:'initial',round:1,reviewer:'/root',native_review:false,native_adjudication:false,reason:'Root scoped this synthetic already-published proof correction through the existing unchanged policy.',drained_state:ref(drained),entries:[{id,group:'g',receipt:ref(join(root,receiptPath)),scientific_evidence:[ref(authorization)]}]});
++ }
++ const prepare=()=>advanceAdjudicationCorrection(root,run,'initial',1);
++ const finish=()=>{
++  const child=JSON.parse(readFileSync(join(dir,explanatoryReviewPhase+'-1.json'),'utf8')),label=workerLabel(explanatoryReviewPhase,1,'1');
++  const report={version:1,run,phase:explanatoryReviewPhase,round:1,unit:'1',input_sha256:digest(child),decisions:[],created_items:[],downstream:[],reviews:[{id:'alg-caption',disposition:'unaffected',...reviewContextHashes(root,['alg-caption'])['alg-caption'],...ev}],adoptions:[{id:'alg-caption',disposition:'adopted',origin:'user-authorized-side-edit',...ev}]};
++  save(workerReport(root,run,explanatoryReviewPhase,1,'1'),report);
++  save(join(root,'research',run+'-dispatch','alpha-repair-'+label+'.result.json'),{ok:true,run,role:'alpha-repair',label,model:MODELS.sol61.id,provider_effort:'high',covers:[explanatoryReviewPhase+':1'],ended_at:'2026-10-22T00:01:00Z'});
++  return report;
++ };
++ return {root,run,dir,local,ids,pack,originalPath,originalReport,request,requestPath,bind,save,ref,state,saveState,current,statements,beforeCaption,currentCaption,beforeFile,currentFile,prepare,finish,
++  completion:()=>explanatoryReviewCompletion(root,run,reviewContextHashes(root,['alg-caption']))};
++}
++
++test('unassigned user explanatory edit receives genuine read-only native review and preserves original history',t=>{
++ const f=fixture(t),pack=readFileSync(join(f.dir,'initial-1.json'),'utf8'),report=readFileSync(f.originalPath,'utf8');
++ assert.ok(validateReports(f.pack,[f.originalReport],f.current(),{root:f.root}).errors.includes('unlicensed or unreviewed change alg-caption'));
++ assert.throws(()=>collect(f.root,f.run,'initial',1),/awaits genuine sealed native review/);
++ f.prepare();assert.deepEqual(adjudicationCorrectionWork(f.root,f.run,'initial',1),[explanatoryReviewPhase+':1']);
++ assert.equal(f.completion(),null);assert.throws(()=>collect(f.root,f.run,'initial',1),/awaits genuine sealed/);
++ f.finish();assert.equal(f.prepare().explanatory_review_completed,true);
++ assert.equal(existsSync(join(f.dir,'initial-1-collected.json')),false);
++ const child=f.completion();assert.equal(isExplanatoryReviewCompletion(child),true);assert.throws(()=>{child.guards.unassigned='bad';},TypeError);
++ const result=collect(f.root,f.run,'initial',1);
++ assert.deepEqual(result.native_explanatory_edit_review.reviews.map(row=>row.id),['alg-caption']);
++ assert.equal(result.reviews.find(row=>row.id==='alg-caption').disposition,'unaffected');
++ assert.equal(result.decisions.length,1);assert.equal(result.decisions[0].id,'thm-assigned');
++ assert.equal(readFileSync(join(f.dir,'initial-1.json'),'utf8'),pack);assert.equal(readFileSync(f.originalPath,'utf8'),report);
++ assert.equal(result.statement_events.some(row=>row.id==='alg-caption'),false);
++ assert.deepEqual(collect(f.root,f.run,'initial',1),result);
++});
++for(const [name,change]of[
++ ['definition',f=>{writeFileSync(f.currentFile,f.currentCaption.replace('A sound claim.','A changed claim.'));f.request.entries[0].current_source=f.ref(f.currentFile);writeFileSync(join(f.root,'items/alg-caption.md'),readFileSync(f.currentFile));f.bind();}],
++ ['proof',f=>{writeFileSync(f.currentFile,f.currentCaption.replace('A complete argument.','A changed proof.'));f.request.entries[0].current_source=f.ref(f.currentFile);writeFileSync(join(f.root,'items/alg-caption.md'),readFileSync(f.currentFile));f.bind();}],
++ ['diagram',f=>{writeFileSync(f.currentFile,f.currentCaption.replace('{$t/h$}','{$t$}'));f.request.entries[0].current_source=f.ref(f.currentFile);writeFileSync(join(f.root,'items/alg-caption.md'),readFileSync(f.currentFile));f.bind();}],
++ ['newlink',f=>{writeFileSync(f.currentFile,f.currentCaption.replace('Set t_n=nh.','Set t_n=nh. [[thm-extra]]'));f.request.entries[0].current_source=f.ref(f.currentFile);writeFileSync(join(f.root,'items/alg-caption.md'),readFileSync(f.currentFile));f.bind();}],
++ ['newheading',f=>{writeFileSync(f.currentFile,f.currentCaption.replace('Set t_n=nh.','## New heading\nSet t_n=nh.'));f.request.entries[0].current_source=f.ref(f.currentFile);writeFileSync(join(f.root,'items/alg-caption.md'),readFileSync(f.currentFile));f.bind();}],
++ ['wrongbefore',f=>writeFileSync(f.beforeFile,'invented before source')],
++ ['wrongcurrent',f=>writeFileSync(join(f.root,'items/alg-caption.md'),f.currentCaption+'drift')],
++ ['wrongowner',f=>{f.request.reviewer='/root/worker';f.bind();}],
++ ['inventedcoverage',f=>{f.request.native_execution_coverage_adopted=true;f.bind();}],
++ ['assignedtarget',f=>{f.pack.assignments['19'].push({id:'alg-caption'});f.save(join(f.dir,'initial-1.json'),f.pack);}],
++ ['wrongrawbaseline',f=>{f.save(join(f.root,'research',f.run+'-step5-auditor-baseline.json'),{item_carriers:{'alg-caption':{guard_sha256:f.pack.before['alg-caption'],item_file_sha256:'b'.repeat(64)}}});}],
++ ['imported',f=>f.save(join(f.root,'research/math-imports.json'),{files:[{path:'items/alg-caption.md'}]})]
++])test('request rejects '+name,t=>{const f=fixture(t);change(f);assert.throws(()=>explanatoryReviewRequest(f.root,f.run));});
++for(const [name,change]of[
++ ['activewriter',f=>{f.state.dispatches.active={startedAt:'now'};f.saveState();}],
++ ['wrongstage',f=>{f.state.stage='5.2-impact';f.saveState();}],
++ ['completed',f=>{f.state.stages['5.1-adjudicate'].doneAt='now';f.saveState();}],
++ ['sharedlock',f=>mkdirSync(join(f.root,'.physics-autopilot/step5-shared-write.lock'))]
++])test('native preparation rejects '+name,t=>{const f=fixture(t);change(f);assert.throws(f.prepare);});
++for(const [name,change]of[
++ ['currentcontext',(f,r)=>{r.reviews[0].review_context_sha256='c'.repeat(64);}],
++ ['uncertainty',(f,r)=>{r.reviews[0].uncertain=true;}],
++ ['authoredclaim',(f,r)=>{r.reviews[0].disposition='repaired';}],
++ ['decision',(f,r)=>{r.decisions.push({id:'alg-caption',outcome:'confirmed_nonfatal'});}],
++ ['missingadoption',(f,r)=>{r.adoptions=[];}],
++ ['unlistedreview',(f,r)=>{r.reviews[0].id='thm-unrelated';}]
++])test('fresh completion rejects '+name,t=>{const f=fixture(t);f.prepare();const r=f.finish();change(f,r);f.save(workerReport(f.root,f.run,explanatoryReviewPhase,1,'1'),r);assert.throws(f.completion);});
++test('read-only completion rejects original report or source mutation',t=>{
++ for(const mode of ['report','source']){const f=fixture(t);f.prepare();f.finish();writeFileSync(mode==='report'?f.originalPath:join(f.root,'items/alg-caption.md'),'tampered');assert.throws(f.completion);}
++});
++test('missing or tampered native dispatch cannot authorize a draft edit',t=>{
++ const f=fixture(t);f.prepare();f.finish();const path=join(f.root,'research',f.run+'-dispatch','alpha-repair-'+workerLabel(explanatoryReviewPhase,1,'1')+'.result.json');
++ const d=JSON.parse(readFileSync(path,'utf8'));d.model=MODELS.luna.id;f.save(path,d);assert.throws(f.completion,/Sol6.1high/);
++ rmSync(path);assert.equal(f.completion(),null);
++});
++test('unlisted unrelated draft edit is still blocking beside sealed native adoption',t=>{
++ const f=fixture(t);f.prepare();f.finish();f.prepare();writeFileSync(join(f.root,'items/thm-unrelated.md'),source('thm-unrelated','Unauthorized claim.'));
++ assert.throws(()=>collect(f.root,f.run,'initial',1),/unlicensed or unreviewed change thm-unrelated/);
++});
++test('sealed historical current review survives later canonical additions; old evidence and source stay protected',t=>{
++ const f=fixture(t);f.prepare();f.finish();f.prepare();const result=f.completion();
++ writeFileSync(join(f.root,'research/defect-ledger.jsonl'),'A later authorized finding.\n');
++ assert.deepEqual(f.completion(),result);
++ writeFileSync(workerReport(f.root,f.run,explanatoryReviewPhase,1,'1'),'tampered');assert.throws(f.completion,/evidence changed/);
++});
++
++// Full composition: unchanged published policy, sealed side review, later native
++// owner finding repair, intermediate historical validation, final collection.
++test('published maintenance and sealed user edit compose with a later native owner-finding continuation',t=>{
++ const f=fixture(t,{published:true});f.prepare();f.finish();f.prepare();
++ const id='thm-referred',before=join(f.local,'finding-before.md'),recordPath=join(f.local,'finding.json'),science=join(f.local,'science.json'),proposal=join(f.local,'proposal.json');
++ writeFileSync(before,readFileSync(join(f.root,'items',id+'.md')));
++ const record={run:f.run,subject:id,defect_id:'owner-real-defect',disposition:'open',caught_by_role:'owner',severity:'fatal'};
++ f.save(recordPath,record);f.save(science,{finding:'Synthetic independently identified native-referral scientific defect.'});f.save(proposal,{proposal:'Unapplied necessary proof explanation.'});
++ writeFileSync(join(f.root,'research/defect-ledger.jsonl'),JSON.stringify(record)+'\n');
++ const request={version:1,run:f.run,phase:'initial',round:1,reviewer:'/root',entries:[{subject:id,owner_lane:'1',mode:'native-referral',root_finding:{defect_id:record.defect_id,record:f.ref(recordPath)},before_source:f.ref(before),before_content_sha256:f.current()[id],before_statement_sha256:f.statements()[id],science:[f.ref(science)],proposals:[f.ref(proposal)],native_outcome:f.ref(f.originalPath)}]};
++ const path=join(f.dir,'owner-finding-queue-current.json');f.save(path,request);f.save(join(f.dir,'owner-finding-queue-request.json'),{version:1,run:f.run,request:f.ref(path)});
++ const progress=f.prepare(),phase='owner-finding-correction-initial';assert.deepEqual(progress.assignments,{'1':[id],'2':[],'3':[]});
++ const child=JSON.parse(readFileSync(join(f.dir,phase+'-1.json'),'utf8'));
++ writeFileSync(join(f.root,'items',id+'.md'),source(id).replace('A complete argument.','A complete argument with its missing convention explicit.'));
++ for(const unit of ['1','2','3']){
++  const ids=unit==='1'?[id]:[],label=workerLabel(phase,1,unit);
++  f.save(workerReport(f.root,f.run,phase,1,unit),{run:f.run,phase,round:1,unit,input_sha256:digest(child),decisions:[],created_items:[],downstream:[],reviews:ids.map(id=>({id,disposition:'repaired',...reviewContextHashes(f.root,[id])[id],...ev})),root_finding_resolutions:ids.map(id=>({defect_id:record.defect_id,status:'fixed',subjects:[id],...ev})),scientific_correction_adjudications:[]});
++  f.save(join(f.root,'research',f.run+'-dispatch','alpha-repair-'+label+'.result.json'),{ok:true,run:f.run,role:'alpha-repair',label,model:MODELS.sol61.id,provider_effort:'high',covers:[phase+':'+unit],ended_at:'2026-10-22T00:03:00Z'});
++ }
++ assert.equal(f.prepare().parent_collected,true);
++ const parent=JSON.parse(readFileSync(join(f.dir,'initial-1-collected.json'),'utf8'));
++ assert.equal(parent.published_local_repairs.length,1);assert.equal(parent.native_explanatory_edit_review.reviews.length,1);assert.equal(parent.native_owner_finding_decisions.length,1);
++ assert.ok(parent.changed.includes('alg-caption'));assert.ok(parent.changed.includes('thm-published'));assert.ok(parent.changed.includes('thm-referred'));
++ assert.deepEqual(JSON.parse(readFileSync(f.originalPath,'utf8')),f.originalReport);
++ assert.deepEqual(collect(f.root,f.run,'initial',1),parent);
++});
++
++test('sealed adoption retains genuine old context and ordinary consumer checking rejects it after a supplier interface change',t=>{
++ const f=fixture(t);f.prepare();f.finish();f.prepare();const old=f.completion().reviews[0];
++ assert.equal(reviewMatchesCurrent(readLibraryItems(f.root),f.current(),old),true);
++ writeFileSync(join(f.root,'items/thm-referred.md'),source('thm-referred','A later authorized supplier interface will require an actual fresh consumer review.'));
++ assert.equal(f.completion().reviews[0].review_context_sha256,old.review_context_sha256);
++ assert.equal(reviewMatchesCurrent(readLibraryItems(f.root),f.current(),old),false);
++});
++
++test('a resealed tampered child receipt cannot extend native adoption to an unreviewed draft',t=>{
++ const f=fixture(t);f.prepare();f.finish();f.prepare();const path=join(f.dir,explanatoryReviewPhase+'-1-collected.json');
++ const saved=JSON.parse(readFileSync(path,'utf8'));saved.guards['thm-unrelated']=f.current()['thm-unrelated'];
++ const {sha256,...payload}=saved;f.save(path,{...payload,sha256:digest(payload)});assert.throws(f.completion,/target guards/);
++});
++
++for(const fragment of ['# Heading','### Heading','###### Heading','~~~python','```js','[link](https://example.com)','[link][ref]','[ref]: https://example.com','<https://example.com>'])test('Remarks guard rejects unsupported added prose structure '+fragment,()=>{
++ const before=caption('alg-caption'),current=before.replace('The horizontal coordinate',fragment+'\nThe horizontal coordinate');assert.throws(()=>remarksOnly(before,current));
++});
++for(const name of ['demo-batch-19.pages.json','demo-batch-19.proof-contracts.json','demo-proof-contracts.json'])test('read-only native completion rejects metadata mutation '+name,t=>{
++ const f=fixture(t);f.prepare();f.finish();writeFileSync(join(f.root,'research',name),'tampered');assert.throws(f.completion,/metadata/);
++});
++
++test('read-only completion rejects newly created run metadata',t=>{const f=fixture(t);f.prepare();f.finish();f.save(join(f.root,'research/demo-batch-20.proof-contracts.json'),{});assert.throws(f.completion,/metadata inventory/);});
+--- a/tools/physics-autopilot/stages/mathlib.step5.mts
++++ b/tools/physics-autopilot/stages/mathlib.step5.mts
+@@ -43,7 +43,7 @@
+     id,label:`${id.split('-')[0]} ${adjudication?'batch adjudication and repair':'three owner agents repair downstream consumers'}`,
+     modelProfile:SOL61_HIGH,
+     units:(ctx:any)=>adjudication ? adjudicationUnits(ctx,phase,id) : ownerUnits(ctx,phase,id),
+-    pattern:(ctx:any)=>adjudication?new RegExp('(?:'+pattern(phase,id)(ctx).source+')|^tool-step5-v2-empty-'+phase+'-r'+round(ctx,id)+'-u[^.]+\\.result\\.json$|^alpha-repair-step5-v2-(?:(?:scientific|owner-finding)-)?correction-'+phase+'-r'+round(ctx,id)+'-u[123]\\.result\\.json$'+(phase==='initial'?'|^alpha-repair-step5-v2-(?:page|review)-correction-initial-r'+round(ctx,id)+'-u1\\.result\\.json$':'')):new RegExp('(?:'+pattern(phase,id)(ctx).source+')|^alpha-repair-'+maintenanceLabel(phase,round(ctx,id),'pack-[0-9]+','[123]')+'\\.result\\.json$'),concurrency:adjudication?24:3,
++    pattern:(ctx:any)=>adjudication?new RegExp('(?:'+pattern(phase,id)(ctx).source+')|^tool-step5-v2-empty-'+phase+'-r'+round(ctx,id)+'-u[^.]+\\.result\\.json$|^alpha-repair-step5-v2-(?:(?:scientific|owner-finding)-)?correction-'+phase+'-r'+round(ctx,id)+'-u[123]\\.result\\.json$'+(phase==='initial'?'|^alpha-repair-step5-v2-(?:(?:page|review)-correction|explanatory-review)-initial-r'+round(ctx,id)+'-u1\\.result\\.json$':'')):new RegExp('(?:'+pattern(phase,id)(ctx).source+')|^alpha-repair-'+maintenanceLabel(phase,round(ctx,id),'pack-[0-9]+','[123]')+'\\.result\\.json$'),concurrency:adjudication?24:3,
+     // Sibling owners run concurrently. Shared metadata edits use a short
+     // critical section; a new pass waits for the entire preceding pass.
+     ...(!adjudication?{
+@@ -60,6 +60,13 @@
+         const complete=executor.unitsComplete(stage,ctx);
+         if(adjudicationBaseUnits(ctx).every((u:string)=>complete.has(u))){
+           const progress=advanceAdjudicationCorrection(ctx.repo,ctx.run,phase,round(ctx,id));
++          if(progress?.explanatory_review_completed&&executor.state){
++            const handoff=executor.state.stage(id);
++            if(!handoff.explanatoryReviewPausedAt){
++              handoff.explanatoryReviewPausedAt=new Date().toISOString();executor.state.paused=true;
++              executor.reporter.notify('paused','User explanatory edits received genuine native review; Root may add later owner findings before the initial parent collects.',{stage:id});
++            }
++          }
+           if(progress?.parent_collected&&executor.state){
+             const handoff=executor.state.stage(id);
+             if(!handoff.ownerFindingCollectionPausedAt){
+@@ -89,7 +96,7 @@
+         }
+         const [pass,unit]=decode(phase,u);
+         if(pass==='correction-'+phase||pass==='scientific-correction-'+phase||pass==='owner-finding-correction-'+phase
+-          ||phase==='initial'&&['page-correction-initial','review-correction-initial'].includes(pass)){
++          ||phase==='initial'&&['page-correction-initial','review-correction-initial','explanatory-review-initial'].includes(pass)){
+           return {role:'alpha-repair',label:workerLabel(pass,n,unit),job:'authoring',covers:[u],profile:SOL61_HIGH,
+             brief:'briefs/step5-owner-repair.md',task:relative(ctx.repo,report(ctx,pass,n,unit).replace(/\.json$/,'.task.md')),timeout:21600};
+         }
+--- a/physics/WORKFLOW.md
++++ b/physics/WORKFLOW.md
+@@ -382,6 +382,48 @@
+ context checks, owner recertification and the complete gate battery remain
+ required. The initial pack, original reports and mechanical zero-work results
+ stay immutable.
++
++An explicitly authorized user edit already applied only to existing diagram
++explanation prose in `## Remarks` has a separate read-only native adoption route.
++It does not use the published-repair exemption. Root advertises
++`research/RUN-step5-v2/owner-explanatory-edit-review-request.json` with
++`{version:1, run, request:{path,sha256}}`, naming immutable
++`owner-explanatory-edit-review-ID.json` in that directory. The request contains
++`version:1`, `run`, `phase:"initial"`, `round:1`, `reviewer:"/root"`,
++`kind:"user-authorized-preapplied-remarks-edit"`, `source_edit_authority:false`,
++`native_execution_coverage_adopted:false`, a concrete `reason`, a bound
++`user_authorization:{path,sha256}`, and nonempty `entries` with `id`,
++`before_source:{path,sha256}` and `current_source:{path,sha256}`. All evidence
++is exact-byte, run-local research evidence; no original source is invented.
++
++Each target must be an unassigned local draft in the original frozen frontier.
++The genuine original source must match both the immutable initial content hash
++and the Step-5 auditor baseline's raw carrier hash. Only the prose between the
++unique Remarks heading and existing TikZ fence may differ: the complete prefix
++and TikZ suffix remain byte-identical. New headings, fences or links are outside
++this bounded route. After original writers drain, native `onProgress` creates
++`explanatory-review-initial:1`, retaining the Sol 6.1 high profile. The worker
++reviews the exact explanations, unchanged claims/proofs/diagram, actual suppliers
++and current context, records actual focused checks, and changes no source or
++shared metadata. It returns actual `unaffected` reviews and separately attributed
++`user-authorized-side-edit` adoptions, with no adjudication or authorship claim.
++
++Native completion requires the exact current target sources, genuine current
++review contexts and authorized completed native dispatch. Original workflow
++artifacts, canonical ledger, current run batch pages/contracts and relevant merged
++pages/contracts are protected during this read-only child. The engine seals the
++actual review and pauses once before parent collection, allowing Root to advertise
++later scientific owner findings. Those later authorized repairs do not rewrite or
++permanently freeze the child's historical metadata. A sealed review retains its
++actual old context; later supplier changes require ordinary fresh impact review,
++never a substituted digest. Verification-only bookkeeping retains the normal
++canonical-content boundary. The initial parent binds the exact actual child
++review and adopted source guards while preserving every original pack, report,
++assignment and judge tuple. All other draft writes still require ordinary source
++ownership and review. Authentic published maintenance is checked before both
++intermediate historical parent validations and final validation, without projecting
++away those changes. Normal current-context closure, certification, rejudgment,
++owner recertification and complete gates remain required.
+ 
+ The native Sol 6.1 high worker identity is independent of the Step-4 judge lineup.
+ Coverage gates retain the singleton original Step-4 lineup bound by the frozen

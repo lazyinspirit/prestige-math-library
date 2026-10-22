@@ -1,0 +1,17 @@
+---
+page: emg-fx02
+title: Local nonlinear constraint construction with explicit analytic obligations
+status: draft
+library: mathematics
+requires:
+  - emg-fx01
+  - lax-milgram-and-weak-elliptic-solutions
+  - completeness-and-uniform-continuity
+items:
+  - def-emg-fx-dirichlet-constraint-problem
+  - lem-emg-fx-banach-implicit-constraint
+  - lem-emg-fx-dirichlet-holder-inverse
+  - lem-emg-fx-holder-cubic-map
+  - thm-emg-fx-small-dirichlet-data
+examples: []
+---

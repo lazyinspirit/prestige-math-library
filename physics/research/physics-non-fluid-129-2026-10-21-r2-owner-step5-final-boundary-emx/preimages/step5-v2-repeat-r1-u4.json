@@ -1,0 +1,167 @@
+{
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "phase": "repeat",
+  "round": 1,
+  "unit": "4",
+  "input_sha256": "c61067372f0d3dd55034da3e83c0853b2a7b437f9b4d69315088b98458efc85c",
+  "decisions": [
+    {
+      "id": "def-emx-finite-energy-boundary-model",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "21147658e184056a43cf42f190d6e9b7a6883c0f87fd98d15ad1ae8cab031a86",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "On the unit cube, time-constant E=e_x,H=e_y,J=0 have zero bulk curls and zero total outward flux, so the former scalar energy-pair identity accepts E_tau=H_tau=0 for every Y>0. These data fail to represent the bulk traces and misidentify local boundary power. The repair requires separately, for u=E,H and every smooth compactly supported ambient vector test phi, integral_Omega(curl u dot phi-u dot curl phi)=integral_Gamma(n cross u_tau) dot phi. For E=e_x take phi=(0,0,y) near the closed cube with compactly supported smooth continuation: the bulk side is -1 and zero boundary data give 0. This excludes the counterexample without altering the bulk or PEC classes, energy definition or nonnegative-admittance law. The scalar energy-pair Green identity remains an explicit additional hypothesis, not an unproved rough-test extension.",
+      "uncertain": false,
+      "source_urls": [
+        "https://www.math.uci.edu/~chenlong/226/Maxwellweakform.pdf"
+      ],
+      "familiar": false
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-emx-finite-energy-boundary-model",
+      "disposition": "repaired",
+      "post_sha256": "e5eff3a35e829bfbe0f1fa9c538d86c12ba5ae8add5eca190dbbbb5e556620f4",
+      "review_context_sha256": "eac6e3cbdeae94a7ca0385734621e6af66e6d14bcf5400e93dbbfee734b9433f",
+      "reason": "Checked the current complete Definition, direct supplier statements, owning contract and page, and all six direct item consumers. Added the weak tangential trace identity separately for both bulk fields against all smooth ambient tests outside one common null set of times. Its n cross u_tau sign agrees with Chen Section 3.2 equation (8), which uses u cross n on the opposite side. All integrals are finite: bulk fields and curls are L2, smooth tests are bounded on the bounded closure, and boundary traces are L2 on finite face area. Tangency, the separate energy-pair identity, global boundary-time L2 requirement, bounded static Y>=0, positive coefficients, AC_omega, Gauss exclusions and no-existence/no-empirical claims are retained. Zero fields obey every test condition. No general H(curl)-to-L2 trace theorem or extension to rough test fields is invoked. The public physical_scope and owning manifest mirrors were updated under the shared write lock. No diagrams occur in the assigned item. This is the author-adjudicator review of the repair, not independent acceptance.",
+      "uncertain": false,
+      "source_urls": [
+        "https://www.math.uci.edu/~chenlong/226/Maxwellweakform.pdf"
+      ],
+      "familiar": false
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "pthm-emx-weak-poynting-uniqueness",
+    "ex-emx-impedance-sign-check",
+    "cex-emx-rough-field-energy-limit",
+    "pthm-emx-oscillator-energy",
+    "def-emx-whitney-semidescretization",
+    "pthm-emx-coercive-maxwell-galerkin"
+  ],
+  "gate_resolutions": [],
+  "ledger_updates": {
+    "canonical_defect_ledger": [
+      {
+        "id": "def-emx-finite-energy-boundary-model",
+        "outcome": "confirmed_fatal",
+        "defect_type": "logic",
+        "proposed_status": "fixed",
+        "reason": "The former scalar-only boundary data failed to identify actual weak tangential traces; repaired by adding the independent smooth-test curl identities for E and H while retaining the energy-pair identity. This proposal does not write or close any shared ledger."
+      }
+    ],
+    "published_consumer_ledger": []
+  },
+  "supporting_evidence": {
+    "research/physics-non-fluid-129-2026-10-21-r2-batch-4-step5-context.json": "044ce7228f8f1aa822cc96665aa59f5c1e5c57e864df847d021a5118d7f72905"
+  },
+  "repair_notes": {
+    "status": "Assigned mathematical repair and current native review complete; all scoped mechanical checks exited zero. Consumer follow-up remains routed to its frontier owner.",
+    "source_reading": {
+      "url": "https://www.math.uci.edu/~chenlong/226/Maxwellweakform.pdf",
+      "retrieval": "Downloaded the actual PDF with curl after web open returned HTTP 502; extracted and read PDF pp.1-5 locally with PyMuPDF.",
+      "locator": "Section 1 curl integration-by-parts formula on PDF p.1; Section 3.2, PDF pp.4-5, especially equation (8) and the distinction between trace-space duality and L2 boundary fields.",
+      "limits": "No claim of reading PDF pp.6-8 or the referenced trace-space proofs. The local definition adopts smooth-test trace identification and retains the rough energy-pair identity explicitly, so no full trace theorem is used."
+    },
+    "dependencies": "All twelve existing direct dependencies retained; no new mathematical supplier is required to define the explicit additional predicate. Read the exact real H(curl) graph and PEC closure definitions and the measure, product, coordinate, SI, AC_omega and material-closure supplier statements.",
+    "consumer_uses": [
+      {
+        "id": "pthm-emx-weak-poynting-uniqueness",
+        "path": "items/pthm-emx-weak-poynting-uniqueness.md",
+        "locator": "Statement, A1, Proof 3.2 and 5.1",
+        "affected_use": "The impedance energy balance uses the retained energy-pair Green identity; all bulk, PEC and zero-data arguments remain valid. The new weak-trace tests are additional admissibility hypotheses and do not remove that energy identity.",
+        "disposition": "refer_frontier_owner",
+        "minimality": "Remove or re-review the Statement sentence \"Separate Green compatibility of each pair does not imply that additional condition.\" Its rationale concerned the old scalar-only definition; it should not assert nonimplication for the newly trace-identified class without a counterexample. The sufficient conditional difference-compatibility claim and its proof remain valid. No consumer edit performed."
+      },
+      {
+        "id": "ex-emx-impedance-sign-check",
+        "path": "items/ex-emx-impedance-sign-check.md",
+        "locator": "Example, A1, F1-F2 and Verification 3.1",
+        "affected_use": "The flat-face calculation uses only n=e_z, E_tau=E_0 e_x and H_tau=Y(n cross E_tau); the conditional energy calculation explicitly uses the retained scalar Green identity. Its nonzero arrows correctly depict E_0>0,Y>0 and the normal points out of the tangent plane.",
+        "disposition": "sound_unchanged",
+        "minimality": "No edit needed: the energy calculation is valid under its stated scalar identity even for the wider class, hence also for genuine weak traces. It makes no global trace realization or solution existence claim."
+      },
+      {
+        "id": "cex-emx-rough-field-energy-limit",
+        "path": "items/cex-emx-rough-field-energy-limit.md",
+        "locator": "F3 and Counterexample 2.1",
+        "affected_use": "F3 invokes only the unchanged L2 bulk requirement and finite quadratic energy; the Coulomb field violates that condition independently of boundary traces.",
+        "disposition": "sound_unchanged",
+        "minimality": "No edit needed; the impedance branch is never used."
+      },
+      {
+        "id": "pthm-emx-oscillator-energy",
+        "path": "items/pthm-emx-oscillator-energy.md",
+        "locator": "Statement, F1, L2 and Proof 2.2",
+        "affected_use": "The fixed-volume oscillator energy conclusion uses closure-defined PEC, static constant coefficients and the unchanged bulk evolution/regularity; it does not use impedance traces.",
+        "disposition": "sound_unchanged",
+        "minimality": "No edit needed; the changed branch is not invoked."
+      },
+      {
+        "id": "def-emx-whitney-semidescretization",
+        "path": "items/def-emx-whitney-semidescretization.md",
+        "locator": "Definition coefficient data and PEC trial-space paragraphs",
+        "affected_use": "The finite-element model borrows static positive coefficient and PEC closure conventions and explicitly requires H_h only in L2; it does not claim continuum impedance admissibility.",
+        "disposition": "sound_unchanged",
+        "minimality": "No edit needed; no boundary trace or Green-pair condition is used."
+      },
+      {
+        "id": "pthm-emx-coercive-maxwell-galerkin",
+        "path": "items/pthm-emx-coercive-maxwell-galerkin.md",
+        "locator": "F1-F2 and Proof 1.1-1.2",
+        "affected_use": "The positive-shift variational theorem uses only static coefficient bounds and the closure-defined PEC graph space, both unchanged by the impedance repair.",
+        "disposition": "sound_unchanged",
+        "minimality": "No edit needed; no impedance argument occurs."
+      }
+    ],
+    "page_uses": [
+      {
+        "path": "library/classical-electromagnetism/emx-weak-boundary-energy.md",
+        "affected_use": "The frontmatter-only page lists the assigned definition; it has no prose claiming trace existence or impedance uniqueness.",
+        "disposition": "sound_unchanged"
+      }
+    ],
+    "metadata_changes": [
+      "research/physics-non-fluid-129-2026-10-21-r2-batch-4.pages.json: only the assigned item statement and physical_scope mirrors",
+      "research/physics-non-fluid-129-2026-10-21-r2-batch-4.proof-contracts.json: only the assigned item risk_review"
+    ],
+    "uncertainty": [],
+    "next_action": "Controller to collect the exact repaired carrier and route the recorded direct-consumer examination. No independent review, rejudgment, certification or overall run closure is claimed.",
+    "focused_checks": [
+      {
+        "name": "precheck",
+        "command": "node tools/physics-support/tsx-run.mjs tools/physics-support/precheck.mts items/def-emx-finite-energy-boundary-model.md --json",
+        "exit_code": 0,
+        "output": "{\n  \"summary\": {\n    \"files\": 1,\n    \"checked\": 0,\n    \"failed\": 0\n  },\n  \"results\": [\n    {\n      \"file\": \"items/def-emx-finite-energy-boundary-model.md\",\n      \"item_id\": \"def-emx-finite-energy-boundary-model\",\n      \"status\": \"not-applicable\"\n    }\n  ]\n}\n"
+      },
+      {
+        "name": "rendercheck",
+        "command": "node tools/physics-support/rendercheck.mjs items/def-emx-finite-energy-boundary-model.md --json",
+        "exit_code": 0,
+        "output": "{\n  \"errors\": [],\n  \"warnings\": [],\n  \"checked\": 1\n}\n"
+      },
+      {
+        "name": "strict-contract",
+        "command": "node tools/physics-support/proof-contract.mjs research/physics-non-fluid-129-2026-10-21-r2-batch-4.proof-contracts.json --strict --items def-emx-finite-energy-boundary-model --json",
+        "exit_code": 0,
+        "output": "{\n  \"ok\": true,\n  \"errors\": [],\n  \"warnings\": [],\n  \"scope\": [\n    \"def-emx-finite-energy-boundary-model\"\n  ],\n  \"checked\": [\n    \"def-emx-finite-energy-boundary-model\"\n  ]\n}\n"
+      },
+      {
+        "name": "proof-layout",
+        "command": "node tools/physics-support/proof-layout.mjs items/def-emx-finite-energy-boundary-model.md",
+        "exit_code": 0,
+        "output": "proof-layout: 1 items, 0 steps, 0 defects\n"
+      }
+    ],
+    "interface_change": {
+      "before": "A Green-compatible tangential boundary pair consists of measurable fields E_tau,H_tau in L2(Gamma x I) with n dot E_tau=n dot H_tau=0 almost everywhere and, for almost every t, only the single integrated energy-pair Green identity.",
+      "after": "For almost every t outside one common null set, each boundary field separately represents its own bulk field through the curl integration-by-parts identity for EVERY smooth compactly supported ambient vector test; the original energy-pair identity is additionally retained.",
+      "preserved": "All original coefficient, domain, measure, AC_omega, bulk evolution, stored energy, Gauss-exclusion, PEC, boundary-time L2, admittance, units and no-existence/empirical qualifications are retained. The genuine trace requirement repairs the intended impedance meaning, rather than removing an energy or uniqueness conclusion.",
+      "physical_scope": "The original phrase explicit Green-compatible L2 tangential boundary data is replaced by L2 weak tangential traces identified through every smooth ambient test and satisfying the additional energy-pair Green identity."
+    },
+    "shared_update": "The guarded short metadata script ran from /tmp to respect the dispatch restriction on new workspace files. It reread current owning metadata under the lock, updated only the assigned statement/physical_scope mirrors and assigned contract risk_review, checked exact mirrors, and released the lock (exit 0)."
+  }
+}

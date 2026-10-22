@@ -1,0 +1,18 @@
+# Batch 95 source reading
+
+The current coverage ledger is research/physics-non-fluid-129-2026-10-21-r2-batch-95.coverage.json. It records each source URL, locator, supported item, reading extent, limitation, disposition, retrieval attempt, and fetch stamp.
+
+| Treatment | Full-text locator inspected | Items and disposition |
+|---|---|---|
+| [Friedli–Velenik, *Statistical Mechanics of Lattice Systems*](https://www.unige.ch/math/folks/velenik/smbook/Statistical_Mechanics_of_Lattice_Systems.pdf) | Chapter 3, §3.1, printed pp. 80–82; Chapter 6, §6.5.2, Theorem 6.31 and equations (6.37)–(6.40), printed pp. 268–269 / PDF pp. 285–286. | Finite Gibbs weights and one-site conditionals for alg-csm-frontier-heat-bath-update (inline); the infinite-volume Dobrushin definition as context for thm-csm-frontier-heat-bath-tv-bound (inline). The source's coefficient uses the full L1 sum; the local finite theorem defines half total variation and proves its own estimate. |
+| [Levin–Peres–Wilmer, *Markov Chains and Mixing Times*, second edition](https://pages.uoregon.edu/dlevin/MARKOV/mcmt2e.pdf) | Chapter 3, §3.3.2, printed pp. 42–43; Chapter 4, §§4.1–4.2, printed pp. 47–49 / PDF pp. 62–64; Chapter 14, §14.2, printed pp. 203–205; Chapter 15, §15.1, printed pp. 215–217; Chapter 25, §§25.1–25.3, printed pp. 347–355 / PDF pp. 363–371. | Finite conditional updates and path-coupling context for the heat-bath algorithm and TV bound (inline); TV error comparison for lem-csm-frontier-error-budget-composition (inline); shared past maps and monotone CFTP for the CFTP algorithm (included) and exactness theorem (inline); finite-chain context for the metastability example (inline). All constants and the four-term scalar budget are proved locally. |
+| [Grimmett, *The Random-Cluster Model*](https://arxiv.org/pdf/math/0205237) | §§2.2–2.3, printed pp. 6–9 / PDF pp. 5–8; §8.3, PDF pp. 38–39. | Finite joint Potts/FK law, conditional cluster colors, and the two-stage update for alg-csm-frontier-swendsen-wang (included) and thm-csm-frontier-swendsen-wang-invariance (inline). The source uses homogeneous ferromagnetic parameters; the local proof handles edge-dependent finite nonnegative activities, including zero. |
+| [Duminil-Copin, *Geometric Representations of Lattice Spin Models*, Cours Peccot notes](https://www.ihes.fr/~duminil/publi/Courspeccot2.pdf) | Chapter 3, §§3.1–3.2, printed pp. 23–26. | Independent full-lecture treatment of the finite Potts/FK coupling and component coloring for the Swendsen–Wang definition and invariance theorem (inline). The local proof supplies the exact conditional edge law and composition argument. |
+
+The four independent treatments above cover the A-page scope, including complete textbooks and full lecture notes. The exact claims remain conditional mathematical results; the sources support conventions and proof routes rather than replacing local proofs.
+
+The B page also has two independent treatments: LPW supports the finite-chain setting, while Friedli–Velenik supports the finite Gibbs-weight convention. The explicit five-state Metropolis kernel, within-well law, and lower bound are proved locally.
+
+source-fetch-check --stamp returned 6/6 source(s) fetch-verified and 6/6 source(s) resolved, with no documented drops. The three prior current-run fetch stamps were reused from batch 86 (Friedli–Velenik) and batch 90 (Grimmett; Duminil-Copin). The LPW body was fetched and stamped in this harvest: 4,855,824 bytes, 461 PDF pages, SHA-256 prefix 9ef39f9467d9647f. Retrieval attempts and exact stamps are retained in the coverage JSON.
+
+There were no retrieval failures, so source_resolution is empty; no source was dropped or owner-escalated.

@@ -1,0 +1,599 @@
+{
+  "version": 1,
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "batch": "37",
+  "level": "run",
+  "scope": [
+    "def-gr-fx-bootstrap-continuation-contract",
+    "thm-gr-fx-bootstrap-closure",
+    "rem-gr-fx-kerr-stability-source-boundary",
+    "ex-gr-fx09-1",
+    "ex-gr-fx09-2"
+  ],
+  "contracts": {
+    "def-gr-fx-bootstrap-continuation-contract": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition allows a finite margin list, including the empty list. Then M(T) is a vacuous universal condition and the separately supplied continuation theorem must still apply from the energy bound. The definition constructs no such continuation theorem."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-value conclusion is part of this definition or source note."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Continuity, dimensionless thresholds, a finite margin list and an improvement implication are required data of a named evolution problem; this definition proves no PDE estimate. The energy and thresholds are real scalars, not a dimension or family-size variable that changes at cardinality one."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No additional degenerate case is asserted."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No additional endpoint claim is made."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice-dependent construction occurs."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Continuity, dimensionless thresholds, a finite margin list and an improvement implication are required data of a named evolution problem; this definition proves no PDE estimate. This public claim is not a biconditional requiring a separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Continuity, dimensionless thresholds, a finite margin list and an improvement implication are required data of a named evolution problem; this definition proves no PDE estimate. This public claim is not a biconditional requiring a separate reverse implication."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-37-author-self-check",
+        "notes": "Definition contract is explicit about solution class, energy normalization, dimensionless time and margins; it proves no PDE estimate."
+      }
+    },
+    "thm-gr-fx-bootstrap-closure": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-gr-fx-bootstrap-continuation-contract",
+          "source_section": "Definition",
+          "quote": "Fix one evolution problem, its state space and its declared classical solution class. For the general-relativity application here, use one fixed periodic symmetric-hyperbolic system on $\\mathbb T^3_{2\\pi}$ with integer regularity $s\\ge5$, a fixed gauge, smooth coefficient maps on an open state domain, symmetric principal matrices and a positive time matrix. On each compact time slab, its normalized state $u$ belongs to $L^\\infty H^s\\cap C^0H^{s-1}$ and has $\\partial_tu\\in L^\\infty H^{s-1}$, with the fixed-gauge data and coefficient bounds specified in the references below.\n\nA forward solution on $[0,T_{\\max})$ is **maximal** in this solution class when no solution on $[0,T_{\\max}+\\rho)$, for any $\\rho>0$, agrees with it on $[0,T_{\\max})$. Let $E_{\\rm raw}$ be a specified nonnegative scalar functional of the solution, continuous on every compact subinterval of $[0,T_{\\max})$. If $E_{\\rm raw}$ has units, choose a fixed positive scale $E_*$ with the same units and set $E=E_{\\rm raw}/E_*$. In the general-relativity convention the time coordinate is $x^0=ct_{\\rm phys}$ in metres; choose a fixed length scale $L_*>0$ and use the dimensionless time $t=x^0/L_*$. Thus $E$ and $t$ are dimensionless. The constants $A$, $\\epsilon$ and $\\eta$ below are dimensionless as well. In a purely mathematical application, take these variables as real scalars without a physical interpretation.\n\nSpecify a finite list of dimensionless margin functions $m_j:[0,T_{\\max})\\to\\mathbb R$ and thresholds $\\mu_j>0$. Write $\\mathcal M(T)$ when $m_j(t)\\ge\\mu_j$ for every listed $j$ and every $0\\le t<T$. The **continuation criterion** is a separate result for the chosen evolution problem: if a solution has a finite right endpoint $T$ with $E(t)\\le\\eta$ for every $0\\le t<T$ and $\\mathcal M(T)$, then it extends past $T$ in the same solution class.\n\nFor constants $A>0$, $\\epsilon>0$ and $\\eta>0$ with $2A\\epsilon^2<\\eta$, a **bootstrap estimate** is the implication, required on every finite $T<T_{\\max}$,\n\n$$\\left[ E(t)\\le2A\\epsilon^2\\text{ for all }0\\le t\\le T\\right]\\quad\\Longrightarrow\\quad\\left[ E(t)\\le A\\epsilon^2\\text{ for all }0\\le t\\le T\\right].$$\n\nThis contract records the continuity and continuation inputs needed by an application. It does not itself prove the bootstrap estimate, the margin bounds, or any Einstein evolution estimate.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-infimum",
+          "source_section": "Definition",
+          "quote": "Let $S \\subseteq \\mathbb{R}$ and $\\ell \\in \\mathbb{R}$. Then $\\ell$ is a\n**greatest lower bound**, or **infimum**, of $S$ if both of the following hold:",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-infimum-property",
+          "source_section": "Statement",
+          "quote": "Let $S \\subseteq \\mathbb{R}$ be nonempty and bounded below. Then $S$ has a\ngreatest lower bound in $\\mathbb{R}$ ([[def-infimum]]), and it is given by\n\n$$\\inf S = -\\sup(-S), \\qquad \\text{where } -S = \\{-s : s \\in S\\}.$$\n\nIn particular the complete ordered field $\\mathbb{R}$ has the\ngreatest-lower-bound property, which is therefore not an extra axiom: it is a\nconsequence of the least-upper-bound property.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each fixed compact interval, a first threshold crossing at $2A\\epsilon^2$ contradicts the assumed improvement; therefore there is no such crossing.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The threshold set is empty, so the improvement implication applies on every finite interval and gives $E\\le A\\epsilon^2$ throughout the maximal lifespan.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If the maximal lifespan were finite, the uniform pointwise bound lies below $\\eta$ and persistent margins trigger continuation, contradicting maximality.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Proof 1.1 explicitly proves the bad-time set S_T is empty rather than taking its infimum unconditionally. An empty list of continuation margins is vacuous; proof 3.1 still uses the separately assumed continuation criterion and strict energy threshold."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 also applies when E(0)=0, because the strict initial bound still holds; it yields E(t)≤Aε²."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The supplied improvement and continuation criterion imply a bound and, if margins persist, an infinite maximal time; no converse from global existence to those estimates is asserted. The energy and thresholds are real scalars, not a dimension or family-size variable that changes at cardinality one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement hypotheses A>0, ε>0 and 2Aε²<η keep the bootstrap threshold and continuation margin strict."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 treats a threshold hit at the right endpoint of each compact slab; step 3.1 handles a finite maximal endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Supplier proof: the infimum result is choice-free, and Step 1.1 selects no sequence of witnesses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The supplied improvement and continuation criterion imply a bound and, if margins persist, an infinite maximal time; no converse from global existence to those estimates is asserted. This public claim is not a biconditional requiring a separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The supplied improvement and continuation criterion imply a bound and, if margins persist, an infinite maximal time; no converse from global existence to those estimates is asserted. This public claim is not a biconditional requiring a separate reverse implication."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "threshold at compact endpoint",
+          "status": "checked",
+          "evidence": "Step 1.1 handles $\\tau=T$ explicitly before applying the improvement."
+        },
+        {
+          "name": "finite maximal endpoint",
+          "status": "checked",
+          "evidence": "Step 3.1 uses the strict inequality Aε²<η before continuation."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-37-author-self-check",
+        "notes": "Conditional real-analysis closure only. No PDE improvement, margin estimate or global Einstein stability theorem is established."
+      }
+    },
+    "rem-gr-fx-kerr-stability-source-boundary": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This source-boundary Remark records a named accessed manuscript and explicitly limits its reading to the stated small-angular-momentum vacuum result. It asserts no quantified empty-set or solution-existence theorem."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-value conclusion is part of this definition or source note."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "This remark records the accessed manuscript stated small-angular-momentum vacuum scope and reading limits; it asserts no local stability theorem or classification. The energy and thresholds are real scalars, not a dimension or family-size variable that changes at cardinality one."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No additional degenerate case is asserted."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No additional endpoint claim is made."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice-dependent construction occurs."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This remark records the accessed manuscript stated small-angular-momentum vacuum scope and reading limits; it asserts no local stability theorem or classification. This public claim is not a biconditional requiring a separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This remark records the accessed manuscript stated small-angular-momentum vacuum scope and reading limits; it asserts no local stability theorem or classification. This public claim is not a biconditional requiring a separate reverse implication."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-37-author-self-check",
+        "notes": "The source-scope item reports the 2021 authors’ stated small-angular-momentum claim and makes no current-status claim for full subextremal or extremal Kerr."
+      }
+    },
+    "ex-gr-fx09-1": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-gronwall-integral-inequality",
+          "source_section": "Statement",
+          "quote": "Let $t_0\\le T$, let $u,a,b:[t_0,T]\\to\\mathbb R$ be continuous, with $u,b\\ge0$, and suppose\n\n$$u(t)\\le a(t)+\\int_{t_0}^t b(s)u(s)\\,ds.$$\n\nThen\n\n$$u(t)\\le a(t)+\\int_{t_0}^t a(s)b(s)\\exp\\!\\left(\\int_s^t b(r)\\,dr\\right)ds.$$\n\nIf $a$ is nondecreasing, this gives $u(t)\\le a(t)\\exp(\\int_{t_0}^t b)$. The time-reflected form assumes $u(t)\\le a(t)+\\int_t^{t_0}b(s)u(s)\\,ds$ for $t\\le t_0$. In particular, when $a=A\\ge0$ and $b=B\\ge0$ are constant, the two orientations give $u(t)\\le A e^{B|t-t_0|}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-real-power",
+          "source_section": "Definition",
+          "quote": "For $a>0$ and $x\\in\\mathbb R$, define\n$$a^x:=\\exp(x\\log a).$$\nFor the supplementary zero-base convention, define $0^x:=0$ when $x>0$.\n\nThe expressions $0^0$ and $0^x$ for $x<0$ are left undefined. Negative bases are not assigned arbitrary real powers.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-real-power-continuity-and-derivatives",
+          "source_section": "Statement",
+          "quote": "For $a>0$, the function $x\\mapsto a^x$ is continuous on $\\mathbb R$ and\n$$(a^x)'=a^x\\log a.$$\nFor $\\alpha\\in\\mathbb R$, the function $x\\mapsto x^\\alpha$ is continuous and differentiable on $(0,\\infty)$, with\n$$(x^\\alpha)'=\\alpha x^{\\alpha-1}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-chain-rule",
+          "source_section": "Statement",
+          "quote": "Let $A, B \\subseteq \\mathbb{R}$, let $g : A \\to \\mathbb{R}$ with\n$g[A] \\subseteq B$ and let $f : B \\to \\mathbb{R}$, so that the composite\n$f \\circ g : A \\to \\mathbb{R}$ is defined. Let $c \\in A$ be a limit point of\n$A$ (Limit point, isolated point, adherent point, derived set, and dense subset of $\\mathbb{R}$) at which $g$ is differentiable\n(The derivative $f'(c) = \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c}$ of $f : A \\to \\mathbb{R}$ at a point $c \\in A$ that is a limit point of $A$, and differentiability on a set), put $b := g(c)$, and suppose $b$ is a limit point of $B$\nat which $f$ is differentiable. Then $f \\circ g$ is differentiable at $c$ and\n\n$$(f \\circ g)'(c) \\;=\\; f'\\bigl(g(c)\\bigr)\\,g'(c) .$$\n\n**Both limit-point hypotheses are needed, and neither is automatic.** That $c$\nis a limit point of $A$ is what makes $g'(c)$ and $(f \\circ g)'(c)$ defined\nsymbols; that $b = g(c)$ is a limit point of $B$ is what makes $f'(b)$ one.\nNothing forces the second: $g$ may be differentiable at $c$ and send $c$ to an\nisolated point of $B$, and there $f'(b)$ is not defined and the formula asserts\nnothing.\n\n**No case analysis appears anywhere.** The naive difference-quotient proof\nwrites $\\frac{f(g(x)) - f(g(c))}{g(x) - g(c)} \\cdot \\frac{g(x) - g(c)}{x - c}$\nand then has to say what happens where $g(x) = g(c)$, which may occur at points\narbitrarily close to $c$. Carathéodory's factorisation never divides by the\ninner increment, so the difficulty does not arise.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-ftc-second-part",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals, let $G : [a,b] \\to \\mathbb{R}$ be differentiable at every\npoint of $[a,b]$ as a function on $[a,b]$ (The derivative $f'(c) = \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c}$ of $f : A \\to \\mathbb{R}$ at a point $c \\in A$ that is a limit point of $A$, and differentiability on a set; at $a$ and $b$\nthis is the one-sided derivative), let $f := G'$, and suppose $f$ is integrable\non $[a,b]$ (The lower and upper Darboux integrals of a bounded $f$ on $[a,b]$ as $\\sup_P L(f,P)$ and $\\inf_P U(f,P)$, Darboux integrability as their equality, and the notation $\\int_a^b f$). Then\n\n$$\\int_a^b f \\;=\\; G(b) - G(a) .$$\n\n**Both hypotheses are needed and neither is removable.** A function may be\ndifferentiable everywhere with $G'$ not integrable — then the left-hand side does\nnot exist (an everywhere differentiable function with unbounded derivative) — and an\nintegrable $f$ need not be the derivative of anything\n(the sign function); both witnesses are on the\ncompanion page.\n\n**No continuity of $f$ is assumed**, which is what makes this the working form:\nthe theorem evaluates $\\int_a^b f$ for every integrable derivative, not only for\ncontinuous integrands.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and\n$$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-gr-fx-bootstrap-continuation-contract",
+          "source_section": "Definition",
+          "quote": "Fix one evolution problem, its state space and its declared classical solution class. For the general-relativity application here, use one fixed periodic symmetric-hyperbolic system on $\\mathbb T^3_{2\\pi}$ with integer regularity $s\\ge5$, a fixed gauge, smooth coefficient maps on an open state domain, symmetric principal matrices and a positive time matrix. On each compact time slab, its normalized state $u$ belongs to $L^\\infty H^s\\cap C^0H^{s-1}$ and has $\\partial_tu\\in L^\\infty H^{s-1}$, with the fixed-gauge data and coefficient bounds specified in the references below.\n\nA forward solution on $[0,T_{\\max})$ is **maximal** in this solution class when no solution on $[0,T_{\\max}+\\rho)$, for any $\\rho>0$, agrees with it on $[0,T_{\\max})$. Let $E_{\\rm raw}$ be a specified nonnegative scalar functional of the solution, continuous on every compact subinterval of $[0,T_{\\max})$. If $E_{\\rm raw}$ has units, choose a fixed positive scale $E_*$ with the same units and set $E=E_{\\rm raw}/E_*$. In the general-relativity convention the time coordinate is $x^0=ct_{\\rm phys}$ in metres; choose a fixed length scale $L_*>0$ and use the dimensionless time $t=x^0/L_*$. Thus $E$ and $t$ are dimensionless. The constants $A$, $\\epsilon$ and $\\eta$ below are dimensionless as well. In a purely mathematical application, take these variables as real scalars without a physical interpretation.\n\nSpecify a finite list of dimensionless margin functions $m_j:[0,T_{\\max})\\to\\mathbb R$ and thresholds $\\mu_j>0$. Write $\\mathcal M(T)$ when $m_j(t)\\ge\\mu_j$ for every listed $j$ and every $0\\le t<T$. The **continuation criterion** is a separate result for the chosen evolution problem: if a solution has a finite right endpoint $T$ with $E(t)\\le\\eta$ for every $0\\le t<T$ and $\\mathcal M(T)$, then it extends past $T$ in the same solution class.\n\nFor constants $A>0$, $\\epsilon>0$ and $\\eta>0$ with $2A\\epsilon^2<\\eta$, a **bootstrap estimate** is the implication, required on every finite $T<T_{\\max}$,\n\n$$\\left[ E(t)\\le2A\\epsilon^2\\text{ for all }0\\le t\\le T\\right]\\quad\\Longrightarrow\\quad\\left[ E(t)\\le A\\epsilon^2\\text{ for all }0\\le t\\le T\\right].$$\n\nThis contract records the continuity and continuation inputs needed by an application. It does not itself prove the bootstrap estimate, the margin bounds, or any Einstein evolution estimate.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-gr-fx-bootstrap-closure",
+          "source_section": "Statement",
+          "quote": "Let a solution of a fixed evolution problem be maximal on $[0,T_{\\max})$ and satisfy the preceding continuation and bootstrap contract, with its constants $A,\\epsilon,\\eta$ and initial bound $E(0)<A\\epsilon^2$. If the bootstrap improvement holds on every compact subinterval, then $E(t)\\le A\\epsilon^2$ for all $t<T_{\\max}$. If the listed margins persist throughout the interval, then $T_{\\max}=\\infty$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Gronwall with constant nondecreasing $a=E_0$ and $b(s)=C\\epsilon(1+s)^{-1-\\delta}$ gives the exponential integral bound.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "An explicit primitive evaluates the weight integral as $\\delta^{-1}[1-(1+t)^{-\\delta}]$, bounded above by $\\delta^{-1}$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The additional smallness hypothesis makes the estimate strictly stronger than the bootstrap target; a GR conclusion still needs the separate margins and continuation criterion.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F7",
+            "F8",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example specifies one continuous scalar E and a nonempty time interval starting at 0; Gronwall applies on each finite [0,T]. The displayed integral at t=0 is zero, as checked in proof 2.1, rather than a missing family input."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1 show that E0=0 forces E(t)≤0; the given nonnegativity then gives E(t)=0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "An assumed integrable-decay Gronwall inequality yields an explicit uniform scalar bound and a conditional bootstrap improvement; no converse energy inequality is claimed. The energy and thresholds are real scalars, not a dimension or family-size variable that changes at cardinality one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement assumes δ>0 for the integrable weight; model 2 treats the logarithmic-weight boundary δ=0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 handles t=0; step 2.1 applies the antiderivative only for t>0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example proof Steps 1.1–3.1 use the named scalar suppliers and no family of choices."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "An assumed integrable-decay Gronwall inequality yields an explicit uniform scalar bound and a conditional bootstrap improvement; no converse energy inequality is claimed. This public claim is not a biconditional requiring a separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "An assumed integrable-decay Gronwall inequality yields an explicit uniform scalar bound and a conditional bootstrap improvement; no converse energy inequality is claimed. This public claim is not a biconditional requiring a separate reverse implication."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "integrable weight",
+          "status": "checked",
+          "evidence": "For $t\\ge0$ and $\\delta>0$, the integral equals $\\delta^{-1}[1-(1+t)^{-\\delta}]\\le\\delta^{-1}.$"
+        },
+        {
+          "name": "strict improvement size",
+          "status": "checked",
+          "evidence": "The stated condition $E_0e^{C\\epsilon/\\delta}<A\\epsilon^2$ makes the bound strictly smaller than the bootstrap target."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-37-author-self-check",
+        "notes": "Scalar inequality only; no GR decay estimate, physical stability conclusion or empirical claim is made."
+      }
+    },
+    "ex-gr-fx09-2": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-gronwall-integral-inequality",
+          "source_section": "Statement",
+          "quote": "Let $t_0\\le T$, let $u,a,b:[t_0,T]\\to\\mathbb R$ be continuous, with $u,b\\ge0$, and suppose\n\n$$u(t)\\le a(t)+\\int_{t_0}^t b(s)u(s)\\,ds.$$\n\nThen\n\n$$u(t)\\le a(t)+\\int_{t_0}^t a(s)b(s)\\exp\\!\\left(\\int_s^t b(r)\\,dr\\right)ds.$$\n\nIf $a$ is nondecreasing, this gives $u(t)\\le a(t)\\exp(\\int_{t_0}^t b)$. The time-reflected form assumes $u(t)\\le a(t)+\\int_t^{t_0}b(s)u(s)\\,ds$ for $t\\le t_0$. In particular, when $a=A\\ge0$ and $b=B\\ge0$ are constant, the two orientations give $u(t)\\le A e^{B|t-t_0|}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-real-power",
+          "source_section": "Definition",
+          "quote": "For $a>0$ and $x\\in\\mathbb R$, define\n$$a^x:=\\exp(x\\log a).$$\nFor the supplementary zero-base convention, define $0^x:=0$ when $x>0$.\n\nThe expressions $0^0$ and $0^x$ for $x<0$ are left undefined. Negative bases are not assigned arbitrary real powers.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-chain-rule",
+          "source_section": "Statement",
+          "quote": "Let $A, B \\subseteq \\mathbb{R}$, let $g : A \\to \\mathbb{R}$ with\n$g[A] \\subseteq B$ and let $f : B \\to \\mathbb{R}$, so that the composite\n$f \\circ g : A \\to \\mathbb{R}$ is defined. Let $c \\in A$ be a limit point of\n$A$ (Limit point, isolated point, adherent point, derived set, and dense subset of $\\mathbb{R}$) at which $g$ is differentiable\n(The derivative $f'(c) = \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c}$ of $f : A \\to \\mathbb{R}$ at a point $c \\in A$ that is a limit point of $A$, and differentiability on a set), put $b := g(c)$, and suppose $b$ is a limit point of $B$\nat which $f$ is differentiable. Then $f \\circ g$ is differentiable at $c$ and\n\n$$(f \\circ g)'(c) \\;=\\; f'\\bigl(g(c)\\bigr)\\,g'(c) .$$\n\n**Both limit-point hypotheses are needed, and neither is automatic.** That $c$\nis a limit point of $A$ is what makes $g'(c)$ and $(f \\circ g)'(c)$ defined\nsymbols; that $b = g(c)$ is a limit point of $B$ is what makes $f'(b)$ one.\nNothing forces the second: $g$ may be differentiable at $c$ and send $c$ to an\nisolated point of $B$, and there $f'(b)$ is not defined and the formula asserts\nnothing.\n\n**No case analysis appears anywhere.** The naive difference-quotient proof\nwrites $\\frac{f(g(x)) - f(g(c))}{g(x) - g(c)} \\cdot \\frac{g(x) - g(c)}{x - c}$\nand then has to say what happens where $g(x) = g(c)$, which may occur at points\narbitrarily close to $c$. Carathéodory's factorisation never divides by the\ninner increment, so the difficulty does not arise.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-ftc-second-part",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals, let $G : [a,b] \\to \\mathbb{R}$ be differentiable at every\npoint of $[a,b]$ as a function on $[a,b]$ (The derivative $f'(c) = \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c}$ of $f : A \\to \\mathbb{R}$ at a point $c \\in A$ that is a limit point of $A$, and differentiability on a set; at $a$ and $b$\nthis is the one-sided derivative), let $f := G'$, and suppose $f$ is integrable\non $[a,b]$ (The lower and upper Darboux integrals of a bounded $f$ on $[a,b]$ as $\\sup_P L(f,P)$ and $\\inf_P U(f,P)$, Darboux integrability as their equality, and the notation $\\int_a^b f$). Then\n\n$$\\int_a^b f \\;=\\; G(b) - G(a) .$$\n\n**Both hypotheses are needed and neither is removable.** A function may be\ndifferentiable everywhere with $G'$ not integrable — then the left-hand side does\nnot exist (an everywhere differentiable function with unbounded derivative) — and an\nintegrable $f$ need not be the derivative of anything\n(the sign function); both witnesses are on the\ncompanion page.\n\n**No continuity of $f$ is assumed**, which is what makes this the working form:\nthe theorem evaluates $\\int_a^b f$ for every integrable derivative, not only for\ncontinuous integrands.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-gr-fx-bootstrap-continuation-contract",
+          "source_section": "Definition",
+          "quote": "Fix one evolution problem, its state space and its declared classical solution class. For the general-relativity application here, use one fixed periodic symmetric-hyperbolic system on $\\mathbb T^3_{2\\pi}$ with integer regularity $s\\ge5$, a fixed gauge, smooth coefficient maps on an open state domain, symmetric principal matrices and a positive time matrix. On each compact time slab, its normalized state $u$ belongs to $L^\\infty H^s\\cap C^0H^{s-1}$ and has $\\partial_tu\\in L^\\infty H^{s-1}$, with the fixed-gauge data and coefficient bounds specified in the references below.\n\nA forward solution on $[0,T_{\\max})$ is **maximal** in this solution class when no solution on $[0,T_{\\max}+\\rho)$, for any $\\rho>0$, agrees with it on $[0,T_{\\max})$. Let $E_{\\rm raw}$ be a specified nonnegative scalar functional of the solution, continuous on every compact subinterval of $[0,T_{\\max})$. If $E_{\\rm raw}$ has units, choose a fixed positive scale $E_*$ with the same units and set $E=E_{\\rm raw}/E_*$. In the general-relativity convention the time coordinate is $x^0=ct_{\\rm phys}$ in metres; choose a fixed length scale $L_*>0$ and use the dimensionless time $t=x^0/L_*$. Thus $E$ and $t$ are dimensionless. The constants $A$, $\\epsilon$ and $\\eta$ below are dimensionless as well. In a purely mathematical application, take these variables as real scalars without a physical interpretation.\n\nSpecify a finite list of dimensionless margin functions $m_j:[0,T_{\\max})\\to\\mathbb R$ and thresholds $\\mu_j>0$. Write $\\mathcal M(T)$ when $m_j(t)\\ge\\mu_j$ for every listed $j$ and every $0\\le t<T$. The **continuation criterion** is a separate result for the chosen evolution problem: if a solution has a finite right endpoint $T$ with $E(t)\\le\\eta$ for every $0\\le t<T$ and $\\mathcal M(T)$, then it extends past $T$ in the same solution class.\n\nFor constants $A>0$, $\\epsilon>0$ and $\\eta>0$ with $2A\\epsilon^2<\\eta$, a **bootstrap estimate** is the implication, required on every finite $T<T_{\\max}$,\n\n$$\\left[ E(t)\\le2A\\epsilon^2\\text{ for all }0\\le t\\le T\\right]\\quad\\Longrightarrow\\quad\\left[ E(t)\\le A\\epsilon^2\\text{ for all }0\\le t\\le T\\right].$$\n\nThis contract records the continuity and continuation inputs needed by an application. It does not itself prove the bootstrap estimate, the margin bounds, or any Einstein evolution estimate.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-gr-fx-bootstrap-closure",
+          "source_section": "Statement",
+          "quote": "Let a solution of a fixed evolution problem be maximal on $[0,T_{\\max})$ and satisfy the preceding continuation and bootstrap contract, with its constants $A,\\epsilon,\\eta$ and initial bound $E(0)<A\\epsilon^2$. If the bootstrap improvement holds on every compact subinterval, then $E(t)\\le A\\epsilon^2$ for all $t<T_{\\max}$. If the listed margins persist throughout the interval, then $T_{\\max}=\\infty$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Gronwall with $b(s)=C\\epsilon/(1+s)$ and the logarithmic integral gives an exponential of $C\\epsilon\\log(1+t)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For $C\\epsilon=E_0=1$, the function $E(t)=1+t$ makes the integral inequality an equality.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The positive-base real-power definition rewrites that bound as $E_0(1+t)^{C\\epsilon}$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "With $B=A\\epsilon^2>1$, the equality example stays below the bootstrap input $2B$ on $[0,B]$ but exceeds the target $B$ at the endpoint, so the improvement fails.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F6",
+            "F7",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The supplied scalar family includes the explicit E(t)=1+t counterexample on nonempty [0,B] with B>1. No minimum, sum or selection over an empty family of evolutions is used."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 give E(t)≤0 when E0=0; the given nonnegativity then forces E(t)=0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The assumed borderline Gronwall inequality gives a polynomial bound, and E(t)=1+t disproves automatic strict improvement; no equivalence between decay hypotheses is asserted. The energy and thresholds are real scalars, not a dimension or family-size variable that changes at cardinality one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example Step 1.2 takes Cε=1>0; the stated C>0 and ε>0 exclude a zero coefficient."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 treats t=0; step 3.1 checks the finite-slab endpoint T=B."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example Step 1.2 is an explicit scalar equality and selects no elements from a family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The assumed borderline Gronwall inequality gives a polynomial bound, and E(t)=1+t disproves automatic strict improvement; no equivalence between decay hypotheses is asserted. This public claim is not a biconditional requiring a separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The assumed borderline Gronwall inequality gives a polynomial bound, and E(t)=1+t disproves automatic strict improvement; no equivalence between decay hypotheses is asserted. This public claim is not a biconditional requiring a separate reverse implication."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "borderline finite-slab failure",
+          "status": "checked",
+          "evidence": "For $B=A\\epsilon^2>1$, $1+B\\le2B$ but $1+B>B$ at $T=B$, so the bootstrap implication fails."
+        },
+        {
+          "name": "initial endpoint",
+          "status": "checked",
+          "evidence": "At $t=0$ the integral is zero and $E(0)=E_0.$"
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-37-author-self-check",
+        "notes": "The example disproves automatic closure for the scalar borderline inequality only. It is not a counterexample to any Einstein stability theorem."
+      }
+    }
+  }
+}

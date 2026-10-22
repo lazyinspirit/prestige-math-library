@@ -1,0 +1,833 @@
+{
+  "version": 1,
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "batch": 12,
+  "level": "physics-non-fluid-129-2026-10-21-r2",
+  "scope": [
+    "def-emx-whitney-semidescretization",
+    "pthm-emx-discrete-maxwell-balance",
+    "pthm-emx-coercive-maxwell-galerkin",
+    "pthm-emx-topological-zero-modes",
+    "cex-emx-edge-moment-domain-failure",
+    "ex-emx-resonance-outside-coercivity"
+  ],
+  "contracts": {
+    "def-emx-whitney-semidescretization": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition allows zero-dimensional PEC subspaces with empty bases. Their represented-field sums are zero and positive-definiteness on a zero basis space is vacuous; Omega, I and the tetrahedral realization remain nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition includes zero coefficient vectors and zero-dimensional basis spaces. The resulting field sums and quadratic energy are zero; coefficient matrix bounds remain the stated positive material bounds."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A definition-only carrier has no one-object exceptional argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition expressly states the vacuous positive-definiteness convention on a zero-dimensional basis space; semidefinite conductivity may also be zero, while epsilon and mu retain strictly positive uniform bounds."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The time interval is open and the definition makes no endpoint assertion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Countable Choice is stated as a model convention; this definition has no numbered proof argument."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition contains no iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition contains no iff claim."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "Definition-only carrier: the local nodal expansion identity for grad q is explicit and places it in the local Whitney edge span; no separate numbered proof check is asserted.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha batch-12",
+        "notes": "Barycentric gradient identity follows from sum lambda_i=1 and sum grad lambda_i=0; oriented edge moments are endpoint differences. Compact smooth H1 gradient approximants establish H0(curl) membership. Checked full-complex curl/div identities, bounded positive coefficients, inverse permeability, empty bases, mass/loss matrices, SI dimensions and tested matrix signs. No rough-field edge trace or empirical assertion."
+      }
+    },
+    "pthm-emx-discrete-maxwell-balance": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-emx-whitney-semidescretization",
+          "source_section": "Definition",
+          "quote": "Let epsilon,mu:Omega -> Sym_3(R) be measurable, essentially bounded, time-independent coefficient fields with constants 0<a_epsilon<=b_epsilon<infinity and 0<a_mu<=b_mu<infinity such that almost everywhere\n\n$$a_\\varepsilon |v|^2\\le v\\cdot\\varepsilon(x)v\\le b_\\varepsilon |v|^2,\\qquad a_\\mu |v|^2\\le v\\cdot\\mu(x)v\\le b_\\mu |v|^2\\quad(v\\in\\mathbb R^3).$$\n\nTheir units are F m^-1 and H m^-1. Pointwise inversion makes mu^-1 measurable, symmetric and essentially bounded, with eigenvalues between b_mu^-1 and a_mu^-1. These coefficient fields are explicit local model data; no material-realization or constitutive derivation is asserted. Let sigma:Omega -> Sym_3(R) be another measurable, essentially bounded, time-independent field with sigma(x) positive semidefinite almost everywhere and units S m^-1. Let J_ext:I -> L^2(Omega;R^3) be continuous in time and have units A m^-2.\n\nDefine the real matrices and current-load vector by\n\n$$ (M_e)_{ij}:=\\int_\\Omega \\phi_i\\cdot\\varepsilon\\phi_j\\,dx,\\qquad (M_b)_{\\alpha\\beta}:=\\int_\\Omega \\psi_\\alpha\\cdot\\mu^{-1}\\psi_\\beta\\,dx,\\qquad S_{ij}:=\\int_\\Omega\\phi_i\\cdot\\sigma\\phi_j\\,dx,\\qquad j_i(t):=\\int_\\Omega\\phi_i\\cdot J_{\\rm ext}(x,t)\\,dx.$$\n\nAll integrals are finite because the mesh is finite, its basis functions are piecewise polynomial, and the coefficient fields are essentially bounded. M_e and M_b are symmetric positive definite on nonzero basis spaces: their quadratic forms are the positive coefficient-weighted L^2 norms of the represented fields; if a basis space is zero-dimensional, the positive-definiteness condition is vacuous. S is symmetric positive semidefinite. The oriented matrices satisfy DC=CG=0. The edge coefficients e_i have units V and the edge basis functions units m^-1; the face coefficients b_alpha have units Wb and the face basis functions units m^-2. The incidence matrices C,D,G are dimensionless, M_e has units F, M_b has units H^-1, S has units S, and j has units A.\n\nFor C1 coefficient vectors e:I -> R^ne and b:I -> R^nb, define E_h(t):=sum_i e_i(t)phi_i and B_h(t):=sum_alpha b_alpha(t)psi_alpha, and put H_h:=mu^-1 B_h in L^2. The perfect-electric-conductor (PEC) semidiscrete model is the weak Galerkin system\n\n$$\\int_\\Omega \\bigl(\\varepsilon\\,\\partial_t E_h+\\sigma E_h+J_{\\rm ext}\\bigr)\\cdot v_h\\,dx=\\int_\\Omega H_h\\cdot\\operatorname{curl}v_h\\,dx\\quad(v_h\\in V_h),\\qquad \\partial_t B_h=-\\operatorname{curl}E_h\\quad\\text{in }M_h.$$\n\nHere H_h is required only to be L^2; no H(curl) regularity or boundary trace for it is asserted. Testing the first identity against the edge basis and expanding the second in the face basis gives exactly M_e dot e=C^T M_b b-Se-j and dot b=-Ce, the finite compatible matrix system.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-emx-matrix-energy-constraints",
+          "source_section": "Statement",
+          "quote": "For the finite compatible matrix system on an open interval $I\\subseteq\\mathbb R$, let $t_0\\in I$, choose initial data $e(t_0)=e_0$ and $b(t_0)=b_0$, and assume the forcing $j:I\\to\\mathbb R^{n_e}$ is continuous. There is a unique $C^1$ solution $(e,b)$ on all of $I$. At every $t\\in I$ it satisfies\n\n$$\\frac{d}{dt}W(e(t),b(t))=-e(t)^TSe(t)-e(t)^Tj(t),\\qquad Db(t)=Db(t_0),\\qquad \\dot q(t)=G^T(Se(t)+j(t)).$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], the semidiscrete Galerkin equations in the chosen edge and face bases are exactly the finite compatible matrix system; the positivity and compatibility hypotheses required by [F2] hold. Countable Choice is the stated graph-space strength [A1]. Each coordinate j_i(t) is continuous because J_ext is continuous in L^2 and phi_i is a fixed L^2 basis function, so Cauchy-Schwarz makes t -> integral(phi_i dot J_ext(t)) continuous. Applying [F2] gives a unique C1 coefficient solution for every initial pair on all of I.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The definitions of M_e and M_b give e^T M_e e=integral(E_h dot epsilon E_h) and b^T M_b b=integral(B_h dot mu^-1 B_h), so W_h is exactly the matrix energy W(e,b) in [F2]. Its derivative is therefore -e^T S e-e^T j. Since S is positive semidefinite, e^T S e>=0; this is a model deduction of discrete dissipation, not an observation about a material. For the same solution established in step 1.1, [F2] also gives D b(t)=D b(t0) and dot q=G^T(S e+j), with q=-G^T M_e e as defined in the Statement. The former is the exact face-to-cell magnetic-divergence constraint; the latter is the stated weak discrete-divergence evolution and does not infer a nodal charge-deposition method.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The time interval and spatial domain are nonempty by the defining model."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 identifies the quadratic energy and its derivative; at e=b=0 and j=0 all three displayed identities reduce to zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 applies the finite matrix theorem to arbitrary finite coefficient dimensions, including a one-dimensional block."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 use the stated vacuous zero-dimensional positive-definiteness convention and the supplier theorem’s empty-block case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The system is asserted only for t in the open interval I and has no endpoint claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the stated Countable Choice strength and no stronger choice hypothesis."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem states identities, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem states identities, not an iff."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "zero field and zero source",
+          "status": "checked",
+          "evidence": "Set e=b=j=0 in the identities; W_h is zero, its derivative is zero, Db is constant, and dot q=0, as in step 2.1."
+        }
+      ],
+      "finite_checks_disposition": "The zero-state hand check is a consistency check; steps 1.1 and 2.1 prove the identities for general data.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha batch-12",
+        "notes": "Read current matrix-energy supplier proof including global variation-of-constants construction, oriented integration and zero-size blocks. Continuous L2 source yields continuous finite load coordinates by Cauchy-Schwarz. Coefficient-weighted integral equals matrix energy; symmetric cross terms cancel; DC=CG=0 give conserved Db and positive-sign q derivative. SI units and zero forcing/conductivity branches agree. Accepted gradient explanation preserves this use. No empirical or continuum claim."
+      }
+    },
+    "pthm-emx-coercive-maxwell-galerkin": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-emx-finite-energy-boundary-model",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ as carried by that imported weak-derivative convention. Let $\\varepsilon,\\mu:\\Omega\\to\\mathbb R^{3\\times3}$ be measurable, essentially bounded, real symmetric coefficient fields, independent of time. Require constants $0<a_\\varepsilon\\le b_\\varepsilon<\\infty$ and $0<a_\\mu\\le b_\\mu<\\infty$ such that, for almost every $x\\in\\Omega$ and every $v\\in\\mathbb R^3$,\n\n$$a_\\varepsilon |v|^2\\le v\\cdot\\varepsilon(x)v\\le b_\\varepsilon |v|^2,\\qquad a_\\mu |v|^2\\le v\\cdot\\mu(x)v\\le b_\\mu |v|^2.$$\n\nThe coefficient units are $\\mathrm{F\\,m^{-1}}$ and $\\mathrm{H\\,m^{-1}}$, respectively. They define bounded symmetric multiplication operators on $L^2$. Define $D(t)=\\varepsilon E(t)$ and $B(t)=\\mu H(t)$. The spatially varying coefficient fields are explicit local model data; they are not inferred from the homogeneous material-closure postulate. Its constant symmetric branch is a special case.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-na-hcurl-space",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice for weak-derivative uniqueness and the real $L^2$ product below, and let $\\Omega\\subset\\mathbb R^3$ be open. Here $L^2(\\Omega;\\mathbb R^3)$ is the set of triples of real scalar $L^2$ classes from [[def-l-p-space-as-a-quotient-by-null-functions]]. Define\n$$ (u,v)_{L^2(\\Omega)}:=\\sum_{j=1}^3\\int_\\Omega u_jv_j\\,dx,\\qquad \\|u\\|_{L^2(\\Omega)}^2:=\\sum_{j=1}^3\\|u_j\\|_{L^2(\\Omega)}^2. $$\nEach scalar pairing is well-defined and induces its quotient norm by [[lem-l-two-with-the-integral-pairing-is-a-hilbert-space]]; the finite sum is therefore a real inner product on the triple space with the displayed norm. A test field $\\varphi\\in C_c^\\infty(\\Omega;\\mathbb R^3)$ means a triple of real-valued members of the test-function space $\\mathcal D(\\Omega)$ of [[def-test-function-space-d-of-an-open-set]]. Writing $\\varphi=(\\varphi_x,\\varphi_y,\\varphi_z)$, its classical curl is the coordinate expression of [[def-divergence-and-curl-of-a-c1-vector-field]],\n$$\\operatorname{curl}\\varphi=(\\partial_y\\varphi_z-\\partial_z\\varphi_y,\\partial_z\\varphi_x-\\partial_x\\varphi_z,\\partial_x\\varphi_y-\\partial_y\\varphi_x).$$\nFor $u\\in L^2(\\Omega;\\mathbb R^3)$, its distributional curl is the triple of scalar distributions whose action on a vector test field is the sum of the three component pairings, determined by\n$$\\langle \\operatorname{curl}u,\\varphi\\rangle=\\int_\\Omega u\\cdot\\operatorname{curl}\\varphi\\,dx,\\qquad \\varphi\\in C_c^\\infty(\\Omega;\\mathbb R^3).$$\nThe integral is finite because $u$ and the smooth compactly supported field $\\operatorname{curl}\\varphi$ are componentwise in $L^2$ and scalar Cauchy–Schwarz applies. On tests supported in a fixed compact $K\\Subset\\Omega$, the same estimate gives $|\\langle\\operatorname{curl}u,\\varphi\\rangle|\\le C_{u,K}\\max_{|\\alpha|\\le1}\\sup_K|D^\\alpha\\varphi|$ with a finite $C_{u,K}$. This proves continuity on each fixed-support test space; the LF universal property of [[lem-test-function-lf-topology-universal-property]], for the test topology of [[def-test-function-topology]], makes the pairing a vector distribution on $\\Omega$.\nIf this vector distribution is represented by an $L^2(\\Omega;\\mathbb R^3)$ class, that class is unique almost everywhere componentwise by the injection of locally integrable functions into scalar distributions in [[thm-locally-integrable-functions-embed-in-distributions]], under the stated Countable Choice assumption.\nDefine\n$$H(\\operatorname{curl};\\Omega)=\\{u\\in L^2(\\Omega;\\mathbb R^3):\\operatorname{curl}u\\text{ is represented by an element of }L^2(\\Omega;\\mathbb R^3)\\}$$\nwith graph norm $\\|u\\|_{H(\\operatorname{curl};\\Omega)}^2=\\|u\\|_{L^2(\\Omega)}^2+\\|\\operatorname{curl}u\\|_{L^2(\\Omega)}^2$. No boundary condition is imposed by this definition. Fields are real-valued; equality is equality of almost-everywhere classes.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-na-zero-tangential-hcurl",
+          "source_section": "Definition",
+          "quote": "Let $\\Omega\\subset\\mathbb R^3$ be open and set\n$$H_0(\\operatorname{curl};\\Omega):=\\overline{C_c^\\infty(\\Omega;\\mathbb R^3)}^{\\,H(\\operatorname{curl};\\Omega)},$$\nwhere the norm is that of [[def-na-hcurl-space]]. This is the closure-defined zero-tangential subspace used on this page. Identifying this closure with the full kernel of a particular boundary trace map is not part of the definition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-lax-milgram",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice ([[def-countable-choice]]). Let $H$ be a real or complex Hilbert space, let $a$ be a bounded coercive sesquilinear form on $H$ with constants $M,\\alpha$ ([[def-bounded-coercive-and-symmetric-sesquilinear-forms]]), and let $F:H\\to\\mathbb K$ be a bounded conjugate-linear functional with norm $\\|F\\|=\\sup_{\\|v\\|\\le1}|F(v)|$. Then there is a unique $u\\in H$ with $$a(u,v)=F(v)\\qquad\\text{for every }v\\in H,$$ and it satisfies $\\alpha\\|u\\|\\le\\|F\\|$, that is $\\|u\\|\\le\\|F\\|/\\alpha$. The real bilinear case is the same statement with $a$ symmetric or not, $F$ a bounded linear functional, and the conjugation read as the identity.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-na-uniformly-bounded-commuting-cochain-projection",
+          "source_section": "Statement",
+          "quote": "There is also a boundary-corrected family of projections $\\pi_{h,0}^k:L^2\\Lambda^k(\\Omega)\\to E_{h,0}^k$, where $E_{h,0}^k=E_h^k\\cap H_0\\Lambda^k(\\Omega)$ and $H_0\\Lambda^k$ is the graph closure of compactly supported smooth forms. These have the same uniform bounds, are the identity on $E_{h,0}^k$, and commute in degrees zero through two on the homogeneous complex; the terminal degree-three differential is zero. In particular,\n$$\\pi_{h,0}^0:H_0^1(\\Omega)\\to W_h^0\\cap H_0^1(\\Omega),\\qquad \\pi_{h,0}^1:H_0(\\operatorname{curl};\\Omega)\\to N_h^1\\cap H_0(\\operatorname{curl};\\Omega),\\qquad \\nabla\\pi_{h,0}^0=\\pi_{h,0}^1\\nabla.$$\nHere the zero tangential space uses [[def-na-zero-tangential-hcurl]]. Each family converges strongly in $L^2$ on every $L^2$ form, uniformly on compact $L^2$ subsets, and in the graph norm on its corresponding graph domain. The full and homogeneous families are separate operators. These are cochain projections; canonical edge moments are not asserted bounded on $H(\\operatorname{curl})$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-emx-whitney-semidescretization",
+          "source_section": "Definition",
+          "quote": "For C1 coefficient vectors e:I -> R^ne and b:I -> R^nb, define E_h(t):=sum_i e_i(t)phi_i and B_h(t):=sum_alpha b_alpha(t)psi_alpha, and put H_h:=mu^-1 B_h in L^2. The perfect-electric-conductor (PEC) semidiscrete model is the weak Galerkin system\n\n$$\\int_\\Omega \\bigl(\\varepsilon\\,\\partial_t E_h+\\sigma E_h+J_{\\rm ext}\\bigr)\\cdot v_h\\,dx=\\int_\\Omega H_h\\cdot\\operatorname{curl}v_h\\,dx\\quad(v_h\\in V_h),\\qquad \\partial_t B_h=-\\operatorname{curl}E_h\\quad\\text{in }M_h.$$\n\nHere H_h is required only to be L^2; no H(curl) regularity or boundary trace for it is asserted. Testing the first identity against the edge basis and expanding the second in the face basis gives exactly M_e dot e=C^T M_b b-Se-j and dot b=-Ce, the finite compatible matrix system.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-na-lowest-order-whitney-de-rham-spaces",
+          "source_section": "Definition",
+          "quote": "Let $\\Omega\\subset\\mathbb R^3$ have a finite matching affine tetrahedral mesh $\\mathcal T$ as in [[def-matching-affine-simplicial-meshes]]. The H(curl) and H(div) graph-space conventions used below carry their stated Countable Choice assumptions. Choose one orientation for every mesh edge and face and the ambient orientation for each tetrahedron, with incidence signs given by [[def-oriented-simplicial-cell-chains]]. Write $t_e$ for the unit tangent in the chosen direction of an edge $e$, and $n_F$ for the unit normal determined by the chosen orientation of a face $F$ and the ambient orientation. On a tetrahedron $K$ with barycentric coordinates $\\lambda_0,\\lambda_1,\\lambda_2,\\lambda_3$, list the vertices in any order and let $P_1(K)$ denote scalar polynomials of total degree at most one. For an ordered edge $[i,j]$, put $\\phi_{ij}=\\lambda_i\\nabla\\lambda_j-\\lambda_j\\nabla\\lambda_i$; reversing its orientation changes the sign. Set\n$$W_h^0:=\\{q\\in C^0(\\overline\\Omega):q|_K\\in P_1(K)\\text{ for every }K\\in\\mathcal T\\}.$$\nThe first-family lowest-order Nedelec space is\n$$N_h^1:=\\{u\\in H(\\operatorname{curl};\\Omega):u|_K\\in\\operatorname{span}\\{\\phi_{ij}:0\\le i<j\\le3\\}\\text{ for every }K\\in\\mathcal T,\\text{ and every global edge }e\\text{ has one common oriented circulation }\\int_e u|_K\\cdot t_e\\,ds\\text{ for all }K\\supset e\\}.$$\nThe local Raviart–Thomas space is $RT_0(K)=\\{a+c x:a\\in\\mathbb R^3,\\ c\\in\\mathbb R\\}$. With $H(\\operatorname{div};\\Omega)$ as defined by [[def-na-hdiv-space]], set\n$$N_h^2:=\\{v\\in H(\\operatorname{div};\\Omega):v|_K\\in RT_0(K)\\text{ for every }K\\in\\mathcal T,\\text{ and every global face }F\\text{ has one common oriented flux }\\int_F v|_K\\cdot n_F\\,dS\\text{ for all }K\\supset F\\},\\qquad N_h^3:=\\{q\\in L^2(\\Omega):q|_K\\text{ is constant for every }K\\in\\mathcal T\\}.$$\nThe covariant affine Piola map for $N_h^1$ and contravariant affine Piola map for $N_h^2$ use the orientation-preserving cell maps and conventions of [[def-covariant-contravariant-piola-maps-and-hdiv-hcurl]]. Their differential and moment identities are those of [[thm-affine-piola-differential-and-trace-moment-identities]]. The edge, face, and cell degrees of freedom are respectively the oriented edge circulation, oriented face-normal flux, and cell integral.\n\nIn the two conformity conditions above, each cellwise polynomial restriction has a unique polynomial representative on its closed cell, and those representatives define the displayed edge and face integrals. Thus the global edge and face moments are part of the assembled-space definition; their correspondence with all cochains is proved by the local unisolvence and commuting-moment items, not inferred from rough-field traces.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let\n$(X,\\mathcal A,\\mu)$ be a measure space and let\n$L^2(\\mu)$ be the quotient of $\\mathcal L^2(\\mu)$ by the almost-everywhere zero\nfunctions ([[def-l-p-space-as-a-quotient-by-null-functions]]), with the quotient\nnorm $\\|\\cdot\\|_2$ ([[thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space]]).\n\n1. On **real** $L^2(\\mu)$ the formula\n   $$\\langle f,g\\rangle:=\\int fg\\,d\\mu$$is a well-defined inner product, linear in both variables, positive definite, with $\\langle f,f\\rangle=\\|f\\|_2^2$; with it $L^2(\\mu)$ is a real Hilbert space ([[def-hilbert-space]]). 2. On **complex** $L^2(\\mu;\\mathbb C)$ the formula$$\\langle f,g\\rangle:=\\int f\\overline g\\,d\\mu$$\n   is a well-defined inner product, linear in the first variable and\n   conjugate-linear in the second, positive definite, with\n   $\\langle f,f\\rangle=\\|f\\|_2^2$; with it $L^2(\\mu;\\mathbb C)$ is a complex\n   Hilbert space ([[def-complex-lp-and-euclidean-test-function-conventions]]).\n\nIn both cases the inner product induces exactly the established quotient\n$L^2$ norm.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The distributional graph of curl is closed: if v_j->v and curl v_j->w in L^2, then for every compactly supported smooth test field phi, integral(v dot curl phi)=lim_j integral(v_j dot curl phi)=lim_j integral(curl v_j dot phi)=integral(w dot phi); hence curl v=w distributionally. L^2 is complete under [A1] and [[lem-l-two-with-the-integral-pairing-is-a-hilbert-space]], so H(curl;Omega) is Hilbert, and its graph-closed subspace H_0(curl;Omega) is Hilbert. Since ell_0 is fixed and positive, ||.||_{V,ell_0} is equivalent to the defining graph norm and gives the same complete space.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "From [F1], the eigenvalues of mu^-1 lie between b_mu^-1 and a_mu^-1. Therefore a_s(v,v)>=b_mu^-1||curl v||_2^2+s^2a_epsilon||v||_2^2>=alpha||v||_{V,ell_0}^2. Cauchy-Schwarz and the upper coefficient bounds give |a_s(u,v)|<=a_mu^-1||curl u||_2||curl v||_2+s^2b_epsilon||u||_2||v||_2<=M||u||_{V,ell_0}||v||_{V,ell_0}. Since s has units s^-1, ell_0 has units m, and epsilon and mu have units F m^-1 and H m^-1 by [F1], both constants have units (H m)^-1; alpha>0 and M<infinity by the stated strict bounds.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply [F3] to the real Hilbert space and form of steps 1.1-1.2 to obtain the unique u. By [F6], each V_n is finite-dimensional and closed in V; restricting the same bounded coercive form and F to V_n gives the unique Galerkin solution u_n, including the zero-space case. If F=0, the zero vector is the solution on V and on every V_n by uniqueness.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F6",
+            "step 1.1",
+            "step 1.2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Put e_n:=u-u_n. For any w_n in V_n, Galerkin orthogonality gives a_s(e_n,u_n-w_n)=0, so a_s(e_n,e_n)=a_s(e_n,u-w_n). Coercivity and boundedness from step 1.2 imply alpha||e_n||_{V,ell_0}^2<=a_s(e_n,e_n)<=M||e_n||_{V,ell_0}||u-w_n||_{V,ell_0}. If e_n=0 the asserted estimate is immediate; otherwise divide by alpha||e_n|| and take the infimum over w_n.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "By [F4], pi_{h_n,0}^1 u belongs to V_n and converges to u in the unscaled H(curl) graph norm; equivalence of the fixed ell_0-scaled norm gives ||u-pi_{h_n,0}^1u||_{V,ell_0}->0. Thus the best-approximation infimum in step 3.1 tends to zero, and the error estimate proves u_n->u in V,ell_0. No interpolation by pointwise edge restrictions is used.",
+          "step": "4.1",
+          "inputs": [
+            "F4",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement supplies a mesh sequence indexed by n>=1, not an empty family. Each trial space V_n contains zero even when zero-dimensional; step 2.1 covers this case and the approximation infimum in step 3.1 is over a nonempty space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 records the zero-forcing solution; step 3.1 explicitly handles zero Galerkin error before division."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 2.1–3.1 apply the existence and estimate to every finite trial space, including a one-dimensional space."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly covers a zero-dimensional V_n; step 3.1 handles e_n=0."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The variational theorem has no time-endpoint assertion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses Countable Choice for the real L2 and weak-derivative Hilbert interfaces; no stronger choice axiom is introduced."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem contains no iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem contains no iff claim."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "curl-free trial vector",
+          "status": "checked",
+          "evidence": "For curl v=0, the lower bound in step 1.2 reduces to a_s(v,v)>=s^2 a_epsilon ||v||_2^2, which is strictly positive for v!=0."
+        }
+      ],
+      "finite_checks_disposition": "The special curl-free case checks the positive mass term; steps 1.1–4.1 prove the full graph-norm coercivity and convergence.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha batch-12",
+        "notes": "Confirmed refuter missing-hypothesis: both Lax-Milgram and relative graph-convergent projection require AC_omega, now explicit in Statement. Closed curl graph and complete real L2 imply Hilbert PEC space; fixed positive length rescales equivalently. Verified alpha/M bounds and dimensions, zero-space and zero-error branches, orthogonality and infimum estimate, and relative projection convergence. Mesh hypotheses match the projection theorem. Reviewed its correction and averaged-pullback proofs; no real-frequency or empirical conclusion."
+      }
+    },
+    "pthm-emx-topological-zero-modes": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-dependent-choice",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and let $R \\subseteq X \\times X$ be a binary relation on $X$.\nCall $R$ **entire on $X$** when\n\n$$\\text{for every } x \\in X \\text{ there is } y \\in X \\text{ with } x \\mathbin{R} y .$$\n\nThe **Axiom of Dependent Choice**, written $\\mathrm{DC}$, is the following\nstatement.\n\n> For every nonempty set $X$, every relation $R$ entire on $X$, and every\n> $a \\in X$, there is a function $x : \\mathbb{N} \\to X$ (A function is a relation $f$ with $(a,b) \\in f$ and $(a,c) \\in f$ implying $b = c$; $f : A \\to B$, the value $f(a)$, domain and codomain,\n> The natural numbers $\\mathbb{N}$ (von Neumann)) with\n> $$x_0 = a \\qquad \\text{and} \\qquad x_n \\mathbin{R} x_{n+1} \\ \\text{ for every } n \\in \\mathbb{N}.$$\n\nHere a sequence in $X$ means a function from $\\mathbb{N}$ to $X$, not necessarily\na real-valued sequence. As everywhere in this library $\\mathbb{N}$ contains $0$, and the sequence is\nindexed from $0$; the term $x_0$ is the prescribed starting point $a$ and every\nlater term is related to its predecessor.\n\n**What DC adds to what came before.** Choice function and\nThe Axiom of Choice select one element from each member of a family that is\nfixed in advance, and The Axiom of Countable Choice ($\\mathrm{AC}_\\omega$) does the same for a family indexed\nby $\\mathbb{N}$. In both, the family is given before any selection is made. DC is\nthe principle needed when the $n$-th set to select from is not known until the\nfirst $n$ selections have been made: here the admissible values of $x_{n+1}$ are\nexactly the $R$-successors of $x_n$, so the family being chosen from is built\nalong the choosing. Thus the displayed recursion is directly an instance of\nDC; it is not itself an application of the fixed-family formulation of\ncountable choice. This observation concerns the input to the two axioms and\nmakes no claim about a nonimplication between them.\n\n**The starting point may be dropped.** The formally weaker statement obtained by\ndeleting the clause $x_0 = a$ — for every nonempty $X$ and every entire $R$ there\nis a sequence with $x_n \\mathbin{R} x_{n+1}$ for all $n$ — is an immediate\nconsequence of the form above, since $X$ is nonempty and any of its elements may\nbe taken as $a$. Conversely, assume the start-free form, and fix $X$, $R$ and $a$ as above. Let $P$ be the set of all functions $p:k\\to X$ with nonzero $k\\in\\mathbb N$, $p(0)=a$, and $p(i)\\mathbin R p(i+1)$ whenever $i+1<k$. It is a set by Separation inside $\\mathcal P(\\mathbb N\\times X)$ (The power set $\\mathcal{P}(x) = \\{\\, z : z \\subseteq x \\,\\}$, The Cartesian product $A \\times B := \\{\\, z \\in \\mathcal{P}(\\mathcal{P}(A \\cup B)) : \\exists a \\in A\\ \\exists b \\in B\\ z = (a,b) \\,\\}$, The Axiom Schema of Separation: for each formula $\\varphi$, $\\forall \\bar p\\,\\forall x\\,\\exists y\\,\\forall z\\,(z \\in y \\leftrightarrow (z \\in x \\wedge \\varphi(z,\\bar p)))$); a natural is the set of its predecessors (On $\\mathbb{N}$ the order is membership: $m < n \\iff m \\in n$). The singleton path $\\{(0,a)\\}$ lies in $P$.\n\nOn $P$ let $p\\mathbin S q$ mean that $q$ extends $p$ by exactly one new last entry. This relation is entire: for one particular $p:k\\to X$, write $k=j+1$ (Every nonzero natural number is a successor); an $R$-successor $y$ of $p(j)$ exists, and $q=p\\cup\\{(k,y)\\}$ is the required extension. This is existential instantiation for that path, not a simultaneous choice of successors. Start-free DC now supplies a sequence $(p_n)$ with $p_n\\mathbin S p_{n+1}$; its first path need not be the singleton path, but every path in $P$ already starts at $a$.\n\nTheir graphs are nested. By induction (The principle of mathematical induction), $p_n$ has at least $n+1$ entries: the initial path is nonempty, and every step adds one entry. Hence $x=\\bigcup_{n\\in\\mathbb N}p_n$ is a function with domain $\\mathbb N$ and values in $X$. Indeed, nestedness makes all common values agree, every natural index eventually lies in a path, and no path has indices outside $\\mathbb N$. Each path starts at $a$, so $x(0)=a$; for any $i$, a sufficiently long path contains both $i$ and $i+1$, giving $x(i)\\mathbin R x(i+1)$. Replacement and Union form this union of the sequence of graphs. Thus the start-free and prescribed-start forms are equivalent in ZF. Every use below retains the prescribed-start convention.\n\n**$R$ need not be an order and the terms need not be distinct.** What DC delivers\nis a sequence, that is a function $\\mathbb{N} \\to X$, not a chain in the\norder-theoretic sense (Chain in a poset). The relation may be symmetric, and the\nsequence may repeat a value or be constant; all that is asserted is\n$x_n \\mathbin{R} x_{n+1}$ at every index.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-na-lowest-order-whitney-de-rham-spaces",
+          "source_section": "Definition",
+          "quote": "Let $\\Omega\\subset\\mathbb R^3$ have a finite matching affine tetrahedral mesh $\\mathcal T$ as in [[def-matching-affine-simplicial-meshes]]. The H(curl) and H(div) graph-space conventions used below carry their stated Countable Choice assumptions. Choose one orientation for every mesh edge and face and the ambient orientation for each tetrahedron, with incidence signs given by [[def-oriented-simplicial-cell-chains]]. Write $t_e$ for the unit tangent in the chosen direction of an edge $e$, and $n_F$ for the unit normal determined by the chosen orientation of a face $F$ and the ambient orientation. On a tetrahedron $K$ with barycentric coordinates $\\lambda_0,\\lambda_1,\\lambda_2,\\lambda_3$, list the vertices in any order and let $P_1(K)$ denote scalar polynomials of total degree at most one. For an ordered edge $[i,j]$, put $\\phi_{ij}=\\lambda_i\\nabla\\lambda_j-\\lambda_j\\nabla\\lambda_i$; reversing its orientation changes the sign. Set\n$$W_h^0:=\\{q\\in C^0(\\overline\\Omega):q|_K\\in P_1(K)\\text{ for every }K\\in\\mathcal T\\}.$$\nThe first-family lowest-order Nedelec space is\n$$N_h^1:=\\{u\\in H(\\operatorname{curl};\\Omega):u|_K\\in\\operatorname{span}\\{\\phi_{ij}:0\\le i<j\\le3\\}\\text{ for every }K\\in\\mathcal T,\\text{ and every global edge }e\\text{ has one common oriented circulation }\\int_e u|_K\\cdot t_e\\,ds\\text{ for all }K\\supset e\\}.$$\nThe local Raviart–Thomas space is $RT_0(K)=\\{a+c x:a\\in\\mathbb R^3,\\ c\\in\\mathbb R\\}$. With $H(\\operatorname{div};\\Omega)$ as defined by [[def-na-hdiv-space]], set\n$$N_h^2:=\\{v\\in H(\\operatorname{div};\\Omega):v|_K\\in RT_0(K)\\text{ for every }K\\in\\mathcal T,\\text{ and every global face }F\\text{ has one common oriented flux }\\int_F v|_K\\cdot n_F\\,dS\\text{ for all }K\\supset F\\},\\qquad N_h^3:=\\{q\\in L^2(\\Omega):q|_K\\text{ is constant for every }K\\in\\mathcal T\\}.$$\nThe covariant affine Piola map for $N_h^1$ and contravariant affine Piola map for $N_h^2$ use the orientation-preserving cell maps and conventions of [[def-covariant-contravariant-piola-maps-and-hdiv-hcurl]]. Their differential and moment identities are those of [[thm-affine-piola-differential-and-trace-moment-identities]]. The edge, face, and cell degrees of freedom are respectively the oriented edge circulation, oriented face-normal flux, and cell integral.\n\nIn the two conformity conditions above, each cellwise polynomial restriction has a unique polynomial representative on its closed cell, and those representatives define the displayed edge and face integrals. Thus the global edge and face moments are part of the assembled-space definition; their correspondence with all cochains is proved by the local unisolvence and commuting-moment items, not inferred from rough-field traces.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-na-lowest-order-discrete-de-rham-cohomology-and-harmonic-modes",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice for the H(curl), H(div), and real $L^2$ inner-product interfaces used here; no full Axiom of Choice is assumed. Let $\\mathcal T$ be a finite matching tetrahedral mesh with realization $|\\mathcal T|=\\overline\\Omega$. Define $C_k(\\mathcal T;\\mathbb R)$ by extending the oriented chain groups of [[def-oriented-simplicial-cell-chains]] to real coefficients, and put $C^k=\\operatorname{Hom}_{\\mathbb R}(C_k,\\mathbb R)$ with coboundary $\\delta^k=\\partial_{k+1}^*$. The degrees of freedom give a cochain isomorphism from\n$$W_h^0\\xrightarrow{\\nabla}N_h^1\\xrightarrow{\\operatorname{curl}}N_h^2\\xrightarrow{\\operatorname{div}}N_h^3$$\nto $C^0\\xrightarrow{\\delta^0}C^1\\xrightarrow{\\delta^1}C^2\\xrightarrow{\\delta^2}C^3$. Consequently the discrete cohomology in degree $k$ is naturally isomorphic to $\\operatorname{Hom}_{\\mathbb R}(H_k(|\\mathcal T|;\\mathbb R),\\mathbb R)$. If $\\overline\\Omega$ is nonempty, connected, and contractible, then the sequence is exact at every positive-degree space, $\\ker\\nabla$ consists of constants, and $\\operatorname{div}:N_h^2\\to N_h^3$ is onto. For general topology, define\n$$\\mathcal H_h^1:=\\ker(\\operatorname{curl}|_{N_h^1})\\cap(\\nabla W_h^0)^\\perp,\\qquad \\mathcal H_h^2:=\\ker(\\operatorname{div}|_{N_h^2})\\cap(\\operatorname{curl}N_h^1)^\\perp$$\nusing the $L^2$ inner product. Then $\\ker\\operatorname{curl}=\\nabla W_h^0\\oplus\\mathcal H_h^1$ and $\\ker\\operatorname{div}=\\operatorname{curl}N_h^1\\oplus\\mathcal H_h^2$, with $\\dim\\mathcal H_h^k=\\dim H_k(|\\mathcal T|;\\mathbb R)$ for $k=1,2$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-emx-whitney-semidescretization",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice as in the real L^2 and weak-derivative conventions. Let I be a nonempty open interval in R, and let Omega be a nonempty bounded Lipschitz polyhedron in one SI laboratory frame under [[def-em-si-conventions]]. Let T be a finite matching affine tetrahedral mesh with realization closure(Omega), with mesh and orientation conventions as in [[def-na-lowest-order-whitney-de-rham-spaces]]. Use the real graph space H(curl;Omega) of [[def-na-hcurl-space]] and define H_0(curl;Omega) by the closure of C_c^\\infty(Omega;R^3) in that graph norm, as in [[def-na-zero-tangential-hcurl]]. Define H_0^1(Omega) as the closure of C_c^\\infty(Omega;R) in W^{1,2}(Omega;R), using the norm and closure conventions of [[def-sobolev-space-wkp-and-its-norm]].\n\nLet W_h^0 be the continuous piecewise P1 scalar space, where P1(K) is the real scalar-polynomial space of total degree at most one on tetrahedron K. On K with barycentric coordinates lambda_0,...,lambda_3, the lowest-order Whitney edge space is spanned by phi_ij=lambda_i grad(lambda_j)-lambda_j grad(lambda_i) for its six oriented edges. Globally N_h^1 consists of these piecewise fields with one common oriented circulation integral_e u dot t_e ds on each shared edge e, where t_e is its chosen unit tangent; it is H(curl)-conforming. The face space N_h^2 consists of piecewise RT0 fields, RT0(K)={x -> a+c x:a in R3,c in R}, with one common oriented flux integral_F u dot n_F dS on each shared face F, where n_F is its oriented unit normal; it is H(div)-conforming in the graph space [[def-na-hdiv-space]]. N_h^3 consists of cellwise constants. These spaces are the full spaces in [[def-na-lowest-order-whitney-de-rham-spaces]]. Set S_h := W_h^0 intersect H_0^1(Omega), V_h := N_h^1 intersect H_0(curl;Omega), and M_h := N_h^2. The finite-dimensional map grad:S_h -> V_h is well-defined: for q in S_h, its weak gradient is L^2, curl(grad q)=0 distributionally, and a sequence from C_c^\\infty converging to q in W^{1,2} has gradients converging to grad q in H(curl). On each tetrahedron K with vertices v_0,...,v_3, write q_i:=q(v_i) for the nodal values of the continuous piecewise-affine representative; then\n\n$$\\nabla q|_K=\\sum_{0\\le i<j\\le3}(q_j-q_i)\\phi_{ij}.$$\n\nThis identity puts grad q in the local Whitney edge span and gives its oriented circulation q_j-q_i along [v_i,v_j]; the shared endpoint values agree between cells because q is continuous. Take the canonical full-space nodal and edge reference bases from [[def-na-lowest-order-whitney-de-rham-spaces]]. Since S_h and V_h are finite-dimensional subspaces of the full nodal and edge spaces, choose any bases chi_1,...,chi_ng of S_h and phi_1,...,phi_ne of V_h obtained by dimensionless real linear combinations of those reference bases. Choose psi_1,...,psi_nb for M_h dual to all oriented face-flux degrees of freedom, and theta_1,...,theta_nc for N_h^3 dual to the cell-integral degrees of freedom, with theta_l=|K_l|^-1 on cell K_l and zero on the other cells. Thus chi_j is dimensionless, phi_i has units m^-1, psi_alpha has units m^-2, and theta_l has units m^-3. Define the real coordinate matrices C,D,G by curl(phi_i)=sum_alpha C_{alpha i} psi_alpha, div(psi_alpha)=sum_l D_{l alpha} theta_l, and grad(chi_j)=sum_i G_{ij} phi_i. These matrices are dimensionless representations of the oriented differentials; D is the face-to-cell incidence matrix in the face-moment basis, and changes of basis in S_h,V_h give the corresponding matrices for their PEC subspaces. Because curl grad=0 and div curl=0 on the full finite-element complex, DC=0 and CG=0. Here D denotes only the magnetic face-to-cell incidence matrix.\n\nWrite Sym_3(R) for the real symmetric 3 by 3 matrices. Let epsilon,mu:Omega -> Sym_3(R) be measurable, essentially bounded, time-independent coefficient fields with constants 0<a_epsilon<=b_epsilon<infinity and 0<a_mu<=b_mu<infinity such that almost everywhere\n\n$$a_\\varepsilon |v|^2\\le v\\cdot\\varepsilon(x)v\\le b_\\varepsilon |v|^2,\\qquad a_\\mu |v|^2\\le v\\cdot\\mu(x)v\\le b_\\mu |v|^2\\quad(v\\in\\mathbb R^3).$$\n\nTheir units are F m^-1 and H m^-1. Pointwise inversion makes mu^-1 measurable, symmetric and essentially bounded, with eigenvalues between b_mu^-1 and a_mu^-1. These coefficient fields are explicit local model data; no material-realization or constitutive derivation is asserted. Let sigma:Omega -> Sym_3(R) be another measurable, essentially bounded, time-independent field with sigma(x) positive semidefinite almost everywhere and units S m^-1. Let J_ext:I -> L^2(Omega;R^3) be continuous in time and have units A m^-2.\n\nDefine the real matrices and current-load vector by\n\n$$ (M_e)_{ij}:=\\int_\\Omega \\phi_i\\cdot\\varepsilon\\phi_j\\,dx,\\qquad (M_b)_{\\alpha\\beta}:=\\int_\\Omega \\psi_\\alpha\\cdot\\mu^{-1}\\psi_\\beta\\,dx,\\qquad S_{ij}:=\\int_\\Omega\\phi_i\\cdot\\sigma\\phi_j\\,dx,\\qquad j_i(t):=\\int_\\Omega\\phi_i\\cdot J_{\\rm ext}(x,t)\\,dx.$$\n\nAll integrals are finite because the mesh is finite, its basis functions are piecewise polynomial, and the coefficient fields are essentially bounded. M_e and M_b are symmetric positive definite on nonzero basis spaces: their quadratic forms are the positive coefficient-weighted L^2 norms of the represented fields; if a basis space is zero-dimensional, the positive-definiteness condition is vacuous. S is symmetric positive semidefinite. The oriented matrices satisfy DC=CG=0. The edge coefficients e_i have units V and the edge basis functions units m^-1; the face coefficients b_alpha have units Wb and the face basis functions units m^-2. The incidence matrices C,D,G are dimensionless, M_e has units F, M_b has units H^-1, S has units S, and j has units A.\n\nFor C1 coefficient vectors e:I -> R^ne and b:I -> R^nb, define E_h(t):=sum_i e_i(t)phi_i and B_h(t):=sum_alpha b_alpha(t)psi_alpha, and put H_h:=mu^-1 B_h in L^2. The perfect-electric-conductor (PEC) semidiscrete model is the weak Galerkin system\n\n$$\\int_\\Omega \\bigl(\\varepsilon\\,\\partial_t E_h+\\sigma E_h+J_{\\rm ext}\\bigr)\\cdot v_h\\,dx=\\int_\\Omega H_h\\cdot\\operatorname{curl}v_h\\,dx\\quad(v_h\\in V_h),\\qquad \\partial_t B_h=-\\operatorname{curl}E_h\\quad\\text{in }M_h.$$\n\nHere H_h is required only to be L^2; no H(curl) regularity or boundary trace for it is asserted. Testing the first identity against the edge basis and expanding the second in the face basis gives exactly M_e dot e=C^T M_b b-Se-j and dot b=-Ce, the finite compatible matrix system. The quadratic semidiscrete energy is the finite Joule-valued quantity one-half times the integral of E_h dot epsilon E_h plus B_h dot mu^-1 B_h.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-na-full-dirichlet-hcurl-regular-decomposition",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $\\Omega\\subset\\mathbb R^3$ be a nonempty bounded Lipschitz open set. There are bounded real linear maps $R:H_0(\\operatorname{curl};\\Omega)\\to H_0^1(\\Omega;\\mathbb R^3)$ and $Q:H_0(\\operatorname{curl};\\Omega)\\to H_0^1(\\Omega)$ such that\n$$u=Ru+\\nabla Qu,\\qquad \\|Ru\\|_{H^1}+\\|Qu\\|_{H^1}\\le C_\\Omega\\|u\\|_{H(\\operatorname{curl})}.$$\nNo contractibility, connected boundary, or mesh hypothesis is required. The scalar estimate uses the full H(curl) norm; no estimate by curl alone is asserted.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-na-uniformly-bounded-commuting-cochain-projection",
+          "source_section": "Statement",
+          "quote": "There is also a boundary-corrected family of projections $\\pi_{h,0}^k:L^2\\Lambda^k(\\Omega)\\to E_{h,0}^k$, where $E_{h,0}^k=E_h^k\\cap H_0\\Lambda^k(\\Omega)$ and $H_0\\Lambda^k$ is the graph closure of compactly supported smooth forms. These have the same uniform bounds, are the identity on $E_{h,0}^k$, and commute in degrees zero through two on the homogeneous complex; the terminal degree-three differential is zero. In particular,\n$$\\pi_{h,0}^0:H_0^1(\\Omega)\\to W_h^0\\cap H_0^1(\\Omega),\\qquad \\pi_{h,0}^1:H_0(\\operatorname{curl};\\Omega)\\to N_h^1\\cap H_0(\\operatorname{curl};\\Omega),\\qquad \\nabla\\pi_{h,0}^0=\\pi_{h,0}^1\\nabla.$$\nHere the zero tangential space uses [[def-na-zero-tangential-hcurl]]. Each family converges strongly in $L^2$ on every $L^2$ form, uniformly on compact $L^2$ subsets, and in the graph norm on its corresponding graph domain. The full and homogeneous families are separate operators. These are cochain projections; canonical edge moments are not asserted bounded on $H(\\operatorname{curl})$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-na-discrete-compactness-and-poincare-lowest-order-nedelec",
+          "source_section": "Statement",
+          "quote": "Assume AC, including its CC and DC consequences. Let $\\Omega\\subset\\mathbb R^3$ be a nonempty bounded contractible Lipschitz polyhedron and let $\\{\\mathcal T_h\\}$ be a shape-regular family of matching affine tetrahedral meshes with $h=\\max_K\\operatorname{diam}K\\to0$. Set $V_h=N_h^1\\cap H_0(\\operatorname{curl};\\Omega)$ and $S_h=W_h^0\\cap H_0^1(\\Omega)$, and define\n$$X_h=\\{v_h\\in V_h:(v_h,\\nabla q_h)_{L^2}=0\\text{ for every }q_h\\in S_h\\}.$$\nEvery sequence $v_h\\in X_h$ bounded in $H(\\operatorname{curl};\\Omega)$ has a subsequence converging strongly in $L^2(\\Omega;\\mathbb R^3)$. Moreover there is $C$ independent of $h$ such that $\\|v_h\\|_2\\le C\\|\\operatorname{curl}v_h\\|_2$ for all $v_h\\in X_h$.\n\nThe precise harmonic-quotient version is as follows. On any bounded Lipschitz polyhedron for which the regular decomposition and relative commuting projections below are proved, put $K=\\ker(\\operatorname{curl}|_{H_0(\\operatorname{curl})})$, $K_h=\\ker(\\operatorname{curl}|_{V_h})$ and\n$$\\mathcal H=K\\cap(\\nabla H_0^1)^\\perp,\\qquad\\mathcal H_h=K_h\\cap(\\nabla S_h)^\\perp.$$\nBoth harmonic spaces are finite dimensional. Discrete compactness still holds on $X_h$, while the uniform curl Poincare inequality holds on $Z_h=V_h\\cap K_h^\\perp=X_h\\cap\\mathcal H_h^\\perp$. A nonzero vector of $\\mathcal H_h$ prevents that inequality on all of $X_h$. These are the harmonic spaces of the relative boundary complex; the full-space absolute cohomology dimensions do not identify them.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For the full clause, [F1] gives exactly the spaces and moment coordinates in [F2]. The finite mesh is matching, its realization is closure(Omega), and Countable Choice is [A1], so all hypotheses of the full discrete de Rham cohomology theorem are met. Applying [F2] gives dim_R H_h^1=beta_1 and dim_R H_h^2=beta_2. These are the full-complex spaces defined in the first clause, not PEC-relative spaces.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For the relative clause, [A2] supplies AC and its stated CC/DC consequences; the domain and refining-mesh hypotheses are those in the Statement; [F4] is the required full-Dirichlet regular decomposition and [F5] gives the exact relative commuting projections on these same spaces. Thus the hypotheses of [F6] hold. It gives discrete compactness on X_h and the mesh-uniform curl Poincare inequality on Z_h. Since B_h is a subspace of K_h and H_h^rel is its L^2-orthogonal complement within the finite-dimensional K_h, the finite-dimensional orthogonal decomposition gives K_h=B_h direct-sum H_h^rel and Z_h=X_h intersect (H_h^rel)^\\perp.",
+          "step": "1.2",
+          "inputs": [
+            "A2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If h in H_h^rel is nonzero, then h in K_h so curl h=0; also h is orthogonal to B_h, hence h belongs to X_h, and ||h||_2>0. Therefore no estimate ||v_h||_2<=C||curl v_h||_2 can hold on that X_h. This is the stated reason that removing only relative gradients can leave zero modes. It makes no claim that H_h^rel has the absolute dimensions beta_1 or beta_2; those numbers belong only to the full complex in step 1.1.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F6",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement supplies the refining mesh family used in step 1.2. Zero Betti numbers and empty bases are allowed: step 1.1 gives zero-dimensional absolute harmonic spaces, and the relative orthogonal decomposition still includes zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 yields zero-dimensional absolute harmonic spaces when beta_1=beta_2=0. In steps 1.2 and 2.1 the zero relative harmonic space is harmless; an obstruction to a curl estimate requires a nonzero harmonic vector."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The claim compares cohomological dimensions and mesh families; it has no one-object exception."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.2–2.1 distinguish zero relative harmonic space from a nonzero zero-curl mode and apply the quotient inequality only on Z_h."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The family parameter h tends to zero but no endpoint of a time interval is involved."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 applies the relative theorem under the explicitly stated Axiom of Choice and its CC/DC consequences."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem contains no iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem contains no iff claim."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "single tetrahedron full complex",
+          "status": "checked",
+          "evidence": "A tetrahedron is contractible, so beta_1=beta_2=0 and step 1.1 gives zero full-complex harmonic dimensions."
+        }
+      ],
+      "finite_checks_disposition": "The tetrahedron check is only for the full absolute clause; the relative family conclusion is proved separately under its own hypotheses.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha batch-12",
+        "notes": "Verified full Whitney cochain isomorphism, homology-dual finite dimensions, and relative-complex separation against the full cohomology and discrete compactness supplier statements/proofs. General-domain quotient clause, rather than its contractible branch, supplies compactness on X_h and curl estimate on Z_h under AC and the explicitly assumed full-Dirichlet regular decomposition/projections. Finite orthogonal complement proves kernel split; a nonzero harmonic vector obstructs X_h estimate. Diagram arrows and moment signs agree with boundary coboundaries in every square; proof is independent. No absolute Betti count is assigned to PEC modes."
+      }
+    },
+    "cex-emx-edge-moment-domain-failure": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-na-hcurl-space",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice for weak-derivative uniqueness and the real $L^2$ product below, and let $\\Omega\\subset\\mathbb R^3$ be open. Here $L^2(\\Omega;\\mathbb R^3)$ is the set of triples of real scalar $L^2$ classes from [[def-l-p-space-as-a-quotient-by-null-functions]]. Define\n$$ (u,v)_{L^2(\\Omega)}:=\\sum_{j=1}^3\\int_\\Omega u_jv_j\\,dx,\\qquad \\|u\\|_{L^2(\\Omega)}^2:=\\sum_{j=1}^3\\|u_j\\|_{L^2(\\Omega)}^2. $$\nEach scalar pairing is well-defined and induces its quotient norm by [[lem-l-two-with-the-integral-pairing-is-a-hilbert-space]]; the finite sum is therefore a real inner product on the triple space with the displayed norm. A test field $\\varphi\\in C_c^\\infty(\\Omega;\\mathbb R^3)$ means a triple of real-valued members of the test-function space $\\mathcal D(\\Omega)$ of [[def-test-function-space-d-of-an-open-set]]. Writing $\\varphi=(\\varphi_x,\\varphi_y,\\varphi_z)$, its classical curl is the coordinate expression of [[def-divergence-and-curl-of-a-c1-vector-field]],\n$$\\operatorname{curl}\\varphi=(\\partial_y\\varphi_z-\\partial_z\\varphi_y,\\partial_z\\varphi_x-\\partial_x\\varphi_z,\\partial_x\\varphi_y-\\partial_y\\varphi_x).$$\nFor $u\\in L^2(\\Omega;\\mathbb R^3)$, its distributional curl is the triple of scalar distributions whose action on a vector test field is the sum of the three component pairings, determined by\n$$\\langle \\operatorname{curl}u,\\varphi\\rangle=\\int_\\Omega u\\cdot\\operatorname{curl}\\varphi\\,dx,\\qquad \\varphi\\in C_c^\\infty(\\Omega;\\mathbb R^3).$$\nThe integral is finite because $u$ and the smooth compactly supported field $\\operatorname{curl}\\varphi$ are componentwise in $L^2$ and scalar Cauchy–Schwarz applies. On tests supported in a fixed compact $K\\Subset\\Omega$, the same estimate gives $|\\langle\\operatorname{curl}u,\\varphi\\rangle|\\le C_{u,K}\\max_{|\\alpha|\\le1}\\sup_K|D^\\alpha\\varphi|$ with a finite $C_{u,K}$. This proves continuity on each fixed-support test space; the LF universal property of [[lem-test-function-lf-topology-universal-property]], for the test topology of [[def-test-function-topology]], makes the pairing a vector distribution on $\\Omega$.\nIf this vector distribution is represented by an $L^2(\\Omega;\\mathbb R^3)$ class, that class is unique almost everywhere componentwise by the injection of locally integrable functions into scalar distributions in [[thm-locally-integrable-functions-embed-in-distributions]], under the stated Countable Choice assumption.\nDefine\n$$H(\\operatorname{curl};\\Omega)=\\{u\\in L^2(\\Omega;\\mathbb R^3):\\operatorname{curl}u\\text{ is represented by an element of }L^2(\\Omega;\\mathbb R^3)\\}$$\nwith graph norm $\\|u\\|_{H(\\operatorname{curl};\\Omega)}^2=\\|u\\|_{L^2(\\Omega)}^2+\\|\\operatorname{curl}u\\|_{L^2(\\Omega)}^2$. No boundary condition is imposed by this definition. Fields are real-valued; equality is equality of almost-everywhere classes.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-emx-whitney-semidescretization",
+          "source_section": "Definition",
+          "quote": "On K with barycentric coordinates lambda_0,...,lambda_3, the lowest-order Whitney edge space is spanned by phi_ij=lambda_i grad(lambda_j)-lambda_j grad(lambda_i) for its six oriented edges. Globally N_h^1 consists of these piecewise fields with one common oriented circulation integral_e u dot t_e ds on each shared edge e, where t_e is its chosen unit tangent; it is H(curl)-conforming.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-na-lowest-order-whitney-de-rham-spaces",
+          "source_section": "Definition",
+          "quote": "Let $\\Omega\\subset\\mathbb R^3$ have a finite matching affine tetrahedral mesh $\\mathcal T$ as in [[def-matching-affine-simplicial-meshes]]. The H(curl) and H(div) graph-space conventions used below carry their stated Countable Choice assumptions. Choose one orientation for every mesh edge and face and the ambient orientation for each tetrahedron, with incidence signs given by [[def-oriented-simplicial-cell-chains]]. Write $t_e$ for the unit tangent in the chosen direction of an edge $e$, and $n_F$ for the unit normal determined by the chosen orientation of a face $F$ and the ambient orientation. On a tetrahedron $K$ with barycentric coordinates $\\lambda_0,\\lambda_1,\\lambda_2,\\lambda_3$, list the vertices in any order and let $P_1(K)$ denote scalar polynomials of total degree at most one. For an ordered edge $[i,j]$, put $\\phi_{ij}=\\lambda_i\\nabla\\lambda_j-\\lambda_j\\nabla\\lambda_i$; reversing its orientation changes the sign. Set\n$$W_h^0:=\\{q\\in C^0(\\overline\\Omega):q|_K\\in P_1(K)\\text{ for every }K\\in\\mathcal T\\}.$$\nThe first-family lowest-order Nedelec space is\n$$N_h^1:=\\{u\\in H(\\operatorname{curl};\\Omega):u|_K\\in\\operatorname{span}\\{\\phi_{ij}:0\\le i<j\\le3\\}\\text{ for every }K\\in\\mathcal T,\\text{ and every global edge }e\\text{ has one common oriented circulation }\\int_e u|_K\\cdot t_e\\,ds\\text{ for all }K\\supset e\\}.$$\nThe local Raviart–Thomas space is $RT_0(K)=\\{a+c x:a\\in\\mathbb R^3,\\ c\\in\\mathbb R\\}$. With $H(\\operatorname{div};\\Omega)$ as defined by [[def-na-hdiv-space]], set\n$$N_h^2:=\\{v\\in H(\\operatorname{div};\\Omega):v|_K\\in RT_0(K)\\text{ for every }K\\in\\mathcal T,\\text{ and every global face }F\\text{ has one common oriented flux }\\int_F v|_K\\cdot n_F\\,dS\\text{ for all }K\\supset F\\},\\qquad N_h^3:=\\{q\\in L^2(\\Omega):q|_K\\text{ is constant for every }K\\in\\mathcal T\\}.$$\nThe covariant affine Piola map for $N_h^1$ and contravariant affine Piola map for $N_h^2$ use the orientation-preserving cell maps and conventions of [[def-covariant-contravariant-piola-maps-and-hdiv-hcurl]]. Their differential and moment identities are those of [[thm-affine-piola-differential-and-trace-moment-identities]]. The edge, face, and cell degrees of freedom are respectively the oriented edge circulation, oriented face-normal flux, and cell integral.\n\nIn the two conformity conditions above, each cellwise polynomial restriction has a unique polynomial representative on its closed cell, and those representatives define the displayed edge and face integrals. Thus the global edge and face moments are part of the assembled-space definition; their correspondence with all cochains is proved by the local unisolvence and commuting-moment items, not inferred from rough-field traces.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-na-uniformly-bounded-commuting-cochain-projection",
+          "source_section": "Statement",
+          "quote": "There is also a boundary-corrected family of projections $\\pi_{h,0}^k:L^2\\Lambda^k(\\Omega)\\to E_{h,0}^k$, where $E_{h,0}^k=E_h^k\\cap H_0\\Lambda^k(\\Omega)$ and $H_0\\Lambda^k$ is the graph closure of compactly supported smooth forms. These have the same uniform bounds, are the identity on $E_{h,0}^k$, and commute in degrees zero through two on the homogeneous complex; the terminal degree-three differential is zero. In particular,\n$$\\pi_{h,0}^0:H_0^1(\\Omega)\\to W_h^0\\cap H_0^1(\\Omega),\\qquad \\pi_{h,0}^1:H_0(\\operatorname{curl};\\Omega)\\to N_h^1\\cap H_0(\\operatorname{curl};\\Omega),\\qquad \\nabla\\pi_{h,0}^0=\\pi_{h,0}^1\\nabla.$$\nHere the zero tangential space uses [[def-na-zero-tangential-hcurl]]. Each family converges strongly in $L^2$ on every $L^2$ form, uniformly on compact $L^2$ subsets, and in the graph norm on its corresponding graph domain. The full and homogeneous families are separate operators. These are cochain projections; canonical edge moments are not asserted bounded on $H(\\operatorname{curl})$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let u_0 be zero everywhere. Define a second measurable representative u_1 to equal t_e on e and zero on Omega minus e. A line segment has three-dimensional Lebesgue measure zero, so u_0 and u_1 represent the same zero L^2 class. Their distributional curls are both the zero distribution by the integral definition in [F1]; hence they represent the same element of H(curl;Omega).",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Using the displayed representatives, the oriented edge integral of u_0 is zero, while that of u_1 is integral_e |t_e|^2 ds=length(e)>0. Therefore this integral is not a function of the H(curl) equivalence class, which refutes the universal raw edge-sampling claim. This does not affect the polynomial Whitney moments in [F2].",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The counterexample concerns only unregularized line restriction. Under the distinct hypotheses in [F3], a smoothed relative commuting projection is available; its construction is not an edge-by-edge evaluation of the arbitrary H(curl) representative. Thus it supplies no missing edge trace to the refuted map and is consistent with steps 1.1-2.1.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The segment is assumed to have positive length and is contained in a nonempty open domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the zero H(curl) equivalence class and constructs a second representative of that same class."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The counterexample concerns one explicit segment and has no one-object exceptional case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 show that the segment has positive one-dimensional length but zero three-dimensional measure."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint limit or endpoint trace is asserted; the segment is interior."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly defines both representatives; no choice from a family of sets is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The refuted claim is a universal well-definedness assertion, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The refuted claim is a universal well-definedness assertion, not an iff."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "representative change on a segment of length L",
+          "status": "checked",
+          "evidence": "Step 1.1 gives the same zero H(curl) class, while step 2.1 gives raw integrals 0 and L>0."
+        }
+      ],
+      "finite_checks_disposition": "This explicit null-set modification witnesses failure of representative independence; it does not address polynomial Whitney moments.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha batch-12",
+        "notes": "Null-set representative change is explicit and measurable on a positive-length interior segment. Both fields are the zero L2 class with zero distributional curl, but raw integrals are 0 and length(e)>0. No endpoint trace or universal integrability is needed for this pair. Polynomial Whitney representatives and smoothed projections are correctly separated. Existing supplier clarification preserves this use; no statistical or empirical inference."
+      }
+    },
+    "ex-emx-resonance-outside-coercivity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "pthm-em-rectangular-mode-candidates",
+          "source_section": "Statement",
+          "quote": "(b) [TM family] For integers $m,n\\ge1$ put $e_{mn}:=\\sin\\frac{m\\pi x_1}{a}\\sin\\frac{n\\pi x_2}{b}$, $k_{mn}^2:=(\\frac{m\\pi}{a})^2+(\\frac{n\\pi}{b})^2$, require $\\beta^2=\\omega^2\\varepsilon\\mu-k_{mn}^2$, and define $$\\tilde E:=E_*\\left(\\frac{i\\beta}{k_{mn}^2}\\nabla_te_{mn}+e_ze_{mn}\\right),\\qquad \\tilde H:=E_*\\frac{i\\omega\\varepsilon}{k_{mn}^2}\\,e_z\\times\\nabla_te_{mn}.$$ Then the corresponding real fields are $C^\\infty$, have $B_z=0$ (TM), satisfy the same four equations and the same boundary conditions on the open walls.\n(c) [Index restrictions] For $m=n=0$ one has $\\nabla_th_{00}=0$ and $k_{00}^2=0$ makes the displayed divided reconstruction formulas undefined. A purely longitudinal constant-profile magnetic amplitude with zero electric amplitude cannot be a nonzero monochromatic Maxwell candidate: Faraday gives $0=i\\omega\\mu\\tilde H$, hence $\\tilde H=0$ because $\\omega>0$. At $\\beta=0$ a constant $H_z$ is divergence-free, so divergence alone does not exclude it. Thus $(0,0)$ is excluded by the full field equations and the reconstruction denominator, not by a false divergence claim; for $m=0$ or $n=0$ the TM profile $e_{mn}$ vanishes identically, so TM indices are restricted to $m,n\\ge1$; conversely for $(m,n)\\ne(0,0)$ (resp. $m,n\\ge1$) the displayed profiles and fields are nonzero.\n(d) [Dispersion and cutoff] On the declared family, $k_c^2=\\omega^2\\varepsilon\\mu-\\beta^2$ defines the cutoff $\\omega_c:=k_c/\\sqrt{\\varepsilon\\mu}>0$; real longitudinal wave numbers with $\\beta^2=\\omega^2\\varepsilon\\mu-k_c^2$ exist exactly for $\\omega\\ge\\omega_c$, with $\\beta\\ne0$ exactly for $\\omega>\\omega_c$ and $\\beta=0$ at $\\omega=\\omega_c$; for $\\omega<\\omega_c$ the two algebraic roots are $\\beta=\\pm i\\sqrt{k_c^2-\\varepsilon\\mu\\omega^2}$, and the same verified separated fields have the factor $e^{-\\operatorname{Im}\\beta x_3}$; a declared half-guide may select the decaying sign, and no propagating-power claim is made there.\n(e) [Scope] These are separated candidate modes of the declared lossless model; the theorem asserts no completeness, no uniqueness among fields with the same data, and no lossy, dispersive or open-end behaviour, and it assumes the PEC model of the definition, not the physical infinite-conductivity limit.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-na-hcurl-space",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice for weak-derivative uniqueness and the real $L^2$ product below, and let $\\Omega\\subset\\mathbb R^3$ be open. Here $L^2(\\Omega;\\mathbb R^3)$ is the set of triples of real scalar $L^2$ classes from [[def-l-p-space-as-a-quotient-by-null-functions]]. Define\n$$ (u,v)_{L^2(\\Omega)}:=\\sum_{j=1}^3\\int_\\Omega u_jv_j\\,dx,\\qquad \\|u\\|_{L^2(\\Omega)}^2:=\\sum_{j=1}^3\\|u_j\\|_{L^2(\\Omega)}^2. $$\nEach scalar pairing is well-defined and induces its quotient norm by [[lem-l-two-with-the-integral-pairing-is-a-hilbert-space]]; the finite sum is therefore a real inner product on the triple space with the displayed norm. A test field $\\varphi\\in C_c^\\infty(\\Omega;\\mathbb R^3)$ means a triple of real-valued members of the test-function space $\\mathcal D(\\Omega)$ of [[def-test-function-space-d-of-an-open-set]]. Writing $\\varphi=(\\varphi_x,\\varphi_y,\\varphi_z)$, its classical curl is the coordinate expression of [[def-divergence-and-curl-of-a-c1-vector-field]],\n$$\\operatorname{curl}\\varphi=(\\partial_y\\varphi_z-\\partial_z\\varphi_y,\\partial_z\\varphi_x-\\partial_x\\varphi_z,\\partial_x\\varphi_y-\\partial_y\\varphi_x).$$\nFor $u\\in L^2(\\Omega;\\mathbb R^3)$, its distributional curl is the triple of scalar distributions whose action on a vector test field is the sum of the three component pairings, determined by\n$$\\langle \\operatorname{curl}u,\\varphi\\rangle=\\int_\\Omega u\\cdot\\operatorname{curl}\\varphi\\,dx,\\qquad \\varphi\\in C_c^\\infty(\\Omega;\\mathbb R^3).$$\nThe integral is finite because $u$ and the smooth compactly supported field $\\operatorname{curl}\\varphi$ are componentwise in $L^2$ and scalar Cauchy–Schwarz applies. On tests supported in a fixed compact $K\\Subset\\Omega$, the same estimate gives $|\\langle\\operatorname{curl}u,\\varphi\\rangle|\\le C_{u,K}\\max_{|\\alpha|\\le1}\\sup_K|D^\\alpha\\varphi|$ with a finite $C_{u,K}$. This proves continuity on each fixed-support test space; the LF universal property of [[lem-test-function-lf-topology-universal-property]], for the test topology of [[def-test-function-topology]], makes the pairing a vector distribution on $\\Omega$.\nIf this vector distribution is represented by an $L^2(\\Omega;\\mathbb R^3)$ class, that class is unique almost everywhere componentwise by the injection of locally integrable functions into scalar distributions in [[thm-locally-integrable-functions-embed-in-distributions]], under the stated Countable Choice assumption.\nDefine\n$$H(\\operatorname{curl};\\Omega)=\\{u\\in L^2(\\Omega;\\mathbb R^3):\\operatorname{curl}u\\text{ is represented by an element of }L^2(\\Omega;\\mathbb R^3)\\}$$\nwith graph norm $\\|u\\|_{H(\\operatorname{curl};\\Omega)}^2=\\|u\\|_{L^2(\\Omega)}^2+\\|\\operatorname{curl}u\\|_{L^2(\\Omega)}^2$. No boundary condition is imposed by this definition. Fields are real-valued; equality is equality of almost-everywhere classes.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-na-zero-tangential-hcurl",
+          "source_section": "Definition",
+          "quote": "Let $\\Omega\\subset\\mathbb R^3$ be open and set\n$$H_0(\\operatorname{curl};\\Omega):=\\overline{C_c^\\infty(\\Omega;\\mathbb R^3)}^{\\,H(\\operatorname{curl};\\Omega)},$$\nwhere the norm is that of [[def-na-hcurl-space]]. This is the closure-defined zero-tangential subspace used on this page. Identifying this closure with the full kernel of a particular boundary trace map is not part of the definition.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "pthm-emx-coercive-maxwell-galerkin",
+          "source_section": "Statement",
+          "quote": "Let s>0 be a real frequency-shift parameter in s^-1, let F:V -> R be a bounded real linear functional scaled so that F(v) has units W s^-1 when v has electric-field units V m^-1, and define\n\n$$a_s(u,v):=\\int_\\Omega\\left(\\mu^{-1}\\operatorname{curl}u\\cdot\\operatorname{curl}v+s^2\\varepsilon u\\cdot v\\right)\\,dx.$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put k^2=k_mn^2. Since -Delta_t f_mn=k^2 f_mn and u=E_* f_mn e_z, direct coordinate differentiation gives curl u=E_*(partial_y f_mn,-partial_x f_mn,0) and curl curl u=E_*(0,0,-Delta_t f_mn)=k^2u. The field is nonzero because f_mn(a/(2m),b/(2n))=1 and E_*>0. The end-wall tangential trace is zero because u is normal to z=0,d; on x=0,a and y=0,b the whole field vanishes because the corresponding sine factor is zero. By [F1], B_z=0 for this TM mode, so n dot B=0 on the end walls; [F1] gives the same condition on the four side walls. Thus the field satisfies the PEC electric and magnetic wall conditions.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "To verify the closure-defined condition in [F2], choose smooth one-dimensional cutoffs chi_delta^x,chi_delta^y,chi_delta^z that vanish within distance delta of their interval endpoints, equal one at distance at least 2delta, take values in [0,1], and satisfy |(chi_delta^.)'|<=C/delta. Put chi_delta=chi_delta^x chi_delta^y chi_delta^z and u_delta=chi_delta u; then u_delta is compactly supported and smooth in Omega. The L^2 norm of u_delta-u tends to zero because its support lies in boundary layers of volume O(delta). Also curl(u_delta-u)=(chi_delta-1)curl u+grad(chi_delta) x u. The first term tends to zero in L^2 by the same shrinking-support bound. In the second term, the z-cutoff derivative is parallel to u and has zero cross product; on the x- and y-boundary layers, |f_mn|<=C delta by the vanishing sine factor, so each remaining product |(chi_delta^.)' f_mn| is uniformly bounded on a set of volume O(delta), and its L^2 norm tends to zero. Hence u_delta->u in the H(curl) graph norm and u lies in H_0(curl;Omega).",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For every v in C_c^\\infty(Omega;R3), the distributional-curl definition and the smoothness of u give integral(curl u dot curl v)=integral(curl curl u dot v)=k^2 integral(u dot v). The identity extends to every v in H_0(curl;Omega) because C_c^\\infty is graph-dense there and both pairings are continuous in that norm. Since omega_mn^2 epsilon=k^2/mu, the real-frequency form satisfies $\\int_\\Omega\\left(\\mu^{-1}\\operatorname{curl}u\\cdot\\operatorname{curl}v-\\omega_{mn}^2\\varepsilon u\\cdot v\\right)\\,dx=0\\quad(v\\in H_0(\\operatorname{curl};\\Omega))$. Taking v=u gives a_omega(u,u)=0. Since u is nonzero, ||u||_{V,ell_0}>0 for every ell_0>0, so the form is not coercive and the zero-forcing weak problem has both the zero solution and a nonzero solution. This is an actual real-frequency cavity resonance and does not contradict the positive-shift theorem, which assumes real s>0 and a plus sign.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The domain has positive side lengths and the indices satisfy m,n>=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 evaluates the field at an interior point and proves the selected amplitude is nonzero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 permits the first index choice m=n=1 and verifies the same field identities."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 proves closure-defined PEC membership through cutoffs, including the corner boundary layers."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies zero tangential field on the end walls z=0,d and on the side walls."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 constructs the cutoff family explicitly from one-dimensional smooth cutoffs."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example establishes a kernel vector and no iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example establishes a kernel vector and no iff claim."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "first TM index pair",
+          "status": "checked",
+          "evidence": "For m=n=1, step 1.1 has f(a/2,b/2)=1 and k^2=(pi/a)^2+(pi/b)^2>0, so u is nonzero."
+        }
+      ],
+      "finite_checks_disposition": "The first admissible mode checks nonvanishing; steps 1.1–3.1 establish the general indexed resonance example.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha batch-12",
+        "notes": "Checked positive root and frequency units, all m,n>=1 including first mode, curl-curl=k^2 u, nonvanishing on an interior neighborhood, PEC side/end electric and normal-magnetic conditions against TM supplier. Boundary-layer cutoffs give graph convergence: z derivative cross u vanishes and x/y sine factors cancel 1/delta; corner overlaps do not change O(delta) bounds. Test identity extends by graph density and omega^2 epsilon=k^2/mu gives nonzero weak kernel. Positive-shift supplier is used only for comparison of the plus sign; no unqualified existence result or broadband material claim is imported. Reader changes accepted; no consumer repair required."
+      }
+    }
+  }
+}

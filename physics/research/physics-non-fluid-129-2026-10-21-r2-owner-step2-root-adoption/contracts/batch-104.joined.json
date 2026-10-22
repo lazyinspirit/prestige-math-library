@@ -1,0 +1,575 @@
+{
+  "version": 1,
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "batch": "104",
+  "level": 2,
+  "scope": [
+    "thm-qsmx-toric-ground-space",
+    "lem-qsmx-toric-local-pauli-centralizer",
+    "thm-qsmx-toric-strings-and-local-tests",
+    "ex-qsmx-toric-defect-pair"
+  ],
+  "contracts": {
+    "thm-qsmx-toric-ground-space": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "> Every family of nonempty sets has a choice function",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qsmx-toric-cellular-hamiltonian",
+          "source_section": "Definition",
+          "quote": "For a vertex $v$ and face $f$, put $A_v=X(\\partial_1^T v)$ and $B_f=Z(\\partial_2 f)$, where $v$ and $f$ also denote the corresponding basis vectors. Thus $A_v$ is the product of $X$ over incident edges with odd incidence, and $B_f$ is the product of $Z$ over boundary edges with odd incidence. The identity $\\partial_1\\partial_2=0$ makes every $A_v$ commute with every $B_f$; each is a self-adjoint involution.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-orientable-compact-surface-has-euler-characteristic-two-minus-two-g",
+          "source_section": "Statement",
+          "quote": "A nonempty compact connected orientable boundaryless topological surface $S$ has a unique genus $g\\in\\mathbb Z_{\\geq0}$ and Euler characteristic $\\chi(S)=2-2g$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $\\partial_1\\partial_2=0$, the supports of $A_v$ and $B_f$ overlap in even parity, so they commute. Each is a self-adjoint involution; hence $(I-A_v)/2$ and $(I-B_f)/2$ are commuting orthogonal projections. Multiplication by the positive coefficients makes each summand positive semidefinite.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The product of all vertex operators is $I$, because each edge has two endpoint incidences counted modulo two. The product of all face operators is $I$, because the closed surface has two incident face sides at each edge. Therefore any simultaneous joint eigenvalue assignment has an even number of violated vertex constraints and an even number of violated face constraints.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "The image of $\\partial_1$ is the even-parity subspace of $\\mathbb F_2^V$: every edge boundary has even parity, while for a fixed vertex $v_0$, a path to each $v\\ne v_0$ has boundary $v+v_0$, and these vectors span that subspace. Thus $\\operatorname{rank}\\partial_1=|V|-1$. A vertex coefficient vector lies in $\\ker\\partial_1^T$ exactly when it is orthogonal to this even-parity subspace; this orthogonal complement consists of the constant vectors and has dimension one. Rank-nullity gives $\\operatorname{rank}\\partial_1^T=|V|-1$, the number of independent vertex stabilizers. A face 2-chain is in $\\ker\\partial_2$ exactly when its coefficients agree across adjacent faces; dual-graph connectedness makes this kernel the one-dimensional constant subspace, so $\\operatorname{rank}\\partial_2=|F|-1$, the number of independent face stabilizers. Hence the combined stabilizer group has rank $r=|V|+|F|-2$.",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Choose independent generators $S_1,\\ldots,S_r$ from those commuting involutions and set $\\Pi=2^{-r}\\prod_{j=1}^r(I+S_j)$. This is an orthogonal projection. Independence of the vertex and face support vectors implies that its $2^r$ Pauli terms are distinct and only the all-identity term is the identity matrix. Every other Pauli term has trace zero because at least one tensor factor is $X$, $Z$, or $XZ$, each of which has trace zero. Thus $\\operatorname{Tr}\\Pi=2^{-r}2^{|E|}>0$, so the common $+1$ eigenspace is nonzero and has dimension $2^{|E|-r}$. The positive Hamiltonian vanishes exactly on that eigenspace, proving frustration freeness and identifying the ground space.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 1.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Put $m=\\min(\\{J_v\\}\\cup\\{K_f\\})$. In a joint eigenvector outside the ground space, at least one constraint is violated; by the two product identities of step 1.2, at least two constraints of that same type are violated. Each contributes at least $m$, so every excited eigenvalue is at least $2m$ above the ground energy zero. If the orthogonal complement of the ground space is zero, the stated $+\\infty$ convention applies.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The dimension found in step 2.1 is $2^{|E|-|V|-|F|+2}$. By [F2], under [A1], $|V|-|E|+|F|=2-2g$, so $|E|-|V|-|F|+2=2g$. Therefore the ground-space dimension is $2^{2g}$.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "On the uniform square torus, applying $Z$ on one edge to any ground vector flips exactly the two distinct endpoint vertex eigenvalues and no face eigenvalue, giving an excited vector of energy $2J$. Applying $X$ on one edge flips exactly the two adjacent face eigenvalues and no vertex eigenvalue, giving an excited vector of energy $2K$. The lower bound of step 2.2 is $2\\min(J,K)$, and one of these two constructions attains it. Thus the exact first-excitation cost is $2\\min(J,K)$.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "step 2.2",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The hypotheses require a nonempty closed surface cellulation and a finite edge-qubit space.",
+          "case_reasoning": "The hypotheses require a nonempty closed surface cellulation and a finite edge-qubit space. The common +1 stabilizer eigenspace is nonzero by its projection trace; positive penalties identify it with the ground space. Parity forces at least two violations and allows the +infinity gap convention when no excited subspace exists."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero couplings are excluded by J_v,K_f>0. Zero Hamiltonian eigenvalue is included: step 2.1 proves a nonzero common +1 eigenspace with energy zero. If there are no positive eigenvalues, step 2.2 uses the explicit +infinity gap convention.",
+          "case_reasoning": "Zero couplings are excluded by J_v,K_f>0. Zero Hamiltonian eigenvalue is included: step 2.1 proves a nonzero common +1 eigenspace with energy zero. If there are no positive eigenvalues, step 2.2 uses the explicit +infinity gap convention. The common +1 stabilizer eigenspace is nonzero by its projection trace; positive penalties identify it with the ground space. Parity forces at least two violations and allows the +infinity gap convention when no excited subspace exists."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For genus zero, step 3.1 gives ground dimension 2^0=1.",
+          "case_reasoning": "For genus zero, step 3.1 gives ground dimension 2^0=1. The common +1 stabilizer eigenspace is nonzero by its projection trace; positive penalties identify it with the ground space. Parity forces at least two violations and allows the +infinity gap convention when no excited subspace exists."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1 compute the full eigenspace dimension 2^(2g) without a simplicity assumption.",
+          "case_reasoning": "Steps 2.1 and 3.1 compute the full eigenspace dimension 2^(2g) without a simplicity assumption. The common +1 stabilizer eigenspace is nonzero by its projection trace; positive penalties identify it with the ground space. Parity forces at least two violations and allows the +infinity gap convention when no excited subspace exists."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The theorem has no path parameter or endpoint hypothesis.",
+          "case_reasoning": "The theorem has no path parameter or endpoint hypothesis. The common +1 stabilizer eigenspace is nonzero by its projection trace; positive penalties identify it with the ground space. Parity forces at least two violations and allows the +infinity gap convention when no excited subspace exists."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Choice is explicit in [A1] and used through [F2] in step 3.1; no other arbitrary selection is made.",
+          "case_reasoning": "Choice is explicit in [A1] and used through [F2] in step 3.1; no other arbitrary selection is made. The common +1 stabilizer eigenspace is nonzero by its projection trace; positive penalties identify it with the ground space. Parity forces at least two violations and allows the +infinity gap convention when no excited subspace exists."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "At the ground-space identification in step 2.1, zero energy for a sum of positive weighted commuting penalty projections forces every penalty to vanish, so every stabilizer has eigenvalue +1.",
+          "case_reasoning": "At the ground-space identification in step 2.1, zero energy for a sum of positive weighted commuting penalty projections forces every penalty to vanish, so every stabilizer has eigenvalue +1. The common +1 stabilizer eigenspace is nonzero by its projection trace; positive penalties identify it with the ground space. Parity forces at least two violations and allows the +infinity gap convention when no excited subspace exists."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Conversely, a vector in every stabilizer +1 eigenspace has every penalty zero and hence H_K=0, as used in step 2.1. This is the ground-space identification, not a converse perturbation or stability theorem.",
+          "case_reasoning": "Conversely, a vector in every stabilizer +1 eigenspace has every penalty zero and hence H_K=0, as used in step 2.1. This is the ground-space identification, not a converse perturbation or stability theorem. The common +1 stabilizer eigenspace is nonzero by its projection trace; positive penalties identify it with the ground space. Parity forces at least two violations and allows the +infinity gap convention when no excited subspace exists."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "sphere genus zero",
+          "calculation": "For a sphere cellulation with V−E+F=2, the exponent E−V−F+2 is 0.",
+          "result": "The stated ground dimension is 1 by step 3.1, as also follows from the cell count."
+        },
+        {
+          "case": "uniform 3-by-3 square torus",
+          "calculation": "V=9, E=18, F=9; the independent stabilizer count is 16 and the ground dimension is 2^(18−16)=4.",
+          "result": "The projector count is 2^(18−16)=4, and step 4.1 attains cost 2 min(J,K)."
+        }
+      ],
+      "current_boundary_worksheet": {
+        "proposal": "research/physics-non-fluid-129-2026-10-21-r2-owner-step2-boundary-proposal-5/proposal.json",
+        "source_sha256": "38e9bdf600f980b768ea3473038e33ea2aa17cba8d4dc9cc3cacef7186b42682",
+        "qualification": "Released complete current source/eight-case semantic worksheet; root transcribed exact current rows. No independent acceptance or finite computation asserted."
+      }
+    },
+    "lem-qsmx-toric-local-pauli-centralizer": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qsmx-toric-cellular-hamiltonian",
+          "source_section": "Definition",
+          "quote": "For the square $L\\times L$ torus, $L\\ge3$, use vertices $\\mathbb Z_L^2$, horizontal and vertical nearest-neighbor edges, and the $L^2$ square faces, with periodic boundary conditions.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Commutation of $P(a,b)$ with every $A_v$ gives $b\\cdot\\partial_1^Tv=0$ for every vertex basis vector $v$, hence $\\partial_1b=0$. Commutation with every $B_f$ gives $a\\cdot\\partial_2f=0$ for every face basis vector $f$, hence $\\partial_2^Ta=0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The image of $\\partial_1$ is the even-parity subspace of $C_0$: each edge boundary has even parity, while a path from a fixed vertex $v_0$ to any $v\\ne v_0$ has boundary $v+v_0$, and these vectors span that subspace. Thus $\\operatorname{rank}\\partial_1=|V|-1$. A 2-chain lies in $\\ker\\partial_2$ exactly when its coefficients agree across every adjacent pair of faces; dual-graph connectedness makes these coefficients constant, so $\\dim\\ker\\partial_2=1$ and $\\operatorname{rank}\\partial_2=|F|-1$. Rank-nullity gives $\\dim H_1(K_L;\\mathbb F_2)=|E|-(|V|-1)-(|F|-1)=2$. The mod-two intersection pairing with a closed dual cycle vanishes on every face boundary, since each face boundary meets that closed dual cycle an even number of times; it is therefore well defined on $H_1$. The matrix $I(p_i,q_j)=\\delta_{ij}$ proves that $p_1,p_2$ are independent; by the dimension calculation they form a basis, and $q_1,q_2$ detect the two coefficients of every homology class.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $b$ is a cycle and its support is disjoint from $q_1,q_2$, its two intersection numbers vanish. The intersection matrix and the two-dimensionality in step 1.2 imply that $b$ has zero homology class; by the definition of $H_1=\\ker\\partial_1/\\operatorname{im}\\partial_2$, there is a face chain $w$ with $b=\\partial_2w$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "The cochain $a$ vanishes on $p_1,p_2$ because its support is disjoint from them. It also vanishes on every boundary $\\partial_2w'$ because $\\partial_2^Ta=0$. Since $p_1,p_2$ represent a basis of $H_1$, every 1-cycle is a sum of their representatives and a boundary; hence $a$ vanishes on every 1-cycle. Define $\\phi$ on $\\operatorname{im}\\partial_1$ by $\\phi(\\partial_1c)=a\\cdot c$. This is well defined because two chains with the same boundary differ by a cycle, on which $a$ vanishes. Extend $\\phi$ linearly to $C_0$ by extending a basis of the finite-dimensional subspace $\\operatorname{im}\\partial_1$. Then $a=\\partial_1^T\\phi$, so take $u=\\phi$.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By $a=\\partial_1^Tu$ and $b=\\partial_2w$, $X(a)$ is the product of $A_v$ over vertices with $u_v=1$, and $Z(b)$ is the product of $B_f$ over faces with $w_f=1$. Therefore $P(a,b)=X(a)Z(b)$ is the product of those vertex and face stabilizers.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For a=b=0, step 3.1 gives the empty product of stabilizers, the identity."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero chain and cochain are included in the linear arguments of step 3.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At the minimal stated size L=3, step 1.2 computes 18−8−8=2 for dim H1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The rank proof in step 1.2 allows all stabilizer relations implied by the connected primal and dual graphs."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No path parameter or endpoint is part of the lemma."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.2 extends a basis only in a finite-dimensional vector space; no arbitrary-index choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a sufficient condition, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is a sufficient condition, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "L=3 cellular ranks",
+          "calculation": "V=9, E=18, F=9, rank(∂1)=8 and rank(∂2)=8.",
+          "result": "dim H1=18−8−8=2 by step 1.2, and the coordinate cycles have the stated identity crossing matrix."
+        }
+      ]
+    },
+    "thm-qsmx-toric-strings-and-local-tests": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "> Every family of nonempty sets has a choice function",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qsmx-toric-cellular-hamiltonian",
+          "source_section": "Definition",
+          "quote": "The mod-two intersection number is the parity of primal edges crossed by a dual cycle.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qsmx-toric-ground-space",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $K$ be a finite cellulation of a closed, connected, orientable surface of genus $g\\ge0$, with the incidence and Hamiltonian conventions of the toric-code definition.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qsmx-toric-local-pauli-centralizer",
+          "source_section": "Statement",
+          "quote": "If $P(a,b)$ commutes with every $A_v$ and $B_f$, then there are vertex and face chains $u\\in\\mathbb F_2^V$ and $w\\in\\mathbb F_2^F$ such that $a=\\partial_1^Tu$ and $b=\\partial_2w$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "On each edge, $XZ=-ZX$, while Pauli operators on distinct edges commute. Moving the $X$ factors of a dual string past the $Z$ factors of a primal string therefore contributes one minus sign for each shared crossed edge. The total sign is $(-1)^I$, with $I$ the number of crossings modulo two.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Expand $O$ in the finite Pauli basis of its supporting edge algebra as $O=\\sum_{a,b}c_{a,b}X(a)Z(b)$. For a Pauli term $Q$ that anticommutes with some stabilizer $S$, the ground projection satisfies $P_0S=SP_0=P_0$ and $SQ=-QS$. Hence $P_0QP_0=P_0SQP_0=-P_0QSP_0=-P_0QP_0$, so $P_0QP_0=0$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Every Pauli term in the expansion either anticommutes with a stabilizer, and has zero compression by step 1.2, or commutes with every stabilizer. In the latter case [F3] writes it as a product of stabilizers; each acts as the identity on the range of $P_0$, so its compression is $P_0$. Summing the finitely many compressed terms gives $P_0OP_0=\\lambda(O)P_0$ for the sum of their coefficients.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "F3",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The zero operator and empty-support Pauli terms have scalar compression by step 2.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "A zero Pauli coefficient contributes zero in the finite expansion of step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For L=3, the fundamental cycle and dual-cycle convention is specified in the Definition and used in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Theorem [F2] allows a 2^(2g)-dimensional ground space; step 2.1 proves scalar compression on that whole space."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The theorem concerns closed strings and disk-supported operators, not endpoint paths."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The ground input carries [A1] through [F2]; step 2.1 uses this assumption and the finite Pauli expansion adds no further choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement gives a scalar-compression conclusion, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement gives a scalar-compression conclusion, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "single crossing",
+          "calculation": "For one shared primal/dual edge, I=1 and the single-edge relation is XZ=−ZX.",
+          "result": "Step 1.1 gives anticommutation for one crossing and commutation for zero or two shared edges."
+        },
+        {
+          "case": "L=3 ground space",
+          "calculation": "The square torus has ground dimension 4 by [F2].",
+          "result": "The ground dimension is 4 by [F2]; step 2.1 proves scalar compression on the whole ground space."
+        }
+      ]
+    },
+    "ex-qsmx-toric-defect-pair": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qsmx-toric-cellular-hamiltonian",
+          "source_section": "Definition",
+          "quote": "An open primal path is a path in the vertex-edge graph; its $Z$ string is $Z(b)$ for its edge chain $b$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The operators $A_v,B_f$ are commuting self-adjoint involutions by [F1], so $\\Pi=\\prod_{v\\in V}(I+A_v)/2\\prod_{f\\in F}(I+B_f)/2$ is the orthogonal projection onto their common $+1$ eigenspace. Expand this finite product. Each term is a tensor-product Pauli $X(a)Z(b)$ with coefficient $+1$: factors of the same type multiply without phases, and every vertex operator commutes with every face operator. For the ordinary matrix trace on $\\mathcal H_K$, the trace of a tensor product is the product of the factor traces. A nonidentity Pauli therefore has trace zero because at least one edge factor is $X$, $Z$, or $XZ$, each of which has trace zero; an identity term has trace $2^{|E|}$. The empty subset contributes one identity term and no term contributes negative trace, so $\\operatorname{Tr}\\Pi\\ge 2^{|E|-|V|-|F|}>0$. Thus $\\Pi\\ne0$. Since each $A_v,B_f$ is a self-adjoint involution, each penalty factor $(I-A_v)/2$ or $(I-B_f)/2$ is an orthogonal projection. The positive coefficients make $H_K$ positive semidefinite, with kernel exactly the common $+1$ eigenspace; hence a nonzero ground vector exists and has $H_K$-eigenvalue zero.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Let $b\\in\\mathbb F_2^E$ be the edge chain of the primal path $\\gamma$. Because the path visits no vertex twice and has distinct endpoints, each internal vertex has even path incidence and the endpoints have odd incidence, so $\\partial_1b=v_1+v_2$. For each vertex $v$, $Z(b)A_v=(-1)^{\\langle b,\\partial_1^Tv\\rangle}A_vZ(b)=(-1)^{(\\partial_1b)_v}A_vZ(b)$; $Z(b)$ commutes with every $B_f$. Hence applying $Z(b)$ to any ground vector flips exactly $A_{v_1}$ and $A_{v_2}$ from $+1$ to $-1$ and leaves every other stabilizer eigenvalue unchanged.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "step": "2.2",
+          "claim": "Regard the dual path $\\gamma^*$ as a path in the dual graph whose vertices are faces, and let $a\\in\\mathbb F_2^E$ indicate the primal edges crossed by its dual edges. By the definition of the dual incidence map as $\\partial_2^T$, the no-repeated-face hypothesis and distinct endpoint faces give $\\partial_2^Ta=f_1+f_2$. For each face $f$, $X(a)B_f=(-1)^{\\langle a,\\partial_2f\\rangle}B_fX(a)=(-1)^{(\\partial_2^Ta)_f}B_fX(a)$; $X(a)$ commutes with every $A_v$. Hence applying $X(a)$ to any ground vector flips exactly $B_{f_1}$ and $B_{f_2}$ and leaves every other stabilizer eigenvalue unchanged.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "By step 2.1, the vector $Z(b)\\psi$ has eigenvalue $-1$ precisely for the two vertex stabilizers at $v_1,v_2$ and eigenvalue $+1$ for every other stabilizer, when $\\psi$ is a ground vector. Thus the only nonzero terms in $H_K Z(b)\\psi$ are the penalties $J_{v_i}(I-A_{v_i})/2$, each acting as multiplication by $J_{v_i}$; its $H_K$-eigenvalue, and hence its energy increase from the ground eigenvalue zero, is $J_{v_1}+J_{v_2}$.",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "By step 2.2, the vector $X(a)\\psi$ has eigenvalue $-1$ precisely for $B_{f_1},B_{f_2}$ and eigenvalue $+1$ for every other stabilizer, when $\\psi$ is a ground vector. Therefore only the two penalties $K_{f_i}(I-B_{f_i})/2$ contribute, and its $H_K$-eigenvalue, hence energy increase from zero, is $K_{f_1}+K_{f_2}$.",
+          "inputs": [
+            "F1",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example assumes simple paths with distinct endpoint vertices or faces."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The path operators are nonempty and all couplings are strictly positive."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For a one-edge primal path, step 2.1 gives its two odd endpoint vertices; for a one-edge dual path, step 2.2 gives its two odd endpoint faces. Steps 3.1 and 4.1 compute the corresponding exact energy increases."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The stabilizer projection in 1.1 may have rank greater than one. The parity calculations in 2.1–2.2 and penalty calculations in 3.1–4.1 apply to every ground vector; no unique-ground-state hypothesis is used."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The primal and dual paths have distinct endpoints and visit no vertex/face twice. The incidence calculations in 2.1 and 2.2 make precisely those two endpoints odd and all internal incidences even. Closed paths are outside this endpoint-pair statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The current source has only F1, with no A1 or F2. Its argument expands a finite stabilizer product, uses the supplied finite path incidence and computes finite Pauli matrices; it makes no indexed choice or inherited A1/F2 appeal."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example is not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "single-edge primal path",
+          "calculation": "A single Z_e anticommutes with its two endpoint A_v operators and commutes with every B_f.",
+          "result": "Step 1.1 gives the two vertex defects and step 2.1 gives their cost; for uniform J the cost is 2J."
+        },
+        {
+          "case": "single-edge dual path",
+          "calculation": "A single X_e anticommutes with its two adjacent B_f operators and commutes with every A_v.",
+          "result": "Step 1.2 gives the two face defects and step 3.1 gives their cost; for uniform K the cost is 2K."
+        }
+      ],
+      "current_boundary_worksheet": {
+        "proposal": "research/physics-non-fluid-129-2026-10-21-r2-owner-step2-boundary-proposal-4/proposal.json",
+        "source_sha256": "d8bf885d5254134bb545756ef7ad03c4cb6c674ab85e5e28ff7b41f8376974de",
+        "qualification": "Released complete current source/eight-case semantic worksheet; root transcribed exact current rows. No independent acceptance or finite computation asserted."
+      }
+    }
+  }
+}

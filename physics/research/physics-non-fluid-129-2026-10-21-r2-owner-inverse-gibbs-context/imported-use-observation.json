@@ -1,0 +1,90 @@
+{
+  "observed_at": "2026-10-21T14:10:48.337Z",
+  "reading_limit": "Read full importance sampling definition and finite-variance proof. Interval supplier claim sections inspected; no new full-proof acceptance or historical audit claim.",
+  "items": [
+    {
+      "id": "alg-importance-sampling",
+      "status": "published",
+      "domain": "mathematics via import",
+      "claim": "Let $(\\mathsf X,\\mathcal X,\\mu)$ be a measure space. An **unnormalized target density** is a measurable function $\\tilde p:\\mathsf X\\to[0,\\infty)$ with\n$$Z_p:=\\int_{\\mathsf X}\\tilde p\\,d\\mu\\in(0,\\infty).$$\nThe target probability measure is $\\pi(dx)=\\tilde p(x)\\mu(dx)/Z_p$. A **proposal density** is a measurable $q:\\mathsf X\\to[0,\\infty)$ with $\\int q\\,d\\mu=1$; write $Q(dx)=q(x)\\mu(dx)$. The input integrand $f:\\mathsf X\\to\\mathbb R$ is measurable, and the input sample $X_1,\\ldots,X_n$ is IID with law $Q$, in the sense of [[def-identically-distributed-and-iid-random-variables]]. The normalizing constant $Z_p$ is known for this algorithm.\n\n**Admissible conditions for an unbiased estimate:** $n\\ge1$, $q>0$ $\\mu$-almost everywhere on $\\{x:f(x)\\tilde p(x)\\ne0\\}$, and the random variable\n$$Y:=\\begin{cases}f(X_1)\\tilde p(X_1)/(Z_pq(X_1)),&q(X_1)>0,\\\\0,&q(X_1)=0\\end{cases}$$\nis integrable under $Q$. The support condition makes the value on $q=0$ immaterial to the target integral.\n\n**Well-defined weights:** The reciprocal map $r(s)=1/s$ for $s>0$ and $r(s)=0$ for $s\\le0$ is Borel. Its composition with $q$, multiplied by the measurable inputs, makes the piecewise weight and weighted integrand measurable ([[thm-composition-with-borel-functions-preserves-measurability]], [[thm-arithmetic-and-lattice-operations-preserve-measurability]]).\n\n**Procedure and output:** For each supplied draw $X_i$, set $Y_i=f(X_i)\\tilde p(X_i)/(Z_pq(X_i))$ when $q(X_i)>0$ and set $Y_i=0$ otherwise. Return\n$$\\hat\\mu_{\\mathrm{IS}}:=\\frac1n\\sum_{i=1}^nY_i.$$\nSeparate variance and central limit claims require the corresponding weighted second-moment hypothesis.\n",
+      "file_sha256": "bd11ac9960b8babf394db564263923c86648e163ca3cd51ea5c8344a6970bab2",
+      "pin": {
+        "path": "items/alg-importance-sampling.md",
+        "sha256": "bd11ac9960b8babf394db564263923c86648e163ca3cd51ea5c8344a6970bab2"
+      },
+      "pin_match": true
+    },
+    {
+      "id": "thm-ordinary-importance-sampling-finite-variance-under-weighted-second-moment",
+      "status": "published",
+      "domain": "mathematics via import",
+      "claim": "Use the hypotheses and notation of [[thm-ordinary-importance-sampling-is-unbiased]]. Define\n$$Y_i:=\\begin{cases}f(X_i)\\tilde p(X_i)/(Z_pq(X_i)),&q(X_i)>0,\\\\0,&q(X_i)=0\\end{cases},\\qquad \\theta:=\\int f\\,d\\pi,\\qquad \\sigma^2:=\\operatorname{Var}_Q(Y_1).$$\nIf $\\mathbb E_Q[Y_1^2]<\\infty$, then $\\hat\\mu_{\\mathrm{IS}}$ has finite variance and\n$$\\operatorname{Var}_Q(\\hat\\mu_{\\mathrm{IS}})=\\frac{\\sigma^2}{n}=\\frac1n\\left(\\frac1{Z_p^2}\\int_{\\{q>0\\}}\\frac{f(x)^2\\tilde p(x)^2}{q(x)}\\,d\\mu(x)-\\theta^2\\right).$$\nThis finite-sample conclusion is choice-free. For the central limit conclusion, let $(X_i)_{i\\ge1}$ be an IID sequence with law $Q$, and apply the estimator to its first $n$ draws for each $n\\ge1$. If, in addition, AC holds, then\n$$\\sqrt n\\bigl(\\hat\\mu_{\\mathrm{IS}}-\\theta\\bigr)\\Rightarrow N(0,\\sigma^2).$$\nNo finite variance or normal-limit claim is made when the weighted second moment is infinite.\n\n",
+      "file_sha256": "7bc56c6619c6cb2132cd987f9cfba970e6a3d9ee14c6455aff2de5faf8b4d501",
+      "pin": {
+        "path": "items/thm-ordinary-importance-sampling-finite-variance-under-weighted-second-moment.md",
+        "sha256": "7bc56c6619c6cb2132cd987f9cfba970e6a3d9ee14c6455aff2de5faf8b4d501"
+      },
+      "pin_match": true
+    },
+    {
+      "id": "def-dyadic-floating-point-format-and-directed-rounding",
+      "status": "published",
+      "domain": "mathematics via import",
+      "claim": "An exact dyadic rational is a number $m2^q$ with integers $m,q$.\nFix integers $p\\ge2$ and $e_{\\min}\\le e_{\\max}$. Put\n$\\eta=2^{e_{\\min}-p+1}$ and\n$N_{\\max}=(2^p-1)2^{e_{\\max}-p+1}$. The finite representable set $\\mathbb F$\nconsists of zero, both signs of every normal number $k2^{e-p+1}$ with integers $e,k$ satisfying\n$e_{\\min}\\le e\\le e_{\\max}$ and $2^{p-1}\\le k<2^p$, and both signs of every\nsubnormal number $k\\eta$ with integer $k$ satisfying $1\\le k<2^{p-1}$. The smallest positive\nsubnormal is $\\eta$, the smallest positive normal is $2^{e_{\\min}}$, and the\nlargest finite magnitude is $N_{\\max}$. The extended endpoint set also contains\n$-\\infty$ and $+\\infty$ as enclosure sentinels; they are not finite machine\nnumbers.\n\nFor a real $x$ with $|x|\\le N_{\\max}$, define $\\operatorname{rd}(x)$ as the\ngreatest member of $\\mathbb F$ not exceeding $x$, and $\\operatorname{ru}(x)$ as\nthe least member of $\\mathbb F$ not less than $x$. Define\n$\\rho(x)=\\operatorname{ru}(x)-\\operatorname{rd}(x)$. Set $\\epsilon_{\\rm abs}(0)=0$.\nFor nonzero $x$ in the\nsubnormal range, define the absolute-error bound $\\epsilon_{\\rm abs}(x)=\\eta$;\nfor $2^e\\le |x|<2^{e+1}$ in the normal range, define\n$\\epsilon_{\\rm abs}(x)=2^{e-p+2}$. For $x>N_{\\max}$, set\n$(\\operatorname{rd}(x),\\operatorname{ru}(x))=(N_{\\max},+\\infty)$; for\n$x<-N_{\\max}$, set\n$(\\operatorname{rd}(x),\\operatorname{ru}(x))=(-\\infty,-N_{\\max})$.\nIn either overflow case set $\\epsilon_{\\rm abs}(x)=+\\infty$ and report\n`overflow`, even when the selected directed endpoint is finite.\nThe rounding procedure reports `finite`, `subnormal`, or\n`overflow`, so no relative-error assumption is implicit.\n\nAn exact rational intermediate may be converted by comparing integer\nnumerators and denominators after clearing powers of two. A directed interval\nendpoint is the resulting greatest lower or least upper member of the\nextended endpoint set $\\mathbb F\\cup\\{-\\infty,+\\infty\\}$.\n\n",
+      "file_sha256": "a3aae09e0409d86a295e0c3717ef955b632655d3d845b5cb1ad64ab730403b28",
+      "pin": {
+        "path": "items/def-dyadic-floating-point-format-and-directed-rounding.md",
+        "sha256": "a3aae09e0409d86a295e0c3717ef955b632655d3d845b5cb1ad64ab730403b28"
+      },
+      "pin_match": true
+    },
+    {
+      "id": "def-intervals-rectangles-and-complex-balls",
+      "status": "published",
+      "domain": "mathematics via import",
+      "claim": "A **real interval** is a closed set $[a,b]\\subset\\mathbb R$ with finite dyadic\nendpoints $a\\le b$. Its width is $b-a$, midpoint is $(a+b)/2$, and its\nmidpoint-radius form is $m+[-r,r]$ with $m=(a+b)/2$ and $r=(b-a)/2$. The empty\nset is the status `empty`; the whole real line is `entire`. `overflow`,\n`domain-error`, `split-domain`, and `inconclusive` are computation statuses,\nnot finite intervals.\n\nA **complex rectangle** is $X+iY=\\{x+iy:x\\in X,\\ y\\in Y\\}$ for real intervals\n$X,Y$. Complex addition and multiplication use\n$(x+iy)+(u+iv)=(x+u)+i(y+v)$ and\n$(x+iy)(u+iv)=(xu-yv)+i(xv+yu)$. For $z=x+iy$, its complex modulus is\n$|z|=\\sqrt{x^2+y^2}$, and for $z\\ne0$ its reciprocal is\n$1/z=(x-iy)/(x^2+y^2)$. A\n**complex ball** $B(c,r)$ is\n$\\{z\\in\\mathbb C:|z-c|\\le r\\}$ with dyadic complex center $c$ and dyadic\n$r\\ge0$. For any two represented sets $S,T$, the inclusion order is\n$S\\sqsubseteq T$ iff $S\\subseteq T$.\n\nThe width of a complex rectangle with coordinate widths $w_X,w_Y$ is its\nEuclidean diameter $\\sqrt{w_X^2+w_Y^2}$; the width of a ball $B(c,r)$ is its\ndiameter $2r$. Width comparisons against a dyadic tolerance can be decided by\nexact rational comparisons after squaring the nonnegative quantities.\n\nThe **range** of a real or complex function $f$ on a set $S$ is\n$f(S)=\\{f(x):x\\in S\\cap\\operatorname{dom}(f)\\}$. A finite expression DAG is a\nfinite directed acyclic graph with input nodes, constant nodes, and operation\nnodes; constants are exact dyadics or are supplied with certified enclosing\nintervals. Sharing a node means the exact same intermediate value is reused.\n\n",
+      "file_sha256": "e4beccf31e861e20d671f75c3f8ba049944036466708c0ab986fb986eebf9aaa",
+      "pin": {
+        "path": "items/def-intervals-rectangles-and-complex-balls.md",
+        "sha256": "e4beccf31e861e20d671f75c3f8ba049944036466708c0ab986fb986eebf9aaa"
+      },
+      "pin_match": true
+    },
+    {
+      "id": "def-outward-rounded-interval-and-ball-operations",
+      "status": "published",
+      "domain": "mathematics via import",
+      "claim": "For real intervals $X=[a,b]$ and $Y=[c,d]$, compute the displayed exact\nendpoint formulas and round the lower endpoint down and the upper endpoint up\nin the format of\n[[def-dyadic-floating-point-format-and-directed-rounding]]. If either exact\nendpoint overflows, return `overflow` with the outward extended endpoints;\nnever substitute a finite endpoint for an overflow sentinel. Addition is\n$[a+c,b+d]$, subtraction is $[a-d,b-c]$, and multiplication is\n$[\\min(ac,ad,bc,bd),\\max(ac,ad,bc,bd)]$. Division is defined only when\n$0\\notin Y$ and is $X[1/d,1/c]$, with reciprocal endpoints computed as exact\nrationals before outward rounding. Squaring is\n$[0,\\max(a^2,b^2)]$ when $0\\in X$ and\n$[\\min(a^2,b^2),\\max(a^2,b^2)]$ otherwise. Square root is defined only for\n$X\\subseteq[0,\\infty)$ and is enclosed by applying\n[[alg-dyadic-square-root-bisection]] to the exact dyadic endpoints with\nrequest $n=p$, where $p$ is the selected format precision, and rounding\noutward for storage.\n\nIf $0\\in Y$ for division, return `split-domain` with the two subdomains\n$Y\\cap(-\\infty,0)$ and $Y\\cap(0,\\infty)$, or `entire` when the caller does not\nrequest subdivision. No finite quotient interval is returned in this case.\nAn invalid square-root domain returns `domain-error` or an explicitly\nrestricted nonnegative subdomain.\n\nComplex-rectangle addition, subtraction and multiplication use\n$(x+iy)(u+iv)=(xu-yv)+i(xv+yu)$, applying the real interval operations to\neach component. For a rectangle $X+iY$ excluding $0$, define its reciprocal by\n$(X-iY)/(X^2+Y^2)$, computing the square hulls, their sum, and the\ncomponent quotient endpoint formulas as exact rationals before rounding the\nfinal reciprocal components outward. The exact denominator interval is\nstrictly positive because at least one coordinate interval excludes zero;\ndo not round it before division, since underflow could introduce zero.\nPropagate any final endpoint overflow. Division multiplies by this reciprocal.\n\nFor a ball $B(c,r)$, let $X_B=[\\Re c-r,\\Re c+r]$ and\n$Y_B=[\\Im c-r,\\Im c+r]$ be its coordinate projection intervals. For a real\ninterval $J$, let $M(J)=\\max(|\\inf J|,|\\sup J|)$ and let $d(J)=0$ if\n$0\\in J$, otherwise $d(J)=\\min(|\\inf J|,|\\sup J|)$. Put\n$M_B=M(X_B)+M(Y_B)$ and $m_B=\\max(d(X_B),d(Y_B))$. Then\n$|z|\\le M_B$ for every $z\\in B(c,r)$ and $|z|\\ge m_B$ for every such $z$.\nDefine ball addition and subtraction as\n$B(0,\\operatorname{ru}(M_{B_1}+M_{B_2}))$, multiplication as\n$B(0,\\operatorname{ru}(M_{B_1}M_{B_2}))$, and division as\n$B(0,\\operatorname{ru}(M_{B_1}/m_{B_2}))$ only when $m_{B_2}>0$. These\norigin-centered output balls are conservative but inclusion-isotone. If\n$m_{B_2}=0$, return `split-domain`, `entire`, or `inconclusive`; if a radius\noverlows, return `overflow`.\n\n",
+      "file_sha256": "e38a2c5fd2ab671d76b07190a03937bbf644eaf0914cda23773938d23e69820c",
+      "pin": {
+        "path": "items/def-outward-rounded-interval-and-ball-operations.md",
+        "sha256": "e38a2c5fd2ab671d76b07190a03937bbf644eaf0914cda23773938d23e69820c"
+      },
+      "pin_match": true
+    },
+    {
+      "id": "lem-directed-dyadic-rounding-enclosure-and-error",
+      "status": "published",
+      "domain": "mathematics via import",
+      "claim": "For finite $x$ with $|x|\\le N_{\\max}$, the directed roundings defined in\n[[def-dyadic-floating-point-format-and-directed-rounding]] satisfy\n$\\operatorname{rd}(x)\\le x\\le\\operatorname{ru}(x)$ and each endpoint error is\nat most the stated $\\epsilon_{\\rm abs}(x)$ (with zero error when $x$ is\nrepresentable). For $x>N_{\\max}$ the pair $(N_{\\max},+\\infty)$ encloses $x$;\nfor $x<-N_{\\max}$ the pair $(-\\infty,-N_{\\max})$ encloses $x$. Overflow has\nerror bound $+\\infty$ and cannot be reported as a finite-error result.\n\n",
+      "file_sha256": "65cd1c1442ca19c6e12f4dd62a951fa987cb3beb88b02538ce827de7a96d68dc",
+      "pin": {
+        "path": "items/lem-directed-dyadic-rounding-enclosure-and-error.md",
+        "sha256": "65cd1c1442ca19c6e12f4dd62a951fa987cb3beb88b02538ce827de7a96d68dc"
+      },
+      "pin_match": true
+    },
+    {
+      "id": "lem-real-interval-arithmetic-preserves-enclosure",
+      "status": "published",
+      "domain": "mathematics via import",
+      "claim": "For finite real intervals on which the operation is defined, each finite result of addition, subtraction, multiplication, division, and squaring in [[def-outward-rounded-interval-and-ball-operations]] contains the exact set of values of the corresponding real operation. For a finite expression directed acyclic graph using these operations, supply each input node with a finite interval containing all its admissible values and each constant node with a finite interval containing its exact value. If all operation nodes return finite interval results, the interval computed at every node contains its exact value for every admissible input assignment; in particular, the root interval contains the exact range. A non-finite status makes no finite enclosure claim.\n\n",
+      "file_sha256": "cb5b4ac07b6faa32e0d3b8742e1233b0d88af50bc5b6d2e1eee97c54fbc79591",
+      "pin": {
+        "path": "items/lem-real-interval-arithmetic-preserves-enclosure.md",
+        "sha256": "cb5b4ac07b6faa32e0d3b8742e1233b0d88af50bc5b6d2e1eee97c54fbc79591"
+      },
+      "pin_match": true
+    }
+  ]
+}

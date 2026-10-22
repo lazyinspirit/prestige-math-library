@@ -1,0 +1,31 @@
+import{readFileSync as rf,writeFileSync as wf,mkdirSync,existsSync,readdirSync}from'node:fs';
+import{resolve}from'node:path';import{createHash}from'node:crypto';
+import{loadStep1Record,itemInputPaths}from'../tools/physics-support/frontier-snapshot.mjs';
+import{checkStep1,recordStep1Batch}from'../tools/physics-support/step1-decisions.mjs';
+import{runPages,dependencyLevels}from'../tools/physics-support/item-dependency-levels.mjs';
+import{readItem}from'../tools/physics-support/physics-content.mjs';
+const root=process.cwd(),run='physics-non-fluid-129-2026-10-21-r2',base=`research/${run}-owner-first-native-battery-findings`,out=`${base}/final-join/readiness`,read=p=>JSON.parse(rf(p)),hash=p=>createHash('sha256').update(rf(p)).digest('hex');
+if(!process.argv.includes('--outside-writers-drained'))throw Error('Explicit actual global source-writer drain required');
+if(existsSync(out))throw Error('Preserve existing readiness operation');
+function drain(){if(existsSync(`.physics-autopilot/${run}/controller.lock`)||Object.values(read(`.physics-autopilot/${run}/state.json`).dispatches).some(d=>!d.endedAt))throw Error('Native writer/controller active');}drain();
+const baseline=read(`.physics-autopilot/${run}/owner-gate-history/403154ec-54d6-4472-9253-025435a9ac9d.json`).request.snapshot;
+const inventory=read(`${base}/final-changed-source-inventory.json`),known=new Set(),evidence=[];
+const sources=[`research/${run}-owner-em-nrqm-boundary/final-report.json`,`research/${run}-owner-qft-tgr-boundaries/source-write-bindings.json`,`${base}/qsm-owner-review/final-bindings.json`,`research/${run}-owner-boundary-gr-emg/source-changes.json`,`research/${run}-owner-maslov-local/release.json`];
+const seals=sources.map(p=>{evidence.push(p);return rf(p,'utf8')});
+if(inventory.length!==19)throw Error('Unexpected scientific scope');
+for(const r of inventory){const p=resolve('items',`${r.id}.md`);if(hash(p)!==r.after_sha256||!seals.some(t=>t.includes(r.after_sha256)))throw Error('Unsealed scientific source '+r.id);known.add(p);}
+const changed=baseline.items.filter(r=>hash(`items/${r.id}.md`)!==r.carrierSha256);if(changed.length!==19||changed.some(r=>!known.has(resolve('items',`${r.id}.md`))))throw Error('Unknown source change');
+for(const r of read(`${base}/late-import-drift/application/receipt.json`).changes){if(hash(r.path)!==r.original_sha256)throw Error('Changed exact import');known.add(resolve(r.path));}
+// Page/manifest changes were adopted through archived root operations; bind the actual present bytes.
+for(const b of baseline.inputs){if(b.path.startsWith(`${root}/research/${run}-batch-`)&&b.path.endsWith('.pages.json')&&hash(b.path)!==b.sha256)known.add(b.path);}
+// Only baseline-different current run page manifests explain metadata staleness.
+for(const f of ['contracts.final.json','boundary.final.json','citation-fidelity.final.json','physics-check.final.json','plan.final.log','merge-final-receipt.json'])evidence.push(`${base}/final-join/${f}`);
+if(read(`${base}/final-join/contracts.final.json`).errors?.length||read(`${base}/final-join/physics-check.final.json`).errors.length)throw Error('Unresolved checks');
+const s=loadStep1Record(root,run),currency=checkStep1(s),graph=dependencyLevels(runPages(root,run));if(graph.errors.length||s.items.size!==845)throw Error('Invalid frontier');
+const guards=new Map(),records=[];function guard(p){guards.set(p,hash(p));}
+for(const p of evidence)guard(p);guard('research/plan-spec.json');guard('research/math-imports.json');
+for(const f of readdirSync('research').filter(f=>f.startsWith(`${run}-batch-`)&&/\.(pages|proof-contracts|coverage)\.json$/.test(f)))guard(`research/${f}`);
+for(const w of currency.work){if(!w.item||w.row?.decision!=='ready'||w.reason!=='Item or dependency changed; record current readiness')throw Error('Unresolved hold '+JSON.stringify(w));const inputs=itemInputPaths(s,w.item,w.row.dependencies);if(!inputs.some(p=>known.has(p)))throw Error('Unexplained stale closure '+w.item);inputs.forEach(guard);const i=readItem(`items/${w.item}.md`),level=graph.levels.get(w.item);if(i.dependency_level!==level)throw Error('Stale numeric level '+w.item);records.push({item:w.item,decision:'ready',dependencies:[...new Set([...w.row.dependencies,...(i.deps??[]),...(i.justified_by??[]),...(i.forward_refs??[])])],level,reason:`Root adopts the exact released scientific and actual consumer repairs bound in ${base}/final-join/readiness/application.json. Nineteen changed sources match sealed same-owner reports; the local Maslov proof and all fifteen consumers are released. Reviewed public mirrors, unchanged CW placement, declared page prerequisites and exact editorial-equivalent imported snapshots are reconciled without changing the 845-item/258-page frontier. All prior examined context IDs are retained. Current combined strict contracts, boundary review, citation quotations, actual physics/import verification and canonical plan checks pass, with honest advisory dispositions retained. All native and outside source writers are drained. Ordinary authoring readiness only, no independent acceptance or full native gate assertion.`});}
+records.sort((a,b)=>a.level-b.level||a.item.localeCompare(b.item));
+function verify(){drain();for(const[p,h]of guards)if(hash(p)!==h)throw Error('Input changed '+p);}verify();mkdirSync(`${out}/before`,{recursive:true});wf(`${out}/currency.before.json`,JSON.stringify(currency,null,2)+'\n');for(const r of records)wf(`${out}/before/${r.item}.json`,rf(`research/${run}-step1-${r.item}.json`));
+const written=recordStep1Batch(root,{run,owner:true,records:records.map(({level,...r})=>r)});verify();const final=checkStep1(loadStep1Record(root,run));wf(`${out}/currency.after.json`,JSON.stringify(final,null,2)+'\n');wf(`${out}/application.json`,JSON.stringify({at:new Date().toISOString(),source_writers_drained:true,scientific_sources:inventory,evidence,known_input_paths:[...known],guards:[...guards].map(([path,sha256])=>({path,sha256})),written:written.map(r=>({item:r.item,sha256:r.sha256})),all_current:final.closed,items:final.items,full_native_gate:false},null,2)+'\n');if(!final.closed)throw Error('Readiness remains open');console.log(JSON.stringify({refreshed:written.length,all_current:final.closed,items:final.items,guards:guards.size}));

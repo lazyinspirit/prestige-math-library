@@ -1,0 +1,1260 @@
+{
+  "version": 1,
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "batch": "78",
+  "level": 1,
+  "scope": [
+    "def-qftx-finite-groupoid-integration",
+    "def-qftx-finite-homotopy-pullback",
+    "lem-qftx-finite-groupoid-push-pull-fubini",
+    "def-qftx-finite-flat-connection-groupoid",
+    "thm-qftx-finite-bf-topological-invariance",
+    "def-qftx-finite-bordism-state-span",
+    "lem-qftx-finite-groupoid-gluing-descent",
+    "thm-qftx-finite-groupoid-gluing",
+    "ex-qftx-finite-bf-three-torus"
+  ],
+  "contracts": {
+    "def-qftx-finite-groupoid-integration": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The groupoid cardinality and integral in the Definition are finite sums by [A1]. Fix $d\\in\\mathcal D$ and one representative $c$ from each source isomorphism class. The set of isomorphisms $p(c)\\cong d$ is empty or a torsor for the finite group $\\operatorname{Aut}_{\\mathcal D}(d)$. Every object of the homotopy fiber is isomorphic to one with such a chosen source representative, so the fiber has finitely many isomorphism classes. The automorphisms of $(c,\\alpha)$ are the $u\\in\\operatorname{Aut}_{\\mathcal C}(c)$ satisfying $\\alpha\\circ p(u)=\\alpha$, a subgroup of a finite group by [A1]. Thus every homotopy fiber is finite and each pushforward sum is finite.",
+          "inputs": [
+            "given",
+            "A1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "If $\\eta:d\\to d'$ is an isomorphism in $\\mathcal D$, the rule $(c,\\alpha)\\mapsto(c,\\eta\\circ\\alpha)$ is an equivalence $\\mathcal C_d\\to\\mathcal C_{d'}$ with inverse given by $\\eta^{-1}$. It preserves isomorphism classes, automorphism groups, and the values of $f([c])$, so the fiber integral is independent of the representative of $[d]$.",
+          "inputs": [
+            "given",
+            "A1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "If $c\\to c'$ is an isomorphism in $\\mathcal C$, then $p(c)\\to p(c')$ is an isomorphism in $\\mathcal D$, so $p^*g$ is invariant; step 1.2 proves the same for $p_!f$. Consequently $b_!a^*$ is a well-defined linear map, since its sums are finite and both operations preserve linear combinations.",
+          "inputs": [
+            "given",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [
+        {
+          "case": "empty groupoid",
+          "calculation": "The isomorphism-class sum has no terms, so its cardinality and integral are 0.",
+          "disposition": "Confirms the empty sum convention."
+        },
+        {
+          "case": "terminal groupoid",
+          "calculation": "The single object has trivial automorphism group, so its cardinality is 1.",
+          "disposition": "Confirms normalization on a point."
+        },
+        {
+          "case": "one-object groupoid BG",
+          "calculation": "The unique isomorphism class contributes 1/|G|.",
+          "disposition": "Confirms nontrivial automorphisms are retained."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The empty sum is zero by finite-sum convention. The exact check is in step 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The empty groupoid has no isomorphism classes and cardinality zero. The exact check is in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The terminal groupoid has cardinality one. The exact check is in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The one-object groupoid BG contributes 1/|G|, not 1. The exact check is in step 1.2."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Homotopy-fiber arrows are required to preserve the chosen target isomorphism. The exact check is in step 1.2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "All operations are finite sums and equivalences; no representatives are chosen globally. The exact check is in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item defines cardinality and push-pull, not an iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item defines cardinality and push-pull, not an iff claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-78",
+        "notes": "Checked every derivation against its labelled inputs and current suppliers, including limiting, empty, identity and stabilizer cases where applicable. This is Step-1 authoring evidence, not independent proof approval."
+      }
+    },
+    "lem-qftx-finite-groupoid-push-pull-fubini": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qftx-finite-groupoid-integration",
+          "source_section": "Definition",
+          "quote": "A span $\\mathcal X\\xleftarrow{a}\\mathcal E\\xrightarrow{b}\\mathcal Y$ of finite groupoids therefore induces the linear map $b_!a^*$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qftx-finite-homotopy-pullback",
+          "source_section": "Definition",
+          "quote": "has objects $(c,e,\\alpha)$, where $c\\in\\mathcal C$, $e\\in\\mathcal E$, and $\\alpha:p(c)\\overset{\\cong}{\\longrightarrow}q(e)$ is an isomorphism in $\\mathcal D$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "For fixed $z\\in\\mathcal Z$, an object of the iterated fiber is $(y,\\beta:q(y)\\to z,x,\\alpha:p(x)\\to y)$. The functor $(y,\\beta,x,\\alpha)\\mapsto(x,\\beta\\circ q(\\alpha))$ maps it to $(\\mathcal X)_z$. A quasi-inverse sends $(x,\\gamma:q(p(x))\\to z)$ to $(p(x),\\gamma,x,\\operatorname{id}_{p(x)})$. The composite on $(\\mathcal X)_z$ is the identity. For any iterated object, the isomorphism $\\alpha:p(x)\\to y$ and $\\operatorname{id}_x$ give a natural isomorphism from the quasi-inverse image back to that object. Hence the functor is an equivalence.",
+          "inputs": [
+            "given",
+            "F1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "Fix an isomorphism class $[e]$ of $\\mathcal E$, set $y=b(e)$, and write $A=\\operatorname{Aut}_{\\mathcal Y}(y)$, $B=\\operatorname{Aut}_{\\mathcal E}(e)$, $I=\\operatorname{im}(B\\to A)$, and $N=\\ker(B\\to A)$. The classes in the homotopy fiber $\\mathcal E_y$ represented by this $[e]$ are the orbits of $I$ on the $A$-torsor of isomorphisms $b(e)\\cong y$, so there are $|A|/|I|$ of them; each has automorphism group $N$. Their contribution after the outer factor $1/|A|$ is $f([e])/(|I||N|)=f([e])/|B|$, by the finite homomorphism counting identity $|B|=|I||N|$. Summing over $[e]$ proves $\\int_{y\\in\\mathcal Y} b_!f(y)=\\int_{e\\in\\mathcal E} f(e)$.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Compose spans $\\mathcal X\\xleftarrow{a}\\mathcal E\\xrightarrow{b}\\mathcal Y$ and $\\mathcal Y\\xleftarrow{c}\\mathcal F\\xrightarrow{d}\\mathcal Z$, and let $P=\\mathcal E\\times^h_{\\mathcal Y}\\mathcal F$ with projections $\\pi_E,\\pi_F$. For fixed $z\\in\\mathcal F$, the homotopy fiber of $\\pi_F$ over $z$ has objects $((e,f',\\alpha),\\tau:f'\\cong z)$. The functor to $\\mathcal E_{c(z)}$ sends this object to $(e,c(\\tau)\\circ\\alpha)$ and sends an arrow $(u,v)$ to $u$. Such an arrow satisfies $\\tau'\\circ v=\\tau$ and $c(v)\\circ\\alpha=\\alpha'\\circ b(u)$, so its image satisfies $\\beta'\\circ b(u)=\\beta$. Conversely, for any such $u$ between images $(e,\\beta)$ and $(e',\\beta')$, the only possible lift has $v=(\\tau')^{-1}\\circ\\tau:f'\\to f''$; the equation $\\beta'\\circ b(u)=\\beta$ implies $c(v)\\circ\\alpha=\\alpha'\\circ b(u)$, so this lift exists and is unique. The functor is fully faithful; every object $(e,\\beta)$ is its image from $((e,z,\\beta),\\operatorname{id}_z)$, so it is essentially surjective. It is therefore an equivalence. By [F1], equivalent fibers have equal finite integrals, giving $c^*b_!g=(\\pi_F)_!\\pi_E^*g$ for every invariant function $g$ on $\\mathcal E$. Applying step 1.1 to $\\pi_F$ and $d$ now gives $d_!c^*b_!a^*f=(d\\circ\\pi_F)_!(a\\circ\\pi_E)^*f$, which is the push-pull map of the homotopy-pullback composite span.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "step": "2.2",
+          "claim": "Put $\\phi([e]):=\\overline{f([a(e)])}g([b(e)])$, which is invariant on $\\pi_0(\\mathcal E)$. Expanding the left inner product by the definition of $b_!$ gives $\\langle b_!a^*f,g\\rangle_{\\mathcal Y}=\\sum_{[y]}\\frac{1}{|\\operatorname{Aut}_{\\mathcal Y}(y)|}\\sum_{[(e,\\eta)]\\in\\pi_0(\\mathcal E_y)}\\frac{\\overline{f([a(e)])}g([y])}{|\\operatorname{Aut}_{\\mathcal E_y}(e,\\eta)|}$. Since $\\eta:b(e)\\cong y$ and $g$ is invariant, $g([y])=g([b(e)])$, so this is $\\int_{y\\in\\mathcal Y}b_!\\phi(y)=\\int_{e\\in\\mathcal E}\\phi(e)=\\sum_{[e]}\\frac{\\phi([e])}{|\\operatorname{Aut}_{\\mathcal E}(e)|}$ by step 1.2. On the other side, expanding $a_!b^*g$ and using $\\xi:a(e)\\cong x$ to replace $\\overline{f([x])}$ by $\\overline{f([a(e)])}$ gives $\\langle f,a_!b^*g\\rangle_{\\mathcal X}=\\sum_{[x]}\\frac{1}{|\\operatorname{Aut}_{\\mathcal X}(x)|}\\sum_{[(e,\\xi)]\\in\\pi_0(\\mathcal E_x)}\\frac{\\phi([e])}{|\\operatorname{Aut}_{\\mathcal E_x}(e,\\xi)|}=\\int_{x\\in\\mathcal X}a_!\\phi(x)=\\int_{e\\in\\mathcal E}\\phi(e)$, again by step 1.2. Both inner products therefore equal the same finite weighted sum, proving the adjoint identity.",
+          "inputs": [
+            "F1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Step 2.2 proves that the adjoint of $b_!a^*$ is $a_!b^*$, and steps 1.1 and 2.1 prove composition through homotopy-pullback spans.",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [
+        {
+          "case": "BG to terminal groupoid",
+          "calculation": "For the terminal functor BG→pt, the homotopy fiber is BG and pushforward of 1 is 1/|G|, matching the groupoid integral.",
+          "disposition": "Confirms the automorphism factor."
+        },
+        {
+          "case": "trivial source stabilizer",
+          "calculation": "If Aut_E(e) is trivial then I and N are trivial and the fiber-class contribution times the base weight equals 1.",
+          "disposition": "Confirms the formula in the free case."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Empty fibers contribute zero to each finite pushforward sum. The exact check is in step 2.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The empty groupoid sums vanish and preserve both identities. The exact check is in step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The terminal groupoid has weight one and composition reduces to ordinary function composition. The exact check is in step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The BG test confirms the nontrivial automorphism factor in both pushforward and adjunction. The exact check is in step 1.2."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Every fiber object includes its specified isomorphism to the target object. The exact check is in step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The proof groups finite isoclasses and uses finite homomorphism kernel-image counting only. The exact check is in step 1.2."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma asserts identities, not an iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma asserts identities, not an iff claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-78",
+        "notes": "Checked every derivation against its labelled inputs and current suppliers, including limiting, empty, identity and stabilizer cases where applicable. This is Step-1 authoring evidence, not independent proof approval."
+      }
+    },
+    "def-qftx-finite-flat-connection-groupoid": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qftx-finite-groupoid-integration",
+          "source_section": "Definition",
+          "quote": "Its **groupoid cardinality** is",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qftx-cw-fundamental-group-presentation",
+          "source_section": "Statement",
+          "quote": "Cells of dimension at least three add no generators or relators.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Reversing an edge replaces $g_e$ by $g_e^{-1}$, and the gauge formula sends the reverse label to $(h_{t(e)}g_eh_{s(e)}^{-1})^{-1}=h_{s(e)}g_e^{-1}h_{t(e)}^{-1}$. For a closed attaching word based at a vertex $v$, the transformed holonomy is $h_v\\operatorname{Hol}(w)h_v^{-1}$. Thus the inverse-edge rule and the flatness equations are preserved by every vertex gauge transformation.",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "For $h,k\\in G^{K_0}$, applying $k$ and then $h$ sends an edge label to $h_{t(e)}k_{t(e)}g_ek_{s(e)}^{-1}h_{s(e)}^{-1}=(hk)_{t(e)}g_e(hk)_{s(e)}^{-1}$. The identity vertex labeling acts as the identity, so this is a group action and its action groupoid has the composition and inverses stated in the Definition.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "There are at most $|G|^{|E(K)|}$ edge assignments and exactly $|G|^{|K_0|}$ gauge transformations, so the action groupoid is finite. Products over the finitely many connected components are finite groupoids as well; the empty product is terminal. By [F1], the connected groupoid cardinality is the orbit sum of reciprocal stabilizer sizes.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "For an orbit represented by $g$, the map $G^{K_0}/\\operatorname{Stab}(g)\\to G^{K_0}\\cdot g$, $h\\operatorname{Stab}(g)\\mapsto h\\cdot g$, is a bijection: equality of images is equivalent to $h_2^{-1}h_1\\in\\operatorname{Stab}(g)$. Hence $|G^{K_0}\\cdot g|/|G^{K_0}|=1/|\\operatorname{Stab}(g)|$. Summing over the disjoint orbits gives the final ratio in the Definition.",
+          "inputs": [
+            "given",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [
+        {
+          "case": "one vertex and no edges",
+          "calculation": "There is one flat assignment and the gauge group is G, so the action groupoid cardinality is 1/|G|.",
+          "disposition": "Confirms the zero-edge connected case."
+        },
+        {
+          "case": "trivial gauge group",
+          "calculation": "For G={1}, there is one assignment and every stabilizer is trivial, so the groupoid cardinality is 1.",
+          "disposition": "Confirms the smallest finite group."
+        },
+        {
+          "case": "one orbit with stabilizer G",
+          "calculation": "A fixed assignment under the whole gauge group contributes 1/|G|^{|K0|}.",
+          "disposition": "Confirms nonfree gauge actions are not counted as ordinary orbit counts."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Definition assigns the terminal groupoid to the empty complex, and step 3.1 explicitly retains the empty component product. Its groupoid cardinality is one."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "A one-vertex complex has one flat assignment and contributes 1/|G|. The exact check is in step 3.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For the trivial group every edge label and gauge value is forced to the identity. The exact check is in step 4.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Stabilizers may be nontrivial and are retained in the groupoid cardinality. The exact check is in step 4.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No parameter interval or boundary endpoint is part of the definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "All cells, labels, and gauge values are finite; the proof uses no choice principle. The exact check is in step 4.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item defines a finite groupoid and amplitude, not an iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item defines a finite groupoid and amplitude, not an iff claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-78",
+        "notes": "Checked every derivation against its labelled inputs and current suppliers, including limiting, empty, identity and stabilizer cases where applicable. This is Step-1 authoring evidence, not independent proof approval."
+      }
+    },
+    "thm-qftx-finite-bf-topological-invariance": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qftx-finite-flat-connection-groupoid",
+          "source_section": "Definition",
+          "quote": "Its untwisted finite BF partition function is the groupoid cardinality",
+          "uses": [
+            "1.1",
+            "3.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qftx-cw-fundamental-group-presentation",
+          "source_section": "Statement",
+          "quote": "the resulting based attaching loop has a unique reduced word",
+          "uses": [
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qftx-finite-groupoid-integration",
+          "source_section": "Definition",
+          "quote": "Its **groupoid cardinality** is",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-based-loops-and-fundamental-group",
+          "source_section": "Definition",
+          "quote": "The multiplication proposed on loop classes is",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-induced-fundamental-group-map-functoriality",
+          "source_section": "Statement",
+          "quote": "Let $f:(X,x_0)\\to(Y,y_0)$ be a continuous map with $f(x_0)=y_0$. Then\n\n$$f_*([\\alpha])=[f\\circ\\alpha]$$\n\nis a well-defined group homomorphism. For pointed continuous maps,\n\n$$\\operatorname{id}_*=\\operatorname{id},\\qquad (g\\circ f)_*=g_*\\circ f_*.$$\n\nIf $f_0,f_1:(X,x_0)\\to(Y,y_0)$ are homotopic through a homotopy that keeps\n$x_0$ at $y_0$, then $(f_0)_*=(f_1)_*$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "For each connected component $K_j$, start with any flat assignment and set the root gauge value at $v_j$ to the identity. Along the unique tree paths in $T_j$ from $v_j$, choose the gauge value at each new vertex so that the transformed label on the traversed tree edge is the identity; when that edge is traversed against its chosen orientation, use its inverse label. This recursively produces a tree-normalized assignment on every component. It is unique among gauges whose value at each $v_j$ is the identity, since the condition that each transformed tree label remain $1$ determines each next vertex value.",
+          "inputs": [
+            "given",
+            "F1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "In a tree-normalized assignment on $K_j$, every edge of $T_j$ has label $1$. Assign to each generator $x_e$ of $\\pi_1(K_j,v_j)$ the inverse of the label on its oriented non-tree edge. By [F4], this is a homomorphism for the traversal-first product on loops: holonomy of a concatenation is the reverse-ordered product, and reversing the path in the Statement reverses that order. Flatness says exactly that every relator $r_f$ maps to $1$. By the presentation in [F2], the normalized assignments on $K_j$ are in bijection with homomorphisms $\\rho:\\pi_1(K_j,v_j)\\to G$.",
+          "inputs": [
+            "F2",
+            "F4",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "For a connected subcomplex $L_i\\subseteq K_{j(i)}$ and base data as in the Statement, the pointed inclusion at $v_i$ induces a well-defined homomorphism on fundamental groups by [F5]. The base-path change map $c_{\\gamma_i}^{K_{j(i)}}:\\pi_1(K_{j(i)},v_i)\\to\\pi_1(K_{j(i)},w_{j(i)})$, given by $[\\alpha]\\mapsto[\\gamma_i*\\alpha*\\bar\\gamma_i]$, is a well-defined isomorphism: endpoint-fixed homotopies remain endpoint-fixed after adjoining $\\gamma_i,\\bar\\gamma_i$, insertion of the retraced path $\\bar\\gamma_i*\\gamma_i$ contracts in a product of loop classes, and $c_{\\bar\\gamma_i}^{K_{j(i)}}$ is its inverse. Thus $\\iota_{\\gamma_i,*}=c_{\\gamma_i}^{K_{j(i)}}\\circ\\iota_*$ is well defined. For a flat assignment $A$ and an edge loop $\\ell$ in $L_i$, the edge-product convention gives $\\Phi_{K_{j(i)}}(A)(\\iota_{\\gamma_i,*}[\\ell])=H_A(\\bar\\gamma_i)H_A(\\bar\\ell)H_A(\\gamma_i)=H_A(\\bar\\gamma_i)\\Phi_{L_i}(A|_{L_i})([\\ell])H_A(\\bar\\gamma_i)^{-1}$. If a gauge arrow $h:A\\to A'$ is applied, its path-product rule gives $H_{A'}(\\bar\\gamma_i)=h(w_{j(i)})H_A(\\bar\\gamma_i)h(v_i)^{-1}$; this is exactly the naturality condition for the stated conjugation arrows. Hence inverse path holonomy intertwines restriction with the componentwise precomposition functor up to that natural isomorphism.",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "step 2.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "On a fixed component $K_j$, a gauge transformation taking one tree-normalized assignment to another must have equal values at the two endpoints of every edge of $T_j$, because both edge labels are $1$. Since $T_j$ is connected, it is constant on all vertices of $K_j$. Conversely, each constant gauge value $a\\in G$ preserves tree normalization and conjugates every generator label by $a$. Thus the full subgroupoid on tree-normalized objects over $K_j$ is identified with $\\operatorname{Hom}(\\pi_1(K_j,v_j),G)//G$. Step 1.1 makes its inclusion into the full flat-connection groupoid essentially surjective, and the inclusion is fully faithful because it is full. The root-one gauge used in step 1.1 leaves inverse path holonomy at $v_j$ unchanged, so the object map $\\Phi_{K_j}$ in the Statement agrees with normalization followed by this identification. For any gauge arrow $h:A\\to A'$, the gauge factors telescope along each based edge loop $\\delta$ at $v_j$ to give $H_{A'}(\\bar\\delta)=h(v_j)H_A(\\bar\\delta)h(v_j)^{-1}$, so $\\Phi_{K_j}(A')=h(v_j)\\Phi_{K_j}(A)h(v_j)^{-1}$. Conversely, after normalizing $A$ and $A'$ by root-one gauges, each conjugating arrow between their representations is the unique constant gauge arrow between the normalized assignments; conjugating back gives the unique gauge arrow between $A$ and $A'$ with that value at $v_j$. Hence the stated functor is fully faithful as well as essentially surjective, and is an equivalence.",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "step": "5.1",
+          "claim": "For each connected component $K_j$, the subgroup of vertex gauges equal to $1$ at $v_j$ acts freely and transitively on each fiber of the map from flat assignments to their tree-normalized representative, by step 1.1 and its uniqueness. Its order is $|G|^{|(K_j)_0|-1}$, so $|\\operatorname{Flat}(K_j,G)|=|G|^{|(K_j)_0|-1}|\\operatorname{Hom}(\\pi_1(K_j,v_j),G)|$. Substituting this count into [F1] gives the connected normalization. Equivalently, the action-groupoid cardinality in step 4.1 sums $1/|\\operatorname{Stab}(\\rho)|$ over conjugacy classes; no freeness of the conjugation action is assumed.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "step": "6.1",
+          "claim": "For $K=K_1\\sqcup\\cdots\\sqcup K_m$, the defining edge-label and vertex-gauge data split componentwise, so $\\mathcal C_G(K)=\\prod_j\\mathcal C_G(K_j)$. Applying step 4.1 on each component gives the product equivalence $\\Phi_K:\\mathcal C_G(K)\\simeq\\mathcal R_G(K)$, and applying step 3.1 componentwise gives the stated restriction naturality. Automorphism orders multiply in a product groupoid and its isomorphism classes are componentwise tuples, so its groupoid cardinality is the product of the connected cardinalities from step 5.1. When $m=0$, the empty product is terminal with cardinality $1$.",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 3.1",
+            "step 4.1",
+            "step 5.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [
+        {
+          "case": "K is a point",
+          "calculation": "Flat(K,G) has one object, gauge group G, and Z_G(K)=1/|G|=|Hom(1,G)|/|G|.",
+          "disposition": "Confirms the connected zero-edge case."
+        },
+        {
+          "case": "trivial G",
+          "calculation": "There is one representation and one flat assignment, so the amplitude is 1 for every connected K.",
+          "disposition": "Confirms the trivial-group limit."
+        },
+        {
+          "case": "nonfree conjugation",
+          "calculation": "For K with trivial pi1, the unique homomorphism has stabilizer G and contributes 1/|G|.",
+          "disposition": "Confirms stabilizers are retained."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The connected formula assumes a nonempty connected component and chosen base vertex."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "A point has trivial pi1 and amplitude 1/|G|. The exact check is in step 4.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For G trivial, the unique homomorphism gives amplitude one. The exact check is in step 4.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Hom//G equivalence retains nontrivial centralizers, including the full stabilizer for the trivial representation. The exact check is in step 3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The closed partition function has no time endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Tree and vertex choices are finite; no global choice family is selected. The exact check is in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem gives a cardinality formula and invariance, not an iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem gives a cardinality formula and invariance, not an iff claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-78",
+        "notes": "Checked every derivation against its labelled inputs and current suppliers, including limiting, empty, identity and stabilizer cases where applicable. This is Step-1 authoring evidence, not independent proof approval."
+      }
+    },
+    "def-qftx-finite-bordism-state-span": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qftx-finite-flat-connection-groupoid",
+          "source_section": "Definition",
+          "quote": "is the action groupoid $\\operatorname{Flat}(K,G)//G^{K_0}",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qftx-finite-groupoid-integration",
+          "source_section": "Definition",
+          "quote": "Define pullback and pushforward of invariant functions by",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Each boundary and bulk triangulation has finitely many cells, and $G$ is finite. Thus the field sets and gauge groups in [F1] are finite, the boundary state spaces are finite-dimensional complex vector spaces, and the sums defining their pairings and amplitudes are finite. The displayed inner product is positive definite because every coefficient $1/|\\operatorname{Aut}(A)|$ is a positive real number.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Restricting the labels and vertex gauge transformations to a boundary transports each attaching word and its flatness equation, so the resulting edge assignment is still flat. If a boundary identification reverses a chosen edge direction, the transported label is inverted, and $(h_{t(e)}g_eh_{s(e)}^{-1})^{-1}=h_{s(e)}g_e^{-1}h_{t(e)}^{-1}$ is exactly the gauge action on that reversed edge. Thus the reindexed restrictions $r_0,r_1$ are functors. Pullback and homotopy-fiber pushforward therefore define $Z_M$ by [F2]; both are linear because they are substitution and finite weighted summation.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "If $\\Sigma_0=\\Sigma_1=\\varnothing$, the restriction span has the terminal groupoid at each end. Its induced map sends $1$ to $\\int_{A\\in\\mathcal C_G(M)}1=|\\mathcal C_G(M)|$ by [F2], which is the stated closed amplitude.",
+          "inputs": [
+            "F2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [
+        {
+          "case": "empty bordism",
+          "calculation": "The empty cell complex has terminal empty-field groupoid by the component-product convention, so its closed amplitude is one.",
+          "disposition": "Confirms the symmetric monoidal unit."
+        },
+        {
+          "case": "cylinder boundary",
+          "calculation": "The two restrictions of a product cylinder are finite groupoid functors; the gluing theorem checks their induced map is identity.",
+          "disposition": "Records the boundary identity obligation for the consuming theorem."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The empty boundary is handled by the terminal boundary groupoid and the closed groupoid-cardinality amplitude. The exact check is in step 3.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The definition permits zero-dimensional boundary manifolds when d=1. The exact check is in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A single closed boundary component has a finite function state space. The exact check is in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Nontrivial boundary automorphisms enter the inner product and pushforward weight. The exact check is in step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Incoming and outgoing boundaries are specified by collars and their orientations. The exact check is in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "All triangulations and groupoids are finite; no choice principle is used. The exact check is in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item defines state spaces and maps, not an iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item defines state spaces and maps, not an iff claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-78",
+        "notes": "Checked every derivation against its labelled inputs and current suppliers, including limiting, empty, identity and stabilizer cases where applicable. This is Step-1 authoring evidence, not independent proof approval."
+      }
+    },
+    "lem-qftx-finite-groupoid-gluing-descent": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qftx-finite-flat-connection-groupoid",
+          "source_section": "Definition",
+          "quote": "arrows $g\\to g'$ are the $h\\in G^{K_0}$ with $h\\cdot g=g'",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qftx-finite-bordism-state-span",
+          "source_section": "Definition",
+          "quote": "Fix an integer $d\\ge1$ and a finite group $G$. A **triangulated $d$-bordism** $M:\\Sigma_0\\to\\Sigma_1$ is a compact oriented piecewise-linear $d$-manifold with product collars on its boundary, where $\\Sigma_0$ and $\\Sigma_1$ are closed oriented $(d-1)$-manifolds with finite triangulations and the incoming boundary is identified with $-\\Sigma_0$ while the outgoing boundary is identified with $\\Sigma_1$. The boundary triangulations agree with the induced triangulation of $M$.\n\nFor a closed $(d-1)$-manifold $\\Sigma$, define the state space\n\n$$V_G(\\Sigma):=\\operatorname{Fun}(\\pi_0(\\mathcal C_G(\\Sigma)),\\mathbb C), \\qquad \\langle f,g\\rangle_\\Sigma :=\\sum_{[A]\\in\\pi_0(\\mathcal C_G(\\Sigma))} \\frac{\\overline{f([A])}g([A])}{|\\operatorname{Aut}_{\\mathcal C_G(\\Sigma)}(A)|}.$$\n\nThe orientation reversal $-\\Sigma$ has the same underlying triangulated cell complex and the same chosen directions on its edges, with only the manifold orientation reversed. Since the flat-connection groupoid uses the cell complex, directed edge labels, flatness equations, and vertex gauge action, not the manifold orientation, the identity on these data gives $\\mathcal C_G(-\\Sigma)=\\mathcal C_G(\\Sigma)$ and hence the same function set for their state spaces. For a complex vector space $W$, write $\\overline W$ for its conjugate vector space, with the same addition and scalar multiplication $\\lambda\\cdot_{\\overline W}w:=\\overline\\lambda w$. The map $J_\\Sigma:V_G(-\\Sigma)\\to\\overline{V_G(\\Sigma)}$ given by $J_\\Sigma(f)=\\overline f$ pointwise is complex-linear. Reversing the manifold orientation does not replace any fixed directed edge label by its inverse; inversion occurs only when a chosen edge direction itself is reversed.\n\nThe specified boundary triangulation identifications induce restriction functors. On the incoming end, $r_0$ is restriction to $\\partial_{\\mathrm{in}}M$, transport through its identification with $-\\Sigma_0$, and then the identity on the common underlying cell data $\\mathcal C_G(-\\Sigma_0)=\\mathcal C_G(\\Sigma_0)$. The outgoing functor $r_1$ is defined by restriction and its specified identification with $\\Sigma_1$. In either transport, a chosen edge mapped to the opposite chosen direction uses the inverse-edge rule from the flat-connection Definition. These functors give a span of finite groupoids\n\n$$\\mathcal C_G(\\Sigma_0)\\xleftarrow{r_0}\\mathcal C_G(M)\\xrightarrow{r_1}\\mathcal C_G(\\Sigma_1).$$\n\nThe associated linear map is\n\n$$Z_M:=(r_1)_!r_0^*:V_G(\\Sigma_0)\\to V_G(\\Sigma_1),$$\n\nwhere pullback and pushforward are the finite homotopy-fiber operations just defined. For empty boundary, the amplitude is $Z_G(M)=|\\mathcal C_G(M)|$.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qftx-finite-homotopy-pullback",
+          "source_section": "Definition",
+          "quote": "has objects $(c,e,\\alpha)$, where $c\\in\\mathcal C$, $e\\in\\mathcal E$, and $\\alpha:p(c)\\overset{\\cong}{\\longrightarrow}q(e)$ is an isomorphism in $\\mathcal D$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "A global flat labeling on $M_2\\cup_\\Sigma M_1$ restricts to flat labelings on both pieces whose boundary labels agree. The identity boundary isomorphism makes this a triple in the homotopy pullback defined by [F3]. Restriction of a global vertex gauge transformation gives a compatible pair, so restriction defines a functor from the global groupoid.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Conversely, let $(A_2,A_1,\\alpha)$ be a homotopy-pullback object as in [F3], where $\\alpha:r_2(A_2)\\to r_1(A_1)$ is a boundary gauge isomorphism. Its finite vertex values on the boundary extend to the vertices of $M_2$ by setting every non-boundary value to the identity. Applying this gauge transformation to $A_2$ makes its boundary edge labels equal to those of $A_1$. The two edge labelings then glue to a unique labeling on the union; every 2-cell lies in one of the pieces or their common boundary, so each flatness equation remains satisfied. This proves essential surjectivity.",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "By [F3], a morphism in the homotopy pullback is a pair of gauge transformations on $M_2$ and $M_1$ satisfying the boundary compatibility equation. After the boundary representatives are aligned as in step 2.1, this equation says exactly that the two vertex gauge values agree at every identified boundary vertex. They therefore glue to a unique gauge transformation on $M_2\\cup_\\Sigma M_1$. Conversely, every global gauge transformation restricts to such a compatible pair. Thus the restriction functor is fully faithful and, with step 2.1, an equivalence.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 2.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "The boundary isomorphism $\\alpha$ is load-bearing. For the one-object groupoid $BG$ of a finite group $G$, an object of the homotopy pullback of two identity functors is an element $\\alpha\\in G$. By [F3], a morphism $(u,v):\\alpha\\to\\alpha'$ satisfies $v\\alpha=\\alpha'u$, so every $\\alpha$ is isomorphic to $1$ and the automorphisms of $1$ are the diagonal pairs $(u,u)$. Thus the homotopy pullback has one isomorphism class with automorphism group isomorphic to $G$ and cardinality $1/|G|$. The ordinary set-theoretic fiber product has one object with trivial automorphism group and cardinality $1$. Omitting $\\alpha$ therefore discards the stabilizer factor required by the gluing measure.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [
+        {
+          "case": "G trivial",
+          "calculation": "The only boundary isomorphism is the identity, so the homotopy pullback reduces to the ordinary matching-label pullback.",
+          "disposition": "Confirms descent in the free trivial case."
+        },
+        {
+          "case": "one-object groupoid BG",
+          "calculation": "The homotopy pullback of id and id has cardinality 1/|G|; the ordinary point pullback has cardinality 1.",
+          "disposition": "Confirms the lost automorphism factor if boundary isomorphisms are omitted."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "If the common boundary is empty, the homotopy pullback is the product groupoid and independent component labels glue directly. The exact check is in step 3.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "A zero-dimensional triangulated boundary has a finite set of vertices and the same gauge descent proof applies. The exact check is in step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A single shared boundary is handled by the displayed isomorphism alpha. The exact check is in step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The BG case checks nontrivial boundary automorphisms and their effect on the cardinality. The exact check is in step 4.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Product collars identify the incoming/outgoing boundary vertices used by the common triangulation. The exact check is in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The boundary gauge extends by identity on finitely many non-boundary vertices. The exact check is in step 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma asserts an equivalence of groupoids, not an iff of predicates."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma asserts an equivalence of groupoids, not an iff of predicates."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-78",
+        "notes": "Checked every derivation against its labelled inputs and current suppliers, including limiting, empty, identity and stabilizer cases where applicable. This is Step-1 authoring evidence, not independent proof approval."
+      }
+    },
+    "thm-qftx-finite-groupoid-gluing": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qftx-finite-bordism-state-span",
+          "source_section": "Definition",
+          "quote": "Z_M:=(r_1)_!r_0^*:V_G(\\Sigma_0)\\to V_G(\\Sigma_1)",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.4",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qftx-finite-groupoid-push-pull-fubini",
+          "source_section": "Statement",
+          "quote": "the adjoint of $b_!a^*$ is $a_!b^*",
+          "uses": [
+            "1.2",
+            "1.3",
+            "1.4",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qftx-finite-bf-topological-invariance",
+          "source_section": "Statement",
+          "quote": "Let $K$ be a finite CW complex, possibly disconnected, and let $G$ be a finite group. Write its connected components as $K_1,\\ldots,K_m$ and choose a vertex $v_j$ in each. Let $\\mathcal R_G(K)$ be the product over $j$ of the action groupoids whose objects are homomorphisms $\\rho:\\pi_1(K_j,v_j)\\to G$ and whose arrows $\\rho\\to\\rho'$ are elements $a\\in G$ satisfying $\\rho'(\\gamma)=a\\rho(\\gamma)a^{-1}$ for every loop class $\\gamma$; identity arrows are labeled by $1$, and if $a:\\rho\\to\\rho'$ and $b:\\rho'\\to\\rho''$, then their composite $b\\circ a$ is labeled by $ba$. For $K=\\varnothing$, this empty product is the terminal groupoid. Choosing a maximal tree in each component, inverse path holonomy defines an equivalence $\\Phi_K:\\mathcal C_G(K)\\simeq\\mathcal R_G(K)$: for an edge path traversing $e_1,\\ldots,e_n$ with signs $\\epsilon_k$, its holonomy is $H_A(e_1^{\\epsilon_1}\\cdots e_n^{\\epsilon_n})=g_{e_n}^{\\epsilon_n}\\cdots g_{e_1}^{\\epsilon_1}$, and $\\Phi_K(A)$ sends a loop class represented by an edge loop $[\\gamma]$ to $H_A(\\bar\\gamma)$; a gauge arrow $h$ maps to the conjugating arrow $h(v_j)$ on component $K_j$. In particular, for connected $K$,\n\n$$|\\mathcal C_G(K)|=\\frac{|\\operatorname{Hom}(\\pi_1(K,v_1),G)|}{|G|},$$\n\nand for arbitrary finite $K$,\n\n$$|\\mathcal C_G(K)|=\\prod_{j=1}^{m}\\frac{|\\operatorname{Hom}(\\pi_1(K_j,v_j),G)|}{|G|}.$$\n\nThe action retains all conjugation stabilizers. For a subcomplex inclusion $\\iota:L\\hookrightarrow K$, choose a base vertex $v_i$ in each component $L_i$, a base vertex $w_{j(i)}$ in its containing component $K_{j(i)}$, and an edge path $\\gamma_i$ in $K_{j(i)}$ from $w_{j(i)}$ to $v_i$. The associated based map is $\\iota_{\\gamma_i,*}([\\ell])=[\\gamma_i*\\iota(\\ell)*\\bar\\gamma_i]$. Under $\\Phi_K$ and $\\Phi_L$, restriction corresponds to precomposition by these maps, up to the natural isomorphism whose component at a flat assignment $A$ is conjugation by $H_A(\\bar\\gamma_i)$. Thus the partition function depends only on the fundamental-group representation groupoid, not on the chosen finite cell decomposition.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qftx-finite-groupoid-gluing-descent",
+          "source_section": "Statement",
+          "quote": "The finite flat-connection groupoid on the glued manifold is equivalent to the homotopy pullback groupoid",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qftx-finite-homotopy-pullback",
+          "source_section": "Definition",
+          "quote": "has objects $(c,e,\\alpha)$, where $c\\in\\mathcal C$, $e\\in\\mathcal E$, and $\\alpha:p(c)\\overset{\\cong}{\\longrightarrow}q(e)$ is an isomorphism in $\\mathcal D$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-induced-fundamental-group-map-functoriality",
+          "source_section": "Statement",
+          "quote": "Let $f:(X,x_0)\\to(Y,y_0)$ be a continuous map with $f(x_0)=y_0$. Then\n\n$$f_*([\\alpha])=[f\\circ\\alpha]$$\n\nis a well-defined group homomorphism. For pointed continuous maps,\n\n$$\\operatorname{id}_*=\\operatorname{id},\\qquad (g\\circ f)_*=g_*\\circ f_*.$$\n\nIf $f_0,f_1:(X,x_0)\\to(Y,y_0)$ are homotopic through a homotopy that keeps\n$x_0$ at $y_0$, then $(f_0)_*=(f_1)_*$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "By [F4], with the homotopy-pullback groupoid explicitly given by [F5], the groupoid on the glued bordism is equivalent to the homotopy-pullback composite of the restriction spans for $M_1$ and $M_2$.",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "Write $\\Sigma=\\bigsqcup_{j=1}^m\\Sigma_j$ and let $C_j=\\Sigma_j\\times[0,1]$. For each $j$ and $\\epsilon\\in\\{0,1\\}$, choose $v_j\\in\\Sigma_j$ and base the end inclusion $i_\\epsilon:\\Sigma_j\\to C_j$ at $(v_j,\\epsilon)$. The projection $p_j:C_j\\to\\Sigma_j$ satisfies $p_j i_\\epsilon=\\operatorname{id}$, and $i_\\epsilon p_j$ is based-homotopic to the identity through $H_s^{(0)}(x,t)=(x,(1-s)t)$ for $\\epsilon=0$ and $H_s^{(1)}(x,t)=(x,(1-s)t+s)$ for $\\epsilon=1$. By [F6], these maps induce inverse isomorphisms on fundamental groups. Precomposition with a group isomorphism is an equivalence of representation action groupoids, with inverse precomposition by its inverse and the identity map on conjugating arrows. The componentwise representation equivalence and restriction naturality in [F3] therefore make both end restriction functors $\\mathcal C_G(C_j)\\to\\mathcal C_G(\\Sigma_j)$ equivalences; taking products gives the same conclusion for disconnected $\\Sigma$. Choose an edge path in each connected cylinder 1-skeleton joining its two end base vertices. The base-path naturality in [F3] gives a natural isomorphism between the two restriction functors. Hence the cylinder span is equivalent to the identity span. Each homotopy fiber of either end equivalence has one isomorphism class and trivial automorphism group, while the natural isomorphism identifies the two boundary values; its weighted push-pull map is therefore the identity on $V_G(\\Sigma)$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F6",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "step": "1.3",
+          "claim": "For a disjoint union, a flat assignment and a vertex gauge transformation are exactly independent assignments on its components. Hence the bulk and boundary groupoids are products. Since the component sets are finite, the indicator functions of pairs of isomorphism classes form the tensor-product basis of the functions on their product. The automorphism weights multiply and the finite fiber sums factor, so the state spaces and maps identify with tensor products.",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "step": "1.4",
+          "claim": "By the corrected orientation convention in [F1], reversing the manifold orientation leaves each fixed directed edge label and its gauge action unchanged; it only exchanges the incoming and outgoing restriction functors. Thus the span of $\\overline M$ is the transposed span with the same underlying finite groupoids, so [F2] gives $Z_{\\overline M}=Z_M^\\dagger$ on those function spaces. Every coefficient of these push-pull maps in the isomorphism-class indicator bases is a finite sum of positive reciprocal automorphism orders, hence is real; the identity on underlying groupoids therefore yields $Z_{\\overline M}\\circ c_{\\Sigma_1}=c_{\\Sigma_0}\\circ Z_M^\\dagger$. Pointwise conjugation is the only anti-linear operation, since this model has no cocycle phase.",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The push-pull composition identity in [F2] identifies the linear map of that composite span with $Z_{M_2}\\circ Z_{M_1}$. Equivalent finite groupoids give the same weighted fiber sums, so this map is $Z_{M_2\\cup_{\\Sigma_1}M_1}$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "For empty boundary the amplitude is $|\\mathcal C_G(M)|$ by [F1]. Applying [F3] to connected $M$ gives $Z_G(M)=|\\operatorname{Hom}(\\pi_1(M),G)|/|G|$, with all conjugation stabilizers retained. The gluing, identity, disjoint-union, and orientation statements above establish the asserted finite state-sum rules.",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 2.1",
+            "step 1.2",
+            "step 1.3",
+            "step 1.4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [
+        {
+          "case": "cylinder",
+          "calculation": "Restriction at either end induces an equivalence of finite flat-connection groupoids, whose homotopy fibers have cardinality one.",
+          "disposition": "Confirms identity action."
+        },
+        {
+          "case": "empty boundary",
+          "calculation": "The state map from the empty object to itself evaluates to |C_G(M)|.",
+          "disposition": "Confirms the partition function convention."
+        },
+        {
+          "case": "disjoint union",
+          "calculation": "For M=M1 disjoint-union M2, the field groupoid is C_G(M1)×C_G(M2), so the weighted sum factors.",
+          "disposition": "Confirms monoidal multiplicativity."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The empty boundary is evaluated by the terminal-groupoid push-pull and gives the finite groupoid cardinality. The exact check is in step 3.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The construction permits d=1 with zero-dimensional closed boundary objects. The exact check is in step 1.2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The identity cylinder on every boundary object acts as the identity map. The exact check is in step 1.2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Homotopy fibers and weighted inner products retain nontrivial automorphism groups. The exact check is in step 3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Incoming/outgoing orientation and collars are explicitly exchanged under bordism reversal. The exact check is in step 1.4."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Finiteness of G and triangulations makes all field sets and sums finite. The exact check is in step 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem proves functorial identities, not an iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem proves functorial identities, not an iff claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-78",
+        "notes": "Checked every derivation against its labelled inputs and current suppliers, including limiting, empty, identity and stabilizer cases where applicable. This is Step-1 authoring evidence, not independent proof approval."
+      }
+    },
+    "ex-qftx-finite-bf-three-torus": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-qftx-finite-bf-topological-invariance",
+          "source_section": "Statement",
+          "quote": "Let $K$ be a finite CW complex, possibly disconnected, and let $G$ be a finite group. Write its connected components as $K_1,\\ldots,K_m$ and choose a vertex $v_j$ in each. Let $\\mathcal R_G(K)$ be the product over $j$ of the action groupoids whose objects are homomorphisms $\\rho:\\pi_1(K_j,v_j)\\to G$ and whose arrows $\\rho\\to\\rho'$ are elements $a\\in G$ satisfying $\\rho'(\\gamma)=a\\rho(\\gamma)a^{-1}$ for every loop class $\\gamma$; identity arrows are labeled by $1$, and if $a:\\rho\\to\\rho'$ and $b:\\rho'\\to\\rho''$, then their composite $b\\circ a$ is labeled by $ba$. For $K=\\varnothing$, this empty product is the terminal groupoid. Choosing a maximal tree in each component, inverse path holonomy defines an equivalence $\\Phi_K:\\mathcal C_G(K)\\simeq\\mathcal R_G(K)$: for an edge path traversing $e_1,\\ldots,e_n$ with signs $\\epsilon_k$, its holonomy is $H_A(e_1^{\\epsilon_1}\\cdots e_n^{\\epsilon_n})=g_{e_n}^{\\epsilon_n}\\cdots g_{e_1}^{\\epsilon_1}$, and $\\Phi_K(A)$ sends a loop class represented by an edge loop $[\\gamma]$ to $H_A(\\bar\\gamma)$; a gauge arrow $h$ maps to the conjugating arrow $h(v_j)$ on component $K_j$. In particular, for connected $K$,\n\n$$|\\mathcal C_G(K)|=\\frac{|\\operatorname{Hom}(\\pi_1(K,v_1),G)|}{|G|},$$\n\nand for arbitrary finite $K$,\n\n$$|\\mathcal C_G(K)|=\\prod_{j=1}^{m}\\frac{|\\operatorname{Hom}(\\pi_1(K_j,v_j),G)|}{|G|}.$$\n\nThe action retains all conjugation stabilizers. For a subcomplex inclusion $\\iota:L\\hookrightarrow K$, choose a base vertex $v_i$ in each component $L_i$, a base vertex $w_{j(i)}$ in its containing component $K_{j(i)}$, and an edge path $\\gamma_i$ in $K_{j(i)}$ from $w_{j(i)}$ to $v_i$. The associated based map is $\\iota_{\\gamma_i,*}([\\ell])=[\\gamma_i*\\iota(\\ell)*\\bar\\gamma_i]$. Under $\\Phi_K$ and $\\Phi_L$, restriction corresponds to precomposition by these maps, up to the natural isomorphism whose component at a flat assignment $A$ is conjugation by $H_A(\\bar\\gamma_i)$. Thus the partition function depends only on the fundamental-group representation groupoid, not on the chosen finite cell decomposition.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qftx-cw-fundamental-group-presentation",
+          "source_section": "Statement",
+          "quote": "Cells of dimension at least three add no generators or relators.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Give $S^3$ its CW structure with one 0-cell and one 3-cell. Its 1-skeleton has no non-tree edges and it has no 2-cell relators, so [F2] gives $\\pi_1(S^3)=1$. There is exactly one homomorphism from the trivial group to $G$, and [F1] gives $Z_G(S^3)=1/|G|$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Give $T^3$ its CW structure with one 0-cell, three 1-cells $a,b,c$, three 2-cells attached along the commutators $aba^{-1}b^{-1}$, $bcb^{-1}c^{-1}$, and $cac^{-1}a^{-1}$, and one 3-cell. By [F2], $\\pi_1(T^3)=\\langle a,b,c\\mid [a,b]=[b,c]=[c,a]=1\\rangle\\cong\\mathbb Z^3$. The isomorphism sends $(1,0,0),(0,1,0),(0,0,1)$ to $a,b,c$: it is surjective because these generators generate the presented group, and its inverse sends $a,b,c$ to the standard basis because the relators are satisfied.",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "A homomorphism $\\mathbb Z^3\\to G$ is determined by the images of its three standard generators. Every triple in $G^3$ satisfies the commutation relations because $G$ is abelian, so $|\\operatorname{Hom}(\\mathbb Z^3,G)|=|G|^3$. Equation [F1] now gives $Z_G(T^3)=|G|^3/|G|=|G|^2$. For $G=\\mathbb Z/2\\mathbb Z$, the two amplitudes are $1/2$ and $4$, respectively, so neither normalization forces every scalar amplitude to be one.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [
+        {
+          "case": "G trivial",
+          "calculation": "Both Hom sets contain one map and both amplitudes equal one.",
+          "disposition": "Confirms the trivial-group case."
+        },
+        {
+          "case": "G=Z/2Z",
+          "calculation": "The S3 value is 1/2 and the T3 value is 2^2=4.",
+          "disposition": "Confirms finite topological amplitudes need not be one."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Both examples are nonempty connected closed manifolds."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "S3 has trivial pi1 and exactly one homomorphism to G. The exact check is in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For G trivial both partition values are one. The exact check is in step 3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The connected formula includes the full gauge-group denominator even when the representation stabilizer is nontrivial. The exact check is in step 3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The examples are closed manifolds with no bordism endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Only three generator images are counted; the finite triple set is explicit. The exact check is in step 3.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example gives two calculations, not an iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example gives two calculations, not an iff claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-78",
+        "notes": "Checked every derivation against its labelled inputs and current suppliers, including limiting, empty, identity and stabilizer cases where applicable. This is Step-1 authoring evidence, not independent proof approval."
+      }
+    },
+    "def-qftx-finite-homotopy-pullback": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qftx-finite-groupoid-integration",
+          "source_section": "Definition",
+          "quote": "A **finite groupoid** is a small category in which every morphism is invertible, with finitely many isomorphism classes and a finite automorphism group at every object.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Identity pairs satisfy the compatibility equation. If $(u,v)$ and $(u',v')$ are composable compatible pairs, then $q(v'\\circ v)\\circ\\alpha=q(v')\\circ q(v)\\circ\\alpha=q(v')\\circ\\alpha'\\circ p(u)=\\alpha''\\circ p(u'\\circ u)$, so their composite is compatible. Inverting the compatibility equation shows $(u^{-1},v^{-1})$ is compatible with the reversed objects. Thus the stated data form a groupoid.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Choose one representative from each of the finitely many isomorphism classes of $\\mathcal C$ and $\\mathcal E$. If $u:c\\to c_0$ and $v:e\\to e_0$ are isomorphisms to representatives, then $(c,e,\\alpha)$ is isomorphic to $(c_0,e_0,q(v)\\circ\\alpha\\circ p(u)^{-1})$. For each representative pair $(c_0,e_0)$, the possible isomorphisms $p(c_0)\\cong q(e_0)$ are either absent or form a set on which postcomposition by $\\operatorname{Aut}_{\\mathcal D}(q(e_0))$ acts freely and transitively; that set has finite size by [F1]. Thus there are finitely many isomorphism classes of triples. The automorphism group of a triple is the subgroup of $\\operatorname{Aut}_{\\mathcal C}(c_0)\\times\\operatorname{Aut}_{\\mathcal E}(e_0)$ satisfying the compatibility equation, and is finite by [F1]. Hence the homotopy pullback is a finite groupoid.",
+          "inputs": [
+            "given",
+            "F1",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [
+        {
+          "case": "empty input groupoid",
+          "calculation": "If either source groupoid has no objects, there are no triples (c,e,α), so the homotopy pullback is empty.",
+          "disposition": "Confirms the empty-object case."
+        },
+        {
+          "case": "terminal target and terminal sources",
+          "calculation": "There is one triple with the unique identity isomorphism and trivial automorphism group.",
+          "disposition": "Confirms the one-object endpoint."
+        },
+        {
+          "case": "identity maps BG to BG",
+          "calculation": "Triples are elements α in G; compatible arrows act transitively and the automorphisms of α=1 are the diagonal copy of G.",
+          "disposition": "Confirms that the boundary identification carries stabilizers."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "If either source has no objects, the pullback has no triples. The exact check is in step 2.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If a chosen pair of source classes has no isomorphism between its images, it contributes no pullback object. The exact check is in step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For terminal source groupoids over a terminal target, the pullback is terminal. The exact check is in step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For the two identity functors BG to BG, the isomorphism coordinate produces the diagonal stabilizer. The exact check is in step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The arrow compatibility equation is preserved under composition and inversion. The exact check is in step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Only finitely many isomorphism-class representatives and finite isomorphism torsors are used; no infinite choice is made. The exact check is in step 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item defines a groupoid construction and asserts no iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item defines a groupoid construction and asserts no iff claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-78",
+        "notes": "Checked the arrow equation, finite isomorphism-class and automorphism hypotheses, and the empty and BG boundary cases. This is Step-1 authoring evidence, not independent proof approval."
+      }
+    }
+  }
+}

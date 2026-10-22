@@ -1,0 +1,83 @@
+---
+id: post-nrqmx-magnetic-model-extension
+kind: postulate
+domain: physics
+library: physics
+title: Unbounded vector potential and effective Pauli model
+status: draft
+origin: pipeline
+pipeline_run: physics-non-fluid-129-2026-10-21-r2
+dependency_level: 2
+deps:
+  - def-nrqmx-magnetic-form-data
+  - lem-nrqmx-magnetic-form-closability
+  - thm-nrqmx-closed-form-representation
+dependency_roles:
+  def-nrqmx-magnetic-form-data: formulation-prerequisite
+  lem-nrqmx-magnetic-form-closability: mathematical-premise
+  thm-nrqmx-closed-form-representation: mathematical-premise
+physical_scope: "A nonrelativistic point-particle model with a static smooth external vector potential and locally integrable lower-bounded scalar potential in Euclidean space, in SI units. An optional spin-half Pauli coupling is an effective model term only when its form is closable and semibounded; no measured g-factor or relativistic correction is asserted."
+provenance:
+  statement: ai-altered
+  proof: not-applicable
+sources:
+  references:
+    - title: "David Tong, Applications of Quantum Mechanics, §§1.1.1 and 1.5, minimal coupling and spin in a magnetic field"
+      url: "https://www.damtp.cam.ac.uk/user/tong/aqm/aqm.pdf"
+    - title: "V. P. Nair, Notes on Quantum Mechanics, §§11.2–11.3, spin magnetic moment and Pauli equation"
+      url: "https://nair.ccny.cuny.edu/Notes-QM.pdf"
+    - title: "Aram Harrow, MIT 8.06 Spring 2016 Lecture Notes, Chapter 4, §3.1, charged-particle Hamiltonian"
+      url: "https://ocw.mit.edu/courses/8-06-quantum-physics-iii-spring-2016/6e02558ecf4b7af37d2cdff550fc0f71_MIT8_06S16_chap4.pdf"
+---
+
+## Postulate
+
+Use SI units with mass $m>0$ in kilograms, charge $q\in\mathbb R$ in
+coulombs, action constant $\hbar>0$ in joule-seconds, vector potential
+$A$ in tesla-metres, magnetic field $B=\nabla\times A$ in teslas, and
+scalar potential-energy function $V$ in joules. For $d\ge1$ and smooth real
+$A:\mathbb R^d\to\mathbb R^d$, with real
+$V\in L^1_{\mathrm{loc}}(\mathbb R^d)$ bounded below, adopt the minimal
+coupling assignment whose core form is
+$$q_{A,V}[u]=\frac1{2m}\sum_{j=1}^d\|(-i\hbar\partial_j-qA_j)u\|_2^2+\int_{\mathbb R^d}V|u|^2,\qquad u\in C_c^\infty(\mathbb R^d;\mathbb C).$$
+Use its closed form closure and the unique self-adjoint representing
+Hamiltonian. For dimensional form norms use the fixed reference energy
+$E_0=1\,\mathrm J$: apply the closed-form representation to
+$q_{A,V}/E_0$ and multiply the representing operator by $E_0$.
+
+For an optional spin-half degree of freedom in three dimensions, define
+$$\sigma_1=\begin{pmatrix}0&1\\1&0\end{pmatrix},\quad \sigma_2=\begin{pmatrix}0&-i\\i&0\end{pmatrix},\quad \sigma_3=\begin{pmatrix}1&0\\0&-1\end{pmatrix},\qquad S_j=\frac{\hbar}{2}\sigma_j.$$
+For a core spinor $u=(u_1,u_2)\in C_c^\infty(\mathbb R^3;\mathbb C^2)$,
+define the spin-independent form
+$$q^{(2)}_{A,V}[u]=q_{A,V}[u_1]+q_{A,V}[u_2].$$
+For a declared dimensionless real coupling $g$, adopt the effective Pauli core
+form
+$$q^{\mathrm P}_{A,V,g}[u]=q^{(2)}_{A,V}[u]-\frac{gq}{2m}\int_{\mathbb R^3}u(x)^*(S\cdot B(x))u(x)\,dx,$$
+where $u^*$ is conjugate transpose and $(S\cdot B)(x)=\sum_jS_jB_j(x)$.
+Include this term only in model instances where the resulting form is
+closable and bounded below, and use its closed form closure and representing
+Hamiltonian. No universal semiboundedness for arbitrary $A,V,g$ is asserted.
+
+## Postulate references
+
+[David Tong, *Applications of Quantum Mechanics*, §§1.1.1 and 1.5](https://www.damtp.cam.ac.uk/user/tong/aqm/aqm.pdf)
+
+[V. P. Nair, *Notes on Quantum Mechanics*, §§11.2–11.3](https://nair.ccny.cuny.edu/Notes-QM.pdf)
+
+[Aram Harrow, MIT 8.06 Lecture Notes, Chapter 4, §3.1](https://ocw.mit.edu/courses/8-06-quantum-physics-iii-spring-2016/6e02558ecf4b7af37d2cdff550fc0f71_MIT8_06S16_chap4.pdf)
+
+## Scope and non-derivation
+
+The core form data and the closability argument are given in
+[[def-nrqmx-magnetic-form-data]] and
+[[lem-nrqmx-magnetic-form-closability]]. The form-representation interface
+[[thm-nrqmx-closed-form-representation]] specifies the unique self-adjoint
+operator associated with the adopted closed form when its stated choice
+axioms hold.
+
+The mathematical identity in
+[[pthm-nrqmx-pauli-square-identity]] is a formal-core identity. This postulate
+does not identify $g$ with an electron measurement, derive the anomalous
+magnetic moment, or use the Dirac or quantum-electrodynamic theories. The
+linear Landau gauge is covered by the local closed-form construction; no
+bounded-coefficient $H^2$ hypothesis is imposed.

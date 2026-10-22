@@ -1,0 +1,844 @@
+{
+  "version": 1,
+  "scope": [
+    "thm-nrqmx-ritz-upper-bounds",
+    "thm-nrqmx-spectral-residual-certificate",
+    "thm-nrqmx-schrodinger-residual-bound",
+    "ex-nrqmx-oscillator-ritz-exact",
+    "cex-nrqmx-small-residual-no-label"
+  ],
+  "contracts": {
+    "thm-nrqmx-ritz-upper-bounds": {
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement explicitly assigns +infinity to the infimum over an empty k-plane family and to the threshold when essential spectrum is empty. Every asserted Ritz value requires dim(V)>=k; proof step 3.2 produces k independent approximants eventually for each eigenvalue below that threshold."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For a zero operator on a finite-dimensional H, step 1.1 gives zero Ritz values, and once V_n=H the sequence in steps 2.1–3.2 is exactly zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 with k=1 is the minimum Rayleigh quotient on the trial space; step 1.2 gives the ground-state upper bound."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and steps 1.2–2.2 count multiplicities and use the full first-k eigenspace, including repeated eigenvalues."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement requires the strict inequality λ_k(A)<α for convergence; the threshold case λ_k(A)=α is outside steps 1.2–4.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement and [A1] explicitly assume Choice and Countable Choice; the min–max supplier carries the same assumptions."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem gives one-way upper-bound and convergence conclusions, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem gives one-way upper-bound and convergence conclusions, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Take H=C², A=diag(1,3), V₁=span{e₁}, and Vₙ=C² for every n≥2, with the standard inner product.",
+          "result": "The global min–max values are 1 and 3; θ₁(V₁)=1, θ₁(Vₙ)=1 and θ₂(Vₙ)=3 for n≥2. Replacing V₁ by span{e₁+e₂} gives θ₁=2≥1.",
+          "verifies": "Steps 1.1–2.2 and 3.1–4.1."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-56-3a",
+        "notes": "Independently checked complete proof and current exact suppliers: AC/CC form min–max yields eigenvalues only below alpha; spectral/Borel domains give S squared=A+cI and the closed form identity; Cauchy–Schwarz controls q in graph norm. Repaired F6 to describe instructions only, and step 1.1 derives Mc=rho Gc and c*Gc=delta by multiplying the normalized Hermitian problem; the invertible converse preserves multiplicity. First-linear entries yield q(e_j,e_i)=rho_j delta_ij. Dimension intersection proves the finite min–max equality. Subfamily inclusion gives the upper bound without a spectral-gap assumption. Nested form-dense approximants are eventually independent; uniform quotient control also handles negative lambda_k and repeated eigenvalues. k above dim H has lambda_k=+infinity and fails strict threshold, so no nonexistent Ritz value is asserted. Empty essential spectrum uses alpha=+infinity; threshold equality is excluded. Reader/refuter findings 3 are confirmed nonfatal and repaired by the explicit calculation; no other defect found."
+      },
+      "routine_steps": [],
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-discrete-and-essential-spectrum-of-a-self-adjoint-operator",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. Let $A$ be a self-adjoint operator on a complex Hilbert space $H$ with\nspectral projection valued measure $E$ on $\\mathbb R$\n([[thm-spectral-theorem-for-unbounded-self-adjoint-operators]]). The **discrete\nspectrum** $\\sigma_{\\mathrm d}(A)$ is the set of eigenvalues of $A$ that are\nisolated points of $\\sigma(A)$ and whose eigenspace is finite dimensional; the\n**essential spectrum** is\n$$\\sigma_{\\mathrm{ess}}(A):=\\sigma(A)\\setminus\\sigma_{\\mathrm d}(A),$$\nwith $\\sigma(A)$ as in [[def-resolvent-and-spectrum-of-a-closed-unbounded-operator]].\n\nFor $H=\\{0\\}$ use its unique PVM directly: the spectrum and both parts\nare empty and every projection has rank zero. Below suppose $H\\ne\\{0\\}$,\nas required by the cited spectral theorem.\n\n**Spectral-projection description, with proofs.** Fix $\\lambda\\in\\mathbb R$ and write\n$P_\\varepsilon:=E((\\lambda-\\varepsilon,\\lambda+\\varepsilon))$ for\n$\\varepsilon>0$.\n\nHere rank means the algebraic dimension of the range when finite; rank\n$=\\infty$ means the range is not finite dimensional. The calculus\n[[thm-unbounded-borel-functional-calculus]] gives the support facts:\n$E(\\mathbb R\\setminus\\sigma(A))=0$, and every open interval about a\nspectral point has nonzero projection. Projections on disjoint sets have\northogonal ranges, and $E(B)E(C)=E(B\\cap C)$\n[[def-projection-valued-measure]].\n\n1. *$E(\\{\\lambda\\})$ is the projection onto $\\ker(A-\\lambda)$.* If\n   $x=E(\\{\\lambda\\})x$, its scalar measure $E_x$ is supported on\n   $\\{\\lambda\\}$ by the projection identity. Thus\n   $\\int\\mu^2dE_x=\\lambda^2\\|x\\|^2<\\infty$, so $x\\in D(A)$, and\n   $$\\|(A-\\lambda)x\\|^2=\\int|\\mu-\\lambda|^2dE_x=0.$$\n   The domain and norm identities are supplied by the unbounded calculus and\n   [[lem-unbounded-pvm-integral-is-well-defined-and-closed]]. Hence $Ax=\\lambda x$.\n   Conversely, for an eigenvector (or the zero vector) the same norm identity\n   gives zero integral. On $\\{|\\mu-\\lambda|\\ge1/n\\}$ this bounds the measure\n   by $n^2$ times that zero integral; taking the countable union shows\n   $E_x(\\mathbb R\\setminus\\{\\lambda\\})=0$.\n   Since $\\|(I-E(\\{\\lambda\\}))x\\|^2$ equals this scalar measure,\n   $E(\\{\\lambda\\})x=x$.\n2. *A finite-rank interval contains only finitely many spectral points.*\n   If $P_\\varepsilon$ has rank $r<\\infty$ and its interval contained $r+1$\n   distinct spectral points, choose disjoint small open intervals about those\n   finitely many points, all contained in the given interval. Each has a\n   nonzero projection by support. Choose one unit vector in each range.\n   They are orthonormal vectors in $\\operatorname{ran}P_\\varepsilon$, hence\n   linearly independent (take inner products with each vector), contradicting\n   its dimension $r$. Thus there are at most $r$ spectral points there.\n   In particular any $\\lambda\\in\\sigma(A)$ with such a finite-rank\n   $P_\\varepsilon$ is isolated: take a smaller interval around $\\lambda$\n   excluding the other finitely many points. For that interval the projection\n   is $E(\\{\\lambda\\})$ by support, is nonzero by support, and has finite rank\n   since its range lies in $\\operatorname{ran}P_\\varepsilon$. By item 1,\n   $\\lambda$ is an eigenvalue of finite multiplicity.\n3. *The two rank characterizations.* If $\\lambda\\in\\sigma_{\\mathrm d}(A)$,\n   an isolating interval has projection $E(\\{\\lambda\\})$, of finite rank\n   by item 1. Conversely, if $\\lambda$ is an eigenvalue and some\n   $P_\\varepsilon$ has finite rank, item 2 proves it discrete. Hence\n   $$\\lambda\\in\\sigma_{\\mathrm d}(A)\\quad\\Longleftrightarrow\\quad\\lambda\\text{ is an eigenvalue and some }P_\\varepsilon\\text{ has finite rank}.$$\n   If $\\lambda\\in\\sigma_{\\mathrm{ess}}(A)$, item 2 excludes every finite-rank\n   interval. Conversely, if every $P_\\varepsilon$ has infinite rank, each is\n   nonzero, so support puts $\\lambda$ in $\\sigma(A)$, and the just-proved\n   discrete characterization excludes it from $\\sigma_{\\mathrm d}(A)$.\n   Therefore\n   $$\\lambda\\in\\sigma_{\\mathrm{ess}}(A)\\quad\\Longleftrightarrow\\quad\\operatorname{rank}P_\\varepsilon=\\infty\\text{ for every }\\varepsilon>0.$$\n4. *$\\sigma_{\\mathrm{ess}}(A)$ is closed.* If $\\lambda_n\\in\n   \\sigma_{\\mathrm{ess}}(A)$ and $\\lambda_n\\to\\lambda$, then for every\n   $\\varepsilon>0$ some $n$ has $(\\lambda_n-\\varepsilon/2, \\lambda_n+\n   \\varepsilon/2)\\subseteq(\\lambda-\\varepsilon,\\lambda+\\varepsilon)$, so\n   $\\operatorname{rank}P_\\varepsilon\\ge\\operatorname{rank}P_{\\varepsilon/2}^{(n)}\n   =\\infty$ and $\\lambda\\in\\sigma_{\\mathrm{ess}}(A)$ by item 3.\n\nThe closure conclusion is in $\\mathbb R$, and also in $\\mathbb C$ since\n$\\mathbb R$ is closed there. A spectral accumulation point has infinitely\nmany spectral points in every surrounding interval, so item 2 forces infinite\nrank. An isolated eigenvalue of infinite multiplicity has its infinite-dimensional\neigenspace inside every interval range by item 1. Consequently an accumulation point of $\\sigma(A)$ and an isolated eigenvalue of\ninfinite multiplicity both lie in $\\sigma_{\\mathrm{ess}}(A)$, and $\\sigma(A)$\nis the disjoint union of $\\sigma_{\\mathrm d}(A)$ and\n$\\sigma_{\\mathrm{ess}}(A)$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-nrqmx-form-min-max",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice and Countable Choice. Let $H\\ne\\{0\\}$ be a complex Hilbert space and\nlet $A$ be a self-adjoint operator with $A\\ge-cI$ for some $c\\ge0$. Let\n$E_A$ be its spectral projection-valued measure, let\n$Q(A)=D((A+cI)^{1/2})$, and define the associated form by\n$$q_A[u]=\\|(A+cI)^{1/2}u\\|^2-c\\|u\\|^2\\quad(u\\in Q(A)).$$\nSet $\\alpha=\\inf\\sigma_{\\mathrm{ess}}(A)$, with $\\alpha=+\\infty$ when the\nessential spectrum is empty. For each integer $k\\ge1$, put\n$$\\lambda_k(A)=\\inf_{\\substack{L\\subseteq Q(A)\\text{ linear},\\ \\dim L=k}}\\ \\sup_{\\substack{u\\in L\\\\\\|u\\|=1}}q_A[u],$$\nwhere the infimum of an empty family is $+\\infty$. Then $\\lambda_k(A)$ is the\n$k$th eigenvalue below $\\alpha$, counted with multiplicity, when at least $k$\nsuch eigenvalues exist; otherwise $\\lambda_k(A)=\\alpha$. If the inclusion\n$Q(A)\\hookrightarrow H$ is compact in the form norm\n$\\|u\\|_{Q(A)}^2=q_A[u]+(c+1)\\|u\\|^2$, then $A$ has a complete orthonormal\neigenbasis; every eigenvalue has finite multiplicity, and the only possible\naccumulation is at $+\\infty$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-spectral-theorem-for-unbounded-self-adjoint-operators",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $T$ be a self-adjoint operator on the nonzero\ncomplex Hilbert space $H$. Then there is a unique regular projection valued\nmeasure $E$ on the Borel $\\sigma$-algebra of $\\mathbb R$ such that\n$$\nD(T)=\\Bigl\\{x\\in H:\\int_{\\mathbb R}\\lambda^2\\,dE_x(\\lambda)<\\infty\\Bigr\\},\\qquad Tx=\\int_{\\mathbb R}\\lambda\\,dE(\\lambda)x\\quad(x\\in D(T)).\n$$\nConversely, if $E$ is a regular projection valued measure on $\\mathbb R$, then\nthe operator $\\int\\lambda\\,dE$ with that domain is self-adjoint and its\nspectral projection valued measure is $E$ again.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-unbounded-borel-functional-calculus",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $T$ be a self-adjoint operator with spectral\nprojection valued measure $E$ on $\\mathbb R$ acting on a complex Hilbert space $H$\n([[thm-spectral-theorem-for-unbounded-self-adjoint-operators]]) and let\n$f,g:\\mathbb R\\to\\mathbb C$ be Borel. Write $u(T)=u(E)$, with the truncation definition below. If $H=\\{0\\}$, use its unique PVM and unique full-domain operator directly. Then:\n\n1. $f(T)^*=\\overline f(T)$;\n2. $f(T)g(T)$ has domain $D(g(T))\\cap D((fg)(T))$ and equals the restriction of\n   $(fg)(T)$ to that domain, and its closure is $(fg)(T)$;\n3. on $D(f(T))\\cap D(g(T))$ the sum $f(T)+g(T)$ equals the restriction of\n   $(f+g)(T)$, and the closure of $f(T)+g(T)$ is $(f+g)(T)$;\n4. the spectrum of $f(T)$ is the essential range\n   $\\{z\\in\\mathbb C:E(f^{-1}(B_\\varepsilon(z)))\\ne0$ for every\n   $\\varepsilon>0\\}$ of $f$ with respect to $E$;\n5. if $f$ is continuous then that essential range is the closure of\n   $f(\\sigma(T))$, with the closure redundant when $f(\\sigma(T))$ is closed.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional complex inner product space and let $T:V\\to V$\nbe linear. Then $T$ is normal if and only if $V$ has an orthonormal basis\nconsisting of eigenvectors of $T$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-cauchy-schwarz-in-an-inner-product-space",
+          "source_section": "Statement",
+          "quote": "For all vectors $x,y$ in a real or complex inner-product space,\n\n$$|\\langle x,y\\rangle|\\le\\|x\\|\\,\\|y\\| ,$$\n\nwith equality if and only if $x$ and $y$ are linearly dependent.",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "alg-nrqmx-rayleigh-ritz-procedure",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a nonzero complex Hilbert space whose inner product is linear in its first argument. Let $Q\\subseteq H$ be a dense linear subspace, and let $q:Q\\times Q\\to\\mathbb C$ be a Hermitian sesquilinear form: it is linear in its first argument, conjugate-linear in its second, and $q(u,v)=\\overline{q(v,u)}$ for all $u,v\\in Q$. In particular, $q(u,u)\\in\\mathbb R$. Write $q[u]=q(u,u)$. Assume $q[u]\\ge-c\\|u\\|^2$ for some real $c\\ge0$, and assume $Q$ is complete in the form norm $\\|u\\|_{q,c}^2=q[u]+(c+1)\\|u\\|^2$; this is the meaning of a closed semibounded form here.\n\nFor an integer $n\\ge1$, let $\\phi_1,\\ldots,\\phi_n\\in Q$ be linearly independent. The exact input matrices are the Gram matrix $G$ and form matrix $A$ with entries\n\n$$G_{ij}=\\langle\\phi_j,\\phi_i\\rangle,\\qquad A_{ij}=q(\\phi_j,\\phi_i)\\qquad(1\\le i,j\\le n).$$\n\nFor every nonzero coefficient vector $z\\in\\mathbb C^n$, $z^*Gz=\\|\\sum_jz_j\\phi_j\\|^2>0$, so $G$ is positive definite; the symmetry of $q$ makes $A$ Hermitian.\n\nThe procedure is:\n\n1. Form $G$ and $A$ from the supplied vectors and form, using exact entries.\n2. Diagonalize the positive definite Hermitian matrix $G$ and form its unique positive inverse square root $G^{-1/2}$. Set $B=G^{-1/2}AG^{-1/2}$.\n3. Diagonalize the Hermitian matrix $B$, listing its real eigenvalues $\\rho_1\\le\\cdots\\le\\rho_n$ with multiplicity and selecting an orthonormal eigenbasis $y_1,\\ldots,y_n$. For each $j$, set $c_j=G^{-1/2}y_j$ and return $(\\rho_j,c_j)$.\n\nRepeated eigenvalues may return any orthonormal basis of the corresponding eigenspace. The procedure uses trial vectors in $Q$ and does not require them to lie in the operator domain of an associated self-adjoint operator. It operates on exact matrix entries: if quadrature or an approximate eigensolver supplies numerical data, this procedure alone supplies no error enclosure or certification for those approximations.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix $V$ with $m=\\dim V\\ge k$. Choose a basis $\\phi_1,\\ldots,\\phi_m$ of $V$ and use [F6], writing $M_{ij}=q_A(\\phi_j,\\phi_i)$ to distinguish the form matrix from the operator $A$. The Hermitian identity for $q_A$ follows from its defining inner products; [F3] verifies the remaining closed-form input conditions. For $z\\ne0$, $z^*Gz=\\|\\sum_i z_i\\phi_i\\|^2>0$. By [F4], diagonalizing $G$ gives the positive square root $G^{1/2}$ and its inverse $G^{-1/2}$, both Hermitian, and $G^{1/2}G^{-1/2}=I$. Multiplying $G^{-1/2}MG^{-1/2}y_j=\\rho_jy_j$ by $G^{1/2}$ gives $Mc_j=\\rho_jG^{1/2}y_j=\\rho_jGc_j$, and $c_j^*Gc_l=y_j^*G^{-1/2}GG^{-1/2}y_l=y_j^*y_l=\\delta_{jl}$. Conversely $Mc=\\rho Gc$ implies $B(G^{1/2}c)=\\rho G^{1/2}c$, so these are all generalized eigenvalues with multiplicities. Their linear combinations $e_j:=\\sum_{i=1}^m(c_j)_i\\phi_i$ form an orthonormal eigenbasis of $V$: Gram normalization gives orthonormality, and the coefficient eigenvalue equation gives $q_A(e_j,e_i)=\\rho_j\\delta_{ij}$. For any $k$-dimensional $L\\subseteq V$, the dimension formula forces $L\\cap\\operatorname{span}\\{e_k,\\ldots,e_m\\}\\ne\\{0\\}$; a unit vector in this intersection has form value at least $\\rho_k$. The subspace $\\operatorname{span}\\{e_1,\\ldots,e_k\\}$ has supremum exactly $\\rho_k$. Hence $\\theta_k(V)=\\rho_k$, the $k$th generalized Ritz eigenvalue.",
+          "step": "1.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "Suppose $\\lambda_k(A)<\\alpha$. By [F2], $\\lambda_1\\le\\cdots\\le\\lambda_k=\\lambda_k(A)$ are the first $k$ isolated eigenvalues below $\\alpha$, counted with multiplicity. Each corresponding eigenspace is finite-dimensional by [F1]. If $x\\ne0$ is an eigenvector with eigenvalue $\\lambda$, self-adjointness gives $\\lambda\\|x\\|^2=\\langle Ax,x\\rangle=\\langle x,Ax\\rangle=\\overline\\lambda\\|x\\|^2$, so $\\lambda$ is real. For $x\\in\\ker(A-\\lambda_i I)$ and $y\\in\\ker(A-\\lambda_j I)$ with $\\lambda_i\\ne\\lambda_j$, this reality and self-adjointness give $\\lambda_i\\langle x,y\\rangle=\\langle Ax,y\\rangle=\\langle x,Ay\\rangle=\\lambda_j\\langle x,y\\rangle$, so the eigenspaces are orthogonal. Within each finite-dimensional eigenspace choose an orthonormal basis and take as many vectors as its multiplicity among $\\lambda_1,\\ldots,\\lambda_k$; concatenating these finite lists gives orthonormal eigenvectors $u_1,\\ldots,u_k\\in D(A)$ with $Au_j=\\lambda_j u_j$.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "given",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Every $k$-dimensional subspace of $V$ is a $k$-dimensional subspace of $Q(A)$, so the infimum defining $\\theta_k(V)$ is over a subfamily of the one defining $\\lambda_k(A)$. Therefore $\\theta_k(V)\\ge\\lambda_k(A)$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "For $u=\\sum_{j=1}^k c_ju_j$ with $\\sum_j|c_j|^2=1$, orthonormality gives $\\|u\\|=1$, while [F3] gives $q_A(u_j,u_i)=\\langle Au_j,u_i\\rangle=\\lambda_j\\delta_{ij}$. Hence $q_A[u]=\\sum_j\\lambda_j|c_j|^2\\le\\lambda_k(A)$.",
+          "step": "2.2",
+          "inputs": [
+            "F3",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For nested $V_n$, every $k$-subspace of $V_n$ is a $k$-subspace of $V_{n+1}$; thus $\\theta_k(V_{n+1})\\le\\theta_k(V_n)$. By step 2.1 this sequence is bounded below by $\\lambda_k(A)$, so it has a limit at least $\\lambda_k(A)$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "Let $\\varepsilon>0$ and put $M=(\\sum_{j=1}^k\\|u_j\\|_{Q(A)}^2)^{1/2}$. For each $j$, density gives an approximation from some $V_{n_j}$; taking $N=\\max_jn_j$ and using nesting, choose all $w_j\\in V_N$ with $\\|w_j-u_j\\|_{Q(A)}<\\delta$. For coefficients $c$ with $\\sum_j|c_j|^2=1$, put $w=\\sum_jc_jw_j$ and $u=\\sum_jc_ju_j$. Then $\\|w-u\\|_{Q(A)}\\le\\sqrt{k}\\delta$ and $\\|u\\|=1$, so $\\|w\\|\\ge1-\\sqrt{k}\\delta$; taking $\\sqrt{k}\\delta<1/2$ ensures the $w_j$ are linearly independent. Writing $a(x,y)=q_A(x,y)+(c+1)\\langle x,y\\rangle$, [F5] and $a[x]\\ge\\|x\\|^2$ give $|q_A(x,y)|\\le(c+2)\\|x\\|_{Q(A)}\\|y\\|_{Q(A)}$. Since $\\|u\\|_{Q(A)}\\le M$ and $\\|w\\|_{Q(A)}\\le M+\\sqrt{k}\\delta$, this yields $|q_A[w]-q_A[u]|\\le(c+2)\\sqrt{k}\\delta(2M+\\sqrt{k}\\delta)$ uniformly in $c$. Also $|\\|w\\|^2-1|\\le\\sqrt{k}\\delta(2+\\sqrt{k}\\delta)$ uniformly, so for sufficiently small $\\delta$, $\\|w\\|^2\\ge1/2$. The bound just proved for $q_A[w]-q_A[u]$ and the uniform bound $|q_A[u]|\\le\\max_j|\\lambda_j|$ then show that $q_A[w]/\\|w\\|^2$ converges uniformly to $q_A[u]$. The values $q_A[u]=\\sum_j\\lambda_j|c_j|^2$ are at most $\\lambda_k(A)$ by step 2.2; hence choose $\\delta$ small enough that every such $w$ satisfies $q_A[w]/\\|w\\|^2\\le\\lambda_k(A)+\\varepsilon$.",
+          "step": "3.2",
+          "inputs": [
+            "A1",
+            "F5",
+            "step 2.2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The span of $w_1,\\ldots,w_k$ is a $k$-dimensional subspace of $V_N$, so step 3.2 gives $\\theta_k(V_N)\\le\\lambda_k(A)+\\varepsilon$. By monotonicity from step 3.1 the same upper bound holds for all $n\\ge N$. As $\\varepsilon>0$ is arbitrary, the limit in step 3.1 is at most $\\lambda_k(A)$; combined with its lower bound from step 2.1 it equals $\\lambda_k(A)$.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "step 3.2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "current_boundary_worksheet": {
+        "proposal": "research/physics-non-fluid-129-2026-10-21-r2-owner-step2-boundary-proposal-4/proposal.json",
+        "source_sha256": "0101f975654c5994e7f9693e0c162b0a3ee346e2d403f1091dc827735640f2c5",
+        "qualification": "Released complete current source/eight-case semantic worksheet; root transcribed exact current rows. No independent acceptance or finite computation asserted."
+      }
+    },
+    "thm-nrqmx-spectral-residual-certificate": {
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A normalized u cannot exist in the zero Hilbert space; H≠{0} is explicit."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 give distance zero for an exact eigenvector residual; step 3.1 gives zero off-cluster component when the eigenvector lies in Δ."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For H=[a] on C, step 2.1 gives dist(λ,{a})=|a−λ|=‖r‖; the projection estimate is either zero or the full scalar norm according to Δ."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 uses the whole PVM projection E_T(Δ), so repeated eigenvalues and multidimensional eigenspaces require no basis selection."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The gap condition in the Statement is |x−λ|≥g with g>0, so spectral points at exactly distance g are included; steps 2.1 and 3.1 claim no estimate for g=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement and [A1] explicitly assume Choice and Countable Choice for the spectral/PVM suppliers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem states inequalities, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem states inequalities, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Take T=diag(0,100), u=(1,0), λ=2, and Δ={0}.",
+          "result": "‖r‖=2=dist(2,{0,100}); with g=98, the off-cluster component is zero and is bounded by 2/98.",
+          "verifies": "Steps 1.1–2.1 and 3.1."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-56-3a",
+        "notes": "Independently checked steps 1.1–3.1 against current unbounded PVM norm identity, finite positive scalar-measure lemma (Countable Choice), spectral theorem (Choice), and Borel spectrum/support clause. Normalization gives total mass one; support and unit mass ensure nonempty spectrum. u in D(T) makes the shifted residual square integrable. Integrating the squared distance yields the first bound, and integrating on the spectral complement of a Borel Delta yields the second. Strict g>0 licenses division; equality at the gap endpoint is permitted. Empty complement gives zero projection; zero residual need not select a ground-state index. Scalar and repeated-eigenvalue cases satisfy the same measure argument. Reader/refuter reported no defect here; none found."
+      },
+      "routine_steps": [],
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-spectral-theorem-for-unbounded-self-adjoint-operators",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $T$ be a self-adjoint operator on the nonzero\ncomplex Hilbert space $H$. Then there is a unique regular projection valued\nmeasure $E$ on the Borel $\\sigma$-algebra of $\\mathbb R$ such that\n$$\nD(T)=\\Bigl\\{x\\in H:\\int_{\\mathbb R}\\lambda^2\\,dE_x(\\lambda)<\\infty\\Bigr\\},\\qquad Tx=\\int_{\\mathbb R}\\lambda\\,dE(\\lambda)x\\quad(x\\in D(T)).\n$$\nConversely, if $E$ is a regular projection valued measure on $\\mathbb R$, then\nthe operator $\\int\\lambda\\,dE$ with that domain is self-adjoint and its\nspectral projection valued measure is $E$ again.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-scalar-and-complex-measures-from-a-pvm",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $(X,\\Sigma)$ be a measurable space, let $H$ be a\ncomplex Hilbert space, let $E$ be a projection valued measure on $(X,\\Sigma)$,\nand for $x,y\\in H$ define\n\n$$E_x(B):=\\langle E(B)x,x\\rangle,\\qquad E_{x,y}(B):=\\langle E(B)x,y\\rangle \\qquad(B\\in\\Sigma).$$\n\nThen:\n\n1. $E_x$ is a positive measure on $(X,\\Sigma)$ with $E_x(X)=\\|x\\|^2$ and\n   $0\\le E_x(B)\\le\\|x\\|^2$ for every $B$;\n2. $E_{x,y}$ is a finite complex measure on $(X,\\Sigma)$, the map\n   $(x,y)\\mapsto E_{x,y}$ is linear in $x$ and conjugate-linear in $y$, and\n   $E_{y,x}=\\overline{E_{x,y}}$, meaning $E_{y,x}(B)=\\overline{E_{x,y}(B)}$ for\n   every $B$;\n3. $|E_{x,y}|(X)\\le\\|x\\|\\,\\|y\\|$, so $|E_{x,y}(B)|\\le\\|x\\|\\,\\|y\\|$ for every\n   $B$, and the polarization identity\n   $$E_{x,y}=\\frac14\\sum_{k=0}^{3}i^kE_{x+i^ky}$$\n   holds as an identity of complex measures, where $i^k$ are the fourth roots\n   of unity $1,i,-1,-i$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-unbounded-pvm-integral-is-well-defined-and-closed",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $E$ be a projection valued measure on $(X,\\Sigma)$\non the complex Hilbert space $H$ and let $f:X\\to\\mathbb C$ be $\\Sigma$-measurable. Then the\noperator $f(E)$ of [[def-unbounded-integral-against-a-pvm]] is densely defined\nand closed, and it is normal, in the sense $D(f(E))=D(f(E)^*)$ and equal norms for the operator and its adjoint; in particular $D(f(E))=D(\\overline f(E))$ and\n$\\|f(E)x\\|=\\|\\overline f(E)x\\|$ for all such $x$. Moreover\n$$\\|f(E)x\\|^2=\\int|f|^2\\,dE_x,\\qquad \\langle x,f(E)x\\rangle=\\int\\overline f\\,dE_x\\qquad(x\\in D(f(E))),$$\nand $(f(E))^*=\\overline f(E)$; in particular $f(E)$ is self-adjoint whenever\n$f$ takes real values. Finally, if $(g_n)$ are bounded $\\Sigma$-measurable functions with\n$|g_n|\\le C|f|$ pointwise and $g_n\\to f$ pointwise, then $g_n(E)x\\to f(E)x$\nfor every $x\\in D(f(E))$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-unbounded-borel-functional-calculus",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $T$ be a self-adjoint operator with spectral\nprojection valued measure $E$ on $\\mathbb R$ acting on a complex Hilbert space $H$\n([[thm-spectral-theorem-for-unbounded-self-adjoint-operators]]) and let\n$f,g:\\mathbb R\\to\\mathbb C$ be Borel. Write $u(T)=u(E)$, with the truncation definition below. If $H=\\{0\\}$, use its unique PVM and unique full-domain operator directly. Then:\n\n1. $f(T)^*=\\overline f(T)$;\n2. $f(T)g(T)$ has domain $D(g(T))\\cap D((fg)(T))$ and equals the restriction of\n   $(fg)(T)$ to that domain, and its closure is $(fg)(T)$;\n3. on $D(f(T))\\cap D(g(T))$ the sum $f(T)+g(T)$ equals the restriction of\n   $(f+g)(T)$, and the closure of $f(T)+g(T)$ is $(f+g)(T)$;\n4. the spectrum of $f(T)$ is the essential range\n   $\\{z\\in\\mathbb C:E(f^{-1}(B_\\varepsilon(z)))\\ne0$ for every\n   $\\varepsilon>0\\}$ of $f$ with respect to $E$;\n5. if $f$ is continuous then that essential range is the closure of\n   $f(\\sigma(T))$, with the closure redundant when $f(\\sigma(T))$ is closed.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Apply the Borel sum rule ([[thm-unbounded-borel-functional-calculus]], Statement, clause 3) to $f(x)=x$ and $h(x)=-\\lambda$. By [F1], $f(T)=T$, while $h(T)=-\\lambda I$ has domain $H$; thus $u\\in D(f(T))\\cap D(h(T))$ and $r=(x\\mapsto x-\\lambda)(T)u$. The norm identity in [F3] therefore gives $\\|r\\|^2=\\int_{\\mathbb R}|x-\\lambda|^2\\,d\\mu_u(x)$. The measure $\\mu_u$ has total mass one by [F2].",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F3], $\\mu_u$ is supported on $\\sigma(T)$. Set $d=\\operatorname{dist}(\\lambda,\\sigma(T))$. For every $x\\in\\sigma(T)$, $|x-\\lambda|\\ge d$ by the definition of infimum, so step 1.1 yields $\\|r\\|^2\\ge d^2\\mu_u(\\sigma(T))=d^2$. Both sides are nonnegative, hence $d\\le\\|r\\|$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since $I-P_\\Delta=E_T(\\mathbb R\\setminus\\Delta)$, the PVM norm identity gives $\\|(I-P_\\Delta)u\\|^2=\\mu_u(\\mathbb R\\setminus\\Delta)=\\mu_u(\\sigma(T)\\setminus\\Delta)$ by support from [F3]. On this set $|x-\\lambda|\\ge g$, so step 1.1 implies $\\|r\\|^2\\ge g^2\\|(I-P_\\Delta)u\\|^2$. Taking nonnegative square roots and dividing by $g>0$ proves the cluster estimate. If $\\sigma(T)\\setminus\\Delta$ is empty, [F3] directly gives $\\mu_u(\\mathbb R\\setminus\\Delta)=0$, yielding the stated zero bound.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ]
+    },
+    "thm-nrqmx-schrodinger-residual-bound": {
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes a nonzero Hilbert space.",
+          "case_reasoning": "The Statement assumes a nonzero Hilbert space. The interaction-picture derivative is justified on the exact self-adjoint operator domain with continuous Tv. Unitary invariance and the Bochner FTC give the same absolute-time-segment bound in both orientations."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 gives zero error when r=0 and v follows the exact autonomous group orbit.",
+          "case_reasoning": "Step 2.1 gives zero error when r=0 and v follows the exact autonomous group orbit. The interaction-picture derivative is justified on the exact self-adjoint operator domain with continuous Tv. Unitary invariance and the Bochner FTC give the same absolute-time-segment bound in both orientations."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For scalar T=[a], the interaction-picture derivative in step 1.1 reduces to the ordinary scalar residual identity.",
+          "case_reasoning": "For scalar T=[a], the interaction-picture derivative in step 1.1 reduces to the ordinary scalar residual identity. The interaction-picture derivative is justified on the exact self-adjoint operator domain with continuous Tv. Unitary invariance and the Bochner FTC give the same absolute-time-segment bound in both orientations."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 uses only the unitary group and domain derivative, not eigenvalue simplicity or spectral gaps.",
+          "case_reasoning": "Step 1.1 uses only the unitary group and domain derivative, not eigenvalue simplicity or spectral gaps. The interaction-picture derivative is justified on the exact self-adjoint operator domain with continuous Tv. Unitary invariance and the Bochner FTC give the same absolute-time-segment bound in both orientations."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "At t=t₀ the two sides are zero; step 2.1 uses the absolute interval for either time orientation.",
+          "case_reasoning": "At t=t₀ the two sides are zero; step 2.1 uses the absolute interval for either time orientation. The interaction-picture derivative is justified on the exact self-adjoint operator domain with continuous Tv. Unitary invariance and the Bochner FTC give the same absolute-time-segment bound in both orientations."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement and [A1] assume Choice and Countable Choice for the spectral group and Banach-valued FTC.",
+          "case_reasoning": "The Statement and [A1] assume Choice and Countable Choice for the spectral group and Banach-valued FTC. The interaction-picture derivative is justified on the exact self-adjoint operator domain with continuous Tv. Unitary invariance and the Bochner FTC give the same absolute-time-segment bound in both orientations."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is a one-way error bound, not an equivalence.",
+          "case_reasoning": "The theorem is a one-way error bound, not an equivalence. The interaction-picture derivative is justified on the exact self-adjoint operator domain with continuous Tv. Unitary invariance and the Bochner FTC give the same absolute-time-segment bound in both orientations."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem is a one-way error bound, not an equivalence.",
+          "case_reasoning": "The theorem is a one-way error bound, not an equivalence. The interaction-picture derivative is justified on the exact self-adjoint operator domain with continuous Tv. Unitary invariance and the Bochner FTC give the same absolute-time-segment bound in both orientations."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Take H=C, T=0, and v(s)=(s−t₀)x for a fixed x∈C.",
+          "result": "r(s)=iℏx, U_T(t,t₀)=I, and both sides equal |t−t₀|‖x‖, for either orientation.",
+          "verifies": "Steps 1.1 and 2.1."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-56-3a",
+        "notes": "Independently checked steps 1.1–2.1 against the current unitary-generation lemma, Stone theorem, spectral/Borel domains, Banach-valued FTC (Countable Choice, compact nondegenerate intervals), and Bochner norm inequality. Difference quotient splits using the group law with v(s) fixed in D(T); the other term converges by unitarity and strong continuity. Continuous v prime and Tv make w prime continuous. Sign is -i/hbar times the interaction-picture residual. Forward/backward integrals use correct orientation; t=t0 is the zero identity without invoking FTC on a degenerate interval. Zero residual gives exact propagation and no approximation or empirical claim. Reader/refuter reported no defect here; none found."
+      },
+      "routine_steps": [],
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-stone-one-parameter-unitary-groups",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. The map $T\\mapsto U(t)=e^{itT}$, computed by the\nBorel functional calculus of $T$\n([[thm-unbounded-borel-functional-calculus]]), is a bijection from the set of\nself-adjoint operators on $H$ onto the set of strongly continuous\none-parameter unitary groups on $H$. Its inverse assigns to $U$ its generator\n$G$ and the self-adjoint operator $T=-iG$; here $D(T)=D(G)$ is exactly the set\nof vectors at which $t\\mapsto U(t)x$ is differentiable at $0$, and\n$\\frac1t(U(t)x-x)\\to iTx$ for $x\\in D(T)$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-self-adjoint-operator-generates-a-strongly-continuous-unitary-group",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $T$ be a self-adjoint operator on $H$ with\nspectral projection valued measure $E$, and set\n$U(t):=e^{itT}=\\int_{\\mathbb R}e^{it\\lambda}\\,dE(\\lambda)$ for $t\\in\\mathbb R$.\nThen $U$ is a strongly continuous one-parameter unitary group,\n$U(t)D(T)=D(T)$ and $TU(t)=U(t)T$ on $D(T)$, and the derivative\n$\\lim_{t\\to0}\\frac1t(U(t)x-x)$ exists exactly for $x\\in D(T)$, where it equals\n$iTx$. Thus the generator of $U$ is $G=iT$, with $D(G)=D(T)$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-spectral-theorem-for-unbounded-self-adjoint-operators",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $T$ be a self-adjoint operator on the nonzero\ncomplex Hilbert space $H$. Then there is a unique regular projection valued\nmeasure $E$ on the Borel $\\sigma$-algebra of $\\mathbb R$ such that\n$$\nD(T)=\\Bigl\\{x\\in H:\\int_{\\mathbb R}\\lambda^2\\,dE_x(\\lambda)<\\infty\\Bigr\\},\\qquad Tx=\\int_{\\mathbb R}\\lambda\\,dE(\\lambda)x\\quad(x\\in D(T)).\n$$\nConversely, if $E$ is a regular projection valued measure on $\\mathbb R$, then\nthe operator $\\int\\lambda\\,dE$ with that domain is self-adjoint and its\nspectral projection valued measure is $E$ again.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-unbounded-borel-functional-calculus",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $T$ be a self-adjoint operator with spectral\nprojection valued measure $E$ on $\\mathbb R$ acting on a complex Hilbert space $H$\n([[thm-spectral-theorem-for-unbounded-self-adjoint-operators]]) and let\n$f,g:\\mathbb R\\to\\mathbb C$ be Borel. Write $u(T)=u(E)$, with the truncation definition below. If $H=\\{0\\}$, use its unique PVM and unique full-domain operator directly. Then:\n\n1. $f(T)^*=\\overline f(T)$;\n2. $f(T)g(T)$ has domain $D(g(T))\\cap D((fg)(T))$ and equals the restriction of\n   $(fg)(T)$ to that domain, and its closure is $(fg)(T)$;\n3. on $D(f(T))\\cap D(g(T))$ the sum $f(T)+g(T)$ equals the restriction of\n   $(f+g)(T)$, and the closure of $f(T)+g(T)$ is $(f+g)(T)$;\n4. the spectrum of $f(T)$ is the essential range\n   $\\{z\\in\\mathbb C:E(f^{-1}(B_\\varepsilon(z)))\\ne0$ for every\n   $\\varepsilon>0\\}$ of $f$ with respect to $E$;\n5. if $f$ is continuous then that essential range is the closure of\n   $f(\\sigma(T))$, with the closure redundant when $f(\\sigma(T))$ is closed.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-bochner-integrable-function",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal A,\\mu)$ be a measure space and $X$ a real or complex\nBanach space. A strongly measurable function $f:\\Omega\\to X$ is\n**Bochner integrable** if there is a sequence of integrable $X$-valued simple\nfunctions $(s_n)$ such that\n\n$$\\lim_{n\\to\\infty}\\int_\\Omega\\|f-s_n\\|\\,d\\mu=0.$$\n\nFor such a sequence define\n\n$$\\int_\\Omega f\\,d\\mu:=\\lim_{n\\to\\infty}\\int_\\Omega s_n\\,d\\mu.$$\n\nThe displayed norm limit exists: the simple integral inequality gives\n\n$$\\left\\|\\int s_n-\\int s_m\\right\\|\\leq\\int\\|s_n-s_m\\|\\leq\\int\\|s_n-f\\|+\\int\\|f-s_m\\|,$$\n\nso the simple integrals form a Cauchy sequence, and $X$ is complete. The next\ntheorem proves that the value is independent of the approximating sequence and\ncharacterizes existence by integrability of $\\|f\\|$.\n\nFor $E\\in\\mathcal A$, write\n$\\int_Ef\\,d\\mu:=\\int_\\Omega\\mathbf1_Ef\\,d\\mu$ whenever this function is\nBochner integrable.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-fundamental-theorem-of-calculus-for-banach-valued-continuous-curves",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice ([[def-countable-choice]]) for the Lebesgue-measure interfaces. Let $X$ be a real or complex Banach space, let $a<b$, and let $f:[a,b]\\to X$ be continuous. Differentiation uses the underlying real structure. Then $G(t):=\\int_a^t f(s)\\,ds$ is differentiable on $(a,b)$ and has the corresponding one-sided derivatives at $a,b$, with $G'(t)=f(t)$, and this derivative extends continuously to $[a,b]$. Consequently, if $\\varphi:[a,b]\\to X$ is continuous, differentiable on $(a,b)$ with $\\varphi'$ continuous on $(a,b)$ and extendable to a continuous $X$-valued function on $[a,b]$, then $\\int_a^b\\varphi'(s)\\,ds=\\varphi(b)-\\varphi(a)$. The Bochner integral here is the one of [[def-bochner-integrable-function]]; the identities also hold for continuous curves on $[0,\\infty)$ restricted to compact subintervals.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-bochner-integral-norm-inequality",
+          "source_section": "Statement",
+          "quote": "If $f:\\Omega\\to X$ is Bochner integrable, then for every measurable $E$,\n\n$$\\left\\|\\int_E f\\,d\\mu\\right\\|\\leq\\int_E\\|f\\|\\,d\\mu.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Fix $s$ in the compact segment joining $t_0$ to $t$, put $W(\\tau)=e^{i\\tau T}$ and $U(s)=W((s-t_0)/\\hbar)$, and define $w(s)=U(s)v(s)$. For $h$ with $s+h$ in the interval, the group law gives $\\frac{w(s+h)-w(s)}h=U(s+h)\\frac{v(s+h)-v(s)}h+U(s)\\frac{W(h/\\hbar)-I}{h}v(s)$. By [F1], $U$ is strongly continuous and unitary, the first term tends to $U(s)v'(s)$, and since $v(s)\\in D(T)$ the second tends to $\\frac{i}{\\hbar}U(s)Tv(s)$ by the derivative of $W$ at zero and the scalar chain rule. Thus $w$ is differentiable and $w'(s)=U(s)v'(s)+\\frac{i}{\\hbar}U(s)Tv(s)=-\\frac{i}{\\hbar}U(s)r(s)$, after substituting $i\\hbar v'=Tv+r$. The derivative is continuous because $v'$, $Tv$, and hence $r$ are continuous and $U$ is strongly continuous.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $t\\ge t_0$, apply [F3] on $[t_0,t]$; if $t<t_0$, apply it on $[t,t_0]$ and negate the resulting identity. In either case $w(t)-w(t_0)=-\\frac{i}{\\hbar}\\int_{t_0}^{t}U(s)r(s)\\,ds$, using step 1.1. Then [F4] gives $\\|w(t)-w(t_0)\\|\\le\\frac1\\hbar\\int_{\\min(t,t_0)}^{\\max(t,t_0)}\\|U(s)r(s)\\|\\,ds=\\frac1\\hbar\\int_{\\min(t,t_0)}^{\\max(t,t_0)}\\|r(s)\\|\\,ds$; the equality uses unitarity of $U(s)$. Since $w(t_0)=v(t_0)$ and $w(t)=U_T(t,t_0)^*v(t)$, unitarity also gives $\\|w(t)-w(t_0)\\|=\\|v(t)-U_T(t,t_0)v(t_0)\\|$. This is the required estimate, including $t=t_0$ and either time orientation.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "current_boundary_worksheet": {
+        "proposal": "research/physics-non-fluid-129-2026-10-21-r2-owner-step2-boundary-proposal-5/proposal.json",
+        "source_sha256": "26cf95493e8091dd651887a08d42afc23cfb1ffa50f5aa45c4caa531afc86c44",
+        "qualification": "Released complete current source/eight-case semantic worksheet; root transcribed exact current rows. No independent acceptance or finite computation asserted."
+      }
+    },
+    "ex-nrqmx-oscillator-ritz-exact": {
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes L²(R) and n≥1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 verifies each continuum residual is exactly zero; the oscillator energies themselves are strictly positive because ℏω>0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For n=1, step 2.1 gives the single ground-state Ritz value ℏω/2 and zero residual."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The one-dimensional oscillator energies E_j=ℏω(j+1/2) are strictly increasing for ℏω>0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and step 2.1: indexing starts at j=0, n is positive, and ℏ,ω are strictly positive; no n=0 or zero-frequency limit is claimed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Example and [A1] state Choice and Countable Choice, matching the cited min–max and oscillator suppliers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is an exact computation, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example is an exact computation, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Set n=1 and V₁=span{ψ₀}.",
+          "result": "The Gram matrix is [1], the form matrix is [ℏω/2], the unique Ritz value is the ground energy, and (Hosc−ℏω/2)ψ₀=0.",
+          "verifies": "Steps 1.1–2.1 and 3.1."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-56-3a",
+        "notes": "Independently checked all three proof steps and cited current coefficient-domain oscillator realization Statement (a)–(d). Positive real hbar and omega give strict ordering; finite Hermite combinations lie in D(Hosc), hence in the square-root form domain by x<=1+x squared. The Borel product domain gives S squared=Hosc, and self-adjointness transfers S between the two inner-product slots. Thus Gram=I and M=diag(E0,...,E[n-1]); the repaired Ritz theorem proof 1.1 identifies these with the variational values. Direct eigenvector substitution yields exactly zero continuum residuals, including n=1. Completeness is supplied by the exact realization, not presumed from formal ladder operations. AC/CC are explicit; no measurements, physical parameter identification, approximate quadrature, or numerical-solver error bound are claimed. Reader/refuter reported no defect here; none found."
+      },
+      "routine_steps": [],
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-nrqm-oscillator-oscillator-scaling-and-exact-realization",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Fix real parameters $m>0$, $\\omega>0$, $\\hbar>0$, put $\\ell:=\\sqrt{\\hbar/(m\\omega)}>0$, and let $g_0,P,(g_n)_{n\\in\\mathbb N}$ be the Hermite data of [[thm-nrqm-oscillator-hermite-recurrence]] in $L^2(\\mathbb R,dy)$, so that $(g_n)$ is a complete orthonormal family by [[thm-nrqm-oscillator-hermite-completeness]]. Define\n\n$$D:L^2(\\mathbb R,dy)\\to L^2(\\mathbb R,dx),\\qquad (Df)(x):=\\ell^{-1/2}f(x/\\ell),$$\n\nand let $A$ be the self-adjoint diagonal operator of [[lem-nrqm-oscillator-diagonal-adjoint-and-graph-core-lemma]] for the complete orthonormal family $(g_n)$ and the eigenvalues $\\lambda_n=2n+1$, with the core $P$ and spectrum $\\{2n+1:n\\in\\mathbb N\\}$ ([[thm-nrqm-oscillator-diagonal-spectrum]]).\n\nThen:\n\n(a) $D$ is a linear isometry of $L^2(\\mathbb R,dy)$ onto $L^2(\\mathbb R,dx)$ with two-sided inverse $(D^{-1}g)(y)=\\ell^{1/2}g(\\ell y)$; the functions $\\psi_n:=Dg_n$, $\\psi_n(x)=\\ell^{-1/2}g_n(x/\\ell)$, form a complete orthonormal family of $L^2(\\mathbb R,dx)$;\n\n(b) the operator\n\n$$H_{\\mathrm{osc}}:=\\frac{\\hbar\\omega}{2}\\,DAD^{-1},\\qquad D(H_{\\mathrm{osc}}):=\\{f\\in L^2(\\mathbb R,dx):D^{-1}f\\in D(A)\\},$$\n\nis self-adjoint, satisfies $H_{\\mathrm{osc}}\\psi_n=\\hbar\\omega(n+\\tfrac12)\\psi_n$ for every $n$, and has\n\n$$D(H_{\\mathrm{osc}})=\\Bigl\\{f:\\sum_n\\hbar^2\\omega^2(n+\\tfrac12)^2|c_n|^2<\\infty\\Bigr\\},\\qquad H_{\\mathrm{osc}}f=\\sum_n\\hbar\\omega(n+\\tfrac12)c_n\\psi_n,$$\n\nwhere $c_n:=\\langle D^{-1}f,g_n\\rangle=\\langle f,\\psi_n\\rangle$; its spectrum is $\\sigma(H_{\\mathrm{osc}})=\\{\\hbar\\omega(n+\\tfrac12):n\\in\\mathbb N\\}$, its ground energy is $\\hbar\\omega/2$ with eigenvector $\\psi_0$, and $\\langle H_{\\mathrm{osc}}f,f\\rangle\\ge\\frac{\\hbar\\omega}{2}\\|f\\|^2$ for every $f\\in D(H_{\\mathrm{osc}})$;\n\n(c) $D(P)=\\operatorname{span}\\{\\psi_n\\}$ is a core for $H_{\\mathrm{osc}}$, and for every polynomial $p$ the function $f:=D(pg_0)$ is $C^\\infty$ on $\\mathbb R$ with\n\n$$H_{\\mathrm{osc}}f=-\\frac{\\hbar^2}{2m}f''+\\frac{m\\omega^2}{2}x^2f$$\n\npointwise on $\\mathbb R$;\n\n(d) for every $f\\in D(H_{\\mathrm{osc}})$ and every test function $\\varphi\\in C_c^\\infty(\\mathbb R)$,\n\n$$\\int_{\\mathbb R}(H_{\\mathrm{osc}}f)(x)\\varphi(x)\\,dx=\\int_{\\mathbb R}f(x)\\Bigl(-\\frac{\\hbar^2}{2m}\\varphi''(x)+\\frac{m\\omega^2}{2}x^2\\varphi(x)\\Bigr)dx,$$\n\nso $H_{\\mathrm{osc}}$ is the self-adjoint realization of the differential expression $-\\frac{\\hbar^2}{2m}\\frac{d^2}{dx^2}+\\frac{m\\omega^2}{2}x^2$ in the weak sense; no identification of $D(H_{\\mathrm{osc}})$ with a separately defined maximal differential-operator domain is asserted.\n\nAll parameters enter as positive real numbers; no physical identification of $m,\\omega,\\hbar$ with measured quantities is made.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-nrqmx-ritz-upper-bounds",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice and Countable Choice. Let $H\\ne\\{0\\}$ be a complex Hilbert space, let $A=A^*$ satisfy $A\\ge-cI$ for some $c\\ge0$, and set $Q(A)=D((A+cI)^{1/2})$. Define the associated closed form by\n\n$$q_A(u,v)=\\langle(A+cI)^{1/2}u,(A+cI)^{1/2}v\\rangle-c\\langle u,v\\rangle\\qquad(u,v\\in Q(A)).$$\n\nLet $\\sigma_{\\mathrm{ess}}(A)$ be the essential spectrum, the complement in $\\sigma(A)$ of isolated eigenvalues of finite multiplicity, and put $\\alpha=\\inf\\sigma_{\\mathrm{ess}}(A)$, with $\\alpha=+\\infty$ when this set is empty. For $k\\ge1$, define\n\n$$\\lambda_k(A)=\\inf_{\\substack{L\\subseteq Q(A)\\text{ linear},\\ \\dim L=k}}\\ \\sup_{\\substack{u\\in L\\\\\\|u\\|=1}}q_A[u],\\qquad q_A[u]=q_A(u,u),$$\n\nwhere the infimum over an empty family is $+\\infty$. For a finite-dimensional conforming subspace $V\\subseteq Q(A)$ and $1\\le k\\le\\dim V$, define its $k$th Ritz value\n\n$$\\theta_k(V)=\\inf_{\\substack{L\\subseteq V\\text{ linear},\\ \\dim L=k}}\\ \\sup_{\\substack{u\\in L\\\\\\|u\\|=1}}q_A[u].$$\n\nThen $\\theta_k(V)\\ge\\lambda_k(A)$. If $V_1\\subseteq V_2\\subseteq\\cdots\\subseteq Q(A)$ are finite-dimensional subspaces whose union is dense in $Q(A)$ in the form norm $\\|u\\|_{Q(A)}^2=q_A[u]+(c+1)\\|u\\|^2$, then for every fixed $k$ with $\\lambda_k(A)<\\alpha$ the values $\\theta_k(V_n)$, defined once $\\dim V_n\\ge k$, decrease to $\\lambda_k(A)$, the $k$th isolated eigenvalue below the essential spectrum counted with multiplicity.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-spectral-theorem-for-unbounded-self-adjoint-operators",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $T$ be a self-adjoint operator on the nonzero\ncomplex Hilbert space $H$. Then there is a unique regular projection valued\nmeasure $E$ on the Borel $\\sigma$-algebra of $\\mathbb R$ such that\n$$\nD(T)=\\Bigl\\{x\\in H:\\int_{\\mathbb R}\\lambda^2\\,dE_x(\\lambda)<\\infty\\Bigr\\},\\qquad Tx=\\int_{\\mathbb R}\\lambda\\,dE(\\lambda)x\\quad(x\\in D(T)).\n$$\nConversely, if $E$ is a regular projection valued measure on $\\mathbb R$, then\nthe operator $\\int\\lambda\\,dE$ with that domain is self-adjoint and its\nspectral projection valued measure is $E$ again.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-unbounded-borel-functional-calculus",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $T$ be a self-adjoint operator with spectral\nprojection valued measure $E$ on $\\mathbb R$ acting on a complex Hilbert space $H$\n([[thm-spectral-theorem-for-unbounded-self-adjoint-operators]]) and let\n$f,g:\\mathbb R\\to\\mathbb C$ be Borel. Write $u(T)=u(E)$, with the truncation definition below. If $H=\\{0\\}$, use its unique PVM and unique full-domain operator directly. Then:\n\n1. $f(T)^*=\\overline f(T)$;\n2. $f(T)g(T)$ has domain $D(g(T))\\cap D((fg)(T))$ and equals the restriction of\n   $(fg)(T)$ to that domain, and its closure is $(fg)(T)$;\n3. on $D(f(T))\\cap D(g(T))$ the sum $f(T)+g(T)$ equals the restriction of\n   $(f+g)(T)$, and the closure of $f(T)+g(T)$ is $(f+g)(T)$;\n4. the spectrum of $f(T)$ is the essential range\n   $\\{z\\in\\mathbb C:E(f^{-1}(B_\\varepsilon(z)))\\ne0$ for every\n   $\\varepsilon>0\\}$ of $f$ with respect to $E$;\n5. if $f$ is continuous then that essential range is the closure of\n   $f(\\sigma(T))$, with the closure redundant when $f(\\sigma(T))$ is closed.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-nrqmx-ritz-upper-bounds",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice and Countable Choice. Let $H\\ne\\{0\\}$ be a complex Hilbert space, let $A=A^*$ satisfy $A\\ge-cI$ for some $c\\ge0$, and set $Q(A)=D((A+cI)^{1/2})$. Define the associated closed form by\n\n$$q_A(u,v)=\\langle(A+cI)^{1/2}u,(A+cI)^{1/2}v\\rangle-c\\langle u,v\\rangle\\qquad(u,v\\in Q(A)).$$\n\nLet $\\sigma_{\\mathrm{ess}}(A)$ be the essential spectrum, the complement in $\\sigma(A)$ of isolated eigenvalues of finite multiplicity, and put $\\alpha=\\inf\\sigma_{\\mathrm{ess}}(A)$, with $\\alpha=+\\infty$ when this set is empty. For $k\\ge1$, define\n\n$$\\lambda_k(A)=\\inf_{\\substack{L\\subseteq Q(A)\\text{ linear},\\ \\dim L=k}}\\ \\sup_{\\substack{u\\in L\\\\\\|u\\|=1}}q_A[u],\\qquad q_A[u]=q_A(u,u),$$\n\nwhere the infimum over an empty family is $+\\infty$. For a finite-dimensional conforming subspace $V\\subseteq Q(A)$ and $1\\le k\\le\\dim V$, define its $k$th Ritz value\n\n$$\\theta_k(V)=\\inf_{\\substack{L\\subseteq V\\text{ linear},\\ \\dim L=k}}\\ \\sup_{\\substack{u\\in L\\\\\\|u\\|=1}}q_A[u].$$\n\nThen $\\theta_k(V)\\ge\\lambda_k(A)$. If $V_1\\subseteq V_2\\subseteq\\cdots\\subseteq Q(A)$ are finite-dimensional subspaces whose union is dense in $Q(A)$ in the form norm $\\|u\\|_{Q(A)}^2=q_A[u]+(c+1)\\|u\\|^2$, then for every fixed $k$ with $\\lambda_k(A)<\\alpha$ the values $\\theta_k(V_n)$, defined once $\\dim V_n\\ge k$, decrease to $\\lambda_k(A)$, the $k$th isolated eigenvalue below the essential spectrum counted with multiplicity.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "By [F1], each $\\psi_j\\in D(H_{\\mathrm{osc}})$, the family is orthonormal, and $H_{\\mathrm{osc}}\\psi_j=E_j\\psi_j$. By [F3], each $\\psi_j$ lies in $Q(H_{\\mathrm{osc}})=D(S)$. The product rule gives $S^2=H_{\\mathrm{osc}}$ with $D(S^2)=D(H_{\\mathrm{osc}})$; since $S$ is self-adjoint, for $i,j<n$ we have $q(\\psi_j,\\psi_i)=\\langle S\\psi_j,S\\psi_i\\rangle=\\langle S^2\\psi_j,\\psi_i\\rangle=\\langle H_{\\mathrm{osc}}\\psi_j,\\psi_i\\rangle=E_j\\delta_{ij}$. Thus the Gram matrix on $V_n$ is the identity and its form matrix is diagonal with entries $E_0,\\ldots,E_{n-1}$.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $\\hbar\\omega>0$, $E_0<\\cdots<E_{n-1}$. The generalized matrix eigenproblem therefore returns exactly these $n$ ordered Ritz values by [F4], and the oscillator eigenvalue equations in [F1] give $(H_{\\mathrm{osc}}-E_jI)\\psi_j=0$ for each $j<n$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Hence this conforming Hermite trial space attains the first $n$ oscillator eigenvalues exactly and every corresponding continuum residual vanishes.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1"
+          ]
+        }
+      ]
+    },
+    "cex-nrqmx-small-residual-no-label": {
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample is on the nonzero space C²."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 has an exactly zero residual at the excited eigenvalue λ=100."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A one-dimensional operator with a lowest eigenvalue has no distinct excited eigenspace; the counterexample requires two spectral values."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The chosen spectrum {0,100} is simple; degeneracy is not needed for the refutation."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 places λ exactly at the non-ground eigenvalue 100 and computes the residual without a limiting argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The counterexample Statement and [A1] include Choice and Countable Choice for its cited residual-certificate context."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The counterexample refutes a one-way implication, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The counterexample refutes a one-way implication, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Take H=diag(0,100), u=(0,1), and λ=100.",
+          "result": "‖u‖=1, (H−λI)u=0, but λ is not the ground value 0 and u is orthogonal to ker(H).",
+          "verifies": "Steps 1.1–1.2."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-56-author",
+        "notes": "Checked the domain, normalization, exact spectrum and kernel, and the distinction between proximity to some spectrum and assignment to the ground eigenspace. The example makes no statement about noise or a nonzero residual threshold. Authoring evidence only."
+      },
+      "routine_steps": [],
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-nrqmx-spectral-residual-certificate",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice and Countable Choice. Let $H\\ne\\{0\\}$ be a complex Hilbert space and let $T=T^*$ be self-adjoint on $H$, with spectral projection-valued measure $E_T$. Let $u\\in D(T)$ satisfy $\\|u\\|=1$, let $\\lambda\\in\\mathbb R$, and define the residual $r=(T-\\lambda I)u$. For a Borel set $\\Delta\\subseteq\\mathbb R$, write $P_\\Delta=E_T(\\Delta)$. If $g>0$ and $|x-\\lambda|\\ge g$ for every $x\\in\\sigma(T)\\setminus\\Delta$, then\n\n$$\\operatorname{dist}(\\lambda,\\sigma(T))\\le\\|r\\|,\\qquad \\|(I-P_\\Delta)u\\|\\le\\frac{\\|r\\|}{g},$$\n\nwhere $\\operatorname{dist}(\\lambda,S)=\\inf_{x\\in S}|x-\\lambda|$. If $\\sigma(T)\\setminus\\Delta=\\varnothing$, the second conclusion is $\\|(I-P_\\Delta)u\\|=0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "On $H=\\mathbb C^2$ with its standard inner product, set $T=\\operatorname{diag}(0,100)$ on all of $H$, $u=(0,1)$, and $\\lambda=100$. Then $T$ is self-adjoint and bounded below, $\\|u\\|=1$, $\\sigma(T)=\\{0,100\\}$, the lowest eigenvalue is $E_0=0$, and $(T-100I)u=0$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The ground eigenspace is $\\ker T=\\operatorname{span}\\{(1,0)\\}$, while $u=(0,1)$ is orthogonal to it and $\\lambda=100\\ne E_0$. Thus the zero residual verifies a spectral point, as in [F1], but refutes the asserted ground-state label.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ]
+    }
+  }
+}

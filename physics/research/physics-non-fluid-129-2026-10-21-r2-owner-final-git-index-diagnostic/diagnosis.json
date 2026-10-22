@@ -1,0 +1,57 @@
+{
+  "version": 1,
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "kind": "read-only repository runtime diagnostic",
+  "captured_at_utc": "2026-10-22T09:23:37Z",
+  "scope": [
+    "tools/physics-support/boundary-audit.mjs",
+    "tools/physics-support/defect-ledger.mjs",
+    "tools/physics-support/boundary-audit-output.test.mjs",
+    "tools/physics-autopilot/test/defect-ledger-output.test.mts",
+    "physics/WORKFLOW.md"
+  ],
+  "index": {
+    "size_bytes": 133157515,
+    "signature": "DIRC",
+    "version": 2,
+    "entries": 626383,
+    "sha1_trailer_matches": true,
+    "raw_sha256": "4c1c83b8215eefe712e6da1613f60bbcb809ddea539a62641b93b8f0c04a498c",
+    "index_lock_exists": false,
+    "open_fds": []
+  },
+  "head": {
+    "exit_code": 0,
+    "stdout": "a72c9e8e575fc7391659899bd31ff51e5c30803a",
+    "stderr": ""
+  },
+  "scoped_staged_paths": {
+    "exit_code": 0,
+    "stdout": "physics/WORKFLOW.md\ntools/physics-autopilot/test/defect-ledger-output.test.mts\ntools/physics-support/boundary-audit-output.test.mjs\ntools/physics-support/boundary-audit.mjs\ntools/physics-support/defect-ledger.mjs",
+    "stderr": ""
+  },
+  "scoped_worktree_sha256": {
+    "tools/physics-support/boundary-audit.mjs": "0c5922d32f45b2bbb8bbdf945af63375605c69cc6148480026c7cdd9dacbb48d",
+    "tools/physics-support/defect-ledger.mjs": "45a40b232a596ec565728c245fb3e18650f38b2490f40b22b16d945bbcde6d8a",
+    "tools/physics-support/boundary-audit-output.test.mjs": "e389c1e4a7bff881135c835ae2379d43d7631701f0cc09379f47fb90c187caca",
+    "tools/physics-autopilot/test/defect-ledger-output.test.mts": "6fdf3bdcf281e3e532c5bfac8d46e5a1c351cafd0658200e7be927d8e44cc92a",
+    "physics/WORKFLOW.md": "de8a3f87f1a86fc88a8ddf7f37e441f2821cbd8490812486df55bb3b4927e24c"
+  },
+  "observations": [
+    "No current Git process or shared index.lock was observed; no open file descriptor to the real index/lock was observed at capture.",
+    "The 127MiB v2 index has a valid SHA1 trailer and 626383 entries. Read-only Git inventory queries succeeded.",
+    "Filesystem is ext4 rw; 741GiB and approximately64million inodes available. Process file/address-space limits are unlimited; approximately18GiB memory available. No evidence for resource exhaustion or index corruption.",
+    "No split/sparse/fsmonitor/index-thread override was configured; narrow Git environment variables were unset. No credentials or full environment were read."
+  ],
+  "diagnosis": "The generic fatal is compatible with write_locked_index failure in either add or commit. All five paths are now staged, consistent with commit failing during its initial real-index rewrite. Upstream Git2.53read-cache.c has a silent return-1 if stat(lockpath) fails after writing/closing; lock removal during writing is one plausible explanation. No captured syscall proves the original errno or concurrent writer; rootcause remains unconfirmed.",
+  "recommendation": "Use a byte copy of current index at a unique run-local absolute GIT_INDEX_FILE path, then the same exact-fivepath git commit --only without another sharedindex add. This isolates the principal lock and preserves unrelated staged entries/sharedindexbytes. Keep normal hooks/config. Record GIT_TRACE2_EVENT for any repeated failure. No index reset/rebuild or config/thread changes warranted.",
+  "only_temp_lifecycle": "Git2.53commit.c first rewrites/locks the configured GIT_INDEX_FILE, then creates .git/next-index-PID.lock for the partial commit. The latter is PID-unique, not .git/index.lock; it remains normal --only behavior.",
+  "verification_required_by_root": [
+    "expected HEAD parent",
+    "exact five changed paths",
+    "committed blobs equal already-tested scoped workingtree bytes",
+    "original sharedindex rawSHA256 unchanged",
+    "privateindex written and lockfiles gone"
+  ],
+  "limits": "No attempted reproduction, staging, commit, index repair, config change, or shared .git mutation by diagnostic agent. Downloaded unmodified upstream Git2.53C source excerpts are evidence only. Root owns authorized commit."
+}

@@ -7,7 +7,7 @@ origin: pipeline
 domain: physics
 library: physics
 physical_scope: A constructed pair of smooth one-component Gibbs charts with zero molar-volume jump; it shows why the local nonzero-jump hypothesis cannot be omitted and makes no material claim.
-dependency_level: 11
+dependency_level: 3
 deps:
   - def-td-phase-and-coexistence-domain
   - pthm-td-clapeyron-local

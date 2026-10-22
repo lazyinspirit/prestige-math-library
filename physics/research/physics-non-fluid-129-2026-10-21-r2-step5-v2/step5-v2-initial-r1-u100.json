@@ -1,0 +1,133 @@
+{
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "phase": "initial",
+  "round": 1,
+  "unit": "100",
+  "input_sha256": "eaf0a68d231b0a7d0d042df337974eaab597dfd3432daa3ad0aaeebd32fe188c",
+  "decisions": [
+    {
+      "id": "lem-qsmx-modular-strip-analyticity",
+      "model": "gpt-6-luna",
+      "context_sha256": "d5cd06c126d0b86b0534ea6d26d3aadc5b86b905ce583e2090b22920164b75c6",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "F2 assigns the spectral squared-norm identity to thm-unbounded-borel-functional-calculus, whose Statement only gives adjoints, sums, products and spectral mapping. The estimate and norm limits in steps 1.1, 2.1 and 2.2 therefore lacked their stated supplier interface. Added the existing published lem-unbounded-pvm-integral-is-well-defined-and-closed as a direct mathematical prerequisite and cited its explicit norm identity. Retained the calculus supplier for common-domain linearity. Its norm identity is proved from the defining truncations in published lemma step 1.2; no new result or weaker claim is needed.",
+      "uncertain": false,
+      "source_urls": [
+        "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe2.pdf",
+        "https://arxiv.org/pdf/2004.02383"
+      ],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-qsmx-modular-strip-analyticity",
+      "disposition": "repaired",
+      "post_sha256": "af147dacff77d3a5b259d7dcf12412580cc7c51810b6040ab395d4e234670f34",
+      "review_context_sha256": "6d4c9b03d4f559e0bc8ce255d826022f0a9712e210fcb5b031305a53662b9ca2",
+      "reason": "Checked the complete assigned argument and exact supplier Statements/Definitions. The added PVM lemma supplies the domain and norm identity under Countable Choice, obtained by restricting the adopted Choice assumption. F2 now supplies finite linear combinations on common domains, and F1 distinguishes the zero-space convention from the nonzero spectral theorem. For 0<=s<=1, lambda^s<=1+lambda gives the domain and uniform estimate. The squared continuity difference is dominated by 4(1+lambda). At an interior point the scalar difference quotients and their limit have modulus at most C(1+sqrt(lambda)), whose square is at most 2C^2(1+lambda); common-domain linearity and scalar dominated convergence give norm differentiability. This verifies both strip edges, arbitrary spectral multiplicity, xi=0 and H={0}; it claims no edge holomorphy. Statement and Statement references are unchanged, so no consumer propagation is triggered. No diagrams occur or are required for this spectral integral argument. This is the adjudicator's current repair review, not independent review of its own repair.",
+      "uncertain": false,
+      "source_urls": [
+        "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe2.pdf",
+        "https://arxiv.org/pdf/2004.02383"
+      ],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "propose_fixed_finding",
+      "id": "lem-qsmx-modular-strip-analyticity",
+      "run": "physics-non-fluid-129-2026-10-21-r2",
+      "phase": "initial",
+      "round": 1,
+      "unit": "100",
+      "severity": "fatal",
+      "defect_type": "dependency_citation",
+      "status": "fixed",
+      "finding": "F2 cited an unbounded-calculus Statement that omits the norm identity needed by all three analytic estimates.",
+      "repair": "Added and cited the existing published PVM-integral norm-identity lemma, made common-domain linearity and the inherited choice hypothesis explicit, and synchronized the owning manifest and contract.",
+      "evidence": "research/physics-non-fluid-129-2026-10-21-r2-step5-v2/step5-v2-initial-r1-u100.json"
+    },
+    {
+      "ledger": "research/published-consumer-supplier-ledger.md",
+      "action": "propose_scoped_supplier_use_record",
+      "supplier": "lem-unbounded-pvm-integral-is-well-defined-and-closed",
+      "consumer": "lem-qsmx-modular-strip-analyticity",
+      "disposition": "scoped_use_checked",
+      "reason": "The published supplier Statement explicitly gives the squared-norm identity and its proof step 1.2 derives it from truncation convergence. Its Countable Choice hypothesis follows from the consumer's adopted Choice. Only the assigned consumer use was reviewed; the published supplier was not edited or adjudicated, and no whole-item acceptance is claimed."
+    }
+  ],
+  "gate_resolutions": [],
+  "supporting_evidence": {
+    "research/physics-non-fluid-129-2026-10-21-r2-batch-100-step5-context.json": "77a26175652255f8b8cd403288c6e92fc762cde59960acae975852c48d9b8f76"
+  },
+  "repair_notes": {
+    "claim_and_conventions": "Positive-support spectral PVM E, first-variable-linear inner product, xi with finite first spectral moment, f_z(lambda)=exp(-iz log(lambda)/2) for 0<=Im z<=1; norm-holomorphy only in the interior. Multipliers extend by zero on the E-null complement of (0,infinity).",
+    "dependency_ids": [
+      "def-axiom-of-choice",
+      "def-unbounded-linear-operator-domain-and-graph",
+      "def-symmetric-self-adjoint-and-essentially-self-adjoint",
+      "def-unbounded-integral-against-a-pvm",
+      "lem-unbounded-pvm-integral-is-well-defined-and-closed",
+      "thm-spectral-theorem-for-unbounded-self-adjoint-operators",
+      "thm-unbounded-borel-functional-calculus",
+      "thm-dominated-convergence"
+    ],
+    "source_reading": [
+      {
+        "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe2.pdf",
+        "locator": "Section 3.1, printed pp.102-104, equations (3.18) and (3.26)-(3.30)",
+        "content": "Read bounded quadratic identity, square-integrability domain and truncation construction through the resulting unbounded norm identity. Teschl uses the opposite inner-product convention; the real norm identity is unchanged. The exact locally cited published supplier uses the consumer's first-variable-linear convention."
+      },
+      {
+        "url": "https://arxiv.org/pdf/2004.02383",
+        "locator": "Theorem A.7, printed pp.146-147, complete forward implication (i)=>(iv)",
+        "content": "Read the forward strip-continuity and strong-derivative argument. Our z corresponds to the source variable -z/2 with alpha=1/2. The displayed source estimate by lambda^2 alone fails at lambda<1 (take scalar A=1/2 and source z=0); the assigned proof already uses the valid 1+lambda bound. This external-source defect is not copied. No reliance on, or review claim for, the converse implication or the entire source is needed."
+      }
+    ],
+    "metadata_changes": [
+      "Added only the published PVM norm-identity prerequisite and mathematical-premise role to the assigned manifest row.",
+      "Regenerated citations and derivations only for the assigned proof-contract entry under the shared metadata lock; all other contracts preserved."
+    ],
+    "public_interface_changed": false,
+    "checks": [
+      {
+        "command": "node tools/physics-support/proof-contract.mjs research/physics-non-fluid-129-2026-10-21-r2-batch-100.proof-contracts.json --strict --items lem-qsmx-modular-strip-analyticity",
+        "exit_code": 0,
+        "output": "proof-contract: 0 error(s), 0 warning(s), 1/1 item(s) checked"
+      },
+      {
+        "command": "node tools/physics-support/tsx-run.mjs tools/physics-support/precheck.mts items/lem-qsmx-modular-strip-analyticity.md",
+        "exit_code": 0,
+        "output": "PASS; 1 checked, 0 failing"
+      },
+      {
+        "command": "node tools/physics-support/rendercheck.mjs items/lem-qsmx-modular-strip-analyticity.md",
+        "exit_code": 0,
+        "output": "OK — 1 file; all math spans and frontmatter parse"
+      },
+      {
+        "command": "node tools/physics-support/proof-layout.mjs items/lem-qsmx-modular-strip-analyticity.md",
+        "exit_code": 0,
+        "output": "proof-layout: 1 items, 4 steps, 0 defects"
+      },
+      {
+        "command": "node tools/physics-support/step5-workflow.mjs review-contexts --run physics-non-fluid-129-2026-10-21-r2 --items lem-qsmx-modular-strip-analyticity",
+        "exit_code": 0,
+        "output": "Obtained post_sha256 and review_context_sha256 copied verbatim into reviews."
+      },
+      {
+        "command": "Scoped read-only consistency check using step5-statement.mjs statementHash and current item/manifest dependency metadata",
+        "exit_code": 0,
+        "output": "Statement unchanged: ec9484ff938ad9979212373e69f2595e19a78e2c1f7ad0185c256efae6edd19e; item and manifest prerequisites/roles match; all 1 assigned tuple covered."
+      }
+    ],
+    "unresolved_obligations": [],
+    "next_action": "Controller collects the native adjudication report and schedules any required later rejudgment; no judges, gates or certificates were launched by this worker."
+  }
+}

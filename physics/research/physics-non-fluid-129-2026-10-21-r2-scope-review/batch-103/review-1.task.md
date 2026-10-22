@@ -1,0 +1,14 @@
+# Batch 103: review 1
+
+Run: physics-non-fluid-129-2026-10-21-r2
+Batch: 103
+Round: 1
+Read the complete assigned A/B pages and items, approved scope and actual supplier claims/proofs. Review the whole batch before reporting.
+Pages: qsmx-matrix-product-states, qsmx-matrix-product-states-examples
+Items: def-qsmx-mps-and-transfer, def-qsmx-transfer-infinite-state, alg-qsmx-schmidt-mps-truncation, thm-qsmx-schmidt-mps-error, thm-qsmx-primitive-transfer-clustering, ex-qsmx-ghz-noninjective
+Consolidated findings: [{"id":"thm-qsmx-primitive-transfer-clustering","type":"prerequisite","reason":"Proof 1.1 infers that the restriction to ker φ has no eigenvalue 1 from the assumption that 1 has multiplicity one in the characteristic polynomial. The current dependencies do not define the characteristic polynomial or algebraic multiplicity, or establish geometric multiplicity ≤ algebraic multiplicity. Add/use def-characteristic-polynomial-of-an-operator, def-algebraic-and-geometric-multiplicity-of-an-eigenvalue, and thm-geometric-multiplicity-does-not-exceed-algebraic-multiplicity as mathematical premises; clarify their relevant content without changing the Statement if possible."},{"id":"qsm-quasilocal-states","type":"outside-batch","reason":"This required page says lem-qsm-matrix-state-calculus and lem-qsm-finite-matrix-cstar-and-state-duality are currently draft and their uses conditional; both current item carriers are published. Their inspected claims and proofs match batch 103's uses, so this creates no logical prerequisite gap. Owner reconciliation of the stale page prose is outside this batch."}]
+Repair suppliers before their affected consumers; pair dispatch has no prerequisite-completion requirement. Preserve sound approved claims and avoid Statement/Definition changes when possible. If a public interface changes, the same repairer owns all affected direct/indirect consumer checks and authorized repairs.
+Your duties are review, repair and escalation only. Do not hash, recertify, reconcile dependency levels, maintain manifests/coverage/contracts/ledgers, or run formatting/gate batteries. The owner orchestrator handles that work.
+Return only the result schema with prepared reviewed_items/reviewed_pages, verdict, concise findings and consumer_checks. Do not edit reports or engine state.
+Escalate to the owner if the final second review remains unsatisfied, or a significant prerequisite gap cannot be resolved locally on the same page. Otherwise use the single local repair and final review.
+Previous repair consumers: [].

@@ -1,0 +1,41 @@
+# Batch 14 authoring notes — `emx-polarization-bundle`
+
+Run: `physics-non-fluid-129-2026-10-21-r2`  
+Batch: `14`  
+Pair: `emx-polarization-bundle` / `emx-polarization-bundle-examples`
+
+## Scope and plan reconciliation
+
+The complete design section is “Helicity bundles, rotations and Berry curvature” in `research/plan-classical-electromagnetism-frontier-expansion-track.md` §621, with its full argument in `research/frontier-expansion-2026-10-19/classical-electromagnetism/prose-scaffold.md`. It assigns three A items (`def-emx-helicity-line-bundle`, `pthm-emx-helicity-berry-curvature`, `pthm-emx-helicity-rotation-weight`) and two B items (`ex-emx-polarization-latitude-phase`, `cex-emx-polarization-gauge-singularity`). The plan specification agrees on page IDs, titles, order 725/726, category, library, companion relationship, and declared page prerequisites. Its item arrays were empty before authoring; this is the expected scaffold state, not a plan conflict. No substantive design/plan conflict was found.
+
+The owner authoring-direction file was absent when checked. Both pages remain below the 100-item cap. The A page retains the conditional classical Maxwell–Lorentz vacuum Fourier-mode scope and its stated exclusions; the B page contains the planned latitude calculation and gauge-singularity counterexample. No measurement or empirical claim is introduced.
+
+## Dependency and interface audit
+
+The five items are authored in supplier-first order. The scoped in-run item levels recompute to `2, 3, 4, 5, 4` respectively, with eight relevant in-run items checked and no cycles or errors. The levels follow the actual in-run supplier graph: the line-bundle definition uses the batch-9 helicity projection and Fourier-field inputs; the Berry theorem uses the definition; the rotation theorem uses the definition and Berry theorem; the latitude example uses the rotation and Berry theorems; and the counterexample uses the definition and Berry theorem. Direct dependency IDs and `dependency_roles` are synchronized between each item and the manifest. Mathematical items carry mathematical prerequisites; the physical Fourier and helicity inputs are labelled by their formulation/result roles.
+
+The run-level recomputation gives batch 14 `dependency_level: 1`, `requires: ["2", "9"]`, matching the existing row. Its shared `input_sha256` is stale after the authored manifest changed (`e9464e11acecf8f1a8bda27ba93ac324cf04cd85b6d1fd546ef373621e7cc91b` recorded; `1c7ac19e817a026fd26d4ae6d7bf2b023f8b2333d71627cb2adb4a4027197dee` recomputed). The shared run-level file was left unchanged; the owner should refresh it at the drained join before relying on the global scheduling snapshot.
+
+The six exact cross-batch rows are in `research/physics-non-fluid-129-2026-10-21-r2-batch-14.cross-batch-dependencies.json`; they cover the two A-page supplier pages and four item edges, all marked `verified` for the scoped interface checks. The declared page prerequisite `the-de-rham-theorem-and-degree` is an imported published mathematics page rather than another batch in this run, so it is recorded here and is not misrepresented as a run cross-batch edge.
+
+The complete current `pthm-emx-helicity-projection` statement and proof were inspected on `emx-classical-helicity-angular-momentum` (batch 9). Its `n=k/|k|`, transverse fibre, `C_n=i n\times`, smooth rank-one helicity projectors, eigenvalues, proper-rotation convention, and qualification about global frames match the consumers. Its Step 1 record is current and hash-valid. The complete `def-emx-transverse-fourier-field` definition was inspected; it fixes the nonzero spatial wavevector variable and SI unit `m^{-1}`, and its Step 1 record is current and hash-valid. The complete `def-emx-lorentz-star` definition and proof were inspected on `emx-lorentz-form-algebra` (batch 2); its ordered coframe and volume form fix the spatial orientation used here, and its Step 1 record is current and hash-valid. These readiness records are not treated as independent proof approval.
+
+The current imported `thm-stokes-theorem-for-smooth-singular-chains` statement and complete proof were inspected. Its finite smooth singular-chain hypotheses match the explicit oriented octahedral sphere cycle and smooth form used to prove the flux obstruction. The imported item SHA-256 `4ca4ee8333f2ef28244e37e8447a26dc89b38521a63d08ca2f60a815215b16fe` matches `research/math-imports.json`. The use is the specific Stokes result, not the stronger de Rham theorem; no countable-choice assumption is imported. The local definitions for the cross product, Euclidean inner product, oriented smooth manifold, smooth forms, wedge, exterior derivative, singular chains, and integration were also inspected at their exact interfaces. No prerequisite argument is missing or unresolved.
+
+## Source reading and disposition
+
+`research/physics-non-fluid-129-2026-10-21-r2-batch-14.coverage.json` records both full-text sources, their locators, supported items, and all eight harvested results with individual dispositions.
+
+- K. Y. Bliokh, F. J. Rodríguez-Fortuño, F. Nori and A. V. Zayats, [“Spin-orbit interactions of light”](https://arxiv.org/pdf/1505.02864), *Nature Photonics* 9 (2015), arXiv:1505.02864. The complete paper and Box 2/direction-sphere discussion, PDF pp. 3–4, were inspected. Its four harvested results support the helicity-dependent rotation, the direction-sphere polarization context, curvature context, and closed-contour phase; optical per-photon `\hbar=1` language is not adopted as a quantum premise.
+- David Tong, [*The Quantum Hall Effect*](https://www.damtp.cam.ac.uk/user/tong/qhe/qhe.pdf), TIFR Infosys Lecture Notes (2016). The complete 235-page notes were retrieved; §§1.5.1–1.5.2, printed pp. 28–34, were inspected for Berry transport, gauge change, curvature, flux, and solid-angle phase. Tong's `-i\langle n|dn\rangle` convention is opposite to the local `+i v^\dagger dv` convention here and was recalculated explicitly. The spin-1/2 quantum Hamiltonian and adiabatic hypotheses are not imported. Of its four harvested results, three support local context or the finite example and one alternate-surface quantum argument is recorded `out-of-scope`.
+
+`source-fetch-check --coverage research/physics-non-fluid-129-2026-10-21-r2-batch-14.coverage.json --stamp` reports 2/2 sources fetch-verified and resolved, 0 newly stamped, and 0 documented drops. The Bliokh fetch stamp records 34 pages, while separate inspection of the fetched PDF with `mutool info` and a PDF parser reports 23 pages. The full relevant pp. 3–4 were inspected; this page-count discrepancy is retained as a source-stamp caveat, not treated as a retrieval failure. Tong's stamp and inspected count both report 235 pages. Since retrieval succeeded for both sources, no failed-source `source_resolution` recovery record is applicable.
+
+## Scoped checks and Step 1 readiness
+
+- Manifest/plan consistency: 2 pages, 5 items; page metadata, declared requirements, item dependencies, and statement text match the plan and carriers. `manifest-deps`: 5 items, 0 missing dependencies, 0 errors. `content-policy`: 5 items, 0 errors, 0 warnings.
+- Strict proof contracts: 5/5 items, 0 errors, 0 warnings. Explicit final `proof-layout`: 5 items, 17 numbered steps, 0 defects. Normative precheck: 5/5 pass. `rendercheck`: all 5 item files and both page files pass.
+- Scoped `depcheck`: 5 selected items, 1,451-item / 363-page prerequisite closure, 0 errors or warnings. Scoped `fwdcheck` and `extcheck`: 0 errors or warnings. The relevant in-run item-level calculation checks 8 items and agrees with all five manifest levels. Cross-batch reconciliation finds exactly the six declared in-run edges, with no missing, extra, duplicate, or malformed rows.
+- `coverage-checklist`: 1 A page, 8 harvested results, 0 errors, 0 warnings. `source-fetch-check --stamp`: 2/2 full-text sources verified and resolved.
+- The final Step 1 records for all five items are `ready` only after the current direct inputs, exact supplier statements/proofs, placements, proof contracts, and these scoped checks were inspected. They record authoring readiness and examined dependencies; they are not independent proof approvals.
+

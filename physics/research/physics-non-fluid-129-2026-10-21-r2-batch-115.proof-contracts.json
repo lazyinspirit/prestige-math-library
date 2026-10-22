@@ -1,0 +1,853 @@
+{
+  "version": 1,
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "batch": "115",
+  "level": 0,
+  "scope": [
+    "def-tgrx-thermal-vorticity",
+    "def-tgrx-period-of-one-form",
+    "lem-tgrx-compensator-implies-exact",
+    "lem-tgrx-exact-one-form-zero-period",
+    "prop-tgrx-equilibrium-obstructions",
+    "ex-tgrx-rotating-annulus"
+  ],
+  "contracts": {
+    "def-tgrx-thermal-vorticity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-gr-smooth-lorentzian-objects",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a smooth four-manifold without boundary, so that $M$ is Hausdorff\nand second countable and carries a maximal smooth atlas\n([[def-smooth-manifold]]). Let $g$ be a smooth covariant $2$-tensor field on $M$\nin the sense of [[def-gr-smooth-covariant-two-tensor-field]]. Then $g$ assigns\nto every $p\\in M$ a bilinear form $g_p:T_pM\\times T_pM\\to\\mathbb R$\n([[def-derivation-at-a-point-and-tangent-space]]).\n\n**(a) Lorentzian metric.** The field $g$ is a **Lorentzian metric of signature\n$(-,+,+,+)$** on $M$ when it is symmetric and nondegenerate, and at every\n$p\\in M$ the pair $(T_pM,g_p)$ is a Lorentz vector space of signature\n$(-,+,+,+)$ in the sense of [[def-lorentz-form-and-inertia]]: that is, $g_p$ has\ninertia $(3,1,0)$, so that some \u2014 equivalently every \u2014 basis of $T_pM$ in which\nthe matrix of $g_p$ is diagonal has exactly one negative and three positive\ndiagonal entries. The pair $(M,g)$ is a **smooth Lorentzian four-manifold** (or\nLorentzian manifold of signature $(-,+,+,+)$). In a smooth chart $(U,x)$ the\n**components** of $g$ are the $C^\\infty$ functions\n$g_{ab}(q)=g_q(\\partial_a|_q,\\partial_b|_q)$ of\n[[def-gr-smooth-covariant-two-tensor-field]], and $g_{ab}=g_{ba}$ by symmetry.\nWe use indices $a,b,c,d=0,1,2,3$ and the Einstein summation convention, with\ncomponents in a chart written as lower-case indexed symbols and equations\nbetween indexed fields understood basis-independently. These conventions are\nfixed once for this library and the physical reading of the symbols is recorded\nwith the framework postulates, separately from this mathematical definition.\n\n**(b) Pointwise causal structure.** For every $p\\in M$ the vocabulary of\n[[def-causal-classification-of-lorentz-vectors]] applies to the Lorentz vector\nspace $(T_pM,g_p)$: a tangent vector $v\\in T_pM$ is **timelike** when\n$g_p(v,v)<0$, **null** when $v\\neq0$ and $g_p(v,v)=0$, **spacelike** when\n$g_p(v,v)>0$, and **causal** when it is timelike or null. Every nonzero\n$v\\in T_pM$ has exactly one causal character. The **timelike set**\n$T_p:=\\{v\\in T_pM:g_p(v,v)<0\\}$ has exactly two connected components, each\nnonempty, open, convex and path-connected; each $g_p$-orthonormal basis\n$e_0,e_1,e_2,e_3$ of $T_pM$ satisfies $g_p(e_a,e_b)=\\operatorname{diag}(-1,1,1,1)_{ab}$\nfor some ordering, so in particular nonzero orthonormal vectors exist at every\npoint ([[lem-lorentz-form-has-orthonormal-basis]],\n[[lem-timelike-cone-has-two-convex-components]]).\n\n**(c) Time orientation.** A **time orientation** of $(M,g)$, also called a\n**choice of future cone**, is a smooth vector field $N$ on $M$\n([[def-smooth-vector-field-as-a-tangent-bundle-section]], whose tangent-bundle\nsmooth structure uses the axiom $\\mathrm{AC}_\\omega$ of\n[[def-countable-choice]]; this is the only use of that axiom in this\ndefinition) such that\n\n$$g_p(N_p,N_p)<0\\qquad\\text{for every }p\\in M .$$\n\nThe function $p\\mapsto g_p(N_p,N_p)$ is $C^\\infty$ because $g$ is a smooth\ncovariant $2$-tensor field and $N$ a smooth field, so the condition is a\npointwise strict inequality between a smooth function and $0$; since\n$g_p(N_p,N_p)<0$ implies $N_p\\neq0$, a time orientation is nowhere vanishing.\nA **time-oriented smooth Lorentzian four-manifold** is a triple $(M,g,N)$\nconsisting of a smooth Lorentzian four-manifold and a time orientation $N$.\n\nGiven a time orientation $N$ and $p\\in M$, the vector $N_p$ is timelike, and we\n**define** a nonzero causal vector $v\\in T_pM$ to be **future-directed** when\n$g_p(v,N_p)<0$ and **past-directed** when $g_p(v,N_p)>0$. The classification of\nnonzero causal vectors into exactly these two classes, and its agreement with\nthe two components of the timelike set (the future component is the component\n$C_p^+$ containing $N_p$, and the future causal vectors form\n$\\operatorname{cl}(C_p^+)\\setminus\\{0\\}$), is proved in\n[[lem-gr-future-causal-classification-by-a-timelike-field]]; in particular no\nnonzero causal $v$ satisfies $g_p(v,N_p)=0$, so the definition is exhaustive and\nmutually exclusive. Replacing $N$ by $-N$ reverses every future/past label, and\ntwo time orientations $N,N'$ determine the same future-directed causal vectors\nat every point where $g_p(N_p,N'_p)<0$, while they determine opposite ones\nwhere $g_p(N_p,N'_p)>0$, by\n[[lem-gr-timelike-fields-define-equal-or-opposite-future-cones]]; that lemma\nalso shows the sign of $p\\mapsto g_p(N_p,N'_p)$ is constant on every connected\ncomponent of $M$.\n\n**(d) The inverse metric.** Because $g_p$ is nondegenerate, it induces at each\n$p$ an isomorphism $\\flat_p:T_pM\\to T_p^*M$, $v\\mapsto g_p(v,\\cdot)$, and an\ninverse metric $g_p^{-1}$ on the dual space; the inverse metric, the musical\nisomorphisms and the components $g^{ab}$ are defined separately on this page,\nwhere the smoothness of those components is also proved. Neither construction\nuses any choice principle beyond the one already recorded in (c).\n\n\n**(e) Smooth timelike curves and their scalar normalization.** Before using\nthese quantities in the physical conventions, fix a positive real scaling\nparameter $c$ (with no physical meaning or dimension in this mathematical\nitem). A **smooth future timelike curve** is a smooth map $\\gamma:I\\to M$\nfrom a nonempty open real interval $I$ ([[def-interval]],\n[[def-c-r-and-smooth-maps-between-smooth-manifolds]]) whose velocity derivation\n$\\gamma'(s)\\in T_{\\gamma(s)}M$\n([[def-velocity-derivation-of-a-smooth-curve]]) satisfies\n$g(\\gamma',\\gamma')<0$ and $g(\\gamma',N)<0$ at every $s\\in I$.\nIn a chart its components are $d(x^a\\circ\\gamma)/ds$, $a=0,1,2,3$.\nFor a supplied base point $s_0\\in I$ and additive constant $\\tau_0\\in\\mathbb R$\ndefine\n\n$$h(s):=\\sqrt{-g_{\\gamma(s)}(\\gamma'(s),\\gamma'(s))},\\qquad \\tau(s):=\\tau_0+\\frac1c\\int_{s_0}^{s}h(r)\\,dr,\\qquad U(s):=\\frac{c\\gamma'(s)}{h(s)}.$$\n\nThe integral is oriented when $s<s_0$. The function $\\tau$ is called\n**proper time** for this scaling and $U$ the **four-velocity** of the smooth\ncurve; its increment times $c$ is the Lorentzian length. The well-definedness\nproof below shows $\\tau'>0$, that $\\tau:I\\to\\tau(I)$ is a smooth\ndiffeomorphism, and that $U$ is the velocity of $\\gamma\\circ\\tau^{-1}$.\nThus $g(U,U)=-c^2$ and $U$ is future timelike. This introduces the smooth\ncase before any physical unit reading; the later worldline definition extends\nit to its stated $C^k$, endpoint and piecewise-$C^1$ classes. It asserts no\nclock coupling, motion law or physical value of $c$.\n\n**Convention and scope.** The physical reading of a smooth time-oriented\nLorentzian four-manifold as a classical spacetime model, and the domain in which\nthat reading is adopted, are recorded in the framework postulate\n`post-gr-spacetime-and-classical-domain`; the words spacetime and event carry no\nmathematical content beyond this definition, and this item asserts no claim\nabout nature. The dimension $4$ and the absence of boundary are part of the\ndata; nothing in the definition assumes that $M$ is nonempty or connected, and\nno completeness, extendibility or maximality property of $(M,g)$ is asserted.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-gr-killing-field",
+          "source_section": "Definition",
+          "quote": "Let $(M,g,N)$ be a time-oriented smooth Lorentzian four-manifold\n([[def-gr-smooth-lorentzian-objects]]) and let $\\xi$ be a smooth vector field\non $M$ ([[def-smooth-vector-field-as-a-tangent-bundle-section]]). The **Lie\nderivative of the metric along $\\xi$**, written $\\mathcal L_\\xi g$, is the\nsmooth symmetric covariant $2$-tensor field obtained by the flow definition of\n[[def-lie-derivative-of-a-tensor-field]] applied to $g$: for the local flow\n$\\Phi_t$ of $\\xi$,\n\n$$\\mathcal L_\\xi g:=\\frac{d}{dt}\\Big|_{t=0}\\Phi_t^*g .$$\n\nThe field $\\xi$ is a **Killing field** of $(M,g)$ (an **isometry generator**,\nor a **Killing vector**) when\n\n$$\\mathcal L_\\xi g=0 .$$\n\nThe equivalent local characterization\n\n$$\\mathcal L_\\xi g=0\\quad\\Longleftrightarrow\\quad\\nabla_a\\xi_b+\\nabla_b\\xi_a=0,$$\n\nwhere $\\nabla$ is the metric-selected connection of $g$\n([[def-gr-metric-selected-connection]],\n[[thm-gr-nondegenerate-levi-civita-and-tensor-derivative]]) and\n$\\xi_b:=g_{bc}\\xi^c$ is the lowered field, is proved in\n[[thm-gr-killing-and-on-shell-matter-identities]] clause (a); the definition\nitself asserts neither direction. Whether a given metric has Killing fields is\na property of that metric: neither existence nor uniqueness of a Killing field\nis asserted here, and a general metric has none beyond the trivial field\n$\\xi=0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-tgr-stationary-thermal-carriers",
+          "source_section": "Definition",
+          "quote": "Let $(M,g,N_0)$ be a smooth time-oriented Lorentzian four-manifold of signature\n$(-,+,+,+)$ in the sense of [[def-gr-smooth-lorentzian-objects]], and let\n$\\nabla$ be its unique torsion-free $g$-compatible connection supplied by\n[[thm-gr-nondegenerate-levi-civita-and-tensor-derivative]]. Fix a nonempty\nconnected open set $O\\subseteq M$. A **selected stationary thermal carrier** on\n$O$ consists of a smooth future timelike vector field $\\xi$ and a smooth\npositive scalar field $T:O\\to(0,\\infty)$, where $T$ is measured in kelvins,\nsuch that $\\xi$ is a Killing field of $g$ in the sense of\n[[def-gr-killing-field]]. Equivalently, the criterion is\n$\\nabla_{(a}\\xi_{b)}=0$ by\n[[thm-gr-killing-and-on-shell-matter-identities]]. The round brackets mean\nsymmetrization with factor $1/2$. The choice of $\\xi$ specifies the thermal congruence; no\ncoordinate chart or universal observer field is selected.\n\nSet $N_\\xi:=\\sqrt{-g(\\xi,\\xi)}>0$ and $u:=\\xi/N_\\xi$. Then\n$g(u,u)=-1$. In the length-coordinate convention $x^0=ct$, $u$ is\ndimensionless and $cu$ is the physical four-velocity, with $c>0$ in\n$\\mathrm{m\\,s^{-1}}$. For a fixed Boltzmann constant $k_B>0$ in\n$\\mathrm{J\\,K^{-1}}$, define the inverse-temperature vector\n$\\beta:=u/(k_BT)$, with units $\\mathrm{J^{-1}}$, and the Killing-normalized\ntemperature field $T_K:=N_\\xi T$. Thus $\\beta=\\xi/(k_BT_K)$; this definition\ndoes not assert that $T_K$ is constant.\n\nFor a smooth chemical-potential scalar $\\mu:O\\to\\mathbb R$ in joules, put\n$\\zeta:=\\mu/(k_BT)$, a dimensionless scalar. Define the rest-space metric,\nderivative, acceleration, expansion and shear by\n$$h_{ab}:=g_{ab}+u_au_b,\\qquad D:=u^a\\nabla_a,\\qquad a_b:=u^a\\nabla_au_b,\\qquad \\theta:=\\nabla_au^a,\\qquad \\sigma_{ab}:=h_a{}^ch_b{}^d\\nabla_{(c}u_{d)}-\\frac13\\theta h_{ab}.$$\nHere $a$, $\\theta$ and $\\sigma$ have inverse-length units; the physical\nproper acceleration is $c^2a$. The smooth tangent-bundle structure used by\nthe cited GR suppliers assumes the Axiom of Countable Choice\n[[def-countable-choice]]; no stronger choice principle is part of this\ndefinition.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The scalar $s:=-g(\\beta,\\beta)$ is smooth and strictly positive on $O$. Hence $s^{-1/2}$ is smooth and positive, so $T=(k_B\\sqrt{s})^{-1}$ is a smooth positive kelvin-valued scalar and $u=\\beta/\\sqrt{s}$ is a smooth future-directed vector field. Direct contraction gives $g(u,u)=g(\\beta,\\beta)/s=-1$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Lowering the smooth vector field $\\beta$ with $g$ gives a smooth one-form, and its covariant derivative is a smooth covariant two-tensor. Antisymmetrizing this tensor gives the smooth two-form $\\varpi$; the inverse-length derivative of the inverse-joule components of $\\beta$ gives its stated units. Since $\\mu$ and $k_BT>0$ are smooth, $\\zeta$ and $\\alpha=-\\zeta$ are defined and dimensionless on all of $O$. The only foundational assumption in this construction is the inherited $\\mathrm{AC}_\\omega$ in [F4]; no selection or stronger choice principle is used.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition requires a nonempty connected thermal domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 excludes the null norm through s=-g(beta,beta)>0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 uses only positive k_B and positive s, including normalized scalar values."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition requires a nondegenerate Lorentzian metric and future timelike beta; step 1.1 has\u2212g(beta,beta)>0, excluding null or zero beta. A zero thermal-vorticity form is allowed; no nonzero-vorticity condition is imposed."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Definition has no parameter interval or endpoint limit."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 2.1 records inherited AC_omega and no selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "A nonempty open future-timelike Killing domain makes T positive and u unit timelike; antisymmetrizing the covariant derivative gives thermal vorticity with its stated inverse-energy/inverse-length units. The public claim does not assert a converse characterization; its definitions specify the data and conventions rather than an iff test."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A nonempty open future-timelike Killing domain makes T positive and u unit timelike; antisymmetrizing the covariant derivative gives thermal vorticity with its stated inverse-energy/inverse-length units. The public claim does not assert a converse characterization; its definitions specify the data and conventions rather than an iff test."
+        }
+      ],
+      "current_boundary_worksheet": {
+        "proposal": "research/physics-non-fluid-129-2026-10-21-r2-owner-step2-boundary-proposal-6/proposal.json",
+        "source_sha256": "1d02ff2d6457c9b88d38c346e7c26d1ed1c73e7c7e8d8806d5c8ceb15a211a2e",
+        "qualification": "Released complete current source/eight-case semantic worksheet; root transcribed exact current rows. No independent acceptance or finite computation asserted."
+      },
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-115",
+        "notes": "Read both steps and direct Lorentzian, Killing, stationary-carrier and countable-choice suppliers. Strict timelikeness makes s=-g(beta,beta)>0 smooth, so T>0 and u=beta/sqrt(s) are smooth and u is future unit timelike. Metric lowering and antisymmetrization produce a smooth two-form; units are inverse joules per metre. Smooth mu divided by positive k_B T defines dimensionless zeta and alpha. Null/zero beta is excluded, no boundary extension or material realization is asserted. AC_omega is inherited and no stronger choice is spent."
+      }
+    },
+    "def-tgrx-period-of-one-form": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-smooth-manifold",
+          "source_section": "Definition",
+          "quote": "A **smooth $n$-manifold** is a pair $(M,\\mathcal S)$ in which $M$ is a\ntopological $n$-manifold\n([[def-topological-manifold-without-boundary]]) and $\\mathcal S$ is a **smooth\nstructure** on $M$: a maximal smooth atlas\n([[thm-each-smooth-atlas-is-contained-in-a-unique-maximal-smooth-atlas]]).\nBecause\n[[thm-each-smooth-atlas-is-contained-in-a-unique-maximal-smooth-atlas]] sends\nevery smooth atlas to the unique maximal atlas containing it, a smooth manifold\nis equivalently specified by a topological manifold $M$ together with any one\nsmooth atlas $\\mathcal A$, the structure being the generated $[\\mathcal A]$. A\nchart $(U,\\varphi)\\in\\mathcal S$ is called a **smooth chart** (or a **chart of\nthe smooth structure**); its domain is a **coordinate domain** and its\ncoordinate functions are **smooth coordinates** on $U$. When the structure is\nclear from context, the manifold itself is written $M$ in place of\n$(M,\\mathcal S)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-smooth-differential-k-form",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a smooth manifold and $k\\ge 0$. A **smooth differential $k$-form**\non $M$ is a smooth section of $\\bigwedge^kT^*M\\to M$. The space of such forms\nis denoted $\\Omega^k(M)$, and $\\Omega^0(M)=C^\\infty(M)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-piecewise-c-one-curve-on-a-manifold",
+          "source_section": "Definition",
+          "quote": "A **piecewise $C^1$ curve** in $M$ is a continuous map $\\gamma:[a,b]\\to M$ with a finite subdivision such that, in local charts on each closed piece, its coordinate representative is $C^1$ on the interior and its derivative extends continuously to both endpoints. The endpoint values of this extension are the corresponding one-sided derivatives.\n\nUse the chartwise regularity convention of [[def-c-r-and-smooth-maps-between-smooth-manifolds]] and the finite path operations of [[def-piecewise-c1-path-operations-and-oriented-reparametrizations]]. Refining a piece into finitely many chart pieces is allowed. No nonzero-velocity hypothesis is imposed: constant segments and pauses are admissible. A singleton parameter interval is interpreted as a constant curve.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-continuous-implies-integrable",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f : [a,b] \\to \\mathbb{R}$ be continuous on $[a,b]$\n(Continuity of $f : A \\to \\mathbb{R}$ at a point of $A$ and on $A$: the $\\varepsilon$-$\\delta$ condition, its agreement with $\\lim_{x \\to c} f(x) = f(c)$ at a limit point, and continuity at an isolated point). Then $f$ is bounded (Lower bound, bounded below, bounded set) and Riemann\nintegrable on $[a,b]$ (The lower and upper Darboux integrals of a bounded $f$ on $[a,b]$ as $\\sup_P L(f,P)$ and $\\inf_P U(f,P)$, Darboux integrability as their equality, and the notation $\\int_a^b f$).\n\n**The proof gives more than integrability: it gives a partition that works.** For\nevery real $\\varepsilon > 0$ the uniform partition into $N$ parts already\nsatisfies $U(f,P) - L(f,P) < \\varepsilon$, as soon as $N$ is large enough that\n$(b-a)/\\iota(N)$ is below the $\\delta$ that uniform continuity supplies for\n$\\varepsilon/\\bigl(2(b-a)\\bigr)$. Uniform continuity is exactly what makes one\n$\\delta$ serve all $N$ subintervals at once, and it is the only place where the\ncompactness of $[a,b]$ is used.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-additivity-over-subintervals",
+          "source_section": "Statement",
+          "quote": "Let $a < c < b$ be reals and let $f : [a,b] \\to \\mathbb{R}$ be bounded\n(Lower bound, bounded below, bounded set). Then:\n\n1. $f$ is integrable on $[a,b]$ (The lower and upper Darboux integrals of a bounded $f$ on $[a,b]$ as $\\sup_P L(f,P)$ and $\\inf_P U(f,P)$, Darboux integrability as their equality, and the notation $\\int_a^b f$) **if and only if** its\n   restrictions to $[a,c]$ and to $[c,b]$ are integrable;\n2. and in that case\n   $$\\int_a^b f \\;=\\; \\int_a^c f \\;+\\; \\int_c^b f .$$\n3. **Oriented form.** Let $\\alpha < \\beta$ be reals, let $f : [\\alpha,\\beta] \\to\n   \\mathbb{R}$ be integrable, and let $u, v, w \\in [\\alpha,\\beta]$ be arbitrary.\n   Then, with the convention of The integral with oriented limits: $\\int_a^a f := 0$ and $\\int_b^a f := -\\int_a^b f$,\n   $$\\int_u^v f \\;+\\; \\int_v^w f \\;=\\; \\int_u^w f .$$\n\nClaim 3 is where The integral with oriented limits: $\\int_a^a f := 0$ and $\\int_b^a f := -\\int_a^b f$ earns its place: it holds for every\narrangement of the three points, including the degenerate ones, and it is the\nform used everywhere below.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The charts are smooth charts of the manifold structure in [F1]. On each chartwise $C^1$ piece, $t\\mapsto\\omega_{\\gamma(t)}(\\dot\\gamma(t))$ is continuous up to the endpoints by [F2] and [F3]. The covector-vector pairing is unchanged by a chart change, so this is an intrinsically defined continuous real function; its piece integral exists by [F4].",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Any two admissible finite subdivisions have a finite common refinement. Repeatedly applying [F5] shows that subdividing a piece leaves the sum unchanged; hence the defined period is a unique real number independent of the chosen subdivision.",
+          "inputs": [
+            "given",
+            "F5",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A curve and one-form are supplied; no empty-object construction is asserted.",
+          "case_reasoning": "A curve and one-form are supplied; no empty-object construction is asserted. The period is the finite sum of continuous intrinsic covector-tangent integrals. A finite common refinement gives subdivision independence without homotopy invariance or a converse exactness assertion."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition gives zero integrand for a constant curve.",
+          "case_reasoning": "The Definition gives zero integrand for a constant curve. The period is the finite sum of continuous intrinsic covector-tangent integrals. A finite common refinement gives subdivision independence without homotopy invariance or a converse exactness assertion."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No unit-sized curve or one-parameter threshold is asserted.",
+          "case_reasoning": "No unit-sized curve or one-parameter threshold is asserted. The period is the finite sum of continuous intrinsic covector-tangent integrals. A finite common refinement gives subdivision independence without homotopy invariance or a converse exactness assertion."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No matrix or spectral degeneracy case occurs.",
+          "case_reasoning": "No matrix or spectral degeneracy case occurs. The period is the finite sum of continuous intrinsic covector-tangent integrals. A finite common refinement gives subdivision independence without homotopy invariance or a converse exactness assertion."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Definition includes the full finite subdivision from t_0=0 to t_m=1.",
+          "case_reasoning": "The Definition includes the full finite subdivision from t_0=0 to t_m=1. The period is the finite sum of continuous intrinsic covector-tangent integrals. A finite common refinement gives subdivision independence without homotopy invariance or a converse exactness assertion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 uses a finite common refinement of the supplied subdivisions.",
+          "case_reasoning": "Step 2.1 uses a finite common refinement of the supplied subdivisions. The period is the finite sum of continuous intrinsic covector-tangent integrals. A finite common refinement gives subdivision independence without homotopy invariance or a converse exactness assertion."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition states no biconditional.",
+          "case_reasoning": "The Definition states no biconditional. The period is the finite sum of continuous intrinsic covector-tangent integrals. A finite common refinement gives subdivision independence without homotopy invariance or a converse exactness assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition states no biconditional.",
+          "case_reasoning": "The Definition states no biconditional. The period is the finite sum of continuous intrinsic covector-tangent integrals. A finite common refinement gives subdivision independence without homotopy invariance or a converse exactness assertion."
+        }
+      ],
+      "current_boundary_worksheet": {
+        "proposal": "research/physics-non-fluid-129-2026-10-21-r2-owner-step2-boundary-proposal-5/proposal.json",
+        "source_sha256": "5d09eb66817b103a6cbcda56695f37a0e8cddc9c4c21aac7cb477d46e1b6339d",
+        "qualification": "Released complete current source/eight-case semantic worksheet; root transcribed exact current rows. No independent acceptance or finite computation asserted."
+      },
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-115",
+        "notes": "Read both steps and all five exact direct supplier definitions/statements. Smooth covector pairing with each continuously extended one-sided tangent is continuous on each nondegenerate closed piece, hence Riemann integrable. Coordinate transformation cancels covector/vector Jacobians. Two finite subdivisions have a finite common refinement and integral additivity identifies their sums. Constant curves/zero velocities give zero; distinct one-sided velocities at joins are integrated separately. No homotopy claim, converse exactness claim, infinite subdivision or choice is used."
+      }
+    },
+    "lem-tgrx-exact-one-form-zero-period": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-tgrx-period-of-one-form",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a smooth $n$-manifold, meaning a topological $n$-manifold equipped with a maximal smooth atlas, and let $\\omega\\in\\Omega^1(M)$ be a smooth real one-form, meaning a smooth section of the cotangent bundle $T^*M\\to M$. Let $\\gamma:[0,1]\\to M$ be a continuous piecewise-$C^1$ curve with $\\gamma(0)=\\gamma(1)$: there is a finite subdivision $0=t_0<\\cdots<t_m=1$ such that on each closed piece a chart contains the curve image, its coordinate representative is $C^1$ on the piece interior, and its derivative extends continuously to the endpoints. At a piece endpoint, use the corresponding one-sided derivative as the tangent. On each piece, pair this tangent $\\dot\\gamma(t)\\in T_{\\gamma(t)}M$ with $\\omega_{\\gamma(t)}\\in T^*_{\\gamma(t)}M$. Define the oriented period by\n\n$$\\operatorname{Per}_\\gamma(\\omega):=\\sum_j\\int_{t_j}^{t_{j+1}}\\omega_{\\gamma(t)}(\\dot\\gamma(t))\\,dt,$$\n\nwhere $0=t_0<\\cdots<t_m=1$ is any admissible chartwise subdivision with the regularity specified above. The covector-vector pairing is intrinsic, and additivity makes this value independent of further subdivision. No invariance under homotopy is asserted by this definition.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-closed-and-exact-differential-forms",
+          "source_section": "Definition",
+          "quote": "For the complex [[def-de-rham-cochain-complex]], put $Z^k(M)=\\ker(d:\\Omega^k(M)\\to\\Omega^{k+1}(M))$ and $B^k(M)=\\operatorname{im}(d:\\Omega^{k-1}(M)\\to\\Omega^k(M))$. A form is **closed** if it belongs to $Z^k$ and **exact** if it belongs to $B^k$.\n\nIf $\\omega=d\\eta$, then $d\\omega=d^2\\eta=0$ by [[thm-the-exterior-derivative-squares-to-zero]], so $B^k\\subseteq Z^k$. In particular $B^0=0$, since $\\Omega^{-1}=0$. The zero form is both closed and exact in every degree.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-continuous-implies-integrable",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f : [a,b] \\to \\mathbb{R}$ be continuous on $[a,b]$\n(Continuity of $f : A \\to \\mathbb{R}$ at a point of $A$ and on $A$: the $\\varepsilon$-$\\delta$ condition, its agreement with $\\lim_{x \\to c} f(x) = f(c)$ at a limit point, and continuity at an isolated point). Then $f$ is bounded (Lower bound, bounded below, bounded set) and Riemann\nintegrable on $[a,b]$ (The lower and upper Darboux integrals of a bounded $f$ on $[a,b]$ as $\\sup_P L(f,P)$ and $\\inf_P U(f,P)$, Darboux integrability as their equality, and the notation $\\int_a^b f$).\n\n**The proof gives more than integrability: it gives a partition that works.** For\nevery real $\\varepsilon > 0$ the uniform partition into $N$ parts already\nsatisfies $U(f,P) - L(f,P) < \\varepsilon$, as soon as $N$ is large enough that\n$(b-a)/\\iota(N)$ is below the $\\delta$ that uniform continuity supplies for\n$\\varepsilon/\\bigl(2(b-a)\\bigr)$. Uniform continuity is exactly what makes one\n$\\delta$ serve all $N$ subintervals at once, and it is the only place where the\ncompactness of $[a,b]$ is used.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-ftc-second-part",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals, let $G : [a,b] \\to \\mathbb{R}$ be differentiable at every\npoint of $[a,b]$ as a function on $[a,b]$ (The derivative $f'(c) = \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c}$ of $f : A \\to \\mathbb{R}$ at a point $c \\in A$ that is a limit point of $A$, and differentiability on a set; at $a$ and $b$\nthis is the one-sided derivative), let $f := G'$, and suppose $f$ is integrable\non $[a,b]$ (The lower and upper Darboux integrals of a bounded $f$ on $[a,b]$ as $\\sup_P L(f,P)$ and $\\inf_P U(f,P)$, Darboux integrability as their equality, and the notation $\\int_a^b f$). Then\n\n$$\\int_a^b f \\;=\\; G(b) - G(a) .$$\n\n**Both hypotheses are needed and neither is removable.** A function may be\ndifferentiable everywhere with $G'$ not integrable \u2014 then the left-hand side does\nnot exist (an everywhere differentiable function with unbounded derivative) \u2014 and an\nintegrable $f$ need not be the derivative of anything\n(the sign function); both witnesses are on the\ncompanion page.\n\n**No continuity of $f$ is assumed**, which is what makes this the working form:\nthe theorem evaluates $\\int_a^b f$ for every integrable derivative, not only for\ncontinuous integrands.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix the finite subdivision from [F1]. On each chartwise $C^1$ piece choose a chart $\\kappa:U\\to V\\subseteq\\mathbb R^n$ containing its image, and put $x(t):=\\kappa(\\gamma(t))$ and $\\widetilde\\phi:=\\phi\\circ\\kappa^{-1}$. By [F2] the coordinate coefficients of $\\omega$ are $\\partial_i\\widetilde\\phi$; applying [F3] to $\\widetilde\\phi\\circ x$ gives $\\frac{d}{dt}(\\phi\\circ\\gamma)(t)=\\omega_{\\gamma(t)}(\\dot\\gamma(t))$ in the piece interior. The same formula holds with one-sided derivatives at the endpoints: the differentiability expansion of $\\widetilde\\phi$ composed with the one-sided expansion of $x$ gives $D\\widetilde\\phi(x(t))x'(t)$. These derivatives are continuous on the closed piece by [F1] and smoothness of $\\phi$, so they are integrable by [F4].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply [F5] on each subdivision interval to $h=\\phi\\circ\\gamma$. By [F1] the period is the sum of those integrals, so it equals the sum of the increments $\\phi(\\gamma(t_{j+1}))-\\phi(\\gamma(t_j))$. The internal endpoint terms cancel, and the remaining increment is $\\phi(\\gamma(1))-\\phi(\\gamma(0))=0$ because $\\gamma$ is closed. Thus the period is zero.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "If no closed curve is present the universally quantified claim is vacuous."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 yields the zero endpoint increment for every closed curve."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The lemma has no scalar parameter equal to one."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No spectral or matrix degeneracy occurs."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 uses gamma(0)=gamma(1) after telescoping."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses only the finite subdivision supplied with the curve."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma states no biconditional.",
+          "historical_template_review": {
+            "upheld": true,
+            "by": "same-owner-qft-green-maps scoped boundary review",
+            "reason": "For a globally defined potential, the chain rule and interval FTC turn each curve piece into a potential increment, whose closed-loop sum telescopes to zero. The claim does not say that zero periods on some unspecified curves imply exactness.",
+            "item_sha256": "d8ee5152ff12f5116abea51f02dc2b70182d93f10c7341151b70708f7827fda3",
+            "row_sha256": "ea217c2c7255ec2f3fe38d5747f2456a636bed47165e2647d3bb818935f0dbfa"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma states no biconditional.",
+          "historical_template_review": {
+            "upheld": true,
+            "by": "same-owner-qft-green-maps scoped boundary review",
+            "reason": "For a globally defined potential, the chain rule and interval FTC turn each curve piece into a potential increment, whose closed-loop sum telescopes to zero. The claim does not say that zero periods on some unspecified curves imply exactness.",
+            "item_sha256": "d8ee5152ff12f5116abea51f02dc2b70182d93f10c7341151b70708f7827fda3",
+            "row_sha256": "8fef62148b06222d58732149ccf470dff2b20aa15331831195c22cad2afb5ac1"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-115",
+        "notes": "Read both steps and exact chain-rule, integrability, FTC and exact-form supplier statements. In each finite chart piece the scalar composite has derivative dphi(gamma dot); its continuous extension supplies the one-sided endpoint derivatives required by the stated FTC. Piecewise endpoint increments telescope to zero because gamma(0)=gamma(1). This covers constant pieces, corners and disconnected/empty manifolds (no closed curves in the empty case). The coordinate x notation is resolved as the chart in phi composed with its inverse and the coordinate curve in the composite. No converse or topological exactness criterion is used."
+      }
+    },
+    "prop-tgrx-equilibrium-obstructions": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-tgrx-thermal-vorticity",
+          "source_section": "Definition",
+          "quote": "Let $O$ be a nonempty connected open subset of a smooth time-oriented Lorentzian four-manifold $(M,g)$ of signature $(-,+,+,+)$, with its Levi-Civita connection $\\nabla$ and length-coordinate convention $x^0=ct$. Let $\\beta$ be a smooth future-directed timelike Killing vector field on $O$, with components in $\\mathrm{J}^{-1}$, and fix $k_B>0$ in $\\mathrm{J\\,K}^{-1}$. On $O$ define\n\n$$T:=\\frac{1}{k_B\\sqrt{-g(\\beta,\\beta)}},\\qquad u:=k_BT\\,\\beta,\\qquad \\varpi_{ab}:=-\\frac12(\\nabla_a\\beta_b-\\nabla_b\\beta_a).$$\n\nThus $T$ is in kelvins, $g(u,u)=-1$, and the covariant two-form $\\varpi$ has units $\\mathrm{J}^{-1}\\mathrm{m}^{-1}$. For a smooth chemical-potential scalar $\\mu:O\\to\\mathbb R$ in joules, set $\\zeta:=\\mu/(k_BT)$ and $\\alpha:=-\\zeta$, both dimensionless. These fields are defined only on the region where $\\beta$ is future timelike; no thermal state or material realization is part of this definition.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-tgr-thermal-killing-kinematic-equivalence",
+          "source_section": "Statement",
+          "quote": "Let $O$ be a connected open set in a smooth time-oriented Lorentzian\nfour-manifold, let $u$ be a smooth future unit timelike vector field on $O$\n($g(u,u)=-1$), and let $T:O\\to(0,\\infty)$ be smooth. Define\n$\\beta:=u/(k_BT)$, $h_{ab}:=g_{ab}+u_au_b$,\n$D:=u^a\\nabla_a$, $a_b:=u^a\\nabla_au_b$,\n$\\theta:=\\nabla_au^a$ and\n$\\sigma_{ab}:=h_a{}^ch_b{}^d\\nabla_{(c}u_{d)}-\\theta h_{ab}/3$ as in\n[[def-tgr-stationary-thermal-carriers]]. Then $\\beta$ is a Killing field of\n$g$ (equivalently $\\nabla_{(a}\\beta_{b)}=0$ by\n[[def-gr-killing-field]] and\n[[thm-gr-killing-and-on-shell-matter-identities]]) if and only if\n$$DT=0,\\qquad \\theta=0,\\qquad \\sigma_{ab}=0,\\qquad h_a{}^b\\nabla_b\\log T=-a_a.$$\nNo hypersurface-orthogonality or vanishing-vorticity condition is assumed.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-tgr-charged-liouville-data",
+          "source_section": "Definition",
+          "quote": "Use SI dimensions and the signature $(-,+,+,+)$. Take the geometric data of\n[[def-tgr-stationary-thermal-carriers]]: $O$ is a nonempty connected open domain in a\nsmooth oriented, time-oriented Lorentzian four-manifold $(M,g)$, $\\nabla$ is the\nLevi\u2013Civita connection, and $\\xi$ is a smooth future-directed timelike Killing\nfield with dimensionless components in physical length coordinates $x^0=ct$\nand $x^i$ measured in metres. Put $N:=\\sqrt{-g(\\xi,\\xi)}>0$ and\n$u:=\\xi/N$, so $g(u,u)=-1$. Its smooth\ntangent-bundle data carry the supplier's explicit foundational assumption\n[[def-countable-choice]] ($\\mathrm{AC}_\\omega$); no stronger choice principle\nis added here.\n\nLet $A$ be a smooth real one-form on $O$: for each $x\\in O$, $A_x:T_xO\\to\\mathbb R$\nis linear, and in every smooth chart $(x^a)$ its coefficients $A_a$ are smooth\nand obey the covector transformation law $A'_i=A_a\\,\\partial x^a/\\partial y^i$\non an overlapping chart $(y^i)$. The coefficients have units tesla metres.\nDefine $F$ in each chart by\n$$F_{ab}:=(dA)_{ab}:=\\partial_aA_b-\\partial_bA_a.$$\nThis prescription defines a global smooth antisymmetric covariant two-tensor:\nunder a change of chart $x=x(y)$ the chain rule gives\n$$F'_{ij}=F_{ab}\\,\\frac{\\partial x^a}{\\partial y^i}\\frac{\\partial x^b}{\\partial y^j},$$\nsince the only additional term is\n$A_a(\\partial_i\\partial_jx^a-\\partial_j\\partial_ix^a)=0$. Thus $F=dA$ is a two-form;\nits components have units tesla. A global gauge compensator is a smooth real\nfunction $\\Lambda_\\xi$ on $O$ satisfying\n$$\\mathcal L_\\xi A=d\\Lambda_\\xi,\\qquad (\\mathcal L_\\xi A)_a:=\\xi^b\\partial_bA_a+A_b\\partial_a\\xi^b$$\nin every smooth chart. This defines the Lie-derivative coefficients globally:\nunder $x=x(y)$, put $J^a_i:=\\partial x^a/\\partial y^i$ and\n$K^i_a:=\\partial y^i/\\partial x^a$. Substitution of\n$A'_i=A_aJ^a_i$ and $\\xi'^i=K^i_a\\xi^a$ gives\n$$ (\\mathcal L_\\xi A)'_i=\\xi^b(\\partial_bA_a)J^a_i+\\xi^bA_aK^j_b\\partial_jJ^a_i+A_cJ^c_j(\\partial_iK^j_b)\\xi^b+A_bJ^a_i\\partial_a\\xi^b. $$\nDifferentiating $J^c_jK^j_b=\\delta^c_b$ and using\n$\\partial_jJ^a_i=\\partial_iJ^a_j$ cancels the two middle terms, leaving\n$(\\mathcal L_\\xi A)'_i=(\\mathcal L_\\xi A)_aJ^a_i$. The units of\n$\\Lambda_\\xi$ are\ntesla metres. No global compensator is assumed to exist for an arbitrary\nsmooth $A$. Define contraction by $(\\iota_\\xi F)_a:=\\xi^bF_{ba}$.\nWhen a global smooth compensator $\\Lambda_\\xi:O\\to\\mathbb R$ satisfying\n$\\mathcal L_\\xi A=d\\Lambda_\\xi$ is supplied as additional data, set\n$$\\Psi_\\xi:=\\xi^aA_a-\\Lambda_\\xi,\\qquad \\Phi_\\xi:=-c\\Psi_\\xi.$$\nThus $\\Psi_\\xi$ has units tesla metres and $\\Phi_\\xi$ has units volts.\nThese two scalars are defined only for such supplied compensated data;\nthe trajectory, mass shell, transport and ansatz below require no compensator.\n\nLet $c>0$ be the speed of light, let $m>0$ be a particle rest mass in\nkilograms, let $q\\in\\mathbb R$ be its charge in coulombs, and put\n$M:=mc^2>0$ joules. A charged massive Lorentz trajectory is a $C^2$ curve\n$x:J\\to O$, where $J$ is an open real interval, parametrized by physical\nlength $s_m=c\\tau$ in metres, with future unit tangent\n$w:=dx/ds_m$, $g(w,w)=-1$, energy four-vector $P:=Mw$, and equation\n$$\\nabla_wP^a=cqF^a{}_bw^b,\\qquad F^a{}_b:=g^{ac}F_{cb}.$$\nIn particular $g(P,P)=-M^2$ and $P$ is future directed. This is a conditional\ndefinition of curves satisfying the equation; it makes no existence claim.\n\nThe future massive shell for this definition is the subset\n$$\\mathcal P_M^+(O):=\\{(x,P)\\in TO:g_x(P,P)=-M^2,\\ P\\text{ future directed}\\}.$$\nOn the full tangent bundle $TO$, define charged transport as the vector field\nwhose integral curves, with parameter $\\lambda=s_m/M$, satisfy\n$$\\frac{dx^a}{d\\lambda}=P^a,\\qquad \\nabla_{dx/d\\lambda}P^a=cqF^a{}_bP^b.$$\nIn a smooth chart its expression is\n$$\\mathcal L_{F,q}:=P^a\\partial_{x^a}+\\left(-\\Gamma^a{}_{bc}P^bP^c+cqF^a{}_bP^b\\right)\\partial_{P^a}.$$\nThe restriction of this field to $\\mathcal P_M^+(O)$ is justified by\n[[lem-tgr-charged-liouville-preserves-mass-shell]]. For any smooth real scalar\n$\\zeta$ and smooth vector field $\\beta$ with components in inverse joules,\ndefine the dimensionless charged exponential ansatz on the shell by\n$$f(x,P):=\\exp\\!\\left(\\zeta(x)+g_x(\\beta(x),P)\\right),\\qquad \\beta_b:=g_{bc}\\beta^c.$$\nThe equation $\\mathcal L_{F,q}f=0$ means that the derivative of this function\nalong the restricted charged transport vector field vanishes.\n\nUnder a smooth gauge change $A\\mapsto A+d\\chi$, with $\\chi$ in tesla square\nmetres, a supplied compensator changes by\n$\\Lambda_\\xi\\mapsto\\Lambda_\\xi+\\xi(\\chi)$. These definitions fix the sign\nconvention for $F$, the Lorentz force, and the potential terms used on this\npage.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-tgr-electrochemical-stationarity",
+          "source_section": "Statement",
+          "quote": "Let $O$ be a connected domain with the stationary Lorentzian data, potential\n$A$, field $F=dA$, Killing field $\\xi$, lapse $N=\\sqrt{-g(\\xi,\\xi)}$, future\nunit stationary observer $u=\\xi/N$, and charged transport on the future mass\nshell from [[def-tgr-charged-liouville-data]]. Let $m>0$, $q\\in\\mathbb R$,\n$\\beta:=u/(k_BT)$ for a smooth proper-temperature scalar $T:O\\to(0,\\infty)$,\nand $\\zeta:=\\mu/(k_BT)$ for a smooth chemical-potential scalar\n$\\mu:O\\to\\mathbb R$. Define $f(x,P)=\\exp(\\zeta+g(\\beta,P))$. Without any global\npotential-symmetry assumption,\n$$\\mathcal L_{F,q}f=0\\quad\\Longleftrightarrow\\quad \\beta\\text{ is Killing and }d\\zeta=-cq\\,\\iota_\\beta F.$$\n\nIf, in addition, a global smooth compensator satisfies\n$\\mathcal L_\\xi A=d\\Lambda_\\xi$, define $\\Phi_\\xi=-c(\\iota_\\xi A-\\Lambda_\\xi)$.\nThen the stationarity conditions above are equivalent to the existence of\nconstants $T_K>0$ and $\\mu_K\\in\\mathbb R$ such that\n$$NT=T_K,\\qquad \\beta=\\frac{\\xi}{k_BT_K},\\qquad N\\mu+q\\Phi_\\xi=\\mu_K.$$\nWith $E_{\\rm loc}:=-g(P,u)$ and\n$H_\\xi:=-g(P,\\xi)+q\\Phi_\\xi$, the same exponent then has both forms\n$$\\zeta+g(\\beta,P)=-\\frac{E_{\\rm loc}-\\mu}{k_BT} =-\\frac{H_\\xi-\\mu_K}{k_BT_K}.$$\nHere $N$ is dimensionless, $T,T_K$ are kelvins, $\\mu,\\mu_K,E_{\\rm loc},H_\\xi$\nare joules per particle, $\\Phi_\\xi$ is volts, $q$ is coulombs, and\n$\\beta\\cdot P$ and $\\zeta$ are dimensionless. All claims are mathematical\nconditional deductions from the displayed smooth data; no equilibrium state,\nparticle ensemble, or physical realization is asserted to exist.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-closed-and-exact-differential-forms",
+          "source_section": "Definition",
+          "quote": "For the complex [[def-de-rham-cochain-complex]], put $Z^k(M)=\\ker(d:\\Omega^k(M)\\to\\Omega^{k+1}(M))$ and $B^k(M)=\\operatorname{im}(d:\\Omega^{k-1}(M)\\to\\Omega^k(M))$. A form is **closed** if it belongs to $Z^k$ and **exact** if it belongs to $B^k$.\n\nIf $\\omega=d\\eta$, then $d\\omega=d^2\\eta=0$ by [[thm-the-exterior-derivative-squares-to-zero]], so $B^k\\subseteq Z^k$. In particular $B^0=0$, since $\\Omega^{-1}=0$. The zero form is both closed and exact in every degree.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-tgrx-period-of-one-form",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a smooth $n$-manifold, meaning a topological $n$-manifold equipped with a maximal smooth atlas, and let $\\omega\\in\\Omega^1(M)$ be a smooth real one-form, meaning a smooth section of the cotangent bundle $T^*M\\to M$. Let $\\gamma:[0,1]\\to M$ be a continuous piecewise-$C^1$ curve with $\\gamma(0)=\\gamma(1)$: there is a finite subdivision $0=t_0<\\cdots<t_m=1$ such that on each closed piece a chart contains the curve image, its coordinate representative is $C^1$ on the piece interior, and its derivative extends continuously to the endpoints. At a piece endpoint, use the corresponding one-sided derivative as the tangent. On each piece, pair this tangent $\\dot\\gamma(t)\\in T_{\\gamma(t)}M$ with $\\omega_{\\gamma(t)}\\in T^*_{\\gamma(t)}M$. Define the oriented period by\n\n$$\\operatorname{Per}_\\gamma(\\omega):=\\sum_j\\int_{t_j}^{t_{j+1}}\\omega_{\\gamma(t)}(\\dot\\gamma(t))\\,dt,$$\n\nwhere $0=t_0<\\cdots<t_m=1$ is any admissible chartwise subdivision with the regularity specified above. The covector-vector pairing is intrinsic, and additivity makes this value independent of further subdivision. No invariance under homotopy is asserted by this definition.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-tgrx-exact-one-form-zero-period",
+          "source_section": "Statement",
+          "quote": "On any smooth manifold $M$, if a smooth one-form $\\omega$ is exact, so $\\omega=d\\phi$ for a globally defined smooth scalar $\\phi:M\\to\\mathbb R$, then $\\operatorname{Per}_\\gamma(\\omega)=0$ for every closed piecewise-$C^1$ curve $\\gamma$ in $M$.",
+          "uses": [
+            "1.4",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-tgrx-compensator-implies-exact",
+          "source_section": "Statement",
+          "quote": "Let $O$ be a smooth time-oriented Lorentzian domain, let $\\xi$ be a smooth future-timelike Killing field on $O$, and let $A$ be a global smooth one-form with $F=dA$. Suppose a global smooth scalar $\\Lambda_\\xi$ satisfies $\\mathcal L_\\xi A=d\\Lambda_\\xi$. Define $\\Psi_\\xi:=\\xi^aA_a-\\Lambda_\\xi$ and $\\omega:=\\iota_\\xi F$, with $(\\iota_\\xi F)_a=\\xi^bF_{ba}$. Then\n\n$$\\omega=-d\\Psi_\\xi,$$\n\nso $\\omega$ is exact. This identity uses the global potential symmetry and assumes no charged trajectory or conservation law.",
+          "uses": [
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "A3",
+          "source": "def-tgr-charged-liouville-data",
+          "source_section": "Definition",
+          "quote": "Use SI dimensions and the signature $(-,+,+,+)$. Take the geometric data of\n[[def-tgr-stationary-thermal-carriers]]: $O$ is a nonempty connected open domain in a\nsmooth oriented, time-oriented Lorentzian four-manifold $(M,g)$, $\\nabla$ is the\nLevi\u2013Civita connection, and $\\xi$ is a smooth future-directed timelike Killing\nfield with dimensionless components in physical length coordinates $x^0=ct$\nand $x^i$ measured in metres. Put $N:=\\sqrt{-g(\\xi,\\xi)}>0$ and\n$u:=\\xi/N$, so $g(u,u)=-1$. Its smooth\ntangent-bundle data carry the supplier's explicit foundational assumption\n[[def-countable-choice]] ($\\mathrm{AC}_\\omega$); no stronger choice principle\nis added here.\n\nLet $A$ be a smooth real one-form on $O$: for each $x\\in O$, $A_x:T_xO\\to\\mathbb R$\nis linear, and in every smooth chart $(x^a)$ its coefficients $A_a$ are smooth\nand obey the covector transformation law $A'_i=A_a\\,\\partial x^a/\\partial y^i$\non an overlapping chart $(y^i)$. The coefficients have units tesla metres.\nDefine $F$ in each chart by\n$$F_{ab}:=(dA)_{ab}:=\\partial_aA_b-\\partial_bA_a.$$\nThis prescription defines a global smooth antisymmetric covariant two-tensor:\nunder a change of chart $x=x(y)$ the chain rule gives\n$$F'_{ij}=F_{ab}\\,\\frac{\\partial x^a}{\\partial y^i}\\frac{\\partial x^b}{\\partial y^j},$$\nsince the only additional term is\n$A_a(\\partial_i\\partial_jx^a-\\partial_j\\partial_ix^a)=0$. Thus $F=dA$ is a two-form;\nits components have units tesla. A global gauge compensator is a smooth real\nfunction $\\Lambda_\\xi$ on $O$ satisfying\n$$\\mathcal L_\\xi A=d\\Lambda_\\xi,\\qquad (\\mathcal L_\\xi A)_a:=\\xi^b\\partial_bA_a+A_b\\partial_a\\xi^b$$\nin every smooth chart. This defines the Lie-derivative coefficients globally:\nunder $x=x(y)$, put $J^a_i:=\\partial x^a/\\partial y^i$ and\n$K^i_a:=\\partial y^i/\\partial x^a$. Substitution of\n$A'_i=A_aJ^a_i$ and $\\xi'^i=K^i_a\\xi^a$ gives\n$$ (\\mathcal L_\\xi A)'_i=\\xi^b(\\partial_bA_a)J^a_i+\\xi^bA_aK^j_b\\partial_jJ^a_i+A_cJ^c_j(\\partial_iK^j_b)\\xi^b+A_bJ^a_i\\partial_a\\xi^b. $$\nDifferentiating $J^c_jK^j_b=\\delta^c_b$ and using\n$\\partial_jJ^a_i=\\partial_iJ^a_j$ cancels the two middle terms, leaving\n$(\\mathcal L_\\xi A)'_i=(\\mathcal L_\\xi A)_aJ^a_i$. The units of\n$\\Lambda_\\xi$ are\ntesla metres. No global compensator is assumed to exist for an arbitrary\nsmooth $A$. Define contraction by $(\\iota_\\xi F)_a:=\\xi^bF_{ba}$.\nWhen a global smooth compensator $\\Lambda_\\xi:O\\to\\mathbb R$ satisfying\n$\\mathcal L_\\xi A=d\\Lambda_\\xi$ is supplied as additional data, set\n$$\\Psi_\\xi:=\\xi^aA_a-\\Lambda_\\xi,\\qquad \\Phi_\\xi:=-c\\Psi_\\xi.$$\nThus $\\Psi_\\xi$ has units tesla metres and $\\Phi_\\xi$ has units volts.\nThese two scalars are defined only for such supplied compensated data;\nthe trajectory, mass shell, transport and ansatz below require no compensator.\n\nLet $c>0$ be the speed of light, let $m>0$ be a particle rest mass in\nkilograms, let $q\\in\\mathbb R$ be its charge in coulombs, and put\n$M:=mc^2>0$ joules. A charged massive Lorentz trajectory is a $C^2$ curve\n$x:J\\to O$, where $J$ is an open real interval, parametrized by physical\nlength $s_m=c\\tau$ in metres, with future unit tangent\n$w:=dx/ds_m$, $g(w,w)=-1$, energy four-vector $P:=Mw$, and equation\n$$\\nabla_wP^a=cqF^a{}_bw^b,\\qquad F^a{}_b:=g^{ac}F_{cb}.$$\nIn particular $g(P,P)=-M^2$ and $P$ is future directed. This is a conditional\ndefinition of curves satisfying the equation; it makes no existence claim.\n\nThe future massive shell for this definition is the subset\n$$\\mathcal P_M^+(O):=\\{(x,P)\\in TO:g_x(P,P)=-M^2,\\ P\\text{ future directed}\\}.$$\nOn the full tangent bundle $TO$, define charged transport as the vector field\nwhose integral curves, with parameter $\\lambda=s_m/M$, satisfy\n$$\\frac{dx^a}{d\\lambda}=P^a,\\qquad \\nabla_{dx/d\\lambda}P^a=cqF^a{}_bP^b.$$\nIn a smooth chart its expression is\n$$\\mathcal L_{F,q}:=P^a\\partial_{x^a}+\\left(-\\Gamma^a{}_{bc}P^bP^c+cqF^a{}_bP^b\\right)\\partial_{P^a}.$$\nThe restriction of this field to $\\mathcal P_M^+(O)$ is justified by\n[[lem-tgr-charged-liouville-preserves-mass-shell]]. For any smooth real scalar\n$\\zeta$ and smooth vector field $\\beta$ with components in inverse joules,\ndefine the dimensionless charged exponential ansatz on the shell by\n$$f(x,P):=\\exp\\!\\left(\\zeta(x)+g_x(\\beta(x),P)\\right),\\qquad \\beta_b:=g_{bc}\\beta^c.$$\nThe equation $\\mathcal L_{F,q}f=0$ means that the derivative of this function\nalong the restricted charged transport vector field vanishes.\n\nUnder a smooth gauge change $A\\mapsto A+d\\chi$, with $\\chi$ in tesla square\nmetres, a supplied compensator changes by\n$\\Lambda_\\xi\\mapsto\\Lambda_\\xi+\\xi(\\chi)$. These definitions fix the sign\nconvention for $F$, the Lorentz force, and the potential terms used on this\npage.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The displayed definitions give $u=k_BT\\beta$ and $k_BT=(-g(\\beta,\\beta))^{-1/2}$, so $u=\\beta/\\sqrt{-g(\\beta,\\beta)}$ is future unit timelike and $\\beta=u/(k_BT)$. Applying the exact equivalence [F2] to this $u$ and $T$ gives the four displayed kinematic conditions if and only if $\\beta$ is Killing. No hypersurface-orthogonality or zero-vorticity condition is added.",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "In the Killing subcase of the Statement, fix any constant $T_*>0$ kelvins and set $\\xi:=k_BT_*\\beta$. This is a smooth future-timelike Killing field with dimensionless components. Its lapse is $N_\\xi=k_BT_*\\sqrt{-g(\\beta,\\beta)}=T_*/T$, so $\\xi/N_\\xi=u$ and $N_\\xi T=T_*$. To meet the orientation hypothesis of [F3] and [F4], fix any point of $O$ and a connected chart domain $U\\subseteq O$ containing it, and orient $U$ by its ordered coordinates. The restricted fields satisfy all stationary thermal-carrier hypotheses of [F4], and [A3] supplies its massive-shell ansatz on $U$. The future shell is defined by $g$ and the time orientation, and the charged transport by its covariant equation in [F3]; neither depends on this auxiliary chart orientation. Thus the restricted scalar $\\mathcal L_{F,q_{\\rm SI}}f$ and the one-form $d\\zeta+cq_{\\rm SI}\\omega$ agree with their global definitions on overlaps. Applying [F4] on $U$ gives stationarity there exactly when $d\\zeta=-cq_{\\rm SI}\\omega$ there, since $\\beta$ is already Killing. As the point was arbitrary, the same equivalence holds globally on $O$, without a global orientation or a simultaneous choice of oriented charts. By [A1] this is exactly $d\\alpha=q_{\\rm eff}\\omega$. This identifies the charged stationarity condition without assuming stationarity in the separate solvability argument below. The only inherited set-theoretic premise is $\\mathrm{AC}_\\omega$ in [F9]; no stronger choice principle is invoked.",
+          "inputs": [
+            "given",
+            "A1",
+            "A3",
+            "F1",
+            "F3",
+            "F4",
+            "F9",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "step": "1.3",
+          "claim": "Since $q_{\\rm eff}\\ne0$, any global solution of $d\\alpha=q_{\\rm eff}\\omega$ gives $\\omega=d(\\alpha/q_{\\rm eff})$, which is exact by [F5]. Conversely, if $\\omega=d\\psi$ for a global smooth $\\psi$, choosing $\\alpha=q_{\\rm eff}\\psi$ solves the equation, and $\\mu=-k_BT\\alpha$ is a smooth global chemical-potential scalar with the stated units. Thus the scalar transport equation has a global solution exactly when $\\omega$ is exact. This is a solvability result and does not itself assert that the supplied fields are stationary.",
+          "inputs": [
+            "given",
+            "A1",
+            "A2",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "step": "1.4",
+          "claim": "If $\\xi=k_BT_*\\beta$ has the global compensator in the Statement, [F8] gives $\\iota_\\xi F=-d\\Psi_\\xi$. Since $\\beta=\\xi/(k_BT_*)$, we get $\\omega=-(k_BT_*)^{-1}d\\Psi_\\xi$, an exact one-form; [F7] then forces every period to vanish. This stronger potential-symmetry condition is separate from the obstruction hypotheses.",
+          "inputs": [
+            "F7",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "If any closed curve has $\\operatorname{Per}_\\gamma(\\omega)\\ne0$, [F7] contradicts the exactness forced by step 1.3. Hence no global smooth charged chemical scalar can solve the transport equation.",
+          "inputs": [
+            "F6",
+            "F7",
+            "step 1.3"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "In the rotating Minkowski model, $\\partial_{x^0}$ and the smooth rotation generator $\\partial_\\phi=-y\\partial_x+x\\partial_y$ are Killing because the metric is invariant under time translations and rotations. Their constant linear combination $\\beta$ is Killing and $g(\\beta,\\beta)=-b^2+b^2\\Omega^2r^2=-b^2(1-\\Omega^2r^2)$. Also $g(\\beta,\\partial_{x^0})=-b<0$, so it is future-directed in the stated time orientation wherever it is timelike. Thus its future-timelike domain is exactly $1-\\Omega^2r^2>0$. Substituting this norm into [F1] gives the stated temperature; when $\\Omega=0$ the norm is $-b^2$ for every $r$.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The proposition assumes a nonempty connected domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 treats Omega=0, and step 2.1 uses q_eff != 0 for the scalar equation."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No separate one-valued parameter case is asserted; admissibility is set by the strict timelike inequality."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 includes the zero-rotation branch; the rotation generator is smooth in Cartesian coordinates."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 uses the strict timelike inequality, excluding the null light-cylinder boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 records inherited AC_omega and no stronger choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.1 applies the forward direction of the exact kinematic equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 1.1 applies the reverse direction of the exact kinematic equivalence."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-115",
+        "notes": "Read all six steps, nine direct dependencies and exact cited statements, including the published kinematic and charged-stationarity proofs. Both kinematic directions hold by the parallel/mixed/spatial projections; u is normalized and T positive. In the Killing subcase xi=k_B T_* beta is a future timelike Killing field with N_xi=T_*/T, meeting the stationary carrier hypotheses; the charged equation has sign d alpha=c q_SI i_beta F. Nonzero constant q_eff gives both exactness/solvability directions by explicit rescaling, and nonzero period obstructs it. A global compensator yields minus the differential of the global contraction-minus-compensator scalar; dividing by constant k_B T_* preserves exactness. The rotational Cartesian generator is smooth at the axis; its metric norm gives the strict light-cylinder bound, with Omega=0 separately valid at every r. No hypersurface orthogonality, local-to-global potential inference, or physical equilibrium realization is assumed. AC_omega is inherited, with no stronger choice. The charged differential identity is local and tensorial, so applying its proof on oriented chart domains needs no additional global orientation."
+      }
+    },
+    "ex-tgrx-rotating-annulus": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "prop-tgrx-equilibrium-obstructions",
+          "source_section": "Statement",
+          "quote": "Let $O$ be a nonempty connected open subset of a smooth time-oriented Lorentzian four-manifold $(M,g,N)$ of signature $(-,+,+,+)$, with Levi-Civita connection $\\nabla$ and time-orientation field $N$. Let $\\beta$ be any smooth vector field on $O$ satisfying $g(\\beta,\\beta)<0$ and $g(\\beta,N)<0$ everywhere; it is not assumed Killing, and Killing means $\\mathcal L_\\beta g=0$. In length coordinates $x^0=ct$, take $\\beta$ to have components in $\\mathrm{J}^{-1}$, fix $k_B>0$ in $\\mathrm{J\\,K}^{-1}$, and let $\\mu:O\\to\\mathbb R$ be smooth in joules. Define\n$$T:=\\frac{1}{k_B\\sqrt{-g(\\beta,\\beta)}},\\qquad u:=k_BT\\beta,\\qquad \\varpi_{ab}:=-\\frac12(\\nabla_a\\beta_b-\\nabla_b\\beta_a),$$\nand\n$$h_{ab}:=g_{ab}+u_au_b,\\quad D:=u^a\\nabla_a,\\quad a_b:=u^a\\nabla_au_b,\\quad \\theta:=\\nabla_au^a,\\quad \\sigma_{ab}:=h_a{}^ch_b{}^d\\nabla_{(c}u_{d)}-\\frac13\\theta h_{ab},\\quad \\alpha:=-\\frac{\\mu}{k_BT}.$$\nThen $\\beta$ is Killing if and only if $DT=0$, $\\theta=0$, $\\sigma_{ab}=0$, and $h_a{}^b\\nabla_b\\log T=-a_a$.\n\nIn the Killing subcase, let $A$ be a global smooth real one-form with SI length-coordinate components in $\\mathrm{T\\,m}$, set $F:=dA$ (with components in teslas), and define $\\omega:=\\iota_\\beta F$ by $(\\iota_\\beta F)_a=\\beta^bF_{ba}$. The components of $\\omega$ have units $\\mathrm{T\\,J}^{-1}$. Assume $d\\omega=0$. Here exact means $\\omega=d\\psi$ for a globally defined smooth scalar $\\psi$ with units $\\mathrm{T\\,m\\,J}^{-1}$; for a piecewise-$C^1$ closed curve $\\gamma:[0,1]\\to O$, its period is the oriented integral $\\operatorname{Per}_\\gamma(\\omega):=\\sum_j\\int_{t_j}^{t_{j+1}}\\omega_{\\gamma(t)}(\\dot\\gamma(t))\\,dt$, with the curve regularity and endpoint convention in the period definition. Let $m>0$ be a particle rest mass in kilograms, let $q_{\\rm SI}\\ne0$ be a constant charge in coulombs, and take $c>0$ in metres per second. Set $q_{\\rm eff}:=cq_{\\rm SI}$, with units $\\mathrm{C\\,m\\,s}^{-1}$. Choose any constant $T_*>0$ kelvins and put $\\xi:=k_BT_*\\beta$ and $N_\\xi:=\\sqrt{-g(\\xi,\\xi)}$. Then $\\xi$ is a future-timelike Killing field with dimensionless components, $u=\\xi/N_\\xi$ is future unit timelike, $N_\\xi=T_*/T$, and $\\beta=u/(k_BT)$. These are the stationary geometric data required by the charged stationarity theorem. For the ansatz $f=\\exp(\\zeta+g(\\beta,P))$ on the future massive shell defined by the charged particle data, with $\\zeta:=\\mu/(k_BT)$ and $\\alpha:=-\\zeta$, stationarity is equivalent, in this already-Killing subcase, to $d\\alpha=q_{\\rm eff}\\omega$; both sides have inverse-length units. Thus the equation for an unknown global smooth dimensionless scalar $\\alpha$ has a solution exactly when $\\omega$ is exact; any nonzero period obstructs such a solution. The scalar $\\alpha$ corresponds to chemical potential $\\mu=-k_BT\\alpha$ in joules.\n\nIf the same normalized field $\\xi=k_BT_*\\beta$ has a global potential compensator $\\mathcal L_\\xi A=d\\Lambda_\\xi$, then $\\omega$ is exact and all its periods vanish. For the rotating model, take global Cartesian length coordinates $(x^0,x,y,z)$ on Minkowski space $M=\\mathbb R^4$, with $x^0=ct$, metric $-(dx^0)^2+dx^2+dy^2+dz^2$, and future direction selected by $\\partial_{x^0}$. Put $r:=\\sqrt{x^2+y^2}$ and, away from the axis $r=0$, let $\\phi$ be the polar angle in the $x,y$-plane. The rotation field $\\partial_\\phi:=-y\\partial_x+x\\partial_y$ is defined by this Cartesian formula on all of $M$, including the axis; away from the axis the metric is $-(dx^0)^2+dr^2+r^2d\\phi^2+dz^2$. For $b>0$ in $\\mathrm{J}^{-1}$ and $\\Omega\\in\\mathbb R$ in $\\mathrm{m}^{-1}$, set $\\beta:=b(\\partial_{x^0}+\\Omega\\partial_\\phi)$. This field is future timelike exactly where $1-\\Omega^2r^2>0$. When $\\Omega\\ne0$ this is $r<1/|\\Omega|$ and $T=1/(k_Bb\\sqrt{1-\\Omega^2r^2})$; when $\\Omega=0$ every $r$ is allowed and $T=1/(k_Bb)$. These rotating formulas use the same SI length-coordinate convention $x^0=ct$ as the preceding clauses; no natural-unit substitution is made.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-tgrx-period-of-one-form",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a smooth $n$-manifold, meaning a topological $n$-manifold equipped with a maximal smooth atlas, and let $\\omega\\in\\Omega^1(M)$ be a smooth real one-form, meaning a smooth section of the cotangent bundle $T^*M\\to M$. Let $\\gamma:[0,1]\\to M$ be a continuous piecewise-$C^1$ curve with $\\gamma(0)=\\gamma(1)$: there is a finite subdivision $0=t_0<\\cdots<t_m=1$ such that on each closed piece a chart contains the curve image, its coordinate representative is $C^1$ on the piece interior, and its derivative extends continuously to the endpoints. At a piece endpoint, use the corresponding one-sided derivative as the tangent. On each piece, pair this tangent $\\dot\\gamma(t)\\in T_{\\gamma(t)}M$ with $\\omega_{\\gamma(t)}\\in T^*_{\\gamma(t)}M$. Define the oriented period by\n\n$$\\operatorname{Per}_\\gamma(\\omega):=\\sum_j\\int_{t_j}^{t_{j+1}}\\omega_{\\gamma(t)}(\\dot\\gamma(t))\\,dt,$$\n\nwhere $0=t_0<\\cdots<t_m=1$ is any admissible chartwise subdivision with the regularity specified above. The covector-vector pairing is intrinsic, and additivity makes this value independent of further subdivision. No invariance under homotopy is asserted by this definition.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-tgrx-exact-one-form-zero-period",
+          "source_section": "Statement",
+          "quote": "On any smooth manifold $M$, if a smooth one-form $\\omega$ is exact, so $\\omega=d\\phi$ for a globally defined smooth scalar $\\phi:M\\to\\mathbb R$, then $\\operatorname{Per}_\\gamma(\\omega)=0$ for every closed piecewise-$C^1$ curve $\\gamma$ in $M$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The chosen radius satisfies $\\Omega^2r^2=(1\\,\\mathrm{m}^{-1})^2(\\tfrac12\\,\\mathrm m)^2=1/4$, so $\\sqrt{1-\\Omega^2r^2}=\\sqrt3/2$ and the rotating temperature formula in [F1] gives $T=2\\,\\mathrm J/(\\sqrt3 k_B)$. The annulus has $r<3/4\\,\\mathrm m<1/|\\Omega|$, so every point lies inside the timelike domain.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The form $\\eta$ is smooth because $r^2=x^2+y^2>0$. Its coefficients are $\\eta_x=-y/r^2$ and $\\eta_y=x/r^2$, with $\\partial_x\\eta_y=(y^2-x^2)/r^4=\\partial_y\\eta_x$, so $d\\eta=0$. Also $\\eta(\\partial_\\phi)=(-y/r^2)(-y)+(x/r^2)x=1$. Hence $dA=C_0dx^0\\wedge\\eta=F$, and contraction gives $\\omega=\\iota_\\beta F=bC_0(\\eta-\\Omega dx^0)$. Since $d\\eta=0$ and $d(dx^0)=0$, $d\\omega=0$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "A1",
+            "A2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "For $\\gamma(s)=(x^0_0,r\\cos(2\\pi s),r\\sin(2\\pi s),z_0)$, $0\\le s\\le1$, its tangent satisfies $dx^0(\\dot\\gamma)=0$ and direct substitution into $\\eta=(-y\\,dx+x\\,dy)/r^2$ gives $\\eta_{\\gamma(s)}(\\dot\\gamma(s))=2\\pi$. Hence $\\operatorname{Per}_\\gamma(\\omega)=\\int_0^1 2\\pi bC_0\\,ds=2\\pi bC_0\\ne0$.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F2",
+            "A1",
+            "A2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If a global smooth $\\alpha$ solved $d\\alpha=q_{\\rm eff}\\omega$, then $\\omega=d(\\alpha/q_{\\rm eff})$ because $q_{\\rm eff}\\ne0$. This would be exact, so [F3] would force $\\operatorname{Per}_\\gamma(\\omega)=0$, contradicting step 1.3. Hence no such global scalar exists.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F3",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example specifies a nonempty annular domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.3 shows the selected nonzero period; the statement excludes q_eff=0 and C_0=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 substitutes b=1 J^-1, Omega=1 m^-1, and r=1/2 m."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 restricts to an annulus away from the cylindrical axis."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.3 parametrizes a closed curve with equal endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1-1.3 use explicit fields and one explicit circle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example states no biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-115",
+        "notes": "Read all four Verification steps and three suppliers after completing their risk reviews. The annulus excludes r=0 and stays strictly inside the light cylinder. Partial derivatives show d eta=0, eta(partial_phi)=1, dA=C_0 dx^0 wedge eta and contraction b C_0(eta-Omega dx^0), with consistent tesla/inverse-joule/metre units. Every fixed-radius positively oriented circle gives eta(gamma dot)=2 pi, hence nonzero period 2 pi b C_0 for nonzero b,C_0. Exactness forced by nonzero q_eff contradicts that period; no converse zero-period criterion is asserted. The fixed radius one-half metre is used for the temperature evaluation; the period calculation works for every admissible radius. The excluded zero-charge and zero-field branches are not claimed. BIPM defining-constants table rows c and k and the exactness paragraph verify the adopted constants, rather than measured data or statistical precision. Both original reports identify one nonfatal locator defect, repaired by the direct URL without changing any claim or proof."
+      }
+    },
+    "lem-tgrx-compensator-implies-exact": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-tgr-charged-liouville-data",
+          "source_section": "Definition",
+          "quote": "Use SI dimensions and the signature $(-,+,+,+)$. Take the geometric data of\n[[def-tgr-stationary-thermal-carriers]]: $O$ is a nonempty connected open domain in a\nsmooth oriented, time-oriented Lorentzian four-manifold $(M,g)$, $\\nabla$ is the\nLevi\u2013Civita connection, and $\\xi$ is a smooth future-directed timelike Killing\nfield with dimensionless components in physical length coordinates $x^0=ct$\nand $x^i$ measured in metres. Put $N:=\\sqrt{-g(\\xi,\\xi)}>0$ and\n$u:=\\xi/N$, so $g(u,u)=-1$. Its smooth\ntangent-bundle data carry the supplier's explicit foundational assumption\n[[def-countable-choice]] ($\\mathrm{AC}_\\omega$); no stronger choice principle\nis added here.\n\nLet $A$ be a smooth real one-form on $O$: for each $x\\in O$, $A_x:T_xO\\to\\mathbb R$\nis linear, and in every smooth chart $(x^a)$ its coefficients $A_a$ are smooth\nand obey the covector transformation law $A'_i=A_a\\,\\partial x^a/\\partial y^i$\non an overlapping chart $(y^i)$. The coefficients have units tesla metres.\nDefine $F$ in each chart by\n$$F_{ab}:=(dA)_{ab}:=\\partial_aA_b-\\partial_bA_a.$$\nThis prescription defines a global smooth antisymmetric covariant two-tensor:\nunder a change of chart $x=x(y)$ the chain rule gives\n$$F'_{ij}=F_{ab}\\,\\frac{\\partial x^a}{\\partial y^i}\\frac{\\partial x^b}{\\partial y^j},$$\nsince the only additional term is\n$A_a(\\partial_i\\partial_jx^a-\\partial_j\\partial_ix^a)=0$. Thus $F=dA$ is a two-form;\nits components have units tesla. A global gauge compensator is a smooth real\nfunction $\\Lambda_\\xi$ on $O$ satisfying\n$$\\mathcal L_\\xi A=d\\Lambda_\\xi,\\qquad (\\mathcal L_\\xi A)_a:=\\xi^b\\partial_bA_a+A_b\\partial_a\\xi^b$$\nin every smooth chart. This defines the Lie-derivative coefficients globally:\nunder $x=x(y)$, put $J^a_i:=\\partial x^a/\\partial y^i$ and\n$K^i_a:=\\partial y^i/\\partial x^a$. Substitution of\n$A'_i=A_aJ^a_i$ and $\\xi'^i=K^i_a\\xi^a$ gives\n$$ (\\mathcal L_\\xi A)'_i=\\xi^b(\\partial_bA_a)J^a_i+\\xi^bA_aK^j_b\\partial_jJ^a_i+A_cJ^c_j(\\partial_iK^j_b)\\xi^b+A_bJ^a_i\\partial_a\\xi^b. $$\nDifferentiating $J^c_jK^j_b=\\delta^c_b$ and using\n$\\partial_jJ^a_i=\\partial_iJ^a_j$ cancels the two middle terms, leaving\n$(\\mathcal L_\\xi A)'_i=(\\mathcal L_\\xi A)_aJ^a_i$. The units of\n$\\Lambda_\\xi$ are\ntesla metres. No global compensator is assumed to exist for an arbitrary\nsmooth $A$. Define contraction by $(\\iota_\\xi F)_a:=\\xi^bF_{ba}$.\nWhen a global smooth compensator $\\Lambda_\\xi:O\\to\\mathbb R$ satisfying\n$\\mathcal L_\\xi A=d\\Lambda_\\xi$ is supplied as additional data, set\n$$\\Psi_\\xi:=\\xi^aA_a-\\Lambda_\\xi,\\qquad \\Phi_\\xi:=-c\\Psi_\\xi.$$\nThus $\\Psi_\\xi$ has units tesla metres and $\\Phi_\\xi$ has units volts.\nThese two scalars are defined only for such supplied compensated data;\nthe trajectory, mass shell, transport and ansatz below require no compensator.\n\nLet $c>0$ be the speed of light, let $m>0$ be a particle rest mass in\nkilograms, let $q\\in\\mathbb R$ be its charge in coulombs, and put\n$M:=mc^2>0$ joules. A charged massive Lorentz trajectory is a $C^2$ curve\n$x:J\\to O$, where $J$ is an open real interval, parametrized by physical\nlength $s_m=c\\tau$ in metres, with future unit tangent\n$w:=dx/ds_m$, $g(w,w)=-1$, energy four-vector $P:=Mw$, and equation\n$$\\nabla_wP^a=cqF^a{}_bw^b,\\qquad F^a{}_b:=g^{ac}F_{cb}.$$\nIn particular $g(P,P)=-M^2$ and $P$ is future directed. This is a conditional\ndefinition of curves satisfying the equation; it makes no existence claim.\n\nThe future massive shell for this definition is the subset\n$$\\mathcal P_M^+(O):=\\{(x,P)\\in TO:g_x(P,P)=-M^2,\\ P\\text{ future directed}\\}.$$\nOn the full tangent bundle $TO$, define charged transport as the vector field\nwhose integral curves, with parameter $\\lambda=s_m/M$, satisfy\n$$\\frac{dx^a}{d\\lambda}=P^a,\\qquad \\nabla_{dx/d\\lambda}P^a=cqF^a{}_bP^b.$$\nIn a smooth chart its expression is\n$$\\mathcal L_{F,q}:=P^a\\partial_{x^a}+\\left(-\\Gamma^a{}_{bc}P^bP^c+cqF^a{}_bP^b\\right)\\partial_{P^a}.$$\nThe restriction of this field to $\\mathcal P_M^+(O)$ is justified by\n[[lem-tgr-charged-liouville-preserves-mass-shell]]. For any smooth real scalar\n$\\zeta$ and smooth vector field $\\beta$ with components in inverse joules,\ndefine the dimensionless charged exponential ansatz on the shell by\n$$f(x,P):=\\exp\\!\\left(\\zeta(x)+g_x(\\beta(x),P)\\right),\\qquad \\beta_b:=g_{bc}\\beta^c.$$\nThe equation $\\mathcal L_{F,q}f=0$ means that the derivative of this function\nalong the restricted charged transport vector field vanishes.\n\nUnder a smooth gauge change $A\\mapsto A+d\\chi$, with $\\chi$ in tesla square\nmetres, a supplied compensator changes by\n$\\Lambda_\\xi\\mapsto\\Lambda_\\xi+\\xi(\\chi)$. These definitions fix the sign\nconvention for $F$, the Lorentz force, and the potential terms used on this\npage.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-closed-and-exact-differential-forms",
+          "source_section": "Definition",
+          "quote": "For the complex [[def-de-rham-cochain-complex]], put $Z^k(M)=\\ker(d:\\Omega^k(M)\\to\\Omega^{k+1}(M))$ and $B^k(M)=\\operatorname{im}(d:\\Omega^{k-1}(M)\\to\\Omega^k(M))$. A form is **closed** if it belongs to $Z^k$ and **exact** if it belongs to $B^k$.\n\nIf $\\omega=d\\eta$, then $d\\omega=d^2\\eta=0$ by [[thm-the-exterior-derivative-squares-to-zero]], so $B^k\\subseteq Z^k$. In particular $B^0=0$, since $\\Omega^{-1}=0$. The zero form is both closed and exact in every degree.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "In any smooth chart, the definitions give $(\\iota_\\xi F)_a=\\xi^b(\\partial_bA_a-\\partial_aA_b)$ and $\\partial_a\\Psi_\\xi=A_b\\partial_a\\xi^b+\\xi^b\\partial_aA_b-\\partial_a\\Lambda_\\xi$. By [A1] and [F1], $\\partial_a\\Lambda_\\xi=\\xi^b\\partial_bA_a+A_b\\partial_a\\xi^b$. Substitution yields $(\\iota_\\xi F)_a=-\\partial_a\\Psi_\\xi$. Since this calculation holds in every chart, it proves the stated one-form identity.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The scalar $\\Psi_\\xi=\\xi^aA_a-\\Lambda_\\xi$ is global and smooth because it is the contraction of globally defined smooth fields minus a global smooth scalar. Thus step 1.1 gives $\\omega=-d\\Psi_\\xi=d(-\\Psi_\\xi)$ globally, which is exact by [F2].",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The charged-data carrier supplies a nonempty domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 includes the zero contracted form among exact forms."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No unit-valued parameter or threshold occurs."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No matrix, spectrum, or rank condition occurs."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The identity has no interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 is a pointwise coordinate identity on supplied fields and makes no selections."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma states no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "same-owner-qft-green-maps scoped boundary review",
+            "reason": "Substituting the global compensator equation into the contraction of dA gives minus the differential of the global scalar xi dot A minus Lambda. This sufficient global identity is not a converse recovery of a potential or compensator from exactness alone.",
+            "item_sha256": "c6182f5601334e6d9535c90a9a2938e5be2b8956a61e804aa53b22f42325e011",
+            "row_sha256": "ea217c2c7255ec2f3fe38d5747f2456a636bed47165e2647d3bb818935f0dbfa"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma states no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "same-owner-qft-green-maps scoped boundary review",
+            "reason": "Substituting the global compensator equation into the contraction of dA gives minus the differential of the global scalar xi dot A minus Lambda. This sufficient global identity is not a converse recovery of a potential or compensator from exactness alone.",
+            "item_sha256": "c6182f5601334e6d9535c90a9a2938e5be2b8956a61e804aa53b22f42325e011",
+            "row_sha256": "8fef62148b06222d58732149ccf470dff2b20aa15331831195c22cad2afb5ac1"
+          }
+        }
+      ]
+    }
+  }
+}

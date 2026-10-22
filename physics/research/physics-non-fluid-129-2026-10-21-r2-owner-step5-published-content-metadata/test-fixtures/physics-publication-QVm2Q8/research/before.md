@@ -1,0 +1,27 @@
+---
+id: pthm-repaired
+kind: physics-theorem
+status: draft
+domain: physics
+physical_scope: Conditional model only
+deps: []
+proof_strategy: direct
+provenance:
+  statement: ai-altered
+  proof: ai-altered
+sources:
+  references:
+    - title: Source
+      url: https://example.org/source
+verification:
+  verified:
+    model: prior-reviewer
+---
+
+## Statement
+
+An original conditional conclusion.
+
+## Proof
+
+A complete synthetic proof carrier for a metadata test.

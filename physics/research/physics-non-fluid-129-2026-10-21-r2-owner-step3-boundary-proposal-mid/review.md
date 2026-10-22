@@ -1,0 +1,9 @@
+# Mid-frontier boundary semantic proposal
+
+Reviewed all ten complete current items selected by diagnosis batches 52–84, all eighty existing boundary rows, and the semantic arguments behind the thirty-five flagged rows. The diagnostic identifies failed exact old/current paragraph matching; the actual step numbers remain present. Thirty-four flagged rows remain sound unchanged. No numbering remap is proposed.
+
+Two evidence locator corrections are concrete: massive Gaussian-field endpoints should cite step 1.2, where the strictly positive-mass multiplier is defined and proved smooth, with step 5.1 retained as its application; helicity endpoints should cite step 1.2 for the overlap phase and winding, while step 2.1 computes Berry flux and the Chern convention. The latter row was noticed while reading all eight rows for its flagged item. Cases and statuses remain unchanged throughout.
+
+The explicit Bogoliubov permutation and spectral-calculus adjoint repairs preserve their prior boundary arguments. Batch 58 integrated pullback and matching suppliers preserve the zero-input, degree cutoff, formal finite-exponential and Countable Choice cases at the current local step numbers; no claim is made to a new recursive audit of those suppliers. No new scientific gap was found in the boundary claims inspected.
+
+proposal.json contains exact source and contract input guards, every before/after row, individual explanations for all flagged cases, and full relevant current numbered paragraphs. Its copied historical template-review data are inputs only, not new audit stamps. Native writers elsewhere may still change inputs, so root must verify guards before adopting these two evidence edits and recertify under its ordinary procedure. No production source, contract, metadata or native certification file was edited.

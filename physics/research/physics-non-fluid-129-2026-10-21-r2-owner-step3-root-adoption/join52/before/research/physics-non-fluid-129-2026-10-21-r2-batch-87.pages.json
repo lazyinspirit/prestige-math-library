@@ -1,0 +1,504 @@
+[
+  {
+    "order": 871,
+    "id": "csm-frontier-polymer-continuum",
+    "kind": "A",
+    "category": "classical-statistical-mechanics",
+    "library": "physics",
+    "title": "Polymer analyticity and dilute continuum correlations",
+    "companion": "csm-frontier-polymer-continuum-examples",
+    "requires": [
+      "csm-continuum-limits",
+      "csm-frontier-quantitative-dlr",
+      "csm-gibbs-lattice",
+      "graphs-walks-and-connectivity",
+      "cayley-graphs-word-metrics-and-quasi-isometry",
+      "trees-forests-and-spanning-trees",
+      "complex-norms-and-realification"
+    ],
+    "items": [
+      {
+        "id": "def-csm-frontier-abstract-polymer",
+        "kind": "definition",
+        "title": "Abstract polymer model and connected coefficients",
+        "status": "draft",
+        "origin": "pipeline",
+        "domain": "mathematics",
+        "library": "physics",
+        "dependency_level": 0,
+        "deps": [
+          "def-complex-numbers-and-arithmetic",
+          "def-countable",
+          "def-sum-over-a-finite-index-set",
+          "def-finite-simple-graph",
+          "def-simple-graph-without-a-finiteness-hypothesis",
+          "def-walks-paths-and-connectedness-in-a-simple-graph",
+          "def-cycles-trees-and-forests-in-a-simple-graph",
+          "cor-cardinality-of-the-power-set",
+          "thm-subset-of-a-finite-set"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-complex-numbers-and-arithmetic": "mathematical-premise",
+          "def-countable": "mathematical-premise",
+          "def-sum-over-a-finite-index-set": "mathematical-premise",
+          "def-finite-simple-graph": "mathematical-premise",
+          "def-simple-graph-without-a-finiteness-hypothesis": "mathematical-premise",
+          "def-walks-paths-and-connectedness-in-a-simple-graph": "mathematical-premise",
+          "def-cycles-trees-and-forests-in-a-simple-graph": "mathematical-premise",
+          "cor-cardinality-of-the-power-set": "mathematical-premise",
+          "thm-subset-of-a-finite-set": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "physical_scope": null,
+        "sources": {
+          "references": [
+            {
+              "title": "Sacha Friedli and Yvan Velenik, Statistical Mechanics of Lattice Systems: A Concrete Mathematical Introduction, Chapter 5, Cluster Expansion",
+              "url": "https://www.unige.ch/~velenik/smbook/Cluster_Expansion.pdf",
+              "locator": "§§5.2–5.3, PDF pp. 2–5 (printed pp. 220–223): finite polymer model, compatible subsets, connected graph coefficients, and the formal expansion."
+            },
+            {
+              "title": "Daniel Ueltschi, Cluster expansions and correlation functions",
+              "url": "https://arxiv.org/pdf/math-ph/0304003",
+              "locator": "§2, PDF pp. 1–4: measure-space partition function, connected graph coefficient, and the cluster expansion."
+            }
+          ]
+        },
+        "statement": "An abstract polymer model consists of an at most countable set $\\Gamma$ (finite or in bijection with $\\mathbb N$), a reflexive symmetric relation $\\sim$ on $\\Gamma$ (so $\\gamma\\sim\\gamma$ and $\\gamma\\sim\\eta$ implies $\\eta\\sim\\gamma$), and an activity function $z:\\Gamma\\to\\mathbb C$. Its elements are called polymers, and $\\gamma\\sim\\eta$ means that the two polymers are incompatible. A subset $X\\subseteq\\Gamma$ is compatible when no two distinct elements of $X$ are related by $\\sim$. For real and natural summands, finite-index sums and products are enumeration-independent. For complex summands, define a finite sum or product by any enumeration and repeated addition or multiplication in $\\mathbb C$; associativity and commutativity make the result independent of the enumeration. The empty sum is $0$ and the empty product is $1$. For each finite $V\\subseteq\\Gamma$, define the finite-volume partition polynomial\n\n$$Z_V(z):=\\sum_{\\substack{X\\subseteq V\\\\X\\text{ compatible}}}\\ \\prod_{\\gamma\\in X}z_\\gamma,$$\n\nwhere the empty subset contributes $1$.\n\nWrite $[n]:=\\{1,\\ldots,n\\}$ and $\\binom{[n]}2:=\\{\\{i,j\\}:i,j\\in[n],\\ i\\ne j\\}$. A simple graph on $[n]$ is a pair $([n],E)$ with $E\\subseteq\\binom{[n]}2$; a path is a finite vertex list with distinct vertices and each consecutive pair an edge. A graph is connected when every two vertices are joined by a path. A cycle is a vertex list $(v_0,\\ldots,v_k)$ with $k\\geq3$, $v_k=v_0$, $v_0,\\ldots,v_{k-1}$ distinct, and each consecutive pair an edge; a tree is a connected simple graph with no cycle. For $n\\in\\mathbb N$ with $n\\geq1$, let $\\mathcal C_n$ be the set of connected simple graphs on $[n]$ and let $\\mathcal T_n$ be the set of trees on $[n]$. The set $[n]$ is finite; its power set is finite, so its subset $\\binom{[n]}2$ is finite; the power set of that edge set is finite as well. Each simple graph on $[n]$ is determined by an edge set in this last power set, so $\\mathcal C_n$ and $\\mathcal T_n$ are finite.\n\nFor an ordered tuple $(\\gamma_1,\\ldots,\\gamma_n)\\in\\Gamma^n$, put $f_{ij}:=-\\mathbf 1_{\\{\\gamma_i\\sim\\gamma_j\\}}$ and define the connected coefficient\n\n$$U_n(\\gamma_1,\\ldots,\\gamma_n):=\\sum_{G\\in\\mathcal C_n}\\ \\prod_{\\{i,j\\}\\in E(G)}f_{ij}.$$\n\nFor $n=1$, $\\mathcal C_1$ contains the one-vertex graph and the empty edge product equals $1$. These are finite polynomial and coefficient definitions; they assert no convergence.\n\n"
+      },
+      {
+        "id": "lem-csm-frontier-polymer-tree-majorant",
+        "kind": "lemma",
+        "title": "Rooted connected polymer sums obey the tree majorant",
+        "status": "draft",
+        "origin": "pipeline",
+        "domain": "mathematics",
+        "library": "physics",
+        "dependency_level": 1,
+        "deps": [
+          "def-csm-frontier-abstract-polymer",
+          "def-real-exponential-function-and-e",
+          "thm-exponential-is-strictly-increasing",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "lem-complex-conjugation-and-modulus-laws",
+          "def-abs-value",
+          "lem-of-abs-value",
+          "lem-of-triangle-inequality",
+          "def-factorial-and-falling-factorial",
+          "def-nonnegative-extended-series",
+          "def-finite-sum",
+          "lem-finite-sum-laws",
+          "def-sum-over-a-finite-index-set",
+          "def-finite-simple-graph",
+          "def-spanning-tree",
+          "thm-connected-iff-has-spanning-tree",
+          "lem-spanning-tree-set-is-finite",
+          "def-max-min",
+          "lem-finite-set-has-max",
+          "def-canonical-natural",
+          "lem-of-naturals-positive",
+          "def-ordered-field",
+          "lem-of-add-order"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-csm-frontier-abstract-polymer": "mathematical-premise",
+          "def-real-exponential-function-and-e": "mathematical-premise",
+          "thm-exponential-is-strictly-increasing": "mathematical-premise",
+          "def-complex-conjugate-real-imaginary-part-and-modulus": "mathematical-premise",
+          "lem-complex-conjugation-and-modulus-laws": "mathematical-premise",
+          "def-abs-value": "mathematical-premise",
+          "lem-of-abs-value": "mathematical-premise",
+          "lem-of-triangle-inequality": "mathematical-premise",
+          "def-factorial-and-falling-factorial": "mathematical-premise",
+          "def-nonnegative-extended-series": "mathematical-premise",
+          "def-finite-sum": "mathematical-premise",
+          "lem-finite-sum-laws": "mathematical-premise",
+          "def-sum-over-a-finite-index-set": "mathematical-premise",
+          "def-finite-simple-graph": "mathematical-premise",
+          "def-spanning-tree": "mathematical-premise",
+          "thm-connected-iff-has-spanning-tree": "mathematical-premise",
+          "lem-spanning-tree-set-is-finite": "mathematical-premise",
+          "def-max-min": "mathematical-premise",
+          "lem-finite-set-has-max": "mathematical-premise",
+          "def-canonical-natural": "mathematical-premise",
+          "lem-of-naturals-positive": "mathematical-premise",
+          "def-ordered-field": "mathematical-premise",
+          "lem-of-add-order": "mathematical-premise"
+        },
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "physical_scope": null,
+        "empirical_premises": [],
+        "sources": {
+          "references": [
+            {
+              "title": "Sacha Friedli and Yvan Velenik, Statistical Mechanics of Lattice Systems: A Concrete Mathematical Introduction, Chapter 5, Cluster Expansion",
+              "url": "https://www.unige.ch/~velenik/smbook/Cluster_Expansion.pdf",
+              "locator": "§5.4, Theorem 5.4 and its complete proof, PDF pp. 5–8 (printed pp. 224–227): the Kotecký–Preiss rooted connected-cluster majorant."
+            },
+            {
+              "title": "Daniel Ueltschi, Cluster expansions and correlation functions",
+              "url": "https://arxiv.org/pdf/math-ph/0304003",
+              "locator": "§2, Theorem 1 and complete rooted-cluster induction, PDF pp. 1–4."
+            }
+          ]
+        },
+        "statement": "Let $(\\Gamma,\\sim,z)$ be an abstract polymer model, and let $a:\\Gamma\\to[0,\\infty)$. Interpret each countable sum over polymer labels of nonnegative terms as the supremum of its finite subsums in $[0,+\\infty]$, and interpret a nonnegative series as the supremum of its increasing partial sums in $[0,+\\infty]$. Suppose\n\n$$\\sum_{\\eta\\sim\\gamma}|z_\\eta|e^{a_\\eta}\\leq a_\\gamma\\qquad(\\gamma\\in\\Gamma).$$\n\nFor each fixed root $\\gamma\\in\\Gamma$, define the nonnegative rooted connected-cluster sum\n\n$$R_\\gamma:=\\sum_{n=1}^{\\infty}\\frac1{(n-1)!}\\sum_{\\gamma_2,\\ldots,\\gamma_n\\in\\Gamma}|U_n(\\gamma,\\gamma_2,\\ldots,\\gamma_n)|\\prod_{j=2}^n|z_{\\gamma_j}|$$\n\nThen $R_\\gamma$ is well-defined as a possibly extended nonnegative series and satisfies $R_\\gamma\\leq e^{a_\\gamma}$.\n\n"
+      },
+      {
+        "id": "thm-csm-frontier-polymer-analyticity",
+        "kind": "theorem",
+        "title": "A strict polymer majorant gives a zero-free finite partition function",
+        "status": "draft",
+        "origin": "pipeline",
+        "domain": "mathematics",
+        "library": "physics",
+        "dependency_level": 2,
+        "deps": [
+          "def-csm-frontier-abstract-polymer",
+          "lem-csm-frontier-polymer-tree-majorant",
+          "def-complex-numbers-and-arithmetic",
+          "def-complex-exponential",
+          "thm-complex-exponential-addition-and-real-extension",
+          "thm-termwise-differentiation-of-complex-power-series",
+          "def-real-exponential-function-and-e",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "lem-complex-conjugation-and-modulus-laws",
+          "lem-complex-modulus-of-real-embedding-equals-real-absolute-value",
+          "def-sum-over-a-finite-index-set"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-csm-frontier-abstract-polymer": "mathematical-premise",
+          "lem-csm-frontier-polymer-tree-majorant": "mathematical-premise",
+          "def-complex-numbers-and-arithmetic": "mathematical-premise",
+          "def-complex-exponential": "mathematical-premise",
+          "thm-complex-exponential-addition-and-real-extension": "mathematical-premise",
+          "thm-termwise-differentiation-of-complex-power-series": "mathematical-premise",
+          "def-real-exponential-function-and-e": "mathematical-premise",
+          "def-complex-conjugate-real-imaginary-part-and-modulus": "mathematical-premise",
+          "lem-complex-conjugation-and-modulus-laws": "mathematical-premise",
+          "lem-complex-modulus-of-real-embedding-equals-real-absolute-value": "mathematical-premise",
+          "def-sum-over-a-finite-index-set": "mathematical-premise"
+        },
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "physical_scope": null,
+        "empirical_premises": [],
+        "sources": {
+          "references": [
+            {
+              "title": "Sacha Friedli and Yvan Velenik, Statistical Mechanics of Lattice Systems: A Concrete Mathematical Introduction, Chapter 5, Cluster Expansion",
+              "url": "https://www.unige.ch/~velenik/smbook/Cluster_Expansion.pdf",
+              "locator": "§§5.3–5.5, PDF pp. 4–9 (printed pp. 222–228): formal graph-component expansion, Theorem 5.4 and its proof, and Theorem 5.8 on analytic activity dependence."
+            },
+            {
+              "title": "Daniel Ueltschi, Cluster expansions and correlation functions",
+              "url": "https://arxiv.org/pdf/math-ph/0304003",
+              "locator": "§2, Theorem 1 and full proof, PDF pp. 1–4: absolute cluster convergence, the rooted bound, and the logarithm of the partition function."
+            }
+          ]
+        },
+        "statement": "Let $\\Gamma$ be an at most countable set (finite or in bijection with $\\mathbb N$) and let $\\sim$ be a reflexive symmetric relation on $\\Gamma$ ($\\gamma\\sim\\gamma$ and $\\gamma\\sim\\eta$ implies $\\eta\\sim\\gamma$). Let $V\\subseteq\\Gamma$ be finite, and fix maps $w:V\\to\\mathbb C$ and $a:V\\to[0,\\infty)$ and a radius $r>0$. Call $X\\subseteq V$ compatible when no two distinct elements of $X$ are related by $\\sim$. Suppose there is $\\varepsilon\\in(0,1]$ such that\n\n$$\\sum_{\\substack{\\eta\\in V\\\\\\eta\\sim\\gamma}}r|w_\\eta|e^{a_\\eta}\\leq(1-\\varepsilon)a_\\gamma\\qquad(\\gamma\\in V).$$\n\nFor $t\\in\\mathbb C$, define $Z_V(t):=\\sum_{\\substack{X\\subseteq V\\\\\\text{and }X\\text{ is compatible}}}\\prod_{\\gamma\\in X}(tw_\\gamma)$. Define the connected series\n\n$$L_V(t):=\\sum_{n=1}^{\\infty}\\frac{t^n}{n!}\\sum_{\\gamma_1,\\ldots,\\gamma_n\\in V}U_n(\\gamma_1,\\ldots,\\gamma_n)\\prod_{i=1}^nw_{\\gamma_i}.$$\n\nThen $L_V$ converges absolutely and uniformly on every closed subdisc strictly inside $|t|<r$, may be differentiated there term by term, and satisfies $Z_V(t)=\\exp(L_V(t))$ for $|t|<r$. Thus $Z_V$ has no zero in this disc. Here an analytic logarithm of $Z_V$ on the disc means a holomorphic function $L$ with $\\exp(L(t))=Z_V(t)$ there; the logarithm $L_V$ is normalized by $L_V(0)=0$.\n\n"
+      },
+      {
+        "id": "lem-csm-frontier-stable-mayer-tree-bound",
+        "kind": "lemma",
+        "title": "Stable continuum Mayer coefficients obey an integrated tree bound",
+        "status": "draft",
+        "origin": "pipeline",
+        "domain": "mathematics",
+        "library": "physics",
+        "dependency_level": 0,
+        "deps": [
+          "def-csm-stable-superstable-continuum-interaction",
+          "def-countable-choice",
+          "prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant",
+          "thm-composition-with-borel-functions-preserves-measurability",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "def-real-exponential-function-and-e",
+          "thm-exponential-addition-formula",
+          "thm-exponential-is-strictly-increasing",
+          "cor-continuous-functions-are-borel-measurable",
+          "def-extended-real-valued-measurable-function",
+          "def-borel-sigma-algebra",
+          "def-borel-sigma-algebra-on-the-extended-real-line",
+          "thm-borel-products-of-euclidean-spaces-are-euclidean-borel",
+          "thm-borel-sets-are-lebesgue-measurable",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "cor-additivity-of-the-nonnegative-lebesgue-integral",
+          "def-simple-graph-without-a-finiteness-hypothesis",
+          "def-walks-paths-and-connectedness-in-a-simple-graph",
+          "def-cycles-trees-and-forests-in-a-simple-graph",
+          "def-finite-simple-graph",
+          "def-spanning-tree",
+          "thm-connected-iff-has-spanning-tree",
+          "lem-spanning-tree-set-is-finite",
+          "def-max-min",
+          "lem-finite-set-has-max",
+          "def-abs-value",
+          "lem-of-abs-value",
+          "lem-of-triangle-inequality",
+          "def-sum-over-a-finite-index-set",
+          "cor-cardinality-of-the-power-set",
+          "thm-subset-of-a-finite-set"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-csm-stable-superstable-continuum-interaction": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets": "mathematical-premise",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces": "mathematical-premise",
+          "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant": "mathematical-premise",
+          "thm-composition-with-borel-functions-preserves-measurability": "mathematical-premise",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability": "mathematical-premise",
+          "def-real-exponential-function-and-e": "mathematical-premise",
+          "thm-exponential-addition-formula": "mathematical-premise",
+          "thm-exponential-is-strictly-increasing": "mathematical-premise",
+          "cor-continuous-functions-are-borel-measurable": "mathematical-premise",
+          "def-extended-real-valued-measurable-function": "mathematical-premise",
+          "def-borel-sigma-algebra": "mathematical-premise",
+          "def-borel-sigma-algebra-on-the-extended-real-line": "mathematical-premise",
+          "thm-borel-products-of-euclidean-spaces-are-euclidean-borel": "mathematical-premise",
+          "thm-borel-sets-are-lebesgue-measurable": "mathematical-premise",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral": "mathematical-premise",
+          "cor-additivity-of-the-nonnegative-lebesgue-integral": "mathematical-premise",
+          "def-simple-graph-without-a-finiteness-hypothesis": "mathematical-premise",
+          "def-walks-paths-and-connectedness-in-a-simple-graph": "mathematical-premise",
+          "def-cycles-trees-and-forests-in-a-simple-graph": "mathematical-premise",
+          "def-finite-simple-graph": "mathematical-premise",
+          "def-spanning-tree": "mathematical-premise",
+          "thm-connected-iff-has-spanning-tree": "mathematical-premise",
+          "lem-spanning-tree-set-is-finite": "mathematical-premise",
+          "def-max-min": "mathematical-premise",
+          "lem-finite-set-has-max": "mathematical-premise",
+          "def-abs-value": "mathematical-premise",
+          "lem-of-abs-value": "mathematical-premise",
+          "lem-of-triangle-inequality": "mathematical-premise",
+          "def-sum-over-a-finite-index-set": "mathematical-premise",
+          "cor-cardinality-of-the-power-set": "mathematical-premise",
+          "thm-subset-of-a-finite-set": "mathematical-premise"
+        },
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "physical_scope": null,
+        "empirical_premises": [],
+        "sources": {
+          "references": [
+            {
+              "title": "Suren Poghosyan and Daniel Ueltschi, Abstract cluster expansion with applications to statistical mechanical systems",
+              "url": "https://arxiv.org/pdf/0811.4281",
+              "locator": "§6, Proposition 6.1(a), Lemmas 6.2–6.3 and complete proof, PDF pp. 11–14; §3, classical gas assumptions and convergence criterion, PDF pp. 4–5."
+            },
+            {
+              "title": "Aldo Procacci and Sergio A. Yuhjtman, Convergence of Mayer and Virial expansions and the Penrose tree-graph identity",
+              "url": "https://arxiv.org/pdf/1508.07379",
+              "locator": "§2.2, Proposition 1, equation (2.18); §§3.1–3.3, the partition scheme, Penrose identity and proof of Proposition 1."
+            }
+          ]
+        },
+        "statement": "Assume the Axiom of Countable Choice. All displayed integrals use Lebesgue measure. Let $n\\in\\mathbb N$ with $n\\geq2$ and write $[n]=\\{1,\\ldots,n\\}$. A simple graph on $[n]$ is $([n],E)$ with $E$ a set of unordered two-element subsets of $[n]$; a path is a finite vertex list with distinct vertices and consecutive pairs in $E$; connected means every two vertices are joined by a path; a cycle is a vertex list $(v_0,\\ldots,v_k)$ with $k\\geq3$, $v_k=v_0$, $v_0,\\ldots,v_{k-1}$ distinct, and consecutive pairs in $E$; a tree is a connected graph with no cycle; a forest is a graph with no cycle. Finite sums and products over graph, edge, vertex, and subset sets below are enumeration-independent; the empty sum is $0$ and the empty product is $1$. Fix $d\\in\\mathbb N$ with $d\\geq1$, let $v:\\mathbb R^d\\to\\mathbb R\\cup\\{+\\infty\\}$ be an even Borel pair potential with no $-\\infty$ values, and suppose it is stable with constant $B\\in\\mathbb R$, $B\\geq0$. Fix $\\beta\\in\\mathbb R$ with $\\beta>0$, set $e^{-c(+\\infty)}:=0$ for every $c>0$, define the Mayer function $f_\\beta(x):=e^{-\\beta v(x)}-1$, and suppose\n\n$$C_\\beta:=\\int_{\\mathbb R^d}|f_\\beta(x)|\\,dx<\\infty.$$\n\nLet $\\mathcal C_n$ be the connected simple graphs on $[n]$ and let $\\mathcal T_n$ be the trees on $[n]$. These families are finite because $[n]$ has finitely many unordered two-element subsets and each graph is determined by a subset of those edges. A spanning tree of a finite graph is a tree with the same vertex set and a subset of its edges. A leaf is a vertex incident to exactly one edge. Put\n\n$$U_n(x_1,\\ldots,x_n):=\\sum_{G\\in\\mathcal C_n}\\ \\prod_{\\{i,j\\}\\in E(G)}f_\\beta(x_i-x_j).$$\n\nFor every configuration $(x_1,\\ldots,x_n)\\in(\\mathbb R^d)^n$,\n\n$$|U_n(x_1,\\ldots,x_n)|\\leq e^{2\\beta Bn}\\sum_{T\\in\\mathcal T_n}\\ \\prod_{\\{i,j\\}\\in E(T)}|f_\\beta(x_i-x_j)|,$$\n\nwhere $\\mathcal T_n$ is the set of labelled trees on $\\{1,\\ldots,n\\}$. In particular,\n\n$$\\int_{(\\mathbb R^d)^{n-1}}|U_n(0,x_2,\\ldots,x_n)|\\,dx_2\\cdots dx_n\\leq e^{2\\beta Bn}n^{n-2}C_\\beta^{\\,n-1}.$$\n\n"
+      },
+      {
+        "id": "thm-csm-frontier-dilute-mayer-domain",
+        "kind": "theorem",
+        "title": "The stable continuum Mayer pressure series converges in an explicit dilute disk",
+        "status": "draft",
+        "origin": "pipeline",
+        "domain": "mathematics",
+        "library": "physics",
+        "dependency_level": 1,
+        "deps": [
+          "def-csm-stable-superstable-continuum-interaction",
+          "lem-csm-frontier-stable-mayer-tree-bound",
+          "def-countable-choice",
+          "prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets",
+          "thm-tdmath-dominated-convergence",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant",
+          "thm-composition-with-borel-functions-preserves-measurability",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "thm-exponential-is-strictly-increasing",
+          "def-real-exponential-function-and-e",
+          "thm-exponential-addition-formula",
+          "def-complex-numbers-and-arithmetic",
+          "def-complex-exponential",
+          "thm-complex-exponential-addition-and-real-extension",
+          "thm-termwise-differentiation-of-complex-power-series",
+          "cor-continuous-functions-are-borel-measurable",
+          "def-extended-real-valued-measurable-function",
+          "def-borel-sigma-algebra",
+          "def-borel-sigma-algebra-on-the-extended-real-line",
+          "thm-borel-products-of-euclidean-spaces-are-euclidean-borel",
+          "thm-borel-sets-are-lebesgue-measurable",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "thm-integral-triangle-inequality",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "cor-additivity-of-the-nonnegative-lebesgue-integral",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "lem-complex-conjugation-and-modulus-laws",
+          "lem-complex-modulus-of-real-embedding-equals-real-absolute-value",
+          "def-abs-value",
+          "lem-of-abs-value",
+          "def-sum-over-a-finite-index-set"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-csm-stable-superstable-continuum-interaction": "mathematical-premise",
+          "lem-csm-frontier-stable-mayer-tree-bound": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets": "mathematical-premise",
+          "thm-tdmath-dominated-convergence": "mathematical-premise",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces": "mathematical-premise",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces": "mathematical-premise",
+          "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant": "mathematical-premise",
+          "thm-composition-with-borel-functions-preserves-measurability": "mathematical-premise",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability": "mathematical-premise",
+          "thm-exponential-is-strictly-increasing": "mathematical-premise",
+          "def-real-exponential-function-and-e": "mathematical-premise",
+          "thm-exponential-addition-formula": "mathematical-premise",
+          "def-complex-numbers-and-arithmetic": "mathematical-premise",
+          "def-complex-exponential": "mathematical-premise",
+          "thm-complex-exponential-addition-and-real-extension": "mathematical-premise",
+          "thm-termwise-differentiation-of-complex-power-series": "mathematical-premise",
+          "cor-continuous-functions-are-borel-measurable": "mathematical-premise",
+          "def-extended-real-valued-measurable-function": "mathematical-premise",
+          "def-borel-sigma-algebra": "mathematical-premise",
+          "def-borel-sigma-algebra-on-the-extended-real-line": "mathematical-premise",
+          "thm-borel-products-of-euclidean-spaces-are-euclidean-borel": "mathematical-premise",
+          "thm-borel-sets-are-lebesgue-measurable": "mathematical-premise",
+          "thm-lebesgue-measure-of-a-box-of-every-kind": "mathematical-premise",
+          "thm-integral-triangle-inequality": "mathematical-premise",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral": "mathematical-premise",
+          "cor-additivity-of-the-nonnegative-lebesgue-integral": "mathematical-premise",
+          "def-complex-conjugate-real-imaginary-part-and-modulus": "mathematical-premise",
+          "lem-complex-conjugation-and-modulus-laws": "mathematical-premise",
+          "lem-complex-modulus-of-real-embedding-equals-real-absolute-value": "mathematical-premise",
+          "def-abs-value": "mathematical-premise",
+          "lem-of-abs-value": "mathematical-premise",
+          "def-sum-over-a-finite-index-set": "mathematical-premise"
+        },
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "physical_scope": null,
+        "empirical_premises": [],
+        "sources": {
+          "references": [
+            {
+              "title": "Suren Poghosyan and Daniel Ueltschi, Abstract cluster expansion with applications to statistical mechanical systems",
+              "url": "https://arxiv.org/pdf/0811.4281",
+              "locator": "§3, classical gas and explicit convergence condition, PDF pp. 4–5; §6, Proposition 6.1(a), PDF pp. 11–14; §7, Theorem 2.1 proof, PDF pp. 15–17."
+            },
+            {
+              "title": "Aldo Procacci and Sergio A. Yuhjtman, Convergence of Mayer and Virial expansions and the Penrose tree-graph identity",
+              "url": "https://arxiv.org/pdf/1508.07379",
+              "locator": "§2.1, Theorem 0, equations (2.8)–(2.11); §2.2, Proposition 1, equation (2.18); §3 tree-graph identity and proof of Proposition 1; §4 Mayer coefficient integration and pressure-series bound."
+            }
+          ]
+        },
+        "statement": "Assume the Axiom of Countable Choice. All displayed integrals use Lebesgue measure. All indices $n,N$ below range over $\\mathbb N$. Fix $d\\in\\mathbb N$ with $d\\geq1$, an even Borel pair potential $v:\\mathbb R^d\\to\\mathbb R\\cup\\{+\\infty\\}$ with no $-\\infty$ values, stable with constant $B\\in\\mathbb R$, $B\\geq0$, and inverse parameter $\\beta\\in\\mathbb R$ with $\\beta>0$. Put $e^{-c(+\\infty)}=0$ for every $c>0$, $f_\\beta(x)=e^{-\\beta v(x)}-1$, and $C_\\beta=\\int_{\\mathbb R^d}|f_\\beta(x)|\\,dx<\\infty$. For each $n\\in\\mathbb N$ with $n\\geq2$, use\n\n$$U_n(x_1,\\ldots,x_n):=\\sum_{G\\in\\mathcal C_n}\\prod_{\\{i,j\\}\\in E(G)}f_\\beta(x_i-x_j),$$\n\nwhere $\\mathcal C_n$ is the set of connected simple graphs on $\\{1,\\ldots,n\\}$; set $U_1=1$. For $L\\in\\mathbb R$ with $L>0$, let $\\Lambda_L=[-L,L]^d$ and write $|\\Lambda_L|:=\\lambda_d(\\Lambda_L)=(2L)^d$; define\n\n$$\\Xi_L(z):=\\sum_{N=0}^{\\infty}\\frac{z^N}{N!}\\int_{\\Lambda_L^N}\\exp\\!\\left(-\\beta\\sum_{1\\leq i<j\\leq N}v(x_i-x_j)\\right)\\,dx_1\\cdots dx_N,$$\n\nwith the $N=0$ term equal to $1$. Set $b_1(L)=1$ and, for $n\\geq2$,\n\n$$b_n(L):=\\frac1{n!|\\Lambda_L|}\\int_{\\Lambda_L^n}U_n(x_1,\\ldots,x_n)\\,dx_1\\cdots dx_n.$$\n\nAlso set $b_1=1$ and, for $n\\geq2$,\n\n$$b_n:=\\frac1{n!}\\int_{(\\mathbb R^d)^{n-1}}U_n(0,x_2,\\ldots,x_n)\\,dx_2\\cdots dx_n.$$\n\nLet $\\mathcal D=\\{z\\in\\mathbb C:|z|e^{2\\beta B+1}C_\\beta<1\\}$ when $C_\\beta>0$, and let $\\mathcal D=\\mathbb C$ when $C_\\beta=0$. On $\\mathcal D$, the finite-volume connected pressure series $p_L(z):=\\sum_{n\\geq1}b_n(L)z^n$ and the limiting Mayer pressure series $p(z):=\\sum_{n\\geq1}b_nz^n$ converge absolutely and locally uniformly, are differentiable term by term, and satisfy\n\n$$\\Xi_L(z)=\\exp\\!\\bigl(|\\Lambda_L|p_L(z)\\bigr),\\qquad \\lim_{L\\to\\infty}p_L(z)=p(z).$$\n\nThe convergence and derivative limits are uniform on every compact subdisc of $\\mathcal D$. The pressure limit here is along centered cubes only.\n\n"
+      }
+    ]
+  },
+  {
+    "order": 872,
+    "id": "csm-frontier-polymer-continuum-examples",
+    "kind": "B",
+    "category": "classical-statistical-mechanics",
+    "library": "physics",
+    "title": "Polymer analyticity and dilute continuum correlations — Examples",
+    "companion": "csm-frontier-polymer-continuum",
+    "requires": [
+      "csm-frontier-polymer-continuum"
+    ],
+    "items": [
+      {
+        "id": "ex-csm-frontier-hard-core-dilute-bound",
+        "kind": "example",
+        "title": "Hard-core spheres in the explicit dilute domain",
+        "status": "draft",
+        "origin": "pipeline",
+        "domain": "mathematics",
+        "library": "physics",
+        "dependency_level": 2,
+        "deps": [
+          "def-csm-stable-superstable-continuum-interaction",
+          "def-countable-choice",
+          "thm-csm-frontier-dilute-mayer-domain",
+          "lem-euclidean-balls-have-positive-finite-lebesgue-measure",
+          "def-metric-ball",
+          "lem-metrics-on-rn",
+          "thm-metric-open-set-algebra",
+          "def-borel-sigma-algebra",
+          "def-borel-sigma-algebra-on-the-extended-real-line",
+          "def-euclidean-inner-product",
+          "prop-the-nonnegative-integral-agrees-with-the-simple-integral",
+          "def-integral-of-a-nonnegative-simple-function",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "def-abs-value",
+          "lem-of-abs-value"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-csm-stable-superstable-continuum-interaction": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "thm-csm-frontier-dilute-mayer-domain": "mathematical-premise",
+          "lem-euclidean-balls-have-positive-finite-lebesgue-measure": "mathematical-premise",
+          "def-metric-ball": "mathematical-premise",
+          "lem-metrics-on-rn": "mathematical-premise",
+          "thm-metric-open-set-algebra": "mathematical-premise",
+          "def-borel-sigma-algebra": "mathematical-premise",
+          "def-borel-sigma-algebra-on-the-extended-real-line": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "prop-the-nonnegative-integral-agrees-with-the-simple-integral": "mathematical-premise",
+          "def-integral-of-a-nonnegative-simple-function": "mathematical-premise",
+          "def-complex-conjugate-real-imaginary-part-and-modulus": "mathematical-premise",
+          "def-abs-value": "mathematical-premise",
+          "lem-of-abs-value": "mathematical-premise"
+        },
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "physical_scope": null,
+        "empirical_premises": [],
+        "sources": {
+          "references": [
+            {
+              "title": "Sacha Friedli and Yvan Velenik, Statistical Mechanics of Lattice Systems: A Concrete Mathematical Introduction, Chapter 5, Cluster Expansion",
+              "url": "https://www.unige.ch/~velenik/smbook/Cluster_Expansion.pdf",
+              "locator": "Revised draft, August 22 2017, §5.6, printed pp. 228–229: abstract hard-core compatibility and cluster coefficients. The continuum hard-sphere specialization is derived locally below, using the following classical-gas source."
+            },
+            {
+              "title": "Suren Poghosyan and Daniel Ueltschi, Abstract cluster expansion with applications to statistical mechanical systems",
+              "url": "https://arxiv.org/pdf/0811.4281",
+              "locator": "§3, classical gas with stable interactions and explicit sufficient low-fugacity condition, PDF pp. 4–5."
+            }
+          ]
+        },
+        "statement": "Assume Countable Choice. Fix $d\\in\\mathbb N$ with $d\\geq1$, a hard-core diameter $a\\in\\mathbb R$ with $a>0$, and $\\beta\\in\\mathbb R$ with $\\beta>0$. For $x=(x_j)_{j<d}\\in\\mathbb R^d$, write $\\|x\\|_2:=\\sqrt{\\sum_{j<d}x_j^2}$, and let $B(0,a):=\\{x\\in\\mathbb R^d:\\|x\\|_2<a\\}$. Let $\\lambda_d$ denote Lebesgue measure on $\\mathbb R^d$. Define the hard-core pair potential $v_a:\\mathbb R^d\\to\\mathbb R\\cup\\{+\\infty\\}$ by $v_a(x)=+\\infty$ when $\\|x\\|_2<a$ and $v_a(x)=0$ when $\\|x\\|_2\\geq a$. Its stability constant may be chosen as $B=0$, the function $x\\mapsto e^{-\\beta v_a(x)}-1$ is $-1$ on $B(0,a)$ and $0$ elsewhere, and its absolute integral is $C_\\beta=\\lambda_d(B(0,a))$. For a complex activity $z\\in\\mathbb C$, with modulus $|z|$ as defined by $|x+iy|=\\sqrt{x^2+y^2}$, the sufficient analytic domain is $e|z|\\lambda_d(B(0,a))<1$.\n\n"
+      }
+    ]
+  }
+]

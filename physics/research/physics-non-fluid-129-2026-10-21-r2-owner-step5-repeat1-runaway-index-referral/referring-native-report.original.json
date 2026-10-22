@@ -1,0 +1,141 @@
+{
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "phase": "repeat",
+  "round": 1,
+  "unit": "8",
+  "input_sha256": "c61067372f0d3dd55034da3e83c0853b2a7b437f9b4d69315088b98458efc85c",
+  "decisions": [
+    {
+      "id": "ex-emx-force-frequency-regime",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "4d8dc9cfbfb20c793965217c847c1273e75c8957262f15bfad2a9b82aaec7b60",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The supplied def-euclidean-inner-product Definition takes R^3 to be functions on {0,1,2}, with x_j=x(j). The Example's sums over j=1,2,3 therefore evaluate nonexistent u_3,v_3 and omit coordinate 0; the claimed norm and normalized error are undefined. Both sums now range from 0 to 2, preserving the intended six-real-coordinate norm and all response and tolerance formulas.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "ex-emx-force-frequency-regime",
+      "disposition": "repaired",
+      "post_sha256": "d7f90e47bc9ec90b8569c7961dc53f4c8517a1a628d2686831268653f4dda8bf",
+      "review_context_sha256": "0c4aadb6ca3c7ba9feb04ace383d742e6cd41d7b3b63b348170e4675ada64930",
+      "reason": "Reviewed the current Example, all three Verification steps, the eight actual supplier interfaces, owning contract and page placement. With coordinates 0,1,2 the squared norm is sum_j(u_j^2+v_j^2), positive for a nonzero phasor. For lambda=alpha+i beta, each coordinate pair contributes (alpha^2+beta^2)(u_j^2+v_j^2), establishing the norm scaling used in 2.1. For x=omega*tau, A-xB=u/m and B+xA=v/m verify the bounded harmonic solution; 1+x^2>0. The difference is -f0*x^2/(m(1+ix)), giving x^2/sqrt(1+x^2). Squaring the nonnegative tolerance inequality is reversible and its negative quadratic root is excluded. Checked zero and negative frequency, canonical real static phasors, excluded zero denominator, and threshold equality. The physical scope and empirical qualifications remain unchanged. This is the repair author's current mathematical review, not independent acceptance.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "id": "ex-emx-force-frequency-regime",
+      "status": "fixed",
+      "defect_type": "logic",
+      "severity": "fatal",
+      "location": "Example: phasor norm definition",
+      "reason": "Confirmed the rejected coordinate-domain mismatch and replaced both sums over 1,2,3 by sums over 0,1,2. The repaired phasor norm is defined on every stated amplitude; no response formula or physical qualification was weakened.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "id": "pthm-emx-runaway-preacceleration",
+      "status": "open",
+      "route": "frontier-owner",
+      "location": "Proof step 1.1",
+      "reason": "Outside this unit's write assignment: step 1.1 defines M=max_{1<=j<=3} sup_s |f_j(s)| although the same R^3 coordinate convention uses {0,1,2}. The displayed maximum includes an undefined coordinate and omits coordinate 0. Refer to the supplier owner for a minimal index-range repair; no supplier item, review hash, or historical decision was changed here. The generic integrating-factor uniqueness argument in steps 3.1-4.1 remains valid on the actual three coordinates and is the part used by this harmonic example.",
+      "affected_use": "items/pthm-emx-runaway-preacceleration.md, Proof 1.1: M:=max_{1<=j<=3} sup_{s in R}|f_j(s)|.",
+      "minimality": "Replace the maximum range by 0<=j<=2; the existing scalar kernel estimates and public Statement need no change.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "published-consumer-supplier-ledger",
+      "id": "ex-emx-force-frequency-regime",
+      "status": "no_update",
+      "reason": "Current items and library references contain no direct item consumer of this example. Its only home-page use is a draft examples-list placement. No published consumer defect or published repair was identified in this scoped review.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "supporting_evidence": {
+    "research/physics-non-fluid-129-2026-10-21-r2-batch-8-step5-context.json": "7fdb90e4fc3cd7f257df2ec32fdfc2d474f04da119a1cd1b17bc5fd8d6249532"
+  },
+  "repair_notes": {
+    "completed": [
+      {
+        "id": "ex-emx-force-frequency-regime",
+        "interface_changed": true,
+        "changed_section": "Example",
+        "before_itemHashGuard": "d73672b1020538b01cca345e65252696450726b2e9d4419c0d913dc54090aa26",
+        "before_raw_sha256": "1419deb83a7979e31a1b59e21fd3d324d6f4bde84818aae907306faac34f5e6d",
+        "after_raw_sha256": "d4b8d6a3a7ee40ba6d7140d959edfad04c7cbce360b709ee677437ccc08aee1e",
+        "exact_change": "Both occurrences of sum_{j=1}^3 in the public phasor norm were replaced by sum_{j=0}^2. No other item text was changed.",
+        "metadata": "Updated only this item's statement mirror in research/physics-non-fluid-129-2026-10-21-r2-batch-8.pages.json under step5-shared-write-lock.mjs run, owner step5-v2-repeat-r1-u8; lock acquisition, guarded reread/change/readback and release succeeded. The contract's proof claims and supplier excerpts remain applicable without edits."
+      }
+    ],
+    "source_checks": [
+      {
+        "path": "items/def-euclidean-inner-product.md",
+        "locator": "Definition, function-space domain and x_k:=x(k) for k<n",
+        "finding": "Exact zero-based convention establishes the rejected defect."
+      },
+      {
+        "path": "items/pthm-emx-runaway-preacceleration.md",
+        "locator": "Statement and Proof steps 3.1-4.1",
+        "finding": "For bounded continuous forcing and m,tau>0, uniqueness follows from the componentwise integrating factor and future exponential growth; the harmonic candidate satisfies these hypotheses."
+      },
+      {
+        "path": "items/pthm-emx-reduction-order-error.md",
+        "locator": "Statement; definition of a_RO",
+        "finding": "Harmonic forcing is bounded C2 with bounded f'', so the stated reduced-order expression applies."
+      }
+    ],
+    "page_uses": [
+      {
+        "path": "library/classical-electromagnetism/emx-radiation-reaction-models-examples.md",
+        "affected_use": "Frontmatter examples list contains ex-emx-force-frequency-regime; the page has no prose or mathematical assertion using its norm.",
+        "disposition": "unaffected",
+        "reason": "The coordinate correction preserves the example's identity and complete frequency-error contract; this list placement remains sound."
+      }
+    ],
+    "consumer_inventory": "Searched current items and library carriers for the canonical ID, and checked the frozen alias map (no aliases). No item depends on or references this example; downstream is empty. The only page reference is recorded above.",
+    "diagram_review": "There is no TikZ/tikzcd diagram in the assigned item or its page; the scalar algebra requires no added diagram.",
+    "support_limits": "Read the required rejection-blind batch digest before the item. Its harmonic conventions were checked directly. The run support index has no pointers for this subject and no support supplement was present. No external paper retrieval or another reviewer's source reading is claimed.",
+    "focused_checks": [
+      {
+        "command": "node tools/physics-support/proof-layout.mjs items/ex-emx-force-frequency-regime.md",
+        "exit_code": 0,
+        "result": "proof-layout: 1 items, 3 steps, 0 defects"
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/physics-support/precheck.mts items/ex-emx-force-frequency-regime.md",
+        "exit_code": 0,
+        "result": "PASS; 1 checked, 0 failing"
+      },
+      {
+        "command": "node tools/physics-support/rendercheck.mjs items/ex-emx-force-frequency-regime.md library/classical-electromagnetism/emx-radiation-reaction-models-examples.md",
+        "exit_code": 0,
+        "result": "OK: 2 files; YAML and all math spans parse"
+      },
+      {
+        "command": "node tools/physics-support/proof-contract.mjs research/physics-non-fluid-129-2026-10-21-r2-batch-8.proof-contracts.json --strict --items ex-emx-force-frequency-regime",
+        "exit_code": 0,
+        "result": "0 errors, 0 warnings, 1/1 items checked"
+      }
+    ],
+    "review_hash_command": "node tools/physics-support/step5-workflow.mjs review-contexts --run physics-non-fluid-129-2026-10-21-r2 --items ex-emx-force-frequency-regime",
+    "unresolved_assigned_obligations": [],
+    "next_action": "Controller collection and ordinary rejudgment remain required after this confirmed-fatal round. Route the separate unassigned supplier index defect to its frontier owner; this report grants no supplier edit, central ledger closure, certification or run completion."
+  }
+}

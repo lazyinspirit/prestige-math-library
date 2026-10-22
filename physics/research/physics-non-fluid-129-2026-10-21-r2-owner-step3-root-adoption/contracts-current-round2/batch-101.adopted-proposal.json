@@ -1,0 +1,651 @@
+{
+  "version": 1,
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "batch": "101",
+  "level": 0,
+  "scope": [
+    "def-qsmx-information-conventions",
+    "thm-qsmx-cmi-and-channel-dpi",
+    "thm-qsmx-thermal-mutual-information-bound",
+    "ex-qsmx-bell-and-classical-information"
+  ],
+  "contracts": {
+    "def-qsmx-information-conventions": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-density-operator",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space, with the root library's convention that the inner product is linear in its first argument. A **density operator** on $H$ is a non-negative endomorphism $\\rho:H\\to H$ with $\\operatorname{tr}(\\rho)=1$; non-negative and trace have the meanings of [[def-non-negative-and-positive-operator]] and [[def-trace-of-an-endomorphism]]. The zero-dimensional space is excluded: its only endomorphism has trace $0$.\n\nHere $\\ker\\rho=\\{x\\in H:\\rho x=0\\}$, using the kernel of a linear map from [[def-kernel-and-image-of-a-linear-map]]. The **support** of $\\rho$ is the orthogonal complement of its kernel in the root convention:\n\n$$\\operatorname{supp}(\\rho):=\\{x\\in H: \\langle x,y\\rangle=0\\text{ for every }y\\in\\ker\\rho\\}.$$\n\nFor a subspace $S\\subseteq H$, $\\rho$ is **faithful on $S$** when $\\operatorname{supp}(\\rho)=S$ and the restriction $\\rho|_S:S\\to S$ is positive definite in the sense of [[def-non-negative-and-positive-operator]]. This restriction is an endomorphism: if $x\\in S$ and $y\\in\\ker\\rho$, self-adjointness gives $\\langle\\rho x,y\\rangle=\\langle x,\\rho y\\rangle=0$, so $\\rho x\\in(\\ker\\rho)^\\perp=S$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-it-von-neumann-entropy",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space, with the root convention that its inner product is linear in the first argument, and let $\\rho$ be a density operator on $H$ ([[def-qc-density-operator]]). If $\\lambda_1,\\ldots,\\lambda_d$ are its eigenvalues counted with multiplicity, define its **von Neumann entropy** by\n\n$$S(\\rho):=-\\operatorname{tr}(\\rho\\ln\\rho):=-\\sum_{j:\\lambda_j>0}\\lambda_j\\ln\\lambda_j.$$\n\nThe trace is the finite-dimensional endomorphism trace ([[def-trace-of-an-endomorphism]]), and the spectral definition makes the expression independent of the eigenbasis. The term for a zero eigenvalue is defined to be $0\\ln0:=0$. The default unit is nats, using the natural logarithm ([[def-natural-logarithm]]); the entropy in bits is $S_2(\\rho):=S(\\rho)/\\ln2$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-it-finite-dimensional-quantum-relative-entropy",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a finite-dimensional complex inner-product space and let $A,B:H\\to H$ be non-negative operators. For such an operator $A$, set $\\operatorname{supp}(A):=(\\ker A)^\\perp$, where $\\ker A$ is the kernel of a linear map ([[def-kernel-and-image-of-a-linear-map]]); this extends the density-operator support convention in [[def-qc-density-operator]]. If $\\operatorname{supp}(A)\\subseteq\\operatorname{supp}(B)$, define\n\n$$D(A\\|B):=\\operatorname{tr}(A\\ln A)-\\operatorname{tr}(A\\ln B).$$\n\nHere $\\ln A$ is defined spectrally on the positive eigenspaces of $A$ with $0\\ln0:=0$, and $\\ln B$ in the cross term is restricted to $\\operatorname{supp}(B)$; the support condition ensures that $A$ vanishes on $\\ker B$, so the omitted kernel contributes zero. If $\\operatorname{supp}(A)\\nsubseteq\\operatorname{supp}(B)$, set $D(A\\|B):=+\\infty$. In particular, $D(0\\|B)=0$. For density operators this is the finite-dimensional **quantum relative entropy**. The logarithms are natural, so the value is in nats; the base-two value is $D_2(A\\|B):=D(A\\|B)/\\ln2$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qc-partial-trace",
+          "source_section": "Definition",
+          "quote": "For a complex vector space $H$, write $\\operatorname{End}(H)$ for the set of\nlinear maps $H\\to H$ ([[def-linear-map]]).\n\nLet $H_A,H_B$ be finite-dimensional complex inner-product spaces with fixed\nordered orthonormal bases $(e_i)_{i<a}$ and $(f_j)_{j<b}$, respectively. The\nordered product basis of $H_A\\otimes H_B$ has the $A$ index first. For\n$R\\in\\operatorname{End}(H_A\\otimes H_B)$ define\n$\\operatorname{Tr}_B(R)\\in\\operatorname{End}(H_A)$ by\n\n$$\\bigl(\\operatorname{Tr}_B(R)\\bigr)_{i i'}:=\\sum_{j<b}R_{(i,j),(i',j)}.$$\n\nRows are output coordinates and columns are input coordinates, as in\n[[def-coordinate-column-and-matrix-of-a-linear-map]]. If $b=0$, the sum is\nempty and equals $0$. The notation $\\operatorname{Tr}_B$ means that the second\nfactor is contracted; the first factor and its order are retained.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-it-partial-traces-of-a-state-are-states",
+          "source_section": "Statement",
+          "quote": "For nonzero finite-dimensional complex inner-product spaces $H_A,H_B$ and a density operator $\\rho_{AB}$ on $H_A\\otimes H_B$, both marginals $\\rho_A:=\\operatorname{Tr}_B\\rho_{AB}$ and $\\rho_B:=\\operatorname{Tr}_A\\rho_{AB}$ are density operators.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-qc-first-factor-partial-trace",
+          "source_section": "Definition",
+          "quote": "Let $H_G,H_Q$ be finite-dimensional complex inner-product spaces, and fix\nthe factor order $H_G\\otimes H_Q$. For ordered orthonormal bases\n$(g_s)$ and $(q_\\alpha)$, define\n$$\\operatorname{Tr}_G:\\mathcal B(H_G\\otimes H_Q)\\to\\mathcal B(H_Q),\\qquad (\\operatorname{Tr}_G X)_{\\alpha\\beta}=\\sum_sX_{(s,\\alpha),(s,\\beta)},$$\nwhere $X_{(s,\\alpha),(t,\\beta)}=\\langle X(g_t\\otimes q_\\beta),\ng_s\\otimes q_\\alpha\\rangle$ under the linear-first convention. Equivalently,\nthis is the partial trace over the second factor after swapping the two wires.\nThe partial-trace characterization and wire-permutation unitarity in\n[[thm-qc-partial-trace-characterization-and-basis-independence]] and\n[[thm-qc-wire-permutation-is-unitary]] show that the map is independent of\nthe chosen orthonormal bases. In particular, the same definition applies when\n$H_Q=H_L\\otimes H_R$, with that residual factor order left unchanged. For an\noperator on $(H_G\\otimes H_L)\\otimes H_R$, use the canonical associator of\nthe ordered tensor-register construction to view it on\n$H_G\\otimes(H_L\\otimes H_R)$ before taking this partial trace.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], the input is a positive trace-one endomorphism on its finite tensor product. Apply [F5] to each bipartite grouping of a finite multipartite density operator; this makes every one-factor and two-factor marginal used in the Definition a density operator. Repeated partial traces use [F4] for the second factor and [F6] for the first factor, retaining the stated residual tensor-factor order.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "F5",
+            "F6"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Each such density operator has finitely many eigenvalues in $[0,1]$, so the finite entropy sum in [F2] is a real number, including when some eigenvalues vanish. The relative entropy clause is defined on exactly the two support cases in [F3]. Therefore $I(A:B)$ and $I(A:C\\mid B)$ are finite real-valued functions on the stated density operators, and $D$ has the extended-real domain specified in the Definition.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Trace one forces at least one positive density eigenvalue, so its entropy index set is nonempty. Relative entropy also permits X=0: its support is zero and the support-restricted trace is the empty sum zero under the stated convention;2.1 handles both support cases."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition explicitly fixes 0 log 0=0 and assigns +infinity when relative-entropy support inclusion fails."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The finite spectral definitions include a one-dimensional density with its only eigenvalue equal to one, giving entropy zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Definition uses the finite spectral trace and eigenvalues with multiplicity, so repeated eigenvalues do not select a preferred eigenbasis."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No variable parameter interval or limiting endpoint is part of these finite definitions."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Only finite-dimensional spaces and finite sums occur; no nonempty-family selection is asserted."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition asserts no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root adopting /root/qsm_boundary",
+            "reason": "Root adopts /root/qsm_boundary current case review in research/physics-non-fluid-129-2026-10-21-r2-owner-step3-boundary-current-qsm_boundary/proposal-final-current.json: The item assigns numerical information quantities; it makes no equivalence between, for example, zero information and a factorization or recoverability predicate. The piecewise definition of D is explicitly handled in 2.1, rather than an omitted theorem implication. Source reading limits and exact support remain in the sealed proposal; no independent native proof acceptance is asserted.",
+            "item_sha256": "1dac95e76bdda4af23855d3d688e7a39b508b94802bd091d4edf762b7f37f5c4",
+            "row_sha256": "40660fbc54669470a785f356893d3c1113fea922d7060433f5cd460345461eca"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition asserts no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root adopting /root/qsm_boundary",
+            "reason": "Root adopts /root/qsm_boundary current case review in research/physics-non-fluid-129-2026-10-21-r2-owner-step3-boundary-current-qsm_boundary/proposal-final-current.json: No converse characterization of states from entropy or information values is claimed. Failed support inclusion means D=+infinity by the stated convention; supported X,Y use their finite spectral trace, with both branches covered in 2.1. Source reading limits and exact support remain in the sealed proposal; no independent native proof acceptance is asserted.",
+            "item_sha256": "1dac95e76bdda4af23855d3d688e7a39b508b94802bd091d4edf762b7f37f5c4",
+            "row_sha256": "4f9637bb4abf2742f25729263efbfb4ea69d8de8193f5f5180a62cb8a8bf664d"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-101",
+        "notes": "Read Definition and both proof steps, F1–F6 suppliers and reader/refuter evidence. Nonzero finite spaces make every grouped marginal a state by F5; F4 contracts the second factor and newly declared F6 contracts the first, preserving residual order. Spectral finite sums handle repeated and zero eigenvalues, one-dimensional states have entropy zero, and D(0||Y)=0 while support failure gives +infinity. No arbitrary choice or limiting argument. Refuter citation defect repaired without changing the Definition; pre/post archive differs only by one extra blank line before Proof."
+      }
+    },
+    "thm-qsmx-cmi-and-channel-dpi": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-qsmx-information-conventions",
+          "source_section": "Definition",
+          "quote": "All Hilbert spaces in this item are nonzero and finite-dimensional over $\\mathbb C$. A density operator $\\rho$ on $H$ is a Hermitian positive semidefinite endomorphism with $\\operatorname{Tr}\\rho=1$. Its dimensionless von Neumann entropy, in nats, is\n\n$$S(\\rho):=-\\operatorname{Tr}(\\rho\\log\\rho)=-\\sum_{j:\\lambda_j>0}\\lambda_j\\log\\lambda_j,$$\n\nwhere $\\lambda_j$ are the eigenvalues of $\\rho$, the logarithm is natural, and $0\\log0:=0$. For any positive semidefinite endomorphisms $X,Y$ on one finite-dimensional $H$, let $\\operatorname{supp}X:=(\\ker X)^\\perp$. Define\n\n$$D(X\\|Y):=\\operatorname{Tr}(X\\log X)-\\operatorname{Tr}(X\\log Y)$$\n\nwhen $\\operatorname{supp}X\\subseteq\\operatorname{supp}Y$, taking each logarithm spectrally on its positive support and setting zero-eigenvalue contributions to zero; set $D(X\\|Y):=+\\infty$ otherwise. For density operators this is the finite-dimensional quantum relative entropy in nats.\n\nFor a density operator $\\rho_{AB}$ on the ordered product $H_A\\otimes H_B$, define $\\rho_A:=\\operatorname{Tr}_B\\rho_{AB}$ and $\\rho_B:=\\operatorname{Tr}_A\\rho_{AB}$, where in orthonormal product bases $\\bigl(\\operatorname{Tr}_B R\\bigr)_{ii'}=\\sum_jR_{(i,j),(i',j)}$ and the first factor is retained. Define\n\n$$I(A:B)_\\rho:=S(\\rho_A)+S(\\rho_B)-S(\\rho_{AB}).$$\n\nFor a density operator $\\rho_{ABC}$ on $H_A\\otimes H_B\\otimes H_C$, define\n\n$$\\rho_{AB}:=\\operatorname{Tr}_C\\rho_{ABC},\\qquad\n\\rho_{BC}:=\\operatorname{Tr}_A\\rho_{ABC},\\qquad\n\\rho_B:=\\operatorname{Tr}_A(\\operatorname{Tr}_C\\rho_{ABC}),$$\n\nwhere each partial trace contracts the indicated tensor factor and retains the other factors in their displayed order.\n\n$$I(A:C\\mid B)_\\rho:=S(\\rho_{AB})+S(\\rho_{BC})-S(\\rho_B)-S(\\rho_{ABC}),$$\n\nusing the partial traces in the displayed factor order. For any fixed positive conversion factor $k_B$ with units J/K, the corresponding physical entropy is $S_{\\mathrm{phys}}(\\rho):=k_BS(\\rho)$; no numerical value of $k_B$ is specified here.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-qsm-dt-channel-definition",
+          "source_section": "Definition",
+          "quote": "Let $d,e\\geq1$ be integers, let $H_{\\mathrm{in}}=\\mathbb C^d$ and $H_{\\mathrm{out}}=\\mathbb C^e$ with their standard inner products, and write $M_d(\\mathbb C)$ and $M_e(\\mathbb C)$ for the complex linear maps on these spaces. A matrix $X$ is **positive semidefinite**, written $X\\geq0$, when it is Hermitian and $\\langle Xv,v\\rangle\\geq0$ for every vector $v$. The finite spectral convention in [[lem-qsm-matrix-state-calculus]] gives positive matrices their orthonormal eigenbases and positive square roots.\n\nA **positive map** is a complex-linear map $\\Phi:M_d(\\mathbb C)\\to M_e(\\mathbb C)$ such that $\\Phi(X)\\geq0$ whenever $X\\geq0$. For each integer $r\\geq1$, identify $M_r(\\mathbb C)\\otimes M_d(\\mathbb C)$ with matrices on $\\mathbb C^r\\otimes\\mathbb C^d$ in the ordered product basis. The map $\\Phi$ is **completely positive** when $\\operatorname{id}_r\\otimes\\Phi$ is positive for every such $r$, where $\\operatorname{id}_r$ is the identity map on $M_r(\\mathbb C)$.\n\nThe map $\\Phi$ is **trace-preserving** when $\\operatorname{Tr}(\\Phi(X))=\\operatorname{Tr}(X)$ for every $X\\in M_d(\\mathbb C)$. A **finite quantum channel** is a complex-linear map that is both completely positive and trace-preserving, abbreviated CPTP. Unitality, $\\Phi(I_d)=I_e$, is a separate condition and is not part of this definition.\n\nThis is a mathematical definition. A physical preparation, measurement, or open-system model must separately identify when one of these maps represents a physical transformation.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-it-finite-strong-subadditivity",
+          "source_section": "Statement",
+          "quote": "Let $H_A,H_B,H_C$ be nonzero finite-dimensional complex inner-product spaces and let $\\rho_{ABC}$ be a density operator on their ordered tensor product. Write $\\rho_{AB},\\rho_{BC},\\rho_B$ for its marginals using the partial traces in [[def-qc-partial-trace]]. Then\n$$S(\\rho_{AB})+S(\\rho_{BC})\\ge S(\\rho_B)+S(\\rho_{ABC}),$$\nwhere $S(\\rho)=-\\operatorname{tr}(\\rho\\ln\\rho)$ with $0\\ln0:=0$ as in [[def-it-von-neumann-entropy]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-it-quantum-relative-entropy-partial-trace-data-processing",
+          "source_section": "Statement",
+          "quote": "Let $H_A,H_B$ be nonzero finite-dimensional complex inner-product spaces, let $d=\\dim H_B\\ge1$, and let $A,B$ be non-negative operators on $H_A\\otimes H_B$. Then\n\n$$D(\\operatorname{Tr}_B A\\|\\operatorname{Tr}_B B)\\le D(A\\|B).$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qsm-dt-choi-kraus",
+          "source_section": "Statement",
+          "quote": "Let $d,e\\geq1$ and let $\\Phi:M_d(\\mathbb C)\\to M_e(\\mathbb C)$ be complex-linear. Choose the standard input basis $(|i\\rangle)_{i=1}^d$, let $E_{ij}=|i\\rangle\\langle j|$, and use the ordered tensor convention input-reference $\\otimes$ output. Define the (unnormalized) Choi matrix\n\n$$J(\\Phi):=\\sum_{i,j=1}^{d}E_{ij}\\otimes\\Phi(E_{ij})\\in M_d(\\mathbb C)\\otimes M_e(\\mathbb C).$$ Then $\\Phi$ is completely positive if and only if $J(\\Phi)\\geq0$, and this holds if and only if there are $q\\leq de$ matrices $K_1,\\ldots,K_q:\\mathbb C^d\\to\\mathbb C^e$ such that $$\\Phi(X)=\\sum_{a=1}^{q}K_aXK_a^*\\qquad(X\\in M_d(\\mathbb C)).$$\n\nThe empty sum is allowed when $\\Phi=0$. For any such Kraus representation, $\\Phi$ is trace-preserving if and only if $\\sum_{a=1}^{q}K_a^*K_a=I_d$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qc-partial-trace",
+          "source_section": "Definition",
+          "quote": "For a complex vector space $H$, write $\\operatorname{End}(H)$ for the set of\nlinear maps $H\\to H$ ([[def-linear-map]]).\n\nLet $H_A,H_B$ be finite-dimensional complex inner-product spaces with fixed\nordered orthonormal bases $(e_i)_{i<a}$ and $(f_j)_{j<b}$, respectively. The\nordered product basis of $H_A\\otimes H_B$ has the $A$ index first. For\n$R\\in\\operatorname{End}(H_A\\otimes H_B)$ define\n$\\operatorname{Tr}_B(R)\\in\\operatorname{End}(H_A)$ by\n\n$$\\bigl(\\operatorname{Tr}_B(R)\\bigr)_{i i'}:=\\sum_{j<b}R_{(i,j),(i',j)}.$$\n\nRows are output coordinates and columns are input coordinates, as in\n[[def-coordinate-column-and-matrix-of-a-linear-map]]. If $b=0$, the sum is\nempty and equals $0$. The notation $\\operatorname{Tr}_B$ means that the second\nfactor is contracted; the first factor and its order are retained.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-it-finite-dimensional-quantum-relative-entropy",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a finite-dimensional complex inner-product space and let $A,B:H\\to H$ be non-negative operators. For such an operator $A$, set $\\operatorname{supp}(A):=(\\ker A)^\\perp$, where $\\ker A$ is the kernel of a linear map ([[def-kernel-and-image-of-a-linear-map]]); this extends the density-operator support convention in [[def-qc-density-operator]]. If $\\operatorname{supp}(A)\\subseteq\\operatorname{supp}(B)$, define\n\n$$D(A\\|B):=\\operatorname{tr}(A\\ln A)-\\operatorname{tr}(A\\ln B).$$\n\nHere $\\ln A$ is defined spectrally on the positive eigenspaces of $A$ with $0\\ln0:=0$, and $\\ln B$ in the cross term is restricted to $\\operatorname{supp}(B)$; the support condition ensures that $A$ vanishes on $\\ker B$, so the omitted kernel contributes zero. If $\\operatorname{supp}(A)\\nsubseteq\\operatorname{supp}(B)$, set $D(A\\|B):=+\\infty$. In particular, $D(0\\|B)=0$. For density operators this is the finite-dimensional **quantum relative entropy**. The logarithms are natural, so the value is in nats; the base-two value is $D_2(A\\|B):=D(A\\|B)/\\ln2$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-qsm-matrix-state-calculus",
+          "source_section": "Statement",
+          "quote": "Use the following conventions on a complex inner-product space $H$ of dimension $D\\geq1$, with inner product linear in its first argument. For an endomorphism $A$, define $\\operatorname{Tr}A:=\\sum_{j=1}^D\\langle Ae_j,e_j\\rangle$ in an orthonormal basis; step 3.1 proves basis independence. For any Hermitian $M$, its **positive spectral subspace** (called its positive support here) is $S_M:=\\bigoplus_{\\lambda>0}\\ker(M-\\lambda I)$; when $M\\geq0$ this equals $(\\ker M)^\\perp$. Its support logarithm is $\\log(M|_{S_M}):=\\sum_{\\lambda>0}(\\log\\lambda)P_\\lambda|_{S_M}$, where $P_\\lambda$ is the orthogonal projection onto that eigenspace. No value $\\log0$ is assigned; for $M=0$ this is the unique endomorphism of the zero space. For the set $\\mathcal D(H)$ of positive semidefinite Hermitian endomorphisms with trace one, a point $\\rho$ is **extreme** if every equality $\\rho=t\\sigma+(1-t)\\tau$ with $\\sigma,\\tau\\in\\mathcal D(H)$ and $0<t<1$ implies $\\sigma=\\tau=\\rho$.\n\nLet $H$ be a complex inner-product space of finite dimension $D\\geq1$, with inner product linear in its first argument. Every Hermitian endomorphism $M$ has an orthonormal eigenbasis with real eigenvalues. For a real function $f$ on its finite spectrum, define $f(M)$ by its spectral projections; this definition is independent of the choice of eigenbasis. In particular positive square roots, exponentials, and logarithms on positive supports are well defined.\n\nFor a density matrix $\\rho$ on $H$, meaning a Hermitian positive semidefinite operator with $\\operatorname{Tr}\\rho=1$, $\\operatorname{Tr}(\\rho A)=\\sum_jp_j\\langle Au_j,u_j\\rangle$ for bounded $A$, where $\\rho=\\sum_jp_j|u_j\\rangle\\langle u_j|$. The weighted form $(X,Y)_\\rho=\\operatorname{Tr}(\\rho X^*Y)$ satisfies Cauchy–Schwarz, $|(X,Y)_\\rho|^2\\leq(X,X)_\\rho(Y,Y)_\\rho$. Finally, $\\operatorname{Tr}(\\rho^2)\\leq1$, with equality exactly for rank-one densities, and those are exactly the extreme points of the finite density-matrix set.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [A1], the left side of the first assertion is the displayed four-entropy difference. Apply [F1] to the given state with the same factor order; the resulting inequality is exactly $I(A:C\\mid B)_\\rho\\ge0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By [F3], choose a finite Kraus list $K_1,\\ldots,K_q$ with $\\sum_aK_a^*K_a=I_d$; because $d\\ge1$, this identity rules out $q=0$. Let $\\mathcal E=\\mathbb C^q$ with orthonormal basis $(f_a)$ and define $V:\\mathbb C^d\\to\\mathbb C^e\\otimes\\mathcal E$ by $Vx=\\sum_aK_ax\\otimes f_a$. Orthogonality of the $f_a$ gives $\\langle Vx,Vy\\rangle=\\sum_a\\langle K_ax,K_ay\\rangle=\\langle x,(\\sum_aK_a^*K_a)y\\rangle=\\langle x,y\\rangle$, so $V^*V=I_d$. The coordinate formula [F4] then gives $\\operatorname{Tr}_{\\mathcal E}(VXV^*)=\\sum_aK_aXK_a^*=\\Phi(X)$ for every $X\\in M_d(\\mathbb C)$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "A2",
+            "F3",
+            "F4",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The isometry $V$ maps each positive-eigenvalue eigenspace of $X\\ge0$ onto the corresponding eigenspace of $VXV^*$, with the same eigenvalue; the orthogonal complement of $\\operatorname{ran}V$ is in the kernel. Hence $\\operatorname{supp}(VXV^*)=V(\\operatorname{supp}X)$, and likewise for $Y$. Because $V$ is injective, support inclusion holds for $X,Y$ exactly when it holds for $VXV^*,VYV^*$. If it fails, both relative entropies are $+\\infty$ by [F5]. If it holds, the support-restricted spectral logarithms satisfy $\\log(VXV^*)=V(\\log X)V^*$ and $\\log(VYV^*)=V(\\log Y)V^*$ on the corresponding supports. The trace identity in [F6] therefore yields $D(VXV^*\\|VYV^*)=D(X\\|Y)$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F5",
+            "F6",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Apply [F2] to $R=VXV^*$ and $S=VYV^*$, which are positive semidefinite because $V$ is linear and $X,Y\\ge0$. By step 1.2 their partial traces are $\\Phi(X),\\Phi(Y)$, and by step 2.1 their relative entropy equals $D(X\\|Y)$. Thus $D(\\Phi(X)\\|\\Phi(Y))\\le D(X\\|Y)$, including when the right side is $+\\infty$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem requires nonzero finite tensor factors and integers d,e>=1; zero-dimensional spaces are excluded."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 treats support inclusion and failure explicitly, including X=0 and the extended-real +infinity branch."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 2.1-3.1 use only finite matrices and the trace-preserving Kraus identity, which also holds when d=1 or e=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 uses eigenspaces and supports, not a choice of basis inside degenerate eigenspaces."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statements have no continuous parameter interval; d,e are positive integers."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 constructs a finite environment from the finite Kraus list; no arbitrary-index choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Neither inequality is stated as an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Neither inequality is stated as an iff."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-101",
+        "notes": "Read all four proof steps, all eight declared suppliers, reader/refuter evidence and hash-matching pre-reader carrier. SSA matches the exact ordered four-entropy combination, including rank-deficient states. Finite Kraus TP identity excludes q=0 for d>=1; V maps input to output tensor environment and is isometric in linear-first convention. Support inclusion is preserved and reflected by V; spectral/trace calculation gives QRE invariance including X=0 and support-failure +infinity. Finite partial-trace DPI applies to both lifted PSD operators. One-dimensional input/output and nonunital channels are included. Checked all three diagram objects, arrow directions and composition against step 1.2; proof does not use the drawing. Watrous Chapter 5 pp.280–282 Theorems 5.35–5.36 and complete proofs agree after conversion from bits to nats; no recovery/equality claim. Retained reader locator correction; moved the existing Statement link to the already-present reference section without changing the claim."
+      }
+    },
+    "thm-qsmx-thermal-mutual-information-bound": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-qsm-relative-entropy-domain",
+          "source_section": "Definition",
+          "quote": "For a trace-class density $\\rho$ on a Hilbert space $H$, define its support subspace in either finite or infinite dimension by\n$$\\operatorname{supp}\\rho:=(\\ker\\rho)^\\perp,\\qquad \\ker\\rho:=\\{x\\in H:\\rho x=0\\}.$$\nIt is closed; write $P_\\rho$ for its orthogonal projection, whose existence and uniqueness follow from [[thm-orthogonal-decomposition-by-a-closed-subspace]].\n\nFix the positive Boltzmann scale $k_B>0$ (in SI units J/K, as in the approved QSM quantities design and [[lem-qsm-trace-state-calculus]]). For a trace-class density $\\rho$ with positive eigenvalues $p_i$, define $S(\\rho)=-k_B\\sum_i p_i\\log p_i\\in[0,\\infty]$, with $0\\log0=0$. The logarithm is natural and acts on dimensionless density eigenvalues.\n\nFor finite-dimensional densities $\\rho,\\sigma$, define $\\operatorname{supp}\\rho=(\\ker\\rho)^\\perp$. If $\\operatorname{supp}\\rho\\not\\subseteq\\operatorname{supp}\\sigma$, set $D(\\rho\\|\\sigma)=+\\infty$. Otherwise define\n$\nD(\\rho\\|\\sigma)=\\operatorname{Tr}(\\rho\\log\\rho)-\\operatorname{Tr}(\\rho\\log\\sigma),\n$\nwhere each logarithm is restricted to the positive support of its operator and zero eigenvalues contribute zero to $\\operatorname{Tr}(\\rho\\log\\rho)$.\n\nFor trace-class normal densities on a separable Hilbert space, write $\\rho=\\sum_i p_i|u_i\\rangle\\langle u_i|$ and $\\sigma=\\sum_j s_j|v_j\\rangle\\langle v_j|$ on their positive supports. Define the nonnegative cross-log moment\n$\nC(\\rho,\\sigma):=\\sum_{i,j}p_i(-\\log s_j)|\\langle u_i,v_j\\rangle|^2\\in[0,\\infty].\n$\nThis is the spectral first moment of $-\\log\\sigma$ in the scalar state law of $\\rho$; equivalently it is the nonnegative sum over the spectral projections, so it is independent of bases within eigenspaces. When support inclusion holds and $C(\\rho,\\sigma)$ and $S(\\rho)$ are both finite, define $D(\\rho\\|\\sigma)=C(\\rho,\\sigma)-S(\\rho)/k_B$. If $C=+\\infty$ and $S(\\rho)<\\infty$, set $D=+\\infty$. No value is assigned by this definition to $+\\infty-(+\\infty)$; [[thm-qsm-trace-cross-log-inequality]] proves that finite $C$ forces finite $S(\\rho)$.\n\nThe spectral-moment identification in the preceding cross-log clause is restricted to $\\operatorname{supp}\\rho\\subseteq\\operatorname{supp}\\sigma$, so that the state is supported on the space where $-\\log\\sigma$ acts. Outside that domain, $C$ denotes only the displayed nonnegative double sum.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-qsm-finite-gibbs-variational",
+          "source_section": "Statement",
+          "quote": "Let $H=H^*$ act on a finite-dimensional complex Hilbert space of dimension $d\\geq1$, $\\beta>0$, $k_B>0$, $T=(k_B\\beta)^{-1}$, and $Z=\\operatorname{Tr}(e^{-\\beta H})$. Put $\\sigma=e^{-\\beta H}/Z$, $F_\\beta=-\\beta^{-1}\\log Z$, and $S(\\rho)=-k_B\\operatorname{Tr}(\\rho\\log\\rho)$, with $0\\log0=0$. Then every density matrix $\\rho$, including rank-deficient matrices, satisfies\n$\n\\operatorname{Tr}(\\rho H)-TS(\\rho)\\geq F_\\beta,\n$\nwith equality if and only if $\\rho=\\sigma$. Moreover $S(\\sigma)=k_B(\\log Z+\\beta\\operatorname{Tr}(\\sigma H))$, so $F_\\beta=\\operatorname{Tr}(\\sigma H)-TS(\\sigma)$. This is finite-dimensional mathematical optimization; actual preparation is a separate postulate.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-it-partial-traces-of-a-state-are-states",
+          "source_section": "Statement",
+          "quote": "For nonzero finite-dimensional complex inner-product spaces $H_A,H_B$ and a density operator $\\rho_{AB}$ on $H_A\\otimes H_B$, both marginals $\\rho_A:=\\operatorname{Tr}_B\\rho_{AB}$ and $\\rho_B:=\\operatorname{Tr}_A\\rho_{AB}$ are density operators.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-nrqm-composites-finite-partial-trace-and-schmidt",
+          "source_section": "Statement",
+          "quote": "Let $V,W$ be nonzero finite-dimensional complex inner product spaces with orthonormal bases $(e_1,\\dots,e_m)$ of $V$ and $(f_1,\\dots,f_n)$ of $W$, let $V\\otimes W$ be their tensor product with the inner product of [[lem-nrqm-composites-hilbert-tensor-construction]], and let $\\operatorname{tr}$ denote the basis-independent trace of an endomorphism ([[def-trace-of-an-endomorphism]]).\n\n(a) For every endomorphism $R$ of $V\\otimes W$ there is a unique endomorphism $\\operatorname{Tr}_W R$ of $V$ with\n\n$$\\operatorname{tr}\\bigl((\\operatorname{Tr}_WR)A\\bigr)=\\operatorname{tr}\\bigl(R(A\\otimes I_W)\\bigr)\\qquad\\text{for every }A\\in\\operatorname{End}(V),$$\n\nnamely $\\operatorname{Tr}_WR=\\sum_{j=1}^n\\varphi_j\\circ R\\circ\\iota_j$, where $\\iota_j(v)=v\\otimes f_j$ and $\\varphi_j(x\\otimes w)=\\langle w,f_j\\rangle x$; it does not depend on the orthonormal basis $(f_j)$ of $W$, and the analogous definition gives $\\operatorname{Tr}_V R$ with $\\operatorname{tr}((\\operatorname{Tr}_VR)B)=\\operatorname{tr}(R(I_V\\otimes B))$.\n\n(b) $\\operatorname{Tr}_W$ is linear, positive (it maps positive endomorphisms to positive endomorphisms) and trace preserving on density matrices: if $R\\ge0$ and $\\operatorname{tr}R=1$ then $\\operatorname{Tr}_WR\\ge0$ and $\\operatorname{tr}\\operatorname{Tr}_WR=1$; and $\\operatorname{Tr}_W T_{\\Psi,\\Psi}=CC^*$ for every $\\Psi\\in V\\otimes W$, where $C:W\\to V$ is the coefficient map determined by $\\Psi=\\sum_jCf_j\\otimes f_j$.\n\n(c) *Schmidt decomposition.* Every $\\Psi\\in V\\otimes W$ admits an expansion\n\n$$\\Psi=\\sum_{r=1}^{k}s_r\\,v_r\\otimes u_r,$$\n\nwith $k\\le\\min(m,n)$, orthonormal families $(v_r)\\subseteq V$, $(u_r)\\subseteq W$ and $s_1\\ge\\cdots\\ge s_k>0$ uniquely determined by $\\Psi$ as the positive singular values of the coefficient map; moreover $\\|\\Psi\\|^2=\\sum_rs_r^2$. For $\\|\\Psi\\|=1$ the reduced density $\\rho=\\operatorname{Tr}_W T_{\\Psi,\\Psi}$ satisfies $\\operatorname{tr}\\rho^2=\\sum_rs_r^4$, and $\\operatorname{tr}\\rho^2=1$ holds exactly when $k=1$, i.e. exactly when $\\Psi$ is a product vector; mixed-state separability is not decided by this criterion.\n\n(d) *Finite nonselective no-signalling.* If $(M_a)_{a=1}^p$ are endomorphisms of $W$ with $\\sum_aM_a^*M_a=I_W$ then for every endomorphism $R$ of $V\\otimes W$\n\n$$\\operatorname{Tr}_W\\Bigl(\\sum_a(I_V\\otimes M_a)R(I_V\\otimes M_a^*)\\Bigr)=\\operatorname{Tr}_WR .$$\n\nThis is an identity for the specified finite local instrument; selective conditioning (dividing one summand by its nonzero trace) is not covered.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qsmx-information-conventions",
+          "source_section": "Definition",
+          "quote": "All Hilbert spaces in this item are nonzero and finite-dimensional over $\\mathbb C$. A density operator $\\rho$ on $H$ is a Hermitian positive semidefinite endomorphism with $\\operatorname{Tr}\\rho=1$. Its dimensionless von Neumann entropy, in nats, is\n\n$$S(\\rho):=-\\operatorname{Tr}(\\rho\\log\\rho)=-\\sum_{j:\\lambda_j>0}\\lambda_j\\log\\lambda_j,$$\n\nwhere $\\lambda_j$ are the eigenvalues of $\\rho$, the logarithm is natural, and $0\\log0:=0$. For any positive semidefinite endomorphisms $X,Y$ on one finite-dimensional $H$, let $\\operatorname{supp}X:=(\\ker X)^\\perp$. Define\n\n$$D(X\\|Y):=\\operatorname{Tr}(X\\log X)-\\operatorname{Tr}(X\\log Y)$$\n\nwhen $\\operatorname{supp}X\\subseteq\\operatorname{supp}Y$, taking each logarithm spectrally on its positive support and setting zero-eigenvalue contributions to zero; set $D(X\\|Y):=+\\infty$ otherwise. For density operators this is the finite-dimensional quantum relative entropy in nats.\n\nFor a density operator $\\rho_{AB}$ on the ordered product $H_A\\otimes H_B$, define $\\rho_A:=\\operatorname{Tr}_B\\rho_{AB}$ and $\\rho_B:=\\operatorname{Tr}_A\\rho_{AB}$, where in orthonormal product bases $\\bigl(\\operatorname{Tr}_B R\\bigr)_{ii'}=\\sum_jR_{(i,j),(i',j)}$ and the first factor is retained. Define\n\n$$I(A:B)_\\rho:=S(\\rho_A)+S(\\rho_B)-S(\\rho_{AB}).$$\n\nFor a density operator $\\rho_{ABC}$ on $H_A\\otimes H_B\\otimes H_C$, define\n\n$$\\rho_{AB}:=\\operatorname{Tr}_C\\rho_{ABC},\\qquad\n\\rho_{BC}:=\\operatorname{Tr}_A\\rho_{ABC},\\qquad\n\\rho_B:=\\operatorname{Tr}_A(\\operatorname{Tr}_C\\rho_{ABC}),$$\n\nwhere each partial trace contracts the indicated tensor factor and retains the other factors in their displayed order.\n\n$$I(A:C\\mid B)_\\rho:=S(\\rho_{AB})+S(\\rho_{BC})-S(\\rho_B)-S(\\rho_{ABC}),$$\n\nusing the partial traces in the displayed factor order. For any fixed positive conversion factor $k_B$ with units J/K, the corresponding physical entropy is $S_{\\mathrm{phys}}(\\rho):=k_BS(\\rho)$; no numerical value of $k_B$ is specified here.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-qsm-matrix-state-calculus",
+          "source_section": "Statement",
+          "quote": "Use the following conventions on a complex inner-product space $H$ of dimension $D\\geq1$, with inner product linear in its first argument. For an endomorphism $A$, define $\\operatorname{Tr}A:=\\sum_{j=1}^D\\langle Ae_j,e_j\\rangle$ in an orthonormal basis; step 3.1 proves basis independence. For any Hermitian $M$, its **positive spectral subspace** (called its positive support here) is $S_M:=\\bigoplus_{\\lambda>0}\\ker(M-\\lambda I)$; when $M\\geq0$ this equals $(\\ker M)^\\perp$. Its support logarithm is $\\log(M|_{S_M}):=\\sum_{\\lambda>0}(\\log\\lambda)P_\\lambda|_{S_M}$, where $P_\\lambda$ is the orthogonal projection onto that eigenspace. No value $\\log0$ is assigned; for $M=0$ this is the unique endomorphism of the zero space. For the set $\\mathcal D(H)$ of positive semidefinite Hermitian endomorphisms with trace one, a point $\\rho$ is **extreme** if every equality $\\rho=t\\sigma+(1-t)\\tau$ with $\\sigma,\\tau\\in\\mathcal D(H)$ and $0<t<1$ implies $\\sigma=\\tau=\\rho$.\n\nLet $H$ be a complex inner-product space of finite dimension $D\\geq1$, with inner product linear in its first argument. Every Hermitian endomorphism $M$ has an orthonormal eigenbasis with real eigenvalues. For a real function $f$ on its finite spectrum, define $f(M)$ by its spectral projections; this definition is independent of the choice of eigenbasis. In particular positive square roots, exponentials, and logarithms on positive supports are well defined.\n\nFor a density matrix $\\rho$ on $H$, meaning a Hermitian positive semidefinite operator with $\\operatorname{Tr}\\rho=1$, $\\operatorname{Tr}(\\rho A)=\\sum_jp_j\\langle Au_j,u_j\\rangle$ for bounded $A$, where $\\rho=\\sum_jp_j|u_j\\rangle\\langle u_j|$. The weighted form $(X,Y)_\\rho=\\operatorname{Tr}(\\rho X^*Y)$ satisfies Cauchy–Schwarz, $|(X,Y)_\\rho|^2\\leq(X,X)_\\rho(Y,Y)_\\rho$. Finally, $\\operatorname{Tr}(\\rho^2)\\leq1$, with equality exactly for rank-one densities, and those are exactly the extreme points of the finite density-matrix set.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-qsm-finite-entropy-composition",
+          "source_section": "Statement",
+          "quote": "For $m\\geq1$ density matrices $\\rho_1,\\ldots,\\rho_m$ on one finite-dimensional complex Hilbert space and weights $t_a\\geq0$ with $\\sum_at_a=1$, define their mixture $\\rho:=\\sum_at_a\\rho_a$. The exact content of entropy concavity under finite mixing is\n$$S(\\rho)\\geq\\sum_{a=1}^m t_aS(\\rho_a).$$\nFor density matrices $\\rho,\\sigma$ on finite-dimensional complex Hilbert spaces, the exact content of product additivity is $S(\\rho\\otimes\\sigma)=S(\\rho)+S(\\sigma)$.\n\nFor the positive entropy scale $k_B>0$ fixed in [[def-qsm-relative-entropy-domain]] (in SI units J/K), entropy is concave under finite mixing and additive on product states for finite-dimensional density matrices. If $R$ is a density matrix on $H_A\\otimes H_B$, with marginals $\\rho_A=\\operatorname{Tr}_B R$, $\\rho_B=\\operatorname{Tr}_A R$, then\n$\nS(R)\\leq S(\\rho_A)+S(\\rho_B),\n$\nwith equality exactly when $R=\\rho_A\\otimes\\rho_B$. These finite statements include rank-deficient densities and assert neither strong subadditivity nor general infinite-dimensional data processing.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F5], $H$ has finitely many real eigenvalues, so $e^{-\\beta H}$ is positive definite and $Z_\\beta>0$. Thus $\\rho_\\beta$ is a finite Gibbs density to which [F1] applies. Its marginals $\\rho_A:=\\operatorname{Tr}_B\\rho_\\beta$ and $\\rho_B:=\\operatorname{Tr}_A\\rho_\\beta$ are density operators by [F2].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Set $\\tau:=\\rho_A\\otimes\\rho_B$. Tensor products of orthonormal eigenbases show that $\\tau$ is positive semidefinite with eigenvalues $p_iq_j$, whose sum is $(\\sum_i p_i)(\\sum_jq_j)=1$; hence $\\tau$ is a density operator. By [F6], $S_{\\mathrm{phys}}(\\tau)=S_{\\mathrm{phys}}(\\rho_A)+S_{\\mathrm{phys}}(\\rho_B)$. Since $k_B>0$ and $S_{\\mathrm{phys}}=k_BS$, division by $k_B$ gives $S(\\tau)=S(\\rho_A)+S(\\rho_B)$. Therefore [F4] gives $S(\\tau)-S(\\rho_\\beta)=I(A:B)_{\\rho_\\beta}$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F4",
+            "F5",
+            "F6",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Define $F_\\beta(\\omega):=\\operatorname{Tr}(H\\omega)-\\beta^{-1}S(\\omega)$ for finite density matrices. Since $T S_{\\mathrm{phys}}=T k_BS=\\beta^{-1}S$, [F1] applies to this functional and yields $F_\\beta(\\rho_\\beta)\\le F_\\beta(\\tau)$. Rearranging and using step 2.1 gives $\\beta^{-1}I(A:B)_{\\rho_\\beta}\\le\\operatorname{Tr}(H(\\tau-\\rho_\\beta))$.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "given",
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The coordinate formula in [F3] gives $\\operatorname{Tr}_B(\\rho_A\\otimes\\rho_B)=\\rho_A$ and $\\operatorname{Tr}_A(\\rho_A\\otimes\\rho_B)=\\rho_B$, since each factor has trace one. The defining trace-pairing identities in [F3], with cyclicity from [F5], then show that the expectations of $H_A\\otimes I_B$ in $\\tau$ and $\\rho_\\beta$ agree, and likewise for $I_A\\otimes H_B$. Thus both local terms cancel in the trace on the right of step 3.1, leaving $\\operatorname{Tr}(H(\\tau-\\rho_\\beta))=\\operatorname{Tr}(H_{\\partial}(\\tau-\\rho_\\beta))$.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "F3",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Diagonalize $H_{\\partial}=\\sum_j\\lambda_jP_j$ by [F5]. For any density matrix $\\omega$, the numbers $w_j:=\\operatorname{Tr}(P_j\\omega)$ are nonnegative (each is a sum of nonnegative diagonal expectations of $\\omega$ on an orthonormal basis of $\\operatorname{ran}P_j$) and sum to one. Thus $|\\operatorname{Tr}(H_{\\partial}\\omega)|=|\\sum_j\\lambda_jw_j|\\le\\sum_j|\\lambda_j|w_j\\le\\max_j|\\lambda_j|=\\|H_{\\partial}\\|_{\\mathrm{op}}$. Applying this absolute bound to $\\tau$ and $\\rho_\\beta$ gives $\\operatorname{Tr}(H_{\\partial}(\\tau-\\rho_\\beta))\\le2\\|H_{\\partial}\\|_{\\mathrm{op}}$. Combine this with steps 3.1 and 4.1 and multiply by $\\beta>0$ to obtain the claimed inequality. Substituting the additional family bound $\\|H_{\\partial}\\|_{\\mathrm{op}}\\le C|\\partial A|$ yields its stated conditional area scaling.",
+          "step": "5.1",
+          "inputs": [
+            "given",
+            "F5",
+            "step 3.1",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For any family member with no crossing labels, the stated definition gives J_partial empty, |partial A|=0, and H_partial=0 as an empty sum. The cancellations in step 4.1 and the norm bound in step 5.1 then give I<=0; a family with no partitions has no instances."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 gives the displayed bound as zero when H_boundary=0; no extra equality condition is asserted."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The proof and statement permit one-dimensional factors; each marginal and tensor spectrum remains finite."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.1 use finite spectral subspaces, so degenerate Hamiltonian and boundary eigenvalues are included."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The theorem assumes beta>0 and makes no beta=0 or zero-temperature endpoint claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 carries Choice through the exact variational supplier hypothesis; the remaining proof is finite-dimensional."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem gives an inequality, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem gives an inequality, not an iff."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-101",
+        "notes": "Read all five current proof steps, every direct supplier, exact pre-reader Gibbs-log final archive and reader/refuter evidence. Finite Hermitian H yields strictly positive Gibbs eigenvalues and Z>0 for every beta>0. Product competitor is a trace-one PSD matrix even for singular marginals; physical product entropy divides by positive k_B to give nats. Gibbs free-energy comparison has the correct sign beta^{-1}I<=Tr H(tau-rho); both local terms cancel by both-factor trace pairings. Each spectral expectation lies within +/-operator norm, hence difference<=2norm. AC inherited explicitly through declared entropy/Gibbs supplier closures, with no new infinite choice. Empty lattice/empty side means C tensor factor, no crossing labels and zero boundary operator; C=0 and dimension one valid. Family conclusion only substitutes its stated uniform norm-count bound; beta=0 and infinite-temperature/zero-temperature limits are not asserted. Reader crossing-support definitions retained, lexicographic order and label universe made exact; no direct item/reference consumer of thermal theorem exists outside its placement page. Wolf et al. Eq.(3), PDF page index 1, and Naaijkens Eq.(3.4.3), PDF page index 78, checked independently; current local Gibbs supplier proof handles rank-deficient competitors."
+      }
+    },
+    "ex-qsmx-bell-and-classical-information": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qsmx-information-conventions",
+          "source_section": "Definition",
+          "quote": "All Hilbert spaces in this item are nonzero and finite-dimensional over $\\mathbb C$. A density operator $\\rho$ on $H$ is a Hermitian positive semidefinite endomorphism with $\\operatorname{Tr}\\rho=1$. Its dimensionless von Neumann entropy, in nats, is\n\n$$S(\\rho):=-\\operatorname{Tr}(\\rho\\log\\rho)=-\\sum_{j:\\lambda_j>0}\\lambda_j\\log\\lambda_j,$$\n\nwhere $\\lambda_j$ are the eigenvalues of $\\rho$, the logarithm is natural, and $0\\log0:=0$. For any positive semidefinite endomorphisms $X,Y$ on one finite-dimensional $H$, let $\\operatorname{supp}X:=(\\ker X)^\\perp$. Define\n\n$$D(X\\|Y):=\\operatorname{Tr}(X\\log X)-\\operatorname{Tr}(X\\log Y)$$\n\nwhen $\\operatorname{supp}X\\subseteq\\operatorname{supp}Y$, taking each logarithm spectrally on its positive support and setting zero-eigenvalue contributions to zero; set $D(X\\|Y):=+\\infty$ otherwise. For density operators this is the finite-dimensional quantum relative entropy in nats.\n\nFor a density operator $\\rho_{AB}$ on the ordered product $H_A\\otimes H_B$, define $\\rho_A:=\\operatorname{Tr}_B\\rho_{AB}$ and $\\rho_B:=\\operatorname{Tr}_A\\rho_{AB}$, where in orthonormal product bases $\\bigl(\\operatorname{Tr}_B R\\bigr)_{ii'}=\\sum_jR_{(i,j),(i',j)}$ and the first factor is retained. Define\n\n$$I(A:B)_\\rho:=S(\\rho_A)+S(\\rho_B)-S(\\rho_{AB}).$$\n\nFor a density operator $\\rho_{ABC}$ on $H_A\\otimes H_B\\otimes H_C$, define\n\n$$\\rho_{AB}:=\\operatorname{Tr}_C\\rho_{ABC},\\qquad\n\\rho_{BC}:=\\operatorname{Tr}_A\\rho_{ABC},\\qquad\n\\rho_B:=\\operatorname{Tr}_A(\\operatorname{Tr}_C\\rho_{ABC}),$$\n\nwhere each partial trace contracts the indicated tensor factor and retains the other factors in their displayed order.\n\n$$I(A:C\\mid B)_\\rho:=S(\\rho_{AB})+S(\\rho_{BC})-S(\\rho_B)-S(\\rho_{ABC}),$$\n\nusing the partial traces in the displayed factor order. For any fixed positive conversion factor $k_B$ with units J/K, the corresponding physical entropy is $S_{\\mathrm{phys}}(\\rho):=k_BS(\\rho)$; no numerical value of $k_B$ is specified here.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-partial-trace",
+          "source_section": "Definition",
+          "quote": "For a complex vector space $H$, write $\\operatorname{End}(H)$ for the set of\nlinear maps $H\\to H$ ([[def-linear-map]]).\n\nLet $H_A,H_B$ be finite-dimensional complex inner-product spaces with fixed\nordered orthonormal bases $(e_i)_{i<a}$ and $(f_j)_{j<b}$, respectively. The\nordered product basis of $H_A\\otimes H_B$ has the $A$ index first. For\n$R\\in\\operatorname{End}(H_A\\otimes H_B)$ define\n$\\operatorname{Tr}_B(R)\\in\\operatorname{End}(H_A)$ by\n\n$$\\bigl(\\operatorname{Tr}_B(R)\\bigr)_{i i'}:=\\sum_{j<b}R_{(i,j),(i',j)}.$$\n\nRows are output coordinates and columns are input coordinates, as in\n[[def-coordinate-column-and-matrix-of-a-linear-map]]. If $b=0$, the sum is\nempty and equals $0$. The notation $\\operatorname{Tr}_B$ means that the second\nfactor is contracted; the first factor and its order are retained.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-it-partial-traces-of-a-state-are-states",
+          "source_section": "Statement",
+          "quote": "For nonzero finite-dimensional complex inner-product spaces $H_A,H_B$ and a density operator $\\rho_{AB}$ on $H_A\\otimes H_B$, both marginals $\\rho_A:=\\operatorname{Tr}_B\\rho_{AB}$ and $\\rho_B:=\\operatorname{Tr}_A\\rho_{AB}$ are density operators.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qc-first-factor-partial-trace",
+          "source_section": "Definition",
+          "quote": "Let $H_G,H_Q$ be finite-dimensional complex inner-product spaces, and fix\nthe factor order $H_G\\otimes H_Q$. For ordered orthonormal bases\n$(g_s)$ and $(q_\\alpha)$, define\n$$\\operatorname{Tr}_G:\\mathcal B(H_G\\otimes H_Q)\\to\\mathcal B(H_Q),\\qquad (\\operatorname{Tr}_G X)_{\\alpha\\beta}=\\sum_sX_{(s,\\alpha),(s,\\beta)},$$\nwhere $X_{(s,\\alpha),(t,\\beta)}=\\langle X(g_t\\otimes q_\\beta),\ng_s\\otimes q_\\alpha\\rangle$ under the linear-first convention. Equivalently,\nthis is the partial trace over the second factor after swapping the two wires.\nThe partial-trace characterization and wire-permutation unitarity in\n[[thm-qc-partial-trace-characterization-and-basis-independence]] and\n[[thm-qc-wire-permutation-is-unitary]] show that the map is independent of\nthe chosen orthonormal bases. In particular, the same definition applies when\n$H_Q=H_L\\otimes H_R$, with that residual factor order left unchanged. For an\noperator on $(H_G\\otimes H_L)\\otimes H_R$, use the canonical associator of\nthe ordered tensor-register construction to view it on\n$H_G\\otimes(H_L\\otimes H_R)$ before taking this partial trace.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The vector $|\\Phi\\rangle$ has norm one because $|00\\rangle$ and $|11\\rangle$ are orthonormal, so $\\rho_\\Phi$ is a rank-one projection with trace one. The two orthogonal basis projections defining $\\rho_{\\mathrm{diag}}$ are positive and each has trace one, so their half-weighted sum is also positive with trace one. Expanding $\\rho_\\Phi$ gives the four terms $\\tfrac12|00\\rangle\\langle00|$, $\\tfrac12|00\\rangle\\langle11|$, $\\tfrac12|11\\rangle\\langle00|$, and $\\tfrac12|11\\rangle\\langle11|$. In the partial trace over the second factor, the two off-diagonal terms vanish because the traced basis indices differ, by [F2]; in the trace over the first factor, the same is true by [F4]. In both cases the diagonal terms each contribute one half of the corresponding basis projection, so both marginals are $I_2/2$. Applying the same two formulas to $\\rho_{\\mathrm{diag}}$ gives these marginals directly; they are density operators by [F3].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The eigenvalues of $\\rho_\\Phi$ are $1,0,0,0$, those of $\\rho_{\\mathrm{diag}}$ are $1/2,1/2,0,0$, and those of each marginal are $1/2,1/2$. Substitution into [F1] yields $S(\\rho_\\Phi)=0$, $S(\\rho_{\\mathrm{diag}})=\\log2$, and $S(I_2/2)=\\log2$. Therefore the mutual informations are $2\\log2$ and $\\log2$, respectively, as stated.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example fixes two factors equal to C^2, so empty factors are excluded."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 includes the zero eigenvalues of the Bell and dephased density matrices and applies 0 log 0=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 computes the rank-one Bell density entropy as zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 handles the repeated 1/2 marginal and dephased-state eigenvalues directly."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Example contains no variable parameter or endpoint claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Example specifies the two basis vectors and all matrices explicitly; no arbitrary selection is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example asserts no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root adopting /root/qsm_boundary",
+            "reason": "Root adopts /root/qsm_boundary current case review in research/physics-non-fluid-129-2026-10-21-r2-owner-step3-boundary-current-qsm_boundary/proposal-final-current.json: The example compares two supplied states with equal marginals and different information values. It asserts no equivalence of marginal equality with joint-state or information equality. Source reading limits and exact support remain in the sealed proposal; no independent native proof acceptance is asserted.",
+            "item_sha256": "f5ad52fec6947696514603badfcdd1dfee1c12ddc0fc0245b2fbcda46b7a7178",
+            "row_sha256": "a5072be23b5bfb7ac8e0aafab204b5529e8851df50371b28f2fb987fa2619bb6"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example asserts no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root adopting /root/qsm_boundary",
+            "reason": "Root adopts /root/qsm_boundary current case review in research/physics-non-fluid-129-2026-10-21-r2-owner-step3-boundary-current-qsm_boundary/proposal-final-current.json: No reverse characterization of every state with those marginals, or of every state with those two information values, is asserted. Direct spectral evaluation suffices for the two examples. Source reading limits and exact support remain in the sealed proposal; no independent native proof acceptance is asserted.",
+            "item_sha256": "f5ad52fec6947696514603badfcdd1dfee1c12ddc0fc0245b2fbcda46b7a7178",
+            "row_sha256": "77756435c13a762ce71040cdd7a689e2d5dce488291672d43c3d1f4e1e39c801"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-101",
+        "notes": "Read both current verification steps and every declared supplier, reader/refuter reports and exact hash-matching pre-reader archive. Normalized Bell vector gives rank-one PSD trace-one projector; half-weighted orthogonal basis projections give the diagonal state. Expanded four Bell terms: off-diagonals vanish under F2 second-factor and F4 first-factor coordinate sums; both states have I_2/2 marginals. Spectra (1,0,0,0), (1/2,1/2,0,0), and (1/2,1/2) give entropies 0, ln2 and ln2, hence mutual informations 2ln2 and ln2 in nats. Zero eigenvalues handled by 0log0 convention. No arbitrary choice, variable endpoint or statistical inference. Retained reader first-factor supplier/citation repair and synchronized its missing manifest dependency. Wilde Chapter 11 section 11.6 definition and exercise 11.6.2 match the example after bits-to-nats conversion."
+      }
+    }
+  }
+}

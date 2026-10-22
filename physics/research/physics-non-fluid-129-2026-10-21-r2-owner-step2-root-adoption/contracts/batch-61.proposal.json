@@ -1,0 +1,538 @@
+{
+  "version": 1,
+  "level": "physics-non-fluid-129-2026-10-21-r2-batch-61",
+  "scope": [
+    "lem-qftx-laurent-negative-projection-rota-baxter",
+    "thm-qftx-cut-hopf-antipode",
+    "thm-qftx-subtraction-character-factorization",
+    "ex-qftx-nested-two-loop-subtraction"
+  ],
+  "contracts": {
+    "lem-qftx-laurent-negative-projection-rota-baxter": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qftx-laurent-subtraction-target",
+          "source_section": "Definition",
+          "quote": "Then $A=A_-\\oplus A_+$ as a $K$-module, and both summands are subalgebras, with $1\\in A_+$. Define $R:A\\to A_-$ by retaining exactly the strictly negative powers; $1-R$ is the projection onto $A_+$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Write $x=x_-+x_+$ and $y=y_-+y_+$ using the direct sum in [F1], so $R(x)=x_-$ and $R(y)=y_-$. Then\n$$R(x)y+xR(y)-xy=x_-(y_-+y_+)+(x_-+x_+)y_--(x_-+x_+)(y_-+y_+)=x_-y_- -x_+y_+.$$",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Since $x_-y_-\\in A_-$ and $x_+y_+\\in A_+$, applying $R$ to the identity in step 1.1 gives $R(R(x)y+xR(y)-xy)=x_-y_-=R(x)R(y)$.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "If $x=0$ or $y=0$, both sides vanish by the expansion in step 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If $x,y\\in A_+$ then $R(x)=R(y)=0$ and $xy\\in A_+$; projection in step 2.1 gives zero on both sides."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For $x=1$, the right side is $R(R(y)-y)=R(-y_+)=0$ and the left side is zero, by the splitting in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The proof uses only the direct-sum decomposition and multiplication, so it also holds when an input has no negative part, by step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The constant power $\\epsilon^0$ belongs to $A_+$, so the strict negative projection removes it as used in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choices are made; the proof is a finite expansion of two Laurent decompositions."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is an identity, not a biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "same-owner-qft-green-maps scoped boundary review",
+            "reason": "Splitting each Laurent series into negative and nonnegative parts reduces the Rota-Baxter expression to the difference of the two same-sign products. Applying the negative projection proves an algebra identity, not a converse characterization of Laurent splittings.",
+            "item_sha256": "d8f96a007100ae80766da4700bd32304fe08e58f3d52516201d594ab1f0c17b0",
+            "row_sha256": "bf58e247c8c7097698adefd67eb0cb01b87841b0024e446517d251293d9f2436"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is an identity, not a biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "same-owner-qft-green-maps scoped boundary review",
+            "reason": "Splitting each Laurent series into negative and nonnegative parts reduces the Rota-Baxter expression to the difference of the two same-sign products. Applying the negative projection proves an algebra identity, not a converse characterization of Laurent splittings.",
+            "item_sha256": "d8f96a007100ae80766da4700bd32304fe08e58f3d52516201d594ab1f0c17b0",
+            "row_sha256": "737e9fedad928c2ab720c590e8ce3b2c453317eac5286b658a71da1ffdaff957"
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "negative monomials",
+          "calculation": "For $x=y=\\epsilon^{-1}$, both sides equal $\\epsilon^{-2}$.",
+          "disposition": "Direct substitution in the identity proved in step 2.1."
+        },
+        {
+          "case": "nonnegative monomial",
+          "calculation": "For $x=1$ and $y=\\epsilon$, both sides equal $0$.",
+          "disposition": "Checks the unit and nonnegative-power boundary in step 2.1."
+        }
+      ]
+    },
+    "thm-qftx-cut-hopf-antipode": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qftx-rooted-forest-hopf",
+          "source_section": "Definition",
+          "quote": "For a rooted tree $t$, an admissible cut is a subset $C$ of its edges meeting every root-to-leaf path in at most one edge. Removing the edges of $C$ leaves one component containing the root; denote it by $R_C(t)$. The components on the child side of the cut edges form a forest denoted by $P_C(t)$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "5.1",
+            "6.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "A rooted-tree isomorphism bijects admissible edge subsets and preserves the isomorphism classes of their pruned forests and root components, so the cut sum is well-defined on $\\mathcal T$. Each cut partitions the vertices between $P_C$ and $R_C$, hence every coproduct term has the same total degree as $t$; multiplicative extension makes $\\Delta$ a graded algebra map. For nonempty $t$, only the empty cut contributes after applying $\\varepsilon$ to the first factor, and only the virtual full cut $t\\otimes1$ contributes after applying $\\varepsilon$ to the second factor. Thus both counit identities hold on tree generators and, since both maps are algebra maps, on all forests.",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Adjoin the empty cut $(P,R)=(1,t)$ and the virtual root cut $(P,R)=(t,1)$. A term of either iterated coproduct is equivalently a labeling of every vertex by its tensor position $1$, $2$, or $3$, with labels nonincreasing along every parent-to-child edge: the root-side trunk has label $3$, any middle components have label $2$, and the detached crown has label $1$. In $(\\Delta\\otimes\\mathrm{id})\\Delta(t)$, the first cut separates the label-$3$ trunk and the second cuts the pruned forest into labels $1$ and $2$; in $(\\mathrm{id}\\otimes\\Delta)\\Delta(t)$, the first cut separates the label-$1$ crown and the second cuts the root component into labels $2$ and $3$. Conversely, any such labeling determines these cuts uniquely: cut each edge where the label drops, and use the empty or virtual root cut when a layer is absent. Jumps from $3$ directly to $1$ are represented by the same edge cut in both iterates, with the missing middle factor supplied by the corresponding extreme cut. Thus both iterates sum over exactly the same finite vertex labelings, and each labeling gives the same three forests with the same multiplicity even when distinct labelings yield isomorphic forests. Coassociativity holds on $t$. Both iterated maps are algebra maps, so the identity holds on all forests.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "The degree-zero part is exactly $\\mathbb Q1$, and the counit and grading checked in steps 1.1 and 2.1 make $H$ a connected graded bialgebra. For linear maps $f,g:H\\to H$, define convolution $f*g=m(f\\otimes g)\\Delta$; coassociativity of $\\Delta$ and associativity of multiplication make this product associative with unit $u\\varepsilon$, where $u$ is the algebra unit map. Put $\\pi=\\mathrm{id}-u\\varepsilon$.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "If $h$ is homogeneous of degree $n$, then $\\pi^{*k}(h)=0$ for $k>n$: the iterated coproduct has $k$ nonnegative homogeneous tensor degrees summing to $n$, so for $k>n$ at least one factor has degree zero and is killed by $\\pi$. Therefore $S=\\sum_{k\\ge0}(-1)^k\\pi^{*k}$ is a finite sum on each homogeneous input. Multiplying its finite partial sum on either side by $\\mathrm{id}=u\\varepsilon+\\pi$ telescopes to $u\\varepsilon$, because the remaining power of $\\pi$ vanishes above degree $n$. Thus $S$ is a two-sided convolution inverse of $\\mathrm{id}$; uniqueness follows by multiplying any two-sided inverse expressions in the associative convolution algebra.",
+          "inputs": [
+            "step 3.1",
+            "algebra",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "step": "5.1",
+          "claim": "For a positive-degree tree $t$, expand $(S*\\mathrm{id})(t)=0$ using the coproduct in [F1]. The two extreme cuts contribute $S(t)$ and $t$, and each nonempty ordinary cut contributes $S(P_C(t))R_C(t)$. Rearranging gives the displayed recursion. For every such cut both the root component and each tree in the pruned forest have fewer vertices than $t$, so induction on degree terminates.",
+          "inputs": [
+            "F1",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "step": "6.1",
+          "claim": "Let $m:H\\otimes H\\to H$ be multiplication and define $g(a\\otimes b)=S(b)S(a)$. In the convolution algebra $\\operatorname{Hom}(H\\otimes H,H)$, both $S\\circ m$ and $g$ are two-sided inverses of $m$: for example, $(g*m)(a\\otimes b)=\\sum S(b_{(1)})(S(a_{(1)})a_{(2)})b_{(2)}=\\varepsilon(a)\\varepsilon(b)1$, and $(m*g)(a\\otimes b)=\\sum a_{(1)}(b_{(1)}S(b_{(2)}))S(a_{(2)})=\\varepsilon(a)\\varepsilon(b)1$; the analogous two products for $S\\circ m$ are $(S*\\mathrm{id})(ab)$ and $(\\mathrm{id}*S)(ab)$. Uniqueness of a two-sided inverse gives $S(ab)=S(b)S(a)$. Since $H$ is commutative, $S(b)S(a)=S(a)S(b)$, so the antipode is multiplicative.",
+          "inputs": [
+            "F1",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The empty edge cut gives $1\\otimes t$ and the virtual root cut gives $t\\otimes1$, yielding the counit and unit terms in step 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The degree-zero unit has $\\Delta(1)=1\\otimes1$ and $S(1)=1$, as used in steps 1.1 and 4.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For the one-vertex tree $\\tau$ there are no nonempty edge cuts, so $\\Delta(\\tau)=\\tau\\otimes1+1\\otimes\\tau$ and $S(\\tau)=-\\tau$ by step 5.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The no-cut one-vertex case is the base of the degreewise recursion in steps 4.1–5.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The two extreme cuts are explicitly separated in the coproduct and in the two-level-cut argument in steps 1.1 and 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Every cut set is a subset of a finite edge set; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a structural theorem and contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a structural theorem and contains no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "one-vertex tree",
+          "calculation": "For $\\tau$, $\\Delta(\\tau)=\\tau\\otimes1+1\\otimes\\tau$ and the recursion gives $S(\\tau)=-\\tau$.",
+          "disposition": "Finite base case of steps 1.1 and 5.1."
+        },
+        {
+          "case": "two-vertex ladder",
+          "calculation": "For the ladder $t$ with one cut, $\\Delta(t)=t\\otimes1+1\\otimes t+\\tau\\otimes\\tau$ and $S(t)=-t+\\tau^2$.",
+          "disposition": "Finite check of the cut formula in step 5.1."
+        },
+        {
+          "case": "two-level coproduct",
+          "calculation": "Expanding either iterate for the two-vertex ladder gives the same six terms: $t\\otimes1\\otimes1$, $1\\otimes t\\otimes1$, $1\\otimes1\\otimes t$, $\\tau\\otimes\\tau\\otimes1$, $\\tau\\otimes1\\otimes\\tau$, and $1\\otimes\\tau\\otimes\\tau$.",
+          "disposition": "Finite check of the compatible two-level cut bijection in step 2.1."
+        }
+      ]
+    },
+    "thm-qftx-subtraction-character-factorization": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qftx-rooted-forest-hopf",
+          "source_section": "Definition",
+          "quote": "Let $H=\\mathbb Q[\\mathcal T]$ be the commutative polynomial algebra generated by $\\mathcal T$; its monomial basis consists of forests, and the degree of a forest is its total number of vertices.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qftx-cut-hopf-antipode",
+          "source_section": "Statement",
+          "quote": "The algebra $H$ is a connected graded bialgebra. Let $u$ be the algebra unit map and $m$ forest multiplication; use convolution $f*g=m(f\\otimes g)\\Delta$ on endomorphisms of $H$, with unit $u\\varepsilon$. It has a unique two-sided convolution inverse $S$ of its identity map.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qftx-laurent-subtraction-target",
+          "source_section": "Definition",
+          "quote": "Then $A=A_-\\oplus A_+$ as a $K$-module, and both summands are subalgebras, with $1\\in A_+$. Define $R:A\\to A_-$ by retaining exactly the strictly negative powers; $1-R$ is the projection onto $A_+$.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qftx-laurent-negative-projection-rota-baxter",
+          "source_section": "Statement",
+          "quote": "For all $x,y\\in A$, $R$ satisfies $$R(x)R(y)=R\\bigl(R(x)y+xR(y)-xy\\bigr).$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "For homogeneous $h$ of degree $n>0$, every term $h_{(1)}\\otimes h_{(2)}$ in $\\widetilde\\Delta(h)$ has both factors of positive degree strictly less than $n$, because $H$ is connected and graded by [F2]. There are finitely many terms by [F1], so induction on $n$ defines $B_\\phi(h)$ and $\\phi_-(h)$ without circularity; extend linearly and set $\\phi_-(1)=1$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Let $x,y$ be positive-degree homogeneous elements with total degree $d$, and assume inductively that $\\phi_-(uv)=\\phi_-(u)\\phi_-(v)$ whenever $\\deg u+\\deg v<d$. Expand $\\Delta(xy)=\\Delta(x)\\Delta(y)$. In $(\\phi_-*\\phi)(x)(\\phi_-*\\phi)(y)$, every summand except the unique pair $(x\\otimes1)(y\\otimes1)$ has left-factor product degree less than $d$; for those terms the induction hypothesis factors $\\phi_-(x_{(1)}y_{(1)})$, while the character property factors $\\phi(x_{(2)}y_{(2)})$. Thus these lower-degree summands agree term-by-term with those in $(\\phi_-*\\phi)(xy)$. The only remaining terms are the top pair $\\phi_-(x)\\phi_-(y)$ in the product and $\\phi_-(xy)$ in the convolution of $xy$. Since $B_\\phi(xy)=(\\phi_-*\\phi)(xy)-\\phi_-(xy)$ and $(\\phi_-*\\phi)(x)=\\phi_-(x)+B_\\phi(x)$, subtracting the top pair gives\n$$B_\\phi(xy)=(\\phi_-*\\phi)(x)(\\phi_-*\\phi)(y)-\\phi_-(x)\\phi_-(y)=\\phi_-(x)B_\\phi(y)+B_\\phi(x)\\phi_-(y)+B_\\phi(x)B_\\phi(y).$$\nThe equality uses commutativity of $A$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "If either $x$ or $y$ has degree zero, multiplicativity follows from $\\phi_-(1)=1$. Otherwise write $X=B_\\phi(x)$ and $Y=B_\\phi(y)$. By the recursion and the identity in [F4],\n$$\\phi_-(xy)=-R B_\\phi(xy)=R\\bigl(R(X)Y+XR(Y)-XY\\bigr)=R(X)R(Y)=\\phi_-(x)\\phi_-(y).$$\nThus degree induction proves that $\\phi_-$ is a character on all of $H$.",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "For positive-degree $h$, expanding its full coproduct gives $(\\phi_-*\\phi)(h)=\\phi_-(h)+B_\\phi(h)=-RB_\\phi(h)+B_\\phi(h)=(1-R)B_\\phi(h)\\in A_+$; also $(\\phi_-*\\phi)(1)=1\\in A_+$. For $x,y\\in H$, the character properties already proved and multiplicativity of $\\Delta$ give\n$$ (\\phi_-*\\phi)(xy)=\\sum\\phi_-(x_{(1)})\\phi_-(y_{(1)})\\phi(x_{(2)})\\phi(y_{(2)})=(\\phi_-*\\phi)(x)(\\phi_-*\\phi)(y),$$\nwhere commutativity of $A$ permits the middle factors to be regrouped. Thus $\\phi_+=\\phi_-*\\phi$ is a character with the stated range.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "step": "5.1",
+          "claim": "For $h\\in H$, multiplicativity and unitality of $\\phi_-$ and the antipode identities in [F2] give\n$$((\\phi_-\\circ S)*\\phi_-)(h)=\\sum\\phi_-(S(h_{(1)}))\\phi_-(h_{(2)})=\\phi_-\\bigl(\\sum S(h_{(1)})h_{(2)}\\bigr)=\\phi_-(u\\varepsilon(h))=u_A\\varepsilon(h),$$\nand likewise\n$$ (\\phi_-*(\\phi_-\\circ S))(h)=\\sum\\phi_-(h_{(1)})\\phi_-(S(h_{(2)}))=\\phi_-\\bigl(\\sum h_{(1)}S(h_{(2)})\\bigr)=u_A\\varepsilon(h).$$\nHence $\\phi_-^{-1}=\\phi_-\\circ S$. From $\\phi_+=\\phi_-*\\phi$, associativity and cancellation by this inverse give $\\phi=\\phi_-^{-1}*\\phi_+$.",
+          "inputs": [
+            "F2",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "At the unit, the recursion fixes $\\phi_-(1)=1$ and convolution gives $\\phi_+(1)=1$, as used in steps 1.1 and 4.1."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "A character is unital, so the zero map is not an input to the statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For a primitive positive-degree generator, the reduced coproduct is empty and the recursion reduces to $\\phi_-(h)=-R\\phi(h)$, as in step 4.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The fixed rooted-tree algebra contains positive-degree generators; the zero-degree-only algebra is outside the stated $H$."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The boundary between negative and nonnegative powers is strict: constants lie in $A_+$ and are removed by $R$ in step 4.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All coproducts and degree recursions are finite; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement gives a factorization, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement gives a factorization, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "primitive character value",
+          "calculation": "If $\\widetilde\\Delta(h)=0$, then $\\phi_-(h)=-R\\phi(h)$ and $\\phi_+(h)=(1-R)\\phi(h)$.",
+          "disposition": "Direct specialization of the recursion and range identity in step 4.1."
+        },
+        {
+          "case": "unit character value",
+          "calculation": "At $h=1$, both factors equal $1$ and the convolution unit is preserved.",
+          "disposition": "Unit case in steps 1.1 and 4.1."
+        }
+      ]
+    },
+    "ex-qftx-nested-two-loop-subtraction": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qftx-rooted-forest-hopf",
+          "source_section": "Definition",
+          "quote": "Define the coproduct on a tree generator by $$\\Delta(t)=t\\otimes1+\\sum_{C\\text{ admissible}}P_C(t)\\otimes R_C(t),$$ where the sum includes the empty edge cut and retains multiplicities of distinct edge subsets.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qftx-laurent-subtraction-target",
+          "source_section": "Definition",
+          "quote": "Define $R:A\\to A_-$ by retaining exactly the strictly negative powers; $1-R$ is the projection onto $A_+$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qftx-subtraction-character-factorization",
+          "source_section": "Statement",
+          "quote": "For each positive-degree homogeneous $h$, write $\\widetilde\\Delta(h)=\\Delta(h)-h\\otimes1-1\\otimes h$ and define recursively $$B_\\phi(h)=\\phi(h)+\\sum_{\\widetilde\\Delta(h)}\\phi_-(h_{(1)})\\phi(h_{(2)}),\\qquad \\phi_-(1)=1,\\qquad \\phi_-(h)=-R B_\\phi(h).$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The only nonempty admissible cut of the two-vertex ladder contributes $\\tau\\otimes\\tau$ to the reduced coproduct, while $\\tau$ itself has no edge cut. Therefore [F3] gives $\\phi_-(\\tau)=-R\\phi(\\tau)=-a\\epsilon^{-1}$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Substituting this value gives $\\phi_-(\\tau)\\phi(\\tau)=(-a\\epsilon^{-1})(a\\epsilon^{-1}+b)=-a^2\\epsilon^{-2}-ab\\epsilon^{-1}$. Hence the preparation is $(c-a^2)\\epsilon^{-2}+(d-ab)\\epsilon^{-1}+e$, and applying $-R$ yields $\\phi_-(t)=(a^2-c)\\epsilon^{-2}+(ab-d)\\epsilon^{-1}$.",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "The primitive-only counterterm is $-R\\phi(t)=-c\\epsilon^{-2}-d\\epsilon^{-1}$, so the recursive counterterm differs by $a^2\\epsilon^{-2}+ab\\epsilon^{-1}$. For $a=1$ and $b=0$ this difference is $\\epsilon^{-2}\\ne0$ in $\\mathbb Q((\\epsilon))$, proving that the primitive-only subtraction generally fails in this nested example.",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes a two-vertex ladder with one proper cut, not an empty forest."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If $a=0$, the nested correction $a^2\\epsilon^{-2}+ab\\epsilon^{-1}$ vanishes, as calculated in step 3.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-vertex tree $\\tau$ is primitive and its counterterm is $-a\\epsilon^{-1}$ in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example fixes the nonempty two-vertex ladder and does not claim a zero-degree graph case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "For $a=1,b=0$ the correction is $\\epsilon^{-2}\\ne0$, while the primitive-only term misses it, by step 3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "A character is defined by explicit values on polynomial generators; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example states a calculation, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example states a calculation, not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "nested correction",
+          "calculation": "For $a=1,b=0,c=d=e=0$, $\\phi_-(t)=\\epsilon^{-2}$ while $-R\\phi(t)=0$.",
+          "disposition": "Finite coefficient check of steps 2.1–3.1."
+        },
+        {
+          "case": "no subdivergence coefficient",
+          "calculation": "For $a=0$, the correction term is zero and the recursion reduces to $-R\\phi(t)$.",
+          "disposition": "Boundary specialization of step 3.1."
+        }
+      ]
+    }
+  }
+}

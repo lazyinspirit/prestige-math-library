@@ -1,0 +1,830 @@
+{
+  "version": 1,
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "batch": 71,
+  "level": "physics-non-fluid-129-2026-10-21-r2",
+  "scope": [
+    "lem-qftx-photon-invariant-measure-isometry",
+    "def-qftx-photon-helicity-bundle",
+    "thm-qftx-photon-rotations-helicity",
+    "prop-qftx-helicity-chern-obstruction",
+    "cex-qftx-fixed-polarization-tensor-factor"
+  ],
+  "contracts": {
+    "lem-qftx-photon-invariant-measure-isometry": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "For every family",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qft-photon-transverse-space",
+          "source_section": "Definition",
+          "quote": "define the positive transverse photon space",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qft-fock-and-test-spaces",
+          "source_section": "Definition",
+          "quote": "use the second-variable-linear pairing",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "**Euclidean norm** of $x$ is",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "weighted-pairing-isometry",
+          "claim": "Multiplication by (2|k|)^-1/2 carries the weighted L2 norm and second-variable-linear pairing to the Lebesgue L2 norm and pairing.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "weighted-transverse-surjectivity",
+          "claim": "The positive inverse multiplier carries every unweighted transverse vector to a weighted transverse vector, and equivalent null sets preserve the a.e. constraint; hence W is onto on the transverse subspaces.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "step 1.1",
+            "given",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For the zero vector both norms and pairings vanish, and steps 1.1 and 2.1 map zero to zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The point k=0 is omitted; step 2.1 proves equivalent null sets on the punctured domain."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The result is an isometry of Hilbert spaces and has no one-sided scalar parameter."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 treats annuli 1/m<=|k|<=m, where the density ratio is bounded above and below."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoint or limiting value occurs in the measure isometry."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The exact Countable Choice assumption is stated in the carrier and supplied in A1; step 2.1 uses the Hilbert-space supplier F1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement asserts an explicit unitary map, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement asserts an explicit unitary map, not a biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-71 author",
+        "notes": "The map W and inverse are explicitly defined. The weighted and Lebesgue measures are not identified as equal; the proof establishes a unitary isomorphism and uses positivity of the density on the punctured domain."
+      }
+    },
+    "def-qftx-photon-helicity-bundle": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "For every family",
+          "uses": [
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-qftx-photon-invariant-measure-isometry",
+          "source_section": "Statement",
+          "quote": "Then $Wf(\\mathbf k)=f(\\mathbf k)/\\sqrt{2\\omega(\\mathbf k)}$ is a unitary map from $\\mathcal H_T^\\nu$ onto $\\mathcal H_T^0$.",
+          "uses": [
+            "1.4",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn",
+          "source_section": "Statement",
+          "quote": "the compactly supported smooth functions",
+          "uses": [
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-polar-coordinates-formula-for-lebesgue-measure",
+          "source_section": "Statement",
+          "quote": "Then $\\sigma$ is a finite Borel measure",
+          "uses": [
+            "1.2",
+            "1.3",
+            "1.5"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-em-sphere-zonal-moments",
+          "source_section": "Statement",
+          "quote": "$\\sigma(S^2)=4\\pi$",
+          "uses": [
+            "1.2",
+            "1.3",
+            "1.5"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-euclidean-chart-measure-agrees-with-polar-surface-measure",
+          "source_section": "Statement",
+          "quote": "Orthogonal transformations preserve it.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-smooth-bump-between-concentric-euclidean-balls",
+          "source_section": "Statement",
+          "quote": "there exists a smooth function",
+          "uses": [
+            "1.5"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "helicity-matrix-identities",
+          "claim": "The transverse projection P is contractive, h is Hermitian with h^2=P, and P commutes with h.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "helicity-projectors",
+          "claim": "The operators P_sigma are orthogonal projections with mutually orthogonal ranges summing to the transverse plane, and each has rank one.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "smooth-line-bundles",
+          "claim": "Smooth constant-rank projectors provide local smooth unit sections of each helicity line.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "rotation-invariance-of-shell-measure",
+          "claim": "Polar decomposition and orthogonal invariance of surface measure show dnu=(r/2)dr dOmega is rotation invariant.",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "annulus-measure",
+          "claim": "Integrating (r/2)dr over a radial interval and using area 4pi gives nu({r0<=|k|<=r1})=pi(r1^2-r0^2), hence sigma-finiteness.",
+          "step": "1.3",
+          "inputs": [
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "componentwise-smooth-approximation",
+          "claim": "Countable Choice and scalar L2 density yield a compactly supported smooth vector field approximating the Lebesgue transverse representative.",
+          "step": "1.4",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "choose"
+          ]
+        },
+        {
+          "id": "puncture-cutoff",
+          "claim": "Smooth cutoffs remove a shrinking ball about zero with vanishing L2 error, using the polar-coordinate volume formula.",
+          "step": "1.5",
+          "inputs": [
+            "F3",
+            "F5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "dense-transverse-test-domain",
+          "claim": "Project the cutoff approximation by P and pull it back by W^-1 to obtain density of D in the weighted transverse space.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 1.4",
+            "step 1.5",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For f=0 the transverse condition, projector identities, and density approximations reduce to zero; steps 1.1, 2.1, and 4.1 include this case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The momentum apex k=0 is explicitly excluded, and step 1.4 approximates by fields supported away from it."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At n=e3, P has rank two and P_sigma has trace and rank one by step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The projector formulas are smooth at every n by step 3.1; the spherical-coordinate pole issue is handled by the north and south gauges in the proposition."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoint or one-sided limit appears in the definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice is the explicit hypothesis A1 and supplies the density choices in step 1.4."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition asserts projectors, ranks, and density, not an if-and-only-if characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition asserts projectors, ranks, and density, not an if-and-only-if characterization."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-71 author",
+        "notes": "Finite fiber check at n=e3 gives P=diag(1,1,0), e_sigma=(e1+i sigma e2)/sqrt(2), and P_sigma of rank one. The radial check gives nu(1<=|k|<=2)=3pi. The fiber formulas are independent of a global polarization frame."
+      }
+    },
+    "thm-qftx-photon-rotations-helicity": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "**Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "1.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-choice-implies-dependent-implies-countable-choice",
+          "source_section": "Statement",
+          "quote": "$$\\mathrm{AC}\\Longrightarrow\\mathrm{DC}\\Longrightarrow\\mathrm{AC}_\\omega",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qftx-photon-helicity-bundle",
+          "source_section": "Definition",
+          "quote": "every orthogonal map preserves $\\nu$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.2",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-stone-one-parameter-unitary-groups",
+          "source_section": "Statement",
+          "quote": "The map $T\\mapsto U(t)=e^{itT}$, computed by the Borel functional calculus",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-heine-borel-rn",
+          "source_section": "Statement",
+          "quote": "A subset $K \\subseteq \\mathbb{R}^n$ is a compact subset of",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-heine-cantor-metric",
+          "source_section": "Statement",
+          "quote": "Then $f$ is uniformly continuous",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-smooth-bump-between-concentric-euclidean-balls",
+          "source_section": "Statement",
+          "quote": "there exists a smooth function",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-extreme-value-metric",
+          "source_section": "Statement",
+          "quote": "image $f[X]$ is bounded above and below",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "rotation-unitarity",
+          "claim": "Rotations preserve transversality and the invariant measure and therefore act unitarily on the weighted transverse space.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "rotation-representation",
+          "claim": "Composition of the displayed pullback-and-vector action gives U(R1)U(R2)=U(R1R2).",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "weighted-lebesgue-intertwiner",
+          "claim": "The radial multiplier W intertwines the weighted and Lebesgue rotation actions because |R^-1k|=|k|.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "helicity-projector-covariance",
+          "claim": "SO(3) equivariance of the cross product gives covariance of P, h, and P_sigma and commutation with U(R).",
+          "step": "1.3",
+          "inputs": [
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "strong-continuity",
+          "claim": "Uniform continuity on a compact rotation-annulus product gives continuity on D, and density plus unitarity extends it to the whole Hilbert space.",
+          "step": "2.2",
+          "inputs": [
+            "F2",
+            "F4",
+            "F6",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "infinitesimal-total-angular-momentum",
+          "claim": "Differentiating the rotation action on D gives the orbital differential term plus the spin-one matrix term and identifies D within the Stone generator domain.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "transversality-cancellation",
+          "claim": "The longitudinal components of the orbital and spin terms cancel on smooth transverse fields.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "separate-terms-fail",
+          "claim": "A smooth transverse bump near e1 for the z-axis rotation has a nonzero longitudinal component under each separate term.",
+          "step": "5.1",
+          "inputs": [
+            "F2",
+            "F5",
+            "step 4.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "stone-self-adjoint-generators",
+          "claim": "Stone's theorem produces a unique self-adjoint generator for each axis subgroup, whose restriction to D is the computed differential expression.",
+          "step": "6.1",
+          "inputs": [
+            "A1",
+            "F3",
+            "step 1.1",
+            "step 2.1",
+            "step 2.2",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For f=0 all rotations and generators return zero, covered by steps 1.1 and 3.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At t=0 the axis subgroup is the identity; the difference quotient and exponential agree in step 6.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Each helicity fiber is one-dimensional by the definition, and step 1.3 proves its projector covariance."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The momentum apex is excluded and every test field is supported in an annulus away from it, as used in step 2.2."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The theorem uses continuous rotation parameters and no one-sided interval endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Axiom of Choice is explicit in A1 and is the stated hypothesis of Stone's theorem in step 6.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement gives the representation, covariance, and generator formula, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement gives the representation, covariance, and generator formula, not a biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-71 author",
+        "notes": "The exact matrix action preserves the transverse constraint. The z-axis bump check shows the separate L and S pieces are not operators on the transverse space. Stone's theorem supplies self-adjoint generators; no essential-self-adjointness claim is made for their restriction to D."
+      }
+    },
+    "prop-qftx-helicity-chern-obstruction": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qftx-photon-helicity-bundle",
+          "source_section": "Definition",
+          "quote": "The fibers $\\mathcal L_{\\sigma,\\mathbf n}=\\operatorname{ran}P_\\sigma(\\mathbf n)$ form smooth complex line subbundles",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-em-sphere-zonal-moments",
+          "source_section": "Statement",
+          "quote": "$\\sigma(S^2)=4\\pi$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-general-stokes-theorem",
+          "source_section": "Statement",
+          "quote": "With $j:\\partial M\\hookrightarrow M$ and the outward-normal-first orientation",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "local-helicity-connection",
+          "claim": "The spherical circular basis is a local unit helicity frame and direct differentiation gives A_sigma=-sigma cos(theta)dphi and F_sigma=sigma sin(theta)dtheta wedge dphi.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "north-south-transition",
+          "claim": "The north and south phase gauges extend over their respective poles and have overlap transition e^(2 i sigma phi) of winding 2sigma.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "berry-flux-and-standard-chern-sign",
+          "claim": "Sphere area gives Berry flux 2sigma; converting Omega=iF through the stated standard Chern-Weil convention yields c1=-2sigma.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "no-global-unit-helicity-section",
+          "claim": "A global unit section would give a global Berry one-form with curvature F_sigma; Stokes forces zero flux, contradicting the nonzero value from step 2.1.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F3",
+            "step 2.1",
+            "step 1.2",
+            "assume-contra",
+            "algebra",
+            "discharge-contradiction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The proposition concerns the nonempty helicity fibers over every point of S2."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For sigma=+1 and sigma=-1 the fluxes are respectively 4pi and -4pi, both nonzero in step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Each line fiber has rank one by F1, and the explicit local frame is verified in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The spherical frame is singular at both poles, and the north and south gauges extend over the corresponding poles in step 1.2."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The transition map is evaluated on the equator as phi traverses 0 to 2pi in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice is explicitly assumed in A1 and supplies the hypothesis of the Stokes theorem used in step 3.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The proposition gives the Chern and flux values and a nonexistence consequence, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The proposition gives the Chern and flux values and a nonexistence consequence, not a biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-71 author",
+        "notes": "Finite sign checks give Berry flux +4pi for sigma=+1 and -4pi for sigma=-1, while the stated Chern-Weil convention gives c1=-2sigma. The proof concerns helicity lines and does not infer nontriviality of the rank-two transverse complex bundle."
+      }
+    },
+    "cex-qftx-fixed-polarization-tensor-factor": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qftx-photon-helicity-bundle",
+          "source_section": "Definition",
+          "quote": "Each $P_\\sigma(\\mathbf n)$ is a rank-one orthogonal projector on the complex transverse plane $P(\\mathbf n)\\mathbb C^3$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-qftx-helicity-chern-obstruction",
+          "source_section": "Statement",
+          "quote": "Thus neither helicity line admits a global smooth unit section.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qftx-photon-rotations-helicity",
+          "source_section": "Statement",
+          "quote": "This total generator preserves transversality, while its orbital and spin terms generally do not separately preserve the transverse space.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "fixed-vector-longitudinal-component",
+          "claim": "At momentum k=kappa e1 the fixed Cartesian circular vector has longitudinal component k dot e_sigma^0=kappa/sqrt(2), so it is not in the transverse helicity fiber.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "smooth-helicity-frame-obstruction",
+          "claim": "The nonzero Chern result excludes any global smooth unit helicity frame, even with momentum-dependent vectors.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "fixed-frame-claim-refuted",
+          "claim": "Because the vector is not transverse at this permitted nonzero momentum, the fixed pair is not a global transverse helicity frame or the asserted factor.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "discharge-contradiction"
+          ]
+        },
+        {
+          "id": "separate-position-spin-actions",
+          "claim": "The cited total generator has orbital and spin terms that do not separately act on the constrained transverse space, so the proposed fixed-frame canonical factor is not rotation covariant.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample selects a nonzero momentum and a nonzero fixed polarization vector."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The chosen momentum has kappa>0; k=0 is excluded from the transverse-space domain, as stated in the definition."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Taking kappa=1 in step 1.1 gives the finite nonzero dot product 1/sqrt(2)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Both helicity signs give the same nonzero longitudinal magnitude at k=kappa e1 in step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or limiting endpoint occurs in the counterexample."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The counterexample uses one explicit vector and no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The counterexample refutes a proposed global frame, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The counterexample refutes a proposed global frame, not a biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-71 author",
+        "notes": "The explicit kappa=1 check gives a longitudinal component of magnitude 1/sqrt(2). The Chern obstruction concerns smooth helicity frames; the item does not rule out every abstract Hilbert-space tensor-product isomorphism."
+      }
+    }
+  }
+}

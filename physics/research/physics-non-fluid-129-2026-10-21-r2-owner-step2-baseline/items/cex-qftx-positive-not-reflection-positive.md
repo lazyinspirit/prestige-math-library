@@ -1,0 +1,45 @@
+---
+id: cex-qftx-positive-not-reflection-positive
+kind: counterexample
+title: Ordinary positive measure need not be reflection positive
+status: draft
+origin: pipeline
+pipeline_run: physics-non-fluid-129-2026-10-21-r2
+dependency_level: 1
+domain: mathematics
+library: mathematics
+deps:
+  - def-qftx-euclidean-limit-data
+dependency_roles:
+  def-qftx-euclidean-limit-data: mathematical-premise
+proof_strategy: direct
+provenance:
+  statement: ai-generated
+  proof: ai-generated
+generation:
+  role: counterexample
+verification:
+  precheck: pass
+---
+
+## Statement refuted
+
+A positive probability measure with a positive-definite ordinary covariance matrix must be reflection positive for the involution exchanging two sites.
+
+## Facts & Assumptions
+
+**Given:** Fix a real parameter $r$ with $0<r<1$. On the four-point set $\{(-1,-1),(-1,1),(1,-1),(1,1)\}$ assign probabilities
+
+$$
+\mathbb P(X=1,Y=1)=\mathbb P(X=-1,Y=-1)=\frac{1-r}{4},\qquad \mathbb P(X=1,Y=-1)=\mathbb P(X=-1,Y=1)=\frac{1+r}{4}.
+$$
+
+The two sites are exchanged by reflection, so $\Theta X=Y$ and $\Theta Y=X$.
+
+[F1] [[def-qftx-euclidean-limit-data]]: ordinary positivity tests $\mathbb E[\bar F F]\ge0$, while reflection positivity tests $\mathbb E[(\Theta F)F]$ for positive-site polynomials.
+
+## Counterexample
+
+1.1 All four weights are positive and sum to $(1-r)/2+(1+r)/2=1$. Symmetry of the support weights gives $\mathbb E[X]=\mathbb E[Y]=0$, and $X^2=Y^2=1$ at every support point, so the covariance diagonal is $(1,1)$. The equal-sign outcomes have total probability $(1-r)/2$ and product $XY=1$; the opposite-sign outcomes have total probability $(1+r)/2$ and product $XY=-1$. Therefore $\mathbb E[XY]=(1-r)/2-(1+r)/2=-r$. [given, algebra]
+
+2.1 The covariance matrix is $C=\begin{pmatrix}1&-r\\-r&1\end{pmatrix}$. For real $u,v$, $(u,v)C(u,v)^{\mathsf T}=(u-rv)^2+(1-r^2)v^2,$ which is strictly positive unless $(u,v)=(0,0)$ because $0<r<1$. Thus $C$ is positive definite and the probability law is ordinarily positive. For the positive-site polynomial $F=Y$, reflection positivity would require $\mathbb E[(\Theta F)F]=\mathbb E[XY]\ge0$, but this is $-r<0$. Hence the statement is false. [F1, given, step 1.1, algebra] ∎ 

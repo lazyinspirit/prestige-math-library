@@ -1,0 +1,40 @@
+import {readFileSync,writeFileSync,mkdirSync,copyFileSync} from 'node:fs';
+import {createHash} from 'node:crypto';
+import {parseFrontmatter} from '../../tools/physics-support/content-policy-lib.mjs';
+import {splitFrontmatter,sourceSectionText} from '../../tools/physics-support/facts-block.mjs';
+import {itemHashGuard} from '../../tools/physics-support/item-hash.mjs';
+const run='physics-non-fluid-129-2026-10-21-r2',base='research/'+run+'-owner-step2-emg26-choice';
+const sha=x=>createHash('sha256').update(x).digest('hex');
+const before=JSON.parse(readFileSync(base+'/before-index.json','utf8'));
+const helper='def-emg-fx-continuous-compact-top-form-integral';
+const changed=[helper,'def-emg-fx-nonlinear-lagrangian','prop-emg-fx-nonlinear-maxwell-variation'];
+const others=['cex-emg-fx-eft-order-does-not-control-derivatives','post-emg-fx-classical-constitutive-adoption'];
+const bindings={};
+for(const id of [...changed,...others]){
+ const path='items/'+id+'.md',raw=readFileSync(path),text=raw.toString(),{fm,body}=splitFrontmatter(text);
+ const dest=base+'/final/'+path;mkdirSync(dest.slice(0,dest.lastIndexOf('/')),{recursive:true});copyFileSync(path,dest);
+ bindings[id]={path,sha256:sha(raw),itemHashGuard:itemHashGuard(text),frontmatter_sha256:sha(fm),body_sha256:sha(body),archive:dest};
+ if(before.inputs[path]){
+  const old=readFileSync(before.inputs[path].archive,'utf8');
+  bindings[id].before=before.inputs[path];
+  bindings[id].frontmatter_unchanged=splitFrontmatter(old).fm===fm;
+ }
+}
+const ht=readFileSync('items/'+helper+'.md','utf8'),hfm=parseFrontmatter(splitFrontmatter(ht).fm);
+const manifest='research/'+run+'-batch-26.pages.json',mdoc=JSON.parse(readFileSync(manifest,'utf8'));
+const a=mdoc.find(p=>p.id==='emg-fx11');if(!a)throw Error('Missing A home');
+const newRow={id:helper,kind:hfm.kind,domain:hfm.domain,title:hfm.title,reference:'items/'+helper+'.md',design_state:'Root-authorized local continuous-top-form integration helper; proof authored, ordinary native acceptance and current metadata pending.',dependency_level:0,deps:hfm.deps,dependency_roles:hfm.dependency_roles,physical_scope:null,statement:sourceSectionText(splitFrontmatter(ht).body,'Definition').trim(),provenance:hfm.provenance,sources:hfm.sources,library:'mathematics'};
+const existing=changed.filter(id=>id!==helper).map(id=>{
+ const text=readFileSync('items/'+id+'.md','utf8'),old=a.items.find(x=>x.id===id);if(!old)throw Error('Missing '+id);
+ return {id,page:'emg-fx11',category:a.category,path:'items/'+id+'.md',current_source:bindings[id],source_frontmatter:{append_deps:[helper],append_dependency_roles:{[helper]:'mathematical-premise'}},manifest_statement:{expected:old.statement,replacement:sourceSectionText(splitFrontmatter(text).body,id.startsWith('def-')?'Definition':'Statement').trim()},manifest_deps_append:[helper],manifest_dependency_roles_append:{[helper]:'mathematical-premise'}};
+});
+const proposal={version:1,run,reviewer:'/root/qsm_boundary',applied:false,authority:'Root owns all existing frontmatter, inventory, manifests, contracts, levels, readiness and native transitions',manifest:{path:manifest,sha256:sha(readFileSync(manifest))},new_item:{page:'emg-fx11',category:a.category,insert_before:'def-emg-fx-nonlinear-lagrangian',source:bindings[helper],manifest_row:newRow},existing_items:existing,focused_contracts:{path:'research/'+run+'-batch-26.proof-contracts.json',operations:['Add the genuine new helper proof worksheet and all exact current source citations.','Regenerate changed nonlinear Definition and variation proof worksheets/citation uses while preserving authentic boundary review history.','Refresh exact changed Definition quote mirrors in actual existing consumer contracts, including batch28 postulate if it carries a Definition quotation.']},levels_tentative:{[helper]:0,'def-emg-fx-nonlinear-lagrangian':1,'prop-emg-fx-nonlinear-maxwell-variation':2,'cex-emg-fx-eft-order-does-not-control-derivatives':2,'post-emg-fx-classical-constitutive-adoption':2},level_authority:'Root must recompute complete actual dependency graph; these are expectations, not accepted numeric metadata',other_consumer_homes:[{id:'cex-emg-fx-eft-order-does-not-control-derivatives',batch:'26',page:'emg-fx11-examples',source_changed:false},{id:'post-emg-fx-classical-constitutive-adoption',batch:'28',page:'emg-fx13',category:'einstein-maxwell-models',source_changed:false}]};
+writeFileSync(base+'/metadata-proposal.json',JSON.stringify(proposal,null,2)+'\n');
+writeFileSync(base+'/final-source-bindings.json',JSON.stringify(bindings,null,2)+'\n');
+const oldChanges=JSON.parse(readFileSync(base+'/source-changes.json','utf8'));
+for(const r of oldChanges.existing_body_only_changes)r.after_sha256=bindings[r.id].sha256;
+writeFileSync(base+'/source-changes.json',JSON.stringify(oldChanges,null,2)+'\n');
+const checks=['precheck-final','layout-final','render-final'].map(n=>{const path=base+'/'+n+'-record.json';const r=JSON.parse(readFileSync(path,'utf8'));if(r.exit_code!==0)throw Error(path);return{path,sha256:sha(readFileSync(path)),...r,output:{path:base+'/'+n+'.txt',sha256:sha(readFileSync(base+'/'+n+'.txt'))}};});
+const decision={version:1,run,batch:'26',cycle:1,reviewer:'/root/qsm_boundary',independent_acceptance:false,native_transition:false,readiness:false,context_status:'provisional actual source/body review while other native writers remain active; Root owns final current metadata and native disposition',findings:[{id:'imported-countable-choice-dependency',disposition:'false-positive',reason:'The AC reference formulates only the conditional forward implication AC implies AC_omega. The exact Countable Choice definition and its use do not assume or derive full AC. Actual relevant integration and geometry suppliers declare AC_omega, and the local finite cover uses only finitely many choices.'},{id:'continuous-action-density-integral',disposition:'locally-repaired-source-pending-root-metadata-adoption',reason:'The imported top-form and chart integration interfaces require smooth forms. L in C2 does not guarantee that regularity. A genuine local continuous-top-form extension now supplies finite chart sums, chart independence by the actual Riemann change-of-variables supplier, compatibility on smooth forms, linearity/locality and a uniform coefficient bound. The nonlinear items consume it without strengthening L or excluding any permitted variation.'}],changed_sources:changed.map(id=>bindings[id]),consumer_reviews:[{id:'prop-emg-fx-nonlinear-maxwell-variation',disposition:'repaired',reason:'Its C1 vector-field divergence and parameter-variation densities use the new continuous integral; finite-cover C1 integration by parts and all allowed compact smooth one-form variations are preserved.'},{id:'cex-emg-fx-eft-order-does-not-control-derivatives',disposition:'unaffected',reason:'Read the complete current counterexample. It uses only fixed bundle curvature, invariants and coefficient units, and explicitly asserts no field equation; the action-integral extension changes none of those uses.',source:bindings[others[0]]},{id:'post-emg-fx-classical-constitutive-adoption',disposition:'unaffected',reason:'Read the complete current postulate. It adopts the polynomial constitutive assignment and small-invariant regime label, with no solution, error bound or empirical assertion. Its optional reference to separately derived field equations retains their exact supplier conditions; no source edit is needed.',source:bindings[others[1]]}],checks,metadata_proposal:{path:base+'/metadata-proposal.json',sha256:sha(readFileSync(base+'/metadata-proposal.json'))},source_bindings:{path:base+'/final-source-bindings.json',sha256:sha(readFileSync(base+'/final-source-bindings.json'))},before_bindings:{path:base+'/before-index.json',sha256:sha(readFileSync(base+'/before-index.json'))}};
+writeFileSync(base+'/decision.json',JSON.stringify(decision,null,2)+'\n');
+console.log('Sealed3 authorized source files; exact Root metadata proposal and5 current source bindings written.');

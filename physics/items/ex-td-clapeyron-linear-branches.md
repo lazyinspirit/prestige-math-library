@@ -7,7 +7,7 @@ origin: pipeline
 domain: physics
 library: physics
 physical_scope: A constructed pair of one-component Gibbs charts satisfying the same-tag, exchange, and reversible-heat assumptions with core closed forward and reverse compound records of the local Clapeyron theorem; the constants are illustrative and are not observations.
-dependency_level: 11
+dependency_level: 3
 deps:
   - def-td-process-and-protocol
   - post-td-macroscopic-second-law
@@ -54,7 +54,11 @@ Fix $T_0=300\,\mathrm K$, $p_0=10^5\,\mathrm{Pa}$, $g_0=1\,\mathrm{J\,mol^{-1}}$
 $$
 g_i(T,p)=g_0-s_i(T-T_0)-\frac{c}{2T_0}(T-T_0)^2+v_i(p-p_0)-\frac{\kappa}{2}(p-p_0)^2,
 $$
-for $i\in\{\alpha,\beta\}$, with $s_\alpha=2\,\mathrm{J\,mol^{-1}K^{-1}}$, $s_\beta=5\,\mathrm{J\,mol^{-1}K^{-1}}$, $v_\alpha=1.0\times10^{-3}\,\mathrm{m^3\,mol^{-1}}$, and $v_\beta=4.0\times10^{-3}\,\mathrm{m^3\,mol^{-1}}$. Set $G_i=n_i g_i$ and use the natural Gibbs assignments $S_i=-\partial_TG_i$, $V_i=\partial_pG_i$, $\mu_i=\partial_{n_i}G_i$, and $U_i=G_i+TS_i-pV_i$. Thus same-tag homogeneity is explicit. Assume the constructed model stipulates an attained coexistence endpoint with energy, volume, and species pairwise transfer curves feasible for all sufficiently small increments of either sign while every nonselected phase and auxiliary coordinate is fixed, and a reversible $\alpha\to\beta$ conversion in contact with an ideal thermal reservoir at $T_0$. The reversible conversion is a record of the complete finite isolated compound comprising converted phases, the fixed-temperature reservoir, work stores and all auxiliaries, with equilibrium endpoints and additive component entropy. The forward and reverse complete-compound records are admitted in the core closed class of [[def-td-process-and-protocol]], each with a supplied positive total mass, defined endpoint center-of-mass velocities in its fixed Galilean chart, and zero endpoint changes of compound center-of-mass kinetic and separately tracked external-field energies. Every component other than the converted phases and reservoir has zero entropy change, and the reservoir change is $-Q/T_0$. These are the exact additional entropy premises of the local Clapeyron theorem. These parameters and endpoint assumptions are model inputs, not empirical claims.
+for $i\in\{\alpha,\beta\}$, with $s_\alpha=2\,\mathrm{J\,mol^{-1}K^{-1}}$, $s_\beta=5\,\mathrm{J\,mol^{-1}K^{-1}}$, $v_\alpha=1.0\times10^{-3}\,\mathrm{m^3\,mol^{-1}}$, and $v_\beta=4.0\times10^{-3}\,\mathrm{m^3\,mol^{-1}}$. Set $G_i=n_i g_i$ and use the natural Gibbs assignments $S_i=-\partial_TG_i$, $V_i=\partial_pG_i$, $\mu_i=\partial_{n_i}G_i$, and $U_i=G_i+TS_i-pV_i$. Thus same-tag homogeneity is explicit. Assume the constructed model stipulates an attained coexistence endpoint with energy, volume, and species pairwise transfer curves feasible for all sufficiently small increments of either sign while every nonselected phase and auxiliary coordinate is fixed, and a reversible $\alpha\to\beta$ conversion in contact with an ideal thermal reservoir at $T_0$. The reversible conversion is a record of the complete finite isolated compound comprising converted phases, the fixed-temperature reservoir, work stores and all auxiliaries, with equilibrium endpoints and additive component entropy. The forward and reverse complete-compound records are admitted in the core closed class of *Thermodynamic process records and transfer conventions*, each with a supplied positive total mass, defined endpoint center-of-mass velocities in its fixed Galilean chart, and zero endpoint changes of compound center-of-mass kinetic and separately tracked external-field energies. Every component other than the converted phases and reservoir has zero entropy change, and the reservoir change is $-Q/T_0$. These are the exact additional entropy premises of the local Clapeyron theorem. These parameters and endpoint assumptions are model inputs, not empirical claims.
+
+## Example references
+
+[[def-td-process-and-protocol]]
 
 ## Facts & Assumptions
 

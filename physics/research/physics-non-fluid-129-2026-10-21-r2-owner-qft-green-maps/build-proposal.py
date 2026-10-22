@@ -1,0 +1,167 @@
+from pathlib import Path
+import yaml
+base=Path('research/physics-non-fluid-129-2026-10-21-r2-owner-qft-green-maps')
+(base/'proposed/items').mkdir(parents=True,exist_ok=True)
+def write(id,title,deps,body):
+ meta=dict(id=id,kind='lemma' if id.startswith('lem-') else 'theorem',title=title,status='draft',origin='pipeline',domain='mathematics',library='mathematics',physical_scope=None,dependency_level=2 if id.startswith('lem-') else 3,deps=deps,dependency_roles={d:'mathematical-premise' for d in deps},proof_strategy='constructive',provenance={'statement':'literature-derived','proof':'ai-altered'},sources={'references':[{'title':'Christian Bär, Nicolas Ginoux, and Frank Pfäffle, Wave Equations on Lorentzian Manifolds and Quantization','url':'https://arxiv.org/pdf/0806.1036','locator':'Chapter 3 §§3.2–3.4, Theorems 3.2.11–3.2.12 and Corollary 3.4.3, printed pp. 85–89. Local analytic construction here instead uses the explicitly cited published symmetric-hyperbolic suppliers.'}]},verification={'precheck':'pending'})
+ (base/'proposed/items'/f'{id}.md').write_text('---\n'+yaml.safe_dump(meta,sort_keys=False,allow_unicode=True)+'---\n\n'+body.strip()+'\n')
+write('lem-qftx-smooth-scalar-cauchy-evolution','Smooth scalar Cauchy evolution, metric causal support and finite-slab estimates',[
+'def-qftx-green-hyperbolic-interface','def-countable-choice','def-dependent-choice','thm-gr-smooth-cauchy-temporal-splitting','thm-gr-local-symmetric-hyperbolic-well-posedness','thm-gr-periodic-symmetric-hyperbolic-existence','thm-gr-periodic-symmetric-hyperbolic-smooth-persistence','lem-gr-periodic-sobolev-embedding','thm-gr-normal-neighborhood-causal-cone','lem-gr-position-vector-differential','lem-gr-compact-future-cone-intersections','lem-gr-globally-hyperbolic-causal-structure','lem-gr-basic-limit-curve','thm-gr-auxiliary-complete-riemannian-metric','lem-gr-cauchy-set-topology-and-graph','lem-gr-causal-curve-conventions','thm-smooth-partitions-of-unity-exist-on-manifolds','thm-divergence-theorem-for-bounded-piecewise-c-one-domains','thm-gronwall-integral-inequality'],r'''
+## Statement
+
+Assume Countable Choice and Dependent Choice. Let $(M,g,N)$ and $P=-\Box_g+V$ have the smooth geometric and scalar-operator hypotheses of the Green-data definition, with arbitrary real $V\in C^\infty(M)$. No Green maps are assumed. Choose a smooth Cauchy temporal splitting $M=\mathbb R\times S$, $g=-\alpha^2dt^2+h_t$, with $\alpha>0$, and write $S_a=\{t=a\}$ and $\nu=\alpha^{-1}\partial_t$. For every $a\in\mathbb R$, $u_0,u_1\in C_c^\infty(S_a;\mathbb R)$ and $f\in C_c^\infty(M;\mathbb R)$ there is a unique smooth solution
+
+$$Pu=f,\qquad u|_{S_a}=u_0,\qquad \nu(u)|_{S_a}=u_1.$$
+
+For $t\ge a$ its support is contained in $J^+(K_+)$, where $K_+=\operatorname{supp}u_0\cup\operatorname{supp}u_1\cup(\operatorname{supp}f\cap\{t\ge a\})$; the time-reversed assertion holds for $t\le a$. These are supports in the indicated closed half-spacetimes. On every finite time slab these support sets are compact. For fixed compact input supports, each compact-output derivative seminorm of $u$ is bounded by a constant times a finite sum of input derivative seminorms. Finally, on every smooth spacelike Cauchy hypersurface $\Sigma$, a smooth homogeneous solution with $u|_\Sigma=\nu(u)|_\Sigma=0$ vanishes identically, without a support hypothesis on that solution.
+
+## Statement references
+
+[[def-qftx-green-hyperbolic-interface]]
+
+[[thm-gr-smooth-cauchy-temporal-splitting]]
+
+[[thm-gr-local-symmetric-hyperbolic-well-posedness]]
+
+## Facts & Assumptions
+
+**Given:** The smooth globally hyperbolic four-manifold and arbitrary smooth real potential of the Statement, compact smooth input data, and Countable Choice and Dependent Choice.
+
+[F1] [[thm-gr-smooth-cauchy-temporal-splitting]] supplies the smooth global orthogonal splitting and the divergence of its temporal function along every inextendible causal curve. Its assumptions are Countable Choice and Dependent Choice; no compactness of $S$ is required.
+
+[F2] [[thm-gr-local-symmetric-hyperbolic-well-posedness]], [[thm-gr-periodic-symmetric-hyperbolic-existence]] and [[thm-gr-periodic-symmetric-hyperbolic-smooth-persistence]] give local smooth solutions for smooth symmetric systems with positive time matrix, with a common time on a bounded $H^s$ data class, $s\ge5$, and finite-speed independence of extensions. They permit coefficients depending smoothly on time and space. [[lem-gr-periodic-sobolev-embedding]] supplies all needed local sup-norm estimates after cutoff and periodic extension. These are proved local suppliers, not assumed scalar wave solvability.
+
+[F3] [[thm-gr-normal-neighborhood-causal-cone]] identifies the local causal cone in each convex normal neighborhood with the exponential image of the Lorentzian cone. [[lem-gr-position-vector-differential]] gives $dD_q^2=2g(P(q,\cdot),\cdot)$; away from the vertex the null boundary is consequently a smooth null hypersurface.
+
+[F4] [[lem-gr-globally-hyperbolic-causal-structure]] gives closedness of the causal relation and compactness of diamonds over compact sets. [[lem-gr-basic-limit-curve]] and [[thm-gr-auxiliary-complete-riemannian-metric]] give convergent causal half-line limits for unbounded auxiliary lengths and compactness of closed auxiliary bounded sets. The proof of [[lem-gr-compact-future-cone-intersections]] establishes compact truncations by Cauchy volume-time levels; step 1.1 below explicitly transfers its argument to the smooth time used here. [[lem-gr-cauchy-set-topology-and-graph]] supplies closedness and the two sides of every Cauchy hypersurface, and [[lem-gr-causal-curve-conventions]] supplies inextendible extensions.
+
+[F5] Smooth partitions subordinate to coordinate covers exist by [[thm-smooth-partitions-of-unity-exist-on-manifolds]]. The flux integrals below use [[thm-divergence-theorem-for-bounded-piecewise-c-one-domains]] in coordinate charts, and zero-energy and finite-time bounds use [[thm-gronwall-integral-inequality]].
+
+[A1] [[def-countable-choice]] is used in the analytic suppliers and countably many slab constructions; [[def-dependent-choice]] is used in the causal limit-curve and splitting suppliers. No arbitrary-index choice is used.
+
+## Proof
+
+**Proof technique:** constructive.
+
+1.1 (Compact geometric regions.) For any compact $K$, $J^+(K)\cap\{t\le b\}$ is compact. Here is the needed argument, so volume time is not silently replaced by an arbitrary function in [F4]. First take $K=\{p\}$. The set is closed. If endpoints in it escape every auxiliary compact ball, joining causal curves from $p$ have unbounded auxiliary lengths. Their half-line limit from [F4] is future inextendible and has $t\le b$ everywhere, contradicting [F1]. Bounded lengths instead put the endpoints in a compact auxiliary ball. Thus the one-point truncation is compact. Cover a general compact $K$ by finitely many chronological futures $I^+(p_j)$ of points slightly to its past, as in the finite-cover proof of [F4]. Its future truncation is a closed subset of the finite union of the one-point truncations. Time reversal gives the past assertion. We also need compactness of $J^-(q)\cap J^+(\Sigma)$ for any smooth Cauchy hypersurface $\Sigma$. This set is closed by its Cauchy sides and [F4]. If curves from $\Sigma$ to $q$ through an escaping sequence have unbounded lengths, parametrize backwards from $q$ and take a past-inextendible limit, all of whose points lie in the closed future side of $\Sigma$. Such a curve cannot meet $\Sigma$: its earlier nonconstant subarc would then lie in $\Sigma$, contrary to acausality. Its inextendible extension cannot meet $\Sigma$ to the future of $q$ either, again by acausality and the fact $q\in J^+(\Sigma)$. This contradicts the Cauchy property. Bounded lengths give compact auxiliary containment as before. The empty and singleton cases $q\in I^-(\Sigma)$ and $q\in\Sigma$ are immediate. [F1, F4, A1, construct]
+
+1.2 (Explicit first-order reduction.) In a splitting chart set $\rho=\alpha\sqrt{\det h}$, $H=(h^{ij})$, $v=\alpha^{-1}\partial_tu$ and $w_i=\partial_i u$. Direct expansion of $\Box_g$ gives
+
+$$P u=\alpha^{-2}\partial_t^2u+b\partial_tu-h^{ij}\partial_i\partial_ju-c^j\partial_ju+Vu,\qquad b=\rho^{-1}\partial_t(\rho\alpha^{-2}),\quad c^j=\rho^{-1}\partial_i(\rho h^{ij}).$$
+
+Solve instead the linear system for $U=(u,v,w_1,w_2,w_3)$ given by $u_t=\alpha v$, $(w_i)_t=\alpha\partial_iv+(\partial_i\alpha)v$, and
+
+$$v_t=\alpha h^{ij}\partial_iw_j+\alpha c^jw_j-\alpha Vu-(\alpha_t/\alpha+\alpha^2b)v+\alpha f.$$
+
+Multiplying the $w$ equations by $H$ gives symmetric principal matrices $A^0=\operatorname{diag}(1,1,H)$ and $(A^i)_{v,w_j}=(A^i)_{w_j,v}=-\alpha h^{ij}$, all other principal spatial entries zero. Thus $A^0>0$. A smooth solution of this system with initial $w_i=\partial_i u_0$ has $(w_i-\partial_iu)_t=0$, so these constraints remain zero, and the displayed expansion proves equivalence with $Pu=f$. Normal data initialize $v=u_1$. No sign of $V$ enters positivity of the principal matrices. [F1, given, algebra, construct]
+
+2.1 (Local solvability and a time independent of data size.) Restrict to a relatively compact splitting chart. Extend $A^0$ periodically by a smooth cutoff and interpolation with a constant positive matrix; convexity preserves positivity. Extend the other matrices and lower terms smoothly, agreeing on a smaller chart. To treat the source without an affine scaling error append the scalar $z$ with $z_t=0$, replace $f$ by $fz$, and initialize $z=1$. This is a homogeneous linear symmetric system in $(U,z)$, with coefficient family independent of its state and state domain all of $\mathbb R^6$. Apply [F2] at $s=5$ to the fixed class of data of $H^5$ norm at most one, with fixed compact admissible state balls containing their values by Sobolev embedding. An arbitrary smooth datum is multiplied by a positive constant making its norm at most one; after solving, divide by the same constant. Linearity restores the original datum and $z=1$. Consequently the local time depends on the coefficient extension and chart margins, not on the magnitude or higher norms of the datum. Smooth persistence applies on that same time. The coordinate finite-speed estimate of [F2] makes restrictions independent of the extension in smaller coordinate cones. This supplies local solutions and gluing uniqueness, but the sharper support assertion is proved next. [step 1.2, F2, F5, construct]
+
+2.2 (Exact metric-cone energy.) Write the reduced system $A^\mu\partial_\mu U+CU=F$. Its current $j^\mu=U^{\mathsf T}A^\mu U$ obeys
+
+$$\partial_\mu j^\mu=U^{\mathsf T}(\partial_\mu A^\mu-C-C^{\mathsf T})U+2U^{\mathsf T}F.$$
+
+On compact charts, the right side is at most $C_0j^0+C_0|F|^2$. More precisely, for a covector $(\tau,\xi)$,
+
+$$U^{\mathsf T}(\tau A^0+\xi_iA^i)U=\tau(u^2+v^2+h^{ij}w_iw_j)-2\alpha v h^{ij}\xi_iw_j\ge0\quad\text{if }\tau\ge\alpha\sqrt{h^{ij}\xi_i\xi_j}.$$
+
+The inequality follows from Cauchy–Schwarz for $H$ and $2ab\le a^2+b^2$; its condition is exactly the future causal covector condition for $g=-\alpha^2dt^2+h$. In a sufficiently small convex normal chart, the boundary of the backward causal cone of a vertex has this outward null conormal, by [F3]. Truncate below the vertex and above a spacelike base, apply the coordinate divergence theorem, and discard the nonnegative lateral flux. Zero source and zero Cauchy data on the base give zero energy by Gronwall, hence zero solution up to the vertex by continuity. Every truncated cone away from its vertex is piecewise smooth: its null side is the smooth exponential null cone and its intersections with the temporal levels are transverse. No regularity of a global cut locus is asserted or used. This proves local dependence on the actual metric causal cone, rather than only a larger coordinate cone. Bounded lower-order terms, including arbitrary $V$ and its derivatives on each compact set, change $C_0$ and require no sign assumption. [step 1.2, F3, F5, algebra]
+
+2.3 (From local cones to global domain of dependence.) Fix a vertex $q$ to the future of the initial hypersurface and its compact truncated causal past from step 1.1. Cover it by finitely many smaller convex normal neighborhoods whose closures lie in coordinate neighborhoods as above. On this compact set the temporal derivative of a causal curve controls its coordinate speed: $h(\dot x,\dot x)\le\alpha^2\dot t^2$ and uniform upper/lower metric bounds give $|dx/dt|\le C$. Shrink a finite cover once more and choose $\delta>0$ smaller than its chart margins divided by $C+1$. Every backward causal segment of temporal duration below $\delta$ then lies in one of the larger normal neighborhoods. Local cones from step 2.2 therefore pass the zero-data assertion from one temporal cross-section of the truncated past to the next, in finitely many strips. At the initial surface use its local spacelike graph charts and the same cone flux with that graph as base; a finite cover of the compact shadow on the initial surface gives a uniform first strip. This proves zero at $q$ whenever the source vanishes on its truncated past and the initial data vanish on its shadow. Applying this to differences proves global uniqueness, even for smooth solutions with no support assumption, since only their values on a compact truncated past enter. Applying it outside the causal future of the source and data proves the claimed one-sided support; the source-free backward statement is its time reverse. [step 1.1, step 2.2, F3, F4, F5, construct]
+
+3.1 (Construction on a whole slice and continuation.) On a compact time slab let $Q$ be the union of the compact future and past support truncations of step 1.1 for the compact input supports. Around $Q$ fix a finite family of splitting coordinate cylinders, smaller cylinders, coefficient extensions and their margins. At an intermediate slice split the compact Cauchy data by a smooth finite partition subordinate to the smaller spatial charts; split the source in the same cylinders by a spacetime partition. For each summand initialize $u,v,w$ from that summand's scalar Cauchy data as in step 1.2. The local constructions of step 2.1 solve it on a common positive strip; finiteness takes the minimum of the times. Choose the strip shorter if needed so that the larger coordinate support cones from [F2] stay strictly inside their cylinders. Each summand then vanishes on a neighborhood of the lateral chart boundary and extends smoothly by zero; their finite sum solves the original scalar equation with the full data and source. Constraints for each summand were initialized from its own scalar datum, so no partition commutator error is introduced. Step 2.3 identifies this solution on overlaps and improves its support to the metric cones. The common strip width depends only on the fixed coefficient families, source and chart margins, not on current data size, by step 2.1. If continuation stopped at a finite end within the slab, start a strip less than half this fixed width before that end; uniqueness identifies its overlap and extends past the alleged end. Hence no such endpoint exists. Repeat over the countable slabs $[a-n,a+n]$ and use uniqueness to obtain one global smooth solution. This uses only finite spatial covers on each slab and countably many slab choices, and never compactness of a full Cauchy surface. [step 1.1, step 1.2, step 2.1, step 2.3, F2, F5, A1, construct]
+
+4.1 (Quantitative estimates and continuity.) For fixed compact input supports and a finite slab, the constructed solution is supported in the fixed compact $Q$ above. In the finite splitting charts choose cutoffs with sum of their squares one near $Q$. Sum the quadratic energies of all spatial derivatives up to integer order $s\ge0$ of the localized $U$. These energies $\mathcal E_s$ are equivalent, with constants depending only on the charts and coefficients, to the sum of the corresponding squared local $H^s$ norms. Differentiate their integrals using the smooth solution. Integration by parts in the symmetric principal terms gives only coefficient derivatives and cutoff terms. The Leibniz expansion of a differentiated equation has terms $(D^\gamma A^\mu)\partial_\mu D^{\eta}U$ with $|\eta|\le s-1$ when $\gamma\ne0$. Replace each time derivative by $(A^0)^{-1}(F-A^i\partial_iU-CU)$; the remaining spatial derivatives have order at most $s$. All coefficient derivatives on $Q$ are bounded, so Cauchy–Schwarz and $2ab\le a^2+b^2$ give
+
+$$|\mathcal E_s'(t)|\le C_s\mathcal E_s(t)+C_s\|f(t)\|_{H^s,\mathrm{loc}}^2.$$
+
+The cutoffs can be chosen on a compact neighborhood of $Q$; their derivatives introduce no unsupported boundary term, since $U$ vanishes off $Q$. Gronwall bounds $\mathcal E_s$ by its initial value and the time integral of the displayed source norm, with constants independent of the particular input of those fixed supports. Local Sobolev embedding with $s>m+3/2$ bounds spatial derivatives through order $m$; the equation and its time derivatives then bound any prescribed mixed spacetime derivatives by finitely many higher spatial/input derivatives. Finite chart volumes bound the Sobolev input norms by finitely many fixed-compact input sup seminorms. This is exactly the asserted compact-output seminorm estimate, and applies to differences by linearity. The construction, support, global uniqueness and arbitrary-Cauchy-surface uniqueness have all been proved in steps 2.3–3.1. [step 1.2, step 2.2, step 3.1, F2, F5, construct, discharge-construct] ∎
+
+## Remarks
+
+The geometric and potential coefficients need only be bounded with their finitely many derivatives on each compact region used in the proof; no global coefficient bound, positivity of the potential, compact spatial topology, flatness or ultrastatic assumption is made. The global hypotheses remain smoothness and global hyperbolicity. The analytic method reconstructs the scalar Cauchy construction from existing local proofs; the cited monograph's existence theorem is a comparison target, not an external proof input.
+''')
+write('thm-qftx-green-hyperbolic-existence','Existence and uniqueness of continuous scalar Green maps on smooth globally hyperbolic spacetimes',[
+'def-qftx-green-hyperbolic-interface','lem-qftx-smooth-scalar-cauchy-evolution','def-countable-choice','def-dependent-choice','def-qftx-distributions-on-smooth-manifolds','thm-smooth-partitions-of-unity-exist-on-manifolds'],r'''
+## Statement
+
+Assume Countable Choice and Dependent Choice. Let $(M,g,N)$ be any Hausdorff second-countable oriented time-oriented smooth globally hyperbolic Lorentzian four-manifold without boundary, with signature $(-,+,+,+)$, and let $V\in C^\infty(M;\mathbb R)$ be arbitrary. For $P=-\Box_g+V$ there exist unique continuous real-linear maps $E_+,E_-:C_c^\infty(M;\mathbb R)\to C^\infty(M;\mathbb R)$ such that
+
+$$PE_+f=E_+Pf=f,\qquad PE_-f=E_-Pf=f,$$
+
+$$\operatorname{supp}E_+f\subseteq J^+(\operatorname{supp}f),\qquad\operatorname{supp}E_-f\subseteq J^-(\operatorname{supp}f).$$
+
+Continuity uses the test-function LF topology and the compact derivative topology of the Green-data definition. The operator is formally self-adjoint for $\mu_g$, and its smooth Cauchy problem has uniqueness on every smooth spacelike Cauchy hypersurface. Thus these maps realize the complete Green-data interface for every such geometry and potential. No Green-map existence or scalar Cauchy solvability is assumed.
+
+## Statement references
+
+[[def-qftx-green-hyperbolic-interface]]
+
+[[lem-qftx-smooth-scalar-cauchy-evolution]]
+
+[[def-qftx-distributions-on-smooth-manifolds]]
+
+## Facts & Assumptions
+
+**Given:** Countable Choice, Dependent Choice and the smooth geometric and operator hypotheses in the Statement; the conventions for $P$, $\mu_g$, test topology and causal support are those of the Green-data definition.
+
+[F1] [[lem-qftx-smooth-scalar-cauchy-evolution]] constructs smooth scalar Cauchy evolution, one-sided metric causal support, uniqueness even without support bounds, and estimates of every compact-output seminorm by finitely many fixed-compact input seminorms. It supplies a smooth Cauchy temporal foliation and arbitrary-Cauchy-surface uniqueness. Its proof uses published local symmetric-hyperbolic results, not Green maps.
+
+[F2] [[def-qftx-distributions-on-smooth-manifolds]] and [[def-qftx-green-hyperbolic-interface]] define the LF test topology and the positive metric density. [[thm-smooth-partitions-of-unity-exist-on-manifolds]] permits localization of integrations of compactly supported smooth densities to finitely many charts.
+
+[A1] [[def-countable-choice]] and [[def-dependent-choice]] are inherited exactly from the local analytic and causal construction in [F1].
+
+## Proof
+
+**Proof technique:** constructive.
+
+1.1 (Retarded construction.) Fix the smooth time $t$ of [F1]. For nonzero compact test $f$, choose $a<\min t(\operatorname{supp}f)$ and solve $Pu=f$ with zero data on $S_a$ using [F1]. Below that slice the source and both data vanish, so uniqueness and its time-reversed support assertion give $u=0$. Above it the one-sided support assertion gives $\operatorname{supp}u\subseteq J^+(\operatorname{supp}f)$. Define $E_+f=u$ and $E_+0=0$. A different sufficiently early slice gives the same solution: both solutions have zero data on a still earlier common slice and the same source, so [F1] uniqueness identifies them. Reversing time constructs $E_-f$ from zero data on any slice later than the support and gives the past support. [F1, A1, construct]
+
+1.2 (Two-sided inverse identities and uniqueness.) The construction gives $PE_\pm f=f$. If $k$ is compact, locality gives $\operatorname{supp}Pk\subseteq\operatorname{supp}k$. The compact smooth function $k$ and $E_+(Pk)$ both solve $Pu=Pk$ and have zero data on a common slice earlier than $\operatorname{supp}k$; uniqueness gives $E_+Pk=k$. The advanced identity is time reversed. If any other smooth retarded solution of $Pu=f$ has support in $J^+(\operatorname{supp}f)$, it has zero data on that earlier slice and equals $E_+f$ by [F1]. The same holds for advanced solutions, proving uniqueness of the maps. Common early or late slices for a finite list of tests and uniqueness give additivity and real homogeneity, hence real linearity. [step 1.1, F1, algebra]
+
+2.1 (Continuity in the actual topologies.) Fix compact input support $K$ and compact output set $L$ with a specified derivative order. Choose $a<\min t(K)$ and a finite slab containing $S_a$ and $L$; if $K$ is empty the restriction is zero. Step 1.1 constructs every $E_+f$ for $\operatorname{supp}f\subseteq K$ from zero data on this same $S_a$. The estimate in [F1] therefore bounds the selected output seminorm by a constant times finitely many fixed-$K$ input derivative seminorms. This proves continuity of $E_+$ restricted to each fixed-compact test space. The LF topology in [F2] is the locally convex inductive-limit topology of these spaces, so a linear map into the locally convex space $C^\infty(M)$ is continuous precisely when all such restrictions are continuous. Thus $E_+$ is continuous; the late-slice estimate gives continuity of $E_-$. No sequential-continuity substitute or unsupported closed-graph argument is used. [step 1.1, step 1.2, F1, F2, algebra]
+
+3.1 (The remaining interface conditions.) For compact smooth $f$ and arbitrary smooth $u$, the coordinate divergence expression for $\Box_g$ and integration by parts give
+
+$$\int_M f(-\Box_g u)\,\mu_g=\int_M g^{ab}(\partial_af)(\partial_bu)\,\mu_g=\int_M(-\Box_g f)u\,\mu_g.$$
+
+These identities are justified by localizing the compact support to finitely many charts using [F2]: the extra partition derivatives sum to zero, and each chart integration has compact support. Multiplication by the real $V$ is symmetric, proving formal self-adjointness. Arbitrary smooth spacelike Cauchy-surface uniqueness is the last conclusion of [F1]. Together with steps 1.1–2.1 these establish every condition in the defined Green-data interface for the full stated class of backgrounds. [step 1.1, step 1.2, step 2.1, F1, F2, construct, discharge-construct] ∎
+''')
+write('lem-qftx-compact-green-support-overlap','Compactness of closed advanced-retarded support overlaps under Countable Choice',[
+'def-qftx-green-hyperbolic-interface','def-countable-choice','def-gr-causal-conditions-and-global-hyperbolicity','def-gr-causal-curves-and-reachability','def-compact-space'],r'''
+## Statement
+
+Assume Countable Choice. Let $(M,g,N)$ have the geometric hypotheses of the Green-data definition. If $K,L\subseteq M$ are compact and $A,B\subseteq M$ are closed with $A\subseteq J^+(K)$ and $B\subseteq J^-(L)$, then $A\cap B$ is compact. More generally every closed subset of $J^+(K)\cap J^-(L)$ is compact. This assertion requires no Green maps and does not assume that $J^\pm(K)$ themselves are closed.
+
+## Statement references
+
+[[def-qftx-green-hyperbolic-interface]]
+
+[[def-gr-causal-conditions-and-global-hyperbolicity]]
+
+[[def-gr-causal-curves-and-reachability]]
+
+## Facts & Assumptions
+
+**Given:** Countable Choice, the smooth globally hyperbolic spacetime, the compact sets $K,L$, and the indicated closed sets.
+
+[F1] [[def-gr-causal-conditions-and-global-hyperbolicity]] includes compactness of each causal diamond $J^+(p)\cap J^-(q)$. [[def-gr-causal-curves-and-reachability]] defines causal reachability by locally absolutely continuous curves with nonzero causal tangent almost everywhere; finite concatenations of two such curves again have this property after affine rescaling of their parameter intervals.
+
+[F2] [[def-compact-space]] supplies finite subcovers; finite unions and closed subsets of compact sets are compact by applying the open-cover definition. The smooth metric and time orientation in [[def-qftx-green-hyperbolic-interface]] give local coordinates and continuity of the metric coefficients. Countable Choice is inherited from those geometric data as in [[def-countable-choice]]; the argument below uses only finite selections.
+
+## Proof
+
+**Proof technique:** constructive.
+
+1.1 (Elementary timelike coordinate neighborhoods.) At $x$ choose linear coordinates about $x$ in which $\partial_0$ is future timelike at $x$. Shrinking the coordinate box, continuity of $g$ and $N$ gives $\epsilon>0$ such that every vector with positive zeroth component and spatial-to-time coordinate ratio below $\epsilon$ is future timelike throughout that box. Choose a point $p$ on the negative time axis and a smaller open box $O_x$ about $x$, with closures inside the first box, so that every straight coordinate segment from $p$ to any point of $O_x$ has such a tangent. Then $O_x\subseteq J^+(p)$ by the definition in [F1]. The reversed construction gives an open box about $x$ contained in $J^-(q)$ for a point $q$ on its positive time axis. This uses local smooth metric continuity and straight smooth segments, without a limit-curve, global chronology-openness or dependent-choice theorem. [F1, F2, construct]
+
+2.1 (Finite compact enclosure.) Take the family of all pairs of boxes and past points furnished by step 1.1 over $K$. These boxes form an open cover of $K$; taking a finite subcover names finitely many $p_i$ with $K\subseteq\bigcup_iJ^+(p_i)$. No past-point choice for an infinite family is made. Similarly take finitely many $q_j$ with $L\subseteq\bigcup_jJ^-(q_j)$. Concatenating the finite causal segments as in [F1] proves transitivity directly, so
+
+$$J^+(K)\cap J^-(L)\subseteq\bigcup_{i,j}\bigl(J^+(p_i)\cap J^-(q_j)\bigr).$$
+
+The right side is a finite union of compact diamonds by [F1]. Every closed subset of the left side is a closed subset of this compact union and therefore compact by [F2]. In particular $A\cap B$ is closed and has the required containment. If either input compact is empty the conclusion is immediate from the empty cover. [step 1.1, F1, F2, construct, discharge-construct] ∎
+
+## Remarks
+
+Closedness is supplied by the actual smooth-function supports in the Green arguments. The result does not assert a general Countable-Choice proof of causal simplicity. It suffices for integration by parts on an advanced-retarded overlap and for compactness of a smooth function supported both to the past and future of compact tests.
+''')

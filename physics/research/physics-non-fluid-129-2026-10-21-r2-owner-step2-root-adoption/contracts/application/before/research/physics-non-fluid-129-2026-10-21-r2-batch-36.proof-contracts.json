@@ -1,0 +1,1253 @@
+{
+  "version": 1,
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "batch": "36",
+  "level": "run",
+  "scope": [
+    "prop-gr-fx-wave-multiplier-identity",
+    "lem-gr-fx-scalar-dominant-energy",
+    "prop-gr-fx-schwarzschild-test-energy",
+    "lem-gr-fx-kerr-horizon-modal-flux",
+    "ex-gr-fx08-1",
+    "ex-gr-fx08-2",
+    "lem-gr-fx-schwarzschild-gaussian-beam-concentration"
+  ],
+  "contracts": {
+    "prop-gr-fx-wave-multiplier-identity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-gr-fx-scalar-wave-stress",
+          "source_section": "Definition",
+          "quote": "Assume the axiom of countable choice $\\mathrm{AC}_\\omega$ for the smooth\ntangent-bundle conventions. Let $(M,g,N)$ be a time-oriented smooth\nLorentzian four-manifold of signature $(-,+,+,+)$ with metric-selected\nconnection $\\nabla$ and inverse metric $g^{ab}$. Let $U\\subseteq M$ be open,\nlet $\\psi\\in C^\\infty(U,\\mathbb R)$ be a real scalar field, and let $X$ be a\nsmooth vector field on $U$. Define the wave operator\n$\\Box_g\\psi:=g^{ab}\\nabla_a\\nabla_b\\psi$ and the symmetric covariant tensor\n\n$$Q_{ab}[\\psi]:=(\\nabla_a\\psi)(\\nabla_b\\psi)-\\frac12 g_{ab}g^{cd}(\\nabla_c\\psi)(\\nabla_d\\psi).$$\n\nDefine the multiplier covector by $J^X_a[\\psi]:=Q_{ab}[\\psi]X^b$. The\nassociated energy-current vector is $j_X^a[\\psi]:=-g^{ab}J^X_b[\\psi]$; this\nsign convention makes its flux through a future spacelike slice equal to the\ndensity $Q_{ab}n^aX^b$ when $n$ is the future unit normal. The test-wave\nequation is $\\Box_g\\psi=0$ on $U$. These objects are defined on the fixed\nbackground $g$; $Q$ is not automatically an SI matter stress-energy tensor,\nis not inserted into an Einstein equation here, and does not evolve $g$.\n\nIf $\\psi$ is dimensionless and the coordinates have length units, the\ncomponents of $Q$ have units of inverse length squared. This dimensional fact\ndoes not identify $Q$ with a physical stress tensor without an independently\nspecified field normalization and coupling.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-gr-nondegenerate-levi-civita-and-tensor-derivative",
+          "source_section": "Statement",
+          "quote": "Let $M$ be a smooth four-manifold without boundary and let $g$ be a smooth\nsymmetric covariant $2$-tensor field on $M$ such that $g_p$ is nondegenerate at\nevery $p\\in M$ ([[def-gr-smooth-covariant-two-tensor-field]]). Assume\n$\\mathrm{AC}_\\omega$ for the canonical tangent-bundle smooth structure\n([[def-countable-choice]], [[def-smooth-vector-field-as-a-tangent-bundle-section]]).\nFor this general metric define $\\flat_p(v):=g_p(v,\\cdot)$,\n$\\sharp_p:=\\flat_p^{-1}$, and\n$g_p^{-1}(\\alpha,\\beta):=g_p(\\sharp_p\\alpha,\\sharp_p\\beta)$.\nNondegeneracy makes $\\flat_p$ injective and hence invertible between the\nfour-dimensional tangent space and its dual. In a chart, $g^{ab}$ are the\nentries of the inverse matrix of $(g_{ab})$. These definitions agree with\n[[def-gr-inverse-metric-and-musical-isomorphisms]] in its Lorentzian scope.\nHere and below repeated upper/lower indices are summed over $0,1,2,3$.\nThis holds in particular\nwhen $(M,g,N)$ is a time-oriented smooth Lorentzian four-manifold and $g$ is\nits metric ([[def-gr-smooth-lorentzian-objects]]). For smooth local vector fields\n$X,Y,Z$ put\n\n$$K(X,Y,Z):=X\\bigl(g(Y,Z)\\bigr)+Y\\bigl(g(Z,X)\\bigr)-Z\\bigl(g(X,Y)\\bigr)+g([X,Y],Z)+g([Z,X],Y)-g([Y,Z],X),$$\n\nwith brackets as in [[def-lie-bracket-of-smooth-vector-fields]].\n\n**(a) Existence and formulas.** There is exactly one affine connection\n$\\nabla$ on $M$ ([[def-affine-connection-on-a-smooth-manifold]]) satisfying\n\n$$2g(\\nabla_XY,Z)=K(X,Y,Z)\\qquad\\text{for all smooth local }X,Y,Z .$$\n\nIt is torsion-free and $g$-compatible, so it is a metric-selected connection\nfor $(M,g)$, meaning torsion-free and satisfying\n$Xg(Y,Z)=g(\\nabla_XY,Z)+g(Y,\\nabla_XZ)$ for smooth local fields\n(the conditions of [[def-gr-metric-selected-connection]] extended here to\nnondegenerate $g$); in every smooth chart its\nChristoffel symbols are\n\n$$\\Gamma^a{}_{bc}=\\tfrac12\\,g^{ad}\\bigl(\\partial_bg_{dc}+\\partial_cg_{bd}-\\partial_dg_{bc}\\bigr),$$\n\nwith $g^{ad}$ the inverse-metric components defined above\n([[def-christoffel-symbols-of-an-affine-connection]]).\n\n**(b) Uniqueness.** If an affine connection $\\nabla'$ on $M$ is torsion-free\nand $g$-compatible, then $\\nabla'=\\nabla$. Consequently the class\n$\\operatorname{LC}(M,g)$ of metric-selected connections has exactly one\nelement; it is the **Levi–Civita connection** of $g$.\n\n**(c) Induced derivative on tensor fields.** Let $\\nabla^*$ be the dual\nconnection on $T^*M$ and let the product connection of\n[[def-product-connection-on-tensor-and-hom-bundles]] act on\n$T^r_sM:=(TM)^{\\otimes r}\\otimes(T^*M)^{\\otimes s}$, for integers $r,s\\ge0$,\nconstructed by [[lem-finite-tensor-products-of-smooth-vector-bundles]]. A\ntype $(r,s)$ tensor at $p$ is a multilinear map\n$(T_p^*M)^r\\times(T_pM)^s\\to\\mathbb R$\n([[def-type-r-s-tensor-on-a-finite-dimensional-vector-space]]); a smooth\ntensor field is a section with smooth coefficients in each local product\nframe. The empty product is the scalar line. Its chart components are\n$T^{a_1\\cdots a_r}{}_{b_1\\cdots b_s}=T(dx^{a_1},\\ldots,dx^{a_r},\\partial_{b_1},\\ldots,\\partial_{b_s})$,\nwhere $dx^a$ is dual to $\\partial_a$. This agrees with\n[[def-gr-tensor-fields-and-components]] in the Lorentzian case. Put\n$T^{a_1\\cdots a_r}{}_{b_1\\cdots b_s;c}:=(\\nabla_{\\partial_c}T)^{a_1\\cdots a_r}{}_{b_1\\cdots b_s}$.\nThen, in every smooth chart, for\nevery smooth tensor field $T$ of type $(r,s)$,\n\n$$T^{a_1\\cdots a_r}{}_{b_1\\cdots b_s;c}=\\partial_cT^{a_1\\cdots a_r}{}_{b_1\\cdots b_s}+\\sum_{i=1}^{r}\\Gamma^{a_i}{}_{dc}\\,T^{a_1\\cdots d\\cdots a_r}{}_{b_1\\cdots b_s}-\\sum_{j=1}^{s}\\Gamma^{d}{}_{b_jc}\\,T^{a_1\\cdots a_r}{}_{b_1\\cdots d\\cdots b_s},$$\n\nwhere the slot marked $d$ replaces the named index; this derivative commutes\nwith every contraction in the sense of [[def-contraction-of-a-mixed-tensor]],\nand it annihilates the metric and the inverse metric:\n\n$$g_{ab;c}=0,\\qquad g^{ab}{}_{;c}=0 .$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-gr-killing-field",
+          "source_section": "Definition",
+          "quote": "Let $(M,g,N)$ be a time-oriented smooth Lorentzian four-manifold\n([[def-gr-smooth-lorentzian-objects]]) and let $\\xi$ be a smooth vector field\non $M$ ([[def-smooth-vector-field-as-a-tangent-bundle-section]]). The **Lie\nderivative of the metric along $\\xi$**, written $\\mathcal L_\\xi g$, is the\nsmooth symmetric covariant $2$-tensor field obtained by the flow definition of\n[[def-lie-derivative-of-a-tensor-field]] applied to $g$: for the local flow\n$\\Phi_t$ of $\\xi$,\n\n$$\\mathcal L_\\xi g:=\\frac{d}{dt}\\Big|_{t=0}\\Phi_t^*g .$$\n\nThe field $\\xi$ is a **Killing field** of $(M,g)$ (an **isometry generator**,\nor a **Killing vector**) when\n\n$$\\mathcal L_\\xi g=0 .$$\n\nThe equivalent local characterization\n\n$$\\mathcal L_\\xi g=0\\quad\\Longleftrightarrow\\quad\\nabla_a\\xi_b+\\nabla_b\\xi_a=0,$$\n\nwhere $\\nabla$ is the metric-selected connection of $g$\n([[def-gr-metric-selected-connection]],\n[[thm-gr-nondegenerate-levi-civita-and-tensor-derivative]]) and\n$\\xi_b:=g_{bc}\\xi^c$ is the lowered field, is proved in\n[[thm-gr-killing-and-on-shell-matter-identities]] clause (a); the definition\nitself asserts neither direction. Whether a given metric has Killing fields is\na property of that metric: neither existence nor uniqueness of a Killing field\nis asserted here, and a general metric has none beyond the trivial field\n$\\xi=0$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-gr-killing-and-on-shell-matter-identities",
+          "source_section": "Statement",
+          "quote": "Let $(M,g,N)$ be an oriented time-oriented smooth Lorentzian four-manifold with\nmetric-selected connection $\\nabla$\n([[def-gr-smooth-lorentzian-objects]],\n[[def-gr-metric-selected-connection]],\n[[thm-gr-nondegenerate-levi-civita-and-tensor-derivative]],\n[[def-oriented-smooth-manifold-and-oriented-chart]]).\n\n**(a) Characterization of Killing fields.** For every smooth vector field\n$\\xi$ ([[def-smooth-vector-field-as-a-tangent-bundle-section]]), with\n$\\xi_b=g_{bc}\\xi^c$ the lowered field,\n\n$$\\mathcal L_\\xi g=0\\quad\\Longleftrightarrow\\quad\\nabla_a\\xi_b+\\nabla_b\\xi_a=0 .$$\n\n**(b) Contraction along geodesics.** If $\\xi$ is a Killing field and\n$\\gamma:I\\to M$ is a geodesic with $D_t\\gamma'=0$ in its affine parameter\n([[def-geodesic-of-an-affine-connection]],\n[[def-covariant-derivative-along-a-curve]]), then $t\\mapsto\ng_{\\gamma(t)}(\\xi_{\\gamma(t)},\\gamma'(t))$ is constant on $I$.\n\n**(c) Conserved current.** Let $U\\subseteq M$ be open, let $T$ be a smooth\nsymmetric covariant $2$-tensor field on $U$\n([[def-gr-smooth-covariant-two-tensor-field]]) with\n$\\nabla^aT_{ab}=0$ on $U$, and let $\\xi$ be a Killing field on $U$. Then\n$J^{a}:=T^{ab}\\xi_b$ is a smooth vector field on $U$ with\n$\\nabla_aJ^a=0$; consequently the flux balance of\n[[thm-gr-density-divergence-and-finite-chain-flux]] clause (b) applies to $J$\non every smooth singular $4$-chain contained in $U$.\n\n**(d) On-shell conservation of the Hilbert tensor.** Let $c>0$, let\n$S:\\mathcal D\\to\\mathbb R$ be a model action with Hilbert stress-energy tensor\n$T$ at $(g,\\varphi)$ with respect to $c$\n([[def-gr-hilbert-stress-energy-tensor]]). For the flow diffeomorphisms $F$\nbelow, suppose the configuration set $\\mathcal X$ carries specified maps\n$P_F:\\mathcal X\\to\\mathcal X$ with $P_{\\mathrm{id}}=\\mathrm{id}$; write\n$F^*\\varphi:=P_F(\\varphi)$. For geometric matter fields these are the\nmodel's pullbacks; no pullback operation on an arbitrary set is implicit.\nFor **every** smooth compactly supported vector field $\\xi$, its flow\n$\\Phi_v$ is global\n([[def-complete-vector-field]], [[def-local-and-global-flow]]); this holds for\nevery compactly supported smooth field, using the axiom\n$\\mathrm{AC}_\\omega$ of [[def-countable-choice]] through\n[[thm-compactly-supported-vector-fields-are-complete]]. Write\n$G(u,v):=S(\\Phi_v^*g,\\Phi_u^*\\varphi)$ for the simultaneous pullback by the\nflow (this presupposes that the pairs lie in $\\mathcal D$, which is part of the\nhypotheses below). Suppose (H1)–(H4) hold for **every** such $\\xi$ (with\nits own $G$ and parameter neighborhood):\n\n- **(H1)** the map $G$ is defined on a neighborhood of $(0,0)$ in\n  $\\mathbb R^2$ and is differentiable at $(0,0)$;\n- **(H2)** $\\partial_uG(0,0)=0$ (the matter configuration $\\varphi$ satisfies\n  its model equations in this direction);\n- **(H3)** $\\partial_vG(0,0)=-\\frac{1}{2c}\\int_MT_{ab}q^{ab}\\mathrm{vol}_g$,\n  where $q^{ab}:=\\partial_v(\\Phi_v^*g)^{ab}|_{v=0}$ (the metric variation is\n  represented by the Hilbert tensor);\n- **(H4)** $G(s,s)=S(g,\\varphi)$ whenever $(s,s)$ lies in that neighborhood\n  (invariance of the action under simultaneous pullback by the flow).\n\nThen $\\nabla^aT_{ab}=0$ on $M$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Differentiate the definition of $Q$ using $\\nabla g=0$ from [F2]:\n$\\nabla^aQ_{ab}=(\\Box_g\\psi)\\nabla_b\\psi+\\nabla^a\\psi\\,\\nabla_a\\nabla_b\\psi-\\nabla^c\\psi\\,\\nabla_b\\nabla_c\\psi$. Since $\\psi$ is a scalar and the connection is torsion-free, $\\nabla_a\\nabla_b\\psi=\\nabla_b\\nabla_a\\psi$; after relabelling the contracted index, the last two terms cancel. Thus $\\nabla^aQ_{ab}=(\\Box_g\\psi)\\nabla_b\\psi$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply the product rule to $J_a^X=Q_{ab}X^b$ and substitute step 1.1:\n$\\nabla^aJ_a^X=(\\Box_g\\psi)X^b\\nabla_b\\psi+Q_{ab}\\nabla^aX^b$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The tensor $Q_{ab}$ is symmetric by [F1]. Therefore\n$Q_{ab}\\nabla^aX^b=\\tfrac12Q^{ab}(\\nabla_aX_b+\\nabla_bX_a)=\\tfrac12Q^{ab}(\\mathcal L_Xg)_{ab}$ by [F4], which proves the displayed identity.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F1",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "If $\\Box_g\\psi=0$ and $X$ is Killing, the first term in the identity vanishes by the equation and the second vanishes by [F3]. Hence $\\nabla^aJ_a^X=0$. This is a conditional model identity, not a decay estimate.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "F3",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The identity is a local tensor formula for one supplied smooth field and multiplier on an open set U. On U empty it is vacuous and uses no integral or minimum; on a nonempty U proof 1.1--4.1 is pointwise."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued input case is relevant to the asserted conclusion."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The displayed divergence identity holds for arbitrary smooth psi and X and vanishes when the wave equation and Killing condition hold; zero divergence is not claimed to imply those hypotheses. The input is already one specified scalar field/current or mode; no number of fields or singleton index set is a theorem parameter."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degeneracy parameter or singular boundary case is asserted."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoint or limiting endpoint is part of the result."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No nonempty-set selection beyond the explicitly stated AC_omega conventions is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The displayed divergence identity holds for arbitrary smooth psi and X and vanishes when the wave equation and Killing condition hold; zero divergence is not claimed to imply those hypotheses. This public claim is not a biconditional requiring a separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The displayed divergence identity holds for arbitrary smooth psi and X and vanishes when the wave equation and Killing condition hold; zero divergence is not claimed to imply those hypotheses. This public claim is not a biconditional requiring a separate reverse implication."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "on-shell Killing specialization",
+          "status": "checked",
+          "evidence": "step 4.1 substitutes Box_g psi=0 and L_X g=0 into the proved identity."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-36-author-self-check",
+        "notes": "Every numbered derivation was checked against the current supplier interface and its stated hypotheses; this is author self-check only, not independent proof approval."
+      }
+    },
+    "lem-gr-fx-scalar-dominant-energy": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-gr-fx-scalar-wave-stress",
+          "source_section": "Definition",
+          "quote": "Assume the axiom of countable choice $\\mathrm{AC}_\\omega$ for the smooth\ntangent-bundle conventions. Let $(M,g,N)$ be a time-oriented smooth\nLorentzian four-manifold of signature $(-,+,+,+)$ with metric-selected\nconnection $\\nabla$ and inverse metric $g^{ab}$. Let $U\\subseteq M$ be open,\nlet $\\psi\\in C^\\infty(U,\\mathbb R)$ be a real scalar field, and let $X$ be a\nsmooth vector field on $U$. Define the wave operator\n$\\Box_g\\psi:=g^{ab}\\nabla_a\\nabla_b\\psi$ and the symmetric covariant tensor\n\n$$Q_{ab}[\\psi]:=(\\nabla_a\\psi)(\\nabla_b\\psi)-\\frac12 g_{ab}g^{cd}(\\nabla_c\\psi)(\\nabla_d\\psi).$$\n\nDefine the multiplier covector by $J^X_a[\\psi]:=Q_{ab}[\\psi]X^b$. The\nassociated energy-current vector is $j_X^a[\\psi]:=-g^{ab}J^X_b[\\psi]$; this\nsign convention makes its flux through a future spacelike slice equal to the\ndensity $Q_{ab}n^aX^b$ when $n$ is the future unit normal. The test-wave\nequation is $\\Box_g\\psi=0$ on $U$. These objects are defined on the fixed\nbackground $g$; $Q$ is not automatically an SI matter stress-energy tensor,\nis not inserted into an Einstein equation here, and does not evolve $g$.\n\nIf $\\psi$ is dimensionless and the coordinates have length units, the\ncomponents of $Q$ have units of inverse length squared. This dimensional fact\ndoes not identify $Q$ with a physical stress tensor without an independently\nspecified field normalization and coupling.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-gr-observer-and-rest-space",
+          "source_section": "Definition",
+          "quote": "Let $(M,g,N)$ be a time-oriented smooth Lorentzian four-manifold and let\n$p\\in M$ ([[def-gr-smooth-lorentzian-objects]]).\n\n**(a) Observers.** An **observer at $p$** is a tangent vector\n$n\\in T_pM$ such that $g_p(n,n)=-1$ and $n$ is future-directed in the sense of\n[[def-gr-smooth-lorentzian-objects]], that is, $g_p(n,N_p)<0$. Because\n$g_p(n,n)=-1\\neq0$, an observer is timelike and in particular nonzero\n([[def-causal-classification-of-lorentz-vectors]]). Observers at $p$ exist:\nthe vector $N_p$ is timelike, and\n$n:=N_p/\\sqrt{-g_p(N_p,N_p)}$ satisfies $g_p(n,n)=-1$ and\n$g_p(n,N_p)=-\\sqrt{-g_p(N_p,N_p)}<0$, where the square root is the\nnonnegative root of [[def-rational-power]]; then $-n$ is a unit timelike\nvector with $g_p(-n,N_p)>0$, so it is not an observer, and the two vectors\n$n,-n$ point in opposite time directions.\n\n**(b) Rest space.** For an observer $n$ at $p$, the **rest space** of $n$ is\nthe $g_p$-orthogonal complement of the line $\\mathbb Rn$,\n\n$$n^{\\perp}=\\{v\\in T_pM: g_p(v,n)=0\\},$$\n\nin the sense of [[def-lorentz-orthogonality-and-orthogonal-complement]]. It is\na linear subspace of $T_pM$. The further facts that $\\dim n^{\\perp}=3$ and\nthat the restriction of $g_p$ to $n^{\\perp}$ is positive definite are proved\nin [[lem-gr-observer-projection-decomposition]]; they are consequences, not\npart of the definition.\n\n**(c) Spatial projection.** The **spatial projection** of the observer $n$ is\nthe map\n\n$$h_n:T_pM\\longrightarrow T_pM,\\qquad h_n(v):=v+g_p(n,v)\\,n .$$\n\nThe map is linear because $g_p$ is bilinear, its image is contained in\n$n^{\\perp}$, and it fixes $n^{\\perp}$ pointwise; that it is the\n$g_p$-orthogonal projection onto $n^{\\perp}$ with kernel $\\mathbb Rn$ is\nproved in [[lem-gr-observer-projection-decomposition]].\n\n**(d) Scope.** An observer at $p$ is a single tangent vector. It is not an\nordered basis or frame of $T_pM$, not a chart, not a field of observers such as\nthe congruences defined later on this page, and not a curve or a worldline: no\nparametrized curve, clock reading, proper time or measurement is attached to\n$n$ by this definition. The physical reading of an observer as the direction\nof an ideal clock's worldline, and the measurement interpretation of the\nobserver-relative quantities introduced later on this page, belong to the\nphysical postulates and unit conventions of the framework and are not asserted\nhere.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-gr-observer-projection-decomposition",
+          "source_section": "Statement",
+          "quote": "Let $(M,g,N)$ be a time-oriented smooth Lorentzian four-manifold, let\n$p\\in M$, and let $n$ be an observer at $p$\n([[def-gr-observer-and-rest-space]]). Write $h:=h_n$,\n$n^{\\perp}=\\{v\\in T_pM:g_p(v,n)=0\\}$\n([[def-lorentz-orthogonality-and-orthogonal-complement]]) and\n$\\mathbb Rn=\\{\\lambda n:\\lambda\\in\\mathbb R\\}$. Then:\n\n1. $h:T_pM\\to T_pM$ is linear, $h(n)=0$, $h(v)=v$ for every $v\\in n^{\\perp}$\n   and $h\\circ h=h$; its kernel is $\\ker h=\\mathbb Rn$, its image is\n   $\\operatorname{im}h=n^{\\perp}$, and\n   $T_pM=\\mathbb Rn\\oplus n^{\\perp}$ is an orthogonal direct sum: every\n   $v\\in T_pM$ has the unique decomposition\n\n   $$v=-g_p(v,n)\\,n+h(v),$$\n\n   in which $-g_p(v,n)n\\in\\mathbb Rn$ and $h(v)\\in n^{\\perp}$.\n2. For all $v,w\\in T_pM$ the **projection identity**\n\n   $$g_p(h(v),h(w))=g_p(v,w)+g_p(v,n)g_p(n,w)$$\n\n   holds; in particular $g_p(h(v),h(v))=g_p(v,v)+g_p(v,n)^2$.\n3. $\\dim n^{\\perp}=3$ and the restriction of $g_p$ to $n^{\\perp}$ is positive\n   definite.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-causal-classification-of-lorentz-vectors",
+          "source_section": "Definition",
+          "quote": "Let $(V,\\eta)$ be a Lorentz vector space of signature $(-,+,+,+)$\n([[def-lorentz-form-and-inertia]]), with associated quadratic form\n$q(v)=\\eta(v,v)$. A vector $v\\in V$ is\n\n- **timelike** when $q(v)<0$;\n- **null**, or **lightlike**, when $v\\neq 0$ and $q(v)=0$;\n- **spacelike** when $q(v)>0$;\n- **causal** when it is timelike or null.\n\nThe zero vector $0\\in V$ satisfies $q(0)=0$ and is consequently **none** of\ntimelike, null or spacelike: the null case explicitly excludes it, and the\ntimelike and spacelike cases exclude it by $q(0)=0$ together with the strict\ninequalities. The **causal character** of a nonzero vector $v$ is the sign of\nthe real number $q(v)$, and the three names are attached to the three signs as\nabove. When no confusion arises, the pairing $\\eta$ itself is written\n$\\langle v,w\\rangle:=\\eta(v,w)$.\n\n**Each nonzero vector has exactly one causal character.** For a nonzero\n$v\\in V$ the real number $q(v)$ satisfies exactly one of $q(v)<0$, $q(v)=0$,\n$q(v)>0$ by trichotomy of the order on $\\mathbb R$, so $v$ is timelike, null or\nspacelike, and no two of the three alternatives can hold at once. The causal\nvectors are therefore exactly the nonzero vectors that are timelike or null,\nand the zero vector is causal in no sense introduced here.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+          "source_section": "Statement",
+          "quote": "For vectors $u,v$ in a real or complex inner product space,\n\n$$|\\langle u,v\\rangle|\\le\\lVert u\\rVert\\lVert v\\rVert.$$\n\nEquality holds if and only if $u$ and $v$ are linearly dependent, including the case in which either vector is zero.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Set $\\ell=\\sharp_g(d\\psi)$ and $a=g(\\ell,n)$. Then\n$b=h_n(\\ell)=\\ell+a n$, so $\\ell=b-a n$ and $g(b,n)=0$ by [F2]–[F3]. It follows that $g^{-1}(d\\psi,d\\psi)=g(\\ell,\\ell)=-a^2+|b|^2$. Substitution into [F1], using $g(n,n)=-1$, gives $Q(n,n)=a^2-\\tfrac12(-a^2+|b|^2)=\\tfrac12(a^2+|b|^2)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Let $\\alpha:=-g(n,X)$ and $Y:=X-\\alpha n$. Future causality in [F4] gives $\\alpha\\geq0$; [F2] gives $Y=h_n(X)\\in n^\\perp$. Since $g(X,X)=-\\alpha^2+|Y|^2\\leq0$, one has $|Y|\\leq\\alpha$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F2",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F1] and step 1.1,\n$Q(n,X)=\\alpha a^2+a\\,g(b,Y)+\\tfrac{\\alpha}{2}(-a^2+|b|^2)=\\tfrac{\\alpha}{2}(a^2+|b|^2)+a\\,g(b,Y)$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Apply [F5] and $|Y|\\leq\\alpha$ from step 1.2:\n$Q(n,X)\\geq\\tfrac{\\alpha}{2}(a^2+|b|^2)-\\alpha|a||b|=\\tfrac{\\alpha}{2}(|a|-|b|)^2\\geq0$. If $\\alpha=0$, step 1.2 gives $Y=0$ and hence $X=0$, for which $Q(n,X)=0$ as well. This proves the causal flux inequality, including the null case.",
+          "step": "3.1",
+          "inputs": [
+            "F5",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement is pointwise at a supplied spacetime point p with one unit future timelike n and one future causal X. The rest space has dimension three; it is not an unspecified possibly empty collection of observers."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 gives Q(n,n)=0 when the scalar first derivative vanishes; step 3.1 includes alpha=0, hence X=0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The scalar stress has Q(n,n)=(a^2+|b|^2)/2 and Q(n,X)>=0 for supplied future causal X; neither causality nor the field equations are deduced from positivity. The input is already one specified scalar field/current or mode; no number of fields or singleton index set is a theorem parameter."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 3.1 includes the null case |Y|=alpha and proves nonnegative flux, with equality permitted."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoint or limiting endpoint is part of the result."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A1 and step 1.1 record the sole AC_omega convention; step 3.1 uses no arbitrary-index selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The scalar stress has Q(n,n)=(a^2+|b|^2)/2 and Q(n,X)>=0 for supplied future causal X; neither causality nor the field equations are deduced from positivity. This public claim is not a biconditional requiring a separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The scalar stress has Q(n,n)=(a^2+|b|^2)/2 and Q(n,X)>=0 for supplied future causal X; neither causality nor the field equations are deduced from positivity. This public claim is not a biconditional requiring a separate reverse implication."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "zero scalar derivative",
+          "status": "checked",
+          "evidence": "step 1.1 yields Q(n,n)=0 when a=0 and b=0."
+        },
+        {
+          "name": "null multiplier",
+          "status": "checked",
+          "evidence": "step 1.2 includes |Y|=alpha; step 3.1 still gives the nonnegative square bound."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-36-author-self-check",
+        "notes": "Every numbered derivation was checked against the current supplier interface and its stated hypotheses; this is author self-check only, not independent proof approval."
+      }
+    },
+    "prop-gr-fx-schwarzschild-test-energy": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-gr-fx-scalar-wave-stress",
+          "source_section": "Definition",
+          "quote": "Assume the axiom of countable choice $\\mathrm{AC}_\\omega$ for the smooth\ntangent-bundle conventions. Let $(M,g,N)$ be a time-oriented smooth\nLorentzian four-manifold of signature $(-,+,+,+)$ with metric-selected\nconnection $\\nabla$ and inverse metric $g^{ab}$. Let $U\\subseteq M$ be open,\nlet $\\psi\\in C^\\infty(U,\\mathbb R)$ be a real scalar field, and let $X$ be a\nsmooth vector field on $U$. Define the wave operator\n$\\Box_g\\psi:=g^{ab}\\nabla_a\\nabla_b\\psi$ and the symmetric covariant tensor\n\n$$Q_{ab}[\\psi]:=(\\nabla_a\\psi)(\\nabla_b\\psi)-\\frac12 g_{ab}g^{cd}(\\nabla_c\\psi)(\\nabla_d\\psi).$$\n\nDefine the multiplier covector by $J^X_a[\\psi]:=Q_{ab}[\\psi]X^b$. The\nassociated energy-current vector is $j_X^a[\\psi]:=-g^{ab}J^X_b[\\psi]$; this\nsign convention makes its flux through a future spacelike slice equal to the\ndensity $Q_{ab}n^aX^b$ when $n$ is the future unit normal. The test-wave\nequation is $\\Box_g\\psi=0$ on $U$. These objects are defined on the fixed\nbackground $g$; $Q$ is not automatically an SI matter stress-energy tensor,\nis not inserted into an Einstein equation here, and does not evolve $g$.\n\nIf $\\psi$ is dimensionless and the coordinates have length units, the\ncomponents of $Q$ have units of inverse length squared. This dimensional fact\ndoes not identify $Q$ with a physical stress tensor without an independently\nspecified field normalization and coupling.",
+          "uses": [
+            "2.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-gr-fx-wave-multiplier-identity",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. Let $(M,g,N)$ be a time-oriented smooth\nLorentzian four-manifold, let $U\\subseteq M$ be open, let\n$\\psi\\in C^\\infty(U,\\mathbb R)$, and let $X$ be a smooth vector field on $U$.\nFor the tensor $Q_{ab}[\\psi]$ and multiplier covector\n$J_a^X[\\psi]=Q_{ab}[\\psi]X^b$ defined from the metric-selected connection,\n\n$$\\nabla^aJ_a^X[\\psi]=(\\Box_g\\psi)\\,X^b\\nabla_b\\psi+\\frac12 Q^{ab}[\\psi](\\mathcal L_Xg)_{ab}.$$\n\nConsequently, when $\\Box_g\\psi=0$ and $X$ is Killing, the multiplier current\nhas zero divergence.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-gr-killing-field",
+          "source_section": "Definition",
+          "quote": "Let $(M,g,N)$ be a time-oriented smooth Lorentzian four-manifold\n([[def-gr-smooth-lorentzian-objects]]) and let $\\xi$ be a smooth vector field\non $M$ ([[def-smooth-vector-field-as-a-tangent-bundle-section]]). The **Lie\nderivative of the metric along $\\xi$**, written $\\mathcal L_\\xi g$, is the\nsmooth symmetric covariant $2$-tensor field obtained by the flow definition of\n[[def-lie-derivative-of-a-tensor-field]] applied to $g$: for the local flow\n$\\Phi_t$ of $\\xi$,\n\n$$\\mathcal L_\\xi g:=\\frac{d}{dt}\\Big|_{t=0}\\Phi_t^*g .$$\n\nThe field $\\xi$ is a **Killing field** of $(M,g)$ (an **isometry generator**,\nor a **Killing vector**) when\n\n$$\\mathcal L_\\xi g=0 .$$\n\nThe equivalent local characterization\n\n$$\\mathcal L_\\xi g=0\\quad\\Longleftrightarrow\\quad\\nabla_a\\xi_b+\\nabla_b\\xi_a=0,$$\n\nwhere $\\nabla$ is the metric-selected connection of $g$\n([[def-gr-metric-selected-connection]],\n[[thm-gr-nondegenerate-levi-civita-and-tensor-derivative]]) and\n$\\xi_b:=g_{bc}\\xi^c$ is the lowered field, is proved in\n[[thm-gr-killing-and-on-shell-matter-identities]] clause (a); the definition\nitself asserts neither direction. Whether a given metric has Killing fields is\na property of that metric: neither existence nor uniqueness of a Killing field\nis asserted here, and a general metric has none beyond the trivial field\n$\\xi=0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-gr-schwarzschild-exterior-model",
+          "source_section": "Definition",
+          "quote": "This item assumes the axiom of countable choice $\\mathrm{AC}_\\omega$ through\nthe tangent-bundle structure used by\n[[def-gr-smooth-lorentzian-objects]] clause (c)\n([[def-countable-choice]]); no further choice principle is used.\n\n**(a) Parameters and the Schwarzschild radius.** Let $c>0$ and $G_N>0$ be real\nconstants and let $m_*>0$ be a real **mass parameter**. Put\n\n$$s:=\\frac{2G_Nm_*}{c^2}>0 .$$\n\nThe number $s$ is the **Schwarzschild radius** of the datum. Neither $c$,\n$G_N$ nor $m_*$ is measured here; the physical reading of $c$ and $G_N$ as the\nframework's conversion and Newton constants and of $m_*$ as a mass is fixed by\nthe physical conventions of the framework, not by this definition.\n\n**(b) The underlying manifold and its product charts.** Let $S^2:=S_2(0,1)=\n\\{y\\in\\mathbb R^3:\\lVert y\\rVert_2=1\\}$ be the unit Euclidean sphere with the\nsubspace topology of [[def-euclidean-spheres-and-closed-balls]]. Specify its\nsmooth structure as the maximal atlas generated by the following two charts\n([[def-smooth-manifold]]). For $\\varepsilon\\in\\{+1,-1\\}$ put\n$p_\\varepsilon=(0,0,\\varepsilon)$ and\n$U_\\varepsilon=S^2\\setminus\\{p_\\varepsilon\\}$, and define\n\n$$\\sigma_\\varepsilon:U_\\varepsilon\\to\\mathbb R^2,\\qquad \\sigma_\\varepsilon(y)=\\frac{(y_1,y_2)}{1-\\varepsilon y_3}.$$\n\nThese open domains cover $S^2$. Each chart is a homeomorphism onto\n$\\mathbb R^2$, with inverse, for $u=(u_1,u_2)$ and $q=u_1^2+u_2^2$,\n\n$$\\sigma_\\varepsilon^{-1}(u)=\\left(\\frac{2u_1}{1+q},\\frac{2u_2}{1+q},\\varepsilon\\frac{q-1}{1+q}\\right).$$\n\nThe two inverse identities follow by substitution; all displayed denominators\nare nonzero on their domains. On the overlap both transition maps are\n$u\\mapsto u/(u_1^2+u_2^2)$ on $\\mathbb R^2\\setminus\\{0\\}$, hence smooth.\nThe subspace is Hausdorff and has a countable basis given by intersections\nwith Euclidean balls of rational centres and positive rational radii.\nThus these charts specify a smooth two-manifold without boundary. This is\nthe standard sphere structure used for the round metric below: the inclusion\nhas the displayed smooth local parametrizations, and their differentials\nare injective because composition with $\\sigma_\\varepsilon$ is the identity.\nLet $M$ be the product manifold\n\n$$M:=\\mathbb R\\times(s,\\infty)\\times S^2$$\n\nwith the product smooth structure\n([[prop-products-of-smooth-manifolds-have-a-canonical-product-smooth-structure]]);\nit is a smooth four-manifold without boundary. Write $x^0:M\\to\\mathbb R$ and\n$r:M\\to(s,\\infty)$ for the first and second projections and $\\iota:M\\to S^2$\nfor the third. A **product chart** of $M$ is a smooth chart on the product\nwhose angular part is a smooth chart of $S^2$. In a **spherical-polar product\nchart**, $0<\\vartheta<\\pi$ and the components of the round metric\n$\\gamma_{S^2}$ of [[ex-the-round-metric-on-the-sphere-as-an-induced-metric]]\nare $\\gamma_{22}=1$, $\\gamma_{23}=\\gamma_{32}=0$,\n$\\gamma_{33}=\\sin^2\\vartheta$. These polar charts omit the two poles; ordinary\nsmooth sphere charts around the poles complete the product atlas.\n\n**(c) The metric.** Let $f:(s,\\infty)\\to(0,\\infty)$ be the smooth function\n\n$$f(r):=1-\\frac{s}{r} .$$\n\nDefine $g$ globally by the coordinate-free expression\n\n$$g=-f\\,d(x^0)\\otimes d(x^0)+f^{-1}\\,dr\\otimes dr+r^2\\,\\iota^*\\gamma_{S^2}.$$\n\nIn every spherical-polar product chart its component functions are\n\n$$g_{00}:=-f(r),\\qquad g_{11}:=\\frac{1}{f(r)},\\qquad g_{22}:=r^2,\\qquad g_{33}:=r^2\\sin^2\\vartheta,$$\n\nand $g_{ab}:=0$ whenever $a\\ne b$, $a,b\\in\\{0,1,2,3\\}$, with the index order\n$(x^0,x^1,x^2,x^3)=(x^0,r,\\vartheta,\\varphi)$. This is a smooth symmetric\ncovariant $2$-tensor field on all of $M$\n([[def-gr-smooth-covariant-two-tensor-field]]); the component display is local\nto spherical-polar charts, and $f>0$ because $r>s$. The pair $(M,g)$ is the **Schwarzschild exterior\nmetric of mass parameter $m_*$**; the datum of this definition is the\nquadruple $(c,G_N,m_*,g)$. With these parameters fixed, write $(M,g,N)$\nfor its associated geometric datum, with $N$ as in clause (d). The geometric\ndatum depends on the parameters only through $s$ and does not retain $c$,\n$G_N$ and $m_*$ separately. That $(M,g,N)$ is a time-oriented smooth Lorentzian four-manifold\nof signature $(-,+,+,+)$ is not asserted here; it is proved in the companion metric-properties lemma of this page (its\njustification record in the frontmatter), which also records the equivalent\ncoordinate-free description\n$g=-f\\,d(x^0)\\otimes d(x^0)+f^{-1}\\,dr\\otimes dr+r^2\\,\\iota^*\\gamma_{S^2}$.\n\n**(d) Time orientation and the Schwarzschild chart.** The field\n$N:=\\partial_0$ is the smooth product vector field on $M$\n([[def-derivation-at-a-point-and-tangent-space]]); the chart components of $g$\nare independent of $x^0$, so $N$ is the restriction of a global vector field,\nand $g(N,N)=-f(r)<0$ at every point. The datum carries the time orientation\n$N$. Spherical-polar product charts are **Schwarzschild charts** of the datum;\nat the poles the same metric is represented in the smooth sphere charts of\nthe product atlas. We write $t$ for the coordinate $x^0/c$ when the datum is\nread in the framework's unit conventions.\n\n**(e) Scope.** The domain of the datum is the exterior region $r>s$; the\ndefinition asserts nothing about $r=s$, about $r\\le 0$, about any matter, or\nabout any equation satisfied by $g$. The horizon $r=s$ is not part of the\ndatum, and a continuation of the metric to $r=s$ requires the separate constructions recorded on this page, the\nregularity lemma for the advanced chart and the Kruskal model-properties\nlemma. Whether the datum is a solution of the\nframework's field law is proved, not defined, in the Ricci-and-Einstein-tensor lemma of this\npage.",
+          "uses": [
+            "1.3",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-gr-schwarzschild-metric-properties",
+          "source_section": "Statement",
+          "quote": "Let $c>0$, $G_N>0$, $m_*>0$ and let $(M,g,N)$ be the Schwarzschild exterior\ndatum of mass parameter $m_*$ with Schwarzschild radius\n$s=2G_Nm_*/c^2$ ([[def-gr-schwarzschild-exterior-model]]). Then:\n\n**(a) Global metric and local components.** $M$ is a smooth four-manifold\nwithout boundary and $g$ is the smooth symmetric covariant $2$-tensor field\nglobally defined by\n\n$$g=-f\\,d(x^0)\\otimes d(x^0)+f^{-1}\\,dr\\otimes dr+r^2\\,\\iota^*\\gamma_{S^2}.$$\n\nIn every spherical-polar product chart $(x^0,r,\\vartheta,\\varphi)$ its\ncomponents are\n\n$$g_{00}=-f(r),\\qquad g_{11}=\\frac{1}{f(r)},\\qquad g_{22}=r^2,\\qquad g_{33}=r^2\\sin^2\\vartheta,\\qquad g_{ab}=0\\ (a\\ne b),$$\n\nwhere $f(r)=1-s/r$, $\\iota:M\\to S^2$ is the third projection and\n$\\gamma_{S^2}$ is the round metric of the unit sphere. The component display\nis local to the spherical-polar charts; the global tensor formula includes\nthe poles.\n\n**(b) Lorentzian signature.** At every $p\\in M$ the form $g_p$ is\nnondegenerate with inertia $(3,1,0)$; consequently $(M,g,N)$ is a smooth\nLorentzian four-manifold of signature $(-,+,+,+)$.\n\n**(c) Time orientation.** The global product field $N=\\partial_0$ is smooth\nand nowhere vanishing, and $g_p(N_p,N_p)=-f(r(p))<0$ at every $p$; it is\ntherefore a time orientation of $(M,g)$. The globally defined base fields\n$\\partial_0,\\partial_r$ are orthogonal with squared norms $-f$ and $f^{-1}$.\nIn a spherical-polar chart the angular coordinate fields are orthogonal with\npositive squared norms $r^2$ and $r^2\\sin^2\\vartheta$; at a pole use any\nangular chart and the positive-definite round metric instead.\n\n**(d) Domain of the coordinates.** Product charts form an atlas covering\n$M$. Spherical-polar charts are defined on the regular angular locus\n$0<\\vartheta<\\pi$ and omit the poles; pole charts are ordinary smooth charts\nof $S^2$. The functions $f$ and $f^{-1}$ are smooth on $r>s$, and the\nspherical-polar component functions are smooth on their chart domains.\n\n**(e) Conventions.** The global tensor identity holds on all of $M$; the\ndisplayed component identities are in spherical-polar product charts. In pole\ncharts the sphere block is $r^2$ times the round-metric component matrix.",
+          "uses": [
+            "1.3",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-gr-schwarzschild-extension-chart",
+          "source_section": "Statement",
+          "quote": "Let $(M,g,N)$ be the Schwarzschild exterior datum with Schwarzschild radius\n$s>0$ and $f(r)=1-s/r$\n([[def-gr-schwarzschild-exterior-model]]). Let\n$M_{\\mathrm{ext}}:=\\mathbb R\\times(0,\\infty)\\times S^2$ carry the product\nsmooth structure and let $\\iota_{\\mathrm{ext}}:M_{\\mathrm{ext}}\\to S^2$ be the\nthird projection. Its product atlas includes ordinary sphere charts at the\npoles ([[prop-products-of-smooth-manifolds-have-a-canonical-product-smooth-structure]]).\nDefine the **tortoise function**\n\n$$r_*(r):=r+s\\log\\left|\\frac{r}{s}-1\\right|,\\qquad r>0,\\ r\\ne s,$$\n\non each of the two intervals $(0,s)$ and $(s,\\infty)$, and define the\n**advanced-chart metric** globally on $M_{\\mathrm{ext}}$ by\n\n$$g_{\\mathrm{ext}}=-f(r)\\,dv\\otimes dv+dv\\otimes dr+dr\\otimes dv+r^2\\,\\iota_{\\mathrm{ext}}^*\\gamma_{S^2}.$$\n\nIn spherical-polar product charts its components are\n\n$$g_{\\mathrm{ext}}=-f(r)\\,dv^2+2\\,dv\\,dr+r^2\\,d\\Omega^2,$$\n\nnamely $g_{vv}=-f$, $g_{vr}=g_{rv}=1$,\n$g_{\\vartheta\\vartheta}=r^2$, $g_{\\varphi\\varphi}=r^2\\sin^2\\vartheta$ and all\nother components zero. In another sphere chart the angular block is\n$r^2(\\gamma_{ij})$. Then:\n\n**(a) Smooth Lorentzian metric.** $g_{\\mathrm{ext}}$ is a smooth symmetric\ncovariant $2$-tensor field on $M_{\\mathrm{ext}}$, and at every point it is\nnondegenerate with inertia $(3,1,0)$; hence $(M_{\\mathrm{ext}},g_{\\mathrm{ext}})$\nis a smooth Lorentzian four-manifold of signature $(-,+,+,+)$ on all of\n$r>0$, including $r=s$.\n\n**(b) Time orientation.** The smooth vector field\n\n$$N_{\\mathrm{ext}}:=A(r)\\,\\partial_v-\\partial_r,\\qquad A(r):=\\frac{f(r)+\\sqrt{f(r)^2+4}}{2}>0,$$\n\nsatisfies $g_{\\mathrm{ext}}(N_{\\mathrm{ext}},N_{\\mathrm{ext}})<0$ everywhere\nand $g_{\\mathrm{ext}}(N_{\\mathrm{ext}},\\partial_v)<0$ everywhere; hence\n$N_{\\mathrm{ext}}$ is a time orientation of $g_{\\mathrm{ext}}$, and on the\nregion $r>s$ it determines the same future cone as the datum's time\norientation $\\partial_v=\\partial_0$.\n\n**(c) Isometric embedding of the exterior.** The map\n$\\Phi:M\\to M_{\\mathrm{ext}}$, $(x^0,r,\\omega)\\mapsto(x^0+r_*(r),r,\\omega)$\nrestricts to a diffeomorphism of $M$ onto the open subset $\\{r>s\\}$ of\n$M_{\\mathrm{ext}}$, and $\\Phi^*g_{\\mathrm{ext}}=g$; the exterior datum is\ntherefore isometric to the region $r>s$ of the extension.\n\n**(d) Vacuum and Kretschmann scalar of the extension.** The\nmetric-selected connection of $g_{\\mathrm{ext}}$ exists and is unique, its\nRicci tensor, scalar curvature and Einstein tensor vanish identically on\n$M_{\\mathrm{ext}}$, and its Kretschmann scalar equals\n\n$$R_{abcd}R^{abcd}=\\frac{12s^2}{r^6}$$\n\non all of $M_{\\mathrm{ext}}$. In particular the scalar is smooth and finite on\nthe horizon $r=s$, where it takes the value $12/s^4$.\n\n**(e) The horizon is a null hypersurface.** The level set $\\{r=s\\}$ is a\nsmooth null hypersurface of $(M_{\\mathrm{ext}},g_{\\mathrm{ext}})$ whose null\ngenerator direction is $\\partial_v$; every smooth product-chart frame remains\na basis across $r=s$. In spherical-polar charts\n$\\det(g_{\\mathrm{ext}})=-r^4\\sin^2\\vartheta$; in an arbitrary sphere chart\nthe determinant is $-r^4\\det(\\gamma_{ij})$, which is nonzero.\n\n**(f) Scope.** The extension constructed here is a smooth Lorentzian\nmanifold containing the exterior isometrically and regular across $r=s$; it\nis not claimed to be maximal, and no uniqueness or global structure theorem\nis asserted. The region $r\\le0$ and the surfaces relevant to the Kruskal\nmodel of this page are outside this statement.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-gr-fx-scalar-dominant-energy",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. At a point $p$ of a time-oriented Lorentzian\nfour-manifold, let $n$ be a future-directed unit timelike vector, let\n$X\\in T_pM$ be future causal, and let $\\psi$ be a smooth real scalar. Put\n$\\ell:=\\sharp_g(d\\psi)$, $a:=d\\psi(n)$,\n$b:=h_n(\\ell)\\in n^\\perp$, and $|b|^2:=g(b,b)$, where $h_n$ is the spatial\nprojection relative to $n$. Then\n\n$$Q(n,n)=\\frac12\\bigl(a^2+|b|^2\\bigr),\\qquad Q(n,X)\\geq0.$$",
+          "uses": [
+            "1.3",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-gr-metric-volume-form-and-current-flux",
+          "source_section": "Definition",
+          "quote": "Let $(M,g,N)$ be a time-oriented smooth Lorentzian four-manifold\n([[def-gr-smooth-lorentzian-objects]]), let $M$ carry an orientation in the\nsense of [[def-oriented-smooth-manifold-and-oriented-chart]] (so that its\ncharts that are oriented in that orientation have orientation-preserving\ntransition maps), and let $\\nabla$ be its metric-selected connection. This item\nfixes the metric volume form, the flux of a current through oriented $3$-faces\nand finite-chain charges. The orientation of $M$ is an independent datum: it is\nnot determined by the metric and not by the time orientation.\n\n**(a) Metric volume density and volume form.** Let $(U,x)$ be an oriented\nchart, with metric components $g_{ab}=g(\\partial_a,\\partial_b)$\n([[def-gr-smooth-lorentzian-objects]] clause (a)). Define the **metric volume\ndensity**\n\n$$w:=\\sqrt{|\\det(g_{ab})|}>0\\qquad\\text{on }U,$$\n\na strictly positive smooth function because $g_{ab}$ is smooth and\n$g_p$ is nondegenerate. In the chart define the local $4$-form\n\n$$\\mathrm{vol}_{g,U}:=w\\,dx^0\\wedge dx^1\\wedge dx^2\\wedge dx^3,$$\n\nwith the exterior product of [[def-wedge-product-of-differential-forms]] and the\ncoordinate covector fields of\n[[prop-local-coordinate-expression-for-a-differential-form]]. That these local\nforms agree on chart overlaps and therefore define one smooth nowhere-vanishing\n$4$-form $\\mathrm{vol}_g$ on $M$ — the **metric volume form** — is proved in\n[[lem-gr-metric-volume-form-patching-and-face-normal]] clause (a), together\nwith the reading statement of clause (b) there: in every oriented chart\n$\\mathrm{vol}_g=w\\,dx^0\\wedge\\cdots\\wedge dx^3$, and on every positively\noriented $g_p$-orthonormal basis $(e_0,e_1,e_2,e_3)$ of $T_pM$ one has\n$\\mathrm{vol}_{g,p}(e_0,e_1,e_2,e_3)=1$.\n\n**(b) Current flux through oriented $3$-faces and chains.** Let $J$ be a\nsmooth vector field on $M$\n([[def-smooth-vector-field-as-a-tangent-bundle-section]]). The **current\n$3$-form** of $J$ is the contraction\n\n$$\\iota_J\\mathrm{vol}_g,$$\n\nthe interior product of the $4$-form $\\mathrm{vol}_g$ with $J$\n([[def-interior-product-of-a-form-by-a-vector-field]]).\n\nBy a **smooth singular $k$-simplex** of $M$ — the convention of the library\ndefinition `def-smooth-singular-simplex` (differential-geometry track),\nrestated here so this page is self-contained — we mean a map\n$\\sigma:\\Delta^k\\to M$ whose domain is the standard $k$-simplex\n$$\\Delta^k=\\Bigl\\{t\\in\\mathbb R^{k+1}:t_i\\ge0,\\ \\textstyle\\sum_it_i=1\\Bigr\\},$$\nfor which there exist an open set $O\\subseteq A^k=\\{t\\in\\mathbb R^{k+1}:\\sum_it_i=1\\}$\ncontaining $\\Delta^k$ and a smooth map $\\bar\\sigma:O\\to M$ with\n$\\bar\\sigma|_{\\Delta^k}=\\sigma$; the extension is not part of the simplex\ndata, and degenerate parametrizations are allowed. With the integration of\nforms over such simplices\n([[def-integral-of-a-form-over-a-smooth-singular-simplex]]), a **$3$-face** is\na smooth singular $3$-simplex $\\sigma$, and the **flux of $J$ through\n$\\sigma$** is the real number\n\n$$\\Phi_J(\\sigma):=\\int_\\sigma\\iota_J\\mathrm{vol}_g.$$\n\nA **finite smooth singular $k$-chain** — the convention of the library\ndefinition `def-smooth-singular-chain-and-cochain-complexes`, restated here —\nis a finite formal real linear combination $\\Sigma=\\sum_i c_i\\sigma_i$ of\nsmooth singular $k$-simplices. For such a $3$-chain the **flux of $J$ through\n$\\Sigma$** is defined additively,\n\n$$\\Phi_J(\\Sigma):=\\sum_i c_i\\,\\Phi_J(\\sigma_i),$$\n\na definition independent of the written expression for $\\Sigma$, because a\nfinite formal sum is evaluated by adding the finitely many coefficients and\ninserting a zero coefficient changes nothing. $\\Phi_J(\\Sigma)$ is the **charge**\nof the current $J$ assigned to $\\Sigma$ when the model reads $J$ as a conserved\ncurrent; that reading belongs to the physical postulates and is not part of\nthis definition.\n\n**(c) Non-null faces and their unit normals.** A $3$-dimensional linear subspace\n$H\\subseteq T_pM$ is **nondegenerate** for $g_p$ when the restriction of $g_p$\nto $H$ is nondegenerate, equivalently when $H\\cap H^\\perp=\\{0\\}$ in the\northogonality of [[def-lorentz-orthogonality-and-orthogonal-complement]]. A\nsmooth singular $3$-simplex $\\sigma$ is **non-null at** a parameter point $t$\nwhen the span of the three velocity vectors\n$\\sigma_*\\partial_1|_t,\\sigma_*\\partial_2|_t,\\sigma_*\\partial_3|_t$ has\ndimension $3$ and is nondegenerate at $\\sigma(t)$, and **non-null** when this holds at every\nparameter point. For a non-null face the **unit normal** $\\nu$ at that point is\nthe unique vector of $T_{\\sigma(t)}M$ with $\\nu\\in H^\\perp$,\n$g(\\nu,\\nu)\\in\\{-1,+1\\}$ and $(\\nu,\\sigma_*\\partial_1,\\sigma_*\\partial_2,\n\\sigma_*\\partial_3)$ a positively oriented basis of $T_{\\sigma(t)}M$; its\nexistence, uniqueness and its sign $\\varepsilon:=g(\\nu,\\nu)$ are proved in\n[[lem-gr-metric-volume-form-patching-and-face-normal]] clause (c), together\nwith the density identity of clause (c) used to read $\\iota_J\\mathrm{vol}_g$ on\nsuch a face. Rank-deficient faces and rank-three faces with degenerate induced\nmetric are not assigned a unit normal; their flux is defined\nby the $3$-form $\\iota_J\\mathrm{vol}_g$ itself, as in clause (b).",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-gr-density-divergence-and-finite-chain-flux",
+          "source_section": "Statement",
+          "quote": "Let $(M,g,N)$ be a time-oriented smooth Lorentzian four-manifold with an\norientation, metric-selected connection $\\nabla$, metric volume form\n$\\mathrm{vol}_g$ and current flux $\\Phi_J$ as in\n[[def-gr-metric-volume-form-and-current-flux]], and let $J$ be a smooth vector\nfield on $M$ ([[def-smooth-vector-field-as-a-tangent-bundle-section]]). Write\n$\\nabla_aJ^a$ for the divergence of $J$.\n\n**(a) Exterior derivative of the current form.** As smooth $4$-forms on $M$,\n\n$$d\\bigl(\\iota_J\\mathrm{vol}_g\\bigr)=\\bigl(\\nabla_aJ^a\\bigr)\\mathrm{vol}_g .$$\n\n**(b) Flux balance (Stokes).** For every finite smooth singular $4$-chain $C$\nof $M$ — a finite formal real sum of smooth singular $4$-simplices, the\nlibrary convention `def-smooth-singular-chain-and-cochain-complexes` restated\nin [[def-gr-metric-volume-form-and-current-flux]] clause (b) — and the flux\n$\\Phi_J$ of the induced boundary $3$-chain\n([[def-integral-of-a-form-over-a-smooth-singular-simplex]],\n[[thm-stokes-theorem-for-smooth-singular-chains]]),\n\n$$\\Phi_J(\\partial C)=\\int_C\\bigl(\\nabla_aJ^a\\bigr)\\mathrm{vol}_g .$$\n\nConsequently, if $\\partial C=\\Sigma_2-\\Sigma_1+B$ for smooth singular $3$-chains\n$\\Sigma_1,\\Sigma_2,B$, then\n\n$$\\Phi_J(\\Sigma_2)-\\Phi_J(\\Sigma_1)=-\\Phi_J(B)+\\int_C\\bigl(\\nabla_aJ^a\\bigr)\\mathrm{vol}_g .$$\n\nIn particular, if $\\nabla_aJ^a=0$ on $C$ then\n$\\Phi_J(\\Sigma_2)-\\Phi_J(\\Sigma_1)=-\\Phi_J(B)$, and if moreover\n$\\Phi_J(B)=0$ then $\\Phi_J(\\Sigma_2)=\\Phi_J(\\Sigma_1)$: equal charges need a\nvanishing side flux, not merely a divergence-free current.\n\n**(c) Non-null face formula.** Let $\\sigma$ be a smooth singular $3$-simplex —\na map $\\sigma:\\Delta^3\\to M$ admitting a smooth extension to a neighbourhood\nof the standard $3$-simplex inside its affine plane, the convention restated\nin [[def-gr-metric-volume-form-and-current-flux]] clause (b) — that is\nnon-null at a parameter point $t$\n([[def-gr-metric-volume-form-and-current-flux]] clause (c)), with\n$v_i:=\\sigma_*\\partial_i|_t$ spanning the hyperplane $H$ and with the unit\nnormal $\\nu^{*}$ adapted to the ordered basis $(v_1,v_2,v_3)$ as in\n[[lem-gr-metric-volume-form-patching-and-face-normal]] clause (c); write\n$\\varepsilon:=g_{\\sigma(t)}(\\nu^{*},\\nu^{*})\\in\\{-1,1\\}$. Then\n\n$$\\sigma^{*}\\bigl(\\iota_J\\mathrm{vol}_g\\bigr)(\\partial_1,\\partial_2,\\partial_3)\\big|_{t} =\\varepsilon\\,g_{\\sigma(t)}\\bigl(J,\\nu^{*}\\bigr)\\sqrt{\\bigl|\\det\\bigl(g_{\\sigma(t)}(v_i,v_j)\\bigr)\\bigr|} .$$\n\nEquivalently, the tangent vector $J$ is decomposed as\n$J=\\varepsilon g(J,\\nu^{*})\\nu^{*}+w'$ with $w'\\in H$, and only the normal\ncomponent contributes to the flux through the face.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-gr-density-divergence-and-finite-chain-flux",
+          "source_section": "Statement",
+          "quote": "$$\\sigma^{*}\\bigl(\\iota_J\\mathrm{vol}_g\\bigr)(\\partial_1,\\partial_2,\\partial_3)\\big|_{t} =\\varepsilon\\,g_{\\sigma(t)}\\bigl(J,\\nu^{*}\\bigr)\\sqrt{\\bigl|\\det\\bigl(g_{\\sigma(t)}(v_i,v_j)\\bigr)\\bigr|} .$$",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In the advanced coordinates all coefficients of $g_{\\mathrm{ext}}$ are independent of $v$, so the coordinate formula for $\\mathcal L_{\\partial_v}g_{\\mathrm{ext}}$ gives $\\mathcal L_Tg_{\\mathrm{ext}}=0$ and $T$ is Killing by [F3]. The multiplier identity [F2] therefore gives $\\nabla^aJ_a^T=0$ on $C$. Since $j_T^a=-g^{ab}J_b^T$, its divergence also vanishes.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "F3",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "The Statement orients each spacelike face so its adapted unit normal is the future unit normal $n_j$. By [F8] its current flux density is $-g(j_T,n_j)\\,d\\mu_{\\Sigma_j}$. The definition $j_T^a=-g^{ab}Q_{bc}T^c$ gives $g(j_T,n_j)=-Q_{ab}n_j^aT^b$, so integration yields $\\Phi_{j_T}(\\Sigma_j)=\\int_{\\Sigma_j}Q_{ab}n_j^aT^b\\,d\\mu_{\\Sigma_j}=E_j$.",
+          "inputs": [
+            "F1",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "The isometric exterior has $T$ future timelike for $r>s$, and [F5] makes $T$ future null on $\\mathcal H^+$. Thus $T$ is future causal throughout the stated closure. Applying [F6] to each spacelike face gives $E_1,E_2\\geq0$.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F4",
+            "F5",
+            "F6"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "On $\\mathcal H^+$, the inverse of the $(v,r)$ metric block has $g^{rv}=1$ and $g^{rr}=f=0$. Hence $j_T^r=-g^{rb}Q_{bv}=-Q_{vv}=-(T\\psi)^2$, since $g_{vv}=0$ there. With\n$\\mathrm{vol}_{g_{\\mathrm{ext}}}=r^2\\,dv\\wedge dr\\wedge d\\Omega$ and the outward boundary orientation at the inner face $r=s$, the pullback of $\\iota_{j_T}\\mathrm{vol}_{g_{\\mathrm{ext}}}$ is $(T\\psi)^2s^2\\,dv\\wedge d\\Omega$. Therefore this face flux is exactly $F_H\\geq0$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "F7",
+            "step 1.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F7] and step 1.1, $\\Phi_{j_T}(\\partial C)=0$. The stated boundary decomposition and additivity of flux give $\\Phi_{j_T}(\\Sigma_2)-\\Phi_{j_T}(\\Sigma_1)+F_H+F_{\\mathrm{out}}=0$. Using step 1.2 to identify the two face fluxes with $E_2$ and $E_1$ gives the asserted balance.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F7",
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "On the static exterior slices $g(T,T)=-f$ and $n=f^{-1/2}T$, so $T=\\sqrt f\\,n$ and bilinearity gives $Q(n,T)=\\sqrt f\\,Q(n,n)$. By [F6] with $X=n$, $Q(n,n)\\geq0$, while the coefficient $\\sqrt f$ tends to zero as $r\\downarrow s$. In the regular extension $g(T,T)=-f$ vanishes at $r=s$ by [F5], so $T$ becomes null there and the static Killing slice density loses its transverse coercivity.",
+          "step": "4.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "F6",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement permits a finite smooth singular chain, and the chain flux identity in proof 3.1 is additive. The zero chain gives zero signed boundary flux and 0=0; one simplex is included by the same finite-chain supplier."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1 give zero horizon and slice flux when the test scalar vanishes identically."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A supplied smooth wave and finite chain obey a signed energy balance and horizon degeneracy; no converse wave equation or no-flux boundary condition is asserted. The input is already one specified scalar field/current or mode; no number of fields or singleton index set is a theorem parameter."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 4.1 exhibits the exact sqrt(f) coefficient tending to zero at r=s."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The chain boundary is the exact signed sum Sigma_2-Sigma_1+H+B_out in the Statement; step 3.1 preserves the outer signed flux."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A1 and step 1.1 record the sole AC_omega convention used by the extension; no further selection is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "A supplied smooth wave and finite chain obey a signed energy balance and horizon degeneracy; no converse wave equation or no-flux boundary condition is asserted. This public claim is not a biconditional requiring a separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A supplied smooth wave and finite chain obey a signed energy balance and horizon degeneracy; no converse wave equation or no-flux boundary condition is asserted. This public claim is not a biconditional requiring a separate reverse implication."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "future-horizon flux sign",
+          "status": "checked",
+          "evidence": "step 2.1 computes the advanced-chart horizon flux density as (T psi)^2 s^2 dv dOmega."
+        },
+        {
+          "name": "static-slice degeneracy",
+          "status": "checked",
+          "evidence": "step 4.1 computes Q(n,T)=sqrt(f)Q(n,n) and f tends to zero as r decreases to s."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-36-author-self-check",
+        "notes": "Every numbered derivation was checked against the current supplier interface and its stated hypotheses; this is author self-check only, not independent proof approval."
+      }
+    },
+    "lem-gr-fx-kerr-horizon-modal-flux": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-gr-fx-kerr-horizon-mode",
+          "source_section": "Definition",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. Let $M>0$, $0<|a|<M$, and use the length\ncoordinates of the subextremal Kerr datum. Let $H^+$ be a regular patch of\nits future horizon, let $T$ and $\\Phi$ be the stationary and axial Killing\nfields, and let\n$\\chi:=T+\\Omega_H\\Phi$ with\n$\\Omega_H:=a/(r_+^2+a^2)$ be the future null generator there. A smooth\ncomplex scalar $u$ on a horizon patch is an $(\\omega,m)$ **horizon mode**\nwhen $\\omega\\in\\mathbb R$, $m\\in\\mathbb Z$, and\n\n$$Tu=-i\\omega u,\\qquad \\Phi u=im u.$$\n\nIts **shifted horizon frequency** is\n$\\widetilde\\omega:=\\omega-m\\Omega_H$. By linearity of $\\chi$, every such\nmode satisfies $\\chi u=-i\\widetilde\\omega u$. The parameter $\\omega$ has\nunits reciprocal to the Kerr time coordinate, $m$ is dimensionless, and\n$\\Omega_H$ has the same units as $\\omega$. This is a local definition of\nmode data only; it does not assert that a nonzero mode extends to a global\nsolution of the wave equation.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-gr-fx-scalar-wave-stress",
+          "source_section": "Definition",
+          "quote": "Assume the axiom of countable choice $\\mathrm{AC}_\\omega$ for the smooth\ntangent-bundle conventions. Let $(M,g,N)$ be a time-oriented smooth\nLorentzian four-manifold of signature $(-,+,+,+)$ with metric-selected\nconnection $\\nabla$ and inverse metric $g^{ab}$. Let $U\\subseteq M$ be open,\nlet $\\psi\\in C^\\infty(U,\\mathbb R)$ be a real scalar field, and let $X$ be a\nsmooth vector field on $U$. Define the wave operator\n$\\Box_g\\psi:=g^{ab}\\nabla_a\\nabla_b\\psi$ and the symmetric covariant tensor\n\n$$Q_{ab}[\\psi]:=(\\nabla_a\\psi)(\\nabla_b\\psi)-\\frac12 g_{ab}g^{cd}(\\nabla_c\\psi)(\\nabla_d\\psi).$$\n\nDefine the multiplier covector by $J^X_a[\\psi]:=Q_{ab}[\\psi]X^b$. The\nassociated energy-current vector is $j_X^a[\\psi]:=-g^{ab}J^X_b[\\psi]$; this\nsign convention makes its flux through a future spacelike slice equal to the\ndensity $Q_{ab}n^aX^b$ when $n$ is the future unit normal. The test-wave\nequation is $\\Box_g\\psi=0$ on $U$. These objects are defined on the fixed\nbackground $g$; $Q$ is not automatically an SI matter stress-energy tensor,\nis not inserted into an Einstein equation here, and does not evolve $g$.\n\nIf $\\psi$ is dimensionless and the coordinates have length units, the\ncomponents of $Q$ have units of inverse length squared. This dimensional fact\ndoes not identify $Q$ with a physical stress tensor without an independently\nspecified field normalization and coupling.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-gr-fx-kerr-horizon-generator",
+          "source_section": "Statement",
+          "quote": "Let $T=\\partial_t$ be the stationary field and let $\\Phi$ be the sphere\nrotation field, extended to $\\mathcal M_{\\mathrm K}$. Both are Killing fields.\nIn a smooth ingoing extension across $r=r_+$, the hypersurface $H^+=\\{r=r_+\\}$\nis null and its null normal direction is generated by\n$\\chi=T+\\Omega_H\\Phi$, where\n$\\Omega_H=a/(r_+^2+a^2)$. On the exterior polar chart, $T$ is spacelike\nexactly for\n\n$$r_+<r<r_{\\mathrm s}(\\theta),\\qquad r_{\\mathrm s}(\\theta):=M+\\sqrt{M^2-a^2\\cos^2\\theta}.$$\n\nAt the rotation axis $r_{\\mathrm s}=r_+$, so the open ergoregion has zero\nradial width there.",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $\\chi$ is normal to the null hypersurface $H^+$ and both $T$ and $\\Phi$ are tangent to it by [F3], $g(\\chi,T)=g(\\chi,\\Phi)=0$ on $H^+$. Hence the metric-trace term in [F2] vanishes when contracted with $\\chi^aT^b$, so\n$Q(\\chi,T)=(\\chi\\psi)(T\\psi)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Along a stationary orbit, write $u(\\tau)=A e^{-i\\omega\\tau}$ with constant $A$; [F1] gives\n$T\\psi=\\operatorname{Re}(-i\\omega u)$ and\n$\\chi\\psi=\\operatorname{Re}(-i(\\omega-m\\Omega_H)u)$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $A=0$, both differentiated real fields vanish along this orbit and the displayed average identity is $0=0$. Otherwise put $\\vartheta=\\arg A-\\omega\\tau$. Then\n$T\\psi=\\omega|A|\\sin\\vartheta$ and\n$\\chi\\psi=(\\omega-m\\Omega_H)|A|\\sin\\vartheta$. Averaging their product over $\\tau\\in[0,2\\pi/\\omega]$ uses\n$\\frac{\\omega}{2\\pi}\\int_0^{2\\pi/\\omega}\\sin^2(\\arg A-\\omega\\tau)\\,d\\tau=\\frac12$, and gives the displayed identity.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "If $m\\Omega_H>\\omega>0$, the coefficient $\\omega(\\omega-m\\Omega_H)/2$ is strictly negative. Since $|u|^2\\ge0$, step 3.1 gives a nonpositive averaged density, with equality exactly at $u=0$ and strict negativity exactly at $u\\ne0$. A mode that is not identically zero need not be nonvanishing at every point.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "step": "5.1",
+          "claim": "On the compact patch $D$, smoothness bounds $|u|^2$ and the induced area density, so both displayed integrals are finite. Integrating step 3.1 gives the formula for $\\mathcal F_D$. If $u|_D$ is not identically zero, continuity and density of the interior give an interior point where $|u|^2>0$ and a smaller coordinate disk where $|u|^2\\ge b>0$. The positive smooth area density has a positive lower bound $a>0$ on a still smaller closed disk; its positive Euclidean area makes $\\int_D|u|^2d\\mu_D\\ge ab\\,\\operatorname{area}(\\text{disk})>0$. Step 4.1 then makes $\\mathcal F_D<0$. Such patches exist locally at a nonzero mode point $p$. By [F3], $T_pH^+=\\chi_p^\\perp$ for a nonzero null normal $\\chi_p$. Nondegeneracy gives $v$ with $g(\\chi_p,v)=-1$; then $k=v+\\tfrac12g(v,v)\\chi_p$ is null and $g(\\chi_p,k)=-1$. The plane spanned by $\\chi_p,k$ has one negative and one positive direction, so its orthogonal complement is a positive two-plane in $T_pH^+$. Choose a smooth hypersurface chart whose first two coordinate vectors span that plane at $p$, fix its third coordinate, and shrink a closed coordinate disk about $p$. Positivity persists by continuity of its metric matrix, and the disk stays in the mode domain and the nonzero set. No integral over a full noncompact horizon is used.",
+          "inputs": [
+            "given",
+            "F3",
+            "step 3.1",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement fixes one nonzero smooth mode trace on a regular horizon patch and omega>0. The period 2pi/omega is positive; the calculation averages a single real phase orbit, not an empty family of modes."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 3.1 shows the flux formula vanishes when the mode amplitude is zero; strict negativity uses the stated nonzero hypothesis."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A supplied smooth stationary/axial mode trace has the exact averaged scalar density omega(omega-m Omega_H)|u|^2/2; the sign conclusion does not classify global scattering solutions. The input is already one specified scalar field/current or mode; no number of fields or singleton index set is a theorem parameter."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "At the threshold omega=m Omega_H the formula is zero; step 4.1 asserts strict negativity only for omega<m Omega_H."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 3.1 averages over the complete period [0,2 pi/omega], with omega>0 as stated."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A1 and step 1.1 record AC_omega for the supplied smooth horizon convention; no arbitrary mode selection is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "A supplied smooth stationary/axial mode trace has the exact averaged scalar density omega(omega-m Omega_H)|u|^2/2; the sign conclusion does not classify global scattering solutions. This public claim is not a biconditional requiring a separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A supplied smooth stationary/axial mode trace has the exact averaged scalar density omega(omega-m Omega_H)|u|^2/2; the sign conclusion does not classify global scattering solutions. This public claim is not a biconditional requiring a separate reverse implication."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "period average",
+          "status": "checked",
+          "evidence": "step 3.1 evaluates the sine-squared average over exactly one period, giving 1/2."
+        },
+        {
+          "name": "threshold frequency",
+          "status": "checked",
+          "evidence": "At omega=m Omega_H the displayed flux is zero; the strict negative sign is asserted only below threshold."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-36-author-self-check",
+        "notes": "The conditional mode-trace argument is complete. Current batch-35 Kerr supplier readiness is missing, so Step-1 readiness remains escalated."
+      }
+    },
+    "ex-gr-fx08-1": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-gr-fx-kerr-horizon-mode",
+          "source_section": "Definition",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. Let $M>0$, $0<|a|<M$, and use the length\ncoordinates of the subextremal Kerr datum. Let $H^+$ be a regular patch of\nits future horizon, let $T$ and $\\Phi$ be the stationary and axial Killing\nfields, and let\n$\\chi:=T+\\Omega_H\\Phi$ with\n$\\Omega_H:=a/(r_+^2+a^2)$ be the future null generator there. A smooth\ncomplex scalar $u$ on a horizon patch is an $(\\omega,m)$ **horizon mode**\nwhen $\\omega\\in\\mathbb R$, $m\\in\\mathbb Z$, and\n\n$$Tu=-i\\omega u,\\qquad \\Phi u=im u.$$\n\nIts **shifted horizon frequency** is\n$\\widetilde\\omega:=\\omega-m\\Omega_H$. By linearity of $\\chi$, every such\nmode satisfies $\\chi u=-i\\widetilde\\omega u$. The parameter $\\omega$ has\nunits reciprocal to the Kerr time coordinate, $m$ is dimensionless, and\n$\\Omega_H$ has the same units as $\\omega$. This is a local definition of\nmode data only; it does not assert that a nonzero mode extends to a global\nsolution of the wave equation.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-gr-fx-kerr-horizon-modal-flux",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. Let $0<|a|<M$ and let $H^+$ be a regular\nfuture Kerr horizon patch with stationary field $T$, axial field $\\Phi$,\nfuture null generator $\\chi=T+\\Omega_H\\Phi$, and\n$\\Omega_H=a/(r_+^2+a^2)$. Let $u$ be a nonzero smooth $(\\omega,m)$ mode\ntrace on $H^+$, where $\\omega>0$, $m\\in\\mathbb Z$, and suppose that\n$\\psi=\\operatorname{Re}u$ is the trace of a smooth real scalar field near\n$H^+$. No wave equation or global extension of the mode is assumed. Define\n$\\langle Q(\\chi,T)\\rangle_T$ as the average of the real scalar flux density\n$Q_{ab}[\\psi]\\chi^aT^b$ over one stationary-flow period $2\\pi/\\omega$.\nThen\n\n$$\\langle Q(\\chi,T)\\rangle_T=\\frac12\\omega(\\omega-m\\Omega_H)|u|^2.$$\n\nConsequently, when $m\\Omega_H>\\omega>0$, this stationary horizon-flux density is nonpositive everywhere, is zero at every node $u=0$, and is strictly negative exactly where $u\\ne0$.\n\nFor a compact smooth spacelike horizon-cut patch $D$ with nonempty interior and smooth boundary, contained in the mode domain, let $d\\mu_D$ be the positive area measure of its induced metric. Define the integrated averaged stationary flux by\n$$\\mathcal F_D:=\\int_D\\langle Q(\\chi,T)\\rangle_T\\,d\\mu_D =\\frac12\\omega(\\omega-m\\Omega_H)\\int_D|u|^2\\,d\\mu_D.$$\nIn the same frequency band, $\\mathcal F_D<0$ whenever $u|_D$ is not identically zero. A smooth nonzero mode therefore has strictly negative integrated averaged flux on a sufficiently small compact spacelike cut patch meeting its nonzero set. This is a conditional local mode-trace calculation; it does not assert the existence of a global wave or scattering solution.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The chosen frequency satisfies $\\omega=m\\Omega_H/2>0$ and\n$\\widetilde\\omega=\\omega-m\\Omega_H=-m\\Omega_H/2<0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "A2",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The horizon-flux identity [F2] gives $\\langle Q(\\chi,T)\\rangle_T=\\tfrac12\\omega\\widetilde\\omega|u|^2=-(m\\Omega_H)^2|u|^2/8$. This is nonpositive at every point, zero at nodes and strictly negative where $u\\ne0$; being a nonzero mode does not exclude nodes.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A2",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "For a compact smooth spacelike cut patch $D$ meeting the nonzero set, [F2] proves $\\int_D|u|^2d\\mu_D>0$ and finiteness of that integral. Integrating step 2.1 therefore gives $\\mathcal F_D=-(m\\Omega_H)^2\\int_D|u|^2d\\mu_D/8<0$. Such small patches are supplied by the local cut construction in [F2]. The conclusion remains conditional on the given trace, without a global wave or scattering existence claim.",
+          "inputs": [
+            "given",
+            "A2",
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Example supplies a nonzero smooth horizon mode trace and m Omega_H>0. If no such trace is supplied there is no existence claim to discharge; it does not average an empty ensemble of modes."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 gives zero flux in the limiting zero-amplitude case; the example itself assumes a nonzero trace."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The chosen frequency omega=m Omega_H/2 is in the superradiant band and the exact local averaged density has the resulting sign on the nonzero trace set; no inverse scattering or mode-existence assertion is made. The input is already one specified scalar field/current or mode; no number of fields or singleton index set is a theorem parameter."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 distinguishes the threshold omega=m Omega_H, where shifted frequency is zero, from the strict superradiant range."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and step 1.1 select omega=m Omega_H/2 strictly inside 0<omega<m Omega_H."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The example assumes a nonzero smooth trace conditionally and makes no choice/existence claim."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The chosen frequency omega=m Omega_H/2 is in the superradiant band and the exact local averaged density has the resulting sign on the nonzero trace set; no inverse scattering or mode-existence assertion is made. This public claim is not a biconditional requiring a separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The chosen frequency omega=m Omega_H/2 is in the superradiant band and the exact local averaged density has the resulting sign on the nonzero trace set; no inverse scattering or mode-existence assertion is made. This public claim is not a biconditional requiring a separate reverse implication."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "interior superradiant frequency",
+          "status": "checked",
+          "evidence": "Step 1.1 selects omega=m Omega_H/2, which is positive and has shifted frequency -m Omega_H/2."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-36-author-self-check",
+        "notes": "The conditional mode-trace argument is complete. Current batch-35 Kerr supplier readiness is missing, so Step-1 readiness remains escalated."
+      }
+    },
+    "ex-gr-fx08-2": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-gr-fx-nondegenerate-local-energy-estimate",
+          "source_section": "Definition",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. Let $(M,g,N)$ be the Schwarzschild exterior\ndatum with $s>0$, $f(r)=1-s/r$, exterior coordinate $x^0$, and stationary\nfield $T=\\partial_0$. Let $0<\\delta<s/2$ and put\n$K_\\delta:=\\{(x^0,r,\\omega):|r-3s/2|\\leq\\delta\\}$ for $\\omega\\in S^2$.\nThen $K_\\delta$ is contained in $r>s$. On the static slice\n$\\Sigma_{x^0}:=\\{x^0=\\text{constant}\\}$ the future unit normal is\n$n=f^{-1/2}T$. For a smooth real test wave $\\psi$ with finite initial\nstationary energy, define\n\n$$E_T[\\psi](x^0):=\\int_{\\Sigma_{x^0}}Q_{ab}[\\psi]n^aT^b\\,d\\mu_{\\Sigma_{x^0}},\\qquad E_{T,\\delta}[\\psi](x^0):=\\int_{\\Sigma_{x^0}\\cap K_\\delta}Q_{ab}[\\psi]n^aT^b\\,d\\mu_{\\Sigma_{x^0}}.$$\n\nA **nondegenerate integrated local energy estimate with no trapping loss**\non $K_\\delta$ means that there is a finite constant $C$, independent of\n$\\psi$, such that every smooth solution of $\\Box_g\\psi=0$ with finite\n$E_T[\\psi](0)$ satisfies\n\n$$\\int_0^\\infty E_{T,\\delta}[\\psi](x^0)\\,dx^0\\leq C E_T[\\psi](0).$$\n\nHere “nondegenerate” means that the estimate integrates the full unweighted\nfirst-derivative density, with no weight vanishing at $r=3s/2$; “no trapping\nloss” means that the right side contains only the initial first-derivative\nstationary energy, with no additional derivatives or degenerating weights.\nThis definition asserts no existence or nonexistence of such a constant.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-gr-schwarzschild-circular-orbits-and-photon-sphere",
+          "source_section": "Statement",
+          "quote": "Let $(M,g,N)$ be the Schwarzschild exterior datum with $s>0$ and\n$f(r)=1-s/r$ ([[def-gr-schwarzschild-exterior-model]]), with\n$f'=s/r^2$. Then:\n\nFor arbitrary $x^0_0,\\varphi_0\\in\\mathbb R$, put\n$\\omega_0=(\\cos\\varphi_0,\\sin\\varphi_0,0)\\in S^2$. For $\\alpha\\in\\mathbb R$\ndefine the rotation\n$$R_\\alpha(y_1,y_2,y_3):=(y_1\\cos\\alpha-y_2\\sin\\alpha,\\ y_1\\sin\\alpha+y_2\\cos\\alpha,\\ y_3),$$\nand the global axial vector field $\\Phi(y_1,y_2,y_3):=(-y_2,y_1,0)$ on $S^2$;\nit is tangent because $y\\cdot\\Phi(y)=0$ for $y\\in S^2$.\nIn every spherical-polar chart near the equator, $\\Phi=\\partial_\\varphi$;\nlongitude expressions below are local chart expressions for the global sphere\ncurve $R_\\alpha\\omega_0$.\n\nIn this item, a **timelike circular geodesic** means a future timelike\ngeodesic whose areal radius $r$ is constant on an interval of positive length;\nits angular orientation is unrestricted.\n\n**(a) Existence of circular timelike geodesics.** Let $r_0>3s/2$ and choose\n$\\ell\\in\\mathbb R$ with\n\n$$\\ell^2=\\frac{c^2sr_0^2}{2r_0-3s}>0,\\qquad e:=\\Bigl(f(r_0)\\Bigl(c^2+\\frac{\\ell^2}{r_0^2}\\Bigr)\\Bigr)^{1/2} =\\frac{c(r_0-s)\\sqrt 2}{\\sqrt{r_0(2r_0-3s)}}>0 .$$\n\nThen the globally defined curve $\\gamma:\\mathbb R\\to M$ is\n\n$$\\gamma(\\tau):=\\bigl(x^0_0+\\tfrac{e}{f(r_0)}\\tau,\\ r_0,\\ R_{\\ell\\tau/r_0^2}\\omega_0\\bigr).$$\nIn each local polar chart along it, $\\vartheta=\\pi/2$ and the longitude is\n$\\varphi_0+\\ell\\tau/r_0^2$ up to a constant multiple of $2\\pi$.\n\nIt is a future timelike geodesic of the datum, with $g(\\gamma',\\gamma')=-c^2$\nand with the conserved quantities $e=-g(\\gamma',\\partial_0)$ and\n$\\ell=g(\\gamma',\\Phi)$ of\n[[lem-gr-schwarzschild-timelike-geodesic-reduction]]; it is a **circular\norbit** at radius $r_0$. Its angular velocity in the coordinate $x^0$ is\n\n$$\\frac{d\\varphi}{dx^0}=\\frac{\\ell f(r_0)}{r_0^2e}=\\operatorname{sgn}(\\ell)\\Bigl(\\frac{s}{2r_0^3}\\Bigr)^{1/2},\\qquad\\text{so}\\qquad \\Bigl(\\frac{d\\varphi}{dt}\\Bigr)^2=\\frac{G_Nm_*}{r_0^3},$$\n\n$t=x^0/c$.\n\n**(b) The circular-orbit condition is necessary.** Conversely, if\n$\\gamma:I\\to M$ is any future timelike geodesic parametrized by proper time with\n$r(\\tau)\\equiv r_0>s$ constant on an interval of positive length, then\n$r_0>\\frac{3s}{2}$. If $\\gamma$ is equatorial, its conserved angular\nmomentum additionally satisfies $\\ell^2=\\dfrac{c^2sr_0^2}{2r_0-3s}$.\nConsequently no timelike circular geodesic, in any angular orientation, exists\nwith $s<r_0\\le\\frac{3s}{2}$.\n\n**(c) Stability threshold of the radial potential.** For each radius\n$r>\\frac{3s}{2}$ set $\\ell_r^2:=c^2sr^2/(2r-3s)$ and regard $\\ell_r$ as a\nconstant in the function $V_{\\ell_r}(x):=\\tfrac12 f(x)(c^2+\\ell_r^2/x^2)$.\nDifferentiate with respect to $x$ at fixed $\\ell_r$, then evaluate at $x=r$.\nThe result, evaluated at the circular value $\\ell_r$, is\n\n$$V_{\\ell_r}''(r)=\\frac{c^2s(r-3s)}{r^3(2r-3s)},\\qquad r>\\frac{3s}{2},$$\n\nso $V_\\ell$ has a strict local minimum at the circular-orbit radius exactly\nfor $r>3s$, a strict local maximum exactly for $\\frac{3s}{2}<r<3s$, and\n$V_\\ell''(3s)=0$; the radius $r=3s$ is the **innermost stable circular orbit\nradius** of the restricted model in this potential sense.\n\n**(d) The photon sphere at $r=3s/2$.** Let $\\ell\\neq0$ and put\n$r_0=\\frac{3s}{2}$ and $e_0:=\\dfrac{\\lvert\\ell\\rvert\\sqrt{f(r_0)}}{r_0}=\\dfrac{2\\lvert\\ell\\rvert}{3\\sqrt3\\,s}>0$.\nThen the globally defined curve\n$$\\eta(\\tau):=\\bigl(x^0_0+\\tfrac{e_0}{f(r_0)}\\tau,\\ r_0,\\ R_{\\ell\\tau/r_0^2}\\omega_0\\bigr),\\qquad \\tau\\in\\mathbb R,$$\nwhose local polar expressions have $\\vartheta=\\pi/2$ and longitude\n$\\varphi_0+\\ell\\tau/r_0^2$ up to chart shifts, is a future null geodesic (a\n**null circular orbit** or **photon sphere**\norbit) with conserved quantities $e_0=-g(\\eta',\\partial_0)$ and\n$\\ell=g(\\eta',\\Phi)$, and its angular velocity is\n\n$$\\frac{d\\varphi}{dx^0}=\\frac{\\ell f(r_0)}{r_0^2e_0}=\\operatorname{sgn}(\\ell)\\,\\frac{\\sqrt{f(r_0)}}{r_0},\\qquad \\Bigl(\\frac{d\\varphi}{dx^0}\\Bigr)^2=\\frac{f(r_0)}{r_0^2}=\\frac{4}{27s^2}.$$\n\nThe **null effective potential** $W^{\\mathrm n}_\\ell(r):=f(r)\\ell^2/r^2$\nsatisfies $(W^{\\mathrm n}_\\ell)'(3s/2)=0$ and\n$(W^{\\mathrm n}_\\ell)''(3s/2)=-\\dfrac{32\\ell^2}{81s^4}<0$, so the photon-sphere\nradius is a strict local maximum of the null potential.\n\n**(e) Scope.** All statements are exact data of the restricted model: the\norbits are ideal geodesics of the metric on the exterior domain, the\nstability claim is the sign of the second derivative of the stated potential,\nand no claim is made about nonlinear stability, about orbital decay, about\nobservations or about the interior region. The case $r_0=s$ is excluded, and\nthe reduction is stated only where $r>s$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-gr-fx-scalar-dominant-energy",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. At a point $p$ of a time-oriented Lorentzian\nfour-manifold, let $n$ be a future-directed unit timelike vector, let\n$X\\in T_pM$ be future causal, and let $\\psi$ be a smooth real scalar. Put\n$\\ell:=\\sharp_g(d\\psi)$, $a:=d\\psi(n)$,\n$b:=h_n(\\ell)\\in n^\\perp$, and $|b|^2:=g(b,b)$, where $h_n$ is the spatial\nprojection relative to $n$. Then\n\n$$Q(n,n)=\\frac12\\bigl(a^2+|b|^2\\bigr),\\qquad Q(n,X)\\geq0.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-gr-fx-schwarzschild-gaussian-beam-concentration",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. Fix the Schwarzschild exterior datum with $s>0$, the stationary field $T=\\partial_0$, and $0<\\delta<s/2$. Let $K_\\delta=\\{|r-3s/2|\\le\\delta\\}$ include the whole sphere factor, and use the stationary total and annular energies $E_T$ and $E_{T,\\delta}$ defined for the real scalar test tensor. For every $H>0$ and every $0<\\epsilon<1$, there is a real $\\psi\\in C^\\infty(\\mathbb R\\times(s,\\infty)\\times S^2)$ solving $\\Box_g\\psi=0$, with compact smooth Cauchy data at $x^0=0$, such that\n\n$$E_T[\\psi](0)=1,\\qquad E_{T,\\delta}[\\psi](x^0)\\ge1-\\epsilon\\quad\\text{for every }0\\le x^0\\le H.$$\n\nThe same solution works on the entire prescribed interval. Its stationary energy is finite and equal to one on every static slice. The frequency may depend on $H,\\epsilon,s,\\delta$; no infinite-time concentration, horizon extension, or concentration in a smaller angular neighborhood is asserted.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F2], the null geodesic has constant radius $r=3s/2$, and $x^0(\\tau)$ increases strictly through every real value. Because $\\delta>0$, each static slice segment of this orbit lies inside $K_\\delta$, the integration region defining $E_{T,\\delta}$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Use [F4] with $\\epsilon=1/2$. For every finite $T>0$ it supplies a wave $\\psi_T$ with unit initial stationary energy and $E_{T,\\delta}[\\psi_T](x^0)\\geq1/2$ on $[0,T]$. By [F3], the local energy density is nonnegative on the whole Schwarzschild annulus, so\n$\\int_0^\\infty E_{T,\\delta}[\\psi_T](x^0)\\,dx^0\\geq\\int_0^T\\tfrac12\\,dx^0=T/2$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If a uniform estimate constant $C<\\infty$ existed, choose $T>2C$. Step 2.1 gives a left side greater than $C$, while the proposed estimate and $E_T[\\psi_T](0)=1$ bound it by $C$, a contradiction. Thus the nondegenerate no-loss estimate fails for the exact real wave class in the Example.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example quantifies over exact smooth waves, and proof 2.1 actually supplies a unit-energy wave for each finite T>0. Thus the wave class is not assumed empty or used vacuously to contradict the uniform estimate."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 also gives contradiction for C=0 by choosing any T>0; no positive lower cutoff for C is required."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The exact concentrated-wave family contradicts a single uniform no-loss local-energy constant; no characterization of all estimates or trapping geometries is asserted. The input is already one specified scalar field/current or mode; no number of fields or singleton index set is a theorem parameter."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and step 1.1 use delta>0 so the closed neighborhood lies strictly outside r=s."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 integrates the nonnegative local energy over the closed finite interval [0,T]; endpoints do not alter the lower bound."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A1 retains Countable Choice; step 2.1 now uses the locally proved F4 concentration supplier with exactly the same hypotheses, rather than an unproved existence premise."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The exact concentrated-wave family contradicts a single uniform no-loss local-energy constant; no characterization of all estimates or trapping geometries is asserted. This public claim is not a biconditional requiring a separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The exact concentrated-wave family contradicts a single uniform no-loss local-energy constant; no characterization of all estimates or trapping geometries is asserted. This public claim is not a biconditional requiring a separate reverse implication."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "finite-time lower bound",
+          "status": "checked",
+          "evidence": "Step 2.1 integrates the lower bound 1/2 over [0,T], giving T/2."
+        },
+        {
+          "name": "uniform-constant contradiction",
+          "status": "checked",
+          "evidence": "Step 3.1 chooses T>2C and compares T/2 with the claimed upper bound C."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "owner-/root/drift_materialization-round1",
+        "notes": "Exact concentration supplier and consumer contradiction checked directly after native writer drain; this is focused Step1 owner repair, not independent proof acceptance."
+      },
+      "historical_author_risk_review": {
+        "status": "escalated",
+        "reviewer": "beta-batch-36-author-self-check",
+        "notes": "The conditional implication is complete. The proposed Gaussian-beam concentration supplier is absent, so the unconditional photon-sphere obstruction remains escalated."
+      }
+    },
+    "lem-gr-fx-schwarzschild-gaussian-beam-concentration": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-gr-schwarzschild-exterior-model",
+          "source_section": "Definition",
+          "quote": "This item assumes the axiom of countable choice $\\mathrm{AC}_\\omega$ through\nthe tangent-bundle structure used by\n[[def-gr-smooth-lorentzian-objects]] clause (c)\n([[def-countable-choice]]); no further choice principle is used.\n\n**(a) Parameters and the Schwarzschild radius.** Let $c>0$ and $G_N>0$ be real\nconstants and let $m_*>0$ be a real **mass parameter**. Put\n\n$$s:=\\frac{2G_Nm_*}{c^2}>0 .$$\n\nThe number $s$ is the **Schwarzschild radius** of the datum. Neither $c$,\n$G_N$ nor $m_*$ is measured here; the physical reading of $c$ and $G_N$ as the\nframework's conversion and Newton constants and of $m_*$ as a mass is fixed by\nthe physical conventions of the framework, not by this definition.\n\n**(b) The underlying manifold and its product charts.** Let $S^2:=S_2(0,1)=\n\\{y\\in\\mathbb R^3:\\lVert y\\rVert_2=1\\}$ be the unit Euclidean sphere with the\nsubspace topology of [[def-euclidean-spheres-and-closed-balls]]. Specify its\nsmooth structure as the maximal atlas generated by the following two charts\n([[def-smooth-manifold]]). For $\\varepsilon\\in\\{+1,-1\\}$ put\n$p_\\varepsilon=(0,0,\\varepsilon)$ and\n$U_\\varepsilon=S^2\\setminus\\{p_\\varepsilon\\}$, and define\n\n$$\\sigma_\\varepsilon:U_\\varepsilon\\to\\mathbb R^2,\\qquad \\sigma_\\varepsilon(y)=\\frac{(y_1,y_2)}{1-\\varepsilon y_3}.$$\n\nThese open domains cover $S^2$. Each chart is a homeomorphism onto\n$\\mathbb R^2$, with inverse, for $u=(u_1,u_2)$ and $q=u_1^2+u_2^2$,\n\n$$\\sigma_\\varepsilon^{-1}(u)=\\left(\\frac{2u_1}{1+q},\\frac{2u_2}{1+q},\\varepsilon\\frac{q-1}{1+q}\\right).$$\n\nThe two inverse identities follow by substitution; all displayed denominators\nare nonzero on their domains. On the overlap both transition maps are\n$u\\mapsto u/(u_1^2+u_2^2)$ on $\\mathbb R^2\\setminus\\{0\\}$, hence smooth.\nThe subspace is Hausdorff and has a countable basis given by intersections\nwith Euclidean balls of rational centres and positive rational radii.\nThus these charts specify a smooth two-manifold without boundary. This is\nthe standard sphere structure used for the round metric below: the inclusion\nhas the displayed smooth local parametrizations, and their differentials\nare injective because composition with $\\sigma_\\varepsilon$ is the identity.\nLet $M$ be the product manifold\n\n$$M:=\\mathbb R\\times(s,\\infty)\\times S^2$$\n\nwith the product smooth structure\n([[prop-products-of-smooth-manifolds-have-a-canonical-product-smooth-structure]]);\nit is a smooth four-manifold without boundary. Write $x^0:M\\to\\mathbb R$ and\n$r:M\\to(s,\\infty)$ for the first and second projections and $\\iota:M\\to S^2$\nfor the third. A **product chart** of $M$ is a smooth chart on the product\nwhose angular part is a smooth chart of $S^2$. In a **spherical-polar product\nchart**, $0<\\vartheta<\\pi$ and the components of the round metric\n$\\gamma_{S^2}$ of [[ex-the-round-metric-on-the-sphere-as-an-induced-metric]]\nare $\\gamma_{22}=1$, $\\gamma_{23}=\\gamma_{32}=0$,\n$\\gamma_{33}=\\sin^2\\vartheta$. These polar charts omit the two poles; ordinary\nsmooth sphere charts around the poles complete the product atlas.\n\n**(c) The metric.** Let $f:(s,\\infty)\\to(0,\\infty)$ be the smooth function\n\n$$f(r):=1-\\frac{s}{r} .$$\n\nDefine $g$ globally by the coordinate-free expression\n\n$$g=-f\\,d(x^0)\\otimes d(x^0)+f^{-1}\\,dr\\otimes dr+r^2\\,\\iota^*\\gamma_{S^2}.$$\n\nIn every spherical-polar product chart its component functions are\n\n$$g_{00}:=-f(r),\\qquad g_{11}:=\\frac{1}{f(r)},\\qquad g_{22}:=r^2,\\qquad g_{33}:=r^2\\sin^2\\vartheta,$$\n\nand $g_{ab}:=0$ whenever $a\\ne b$, $a,b\\in\\{0,1,2,3\\}$, with the index order\n$(x^0,x^1,x^2,x^3)=(x^0,r,\\vartheta,\\varphi)$. This is a smooth symmetric\ncovariant $2$-tensor field on all of $M$\n([[def-gr-smooth-covariant-two-tensor-field]]); the component display is local\nto spherical-polar charts, and $f>0$ because $r>s$. The pair $(M,g)$ is the **Schwarzschild exterior\nmetric of mass parameter $m_*$**; the datum of this definition is the\nquadruple $(c,G_N,m_*,g)$. With these parameters fixed, write $(M,g,N)$\nfor its associated geometric datum, with $N$ as in clause (d). The geometric\ndatum depends on the parameters only through $s$ and does not retain $c$,\n$G_N$ and $m_*$ separately. That $(M,g,N)$ is a time-oriented smooth Lorentzian four-manifold\nof signature $(-,+,+,+)$ is not asserted here; it is proved in the companion metric-properties lemma of this page (its\njustification record in the frontmatter), which also records the equivalent\ncoordinate-free description\n$g=-f\\,d(x^0)\\otimes d(x^0)+f^{-1}\\,dr\\otimes dr+r^2\\,\\iota^*\\gamma_{S^2}$.\n\n**(d) Time orientation and the Schwarzschild chart.** The field\n$N:=\\partial_0$ is the smooth product vector field on $M$\n([[def-derivation-at-a-point-and-tangent-space]]); the chart components of $g$\nare independent of $x^0$, so $N$ is the restriction of a global vector field,\nand $g(N,N)=-f(r)<0$ at every point. The datum carries the time orientation\n$N$. Spherical-polar product charts are **Schwarzschild charts** of the datum;\nat the poles the same metric is represented in the smooth sphere charts of\nthe product atlas. We write $t$ for the coordinate $x^0/c$ when the datum is\nread in the framework's unit conventions.\n\n**(e) Scope.** The domain of the datum is the exterior region $r>s$; the\ndefinition asserts nothing about $r=s$, about $r\\le 0$, about any matter, or\nabout any equation satisfied by $g$. The horizon $r=s$ is not part of the\ndatum, and a continuation of the metric to $r=s$ requires the separate constructions recorded on this page, the\nregularity lemma for the advanced chart and the Kruskal model-properties\nlemma. Whether the datum is a solution of the\nframework's field law is proved, not defined, in the Ricci-and-Einstein-tensor lemma of this\npage.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-gr-fx-scalar-wave-stress",
+          "source_section": "Definition",
+          "quote": "Assume the axiom of countable choice $\\mathrm{AC}_\\omega$ for the smooth\ntangent-bundle conventions. Let $(M,g,N)$ be a time-oriented smooth\nLorentzian four-manifold of signature $(-,+,+,+)$ with metric-selected\nconnection $\\nabla$ and inverse metric $g^{ab}$. Let $U\\subseteq M$ be open,\nlet $\\psi\\in C^\\infty(U,\\mathbb R)$ be a real scalar field, and let $X$ be a\nsmooth vector field on $U$. Define the wave operator\n$\\Box_g\\psi:=g^{ab}\\nabla_a\\nabla_b\\psi$ and the symmetric covariant tensor\n\n$$Q_{ab}[\\psi]:=(\\nabla_a\\psi)(\\nabla_b\\psi)-\\frac12 g_{ab}g^{cd}(\\nabla_c\\psi)(\\nabla_d\\psi).$$\n\nDefine the multiplier covector by $J^X_a[\\psi]:=Q_{ab}[\\psi]X^b$. The\nassociated energy-current vector is $j_X^a[\\psi]:=-g^{ab}J^X_b[\\psi]$; this\nsign convention makes its flux through a future spacelike slice equal to the\ndensity $Q_{ab}n^aX^b$ when $n$ is the future unit normal. The test-wave\nequation is $\\Box_g\\psi=0$ on $U$. These objects are defined on the fixed\nbackground $g$; $Q$ is not automatically an SI matter stress-energy tensor,\nis not inserted into an Einstein equation here, and does not evolve $g$.\n\nIf $\\psi$ is dimensionless and the coordinates have length units, the\ncomponents of $Q$ have units of inverse length squared. This dimensional fact\ndoes not identify $Q$ with a physical stress tensor without an independently\nspecified field normalization and coupling.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-gr-fx-nondegenerate-local-energy-estimate",
+          "source_section": "Definition",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. Let $(M,g,N)$ be the Schwarzschild exterior\ndatum with $s>0$, $f(r)=1-s/r$, exterior coordinate $x^0$, and stationary\nfield $T=\\partial_0$. Let $0<\\delta<s/2$ and put\n$K_\\delta:=\\{(x^0,r,\\omega):|r-3s/2|\\leq\\delta\\}$ for $\\omega\\in S^2$.\nThen $K_\\delta$ is contained in $r>s$. On the static slice\n$\\Sigma_{x^0}:=\\{x^0=\\text{constant}\\}$ the future unit normal is\n$n=f^{-1/2}T$. For a smooth real test wave $\\psi$ with finite initial\nstationary energy, define\n\n$$E_T[\\psi](x^0):=\\int_{\\Sigma_{x^0}}Q_{ab}[\\psi]n^aT^b\\,d\\mu_{\\Sigma_{x^0}},\\qquad E_{T,\\delta}[\\psi](x^0):=\\int_{\\Sigma_{x^0}\\cap K_\\delta}Q_{ab}[\\psi]n^aT^b\\,d\\mu_{\\Sigma_{x^0}}.$$\n\nA **nondegenerate integrated local energy estimate with no trapping loss**\non $K_\\delta$ means that there is a finite constant $C$, independent of\n$\\psi$, such that every smooth solution of $\\Box_g\\psi=0$ with finite\n$E_T[\\psi](0)$ satisfies\n\n$$\\int_0^\\infty E_{T,\\delta}[\\psi](x^0)\\,dx^0\\leq C E_T[\\psi](0).$$\n\nHere “nondegenerate” means that the estimate integrates the full unweighted\nfirst-derivative density, with no weight vanishing at $r=3s/2$; “no trapping\nloss” means that the right side contains only the initial first-derivative\nstationary energy, with no additional derivatives or degenerating weights.\nThis definition asserts no existence or nonexistence of such a constant.",
+          "uses": [
+            "3.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-smooth-bump-between-concentric-euclidean-balls",
+          "source_section": "Statement",
+          "quote": "Let $0<r<R$ and $n\\ge 1$. Then there exists a smooth function $\\rho:\\mathbb R^n\\to [0,1]$ such that $\\rho=1$ on $\\overline B_r(0)$ and $\\operatorname{supp}(\\rho)\\subseteq B_R(0)$.",
+          "uses": [
+            "4.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Coordinates and angular functions. Put $r_0=3s/2$ and $x=r+s\\log(r/s-1)-c$, with $c$ chosen so $x(r_0)=0$. Since $dx/dr=f^{-1}>0$ and the two endpoint limits are $-\\infty,+\\infty$, this is a smooth global radial coordinate with $r_x=f$. For an integer $l\\ge1$ set $Y_l=c_l(\\omega_1+i\\omega_2)^l$, with the positive constant $c_l$ normalizing $\\int_{S^2}|Y_l|^2=1$. This function is smooth at the poles by its polynomial expression. In polar coordinates it is $c_l\\sin^l\\vartheta\\,e^{il\\varphi}$; direct differentiation gives $\\Delta_{S^2}Y_l=-l(l+1)Y_l$. Integration in $\\varphi$ gives $\\int Y_l^2=0$. Sphere integration by parts gives $\\int|\\nabla Y_l|^2=l(l+1)$ and $\\int\\nabla Y_l\\cdot\\nabla Y_l=l(l+1)\\int Y_l^2=0$. These identities can also be checked directly in the polar coordinates, where $\\sin^l\\vartheta$ removes the endpoint terms.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Exact scalar reduction. In $(t,x,\\omega)$ the metric is $f(-dt^2+dx^2)+r^2\\gamma_{S^2}$. Expanding $\\Box_g$ in its volume density yields $\\Box_g u=f^{-1}(-u_{tt}+r^{-2}\\partial_x(r^2u_x))+r^{-2}\\Delta_{S^2}u$. Substitution of $u=q(t,x)Y_l(\\omega)/r(x)$ therefore gives precisely $q_{tt}-q_{xx}+W_lq=0$, with $W_l=f(l(l+1)/r^2+s/r^3)\\ge0$. For each fixed $l$, $W_l$ and every $x$ derivative are bounded on $\\mathbb R$: $\\partial_x=f\\partial_r$, the rational functions extend smoothly to $r=s$, and their derivatives decay at infinity. No uniform-in-$l$ bound is needed for existence.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Positive energy and real fields. For a compactly supported complex $q$ define $e_l[q]=\\tfrac12\\int_{\\mathbb R}(|q_t|^2+|q_x|^2+W_l|q|^2)\\,dx$. Use the sum of the real and imaginary scalar energies for a complex field. From [F2]--[F3], its energy density in $x,\\omega$ is $\\tfrac12(r^2|u_t|^2+r^2|u_x|^2+f|\\nabla_{S^2}u|^2)$. For $qY_l/r$, integration over $S^2$ gives $\\tfrac12(|q_t|^2+|q_x-bq|^2+fl(l+1)|q|^2/r^2)$, $b=f/r$. The identity $b'+b^2=fs/r^3$ and integration of $-b\\partial_x|q|^2$, with zero endpoint terms, prove that its total energy equals $e_l[q]$. The zero bilinear angular integrals in step 1.1 give exactly $E_T[\\operatorname{Re}(qY_l/r)]=e_l[q]/2$. The original local energy density is nonnegative on every radial subset. The factor $1/2$ for real fields also holds before the radial integration by parts, so no false boundary-term identity on a finite annulus is being used.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "Global smooth radial Cauchy construction. For arbitrary compact smooth data $p,v$, solve the integral equation $q=q_0+\\mathcal Kq$, where $q_0=(p(x+t)+p(x-t))/2+\\tfrac12\\int_{x-t}^{x+t}v(y)\\,dy$ and $\\mathcal Kq=-\\tfrac12\\int_0^t\\int_{x-(t-a)}^{x+(t-a)}W_l(y)q(a,y)\\,dy\\,da$. On a slab of width $d$ its operator norm on bounded continuous functions is at most $\\|W_l\\|_\\infty d^2/2$. Choose this below one. Picard iteration from $q_0$ then has geometrically summable successive sup-norm differences, so converges uniformly to the unique bounded continuous solution. Each iterate vanishes outside the unit-speed cone of the initial compact support. Spatial difference quotients of the integral equation inductively give continuous derivatives of every order: the highest differentiated unknown is acted on by the same $\\mathcal K$, while all lower terms involve already known derivatives and bounded derivatives of $W_l$. Uniform convergence of these difference quotients follows from that same geometric estimate; the fundamental theorem of calculus identifies their limits as the derivatives. Differentiating the integral equation in time gives the initial velocity, $q_{tt}=q_{xx}-W_lq$, and all higher time derivatives. Thus the solution is jointly smooth. The fixed slab width depends on $l$ but not on the data size, so restart at successive endpoints and use uniqueness on overlaps to obtain a solution for every real time. Time reversal treats negative times. The iterates and their restarted solutions retain the compact unit-speed support cone. This is an actual Cauchy construction; global hyperbolicity or an unproved scalar-wave existence theorem has not been invoked.",
+          "step": "3.2",
+          "inputs": [
+            "step 2.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-3",
+          "claim": "Explicit Gaussian envelope. Let $h=(l+1/2)^{-1}$, $V_0=f/r^2$, $V_1=fs/r^3-V_0/4$. Then $W_l=h^{-2}V_0+V_1$. At $x=0$ direct differentiation gives $V_0(0)=\\Omega^2$, $V_0'(0)=0$, $V_0''(0)/2=-\\Omega^4$, where $\\Omega=2/(3\\sqrt3s)>0$. Indeed $\\partial_rV_0=(-2r+3s)/r^4$, and $\\partial_r^2V_0(r_0)=-3s/r_0^5$, with $\\partial_x=f\\partial_r$. Put $z(t)=\\cosh(\\Omega t)+i\\sinh(\\Omega t)$, $b(t)=\\Omega^2(\\cosh(\\Omega t)-i\\sinh(\\Omega t))/z(t)$, and $a(t,y)=z(t)^{-1/2}e^{-b(t)y^2/2}$, using the smooth square-root branch equal to one initially. Since $\\operatorname{Re}z>0$, it never vanishes. Calculation gives $\\operatorname{Re}b=\\Omega^2/|z|^2>0$, $b'=-i(b^2+\\Omega^4)/\\Omega$, and $(z^{-1/2})'/z^{-1/2}=-ib/(2\\Omega)$. Therefore $2i\\Omega a_t=-a_{yy}-\\Omega^4y^2a$. On every fixed $|t|\\le H$, all derivatives of $a$ are polynomials in $y$ with bounded coefficients times a Gaussian having $\\operatorname{Re}b\\ge c_H>0$; all required weighted $L^2$ norms are bounded uniformly there.",
+          "step": "3.3",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Frequency-independent energy stability. The same integral construction with an added d'Alembert forcing term treats smooth forcing on finite slabs. For a smooth spatially compact solution of $q_{tt}-q_{xx}+W_lq=F$, direct differentiation and integration by parts give $e_l'[q]=\\operatorname{Re}\\int F\\overline{q_t}\\,dx$. For nonzero $A=\\|F\\|_2$ and $B=\\|q_t\\|_2$, integration of $(|F|/A-|q_t|/B)^2\\ge0$ gives $\\int|Fq_t|\\le AB$; zero-norm cases give the same inequality immediately. Since $W_l\\ge0$, this bounds the energy derivative in absolute value by $\\sqrt{2e_l[q]}\\,\\|F\\|_2$. Apply this first to $\\sqrt{e_l+\\eta}$, integrate and let $\\eta\\downarrow0$ to obtain $\\sqrt{e_l[q](t)}\\le\\sqrt{e_l[q](0)}+2^{-1/2}\\int_0^t\\|F(a)\\|_2\\,da$. In particular the energy of a homogeneous wave from step 3.2 is conserved. Compact support on every finite slab justifies all integrations, even though the full spatial line is noncompact.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "step 3.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-2",
+          "claim": "Compact approximation and residual. Choose a real $\\chi\\in C_c^\\infty(\\mathbb R)$ from [F4], equal to one near $0$ and supported inside $\\{|r(x)-r_0|<\\delta\\}$. Set $Q_h=h^{3/4}e^{-i\\Omega t/h}\\chi(x)a(t,x/\\sqrt h)$. Its support and the support of each derivative lie in the exact annulus. In $R_h=(\\partial_t^2-\\partial_x^2+W_l)Q_h$, the $h^{-2}$ term cancels by $V_0(0)=\\Omega^2$ and the $h^{-1}$ term cancels by the envelope equation in step 3.3. The remaining terms away from cutoff derivatives are $h^{3/4}e^{-i\\Omega t/h}\\chi$ times $a_{tt}+V_1a+h^{-2}(V_0(x)-\\Omega^2+\\Omega^4x^2)a$. Taylor's theorem on the fixed compact support bounds the last parenthesis by $C|x|^3$. With $dx=\\sqrt h\\,dy$, the amplitude prefactor changes an envelope $L^2$ norm by $h$. Thus the first two terms are $O_H(h)$ in $L^2_x$ and the cubic term is bounded by $Ch\\,h^{-2}h^{3/2}\\||y|^3a\\|_2=O_H(\\sqrt h)$. Cutoff commutators are $-2\\chi'\\partial_x$ of the uncut amplitude and $-\\chi''$ times that amplitude. Their supports have $|x|\\ge d_0>0$; Gaussian decay there makes their norms $O_{H,N}(h^N)$ for every $N$, despite any fixed derivative powers of $h^{-1}$. Consequently $\\sup_{0\\le t\\le H}\\|R_h(t)\\|_2\\le C_H\\sqrt h$.",
+          "step": "4.2",
+          "inputs": [
+            "F4",
+            "step 1.1",
+            "step 3.3",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Positive normalization. At $t=0$, the substitution $x=\\sqrt h\\,y$ and Gaussian tail bounds show $e_l[Q_h](0)\\to C_0=\\Omega^2\\int|a(0,y)|^2\\,dy=\\Omega\\sqrt\\pi>0$. More explicitly, the time derivative's leading term $-i\\Omega Q_h/h$ contributes $\\Omega^2\\int|a_0|^2$ to the unhalved energy integral; $h^{-2}V_0|Q_h|^2$ contributes the same limit. Their cross/time-envelope terms are $O(h)$, the radial derivative energy is $O(h)$, and the $V_1$ term is $O(h^2)$. The factor $1/2$ in $e_l$ therefore gives $C_0+O(h)$. In particular this energy has a positive lower bound for sufficiently large integers $l$.",
+          "step": "5.1",
+          "inputs": [
+            "step 3.1",
+            "step 3.3",
+            "step 4.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-2",
+          "claim": "Exact correction. Use step 3.2 to solve the homogeneous radial equation with exactly the smooth compact initial data $Q_h(0),\\partial_tQ_h(0)$, obtaining $q_h$ on all real times. Then $w_h=q_h-Q_h$ has zero initial data and forcing $-R_h$. Steps 4.1 and 4.2 give $\\sup_{0\\le t\\le H}e_l[w_h](t)\\le(H^2/2)\\sup\\|R_h(t)\\|_2^2\\le C_Hh$. Its compact support on finite slabs follows from the support of $q_h$ and $Q_h$. Define $U_h=\\operatorname{Re}(q_hY_l/r)$. By steps 1.1--2.1 it is a real globally smooth exact scalar wave, including at the sphere poles, with compact smooth initial data. Its conserved stationary energy is exactly $e_l[Q_h](0)/2$ by steps 3.1 and 4.1.",
+          "step": "5.2",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "step 3.2",
+            "step 4.1",
+            "step 4.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "Concentration on every required slice. Normalize $\\psi_h=U_h/\\sqrt{e_l[Q_h](0)/2}$; its stationary energy is exactly one on every slice. Outside $K_\\delta$, the approximate field $\\operatorname{Re}(Q_hY_l/r)$ and all its derivatives vanish. There the exact field equals the correction $\\operatorname{Re}(w_hY_l/r)$. The original positive density of step 3.1 and the global energy identity consequently give $E_{T,\\mathrm{outside}\\ K_\\delta}[\\psi_h](t)\\le e_l[w_h](t)/e_l[Q_h](0)\\le C'_Hh$. The boundary spheres have measure zero, so total energy one implies $E_{T,\\delta}[\\psi_h](t)\\ge1-C'_Hh$ simultaneously for all $t\\in[0,H]$. Choose one sufficiently large integer $l$ with $C'_H/(l+1/2)<\\epsilon$. This proves the exact quantifiers and real-field assertion. The construction uses the full specified radial annulus and makes no assertion about a smaller angular neighborhood or a frequency uniform in $H$.",
+          "step": "6.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F3",
+            "step 3.1",
+            "step 5.1",
+            "step 5.2",
+            "construct",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The exterior and each specified annulus are nonempty because s>0 and delta>0; no empty-domain theorem is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement fixes epsilon>0; step 5.1 proves a strictly positive initial energy limit before division, so zero initial data are never normalized."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 6.1 normalizes the real wave to total stationary energy exactly one; the factor one-half from taking a real field was computed in step 3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement excludes s=0 and delta=0; step 4.2 places the cutoff strictly inside the exact annulus, so it stays away from the horizon."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 6.1 proves one uniform bound at every t in the closed interval [0,H], including both endpoints; the annular boundary spheres have measure zero."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A1 retains Countable Choice; step 3.2 constructs the actual smooth Cauchy solution by uniquely determined Picard iteration, and step 6.1 chooses one sufficiently large integer frequency."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The concentration statement has no if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The concentration statement has no if-and-only-if assertion."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "Gaussian and potential coefficients",
+          "status": "checked",
+          "evidence": "Step 3.3 explicitly differentiates V0 and the Gaussian to obtain V0 second derivative/2=-Omega^4 and the exact envelope equation."
+        },
+        {
+          "name": "normalization factor",
+          "status": "checked",
+          "evidence": "Steps 3.1,5.1,6.1 derive the exact real-field factor and positive limit Omega sqrt(pi), then normalize total energy to one."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "owner-/root/drift_materialization-round1",
+        "notes": "Checked all reduction signs, real-field angular identities, smooth Cauchy iteration, nonnegative potential, cutoff residual scaling and simultaneous-in-time energy localization directly. Not independent acceptance or a full-run gate."
+      }
+    }
+  }
+}

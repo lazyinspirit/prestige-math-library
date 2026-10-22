@@ -1,0 +1,914 @@
+{
+  "version": 1,
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "batch": "75",
+  "level": 3,
+  "scope": [
+    "def-qftx-braided-line-model",
+    "lem-qftx-anyonic-vacuum-reverse-adjacent-relation",
+    "thm-qftx-tl-hecke-braid",
+    "prop-qftx-coxeter-specialization",
+    "ex-qftx-vacuum-channel-exchange"
+  ],
+  "contracts": {
+    "def-qftx-braided-line-model": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-tensor-and-multitensor-category",
+          "source_section": "Definition",
+          "quote": "A **multitensor category over $k$** is a locally finite $k$-linear abelian,\nrigid monoidal category whose tensor product is $k$-bilinear in both variables.\nA **tensor category** is a multitensor category for which\n$\\operatorname{End}(\\mathbf1)\\cong k$ as $k$-algebras.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-braiding",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal C,\\otimes,\\mathbf 1,\\alpha,\\lambda,\\rho)$ be a monoidal\ncategory ([[def-monoidal-category]]).\n\nA **braiding** on $\\mathcal C$ is a natural isomorphism\n\n$$c_{X,Y}:X\\otimes Y\\longrightarrow Y\\otimes X$$\n\nnatural in both variables ([[def-natural-isomorphism]]) such that, for all\nobjects $X,Y,Z$,\n\n$$\\alpha_{Y,Z,X}\\circ c_{X,Y\\otimes Z}\\circ\\alpha_{X,Y,Z}=(1_Y\\otimes c_{X,Z})\\circ\\alpha_{Y,X,Z}\\circ(c_{X,Y}\\otimes1_Z),$$\n\nand\n\n$$\\alpha_{Z,X,Y}^{-1}\\circ c_{X\\otimes Y,Z}\\circ\\alpha_{X,Y,Z}^{-1}=(c_{X,Z}\\otimes1_Y)\\circ\\alpha_{X,Z,Y}^{-1}\\circ(1_X\\otimes c_{Y,Z}).$$\n\nThese are the two **hexagon identities**. The invertibility of each\n$c_{X,Y}$ is part of the data, not a consequence of the hexagons.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-braided-coherence-via-underlying-braids",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal C$ be a braided monoidal category and let $X$ be an object of\n$\\mathcal C$. Each **formal canonical composite** on $X^{\\otimes n}$ built\nfrom associators, unitors, braidings, and their inverses has an underlying\nbraid in $B_n$. If two such formal composites have equal underlying braids,\nthen their interpreted morphisms in $\\mathcal C$ are equal. Different formal\nbraids may, of course, have the same interpretation in a particular braided\ncategory.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-braid-group-by-the-artin-presentation",
+          "source_section": "Definition",
+          "quote": "For $n\\ge2$, the **braid group** $B_n$ is the group with generators\n$\\sigma_1,\\dots,\\sigma_{n-1}$ and relations\n\n$$\\sigma_i\\sigma_{i+1}\\sigma_i=\\sigma_{i+1}\\sigma_i\\sigma_{i+1}\\qquad(1\\le i\\le n-2),$$\n\n$$\\sigma_i\\sigma_j=\\sigma_j\\sigma_i\\qquad(1\\le i,j\\le n-1,\\ |i-j|>1).$$\n\nEquivalently,\n\n$$B_n=\\langle \\sigma_1,\\dots,\\sigma_{n-1}\\mid \\sigma_i\\sigma_{i+1}\\sigma_i=\\sigma_{i+1}\\sigma_i\\sigma_{i+1}\\ (1\\le i\\le n-2),\\ \\sigma_i\\sigma_j=\\sigma_j\\sigma_i\\ (1\\le i,j\\le n-1,\\ |i-j|>1)\\rangle,$$\n\ninterpreted in the sense of [[def-group-presentation]] and\n[[def-relators-relations-and-finite-presentations]].\n\nFor $n=0$ and $n=1$, there are no generators, and $B_n$ is the trivial group\ngiven by the empty presentation.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-von-dyck",
+          "source_section": "Statement",
+          "quote": "Let $\\langle X\\mid R\\rangle$ be a presentation, let $H$ be a group, and let\n$u:X\\to H$ be a function. If the evaluation of every $r\\in R$ under $u$ is\n$e_H$, then there is a unique homomorphism\n\n$$\\overline u:\\langle X\\mid R\\rangle\\longrightarrow H$$\n\nwith $\\overline u([x])=u(x)$ for every $x\\in X$. Moreover, $\\overline u$ is\nsurjective if and only if $u(X)$ generates $H$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-hh-finite-double-hopf-structure-and-canonical-r",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a finite-dimensional Hopf algebra over a field with bijective antipode, and let $(h_i)$ and $(f_i)$ be dual bases of $H$ and $H^*$. In the factor order $D(H)=H^{*\\mathrm{op}}\\otimes H$, the tensor\n\n$$R=\\sum_i(f_i\\otimes1_H)\\otimes(\\varepsilon_H\\otimes h_i)$$\n\nis basis-independent and invertible, with\n\n$$R^{-1}=\\sum_i(f_i\\otimes1_H)\\otimes(\\varepsilon_H\\otimes S^{-1}(h_i)).$$\n\nIt is quasitriangular in the convention\n\n$$R\\Delta_D(d)=\\Delta_D^{\\mathrm{op}}(d)R,\\qquad(\\Delta_D\\otimes\\operatorname{id})R=R_{13}R_{23},\\qquad\\alpha^{-1}_{D,D,D}(\\operatorname{id}\\otimes\\Delta_D)R=R_{13}R_{12}.$$\n\nOn every pair of left $D(H)$-modules, $\\tau\\circ R$ is the Yetter–Drinfeld braiding of [[thm-hh-double-modules-and-yetter-drinfeld-modules]].",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By the canonical rebracketing property in [F3], there is a canonical isomorphism $\\rho_{n,i}:P_n(X)\\to Q_{n,i}(X)$ built from the associators and unitors; every factor is invertible, so the composite is invertible. The map $\\operatorname{id}\\otimes c_{X,X}\\otimes\\operatorname{id}$ is an endomorphism of $Q_{n,i}(X)$, because $c_{X,X}$ is an isomorphism from $X\\otimes X$ to the same ordered object $X\\otimes X$. Conjugating gives the displayed endomorphism $B_i^X$ of $P_n(X)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $\\rho_{n,i}$ and $\\rho'_{n,i}$ are two such canonical rebracketings, then $\\rho'_{n,i}\\rho_{n,i}^{-1}$ has trivial underlying braid. Inserting the same local $c_{X,X}$ gives formal composites with underlying braid $\\sigma_i$; [F3] makes the resulting endomorphisms equal. Thus $B_i^X$ is independent of the rebracketing path.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The two composites $B_i^XB_{i+1}^XB_i^X$ and $B_{i+1}^XB_i^XB_{i+1}^X$ have underlying braid words $\\sigma_i\\sigma_{i+1}\\sigma_i$ and $\\sigma_{i+1}\\sigma_i\\sigma_{i+1}$, equal in $B_n$; operators with $|i-j|>1$ have the equal underlying words $\\sigma_i\\sigma_j=\\sigma_j\\sigma_i$. By [F3] the corresponding morphisms are equal.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Each $B_i^X$ is invertible by step 1.1 and [F2]. The relations in step 3.1 therefore satisfy the Artin presentation [F4], and [F5] gives the unique homomorphism $\\varrho_n:B_n\\to\\operatorname{Aut}_{\\mathcal C}(P_n(X))$ with $\\varrho_n(\\sigma_i)=B_i^X$.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "F5",
+            "step 1.1",
+            "step 3.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "In the Hopf-module convention, the coproduct supplies the tensor-product module action, while [F6]'s intertwining identity $R\\Delta_D(d)=\\Delta_D^{\\mathrm{op}}(d)R$ makes $\\tau\\circ R$ the exchange braiding; [F6] fixes the factor order $H^{*\\mathrm{op}}\\otimes H$. This supplies the category braiding only when the relevant module objects and category structure are supplied. No semisimplicity, unitarity, modularity, or physical realization follows from [F6] alone.",
+          "step": "5.1",
+          "inputs": [
+            "F6",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [
+        {
+          "case": "n=2, i=1",
+          "calculation": "P_0=1 is removed by the fixed unitors, so Q_{2,1}=X⊗X and B_1^X=c_{X,X}.",
+          "disposition": "The smallest admitted tensor power satisfies the same construction without spectator factors."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The definition removes zero spectator factors by the fixed unitors; step 1.1 covers the boundary indices."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No scalar zero parameter occurs; X is unrestricted and may be the zero object."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At n=2 there are no spectator factors and step 1.1 gives c_{X,X} on X⊗X."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement asserts a group homomorphism but no faithfulness; step 4.1 constructs only that homomorphism."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The zero-exponent spectator convention uses unitors at i=1 and i=n−1; step 1.1 defines the endomorphism there."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 compares any two admissible rebracketing paths and proves their operators agree."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a construction and its consequence, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no converse to the braid representation construction."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-75-author-self-check",
+        "notes": "The author checked each numbered step against its labelled facts, exact supplier excerpt, domains, sign convention, normalization, and boundary cases. This is Step 1 authoring evidence, not independent proof approval."
+      }
+    },
+    "lem-qftx-anyonic-vacuum-reverse-adjacent-relation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-anyonic-fusion-path-space",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal C$ be a fusion category over $\\mathbb C$, so it is finite semisimple, rigid, monoidal, and has simple unit [[def-fusion-and-multifusion-category]]. Let $a,b,c$ be simple objects and let $n\\ge0$. Fix one representative of each simple isomorphism class for the internal path labels; the external objects $a,b,c$ need not equal their representatives. Set $T_0=b$ and recursively fix the left-associated parenthesization $T_{j+1}:=T_j\\otimes a$. The **fixed-boundary anyonic path space** is\n\n$$H_{a,n;b,c}:=\\operatorname{Hom}_{\\mathcal C}(c,T_n).$$\n\nFor simple labels $x,y$, define the split multiplicity space $W_{x,a}^y:=\\operatorname{Hom}_{\\mathcal C}(y,x\\otimes a)$. For $n\\ge1$, a fusion path is a sequence of simple labels $x_0=b,x_1,\\ldots,x_n=c$, with $x_1,\\ldots,x_{n-1}$ drawn from the fixed representative set, together with, for every $1\\le j\\le n$, one basis index $\\mu_j$ in a chosen basis $B_{x_{j-1},a}^{x_j}$ of $W_{x_{j-1},a}^{x_j}$. The basis index is retained even when distinct indices have the same adjacent labels. Fusion rules are the nonnegative integers $N_{x a}^{y}$ in $[x][a]=\\sum_yN_{x a}^{y}[y]$ [[def-fusion-rules]].\n\nFor $n=0$, there is no path if $b\\not\\cong c$. If $b\\cong c$, fix an isomorphism $u_{c,b}:c\\to b$ and take it as the single empty-path vector (use $u_{b,b}=\\operatorname{id}_b$ when the objects coincide). In the unitary setting choose this isomorphism unitary.\n\nFor $n\\ge1$, if $i_j\\in B_{x_{j-1},a}^{x_j}$ is the selected inclusion $x_j\\to x_{j-1}\\otimes a$, define the path composite by $\\gamma_0:=\\operatorname{id}_b$ and $\\gamma_j:=(\\gamma_{j-1}\\otimes\\operatorname{id}_a)\\circ i_j:x_j\\to T_j$. For $x_n=c$, $\\gamma_n$ is a vector in $H_{a,n;b,c}$. The next lemma proves these composites form a basis and computes the dimension. No Hilbert-space or physical Hamiltonian structure is part of this definition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-anyonic-local-channel-projector",
+          "source_section": "Definition",
+          "quote": "Fix a fusion-path space with repeated simple site charge $a$, a position $i$ with two adjacent $a$-labels, and a simple output $s$ of $a\\otimes a$, chosen from the fixed internal representative set of [[def-anyonic-fusion-path-space]]. Choose bases in the split spaces $\\operatorname{Hom}(z,x\\otimes y)$ at every vertex of the trees used below, retaining the fixed path vertex bases on the fixed tree. In the tree basis where this adjacent pair is fused first, let $\\Pi_s$ be the projection onto the direct summand with pair output $s$, acting as the identity on every multiplicity index inside that channel and as zero on all other pair outputs. Let $A_i:T_{\\mathrm{fixed}}\\to T_{\\mathrm{pair}}$ be a typed composite of associators and their inverses carrying the fixed path tree to this pair-first tree, without permuting the ordered inputs (including the boundary charge). In the split-tree bases of $\\operatorname{Hom}(c,T)$, let $F_i$ be the matrix of $h\\mapsto A_i\\circ h$, with target coordinates as rows and source coordinates as columns. The proof below constructs these bases and proves invertibility in any complex fusion category. Define the **local channel projector** in the fixed path basis by\n\n$$P_{i,s}:=F_i^{-1}\\Pi_sF_i.$$\n\nThis is an idempotent for any fusion category because $F_i$ is invertible. In a unitary fusion category with orthonormal tree bases, $F_i$ is unitary and $P_{i,s}$ is an orthogonal projection. The channel projection includes every multiplicity coordinate; the definition has no multiplicity-free restriction. The split Hom convention here is $\\operatorname{Hom}(c,T)$, as in [[def-anyonic-fusion-path-space]]. In the unitary case with adjoint vertex bases, each local left-to-right split recoupling matrix is the entrywise conjugate of the QC25 inverse-precomposition F matrix, as proved below; they agree for the displayed real Fibonacci and Ising blocks.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-tqc-f-symbol",
+          "source_section": "Definition",
+          "quote": "Let $a,b,c,d$ be simple charges in a unitary fusion category, and put\n$P_L=((a\\otimes b)\\otimes c)$ and $P_R=a\\otimes(b\\otimes c)$. The local\nfusion-tree basis result [[lem-qc-tqc-fusion-tree-dimension]] identifies\n\n$$\\mathcal H_L:=\\bigoplus_e V_{ab}^e\\otimes V_{ec}^d \\quad\\text{with}\\quad\\operatorname{Hom}(P_L,d),$$\n\nand\n\n$$\\mathcal H_R:=\\bigoplus_f V_{bc}^f\\otimes V_{af}^d \\quad\\text{with}\\quad\\operatorname{Hom}(P_R,d),$$\n\nby the corresponding tree compositions. These direct sums carry the\northonormal left- and right-tree bases. If $\\mu:a\\otimes b\\to e$ and\n$\\nu:e\\otimes c\\to d$ are vertex basis maps, write\n$L_{e,\\mu,\\nu}:=\\nu\\circ(\\mu\\otimes\\operatorname{id}_c):P_L\\to d$. If\n$\\rho:b\\otimes c\\to f$ and $\\sigma:a\\otimes f\\to d$ are vertex basis maps,\nwrite $R_{f,\\rho,\\sigma}:=\\sigma\\circ(\\operatorname{id}_a\\otimes\\rho):P_R\\to d$.\nLet $\\alpha_{a,b,c}:P_L\\to P_R$ be the associator. Define the **F-symbol\nmatrix** $F_d^{abc}$ by\n\n$$L_{e,\\mu,\\nu}\\circ\\alpha_{a,b,c}^{-1} =\\sum_{f,\\rho,\\sigma}F_d^{abc}[(f,\\rho,\\sigma),(e,\\mu,\\nu)]R_{f,\\rho,\\sigma}.$$\n\nRows index target-tree labels and multiplicity indices; columns index\nsource-tree labels and multiplicity indices. The sums retain every fusion\nchannel and every multiplicity coordinate.\nIf the fixed-total fusion space is zero-dimensional, the F-symbol is the unique\nempty $0\\times0$ matrix.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-anyonic-local-channel-projectors-are-orthogonal",
+          "source_section": "Statement",
+          "quote": "Let $b,c,a_1,\\ldots,a_n$ be simple objects of a unitary fusion category, with $n\\ge2$, and let $T_{\\mathrm{fixed}}$ be a fixed parenthesization of $b\\otimes a_1\\otimes\\cdots\\otimes a_n$. Equip $H=\\operatorname{Hom}(c,T_{\\mathrm{fixed}})$ with the split Hom inner product $g^\\dagger h=\\langle h,g\\rangle\\operatorname{id}_c$ and choose orthonormal split vertex bases in the trees below. Fix $1\\le i<n$. Let $A_i:T_{\\mathrm{fixed}}\\to T_{\\mathrm{pair}}$ be a composite of associators and inverses to a tree fusing $a_i,a_{i+1}$ first, without permuting inputs. Let $F_i$ be the matrix of $h\\mapsto A_i\\circ h$, with target rows and source columns, and let $\\Pi_s$ project onto all pair-first coordinates of simple pair output $s$, retaining every multiplicity index. Define $P_{i,s}:=F_i^{-1}\\Pi_sF_i$, extending the repeated-charge construction of [[def-anyonic-local-channel-projector]] to these arbitrary simple site charges. Then $(P_{i,s})_s$ is pairwise orthogonal, self-adjoint, and idempotent, and its sum over all simple outputs of $a_i\\otimes a_{i+1}$ is the identity on $H$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-anyonic-frobenius-schur-sign",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal C$ be a unitary spherical fusion category over $\\mathbb C$, with pivotal structure and spherical dimension as in [[def-pivotal-structure]], [[def-spherical-structure]], and [[def-the-dimension-of-an-object-relative-to-a-pivotal-structure]]. Let $a$ be a self-dual simple object with $N_{aa}^{\\mathbf1}=1$. Choose a unit vector $v:\\mathbf1\\to a\\otimes a$ spanning the one-dimensional vacuum split space and let $d_a>0$ be its positive spherical dimension.\n\nA **normalized vacuum-channel self-duality datum** is a supplied pair of maps $\\operatorname{coev}:\\mathbf1\\to a\\otimes a$ and $\\operatorname{ev}:a\\otimes a\\to\\mathbf1$ of the form\n\n$$\\operatorname{coev}=\\sqrt{d_a}\\,v,\\qquad \\operatorname{ev}=\\kappa_a\\sqrt{d_a}\\,v^\\dagger,$$\n\nwhere $\\kappa_a\\in\\{+1,-1\\}$ and the two duality zig-zag identities hold after the self-duality identification, using the left-dual convention of [[def-left-dual-and-right-dual-object]]. We call $\\kappa_a$ the **Frobenius–Schur sign in this normalized cup/cap convention**. It is not a braiding or $R$-symbol phase.\n\nThis item records supplied normalized duality data; it does not assert that every self-dual simple object admits the displayed gauge or prove a trace, ribbon, or category-equivalence theorem. An example must supply the datum or compute the sign from coherent normalized F-data; fusion rules alone do not specify it.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-anyonic-vacuum-f-symbol-frobenius-schur-normalization",
+          "source_section": "Statement",
+          "quote": "Let $a$ and $(v,\\operatorname{ev},\\operatorname{coev},d_a,\\kappa_a)$ be as in [[def-anyonic-frobenius-schur-sign]]. In the multiplicity-free vacuum-normalized gauge of [[def-qc-tqc-f-symbol]],\n\n$$\\left(F^{aaa}_a\\right)_{\\mathbf1,\\mathbf1}=\\frac{\\kappa_a}{d_a},\\qquad \\delta_a:=\\frac{1}{\\left((F^{aaa}_a)^{-1}\\right)_{\\mathbf1,\\mathbf1}}=\\kappa_a d_a.$$",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-anyonic-channel-projectors-are-reparenthesization-independent",
+          "source_section": "Statement",
+          "quote": "For fixed ordered tensor inputs and fixed source and target parenthesizations, any two sequences of canonical associator F-moves between them induce the same coordinate map. Consequently, conjugating a fixed pair-channel projection by either sequence gives the same operator on the fusion-path space.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Choose a parenthesization grouping the three sites $a_i,a_{i+1},a_{i+2}$ and decompose the split-tree basis by their simple total charge $y$ and the spectator labels. If the first pair fuses to $\\mathbf1$, then its fusion with the third $a$ has total charge $y=\\mathbf1\\otimes a\\cong a$; the same is true if the last pair fuses to $\\mathbf1$. On the $y=a$ block each vacuum-channel subspace has dimension $N_{aa}^{\\mathbf1}N_{\\mathbf1 a}^{a}=1$, since $N_{aa}^{\\mathbf1}=1$ and the tensor unit acts as the identity. On every $y\\not\\cong a$ block both projectors vanish. Each fixed spectator label and multiplicity coordinate gives a copy of this local block, where $P_i$ and $P_{i+1}$ act as rank-one orthogonal projections onto unit vectors $e$ and $f$, by [F4].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By the F-symbol coordinate convention in [F3], the vacuum-to-vacuum entry of the three-site F-move is the coordinate of one unit basis vector in the other tree basis. Therefore $|\\langle e,f\\rangle|=|(F^{aaa}_a)_{\\mathbf1,\\mathbf1}|=|\\kappa_a/d_a|=1/d_a$ by [F5] and [F6], so $|\\langle e,f\\rangle|^2=d_a^{-2}$.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F5",
+            "F6",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For unit vectors $e,f$, the rank-one projection formula gives $P_fP_eP_f=|\\langle e,f\\rangle|^2P_f$: on $x$, its value is $\\langle f,x\\rangle\\langle e,f\\rangle\\langle f,e\\rangle f$. Therefore $P_{i+1}P_iP_{i+1}=d_a^{-2}P_{i+1}$ on each $y=a$ spectator copy; on every other block both sides are zero. Tensoring with the spectator identities and transporting to the fixed path parenthesization preserves the relation by [F7].",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "F7",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Since $\\delta_a=\\kappa_ad_a$ and $\\kappa_a^2=1$, $\\delta_a^2=d_a^2$. Thus $U_{i+1}U_iU_{i+1}=\\delta_a^3P_{i+1}P_iP_{i+1}=\\delta_a^3d_a^{-2}P_{i+1}=\\delta_aP_{i+1}=U_{i+1}$. The sign is retained in the final equality.",
+          "step": "4.1",
+          "inputs": [
+            "F5",
+            "F6",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [
+        {
+          "case": "one total-a triple block",
+          "calculation": "For unit vectors e,f spanning the two vacuum-channel lines, |<e,f>|²=|κ_a/d_a|²=d_a^{-2}; hence P_{i+1}P_iP_{i+1}=d_a^{-2}P_{i+1} and δ_a³d_a^{-2}P_{i+1}=δ_aP_{i+1}.",
+          "disposition": "This finite-dimensional block calculation is the complete local relation; all spectator blocks are copies or zero."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "In step 1.1 the fixed-boundary path space may have no spectator blocks; all local projectors are then the zero operator. The blockwise equality in step 3.1 and its rescaling in step 4.1 both read zero equals zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "On a zero path block or a triple block whose total charge is not a, both local vacuum projectors vanish; steps 1.1 and 3.1 give 0=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The vacuum fusion multiplicity N_aa^1=1 and unit fusion N_1a^a=1 make each local vacuum-channel subspace rank one on the total-a block by step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The supplied d_a is positive and κ_a=±1, so δ_a²=d_a²>0; step 4.1 uses this exact normalization."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The allowed range 1≤i≤n−2 is stated explicitly and step 1.1 groups precisely those three sites."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "A fixed parenthesization and finite split-tree basis are given; the proof requires no nonempty selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is a one-way adjacent relation, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse construction from Temperley–Lieb relations to fusion data is claimed."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-75-author-self-check",
+        "notes": "The author checked each numbered step against its labelled facts, exact supplier excerpt, domains, sign convention, normalization, and boundary cases. This is Step 1 authoring evidence, not independent proof approval."
+      }
+    },
+    "thm-qftx-tl-hecke-braid": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "prop-anyonic-vacuum-channel-projectors-satisfy-temperley-lieb",
+          "source_section": "Statement",
+          "quote": "Let $a$ be a self-dual simple site charge with one-dimensional vacuum fusion $a\\otimes a\\to\\mathbf1$, and supply the normalized pivotal cup/cap datum of [[def-anyonic-frobenius-schur-sign]]. On a repeated-$a$ path space let $P_i:=P_{i,\\mathbf1}$ and set $U_i:=\\delta_aP_i$, where $\\delta_a=\\kappa_ad_a$ is the signed loop parameter of [[lem-anyonic-vacuum-f-symbol-frobenius-schur-normalization]]. Then, for all applicable interior indices,\n\n$$U_i^2=\\delta_aU_i,\\qquad U_iU_{i+1}U_i=U_i,\\qquad U_iU_j=U_jU_i\\quad(|i-j|>1).$$\n\nThe sign $\\kappa_a$ is retained; replacing it by $+1$ is justified only in examples whose self-duality datum has that sign.\n\nFor the diagram convention, each box $U_i$ has a cup at the top and a cap at the bottom on strands $i,i+1$; multiplication stacks diagrams from top to bottom, and a closed circle evaluates to $\\delta_a$. In the left picture the upper box's cup and the lower box's cap remain on the outside, while the upper cap and lower cup form one closed circle. Thus the picture records $U_i^2=\\delta_aU_i$; the proof below verifies this and the adjacent and distant relations algebraically, without relying on the drawing.\n\n```tikz\n\\begin{tikzpicture}[baseline=(current bounding box.center),scale=.72]\n  % The outer top cup and bottom cap are the remaining U_i diagram.\n  \\draw (0,3) .. controls (0,3.65) and (1,3.65) .. (1,3);\n  \\fill (0,3) circle (1.4pt); \\fill (1,3) circle (1.4pt);\n  \\draw (0,2) .. controls (0,2.65) and (1,2.65) .. (1,2);\n  \\draw (0,2) .. controls (0,1.35) and (1,1.35) .. (1,2);\n  \\draw (0,1) .. controls (0,.35) and (1,.35) .. (1,1);\n  \\fill (0,1) circle (1.4pt); \\fill (1,1) circle (1.4pt);\n  \\node at (1.45,2) {$=\\delta_a$};\n  \\draw (3,3) .. controls (3,3.65) and (4,3.65) .. (4,3);\n  \\draw (3,1) .. controls (3,.35) and (4,.35) .. (4,1);\n  \\fill (3,3) circle (1.4pt); \\fill (4,3) circle (1.4pt);\n  \\fill (3,1) circle (1.4pt); \\fill (4,1) circle (1.4pt);\n\\end{tikzpicture}\n```",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qftx-anyonic-vacuum-reverse-adjacent-relation",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal C$ be a unitary spherical fusion category over $\\mathbb C$. Let $a,b,c$ be simple objects, with $a$ self-dual, $N_{aa}^{\\mathbf1}=1$, and supply the normalized vacuum-channel self-duality datum with sign $\\kappa_a\\in\\{+1,-1\\}$ and positive spherical dimension $d_a$. For $n\\ge3$, take the fixed-boundary repeated-$a$ path space $H_{a,n;b,c}=\\operatorname{Hom}_{\\mathcal C}(c,T_n)$ with $T_0=b$ and $T_{j+1}=T_j\\otimes a$, as in [[def-anyonic-fusion-path-space]]. Let $P_i=P_{i,\\mathbf1}$ be the orthogonal local vacuum-channel projectors and put $U_i=\\delta_aP_i$, where $\\delta_a=\\kappa_ad_a$. Then, for every $1\\le i\\le n-2$,\n\n$$U_{i+1}U_iU_{i+1}=U_{i+1}.$$\n\nThis supplies the reverse adjacent relation for the repeated-charge Temperley–Lieb family.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-generic-type-a-hecke-algebra",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge0$ be an integer, with $S_0=\\{1\\}$ as in\n[[def-partition-young-diagram-and-conjugate-partition]]. Let $A:=\\mathbb Z[v^{\\pm1}]$ be the ring of Laurent polynomials in one\nindeterminate $v$ over $\\mathbb Z$. For $n\\ge2$ the **generic type-A Hecke\nalgebra** $H_v(n)$ is the associative unital $A$-algebra presented by generators\n$T_1,\\dots,T_{n-1}$ and the relations\n$$T_i^2=(v-1)T_i+v\\quad(1\\le i<n),\\qquad T_iT_{i+1}T_i=T_{i+1}T_iT_{i+1}\\quad(1\\le i\\le n-2),\\qquad T_iT_j=T_jT_i\\quad(1\\le i,j<n,\\ |i-j|>1),$$\nthat is, the quotient of the free unital associative $A$-algebra on\n$T_1,\\dots,T_{n-1}$ by the two-sided ideal generated by these relators. The\nfirst relation is written in the **RG-13 quadratic normalization**\n$(T_i-v)(T_i+1)=0$, equivalent to the displayed form over $A$. For $n\\le1$ there\nare no generators and we set $H_v(n):=A$.\n\n**Standard basis elements.** Let $S_n=\\operatorname{Sym}(\\{1,\\dots,n\\})$ with\nsimple transpositions $s_i=(i\\ i+1)$\n([[def-symmetric-group]]), and let $w\\in S_n$ have inversion length $\\ell(w)=\\ell$\n([[def-weyl-group-and-length-for-finite-gl-n]]). Choose a reduced expression\n$w=s_{i_1}\\cdots s_{i_\\ell}$, that is, a word of the minimal length $\\ell(w)$\nrepresenting $w$, and put\n$$T_w:=T_{i_1}\\cdots T_{i_\\ell}\\in H_v(n),$$\nthe empty product when $w$ is the identity of $S_n$, so that $T_w=1$ for that\nelement. That $T_w$ is independent of the chosen reduced expression, and that\nthe elements $T_w$ form an $A$-basis of $H_v(n)$, is proved in the\nstandard-basis theorem below\n([[thm-standard-basis-of-the-generic-type-a-hecke-algebra]]); the notation\ndistinguishes the generator $T_i$ with $1\\le i\\le n-1$ from $T_w$ for the group\nelement $w$.\n\n**Specializations.** Let $R$ be a commutative $A$-algebra with structure map\n$\\mathbb Z[v^{\\pm1}]\\to R$, $v\\mapsto v_0$, and suppose $v_0\\in R^\\times$. The\n**specialization** of $H_v(n)$ at $v_0$ is the $R$-algebra\n$R\\otimes_AH_v(n)$; it is presented over $R$ by the images of $T_1,\\dots,T_{n-1}$\nsubject to the same relations with $v$ replaced by $v_0$, and we write $H_{v_0}(n)$\nfor it. Two specializations are used on this page: $v\\mapsto1$, where the\nquadratic relation becomes $T_i^2=1$ together with the braid and commutation\nrelations, and $v\\mapsto q$, where $q$ is the prime power defining\n$\\operatorname{GL}_n(\\mathbb F_q)$; the latter specializes the generic algebra to\nthe Hecke algebra attached to the finite general linear group. The condition\n$v_0\\in R^\\times$ is part of the definition of a specialization and, for a nonzero coefficient ring $R$, excludes $v_0=0$. The zero ring\nis allowed: its unique element is a unit and its specialization is the zero algebra.",
+          "uses": [
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-the-hecke-generators-satisfy-the-artin-relations-and-are-units",
+          "source_section": "Statement",
+          "quote": "Let $H(n)$ be the Hecke tower over $\\Lambda=\\mathbb Z[v^{\\pm1},z]$ of\n[[def-markov-trace-on-the-type-a-hecke-tower]]. Then: (1) the elements\n$T_1,\\dots,T_{n-1}$ are units of $H(n)$ with\n$T_i^{-1}=v^{-1}T_i+(v^{-1}-1)$; (2) the assignment $\\sigma_i\\mapsto T_i$\ndescends to a group homomorphism\n$$\\pi_n:B_n\\longrightarrow H(n)^{\\times},\\qquad \\pi_n(\\sigma_i)=T_i,$$\nwhere $H(n)^{\\times}$ is the group of units of $H(n)$; (3) for every Artin word\n$\\beta=\\sigma_{i_1}^{\\varepsilon_1}\\cdots\\sigma_{i_k}^{\\varepsilon_k}$ one has\n$\\pi_n(\\beta)=T_{i_1}^{\\varepsilon_1}\\cdots T_{i_k}^{\\varepsilon_k}$, and\n$\\pi_{n+1}(\\iota_n^{\\mathrm{Br}}(\\beta))=\\iota_n(\\pi_n(\\beta))$ for all\n$\\beta\\in B_n$ under the standard inclusion of braid groups $B_n\\to B_{n+1}$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-braid-group-by-the-artin-presentation",
+          "source_section": "Definition",
+          "quote": "For $n\\ge2$, the **braid group** $B_n$ is the group with generators\n$\\sigma_1,\\dots,\\sigma_{n-1}$ and relations\n\n$$\\sigma_i\\sigma_{i+1}\\sigma_i=\\sigma_{i+1}\\sigma_i\\sigma_{i+1}\\qquad(1\\le i\\le n-2),$$\n\n$$\\sigma_i\\sigma_j=\\sigma_j\\sigma_i\\qquad(1\\le i,j\\le n-1,\\ |i-j|>1).$$\n\nEquivalently,\n\n$$B_n=\\langle \\sigma_1,\\dots,\\sigma_{n-1}\\mid \\sigma_i\\sigma_{i+1}\\sigma_i=\\sigma_{i+1}\\sigma_i\\sigma_{i+1}\\ (1\\le i\\le n-2),\\ \\sigma_i\\sigma_j=\\sigma_j\\sigma_i\\ (1\\le i,j\\le n-1,\\ |i-j|>1)\\rangle,$$\n\ninterpreted in the sense of [[def-group-presentation]] and\n[[def-relators-relations-and-finite-presentations]].\n\nFor $n=0$ and $n=1$, there are no generators, and $B_n$ is the trivial group\ngiven by the empty presentation.",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-von-dyck",
+          "source_section": "Statement",
+          "quote": "Let $\\langle X\\mid R\\rangle$ be a presentation, let $H$ be a group, and let\n$u:X\\to H$ be a function. If the evaluation of every $r\\in R$ under $u$ is\n$e_H$, then there is a unique homomorphism\n\n$$\\overline u:\\langle X\\mid R\\rangle\\longrightarrow H$$\n\nwith $\\overline u([x])=u(x)$ for every $x\\in X$. Moreover, $\\overline u$ is\nsurjective if and only if $u(X)$ generates $H$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $U_i^2=\\delta U_i$ and $\\delta=q+q^{-1}$, $(qI_V-U_i)(q^{-1}I_V-U_i)=I_V-(q+q^{-1})U_i+U_i^2=I_V$. The product in the reverse order is the same polynomial in $U_i$, so $B_i^{-1}=q^{-1}I_V-U_i$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For adjacent $i,i+1$, expansion and the square and adjacent Temperley–Lieb relations give $(qI_V-U_i)(qI_V-U_{i+1})(qI_V-U_i)-(qI_V-U_{i+1})(qI_V-U_i)(qI_V-U_{i+1})=-(q^2-q\\delta+1)(U_i-U_{i+1})=0$, since $q\\delta=q^2+1$. Thus the adjacent braid relation holds.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "We have $B_i-qI_V=-U_i$ and $B_i+q^{-1}I_V=\\delta I_V-U_i$; hence $(B_i-qI_V)(B_i+q^{-1}I_V)=-\\delta U_i+U_i^2=0$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "If $|i-j|>1$, then $B_iB_j-B_jB_i=U_iU_j-U_jU_i=0$. Together with step 1.1, the $B_i$ are units satisfying all relators of [F5].",
+          "step": "2.2",
+          "inputs": [
+            "F5",
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F6] applied to [F5] and the assignment $\\sigma_i\\mapsto B_i$, step 2.2 supplies a unique homomorphism $\\rho_n:B_n\\to\\operatorname{GL}(V)$ with $\\rho_n(\\sigma_i)=B_i$.",
+          "step": "3.1",
+          "inputs": [
+            "F5",
+            "F6",
+            "step 2.2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "Let $\\widetilde T_i:=qB_i$. They satisfy the braid and distant relations by steps 1.2–2.2, and $(\\widetilde T_i-q^2I_V)(\\widetilde T_i+I_V)=q^2(B_i-qI_V)(B_i+q^{-1}I_V)=0$. Consequently the generator map from the free unital algebra kills every defining relator of $H_{q^2}(n)$, so its defining ideal lies in the kernel and the map factors through the quotient $H_{q^2}(n)$. This gives the stated unital Hecke-algebra representation.",
+          "step": "3.2",
+          "inputs": [
+            "F3",
+            "step 2.1",
+            "step 1.2",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Apply the coefficient map $\\mathbb Z[v^{\\pm1},z]\\to\\mathbb C$, $v\\mapsto q^2$, $z\\mapsto0$, to the Hecke tower in [F4]. By its defining scalar-extension construction and the specialization in [F3], the resulting algebra is $H_{q^2}(n)$; base change carries [F4]'s braid homomorphism to $\\eta_n:B_n\\to H_{q^2}(n)^\\times$ with $\\eta_n(\\sigma_i)=T_i$. Composing with $\\Phi_n$ from step 3.2 sends $\\sigma_i$ to $qB_i$, identifying the chosen normalization against the standard Hecke generator assignment. No Markov trace or link-invariant claim is used.",
+          "step": "4.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 3.2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "If $V$ is a complex Hilbert space, $U_i$ is bounded self-adjoint, and $|q|=1$, then $B_i^*=\\overline q I_V-U_i=q^{-1}I_V-U_i=B_i^{-1}$ by step 1.1, so $B_i$ is unitary. For the repeated-$a$ anyonic path family, [F1] and [F2] supply both adjacent relations, the square relation, and distant commutation with the signed $\\delta_a=\\kappa_ad_a$; whenever $q+q^{-1}=\\delta_a$, it therefore meets the operator hypotheses of this theorem. No sign is replaced by $+1$.",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [
+        {
+          "case": "n=2, q=2, δ=5/2, U_1=0",
+          "calculation": "The TL square relation holds; B_1=2I, B_1^{-1}=I/2, and T_1=qB_1=4I satisfies (T_1−4I)(T_1+I)=0.",
+          "disposition": "The one-generator boundary satisfies the inverse and Hecke quadratic formulas."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem fixes n≥2, so the family has at least one generator."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If δ=0 then q=±i and U_i²=0; step 1.1 still gives the stated two-sided inverse."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At n=2 the adjacent TL relations are vacuous; steps 1.1–1.2 check the one-generator inverse and quadratic relation."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement explicitly disclaims diagonalizability; the quadratic roots coincide when q²=−1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 applies to every i including i=1 and i=n−1; no adjacent relation is needed outside its stated index range."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof consists of operator identities and presentation factorization and makes no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No iff is stated."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse to the TL-to-Hecke construction is stated."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-75-author-self-check",
+        "notes": "The author checked each numbered step against its labelled facts, exact supplier excerpt, domains, sign convention, normalization, and boundary cases. This is Step 1 authoring evidence, not independent proof approval."
+      }
+    },
+    "prop-qftx-coxeter-specialization": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-qftx-tl-hecke-braid",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge2$, let $V$ be a complex vector space, and let $U_1,\\ldots,U_{n-1}\\in\\operatorname{End}_{\\mathbb C}(V)$. Suppose $\\delta\\in\\mathbb C$, $q\\in\\mathbb C^\\times$, and $\\delta=q+q^{-1}$, and assume\n\n$$U_i^2=\\delta U_i,\\qquad U_iU_{i+1}U_i=U_i,\\qquad U_{i+1}U_iU_{i+1}=U_{i+1}\\quad(1\\le i\\le n-2),\\qquad U_iU_j=U_jU_i\\quad(|i-j|>1).$$\n\nDefine $B_i:=qI_V-U_i$. Then each $B_i$ is invertible with $B_i^{-1}=q^{-1}I_V-U_i$; the $B_i$ satisfy the Artin braid and far-commutation relations; and\n\n$$(B_i-qI_V)(B_i+q^{-1}I_V)=0.$$\n\nThus $\\sigma_i\\mapsto B_i$ defines a group homomorphism $B_n\\to\\operatorname{GL}(V)$. If $H_v(n)$ is the generic type-A Hecke algebra with $(T_i-v)(T_i+1)=0$, its scalar specialization $H_{q^2}(n)$ has a unital algebra representation $T_i\\mapsto qB_i$. This is the standard Hecke normalization because $(qB_i-q^2I_V)(qB_i+I_V)=0$. If $V$ is a complex Hilbert space and each $U_i$ is bounded self-adjoint, then $\\delta\\in\\mathbb R$ and $|q|=1$ imply that each $B_i$ is unitary. No faithfulness, diagonalizability, or physical realization is asserted.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-generic-type-a-hecke-algebra",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge0$ be an integer, with $S_0=\\{1\\}$ as in\n[[def-partition-young-diagram-and-conjugate-partition]]. Let $A:=\\mathbb Z[v^{\\pm1}]$ be the ring of Laurent polynomials in one\nindeterminate $v$ over $\\mathbb Z$. For $n\\ge2$ the **generic type-A Hecke\nalgebra** $H_v(n)$ is the associative unital $A$-algebra presented by generators\n$T_1,\\dots,T_{n-1}$ and the relations\n$$T_i^2=(v-1)T_i+v\\quad(1\\le i<n),\\qquad T_iT_{i+1}T_i=T_{i+1}T_iT_{i+1}\\quad(1\\le i\\le n-2),\\qquad T_iT_j=T_jT_i\\quad(1\\le i,j<n,\\ |i-j|>1),$$\nthat is, the quotient of the free unital associative $A$-algebra on\n$T_1,\\dots,T_{n-1}$ by the two-sided ideal generated by these relators. The\nfirst relation is written in the **RG-13 quadratic normalization**\n$(T_i-v)(T_i+1)=0$, equivalent to the displayed form over $A$. For $n\\le1$ there\nare no generators and we set $H_v(n):=A$.\n\n**Standard basis elements.** Let $S_n=\\operatorname{Sym}(\\{1,\\dots,n\\})$ with\nsimple transpositions $s_i=(i\\ i+1)$\n([[def-symmetric-group]]), and let $w\\in S_n$ have inversion length $\\ell(w)=\\ell$\n([[def-weyl-group-and-length-for-finite-gl-n]]). Choose a reduced expression\n$w=s_{i_1}\\cdots s_{i_\\ell}$, that is, a word of the minimal length $\\ell(w)$\nrepresenting $w$, and put\n$$T_w:=T_{i_1}\\cdots T_{i_\\ell}\\in H_v(n),$$\nthe empty product when $w$ is the identity of $S_n$, so that $T_w=1$ for that\nelement. That $T_w$ is independent of the chosen reduced expression, and that\nthe elements $T_w$ form an $A$-basis of $H_v(n)$, is proved in the\nstandard-basis theorem below\n([[thm-standard-basis-of-the-generic-type-a-hecke-algebra]]); the notation\ndistinguishes the generator $T_i$ with $1\\le i\\le n-1$ from $T_w$ for the group\nelement $w$.\n\n**Specializations.** Let $R$ be a commutative $A$-algebra with structure map\n$\\mathbb Z[v^{\\pm1}]\\to R$, $v\\mapsto v_0$, and suppose $v_0\\in R^\\times$. The\n**specialization** of $H_v(n)$ at $v_0$ is the $R$-algebra\n$R\\otimes_AH_v(n)$; it is presented over $R$ by the images of $T_1,\\dots,T_{n-1}$\nsubject to the same relations with $v$ replaced by $v_0$, and we write $H_{v_0}(n)$\nfor it. Two specializations are used on this page: $v\\mapsto1$, where the\nquadratic relation becomes $T_i^2=1$ together with the braid and commutation\nrelations, and $v\\mapsto q$, where $q$ is the prime power defining\n$\\operatorname{GL}_n(\\mathbb F_q)$; the latter specializes the generic algebra to\nthe Hecke algebra attached to the finite general linear group. The condition\n$v_0\\in R^\\times$ is part of the definition of a specialization and, for a nonzero coefficient ring $R$, excludes $v_0=0$. The zero ring\nis allowed: its unique element is a unit and its specialization is the zero algebra.",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-the-symmetric-group-has-the-coxeter-presentation",
+          "source_section": "Statement",
+          "quote": "For $n\\ge2$, the symmetric group $S_n$ has the presentation\n\n$$S_n=\\langle s_1,\\dots,s_{n-1}\\mid s_i^2=1,\\ s_is_{i+1}s_i=s_{i+1}s_is_{i+1},\\ s_is_j=s_js_i\\ (|i-j|>1)\\rangle,$$\n\nwhere, after relabelling the underlying set $n=\\{0,\\ldots,n-1\\}$ as\n$\\{1,\\ldots,n\\}$, $s_i$ corresponds to the adjacent transposition\n$(i\\ i+1)$. For\n$n=0,1$, the trivial group has the empty presentation.",
+          "uses": [
+            "2.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-the-braid-group-surjects-onto-the-symmetric-group",
+          "source_section": "Statement",
+          "quote": "For $n\\ge2$, use the one-based model $S_n^{(1)}:=\\operatorname{Sym}(\\{1,\\ldots,n\\})$, identified with the library's $S_n=\\operatorname{Sym}(\\{0,\\ldots,n-1\\})$ by conjugation with $\\kappa_n(k)=k+1$ ([[def-finite-symmetric-group-and-permutation-notation]], [[thm-adjacent-transpositions-generate-the-symmetric-group]]). Write $S_n$ in this transported model below. The assignment $\\sigma_i\\mapsto(i\\ i+1)$ extends to a surjective homomorphism\n\n$$\\pi_n:B_n\\longrightarrow S_n.$$\n\nIn the library's zero-based model, the same map is $\\sigma_i\\mapsto(i-1\\ i)$, obtained by conjugating $\\pi_n$ with $\\kappa_n^{-1}$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-von-dyck",
+          "source_section": "Statement",
+          "quote": "Let $\\langle X\\mid R\\rangle$ be a presentation, let $H$ be a group, and let\n$u:X\\to H$ be a function. If the evaluation of every $r\\in R$ under $u$ is\n$e_H$, then there is a unique homomorphism\n\n$$\\overline u:\\langle X\\mid R\\rangle\\longrightarrow H$$\n\nwith $\\overline u([x])=u(x)$ for every $x\\in X$. Moreover, $\\overline u$ is\nsurjective if and only if $u(X)$ generates $H$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "At $q=1$, the parameter relation gives $\\delta=2$. For every $i$, $B_i^2=(I_V-U_i)^2=I_V-2U_i+U_i^2=I_V$, using $U_i^2=2U_i$ from [F1].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The general quadratic in [F1] factors as $(B_i-qI_V)(B_i+q^{-1}I_V)=0$, whose scalar roots are $q$ and $-q^{-1}$; equality of those roots is equivalent to $q^2=-1$. This polynomial relation alone asserts no diagonalization.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F1], the $B_i$ also satisfy the adjacent braid and distant-commutation relators. Along with step 1.1, these are exactly the Coxeter relators in [F3], so [F5] gives a homomorphism $\\widetilde\\rho_n:S_n\\to\\operatorname{GL}(V)$ with $\\widetilde\\rho_n(s_i)=B_i$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F5",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The composite $\\widetilde\\rho_n\\circ\\pi_n$, with $\\pi_n$ from [F4], and the braid representation $\\rho_n$ from [F1] agree on every generator $\\sigma_i$, since both send it to $B_i$. The generators determine a homomorphism from $B_n$, so $\\rho_n=\\widetilde\\rho_n\\circ\\pi_n$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "The Hecke representation of the preceding theorem sends $T_i$ to $qB_i$, which equals $B_i$ at $q=1$. The generic relation $(T_i-v)(T_i+1)=0$ in [F2] then becomes $T_i^2=I_V$; together with the braid and distant relations these are exactly the Coxeter generator relations in [F3]. Thus the specialized Hecke generators act by the same generator assignment as $\\widetilde\\rho_n$.",
+          "step": "3.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "To see that involutivity is not forced for general $q$, take $V=\\mathbb C$, $U_i=0$ for every $i$, $q=2$, and $\\delta=5/2$. All Temperley–Lieb relations hold, while $B_i=2I_V$ and $B_i^2=4I_V\\ne I_V$.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [
+        {
+          "case": "q=2, δ=5/2, U_i=0",
+          "calculation": "All TL relations hold, B_i=2I and B_i²=4I≠I.",
+          "disposition": "This is the stated counterexample showing general q does not force involutivity."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The proposition fixes n≥2 and therefore has at least one generator."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 4.1 checks U_i=0, q=2, δ=5/2 and exhibits B_i²=4I≠I."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At the specialization q=1, step 1.1 computes B_i²=I for every generator."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 notes that q²=−1 makes the quadratic roots coincide and does not assert diagonalizability."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 is stated for every i and includes the first and last generators."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The presentation argument uses no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is a one-way factorization through S_n, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse lifting statement is claimed."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-75-author-self-check",
+        "notes": "The author checked each numbered step against its labelled facts, exact supplier excerpt, domains, sign convention, normalization, and boundary cases. This is Step 1 authoring evidence, not independent proof approval."
+      }
+    },
+    "ex-qftx-vacuum-channel-exchange": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-anyonic-local-channel-projector",
+          "source_section": "Definition",
+          "quote": "Fix a fusion-path space with repeated simple site charge $a$, a position $i$ with two adjacent $a$-labels, and a simple output $s$ of $a\\otimes a$, chosen from the fixed internal representative set of [[def-anyonic-fusion-path-space]]. Choose bases in the split spaces $\\operatorname{Hom}(z,x\\otimes y)$ at every vertex of the trees used below, retaining the fixed path vertex bases on the fixed tree. In the tree basis where this adjacent pair is fused first, let $\\Pi_s$ be the projection onto the direct summand with pair output $s$, acting as the identity on every multiplicity index inside that channel and as zero on all other pair outputs. Let $A_i:T_{\\mathrm{fixed}}\\to T_{\\mathrm{pair}}$ be a typed composite of associators and their inverses carrying the fixed path tree to this pair-first tree, without permuting the ordered inputs (including the boundary charge). In the split-tree bases of $\\operatorname{Hom}(c,T)$, let $F_i$ be the matrix of $h\\mapsto A_i\\circ h$, with target coordinates as rows and source coordinates as columns. The proof below constructs these bases and proves invertibility in any complex fusion category. Define the **local channel projector** in the fixed path basis by\n\n$$P_{i,s}:=F_i^{-1}\\Pi_sF_i.$$\n\nThis is an idempotent for any fusion category because $F_i$ is invertible. In a unitary fusion category with orthonormal tree bases, $F_i$ is unitary and $P_{i,s}$ is an orthogonal projection. The channel projection includes every multiplicity coordinate; the definition has no multiplicity-free restriction. The split Hom convention here is $\\operatorname{Hom}(c,T)$, as in [[def-anyonic-fusion-path-space]]. In the unitary case with adjoint vertex bases, each local left-to-right split recoupling matrix is the entrywise conjugate of the QC25 inverse-precomposition F matrix, as proved below; they agree for the displayed real Fibonacci and Ising blocks.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-anyonic-local-channel-projectors-are-orthogonal",
+          "source_section": "Statement",
+          "quote": "Let $b,c,a_1,\\ldots,a_n$ be simple objects of a unitary fusion category, with $n\\ge2$, and let $T_{\\mathrm{fixed}}$ be a fixed parenthesization of $b\\otimes a_1\\otimes\\cdots\\otimes a_n$. Equip $H=\\operatorname{Hom}(c,T_{\\mathrm{fixed}})$ with the split Hom inner product $g^\\dagger h=\\langle h,g\\rangle\\operatorname{id}_c$ and choose orthonormal split vertex bases in the trees below. Fix $1\\le i<n$. Let $A_i:T_{\\mathrm{fixed}}\\to T_{\\mathrm{pair}}$ be a composite of associators and inverses to a tree fusing $a_i,a_{i+1}$ first, without permuting inputs. Let $F_i$ be the matrix of $h\\mapsto A_i\\circ h$, with target rows and source columns, and let $\\Pi_s$ project onto all pair-first coordinates of simple pair output $s$, retaining every multiplicity index. Define $P_{i,s}:=F_i^{-1}\\Pi_sF_i$, extending the repeated-charge construction of [[def-anyonic-local-channel-projector]] to these arbitrary simple site charges. Then $(P_{i,s})_s$ is pairwise orthogonal, self-adjoint, and idempotent, and its sum over all simple outputs of $a_i\\otimes a_{i+1}$ is the identity on $H$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-anyonic-frobenius-schur-sign",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal C$ be a unitary spherical fusion category over $\\mathbb C$, with pivotal structure and spherical dimension as in [[def-pivotal-structure]], [[def-spherical-structure]], and [[def-the-dimension-of-an-object-relative-to-a-pivotal-structure]]. Let $a$ be a self-dual simple object with $N_{aa}^{\\mathbf1}=1$. Choose a unit vector $v:\\mathbf1\\to a\\otimes a$ spanning the one-dimensional vacuum split space and let $d_a>0$ be its positive spherical dimension.\n\nA **normalized vacuum-channel self-duality datum** is a supplied pair of maps $\\operatorname{coev}:\\mathbf1\\to a\\otimes a$ and $\\operatorname{ev}:a\\otimes a\\to\\mathbf1$ of the form\n\n$$\\operatorname{coev}=\\sqrt{d_a}\\,v,\\qquad \\operatorname{ev}=\\kappa_a\\sqrt{d_a}\\,v^\\dagger,$$\n\nwhere $\\kappa_a\\in\\{+1,-1\\}$ and the two duality zig-zag identities hold after the self-duality identification, using the left-dual convention of [[def-left-dual-and-right-dual-object]]. We call $\\kappa_a$ the **Frobenius–Schur sign in this normalized cup/cap convention**. It is not a braiding or $R$-symbol phase.\n\nThis item records supplied normalized duality data; it does not assert that every self-dual simple object admits the displayed gauge or prove a trace, ribbon, or category-equivalence theorem. An example must supply the datum or compute the sign from coherent normalized F-data; fusion rules alone do not specify it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-anyonic-vacuum-f-symbol-frobenius-schur-normalization",
+          "source_section": "Statement",
+          "quote": "Let $a$ and $(v,\\operatorname{ev},\\operatorname{coev},d_a,\\kappa_a)$ be as in [[def-anyonic-frobenius-schur-sign]]. In the multiplicity-free vacuum-normalized gauge of [[def-qc-tqc-f-symbol]],\n\n$$\\left(F^{aaa}_a\\right)_{\\mathbf1,\\mathbf1}=\\frac{\\kappa_a}{d_a},\\qquad \\delta_a:=\\frac{1}{\\left((F^{aaa}_a)^{-1}\\right)_{\\mathbf1,\\mathbf1}}=\\kappa_a d_a.$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "prop-anyonic-vacuum-channel-projectors-satisfy-temperley-lieb",
+          "source_section": "Statement",
+          "quote": "Let $a$ be a self-dual simple site charge with one-dimensional vacuum fusion $a\\otimes a\\to\\mathbf1$, and supply the normalized pivotal cup/cap datum of [[def-anyonic-frobenius-schur-sign]]. On a repeated-$a$ path space let $P_i:=P_{i,\\mathbf1}$ and set $U_i:=\\delta_aP_i$, where $\\delta_a=\\kappa_ad_a$ is the signed loop parameter of [[lem-anyonic-vacuum-f-symbol-frobenius-schur-normalization]]. Then, for all applicable interior indices,\n\n$$U_i^2=\\delta_aU_i,\\qquad U_iU_{i+1}U_i=U_i,\\qquad U_iU_j=U_jU_i\\quad(|i-j|>1).$$\n\nThe sign $\\kappa_a$ is retained; replacing it by $+1$ is justified only in examples whose self-duality datum has that sign.\n\nFor the diagram convention, each box $U_i$ has a cup at the top and a cap at the bottom on strands $i,i+1$; multiplication stacks diagrams from top to bottom, and a closed circle evaluates to $\\delta_a$. In the left picture the upper box's cup and the lower box's cap remain on the outside, while the upper cap and lower cup form one closed circle. Thus the picture records $U_i^2=\\delta_aU_i$; the proof below verifies this and the adjacent and distant relations algebraically, without relying on the drawing.\n\n```tikz\n\\begin{tikzpicture}[baseline=(current bounding box.center),scale=.72]\n  % The outer top cup and bottom cap are the remaining U_i diagram.\n  \\draw (0,3) .. controls (0,3.65) and (1,3.65) .. (1,3);\n  \\fill (0,3) circle (1.4pt); \\fill (1,3) circle (1.4pt);\n  \\draw (0,2) .. controls (0,2.65) and (1,2.65) .. (1,2);\n  \\draw (0,2) .. controls (0,1.35) and (1,1.35) .. (1,2);\n  \\draw (0,1) .. controls (0,.35) and (1,.35) .. (1,1);\n  \\fill (0,1) circle (1.4pt); \\fill (1,1) circle (1.4pt);\n  \\node at (1.45,2) {$=\\delta_a$};\n  \\draw (3,3) .. controls (3,3.65) and (4,3.65) .. (4,3);\n  \\draw (3,1) .. controls (3,.35) and (4,.35) .. (4,1);\n  \\fill (3,3) circle (1.4pt); \\fill (4,3) circle (1.4pt);\n  \\fill (3,1) circle (1.4pt); \\fill (4,1) circle (1.4pt);\n\\end{tikzpicture}\n```",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-qftx-anyonic-vacuum-reverse-adjacent-relation",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal C$ be a unitary spherical fusion category over $\\mathbb C$. Let $a,b,c$ be simple objects, with $a$ self-dual, $N_{aa}^{\\mathbf1}=1$, and supply the normalized vacuum-channel self-duality datum with sign $\\kappa_a\\in\\{+1,-1\\}$ and positive spherical dimension $d_a$. For $n\\ge3$, take the fixed-boundary repeated-$a$ path space $H_{a,n;b,c}=\\operatorname{Hom}_{\\mathcal C}(c,T_n)$ with $T_0=b$ and $T_{j+1}=T_j\\otimes a$, as in [[def-anyonic-fusion-path-space]]. Let $P_i=P_{i,\\mathbf1}$ be the orthogonal local vacuum-channel projectors and put $U_i=\\delta_aP_i$, where $\\delta_a=\\kappa_ad_a$. Then, for every $1\\le i\\le n-2$,\n\n$$U_{i+1}U_iU_{i+1}=U_{i+1}.$$\n\nThis supplies the reverse adjacent relation for the repeated-charge Temperley–Lieb family.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-qftx-tl-hecke-braid",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge2$, let $V$ be a complex vector space, and let $U_1,\\ldots,U_{n-1}\\in\\operatorname{End}_{\\mathbb C}(V)$. Suppose $\\delta\\in\\mathbb C$, $q\\in\\mathbb C^\\times$, and $\\delta=q+q^{-1}$, and assume\n\n$$U_i^2=\\delta U_i,\\qquad U_iU_{i+1}U_i=U_i,\\qquad U_{i+1}U_iU_{i+1}=U_{i+1}\\quad(1\\le i\\le n-2),\\qquad U_iU_j=U_jU_i\\quad(|i-j|>1).$$\n\nDefine $B_i:=qI_V-U_i$. Then each $B_i$ is invertible with $B_i^{-1}=q^{-1}I_V-U_i$; the $B_i$ satisfy the Artin braid and far-commutation relations; and\n\n$$(B_i-qI_V)(B_i+q^{-1}I_V)=0.$$\n\nThus $\\sigma_i\\mapsto B_i$ defines a group homomorphism $B_n\\to\\operatorname{GL}(V)$. If $H_v(n)$ is the generic type-A Hecke algebra with $(T_i-v)(T_i+1)=0$, its scalar specialization $H_{q^2}(n)$ has a unital algebra representation $T_i\\mapsto qB_i$. This is the standard Hecke normalization because $(qB_i-q^2I_V)(qB_i+I_V)=0$. If $V$ is a complex Hilbert space and each $U_i$ is bounded self-adjoint, then $\\delta\\in\\mathbb R$ and $|q|=1$ imply that each $B_i$ is unitary. No faithfulness, diagonalizability, or physical realization is asserted.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $v\\in\\operatorname{ran}P_i$, then $P_iv=v$ and $B_iv=(qI_V-\\delta_aP_i)v=(q-\\delta_a)v=-q^{-1}v$, using $q+q^{-1}=\\delta_a$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $v\\in\\ker P_i$, then $P_iv=0$ and $B_iv=qv$. Since $P_i$ is an orthogonal projection by [F2], $V=\\operatorname{ran}P_i\\oplus\\ker P_i$ orthogonally, so these two subspaces exhaust the operator's action and no absent subspace contributes an eigenvalue.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F7",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The source relation [F5] and local reverse relation [F6] supply all Temperley–Lieb hypotheses for [F7], with signed $\\delta_a$ from [F4]. Thus the scalar actions above are the exchange eigenvalues on their respective channel subspaces; no physical transport or measurement premise is used.",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [
+        {
+          "case": "P_i=0",
+          "calculation": "Then ran(P_i)=0 and B_i=qI on ker(P_i)=V.",
+          "disposition": "The vacuum-channel scalar is not an eigenvalue contributed by the absent range."
+        },
+        {
+          "case": "P_i=I",
+          "calculation": "Then ker(P_i)=0 and B_i=−q^{-1}I on ran(P_i)=V.",
+          "disposition": "The complementary-channel scalar is not an eigenvalue contributed by the absent kernel."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement and steps 1.1–2.1 explicitly exclude an eigenvalue contribution from a zero range or kernel."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If the path space or one channel subspace is zero, the absent subspace contributes no eigenvalue by the Statement and step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-dimensional vacuum fusion hypothesis fixes the named vacuum channel; step 1.1 computes its scalar action."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The two listed scalars can coincide at q²=−1; the Statement claims subspace actions rather than distinct eigenvalues."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement restricts i to an applicable interior index of the repeated-charge path space."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The range/kernel computation uses no nonempty selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example gives a one-way operator calculation, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse construction from eigenvalues to a fusion category is claimed."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-75-author-self-check",
+        "notes": "The author checked each numbered step against its labelled facts, exact supplier excerpt, domains, sign convention, normalization, and boundary cases. This is Step 1 authoring evidence, not independent proof approval."
+      }
+    }
+  }
+}

@@ -1,0 +1,25 @@
+import {readFileSync,writeFileSync} from 'node:fs';
+import {resolve,dirname,join} from 'node:path';
+import {fileURLToPath,pathToFileURL} from 'node:url';
+import {createHash} from 'node:crypto';
+import {frontierGateBattery} from './candidate/tools/physics-support/step5-frontier-gate.mjs';
+import {validateFrontier} from './candidate/tools/physics-support/step5-rounds.mjs';
+import {isPublishedItem,recordedPublishedRepair} from './candidate/tools/physics-support/published-repair-policy.mjs';
+import {readItem} from './candidate/tools/physics-support/physics-content.mjs';
+const here=dirname(fileURLToPath(import.meta.url)),repo=resolve(here,'../../..'),root=join(repo,'physics'),run='physics-non-fluid-129-2026-10-21-r2',dir=join(root,'research',run+'-step5-v2');
+const production=await import(pathToFileURL(join(repo,'tools/physics-support/step5-frontier-gate.mjs')).href);
+const {stages}=await import(pathToFileURL(join(repo,'tools/physics-autopilot/stages/mathlib.mts')).href);
+const stage=stages.find((s:any)=>s.id==='5.8-gate');
+const ctx={repo:root,run,doctor:true,stageRounds:{'5.7-certify':2,'5.8-gate':1}};
+const gates=stage.gates(ctx),capture=(fn:()=>any)=>{try{return{result:fn()}}catch(error:any){return{error:error.message}}};
+const frontierPath=join(dir,'frontier.json'),frontier=validateFrontier(JSON.parse(readFileSync(frontierPath,'utf8')));
+const oldPattern=/^(?:alg|def|lem|thm|prop|cor|ex|cex|fs|rem|post|pthm|exp|texp)-[a-z0-9]+(?:-[a-z0-9]+)*$/;
+const published=frontier.ids.filter((id:string)=>isPublishedItem(root,id)),draft=frontier.ids.filter((id:string)=>!published.includes(id));
+const before=capture(()=>production.frontierGateBattery({repo:root,run},gates));
+const after=capture(()=>frontierGateBattery({repo:root,run},gates));
+const candidate=after.result as any[]|undefined;
+const maintenancePath=join(dir,'owner-published-maintenance.json'),maintenance=JSON.parse(readFileSync(maintenancePath,'utf8'));
+const files=[frontierPath,join(dir,'threshold-2.json'),join(root,'research',run+'-dispatch','tool-step5-v2-gate-check-r1-5.8-gate-all.result.json'),maintenancePath,join(repo,'tools/physics-support/step5-frontier-gate.mjs'),join(repo,'tools/physics-support/step5-frontier-gate.test.mjs'),join(repo,'tools/physics-autopilot/stages/mathlib.step5.mts')];
+for(const entry of maintenance.entries){files.push(join(root,entry.receipt.path),join(root,'items',entry.id+'.md'));}
+const result={run,at:new Date().toISOString(),scope:'Read-only descriptor composition with the actual complete native Step-5.8 roster. No gate, owner receipt, readiness dispatch, source edit, certification or scientific review was performed.',frontier:{count:frontier.ids.length,sha256:frontier.sha256,oldPatternRejected:frontier.ids.filter((id:string)=>!oldPattern.test(id)),publishedCount:published.length,draftCount:draft.length},production:before,candidate:after.error?after:{gateCount:candidate?.length,gateIds:candidate?.map(g=>g.id),allGatesRetained:JSON.stringify(candidate?.map(g=>g.id))===JSON.stringify(gates.map((g:any)=>g.id)),draftBindingsExact:candidate?.filter(g=>Array.isArray(g.ownerReviewItems)).every(g=>JSON.stringify(g.ownerReviewItems)===JSON.stringify(draft)),openProblemBound:candidate?.filter(g=>Array.isArray(g.ownerReviewItems)).every(g=>g.ownerReviewItems.includes('op-tgrx-continuum-generalized-entropy')),livenessPreserved:candidate?.every((g,i)=>g.id==='judge-closure'?g.liveness?.min===gates[i].liveness?.min:JSON.stringify(g.liveness)===JSON.stringify(gates[i].liveness)),nativeWrapperArgumentsPreserved:candidate?.filter((g,i)=>['precheck','rendercheck','prosecheck'].includes(g.id)&&gates[i].argv.some((arg:any)=>typeof arg==='string'&&arg.endsWith('/frontier-item-gate.mjs'))).every(g=>JSON.stringify(g.argv)===JSON.stringify(gates.find((x:any)=>x.id===g.id).argv))},publishedLocalMaintenance:maintenance.entries.map((entry:any)=>{const item=readItem(join(root,'items',entry.id+'.md'));return{id:entry.id,excludedFromDraftBinding:!draft.includes(entry.id),receipt:entry.receipt,policy:recordedPublishedRepair(root,entry.id,item.raw,item.verification?.repair)}}),inputHashes:Object.fromEntries(files.map(path=>[path.slice(repo.length+1),createHash('sha256').update(readFileSync(path)).digest('hex')]))};
+writeFileSync(join(here,'reproduction.json'),JSON.stringify(result,null,2)+'\n');console.log(JSON.stringify(result,null,2));

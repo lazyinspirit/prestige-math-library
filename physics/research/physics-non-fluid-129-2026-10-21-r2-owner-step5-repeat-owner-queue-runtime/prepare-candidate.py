@@ -1,0 +1,110 @@
+from pathlib import Path
+import difflib
+here=Path(__file__).resolve().parent;repo=here.parents[2];src=repo/'tools/physics-support/step5-owner-finding-queue.mjs';old=src.read_text()
+helper='''// A retained advertisement is history only after its exact native collection
+// was consumed and sealed by that wave's impact certificate. Never reinterpret
+// a fresh wrong-wave request as absent, or bind old reviews to current sources.
+function consumedEarlierQueue(root, run, phase, round, dir, pointer, requestPath, request, bound) {
+  const earlier = request.phase === 'initial' ? phase === 'repeat'
+    : request.phase === 'repeat' && phase === 'repeat' && request.round < round;
+  need(earlier, 'advertised queue does not belong to an earlier consumed wave');
+  const priorPhase = request.phase, priorRound = request.round, childPhase = queuePhase(priorPhase);
+  const ref = { path: requestPath, sha256: pointer.request.sha256 };
+  const progressPath = join(dir, childPhase + '-' + priorRound + '-progress.json');
+  const packPath = join(dir, childPhase + '-' + priorRound + '.json');
+  const childPath = join(dir, childPhase + '-' + priorRound + '-collected.json');
+  const parentPath = join(dir, priorPhase + '-' + priorRound + '-collected.json');
+  const certificate = read(join(dir, 'certification-impact-' + priorPhase + '-' + priorRound + '.json'));
+  const { sha256: seal, ...payload } = certificate;
+  need(certificate.version === 2 && certificate.run === run && certificate.phase === 'impact-' + priorPhase
+    && certificate.round === priorRound && sha(seal) && hash(JSON.stringify(payload)) === seal,
+    'historical queue certificate is not intact');
+  const parent = read(parentPath), progress = read(progressPath), pack = read(packPath), child = read(childPath);
+  const sealed = (path, expected) => {
+    need(sha(expected) && certificate.evidence?.[path] === expected, 'historical queue evidence lacks certificate binding: ' + path);
+    bound({ path: relative(root, path), sha256: expected });
+  };
+  sealed(parentPath, hash(readFileSync(parentPath)));
+  need(parent.version === 2 && parent.run === run && parent.phase === priorPhase && parent.round === priorRound
+    && Array.isArray(parent.errors) && parent.errors.length === 0
+    && equal(parent.native_owner_finding_corrections?.request, ref), 'historical parent did not consume this exact queue');
+  for (const path of [requestPath, progressPath, packPath, childPath]) sealed(path, parent.evidence?.[path]);
+  need(progress.version === 1 && progress.run === run && progress.phase === priorPhase && progress.round === priorRound
+    && progress.correction_phase === childPhase && equal(progress.request, ref)
+    && equal(progress.subjects, request.entries.map(entry => entry.subject))
+    && equal(progress.assignments, assignmentsFor(request.entries))
+    && progress.evidence && typeof progress.evidence === 'object' && !Array.isArray(progress.evidence)
+    && progress.evidence[requestPath] === ref.sha256 && progress.evidence[packPath] === parent.evidence?.[packPath]
+    && equal(pack.owner_finding_queue, { request: ref, payload: request }), 'historical queue progress or pack changed');
+  for (const [path, expected] of Object.entries(progress.evidence)) {
+    need(parent.evidence?.[path] === expected, 'historical queue input absent from consumed parent: ' + path);
+    sealed(path, expected);
+  }
+  need(child.version === 2 && child.run === run && child.phase === childPhase && child.round === priorRound
+    && Array.isArray(child.errors) && child.errors.length === 0 && child.post
+    && equal(child.owner_finding_completion, parent.native_owner_finding_corrections.completion),
+    'historical child collection is not the consumed completion');
+  const reports = [];
+  for (const lane of lanes) {
+    const label = 'step5-v2-' + childPhase + '-r' + priorRound + '-u' + lane;
+    const reportPath = join(dir, label + '.json');
+    need(sha(progress.evidence[join(dir, label + '.task.md')]), 'historical queue lacks its frozen native task');
+    const dispatchPath = join(root, 'research', run + '-dispatch', 'alpha-repair-' + label + '.result.json');
+    for (const path of [reportPath, dispatchPath]) {
+      need(child.evidence?.[path] === parent.evidence?.[path], 'historical child native evidence differs from parent');
+      sealed(path, child.evidence?.[path]);
+    }
+    const dispatch = read(dispatchPath);
+    need(dispatch.ok === true && dispatch.run === run && dispatch.role === 'alpha-repair' && dispatch.label === label
+      && dispatch.model === MODELS.sol61.id && dispatch.provider_effort === 'high'
+      && equal(dispatch.covers, [childPhase + ':' + lane]) && typeof dispatch.ended_at === 'string'
+      && !Number.isNaN(Date.parse(dispatch.ended_at)), 'historical queue lacks completed native authority');
+    reports.push(read(reportPath));
+  }
+  const completion = ownerFindingCompletion(pack, reports, child.post,
+    id => child.owner_finding_completion.reviews.find(row => row.id === id));
+  need(equal(completion, child.owner_finding_completion), 'historical queue completion differs from original native reports');
+}
+
+'''
+anchor='export function ownerFindingRequest(root, run, phase, round,'
+assert old.count(anchor)==1;new=old.replace(anchor,helper+anchor)
+needle="""  need(request.version === 1 && request.run === run && request.reviewer === '/root'
+    && request.phase === phase && request.round === round && Number.isSafeInteger(round) && round > 0
+    && Array.isArray(request.entries) && request.entries.length > 0, 'invalid explicit root finding queue');"""
+replacement="""  need(request.version === 1 && request.run === run && request.reviewer === '/root'
+    && adjudicationStage(request.phase) && Number.isSafeInteger(request.round) && request.round > 0
+    && Number.isSafeInteger(round) && round > 0
+    && Array.isArray(request.entries) && request.entries.length > 0, 'invalid explicit root finding queue');
+  if (request.phase !== phase || request.round !== round) {
+    consumedEarlierQueue(root, run, phase, round, dir, pointer, requestPath, request, bound);
+    return null;
+  }"""
+assert new.count(needle)==1;new=new.replace(needle,replacement)
+anchor="  need(pointer.version === 1 && pointer.run === run, 'invalid root advertisement');"
+assert new.count(anchor)==1
+new=new.replace(anchor,anchor+"\n  need(resolve(root, pointer.state_dir ?? '.physics-autopilot/' + run) === join(root, '.physics-autopilot', run), 'wrong state directory');")
+file=here/'candidate/tools/physics-support/step5-owner-finding-queue.mjs';file.write_text(new)
+for entry in (repo/'tools/physics-support').iterdir():
+ dest=file.parent/entry.name
+ if not dest.exists():dest.symlink_to(entry)
+# Existing workflow dynamically loads the adjacent queue by import.meta.url.
+workflow=here/'candidate/tools/physics-support/step5-workflow.mjs'
+if workflow.is_symlink():workflow.unlink()
+oldWorkflow=(repo/'tools/physics-support/step5-workflow.mjs').read_text()
+anchor="""  if(existsSync(queueProgress)){
+    const prior=read(queueProgress),pointer=read(join(workflowDir(root,run),'owner-finding-queue-request.json'));"""
+updated="""  if(existsSync(queueProgress)){
+    const prior=read(queueProgress);
+    requireValue(prior.run===run&&prior.phase===phase&&prior.round===round,'frozen owner finding queue identity changed');
+    if(existsSync(join(workflowDir(root,run),phase+'-'+round+'-collected.json'))){
+      // Replay this consumed wave from its immutable parent, which binds its
+      // own queue request/progress. A newer advertisement belongs to new intake.
+      collect(root,run,phase,round);return {...prior,parent_collected:true};
+    }
+    const pointer=read(join(workflowDir(root,run),'owner-finding-queue-request.json'));"""
+assert oldWorkflow.count(anchor)==1
+newWorkflow=oldWorkflow.replace(anchor,updated);workflow.write_text(newWorkflow)
+(here/'workflow-integration.patch').write_text(''.join(difflib.unified_diff(oldWorkflow.splitlines(True),newWorkflow.splitlines(True),fromfile='a/tools/physics-support/step5-workflow.mjs',tofile='b/tools/physics-support/step5-workflow.mjs')))
+
+(here/'queue-integration.patch').write_text(''.join(difflib.unified_diff(old.splitlines(True),new.splitlines(True),fromfile='a/tools/physics-support/step5-owner-finding-queue.mjs',tofile='b/tools/physics-support/step5-owner-finding-queue.mjs')))

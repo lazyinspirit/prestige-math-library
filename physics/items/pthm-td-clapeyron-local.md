@@ -6,8 +6,8 @@ status: published
 origin: pipeline
 domain: physics
 library: physics
-physical_scope: A one-component, positive-temperature, C1 coexistence branch with bilateral energy, volume, and species exchange, nonzero molar-volume jump, and the explicit local same-tag homogeneity and reversible-heat assumptions stated here, with homogeneity either independently stipulated or supplied on each designated common-law bulk branch through the local Euler theorem; the slope formula requires nonzero molar-volume jump and C1 branch charts and is not asserted when either condition fails.
-dependency_level: 10
+physical_scope: A one-component, positive-temperature, C1 coexistence branch with pure pairwise energy, volume, and species transfers feasible arbitrarily close to zero from each sign with every other phase and auxiliary coordinate fixed, nonzero molar-volume jump, and the explicit local same-tag homogeneity and reversible-heat assumptions stated here, with homogeneity either independently stipulated or supplied on each designated common-law bulk branch through the local Euler theorem; the slope formula requires nonzero molar-volume jump and C1 branch charts and is not asserted when either condition fails.
+dependency_level: 2
 deps:
   - def-td-phase-and-coexistence-domain
   - def-td-si-quantities
@@ -46,25 +46,18 @@ sources:
     - title: "Konstantin K. Likharev, Essential Graduate Physics: Statistical Mechanics, §4.1 First-order phase transitions"
       url: https://phys.libretexts.org/Bookshelves/Thermodynamics_and_Statistical_Mechanics/Essential_Graduate_Physics_-_Statistical_Mechanics_%28Likharev%29/04%3A_Phase_Transitions/4.01%3A_First_order_phase_transitions
 verification:
-  verified:
-    model: "gpt-6-luna, gpt-6.1-sol, and delegated Codex review/repair agents; see completed run evidence"
-    verdict: "Owner accepted completed review and adjudication evidence for publication"
-    date: "2026-10-15"
-    scope: "Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report."
-    evidence: "research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json"
-    publication: "research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json"
-    delegated_by: "owner; publication instruction 2026-10-15"
+  repair: "research/physics-non-fluid-129-2026-10-21-r2-owner-step5-td-published-maintenance/root-application/pthm-td-clapeyron-local.receipt.json"
 ---
 
 ## Statement
 
-Let $\alpha,\beta$ be two one-component phase branches from [[def-td-phase-and-coexistence-domain]] on a common open chart $O\subset(0,\infty)\times\mathbb R$ with coordinates $(T,p)$. Assume each branch has a local $C^2$ energy representation $\mathcal U_i(s,V,n)$, $i\in\{\alpha,\beta\}$, and that within each fixed branch tag it satisfies the same-tag homogeneity
+Let $\alpha,\beta$ be two one-component phase branches from *Phase branches and coexistence domains* on a common open chart $O\subset(0,\infty)\times\mathbb R$ with coordinates $(T,p)$. Assume each branch has a local $C^2$ energy representation $\mathcal U_i(s,V,n)$, $i\in\{\alpha,\beta\}$, and that within each fixed branch tag it satisfies the same-tag homogeneity
 $$
 \mathcal U_i(\lambda s,\lambda V,\lambda n)=\lambda\mathcal U_i(s,V,n)
 $$
-for all $\lambda$ in a neighborhood of $1$ for which the scaled state remains in the chart. This is a phase-branch hypothesis: the general tagged law of [[post-td-bulk-additivity]] does not imply it. It may be stipulated independently on each local branch, or supplied by the common-law bulk subclass of [[pthm-td-euler-and-gibbs-duhem]] when each phase's local inverse states lie in its designated entropy cone with fixed species and intensive parameters and common SI units and energy/entropy reference conventions. That supplied subclass uses local inverse uniqueness and does not require a global energy inverse.
+for all $\lambda$ in a neighborhood of $1$ for which the scaled state remains in the chart. This is a phase-branch hypothesis: the general tagged law of *Additive separated systems and tagged bulk scaling* does not imply it. It may be stipulated independently on each local branch, or supplied by the common-law bulk subclass of *Euler and Gibbs-Duhem identities under same-tag homogeneity* when each phase's local inverse states lie in its designated entropy cone with fixed species and intensive parameters and common SI units and energy/entropy reference conventions. That supplied subclass uses local inverse uniqueness and does not require a global energy inverse.
 
-Suppose a state $(T_0,p_0)\in O$ is an attained interior coexistence equilibrium with bilateral energy, volume, and species exchange between the two branches, and both branches admit the valid local Gibbs charts of [[def-td-legendre-potentials]]. Write $g_i=G_i/n_i$, $s_i=S_i/n_i$, and $v_i=V_i/n_i$ in the units specified by [[def-td-si-quantities]]. If
+Suppose a state $(T_0,p_0)\in O$ is an attained interior coexistence equilibrium with bilateral energy, volume, and species exchange between the two branches, and both branches admit the valid local Gibbs charts of *Local thermodynamic Legendre potentials*. Precisely, in each of these three exchange directions, feasible nonzero pure pairwise increments approach zero from each sign, while every nonselected coordinate of both phases, every other phase, and every auxiliary state is fixed at its endpoint value. Write $g_i=G_i/n_i$, $s_i=S_i/n_i$, and $v_i=V_i/n_i$ in the units specified by *SI quantities and unit conventions*. If
 $$
 \Delta v(T_0,p_0):=v_\beta(T_0,p_0)-v_\alpha(T_0,p_0)\ne0,
 $$
@@ -73,6 +66,18 @@ $$
 \frac{dp}{dT}=\frac{s_\beta-s_\alpha}{v_\beta-v_\alpha}.
 $$
 If, in addition, conversion from $\alpha$ to $\beta$ is admitted as a reversible process in contact with an ideal thermal reservoir at the same fixed $T$, and the full finite isolated compound (converted phases, reservoir, work stores and all auxiliaries) has equilibrium endpoints with additive component entropy, with every component other than the converted phases and that reservoir having zero entropy change, and the admitted forward and reverse complete-compound records have nonnegative total endpoint entropy changes for that same additive split with their full endpoint tuples interchanged, then its molar latent heat absorbed by the system is $\ell_{\alpha\to\beta}=T(s_\beta-s_\alpha)$. These are conditional model deductions. The slope conclusion is not asserted when $\Delta v=0$ or where the branch charts are not $C^1$.
+
+## Statement references
+
+[[def-td-phase-and-coexistence-domain]]
+
+[[post-td-bulk-additivity]]
+
+[[pthm-td-euler-and-gibbs-duhem]]
+
+[[def-td-legendre-potentials]]
+
+[[def-td-si-quantities]]
 
 ## Facts & Assumptions
 
@@ -86,13 +91,13 @@ If, in addition, conversion from $\alpha$ to $\beta$ is admitted as a reversible
 
 [F2] [[def-td-legendre-potentials]]: on its valid local natural-variable chart, $G=U-Ts+pV$.
 
-[F3] [[pthm-td-intensive-coexistence-conditions]]: with energy, volume, and species transfer feasible in both directions at an attained interior entropy maximum, the two branches have equal positive temperatures, equal pressures, and equal chemical potentials.
+[F3] [[pthm-td-intensive-coexistence-conditions]]: at an attained entropy maximum, pure pairwise energy, volume, and species transfers with feasible nonzero increments approaching zero from each sign, and every nonselected phase and auxiliary coordinate fixed, give equal positive temperatures, equal pressures, and equal chemical potentials. The Statement supplies exactly these transfer hypotheses.
 
-[F4] [[pthm-td-potential-differentials]]: on a valid local C2 energy-representation chart, $dG=-S\,dT+V\,dp+\mu\,dn$. Its current batch-9 carrier is registered with draft status and its proof is conditional on the actual local-energy and partial-Legendre suppliers; their interfaces and proof statuses are recorded in batch-13 cross-batch evidence.
+[F4] [[pthm-td-potential-differentials]]: Its current carrier is published and includes verification evidence. On a valid local $C^2$ energy-representation chart with the stated natural-coordinate inverse charts, its Statement gives $dG=-S\,dT+V\,dp+\sum_j\mu_j\,dn_j$. Its Proof derives this identity from the local energy conjugate identities, the Legendre-potential definitions, and the published $C^2$ partial-Legendre differential lemma; it does not assert that heat or work is an exact differential on process space.
 
 [F5] [[pthm-td-euler-and-gibbs-duhem]]: if the same-tag homogeneity [A1] holds on a valid local C2 energy chart, its current Statement gives $U=Ts-pV+\mu n$, hence $G/n=\mu$. Its general conditional implication requires [A1], and its separately designated common-law bulk subclass derives that local premise from adopted entropy transport and local inverse uniqueness. Neither route silently equates distinct physical system tags.
 
-[L1] [[thm-tdmath-local-implicit-rank]]: for a C1 scalar equation $F(T,p)=0$ on an open subset of $\mathbb R^2$, if $F(T_0,p_0)=0$ and $\partial_pF(T_0,p_0)\ne0$, the local zero set is uniquely a C1 graph $p=p(T)$ with $p'=-F_T/F_p$. The current carrier is registered in batch 4; it remains a draft mathematical item, not an independent acceptance.
+[L1] [[thm-tdmath-local-implicit-rank]]: Its current mathematical carrier is published and has verification evidence. Its Statement gives a unique local $C^1$ graph of dimension $n-q$ for a $C^1$ map $F:U\subseteq\mathbb R^n\to\mathbb R^q$ with $F(x_*)=0$ and an invertible $q\times q$ derivative minor; when $q=n$, the zero is locally isolated. Its Proof reduces the nonsquare case by a coordinate permutation to the Euclidean implicit-function theorem and the square case to the inverse-function theorem. Here $F=g_\beta-g_\alpha$ is $C^1$ on the stated open chart and $F_p=v_\beta-v_\alpha\ne0$, so the required scalar minor is invertible.
 
 [L2] [[thm-chain-rule-for-total-derivatives]]: differentiating a composition of differentiable maps gives the composed derivative.
 

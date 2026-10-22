@@ -1,0 +1,25 @@
+Both exact historical pre-reader carriers recovered. The original reader46 full `cat` output in `research/physics-non-fluid-129-2026-10-21-r2-dispatch/reader-reader-46.log` contains the complete source blocks: Egorov lines8775–8923, Gaussian lines8928–9056. Extracting the source bytes alone with the original single final newline reproduces the immutable native pre-hashes:
+
+- `thm-nrqmx-quadratic-egorov`: `57e0862a2c622f277cd286339c72ad9e5e5ff8825f1a89d1f797e20e4c802d0c`.
+- `ex-nrqmx-gaussian-wigner-flow`: `d451d11cc46db8f38ef96b24fa1c4507d35f12b0edbb70cf8b1822950c53e16a`.
+
+No missing text was inferred from another baseline. `evidence/pre-reader/` holds the exact authenticated source extracts; `evidence/recovery.json` binds the original log, line ranges and pre/current hashes. Original native escalations, verdicts and history remain untouched. The historical-unknown exception is unnecessary.
+
+The actual delta is bounded. Egorov explicitly defines both unitary groups by U(0)=I, preservation of D(H), and i∂tU=HU/epsilon, hence generator −iH/epsilon. That faithfully resolves the former ambiguous phrase “constant generator H/epsilon” in the direction already used by the proof. Its Nonnenmacher page locator changes40–42 to38–39. Gaussian changes its three schema headings and clarifies the bibliography scope/locator. Both Facts sections and both entire mathematical arguments are identical modulo whitespace; the Gaussian public mathematical text is also identical modulo whitespace. Exact raw diffs and section comparisons are retained.
+
+Current scientific review found no remaining logical defect in these two carriers. For Egorov, I checked completeness from bounded Hessian, the higher variational induction, finite-time compact support transport, graph-core extension of the bounded commutator, operator-norm differentiability of the symbol family, continuous vector derivatives and compact-interval Banach FTC for both time orientations. The cubic supplier's explicit1/16 Taylor kernel and derivative counts give the uniform epsilon² remainder. The exact general quadratic branch computes the Q/P left/right formulas, cancels second derivatives and preserves Schwartz symbols under the invertible affine flow; arbitrary singular/indefinite G and real linear/scalar terms remain allowed under the explicit self-adjoint/core assumption. This neither proves a universal realization nor an Ehrenfest-time statement.
+
+For Gaussian, I checked the complete Hermite coefficient/domain/core argument, the Wigner Fourier constant and phase, normalization, all first/second moments, Q/P symmetry and the uncertainty sign under the first-variable-linear pairing. The Gaussian cross pairing has imaginary part −epsilon/2, whose absolute value gives the claimed bound, attained by this vector. The exact evolved compact-test functional is transported by the determinant-one rotation, so no premise that the evolved vector stays Schwartz is hidden. All real q,p,t, epsilon=1 and excluded epsilon=0 retain their exact stated scope; these are mathematical model claims.
+
+The thirteen complete current sources read include the targets and eleven critical local/imported supplier/definition sources. The remaining thirteen direct public prerequisite interfaces and six additional context interfaces were inspected exactly. `evidence/current-inputs.json` binds all32 current files and identifies these reading scopes individually. Every declared import pin among them matches the current file. I did not newly retrieve or read external PDFs, nor audit the entire transitive supplier corpus. The pre-existing published-verification marker findings remain separate native maintenance records; no audit or verification was invented.
+
+Actual source consumer search finds only Gaussian using Egorov (F4 and Verification1.1/2.1), with U=exp(−itH/epsilon) and exactly the restored Schrödinger sign. Gaussian has no source consumer. Both draft A/B placement pages were read. Current batch46 public-text mirrors and the Gaussian F4 full-Statement citation agree modulo whitespace. No consumer repair or new dependency is needed. Exact source and consumer bindings are in `evidence/consumers.json` and `evidence/public-interfaces.json`.
+
+Research-only recommendation: root may replace the two current touched escalations with `accepted_repair` using these authenticated deltas and the completed current scientific/risk review, preserving the existing defect references and original escalation history. This proposal is not a native verdict or acceptance stamp. Root owns actual disposition, risk/metadata refresh and hash recertification. No production source, manifest, contract, import, ledger, readiness or control file was edited. No native gate was attempted. Production ownership is released.
+
+Current raw hashes:
+
+- Egorov: `fff1b25cb60caac6682f9d9899cf872eefd19c1eca72b3cb754391b8d110c453`.
+- Gaussian: `1cef4995484e720595feabadbf4e1902767768a391ef3134c474d4139ab0af8c`.
+
+proposal.json SHA256: `c97ad82307f4d68d98a26a84c50fe7676a1235e44e18767327fe59adf47b18aa`.

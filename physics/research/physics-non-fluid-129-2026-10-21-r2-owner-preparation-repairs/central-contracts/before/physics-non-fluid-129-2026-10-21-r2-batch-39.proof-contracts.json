@@ -1,0 +1,1411 @@
+{
+  "version": 1,
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "batch": "39",
+  "level": 2,
+  "scope": [
+    "alg-gr-fx-periodic-wave-leapfrog",
+    "prop-gr-fx-leapfrog-termination",
+    "thm-gr-fx-leapfrog-mode-stability",
+    "thm-gr-fx-leapfrog-local-truncation",
+    "def-gr-fx-constraint-residual-diagnostic",
+    "ex-gr-fx11-1",
+    "ex-gr-fx11-2"
+  ],
+  "contracts": {
+    "alg-gr-fx-periodic-wave-leapfrog": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The algorithm requires N>=3 and therefore has a nonempty periodic grid."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: zero input arrays remain zero under the exact linear formulas."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: nmax=1 still computes u1 and has an empty update range."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Definition: the finite real-arithmetic procedure has no singular matrix or division by a data-dependent quantity."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: the loop endpoints are explicitly n=1 through nmax-1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Definition: all arrays and parameters are supplied; the procedure selects no element from a family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The algorithm is procedural and states no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The algorithm is procedural and states no if-and-only-if claim."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "zero input",
+          "inputs": "N=3, nmax=1, u0=v0=0",
+          "calculation": "The single startup formula gives u1=0; the update range 1..0 is empty.",
+          "result": "The output is (u0,u1)=(0,0), with no update pass."
+        }
+      ],
+      "finite_checks_disposition": "Finite exact substitutions check stated domains, recurrence interfaces, signs and units. They are not empirical observations and do not replace the complete conditional argument or imply an Einstein-solver convergence result.",
+      "supplier_excerpts": [
+        {
+          "supplier": "def-gr-fx-fixed-gauge-data-topology",
+          "carrier": "items/def-gr-fx-fixed-gauge-data-topology.md",
+          "status": "Current supplier. Current draft interface and complete proof inspected; loadStep1Record and step1Decision report the current Step 1 authoring record as ready. Draft/precheck metadata is preserved; independent proof approval is not inferred.",
+          "source_section": "Definition",
+          "exact_statement": "Fix an integer $s\\ge5$, a finite number $T>0$, the closed interval $J=[0,T]$, and the flat spatial torus $\\mathbb T^3_{2\\pi}=\\mathbb R^3/(2\\pi\\mathbb Z)^3$. Use the spaces $H^s(\\mathbb T^3_{2\\pi};\\mathbb R^m)$ and one fixed periodic symmetric-hyperbolic system as defined in [[def-gr-periodic-symmetric-hyperbolic-system]]: its state domain $O\\subseteq\\mathbb R^m$ is open, its coefficient maps $A^\\mu(t,x,z),B(t,x,z)$ are smooth on the stated time, torus and state domain, each $A^\\mu$ is symmetric, and $A^0$ is positive definite. The fixed-gauge Einstein state is the finite vector $z=(g_{ab},p_{ab},q_{abi},w)$, where $p_{ab}=\\partial_0g_{ab}$, $q_{abi}=\\partial_i g_{ab}$, and $w$ is the complete matter and auxiliary state of one fixed reduction.\n\nFor the SI interpretation, the system's time parameter $t$ is the length coordinate $x^0=ct_{\\rm phys}$ in metres, while $x^i$ are dimensionless angular coordinates on the torus. The metric components then have coordinate-dependent units: $g_{00}$ is dimensionless, $g_{0i}$ has units of metres, and $g_{ij}$ has units of square metres. Accordingly $p_{ab}=\\partial_0g_{ab}$ has units $[g_{ab}]\\,\\mathrm m^{-1}$ and $q_{abi}=\\partial_i g_{ab}$ has units $[g_{ab}]$. The model-specific components of $w$ have the fixed units declared by that reduction. Divide each component by its fixed declared unit scale before forming the Euclidean-valued state and its Sobolev norm; the resulting numerical state is dimensionless. The coefficient and source fields are those of this same fixed normalized reduction. Thus $R_z$ is a bound on that normalized state, and $R_t$ is a separate bound on its derivative with respect to the length coordinate $x^0$ (units $\\mathrm m^{-1}$). Neither is a unit-independent physical observable. If physical seconds are used instead, then $\\partial_{x^0}=c^{-1}\\partial_{t_{\\rm phys}}$; consequently the term $A^0\\partial_{x^0}$ becomes $c^{-1}A^0\\partial_{t_{\\rm phys}}$ unless the entire equation is multiplied by $c$.\n\nA fixed-gauge finite-slab comparison context consists of one such coefficient family on an open time interval containing $J$, one coordinate gauge and reconstruction rule, compact state sets $K_0\\subset\\operatorname{int}K_1\\subset\\operatorname{int}K_2\\subset O$, separate finite nonnegative bounds $R_z,R_t$, and constants $0<a\\le b<\\infty$ such that\n\n$$a|\\zeta|^2\\le \\zeta^{\\mathsf T}A^0(t,x,z)\\zeta\\le b|\\zeta|^2$$\n\nfor every $t\\in J$, $x\\in\\mathbb T^3_{2\\pi}$, $z\\in K_2$, and $\\zeta\\in\\mathbb R^m$. The reference state takes values in $K_0$. Compared classical states take values in $K_1$, belong to $L^\\infty(J;H^s)\\cap C^0(J;H^{s-1})$, have $\\partial_tz\\in L^\\infty(J;H^{s-1})$, and satisfy\n$$\\operatorname*{ess\\,sup}_{t\\in J}\\|z(t)\\|_{H^s}\\le R_z,\\qquad \\operatorname*{ess\\,sup}_{t\\in J}\\|\\partial_tz(t)\\|_{H^{s-1}}\\le R_t.$$\nThe outer set $K_2$ supplies the positive coefficient margin for local existence restarted from data in compact subsets of $K_1$. Two states use the same chart grid, coefficient maps, gauge source functions, reconstruction rule, and fixed matter branch. Forcing terms, when included in a comparison, are continuous $H^{s-1}$-valued functions of the slab parameter; their size is controlled through the separate stated solution and time-derivative bounds when the comparison estimate is applied.\n\nThe Sobolev norms compare coordinate fields in this fixed gauge. They do not identify two arbitrary coordinate representatives by a diffeomorphism. The Einstein interpretation uses the same first-order reduction, full initial constraints, complete matter data, and local restart hypotheses throughout the finite slab.",
+          "relevant_hypotheses_and_conventions": "No separate Given block; exact domain and conventions are stated in the quoted Definition or Statement.",
+          "supplier_proof_status": "Current draft interface and complete proof inspected; loadStep1Record and step1Decision report the current Step 1 authoring record as ready. Draft/precheck metadata is preserved; independent proof approval is not inferred.",
+          "consumer_use": "Declared direct dependency; see alg-gr-fx-periodic-wave-leapfrog's Statement/Definition reference."
+        }
+      ]
+    },
+    "prop-gr-fx-leapfrog-termination": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-gr-fx-periodic-wave-leapfrog",
+          "source_section": "Definition",
+          "quote": "Use the first circle factor of the fixed periodic three-torus from the earlier\nfixed-gauge data definition. This item is a separate nondimensionalized scalar\nmodel: both the spatial coordinate $x$ and time $t$ are dimensionless, the\nperiod is $2\\pi$, and the model wave speed is $1$. Let $N\\ge3$ be an integer,\n$h:=2\\pi/N$, and $x_j:=jh\\pmod{2\\pi}$ for $j\\in\\mathbb Z/N\\mathbb Z$. A\nperiodic grid function is an $N$-tuple $u=(u_j)_{j\\in\\mathbb Z/N\\mathbb Z}$ of\nreal numbers. Define the centered periodic second-difference operator\n$$\n(D_hu)_j:=\\frac{u_{j+1}-2u_j+u_{j-1}}{h^2},\n$$\nwhere subscripts are reduced modulo $N$.\n\nThe algorithm takes as input such arrays $u^0,v^0$, a real time step $k>0$,\nand an integer $n_{\\max}\\ge1$. It sets\n$$\nu^1:=u^0+kv^0+\\frac{k^2}{2}D_hu^0,\n$$\nthen, for each integer $n=1,\\ldots,n_{\\max}-1$, computes\n$$\nu^{n+1}_j:=2u^n_j-u^{n-1}_j+k^2(D_hu^n)_j \\qquad(j\\in\\mathbb Z/N\\mathbb Z).\n$$\nIt outputs $(u^0,u^1,\\ldots,u^{n_{\\max}})$. All operations here are exact real\narithmetic. No rounding-error model or claim about a floating-point\nimplementation is part of the definition.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The initialization uses a finite formula at each of the $N$ sites. The\nouter index takes each of the finitely many values $1$ through $n_{\\max}-1$\nand has no data-dependent branch, so the procedure makes exactly\n$n_{\\max}-1$ update passes. Each pass writes the next $N$-tuple, giving the\noutput levels $u^0,u^1,\\ldots,u^{n_{\\max}}$. [given, F1, algebra]",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The initialization costs at most $C_0N$ scalar and array operations for a\nfixed constant $C_0$. Each update pass costs at most $C_1N$ such operations\nfor a fixed $C_1$, because every site uses the same fixed stencil. Thus the\ntotal is at most $C_0N+C_1N(n_{\\max}-1)\\le(C_0+C_1)Nn_{\\max}$, proving the\nclaimed bound. [given, F1, step 1.1, algebra] ∎",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The hypothesis N>=3 excludes an empty grid."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1: each finite formula maps zero arrays to zero arrays."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1: for nmax=1 the update range is empty, so there are exactly nmax-1=0 passes."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Statement: each update uses a fixed three-point formula and no division by data."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1: the inclusive integer range 1,...,nmax-1 is counted explicitly."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proposition uses supplied arrays and performs no selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is an unconditional operation-count assertion, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is an unconditional operation-count assertion, not an iff."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "smallest grid and step count",
+          "inputs": "N=3, nmax=1",
+          "calculation": "The loop index range 1..nmax-1 is empty; initialization writes one N-entry level u1.",
+          "result": "Exactly 0 update passes and output through u1; the stated O(N nmax) bound is finite."
+        }
+      ],
+      "finite_checks_disposition": "Finite exact substitutions check stated domains, recurrence interfaces, signs and units. They are not empirical observations and do not replace the complete conditional argument or imply an Einstein-solver convergence result.",
+      "supplier_excerpts": [
+        {
+          "supplier": "alg-gr-fx-periodic-wave-leapfrog",
+          "carrier": "items/alg-gr-fx-periodic-wave-leapfrog.md",
+          "status": "Current supplier. Current batch draft supplier authored in this run; its exact statement and complete available proof were inspected. Independent approval is not inferred; its Step 1 record is written only after final scoped checks.",
+          "source_section": "Definition",
+          "exact_statement": "Use the first circle factor of the fixed periodic three-torus from the earlier\nfixed-gauge data definition. This item is a separate nondimensionalized scalar\nmodel: both the spatial coordinate $x$ and time $t$ are dimensionless, the\nperiod is $2\\pi$, and the model wave speed is $1$. Let $N\\ge3$ be an integer,\n$h:=2\\pi/N$, and $x_j:=jh\\pmod{2\\pi}$ for $j\\in\\mathbb Z/N\\mathbb Z$. A\nperiodic grid function is an $N$-tuple $u=(u_j)_{j\\in\\mathbb Z/N\\mathbb Z}$ of\nreal numbers. Define the centered periodic second-difference operator\n$$\n(D_hu)_j:=\\frac{u_{j+1}-2u_j+u_{j-1}}{h^2},\n$$\nwhere subscripts are reduced modulo $N$.\n\nThe algorithm takes as input such arrays $u^0,v^0$, a real time step $k>0$,\nand an integer $n_{\\max}\\ge1$. It sets\n$$\nu^1:=u^0+kv^0+\\frac{k^2}{2}D_hu^0,\n$$\nthen, for each integer $n=1,\\ldots,n_{\\max}-1$, computes\n$$\nu^{n+1}_j:=2u^n_j-u^{n-1}_j+k^2(D_hu^n)_j \\qquad(j\\in\\mathbb Z/N\\mathbb Z).\n$$\nIt outputs $(u^0,u^1,\\ldots,u^{n_{\\max}})$. All operations here are exact real\narithmetic. No rounding-error model or claim about a floating-point\nimplementation is part of the definition.",
+          "relevant_hypotheses_and_conventions": "No separate Given block; exact domain and conventions are stated in the quoted Definition or Statement.",
+          "supplier_proof_status": "Current batch draft supplier authored in this run; its exact statement and complete available proof were inspected. Independent approval is not inferred; its Step 1 record is written only after final scoped checks.",
+          "consumer_use": "[F1] [[alg-gr-fx-periodic-wave-leapfrog]]: one initialization computes $u^1$\nby one finite grid pass; the update loop runs through the fixed integer range\n$1,\\ldots,n_{\\max}-1$, and each pass updates exactly $N$ grid entries."
+        }
+      ]
+    },
+    "thm-gr-fx-leapfrog-mode-stability": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-gr-fx-periodic-wave-leapfrog",
+          "source_section": "Definition",
+          "quote": "Use the first circle factor of the fixed periodic three-torus from the earlier\nfixed-gauge data definition. This item is a separate nondimensionalized scalar\nmodel: both the spatial coordinate $x$ and time $t$ are dimensionless, the\nperiod is $2\\pi$, and the model wave speed is $1$. Let $N\\ge3$ be an integer,\n$h:=2\\pi/N$, and $x_j:=jh\\pmod{2\\pi}$ for $j\\in\\mathbb Z/N\\mathbb Z$. A\nperiodic grid function is an $N$-tuple $u=(u_j)_{j\\in\\mathbb Z/N\\mathbb Z}$ of\nreal numbers. Define the centered periodic second-difference operator\n$$\n(D_hu)_j:=\\frac{u_{j+1}-2u_j+u_{j-1}}{h^2},\n$$\nwhere subscripts are reduced modulo $N$.\n\nThe algorithm takes as input such arrays $u^0,v^0$, a real time step $k>0$,\nand an integer $n_{\\max}\\ge1$. It sets\n$$\nu^1:=u^0+kv^0+\\frac{k^2}{2}D_hu^0,\n$$\nthen, for each integer $n=1,\\ldots,n_{\\max}-1$, computes\n$$\nu^{n+1}_j:=2u^n_j-u^{n-1}_j+k^2(D_hu^n)_j \\qquad(j\\in\\mathbb Z/N\\mathbb Z).\n$$\nIt outputs $(u^0,u^1,\\ldots,u^{n_{\\max}})$. All operations here are exact real\narithmetic. No rounding-error model or claim about a floating-point\nimplementation is part of the definition.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "5.1",
+            "5.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-complex-numbers-and-arithmetic",
+          "source_section": "Definition",
+          "quote": "Form the polynomial ring $\\mathbb R[x]$\n([[def-polynomial-ring-over-a-commutative-ring]]) and define the **complex\nnumbers** by the quotient ring\n$$\\mathbb C:=\\mathbb R[x]/(x^2+1)$$\n([[def-quotient-ring]]). Write $a$ for the constant class $a+(x^2+1)$ and set\n$$i:=x+(x^2+1).$$\nThus $i^2=-1$ in the quotient. The constant-class map\n$\\mathbb R\\to\\mathbb C$ is the specified real map; its injectivity and the\nfield structure are proved in [[thm-complex-numbers-form-a-field]], after which\n$\\mathbb C/\\mathbb R$ is a field extension in the sense of\n[[def-field-extension-generated-subfields-and-simple-extension]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-complex-numbers-form-a-field",
+          "source_section": "Statement",
+          "quote": "$\\mathbb C=\\mathbb R[x]/(x^2+1)$ is a field containing the embedded copy of\n$\\mathbb R$. Every complex number has a unique form $a+bi$ with $a,b\\in\\mathbb R$,\nand\n$$ (a+bi)+(u+vi)=(a+u)+(b+v)i, $$\n$$ (a+bi)(u+vi)=(au-bv)+(av+bu)i. $$\nIf $a+bi\\ne0$, then\n$$ (a+bi)^{-1}=\\frac{a-bi}{a^2+b^2}. $$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-complex-exponential",
+          "source_section": "Definition",
+          "quote": "Let $\\iota_{\\mathbb R}\\colon\\mathbb N\\to\\mathbb R$ be the canonical-natural map\nof [[def-canonical-natural]], and let $j\\colon\\mathbb R\\to\\mathbb C$ be the real\nembedding $j(x)=x+i0$ from [[def-complex-numbers-and-arithmetic]]. For every\n$n\\in\\mathbb N$, the factorial $n!$ is nonzero by\n[[def-factorial-and-falling-factorial]], so\n$\\iota_{\\mathbb R}(n!)>0$ by [[lem-of-naturals-positive]] and consequently\n$j(\\iota_{\\mathbb R}(n!))\\ne0$ in the complex field\n[[thm-complex-numbers-form-a-field]].\n\nFor $z\\in\\mathbb C$, define\n$$ \\exp z:=\\sum_{n=0}^{\\infty}\\frac{z^n}{j(\\iota_{\\mathbb R}(n!))}. $$\nwhenever this complex series converges. Inside a complex expression we\nabbreviate the embedded denominator $j(\\iota_{\\mathbb R}(n!))$ by $n!$, so the\nsame definition may be written $\\exp z=\\sum z^n/n!$ without identifying a\nnatural number with a complex number. Powers and series are those of\n[[def-complex-integer-powers]] and\n[[def-complex-series-power-series-and-absolute-convergence]]. The convergence\nfor every $z\\in\\mathbb C$ is discharged by\n[[lem-complex-exponential-series-converges-everywhere]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-eulers-formula",
+          "source_section": "Statement",
+          "quote": "For every real $\\theta$, $\\exp(i\\theta)=\\cos\\theta+i\\sin\\theta$.",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-sine-and-cosine-derivatives",
+          "source_section": "Statement",
+          "quote": "The functions $\\sin$ and $\\cos$ are differentiable on $\\mathbb R$, with\n$$(\\sin x)'=\\cos x,\\qquad(\\cos x)'=-\\sin x.$$\nAlso $\\sin0=0$ and $\\cos0=1$.",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-sine-and-cosine-addition-formulas",
+          "source_section": "Statement",
+          "quote": "For all real $x,y$,\n$$\\sin(x+y)=\\sin x\\cos y+\\cos x\\sin y,$$\n$$\\cos(x+y)=\\cos x\\cos y-\\sin x\\sin y.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-trigonometric-parity-and-pythagorean-identity",
+          "source_section": "Statement",
+          "quote": "For every real $x$,\n$$\\sin(-x)=-\\sin x,\\qquad\\cos(-x)=\\cos x,\\qquad\\sin^2x+\\cos^2x=1.$$\nConsequently $|\\sin x|\\le1$ and $|\\cos x|\\le1$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-sine-cosine-zero-sets-and-fundamental-period",
+          "source_section": "Statement",
+          "quote": "For every real $x$,\n$$\\sin x=0\\Longleftrightarrow x=m\\pi\\text{ for some }m\\in\\mathbb Z,\\qquad \\cos x=0\\Longleftrightarrow x=(m+1/2)\\pi\\text{ for some }m\\in\\mathbb Z.$$\nBoth sine and cosine have period $2\\pi$, and no smaller positive number is a common period.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-trigonometric-parity-and-pythagorean-identity",
+          "source_section": "Statement",
+          "quote": "For every real $x$,\n$$\\sin(-x)=-\\sin x,\\qquad\\cos(-x)=\\cos x,\\qquad\\sin^2x+\\cos^2x=1.$$\nConsequently $|\\sin x|\\le1$ and $|\\cos x|\\le1$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-nth-roots-exist",
+          "source_section": "Statement",
+          "quote": "Let $\\mathbb{R}$ be a complete ordered field ([[def-complete-ordered-field]]).\nFor every $a \\in \\mathbb{R}$ with $a \\ge 0$ and every $n \\in \\mathbb{N}$ with\n$n \\ge 1$ there is a **unique** $s \\in \\mathbb{R}$ with $s \\ge 0$ and $s^n = a$\n([[def-integer-power]]); we write\n\n$$s = a^{1/n} = \\sqrt[n]{a}.$$\n\nMoreover $a^{1/n} > 0$ when $a > 0$, and $a^{1/1} = a$.\n\n**This generalises the published [[thm-of-square-roots]], and the case $n = 2$ is\nnot new.** That theorem already produces the unique $\\sqrt{a} \\ge 0$ with\n$(\\sqrt{a})^2 = a$, and it is cited as such throughout the library; the notation\n$a^{1/2}$ introduced here is the same number. What is new is the passage to\ngeneral $n$: the completed square that drives the $n = 2$ argument has no direct\nanalogue, and its place is taken by the factorisation of $b^n - a^n$ and the\nresulting Lipschitz estimate ([[lem-power-difference-factorisation]]).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-finite-sum",
+          "source_section": "Definition",
+          "quote": "Throughout this page $\\mathbb{R}$ is the complete ordered field\n(Complete ordered field (least-upper-bound property)), in particular an ordered field\n(Ordered field) and a field (Field), and $\\mathbb{N}$ is the set\nof natural numbers (The natural numbers $\\mathbb{N}$ (von Neumann)) with successor $\\sigma(n) = n + 1$\n(Addition of natural numbers).\n\nLet $a : \\mathbb{N} \\to \\mathbb{R}$ be a sequence of reals, written $a_k$ for\n$a(k)$. **Finite sums and finite products of $a$ are defined by recursion on the\nupper index**, which is legitimate because of the recursion theorem\n(The recursion theorem). That theorem produces a function of one variable, so the\nrunning index has to be carried along inside the value: applying it to the set\n$A = \\mathbb{N} \\times \\mathbb{R}$, the starting element $(0, 0)$ and the function\n$f(n, s) = (\\sigma(n),\\, s + a_n)$ gives a unique\n$g : \\mathbb{N} \\to \\mathbb{N} \\times \\mathbb{R}$ with\n\n$$g(0) = (0, 0), \\qquad g(\\sigma(n)) = f(g(n)) \\quad (n \\in \\mathbb{N}).$$\n\nWrite $g(n) = \\big(\\pi_1(g(n)),\\, \\Sigma_n\\big)$ for its two coordinates.\n\n**The first coordinate is the index itself, and that is a small induction, not an\nobservation** (The principle of mathematical induction). Indeed $\\pi_1(g(0)) = 0$; and if\n$\\pi_1(g(n)) = n$, then\n$g(\\sigma(n)) = f\\big(\\pi_1(g(n)), \\Sigma_n\\big) = \\big(\\sigma(\\pi_1(g(n))),\\, \\Sigma_n + a_{\\pi_1(g(n))}\\big) = \\big(\\sigma(n),\\, \\Sigma_n + a_n\\big)$,\nso $\\pi_1(g(\\sigma(n))) = \\sigma(n)$. By induction $\\pi_1(g(n)) = n$ for every\n$n \\in \\mathbb{N}$. Only now may the second coordinate of the two displayed\nclauses be read off, and doing so gives\n\n$$\\Sigma_0 = 0, \\qquad \\Sigma_{\\sigma(n)} = \\Sigma_n + a_n .$$\n\n$\\Sigma$ is moreover the **unique** function $\\mathbb{N} \\to \\mathbb{R}$ with those\ntwo properties: if $\\Sigma'$ also has them then $n \\mapsto (n, \\Sigma'_n)$ satisfies\nthe two clauses defining $g$, hence equals $g$ by the uniqueness clause of\nThe recursion theorem, so $\\Sigma' = \\Sigma$.\n\nWe write $\\sum_{k < n} a_k := \\Sigma_n$. The same construction with starting\nelement $(0, 1)$ and $f(n, p) = (\\sigma(n),\\, p \\cdot a_n)$, with the same\ninduction on the first coordinate and the same uniqueness argument, gives the\nunique $\\Pi : \\mathbb{N} \\to \\mathbb{R}$ with\n\n$$\\Pi_0 = 1, \\qquad \\Pi_{\\sigma(n)} = \\Pi_n \\cdot a_n ,$$\n\nand we write $\\prod_{k < n} a_k := \\Pi_n$.\n\n**Notation.** For $m, n \\in \\mathbb{N}$ we abbreviate\n\n$$\\sum_{k=0}^{n} a_k := \\sum_{k < n+1} a_k, \\qquad \\prod_{k=0}^{n} a_k := \\prod_{k < n+1} a_k,$$\n\nand, for a general lower index $m$ with $m \\le n + 1$, let $d$ be the\nunique natural number satisfying $m+d=n+1$. Existence is the definition of\nnatural order (Order on the natural numbers); if $m+d=m+e$, commutativity\n(Addition is commutative) gives $d+m=e+m$, so cancellation\n(Addition is cancellative) gives $d=e$. On these admissible bounds only,\nwe may write this unique additive gap as $d=n+1-m$; no total natural subtraction\noperation is presupposed. With $d$ thus fixed, define\n\n$$\\sum_{k=m}^{n} a_k := \\sum_{j < d} a_{m+j}, \\qquad \\prod_{k=m}^{n} a_k := \\prod_{j < d} a_{m+j} .$$\n\nWhen $m = n + 1$ we have $d = 0$ and the sum is **empty**, with value $0$, while\nthe empty product has value $1$. In the same spirit $\\sum_{k=0}^{-1} a_k$ is\nnotation for the empty sum $\\Sigma_0 = 0$ and $\\prod_{k=0}^{-1} a_k$ for the\nempty product $\\Pi_0 = 1$; the index $-1$ never occurs as an element of\n$\\mathbb{N}$ and is only a way of writing \"no terms\".\n\nEquivalently, for naturals $m \\le r$, the half-open endpoint notation\n$\\sum_{k=m}^{r-1}a_k$ and $\\prod_{k=m}^{r-1}a_k$ means\n$\\sum_{j<d}a_{m+j}$ and $\\prod_{j<d}a_{m+j}$, respectively, where $d$ is the\nunique natural with $m+d=r$. Here $r-1$ is an endpoint label for the terms\nbefore $r$, so this notation needs no total subtraction operation. For $m=r$,\nthe unique gap is $0$ because $m+0=m$, giving the empty sum and product; the\ncase $m=r=0$ is the $-1$ endpoint convention just stipulated.\n\nOnly finitely many values of $a$ enter $\\sum_{k<n} a_k$, so the notation\n$\\sum_{k<n} a_k$ and $\\prod_{k<n} a_k$ is also used for a list\n$a_0, \\dots, a_{n-1}$ of reals given without reference to any extension of the\nlist to all of $\\mathbb{N}$: extend the list by $a_k = 0$ (respectively\n$a_k = 1$) for $k \\ge n$ and apply the definition above.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-finite-sum-reindexing-and-fubini",
+          "source_section": "Statement",
+          "quote": "Let $(M,+,0)$ be a commutative monoid and let all index sets below be finite.\n\n1. If $h:T\\to S$ is a bijection and $a:S\\to M$, then $\\sum_{t\\in T}a_{h(t)}=\\sum_{s\\in S}a_s$.\n2. If $S$ and $T$ are disjoint and $a:S\\cup T\\to M$, then $\\sum_{u\\in S\\cup T}a_u=\\sum_{s\\in S}a_s+\\sum_{t\\in T}a_t$.\n3. If $a:S\\times T\\to M$, then\n   $$\\sum_{(s,t)\\in S\\times T}a_{s,t}=\\sum_{s\\in S}\\left(\\sum_{t\\in T}a_{s,t}\\right)=\\sum_{t\\in T}\\left(\\sum_{s\\in S}a_{s,t}\\right).$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-quarter-turn-values-and-shift-formulas",
+          "source_section": "Statement",
+          "quote": "For every real $x$,\n$$\\sin(x+\\pi/2)=\\cos x,\\quad\\cos(x+\\pi/2)=-\\sin x,\\quad\\sin(x+\\pi)=-\\sin x,\\quad\\cos(x+\\pi)=-\\cos x.$$\nIn particular,\n$$\\sin(\\pi/2)=1,\\quad\\cos(\\pi/2)=0,\\quad\\sin\\pi=0,\\quad\\cos\\pi=-1.$$",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The period and zero-set facts in [F3, F5] make $e_\\ell$ well-defined on\n$\\mathbb Z/N\\mathbb Z$. Put $\\theta_\\ell=2\\pi\\ell/N$. By [F3] and [F4],\n$$\n(D_he_\\ell)(j)=h^{-2}\\bigl(e^{i\\theta_\\ell}-2+e^{-i\\theta_\\ell}\\bigr)e_\\ell(j) =-4h^{-2}\\sin^2(\\pi\\ell/N)e_\\ell(j).\n$$\nThus a mode sequence $u^n_j=a_ne_\\ell(j)$ obeys\n$a_{n+1}-2c_\\ell a_n+a_{n-1}=0$ for every update step. [A1, F1, F2, F3, F4, F5, algebra]",
+          "step": "1.1",
+          "inputs": [
+            "F3",
+            "F5",
+            "F4",
+            "A1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $\\ell\\ne0$, [F5] and $0<\\lambda<1$ imply\n$0<2\\lambda^2\\sin^2(\\pi\\ell/N)<2$, so $-1<c_\\ell<1$. Then\n$r_\\ell:=\\sqrt{1-c_\\ell^2}$ exists and is positive by [F7]. Direct\nsubstitution shows that $z^2-2c_\\ell z+1=0$ has roots\n$c_\\ell\\pm ir_\\ell$; they are distinct, and\n$|c_\\ell\\pm ir_\\ell|^2=c_\\ell^2+r_\\ell^2=1$. [A1, F2, F5, F6, F7, step 1.1, algebra]",
+          "step": "2.1",
+          "inputs": [
+            "F5",
+            "F7",
+            "A1",
+            "F2",
+            "F6",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Since the roots are distinct, for any initial pair $a_0,a_1$ there are\nunique complex constants $A,B$ with $a_0=A+B$ and\n$a_1=Az_{\\ell,+}+Bz_{\\ell,-}$. The sequence\n$Az_{\\ell,+}^n+Bz_{\\ell,-}^n$ obeys the recurrence in step 1.1 and has that\ninitial pair; induction on $n$ therefore identifies it with $a_n$. Its\nabsolute value is at most $|A|+|B|$ for all steps, so in particular on every\nfinite slab. [step 1.1, step 2.1, algebra]",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For the constant mode, define $\\bar u^n=N^{-1}\\sum_{j=0}^{N-1}u_j^n$.\nBy [F8], a cyclic shift preserves a finite sum, so\n$\\sum_j(D_hu^n)_j=0$. Averaging the update [F1] therefore gives\n$\\bar u^{n+1}=2\\bar u^n-\\bar u^{n-1}$, and averaging the startup gives\n$\\bar u^1=\\bar u^0+k\\bar v^0$. Induction yields\n$\\bar u^n=\\bar u^0+nk\\bar v^0$; when $nk\\le T$ its magnitude is at most\n$|\\bar u^0|+T|\\bar v^0|$, while nonzero $\\bar v^0$ makes it unbounded as\n$n\\to\\infty$. [F1, F8, algebra]",
+          "step": "3.1",
+          "inputs": [
+            "F8",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For fixed $N$, list the $N-1$ numbers\n$2h^{-1}|\\sin(\\pi\\ell/N)|$, $1\\le\\ell<N$. Each is positive by [F5], since\n$\\pi\\ell/N$ is not an integer multiple of $\\pi$. Taking the smaller of the\nfirst two positive numbers and then successively the smaller with each next\nnumber gives, by induction over this finite list, an attained positive\nminimum. The argument is for fixed $N$ only. [F5, algebra]",
+          "step": "4.1",
+          "inputs": [
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Suppose $N$ is even and $\\lambda=1$. Repeated $\\pi$-shift use of [F9]\ngives $\\sin(\\pi j)=0$ and $\\cos(\\pi j)=(-1)^j$ for every grid index\n$0\\le j<N$; Euler's formula [F3] identifies the Fourier character\n$e_{N/2}(j)$ with the alternating array $(-1)^j$. Its periodic neighbors are\nequal to its negative. By [F1],\n$(D_h((-1)^\\cdot))_j=-4h^{-2}(-1)^j$, so the mode recurrence has coefficient\n$c=1-2\\lambda^2=-1$ and characteristic polynomial $(z+1)^2$.\n[F1, F3, F9, algebra]",
+          "step": "5.1",
+          "inputs": [
+            "F9",
+            "F3",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-2",
+          "claim": "Write $u_j^n=a_n(-1)^j$ and put $q_n:=(-1)^na_n$. The repeated-root\nrecurrence from step 5.1 gives $q_{n+1}-2q_n+q_{n-1}=0$, so its first\ndifferences are constant and $q_n=a_0+n(-a_1-a_0)$. The startup in [F1]\nwith $u_j^0=a_0(-1)^j$ and $v_j^0=\\beta_0(-1)^j$ gives\n$a_1=-a_0+k\\beta_0$, hence $a_n=(-1)^n(a_0-nk\\beta_0)$. For\n$\\beta_0\\ne0$ its magnitude grows linearly in $n$; for $\\beta_0=0$ it is\nbounded. [F1, step 5.1, algebra] ∎",
+          "step": "5.2",
+          "inputs": [
+            "F1",
+            "step 5.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement: N>=3, so the periodic grid and mode index set are nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1: the mean formula includes the zero-velocity case and yields constant mean."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1: each nonconstant index 1<=ell<N has sin(pi ell/N) nonzero; ell=0 is treated separately in step 3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and steps 2.1 and 3.1: nonconstant roots are distinct for 0<lambda<1; the constant mode has the repeated root 1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and steps 5.1–5.2 analyze lambda=1 separately; the strict unit-circle conclusion assumes 0<lambda<1, and no lambda=0 claim is part of the input domain."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The Fourier indices and finite arrays are explicit; no choice from a family is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: the result is a one-way stability implication and contains no iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: the result is a one-way stability implication and contains no iff."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "nonconstant mode at N=4, lambda=1/2",
+          "inputs": "ell=1, N=4, lambda=1/2",
+          "calculation": "sin^2(pi/4)=1/2, so c=3/4 and r=sqrt(1-c^2)=sqrt(7)/4.",
+          "result": "The roots 3/4 ± i sqrt(7)/4 have squared modulus 9/16+7/16=1."
+        },
+        {
+          "case": "constant mean with zero mean velocity",
+          "inputs": "bar v0=0",
+          "calculation": "bar u^n=bar u0+n k bar v0=bar u0.",
+          "result": "The repeated-root mean component is constant; nonzero mean velocity is separately allowed linear growth."
+        },
+        {
+          "case": "Nyquist endpoint lambda=1",
+          "inputs": "N=4, h=k=pi/2, a0=0, beta0=1",
+          "calculation": "The repeated root is -1 and the exact startup formula gives a_n=(-1)^n(-n k).",
+          "result": "The Nyquist amplitude grows linearly with n; this endpoint calculation is separate from the strict 0<lambda<1 root claim."
+        }
+      ],
+      "finite_checks_disposition": "Finite substitutions check the strict-root formula, mean mode and repeated-root Nyquist endpoint. They are exact mathematical calculations and do not imply an Einstein-solver convergence result.",
+      "supplier_excerpts": [
+        {
+          "supplier": "alg-gr-fx-periodic-wave-leapfrog",
+          "carrier": "items/alg-gr-fx-periodic-wave-leapfrog.md",
+          "status": "Current supplier. Current batch draft supplier authored in this run; its exact statement and complete available proof were inspected. Independent approval is not inferred; its Step 1 record is written only after final scoped checks.",
+          "source_section": "Definition",
+          "exact_statement": "Use the first circle factor of the fixed periodic three-torus from the earlier\nfixed-gauge data definition. This item is a separate nondimensionalized scalar\nmodel: both the spatial coordinate $x$ and time $t$ are dimensionless, the\nperiod is $2\\pi$, and the model wave speed is $1$. Let $N\\ge3$ be an integer,\n$h:=2\\pi/N$, and $x_j:=jh\\pmod{2\\pi}$ for $j\\in\\mathbb Z/N\\mathbb Z$. A\nperiodic grid function is an $N$-tuple $u=(u_j)_{j\\in\\mathbb Z/N\\mathbb Z}$ of\nreal numbers. Define the centered periodic second-difference operator\n$$\n(D_hu)_j:=\\frac{u_{j+1}-2u_j+u_{j-1}}{h^2},\n$$\nwhere subscripts are reduced modulo $N$.\n\nThe algorithm takes as input such arrays $u^0,v^0$, a real time step $k>0$,\nand an integer $n_{\\max}\\ge1$. It sets\n$$\nu^1:=u^0+kv^0+\\frac{k^2}{2}D_hu^0,\n$$\nthen, for each integer $n=1,\\ldots,n_{\\max}-1$, computes\n$$\nu^{n+1}_j:=2u^n_j-u^{n-1}_j+k^2(D_hu^n)_j \\qquad(j\\in\\mathbb Z/N\\mathbb Z).\n$$\nIt outputs $(u^0,u^1,\\ldots,u^{n_{\\max}})$. All operations here are exact real\narithmetic. No rounding-error model or claim about a floating-point\nimplementation is part of the definition.",
+          "relevant_hypotheses_and_conventions": "No separate Given block; exact domain and conventions are stated in the quoted Definition or Statement.",
+          "supplier_proof_status": "Current batch draft supplier authored in this run; its exact statement and complete available proof were inspected. Independent approval is not inferred; its Step 1 record is written only after final scoped checks.",
+          "consumer_use": "[F1] [[alg-gr-fx-periodic-wave-leapfrog]]: $D_h$ is the centered periodic\nsecond difference, the startup is $u^1=u^0+kv^0+(k^2/2)D_hu^0$, and for\n$n\\ge1$ the update is $u^{n+1}=2u^n-u^{n-1}+k^2D_hu^n$."
+        },
+        {
+          "supplier": "def-complex-exponential",
+          "carrier": "items/def-complex-exponential.md",
+          "status": "Published supplier. Published definition/algorithm carrier; exact current interface inspected; no proof is applicable. No current-run readiness record is expected for this out-of-run item.",
+          "source_section": "Definition",
+          "exact_statement": "Let $\\iota_{\\mathbb R}\\colon\\mathbb N\\to\\mathbb R$ be the canonical-natural map\nof [[def-canonical-natural]], and let $j\\colon\\mathbb R\\to\\mathbb C$ be the real\nembedding $j(x)=x+i0$ from [[def-complex-numbers-and-arithmetic]]. For every\n$n\\in\\mathbb N$, the factorial $n!$ is nonzero by\n[[def-factorial-and-falling-factorial]], so\n$\\iota_{\\mathbb R}(n!)>0$ by [[lem-of-naturals-positive]] and consequently\n$j(\\iota_{\\mathbb R}(n!))\\ne0$ in the complex field\n[[thm-complex-numbers-form-a-field]].\n\nFor $z\\in\\mathbb C$, define\n$$ \\exp z:=\\sum_{n=0}^{\\infty}\\frac{z^n}{j(\\iota_{\\mathbb R}(n!))}. $$\nwhenever this complex series converges. Inside a complex expression we\nabbreviate the embedded denominator $j(\\iota_{\\mathbb R}(n!))$ by $n!$, so the\nsame definition may be written $\\exp z=\\sum z^n/n!$ without identifying a\nnatural number with a complex number. Powers and series are those of\n[[def-complex-integer-powers]] and\n[[def-complex-series-power-series-and-absolute-convergence]]. The convergence\nfor every $z\\in\\mathbb C$ is discharged by\n[[lem-complex-exponential-series-converges-everywhere]].",
+          "relevant_hypotheses_and_conventions": "No separate Given block; exact domain and conventions are stated in the quoted Definition or Statement.",
+          "supplier_proof_status": "Published definition/algorithm carrier; exact current interface inspected; no proof is applicable. No current-run readiness record is expected for this out-of-run item.",
+          "consumer_use": "[F2] [[def-complex-numbers-and-arithmetic]], [[thm-complex-numbers-form-a-field]],\n[[def-complex-exponential]]: $\\mathbb C$ is a field with imaginary unit $i$,\n$i^2=-1$, and the complex exponential is defined by its power series."
+        },
+        {
+          "supplier": "def-complex-numbers-and-arithmetic",
+          "carrier": "items/def-complex-numbers-and-arithmetic.md",
+          "status": "Published supplier. Published definition/algorithm carrier; exact current interface inspected; no proof is applicable. No current-run readiness record is expected for this out-of-run item.",
+          "source_section": "Definition",
+          "exact_statement": "Form the polynomial ring $\\mathbb R[x]$\n([[def-polynomial-ring-over-a-commutative-ring]]) and define the **complex\nnumbers** by the quotient ring\n$$\\mathbb C:=\\mathbb R[x]/(x^2+1)$$\n([[def-quotient-ring]]). Write $a$ for the constant class $a+(x^2+1)$ and set\n$$i:=x+(x^2+1).$$\nThus $i^2=-1$ in the quotient. The constant-class map\n$\\mathbb R\\to\\mathbb C$ is the specified real map; its injectivity and the\nfield structure are proved in [[thm-complex-numbers-form-a-field]], after which\n$\\mathbb C/\\mathbb R$ is a field extension in the sense of\n[[def-field-extension-generated-subfields-and-simple-extension]].",
+          "relevant_hypotheses_and_conventions": "No separate Given block; exact domain and conventions are stated in the quoted Definition or Statement.",
+          "supplier_proof_status": "Published definition/algorithm carrier; exact current interface inspected; no proof is applicable. No current-run readiness record is expected for this out-of-run item.",
+          "consumer_use": "[F2] [[def-complex-numbers-and-arithmetic]], [[thm-complex-numbers-form-a-field]],\n[[def-complex-exponential]]: $\\mathbb C$ is a field with imaginary unit $i$,\n$i^2=-1$, and the complex exponential is defined by its power series."
+        },
+        {
+          "supplier": "thm-complex-numbers-form-a-field",
+          "carrier": "items/thm-complex-numbers-form-a-field.md",
+          "status": "Published supplier. Published proof carrier; exact current statement and complete proof inspected. No current-run readiness record is expected for this out-of-run item; no broader acceptance is inferred.",
+          "source_section": "Statement",
+          "exact_statement": "$\\mathbb C=\\mathbb R[x]/(x^2+1)$ is a field containing the embedded copy of\n$\\mathbb R$. Every complex number has a unique form $a+bi$ with $a,b\\in\\mathbb R$,\nand\n$$ (a+bi)+(u+vi)=(a+u)+(b+v)i, $$\n$$ (a+bi)(u+vi)=(au-bv)+(av+bu)i. $$\nIf $a+bi\\ne0$, then\n$$ (a+bi)^{-1}=\\frac{a-bi}{a^2+b^2}. $$",
+          "relevant_hypotheses_and_conventions": "**Given:** The quotient construction $\\mathbb C=\\mathbb R[x]/(x^2+1)$.",
+          "supplier_proof_status": "Published proof carrier; exact current statement and complete proof inspected. No current-run readiness record is expected for this out-of-run item; no broader acceptance is inferred.",
+          "consumer_use": "[F2] [[def-complex-numbers-and-arithmetic]], [[thm-complex-numbers-form-a-field]],\n[[def-complex-exponential]]: $\\mathbb C$ is a field with imaginary unit $i$,\n$i^2=-1$, and the complex exponential is defined by its power series."
+        },
+        {
+          "supplier": "thm-eulers-formula",
+          "carrier": "items/thm-eulers-formula.md",
+          "status": "Published supplier. Published proof carrier; exact current statement and complete proof inspected. No current-run readiness record is expected for this out-of-run item; no broader acceptance is inferred.",
+          "source_section": "Statement",
+          "exact_statement": "For every real $\\theta$, $\\exp(i\\theta)=\\cos\\theta+i\\sin\\theta$.",
+          "relevant_hypotheses_and_conventions": "**Given:** A real $\\theta$.",
+          "supplier_proof_status": "Published proof carrier; exact current statement and complete proof inspected. No current-run readiness record is expected for this out-of-run item; no broader acceptance is inferred.",
+          "consumer_use": "[F3] [[thm-eulers-formula]], [[thm-sine-and-cosine-derivatives]]:\n$\\exp(i\\theta)=\\cos\\theta+i\\sin\\theta$, $\\cos0=1$, and $\\sin0=0$."
+        },
+        {
+          "supplier": "thm-sine-and-cosine-addition-formulas",
+          "carrier": "items/thm-sine-and-cosine-addition-formulas.md",
+          "status": "Published supplier. Published proof carrier; exact current statement and complete proof inspected. No current-run readiness record is expected for this out-of-run item; no broader acceptance is inferred.",
+          "source_section": "Statement",
+          "exact_statement": "For all real $x,y$,\n$$\\sin(x+y)=\\sin x\\cos y+\\cos x\\sin y,$$\n$$\\cos(x+y)=\\cos x\\cos y-\\sin x\\sin y.$$",
+          "relevant_hypotheses_and_conventions": "**Given:** A fixed real $y$ and variable real $x$.",
+          "supplier_proof_status": "Published proof carrier; exact current statement and complete proof inspected. No current-run readiness record is expected for this out-of-run item; no broader acceptance is inferred.",
+          "consumer_use": "[F4] [[thm-sine-and-cosine-addition-formulas]],\n[[cor-trigonometric-parity-and-pythagorean-identity]]: the double-angle\nidentity is $\\cos(2x)-1=-2\\sin^2x$."
+        },
+        {
+          "supplier": "thm-sine-and-cosine-derivatives",
+          "carrier": "items/thm-sine-and-cosine-derivatives.md",
+          "status": "Published supplier. Published proof carrier; exact current statement and complete proof inspected. No current-run readiness record is expected for this out-of-run item; no broader acceptance is inferred.",
+          "source_section": "Statement",
+          "exact_statement": "The functions $\\sin$ and $\\cos$ are differentiable on $\\mathbb R$, with\n$$(\\sin x)'=\\cos x,\\qquad(\\cos x)'=-\\sin x.$$\nAlso $\\sin0=0$ and $\\cos0=1$.",
+          "relevant_hypotheses_and_conventions": "**Given:** The sine and cosine power series.",
+          "supplier_proof_status": "Published proof carrier; exact current statement and complete proof inspected. No current-run readiness record is expected for this out-of-run item; no broader acceptance is inferred.",
+          "consumer_use": "[F3] [[thm-eulers-formula]], [[thm-sine-and-cosine-derivatives]]:\n$\\exp(i\\theta)=\\cos\\theta+i\\sin\\theta$, $\\cos0=1$, and $\\sin0=0$."
+        },
+        {
+          "supplier": "thm-sine-cosine-zero-sets-and-fundamental-period",
+          "carrier": "items/thm-sine-cosine-zero-sets-and-fundamental-period.md",
+          "status": "Published supplier. Published proof carrier; exact current statement and complete proof inspected. No current-run readiness record is expected for this out-of-run item; no broader acceptance is inferred.",
+          "source_section": "Statement",
+          "exact_statement": "For every real $x$,\n$$\\sin x=0\\Longleftrightarrow x=m\\pi\\text{ for some }m\\in\\mathbb Z,\\qquad \\cos x=0\\Longleftrightarrow x=(m+1/2)\\pi\\text{ for some }m\\in\\mathbb Z.$$\nBoth sine and cosine have period $2\\pi$, and no smaller positive number is a common period.",
+          "relevant_hypotheses_and_conventions": "**Given:** A real $x$.",
+          "supplier_proof_status": "Published proof carrier; exact current statement and complete proof inspected. No current-run readiness record is expected for this out-of-run item; no broader acceptance is inferred.",
+          "consumer_use": "[F5] [[thm-sine-cosine-zero-sets-and-fundamental-period]]: sine and cosine\nhave period $2\\pi$, the zero set of sine is $\\pi\\mathbb Z$, and for\n$0<\\ell<N$, $\\sin(\\pi\\ell/N)\\ne0$."
+        },
+        {
+          "supplier": "thm-quarter-turn-values-and-shift-formulas",
+          "carrier": "items/thm-quarter-turn-values-and-shift-formulas.md",
+          "status": "Published supplier. Published proof carrier; exact current statement and complete proof inspected. No current-run readiness record is expected for this out-of-run item; no broader acceptance is inferred.",
+          "source_section": "Statement",
+          "exact_statement": "For every real $x$,\n$$\\sin(x+\\pi/2)=\\cos x,\\quad\\cos(x+\\pi/2)=-\\sin x,\\quad\\sin(x+\\pi)=-\\sin x,\\quad\\cos(x+\\pi)=-\\cos x.$$\nIn particular,\n$$\\sin(\\pi/2)=1,\\quad\\cos(\\pi/2)=0,\\quad\\sin\\pi=0,\\quad\\cos\\pi=-1.$$",
+          "relevant_hypotheses_and_conventions": "**Given:** A real $x$ and $\\gamma=\\pi/2$.",
+          "supplier_proof_status": "Published proof carrier; exact current statement and complete proof inspected. No current-run readiness record is expected for this out-of-run item; no broader acceptance is inferred.",
+          "consumer_use": "[F9] [[thm-quarter-turn-values-and-shift-formulas]]: shifts by $\\pi$ negate\nsine and cosine, and $\\sin\\pi=0$, $\\cos\\pi=-1$."
+        },
+        {
+          "supplier": "cor-trigonometric-parity-and-pythagorean-identity",
+          "carrier": "items/cor-trigonometric-parity-and-pythagorean-identity.md",
+          "status": "Published supplier. Published proof carrier; exact current statement and complete proof inspected. No current-run readiness record is expected for this out-of-run item; no broader acceptance is inferred.",
+          "source_section": "Statement",
+          "exact_statement": "For every real $x$,\n$$\\sin(-x)=-\\sin x,\\qquad\\cos(-x)=\\cos x,\\qquad\\sin^2x+\\cos^2x=1.$$\nConsequently $|\\sin x|\\le1$ and $|\\cos x|\\le1$.",
+          "relevant_hypotheses_and_conventions": "**Given:** A real $x$.",
+          "supplier_proof_status": "Published proof carrier; exact current statement and complete proof inspected. No current-run readiness record is expected for this out-of-run item; no broader acceptance is inferred.",
+          "consumer_use": "[F4] [[thm-sine-and-cosine-addition-formulas]],\n[[cor-trigonometric-parity-and-pythagorean-identity]]: the double-angle\nidentity is $\\cos(2x)-1=-2\\sin^2x$.\n\n[F6] [[cor-trigonometric-parity-and-pythagorean-identity]]: $|\\sin x|\\le1$\nfor every real $x$."
+        },
+        {
+          "supplier": "thm-nth-roots-exist",
+          "carrier": "items/thm-nth-roots-exist.md",
+          "status": "Published supplier. Published proof carrier; exact current statement and complete proof inspected. No current-run readiness record is expected for this out-of-run item; no broader acceptance is inferred.",
+          "source_section": "Statement",
+          "exact_statement": "Let $\\mathbb{R}$ be a complete ordered field ([[def-complete-ordered-field]]).\nFor every $a \\in \\mathbb{R}$ with $a \\ge 0$ and every $n \\in \\mathbb{N}$ with\n$n \\ge 1$ there is a **unique** $s \\in \\mathbb{R}$ with $s \\ge 0$ and $s^n = a$\n([[def-integer-power]]); we write\n\n$$s = a^{1/n} = \\sqrt[n]{a}.$$\n\nMoreover $a^{1/n} > 0$ when $a > 0$, and $a^{1/1} = a$.\n\n**This generalises the published [[thm-of-square-roots]], and the case $n = 2$ is\nnot new.** That theorem already produces the unique $\\sqrt{a} \\ge 0$ with\n$(\\sqrt{a})^2 = a$, and it is cited as such throughout the library; the notation\n$a^{1/2}$ introduced here is the same number. What is new is the passage to\ngeneral $n$: the completed square that drives the $n = 2$ argument has no direct\nanalogue, and its place is taken by the factorisation of $b^n - a^n$ and the\nresulting Lipschitz estimate ([[lem-power-difference-factorisation]]).",
+          "relevant_hypotheses_and_conventions": "**Given:** A complete ordered field $\\mathbb{R}$ ([[def-complete-ordered-field]]), that is, an ordered field ([[def-ordered-field]]) with the least-upper-bound property; an element $a \\ge 0$; and a natural $n \\ge 1$, with field coefficients $n$ denoting $n\\cdot1_{\\mathbb{R}}$ while the root order remains natural ([[lem-of-naturals-positive]], [[lem-of-q-embeds]]).",
+          "supplier_proof_status": "Published proof carrier; exact current statement and complete proof inspected. No current-run readiness record is expected for this out-of-run item; no broader acceptance is inferred.",
+          "consumer_use": "[F7] [[thm-nth-roots-exist]]: each nonnegative real has a unique nonnegative\nsquare root."
+        },
+        {
+          "supplier": "def-finite-sum",
+          "carrier": "items/def-finite-sum.md",
+          "status": "Published supplier. Published definition/algorithm carrier; exact current interface inspected; no proof is applicable. No current-run readiness record is expected for this out-of-run item.",
+          "source_section": "Definition",
+          "exact_statement": "Throughout this page $\\mathbb{R}$ is the complete ordered field\n(Complete ordered field (least-upper-bound property)), in particular an ordered field\n(Ordered field) and a field (Field), and $\\mathbb{N}$ is the set\nof natural numbers (The natural numbers $\\mathbb{N}$ (von Neumann)) with successor $\\sigma(n) = n + 1$\n(Addition of natural numbers).\n\nLet $a : \\mathbb{N} \\to \\mathbb{R}$ be a sequence of reals, written $a_k$ for\n$a(k)$. **Finite sums and finite products of $a$ are defined by recursion on the\nupper index**, which is legitimate because of the recursion theorem\n(The recursion theorem). That theorem produces a function of one variable, so the\nrunning index has to be carried along inside the value: applying it to the set\n$A = \\mathbb{N} \\times \\mathbb{R}$, the starting element $(0, 0)$ and the function\n$f(n, s) = (\\sigma(n),\\, s + a_n)$ gives a unique\n$g : \\mathbb{N} \\to \\mathbb{N} \\times \\mathbb{R}$ with\n\n$$g(0) = (0, 0), \\qquad g(\\sigma(n)) = f(g(n)) \\quad (n \\in \\mathbb{N}).$$\n\nWrite $g(n) = \\big(\\pi_1(g(n)),\\, \\Sigma_n\\big)$ for its two coordinates.\n\n**The first coordinate is the index itself, and that is a small induction, not an\nobservation** (The principle of mathematical induction). Indeed $\\pi_1(g(0)) = 0$; and if\n$\\pi_1(g(n)) = n$, then\n$g(\\sigma(n)) = f\\big(\\pi_1(g(n)), \\Sigma_n\\big) = \\big(\\sigma(\\pi_1(g(n))),\\, \\Sigma_n + a_{\\pi_1(g(n))}\\big) = \\big(\\sigma(n),\\, \\Sigma_n + a_n\\big)$,\nso $\\pi_1(g(\\sigma(n))) = \\sigma(n)$. By induction $\\pi_1(g(n)) = n$ for every\n$n \\in \\mathbb{N}$. Only now may the second coordinate of the two displayed\nclauses be read off, and doing so gives\n\n$$\\Sigma_0 = 0, \\qquad \\Sigma_{\\sigma(n)} = \\Sigma_n + a_n .$$\n\n$\\Sigma$ is moreover the **unique** function $\\mathbb{N} \\to \\mathbb{R}$ with those\ntwo properties: if $\\Sigma'$ also has them then $n \\mapsto (n, \\Sigma'_n)$ satisfies\nthe two clauses defining $g$, hence equals $g$ by the uniqueness clause of\nThe recursion theorem, so $\\Sigma' = \\Sigma$.\n\nWe write $\\sum_{k < n} a_k := \\Sigma_n$. The same construction with starting\nelement $(0, 1)$ and $f(n, p) = (\\sigma(n),\\, p \\cdot a_n)$, with the same\ninduction on the first coordinate and the same uniqueness argument, gives the\nunique $\\Pi : \\mathbb{N} \\to \\mathbb{R}$ with\n\n$$\\Pi_0 = 1, \\qquad \\Pi_{\\sigma(n)} = \\Pi_n \\cdot a_n ,$$\n\nand we write $\\prod_{k < n} a_k := \\Pi_n$.\n\n**Notation.** For $m, n \\in \\mathbb{N}$ we abbreviate\n\n$$\\sum_{k=0}^{n} a_k := \\sum_{k < n+1} a_k, \\qquad \\prod_{k=0}^{n} a_k := \\prod_{k < n+1} a_k,$$\n\nand, for a general lower index $m$ with $m \\le n + 1$, let $d$ be the\nunique natural number satisfying $m+d=n+1$. Existence is the definition of\nnatural order (Order on the natural numbers); if $m+d=m+e$, commutativity\n(Addition is commutative) gives $d+m=e+m$, so cancellation\n(Addition is cancellative) gives $d=e$. On these admissible bounds only,\nwe may write this unique additive gap as $d=n+1-m$; no total natural subtraction\noperation is presupposed. With $d$ thus fixed, define\n\n$$\\sum_{k=m}^{n} a_k := \\sum_{j < d} a_{m+j}, \\qquad \\prod_{k=m}^{n} a_k := \\prod_{j < d} a_{m+j} .$$\n\nWhen $m = n + 1$ we have $d = 0$ and the sum is **empty**, with value $0$, while\nthe empty product has value $1$. In the same spirit $\\sum_{k=0}^{-1} a_k$ is\nnotation for the empty sum $\\Sigma_0 = 0$ and $\\prod_{k=0}^{-1} a_k$ for the\nempty product $\\Pi_0 = 1$; the index $-1$ never occurs as an element of\n$\\mathbb{N}$ and is only a way of writing \"no terms\".\n\nEquivalently, for naturals $m \\le r$, the half-open endpoint notation\n$\\sum_{k=m}^{r-1}a_k$ and $\\prod_{k=m}^{r-1}a_k$ means\n$\\sum_{j<d}a_{m+j}$ and $\\prod_{j<d}a_{m+j}$, respectively, where $d$ is the\nunique natural with $m+d=r$. Here $r-1$ is an endpoint label for the terms\nbefore $r$, so this notation needs no total subtraction operation. For $m=r$,\nthe unique gap is $0$ because $m+0=m$, giving the empty sum and product; the\ncase $m=r=0$ is the $-1$ endpoint convention just stipulated.\n\nOnly finitely many values of $a$ enter $\\sum_{k<n} a_k$, so the notation\n$\\sum_{k<n} a_k$ and $\\prod_{k<n} a_k$ is also used for a list\n$a_0, \\dots, a_{n-1}$ of reals given without reference to any extension of the\nlist to all of $\\mathbb{N}$: extend the list by $a_k = 0$ (respectively\n$a_k = 1$) for $k \\ge n$ and apply the definition above.",
+          "relevant_hypotheses_and_conventions": "No separate Given block; exact domain and conventions are stated in the quoted Definition or Statement.",
+          "supplier_proof_status": "Published definition/algorithm carrier; exact current interface inspected; no proof is applicable. No current-run readiness record is expected for this out-of-run item.",
+          "consumer_use": "[F8] [[def-finite-sum]], [[lem-finite-sum-reindexing-and-fubini]]: finite\ncyclic shifts preserve the sum of an $N$-tuple."
+        },
+        {
+          "supplier": "lem-finite-sum-reindexing-and-fubini",
+          "carrier": "items/lem-finite-sum-reindexing-and-fubini.md",
+          "status": "Published supplier. Published proof carrier; exact current statement and complete proof inspected. No current-run readiness record is expected for this out-of-run item; no broader acceptance is inferred.",
+          "source_section": "Statement",
+          "exact_statement": "Let $(M,+,0)$ be a commutative monoid and let all index sets below be finite.\n\n1. If $h:T\\to S$ is a bijection and $a:S\\to M$, then $\\sum_{t\\in T}a_{h(t)}=\\sum_{s\\in S}a_s$.\n2. If $S$ and $T$ are disjoint and $a:S\\cup T\\to M$, then $\\sum_{u\\in S\\cup T}a_u=\\sum_{s\\in S}a_s+\\sum_{t\\in T}a_t$.\n3. If $a:S\\times T\\to M$, then\n   $$\\sum_{(s,t)\\in S\\times T}a_{s,t}=\\sum_{s\\in S}\\left(\\sum_{t\\in T}a_{s,t}\\right)=\\sum_{t\\in T}\\left(\\sum_{s\\in S}a_{s,t}\\right).$$",
+          "relevant_hypotheses_and_conventions": "**Given:** A commutative monoid $(M,+,0)$, finite sets $S,T$, and functions and a bijection as in the Statement.",
+          "supplier_proof_status": "Published proof carrier; exact current statement and complete proof inspected. No current-run readiness record is expected for this out-of-run item; no broader acceptance is inferred.",
+          "consumer_use": "[F8] [[def-finite-sum]], [[lem-finite-sum-reindexing-and-fubini]]: finite\ncyclic shifts preserve the sum of an $N$-tuple."
+        }
+      ]
+    },
+    "thm-gr-fx-leapfrog-local-truncation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-gr-fx-periodic-wave-leapfrog",
+          "source_section": "Definition",
+          "quote": "Use the first circle factor of the fixed periodic three-torus from the earlier\nfixed-gauge data definition. This item is a separate nondimensionalized scalar\nmodel: both the spatial coordinate $x$ and time $t$ are dimensionless, the\nperiod is $2\\pi$, and the model wave speed is $1$. Let $N\\ge3$ be an integer,\n$h:=2\\pi/N$, and $x_j:=jh\\pmod{2\\pi}$ for $j\\in\\mathbb Z/N\\mathbb Z$. A\nperiodic grid function is an $N$-tuple $u=(u_j)_{j\\in\\mathbb Z/N\\mathbb Z}$ of\nreal numbers. Define the centered periodic second-difference operator\n$$\n(D_hu)_j:=\\frac{u_{j+1}-2u_j+u_{j-1}}{h^2},\n$$\nwhere subscripts are reduced modulo $N$.\n\nThe algorithm takes as input such arrays $u^0,v^0$, a real time step $k>0$,\nand an integer $n_{\\max}\\ge1$. It sets\n$$\nu^1:=u^0+kv^0+\\frac{k^2}{2}D_hu^0,\n$$\nthen, for each integer $n=1,\\ldots,n_{\\max}-1$, computes\n$$\nu^{n+1}_j:=2u^n_j-u^{n-1}_j+k^2(D_hu^n)_j \\qquad(j\\in\\mathbb Z/N\\mathbb Z).\n$$\nIt outputs $(u^0,u^1,\\ldots,u^{n_{\\max}})$. All operations here are exact real\narithmetic. No rounding-error model or claim about a floating-point\nimplementation is part of the definition.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-taylor-remainder-bound",
+          "source_section": "Statement",
+          "quote": "Let $n\\in\\mathbb N$, and suppose $f$ has derivatives through order $n+1$ on the closed interval between $a$ and $x$, with the usual endpoint continuity. If $|f^{(n+1)}(t)|\\le M$ throughout that interval, then\n$$|R_{n,a}f(x)|\\le \\frac{M}{\\iota((n+1)!)}|x-a|^{n+1}.$$",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-clairaut-schwarz-mixed-partials",
+          "source_section": "Statement",
+          "quote": "If $f$ is $C^2$ on an open subset of $\\mathbb R^m$, then $\\partial_i\\partial_j f=\\partial_j\\partial_i f$ for every pair of coordinate indices.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-heine-borel-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions\n$n \\to \\mathbb{R}$ and let $d_2$ be the Euclidean metric on it\n($\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it). Then:\n\n1. **Closed boxes are compact.** For reals $a_k \\le b_k$ $(k < n)$ the box\n   $Q = \\{\\, x \\in \\mathbb{R}^n : a_k \\le x_k \\le b_k \\text{ for every } k < n \\,\\}$\n   is a compact subset of $(\\mathbb{R}^n, d_2)$ (Open cover, subcover, compact metric space, and compact subset of a metric space).\n2. **Heine-Borel.** A subset $K \\subseteq \\mathbb{R}^n$ is a compact subset of\n   $(\\mathbb{R}^n, d_2)$ if and only if $K$ is closed in $\\mathbb{R}^n$\n   (The metric topology: a set is open when every one of its points has a ball around it inside the set; closed means open complement) and bounded\n   (Bounded subset, diameter, distance from a point to a set, and distance between two sets in a metric space).\n3. **The real line.** A subset $K \\subseteq \\mathbb{R}$ is a compact subset of\n   $(\\mathbb{R}, d_{\\mathbb{R}})$, the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   (The absolute value makes $\\mathbb{R}$ a metric space: $d(x,y) = |x-y|$ is a metric, its open balls are the intervals $(x-r, x+r)$, and it is unbounded), if and only if $K$ is closed in\n   $\\mathbb{R}$ and bounded.\n\n**No choice principle is used.** The bisection below halves one coordinate at a\ntime and takes the **left** half whenever the left half still fails to be finitely\ncovered, the right half otherwise: a rule with two outcomes, decided by a\nproperty of the box, not a selection. That is the whole reason the theorem is\navailable in ZF, while the general \"complete and totally bounded implies compact\"\n(A complete, totally bounded metric space is compact, proved from countable choice used exactly once) is not.\n\nThe hypothesis $n \\ge 1$ is inherited from $\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it, which defines\n$\\mathbb{R}^n$ and its metrics only there; the last remark below records what\nhappens at $n = 0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-extreme-value-metric",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a nonempty compact metric space (Open cover, subcover, compact metric space, and compact subset of a metric space,\nMetric space: $d(x,y) = 0$ iff $x = y$, symmetry, and the triangle inequality; pseudometric and ultrametric) and let $f : X \\to \\mathbb{R}$ be continuous\n(Continuity of a map between metric spaces, at a point and globally, in the $\\varepsilon$-$\\delta$ form), $\\mathbb{R}$ carrying its usual metric\n$d_{\\mathbb{R}}(s,t) = |s-t|$ (The absolute value makes $\\mathbb{R}$ a metric space: $d(x,y) = |x-y|$ is a metric, its open balls are the intervals $(x-r, x+r)$, and it is unbounded). Then the\nimage $f[X]$ is bounded above and below (Lower bound, bounded below, bounded set), and it has a\nmaximum and a minimum (Maximum and minimum of a set): there are points\n$x_{\\max}, x_{\\min} \\in X$ with\n\n$$f(x_{\\min}) \\;\\le\\; f(x) \\;\\le\\; f(x_{\\max}) \\qquad \\text{for every } x \\in X,$$\n\nand then $f(x_{\\max}) = \\sup f[X]$ and $f(x_{\\min}) = \\inf f[X]$\n(Complete ordered field (least-upper-bound property), Greatest lower bound (infimum)).\n\nNonemptiness of $X$ is a hypothesis and not an oversight: for $X = \\emptyset$ the\nimage is empty and has neither a supremum nor a maximum. No choice principle is\nused.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The set $[0,2\\pi]\\times[t_n-k,t_n+k]$ is a nonempty closed box in\n$\\mathbb R^2$: $k>0$ and the time interval lies in $I$. Thus [F4] makes it\ncompact. The function $(x,t)\\mapsto u_{xxxx}(x,t)$ is continuous there because\n$u\\in C^6$; [F5] bounds it, so $M_n<\\infty$ as claimed.\n[given, F4, F5, algebra]",
+          "step": "1.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Apply [F2] to the spatial function $x\\mapsto u(x,t_n)$ at $x_j$ with\nincrements $h$ and $-h$. Adding the two degree-three Taylor polynomials and\nsubtracting twice their common center value cancels their odd terms and leaves $h^2u_{xx}(x_j,t_n)$; the sum of the two\nremainders has absolute value at most $2M_nh^4/4!$. After division by $h^2$,\n$$\n\\left|\\frac{U_{j+1}^n-2U_j^n+U_{j-1}^n}{h^2}-u_{xx}(x_j,t_n)\\right| \\le\\frac{h^2}{12}M_n.\n$$\nPeriodicity of $u$ and its derivatives extends the bound defining $M_n$ from\n$[0,2\\pi]$ to all real spatial coordinates, including a wrapped neighbor.\n[given, F1, F2, algebra]",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Apply the same estimate to $t\\mapsto u(x_j,t)$ with increments $k$ and\n$-k$. By [F3] and $u_{tt}=u_{xx}$, the fourth time derivative equals\n$u_{tttt}=u_{xxxx}$, whose absolute value is bounded by $M_n$ on this time\nwindow and all $x$. Thus\n$$\n\\left|\\frac{U_j^{n+1}-2U_j^n+U_j^{n-1}}{k^2}-u_{tt}(x_j,t_n)\\right| \\le\\frac{k^2}{12}M_n.\n$$\n[given, F2, F3, algebra]",
+          "step": "1.3",
+          "inputs": [
+            "F3",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Subtract the two estimates of steps 1.2 and 1.3, use\n$u_{tt}(x_j,t_n)=u_{xx}(x_j,t_n)$, and apply the triangle inequality. The\nresult is $|\\tau_j^n|\\le(k^2+h^2)M_n/12$, as claimed. [step 1.2, step 1.3, given, algebra] ∎",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "step 1.3",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement: N>=3, so the grid is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and finite check: a constant solution has zero fourth derivative and zero residual."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1: adding the two Taylor polynomials cancels odd terms, including the cubic term."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Statement: the estimate uses only positive h and k and has no singular parameter denominator beyond their stated squares."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and step 1.2: the closed time window [tn-k,tn+k] is required to lie inside the open interval I; endpoint inclusion is allowed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses the supplied smooth function and no selection principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The estimate is not stated as an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The estimate is not stated as an iff."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "constant periodic solution",
+          "inputs": "u(x,t)=C",
+          "calculation": "All second differences and u_xxxx vanish, so M_n=0 and tau_j^n=0.",
+          "result": "The estimate holds with equality."
+        },
+        {
+          "case": "smooth travelling wave",
+          "inputs": "u(x,t)=sin(x-t)",
+          "calculation": "u_tt=u_xx and sup_x,t |u_xxxx|=1; the stated bound becomes |tau_j^n|≤(k^2+h^2)/12.",
+          "result": "A local residual bound is obtained; this substitution gives no global error conclusion."
+        }
+      ],
+      "finite_checks_disposition": "Finite exact substitutions check stated domains, recurrence interfaces, signs and units. They are not empirical observations and do not replace the complete conditional argument or imply an Einstein-solver convergence result.",
+      "supplier_excerpts": [
+        {
+          "supplier": "alg-gr-fx-periodic-wave-leapfrog",
+          "carrier": "items/alg-gr-fx-periodic-wave-leapfrog.md",
+          "status": "Current supplier. Current batch draft supplier authored in this run; its exact statement and complete available proof were inspected. Independent approval is not inferred; its Step 1 record is written only after final scoped checks.",
+          "source_section": "Definition",
+          "exact_statement": "Use the first circle factor of the fixed periodic three-torus from the earlier\nfixed-gauge data definition. This item is a separate nondimensionalized scalar\nmodel: both the spatial coordinate $x$ and time $t$ are dimensionless, the\nperiod is $2\\pi$, and the model wave speed is $1$. Let $N\\ge3$ be an integer,\n$h:=2\\pi/N$, and $x_j:=jh\\pmod{2\\pi}$ for $j\\in\\mathbb Z/N\\mathbb Z$. A\nperiodic grid function is an $N$-tuple $u=(u_j)_{j\\in\\mathbb Z/N\\mathbb Z}$ of\nreal numbers. Define the centered periodic second-difference operator\n$$\n(D_hu)_j:=\\frac{u_{j+1}-2u_j+u_{j-1}}{h^2},\n$$\nwhere subscripts are reduced modulo $N$.\n\nThe algorithm takes as input such arrays $u^0,v^0$, a real time step $k>0$,\nand an integer $n_{\\max}\\ge1$. It sets\n$$\nu^1:=u^0+kv^0+\\frac{k^2}{2}D_hu^0,\n$$\nthen, for each integer $n=1,\\ldots,n_{\\max}-1$, computes\n$$\nu^{n+1}_j:=2u^n_j-u^{n-1}_j+k^2(D_hu^n)_j \\qquad(j\\in\\mathbb Z/N\\mathbb Z).\n$$\nIt outputs $(u^0,u^1,\\ldots,u^{n_{\\max}})$. All operations here are exact real\narithmetic. No rounding-error model or claim about a floating-point\nimplementation is part of the definition.",
+          "relevant_hypotheses_and_conventions": "No separate Given block; exact domain and conventions are stated in the quoted Definition or Statement.",
+          "supplier_proof_status": "Current batch draft supplier authored in this run; its exact statement and complete available proof were inspected. Independent approval is not inferred; its Step 1 record is written only after final scoped checks.",
+          "consumer_use": "[F1] [[alg-gr-fx-periodic-wave-leapfrog]]: $h=2\\pi/N$, $x_j=jh$ modulo the\nperiod, and the normalized discrete second difference is the centered\nthree-point expression in the Statement."
+        },
+        {
+          "supplier": "cor-taylor-remainder-bound",
+          "carrier": "items/cor-taylor-remainder-bound.md",
+          "status": "Published supplier. Published proof carrier; exact current statement and complete proof inspected. No current-run readiness record is expected for this out-of-run item; no broader acceptance is inferred.",
+          "source_section": "Statement",
+          "exact_statement": "Let $n\\in\\mathbb N$, and suppose $f$ has derivatives through order $n+1$ on the closed interval between $a$ and $x$, with the usual endpoint continuity. If $|f^{(n+1)}(t)|\\le M$ throughout that interval, then\n$$|R_{n,a}f(x)|\\le \\frac{M}{\\iota((n+1)!)}|x-a|^{n+1}.$$",
+          "relevant_hypotheses_and_conventions": "**Given:** The stated regularity and derivative bound.",
+          "supplier_proof_status": "Published proof carrier; exact current statement and complete proof inspected. No current-run readiness record is expected for this out-of-run item; no broader acceptance is inferred.",
+          "consumer_use": "[F2] [[cor-taylor-remainder-bound]]: if the fourth derivative of a scalar\nfunction has absolute value at most $M$ between $x$ and $x+d$, its Taylor\nremainder after degree three has absolute value at most $M|d|^4/4!$."
+        },
+        {
+          "supplier": "thm-clairaut-schwarz-mixed-partials",
+          "carrier": "items/thm-clairaut-schwarz-mixed-partials.md",
+          "status": "Published supplier. Published proof carrier; exact current statement and complete proof inspected. No current-run readiness record is expected for this out-of-run item; no broader acceptance is inferred.",
+          "source_section": "Statement",
+          "exact_statement": "If $f$ is $C^2$ on an open subset of $\\mathbb R^m$, then $\\partial_i\\partial_j f=\\partial_j\\partial_i f$ for every pair of coordinate indices.",
+          "relevant_hypotheses_and_conventions": "**Given:** A $C^2$ scalar field and coordinate indices $i,j<m$.",
+          "supplier_proof_status": "Published proof carrier; exact current statement and complete proof inspected. No current-run readiness record is expected for this out-of-run item; no broader acceptance is inferred.",
+          "consumer_use": "[F3] [[thm-clairaut-schwarz-mixed-partials]]: continuous mixed partials of\nthe $C^6$ function commute, so differentiating the wave equation twice gives\n$u_{tttt}=u_{xxxx}$."
+        },
+        {
+          "supplier": "thm-heine-borel-rn",
+          "carrier": "items/thm-heine-borel-rn.md",
+          "status": "Published supplier. Published proof carrier; exact current statement and complete proof inspected. No current-run readiness record is expected for this out-of-run item; no broader acceptance is inferred.",
+          "source_section": "Statement",
+          "exact_statement": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions\n$n \\to \\mathbb{R}$ and let $d_2$ be the Euclidean metric on it\n($\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it). Then:\n\n1. **Closed boxes are compact.** For reals $a_k \\le b_k$ $(k < n)$ the box\n   $Q = \\{\\, x \\in \\mathbb{R}^n : a_k \\le x_k \\le b_k \\text{ for every } k < n \\,\\}$\n   is a compact subset of $(\\mathbb{R}^n, d_2)$ (Open cover, subcover, compact metric space, and compact subset of a metric space).\n2. **Heine-Borel.** A subset $K \\subseteq \\mathbb{R}^n$ is a compact subset of\n   $(\\mathbb{R}^n, d_2)$ if and only if $K$ is closed in $\\mathbb{R}^n$\n   (The metric topology: a set is open when every one of its points has a ball around it inside the set; closed means open complement) and bounded\n   (Bounded subset, diameter, distance from a point to a set, and distance between two sets in a metric space).\n3. **The real line.** A subset $K \\subseteq \\mathbb{R}$ is a compact subset of\n   $(\\mathbb{R}, d_{\\mathbb{R}})$, the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   (The absolute value makes $\\mathbb{R}$ a metric space: $d(x,y) = |x-y|$ is a metric, its open balls are the intervals $(x-r, x+r)$, and it is unbounded), if and only if $K$ is closed in\n   $\\mathbb{R}$ and bounded.\n\n**No choice principle is used.** The bisection below halves one coordinate at a\ntime and takes the **left** half whenever the left half still fails to be finitely\ncovered, the right half otherwise: a rule with two outcomes, decided by a\nproperty of the box, not a selection. That is the whole reason the theorem is\navailable in ZF, while the general \"complete and totally bounded implies compact\"\n(A complete, totally bounded metric space is compact, proved from countable choice used exactly once) is not.\n\nThe hypothesis $n \\ge 1$ is inherited from $\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it, which defines\n$\\mathbb{R}^n$ and its metrics only there; the last remark below records what\nhappens at $n = 0$.",
+          "relevant_hypotheses_and_conventions": "**Given:** A natural number $n \\ge 1$, the metric space $(\\mathbb{R}^n, d_2)$, and the notions of open, closed, bounded and compact subset in it.",
+          "supplier_proof_status": "Published proof carrier; exact current statement and complete proof inspected. No current-run readiness record is expected for this out-of-run item; no broader acceptance is inferred.",
+          "consumer_use": "[F4] [[thm-heine-borel-rn]]: every closed box in Euclidean $\\mathbb R^2$ is\ncompact."
+        },
+        {
+          "supplier": "thm-extreme-value-metric",
+          "carrier": "items/thm-extreme-value-metric.md",
+          "status": "Published supplier. Published proof carrier; exact current statement and complete proof inspected. No current-run readiness record is expected for this out-of-run item; no broader acceptance is inferred.",
+          "source_section": "Statement",
+          "exact_statement": "Let $(X,d)$ be a nonempty compact metric space (Open cover, subcover, compact metric space, and compact subset of a metric space,\nMetric space: $d(x,y) = 0$ iff $x = y$, symmetry, and the triangle inequality; pseudometric and ultrametric) and let $f : X \\to \\mathbb{R}$ be continuous\n(Continuity of a map between metric spaces, at a point and globally, in the $\\varepsilon$-$\\delta$ form), $\\mathbb{R}$ carrying its usual metric\n$d_{\\mathbb{R}}(s,t) = |s-t|$ (The absolute value makes $\\mathbb{R}$ a metric space: $d(x,y) = |x-y|$ is a metric, its open balls are the intervals $(x-r, x+r)$, and it is unbounded). Then the\nimage $f[X]$ is bounded above and below (Lower bound, bounded below, bounded set), and it has a\nmaximum and a minimum (Maximum and minimum of a set): there are points\n$x_{\\max}, x_{\\min} \\in X$ with\n\n$$f(x_{\\min}) \\;\\le\\; f(x) \\;\\le\\; f(x_{\\max}) \\qquad \\text{for every } x \\in X,$$\n\nand then $f(x_{\\max}) = \\sup f[X]$ and $f(x_{\\min}) = \\inf f[X]$\n(Complete ordered field (least-upper-bound property), Greatest lower bound (infimum)).\n\nNonemptiness of $X$ is a hypothesis and not an oversight: for $X = \\emptyset$ the\nimage is empty and has neither a supremum nor a maximum. No choice principle is\nused.",
+          "relevant_hypotheses_and_conventions": "**Given:** A nonempty compact metric space $(X,d)$ and a continuous $f : X \\to \\mathbb{R}$.",
+          "supplier_proof_status": "Published proof carrier; exact current statement and complete proof inspected. No current-run readiness record is expected for this out-of-run item; no broader acceptance is inferred.",
+          "consumer_use": "[F5] [[thm-extreme-value-metric]]: a continuous real-valued function on a\nnonempty compact metric space is bounded (and attains its extrema)."
+        }
+      ]
+    },
+    "def-gr-fx-constraint-residual-diagnostic": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition: each N_i>=3, so the periodic grid is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition and finite check: zero K, matter and cosmological data on a constant metric give the specified zero residuals."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Definition: there is no one-point grid because each N_i>=3."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: pointwise positive definiteness makes h inverse well-defined at every node; the finite derivative maps are specified before residual evaluation."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: periodic indices are reduced modulo each N_i, so seam nodes use the stated wrap convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The arrays, derivative maps, and reconstruction map are supplied as data; the definition makes no selection from a family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition assigns residual arrays and makes no iff claim about their vanishing."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition assigns residual arrays and makes no iff claim about continuum constraint satisfaction."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "flat vacuum array",
+          "inputs": "h_ij=L_*^2 delta_ij, K=0, rho=j=Lambda=0, delta_i 1=0",
+          "calculation": "All metric and K arrays are constant; Gamma, curvature, tau, |K|^2 and D_i K vanish.",
+          "result": "Both discrete residuals vanish."
+        },
+        {
+          "case": "units",
+          "inputs": "dimensionless angular coordinates; [h]=m^2, [K]=m, [rho]=J m^-3, [j_i]=J m^-2, [kappa]=m^-1 kg^-1 s^2",
+          "calculation": "R and tau^2 and |K|^2 and Lambda and kappa rho each have units m^-2; each momentum term has units m^-1.",
+          "result": "The scalar and covector residual units are consistent."
+        }
+      ],
+      "finite_checks_disposition": "Finite exact substitutions check stated domains, recurrence interfaces, signs and units. They are not empirical observations and do not replace the complete conditional argument or imply an Einstein-solver convergence result.",
+      "supplier_excerpts": [
+        {
+          "supplier": "def-gr-fx-fixed-gauge-data-topology",
+          "carrier": "items/def-gr-fx-fixed-gauge-data-topology.md",
+          "status": "Current supplier. Current draft interface and complete proof inspected; loadStep1Record and step1Decision report the current Step 1 authoring record as ready. Draft/precheck metadata is preserved; independent proof approval is not inferred.",
+          "source_section": "Definition",
+          "exact_statement": "Fix an integer $s\\ge5$, a finite number $T>0$, the closed interval $J=[0,T]$, and the flat spatial torus $\\mathbb T^3_{2\\pi}=\\mathbb R^3/(2\\pi\\mathbb Z)^3$. Use the spaces $H^s(\\mathbb T^3_{2\\pi};\\mathbb R^m)$ and one fixed periodic symmetric-hyperbolic system as defined in [[def-gr-periodic-symmetric-hyperbolic-system]]: its state domain $O\\subseteq\\mathbb R^m$ is open, its coefficient maps $A^\\mu(t,x,z),B(t,x,z)$ are smooth on the stated time, torus and state domain, each $A^\\mu$ is symmetric, and $A^0$ is positive definite. The fixed-gauge Einstein state is the finite vector $z=(g_{ab},p_{ab},q_{abi},w)$, where $p_{ab}=\\partial_0g_{ab}$, $q_{abi}=\\partial_i g_{ab}$, and $w$ is the complete matter and auxiliary state of one fixed reduction.\n\nFor the SI interpretation, the system's time parameter $t$ is the length coordinate $x^0=ct_{\\rm phys}$ in metres, while $x^i$ are dimensionless angular coordinates on the torus. The metric components then have coordinate-dependent units: $g_{00}$ is dimensionless, $g_{0i}$ has units of metres, and $g_{ij}$ has units of square metres. Accordingly $p_{ab}=\\partial_0g_{ab}$ has units $[g_{ab}]\\,\\mathrm m^{-1}$ and $q_{abi}=\\partial_i g_{ab}$ has units $[g_{ab}]$. The model-specific components of $w$ have the fixed units declared by that reduction. Divide each component by its fixed declared unit scale before forming the Euclidean-valued state and its Sobolev norm; the resulting numerical state is dimensionless. The coefficient and source fields are those of this same fixed normalized reduction. Thus $R_z$ is a bound on that normalized state, and $R_t$ is a separate bound on its derivative with respect to the length coordinate $x^0$ (units $\\mathrm m^{-1}$). Neither is a unit-independent physical observable. If physical seconds are used instead, then $\\partial_{x^0}=c^{-1}\\partial_{t_{\\rm phys}}$; consequently the term $A^0\\partial_{x^0}$ becomes $c^{-1}A^0\\partial_{t_{\\rm phys}}$ unless the entire equation is multiplied by $c$.\n\nA fixed-gauge finite-slab comparison context consists of one such coefficient family on an open time interval containing $J$, one coordinate gauge and reconstruction rule, compact state sets $K_0\\subset\\operatorname{int}K_1\\subset\\operatorname{int}K_2\\subset O$, separate finite nonnegative bounds $R_z,R_t$, and constants $0<a\\le b<\\infty$ such that\n\n$$a|\\zeta|^2\\le \\zeta^{\\mathsf T}A^0(t,x,z)\\zeta\\le b|\\zeta|^2$$\n\nfor every $t\\in J$, $x\\in\\mathbb T^3_{2\\pi}$, $z\\in K_2$, and $\\zeta\\in\\mathbb R^m$. The reference state takes values in $K_0$. Compared classical states take values in $K_1$, belong to $L^\\infty(J;H^s)\\cap C^0(J;H^{s-1})$, have $\\partial_tz\\in L^\\infty(J;H^{s-1})$, and satisfy\n$$\\operatorname*{ess\\,sup}_{t\\in J}\\|z(t)\\|_{H^s}\\le R_z,\\qquad \\operatorname*{ess\\,sup}_{t\\in J}\\|\\partial_tz(t)\\|_{H^{s-1}}\\le R_t.$$\nThe outer set $K_2$ supplies the positive coefficient margin for local existence restarted from data in compact subsets of $K_1$. Two states use the same chart grid, coefficient maps, gauge source functions, reconstruction rule, and fixed matter branch. Forcing terms, when included in a comparison, are continuous $H^{s-1}$-valued functions of the slab parameter; their size is controlled through the separate stated solution and time-derivative bounds when the comparison estimate is applied.\n\nThe Sobolev norms compare coordinate fields in this fixed gauge. They do not identify two arbitrary coordinate representatives by a diffeomorphism. The Einstein interpretation uses the same first-order reduction, full initial constraints, complete matter data, and local restart hypotheses throughout the finite slab.",
+          "relevant_hypotheses_and_conventions": "No separate Given block; exact domain and conventions are stated in the quoted Definition or Statement.",
+          "supplier_proof_status": "Current draft interface and complete proof inspected; loadStep1Record and step1Decision report the current Step 1 authoring record as ready. Draft/precheck metadata is preserved; independent proof approval is not inferred.",
+          "consumer_use": "Declared direct dependency; see def-gr-fx-constraint-residual-diagnostic's Statement/Definition reference."
+        },
+        {
+          "supplier": "thm-gr-constraint-equations-in-normal-frame",
+          "carrier": "items/thm-gr-constraint-equations-in-normal-frame.md",
+          "status": "Published supplier. Published proof carrier; exact current statement and complete proof inspected. No current-run readiness record is expected for this out-of-run item; no broader acceptance is inferred.",
+          "source_section": "Statement",
+          "exact_statement": "Let $(M,g,N)$ be a time-oriented smooth Lorentzian four-manifold, and let $\\Sigma\\subseteq M$ be a smooth spacelike embedded hypersurface with future unit normal $n$, induced Riemannian metric $h$ and second fundamental form $K(X,Y)=g(\\nabla_Xn,Y)$ ([[def-gr-spacelike-hypersurfaces-and-cauchy-sets]], [[lem-gr-spacelike-hypersurface-normal-and-second-fundamental-form]]). Write $D$ for the Levi-Civita connection of $h$, $R^h$ for its curvature operator in the same operator convention as the ambient curvature, and $S_h$ for its scalar curvature. Explicitly distinguish the lowered tensor from the operator pairing by setting\n$$\\mathcal R^g(A,B,C,D):=g(R^g(C,D)B,A),\\qquad \\mathcal R^h(A,B,C,D):=h(R^h(C,D)B,A).$$\nThus $\\mathcal R^g_{abcd}=R_{abcd}$ in [[def-gr-curvature-tensor-and-derived-tensors]]; in particular $g(R^g(X,Y)Z,W)=\\mathcal R^g(W,Z,X,Y)$. Let $G$ be the Einstein tensor defined there. At every $p\\in\\Sigma$ and for all $X,Y,Z,W\\in T_p\\Sigma$:\n\n**(a) Gauss equation.**\n$$\\mathcal R^g(X,Y,Z,W)=\\mathcal R^h(X,Y,Z,W)+K(X,Z)K(Y,W)-K(X,W)K(Y,Z).$$\nEquivalently, in operator order,\n$$g(R^g(X,Y)Z,W)=h(R^h(X,Y)Z,W)+K(Y,Z)K(X,W)-K(X,Z)K(Y,W).$$\n\n**(b) Codazzi equation.**\n$$g(R^g(X,Y)Z,n)=(D_YK)(X,Z)-(D_XK)(Y,Z).$$\n\n**(c) Normal projections.** Define $(\\operatorname{div}_hK)(Y)=h^{ij}(D_{e_i}K)(e_j,Y)$, $\\tau=\\operatorname{tr}_hK=h^{ij}K_{ij}$ and $|K|_h^2=h^{ik}h^{jl}K_{ij}K_{kl}$. Then\n$$G(n,n)=\\tfrac12(S_h+\\tau^2-|K|_h^2),\\qquad G(n,Y)=(\\operatorname{div}_hK)(Y)-D_Y\\tau.$$\n\n**(d) Constraint equations.** If the tensor equation $G+\\Lambda g=\\kappa T$ holds at $p$, for a smooth symmetric covariant $2$-tensor $T$ and real constants $\\kappa,\\Lambda$, then\n$$S_h+\\tau^2-|K|_h^2=2\\Lambda+2\\kappa T(n,n),\\qquad (\\operatorname{div}_hK)(Y)-D_Y\\tau=\\kappa T(n,Y).$$\nWith $\\rho=T(n,n)$ and $j(Y)=-T(n,Y)$, the second equation is $(\\operatorname{div}_hK)(Y)-D_Y\\tau=-\\kappa j(Y)$.",
+          "relevant_hypotheses_and_conventions": "**Given:** The smooth Lorentzian manifold, spacelike embedded hypersurface, normal and tensors in the Statement; in (d), the field equation at the selected point.",
+          "supplier_proof_status": "Published proof carrier; exact current statement and complete proof inspected. No current-run readiness record is expected for this out-of-run item; no broader acceptance is inferred.",
+          "consumer_use": "Declared direct dependency; see def-gr-fx-constraint-residual-diagnostic's Statement/Definition reference."
+        }
+      ]
+    },
+    "ex-gr-fx11-1": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-gr-fx-periodic-wave-leapfrog",
+          "source_section": "Definition",
+          "quote": "Use the first circle factor of the fixed periodic three-torus from the earlier\nfixed-gauge data definition. This item is a separate nondimensionalized scalar\nmodel: both the spatial coordinate $x$ and time $t$ are dimensionless, the\nperiod is $2\\pi$, and the model wave speed is $1$. Let $N\\ge3$ be an integer,\n$h:=2\\pi/N$, and $x_j:=jh\\pmod{2\\pi}$ for $j\\in\\mathbb Z/N\\mathbb Z$. A\nperiodic grid function is an $N$-tuple $u=(u_j)_{j\\in\\mathbb Z/N\\mathbb Z}$ of\nreal numbers. Define the centered periodic second-difference operator\n$$\n(D_hu)_j:=\\frac{u_{j+1}-2u_j+u_{j-1}}{h^2},\n$$\nwhere subscripts are reduced modulo $N$.\n\nThe algorithm takes as input such arrays $u^0,v^0$, a real time step $k>0$,\nand an integer $n_{\\max}\\ge1$. It sets\n$$\nu^1:=u^0+kv^0+\\frac{k^2}{2}D_hu^0,\n$$\nthen, for each integer $n=1,\\ldots,n_{\\max}-1$, computes\n$$\nu^{n+1}_j:=2u^n_j-u^{n-1}_j+k^2(D_hu^n)_j \\qquad(j\\in\\mathbb Z/N\\mathbb Z).\n$$\nIt outputs $(u^0,u^1,\\ldots,u^{n_{\\max}})$. All operations here are exact real\narithmetic. No rounding-error model or claim about a floating-point\nimplementation is part of the definition.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-gr-fx-leapfrog-termination",
+          "source_section": "Statement",
+          "quote": "For every admissible integer $N\\ge3$, time-step count $n_{\\max}\\ge1$, real\nstep $k>0$, and pair of real periodic input arrays, the algorithm terminates\nafter exactly $n_{\\max}-1$ update passes and outputs all levels through\n$u^{n_{\\max}}$. In the unit-cost exact-real-arithmetic model, where each scalar\narithmetic operation and each array read or write has bounded cost independent\nof $N$ and $n_{\\max}$, its operation count is $O(Nn_{\\max})$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-gr-fx-leapfrog-mode-stability",
+          "source_section": "Statement",
+          "quote": "Let $N\\ge3$, $h=2\\pi/N$, $k>0$, and $\\lambda=k/h$. Complexify the real\nlinear recurrence of the periodic wave algorithm. For each discrete Fourier\nindex $\\ell\\in\\{0,1,\\ldots,N-1\\}$ define the mode\n$$\ne_\\ell(j):=\\exp(2\\pi i\\ell j/N),\\qquad j\\in\\mathbb Z/N\\mathbb Z.\n$$\nIf $0<\\lambda<1$, every nonconstant mode ($\\ell\\ne0$) has recurrence\ncoefficient\n$$\nc_\\ell:=1-2\\lambda^2\\sin^2(\\pi\\ell/N)\\in(-1,1)\n$$\nand two distinct amplification roots\n$$\nz_{\\ell,\\pm}:=c_\\ell\\pm i\\sqrt{1-c_\\ell^2},\\qquad |z_{\\ell,\\pm}|=1.\n$$\nConsequently, each fixed nonconstant mode has bounded amplitude on every\nfinite slab. For arbitrary real initial arrays define their spatial means by\n$$\n\\bar u^0:=\\frac1N\\sum_{j=0}^{N-1}u^0_j,\\qquad \\bar v^0:=\\frac1N\\sum_{j=0}^{N-1}v^0_j.\n$$\nThe constant mode has the repeated root $1$ and evolves exactly as\n$\\bar u^0+nk\\bar v^0$; for any fixed $T\\ge0$ it is bounded on the slab\n$0\\le nk\\le T$ but has no uniform-in-time displacement bound when\n$\\bar v^0\\ne0$. This statement\ndoes not assert that the condition $0<\\lambda<1$ alone proves convergence of a\nnumerical relativity scheme. For each fixed $N$, define the nonzero discrete\nfrequencies $\\omega_\\ell:=2h^{-1}|\\sin(\\pi\\ell/N)|$, $1\\le\\ell<N$.\nThis finite list has a positive minimum; it is a fixed-grid fact and no bound\nuniform in $N$ is asserted.\nFor even $N$, the alternating mode with Fourier index $\\ell=N/2$ is called\nthe Nyquist mode. At the endpoint $\\lambda=1$, if $N$ is even and\n$u_j^0=a_0(-1)^j$, $v_j^0=\\beta_0(-1)^j$ for real amplitudes $a_0,\\beta_0$,\nthen each output level satisfies\n$$\nu_j^n=(-1)^j(-1)^n(a_0-nk\\beta_0).\n$$\nThe Nyquist amplification root is repeated at $-1$, and a nonzero Nyquist\nvelocity amplitude $\\beta_0$ gives linear growth in the step number.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-nth-roots-exist",
+          "source_section": "Statement",
+          "quote": "Let $\\mathbb{R}$ be a complete ordered field ([[def-complete-ordered-field]]).\nFor every $a \\in \\mathbb{R}$ with $a \\ge 0$ and every $n \\in \\mathbb{N}$ with\n$n \\ge 1$ there is a **unique** $s \\in \\mathbb{R}$ with $s \\ge 0$ and $s^n = a$\n([[def-integer-power]]); we write\n\n$$s = a^{1/n} = \\sqrt[n]{a}.$$\n\nMoreover $a^{1/n} > 0$ when $a > 0$, and $a^{1/1} = a$.\n\n**This generalises the published [[thm-of-square-roots]], and the case $n = 2$ is\nnot new.** That theorem already produces the unique $\\sqrt{a} \\ge 0$ with\n$(\\sqrt{a})^2 = a$, and it is cited as such throughout the library; the notation\n$a^{1/2}$ introduced here is the same number. What is new is the passage to\ngeneral $n$: the completed square that drives the $n = 2$ argument has no direct\nanalogue, and its place is taken by the factorisation of $b^n - a^n$ and the\nresulting Lipschitz estimate ([[lem-power-difference-factorisation]]).",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Because $N$ is even, both periodic neighbors of $(-1)^j$ equal\n$-(-1)^j$. Hence $(D_hu^0)_j=-4h^{-2}(-1)^j$, and the startup in [F1] gives\n$a_0=1$ and $a_1=1-2(k/h)^2=c$. This mode has index $\\ell=N/2$; it is outside\nthe strict range of [F3]. [given, F1, F3, algebra]",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Substitution of $u_j^n=a_n(-1)^j$ into the update [F1] gives\n$a_{n+1}-2ca_n+a_{n-1}=0$. Since $c<-1$, [F4] supplies\n$r=\\sqrt{c^2-1}>0$. The two roots $z_{\\rm grow}=c-r$ and $z_{\\rm decay}=c+r$\nsatisfy $z_{\\rm grow}z_{\\rm decay}=1$; also $z_{\\rm grow}<-1$ and\n$z_{\\rm decay}=1/z_{\\rm grow}\\in(-1,0)$. [given, F1, F4, step 1.1, algebra]",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F4",
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The sequence $(z_{\\rm grow}^n+z_{\\rm decay}^n)/2$ satisfies the\nrecurrence because each root satisfies $z^2-2cz+1=0$, and its values at\n$n=0,1$ are $1,c$. Induction identifies it with $a_n$. Both roots are\nnegative, so their $n$th powers have the same sign and\n$|a_n|=(|z_{\\rm grow}|^n+|z_{\\rm decay}|^n)/2\\ge|z_{\\rm grow}|^n/2$.\n[step 1.1, step 1.2, F1, F2, algebra] ∎",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement: N is even and at least 4, so the grid is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1: v0=0 is allowed and the alternating displacement has a0=1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and step 2.1: n=0 gives a0=1; every finite output index is covered by the recurrence induction."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2: lambda>1 implies c<-1 and two distinct real roots z_grow and z_decay."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: lambda=1 is excluded, and the example makes no endpoint claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All initial data are explicit; no choice axiom or selection is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement gives a sufficient instability condition, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement gives a sufficient instability condition, not an iff."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "N=4 and lambda=2",
+          "inputs": "N=4, u_j^0=(-1)^j, v0=0, lambda=2",
+          "calculation": "c=1-2lambda^2=-7, sqrt(c^2-1)=4sqrt(3), z_grow=-7-4sqrt(3), z_decay=-7+4sqrt(3).",
+          "result": "a1=-7 and |a_n|≥|z_grow|^n/2; the decay root lies in (-1,0) and the growth root is below -1."
+        }
+      ],
+      "finite_checks_disposition": "Finite exact substitutions check stated domains, recurrence interfaces, signs and units. They are not empirical observations and do not replace the complete conditional argument or imply an Einstein-solver convergence result.",
+      "supplier_excerpts": [
+        {
+          "supplier": "alg-gr-fx-periodic-wave-leapfrog",
+          "carrier": "items/alg-gr-fx-periodic-wave-leapfrog.md",
+          "status": "Current supplier. Current batch draft supplier authored in this run; its exact statement and complete available proof were inspected. Independent approval is not inferred; its Step 1 record is written only after final scoped checks.",
+          "source_section": "Definition",
+          "exact_statement": "Use the first circle factor of the fixed periodic three-torus from the earlier\nfixed-gauge data definition. This item is a separate nondimensionalized scalar\nmodel: both the spatial coordinate $x$ and time $t$ are dimensionless, the\nperiod is $2\\pi$, and the model wave speed is $1$. Let $N\\ge3$ be an integer,\n$h:=2\\pi/N$, and $x_j:=jh\\pmod{2\\pi}$ for $j\\in\\mathbb Z/N\\mathbb Z$. A\nperiodic grid function is an $N$-tuple $u=(u_j)_{j\\in\\mathbb Z/N\\mathbb Z}$ of\nreal numbers. Define the centered periodic second-difference operator\n$$\n(D_hu)_j:=\\frac{u_{j+1}-2u_j+u_{j-1}}{h^2},\n$$\nwhere subscripts are reduced modulo $N$.\n\nThe algorithm takes as input such arrays $u^0,v^0$, a real time step $k>0$,\nand an integer $n_{\\max}\\ge1$. It sets\n$$\nu^1:=u^0+kv^0+\\frac{k^2}{2}D_hu^0,\n$$\nthen, for each integer $n=1,\\ldots,n_{\\max}-1$, computes\n$$\nu^{n+1}_j:=2u^n_j-u^{n-1}_j+k^2(D_hu^n)_j \\qquad(j\\in\\mathbb Z/N\\mathbb Z).\n$$\nIt outputs $(u^0,u^1,\\ldots,u^{n_{\\max}})$. All operations here are exact real\narithmetic. No rounding-error model or claim about a floating-point\nimplementation is part of the definition.",
+          "relevant_hypotheses_and_conventions": "No separate Given block; exact domain and conventions are stated in the quoted Definition or Statement.",
+          "supplier_proof_status": "Current batch draft supplier authored in this run; its exact statement and complete available proof were inspected. Independent approval is not inferred; its Step 1 record is written only after final scoped checks.",
+          "consumer_use": "[F1] [[alg-gr-fx-periodic-wave-leapfrog]]: the initialization and periodic\nupdate are $u^1=u^0+kv^0+(k^2/2)D_hu^0$ and\n$u^{n+1}=2u^n-u^{n-1}+k^2D_hu^n$."
+        },
+        {
+          "supplier": "prop-gr-fx-leapfrog-termination",
+          "carrier": "items/prop-gr-fx-leapfrog-termination.md",
+          "status": "Current supplier. Current batch draft supplier authored in this run; its exact statement and complete available proof were inspected. Independent approval is not inferred; its Step 1 record is written only after final scoped checks.",
+          "source_section": "Statement",
+          "exact_statement": "For every admissible integer $N\\ge3$, time-step count $n_{\\max}\\ge1$, real\nstep $k>0$, and pair of real periodic input arrays, the algorithm terminates\nafter exactly $n_{\\max}-1$ update passes and outputs all levels through\n$u^{n_{\\max}}$. In the unit-cost exact-real-arithmetic model, where each scalar\narithmetic operation and each array read or write has bounded cost independent\nof $N$ and $n_{\\max}$, its operation count is $O(Nn_{\\max})$.",
+          "relevant_hypotheses_and_conventions": "**Given:** The finite periodic scalar-wave algorithm with integer inputs\n$N\\ge3$ and $n_{\\max}\\ge1$.",
+          "supplier_proof_status": "Current batch draft supplier authored in this run; its exact statement and complete available proof were inspected. Independent approval is not inferred; its Step 1 record is written only after final scoped checks.",
+          "consumer_use": "[F2] [[prop-gr-fx-leapfrog-termination]]: for every finite $n_{\\max}$ the\nalgorithm outputs every level through $u^{n_{\\max}}$."
+        },
+        {
+          "supplier": "thm-gr-fx-leapfrog-mode-stability",
+          "carrier": "items/thm-gr-fx-leapfrog-mode-stability.md",
+          "status": "Current supplier. Current batch draft supplier authored in this run; its exact statement and complete available proof were inspected. Independent approval is not inferred; its Step 1 record is written only after final scoped checks.",
+          "source_section": "Statement",
+          "exact_statement": "Let $N\\ge3$, $h=2\\pi/N$, $k>0$, and $\\lambda=k/h$. Complexify the real\nlinear recurrence of the periodic wave algorithm. For each discrete Fourier\nindex $\\ell\\in\\{0,1,\\ldots,N-1\\}$ define the mode\n$$\ne_\\ell(j):=\\exp(2\\pi i\\ell j/N),\\qquad j\\in\\mathbb Z/N\\mathbb Z.\n$$\nIf $0<\\lambda<1$, every nonconstant mode ($\\ell\\ne0$) has recurrence\ncoefficient\n$$\nc_\\ell:=1-2\\lambda^2\\sin^2(\\pi\\ell/N)\\in(-1,1)\n$$\nand two distinct amplification roots\n$$\nz_{\\ell,\\pm}:=c_\\ell\\pm i\\sqrt{1-c_\\ell^2},\\qquad |z_{\\ell,\\pm}|=1.\n$$\nConsequently, each fixed nonconstant mode has bounded amplitude on every\nfinite slab. For arbitrary real initial arrays define their spatial means by\n$$\n\\bar u^0:=\\frac1N\\sum_{j=0}^{N-1}u^0_j,\\qquad \\bar v^0:=\\frac1N\\sum_{j=0}^{N-1}v^0_j.\n$$\nThe constant mode has the repeated root $1$ and evolves exactly as\n$\\bar u^0+nk\\bar v^0$; for any fixed $T\\ge0$ it is bounded on the slab\n$0\\le nk\\le T$ but has no uniform-in-time displacement bound when\n$\\bar v^0\\ne0$. This statement\ndoes not assert that the condition $0<\\lambda<1$ alone proves convergence of a\nnumerical relativity scheme. For each fixed $N$, define the nonzero discrete\nfrequencies $\\omega_\\ell:=2h^{-1}|\\sin(\\pi\\ell/N)|$, $1\\le\\ell<N$.\nThis finite list has a positive minimum; it is a fixed-grid fact and no bound\nuniform in $N$ is asserted.\nFor even $N$, the alternating mode with Fourier index $\\ell=N/2$ is called\nthe Nyquist mode. At the endpoint $\\lambda=1$, if $N$ is even and\n$u_j^0=a_0(-1)^j$, $v_j^0=\\beta_0(-1)^j$ for real amplitudes $a_0,\\beta_0$,\nthen each output level satisfies\n$$\nu_j^n=(-1)^j(-1)^n(a_0-nk\\beta_0).\n$$\nThe Nyquist amplification root is repeated at $-1$, and a nonzero Nyquist\nvelocity amplitude $\\beta_0$ gives linear growth in the step number.",
+          "relevant_hypotheses_and_conventions": "**Given:** The real periodic wave algorithm, $N\\ge3$, $k>0$, and\n$0<\\lambda=k/h<1$.",
+          "supplier_proof_status": "Current batch draft supplier authored in this run; its exact statement and complete available proof were inspected. Independent approval is not inferred; its Step 1 record is written only after final scoped checks.",
+          "consumer_use": "[F3] [[thm-gr-fx-leapfrog-mode-stability]]: the preceding unit-circle result\nassumes $0<k/h<1$ and makes no claim for $k/h>1$."
+        },
+        {
+          "supplier": "thm-nth-roots-exist",
+          "carrier": "items/thm-nth-roots-exist.md",
+          "status": "Published supplier. Published proof carrier; exact current statement and complete proof inspected. No current-run readiness record is expected for this out-of-run item; no broader acceptance is inferred.",
+          "source_section": "Statement",
+          "exact_statement": "Let $\\mathbb{R}$ be a complete ordered field ([[def-complete-ordered-field]]).\nFor every $a \\in \\mathbb{R}$ with $a \\ge 0$ and every $n \\in \\mathbb{N}$ with\n$n \\ge 1$ there is a **unique** $s \\in \\mathbb{R}$ with $s \\ge 0$ and $s^n = a$\n([[def-integer-power]]); we write\n\n$$s = a^{1/n} = \\sqrt[n]{a}.$$\n\nMoreover $a^{1/n} > 0$ when $a > 0$, and $a^{1/1} = a$.\n\n**This generalises the published [[thm-of-square-roots]], and the case $n = 2$ is\nnot new.** That theorem already produces the unique $\\sqrt{a} \\ge 0$ with\n$(\\sqrt{a})^2 = a$, and it is cited as such throughout the library; the notation\n$a^{1/2}$ introduced here is the same number. What is new is the passage to\ngeneral $n$: the completed square that drives the $n = 2$ argument has no direct\nanalogue, and its place is taken by the factorisation of $b^n - a^n$ and the\nresulting Lipschitz estimate ([[lem-power-difference-factorisation]]).",
+          "relevant_hypotheses_and_conventions": "**Given:** A complete ordered field $\\mathbb{R}$ ([[def-complete-ordered-field]]), that is, an ordered field ([[def-ordered-field]]) with the least-upper-bound property; an element $a \\ge 0$; and a natural $n \\ge 1$, with field coefficients $n$ denoting $n\\cdot1_{\\mathbb{R}}$ while the root order remains natural ([[lem-of-naturals-positive]], [[lem-of-q-embeds]]).",
+          "supplier_proof_status": "Published proof carrier; exact current statement and complete proof inspected. No current-run readiness record is expected for this out-of-run item; no broader acceptance is inferred.",
+          "consumer_use": "[F4] [[thm-nth-roots-exist]]: a positive real number has a unique positive\nsquare root."
+        }
+      ]
+    },
+    "ex-gr-fx11-2": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-gr-fx-conformal-constraint-data",
+          "source_section": "Definition",
+          "quote": "Let $\\Sigma$ be a nonempty compact smooth three-manifold without boundary. In\nthis item, “vacuum” means that the stress-energy tensor is zero and the\ncosmological constant is fixed at $\\Lambda=0$. Let $\\widetilde h$ be a smooth\nRiemannian metric on $\\Sigma$, let $\\widetilde\\sigma$ be a smooth symmetric\ncovariant two-tensor field, let $\\tau\\in\\mathbb R$ be constant, and let\n$\\phi\\in C^\\infty(\\Sigma,\\mathbb R)$ satisfy $\\phi(p)>0$ at every $p\\in\\Sigma$.\nUse the positive scalar $\\phi$ as a dimensionless conformal factor.\n\nWrite $\\widetilde D$ for the Levi-Civita connection of $\\widetilde h$ and\n$D$ for that of the metric $h$ defined below. In a chart, $\\widetilde h^{ij}$\ndenotes the inverse matrix to $\\widetilde h_{ij}$. It is smooth because\n$\\det(\\widetilde h_{ij})>0$ and the matrix inverse is the adjugate divided by\nthe determinant. For any smooth Riemannian metric $m$ on $\\Sigma$, with\nLevi-Civita connection $D^m$, define\n$$R^m(X,Y)Z:=D^m_XD^m_YZ-D^m_YD^m_XZ-D^m_{[X,Y]}Z.$$\nIn a chart, $R[m]^a{}_{bij}$ denotes the components of\n$R^m(\\partial_i,\\partial_j)\\partial_b$. Define\n$\\operatorname{Ric}(m)_{ij}:=R[m]^k{}_{ikj}$ and\n$R(m):=m^{ij}\\operatorname{Ric}(m)_{ij}$. In particular,\n$\\widetilde R:=R(\\widetilde h)$, with the same curvature sign convention.\nDefine the scalar Laplacian by\n$$\\widetilde\\Delta f:=\\widetilde h^{ij} (\\partial_i\\partial_j f-\\widetilde\\Gamma^k{}_{ij}\\partial_k f),$$\nwhere $\\widetilde\\Gamma^k{}_{ij}$ are the Christoffel symbols of\n$\\widetilde D$, given by the Levi-Civita Christoffel formula\n[[prop-christoffel-formula-for-the-levi-civita-connection]].\nThe curvature sign is the one displayed above. All traces, norms, raising of\nindices and contractions in this item use the metric indicated by the\nsubscript. In particular,\n$$\\operatorname{tr}_{\\widetilde h}\\widetilde\\sigma:=\\widetilde h^{ij}\\widetilde\\sigma_{ij},\\qquad |\\widetilde\\sigma|_{\\widetilde h}^2:=\\widetilde h^{ik}\\widetilde h^{j\\ell}\\widetilde\\sigma_{ij}\\widetilde\\sigma_{k\\ell},\\qquad (\\operatorname{div}_{\\widetilde h}\\widetilde\\sigma)_j:=\\widetilde h^{ik}\\widetilde D_i\\widetilde\\sigma_{kj}.$$\nThe tensor $\\widetilde\\sigma$ is **transverse-traceless** (TT) when it is\nsymmetric and both displayed trace and divergence vanish.\n\nDefine\n$$h:=\\phi^4\\widetilde h,\\qquad K:=\\phi^{-2}\\widetilde\\sigma+\\frac{\\tau}{3}h.$$\nBecause $\\phi>0$, $h$ is a smooth Riemannian metric; because\n$\\widetilde\\sigma$ and $h$ are symmetric, $K$ is a smooth symmetric tensor.\nHere $h$ is the candidate induced Riemannian metric and $K$ is the candidate\nsecond fundamental form, with the library convention\n$K(X,Y)=g(\\nabla_X n,Y)$ when the data are induced by a spacelike hypersurface\nwith future unit normal $n$. The pair is **vacuum conformal constraint data**.\nIt is abstract data on $\\Sigma$; no embedding into a spacetime is part of this\ndefinition. For its embedded Lorentzian interpretation assume the Axiom of\nCountable Choice $\\mathrm{AC}_\\omega$, as in the supplied smooth tangent-bundle\nconvention; the algebraic tensor definitions themselves use no choice\nprinciple. Define the $h$-trace, squared norm and divergence by\n$$\\operatorname{tr}_hK:=h^{ij}K_{ij},\\qquad |K|_h^2:=h^{ik}h^{j\\ell}K_{ij}K_{k\\ell},\\qquad (\\operatorname{div}_hK)_j:=h^{ik}D_iK_{kj}.$$\nWith $R(h)$ computed using $h$, define the Hamiltonian and momentum residuals\n$$\\mathcal H(h,K):=R(h)+(\\operatorname{tr}_hK)^2-|K|_h^2,\\qquad \\mathcal M_j(h,K):=h^{ik}D_iK_{kj}-D_j(\\operatorname{tr}_hK).$$\nThe data satisfy the vacuum constraint equations when\n$\\mathcal H(h,K)=0$ and $\\mathcal M(h,K)=0$. For an embedded hypersurface,\nthese are the normal and normal-tangential Einstein constraints in the\nspecified $K$ convention.\n\nTensoriality of curvature and basis-independent contraction make these scalar\ncurvatures independent of the chart.\nFor dimensional bookkeeping in the SI length convention, $[\\tau]=\\mathrm m^{-1}$,\n$[R(h)]=[\\widetilde R]=[|\\widetilde\\sigma|_{\\widetilde h}^2]\n=[\\widetilde\\Delta]=\\mathrm m^{-2}$, and $[\\phi]=1$. Thus all terms in the\nscalar constraint equation have units $\\mathrm m^{-2}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-gr-fx-lichnerowicz-reduction",
+          "source_section": "Statement",
+          "quote": "Let $(h,K)$ be the vacuum conformal constraint data of the definition. Then\n$\\operatorname{tr}_hK=\\tau$ and the momentum residual vanishes:\n$$\\mathcal M_j(h,K)=0.$$\nThe Hamiltonian residual is\n$$\\mathcal H(h,K)=0\\quad\\Longleftrightarrow\\quad -8\\widetilde\\Delta\\phi+\\widetilde R\\,\\phi-|\\widetilde\\sigma|_{\\widetilde h}^2\\phi^{-7} +\\frac{2}{3}\\tau^2\\phi^5=0.$$\nThe displayed scalar equation is the **Lichnerowicz equation** for these\nconstant-mean-curvature (CMC) vacuum data. Here CMC means that the trace\n$\\operatorname{tr}_hK$ is spatially constant; its value is $\\tau$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-gr-fx-periodic-wave-leapfrog",
+          "source_section": "Definition",
+          "quote": "Use the first circle factor of the fixed periodic three-torus from the earlier\nfixed-gauge data definition. This item is a separate nondimensionalized scalar\nmodel: both the spatial coordinate $x$ and time $t$ are dimensionless, the\nperiod is $2\\pi$, and the model wave speed is $1$. Let $N\\ge3$ be an integer,\n$h:=2\\pi/N$, and $x_j:=jh\\pmod{2\\pi}$ for $j\\in\\mathbb Z/N\\mathbb Z$. A\nperiodic grid function is an $N$-tuple $u=(u_j)_{j\\in\\mathbb Z/N\\mathbb Z}$ of\nreal numbers. Define the centered periodic second-difference operator\n$$\n(D_hu)_j:=\\frac{u_{j+1}-2u_j+u_{j-1}}{h^2},\n$$\nwhere subscripts are reduced modulo $N$.\n\nThe algorithm takes as input such arrays $u^0,v^0$, a real time step $k>0$,\nand an integer $n_{\\max}\\ge1$. It sets\n$$\nu^1:=u^0+kv^0+\\frac{k^2}{2}D_hu^0,\n$$\nthen, for each integer $n=1,\\ldots,n_{\\max}-1$, computes\n$$\nu^{n+1}_j:=2u^n_j-u^{n-1}_j+k^2(D_hu^n)_j \\qquad(j\\in\\mathbb Z/N\\mathbb Z).\n$$\nIt outputs $(u^0,u^1,\\ldots,u^{n_{\\max}})$. All operations here are exact real\narithmetic. No rounding-error model or claim about a floating-point\nimplementation is part of the definition.",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-gr-fx-constraint-residual-diagnostic",
+          "source_section": "Definition",
+          "quote": "Use the dimensionless angular coordinates $x^i$ and the periodic spatial\nthree-torus from the earlier fixed-gauge data definition. Choose integers\n$N_i\\ge3$, coordinate spacings $\\Delta_i:=2\\pi/N_i$, and the finite periodic\ngrid\n$$\nG_{\\boldsymbol\\Delta}:=\\{(2\\pi j_1/N_1,2\\pi j_2/N_2,2\\pi j_3/N_3): 0\\le j_i<N_i\\}\\subset\\mathbb T^3_{2\\pi}.\n$$\nAt each grid node $p$, supply a real symmetric positive-definite matrix\n$h_{ij}(p)$ and its matrix inverse $h^{ij}(p)$ (so\n$h^{ik}(p)h_{kj}(p)=\\delta^i{}_j$), a real symmetric array $K_{ij}(p)$,\na scalar $\\rho(p)$, a covector array $j_i(p)$, and real constants $\\Lambda$\nand $\\kappa>0$. These are the sampled spatial metric, second fundamental\nform, energy density and momentum density in the convention of\n[[thm-gr-constraint-equations-in-normal-frame]]: for a future unit normal $n$\nand the coordinate basis $\\partial_i$, $K(X,Y)=g(\\nabla_Xn,Y)$,\n$\\rho=T(n,n)$ and $j_i=-T(n,\\partial_i)$, where $T$ is a smooth symmetric\ncovariant two-tensor. The array definition itself needs only the listed\nsamples and does not assume the continuum field equation. The vacuum case is\n$\\rho=j_i=\\Lambda=0$. In the SI angular-coordinate convention used here,\n$[x^i]=1$, $[h_{ij}]=\\mathrm m^2$, $[K_{ij}]=\\mathrm m$,\n$[\\rho]=\\mathrm{J\\,m^{-3}}$, $[j_i]=\\mathrm{J\\,m^{-2}}$,\n$[\\Lambda]=\\mathrm m^{-2}$, and\n$[\\kappa]=\\mathrm{m^{-1}\\,kg^{-1}\\,s^2}$. Thus the scalar residual below\nhas units $\\mathrm m^{-2}$ and its covector components in this angular basis\nhave units $\\mathrm m^{-1}$.\n\nLet $\\mathbb R^{G_{\\boldsymbol\\Delta}}$ denote the real arrays indexed by\nthe grid. Choose and specify linear maps\n$\\delta_i:\\mathbb R^{G_{\\boldsymbol\\Delta}}\\to\n\\mathbb R^{G_{\\boldsymbol\\Delta}}$ with $\\delta_i1=0$; apply them\ncomponentwise to tensor arrays. Periodic index wrapping is used here. Define\nthe discrete connection components, curvature, Ricci array and scalar\ncurvature by nodewise operations, with every index $i,j,k,\\ell,a,b$ ranging\nover $1,2,3$ and repeated upper/lower indices summed:\n$$\n\\Gamma^k{}_{ij,\\boldsymbol\\Delta}:= \\frac12h^{k\\ell}(\\delta_i h_{j\\ell}+\\delta_j h_{i\\ell}-\\delta_\\ell h_{ij}),\n$$\n$$\nR^a{}_{b i j,\\boldsymbol\\Delta}:= \\delta_i\\Gamma^a{}_{jb,\\boldsymbol\\Delta} -\\delta_j\\Gamma^a{}_{ib,\\boldsymbol\\Delta} +\\Gamma^a{}_{i\\ell,\\boldsymbol\\Delta}\\Gamma^\\ell{}_{jb,\\boldsymbol\\Delta} -\\Gamma^a{}_{j\\ell,\\boldsymbol\\Delta}\\Gamma^\\ell{}_{ib,\\boldsymbol\\Delta}, \\qquad \\operatorname{Ric}_{ij,\\boldsymbol\\Delta}:=R^k{}_{i k j,\\boldsymbol\\Delta}, \\qquad R_{\\boldsymbol\\Delta}:=h^{ij}\\operatorname{Ric}_{ij,\\boldsymbol\\Delta}.\n$$\nSet\n$$\n\\tau_{\\boldsymbol\\Delta}:=h^{ij}K_{ij},\\qquad |K|^2_{\\boldsymbol\\Delta}:=h^{ik}h^{j\\ell}K_{ij}K_{k\\ell},\n$$\n$$\n(D_i^{\\boldsymbol\\Delta}K)_{kj}:= \\delta_iK_{kj}-\\Gamma^\\ell{}_{ik,\\boldsymbol\\Delta}K_{\\ell j} -\\Gamma^\\ell{}_{ij,\\boldsymbol\\Delta}K_{k\\ell}.\n$$\nThe signed discrete Hamiltonian and momentum residuals are\n$$\n\\mathcal H_{\\boldsymbol\\Delta}:= R_{\\boldsymbol\\Delta}+\\tau_{\\boldsymbol\\Delta}^2 -|K|^2_{\\boldsymbol\\Delta}-2\\Lambda-2\\kappa\\rho,\n$$\n$$\n\\mathcal M_{\\boldsymbol\\Delta,j}:= h^{ik}(D_i^{\\boldsymbol\\Delta}K)_{kj} -\\delta_j\\tau_{\\boldsymbol\\Delta}+\\kappa j_j.\n$$\nThese signs match the Hamiltonian and momentum constraints in\n[[thm-gr-constraint-equations-in-normal-frame]] when its pointwise equation\n$G+\\Lambda g=\\kappa T$ is assumed. The displayed discrete formulas are array\noperations: they do not define a coordinate-covariant discrete connection or\nassume a discrete Leibniz rule. A reconstruction map has the exact type\n$$\n\\mathcal I_{\\boldsymbol\\Delta}:\\mathcal D_{\\boldsymbol\\Delta}\\longrightarrow \\mathcal C,\n$$\nwhere $\\mathcal D_{\\boldsymbol\\Delta}$ is the set of all grid arrays\n$(h_{ij},K_{ij},\\rho,j_i)$ with the pointwise symmetry and positive-definite\nconditions above, and $\\mathcal C$ is the set of pointwise assignments on\n$\\mathbb T^3_{2\\pi}$ of a positive-definite symmetric covariant two-tensor\n$h$, a symmetric covariant two-tensor $K$, a scalar $\\rho$ and a covector\n$j$, with the same units. No continuity or differentiability of a member of\n$\\mathcal C$ is implied; if continuum derivatives are used, the needed\nregularity must be stated separately. Specify $\\mathcal I_{\\boldsymbol\\Delta}$\nas part of each diagnostic, since it records which continuum field the grid\nis intended to represent. For every reported diagnostic, also record the grid\nnorm and its weights, the mesh hierarchy, the units, the derivative maps, the\nperiodic boundary treatment, and $\\mathcal I_{\\boldsymbol\\Delta}$. A small\nresidual by itself does not assert closeness to an exact constraint-satisfying\ndevelopment.",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "prop-christoffel-formula-for-the-levi-civita-connection",
+          "source_section": "Statement",
+          "quote": "In coordinates for a Riemannian metric with matrix $(g_{ij})$ and inverse $(g^{ij})$, its Levi–Civita symbols are\n$$\\Gamma^k{}_{ij}=\\tfrac12\\sum_\\ell g^{k\\ell}(\\partial_i g_{j\\ell}+\\partial_j g_{i\\ell}-\\partial_\\ell g_{ij}).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-curvature-of-an-affine-connection",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a smooth manifold, let $\\nabla$ be an affine connection on $M$ in\nthe sense of [[def-affine-connection-on-a-smooth-manifold]], and let $X,Y,Z$ be\nsmooth vector fields. With the sign convention used throughout this page, the\n**curvature of $\\nabla$** is\n\n$$R^\\nabla(X,Y)Z:=\\nabla_X\\nabla_YZ-\\nabla_Y\\nabla_XZ-\\nabla_{[X,Y]}Z,$$\n\nwhere $[X,Y]$ is the bracket of\n[[def-lie-bracket-of-smooth-vector-fields]]. We usually write $R$ when the\nconnection is understood. The connection is **flat** or **curvature-free** when\n$R(X,Y)Z=0$ for every triple of smooth vector fields.\n\nThe bracket correction is part of the definition. The raw commutator of two\ncovariant derivatives is not function-linear in its differentiating fields.\nNo metric or torsion hypothesis is imposed here. On an empty or\nzero-dimensional manifold the condition is vacuous; on manifolds with boundary\nthe same formula uses the ambient tangent bundle supplied by the definition of\nan affine connection.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-trigonometric-parity-and-pythagorean-identity",
+          "source_section": "Statement",
+          "quote": "For every real $x$,\n$$\\sin(-x)=-\\sin x,\\qquad\\cos(-x)=\\cos x,\\qquad\\sin^2x+\\cos^2x=1.$$\nConsequently $|\\sin x|\\le1$ and $|\\cos x|\\le1$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-sine-cosine-zero-sets-and-fundamental-period",
+          "source_section": "Statement",
+          "quote": "For every real $x$,\n$$\\sin x=0\\Longleftrightarrow x=m\\pi\\text{ for some }m\\in\\mathbb Z,\\qquad \\cos x=0\\Longleftrightarrow x=(m+1/2)\\pi\\text{ for some }m\\in\\mathbb Z.$$\nBoth sine and cosine have period $2\\pi$, and no smaller positive number is a common period.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-quarter-turn-values-and-shift-formulas",
+          "source_section": "Statement",
+          "quote": "For every real $x$,\n$$\\sin(x+\\pi/2)=\\cos x,\\quad\\cos(x+\\pi/2)=-\\sin x,\\quad\\sin(x+\\pi)=-\\sin x,\\quad\\cos(x+\\pi)=-\\cos x.$$\nIn particular,\n$$\\sin(\\pi/2)=1,\\quad\\cos(\\pi/2)=0,\\quad\\sin\\pi=0,\\quad\\cos\\pi=-1.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-sine-and-cosine-derivatives",
+          "source_section": "Statement",
+          "quote": "The functions $\\sin$ and $\\cos$ are differentiable on $\\mathbb R$, with\n$$(\\sin x)'=\\cos x,\\qquad(\\cos x)'=-\\sin x.$$\nAlso $\\sin0=0$ and $\\cos0=1$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-chain-rule",
+          "source_section": "Statement",
+          "quote": "Let $A, B \\subseteq \\mathbb{R}$, let $g : A \\to \\mathbb{R}$ with\n$g[A] \\subseteq B$ and let $f : B \\to \\mathbb{R}$, so that the composite\n$f \\circ g : A \\to \\mathbb{R}$ is defined. Let $c \\in A$ be a limit point of\n$A$ (Limit point, isolated point, adherent point, derived set, and dense subset of $\\mathbb{R}$) at which $g$ is differentiable\n(The derivative $f'(c) = \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c}$ of $f : A \\to \\mathbb{R}$ at a point $c \\in A$ that is a limit point of $A$, and differentiability on a set), put $b := g(c)$, and suppose $b$ is a limit point of $B$\nat which $f$ is differentiable. Then $f \\circ g$ is differentiable at $c$ and\n\n$$(f \\circ g)'(c) \\;=\\; f'\\bigl(g(c)\\bigr)\\,g'(c) .$$\n\n**Both limit-point hypotheses are needed, and neither is automatic.** That $c$\nis a limit point of $A$ is what makes $g'(c)$ and $(f \\circ g)'(c)$ defined\nsymbols; that $b = g(c)$ is a limit point of $B$ is what makes $f'(b)$ one.\nNothing forces the second: $g$ may be differentiable at $c$ and send $c$ to an\nisolated point of $B$, and there $f'(b)$ is not defined and the formula asserts\nnothing.\n\n**No case analysis appears anywhere.** The naive difference-quotient proof\nwrites $\\frac{f(g(x)) - f(g(c))}{g(x) - g(c)} \\cdot \\frac{g(x) - g(c)}{x - c}$\nand then has to say what happens where $g(x) = g(c)$, which may occur at points\narbitrarily close to $c$. Carathéodory's factorisation never divides by the\ninner increment, so the difficulty does not arise.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $N/2$ is an integer, $\\phi_N$ is $2\\pi$-periodic. By [F6],\n$\\phi_N\\ge1-\\varepsilon>0$. The flat seed metric is smooth positive-definite;\n$\\widetilde\\sigma=0$ is symmetric, trace-free and divergence-free, and\n$\\tau=0$ is constant. Thus the data satisfy [F1] and\n$h=\\phi_N^4\\widetilde h$, $K=0$. [given, A1, F1, F6, algebra]",
+          "step": "1.1",
+          "inputs": [
+            "F6",
+            "F1",
+            "A1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "At each first-coordinate grid node $x^1_j=2\\pi j/N$, [F6] gives\n$\\phi_N(x_j)=1$. The sampled arrays therefore have $h_{ij}=L_*^2\\delta_{ij}$,\n$K_{ij}=0$, $\\rho=j=\\Lambda=0$. Since the discrete derivatives annihilate\nthese constant arrays, the discrete connection and curvature formulas of [F4]\ngive zero; [F4] then gives\n$\\mathcal H_{\\boldsymbol\\Delta}=\\mathcal M_{\\boldsymbol\\Delta}=0$ at every\nnode. The specified piecewise-constant reconstruction of these samples is\nflat. Every summand in the stated norm is therefore zero, so the norm is zero.\n[given, F3, F4, F6, step 1.1, algebra]",
+          "step": "1.2",
+          "inputs": [
+            "F6",
+            "F4",
+            "F3",
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "In the lifted angular coordinates the coefficients of $\\widetilde h$ are\nconstant. The Christoffel formula in [F5] therefore gives\n$\\widetilde\\Gamma^k{}_{ij}=0$, and the curvature formula in [F5] gives\n$\\widetilde R=0$. Thus\n$\\widetilde\\Delta\\phi_N=L_*^{-2}\\partial_1^2\\phi_N$. By [F7],\n$$\n\\widetilde\\Delta\\phi_N=-\\frac{\\varepsilon N^2}{4L_*^2}\\sin(Nx^1/2).\n$$\nAt $x^1=\\pi/N$, [F6] gives $\\phi_N=1+\\varepsilon$ and\n$\\sin(Nx^1/2)=1$. Substituting $\\widetilde\\sigma=0$, $\\tau=0$ and this\nLaplacian into [F2] gives\n$\\mathcal H(h,K)=2\\varepsilon N^2/[L_*^2(1+\\varepsilon)^5]>0$. [given, F2, F5, F6, F7, step 1.1, algebra]",
+          "step": "2.1",
+          "inputs": [
+            "F5",
+            "F7",
+            "F6",
+            "F2",
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Step 1.2 and step 2.1 exhibit identical grid data with zero discrete\nresiduals and a smooth continuum representative with a nonzero exact\nHamiltonian residual. The reconstruction and finite differences cannot\nidentify the unresolved sine mode from these samples; the residual therefore\ndoes not certify continuum constraint satisfaction. [step 1.2, step 2.1, F3, F4] ∎",
+          "step": "2.2",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement: the periodic three-torus and every mesh count are nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1: epsilon>0 is explicit; the excluded epsilon=0 case would reduce to the flat field and is not asserted as a counterexample."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "All three grid counts satisfy N_i>=3; no one-point direction is admitted."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1: phi_N>=1-epsilon>0, so h=phi_N^4 tilde h remains positive definite."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition and Example: periodic cell boundaries are assigned by half-open cells; the sampled arrays are constant across all cells, while pi/N is a continuum point between grid nodes."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1: the explicit smooth data are supplied directly; the inherited AC_omega premise is preserved only for the embedded interpretation and no choice is performed in the calculation."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example asserts a counterexample to residual certification, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example asserts a counterexample to residual certification, not an iff."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "N=4, epsilon=1/2, L*=1 m",
+          "inputs": "N=4, N2=N3=3, epsilon=1/2, L*=1 m",
+          "calculation": "All sampled phi values are 1, so the arrays are flat and both discrete residuals are zero. With every positive weight w_j=1/(N N2 N3), the stated combined norm is also zero. At x1=pi/4, the formula gives 2 epsilon N^2/(L_*^2(1+epsilon)^5)=512/243 m^-2.",
+          "result": "The smooth continuum representative has a positive residual between nodes despite the exact zero sampled residual."
+        }
+      ],
+      "finite_checks_disposition": "Finite exact substitutions check stated domains, recurrence interfaces, signs and units. They are not empirical observations and do not replace the complete conditional argument or imply an Einstein-solver convergence result.",
+      "supplier_excerpts": [
+        {
+          "supplier": "alg-gr-fx-periodic-wave-leapfrog",
+          "carrier": "items/alg-gr-fx-periodic-wave-leapfrog.md",
+          "status": "Current supplier. Current batch draft supplier authored in this run; its exact statement and complete available proof were inspected. Independent approval is not inferred; its Step 1 record is written only after final scoped checks.",
+          "source_section": "Definition",
+          "exact_statement": "Use the first circle factor of the fixed periodic three-torus from the earlier\nfixed-gauge data definition. This item is a separate nondimensionalized scalar\nmodel: both the spatial coordinate $x$ and time $t$ are dimensionless, the\nperiod is $2\\pi$, and the model wave speed is $1$. Let $N\\ge3$ be an integer,\n$h:=2\\pi/N$, and $x_j:=jh\\pmod{2\\pi}$ for $j\\in\\mathbb Z/N\\mathbb Z$. A\nperiodic grid function is an $N$-tuple $u=(u_j)_{j\\in\\mathbb Z/N\\mathbb Z}$ of\nreal numbers. Define the centered periodic second-difference operator\n$$\n(D_hu)_j:=\\frac{u_{j+1}-2u_j+u_{j-1}}{h^2},\n$$\nwhere subscripts are reduced modulo $N$.\n\nThe algorithm takes as input such arrays $u^0,v^0$, a real time step $k>0$,\nand an integer $n_{\\max}\\ge1$. It sets\n$$\nu^1:=u^0+kv^0+\\frac{k^2}{2}D_hu^0,\n$$\nthen, for each integer $n=1,\\ldots,n_{\\max}-1$, computes\n$$\nu^{n+1}_j:=2u^n_j-u^{n-1}_j+k^2(D_hu^n)_j \\qquad(j\\in\\mathbb Z/N\\mathbb Z).\n$$\nIt outputs $(u^0,u^1,\\ldots,u^{n_{\\max}})$. All operations here are exact real\narithmetic. No rounding-error model or claim about a floating-point\nimplementation is part of the definition.",
+          "relevant_hypotheses_and_conventions": "No separate Given block; exact domain and conventions are stated in the quoted Definition or Statement.",
+          "supplier_proof_status": "Current batch draft supplier authored in this run; its exact statement and complete available proof were inspected. Independent approval is not inferred; its Step 1 record is written only after final scoped checks.",
+          "consumer_use": "[F3] [[alg-gr-fx-periodic-wave-leapfrog]]: the periodic coordinate grid has\nnodes $x_j=2\\pi j/N$ in its first circle factor."
+        },
+        {
+          "supplier": "def-gr-fx-constraint-residual-diagnostic",
+          "carrier": "items/def-gr-fx-constraint-residual-diagnostic.md",
+          "status": "Current supplier. Current batch draft supplier authored in this run; its exact statement and complete available proof were inspected. Independent approval is not inferred; its Step 1 record is written only after final scoped checks.",
+          "source_section": "Definition",
+          "exact_statement": "Use the dimensionless angular coordinates $x^i$ and the periodic spatial\nthree-torus from the earlier fixed-gauge data definition. Choose integers\n$N_i\\ge3$, coordinate spacings $\\Delta_i:=2\\pi/N_i$, and the finite periodic\ngrid\n$$\nG_{\\boldsymbol\\Delta}:=\\{(2\\pi j_1/N_1,2\\pi j_2/N_2,2\\pi j_3/N_3): 0\\le j_i<N_i\\}\\subset\\mathbb T^3_{2\\pi}.\n$$\nAt each grid node $p$, supply a real symmetric positive-definite matrix\n$h_{ij}(p)$ and its matrix inverse $h^{ij}(p)$ (so\n$h^{ik}(p)h_{kj}(p)=\\delta^i{}_j$), a real symmetric array $K_{ij}(p)$,\na scalar $\\rho(p)$, a covector array $j_i(p)$, and real constants $\\Lambda$\nand $\\kappa>0$. These are the sampled spatial metric, second fundamental\nform, energy density and momentum density in the convention of\n[[thm-gr-constraint-equations-in-normal-frame]]: for a future unit normal $n$\nand the coordinate basis $\\partial_i$, $K(X,Y)=g(\\nabla_Xn,Y)$,\n$\\rho=T(n,n)$ and $j_i=-T(n,\\partial_i)$, where $T$ is a smooth symmetric\ncovariant two-tensor. The array definition itself needs only the listed\nsamples and does not assume the continuum field equation. The vacuum case is\n$\\rho=j_i=\\Lambda=0$. In the SI angular-coordinate convention used here,\n$[x^i]=1$, $[h_{ij}]=\\mathrm m^2$, $[K_{ij}]=\\mathrm m$,\n$[\\rho]=\\mathrm{J\\,m^{-3}}$, $[j_i]=\\mathrm{J\\,m^{-2}}$,\n$[\\Lambda]=\\mathrm m^{-2}$, and\n$[\\kappa]=\\mathrm{m^{-1}\\,kg^{-1}\\,s^2}$. Thus the scalar residual below\nhas units $\\mathrm m^{-2}$ and its covector components in this angular basis\nhave units $\\mathrm m^{-1}$.\n\nLet $\\mathbb R^{G_{\\boldsymbol\\Delta}}$ denote the real arrays indexed by\nthe grid. Choose and specify linear maps\n$\\delta_i:\\mathbb R^{G_{\\boldsymbol\\Delta}}\\to\n\\mathbb R^{G_{\\boldsymbol\\Delta}}$ with $\\delta_i1=0$; apply them\ncomponentwise to tensor arrays. Periodic index wrapping is used here. Define\nthe discrete connection components, curvature, Ricci array and scalar\ncurvature by nodewise operations, with every index $i,j,k,\\ell,a,b$ ranging\nover $1,2,3$ and repeated upper/lower indices summed:\n$$\n\\Gamma^k{}_{ij,\\boldsymbol\\Delta}:= \\frac12h^{k\\ell}(\\delta_i h_{j\\ell}+\\delta_j h_{i\\ell}-\\delta_\\ell h_{ij}),\n$$\n$$\nR^a{}_{b i j,\\boldsymbol\\Delta}:= \\delta_i\\Gamma^a{}_{jb,\\boldsymbol\\Delta} -\\delta_j\\Gamma^a{}_{ib,\\boldsymbol\\Delta} +\\Gamma^a{}_{i\\ell,\\boldsymbol\\Delta}\\Gamma^\\ell{}_{jb,\\boldsymbol\\Delta} -\\Gamma^a{}_{j\\ell,\\boldsymbol\\Delta}\\Gamma^\\ell{}_{ib,\\boldsymbol\\Delta}, \\qquad \\operatorname{Ric}_{ij,\\boldsymbol\\Delta}:=R^k{}_{i k j,\\boldsymbol\\Delta}, \\qquad R_{\\boldsymbol\\Delta}:=h^{ij}\\operatorname{Ric}_{ij,\\boldsymbol\\Delta}.\n$$\nSet\n$$\n\\tau_{\\boldsymbol\\Delta}:=h^{ij}K_{ij},\\qquad |K|^2_{\\boldsymbol\\Delta}:=h^{ik}h^{j\\ell}K_{ij}K_{k\\ell},\n$$\n$$\n(D_i^{\\boldsymbol\\Delta}K)_{kj}:= \\delta_iK_{kj}-\\Gamma^\\ell{}_{ik,\\boldsymbol\\Delta}K_{\\ell j} -\\Gamma^\\ell{}_{ij,\\boldsymbol\\Delta}K_{k\\ell}.\n$$\nThe signed discrete Hamiltonian and momentum residuals are\n$$\n\\mathcal H_{\\boldsymbol\\Delta}:= R_{\\boldsymbol\\Delta}+\\tau_{\\boldsymbol\\Delta}^2 -|K|^2_{\\boldsymbol\\Delta}-2\\Lambda-2\\kappa\\rho,\n$$\n$$\n\\mathcal M_{\\boldsymbol\\Delta,j}:= h^{ik}(D_i^{\\boldsymbol\\Delta}K)_{kj} -\\delta_j\\tau_{\\boldsymbol\\Delta}+\\kappa j_j.\n$$\nThese signs match the Hamiltonian and momentum constraints in\n[[thm-gr-constraint-equations-in-normal-frame]] when its pointwise equation\n$G+\\Lambda g=\\kappa T$ is assumed. The displayed discrete formulas are array\noperations: they do not define a coordinate-covariant discrete connection or\nassume a discrete Leibniz rule. A reconstruction map has the exact type\n$$\n\\mathcal I_{\\boldsymbol\\Delta}:\\mathcal D_{\\boldsymbol\\Delta}\\longrightarrow \\mathcal C,\n$$\nwhere $\\mathcal D_{\\boldsymbol\\Delta}$ is the set of all grid arrays\n$(h_{ij},K_{ij},\\rho,j_i)$ with the pointwise symmetry and positive-definite\nconditions above, and $\\mathcal C$ is the set of pointwise assignments on\n$\\mathbb T^3_{2\\pi}$ of a positive-definite symmetric covariant two-tensor\n$h$, a symmetric covariant two-tensor $K$, a scalar $\\rho$ and a covector\n$j$, with the same units. No continuity or differentiability of a member of\n$\\mathcal C$ is implied; if continuum derivatives are used, the needed\nregularity must be stated separately. Specify $\\mathcal I_{\\boldsymbol\\Delta}$\nas part of each diagnostic, since it records which continuum field the grid\nis intended to represent. For every reported diagnostic, also record the grid\nnorm and its weights, the mesh hierarchy, the units, the derivative maps, the\nperiodic boundary treatment, and $\\mathcal I_{\\boldsymbol\\Delta}$. A small\nresidual by itself does not assert closeness to an exact constraint-satisfying\ndevelopment.",
+          "relevant_hypotheses_and_conventions": "No separate Given block; exact domain and conventions are stated in the quoted Definition or Statement.",
+          "supplier_proof_status": "Current batch draft supplier authored in this run; its exact statement and complete available proof were inspected. Independent approval is not inferred; its Step 1 record is written only after final scoped checks.",
+          "consumer_use": "[F4] [[def-gr-fx-constraint-residual-diagnostic]]: the discrete derivatives\nannihilate constant arrays, the signed vacuum scalar residual is\n$R_{\\boldsymbol\\Delta}+\\tau_{\\boldsymbol\\Delta}^2-|K|^2_{\\boldsymbol\\Delta}$,\nand the reconstruction map acts from admissible metric/extrinsic-curvature\ngrid arrays to pointwise fields on the periodic torus without a smoothness\nclaim."
+        },
+        {
+          "supplier": "def-gr-fx-conformal-constraint-data",
+          "carrier": "items/def-gr-fx-conformal-constraint-data.md",
+          "status": "Current supplier. Current draft interface and complete proof inspected; loadStep1Record and step1Decision report the current Step 1 authoring record as ready. Draft/precheck metadata is preserved; independent proof approval is not inferred.",
+          "source_section": "Definition",
+          "exact_statement": "Let $\\Sigma$ be a nonempty compact smooth three-manifold without boundary. In\nthis item, “vacuum” means that the stress-energy tensor is zero and the\ncosmological constant is fixed at $\\Lambda=0$. Let $\\widetilde h$ be a smooth\nRiemannian metric on $\\Sigma$, let $\\widetilde\\sigma$ be a smooth symmetric\ncovariant two-tensor field, let $\\tau\\in\\mathbb R$ be constant, and let\n$\\phi\\in C^\\infty(\\Sigma,\\mathbb R)$ satisfy $\\phi(p)>0$ at every $p\\in\\Sigma$.\nUse the positive scalar $\\phi$ as a dimensionless conformal factor.\n\nWrite $\\widetilde D$ for the Levi-Civita connection of $\\widetilde h$ and\n$D$ for that of the metric $h$ defined below. In a chart, $\\widetilde h^{ij}$\ndenotes the inverse matrix to $\\widetilde h_{ij}$. It is smooth because\n$\\det(\\widetilde h_{ij})>0$ and the matrix inverse is the adjugate divided by\nthe determinant. For any smooth Riemannian metric $m$ on $\\Sigma$, with\nLevi-Civita connection $D^m$, define\n$$R^m(X,Y)Z:=D^m_XD^m_YZ-D^m_YD^m_XZ-D^m_{[X,Y]}Z.$$\nIn a chart, $R[m]^a{}_{bij}$ denotes the components of\n$R^m(\\partial_i,\\partial_j)\\partial_b$. Define\n$\\operatorname{Ric}(m)_{ij}:=R[m]^k{}_{ikj}$ and\n$R(m):=m^{ij}\\operatorname{Ric}(m)_{ij}$. In particular,\n$\\widetilde R:=R(\\widetilde h)$, with the same curvature sign convention.\nDefine the scalar Laplacian by\n$$\\widetilde\\Delta f:=\\widetilde h^{ij} (\\partial_i\\partial_j f-\\widetilde\\Gamma^k{}_{ij}\\partial_k f),$$\nwhere $\\widetilde\\Gamma^k{}_{ij}$ are the Christoffel symbols of\n$\\widetilde D$, given by the Levi-Civita Christoffel formula\n[[prop-christoffel-formula-for-the-levi-civita-connection]].\nThe curvature sign is the one displayed above. All traces, norms, raising of\nindices and contractions in this item use the metric indicated by the\nsubscript. In particular,\n$$\\operatorname{tr}_{\\widetilde h}\\widetilde\\sigma:=\\widetilde h^{ij}\\widetilde\\sigma_{ij},\\qquad |\\widetilde\\sigma|_{\\widetilde h}^2:=\\widetilde h^{ik}\\widetilde h^{j\\ell}\\widetilde\\sigma_{ij}\\widetilde\\sigma_{k\\ell},\\qquad (\\operatorname{div}_{\\widetilde h}\\widetilde\\sigma)_j:=\\widetilde h^{ik}\\widetilde D_i\\widetilde\\sigma_{kj}.$$\nThe tensor $\\widetilde\\sigma$ is **transverse-traceless** (TT) when it is\nsymmetric and both displayed trace and divergence vanish.\n\nDefine\n$$h:=\\phi^4\\widetilde h,\\qquad K:=\\phi^{-2}\\widetilde\\sigma+\\frac{\\tau}{3}h.$$\nBecause $\\phi>0$, $h$ is a smooth Riemannian metric; because\n$\\widetilde\\sigma$ and $h$ are symmetric, $K$ is a smooth symmetric tensor.\nHere $h$ is the candidate induced Riemannian metric and $K$ is the candidate\nsecond fundamental form, with the library convention\n$K(X,Y)=g(\\nabla_X n,Y)$ when the data are induced by a spacelike hypersurface\nwith future unit normal $n$. The pair is **vacuum conformal constraint data**.\nIt is abstract data on $\\Sigma$; no embedding into a spacetime is part of this\ndefinition. For its embedded Lorentzian interpretation assume the Axiom of\nCountable Choice $\\mathrm{AC}_\\omega$, as in the supplied smooth tangent-bundle\nconvention; the algebraic tensor definitions themselves use no choice\nprinciple. Define the $h$-trace, squared norm and divergence by\n$$\\operatorname{tr}_hK:=h^{ij}K_{ij},\\qquad |K|_h^2:=h^{ik}h^{j\\ell}K_{ij}K_{k\\ell},\\qquad (\\operatorname{div}_hK)_j:=h^{ik}D_iK_{kj}.$$\nWith $R(h)$ computed using $h$, define the Hamiltonian and momentum residuals\n$$\\mathcal H(h,K):=R(h)+(\\operatorname{tr}_hK)^2-|K|_h^2,\\qquad \\mathcal M_j(h,K):=h^{ik}D_iK_{kj}-D_j(\\operatorname{tr}_hK).$$\nThe data satisfy the vacuum constraint equations when\n$\\mathcal H(h,K)=0$ and $\\mathcal M(h,K)=0$. For an embedded hypersurface,\nthese are the normal and normal-tangential Einstein constraints in the\nspecified $K$ convention.\n\nTensoriality of curvature and basis-independent contraction make these scalar\ncurvatures independent of the chart.\nFor dimensional bookkeeping in the SI length convention, $[\\tau]=\\mathrm m^{-1}$,\n$[R(h)]=[\\widetilde R]=[|\\widetilde\\sigma|_{\\widetilde h}^2]\n=[\\widetilde\\Delta]=\\mathrm m^{-2}$, and $[\\phi]=1$. Thus all terms in the\nscalar constraint equation have units $\\mathrm m^{-2}$.",
+          "relevant_hypotheses_and_conventions": "**Given:** A nonempty compact smooth three-manifold, a smooth Riemannian metric\n$\\widetilde h$, a smooth symmetric covariant tensor $\\widetilde\\sigma$, a\npositive smooth scalar $\\phi$, and a constant $\\tau$. For the embedded\nLorentzian constraint interpretation assume $\\mathrm{AC}_\\omega$.",
+          "supplier_proof_status": "Current draft interface and complete proof inspected; loadStep1Record and step1Decision report the current Step 1 authoring record as ready. Draft/precheck metadata is preserved; independent proof approval is not inferred.",
+          "consumer_use": "[F1] [[def-gr-fx-conformal-constraint-data]]: on a compact smooth three-manifold,\n$h=\\phi^4\\widetilde h$ and\n$K=\\phi^{-2}\\widetilde\\sigma+(\\tau/3)h$; vacuum means $\\Lambda=0$ and zero\nstress-energy, and zero $\\widetilde\\sigma$ is transverse-traceless."
+        },
+        {
+          "supplier": "thm-gr-fx-lichnerowicz-reduction",
+          "carrier": "items/thm-gr-fx-lichnerowicz-reduction.md",
+          "status": "Current supplier. Current draft interface and complete proof inspected; loadStep1Record and step1Decision report the current Step 1 authoring record as ready. Draft/precheck metadata is preserved; independent proof approval is not inferred.",
+          "source_section": "Statement",
+          "exact_statement": "Let $(h,K)$ be the vacuum conformal constraint data of the definition. Then\n$\\operatorname{tr}_hK=\\tau$ and the momentum residual vanishes:\n$$\\mathcal M_j(h,K)=0.$$\nThe Hamiltonian residual is\n$$\\mathcal H(h,K)=0\\quad\\Longleftrightarrow\\quad -8\\widetilde\\Delta\\phi+\\widetilde R\\,\\phi-|\\widetilde\\sigma|_{\\widetilde h}^2\\phi^{-7} +\\frac{2}{3}\\tau^2\\phi^5=0.$$\nThe displayed scalar equation is the **Lichnerowicz equation** for these\nconstant-mean-curvature (CMC) vacuum data. Here CMC means that the trace\n$\\operatorname{tr}_hK$ is spatially constant; its value is $\\tau$.",
+          "relevant_hypotheses_and_conventions": "**Given:** A nonempty compact smooth three-manifold without boundary, a smooth\nRiemannian metric $\\widetilde h$, a smooth TT covariant two-tensor\n$\\widetilde\\sigma$, a constant $\\tau\\in\\mathbb R$, and a positive smooth\ndimensionless function $\\phi$, with $\\Lambda=0$ and zero stress-energy. Assume\n$\\mathrm{AC}_\\omega$ for the embedded Lorentzian constraint interpretation.",
+          "supplier_proof_status": "Current draft interface and complete proof inspected; loadStep1Record and step1Decision report the current Step 1 authoring record as ready. Draft/precheck metadata is preserved; independent proof approval is not inferred.",
+          "consumer_use": "[F2] [[thm-gr-fx-lichnerowicz-reduction]]: for these data,\n$$\n\\mathcal H(h,K)=\\phi^{-5}\\left(-8\\widetilde\\Delta\\phi+\\widetilde R\\phi -|\\widetilde\\sigma|_{\\widetilde h}^2\\phi^{-7}+\\frac23\\tau^2\\phi^5\\right).\n$$"
+        },
+        {
+          "supplier": "def-countable-choice",
+          "carrier": "items/def-countable-choice.md",
+          "status": "Published supplier. Published definition/algorithm carrier; exact current interface inspected; no proof is applicable. No current-run readiness record is expected for this out-of-run item.",
+          "source_section": "Definition",
+          "exact_statement": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "relevant_hypotheses_and_conventions": "No separate Given block; exact domain and conventions are stated in the quoted Definition or Statement.",
+          "supplier_proof_status": "Published definition/algorithm carrier; exact current interface inspected; no proof is applicable. No current-run readiness record is expected for this out-of-run item.",
+          "consumer_use": "[A1] [[def-countable-choice]]: $\\mathrm{AC}_\\omega$ is the axiom that every\ncountable family of nonempty sets has a choice function. It is retained because\nthe conformal-data supplier includes the embedded Lorentzian interpretation;\nthe algebraic grid example itself uses only the abstract data."
+        },
+        {
+          "supplier": "prop-christoffel-formula-for-the-levi-civita-connection",
+          "carrier": "items/prop-christoffel-formula-for-the-levi-civita-connection.md",
+          "status": "Published supplier. Published proof carrier; exact current statement and complete proof inspected. No current-run readiness record is expected for this out-of-run item; no broader acceptance is inferred.",
+          "source_section": "Statement",
+          "exact_statement": "In coordinates for a Riemannian metric with matrix $(g_{ij})$ and inverse $(g^{ij})$, its Levi–Civita symbols are\n$$\\Gamma^k{}_{ij}=\\tfrac12\\sum_\\ell g^{k\\ell}(\\partial_i g_{j\\ell}+\\partial_j g_{i\\ell}-\\partial_\\ell g_{ij}).$$",
+          "relevant_hypotheses_and_conventions": "**Given:** A supplied Riemannian metric and a coordinate chart.",
+          "supplier_proof_status": "Published proof carrier; exact current statement and complete proof inspected. No current-run readiness record is expected for this out-of-run item; no broader acceptance is inferred.",
+          "consumer_use": "[F5] [[prop-christoffel-formula-for-the-levi-civita-connection]],\n[[def-curvature-of-an-affine-connection]]: Christoffel symbols are given by\nthe first-derivative metric formula, and curvature is the derivative-plus-\nquadratic expression in those symbols."
+        },
+        {
+          "supplier": "def-curvature-of-an-affine-connection",
+          "carrier": "items/def-curvature-of-an-affine-connection.md",
+          "status": "Published supplier. Published definition/algorithm carrier; exact current interface inspected; no proof is applicable. No current-run readiness record is expected for this out-of-run item.",
+          "source_section": "Definition",
+          "exact_statement": "Let $M$ be a smooth manifold, let $\\nabla$ be an affine connection on $M$ in\nthe sense of [[def-affine-connection-on-a-smooth-manifold]], and let $X,Y,Z$ be\nsmooth vector fields. With the sign convention used throughout this page, the\n**curvature of $\\nabla$** is\n\n$$R^\\nabla(X,Y)Z:=\\nabla_X\\nabla_YZ-\\nabla_Y\\nabla_XZ-\\nabla_{[X,Y]}Z,$$\n\nwhere $[X,Y]$ is the bracket of\n[[def-lie-bracket-of-smooth-vector-fields]]. We usually write $R$ when the\nconnection is understood. The connection is **flat** or **curvature-free** when\n$R(X,Y)Z=0$ for every triple of smooth vector fields.\n\nThe bracket correction is part of the definition. The raw commutator of two\ncovariant derivatives is not function-linear in its differentiating fields.\nNo metric or torsion hypothesis is imposed here. On an empty or\nzero-dimensional manifold the condition is vacuous; on manifolds with boundary\nthe same formula uses the ambient tangent bundle supplied by the definition of\nan affine connection.",
+          "relevant_hypotheses_and_conventions": "No separate Given block; exact domain and conventions are stated in the quoted Definition or Statement.",
+          "supplier_proof_status": "Published definition/algorithm carrier; exact current interface inspected; no proof is applicable. No current-run readiness record is expected for this out-of-run item.",
+          "consumer_use": "[F5] [[prop-christoffel-formula-for-the-levi-civita-connection]],\n[[def-curvature-of-an-affine-connection]]: Christoffel symbols are given by\nthe first-derivative metric formula, and curvature is the derivative-plus-\nquadratic expression in those symbols."
+        },
+        {
+          "supplier": "cor-trigonometric-parity-and-pythagorean-identity",
+          "carrier": "items/cor-trigonometric-parity-and-pythagorean-identity.md",
+          "status": "Published supplier. Published proof carrier; exact current statement and complete proof inspected. No current-run readiness record is expected for this out-of-run item; no broader acceptance is inferred.",
+          "source_section": "Statement",
+          "exact_statement": "For every real $x$,\n$$\\sin(-x)=-\\sin x,\\qquad\\cos(-x)=\\cos x,\\qquad\\sin^2x+\\cos^2x=1.$$\nConsequently $|\\sin x|\\le1$ and $|\\cos x|\\le1$.",
+          "relevant_hypotheses_and_conventions": "**Given:** A real $x$.",
+          "supplier_proof_status": "Published proof carrier; exact current statement and complete proof inspected. No current-run readiness record is expected for this out-of-run item; no broader acceptance is inferred.",
+          "consumer_use": "[F6] [[cor-trigonometric-parity-and-pythagorean-identity]],\n[[thm-sine-cosine-zero-sets-and-fundamental-period]],\n[[thm-quarter-turn-values-and-shift-formulas]]: $|\\sin x|\\le1$,\n$\\sin(\\pi j)=0$ for integer $j$, and $\\sin(\\pi/2)=1$."
+        },
+        {
+          "supplier": "thm-sine-cosine-zero-sets-and-fundamental-period",
+          "carrier": "items/thm-sine-cosine-zero-sets-and-fundamental-period.md",
+          "status": "Published supplier. Published proof carrier; exact current statement and complete proof inspected. No current-run readiness record is expected for this out-of-run item; no broader acceptance is inferred.",
+          "source_section": "Statement",
+          "exact_statement": "For every real $x$,\n$$\\sin x=0\\Longleftrightarrow x=m\\pi\\text{ for some }m\\in\\mathbb Z,\\qquad \\cos x=0\\Longleftrightarrow x=(m+1/2)\\pi\\text{ for some }m\\in\\mathbb Z.$$\nBoth sine and cosine have period $2\\pi$, and no smaller positive number is a common period.",
+          "relevant_hypotheses_and_conventions": "**Given:** A real $x$.",
+          "supplier_proof_status": "Published proof carrier; exact current statement and complete proof inspected. No current-run readiness record is expected for this out-of-run item; no broader acceptance is inferred.",
+          "consumer_use": "[F6] [[cor-trigonometric-parity-and-pythagorean-identity]],\n[[thm-sine-cosine-zero-sets-and-fundamental-period]],\n[[thm-quarter-turn-values-and-shift-formulas]]: $|\\sin x|\\le1$,\n$\\sin(\\pi j)=0$ for integer $j$, and $\\sin(\\pi/2)=1$."
+        },
+        {
+          "supplier": "thm-quarter-turn-values-and-shift-formulas",
+          "carrier": "items/thm-quarter-turn-values-and-shift-formulas.md",
+          "status": "Published supplier. Published proof carrier; exact current statement and complete proof inspected. No current-run readiness record is expected for this out-of-run item; no broader acceptance is inferred.",
+          "source_section": "Statement",
+          "exact_statement": "For every real $x$,\n$$\\sin(x+\\pi/2)=\\cos x,\\quad\\cos(x+\\pi/2)=-\\sin x,\\quad\\sin(x+\\pi)=-\\sin x,\\quad\\cos(x+\\pi)=-\\cos x.$$\nIn particular,\n$$\\sin(\\pi/2)=1,\\quad\\cos(\\pi/2)=0,\\quad\\sin\\pi=0,\\quad\\cos\\pi=-1.$$",
+          "relevant_hypotheses_and_conventions": "**Given:** A real $x$ and $\\gamma=\\pi/2$.",
+          "supplier_proof_status": "Published proof carrier; exact current statement and complete proof inspected. No current-run readiness record is expected for this out-of-run item; no broader acceptance is inferred.",
+          "consumer_use": "[F6] [[cor-trigonometric-parity-and-pythagorean-identity]],\n[[thm-sine-cosine-zero-sets-and-fundamental-period]],\n[[thm-quarter-turn-values-and-shift-formulas]]: $|\\sin x|\\le1$,\n$\\sin(\\pi j)=0$ for integer $j$, and $\\sin(\\pi/2)=1$."
+        },
+        {
+          "supplier": "thm-sine-and-cosine-derivatives",
+          "carrier": "items/thm-sine-and-cosine-derivatives.md",
+          "status": "Published supplier. Published proof carrier; exact current statement and complete proof inspected. No current-run readiness record is expected for this out-of-run item; no broader acceptance is inferred.",
+          "source_section": "Statement",
+          "exact_statement": "The functions $\\sin$ and $\\cos$ are differentiable on $\\mathbb R$, with\n$$(\\sin x)'=\\cos x,\\qquad(\\cos x)'=-\\sin x.$$\nAlso $\\sin0=0$ and $\\cos0=1$.",
+          "relevant_hypotheses_and_conventions": "**Given:** The sine and cosine power series.",
+          "supplier_proof_status": "Published proof carrier; exact current statement and complete proof inspected. No current-run readiness record is expected for this out-of-run item; no broader acceptance is inferred.",
+          "consumer_use": "[F7] [[thm-sine-and-cosine-derivatives]], [[thm-chain-rule]]: the second\nderivative of $x\\mapsto\\sin(Nx/2)$ is\n$-(N/2)^2\\sin(Nx/2)$."
+        },
+        {
+          "supplier": "thm-chain-rule",
+          "carrier": "items/thm-chain-rule.md",
+          "status": "Published supplier. Published proof carrier; exact current statement and complete proof inspected. No current-run readiness record is expected for this out-of-run item; no broader acceptance is inferred.",
+          "source_section": "Statement",
+          "exact_statement": "Let $A, B \\subseteq \\mathbb{R}$, let $g : A \\to \\mathbb{R}$ with\n$g[A] \\subseteq B$ and let $f : B \\to \\mathbb{R}$, so that the composite\n$f \\circ g : A \\to \\mathbb{R}$ is defined. Let $c \\in A$ be a limit point of\n$A$ (Limit point, isolated point, adherent point, derived set, and dense subset of $\\mathbb{R}$) at which $g$ is differentiable\n(The derivative $f'(c) = \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c}$ of $f : A \\to \\mathbb{R}$ at a point $c \\in A$ that is a limit point of $A$, and differentiability on a set), put $b := g(c)$, and suppose $b$ is a limit point of $B$\nat which $f$ is differentiable. Then $f \\circ g$ is differentiable at $c$ and\n\n$$(f \\circ g)'(c) \\;=\\; f'\\bigl(g(c)\\bigr)\\,g'(c) .$$\n\n**Both limit-point hypotheses are needed, and neither is automatic.** That $c$\nis a limit point of $A$ is what makes $g'(c)$ and $(f \\circ g)'(c)$ defined\nsymbols; that $b = g(c)$ is a limit point of $B$ is what makes $f'(b)$ one.\nNothing forces the second: $g$ may be differentiable at $c$ and send $c$ to an\nisolated point of $B$, and there $f'(b)$ is not defined and the formula asserts\nnothing.\n\n**No case analysis appears anywhere.** The naive difference-quotient proof\nwrites $\\frac{f(g(x)) - f(g(c))}{g(x) - g(c)} \\cdot \\frac{g(x) - g(c)}{x - c}$\nand then has to say what happens where $g(x) = g(c)$, which may occur at points\narbitrarily close to $c$. Carathéodory's factorisation never divides by the\ninner increment, so the difficulty does not arise.",
+          "relevant_hypotheses_and_conventions": "**Given:** Sets $A, B \\subseteq \\mathbb{R}$, functions $g : A \\to \\mathbb{R}$ with $g[A] \\subseteq B$ and $f : B \\to \\mathbb{R}$, a point $c \\in A$ that is a limit point of $A$ at which $g$ is differentiable, and the point $b := g(c) \\in B$, a limit point of $B$ at which $f$ is differentiable ([[def-derivative]], [[def-limit-point-r]]).",
+          "supplier_proof_status": "Published proof carrier; exact current statement and complete proof inspected. No current-run readiness record is expected for this out-of-run item; no broader acceptance is inferred.",
+          "consumer_use": "[F7] [[thm-sine-and-cosine-derivatives]], [[thm-chain-rule]]: the second\nderivative of $x\\mapsto\\sin(Nx/2)$ is\n$-(N/2)^2\\sin(Nx/2)$."
+        }
+      ]
+    }
+  }
+}

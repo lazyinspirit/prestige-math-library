@@ -1,0 +1,1478 @@
+{
+  "version": 1,
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "batch": "91",
+  "scope": [
+    "lem-csm-frontier-ssep-sector-connectivity",
+    "def-csm-frontier-ssep-weak-heat-solution",
+    "lem-csm-frontier-ssep-heat-flow",
+    "def-csm-frontier-ssep-diffusive-model",
+    "lem-csm-frontier-ssep-bracket",
+    "lem-csm-frontier-ssep-time-dependent-martingale",
+    "thm-csm-frontier-ssep-heat-limit",
+    "ex-csm-frontier-ssep-density-mode"
+  ],
+  "contracts": {
+    "lem-csm-frontier-ssep-sector-connectivity": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "A finite connected graph has a spanning tree: start with one vertex and, while the current vertex set is not $V$, add an edge from that set to its complement together with the new endpoint. Such an edge exists because otherwise no path could join the current set to its complement. Finiteness makes this process terminate; each added edge attaches one new vertex, so the resulting spanning subgraph is connected and has no cycle.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "L1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "We prove by induction on the number of vertices that the $k$-element subsets of any finite tree are connected for every admissible $k$. The assertion holds for a one-vertex tree, since its $0$- and $1$-element subset graphs each have one vertex. For a tree $T$ with at least two vertices, choose a simple path of maximum length; either endpoint is a leaf, because an additional neighbor outside the path would extend it, while an additional neighbor on the path would create a cycle. Let $v$ be a leaf. Removing a leaf leaves a connected acyclic graph, hence a smaller tree: the unique path between two remaining vertices cannot have the leaf as an interior vertex. If two configurations $A,B$ have the same occupancy at $v$, removing $v$ leaves two subsets of the same cardinality in $T-v$; by induction a sequence of legal moves there connects them, and the same moves in $T$ keep the occupancy at $v$ fixed.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "L1",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Suppose $v\\in A$ and $v\\notin B$. Since $k<m$, choose a vacant vertex $w\\notin A$ and let $v=v_0,v_1,\\ldots,v_r=w$ be the unique simple path in $T$ from $v$ to $w$. Existence follows from connectedness, and two distinct simple paths would contain a cycle, so the path is unique. Let $j$ be the first index with $v_j\\notin A$; then $v_0,\\ldots,v_{j-1}$ are occupied. Move the particle at $v_{j-1}$ to the vacancy $v_j$, then the particle at $v_{j-2}$ to the new vacancy $v_{j-1}$, and continue until the particle at $v_0$ has moved to $v_1$. These are legal edge moves and leave $v$ vacant. The resulting configuration and $B$, restricted to $T-v$, both have $k$ particles; induction connects them without using $v$.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "L1",
+            "step 2.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "Suppose $v\\notin A$ and $v\\in B$. Since $k>0$, choose an occupied vertex $w\\in A$ and use the unique path $v=v_0,\\ldots,v_r=w$. Let $j$ be the first index with $v_j\\in A$; all earlier vertices are vacant. Move the particle from $v_j$ to $v_{j-1}$, then from $v_{j-1}$ to $v_{j-2}$, and continue until $v_0=v$ is occupied. The moves are legal along the path. The resulting configuration and $B$, restricted to $T-v$, both have $k-1$ particles; induction connects them without using $v$. This proves the claim for trees, including the cases $k=0$ and $k=m$ already covered by their singleton configuration graphs.",
+          "step": "3.2",
+          "inputs": [
+            "A1",
+            "L1",
+            "step 2.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Apply step 1.1 to $G$ and let $T$ be a spanning tree. Every move along an edge of $T$ is also an allowed move in $G$. steps 3.1 and 3.2 therefore connect any two $k$-element subsets using edges of $G$, so $\\mathcal C_k(G)$ is connected.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "L1",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "step 3.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly includes the empty-occupancy case k=0; the empty underlying graph is excluded by m\u22651."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 handles the singleton configuration graph for k=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 proves the one-vertex tree base case for k=0 and k=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 and steps 3.1 and 3.2 include the full and empty configurations and the move cases at the leaf."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 handles occupancy endpoints k=0 and k=m."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 constructs a spanning tree by finite edge additions; this is a finite construction."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement asserts connectedness and contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement asserts connectedness and contains no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "one-vertex and occupancy endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 treats the one-vertex tree and singleton configuration graphs at k=0 and k=m."
+        },
+        {
+          "name": "leaf cases when occupancy changes",
+          "status": "checked",
+          "evidence": "Steps 3.1 and 3.2 route a vacancy or particle along the unique path to occupy or vacate the leaf."
+        }
+      ],
+      "finite_checks_disposition": "Boundary and finite cases that affect the claim are checked explicitly above. The general argument is symbolic and applies to all inputs in the stated domains; no unrecorded numerical or experimental checks are used.",
+      "supplier_excerpts": [],
+      "risk_review": {
+        "status": "complete",
+        "notes": "Scoped authoring check matched each declared prerequisite interface to the actual consumer use and checked the stated boundary cases. This record is not independent proof approval."
+      },
+      "repair_confidence": 1
+    },
+    "def-csm-frontier-ssep-weak-heat-solution": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Definition assumes d\u22651 and a nonempty torus.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/csm_boundary",
+            "reason": "The torus has normalized measure one and d>=1. Even T=0 leaves the singleton time index {0}; the integral identity then specifies the given initial function class, without an empty space or empty-time-family case.",
+            "item_sha256": "da90245fe92ca7609850e60bbe7563d5383cf43fb677c9196ae866b94388f687",
+            "row_sha256": "3979a64462a2721c3fa526d25f389ef308ff761b09205fc154c17eb067246a2d"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/csm_boundary",
+            "reason": "The torus has normalized measure one and d>=1. Even T=0 leaves the singleton time index {0}; the integral identity then specifies the given initial function class, without an empty space or empty-time-family case."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition includes t=0 and fixes u0=rho0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The parameter d=1 is admitted by the Definition."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition permits rho0 identically 0 or 1 because it assumes only 0\u2264rho0\u22641."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition explicitly admits the finite horizon T=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Definition explicitly assumes AC\u03c9."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition does not state an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition does not state an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "Boundary and finite cases that affect the claim are checked explicitly above. The general argument is symbolic and applies to all inputs in the stated domains; no unrecorded numerical or experimental checks are used.",
+      "supplier_excerpts": [
+        {
+          "supplier": "def-countable-choice",
+          "carrier": "items/def-countable-choice.md",
+          "status": "Published supplier interface inspected; complete current proof inspected where the item has a proof. This records Step 1 use only and is not an independent approval.",
+          "source_section": "Definition",
+          "exact_statement": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "relevant_hypotheses_and_conventions": "The exact hypotheses and conventions used are restated in the consumer Facts & Assumptions where applicable; this excerpt records the inspected supplier interface.",
+          "supplier_proof_status": "Published supplier interface inspected; complete current proof inspected where the item has a proof. This records Step 1 use only and is not an independent approval.",
+          "consumer_use": "Declared mathematical prerequisite used in the consumer definition or example."
+        },
+        {
+          "supplier": "def-fourier-coefficients-and-trigonometric-polynomials",
+          "carrier": "items/def-fourier-coefficients-and-trigonometric-polynomials.md",
+          "status": "Published supplier interface inspected; complete current proof inspected where the item has a proof. This records Step 1 use only and is not an independent approval.",
+          "source_section": "Definition",
+          "exact_statement": "Assume the Axiom of Countable Choice ([[def-countable-choice]]) and let\n$\\mathbb T=\\mathbb R/\\mathbb Z$ with its normalized Haar integral\n$dm_{\\mathbb T}$ ([[def-the-one-dimensional-torus-and-normalized-haar-integral]]).\n\n**Characters.** For $k\\in\\mathbb Z$ define $e_k:\\mathbb T\\to\\mathbb C$ by\n$e_k(x):=\\exp(2\\pi i\\,k\\,\\widetilde x)$ for $x=[\\widetilde x]\\in\\mathbb T$,\nwhere $\\exp$ is the complex exponential ([[def-complex-exponential]]). The\ndefinition is independent of the representative $\\widetilde x$: replacing\n$\\widetilde x$ by $\\widetilde x+n$ with $n\\in\\mathbb Z$ adds the period\n$2\\pi kn$ to the argument of sine and cosine. Each $e_k$ is continuous, hence\nBorel, and satisfies\n\n$$e_k(x)e_l(x)=e_{k+l}(x),\\qquad |e_k(x)|=1,\\qquad \\overline{e_k(x)}=e_{-k}(x) ,$$\n\nthe last two by the cartesian form $\\exp(i\\theta)=\\cos\\theta+i\\sin\\theta$ of\n[[cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]] and\n[[lem-complex-conjugation-and-modulus-laws]]. In particular $e_0=1$ and every\n$e_k$ is bounded and nonzero everywhere.\n\n**Fourier coefficients.** Let $f\\in L^1(\\mathbb T;\\mathbb C)$\n([[def-complex-lp-and-euclidean-test-function-conventions]]), that is, a class\nof Borel functions with $\\int_{\\mathbb T}|f|\\,dm_{\\mathbb T}<+\\infty$. Define the\n**Fourier coefficient** of $f$ at $k\\in\\mathbb Z$ by\n\n$$\\widehat f(k):=\\int_{\\mathbb T}f(x)e_{-k}(x)\\,dm_{\\mathbb T}=\\int_{\\mathbb T}f(x)\\exp(-2\\pi ikx)\\,dm_{\\mathbb T}.$$\n\nThis is well defined: $|f\\,e_{-k}|=|f|$ because $|e_{-k}|=1$, so\n$f\\,e_{-k}\\in L^1(\\mathbb T;\\mathbb C)$ and its integral is finite; and the\nintegral depends only on the class of $f$, because it is unchanged when $f$ is\nmodified on a null set\n([[thm-the-lebesgue-integral-respects-almost-everywhere-equality]]). The map\n$f\\mapsto\\widehat f(k)$ is complex-linear for each $k$\n([[thm-linearity-of-the-lebesgue-integral-on-l-one]]).\n\n**Trigonometric polynomials.** A **trigonometric polynomial** on $\\mathbb T$ is\na finite complex linear combination of characters, $p=\\sum_{k\\in F}c_ke_k$, for\na finite $F\\subseteq\\mathbb Z$ and scalars $c_k\\in\\mathbb C$. The set of all\ntrigonometric polynomials is the span of $\\{e_k:k\\in\\mathbb Z\\}$; it is closed\nunder addition, scalar multiplication, multiplication and complex conjugation\n(by the identities for $e_ke_l$ and $\\overline{e_k}$), and it contains $e_0=1$.\nNothing is claimed here about uniqueness of the coefficients in an expansion,\nnor about the size of $\\widehat p$; those are properties of the characters\nproved below.\n\n**The finite torus.** On $\\mathbb T^n$, $n\\ge1$, the characters are\n$e_k(x):=\\exp(2\\pi i\\,k\\cdot x)$ for $k\\in\\mathbb Z^n$, where $k\\cdot x$ is the\nEuclidean dot product of a representative tuple; trigonometric polynomials are\nfinite complex linear combinations of these, and Fourier coefficients of\n$f\\in L^1(\\mathbb T^n;\\mathbb C)$ are\n$\\widehat f(k)=\\int_{\\mathbb T^n}f\\,e_{-k}\\,dm_{\\mathbb T^n}$. Fubini computes\nintegrals of products of characters on the product measure\n([[thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces]]); for\n$f\\in L^2(\\mathbb T^n;\\mathbb C)$ H\u00f6lder's inequality makes $f\\,e_{-k}$\nintegrable ([[thm-complex-holder-minkowski-and-the-quotient-norm]],\n[[thm-finite-measure-l-r-includes-into-l-p-for-p-less-r]]).",
+          "relevant_hypotheses_and_conventions": "The exact hypotheses and conventions used are restated in the consumer Facts & Assumptions where applicable; this excerpt records the inspected supplier interface.",
+          "supplier_proof_status": "Published supplier interface inspected; complete current proof inspected where the item has a proof. This records Step 1 use only and is not an independent approval.",
+          "consumer_use": "Declared mathematical prerequisite used in the consumer definition or example."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "notes": "Scoped authoring check matched each declared prerequisite interface to the actual consumer use and checked the stated boundary cases. This record is not independent proof approval."
+      },
+      "repair_confidence": 1
+    },
+    "lem-csm-frontier-ssep-heat-flow": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-fourier-coefficients-and-trigonometric-polynomials",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]) and let\n$\\mathbb T=\\mathbb R/\\mathbb Z$ with its normalized Haar integral\n$dm_{\\mathbb T}$ ([[def-the-one-dimensional-torus-and-normalized-haar-integral]]).\n\n**Characters.** For $k\\in\\mathbb Z$ define $e_k:\\mathbb T\\to\\mathbb C$ by\n$e_k(x):=\\exp(2\\pi i\\,k\\,\\widetilde x)$ for $x=[\\widetilde x]\\in\\mathbb T$,\nwhere $\\exp$ is the complex exponential ([[def-complex-exponential]]). The\ndefinition is independent of the representative $\\widetilde x$: replacing\n$\\widetilde x$ by $\\widetilde x+n$ with $n\\in\\mathbb Z$ adds the period\n$2\\pi kn$ to the argument of sine and cosine. Each $e_k$ is continuous, hence\nBorel, and satisfies\n\n$$e_k(x)e_l(x)=e_{k+l}(x),\\qquad |e_k(x)|=1,\\qquad \\overline{e_k(x)}=e_{-k}(x) ,$$\n\nthe last two by the cartesian form $\\exp(i\\theta)=\\cos\\theta+i\\sin\\theta$ of\n[[cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]] and\n[[lem-complex-conjugation-and-modulus-laws]]. In particular $e_0=1$ and every\n$e_k$ is bounded and nonzero everywhere.\n\n**Fourier coefficients.** Let $f\\in L^1(\\mathbb T;\\mathbb C)$\n([[def-complex-lp-and-euclidean-test-function-conventions]]), that is, a class\nof Borel functions with $\\int_{\\mathbb T}|f|\\,dm_{\\mathbb T}<+\\infty$. Define the\n**Fourier coefficient** of $f$ at $k\\in\\mathbb Z$ by\n\n$$\\widehat f(k):=\\int_{\\mathbb T}f(x)e_{-k}(x)\\,dm_{\\mathbb T}=\\int_{\\mathbb T}f(x)\\exp(-2\\pi ikx)\\,dm_{\\mathbb T}.$$\n\nThis is well defined: $|f\\,e_{-k}|=|f|$ because $|e_{-k}|=1$, so\n$f\\,e_{-k}\\in L^1(\\mathbb T;\\mathbb C)$ and its integral is finite; and the\nintegral depends only on the class of $f$, because it is unchanged when $f$ is\nmodified on a null set\n([[thm-the-lebesgue-integral-respects-almost-everywhere-equality]]). The map\n$f\\mapsto\\widehat f(k)$ is complex-linear for each $k$\n([[thm-linearity-of-the-lebesgue-integral-on-l-one]]).\n\n**Trigonometric polynomials.** A **trigonometric polynomial** on $\\mathbb T$ is\na finite complex linear combination of characters, $p=\\sum_{k\\in F}c_ke_k$, for\na finite $F\\subseteq\\mathbb Z$ and scalars $c_k\\in\\mathbb C$. The set of all\ntrigonometric polynomials is the span of $\\{e_k:k\\in\\mathbb Z\\}$; it is closed\nunder addition, scalar multiplication, multiplication and complex conjugation\n(by the identities for $e_ke_l$ and $\\overline{e_k}$), and it contains $e_0=1$.\nNothing is claimed here about uniqueness of the coefficients in an expansion,\nnor about the size of $\\widehat p$; those are properties of the characters\nproved below.\n\n**The finite torus.** On $\\mathbb T^n$, $n\\ge1$, the characters are\n$e_k(x):=\\exp(2\\pi i\\,k\\cdot x)$ for $k\\in\\mathbb Z^n$, where $k\\cdot x$ is the\nEuclidean dot product of a representative tuple; trigonometric polynomials are\nfinite complex linear combinations of these, and Fourier coefficients of\n$f\\in L^1(\\mathbb T^n;\\mathbb C)$ are\n$\\widehat f(k)=\\int_{\\mathbb T^n}f\\,e_{-k}\\,dm_{\\mathbb T^n}$. Fubini computes\nintegrals of products of characters on the product measure\n([[thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces]]); for\n$f\\in L^2(\\mathbb T^n;\\mathbb C)$ H\u00f6lder's inequality makes $f\\,e_{-k}$\nintegrable ([[thm-complex-holder-minkowski-and-the-quotient-norm]],\n[[thm-finite-measure-l-r-includes-into-l-p-for-p-less-r]]).",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1",
+            "3.2",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-fourier-basis-and-parseval-on-the-n-torus",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $n\\ge1$\nand let $e_k(x)=\\exp(2\\pi i\\,k\\cdot x)$, $k\\in\\mathbb Z^n$, be the coordinate\ncharacters on $\\mathbb T^n$\n([[def-the-one-dimensional-torus-and-normalized-haar-integral]],\n[[def-fourier-coefficients-and-trigonometric-polynomials]]). Then:\n\n1. $(e_k)_{k\\in\\mathbb Z^n}$ is an orthonormal family in the complex Hilbert\n   space $L^2(\\mathbb T^n)$;\n2. it is an orthonormal basis: its closed linear span is $L^2(\\mathbb T^n)$;\n3. consequently the Fourier expansion\n   $f=\\sum_{k\\in\\mathbb Z^n}\\widehat f(k)e_k$ and Parseval's identity\n   $$\\|f\\|_2^2=\\sum_{k\\in\\mathbb Z^n}|\\widehat f(k)|^2,\\qquad \\langle f,g\\rangle=\\sum_{k\\in\\mathbb Z^n}\\widehat f(k)\\overline{\\widehat g(k)}$$\n   hold for all $f,g\\in L^2(\\mathbb T^n)$, in the finite-subset-net sense; and\n4. the Fourier coefficient map is a surjective linear isometry of\n   $L^2(\\mathbb T^n)$ onto $\\ell^2(\\mathbb Z^n,\\mathbb C)$.\n\nNo Hilbert tensor-product identification is used anywhere.",
+          "uses": [
+            "2.2",
+            "3.2",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-csm-frontier-ssep-weak-heat-solution",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Countable Choice ($\\mathrm{AC}_\\omega$), meaning every at most countable family of nonempty sets has a choice function. Let $d\\ge1$, let $\\mathbb T^d=(\\mathbb R/\\mathbb Z)^d$ carry the normalized product Haar measure $dx$ with $dx(\\mathbb T^d)=1$, and let $\\rho_0$ be a real measurable function on $\\mathbb T^d$ with $0\\le\\rho_0\\le1$ almost everywhere. For a finite $T\\ge0$, a **weak heat solution with datum $\\rho_0$** is a family $(u_t)_{0\\le t\\le T}$ of real essentially bounded measurable-function classes (elements of $L^\\infty(\\mathbb T^d,dx;\\mathbb R)$), with $u_0=\\rho_0$ as a function class, such that for every complex-valued smooth periodic test function $G$, the map $t\\mapsto\\int_{\\mathbb T^d}u_t(x)G(x)\\,dx$ is continuous and\n\n$$\\int_{\\mathbb T^d}u_t(x)G(x)\\,dx=\\int_{\\mathbb T^d}\\rho_0(x)G(x)\\,dx+\\int_0^t\\int_{\\mathbb T^d}u_s(x)\\Delta G(x)\\,dx\\,ds$$\n\nfor every $0\\le t\\le T$. Here $\\Delta=\\sum_{i=1}^d\\partial_{x_i}^2$ is the periodic Laplacian; equality of function classes means equality almost everywhere with respect to $dx$. For the Fourier convention on this torus, set $e_k(x)=\\exp(2\\pi i k\\cdot x)$ for $k\\in\\mathbb Z^d$ and $\\widehat f(k)=\\int_{\\mathbb T^d}f(x)e_{-k}(x)\\,dx$ for $f\\in L^1(\\mathbb T^d,dx)$.",
+          "uses": [
+            "3.1",
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $0\\le\\rho_0\\le1$ and $dx(\\mathbb T^d)=1$, $\\rho_0\\in L^1$ and $|\\widehat\\rho_0(k)|\\le1$ for every $k$. For any smooth $G$ and integer $m\\ge1$, periodic integration by parts gives $(1+4\\pi^2|k|^2)^m\\widehat G(k)=\\widehat{(1-\\Delta)^mG}(k)$, hence $|\\widehat G(k)|\\le\\|(1-\\Delta)^mG\\|_{L^1}(1+4\\pi^2|k|^2)^{-m}$. If $q\\ge0$ is fixed, choose $m>(d+q)/2$; grouping lattice points by $r=\\|k\\|_\\infty$ gives at most $(2r+1)^d-(2r-1)^d\\le C_dr^{d-1}$ points in shell $r$. The shell contribution to $\\sum_k(1+|k|)^q|\\widehat G(k)|$ is at most $C r^{d-1+q-2m}$. Grouping shells into dyadic blocks $2^j\\le r<2^{j+1}$ bounds the $j$th block by $C'2^{j(d+q-2m)}$, a convergent geometric series since $2m>d+q$. Thus $\\sum_k(1+|k|)^q|\\widehat G(k)|<\\infty$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For each $t>0$ and each fixed derivative order, multiplication of the coefficients by any corresponding polynomial in $k$ still leaves an absolutely summable sequence, because $|\\widehat\\rho_0(k)|\\le1$ and the Gaussian factor $e^{-4\\pi^2|k|^2t}$ dominates every inverse power on lattice shells. Therefore the heat series and all fixed-order differentiated series converge uniformly on $\\mathbb T^d$ for $t\\ge\\varepsilon>0$. Pairing the $k$ and $-k$ terms shows $\\rho_t$ is real. Termwise differentiation is valid on every such compact time interval; both $\\partial_t$ and $\\Delta$ multiply the $k$th term by $-4\\pi^2|k|^2$, so $\\partial_t\\rho_t=\\Delta\\rho_t$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "The decay estimate in step 1.1 makes the Fourier series for $G$ and for each fixed space or time derivative of $P_tG$ uniformly absolutely convergent even at $t=0$. By [F2], the series at $t=0$ equals $G$ in $L^2$; both are continuous, so equality almost everywhere implies equality everywhere. Uniform convergence of the differentiated series proves smoothness and uniform derivative bounds on $[0,T]\\times\\mathbb T^d$. Also $\\|P_tG-G\\|_\\infty\\le\\sum_k|\\widehat G(k)|\\,|e^{-4\\pi^2|k|^2t}-1|\\to0$ by splitting into a finite set of modes and an absolutely summable tail. Termwise differentiation gives $\\partial_tP_tG=\\Delta P_tG$.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Absolute convergence permits termwise integration against $\\rho_0\\in L^1$. Reindexing $k\\mapsto-k$ and using the even multiplier $e^{-4\\pi^2|k|^2t}$ gives $\\int\\rho_tG=\\sum_k e^{-4\\pi^2|k|^2t}\\widehat\\rho_0(k)\\widehat G(-k)=\\int\\rho_0P_tG$. By step 2.2 this pairing tends to $\\int\\rho_0G$ as $t\\downarrow0$. Differentiating the pairing for $t>0$ and using $\\Delta P_tG=P_t\\Delta G$ yields $\\frac{d}{dt}\\int\\rho_tG=\\int\\rho_t\\Delta G$; integration from $0$ proves the weak identity in [F3]. Thus the constructed family is a weak heat solution.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "Parseval and the heat coefficients give $\\|\\rho_t-\\rho_0\\|_2^2=\\sum_k|\\widehat\\rho_0(k)|^2|e^{-4\\pi^2|k|^2t}-1|^2\\to0$ as $t\\downarrow0$: choose a finite set whose tail in the convergent series $\\sum_k|\\widehat\\rho_0(k)|^2$ is small, then take the limit on that finite set. For $\\epsilon>0$ put $a_\\epsilon(z)=\\frac12(1-z/\\sqrt{z^2+\\epsilon^2})$ and $\\Phi_\\epsilon(z)=\\int_0^z\\int_0^r a_\\epsilon(q)\\,dq\\,dr$. Then $\\Phi_\\epsilon$ is smooth and convex, $\\Phi_\\epsilon(0)=\\Phi_\\epsilon'(0)=0$, and $0\\le\\Phi_\\epsilon(z)\\le z^2/2$. On any interval $[a,b]\\subset(0,T]$, the heat equation, chain rule, and periodic integration by parts give $\\int\\Phi_\\epsilon(\\rho_b)-\\int\\Phi_\\epsilon(\\rho_a)=-\\int_a^b\\int\\Phi_\\epsilon''(\\rho_s)\\sum_{i=1}^d|\\partial_{x_i}\\rho_s|^2\\,dx\\,ds\\le0$. For each real $z$, the defining double integral tends to $\\frac12(z^-)^2$, where $z^-:=\\max\\{-z,0\\}$; dominated convergence on the bounded range of $\\rho$ over $[a,b]\\times\\mathbb T^d$ gives the same monotonicity for $\\|\\rho_t^-\\|_2^2$. Letting $a\\downarrow0$, the $L^2$ continuity just proved and $\\rho_0\\ge0$ imply $\\rho_t^-=0$. The assumed datum already gives the required bound when $T=0$.",
+          "step": "3.2",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For the upper bound put $b_\\epsilon(z)=\\frac12(1+(z-1)/\\sqrt{(z-1)^2+\\epsilon^2})$ and $\\Psi_\\epsilon(z)=\\int_1^z\\int_1^r b_\\epsilon(q)\\,dq\\,dr$. This is smooth and convex with $\\Psi_\\epsilon(1)=\\Psi_\\epsilon'(1)=0$ and $0\\le\\Psi_\\epsilon(z)\\le(z-1)^2/2$. The same integration by parts gives $\\int\\Psi_\\epsilon(\\rho_b)\\le\\int\\Psi_\\epsilon(\\rho_a)$ for $0<a<b$, and $\\Psi_\\epsilon(z)\\to\\frac12((z-1)^+)^2$, where $r^+:=\\max\\{r,0\\}$. Dominated convergence and $L^2$ continuity at zero, together with $\\rho_0\\le1$, give $(\\rho_t-1)^+=0$. The zero Fourier coefficient is unchanged by the heat multiplier, so $\\int\\rho_t=\\widehat\\rho_0(0)=\\int\\rho_0$. The assumed datum already gives the bound when $T=0$.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "step 3.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Let $(u_t)$ be any weak heat solution in the sense of [F3]. Testing its weak identity with $e_{-k}$ shows $g_k(t):=\\widehat u_t(k)$ is continuous and satisfies $g_k(t)=\\widehat\\rho_0(k)-4\\pi^2|k|^2\\int_0^t g_k(s)\\,ds$. Hence $g_k$ is differentiable and solves $g_k'=-4\\pi^2|k|^2g_k$, so $g_k(t)=e^{-4\\pi^2|k|^2t}\\widehat\\rho_0(k)$, the coefficient of the constructed $\\rho_t$. For each $t$, both functions are in $L^2$; equality of all Fourier coefficients and completeness in [F2] imply $u_t=\\rho_t$ almost everywhere. Thus the weak heat solution is unique.",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes d\u22651 and the nonempty continuum torus.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root, adopting the named delegated complete-source semantic worksheet",
+            "reason": "Released complete-source/eight-case worksheet research/physics-non-fluid-129-2026-10-21-r2-owner-step2-boundary-proposal-6/proposal.json: The Statement assumes d\u22651 and the nonempty continuum torus. Exact current Statement scope: Assume the Axiom of Countable Choice. Let $d\\ge1$ and let $\\rho_0:\\mathbb T^d\\to\\mathbb R$ be measurable with $0\\le\\rho_0\\le1$ almost everywhere, using normalized product Haar measure $dx$. For $k\\in\\mathbb Z^d$ define $e_k(x)=\\exp(2\\pi i k\\cdot x)$ and $\\widehat f(k)=\\int_{\\mathbb T^d}f(x)e_{-k}(x)\\,dx$. For $t>0$ set\n\n$$\\rho_t(x):=\\sum_{k\\in\\mathbb Z^d}e^{-4\\pi^2|k|^2t}\\widehat\\rho_0(k)e_k(x),$$\n\nand at $t=0$ set $\\rho_t=\\rho_0$ as an almost-everywhere class. For smooth periodic $G$, define\n\n$$P_tG(x):=\\sum_{k\\in\\mathbb Z^d}e^{-4\\pi^2|k|^2t}\\widehat G(k)e_k(x)\\quad(t>0),\\qquad P_0G:=G.$$\n\nThen on every strip $[\\epsilon,T]\\times\\mathbb T^d$ with $0<\\epsilon<T<\\infty$, the series for $\\rho_t$ and all its space and time derivatives converge absolutely and uniformly; in particular $\\rho_t$ is real and smooth for each $t>0$ and $\\partial_t\\rho_t=\\Delta\\rho_t$. For every finite $T$ and every smooth $G$, $P_tG$ is smooth on $[0,T]\\times\\math. Root adopts and binds this actual semantic disposition to the current item and row; this is not independent proof acceptance.",
+            "item_sha256": "53ebd623bb186729879953ee7d323877395ba443039cb82ff64171863649fad8",
+            "row_sha256": "db4d1a3002effef82f1a9eb9de158ed86853bb6ab84b48525c10fc85d3e807ca"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The time-zero value is assigned to rho0; step 3.2 proves L2 continuity there."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The zero Fourier mode has multiplier 1, so constants and mass are preserved in steps 2.2 and 4.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 3.2 and 4.1 establish preservation of the boundary values 0 and 1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 2.1, 2.2, and 3.1 include the heat-flow and weak-formulation endpoints; the derivative series are controlled on each positive-time strip."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A1 and F2 specify AC\u03c9 for Fourier completeness, used in step 5.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Fourier heat multipliers define positive-time smooth densities, smooth test evolutions through time zero, preserve0\u2264rho\u22641 and mass, and give uniqueness via each Fourier coefficient. The public claim does not assert a converse characterization; the displayed construction or estimate is the one-way conclusion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Fourier heat multipliers define positive-time smooth densities, smooth test evolutions through time zero, preserve0\u2264rho\u22641 and mass, and give uniqueness via each Fourier coefficient. The public claim does not assert a converse characterization; the displayed construction or estimate is the one-way conclusion."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "zero Fourier mode",
+          "status": "checked",
+          "evidence": "The multiplier in steps 2.2 and 4.1 is 1 for k=0, proving mass conservation."
+        },
+        {
+          "name": "constant boundary data",
+          "status": "checked",
+          "evidence": "Steps 3.2 and 4.1 yield zero positive/negative parts for rho0 equal to 0 or 1."
+        }
+      ],
+      "finite_checks_disposition": "Boundary and finite cases that affect the claim are checked explicitly above. The general argument is symbolic and applies to all inputs in the stated domains; no unrecorded numerical or experimental checks are used.",
+      "supplier_excerpts": [
+        {
+          "supplier": "def-countable-choice",
+          "carrier": "items/def-countable-choice.md",
+          "status": "Published supplier interface inspected; complete current proof inspected where the item has a proof. This records Step 1 use only and is not an independent approval.",
+          "source_section": "Definition",
+          "exact_statement": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "relevant_hypotheses_and_conventions": "The exact hypotheses and conventions used are restated in the consumer Facts & Assumptions where applicable; this excerpt records the inspected supplier interface.",
+          "supplier_proof_status": "Published supplier interface inspected; complete current proof inspected where the item has a proof. This records Step 1 use only and is not an independent approval.",
+          "consumer_use": "Facts A1 use this supplier interface."
+        },
+        {
+          "supplier": "def-csm-frontier-ssep-weak-heat-solution",
+          "carrier": "items/def-csm-frontier-ssep-weak-heat-solution.md",
+          "status": "Draft supplier interface and complete current proof inspected for this use; current readiness is recorded separately. This is not independent proof approval.",
+          "source_section": "Definition",
+          "exact_statement": "Assume the Axiom of Countable Choice ($\\mathrm{AC}_\\omega$), meaning every at most countable family of nonempty sets has a choice function. Let $d\\ge1$, let $\\mathbb T^d=(\\mathbb R/\\mathbb Z)^d$ carry the normalized product Haar measure $dx$ with $dx(\\mathbb T^d)=1$, and let $\\rho_0$ be a real measurable function on $\\mathbb T^d$ with $0\\le\\rho_0\\le1$ almost everywhere. For a finite $T\\ge0$, a **weak heat solution with datum $\\rho_0$** is a family $(u_t)_{0\\le t\\le T}$ of real essentially bounded measurable-function classes (elements of $L^\\infty(\\mathbb T^d,dx;\\mathbb R)$), with $u_0=\\rho_0$ as a function class, such that for every complex-valued smooth periodic test function $G$, the map $t\\mapsto\\int_{\\mathbb T^d}u_t(x)G(x)\\,dx$ is continuous and\n\n$$\\int_{\\mathbb T^d}u_t(x)G(x)\\,dx=\\int_{\\mathbb T^d}\\rho_0(x)G(x)\\,dx+\\int_0^t\\int_{\\mathbb T^d}u_s(x)\\Delta G(x)\\,dx\\,ds$$\n\nfor every $0\\le t\\le T$. Here $\\Delta=\\sum_{i=1}^d\\partial_{x_i}^2$ is the periodic Laplacian; equality of function classes means equality almost everywhere with respect to $dx$. For the Fourier convention on this torus, set $e_k(x)=\\exp(2\\pi i k\\cdot x)$ for $k\\in\\mathbb Z^d$ and $\\widehat f(k)=\\int_{\\mathbb T^d}f(x)e_{-k}(x)\\,dx$ for $f\\in L^1(\\mathbb T^d,dx)$.",
+          "relevant_hypotheses_and_conventions": "The exact hypotheses and conventions used are restated in the consumer Facts & Assumptions where applicable; this excerpt records the inspected supplier interface.",
+          "supplier_proof_status": "Draft supplier interface and complete current proof inspected for this use; current readiness is recorded separately. This is not independent proof approval.",
+          "consumer_use": "Facts F3 use this supplier interface."
+        },
+        {
+          "supplier": "def-fourier-coefficients-and-trigonometric-polynomials",
+          "carrier": "items/def-fourier-coefficients-and-trigonometric-polynomials.md",
+          "status": "Published supplier interface inspected; complete current proof inspected where the item has a proof. This records Step 1 use only and is not an independent approval.",
+          "source_section": "Definition",
+          "exact_statement": "Assume the Axiom of Countable Choice ([[def-countable-choice]]) and let\n$\\mathbb T=\\mathbb R/\\mathbb Z$ with its normalized Haar integral\n$dm_{\\mathbb T}$ ([[def-the-one-dimensional-torus-and-normalized-haar-integral]]).\n\n**Characters.** For $k\\in\\mathbb Z$ define $e_k:\\mathbb T\\to\\mathbb C$ by\n$e_k(x):=\\exp(2\\pi i\\,k\\,\\widetilde x)$ for $x=[\\widetilde x]\\in\\mathbb T$,\nwhere $\\exp$ is the complex exponential ([[def-complex-exponential]]). The\ndefinition is independent of the representative $\\widetilde x$: replacing\n$\\widetilde x$ by $\\widetilde x+n$ with $n\\in\\mathbb Z$ adds the period\n$2\\pi kn$ to the argument of sine and cosine. Each $e_k$ is continuous, hence\nBorel, and satisfies\n\n$$e_k(x)e_l(x)=e_{k+l}(x),\\qquad |e_k(x)|=1,\\qquad \\overline{e_k(x)}=e_{-k}(x) ,$$\n\nthe last two by the cartesian form $\\exp(i\\theta)=\\cos\\theta+i\\sin\\theta$ of\n[[cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]] and\n[[lem-complex-conjugation-and-modulus-laws]]. In particular $e_0=1$ and every\n$e_k$ is bounded and nonzero everywhere.\n\n**Fourier coefficients.** Let $f\\in L^1(\\mathbb T;\\mathbb C)$\n([[def-complex-lp-and-euclidean-test-function-conventions]]), that is, a class\nof Borel functions with $\\int_{\\mathbb T}|f|\\,dm_{\\mathbb T}<+\\infty$. Define the\n**Fourier coefficient** of $f$ at $k\\in\\mathbb Z$ by\n\n$$\\widehat f(k):=\\int_{\\mathbb T}f(x)e_{-k}(x)\\,dm_{\\mathbb T}=\\int_{\\mathbb T}f(x)\\exp(-2\\pi ikx)\\,dm_{\\mathbb T}.$$\n\nThis is well defined: $|f\\,e_{-k}|=|f|$ because $|e_{-k}|=1$, so\n$f\\,e_{-k}\\in L^1(\\mathbb T;\\mathbb C)$ and its integral is finite; and the\nintegral depends only on the class of $f$, because it is unchanged when $f$ is\nmodified on a null set\n([[thm-the-lebesgue-integral-respects-almost-everywhere-equality]]). The map\n$f\\mapsto\\widehat f(k)$ is complex-linear for each $k$\n([[thm-linearity-of-the-lebesgue-integral-on-l-one]]).\n\n**Trigonometric polynomials.** A **trigonometric polynomial** on $\\mathbb T$ is\na finite complex linear combination of characters, $p=\\sum_{k\\in F}c_ke_k$, for\na finite $F\\subseteq\\mathbb Z$ and scalars $c_k\\in\\mathbb C$. The set of all\ntrigonometric polynomials is the span of $\\{e_k:k\\in\\mathbb Z\\}$; it is closed\nunder addition, scalar multiplication, multiplication and complex conjugation\n(by the identities for $e_ke_l$ and $\\overline{e_k}$), and it contains $e_0=1$.\nNothing is claimed here about uniqueness of the coefficients in an expansion,\nnor about the size of $\\widehat p$; those are properties of the characters\nproved below.\n\n**The finite torus.** On $\\mathbb T^n$, $n\\ge1$, the characters are\n$e_k(x):=\\exp(2\\pi i\\,k\\cdot x)$ for $k\\in\\mathbb Z^n$, where $k\\cdot x$ is the\nEuclidean dot product of a representative tuple; trigonometric polynomials are\nfinite complex linear combinations of these, and Fourier coefficients of\n$f\\in L^1(\\mathbb T^n;\\mathbb C)$ are\n$\\widehat f(k)=\\int_{\\mathbb T^n}f\\,e_{-k}\\,dm_{\\mathbb T^n}$. Fubini computes\nintegrals of products of characters on the product measure\n([[thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces]]); for\n$f\\in L^2(\\mathbb T^n;\\mathbb C)$ H\u00f6lder's inequality makes $f\\,e_{-k}$\nintegrable ([[thm-complex-holder-minkowski-and-the-quotient-norm]],\n[[thm-finite-measure-l-r-includes-into-l-p-for-p-less-r]]).",
+          "relevant_hypotheses_and_conventions": "The exact hypotheses and conventions used are restated in the consumer Facts & Assumptions where applicable; this excerpt records the inspected supplier interface.",
+          "supplier_proof_status": "Published supplier interface inspected; complete current proof inspected where the item has a proof. This records Step 1 use only and is not an independent approval.",
+          "consumer_use": "Facts F1 use this supplier interface."
+        },
+        {
+          "supplier": "thm-fourier-basis-and-parseval-on-the-n-torus",
+          "carrier": "items/thm-fourier-basis-and-parseval-on-the-n-torus.md",
+          "status": "Published supplier interface inspected; complete current proof inspected where the item has a proof. This records Step 1 use only and is not an independent approval.",
+          "source_section": "Statement",
+          "exact_statement": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $n\\ge1$\nand let $e_k(x)=\\exp(2\\pi i\\,k\\cdot x)$, $k\\in\\mathbb Z^n$, be the coordinate\ncharacters on $\\mathbb T^n$\n([[def-the-one-dimensional-torus-and-normalized-haar-integral]],\n[[def-fourier-coefficients-and-trigonometric-polynomials]]). Then:\n\n1. $(e_k)_{k\\in\\mathbb Z^n}$ is an orthonormal family in the complex Hilbert\n   space $L^2(\\mathbb T^n)$;\n2. it is an orthonormal basis: its closed linear span is $L^2(\\mathbb T^n)$;\n3. consequently the Fourier expansion\n   $f=\\sum_{k\\in\\mathbb Z^n}\\widehat f(k)e_k$ and Parseval's identity\n   $$\\|f\\|_2^2=\\sum_{k\\in\\mathbb Z^n}|\\widehat f(k)|^2,\\qquad \\langle f,g\\rangle=\\sum_{k\\in\\mathbb Z^n}\\widehat f(k)\\overline{\\widehat g(k)}$$\n   hold for all $f,g\\in L^2(\\mathbb T^n)$, in the finite-subset-net sense; and\n4. the Fourier coefficient map is a surjective linear isometry of\n   $L^2(\\mathbb T^n)$ onto $\\ell^2(\\mathbb Z^n,\\mathbb C)$.\n\nNo Hilbert tensor-product identification is used anywhere.",
+          "relevant_hypotheses_and_conventions": "The exact hypotheses and conventions used are restated in the consumer Facts & Assumptions where applicable; this excerpt records the inspected supplier interface.",
+          "supplier_proof_status": "Published supplier interface inspected; complete current proof inspected where the item has a proof. This records Step 1 use only and is not an independent approval.",
+          "consumer_use": "Facts F2 use this supplier interface."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-91",
+        "notes": "Independently checked all seven steps against the weak-solution and Fourier/Parseval interfaces under AC_omega. Polynomial Fourier decay via lattice shells makes all fixed derivatives summable; Gaussian damping handles L1 initial data on positive-time strips. Duality gives continuity and weak identity; Parseval gives L2 convergence at zero, convex smooth truncations give both 0 and 1 bounds, the zero mode preserves mass, and scalar Fourier ODE uniqueness applies at each time to L-infinity classes. T=0 and zero/constant data are covered. No load-bearing source beyond the explicit local proof and exact suppliers; no defect found."
+      },
+      "repair_confidence": 1,
+      "current_boundary_worksheet": {
+        "proposal": "research/physics-non-fluid-129-2026-10-21-r2-owner-step2-boundary-proposal-6/proposal.json",
+        "source_sha256": "9f7f34e1b9065a4f90b913cb0b8f5c1013c4f556096cdef43175fbd0ee6ce33d",
+        "qualification": "Released complete current source/eight-case semantic worksheet; root transcribed exact current rows. No independent acceptance or finite computation asserted."
+      }
+    },
+    "def-csm-frontier-ssep-diffusive-model": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Definition has d\u22651, N\u22653, and a nonempty finite torus.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/csm_boundary",
+            "reason": "The lattice has N^d sites with N>=3,d>=1, and its binary configuration set has 2^(N^d) elements. The zero-particle sector is a singleton, not an empty spatial index; the empirical and Laplacian sums are defined.",
+            "item_sha256": "8fa8360ceafdff20c20f5aa129bf6606ea440e2ac52da91ccccb8117cba890ac",
+            "row_sha256": "24788ee0a9b59dde1e699ef18acbe3cc87254bac83db6008c6914d32079009ad"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/csm_boundary",
+            "reason": "The lattice has N^d sites with N>=3,d>=1, and its binary configuration set has 2^(N^d) elements. The zero-particle sector is a singleton, not an empty spatial index; the empirical and Laplacian sums are defined."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The occupancy sector k=0 is explicitly a singleton constant chain in the Definition."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Definition admits d=1 and explicitly defines the k=1 sector."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition states that the full chain is reducible across particle sectors and both extreme sectors are constant chains."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The model Definition has no time-interval endpoint assertion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Definition explicitly assumes the Axiom of Choice for the finite-chain suppliers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition does not state an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition does not state an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "Boundary and finite cases that affect the claim are checked explicitly above. The general argument is symbolic and applies to all inputs in the stated domains; no unrecorded numerical or experimental checks are used.",
+      "supplier_excerpts": [
+        {
+          "supplier": "def-axiom-of-choice",
+          "carrier": "items/def-axiom-of-choice.md",
+          "status": "Published supplier interface inspected; complete current proof inspected where the item has a proof. This records Step 1 use only and is not an independent approval.",
+          "source_section": "Definition",
+          "exact_statement": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "relevant_hypotheses_and_conventions": "The exact hypotheses and conventions used are restated in the consumer Facts & Assumptions where applicable; this excerpt records the inspected supplier interface.",
+          "supplier_proof_status": "Published supplier interface inspected; complete current proof inspected where the item has a proof. This records Step 1 use only and is not an independent approval.",
+          "consumer_use": "Declared mathematical prerequisite used in the consumer definition or example."
+        },
+        {
+          "supplier": "def-csm-dk-finite-reversible-rate-model",
+          "carrier": "items/def-csm-dk-finite-reversible-rate-model.md",
+          "status": "Published supplier interface inspected; complete current proof inspected where the item has a proof. This records Step 1 use only and is not an independent approval.",
+          "source_section": "Definition",
+          "exact_statement": "Assume the Axiom of Choice [[def-axiom-of-choice]]. A **finite reversible stochastic rate model** consists of an integer $r\\ge2$, the finite state set $E=\\{1,\\ldots,r\\}$, real energy parameters $e_a\\in\\mathbb R$, an inverse-energy parameter $\\beta>0$, and finite transition rates $w_{ab}\\ge0$ for distinct $a,b\\in E$. When physical units are assigned, $e_a$ is measured in joules, $\\beta$ in joules$^{-1}$, and $w_{ab}$ in seconds$^{-1}$; this mathematical definition does not assert a physical realization. Define\n\n$$Z:=\\sum_{a\\in E}e^{-\\beta e_a},\\qquad \\pi_a:=Z^{-1}e^{-\\beta e_a}.$$\n\nThen $Z$ is finite and positive, and $\\pi$ is a strictly positive probability vector. Require $w_{ab}>0$ exactly when $w_{ba}>0$, require the undirected graph with edge $\\{a,b\\}$ whenever $w_{ab}>0$ to be connected, and impose detailed balance $\\pi_aw_{ab}=\\pi_bw_{ba}$. Define the row generator $Q$ by $Q_{ab}=w_{ab}$ for $a\\ne b$ and $Q_{aa}=-q_a$, where $q_a:=\\sum_{b\\ne a}w_{ab}$. Since $r\\ge2$ and the graph is connected, every $q_a>0$. Thus $(Qf)_a=\\sum_{b\\ne a}w_{ab}(f_b-f_a)$ for a column observable $f$, and a row probability vector evolves by $p'=pQ$.\n\nFor any observable $f:E\\to\\mathbb R$, write $\\pi(f):=\\sum_{a\\in E}\\pi_af_a$. For $f,g:E\\to\\mathbb R$, define $\\langle f,g\\rangle_\\pi:=\\sum_{a\\in E}\\pi_af_ag_a$. Since $E$ is finite and every $\\pi_a>0$, all real functions on $E$ belong to this finite-dimensional real inner-product space, denoted $L^2(E,\\pi)$; equality in it is pointwise equality.\n\nThe associated jump-chain construction waits an exponential time of rate $q_a$ in state $a$ and then selects state $b\\ne a$ with probability $w_{ab}/q_a$, using fresh independent random choices at successive jumps. Here an exponential time of rate $q>0$ has survival probability $\\Pr(\\tau>t)=e^{-qt}$ for $t\\ge0$. The Ionescu\u2013Tulcea construction [[thm-ionescu-tulcea-construction-of-a-markov-chain]] supplies the countable random sequence under the stated Choice assumption. The theorem on this page proves nonexplosion, identifies the transition semigroup, and establishes the positive reversible spectral gap. This is a finite mathematical rate model, not a derivation of rates from Hamiltonian mechanics.",
+          "relevant_hypotheses_and_conventions": "The exact hypotheses and conventions used are restated in the consumer Facts & Assumptions where applicable; this excerpt records the inspected supplier interface.",
+          "supplier_proof_status": "Published supplier interface inspected; complete current proof inspected where the item has a proof. This records Step 1 use only and is not an independent approval.",
+          "consumer_use": "Declared mathematical prerequisite used in the consumer definition or example."
+        },
+        {
+          "supplier": "def-csm-frontier-finite-generator-chain",
+          "carrier": "items/def-csm-frontier-finite-generator-chain.md",
+          "status": "Draft supplier interface and complete current proof inspected for this use; current readiness is recorded separately. This is not independent proof approval.",
+          "source_section": "Definition",
+          "exact_statement": "Let $E=\\{1,\\ldots,m\\}$ for a finite integer $m\\ge1$. A rate matrix on $E$ is a real matrix $L=(L_{ij})_{i,j\\in E}$ such that $L_{ij}\\ge0$ for $i\\ne j$ and $\\sum_{j\\in E}L_{ij}=0$ for every $i$. Write $\\lambda_i=\\sum_{j\\ne i}L_{ij}$, so $L_{ii}=-\\lambda_i$. The row convention acts on a column observable $f:E\\to\\mathbb R$ by $(Lf)(i)=\\sum_jL_{ij}f(j)$; a row probability vector evolves by right multiplication.\n\nFix an initial probability vector $\\nu$ on $E$ and put $q=\\max_i\\lambda_i$. If $q=0$, then $L=0$ and the associated realization is the constant process $X_t=Y_0$ with $Y_0\\sim\\nu$. If $q>0$, put $R=I+L/q$, a stochastic matrix. A uniformized realization consists of a probability space carrying a discrete-time Markov sequence $(Y_n)_{n\\ge0}$ with initial law $\\nu$ and transition matrix $R$, and independent random variables $(W_n)_{n\\ge1}$ that are independent of the entire sequence $Y$ and satisfy $\\mathbb P(W_n>u)=e^{-qu}$ for $u\\ge0$. Here a discrete-time Markov sequence with transition matrix $R$ means that\n$$\\mathbb P(A\\cap\\{Y_{n+1}=j\\})=\\mathbb E[\\mathbf1_A R_{Y_nj}]$$\nfor every $n\\ge0$, $j\\in E$, and $A\\in\\sigma(Y_0,\\ldots,Y_n)$. Each $W_n$ therefore has the exponential distribution of rate $q$; in particular its mean is $q^{-1}$. Require $\\sum_{n\\ge1}W_n=+\\infty$ almost surely. Put $T_0=0$, $T_n=\\sum_{k=1}^nW_k$, and, on this probability-one event, $N_t=\\max\\{n:T_n\\le t\\}$ and $X_t=Y_{N_t}$. On its null complement set $N_t=0$ and $X_t=Y_0$. The construction filtration is $\\mathcal F_t=\\sigma(N_s,X_s:0\\le s\\le t)$; it records event counts and states through time $t$ and is not completed or made right-continuous by this definition.\n\nThis uniformized construction permits reducible rate matrices and states with zero exit rate. A local existence result proves that every finite rate matrix and initial law admit such a realization and that its conditional transition matrices are $e^{tL}:=\\sum_{n=0}^\\infty t^nL^n/n!$.",
+          "relevant_hypotheses_and_conventions": "The exact hypotheses and conventions used are restated in the consumer Facts & Assumptions where applicable; this excerpt records the inspected supplier interface.",
+          "supplier_proof_status": "Draft supplier interface and complete current proof inspected for this use; current readiness is recorded separately. This is not independent proof approval.",
+          "consumer_use": "Declared mathematical prerequisite used in the consumer definition or example."
+        },
+        {
+          "supplier": "lem-csm-frontier-finite-generator-chain-existence",
+          "carrier": "items/lem-csm-frontier-finite-generator-chain-existence.md",
+          "status": "Draft supplier interface and complete current proof inspected for this use; current readiness is recorded separately. This is not independent proof approval.",
+          "source_section": "Statement",
+          "exact_statement": "Assume the Axiom of Choice. Let $E$ be a nonempty finite set, let $L$ be a rate matrix on $E$ with nonnegative off-diagonal entries and zero row sums, and let $\\nu$ be an initial probability vector. Then there exists a uniformized realization under the conventions stated below. Its paths are c\u00e0dl\u00e0g and almost surely have only finitely many event times on each bounded interval (nonexplosion), and, for all $0\\le s\\le t$,\n$$\\mathbb P(X_t=j\\mid\\mathcal F_s)=(e^{(t-s)L})_{X_sj}\\quad\\text{almost surely},$$\nwhere $\\mathcal F_s=\\sigma(N_u,X_u:0\\le u\\le s)$ is the construction filtration. In particular, $e^{tL}$ is the transition matrix from any initial state.",
+          "relevant_hypotheses_and_conventions": "The exact hypotheses and conventions used are restated in the consumer Facts & Assumptions where applicable; this excerpt records the inspected supplier interface.",
+          "supplier_proof_status": "Draft supplier interface and complete current proof inspected for this use; current readiness is recorded separately. This is not independent proof approval.",
+          "consumer_use": "Declared mathematical prerequisite used in the consumer definition or example."
+        },
+        {
+          "supplier": "lem-csm-frontier-ssep-sector-connectivity",
+          "carrier": "items/lem-csm-frontier-ssep-sector-connectivity.md",
+          "status": "Draft supplier interface and complete current proof inspected for this use; current readiness is recorded separately. This is not independent proof approval.",
+          "source_section": "Statement",
+          "exact_statement": "Let $G=(V,E)$ be a finite connected simple undirected graph with $m:=|V|\\ge1$. For $0\\le k\\le m$, let $\\mathcal C_k(G)$ be the set of all $k$-element subsets of $V$. Join distinct $A,B\\in\\mathcal C_k(G)$ when there is an edge $\\{x,y\\}\\in E$ with $x\\in A$, $y\\notin A$, and $B=(A\\setminus\\{x\\})\\cup\\{y\\}$. Then this graph on $\\mathcal C_k(G)$ is connected.",
+          "relevant_hypotheses_and_conventions": "The exact hypotheses and conventions used are restated in the consumer Facts & Assumptions where applicable; this excerpt records the inspected supplier interface.",
+          "supplier_proof_status": "Draft supplier interface and complete current proof inspected for this use; current readiness is recorded separately. This is not independent proof approval.",
+          "consumer_use": "Declared mathematical prerequisite used in the consumer definition or example."
+        }
+      ],
+      "risk_review": {
+        "status": "open",
+        "reviewer": "alpha-batch-91",
+        "notes": "Checked the whole Definition against AC, finite reversible rate model, finite-generator Definition and existence proof, and sector-connectivity proof. N>=3 gives each unordered bond once, including N=3; distinct nontrivial swaps change precisely their endpoints, so no duplicated target-rate ambiguity. Rates N^2, mass N^-d and centered Laplacian give D=1. Finite uniformization permits reducibility and arbitrary initial vectors; q=0, singleton empty/full sectors and zero exit states are covered by the existence proof. Uniform sector weights satisfy detailed balance. The missing justified_by metadata on the outside batch-85 generator definition is confirmed and referred to its owner; this consumer separately declares the sound existence lemma, so no mathematical premise is absent. No consumer interface edit needed. Mathematical review is complete, but this risk disposition remains open until owner resolution of reader:91:1 and refuter:91:1; do not infer closure from the proof check."
+      },
+      "repair_confidence": 1
+    },
+    "lem-csm-frontier-ssep-bracket": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-csm-frontier-ssep-diffusive-model",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice, meaning every family of nonempty sets has a choice function. Fix an integer $d\\ge1$ and an integer $N\\ge3$. Let $\\Lambda_N=(\\mathbb Z/N\\mathbb Z)^d$, with each coordinate represented by $0,1,\\ldots,N-1$, and let $\\mathcal E_N$ be the set of unordered nearest-neighbor bonds $\\{x,x+e_i\\}$, where $1\\le i\\le d$ and addition is modulo $N$. The condition $N\\ge3$ makes this a simple graph with each bond listed once as $x$ ranges over $\\Lambda_N$. The site graph is connected because any two coordinate tuples are joined by finitely many steps of $+e_i$ or $-e_i$.\n\nThe configuration space is $\\Omega_N=\\{\\eta:\\Lambda_N\\to\\{0,1\\}\\}$, ordered lexicographically by its binary occupation vector in the fixed site order; this labels it as a finite set $\\{1,\\ldots,2^{N^d}\\}$. The occupation $\\eta_x$ is $1$ for an occupied site and $0$ for a vacant site. For $b=\\{x,y\\}\\in\\mathcal E_N$, let $\\eta^b$ be the configuration obtained by swapping $\\eta_x$ and $\\eta_y$.\n\nThe coordinates $x/N$ have dimensionless spacing $1/N$ on the unit torus, and $t$ is dimensionless diffusive time: it is the microscopic unit-rate bond clock accelerated by the factor $N^2$. Thus the continuum heat equation below has normalized diffusion coefficient $D=1$.\n\nDefine a rate matrix $L_N$ on $\\Omega_N$ by giving each distinct state change $\\eta\\to\\eta^b\\ne\\eta$ rate $N^2$ and setting the diagonal entry to the negative sum of the off-diagonal row. If the two occupations on a bond agree, swapping them produces no state change and contributes no off-diagonal transition. On a column observable $f:\\Omega_N\\to\\mathbb R$, use the row-generator convention $(L_Nf)(\\eta)=\\sum_{\\xi\\ne\\eta}L_N(\\eta,\\xi)(f(\\xi)-f(\\eta))$; a row probability vector evolves by $p'=pL_N$. The **symmetric simple exclusion process (SSEP)** is the uniformized finite-state chain with rate matrix $L_N$ and any specified initial probability vector. The finite-generator existence result supplies its all-pairs transition matrices $e^{tL_N}$ and c\u00e0dl\u00e0g paths. Every jump conserves $\\sum_{x\\in\\Lambda_N}\\eta_x$.\n\nFor $k=0,1,\\ldots,N^d$, the fixed-occupancy sector is $\\Omega_{N,k}=\\{\\eta\\in\\Omega_N:\\sum_x\\eta_x=k\\}$. When $0<k<N^d$, this sector has at least two states and its transition graph is connected by the fixed-occupancy connectivity lemma. Setting every sector energy to $0$, $\\beta=1$, and each allowed transition rate to $N^2$ makes this sector a finite reversible stochastic rate model with uniform stationary weights. The sectors $k=0$ and $k=N^d$ are singleton constant chains. The full SSEP state graph is reducible across particle-number sectors; the generic finite rate-matrix construction, not the irreducible reversible-model definition, defines the full process.\n\nLet $\\mathbb T^d=(\\mathbb R/\\mathbb Z)^d$ with normalized Haar measure $dx$. For $x\\in\\Lambda_N$, write $x/N\\in\\mathbb T^d$ for the point with coordinates represented in $[0,1)$. The empirical measure and its action on a smooth periodic test function $G$ are\n\n$$\\pi_t^N:=N^{-d}\\sum_{x\\in\\Lambda_N}\\eta_x(t)\\,\\delta_{x/N},\\qquad \\langle\\pi_t^N,G\\rangle:=\\int_{\\mathbb T^d}G\\,d\\pi_t^N=N^{-d}\\sum_{x\\in\\Lambda_N}\\eta_x(t)G(x/N).$$\n\nHere $\\delta_y$ denotes unit point mass at $y$. Thus $\\pi_t^N$ is a finite positive measure of total mass at most $1$, not necessarily a probability measure. For a smooth periodic $G$, define its discrete Laplacian on grid points by\n\n$$\\Delta_NG(x/N):=N^2\\sum_{i=1}^d\\bigl[G((x+e_i)/N)+G((x-e_i)/N)-2G(x/N)\\bigr].$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-csm-frontier-finite-chain-martingale",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $E$ be finite and nonempty, let $L$ be a rate matrix on $E$, let $X$ be its uniformized realization from the preceding existence result, and let $f:E\\to\\mathbb R$ be bounded. Put $g=Lf$ and\n$$M_t=f(X_t)-f(X_0)-\\int_0^t g(X_s)\\,ds,\\qquad \\Gamma_f(i)=L(f^2)(i)-2f(i)Lf(i).$$For every finite $T$, $(M_t)_{0\\le t\\le T}$ is a square-integrable martingale relative to the construction filtration, and$$A_t:=\\int_0^t\\Gamma_f(X_s)\\,ds$$\nis its continuous predictable bracket: $A_0=0$, $A$ is increasing and predictable, and $M_t^2-A_t$ is a martingale. The bracket is understood in the continuous predictable increasing compensator convention stated in the proof.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $f_G(\\eta)=N^{-d}\\sum_x\\eta_xG(x/N)$. For the bond $\\{x,x+e_i\\}$, $f_G(\\eta^{x,x+e_i})-f_G(\\eta)=N^{-d}(\\eta_{x+e_i}-\\eta_x)(G(x/N)-G((x+e_i)/N))$. Summing its rate-$N^2$ contribution over all $x,i$ and reindexing the terms containing $\\eta_{x+e_i}$ gives $L_Nf_G(\\eta)=N^{-d}\\sum_x\\eta_xN^2\\sum_i[G((x+e_i)/N)+G((x-e_i)/N)-2G(x/N)]=\\langle\\pi^N(\\eta),\\Delta_NG\\rangle$. Thus the finite-chain martingale in [F2], applied to $f_G$, is exactly $M_t^{N,G}$ and has bracket given by the sum of rates times squared jumps.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "A bond with equal endpoint occupations has zero jump; otherwise its squared jump is $N^{-2d}(G((x+e_i)/N)-G(x/N))^2$. Substituting these jumps and rate $N^2$ into [F2] gives the displayed bracket. By the fundamental theorem of calculus along the coordinate segment, $|G((x+e_i)/N)-G(x/N)|\\le N^{-1}\\|\\partial_iG\\|_\\infty$, while $(\\eta_{x+e_i}-\\eta_x)^2\\le1$. There are $N^d$ bonds in each coordinate direction, so the bracket is increasing, continuous, predictable, and bounded by $TN^{-d}\\sum_i\\|\\partial_iG\\|_\\infty^2$. The finite state space makes $f_G$ bounded, hence [F2] also gives square integrability.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes d\u22651 and N\u22653.",
+          "case_reasoning": "The Statement assumes d\u22651 and N\u22653. The finite-state squared-jump formula counts each SSEP bond and has the N^-d gradient bound. Equal occupations and constant G give zero jumps, and t=0 has zero bracket.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root, adopting the named delegated complete-source semantic worksheet",
+            "reason": "Released complete-source/eight-case worksheet research/physics-non-fluid-129-2026-10-21-r2-owner-step2-boundary-proposal-5/proposal.json: The Statement assumes d\u22651 and N\u22653. The finite-state squared-jump formula counts each SSEP bond and has the N^-d gradient bound. Equal occupations and constant G give zero jumps, and t=0 has zero bracket. Exact current Statement scope: Assume the Axiom of Choice. Let $d\\ge1$, $N\\ge3$, $T\\ge0$, and let $(\\eta_t)_{0\\le t\\le T}$ be the SSEP from the diffusive-model definition with any initial probability vector. For a real smooth periodic $G:\\mathbb T^d\\to\\mathbb R$, set\n\n$$M_t^{N,G}:=\\langle\\pi_t^N,G\\rangle-\\langle\\pi_0^N,G\\rangle-\\int_0^t\\langle\\pi_s^N,\\Delta_NG\\rangle\\,ds.$$\n\nThen $M^{N,G}$ is a square-integrable martingale. Its continuous predictable bracket is\n\n$$A_t^{N,G}=N^{2-2d}\\int_0^t\\sum_{i=1}^d\\sum_{x\\in\\Lambda_N}(\\eta_{x+e_i}(s)-\\eta_x(s))^2\\bigl(G((x+e_i)/N)-G(x/N)\\bigr)^2\\,ds,$$\n\nin the continuous predictable compensator convention of the finite-chain martingale supplier. In particular,\n\n$$A_T^{N,G}\\le T N^{-d}\\sum_{i=1}^d\\|\\partial_iG\\|_\\infty^2.$$. Root adopts and binds this actual semantic disposition to the current item and row; this is not independent proof acceptance.",
+            "item_sha256": "9f0aa188b7ed980776eba9055ae4b6b8f67f5545b1ddd7ea3a1deb809f7ddbfa",
+            "row_sha256": "224dd1cacf204249e84a7aa36827bf6692a5219f2031ab900a176a69508c8916"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For constant G every bond increment vanishes, so the displayed bracket is zero by step 2.1.",
+          "case_reasoning": "For constant G every bond increment vanishes, so the displayed bracket is zero by step 2.1. The finite-state squared-jump formula counts each SSEP bond and has the N^-d gradient bound. Equal occupations and constant G give zero jumps, and t=0 has zero bracket."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For d=1 the sum in step 2.1 has exactly one coordinate direction.",
+          "case_reasoning": "For d=1 the sum in step 2.1 has exactly one coordinate direction. The finite-state squared-jump formula counts each SSEP bond and has the N^-d gradient bound. Equal occupations and constant G give zero jumps, and t=0 has zero bracket."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 makes every equal-occupation bond contribute zero.",
+          "case_reasoning": "Step 2.1 makes every equal-occupation bond contribute zero. The finite-state squared-jump formula counts each SSEP bond and has the N^-d gradient bound. Equal occupations and constant G give zero jumps, and t=0 has zero bracket."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The bracket integral is zero at t=0 and when T=0, as step 2.1 shows.",
+          "case_reasoning": "The bracket integral is zero at t=0 and when T=0, as step 2.1 shows. The finite-state squared-jump formula counts each SSEP bond and has the N^-d gradient bound. Equal occupations and constant G give zero jumps, and t=0 has zero bracket."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement A1 records the Choice assumption required by the finite-chain supplier.",
+          "case_reasoning": "Statement A1 records the Choice assumption required by the finite-chain supplier. The finite-state squared-jump formula counts each SSEP bond and has the N^-d gradient bound. Equal occupations and constant G give zero jumps, and t=0 has zero bracket."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement contains no biconditional.",
+          "case_reasoning": "The Statement contains no biconditional. The finite-state squared-jump formula counts each SSEP bond and has the N^-d gradient bound. Equal occupations and constant G give zero jumps, and t=0 has zero bracket.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root, binding released delegated semantic worksheet",
+            "reason": "Released complete-source/eight-case worksheet research/physics-non-fluid-129-2026-10-21-r2-owner-step2-boundary-proposal-5/proposal.json: The Statement contains no biconditional. The finite-state squared-jump formula counts each SSEP bond and has the N^-d gradient bound. Equal occupations and constant G give zero jumps, and t=0 has zero bracket. Exact current Statement scope: Assume the Axiom of Choice. Let $d\\ge1$, $N\\ge3$, $T\\ge0$, and let $(\\eta_t)_{0\\le t\\le T}$ be the SSEP from the diffusive-model definition with any initial probability vector. For a real smooth periodic $G:\\mathbb T^d\\to\\mathbb R$, set\n\n$$M_t^{N,G}:=\\langle\\pi_t^N,G\\rangle-\\langle\\pi_0^N,G\\rangle-\\int_0^t\\langle\\pi_s^N,\\Delta_NG\\rangle\\,ds.$$\n\nThen $M^{N,G}$ is a square-integrable martingale. Its continuous predictable bracket is\n\n$$A_t^{N,G}=N^{2-2d}\\int_0^t\\sum_{i=1}^d\\sum_{x\\in\\Lambda_N}(\\eta_{x+e_i}(s)-\\eta_x(s))^2\\bigl(G((x+e_i)/N)-G(x/N)\\bigr)^2\\,ds,$$\n\nin the continuous predictable compensator convention of the finite-chain martingale supplier. In particular,\n\n$$A_T^{N,G}\\le T N^{-d}\\sum_{i=1}^d\\|\\partial_iG\\|_\\infty^2.$$. Root adopts and binds this actual semantic disposition to the current item and row; this is not independent proof acceptance.",
+            "item_sha256": "9f0aa188b7ed980776eba9055ae4b6b8f67f5545b1ddd7ea3a1deb809f7ddbfa",
+            "row_sha256": "b5418604072e4d20720cfe4a39cf0838dc85680201091986c51f484580ce84f6"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement contains no biconditional.",
+          "case_reasoning": "The Statement contains no biconditional. The finite-state squared-jump formula counts each SSEP bond and has the N^-d gradient bound. Equal occupations and constant G give zero jumps, and t=0 has zero bracket.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root, binding released delegated semantic worksheet",
+            "reason": "Released complete-source/eight-case worksheet research/physics-non-fluid-129-2026-10-21-r2-owner-step2-boundary-proposal-5/proposal.json: The Statement contains no biconditional. The finite-state squared-jump formula counts each SSEP bond and has the N^-d gradient bound. Equal occupations and constant G give zero jumps, and t=0 has zero bracket. Exact current Statement scope: Assume the Axiom of Choice. Let $d\\ge1$, $N\\ge3$, $T\\ge0$, and let $(\\eta_t)_{0\\le t\\le T}$ be the SSEP from the diffusive-model definition with any initial probability vector. For a real smooth periodic $G:\\mathbb T^d\\to\\mathbb R$, set\n\n$$M_t^{N,G}:=\\langle\\pi_t^N,G\\rangle-\\langle\\pi_0^N,G\\rangle-\\int_0^t\\langle\\pi_s^N,\\Delta_NG\\rangle\\,ds.$$\n\nThen $M^{N,G}$ is a square-integrable martingale. Its continuous predictable bracket is\n\n$$A_t^{N,G}=N^{2-2d}\\int_0^t\\sum_{i=1}^d\\sum_{x\\in\\Lambda_N}(\\eta_{x+e_i}(s)-\\eta_x(s))^2\\bigl(G((x+e_i)/N)-G(x/N)\\bigr)^2\\,ds,$$\n\nin the continuous predictable compensator convention of the finite-chain martingale supplier. In particular,\n\n$$A_T^{N,G}\\le T N^{-d}\\sum_{i=1}^d\\|\\partial_iG\\|_\\infty^2.$$. Root adopts and binds this actual semantic disposition to the current item and row; this is not independent proof acceptance.",
+            "item_sha256": "9f0aa188b7ed980776eba9055ae4b6b8f67f5545b1ddd7ea3a1deb809f7ddbfa",
+            "row_sha256": "cb3270b358350459a2265f8060a8b95b1014291534dda82ce7b6e01df30ae0cd"
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "constant test",
+          "status": "checked",
+          "evidence": "With G constant all bond differences vanish, so step 2.1 gives A=0."
+        },
+        {
+          "name": "equal occupations",
+          "status": "checked",
+          "evidence": "Step 2.1 makes a bond with eta_x=eta_y contribute zero to both jump and bracket."
+        }
+      ],
+      "finite_checks_disposition": "Boundary and finite cases that affect the claim are checked explicitly above. The general argument is symbolic and applies to all inputs in the stated domains; no unrecorded numerical or experimental checks are used.",
+      "supplier_excerpts": [
+        {
+          "supplier": "def-axiom-of-choice",
+          "carrier": "items/def-axiom-of-choice.md",
+          "status": "Published supplier interface inspected; complete current proof inspected where the item has a proof. This records Step 1 use only and is not an independent approval.",
+          "source_section": "Definition",
+          "exact_statement": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "relevant_hypotheses_and_conventions": "The exact hypotheses and conventions used are restated in the consumer Facts & Assumptions where applicable; this excerpt records the inspected supplier interface.",
+          "supplier_proof_status": "Published supplier interface inspected; complete current proof inspected where the item has a proof. This records Step 1 use only and is not an independent approval.",
+          "consumer_use": "Facts A1 use this supplier interface."
+        },
+        {
+          "supplier": "def-csm-frontier-ssep-diffusive-model",
+          "carrier": "items/def-csm-frontier-ssep-diffusive-model.md",
+          "status": "Draft supplier interface and complete current proof inspected for this use; current readiness is recorded separately. This is not independent proof approval.",
+          "source_section": "Definition",
+          "exact_statement": "Assume the Axiom of Choice, meaning every family of nonempty sets has a choice function. Fix an integer $d\\ge1$ and an integer $N\\ge3$. Let $\\Lambda_N=(\\mathbb Z/N\\mathbb Z)^d$, with each coordinate represented by $0,1,\\ldots,N-1$, and let $\\mathcal E_N$ be the set of unordered nearest-neighbor bonds $\\{x,x+e_i\\}$, where $1\\le i\\le d$ and addition is modulo $N$. The condition $N\\ge3$ makes this a simple graph with each bond listed once as $x$ ranges over $\\Lambda_N$. The site graph is connected because any two coordinate tuples are joined by finitely many steps of $+e_i$ or $-e_i$.\n\nThe configuration space is $\\Omega_N=\\{\\eta:\\Lambda_N\\to\\{0,1\\}\\}$, ordered lexicographically by its binary occupation vector in the fixed site order; this labels it as a finite set $\\{1,\\ldots,2^{N^d}\\}$. The occupation $\\eta_x$ is $1$ for an occupied site and $0$ for a vacant site. For $b=\\{x,y\\}\\in\\mathcal E_N$, let $\\eta^b$ be the configuration obtained by swapping $\\eta_x$ and $\\eta_y$.\n\nThe coordinates $x/N$ have dimensionless spacing $1/N$ on the unit torus, and $t$ is dimensionless diffusive time: it is the microscopic unit-rate bond clock accelerated by the factor $N^2$. Thus the continuum heat equation below has normalized diffusion coefficient $D=1$.\n\nDefine a rate matrix $L_N$ on $\\Omega_N$ by giving each distinct state change $\\eta\\to\\eta^b\\ne\\eta$ rate $N^2$ and setting the diagonal entry to the negative sum of the off-diagonal row. If the two occupations on a bond agree, swapping them produces no state change and contributes no off-diagonal transition. On a column observable $f:\\Omega_N\\to\\mathbb R$, use the row-generator convention $(L_Nf)(\\eta)=\\sum_{\\xi\\ne\\eta}L_N(\\eta,\\xi)(f(\\xi)-f(\\eta))$; a row probability vector evolves by $p'=pL_N$. The **symmetric simple exclusion process (SSEP)** is the uniformized finite-state chain with rate matrix $L_N$ and any specified initial probability vector. The finite-generator existence result supplies its all-pairs transition matrices $e^{tL_N}$ and c\u00e0dl\u00e0g paths. Every jump conserves $\\sum_{x\\in\\Lambda_N}\\eta_x$.\n\nFor $k=0,1,\\ldots,N^d$, the fixed-occupancy sector is $\\Omega_{N,k}=\\{\\eta\\in\\Omega_N:\\sum_x\\eta_x=k\\}$. When $0<k<N^d$, this sector has at least two states and its transition graph is connected by the fixed-occupancy connectivity lemma. Setting every sector energy to $0$, $\\beta=1$, and each allowed transition rate to $N^2$ makes this sector a finite reversible stochastic rate model with uniform stationary weights. The sectors $k=0$ and $k=N^d$ are singleton constant chains. The full SSEP state graph is reducible across particle-number sectors; the generic finite rate-matrix construction, not the irreducible reversible-model definition, defines the full process.\n\nLet $\\mathbb T^d=(\\mathbb R/\\mathbb Z)^d$ with normalized Haar measure $dx$. For $x\\in\\Lambda_N$, write $x/N\\in\\mathbb T^d$ for the point with coordinates represented in $[0,1)$. The empirical measure and its action on a smooth periodic test function $G$ are\n\n$$\\pi_t^N:=N^{-d}\\sum_{x\\in\\Lambda_N}\\eta_x(t)\\,\\delta_{x/N},\\qquad \\langle\\pi_t^N,G\\rangle:=\\int_{\\mathbb T^d}G\\,d\\pi_t^N=N^{-d}\\sum_{x\\in\\Lambda_N}\\eta_x(t)G(x/N).$$\n\nHere $\\delta_y$ denotes unit point mass at $y$. Thus $\\pi_t^N$ is a finite positive measure of total mass at most $1$, not necessarily a probability measure. For a smooth periodic $G$, define its discrete Laplacian on grid points by\n\n$$\\Delta_NG(x/N):=N^2\\sum_{i=1}^d\\bigl[G((x+e_i)/N)+G((x-e_i)/N)-2G(x/N)\\bigr].$$",
+          "relevant_hypotheses_and_conventions": "The exact hypotheses and conventions used are restated in the consumer Facts & Assumptions where applicable; this excerpt records the inspected supplier interface.",
+          "supplier_proof_status": "Draft supplier interface and complete current proof inspected for this use; current readiness is recorded separately. This is not independent proof approval.",
+          "consumer_use": "Facts F1 use this supplier interface."
+        },
+        {
+          "supplier": "lem-csm-frontier-finite-chain-martingale",
+          "carrier": "items/lem-csm-frontier-finite-chain-martingale.md",
+          "status": "Draft supplier interface and complete current proof inspected for this use; current readiness is recorded separately. This is not independent proof approval.",
+          "source_section": "Statement",
+          "exact_statement": "Assume the Axiom of Choice. Let $E$ be finite and nonempty, let $L$ be a rate matrix on $E$, let $X$ be its uniformized realization from the preceding existence result, and let $f:E\\to\\mathbb R$ be bounded. Put $g=Lf$ and\n$$M_t=f(X_t)-f(X_0)-\\int_0^t g(X_s)\\,ds,\\qquad \\Gamma_f(i)=L(f^2)(i)-2f(i)Lf(i).$$For every finite $T$, $(M_t)_{0\\le t\\le T}$ is a square-integrable martingale relative to the construction filtration, and$$A_t:=\\int_0^t\\Gamma_f(X_s)\\,ds$$\nis its continuous predictable bracket: $A_0=0$, $A$ is increasing and predictable, and $M_t^2-A_t$ is a martingale. The bracket is understood in the continuous predictable increasing compensator convention stated in the proof.",
+          "relevant_hypotheses_and_conventions": "The exact hypotheses and conventions used are restated in the consumer Facts & Assumptions where applicable; this excerpt records the inspected supplier interface.",
+          "supplier_proof_status": "Draft supplier interface and complete current proof inspected for this use; current readiness is recorded separately. This is not independent proof approval.",
+          "consumer_use": "Facts F2 use this supplier interface."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-91",
+        "notes": "Read both proof steps and the current finite-chain martingale proof. The rate-matrix row convention yields exactly the centered Laplacian after reindexing. Each jump is N^-d times the occupation difference times the reversed test difference; squaring removes the sign. Multiplying by N^2 and counting N^d bonds per direction gives T N^-d sum_i ||partial_i G||_infinity^2. Periodicity handles boundary bonds; equal occupations, constant G, empty/full sectors and T=0 yield zero. The current supplier establishes all-pairs square-integrability, predictable continuous compensator and uniqueness without completed filtration. No mathematical defect; outside metadata referral retained."
+      },
+      "repair_confidence": 1,
+      "current_boundary_worksheet": {
+        "proposal": "research/physics-non-fluid-129-2026-10-21-r2-owner-step2-boundary-proposal-5/proposal.json",
+        "source_sha256": "ba943049f5b8d5ebc6bf7661dd342cf5feab86384ee9f01b51aca479a6353a89",
+        "qualification": "Released complete current source/eight-case semantic worksheet; root transcribed exact current rows. No independent acceptance or finite computation asserted."
+      }
+    },
+    "lem-csm-frontier-ssep-time-dependent-martingale": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-csm-frontier-ssep-diffusive-model",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice, meaning every family of nonempty sets has a choice function. Fix an integer $d\\ge1$ and an integer $N\\ge3$. Let $\\Lambda_N=(\\mathbb Z/N\\mathbb Z)^d$, with each coordinate represented by $0,1,\\ldots,N-1$, and let $\\mathcal E_N$ be the set of unordered nearest-neighbor bonds $\\{x,x+e_i\\}$, where $1\\le i\\le d$ and addition is modulo $N$. The condition $N\\ge3$ makes this a simple graph with each bond listed once as $x$ ranges over $\\Lambda_N$. The site graph is connected because any two coordinate tuples are joined by finitely many steps of $+e_i$ or $-e_i$.\n\nThe configuration space is $\\Omega_N=\\{\\eta:\\Lambda_N\\to\\{0,1\\}\\}$, ordered lexicographically by its binary occupation vector in the fixed site order; this labels it as a finite set $\\{1,\\ldots,2^{N^d}\\}$. The occupation $\\eta_x$ is $1$ for an occupied site and $0$ for a vacant site. For $b=\\{x,y\\}\\in\\mathcal E_N$, let $\\eta^b$ be the configuration obtained by swapping $\\eta_x$ and $\\eta_y$.\n\nThe coordinates $x/N$ have dimensionless spacing $1/N$ on the unit torus, and $t$ is dimensionless diffusive time: it is the microscopic unit-rate bond clock accelerated by the factor $N^2$. Thus the continuum heat equation below has normalized diffusion coefficient $D=1$.\n\nDefine a rate matrix $L_N$ on $\\Omega_N$ by giving each distinct state change $\\eta\\to\\eta^b\\ne\\eta$ rate $N^2$ and setting the diagonal entry to the negative sum of the off-diagonal row. If the two occupations on a bond agree, swapping them produces no state change and contributes no off-diagonal transition. On a column observable $f:\\Omega_N\\to\\mathbb R$, use the row-generator convention $(L_Nf)(\\eta)=\\sum_{\\xi\\ne\\eta}L_N(\\eta,\\xi)(f(\\xi)-f(\\eta))$; a row probability vector evolves by $p'=pL_N$. The **symmetric simple exclusion process (SSEP)** is the uniformized finite-state chain with rate matrix $L_N$ and any specified initial probability vector. The finite-generator existence result supplies its all-pairs transition matrices $e^{tL_N}$ and c\u00e0dl\u00e0g paths. Every jump conserves $\\sum_{x\\in\\Lambda_N}\\eta_x$.\n\nFor $k=0,1,\\ldots,N^d$, the fixed-occupancy sector is $\\Omega_{N,k}=\\{\\eta\\in\\Omega_N:\\sum_x\\eta_x=k\\}$. When $0<k<N^d$, this sector has at least two states and its transition graph is connected by the fixed-occupancy connectivity lemma. Setting every sector energy to $0$, $\\beta=1$, and each allowed transition rate to $N^2$ makes this sector a finite reversible stochastic rate model with uniform stationary weights. The sectors $k=0$ and $k=N^d$ are singleton constant chains. The full SSEP state graph is reducible across particle-number sectors; the generic finite rate-matrix construction, not the irreducible reversible-model definition, defines the full process.\n\nLet $\\mathbb T^d=(\\mathbb R/\\mathbb Z)^d$ with normalized Haar measure $dx$. For $x\\in\\Lambda_N$, write $x/N\\in\\mathbb T^d$ for the point with coordinates represented in $[0,1)$. The empirical measure and its action on a smooth periodic test function $G$ are\n\n$$\\pi_t^N:=N^{-d}\\sum_{x\\in\\Lambda_N}\\eta_x(t)\\,\\delta_{x/N},\\qquad \\langle\\pi_t^N,G\\rangle:=\\int_{\\mathbb T^d}G\\,d\\pi_t^N=N^{-d}\\sum_{x\\in\\Lambda_N}\\eta_x(t)G(x/N).$$\n\nHere $\\delta_y$ denotes unit point mass at $y$. Thus $\\pi_t^N$ is a finite positive measure of total mass at most $1$, not necessarily a probability measure. For a smooth periodic $G$, define its discrete Laplacian on grid points by\n\n$$\\Delta_NG(x/N):=N^2\\sum_{i=1}^d\\bigl[G((x+e_i)/N)+G((x-e_i)/N)-2G(x/N)\\bigr].$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-csm-frontier-finite-generator-chain-existence",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $E$ be a nonempty finite set, let $L$ be a rate matrix on $E$ with nonnegative off-diagonal entries and zero row sums, and let $\\nu$ be an initial probability vector. Then there exists a uniformized realization under the conventions stated below. Its paths are c\u00e0dl\u00e0g and almost surely have only finitely many event times on each bounded interval (nonexplosion), and, for all $0\\le s\\le t$,\n$$\\mathbb P(X_t=j\\mid\\mathcal F_s)=(e^{(t-s)L})_{X_sj}\\quad\\text{almost surely},$$\nwhere $\\mathcal F_s=\\sigma(N_u,X_u:0\\le u\\le s)$ is the construction filtration. In particular, $e^{tL}$ is the transition matrix from any initial state.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-csm-frontier-finite-chain-martingale",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $E$ be finite and nonempty, let $L$ be a rate matrix on $E$, let $X$ be its uniformized realization from the preceding existence result, and let $f:E\\to\\mathbb R$ be bounded. Put $g=Lf$ and\n$$M_t=f(X_t)-f(X_0)-\\int_0^t g(X_s)\\,ds,\\qquad \\Gamma_f(i)=L(f^2)(i)-2f(i)Lf(i).$$For every finite $T$, $(M_t)_{0\\le t\\le T}$ is a square-integrable martingale relative to the construction filtration, and$$A_t:=\\int_0^t\\Gamma_f(X_s)\\,ds$$\nis its continuous predictable bracket: $A_0=0$, $A$ is increasing and predictable, and $M_t^2-A_t$ is a martingale. The bracket is understood in the continuous predictable increasing compensator convention stated in the proof.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-progressively-measurable-and-predictable-process",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice [[def-axiom-of-choice]]. Let\n$(\\Omega,\\mathcal F,P)$ be a probability space with a continuous-time\nfiltration $(\\mathcal F_t)_{t\\ge0}$\n[[def-continuous-time-filtration-and-all-pairs-martingale]]. All processes here\nare real-valued and indexed by $[0,\\infty)$. AC is inherited from the cited\ncontinuous-time-filtration interface, whose separate martingale clause uses\nconditional expectation. Once the filtered probability space and stopping\ntimes are given, the progressive and predictable constructions below make no\nadditional choice: they use only generated sigma-algebras and product\nrectangles.\n\n1. **Progressively measurable.** A process $X=(X_t)_{t\\ge0}$ is\n   **progressively measurable** relative to $(\\mathcal F_t)$ when for every\n   $t\\ge0$ the restricted map\n   $[0,t]\\times\\Omega\\to\\mathbb R$, $(s,\\omega)\\mapsto X_s(\\omega)$, is\n   measurable for the product sigma-algebra\n   $\\mathcal B([0,t])\\otimes\\mathcal F_t$\n   [[def-product-sigma-algebra-and-finite-product-sigma-algebras]].\n\n2. **Time-zero and interval generators.** On the product space\n   $[0,\\infty)\\times\\Omega$, let $\\mathcal P$ be the sigma-algebra generated by\n   the family\n   $$\\mathcal G:=\\bigl\\{(s,u]\\times A:\\ 0\\le s<u<\\infty,\\ A\\in\\mathcal F_s\\bigr\\}\\ \\cup\\ \\bigl\\{\\{0\\}\\times A:\\ A\\in\\mathcal F_0\\bigr\\}.$$\n   The interval generators with $s=0$ are included, so $(0,u]\\times A$ with\n   $A\\in\\mathcal F_0$ is a generator. The sigma-algebra $\\mathcal P$ exists by\n   [[thm-generated-sigma-algebra-exists-and-is-minimal]] and is called the\n   **predictable sigma-algebra**. A process $H=(H_t)_{t\\ge0}$ is\n   **predictable** when the map $(s,\\omega)\\mapsto H_s(\\omega)$ is\n   $\\mathcal P$-measurable. For a finite horizon $T>0$ we write\n   $\\mathcal P_T$ for the sigma-algebra on $[0,T]\\times\\Omega$ generated by the\n   same family restricted to $u\\le T$ together with the time-zero generators;\n   this is the trace of $\\mathcal P$ on $[0,T]\\times\\Omega$. Indeed, the\n   trace of an interval generator is empty when $s\\ge T$, and otherwise is\n   $(s,\\min(u,T)]\\times A$, while time-zero generators are unchanged.\n   Conversely every listed finite-horizon generator is such a trace.\n\n3. **Sections, adaptedness, and null sets.** Two structural conventions are\n   used repeatedly and are part of the definition.\n   (a) Every generator is a measurable rectangle of\n   $\\mathcal B([0,\\infty))\\otimes\\mathcal F$, hence\n   $\\mathcal P\\subseteq\\mathcal B([0,\\infty))\\otimes\\mathcal F$; the time-zero\n   generator $\\{0\\}\\times A$ has $dt\\otimes P$-measure zero for every $A$. A\n   set in $\\mathcal P$ has its section at each fixed time $s$ in $\\mathcal F_s$:\n   sets with that section property form a sigma-algebra, and each generator\n   has the property by the increasing-filtration condition. Its section at\n   each fixed $\\omega$ is Borel in time, by the same sigma-algebra argument.\n   (b) If a process is predictable then it is progressively measurable: for\n   $s\\le t$ the section $\\omega\\mapsto H_s(\\omega)$ is $\\mathcal F_s$-measurable\n   $\\subseteq\\mathcal F_t$-measurable, and the progressive-measurability claim\n   is the restriction of the joint map to $[0,t]\\times\\Omega$; the restriction\n   of a $\\mathcal P$-measurable map to $[0,t]\\times\\Omega$ is measurable for\n   $\\mathcal B([0,t])\\otimes\\mathcal F_t$ because every generator with $u\\le t$\n   lies in that product sigma-algebra and the generators with $u>t$ have\n   intersection with $[0,t]\\times\\Omega$ of the form $(s,t]\\times A$ with\n   $s<t$ and $A\\in\\mathcal F_s$, or the empty set when $s\\ge t$.\n   The time-zero generators also lie in\n   $\\mathcal B([0,t])\\otimes\\mathcal F_t$.\n\nThe family $\\mathcal G$ need not itself contain the whole space, but a finite intersection\nof generators is empty or again a generator, or a time-zero generator, because\n$(s,u]\\cap(s',u']=(s\\vee s',u\\wedge u']$ and $A\\cap A'\\in\\mathcal F_{s\\vee s'}$\nwhenever $A\\in\\mathcal F_s$, $A'\\in\\mathcal F_{s'}$, while\n$\\{0\\}\\times A$ is disjoint from every interval generator, including\n$(0,u]\\times A'$. Two time-zero generators intersect in\n$\\{0\\}\\times(A\\cap A')$ with $A\\cap A'\\in\\mathcal F_0$.\nThus the family consisting of the whole space\ntogether with finite intersections of generators is a pi-system generating\n$\\mathcal P$; this is the structural fact used by the density theorem below.\n\nBecause predictability is a measurability requirement for the joint map, it is\npreserved by pointwise limits, products and linear combinations of predictable\nprocesses. A deterministic function $h$ of time defines a predictable process\nexactly when $h$ is Borel measurable: the sets $C$ for which\n$C\\times\\Omega\\in\\mathcal P$ form a sigma-algebra containing the intervals\n$(s,u]$ and $\\{0\\}$, hence all Borel sets. Conversely, take any fixed\n$\\omega\\in\\Omega$ (a probability space is nonempty) and use the Borel\ntime-section property from 3(a) on every inverse image of an open set.\nThis single choice uses no choice axiom. In particular the\nindicators $1_{[0,u]}$ and $1_{(0,u]}$ are predictable for every deterministic\n$u\\ge0$, and the process $s\\mapsto 1_{s\\le\\tau(\\omega)}$ for a stopping time\n$\\tau$ [[def-continuous-time-stopping-time]] is predictable, since\n$$\\{(s,\\omega):s>\\tau(\\omega)\\}=\\bigcup_{q\\in\\mathbb Q_{>0}}(q,\\infty)\\times\\{\\tau<q\\}=\\bigcup_{q\\in\\mathbb Q_{>0}}\\bigcup_{n>q}(q,n]\\times\\{\\tau<q\\}$$\nis a countable union of generators: for rational $q>0$ one has\n$\\{\\tau<q\\}=\\bigcup_{q'<q,\\ q'\\in\\mathbb Q}\\{\\tau\\le q'\\}\\in\\mathcal F_q$. The\ncomplement of that set inside $[0,\\infty)\\times\\Omega$ is the event of the\nindicator, so $1_{[0,\\tau]}$ is predictable; its left-continuity in the time\nvariable is the visual form of the same computation.\n\nNo completeness of the filtration and no right continuity of $(\\mathcal F_t)$\nis used or assumed. Apart from the inherited ambient assumption just recorded,\nthe constructions in this definition are choice-free.",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For fixed $s$, reindexing the bond sum as in the model generator gives $L_NF_s^N(\\eta)=\\langle\\pi^N(\\eta),\\Delta_NH(s,\\cdot)\\rangle$; also $\\partial_sF_s^N(\\eta)=\\langle\\pi^N(\\eta),\\partial_sH(s,\\cdot)\\rangle$. Hence the compensating drift in the Statement is exactly $(\\partial_sF_s^N+L_NF_s^N)(\\eta_s)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fix $N$ and a state $i=\\eta_s$. By [F2], on an interval of length $h$, two or more potential uniformization events have probability $O_N(h^2)$, one actual transition $i\\to j$ has probability $hL_N(i,j)+O_N(h^2)$, and no state change has probability $1-h\\lambda_i+O_N(h^2)$, with $\\lambda_i=\\sum_{j\\ne i}L_N(i,j)$. Taylor expansion is uniform over the finite state set and $s\\in[0,T]$. If no state change occurs, then $F_{s+h}^N(i)-F_s^N(i)=h\\partial_sF_s^N(i)+O_N(h^2)$ and the compensating integral is $h(\\partial_sF_s^N+L_NF_s^N)(i)+O_N(h^2)$, so the increment of $M^N$ is $-hL_NF_s^N(i)+O_N(h^2)$. A single transition $i\\to j$ gives increment $F_s^N(j)-F_s^N(i)+O_N(h)$; summing its conditional mean over $j$ gives $hL_NF_s^N(i)+O_N(h^2)$, which cancels the no-transition term. Paths with at least two potential events contribute $O_N(h^2)$ because $M^N$ has bounded increments for fixed $N,T$. Therefore $|\\mathbb E[M_{s+h}^N-M_s^N\\mid\\mathcal F_s]|\\le C_Nh^2$. In the conditional second moment, no transition contributes $O_N(h^2)$, one transition contributes $h\\sum_{j\\ne i}L_N(i,j)(F_s^N(j)-F_s^N(i))^2+O_N(h^2)=h\\Gamma_{F_s^N}(i)+O_N(h^2)$, and two or more potential events contribute $O_N(h^2)$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $T=0$, the only time is $0$ and $M_0^N=0$. For $T>0$, fix $s<t$ and partition $[s,t]$ into $n$ equal intervals of length $h=(t-s)/n$. Applying the conditional-mean estimate from step 2.1 on every subinterval, then the tower property, bounds $|\\mathbb E[M_t^N-M_s^N\\mid\\mathcal F_s]|$ by $nC_Nh^2\\to0$. Thus $M^N$ is an all-pairs martingale. For fixed $N$ its paths are bounded on $[0,T]$ because the state space is finite, $H$ and its time derivative are bounded, and the compensating integrand is bounded; hence it is square-integrable.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Set $\\gamma_s(\\eta)=\\Gamma_{F_s^N}(\\eta)$ and $A_t^N=\\int_0^t\\gamma_s(\\eta_s)ds$. If $T=0$, both processes are zero. For $T>0$, the second-moment expansion in step 2.1 and continuity of $\\gamma_s(i)$ in $s$ imply $\\mathbb E[A_{s+h}^N-A_s^N\\mid\\mathcal F_s]=h\\gamma_s(\\eta_s)+O_N(h^2)$: without a state change the integrand differs from $\\gamma_s(\\eta_s)$ by $O_N(h)$, and a state change has probability $O_N(h)$ and changes the bounded integrand over an interval of length $h$. Hence $\\mathbb E[(M_{s+h}^N-M_s^N)^2-(A_{s+h}^N-A_s^N)\\mid\\mathcal F_s]=O_N(h^2)$. For fixed $s<t$, partition $[s,t]$ into $n$ equal intervals and write $\\Delta_jM=M_{t_{j+1}}^N-M_{t_j}^N$, $\\Delta_jA=A_{t_{j+1}}^N-A_{t_j}^N$. Since $M^N$ is a martingale, $\\mathbb E[M_{t_j}^N\\Delta_jM\\mid\\mathcal F_s]=0$ by the tower property. Expanding the square, conditioning each remainder $\\Delta_jM^2-\\Delta_jA$ first on $\\mathcal F_{t_j}$, and using the bound just proved gives an absolute conditional expectation at most $nC_Nh^2\\to0$. Therefore $(M_t^N)^2-A_t^N$ is an all-pairs martingale.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "The integrand $\\gamma_s(\\eta_s)$ is nonnegative, so $A^N$ is increasing; it is continuous and adapted. If $T=0$, the zero process is predictable. Otherwise, for each nested deterministic partition, the process equal to $A^N$ at the left endpoint on each interval $(a,b]$ and zero at time zero is predictable by [F4]; these processes converge pointwise to $A^N$ by continuity. Thus $A^N$ is predictable. At a bond $\\{x,x+e_i\\}$, the test-function jump is $N^{-d}(\\eta_{x+e_i}-\\eta_x)(H(s,x/N)-H(s,(x+e_i)/N))$. Multiplying its square by the rate $N^2$ and summing over all bonds yields the displayed formula for $\\gamma_s(\\eta_s)$. The fundamental theorem of calculus gives $|H(s,(x+e_i)/N)-H(s,x/N)|\\le N^{-1}\\|\\partial_iH(s,\\cdot)\\|_\\infty$; using $(\\eta_{x+e_i}-\\eta_x)^2\\le1$ and $N^d$ bonds per coordinate gives the stated bound for $A_T^N$.",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes d\u22651 and N\u22653.",
+          "case_reasoning": "d>=1,N>=3 exclude empty lattice/bond direction sets; T=0 is a separate allowed degenerate interval.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root, adopting the named delegated complete-source semantic worksheet",
+            "reason": "Released complete-source/eight-case worksheet research/physics-non-fluid-129-2026-10-21-r2-owner-step2-boundary-proposal-7/proposal.json: d>=1,N>=3 exclude empty lattice/bond direction sets; T=0 is a separate allowed degenerate interval. Exact current Statement scope: Assume the Axiom of Choice. Let $d\\ge1$, $N\\ge3$, $T\\ge0$, and let $(\\eta_t)_{0\\le t\\le T}$ be the SSEP from the diffusive-model definition. Let $H:[0,T]\\times\\mathbb T^d\\to\\mathbb R$ be smooth up to the time endpoints, meaning all time and space derivatives used below extend continuously to $[0,T]\\times\\mathbb T^d$. Define\n\n$$F_s^N(\\eta):=N^{-d}\\sum_{x\\in\\Lambda_N}\\eta_xH(s,x/N),\\qquad 0\\le s\\le T.$$\n\nThen\n\n$$M_t^N:=F_t^N(\\eta_t)-F_0^N(\\eta_0)-\\int_0^t\\langle\\pi_s^N,\\partial_sH(s,\\cdot)+\\Delta_NH(s,\\cdot)\\rangle\\,ds$$\n\nis a square-integrable martingale, and\n\n$$A_t^N:=N^{2-2d}\\int_0^t\\sum_{i=1}^d\\sum_{x\\in\\Lambda_N}(\\eta_{x+e_i}(s)-\\eta_x(s))^2\\bigl(H(s,(x+e_i)/N)-H(s,x/N)\\bigr)^2\\,ds$$\n\nis a continuous predictable increasing process with $(M_t^N)^2-A_t^N$ a martingale. In particular,\n\n$$A_T^N\\le T N^{-d}\\sum_{i=1}^d\\sup_{0\\le s\\le T}\\|\\partial_iH(s,\\cdot)\\|_\\infty^2.$$. Root adopts and binds this actual semantic disposition to the current item and row; this is not independent proof acceptance.",
+            "item_sha256": "67583736fec566e5ea4792cf767a63498adbb2c5adb56feb7ba6c1d716502717",
+            "row_sha256": "224dd1cacf204249e84a7aa36827bf6692a5219f2031ab900a176a69508c8916"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 3.1, 4.1, and 5.1 handle T=0, when M and A are both zero.",
+          "case_reasoning": "3.1\u20135.1 explicitly handle T=0 with M=A=0; H=0 gives the same processes for any T."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For d=1 the bond sum in step 5.1 has one coordinate direction.",
+          "case_reasoning": "d=1 retains N bonds in one coordinate direction and the same finite-chain proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 5.1 shows equal endpoint occupations create zero jump and zero bracket contribution.",
+          "case_reasoning": "Equal occupations or constant spatial H give zero jump/bracket contribution; absorbing all-zero/all-one configurations allowed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof 3.1\u20134.1 proves all-pairs martingale identities on [0,T] by partitions, including s=0,t=T; 3.1\u20135.1 separately handles T=0. Smoothness up to both endpoints is an explicit premise.",
+          "case_reasoning": "All s<=t in [0,T], including 0,T, are handled by finite equal partitions; continuous endpoint derivatives are explicit premises."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement A1 records the Axiom of Choice required by the finite-chain suppliers.",
+          "case_reasoning": "Full AC is retained in A1 for realization/martingale suppliers even though state space finite."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement contains no biconditional.",
+          "case_reasoning": "No biconditional, only martingale and predictable-bracket conclusions.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root, binding released delegated semantic worksheet",
+            "reason": "Released complete-source/eight-case worksheet research/physics-non-fluid-129-2026-10-21-r2-owner-step2-boundary-proposal-7/proposal.json: No biconditional, only martingale and predictable-bracket conclusions. Exact current Statement scope: Assume the Axiom of Choice. Let $d\\ge1$, $N\\ge3$, $T\\ge0$, and let $(\\eta_t)_{0\\le t\\le T}$ be the SSEP from the diffusive-model definition. Let $H:[0,T]\\times\\mathbb T^d\\to\\mathbb R$ be smooth up to the time endpoints, meaning all time and space derivatives used below extend continuously to $[0,T]\\times\\mathbb T^d$. Define\n\n$$F_s^N(\\eta):=N^{-d}\\sum_{x\\in\\Lambda_N}\\eta_xH(s,x/N),\\qquad 0\\le s\\le T.$$\n\nThen\n\n$$M_t^N:=F_t^N(\\eta_t)-F_0^N(\\eta_0)-\\int_0^t\\langle\\pi_s^N,\\partial_sH(s,\\cdot)+\\Delta_NH(s,\\cdot)\\rangle\\,ds$$\n\nis a square-integrable martingale, and\n\n$$A_t^N:=N^{2-2d}\\int_0^t\\sum_{i=1}^d\\sum_{x\\in\\Lambda_N}(\\eta_{x+e_i}(s)-\\eta_x(s))^2\\bigl(H(s,(x+e_i)/N)-H(s,x/N)\\bigr)^2\\,ds$$\n\nis a continuous predictable increasing process with $(M_t^N)^2-A_t^N$ a martingale. In particular,\n\n$$A_T^N\\le T N^{-d}\\sum_{i=1}^d\\sup_{0\\le s\\le T}\\|\\partial_iH(s,\\cdot)\\|_\\infty^2.$$. Root adopts and binds this actual semantic disposition to the current item and row; this is not independent proof acceptance.",
+            "item_sha256": "67583736fec566e5ea4792cf767a63498adbb2c5adb56feb7ba6c1d716502717",
+            "row_sha256": "b5418604072e4d20720cfe4a39cf0838dc85680201091986c51f484580ce84f6"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement contains no biconditional.",
+          "case_reasoning": "No converse characterization of SSEP or test regularity from the bracket formula.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root, binding released delegated semantic worksheet",
+            "reason": "Released complete-source/eight-case worksheet research/physics-non-fluid-129-2026-10-21-r2-owner-step2-boundary-proposal-7/proposal.json: No converse characterization of SSEP or test regularity from the bracket formula. Exact current Statement scope: Assume the Axiom of Choice. Let $d\\ge1$, $N\\ge3$, $T\\ge0$, and let $(\\eta_t)_{0\\le t\\le T}$ be the SSEP from the diffusive-model definition. Let $H:[0,T]\\times\\mathbb T^d\\to\\mathbb R$ be smooth up to the time endpoints, meaning all time and space derivatives used below extend continuously to $[0,T]\\times\\mathbb T^d$. Define\n\n$$F_s^N(\\eta):=N^{-d}\\sum_{x\\in\\Lambda_N}\\eta_xH(s,x/N),\\qquad 0\\le s\\le T.$$\n\nThen\n\n$$M_t^N:=F_t^N(\\eta_t)-F_0^N(\\eta_0)-\\int_0^t\\langle\\pi_s^N,\\partial_sH(s,\\cdot)+\\Delta_NH(s,\\cdot)\\rangle\\,ds$$\n\nis a square-integrable martingale, and\n\n$$A_t^N:=N^{2-2d}\\int_0^t\\sum_{i=1}^d\\sum_{x\\in\\Lambda_N}(\\eta_{x+e_i}(s)-\\eta_x(s))^2\\bigl(H(s,(x+e_i)/N)-H(s,x/N)\\bigr)^2\\,ds$$\n\nis a continuous predictable increasing process with $(M_t^N)^2-A_t^N$ a martingale. In particular,\n\n$$A_T^N\\le T N^{-d}\\sum_{i=1}^d\\sup_{0\\le s\\le T}\\|\\partial_iH(s,\\cdot)\\|_\\infty^2.$$. Root adopts and binds this actual semantic disposition to the current item and row; this is not independent proof acceptance.",
+            "item_sha256": "67583736fec566e5ea4792cf767a63498adbb2c5adb56feb7ba6c1d716502717",
+            "row_sha256": "cb3270b358350459a2265f8060a8b95b1014291534dda82ce7b6e01df30ae0cd"
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "zero horizon",
+          "status": "checked",
+          "evidence": "Steps 3.1, 4.1, and 5.1 give M0=A0=0 when T=0."
+        },
+        {
+          "name": "single coordinate direction",
+          "status": "checked",
+          "evidence": "Step 5.1 reduces the sum to one bond direction when d=1."
+        }
+      ],
+      "finite_checks_disposition": "Boundary and finite cases that affect the claim are checked explicitly above. The general argument is symbolic and applies to all inputs in the stated domains; no unrecorded numerical or experimental checks are used.",
+      "supplier_excerpts": [
+        {
+          "supplier": "def-axiom-of-choice",
+          "carrier": "items/def-axiom-of-choice.md",
+          "status": "Published supplier interface inspected; complete current proof inspected where the item has a proof. This records Step 1 use only and is not an independent approval.",
+          "source_section": "Definition",
+          "exact_statement": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "relevant_hypotheses_and_conventions": "The exact hypotheses and conventions used are restated in the consumer Facts & Assumptions where applicable; this excerpt records the inspected supplier interface.",
+          "supplier_proof_status": "Published supplier interface inspected; complete current proof inspected where the item has a proof. This records Step 1 use only and is not an independent approval.",
+          "consumer_use": "Facts A1 use this supplier interface."
+        },
+        {
+          "supplier": "def-csm-frontier-ssep-diffusive-model",
+          "carrier": "items/def-csm-frontier-ssep-diffusive-model.md",
+          "status": "Draft supplier interface and complete current proof inspected for this use; current readiness is recorded separately. This is not independent proof approval.",
+          "source_section": "Definition",
+          "exact_statement": "Assume the Axiom of Choice, meaning every family of nonempty sets has a choice function. Fix an integer $d\\ge1$ and an integer $N\\ge3$. Let $\\Lambda_N=(\\mathbb Z/N\\mathbb Z)^d$, with each coordinate represented by $0,1,\\ldots,N-1$, and let $\\mathcal E_N$ be the set of unordered nearest-neighbor bonds $\\{x,x+e_i\\}$, where $1\\le i\\le d$ and addition is modulo $N$. The condition $N\\ge3$ makes this a simple graph with each bond listed once as $x$ ranges over $\\Lambda_N$. The site graph is connected because any two coordinate tuples are joined by finitely many steps of $+e_i$ or $-e_i$.\n\nThe configuration space is $\\Omega_N=\\{\\eta:\\Lambda_N\\to\\{0,1\\}\\}$, ordered lexicographically by its binary occupation vector in the fixed site order; this labels it as a finite set $\\{1,\\ldots,2^{N^d}\\}$. The occupation $\\eta_x$ is $1$ for an occupied site and $0$ for a vacant site. For $b=\\{x,y\\}\\in\\mathcal E_N$, let $\\eta^b$ be the configuration obtained by swapping $\\eta_x$ and $\\eta_y$.\n\nThe coordinates $x/N$ have dimensionless spacing $1/N$ on the unit torus, and $t$ is dimensionless diffusive time: it is the microscopic unit-rate bond clock accelerated by the factor $N^2$. Thus the continuum heat equation below has normalized diffusion coefficient $D=1$.\n\nDefine a rate matrix $L_N$ on $\\Omega_N$ by giving each distinct state change $\\eta\\to\\eta^b\\ne\\eta$ rate $N^2$ and setting the diagonal entry to the negative sum of the off-diagonal row. If the two occupations on a bond agree, swapping them produces no state change and contributes no off-diagonal transition. On a column observable $f:\\Omega_N\\to\\mathbb R$, use the row-generator convention $(L_Nf)(\\eta)=\\sum_{\\xi\\ne\\eta}L_N(\\eta,\\xi)(f(\\xi)-f(\\eta))$; a row probability vector evolves by $p'=pL_N$. The **symmetric simple exclusion process (SSEP)** is the uniformized finite-state chain with rate matrix $L_N$ and any specified initial probability vector. The finite-generator existence result supplies its all-pairs transition matrices $e^{tL_N}$ and c\u00e0dl\u00e0g paths. Every jump conserves $\\sum_{x\\in\\Lambda_N}\\eta_x$.\n\nFor $k=0,1,\\ldots,N^d$, the fixed-occupancy sector is $\\Omega_{N,k}=\\{\\eta\\in\\Omega_N:\\sum_x\\eta_x=k\\}$. When $0<k<N^d$, this sector has at least two states and its transition graph is connected by the fixed-occupancy connectivity lemma. Setting every sector energy to $0$, $\\beta=1$, and each allowed transition rate to $N^2$ makes this sector a finite reversible stochastic rate model with uniform stationary weights. The sectors $k=0$ and $k=N^d$ are singleton constant chains. The full SSEP state graph is reducible across particle-number sectors; the generic finite rate-matrix construction, not the irreducible reversible-model definition, defines the full process.\n\nLet $\\mathbb T^d=(\\mathbb R/\\mathbb Z)^d$ with normalized Haar measure $dx$. For $x\\in\\Lambda_N$, write $x/N\\in\\mathbb T^d$ for the point with coordinates represented in $[0,1)$. The empirical measure and its action on a smooth periodic test function $G$ are\n\n$$\\pi_t^N:=N^{-d}\\sum_{x\\in\\Lambda_N}\\eta_x(t)\\,\\delta_{x/N},\\qquad \\langle\\pi_t^N,G\\rangle:=\\int_{\\mathbb T^d}G\\,d\\pi_t^N=N^{-d}\\sum_{x\\in\\Lambda_N}\\eta_x(t)G(x/N).$$\n\nHere $\\delta_y$ denotes unit point mass at $y$. Thus $\\pi_t^N$ is a finite positive measure of total mass at most $1$, not necessarily a probability measure. For a smooth periodic $G$, define its discrete Laplacian on grid points by\n\n$$\\Delta_NG(x/N):=N^2\\sum_{i=1}^d\\bigl[G((x+e_i)/N)+G((x-e_i)/N)-2G(x/N)\\bigr].$$",
+          "relevant_hypotheses_and_conventions": "The exact hypotheses and conventions used are restated in the consumer Facts & Assumptions where applicable; this excerpt records the inspected supplier interface.",
+          "supplier_proof_status": "Draft supplier interface and complete current proof inspected for this use; current readiness is recorded separately. This is not independent proof approval.",
+          "consumer_use": "Facts F1 use this supplier interface."
+        },
+        {
+          "supplier": "def-progressively-measurable-and-predictable-process",
+          "carrier": "items/def-progressively-measurable-and-predictable-process.md",
+          "status": "Published supplier interface inspected; complete current proof inspected where the item has a proof. This records Step 1 use only and is not an independent approval.",
+          "source_section": "Definition",
+          "exact_statement": "Assume the Axiom of Choice [[def-axiom-of-choice]]. Let\n$(\\Omega,\\mathcal F,P)$ be a probability space with a continuous-time\nfiltration $(\\mathcal F_t)_{t\\ge0}$\n[[def-continuous-time-filtration-and-all-pairs-martingale]]. All processes here\nare real-valued and indexed by $[0,\\infty)$. AC is inherited from the cited\ncontinuous-time-filtration interface, whose separate martingale clause uses\nconditional expectation. Once the filtered probability space and stopping\ntimes are given, the progressive and predictable constructions below make no\nadditional choice: they use only generated sigma-algebras and product\nrectangles.\n\n1. **Progressively measurable.** A process $X=(X_t)_{t\\ge0}$ is\n   **progressively measurable** relative to $(\\mathcal F_t)$ when for every\n   $t\\ge0$ the restricted map\n   $[0,t]\\times\\Omega\\to\\mathbb R$, $(s,\\omega)\\mapsto X_s(\\omega)$, is\n   measurable for the product sigma-algebra\n   $\\mathcal B([0,t])\\otimes\\mathcal F_t$\n   [[def-product-sigma-algebra-and-finite-product-sigma-algebras]].\n\n2. **Time-zero and interval generators.** On the product space\n   $[0,\\infty)\\times\\Omega$, let $\\mathcal P$ be the sigma-algebra generated by\n   the family\n   $$\\mathcal G:=\\bigl\\{(s,u]\\times A:\\ 0\\le s<u<\\infty,\\ A\\in\\mathcal F_s\\bigr\\}\\ \\cup\\ \\bigl\\{\\{0\\}\\times A:\\ A\\in\\mathcal F_0\\bigr\\}.$$\n   The interval generators with $s=0$ are included, so $(0,u]\\times A$ with\n   $A\\in\\mathcal F_0$ is a generator. The sigma-algebra $\\mathcal P$ exists by\n   [[thm-generated-sigma-algebra-exists-and-is-minimal]] and is called the\n   **predictable sigma-algebra**. A process $H=(H_t)_{t\\ge0}$ is\n   **predictable** when the map $(s,\\omega)\\mapsto H_s(\\omega)$ is\n   $\\mathcal P$-measurable. For a finite horizon $T>0$ we write\n   $\\mathcal P_T$ for the sigma-algebra on $[0,T]\\times\\Omega$ generated by the\n   same family restricted to $u\\le T$ together with the time-zero generators;\n   this is the trace of $\\mathcal P$ on $[0,T]\\times\\Omega$. Indeed, the\n   trace of an interval generator is empty when $s\\ge T$, and otherwise is\n   $(s,\\min(u,T)]\\times A$, while time-zero generators are unchanged.\n   Conversely every listed finite-horizon generator is such a trace.\n\n3. **Sections, adaptedness, and null sets.** Two structural conventions are\n   used repeatedly and are part of the definition.\n   (a) Every generator is a measurable rectangle of\n   $\\mathcal B([0,\\infty))\\otimes\\mathcal F$, hence\n   $\\mathcal P\\subseteq\\mathcal B([0,\\infty))\\otimes\\mathcal F$; the time-zero\n   generator $\\{0\\}\\times A$ has $dt\\otimes P$-measure zero for every $A$. A\n   set in $\\mathcal P$ has its section at each fixed time $s$ in $\\mathcal F_s$:\n   sets with that section property form a sigma-algebra, and each generator\n   has the property by the increasing-filtration condition. Its section at\n   each fixed $\\omega$ is Borel in time, by the same sigma-algebra argument.\n   (b) If a process is predictable then it is progressively measurable: for\n   $s\\le t$ the section $\\omega\\mapsto H_s(\\omega)$ is $\\mathcal F_s$-measurable\n   $\\subseteq\\mathcal F_t$-measurable, and the progressive-measurability claim\n   is the restriction of the joint map to $[0,t]\\times\\Omega$; the restriction\n   of a $\\mathcal P$-measurable map to $[0,t]\\times\\Omega$ is measurable for\n   $\\mathcal B([0,t])\\otimes\\mathcal F_t$ because every generator with $u\\le t$\n   lies in that product sigma-algebra and the generators with $u>t$ have\n   intersection with $[0,t]\\times\\Omega$ of the form $(s,t]\\times A$ with\n   $s<t$ and $A\\in\\mathcal F_s$, or the empty set when $s\\ge t$.\n   The time-zero generators also lie in\n   $\\mathcal B([0,t])\\otimes\\mathcal F_t$.\n\nThe family $\\mathcal G$ need not itself contain the whole space, but a finite intersection\nof generators is empty or again a generator, or a time-zero generator, because\n$(s,u]\\cap(s',u']=(s\\vee s',u\\wedge u']$ and $A\\cap A'\\in\\mathcal F_{s\\vee s'}$\nwhenever $A\\in\\mathcal F_s$, $A'\\in\\mathcal F_{s'}$, while\n$\\{0\\}\\times A$ is disjoint from every interval generator, including\n$(0,u]\\times A'$. Two time-zero generators intersect in\n$\\{0\\}\\times(A\\cap A')$ with $A\\cap A'\\in\\mathcal F_0$.\nThus the family consisting of the whole space\ntogether with finite intersections of generators is a pi-system generating\n$\\mathcal P$; this is the structural fact used by the density theorem below.\n\nBecause predictability is a measurability requirement for the joint map, it is\npreserved by pointwise limits, products and linear combinations of predictable\nprocesses. A deterministic function $h$ of time defines a predictable process\nexactly when $h$ is Borel measurable: the sets $C$ for which\n$C\\times\\Omega\\in\\mathcal P$ form a sigma-algebra containing the intervals\n$(s,u]$ and $\\{0\\}$, hence all Borel sets. Conversely, take any fixed\n$\\omega\\in\\Omega$ (a probability space is nonempty) and use the Borel\ntime-section property from 3(a) on every inverse image of an open set.\nThis single choice uses no choice axiom. In particular the\nindicators $1_{[0,u]}$ and $1_{(0,u]}$ are predictable for every deterministic\n$u\\ge0$, and the process $s\\mapsto 1_{s\\le\\tau(\\omega)}$ for a stopping time\n$\\tau$ [[def-continuous-time-stopping-time]] is predictable, since\n$$\\{(s,\\omega):s>\\tau(\\omega)\\}=\\bigcup_{q\\in\\mathbb Q_{>0}}(q,\\infty)\\times\\{\\tau<q\\}=\\bigcup_{q\\in\\mathbb Q_{>0}}\\bigcup_{n>q}(q,n]\\times\\{\\tau<q\\}$$\nis a countable union of generators: for rational $q>0$ one has\n$\\{\\tau<q\\}=\\bigcup_{q'<q,\\ q'\\in\\mathbb Q}\\{\\tau\\le q'\\}\\in\\mathcal F_q$. The\ncomplement of that set inside $[0,\\infty)\\times\\Omega$ is the event of the\nindicator, so $1_{[0,\\tau]}$ is predictable; its left-continuity in the time\nvariable is the visual form of the same computation.\n\nNo completeness of the filtration and no right continuity of $(\\mathcal F_t)$\nis used or assumed. Apart from the inherited ambient assumption just recorded,\nthe constructions in this definition are choice-free.",
+          "relevant_hypotheses_and_conventions": "The exact hypotheses and conventions used are restated in the consumer Facts & Assumptions where applicable; this excerpt records the inspected supplier interface.",
+          "supplier_proof_status": "Published supplier interface inspected; complete current proof inspected where the item has a proof. This records Step 1 use only and is not an independent approval.",
+          "consumer_use": "Facts F4 use this supplier interface."
+        },
+        {
+          "supplier": "lem-csm-frontier-finite-chain-martingale",
+          "carrier": "items/lem-csm-frontier-finite-chain-martingale.md",
+          "status": "Draft supplier interface and complete current proof inspected for this use; current readiness is recorded separately. This is not independent proof approval.",
+          "source_section": "Statement",
+          "exact_statement": "Assume the Axiom of Choice. Let $E$ be finite and nonempty, let $L$ be a rate matrix on $E$, let $X$ be its uniformized realization from the preceding existence result, and let $f:E\\to\\mathbb R$ be bounded. Put $g=Lf$ and\n$$M_t=f(X_t)-f(X_0)-\\int_0^t g(X_s)\\,ds,\\qquad \\Gamma_f(i)=L(f^2)(i)-2f(i)Lf(i).$$For every finite $T$, $(M_t)_{0\\le t\\le T}$ is a square-integrable martingale relative to the construction filtration, and$$A_t:=\\int_0^t\\Gamma_f(X_s)\\,ds$$\nis its continuous predictable bracket: $A_0=0$, $A$ is increasing and predictable, and $M_t^2-A_t$ is a martingale. The bracket is understood in the continuous predictable increasing compensator convention stated in the proof.",
+          "relevant_hypotheses_and_conventions": "The exact hypotheses and conventions used are restated in the consumer Facts & Assumptions where applicable; this excerpt records the inspected supplier interface.",
+          "supplier_proof_status": "Draft supplier interface and complete current proof inspected for this use; current readiness is recorded separately. This is not independent proof approval.",
+          "consumer_use": "Facts F3 use this supplier interface."
+        },
+        {
+          "supplier": "lem-csm-frontier-finite-generator-chain-existence",
+          "carrier": "items/lem-csm-frontier-finite-generator-chain-existence.md",
+          "status": "Draft supplier interface and complete current proof inspected for this use; current readiness is recorded separately. This is not independent proof approval.",
+          "source_section": "Statement",
+          "exact_statement": "Assume the Axiom of Choice. Let $E$ be a nonempty finite set, let $L$ be a rate matrix on $E$ with nonnegative off-diagonal entries and zero row sums, and let $\\nu$ be an initial probability vector. Then there exists a uniformized realization under the conventions stated below. Its paths are c\u00e0dl\u00e0g and almost surely have only finitely many event times on each bounded interval (nonexplosion), and, for all $0\\le s\\le t$,\n$$\\mathbb P(X_t=j\\mid\\mathcal F_s)=(e^{(t-s)L})_{X_sj}\\quad\\text{almost surely},$$\nwhere $\\mathcal F_s=\\sigma(N_u,X_u:0\\le u\\le s)$ is the construction filtration. In particular, $e^{tL}$ is the transition matrix from any initial state.",
+          "relevant_hypotheses_and_conventions": "The exact hypotheses and conventions used are restated in the consumer Facts & Assumptions where applicable; this excerpt records the inspected supplier interface.",
+          "supplier_proof_status": "Draft supplier interface and complete current proof inspected for this use; current readiness is recorded separately. This is not independent proof approval.",
+          "consumer_use": "Facts F2 use this supplier interface."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-91",
+        "notes": "Read all five steps against the current uniformization, finite-chain martingale and predictable-sigma-algebra interfaces. For fixed N the finite rate bound gives uniform O_N(h^2) errors and bounded increments; smoothness of H gives bounded time derivatives on the compact horizon. Summing conditional mean errors over deterministic partitions proves the all-pairs martingale, and the conditional second-moment expansion plus exact martingale cross-term cancellation proves M^2-A. No estimate interchanges N and partition limits. Continuous adapted A is predictable by left-step approximation; squared jump and gradient bound have the stated normalization. Checked T=0, self-transitions and singleton sectors. No defect beyond the separately routed outside generator metadata."
+      },
+      "repair_confidence": 1,
+      "current_boundary_worksheet": {
+        "proposal": "research/physics-non-fluid-129-2026-10-21-r2-owner-step2-boundary-proposal-7/proposal.json",
+        "source_sha256": "78a2dff380ad1b2ed1cb8f614018ebf89ebea1303d78764302d4fb94ede4d727",
+        "qualification": "Released complete current source/eight-case semantic worksheet; root transcribed exact current rows. No independent acceptance or finite computation asserted."
+      }
+    },
+    "thm-csm-frontier-ssep-heat-limit": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-csm-frontier-ssep-diffusive-model",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice, meaning every family of nonempty sets has a choice function. Fix an integer $d\\ge1$ and an integer $N\\ge3$. Let $\\Lambda_N=(\\mathbb Z/N\\mathbb Z)^d$, with each coordinate represented by $0,1,\\ldots,N-1$, and let $\\mathcal E_N$ be the set of unordered nearest-neighbor bonds $\\{x,x+e_i\\}$, where $1\\le i\\le d$ and addition is modulo $N$. The condition $N\\ge3$ makes this a simple graph with each bond listed once as $x$ ranges over $\\Lambda_N$. The site graph is connected because any two coordinate tuples are joined by finitely many steps of $+e_i$ or $-e_i$.\n\nThe configuration space is $\\Omega_N=\\{\\eta:\\Lambda_N\\to\\{0,1\\}\\}$, ordered lexicographically by its binary occupation vector in the fixed site order; this labels it as a finite set $\\{1,\\ldots,2^{N^d}\\}$. The occupation $\\eta_x$ is $1$ for an occupied site and $0$ for a vacant site. For $b=\\{x,y\\}\\in\\mathcal E_N$, let $\\eta^b$ be the configuration obtained by swapping $\\eta_x$ and $\\eta_y$.\n\nThe coordinates $x/N$ have dimensionless spacing $1/N$ on the unit torus, and $t$ is dimensionless diffusive time: it is the microscopic unit-rate bond clock accelerated by the factor $N^2$. Thus the continuum heat equation below has normalized diffusion coefficient $D=1$.\n\nDefine a rate matrix $L_N$ on $\\Omega_N$ by giving each distinct state change $\\eta\\to\\eta^b\\ne\\eta$ rate $N^2$ and setting the diagonal entry to the negative sum of the off-diagonal row. If the two occupations on a bond agree, swapping them produces no state change and contributes no off-diagonal transition. On a column observable $f:\\Omega_N\\to\\mathbb R$, use the row-generator convention $(L_Nf)(\\eta)=\\sum_{\\xi\\ne\\eta}L_N(\\eta,\\xi)(f(\\xi)-f(\\eta))$; a row probability vector evolves by $p'=pL_N$. The **symmetric simple exclusion process (SSEP)** is the uniformized finite-state chain with rate matrix $L_N$ and any specified initial probability vector. The finite-generator existence result supplies its all-pairs transition matrices $e^{tL_N}$ and c\u00e0dl\u00e0g paths. Every jump conserves $\\sum_{x\\in\\Lambda_N}\\eta_x$.\n\nFor $k=0,1,\\ldots,N^d$, the fixed-occupancy sector is $\\Omega_{N,k}=\\{\\eta\\in\\Omega_N:\\sum_x\\eta_x=k\\}$. When $0<k<N^d$, this sector has at least two states and its transition graph is connected by the fixed-occupancy connectivity lemma. Setting every sector energy to $0$, $\\beta=1$, and each allowed transition rate to $N^2$ makes this sector a finite reversible stochastic rate model with uniform stationary weights. The sectors $k=0$ and $k=N^d$ are singleton constant chains. The full SSEP state graph is reducible across particle-number sectors; the generic finite rate-matrix construction, not the irreducible reversible-model definition, defines the full process.\n\nLet $\\mathbb T^d=(\\mathbb R/\\mathbb Z)^d$ with normalized Haar measure $dx$. For $x\\in\\Lambda_N$, write $x/N\\in\\mathbb T^d$ for the point with coordinates represented in $[0,1)$. The empirical measure and its action on a smooth periodic test function $G$ are\n\n$$\\pi_t^N:=N^{-d}\\sum_{x\\in\\Lambda_N}\\eta_x(t)\\,\\delta_{x/N},\\qquad \\langle\\pi_t^N,G\\rangle:=\\int_{\\mathbb T^d}G\\,d\\pi_t^N=N^{-d}\\sum_{x\\in\\Lambda_N}\\eta_x(t)G(x/N).$$\n\nHere $\\delta_y$ denotes unit point mass at $y$. Thus $\\pi_t^N$ is a finite positive measure of total mass at most $1$, not necessarily a probability measure. For a smooth periodic $G$, define its discrete Laplacian on grid points by\n\n$$\\Delta_NG(x/N):=N^2\\sum_{i=1}^d\\bigl[G((x+e_i)/N)+G((x-e_i)/N)-2G(x/N)\\bigr].$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-csm-frontier-ssep-heat-flow",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $d\\ge1$ and let $\\rho_0:\\mathbb T^d\\to\\mathbb R$ be measurable with $0\\le\\rho_0\\le1$ almost everywhere, using normalized product Haar measure $dx$. For $k\\in\\mathbb Z^d$ define $e_k(x)=\\exp(2\\pi i k\\cdot x)$ and $\\widehat f(k)=\\int_{\\mathbb T^d}f(x)e_{-k}(x)\\,dx$. For $t>0$ set\n\n$$\\rho_t(x):=\\sum_{k\\in\\mathbb Z^d}e^{-4\\pi^2|k|^2t}\\widehat\\rho_0(k)e_k(x),$$\n\nand at $t=0$ set $\\rho_t=\\rho_0$ as an almost-everywhere class. For smooth periodic $G$, define\n\n$$P_tG(x):=\\sum_{k\\in\\mathbb Z^d}e^{-4\\pi^2|k|^2t}\\widehat G(k)e_k(x)\\quad(t>0),\\qquad P_0G:=G.$$\n\nThen on every strip $[\\epsilon,T]\\times\\mathbb T^d$ with $0<\\epsilon<T<\\infty$, the series for $\\rho_t$ and all its space and time derivatives converge absolutely and uniformly; in particular $\\rho_t$ is real and smooth for each $t>0$ and $\\partial_t\\rho_t=\\Delta\\rho_t$. For every finite $T$ and every smooth $G$, $P_tG$ is smooth on $[0,T]\\times\\mathbb T^d$, satisfies $\\partial_tP_tG=\\Delta P_tG$, has uniformly bounded derivatives of every fixed order there, and $P_tG\\to G$ uniformly as $t\\downarrow0$. Moreover\n\n$$\\int_{\\mathbb T^d}\\rho_tG\\,dx=\\int_{\\mathbb T^d}\\rho_0P_tG\\,dx,$$\n\nso $(\\rho_t)_{0\\le t\\le T}$ is the unique weak heat solution with datum $\\rho_0$ in the stated weak formulation. It preserves $0\\le\\rho_t\\le1$ almost everywhere and the mass $\\int\\rho_t\\,dx=\\int\\rho_0\\,dx$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-csm-frontier-ssep-time-dependent-martingale",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $d\\ge1$, $N\\ge3$, $T\\ge0$, and let $(\\eta_t)_{0\\le t\\le T}$ be the SSEP from the diffusive-model definition. Let $H:[0,T]\\times\\mathbb T^d\\to\\mathbb R$ be smooth up to the time endpoints, meaning all time and space derivatives used below extend continuously to $[0,T]\\times\\mathbb T^d$. Define\n\n$$F_s^N(\\eta):=N^{-d}\\sum_{x\\in\\Lambda_N}\\eta_xH(s,x/N),\\qquad 0\\le s\\le T.$$\n\nThen\n\n$$M_t^N:=F_t^N(\\eta_t)-F_0^N(\\eta_0)-\\int_0^t\\langle\\pi_s^N,\\partial_sH(s,\\cdot)+\\Delta_NH(s,\\cdot)\\rangle\\,ds$$\n\nis a square-integrable martingale, and\n\n$$A_t^N:=N^{2-2d}\\int_0^t\\sum_{i=1}^d\\sum_{x\\in\\Lambda_N}(\\eta_{x+e_i}(s)-\\eta_x(s))^2\\bigl(H(s,(x+e_i)/N)-H(s,x/N)\\bigr)^2\\,ds$$\n\nis a continuous predictable increasing process with $(M_t^N)^2-A_t^N$ a martingale. In particular,\n\n$$A_T^N\\le T N^{-d}\\sum_{i=1}^d\\sup_{0\\le s\\le T}\\|\\partial_iH(s,\\cdot)\\|_\\infty^2.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-csm-frontier-ssep-bracket",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $d\\ge1$, $N\\ge3$, $T\\ge0$, and let $(\\eta_t)_{0\\le t\\le T}$ be the SSEP from the diffusive-model definition with any initial probability vector. For a real smooth periodic $G:\\mathbb T^d\\to\\mathbb R$, set\n\n$$M_t^{N,G}:=\\langle\\pi_t^N,G\\rangle-\\langle\\pi_0^N,G\\rangle-\\int_0^t\\langle\\pi_s^N,\\Delta_NG\\rangle\\,ds.$$\n\nThen $M^{N,G}$ is a square-integrable martingale. Its continuous predictable bracket is\n\n$$A_t^{N,G}=N^{2-2d}\\int_0^t\\sum_{i=1}^d\\sum_{x\\in\\Lambda_N}(\\eta_{x+e_i}(s)-\\eta_x(s))^2\\bigl(G((x+e_i)/N)-G(x/N)\\bigr)^2\\,ds,$$\n\nin the continuous predictable compensator convention of the finite-chain martingale supplier. In particular,\n\n$$A_T^{N,G}\\le T N^{-d}\\sum_{i=1}^d\\|\\partial_iG\\|_\\infty^2.$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-csm-frontier-finite-doob-bound",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $T\\ge0$, let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space, and let $(\\mathcal F_t)_{0\\le t\\le T}$ be an increasing family of sub-$\\sigma$-algebras of $\\mathcal F$. Let $(M_t)_{0\\le t\\le T}$ be a family of real random variables such that each $M_t$ is $\\mathcal F_t$-measurable, $\\mathbb E[M_t^2]<\\infty$, $M_0=0$, and $\\mathbb E[M_t\\mid\\mathcal F_s]=M_s$ almost surely for every $0\\le s\\le t\\le T$. Suppose it has c\u00e0dl\u00e0g paths almost surely, meaning there is a measurable event $\\Omega_0\\in\\mathcal F$ with $\\mathbb P(\\Omega_0)=1$ such that, for every $\\omega\\in\\Omega_0$, the path $t\\mapsto M_t(\\omega)$ is right-continuous on $[0,T)$ and has a finite left limit at every $t\\in(0,T]$. Define\n$$\nD_T=\\bigcup_{n\\ge0}\\{kT/2^n:0\\le k\\le2^n\\},\\qquad S_T=\\sup_{t\\in D_T}|M_t|.\n$$\nThen $S_T$ is measurable and agrees with the pathwise supremum $\\sup_{0\\le t\\le T}|M_t|$ on $\\Omega_0$, and\n$$\n\\mathbb E[S_T^2]\\le4\\,\\mathbb E[|M_T|^2].\n$$",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Fix $t\\in[0,T]$ and a real-valued smooth periodic $G$. For every $r\\ge0$, $P_rG$ is real-valued: since $G$ is real, $\\widehat G(-k)=\\overline{\\widehat G(k)}$, and the Fourier multiplier $e^{-4\\pi^2|k|^2r}$ is real and unchanged by $k\\mapsto-k$; pairing the absolutely convergent $k$ and $-k$ terms (with the zero mode real) gives a real sum. By [F2], these functions are smooth, so $H_s=P_{t-s}G$ is an admissible real-valued test in [F3]. Denote its martingale by $M_s^{N,t}$. By [F2], $\\partial_sH_s=-\\Delta H_s$. The time-dependent martingale identity at its terminal time gives $\\langle\\pi_t^N,G\\rangle=\\langle\\pi_0^N,P_tG\\rangle+M_t^{N,t}+\\int_0^t\\langle\\pi_s^N,(\\Delta_N-\\Delta)P_{t-s}G\\rangle\\,ds$, and $M^{N,t}$ starts at zero with terminal second moment equal to the expected bracket.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The fourth spatial derivatives of $P_{t-s}G$ are uniformly bounded for $0\\le s\\le t$ by [F2]. Taylor's formula for each symmetric second difference therefore gives $\\sup_{s,x}|(\\Delta_N-\\Delta)P_{t-s}G(x)|\\le C_{G,T}N^{-2}$. Since $\\pi_s^N(\\mathbb T^d)\\le1$, the drift-error integral in step 1.1 is at most $tC_{G,T}N^{-2}$. By [F3], $\\mathbb E_N|M_t^{N,t}|^2\\le C'_{G,T}N^{-d}$, so Chebyshev's inequality makes that martingale term tend to zero in probability. Step 1.1 establishes that $P_tG$ is real-valued, and [F2] gives its smoothness; hence the initial-profile assumption applies to this test. Also [F2] gives $\\int\\rho_0P_tG=\\int\\rho_tG$. Thus for each fixed $t$, $\\langle\\pi_t^N,G\\rangle\\to\\int\\rho_tG$ in probability.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $T=0$, the conclusion is the initial-profile assumption. Suppose $T>0$ and fix a finite time mesh $0=t_0<\\cdots<t_m=T$. Step 2.1 and a finite union bound imply $\\max_j|\\langle\\pi_{t_j}^N,G\\rangle-\\int\\rho_{t_j}G|\\to0$ in probability.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "By the fundamental theorem of calculus applied twice to each centered second difference, $\\|\\Delta_NG\\|_\\infty\\le K_G:=\\sum_i\\|\\partial_{ii}G\\|_\\infty$ for all $N$. The fixed-test martingale in [F4] gives $|\\langle\\pi_t^N,G\\rangle-\\langle\\pi_s^N,G\\rangle|\\le K_G|t-s|+2\\sup_{0\\le u\\le T}|M_u^{N,G}|$ for all $s,t\\in[0,T]$. By [F4], $\\mathbb E|M_T^{N,G}|^2\\le T N^{-d}\\sum_i\\|\\partial_iG\\|_\\infty^2$; [F5] therefore implies $\\sup_{u\\le T}|M_u^{N,G}|\\to0$ in probability. Also [F2] and the mass bound $\\int\\rho_t\\le1$ show $t\\mapsto\\int\\rho_tG$ is Lipschitz with constant $\\|\\Delta G\\|_\\infty$. Given $\\delta>0$, choose a finite mesh with spacing at most $\\delta$; the supremum error is bounded by the maximum mesh error from step 3.1, $2\\sup|M^{N,G}|$, and $(K_G+\\|\\Delta G\\|_\\infty)\\delta$. First let $N\\to\\infty$ and then $\\delta\\downarrow0$. This proves the stated uniform-in-time convergence in probability.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F4",
+            "F5",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes d\u22651, N\u22653, and a finite nonnegative horizon. Initial empirical convergence implies uniform finite-horizon heat convergence; the result does not characterize every microscopic process with a heat limit.",
+          "argument_steps": [],
+          "reviewed": {
+            "upheld": true,
+            "by": "/root, adopting the named delegated complete-source semantic worksheet",
+            "reason": "Released complete-source/eight-case worksheet research/physics-non-fluid-129-2026-10-21-r2-owner-step2-boundary-proposal-8/proposal.json: The Statement assumes d\u22651, N\u22653, and a finite nonnegative horizon. Initial empirical convergence implies uniform finite-horizon heat convergence; the result does not characterize every microscopic process with a heat limit. Exact current Statement scope: Assume the Axiom of Choice. Fix $d\\ge1$, $T\\ge0$, and for each integer $N\\ge3$ let $(\\eta_t^N)_{0\\le t\\le T}$ be the SSEP on $\\Lambda_N=(\\mathbb Z/N\\mathbb Z)^d$ with rate $N^2$ on each unordered nearest-neighbor bond, started from any initial probability vector on a probability space $(\\Xi_N,\\mathcal A_N,\\mathbb P_N)$. Write $\\pi_t^N=N^{-d}\\sum_{x\\in\\Lambda_N}\\eta_x^N(t)\\delta_{x/N}$ for its empirical measure. Suppose a measurable $\\rho_0:\\mathbb T^d\\to[0,1]$ satisfies, for every real-valued smooth periodic $G$ and every $\\epsilon>0$,\n\n$$\\mathbb P_N\\!\\left(\\left|\\langle\\pi_0^N,G\\rangle-\\int_{\\mathbb T^d}\\rho_0(x)G(x)\\,dx\\right|>\\epsilon\\right)\\longrightarrow0\\qquad(N\\to\\infty),$$\n\nwhere the probability spaces may depend on $N$. Let $\\rho_t$ be the unique weak heat solution on $\\mathbb T^d$ with initial datum $\\rho_0$, defined by the Fourier heat profile. Then for every real-valued smooth periodic $G$ and every $\\epsilon>0$,\n\n$$\\mathbb . Root adopts and binds this actual semantic disposition to the current item and row; this is not independent proof acceptance.",
+            "item_sha256": "3e99ff7e045344c2cda6681288f6b0cf5eaa35e68550217f7b84bea3488e8d66",
+            "row_sha256": "d1f97b3188c27e59a9ffc3559b0a13353eae1fddad66c9e188fb0927906fc73a"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 handles T=0 by the initial-profile hypothesis.",
+          "argument_steps": [
+            "3.1"
+          ]
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The proof allows d=1 and step 4.1 retains the single coordinate term.",
+          "argument_steps": [
+            "4.1"
+          ]
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Public statement and its supplied argument: The density values0 and1 are permitted and preserved by F2. The theorem assumes only empirical initial convergence, not that every finite-N law is the exactly empty/full configuration.",
+          "argument_steps": []
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "3.1 separately identifies T=0 with initial convergence;4.1 controls the supremum on the entire closed finite interval [0,T] using a mesh containing both endpoints.",
+          "argument_steps": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement A1 records the Choice assumption required by the finite-chain and martingale suppliers.",
+          "argument_steps": []
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement contains no biconditional. Initial empirical convergence implies uniform finite-horizon heat convergence; the result does not characterize every microscopic process with a heat limit.",
+          "argument_steps": []
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement contains no biconditional. Initial empirical convergence implies uniform finite-horizon heat convergence; the result does not characterize every microscopic process with a heat limit.",
+          "argument_steps": []
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "zero horizon",
+          "status": "checked",
+          "evidence": "Step 3.1 reduces the claimed supremum convergence to the initial-profile assumption when T=0."
+        },
+        {
+          "name": "finite mesh",
+          "status": "checked",
+          "evidence": "Steps 3.1 and 4.1 use finitely many mesh times and then send mesh spacing to zero."
+        }
+      ],
+      "finite_checks_disposition": "Boundary and finite cases that affect the claim are checked explicitly above. The general argument is symbolic and applies to all inputs in the stated domains; no unrecorded numerical or experimental checks are used.",
+      "supplier_excerpts": [
+        {
+          "supplier": "def-axiom-of-choice",
+          "carrier": "items/def-axiom-of-choice.md",
+          "status": "Published supplier interface inspected; complete current proof inspected where the item has a proof. This records Step 1 use only and is not an independent approval.",
+          "source_section": "Definition",
+          "exact_statement": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "relevant_hypotheses_and_conventions": "The exact hypotheses and conventions used are restated in the consumer Facts & Assumptions where applicable; this excerpt records the inspected supplier interface.",
+          "supplier_proof_status": "Published supplier interface inspected; complete current proof inspected where the item has a proof. This records Step 1 use only and is not an independent approval.",
+          "consumer_use": "Facts A1 use this supplier interface."
+        },
+        {
+          "supplier": "def-csm-frontier-ssep-diffusive-model",
+          "carrier": "items/def-csm-frontier-ssep-diffusive-model.md",
+          "status": "Draft supplier interface and complete current proof inspected for this use; current readiness is recorded separately. This is not independent proof approval.",
+          "source_section": "Definition",
+          "exact_statement": "Assume the Axiom of Choice, meaning every family of nonempty sets has a choice function. Fix an integer $d\\ge1$ and an integer $N\\ge3$. Let $\\Lambda_N=(\\mathbb Z/N\\mathbb Z)^d$, with each coordinate represented by $0,1,\\ldots,N-1$, and let $\\mathcal E_N$ be the set of unordered nearest-neighbor bonds $\\{x,x+e_i\\}$, where $1\\le i\\le d$ and addition is modulo $N$. The condition $N\\ge3$ makes this a simple graph with each bond listed once as $x$ ranges over $\\Lambda_N$. The site graph is connected because any two coordinate tuples are joined by finitely many steps of $+e_i$ or $-e_i$.\n\nThe configuration space is $\\Omega_N=\\{\\eta:\\Lambda_N\\to\\{0,1\\}\\}$, ordered lexicographically by its binary occupation vector in the fixed site order; this labels it as a finite set $\\{1,\\ldots,2^{N^d}\\}$. The occupation $\\eta_x$ is $1$ for an occupied site and $0$ for a vacant site. For $b=\\{x,y\\}\\in\\mathcal E_N$, let $\\eta^b$ be the configuration obtained by swapping $\\eta_x$ and $\\eta_y$.\n\nThe coordinates $x/N$ have dimensionless spacing $1/N$ on the unit torus, and $t$ is dimensionless diffusive time: it is the microscopic unit-rate bond clock accelerated by the factor $N^2$. Thus the continuum heat equation below has normalized diffusion coefficient $D=1$.\n\nDefine a rate matrix $L_N$ on $\\Omega_N$ by giving each distinct state change $\\eta\\to\\eta^b\\ne\\eta$ rate $N^2$ and setting the diagonal entry to the negative sum of the off-diagonal row. If the two occupations on a bond agree, swapping them produces no state change and contributes no off-diagonal transition. On a column observable $f:\\Omega_N\\to\\mathbb R$, use the row-generator convention $(L_Nf)(\\eta)=\\sum_{\\xi\\ne\\eta}L_N(\\eta,\\xi)(f(\\xi)-f(\\eta))$; a row probability vector evolves by $p'=pL_N$. The **symmetric simple exclusion process (SSEP)** is the uniformized finite-state chain with rate matrix $L_N$ and any specified initial probability vector. The finite-generator existence result supplies its all-pairs transition matrices $e^{tL_N}$ and c\u00e0dl\u00e0g paths. Every jump conserves $\\sum_{x\\in\\Lambda_N}\\eta_x$.\n\nFor $k=0,1,\\ldots,N^d$, the fixed-occupancy sector is $\\Omega_{N,k}=\\{\\eta\\in\\Omega_N:\\sum_x\\eta_x=k\\}$. When $0<k<N^d$, this sector has at least two states and its transition graph is connected by the fixed-occupancy connectivity lemma. Setting every sector energy to $0$, $\\beta=1$, and each allowed transition rate to $N^2$ makes this sector a finite reversible stochastic rate model with uniform stationary weights. The sectors $k=0$ and $k=N^d$ are singleton constant chains. The full SSEP state graph is reducible across particle-number sectors; the generic finite rate-matrix construction, not the irreducible reversible-model definition, defines the full process.\n\nLet $\\mathbb T^d=(\\mathbb R/\\mathbb Z)^d$ with normalized Haar measure $dx$. For $x\\in\\Lambda_N$, write $x/N\\in\\mathbb T^d$ for the point with coordinates represented in $[0,1)$. The empirical measure and its action on a smooth periodic test function $G$ are\n\n$$\\pi_t^N:=N^{-d}\\sum_{x\\in\\Lambda_N}\\eta_x(t)\\,\\delta_{x/N},\\qquad \\langle\\pi_t^N,G\\rangle:=\\int_{\\mathbb T^d}G\\,d\\pi_t^N=N^{-d}\\sum_{x\\in\\Lambda_N}\\eta_x(t)G(x/N).$$\n\nHere $\\delta_y$ denotes unit point mass at $y$. Thus $\\pi_t^N$ is a finite positive measure of total mass at most $1$, not necessarily a probability measure. For a smooth periodic $G$, define its discrete Laplacian on grid points by\n\n$$\\Delta_NG(x/N):=N^2\\sum_{i=1}^d\\bigl[G((x+e_i)/N)+G((x-e_i)/N)-2G(x/N)\\bigr].$$",
+          "relevant_hypotheses_and_conventions": "The exact hypotheses and conventions used are restated in the consumer Facts & Assumptions where applicable; this excerpt records the inspected supplier interface.",
+          "supplier_proof_status": "Draft supplier interface and complete current proof inspected for this use; current readiness is recorded separately. This is not independent proof approval.",
+          "consumer_use": "Facts F1 use this supplier interface."
+        },
+        {
+          "supplier": "lem-csm-frontier-finite-doob-bound",
+          "carrier": "items/lem-csm-frontier-finite-doob-bound.md",
+          "status": "Exact current public interface transcribed by root at the drained Step2 join; original substantive source-use review retained in historical_source_interface and native/same-owner reports. No renewed full supplier-proof reading asserted.",
+          "source_section": "Statement",
+          "exact_statement": "Assume the Axiom of Choice. Let $T\\ge0$, let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space, and let $(\\mathcal F_t)_{0\\le t\\le T}$ be an increasing family of sub-$\\sigma$-algebras of $\\mathcal F$. Let $(M_t)_{0\\le t\\le T}$ be a family of real random variables such that each $M_t$ is $\\mathcal F_t$-measurable, $\\mathbb E[M_t^2]<\\infty$, $M_0=0$, and $\\mathbb E[M_t\\mid\\mathcal F_s]=M_s$ almost surely for every $0\\le s\\le t\\le T$. Suppose it has c\u00e0dl\u00e0g paths almost surely, meaning there is a measurable event $\\Omega_0\\in\\mathcal F$ with $\\mathbb P(\\Omega_0)=1$ such that, for every $\\omega\\in\\Omega_0$, the path $t\\mapsto M_t(\\omega)$ is right-continuous on $[0,T)$ and has a finite left limit at every $t\\in(0,T]$. Define\n$$\nD_T=\\bigcup_{n\\ge0}\\{kT/2^n:0\\le k\\le2^n\\},\\qquad S_T=\\sup_{t\\in D_T}|M_t|.\n$$\nThen $S_T$ is measurable and agrees with the pathwise supremum $\\sup_{0\\le t\\le T}|M_t|$ on $\\Omega_0$, and\n$$\n\\mathbb E[S_T^2]\\le4\\,\\mathbb E[|M_T|^2].\n$$",
+          "relevant_hypotheses_and_conventions": "The exact hypotheses and conventions used are restated in the consumer Facts & Assumptions where applicable; this excerpt records the inspected supplier interface.",
+          "supplier_proof_status": "draft; this exact-quote refresh does not grant independent proof acceptance",
+          "consumer_use": "Facts F5 use this supplier interface.",
+          "historical_source_interface": {
+            "source_section": "Statement",
+            "exact_statement": "Assume the Axiom of Choice. Let $(M_t)_{0\\le t\\le T}$ be a real square-integrable martingale relative to a filtration $(\\mathcal F_t)$, with c\u00e0dl\u00e0g paths almost surely and $M_0=0$. Then\n$$\\mathbb E\\!\\left[\\sup_{0\\le t\\le T}|M_t|^2\\right]\\le4\\,\\mathbb E[|M_T|^2].$$",
+            "status": "Draft supplier interface and complete current proof inspected for this use; current readiness is recorded separately. This is not independent proof approval.",
+            "supplier_proof_status": "Draft supplier interface and complete current proof inspected for this use; current readiness is recorded separately. This is not independent proof approval."
+          }
+        },
+        {
+          "supplier": "lem-csm-frontier-ssep-bracket",
+          "carrier": "items/lem-csm-frontier-ssep-bracket.md",
+          "status": "Draft supplier interface and complete current proof inspected for this use; current readiness is recorded separately. This is not independent proof approval.",
+          "source_section": "Statement",
+          "exact_statement": "Assume the Axiom of Choice. Let $d\\ge1$, $N\\ge3$, $T\\ge0$, and let $(\\eta_t)_{0\\le t\\le T}$ be the SSEP from the diffusive-model definition with any initial probability vector. For a real smooth periodic $G:\\mathbb T^d\\to\\mathbb R$, set\n\n$$M_t^{N,G}:=\\langle\\pi_t^N,G\\rangle-\\langle\\pi_0^N,G\\rangle-\\int_0^t\\langle\\pi_s^N,\\Delta_NG\\rangle\\,ds.$$\n\nThen $M^{N,G}$ is a square-integrable martingale. Its continuous predictable bracket is\n\n$$A_t^{N,G}=N^{2-2d}\\int_0^t\\sum_{i=1}^d\\sum_{x\\in\\Lambda_N}(\\eta_{x+e_i}(s)-\\eta_x(s))^2\\bigl(G((x+e_i)/N)-G(x/N)\\bigr)^2\\,ds,$$\n\nin the continuous predictable compensator convention of the finite-chain martingale supplier. In particular,\n\n$$A_T^{N,G}\\le T N^{-d}\\sum_{i=1}^d\\|\\partial_iG\\|_\\infty^2.$$",
+          "relevant_hypotheses_and_conventions": "The exact hypotheses and conventions used are restated in the consumer Facts & Assumptions where applicable; this excerpt records the inspected supplier interface.",
+          "supplier_proof_status": "Draft supplier interface and complete current proof inspected for this use; current readiness is recorded separately. This is not independent proof approval.",
+          "consumer_use": "Facts F4 use this supplier interface."
+        },
+        {
+          "supplier": "lem-csm-frontier-ssep-heat-flow",
+          "carrier": "items/lem-csm-frontier-ssep-heat-flow.md",
+          "status": "Draft supplier interface and complete current proof inspected for this use; current readiness is recorded separately. This is not independent proof approval.",
+          "source_section": "Statement",
+          "exact_statement": "Assume the Axiom of Countable Choice. Let $d\\ge1$ and let $\\rho_0:\\mathbb T^d\\to\\mathbb R$ be measurable with $0\\le\\rho_0\\le1$ almost everywhere, using normalized product Haar measure $dx$. For $k\\in\\mathbb Z^d$ define $e_k(x)=\\exp(2\\pi i k\\cdot x)$ and $\\widehat f(k)=\\int_{\\mathbb T^d}f(x)e_{-k}(x)\\,dx$. For $t>0$ set\n\n$$\\rho_t(x):=\\sum_{k\\in\\mathbb Z^d}e^{-4\\pi^2|k|^2t}\\widehat\\rho_0(k)e_k(x),$$\n\nand at $t=0$ set $\\rho_t=\\rho_0$ as an almost-everywhere class. For smooth periodic $G$, define\n\n$$P_tG(x):=\\sum_{k\\in\\mathbb Z^d}e^{-4\\pi^2|k|^2t}\\widehat G(k)e_k(x)\\quad(t>0),\\qquad P_0G:=G.$$\n\nThen on every strip $[\\epsilon,T]\\times\\mathbb T^d$ with $0<\\epsilon<T<\\infty$, the series for $\\rho_t$ and all its space and time derivatives converge absolutely and uniformly; in particular $\\rho_t$ is real and smooth for each $t>0$ and $\\partial_t\\rho_t=\\Delta\\rho_t$. For every finite $T$ and every smooth $G$, $P_tG$ is smooth on $[0,T]\\times\\mathbb T^d$, satisfies $\\partial_tP_tG=\\Delta P_tG$, has uniformly bounded derivatives of every fixed order there, and $P_tG\\to G$ uniformly as $t\\downarrow0$. Moreover\n\n$$\\int_{\\mathbb T^d}\\rho_tG\\,dx=\\int_{\\mathbb T^d}\\rho_0P_tG\\,dx,$$\n\nso $(\\rho_t)_{0\\le t\\le T}$ is the unique weak heat solution with datum $\\rho_0$ in the stated weak formulation. It preserves $0\\le\\rho_t\\le1$ almost everywhere and the mass $\\int\\rho_t\\,dx=\\int\\rho_0\\,dx$.",
+          "relevant_hypotheses_and_conventions": "The exact hypotheses and conventions used are restated in the consumer Facts & Assumptions where applicable; this excerpt records the inspected supplier interface.",
+          "supplier_proof_status": "Draft supplier interface and complete current proof inspected for this use; current readiness is recorded separately. This is not independent proof approval.",
+          "consumer_use": "Facts F2 use this supplier interface."
+        },
+        {
+          "supplier": "lem-csm-frontier-ssep-time-dependent-martingale",
+          "carrier": "items/lem-csm-frontier-ssep-time-dependent-martingale.md",
+          "status": "Draft supplier interface and complete current proof inspected for this use; current readiness is recorded separately. This is not independent proof approval.",
+          "source_section": "Statement",
+          "exact_statement": "Assume the Axiom of Choice. Let $d\\ge1$, $N\\ge3$, $T\\ge0$, and let $(\\eta_t)_{0\\le t\\le T}$ be the SSEP from the diffusive-model definition. Let $H:[0,T]\\times\\mathbb T^d\\to\\mathbb R$ be smooth up to the time endpoints, meaning all time and space derivatives used below extend continuously to $[0,T]\\times\\mathbb T^d$. Define\n\n$$F_s^N(\\eta):=N^{-d}\\sum_{x\\in\\Lambda_N}\\eta_xH(s,x/N),\\qquad 0\\le s\\le T.$$\n\nThen\n\n$$M_t^N:=F_t^N(\\eta_t)-F_0^N(\\eta_0)-\\int_0^t\\langle\\pi_s^N,\\partial_sH(s,\\cdot)+\\Delta_NH(s,\\cdot)\\rangle\\,ds$$\n\nis a square-integrable martingale, and\n\n$$A_t^N:=N^{2-2d}\\int_0^t\\sum_{i=1}^d\\sum_{x\\in\\Lambda_N}(\\eta_{x+e_i}(s)-\\eta_x(s))^2\\bigl(H(s,(x+e_i)/N)-H(s,x/N)\\bigr)^2\\,ds$$\n\nis a continuous predictable increasing process with $(M_t^N)^2-A_t^N$ a martingale. In particular,\n\n$$A_T^N\\le T N^{-d}\\sum_{i=1}^d\\sup_{0\\le s\\le T}\\|\\partial_iH(s,\\cdot)\\|_\\infty^2.$$",
+          "relevant_hypotheses_and_conventions": "The exact hypotheses and conventions used are restated in the consumer Facts & Assumptions where applicable; this excerpt records the inspected supplier interface.",
+          "supplier_proof_status": "Draft supplier interface and complete current proof inspected for this use; current readiness is recorded separately. This is not independent proof approval.",
+          "consumer_use": "Facts F3 use this supplier interface."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-91",
+        "notes": "Independently reviewed all four proof steps and exact six declared supplier interfaces. Backward H_s=P_(t-s)G is real and smooth through s=t; heat derivative bounds make centered-difference error O(N^-2) uniformly on the horizon. Bracket O(N^-d) gives fixed-time convergence for every d>=1 on possibly different probability spaces; initial convergence applies to the real smooth P_tG. The fixed-test Doob bound and deterministic mass<=1 give the finite-mesh argument and uniform-in-time conclusion. Checked cadlag path hypothesis from uniformization, bracket expectation identity, T=0, G constant, and zero/full density. Full AC implies the heat supplier AC_omega. Remarks correctly derive D=ell_0^2/tau_0 for this mathematical model and claim no empirical result. No mathematical defect; outside generator metadata remains referred."
+      },
+      "repair_confidence": 1,
+      "current_boundary_worksheet": {
+        "proposal": "research/physics-non-fluid-129-2026-10-21-r2-owner-step2-boundary-proposal-8/proposal.json",
+        "source_sha256": "e4dd06604fa8c31afa89d69c0d9202f4284be86974c05cc77e91809c29292684",
+        "qualification": "Released complete current source/eight-case semantic worksheet; root transcribed exact current rows. No independent acceptance or finite computation asserted."
+      }
+    },
+    "ex-csm-frontier-ssep-density-mode": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-csm-frontier-ssep-heat-flow",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $d\\ge1$ and let $\\rho_0:\\mathbb T^d\\to\\mathbb R$ be measurable with $0\\le\\rho_0\\le1$ almost everywhere, using normalized product Haar measure $dx$. For $k\\in\\mathbb Z^d$ define $e_k(x)=\\exp(2\\pi i k\\cdot x)$ and $\\widehat f(k)=\\int_{\\mathbb T^d}f(x)e_{-k}(x)\\,dx$. For $t>0$ set\n\n$$\\rho_t(x):=\\sum_{k\\in\\mathbb Z^d}e^{-4\\pi^2|k|^2t}\\widehat\\rho_0(k)e_k(x),$$\n\nand at $t=0$ set $\\rho_t=\\rho_0$ as an almost-everywhere class. For smooth periodic $G$, define\n\n$$P_tG(x):=\\sum_{k\\in\\mathbb Z^d}e^{-4\\pi^2|k|^2t}\\widehat G(k)e_k(x)\\quad(t>0),\\qquad P_0G:=G.$$\n\nThen on every strip $[\\epsilon,T]\\times\\mathbb T^d$ with $0<\\epsilon<T<\\infty$, the series for $\\rho_t$ and all its space and time derivatives converge absolutely and uniformly; in particular $\\rho_t$ is real and smooth for each $t>0$ and $\\partial_t\\rho_t=\\Delta\\rho_t$. For every finite $T$ and every smooth $G$, $P_tG$ is smooth on $[0,T]\\times\\mathbb T^d$, satisfies $\\partial_tP_tG=\\Delta P_tG$, has uniformly bounded derivatives of every fixed order there, and $P_tG\\to G$ uniformly as $t\\downarrow0$. Moreover\n\n$$\\int_{\\mathbb T^d}\\rho_tG\\,dx=\\int_{\\mathbb T^d}\\rho_0P_tG\\,dx,$$\n\nso $(\\rho_t)_{0\\le t\\le T}$ is the unique weak heat solution with datum $\\rho_0$ in the stated weak formulation. It preserves $0\\le\\rho_t\\le1$ almost everywhere and the mass $\\int\\rho_t\\,dx=\\int\\rho_0\\,dx$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-csm-frontier-ssep-heat-limit",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Fix $d\\ge1$, $T\\ge0$, and for each integer $N\\ge3$ let $(\\eta_t^N)_{0\\le t\\le T}$ be the SSEP on $\\Lambda_N=(\\mathbb Z/N\\mathbb Z)^d$ with rate $N^2$ on each unordered nearest-neighbor bond, started from any initial probability vector on a probability space $(\\Xi_N,\\mathcal A_N,\\mathbb P_N)$. Write $\\pi_t^N=N^{-d}\\sum_{x\\in\\Lambda_N}\\eta_x^N(t)\\delta_{x/N}$ for its empirical measure. Suppose a measurable $\\rho_0:\\mathbb T^d\\to[0,1]$ satisfies, for every real-valued smooth periodic $G$ and every $\\epsilon>0$,\n\n$$\\mathbb P_N\\!\\left(\\left|\\langle\\pi_0^N,G\\rangle-\\int_{\\mathbb T^d}\\rho_0(x)G(x)\\,dx\\right|>\\epsilon\\right)\\longrightarrow0\\qquad(N\\to\\infty),$$\n\nwhere the probability spaces may depend on $N$. Let $\\rho_t$ be the unique weak heat solution on $\\mathbb T^d$ with initial datum $\\rho_0$, defined by the Fourier heat profile. Then for every real-valued smooth periodic $G$ and every $\\epsilon>0$,\n\n$$\\mathbb P_N\\!\\left(\\sup_{0\\le t\\le T}\\left|\\langle\\pi_t^N,G\\rangle-\\int_{\\mathbb T^d}\\rho_t(x)G(x)\\,dx\\right|>\\epsilon\\right)\\longrightarrow0\\qquad(N\\to\\infty).$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The constant function has Laplacian zero. Direct differentiation of $\\cos(2\\pi k\\cdot x)$ gives $\\Delta\\cos(2\\pi k\\cdot x)=-4\\pi^2|k|^2\\cos(2\\pi k\\cdot x)$. Therefore the displayed $\\rho_t$ solves $\\partial_t\\rho_t=\\Delta\\rho_t$ and has the stated initial value. The bound on $b$ gives $0\\le\\rho_0\\le1$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By uniqueness in [F1], this explicit solution is the heat profile used in [F2]. Applying [F2] to the assumed SSEP sequence gives the uniform-in-time convergence statement. The formula is therefore a conditional model prediction and contains no empirical observation.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example assumes d\u22651 and a nonempty continuum torus."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The mode k=0 is permitted and gives a constant density; step 1.1 verifies its zero Laplacian."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Example permits d=1 and any integer Fourier mode."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "If a=0 or a=1, the amplitude bound forces b=0, and step 1.1 verifies the profile remains admissible."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 includes t=0 and step 2.1 applies the theorem on any finite interval [0,T]."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement A1 records the Axiom of Choice required by the cited theorem."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example contains no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/csm_boundary",
+            "reason": "The cosine Laplacian calculation and uniqueness give an explicit heat profile. The hydrodynamic prediction follows for an assumed initial-law sequence; there is no equivalence characterizing microscopic laws by this formula.",
+            "item_sha256": "9b67d07ad6047c115577ef4dcfc2981bdb1787b542ebdfe64311f4b18f347642",
+            "row_sha256": "c785cfd9f99fbc162f904355cde8cf463948d6ac6a155d301e0b7a491b5d5dd5"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example contains no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/csm_boundary",
+            "reason": "The cosine Laplacian calculation and uniqueness give an explicit heat profile. The hydrodynamic prediction follows for an assumed initial-law sequence; there is no equivalence characterizing microscopic laws by this formula.",
+            "item_sha256": "9b67d07ad6047c115577ef4dcfc2981bdb1787b542ebdfe64311f4b18f347642",
+            "row_sha256": "6bd1fce339602dc5c0e2b34e2f577eaef837c523cb269d66ff0500d58e744594"
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "zero mode and zero amplitude",
+          "status": "checked",
+          "evidence": "Step 1.1 gives a constant profile when k=0 or b=0."
+        },
+        {
+          "name": "endpoint densities",
+          "status": "checked",
+          "evidence": "Step 1.1 uses |b|\u2264min(a,1-a), which forces b=0 at a=0 or a=1."
+        }
+      ],
+      "finite_checks_disposition": "Boundary and finite cases that affect the claim are checked explicitly above. The general argument is symbolic and applies to all inputs in the stated domains; no unrecorded numerical or experimental checks are used.",
+      "supplier_excerpts": [
+        {
+          "supplier": "def-axiom-of-choice",
+          "carrier": "items/def-axiom-of-choice.md",
+          "status": "Published supplier interface inspected; complete current proof inspected where the item has a proof. This records Step 1 use only and is not an independent approval.",
+          "source_section": "Definition",
+          "exact_statement": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "relevant_hypotheses_and_conventions": "The exact hypotheses and conventions used are restated in the consumer Facts & Assumptions where applicable; this excerpt records the inspected supplier interface.",
+          "supplier_proof_status": "Published supplier interface inspected; complete current proof inspected where the item has a proof. This records Step 1 use only and is not an independent approval.",
+          "consumer_use": "Facts A1 use this supplier interface."
+        },
+        {
+          "supplier": "lem-csm-frontier-ssep-heat-flow",
+          "carrier": "items/lem-csm-frontier-ssep-heat-flow.md",
+          "status": "Draft supplier interface and complete current proof inspected for this use; current readiness is recorded separately. This is not independent proof approval.",
+          "source_section": "Statement",
+          "exact_statement": "Assume the Axiom of Countable Choice. Let $d\\ge1$ and let $\\rho_0:\\mathbb T^d\\to\\mathbb R$ be measurable with $0\\le\\rho_0\\le1$ almost everywhere, using normalized product Haar measure $dx$. For $k\\in\\mathbb Z^d$ define $e_k(x)=\\exp(2\\pi i k\\cdot x)$ and $\\widehat f(k)=\\int_{\\mathbb T^d}f(x)e_{-k}(x)\\,dx$. For $t>0$ set\n\n$$\\rho_t(x):=\\sum_{k\\in\\mathbb Z^d}e^{-4\\pi^2|k|^2t}\\widehat\\rho_0(k)e_k(x),$$\n\nand at $t=0$ set $\\rho_t=\\rho_0$ as an almost-everywhere class. For smooth periodic $G$, define\n\n$$P_tG(x):=\\sum_{k\\in\\mathbb Z^d}e^{-4\\pi^2|k|^2t}\\widehat G(k)e_k(x)\\quad(t>0),\\qquad P_0G:=G.$$\n\nThen on every strip $[\\epsilon,T]\\times\\mathbb T^d$ with $0<\\epsilon<T<\\infty$, the series for $\\rho_t$ and all its space and time derivatives converge absolutely and uniformly; in particular $\\rho_t$ is real and smooth for each $t>0$ and $\\partial_t\\rho_t=\\Delta\\rho_t$. For every finite $T$ and every smooth $G$, $P_tG$ is smooth on $[0,T]\\times\\mathbb T^d$, satisfies $\\partial_tP_tG=\\Delta P_tG$, has uniformly bounded derivatives of every fixed order there, and $P_tG\\to G$ uniformly as $t\\downarrow0$. Moreover\n\n$$\\int_{\\mathbb T^d}\\rho_tG\\,dx=\\int_{\\mathbb T^d}\\rho_0P_tG\\,dx,$$\n\nso $(\\rho_t)_{0\\le t\\le T}$ is the unique weak heat solution with datum $\\rho_0$ in the stated weak formulation. It preserves $0\\le\\rho_t\\le1$ almost everywhere and the mass $\\int\\rho_t\\,dx=\\int\\rho_0\\,dx$.",
+          "relevant_hypotheses_and_conventions": "The exact hypotheses and conventions used are restated in the consumer Facts & Assumptions where applicable; this excerpt records the inspected supplier interface.",
+          "supplier_proof_status": "Draft supplier interface and complete current proof inspected for this use; current readiness is recorded separately. This is not independent proof approval.",
+          "consumer_use": "Facts F1 use this supplier interface."
+        },
+        {
+          "supplier": "thm-csm-frontier-ssep-heat-limit",
+          "carrier": "items/thm-csm-frontier-ssep-heat-limit.md",
+          "status": "Draft supplier interface and complete current proof inspected for this use; current readiness is recorded separately. This is not independent proof approval.",
+          "source_section": "Statement",
+          "exact_statement": "Assume the Axiom of Choice. Fix $d\\ge1$, $T\\ge0$, and for each integer $N\\ge3$ let $(\\eta_t^N)_{0\\le t\\le T}$ be the SSEP on $\\Lambda_N=(\\mathbb Z/N\\mathbb Z)^d$ with rate $N^2$ on each unordered nearest-neighbor bond, started from any initial probability vector on a probability space $(\\Xi_N,\\mathcal A_N,\\mathbb P_N)$. Write $\\pi_t^N=N^{-d}\\sum_{x\\in\\Lambda_N}\\eta_x^N(t)\\delta_{x/N}$ for its empirical measure. Suppose a measurable $\\rho_0:\\mathbb T^d\\to[0,1]$ satisfies, for every real-valued smooth periodic $G$ and every $\\epsilon>0$,\n\n$$\\mathbb P_N\\!\\left(\\left|\\langle\\pi_0^N,G\\rangle-\\int_{\\mathbb T^d}\\rho_0(x)G(x)\\,dx\\right|>\\epsilon\\right)\\longrightarrow0\\qquad(N\\to\\infty),$$\n\nwhere the probability spaces may depend on $N$. Let $\\rho_t$ be the unique weak heat solution on $\\mathbb T^d$ with initial datum $\\rho_0$, defined by the Fourier heat profile. Then for every real-valued smooth periodic $G$ and every $\\epsilon>0$,\n\n$$\\mathbb P_N\\!\\left(\\sup_{0\\le t\\le T}\\left|\\langle\\pi_t^N,G\\rangle-\\int_{\\mathbb T^d}\\rho_t(x)G(x)\\,dx\\right|>\\epsilon\\right)\\longrightarrow0\\qquad(N\\to\\infty).$$",
+          "relevant_hypotheses_and_conventions": "The exact hypotheses and conventions used are restated in the consumer Facts & Assumptions where applicable; this excerpt records the inspected supplier interface.",
+          "supplier_proof_status": "Draft supplier interface and complete current proof inspected for this use; current readiness is recorded separately. This is not independent proof approval.",
+          "consumer_use": "Facts F2 use this supplier interface."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-91",
+        "notes": "Checked both verification steps against the current heat-flow and heat-limit suppliers. The cosine eigenvalue is -4 pi^2 |k|^2, constant part has eigenvalue zero, and |b|<=min(a,1-a) bounds the datum in [0,1]. For k=0 the profile is the constant a+b, not a distinct pair of nonzero modes; the displayed formula still holds. b=0 and a=0 or 1 are valid, and T=0 is the initial-law premise. The empirical convergence is explicitly conditional on the full initial test-profile assumption; it neither constructs measurements nor infers physical truth. Full AC is explicit in Given/A1 and inherited in the cited theorem. No defect found."
+      },
+      "repair_confidence": 1
+    }
+  }
+}

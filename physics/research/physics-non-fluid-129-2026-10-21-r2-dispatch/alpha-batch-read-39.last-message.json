@@ -1,0 +1,268 @@
+{
+  "group": "r",
+  "batches": ["39"],
+  "pages_read": [
+    "gr-fx11-numerical-geometry-and-constraint-monitoring",
+    "gr-fx11-numerical-geometry-and-constraint-monitoring-examples"
+  ],
+  "items_read": [
+    "alg-gr-fx-periodic-wave-leapfrog",
+    "prop-gr-fx-leapfrog-termination",
+    "thm-gr-fx-leapfrog-mode-stability",
+    "thm-gr-fx-leapfrog-local-truncation",
+    "def-gr-fx-constraint-residual-diagnostic",
+    "ex-gr-fx11-1",
+    "ex-gr-fx11-2"
+  ],
+  "conventions": [
+    {
+      "convention": "The scalar benchmark uses dimensionless space and time, period 2π, wave speed 1, N ≥ 3, h = 2π/N, k > 0, and exact real arithmetic. Grid indices wrap modulo N.",
+      "fixed_by": "alg-gr-fx-periodic-wave-leapfrog",
+      "matters_for": [
+        "prop-gr-fx-leapfrog-termination",
+        "thm-gr-fx-leapfrog-mode-stability",
+        "thm-gr-fx-leapfrog-local-truncation",
+        "ex-gr-fx11-1"
+      ]
+    },
+    {
+      "convention": "Initialization is u¹ = u⁰ + kv⁰ + (k²/2)D_hu⁰; subsequent updates are uⁿ⁺¹ = 2uⁿ − uⁿ⁻¹ + k²D_huⁿ. The output includes levels 0 through n_max, with n_max ≥ 1.",
+      "fixed_by": "alg-gr-fx-periodic-wave-leapfrog",
+      "matters_for": [
+        "prop-gr-fx-leapfrog-termination",
+        "thm-gr-fx-leapfrog-mode-stability",
+        "ex-gr-fx11-1"
+      ]
+    },
+    {
+      "convention": "The distinct unit-modulus root claim assumes 0 < k/h < 1 and excludes the constant mode. The mean is ū⁰ + nkv̄⁰. At k/h = 1 on an even grid, Nyquist velocity produces the separately stated repeated-root solution.",
+      "fixed_by": "thm-gr-fx-leapfrog-mode-stability",
+      "matters_for": [
+        "ex-gr-fx11-1"
+      ]
+    },
+    {
+      "convention": "Use K(X,Y) = g(∇_Xn,Y), ρ = T(n,n), and j_i = −T(n,∂_i). The discrete momentum residual includes +κj_j; the Hamiltonian residual subtracts 2Λ + 2κρ.",
+      "fixed_by": "def-gr-fx-constraint-residual-diagnostic",
+      "matters_for": [
+        "ex-gr-fx11-2"
+      ]
+    },
+    {
+      "convention": "Diagnostic coordinates are dimensionless torus angles; h_ij has units m² and K_ij units m. Derivative maps are specified linear array maps annihilating constants. Reconstruction need not be continuous, and residuals alone certify no continuum solution.",
+      "fixed_by": "def-gr-fx-constraint-residual-diagnostic",
+      "matters_for": [
+        "ex-gr-fx11-2"
+      ]
+    },
+    {
+      "convention": "The aliasing example uses even N ≥ 4, 0 < ε < 1, L_* > 0, centered periodic derivatives, piecewise-constant reconstruction, uniform positive weights, and a singleton mesh hierarchy. Countable Choice is retained for the supplier's embedded interpretation.",
+      "fixed_by": "ex-gr-fx11-2",
+      "matters_for": [
+        "ex-gr-fx11-2"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "alg-gr-fx-periodic-wave-leapfrog",
+      "statement": "For real periodic arrays u⁰,v⁰ on N ≥ 3 sites, k > 0 and integer n_max ≥ 1, initialize u¹ = u⁰ + kv⁰ + (k²/2)D_hu⁰, update uⁿ⁺¹ = 2uⁿ − uⁿ⁻¹ + k²D_huⁿ for n = 1,…,n_max−1, and output all levels through uⁿ_max using exact real arithmetic.",
+      "used_by": [
+        "prop-gr-fx-leapfrog-termination",
+        "thm-gr-fx-leapfrog-mode-stability",
+        "thm-gr-fx-leapfrog-local-truncation",
+        "ex-gr-fx11-1",
+        "ex-gr-fx11-2"
+      ]
+    },
+    {
+      "id": "def-gr-fx-constraint-residual-diagnostic",
+      "statement": "For the specified positive-definite metric samples, symmetric K samples, matter samples, constants and linear derivative maps annihilating constants, define the displayed discrete connection and curvature arrays and residuals H_Δ = R_Δ + τ_Δ² − |K|_Δ² − 2Λ − 2κρ and M_Δ,j = hⁱᵏ(D_i^ΔK)_kj − δ_jτ_Δ + κj_j. Record the reconstruction, norm, weights, mesh hierarchy, units and boundary treatment.",
+      "used_by": [
+        "ex-gr-fx11-2"
+      ]
+    },
+    {
+      "id": "thm-gr-fx-leapfrog-mode-stability",
+      "statement": "For N ≥ 3, h = 2π/N, k > 0 and 0 < λ = k/h < 1, each nonconstant discrete Fourier mode has c_ℓ = 1 − 2λ²sin²(πℓ/N) ∈ (−1,1) and distinct roots c_ℓ ± i√(1−c_ℓ²), both of modulus 1.",
+      "used_by": [
+        "ex-gr-fx11-1"
+      ]
+    },
+    {
+      "id": "prop-gr-fx-leapfrog-termination",
+      "statement": "For every admissible integer N ≥ 3, time-step count n_max ≥ 1, real step k > 0, and pair of real periodic input arrays, the algorithm terminates after exactly n_max−1 update passes and outputs all levels through uⁿ_max. In the stated unit-cost exact-real-arithmetic model, its operation count is O(Nn_max).",
+      "used_by": [
+        "ex-gr-fx11-1"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "thm-gr-constraint-equations-in-normal-frame",
+      "used_for": "Checked the full local constraint argument and the K, curvature, Hamiltonian and momentum signs used by the diagnostic.",
+      "opened": true
+    },
+    {
+      "id": "def-complex-exponential",
+      "used_for": "Power-series definition underlying the Fourier characters.",
+      "opened": true
+    },
+    {
+      "id": "def-complex-numbers-and-arithmetic",
+      "used_for": "Complexification and the specified real embedding.",
+      "opened": true
+    },
+    {
+      "id": "thm-complex-numbers-form-a-field",
+      "used_for": "Complex coordinate arithmetic and division when solving for distinct-root coefficients.",
+      "opened": true
+    },
+    {
+      "id": "def-complex-conjugate-real-imaginary-part-and-modulus",
+      "used_for": "The modulus of the amplification roots.",
+      "opened": true
+    },
+    {
+      "id": "lem-complex-conjugation-and-modulus-laws",
+      "used_for": "Multiplicativity and the complex triangle inequality in the mode bound.",
+      "opened": true
+    },
+    {
+      "id": "def-abs-value",
+      "used_for": "Real absolute values in mean bounds, residual estimates and examples.",
+      "opened": true
+    },
+    {
+      "id": "lem-of-abs-value",
+      "used_for": "Definiteness, signs and multiplicativity in the growth and zero-residual calculations.",
+      "opened": true
+    },
+    {
+      "id": "lem-of-triangle-inequality",
+      "used_for": "Mean-mode estimates and combination of Taylor remainder bounds.",
+      "opened": true
+    },
+    {
+      "id": "lem-of-square-positive",
+      "used_for": "Strict positivity and nonnegativity of real squares in the amplification-root calculation.",
+      "opened": true
+    },
+    {
+      "id": "thm-of-archimedean",
+      "used_for": "Unboundedness of the constant mode with nonzero mean velocity.",
+      "opened": true
+    },
+    {
+      "id": "thm-eulers-formula",
+      "used_for": "Fourier characters, stencil eigenvalues and the alternating Nyquist character.",
+      "opened": true
+    },
+    {
+      "id": "thm-sine-and-cosine-addition-formulas",
+      "used_for": "Fourier shifts and the double-angle identity.",
+      "opened": true
+    },
+    {
+      "id": "thm-sine-and-cosine-derivatives",
+      "used_for": "The frequency lower bound and differentiation of the unresolved sine mode.",
+      "opened": true
+    },
+    {
+      "id": "thm-sine-cosine-zero-sets-and-fundamental-period",
+      "used_for": "Periodicity, nonvanishing of nonconstant discrete frequencies and vanishing sampled sine values.",
+      "opened": true
+    },
+    {
+      "id": "thm-quarter-turn-values-and-shift-formulas",
+      "used_for": "Nyquist identification, frequency symmetry and evaluation between sample nodes.",
+      "opened": true
+    },
+    {
+      "id": "cor-trigonometric-parity-and-pythagorean-identity",
+      "used_for": "Sine bounds, parity and the unit-circle calculation.",
+      "opened": true
+    },
+    {
+      "id": "thm-nth-roots-exist",
+      "used_for": "Existence and uniqueness of nonnegative square roots in the stable and unstable root formulas.",
+      "opened": true
+    },
+    {
+      "id": "def-finite-sum",
+      "used_for": "Finite spatial means and their indexing conventions.",
+      "opened": true
+    },
+    {
+      "id": "lem-finite-sum-reindexing-and-fubini",
+      "used_for": "Invariance of finite grid sums under cyclic shifts.",
+      "opened": true
+    },
+    {
+      "id": "cor-mean-value-theorem",
+      "used_for": "The sine chord estimate proving the mesh-independent frequency lower bound.",
+      "opened": true
+    },
+    {
+      "id": "cor-pi-is-the-first-positive-sine-zero",
+      "used_for": "Positivity of sine and monotonicity of cosine in the chord argument.",
+      "opened": true
+    },
+    {
+      "id": "cor-taylor-remainder-bound",
+      "used_for": "Degree-three Taylor remainder bounds with coefficient 1/4!, yielding centered-difference errors bounded by M times step²/12.",
+      "opened": true
+    },
+    {
+      "id": "thm-clairaut-schwarz-mixed-partials",
+      "used_for": "Commutation of continuous mixed derivatives to obtain u_tttt = u_xxxx.",
+      "opened": true
+    },
+    {
+      "id": "thm-heine-borel-rn",
+      "used_for": "Compactness of the nonempty closed space-time box defining M_n.",
+      "opened": true
+    },
+    {
+      "id": "thm-extreme-value-metric",
+      "used_for": "Boundedness of the continuous fourth spatial derivative on that compact box.",
+      "opened": true
+    },
+    {
+      "id": "def-countable-choice",
+      "used_for": "The explicitly qualified embedded Lorentzian interpretation in the conformal-data example.",
+      "opened": true
+    },
+    {
+      "id": "prop-christoffel-formula-for-the-levi-civita-connection",
+      "used_for": "Vanishing seed Christoffel symbols for the constant flat metric.",
+      "opened": true
+    },
+    {
+      "id": "def-curvature-of-an-affine-connection",
+      "used_for": "Curvature convention and vanishing seed curvature in the aliasing example.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-rule",
+      "used_for": "The second derivative of sin(Nx/2) in the continuum residual calculation.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "gr-fx11-numerical-geometry-and-constraint-monitoring",
+      "to": "gr-fx03-geometric-cauchy-stability",
+      "faithful": true,
+      "note": "Opened the supplier page, fixed-gauge topology definition and finite-slab theorem statement. The benchmark borrows the periodic torus while explicitly adopting separate dimensionless scalar dynamics. Its stability remark correctly distinguishes the continuum fixed-gauge estimate from missing discrete Einstein estimates. The supplier makes no converse claim certifying the benchmark."
+    },
+    {
+      "from": "gr-fx11-numerical-geometry-and-constraint-monitoring",
+      "to": "gr-fx02-conformal-constraint-construction",
+      "faithful": true,
+      "note": "Opened the supplier page, conformal-data definition and complete Lichnerowicz reduction proof. The companion example satisfies compact smooth positive conformal-data, TT-zero, constant-trace-zero and vacuum hypotheses. Its exact residual identity follows from supplier proof step 3.1, beyond the Statement's zero-residual equivalence. Neither side claims general solvability or a spacetime development from sampled residuals."
+    }
+  ]
+}

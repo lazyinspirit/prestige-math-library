@@ -1,0 +1,4532 @@
+arXiv:math/0408405v2  [math.QA]  16 May 2006
+
+Hopf algebras,
+
+from basics to applications to renormalization
+
+Revised and updated version, may 2006
+
+Dominique Manchon1
+
+Introduction
+
+These notes are an extended version of a series of lectures given at Bogota from 2nd to 6th
+december 2002. They aim to present a self-contained introduction to the Hopf-algebraic
+techniques which appear in the work of A. Connes and D. Kreimer on renormalization
+in Quantum Field Theory [CK1], [CK2], [BF]... Our point of view consists in revisiting
+a substantial part of their work in the abstract framework of connected graded Hopf
+algebras, i.e. Hopf algebras endowed with a compatible Z+ grading such that the degree
+zero component is one-dimensional.
+Chapter I contains a few elements of Hopf algebra theory which can be found in any
+good introductory text on the subject ([Ab], [Sw], [Ka]...), as well as some basic tools from
+algebra which are necessary to understand the coradical filtration of a Hopf algebra.
+Chapter II deals with connected graded and connected filtered Hopf algebras with
+emphasis on the convolution product. The main interest of these objects resides in the
+possibility to implement induction techniques with respect to the grading or the filtration :
+the starting point is the particular form of the coproduct on a connected filtered Hopf
+algebra H :
+
+∆x = x ⊗1 + 1 ⊗x + terms involving elements of strictly lower filtration degree.
+
+We derive the Birkhoff decomposition of any linear map on H with values into any com-
+mutative unital algebra A which sends the unit 1 to the unit 1A, provided the algebra A
+is endowed with a renormalization scheme, i.e. a splitting :
+
+A = A−⊕A+
+
+into two subalgebras, where A+ contains the unit 1A. Those maps indeed form a group G
+under the convolution product, and the Birkhoff decomposition of any ϕ ∈G reads :
+
+ϕ = ϕ∗−1
+−
+∗ϕ+,
+
+1
+Universit´e Blaise Pascal, CNRS - UMR 6620. manchon@math.univ-bpclermont.fr
+
+1
+
+
+where ϕ−and ϕ+ are elements of G, ϕ−sends any element of H of positive degree to an
+element of A−, , and ϕ+ is a map with values in A+. As an example, A is the algebra of
+germs of meromorphic functions at z0 ∈C endowed with the minimal subtraction scheme,
+i.e. A+ is the algebra of germs of holomorphic functions at z0, and A−is the subalgebra
+of polar parts (z −z0)−1C[(z −z0)−1].
+
+The Birkhoff decomposition respects two particular subgroups of G, namely the group
+G1 of algebra morphisms from H into A (characters), and the group G2 of elements ϕ of
+G such that ϕ(xy) = ϕ(yx) (cocycles). We end up this chapter with some examples. The
+Birkhoff decomposition in this abstract algebraic setting has applications beyond quantum
+field theory, for example in number theory where it can be used to define multiple zeta
+values at nonpositive arguments ([GZ], [MP2]).
+
+Chapter III is devoted to Feynman graphs, which are the original example coming from
+quantum field theory, where D. Kreimer discovered the underlying Hopf algebra structure.
+
+In Chapter IV we define a bijective map �R : G →g where g stands for the linear space
+of maps on H with values into A which sends the unit 1 to 0. It is uniquely defined by
+means of the equation :
+
+ϕ ◦Y = ϕ ∗�R(ϕ),
+
+where Y : H →H is the natural biderivation x �→|x|.x associated to the graduation. We
+give an explicit formula for this renormalization map and for its inverse. Finally, along
+the lines of [CK2] we explore more closely the interplay between the renormalization map
+�R and Birkhoff decomposition. When A is the algebra of germs of meromorphic functions
+at z0 = 0 endowed with the minimal subtraction scheme, the renormalization map �R is
+closely related to the β-function of [CK2] as follows : for any ϕ ∈G1 with trivial positive
+part in the Birkhoff decomposition (i.e. ϕ+ = uA ◦ε, where ε is the co-unit of H and uA
+is the unit map of A), we have :
+
+β(ϕ) = z �R(ϕ).
+
+(see theorem IV.4.4).
+
+These notes find their origin in a workshop on renormalization in Quantum Field
+Theory held in Nancy every monday during year 2000-2001. I would like to thank all par-
+ticipants to this workshop, among them specially Philippe Bonneau, Malte Henkel, Mohsen
+Masmoudi, Andr´e Roux, J´er´emie Unterberger and Tilmann Wurzbacher. Many thanks as
+well to the Mathematics Departments of Universidad de Los Andes and Universidad La
+Nacional at Bogota for the friendly atmosphere of this conference. I would like to thank
+Luis Fernandez and Sylvie Paycha for valuable remarks on previous versions of this text,
+as well as Kurusch Ebrahimi-Fard, Dirk Kreimer and Li Guo for illuminating discussions.
+
+Enfin, un grand merci `a toute l’´equipe des Rencontres Math´ematiques de Glanon pour
+avoir bien voulu publier ces notes dans ce volume des comptes-rendus.
+
+2
+
+
+Contents :
+
+Introduction
+
+I. A few elements of Hopf algebra theory
+
+I.1. Tensor algebra
+
+I.2. Algebras
+I.3. Coalgebras
+
+I.4. Convolution product
+
+I.5. Bialgebras and Hopf algebras
+
+I.6. Examples
+I.7. Some properties of Hopf algebras
+
+II. Convolution product and regularization
+
+II.1. Connected graded bialgebras
+II.2. Connected filtered bialgebras
+
+II.3. The convolution product
+
+II.4. Algebra morphisms and cocycles
+II.5. Birkhoff decomposition
+
+II.6. The BCH approach to Birkhoff decomposition
+
+II.7. Renormalized traces and characters
+
+II.8. More on the graduation
+II.9. Examples
+
+III. Hopf algebras of Feynman graphs
+
+III.1. Discarding exterior structures
+III.2. Operations on Feynman graphs
+
+III.3. The graded Hopf algebra structure
+
+III.4. External structures
+
+IV. An approach to the renormalization group
+
+III.1. The renormalization map
+
+III.2. Inverting �R : the scattering map
+III.3. The residue
+
+III.4. Renormalization map and Birkhoff decomposition
+
+References
+
+3
+
+
+I. A few elements of Hopf algebra theory
+
+I.1. Tensor algebra
+
+Let k be any field, and let A, B be vector spaces over k. The tensor product A ⊗B is a
+vector space over k which satisfies the following universal property : there exists a bilinear
+map :
+ι : A × B −→A ⊗B
+
+(a, b) �−→a ⊗b
+
+such that for any k-vector space C and for any bilinear map f from A × B into C there is
+a unique linear map �f : A ⊗B →C such that f = �f ◦ι :
+
+A ⊗B
+�
+f
+
+��
+�
+�
+�
+�
+�
+�
+�
+�
+
+A × B
+
+ι
+�
+
+f
+�C
+
+Proposition I.1.1.
+Tensor product A ⊗B exists and is unique up to isomorphism.
+
+Proof. We show uniqueness first : if (T1, ι1) and (T2, ι2) are both candidates for playing
+the role of the tensor product, then the universal property applied to both tells us that
+there exist φ : T1 →T2 and ψ : T2 →T1 such that ι2 = φ ◦ι1 and ι1 = ψ ◦ι2.
+
+T1
+φ
+
+��
+�
+�
+�
+�
+�
+�
+�
+�
+
+A × B
+
+ι1
+�
+
+ι2
+�T2
+
+ψ
+
+����������
+
+Applying the universal property twice again shows that ψ ◦φ = IT1 and φ ◦ψ = IT2,
+whence uniqueness of the tensor product up to linear isomorphism.
+
+For the existence we shall need axiom of choice in the infinite-dimensional case : let
+(ei)i∈E and (fj)j∈F be bases of A and B respectively. Then we take as A ⊗B the vector
+space freely generated by (cij)i∈E,j∈F , and we set ι(ei, fj) = ei ⊗fj = cij. For any bilinear
+map φ from A × B to another vector space C it is clear that the linear map �φ from A ⊗B
+to C defined by :
+�φ(cij) = φ(ei, fj)
+
+is the only one such that �φ ◦ι = φ. The vector space A ⊗B constructed above fulfills then
+the universal property.
+•
+
+4
+
+
+Elements a ⊗b in A ⊗B are called indecomposable. They clearly generate A ⊗B. Tensor
+products k ⊗A and A ⊗k are canonically identified with A via 1 ⊗a ≃a ≃a ⊗1. When
+three vector spaces A, B, C are involved there is an isomorphism :
+
+α : (A ⊗B) ⊗C −→A ⊗(B ⊗C)
+(a ⊗b) ⊗c �−→a ⊗(b ⊗c).
+
+Note that this isomorphism is not canonical, because tensor product A ⊗B itself is only
+defined up to isomorphism. We shall denote by A ⊗B ⊗C any of these two versions of the
+iterated tensor product.
+
+Let A and B be two vector spaces. The flip τ : A⊗B →B⊗A defined by τ(a⊗b) = b⊗a
+is an isomorphism. This generalizes to any finite collection of vector spaces as follows :
+any permutation σ ∈Sn defines a map :
+
+τσ : A1 ⊗· · · ⊗An −→Aσ−11 ⊗· · · ⊗Aσ−1n
+a1 ⊗· · · ⊗an �−→aσ−11 ⊗· · · ⊗aσ−1n.
+
+In particular the group Sn acts on the tensor power A⊗n by automorphisms. It makes
+then sense to consider the tensor power A⊗F for any finite set, by choosing any arbitrary
+total order on F.
+
+Now let us consider four k-vector spaces A1, A2, B1, B2.
+
+Proposition I.1.2.
+There is a canonical injection :
+
+L(A1, A2) ⊗L(B1, B2)
+j
+֒−−→
+∼L(A1 ⊗B1, A2 ⊗B2)
+
+given by :
+�
+j(f ⊗g)
+�
+(a ⊗b) = f(a) ⊗g(b).
+
+In the case when all the spaces are finite-dimensional, this injection is an isomorphism.
+
+Proof. The space L(A1 ⊗B1, A2 ⊗B2) together with the bilinear map :
+
+ι : L(A1, A2) × L(B1, B2) −→L(A1 ⊗B1, A2 ⊗B2)
+
+(f, g) �−→
+�
+a ⊗b �→f(a) ⊗g(b)
+�
+
+yields the map j, which is easily seen to be injective. In the finite-dimensional case we can
+either compute the dimensions or verify that the space L(A1 ⊗B1, A2 ⊗B2) together with
+the bilinear map ι fulfills the universal property. The details are left to the reader.
+•
+
+5
+
+
+Remark : There are “super” versions of the tensor product for super-vector spaces (i.e.
+Z2-graded vector spaces). Elements of vector spaces and linear morphisms are decomposed
+into degree zero (even) and degree one (odd) components. Then proposition I.1.2 must be
+modified by a minus sign if both g and a are odd : this is the Koszul rule of signs :
+
+(f ⊗g)(a ⊗b) = (−1)|g||a|f(a) ⊗g(b),
+
+according to which any transposition in such a formula brings a sign which is minus if
+and only if the two elements involved in the transposition are odd. We shall not use this
+Z2-graded framework in the sequel.
+
+I.2. Algebras and modules
+
+I.2.1. Basic definitions
+
+A k-algebra is by definition a k-vector space A together with a bilinear map m : A⊗A →A
+which is associative. The associativity is expressed by the commutativity of the following
+diagram :
+
+A ⊗A ⊗A
+
+I⊗m
+�
+
+m⊗I
+�A ⊗A
+
+m
+�
+A ⊗A
+m
+�A
+
+The algebra A is unital if moreover there is a unit 1 in it.
+This is expressed by the
+commutativity of the following diagram :
+
+k ⊗A
+u⊗I �
+
+∼
+
+��
+�
+�
+�
+�
+�
+�
+�
+�
+�
+A ⊗A
+
+m
+�
+
+A ⊗k
+I⊗u
+�
+
+∼
+
+�����������
+
+A
+
+where u is the map from k to A defined by u(λ) = λ1. The algebra A is commutative if
+m ◦τ = m, where τ : A ⊗A →A ⊗A is the flip, defined by τ(a ⊗b) = b ⊗a.
+A subspace J ⊂A is called a subalgebra (resp. a left ideal, right ideal, two-sided
+ideal) of A if m(J ⊗J) (resp. m(J ⊗A), m(A ⊗J), m(J ⊗A + A ⊗J) is included in J.
+
+I.2.2. Algebras and tensor product
+
+To any vector space V we can associate its tensor algebra T(V ). As a vector space it is
+defined by :
+T(V ) =
+�
+
+k≥0
+V ⊗k,
+
+with V ⊗0 = k and V ⊗k+1 := V ⊗V ⊗k. The product is given by the concatenation :
+
+m(v1 ⊗· · · ⊗vp, vp+1 ⊗· · · ⊗vp+q) = v1 ⊗· · · ⊗vp+q.
+
+6
+
+
+The embedding of k = V ⊗0 into T(V ) gives the unit map u. Tensor algebra T(V ) is
+also called the free (unital) algebra generated by V . This algebra is characterized by the
+following universal property : for any linear map ϕ from V to an algebra A there is a
+unique algebra morphism �ϕ from T(V ) to A extending ϕ. The fact that this property
+characterizes T(V ) up to isomorphism is an easy exercise left to the reader.
+
+Let A and B be unital k-algebras. We put a unital algebra structure on A ⊗B in the
+following way :
+(a1 ⊗b1).(a2 ⊗b2) = a1a2 ⊗b1b2.
+
+The unit element 1A⊗B is given by 1A ⊗1B, and the associativity is clear. This multipli-
+cation is given by :
+mA⊗B = (mA ⊗mB) ◦τ23,
+
+where τ23 : A ⊗B ⊗A ⊗B →A ⊗A ⊗B ⊗B is defined by the flip of the two middle
+factors :
+τ23(a1 ⊗b1 ⊗a2 ⊗b2) = a1 ⊗a2 ⊗b1 ⊗b2.
+
+I.2.3. Modules
+
+Let A be any unital algebra. A left A-module is a k-vector space M together with a map
+α : A ⊗M →M such that the following diagrams commute :
+
+A ⊗A ⊗M
+
+I⊗α
+�
+
+m⊗I
+�A ⊗M
+
+α
+�
+
+k ⊗M
+u⊗I �
+
+∼
+
+��
+�
+�
+�
+�
+�
+�
+�
+�
+�
+�
+A ⊗M
+
+α
+�
+A ⊗M
+α
+�M
+A
+
+The map α is called the action of the algebra A on M. For any a ∈A and m ∈M we
+usually denote by a.m the action α(a ⊗m) of a on m. The two diagrams above express
+the identities :
+(a.b).m = a.(b.m),
+1.m = m
+
+for any a, b ∈A and m ∈M. The right A-module are defined similarly, replacing A ⊗M
+with M ⊗A (details are left to the reader). A linear subspace N of a left A-module M
+is called a submodule if α(A ⊗N) ⊂N. The intersection of all left submodules of M
+containing a subset P is called the left submodule generated by P.
+
+A left module M is simple if it does not contain any submodule different from {0} or
+M itself. If a left module M can be written as a direct sum of simple modules, M is said
+to be semi-simple.
+
+Proposition I.2.1.
+For any left maximal ideal J of an algebra A the quotient A/J is a simple left A-module,
+and conversely any simple left A-module is isomorphic to a simple left A-module of this
+form.
+
+7
+
+
+Proof. The first assertion is immediate. Conversely, let M a simple left module and let
+m ∈M −{0}. Let Jm be the annihilator of m. It is a left ideal of A, and by simplicity of
+M the map :
+
+φm : A −→M
+
+a �−→a.m
+
+gives rise to an morphism of left A-modules from A/Jm onto M. It is injective by defi-
+nition of Jm, and surjectivity comes from the simplicity of the module M. So φm is an
+isomorphism. The left ideal Jm is maximal, which proves the proposition.
+•
+Now let M be an A-module. We denote by A′
+M the algebra of endomorphisms of M as an
+A-module, and we denote by A′′
+M the algebra of endomorphisms of M as an A′
+M-module.
+Clearly any a ∈A gives rise to an element of A′′
+M. Following N. Jacobson [J Chap. 4.3]
+we shall give a proof of an important density theorem :
+
+Theorem I.2.2.
+Let M be a semi-simple A-module, and let x1, . . ., xn a finite collection of elements of
+M. Then for any a′′ ∈A′′
+M there exists an element a ∈A such that axi = a′′xi for any
+i = 1, . . ., n.
+
+Proof. First notice that any A-submodule N of M is an A′′
+M-submodule.
+To see this
+write (thanks to semi-simplicity) M = N ⊕T where T is another A-submodule of M.
+The projection e on N with respect to this decomposition is an element of A′
+M. For any
+a′′ ∈A′′
+M we have then :
+
+a′′(N) = a′′ ◦e(M) = e ◦a′′(M) ⊂N.
+
+Consider then for any fixed positive integer n the semi-simple module M n, direct sum of n
+copies of M. The algebra A′
+Mn coincides with the algebra of n × n matrices over A′
+M, and
+the diagonal matrices over A′′
+M form a subalgebra of A′′
+Mn, and thus realize an embedding
+of A′′
+M into A′′
+Mn.
+
+Consider x = (x1, . . ., xn) ∈M n. Then N = A.x is an A-submodule of M n. So it
+is an A′′
+Mn-submodule, hence an A′′
+M-submodule via the diagonal embedding above. Then
+for any a′′ ∈A′′
+M there exists a ∈A such that a′′x = ax, which proves the theorem.
+•
+
+Corollary I.2.3.
+On a semi-simple finite-dimensional module M the natural map from A into A′′
+M is sur-
+jective.
+
+8
+
+
+I.2.4. The Jacobson radical
+
+Let A be a k-algebra. The radical rad M of a left module is by definition the intersection
+of all maximal submodules of M. When the module M is the algebra A itself, the radical
+rad A is the intersection of all maximal left ideals, and is called the Jacobson radical of
+the algebra A.
+
+We shall give an alternative definition of the Jacobson radical : a primitive ideal is
+the annihilator of a simple module. In view of proposition I.2.1, any primitive ideal is the
+annihilator of A/J where J is a maximal left ideal. Of course a primitive ideal is two-sided.
+
+Lemma I.2.4.
+Any primitive ideal is an intersection of maximal left ideals.
+
+Proof. Any primitive ideal J is by definition the annihilator of a simple module M. The
+annihilator Jm of any m ∈M −{0} is then a maximal left ideal containing J, and it is
+clear that we have :
+
+J =
+�
+
+m∈M−{0}
+Jm.
+
+•
+
+Proposition I.2.5.
+The Jacobson radical of A is the intersection of its primitive ideals.
+
+Proof. Let us call P the intersection of all primitive ideals of A. By lemma I.2.4 and
+proposition I.2.1, P is indeed the intersection of all maximal left ideals.
+•
+
+Lemma I.2.6 (Nakayama’s lemma).
+Let M a finitely generated A-module, and let N, L two submodules of M such that M =
+L + N and N ⊂rad M. Then L = M.
+
+Proof. Suppose that L is strictly contained in M. As M is finitely generated there exists
+a maximal nontrivial submodule �L containing L. It contains N as well by definition of
+rad M. Then �L contains L + N, so L + N cannot be equal to M.
+•
+
+Corollary I.2.7.
+The Jacobson radical of a finite-dimensional algebra is nilpotent.
+
+9
+
+
+Proof.
+Let A a finite-dimensional algebra with radical R.
+Observe first that for any
+A-module M we have the inclusion :
+
+R.M ⊂rad M.
+
+Indeed any maximal submodule N of M contains J.M where J is a primitive ideal, namely
+the annihilator of M/N. Hence any maximal submodule of M contains R.M. Suppose
+now that A is finite dimensional and that J is an ideal of A such that R.J = J. A fortiori
+rad J = J. Applying Nakayama’s lemma I.2.6 to M = J and L = {0} we get J = {0}.
+We immediately deduce from this fact that for any positive integer n, Rn either contains
+strictly Rn+1 or is equal to {0}. As A is finite-dimensional Rn is indeed equal to {0} for
+some n.
+•
+Remark : although the definition of the Jacobson ideal is not symmetric (because we used
+left ideals and left modules), the Jacobson ideal itself is a symmetric notion : in other
+words the Jacobson radicals of algebras A and Aopp coincide. In order to see this one can
+show that Rad A is the biggest two-sided ideal J such that 1−x is invertible for any x ∈J
+[B §6.3]. This definition is indeed symmetric.
+
+I.2.5. Maximal two-sided ideals
+
+It is easily seen that any maximal two-sided ideal in an algebra A is primitive.
+The
+converse is false in general : for example, in the enveloping algebra of the non-trivial two-
+dimensional Lie algebra, the ideal {0} is primitive but not maximal [Di]. However we have
+the following result :
+
+Proposition I.2.8.
+Any finite-codimensional primitive ideal is maximal.
+
+Before giving a proof of this result, we need the following definitions : an algebra A is
+simple if it does not contain any proper two-sided ideal. A division algebra is an algebra
+such that any nonzero element is inversible.
+
+Lemma I.2.9.
+Let D be a division algebra. Then the algebra Mn(D) of square n × n matrices over D is
+simple.
+
+Proof. Let us consider for any i, j ∈{1, . . ., n} the elementary matrix eij with vanishing
+entries except the one on the ith row and jth column which is equal to the unit of D.
+Denote by Ii the left ideal of Mn(D) consisting of matrices such that all columns vanish
+except the ith column. These left ideals are all simple and isomorphic as Mn(D)-modules.
+Now let I a nonzero two-sided ideal of Mn(D). Let X a nonzero element of I, and xkl a
+nonzero entry of the matrix X. Then for any i ∈{0, . . ., n} the product eikX belongs to
+Ii ∩I and is different from 0.
+Then Ii ∩I ̸= {0}. As Ii is simple as a left module for each i that means that I
+contains all the left ideals Ii, and hence I = Mn(D).
+•
+
+10
+
+
+There is a converse to this result, namely any simple artinian algebra (a fortiori any simple
+finite-dimensional algebra) is isomorphic to Mn(D) where D is a division algebra. This is
+a particular case of the Wedderburn-Artin theorem, which gives a complete description of
+semi-simple algebras [DF Chap. 1], [DK Chap. 2].
+
+Proof of Proposition I.2.8 : a finite-dimensional primitive ideal I is the annihilator of
+a simple finite-dimensional module M.
+By simplicity of M the algebra D = A′
+M is a
+division algebra (Schur’s lemma). The action of A on M yields (thanks to corollary I.2.3)
+a surjective algebra morphism from A onto A′′
+M, and hence an algebra isomorphism from
+A/J onto A′′
+M. But A′′
+M is a matrix algebra over D, and then is simple (according to
+lemma I.2.7). So A/J is a simple algebra, which amounts to say that J is maximal as a
+two-sided ideal.
+•
+
+Corollary I.2.10.
+In a finite-dimensional algebra, primitive ideals and maximal two-sided ideals coincide. In
+particular the Jacobson radical is the intersection of all maximal two-sided ideals in this
+case.
+
+I.3. Coalgebras and comodules
+
+This paragraph is mostly borrowed from M.E. Sweedler’s book [Sw], particularly chapters
+1, 2, 8 and 9.
+
+I.3.1. Coalgebras
+
+Coalgebras are objects wich are somehow dual to algebras : axioms for coalgebras are
+derived from axioms for algebras by reversing the arrows of the corresponding diagrams :
+
+A k-coalgebra is by definition a k-vector space C together with a bilinear map ∆:
+C →C⊗C which is co-associative. The co-associativity is expressed by the commutativity
+of the following diagram :
+
+C ⊗C ⊗C
+C ⊗C
+∆⊗I
+�
+
+C ⊗C
+
+I⊗∆
+�
+
+C
+∆
+�
+
+∆
+�
+
+Coalgebra C is co-unital if moreover there is a co-unit ε such that the following diagram
+commutes :
+
+k ⊗C
+C ⊗C
+ε⊗I
+�
+I⊗ε �C ⊗k
+
+C
+
+∆
+�
+∼
+�����������
+
+∼
+��
+�
+�
+�
+�
+�
+�
+�
+�
+�
+
+11
+
+
+A subspace J ⊂C is called a subcoalgebra (resp. a left coideal, right coideal, two-sided
+coideal) of C if ∆(J) is contained in J ⊗J (resp. C ⊗J, J ⊗C, J ⊗C +C ⊗J) is included
+in J. The duality alluded to above can be made more precise :
+
+Proposition I.3.1.
+1)The linear dual C∗of a co-unital coalgebra C is a unital algebra, with product (resp.
+unit map) the transpose of the coproduct (resp. of the co-unity).
+2)Let J a linear subspace of C. Denote by J⊥the orthogonal of J in C∗. Then :
+J is a two-sided coideal if and only if J⊥is a subalgebra of C∗.
+J is a left coideal if and only if J⊥is a left ideal of C∗.
+J is a right coideal if and only if J⊥is a right ideal of C∗.
+J is a subcoalgebra if and only if J⊥is a two-sided ideal of C∗.
+
+Proof. For any subspace K of C∗we shall denote by K⊥the subspace of those elements of
+C on which any element of K vanishes. It coincides with the intersection of the orthogonal
+of K with C, via the canonical embedding C ֒−−→C∗∗. So we have for any linear subspaces
+J ⊂C and K ⊂C∗:
+J⊥⊥= J,
+K⊥⊥⊃K.
+
+Suppose that J is a two-sided coideal. Take any ξ, η in J⊥. For any x ∈J we have :
+
+< ξη, x >=< ξ ⊗η, ∆x >= 0,
+
+as ∆x ⊂J ⊗C + C ⊗J. So J⊥is a subalgebra of C∗. Conversely if J⊥is a subalgebra
+then :
+∆J ⊂(J⊥⊗J⊥)⊥= J ⊗C + C ⊗J,
+
+which proves the first assertion. We leave it to the reader as an exercice to prove the three
+other assertions along the same lines. Dually we have the following :
+
+Proposition I.3.2.
+Let K a linear subspace of C∗. Then :
+K⊥is a two-sided coideal if and only if K is a subalgebra of C∗.
+K⊥is a left coideal if and only if K is a left ideal of C∗.
+K⊥is a right coideal if and only if K is a rightt ideal of C∗.
+K⊥is a subcoalgebra if and only if K is a two-sided ideal of C∗.
+
+The linear dual (C ⊗C)∗naturally contains the tensor product C∗⊗C∗.
+Take as a
+multiplication the restriction of t∆to C∗⊗C∗:
+
+m =t ∆: C∗⊗C∗−→C∗,
+
+and put u =t ε : k →C∗. It is easily seen, by just reverting the arrows of the corresponding
+diagrams, that coassociativity of ∆implies associativity of m, and that the co-unit property
+for ε implies that u is a unit.
+•
+
+12
+
+
+The coalgebra C is cocommutative if τ ◦∆= ∆, where τ : C ⊗C →C ⊗C is the flip. It
+will be convenient to use Sweedler’s notation :
+
+∆x =
+�
+
+(x)
+x1 ⊗x2.
+
+Cocommutativity expresses then as :
+
+�
+
+(x)
+x1 ⊗x2 =
+�
+
+(x)
+x2 ⊗x1.
+
+Coassociativity reads in Sweedler’s notation :
+
+(∆⊗I) ◦∆(x) =
+�
+
+(x)
+x1:1 ⊗x1:2 ⊗x2 =
+�
+
+(x)
+x1 ⊗x2:1 ⊗x2:2 = (I ⊗∆) ◦∆(x),
+
+We shall sometimes write the iterated coproduct as :
+
+�
+
+(x)
+x1 ⊗x2 ⊗x3.
+
+Sometimes we shall even mix the two ways of using Sweedler’s notation for the iterated
+coproduct, in the case we want to keep partially track of how we have constructed it [DNR].
+For example,
+∆3(x) = (I ⊗∆⊗I) ◦(∆⊗I) ◦∆(x)
+
+= (I ⊗∆⊗I)(
+�
+
+(x)
+x1 ⊗x2 ⊗x3)
+
+=
+�
+
+(x)
+x1 ⊗x2:1 ⊗x2:2 ⊗x3.
+
+To any vector space V we can associate its tensor coalgebra T c(V ). It is isomorphic
+to T(V ) as a vector space. The coproduct is given by the deconcatenation :
+
+∆(v1 ⊗· · · ⊗vn) =
+
+n
+�
+
+p=0
+(v1 ⊗· · · ⊗vp)
+�
+(vp+1 ⊗· · · ⊗vn).
+
+The co-unit is given by the natural projection of T c(V ) onto k.
+Let C and D be unital k-coalgebras. We put a co-unital coalgebra structure on C ⊗D
+in the following way : the comultiplication is given by :
+
+∆C⊗D = τ23 ◦(∆C ⊗∆D),
+
+where τ23 is again the flip of the two middle factors, and the co-unity is given by εC⊗D =
+εC ⊗εD.
+
+13
+
+
+I.3.2. Comodules
+
+Let C be any co-unital coalgebra. A left C-comodule is a k-vector space M together with
+a map Φ : M →C ⊗M such that the following diagrams commute :
+
+C ⊗C ⊗M
+C ⊗M
+∆⊗I
+�
+k ⊗M
+C ⊗M
+ε⊗I
+�
+
+C ⊗M
+
+I⊗Φ
+�
+
+M
+Φ
+�
+
+Φ
+�
+
+C
+
+Φ
+�
+∼
+�����������
+
+The notion of right C-comodule is defined similarly. A linear subspace N of a left C-
+comodule M is called a subcomodule if Φ(C) ⊂C ⊗N. The intersection of all left subco-
+modules of M containing a subset P is again a subcomodule, called the left subcomodule
+generated by P.
+It will be convenient to use again Sweedler’s notation :
+
+Φ(m) =
+�
+
+(m)
+m1 ⊗m0,
+
+with m0 ∈M and m1 ∈C. Comodule property reads in Sweedler’s notation :
+
+(Φ ⊗I) ◦Φ(m) =
+�
+
+(x)
+m1:1 ⊗m1:2 ⊗m0 =
+�
+
+(m)
+m1 ⊗m0:1 ⊗m0:0 = (I ⊗∆) ◦Φ(m),
+
+We shall sometimes write the iterated coproduct as :
+�
+
+(m)
+m1 ⊗m2 ⊗m0.
+
+For a right comodule we have a similar behaviour with m0 on the left. The notion of
+comodule is dual to the notion of module in the sense that any left (resp.
+right) C-
+comodule M admits a right (resp. left) C∗-module structure. To be precise suppose for
+the moment that Φ is any linear map from M to M ⊗C, and define αΦ : C∗⊗M →M
+as the following composition :
+
+C∗⊗M
+I⊗Φ�C∗⊗M ⊗C
+τ⊗I �M ⊗C∗⊗C
+I⊗<−,−>
+�M ⊗k
+∼
+�M.
+
+Then :
+
+Proposition I.3.3.
+(M, Φ) is a right (resp. left) C-comodule if and only is (M, αΦ) is a left (resp. right)
+C∗-module.
+
+Proof. See Sweedler [Sw] section 2.1.
+•
+
+14
+
+
+Note that the duality property is not perfect : if the linear dual of a coalgebra is always an
+algebra, the linear dual of an algebra is not in general a coalgebra. However the restricted
+dual A◦of an algebra A is a coalgebra. It is defined as the space of linear forms on A
+vanishing on some finite-codimensional ideal. Along the same lines, for a coalgebra C the
+only left C∗-modules related to a right C-comodule structure via proposition I.3.3 are the
+rational left C∗-modules, i.e. those left modules such that the linear map :
+
+ρ : M −→L(C∗, M)
+m �−→(x �→x.m)
+
+has image included in M ⊗C via the embedding :
+
+j : M ⊗C −→L(C∗, M)
+m ⊗c �−→(x �→< x, c > m).
+
+See [Sw] for details. We come now to the fundamental theorem of comodule structure
+theory :
+
+Theorem I.3.4.
+Let M be a left comodule over a coalgebra C. For any element m ∈M the subcomodule
+generated by m is finite-dimensional.
+
+Proof. There is a finite collection (ci)i=1···s of linearly independant elements of C and a
+collection (mi)i=1···s of elements of M such that
+
+Φ(m) =
+
+s
+�
+
+i=1
+mi ⊗ci.
+
+Let N be the linear subspace of M generated by m1, . . ., ms. Let us show that N is a left
+subcomodule of M. First note that thanks to the co-unit axiom we have :
+
+m = (I ⊗ε) ◦Φ(m) =
+
+s
+�
+
+j=1
+ε(cj)mj,
+
+hence m ∈N. On the other hand, considering linear forms (fi)i=1···s on C such that
+fi(cj) = δj
+i we have :
+
+Φ(mi) = (I ⊗I ⊗fi)
+�
+Φ(mi) ⊗ci
+�
+
+= (I ⊗I ⊗fi)
+�s
+�
+
+j=1
+Φ(mj) ⊗cj
+�
+
+= (I ⊗I ⊗fi) ◦(Φ ⊗I) ◦Φ(m)
+= (I ⊗I ⊗fi) ◦(I ⊗∆) ◦Φ(m)
+
+=
+
+s
+�
+
+j=1
+mj ⊗(I ⊗fi)(∆cj),
+
+whence Φ(mi) ∈N ⊗C, which proves the theorem.
+•
+
+15
+
+
+Corollary I.3.5.
+Let M be a left comodule over a coalgebra C. Then any left subcomodule of M generated
+by a finite set is finite-dimensional.
+
+Proof. remark that if P = {m1, . . . , mn}, the left subcomodule generated by P is the sum
+of the left comodules generated by the mj’s, and then apply theorem I.3.4.
+•
+I.3.3. Structure of coalgebras
+
+Let C be a coalgebra. Any intersection of subcoalgebras is a subcoalgebra. To see this
+consider any family (Dα)α∈Λ of subcoalgebras of C. Then I := �
+α D⊥
+α is a two-sided ideal
+of C∗, as a sum of two-sided ideals. Hence I⊥is a subcoalgebra according to proposition
+I.3.2. But I⊥is indeed the intersection of the subcoalgebras Dα.
+
+In particular, the intersection of all subcoalgebras containing a given subset P of C
+will be called the subcoalgebra generated by P. We can now state the fundamental theorem
+of coalgebra theory :
+
+Theorem I.3.6.
+Let C be a coalgebra. Then the subcoalgebra generated by one single element x is finite-
+dimensional.
+
+Proof. The coalgebra C is a left comodule over itself. Let N be the left subcomodule
+generated by x. According to theorem I.3.4, N is finite-dimensional. Then N ⊥has finite
+codimension, equal to dim N. It is a left ideal thanks to proposition I.3.1. The quotient
+space E = C∗/N ⊥is a finite-dimensional left module over C⊥. Let K be the annihilator of
+this left module. As kernel of the associated representation ρ : C∗→End E it has clearly
+finite codimension, and it is a two-sided ideal.
+
+Now K⊥is a subcoalgebra according to proposition I.3.2.
+Moreover it is finite-
+dimensional, as dim K⊥= codim K⊥⊥≤codim K.
+Finally K ⊂N ⊥implies that
+N ⊥⊥⊂K⊥. A fortiori N ⊂K⊥, so x belongs to K⊥. The subcoalgebra generated by x
+is then included in the finite-dimensional subcoalgebra K⊥, which proves the theorem.
+•
+A coalgebra C is said to be irreducible if two nonzero subcoalgebras of C have always
+nonzero intersection. A simple coalgebra is a coalgebra which does not contain any proper
+subcoalgebra. A coalgebra C will be called pointed if any simple subcoalgebra of C is
+one-dimensional.
+
+Lemma I.3.7.
+Any coalgebra C contains a simple subcoalgebra.
+
+Proof. According to theorem I.3.6 we may suppose that C is finite-dimensional, and the
+lemma is immediate in this case.
+•
+
+16
+
+
+Proposition I.3.8.
+A coalgebra C is irreducible if and only if it contains a unique simple subcoalgebra.
+
+Proof. Suppose C irreducible, and suppose that D1 and D2 are two simple subcoalgebras.
+The intersection D1 ∩D2 is nonzero, and hence, by simplicity, D1 = D2. Conversely sup-
+pose that E is the only simple subcoalgebra of C, and let D any subcoalgebra. According
+to lemma I.3.7 we have E ⊂D, hence E is included in any intersection of subcoalgebras,
+which proves that C is irreducible.
+•
+
+Lemma I.3.9.
+Let (Cα)α∈Λ a family of subcoalgebras of a coalgebra C such that C is the direct sum of
+the Cα’s. Then for any subcoalgebra D we have :
+
+D =
+�
+
+α∈Λ
+D ∩Cα.
+
+Proof. The sum is indeed direct and included in D. To prove the reverse inclusion, pick
+any y in D and decompose it inside C :
+
+y =
+�
+
+α∈Λ
+yα
+
+with yα ∈Cα (finite sum). Consider for any γ ∈Λ the linear form fγ defined by :
+
+fγ|Cα = ε|Cα si α = γ
+
+= 0 si α ̸= γ.
+
+Then fγ(y) = ε(yγ). Now we have :
+
+(I ⊗fγ) ◦∆(y) =
+�
+
+α
+(I ⊗fγ) ◦∆(yα)
+
+=
+�
+
+α
+
+�
+
+(yα)
+(yα)1fγ
+�
+(yα)2
+�
+
+=
+�
+
+(yγ)
+(yγ)1ε
+�
+(yγ)2
+�
+
+= (I ⊗ε) ◦∆(yγ)
+= yγ.
+
+This shows that yγ in in D, which proves the lemma.
+•
+
+17
+
+
+Let us define the coradical of a coalgebra C as the sum R of its simple subcoalgebras. As
+indicated by the terminology this notion is dual to the notion of Jacobson radical of an
+algebra : cf. proposition I.3.11 below.
+
+Proposition I.3.10.
+Let R be the coradical of a coalgebra C. Then for any subcoalgebra D the coradical RD
+of D is equal to R ∩D.
+
+Proof. Any simple subcoalgebra of D is a simple subcoalgebra of C, so RD ⊂R ∩D.
+Conversely by lemma I.3.9 R ∩D is a direct sum of simple subcoalgebras of D, hence
+R ∩D ⊂RD.
+•
+
+Proposition I.3.11.
+If C is a finite-dimensional coalgebra with coradical R, then R⊥is the Jacobson radical of
+the algebra C∗.
+
+Proof. If S is a simple subcoalgebra of C it is clear from dimension considerations that
+S⊥is a maximal two-sided ideal of C∗. Conversely any maximal two-sided ideal of C∗is
+the orthogonal of a simple subcoalgebra, so R⊥is indeed the intersection of all maximal
+two-sided ideals of C∗. Finally (lemma I.2.8), maximal two-sided and primitive ideals of a
+finite-dimensional algebra coincide.
+•
+
+I.3.4. The wedge
+
+Let C be a coalgebra and X, Y two linear subspaces of C. We define :
+
+X ∧Y = {x ∈C, ∆x ∈X ⊗C + C ⊗Y }.
+
+We define as well inductively :
+
+∧0X = {0},
+∧nX = (∧n−1X) ∧X.
+
+The alternative definition in terms of the algebra structure on C∗is often more manageable,
+and its verification is straightforward :
+
+X ∧Y = (X⊥Y ⊥)⊥.
+
+Here is a first application of this definition :
+
+Proposition I.3.12.
+1) The wedge is associative : (X ∧Y ) ∧Z = X ∧(Y ∧Z).
+2) If X is a left coideal then {0} ∧X = X.
+3) If X is a left coideal and Y is a right coideal, then X ∧Y is a subcoalgebra of C.
+4) The wedge of two subcoalgebras is a subcoalgebra.
+5) If X ⊂X′ and Y ⊂Y ′, then X ∧Y ⊂X′ ∧Y ′.
+
+18
+
+
+Proof. According to the definition we have :
+
+(X ∧Y ) ∧Z = X ∧(Y ∧Z) = (X⊥Y ⊥Z⊥)⊥.
+
+Let X (resp. Y ) be a left (resp. right) coideal. According to proposition I.3.1, X⊥is a
+left ideal of C∗and Y ⊥is a right ideal. The product (X⊥Y ⊥) is then a two-sided ideal.
+Second and third assertions follow by applying proposition I.3.1 again, and by noticing
+that :
+{0} ∧X = (C∗.X⊥)⊥= X⊥⊥= X.
+
+4) is an immediate consequence of 3), and 5) is clear.
+•
+The wedge admits the following comodule version : let M be a right C-comodule with
+coaction Φ : M →M ⊗C. Let N be a subspace of M and X be a subspace of C. We
+define :
+N ∧X = {x ∈M, Φx ∈N ⊗C + C ⊗X}.
+
+One can check that if X is a right coideal the N ∧X is a subcomodule, and if N is a
+subcomodule then N ⊂N ∧X.
+
+Proposition I.3.13.
+Let R be the coradical of a coalgebra C, and let M be a right C-comodule. Then for
+{0} ⊂M we have :
+�
+
+n
+{0} ∧(∧nM) = M.
+
+Proof. Let x ∈M, and let N be a finite-dimensional subcomodule containing x (which
+exists thanks to theorem I.3.4). If Φ denotes the coaction, then Φ(N) ⊂N ⊗X where X is
+a finite-dimensional subspace of C. Let D be a finite-dimensional subcoalgebra containing
+X (which exists thanks to theorem I.3.6). It is clear that N is a right D-comodule.
+Applying Proposition I.3.10, the coradical of D is R0 = R∩D. Proposition I.3.11 says
+that R⊥
+0 is the Jacobson radical of D∗, which is nilpotent by corollary I.2.7 : there exists
+a positive integer n such that (R⊥
+0 )n = {0}. Dualizing we get that ∧n
+DR0 = D, where the
+subscribe D reminds with respect to which coalgebra the wedge operation is performed.
+Clearly we have :
+∧n
+DR0 ⊂∧n
+CR0 ⊂∧n
+CR,
+
+the second inclusion coming from assertion 5) of proposition I.3.12. We have then :
+
+D ⊂∧nR
+
+(we have dropped the subscribe “C” here), hence the inclusions :
+
+N ⊂{0} ∧D ⊂{0} ∧(∧nR).
+
+The initial element x belongs then to {0} ∧(∧nR) for some n, which proves the assertion.
+•
+
+19
+
+
+I.3.5. The coradical filtration
+
+Let C be a coalgebra with coradical R. We consider for any integer i ≥0 :
+
+Ci = ∧i+1R.
+
+The following proposition is an immediate consequence of propositions I.3.12 and I.3.13 :
+
+Proposition I.3.14.
+(Ci)i≥0 is an increasing sequence of subcoalgebras of C, and we have :
+
+C =
+�
+
+i≥0
+Ci.
+
+The coalgebra C is then endowed with an increasing filtration by subcoalgebras : its
+coradical filtration.
+
+Proposition I.3.15.
+The coproduct is compatible with the coradical filtration, in the sense that the following
+inclusion holds :
+
+∆(Cn) ⊂
+
+n
+�
+
+i=0
+Ci ⊗Cn−i.
+
+Proof. For any i ∈{0, . . ., n + 1} we have :
+
+∧n+1R = (∧iR) ∧(∧n−i+1R).
+
+This is immediate for i = 1, . . ., n, and comes from proposition I.3.12 assertion 2) for i = 0
+and i = n + 1. We have then (setting C−1 = {0}) :
+
+∆Cn ⊂
+
+n+1
+�
+
+i=0
+(C ⊗Cn−i + Ci−1 ⊗C).
+
+The right-hand side (RHS) is contained in Cn ⊗Cn. Choose any supplementary subspace
+Di of Ci−1 inside Ci : so C0 = D0, and Ci = D0 ⊕· · · ⊕Di. We have :
+
+(RHS) =
+
+n+1
+�
+
+i=0
+
+�
+
+r≤i−1 or s≤n−i
+Dr ⊗Ds
+
+=
+�
+
+r+s≤n
+Dr ⊗Ds
+
+=
+
+n
+�
+
+i=0
+Ci ⊗Cn−i,
+
+which proves the result.
+•
+
+20
+
+
+I.4. Convolution product
+
+Let A be an algebra and C be a coalgebra (over the same field k).
+Then there is an
+associative product on L(C, A) called the convolution product. It is given by :
+
+ϕ ∗ψ = mA ◦(ϕ ⊗ψ) ◦∆C.
+
+In Sweedler’s notation it reads :
+
+ϕ ∗ψ(x) =
+�
+
+(x)
+ϕ(x1)ψ(x2).
+
+The associativity is a direct consequence of both associativity of A and coassociativity of
+C. We shall study this product more thoroughly in the next chapters.
+
+I.5. Bialgebras and Hopf algebras
+
+A (unital and co-unital) bialgebra is a vector space H endowed with a structure of unital
+algebra (m, u) and a structure of co-unital coalgebra (∆, ε) which are compatible. The
+compatibility requirement is that ∆is an algebra morphism (or equivalently that m is
+a coalgebra morphism), ε is an algebra morphism and u is a coalgebra morphism. It is
+expressed by the commutativity of the three following diagrams :
+
+H ⊗H ⊗H ⊗H
+τ23
+�H ⊗H ⊗H ⊗H
+
+m⊗m
+�
+H ⊗H
+
+∆⊗∆
+�
+
+m
+�H
+∆
+�H ⊗H
+
+H ⊗H
+
+m
+�
+
+ε⊗ε �k ⊗k
+
+∼
+�
+
+H ⊗H
+k ⊗k
+u⊗u
+�
+
+H
+ε
+�k
+H
+
+∆
+�
+
+k
+u
+�
+
+∼
+�
+
+A Hopf algebra is a bialgebra H together with a linear map S : H →H called the antipode,
+such that the following diagram commutes :
+
+H ⊗H
+S⊗I
+�H ⊗H
+
+m
+
+��
+�
+�
+�
+�
+�
+�
+�
+�
+
+H
+ε
+�
+
+∆
+��
+�
+�
+�
+�
+�
+�
+�
+�
+
+∆
+��
+�
+�
+�
+�
+�
+�
+�
+�
+k
+u
+�H
+
+H ⊗H
+I⊗S
+�H ⊗H
+
+m
+��
+�
+�
+�
+�
+�
+�
+�
+�
+
+21
+
+
+In Sweedler’s notation it reads :
+
+�
+
+(x)
+S(x1)x2 =
+�
+
+(x)
+x1S(x2) = (u ◦ε)(x).
+
+In other words the antipode is an inverse of the identity I for the convolution product on
+L(H, H). The unit for the convolution is the map u ◦ε.
+
+Let H be a bialgebra. A primitive element in H is an element x such that ∆x =
+x ⊗1 + 1 ⊗x. A grouplike element is a nonzero element x such that ∆x = x ⊗x. Note
+that grouplike elements make sense in any coalgebra.
+
+I.6. Examples
+
+I.6.1. The Hopf algebra of a group
+
+Let G be a group, and let kG be the group algebra (over the field k). It is by definition
+the vector space freely generated by the elements of G : the product of G extends uniquely
+to a bilinear map from kG×kG into kG, hence a multiplication m : kG⊗kG →kG, which
+is associative. The neutral element of G gives the unit for m.
+
+The space kG is also endowed with a co-unital coalgebra structure, given by :
+
+∆(
+�
+λigi) =
+�
+λi.gi ⊗gi
+
+and :
+ε(
+�
+λigi) =
+�
+λi.
+
+This defines the coalgebra of the set G : it does not take into account the extra group
+structure on G, as the algebra structure does.
+
+Proposition I.6.1.
+The vector space kG endowed with the algebra and coalgebra structures defined above is
+a Hopf algebra. The antipode is given by :
+
+S(g) = g−1, g ∈G.
+
+Proof. The compatibility of the product and the coproduct is an immediate consequence
+of the following computation : for any g, h ∈G we have :
+
+∆(gh) = gh ⊗gh = (g ⊗g)(h ⊗h) = ∆g.∆h.
+
+Now m(S ⊗I)∆(g) = g−1g = e and similarly for m(I ⊗S)∆(g). But e = u ◦ε(g) for any
+g ∈G, so map S is indeed the antipode.
+•
+
+22
+
+
+Remark : if G were only a semigroup, the same construction would lead to a bialgebra
+structure on kG : the Hopf algebra structure (i.e. the existence of an antipode) reflects the
+group structure (the existence of the inverse). We have S2 = I in this case, but involutivity
+of the antipode is not true for general Hopf algebras.
+
+I.6.2. Tensor algebras
+
+There is a natural structure of cocommutative Hopf algebra on the tensor algebra
+T(V ) of any vector space V . Namely we define the coproduct ∆as the unique algebra
+morphism from T(V ) into T(V ) ⊗T(V ) such that :
+
+∆(1) = 1 ⊗1,
+∆(x) = x ⊗1 + 1 ⊗x, x ∈V.
+
+We define the co-unit as the algebra morphism such that ε(1) = 1 and ε|V = 0 This
+
+endows T(V ) with a cocommutative bialgebra structure.
+We claim that the principal
+anti-automorphism :
+S(x1 ⊗· · · ⊗xn) = (−1)nxn ⊗· · · ⊗x1
+verifies the axioms of an antipode, so that T(V ) is indeed a Hopf algebra. For x ∈V we
+have S(x) = −x, hence S ∗I(x) = I ∗S(x) = 0. As V generates T(V ) as an algebra it is
+easy to conclude.
+
+I.6.3. Enveloping algebras
+
+Let g a Lie algebra. The universal enveloping algebra is the quotient of the tensor
+algebra T(g) by the ideal J generated by x ⊗y −y ⊗x −[x, y], x, y ∈g.
+
+Lemma I.6.2.
+J is a Hopf ideal, i.e. ∆(J) ⊂H ⊗J + J ⊗H and S(H) ⊂H.
+
+Proof. The last assertion is immediate. The first comes easily from the fact that the ideal
+J is generated by primitive elements (according to proposition I.7.3 below) : indeed any
+ideal generated by primitive elements is a Hopf ideal (very easy and left to the reader).
+•
+The quotient of a Hopf algebra by a Hopf ideal is a Hopf algebra. Hence the universal
+enveloping algebra U(g) is a cocommutative Hopf algebra.
+
+I.7. Some properties of Hopf algebras
+
+We summarize in the proposition below the main properties of the antipode in a Hopf
+algebra :
+
+Proposition I.7.1 (cf. [Sw] proposition 4.0.1).
+Let H be a Hopf algebra with multiplication m, comultiplication ∆, unit u : 1 �→1, co-unit
+ε and antipode S. Then :
+1) S ◦u = u and ε ◦S = ε.
+2) S is an algebra antimorphism and a coalgebra antimorphism, i.e. if τ denotes the flip
+we have :
+m ◦(S ⊗S) ◦τ = S ◦m,
+τ ◦(S ⊗S) ◦∆= ∆◦S.
+
+3) If H is commutative or cocommutative, then S2 = I.
+
+23
+
+
+Proof. We follow closely the proof given by Chr. Kassel here [K]. Starting from ε(1) = 1
+and ∆(1) = 1 ⊗1, we get : 1 = m(S ⊗I)∆(1) = S(1)1, so S(1) = 1. We have for any
+x ∈H :
+ε ◦u ◦ε(x) = ε(ε(x).1) = ε(x).
+
+Then,
+ε(x) = ε
+�
+m(S ⊗I)∆
+�
+(x)
+
+= ε
+��
+
+(x)
+S(x1)x2
+�
+
+=
+�
+
+(x)
+(ε ◦S)(x1)ε(x2).
+
+On the other hand,
+
+S(x) = S ∗(u ◦ε)(x) =
+�
+
+(x)
+S(x1)(u ◦ε)(x2).
+
+Hence,
+(ε ◦S)(x) =
+�
+
+(x)
+(ε ◦S)(x1)ε(x2).
+
+This proves assertion 1). Now consider m, N, P ∈L(H ⊗H, H) defined by :
+
+m(x ⊗y) = xy,
+N(x ⊗y) = S(y)S(x),
+P(x ⊗y) = S(xy).
+
+Considering the convolution product �∗on L(H ⊗H, H) we shall prove :
+
+Lemma I.7.2.
+
+P�∗m = u ◦εH⊗H = m�∗N.
+
+Proof. We compute, with Sweedler’s notation :
+
+P�∗m(x ⊗y) =
+�
+
+(x⊗y)
+P
+�
+(x ⊗y)1
+�
+m
+�
+(x ⊗y)2
+�
+
+=
+�
+
+(x),(y)
+P(x1 ⊗y1)m(x2 ⊗y2)
+
+=
+�
+
+(x),(y)
+S(x1y1)x2y2
+
+= (S ∗I)(xy)
+
+= (u ◦ε)(xy)
+= (u ◦εH⊗H)(x ⊗y),
+
+24
+
+
+and :
+
+m�∗N(x ⊗y) =
+�
+
+(x),(y)
+m(x1 ⊗y1)N(x2 ⊗y2)
+
+=
+�
+
+(x),(y)
+x1y1S(y2)S(x2)
+
+=
+�
+
+(x)
+x1(u ◦ε)(y)S(x2)
+
+= (u ◦ε)(x)(u ◦ε)(y)
+= (u ◦εH⊗H)(x ⊗y),
+
+which proves the lemma.
+
+•
+
+End of proof of Proposition I.7.1 : as u ◦εH⊗H is the unit element for �∗lemma proves
+that both P and N are inverse of m for this convolution. Hence :
+
+P = P�∗(m�∗N) = (P�∗m)�∗N = N,
+
+which proves the first part of assertion 2).
+The second part is proved similarly using
+convolution in L(H, H ⊗H) with m replaced with ∆, N replaced with τ ◦(S ⊗S) ◦∆and
+P replaced with ∆◦S. Indeed,
+
+�
+(∆◦S)�∗∆
+�
+(x) = (m ⊗m) ◦τ23 ◦
+�
+(∆◦S) ⊗∆
+�
+◦∆(x)
+
+= (m ⊗m) ◦τ23 ◦(∆⊗∆) ◦(S ⊗I) ◦∆(x)
+= ∆◦m ◦(S ⊗I) ◦∆(x)
+
+= ∆
+�
+u ◦ε(x)
+�
+
+= u ◦ε(x) ⊗u ◦ε(x),
+
+25
+
+
+and :
+
+∆�∗
+�
+τ ◦(S ⊗S) ◦∆
+�
+(x) = (m ⊗m) ◦τ23 ◦
+�
+∆⊗
+�
+τ ◦(S ⊗S) ◦∆
+��
+◦∆(x)
+
+= (m ⊗m) ◦τ23 ◦τ34 ◦(I ⊗I ⊗S ⊗S) ◦(∆⊗∆) ◦∆(x)
+= (m ⊗m) ◦τ23 ◦τ34 ◦(I ⊗I ⊗S ⊗S) ◦(I ⊗∆⊗I) ◦(∆⊗I) ◦∆(x)
+
+= (m ⊗m) ◦τ23 ◦τ34 ◦(I ⊗I ⊗S ⊗S) ◦(I ⊗∆⊗I)
+��
+
+(x)
+x1 ⊗x2 ⊗x3
+�
+
+= (m ⊗m) ◦τ23 ◦τ34 ◦
+��
+
+(x)
+x1 ⊗x2:1 ⊗Sx2:2 ⊗Sx3
+�
+
+=
+�
+
+(x)
+x1Sx3 ⊗x2:1Sx2:2
+
+=
+�
+
+(x)
+x1Sx3 ⊗(u ◦ε)(x2)
+
+=
+��
+
+(x)
+x1Sx2
+�
+⊗(u ◦ε)(x)
+
+= u ◦ε(x) ⊗u ◦ε(x).
+
+If H is commutative then :
+u ◦ε(x) =
+�
+
+(x)
+x2S(x1).
+
+If H is cocommutative, this is again true, as :
+
+u ◦ε(x) = (I ∗S)(x) =
+�
+
+(x)
+x1S(x2).
+
+Suppose that H is commutative or cocommutative. Then using assertion 2) we can com-
+pute :
+(S ◦S) ∗S(x) =
+�
+
+(x)
+(S ◦S)(x1)S(x2)
+
+= S
+��
+
+(x)
+x2S(x1)
+�
+
+= S
+�
+u ◦ε(x)
+�
+
+= (u ◦ε)(x).
+
+Thus S ◦S is a left inverse for S (for the convolution), and then S ◦S = I. This ends the
+proof of Proposition I.7.1.
+•
+
+Proposition I.7.3.
+1). If x is a primitive element then S(x) = −x.
+2). The linear subspace Prim H of primitive elements in H is a Lie algebra.
+
+26
+
+
+Proof. If x is primitive, then (ε⊗ε)◦∆(x) = 2ε(x). On the other hand, (ε⊗ε)◦∆(x) = ε(x),
+so ε(x) = 0. Then :
+
+0 = (u ◦ε)(x) = m(S ⊗I)∆(x) = S(x) −x.
+
+Now let x and y be primitive elements of H. Then we can easily compute :
+
+∆(xy −yx) = (x ⊗1 + 1 ⊗x)(y ⊗1 + 1 ⊗y) −(y ⊗1 + 1 ⊗y)(x ⊗1 + 1 ⊗x)
+
+= (xy −yx) ⊗1 + 1 ⊗(xy + yx) + x ⊗y + y ⊗x −y ⊗x −x ⊗y
+= (xy −yx) ⊗1 + 1 ⊗(xy −yx).
+
+•
+
+II. Convolution product and regularization
+
+II.1. Connected graded bialgebras
+
+Let k be a field with vanishing characteristic. We shall denote by k[[t]] the ring of formal
+series on k, and by k[t−1, t]] the field of Laurent series on k. A graded Hopf algebra on k
+is a graded k-vector space :
+H =
+�
+
+n≥0
+Hn
+
+endowed with a product m : H⊗H →H, a coproduct ∆: H →H⊗H, a unity u : k →H,
+a co-unity ε : H →k and an antipode S : H →H fulfilling the usual axioms of a Hopf
+algebra, and such that :
+Hp.Hq ⊂Hp+q
+
+∆(Hn) ⊂
+�
+
+p+q=n
+Hp ⊗Hq.
+
+S(Hn) ⊂Hn
+
+If we do not ask for the existence of an antipode H we get the definition of a graded
+bialgebra. In a graded bialgebra H we shall consider the increasing filtration :
+
+Hn =
+
+n
+�
+
+p=0
+Hp.
+
+Suppose moreover that H is connected, i.e. H0 is one-dimensional. Then we have :
+
+Ker ε =
+�
+
+n≥1
+Hn.
+
+27
+
+
+Proposition II.1.1.
+For any x ∈Hn, n ≥1 we can write :
+
+∆x = x ⊗1 + 1 ⊗x + �∆x,
+�∆x ∈
+�
+
+p+q=n,p̸=0,q̸=0
+Hp ⊗Hq.
+
+The map �∆is coassociative on Ker ε and �∆k = (I⊗k−1 ⊗�∆)(I⊗k−2 ⊗�∆)...�∆sends Hn into
+(Hn−k)⊗k+1.
+
+Proof. Thanks to connectedness we clearly can write :
+
+∆x = a(x ⊗1) + b(1 ⊗x) + �∆x
+
+with a, b ∈k and �∆x ∈Ker ε⊗Ker ε. The co-unity property then tells us that, with k ⊗H
+and H ⊗k canonically identified with H :
+
+x = (ε ⊗I)(∆x) = bx
+x = (I ⊗ε)(∆x) = ax,
+
+hence a = b = 1. We shall use the following two variants of Sweedler’s notation :
+
+∆x =
+�
+
+(x)
+x1 ⊗x2,
+
+�∆x =
+�
+
+(x)
+x′ ⊗x′′,
+
+the second being relevant only for x ∈Ker ε. if x is homogeneous of degree n we can
+suppose that the components x1, x2, x′, x′′ in the expressions above are homogeneous as
+well, and we have then |x1| + |x2| = n and |x′| + |x′′| = n We easily compute :
+
+(∆⊗I)∆(x) = x ⊗1 ⊗1 + 1 ⊗x ⊗1 + 1 ⊗1 ⊗x
+
++
+�
+
+(x)
+x′ ⊗x′′ ⊗1 + x′ ⊗1 ⊗x′′ + 1 ⊗x′ ⊗x′′
+
++ (�∆⊗I)�∆(x)
+
+and
+(I ⊗∆)∆(x) = x ⊗1 ⊗1 + 1 ⊗x ⊗1 + 1 ⊗1 ⊗x
+
++
+�
+
+(x)
+x′ ⊗x′′ ⊗1 + x′ ⊗1 ⊗x′′ + 1 ⊗x′ ⊗x′′
+
++ (I ⊗�∆)�∆(x),
+
+hence the co-associativity of �∆comes from the one of ∆.
+Finally it is easily seen by
+induction on k that for any x ∈Hn we can write :
+
+�∆k(x) =
+�
+
+x
+x(1) ⊗· · · ⊗x(k+1),
+
+28
+
+
+with |x(j)| ≥1. The grading imposes :
+
+k+1
+�
+
+j=1
+|x(j)| = n,
+
+so the maximum possible for any degree |x(j)| is n −k.
+•
+
+II.2. Connected filtered bialgebras
+
+A filtered Hopf algebra on k is a k-vector space together with an increasing Z+-indexed
+filtration :
+H0 ⊂H1 ⊂· · · ⊂Hn ⊂· · · ,
+�
+
+n
+Hn = H
+
+endowed with a product m : H⊗H →H, a coproduct ∆: H →H⊗H, a unit characteristic
+u : k →H, a co-unit ε : H →k and an antipode S : H →H fulfilling the usual axioms of
+a Hopf algebra, and such that :
+
+Hp.Hq ⊂Hp+q
+
+∆(Hn) ⊂
+�
+
+p+q=n
+Hp ⊗Hq
+
+S(Hn) ⊂Hn.
+
+If we do not ask for the existence of an antipode H we get the definition of a filtered
+bialgebra. For any x ∈H we set :
+
+|x| = min{n ∈N, x ∈Hn}.
+
+Any graded bialgebra or Hopf algebra is obviously filtered by the canonical filtration as-
+sociated to the grading :
+
+Hn =
+
+n
+�
+
+i=0
+Hi,
+
+and in that case, if x is an homogeneous element, x is of degree n if and only if |x| = n.
+We say that the filtered bialgebra H is connected if H0 is one-dimensional. There is an
+analogue of proposition II.1.1 in the connected filtered case :
+
+Proposition II.2.1.
+For any x ∈Hn, n ≥1 we can write :
+
+∆x = x ⊗1 + 1 ⊗x + �∆x,
+�∆x ∈
+�
+
+p+q=n,p̸=0,q̸=0
+Hp ⊗Hq.
+
+The map �∆is coassociative on Ker ε and �∆k = (I⊗k−1 ⊗�∆)(I⊗k−2 ⊗�∆)...�∆sends Hn into
+(Hn−k)⊗k+1.
+
+29
+
+
+Proof. Straightforward adaptation of proof of proposition II.1.1.
+•
+The following theorem is due to S. Montgomery [Mo lemma 1.1].
+
+Theorem II.2.2.
+Let H be any pointed Hopf algebra. Then the coradical filtration endows H with a structure
+of filtered Hopf algebra.
+
+Proof. It only remains to show that for any n ∈N the inclusion S(Hn) ⊂Hn holds, and
+that for any p, q ∈N :
+HpHq ⊂Hp+q,
+
+which, together with proposition I.3.15, will prove the result. Recall that a pointed coal-
+gebra is a coalgebra in which any simple subcoalgebra is one-dimensional. In this case any
+simple subcoalgebra is linearly generated by a unique grouplike element. Any grouplike
+element g in a Hopf algebra admits an inverse Sg, where S is the antipode. It follows that
+the coradical H0 of a pointed Hopf algebra H is a Hopf subalgebra of H, precisely the Hopf
+algebra of the group of the grouplike elements of H (cf. example I.6.1).
+The proof proceeds by induction : inclusion SH0 ⊂H0 obviously holds. Suppose that
+SHk ⊂Hk for all k ≤n −1. Using the definition of Hn :
+
+Hn = H0 ∧Hn−1 = Hn−1 ∧H0
+
+and the formula :
+Sx =
+�
+
+(x)
+Sx2 ⊗Sx1,
+
+(cf. proposition I.7.1) we deduce the inclusion SHn ⊂Hn. Now, suppose that the inclusion
+HkH0 ⊂Hk holds for k ≤n −1 (its is obviously the case for k = 0). Then we have :
+
+∆(HnH0) ⊂(H0 ⊗H + H ⊗Hn−1)(H0 ⊗H0)
+
+⊂H0 ⊗H + H ⊗Hn−1H0
+
+⊂H0 ⊗H + H ⊗Hn−1.
+
+So HnH0 ⊂∆−1(H0 ⊗H + H ⊗Hn−1) = Hn.
+Similarly on the other side we have
+H0Hn ⊂Hn for any n. Suppose now that the inclusion :
+
+HpHq ⊂Hp+q
+
+holds for any p, q such that p + q ≤n −1. Choose p, q with p + q = n and compute :
+
+∆(HpHq) ⊂(H0 ⊗Hp + Hp ⊗Hp−1)(H0 ⊗Hq + Hq ⊗Hq−1)
+
+⊂H0H0 ⊗HpHq + HpH0 ⊗Hp−1Hq + H0Hq ⊗HpHq−1 + HpHq ⊗Hp−1Hq−1
+
+⊂H0 ⊗H + H ⊗Hp+q−1
+
+thanks to the induction hypothesis and the property already proved when one of the indices
+is equal to zero. Thus HpHq ⊂Hp+q, which finishes the proof of the theorem.
+•
+
+30
+
+
+Remark 1 : The proof used only the property that the coradical is a Hopf subalgebra of
+H. The pointedness of H implies this property but is not strictly necessary.
+
+Remark 2 : the image of k under the unit map u is a one-dimensional simple subcoagebra
+of H. If H is an irreducible coalgebra, by proposition I.3.8 it is the unique one, and then
+the coradical is H0 = k.1. Any irreducible Hopf algebra is then pointed, and connected
+with respect to the coradical filtration.
+
+II.3. The convolution product
+
+An important result is that any connected filtered bialgebra is indeed a filtered Hopf
+algebra, in the sense that the antipode comes for free. We give a proof of this fact as well
+as a recursive formula for the antipode with the help of the convolution product :
+
+Let H be a (connected filtered) bialgebra, and let A be any k-algebra : the convolution
+product on L(H, A) is given by :
+
+ϕ ∗ψ(x) = mA(ϕ ⊗ψ)∆(x)
+
+=
+�
+
+(x)
+ϕ(x1)ψ(x2).
+
+Proposition II.3.1.
+The map e = uA ◦ε, given by e(1) = 1A and e(x) = 0 for any x ∈Ker ε, is a unit for the
+convolution product. Moreover the set G = {ϕ ∈L(H, A), ϕ(1) = 1A} endowed with the
+convolution product is a group.
+
+Proof. The first statement is straightforward. To prove the second let us consider the
+formal series :
+
+ϕ∗−1(x) =
+�
+e −(e −ϕ)
+�∗−1(x)
+
+=
+�
+
+k≥0
+(e −ϕ)∗k(x).
+
+Using (e −ϕ)(1) = 0 we have immediately (e −ϕ)∗k(1) = 0, and for any x ∈Ker ε :
+
+(e −ϕ)∗k(x) = mA,k−1(ϕ ⊗· · · ⊗ϕ)�∆k−1(x).
+
+When x ∈Hn this expression vanishes then for k ≥n + 1. The formal series ends up then
+with a finite number of terms for any x, which proves the result.
+•
+
+31
+
+
+Corollary II.3.2.
+Any connected filtered bialgebra H is a filtered Hopf algebra. The antipode is defined by :
+
+S(x) =
+�
+
+k≥0
+(uε −I)∗k(x).
+
+It is given by S(1) = 1 and recursively by any of the two formulas for x ∈Ker ε :
+
+S(x) = −x −
+�
+
+(x)
+S(x′)x′′
+
+S(x) = −x −
+�
+
+(x)
+x′S(x′′).
+
+Proof. The antipode, when it exists, is the inverse of the identity for the convolution
+product on L(H, H). One just needs then to apply proposition II.3.1 with A = H. The
+two recursive formulas come directly from the two equalities :
+
+m(S ⊗I)∆(x) = m(I ⊗S)∆(x) = 0
+
+fulfilled by any x ∈Ker ε.
+•
+Let g be the subspace of L(H, A) formed by the elements α such that α(1) = 0. It is
+clearly a subalgebra of L(H, A) for the convolution product. We have :
+
+G = e + g.
+
+From now on we shall suppose that the ground field k is of characteristic zero. For any
+x ∈Hn the exponential :
+
+e∗α(x) =
+�
+
+k≥0
+
+α∗k(x)
+
+k!
+
+is a finite sum (ending up at k = n). It is a bijection from g onto G. Its inverse is given
+by :
+
+Log(1 + α)(x) =
+�
+
+k≥1
+
+(−1)k−1
+
+k
+α∗k(x).
+
+This sum again ends up at k = n for any x ∈Hn. Let us introduce a decreasing filtration
+on L = L(H, A) :
+Ln = {α ∈L, α|Hn−1 = 0}.
+
+Clearly L0 = L and L1 = g. We define the valuation val ϕ of an element ϕ of L as the
+biggest integer k such that ϕ is in Lk. We shall consider in the sequel the ultrametric
+distance on L induced by the filtration :
+
+d(ϕ, ψ) = 2−val(ϕ−ψ).
+
+For any α, β ∈g let [α, β] = α ∗β −β ∗α.
+
+32
+
+
+Proposition II.3.3.
+1) We have the inclusion :
+Lp ∗Lq ⊂Lp+q.
+
+2) The metric space L endowed with then distance defined just above is complete.
+
+Proof. Take any x ∈Hp+q−1, and any α ∈Lp and β ∈Lq. We have :
+
+(α ∗β)(x) =
+�
+
+(x)
+α(x1)β(x2).
+
+Recall that we denote by |x| the minimal n such that x ∈Hn. Since |x1| + |x2| = |x| ≤
+p + q −1, either |x1| ≤p −1 or |x2| ≤q −1, so the expression vanishes. Now if (ψn) is
+a Cauchy sequence in L it is immediate to see that this sequence is locally stationary, i.e.
+for any x ∈H there exists N(x) ∈N such that ψn(x) = ψN(x)(x) for any n ≥N(x). Then
+the limit of (ψn) exists and is clearly defined by :
+
+ψ(x) = ψN(x)(x).
+
+•
+As a corollary the Lie algebra L1 = g is pro-nilpotent, in a sense that it is the projective
+limit of the Lie algebras g/Ln, which are nilpotent.
+
+II.4. Algebra morphisms and cocycles
+
+Let H be a connected filtered Hopf algebra over k, and let A be a k-algebra. A cocycle
+from H to A is a linear morphism τ : H →A such that τ(xy) = τ(yx) for any x, y ∈H. It
+is indeed a 1-cocycle in the cohomology of the Lie algebra H with values in A considered
+as a trivial H-module. In the case where A is the ground field k cocycles are just traces.
+We shall also consider algebra morphisms from H to A.
+When the algebra A is
+commutative we shall call them slightly abusively characters. It is clear that any character
+in our sense is a cocycle. We recover of course the usual notion of character when the
+algebra A is the ground field k.
+The notions of character and cocycle involve only the algebra structure of H. Let us
+consider now the full Hopf algebra structure and see what happens with the convolution
+product :
+
+Proposition II.4.1.
+Let H be a connected filtered Hopf algebra over k, and let A be a k-algebra. Then,
+
+1). The convolution of two cocycles in L(H, A) is a cocycle.
+
+2). If τ is a cocycle such that τ(1) = 1A, then the inverse τ ∗−1 is a cocycle as well.
+
+3). In the case of a commutative algebra A the characters from H to A form a group Γ
+under the convolution product, and for any χ ∈Γ the inverse is given by :
+
+χ∗−1 = χ ◦S.
+
+33
+
+
+Proof. Using the fact that ∆is an algebra morphism we have for any x, y ∈H :
+
+f ∗g(xy) =
+�
+
+(x)(y)
+f(x1y1)g(x2y2).
+
+If f and g are cocycles we get :
+
+f ∗g(xy) =
+�
+
+(x)(y)
+f(y1x1)g(y2x2)
+
+= f ∗g(yx).
+
+If A is commutative and if f and g are characters we get :
+
+f ∗g(xy) =
+�
+
+(x)(y)
+f(x1)f(y1)g(x2)g(y2)
+
+=
+�
+
+(x)(y)
+f(x1)g(x2)f(y1)g(y2)
+
+= (f ∗g)(x)(f ∗g)(y).
+
+The unit e = uAε is both a cocycle and an algebra morphism. The formula for the inverse
+of a character comes easily from the commutativity of the following diagram :
+
+H ⊗H
+S⊗I
+�H ⊗H
+
+m
+
+��
+�
+�
+�
+�
+�
+�
+�
+�
+
+f⊗f
+�⊗A
+
+mA
+
+��
+�
+�
+�
+�
+�
+�
+�
+�
+
+H
+ε
+�
+
+∆
+��
+�
+�
+�
+�
+�
+�
+�
+�
+
+∆
+��
+�
+�
+�
+�
+�
+�
+�
+�
+
+f∗(f◦S)
+
+�������������������������������
+
+(f◦S)∗f�����������������������������
+e
+�
+������������������������������
+k
+u
+�H
+f
+�A
+
+H ⊗H
+I⊗S
+�H ⊗H
+
+m
+��
+�
+�
+�
+�
+�
+�
+�
+�
+f⊗f
+�A ⊗A
+
+mA
+�
+�
+�
+�
+�
+�
+�
+�
+
+Finally the fact that the inverse of a cocycle τ such that τ(1) = 1A is a cocycle comes
+from 1) and from the formula :
+
+τ −1(x) =
+�
+
+k≥0
+(e −τ)∗k(x).
+
+•
+We call derivations (or infinitesimal characters) with values in the algebra A those elements
+α of L(H, A) such that :
+α(xy) = e(x)α(y) + α(x)e(y).
+
+34
+
+
+Proposition II.4.2.
+Suppose that A is a commutative algebra. Let G1 (resp. g1) be the set of characters of
+H with values in A (resp the set of derivations of H with values in A), and let G2 (resp.
+g2) be the set of cocycles ϕ from H to A such that ϕ(1) = 1A (resp. ϕ(1) = 0). Then G1
+and G2 are subgroups of G, the exponential restricts to a bijection from g1 onto G1 (resp.
+from g2 onto G2), and g1, g2 are Lie subalgebras of g.
+
+Proof. Part of these results are a reformulation of proposition II.4.1 and some points are
+straightforward. The only non-trivial point concerns g1 and G1. Take two derivations α
+and β with values in A and compute :
+
+(α ∗β)(xy) =
+�
+
+(x)(y)
+α(x1x2)β(y1y2)
+
+=
+�
+
+(x)(y)
+
+�
+α(x1)e(y1) + e(x1)α(y1)
+�
+.
+�
+β(x2)e(y2) + e(x2)α(y2)
+�
+
+= (α ∗β)(x)e(y) + α(x)β(y) + β(x)α(y) + e(x)(α ∗β)(y).
+
+Using the commutativity of A we immediately get :
+
+[α, β](xy) = [α, β](x)e(y) + e(x)[α, β](y),
+
+which shows that g1 is a Lie algebra. Now for α ∈g1 we have :
+
+α∗n(xy) =
+
+n
+�
+
+k=0
+
+�n
+k
+
+�
+α∗k(x)α∗(n−k)(y),
+
+as easily see by induction on n. A straightforward computation then yields :
+
+e∗α(xy) = e∗α(x)e∗α(y).
+
+•
+
+II.5. Birkhoff decomposition
+
+We consider here the situation where the algebra A admits a renormalization scheme, i.e.
+a splitting into two subalgebras :
+A = A−⊕A+
+
+with 1 ∈A+. As an example, take A as the field k[t−1, t]] of Laurent series, A−= t−1k[t−1]
+and A+ = k[[t]]. The projection on A−parallel to A+ will be denoted by π.
+
+35
+
+
+Theorem II.5.1.
+1). Let H be a connected filtered Hopf algebra. Let G be the group of those ϕ ∈L(H, A)
+such that ϕ(1) = 1A endowed with the convolution product. Any ϕ ∈G admits a unique
+Birkhoff decomposition :
+ϕ = ϕ∗−1
+−
+∗ϕ+,
+
+where ϕ−sends 1 to 1A and Ker ε into A−, and where ϕ+ sends H into A+. The maps
+ϕ−and ϕ+ are given on Ker ε by the following recursive formulas :
+
+ϕ−(x) = −π
+�
+ϕ(x) +
+�
+
+(x)
+ϕ−(x′)ϕ(x′′)
+�
+
+ϕ+(x) = (I −π)
+�
+ϕ(x) +
+�
+
+(x)
+ϕ−(x′)ϕ(x′′)
+�
+.
+
+2). If τ ∈G is a cocycle, the components τ−and τ+ occurring in the Birkhoff decomposition
+of τ are cocycles as well.
+
+3). If the algebra A is commutative and if χ is a character, the components χ−and χ+
+occurring in the Birkhoff decomposition of χ are characters as well.
+
+Proof.
+Points 1) and 3) together give an abstract counterpart of Theorem 4 of [CK],
+point 2) is new up to my knowledge. The proof goes along the same lines : for the first
+assertion it is immediate from the definition of π that ϕ−sends Ker ε into A−, and that
+ϕ+ sends Ker ε into A+. It only remains to check equality ϕ+ = ϕ−∗ϕ, which is an easy
+computation :
+
+ϕ+(x) = (I −π)
+�
+ϕ(x) +
+�
+
+(x)
+ϕ−(x′)ϕ(x′′)
+�
+.
+
+= ϕ(x) + ϕ−(x) +
+�
+
+(x)
+ϕ−(x′)ϕ(x′′)
+
+= (ϕ−∗ϕ)(x).
+
+To prove the second assertion it is sufficient to prove that τ−is a cocycle whenever τ is
+a cocycle. The same property for τ+ comes then from proposition II.3.1. We prove the
+formula τ−(xy) = τ−(yx) by induction on the integer d = |x| + |y| : it is true for d ≤1.
+Suppose the formula is true up to d−1 and take any x, y ∈H with |x|+|y| = d. Decompose
+∆(xy) with the second version of Sweedler’s notation :
+
+∆(xy) = xy ⊗1 + 1 ⊗xy + x ⊗y + y ⊗x
+
++
+�
+
+(x)
+(x′y ⊗x′′ + x′ ⊗x′′y) +
+�
+
+(y)
+(xy′ ⊗y′′ + y′ ⊗xy′′)
+
++
+�
+
+(x)(y)
+x′y′ ⊗x′′y′′.
+
+36
+
+
+We have then :
+
+τ−(xy) = −π
+�
+τ(xy) + τ−(x)τ(y) + τ−(y)τ(x)
+
++
+�
+
+(x)
+
+�
+τ−(x′y)τ(x′′) + τ−(x′)τ(x′′y)
+�
++
+�
+
+(y)
+
+�
+τ−(xy′)τ(y′′) + τ−(y′)τ(xy′′)
+�
+
++
+�
+
+(x)(y)
+τ−(x′y′)τ(x′′y′′)
+�
+,
+
+whereas :
+
+τ−(yx) = −π
+�
+τ(yx) + τ−(y)τ(x) + τ−(x)τ(y)
+
++
+�
+
+(y)
+
+�
+τ−(y′x)τ(y′′) + τ−(y′)τ(y′′x)
+�
++
+�
+
+(x)
+
+�
+τ−(yx′)τ(x′′) + τ−(x′)τ(yx′′)
+�
+
++
+�
+
+(x)(y)
+τ−(y′x′)τ(y′′x′′)
+�
+.
+
+Using the cocycle property for τ and the induction hypothesis we see that the two expres-
+sions are the same.
+
+The proof of assertion 3) goes exactly as in [CK] and relies on the following Rota-
+Baxter equality in A :
+
+π(a)π(b) = −π(ab) + π
+�
+π(a)b
+�
++ π
+�
+π(b)a
+�
+,
+
+which is easily verified by decomposing a and b into their A±-parts. Let χ be a character
+of H with values in A. Suppose that we have χ−(xy) = χ−(x)χ−(y) for any x, y ∈H such
+that |x| + |y| ≤d −1, and compute for x, y such that |x| + |y| = d :
+
+χ−(x)χ−(y) = π(X)π(Y ),
+
+with X = χ(x)−�
+
+(x) χ−(x′)χ(x′′) and Y = χ(y)−�
+
+(y) χ−(y′)χ(y′′). Using the formula :
+
+π(X) = −χ−(x),
+
+we get :
+χ−(x)χ−(y) = −π
+�
+XY + χ−(x)Y + Xχ−(y)
+�
+,
+
+hence :
+
+χ−(x)χ−(y) = −π
+�
+χ(x)χ(y) + χ−(x)χ(y) + χ(x)χ−(y)
+
++
+�
+
+(x)
+χ−(x′)χ(x′′)
+�
+χ(y) + χ−(y)
+�
++
+�
+
+(y)
+
+�
+χ(x) + χ−(x)
+�
+χ−(y′)χ(y′′)
+
++
+�
+
+(x)(y)
+χ−(x′)χ(x′′)χ−(y′)χ(y′′)
+�
+.
+
+37
+
+
+We have to compare this expression with :
+
+χ−(xy) = −π
+�
+χ(xy) + χ−(x)χ(y) + χ−(y)χ(x)
+
++
+�
+
+(x)
+
+�
+χ−(x′y)χ(x′′) + χ−(x′)χ(x′′y)
+�
++
+�
+
+(y)
+
+�
+χ−(xy′)χ(y′′) + χ−(y′)χ(xy′′)
+�
+
++
+�
+
+(x)(y)
+χ−(x′y′)χ(x′′y′′)
+�
+.
+
+These two expressions are easily seen to be equal using the commutativity of the algebra
+A, the character property for χ and the induction hypothesis.
+•
+Remark : define the Bogoliubov character as the map b : G →L(H, A) recursively given
+by :
+b(ϕ)(x) = ϕ(x) +
+�
+
+(x)
+ϕ−(x′)ϕ(x′′).
+
+Then the components of ϕ in the birkhoff decomposition read :
+
+ϕ−= −π ◦b(ϕ),
+ϕ+ = (I −π) ◦b(ϕ).
+
+II.6. The BCH approach to Birkhoff decomposition
+
+Let g a Lie algebra endowed with a decreasing filtration :
+
+g = g1 ⊃g2 ⊃· · · ⊃gn ⊃· · ·
+
+such that the intersection of the gi’s is reduced to {0}. We ask for the inclusion :
+
+[gi, gj] ⊂gi+j,
+
+so in particular g is a pro-nilpotent Lie algebra. Suppose that g is complete for the (metric)
+topology defined by this filtration. The Baker-Campbell-Hausdorff series defines then a
+pro-nilpotent group law on g :
+
+X.Y = X + Y + 1
+
+2[X, Y ] + 1
+
+12([X, [X, Y ]] + [Y, [Y, X]]) + · · ·
+
+The following proposition is implicitly used in [EGK2] :
+
+Proposition II.6.1.
+For any linear map R : g →g preserving the filtration there exists a (usually non-linear)
+map χR : g →g such that (χR −Idg)(gi) ⊂g2i for any i ≥1, and such that, with
+�R := Idg −R we have :
+
+∀X ∈g,
+X = R
+�
+χR(X)
+�
+. �R(χR(X)
+�
+.
+(∗)
+
+38
+
+
+Proof. Let us introduce for any X, Y ∈g the following expression :
+
+δ(X, Y ) = X.Y −X −Y = 1
+
+2[X, Y ] + 1
+
+12([X, [X, Y ]] + [Y, [Y, X]]) + · · ·
+
+Then equation (*) can be rewritten as :
+
+χR(X) = FX
+�
+χR(X)
+�
+,
+
+with FX : g →g defined by :
+
+FX(Y ) = X −δ
+�
+R(Y ), �R(Y )
+�
+.
+
+This map FX is a contraction with respect to the metric associated with the filtration :
+indeed if Y, ε ∈g with ε ∈gn, we have :
+
+FX(Y + ε) −FX(Y ) = δ
+�
+R(Y ), �R(Y )
+�
+−δ
+�
+R(Y + ε), �R(Y + ε)
+�
+.
+
+Right-hand side is a sum of iterated commutators in each of which ε does appear at least
+once. So it belongs to gn+1. So the sequence F n
+X(Y ) converges in g to a unique fixed point
+χR(X) for FX.
+Let us remark that for any X ∈gi, the element FX(X) −X belongs to g2i. Now
+taking X as starting point it is obvious from the expression :
+
+χR(X) −X =
+
++∞
+�
+
+k=1
+(F k
+X −F k−1
+X
+)(X)
+
+that for any X ∈gi, the element χR(X) −X belongs to g2i.
+•
+Let H be a connected filtered Hopf algebra, let A a commutative algebra endowed with
+a splitting A = A−⊕A+ as in § II.5, and let π be the projection on A−parallel to A+.
+Now take for g any of the Lie algebras g, g1, g2 of § II.3 and II.4, set G = exp∗(g) and
+set R(X) = π ◦X. Of course R makes sense on L(H, A). Equation (*) then yields the
+following equality in the group G, G1 or G2 :
+
+e∗X = e∗R
+�
+χR(X)
+�
+∗e∗�
+R
+�
+χR(X)
+�
+,
+(∗∗)
+
+as map R respects the decreasing filtration introduced in § II.3. Now, thanks to Rota-
+Baxter relation in A :
+π(a)π(b) = π
+�
+π(a)b + π(b)a −ab
+�
+,
+
+K. Ebrahimi-Fard, L. Guo and D. Kreimer derive in [EGK2] two identities involving the
+Bogoliubov character :
+
+e∗−R
+�
+χR(X)
+�
+= R
+�
+b(e∗X)
+�
+,
+e∗�
+R
+�
+χR(X)
+�
+= −�R
+�
+b(e∗X)
+�
+.
+
+39
+
+
+So (**) is indeed the Birkhoff decomposition of the element ϕ = e∗X of G, G1 or G2,
+namely :
+
+ϕ−= e∗−R
+�
+χR(X)
+�
+,
+ϕ+ = e∗�
+R
+�
+χR(X)
+�
+.
+
+Of course when H is cocommutative the convolution product is commutative, the Lie
+algebras involved are abelian and the situation simplifies greatly, as χR = Idg for any
+linear map R here [EGK1]. Further developments on general Rota-Baxter algebras can be
+found in [EGK2] and [EGK3].
+Remark : Rota-Baxter identity for R just guarantees that equation (**) gives a Birkhoff
+decomposition. When R is idempotent (which is indeed the case in the setting of § II.5,
+where R is built up from projection π) this decomposition is unique and is given either by
+(**) or by the recursive formulas of Theorem II.5.1. On the other hand, with an idempotent
+R which does not verify Rota-Baxter identity (or, which is the same, with a direct sum
+decomposition of the algebra A on two components A+ and A−which are not subalgebras
+of A), we still get a unique Birkhoff decomposition along the lines of theorem II.5.1 for
+the groups G and G2, which does not coincide with (**). But Rota-Baxter identity arises
+in an essential way, as we have seen, in order to get the Birkhoff decomposition for the
+groups G1 of A-valued characters.
+
+II.7. Renormalized traces and characters
+
+Keeping the same notations we take k = C as ground field and we specialize to the
+case when A is the field of meromorphic functions (resp. the field of germs of meromorphic
+functions at z0), A+ is the algebra of meromorphic functions which are holomorphic at
+z0 (resp. the algebra of germs of holomorphic functions at z0) and A−is the non-unital
+algebra (z −z0)−1C[(z −z0)−1]. Applying the projection π to such a meromorphic fuction
+amounts to “take its divergent part at z0”. This particular splitting is called the minimal
+subtraction scheme. It is by no means unique : for example for any automorphism θ of
+the field of (germs of) meromorphic functions, we can consider the splitting :
+
+A = Aθ
++ ⊕Aθ
+−,
+
+with Aθ
+± = θ(A±). The corresponding projection on Aθ
+−is given by πθ = θ ◦π ◦θ−1. As
+an example of automorphism θ fix a constant c, consider the change of variable z �→z′
+
+such that :
+1
+z′ −z0
+=
+1
+z −z0
++ c
+
+(hence z′ = z0 +
+z −z0
+1 + c(z −z0)), and set θ(f)(z) = f(z′).
+
+Considering a linear map ϕ from H to A (and a particular splitting of A) we can
+consider its Birkhoff decomposition ϕ = ϕ∗−1
+−
+∗ϕ+ given by Theorem II.5.1, and evaluate
+ϕ+(x) at z = z0 for any x ∈H. This gives a linear map ϕz0
++ from H to C which we call
+the renormalized value of ϕ at z = z0. According to Theorem II.5.1 the renormalized
+value of a cocycle at z0 is a trace, and the renormalized value of a character at z = z0 is
+a C-valued character. All this procedure depends in an essential way on the choice of the
+renormalization scheme, i.e. the splitting of A.
+
+40
+
+
+II.8. More on connected graded Hopf algebras
+
+Let H be a connected graded Hopf algebra. The grading induces a biderivation Y defined
+on homogeneous elements by :
+Y : Hn −→Hn
+x �−→nx.
+
+Exponentiating we get a one-parameter group θt of automorphisms of the Hopf algebra H,
+defined on Hn by :
+θt(x) = entx.
+
+Lemma II.8.1.
+ϕ �→ϕ◦Y is a derivation of
+�
+L(H, A), ∗
+�
+, and ϕ �→ϕ◦θt is an automorphism of
+�
+L(H, A), ∗
+�
+
+for any complex t.
+
+Proof. We compute for ϕ, ψ ∈L(H, A) and for an homogeneous element x of H :
+
+(ϕ ∗ψ) ◦Y (x) = |x|
+�
+
+(x)
+ϕ(x1)ψ(x2)
+
+=
+�
+
+(x)
+(|x1| + |x2|)ϕ(x1)ψ(x2)
+
+=
+�
+
+(x)
+(ϕ ◦Y )(x1)ψ(x2) + ϕ(x1)(ψ ◦Y )(x2)
+
+=
+�
+(ϕ ◦Y ) ∗ψ + ϕ ∗(ψ ◦Y )
+�
+(x),
+
+which shows the first assertion. The second part of the proposition is proven similarly.
+•
+Using the fact that e ◦Y = 0 we easily compute for any derivation α with values in A :
+
+(α ◦Y )(xy) = α(Y (x).y + x.Y (y))
+
+= (α ◦Y )(x)e(y) + (e ◦Y )(x)α(y) + α(x)(e ◦Y )(y) + e(x)(α ◦Y )(y)
+= (α ◦Y )(x)e(y) + e(x)(α ◦Y )(y).
+
+So we have proved :
+
+Lemma II.8.2.
+The map α �→α ◦Y is a linear automorphism of the space of derivations of H with values
+in A. Its inverse is given by α �→α ◦Y −1, where Y −1(x) = |x|−1x for x homogeneous of
+positive degree, and Y −1(1) = 0.
+
+41
+
+
+Remark : the notation Y −1 is of course slightly incorrect, as the inverse of Y does not
+make sense on H0. The convention Y −1(1) = 0 is arbitrary : any other value of Y −1(1)
+would give the same result, as derivations with values in A vanish at 1.
+
+II.9. Examples
+
+II.9.1. The Hopf algebra of positive integers
+
+This example is a simplified version of the one given by D. Kreimer in [K2 § 2.1]. Consider
+the algebra N of the multiplicative semigroup N∗= {1, 2, 3, . . .} of positive integers. As a
+vector space it admits a basis (en)n∈N∗with product given by en.em = enm and extended
+by linearity. We endow N with a structure of commutative cocommutative connected
+graded Hopf algebra thanks to the decomposition of any integer into a product of prime
+factors : namely we set ∆(e1) = e1 ⊗e1, and for any prime p :
+
+∆(ep) = ep ⊗e1 + e1 ⊗ep,
+
+and we extend ∆to an algebra isomorphism. Hence,
+
+∆(ep1···pk) =
+�
+
+I∐J={1,...,k}
+epI ⊗epJ ,
+
+where pI denotes the product of the primes pj, j ∈I. The grading is clearly given by the
+number of prime factors (including multiplicities). The antipode is given by :
+
+S(en) = (−1)|n|en.
+
+Suppose that the ground field is k = C. The map n �→nz defines a character ϕ of N with
+values into the holomorphic functions. Then the Riemann Zeta function is nothing but
+the evaluation of ϕ on the element :
+
+ω = e1 + e2 + e3 + · · · =
+�
+
+p prime
+
+1
+1 −ep
+.
+
+Here 1/(1 −ep) stands for the infinite sum : e1 + ep + ep2 + · · ·. Of course ω is not an
+element of N : it makes sense (as well as the abstract Euler product expansion on the
+right-hand side) only in the completion of N with respect to the fine filtration defined by
+the vector space grading d(n) = n −1. But evaluating the character ϕ on both sides of
+this equality gives the well-known Euler product expression of the Zeta function.
+
+II.9.2. Tensor and symmetric algebras
+
+The tensor Hopf algebra T(V ) of any vector space V (cf.
+Example I.6.2) is obviously
+graded.
+The symmetric Hopf algebra is a particular case of enveloping Hopf algebra,
+with V viewed as an abelian Lie algebra. The Hopf algebra S(V ) is a cocommutative
+commutative connected graded Hopf algebra.
+Note that an enveloping algebra is not
+graded in general, since the quotienting ideal generated by x ⊗y −y ⊗x −[x, y] is not
+homogeneous.
+
+42
+
+
+II.9.3. Planar decorated rooted trees
+
+We borrow in this section some material from [F]. A planar rooted tree is an oriented
+connected contractible graph, with a finite number of vertices, together with an embedding
+of it into the plane, such that only one vertex has only outgoing edges (the root). We have
+drawn below the planar rooted trees with four vertices :
+
+Figure 1 : the planar rooted trees with four vertices.
+
+Let T be the set of planar rooted trees. Let V be a vector space on some field k, and let
+t be a planar rooted tree. The space of decorations of t by V is the vector space V ⊗t. A
+planar rooted tree t together with an indecomposable element of V ⊗t is called a decorated
+rooted tree. Let us consider the vector space :
+
+TV =
+�
+
+t∈T
+V ⊗t,
+
+let HV be the (noncommutative) free algebra generated by TV . Products of decorated
+trees (decorated forests) generate HV as a graded vector space, the degree of a decorated
+forest being given by the total number of vertices. The connected graded Hopf algebra
+structure on HV is given by the co-unit ε sending 1 to 1 and any nonempty decorated
+forest to 0, and by a coproduct which we describe shortly here :
+An elementary cut on a tree is a cut on some edge of the given tree. An admissible
+cut is a cut such that any path starting from the root contains at most one elementary
+cut. The empty cut is considered as elementary, as well as the total cut, i.e. a cut below
+the root. A cut on a forest is said to be admissible if its restriction to any tree factor is
+admissible. Any elementary cut c sends a forest F to a couple
+�
+P c(F), Rc(F)
+�
+, the crown
+and the trunk respectively. The trunk of a tree is a tree, but the crown of a tree is a
+forest. Let Adm(F) the set of admissible cuts of the forest F, and let Adm∗(F) the set of
+elementary cuts discarding the empty cut and the total cut. The coproduct :
+
+∆(F) =
+�
+
+c∈Adm F
+P c(F) ⊗Rc(F)
+
+is graded, co-associative and compatible with the product [F]. The compatibility with the
+product is clear (due to the definition of an admissible cut for a forest). There is a beautiful
+proof of the co-associativity in [F] using induction on the degree and grafting of any forest
+
+43
+
+
+on a decorated root. We propose here a more intuitive proof : say that a couple (c1, c2) of
+cuts is bi-admissible if both cuts c1, c2 are admissible and if c1 never bypasses c2, i.e. if c2
+never cuts the trunk of c1. Any bi-admissible couple c = (c1, c2) of cuts c defines a crown
+P c(F) = P c2(F), a trunk Rc(F) = Rc1(F), and a middle M c(F) :
+
+Figure 2 : an example of bi-admissible couple of cuts. From thickest to thinnest : trunk, middle and crown.
+
+Let Adm2 F the set of bi-admissible couples of cuts of the forest F. It is quite straightfor-
+ward to set down the formula for the iterated coproduct :
+
+(∆⊗I) ◦∆(F) = (I ⊗∆) ◦∆(F) =
+�
+
+c∈Adm2 F
+P c(F) ⊗M c(F) ⊗Rc(F).
+
+Of course the n-fold iterated coproduct admits a similar expression, involving n-admissible
+n-uples of admissible cuts and n + 1 “level segments” of the forest, from the crown down
+to the trunk.
+By corollary II.2.2 the connected graded bialgebra HV thus obtained admits an an-
+tipode given on Ker ε by any of the two recursive formulas :
+
+S(F) = −F −
+�
+
+c∈Adm∗(F )
+S
+�
+P c(F)
+�
+.Rc(F)
+
+= −F −
+�
+
+c∈Adm∗(F )
+P c(F).S
+�
+Rc(F)
+�
+.
+
+The square of the antipode does not in general coincide with the identity.
+
+II.9.3. Decorated rooted trees
+
+The construction is the same except that we consider rooted trees independently from any
+embedding into the plane, and we consider the free commutative algebra generated by
+decorated rooted trees. We thus obtain a commutative Hopf algebra H′
+V which is clearly
+a quotient of HV . This Hopf algebra is thoroughly investigated in [F].
+
+III. Hopf algebras of Feynman graphs
+
+We treat this example (more exactly this family of examples) in a separate section for
+two main reasons : firstly the Hopf algebras appearing there are pointed but not connected,
+and secondly this is the very example where a link is established with quantum field theory.
+
+44
+
+
+The non-connectedness is not a very serious problem : as we shall see we can reason on
+a connected quotient and go back. The formula for the coproduct will differ slightly from
+that of Connes-Kreimer in order to deal with this non-connectedness problem, but both
+will agree on the connected quotient. We follow [K1] quite closely, with some modifications
+in order to allow self-loops.
+
+III.1. Discarding exterior structures
+
+Anyone a little bit familiar with quantum field theory knows that Feynman graphs
+are made of internal and external edges of different types, and that an external edge comes
+with a vector attached to it (an exterior momentum). The sum of all exterior momenta
+of a given graph must be equal to zero, reflecting the global conservation of momenta
+in an interaction. The Feynman rules attach to a graph together with such an external
+structure an integral which can be divergent. This integral can be regularized by various
+procedures, among them dimensional regularization : the idea is to “let the dimension of
+the space of momenta vary in the complex numbers”, a procedure which has been recently
+given a precise geometrical contents by A. Connes and M. Marcolli ([CM2] § 15). The
+divergent integral is now replaced by a meromorphic function with poles at least at the
+entire dimensions where the original integral diverges [C Chap. 4], [E].
+
+The approach of renormalization by A. Connes and D. Kreimer can be summarized
+as follows : organize Feynman graphs with their exterior structures into a graded Hopf al-
+gebra, understand the (regularized, e.g. by means of dimensional regularization) Feynman
+rules as a character of this Hopf algebra with values into some algebra A (e.g. the mero-
+morphic functions), choose a renormalization scheme, i.e. a splitting A = A+ ⊕A−into
+two subalgebras, apply the method of § II.5 and II.6 to extract a renormalized value, and
+finally recognize that this method agrees with algorithms already developed by physicists,
+such as the Bogoliubov-Parasiuk-Hepp-Zimmerman (BPHZ) algorithm.
+
+Our first step will consist in constructing a Hopf algebra from Feynman diagrams
+without exterior structure (i.e. with exterior momenta nullified).
+
+III.2. Operations on Feynman graphs
+
+A Feynman graph is a (non-oriented, non-planar) graph with a finite number of ver-
+tices and edges. An internal edge is an edge connected at both ends to a vertex (which
+can be the same in case of a self-loop), an external edge is an edge with one open end, the
+other end being connected to a vertex.
+
+A Feynman graph is called by physicists vacuum graph, tadpole graph, self-energy
+graph, resp. interaction graph if its number of external edges is 0,1, 2, resp. > 2.
+
+The edges (internal or external) will be of different types labelled by a positive integer
+(1, 2, 3, . . .), each type being represented by the way the corresponding edge is drawn (full,
+dashed, wavy, various colours, etc...). Let τ(e) ∈N∗be the type of the edge e. For any
+vertex v let st(v) be the star of v, i.e. the set of all edges attached to v, with self-loops
+counted twice. Hence the valence of the vertex is given by the cardinal of st(v). Finally
+to each vertex we associate its type, the sequence (n1, . . ., nr) of positive integers where
+nj stands for the number of edges of type j in st(v). Let T(v) be the type of the vertex v
+
+45
+
+
+For example, in the ϕn theory there is only one type of edge, and two types of vertices :
+the bivalent vertices and the n-valent vertices. In quantum electrodynamics there are two
+types of edges : the fermion edges (usually drawn full), and the boson edges (usually drawn
+wavy), and three types of vertices : bivalent boson-boson vertices, bivalent fermion-fermion
+vertices, and trivalent vertices with two fermion edges and one boson edge. Most of the
+pictures will be drawn in ϕ3 or ϕ4 theory, or in quantum electrodynamics.
+A one-particle irreducible graph (in short, 1PI graph) is a connected graph which
+remains connected when we cut any internal edge. A disconnected graph is said to be
+locally 1PI if any of its connected components is 1PI. The residue of a connected graph
+is the graph with only one vertex obtained by shrinking all internal edges to a point. Of
+course any connected graph has the same type as its residue.
+
+Figure 3 : A QED interaction graph and its residue.
+
+A subgraph of a Feynman graph is either the empty graph, or a nonempty (connected or
+disconnected) set of internal edges together with the vertices they encounter and the stars
+of those vertices. A proper subgraph of Γ is a subgraph different from the empty graph or
+the whole graph Γ itself. If γ is a subgraph inside a graph Γ, the contracted graph Γ/γ is
+the graph obtained by replacing all connected components of γ by their residues inside Γ.
+As an example the residue of a graph Γ is equal to Γ/Γ.
+
+Γ
+γ
+
+Γ/γ
+
+Figure 4 : A subgraph γ inside a graph Γ in ϕ3 theory. The contracted graph Γ/γ does not belong to ϕ3.
+
+46
+
+
+III.3. The graded Hopf algebra structure
+
+Fix a set T = {T1, . . ., Tk} of finite sequences of positive integers, which will be the
+possible vertex types we want to deal with. Let VT be the vector space generated by all
+connected 1PI Feynman graphs with vertex types in T , and all residues of those. Let
+BT = S(VT ) be the free commutative algebra generated by V . We shall identify the unit
+1 with the empty graph and any element of BT with a linear combination of disconnected
+locally 1PI graphs. The algebra structure is obvious, the co-unity is given by ε(1) = 1 and
+ε(Γ) = 0 for any nonempty graph Γ. The grading (at least, one possible grading) is given
+on connected graphs by the loop number :
+
+L := I −V + 1,
+
+where I is the number of internal edges and V is the number of vertices of a given graph.
+This grading is extended to non-connected graphs in such a way that it is compatible with
+the algebra structure. It is important to notice that any nonempty subgraph has a non-
+vanishing loop number. The coproduct is given on connected 1PI graphs by the following
+formula :
+∆(Γ) =
+�
+
+γ subgraph of Γ
+Γ/γ∈VT
+
+γ ⊗Γ/γ
+
+= Γ ⊗res Γ + 1 ⊗Γ +
+�
+
+γ proper subgraph of Γ
+Γ/γ∈VT
+
+γ ⊗Γ/γ
+if L(Γ) ≥1,
+
+∆(Γ) = Γ ⊗Γ
+if L(Γ) = 0,
+and extended to non-connected graphs by multiplicativity. We leave it to the reader as
+an easy exercice to show that the coproduct respects the loop number as well. Figure 5
+below illustrates a coproduct computation in ϕ3 theory. Two terms of the sum have been
+removed because the corresponding contracted graphs have a vertex the type of which is
+outside T (here a pentavalent and an hexavalent vertex respectively), and then does not
+belong to VT . On the other hand residues with any number of external edges are allowed.
+
++
+
++
+
++2 
+
+∆(              )=
+   +  1
+
++2 
+
+Figure 5 : an example of coproduct in ϕ3 theory.
+
+47
+
+
+Figure 6 below illustrates another coproduct computation in ϕ3 theory, with a bivalent
+vertex arising in the contracted graph :
+
+∆(           )
+
++
+
+=  1
++
+
+Figure 6 : another example of coproduct in ϕ3 theory.
+
+Proposition III.3.1.
+BT is a pointed graded bialgebra.
+
+Proof. All axioms of a pointed graded bialgebra have been already given by the construc-
+tion, except coassociativity of the coproduct. But we have for any 1PI graph of positive
+degree :
+(∆⊗I)∆(Γ) =
+�
+
+δ⊂γ⊂Γ
+γ/δ∈BT , Γ/γ∈BT
+
+δ ⊗γ/δ ⊗Γ/γ,
+
+whereas :
+(I ⊗∆)∆(Γ) =
+�
+
+δ⊂Γ,�γ⊂Γ/δ
+Γ/δ∈BT , (Γ/δ)/�γ∈BT
+
+δ ⊗�γ ⊗(Γ/δ)/�γ.
+
+There is an obvious bijection γ �→�γ = γ/δ from subgraphs of Γ containing δ onto subgraphs
+of Γ/δ, given by shrinking δ. As we have the obvious “transitive shrinking property” :
+
+Γ/γ = (Γ/δ)/�γ,
+
+the two expressions coincide.
+•
+In order to build up a graded Hopf algebra from BT , two choices are possible : first we
+can add formally the inverses of the grouplike elements, i.e. the degree zero graphs : let Σ
+be the set of degree zero connected 1PI graphs, let Σ−1 be another copy of the same set,
+with elements labelled γ−1, γ ∈Σ. Let �VT be the vector space generated by VT and Σ−1,
+and consider :
+�
+HT = S(�VT )/J,
+
+where J is the ideal generated by γγ−1 −1, γ ∈Σ. The coproduct on S(VT ) is extended
+to S(�VT ) by saying that the elements of Σ−1 are grouplike. The ideal J is the a bi-ideal,
+and so �
+HT is a pointed graded bialgebra. An antipode is easily given inductively with
+respect to the degree, as any degree zero element has an antipode given by S(γ) = γ−1,
+S(γ−1) = γ for any γ ∈Σ.
+
+48
+
+
+The second option consists in killing the degree zero graphs (except the empty graph).
+We set :
+HT = BT /K,
+
+where K is the ideal generated by γ −1, γ ∈Σ. It is easily seen to be a bi-ideal. The
+quotient is then a connected graded bialgebra, hence a Hopf algebra thanks to corollary
+II.3.2. We can identify the quotient with S(V ′
+T ), where V ′
+T stands for the vector space
+generated by connected 1PI graphs with loop number ≥1. The coproduct is then given
+by Kreimer’s formula :
+
+∆(Γ) = Γ ⊗1 + 1 ⊗Γ +
+�
+
+γ proper subgraph of Γ
+Γ/γ∈VT
+
+γ ⊗Γ/γ.
+
+III.4. External structures
+
+We shall be very sketchy here. Let W be a finite-dimensional vector space (the mo-
+mentum space). Keeping the notations of § III.3 and following [CK 2] and [K 1], a specified
+graph will be a couple (Γ, σ) where Γ is a connected graph in VT with E external lines,
+and σ is a distribution on the vector subspace MΓ = ME ⊂W E defined by :
+
+ME = {(p1, . . . , pE),
+
+E
+�
+
+k=1
+pk = 0}.
+
+In order to get a Hopf algebra structure for specified graphs we must discriminate further
+the type of a vertex : once the number of edges of each type is fixed for a vertex, we add
+an extra nonzero natural number, so that there are “several kinds of vertices of the same
+type”. This comes from the lagrangian of the given quantum field theory we are dealing
+with : each monomial of degree ni with respect to the field φi (i ∈{1, . . ., k}) gives rise
+to vertices of type T = (n1, . . ., nk), and there are as many kinds of vertices of type T
+as monomials of “field degree” T inside the lagrangian. For example, in ϕ3 theory with
+mass, terms (m2/2)ϕ2 and (∂ϕ)2/2 give rise to two different kinds of bivalent vertices.
+When taking residues we must specify the kind for the unique remaining vertex : then
+when considering a contracted graph Γ/γ we must consider the kind of every contracted
+vertex (corresponding to a connected component of the subgraph γ). This gives rise to
+contracted graphs Γ/γ(i) where i is a multi-index.
+To any vertex of kind (T, i) corresponds a specific distribution σT,i on MΓ, where Γ is
+any graph whose residue gives a vertex of type T. This extends to non-connected graphs
+by considering multi-indices i. Now T stands for the set of all kinds (T, i) of vertices we
+can encounter, VT stands for the space generated by all connected 1PI graphs with vertex
+kinds in T , and all residues of those. Let V ′
+T the space generated by all connected 1PI
+Feynman graphs with vertex kinds in T and nonzero loop number, let (V ′
+T )E the subspace
+of V ′
+T of graphs with E external edges, and finally let W ′
+T the corresponding space of
+specified graphs :
+
+W ′
+T =
+
+∞
+�
+
+E=0
+(V ′
+T )E ⊗D′(ME).
+
+49
+
+
+We directly give the connected version of the Hopf algebra : it is given by HT = S(W ′
+T ),
+and the coproduct is given on connected specified graphs by :
+
+∆(Γ, σ) = (Γ, σ) ⊗1 + 1 ⊗(Γ, σ) +
+�
+
+γ proper subgraph of Γ
+
+�
+
+i, Γ/γ(i)∈VT
+(γ, σT,i) ⊗(Γ/γ(i), σ).
+
+IV. An approach to the renormalization group
+
+Keeping the notations of paragraph II, we denote by H a connected graded Hopf
+algebra, and by A the algebra of germs of meromorphic functions at some z0 ∈C. The
+algebra A admits a splitting into two subalgebras :
+
+A = A+ ⊕A−,
+
+where A+ is the algebra of germs of holomorphic functions at z0, and A−= (z−z0)−1C[(z−
+z0)−1]. We denote by Y (resp. θt) the biderivation (resp. the one-parameter group of
+automorphisms) of the Hopf algebra H induced by the graduation (cf.
+§ II.6).
+As in
+paragraph II we denote by G the group of the elements ϕ ∈L(H, A) such that ϕ(1) = 1A
+(with the convolution products), and by g the subalgebra of L(H, A) of the elements
+ϕ ∈L(H, A) such that ϕ(1) = 0.
+Recall that G = exp g. As in § II we shall consider the subgroups G1 (resp. G2)
+of G formed by the characters of H with values in A (resp. by the elements of G which
+enjoy the cocycle property), as well as the Lie subalgebras g1 (resp. g2) of derivations of
+H with values in A (resp. of g which enjoy the cocycle property). We have G1 = exp g1
+and G2 = exp g2.
+
+IV.1. The renormalization map
+
+We settle here a bijection R : g →g thanks to the biderivation Y :
+
+Proposition IV.1.1.
+The equation :
+ϕ ◦Y = ϕ ∗γ
+(E)
+
+defines a bijective correspondence :
+
+�R : G −→g
+ϕ �−→γ.
+
+Equivalently the equation :
+e∗α ◦Y = e∗α ∗γ
+(E′)
+
+defines a (non-linear) bijective correspondence :
+
+R : g −→g
+
+α �−→γ,
+
+and R = �R ◦exp.
+
+50
+
+
+Proof. Equation (E) yields for any homogeneous x ∈H :
+
+|x|ϕ(x) = γ(x) +
+�
+
+(x)
+ϕ(x′)γ(x′′),
+
+which determines γ (recursively in |x|) from ϕ and vice-versa, starting from ϕ(1) = 1A
+and γ(1) = 0. In other words equation (E) determines a bijection �R from G to g such that
+γ = �R(ϕ). The remainder of prop. IV.1.1 follows then immediately.
+•
+Equation (E′) yields the following explicit expression for R :
+
+R(α) = e∗−α ∗(e∗α ◦Y ).
+
+There is another explicit formula :
+
+Proposition IV.1.2.
+
+R(α) =
+�1
+
+0
+e∗−sα ∗(α ◦Y ) ∗e∗sα ds.
+
+Proof. for any u ∈R we have :
+
+e∗uα ◦Y = e∗uα ∗R(uα).
+
+Setting u = t + s and using the group property e∗(t+s)α = e∗tα ∗e∗sα as well as the
+derivation property :
+
+(e∗tα ∗e∗sα) ◦Y = (e∗tα ◦Y ) ∗e∗sα + e∗tα ∗(e∗sα ◦Y ),
+
+we get :
+e∗(t+s)α ◦Y = e∗(t+s)α ∗
+�
+R(sα) + e∗−sα ∗R(tα) ∗e∗sα�
+.
+
+Set γ(t) = R(tα) : the above equation reads :
+
+γ(t + s) = γ(s) + e∗−sα ∗γ(t) ∗e∗sα.
+
+We have γ(0) = 0, and differentiating this equation with respect to s at s = 0 yields :
+
+˙γ(t) = ˙γ(0) + [γ(t), α].
+
+Differentiating once again with respect to t gives then :
+
+¨γ(t) = [ ˙γ(t), α].
+
+The solution of this first order differential equation is given by :
+
+˙γ(t) = e∗−tα ∗˙γ(0) ∗e∗tα.
+
+Expanding the equation e∗tα ◦Y = e∗tα ∗γ(t) up to order 1 in t = 0 yields immediately :
+
+˙γ(0) = α ◦Y.
+
+Integrating and setting t = 1 establishes then proposition IV.1.2.
+•
+
+51
+
+
+Corollary IV.1.3.
+Correspondence R sends A-valued derivations to A-valued derivations and cocycles to
+cocycles.
+
+Proof.
+First assertion follows immediately from propositions IV.1.2, II.4.2 and II.8.2.
+Second assertion follows directly from proposition IV.1.2.
+•
+Remark : If the Hopf algebra H is cocommutative, then thanks to the commutativity of
+A, the convolution product is commutative. The correspondence R becomes then linear
+and we simply have :
+R(α) = α ◦Y.
+
+IV.2. Inverting �R : the scattering map
+
+We shall give an explicit expression of the map �R−1 : g →G. It takes the form :
+
+�R−1(γ) =
+lim
+t→+∞exp −tA exp tB,
+
+(cf.
+theorem IV.2.1 below), where A and B live in a semi-direct product Lie algebra
+�g = g ×| C. We have to describe this semi-direct product and the corresponding semi-
+direct product group �G = G ×| C, and then we must endow �G with a topology so that the
+above limit makes sense. We adapt here the proof of Theorem 2 in [CK2]. To be precise,
+we define the Lie algebra :
+�g = g ×| C.Z0,
+
+where the action of Z0 on g is given by the derivation :
+
+Z0(γ) = γ ◦Y
+
+(see lemma II.7.1). The corresponding group is �G = G ×| C, where the right action of C
+on G is given by :
+ϕ.t = ϕ ◦θt,
+
+so that the product is given by (ϕ, t)(ψ, s) =
+�
+ϕ ∗(ψ ◦θt), t + s
+�
+. We shall not dig out a
+Lie group structure for �G here, but we shall define the exponential map exp : �g →�G. It
+should of course coincide with the exponential already defined on G, and should verify :
+
+exp tZ0 = (e, t)
+
+so that exp tZ0 indeed acts on G by composition with θt = exp tY on the right. We should
+be able in principle to define exp(tZ0 + γ) by means of the Baker-Campbell-Hausdorff
+formula as long as convergence problems can be handled here. We prefer, like in [CK2], to
+give an alternative definition based on Araki’s expansion formula [Ar] :
+
+exp(tZ0 + γ) =
+
+∞
+�
+
+n=0
+
+�
+
+�n
+
+j=0 uj=1, uj≥0
+exp(u0tZ0)γ exp(u1tZ0)γ · · · γ exp(untZ0) du1 · · · dun.
+
+52
+
+
+Let us check that the sum above makes sense in our particular context : setting vj =
+uj + uj+1 + · · · + un we get :
+
+exp(−tZ0) exp(tZ0 + γ) = exp(−tZ0).
+
+exp(tZ0).
+
+∞
+�
+
+n=0
+
+�
+
+0≤vn≤···≤v1≤1
+exp(−tv1Z0)γ exp(tv1Z0) · · ·exp(−tvnZ0)γ exp(tvnZ0) dv1 · · · dvn
+
+=
+
+∞
+�
+
+n=0
+
+�
+
+0≤vn≤···≤v1≤1
+(γ ◦θ−tv1) ∗· · · ∗(γ ◦θ−tvn) dv1 · · · dvn.
+
+The sum here is well defined as a locally finite sum, as it ends up at n = n0 when evaluated
+at any x = Hn0. It remains to check that the exponential thus defined enjoys the one-
+parameter group property. Indeed, for any s, t real we have :
+
+exp t(Z0 + γ) exps(Z0 + γ) = etZ0�∞
+�
+
+p=0
+tp
+�
+
+0≤vp≤···≤v1≤1
+(γ ◦θ−tv1) ∗· · · ∗(γ ◦θ−tvp) dv1 · · ·dvp
+�
+.
+
+esZ0
+�∞
+�
+
+p=0
+sq
+�
+
+0≤wq≤···≤w1≤1
+(γ ◦θ−sw1) ∗· · · ∗(γ ◦θ−swq) dw1 · · · dwq
+�
+
+= e(t+s)Z0
+∞
+�
+
+p,q=0
+tpsq
+��
+
+0≤vp≤···≤v1≤1, 0≤wq≤···≤w1≤1
+
+(γ ◦θ−s−tv1) ∗· · · ∗(γ ◦θ−s−tvp) ∗(γ ◦θ−sw1) ∗· · · ∗(γ ◦θ−swq) dv1 · · · dvpdw1 · · · dwq
+
+= e(t+s)Z0
+∞
+�
+
+p,q=0
+
+��
+
+0≤vp≤···≤v1≤t, 0≤wq≤···≤w1≤s
+
+(γ ◦θ−s−v1) ∗· · · ∗(γ ◦θ−s−vp) ∗(γ ◦θ−w1) ∗· · · ∗(γ ◦θ−wq) dv1 · · · dvpdw1 · · · dwq
+
+= e(t+s)Z0
+∞
+�
+
+n=0
+
+�
+
+p+q=n
+
+��
+
+s≤vp≤···≤v1≤t+s, 0≤wq≤···≤w1≤s
+
+(γ ◦θ−v1) ∗· · · ∗(γ ◦θ−vp) ∗(γ ◦θ−w1) ∗· · · ∗(γ ◦θ−wq) dv1 · · · dvpdw1 · · · dwq
+
+= e(t+s)Z0
+∞
+�
+
+n=0
+
+�
+
+s≤up≤···≤u1≤t+s
+
+(γ ◦θ−u1) ∗· · · ∗(γ ◦θ−un) du1 · · · dun
+= exp(t + s)(Z0 + γ).
+
+We can now state the main theorem of this section :
+
+Theorem IV.2.1.
+Let γ ∈g. Then :
+
+1) For any real t the product exp −tZ0 exp t(Z0 + γ) belongs to G.
+
+53
+
+
+2) The product above admits a limit when t →+∞for the topology on G induced by the
+simple convergence topology on L(H, A).
+3) The inverse of the renormalization map is given by :
+
+�R−1(γ) =
+lim
+t→+∞exp −tZ0 exp t(Z0 + γ).
+
+4) �R−1 sends g1 into G1 and g2 into G2.
+
+Proof. The first assertion comes directly from the expression :
+
+exp(−tZ0) exp(tZ0 + tγ) =
+
+∞
+�
+
+n=0
+
+�
+
+0≤vn≤···≤v1≤1
+(tγ ◦θ−tv1) ∗· · · ∗(tγ ◦θ−tvn) dv1 · · · dvn.
+
+The right-hand side belongs manifestly to G. Change of variables vj →tvj yields :
+
+exp(−tZ0) exp(tZ0 + tγ) =
+
+∞
+�
+
+n=0
+
+�
+
+0≤vn≤···≤v1≤t
+(γ ◦θ−v1) ∗· · · ∗(γ ◦θ−vn) dv1 · · · dvn.
+
+To prove the second assertion it suffices to prove that the integrals :
+
+In :=
+�
+
+0≤vn≤···≤v1≤+∞
+(γ ◦θ−v1) ∗· · · ∗(γ ◦θ−vn) dv1 · · · dvn
+
+converge, as the sum I0 + I1 + I2 + · · · is locally finite. The convergence is easily seen by
+induction on n : indeed we have I0 = e and the crucial equality valid for any x ∈Ker ε :
+
+Y −1(x) =
+�∞
+
+0
+θ−t(x) dt.
+
+It follows that we have for any a ∈g :
+�∞
+
+0
+a ◦θ−t dt = a ◦Y −1.
+
+A simple computation then gives :
+
+In =
+�∞
+
+0
+(In−1 ∗γ) ◦θ−vn dvn
+
+= (In−1 ∗γ) ◦Y −1,
+
+which inductively shows the convergence of the integrals In. Now equation (E) can be
+rewritten as :
+ϕ(x) = (ϕ ∗γ) ◦Y −1(x) ∀x ∈Ker ε
+ϕ(1) = 1A.
+(E′′)
+
+54
+
+
+As γ = �R(ϕ) it means that :
+
+�R−1(γ) = e + T
+��R−1(γ)
+�
+,
+
+where T is the transformation of L = L(H, A) defined by :
+
+T(ψ) = (ψ ∗γ) ◦Y −1
+
+=
+�∞
+
+0
+(ψ ∗γ) ◦θ−t dt.
+
+Transformation T is a contraction on L for the distance associated with the filtration.
+�R−1(γ) is then the limit of the sequence (ϕn) defined by ϕ0 = e and ϕn+1 = e + T(ϕn).
+A straightforward computation yields :
+
+ϕn =
+
+n
+�
+
+k=0
+Ik.
+
+Hence we have :
+
+�R−1(γ) =
+
+∞
+�
+
+k=0
+Ik,
+
+which proves assertion 3). Finally assertion 4) comes from the fact that derivation Z0 acts
+on g1 and g2. We can then consider semi-direct products :
+
+�g1 = g1 ×| C.Z0,
+�G1 = G1 ×| C,
+
+�g2 = g2 ×| C.Z0,
+�G2 = G2 ×| C,
+
+and thus replace the group G by any of the two groups G1, G2 in assertions 1), 2) and 3),
+which proves assertion 4) and ends the proof of the theorem.
+•
+
+Corollary IV.2.2.
+The inverse of R : g →g is given by :
+
+R−1(γ) =
+lim
+t→+∞Log
+�
+exp −tZ0 exp t(Z0 + γ)
+�
+,
+
+and R−1 sends g1 (resp. g2) into g1 (resp. g2).
+
+55
+
+
+IV.3. The residue
+
+We keep the same notations as before except that we set z0 = 0 for notational simplicity.
+To any ψ ∈L we associate a linear form Res ψ on H by extracting the z−1 term : more
+precisely if we have for any x ∈H and for any z in some pointed neighbourhood of 0 :
+
+ψ(x)(z) =
+
++∞
+�
+
+n=−N
+ψn(x)zn
+
+with ψn(x) ∈C, then :
+Res ψ(x) := ψ−1(x).
+
+IV.4. Renormalization map and Birkhoff decomposition
+
+Following more closely A. Connes and D. Kreimer [CK2] we shall focus our attention on
+elements of G the Birkhoff decomposition of which shares an invariance property with
+respect to the action of the graduation. More precisely we define first a new action of C
+on the group G by :
+ψt(x)(z) = ψ(θtz(x))(z) = etz|x|ψ(x)(z).
+
+We shall consider the elements ψ of G such that in the Birkhoff decomposition :
+
+ψt = (ψt)∗−1
+−
+∗(ψt)+
+
+the polar part (ψt)−is independent of t. The motivation to look at this very specific
+property is that it is fulfilled by the characters of Hopf algebras of Feynman graphs obtained
+via Feynman rules and dimensional regularization. In physical terms this corresponds to
+the well-known fact that the counterterms do not depend on the choice of the arbitrary
+mass µ one must introduce in order to perform dimensional regularization. Let us say
+that ψ ∈G enjoys property (Φ) if the above condition on the polar part of its Birkhoff
+decomposition is fulfilled. GΦ will denote the subset of elements of G enjoying property
+(Φ).
+
+For any ψ ∈L and any f ∈A, we shall denote by fψ the element of L defined by :
+
+∀x ∈H, fψ(x)(z) = f(z)ψ(x)(z).
+
+In particular, (zψ) is defined by (zψ)(x)(z) = z.ψ(x)(z).
+
+Theorem IV.4.1.
+The map :
+z �R : G −→g
+
+ψ �−→z �R(ψ)
+
+restricts to a bijection from GΦ onto g ∩L(H, A+).
+
+56
+
+
+Proof. For any β ∈g introduce the linear transformation Uβ of g defined by :
+
+Uβ(A) = β ∗A + zA ◦Y.
+
+If β belongs to g ∩L(H, A+) then Uβ restricts to a linear transformation of g ∩L(H, A+).
+
+Lemma IV.4.2.
+For any ψ ∈G, n ∈N we have :
+
+znψ ◦Y n = ψ ∗U n
+z�
+R(ψ)(e).
+
+Proof. Case n = 0 is obvious, n = 1 is just the definition of �R. We check thus by induction :
+
+zn+1ψ ◦Y n+1 = z(ψ ◦Y n) ◦Y
+
+= z
+�
+ψ ∗U n
+z�
+R(ψ)(e)
+�
+◦Y
+
+= z(ψ ◦Y ) ∗U n
+z�
+R(ψ)(e) + zψ ∗
+�
+U n
+z�
+R(ψ)(e) ◦Y
+�
+
+= ψ ∗
+�
+z �R(ψ) ∗U n
+z�
+R(ψ)(e) + zU n
+z�
+R(ψ)(e) ◦Y
+�
+
+= ψ ∗U n+1
+z�
+R(ψ)(e).
+
+•
+Let us finish the proof of Theorem IV.4.1 : according to Lemma IV.4.2 we have for any
+real t, at least formally :
+ψt = ψ ∗exp(tUz�
+R(ψ))(e).
+(∗)
+
+We have still to fix the convergence of the exponential just above in the case when z �R(ψ)
+belongs to L(H, A+). Let us consider the following decreasing bifiltration of L(H, A+) :
+
+Lp,q
++ =
+�
+zqL(H, A+)
+�
+∩Lp.
+
+Considering the associated filtration :
+
+Ln
++ =
+�
+
+p+q=n
+Lp,q
++ ,
+
+we see that for any β ∈g ∩L(H, A+) transformation Uβ increases filtration by 1, i.e :
+
+Uβ(Ln
++) ⊂Ln+1
++
+.
+
+The algebra L(H, A+) is not complete with respect to the topology induced by this fil-
+tration, but the completion is L(H, �
+A+), where �
+A+ = C[[z]] stands for the formal series.
+Hence the right-hand side of (*) is convergent in L(H, �
+A+) with respect to this topol-
+ogy. Hence for any γ ∈L(H, A+) and for ψ such that z �R(ψ) = γ we have ψt = ψ ∗ht
+
+57
+
+
+with ht ∈L(H, �
+A+) for any t. On another hand we already know that ht takes values in
+meromorphic functions for each t. So ht belongs to L(H, A+).
+
+Then for any β ∈L(H, A+) and for ψ such that z �R(ψ) = β we have ψt = ψ∗h(t) with
+h(t) ∈L(H, A+) for any t. This is equivalent to the fact that ψ belongs to GΦ. Conversely
+take any ψ in GΦ. Then there exists ht ∈L(H, A+) such that ψt = ψ ∗ht. Hence :
+
+d
+dt|t=0ψt = z(ψ ◦Y ) = ψ ˙ht|t=0.
+
+So z �R(ψ) = ˙ht|t=0 belongs to L(H, A+). This proves theorem IV.4.1.
+•
+
+Lemma IV.4.3.
+1) Let ψ ∈GΦ, and let :
+ψ = (ψ−)∗−1 ∗ψ+
+
+its Birkhoff decomposition. Then �ψ = (ψ−)∗−1 enjoys property (Φ) as well.
+
+2) Let ψ ∈GΦ and let h be any element of G without polar part. Then ψ ∗h enjoys
+property (Φ) as well.
+
+Proof. Assertion 1) is a consequence of the equality :
+
+ψt = (ψt)∗−1
+−
+∗(ψt)+ = �ψt ∗(ψ+)t,
+
+which implies immediately :
+
+�ψt = (ψt)∗−1
+−
+∗(ψt)+ ∗
+�
+(ψ+)t�∗−1.
+
+This is the Birkhoff decomposition of �ψt : its polar part is (ψt)−, which by hypothesis is
+independant of t. Assertion 2) comes from the equality :
+
+(ψ ∗h)t = ψt ∗ht = (ψt)∗−1
+−
+∗
+�
+(ψt)+ ∗ht�
+,
+
+and from the fact that ht does not have any polar part. Thus the right-hand side is the
+Birkhoff decomposition of (ψ ∗h)t, the polar part of which is clearly independant of t.
+•
+Thanks to Lemma IV.4.3 we can now focus our attention on elements ψ of G which enjoy
+property (Φ) and such that ψ sends Ker ε into A−. Let us denote by GΦ
+−the subset of G
+formed by these elements.
+
+58
+
+
+Theorem IV.4.4.
+Let gc = {β ∈L(H, C), β(1) = 0}. Let gc
+1 = gc∩g1, and gc
+2 = gc∩g2. Let GΦ
+1,−= GΦ
+−∩G1
+and GΦ
+2,−= GΦ
+−∩G2. Then the map :
+
+G −→g
+
+ψ �−→z �R(ψ)
+
+restricts to a bijection from GΦ
+−(resp.
+GΦ
+1,−, GΦ
+2,−) to gc (resp gc
+1, gc
+2) , and we have
+explicitly for any ψ ∈GΦ
+−:
+
+�R(ψ) = 1
+
+z
+�
+(Res ψ) ◦Y
+�
+.
+
+Proof. We shall need the following key lemma :
+
+Lemma IV.4.5.
+For any ψ ∈GΦ
+−we have :
+
+d
+dt|t=0
+�
+(ψt)+) = Res(ψ ◦Y ).
+
+Proof. Using property (Φ), the fact that ψ(Ker ε) ⊂A−and the explicit expression of
+(ψt)+ given by theorem II.4.1 we have for any x ∈H :
+
+(ψt)+(x) = (I −π)
+�
+ψt(x) +
+�
+
+(x)
+ψ∗−1(x′)ψt(x′′)
+�
+
+= t(I −π)
+�
+z|x|ψ(x) + z
+�
+
+(x)
+ψ∗−1(x′)ψ(x′′)|x′′|
+�
++ O(t2)
+
+= t Res
+�
+ψ ◦Y ) + O(t2).
+
+•
+Now for any ψ ∈GΦ
+−the Birkhoff decomposition of ψt reads :
+
+ψt = ψ ∗(ψt)+.
+
+Differentiating with respect to t at t = 0 we get according to Lemma IV.4.5 :
+
+zψ ◦Y = ψ ∗Res(ψ ◦Y ).
+
+We deduce then :
+
+ψ ◦Y = ψ ∗1
+
+z Res(ψ ◦Y ),
+
+59
+
+
+which proves the equality �R(ψ) =
+1
+z Res(ψ ◦Y ). As a consequence correspondence z �R
+sends GΦ
+−into gc. Conversely let β in gc. Consider ψ = �R−1(z−1β). This element of G
+verifies by definition :
+zψ ◦Y = ψ ∗β.
+
+Hence for any x ∈Ker ε we have :
+
+zψ(x) = 1
+
+|x|
+
+�
+β(x) +
+�
+
+(x)
+ψ(x′)β(x′′)
+�
+.
+
+As β(x) is a constant (as a function of the complex variable z) it is easily seen by induction
+on |x| that the right-hand side evaluated at z has a limit when z tends to infinity. Thus
+ψ(x) ∈A−, and then :
+
+ψ = �R−1(1
+
+z β) ∈GΦ
+−.
+
+The proof of the variants of theorem IV.4.4 with G1 and G2 is then immediate thanks to
+corollary IV.1.3 and theorem IV.2.1.
+•
+Remark : the “G1” version of Theorem IV.4.4 recovers the result of A. Connes and D.
+Kreimer in [CK2 § 2] : when ψ is a character, then the C-valued derivation z �R(ψ) is
+denoted by β in loc. cit. Theorem IV.4.4 appears then as an interpretation of the result
+of Connes and Kreimer in other groups than the group of A-valued characters.
+
+References
+
+[Ab]
+E. Abe, Hopf Algebras, Cambridge Univ. Press (1980).
+
+[ABS]
+M. Aguiar, N. Bergeron, F. Sottile, Combinatorial Hopf algebras and generalized Dehn-
+Sommerville relations, Compos. Math. 142 no. 1, 1-30.(2006).
+
+[Ar]
+H. Araki, Expansional in Banach algebras, Ann. Scient. Ec. Norm. Sup. 4e s´erie, 6,
+67-84 (1973).
+
+[B]
+N. Bourbaki, Alg`ebre, Chapitre 8, Hermann, Paris.
+
+[BF]
+Ch.
+Brouder, A. Frabetti, Noncommutative renormalization for massless QED, hep-
+th/0011161 (2000).
+
+[BP]
+N.N. Bogoliubov, O.S. parasiuk, On the multiplication of causal functions in the quantum
+theory of fields, Acta Math. 97, 227-266 (1957).
+
+[C]
+J. Collins, Renormalization, Cambridge (1984).
+
+[CK1]
+A. Connes, D. Kreimer, Renormalization in Quantum Field Theory and the Riemann-
+Hilbert problem I : The Hopf algebra structure of graphs and the main theorem, Commun.
+Math. Phys. 210, 249-273 (2000).
+
+60
+
+
+[CK2]
+A. Connes, D. Kreimer, Renormalization in quantum field theory and the Riemann-Hilbert
+problem.
+II. The β-function, diffeomorphisms and the renormalization group.
+Comm.
+Math. Phys. 216, no. 1, 215–241 (2001).
+
+[CK3]
+A. Connes, D. Kreimer, Insertion and elimination: the doubly infinite Lie algebra of Feyn-
+man graphs, Ann. Henri Poincar 3, no. 3, 411–433 (2002).
+
+[CM1]
+A. Connes, M.Marcolli, From physics to number theory via noncommutative geometry II,
+arxiv:math.QA/0411114 (2004).
+
+[CM2]
+A. Connes, M.Marcolli, A walk in the noncommutative garden, arxiv:math.QA/0601054
+(2006).
+
+[Di]
+J. Dixmier, Alg`ebres enveloppantes, Gautier-Villars, Paris (1974).
+
+[DF]
+R.K. Dennis, B. Farb, Noncommutative algebra, Springer Verlag (1993).
+
+[DK]
+Yu. A. Drozd, V.V. Kirichenko, Finite dimensional algebras (english edition), Springer
+Verlag (1994).
+
+[DNR]
+S. Dˇascˇalescu, C. Nˇastˇasescu, S. Raianu, Hopf algebras, an introduction, Pure and Applied
+mathematics vol. 235, Marcel Dekker (2001).
+
+[E]
+P. Etingof, Note on dimensional regularization, in Quantum fields and strings : a course
+for mathematicians, AMS/IAS (1999).
+
+[EGK1]
+K. Ebrahimi-Fard, L. Guo, Matrix representation of of renormalization in perturbative
+quantum field theory, preprint arxiv:hep-th/0508155 (2005).
+
+[EGK1]
+K. Ebrahimi-Fard, L. Guo, D. Kreimer, Integrable renormalization I: the ladder case,
+arXiv:hep-th/0402095 (2004).
+
+[EGK2]
+K. Ebrahimi-Fard, L. Guo, D. Kreimer, Integrable renormalization II: the general case,
+arXiv:hep-th/0403118 (2004).
+
+[EGK3]
+K. Ebrahimi-Fard, L. Guo, D. Kreimer, Spitzer’s identity and the algebraic Birkhoff decom-
+position in pQFT, J. Phys. A: Math. Gen. 37, 11036-11052 (2004), arXiv:hep-th/0407082.
+
+[EGM]
+K. Ebrahimi-Fard, L. Guo, D. Manchon, Birkhoff type decompositions and the Baker-
+Campbell-Hausdorff recursion, Comm. Math. Phys. (to appear). arxiv:math-ph/0602004
+(2006).
+
+[EGGV]
+K. Ebrahimi-Fard, J.M. Gracia-Bondia, L. Guo, J.C. V`arilly, Combinatorics of renormal-
+ization as matrix calculus, Phys. Lett. B, 632 No 4, 552-558 (2006), arxiv:hp-th/0508154.
+
+[F]
+L. Foissy, Les alg`ebres de Hopf des arbres enracin´es d´ecor´es I,II, Bull. Sci. Math. 126,
+193-239 et 249-288 (2002).
+
+[FG]
+H. Figueroa, J.M. Gracia-Bond´ıa, Combinatorial Hopf algebras in Quantum Field Theory
+I, Reviews of Mathematical Physics 17, 881-976 (2005).
+
+[GZ]
+L. Guo, B. Zhang, Renormalization of multiple zeta values, preprint (2006).
+
+61
+
+
+[He]
+K. Hepp, Proof of the bogoliubov-Parasiuk theorem on renormalization, Comm. Math.
+Phys. 2, 301-326 (1966).
+
+[H]
+M.E. Hoffman, The Hopf algebra structure of multiple harmonic sums, Nuclear Phys. B
+Proc. Suppl. 135, 215-219 (2004). arXiv:math.QA/0406589.
+
+[I1]
+L.M. Ionescu, Perturbative quantum field theory and configuration space integrals, arXiv:-
+hep-th/0307062 (2003).
+
+[I2]
+L.M. Ionescu, A combinatorial approach to coefficients in deformation quantization, arXiv:-
+hep-th/0404389 (2004).
+
+[IM]
+L.M. Ionescu, M. Marsalli, A Hopf algebra deformation approach to renormalization,
+arXiv:hep-th/0307112 (2003).
+
+[J]
+N. Jacobson, Basic algebra II (second edition), Freeman, New-York, 1989.
+
+[Ka]
+C. Kassel, Quantum groups, Springer Verlag (1995).
+
+[K1]
+D. Kreimer, Structures in Feynman graphs- Hopf algebras and symmetries, hep-th/0202100
+(2002).
+
+[K2]
+D. Kreimer, New mathematical structures in renormalizable quantum field theories, hep-
+th/0211136 (2002).
+
+[Ma]
+D. Manchon, L’alg`ebre de Hopf bitensorielle, Comm. Algebra 25, no. 5, 1537–1551 (1997).
+
+[MP1]
+D. Manchon, S. Paycha, Shuffle relations for regularised integrals of symbols, arXiv:math-
+ph/0510067 (2005).
+
+[MP2]
+D. Manchon, S. Paycha, Renormalised Chen integrals for symbols on Rn and renormalised
+polyzeta functions, arXiv:math-ph/0604562 (2006).
+
+[Mo]
+S. Montgomery, Some remarks on filtrations of Hopf algebras, Comm. Algebra 21 No 3,
+999-1007 (1993).
+
+[R]
+H. Ratsimbarison, Feynman diagrams, Hopf algebras and renormalization, arxiv:math-
+ph/0512012 (2005).
+
+[RV]
+M. Rosenbaum, J.D. Vergara, The Hopf algebra of renormalization, normal coordinates
+and Kontsevich deformation quantization, arXiv:hep-th/0404233 (2004).
+
+[S]
+M. Sakakibara, On the Differential equations of the characters for the Renormalization
+group, Mod.Phys.Lett. A19, 1453-1456 (2004).
+
+[Sw]
+M. E. Sweedler, Hopf algebras, Benjamin, New-York (1969).
+
+[TW]
+E.J. Taft, R.L. Wilson, On antipodes in pointed Hopf algebras, J. Algebra 28, 27-32 (1974).
+
+[Z]
+W. Zimmermann, Convergence of Bogoliubov’s method of renormalization in momentum
+space, Comm. Math. Phys. 15, 208-234 (1969).
+
+62
+
+

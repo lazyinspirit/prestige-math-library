@@ -1,0 +1,197 @@
+{
+  "group": "i",
+  "batches": ["95"],
+  "pages_read": [
+    "csm-frontier-sampling-certificates",
+    "csm-frontier-sampling-certificates-examples"
+  ],
+  "items_read": [
+    "alg-csm-frontier-heat-bath-update",
+    "thm-csm-frontier-heat-bath-tv-bound",
+    "lem-csm-frontier-error-budget-composition",
+    "alg-csm-frontier-monotone-cftp",
+    "thm-csm-frontier-monotone-cftp-exact",
+    "alg-csm-frontier-swendsen-wang",
+    "thm-csm-frontier-swendsen-wang-invariance",
+    "ex-csm-frontier-metastable-diagnostic"
+  ],
+  "conventions": [
+    {
+      "convention": "Heat-bath inputs have finite nonempty site and spin sets and strictly positive finite weights. Random-scan sites and uniform draws are mutually independent; successive configurations need not be independent.",
+      "fixed_by": "alg-csm-frontier-heat-bath-update",
+      "matters_for": [
+        "thm-csm-frontier-heat-bath-tv-bound",
+        "alg-csm-frontier-monotone-cftp",
+        "thm-csm-frontier-monotone-cftp-exact"
+      ]
+    },
+    {
+      "convention": "Inverse conditional sampling uses intervals closed on the left and open on the right, except that uniform input 1 selects the final spin.",
+      "fixed_by": "alg-csm-frontier-heat-bath-update",
+      "matters_for": [
+        "alg-csm-frontier-monotone-cftp",
+        "thm-csm-frontier-monotone-cftp-exact"
+      ]
+    },
+    {
+      "convention": "Total variation is half the sum of absolute probability differences. The coefficient c_ij measures the influence of exterior site j on the conditional at i. Both row and column sums are assumed bounded by c<1; the Hamming contraction proof uses the column bound.",
+      "fixed_by": "thm-csm-frontier-heat-bath-tv-bound",
+      "matters_for": [
+        "thm-csm-frontier-heat-bath-tv-bound"
+      ]
+    },
+    {
+      "convention": "The Ising coordinate order is −1<+1, whereas the heat-bath sampling order is +1 before −1. Couplings are finite and nonnegative, fields finite, and all overlapping CFTP horizons reuse exactly the same stored maps.",
+      "fixed_by": "alg-csm-frontier-monotone-cftp",
+      "matters_for": [
+        "thm-csm-frontier-monotone-cftp-exact"
+      ]
+    },
+    {
+      "convention": "The statistical error inequality is an assumed realized-error event with no assigned probability. Truncation, mixing, statistical and arithmetic errors have the target's units.",
+      "fixed_by": "lem-csm-frontier-error-budget-composition",
+      "matters_for": [
+        "lem-csm-frontier-error-budget-composition"
+      ]
+    },
+    {
+      "convention": "Swendsen–Wang uses finite nonnegative activities, activation probability v_e/(1+v_e) on equal-spin edges, and independent uniform component colors. Zero-activity edges are never activated; uniform color input 1 selects Q.",
+      "fixed_by": "alg-csm-frontier-swendsen-wang",
+      "matters_for": [
+        "thm-csm-frontier-swendsen-wang-invariance"
+      ]
+    },
+    {
+      "convention": "The metastability example assumes AC through its general-state Metropolis suppliers. Its state space has the full power-set sigma-algebra, ε=exp(−βB) lies in (0,1), and mixing time uses worst-start half-total-variation distance.",
+      "fixed_by": "ex-csm-frontier-metastable-diagnostic",
+      "matters_for": [
+        "ex-csm-frontier-metastable-diagnostic"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "alg-csm-frontier-heat-bath-update",
+      "statement": "For finite nonempty V and S and strictly positive finite w, update a scheduled site by inverse sampling its normalized one-site conditional, leaving all other spins unchanged. Random scan uses independent uniform sites and independent uniform inputs.",
+      "used_by": [
+        "thm-csm-frontier-heat-bath-tv-bound",
+        "alg-csm-frontier-monotone-cftp",
+        "thm-csm-frontier-monotone-cftp-exact"
+      ]
+    },
+    {
+      "id": "alg-csm-frontier-monotone-cftp",
+      "statement": "For finite ferromagnetic Ising weights, apply shared stored heat-bath maps to the least and greatest configurations over horizons T=1,2,4,…; return their common time-zero configuration upon agreement, otherwise double the horizon while reusing overlapping maps.",
+      "used_by": [
+        "thm-csm-frontier-monotone-cftp-exact"
+      ]
+    },
+    {
+      "id": "alg-csm-frontier-swendsen-wang",
+      "statement": "On a finite simple graph with integer Q≥2 and finite activities v_e≥0, independently activate equal-spin edges with probabilities v_e/(1+v_e), then independently recolor each resulting component uniformly from [Q].",
+      "used_by": [
+        "thm-csm-frontier-swendsen-wang-invariance"
+      ]
+    },
+    {
+      "id": "thm-csm-frontier-heat-bath-tv-bound",
+      "statement": "Under both influence row- and column-sum bounds ≤c<1, for every starting configuration and integer t≥0, TV(Law(X_t),π)≤n(1−(1−c)/n)^t≤n exp(−(1−c)t/n). For f taking values in [a,b], the expectation bias is at most (b−a)n exp(−(1−c)t/n).",
+      "used_by": []
+    },
+    {
+      "id": "thm-csm-frontier-monotone-cftp-exact",
+      "statement": "For every finite nonempty V, finite interaction set, finite nonnegative couplings and finite fields in the specified monotone CFTP procedure, the doubling algorithm terminates almost surely and its returned configuration has exactly the finite Gibbs distribution.",
+      "used_by": []
+    },
+    {
+      "id": "thm-csm-frontier-swendsen-wang-invariance",
+      "statement": "For a finite simple graph, integer Q≥2 and finite activities v_e≥0, the specified Swendsen–Wang transition kernel preserves the finite Potts law and terminates after finitely many edge and component operations.",
+      "used_by": []
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "The explicit AC assumption inherited by the metastability example from its general-state Metropolis suppliers.",
+      "opened": true
+    },
+    {
+      "id": "def-standard-borel-space",
+      "used_for": "Checking that the finite discrete measurable carrier meets the Metropolis algorithm's standard-Borel hypothesis.",
+      "opened": true
+    },
+    {
+      "id": "def-polish-space",
+      "used_for": "The finite discrete metric is complete and separable, supplying a Polish realization of the example's carrier.",
+      "opened": true
+    },
+    {
+      "id": "def-probability-measure",
+      "used_for": "Checking normalization of the five-state Gibbs target.",
+      "opened": true
+    },
+    {
+      "id": "def-measure-kernel-and-probability-kernel",
+      "used_for": "Checking pointwise probability rows and measurability of the finite proposal kernel.",
+      "opened": true
+    },
+    {
+      "id": "def-invariant-and-stationary-distribution-for-a-markov-kernel",
+      "used_for": "The meaning of πP=π and its finite-state matrix formulation.",
+      "opened": true
+    },
+    {
+      "id": "alg-metropolis-hastings-kernel",
+      "used_for": "The common accepted-flow construction, specialized locally to the finite symmetric proposal acceptance ratio.",
+      "opened": true
+    },
+    {
+      "id": "thm-metropolis-hastings-kernel-is-reversible-and-invariant",
+      "used_for": "Probability-kernel validity and invariance only; finite convergence and bottleneck estimates are established locally in the example.",
+      "opened": true
+    },
+    {
+      "id": "def-finite-simple-graph",
+      "used_for": "The finite graph convention underlying the Potts/FK supplier and Swendsen–Wang update, including the permitted empty graph.",
+      "opened": true
+    },
+    {
+      "id": "def-finite-cardinality",
+      "used_for": "Finite vertex and edge cardinalities and the empty-set convention in the graph supplier.",
+      "opened": true
+    },
+    {
+      "id": "def-csm-lattice-gibbs-specification",
+      "used_for": "Context for the quantitative-DLR seam: conditional kernels, specification consistency, and the distinction between infinite-lattice assumptions and the locally proved finite sampling estimate.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "csm-frontier-sampling-certificates",
+      "to": "csm-frontier-quantitative-dlr",
+      "faithful": true,
+      "note": "Compared the finite influence definition and heat-bath estimate with the quantitative page's influence convention and comparison statement. Both use half-total variation and j-to-i influence indexing. The sampling theorem explicitly adds a column bound and proves its finite-time estimate locally; it does not infer it from infinite-volume uniqueness."
+    },
+    {
+      "from": "csm-frontier-sampling-certificates",
+      "to": "csm-frontier-fk-loop-algebra",
+      "faithful": true,
+      "note": "Opened the finite Potts/FK definition and complete Edwards–Sokal proof. The sampling items preserve Q≥2, finite nonnegative activities, the Potts weight normalization, and independent uniform colors conditional on positive-probability edge sets. Zero activities and the empty graph are compatible."
+    },
+    {
+      "from": "csm-frontier-inverse-gibbs",
+      "to": "csm-frontier-sampling-certificates",
+      "faithful": true,
+      "note": "The page-level prerequisite makes no stronger sampling assertion. Its prose explicitly distinguishes IID likelihood assumptions from MCMC output; the finite-MLE statement assumes an IID product sampling model rather than deriving independence from Gibbs updates."
+    },
+    {
+      "from": "csm-frontier-rare-event-numerics",
+      "to": "csm-frontier-sampling-certificates",
+      "faithful": true,
+      "note": "The page-level prerequisite does not upgrade invariance or finite bias control into independent exact sampling. The bridge procedure requires mutually independent exact draws as supplied inputs, and the variance theorem explicitly excludes approximate Gibbs draws, reused trajectories and adaptive bridges."
+    }
+  ]
+}

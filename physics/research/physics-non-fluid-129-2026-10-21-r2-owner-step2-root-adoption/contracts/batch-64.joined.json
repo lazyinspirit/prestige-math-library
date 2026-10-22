@@ -1,0 +1,1010 @@
+{
+  "version": 1,
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "scope": [
+    "lem-qftx-finite-heavy-gaussian-square",
+    "def-qftx-heavy-gaussian-data",
+    "thm-qftx-heavy-derivative-bound",
+    "def-qftx-finite-gaussian-shell-transform",
+    "prop-qftx-finite-gaussian-shell-semigroup",
+    "cex-qftx-eft-outside-band"
+  ],
+  "contracts": {
+    "lem-qftx-finite-heavy-gaussian-square": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisf",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following c",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-nondegenerate-multivariate-normal-law-has-density",
+          "source_section": "Statement",
+          "quote": "then its law has Lebesgue density\n$$f_{m,\\Sigma}(x)=(2\\pi)^{-d/2}\\det(\\Sigma)^{-1/2} \\exp\\!\\left(-\\tfrac12(x-m)^T\\Sigma^{-1}(x-m)\\right), \\qquad x\\in\\mathbb R^d.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant",
+          "source_section": "Statement",
+          "quote": "2. $E$ is Lebesgue measurable if and only if $E+h$ is;\n3. $\\lambda_n(E+h) = \\lambda_n(E)$ for every Lebesgue measurable $E$.\n\n**No choice principle is used.** Lebesgue outer measure is defined as an infimum\nand",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-measure-preserving-transformation-and-system",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space. A measurable self-map $T:X\\to X$ is **measure preserving** if $\\mu(T^{-1}E)=\\mu(E)$ for every $E\\in\\mathcal A$. The quadruple $(X,\\mathcal A,\\mu,T)$ is a **measure-p",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-integrals-are-invariant-under-measure-preserving-maps",
+          "source_section": "Statement",
+          "quote": "If $T$ preserves $\\mu$ and $f:X\\to[0,\\infty]$ is measurable, then $\\int f\\circ T\\,d\\mu=\\int f\\,d\\mu$, allowing infinity. If $f$ is integrable real or complex valued, $f\\circ T$ is integrable and the same equali",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1]–[F2], $\\gamma_{K^{-1}}$ has Lebesgue density $c_K\\exp(-\\tfrac12x^TKx)$, where $c_K=(2\\pi)^{-d/2}\\det(K^{-1})^{-1/2}>0$. The expectation in the Statement is therefore the ratio of the displayed Lebesgue integrals, provided the numerator is finite.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $K$ is invertible, direct expansion gives\n$$\\tfrac12x^TKx-j^Tx=\\tfrac12(x-K^{-1}j)^TK(x-K^{-1}j)-\\tfrac12j^TK^{-1}j.$$\nThe translation $x\\mapsto x-K^{-1}j$ preserves Lebesgue measure by [F3]–[F5], so the numerator is the denominator multiplied by $\\exp(\\tfrac12j^TK^{-1}j)$. The denominator is finite and positive because it is the normalizing integral of the probability density in [F2]; hence the numerator is also finite, and division proves both equalities. Expanding the same square proves the action identity.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The finite real Gaussian regulator explicitly has dimension d at least one; no zero-dimensional normalization is claimed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For source j=0 the translation in step 2.1 is the identity and its exponential factor is one, so both normalized ratios equal one."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For d=1, step 2.1 is the scalar completion of the square with positive precision K, using the same positive normalizing density from step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "A singular precision matrix is excluded by positive definiteness of K; the inverse source shift and nondegenerate Gaussian density are used only under that hypothesis."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no finite parameter interval or cutoff endpoint in this Gaussian-ratio statement; integration is over all real coordinates and step 2.1 obtains finiteness from the normalized density."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement assumes AC, recorded in A1; step 1.1 invokes precisely the finite normal-law density under that hypothesis."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Proof 2.1 expands the translated quadratic form and uses translation invariance to evaluate the ratio. Equivalently introduces the same square identity, not a reverse characterization of Gaussian models."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Proof 2.1 expands the translated quadratic form and uses translation invariance to evaluate the ratio. Equivalently introduces the same square identity, not a reverse characterization of Gaussian models."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "one-dimensional Gaussian square",
+          "inputs": "d=1, K=k>0, j=s",
+          "method": "Complete kx²/2-sx as k(x-s/k)²/2-s²/(2k) and translate Lebesgue measure.",
+          "result": "The normalized ratio is exp(s²/(2k)); the source-shift identity agrees exactly.",
+          "limitation": "Special case only; the proof covers all finite dimensions and positive-definite K."
+        }
+      ],
+      "finite_checks_disposition": "The finite check records an exact scalar or finite-regulator boundary; all general claims remain justified by the numbered proof.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-64 author",
+        "notes": "Finite density, normalization and translated integrability are proved; no infinite-dimensional measure is used. This authoring risk review is not independent acceptance."
+      },
+      "current_boundary_worksheet": {
+        "proposal": "research/physics-non-fluid-129-2026-10-21-r2-owner-step2-boundary-proposal-2/proposal.json",
+        "source_sha256": "f3e6fd5cbde596e6d2b1defb20739919df0b885bf12cd63bbcf3ce564c6fe486",
+        "qualification": "Released complete current source/eight-case semantic worksheet; root transcribed exact current rows. No independent acceptance or finite computation asserted."
+      }
+    },
+    "def-qftx-heavy-gaussian-data": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisf",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "lem-ac-supplies-sequential-choices-for-probability-constructions",
+          "source_section": "Statement",
+          "quote": "Then countable choice holds. Moreover, if $R\\subseteq X\\times X$ is serial on a nonempty set X and $a\\in X$, there is a sequence $(x_n)_{n\\ge0}$ with $x_0=a$ and $x_n R x_{n+1}$ for every n. Thus the countable",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-qftx-positive-unbounded-spectral-calculus",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $H\\ne\\{0\\}$ be a complex Hilbert space, with inner product linear in its first variable, and let $A:D(A)\\subseteq H\\to H$ be densely defined, self-adjoint, and nonnegative, meaning $\\langle Au,u\\rangle\\ge0$ for every $u\\in D(A)$. Here self-adjoint means equality with the Hilbert-space adjoint, including equality of domains. A projection-valued measure (PVM) on a measurable space $(X,\\Sigma)$ is a map $E:\\Sigma\\to\\mathcal B(H)$ such that every $E(S)$ is a bounded orthogonal projection ($E(S)^2=E(S)=E(S)^*$), $E(\\varnothing)=0$, $E(X)=I$, $E(S\\cap T)=E(S)E(T)$, and $E(\\bigcup_n S_n)u=\\sum_nE(S_n)u$ in norm for each disjoint sequence $(S_n)$ and each $u\\in H$. On a locally compact Hausdorff Borel space, such a PVM is regular when each finite scalar measure $\\mu_u(S):=\\langle E(S)u,u\\rangle$ is inner regular on Borel sets and outer regular by open supersets. Then $I+A:D(A)\\to H$ is bijective. Its inverse $B:=(I+A)^{-1}$ is a bounded positive (meaning $\\langle Bx,x\\rangle\\ge0$ for all $x\\in H$) self-adjoint injection with $\\|B\\|\\le1$ and dense range $D(A)$. For a bounded operator, its spectrum $\\sigma(B)$ is the set of complex $z$ for which $B-zI$ has no bounded two-sided inverse. Let $E_B$ be the regular spectral PVM on the Borel subsets of the nonempty compact set $\\sigma(B)$ satisfying $B=\\int_{\\sigma(B)}b\\,dE_B(b)$. Then $\\sigma(B)\\subseteq[0,1]$ and $E_B(\\{0\\})=0$. Define $\\phi(b)=b^{-1}-1$ for $b\\in\\sigma(B)\\setminus\\{0\\}$ and, for every Borel $S\\subseteq[0,\\infty)$, define\n\n$$E_A(S):=E_B(\\{b\\in\\sigma(B)\\setminus\\{0\\}:\\phi(b)\\in S\\}).$$\n\nThis is a PVM on the Borel subsets of $[0,\\infty)$. For each $u\\in H$ put $\\mu_u(S):=\\langle E_A(S)u,u\\rangle$. The unbounded integral $\\int_{[0,\\infty)}\\lambda\\,dE_A(\\lambda)$ denotes the operator $T_A$ with domain\n\n$$D(T_A):=\\left\\{u\\in H:\\int_{[0,\\infty)}\\lambda^2\\,d\\mu_u(\\lambda)<\\infty\\right\\}$$\n\nand action\n\n$$T_Au:=\\lim_{N\\to\\infty}\\Phi_{E_A}(\\lambda\\mathbf1_{[0,N]})(u),$$\n\nwhere $\\Phi_{E_A}(g)$ is the bounded Borel PVM integral of $g$. Then $A=T_A$ and hence\n\n$$A=\\int_{[0,\\infty)}\\lambda\\,dE_A(\\lambda),\\qquad D(A)=\\left\\{u\\in H:\\int_{[0,\\infty)}\\lambda^2\\,d\\langle E_A(\\lambda)u,u\\rangle<\\infty\\right\\}.$$\n\nFor every bounded Borel function $f:[0,\\infty)\\to\\mathbb C$, $f(A):=\\Phi_{E_A}(f)$ is bounded, satisfies $\\|f(A)\\|\\le\\sup_{\\lambda\\ge0}|f(\\lambda)|$, and obeys $\\|f(A)u\\|^2=\\int|f|^2\\,d\\mu_u$. The condition $E_B(\\{0\\})=0$ does not assert that $0\\notin\\sigma(B)$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-cauchy-schwarz-in-an-inner-product-space",
+          "source_section": "Statement",
+          "quote": "For all vectors $x,y$ in a real or complex inner-product space,\n\n$$|\\langle x,y\\rangle|\\le\\|x\\|\\,\\|y\\| ,$$\n\nwith equality if and only if $x$ and $y$ are linearly dependent.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-unbounded-adjoint-is-well-defined-and-closed",
+          "source_section": "Statement",
+          "quote": "nd linear with linear domain $D(T^*)$; $T^*$ is\nclosed; for every $z\\in\\mathbb C$\n$$\\operatorname{ran}(T-z)^\\perp=\\ker(T^*-\\overline z),$$\nand if $S\\subseteq T$ and both are densely defined, then $T^*\\subseteq S^*",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qftx-finite-heavy-gaussian-square",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $d\\ge1$, let $K\\in\\mathbb R^{d\\times d}$ be symmetric positive definite, and let $j\\in\\mathbb R^d$. Let $\\gamma_{K^{-1}}=N_d(0,K^{-1})$, where covariance is the matrix $\\mathbb E[XX^T]$. Then\n$$\\frac{\\int_{\\mathbb R^d}\\exp(-\\tfrac12x^TKx+j^Tx)\\,dx} {\\int_{\\mathbb R^d}\\exp(-\\tfrac12x^TKx)\\,dx} =\\int_{\\mathbb R^d}e^{j^Tx}\\,d\\gamma_{K^{-1}}(x) =\\exp\\!\\left(\\tfrac12j^TK^{-1}j\\right).$$\nEquivalently, in the finite real Gaussian regulator with normalized weight $e^{-S}$ and $\\hbar=1$, completing the source shift $\\chi=K^{-1}j+\\eta$ gives\n$$\\tfrac12\\chi^TK\\chi-j^T\\chi=\\tfrac12\\eta^",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-pvm-integral-is-a-star-homomorphism",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $(X,\\Sigma)$ be a measurable space, let $H$ be a\nnonzero complex Hilbert space, let $E$ be a projection valued measure on\n$(X,\\Sigma)$, and for a bounded measurable $f$ write $\\Phi_E(f)=\\int f\\,dE$ for\nthe operator of [[thm-bounded-borel-pvm-integral]]. Then:\n\n1. $\\Phi_E$ is linear and unital: $\\Phi_E(\\mathbf 1_X)=I$ and\n   $\\Phi_E(af+bg)=a\\Phi_E(f)+b\\Phi_E(g)$ for bounded measurable $f,g$ and\n   $a,b\\in\\mathbb C$;\n2. $\\Phi_E$ is multiplicative: $\\Phi_E(fg)=\\Phi_E(f)\\Phi_E(g)$;\n3. $\\Phi_E$ preserves conjugation: $\\Phi_E(\\overline f)=\\Phi_E(f)^*$;\n4. if $(f_n)$ are bounded measurable with $\\sup_n\\|f_n\\|_\\infty<\\infty$, $f$\n   is bounded measurable, and $f_n\\to f$ pointwise $E$-almost everywhere,\n   meaning $E_x$-almost everywhere for every $x\\in H$, then\n   $\\Phi_E(f_n)\\to\\Phi_E(f)$ in the strong operator topology.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A3",
+          "source": "def-hilbert-space",
+          "source_section": "Definition",
+          "quote": "A **real Hilbert space** is a real inner-product space $H$ whose induced-length metric is complete: every Cauchy sequence in $H$ for the norm $\\|v\\|=\\sqrt{\\langle v,v\\rangle}$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A4",
+          "source": "def-real-and-complex-inner-product-space",
+          "source_section": "Definition",
+          "quote": "with the inner product linear in the first argument: for all $u,v,w\\in V$ and $a,b\\in\\mathbb F$,\n\n$$\\langle au+bv,w\\rangle=a\\langle u,w\\rangle+b\\langle v,w\\rangle,\\qquad \\lang",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because The exponential is a continuous bijection from $\\mathbb{R}$ onto $(0,\\infty)$ states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The actual proof of [F1] uses Cauchy–Schwarz for its resolvent lower bound and closedness of $A$ for its resolvent graph argument. [F2] supplies the former. By [A1]–[A2] countable choice is available, so [F3] applies and self-adjointness gives $A=A^*$, hence $A$ is closed. This records the actual inputs of [F1]'s proof; the carrier's complete conditional proof was inspected.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Set $g_M(a)=(M^2+a)^{-1}$ and $\\mu_u(S)=\\langle E_A(S)u,u\\rangle$. By [F1], $g_M(A)$ is bounded with norm at most $M^{-2}$. Since $0\\le ag_M(a)\\le1$, $\\int a^2g_M(a)^2\\,d\\mu_u(a)\\le\\mu_u([0,\\infty))=\\|u\\|^2$ for every $u\\in H$, so the domain formula in [F1] gives $g_M(A)u\\in D(A)$. To see the left-inverse identity, let $x=g_M(A)u$ and $x_n=E_A([0,n])x$. The domain formula gives $x_n\\to x$ and $Ax_n\\to Ax$ in $H$. The spectral representation in [F1] and the multiplicativity in [F5] applied to bounded truncations give $(M^2I+A)x_n=\\int_{[0,n]}(M^2+a)g_M(a)\\,dE_A(a)u=E_A([0,n])u$; hence $(M^2I+A)g_M(A)u=u$. For the right-inverse identity, if $v\\in D(A)$, set $v_n=E_A([0,n])v$. Then $v_n\\to v$ and $(M^2I+A)v_n\\to(M^2I+A)v$ in $H$. The same spectral representation and multiplicativity give $g_M(A)(M^2I+A)v_n=\\int_{[0,n]}g_M(a)(M^2+a)\\,dE_A(a)v=v_n$, and boundedness of $g_M(A)$ gives $g_M(A)(M^2I+A)v=v$. Thus $K^{-1}=g_M(A)$ and $\\|K^{-1}\\|\\le M^{-2}$. Finally, the positive scalar multiplier gives $\\langle J,K^{-1}J\\rangle=\\int g_M(a)\\,d\\mu_J(a)\\ge0$, so the quadratic form is real.",
+          "inputs": [
+            "A3",
+            "A4",
+            "F1",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "In a finite real regulator with symmetric positive-definite matrix $K$, [F4] gives the normalized source integral $\\exp(\\tfrac12j^TK^{-1}j)$. Taking its negative logarithm using [F6] gives the effective-action shift $-\\tfrac12j^TK^{-1}j$. No determinant or Lebesgue integral beyond that finite regulator enters the definition.",
+          "inputs": [
+            "F4",
+            "F6",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Definition requires a nonzero complex Hilbert space; its source J may be zero but an empty Hilbert representation is not part of these data."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The quadratic form in step 2.1 vanishes for J=0. If A=0, its spectral multiplier is the constant M to the power minus two, so the same step yields K inverse equal to that scalar times the identity."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "On a one-dimensional Hilbert space A is a nonnegative scalar a and step 2.1 gives the inverse scalar 1/(M squared plus a), with the stated real nonpositive action."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "A may have a kernel: step 2.1 keeps every spectral denominator at least M squared, with M strictly positive, and verifies both inverse identities on the specified domains."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The spectral endpoint a=0 is admitted in step 2.1 and has multiplier M to the power minus two. A zero mass shift is outside the strict M>0 hypothesis."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses A1 and A2 to provide Countable Choice for adjoint closedness before the spectral construction; the Definition retains the stronger explicit AC assumption."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The positive spectral multiplier defines the heavy-mode inverse and finite-regulator action shift; existence of a nonpositive quadratic action is not used to infer a nonnegative self-adjoint A."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The positive spectral multiplier defines the heavy-mode inverse and finite-regulator action shift; existence of a nonpositive quadratic action is not used to infer a nonnegative self-adjoint A."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "finite-regulator source shift",
+          "inputs": "real SPD K and source j in finite dimension",
+          "method": "Apply the completed-square identity of the local Gaussian lemma.",
+          "result": "The normalized integral contributes exp(j^T K^-1 j/2), hence action shift -j^T K^-1 j/2.",
+          "limitation": "No infinite-dimensional measure or determinant is inferred."
+        }
+      ],
+      "finite_checks_disposition": "The finite check records an exact scalar or finite-regulator boundary; all general claims remain justified by the numbered proof.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-64 author",
+        "notes": "The spectral carrier was checked at its actual AC/domain interface. Its omitted Cauchy–Schwarz and closedness inputs are declared here; Gaussian Lebesgue integration is finite-regulator only. This authoring risk review is not independent acceptance."
+      },
+      "current_boundary_worksheet": {
+        "proposal": "research/physics-non-fluid-129-2026-10-21-r2-owner-step2-boundary-proposal-1/proposal.json",
+        "source_sha256": "c8356a1b0eabbdc34de411bd077afa106c9d411e9fa34e5fb9912a1757f44c85",
+        "qualification": "Released complete current source/eight-case semantic worksheet; root transcribed exact current rows. No independent acceptance or finite computation asserted."
+      }
+    },
+    "thm-qftx-heavy-derivative-bound": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisf",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "lem-ac-supplies-sequential-choices-for-probability-constructions",
+          "source_section": "Statement",
+          "quote": "Then countable choice holds. Moreover, if $R\\subseteq X\\times X$ is serial on a nonempty set X and $a\\in X$, there is a sequence $(x_n)_{n\\ge0}$ with $x_0=a$ and $x_n R x_{n+1}$ for every n. Thus the countable",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-qftx-positive-unbounded-spectral-calculus",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $H\\ne\\{0\\}$ be a complex Hilbert space, with inner product linear in its first variable, and let $A:D(A)\\subseteq H\\to H$ be densely defined, self-adjoint, and nonnegative, meaning $\\langle Au,u\\rangle\\ge0$ for every $u\\in D(A)$. Here self-adjoint means equality with the Hilbert-space adjoint, including equality of domains. A projection-valued measure (PVM) on a measurable space $(X,\\Sigma)$ is a map $E:\\Sigma\\to\\mathcal B(H)$ such that every $E(S)$ is a bounded orthogonal projection ($E(S)^2=E(S)=E(S)^*$), $E(\\varnothing)=0$, $E(X)=I$, $E(S\\cap T)=E(S)E(T)$, and $E(\\bigcup_n S_n)u=\\sum_nE(S_n)u$ in norm for each disjoint sequence $(S_n)$ and each $u\\in H$. On a locally compact Hausdorff Borel space, such a PVM is regular when each finite scalar measure $\\mu_u(S):=\\langle E(S)u,u\\rangle$ is inner regular on Borel sets and outer regular by open supersets. Then $I+A:D(A)\\to H$ is bijective. Its inverse $B:=(I+A)^{-1}$ is a bounded positive (meaning $\\langle Bx,x\\rangle\\ge0$ for all $x\\in H$) self-adjoint injection with $\\|B\\|\\le1$ and dense range $D(A)$. For a bounded operator, its spectrum $\\sigma(B)$ is the set of complex $z$ for which $B-zI$ has no bounded two-sided inverse. Let $E_B$ be the regular spectral PVM on the Borel subsets of the nonempty compact set $\\sigma(B)$ satisfying $B=\\int_{\\sigma(B)}b\\,dE_B(b)$. Then $\\sigma(B)\\subseteq[0,1]$ and $E_B(\\{0\\})=0$. Define $\\phi(b)=b^{-1}-1$ for $b\\in\\sigma(B)\\setminus\\{0\\}$ and, for every Borel $S\\subseteq[0,\\infty)$, define\n\n$$E_A(S):=E_B(\\{b\\in\\sigma(B)\\setminus\\{0\\}:\\phi(b)\\in S\\}).$$\n\nThis is a PVM on the Borel subsets of $[0,\\infty)$. For each $u\\in H$ put $\\mu_u(S):=\\langle E_A(S)u,u\\rangle$. The unbounded integral $\\int_{[0,\\infty)}\\lambda\\,dE_A(\\lambda)$ denotes the operator $T_A$ with domain\n\n$$D(T_A):=\\left\\{u\\in H:\\int_{[0,\\infty)}\\lambda^2\\,d\\mu_u(\\lambda)<\\infty\\right\\}$$\n\nand action\n\n$$T_Au:=\\lim_{N\\to\\infty}\\Phi_{E_A}(\\lambda\\mathbf1_{[0,N]})(u),$$\n\nwhere $\\Phi_{E_A}(g)$ is the bounded Borel PVM integral of $g$. Then $A=T_A$ and hence\n\n$$A=\\int_{[0,\\infty)}\\lambda\\,dE_A(\\lambda),\\qquad D(A)=\\left\\{u\\in H:\\int_{[0,\\infty)}\\lambda^2\\,d\\langle E_A(\\lambda)u,u\\rangle<\\infty\\right\\}.$$\n\nFor every bounded Borel function $f:[0,\\infty)\\to\\mathbb C$, $f(A):=\\Phi_{E_A}(f)$ is bounded, satisfies $\\|f(A)\\|\\le\\sup_{\\lambda\\ge0}|f(\\lambda)|$, and obeys $\\|f(A)u\\|^2=\\int|f|^2\\,d\\mu_u$. The condition $E_B(\\{0\\})=0$ does not assert that $0\\notin\\sigma(B)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qftx-heavy-gaussian-data",
+          "source_section": "Definition",
+          "quote": "The bounded spectral operator $f_M(A)$ is the inverse $K^{-1}$ and satisfies $\\|K^{-1}\\|\\le M^{-2}$. For $J\\in H$ define the matched quadratic effective-action contribution\n$$\\Delta S_{\\mathrm{eff}}(J):=-\\tfrac",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-cauchy-schwarz-in-an-inner-product-space",
+          "source_section": "Statement",
+          "quote": "For all vectors $x,y$ in a real or complex inner-product space,\n\n$$|\\langle x,y\\rangle|\\le\\|x\\|\\,\\|y\\| ,$$\n\nwith equality if and only if $x$ and $y$ are linearly dependent.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For every $a\\ge0$, putting $x=a/M^2$ and multiplying by $1+x$ gives\n$$\\frac1{M^2+a}=M^{-2}\\sum_{r=0}^{N}(-a/M^2)^r+ M^{-2}\\frac{(-a/M^2)^{N+1}}{1+a/M^2}.$$\nThis finite geometric identity also holds at $a=0$ and for $N=0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "On $J=P_EJ$, the spectral variable satisfies $0\\le a\\le E^2$. Therefore every polynomial term $A^rJ$ is defined, and the remainder multiplier satisfies\n$$\\left|M^{-2}\\frac{(-a/M^2)^{N+1}}{1+a/M^2}\\right| \\le M^{-2}(E^2/M^2)^{N+1},$$\nbecause $1+a/M^2\\ge1$. Extend this bounded multiplier by zero outside $[0,E^2]$ and apply [F1]. With [F2] this identifies the inverse kernel and proves the vector identity defining $R_NJ$ and its norm bound.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F2], the action remainder equals $\\tfrac12|\\langle J,R_NJ\\rangle|$. Cauchy–Schwarz [F3] and step 2.1 give the claimed bound. The factor $(E^2/M^2)^{N+1}$ decreases to zero only when $E<M$; for $E\\ge M$ the same finite-order bound remains true but need not be small.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The finite geometric sum ranges from r=0 through N with N nonnegative, so it always contains its identity term. The fixed spectral-band input is not an arbitrary family with an empty indexing option."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly includes a=0 and N=0. At E=0 the band's scalar variable is zero and its remainder numerator vanishes; J=0 also gives both remainder norms zero by steps 2.1 and 3.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The N=0 truncation in step 1.1 contains exactly M to the power minus two times J, and its single-term remainder bound follows through step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The spectral proof step 2.1 permits zero eigenvalues of A and bounds the denominator 1+a/M squared below by one, so no inverse of A is required."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 includes both endpoints of the closed band from zero to E squared. Step 3.1 distinguishes useful decay at E<M from the still valid finite-order estimate at E=M and E>M."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A1 and A2 explicitly carry AC and its Countable Choice consequence into the spectral supplier used in step 2.1; no choice of a new source family occurs."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a definition, equality, estimate, or counterexample, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is a definition, equality, estimate, or counterexample, not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "zero spectral mode and first truncation",
+          "inputs": "a=0; N=0; M>0",
+          "method": "Substitute a=0 in the finite geometric remainder identity.",
+          "result": "The remainder multiplier is zero and the bound is 0≤0.",
+          "limitation": "Scalar boundary check only; the proof covers the full spectral subspace."
+        }
+      ],
+      "finite_checks_disposition": "The finite check records an exact scalar or finite-regulator boundary; all general claims remain justified by the numbered proof.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-64 author",
+        "notes": "The scalar identity and bounded spectral band prove the estimate for every E; usefulness is limited to E<M. This authoring risk review is not independent acceptance."
+      },
+      "current_boundary_worksheet": {
+        "proposal": "research/physics-non-fluid-129-2026-10-21-r2-owner-step2-boundary-proposal-4/proposal.json",
+        "source_sha256": "a5af48d1922833a39dfc0c41e82b4842cb1d877963b83e1fa53b656e3e512662",
+        "qualification": "Released complete current source/eight-case semantic worksheet; root transcribed exact current rows. No independent acceptance or finite computation asserted."
+      }
+    },
+    "def-qftx-finite-gaussian-shell-transform": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisf",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following c",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand\n\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because The exponential is a continuous bijection from $\\mathbb{R}$ onto $(0,\\infty)$ states that $\\exp:\\mathbb R",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-exponential-is-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "continuous and strictly increasing on $\\mathbb R$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The map $(x,z)\\mapsto f(x+z)$ is Borel because addition is continuous and $f$ is Borel. Lebesgue measure on $\\mathbb R^d$ is sigma-finite because $\\mathbb R^d=\\bigcup_{n\\ge1}[-n,n]^d$ and each cube has finite measure; $\\gamma_C$ is a probability by [F1]. Thus [F2] makes $x\\mapsto T_Cf(x)$ Borel, including when the integral is infinite.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For finite nonnegative Borel $V$, $g_x(z):=e^{-V(x+z)}$ is Borel and satisfies $0<g_x(z)\\le1$. Its integral against the probability $\\gamma_C$ is at most one. It is strictly positive: if the integral were zero, each set $\\{z:g_x(z)\\ge1/n\\}$ would have measure zero, while their countable union is all of $\\mathbb R^d$, contradicting $\\gamma_C(\\mathbb R^d)=1$. Thus $T_C(e^{-V})(x)\\in(0,1]$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F3], the logarithm is defined at these values. Its continuity follows directly from [F4]: for $y_0>0$ and $\\epsilon>0$, strict increase and continuity of $\\exp$ give $\\exp(\\log y_0-\\epsilon)<y_0<\\exp(\\log y_0+\\epsilon)$; put $\\delta=\\min\\{y_0-\\exp(\\log y_0-\\epsilon),\\exp(\\log y_0+\\epsilon)-y_0\\}>0$. If $y>0$ and $|y-y_0|<\\delta$, then $\\exp(\\log y_0-\\epsilon)<y<\\exp(\\log y_0+\\epsilon)$, and strict monotonicity gives $|\\log y-\\log y_0|<\\epsilon$. Hence $V_C$ is finite, nonnegative, and Borel. If $C=0$, then for each coordinate $Z_i$, $\\mathbb E Z_i^2=C_{ii}=0$. For every $n\\ge1$, $0=\\mathbb E Z_i^2\\ge n^{-2}\\mathbb P(|Z_i|\\ge n^{-1})$, so $Z_i=0$ almost surely; the finite intersection gives $Z=0$ almost surely and $\\gamma_0=\\delta_0$; hence $T_0f=f$ and $V_0=V$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The shell transform is an integral against a normalized Gaussian probability on R to dimension d with d at least one, not an average over an unspecified finite or empty family.",
+          "argument_steps": []
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 proves that zero covariance gives the point mass at the origin, hence T_0 f=f and V_0=V. Taking f=0 in the Definition gives a zero nonnegative integral, while V=0 gives average exponential one and V_C=0.",
+          "argument_steps": [
+            "3.1"
+          ]
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Dimension d=1 is allowed in the Definition; its scalar nonnegative covariance law and the measurability and positivity arguments in steps 1.1 and 2.1 require no higher dimension.",
+          "argument_steps": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Singular covariances are admitted by F1 and used as probability laws without a density in step 1.1; step 3.1 separately verifies the fully zero covariance.",
+          "argument_steps": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 proves the exponential average is strictly positive and at most one, so its logarithm never meets zero. Step 1.1 allows T_C f to equal positive infinity for general nonnegative f, as the Definition states.",
+          "argument_steps": [
+            "2.1",
+            "1.1"
+          ]
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Gaussian-law existence assumption is explicitly AC in A1 and the Definition; step 1.1 invokes that law before Tonelli, without treating a singular covariance as a Lebesgue density.",
+          "argument_steps": [
+            "1.1"
+          ]
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item defines normalized Gaussian convolution, proves Borel measurability and strict positivity of the exponential average, and defines its negative logarithm. It asserts no inverse characterization of inputs by their shell transforms.",
+          "argument_steps": []
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reconstruction of V or C from V_C is claimed; the C=0 identity 3.1 is a special branch, not a converse shell-transform classification.",
+          "argument_steps": [
+            "3.1"
+          ]
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "zero covariance shell",
+          "inputs": "C=0 and finite nonnegative Borel V",
+          "method": "Use the covariance-zero Gaussian law concentrated at the origin.",
+          "result": "T_0 f=f and V_0=V.",
+          "limitation": "Boundary identity only; the definition covers every positive-semidefinite covariance."
+        }
+      ],
+      "finite_checks_disposition": "The finite check records an exact scalar or finite-regulator boundary; all general claims remain justified by the numbered proof.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-64 author",
+        "notes": "Tonelli supplies measurability; strict positivity and normalization make the logarithm well-defined for singular covariance. This authoring risk review is not independent acceptance."
+      },
+      "current_boundary_worksheet": {
+        "proposal": "research/physics-non-fluid-129-2026-10-21-r2-owner-step2-boundary-proposal-8/proposal.json",
+        "source_sha256": "0a6a4b65e3d222a8345b15737d9a7aee136370c97d3ff682adda6542b88f1fa1",
+        "qualification": "Released complete current source/eight-case semantic worksheet; root transcribed exact current rows. No independent acceptance or finite computation asserted."
+      }
+    },
+    "prop-qftx-finite-gaussian-shell-semigroup": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisf",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qftx-finite-gaussian-shell-transform",
+          "source_section": "Definition",
+          "quote": "T_Cf(x):=\\int_{\\mathbb R^d}f(x+z)\\,d\\gamma_C(z)\\in[0,\\infty].$$\nThis is a Borel function of $x$. If $V:\\mathbb R^d\\to[0,\\infty)$ is finite-valued and Borel, define\n$$V_C(x):=-\\log\\bigl(T_C(e^{-V})(x)\\bigr).$$\nT",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following c",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "source_section": "Statement",
+          "quote": "The product measure of two sigma-finite measure spaces is a measure on\n   $\\mathcal A \\otimes \\mathcal B$;\n2. for measurable rectangles,\n   $$(\\mu \\times \\nu)(A \\times B)=\\mu(A)\\nu(B),$$\n   with the nonnegative",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "the three integrals agree:\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-characteristic-function-of-a-multivariate-normal-law",
+          "source_section": "Statement",
+          "quote": "This transform uniquely determines the law, including singular Sigma.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand\n\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "On $(\\mathbb R^d,\\gamma_{C_1})\\times(\\mathbb R^d,\\gamma_{C_2})$, the sum map $(y,z)\\mapsto y+z$ has characteristic function\n$$\\int e^{iu\\cdot(y+z)}\\,d(\\gamma_{C_1}\\times\\gamma_{C_2}) =\\exp(-u^TC_1u/2)\\exp(-u^TC_2u/2) =\\exp[-u^T(C_1+C_2)u/2].$$\nThe product measure exists by [F3], the integrand is bounded and therefore integrable, and [F4] justifies the iterated integral/product factorization. Since $C_1+C_2$ is positive semidefinite, [F2] and [F5] identify the pushforward under addition as $\\gamma_{C_1+C_2}$. This includes singular and zero covariances.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The function $(x,y,z)\\mapsto f(x+y+z)$ is nonnegative and Borel. Apply [F6] to integrate first in $y$ and then in $z$; the resulting iterated integral equals the integral against the product law of $(y,z)$. By step 1.1 its pushforward under addition is $\\gamma_{C_1+C_2}$. Therefore\n$$\\int\\left(\\int f(x+z+y)\\,d\\gamma_{C_1}(y)\\right)d\\gamma_{C_2}(z) =\\int f(x+w)\\,d\\gamma_{C_1+C_2}(w),$$\nincluding the value $+\\infty$. By [F1] this is exactly $T_{C_2}(T_{C_1}f)(x)=T_{C_1+C_2}f(x)$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F6",
+            "step 1.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For finite nonnegative Borel $V$, [F1] gives $\\exp[-V_{C_1}(x)]=T_{C_1}(e^{-V})(x)$ and the corresponding identity after applying $C_2$. Substituting $f=e^{-V}$ into step 2.1 proves the stated potential-weight identity. Since the normalized Gaussian integrals are expectations under probability laws, no determinant factor occurs. No differentiation or covariance-path limit was used.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The proposition composes exactly two normalized Gaussian shell transforms in a fixed positive finite dimension; neither probability factor has empty total mass."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 includes zero covariances. With either covariance zero the corresponding transform is the identity by F1, so step 2.1 reduces to the other transform; with f=0 both integrals vanish."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The characteristic-function factorization in step 1.1 applies to d=1, where the covariance sum is the ordinary sum of two nonnegative scalar variances."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 expressly includes singular covariance matrices, identifies the pushforward by its characteristic function, and never divides by a covariance determinant."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The extended-value case of step 2.1 is retained by Tonelli, including positive infinity. For the potential branch step 3.1 uses the strictly positive averages guaranteed by F1, so no undefined logarithm is introduced."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement and A1 assume AC for the Gaussian laws; step 1.1 constructs their finite product law and uses uniqueness of its characteristic transform."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The asserted operation is the convolution equality T_C2(T_C1 f)=T_(C1+C2)f for supplied covariances and nonnegative Borel f. No criterion reconstructing covariances/potentials from a transformed function, or reverse differentiability theorem, is claimed."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The asserted operation is the convolution equality T_C2(T_C1 f)=T_(C1+C2)f for supplied covariances and nonnegative Borel f. No criterion reconstructing covariances/potentials from a transformed function, or reverse differentiability theorem, is claimed."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "scalar Gaussian shell composition",
+          "inputs": "d=1, C1,C2≥0",
+          "method": "Multiply exp(-C1u²/2) and exp(-C2u²/2).",
+          "result": "The product is exp(-(C1+C2)u²/2), the characteristic function with covariance C1+C2.",
+          "limitation": "Exact scalar check; Tonelli proves the general nonnegative-integrand identity."
+        }
+      ],
+      "finite_checks_disposition": "The finite check records an exact scalar or finite-regulator boundary; all general claims remain justified by the numbered proof.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-64 author",
+        "notes": "Product Gaussian law is identified by its characteristic function; Tonelli permits extended nonnegative integrals. No differentiability claim is made. This authoring risk review is not independent acceptance."
+      },
+      "current_boundary_worksheet": {
+        "proposal": "research/physics-non-fluid-129-2026-10-21-r2-owner-step2-boundary-proposal-3/proposal.json",
+        "source_sha256": "52f0a1e8e1b3284bd39b33fb59f82b5d0b386548084d703986726bf0577c1158",
+        "qualification": "Released complete current source/eight-case semantic worksheet; root transcribed exact current rows. No independent acceptance or finite computation asserted."
+      }
+    },
+    "cex-qftx-eft-outside-band": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisf",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "lem-ac-supplies-sequential-choices-for-probability-constructions",
+          "source_section": "Statement",
+          "quote": "Then countable choice holds. Moreover, if $R\\subseteq X\\times X$ is serial on a nonempty set X and $a\\in X$, there is a sequence $(x_n)_{n\\ge0}$ with $x_0=a$ and $x_n R x_{n+1}$ for every n. Thus the countable",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-qftx-heavy-derivative-bound",
+          "source_section": "Statement",
+          "quote": "For $J=P_EJ\\in H$ and an integer $N\\ge0$, define\n$$S_NJ:=M^{-2}\\sum_{r=0}^{N}(-A/M^2)^rJ,$$\nwhich is well-defined since $J$ has bounded spectral support. Put $R_NJ:=K^{-1}J-S_NJ$. Then\n$$\\|R_NJ\\|\\le M^{-2}(E^2/M^2)^{N+1}\\|J\\|,$$\nand\n$$\\left|\\Delta S_{\\mathrm{eff}}(J)+\\tfrac12\\langle J,S_NJ\\rangle\\right|\n=\\tfrac12|\\langle J,R_NJ\\rangle|\n\\l",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-nrqm-observables-l2-multiplication-spectral-measure",
+          "source_section": "Statement",
+          "quote": "is self-adjoint on $D(M_m)$.\n\n(b) The assignment $E(B):=M_{\\mathbf 1_{m^{-1}(B)}}$ on Borel sets $B\\subseteq\\mathbb R$ is a regular projection-valued measure on the Borel $\\sigma$-algebra of $\\mathbb R$ ([[def-projection-valued-measure]]), and for a unit vector $\\psi\\in H$\n$$\\|E(B)\\psi\\|^{2}=\\int_{m^{-1}(B)}|\\psi|^{2}\\,d\\mu .$$\n\n(c) The operator identity $\\int_{\\mathbb R}\\lambda\\,dE(\\lambda)=M_{m}$ holds with domain $D(M_{m})$ ([[def-un",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-l-p-space-as-a-quotient-by-null-functions",
+          "source_section": "Definition",
+          "quote": "Thus an element of $L^p(\\mu)$ is an almost-everywhere equivalence class of\nmeasurable representatives.\n\nWhen $1\\le p\\le\\infty$, the displayed set quotient agrees with the usual\nquotient-vector-space constructio",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let\n$(X,\\mathcal A,\\mu)$ be a measure space and let\n$L^2(\\mu)$ be the quotient of $\\mathcal L^2(\\mu)$ by the almost-everywhere zero\nfunctions ([[def-l-p-space-as-a-quotient-by-null-functions]]), with the quotient\nnorm $\\|\\cdot\\|_2$ ([[thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space]]).\n\n1. On **real** $L^2(\\mu)$ the formula\n   $$\\",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [A1]–[A2], the AC and Countable Choice assumptions of [F2] and [F4] hold. Apply [F2] with $m(p)=p^2$ on the sigma-finite positive-measure space $(\\mathbb R,dp)$; sigma-finiteness follows from $\\mathbb R=\\bigcup_{n\\ge1}[-n,n]$ and $[-1,1]$ has positive finite measure. It gives the self-adjoint nonnegative multiplication operator $A$ with the displayed domain and spectral calculus. The multiplier $(M^2+p^2)^{-1}$ is bounded by $M^{-2}$ and maps $H$ into $D(A)$ because $p^2/(M^2+p^2)\\le1$; pointwise multiplication then shows it is the two-sided inverse of $M^2I+A$. For $u$ with bounded support, every $A^ru$ is in $H$. Pointwise finite geometric division gives\n$$\n(M^2+p^2)^{-1}-M^{-2}\\sum_{r=0}^{N}(-p^2/M^2)^r=r_N(p^2),\n$$\nso the remainder on such $u$ is multiplication by $r_N(p^2)$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F2",
+            "F3",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The target coefficient $C_N:=M^{-2}(E^2/M^2)^{N+1}$ is finite and is strictly less than $M^{-2}$. If $N=0$, $|r_0(q)|=M^{-2}(q/M^2)/(1+q/M^2)\\to M^{-2}>C_0$ as $q\\to\\infty$. If $N\\ge1$, $|r_N(q)|=M^{-2}(q/M^2)^{N+1}/(1+q/M^2)\\to\\infty$. In either case choose $P>0$ so that $|r_N(p^2)|>C_N$ for every $p\\in[P,P+M]$, and put $u=M^{-1/2}\\mathbf1_{[P,P+M]}$. The interval has Lebesgue measure $M$, so $\\|u\\|_2^2=M^{-1}\\int_P^{P+M}1\\,dp=1$; its bounded support puts it in every $D(A^r)$, while\n$$\\|r_N(A)u\\|_2^2=M^{-1}\\int_P^{P+M}|r_N(p^2)|^2\\,dp>C_N^2.$$\nThus the full-space bound fails. The restriction $E<M$ is precisely what makes the proposed low-energy coefficient smaller than the $N=0$ high-momentum limit; the example does not contradict the band-limited theorem.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample uses a fixed nonzero L2 space and an indicator interval of positive length M. Its polynomial sum has N+1 terms with N nonnegative; no empty spectral index family is used.",
+          "case_reasoning": "N>=0 makes polynomial contain N+1>=1 terms; witness interval length M>0 is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For E=0 the target coefficient in step 2.1 is zero, and choosing the positive high-momentum interval still gives a strictly larger remainder norm. A zero vector is excluded by the unit-vector requirement.",
+          "case_reasoning": "E=0 makes target zero, while high-momentum interval gives strictly positive norm; unit-vector premise excludes u=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly separates N=0: its remainder tends to M to the power minus two, strictly exceeding the proposed coefficient because E<M.",
+          "case_reasoning": "N=0 is one-term truncation, separately proved by limiting remainder M^-2 greater than target."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 treats the unbounded nonnegative multiplier A=p squared with its maximal domain, while its shifted inverse has a uniformly positive denominator. The compactly supported test vector in step 2.1 belongs to all required powers.",
+          "case_reasoning": "Unbounded A has maximal domain; bounded support puts the constructed vector in every needed power, avoiding undefined remainders."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 covers E=0 and N=0; its strict E<M assumption is used to make the N=0 target smaller than the high-momentum limit. E=M is outside this counterexample's hypotheses.",
+          "case_reasoning": "E=0 and N=0 included; E=M excluded and positivity M>0 prevents singular units/scales."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly uses A1 and A2 for the multiplication-operator and L2 Hilbert suppliers; step 2.1 then specifies its witness by a single positive finite interval.",
+          "case_reasoning": "AC→CC suppliers explicitly invoked; P is a single sufficiently large real and u is explicitly normalized indicator."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a definition, equality, estimate, or counterexample, not a biconditional.",
+          "case_reasoning": "One witness disproves removal of the band condition; no characterization iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is a definition, equality, estimate, or counterexample, not a biconditional.",
+          "case_reasoning": "No claim every unbanded vector violates the estimate, nor contradiction of the band-limited supplier."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "compact momentum interval witness",
+          "inputs": "u=M^-1/2 1_[P,P+M], P large",
+          "method": "Normalize the indicator on a mass-width interval and integrate |r_N(p²)|² where the multiplier exceeds the proposed coefficient.",
+          "result": "||u||2=1 and ||r_N(A)u||>M^-2(E²/M²)^(N+1).",
+          "limitation": "Refutes only the full-spectrum extrapolation, not the band-limited theorem."
+        }
+      ],
+      "finite_checks_disposition": "The finite check records an exact scalar or finite-regulator boundary; all general claims remain justified by the numbered proof.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-64 author",
+        "notes": "The p² multiplier is self-adjoint on its maximal domain and compact interval witnesses lie in every polynomial domain. This authoring risk review is not independent acceptance."
+      },
+      "current_boundary_worksheet": {
+        "proposal": "research/physics-non-fluid-129-2026-10-21-r2-owner-step2-boundary-proposal-7/proposal.json",
+        "source_sha256": "2e5090ab6294bb8f236d353ba38613daea3f1270b9aa8cd5b6f30645d6208277",
+        "qualification": "Released complete current source/eight-case semantic worksheet; root transcribed exact current rows. No independent acceptance or finite computation asserted."
+      }
+    }
+  }
+}

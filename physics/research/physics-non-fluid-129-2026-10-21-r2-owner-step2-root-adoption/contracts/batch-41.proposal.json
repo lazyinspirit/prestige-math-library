@@ -1,0 +1,1364 @@
+{
+  "version": 1,
+  "level": "physics-non-fluid-129-2026-10-21-r2-batch-41",
+  "scope": [
+    "def-gr-fx-tetrad-spin-connection",
+    "lem-gr-fx-sl2c-connected",
+    "lem-gr-fx-so-plus-connected",
+    "prop-gr-fx-oriented-time-oriented-orthonormal-frame-bundle",
+    "prop-gr-fx-spin-double-cover",
+    "prop-gr-fx-torsion-free-tetrad-equivalence",
+    "def-gr-fx-lorentz-spin-lift",
+    "prop-gr-fx-lorentz-clifford-compatibility",
+    "ex-gr-fx13-1",
+    "ex-gr-fx13-2"
+  ],
+  "contracts": {
+    "def-gr-fx-tetrad-spin-connection": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition: empty is not a separate proof boundary for this interface definition; it defines supplied local bundle or connection data and makes no existence theorem."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Definition: zero is not a separate proof boundary for this interface definition; it defines supplied local bundle or connection data and makes no existence theorem."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Definition: one is not a separate proof boundary for this interface definition; it defines supplied local bundle or connection data and makes no existence theorem."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Definition: degenerate is not a separate proof boundary for this interface definition; it defines supplied local bundle or connection data and makes no existence theorem."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Definition: endpoints is not a separate proof boundary for this interface definition; it defines supplied local bundle or connection data and makes no existence theorem."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Definition: nonempty-choice is not a separate proof boundary for this interface definition; it defines supplied local bundle or connection data and makes no existence theorem."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition: iff-forward is not a separate proof boundary for this interface definition; it defines supplied local bundle or connection data and makes no existence theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition: iff-reverse is not a separate proof boundary for this interface definition; it defines supplied local bundle or connection data and makes no existence theorem."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-41 author self-check",
+        "notes": "Definition item: no proof steps are claimed; the contract records not-applicable proof boundaries and the exact definition suppliers. This is an authoring record, not independent proof approval."
+      }
+    },
+    "lem-gr-fx-sl2c-connected": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-determinant-multiplicative",
+          "source_section": "Statement",
+          "quote": "For $n\\ge1$ and $A,B\\in M_n(R)$ over a commutative ring,\n$$\\det(AB)=\\det(A)\\det(B).$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-determinant-of-a-square-matrix",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative ring, let $n\\ge1$, and let $A=(a_{ij})\\in M_n(R)$. Its **determinant** is\n$$\\det(A):=\\sum_{\\sigma\\in S_n}\\operatorname{sgn}(\\sigma)\\prod_{i<n}a_{\\sigma(i),i}.$$\nThe sum is finite because $S_n$ has $n!$ elements. The product is taken in $R$, so the signs $1$ and $-1$ act through the ring identities. The formula uses columns indexed by $i<n$ and rows indexed by $\\sigma(i)$.\n\nWhen $A$ is real, $|\\det A|$ means the ordinary real absolute value of its real determinant. It is not alternate notation for the determinant itself.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Write the columns of $A$ as $u,v\\in\\mathbb C^2$. Since $\\det A=1$, $u$ and $v$ are linearly independent. Put $r_{11}:=\\|u\\|>0$, $q_1:=u/r_{11}$, $\\alpha:=q_1^\\dagger v$, $w:=v-\\alpha q_1$, and $r_{22}:=\\|w\\|>0$. Then $q_1^\\dagger w=0$ and $q_2:=w/r_{22}$ makes $Q:=(q_1,q_2)$ unitary; with $R:=\\begin{pmatrix}r_{11}&\\alpha\\\\0&r_{22}\\end{pmatrix}$ we have $A=QR$. By [F1]–[F2], $1=|\\det A|=|\\det Q|r_{11}r_{22}=r_{11}r_{22}$, and $\\det A=\\det Q\\,r_{11}r_{22}=1$ then gives $\\det Q=1$. Therefore $Q\\in SU(2)$ and $R=\\begin{pmatrix}r&z\\\\0&r^{-1}\\end{pmatrix}$ for $r>0$ and $z\\in\\mathbb C$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "If the first column of $Q$ is $(a,c)^{\\mathsf T}$, its unit orthogonal vectors are $z(-\\overline c,\\overline a)^{\\mathsf T}$ with $|z|=1$. The determinant of the matrix with these columns is $z(|a|^2+|c|^2)=z$; $\\det Q=1$ therefore forces $z=1$. Thus $Q=\\begin{pmatrix}a&-\\overline c\\\\c&\\overline a\\end{pmatrix}$ and $|a|^2+|c|^2=1$. This identifies $SU(2)$ with the unit sphere $S^3\\subset\\mathbb R^4$. Under this identification use the standard Euclidean inner product $\\cdot$ and norm $\\lVert\\cdot\\rVert_2$ on $\\mathbb R^4$. The sphere is path-connected: non-antipodal points are joined by normalizing their straight segment. For antipodal points $x,-x\\in S^3$, at least one of the first two standard basis vectors $e_1,e_2$ is not parallel to $x$; choose such an $e_j$ and set\n$$w:=\\frac{e_j-(e_j\\cdot x)x}{\\lVert e_j-(e_j\\cdot x)x\\rVert_2}.$$\nThe denominator is nonzero because $e_j$ is not parallel to $x$; hence $w\\in S^3$ and $w\\cdot x=0$. The normalized straight segments from $x$ to $w$ and from $w$ to $-x$ give a path. Hence there is a continuous path $Q_t$ in $SU(2)$ from $I$ to $Q$.",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For $R=\\begin{pmatrix}r&z\\\\0&r^{-1}\\end{pmatrix}$, the path $R_t:=\\begin{pmatrix}r^t&tz\\\\0&r^{-t}\\end{pmatrix}$ has determinant one for every $t\\in[0,1]$, with $R_0=I$ and $R_1=R$. Thus $A_t:=Q_tR_t$ is a continuous path in $SL(2,\\mathbb C)$ from $I$ to $A=QR$. Since $A$ was arbitrary, $SL(2,\\mathbb C)$ is path-connected.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement concerns the fixed nonempty matrix group SL(2,C), not a variable set or empty domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 excludes the zero or singular matrix because det A=1; the identity matrix is the zero-displacement endpoint in step 3.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and step 3.1: the identity matrix has the constant path and is included."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 uses det A=1 to make the two columns independent, so singular matrices are outside the domain."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 has R_0=I, R_1=R, and Q_0=I, Q_1=Q; the constructed path includes both endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 use explicit Gram–Schmidt formulas and an explicitly constructed orthogonal unit vector; no choice from a family is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a path-connectedness assertion, not an iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is a path-connectedness assertion, not an iff claim."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-41 author self-check",
+        "notes": "Mapped each numbered argument to its actual stated inputs; exact source sections and use locations are recorded. Boundary cases were checked against the conditional statement and the displayed proof. This is an authoring record, not independent proof approval."
+      }
+    },
+    "lem-gr-fx-so-plus-connected": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-lorentz-map-and-lorentz-group",
+          "source_section": "Definition",
+          "quote": "Let $(V,\\eta)$ be a $4$-dimensional Lorentz vector space\n([[def-lorentz-form-and-inertia]]) equipped with a time orientation $C^+$\n([[def-time-orientation-and-future-causal-sets]]), and let\n$(A,V,\\eta,C^+)$ be the corresponding oriented time-oriented affine Minkowski\nspace ([[def-sr-affine-minkowski-model]]).\n\n**(a) Linear Lorentz maps.** A **linear Lorentz map** is a linear map\n$L:V\\to V$ ([[def-linear-map]]) such that\n\n$$\\eta(Lv,Lw)=\\eta(v,w)\\qquad\\text{for all }v,w\\in V.$$\n\nThe set of all linear Lorentz maps is denoted $O(V,\\eta)$.\n\n**(b) Matrix criterion.** Let $(e_0,e_1,e_2,e_3)$ be an ordered\n$\\eta$-orthonormal basis of $V$ ([[lem-lorentz-form-has-orthonormal-basis]]),\nso that $\\eta_0:=\\operatorname{diag}(-1,1,1,1)$ is the matrix of $\\eta$ in\nthat basis, and let $M$ be the matrix of $L$ in that basis\n([[def-coordinate-column-and-matrix-of-a-linear-map]]). Then $L$ is a linear\nLorentz map if and only if\n\n$$M^{T}\\eta_0 M=\\eta_0,$$\n\nwhere the product is matrix multiplication\n([[def-matrix-product-and-identity-matrix]]). Every linear Lorentz map is a\nlinear isomorphism of $V$ ([[def-linear-isomorphism-and-invertible-linear-map]]),\nand the criterion itself does not depend on the $\\eta$-orthonormal basis used.\nThe three assertions of this clause are proved in\n[[lem-lorentz-map-preserves-metric-and-causal-structure]].\n\n**(c) Proper and orthochronous maps; the Lorentz group.** A linear Lorentz map\n$L$ is **proper** if $\\det L=+1$ ([[def-determinant-of-a-linear-operator]]) and\n**orthochronous** if $L(C^+)=C^+$, a condition on the image of the set $C^+$.\nThe set of proper orthochronous linear Lorentz maps is denoted\n$SO^{+}(V,\\eta)$. The set $O(V,\\eta)$ is called the **(full) Lorentz group** of\n$(V,\\eta)$ and $SO^{+}(V,\\eta)$ the **proper orthochronous Lorentz group**;\nthat these sets are groups under composition is proved in\n[[lem-lorentz-map-preserves-metric-and-causal-structure]], which also shows\nthat $L$ is orthochronous if and only if $L(C^+)$ is contained in $C^+$.\n\n**(d) Affine Lorentz maps.** An **affine Lorentz map** is a map $F:A\\to A$\nfor which there exist $p_0\\in A$ and a linear Lorentz map $L$ with\n\n$$F(p_0+v)=F(p_0)+Lv\\qquad\\text{for all }v\\in V.$$\n\nEquivalently $F(p)=F(p_0)+L(p-p_0)$ for all $p\\in A$, and $L$ is then unique:\nit is recovered as $Lv=F(p+v)-F(p)$ for every $p\\in A$, so it is independent\nof the base event. $F$ is called **proper** (respectively **orthochronous**)\nwhen its linear part $L$ is. If $x$ is the chart of an inertial frame\n([[def-inertial-frame-and-inertial-chart]]), then\n\n$$x(F(p))=M\\,x(p)+b\\qquad\\text{for all }p\\in A,$$\n\nwhere $M$ is the matrix of $L$ in the frame's ordered basis and\n$b:=x(F(o))-Mx(o)\\in\\mathbb R^4$; the two sides are column vectors in\n$\\mathbb R^4$.\n\n**(e) Convention.** In this framework, unless stated otherwise, the term\n**Lorentz transformation** means a proper orthochronous affine Lorentz map.\nImproper or non-orthochronous Lorentz maps are always named explicitly.\n\nThe composition of two affine Lorentz maps is affine Lorentz with linear part\nthe composition of the linear parts, and the identity and the inverse of an\naffine Lorentz map are again such maps; these facts are part of\n[[lem-lorentz-map-preserves-metric-and-causal-structure]].",
+          "uses": [
+            "1.1",
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-lorentz-map-preserves-metric-and-causal-structure",
+          "source_section": "Statement",
+          "quote": "Let $(V,\\eta)$ be a $4$-dimensional Lorentz vector space with a chosen time\norientation $C^+$, and let $L:V\\to V$ be a linear map with\n$\\eta(Lv,Lw)=\\eta(v,w)$ for all $v,w\\in V$\n([[def-lorentz-map-and-lorentz-group]]). Then:\n\n(i) $L$ is a linear isomorphism of $V$; for every ordered $\\eta$-orthonormal\nbasis the matrix $M$ of $L$ satisfies $M^{T}\\eta_0M=\\eta_0$ with\n$\\eta_0=\\operatorname{diag}(-1,1,1,1)$, and conversely every invertible matrix\n$M$ with $M^{T}\\eta_0M=\\eta_0$ is the matrix of a linear Lorentz map in that\nbasis.\n\n(ii) $\\det L=\\pm1$. The composition of two Lorentz maps is a Lorentz map, the\nidentity is a Lorentz map, and the inverse of a Lorentz map is a Lorentz map;\nthe sets $SO(V,\\eta):=\\{L\\in O(V,\\eta):\\det L=1\\}$,\n$O^{\\uparrow}(V,\\eta):=\\{L\\in O(V,\\eta):L(C^+)=C^+\\}$ and\n$SO^{+}(V,\\eta)=SO(V,\\eta)\\cap O^{\\uparrow}(V,\\eta)$ are subgroups of\n$O(V,\\eta)$, which itself is a subgroup of the general linear group $GL(V)$.\n\n(iii) $\\eta(Lv,Lv)=\\eta(v,v)$ for all $v\\in V$; hence $L$ preserves the causal\ncharacter of every nonzero vector (timelike, null or spacelike) and maps the\nset of null vectors onto itself. If $L$ is proper, then the oriented volume\nform is preserved:\n$\\epsilon(Lv_0,\\dots,Lv_3)=\\epsilon(v_0,\\dots,v_3)$ for all\n$v_0,\\dots,v_3\\in V$ ([[def-oriented-minkowski-volume-form]]); if\n$\\det L=-1$ the two sides differ by the sign $-1$.\n\n(iv) $L(C^+)$ is one of the two components $C^+,C^-$ of the timelike set, so\nexactly one of $L(C^+)=C^+$ and $L(C^+)=C^-$ holds; $L$ is orthochronous in\nthe first case and non-orthochronous in the second, and $L(C^+)=C^+$ holds if\nand only if $L(C^+)$ is contained in $C^+$.\n\n(v) The affine Lorentz maps of\n[[def-lorentz-map-and-lorentz-group]] form a group under composition: the\ncomposition and the inverse of affine Lorentz maps are affine Lorentz maps,\nand every affine Lorentz map is a bijection of $A$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-timelike-cone-has-two-convex-components",
+          "source_section": "Statement",
+          "quote": "Let $(V,\\eta)$ be a Lorentz vector space of signature $(-,+,+,+)$ and let\n$(e_0,e_1,e_2,e_3)$ be an $\\eta$-orthonormal ordered basis. Write\n$v=v^0e_0+v^1e_1+v^2e_2+v^3e_3$ for the coordinates of $v$\n([[thm-unique-coordinates-with-respect-to-an-ordered-basis]]) and\n\n$$\\lvert v_{\\mathrm{vec}}\\rvert:=\\sqrt{(v^1)^2+(v^2)^2+(v^3)^2}.$$\n\nThen $\\eta(v,v)=-(v^0)^2+\\lvert v_{\\mathrm{vec}}\\rvert^2$, and the timelike set\n$T:=\\{v\\in V:\\eta(v,v)<0\\}$ satisfies\n\n$$T=T_+\\cup T_-,\\qquad T_+:=\\{v:v^0>\\lvert v_{\\mathrm{vec}}\\rvert\\},\\qquad T_-:=\\{v:v^0<-\\lvert v_{\\mathrm{vec}}\\rvert\\}.$$\n\nThe sets $T_+$ and $T_-$ are nonempty, disjoint, open in $V$ (for the metric\ntopology of the distance $d(u,w):=\\lVert c(u)-c(w)\\rVert_2$ induced by the\ncoordinates $c(v):=(v^0,v^1,v^2,v^3)$), convex and path-connected, and they are\nexactly the two connected components of $T$. In every $\\eta$-orthonormal\nordered basis the two displayed coordinate sets coincide with the two\ncomponents of $T$ in some order, and they may be interchanged relative to a\npreviously fixed naming of the components. Moreover\n\n$$\\operatorname{cl}(T_+)=\\{v:v^0\\ge\\lvert v_{\\mathrm{vec}}\\rvert\\},\\qquad \\operatorname{cl}(T_-)=\\{v:v^0\\le-\\lvert v_{\\mathrm{vec}}\\rvert\\},\\qquad \\operatorname{cl}(T_+)\\cap\\operatorname{cl}(T_-)=\\{0\\}.$$",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $u\\in\\mathbb R^3$, set $\\gamma:=\\sqrt{1+|u|^2}$ and\n$S:=I_3+\\frac{uu^{\\mathsf T}}{1+\\gamma}$. Define\n$B(u):=\\begin{pmatrix}\\gamma&u^{\\mathsf T}\\\\u&S\\end{pmatrix}$. The identities\n$|u|^2=\\gamma^2-1$ and\n$S^2=I_3+\\bigl(\\frac{2}{1+\\gamma}+\\frac{|u|^2}{(1+\\gamma)^2}\\bigr)uu^{\\mathsf T}\n=I_3+uu^{\\mathsf T}$ give $B(u)^{\\mathsf T}\\eta B(u)=\\eta$: the time-time entry is $-\\gamma^2+|u|^2=-1$, the time-space block is $-\\gamma u^{\\mathsf T}+u^{\\mathsf T}S=0$, and the spatial block is $-uu^{\\mathsf T}+S^2=I_3$. Also $B(u)e_0=(\\gamma,u)$ is future timelike. The continuous path $t\\mapsto B(tu)$ consists of Lorentz maps and starts at the identity, so its determinant, which is always $\\pm1$, stays $+1$. Since it sends the future vector $e_0$ to the future component, the Lorentz map preserves that component by [F2]. Thus $B(u)\\in SO^+(1,3)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $\\Lambda\\in SO^+(1,3)$, write $\\Lambda e_0=(\\gamma,u)$. Preservation of $\\eta$ and the future cone gives $\\gamma=\\sqrt{1+|u|^2}>0$, so the matrix in step 1.1 satisfies $B(u)e_0=\\Lambda e_0$. Then $R:=B(u)^{-1}\\Lambda$ is a proper orthochronous Lorentz map fixing $e_0$. Its first column is $e_0$, and preservation of $\\eta$ makes its first row $e_0^{\\mathsf T}$; therefore $R=\\operatorname{diag}(1,R_3)$ with $R_3^{\\mathsf T}R_3=I_3$ and $\\det R_3=1$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The real cubic characteristic polynomial of $R_3$ has a real root, and every real eigenvalue of an orthogonal matrix is $+1$ or $-1$. If there were no $+1$ eigenvalue, then either all three eigenvalues would be $-1$, giving determinant $-1$, or the other two would be a conjugate pair with product $1$, again giving determinant $-1$. Both contradict $\\det R_3=1$. Choose a unit eigenvector $n$ for eigenvalue $+1$. Its orthogonal plane is invariant; the restriction to that plane is orthogonal with determinant $1$, hence is a two-dimensional rotation by an angle $\\theta$. Choose a unit vector $m\\perp n$ and then a unit vector $p\\perp n,m$ so $(n,m,p)$ is positively oriented; such $m,p$ are obtained by finite orthogonalization in the two-dimensional plane. In this basis the matrix is $\\begin{pmatrix}1&0&0\\\\0&\\cos\\theta&-\\sin\\theta\\\\0&\\sin\\theta&\\cos\\theta\\end{pmatrix}$. Replacing $\\theta$ by $s\\theta$ for $s\\in[0,1]$ gives a continuous path $R_3(s)$ in $SO(3)$ from $I_3$ to $R_3$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Use the path $B(2tu)$ for $0\\le t\\le \\frac12$, followed by\n$B(u)\\operatorname{diag}(1,R_3(2t-1))$ for $\\frac12\\le t\\le1$, where $R_3(s)$ is the path from step 3.1. This is a continuous path in $SO^+(1,3)$ from $I_4$ to $\\Lambda=B(u)R$. Hence $SO^+(1,3)$ is path-connected.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "In $O(1,3)$, the determinant takes only the values $+1,-1$, so the subset with determinant $+1$ is both open and closed. The continuous map $L\\mapsto Le_0$ takes $O(1,3)$ into the timelike set; by [F2], the preimage of the future timelike component is also both open and closed. Their intersection is $SO^+(1,3)$ and contains $I_4$, so the connected component of $I_4$ in $O(1,3)$ lies in $SO^+(1,3)$. Step 4.1 joins every member of $SO^+(1,3)$ to $I_4$, giving the reverse inclusion.",
+          "step": "5.1",
+          "inputs": [
+            "step 4.1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement concerns the fixed Lorentz matrix group and has no variable set input."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 with u=0 gives B(0)=I; step 2.1 then has the identity rotation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 4.1 include I_4 and its constant path."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement restricts to Lorentz maps, which are invertible by the Lorentz supplier; singular matrices are excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 4.1 joins I_4 at t=0 to the arbitrary Lambda at t=1 with matching path pieces."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–4.1 use finite formulas and a unit eigenvector/orthonormal basis in R^3; no countable-family choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement gives connectedness and identity-component equality, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement gives connectedness and identity-component equality, not a biconditional."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-41 author self-check",
+        "notes": "Mapped each numbered argument to its actual stated inputs; exact source sections and use locations are recorded. Boundary cases were checked against the conditional statement and the displayed proof. This is an authoring record, not independent proof approval."
+      }
+    },
+    "prop-gr-fx-oriented-time-oriented-orthonormal-frame-bundle": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-gr-local-lorentz-tetrad-existence",
+          "source_section": "Statement",
+          "quote": "Let $(M,g,N)$ be a time-oriented smooth Lorentzian four-manifold and let\n$p\\in M$ ([[def-gr-smooth-lorentzian-objects]]). Then there is an open\nneighborhood $U\\subseteq M$ of $p$ and a smooth future-directed tetrad field\n$(E_0,E_1,E_2,E_3)$ on $U$\n([[def-gr-local-frame-and-tetrad-fields]]), i.e.\n$g_q(E_A(q),E_B(q))=\\operatorname{diag}(-1,1,1,1)_{AB}$ for all $q\\in U$ with\n$E_0(q)$ future-directed for every $q\\in U$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-oriented-smooth-manifold-and-oriented-chart",
+          "source_section": "Definition",
+          "quote": "An orientation of an $n$-manifold is a smooth choice of a ray in $\\det T_pM$ for every $p$. For $n>0$, a chart is oriented when its coordinate frame is in that ray. For $n=0$, the datum is a sign at each point; the unique empty frame does not encode both choices.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-gr-tetrad-change-of-basis-is-lorentz",
+          "source_section": "Statement",
+          "quote": "Let $(M,g,N)$ be a time-oriented smooth Lorentzian four-manifold, let\n$p\\in M$, and let $E=(E_0,E_1,E_2,E_3)$ and $F=(F_0,F_1,F_2,F_3)$ be two\nfuture-directed tetrads at $p$ ([[def-gr-local-frame-and-tetrad-fields]]).\nWrite $\\eta=\\operatorname{diag}(-1,1,1,1)$. Then there is a unique real\n$4\\times4$ matrix $\\Lambda=(\\Lambda^B{}_A)$ such that\n$F_A=\\sum_B\\Lambda^B{}_AE_B$ for all $A$, and:\n\n1. $\\sum_{C,D}\\Lambda^C{}_A\\,\\eta_{CD}\\,\\Lambda^D{}_B=\\eta_{AB}$ for all\n   $A,B$; equivalently $\\Lambda^{\\mathsf T}\\eta\\Lambda=\\eta$.\n2. $\\Lambda$ is invertible and $\\det\\Lambda=\\pm1$.\n3. $\\Lambda^0{}_0>0$.\n4. For every covariant $2$-tensor $T$ at $p$, its components in the two\n   tetrads satisfy\n   $T(F_A,F_B)=\\sum_{C,D}\\Lambda^C{}_A\\Lambda^D{}_BT(E_C,E_D)$.\n   More generally, for a type $(r,s)$ tensor at $p$ each contravariant slot\n   contributes a factor $(\\Lambda^{-1})^A{}_B$ and each covariant slot a\n   factor $\\Lambda^A{}_B$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-rpm-h-poincare-charge-space",
+          "source_section": "Definition",
+          "quote": "Assume $\\mathrm{AC}_\\omega$ for the referenced cotangent and symplectic-action conventions. Work on affine Minkowski spacetime with inertial coordinates $x^0=ct,x^1,x^2,x^3$ in metres, metric matrix $\\eta=\\operatorname{diag}(-1,1,1,1)$, and cotangent coordinates $(x^a,p_a)$, where each $p_a$ has SI momentum units. Fix the future cone as the timelike component containing the positive $x^0$ axis, equivalently $v^0>\\lvert\\mathbf v\\rvert$. Let $SO^+(1,3)$ denote the determinant-one, future-cone-preserving Lorentz subgroup. Define the proper orthochronous Poincaré group and its multiplication by\n\n$$G=\\mathbb R^4\\rtimes SO^+(1,3),\\qquad (a,\\Lambda)(b,L)=(a+\\Lambda b,\\Lambda L).$$\n\nIts action on spacetime and the cotangent lift are $x'=\\Lambda x+a$ and $p'=\\Lambda^{-T}p$. The Lie algebra consists of pairs $(a,A)$ with $A^T\\eta+\\eta A=0$, bracket\n\n$$[(a,A),(b,B)]=(Ab-Ba,[A,B]).$$\n\nUse the library convention $\\xi_M=\\left.\\frac d{ds}\\right|_0\\exp_G(-s\\xi)\\cdot z$. Thus the positive affine generator on spacetime is $Y_{(a,A)}(x)=a+Ax$, the fundamental field is its negative, and the cotangent-lifted positive field is $(a+Ax,-A^Tp)$. Pair the cotangent point with a Lie-algebra element by\n\n$$\\ell_{(a,A)}(x,p)=p_b(a^b+A^b{}_cx^c).$$\n\nDefine $P^a=\\eta^{ab}p_b$ and $J^{ab}=x^aP^b-x^bP^a$. The equivalent dual pairing is $\\ell_{(a,A)}=p_ba^b-\\tfrac12J_{bc}A^{bc}$, where $A^{bc}=A^b{}_d\\eta^{dc}$ and $J_{bc}=\\eta_{bd}\\eta_{ce}J^{de}$. Here $[P^a]=\\mathrm{kg\\,m/s}$ and $[J^{ab}]=\\mathrm{J\\,s}$. These are charge-space definitions on the full cotangent bundle; shell reduction and the moment-map identities are stated separately. No spin or particle model is included.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-smooth-principal-g-bundle",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite-dimensional real Lie group, $M$ a smooth manifold, and $P$\na smooth manifold. A **smooth right principal $G$-bundle** is a right principal\n$G$-bundle $\\pi:P\\to M$ in the topological sense of\n[[def-principal-g-bundle-and-associated-fiber-bundle]], with the following\nadditional smooth structure: $\\pi$ and the right $G$-action are smooth, and\nthe principal-bundle charts can be chosen as equivariant diffeomorphisms\n$\\pi^{-1}(U)\\cong U\\times G$. Thus each chart respects the projection to\n$U$ and the right action on the $G$ factor. The smoothness convention is that\nof [[def-smooth-map-between-manifolds-with-boundary]]; boundaryless manifolds\nare the default in this item.\n\nThe topological principal-bundle clause retains its free, transitive right\naction on every fibre and its local triviality. Smoothness adds compatible\ndifferentiable structure; it does not select a connection or assert that a\nglobal trivialization exists. The empty-base case is allowed and then $P$ is\nempty by the cited topological definition.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-gr-smooth-lorentzian-objects",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a smooth four-manifold without boundary, so that $M$ is Hausdorff\nand second countable and carries a maximal smooth atlas\n([[def-smooth-manifold]]). Let $g$ be a smooth covariant $2$-tensor field on $M$\nin the sense of [[def-gr-smooth-covariant-two-tensor-field]]. Then $g$ assigns\nto every $p\\in M$ a bilinear form $g_p:T_pM\\times T_pM\\to\\mathbb R$\n([[def-derivation-at-a-point-and-tangent-space]]).\n\n**(a) Lorentzian metric.** The field $g$ is a **Lorentzian metric of signature\n$(-,+,+,+)$** on $M$ when it is symmetric and nondegenerate, and at every\n$p\\in M$ the pair $(T_pM,g_p)$ is a Lorentz vector space of signature\n$(-,+,+,+)$ in the sense of [[def-lorentz-form-and-inertia]]: that is, $g_p$ has\ninertia $(3,1,0)$, so that some — equivalently every — basis of $T_pM$ in which\nthe matrix of $g_p$ is diagonal has exactly one negative and three positive\ndiagonal entries. The pair $(M,g)$ is a **smooth Lorentzian four-manifold** (or\nLorentzian manifold of signature $(-,+,+,+)$). In a smooth chart $(U,x)$ the\n**components** of $g$ are the $C^\\infty$ functions\n$g_{ab}(q)=g_q(\\partial_a|_q,\\partial_b|_q)$ of\n[[def-gr-smooth-covariant-two-tensor-field]], and $g_{ab}=g_{ba}$ by symmetry.\nWe use indices $a,b,c,d=0,1,2,3$ and the Einstein summation convention, with\ncomponents in a chart written as lower-case indexed symbols and equations\nbetween indexed fields understood basis-independently. These conventions are\nfixed once for this library and the physical reading of the symbols is recorded\nwith the framework postulates, separately from this mathematical definition.\n\n**(b) Pointwise causal structure.** For every $p\\in M$ the vocabulary of\n[[def-causal-classification-of-lorentz-vectors]] applies to the Lorentz vector\nspace $(T_pM,g_p)$: a tangent vector $v\\in T_pM$ is **timelike** when\n$g_p(v,v)<0$, **null** when $v\\neq0$ and $g_p(v,v)=0$, **spacelike** when\n$g_p(v,v)>0$, and **causal** when it is timelike or null. Every nonzero\n$v\\in T_pM$ has exactly one causal character. The **timelike set**\n$T_p:=\\{v\\in T_pM:g_p(v,v)<0\\}$ has exactly two connected components, each\nnonempty, open, convex and path-connected; each $g_p$-orthonormal basis\n$e_0,e_1,e_2,e_3$ of $T_pM$ satisfies $g_p(e_a,e_b)=\\operatorname{diag}(-1,1,1,1)_{ab}$\nfor some ordering, so in particular nonzero orthonormal vectors exist at every\npoint ([[lem-lorentz-form-has-orthonormal-basis]],\n[[lem-timelike-cone-has-two-convex-components]]).\n\n**(c) Time orientation.** A **time orientation** of $(M,g)$, also called a\n**choice of future cone**, is a smooth vector field $N$ on $M$\n([[def-smooth-vector-field-as-a-tangent-bundle-section]], whose tangent-bundle\nsmooth structure uses the axiom $\\mathrm{AC}_\\omega$ of\n[[def-countable-choice]]; this is the only use of that axiom in this\ndefinition) such that\n\n$$g_p(N_p,N_p)<0\\qquad\\text{for every }p\\in M .$$\n\nThe function $p\\mapsto g_p(N_p,N_p)$ is $C^\\infty$ because $g$ is a smooth\ncovariant $2$-tensor field and $N$ a smooth field, so the condition is a\npointwise strict inequality between a smooth function and $0$; since\n$g_p(N_p,N_p)<0$ implies $N_p\\neq0$, a time orientation is nowhere vanishing.\nA **time-oriented smooth Lorentzian four-manifold** is a triple $(M,g,N)$\nconsisting of a smooth Lorentzian four-manifold and a time orientation $N$.\n\nGiven a time orientation $N$ and $p\\in M$, the vector $N_p$ is timelike, and we\n**define** a nonzero causal vector $v\\in T_pM$ to be **future-directed** when\n$g_p(v,N_p)<0$ and **past-directed** when $g_p(v,N_p)>0$. The classification of\nnonzero causal vectors into exactly these two classes, and its agreement with\nthe two components of the timelike set (the future component is the component\n$C_p^+$ containing $N_p$, and the future causal vectors form\n$\\operatorname{cl}(C_p^+)\\setminus\\{0\\}$), is proved in\n[[lem-gr-future-causal-classification-by-a-timelike-field]]; in particular no\nnonzero causal $v$ satisfies $g_p(v,N_p)=0$, so the definition is exhaustive and\nmutually exclusive. Replacing $N$ by $-N$ reverses every future/past label, and\ntwo time orientations $N,N'$ determine the same future-directed causal vectors\nat every point where $g_p(N_p,N'_p)<0$, while they determine opposite ones\nwhere $g_p(N_p,N'_p)>0$, by\n[[lem-gr-timelike-fields-define-equal-or-opposite-future-cones]]; that lemma\nalso shows the sign of $p\\mapsto g_p(N_p,N'_p)$ is constant on every connected\ncomponent of $M$.\n\n**(d) The inverse metric.** Because $g_p$ is nondegenerate, it induces at each\n$p$ an isomorphism $\\flat_p:T_pM\\to T_p^*M$, $v\\mapsto g_p(v,\\cdot)$, and an\ninverse metric $g_p^{-1}$ on the dual space; the inverse metric, the musical\nisomorphisms and the components $g^{ab}$ are defined separately on this page,\nwhere the smoothness of those components is also proved. Neither construction\nuses any choice principle beyond the one already recorded in (c).\n\n\n**(e) Smooth timelike curves and their scalar normalization.** Before using\nthese quantities in the physical conventions, fix a positive real scaling\nparameter $c$ (with no physical meaning or dimension in this mathematical\nitem). A **smooth future timelike curve** is a smooth map $\\gamma:I\\to M$\nfrom a nonempty open real interval $I$ ([[def-interval]],\n[[def-c-r-and-smooth-maps-between-smooth-manifolds]]) whose velocity derivation\n$\\gamma'(s)\\in T_{\\gamma(s)}M$\n([[def-velocity-derivation-of-a-smooth-curve]]) satisfies\n$g(\\gamma',\\gamma')<0$ and $g(\\gamma',N)<0$ at every $s\\in I$.\nIn a chart its components are $d(x^a\\circ\\gamma)/ds$, $a=0,1,2,3$.\nFor a supplied base point $s_0\\in I$ and additive constant $\\tau_0\\in\\mathbb R$\ndefine\n\n$$h(s):=\\sqrt{-g_{\\gamma(s)}(\\gamma'(s),\\gamma'(s))},\\qquad \\tau(s):=\\tau_0+\\frac1c\\int_{s_0}^{s}h(r)\\,dr,\\qquad U(s):=\\frac{c\\gamma'(s)}{h(s)}.$$\n\nThe integral is oriented when $s<s_0$. The function $\\tau$ is called\n**proper time** for this scaling and $U$ the **four-velocity** of the smooth\ncurve; its increment times $c$ is the Lorentzian length. The well-definedness\nproof below shows $\\tau'>0$, that $\\tau:I\\to\\tau(I)$ is a smooth\ndiffeomorphism, and that $U$ is the velocity of $\\gamma\\circ\\tau^{-1}$.\nThus $g(U,U)=-c^2$ and $U$ is future timelike. This introduces the smooth\ncase before any physical unit reading; the later worldline definition extends\nit to its stated $C^k$, endpoint and piecewise-$C^1$ classes. It asserts no\nclock coupling, motion law or physical value of $c$.\n\n**Convention and scope.** The physical reading of a smooth time-oriented\nLorentzian four-manifold as a classical spacetime model, and the domain in which\nthat reading is adopted, are recorded in the framework postulate\n`post-gr-spacetime-and-classical-domain`; the words spacetime and event carry no\nmathematical content beyond this definition, and this item asserts no claim\nabout nature. The dimension $4$ and the absence of boundary are part of the\ndata; nothing in the definition assumes that $M$ is nonempty or connected, and\nno completeness, extendibility or maximality property of $(M,g)$ is asserted.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each point $p$, use [F1] to choose a neighborhood $U$ and a smooth future-directed tetrad $E$ there. In a local oriented coordinate frame, the determinant of the component matrix of $E$ is a smooth nonzero real function; shrink $U$ to a connected neighborhood of $p$, so its sign is constant. If that sign is negative, replace $E_1$ by $-E_1$. This preserves orthonormality and the future direction of $E_0$ and makes $E$ positively oriented by [F2]. Thus positively oriented future tetrads exist locally.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Let $u,v$ lie in a common fiber of $P^+_g(M)$. Since $u$ is an isomorphism, $A:=u^{-1}v$ is the unique real matrix with $v=u\\circ A$. The isometry condition gives $A^{\\mathsf T}\\eta A=\\eta$. Positivity of the two frame orientations gives $\\det A>0$, while the Lorentz identity gives $\\det A=\\pm1$, hence $\\det A=1$. Because $u(e_0)$ and $v(e_0)$ are future timelike, $A e_0$ is future timelike; so $A$ preserves the selected future component and belongs to $SO^+(1,3)$. This proves that the right action is transitive on each fiber; uniqueness of $A$ proves freeness.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For a local positively oriented future tetrad section $E$ on $U$, define $\\Psi_E:U\\times SO^+(1,3)\\to(P^+_g(M))|_U$ by $\\Psi_E(p,A)=E(p)\\circ A$. Step 1.2 makes this map bijective. Its inverse sends a frame $u$ over $p$ to $(p,E(p)^{-1}\\circ u)$; the matrix entries of this second component are smooth because they are obtained by applying the smooth dual coframe of $E$ to the smooth frame vectors of $u$. Thus $\\Psi_E$ is a smooth local product chart.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $E'$ is another such section on an overlap, write $E'(p)=E(p)\\circ A(p)$. The coefficients of $A(p)$ are smooth by the same dual-coframe calculation in step 2.1, and step 1.2 places every value in $SO^+(1,3)$. The transition between the charts is $(p,B)\\mapsto(p,A(p)B)$, which is smooth; its inverse $(p,B)\\mapsto(p,A(p)^{-1}B)$ is smooth because inversion is smooth in the Lie group of [F4]. The right action is smooth in these charts and the projection is the product projection.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.2",
+            "step 2.1",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The charts of step 2.1 and smooth transitions from step 3.1 give $P^+_g(M)$ local products $U\\times SO^+(1,3)$. Different base points separate by the Hausdorff base [F6], and distinct frames over one point separate in the Hausdorff matrix group [F4], so the total space is Hausdorff. For second countability, let $\\mathcal B$ be a countable base of $M$; for each $B\\in\\mathcal B$ contained in at least one local-section neighborhood, use [A1] to select one such neighborhood. The selected countable family covers $M$, and countable bases of each selected $U\\times SO^+(1,3)$ give a countable base of the total space by [F4,F6]. Thus the local charts define a smooth manifold structure. Freeness and fiberwise transitivity were proved in step 1.2; by [F5], this is a smooth right principal $SO^+(1,3)$-bundle. The construction supplies local sections only, so no global tetrad is asserted.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "step 1.2",
+            "step 2.1",
+            "step 3.1",
+            "F4",
+            "F5",
+            "F6"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: on an empty base the frame space is empty and the local-chart and fiber conditions are vacuous."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Lorentzian metric in the Statement is nondegenerate; zero or degenerate metric forms are excluded."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The Statement fixes a four-dimensional Lorentzian base and rank-four frame fibers; it has no one-dimensional case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and step 1.2 require isometries for a nondegenerate Lorentz metric; singular frame maps are excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement has no interval or limiting endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A1 explicitly carries AC_omega for local smooth frame and tangent-bundle conventions; step 1.1 uses the supplied local tetrad theorem."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement asserts a principal-bundle construction, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement asserts a principal-bundle construction, not a biconditional."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-41 author self-check",
+        "notes": "Mapped each numbered argument to its actual stated inputs; exact source sections and use locations are recorded. Boundary cases were checked against the conditional statement and the displayed proof. This is an authoring record, not independent proof approval."
+      }
+    },
+    "prop-gr-fx-spin-double-cover": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-determinant-of-a-square-matrix",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative ring, let $n\\ge1$, and let $A=(a_{ij})\\in M_n(R)$. Its **determinant** is\n$$\\det(A):=\\sum_{\\sigma\\in S_n}\\operatorname{sgn}(\\sigma)\\prod_{i<n}a_{\\sigma(i),i}.$$\nThe sum is finite because $S_n$ has $n!$ elements. The product is taken in $R$, so the signs $1$ and $-1$ act through the ring identities. The formula uses columns indexed by $i<n$ and rows indexed by $\\sigma(i)$.\n\nWhen $A$ is real, $|\\det A|$ means the ordinary real absolute value of its real determinant. It is not alternate notation for the determinant itself.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-determinant-multiplicative",
+          "source_section": "Statement",
+          "quote": "For $n\\ge1$ and $A,B\\in M_n(R)$ over a commutative ring,\n$$\\det(AB)=\\det(A)\\det(B).$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-gr-fx-sl2c-connected",
+          "source_section": "Statement",
+          "quote": "For a complex matrix $A$, write $A^\\dagger:=\\overline A^{\\mathsf T}$. On $\\mathbb C^2$ use $\\langle u,v\\rangle:=u^\\dagger v$ and $\\|u\\|:=\\sqrt{u^\\dagger u}$, and set $SU(2):=\\{Q:Q^\\dagger Q=I,\\det Q=1\\}$. Give $M_2(\\mathbb C)$ its Euclidean topology as $\\mathbb R^8$, and define $SL(2,\\mathbb C):=\\{A\\in M_2(\\mathbb C):\\det A=1\\}$ with matrix multiplication. Then $SL(2,\\mathbb C)$ is path-connected.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-lorentz-map-and-lorentz-group",
+          "source_section": "Definition",
+          "quote": "Let $(V,\\eta)$ be a $4$-dimensional Lorentz vector space\n([[def-lorentz-form-and-inertia]]) equipped with a time orientation $C^+$\n([[def-time-orientation-and-future-causal-sets]]), and let\n$(A,V,\\eta,C^+)$ be the corresponding oriented time-oriented affine Minkowski\nspace ([[def-sr-affine-minkowski-model]]).\n\n**(a) Linear Lorentz maps.** A **linear Lorentz map** is a linear map\n$L:V\\to V$ ([[def-linear-map]]) such that\n\n$$\\eta(Lv,Lw)=\\eta(v,w)\\qquad\\text{for all }v,w\\in V.$$\n\nThe set of all linear Lorentz maps is denoted $O(V,\\eta)$.\n\n**(b) Matrix criterion.** Let $(e_0,e_1,e_2,e_3)$ be an ordered\n$\\eta$-orthonormal basis of $V$ ([[lem-lorentz-form-has-orthonormal-basis]]),\nso that $\\eta_0:=\\operatorname{diag}(-1,1,1,1)$ is the matrix of $\\eta$ in\nthat basis, and let $M$ be the matrix of $L$ in that basis\n([[def-coordinate-column-and-matrix-of-a-linear-map]]). Then $L$ is a linear\nLorentz map if and only if\n\n$$M^{T}\\eta_0 M=\\eta_0,$$\n\nwhere the product is matrix multiplication\n([[def-matrix-product-and-identity-matrix]]). Every linear Lorentz map is a\nlinear isomorphism of $V$ ([[def-linear-isomorphism-and-invertible-linear-map]]),\nand the criterion itself does not depend on the $\\eta$-orthonormal basis used.\nThe three assertions of this clause are proved in\n[[lem-lorentz-map-preserves-metric-and-causal-structure]].\n\n**(c) Proper and orthochronous maps; the Lorentz group.** A linear Lorentz map\n$L$ is **proper** if $\\det L=+1$ ([[def-determinant-of-a-linear-operator]]) and\n**orthochronous** if $L(C^+)=C^+$, a condition on the image of the set $C^+$.\nThe set of proper orthochronous linear Lorentz maps is denoted\n$SO^{+}(V,\\eta)$. The set $O(V,\\eta)$ is called the **(full) Lorentz group** of\n$(V,\\eta)$ and $SO^{+}(V,\\eta)$ the **proper orthochronous Lorentz group**;\nthat these sets are groups under composition is proved in\n[[lem-lorentz-map-preserves-metric-and-causal-structure]], which also shows\nthat $L$ is orthochronous if and only if $L(C^+)$ is contained in $C^+$.\n\n**(d) Affine Lorentz maps.** An **affine Lorentz map** is a map $F:A\\to A$\nfor which there exist $p_0\\in A$ and a linear Lorentz map $L$ with\n\n$$F(p_0+v)=F(p_0)+Lv\\qquad\\text{for all }v\\in V.$$\n\nEquivalently $F(p)=F(p_0)+L(p-p_0)$ for all $p\\in A$, and $L$ is then unique:\nit is recovered as $Lv=F(p+v)-F(p)$ for every $p\\in A$, so it is independent\nof the base event. $F$ is called **proper** (respectively **orthochronous**)\nwhen its linear part $L$ is. If $x$ is the chart of an inertial frame\n([[def-inertial-frame-and-inertial-chart]]), then\n\n$$x(F(p))=M\\,x(p)+b\\qquad\\text{for all }p\\in A,$$\n\nwhere $M$ is the matrix of $L$ in the frame's ordered basis and\n$b:=x(F(o))-Mx(o)\\in\\mathbb R^4$; the two sides are column vectors in\n$\\mathbb R^4$.\n\n**(e) Convention.** In this framework, unless stated otherwise, the term\n**Lorentz transformation** means a proper orthochronous affine Lorentz map.\nImproper or non-orthochronous Lorentz maps are always named explicitly.\n\nThe composition of two affine Lorentz maps is affine Lorentz with linear part\nthe composition of the linear parts, and the identity and the inverse of an\naffine Lorentz map are again such maps; these facts are part of\n[[lem-lorentz-map-preserves-metric-and-causal-structure]].",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-gr-fx-so-plus-connected",
+          "source_section": "Statement",
+          "quote": "Let $\\eta=\\operatorname{diag}(-1,1,1,1)$ on $\\mathbb R^4$ and let\n$C^+:=\\{(t,x)\\in\\mathbb R\\times\\mathbb R^3:t>|x|\\}$. Give\n$M_4(\\mathbb R)$ its Euclidean topology and define\n$O(1,3):=\\{L\\in M_4(\\mathbb R):L^{\\mathsf T}\\eta L=\\eta\\}$ with the\ninduced subspace topology. Define\n$SO^+(1,3):=\\{L\\in O(1,3):\\det L=1,\\ L(C^+)=C^+\\}$ with the same induced\ntopology. The **identity component** means the connected component of $I_4$\nin $O(1,3)$ for this topology. Then $SO^+(1,3)$ is path-connected and equals\nthat identity component.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-rpm-h-poincare-charge-space",
+          "source_section": "Definition",
+          "quote": "Assume $\\mathrm{AC}_\\omega$ for the referenced cotangent and symplectic-action conventions. Work on affine Minkowski spacetime with inertial coordinates $x^0=ct,x^1,x^2,x^3$ in metres, metric matrix $\\eta=\\operatorname{diag}(-1,1,1,1)$, and cotangent coordinates $(x^a,p_a)$, where each $p_a$ has SI momentum units. Fix the future cone as the timelike component containing the positive $x^0$ axis, equivalently $v^0>\\lvert\\mathbf v\\rvert$. Let $SO^+(1,3)$ denote the determinant-one, future-cone-preserving Lorentz subgroup. Define the proper orthochronous Poincaré group and its multiplication by\n\n$$G=\\mathbb R^4\\rtimes SO^+(1,3),\\qquad (a,\\Lambda)(b,L)=(a+\\Lambda b,\\Lambda L).$$\n\nIts action on spacetime and the cotangent lift are $x'=\\Lambda x+a$ and $p'=\\Lambda^{-T}p$. The Lie algebra consists of pairs $(a,A)$ with $A^T\\eta+\\eta A=0$, bracket\n\n$$[(a,A),(b,B)]=(Ab-Ba,[A,B]).$$\n\nUse the library convention $\\xi_M=\\left.\\frac d{ds}\\right|_0\\exp_G(-s\\xi)\\cdot z$. Thus the positive affine generator on spacetime is $Y_{(a,A)}(x)=a+Ax$, the fundamental field is its negative, and the cotangent-lifted positive field is $(a+Ax,-A^Tp)$. Pair the cotangent point with a Lie-algebra element by\n\n$$\\ell_{(a,A)}(x,p)=p_b(a^b+A^b{}_cx^c).$$\n\nDefine $P^a=\\eta^{ab}p_b$ and $J^{ab}=x^aP^b-x^bP^a$. The equivalent dual pairing is $\\ell_{(a,A)}=p_ba^b-\\tfrac12J_{bc}A^{bc}$, where $A^{bc}=A^b{}_d\\eta^{dc}$ and $J_{bc}=\\eta_{bd}\\eta_{ce}J^{de}$. Here $[P^a]=\\mathrm{kg\\,m/s}$ and $[J^{ab}]=\\mathrm{J\\,s}$. These are charge-space definitions on the full cotangent bundle; shell reduction and the moment-map identities are stated separately. No spin or particle model is included.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-lorentz-lie-algebra-structure",
+          "source_section": "Statement",
+          "quote": "Let $(V,\\eta)$ be a $4$-dimensional Lorentz vector space and let\n$(e_0,e_1,e_2,e_3)$ be an ordered $\\eta$-orthonormal basis with\n$\\eta_0=\\operatorname{diag}(-1,1,1,1)$. For a linear map $K:V\\to V$\n([[def-linear-map]]) with matrix $M$ in this basis, the following are\nequivalent:\n\n(a) $\\eta(Kv,w)+\\eta(v,Kw)=0$ for all $v,w\\in V$;\n(b) $M^{T}\\eta_0+\\eta_0M=0$;\n(c) $M$ has the block form\n$M=\\begin{pmatrix}0&u^{T}\\\\ u&\\Omega\\end{pmatrix}$ with\n$u\\in\\mathbb R^3$ and $\\Omega^{T}=-\\Omega$.\n\nThe set\n$\\mathfrak g:=\\{K:\\eta(Kv,w)+\\eta(v,Kw)=0\\text{ for all }v,w\\}$ is a\n$6$-dimensional linear subspace of the space of linear maps $V\\to V$. Define\nthe maps $M_{ab}$ for all $0\\le a,b\\le3$ by\n$(M_{ab})^{\\mu}{}_{\\nu}=\\delta^{\\mu}_{a}\\eta_{b\\nu}\n-\\delta^{\\mu}_{b}\\eta_{a\\nu}$. Thus $M_{aa}=0$ and $M_{ba}=-M_{ab}$; the six maps with $a<b$ form a basis of\n$\\mathfrak g$ and satisfy\n$[M_{ab},M_{cd}]=\\eta_{bc}M_{ad}-\\eta_{ac}M_{bd}-\\eta_{bd}M_{ac}\n+\\eta_{ad}M_{bc}$ for all $0\\le a,b,c,d\\le3$, where\n$[K_1,K_2]:=K_1K_2-K_2K_1$ is the commutator. Here a real Lie algebra means a real vector space with a bilinear antisymmetric bracket satisfying $[K_1,[K_2,K_3]]+[K_2,[K_3,K_1]]+[K_3,[K_1,K_2]]=0$. The commutator makes $\\mathfrak g$ such an algebra.\nIf $L:I\\to O(V,\\eta)$, with $I\\subseteq\\mathbb R$ an open interval containing $0$, is a\n$\\mathcal C^1$ curve in $O(V,\\eta)$ with $L(0)=\\operatorname{id}_V$, then its\nderivative $K:=L'(0)$ belongs to $\\mathfrak g$, and $L(s)=\\operatorname{id}_V+sK+o(s)$ as $s\\to0$. Here $\\mathcal C^1$ means that each matrix entry is continuously differentiable on $I$, $K$ has entries $(L^a{}_b)\\prime(0)$, and $o(s)$ denotes a matrix remainder each of whose entries divided by $|s|$ tends to $0$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-euclidean-inverse-function-theorem",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, let $f:U\\to\\mathbb R^n$ be\n$C^1$, and let $a\\in U$.  If $Df(a)$ is invertible, then there are open sets\n$V,W\\subseteq\\mathbb R^n$ with $a\\in V\\subseteq U$ and $f(a)\\in W$ such that\n$f|_V:V\\to W$ is bijective.  Its inverse $g:W\\to V$ is $C^1$, and\n\n$$Dg(y)=Df(g(y))^{-1}\\qquad(y\\in W).$$\n\nThus $f$ is a local diffeomorphism at $a$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-lie-group",
+          "source_section": "Definition",
+          "quote": "A **finite-dimensional real Lie group** is a group $G$, in the sense of\n[[def-group]], together with the structure of a finite-dimensional real smooth\nmanifold such that the maps\n\n$$m:G\\times G\\longrightarrow G,\\qquad m(g,h)=gh,$$\n\nand\n\n$$\\operatorname{inv}:G\\longrightarrow G,\\qquad \\operatorname{inv}(g)=g^{-1},$$\n\nare smooth in the sense of\n[[def-smooth-map-between-manifolds-with-boundary]]. Its identity element is\ndenoted by $e$ (or occasionally $1$).\n\nUnless an item explicitly says otherwise, every Lie group on this page is real,\nfinite-dimensional, and has no manifold boundary. Dimension zero is allowed;\nfor example, any countable discrete group with its discrete zero-dimensional\nsmooth structure is a Lie group. A Lie group cannot be empty because a group\ncontains its identity. The definition applies unchanged in dimension one,\nuses no metric or nondegeneracy hypothesis, and makes no choice from a family\nof sets.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Every Hermitian matrix has a unique form $X(x)$, since its two real diagonal entries determine $x^0,x^3$ and its complex off-diagonal entry determines $x^1,x^2$. Direct evaluation gives\n$$X(x)=\\begin{pmatrix}x^0+x^3&x^1-ix^2\\\\x^1+ix^2&x^0-x^3\\end{pmatrix},\\qquad \\det X(x)=(x^0)^2-(x^1)^2-(x^2)^2-(x^3)^2.$$\nNear its identity, the set $SL(2,\\mathbb C)$ is a smooth real six-dimensional manifold: where the upper-left entry $a$ is nonzero, writing a matrix as $\\begin{pmatrix}a&b\\\\c&d\\end{pmatrix}$, the equation $ad-bc=1$ uniquely gives $d=(1+bc)/a$, so $(a,b,c)$ are six real local coordinates. Left translates of this chart cover the group and have smooth transitions because left multiplication is a smooth invertible matrix map. The group product and inverse are smooth matrix operations, so [F8] makes $SL(2,\\mathbb C)$ a Lie group.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $A\\in SL(2,\\mathbb C)$, multiplicativity and the conjugate-transpose determinant identity in [F1] give $\\det(AXA^\\dagger)=\\det X$. Thus the action defines a real linear Lorentz map $\\rho(A)$; composition satisfies $\\rho(AB)=\\rho(A)\\rho(B)$, and the coordinate entries are quadratic polynomials in the entries of $A$, so $\\rho$ is smooth. Given any $A$, choose a path $A_t$ in $SL(2,\\mathbb C)$ from $I$ to $A$ by [F2]. Then $t\\mapsto\\rho(A_t)$ is a path of Lorentz maps from the identity to $\\rho(A)$. By [F4], its endpoint is in $SO^+(1,3)$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "A tangent matrix at $I$ to $SL(2,\\mathbb C)$ has trace zero: differentiating $ad-bc=1$ at $I$ gives $Z_{11}+Z_{22}=0$. Conversely, for any trace-zero $Z=\\begin{pmatrix}z&b\\\\c&-z\\end{pmatrix}$, the curve\n$$A(t)=\\begin{pmatrix}1+tz&tb\\\\tc&(1+t^2bc)/(1+tz)\\end{pmatrix}$$\nhas determinant one near $0$ and derivative $Z$ at $0$. Hence the real tangent space has dimension six. Differentiating the action gives\n$$d\\rho_I(Z)X=ZX+XZ^\\dagger.$$\nSince [F1] shows that the action preserves $-\\det X$, differentiation places $d\\rho_I(Z)$ in the tangent space of the Lorentz group. If it vanishes for every Hermitian $X$, then $X=I$ gives $Z^\\dagger=-Z$, and the remaining equations give $ZX=XZ$ for every Hermitian $X$. Commuting with $\\operatorname{diag}(1,0)$ makes $Z$ diagonal; commuting with $\\sigma_1$ makes its diagonal entries equal. Its trace is zero, so $Z=0$. Thus $d\\rho_I$ is injective. Every tangent $K$ to $SO^+(1,3)$ at $I$ is the derivative of a smooth curve $\\Lambda(t)$ in that group. Differentiating $\\Lambda(t)^{\\mathsf T}\\eta\\Lambda(t)=\\eta$ at $t=0$ gives $K^{\\mathsf T}\\eta+\\eta K=0$, so by [F6] the target tangent lies in the six-dimensional eta-skew space. By [F5] its own dimension is six, hence it equals that space. The injective differential between the six-dimensional source and target tangent spaces is therefore an isomorphism.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F3",
+            "F5",
+            "F6",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Apply [F7] in smooth coordinate charts at the identity, using step 3.1: after shrinking a neighborhood $U$ of $I$ in $SL(2,\\mathbb C)$, $\\rho$ maps $U$ diffeomorphically onto a neighborhood $V$ of the identity in $SO^+(1,3)$. Since $\\rho$ is a homomorphism, its image is a subgroup containing $V$ and hence is open. Every coset of this subgroup is open; its complement is a union of open cosets, so the image is also closed. The target is connected by [F4], and the image is nonempty, so it is all of $SO^+(1,3)$.",
+          "step": "4.1",
+          "inputs": [
+            "F4",
+            "F7",
+            "step 2.1",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "If $A$ lies in the kernel, then $AXA^\\dagger=X$ for every Hermitian $X$. Setting $X=I$ gives $AA^\\dagger=I$, so $A$ is unitary and the same equations imply $AX=XA$. Commuting with $\\operatorname{diag}(1,0)$ and $\\sigma_1$ as in step 3.1 forces $A=zI$; $\\det A=1$ gives $z^2=1$. Both $I$ and $-I$ act trivially, hence the kernel is exactly $\\{I,-I\\}$. Shrink $U$ from step 4.1 so that $U\\cap(-U)=\\varnothing$. If $\\rho(B)\\in V$, let $C\\in U$ be the unique point with $\\rho(C)=\\rho(B)$; then $BC^{-1}$ is in the kernel, so $B=C$ or $B=-C$. Therefore $\\rho^{-1}(V)=U\\sqcup(-U)$ and both pieces map diffeomorphically to $V$. Translating this neighborhood by any target element gives evenly covered neighborhoods everywhere, proving that $\\rho$ is a two-sheeted covering.",
+          "step": "5.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 3.1",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement concerns fixed nonempty matrix Lie groups and has no variable set input."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 5.1 includes the identity matrix in the kernel; the zero matrix is excluded from SL(2,C) by det A=1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 5.1 checks the identity and its distinct partner -I, showing the kernel has exactly two elements."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and step 1.1 require determinant one; singular matrices cannot be in SL(2,C)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 5.1 gives evenly covered neighborhoods by translating the identity neighborhood to every target point."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A1 states the inherited AC_omega premise; all matrix and local-chart choices in steps 1.1–5.1 are finite and explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a covering homomorphism assertion, not an iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is a covering homomorphism assertion, not an iff claim."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-41 author self-check",
+        "notes": "Mapped each numbered argument to its actual stated inputs; exact source sections and use locations are recorded. Boundary cases were checked against the conditional statement and the displayed proof. This is an authoring record, not independent proof approval."
+      }
+    },
+    "prop-gr-fx-torsion-free-tetrad-equivalence": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-gr-fx-tetrad-spin-connection",
+          "source_section": "Definition",
+          "quote": "Assume $\\mathrm{AC}_\\omega$ for the canonical tangent-bundle and tetrad\nconventions of [[def-gr-smooth-lorentzian-objects]] and\n[[def-gr-local-frame-and-tetrad-fields]]. Let $(M,g,N)$ be a smooth,\ntime-oriented Lorentzian four-manifold of signature $(-,+,+,+)$, let\n$U\\subseteq M$ be nonempty and open, and let\n$E=(E_0,E_1,E_2,E_3)$ be a smooth future-directed tetrad on $U$. Thus the\n$E_J$ are a pointwise basis of $TM|_U$, $g(E_I,E_J)=\\eta_{IJ}$ for\n$\\eta=\\operatorname{diag}(-1,1,1,1)$, and $E_0$ is future-directed. Write\n$e=(e^0,e^1,e^2,e^3)^{\\mathsf T}$ for the dual coframe, so\n$e^I(E_J)=\\delta^I{}_J$.\n\nA **tetrad connection** is a smooth affine connection $\\nabla$ on $TM|_U$;\nits connection matrix $\\omega=(\\omega^I{}_J)$ in $E$ is defined by\n$\\nabla_XE_J=\\sum_I\\omega^I{}_J(X)E_I$. It is a **Lorentz connection** when\nit is metric-compatible, equivalently when the matrix-valued one-form is\n$\\eta$-skew: $\\omega_{IJ}:=\\eta_{IK}\\omega^K{}_J$ satisfies\n$\\omega_{IJ}=-\\omega_{JI}$. A smooth local Lorentz change is a smooth map\n$\\Lambda:U\\to SO^+(1,3)$. With the convention\n$e'=\\Lambda e$ (equivalently $E'=E\\Lambda^{-1}$), the connection matrix\ntransforms as\n\n$$e'=\\Lambda e,\\qquad\n\\omega'=\\Lambda\\omega\\Lambda^{-1}-d\\Lambda\\,\\Lambda^{-1}.$$\n\nHere $d$ is the componentwise exterior derivative, and products of\nmatrix-valued forms use matrix multiplication and the wedge product of their\nscalar form entries. Define the torsion and curvature forms by\n\n$$T^I:=de^I+\\sum_J\\omega^I{}_J\\wedge e^J,\\qquad\nF^I{}_J:=d\\omega^I{}_J+\\sum_K\\omega^I{}_K\\wedge\\omega^K{}_J.$$\n\nThus $T$ is an $\\mathbb R^4$-valued two-form and $F$ is an\n$\\operatorname{End}(\\mathbb R^4)$-valued two-form. With this convention,\n$F$ is the local curvature two-form of $\\nabla$. A local $\\Lambda$ is a\nchange of frame in a trivialization; it represents a gauge transformation in\nthe sense of [[def-gauge-group-of-a-smooth-principal-bundle]] only when it\nextends to a principal-bundle automorphism over the identity. No such extension,\nglobal tetrad, or spin structure is part of this definition.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-gr-nondegenerate-levi-civita-and-tensor-derivative",
+          "source_section": "Statement",
+          "quote": "Let $M$ be a smooth four-manifold without boundary and let $g$ be a smooth\nsymmetric covariant $2$-tensor field on $M$ such that $g_p$ is nondegenerate at\nevery $p\\in M$ ([[def-gr-smooth-covariant-two-tensor-field]]). Assume\n$\\mathrm{AC}_\\omega$ for the canonical tangent-bundle smooth structure\n([[def-countable-choice]], [[def-smooth-vector-field-as-a-tangent-bundle-section]]).\nFor this general metric define $\\flat_p(v):=g_p(v,\\cdot)$,\n$\\sharp_p:=\\flat_p^{-1}$, and\n$g_p^{-1}(\\alpha,\\beta):=g_p(\\sharp_p\\alpha,\\sharp_p\\beta)$.\nNondegeneracy makes $\\flat_p$ injective and hence invertible between the\nfour-dimensional tangent space and its dual. In a chart, $g^{ab}$ are the\nentries of the inverse matrix of $(g_{ab})$. These definitions agree with\n[[def-gr-inverse-metric-and-musical-isomorphisms]] in its Lorentzian scope.\nHere and below repeated upper/lower indices are summed over $0,1,2,3$.\nThis holds in particular\nwhen $(M,g,N)$ is a time-oriented smooth Lorentzian four-manifold and $g$ is\nits metric ([[def-gr-smooth-lorentzian-objects]]). For smooth local vector fields\n$X,Y,Z$ put\n\n$$K(X,Y,Z):=X\\bigl(g(Y,Z)\\bigr)+Y\\bigl(g(Z,X)\\bigr)-Z\\bigl(g(X,Y)\\bigr)+g([X,Y],Z)+g([Z,X],Y)-g([Y,Z],X),$$\n\nwith brackets as in [[def-lie-bracket-of-smooth-vector-fields]].\n\n**(a) Existence and formulas.** There is exactly one affine connection\n$\\nabla$ on $M$ ([[def-affine-connection-on-a-smooth-manifold]]) satisfying\n\n$$2g(\\nabla_XY,Z)=K(X,Y,Z)\\qquad\\text{for all smooth local }X,Y,Z .$$\n\nIt is torsion-free and $g$-compatible, so it is a metric-selected connection\nfor $(M,g)$, meaning torsion-free and satisfying\n$Xg(Y,Z)=g(\\nabla_XY,Z)+g(Y,\\nabla_XZ)$ for smooth local fields\n(the conditions of [[def-gr-metric-selected-connection]] extended here to\nnondegenerate $g$); in every smooth chart its\nChristoffel symbols are\n\n$$\\Gamma^a{}_{bc}=\\tfrac12\\,g^{ad}\\bigl(\\partial_bg_{dc}+\\partial_cg_{bd}-\\partial_dg_{bc}\\bigr),$$\n\nwith $g^{ad}$ the inverse-metric components defined above\n([[def-christoffel-symbols-of-an-affine-connection]]).\n\n**(b) Uniqueness.** If an affine connection $\\nabla'$ on $M$ is torsion-free\nand $g$-compatible, then $\\nabla'=\\nabla$. Consequently the class\n$\\operatorname{LC}(M,g)$ of metric-selected connections has exactly one\nelement; it is the **Levi–Civita connection** of $g$.\n\n**(c) Induced derivative on tensor fields.** Let $\\nabla^*$ be the dual\nconnection on $T^*M$ and let the product connection of\n[[def-product-connection-on-tensor-and-hom-bundles]] act on\n$T^r_sM:=(TM)^{\\otimes r}\\otimes(T^*M)^{\\otimes s}$, for integers $r,s\\ge0$,\nconstructed by [[lem-finite-tensor-products-of-smooth-vector-bundles]]. A\ntype $(r,s)$ tensor at $p$ is a multilinear map\n$(T_p^*M)^r\\times(T_pM)^s\\to\\mathbb R$\n([[def-type-r-s-tensor-on-a-finite-dimensional-vector-space]]); a smooth\ntensor field is a section with smooth coefficients in each local product\nframe. The empty product is the scalar line. Its chart components are\n$T^{a_1\\cdots a_r}{}_{b_1\\cdots b_s}=T(dx^{a_1},\\ldots,dx^{a_r},\\partial_{b_1},\\ldots,\\partial_{b_s})$,\nwhere $dx^a$ is dual to $\\partial_a$. This agrees with\n[[def-gr-tensor-fields-and-components]] in the Lorentzian case. Put\n$T^{a_1\\cdots a_r}{}_{b_1\\cdots b_s;c}:=(\\nabla_{\\partial_c}T)^{a_1\\cdots a_r}{}_{b_1\\cdots b_s}$.\nThen, in every smooth chart, for\nevery smooth tensor field $T$ of type $(r,s)$,\n\n$$T^{a_1\\cdots a_r}{}_{b_1\\cdots b_s;c}=\\partial_cT^{a_1\\cdots a_r}{}_{b_1\\cdots b_s}+\\sum_{i=1}^{r}\\Gamma^{a_i}{}_{dc}\\,T^{a_1\\cdots d\\cdots a_r}{}_{b_1\\cdots b_s}-\\sum_{j=1}^{s}\\Gamma^{d}{}_{b_jc}\\,T^{a_1\\cdots a_r}{}_{b_1\\cdots d\\cdots b_s},$$\n\nwhere the slot marked $d$ replaces the named index; this derivative commutes\nwith every contraction in the sense of [[def-contraction-of-a-mixed-tensor]],\nand it annihilates the metric and the inverse metric:\n\n$$g_{ab;c}=0,\\qquad g^{ab}{}_{;c}=0 .$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-the-exterior-derivative-is-a-graded-derivation",
+          "source_section": "Statement",
+          "quote": "Let $M$ be a smooth manifold. The exterior derivative is an\n$\\mathbb R$-linear map $d:\\Omega^*(M)\\to\\Omega^*(M)$ of degree one.\nFor homogeneous smooth forms $\\alpha\\in\\Omega^p(M)$ and\n$\\beta\\in\\Omega^q(M)$, $$d(\\alpha\\wedge\\beta)=d\\alpha\\wedge\\beta+(-1)^{\\deg\\alpha}\\alpha\\wedge d\\beta.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-the-exterior-derivative-squares-to-zero",
+          "source_section": "Statement",
+          "quote": "For every differential form $\\omega$, $d(d\\omega)=0$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For smooth vector fields $X,Y$ on $U$, evaluating exterior derivative and the wedge product gives $T^I(X,Y)=X(e^I(Y))-Y(e^I(X))-e^I([X,Y])+\\omega^I{}_J(X)e^J(Y)-\\omega^I{}_J(Y)e^J(X)$. Since $Y=e^J(Y)E_J$, the connection definition gives $e^I(\\nabla_XY)=X(e^I(Y))+\\omega^I{}_J(X)e^J(Y)$; the corresponding formula with $X,Y$ exchanged shows $T^I(X,Y)=e^I(\\nabla_XY-\\nabla_YX-[X,Y])$. Thus all coframe torsion forms vanish exactly when the induced affine-connection torsion vanishes.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "Write $\\alpha:=d\\Lambda\\,\\Lambda^{-1}$ and $\\bar\\omega:=\\Lambda\\omega\\Lambda^{-1}$, so $\\omega'=\\bar\\omega-\\alpha$. By [F3] applied componentwise and [F4], differentiating $\\Lambda\\Lambda^{-1}=I$ gives $d\\Lambda^{-1}=-\\Lambda^{-1}d\\Lambda\\Lambda^{-1}$ and then\n$$d\\alpha=d^2\\Lambda\\,\\Lambda^{-1}-d\\Lambda\\wedge d\\Lambda^{-1}=\\alpha\\wedge\\alpha.$$\nThe same graded product rule gives\n$$d\\bar\\omega=d\\Lambda\\wedge\\omega\\Lambda^{-1}+\\Lambda d\\omega\\Lambda^{-1}-\\Lambda\\omega\\wedge d\\Lambda^{-1}=\\alpha\\wedge\\bar\\omega+\\Lambda(d\\omega)\\Lambda^{-1}+\\bar\\omega\\wedge\\alpha.$$\nExpanding $d\\omega'+\\omega'\\wedge\\omega'$ and substituting these identities cancels the $\\alpha$ terms and leaves $\\Lambda(d\\omega+\\omega\\wedge\\omega)\\Lambda^{-1}$, hence $F'=\\Lambda F\\Lambda^{-1}$. Also [F3] gives $de'=d\\Lambda\\wedge e+\\Lambda de$ and $\\omega'\\wedge e'=\\Lambda\\omega\\wedge e-d\\Lambda\\wedge e$, hence $T'=\\Lambda T$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Restrict the unique Levi-Civita connection supplied by [F2] to $U$. Its connection coefficients in $E$ are smooth; metric compatibility and the constant frame metric $\\eta_{IJ}$ give $\\omega_{IJ}=-\\omega_{JI}$. Its tangent torsion is zero, so step 1.1 makes every $T^I$ zero. This proves existence of an $\\eta$-skew solution.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Conversely, an $\\eta$-skew $\\omega$ induces a metric-compatible connection. For $V=V^IE_I$ and $W=W^JE_J$, the connection terms in $g(\\nabla_XV,W)+g(V,\\nabla_XW)$ are $\\omega_{KJ}V^JW^K+\\omega_{IJ}V^IW^J=0$ after interchanging the summed indices in the first term and using $\\omega_{IJ}=-\\omega_{JI}$; the remaining terms equal $X(g(V,W))$. If also $T^I=0$, step 1.1 gives zero tangent torsion. By uniqueness in [F2], this connection is the Levi-Civita connection. Hence the solution from step 2.1 is unique, and the displayed torsion equation is equivalent to torsion-freeness.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Steps 1.1–3.1 establish the torsion equivalence and unique Levi-Civita identification; step 1.2 establishes both transformation laws.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: if U is empty, the restricted tangent bundle and all torsion equations are vacuous, with the restricted Levi-Civita connection unique."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 identifies zero coframe torsion with zero affine torsion; steps 2.1–3.1 prove the zero case in both directions."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The Statement fixes a four-dimensional tetrad and has no rank-one boundary case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement assumes a Lorentzian metric and an invertible tetrad; degenerate metrics and coframes are excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement has no interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1–3.1 carry AC_omega for the smooth tetrad and tangent-bundle conventions; the Levi-Civita construction is supplied under the same premise."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.1 and step 3.1: zero coframe torsion implies zero affine torsion and the unique metric-compatible connection is Levi-Civita."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1: the Levi-Civita connection is eta-skew and torsion-free, so its coframe torsion vanishes."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-41 author self-check",
+        "notes": "Mapped each numbered argument to its actual stated inputs; exact source sections and use locations are recorded. Boundary cases were checked against the conditional statement and the displayed proof. This is an authoring record, not independent proof approval."
+      }
+    },
+    "def-gr-fx-lorentz-spin-lift": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition: empty is not a separate proof boundary for this interface definition; it defines supplied local bundle or connection data and makes no existence theorem."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Definition: zero is not a separate proof boundary for this interface definition; it defines supplied local bundle or connection data and makes no existence theorem."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Definition: one is not a separate proof boundary for this interface definition; it defines supplied local bundle or connection data and makes no existence theorem."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Definition: degenerate is not a separate proof boundary for this interface definition; it defines supplied local bundle or connection data and makes no existence theorem."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Definition: endpoints is not a separate proof boundary for this interface definition; it defines supplied local bundle or connection data and makes no existence theorem."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Definition: nonempty-choice is not a separate proof boundary for this interface definition; it defines supplied local bundle or connection data and makes no existence theorem."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition: iff-forward is not a separate proof boundary for this interface definition; it defines supplied local bundle or connection data and makes no existence theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition: iff-reverse is not a separate proof boundary for this interface definition; it defines supplied local bundle or connection data and makes no existence theorem."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-41 author self-check",
+        "notes": "Definition item: no proof steps are claimed; the contract records not-applicable proof boundaries and the exact definition suppliers. This is an authoring record, not independent proof approval."
+      }
+    },
+    "prop-gr-fx-lorentz-clifford-compatibility": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-gr-fx-tetrad-spin-connection",
+          "source_section": "Definition",
+          "quote": "Assume $\\mathrm{AC}_\\omega$ for the canonical tangent-bundle and tetrad\nconventions of [[def-gr-smooth-lorentzian-objects]] and\n[[def-gr-local-frame-and-tetrad-fields]]. Let $(M,g,N)$ be a smooth,\ntime-oriented Lorentzian four-manifold of signature $(-,+,+,+)$, let\n$U\\subseteq M$ be nonempty and open, and let\n$E=(E_0,E_1,E_2,E_3)$ be a smooth future-directed tetrad on $U$. Thus the\n$E_J$ are a pointwise basis of $TM|_U$, $g(E_I,E_J)=\\eta_{IJ}$ for\n$\\eta=\\operatorname{diag}(-1,1,1,1)$, and $E_0$ is future-directed. Write\n$e=(e^0,e^1,e^2,e^3)^{\\mathsf T}$ for the dual coframe, so\n$e^I(E_J)=\\delta^I{}_J$.\n\nA **tetrad connection** is a smooth affine connection $\\nabla$ on $TM|_U$;\nits connection matrix $\\omega=(\\omega^I{}_J)$ in $E$ is defined by\n$\\nabla_XE_J=\\sum_I\\omega^I{}_J(X)E_I$. It is a **Lorentz connection** when\nit is metric-compatible, equivalently when the matrix-valued one-form is\n$\\eta$-skew: $\\omega_{IJ}:=\\eta_{IK}\\omega^K{}_J$ satisfies\n$\\omega_{IJ}=-\\omega_{JI}$. A smooth local Lorentz change is a smooth map\n$\\Lambda:U\\to SO^+(1,3)$. With the convention\n$e'=\\Lambda e$ (equivalently $E'=E\\Lambda^{-1}$), the connection matrix\ntransforms as\n\n$$e'=\\Lambda e,\\qquad \\omega'=\\Lambda\\omega\\Lambda^{-1}-d\\Lambda\\,\\Lambda^{-1}.$$\n\nHere $d$ is the componentwise exterior derivative, and products of\nmatrix-valued forms use matrix multiplication and the wedge product of their\nscalar form entries. Define the torsion and curvature forms by\n\n$$T^I:=de^I+\\sum_J\\omega^I{}_J\\wedge e^J,\\qquad F^I{}_J:=d\\omega^I{}_J+\\sum_K\\omega^I{}_K\\wedge\\omega^K{}_J.$$\n\nThus $T$ is an $\\mathbb R^4$-valued two-form and $F$ is an\n$\\operatorname{End}(\\mathbb R^4)$-valued two-form. With this convention,\n$F$ is the local curvature two-form of $\\nabla$. A local $\\Lambda$ is a\nchange of frame in a trivialization; it represents a gauge transformation in\nthe sense of [[def-gauge-group-of-a-smooth-principal-bundle]] only when it\nextends to a principal-bundle automorphism over the identity. No such extension,\nglobal tetrad, or spin structure is part of this definition.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-gr-fx-tetrad-spin-connection",
+          "source_section": "Definition",
+          "quote": "Assume $\\mathrm{AC}_\\omega$ for the canonical tangent-bundle and tetrad\nconventions of [[def-gr-smooth-lorentzian-objects]] and\n[[def-gr-local-frame-and-tetrad-fields]]. Let $(M,g,N)$ be a smooth,\ntime-oriented Lorentzian four-manifold of signature $(-,+,+,+)$, let\n$U\\subseteq M$ be nonempty and open, and let\n$E=(E_0,E_1,E_2,E_3)$ be a smooth future-directed tetrad on $U$. Thus the\n$E_J$ are a pointwise basis of $TM|_U$, $g(E_I,E_J)=\\eta_{IJ}$ for\n$\\eta=\\operatorname{diag}(-1,1,1,1)$, and $E_0$ is future-directed. Write\n$e=(e^0,e^1,e^2,e^3)^{\\mathsf T}$ for the dual coframe, so\n$e^I(E_J)=\\delta^I{}_J$.\n\nA **tetrad connection** is a smooth affine connection $\\nabla$ on $TM|_U$;\nits connection matrix $\\omega=(\\omega^I{}_J)$ in $E$ is defined by\n$\\nabla_XE_J=\\sum_I\\omega^I{}_J(X)E_I$. It is a **Lorentz connection** when\nit is metric-compatible, equivalently when the matrix-valued one-form is\n$\\eta$-skew: $\\omega_{IJ}:=\\eta_{IK}\\omega^K{}_J$ satisfies\n$\\omega_{IJ}=-\\omega_{JI}$. A smooth local Lorentz change is a smooth map\n$\\Lambda:U\\to SO^+(1,3)$. With the convention\n$e'=\\Lambda e$ (equivalently $E'=E\\Lambda^{-1}$), the connection matrix\ntransforms as\n\n$$e'=\\Lambda e,\\qquad\n\\omega'=\\Lambda\\omega\\Lambda^{-1}-d\\Lambda\\,\\Lambda^{-1}.$$\n\nHere $d$ is the componentwise exterior derivative, and products of\nmatrix-valued forms use matrix multiplication and the wedge product of their\nscalar form entries. Define the torsion and curvature forms by\n\n$$T^I:=de^I+\\sum_J\\omega^I{}_J\\wedge e^J,\\qquad\nF^I{}_J:=d\\omega^I{}_J+\\sum_K\\omega^I{}_K\\wedge\\omega^K{}_J.$$\n\nThus $T$ is an $\\mathbb R^4$-valued two-form and $F$ is an\n$\\operatorname{End}(\\mathbb R^4)$-valued two-form. With this convention,\n$F$ is the local curvature two-form of $\\nabla$. A local $\\Lambda$ is a\nchange of frame in a trivialization; it represents a gauge transformation in\nthe sense of [[def-gauge-group-of-a-smooth-principal-bundle]] only when it\nextends to a principal-bundle automorphism over the identity. No such extension,\nglobal tetrad, or spin structure is part of this definition.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "From the Clifford relation, $\\gamma^I\\gamma^J\\gamma^K=2\\eta^{JK}\\gamma^I-2\\eta^{IK}\\gamma^J+\\gamma^K\\gamma^I\\gamma^J$. Subtracting $\\gamma^K\\gamma^I\\gamma^J$ gives $[\\gamma^I\\gamma^J,\\gamma^K]=2(\\eta^{JK}\\gamma^I-\\eta^{IK}\\gamma^J)$. This is an algebraic identity for every triple of indices, including repeated indices, and uses no group-representation covariance hypothesis.",
+          "inputs": [
+            "given",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Contract step 1.1 with $\\frac14\\omega_{IJ}$. Since $\\omega_{IJ}\\eta^{JK}=-\\omega^K{}_I$ by antisymmetry and $\\omega_{IJ}\\eta^{IK}=\\omega^K{}_J$, the two terms each contribute $-\\frac12\\omega^K{}_J\\gamma^J$ after relabeling the summed index. Hence $[\\Gamma,\\gamma^K]=-\\omega^K{}_J\\gamma^J$. The contraction is valid because each $\\omega_{IJ}$ is scalar-valued and the gamma matrices are constant in the chosen local frame.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Write $c(V)=V_K\\gamma^K$. Then step 2.1 gives $dc(V)+[\\Gamma,c(V)]=dV_K\\gamma^K-V_K\\omega^K{}_J\\gamma^J=(dV_J-\\omega^K{}_J V_K)\\gamma^J=c(\\nabla V)$. For a spinor $\\psi$, expand $D(c(V)\\psi)=d(c(V)\\psi)+\\Gamma c(V)\\psi$ and use\n$\\Gamma c(V)=c(V)\\Gamma+[\\Gamma,c(V)]$. The result is\n$c(\\nabla V)\\psi+c(V)(d\\psi+\\Gamma\\psi)=c(\\nabla V)\\psi+c(V)D\\psi$, as asserted.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement is a local compatibility identity for supplied fields and has no variable set claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1: if V or psi is zero, both sides vanish by linearity; zero connection coefficients also reduce D to d."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The Statement fixes the four-dimensional Lorentz frame and a supplied spin representation; it has no rank-one case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement fixes eta=diag(-1,1,1,1), which is nondegenerate, and assumes the Clifford relation for that eta."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement has no interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1–3.1 supply AC_omega, the selected representation, and gamma matrices explicitly; the calculation uses only finite sums."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a compatibility identity, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is a compatibility identity, not a biconditional."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-41 author self-check",
+        "notes": "Mapped each numbered argument to its actual stated inputs; exact source sections and use locations are recorded. Boundary cases were checked against the conditional statement and the displayed proof. This is an authoring record, not independent proof approval."
+      }
+    },
+    "ex-gr-fx13-1": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-gr-fx-tetrad-spin-connection",
+          "source_section": "Definition",
+          "quote": "Assume $\\mathrm{AC}_\\omega$ for the canonical tangent-bundle and tetrad\nconventions of [[def-gr-smooth-lorentzian-objects]] and\n[[def-gr-local-frame-and-tetrad-fields]]. Let $(M,g,N)$ be a smooth,\ntime-oriented Lorentzian four-manifold of signature $(-,+,+,+)$, let\n$U\\subseteq M$ be nonempty and open, and let\n$E=(E_0,E_1,E_2,E_3)$ be a smooth future-directed tetrad on $U$. Thus the\n$E_J$ are a pointwise basis of $TM|_U$, $g(E_I,E_J)=\\eta_{IJ}$ for\n$\\eta=\\operatorname{diag}(-1,1,1,1)$, and $E_0$ is future-directed. Write\n$e=(e^0,e^1,e^2,e^3)^{\\mathsf T}$ for the dual coframe, so\n$e^I(E_J)=\\delta^I{}_J$.\n\nA **tetrad connection** is a smooth affine connection $\\nabla$ on $TM|_U$;\nits connection matrix $\\omega=(\\omega^I{}_J)$ in $E$ is defined by\n$\\nabla_XE_J=\\sum_I\\omega^I{}_J(X)E_I$. It is a **Lorentz connection** when\nit is metric-compatible, equivalently when the matrix-valued one-form is\n$\\eta$-skew: $\\omega_{IJ}:=\\eta_{IK}\\omega^K{}_J$ satisfies\n$\\omega_{IJ}=-\\omega_{JI}$. A smooth local Lorentz change is a smooth map\n$\\Lambda:U\\to SO^+(1,3)$. With the convention\n$e'=\\Lambda e$ (equivalently $E'=E\\Lambda^{-1}$), the connection matrix\ntransforms as\n\n$$e'=\\Lambda e,\\qquad\n\\omega'=\\Lambda\\omega\\Lambda^{-1}-d\\Lambda\\,\\Lambda^{-1}.$$\n\nHere $d$ is the componentwise exterior derivative, and products of\nmatrix-valued forms use matrix multiplication and the wedge product of their\nscalar form entries. Define the torsion and curvature forms by\n\n$$T^I:=de^I+\\sum_J\\omega^I{}_J\\wedge e^J,\\qquad\nF^I{}_J:=d\\omega^I{}_J+\\sum_K\\omega^I{}_K\\wedge\\omega^K{}_J.$$\n\nThus $T$ is an $\\mathbb R^4$-valued two-form and $F$ is an\n$\\operatorname{End}(\\mathbb R^4)$-valued two-form. With this convention,\n$F$ is the local curvature two-form of $\\nabla$. A local $\\Lambda$ is a\nchange of frame in a trivialization; it represents a gauge transformation in\nthe sense of [[def-gauge-group-of-a-smooth-principal-bundle]] only when it\nextends to a principal-bundle automorphism over the identity. No such extension,\nglobal tetrad, or spin structure is part of this definition.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-gr-fx-torsion-free-tetrad-equivalence",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. Let $(M,g,N)$ be a smooth time-oriented\nLorentzian four-manifold, let $U\\subseteq M$ be open, and let\n$e=(e^0,e^1,e^2,e^3)^{\\mathsf T}$ be the dual coframe of a smooth\nfuture-directed tetrad on $U$. Let $\\omega^I{}_J$ be a smooth matrix-valued\none-form with $\\omega_{IJ}:=\\eta_{IK}\\omega^K{}_J=-\\omega_{JI}$, and let\n$\\nabla$ be its induced affine connection as in\n[[def-gr-fx-tetrad-spin-connection]]. Then\n\n$$de^I+\\omega^I{}_J\\wedge e^J=0\\quad\\text{for every }I$$\n\nif and only if $\\nabla$ is torsion-free. There is exactly one such\n$\\eta$-skew connection: the Levi-Civita connection of $g$. Under a smooth\nchange $e'=\\Lambda e$, $\\Lambda:U\\to SO^+(1,3)$, the torsion and curvature\nforms obey\n\n$$T'=\\Lambda T,\\qquad F'=\\Lambda F\\Lambda^{-1}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-gr-fx-spin-double-cover",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$ for the cited smooth Lie-group convention. For a complex matrix $A$, write $A^\\dagger:=\\overline A^{\\mathsf T}$. Let\n$\\eta=\\operatorname{diag}(-1,1,1,1)$ and define\n$SL(2,\\mathbb C)=\\{A\\in M_2(\\mathbb C):\\det A=1\\}$. Let\n$\\sigma_1=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix}$,\n$\\sigma_2=\\begin{pmatrix}0&-i\\\\i&0\\end{pmatrix}$,\n$\\sigma_3=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}$ and\n$X(x)=x^0I+x^1\\sigma_1+x^2\\sigma_2+x^3\\sigma_3$ for\n$x\\in\\mathbb R^4$. The real-linear map $x\\mapsto X(x)$ identifies\n$\\mathbb R^4$ with the Hermitian $2\\times2$ matrices and\n$-\\det X(x)=-(x^0)^2+(x^1)^2+(x^2)^2+(x^3)^2$. For $A\\in SL(2,\\mathbb C)$,\nlet $\\rho(A)$ be the real linear transformation defined by\n\n$$X(\\rho(A)x)=AX(x)A^\\dagger.$$\n\nThen $\\rho:SL(2,\\mathbb C)\\to SO^+(1,3)$ is a smooth surjective Lie-group\nhomomorphism, its kernel is exactly $\\{I,-I\\}$, and its differential at the\nidentity is an isomorphism. In particular, $\\rho$ is a two-sheeted covering\nhomomorphism. This is a local group statement; it does not assert that a\nspacetime admits a global spin lift.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-gr-fx-lorentz-spin-lift",
+          "source_section": "Definition",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. Let $(M,g,N,o)$ be an oriented and\ntime-oriented smooth Lorentzian four-manifold, and let\n$P^+_g(M)$ be its smooth oriented time-oriented orthonormal frame bundle from\n[[prop-gr-fx-oriented-time-oriented-orthonormal-frame-bundle]]. Set\n$\\mathrm{Spin}^+(1,3):=SL(2,\\mathbb C)$ and let\n$\\rho:SL(2,\\mathbb C)\\to SO^+(1,3)$ be the Hermitian-matrix covering\nhomomorphism of [[prop-gr-fx-spin-double-cover]]. A **Lorentzian spin\nstructure** is a smooth right principal $SL(2,\\mathbb C)$-bundle\n$\\widetilde P\\to M$ together with a smooth map $\\lambda:\\widetilde P\\to\nP^+_g(M)$ over the identity of $M$ such that\n\n$$\\lambda(ua)=\\lambda(u)\\rho(a)\\qquad (u\\in\\widetilde P,\\ a\\in SL(2,\\mathbb C)),$$\n\nand the restriction of $\\lambda$ to each fiber is a surjective two-sheeted\ncovering map. The map is over the identity, meaning $\\pi^+\\circ\\lambda=\\widetilde\\pi$; the square below displays this base condition and is not used as a proof.\n\n```tikzcd\n\\begin{tikzcd}\n\\widetilde P \\arrow[r,\"\\lambda\"] \\arrow[d,\"\\widetilde\\pi\"'] & P^+_g(M) \\arrow[d,\"\\pi^+\"] \\\\\nM \\arrow[r,\"\\mathrm{id}_M\"'] & M\n\\end{tikzcd}\n```\n\nA smooth finite-dimensional complex representation here consists of a\nfinite-dimensional complex vector space $V_\\sigma$ and a smooth group\nhomomorphism $\\sigma:SL(2,\\mathbb C)\\to GL(V_\\sigma)$, where\n$GL(V_\\sigma)$ is the group of invertible complex-linear maps on\n$V_\\sigma$, with the smooth structure inherited as an open subset of the\nreal vector space of complex-linear endomorphisms of $V_\\sigma$. Its\n**associated vector bundle** is the quotient\n$$\\widetilde P\\times_\\sigma V_\\sigma:=(\\widetilde P\\times V_\\sigma)/\\sim,$$\nwhere $\\sim$ is the equivalence relation generated by\n$(ua,v)\\sim(u,\\sigma(a)v)$ for $u\\in\\widetilde P$,\n$a\\in SL(2,\\mathbb C)$ and $v\\in V_\\sigma$; equivalently\n$(u,v)\\sim(ua,\\sigma(a)^{-1}v)$, in the convention of\n[[def-principal-g-bundle-and-associated-fiber-bundle]]. Write $[u,v]$ for\nthe class of $(u,v)$. Since every $\\sigma(a)$ is complex-linear, the\nfiberwise vector-space operations\n$[u,v]+[u,w]=[u,v+w]$ and $z[u,v]=[u,zv]$ for $z\\in\\mathbb C$ are\nindependent of the representative. The associated-bundle proposition\n[[prop-associated-bundle-is-locally-trivial-and-functorial-under-pullback]]\ngives local triviality; on an overlap with local sections satisfying\n$s_j(x)=s_i(x)a_{ij}(x)$, the smooth principal charts give transition maps\n$(x,v)\\mapsto(x,\\sigma(a_{ij}(x))v)$. These are smooth because $\\sigma$ is\nsmooth and define the smooth vector-bundle structure. When $V_\\sigma$ is\nchosen for spinor components, this is called its associated spinor bundle.\nWith the defining representation on $\\mathbb C^2$ chosen for spinor\ncomponents, it is a rank-two complex spinor bundle.\n\nTo define a **lift of a Lorentz connection**, first supply a principal\nconnection $H^+\\subset TP^+_g(M)$ on the frame bundle: it is a smooth vector\nsubbundle complementary to $VP^+:=\\ker(d\\pi^+)$ and invariant under the\nright $SO^+(1,3)$ action, as in\n[[def-principal-connection-and-vertical-curvature]]. This $H^+$ is additional\nglobal data; the local affine connection and local matrix $\\omega$ in\n[[def-gr-fx-tetrad-spin-connection]] do not determine it unless they are\nspecified as restrictions of a chosen global metric-compatible affine\nconnection whose induced principal connection is the supplied $H^+$. A lift\nis a supplied principal connection $\\widetilde H\\subset T\\widetilde P$,\nlikewise a smooth\nright-invariant horizontal complement to\n$V\\widetilde P:=\\ker(d\\widetilde\\pi)$, such that\n$d\\lambda_u(\\widetilde H_u)=H^+_{\\lambda(u)}$ at each\n$u\\in\\widetilde P$. It induces a covariant derivative on the associated\nvector bundle by horizontal differentiation: a section is represented by a\nsmooth equivariant map $f:\\widetilde P\\to V_\\sigma$ with\n$f(ua)=\\sigma(a)^{-1}f(u)$, and its derivative along a smooth base vector\nfield $X$ at $x$ is the class $[u,df_u(\\widetilde X^H_u)]$ for\n$u\\in\\widetilde P_x$, where $\\widetilde X^H$ is the horizontal lift. The local\nClifford-compatibility calculation is a separate proposition about supplied\ngamma matrices and does not follow from the existence of $\\sigma$ alone.\nA spin structure, a global spinor field, and a lifted connection are extra data: this definition asserts\nneither existence nor uniqueness of a spin lift, global tetrad, or connection\nlift. The matrix group and covering homomorphism are Lorentzian; the Euclidean\n$\\mathrm{Spin}(4)$ cover is not substituted.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "prop-gr-fx-lorentz-clifford-compatibility",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. Let $(M,g,N)$ be a smooth time-oriented\nLorentzian four-manifold, let $U\\subseteq M$ be a nonempty open set, and let\n$E=(E_0,E_1,E_2,E_3)$ be a smooth future-directed tetrad on $U$. Let\n$\\nabla$ be a smooth affine Lorentz connection on $TM|_U$ with smooth\nconnection matrix $\\omega^I{}_J$ in $E$, meaning\n$\\nabla_XE_J=\\sum_I\\omega^I{}_J(X)E_I$ as in\n[[def-gr-fx-tetrad-spin-connection]]. Write\n$\\omega_{IJ}:=\\eta_{IK}\\omega^K{}_J=-\\omega_{JI}$ for\n$\\eta=\\operatorname{diag}(-1,1,1,1)$, so $\\eta^{IJ}$ denotes the entries of\n$\\eta^{-1}=\\eta$. Fix an integer $n\\ge1$ and constant\nmatrices $\\gamma^I\\in M_n(\\mathbb C)$ satisfying\n\n$$\\gamma^I\\gamma^J+\\gamma^J\\gamma^I=2\\eta^{IJ}I_n.$$\n\nLet $V\\in\\Gamma^\\infty(TM|_U)$ be a smooth vector field and let\n$\\psi\\in C^\\infty(U,\\mathbb C^n)$ be smooth. With $V_I:=\\eta_{IJ}V^J$,\ndefine $c(V):=V_I\\gamma^I$ and, on $\\mathbb C^n$-valued fields and forms,\n\n$$D\\psi:=d\\psi+\\Gamma\\psi,\\qquad \\Gamma:=\\frac14\\omega_{IJ}\\gamma^I\\gamma^J,$$\n\nwhere $d$ acts componentwise. Then\n\n$$D(c(V)\\psi)=c(\\nabla V)\\psi+c(V)D\\psi,$$\n\nwhere $(\\nabla V)_I:=dV_I-\\omega^J{}_I V_J$ are the covector components\nof the induced Lorentz connection and $c(\\nabla V):=(\\nabla V)_I\\gamma^I$.\nThis is precisely a local matrix identity under the stated hypotheses; it\ndoes not assert that the matrices $\\gamma^I$ or the operator $D$ are\ncompatible with, or induced by, a separately supplied $SL(2,\\mathbb C)$\nrepresentation or principal-connection lift. Such compatibility is an\nadditional condition when this identity is used to describe an associated\nspinor bundle.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $J$ be the stated generator, so $\\Lambda=\\exp(\\theta J)$. Its spatial block is an ordinary rotation, hence $\\Lambda^{\\mathsf T}\\eta\\Lambda=\\eta$, $\\det\\Lambda=1$, and $\\Lambda^0{}_0=1$; thus $\\Lambda(x)\\in SO^+(1,3)$. Since $d\\Lambda\\,\\Lambda^{-1}=Jd\\theta$, [F1] with initial $\\omega=0$ gives $\\omega'=-Jd\\theta$. Because $d\\theta=dx^1\\ne0$ and $J\\ne0$, this connection matrix is nonzero. The metric is unchanged because $\\Lambda^{\\mathsf T}\\eta\\Lambda=\\eta$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Initially $T=0$ and $F=0$. By [F2], $T'=\\Lambda T=0$ and $F'=\\Lambda F\\Lambda^{-1}=0$. The connection is $\\eta$-skew since $J^{\\mathsf T}\\eta+\\eta J=0$; the torsion calculation and [F2] therefore identify it as the Levi-Civita connection in the rotated tetrad.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "The matrix $A=\\operatorname{diag}(e^{-i\\theta/2},e^{i\\theta/2})$ has determinant one. Conjugating $\\sigma_1,\\sigma_2$ by $A$ gives $A\\sigma_1A^\\dagger=\\cos\\theta\\,\\sigma_1+\\sin\\theta\\,\\sigma_2$ and $A\\sigma_2A^\\dagger=-\\sin\\theta\\,\\sigma_1+\\cos\\theta\\,\\sigma_2$, while $I$ and $\\sigma_3$ are fixed. Thus [F3] sends $A(x)$ to $\\Lambda(x)$, so $A$ is a local lift of this Lorentz-valued map; this asserts no global spin structure. In any chosen local $\\mathbb C^n$ trivialization with constant gamma matrices satisfying the Clifford relation, [F5] gives the local matrix identity for $D=d+\\frac14\\omega'_{IJ}\\gamma^I\\gamma^J$, without asserting group-representation compatibility.",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement uses the nonempty domain R^4; no empty-domain conclusion is drawn."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 computes dtheta=dx^1 nonzero everywhere, so the resulting connection is not the zero connection."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 checks the identity element and the explicit SL(2,C) lift A(theta)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies Lambda^T eta Lambda=eta and determinant one, so the transformed coframe remains nondegenerate."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example has no interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1–3.1 record AC_omega; the coordinate fields, rotation matrix, and lift are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is a verified construction, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example is a verified construction, not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "Spatial rotation preserves the Lorentz form",
+          "status": "checked",
+          "evidence": "Step 1.1: the 1-2 block is a planar rotation and the time and third-spatial coordinates are fixed, so Lambda^T eta Lambda=eta and det Lambda=1."
+        },
+        {
+          "name": "Pure-gauge curvature vanishes",
+          "status": "checked",
+          "evidence": "Step 2.1: omega=-J dtheta gives d omega=0 and omega wedge omega=J^2 dtheta wedge dtheta=0."
+        },
+        {
+          "name": "Explicit SL(2,C) rotation lift",
+          "status": "checked",
+          "evidence": "Step 3.1: conjugation by diag(exp(-i theta/2), exp(i theta/2)) rotates sigma_1,sigma_2 by theta and fixes I,sigma_3."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-41 author self-check",
+        "notes": "Mapped each numbered argument to its actual stated inputs; exact source sections and use locations are recorded. Boundary cases were checked against the conditional statement and the displayed proof. This is an authoring record, not independent proof approval."
+      }
+    },
+    "ex-gr-fx13-2": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-gr-fx-tetrad-spin-connection",
+          "source_section": "Definition",
+          "quote": "Assume $\\mathrm{AC}_\\omega$ for the canonical tangent-bundle and tetrad\nconventions of [[def-gr-smooth-lorentzian-objects]] and\n[[def-gr-local-frame-and-tetrad-fields]]. Let $(M,g,N)$ be a smooth,\ntime-oriented Lorentzian four-manifold of signature $(-,+,+,+)$, let\n$U\\subseteq M$ be nonempty and open, and let\n$E=(E_0,E_1,E_2,E_3)$ be a smooth future-directed tetrad on $U$. Thus the\n$E_J$ are a pointwise basis of $TM|_U$, $g(E_I,E_J)=\\eta_{IJ}$ for\n$\\eta=\\operatorname{diag}(-1,1,1,1)$, and $E_0$ is future-directed. Write\n$e=(e^0,e^1,e^2,e^3)^{\\mathsf T}$ for the dual coframe, so\n$e^I(E_J)=\\delta^I{}_J$.\n\nA **tetrad connection** is a smooth affine connection $\\nabla$ on $TM|_U$;\nits connection matrix $\\omega=(\\omega^I{}_J)$ in $E$ is defined by\n$\\nabla_XE_J=\\sum_I\\omega^I{}_J(X)E_I$. It is a **Lorentz connection** when\nit is metric-compatible, equivalently when the matrix-valued one-form is\n$\\eta$-skew: $\\omega_{IJ}:=\\eta_{IK}\\omega^K{}_J$ satisfies\n$\\omega_{IJ}=-\\omega_{JI}$. A smooth local Lorentz change is a smooth map\n$\\Lambda:U\\to SO^+(1,3)$. With the convention\n$e'=\\Lambda e$ (equivalently $E'=E\\Lambda^{-1}$), the connection matrix\ntransforms as\n\n$$e'=\\Lambda e,\\qquad\n\\omega'=\\Lambda\\omega\\Lambda^{-1}-d\\Lambda\\,\\Lambda^{-1}.$$\n\nHere $d$ is the componentwise exterior derivative, and products of\nmatrix-valued forms use matrix multiplication and the wedge product of their\nscalar form entries. Define the torsion and curvature forms by\n\n$$T^I:=de^I+\\sum_J\\omega^I{}_J\\wedge e^J,\\qquad\nF^I{}_J:=d\\omega^I{}_J+\\sum_K\\omega^I{}_K\\wedge\\omega^K{}_J.$$\n\nThus $T$ is an $\\mathbb R^4$-valued two-form and $F$ is an\n$\\operatorname{End}(\\mathbb R^4)$-valued two-form. With this convention,\n$F$ is the local curvature two-form of $\\nabla$. A local $\\Lambda$ is a\nchange of frame in a trivialization; it represents a gauge transformation in\nthe sense of [[def-gauge-group-of-a-smooth-principal-bundle]] only when it\nextends to a principal-bundle automorphism over the identity. No such extension,\nglobal tetrad, or spin structure is part of this definition.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-gr-fx-torsion-free-tetrad-equivalence",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. Let $(M,g,N)$ be a smooth time-oriented\nLorentzian four-manifold, let $U\\subseteq M$ be open, and let\n$e=(e^0,e^1,e^2,e^3)^{\\mathsf T}$ be the dual coframe of a smooth\nfuture-directed tetrad on $U$. Let $\\omega^I{}_J$ be a smooth matrix-valued\none-form with $\\omega_{IJ}:=\\eta_{IK}\\omega^K{}_J=-\\omega_{JI}$, and let\n$\\nabla$ be its induced affine connection as in\n[[def-gr-fx-tetrad-spin-connection]]. Then\n\n$$de^I+\\omega^I{}_J\\wedge e^J=0\\quad\\text{for every }I$$\n\nif and only if $\\nabla$ is torsion-free. There is exactly one such\n$\\eta$-skew connection: the Levi-Civita connection of $g$. Under a smooth\nchange $e'=\\Lambda e$, $\\Lambda:U\\to SO^+(1,3)$, the torsion and curvature\nforms obey\n\n$$T'=\\Lambda T,\\qquad F'=\\Lambda F\\Lambda^{-1}.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-gr-fx-lorentz-spin-lift",
+          "source_section": "Definition",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. Let $(M,g,N,o)$ be an oriented and\ntime-oriented smooth Lorentzian four-manifold, and let\n$P^+_g(M)$ be its smooth oriented time-oriented orthonormal frame bundle from\n[[prop-gr-fx-oriented-time-oriented-orthonormal-frame-bundle]]. Set\n$\\mathrm{Spin}^+(1,3):=SL(2,\\mathbb C)$ and let\n$\\rho:SL(2,\\mathbb C)\\to SO^+(1,3)$ be the Hermitian-matrix covering\nhomomorphism of [[prop-gr-fx-spin-double-cover]]. A **Lorentzian spin\nstructure** is a smooth right principal $SL(2,\\mathbb C)$-bundle\n$\\widetilde P\\to M$ together with a smooth map $\\lambda:\\widetilde P\\to\nP^+_g(M)$ over the identity of $M$ such that\n\n$$\\lambda(ua)=\\lambda(u)\\rho(a)\\qquad (u\\in\\widetilde P,\\ a\\in SL(2,\\mathbb C)),$$\n\nand the restriction of $\\lambda$ to each fiber is a surjective two-sheeted\ncovering map. The map is over the identity, meaning $\\pi^+\\circ\\lambda=\\widetilde\\pi$; the square below displays this base condition and is not used as a proof.\n\n```tikzcd\n\\begin{tikzcd}\n\\widetilde P \\arrow[r,\"\\lambda\"] \\arrow[d,\"\\widetilde\\pi\"'] & P^+_g(M) \\arrow[d,\"\\pi^+\"] \\\\\nM \\arrow[r,\"\\mathrm{id}_M\"'] & M\n\\end{tikzcd}\n```\n\nA smooth finite-dimensional complex representation here consists of a\nfinite-dimensional complex vector space $V_\\sigma$ and a smooth group\nhomomorphism $\\sigma:SL(2,\\mathbb C)\\to GL(V_\\sigma)$, where\n$GL(V_\\sigma)$ is the group of invertible complex-linear maps on\n$V_\\sigma$, with the smooth structure inherited as an open subset of the\nreal vector space of complex-linear endomorphisms of $V_\\sigma$. Its\n**associated vector bundle** is the quotient\n$$\\widetilde P\\times_\\sigma V_\\sigma:=(\\widetilde P\\times V_\\sigma)/\\sim,$$\nwhere $\\sim$ is the equivalence relation generated by\n$(ua,v)\\sim(u,\\sigma(a)v)$ for $u\\in\\widetilde P$,\n$a\\in SL(2,\\mathbb C)$ and $v\\in V_\\sigma$; equivalently\n$(u,v)\\sim(ua,\\sigma(a)^{-1}v)$, in the convention of\n[[def-principal-g-bundle-and-associated-fiber-bundle]]. Write $[u,v]$ for\nthe class of $(u,v)$. Since every $\\sigma(a)$ is complex-linear, the\nfiberwise vector-space operations\n$[u,v]+[u,w]=[u,v+w]$ and $z[u,v]=[u,zv]$ for $z\\in\\mathbb C$ are\nindependent of the representative. The associated-bundle proposition\n[[prop-associated-bundle-is-locally-trivial-and-functorial-under-pullback]]\ngives local triviality; on an overlap with local sections satisfying\n$s_j(x)=s_i(x)a_{ij}(x)$, the smooth principal charts give transition maps\n$(x,v)\\mapsto(x,\\sigma(a_{ij}(x))v)$. These are smooth because $\\sigma$ is\nsmooth and define the smooth vector-bundle structure. When $V_\\sigma$ is\nchosen for spinor components, this is called its associated spinor bundle.\nWith the defining representation on $\\mathbb C^2$ chosen for spinor\ncomponents, it is a rank-two complex spinor bundle.\n\nTo define a **lift of a Lorentz connection**, first supply a principal\nconnection $H^+\\subset TP^+_g(M)$ on the frame bundle: it is a smooth vector\nsubbundle complementary to $VP^+:=\\ker(d\\pi^+)$ and invariant under the\nright $SO^+(1,3)$ action, as in\n[[def-principal-connection-and-vertical-curvature]]. This $H^+$ is additional\nglobal data; the local affine connection and local matrix $\\omega$ in\n[[def-gr-fx-tetrad-spin-connection]] do not determine it unless they are\nspecified as restrictions of a chosen global metric-compatible affine\nconnection whose induced principal connection is the supplied $H^+$. A lift\nis a supplied principal connection $\\widetilde H\\subset T\\widetilde P$,\nlikewise a smooth\nright-invariant horizontal complement to\n$V\\widetilde P:=\\ker(d\\widetilde\\pi)$, such that\n$d\\lambda_u(\\widetilde H_u)=H^+_{\\lambda(u)}$ at each\n$u\\in\\widetilde P$. It induces a covariant derivative on the associated\nvector bundle by horizontal differentiation: a section is represented by a\nsmooth equivariant map $f:\\widetilde P\\to V_\\sigma$ with\n$f(ua)=\\sigma(a)^{-1}f(u)$, and its derivative along a smooth base vector\nfield $X$ at $x$ is the class $[u,df_u(\\widetilde X^H_u)]$ for\n$u\\in\\widetilde P_x$, where $\\widetilde X^H$ is the horizontal lift. The local\nClifford-compatibility calculation is a separate proposition about supplied\ngamma matrices and does not follow from the existence of $\\sigma$ alone.\nA spin structure, a global spinor field, and a lifted connection are extra data: this definition asserts\nneither existence nor uniqueness of a spin lift, global tetrad, or connection\nlift. The matrix group and covering homomorphism are Lorentzian; the Euclidean\n$\\mathrm{Spin}(4)$ cover is not substituted.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-gr-fx-spin-double-cover",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$ for the cited smooth Lie-group convention. For a complex matrix $A$, write $A^\\dagger:=\\overline A^{\\mathsf T}$. Let\n$\\eta=\\operatorname{diag}(-1,1,1,1)$ and define\n$SL(2,\\mathbb C)=\\{A\\in M_2(\\mathbb C):\\det A=1\\}$. Let\n$\\sigma_1=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix}$,\n$\\sigma_2=\\begin{pmatrix}0&-i\\\\i&0\\end{pmatrix}$,\n$\\sigma_3=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}$ and\n$X(x)=x^0I+x^1\\sigma_1+x^2\\sigma_2+x^3\\sigma_3$ for\n$x\\in\\mathbb R^4$. The real-linear map $x\\mapsto X(x)$ identifies\n$\\mathbb R^4$ with the Hermitian $2\\times2$ matrices and\n$-\\det X(x)=-(x^0)^2+(x^1)^2+(x^2)^2+(x^3)^2$. For $A\\in SL(2,\\mathbb C)$,\nlet $\\rho(A)$ be the real linear transformation defined by\n\n$$X(\\rho(A)x)=AX(x)A^\\dagger.$$\n\nThen $\\rho:SL(2,\\mathbb C)\\to SO^+(1,3)$ is a smooth surjective Lie-group\nhomomorphism, its kernel is exactly $\\{I,-I\\}$, and its differential at the\nidentity is an isomorphism. In particular, $\\rho$ is a two-sheeted covering\nhomomorphism. This is a local group statement; it does not assert that a\nspacetime admits a global spin lift.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "prop-gr-fx-lorentz-clifford-compatibility",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. Let $(M,g,N)$ be a smooth time-oriented\nLorentzian four-manifold, let $U\\subseteq M$ be a nonempty open set, and let\n$E=(E_0,E_1,E_2,E_3)$ be a smooth future-directed tetrad on $U$. Let\n$\\nabla$ be a smooth affine Lorentz connection on $TM|_U$ with smooth\nconnection matrix $\\omega^I{}_J$ in $E$, meaning\n$\\nabla_XE_J=\\sum_I\\omega^I{}_J(X)E_I$ as in\n[[def-gr-fx-tetrad-spin-connection]]. Write\n$\\omega_{IJ}:=\\eta_{IK}\\omega^K{}_J=-\\omega_{JI}$ for\n$\\eta=\\operatorname{diag}(-1,1,1,1)$, so $\\eta^{IJ}$ denotes the entries of\n$\\eta^{-1}=\\eta$. Fix an integer $n\\ge1$ and constant\nmatrices $\\gamma^I\\in M_n(\\mathbb C)$ satisfying\n\n$$\\gamma^I\\gamma^J+\\gamma^J\\gamma^I=2\\eta^{IJ}I_n.$$\n\nLet $V\\in\\Gamma^\\infty(TM|_U)$ be a smooth vector field and let\n$\\psi\\in C^\\infty(U,\\mathbb C^n)$ be smooth. With $V_I:=\\eta_{IJ}V^J$,\ndefine $c(V):=V_I\\gamma^I$ and, on $\\mathbb C^n$-valued fields and forms,\n\n$$D\\psi:=d\\psi+\\Gamma\\psi,\\qquad \\Gamma:=\\frac14\\omega_{IJ}\\gamma^I\\gamma^J,$$\n\nwhere $d$ acts componentwise. Then\n\n$$D(c(V)\\psi)=c(\\nabla V)\\psi+c(V)D\\psi,$$\n\nwhere $(\\nabla V)_I:=dV_I-\\omega^J{}_I V_J$ are the covector components\nof the induced Lorentz connection and $c(\\nabla V):=(\\nabla V)_I\\gamma^I$.\nThis is precisely a local matrix identity under the stated hypotheses; it\ndoes not assert that the matrices $\\gamma^I$ or the operator $D$ are\ncompatible with, or induced by, a separately supplied $SL(2,\\mathbb C)$\nrepresentation or principal-connection lift. Such compatibility is an\nadditional condition when this identity is used to describe an associated\nspinor bundle.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $c=\\cosh r$ and $s=\\sinh r$. Multiplying the upper-left $2\\times2$ block gives\n$B(r)^{\\mathsf T}\\eta B(r)=\\eta$, because $c^2-s^2=1$ and the off-diagonal time-space terms cancel. The determinant of that block is $1$, the remaining block is identity, and $B(r)e_0=(c,s,0,0)$ is future timelike since $c>|s|$. Hence $B(r)\\in SO^+(1,3)$. For the Euclidean form, however,\n$\\delta(B(r)e_0,B(r)e_0)=c^2+s^2>1=\\delta(e_0,e_0)$ for $r\\ne0$, so $B(r)\\notin SO(4)$. A map with codomain $SO(4)$ cannot lift this element through its covering map.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Write $A(r)=\\cosh(r/2)I+\\sinh(r/2)\\sigma_1$. Its eigenvalues are $e^{r/2}$ and $e^{-r/2}$, so $\\det A(r)=1$. Pauli multiplication gives\n$AIA^\\dagger=\\cosh r\\,I+\\sinh r\\,\\sigma_1$,\n$A\\sigma_1A^\\dagger=\\sinh r\\,I+\\cosh r\\,\\sigma_1$, and\n$A\\sigma_jA^\\dagger=\\sigma_j$ for $j=2,3$; thus its Hermitian action is exactly $B(r)$. By [F4] it is the Lorentzian spin lift, consistent with the target group in [F3].",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "On the Cartesian tetrad $e^I=dx^I$, $de^I=0$, so $\\omega=0$ gives zero torsion and is $\\eta$-skew. By [F2] it induces the unique Levi-Civita connection. The boost $B(r)$ is constant on spacetime, so $e' =B(r)e$ also has $de' =0$ and its transformed connection is $\\omega'=0$ by [F1]; the torsion remains zero. The local matrix identity from [F5] uses the same $\\eta$; it does not identify this operator as one induced by a group representation. Thus neither the Euclidean metric nor its compact spin group supplies this Lorentzian interface.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement fixes a nonzero boost r; it makes no claim on an empty domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement excludes r=0; the zero-rapidity identity is the boundary where the Euclidean and Lorentz boosts coincide."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 verifies A(r) has determinant one; the Lorentz identity element is included as the r=0 boundary check."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies B(r)^T eta B(r)=eta and determinant one, so the boost is invertible and nondegenerate."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example has no interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1–3.1 record AC_omega; every matrix and algebraic check is explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example establishes a mismatch and a Lorentz lift, not an iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example establishes a mismatch and a Lorentz lift, not an iff claim."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "Lorentz and Euclidean quadratic forms differ on the boost",
+          "status": "checked",
+          "evidence": "Step 1.1: B^T eta B=eta, while delta(B e_0,B e_0)=cosh^2(r)+sinh^2(r)>1 for r nonzero."
+        },
+        {
+          "name": "Explicit SL(2,C) boost lift",
+          "status": "checked",
+          "evidence": "Step 2.1: A=exp(r sigma_1/2) has eigenvalues exp(±r/2), determinant one, and its Hermitian action gives the displayed cosh/sinh boost block."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-41 author self-check",
+        "notes": "Mapped each numbered argument to its actual stated inputs; exact source sections and use locations are recorded. Boundary cases were checked against the conditional statement and the displayed proof. This is an authoring record, not independent proof approval."
+      }
+    }
+  }
+}

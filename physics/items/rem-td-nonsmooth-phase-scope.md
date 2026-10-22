@@ -7,7 +7,7 @@ origin: pipeline
 domain: physics
 library: physics
 physical_scope: Interpretive limits for the phase-branch, coexistence, Clapeyron, and compact-mixture statements on this page; this remark establishes no universal critical or thermodynamic-limit result.
-dependency_level: 11
+dependency_level: 3
 deps:
   - def-td-phase-and-coexistence-domain
   - def-td-thermodynamic-limit-contract
@@ -41,10 +41,21 @@ verification:
 
 ## Remarks
 
-The branch theorems on this page require the stated smooth local charts. Here coexistence means an attained global entropy-maximizing endpoint on the exact feasible set of [[def-td-phase-and-coexistence-domain]]; equality of intensive phase data follows only for the bilateral exchanges assumed in the branch theorems and does not itself imply loss of chart regularity. The smooth-branch conclusions apply only on their specified C1 charts and interior composition domains. They supply no conclusion where a branch chart fails to be C1, a species amount reaches the composition boundary, or the specified coexistence-and-affinity Jacobian lacks its required nonsingular minor. In particular, [[pthm-td-clapeyron-local]] requires a nonzero molar-volume jump; when that jump vanishes, its local graph argument and quotient formula do not apply.
+The branch theorems on this page require the stated smooth local charts. Here coexistence means an attained global entropy-maximizing endpoint on the exact feasible set of *Phase branches and coexistence domains*; equality of intensive phase data follows only for the bilateral exchanges assumed in the branch theorems and does not itself imply loss of chart regularity. The smooth-branch conclusions apply only on their specified C1 charts and interior composition domains. They supply no conclusion where a branch chart fails to be C1, a species amount reaches the composition boundary, or the specified coexistence-and-affinity Jacobian lacks its required nonsingular minor. In particular, *Local Clapeyron slope on a regular pure-phase coexistence branch* requires a nonzero molar-volume jump; when that jump vanishes, its local graph argument and quotient formula do not apply.
 
-The compact-mixture result [[pthm-td-compact-continuous-phase-mixture]] requires a compact phase-generator domain, a continuous entropy map, a fixed barycenter, and feasibility of all probability mixtures with that barycenter. It supplies no attainment theorem for noncompact domains. Likewise, [[def-td-thermodynamic-limit-contract]] specifies the sequence and normalization for a limiting claim but proves no limit exists and no derivatives commute with that limit.
+The compact-mixture result *Attained entropy-maximizing mixtures on compact phase domains* requires a compact phase-generator domain, a continuous entropy map, a fixed barycenter, and feasibility of all probability mixtures with that barycenter. It supplies no attainment theorem for noncompact domains. Likewise, *Finite-state thermodynamic-limit contract* specifies the sequence and normalization for a limiting claim but proves no limit exists and no derivatives commute with that limit.
 
 A finite-state partition sum is finite and positive at each finite system size. A singular phase behavior therefore needs a separately specified limit or another model with a separately established domain and regularity analysis. This page does not assert a universal thermodynamic-limit theorem, ensemble equivalence, critical exponent, or physical applicability of the van der Waals equation.
 
-The local homogeneity used by [[pthm-td-clapeyron-local]] may be independently stipulated in a phase model or supplied on the separately designated common-law bulk branch under the local Euler theorem's inverse-chart and common-reference conditions. A constructed local Gibbs model need not be embedded in a global bulk cone to use the general conditional result. The added branch supplies no universal finite-size, long-range or gravitational extensivity and does not remove any smoothness, exchange or nonzero-volume-jump condition.
+The local homogeneity used by *Local Clapeyron slope on a regular pure-phase coexistence branch* may be independently stipulated in a phase model or supplied on the separately designated common-law bulk branch under the local Euler theorem's inverse-chart and common-reference conditions. A constructed local Gibbs model need not be embedded in a global bulk cone to use the general conditional result. The added branch supplies no universal finite-size, long-range or gravitational extensivity and does not remove any smoothness, exchange or nonzero-volume-jump condition.
+
+## Remarks references
+
+[[def-td-phase-and-coexistence-domain]]
+
+[[pthm-td-clapeyron-local]]
+
+[[pthm-td-compact-continuous-phase-mixture]]
+
+[[def-td-thermodynamic-limit-contract]]
+

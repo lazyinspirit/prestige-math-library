@@ -1,0 +1,650 @@
+{
+  "version": 1,
+  "scope": [
+    "def-emg-fx-conformal-seed",
+    "lem-emg-fx-conformal-constraints",
+    "prop-emg-fx-rn-isotropic-seed",
+    "ex-emg-fx-extremal-puncture-end",
+    "cex-emg-fx-wrong-electric-weight"
+  ],
+  "contracts": {
+    "def-emg-fx-conformal-seed": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition explicitly requires a nonempty seed manifold."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: psi is required positive; the remaining vector and tensor fields may vanish."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: psi=1 is admissible and reduces the metric and vector weights to identity values."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: zero trace-free tensor and zero fields remain admissible; no inverse beyond the positive metric and psi is used."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The definition has no interval or endpoint claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The definition selects no elements and uses no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Positive conformal factor, trace-free seed tensor and rescaled fields define a conformal datum; divergence, Hamiltonian, momentum and development equations are not imposed. This public claim is not a biconditional requiring a separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Positive conformal factor, trace-free seed tensor and rescaled fields define a conformal datum; divergence, Hamiltonian, momentum and development equations are not imposed. This public claim is not a biconditional requiring a separate reverse implication."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "step1-scaffolder",
+        "notes": "Checked object types, positivity, trace-free condition, SI-to-geometric conversion, component units, and the explicit absence of constraint or development claims."
+      }
+    },
+    "lem-emg-fx-conformal-constraints": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-emg-fx-conformal-seed",
+          "source_section": "Definition",
+          "quote": "h:=\\psi^4\\bar h,\\qquad K:=\\frac{\\tau}{3}h+\\psi^{-2}\\bar A,\\qquad E:=\\psi^{-6}\\bar E,\\qquad B:=\\psi^{-6}\\bar B",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.4",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-emg-constrained-electrovacuum-data",
+          "source_section": "Definition",
+          "quote": "R(h)+\\tau^2-|K|_h^2=2\\Lambda+\\frac{\\kappa}{\\mu_0}\\bigl(|e|_h^2+|b|_h^2\\bigr),",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-emg-geometric-scaling",
+          "source_section": "Definition",
+          "quote": "\\alpha:=\\sqrt{\\frac{\\kappa}{2\\mu_0}},\\qquad \\mathcal F:=\\alpha F",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-gr-constraint-equations-in-normal-frame",
+          "source_section": "Statement",
+          "quote": "Write $D$ for the Levi-Civita connection of $h$, $R^h$ for its curvature operator in the same operator convention as the ambient curvature, and $S_h$ for its scalar curvature.",
+          "uses": [
+            "1.4"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In any positively oriented coordinate chart, $\\det h=\\psi^{12}\\det\\bar h$, so $\\sqrt{\\det h}=\\psi^6\\sqrt{\\det\\bar h}$. The Levi-Civita formula and the determinant derivative give $\\Gamma^i{}_{ik}=\\partial_k\\log\\sqrt{\\det h}$, hence $D_iV^i=(\\sqrt{\\det h})^{-1}\\partial_i(\\sqrt{\\det h}\\,V^i)$ for every smooth vector field $V$. Substituting $V=E=\\psi^{-6}\\bar E$ and then $V=B=\\psi^{-6}\\bar B$ gives $D_iE^i=\\psi^{-6}\\bar D_i\\bar E^i$ and $D_iB^i=\\psi^{-6}\\bar D_i\\bar B^i$. Since $e=\\alpha^{-1}E$, $b=\\alpha^{-1}B$, and both factors are positive, the two SI divergence constraints are equivalent to the two barred divergence equations.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The oriented volume forms satisfy $\\operatorname{vol}_h=\\psi^6\\operatorname{vol}_{\\bar h}$. In coordinates, $(E\\times_hB)_i=(\\operatorname{vol}_h)_{ijk}E^jB^k=\\psi^{-6}(\\bar E\\times_{\\bar h}\\bar B)_i$. Also $|E|_h^2=\\psi^{-8}|\\bar E|_{\\bar h}^2$ and $|B|_h^2=\\psi^{-8}|\\bar B|_{\\bar h}^2$, by inserting $h_{ij}=\\psi^4\\bar h_{ij}$ and the two vector weights. Therefore $(\\kappa/\\mu_0)(|e|_h^2+|b|_h^2)=2\\psi^{-8}(|\\bar E|_{\\bar h}^2+|\\bar B|_{\\bar h}^2)$ and $(\\kappa/\\mu_0)(e\\times_hb)_i=2\\psi^{-6}(\\bar E\\times_{\\bar h}\\bar B)_i$, using [F3].",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Taking the $h$-trace of $K=(\\tau/3)h+\\psi^{-2}\\bar A$ gives $\\operatorname{tr}_hK=\\tau+\\psi^{-6}\\bar h^{ij}\\bar A_{ij}=\\tau$, because $\\bar A$ is trace-free. In the squared norm, the cross term between $(\\tau/3)h$ and $\\psi^{-2}\\bar A$ vanishes by the same trace condition; the pure trace term is $\\tau^2/3$, and the trace-free term is $\\psi^{-12}|\\bar A|_{\\bar h}^2$. Thus $|K|_h^2=\\tau^2/3+\\psi^{-12}|\\bar A|_{\\bar h}^2$.",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "claim": "Put $u=2\\log\\psi$, so $h=e^{2u}\\bar h$. In a chart, metric compatibility and torsion-freeness give $\\Gamma[h]^k{}_{ij}=\\tfrac12h^{k\\ell}(\\partial_i h_{j\\ell}+\\partial_j h_{i\\ell}-\\partial_\\ell h_{ij})$, hence $C^k{}_{ij}:=\\Gamma[h]^k{}_{ij}-\\Gamma[\\bar h]^k{}_{ij}=\\delta^k_i u_j+\\delta^k_j u_i-\\bar h_{ij}u^k$. Expanding the curvature definition and contracting gives $\\operatorname{Ric}(h)_{ij}=\\operatorname{Ric}(\\bar h)_{ij}+\\bar D_kC^k{}_{ij}-\\bar D_iC^k{}_{kj}+C^k{}_{ij}C^\\ell{}_{k\\ell}-C^k{}_{i\\ell}C^\\ell{}_{kj}$. Here $C^k{}_{kj}=3u_j$, $\\bar D_kC^k{}_{ij}=2\\bar D_i u_j-\\bar h_{ij}\\bar\\Delta u$, and $\\bar D_iC^k{}_{kj}=3\\bar D_i u_j$ because $du$ is closed. Expanding the products gives $C^k{}_{ij}C^\\ell{}_{k\\ell}=6u_i u_j-3\\bar h_{ij}|du|_{\\bar h}^2$ and $C^k{}_{i\\ell}C^\\ell{}_{kj}=5u_i u_j-2\\bar h_{ij}|du|_{\\bar h}^2$; tracing with $h^{ij}=\\psi^{-4}\\bar h^{ij}$ therefore yields $R(h)=\\psi^{-4}(\\bar R-4\\bar\\Delta u-2|du|_{\\bar h}^2)$. Substitution of $u=2\\log\\psi$ and $\\bar\\Delta\\log\\psi=\\psi^{-1}\\Delta_{\\bar h}\\psi-\\psi^{-2}|d\\psi|_{\\bar h}^2$ cancels the gradient-square terms and gives $R(h)=\\psi^{-5}(\\bar R\\psi-8\\Delta_{\\bar h}\\psi)$.",
+          "step": "1.4",
+          "inputs": [
+            "F1",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Substituting steps 1.3 and 1.4 into the left side of the SI Hamiltonian constraint [F2], and step 1.2 into its right side, gives $\\psi^{-5}(-8\\Delta_{\\bar h}\\psi+\\bar R\\psi)-\\psi^{-12}|\\bar A|_{\\bar h}^2+\\frac{2}{3}\\tau^2=2\\Lambda+2\\psi^{-8}(|\\bar E|_{\\bar h}^2+|\\bar B|_{\\bar h}^2)$. Multiplication by the positive $\\psi^5$ is reversible and yields exactly the transformed scalar equation in the Statement; step 1.1 gives the two equivalent Maxwell constraints.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "step 1.2",
+            "step 1.3",
+            "step 1.4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By step 1.2, the right side of the SI momentum constraint in [F2] is $-2\\psi^{-6}(\\bar E\\times_{\\bar h}\\bar B)_i$, which proves the displayed retained momentum equation. If $K=0$, its left side vanishes; if also $\\bar E\\times_{\\bar h}\\bar B=0$, its right side vanishes. No step has inferred this vector equation from the scalar constraint.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The seed definition requires a nonempty three-manifold."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.1 retain the identities when a seed field, tau, Abar, or Lambda vanishes; psi remains positive."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 is reversible because psi^5 is positive; at psi=1 the conformal equations reduce to the original constraints."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.1 allow vanishing Ebar, Bbar, and Abar and do not divide by their norms."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The lemma is pointwise on a smooth manifold and has no interval endpoint claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no selection and invokes no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Steps 1.1, 1.2, 2.1, and 3.1 transform every original divergence and Hamiltonian equation using positive psi and alpha."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.1 reverse the divergence identities and divide the Hamiltonian equation by positive psi^5."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "three-dimensional conformal scalar curvature",
+          "status": "checked",
+          "evidence": "Step 1.4 traces the connection-difference Ricci formula and cancels both gradient-square terms to obtain R(h)=psi^-5(bar R psi-8 Delta_bar psi)."
+        },
+        {
+          "name": "field and trace weights",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 1.3 use h_ij=psi^4 bar h_ij, E^i=psi^-6 bar E^i, and trace-free bar A to obtain the displayed powers."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "step1-scaffolder",
+        "notes": "Checked the SI coefficient through alpha squared, the curvature sign against the induced-constraint supplier, the contravariant field weight, the covariant A weight, and that momentum remains an independent equation."
+      }
+    },
+    "prop-emg-fx-rn-isotropic-seed": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-emg-fx-conformal-seed",
+          "source_section": "Definition",
+          "quote": "h:=\\psi^4\\bar h,\\qquad K:=\\frac{\\tau}{3}h+\\psi^{-2}\\bar A,\\qquad E:=\\psi^{-6}\\bar E,\\qquad B:=\\psi^{-6}\\bar B",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-emg-fx-conformal-constraints",
+          "source_section": "Statement",
+          "quote": "-8\\Delta_{\\bar h}\\psi+\\bar R\\,\\psi-|\\bar A|_{\\bar h}^2\\psi^{-7}+\\left(\\frac{2}{3}\\tau^2-2\\Lambda\\right)\\psi^5-2\\left(|\\bar E|_{\\bar h}^2+|\\bar B|_{\\bar h}^2\\right)\\psi^{-3}=0.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-emg-xs-rn-data",
+          "source_section": "Definition",
+          "quote": "f(r):=1-\\frac{2M}{r}+\\frac{Q^2}{r^2}\\ne0\\qquad(r\\in J).",
+          "uses": [
+            "3.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $C:=m^2-q^2$ and $w:=\\psi^2$. Since $2r+m>0$, the condition $w>0$ is equivalent to $2r+m>|q|$, giving exactly $\\mathcal D_{m,q}$. Thus $\\psi$ is smooth and positive there. In Euclidean spherical coordinates, $\\bar D_i\\bar E^i=r^{-2}\\partial_r(r^2 q r^{-2})=0$, while $\\bar D_i\\bar B^i=0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "On this domain $w:=\\psi^2=1+m/r+C/(4r^2)$, $w'=-m/r^2-C/(2r^3)$, and $w''=2m/r^3+3C/(2r^4)$. Since $\\Delta_{\\mathbb R^3}\\psi=\\psi''+2\\psi'/r$, $\\psi'/\\psi=w'/(2w)$ and $\\psi''/\\psi=w''/(2w)-(w')^2/(4w^2)$ give $\\Delta_{\\mathbb R^3}\\psi/\\psi=(w''/2+w'/r)/w-(w')^2/(4w^2)=(Cw/r^4-(w')^2)/(4w^2)=-q^2/(4r^4w^2)$; here $w''/2+w'/r=C/(4r^4)$ and direct expansion gives $Cw/r^4-(w')^2=-q^2/r^4$. Thus $\\Delta_{\\mathbb R^3}\\psi=-q^2/(4r^4\\psi^3)$. With $\\bar R=0$, $\\bar A=\\tau=\\Lambda=\\bar B=0$, the transformed scalar equation is $-8\\Delta\\psi-2q^2r^{-4}\\psi^{-3}=0$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The seed Gauss constraint holds by step 1.1, and step 1.2 verifies the Hamiltonian equation. The momentum right side vanishes because $\\bar B=0$, and its left side vanishes because $K=\\tau=0$. The omitted point $r=0$ is not in the manifold, so the smooth divergence calculation on $\\mathcal D_{m,q}\\times S^2$ makes no distributional assertion at the puncture.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Suppose $m>|q|$, so $C>0$ and $r_0=\\sqrt C/2$. Then $R_{\\rm areal}=r+m+C/(4r)$, $R'_{\\rm areal}=1-C/(4r^2)$, and $R''_{\\rm areal}=C/(2r^3)>0$. Hence $R_{\\rm areal}$ has its unique minimum on $(0,\\infty)$ at $r_0$, with value $m+\\sqrt C$. The area formula follows directly from the induced metric on $S_r$, namely $r^2\\psi^4\\gamma_{S^2}$.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The outward unit normal to $S_r$ is $\\nu=\\psi^{-2}\\partial_r$. Its mean curvature, defined as the trace of the second fundamental form, is $H=\\operatorname{div}_h\\nu=(\\sqrt{\\det h})^{-1}\\partial_r(\\sqrt{\\det h}\\,\\psi^{-2})=2R'_{\\rm areal}/(\\psi^2R_{\\rm areal})$. Thus $H(r_0)=0$, and $H$ is nonzero for every other centered coordinate sphere.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "Write $r_0^2=C/4$ and $R=R_{\\rm areal}(r)$. On $r>r_0$, $R>m+2r_0$, so $f(R)>0$. Direct algebra gives $R^2f(R)=(R-m)^2-C=(r-r_0^2/r)^2$ and $dR/dr=1-r_0^2/r^2=(r-r_0^2/r)/r$. Therefore $f(R)^{-1}(dR/dr)^2=R^2/r^2=\\psi^4$, which proves that $h=\\psi^4dr^2+R^2\\gamma_{S^2}$ equals the radial and angular spatial metric in [F3] on this branch.",
+          "step": "3.2",
+          "inputs": [
+            "F3",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "As $r\\to\\infty$, $\\psi^4=1+2m/r+O(r^{-2})$; differentiating this explicit rational expression for $\\psi^4$ gives first- and second-coordinate-derivative falloffs $O(r^{-2})$ and $O(r^{-3})$. For the inner end put $\\tilde r=r_0^2/r$. Then $\\psi(r)^2r^2/r_0^2=1+m/\\tilde r+r_0^2/\\tilde r^2=\\psi(\\tilde r)^2$ and $dr^2+r^2\\gamma_{S^2}=(r^4/r_0^4)(d\\tilde r^2+\\tilde r^2\\gamma_{S^2})$. Hence the inner metric is exactly the same isotropic form in $\\tilde r$, and it has the same falloff and derivative estimates. This proves the two stated end descriptions without extending the static areal chart through $f=0$.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The hypotheses m>0 and the positive radial domain exclude an empty data manifold."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 remains valid at q=0 and gives the harmonic uncharged isotropic factor."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: at m=|q|>0 the positive domain is still (0,infinity); no nonextreme minimal-sphere claim is made there."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.2 proves the unique coordinate minimum only for m>|q|, while the constraint verification also includes m=|q|."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof 1.1 excludes the zero/negative conformal-factor boundary. In the nonextreme branch, Proof 4.1 treats r to infinity and r down to zero using inverted coordinates; Proof 3.2 compares the static RN metric only on r>r0, without extending its chart through f=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The coordinate calculations use no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Statement defines minimality as H=0. Proof 3.1 gives H=2R_areal prime/(psi^2 R_areal); the denominator is positive and Proof 2.2 gives the unique root R_areal prime=0 at r0. Thus minimal implies r=r0. Proof 1.1 also derives w>0 implies 2r+m>|q| on the positive radial half-line."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "At r=r0, Proof 2.2 gives R_areal prime=0; Proof 3.1 then gives H=0, hence minimality by the stated convention. Conversely to the positive-domain calculation, r>r_* makes 2r+m>|q| and therefore w>0 in Proof 1.1."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "radial Hamiltonian identity",
+          "status": "checked",
+          "evidence": "Step 1.2 differentiates w=1+m/r+(m^2-q^2)/(4r^2) and verifies Delta psi=-q^2/(4r^4 psi^3)."
+        },
+        {
+          "name": "nonextreme coordinate sphere",
+          "status": "checked",
+          "evidence": "Steps 2.2 and 3.1 give R_areal'=1-(m^2-q^2)/(4r^2), its unique zero r0, and H(r0)=0."
+        },
+        {
+          "name": "RN areal-coordinate match",
+          "status": "checked",
+          "evidence": "Step 3.2 verifies f(R)^-1(dR/dr)^2=psi^4 on r>r0 with f>0."
+        },
+        {
+          "name": "inner-end inversion",
+          "status": "checked",
+          "evidence": "Step 4.1 substitutes tilde r=r0^2/r and reproduces the same positive conformal factor and Euclidean falloff."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "step1-scaffolder",
+        "notes": "Checked the exact positivity domain, signed charge convention, source-free punctured manifold, Hamiltonian substitution, minimal-sphere condition, areal radius, both end limits, and restricted RN exterior coordinate match."
+      },
+      "current_boundary_worksheet": {
+        "proposal": "research/physics-non-fluid-129-2026-10-21-r2-owner-step2-boundary-proposal-2/proposal.json",
+        "source_sha256": "5bbffaa8bc6bffc4d43316c14725fc739a1d6bd22d035d15fc9353250395bd35",
+        "qualification": "Released complete current source/eight-case semantic worksheet; root transcribed exact current rows. No independent acceptance or finite computation asserted."
+      }
+    },
+    "ex-emg-fx-extremal-puncture-end": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "prop-emg-fx-rn-isotropic-seed",
+          "source_section": "Statement",
+          "quote": "Let $m>0$ be a geometric mass length, let $q\\in\\mathbb R$ be a signed geometric electric-charge length, and define\n\n$$r_*:=\\max\\left\\{0,\\frac{|q|-m}{2}\\right\\},\\qquad \\mathcal D_{m,q}:=(r_*,\\infty),\\qquad \\psi(r):=\\sqrt{\\left(1+\\frac{m}{2r}\\right)^2-\\frac{q^2}{4r^2}}\\quad(r\\in\\mathcal D_{m,q}),$$\n\nwhere the square root is positive. On $\\Sigma=\\mathcal D_{m,q}\\times S^2$, use the Euclidean seed metric $\\bar h=dr^2+r^2\\gamma_{S^2}$, with $\\gamma_{S^2}$ the unit round metric, and set\n\n$$\\bar E=q\\,r^{-2}\\partial_r,\\qquad \\bar B=0,\\qquad \\bar A=0,\\qquad \\tau=0,\\qquad \\Lambda=0.$$\n\nWith $h=\\psi^4\\bar h$, $K=0$, $E=\\psi^{-6}\\bar E$, and $B=0$, the exact transformed equations are\n\n$$\\bar D_i\\bar E^i=0,\\qquad \\bar D_i\\bar B^i=0,\\qquad -8\\Delta_{\\bar h}\\psi-2|\\bar E|_{\\bar h}^2\\psi^{-3}=0,$$\n\nand the separate momentum equation is $0=-2\\psi^{-6}(\\bar E\\times_{\\bar h}\\bar B)_i$. They are satisfied by the displayed fields, so the corresponding SI-convention data satisfy the original constraints. The puncture $r=0$ is omitted from $\\Sigma$, so the assertion concerns smooth equations on this domain and introduces no delta-function source there.\n\nFor $m>|q|$, $\\mathcal D_{m,q}=(0,\\infty)$. The centered coordinate sphere $S_r=\\{r\\}\\times S^2$ has area $4\\pi R_{\\rm areal}(r)^2$, where\n\n$$R_{\\rm areal}(r):=r\\psi(r)^2=r+m+\\frac{m^2-q^2}{4r}.$$\n\nOn each $S_r$, the outward unit normal is $\\nu:=\\psi^{-2}\\partial_r$. Define its mean-curvature scalar by $H:=\\operatorname{div}_h\\nu$; by convention here, $S_r$ is minimal exactly when $H(r)=0$. Its mean curvature vanishes exactly at $r_0=\\frac12\\sqrt{m^2-q^2}$, where $R_{\\rm areal}(r_0)=m+\\sqrt{m^2-q^2}$. Both ends are asymptotically Euclidean in the following explicit sense. In the Euclidean seed Cartesian coordinates $x^i=r n^i$ with $n\\in S^2$, the $r\\to\\infty$ end has $h_{ij}=\\left(1+2m/r+O(r^{-2})\\right)\\delta_{ij}$, $\\partial_kh_{ij}=O(r^{-2})$, and $\\partial_\\ell\\partial_kh_{ij}=O(r^{-3})$. For the inner end define inverted Cartesian coordinates $\\tilde x^i:=(r_0^2/r^2)x^i$, whose radius is $\\tilde r:=|\\tilde x|=r_0^2/r$; the same metric and derivative falloffs hold as $r\\downarrow0$ in these coordinates. On the branch $r>r_0$, put $R:=R_{\\rm areal}(r)$. The comparator spatial metric is\n\n$$h_{\\rm RN}^{\\rm spatial}:=f(R)^{-1}dR\\otimes dR+R^2\\gamma_{S^2},\\qquad f(R):=1-\\frac{2m}{R}+\\frac{q^2}{R^2},$$\n\nwith $R>m+\\sqrt{m^2-q^2}$ and hence $f(R)>0$; the spatial metric $h$ agrees with this static Reissner–Nordström exterior metric under the displayed areal-radius coordinate. These statements make no global event-horizon or maximal-extension claim.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Substituting $q^2=m^2$ into the conformal factor gives $\\psi^2=(1+m/(2r))^2-m^2/(4r^2)=1+m/r$, which is positive for every $r>0$. Therefore $\\rho=r\\psi^2=r+m$ and $\\rho'(r)=1$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The radial line element of $h=\\psi^4(dr^2+r^2\\gamma_{S^2})$ is $\\psi^2dr=(1+m/r)dr$. Since $s'(r)=1+m/r=\\psi^2>0$, $s$ is a proper radial coordinate; moreover $s\\to-\\infty$ as $r\\downarrow0$ and $s\\to+\\infty$ as $r\\to\\infty$, so its range is $\\mathbb R$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Replacing $\\psi^4dr^2$ by $ds^2$ and using $\\rho=r+m$ gives $h=ds^2+\\rho(s)^2\\gamma_{S^2}$. As $s\\to-\\infty$, $r(s)\\to0$, so $\\rho(s)^2\\to m^2$ and the spherical coefficient converges to that of the product cylinder of radius $m$.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The unit normal to $S_r$ is $\\nu=\\psi^{-2}\\partial_r$. Its mean curvature is $H=\\operatorname{div}_h\\nu=2\\rho'/(\\psi^2\\rho)=2r/(r+m)^2>0$ for every $r>0$. Thus no centered coordinate sphere is minimal, while the infinite negative range of $s$ proves that the puncture is an infinite-distance cylindrical end.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "m=|q|>0 gives the nonempty radial manifold (0,infinity) times S2."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 gives psi squared 1+m/r>0 and areal radius at least m>0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1-4.1 treat one puncture and every centered sphere on the full positive radial interval."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 is exactly q squared equals m squared; no nonextreme throat formula is used."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1 compute the r to zero infinite-distance and cylindrical limits explicitly."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The example uses explicit parameters and coordinates, with no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example asserts direct properties, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example asserts direct properties, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "extremal conformal-factor substitution",
+          "status": "checked",
+          "evidence": "Step 1.1 cancels the two m^2/(4r^2) terms and leaves psi squared exactly 1+m/r."
+        },
+        {
+          "name": "proper radial coordinate",
+          "status": "checked",
+          "evidence": "Step 2.1 differentiates s and obtains ds/dr=psi^2; its logarithm diverges at r=0."
+        },
+        {
+          "name": "limiting sphere radius",
+          "status": "checked",
+          "evidence": "Step 3.1 gives the exact sphere coefficient (r(s)+m)^2 tending to m^2."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "step1-scaffolder",
+        "notes": "Checked the equal-mass/charge substitution, proper-distance coordinate, product-cylinder limit, and strict positivity of the mean curvature of every centered sphere."
+      }
+    },
+    "cex-emg-fx-wrong-electric-weight": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-emg-fx-conformal-constraints",
+          "source_section": "Statement",
+          "quote": "The exact vector divergence identities are $D_iE^i=\\psi^{-6}\\bar D_i\\bar E^i$ and $D_iB^i=\\psi^{-6}\\bar D_i\\bar B^i$. The separate momentum constraint remains",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The seed vector $\\bar E=\\partial_x$ has Euclidean divergence $\\bar D_i\\bar E^i=\\partial_x(1)=0$, so it satisfies the source-free seed Gauss condition. The function $\\psi=e^x$ is smooth and positive on all of $\\mathbb R^3$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If instead one assigns the unscaled vector $E=\\bar E$, then $\\sqrt{\\det h}=\\psi^6=e^{6x}$ and the coordinate divergence formula gives $D_iE^i=(\\sqrt{\\det h})^{-1}\\partial_i(\\sqrt{\\det h}\\,E^i)=e^{-6x}\\partial_x(e^{6x})=6$. Thus the claimed universal preservation fails: this smooth field violates $D_iE^i=0$ everywhere.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The correct conformal field is $E=\\psi^{-6}\\bar E=e^{-6x}\\partial_x$, for which step 1.1's seed identity gives $D_iE^i=e^{-6x}\\bar D_i\\bar E^i=0$. Hence the counterexample isolates the missing vector weight and uses no singular source at a removed point.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample domain is the nonempty manifold R3."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 fixes a nonzero seed vector; if it were zero, this would not violate Gauss law."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement/step 1.1: the chosen factor psi=e^x is nonconstant; for psi=1 the unscaled assignment would have zero divergence."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 use smooth fields on all R3 and have no singular boundary or puncture."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The counterexample is defined on all R3 and has no parameter interval endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All fields and coordinates are explicitly specified."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The counterexample refutes a universal preservation assertion, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The counterexample refutes a universal preservation assertion, not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "unscaled electric divergence",
+          "status": "checked",
+          "evidence": "Step 2.1 computes (e^{6x})^-1 partial_x(e^{6x})=6 exactly."
+        },
+        {
+          "name": "correct electric weight",
+          "status": "checked",
+          "evidence": "Step 3.1 inserts e^{-6x} and obtains zero divergence from the seed identity."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "step1-scaffolder",
+        "notes": "Checked the smooth positive conformal factor, divergence-free nonzero seed, determinant weight, and nonzero divergence under the incorrect assignment."
+      }
+    }
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "phase": "impact-initial-pass-2",
+  "round": 1,
+  "unit": "3",
+  "input_sha256": "f6094f1cb89a44d7f2a527713519f6e55b4c46a1412d7cb344d3d956f4d241bd",
+  "decisions": [],
+  "reviews": [
+    {
+      "id": "ex-emx-reciprocity-not-time-reversal",
+      "disposition": "unaffected",
+      "post_sha256": "c3b49f262781051821b1ad69bed51edc7e2c8f02ee5b462d63ef1c74e1b5c08c",
+      "review_context_sha256": "9944f7d91a2b0ac2736516c0eadf944edee4ce9cfd37d28c272c5b0f6d373847",
+      "reason": "L1 and verification 1.1 use the general bounded-C1-domain reciprocity identity for complex transpose-symmetric coefficients, conditional on the corresponding C1 solutions. The supplier's added finite-band restriction applies only to its separate lossless anisotropic specialization, which this example does not use. AC_omega is explicit. For the single strictly damped oscillator, the current susceptibility supplier gives the stated harmonic amplitude and positive imaginary permittivity; the denominator stays positive at resonance. Verification 2.1 correctly averages the real harmonic fields to Re(j_osc dot e*)/2 = omega Im(epsilon)|e|^2/2 in W/m^3. The conjugation in this average is distinct from bilinear reciprocity. The conclusion remains a local conditional model calculation, with no global existence, measurement or time-reversal claim. The item carrier and owning contract require no correction.",
+      "uncertain": false,
+      "source_urls": [
+        "https://engineering.purdue.edu/wcchew/ece604f19/Lecture%20Notes/Lect30.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "supporting_evidence": {
+    "research/physics-non-fluid-129-2026-10-21-r2-owner-step5-support-index.json": "0e5ab24286891cecba2dd2a7573f9221608d1307d7624db5e1fb22bc4093bf9b",
+    "research/physics-non-fluid-129-2026-10-21-r2-step5-v2/step5-v2-impact-initial-r1-u2.json": "cc0edb83bbe6da9793b3ade4bd466f1412eb2d6a2f1c23fb5a245dd407b5f94c"
+  },
+  "repair_notes": {
+    "status": "Completed assigned current consumer review; no source or metadata edits necessary.",
+    "affected_use": {
+      "supplier": "pthm-emx-lorentz-reciprocity",
+      "consumer": "ex-emx-reciprocity-not-time-reversal",
+      "locations": ["Facts & Assumptions L1", "Verification 1.1"],
+      "disposition": "unaffected",
+      "evidence": "The current supplier Statement retains the arbitrary fixed-real-frequency identity for continuous complex symmetric tensors. Its finite positive-frequency band qualifies only the additional real positive lossless anisotropic branch. Scalar complex Lorentz permittivity times I_3 and real positive scalar permeability satisfy the unchanged general coefficient condition. Constant coefficients may be restricted to any bounded C1 domain; existence of C1 phasor solutions is expressly conditional. Neither this consumer nor its exact L1 contract excerpt invokes the specialized branch."
+    },
+    "examined_carriers": [
+      "items/ex-emx-reciprocity-not-time-reversal.md: complete current item, including both verification steps and physical_scope",
+      "items/pthm-emx-lorentz-reciprocity.md: complete current Statement, Facts, proof and qualifications",
+      "items/def-emx-reciprocal-phasor-medium.md: complete current fixed-frequency definition and bilinear conventions",
+      "items/pthm-emx-lorentz-susceptibility.md: complete current Statement and proof; only harmonic particular-solution and pointwise-loss clauses used here",
+      "items/def-countable-choice.md: current definition and explanatory scope",
+      "research/physics-non-fluid-129-2026-10-21-r2-batch-6.proof-contracts.json: assigned example's citations, derivations, supplier excerpts and boundary records"
+    ],
+    "source_reading": [
+      {
+        "url": "https://engineering.purdue.edu/wcchew/ece604f19/Lecture%20Notes/Lect30.pdf",
+        "locator": "Section 30.1 through 30.1.1, printed pp. 299-302, PDF pp. 1-4; equations (30.1.1)-(30.1.12) and the conditions-for-reciprocity paragraph.",
+        "use": "Read the complete relevant tensor-cancellation and bounded-volume argument, including conductive media. This source uses exp(+j omega t); independently checked the current local exp(-i omega t) equations and cancellation. The extracted first equality in (30.1.7) contains a divergence/curl typo; the local supplier uses the correct cross-product divergence identity and the derivation was checked directly. No source claim about time reversal is used.",
+        "retrieval_limit": "The item's cited 2023-2024 complete-text URL timed out in this session. The authoritative 2019 lecture section was retrieved and read instead; no retrieval of the cited complete text, Kong or Beisert is claimed."
+      }
+    ],
+    "support_reuse": "The root support index has no entry for this subject or its changed reciprocity supplier, and no root-published supplements were present. The prior impact-initial unit-2 report's supplier review and exact consumer-use referral were read as navigation evidence and credited here. Its focused-use conclusion was checked against the complete current consumer and supplier, not adopted as a current native review or attributed source retrieval.",
+    "choice_and_empirical_scope": "AC_omega remains explicitly assumed as required by the relevant suppliers. The example uses no susceptibility Hilbert-transform or integrable-convolution conclusion and therefore imports no DC-dependent clause. Positive damping, positive frequency and nonzero amplitude are essential for strict positive work. The calculation gives a prescribed local harmonic particular solution and makes no empirical assertion.",
+    "diagram_review": "The assigned item contains no TikZ or tikzcd diagram. Its scalar response and period-average argument need no diagram to supply a missing definition or deduction.",
+    "focused_checks": [
+      {
+        "command": "node tools/physics-support/proof-contract.mjs research/physics-non-fluid-129-2026-10-21-r2-batch-6.proof-contracts.json --strict --items ex-emx-reciprocity-not-time-reversal --json",
+        "exit_code": 0,
+        "result": "ok:true; assigned item checked; no errors or warnings."
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/physics-support/precheck.mts --json items/ex-emx-reciprocity-not-time-reversal.md",
+        "exit_code": 0,
+        "result": "One file checked, zero failures, direct strategy pass; no proposed repair."
+      },
+      {
+        "command": "node tools/physics-support/rendercheck.mjs items/ex-emx-reciprocity-not-time-reversal.md --json",
+        "exit_code": 0,
+        "result": "One file checked; no errors or warnings."
+      },
+      {
+        "command": "node tools/physics-support/step5-workflow.mjs review-contexts --run physics-non-fluid-129-2026-10-21-r2 --items ex-emx-reciprocity-not-time-reversal",
+        "exit_code": 0,
+        "result": "Run immediately after completing the mathematical review. Both returned hashes are copied unchanged into the review; the post guard equals the frozen assignment before guard."
+      }
+    ],
+    "public_interface_changes": [],
+    "metadata_changes": [],
+    "ledger_updates": [],
+    "published_consumer_supplier_ledger": "No new mathematical finding or published maintenance need was found in the assigned use; no canonical ledger update is necessary.",
+    "remaining_obligations": [],
+    "next_action": "Controller collection and current-context coverage remain native workflow responsibilities. This report asserts no certification, judge verdict or independent acceptance."
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "id": "def-qsmx-information-conventions",
+  "original_claim_verbatim": "Read all seven listed scope carriers and the batch-101 producer def-qsmx-information-conventions as required dependency context; its current hash matches the batch-101 post-reader snapshot, whose findings are empty. Checked the MPS construction, transfer-state extension, truncation and entropy arguments, clustering proof, GHZ computation, page inventories, relevant suppliers, and cited MPS source passages. I did not re-audit the full transitive proofs of published mathematical suppliers.",
+  "original_observed_source_raw_sha256": "032a188857d8ce8c7a4d51d17f0769443902518a81ecc17b814c1e5ebd36414d",
+  "exact_original_context_source_from_log": "---\nid: def-qsmx-information-conventions\nkind: definition\ntitle: Dimensionless entropy, mutual and conditional information\nstatus: draft\norigin: pipeline\npipeline_run: physics-non-fluid-129-2026-10-21-r2\ndomain: mathematics\nlibrary: physics\ndependency_level: 0\ndeps:\n  - def-qc-density-operator\n  - def-it-von-neumann-entropy\n  - def-it-finite-dimensional-quantum-relative-entropy\n  - def-qc-partial-trace\n  - lem-it-partial-traces-of-a-state-are-states\ndependency_roles:\n  def-qc-density-operator: mathematical-premise\n  def-it-von-neumann-entropy: mathematical-premise\n  def-it-finite-dimensional-quantum-relative-entropy: mathematical-premise\n  def-qc-partial-trace: mathematical-premise\n  lem-it-partial-traces-of-a-state-are-states: mathematical-premise\nproof_strategy: direct\nprovenance:\n  statement: ai-altered\n  proof: ai-generated\nsources:\n  references:\n    - title: John Watrous, The Theory of Quantum Information, Chapter 5, \u00a75.2.1, author-hosted manuscript\n      url: https://cs.uwaterloo.ca/~watrous/TQI/TQI.5.pdf\n    - title: Mark M. Wilde, From Classical to Quantum Shannon Theory, Chapter 11, \u00a7\u00a711.1 and 11.6, second-edition prepublication full text\n      url: https://arxiv.org/pdf/1106.1445v8\nverification:\n  precheck: pass\n---\n\n## Definition\n\nAll Hilbert spaces in this item are nonzero and finite-dimensional over $\\mathbb C$. A density operator $\\rho$ on $H$ is a Hermitian positive semidefinite endomorphism with $\\operatorname{Tr}\\rho=1$. Its dimensionless von Neumann entropy, in nats, is\n\n$$S(\\rho):=-\\operatorname{Tr}(\\rho\\log\\rho)=-\\sum_{j:\\lambda_j>0}\\lambda_j\\log\\lambda_j,$$\n\nwhere $\\lambda_j$ are the eigenvalues of $\\rho$, the logarithm is natural, and $0\\log0:=0$. For any positive semidefinite endomorphisms $X,Y$ on one finite-dimensional $H$, let $\\operatorname{supp}X:=(\\ker X)^\\perp$. Define\n\n$$D(X\\|Y):=\\operatorname{Tr}(X\\log X)-\\operatorname{Tr}(X\\log Y)$$\n\nwhen $\\operatorname{supp}X\\subseteq\\operatorname{supp}Y$, taking each logarithm spectrally on its positive support and setting zero-eigenvalue contributions to zero; set $D(X\\|Y):=+\\infty$ otherwise. For density operators this is the finite-dimensional quantum relative entropy in nats.\n\nFor a density operator $\\rho_{AB}$ on the ordered product $H_A\\otimes H_B$, define $\\rho_A:=\\operatorname{Tr}_B\\rho_{AB}$ and $\\rho_B:=\\operatorname{Tr}_A\\rho_{AB}$, where in orthonormal product bases $\\bigl(\\operatorname{Tr}_B R\\bigr)_{ii'}=\\sum_jR_{(i,j),(i',j)}$ and the first factor is retained. Define\n\n$$I(A:B)_\\rho:=S(\\rho_A)+S(\\rho_B)-S(\\rho_{AB}).$$\n\nFor a density operator $\\rho_{ABC}$ on $H_A\\otimes H_B\\otimes H_C$, define\n\n$$\\rho_{AB}:=\\operatorname{Tr}_C\\rho_{ABC},\\qquad \\rho_{BC}:=\\operatorname{Tr}_A\\rho_{ABC},\\qquad \\rho_B:=\\operatorname{Tr}_A(\\operatorname{Tr}_C\\rho_{ABC}),$$\n\nwhere each partial trace contracts the indicated tensor factor and retains the other factors in their displayed order.\n\n$$I(A:C\\mid B)_\\rho:=S(\\rho_{AB})+S(\\rho_{BC})-S(\\rho_B)-S(\\rho_{ABC}),$$\n\nusing the partial traces in the displayed factor order. For any fixed positive conversion factor $k_B$ with units J/K, the corresponding physical entropy is $S_{\\mathrm{phys}}(\\rho):=k_BS(\\rho)$; no numerical value of $k_B$ is specified here.\n\n## Definition references\n\n[[def-qc-density-operator]]\n\n[[def-it-von-neumann-entropy]]\n\n[[def-it-finite-dimensional-quantum-relative-entropy]]\n\n[[def-qc-partial-trace]]\n\n[[lem-it-partial-traces-of-a-state-are-states]]\n\n## Facts & Assumptions\n\n**Given:** Nonzero finite-dimensional complex inner-product spaces $H_A,H_B,H_C$ and density operators on the tensor products appearing in the Definition. Use the ordered tensor factors displayed there and natural logarithms.\n\n[F1] [[def-qc-density-operator]]: a density operator is Hermitian positive semidefinite and has trace one.\n\n[F2] [[def-it-von-neumann-entropy]]: for a finite density operator, $S(\\rho)=-\\operatorname{Tr}(\\rho\\log\\rho)$ with zero eigenvalues contributing $0\\log0:=0$.\n\n[F3] [[def-it-finite-dimensional-quantum-relative-entropy]]: $D(X\\|Y)$ uses support inclusion and support-restricted logarithms; it is $+\\infty$ when support inclusion fails.\n\n[F4] [[def-qc-partial-trace]]: the second tensor factor is contracted by summing its equal row and column indices in an ordered product basis.\n\n[F5] [[lem-it-partial-traces-of-a-state-are-states]]: both marginals of a finite bipartite density operator are density operators.\n\n\n## Proof\n\n1.1 By [F1], the input is a positive trace-one endomorphism on its finite tensor product. Apply [F5] to each bipartite grouping of a finite multipartite density operator; this makes every one-factor and two-factor marginal used in the Definition a density operator. Repeated partial traces use [F4] to retain the stated tensor-factor order. [given, F1, F4, F5]\n\n2.1 Each such density operator has finitely many eigenvalues in $[0,1]$, so the finite entropy sum in [F2] is a real number, including when some eigenvalues vanish. The relative entropy clause is defined on exactly the two support cases in [F3]. Therefore $I(A:B)$ and $I(A:C\\mid B)$ are finite real-valued functions on the stated density operators, and $D$ has the extended-real domain specified in the Definition. [given, F2, F3, step 1.1, algebra] \u220e\n",
+  "post_reader101_guard": {
+    "path": "research/physics-non-fluid-129-2026-10-21-r2-step3-hash-101-post.json",
+    "raw_sha256": "467b715c266991f13232f627fd3aeffea819e9edf2197ef0404f7d77b1ea48dd"
+  },
+  "original_log_cat_line": 16918,
+  "current_source": {
+    "path": "items/def-qsmx-information-conventions.md",
+    "raw_sha256": "d91a0b3d93f895d81573e87c17955cbaf43ccff9874c32d5075fdd00ee87a852"
+  },
+  "source_has_changed_since_original_read": true,
+  "definition_public_interface_unchanged": true,
+  "change_summary": "Current producer adds def-qc-first-factor-partial-trace to deps/references, adds F6 for its exact coordinate formula, and uses F6 in proof 1.1; entropy definition used by the batch-103 consumer is unchanged. This is a separate completed native-101 repair, not coverage invented here.",
+  "producer": {
+    "batch": "101",
+    "scope_guard": {
+      "path": "research/physics-non-fluid-129-2026-10-21-r2-step3-scope-101.json",
+      "raw_sha256": "1fdf076ee37b9bd57af45ff0821482454c7487916623862f1e80c4c221d936ea"
+    },
+    "native101_writer_observed": {
+      "stage": "3a-adjudicate",
+      "role": "alpha",
+      "label": "3a-batch-101",
+      "covers": [
+        "101"
+      ],
+      "attempt": 1,
+      "attempts": 1,
+      "startedAt": "2026-10-21T23:46:17.710Z",
+      "endedAt": "2026-10-21T23:52:08.621Z",
+      "lastExitOk": true
+    },
+    "status": "draft"
+  },
+  "consumer_reachability": {
+    "consumer": "thm-qsmx-schmidt-mps-error",
+    "source_guard": {
+      "path": "items/thm-qsmx-schmidt-mps-error.md",
+      "raw_sha256": "4d570a81eef737e62ffcee64660459fb2442da085b2cf079b0f3e420909a25d9"
+    },
+    "edge": "direct declared deps",
+    "exact_used_fact": "[F5]: for finite density matrix rho, S(rho)=-sum_{lambda_j>0}lambda_j log(lambda_j) in nats, with 0 log 0=0; partial trace contracts the stated tensor factors.",
+    "focused_disposition": "Current producer retains this exact entropy convention. Its added first-factor proof support does not change the consumer-used definition. No separate consumer edit is indicated by this supplier clarification; ordinary native current-context obligations remain root-owned."
+  },
+  "offscope_scientific_findings": []
+}

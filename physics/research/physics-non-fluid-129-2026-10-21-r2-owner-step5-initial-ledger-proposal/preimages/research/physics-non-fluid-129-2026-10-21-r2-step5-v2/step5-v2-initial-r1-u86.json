@@ -1,0 +1,146 @@
+{
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "phase": "initial",
+  "round": 1,
+  "unit": "86",
+  "input_sha256": "eaf0a68d231b0a7d0d042df337974eaab597dfd3432daa3ad0aaeebd32fe188c",
+  "decisions": [
+    {
+      "id": "lem-csm-frontier-finite-response-covariance",
+      "model": "gpt-6-luna",
+      "context_sha256": "d1ab331df7fa48ae896e7856962518897c489844aa84e33afe1817f7f0865dd9",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The title omitted beta, whereas the Statement and all three proof steps correctly derive beta times covariance. Positive finite Z and the exponential, chain, finite-sum and quotient rules establish the displayed identity for every real t. Corrected the title only; the theorem and proof were already sound.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-csm-frontier-ising-explicit-contraction",
+      "model": "gpt-6-luna",
+      "context_sha256": "6692fbd985d1389266bafe66ad328c487ba408df419630b07ef28995ecc4e324",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The two-field paragraph asserted that the specified common envelope has row sums below 1 without retaining 2d tanh(beta|J|)<1. Its row sum is exactly 2d tanh(beta|J|); at d=1, beta=1, J=1 it exceeds 1, so the cited comparison theorem cannot be invoked. Repeated the strict hypothesis in that paragraph and its conclusion, preserving the unconditional influence estimate.",
+      "uncertain": false,
+      "source_urls": [
+        "https://arxiv.org/pdf/1308.4117"
+      ],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-csm-frontier-finite-response-covariance",
+      "disposition": "repaired",
+      "post_sha256": "3bcdb18fa714c4c40acad309cba71ebdde5f82d79ba0ba8ad5577b750840a660",
+      "review_context_sha256": "e0928f44d9f000ba5dccde797a7a5886448889d0c473aa6e0132663ffe6bce96",
+      "reason": "Reviewed the complete local proof and four direct suppliers: all functions are on finite E, Z(t)>0 everywhere, weight derivatives are beta M times the weights, and quotient differentiation yields beta Cov(F,M). Singleton E and constant or zero observables are included; no choice or limit exchange is used. Title repaired to state the actual beta factor. Statement, dependencies, proof and owning contract remain unchanged. Rechecked the exact owning title mirror after its locked update; the mathematical interface is unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-csm-frontier-ising-explicit-contraction",
+      "disposition": "repaired",
+      "post_sha256": "8649d37a5b18fe655db0782f659dae6edc598d5acc859b6e78d0ce03774aeef7",
+      "review_context_sha256": "990ccf42354b65486e1ebf92fc6bf35b761499be105ac6abb24f0be8d1ae8808",
+      "reason": "Reviewed all four verification steps, the full published influence proof, influence definitions, and complete local comparison argument. Finite sums give positive measurable proper kernels; splitting energy at Delta proves consistency. The Bernoulli tanh bound is independent of the real field at each site, so unbounded profiles cause no local gap. Counting 2d neighbors yields the common radius-one envelope; under the restored strict inequality every comparison hypothesis holds. J=0 and equality exclusion are handled. Rechecked the exact owning Example mirror after its locked update; it retains every construction and the unconditional influence bound.",
+      "uncertain": false,
+      "source_urls": [
+        "https://arxiv.org/pdf/1308.4117"
+      ],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "propose_fixed_finding",
+      "subject": "lem-csm-frontier-finite-response-covariance",
+      "severity": "nonfatal",
+      "reason": "The display title omitted beta although the exact Statement and proof already included it. The title and its owning manifest mirror now include beta; no mathematical claim changed.",
+      "uncertain": false
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "propose_fixed_finding",
+      "subject": "ex-csm-frontier-ising-explicit-contraction",
+      "severity": "fatal",
+      "defect_type": "logic",
+      "reason": "The two-field comparison paragraph asserted strict contraction without its required hypothesis. Restored 2d tanh(beta|J|)<1 explicitly in that paragraph and conclusion; the owning description mirror agrees. This is distinct from the historical specification-construction finding.",
+      "uncertain": false
+    },
+    {
+      "ledger": "research/published-consumer-supplier-ledger.md",
+      "action": "no_update",
+      "reason": "Neither repair changes a published supplier. The corrected Example has no item consumers, and its examples page only lists its ID. No potentially defective published use was identified.",
+      "uncertain": false
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "completed_items": [
+      "lem-csm-frontier-finite-response-covariance",
+      "ex-csm-frontier-ising-explicit-contraction"
+    ],
+    "source_reading": "Read Rebeschini and van Handel, arXiv:1308.4117, section 2.3 Corollary 2.6 and its reduction to Theorem 2.4, plus section 2.4 Corollary 2.8 conditions, PDF pages 8\u201310. These confirm the influence/resolvent and strict contraction requirements. Did not retrieve the Friedli\u2013Velenik book or the paper main proof; local comparison and published influence arguments were read completely. The support index contains no assigned-subject entry.",
+    "manifest_repairs": {
+      "path": "research/physics-non-fluid-129-2026-10-21-r2-batch-86.pages.json",
+      "fields": [
+        "lemma title",
+        "example statement"
+      ],
+      "evidence": "Under the shared write lock, reread the owning manifest, changed only the two assigned fields to mirror the repaired items, and checked the stored values. No contract proof text or dependency changed."
+    },
+    "focused_checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/physics-support/precheck.mts items/lem-csm-frontier-finite-response-covariance.md items/ex-csm-frontier-ising-explicit-contraction.md",
+        "exit_code": 0,
+        "result": "2 checked, 0 failing."
+      },
+      {
+        "command": "node tools/physics-support/rendercheck.mjs items/lem-csm-frontier-finite-response-covariance.md items/ex-csm-frontier-ising-explicit-contraction.md --json",
+        "exit_code": 0,
+        "result": "2 checked, no errors or warnings."
+      },
+      {
+        "command": "node tools/physics-support/proof-contract.mjs research/physics-non-fluid-129-2026-10-21-r2-batch-86.proof-contracts.json --strict --items lem-csm-frontier-finite-response-covariance,ex-csm-frontier-ising-explicit-contraction",
+        "exit_code": 0,
+        "result": "2/2 items checked, no errors or warnings."
+      },
+      {
+        "command": "node tools/physics-support/proof-layout.mjs items/lem-csm-frontier-finite-response-covariance.md items/ex-csm-frontier-ising-explicit-contraction.md",
+        "exit_code": 0,
+        "result": "2 items, 7 steps, 0 defects."
+      }
+    ],
+    "review_contexts": "Captured each review immediately after its item repair. After checking the two exact manifest field updates, reviewed their effects and captured both current contexts together; hashes were unchanged.",
+    "interface_and_consumers": [
+      {
+        "id": "lem-csm-frontier-finite-response-covariance",
+        "change": "Title only; Statement and proof unchanged.",
+        "affected_use": "The direct consumer thm-csm-frontier-high-temperature-susceptibility already quotes beta Cov(F,M) in F6. No propagation is triggered by this title correction.",
+        "disposition": "unaffected"
+      },
+      {
+        "id": "ex-csm-frontier-ising-explicit-contraction",
+        "change": "Example comparison paragraph now explicitly retains the existing strict criterion.",
+        "affected_use": "Search of all current items and library pages found no direct item consumer. library/classical-statistical-mechanics/csm-frontier-quantitative-dlr-examples.md only places the example in its examples list and contains no prose.",
+        "disposition": "page_placement_unaffected"
+      }
+    ],
+    "diagrams": "Neither assigned item contains a diagram or needs one for these scalar calculations. The influence supplier diagram has j to k labelled C_kj and k to i labelled C_ik, consistent with (C^2)_ij.",
+    "tooling_probe": {
+      "command": "node tools/physics-support/content-policy.mjs --help",
+      "exit_code": 1,
+      "diagnosis": "This CLI has no help flag and interpreted --help as a manifest path. No content check ran; the invocation was read-only and is not reported as a passing validation."
+    },
+    "scope": "Both assigned items are draft members of the frozen frontier and are not mathematical imports. No published carrier, source snapshot, contract proof, shared ledger, judge stamp or workflow state was edited. No new prerequisite or gate diagnostic was assigned."
+  },
+  "supporting_evidence": {
+    "research/physics-non-fluid-129-2026-10-21-r2-batch-86-step5-context.json": "99409b7c5e0860e60ec99a39ccaa8d99e28bca3b986fa36cd036b03ee6ccaa0b"
+  }
+}

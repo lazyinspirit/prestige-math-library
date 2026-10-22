@@ -1,0 +1,14 @@
+--- a/tools/physics-support/step5-frontier-gate.test.mjs
++++ b/tools/physics-support/step5-frontier-gate.test.mjs
+@@ -197,3 +197,11 @@
+     assert.deepEqual(gate.ownerReviewInputs, [f.path]);
+   }
+ });
++
++test('open-problem recognition cannot turn a retained finding or unknown code into success', () => {
++  const f = freezeFrontier({ run: 'demo', batches: [{ id: '1', items: ['op-owned'] }] });
++  const owned = projectFrontierGate('risk-report', raw({ errors: [{ id: 'op-owned', code: 'item-missing' }] }, 0), f, ['op-owned', 'op-outside']);
++  assert.equal(owned.code, 1); assert.match(owned.scopeError, /exit disagrees/);
++  const unknown = projectFrontierGate('risk-report', raw({ errors: [{ id: 'op-outside', code: 'unknown-code' }] }), f, ['op-owned', 'op-outside']);
++  assert.equal(unknown.code, 1); assert.equal(unknown.frontierScope.global.length, 1);
++});

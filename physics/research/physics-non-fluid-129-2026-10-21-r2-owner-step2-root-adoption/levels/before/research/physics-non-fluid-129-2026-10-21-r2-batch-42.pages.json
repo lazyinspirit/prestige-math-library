@@ -1,0 +1,777 @@
+[
+  {
+    "order": 781,
+    "id": "gr-fx14-holonomy-and-discrete-geometric-interface",
+    "kind": "A",
+    "category": "general-relativity",
+    "library": "physics",
+    "title": "Holonomy and discrete geometric interfaces",
+    "companion": "gr-fx14-holonomy-and-discrete-geometric-interface-examples",
+    "requires": [
+      "gr-fx13-tetrads-and-lorentz-spin",
+      "gr-fx12-covariant-phase-space",
+      "complete-reducibility-for-compact-groups",
+      "gauge-groups-and-representation-theory-interfaces",
+      "relations-functions-and-quotients",
+      "hurewicz-whitehead-freudenthal-and-cw-approximation",
+      "the-fundamental-group",
+      "the-fundamental-group-of-the-circle",
+      "the-seifert-van-kampen-theorem",
+      "the-zfc-axioms-and-basic-set-constructions",
+      "categories-functors-and-natural-transformations",
+      "free-groups-and-presentations",
+      "hilbert-space-geometry-and-riesz-representation",
+      "unitary-representations-positive-type-and-gns",
+      "haar-measure-existence-and-uniqueness",
+      "bounded-linear-operators-and-quotient-spaces",
+      "characters-and-the-orthogonality-relations"
+    ],
+    "items": [
+      {
+        "id": "thm-qftx-cw-fundamental-group-presentation",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "A finite CW complex has the edge-and-2-cell presentation",
+        "reference": "research/frontier-expansion-2026-10-19/quantum-field-theory/prose-scaffold.md#qftx-finite-group-bf--finite-group-bf-state-sums-gauge-groupoids-and-gluing",
+        "design_state": "Locally authored A-page prerequisite or intermediate result required by the assigned finite-group BF proof route; complete statement and proof are recorded on the owning page.",
+        "dependency_level": 0,
+        "deps": [
+          "def-based-loops-and-fundamental-group",
+          "lem-cw-quotients-and-collapse-of-a-contractible-subcomplex",
+          "thm-fundamental-group-of-finite-wedge-of-circles",
+          "thm-seifert-van-kampen",
+          "thm-fundamental-group-of-the-circle"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-based-loops-and-fundamental-group": "mathematical-premise",
+          "lem-cw-quotients-and-collapse-of-a-contractible-subcomplex": "mathematical-premise",
+          "thm-fundamental-group-of-finite-wedge-of-circles": "mathematical-premise",
+          "thm-seifert-van-kampen": "mathematical-premise",
+          "thm-fundamental-group-of-the-circle": "mathematical-premise"
+        },
+        "inventory_expansion_required": true,
+        "statement": "Let $K$ be a finite connected CW complex, let $v_0$ be a vertex, and let $T$ be a maximal tree in its 1-skeleton. Choose one orientation of each 1-cell outside $T$. For each such edge $e:u\\to v$, let $x_e$ be the based loop that follows $T$ from $v_0$ to $u$, traverses $e$, and returns along $T$ from $v$ to $v_0$. For every 2-cell $f$, choose a point on its attaching circle and a path in the 1-skeleton from $v_0$ to its image; the resulting based attaching loop has a unique reduced word $r_f$ in the free basis $(x_e)$. Then",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Allen Hatcher, Algebraic Topology, Chapter 1, §1.2 Applications to Cell Complexes and §1.A Graphs and Free Groups",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/AT%2B.pdf",
+              "locator": "Proposition 1.26, PDF pp. 49–51, for attaching 2-cells and higher cells; Proposition 1A.2, PDF pp. 83–85, for the maximal-tree basis."
+            }
+          ]
+        },
+        "library": "mathematics",
+        "strategy": "1.1 The 1-skeleton of a connected CW complex is connected: attaching a cell of dimension at least two has connected attaching sphere, so it cannot join two components of the preceding skeleton. Since $K$ is finite, its 1-skeleton is a finite connected graph. The unique paths in $T$ contract it to $v_0$, supplying the contraction required by [F2]. The quotient that collapses $T$ to a point is a wedge with one circle for each 1-cell outside $T$, and [F3] gives the free basis represented by the loops $x_e$. [given, F2, F3, construct]",
+        "proof_strategy": "direct",
+        "verification": {
+          "precheck": "pending"
+        }
+      },
+      {
+        "id": "def-gr-fx-thin-paths",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Piecewise-smooth paths and thin homotopies",
+        "reference": "items/def-gr-fx-thin-paths.md#definition",
+        "design_state": "Step 1 local prerequisite expansion; complete statement and proof authored before consumers.",
+        "deps": [
+          "def-smooth-manifold",
+          "def-smooth-map-between-manifolds-with-boundary",
+          "def-smooth-singular-simplex",
+          "lem-the-set-of-functions-between-two-sets-is-a-set",
+          "def-axiom-schema-of-separation",
+          "def-equivalence-relation"
+        ],
+        "dependency_roles": {
+          "def-smooth-manifold": "mathematical-premise",
+          "def-smooth-map-between-manifolds-with-boundary": "mathematical-premise",
+          "def-smooth-singular-simplex": "mathematical-premise",
+          "lem-the-set-of-functions-between-two-sets-is-a-set": "mathematical-premise",
+          "def-axiom-schema-of-separation": "mathematical-premise",
+          "def-equivalence-relation": "mathematical-premise"
+        },
+        "inventory_expansion_required": true,
+        "dependency_level": 0,
+        "statement": "Let $M$ be a smooth manifold and $U\\subseteq M$ open. A **piecewise-smooth path** in $U$ is a continuous map $\\gamma:[0,1]\\to U$ for which some finite partition $0=t_0<t_1<\\cdots<t_n=1$ makes every restriction $\\gamma|_{[t_{j-1},t_j]}$ smooth as a map of manifolds with boundary. Its source and target are $\\gamma(0)$ and $\\gamma(1)$. The collection of all such paths is a set: it is a subset, defined by separation, of the function set from $[0,1]$ to $U$.\n\nTwo paths $\\gamma_0,\\gamma_1$ with the same source $x$ and target $y$ are **thin-homotopic**, written $\\gamma_0\\sim_{\\mathrm{thin}}\\gamma_1$, if there is a continuous map $H:[0,1]^2\\to U$ and a finite subdivision of the square into compact curvilinear triangles such that $H$ is smooth up to each triangle's boundary, $H(0,t)=\\gamma_0(t)$, $H(1,t)=\\gamma_1(t)$, $H(s,0)=x$, $H(s,1)=y$, and $\\operatorname{rank}(dH_{(s,t)})\\le 1$ on every smooth triangle. A **curvilinear triangle** here is a compact region $D$ equipped with a specified homeomorphism $\\psi:\\Delta^2\\to D$ from the standard closed two-simplex which is a smooth embedding on the interior, extends smoothly to a neighborhood of $\\Delta^2$ in its affine span, and maps the three edges of $\\Delta^2$ to the three boundary arcs of $D$. Saying $H$ is smooth up to $D$'s boundary means that $H\\circ\\psi$ extends smoothly from $\\Delta^2$ to an open neighborhood of $\\Delta^2$ in its affine span, with values in $U$; equivalently, it is a smooth singular $2$-simplex under the neighborhood-extension convention of [[def-smooth-singular-simplex]]. The rank is the dimension of the image of the differential from the two-dimensional tangent space of the triangle to $T_{H(s,t)}M$, computed through the interior chart $\\psi$ and extended to boundary points by these smooth extensions. The quotient by this relation is used only after its equivalence and compatibility properties are proved.\n\n",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Urs Schreiber and Konrad Waldorf, Parallel Transport and Functors, §2.1, Definitions 2.1–2.2",
+              "url": "https://arxiv.org/pdf/0705.0452"
+            }
+          ]
+        },
+        "physical_scope": null,
+        "library": "physics"
+      },
+      {
+        "id": "prop-gr-fx-thin-path-quotient-groupoid",
+        "kind": "proposition",
+        "domain": "mathematics",
+        "title": "Thin path classes form a groupoid",
+        "reference": "items/prop-gr-fx-thin-path-quotient-groupoid.md#statement",
+        "design_state": "Step 1 local prerequisite expansion; complete statement and proof authored before consumers.",
+        "deps": [
+          "def-gr-fx-thin-paths",
+          "def-equivalence-relation",
+          "def-category",
+          "def-isomorphism-groupoid-and-connected-category"
+        ],
+        "dependency_roles": {
+          "def-gr-fx-thin-paths": "mathematical-premise",
+          "def-equivalence-relation": "mathematical-premise",
+          "def-category": "mathematical-premise",
+          "def-isomorphism-groupoid-and-connected-category": "mathematical-premise"
+        },
+        "inventory_expansion_required": true,
+        "dependency_level": 1,
+        "statement": "Let $M$ be a smooth manifold and $U\\subseteq M$ open. For composable piecewise-smooth paths $\\gamma:x\\to y$ and $\\delta:y\\to z$ in $U$, define $\\delta*\\gamma:[0,1]\\to U$ by $(\\delta*\\gamma)(t)=\\gamma(2t)$ for $0\\le t\\le\\tfrac12$ and $(\\delta*\\gamma)(t)=\\delta(2t-1)$ for $\\tfrac12\\le t\\le1$. Thus $\\delta*\\gamma$ traverses $\\gamma$ first and then $\\delta$. A groupoid means a category in which every morphism is an isomorphism.\n\nThen thin homotopy is an equivalence relation on each set of piecewise-smooth paths with fixed endpoints, and concatenation respects the equivalence classes. Tag a morphism by its endpoints and its path class. With objects the points of $U$, morphisms $x\\to y$ the tagged classes $[\\gamma]$ from $x$ to $y$, composition $[\\delta]\\circ[\\gamma]=[\\delta*\\gamma]$, identity the class of the constant path, and inverse $[\\gamma]^{-1}=[\\bar\\gamma]$ where $\\bar\\gamma(t)=\\gamma(1-t)$, the resulting category is a groupoid.\n\n",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Urs Schreiber and Konrad Waldorf, Parallel Transport and Functors, §2.1, Definition 2.2 and Lemma 2.3",
+              "url": "https://arxiv.org/pdf/0705.0452"
+            }
+          ]
+        },
+        "physical_scope": null,
+        "library": "physics"
+      },
+      {
+        "id": "def-gr-fx-thin-path-groupoid",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Thin path groupoid",
+        "reference": "items/def-gr-fx-thin-path-groupoid.md#definition",
+        "design_state": "Step 1 local prerequisite expansion; complete statement and proof authored before consumers.",
+        "deps": [
+          "def-gr-fx-thin-paths",
+          "prop-gr-fx-thin-path-quotient-groupoid",
+          "def-equivalence-relation",
+          "def-category"
+        ],
+        "dependency_roles": {
+          "def-gr-fx-thin-paths": "mathematical-premise",
+          "prop-gr-fx-thin-path-quotient-groupoid": "mathematical-premise",
+          "def-equivalence-relation": "mathematical-premise",
+          "def-category": "mathematical-premise"
+        },
+        "inventory_expansion_required": true,
+        "dependency_level": 2,
+        "statement": "A **groupoid** is a category in which every morphism has a two-sided inverse. For an open subset $U$ of a smooth manifold, the **thin path groupoid** $\\Pi^{\\mathrm{thin}}_1(U)$ is the category whose objects are the points of $U$ and whose morphisms from $x$ to $y$ are tagged triples $(x,y,[\\gamma])$, where $[\\gamma]$ is a thin-homotopy class of piecewise-smooth paths from $x$ to $y$; composition, identities, and inverses are those of Proposition [[prop-gr-fx-thin-path-quotient-groupoid]].",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Urs Schreiber and Konrad Waldorf, Parallel Transport and Functors, §2.1, Definition 2.4",
+              "url": "https://arxiv.org/pdf/0705.0452"
+            }
+          ]
+        },
+        "physical_scope": null,
+        "library": "physics"
+      },
+      {
+        "id": "prop-gr-fx-s1-loop-noncontractible",
+        "kind": "proposition",
+        "domain": "mathematics",
+        "title": "The once-around circle path is not thin-contractible",
+        "reference": "items/prop-gr-fx-s1-loop-noncontractible.md#statement",
+        "design_state": "Step 1 local prerequisite expansion; complete statement and proof authored before consumers.",
+        "deps": [
+          "def-gr-fx-thin-path-groupoid",
+          "def-gr-fx-thin-paths",
+          "thm-a-regular-level-set-is-an-embedded-submanifold",
+          "def-smooth-differential-k-form",
+          "def-exterior-derivative-by-the-invariant-vector-field-formula",
+          "def-pullback-of-a-differential-form",
+          "prop-pullback-of-forms-is-smooth-functorial-and-preserves-wedges",
+          "def-smooth-singular-simplex",
+          "def-integral-of-a-form-over-a-smooth-singular-simplex",
+          "thm-stokes-theorem-for-smooth-singular-chains"
+        ],
+        "dependency_roles": {
+          "def-gr-fx-thin-path-groupoid": "mathematical-premise",
+          "def-gr-fx-thin-paths": "mathematical-premise",
+          "thm-a-regular-level-set-is-an-embedded-submanifold": "mathematical-premise",
+          "def-smooth-differential-k-form": "mathematical-premise",
+          "def-exterior-derivative-by-the-invariant-vector-field-formula": "mathematical-premise",
+          "def-pullback-of-a-differential-form": "mathematical-premise",
+          "prop-pullback-of-forms-is-smooth-functorial-and-preserves-wedges": "mathematical-premise",
+          "def-smooth-singular-simplex": "mathematical-premise",
+          "def-integral-of-a-form-over-a-smooth-singular-simplex": "mathematical-premise",
+          "thm-stokes-theorem-for-smooth-singular-chains": "mathematical-premise"
+        },
+        "inventory_expansion_required": true,
+        "dependency_level": 3,
+        "statement": "Let $S^1=\\{(x,y)\\in\\mathbb R^2:x^2+y^2=1\\}$ with its regular-level-set smooth structure. For $\\gamma(t)=(\\cos(2\\pi t),\\sin(2\\pi t))$, $0\\le t\\le1$, the morphism $[\\gamma]$ in $\\Pi^{\\mathrm{thin}}_1(S^1)$ is not the identity morphism at $(1,0)$.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Urs Schreiber and Konrad Waldorf, Parallel Transport and Functors, §2.1",
+              "url": "https://arxiv.org/pdf/0705.0452"
+            }
+          ]
+        },
+        "physical_scope": null,
+        "library": "physics"
+      },
+      {
+        "id": "prop-gr-fx-connection-path-transport-exists",
+        "kind": "proposition",
+        "domain": "mathematics",
+        "title": "Existence and uniqueness of transport along a piecewise-smooth path",
+        "reference": "items/prop-gr-fx-connection-path-transport-exists.md#statement",
+        "design_state": "Step 1 local prerequisite expansion; complete statement and proof authored before consumers.",
+        "deps": [
+          "lem-linear-matrix-odes-have-unique-global-solutions-on-a-given-interval"
+        ],
+        "dependency_roles": {
+          "lem-linear-matrix-odes-have-unique-global-solutions-on-a-given-interval": "mathematical-premise"
+        },
+        "inventory_expansion_required": true,
+        "dependency_level": 0,
+        "statement": "Let $n\\ge1$ and let $0=t_0<t_1<\\cdots<t_m=1$ be a finite partition. For each $j$, let $A_j:[t_{j-1},t_j]\\to M_n(\\mathbb R)$ be continuous. There is a unique continuous function $U:[0,1]\\to M_n(\\mathbb R)$ that is $C^1$ on each partition interval, satisfies $U'(t)=-A_j(t)U(t)$ in its interior, and has $U(0)=I_n$. Derivatives at interval endpoints are the corresponding one-sided derivatives.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, General Relativity, Cambridge Part III lecture notes, §3.3 Parallel transport",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/gr/grhtml/S3.html"
+            },
+            {
+              "title": "S. M. Carroll, Lecture Notes on General Relativity, arXiv:gr-qc/9712019v1, Chapter 3",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019"
+            }
+          ]
+        },
+        "physical_scope": null,
+        "library": "physics"
+      },
+      {
+        "id": "def-gr-fx-connection-path-transport",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Connection path transport",
+        "reference": "items/def-gr-fx-connection-path-transport.md#definition",
+        "design_state": "Planned claim authored with complete local argument or exact well-defined definition.",
+        "deps": [
+          "def-gr-fx-tetrad-spin-connection",
+          "prop-gr-fx-connection-path-transport-exists",
+          "def-gauge-group-of-a-smooth-principal-bundle"
+        ],
+        "dependency_roles": {
+          "def-gr-fx-tetrad-spin-connection": "mathematical-premise",
+          "prop-gr-fx-connection-path-transport-exists": "mathematical-premise",
+          "def-gauge-group-of-a-smooth-principal-bundle": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "dependency_level": 1,
+        "statement": "Let $M$ be a smooth time-oriented Lorentzian four-manifold, $U\\subseteq M$ a nonempty open set with a smooth tetrad, and $\\omega$ its Lorentz-connection matrix from [[def-gr-fx-tetrad-spin-connection]]. Assume the supplier's $\\mathrm{AC}_\\omega$ convention. For a piecewise-smooth path $\\gamma:[0,1]\\to U$, let $A_\\gamma(t)=\\omega_{\\gamma(t)}(\\dot\\gamma(t))$ on each smooth piece. By Proposition [[prop-gr-fx-connection-path-transport-exists]], there is a unique continuous piecewise-$C^1$ solution\n\n$$\\dot U_\\gamma(t)=-A_\\gamma(t)U_\\gamma(t),\\qquad U_\\gamma(0)=I_4.$$\n\nThe endpoint matrix $U_\\gamma(1)$ is the **connection path transport** in the chosen tetrad trivialization. It maps vector components at $\\gamma(0)$ to components at $\\gamma(1)$ under the convention of the supplier. A smooth local Lorentz frame change transforms this matrix by its endpoint frame matrices; it is a gauge transformation in the principal-bundle sense only if it extends to an automorphism over the identity as in [[def-gauge-group-of-a-smooth-principal-bundle]].",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, General Relativity, Cambridge Part III lecture notes, §3.3 Parallel transport",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/gr/grhtml/S3.html"
+            },
+            {
+              "title": "S. M. Carroll, Lecture Notes on General Relativity, arXiv:gr-qc/9712019v1, Chapter 3",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019"
+            }
+          ]
+        },
+        "physical_scope": null,
+        "library": "physics"
+      },
+      {
+        "id": "prop-gr-fx-thin-transport-invariance",
+        "kind": "proposition",
+        "domain": "mathematics",
+        "title": "Connection transport is invariant under thin homotopy",
+        "reference": "items/prop-gr-fx-thin-transport-invariance.md#statement",
+        "design_state": "Step 1 local prerequisite expansion; complete statement and proof authored before consumers.",
+        "deps": [
+          "def-gr-fx-thin-paths",
+          "def-gr-fx-connection-path-transport",
+          "def-gr-fx-tetrad-spin-connection",
+          "lem-linear-matrix-odes-have-unique-global-solutions-on-a-given-interval",
+          "thm-smooth-dependence-of-ode-solutions-on-parameters",
+          "def-based-loops-and-fundamental-group",
+          "thm-qftx-cw-fundamental-group-presentation",
+          "def-group-presentation",
+          "prop-normal-closure-is-products-of-conjugates"
+        ],
+        "dependency_roles": {
+          "def-gr-fx-thin-paths": "mathematical-premise",
+          "def-gr-fx-connection-path-transport": "mathematical-premise",
+          "def-gr-fx-tetrad-spin-connection": "mathematical-premise",
+          "lem-linear-matrix-odes-have-unique-global-solutions-on-a-given-interval": "mathematical-premise",
+          "thm-smooth-dependence-of-ode-solutions-on-parameters": "mathematical-premise",
+          "def-based-loops-and-fundamental-group": "mathematical-premise",
+          "thm-qftx-cw-fundamental-group-presentation": "mathematical-premise",
+          "def-group-presentation": "mathematical-premise",
+          "prop-normal-closure-is-products-of-conjugates": "mathematical-premise"
+        },
+        "inventory_expansion_required": true,
+        "dependency_level": 2,
+        "statement": "Under the assumptions of [[def-gr-fx-connection-path-transport]], if two piecewise-smooth paths $\\gamma_0,\\gamma_1:[0,1]\\to U$ are thin-homotopic in the sense of [[def-gr-fx-thin-paths]], then $U_{\\gamma_0}(1)=U_{\\gamma_1}(1)$ in the fixed tetrad trivialization.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Urs Schreiber and Konrad Waldorf, Parallel Transport and Functors, arXiv:0705.0452, §2.1 and Appendix B.3",
+              "url": "https://arxiv.org/pdf/0705.0452"
+            },
+            {
+              "title": "David Tong, General Relativity, Cambridge Part III lecture notes, §3.3.3",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/gr/grhtml/S3.html"
+            }
+          ]
+        },
+        "physical_scope": null,
+        "library": "physics"
+      },
+      {
+        "id": "prop-gr-fx-path-functor-and-gauge",
+        "kind": "proposition",
+        "domain": "mathematics",
+        "title": "Path transport composes and transforms covariantly",
+        "reference": "items/prop-gr-fx-path-functor-and-gauge.md#statement",
+        "design_state": "Planned claim authored with complete local argument or exact well-defined definition.",
+        "deps": [
+          "def-gr-fx-connection-path-transport",
+          "def-gr-fx-thin-path-groupoid",
+          "prop-gr-fx-thin-transport-invariance",
+          "def-gr-fx-tetrad-spin-connection",
+          "def-isomorphism-groupoid-and-connected-category",
+          "def-functor-and-contravariant-functor",
+          "def-linear-isomorphism-and-invertible-linear-map",
+          "def-category"
+        ],
+        "dependency_roles": {
+          "def-gr-fx-connection-path-transport": "mathematical-premise",
+          "def-gr-fx-thin-path-groupoid": "mathematical-premise",
+          "prop-gr-fx-thin-transport-invariance": "mathematical-premise",
+          "def-gr-fx-tetrad-spin-connection": "mathematical-premise",
+          "def-isomorphism-groupoid-and-connected-category": "mathematical-premise",
+          "def-functor-and-contravariant-functor": "mathematical-premise",
+          "def-linear-isomorphism-and-invertible-linear-map": "mathematical-premise",
+          "def-category": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "dependency_level": 3,
+        "statement": "For transport as in [[def-gr-fx-connection-path-transport]], with composition convention $[\\delta]\\circ[\\gamma]=[\\delta*\\gamma]$ meaning first traverse $\\gamma$ and then $\\delta$,\n\n$$U_{\\delta*\\gamma}(1)=U_\\delta(1)U_\\gamma(1),\\qquad U_{\\bar\\gamma}(1)=U_\\gamma(1)^{-1}.$$\n\nLet $E=(E_0,E_1,E_2,E_3)$ be the tetrad of [[def-gr-fx-connection-path-transport]]. For each $x\\in U$, let $E_x:\\mathbb R^4\\to T_xM$ send the standard basis vector $\\mathbf e_I$ to $E_I(x)$; because the tetrad vectors are a basis, $E_x$ is an invertible real-linear map, hence a linear isomorphism ([[def-linear-isomorphism-and-invertible-linear-map]]). A groupoid is a category in which every morphism is an isomorphism ([[def-isomorphism-groupoid-and-connected-category]]). Define the target groupoid $\\mathcal T(U)$ to have base-point-tagged objects $\\tau_x:=(x,T_xM)$ for $x\\in U$ and morphisms $\\tau_x\\to\\tau_y$ the tagged triples $(\\tau_x,\\tau_y,L)$ where $L:T_xM\\to T_yM$ is a real-linear isomorphism; identities and composition are tagged identity maps and ordinary composition ([[def-category]]). A covariant functor assigns objects and morphisms and preserves identities and composition ([[def-functor-and-contravariant-functor]]). The functor from the thin path groupoid [[def-gr-fx-thin-path-groupoid]] to $\\mathcal T(U)$ sends $x$ to $\\tau_x$ and sends $[\\gamma]:x\\to y$ to the tagged tangent-space arrow\n\n$$\\bigl(\\tau_x,\\tau_y,E_y\\,U_\\gamma(1)\\,E_x^{-1}\\bigr):\\tau_x\\longrightarrow\\tau_y.$$\n\nHere $U_\\gamma(1)$ acts on tetrad components, while $E_y$ and $E_x^{-1}$ convert between components and tangent vectors. Under the supplier convention $e'=\\Lambda e$, the component matrix in the changed local frame satisfies\n\n$$U'_{\\gamma}(1)=\\Lambda(\\gamma(1))U_\\gamma(1)\\Lambda(\\gamma(0))^{-1}.$$\n\n",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, General Relativity, Cambridge Part III lecture notes, §§3.3–3.4.2",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/gr/grhtml/S3.html"
+            },
+            {
+              "title": "Urs Schreiber and Konrad Waldorf, Parallel Transport and Functors, arXiv:0705.0452, §2.1",
+              "url": "https://arxiv.org/pdf/0705.0452"
+            }
+          ]
+        },
+        "physical_scope": null,
+        "library": "physics"
+      },
+      {
+        "id": "prop-gr-fx-small-loop-curvature",
+        "kind": "proposition",
+        "domain": "mathematics",
+        "title": "Small-loop transport recovers curvature",
+        "reference": "items/prop-gr-fx-small-loop-curvature.md#statement",
+        "design_state": "Planned claim authored with complete local argument or exact well-defined definition.",
+        "deps": [
+          "prop-gr-fx-path-functor-and-gauge",
+          "def-gr-fx-tetrad-spin-connection",
+          "def-gr-fx-connection-path-transport",
+          "prop-gr-fx-connection-path-transport-exists"
+        ],
+        "dependency_roles": {
+          "prop-gr-fx-path-functor-and-gauge": "mathematical-premise",
+          "def-gr-fx-tetrad-spin-connection": "mathematical-premise",
+          "def-gr-fx-connection-path-transport": "mathematical-premise",
+          "prop-gr-fx-connection-path-transport-exists": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "dependency_level": 4,
+        "statement": "Fix coordinate dimension $n\\ge2$ and matrix size $q\\ge1$, independently. Let $V\\subseteq\\mathbb R^n$ be an open coordinate domain, let $K\\subset V$ be compact with positive distance from $\\mathbb R^n\\setminus V$, and let $e_1,\\ldots,e_n$ be the standard basis of $\\mathbb R^n$. Let $\\omega=\\sum_{k=1}^n\\omega_k(x)\\,dx^k$ be a $C^2$ $M_q(\\mathbb R)$-valued connection one-form, with each $\\omega_k:V\\to M_q(\\mathbb R)$. Along each segment use the matrix ODE $U'=-\\omega(\\dot\\gamma)U$ and initial value $I_q$; existence and uniqueness for this fixed matrix size follow from [[prop-gr-fx-connection-path-transport-exists]]. For the tetrad connection of [[def-gr-fx-connection-path-transport]], take $q=4$. For $p\\in K$, distinct coordinate directions $i,j$, and sufficiently small positive $\\varepsilon$ so the square stays in $V$, define $\\gamma_\\varepsilon$ by traversing each straight side at constant speed over one quarter of $[0,1]$, in the order\n\n$$p\\to p+\\varepsilon e_i\\to p+\\varepsilon e_i+\\varepsilon e_j\\to p+\\varepsilon e_j\\to p.$$\n\nIts boundary orientation is positive for the ordered coordinate pair $(e_i,e_j)$.\n\n$$U_{\\gamma_\\varepsilon}(1)=I_q-\\varepsilon^2F_{ij}(p)+O(\\varepsilon^3),\\qquad F_{ij}=\\partial_i\\omega_j-\\partial_j\\omega_i+[\\omega_i,\\omega_j]\\in M_q(\\mathbb R).$$\n\nHere $I_q$ is the identity in $M_q(\\mathbb R)$ and fix a norm $\\|\\cdot\\|$ on that space satisfying $\\|AB\\|\\le\\|A\\|\\,\\|B\\|$ for all $A,B\\in M_q(\\mathbb R)$. The notation $O(\\varepsilon^3)$ means that the norm of the remainder is at most $C\\varepsilon^3$ for all sufficiently small positive $\\varepsilon$, with $C$ uniform for basepoints $p\\in K$.\n\n",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, General Relativity, Cambridge Part III lecture notes, §3.3.3 and §3.4.2",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/gr/grhtml/S3.html"
+            },
+            {
+              "title": "S. M. Carroll, Lecture Notes on General Relativity, arXiv:gr-qc/9712019v1, Chapter 3",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019"
+            }
+          ]
+        },
+        "physical_scope": null,
+        "library": "physics"
+      },
+      {
+        "id": "prop-gr-fx-su2-compact",
+        "kind": "proposition",
+        "domain": "mathematics",
+        "title": "SU(2) is a compact Hausdorff matrix group",
+        "reference": "items/prop-gr-fx-su2-compact.md#statement",
+        "design_state": "Step 1 local prerequisite expansion; complete statement and proof authored before consumers.",
+        "deps": [
+          "def-matrix-product-and-identity-matrix",
+          "def-determinant-of-a-square-matrix",
+          "thm-determinant-multiplicative",
+          "thm-heine-borel-rn",
+          "def-topological-group"
+        ],
+        "dependency_roles": {
+          "def-matrix-product-and-identity-matrix": "mathematical-premise",
+          "def-determinant-of-a-square-matrix": "mathematical-premise",
+          "thm-determinant-multiplicative": "mathematical-premise",
+          "thm-heine-borel-rn": "mathematical-premise",
+          "def-topological-group": "mathematical-premise"
+        },
+        "inventory_expansion_required": true,
+        "dependency_level": 0,
+        "statement": "Let $M_2(\\mathbb C)$ have its Euclidean topology as $\\mathbb R^8$, write $Q^\\dagger:=\\overline Q^{\\mathsf T}$ for conjugate transpose, and define\n\n$$SU(2)=\\{Q\\in M_2(\\mathbb C):Q^\\dagger Q=I_2,\\ \\det Q=1\\}.$$\n\nUnder matrix multiplication, $SU(2)$ is a compact Hausdorff topological group.\n\n",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Emmanuel Kowalski, An Introduction to the Representation Theory of Groups (2025), §5.2",
+              "url": "https://people.math.ethz.ch/~kowalski/representation-theory-2025.pdf"
+            },
+            {
+              "title": "John C. Baez, Spin Network States in Gauge Theory, arXiv:gr-qc/9411007, §2",
+              "url": "https://arxiv.org/pdf/gr-qc/9411007"
+            }
+          ]
+        },
+        "physical_scope": null,
+        "library": "physics"
+      },
+      {
+        "id": "def-gr-fx-discrete-holonomy-model",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Finite SU(2) graph holonomy model",
+        "reference": "items/def-gr-fx-discrete-holonomy-model.md#definition",
+        "design_state": "Planned claim authored with complete local argument or exact well-defined definition.",
+        "deps": [
+          "prop-gr-fx-su2-compact",
+          "lem-the-set-of-functions-between-two-sets-is-a-set",
+          "def-real-and-complex-inner-product-space",
+          "def-strongly-continuous-unitary-representation",
+          "def-trace-of-an-endomorphism"
+        ],
+        "dependency_roles": {
+          "prop-gr-fx-su2-compact": "mathematical-premise",
+          "lem-the-set-of-functions-between-two-sets-is-a-set": "mathematical-premise",
+          "def-real-and-complex-inner-product-space": "mathematical-premise",
+          "def-strongly-continuous-unitary-representation": "mathematical-premise",
+          "def-trace-of-an-endomorphism": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "dependency_level": 4,
+        "statement": "A **finite oriented graph** consists of finite vertex and edge sets $V,E$, source and target maps $s,t:E\\to V$, and a fixed-point-free involution $e\\mapsto\\bar e$ with $s(\\bar e)=t(e)$ and $t(\\bar e)=s(e)$. A **finite SU(2) graph configuration** assigns $g_e\\in SU(2)$ to every oriented edge and requires $g_{\\bar e}=g_e^{-1}$. A graph path is a finite composable edge word $e_1,\\ldots,e_n$; its holonomy is the later-left product $g_{e_n}\\cdots g_{e_1}$, and the empty path has holonomy $I_2$.\n\nA vertex gauge assignment is a function $h:V\\to SU(2)$. It acts on edge variables by\n\n$$g_e\\longmapsto g'_e=h_{t(e)}g_eh_{s(e)}^{-1}.$$\n\nA **finite-dimensional unitary representation** is a group homomorphism $\\rho:SU(2)\\to U(W)$ on a finite-dimensional complex inner-product space $W$ that is strongly continuous, meaning $g\\mapsto\\rho(g)w$ is continuous for each $w\\in W$. Here\n\n$$U(W):=\\{T\\in\\operatorname{GL}(W):\\langle Tv,Tw\\rangle=\\langle v,w\\rangle\\text{ for all }v,w\\in W\\},$$\n\nwith the operator-norm topology inherited from $\\operatorname{End}(W)$. In finite dimension, strong continuity is equivalent to continuity in this operator norm.\n\nFor a closed graph path $\\ell=(e_1,\\ldots,e_n)$, the associated **Wilson trace** is the basis-independent trace of the endomorphism of $W$ given by\n\n$$\\operatorname{Tr}\\bigl(\\rho(g_{e_n})\\cdots\\rho(g_{e_1})\\bigr).$$\n\nHere the trace of a finite-dimensional endomorphism is the trace of its matrix in any basis.\n\n",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John C. Baez, Spin Network States in Gauge Theory, arXiv:gr-qc/9411007, §2",
+              "url": "https://arxiv.org/pdf/gr-qc/9411007"
+            },
+            {
+              "title": "Emmanuel Kowalski, An Introduction to the Representation Theory of Groups (2025), §§2–3",
+              "url": "https://people.math.ethz.ch/~kowalski/representation-theory-2025.pdf"
+            }
+          ]
+        },
+        "physical_scope": null,
+        "library": "physics"
+      },
+      {
+        "id": "prop-gr-fx-discrete-wilson-trace",
+        "kind": "proposition",
+        "domain": "mathematics",
+        "title": "Wilson traces are invariant under vertex gauge transformations",
+        "reference": "items/prop-gr-fx-discrete-wilson-trace.md#statement",
+        "design_state": "Step 1 local prerequisite expansion; complete statement and proof authored before consumers.",
+        "deps": [
+          "def-gr-fx-discrete-holonomy-model"
+        ],
+        "dependency_roles": {
+          "def-gr-fx-discrete-holonomy-model": "mathematical-premise"
+        },
+        "inventory_expansion_required": true,
+        "dependency_level": 5,
+        "statement": "For every finite SU(2) graph configuration, continuous finite-dimensional unitary representation $\\rho$, closed graph path $\\ell$, and vertex gauge assignment $h$, the Wilson trace of $\\ell$ is unchanged by $g_e\\mapsto h_{t(e)}g_eh_{s(e)}^{-1}$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John C. Baez, Spin Network States in Gauge Theory, arXiv:gr-qc/9411007, §2",
+              "url": "https://arxiv.org/pdf/gr-qc/9411007"
+            },
+            {
+              "title": "Emmanuel Kowalski, An Introduction to the Representation Theory of Groups (2025), §§2–3",
+              "url": "https://people.math.ethz.ch/~kowalski/representation-theory-2025.pdf"
+            }
+          ]
+        },
+        "physical_scope": null,
+        "library": "physics"
+      },
+      {
+        "id": "prop-gr-fx-vertex-haar-projection",
+        "kind": "proposition",
+        "domain": "mathematics",
+        "title": "Finite graph vertex Haar averaging is an orthogonal projection",
+        "reference": "items/prop-gr-fx-vertex-haar-projection.md#statement",
+        "design_state": "Planned claim authored with complete local argument or exact well-defined definition.",
+        "deps": [
+          "def-gr-fx-discrete-holonomy-model",
+          "prop-gr-fx-su2-compact",
+          "def-axiom-of-choice",
+          "cor-normalized-haar-probability-on-a-compact-group",
+          "def-hilbert-space",
+          "def-real-and-complex-inner-product-space",
+          "def-strongly-continuous-unitary-representation",
+          "def-bounded-linear-operator",
+          "def-tensor-product-of-complex-representations",
+          "def-dual-complex-representation",
+          "def-haar-averaging-operator-on-hom-spaces",
+          "lem-haar-averaging-projects-onto-the-intertwiner-space",
+          "def-orthogonal-projection"
+        ],
+        "dependency_roles": {
+          "def-gr-fx-discrete-holonomy-model": "mathematical-premise",
+          "prop-gr-fx-su2-compact": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise",
+          "cor-normalized-haar-probability-on-a-compact-group": "mathematical-premise",
+          "def-hilbert-space": "mathematical-premise",
+          "def-real-and-complex-inner-product-space": "mathematical-premise",
+          "def-strongly-continuous-unitary-representation": "mathematical-premise",
+          "def-bounded-linear-operator": "mathematical-premise",
+          "def-tensor-product-of-complex-representations": "mathematical-premise",
+          "def-dual-complex-representation": "mathematical-premise",
+          "def-haar-averaging-operator-on-hom-spaces": "mathematical-premise",
+          "lem-haar-averaging-projects-onto-the-intertwiner-space": "mathematical-premise",
+          "def-orthogonal-projection": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "dependency_level": 5,
+        "statement": "Assume the full Axiom of Choice. Let a finite oriented graph be given, fix total orders on its finite vertex and edge sets, and for each edge $e$ choose a finite-dimensional strongly continuous unitary representation $\\rho_e:SU(2)\\to U(V_e)$. At a vertex $v$ set\n\n$$W_v=\\bigotimes_{t(e)=v}V_e\\;\\otimes\\!\\bigotimes_{s(e)=v}V_e^*,$$\n\nwhere the edge order induces the order on each factor list and an empty tensor product is $\\mathbb C$. Use the dual action $g\\cdot\\lambda=\\lambda\\circ\\rho_e(g^{-1})$ on $V_e^*$, with the dual Hilbert inner product determined by any orthonormal basis of $V_e$. On elementary tensors use the tensor-product inner product $\\langle\\bigotimes_i u_i,\\bigotimes_i w_i\\rangle=\\prod_i\\langle u_i,w_i\\rangle$, extended sesquilinearly. Let $R_v$ be the resulting diagonal unitary representation and define its fixed-vector subspace by\n\n$$W_v^{SU(2)}:=\\{w\\in W_v:R_v(g)w=w\\text{ for every }g\\in SU(2)\\}.$$\n\nAn orthogonal projection onto a subspace $S\\subseteq W_v$, regarded as an endomorphism of $W_v$, is the idempotent with range $S$ and kernel $S^\\perp$.\n\nFor the normalized Haar probability measure $\\mu$ on $SU(2)$,\n\n$$P_vw:=\\int_{SU(2)}R_v(g)w\\,d\\mu(g)$$\n\nis the orthogonal projection of $W_v$ onto its invariant subspace $W_v^{SU(2)}$. The vector integral is defined coordinatewise in the finite-dimensional space, equivalently by the weak integral in [[def-haar-averaging-operator-on-hom-spaces]]. On the coefficient space $W=\\bigotimes_{v\\in V}W_v$, with vertex order fixed as above, the operators $P_v$ acting on their respective vertex factors commute, and $\\prod_{v\\in V}P_v$ projects onto the tensors invariant at every vertex. This is a finite kinematic projection; it imposes no Hamiltonian or continuum constraint.\n\n",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John C. Baez, Spin Network States in Gauge Theory, arXiv:gr-qc/9411007, §2",
+              "url": "https://arxiv.org/pdf/gr-qc/9411007"
+            },
+            {
+              "title": "Emmanuel Kowalski, An Introduction to the Representation Theory of Groups (2025), §§5.2.1 and 5.2.11",
+              "url": "https://people.math.ethz.ch/~kowalski/representation-theory-2025.pdf"
+            }
+          ]
+        },
+        "physical_scope": null,
+        "library": "physics"
+      }
+    ]
+  },
+  {
+    "order": 782,
+    "id": "gr-fx14-holonomy-and-discrete-geometric-interface-examples",
+    "kind": "B",
+    "category": "general-relativity",
+    "library": "physics",
+    "title": "Holonomy and discrete geometric interfaces — Examples",
+    "companion": "gr-fx14-holonomy-and-discrete-geometric-interface",
+    "requires": [
+      "gr-fx14-holonomy-and-discrete-geometric-interface"
+    ],
+    "items": [
+      {
+        "id": "ex-gr-fx14-1",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "Holonomy and discrete geometric interfaces — flat local transport with global holonomy",
+        "reference": "items/ex-gr-fx14-1.md#statement",
+        "design_state": "Planned claim authored with complete local argument or exact well-defined definition.",
+        "deps": [
+          "def-gr-fx-tetrad-spin-connection",
+          "def-gr-fx-connection-path-transport",
+          "prop-gr-fx-s1-loop-noncontractible",
+          "thm-a-regular-level-set-is-an-embedded-submanifold",
+          "def-smooth-differential-k-form",
+          "def-exterior-derivative-by-the-invariant-vector-field-formula",
+          "def-pullback-of-a-differential-form",
+          "prop-pullback-of-forms-is-smooth-functorial-and-preserves-wedges"
+        ],
+        "dependency_roles": {
+          "def-gr-fx-tetrad-spin-connection": "mathematical-premise",
+          "def-gr-fx-connection-path-transport": "mathematical-premise",
+          "prop-gr-fx-s1-loop-noncontractible": "mathematical-premise",
+          "thm-a-regular-level-set-is-an-embedded-submanifold": "mathematical-premise",
+          "def-smooth-differential-k-form": "mathematical-premise",
+          "def-exterior-derivative-by-the-invariant-vector-field-formula": "mathematical-premise",
+          "def-pullback-of-a-differential-form": "mathematical-premise",
+          "prop-pullback-of-forms-is-smooth-functorial-and-preserves-wedges": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "dependency_level": 4,
+        "statement": "Let $M=S^1\\times\\mathbb R^3$, write $(x,y)$ for the standard embedding coordinates on $S^1$, and set $\\alpha=x\\,dy-y\\,dx$. With real coordinates $t,z_1,z_2$ on $\\mathbb R^3$, define\n\n$$g=-dt\\otimes dt+\\alpha\\otimes\\alpha+dz_1\\otimes dz_1+dz_2\\otimes dz_2.$$\n\nThe global frame $E_0=\\partial_t$, $E_1=-y\\partial_x+x\\partial_y$, $E_2=\\partial_{z_1}$, $E_3=\\partial_{z_2}$ is an orthonormal tetrad for $g$ with signature $(-,+,+,+)$. Here $E_1$ is the restriction of the indicated ambient vector field to $S^1$, where it is tangent because it is orthogonal to $(x,y)$. Orient $M$ by this ordered frame and time-orient it by $E_0$. Let $J$ be the constant matrix with $JE_2=E_3$, $JE_3=-E_2$, and $JE_0=JE_1=0$. Assume the $\\mathrm{AC}_\\omega$ convention in [[def-gr-fx-tetrad-spin-connection]]. Define $\\omega=\\tfrac14J\\alpha$ and the affine connection on this frame by\n\n$$\\nabla_X\\Bigl(\\sum_Jv^J E_J\\Bigr):=\\sum_I\\Bigl(X(v^I)+\\sum_J\\omega^I{}_J(X)v^J\\Bigr)E_I.$$\n\nFor a real $4\\times4$ matrix $A$, $\\exp(A)$ denotes the matrix series $\\sum_{m=0}^\\infty A^m/m!$, which converges absolutely in any fixed submultiplicative matrix norm.\n\nThis is a flat Lorentz connection. On any coordinate arc of $S^1$ with angular coordinate $\\theta$, transport between endpoints is $\\exp(-\\tfrac14J(\\theta_1-\\theta_0))$, independent of the chosen path inside that arc. Around the once-around loop it is $\\exp(-\\tfrac\\pi2J)\\ne I_4$, although the curvature is zero; the loop is not thin-contractible.\n\n",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, General Relativity, Cambridge Part III lecture notes, §§3.3.3–3.4.2",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/gr/grhtml/S3.html"
+            },
+            {
+              "title": "Urs Schreiber and Konrad Waldorf, Parallel Transport and Functors, arXiv:0705.0452, §2.1",
+              "url": "https://arxiv.org/pdf/0705.0452"
+            }
+          ]
+        },
+        "physical_scope": null,
+        "library": "physics"
+      },
+      {
+        "id": "ex-gr-fx14-2",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "Holonomy and discrete geometric interfaces — triangular graph Wilson trace",
+        "reference": "items/ex-gr-fx14-2.md#statement",
+        "design_state": "Planned claim authored with complete local argument or exact well-defined definition.",
+        "deps": [
+          "def-gr-fx-discrete-holonomy-model",
+          "prop-gr-fx-discrete-wilson-trace",
+          "prop-gr-fx-su2-compact"
+        ],
+        "dependency_roles": {
+          "def-gr-fx-discrete-holonomy-model": "mathematical-premise",
+          "prop-gr-fx-discrete-wilson-trace": "mathematical-premise",
+          "prop-gr-fx-su2-compact": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "dependency_level": 6,
+        "statement": "Take the oriented triangle $v_0\\xrightarrow{e_1}v_1\\xrightarrow{e_2}v_2\\xrightarrow{e_3}v_0$, assign $g_{e_1}=g_{e_2}=g_{e_3}=I_2$, and use the defining representation $\\rho:SU(2)\\to U(\\mathbb C^2)$ given by $\\rho(g)v:=gv$ for column vectors $v\\in\\mathbb C^2$. Let $k=\\operatorname{diag}(i,-i)\\in SU(2)$ and take the vertex gauge assignment $h_{v_0}=k$, $h_{v_1}=h_{v_2}=I_2$. The first and third edge matrices change to $k^{-1}$ and $k$, respectively, while the loop product remains $I_2$ and its Wilson trace remains $2$.\n\n",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John C. Baez, Spin Network States in Gauge Theory, arXiv:gr-qc/9411007, §2",
+              "url": "https://arxiv.org/pdf/gr-qc/9411007"
+            },
+            {
+              "title": "Emmanuel Kowalski, An Introduction to the Representation Theory of Groups (2025), §§2–3",
+              "url": "https://people.math.ethz.ch/~kowalski/representation-theory-2025.pdf"
+            }
+          ]
+        },
+        "physical_scope": null,
+        "library": "physics"
+      },
+      {
+        "id": "ex-gr-fx14-3",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "Holonomy and discrete geometric interfaces — antisymmetric SU(2) intertwiner",
+        "reference": "items/ex-gr-fx14-3.md#statement",
+        "design_state": "Planned claim authored with complete local argument or exact well-defined definition.",
+        "deps": [
+          "prop-gr-fx-vertex-haar-projection",
+          "def-gr-fx-discrete-holonomy-model",
+          "def-axiom-of-choice"
+        ],
+        "dependency_roles": {
+          "prop-gr-fx-vertex-haar-projection": "mathematical-premise",
+          "def-gr-fx-discrete-holonomy-model": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "dependency_level": 6,
+        "statement": "At a vertex with two incoming edges carrying the defining representation $\\rho(g)v:=gv$ for $g\\in SU(2)$ and $v\\in V=\\mathbb C^2$, the vertex space is $W_v=V\\otimes V$. For a basis $e_1,e_2$ of $V$, the nonzero antisymmetric tensor\n\n$$\\epsilon=e_1\\otimes e_2-e_2\\otimes e_1$$\n\nis invariant under the diagonal action $g\\otimes g$. Consequently the normalized Haar projection $P_v$ of [[prop-gr-fx-vertex-haar-projection]] fixes it: $P_v\\epsilon=\\epsilon$.\n\n",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John C. Baez, Spin Network States in Gauge Theory, arXiv:gr-qc/9411007, §2",
+              "url": "https://arxiv.org/pdf/gr-qc/9411007"
+            },
+            {
+              "title": "Emmanuel Kowalski, An Introduction to the Representation Theory of Groups (2025), §§2–3 and §5.2",
+              "url": "https://people.math.ethz.ch/~kowalski/representation-theory-2025.pdf"
+            }
+          ]
+        },
+        "physical_scope": null,
+        "library": "physics"
+      }
+    ]
+  }
+]

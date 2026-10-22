@@ -1,0 +1,74 @@
+{
+  "version": 1,
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "batch": "30",
+  "round": 0,
+  "reviewed_items": [
+    "def-gr-fx-conformal-constraint-data",
+    "thm-gr-fx-lichnerowicz-reduction",
+    "prop-gr-fx-constant-constraint-solution",
+    "prop-gr-fx-positive-linearized-constraint",
+    "ex-gr-fx02-1",
+    "ex-gr-fx02-2"
+  ],
+  "reviewed_pages": [
+    "gr-fx02-conformal-constraint-construction",
+    "gr-fx02-conformal-constraint-construction-examples"
+  ],
+  "decision": "repair",
+  "reason": "The local conformal formulas and examples otherwise match the approved limits: uniqueness is only among positive constants, the inverse is linear, and no general solvability claim is made. The approved scope and cited treatments require transverse-traceless (TT) free data; make that condition part of the definition and carry it into the constant-solution claim. The other reviewed consumers use TT data explicitly or inherit it from that proposition.",
+  "findings": [
+    {
+      "id": "def-gr-fx-conformal-constraint-data",
+      "type": "scope",
+      "reason": "The approved design specifies a TT covariant tensor as input, but this definition only introduces TT as a property and does not require it. The reduction theorem then applies to all data permitted by this definition, although its proof uses trace-freeness in step 1.1 and trace-freeness plus divergence-freeness in step 2.1. Add TT as an input condition. This matches Bartnik–Isenberg §4.1 and Gourgoulhon §8.2.1, equations (8.9)–(8.10), before the CMC reduction ([Bartnik–Isenberg](https://arxiv.org/abs/gr-qc/0405092); [Gourgoulhon](https://arxiv.org/pdf/gr-qc/0703035))."
+    },
+    {
+      "id": "prop-gr-fx-constant-constraint-solution",
+      "type": "prerequisite",
+      "reason": "The root calculation is algebraically correct, but this proposition calls the equation a vacuum CMC constraint equation while its statement and Facts do not carry the TT condition needed for the reduction theorem's constraint equivalence. State that the data are as in the TT definition, preserving the claim of uniqueness only among positive constants."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "thm-gr-fx-lichnerowicz-reduction",
+      "decision": "accept",
+      "reason": "Its Statement takes the data from the definition, and its Facts and proof already state and use TT. Requiring TT in the definition supplies the missing condition for steps 1.1 and 2.1."
+    },
+    {
+      "id": "prop-gr-fx-constant-constraint-solution",
+      "decision": "repair",
+      "reason": "Carry the definition's TT condition into this proposition's statement or exact data hypothesis; its algebraic proof then applies to the constraint equation supplied by the theorem."
+    },
+    {
+      "id": "prop-gr-fx-positive-linearized-constraint",
+      "decision": "accept",
+      "reason": "It takes phi_0 from the preceding constant-solution proposition. Once that use carries TT, the stated scalar linearization and Fourier inverse are valid; the item does not claim nonlinear solvability."
+    },
+    {
+      "id": "ex-gr-fx02-1",
+      "decision": "accept",
+      "reason": "Its verification computes both the trace and divergence of the specified constant tensor as zero."
+    },
+    {
+      "id": "ex-gr-fx02-2",
+      "decision": "accept",
+      "reason": "The zero conformal tensor is TT; the zero mode correctly establishes failure of coercivity in this case."
+    },
+    {
+      "id": "ex-gr-fx02-1-and-ex-gr-fx02-2",
+      "decision": "accept",
+      "reason": "The examples page contains only these two examples, and both use TT data."
+    },
+    {
+      "id": "ex-gr-fx11-2",
+      "decision": "accept",
+      "reason": "The outside-batch example uses the zero conformal tensor and explicitly identifies it as TT; its displayed use of the scalar residual formula is compatible with the required condition."
+    },
+    {
+      "id": "gr-fx11-numerical-geometry-and-constraint-monitoring",
+      "decision": "accept",
+      "reason": "The page's dependency on the FX02 page remains compatible; its inspected outside-batch use is the zero-TT example above."
+    }
+  ]
+}

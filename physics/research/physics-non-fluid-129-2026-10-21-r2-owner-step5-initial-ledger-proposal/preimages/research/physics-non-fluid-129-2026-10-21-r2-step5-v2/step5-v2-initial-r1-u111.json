@@ -1,0 +1,178 @@
+{
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "phase": "initial",
+  "round": 1,
+  "unit": "111",
+  "input_sha256": "eaf0a68d231b0a7d0d042df337974eaab597dfd3432daa3ad0aaeebd32fe188c",
+  "decisions": [
+    {
+      "id": "lem-qsmx-finite-car-quasifree-gibbs-construction",
+      "model": "gpt-6-luna",
+      "context_sha256": "f2481e71962e1511ae8d54bdff048897dcd2e673bbc1d51ea68103ed542984cf",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "Step 1.2 reverses the exterior-power basis rotation: exterior multiplication gives d_j*=Gamma_-(W)c_j*Gamma_-(W)* when d=W*c. Thus Gamma_-(W)|m> is the eigenmode occupation vector, while the asserted reverse rotation and unrotated eigenvector equation are false for general W. Repaired the operator identity, rotated eigenvector equation and conjugated Gibbs density without changing the claim.",
+      "uncertain": false,
+      "source_urls": [
+        "https://arxiv.org/pdf/2111.08343"
+      ],
+      "familiar": true
+    },
+    {
+      "id": "thm-qsmx-finite-boson-stability",
+      "model": "gpt-6-luna",
+      "context_sha256": "83c6574723d8844993767c8357a4d9fc26c93d320bb02a9b664e342c2e0eedbe",
+      "outcome": "confirmed_nonfatal",
+      "reason": "For beta>0, exp(-beta x) diverges as x tends to minus infinity, so F9 falsely calls it bounded on R. The current supplier licenses arbitrary finite-valued Borel functions with the spectral square-integrability domain, and the actual diagonal eigenvalues are bounded below by c0. Repaired F9 and made the support bound explicit in step 7.1; the conditional partition formula is unchanged.",
+      "uncertain": false,
+      "source_urls": [
+        "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe2.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-qsmx-finite-car-quasifree-gibbs-construction",
+      "disposition": "repaired",
+      "post_sha256": "37c37895f6cedaab2baddbf9c0e138caebb31cff10e83da57f31b03e3fc6f0b7",
+      "review_context_sha256": "0f77ddb2bf623af4f99ffe10edbdf46d054144cec4d5fa205a68133a9437c74d",
+      "reason": "Checked the finite exterior-power implementer against the CAR occupation shifts and covariance C_ji=Tr(rho c_i*c_j). The corrected W-rotated basis diagonalizes dGamma(h-mu I), with Z=product(1+q_j); conjugation yields W diag(p) W*. The Bernoulli determinant argument includes eigenvalues 0 and 1, and vacuum matrix units prove uniqueness. The statement and dependencies are unchanged; no diagram is present. This is the authoring adjudicator review, not an independent review of the repair. Rechecked all references after normative phase renumbering: original 1.2 is now 2.1, and original 2.1 is now 2.2.",
+      "uncertain": false,
+      "source_urls": [
+        "https://arxiv.org/pdf/2111.08343"
+      ],
+      "familiar": true
+    },
+    {
+      "id": "thm-qsmx-finite-boson-stability",
+      "disposition": "repaired",
+      "post_sha256": "3c8bfa57da61ef55d6a82deee00cb1dda302a62540d1e184d5de3f06a549a7fe",
+      "review_context_sha256": "b9c9375bc23deada5cbff855b76394ea5de47de8c5455807ba1ff8aaa81f8efc",
+      "reason": "Checked the explicit grouped-coordinate certificate, finite-mode implementer and Schwartz invariance, Hermite graph core, real scalar shift of the diagonal self-adjoint domain, and positive trace-class geometric sum. The exponential is Borel globally and bounded on the spectral support E_n>=c0; arbitrary finite real c is allowed. The title now says certified, preserving the stated conditional scope; neither Statement nor dependencies change. No diagram is present. This is an authoring adjudicator review, not independent review of the repair.",
+      "uncertain": false,
+      "source_urls": [
+        "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe2.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "gate_resolutions": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "id": "lem-qsmx-finite-car-quasifree-gibbs-construction",
+      "location": "Original Proof 1.2; repaired Proof 2.1",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "proposed_status": "fixed",
+      "reason": "The asserted reverse exterior-power basis rotation gives incorrect eigenvectors for general W. Corrected creators, eigenmode occupation basis and conjugated Gibbs density; verified all subsequent Wick and uniqueness uses and retained the full original Statement.",
+      "uncertain": false,
+      "source_urls": [
+        "https://arxiv.org/pdf/2111.08343"
+      ],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "id": "thm-qsmx-finite-boson-stability",
+      "location": "Fact F9 and Proof 7.1",
+      "outcome": "confirmed_nonfatal",
+      "proposed_status": "fixed",
+      "reason": "The exponential is unbounded on R but the licensed Borel calculus and lower spectral bound make the argument valid. Corrected F9 and established boundedness on the actual spectral support before identifying full-domain exponentials. Also qualified the title by the assumed certificate.",
+      "uncertain": false,
+      "source_urls": [
+        "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe2.pdf"
+      ],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-published-consumer-ledger",
+      "proposed_updates": [],
+      "reason": "No published supplier defect or potentially invalidated published consumer was identified. Both mathematical Statements remain byte-for-byte unchanged; proof, citation-tag, title and contract edits cause no public-interface propagation.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "repair_notes": {
+    "status": "Both assigned tuples adjudicated and repaired; focused checks complete; no unresolved mathematical obligations.",
+    "car": {
+      "claim_and_conventions": "Finite CAR covariance C_ji=Tr(rho c_i*c_j); Gamma_-(W) is the direct sum of exterior powers. For d=W*c the eigenmode occupation vectors are Gamma_-(W)|m>.",
+      "repair": "Replaced original step 1.2 by the explicit exterior-multiplication conjugation and eigenvector computation. Normative precheck moved it to 2.1 and the old 2.1 to 2.2; all proof and owning contract references were reconciled.",
+      "counterexample_to_original_rotation": "With W=[[3/5,-4/5],[4/5,3/5]], h=W diag(0,1) W*=[[16/25,-12/25],[-12/25,9/25]], the one-particle vector W e1 is a zero eigenvector. In contrast h W* e1=(96/125,-72/125), so the originally reversed vector is not that zero eigenvector. This exact rational calculation was executed successfully.",
+      "suppliers": [
+        "items/def-qsmx-quasifree-finite-covariance.md#Definition",
+        "items/lem-qsm-fock-occupation-basis-and-car-relations.md#Statement and Proof",
+        "items/lem-qsm-matrix-state-calculus.md#Statement and Proof"
+      ]
+    },
+    "bose": {
+      "claim_and_conventions": "AC and Countable Choice; finite r>=1; grouped quadratures and explicit symplectic diagonalization certificate; strictly positive omega_j. The diagonal energies are c0+sum hbar omega_j n_j.",
+      "repair": "F9 now specifies the Borel spectral calculus and its square-integrability domain using the scalar measure E_f(A)=<E(A)f,f>. Step 7.1 explicitly uses E_n>=c0 to establish that the exponential is bounded on the supported spectrum and defined on the full Hilbert space. Added the already-used step 5.1 to its trailing tags and contract inputs. The title and owning manifest now say Certified positive finite quadratic Bose Hamiltonian is normalizable.",
+      "suppliers": [
+        "items/def-qsmx-finite-boson-quadratic-form.md#Definition",
+        "items/thm-nrqmx-finite-mode-bogoliubov.md#Statement",
+        "items/thm-nrqmx-finite-metaplectic-construction.md#Statement",
+        "items/lem-nrqmx-finite-mode-fock-schr-identification.md#Statement",
+        "items/lem-qsm-models-diagonal-occupation-trace.md#Statement",
+        "items/thm-unbounded-borel-functional-calculus.md#Statement, Facts and Proof",
+        "items/thm-trace-of-a-positive-operator-is-the-sum-of-its-eigenvalues.md#Statement",
+        "items/def-adjoint-of-a-densely-defined-unbounded-operator.md#Definition",
+        "items/def-densely-defined-closed-and-closable-operator.md#Definition",
+        "items/def-trace-class-operator.md#Definition",
+        "items/def-absolute-value-and-singular-values-of-a-compact-operator.md#Definition",
+        "items/lem-positive-square-root-of-a-compact-positive-operator.md#Statement"
+      ]
+    },
+    "source_reading": [
+      {
+        "url": "https://arxiv.org/pdf/2111.08343",
+        "locator": "Section 3.5, equations (52)-(59), printed pp. 13-14; retrieved relevant product-density and correlation diagonalization passage.",
+        "limit": "Supplementary check only. The paper uses doubled Dirac correlations and a factor-two Hamiltonian convention; the exact number-conserving W rotation and covariance convention were checked directly from the local exterior-power construction."
+      },
+      {
+        "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe2.pdf",
+        "locator": "Section 3.1, printed pp. 102-105, equations (3.18)-(3.33), bounded calculus, unbounded truncation construction and Theorem 3.2 with proof.",
+        "limit": "Checked the Borel square-integrability domain and bounded-support application; no whole-book reading or independent acceptance is claimed."
+      }
+    ],
+    "public_interfaces": {
+      "comparison": "Direct comparison with actual pre-edit item bytes confirmed that each complete original Statement is byte-for-byte unchanged. No dependency or mathematical Definition was added or changed.",
+      "downstream": "No propagation event; downstream remains empty. The title qualification preserves the already explicit certificate hypothesis."
+    },
+    "metadata": "Only assigned derivation claims, their step/reference fields and corresponding finite-check/citation/boundary references were changed in the owning contract. One owning manifest title was mirrored. Shared writes reread current owning files under the shared write lock; busy attempts exited 2 and made no shared changes. Prior risk-review records, other contracts and independent evidence were preserved.",
+    "initial_check_repairs": "The first focused precheck requested canonical CAR phase renumbering; the first combined strict contract check found the existing step 5.1 use missing from final Bose derivation inputs. Both were repaired, followed by fresh actual review of both final carriers and the final successful checks.",
+    "validation": [
+      {
+        "command": "node tools/physics-support/tsx-run.mjs tools/physics-support/precheck.mts items/lem-qsmx-finite-car-quasifree-gibbs-construction.md items/thm-qsmx-finite-boson-stability.md",
+        "exit_code": 0,
+        "result": "2 checked, 0 failing; both direct proofs pass."
+      },
+      {
+        "command": "node tools/physics-support/rendercheck.mjs items/lem-qsmx-finite-car-quasifree-gibbs-construction.md items/thm-qsmx-finite-boson-stability.md",
+        "exit_code": 0,
+        "result": "2 files pass real KaTeX and renderer YAML checks."
+      },
+      {
+        "command": "node tools/physics-support/proof-contract.mjs research/physics-non-fluid-129-2026-10-21-r2-batch-111.proof-contracts.json --strict --items lem-qsmx-finite-car-quasifree-gibbs-construction,thm-qsmx-finite-boson-stability",
+        "exit_code": 0,
+        "result": "0 errors, 0 warnings; 2/2 assigned items checked."
+      },
+      {
+        "command": "node tools/physics-support/proof-layout.mjs items/lem-qsmx-finite-car-quasifree-gibbs-construction.md items/thm-qsmx-finite-boson-stability.md",
+        "exit_code": 0,
+        "result": "2 items, 12 steps, 0 defects."
+      }
+    ],
+    "diagrams": "Neither assigned item contains a TikZ/tikzcd diagram; the finite algebraic and operator-domain arguments need no diagram.",
+    "review_currency": "After checking the final CAR renumbering, Bose spectral-measure definition, exact supplier interfaces and unchanged Statements, ran review-contexts for both final items on the same stable state and copied both hashes. No old review hash was mechanically refreshed into acceptance.",
+    "unresolved": [],
+    "scope": "No published item, imported supplier, outside-frontier consumer, shared ledger, judge stamp, certificate or round state was edited. No workers or judges were launched. The controller owns further rejudgment and certification."
+  },
+  "supporting_evidence": {
+    "research/physics-non-fluid-129-2026-10-21-r2-batch-111-step5-context.json": "0006a70a42ebe99b2296d32660f9159d40a4ddf876f4d4557711a4644617eb41"
+  }
+}

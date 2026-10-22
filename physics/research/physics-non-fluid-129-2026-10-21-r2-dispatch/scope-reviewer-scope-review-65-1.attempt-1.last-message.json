@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "batch": "65",
+  "round": 1,
+  "reviewed_items": [
+    "def-qftx-scaling-cocycle",
+    "prop-qftx-scale-cocycle-law",
+    "thm-qftx-truncated-rg-ode",
+    "ex-qftx-truncation-landau-pole"
+  ],
+  "reviewed_pages": [
+    "qftx-scale-cocycles",
+    "qftx-scale-cocycles-examples"
+  ],
+  "decision": "escalate",
+  "reason": "The prior map-action and ODE-convention findings are repaired, and their consumer paths were rechecked. One local issue remains in the scaling Definition: it calls the formal S-map and its conjugate time-ordered systems, although the supplied definition defines a time-ordered system as a sequence of multilinear maps. The finite-renormalization supplier requires two such systems. Specify the conjugated sequence and make the admissibility assumption on that sequence; the direct consumer is prop-qftx-scale-cocycle-law, Facts F1 and Proof steps 1.1–2.1. Since this is the final review, escalate the unresolved finding to the owner.",
+  "findings": [
+    {
+      "id": "def-qftx-scaling-cocycle-system-admissibility-type",
+      "type": "local",
+      "reason": "The Definition constructs S_m from T_n^(m), then assumes that S and its conjugate are normalized scalar time-ordered systems. Those are different objects under def-qftx-local-time-ordered-system: a system is a sequence of multilinear maps, while S_m is its formal map. Define the conjugated sequence, for example componentwise by T'^(m)_(n,ρ)(F1,...,Fn) = Cρ* T_n^(ρ^-1 m)((Cρ*)^-1 F1,...,(Cρ*)^-1 Fn), and state that this sequence satisfies the required contract for the relabelled free data. This resolves the missing type/hypothesis locally, but the one repair has already been used."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "prop-qftx-scale-cocycle-law",
+      "decision": "escalate",
+      "reason": "Direct consumer: Facts F1 and Proof steps 1.1–2.1 use the system comparison and uniqueness. Recheck this use against the explicitly defined conjugated sequence and its admissibility."
+    },
+    {
+      "id": "thm-qftx-truncated-rg-ode",
+      "decision": "accept",
+      "reason": "Its remark uses the scaling Definition only as context for the logarithmic-scale convention; its ODE and formal-series argument does not use the time-ordered-system comparison."
+    },
+    {
+      "id": "ex-qftx-truncation-landau-pole",
+      "decision": "accept",
+      "reason": "It depends on the truncated ODE theorem, not on the time-ordered-system comparison. The maximal-solution convention and truncated-pole definition are now explicit."
+    },
+    {
+      "id": "qftx-scale-cocycles-examples",
+      "decision": "accept",
+      "reason": "Its page-ordering prerequisite and inventory are unchanged; its example consumer was checked separately."
+    }
+  ]
+}

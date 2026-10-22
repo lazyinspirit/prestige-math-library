@@ -1,0 +1,131 @@
+{
+  "group": "m",
+  "batches": [
+    "25"
+  ],
+  "pages_read": [
+    "emg-fx10",
+    "emg-fx10-examples"
+  ],
+  "items_read": [
+    "def-emg-fx-cochain-maxwell",
+    "alg-emg-fx-leapfrog-cochains",
+    "prop-emg-fx-discrete-gauss-preservation",
+    "lem-emg-fx-finite-step-termination",
+    "cex-emg-fx-cfl-discrete-growth"
+  ],
+  "conventions": [
+    {
+      "convention": "C^k = R^{n_k}, allowing zero dimensions, with fixed ordered bases and dual bases; D1D0 = D2D1 = 0. M1 and M2 are symmetric positive-definite mass maps. The state is (b,d) in C² ⊕ (C¹)*; 'phase space' asserts no symplectic structure. The cochain diagram has the correct objects and arrow directions.",
+      "fixed_by": "def-emg-fx-cochain-maxwell",
+      "matters_for": [
+        "alg-emg-fx-leapfrog-cochains",
+        "prop-emg-fx-discrete-gauss-preservation",
+        "lem-emg-fx-finite-step-termination",
+        "cex-emg-fx-cfl-discrete-growth"
+      ]
+    },
+    {
+      "convention": "The algorithm accepts rational admissible data, positive rational τ and N ≥ 0, uses exact rational arithmetic and fixed-order Gauss–Jordan elimination without row swaps, then updates b before d. Stored states are (b_n,d_{n+1/2}), starting at n = 0.",
+      "fixed_by": "alg-emg-fx-leapfrog-cochains",
+      "matters_for": [
+        "prop-emg-fx-discrete-gauss-preservation",
+        "lem-emg-fx-finite-step-termination",
+        "cex-emg-fx-cfl-discrete-growth"
+      ]
+    },
+    {
+      "convention": "Tτ is separately defined on every real state; the rational algorithm is its rational restriction. The invariant has negative cross term −τ bᵀM2D1M1⁻¹d. σ is the Euclidean operator norm of M2^{1/2}D1M1^{−1/2}, with σ = 0 on a zero domain. Positive definiteness is asserted under the strict inequality τσ < 2.",
+      "fixed_by": "prop-emg-fx-discrete-gauss-preservation",
+      "matters_for": [
+        "cex-emg-fx-cfl-discrete-growth"
+      ]
+    },
+    {
+      "convention": "Complexity counts rational arithmetic operations and stored rational entries; it does not bound bit growth, roundoff or continuum accuracy.",
+      "fixed_by": "lem-emg-fx-finite-step-termination",
+      "matters_for": [
+        "lem-emg-fx-finite-step-termination"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-emg-fx-cochain-maxwell",
+      "statement": "Finite real cochain spaces satisfy D1D0 = D2D1 = 0, with symmetric positive-definite mass maps. Semidiscrete evolution is ḃ = −D1M1⁻¹d and ḋ = D1ᵀM2b; the constraints are D2b = 0 and D0ᵀd = 0.",
+      "used_by": [
+        "alg-emg-fx-leapfrog-cochains",
+        "prop-emg-fx-discrete-gauss-preservation",
+        "lem-emg-fx-finite-step-termination",
+        "cex-emg-fx-cfl-discrete-growth"
+      ]
+    },
+    {
+      "id": "alg-emg-fx-leapfrog-cochains",
+      "statement": "For rational admissible input, compute R = M1⁻¹ by the specified elimination, then perform N updates b_new = b − τD1Rd and d_new = d + τD1ᵀM2b_new, recording the N+1 states.",
+      "used_by": [
+        "prop-emg-fx-discrete-gauss-preservation",
+        "lem-emg-fx-finite-step-termination",
+        "cex-emg-fx-cfl-discrete-growth"
+      ]
+    },
+    {
+      "id": "prop-emg-fx-discrete-gauss-preservation",
+      "statement": "For every real input state, D2b⁺ = D2b and D0ᵀd⁺ = D0ᵀd. Every continuously differentiable semidiscrete solution conserves E. Qτ is exactly invariant under Tτ and is positive definite whenever τσ < 2.",
+      "used_by": [
+        "cex-emg-fx-cfl-discrete-growth"
+      ]
+    },
+    {
+      "id": "lem-emg-fx-finite-step-termination",
+      "statement": "For rational admissible inputs and finite N ≥ 0, the specified algorithm terminates after finitely many exact rational operations; elimination costs O(n1³), and each update costs O(n1² + n1n2 + n2²).",
+      "used_by": [
+        "alg-emg-fx-leapfrog-cochains"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "lem-cm-positive-definite-matrix-square-roots",
+      "used_for": "Invertibility, symmetric positive-definite inverses and square roots, and the energy-coordinate transformation. Its n ≥ 1 restriction is faithfully retained; zero-dimensional cases are handled locally.",
+      "opened": true
+    },
+    {
+      "id": "thm-operator-norm-is-the-largest-singular-value",
+      "used_for": "Existence and identification of the Euclidean operator-norm maximum, including zero domain and zero codomain cases.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+      "used_for": "The bound |xᵀSy| ≤ ||x||₂ ||Sy||₂ in the positivity estimate for Qτ.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "def-emg-fx-cochain-maxwell",
+      "concern": "The first Remarks paragraph says, 'For a finite oriented cell complex,' incidence entries are +1, −1 or 0 according to boundary occurrence. No regular-cell or mesh convention is defined. Under the general CW-complex meaning this is false: attaching a two-cell to a circle by a degree-two map gives cellular boundary coefficient 2. The cited [Hiptmair report](https://www.sam.math.ethz.ch/sam_reports/reports_final/reports2015/2015-18.pdf), Definition 4 and equations (41)–(42), treats explicitly restricted meshes before introducing these signs. State the intended restricted cell class or use general cellular incidence numbers. The abstract matrix definition and simplicial calculation remain sound.",
+      "severity": "would-be-fatal"
+    },
+    {
+      "id": "lem-emg-fx-finite-step-termination",
+      "concern": "The Statement says the algorithm 'returns ... with the stated N+1 states and the exact rational inverse M1⁻¹.' The algorithm explicitly says its output consists of the N+1 states; R is computed internally but is not included in its output specification. Align 'returns' with 'computes' or explicitly include R in the algorithm's output. The inverse computation and termination proof themselves check out.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [
+    {
+      "item": "thm-operator-norm-is-the-largest-singular-value",
+      "finding": "The Statement contains: 'In the nonzero case, the maximum in The operator norm is zero on the zero domain and otherwise is max_{||v||=1} ||Tv|| is attained at a right-singular vector for s_1.' This is malformed prose with an unrendered formula inserted into the sentence. The intended assertion is recoverable, and the proof explicitly handles zero domain, zero map and zero codomain.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "emg-fx10",
+      "to": "emg-fx09",
+      "faithful": true,
+      "note": "Checked both page inventories and the actual boundary-current item linked from the cochain definition. That link is contextual: no boundary-current or gauge-degeneracy conclusion is used by the finite algebraic arguments. The cochain definition expressly asserts no symplectic form, so it does not strengthen or transfer the supplier's presymplectic claims."
+    }
+  ]
+}

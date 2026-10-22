@@ -1,0 +1,241 @@
+[
+  {
+    "order": 941,
+    "id": "tgrx-relative-entropy-balance",
+    "kind": "A",
+    "category": "thermodynamics-and-general-relativity-mathematics",
+    "library": "mathematics",
+    "title": "Finite modular energy and entropy balance",
+    "companion": "tgrx-relative-entropy-balance-examples",
+    "requires": [
+      "tgr-mhs05",
+      "quantum-information-measures",
+      "qsm-states-ensembles",
+      "matrices-and-the-matrix-of-a-linear-map",
+      "bounded-linear-operators-and-quotient-spaces",
+      "the-logarithm-and-general-powers",
+      "series-and-nonnegative-tests",
+      "power-series-and-real-analytic-functions",
+      "the-derivative-and-mean-value-theorems",
+      "registers-tensor-products-and-partial-trace",
+      "inner-product-spaces-and-orthogonality"
+    ],
+    "items": [
+      {
+        "id": "lem-tgrx-finite-matrix-entropy-variation",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Finite matrix entropy derivative at a faithful state",
+        "reference": "research/frontier-expansion-2026-10-19/thermodynamics-and-general-relativity/prose-scaffold.md#tgrx-relative-entropy-balance",
+        "design_state": "step1-local-intermediate",
+        "dependency_level": 0,
+        "deps": [
+          "lem-qsm-matrix-state-calculus",
+          "def-trace-of-an-endomorphism",
+          "def-operator-norm",
+          "def-natural-logarithm",
+          "thm-natural-logarithm-laws",
+          "thm-logarithm-derivative-and-integral",
+          "thm-geometric-series",
+          "thm-termwise-differentiation-of-a-real-power-series",
+          "cor-zero-derivative-implies-constant",
+          "def-derivative"
+        ],
+        "dependency_roles": {
+          "lem-qsm-matrix-state-calculus": "mathematical-premise",
+          "def-trace-of-an-endomorphism": "mathematical-premise",
+          "def-operator-norm": "mathematical-premise",
+          "def-natural-logarithm": "mathematical-premise",
+          "thm-natural-logarithm-laws": "mathematical-premise",
+          "thm-logarithm-derivative-and-integral": "mathematical-premise",
+          "thm-geometric-series": "mathematical-premise",
+          "thm-termwise-differentiation-of-a-real-power-series": "mathematical-premise",
+          "cor-zero-derivative-implies-constant": "mathematical-premise",
+          "def-derivative": "mathematical-premise"
+        },
+        "justified_by": [],
+        "forward_refs": [],
+        "physical_scope": null,
+        "statement": "Let $H$ be a nonzero finite-dimensional complex inner-product space with a fixed orthonormal basis, let $J\\subseteq\\mathbb R$ be an open interval, and let $t_0\\in J$. Suppose $A:J\\to\\operatorname{End}(H)$ has real and imaginary matrix entries in the fixed basis differentiable at $t_0$ and is self-adjoint with strictly positive eigenvalues on a neighborhood of $t_0$. Define $\\log A(t)$ by applying the natural logarithm to the eigenvalues of $A(t)$ in its spectral decomposition, let $\\operatorname{tr}$ be the finite-dimensional trace, and let $\\|T\\|_{\\mathrm{op}}:=\\sup_{\\|v\\|=1}\\|Tv\\|$ be the operator norm. Then $G(t):=\\operatorname{tr}(A(t)\\log A(t))$ is differentiable at $t_0$ and\n\n$$G'(t_0)=\\operatorname{tr}\\!\\left(A'(t_0)(\\log A(t_0)+I_H)\\right),$$\n\nwhere $I_H$ is the identity endomorphism of $H$ and $A'(t_0)$ is obtained by differentiating the matrix entries in the fixed basis.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information, author-hosted complete book manuscript, §5.2.1",
+              "url": "https://jhwatrous.github.io/TQI.pdf"
+            },
+            {
+              "title": "Mark M. Wilde, From Classical to Quantum Shannon Theory, complete book manuscript, §11.1",
+              "url": "https://arxiv.org/pdf/1106.1445v8"
+            }
+          ]
+        },
+        "library": "mathematics"
+      },
+      {
+        "id": "prop-tgrx-finite-modular-balance",
+        "kind": "proposition",
+        "domain": "mathematics",
+        "title": "Finite relative entropy equals modular energy minus entropy",
+        "reference": "research/frontier-expansion-2026-10-19/thermodynamics-and-general-relativity/prose-scaffold.md#prop-tgrx-finite-modular-balance",
+        "design_state": "draft-research",
+        "dependency_level": 0,
+        "deps": [
+          "def-it-finite-dimensional-quantum-relative-entropy",
+          "def-it-von-neumann-entropy",
+          "def-trace-of-an-endomorphism",
+          "def-qc-partial-trace",
+          "thm-it-quantum-relative-entropy-partial-trace-data-processing"
+        ],
+        "dependency_roles": {
+          "def-it-finite-dimensional-quantum-relative-entropy": "mathematical-premise",
+          "def-it-von-neumann-entropy": "mathematical-premise",
+          "def-trace-of-an-endomorphism": "mathematical-premise",
+          "def-qc-partial-trace": "mathematical-premise",
+          "thm-it-quantum-relative-entropy-partial-trace-data-processing": "mathematical-premise"
+        },
+        "justified_by": [],
+        "forward_refs": [],
+        "physical_scope": null,
+        "statement": "Let $H$ be a nonzero finite-dimensional complex inner-product space. Let $\\rho,\\sigma:H\\to H$ be self-adjoint linear maps with nonnegative eigenvalues and trace one, and suppose every eigenvalue of $\\sigma$ is strictly positive. Define $K_\\sigma:=-\\log\\sigma$ by spectral calculus, and for any self-adjoint $\\tau:H\\to H$ with nonnegative eigenvalues and trace one define $s(\\tau):=-\\operatorname{tr}(\\tau\\log\\tau)=-\\sum_{\\lambda_j(\\tau)>0}\\lambda_j(\\tau)\\log\\lambda_j(\\tau)$, with the zero-eigenvalue term $0\\log0:=0$ and natural logarithms, so the entropy is in nats. Define the modular-energy difference relative to $\\sigma$ by $\\Delta_K(\\rho,\\sigma):=\\operatorname{tr}((\\rho-\\sigma)K_\\sigma)$. Then\n\n$$D(\\rho\\|\\sigma)=\\Delta_K(\\rho,\\sigma)-(s(\\rho)-s(\\sigma)).$$\n\nFor any nonzero finite-dimensional complex inner-product spaces $H_A,H_B$ with $H=H_A\\otimes H_B$, partial tracing both states over $H_B$ cannot increase relative entropy:\n\n$$D(\\operatorname{Tr}_{B}\\rho\\|\\operatorname{Tr}_{B}\\sigma)\\le D(\\rho\\|\\sigma).$$\n\nThe identity and inequality are finite-dimensional mathematical statements; no Hamiltonian, physical energy, physical units, continuum limit, or gravitational entropy is assumed.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information, author-hosted complete book manuscript, §§5.2.1–5.2.3",
+              "url": "https://jhwatrous.github.io/TQI.pdf"
+            },
+            {
+              "title": "Aron C. Wall, A proof of the generalized second law for rapidly changing fields and arbitrary horizon slices, §2.5",
+              "url": "https://arxiv.org/pdf/1105.3445"
+            },
+            {
+              "title": "Mark M. Wilde, From Classical to Quantum Shannon Theory, complete book manuscript, §§11.1 and 11.8",
+              "url": "https://arxiv.org/pdf/1106.1445v8"
+            }
+          ]
+        },
+        "library": "mathematics"
+      },
+      {
+        "id": "prop-tgrx-entropy-first-variation",
+        "kind": "proposition",
+        "domain": "mathematics",
+        "title": "Entanglement first variation at faithful finite reference",
+        "reference": "research/frontier-expansion-2026-10-19/thermodynamics-and-general-relativity/prose-scaffold.md#prop-tgrx-entropy-first-variation",
+        "design_state": "draft-research",
+        "dependency_level": 1,
+        "deps": [
+          "lem-tgrx-finite-matrix-entropy-variation",
+          "prop-tgrx-finite-modular-balance",
+          "lem-qsm-matrix-state-calculus",
+          "def-trace-of-an-endomorphism",
+          "def-operator-norm",
+          "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces"
+        ],
+        "dependency_roles": {
+          "lem-tgrx-finite-matrix-entropy-variation": "mathematical-premise",
+          "prop-tgrx-finite-modular-balance": "mathematical-premise",
+          "lem-qsm-matrix-state-calculus": "mathematical-premise",
+          "def-trace-of-an-endomorphism": "mathematical-premise",
+          "def-operator-norm": "mathematical-premise",
+          "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces": "mathematical-premise"
+        },
+        "justified_by": [],
+        "forward_refs": [],
+        "physical_scope": null,
+        "statement": "Let $H$ be a nonzero finite-dimensional complex inner-product space and let $I\\subseteq\\mathbb R$ be an open interval containing $0$. Let $\\rho:I\\to\\operatorname{End}(H)$ be a path whose real and imaginary matrix entries are twice continuously differentiable, such that each $\\rho(\\varepsilon)$ is self-adjoint with nonnegative eigenvalues and trace one. Suppose $\\rho(0)=\\sigma$ and every eigenvalue of $\\sigma$ is strictly positive. Define $K_\\sigma:=-\\log\\sigma$ by spectral calculus and let $s(\\tau):=-\\operatorname{tr}(\\tau\\log\\tau)$ with the finite spectral convention $0\\log0:=0$. Then\n\n$$\\left.\\frac{d}{d\\varepsilon}s(\\rho(\\varepsilon))\\right|_{\\varepsilon=0}=\\operatorname{tr}(\\rho'(0)K_\\sigma).$$\n\nThe finite relative entropy $D(\\rho(\\varepsilon)\\|\\sigma)$ has zero first derivative at $\\varepsilon=0$. These are finite-dimensional mathematical statements and make no continuum or gravitational claim.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information, author-hosted complete book manuscript, §5.2.1",
+              "url": "https://jhwatrous.github.io/TQI.pdf"
+            },
+            {
+              "title": "Aron C. Wall, A proof of the generalized second law for rapidly changing fields and arbitrary horizon slices, §2.5",
+              "url": "https://arxiv.org/pdf/1105.3445"
+            },
+            {
+              "title": "Mark M. Wilde, From Classical to Quantum Shannon Theory, complete book manuscript, §§11.1 and 11.8",
+              "url": "https://arxiv.org/pdf/1106.1445v8"
+            }
+          ]
+        },
+        "library": "mathematics"
+      }
+    ]
+  },
+  {
+    "order": 942,
+    "id": "tgrx-relative-entropy-balance-examples",
+    "kind": "B",
+    "category": "thermodynamics-and-general-relativity-mathematics",
+    "library": "mathematics",
+    "title": "Finite modular energy and entropy balance — Examples",
+    "companion": "tgrx-relative-entropy-balance",
+    "requires": [
+      "tgrx-relative-entropy-balance",
+      "the-logarithm-and-general-powers",
+      "the-derivative-and-mean-value-theorems"
+    ],
+    "items": [
+      {
+        "id": "ex-tgrx-qubit-first-variation",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "Biased qubit entanglement variation",
+        "reference": "research/frontier-expansion-2026-10-19/thermodynamics-and-general-relativity/prose-scaffold.md#ex-tgrx-qubit-first-variation",
+        "design_state": "draft-research",
+        "dependency_level": 2,
+        "deps": [
+          "prop-tgrx-entropy-first-variation",
+          "thm-logarithm-derivative-and-integral",
+          "thm-natural-logarithm-laws",
+          "thm-algebra-of-derivatives",
+          "def-natural-logarithm"
+        ],
+        "dependency_roles": {
+          "prop-tgrx-entropy-first-variation": "mathematical-premise",
+          "thm-logarithm-derivative-and-integral": "mathematical-premise",
+          "thm-natural-logarithm-laws": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "def-natural-logarithm": "mathematical-premise"
+        },
+        "justified_by": [],
+        "forward_refs": [],
+        "physical_scope": null,
+        "statement": "Fix $p\\in(0,1)$ and set $\\sigma:=\\operatorname{diag}(p,1-p)$. For $|\\varepsilon|<\\min\\{p,1-p\\}$ define $\\rho(\\varepsilon):=\\operatorname{diag}(p+\\varepsilon,1-p-\\varepsilon)$ and $s(\\rho(\\varepsilon)):=-\\operatorname{tr}(\\rho(\\varepsilon)\\log\\rho(\\varepsilon))$. Then every $\\rho(\\varepsilon)$ is a faithful density matrix, $\\rho(0)=\\sigma$, and\n\n$$\\left.\\frac{d}{d\\varepsilon}s(\\rho(\\varepsilon))\\right|_{\\varepsilon=0}=\\log\\!\\left(\\frac{1-p}{p}\\right).$$",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information, author-hosted complete book manuscript, §5.2.1",
+              "url": "https://jhwatrous.github.io/TQI.pdf"
+            },
+            {
+              "title": "Mark M. Wilde, From Classical to Quantum Shannon Theory, complete book manuscript, §11.1",
+              "url": "https://arxiv.org/pdf/1106.1445v8"
+            }
+          ]
+        },
+        "library": "mathematics",
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

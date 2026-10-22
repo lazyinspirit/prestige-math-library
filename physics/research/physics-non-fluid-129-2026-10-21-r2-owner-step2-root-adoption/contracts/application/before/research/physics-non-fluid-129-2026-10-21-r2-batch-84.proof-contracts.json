@@ -1,0 +1,447 @@
+{
+  "version": 1,
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "batch": 84,
+  "level": "physics-non-fluid-129-2026-10-21-r2",
+  "scope": [
+    "def-qftx-scattering-approximant-contract",
+    "thm-qftx-cook-scattering-limit",
+    "prop-qftx-scattering-isometry-not-completeness",
+    "cex-qftx-isometries-different-ranges"
+  ],
+  "contracts": {
+    "def-qftx-scattering-approximant-contract": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: the zero-particle sector is the vacuum; its assigned approximant is the constant vector Ω."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: m>0 and P_m≠0 are strict shell-input conditions; the massless shell is outside this contract."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: a one-packet family has no pairwise-disjointness comparison to make, and its one-particle norm limit is stated."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: packet families require pairwise disjoint velocity supports; coincident supports are excluded from this construction contract."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: the parameter interval begins at t=1 and the limit is taken as t→∞; the norm derivative at t=1 is one-sided."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: Countable Choice is explicitly assumed through the QFT spectral and Fock inputs; no stronger choice principle is stated."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition gives data and construction obligations, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition gives data and construction obligations, not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "packet shell is Borel",
+          "status": "checked",
+          "evidence": "Definition: the continuous image under p_m of compact supp f is compact, so E(S_{m,f}) is defined."
+        },
+        {
+          "name": "velocity is subluminal for m>0",
+          "status": "checked",
+          "evidence": "For every k, |k/ω_m(k)|²=|k|²/(|k|²+m²)<1."
+        },
+        {
+          "name": "bounded packet spectral multiplier",
+          "status": "checked",
+          "evidence": "A smooth compactly supported f gives a bounded Borel function f-hat(p0,p)=f(p); the exact dependency thm-bounded-borel-pvm-integral supplies the bounded operator Phi_E(f-hat)."
+        },
+        {
+          "name": "one-particle shell component",
+          "status": "checked",
+          "evidence": "Fourier inversion in the cited 2pi convention gives the spatial multiplier f(p)e^{-i eta ell0 t omega_m(p)}; on M_m the translation time factor cancels it exactly."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-84 author",
+        "notes": "This is a conditional proof contract, not an existence theorem. The local derivative estimate, one-particle limits, vacuum-clustering input if needed, and Fock inner-product convergence remain construction obligations. Charged QED, LSZ reduction, and Haag no-go claims are kept outside the asserted result."
+      }
+    },
+    "thm-qftx-cook-scattering-limit": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qftx-scattering-approximant-contract",
+          "source_section": "Definition",
+          "quote": "The Cook condition is\nthat $t\\mapsto\\Psi_t^\\eta(f)$ is norm-$C^1$ on\n$[1,\\infty)$ and, for constants $C_{\\eta,f}\\ge0$ and\n$\\epsilon_{\\eta,f}>0$,\n$$\\left\\|\\frac{d}{dt}\\Psi_t^\\eta(f)\\right\\|\\le C_{\\eta,f}(1+t)^{-1-\\epsilon_{\\eta,f}}\\qquad(t\\ge1).$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qft-fock-and-test-spaces",
+          "source_section": "Definition",
+          "quote": "The bosonic and fermionic Fock Hilbert spaces are the square-summable direct\nsums\n$\\mathcal F_s(H)=\\{(\\Psi_n)_{n\\ge0}:\\Psi_n\\in H_s^{(n)},\\\n\\sum_n\\|\\Psi_n\\|^2<\\infty\\}$ and\n$\\mathcal F_a(H)=\\{(\\Psi_n)_{n\\ge0}:\\Psi_n\\in H_a^{(n)},\\\n\\sum_n\\|\\Psi_n\\|^2<\\infty\\}$, with the componentwise inner product.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "hilbert-valued-fundamental-theorem",
+          "claim": "On a compact interval, the norm-C1 Hilbert-valued curve has increment equal to the Riemann integral of its derivative, with the integral norm bounded by the integral of derivative norms.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "integrable-tail-and-limit",
+          "claim": "The positive-power tail makes the curve Cauchy at infinity and gives the explicit norm-limit rate.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "linearity-of-limit-map",
+          "claim": "Pointwise norm limits of the supplied linear approximant maps are linear on the packet domain.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "fock-isometry",
+          "claim": "Convergence of pairwise inner products to the Fock pairing makes the limit map norm-preserving.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "extension-to-completion",
+          "claim": "The isometry on the packet domain extends uniquely to its Hilbert-space closure by completeness.",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: the vacuum label belongs to the packet domain and has a constant approximant; its derivative and tail are zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 allows C=0, giving a constant curve and zero error bound."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: Steps 1.1 and 2.1 apply to a single packet with no product or pairwise-velocity exception."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: coincident velocity supports are excluded from the multi-packet domain; the Hilbert-valued Cook estimate itself requires no separation once its derivative bound is assumed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 starts at s≥1 and gives a bound for every t≥1; the limit is only asserted at t→∞."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Steps 1.1–5.1 use Hilbert completeness, Riemann sums, and the stated estimate; no choice principle is used in this conditional Cook argument."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem makes direct limit and conditional isometry claims, not an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem makes direct limit and conditional isometry claims, not an iff statement."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "integrable tail",
+          "status": "checked",
+          "evidence": "For ε>0, ∫_s^∞ C(1+r)^(-1-ε)dr=C(1+s)^(-ε)/ε, the exact rate in step 1.2."
+        },
+        {
+          "name": "threshold exponent",
+          "status": "checked",
+          "evidence": "At ε=0 the same tail is C∫_s^∞(1+r)^(-1)dr and diverges; the strict ε>0 hypothesis is essential to this proof."
+        },
+        {
+          "name": "time direction",
+          "status": "checked",
+          "evidence": "The contract reparameterizes each sign η by t≥1; the argument applies to η=+1 and η=-1 separately."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-84 author",
+        "notes": "The proof establishes a complete conditional Hilbert-space limit and its rate. It does not prove the local Haag–Ruelle derivative estimate, Fock inner-product convergence, or surjectivity onto the physical Hilbert space."
+      }
+    },
+    "prop-qftx-scattering-isometry-not-completeness": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-qftx-cook-scattering-limit",
+          "source_section": "Statement",
+          "quote": "then $W_\\eta$ is an isometry on $\\mathcal D_\\sigma$ and extends uniquely to an isometry on its Hilbert-space closure. The derivative estimate alone does not assert this inner-product convergence or that the range is all of $\\mathcal H$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+          "source_section": "Statement",
+          "quote": "For vectors $u,v$ in a real or complex inner product space,\n\n$$|\\langle u,v\\rangle|\\le\\lVert u\\rVert\\lVert v\\rVert.$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "comparison-is-contraction",
+          "claim": "The adjoint of an isometry has norm at most one, so Ω+*Ω- is a contraction.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "equal-ranges-imply-unitary",
+          "claim": "Equal ranges give the same orthogonal range projection and hence S*S=SS*=I.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "unitary-implies-equal-ranges",
+          "claim": "If S is unitary, equality of the norm of a vector and its range projection forces inclusion of the ranges; surjectivity gives the reverse inclusion.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "given",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 remains valid for the zero asymptotic space; its unique endomorphism is the identity on that zero space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 includes x=0 in the contraction inequality."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: Steps 1.2 and 2.1 are dimension-independent and include one-dimensional asymptotic spaces."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 permits equal but proper ranges, so S can be unitary on the asymptotic space while full asymptotic completeness fails."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The proposition has no time or limiting endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The Hilbert-space operator argument uses no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.2 proves equal ranges imply S is unitary."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1 proves S unitary implies equal ranges."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "common proper range",
+          "status": "checked",
+          "evidence": "For Ω+=Ω-:C→C², z↦(z,0), the comparison is I_C while the common range is a proper subspace; equal ranges do not imply full asymptotic completeness."
+        },
+        {
+          "name": "unequal orthogonal ranges",
+          "status": "checked",
+          "evidence": "For Ω-(z)=(z,0), Ω+(z)=(0,z), the comparison is zero and the ranges differ; the B-page counterexample gives the complete computation."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-84 author",
+        "notes": "The statement distinguishes unitarity on a common scattering range from full asymptotic completeness. It makes no claim that any particular QFT realizes either range configuration."
+      }
+    },
+    "cex-qftx-isometries-different-ranges": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "prop-qftx-scattering-isometry-not-completeness",
+          "source_section": "Statement",
+          "quote": "It is unitary if and only if\n$\\operatorname{Ran}\\Omega_+=\\operatorname{Ran}\\Omega_-$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "maps-are-isometries",
+          "claim": "Both coordinate embeddings preserve the norm on C.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "comparison-is-zero",
+          "claim": "The adjoint of the second-axis embedding extracts the second coordinate, so its product with the first-axis embedding is zero and not unitary.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example uses a one-dimensional nonzero domain and has no empty-packet case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 computes S(z)=0 for every z, including z=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The domain is exactly C, and step 1.1 verifies both maps on every scalar."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 gives two distinct orthogonal proper ranges, and step 2.1 computes their comparison."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No time or limit parameter occurs in this finite-dimensional example."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All spaces and maps are explicit finite-dimensional objects; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The counterexample refutes an unqualified universal unitarity claim; it states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The counterexample refutes an unqualified universal unitarity claim; it states no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "unit vectors",
+          "status": "checked",
+          "evidence": "For z=1, both embedded vectors have norm one but S(1)=0."
+        },
+        {
+          "name": "range check",
+          "status": "checked",
+          "evidence": "The ranges C×{0} and {0}×C are distinct proper subspaces of C²."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-84 author",
+        "notes": "This is a pure Hilbert-space counterexample to unqualified unitarity. It is not a constructed or reported QFT model and does not assert failure of completeness in any specific physical theory."
+      }
+    }
+  }
+}

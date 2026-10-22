@@ -1,0 +1,239 @@
+[
+  {
+    "order": 917,
+    "id": "qsmx-transport-and-drude",
+    "kind": "A",
+    "category": "quantum-statistical-mechanics",
+    "library": "physics",
+    "title": "Current continuity, Drude obstructions and conditional diffusion",
+    "companion": "qsmx-transport-and-drude-examples",
+    "requires": [
+      "qsm-dt-response",
+      "qsmx-integrable-transfer",
+      "qsmx-lieb-robinson-spectral-flow"
+    ],
+    "items": [
+      {
+        "id": "def-qsmx-lattice-current-and-limits",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Local charge current and finite-volume correlation conventions",
+        "reference": "items/def-qsmx-lattice-current-and-limits.md",
+        "design_state": "Step 1 assigned design item; current authored draft.",
+        "inventory_expansion_required": false,
+        "dependency_level": 0,
+        "deps": [
+          "thm-qsm-dt-finite-kubo"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "thm-qsm-dt-finite-kubo": "mathematical-premise"
+        },
+        "physical_scope": null,
+        "statement": "Fix either a finite open chain with sites $\\{1,\\ldots,L\\}$, $L\\ge2$, or a periodic chain with sites $\\mathbb Z/L\\mathbb Z$, $L\\ge3$, and denote its site set by $\\Lambda_L$. Let $\\mathcal H_L$ be a nonzero finite-dimensional complex Hilbert space. For each site $j$, let $q_j=q_j^*$ be a bounded charge observable, with physical unit $\\mathsf Q$. For each oriented nearest-neighbor bond $(j,j+1)$, let $h_{j,j+1}=h_{j,j+1}^*$ be an energy operator in joules. Require $[h_{k,k+1},q_j]=0$ whenever $j\\notin\\{k,k+1\\}$, and require local charge conservation $[h_{j,j+1},q_j+q_{j+1}]=0$. On an open chain set $H_L=\\sum_{j=1}^{L-1}h_{j,j+1}$; on a ring set $H_L=\\sum_{j\\in\\mathbb Z/L\\mathbb Z}h_{j,j+1}$ with periodic indices. For an open chain define the absent boundary currents $j_{0,1}=j_{L,L+1}=0$. Use $\\hbar>0$ in joule-seconds. These finite local data may be realized on a tensor-product spin space or on a finite fixed-particle site space, provided the stated commutation conditions hold.\n\nThe oriented bond current from $j$ to $j+1$ is\n$$j_{j,j+1}:=\\frac{i}{\\hbar}[h_{j,j+1},q_{j+1}].$$\nIt has unit $\\mathsf Q\\,\\mathrm{s}^{-1}$. The total current is the sum over existing bonds, $J_L:=\\sum_{(j,j+1)}j_{j,j+1}$, and its Heisenberg evolution for $t\\in\\mathbb R$ is $J_L(t):=e^{iH_Lt/\\hbar}J_Le^{-iH_Lt/\\hbar}$. For finite inverse temperature $\\beta>0$ in joules$^{-1}$, define $\\rho_{\\beta,L}:=e^{-\\beta H_L}/\\operatorname{Tr}(e^{-\\beta H_L})$ and $\\omega_{\\beta,L}(A):=\\operatorname{Tr}(\\rho_{\\beta,L}A)$. Write $J_L^\\circ:=J_L-\\omega_{\\beta,L}(J_L)I$ and $J_L^\\circ(t):=e^{iH_Lt/\\hbar}J_L^\\circ e^{-iH_Lt/\\hbar}$. Define the real, connected, symmetrized correlation per site by\n$$C_L(t):=\\frac{1}{L}\\operatorname{Re}\\,\\omega_{\\beta,L}\\!\\left(J_L^\\circ(t)J_L^\\circ\\right)=\\frac{1}{2L}\\omega_{\\beta,L}\\!\\left(J_L^\\circ(t)J_L^\\circ+J_L^\\circ J_L^\\circ(t)\\right).$$\nThe correlation has unit $\\mathsf Q^2\\,\\mathrm{s}^{-2}$ per site.\n\nThis definition assigns no transport coefficient by itself. Any proposed finite-volume or thermodynamic transport quantity must additionally state its time cutoff, frequency regulator (for example $e^{-\\eta t}$ with $\\eta>0$ in seconds$^{-1}$), spatial normalization, and the exact order in which $L\\to\\infty$, the time cutoff tends to infinity, and any regulator is removed. Existence of those limits is not part of this definition.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. Sirker, Transport in one-dimensional integrable quantum systems, SciPost Physics Lecture Notes 17 (2020), §2, equations (2.1)–(2.4)",
+              "url": "https://arxiv.org/pdf/1910.12155",
+              "locator": "§2, PDF pp. 2–3, equations (2.1)–(2.4): lattice continuity equations and commutator-defined spin and energy currents."
+            },
+            {
+              "title": "MIT OpenCourseWare 22.103, Microscopic Theory of Transport, Lecture 3: Diffusion and the Velocity Autocorrelation—Green-Kubo Relations",
+              "url": "https://ocw.mit.edu/courses/22-103-microscopic-theory-of-transport-fall-2003/42a7a0ddcb94eb23f6c096ae04da0162_lec3.pdf",
+              "locator": "Lecture 3, equations (3.1)–(3.8): stationary current correlations, time integration, and limit-qualified transport coefficients."
+            }
+          ]
+        },
+        "library": "physics"
+      },
+      {
+        "id": "lem-qsmx-lattice-current-continuity",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Continuity equation for a local lattice charge current",
+        "reference": "items/lem-qsmx-lattice-current-continuity.md",
+        "design_state": "Step 1 locally added intermediate lemma; complete proof authored.",
+        "inventory_expansion_required": true,
+        "dependency_level": 1,
+        "deps": [
+          "def-qsmx-lattice-current-and-limits"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-qsmx-lattice-current-and-limits": "mathematical-premise"
+        },
+        "physical_scope": null,
+        "statement": "Use the finite open or periodic chain and bond-current definition in [[def-qsmx-lattice-current-and-limits]]. Each $j_{j,j+1}$ is self-adjoint, and with $\\dot q_j:=(i/\\hbar)[H_L,q_j]$ the exact local identity\n$$\\dot q_j=j_{j-1,j}-j_{j,j+1}$$\nholds at every site. Consequently the total charge $Q_L:=\\sum_{j\\in\\Lambda_L}q_j$, where $\\Lambda_L$ is the open-chain site set or periodic site set from the definition, is conserved: $[H_L,Q_L]=0$. The current orientation is from $j$ to $j+1$, so positive outgoing current lowers the charge at site $j$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. Sirker, Transport in one-dimensional integrable quantum systems, SciPost Physics Lecture Notes 17 (2020), §2, equations (2.1)–(2.2)",
+              "url": "https://arxiv.org/pdf/1910.12155",
+              "locator": "§2, PDF p. 2, equations (2.1)–(2.2): the Heisenberg equation for local spin density and the oriented bond current."
+            }
+          ]
+        },
+        "library": "physics"
+      },
+      {
+        "id": "thm-qsmx-finite-mazur-bound",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Conserved overlaps bound the finite persistent current correlation",
+        "reference": "items/thm-qsmx-finite-mazur-bound.md",
+        "design_state": "Step 1 assigned design item; current authored draft.",
+        "inventory_expansion_required": false,
+        "dependency_level": 2,
+        "deps": [
+          "def-qsmx-lattice-current-and-limits",
+          "lem-qsmx-lattice-current-continuity",
+          "thm-qsm-dt-cesaro-dephasing",
+          "lem-qsm-matrix-state-calculus"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-qsmx-lattice-current-and-limits": "mathematical-premise",
+          "lem-qsmx-lattice-current-continuity": "mathematical-premise",
+          "thm-qsm-dt-cesaro-dephasing": "mathematical-premise",
+          "lem-qsm-matrix-state-calculus": "mathematical-premise"
+        },
+        "physical_scope": null,
+        "statement": "Take the finite-chain data of the current definition on $\\mathcal H_L$ and identify $\\mathcal H:=\\mathcal H_L$. Let $H=H^*$ have energy unit joules, let $\\hbar>0$ have unit joule-seconds, and let $\\rho$ be a positive-definite trace-one matrix satisfying $[\\rho,H]=0$. Define $\\omega(A):=\\operatorname{Tr}(\\rho A)$ and $\\alpha_t(A):=e^{iHt/\\hbar}Ae^{-iHt/\\hbar}$. Let $J_L$ be the total lattice current of the finite-volume current definition and center it with respect to this same $\\rho$, setting $J:=J_L-\\omega(J_L)I$. With no identification of $H$ and $H_L$, the estimate below is an abstract bound for this observable under $\\alpha_t$. Its lattice-transport specialization further takes $H=H_L$; then the Gibbs density $\\rho_{\\beta,L}$ in that definition is stationary and is an admissible choice of $\\rho$. More generally, $\\rho_{\\beta,L}$ can be used with another $H$ exactly when it also satisfies $[\\rho_{\\beta,L},H]=0$. Then $J=J^*$, as established by the local continuity result. For $m\\ge1$, let $Q_1,\\ldots,Q_m$ be linearly independent conserved matrices, $[H,Q_a]=0$. Put\n$$G_{ab}:=\\operatorname{Tr}(\\rho Q_a^*Q_b),\\qquad v_a:=\\operatorname{Tr}(\\rho Q_a^*J).$$\nThen $G$ is positive definite, the finite Cesàro limit exists, and\n$$\\lim_{T\\to\\infty}\\frac1T\\int_0^T\\operatorname{Re}\\,\\omega\\!\\left(\\alpha_t(J)J\\right)\\,dt\\;\\ge\\;v^*G^{-1}v\\;\\ge0.$$\nThis is a finite-dimensional persistent-correlation bound. It does not identify a thermodynamic Drude weight or assert that either volume/time order of limits exists.\n\n",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. Sirker, Transport in one-dimensional integrable quantum systems, SciPost Physics Lecture Notes 17 (2020), §2.1, equations (2.9)–(2.14)",
+              "url": "https://arxiv.org/pdf/1910.12155",
+              "locator": "§2.1, PDF pp. 4–5, equations (2.9)–(2.14): finite spectral Cesàro current correlation and the Mazur lower bound."
+            }
+          ]
+        },
+        "library": "physics"
+      },
+      {
+        "id": "thm-qsmx-conditional-diffusive-green-kubo",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Integrable current correlations give a conditional variance coefficient",
+        "reference": "items/thm-qsmx-conditional-diffusive-green-kubo.md",
+        "design_state": "Step 1 assigned design item; current authored draft.",
+        "inventory_expansion_required": false,
+        "dependency_level": 1,
+        "deps": [
+          "def-qsmx-lattice-current-and-limits",
+          "thm-qsm-dt-variance-green-kubo",
+          "thm-riemann-fubini-on-product-rectangles",
+          "thm-substitution",
+          "thm-ftc-second-part",
+          "thm-ftc-first-part",
+          "lem-cm-integral-and-ftc-for-continuous-normed-space-curves"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-qsmx-lattice-current-and-limits": "mathematical-premise",
+          "thm-qsm-dt-variance-green-kubo": "mathematical-premise",
+          "thm-riemann-fubini-on-product-rectangles": "mathematical-premise",
+          "thm-substitution": "mathematical-premise",
+          "thm-ftc-second-part": "mathematical-premise",
+          "thm-ftc-first-part": "mathematical-premise",
+          "lem-cm-integral-and-ftc-for-continuous-normed-space-curves": "mathematical-premise"
+        },
+        "physical_scope": null,
+        "statement": "Fix a spatial normalization and current convention as in the finite-volume lattice-current definition. Let $C:[0,\\infty)\\to\\mathbb R$ be a real, even, connected autocorrelation for that specified normalized current. In the classical alternative, let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space and let $t\\mapsto J(t)$ be a norm-continuous map into the real Hilbert space $L^2(\\Omega,\\mathcal F,\\mathbb P)$. Assume it is centered and second-order stationary, meaning $\\mathbb E[J(t)]=0$ and $\\mathbb E[J(s)J(t)]=C(t-s)$ for all $s,t\\ge0$, with the even extension $C(-u)=C(u)$. Define $X_T:=\\int_0^T J(t)\\,dt$ as a Bochner integral in $L^2$. In this classical alternative assume $\\lim_{R\\to\\infty}\\int_0^R|C(t)|\\,dt<\\infty$ as an absolute improper Riemann integral. In the quantum alternative, let $V=V^*$ be the chosen spatially normalized current observable in a finite-range spin $C^*$-dynamical system with the exact hypotheses of the finite quantum variance theorem cited below, and let its invariant state $\\phi$ satisfy $\\phi(V)=0$. For its strongly continuous dynamics $\\alpha_t$, define $X_T:=\\int_0^T\\alpha_t(V)\\,dt$ as a norm-Riemann integral and $C(t):=\\operatorname{Re}\\phi(V\\alpha_t(V))$. Invariance and self-adjointness make this real correlation even. This quantum alternative assumes exactly the Countable Choice, finite-matrix $C^*$-identity, interaction, state, and dynamics hypotheses in that supplier, and requires $C\\in L^1([0,\\infty))$ with respect to Lebesgue measure. In either alternative, the corresponding integral being finite gives\n$$\\lim_{T\\to\\infty}\\frac{\\operatorname{Var}(X_T)}{2T}=\\int_0^\\infty C(t)\\,dt=:D\\ge0,$$\nwhere the classical variance is $\\mathbb E[(X_T-\\mathbb E X_T)^2]=\\mathbb E[X_T^2]$ and the quantum variance is $\\phi(X_T^2)$. The correlation already includes the chosen spatial normalization; if it is obtained from a finite-volume sequence, convergence to $C$ and the order of spatial, time, and frequency-regulator limits are assumptions, not conclusions here. If the chosen current observable $J$ or $V$ has units $\\mathsf Q\\,\\mathrm{s}^{-1}$, both sides have units $\\mathsf Q^2\\,\\mathrm{s}^{-1}$, multiplied by any declared spatial-normalization unit. This conditional variance coefficient is not by itself an empirical diffusion constant or a conductivity.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. Sirker, Transport in one-dimensional integrable quantum systems, SciPost Physics Lecture Notes 17 (2020), §§2.2–3",
+              "url": "https://arxiv.org/pdf/1910.12155",
+              "locator": "§2.2, PDF pp. 6–8, equations (2.23)–(2.28): current correlations, Drude contribution, and integrability-qualified regular diffusion coefficient."
+            },
+            {
+              "title": "MIT OpenCourseWare 22.103, Microscopic Theory of Transport, Lecture 3: Diffusion and the Velocity Autocorrelation—Green-Kubo Relations",
+              "url": "https://ocw.mit.edu/courses/22-103-microscopic-theory-of-transport-fall-2003/42a7a0ddcb94eb23f6c096ae04da0162_lec3.pdf",
+              "locator": "Entire 4-page Lecture 3, equations (3.1)–(3.8): the stationary velocity-correlation identity and the conditional long-time diffusion limit."
+            },
+            {
+              "title": "Pieter Naaijkens, Quantum Spin Systems on Infinite Lattices, complete lecture notes, Theorem 3.3.12 and proof",
+              "url": "https://arxiv.org/pdf/1311.2717",
+              "locator": "§3.3.11–3.3.12, printed pp. 68–71 (PDF pp. 67–70): finite-range infinite-volume dynamics and strong continuity."
+            }
+          ]
+        },
+        "library": "physics"
+      }
+    ]
+  },
+  {
+    "order": 918,
+    "id": "qsmx-transport-and-drude-examples",
+    "kind": "B",
+    "category": "quantum-statistical-mechanics",
+    "library": "physics",
+    "title": "Current continuity, Drude obstructions and conditional diffusion — Examples",
+    "companion": "qsmx-transport-and-drude",
+    "requires": [
+      "qsmx-transport-and-drude"
+    ],
+    "items": [
+      {
+        "id": "cex-qsmx-dc-order-of-limits",
+        "kind": "counterexample",
+        "domain": "mathematics",
+        "title": "A conserved finite current obstructs an integrable dc correlation",
+        "reference": "items/cex-qsmx-dc-order-of-limits.md",
+        "design_state": "Step 1 assigned design item; current authored draft.",
+        "inventory_expansion_required": false,
+        "dependency_level": 3,
+        "deps": [
+          "def-qsmx-lattice-current-and-limits",
+          "lem-qsmx-lattice-current-continuity",
+          "thm-qsmx-finite-mazur-bound"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-qsmx-lattice-current-and-limits": "mathematical-premise",
+          "lem-qsmx-lattice-current-continuity": "mathematical-premise",
+          "thm-qsmx-finite-mazur-bound": "mathematical-premise"
+        },
+        "physical_scope": null,
+        "statement": "Every finite thermal lattice current correlation $C_L(t)$ defined by the current convention in this page is absolutely integrable on $[0,\\infty)$, so its unregulated Green–Kubo integral is finite.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. Sirker, Transport in one-dimensional integrable quantum systems, SciPost Physics Lecture Notes 17 (2020), §2.1, equations (2.9)–(2.14), and §2.2",
+              "url": "https://arxiv.org/pdf/1910.12155",
+              "locator": "§2.1, equations (2.9)–(2.14), and §2.2: finite persistent correlations, limit-order cautions, and the role of nondecaying current components."
+            },
+            {
+              "title": "MIT OpenCourseWare 22.103, Microscopic Theory of Transport, Lecture 3: Diffusion and the Velocity Autocorrelation—Green-Kubo Relations",
+              "url": "https://ocw.mit.edu/courses/22-103-microscopic-theory-of-transport-fall-2003/42a7a0ddcb94eb23f6c096ae04da0162_lec3.pdf",
+              "locator": "Lecture 3, equations (3.6)–(3.8), and discussion on pp. 3–4: a nondecaying correlation makes the Green–Kubo integral diverge."
+            }
+          ]
+        },
+        "library": "physics"
+      }
+    ]
+  }
+]

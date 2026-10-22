@@ -1,0 +1,605 @@
+ITEM 15 def-nrqmx-planar-two-particle-configuration-space
+---
+id: def-nrqmx-planar-two-particle-configuration-space
+kind: definition
+domain: mathematics
+library: mathematics
+title: "The collision-free unordered configuration space of two planar points"
+status: draft
+origin: pipeline
+pipeline_run: physics-non-fluid-129-2026-10-21-r2
+dependency_level: 0
+deps:
+  - def-topological-space
+  - def-subspace-topology-top
+  - def-quotient-topology
+dependency_roles:
+  def-topological-space: mathematical-premise
+  def-subspace-topology-top: mathematical-premise
+  def-quotient-topology: mathematical-premise
+provenance:
+  statement: literature-derived
+  proof: not-applicable
+sources:
+  references:
+    - title: "Chetan Nayak, Steven H. Simon, Ady Stern, Michael Freedman, and Sankar Das Sarma, Non-Abelian Anyons and Topological Quantum Computation, §II.A.1"
+      url: "https://arxiv.org/pdf/0707.1889"
+---
+
+## Definition
+
+Give $\mathbb R^4$ its Euclidean topology, whose basic open sets are the
+Euclidean open balls, and write a point as an ordered pair $(x,y)$ with
+$x,y\in\mathbb R^2$. The **ordered configuration space** is the subspace
+$$F_2(\mathbb R^2):=\{(x,y)\in\mathbb R^2\times\mathbb R^2:x\ne y\}$$
+with the subspace topology. The transposition acts by $(x,y)\mapsto(y,x)$.
+The **unordered configuration space of two distinct planar points** is
+$$C_2(\mathbb R^2):=F_2(\mathbb R^2)/\bigl((x,y)\sim(y,x)\bigr)$$
+with the quotient topology of the canonical projection
+$q:F_2(\mathbb R^2)\to C_2(\mathbb R^2)$. We write its points as unordered
+sets $\{x,y\}$; equality in this set means equality up to transposition.
+The diagonal $x=y$ is excluded, so collisions are not points of this space.
+
+The topology on each finite Cartesian coordinate space used below is its
+Euclidean topology; on a finite product it is equivalently the topology with
+basis the products of open sets in the factors.
+
+## Definition references
+
+[[def-topological-space]]
+
+[[def-subspace-topology-top]]
+
+[[def-quotient-topology]]
+
+## Remarks
+
+This is a mathematical configuration space. Its definition alone makes no
+claim about a physical particle species, exchange statistics, or a realized
+holonomy.
+
+OLD BOUNDARIES
+[{"case": "empty", "status": "checked", "evidence": "Definition: the distinct pair ((1,0),(-1,0)) is an explicit member of the ordered configuration space."}, {"case": "zero", "status": "not_applicable", "reason": "The definition fixes two planar points and has no zero-particle parameter."}, {"case": "one", "status": "not_applicable", "reason": "The definition fixes two distinct points; a one-point configuration is outside its domain."}, {"case": "degenerate", "status": "checked", "evidence": "Definition: the collision diagonal x=y is expressly removed from the configuration space."}, {"case": "endpoints", "status": "not_applicable", "reason": "The definition has no interval or endpoint parameter."}, {"case": "nonempty-choice", "status": "checked", "evidence": "Definition: unordered configurations are defined by the explicit two-point quotient; no representative is selected in a proof."}, {"case": "iff-forward", "status": "not_applicable", "reason": "The Definition contains no if-and-only-if assertion."}, {"case": "iff-reverse", "status": "not_applicable", "reason": "The Definition contains no if-and-only-if assertion."}]
+FLAGS
+{"reference": [], "audit": []}
+ITEM 16 ex-nrqmx-pauli-tomography
+---
+id: ex-nrqmx-pauli-tomography
+kind: example
+title: "Pauli six-outcome tomography"
+status: draft
+origin: pipeline
+domain: mathematics
+library: mathematics
+dependency_level: 4
+deps:
+  - thm-nrqmx-tomography-identifiability-stability
+  - lem-nrqmx-frame-pseudoinverse-reconstruction
+  - def-nrqmx-finite-hermitian-frame-and-gram-pseudoinverse
+dependency_roles:
+  thm-nrqmx-tomography-identifiability-stability: mathematical-premise
+  lem-nrqmx-frame-pseudoinverse-reconstruction: mathematical-premise
+  def-nrqmx-finite-hermitian-frame-and-gram-pseudoinverse: mathematical-premise
+proof_strategy: direct
+provenance:
+  statement: ai-altered
+  proof: ai-altered
+sources:
+  references:
+    - title: "Xhek Turkeshi and Markus Heinrich, Quantum Information Methods for Many-Body Physics, §3.1"
+      url: "https://www.quantum-randomness.com/teaching_files/qinfo_for_mbp/lecture_notes6.pdf"
+    - title: "John Watrous, The Theory of Quantum Information, Chapter 2, §2.1.3"
+      url: "https://cs.uwaterloo.ca/~watrous/TQI/TQI.2.pdf"
+---
+
+## Example
+
+On $\mathbb C^2$, define the Pauli matrices
+$$
+\sigma_x=\begin{pmatrix}0&1\\1&0\end{pmatrix},\quad \sigma_y=\begin{pmatrix}0&-i\\i&0\end{pmatrix},\quad \sigma_z=\begin{pmatrix}1&0\\0&-1\end{pmatrix}.
+$$
+The six effects $F_{j,\pm}=(I\pm\sigma_j)/6$, with $j\in\{x,y,z\}$, form an informationally complete POVM. For every qubit density matrix $\rho=(I+r_x\sigma_x+r_y\sigma_y+r_z\sigma_z)/2$, the exact outcome probabilities satisfy $r_j=3(p_{j,+}-p_{j,-})$ and the canonical linear-inversion procedure returns $\rho$. A valid finite frequency vector can instead yield a nonpositive output.
+
+## Example references
+
+[[thm-nrqmx-tomography-identifiability-stability]]
+
+[[lem-nrqmx-frame-pseudoinverse-reconstruction]]
+
+[[def-nrqmx-finite-hermitian-frame-and-gram-pseudoinverse]]
+
+## Facts & Assumptions
+
+**Given:** The six displayed matrices and a density matrix $\rho$ on $\mathbb C^2$.
+
+[A1] The Pauli matrices and effects are the finite matrices and operators in the Example.
+
+[A2] $\rho$ is Hermitian, positive semidefinite, and has trace one.
+
+[F1] [[thm-nrqmx-tomography-identifiability-stability]]: for a spanning finite POVM, exact probabilities reconstruct $\rho$, and the linear-inversion output is $\sum_af_aD_a$ for its canonical dual.
+
+[F2] [[lem-nrqmx-frame-pseudoinverse-reconstruction]]: for a positive semidefinite Gram matrix with spectral projections $P_\lambda$ at positive eigenvalues, $G^+=\sum_{\lambda>0}\lambda^{-1}P_\lambda$.
+
+[F3] [[def-nrqmx-finite-hermitian-frame-and-gram-pseudoinverse]]: $G_{ab}=\operatorname{Tr}(F_aF_b)$ and $D_a=\sum_b(G^+)_{ba}F_b$.
+
+## Verification
+
+
+1.1 Direct multiplication gives $\sigma_j^2=I$, $\operatorname{Tr}(\sigma_j)=0$, $\sigma_x\sigma_y=i\sigma_z$, $\sigma_y\sigma_z=i\sigma_x$, and $\sigma_z\sigma_x=i\sigma_y$; reversing the order negates each mixed product. Thus $\operatorname{Tr}(\sigma_j\sigma_k)=2\delta_{jk}$. Since a Hermitian $2\times2$ matrix has two real diagonal entries and one complex off-diagonal entry, $\dim_{\mathbb R}\mathsf H_2=4$; the four nonzero orthogonal matrices $I,\sigma_x,\sigma_y,\sigma_z$ form a basis. Every trace-one Hermitian $\rho$ therefore has the stated form with $r_j=\operatorname{Tr}(\rho\sigma_j)\in\mathbb R$. Positivity [A2] restricts $|r|\le1$, since $(r_x\sigma_x+r_y\sigma_y+r_z\sigma_z)^2=|r|^2I$ and the eigenvalues of $\rho$ are $(1\pm|r|)/2$. [A1, A2, algebra]
+
+2.1 Each $\sigma_j$ is Hermitian with eigenvalues $1,-1$ by step 1.1, so $F_{j,\pm}$ has eigenvalues $1/3,0$ and is positive. For each $j$, $F_{j,+}+F_{j,-}=I/3$; summing over $x,y,z$ gives $I$. Also $F_{j,+}-F_{j,-}=\sigma_j/3$, so each $\sigma_j$ lies in the real span of the effects. Since $I$ is their sum, the basis in step 1.1 shows that the effects span $\mathsf H_2$. [A1, step 1.1, algebra]
+
+3.1 In the coordinate order $(x+,x-,y+,y-,z+,z-)$, direct multiplication and step 1.1 give $G_{(j,s),(k,t)}=\frac1{36}\operatorname{Tr}((I+s\sigma_j)(I+t\sigma_k))=\frac1{18}(1+st\,\delta_{jk})$ for $s,t\in\{+1,-1\}$. Thus the diagonal entries are $1/9$, opposite outcomes on one axis have entry $0$, and distinct axes have entry $1/18$. Let $u=(1,1,1,1,1,1)$ and $v_j=e_{j+}-e_{j-}$. Then $Gu=u/3$, $Gv_j=v_j/9$, and $G$ vanishes on vectors $(s_x,s_x,s_y,s_y,s_z,s_z)$ with $s_x+s_y+s_z=0$. These mutually orthogonal subspaces have dimensions $1,3,2$ and span $\mathbb R^6$. [A1, step 1.1, step 2.1, algebra]
+
+4.1 By [F2] and the eigenspaces in step 3.1, $G^+=3P_u+9\sum_jP_{v_j}$, where $P_u=uu^\mathsf T/6$ and $P_{v_j}=v_jv_j^\mathsf T/2$. The $e_{j+}$ column of $G^+$ is $u/2+9v_j/2$. Applying the canonical-dual formula [F3], using $\sum_{k,\pm}F_{k,\pm}=I$ and $F_{j,+}-F_{j,-}=\sigma_j/3$, gives $D_{j,+}=\frac12I+\frac32\sigma_j$; similarly $D_{j,-}=\frac12I-\frac32\sigma_j$. The probabilities are $p_{j,\pm}=\operatorname{Tr}(\rho F_{j,\pm})=(1\pm r_j)/6$, so $\sum_{j,\pm}p_{j,\pm}D_{j,\pm}=\frac12I+\frac12\sum_jr_j\sigma_j=\rho$, in agreement with [F1]. [A1, A2, F1, F2, F3, step 1.1, step 2.1, step 3.1, algebra]
+
+5.1 The frequency vector with $f_{x,+}=1$ and all other entries zero is nonnegative and sums to one. Its output is $D_{x,+}=\frac12I+\frac32\sigma_x$, whose eigenvalues are $2$ and $-1$. It is Hermitian but not positive, so the linear-inversion procedure does not preserve positivity for every frequency vector. [A1, step 4.1, algebra] ∎ 
+
+
+OLD BOUNDARIES
+[{"case": "empty", "status": "not_applicable", "reason": "The Example fixes six effects on C²."}, {"case": "zero", "status": "checked", "evidence": "Step 1.1 gives zero eigenvalues for effects, and step 5.1 computes an output with eigenvalue −1."}, {"case": "one", "status": "not_applicable", "reason": "The Example fixes six outcomes."}, {"case": "degenerate", "status": "checked", "evidence": "Step 3.1 finds a two-dimensional Gram kernel for the redundant six-element frame."}, {"case": "endpoints", "status": "checked", "evidence": "Step 4.1 includes probability endpoints reached by pure Bloch states; step 5.1 checks a simplex vertex frequency."}, {"case": "nonempty-choice", "status": "checked", "evidence": "Steps 1.1–5.1 are explicit finite matrix multiplications and finite sums."}, {"case": "iff-forward", "status": "not_applicable", "reason": "The Example asserts no equivalence."}, {"case": "iff-reverse", "status": "not_applicable", "reason": "The Example asserts no equivalence."}]
+FLAGS
+{"reference": [], "audit": []}
+ITEM 17 cex-nrqmx-infinite-mode-vacuum-warning
+---
+id: cex-nrqmx-infinite-mode-vacuum-warning
+kind: counterexample
+domain: mathematics
+title: Finite-mode implementability does not supply an infinite-mode limit
+status: draft
+origin: pipeline
+dependency_level: 5
+deps: [thm-nrqmx-finite-mode-bogoliubov, def-nrqmx-finite-mode-symplectic-data, lem-nrqmx-finite-mode-fock-schr-identification, cor-c-one-change-of-variables-for-l-one-functions, lem-euclidean-gaussian-fourier-transform-with-two-pi-normalization, lem-complex-integration-by-parts-on-intervals-and-decaying-lines, thm-exponential-beats-every-polynomial]
+dependency_roles:
+  thm-nrqmx-finite-mode-bogoliubov: mathematical-premise
+  def-nrqmx-finite-mode-symplectic-data: mathematical-premise
+  lem-nrqmx-finite-mode-fock-schr-identification: mathematical-premise
+  cor-c-one-change-of-variables-for-l-one-functions: mathematical-premise
+  lem-euclidean-gaussian-fourier-transform-with-two-pi-normalization: mathematical-premise
+  lem-complex-integration-by-parts-on-intervals-and-decaying-lines: mathematical-premise
+  thm-exponential-beats-every-polynomial: mathematical-premise
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+sources:
+  references:
+    - title: "Phan Thành Nam, Mathematical Quantum Mechanics II, §6.3, pp. 146–156"
+      url: "https://www.math.lmu.de/~nam/LectureNotesMQM2020.pdf"
+    - title: "Arvind, B. Dutta, N. Mukunda and R. Simon, The Real Symplectic Groups in Quantum Mechanics and Optics, §VI"
+      url: "https://arxiv.org/pdf/quant-ph/9509002"
+---
+
+## Statement
+
+Fix a positive real action scale $\hbar>0$ and a real squeeze parameter
+$s\ne0$. For each finite $N\ge1$, apply independently to $N$ vacuum modes
+the one-mode dilation $[U_sf](x)=e^{-s/2}f(e^{-s}x)$. The
+resulting finite-mode unitary exists, its mean total number is
+$$N\sinh^2(s),$$
+and the magnitude of its overlap with the $N$-mode vacuum is
+$$|\langle\Omega_N,U_s^{\otimes N}\Omega_N\rangle| =(\cosh s)^{-N/2}\longrightarrow0.$$
+These exact finite-$N$ calculations exhibit quantities that are not uniform
+in mode number. They do not prove an infinite-mode non-implementability
+theorem and do not assign a limiting density operator or measurement.
+
+## Facts & Assumptions
+
+**Given:** A positive action scale $\hbar>0$, a nonzero real squeeze
+parameter $s$, and a finite integer $N\ge1$.
+
+[A1] The action scale is positive, $\hbar>0$, the squeeze is fixed with
+$s\in\mathbb R\setminus\{0\}$, and the mode count is a finite integer
+$N\ge1$.
+
+[F1] For $u=\cosh s$, $v=\sinh s$, the finite-mode Bogoliubov theorem
+supplies an implementer on every fixed finite product of $N$ modes
+([[thm-nrqmx-finite-mode-bogoliubov]]).
+
+[F2] The finite-mode Bogoliubov theorem supplies a unitary on every fixed
+finite number $N$ of modes; it asserts nothing about an infinite collection
+([[thm-nrqmx-finite-mode-bogoliubov]]).
+
+[F3] In Schrödinger coordinates, $Q=\sqrt\hbar x$,
+$P=-i\sqrt\hbar\partial_x$, and
+$a=(Q+iP)/\sqrt{2\hbar}$; the vacuum is the normalized ground Hermite
+function ([[def-nrqmx-finite-mode-symplectic-data]],
+[[lem-nrqmx-finite-mode-fock-schr-identification]]).
+
+[F4] For $A>0$ and $B\in\mathbb R$,
+$$\int_{\mathbb R}e^{-Ax^2+iBx}\,dx=\sqrt{\frac\pi A}e^{-B^2/(4A)}$$
+by scaling the imported $2\pi$-frequency Gaussian transform; finite-interval
+integration by parts and exponential domination justify the Gaussian second
+moment ([[lem-euclidean-gaussian-fourier-transform-with-two-pi-normalization]],
+[[lem-complex-integration-by-parts-on-intervals-and-decaying-lines]],
+[[thm-exponential-beats-every-polynomial]]).
+
+[F5] In every finite dimension $n$, Lebesgue substitution applies to the
+$C^1$ dilation $\mathbf x\mapsto e^{-s}\mathbf x$ and every $L^1$ integrand;
+in particular this covers $|f|^2$ in one mode, $x^2|U_sg_0|^2$, and the
+$N$-coordinate product dilation ([[cor-c-one-change-of-variables-for-l-one-functions]]).
+
+## Proof
+
+1.1 Apply [F5] to $x\mapsto e^{-s}x$ and $|f|^2$ to get
+$$\int_{\mathbb R}|U_sf(x)|^2dx =\int_{\mathbb R}|f(y)|^2dy,$$
+so $U_s$ is unitary. The chain rule for $Q=\sqrt\hbar x$ and
+$P=-i\sqrt\hbar\partial_x$ gives
+$U_s^*aU_s=\cosh(s)a+\sinh(s)a^*$. The scalar pair obeys
+$|u|^2-|v|^2=1$ and $uv=vu$. For the $N$-mode product take
+$U_N=uI_N$ and $V_N=vI_N$; the finite Bogoliubov result [F1] supplies an
+implementer for these coefficients. Write
+$\psi_s(x)=U_sg_0(x)=e^{-s/2}\pi^{-1/4}e^{-e^{-2s}x^2/2}$. Then
+$$a\psi_s=\frac{1-e^{-2s}}{\sqrt2}x\psi_s.$$
+By [F4] with $A=1,B=0$, $\int e^{-y^2}dy=\sqrt\pi$. On $[-R,R]$,
+integration by parts gives
+$$\int_{-R}^R y^2e^{-y^2}dy=\left[-\frac y2e^{-y^2}\right]_{-R}^R+\frac12\int_{-R}^Re^{-y^2}dy.$$
+The boundary term tends to zero by [F4], so
+$\int y^2|g_0(y)|^2dy=1/2$. The substitution $y=e^{-s}x$ in [F5] gives
+$$\int_{\mathbb R}x^2|\psi_s(x)|^2dx=e^{2s}\int_{\mathbb R}y^2|g_0(y)|^2dy=e^{2s}/2.$$
+Consequently
+$$\|a\psi_s\|^2=\frac{(1-e^{-2s})^2}{2}\frac{e^{2s}}2=\sinh^2(s).$$
+By [F3], the $N$-mode Fock–Schrödinger unitary sends its vacuum
+$\Omega_N$ to $g_0^{\otimes N}$. On $L^2(\mathbb R^N)$ define
+$$[U_s^{(N)}f](x_1,\ldots,x_N)=e^{-Ns/2} f(e^{-s}x_1,\ldots,e^{-s}x_N).$$
+The $C^1$ change-of-variables formula [F5] in $\mathbb R^N$ gives
+$\|U_s^{(N)}f\|_2=\|f\|_2$, so this is unitary. It is the
+product of the one-mode dilations, and the coordinatewise chain rule gives
+$U_s^{(N)*}a_jU_s^{(N)}=u a_j+v a_j^*$ for each $j$. The finite Bogoliubov
+statement [F1] also supplies an implementer for this coefficient pair. Put
+$\Psi_N=(U_s\Omega)^{\otimes N}$ under the same identification; its $j$th
+number expectation is the one-mode value $\|a\psi_s\|^2=\sinh^2(s)$ already
+computed above. The number operator is the sum of the $N$ mode number
+operators, so linearity gives
+$$\langle\Psi_N,\mathcal N_N\Psi_N\rangle=N\sinh^2(s).$$
+The product unitary exists because it is the tensor product of finitely many
+copies of this unitary. The same coefficient pair is covered by the finite Bogoliubov
+statement [F2]; no infinite product is taken. [A1, F1, F2, F3, F4, F5,
+algebra]
+
+2.1 In Schrödinger coordinates, $\Omega=g_0$ and
+$U_sg_0(x)=e^{-s/2}\pi^{-1/4}e^{-e^{-2s}x^2/2}$. Set
+$A=(1+e^{-2s})/2>0$. By [F4] with $B=0$,
+$$\int_{\mathbb R}e^{-Ax^2}dx=\sqrt{\pi/A}=\sqrt{\frac{2\pi}{1+e^{-2s}}}.$$
+Hence
+$$\langle g_0,U_sg_0\rangle=\pi^{-1/2}e^{-s/2}\sqrt{\frac{2\pi}{1+e^{-2s}}}=\sqrt{\frac{2}{e^s+e^{-s}}}=\frac1{\sqrt{\cosh s}}.$$
+Since $U_s$ and $g_0$ are real and positive here, this is also the overlap
+magnitude; the formula holds for every real $s$. Product inner products
+factor over the $N$ modes, yielding
+$$|\langle\Omega_N,\Psi_N\rangle|=(\cosh s)^{-N/2}.$$
+For $s\ne0$, $\cosh s>1$, so this magnitude tends to zero as $N\to\infty$.
+Together with step 1.1 this proves only the stated finite-$N$ divergence and
+overlap limit. Finite-dimensional implementation does not itself provide an
+infinite-mode implementer, and this example does not prove that none exists.
+[A1, F1, F2, F4, step 1.1, algebra] ∎
+
+OLD BOUNDARIES
+[{"case": "empty", "status": "not_applicable", "reason": "The example assumes N>=1 and s!=0."}, {"case": "zero", "status": "checked", "evidence": "At s=0 the formulas give zero number and unit overlap; the statement excludes this trivial case."}, {"case": "one", "status": "checked", "evidence": "Step 2.1 gives the exact N=1 overlap."}, {"case": "degenerate", "status": "checked", "evidence": "Statement and steps 1.1 and 2.1: the same nonzero squeeze is repeated in every one of the finite N modes."}, {"case": "endpoints", "status": "checked", "evidence": "Steps 1.1 and 2.1 give every finite N and the N-to-infinity scalar limit."}, {"case": "nonempty-choice", "status": "not_applicable", "reason": "Every constructed product has finite N and uses no infinite choice."}, {"case": "iff-forward", "status": "not_applicable", "reason": "This is a finite-N warning, not an iff result."}, {"case": "iff-reverse", "status": "not_applicable", "reason": "This is a finite-N warning, not an iff result."}]
+FLAGS
+{"reference": [{"id": "cex-nrqmx-infinite-mode-vacuum-warning", "batch": 52, "case": "one", "evidence": "Step 2.1 gives the exact N=1 overlap.", "unresolved_step_references": ["2.1"]}, {"id": "cex-nrqmx-infinite-mode-vacuum-warning", "batch": 52, "case": "degenerate", "evidence": "Statement and steps 1.1 and 2.1: the same nonzero squeeze is repeated in every one of the finite N modes.", "unresolved_step_references": ["1.1", "2.1"]}, {"id": "cex-nrqmx-infinite-mode-vacuum-warning", "batch": 52, "case": "endpoints", "evidence": "Steps 1.1 and 2.1 give every finite N and the N-to-infinity scalar limit.", "unresolved_step_references": ["1.1", "2.1"]}], "audit": []}
+ITEM 18 lem-nrqmx-landau-form-diagonalization
+---
+id: lem-nrqmx-landau-form-diagonalization
+kind: lemma
+domain: mathematics
+library: physics
+title: Closed-form diagonalization in Landau gauge
+status: draft
+origin: pipeline
+pipeline_run: physics-non-fluid-129-2026-10-21-r2
+dependency_level: 1
+deps:
+  - def-nrqmx-magnetic-form-data
+  - thm-nrqm-oscillator-oscillator-scaling-and-exact-realization
+  - def-fourier-transform-on-l-one-of-rn
+  - thm-plancherel
+  - cor-fourier-transform-is-a-topological-automorphism-of-schwartz-space
+  - lem-nrqm-composites-euclidean-l2-product-unitary
+  - cor-c-one-change-of-variables-for-l-one-functions
+  - thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces
+  - thm-tonelli-theorem-for-sigma-finite-product-spaces
+  - thm-integration-by-parts-for-absolutely-continuous-functions
+  - def-the-standard-smooth-step-function
+  - cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn
+  - lem-l-two-with-the-integral-pairing-is-a-hilbert-space
+  - def-countable-choice
+  - def-dependent-choice
+  - thm-dominated-convergence
+dependency_roles:
+  def-nrqmx-magnetic-form-data: mathematical-premise
+  thm-nrqm-oscillator-oscillator-scaling-and-exact-realization: mathematical-premise
+  def-fourier-transform-on-l-one-of-rn: mathematical-premise
+  thm-plancherel: mathematical-premise
+  cor-fourier-transform-is-a-topological-automorphism-of-schwartz-space: mathematical-premise
+  lem-nrqm-composites-euclidean-l2-product-unitary: mathematical-premise
+  cor-c-one-change-of-variables-for-l-one-functions: mathematical-premise
+  thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces: mathematical-premise
+  thm-tonelli-theorem-for-sigma-finite-product-spaces: mathematical-premise
+  thm-integration-by-parts-for-absolutely-continuous-functions: mathematical-premise
+  def-the-standard-smooth-step-function: mathematical-premise
+  cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn: mathematical-premise
+  lem-l-two-with-the-integral-pairing-is-a-hilbert-space: mathematical-premise
+  def-countable-choice: mathematical-premise
+  def-dependent-choice: mathematical-premise
+  thm-dominated-convergence: mathematical-premise
+proof_strategy: direct
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+sources:
+  references:
+    - title: "David Tong, Applications of Quantum Mechanics, §1.2, Landau gauge and
+        oscillator fibers"
+      url: "https://www.damtp.cam.ac.uk/user/tong/aqm/aqm.pdf"
+    - title: "Aram Harrow, MIT 8.06 Spring 2016 Lecture Notes, Chapter 4, §§3.1–3.2"
+      url: "https://ocw.mit.edu/courses/8-06-quantum-physics-iii-spring-2016/6e02558e\
+        cf4b7af37d2cdff550fc0f71_MIT8_06S16_chap4.pdf"
+    - title: "V. P. Nair, Notes on Quantum Mechanics, §13.2"
+      url: "https://nair.ccny.cuny.edu/Notes-QM.pdf"
+verification:
+  precheck: pass
+---
+
+## Statement
+
+Assume Countable Choice and Dependent Choice, $m,\hbar>0$, and real $q,B$
+with $qB\ne0$. On
+$L^2(\mathbb R^2;\mathbb C)$ close the nonnegative form
+$$q_B[u]=\frac1{2m}\left(\|-i\hbar\partial_xu\|_2^2+\|(-i\hbar\partial_y-qBx)u\|_2^2\right),\qquad u\in C_c^\infty(\mathbb R^2;\mathbb C).$$
+Put $\omega_c=|qB|/m$,
+$E_n=\hbar\omega_c(n+\tfrac12)$, and let $(\psi_n)_{n\ge0}$ be the
+complete normalized eigenfunctions of the one-dimensional oscillator with
+mass $m$, frequency $\omega_c$, and action constant $\hbar$ in its exact
+self-adjoint oscillator realization. For
+Schwartz $u$ define
+$\mathcal F_yu(x,k)=(2\pi)^{-1/2}\int_{\mathbb R}e^{-iky}u(x,y)\,dy$,
+and use its unitary $L^2$ extension. Put $x_0(k)=\hbar k/(qB)$ and
+$(Uu)(\xi,k)=\mathcal F_yu(\xi+x_0(k),k)$.
+Then $U$ is unitary from $L^2(\mathbb R^2_{x,y})$ onto
+$L^2(\mathbb R^2_{\xi,k})$. Writing
+$$Uu(\xi,k)=\sum_{n=0}^\infty f_n(k)\psi_n(\xi),\qquad f_n\in L^2(\mathbb R_k),$$
+the form closure domain and value are exactly
+$$D(\overline q_B)=\left\{u:\sum_{n=0}^\infty E_n\|f_n\|_{L^2(k)}^2<\infty\right\},\qquad \overline q_B[u]=\sum_{n=0}^\infty E_n\|f_n\|_{L^2(k)}^2.$$
+Thus the form is the diagonal oscillator form with an unrestricted $L^2(k)$
+degeneracy factor; it asserts no finite-area state count.
+
+## Statement references
+
+[[def-nrqmx-magnetic-form-data]]
+
+[[def-countable-choice]]
+
+[[def-dependent-choice]]
+
+[[thm-nrqm-oscillator-oscillator-scaling-and-exact-realization]]
+
+[[thm-dominated-convergence]]
+
+## Facts & Assumptions
+
+**Given:** Countable Choice and Dependent Choice, $m,\hbar>0$, $qB\ne0$,
+the form $q_B$, and the oscillator eigenfamily $(\psi_n)$ with energies
+$E_n$.
+
+[F1] The magnetic form on $C_c^\infty$ is the form of
+[[def-nrqmx-magnetic-form-data]] with $d=2$, $A=(0,Bx)$ and $V=0$.
+
+[F2] The $2\pi$-frequency Fourier transform on $L^1$ has kernel
+$e^{-2\pi i y\xi}$ ([[def-fourier-transform-on-l-one-of-rn]]), and its
+extension to $L^2$ is unitary ([[thm-plancherel]]). The wave-number convention
+in the Statement is the unitary rescaling
+$\mathcal F_y g(k)=(2\pi)^{-1/2}\widehat g(k/(2\pi))$; for Schwartz $g$ it
+satisfies $\mathcal F_y(-i\partial_y g)=k\mathcal F_y g$ by integration by
+parts, and Fourier transform preserves Schwartz space
+([[cor-fourier-transform-is-a-topological-automorphism-of-schwartz-space]]).
+The Euclidean $L^2$ product identification and Fubini apply
+([[lem-nrqm-composites-euclidean-l2-product-unitary]],
+[[thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces]]); the
+integration-by-parts identity used for the derivative multiplier is
+[[thm-integration-by-parts-for-absolutely-continuous-functions]].
+
+[F3] For $\omega_c>0$, let $H_{\mathrm{osc}}$ be the exact self-adjoint
+oscillator realization in
+[[thm-nrqm-oscillator-oscillator-scaling-and-exact-realization]]. It has
+complete orthonormal basis $(\psi_n)$, eigenvalues $E_n$, and domain
+$$D(H_{\mathrm{osc}})=\left\{g:\sum_{n=0}^\infty E_n^2|\langle g,\psi_n\rangle|^2<\infty\right\}.$$
+On its polynomial-Gaussian core it has differential expression
+$L=-\hbar^2\partial_\xi^2/(2m)+m\omega_c^2\xi^2/2$; in particular,
+$L\psi_n=E_n\psi_n$ on that core.
+
+[F4] Translation of one Lebesgue variable preserves its integral, and
+integration by parts holds for smooth compactly supported functions
+([[cor-c-one-change-of-variables-for-l-one-functions]],
+[[thm-integration-by-parts-for-absolutely-continuous-functions]]).
+
+[F5] Smooth compactly supported cutoffs equal to one on expanding balls and
+with first derivatives bounded by $C/R$ are obtained by rescaling the
+standard smooth step function ([[def-the-standard-smooth-step-function]]).
+
+[F6] Tonelli's theorem permits integration of the nonnegative oscillator
+energy series term by term over $(\xi,k)$ with Lebesgue measure
+([[thm-tonelli-theorem-for-sigma-finite-product-spaces]]).
+
+[F7] For every finite $p$ and dimension, compactly supported smooth
+functions are dense in $L^p(\mathbb R^d)$; in particular this holds for
+$L^2(\mathbb R_k)$ ([[cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn]]).
+
+[F8] The weighted sequence space in the Statement is complete: it is
+$L^2$ on $\mathbb N_0\times\mathbb R_k$ for the sigma-finite measure
+$(n,k)\mapsto E_n\,d\#(n)\,dk$, and $L^2$ of any measure space is
+Hilbert under Countable Choice
+([[lem-l-two-with-the-integral-pairing-is-a-hilbert-space]]).
+
+[F9] On any measure space, measurable complex-valued functions converging almost everywhere and bounded in modulus by a single nonnegative measurable $L^1$ function converge in integral (indeed in $L^1$). [[thm-dominated-convergence]]
+
+[A1] Countable Choice is assumed by the unitary Fourier, product-space, and
+oscillator suppliers; Dependent Choice is an exact hypothesis of the
+absolutely-continuous integration-by-parts supplier
+([[def-countable-choice]], [[def-dependent-choice]],
+[[thm-integration-by-parts-for-absolutely-continuous-functions]]).
+
+## Proof
+
+1.1 On the dense tensor core $a(x)b(y)$ with $a,b\in\mathcal S(\mathbb R)$,
+$\mathcal F_y$ is the identity on the first factor and the unitary Fourier
+transform on the second, by [F2] and the Euclidean $L^2$ product identification
+in [F2]. It extends uniquely to a unitary on $L^2(\mathbb R^2)$. For each
+$k$, translation $x=\xi+x_0(k)$ preserves the $x$-integral by [F4]; Fubini
+then shows that $Wg(\xi,k)=g(\xi+x_0(k),k)$ is an isometry with inverse
+$W^{-1}h(x,k)=h(x-x_0(k),k)$. Hence $U=W\mathcal F_y$ is unitary. [given, A1, F2, F4, construct]
+
+2.1 Let $u\in C_c^\infty(\mathbb R^2)$ and write
+$F(\xi,k)=Uu(\xi,k)$. For each fixed $k$, $F(\cdot,k)$ is smooth and
+compactly supported in $\xi$. Plancherel in $y$, the derivative identity
+in [F2], and the substitution $x=\xi+x_0(k)$ give
+$$q_B[u]=\int_{\mathbb R^2}\left(\frac{\hbar^2}{2m}|\partial_\xi F|^2+\frac{(qB)^2}{2m}\xi^2|F|^2\right)d\xi\,dk.$$
+For a compactly supported smooth $g(\xi)$, put
+$Lg=-\hbar^2g''/(2m)+m\omega_c^2\xi^2g/2\in L^2$. Integrating by parts
+twice on a finite interval containing the support of $g$ gives
+$\langle Lg,\psi_n\rangle=E_n\langle g,\psi_n\rangle$, since
+$L\psi_n=E_n\psi_n$ and the boundary terms vanish. Completeness and Parseval
+therefore give
+$$\sum_{n=0}^\infty E_n^2|\langle g,\psi_n\rangle|^2=\|Lg\|_2^2<\infty.$$
+The exact domain characterization in [F3] now implies
+$g\in D(H_{\mathrm{osc}})$, and its diagonal action gives
+$H_{\mathrm{osc}}g=Lg$. Hence
+$$\langle H_{\mathrm{osc}}g,g\rangle=\sum_{n=0}^\infty E_n|\langle g,\psi_n\rangle|^2.$$
+Integration by parts also identifies the left side with
+$$\frac1{2m}\left(\hbar^2\|g'\|_2^2+(qB)^2\|\xi g\|_2^2\right).$$
+Apply this identity to $F(\cdot,k)$ for almost every $k$. Tonelli [F6]
+permits integrating the nonnegative series, so the displayed core form is
+the coefficient form on every transformed core vector. [given, A1, F2, F3, F4, F6, step 1.1, algebra]
+
+3.1 For $N<\infty$ and $f_0,\ldots,f_N\in C_c^\infty(\mathbb R_k)$,
+$F_N(\xi,k)=\sum_{n=0}^Nf_n(k)\psi_n(\xi)$ has inverse
+$$U^{-1}F_N(x,y)=\frac1{\sqrt{2\pi}}\sum_{n=0}^N\int_{\mathbb R}e^{iky}f_n(k)\psi_n\!\left(x-\frac{\hbar k}{qB}\right)dk.$$
+Write $v:=U^{-1}F_N$. The integrands have compact $k$-support and are Schwartz in $x$ uniformly
+there by the Hermite form in [F3]; differentiating under the integral and
+integrating by parts in $k$ show rapid decay in $y$, so the inverse is
+Schwartz. Define
+$$\chi_R(x,y)=\prod_{s\in\{x,y\}}\sigma(2-s/R)\sigma(2+s/R),$$
+using [F5]. These cutoffs are one on $[-R,R]^2$, vanish outside
+$[-2R,2R]^2$, and have $|\nabla\chi_R|\le C/R$. For each covariant
+derivative,
+$$\Pi_j^A(\chi_Rv)=\chi_R\Pi_j^Av-i\hbar(\partial_j\chi_R)v.$$
+Take integer $R\ge1$. The step-function bounds in [F5] give $0\le\chi_R\le1$, and for every fixed $(x,y)$, $\chi_R(x,y)=1$ once $R\ge\max\{|x|,|y|\}$, so $\chi_R\to1$ pointwise. Since $v$ is Schwartz and $A=(0,Bx)$ is linear, $\Pi_1^Av=-i\hbar\partial_xv$ and $\Pi_2^Av=-i\hbar\partial_yv-qBxv$ are Schwartz and belong to $L^2(\mathbb R^2)$. For each $w\in\{v,\Pi_1^Av,\Pi_2^Av\}$, the functions $|(\chi_R-1)w|^2$ are measurable, tend pointwise to zero, and are bounded by the single measurable $L^1$ majorant $|w|^2$. Applying [F9] on the Lebesgue measure space $\mathbb R^2$ gives $\|(\chi_R-1)w\|_2\to0$. The derivative-cutoff term separately satisfies $\|\hbar(\partial_j\chi_R)v\|_2\le C\hbar\|v\|_2/R\to0$. Thus the displayed product identity and the triangle inequality give $\|\Pi_j^A(\chi_Rv-v)\|_2\to0$ for both $j$, as well as $\|\chi_Rv-v\|_2\to0$.
+The form identity of step 2.1 also holds for Schwartz functions: the Fourier and shear maps preserve Schwartz regularity, and for each Schwartz $g(\xi)$ one has $Lg\in L^2$; its integration-by-parts pairings with the polynomial-Gaussian $\psi_n$ have vanishing boundary terms at both infinities. The same Parseval calculation and exact diagonal operator-domain criterion in [F3] therefore give $g\in D(H_{\mathrm{osc}})$ and the same oscillator energy identity. All resulting nonnegative energies can again be integrated by [F6]. Apply this extended identity to the Schwartz difference $\chi_Rv-v$. Its weighted coefficient norm squared is exactly $\frac1{2m}\sum_{j=1}^2\|\Pi_j^A(\chi_Rv-v)\|_2^2$, which tends to zero by the preceding bounds. Since $\chi_Rv\in C_c^\infty$, each $F_N$ therefore lies in the weighted-norm closure of the transformed original core, without assuming closability in advance. Finite coefficient families are dense
+in the weighted target: truncate its convergent nonnegative series, then
+approximate the remaining finitely many $L^2(k)$ coefficients by
+$C_c^\infty(k)$ using [F7]. [A1, F1, F2, F3, F4, F5, F6, F7, F9, step 1.1, step 2.1, construct, algebra]
+
+4.1 Let $\mathcal K_E$ be the coefficient space
+$\{(f_n):\sum_nE_n\|f_n\|_2^2<\infty\}$ with squared norm
+$\sum_nE_n\|f_n\|_2^2$, and let
+$J:\mathcal K_E\hookrightarrow L^2(\mathbb N_0\times\mathbb R,d\#\,dk)$
+be the identity inclusion. Step 2.1 maps the transformed core isometrically
+into $\mathcal K_E$. Since $E_n\ge E_0=\hbar\omega_c/2>0$, $J$ is
+continuous and injective, with
+$\|Jf\|_2^2\le E_0^{-1}\sum_nE_n\|f_n\|_2^2$. The coefficient map is
+unitary on the underlying $L^2$ space by [F2] and [F3]. Thus
+$q_B[u]\ge E_0\|u\|_2^2$ on the core. For every $\varepsilon>0$,
+$$q_B[u]\le q_B[u]+\varepsilon\|u\|_2^2\le(1+\varepsilon/E_0)q_B[u],$$
+so each shifted form norm is equivalent to $q_B[u]^{1/2}$. Suppose a core
+sequence is Cauchy in $q_B[u]^{1/2}$ and tends to zero in $L^2$. Its
+weighted coefficient image converges in $\mathcal K_E$ to
+some $f$; unweighted $L^2$ convergence and continuity of $J$ give $Jf=0$.
+Injectivity of $J$ gives $f=0$, so $q_B[u]\to0$ along that sequence.
+The equivalence above then gives convergence to zero in the defining shifted
+form norm, proving closability of the core form. By [F8] the
+target is complete, so the isometric image of the form completion is
+closed there. Step 3.1 places a dense subspace of that target in the image;
+hence the image is the whole weighted space and the form closure is exactly
+the stated one. [F1, F2, F3, F8, step 2.1, step 3.1, algebra] ∎
+
+## Remarks
+
+The diagram records the unitary changes of representation used in the proof;
+the argument establishes each arrow and does not rely on the diagram.
+
+```tikzcd
+L^2(\mathbb R^2_{x,y}) \arrow[r,"\mathcal F_y"] & L^2(\mathbb R^2_{x,k}) \arrow[r,"W"] & L^2(\mathbb R^2_{\xi,k}) \arrow[r,"\mathcal H"] & L^2(\mathbb R_k;\ell^2(\mathbb N_0))
+```
+
+Here $\mathcal H$ is the coefficient map
+$F\mapsto(\langle F(k,\cdot),\psi_n\rangle)_{n\ge0}$, which is unitary by
+the complete oscillator basis. The linear Landau potential is unbounded, so
+no bounded-coefficient $H^2$ realization is invoked.
+
+OLD BOUNDARIES
+[{"case": "empty", "status": "checked", "evidence": "Statement fixes oscillator indices N_0 and a real momentum line; neither is empty. Steps 2.1 and 4.1 admit the all-zero coefficient family, giving zero vector and zero series. Finite truncations in step 3.1 include their ground term."}, {"case": "zero", "status": "checked", "evidence": "Statement assumes m,hbar>0 and qB!=0. Thus the actual denominators 2m and qB in proof steps 2.1 and 3.1 are nonzero; x_0 and positive oscillator energies are defined. Zero input vectors and coefficient functions remain allowed and give zero form."}, {"case": "one", "status": "checked", "evidence": "Statement and step 2.1 include n=0 with E0>0."}, {"case": "degenerate", "status": "checked", "evidence": "Statement and step 3.1 retain an unrestricted L2(k) coefficient for every n."}, {"case": "endpoints", "status": "not_applicable", "reason": "The wave-number variable ranges over R and has no finite endpoint."}, {"case": "nonempty-choice", "status": "not_applicable", "reason": "The proof uses the explicit oscillator basis and makes no arbitrary family selection."}, {"case": "iff-forward", "status": "not_applicable", "reason": "The result is an exact form identification, not an iff."}, {"case": "iff-reverse", "status": "not_applicable", "reason": "The result is an exact form identification, not an iff."}]
+FLAGS
+{"reference": [{"id": "lem-nrqmx-landau-form-diagonalization", "batch": 53, "case": "empty", "evidence": "Statement fixes oscillator indices N_0 and a real momentum line; neither is empty. Steps 2.1 and 4.1 admit the all-zero coefficient family, giving zero vector and zero series. Finite truncations in step 3.1 include their ground term.", "unresolved_step_references": ["2.1", "4.1", "3.1"]}, {"id": "lem-nrqmx-landau-form-diagonalization", "batch": 53, "case": "zero", "evidence": "Statement assumes m,hbar>0 and qB!=0. Thus the actual denominators 2m and qB in proof steps 2.1 and 3.1 are nonzero; x_0 and positive oscillator energies are defined. Zero input vectors and coefficient functions remain allowed and give zero form.", "unresolved_step_references": ["2.1", "3.1"]}, {"id": "lem-nrqmx-landau-form-diagonalization", "batch": 53, "case": "one", "evidence": "Statement and step 2.1 include n=0 with E0>0.", "unresolved_step_references": ["2.1"]}, {"id": "lem-nrqmx-landau-form-diagonalization", "batch": 53, "case": "degenerate", "evidence": "Statement and step 3.1 retain an unrestricted L2(k) coefficient for every n.", "unresolved_step_references": ["3.1"]}], "audit": []}
+ITEM 19 lem-nrqmx-determinant-curvature-is-trace
+---
+id: lem-nrqmx-determinant-curvature-is-trace
+kind: lemma
+domain: mathematics
+library: mathematics
+title: Determinant-line curvature is the trace curvature
+status: draft
+origin: pipeline
+pipeline_run: physics-non-fluid-129-2026-10-21-r2
+dependency_level: 3
+deps:
+  - def-nrqmx-determinant-line-projector
+  - lem-nrqmx-determinant-line-projector-well-defined
+  - thm-nrqmx-berry-projector-curvature
+dependency_roles:
+  def-nrqmx-determinant-line-projector: mathematical-premise
+  lem-nrqmx-determinant-line-projector-well-defined: mathematical-premise
+  thm-nrqmx-berry-projector-curvature: mathematical-premise
+proof_strategy: direct
+verification:
+  precheck: pass
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+sources:
+  references:
+    - title: Di Xiao, Ming-Che Chang, and Qian Niu, Berry Phase Effects on Electronic
+        Properties
+      url: https://arxiv.org/pdf/0907.2021
+      locator: Section I.C and Appendix A, projector curvature and connection
+        conventions.
+---
+
+## Statement
+
+Let $M$ be a finite-dimensional smooth manifold, let $r\ge1$, and let $P:M\to M_r(\mathbb C)$ be a $C^2$ orthogonal projector of constant rank $m$, with $1\le m\le r$. Write $E_P=\{(x,v):P(x)v=v\}$ and give it the projected connection $\nabla s=P\,ds$. For $x\in M$ and $X,Y\in T_xM$, define the curvature two-form with values in $M_r(\mathbb C)$ by
+
+$$F_x(X,Y):=P(x)\bigl(dP_x(X)dP_x(Y)-dP_x(Y)dP_x(X)\bigr)P(x).$$
+
+Let $U\subseteq M$ be open and let $V:U\to\mathbb C^{r\times m}$ be a $C^2$ orthonormal frame, meaning $V(x)^*V(x)=I_m$ and $V(x)V(x)^*=P(x)$ for all $x\in U$. Put $A=V^*dV$ and $w=v_1\wedge\cdots\wedge v_m$, where $v_1,\ldots,v_m$ are the columns of $V$. The induced projected connection on $\det E_P$ has local connection one-form $a=\operatorname{tr}A$ in the unit frame $w$, and its scalar curvature is
+
+$$da=\operatorname{tr}(V^*FV)=\operatorname{tr}F.$$
+
+Thus the curvature of the determinant line is the trace of the original bundle curvature, with the same orientation and sign convention.
+
+## Statement references
+
+[[def-nrqmx-determinant-line-projector]]
+
+[[thm-nrqmx-berry-projector-curvature]]
+
+## Facts & Assumptions
+
+**Given:** The smooth projector and the supplied local orthonormal frame in the Statement.
+
+[F1] [[def-nrqmx-determinant-line-projector]] identifies $\det E_P$ with the range of $Q=\bigwedge^mP$.
+
+[F2] [[lem-nrqmx-determinant-line-projector-well-defined]] proves that $Q$ is a smooth rank-one orthogonal projector.
+
+[F3] [[thm-nrqmx-berry-projector-curvature]] gives the frame connection $A=V^*dV$ and curvature $F_{\mathrm{fr}}=dA+A\wedge A=V^*FV$.
+
+## Proof
+
+**Given:** [F1]–[F3].
+
+1.1 Because the columns of $V$ are orthonormal, $w=v_1\wedge\cdots\wedge v_m$ has unit norm and spans the determinant line. Differentiating by the product rule gives $dw=\sum_j v_1\wedge\cdots\wedge dv_j\wedge\cdots\wedge v_m$. The projected connection applies $P$ to each differentiated factor. Since $P\,dv_j=\sum_a v_a A_{aj}$, each term with $a\ne j$ vanishes from a repeated wedge factor, while the $a=j$ term is $A_{jj}w$. Summing gives $Qdw=(\operatorname{tr}A)w$, so the determinant connection form is $a=\operatorname{tr}A$. [F1, F2, given, algebra]
+
+2.1 A line connection with scalar one-form $a$ has curvature $da+a\wedge a=da$, since a scalar one-form wedges with itself to zero. By [F3], $\operatorname{tr}F=\operatorname{tr}(dA)+\operatorname{tr}(A\wedge A)$. In coordinates, $\operatorname{tr}(A\wedge A)=\sum_{i,j}A_{ij}\wedge A_{ji}=0$: diagonal terms vanish and each off-diagonal pair cancels because one-forms anticommute. Therefore $da=d\operatorname{tr}A=\operatorname{tr}F_{\mathrm{fr}}=\operatorname{tr}(V^*FV)$. Finally, since $PFP=F$ and $VV^*=P$, cyclicity of finite-dimensional trace gives $\operatorname{tr}(V^*FV)=\operatorname{tr}(FVV^*)=\operatorname{tr}(FP)=\operatorname{tr}F$. [F3, step 1.1, algebra] ∎
+
+OLD BOUNDARIES
+[{"case": "empty", "status": "checked", "evidence": "An empty frame domain has no local curvature claim; the statement is on each open set carrying a frame. See the item Statement or Definition."}, {"case": "zero", "status": "checked", "evidence": "For a constant projector and constant frame, A=0 and both curvature expressions vanish. See the item Statement or Definition."}, {"case": "one", "status": "checked", "evidence": "At m=1, tr A=A and the determinant-line connection is the original line connection. See the item Statement or Definition."}, {"case": "degenerate", "status": "checked", "evidence": "Repeated eigenvalues within the rank-m bundle do not affect the frame computation. See the item Statement or Definition."}, {"case": "endpoints", "status": "checked", "evidence": "The identity is local and applies up to any chart boundary where the stated C2 frame is defined. See the item Statement or Definition."}, {"case": "nonempty-choice", "status": "checked", "evidence": "Countable Choice is explicit for the curvature supplier; the wedge and trace identities are finite algebra. See the item Statement or Definition."}, {"case": "iff-forward", "status": "not_applicable", "reason": "The statement is a direct definition or result, not an if-and-only-if claim."}, {"case": "iff-reverse", "status": "not_applicable", "reason": "The statement is a direct definition or result, not an if-and-only-if claim."}]
+FLAGS
+{"reference": [], "audit": []}

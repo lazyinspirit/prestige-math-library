@@ -7,7 +7,7 @@ origin: pipeline
 domain: physics
 library: physics
 physical_scope: A constructed two-state canonical model at finite positive temperature; the formulas are model predictions, not measured material properties or a thermodynamic-limit result.
-dependency_level: 4
+dependency_level: 1
 deps:
   - thm-natural-logarithm-laws
   - lem-exponential-series-has-infinite-radius
@@ -68,10 +68,16 @@ verification:
 
 ## Example
 
-Let $X=\{0,1\}$ have energies $E(0)=0$ J and $E(1)=\epsilon$ J with $\epsilon>0$, both weights $g_i=1$, and $\beta=(k_BT)^{-1}>0$ in $\mathrm{J^{-1}}$. This illustrates the finite-state canonical-sum clause of [[def-td-thermodynamic-limit-contract]] and [[def-tdmath-countable-canonical-model]]; it supplies no thermodynamic-limit sequence. Its partition sum and free energy are
+Let $X=\{0,1\}$ have energies $E(0)=0$ J and $E(1)=\epsilon$ J with $\epsilon>0$, both weights $g_i=1$, and $\beta=(k_BT)^{-1}>0$ in $\mathrm{J^{-1}}$. This illustrates the finite-state canonical-sum clause of *Finite-state thermodynamic-limit contract* and *Countable canonical model*; it supplies no thermodynamic-limit sequence. Its partition sum and free energy are
 $$
 Z(\beta)=1+e^{-\beta\epsilon},\qquad F(\beta)=-\beta^{-1}\log(1+e^{-\beta\epsilon}).
 $$
+
+## Example references
+
+[[def-td-thermodynamic-limit-contract]]
+
+[[def-tdmath-countable-canonical-model]]
 
 ## Facts & Assumptions
 

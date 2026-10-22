@@ -1,0 +1,1007 @@
+{
+  "version": 1,
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "batch": "127",
+  "scope": [
+    "def-tgrx-finite-fusion-count-model",
+    "prop-tgrx-fusion-count-entropy",
+    "def-tgrx-tl-boundary-representation",
+    "prop-tgrx-tl-projector-entropy",
+    "ex-tgrx-count-is-not-area-law"
+  ],
+  "contracts": {
+    "def-tgrx-finite-fusion-count-model": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition requires a finite nonempty label set I; the empty label set is outside the carrier.",
+          "case_reasoning": "Definition requires a finite nonempty label set I; the empty label set is outside the carrier. The nonnegative integer transition matrix counts explicitly labelled copies. The normalized identity is assigned only at a positive return count; no fusion category or gravitational interpretation is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition assigns no normalized operator when D_n=0; no zero-dimensional density matrix is claimed.",
+          "case_reasoning": "Definition assigns no normalized operator when D_n=0; no zero-dimensional density matrix is claimed. The nonnegative integer transition matrix counts explicitly labelled copies. The normalized identity is assigned only at a positive return count; no fusion category or gravitational interpretation is asserted."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition permits D_n=1, for which H_n is one-dimensional and rho_n is the identity.",
+          "case_reasoning": "Definition permits D_n=1, for which H_n is one-dimensional and rho_n is the identity. The nonnegative integer transition matrix counts explicitly labelled copies. The normalized identity is assigned only at a positive return count; no fusion category or gravitational interpretation is asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition permits repeated transition copies; N_ab records their multiplicity without requiring distinct label values.",
+          "case_reasoning": "Definition permits repeated transition copies; N_ab records their multiplicity without requiring distinct label values. The nonnegative integer transition matrix counts explicitly labelled copies. The normalized identity is assigned only at a positive return count; no fusion category or gravitational interpretation is asserted."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition includes n=0; D_0=(N^0)_00=1.",
+          "case_reasoning": "Definition includes n=0; D_0=(N^0)_00=1. The nonnegative integer transition matrix counts explicitly labelled copies. The normalized identity is assigned only at a positive return count; no fusion category or gravitational interpretation is asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition supplies finite label and matrix data; the construction uses finite sums and no arbitrary-family choice.",
+          "case_reasoning": "Definition supplies finite label and matrix data; the construction uses finite sums and no arbitrary-family choice. The nonnegative integer transition matrix counts explicitly labelled copies. The normalized identity is assigned only at a positive return count; no fusion category or gravitational interpretation is asserted."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement gives explicit definitions or one-way conclusions and contains no biconditional.",
+          "case_reasoning": "The Statement gives explicit definitions or one-way conclusions and contains no biconditional. The nonnegative integer transition matrix counts explicitly labelled copies. The normalized identity is assigned only at a positive return count; no fusion category or gravitational interpretation is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement gives explicit definitions or one-way conclusions and contains no biconditional.",
+          "case_reasoning": "The Statement gives explicit definitions or one-way conclusions and contains no biconditional. The nonnegative integer transition matrix counts explicitly labelled copies. The normalized identity is assigned only at a positive return count; no fusion category or gravitational interpretation is asserted."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "two-label transition matrix",
+          "inputs": "I={0,1}, N=[[0,1],[1,1]]",
+          "expected": "D0=1, D1=0, D2=1",
+          "result": "Direct matrix multiplication gives N^2=N+I and the stated entries.",
+          "scope": "Exact finite matrix check; no fusion-category realization is asserted."
+        },
+        {
+          "case": "zero return count",
+          "inputs": "D_n=0",
+          "expected": "no normalized rho_n is assigned",
+          "result": "The Definition assigns rho_n only for D_n>0.",
+          "scope": "Definition boundary only."
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "def-tgrx-sector-code",
+          "carrier": "items/def-tgrx-sector-code.md",
+          "status": "Current batch-125 draft carrier; the current Step1 record is ready and its hash matches the inspected carrier. This is authoring readiness, not independent proof approval.",
+          "source_section": "Definition",
+          "exact_statement": "Let $I$ be a finite nonempty index set. For each $\\alpha\\in I$, let $H_\\alpha$ and $K_\\alpha$ be nonzero finite-dimensional complex inner-product spaces, and give\n\n$$H_A:=\\bigoplus_{\\alpha\\in I}(H_\\alpha\\otimes K_\\alpha)$$\n\nthe orthogonal direct-sum inner product: distinct summands are orthogonal and the inner product within a summand is the Hilbert tensor-product inner product. On elementary tensors that inner product is $\\langle x\\otimes y,x'\\otimes y'\\rangle=\\langle x,x'\\rangle\\langle y,y'\\rangle$. A map $T\\otimes U$ acts by $(T\\otimes U)(x\\otimes y)=Tx\\otimes Uy$, and a direct-sum map acts blockwise with zero off-diagonal blocks.\n\nA complex-linear endomorphism is a linear map from a vector space to itself. A density matrix on a finite-dimensional complex inner-product space is a self-adjoint endomorphism with nonnegative eigenvalues and trace one; it is faithful when all eigenvalues are strictly positive. These are the conventions used for the finite density matrices in the earlier modular-balance result. The summand indexed by $\\alpha$ is called the $\\alpha$ sector. For each $\\alpha$, fix a faithful density matrix $\\chi_\\alpha$ on $K_\\alpha$. Let $\\mathbf p=(p_\\alpha)_{\\alpha\\in I}$ satisfy $p_\\alpha>0$ and $\\sum_{\\alpha\\in I}p_\\alpha=1$, and let $\\rho_\\alpha$ be density matrices on $H_\\alpha$. Define the encoded endomorphism\n\n$$\\mathcal E_\\chi(\\mathbf p,\\rho):=\\bigoplus_{\\alpha\\in I}p_\\alpha\\,\\rho_\\alpha\\otimes\\chi_\\alpha.$$\n\nWhen this encoded endomorphism is a density matrix, call it the encoded reduced state. The logical data are $\\mathbf p$ and $\\{\\rho_\\alpha\\}$; the ancillary matrices $\\{\\chi_\\alpha\\}$ are held fixed. For a second strictly positive probability vector $\\mathbf q$ and faithful density matrices $\\sigma_\\alpha$ on the same $H_\\alpha$, write $\\sigma_A:=\\mathcal E_\\chi(\\mathbf q,\\sigma)$ for the encoded reference endomorphism.\n\nThis is a finite-dimensional algebraic model. The definition makes no gravitational interpretation and does not identify a matrix entropy term with a geometric area.",
+          "relevant_hypotheses_and_conventions": "Finite-dimensional complex inner-product space; a density matrix is self-adjoint, has nonnegative eigenvalues, and trace one.",
+          "supplier_proof_status": "Definition; no separate proof is required. Current Step1 readiness is ready.",
+          "consumer_use": "Supplies the density-matrix convention for the normalized scalar state."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-127-beta-self-review",
+        "notes": "Self-review checked transition orientation, finite matrix domain, multiplicity convention, and the D_n=0 exclusion. No fusion category, quantum group, physical area, or gravitational state count is asserted. This is authoring evidence, not independent proof approval."
+      },
+      "current_boundary_worksheet": {
+        "proposal": "research/physics-non-fluid-129-2026-10-21-r2-owner-step2-boundary-proposal-5/proposal.json",
+        "source_sha256": "9ff2643c8e55647268995d9e2b3cd67b2827e9363c39e0f4445eb3f428a51c18",
+        "qualification": "Released complete current source/eight-case semantic worksheet; root transcribed exact current rows. No independent acceptance or finite computation asserted."
+      }
+    },
+    "prop-tgrx-fusion-count-entropy": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-tgrx-finite-fusion-count-model",
+          "source_section": "Definition",
+          "quote": "A **finite fusion transfer count model** consists of a finite nonempty label set $I$, a distinguished label $0\\in I$, and an explicitly supplied matrix $N=(N_{ab})_{a,b\\in I}$ whose entries lie in $\\{0,1,2,\\ldots\\}$. The entry $N_{ab}$ is the multiplicity of elementary transitions from label $b$ to label $a$; formally, the transition copies from $b$ to $a$ are the triples $(b,a,j)$ with integer $1\\leq j\\leq N_{ab}$. A length-$n$ path is a sequence of $n+1$ labels together with a chosen transition copy between each consecutive pair. View each natural-number entry as a real number under the usual inclusion $\\mathbb N\\subset\\mathbb R$. For a finite set $J$ and $F=\\mathbb R$ or $\\mathbb C$, $F^J$ means the functions $J\\to F$, with pointwise addition $(x+y)_j=x_j+y_j$ and scalar multiplication $(\\lambda x)_j=\\lambda x_j$. For real matrices $A,B$ indexed by $I$, define $(A+B)_{ab}:=A_{ab}+B_{ab}$. Their action on $x\\in\\mathbb R^I$ is $(Ax)_a:=\\sum_{b\\in I}A_{ab}x_b$. Matrix multiplication is $(AB)_{ac}:=\\sum_{b\\in I}A_{ab}B_{bc}$; it is associative by regrouping finite sums. These definitions are compatible because $((AB)x)_a=\\sum_{b,c\\in I}A_{ab}B_{bc}x_c=\\sum_{b\\in I}A_{ab}(Bx)_b=(A(Bx))_a$, and $((A+B)C)_{ac}=\\sum_b(A_{ab}+B_{ab})C_{bc}=(AC)_{ac}+(BC)_{ac}$. Thus the natural-entry powers can also act on real vectors and the addition used below distributes over matrix multiplication. Let $I_I$ be the identity matrix with entries $(I_I)_{ab}=1$ if $a=b$ and $0$ otherwise, and use the power convention $N^0:=I_I$ and $N^{n+1}:=NN^n$ for $n\\geq0$. Define the vacuum-return count $D_n:=(N^n)_{00}$. If $D_n>0$, set $H_n:=\\mathbb C^{D_n}$, with coordinates $x=(x_1,\\ldots,x_{D_n})$ and inner product $\\langle x,y\\rangle:=\\sum_{j=1}^{D_n}x_j\\overline{y_j}$, linear in the first argument. This pairing satisfies the inner-product axioms of [[def-inner-product-space]]: finite distributivity gives $\\langle\\alpha x+\\beta z,y\\rangle=\\alpha\\langle x,y\\rangle+\\beta\\langle z,y\\rangle$, and conjugating the finite sum gives $\\overline{\\langle y,x\\rangle}=\\sum_j\\overline{y_j}x_j=\\langle x,y\\rangle$. Writing $x_j=a_j+ib_j$ with real $a_j,b_j$ gives $\\langle x,x\\rangle=\\sum_j(a_j^2+b_j^2)\\geq0$; if this sum is zero, each nonnegative summand is zero, hence every $a_j=b_j=0$ and $x=0$. Conversely $x=0$ gives zero. The conjugation identities used here follow directly from $\\overline{a+ib}=a-ib$ and finite distributivity. Therefore $H_n$ is a finite-dimensional complex inner-product space; its coordinate unit vectors form a basis since every $x$ equals their linear combination with coefficients $x_j$, and a zero combination forces every coefficient to vanish. Let $I_{H_n}$ be its identity endomorphism and define $\\rho_n:=D_n^{-1}I_{H_n}$. If $D_n=0$, no normalized operator $\\rho_n$ is assigned. The matrix $N$ is model data; no fusion category, quantum group, or representation is presumed to realize it.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-tgrx-sector-code",
+          "source_section": "Definition",
+          "quote": "Let $I$ be a finite nonempty index set. For each $\\alpha\\in I$, let $H_\\alpha$ and $K_\\alpha$ be nonzero finite-dimensional complex inner-product spaces, and give\n\n$$H_A:=\\bigoplus_{\\alpha\\in I}(H_\\alpha\\otimes K_\\alpha)$$\n\nthe orthogonal direct-sum inner product: distinct summands are orthogonal and the inner product within a summand is the Hilbert tensor-product inner product. On elementary tensors that inner product is $\\langle x\\otimes y,x'\\otimes y'\\rangle=\\langle x,x'\\rangle\\langle y,y'\\rangle$. A map $T\\otimes U$ acts by $(T\\otimes U)(x\\otimes y)=Tx\\otimes Uy$, and a direct-sum map acts blockwise with zero off-diagonal blocks.\n\nA complex-linear endomorphism is a linear map from a vector space to itself. A density matrix on a finite-dimensional complex inner-product space is a self-adjoint endomorphism with nonnegative eigenvalues and trace one; it is faithful when all eigenvalues are strictly positive. These are the conventions used for the finite density matrices in the earlier modular-balance result. The summand indexed by $\\alpha$ is called the $\\alpha$ sector. For each $\\alpha$, fix a faithful density matrix $\\chi_\\alpha$ on $K_\\alpha$. Let $\\mathbf p=(p_\\alpha)_{\\alpha\\in I}$ satisfy $p_\\alpha>0$ and $\\sum_{\\alpha\\in I}p_\\alpha=1$, and let $\\rho_\\alpha$ be density matrices on $H_\\alpha$. Define the encoded endomorphism\n\n$$\\mathcal E_\\chi(\\mathbf p,\\rho):=\\bigoplus_{\\alpha\\in I}p_\\alpha\\,\\rho_\\alpha\\otimes\\chi_\\alpha.$$\n\nWhen this encoded endomorphism is a density matrix, call it the encoded reduced state. The logical data are $\\mathbf p$ and $\\{\\rho_\\alpha\\}$; the ancillary matrices $\\{\\chi_\\alpha\\}$ are held fixed. For a second strictly positive probability vector $\\mathbf q$ and faithful density matrices $\\sigma_\\alpha$ on the same $H_\\alpha$, write $\\sigma_A:=\\mathcal E_\\chi(\\mathbf q,\\sigma)$ for the encoded reference endomorphism.\n\nThis is a finite-dimensional algebraic model. The definition makes no gravitational interpretation and does not identify a matrix entropy term with a geometric area.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-tgrx-code-area-entropy",
+          "source_section": "Statement",
+          "quote": "Let $I$ be a finite nonempty set. For each $\\alpha\\in I$, let $H_\\alpha,K_\\alpha$ be nonzero finite-dimensional complex inner-product spaces. A density matrix is a self-adjoint endomorphism with nonnegative eigenvalues and trace one; it is faithful when all its eigenvalues are strictly positive. Let $p_\\alpha,q_\\alpha>0$ with $\\sum_\\alpha p_\\alpha=\\sum_\\alpha q_\\alpha=1$, let $\\rho_\\alpha$ be a density matrix on $H_\\alpha$, let $\\sigma_\\alpha$ be a faithful density matrix on $H_\\alpha$, and let $\\chi_\\alpha$ be a fixed faithful density matrix on $K_\\alpha$. Form the finite orthogonal direct sums\n\n$$\\rho_A:=\\bigoplus_{\\alpha\\in I}p_\\alpha\\rho_\\alpha\\otimes\\chi_\\alpha,\\qquad \\sigma_A:=\\bigoplus_{\\alpha\\in I}q_\\alpha\\sigma_\\alpha\\otimes\\chi_\\alpha.$$\n\nFor a density matrix $\\tau$, set $s(\\tau):=-\\sum_{\\lambda_j(\\tau)>0}\\lambda_j(\\tau)\\log\\lambda_j(\\tau)$, with $0\\log0:=0$, so entropy is in nats. For density matrices $\\tau,\\omega$ with faithful reference $\\omega$, set $D(\\tau\\|\\omega):=\\operatorname{tr}(\\tau\\log\\tau)-\\operatorname{tr}(\\tau\\log\\omega)$ using spectral logarithms on positive eigenvalues. Also define $H(\\mathbf p):=-\\sum_\\alpha p_\\alpha\\log p_\\alpha$ and $D_{\\rm cl}(\\mathbf p\\|\\mathbf q):=\\sum_\\alpha p_\\alpha\\log(p_\\alpha/q_\\alpha)$. Then $\\rho_A$ and $\\sigma_A$ are density matrices, $\\sigma_A$ is faithful, and\n\n$$s(\\rho_A)=H(\\mathbf p)+\\sum_{\\alpha\\in I}p_\\alpha\\bigl(s(\\rho_\\alpha)+s(\\chi_\\alpha)\\bigr),$$\n\n$$D(\\rho_A\\|\\sigma_A)=D_{\\rm cl}(\\mathbf p\\|\\mathbf q)+\\sum_{\\alpha\\in I}p_\\alpha D(\\rho_\\alpha\\|\\sigma_\\alpha).$$\n\nThese are exact finite-dimensional matrix identities; no literal black-hole area, universal Ryu–Takayanagi formula, continuum limit, or gravitational entropy claim follows.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-trace-of-an-endomorphism",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a finite-dimensional vector space over $F$ and let $T:V\\to V$ be\nlinear. Choose any ordered basis $\\mathcal B$ of $V$ and define the **trace of\nthe endomorphism $T$** by\n\n$$\\operatorname{tr}(T):=\\operatorname{tr}([T]_{\\mathcal B}^{\\mathcal B}).$$\n\nThis is independent of the chosen basis: matrices of the same endomorphism in\ntwo ordered bases are similar, and similar matrices have equal trace. When\n$V$ is the zero space, the empty basis gives trace $0$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "For $n=0$, the unique path of length zero is the empty path from $0$ to $0$, and there is no length-zero path from $0$ to any $a\\ne0$. Thus the number of length-zero paths from $0$ to $a$ is $(I_I)_{a0}=(N^0)_{a0}=(e_0)_a$.",
+          "inputs": [
+            "given",
+            "F1",
+            "base"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "If $D_n>0$, then $D_n$ is a positive integer and $\\rho_n=D_n^{-1}I_{H_n}$ has eigenvalue $1/D_n$ with multiplicity $D_n$. Its trace is $D_n(1/D_n)=1$, and it is self-adjoint since $\\langle\\rho_n x,y\\rangle=D_n^{-1}\\langle x,y\\rangle=\\langle x,\\rho_n y\\rangle$ with the real scalar $D_n^{-1}$, and its eigenvalues are nonnegative; hence it is a density matrix by [F2]. Substitution into [F3] gives $s(\\rho_n)=-D_n(1/D_n)\\log(1/D_n)=\\log D_n$ by [F5].",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Suppose for a fixed $n\\geq0$ that the number of length-$n$ paths from $0$ to each $b\\in I$ is $(N^n)_{b0}$. Every length-$(n+1)$ path from $0$ to $a$ has a unique penultimate label $b$ and a final transition copy from $b$ to $a$, so the number of such paths is $\\sum_{b\\in I}N_{ab}(N^n)_{b0}=(NN^n)_{a0}=(N^{n+1})_{a0}$ by the stated matrix-product and power conventions. Induction proves $(v_n)_a=(N^n)_{a0}$ for every $n\\geq0$ and $a\\in I$; in particular $v_0=e_0$ and $v_{n+1}=Nv_n$.",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "algebra",
+            "induction",
+            "discharge-induction"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Under [A1], direct multiplication gives $N^2=\\begin{pmatrix}1&1\\\\1&2\\end{pmatrix}=N+I_I$. Therefore $D_0=1$, $D_1=0$, and $D_2=1$. From the power recursion and associativity, $N^{n+2}=N^2N^n=(N+I_I)N^n=N^{n+1}+N^n$ for every $n\\geq0$; taking the $(0,0)$ entry proves $D_{n+2}=D_{n+1}+D_n$.",
+          "inputs": [
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement inherits the finite nonempty label set from Definition; the empty case is excluded.",
+          "argument_steps": []
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "D_n=0 has no assigned normalized state or entropy by F1/Statement;3.1 computes D1=0 for the two-label specialization.1.2 establishes density and entropy only for D_n>0.",
+          "argument_steps": [
+            "3.1"
+          ]
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The D_n=1 case gives the one-dimensional state with entropy log(1)=0 (step 1.2).",
+          "argument_steps": [
+            "1.2"
+          ]
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Repeated matrix entries are counted with multiplicity, and the spectrum of I/D_n has a repeated eigenvalue by construction (step 1.2).",
+          "argument_steps": [
+            "1.2"
+          ]
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The n=0 endpoint is included and yields v_0=e_0 and D_0=1 (step 1.1).",
+          "argument_steps": [
+            "1.1"
+          ]
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The label/transition sets at each finite n are finite.1.1 gives the empty-path base and 2.1 the finite path extension;1.2 uses a coordinate identity state, with no axiom of Choice.",
+          "argument_steps": [
+            "2.1",
+            "1.2"
+          ]
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement gives explicit definitions or one-way conclusions and contains no biconditional. The proposition counts finite paths and computes uniform-state log entropy, without reconstructing a transfer matrix from the count or entropy.",
+          "argument_steps": []
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement gives explicit definitions or one-way conclusions and contains no biconditional. The proposition counts finite paths and computes uniform-state log entropy, without reconstructing a transfer matrix from the count or entropy.",
+          "argument_steps": []
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "two-label return counts",
+          "inputs": "N=[[0,1],[1,1]]",
+          "expected": "D0=1, D1=0, D2=1, D3=1, D4=2",
+          "result": "N^2=N+I gives the recurrence and exact first five values.",
+          "scope": "Exact finite matrix check."
+        },
+        {
+          "case": "one-channel state",
+          "inputs": "D_n=1",
+          "expected": "s(rho_n)=0",
+          "result": "rho_n=[1], so its sole eigenvalue is 1 and entropy is -log(1)=0.",
+          "scope": "Exact finite spectral check."
+        },
+        {
+          "case": "zero channels",
+          "inputs": "D_n=0",
+          "expected": "no state entropy claim",
+          "result": "The Definition does not assign rho_n at D_n=0.",
+          "scope": "Boundary verification; no density matrix is fabricated."
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "def-tgrx-finite-fusion-count-model",
+          "carrier": "items/def-tgrx-finite-fusion-count-model.md",
+          "status": "Exact current public interface transcribed by root at the drained Step2 join; original substantive source-use review retained in historical_source_interface and native/same-owner reports. No renewed full supplier-proof reading asserted.",
+          "source_section": "Definition",
+          "exact_statement": "A **finite fusion transfer count model** consists of a finite nonempty label set $I$, a distinguished label $0\\in I$, and an explicitly supplied matrix $N=(N_{ab})_{a,b\\in I}$ whose entries lie in $\\{0,1,2,\\ldots\\}$. The entry $N_{ab}$ is the multiplicity of elementary transitions from label $b$ to label $a$; formally, the transition copies from $b$ to $a$ are the triples $(b,a,j)$ with integer $1\\leq j\\leq N_{ab}$. A length-$n$ path is a sequence of $n+1$ labels together with a chosen transition copy between each consecutive pair. View each natural-number entry as a real number under the usual inclusion $\\mathbb N\\subset\\mathbb R$. For a finite set $J$ and $F=\\mathbb R$ or $\\mathbb C$, $F^J$ means the functions $J\\to F$, with pointwise addition $(x+y)_j=x_j+y_j$ and scalar multiplication $(\\lambda x)_j=\\lambda x_j$. For real matrices $A,B$ indexed by $I$, define $(A+B)_{ab}:=A_{ab}+B_{ab}$. Their action on $x\\in\\mathbb R^I$ is $(Ax)_a:=\\sum_{b\\in I}A_{ab}x_b$. Matrix multiplication is $(AB)_{ac}:=\\sum_{b\\in I}A_{ab}B_{bc}$; it is associative by regrouping finite sums. These definitions are compatible because $((AB)x)_a=\\sum_{b,c\\in I}A_{ab}B_{bc}x_c=\\sum_{b\\in I}A_{ab}(Bx)_b=(A(Bx))_a$, and $((A+B)C)_{ac}=\\sum_b(A_{ab}+B_{ab})C_{bc}=(AC)_{ac}+(BC)_{ac}$. Thus the natural-entry powers can also act on real vectors and the addition used below distributes over matrix multiplication. Let $I_I$ be the identity matrix with entries $(I_I)_{ab}=1$ if $a=b$ and $0$ otherwise, and use the power convention $N^0:=I_I$ and $N^{n+1}:=NN^n$ for $n\\geq0$. Define the vacuum-return count $D_n:=(N^n)_{00}$. If $D_n>0$, set $H_n:=\\mathbb C^{D_n}$, with coordinates $x=(x_1,\\ldots,x_{D_n})$ and inner product $\\langle x,y\\rangle:=\\sum_{j=1}^{D_n}x_j\\overline{y_j}$, linear in the first argument. This pairing satisfies the inner-product axioms of [[def-inner-product-space]]: finite distributivity gives $\\langle\\alpha x+\\beta z,y\\rangle=\\alpha\\langle x,y\\rangle+\\beta\\langle z,y\\rangle$, and conjugating the finite sum gives $\\overline{\\langle y,x\\rangle}=\\sum_j\\overline{y_j}x_j=\\langle x,y\\rangle$. Writing $x_j=a_j+ib_j$ with real $a_j,b_j$ gives $\\langle x,x\\rangle=\\sum_j(a_j^2+b_j^2)\\geq0$; if this sum is zero, each nonnegative summand is zero, hence every $a_j=b_j=0$ and $x=0$. Conversely $x=0$ gives zero. The conjugation identities used here follow directly from $\\overline{a+ib}=a-ib$ and finite distributivity. Therefore $H_n$ is a finite-dimensional complex inner-product space; its coordinate unit vectors form a basis since every $x$ equals their linear combination with coefficients $x_j$, and a zero combination forces every coefficient to vanish. Let $I_{H_n}$ be its identity endomorphism and define $\\rho_n:=D_n^{-1}I_{H_n}$. If $D_n=0$, no normalized operator $\\rho_n$ is assigned. The matrix $N$ is model data; no fusion category, quantum group, or representation is presumed to realize it.",
+          "relevant_hypotheses_and_conventions": "Finite nonempty labels, transition orientation N_ab from b to a, D_n=(N^n)_00, and rho_n=I/D_n only when D_n>0.",
+          "supplier_proof_status": "draft; this exact-quote refresh does not grant independent proof acceptance",
+          "consumer_use": "Supplies the exact matrix model.",
+          "historical_source_interface": {
+            "source_section": "Definition",
+            "exact_statement": "A **finite fusion transfer count model** consists of a finite nonempty label set $I$, a distinguished label $0\\in I$, and an explicitly supplied matrix $N=(N_{ab})_{a,b\\in I}$ whose entries lie in $\\{0,1,2,\\ldots\\}$. The entry $N_{ab}$ is the multiplicity of elementary transitions from label $b$ to label $a$; formally, the transition copies from $b$ to $a$ are the triples $(b,a,j)$ with integer $1\\leq j\\leq N_{ab}$. A length-$n$ path is a sequence of $n+1$ labels together with a chosen transition copy between each consecutive pair. For each integer $n\\geq0$, define the vacuum-return count $D_n:=(N^n)_{00}$. If $D_n>0$, set $H_n:=\\mathbb C^{D_n}$ with its standard inner product and define $\\rho_n:=D_n^{-1}I_{H_n}$. If $D_n=0$, no normalized operator $\\rho_n$ is assigned. The matrix $N$ is model data; no fusion category, quantum group, or representation is presumed to realize it.",
+            "status": "Current same-batch draft carrier; exact statement and placement are recorded in the batch manifest.",
+            "supplier_proof_status": "Definition; no separate proof is required."
+          }
+        },
+        {
+          "supplier": "prop-tgrx-code-area-entropy",
+          "carrier": "items/prop-tgrx-code-area-entropy.md",
+          "status": "Current batch-125 draft carrier; its full current proof was inspected and its Step1 record is ready at the current hash. This is authoring readiness, not independent proof approval.",
+          "source_section": "Statement",
+          "exact_statement": "Let $I$ be a finite nonempty set. For each $\\alpha\\in I$, let $H_\\alpha,K_\\alpha$ be nonzero finite-dimensional complex inner-product spaces. A density matrix is a self-adjoint endomorphism with nonnegative eigenvalues and trace one; it is faithful when all its eigenvalues are strictly positive. Let $p_\\alpha,q_\\alpha>0$ with $\\sum_\\alpha p_\\alpha=\\sum_\\alpha q_\\alpha=1$, let $\\rho_\\alpha$ be a density matrix on $H_\\alpha$, let $\\sigma_\\alpha$ be a faithful density matrix on $H_\\alpha$, and let $\\chi_\\alpha$ be a fixed faithful density matrix on $K_\\alpha$. Form the finite orthogonal direct sums\n\n$$\\rho_A:=\\bigoplus_{\\alpha\\in I}p_\\alpha\\rho_\\alpha\\otimes\\chi_\\alpha,\\qquad \\sigma_A:=\\bigoplus_{\\alpha\\in I}q_\\alpha\\sigma_\\alpha\\otimes\\chi_\\alpha.$$\n\nFor a density matrix $\\tau$, set $s(\\tau):=-\\sum_{\\lambda_j(\\tau)>0}\\lambda_j(\\tau)\\log\\lambda_j(\\tau)$, with $0\\log0:=0$, so entropy is in nats. For density matrices $\\tau,\\omega$ with faithful reference $\\omega$, set $D(\\tau\\|\\omega):=\\operatorname{tr}(\\tau\\log\\tau)-\\operatorname{tr}(\\tau\\log\\omega)$ using spectral logarithms on positive eigenvalues. Also define $H(\\mathbf p):=-\\sum_\\alpha p_\\alpha\\log p_\\alpha$ and $D_{\\rm cl}(\\mathbf p\\|\\mathbf q):=\\sum_\\alpha p_\\alpha\\log(p_\\alpha/q_\\alpha)$. Then $\\rho_A$ and $\\sigma_A$ are density matrices, $\\sigma_A$ is faithful, and\n\n$$s(\\rho_A)=H(\\mathbf p)+\\sum_{\\alpha\\in I}p_\\alpha\\bigl(s(\\rho_\\alpha)+s(\\chi_\\alpha)\\bigr),$$\n\n$$D(\\rho_A\\|\\sigma_A)=D_{\\rm cl}(\\mathbf p\\|\\mathbf q)+\\sum_{\\alpha\\in I}p_\\alpha D(\\rho_\\alpha\\|\\sigma_\\alpha).$$\n\nThese are exact finite-dimensional matrix identities; no literal black-hole area, universal Ryu–Takayanagi formula, continuum limit, or gravitational entropy claim follows.",
+          "relevant_hypotheses_and_conventions": "Finite density-matrix entropy s(tau)=-sum_{lambda>0}lambda log(lambda), with natural logarithms and nats.",
+          "supplier_proof_status": "Complete current conditional proof inspected; Step1 readiness is ready; independent proof approval is not claimed.",
+          "consumer_use": "Supplies the entropy definition."
+        },
+        {
+          "supplier": "def-tgrx-sector-code",
+          "carrier": "items/def-tgrx-sector-code.md",
+          "status": "Current batch-125 draft carrier; the current Step1 record is ready and its hash matches the inspected carrier. This is authoring readiness, not independent proof approval.",
+          "source_section": "Definition",
+          "exact_statement": "Let $I$ be a finite nonempty index set. For each $\\alpha\\in I$, let $H_\\alpha$ and $K_\\alpha$ be nonzero finite-dimensional complex inner-product spaces, and give\n\n$$H_A:=\\bigoplus_{\\alpha\\in I}(H_\\alpha\\otimes K_\\alpha)$$\n\nthe orthogonal direct-sum inner product: distinct summands are orthogonal and the inner product within a summand is the Hilbert tensor-product inner product. On elementary tensors that inner product is $\\langle x\\otimes y,x'\\otimes y'\\rangle=\\langle x,x'\\rangle\\langle y,y'\\rangle$. A map $T\\otimes U$ acts by $(T\\otimes U)(x\\otimes y)=Tx\\otimes Uy$, and a direct-sum map acts blockwise with zero off-diagonal blocks.\n\nA complex-linear endomorphism is a linear map from a vector space to itself. A density matrix on a finite-dimensional complex inner-product space is a self-adjoint endomorphism with nonnegative eigenvalues and trace one; it is faithful when all eigenvalues are strictly positive. These are the conventions used for the finite density matrices in the earlier modular-balance result. The summand indexed by $\\alpha$ is called the $\\alpha$ sector. For each $\\alpha$, fix a faithful density matrix $\\chi_\\alpha$ on $K_\\alpha$. Let $\\mathbf p=(p_\\alpha)_{\\alpha\\in I}$ satisfy $p_\\alpha>0$ and $\\sum_{\\alpha\\in I}p_\\alpha=1$, and let $\\rho_\\alpha$ be density matrices on $H_\\alpha$. Define the encoded endomorphism\n\n$$\\mathcal E_\\chi(\\mathbf p,\\rho):=\\bigoplus_{\\alpha\\in I}p_\\alpha\\,\\rho_\\alpha\\otimes\\chi_\\alpha.$$\n\nWhen this encoded endomorphism is a density matrix, call it the encoded reduced state. The logical data are $\\mathbf p$ and $\\{\\rho_\\alpha\\}$; the ancillary matrices $\\{\\chi_\\alpha\\}$ are held fixed. For a second strictly positive probability vector $\\mathbf q$ and faithful density matrices $\\sigma_\\alpha$ on the same $H_\\alpha$, write $\\sigma_A:=\\mathcal E_\\chi(\\mathbf q,\\sigma)$ for the encoded reference endomorphism.\n\nThis is a finite-dimensional algebraic model. The definition makes no gravitational interpretation and does not identify a matrix entropy term with a geometric area.",
+          "relevant_hypotheses_and_conventions": "A finite density matrix is self-adjoint, has nonnegative eigenvalues, and has trace one.",
+          "supplier_proof_status": "Definition; no separate proof is required. Current Step1 readiness is ready.",
+          "consumer_use": "Supplies the matrix-state convention."
+        },
+        {
+          "supplier": "def-trace-of-an-endomorphism",
+          "carrier": "items/def-trace-of-an-endomorphism.md",
+          "status": "Published mathematical import; current pinned carrier and exact interface were inspected read-only.",
+          "source_section": "Definition",
+          "exact_statement": "Let $V$ be a finite-dimensional vector space over $F$ and let $T:V\\to V$ be\nlinear. Choose any ordered basis $\\mathcal B$ of $V$ and define the **trace of\nthe endomorphism $T$** by\n\n$$\\operatorname{tr}(T):=\\operatorname{tr}([T]_{\\mathcal B}^{\\mathcal B}).$$\n\nThis is independent of the chosen basis: matrices of the same endomorphism in\ntwo ordered bases are similar, and similar matrices have equal trace. When\n$V$ is the zero space, the empty basis gives trace $0$.",
+          "relevant_hypotheses_and_conventions": "Trace is the basis-independent finite sum of diagonal entries.",
+          "supplier_proof_status": "Published definition inspected.",
+          "consumer_use": "Supplies the trace convention used for I/D."
+        },
+        {
+          "supplier": "thm-natural-logarithm-laws",
+          "carrier": "items/thm-natural-logarithm-laws.md",
+          "status": "Published mathematical import; current pinned carrier and exact interface were inspected read-only.",
+          "source_section": "Statement",
+          "exact_statement": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "relevant_hypotheses_and_conventions": "log(1/x)=-log(x) for x>0 and log(1)=0.",
+          "supplier_proof_status": "Published complete proof inspected for the exact cited claim.",
+          "consumer_use": "Supplies the reciprocal-logarithm identity."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-127-beta-self-review",
+        "notes": "Self-review checked the row/column transition convention, finite path extension, positivity and normalization for D_n>0, the zero-count boundary, and natural-log units. No Perron-Frobenius theorem or asymptotic claim is used; this is not independent proof approval."
+      },
+      "current_boundary_worksheet": {
+        "proposal": "research/physics-non-fluid-129-2026-10-21-r2-owner-step2-boundary-proposal-8/proposal.json",
+        "source_sha256": "7057d079b746c9d323b8aadcbe2f642753d026df2f52eb0687d7ad7852a066ff",
+        "qualification": "Released complete current source/eight-case semantic worksheet; root transcribed exact current rows. No independent acceptance or finite computation asserted."
+      }
+    },
+    "def-tgrx-tl-boundary-representation": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition requires n>=1; the zero-strand algebra is outside this model interface."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition requires nonzero denominators[2] through[n] and rank P>0; a representation that annihilates the final recursive projector has rank0 and is excluded, although other algebra elements may lie in its kernel."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: at n=1 the denominator list is empty, p_1 is the identity, and a unital representation on nonzero H has positive rank."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition imposes no distinct-eigenvalue or faithful-representation condition; multiplicities and nonfaithful representations are allowed subject to rank P>0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition has no parameter interval or limiting assertion; [n+1]_delta is not a denominator condition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition supplies all finite-dimensional algebra, Hilbert-space, and representation data explicitly; no arbitrary choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Nonzero quantum-integer denominators through n define the Jones–Wenzl recursion and its tower maps; a supplied finite unital self-adjoint-generator representation is restricted to positive projector rank. The public claim does not assert a converse characterization; its definitions specify the data and conventions rather than an iff test."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Nonzero quantum-integer denominators through n define the Jones–Wenzl recursion and its tower maps; a supplied finite unital self-adjoint-generator representation is restricted to positive projector rank. The public claim does not assert a converse characterization; its definitions specify the data and conventions rather than an iff test."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "one strand",
+          "inputs": "n=1 with any real delta and nonzero finite H",
+          "expected": "denominator list is empty and p1=1",
+          "result": "The recursion has no step; P=I_H and rank P=dim H>0 for a unital representation.",
+          "scope": "Exact boundary case."
+        },
+        {
+          "case": "next quantum integer vanishes",
+          "inputs": "delta=1, n=2; [2]=1 and [3]=0",
+          "expected": "the unit-denominator recursion for p2 is defined",
+          "result": "Only [2] is a denominator through n=2; [3] is not inverted.",
+          "scope": "Shows the definition does not impose [n+1] nonzero."
+        },
+        {
+          "case": "representation kills projector",
+          "inputs": "any representation with pi(p_n)=0",
+          "expected": "excluded by rank P>0",
+          "result": "The normalization P/r is not part of this Definition when rank P=0.",
+          "scope": "Exact normalization boundary."
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "def-temperley-lieb-generator-presentation",
+          "carrier": "items/def-temperley-lieb-generator-presentation.md",
+          "status": "Published mathematical import; current pinned carrier and exact interface were inspected read-only.",
+          "source_section": "Definition",
+          "exact_statement": "Let $R$ be a commutative ring with unit and $\\delta\\in R$. For each $n\\ge0$, let $F_n:=R\\langle u_1,\\ldots,u_{n-1}\\rangle$ be the free associative unital $R$-algebra on the indicated symbols ([[lem-hh-free-associative-ring-and-relations-descent]]). When $n=0$ or $n=1$, the symbol set is empty and $F_n=R$.\n\nLet $I_n$ be the two-sided ideal generated by\n\n$$u_i^2-\\delta u_i\\quad(1\\le i<n),\\qquad u_i u_j-u_j u_i\\quad(|i-j|>1),$$\n\nand\n\n$$u_i u_{i+1}u_i-u_i,\\qquad u_{i+1}u_i u_{i+1}-u_{i+1}\\quad(1\\le i\\le n-2).$$\n\nThe abstract **rank-$n$ Temperley–Lieb algebra** is the presented $R$-algebra\n\n$$P_n(R,\\delta):=F_n/I_n.$$\n\nThus its defining relations are $u_i^2=\\delta u_i$, $u_i u_{i\\pm1}u_i=u_i$, and $u_i u_j=u_j u_i$ for $|i-j|>1$. The definition of a presented $R$-algebra and its universal property are those of [[lem-hh-free-associative-ring-and-relations-descent]].",
+          "relevant_hypotheses_and_conventions": "The abstract presented algebra has u_i^2=delta u_i, adjacent triple relations, and distant commutation.",
+          "supplier_proof_status": "Published definition inspected.",
+          "consumer_use": "Fixes the abstract generator algebra convention."
+        },
+        {
+          "supplier": "def-temperley-lieb-diagram-category",
+          "carrier": "items/def-temperley-lieb-diagram-category.md",
+          "status": "Published mathematical import; current pinned carrier and exact interface were inspected read-only.",
+          "source_section": "Definition",
+          "exact_statement": "Let $R$ be a commutative ring with unit ([[def-algebra-over-a-commutative-ring]]) and let $\\delta\\in R$. The object labels are the nonnegative integers $n=0,1,2,\\ldots$. For labels $m,n$, place bottom points $b_1,\\ldots,b_m$ and top points $t_1,\\ldots,t_n$ along the rectangle from left to right on their respective edges. Their cyclic order is $t_1,\\ldots,t_n,b_m,\\ldots,b_1$. When $m=n=0$, the empty matching is included.\n\nAn $(m,n)$ **diagram** is a perfect matching of these $m+n$ boundary labels which is noncrossing: there are no four labels $a,b,c,d$ in cyclic order whose matched pairs are $\\{a,c\\}$ and $\\{b,d\\}$. A picture consists of disjoint arcs realizing the matching; equality is equality of the matching, so planar deformation that fixes the boundary does not change a diagram. If $m+n$ is odd, there are no such diagrams. Write $\\mathcal D(m,n)$ for this set and define the $R$-module\n\n$$M_R(m,n):=R^{(\\mathcal D(m,n))},$$\n\nthe free $R$-module on the set of diagrams ([[def-free-module-on-a-set-and-standard-basis]]). In particular, its diagram basis is empty when $m+n$ is odd.\n\nFor basis diagrams $D:m\\to n$ and $E:n\\to p$, stack $E$ above $D$ and identify the $n$ matching boundary points. The resulting finite graph has degree two at each identified point, where degree means the number of incident arcs. Each component is a path joining two exterior boundary points or a closed cycle. Remove every cycle and multiply the remaining exterior matching by $\\delta^c$, where $c$ is the number of removed cycles. Denote this output by $E\\circ D$ and extend the rule $R$-bilinearly to a map $M_R(n,p)\\times M_R(m,n)\\to M_R(m,p)$. A following result proves closure of these operations on the diagram modules and the category axioms.\n\nThe matching $1_n:n\\to n$ pairs each bottom point to the top point directly above it. Horizontal juxtaposition, with the left diagram placed first, defines $m\\otimes m'=m+m'$ on object labels and $D\\otimes D'$ on basis diagrams; extend it $R$-bilinearly to the modules. A following result proves that these operations give a strict monoidal category.\n\nFor $1\\le i<n$, let $d_i\\in M_R(n,n)$ be the diagram with a cap joining top points $i,i+1$, a cup joining bottom points $i,i+1$, and vertical through strands at every other position. Define $\\mathrm{TL}_n(R,\\delta)$ to be the $R$-module $M_R(n,n)$ with bilinear multiplication $xy:=x\\circ y$ and distinguished element $1_n$. A following result proves that it is a unital associative $R$-algebra and identifies it with the endomorphism algebra at object $n$.\n\nThe left factor is stacked above the right factor. The loop value is $\\delta$; no invertibility or nonzero condition on $\\delta$ is part of these data.",
+          "relevant_hypotheses_and_conventions": "The algebra is the noncrossing-pairing diagram algebra; stacking removes each loop with coefficient delta.",
+          "supplier_proof_status": "Published definition inspected.",
+          "consumer_use": "Defines the matching diagram algebra and loop convention."
+        },
+        {
+          "supplier": "thm-temperley-lieb-presentation-isomorphism",
+          "carrier": "items/thm-temperley-lieb-presentation-isomorphism.md",
+          "status": "Published mathematical import; current pinned carrier and exact interface were inspected read-only.",
+          "source_section": "Statement",
+          "exact_statement": "Let $R$ be a commutative ring with unit, $\\delta\\in R$, and $n\\ge0$. The homomorphism $\\pi_n:P_n(R,\\delta)\\to\\mathrm{TL}_n(R,\\delta)$ sending $u_i$ to $d_i$ is an isomorphism. Consequently the Jones normal forms of [[thm-temperley-lieb-generator-normal-form]] are an $R$-basis of the presented algebra, and both algebras are free of rank $C_n$. This holds without a field assumption and without requiring $\\delta$ to be nonzero or invertible.",
+          "relevant_hypotheses_and_conventions": "The canonical map P_n(R,delta)->TL_n(R,delta), u_i->d_i, is an isomorphism.",
+          "supplier_proof_status": "Published complete proof inspected for the exact cited claim.",
+          "consumer_use": "Identifies the presentation and diagram recursion interfaces."
+        },
+        {
+          "supplier": "def-temperley-lieb-quantum-integers-and-quantum-characteristic",
+          "carrier": "items/def-temperley-lieb-quantum-integers-and-quantum-characteristic.md",
+          "status": "Published mathematical import; current pinned carrier and exact interface were inspected read-only.",
+          "source_section": "Definition",
+          "exact_statement": "Let $R$ be a commutative ring with unit and $\\delta\\in R$. Define the quantum integers by\n\n$$[0]_\\delta=0,\\qquad [1]_\\delta=1,\\qquad [r+1]_\\delta=\\delta[r]_\\delta-[r-1]_\\delta\\quad(r\\ge1).$$\n\nThe **quantum characteristic** of $(R,\\delta)$ is the least positive integer $\\ell$ with $[\\ell]_\\delta=0$, if one exists, and $\\ell=\\infty$ otherwise. No element of $R$ is inverted in this definition.\n\nFor $q\\in\\mathbb C^\\times$ and $\\delta=q+q^{-1}$, write $[r]_q=[r]_\\delta$. If $q\\ne\\pm1$, this agrees with $(q^r-q^{-r})/(q-q^{-1})$; at $q=\\pm1$ the recurrence gives $[r]_q=rq^{r-1}$. For complex-parameter classification, write $\\kappa=\\operatorname{ord}(q^2)$, with $\\kappa=\\infty$ when $q^2$ has infinite order. If $q\\ne\\pm1$, the quantum characteristic equals $\\kappa$ when $\\kappa<\\infty$ and is $\\infty$ otherwise. At $q=\\pm1$, $\\kappa=1$ but the complex quantum characteristic is $\\infty$, because $[r]_q=rq^{r-1}\\ne0$ for every positive $r$.\n\nFor a field $K$ of positive characteristic $p$, set $p(0)=1$ and, when $\\ell<\\infty$, set $p(i)=\\ell p^{i-1}$ for $i\\ge1$. In characteristic zero and finite $\\ell$, the finite digit scale is $p(1)=\\ell$; the separate characteristic-zero criterion below uses $a\\ell-1$ for arbitrary positive integers $a$. If $\\ell=\\infty$, every finite index is already in the range $n<\\ell$.",
+          "relevant_hypotheses_and_conventions": "[0]=0, [1]=1, and [r+1]=delta[r]-[r-1].",
+          "supplier_proof_status": "Published definition inspected.",
+          "consumer_use": "Supplies the recurrence and nonzero-denominator conditions."
+        },
+        {
+          "supplier": "def-temperley-lieb-jones-wenzl-recursion-over-unit-denominators",
+          "carrier": "items/def-temperley-lieb-jones-wenzl-recursion-over-unit-denominators.md",
+          "status": "Published mathematical import; current pinned carrier and exact interface were inspected read-only.",
+          "source_section": "Definition",
+          "exact_statement": "Let $R$ be a commutative ring with unit and let $\\delta\\in R$. Use the quantum integers $[0]=0$, $[1]=1$, $[r+1]=\\delta[r]-[r-1]$ of [[def-temperley-lieb-quantum-integers-and-quantum-characteristic]]. Put $p_0=1_0$ and $p_1=1_1$. For $r\\ge1$, if $p_r$ is defined and $[r+1]$ is a unit, put\n\n$$P_r=p_r\\otimes1_1\\in\\mathrm{TL}_{r+1}(R,\\delta),\\qquad p_{r+1}=P_r-\\frac{[r]}{[r+1]}P_rU_rP_r,$$\n\nwhere $U_r$ is the cap-cup generator on the final two of the $r+1$ strands in [[def-temperley-lieb-diagram-category]]. Thus $p_n$ is defined by this recursion only when every $[2],\\ldots,[n]$ is a unit. The definition makes no assertion that failure of a denominator condition prevents every other normalized projector from existing.\n\n```tikz\n\\begin{tikzpicture}[x=0.9cm,y=0.9cm]\n  \\draw (0,0) -- (0,1.8);\n  \\draw (1,0) -- (1,1.8);\n  \\node[draw,minimum width=0.55cm,minimum height=0.45cm] at (0.5,1.25) {$p_r$};\n  \\node[draw,minimum width=0.55cm,minimum height=0.45cm] at (0.5,0.45) {$p_r$};\n  \\draw (2,0) .. controls (2,0.55) and (3,0.55) .. (3,0);\n  \\draw (2,1.8) .. controls (2,1.25) and (3,1.25) .. (3,1.8);\n\\end{tikzpicture}\n```\n\nThe box labels stand for the corresponding idempotents and the right-hand cup-cap is $U_r$; the picture is only a convention aid. All algebraic identities are proved from the labeled matching composition and the relations of [[lem-temperley-lieb-generators-satisfy-local-relations]].",
+          "relevant_hypotheses_and_conventions": "The Jones-Wenzl element is defined recursively when each [2],..., [n] is a unit.",
+          "supplier_proof_status": "Published definition inspected.",
+          "consumer_use": "Supplies the exact recursive element and indexing."
+        },
+        {
+          "supplier": "lem-temperley-lieb-jones-wenzl-partial-trace-and-uniqueness",
+          "carrier": "items/lem-temperley-lieb-jones-wenzl-partial-trace-and-uniqueness.md",
+          "status": "Published mathematical import; current pinned carrier and exact interface were inspected read-only.",
+          "source_section": "Statement",
+          "exact_statement": "Let $R$ be a nonzero commutative ring with unit, $\\delta\\in R$, and suppose $[2],\\ldots,[n]$ are units. The projector $p_n$ of [[def-temperley-lieb-jones-wenzl-recursion-over-unit-denominators]] has coefficient $1$ on the identity diagram, is nonzero and idempotent, and is annihilated on both sides by each $U_i$ for $1\\le i<n$. Its corner is $p_n\\mathrm{TL}_n p_n=R p_n$, so it is the unique idempotent with identity coefficient $1$ and those two-sided annihilation conditions. For $n\\ge1$,\n\n$$\\operatorname{ptr}_n(p_n)=\\frac{[n+1]}{[n]}p_{n-1},\\qquad \\operatorname{Tr}_n(p_n)=[n+1].$$\n\nOnly the displayed denominator units are assumed; $\\delta$ need not be a unit.",
+          "relevant_hypotheses_and_conventions": "For a nonzero commutative ring and unit [2],..., [n], p_n is nonzero, idempotent, and annihilated by the generators.",
+          "supplier_proof_status": "Published complete proof inspected for the exact cited claim.",
+          "consumer_use": "Supplies the named Jones-Wenzl projector property."
+        },
+        {
+          "supplier": "def-kernel-and-image-of-a-linear-map",
+          "carrier": "items/def-kernel-and-image-of-a-linear-map.md",
+          "status": "Published mathematical import; current pinned carrier and exact interface were inspected read-only.",
+          "source_section": "Definition",
+          "exact_statement": "For a linear map $T:V\\to W$, its **kernel** and **image** are respectively\n\n$$\\ker T:=\\{v\\in V:T(v)=0_W\\},\\qquad \\operatorname{im}T:=\\{T(v):v\\in V\\}.$$\n\nThat both sets are linear subspaces, and that a trivial kernel characterises\ninjectivity, is proved in [[thm-linear-kernel-image-and-injectivity]].",
+          "relevant_hypotheses_and_conventions": "ker(T)={x:T(x)=0} and im(T)={T(x):x in V}.",
+          "supplier_proof_status": "Published definition inspected.",
+          "consumer_use": "Supplies the image notation used in rank P."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-127-beta-self-review",
+        "notes": "Self-review checked the loop convention, generator presentation, isomorphism direction, recursion indexing, real coefficients, denominator range, and rank condition. No root-of-unity quotient, modular classification, trace-preserving representation, or physical boundary interpretation is asserted; not independent proof approval."
+      },
+      "current_boundary_worksheet": {
+        "proposal": "research/physics-non-fluid-129-2026-10-21-r2-owner-step2-boundary-proposal-6/proposal.json",
+        "source_sha256": "2c6555f7bc161a2f49d5f1e48dccdcb76c8a959bc41c0f3fd68826c5ceab56d0",
+        "qualification": "Released complete current source/eight-case semantic worksheet; root transcribed exact current rows. No independent acceptance or finite computation asserted."
+      }
+    },
+    "prop-tgrx-tl-projector-entropy": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-tgrx-tl-boundary-representation",
+          "source_section": "Definition",
+          "quote": "Fix an integer $n\\geq1$ and a real loop parameter $\\delta$. Define $[0]_\\delta=0$, $[1]_\\delta=1$, and $[r+1]_\\delta=\\delta[r]_\\delta-[r-1]_\\delta$ for $r\\geq1$. Assume $[k]_\\delta\\neq0$ for $2\\leq k\\leq n$; this list is empty when $n=1$. The abstract generator algebra $P_n(\\mathbb C,\\delta)$ is the unital complex algebra with generators $u_1,\\ldots,u_{n-1}$ and relations $u_i^2=\\delta u_i$, $u_i u_{i\\pm1}u_i=u_i$, and $u_i u_j=u_j u_i$ when $|i-j|>1$. The diagram algebra $\\mathrm{TL}_n(\\mathbb C,\\delta)$ has basis the noncrossing pairings of $n$ ordered bottom and $n$ ordered top points; its product stacks the left factor above the right, deletes each closed loop, and multiplies by $\\delta$ per loop. Its elementary diagram $d_i$ has a cap joining top points $i,i+1$, a cup joining bottom points $i,i+1$, and vertical strands elsewhere. The isomorphism $\\Phi_n:P_n(\\mathbb C,\\delta)\\to\\mathrm{TL}_n(\\mathbb C,\\delta)$ sends $u_i$ to $d_i$.\n\nFor every $1\\leq i\\leq n-2$, the adjacent relations in the presentation mean both $u_i u_{i+1}u_i=u_i$ and $u_{i+1}u_i u_{i+1}=u_{i+1}$. For matching the imported recursion's notation, write $U_i:=d_i$.\n\nSet $p_1=1_1$. For $1\\leq r<n$, put $Q_r=p_r\\otimes1_1$ by adjoining one rightmost vertical strand and define\n\n$$p_{r+1}:=Q_r-\\frac{[r]_\\delta}{[r+1]_\\delta}Q_r d_r Q_r.$$\n\nThe denominator hypotheses make this recursion defined. For each $1\\leq r\\leq n$, let $\\widehat p_r:=\\Phi_r^{-1}(p_r)$. The cited Jones-Wenzl result gives $p_n^2=p_n$ under these unit-denominator hypotheses. For $1\\leq r\\leq n$, let $\\iota_{r,n}:P_r(\\mathbb C,\\delta)\\to P_n(\\mathbb C,\\delta)$ send each generator $u_i$ to the same-named generator, and let $\\jmath_{r,n}:\\mathrm{TL}_r(\\mathbb C,\\delta)\\to\\mathrm{TL}_n(\\mathbb C,\\delta)$ append $n-r$ rightmost vertical strands. The maps commute with $\\Phi$: on each generator, both composites send $u_i$ to $d_i$ with those added strands, and both send the unit to the identity diagram. Since generators and unit generate $P_r$, the composites agree on every element.\n\nLet $H$ be a nonzero finite-dimensional complex inner-product space whose inner product is linear in its first argument and conjugate-linear in its second. A unital complex-algebra representation is a complex-linear map $\\pi:P_n(\\mathbb C,\\delta)\\to\\operatorname{End}_{\\mathbb C}(H)$ such that $\\pi(xy)=\\pi(x)\\pi(y)$ for all $x,y\\in P_n(\\mathbb C,\\delta)$ and $\\pi(1)=I_H$. Here $\\operatorname{End}_{\\mathbb C}(H)$ is the algebra of complex-linear endomorphisms, with composition as multiplication and $I_H$ as unit. Require each generator image to be self-adjoint, meaning $\\langle\\pi(u_i)x,y\\rangle=\\langle x,\\pi(u_i)y\\rangle$ for all $x,y\\in H$. Define $P:=\\pi(\\widehat p_n)$, define $\\operatorname{rank}P:=\\dim_{\\mathbb C}\\operatorname{im}P$, and restrict to data with $\\operatorname{rank}P>0$. The algebraic representation as a physical boundary state space is an additional model identification and is not part of this definition.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-temperley-lieb-jones-wenzl-recursion-over-unit-denominators",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative ring with unit and let $\\delta\\in R$. Use the quantum integers $[0]=0$, $[1]=1$, $[r+1]=\\delta[r]-[r-1]$ of [[def-temperley-lieb-quantum-integers-and-quantum-characteristic]]. Put $p_0=1_0$ and $p_1=1_1$. For $r\\ge1$, if $p_r$ is defined and $[r+1]$ is a unit, put\n\n$$P_r=p_r\\otimes1_1\\in\\mathrm{TL}_{r+1}(R,\\delta),\\qquad p_{r+1}=P_r-\\frac{[r]}{[r+1]}P_rU_rP_r,$$\n\nwhere $U_r$ is the cap-cup generator on the final two of the $r+1$ strands in [[def-temperley-lieb-diagram-category]]. Thus $p_n$ is defined by this recursion only when every $[2],\\ldots,[n]$ is a unit. The definition makes no assertion that failure of a denominator condition prevents every other normalized projector from existing.\n\n```tikz\n\\begin{tikzpicture}[x=0.9cm,y=0.9cm]\n  \\draw (0,0) -- (0,1.8);\n  \\draw (1,0) -- (1,1.8);\n  \\node[draw,minimum width=0.55cm,minimum height=0.45cm] at (0.5,1.25) {$p_r$};\n  \\node[draw,minimum width=0.55cm,minimum height=0.45cm] at (0.5,0.45) {$p_r$};\n  \\draw (2,0) .. controls (2,0.55) and (3,0.55) .. (3,0);\n  \\draw (2,1.8) .. controls (2,1.25) and (3,1.25) .. (3,1.8);\n\\end{tikzpicture}\n```\n\nThe box labels stand for the corresponding idempotents and the right-hand cup-cap is $U_r$; the picture is only a convention aid. All algebraic identities are proved from the labeled matching composition and the relations of [[lem-temperley-lieb-generators-satisfy-local-relations]].",
+          "uses": [
+            "1.3",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-temperley-lieb-jones-wenzl-partial-trace-and-uniqueness",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a nonzero commutative ring with unit, $\\delta\\in R$, and suppose $[2],\\ldots,[n]$ are units. The projector $p_n$ of [[def-temperley-lieb-jones-wenzl-recursion-over-unit-denominators]] has coefficient $1$ on the identity diagram, is nonzero and idempotent, and is annihilated on both sides by each $U_i$ for $1\\le i<n$. Its corner is $p_n\\mathrm{TL}_n p_n=R p_n$, so it is the unique idempotent with identity coefficient $1$ and those two-sided annihilation conditions. For $n\\ge1$,\n\n$$\\operatorname{ptr}_n(p_n)=\\frac{[n+1]}{[n]}p_{n-1},\\qquad \\operatorname{Tr}_n(p_n)=[n+1].$$\n\nOnly the displayed denominator units are assumed; $\\delta$ need not be a unit.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-temperley-lieb-closure-trace-and-partial-trace",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative ring, $\\delta\\in R$, and use the noncrossing-pairing diagram category of [[def-temperley-lieb-diagram-category]], with the left factor stacked above the right factor. For a basis diagram $D:n\\to n$, close each top endpoint to the corresponding bottom endpoint outside the rectangle and let $c(D)$ be the number of circles in the resulting finite graph. Define\n\n$$\\operatorname{Tr}_n(D)=\\delta^{c(D)}$$\n\nand extend $R$-linearly to $\\mathrm{TL}_n(R,\\delta)$. This is the **unnormalized closure trace**. In particular, $\\operatorname{Tr}_0(1_0)=1$ and $\\operatorname{Tr}_n(1_n)=\\delta^n$. No unit or nonzero condition on $\\delta$ is required.\n\nLet $\\cup:0\\to2$ and $\\cap:2\\to0$ be the standard cup and cap in the diagram category. For $n\\ge1$ define the **right partial trace** by\n\n$$\\operatorname{ptr}_n(x)=(1_{n-1}\\otimes\\cap)\\circ(x\\otimes1_1)\\circ(1_{n-1}\\otimes\\cup),\\qquad x\\in\\mathrm{TL}_n(R,\\delta).$$\n\nIt is a map $\\mathrm{TL}_n\\to\\mathrm{TL}_{n-1}$. If $\\delta$ is a unit, define $\\tau_n=\\delta^{-n}\\operatorname{Tr}_n$. This agrees with the normalized trace of [[def-temperley-lieb-normalized-markov-trace-by-closure]] over $\\mathbb C$ when $\\delta\\ne0$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-tgrx-sector-code",
+          "source_section": "Definition",
+          "quote": "Let $I$ be a finite nonempty index set. For each $\\alpha\\in I$, let $H_\\alpha$ and $K_\\alpha$ be nonzero finite-dimensional complex inner-product spaces, and give\n\n$$H_A:=\\bigoplus_{\\alpha\\in I}(H_\\alpha\\otimes K_\\alpha)$$\n\nthe orthogonal direct-sum inner product: distinct summands are orthogonal and the inner product within a summand is the Hilbert tensor-product inner product. On elementary tensors that inner product is $\\langle x\\otimes y,x'\\otimes y'\\rangle=\\langle x,x'\\rangle\\langle y,y'\\rangle$. A map $T\\otimes U$ acts by $(T\\otimes U)(x\\otimes y)=Tx\\otimes Uy$, and a direct-sum map acts blockwise with zero off-diagonal blocks.\n\nA complex-linear endomorphism is a linear map from a vector space to itself. A density matrix on a finite-dimensional complex inner-product space is a self-adjoint endomorphism with nonnegative eigenvalues and trace one; it is faithful when all eigenvalues are strictly positive. These are the conventions used for the finite density matrices in the earlier modular-balance result. The summand indexed by $\\alpha$ is called the $\\alpha$ sector. For each $\\alpha$, fix a faithful density matrix $\\chi_\\alpha$ on $K_\\alpha$. Let $\\mathbf p=(p_\\alpha)_{\\alpha\\in I}$ satisfy $p_\\alpha>0$ and $\\sum_{\\alpha\\in I}p_\\alpha=1$, and let $\\rho_\\alpha$ be density matrices on $H_\\alpha$. Define the encoded endomorphism\n\n$$\\mathcal E_\\chi(\\mathbf p,\\rho):=\\bigoplus_{\\alpha\\in I}p_\\alpha\\,\\rho_\\alpha\\otimes\\chi_\\alpha.$$\n\nWhen this encoded endomorphism is a density matrix, call it the encoded reduced state. The logical data are $\\mathbf p$ and $\\{\\rho_\\alpha\\}$; the ancillary matrices $\\{\\chi_\\alpha\\}$ are held fixed. For a second strictly positive probability vector $\\mathbf q$ and faithful density matrices $\\sigma_\\alpha$ on the same $H_\\alpha$, write $\\sigma_A:=\\mathcal E_\\chi(\\mathbf q,\\sigma)$ for the encoded reference endomorphism.\n\nThis is a finite-dimensional algebraic model. The definition makes no gravitational interpretation and does not identify a matrix entropy term with a geometric area.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-trace-of-an-endomorphism",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a finite-dimensional vector space over $F$ and let $T:V\\to V$ be\nlinear. Choose any ordered basis $\\mathcal B$ of $V$ and define the **trace of\nthe endomorphism $T$** by\n\n$$\\operatorname{tr}(T):=\\operatorname{tr}([T]_{\\mathcal B}^{\\mathcal B}).$$\n\nThis is independent of the chosen basis: matrices of the same endomorphism in\ntwo ordered bases are similar, and similar matrices have equal trace. When\n$V$ is the zero space, the empty basis gives trace $0$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "prop-tgrx-code-area-entropy",
+          "source_section": "Statement",
+          "quote": "Let $I$ be a finite nonempty set. For each $\\alpha\\in I$, let $H_\\alpha,K_\\alpha$ be nonzero finite-dimensional complex inner-product spaces. A density matrix is a self-adjoint endomorphism with nonnegative eigenvalues and trace one; it is faithful when all its eigenvalues are strictly positive. Let $p_\\alpha,q_\\alpha>0$ with $\\sum_\\alpha p_\\alpha=\\sum_\\alpha q_\\alpha=1$, let $\\rho_\\alpha$ be a density matrix on $H_\\alpha$, let $\\sigma_\\alpha$ be a faithful density matrix on $H_\\alpha$, and let $\\chi_\\alpha$ be a fixed faithful density matrix on $K_\\alpha$. Form the finite orthogonal direct sums\n\n$$\\rho_A:=\\bigoplus_{\\alpha\\in I}p_\\alpha\\rho_\\alpha\\otimes\\chi_\\alpha,\\qquad \\sigma_A:=\\bigoplus_{\\alpha\\in I}q_\\alpha\\sigma_\\alpha\\otimes\\chi_\\alpha.$$\n\nFor a density matrix $\\tau$, set $s(\\tau):=-\\sum_{\\lambda_j(\\tau)>0}\\lambda_j(\\tau)\\log\\lambda_j(\\tau)$, with $0\\log0:=0$, so entropy is in nats. For density matrices $\\tau,\\omega$ with faithful reference $\\omega$, set $D(\\tau\\|\\omega):=\\operatorname{tr}(\\tau\\log\\tau)-\\operatorname{tr}(\\tau\\log\\omega)$ using spectral logarithms on positive eigenvalues. Also define $H(\\mathbf p):=-\\sum_\\alpha p_\\alpha\\log p_\\alpha$ and $D_{\\rm cl}(\\mathbf p\\|\\mathbf q):=\\sum_\\alpha p_\\alpha\\log(p_\\alpha/q_\\alpha)$. Then $\\rho_A$ and $\\sigma_A$ are density matrices, $\\sigma_A$ is faithful, and\n\n$$s(\\rho_A)=H(\\mathbf p)+\\sum_{\\alpha\\in I}p_\\alpha\\bigl(s(\\rho_\\alpha)+s(\\chi_\\alpha)\\bigr),$$\n\n$$D(\\rho_A\\|\\sigma_A)=D_{\\rm cl}(\\mathbf p\\|\\mathbf q)+\\sum_{\\alpha\\in I}p_\\alpha D(\\rho_\\alpha\\|\\sigma_\\alpha).$$\n\nThese are exact finite-dimensional matrix identities; no literal black-hole area, universal Ryu–Takayanagi formula, continuum limit, or gravitational entropy claim follows.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-kernel-and-image-of-a-linear-map",
+          "source_section": "Definition",
+          "quote": "For a linear map $T:V\\to W$, its **kernel** and **image** are respectively\n\n$$\\ker T:=\\{v\\in V:T(v)=0_W\\},\\qquad \\operatorname{im}T:=\\{T(v):v\\in V\\}.$$\n\nThat both sets are linear subspaces, and that a trivial kernel characterises\ninjectivity, is proved in [[thm-linear-kernel-image-and-injectivity]].",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F2], $p_n^2=p_n$. The map $\\Phi_n$ and the representation $\\pi$ are algebra homomorphisms, so $P^2=\\pi(\\widehat p_n^2)=\\pi(\\widehat p_n)=P$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The imported projector result [F2] gives the unnormalized closure value $\\operatorname{Tr}_n(p_n)=[n+1]_\\delta$, where [F3] defines $\\operatorname{Tr}_n$ by closing the corresponding diagram endpoints and weighting each resulting loop by $\\delta$. This is the diagram-algebra functional recorded separately from the Hilbert-space trace.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "step": "1.3",
+          "claim": "At recursion index $1$, $Q_1:=\\pi(\\iota_{1,n}(\\widehat p_1))=I_H$ is self-adjoint because $\\widehat p_1=1$ and $\\langle I_Hx,y\\rangle=\\langle x,I_Hy\\rangle$ for all $x,y\\in H$.",
+          "inputs": [
+            "L1",
+            "F1",
+            "base"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "step": "1.4",
+          "claim": "Suppose $1\\leq k<n$ and $Q_k:=\\pi(\\iota_{k,n}(\\widehat p_k))$ is self-adjoint. By the commuting tower identity in [L1], the diagram recursion [F1] transfers under $\\Phi_n^{-1}$ and $\\pi$ to $Q_{k+1}=Q_k-c_kQ_k\\pi(u_k)Q_k$, where $c_k=[k]_\\delta/[k+1]_\\delta\\in\\mathbb R$ because $\\delta$ is real and the recurrence defines real quantum integers. For all $x,y\\in H$, self-adjointness of $Q_k$ and $\\pi(u_k)$, together with $c_k\\in\\mathbb R$, gives $\\langle Q_{k+1}x,y\\rangle=\\langle Q_kx,y\\rangle-c_k\\langle Q_k\\pi(u_k)Q_kx,y\\rangle=\\langle x,Q_ky\\rangle-c_k\\langle x,Q_k\\pi(u_k)Q_ky\\rangle=\\langle x,Q_{k+1}y\\rangle$. Thus $Q_{k+1}$ is self-adjoint.",
+          "inputs": [
+            "L1",
+            "F1",
+            "ih",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Applying the finite step 1.4 from base step 1.3 through $k=n-1$ gives $Q_n=P$, with $P$ self-adjoint in the stated inner-product sense; when $n=1$, step 1.3 already gives the conclusion.",
+          "inputs": [
+            "step 1.3",
+            "step 1.4",
+            "induction",
+            "discharge-induction"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "For every $x\\in H$, $x=Px+(I_H-P)x$, with $Px\\in\\operatorname{im}P$ and $P(I_H-P)x=0$, so $(I_H-P)x\\in\\ker P$ by [F8]. If $y=Pu\\in\\operatorname{im}P$ and $z\\in\\ker P$, then $\\langle y,z\\rangle=\\langle Pu,z\\rangle=\\langle u,Pz\\rangle=0$ by step 2.1 and $Pz=0$. Thus the two subspaces are orthogonal and sum to $H$, so their intersection is zero and $H=\\operatorname{im}P\\oplus\\ker P$. The idempotent $P$ acts as the identity on $\\operatorname{im}P$ and as zero on $\\ker P$, so it is an orthogonal projection with eigenvalues $1$ on its $r$-dimensional image and $0$ on the kernel.",
+          "inputs": [
+            "F8",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "By step 3.1 and [F5], the ordinary Hilbert-space trace is $\\operatorname{tr}_H(P)=r$, while step 1.2 gives the separate diagrammatic closure value. The operator $\\rho=P/r$ is self-adjoint and has eigenvalues $1/r$ on $\\operatorname{im}P$ and $0$ on $\\ker P$. In a basis formed from bases of these subspaces its trace is $r(1/r)=1$, so it is a density matrix by [F4,F5]. Its entropy is $-r(1/r)\\log(1/r)=\\log r$ by [F6,F7]. This concludes the proof using the self-adjointness established by induction in step 2.1.",
+          "step": "4.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "step 1.2",
+            "step 3.1",
+            "step 2.1",
+            "algebra",
+            "discharge-induction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement assumes n>=1 as in Definition; n=0 is outside the named projector setup."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement requires [2]_delta,...,[n]_delta nonzero and rank P>0; if P=0 the normalized rho is undefined."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At n=1, p_1=1 and P=I_H, so the conclusion gives rho=I_H/dim(H) and entropy log(dim H) (steps 2.1-4.1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The projection may have any rank r from 1 to dim(H); the proof treats repeated eigenvalues 1/r and zeros on the kernel (steps 3.1-4.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement explicitly requires only [2]_delta,...,[n]_delta nonzero and asserts no limit; [n+1]_delta may vanish."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "All spaces and the algebra are finite-dimensional; the image/kernel decomposition is an explicit finite-dimensional construction (step 3.1)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The represented Jones-Wenzl idempotent is orthogonal and has normalized-rank entropy; preserving the diagram trace is only a sufficient extra assumption for its equality with Hilbert trace, with no converse assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The represented Jones-Wenzl idempotent is orthogonal and has normalized-rank entropy; preserving the diagram trace is only a sufficient extra assumption for its equality with Hilbert trace, with no converse assertion."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "one-strand representation",
+          "inputs": "n=1, H=C^d with d>=1 and pi unital",
+          "expected": "P=I, rho=I/d, s(rho)=log(d)",
+          "result": "The recursion gives p1=1; the finite spectrum has d eigenvalues 1/d.",
+          "scope": "Exact finite-dimensional case."
+        },
+        {
+          "case": "ordinary trace differs from closure trace",
+          "inputs": "n=2, delta=2, pi(u1)=diag(2,0) on C^2",
+          "expected": "rank(pi(p2))=1 while [3]_delta=3",
+          "result": "p2=1-(1/2)u1, so P=diag(0,1), rank P=1; [2]=2 and [3]=2*2-1=3.",
+          "scope": "Exact representation check; demonstrates the two trace values are not universally identified."
+        },
+        {
+          "case": "critical next denominator",
+          "inputs": "delta=1, n=2",
+          "expected": "the recursion is defined although [3]=0",
+          "result": "[2]=1 is the only denominator through n=2; the proposition requires no division by [3].",
+          "scope": "Exact denominator boundary."
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "def-tgrx-tl-boundary-representation",
+          "carrier": "items/def-tgrx-tl-boundary-representation.md",
+          "status": "Exact current public interface transcribed by root at the drained Step2 join; original substantive source-use review retained in historical_source_interface and native/same-owner reports. No renewed full supplier-proof reading asserted.",
+          "source_section": "Definition",
+          "exact_statement": "Fix an integer $n\\geq1$ and a real loop parameter $\\delta$. Define $[0]_\\delta=0$, $[1]_\\delta=1$, and $[r+1]_\\delta=\\delta[r]_\\delta-[r-1]_\\delta$ for $r\\geq1$. Assume $[k]_\\delta\\neq0$ for $2\\leq k\\leq n$; this list is empty when $n=1$. The abstract generator algebra $P_n(\\mathbb C,\\delta)$ is the unital complex algebra with generators $u_1,\\ldots,u_{n-1}$ and relations $u_i^2=\\delta u_i$, $u_i u_{i\\pm1}u_i=u_i$, and $u_i u_j=u_j u_i$ when $|i-j|>1$. The diagram algebra $\\mathrm{TL}_n(\\mathbb C,\\delta)$ has basis the noncrossing pairings of $n$ ordered bottom and $n$ ordered top points; its product stacks the left factor above the right, deletes each closed loop, and multiplies by $\\delta$ per loop. Its elementary diagram $d_i$ has a cap joining top points $i,i+1$, a cup joining bottom points $i,i+1$, and vertical strands elsewhere. The isomorphism $\\Phi_n:P_n(\\mathbb C,\\delta)\\to\\mathrm{TL}_n(\\mathbb C,\\delta)$ sends $u_i$ to $d_i$.\n\nFor every $1\\leq i\\leq n-2$, the adjacent relations in the presentation mean both $u_i u_{i+1}u_i=u_i$ and $u_{i+1}u_i u_{i+1}=u_{i+1}$. For matching the imported recursion's notation, write $U_i:=d_i$.\n\nSet $p_1=1_1$. For $1\\leq r<n$, put $Q_r=p_r\\otimes1_1$ by adjoining one rightmost vertical strand and define\n\n$$p_{r+1}:=Q_r-\\frac{[r]_\\delta}{[r+1]_\\delta}Q_r d_r Q_r.$$\n\nThe denominator hypotheses make this recursion defined. For each $1\\leq r\\leq n$, let $\\widehat p_r:=\\Phi_r^{-1}(p_r)$. The cited Jones-Wenzl result gives $p_n^2=p_n$ under these unit-denominator hypotheses. For $1\\leq r\\leq n$, let $\\iota_{r,n}:P_r(\\mathbb C,\\delta)\\to P_n(\\mathbb C,\\delta)$ send each generator $u_i$ to the same-named generator, and let $\\jmath_{r,n}:\\mathrm{TL}_r(\\mathbb C,\\delta)\\to\\mathrm{TL}_n(\\mathbb C,\\delta)$ append $n-r$ rightmost vertical strands. The maps commute with $\\Phi$: on each generator, both composites send $u_i$ to $d_i$ with those added strands, and both send the unit to the identity diagram. Since generators and unit generate $P_r$, the composites agree on every element.\n\nLet $H$ be a nonzero finite-dimensional complex inner-product space whose inner product is linear in its first argument and conjugate-linear in its second. A unital complex-algebra representation is a complex-linear map $\\pi:P_n(\\mathbb C,\\delta)\\to\\operatorname{End}_{\\mathbb C}(H)$ such that $\\pi(xy)=\\pi(x)\\pi(y)$ for all $x,y\\in P_n(\\mathbb C,\\delta)$ and $\\pi(1)=I_H$. Here $\\operatorname{End}_{\\mathbb C}(H)$ is the algebra of complex-linear endomorphisms, with composition as multiplication and $I_H$ as unit. Require each generator image to be self-adjoint, meaning $\\langle\\pi(u_i)x,y\\rangle=\\langle x,\\pi(u_i)y\\rangle$ for all $x,y\\in H$. Define $P:=\\pi(\\widehat p_n)$, define $\\operatorname{rank}P:=\\dim_{\\mathbb C}\\operatorname{im}P$, and restrict to data with $\\operatorname{rank}P>0$. The algebraic representation as a physical boundary state space is an additional model identification and is not part of this definition.",
+          "relevant_hypotheses_and_conventions": "n>=1, real delta, unit denominators through n, a unital representation with self-adjoint generator images, P=pi(p_n), and rank P>0.",
+          "supplier_proof_status": "draft; this exact-quote refresh does not grant independent proof acceptance",
+          "consumer_use": "Supplies the finite representation data.",
+          "historical_source_interface": {
+            "source_section": "Definition",
+            "exact_statement": "Fix an integer $n\\geq1$ and a real loop parameter $\\delta$. Define $[0]_\\delta=0$, $[1]_\\delta=1$, and $[r+1]_\\delta=\\delta[r]_\\delta-[r-1]_\\delta$ for $r\\geq1$. Assume $[k]_\\delta\\neq0$ for $2\\leq k\\leq n$; this list is empty when $n=1$. The abstract generator algebra $P_n(\\mathbb C,\\delta)$ is the unital complex algebra with generators $u_1,\\ldots,u_{n-1}$ and relations $u_i^2=\\delta u_i$, $u_i u_{i\\pm1}u_i=u_i$, and $u_i u_j=u_j u_i$ when $|i-j|>1$. The diagram algebra $\\mathrm{TL}_n(\\mathbb C,\\delta)$ has basis the noncrossing pairings of $n$ ordered bottom and $n$ ordered top points; its product stacks the left factor above the right, deletes each closed loop, and multiplies by $\\delta$ per loop. Its elementary diagram $d_i$ has a cap joining top points $i,i+1$, a cup joining bottom points $i,i+1$, and vertical strands elsewhere. The isomorphism $\\Phi_n:P_n(\\mathbb C,\\delta)\\to\\mathrm{TL}_n(\\mathbb C,\\delta)$ sends $u_i$ to $d_i$.\n\nFor every $1\\leq i\\leq n-2$, the adjacent relations in the presentation mean both $u_i u_{i+1}u_i=u_i$ and $u_{i+1}u_i u_{i+1}=u_{i+1}$. For matching the imported recursion's notation, write $U_i:=d_i$.\n\nSet $p_1=1_1$. For $1\\leq r<n$, put $Q_r=p_r\\otimes1_1$ by adjoining one rightmost vertical strand and define\n\n$$p_{r+1}:=Q_r-\\frac{[r]_\\delta}{[r+1]_\\delta}Q_r d_r Q_r.$$\n\nThe denominator hypotheses make this recursion defined. Let $\\widehat p_n:=\\Phi_n^{-1}(p_n)$. The cited Jones-Wenzl result gives $p_n^2=p_n$ under these unit-denominator hypotheses. For $r\\leq n$, the tower map is the operation of adjoining $n-r$ rightmost vertical strands; under $\\Phi_n$ it sends each generator $u_i$ with $i<r$ to the same $d_i$ on the larger strand set.\n\nLet $H$ be a nonzero finite-dimensional complex inner-product space. A unital representation is a unital complex-algebra homomorphism $\\pi:P_n(\\mathbb C,\\delta)\\to\\operatorname{End}_{\\mathbb C}(H)$, where $\\operatorname{End}_{\\mathbb C}(H)$ is the algebra of complex-linear endomorphisms of $H$. Require each $\\pi(u_i)$ to be self-adjoint, meaning $\\langle\\pi(u_i)x,y\\rangle=\\langle x,\\pi(u_i)y\\rangle$ for all $x,y\\in H$. Define $P:=\\pi(\\widehat p_n)$, define $\\operatorname{rank}P:=\\dim_{\\mathbb C}\\operatorname{im}P$, and restrict to data with $\\operatorname{rank}P>0$. The algebraic representation as a physical boundary state space is an additional model identification and is not part of this definition.",
+            "status": "Current same-batch draft carrier; exact statement and placement are recorded in the batch manifest.",
+            "supplier_proof_status": "Definition; no separate proof is required."
+          }
+        },
+        {
+          "supplier": "def-temperley-lieb-jones-wenzl-recursion-over-unit-denominators",
+          "carrier": "items/def-temperley-lieb-jones-wenzl-recursion-over-unit-denominators.md",
+          "status": "Published mathematical import; current pinned carrier and exact interface were inspected read-only.",
+          "source_section": "Definition",
+          "exact_statement": "Let $R$ be a commutative ring with unit and let $\\delta\\in R$. Use the quantum integers $[0]=0$, $[1]=1$, $[r+1]=\\delta[r]-[r-1]$ of [[def-temperley-lieb-quantum-integers-and-quantum-characteristic]]. Put $p_0=1_0$ and $p_1=1_1$. For $r\\ge1$, if $p_r$ is defined and $[r+1]$ is a unit, put\n\n$$P_r=p_r\\otimes1_1\\in\\mathrm{TL}_{r+1}(R,\\delta),\\qquad p_{r+1}=P_r-\\frac{[r]}{[r+1]}P_rU_rP_r,$$\n\nwhere $U_r$ is the cap-cup generator on the final two of the $r+1$ strands in [[def-temperley-lieb-diagram-category]]. Thus $p_n$ is defined by this recursion only when every $[2],\\ldots,[n]$ is a unit. The definition makes no assertion that failure of a denominator condition prevents every other normalized projector from existing.\n\n```tikz\n\\begin{tikzpicture}[x=0.9cm,y=0.9cm]\n  \\draw (0,0) -- (0,1.8);\n  \\draw (1,0) -- (1,1.8);\n  \\node[draw,minimum width=0.55cm,minimum height=0.45cm] at (0.5,1.25) {$p_r$};\n  \\node[draw,minimum width=0.55cm,minimum height=0.45cm] at (0.5,0.45) {$p_r$};\n  \\draw (2,0) .. controls (2,0.55) and (3,0.55) .. (3,0);\n  \\draw (2,1.8) .. controls (2,1.25) and (3,1.25) .. (3,1.8);\n\\end{tikzpicture}\n```\n\nThe box labels stand for the corresponding idempotents and the right-hand cup-cap is $U_r$; the picture is only a convention aid. All algebraic identities are proved from the labeled matching composition and the relations of [[lem-temperley-lieb-generators-satisfy-local-relations]].",
+          "relevant_hypotheses_and_conventions": "The recursion is p_{k+1}=P_k-([k]/[k+1])P_k d_k P_k.",
+          "supplier_proof_status": "Published definition inspected.",
+          "consumer_use": "Supplies the real recursive formula used for self-adjointness."
+        },
+        {
+          "supplier": "lem-temperley-lieb-jones-wenzl-partial-trace-and-uniqueness",
+          "carrier": "items/lem-temperley-lieb-jones-wenzl-partial-trace-and-uniqueness.md",
+          "status": "Published mathematical import; current pinned carrier and exact interface were inspected read-only.",
+          "source_section": "Statement",
+          "exact_statement": "Let $R$ be a nonzero commutative ring with unit, $\\delta\\in R$, and suppose $[2],\\ldots,[n]$ are units. The projector $p_n$ of [[def-temperley-lieb-jones-wenzl-recursion-over-unit-denominators]] has coefficient $1$ on the identity diagram, is nonzero and idempotent, and is annihilated on both sides by each $U_i$ for $1\\le i<n$. Its corner is $p_n\\mathrm{TL}_n p_n=R p_n$, so it is the unique idempotent with identity coefficient $1$ and those two-sided annihilation conditions. For $n\\ge1$,\n\n$$\\operatorname{ptr}_n(p_n)=\\frac{[n+1]}{[n]}p_{n-1},\\qquad \\operatorname{Tr}_n(p_n)=[n+1].$$\n\nOnly the displayed denominator units are assumed; $\\delta$ need not be a unit.",
+          "relevant_hypotheses_and_conventions": "Under the denominator hypotheses, p_n^2=p_n and the unnormalized closure is [n+1].",
+          "supplier_proof_status": "Published complete proof inspected for the exact cited claim.",
+          "consumer_use": "Supplies idempotence and the separate diagram-trace value."
+        },
+        {
+          "supplier": "def-temperley-lieb-closure-trace-and-partial-trace",
+          "carrier": "items/def-temperley-lieb-closure-trace-and-partial-trace.md",
+          "status": "Published mathematical import; current pinned carrier and exact interface were inspected read-only.",
+          "source_section": "Definition",
+          "exact_statement": "Let $R$ be a commutative ring, $\\delta\\in R$, and use the noncrossing-pairing diagram category of [[def-temperley-lieb-diagram-category]], with the left factor stacked above the right factor. For a basis diagram $D:n\\to n$, close each top endpoint to the corresponding bottom endpoint outside the rectangle and let $c(D)$ be the number of circles in the resulting finite graph. Define\n\n$$\\operatorname{Tr}_n(D)=\\delta^{c(D)}$$\n\nand extend $R$-linearly to $\\mathrm{TL}_n(R,\\delta)$. This is the **unnormalized closure trace**. In particular, $\\operatorname{Tr}_0(1_0)=1$ and $\\operatorname{Tr}_n(1_n)=\\delta^n$. No unit or nonzero condition on $\\delta$ is required.\n\nLet $\\cup:0\\to2$ and $\\cap:2\\to0$ be the standard cup and cap in the diagram category. For $n\\ge1$ define the **right partial trace** by\n\n$$\\operatorname{ptr}_n(x)=(1_{n-1}\\otimes\\cap)\\circ(x\\otimes1_1)\\circ(1_{n-1}\\otimes\\cup),\\qquad x\\in\\mathrm{TL}_n(R,\\delta).$$\n\nIt is a map $\\mathrm{TL}_n\\to\\mathrm{TL}_{n-1}$. If $\\delta$ is a unit, define $\\tau_n=\\delta^{-n}\\operatorname{Tr}_n$. This agrees with the normalized trace of [[def-temperley-lieb-normalized-markov-trace-by-closure]] over $\\mathbb C$ when $\\delta\\ne0$.",
+          "relevant_hypotheses_and_conventions": "The unnormalized closure closes corresponding boundary points and assigns delta for each loop.",
+          "supplier_proof_status": "Published definition inspected.",
+          "consumer_use": "Defines the trace functional distinct from the Hilbert-space trace."
+        },
+        {
+          "supplier": "def-tgrx-sector-code",
+          "carrier": "items/def-tgrx-sector-code.md",
+          "status": "Current batch-125 draft carrier; the current Step1 record is ready and its hash matches the inspected carrier. This is authoring readiness, not independent proof approval.",
+          "source_section": "Definition",
+          "exact_statement": "Let $I$ be a finite nonempty index set. For each $\\alpha\\in I$, let $H_\\alpha$ and $K_\\alpha$ be nonzero finite-dimensional complex inner-product spaces, and give\n\n$$H_A:=\\bigoplus_{\\alpha\\in I}(H_\\alpha\\otimes K_\\alpha)$$\n\nthe orthogonal direct-sum inner product: distinct summands are orthogonal and the inner product within a summand is the Hilbert tensor-product inner product. On elementary tensors that inner product is $\\langle x\\otimes y,x'\\otimes y'\\rangle=\\langle x,x'\\rangle\\langle y,y'\\rangle$. A map $T\\otimes U$ acts by $(T\\otimes U)(x\\otimes y)=Tx\\otimes Uy$, and a direct-sum map acts blockwise with zero off-diagonal blocks.\n\nA complex-linear endomorphism is a linear map from a vector space to itself. A density matrix on a finite-dimensional complex inner-product space is a self-adjoint endomorphism with nonnegative eigenvalues and trace one; it is faithful when all eigenvalues are strictly positive. These are the conventions used for the finite density matrices in the earlier modular-balance result. The summand indexed by $\\alpha$ is called the $\\alpha$ sector. For each $\\alpha$, fix a faithful density matrix $\\chi_\\alpha$ on $K_\\alpha$. Let $\\mathbf p=(p_\\alpha)_{\\alpha\\in I}$ satisfy $p_\\alpha>0$ and $\\sum_{\\alpha\\in I}p_\\alpha=1$, and let $\\rho_\\alpha$ be density matrices on $H_\\alpha$. Define the encoded endomorphism\n\n$$\\mathcal E_\\chi(\\mathbf p,\\rho):=\\bigoplus_{\\alpha\\in I}p_\\alpha\\,\\rho_\\alpha\\otimes\\chi_\\alpha.$$\n\nWhen this encoded endomorphism is a density matrix, call it the encoded reduced state. The logical data are $\\mathbf p$ and $\\{\\rho_\\alpha\\}$; the ancillary matrices $\\{\\chi_\\alpha\\}$ are held fixed. For a second strictly positive probability vector $\\mathbf q$ and faithful density matrices $\\sigma_\\alpha$ on the same $H_\\alpha$, write $\\sigma_A:=\\mathcal E_\\chi(\\mathbf q,\\sigma)$ for the encoded reference endomorphism.\n\nThis is a finite-dimensional algebraic model. The definition makes no gravitational interpretation and does not identify a matrix entropy term with a geometric area.",
+          "relevant_hypotheses_and_conventions": "A finite density matrix is self-adjoint, has nonnegative eigenvalues, and has trace one.",
+          "supplier_proof_status": "Definition; no separate proof is required. Current Step1 readiness is ready.",
+          "consumer_use": "Supplies the density-matrix definition."
+        },
+        {
+          "supplier": "prop-tgrx-code-area-entropy",
+          "carrier": "items/prop-tgrx-code-area-entropy.md",
+          "status": "Current batch-125 draft carrier; its full current proof was inspected and its Step1 record is ready at the current hash. This is authoring readiness, not independent proof approval.",
+          "source_section": "Statement",
+          "exact_statement": "Let $I$ be a finite nonempty set. For each $\\alpha\\in I$, let $H_\\alpha,K_\\alpha$ be nonzero finite-dimensional complex inner-product spaces. A density matrix is a self-adjoint endomorphism with nonnegative eigenvalues and trace one; it is faithful when all its eigenvalues are strictly positive. Let $p_\\alpha,q_\\alpha>0$ with $\\sum_\\alpha p_\\alpha=\\sum_\\alpha q_\\alpha=1$, let $\\rho_\\alpha$ be a density matrix on $H_\\alpha$, let $\\sigma_\\alpha$ be a faithful density matrix on $H_\\alpha$, and let $\\chi_\\alpha$ be a fixed faithful density matrix on $K_\\alpha$. Form the finite orthogonal direct sums\n\n$$\\rho_A:=\\bigoplus_{\\alpha\\in I}p_\\alpha\\rho_\\alpha\\otimes\\chi_\\alpha,\\qquad \\sigma_A:=\\bigoplus_{\\alpha\\in I}q_\\alpha\\sigma_\\alpha\\otimes\\chi_\\alpha.$$\n\nFor a density matrix $\\tau$, set $s(\\tau):=-\\sum_{\\lambda_j(\\tau)>0}\\lambda_j(\\tau)\\log\\lambda_j(\\tau)$, with $0\\log0:=0$, so entropy is in nats. For density matrices $\\tau,\\omega$ with faithful reference $\\omega$, set $D(\\tau\\|\\omega):=\\operatorname{tr}(\\tau\\log\\tau)-\\operatorname{tr}(\\tau\\log\\omega)$ using spectral logarithms on positive eigenvalues. Also define $H(\\mathbf p):=-\\sum_\\alpha p_\\alpha\\log p_\\alpha$ and $D_{\\rm cl}(\\mathbf p\\|\\mathbf q):=\\sum_\\alpha p_\\alpha\\log(p_\\alpha/q_\\alpha)$. Then $\\rho_A$ and $\\sigma_A$ are density matrices, $\\sigma_A$ is faithful, and\n\n$$s(\\rho_A)=H(\\mathbf p)+\\sum_{\\alpha\\in I}p_\\alpha\\bigl(s(\\rho_\\alpha)+s(\\chi_\\alpha)\\bigr),$$\n\n$$D(\\rho_A\\|\\sigma_A)=D_{\\rm cl}(\\mathbf p\\|\\mathbf q)+\\sum_{\\alpha\\in I}p_\\alpha D(\\rho_\\alpha\\|\\sigma_\\alpha).$$\n\nThese are exact finite-dimensional matrix identities; no literal black-hole area, universal Ryu–Takayanagi formula, continuum limit, or gravitational entropy claim follows.",
+          "relevant_hypotheses_and_conventions": "s(tau) is the finite sum -sum_{lambda>0}lambda log(lambda), with 0 log 0=0 and natural logarithms.",
+          "supplier_proof_status": "Complete current conditional proof inspected; Step1 readiness is ready; independent proof approval is not claimed.",
+          "consumer_use": "Supplies the entropy convention."
+        },
+        {
+          "supplier": "def-trace-of-an-endomorphism",
+          "carrier": "items/def-trace-of-an-endomorphism.md",
+          "status": "Published mathematical import; current pinned carrier and exact interface were inspected read-only.",
+          "source_section": "Definition",
+          "exact_statement": "Let $V$ be a finite-dimensional vector space over $F$ and let $T:V\\to V$ be\nlinear. Choose any ordered basis $\\mathcal B$ of $V$ and define the **trace of\nthe endomorphism $T$** by\n\n$$\\operatorname{tr}(T):=\\operatorname{tr}([T]_{\\mathcal B}^{\\mathcal B}).$$\n\nThis is independent of the chosen basis: matrices of the same endomorphism in\ntwo ordered bases are similar, and similar matrices have equal trace. When\n$V$ is the zero space, the empty basis gives trace $0$.",
+          "relevant_hypotheses_and_conventions": "Trace is the basis-independent sum of diagonal entries.",
+          "supplier_proof_status": "Published definition inspected.",
+          "consumer_use": "Supplies the trace used to normalize rho."
+        },
+        {
+          "supplier": "thm-natural-logarithm-laws",
+          "carrier": "items/thm-natural-logarithm-laws.md",
+          "status": "Published mathematical import; current pinned carrier and exact interface were inspected read-only.",
+          "source_section": "Statement",
+          "exact_statement": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "relevant_hypotheses_and_conventions": "log(1/x)=-log(x) for x>0.",
+          "supplier_proof_status": "Published complete proof inspected for the exact cited claim.",
+          "consumer_use": "Supplies the entropy simplification."
+        },
+        {
+          "supplier": "def-kernel-and-image-of-a-linear-map",
+          "carrier": "items/def-kernel-and-image-of-a-linear-map.md",
+          "status": "Published mathematical import; current pinned carrier and exact interface were inspected read-only.",
+          "source_section": "Definition",
+          "exact_statement": "For a linear map $T:V\\to W$, its **kernel** and **image** are respectively\n\n$$\\ker T:=\\{v\\in V:T(v)=0_W\\},\\qquad \\operatorname{im}T:=\\{T(v):v\\in V\\}.$$\n\nThat both sets are linear subspaces, and that a trivial kernel characterises\ninjectivity, is proved in [[thm-linear-kernel-image-and-injectivity]].",
+          "relevant_hypotheses_and_conventions": "ker(T)={x:T(x)=0} and im(T)={T(x):x in H}.",
+          "supplier_proof_status": "Published definition inspected.",
+          "consumer_use": "Supplies range and kernel notation."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-127-beta-self-review",
+        "notes": "Self-review checked that idempotence alone does not imply orthogonality, proved self-adjointness from the real recursion and generator hypotheses, used rank P>0 for normalization, and kept the diagram closure trace distinct. The representation is not assumed trace-preserving; not independent proof approval."
+      },
+      "current_boundary_worksheet": {
+        "proposal": "research/physics-non-fluid-129-2026-10-21-r2-owner-step2-boundary-proposal-1/proposal.json",
+        "source_sha256": "1f25f2904574419cff2141bfab3499e4963fcda8b8e9e5dde155954acaa9a119",
+        "qualification": "Released complete current source/eight-case semantic worksheet; root transcribed exact current rows. No independent acceptance or finite computation asserted."
+      }
+    },
+    "ex-tgrx-count-is-not-area-law": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "prop-tgrx-fusion-count-entropy",
+          "source_section": "Statement",
+          "quote": "For a finite fusion transfer count model, let $e_0\\in\\mathbb R^I$ be the coordinate vector equal to $1$ at label $0$ and $0$ elsewhere, and define $v_n:=N^n e_0$. Then $v_0=e_0$, $v_{n+1}=Nv_n$, and the number of length-$n$ paths from $0$ to a label $a$ is $(v_n)_a=(N^n)_{a0}$. Whenever $D_n>0$, the operator $\\rho_n=D_n^{-1}I_{\\mathbb C^{D_n}}$ is a density matrix and has von Neumann entropy $s(\\rho_n)=\\log D_n$ in nats. For the supplied two-label matrix $N=\\begin{pmatrix}0&1\\\\1&1\\end{pmatrix}$, with labels ordered $0,1$, one has $D_0=1$, $D_1=0$, $D_2=1$, and $D_{n+2}=D_{n+1}+D_n$ for every $n\\geq0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Applying the recurrence in [F1] gives $D_2=1$, $D_3=1$, and $D_4=2$. Since $D_4>0$, the corresponding finite-state entropy is $s_4=\\log2$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "With the assignment $a$, the ratio is $c(a):=s_4/A_4=\\log2/(4a)$. Replacing $a$ by $2a$ leaves $N$, $D_4$, and $s_4$ fixed while giving $c(2a)=\\log2/(8a)=c(a)/2$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Because $2>1$, [F2] gives $\\log2>\\log1=0$; since $a>0$, $c(a)>0$ and therefore $c(2a)\\neq c(a)$. The count model consequently does not fix this coefficient.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement uses the nonempty two-label matrix from its cited finite model; the empty label case is excluded.",
+          "case_reasoning": "Fixed two-label model at n=4 has D4=2, so empty entropy-state case is not used."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For D_n=0 the entropy state is undefined; the example uses D_4=2 (step 1.1).",
+          "case_reasoning": "D1=0 is a recursion seed, not an entropy state; 1.1 only takes log at D4>0. a=0 excluded to keep ratio defined."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Verification 1.1 directly computes the singleton counts D2=D3=1; F2 gives log1=0. The coefficient-variation witness uses D4=2 so its entropy is strictly positive.",
+          "case_reasoning": "1.1 directly computes D2=D3=1 before D4=2; F2 log1=0 gives the one-state entropy boundary without a new supplier proof claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and step 1.1 give D4=2, whose uniform state has repeated eigenvalue 1/2 and entropy log 2.",
+          "case_reasoning": "Uniform two-state spectrum has repeated weight 1/2; this does not alter log2 entropy or the independent area scaling."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example fixes n=4 and compares two admissible positive scalars a and 2a; it makes no limit claim as n→infinity or a→0.",
+          "case_reasoning": "Fixed n=4 has no asymptotic endpoint theorem; strict a>0 excludes division at zero and both a,2a remain allowed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Only a finite two-label matrix and a positive scalar a are used; no choice from an infinite family occurs (step 2.1).",
+          "case_reasoning": "Single supplied positive scalar and finite matrix/recursion; no infinite choices or geometric realization asserted."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement gives explicit definitions or one-way conclusions and contains no biconditional.",
+          "case_reasoning": "Finite count fixed while independently assigned scalar changes is a sufficient non-determination witness."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement gives explicit definitions or one-way conclusions and contains no biconditional.",
+          "case_reasoning": "No converse that any chosen scalar represents a geometric area law."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "area-like scalar a=1",
+          "inputs": "N=[[0,1],[1,1]], n=4, a=1",
+          "expected": "D4=2 and c=log(2)/4",
+          "result": "The recurrence gives D4=2 and A4=4.",
+          "scope": "Exact finite assignment."
+        },
+        {
+          "case": "area-like scalar a=2",
+          "inputs": "N=[[0,1],[1,1]], n=4, a=2",
+          "expected": "D4=2 and c=log(2)/8",
+          "result": "N and D4 are unchanged while A4 doubles and the coefficient halves.",
+          "scope": "Exact finite assignment; no physical area is modeled."
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "prop-tgrx-fusion-count-entropy",
+          "carrier": "items/prop-tgrx-fusion-count-entropy.md",
+          "status": "Current same-batch draft carrier; exact statement and placement are recorded in the batch manifest.",
+          "source_section": "Statement",
+          "exact_statement": "For a finite fusion transfer count model, let $e_0\\in\\mathbb R^I$ be the coordinate vector equal to $1$ at label $0$ and $0$ elsewhere, and define $v_n:=N^n e_0$. Then $v_0=e_0$, $v_{n+1}=Nv_n$, and the number of length-$n$ paths from $0$ to a label $a$ is $(v_n)_a=(N^n)_{a0}$. Whenever $D_n>0$, the operator $\\rho_n=D_n^{-1}I_{\\mathbb C^{D_n}}$ is a density matrix and has von Neumann entropy $s(\\rho_n)=\\log D_n$ in nats. For the supplied two-label matrix $N=\\begin{pmatrix}0&1\\\\1&1\\end{pmatrix}$, with labels ordered $0,1$, one has $D_0=1$, $D_1=0$, $D_2=1$, and $D_{n+2}=D_{n+1}+D_n$ for every $n\\geq0$.",
+          "relevant_hypotheses_and_conventions": "The two-label return counts satisfy D0=1, D1=0, D_{n+2}=D_{n+1}+D_n; for D_n>0, entropy is log(D_n).",
+          "supplier_proof_status": "Complete local conditional argument is in the carrier.",
+          "consumer_use": "Supplies D4 and the entropy value."
+        },
+        {
+          "supplier": "thm-natural-logarithm-laws",
+          "carrier": "items/thm-natural-logarithm-laws.md",
+          "status": "Published mathematical import; current pinned carrier and exact interface were inspected read-only.",
+          "source_section": "Statement",
+          "exact_statement": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "relevant_hypotheses_and_conventions": "log is strictly increasing and log(1)=0.",
+          "supplier_proof_status": "Published complete proof inspected for the exact cited claim.",
+          "consumer_use": "Supplies log(2)>0 for the strict coefficient comparison."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-127-beta-self-review",
+        "notes": "Self-review checked the positive scalar assignment, computed D4, and showed the coefficient changes while N and D4 stay fixed. The scalar is formal data, not geometric area; no gravity claim is proved or assumed."
+      },
+      "current_boundary_worksheet": {
+        "proposal": "research/physics-non-fluid-129-2026-10-21-r2-owner-step2-boundary-proposal-7/proposal.json",
+        "source_sha256": "3f5de0fb563def53df37c588faea143ce88ee55f036fc05ee288a48b409e20ed",
+        "qualification": "Released complete current source/eight-case semantic worksheet; root transcribed exact current rows. No independent acceptance or finite computation asserted."
+      }
+    }
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "batch": "15",
+  "round": 0,
+  "reviewed_items": [
+    "def-emx-port-scattering-model",
+    "pthm-emx-scattering-contraction",
+    "pthm-emx-scattering-reciprocity",
+    "ex-emx-single-port-lossless-reflection",
+    "ex-emx-omitted-channel-subunitarity"
+  ],
+  "reviewed_pages": [
+    "emx-waveguide-scattering-channels",
+    "emx-waveguide-scattering-channels-examples"
+  ],
+  "decision": "repair",
+  "reason": "The cited guide sources are used as bounded context: the ETH notes address their specified guide class, and the Purdue and NIST texts show why scattering and power-wave conventions require explicit normalization. The batch states its finite-map and reciprocal-pairing assumptions explicitly ([ETH](https://people.phys.ethz.ch/~nbeisert/lectures/ED-24FS-Skript.pdf), [Purdue](https://engineering.purdue.edu/wcchew/course/tgwAll20121211.pdf), [NIST](https://nistdigitalarchives.contentdm.oclc.org/digital/api/collection/p16009coll6/id/74796/download)). Two repairable A-page issues remain.",
+  "findings": [
+    {
+      "id": "pthm-emx-scattering-reciprocity",
+      "type": "prerequisite",
+      "reason": "The lossless clause in the Statement, Facts [L2], and Proof 4.1 infers unitarity from zero-loss conditions alone. Its supplier, pthm-emx-scattering-contraction, establishes that conclusion under additional smooth periodic source-free fields and one of its specified homogeneous Lorentz or Drude branches. The broader reciprocal-phasor hypotheses do not supply those conditions, and “material loss” is not mathematically specified for that broader class. Carry the supplier’s full assumptions into this clause or prove the broader lossless result locally."
+    },
+    {
+      "id": "pthm-emx-scattering-contraction",
+      "type": "local",
+      "reason": "Proof 3.1 uses u without defining it as the branch’s total field-plus-material energy density. The Statement and Proof also use S†, “Hermitian,” and “unitary” without defining the complex matrix conventions; def-euclidean-inner-product supplies only a real inner product. Define u branchwise and state the conjugate-transpose, Hermitian, and unitary conventions. Review the three direct consumers listed below if the Statement is amended."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "pthm-emx-scattering-reciprocity",
+      "decision": "repair",
+      "reason": "Its lossless clause needs the contraction theorem’s additional hypotheses or a separate proof for its broader stated scope; this is the prerequisite finding above."
+    },
+    {
+      "id": "ex-emx-single-port-lossless-reflection",
+      "decision": "accept",
+      "reason": "It assumes the contraction theorem’s hypotheses at each frequency, and its scalar deduction |r|=1 is valid; it explicitly disclaims realization of arbitrary phase laws."
+    },
+    {
+      "id": "ex-emx-omitted-channel-subunitarity",
+      "decision": "accept",
+      "reason": "The swap and projection calculation is algebraically correct, and the item explicitly separates that example from any claimed Maxwell-device realization."
+    }
+  ]
+}

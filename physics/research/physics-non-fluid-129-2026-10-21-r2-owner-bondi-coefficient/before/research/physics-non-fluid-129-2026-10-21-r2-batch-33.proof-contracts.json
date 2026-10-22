@@ -1,0 +1,860 @@
+{
+  "version": 1,
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "scope": [
+    "def-gr-fx-bondi-expansion",
+    "def-gr-fx-bms-supertranslation",
+    "lem-gr-fx-bondi-mass-coefficient",
+    "prop-gr-fx-memory-integral",
+    "prop-gr-fx-bondi-mass-loss",
+    "ex-gr-fx05-1",
+    "ex-gr-fx05-2"
+  ],
+  "contracts": {
+    "def-gr-fx-bondi-expansion": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Definition fixes a nonempty open interval and a nonempty sphere; no empty-end case is asserted. (Definition)"
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition explicitly includes the zero-shear, zero-news case as admissible smooth data. (Definition)"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Definition fixes one unit round two-sphere and two angular indices A,B=1,2. (Definition)"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Definition requires positive definite gamma and r0>0, excluding degenerate cuts and radius. (Definition)"
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Definition is on an open interval and makes no endpoint claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice is stated in the Definition for the inherited smooth Lorentzian conventions. (Definition)"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition asserts no biconditional."
+        }
+      ]
+    },
+    "def-gr-fx-bms-supertranslation": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Definition fixes the nonempty formal boundary I\u00d7S\u00b2 and smooth data. (Definition)"
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition states that when N_AB=0 the infinitesimal shear shift is time independent and leaves news zero. (Definition)"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Definition fixes a single smooth parameter f and a two-dimensional sphere metric. (Definition)"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Definition uses the positive unit round cut metric and a fixed Bondi frame. (Definition)"
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Only an infinitesimal vector field is defined; no finite endpoint action is asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice is stated for the inherited smooth boundary convention. (Definition)"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition asserts no biconditional."
+        }
+      ]
+    },
+    "lem-gr-fx-bondi-mass-coefficient": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-gr-fx-bondi-expansion",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice for the smooth Lorentzian tangent-bundle conventions of the suppliers. Let $I\\subseteq\\mathbb R$ be a nonempty open interval, $r_0>0$, and $\\mathcal E=I\\times(r_0,\\infty)\\times S^2$, where $S^2=\\{x\\in\\mathbb R^3:|x|=1\\}$ has its unit round metric $q_{AB}$ and area form $d\\Omega$. Let $D_A$ be the Levi-Civita covariant derivative of $q$, and raise angular indices with $q^{AB}$. A **Bondi-Sachs end** is a smooth Lorentzian metric on $\\mathcal E$ written in coordinates $(u,r,x^A)$, $A,B=1,2$, as\n\n$$g=-\\left(e^{2\\beta}\\frac Vr-r^2\\gamma_{AB}U^AU^B\\right)du^2-2e^{2\\beta}du\\,dr-2r^2\\gamma_{AB}U^Bdu\\,dx^A+r^2\\gamma_{AB}dx^A dx^B,$$\n\nwhere $\\beta,V,U^A,\\gamma_{AB}$ are smooth, $\\gamma_{AB}$ is positive definite, $\\gamma^{AC}\\gamma_{CB}=\\delta^A_B$, and $\\det(\\gamma_{AB})=\\det(q_{AB})$. Thus $u=\\mathrm{constant}$ are outgoing null hypersurfaces, $r$ is the area radius, and $x^A$ are constant along their null generators. This Bondi gauge has $g_{rr}=g_{rA}=0$.\n\nA **smooth Bondi expansion** is such an end with the differentiated uniform expansions\n\n$$\\gamma_{AB}=q_{AB}+\\frac{C_{AB}(u,x)}r+\\frac{P_{AB}(u,x)}{r^2}+O(r^{-3}),\\qquad \\beta=O(r^{-2}),\\qquad U^A=\\frac{U^A_{(2)}(u,x)}{r^2}+\\frac{U^A_{(3)}(u,x)}{r^3}+O(r^{-4}),\\qquad V=r-2m(u,x)+\\frac{V_{(1)}(u,x)}r+O(r^{-2}).$$\n\nHere $C_{AB}$, $P_{AB}$ and the displayed coefficients are smooth sphere fields on $I$; the determinant gauge imposes $q^{AB}C_{AB}=0$ and $q^{AB}P_{AB}=\\tfrac12 C_{AB}C^{AB}$. For every compact $I'\\subset I$, angular chart compact set, and derivative multi-index $\\alpha$ of total order at most two, the partial derivatives of each $O(r^{-k})$ remainder obey $\\partial_u^{\\alpha_u}D^{\\alpha_x}\\partial_r^{\\alpha_r}O(r^{-k})=O(r^{-k-\\alpha_r})$ uniformly as $r\\to\\infty$. Define the **mass aspect** $m$ by the $r^{-1}$ coefficient in $V$, the **Bondi shear** by $C_{AB}=\\lim_{r\\to\\infty}r(\\gamma_{AB}-q_{AB})$, the **Bondi news** by $N_{AB}:=\\partial_u C_{AB}$, and the **geometric Bondi mass** by $m_B(u):=\\frac1{4\\pi}\\int_{S^2}m(u,x)\\,d\\Omega$. The future null boundary used here is the formal $r\\to\\infty$ boundary $\\mathcal I^+=I\\times S^2$ with coordinates $(u,x^A)$; no conformal completion is included in this definition. A **vacuum Bondi expansion** means, in addition, that the Ricci tensor $\\operatorname{Ric}_{ab}$ defined by the curvature convention of [[def-gr-curvature-tensor-and-derived-tensors]] vanishes to the asymptotic coefficient orders under discussion, with no cosmological term.\n\n",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-gr-curvature-tensor-and-derived-tensors",
+          "source_section": "Definition",
+          "quote": "Let $(M,g,N)$ be a time-oriented smooth Lorentzian four-manifold\n([[def-gr-smooth-lorentzian-objects]]) with metric-selected connection\n$\\nabla$ ([[def-gr-metric-selected-connection]]), whose existence and\nuniqueness are supplied by\n[[thm-gr-nondegenerate-levi-civita-and-tensor-derivative]]; that theorem also\nextends $\\nabla$ to a derivative on tensor fields commuting with contractions\nand annihilating $g$ and $g^{-1}$. Let $U\\subseteq M$ be open and let\n$X,Y,Z$ be smooth vector fields on $U$; brackets are those of\n[[def-lie-bracket-of-smooth-vector-fields]], and contractions those of\n[[def-contraction-of-a-mixed-tensor]].\n\n**(a) The curvature operator.** The **curvature operator** of $\\nabla$ is the\nassignment\n\n$$R(X,Y)Z:=\\nabla_X\\nabla_YZ-\\nabla_Y\\nabla_XZ-\\nabla_{[X,Y]}Z .$$\n\nThe right-hand side is a smooth vector field on $U$: $\\nabla_YZ$ is smooth\nbecause $\\nabla$ is an affine connection\n([[def-affine-connection-on-a-smooth-manifold]]), $[X,Y]$ is smooth, and\n$\\nabla_X(\\cdot)$ and $\\nabla_{[X,Y]}(\\cdot)$ preserve smoothness. The\nassignment is defined for the given smooth fields; that its value at a point\ndepends only on the values of $X,Y,Z$ at that point, so that $R$ is a smooth\ntensor field of type $(1,3)$, is the content of\n[[thm-gr-curvature-tensoriality-and-coordinate-formula]] clause (a), and\nlikewise the algebraic symmetries used below are proved in\n[[thm-gr-curvature-algebraic-symmetries]].\n\n**(b) Component functions.** Let $(V,x)$ be a smooth chart of $M$ and let\n$\\Gamma^a{}_{bc}$ be the Christoffel symbols of $\\nabla$ in this chart,\ncharacterized by $\\nabla_{\\partial_b}\\partial_c=\\sum_a\\Gamma^a{}_{bc}\\partial_a$\n([[def-christoffel-symbols-of-an-affine-connection]]); the coordinate fields\ncommute, so $\\nabla_{\\partial_c}\\partial_d$ and $\\nabla_{\\partial_d}\\partial_c$\nare obtained from the same symbols. The **components** of the curvature in the\nchart are the smooth functions $R^a{}_{bcd}$ on $V$ defined by\n\n$$R(\\partial_c,\\partial_d)\\partial_b=\\sum_a R^a{}_{bcd}\\,\\partial_a .$$\n\nThe first index is the output slot, the second is the differentiated slot and\nthe last two are the two directions of the loop; indices are $a,b,c,d=0,1,2,3$\nand the Einstein summation convention of\n[[def-gr-smooth-lorentzian-objects]] applies.\n\n**(c) Lowered tensor, Ricci tensor, scalar curvature, Einstein tensor.** On\nthe chart domain define, using the inverse metric\n$g^{ab}$ of [[def-gr-inverse-metric-and-musical-isomorphisms]],\n\n$$R_{abcd}:=\\sum_e g_{ae}R^e{}_{bcd},\\qquad \\operatorname{Ric}_{bd}:=\\sum_{a,c}g^{ac}R_{abcd},\\qquad S:=\\sum_{b,d}g^{bd}\\operatorname{Ric}_{bd},\\qquad G_{ab}:=\\operatorname{Ric}_{ab}-\\tfrac12 S\\,g_{ab}.$$\n\nThe fields $R_{abcd}$, $\\operatorname{Ric}_{ab}$, $S$ and $G_{ab}$ are called\nthe **Riemann tensor with lowered indices**, the **Ricci tensor**, the\n**scalar curvature** and the **Einstein tensor** of the metric-selected\nconnection. Tensoriality of $R$ is proved in\n[[thm-gr-curvature-tensoriality-and-coordinate-formula]] clause (a).\nLowering its output slot with the smooth metric and contracting with the\nsmooth inverse metric are intrinsic tensor operations\n([[def-gr-tensor-fields-and-components]] clauses (b)-(c),\n[[def-contraction-of-a-mixed-tensor]]). Thus these formulas give smooth\nfields of types $(0,4)$, $(0,2)$, $(0,0)$ and $(0,2)$, respectively,\nindependent of the chart. Symmetry of $\\operatorname{Ric}$ and $G$ is proved\nseparately in [[thm-gr-curvature-algebraic-symmetries]] clause (d).\n\n",
+          "uses": [
+            "1.3",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-gr-curvature-tensoriality-and-coordinate-formula",
+          "source_section": "Statement",
+          "quote": "Let $(M,g,N)$ be a time-oriented smooth Lorentzian four-manifold with\nmetric-selected connection $\\nabla$\n([[def-gr-smooth-lorentzian-objects]],\n[[def-gr-metric-selected-connection]],\n[[thm-gr-nondegenerate-levi-civita-and-tensor-derivative]]), and let $R$ be\nthe curvature operator of [[def-gr-curvature-tensor-and-derived-tensors]],\nwith components $R^a{}_{bcd}$ in a chart.\n\n**(a) Tensoriality.** For all smooth functions $f$ on $M$ and smooth vector\nfields $X,Y,Z$ on a common domain, $R(X,Y)Z=-R(Y,X)Z$ and\n$$R(fX,Y)Z=fR(X,Y)Z,\\qquad R(X,fY)Z=fR(X,Y)Z,\\qquad R(X,Y)(fZ)=fR(X,Y)Z .$$\nConsequently, for every $p\\in M$, the value $R(X,Y)Z|_p$ depends only on\n$X_p,Y_p,Z_p$, and $R$ is a smooth tensor field of type $(1,3)$ on $M$ whose\ncomponents in every smooth chart are the functions $R^a{}_{bcd}$ of\n[[def-gr-curvature-tensor-and-derived-tensors]] clause (b).\n\n**(b) Coordinate formula.** In every smooth chart $(U,x)$ with Christoffel\nsymbols $\\Gamma^a{}_{bc}$ of $\\nabla$\n([[def-christoffel-symbols-of-an-affine-connection]]),\n$$R^a{}_{bcd}=\\partial_c\\Gamma^a{}_{db}-\\partial_d\\Gamma^a{}_{cb} +\\sum_e\\bigl(\\Gamma^a{}_{ce}\\Gamma^e{}_{db}-\\Gamma^a{}_{de}\\Gamma^e{}_{cb}\\bigr)$$\non $U$, for all $a,b,c,d\\in\\{0,1,2,3\\}$.\n\n**(c) Point-normal formula.** If the chart is point-normal at $p$, that is\n$g_{ab}(p)=\\eta_{ab}$, $\\partial_ag_{bc}(p)=0$ and $\\Gamma^a{}_{bc}(p)=0$\n([[thm-gr-point-normal-and-exponential-coordinate-charts]]), then, writing\n$g_{ad,bc}:=\\partial_b\\partial_cg_{ad}$,\n$$R_{abcd}(p)=\\tfrac12\\bigl(g_{ad,bc}+g_{bc,ad}-g_{bd,ac}-g_{ac,bd}\\bigr)(p) .$$\nEquivalently, $R^a{}_{bcd}(p)=\\tfrac12\\,g^{ae}(p)\\bigl(\\partial_b\\partial_cg_{ed}\n+\\partial_e\\partial_dg_{bc}-\\partial_e\\partial_cg_{bd}-\\partial_b\\partial_dg_{ec}\\bigr)(p)$.\n\n",
+          "uses": [
+            "1.3",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1.1",
+          "claim": "Expanding $\\det\\gamma=\\det q$ through order $r^{-2}$ gives $q^{AB}C_{AB}=0$ and $q^{AB}P_{AB}=\\tfrac12C^2$. Differentiating the latter coefficient identity in $u$ yields $q^{AB}\\dot P_{AB}-C^{AB}N_{AB}=0$. The inverse angular metric is $\\gamma^{AB}=q^{AB}-C^{AB}/r+(C^A{}_EC^{EB}-P^{AB})/r^2+O(r^{-3})$. These expansions retain the subleading trace fixed by determinant gauge.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d1.2",
+          "claim": "Inverting the Bondi-Sachs block metric gives $g^{ur}=-e^{-2\\beta}$, $g^{rr}=e^{-2\\beta}V/r$, $g^{rA}=-e^{-2\\beta}U^A$, and $g^{AB}=r^{-2}\\gamma^{AB}$, with $g^{uu}=g^{uA}=0$. Multiplication by the metric components in [F1] verifies each identity.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d1.3",
+          "claim": "Substitution of this Bondi metric into the Christoffel and Ricci formulas [F2]\u2013[F3] gives the exact radial component\n$$\\operatorname{Ric}_{rr}=\\frac4r\\partial_r\\beta-\\frac14\\gamma^{AC}\\gamma^{BD}(\\partial_r\\gamma_{AB})(\\partial_r\\gamma_{CD}).$$\nThus [A2] implies $\\partial_r\\beta=\\tfrac r{16}\\gamma^{AC}\\gamma^{BD}(\\partial_r\\gamma_{AB})(\\partial_r\\gamma_{CD})$. From [F1], $\\partial_r\\gamma_{AB}=-C_{AB}/r^2+O(r^{-3})$ and $\\gamma^{AB}=q^{AB}+O(r^{-1})$, so the right side is $C^2/(16r^3)+O(r^{-4})$. Integrating in $r$ with $\\beta\\to0$ gives $\\beta=-C^2/(32r^2)+O(r^{-3})$.",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "A2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d2.1",
+          "claim": "The vacuum $rA$ hypersurface equation obtained from [F2]\u2013[F3] is\n$$\\partial_r(r^4e^{-2\\beta}\\gamma_{AB}\\partial_rU^B)=2r^4\\partial_r(r^{-2}\\mathcal D_A\\beta)-r^2\\gamma^{EF}\\mathcal D_E(\\partial_r\\gamma_{AF}),$$\nwhere $\\mathcal D$ is the Levi-Civita derivative of $\\gamma$ on a fixed $r,u$ sphere. If $U^A=U^A_{(2)}r^{-2}+O(r^{-3})$, the left side is $-2q_{AB}U^B_{(2)}+O(r^{-1})$. By [F1] and step 1.3, the right side is $D^BC_{AB}+O(r^{-1})$: the $\\beta$ term is $O(r^{-1})$, while $\\partial_r\\gamma_{AF}=-C_{AF}r^{-2}+O(r^{-3})$. Equality of the constant coefficients yields $U^A_{(2)}=-\\tfrac12D_BC^{AB}$. This leading solve does not determine the $r^{-3}$ coefficient.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "A2",
+            "step 1.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d3.1",
+          "claim": "The vacuum radial $V$ equation from [F2]\u2013[F3] is\n$$2e^{-2\\beta}\\partial_rV=\\mathcal R[\\gamma]-2\\gamma^{AB}(\\mathcal D_A\\mathcal D_B\\beta+\\mathcal D_A\\beta\\,\\mathcal D_B\\beta)+e^{-2\\beta}r^{-2}\\mathcal D_A\\!\\left[\\partial_r(r^4U^A)\\right]-\\frac12r^4e^{-4\\beta}\\gamma_{AB}(\\partial_rU^A)(\\partial_rU^B),$$\nwhere $\\mathcal R[\\gamma]$ is the scalar curvature of the cut metric $\\gamma_{AB}$. The first variation of scalar curvature at the unit sphere, applied to the trace-free $C_{AB}/r$, gives $\\mathcal R[\\gamma]=2+r^{-1}D_AD_BC^{AB}+O(r^{-2})$. From step 2.1, $r^{-2}D_A\\partial_r(r^4U^A)=2r^{-1}D_AU^A_{(2)}+O(r^{-2})=-r^{-1}D_AD_BC^{AB}+O(r^{-2})$. The $r^{-1}$ terms cancel; the other displayed terms are $O(r^{-2})$, so $\\partial_rV=1+O(r^{-2})$. Integration and $V/r\\to1$ give $V=r+V_{(0)}+O(r^{-1})$, where the definition in [F1] identifies $V_{(0)}=-2m$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "A2",
+            "step 2.1",
+            "algebra",
+            "L1"
+          ]
+        },
+        {
+          "id": "d4.1",
+          "claim": "The planned final calculation must expand every $r^{-2}$ contribution to $\\operatorname{Ric}_{uu}$ after the radial solves, including the trace-free part of $P_{AB}$ and the coefficients $U^A_{(3)},V_{(1)},\\beta_{(3)}$. The literature records that these terms reduce to [L1], but this draft does not supply the contraction and cancellation showing that reduction. In particular, [L1] is the exact unresolved step; the preceding leading radial solves do not prove it.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "A2",
+            "step 1.1",
+            "step 1.3",
+            "step 2.1",
+            "step 3.1",
+            "algebra",
+            "L1"
+          ]
+        },
+        {
+          "id": "d5.1",
+          "claim": "Conditional on the unresolved coefficient identity [L1], vacuum [A2] makes that coefficient zero. Rearranging and using $N_{AB}=\\partial_uC_{AB}$ gives $\\partial_um=\\tfrac14D_AD_BN^{AB}-\\tfrac18N_{AB}N^{AB}$. This establishes the target only once [L1] has a complete local proof; until then this is an explicit conditional reduction.",
+          "step": "5.1",
+          "inputs": [
+            "A2",
+            "L1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The expansion uses a nonempty open retarded interval and the nonempty sphere; steps 1.3, 2.1 and 3.1 retain the asymptotic end."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-news reduction follows conditionally from the missing coefficient identity [L1] in step 5.1; readiness remains escalated until [L1] is proved."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The zero-news reduction follows conditionally from the missing coefficient identity [L1] in step 5.1; readiness remains escalated until [L1] is proved."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The determinant gauge and positive unit sphere metric are explicit in [F1]; the exact radial expansion is checked in step 1.3."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The retarded interval is open and the identity is pointwise in its interior."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The inherited smooth Lorentzian convention uses only AC_omega by [A1] and is carried in step 5.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma states an identity, not a forward implication in an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma states an identity, not a reverse implication in an iff."
+        }
+      ]
+    },
+    "prop-gr-fx-memory-integral": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-gr-fx-bondi-expansion",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice for the smooth Lorentzian tangent-bundle conventions of the suppliers. Let $I\\subseteq\\mathbb R$ be a nonempty open interval, $r_0>0$, and $\\mathcal E=I\\times(r_0,\\infty)\\times S^2$, where $S^2=\\{x\\in\\mathbb R^3:|x|=1\\}$ has its unit round metric $q_{AB}$ and area form $d\\Omega$. Let $D_A$ be the Levi-Civita covariant derivative of $q$, and raise angular indices with $q^{AB}$. A **Bondi-Sachs end** is a smooth Lorentzian metric on $\\mathcal E$ written in coordinates $(u,r,x^A)$, $A,B=1,2$, as\n\n$$g=-\\left(e^{2\\beta}\\frac Vr-r^2\\gamma_{AB}U^AU^B\\right)du^2-2e^{2\\beta}du\\,dr-2r^2\\gamma_{AB}U^Bdu\\,dx^A+r^2\\gamma_{AB}dx^A dx^B,$$\n\nwhere $\\beta,V,U^A,\\gamma_{AB}$ are smooth, $\\gamma_{AB}$ is positive definite, $\\gamma^{AC}\\gamma_{CB}=\\delta^A_B$, and $\\det(\\gamma_{AB})=\\det(q_{AB})$. Thus $u=\\mathrm{constant}$ are outgoing null hypersurfaces, $r$ is the area radius, and $x^A$ are constant along their null generators. This Bondi gauge has $g_{rr}=g_{rA}=0$.\n\nA **smooth Bondi expansion** is such an end with the differentiated uniform expansions\n\n$$\\gamma_{AB}=q_{AB}+\\frac{C_{AB}(u,x)}r+\\frac{P_{AB}(u,x)}{r^2}+O(r^{-3}),\\qquad \\beta=O(r^{-2}),\\qquad U^A=\\frac{U^A_{(2)}(u,x)}{r^2}+\\frac{U^A_{(3)}(u,x)}{r^3}+O(r^{-4}),\\qquad V=r-2m(u,x)+\\frac{V_{(1)}(u,x)}r+O(r^{-2}).$$\n\nHere $C_{AB}$, $P_{AB}$ and the displayed coefficients are smooth sphere fields on $I$; the determinant gauge imposes $q^{AB}C_{AB}=0$ and $q^{AB}P_{AB}=\\tfrac12 C_{AB}C^{AB}$. For every compact $I'\\subset I$, angular chart compact set, and derivative multi-index $\\alpha$ of total order at most two, the partial derivatives of each $O(r^{-k})$ remainder obey $\\partial_u^{\\alpha_u}D^{\\alpha_x}\\partial_r^{\\alpha_r}O(r^{-k})=O(r^{-k-\\alpha_r})$ uniformly as $r\\to\\infty$. Define the **mass aspect** $m$ by the $r^{-1}$ coefficient in $V$, the **Bondi shear** by $C_{AB}=\\lim_{r\\to\\infty}r(\\gamma_{AB}-q_{AB})$, the **Bondi news** by $N_{AB}:=\\partial_u C_{AB}$, and the **geometric Bondi mass** by $m_B(u):=\\frac1{4\\pi}\\int_{S^2}m(u,x)\\,d\\Omega$. The future null boundary used here is the formal $r\\to\\infty$ boundary $\\mathcal I^+=I\\times S^2$ with coordinates $(u,x^A)$; no conformal completion is included in this definition. A **vacuum Bondi expansion** means, in addition, that the Ricci tensor $\\operatorname{Ric}_{ab}$ defined by the curvature convention of [[def-gr-curvature-tensor-and-derived-tensors]] vanishes to the asymptotic coefficient orders under discussion, with no cosmological term.\n\n",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-gr-wave-screen-and-tt-projection",
+          "source_section": "Definition",
+          "quote": "Let $(M,g,N)=(\\mathbb R^4,\\eta,\\partial_0)$ be the flat model with its\ninertial chart $x$ and metric components\n$\\eta_{ab}=\\operatorname{diag}(-1,1,1,1)$\n([[def-gr-minkowski-model-and-inertial-chart]],\n[[def-gr-smooth-lorentzian-objects]]). Since the chart identifies each\n$T_p\\mathbb R^4$ with $\\mathbb R^4$, all objects below are defined by their\ncomponents in this chart; they are the components at a point, and a subscript\n$p$ is suppressed. Indices are raised and lowered with $\\eta$ and $\\eta^{-1}$\n([[def-gr-inverse-metric-and-musical-isomorphisms]]), and orthogonality is in\nthe sense of [[def-lorentz-orthogonality-and-orthogonal-complement]].\n\n**(a) Observer, propagation direction, screen.** Let $n=n^a\\partial_a$ be an\n**observer** of the flat model: $n$ is future-directed, $\\eta(n,n)=-1$\n([[def-causal-classification-of-lorentz-vectors]]); and let\n$s=s^a\\partial_a$ be a **propagation direction**: $\\eta(s,s)=1$ and\n$\\eta(n,s)=0$. The pair defines the two-dimensional **screen**\n$\\Sigma(n,s):=\\{v\\in\\mathbb R^4:\\eta(v,n)=0,\\ \\eta(v,s)=0\\}$, on which the\nrestriction of $\\eta$ is positive definite by\n[[lem-gr-observer-projection-decomposition]]. The **screen projector** and\nthe **spatial projector** of the pair are the $(1,1)$-tensors with components\n\n$$p^a{}_b:=\\delta^a{}_b+n^an_b-s^as_b,\\qquad h^a{}_b:=\\delta^a{}_b+n^an_b,$$\n\nand the covariant form of the screen projector is\n$p_{ab}:=\\eta_{ac}p^c{}_b=\\eta_{ab}+n_an_b-s_as_b$. The properties $p^2=p$,\n$h^2=h$, $\\operatorname{im}p=\\Sigma(n,s)$ and $\\operatorname{im}h=n^\\perp$\nare proved in the screen-projector lemma of this page.\n\n**(b) TT projection.** Let $A=(A_{ab})$ be a symmetric covariant $2$-tensor\nat a point. Its **transverse-traceless (TT) projection with respect to\n$(n,s)$** is the symmetric covariant $2$-tensor\n\n$$\\Pi_{n,s}(A)_{ab}:=p_a{}^cp_b{}^dA_{cd}-\\tfrac12\\,p_{ab}\\,p^{cd}A_{cd},\\qquad p^{cd}:=\\eta^{ce}\\eta^{df}p_{ef}.$$\n\n**(c) Screen amplitudes.** Let $(e_1,e_2)$ be an ordered\n$\\eta$-orthonormal basis of $\\Sigma(n,s)$ (which exists by\n[[cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases]] applied\nto the positive-definite restriction of $\\eta$). For a symmetric covariant\n$2$-tensor $A$ the **plus and cross amplitudes of $A$ with respect to\n$(e_1,e_2)$** are $A_+:=A(e_1,e_1)$ and $A_\\times:=A(e_1,e_2)$; if $A$ is\nTT with respect to $(n,s)$ in the sense of clause (d) below, then, extending\nthe screen dual basis to covectors on $\\mathbb R^4$ by\n$e^i(v):=\\eta(e_i,v)$ for $i=1,2$ (so both vanish on $n,s$),\n\n$$A=A_+\\bigl(e^1\\otimes e^1-e^2\\otimes e^2\\bigr)+A_\\times\\bigl(e^1\\otimes e^2+e^2\\otimes e^1\\bigr).$$\n\nFor a TT screen tensor $A$, under the rotation\n$e_1'=\\cos\\theta\\,e_1+\\sin\\theta\\,e_2$,\n$e_2'=-\\sin\\theta\\,e_1+\\cos\\theta\\,e_2$ of the screen basis the amplitudes\ntransform as $A_+'=A_+\\cos2\\theta+A_\\times\\sin2\\theta$ and\n$A_\\times'=-A_+\\sin2\\theta+A_\\times\\cos2\\theta$. Here $\\sin$ and $\\cos$\nare the power-series functions of [[def-sine-and-cosine-by-power-series]];\nexpanding $A(e_1',e_1')$ and $A(e_1',e_2')$ by bilinearity and applying the\naddition formulas of [[thm-sine-and-cosine-addition-formulas]] gives the two\ndisplayed transformations.\n\n**(d) TT tensors and TT perturbations.** A symmetric covariant $2$-tensor\n$A$ is **transverse-traceless (TT) with respect to $(n,s)$** when\n$A(n,\\cdot)=0$, $A(s,\\cdot)=0$ and $\\eta^{ab}A_{ab}=0$. For a symmetric\nfield $h$ on a nonempty open set $\\Omega\\subseteq\\mathbb R^4$, use the\nconstant smooth extensions of the fixed component vectors:\n$n_q:=n^a\\partial_a|_q$ and $s_q:=s^a\\partial_a|_q$ for $q\\in\\Omega$.\nHere a symmetric field is a smooth covariant $2$-tensor field with symmetric\ncomponents in the sense of [[def-gr-tensor-fields-and-components]]. Then\n\"TT with respect to $(n,s)$\" means\n$h_q(n_q,\\cdot)=h_q(s_q,\\cdot)=0$ and $\\eta^{ab}h_{ab}(q)=0$ for every\n$q\\in\\Omega$. It is **spatial with respect to $n$** when\n$h_q(n_q,\\cdot)=0$ for every $q\\in\\Omega$.\n\n**(e) Scope.** This item fixes the screen, the two projections and the\namplitude terminology, and states the rotation law of clause (c) as part of\nthe naming. It asserts no property of $\\Pi_{n,s}$ (idempotence, rank, image\nand trace are proved in the screen-projector lemma of this page), no relation\nto the planar perturbations of the plane-wave definition of this page\n(established in the gauge-decomposition lemma of this page) and no physical\ninterpretation of the amplitudes.\n",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-gr-tt-plane-wave-curvature",
+          "source_section": "Statement",
+          "quote": "Let $(M,g,N)=(\\mathbb R^4,\\eta,\\partial_0)$ be the flat model with its\ninertial chart and let $(\\varepsilon_1,h,q)$ be a flat linearized family over\nan open set $\\Omega\\subseteq\\mathbb R^4$ with first-order coefficients\n$\\Gamma^{(1)a}{}_{bc}$ as in [[def-gr-flat-linearized-perturbation]]; write\n$R^a{}_{bcd}(\\lambda)$ for the curvature components of $g(\\lambda)$\n([[def-gr-curvature-tensor-and-derived-tensors]],\n[[thm-gr-curvature-tensoriality-and-coordinate-formula]]) and define the\n**first-order curvature coefficient**\n\n$$R^{(1)a}{}_{bcd}:=\\partial_\\lambda R^a{}_{bcd}(\\lambda)\\big|_{\\lambda=0},\\qquad R^{(1)}_{abcd}:=\\eta_{ae}R^{(1)e}{}_{bcd}.$$\n\nThen:\n\n**(a) General first-order formula.** The coefficient is defined (the\ncomponent family is differentiable in $\\lambda$ at $0$) and\n\n$$R^{(1)a}{}_{bcd}=\\partial_c\\Gamma^{(1)a}{}_{db}-\\partial_d\\Gamma^{(1)a}{}_{cb},\\qquad R^{(1)}_{abcd}=\\tfrac12\\bigl(\\partial_b\\partial_ch_{ad}+\\partial_a\\partial_dh_{bc}-\\partial_a\\partial_ch_{bd}-\\partial_b\\partial_dh_{ac}\\bigr).$$\n\n**(b) Gauge invariance.** For every smooth covector field $\\xi$ on $\\Omega$,\nwith $h'_{ab}:=h_{ab}-\\partial_a\\xi_b-\\partial_b\\xi_a$ the gauge-transformed\nperturbation of [[def-gr-flat-linearized-perturbation]] clause (d),\n$R^{(1)}_{abcd}(h')=R^{(1)}_{abcd}(h)$: the first-order curvature coefficient\nis unchanged by gauge transformations.\n\n**(c) Planar and TT waves.** Let $F=(F_{ab})$ be a smooth planar profile with\n$h_{ab}(x)=F_{ab}(u(x))$, $u=x^0-x^3$, and let $n_a=\\partial_au$; then\n\n$$R^{(1)}_{abcd}=\\tfrac12\\bigl(n_bn_cF''_{ad}+n_an_dF''_{bc}-n_an_cF''_{bd}-n_bn_dF''_{ac}\\bigr).$$\n\nIf the profile is spatial ($F_{0a}=0$ for all $a$), then\n$R^{(1)}_{0i0j}=-\\tfrac12F''_{ij}$ and, raising indices,\n$R^{(1)i}{}_{00j}=+\\tfrac12F''{}^i{}_j$. If the profile is TT with amplitudes\n$A_+,A_\\times$, then $F''$ is supported on the screen with $F''_{11}=A_+''$,\n$F''_{22}=-A_+''$, $F''_{12}=F''_{21}=A_\\times''$ and all other second\nderivatives of the profile zero; in particular\n\n$$R^{(1)}_{0101}=-\\tfrac12A_+'',\\qquad R^{(1)}_{0102}=-\\tfrac12A_\\times'',\\qquad R^{(1)}_{0202}=+\\tfrac12A_+'' .$$\n\n**(d) Contraction to the Ricci coefficient.** For every perturbation $h$,\n\n$$\\eta^{ac}R^{(1)}_{abcd}=\\operatorname{Ric}^{(1)}_{bd},$$\n\nthe right-hand side being the first-order coefficient of\n[[def-gr-flat-linearized-perturbation]] clause (b). For a TT planar\nperturbation both sides vanish: $\\operatorname{Ric}^{(1)}_{bd}=0$ and\n$S^{(1)}=0$.\n\n",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-gr-jacobi-equation-and-geodesic-deviation",
+          "source_section": "Statement",
+          "quote": "Let $(M,g,N)$ be a time-oriented smooth Lorentzian four-manifold with\nmetric-selected connection $\\nabla$\n([[def-gr-smooth-lorentzian-objects]],\n[[def-gr-metric-selected-connection]],\n[[thm-gr-nondegenerate-levi-civita-and-tensor-derivative]]), let $R$ be its\ncurvature ([[def-gr-curvature-tensor-and-derived-tensors]]), let\n$I,J_0\\subseteq\\mathbb R$ be intervals with nonempty interior\n([[def-interval]]), and let $F:J_0\\times I\\to M$ be a smooth map. Write\n$T:=\\partial_tF$ and $J^F:=\\partial_rF$; a field along $F$ means a smooth\nsection of $F^*TM$ over $J_0\\times I$, and $D_r,D_t$ are the covariant\nderivatives in the two parameters\n([[def-covariant-derivative-along-a-curve]]).\n\n**(a) Curvature as the commutator of the two derivatives.** For every smooth\nfield $V$ along $F$,\n$$\\bigl(D_tD_r-D_rD_t\\bigr)V=R(T,J^F)V .$$\n\n**(b) Geodesic deviation.** Suppose in addition that for every $r\\in J_0$ the\ncurve $t\\mapsto F(r,t)$ is a geodesic with affine parameter $t$, that is\n$D_tT=0$. Then $D_tJ^F=D_rT$ and\n$$D_t^2J^F=R(T,J^F)T .$$\nConsequently, for every $r$ the field $t\\mapsto J^F(r,t)$ is a Jacobi field\nalong the geodesic $t\\mapsto F(r,t)$\n([[def-gr-jacobi-field-and-conjugate-instant]] clause (b)), and for a geodesic\nvariation the variation field is a Jacobi field.\n\n**(c) Initial data.** Let $\\gamma:I\\to M$ be a smooth geodesic and let\n$s_0\\in I$. For every pair $J_0,J_1\\in T_{\\gamma(s_0)}M$ there exists exactly\none smooth Jacobi field $J$ along $\\gamma$ with\n$$J(s_0)=J_0,\\qquad D_sJ(s_0)=J_1 .$$\nThe set of all Jacobi fields along $\\gamma$ is a real vector space of\ndimension $8$, and $J\\mapsto\\bigl(J(s_0),D_sJ(s_0)\\bigr)$ is a linear\nisomorphism onto $T_{\\gamma(s_0)}M\\oplus T_{\\gamma(s_0)}M$.\n\n**(d) The tangential component.** Let $\\gamma$ be a smooth geodesic and $J$ a\nsmooth Jacobi field along it. Then $s\\mapsto g(J,\\gamma')(s)$ is affine, and\nif $\\gamma$ is future timelike with $g(\\gamma',\\gamma')=-1$, the normal\ncomponent $J^\\perp$ of [[def-gr-jacobi-field-and-conjugate-instant]] clause\n(e), explicitly $J^\\perp=J+g(J,\\gamma')\\gamma'$, is again a Jacobi field\nalong $\\gamma$.\n\n",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-ftc-second-part",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals, let $G : [a,b] \\to \\mathbb{R}$ be differentiable at every\npoint of $[a,b]$ as a function on $[a,b]$ (The derivative $f'(c) = \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c}$ of $f : A \\to \\mathbb{R}$ at a point $c \\in A$ that is a limit point of $A$, and differentiability on a set; at $a$ and $b$\nthis is the one-sided derivative), let $f := G'$, and suppose $f$ is integrable\non $[a,b]$ (The lower and upper Darboux integrals of a bounded $f$ on $[a,b]$ as $\\sup_P L(f,P)$ and $\\inf_P U(f,P)$, Darboux integrability as their equality, and the notation $\\int_a^b f$). Then\n\n$$\\int_a^b f \\;=\\; G(b) - G(a) .$$\n\n**Both hypotheses are needed and neither is removable.** A function may be\ndifferentiable everywhere with $G'$ not integrable \u2014 then the left-hand side does\nnot exist (an everywhere differentiable function with unbounded derivative) \u2014 and an\nintegrable $f$ need not be the derivative of anything\n(the sign function); both witnesses are on the\ncompanion page.\n\n**No continuity of $f$ is assumed**, which is what makes this the working form:\nthe theorem evaluates $\\int_a^b f$ for every integrable derivative, not only for\ncontinuous integrands.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1.1",
+          "claim": "Apply [F5] to each smooth tensor component $C_{AB}(u,x)$ at the fixed angular point. Since $N_{AB}=\\partial_uC_{AB}$, $C_{AB}(u_2,x)-C_{AB}(u_1,x)=\\int_{u_1}^{u_2}N_{AB}(u,x)\\,du$. This is the first identity.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d1.2",
+          "claim": "In the leading local plane-profile model, [F3] and [F4] give the screen Jacobi equation $\\partial_u^2s^A=\\tfrac12\\partial_u^2H^A{}_B\\,s^B$ to first order in $H$. Replacing $s^B(u)$ on the right by its initial value $s^B$ changes the result only at second order $O(\\varepsilon^2|s|)$, because the first-order Jacobi response is $O(\\varepsilon|s|)$.",
+          "step": "1.2",
+          "inputs": [
+            "A2",
+            "F2",
+            "F3",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d2.1",
+          "claim": "With $s'(u_1)=0$, integrate the first-order equation twice to obtain\n$$s^A(u_2)-s^A(u_1)=\\frac12\\int_{u_1}^{u_2}(u_2-v)\\,\\partial_v^2H^A{}_B(v)\\,s^B\\,dv+O(\\varepsilon^2|s|).$$\nIntegration by parts gives the integral as $\\Delta H^A{}_B-(u_2-u_1)\\partial_uH^A{}_B(u_1)$. The leading part of the endpoint derivative vanishes by $N_{AB}(u_1)=0$, and the remainder derivative is $O(r^{-2})$ by [F1]; hence its contribution is $O(r^{-2}|s|)$. Also $\\Delta H^A{}_B=\\Delta C^A{}_B/r+O(r^{-2})$ by [F1]. Substitution proves the stated leading displacement and both error orders.",
+          "step": "2.1",
+          "inputs": [
+            "A2",
+            "F1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d3.1",
+          "claim": "Integrating the first-order Jacobi equation once gives $\\partial_us^A(u_2)=\\tfrac12(\\partial_uH^A{}_B(u_2)-\\partial_uH^A{}_B(u_1))s^B+O(\\varepsilon^2|s|)$. At both endpoints the leading derivative is $N^A{}_B/r=0$; the derivative of the remainder in [F1] is $O(r^{-2})$. This proves the endpoint velocity estimate.",
+          "step": "3.1",
+          "inputs": [
+            "A2",
+            "F1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement assumes u1<u2, so the interval is nonempty; step 1.1 uses those endpoints."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If N_AB=0, step 1.1 gives Delta C_AB=0; the detector displacement then has no leading term in step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement fixes a single angular generator and a two-dimensional positive detector screen [F2]."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The detector statement fixes a large positive area radius r and the positive screen metric [F2]."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Both endpoint news conditions are used for the displacement and velocity estimates in steps 2.1 and 3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The smooth Jacobi variation is supplied as data; the proof makes no choice from a family of nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement gives an equality and approximation, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement gives an equality and approximation, not a biconditional."
+        }
+      ]
+    },
+    "prop-gr-fx-bondi-mass-loss": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-gr-fx-bondi-expansion",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice for the smooth Lorentzian tangent-bundle conventions of the suppliers. Let $I\\subseteq\\mathbb R$ be a nonempty open interval, $r_0>0$, and $\\mathcal E=I\\times(r_0,\\infty)\\times S^2$, where $S^2=\\{x\\in\\mathbb R^3:|x|=1\\}$ has its unit round metric $q_{AB}$ and area form $d\\Omega$. Let $D_A$ be the Levi-Civita covariant derivative of $q$, and raise angular indices with $q^{AB}$. A **Bondi-Sachs end** is a smooth Lorentzian metric on $\\mathcal E$ written in coordinates $(u,r,x^A)$, $A,B=1,2$, as\n\n$$g=-\\left(e^{2\\beta}\\frac Vr-r^2\\gamma_{AB}U^AU^B\\right)du^2-2e^{2\\beta}du\\,dr-2r^2\\gamma_{AB}U^Bdu\\,dx^A+r^2\\gamma_{AB}dx^A dx^B,$$\n\nwhere $\\beta,V,U^A,\\gamma_{AB}$ are smooth, $\\gamma_{AB}$ is positive definite, $\\gamma^{AC}\\gamma_{CB}=\\delta^A_B$, and $\\det(\\gamma_{AB})=\\det(q_{AB})$. Thus $u=\\mathrm{constant}$ are outgoing null hypersurfaces, $r$ is the area radius, and $x^A$ are constant along their null generators. This Bondi gauge has $g_{rr}=g_{rA}=0$.\n\nA **smooth Bondi expansion** is such an end with the differentiated uniform expansions\n\n$$\\gamma_{AB}=q_{AB}+\\frac{C_{AB}(u,x)}r+\\frac{P_{AB}(u,x)}{r^2}+O(r^{-3}),\\qquad \\beta=O(r^{-2}),\\qquad U^A=\\frac{U^A_{(2)}(u,x)}{r^2}+\\frac{U^A_{(3)}(u,x)}{r^3}+O(r^{-4}),\\qquad V=r-2m(u,x)+\\frac{V_{(1)}(u,x)}r+O(r^{-2}).$$\n\nHere $C_{AB}$, $P_{AB}$ and the displayed coefficients are smooth sphere fields on $I$; the determinant gauge imposes $q^{AB}C_{AB}=0$ and $q^{AB}P_{AB}=\\tfrac12 C_{AB}C^{AB}$. For every compact $I'\\subset I$, angular chart compact set, and derivative multi-index $\\alpha$ of total order at most two, the partial derivatives of each $O(r^{-k})$ remainder obey $\\partial_u^{\\alpha_u}D^{\\alpha_x}\\partial_r^{\\alpha_r}O(r^{-k})=O(r^{-k-\\alpha_r})$ uniformly as $r\\to\\infty$. Define the **mass aspect** $m$ by the $r^{-1}$ coefficient in $V$, the **Bondi shear** by $C_{AB}=\\lim_{r\\to\\infty}r(\\gamma_{AB}-q_{AB})$, the **Bondi news** by $N_{AB}:=\\partial_u C_{AB}$, and the **geometric Bondi mass** by $m_B(u):=\\frac1{4\\pi}\\int_{S^2}m(u,x)\\,d\\Omega$. The future null boundary used here is the formal $r\\to\\infty$ boundary $\\mathcal I^+=I\\times S^2$ with coordinates $(u,x^A)$; no conformal completion is included in this definition. A **vacuum Bondi expansion** means, in addition, that the Ricci tensor $\\operatorname{Ric}_{ab}$ defined by the curvature convention of [[def-gr-curvature-tensor-and-derived-tensors]] vanishes to the asymptotic coefficient orders under discussion, with no cosmological term.\n\n",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-gr-fx-bondi-mass-coefficient",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice for the smooth Lorentzian bundle conventions of the suppliers. Let a vacuum Bondi expansion be as in [[def-gr-fx-bondi-expansion]], with $R_{ab}=0$ in the curvature convention of [[def-gr-curvature-tensor-and-derived-tensors]]. Then, for the mass aspect $m$, shear $C_{AB}$, news $N_{AB}=\\partial_uC_{AB}$, unit sphere metric $q_{AB}$ and its Levi-Civita derivative $D_A$ specified there,\n\n$$\\partial_um=\\frac14D_AD_BN^{AB}-\\frac18N_{AB}N^{AB}.$$\n\nThe identity is the leading supplementary vacuum Einstein coefficient at future null infinity; it is not an exact finite-radius equation.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1.1",
+          "claim": "For fixed $u\\in I$, define the smooth sphere vector field $X^A:=D_BN^{AB}$. In standard spherical coordinates $q=d\\theta^2+\\sin^2\\theta\\,d\\phi^2$, its divergence satisfies $D_AX^A\\,d\\Omega=\\{\\partial_\\theta(\\sin\\theta X^\\theta)+\\partial_\\phi(\\sin\\theta X^\\phi)\\}\\,d\\theta\\,d\\phi$. The $\\phi$-boundary terms cancel by periodicity. Smoothness makes $X^\\theta$ bounded in norm near each pole, so $\\sin\\theta X^\\theta\\to0$ at $\\theta=0,\\pi$; hence $\\int_{S^2}D_AD_BN^{AB}\\,d\\Omega=0$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d1.2",
+          "claim": "Smoothness on each compact $u$-slab permits differentiation under the finite sphere integral: for small $h$, the difference quotient for $m_B$ equals $\\frac1{4\\pi}\\int_{S^2}\\int_0^1\\partial_um(u+th,x)\\,dt\\,d\\Omega$, and uniform continuity of $\\partial_um$ makes it converge uniformly in $x$ to $\\frac1{4\\pi}\\partial_um(u,x)$. Therefore $\\frac{dm_B}{du}=\\frac1{4\\pi}\\int_{S^2}\\partial_um\\,d\\Omega$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d2.1",
+          "claim": "Substitute [F2] into step 1.2 and use step 1.1 to eliminate the double divergence. The remaining term is $-\\frac1{32\\pi}\\int_{S^2}N_{AB}N^{AB}\\,d\\Omega$, proving the equality. Since $q$ is positive definite, $N_{AB}N^{AB}=|N|_q^2\\ge0$ pointwise, proving the inequality.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d3.1",
+          "claim": "If $dm_B/du=0$ at a fixed $u\\in J$, step 2.1 gives the integral of the continuous nonnegative function $|N|_q^2$ equal to zero. If $N$ were nonzero at some point, continuity and positive definiteness of $q$ would make $|N|_q^2$ strictly positive on a sphere neighborhood of positive area, contradicting the zero integral. Thus $N=0$ on that cut; applying this to every $u\\in J$ proves the final claim.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The sphere S\u00b2 is nonempty and compact and the retarded interval I is nonempty [F1], as used in step 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The equality gives zero mass derivative when N_AB vanishes, and step 3.1 proves the converse under continuity."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 differentiates the geometric mass at a single fixed u in the open interval."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Positive definiteness in [F1] gives N_AB N^AB=|N|\u00b2\u22650 in step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The derivative identity is pointwise on an open retarded interval; no endpoint is included."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No selection from nonempty sets occurs in the sphere integration argument."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The proposition does not state an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The proposition does not state an iff."
+        }
+      ]
+    },
+    "ex-gr-fx05-1": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-gr-fx-bondi-expansion",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice for the smooth Lorentzian tangent-bundle conventions of the suppliers. Let $I\\subseteq\\mathbb R$ be a nonempty open interval, $r_0>0$, and $\\mathcal E=I\\times(r_0,\\infty)\\times S^2$, where $S^2=\\{x\\in\\mathbb R^3:|x|=1\\}$ has its unit round metric $q_{AB}$ and area form $d\\Omega$. Let $D_A$ be the Levi-Civita covariant derivative of $q$, and raise angular indices with $q^{AB}$. A **Bondi-Sachs end** is a smooth Lorentzian metric on $\\mathcal E$ written in coordinates $(u,r,x^A)$, $A,B=1,2$, as\n\n$$g=-\\left(e^{2\\beta}\\frac Vr-r^2\\gamma_{AB}U^AU^B\\right)du^2-2e^{2\\beta}du\\,dr-2r^2\\gamma_{AB}U^Bdu\\,dx^A+r^2\\gamma_{AB}dx^A dx^B,$$\n\nwhere $\\beta,V,U^A,\\gamma_{AB}$ are smooth, $\\gamma_{AB}$ is positive definite, $\\gamma^{AC}\\gamma_{CB}=\\delta^A_B$, and $\\det(\\gamma_{AB})=\\det(q_{AB})$. Thus $u=\\mathrm{constant}$ are outgoing null hypersurfaces, $r$ is the area radius, and $x^A$ are constant along their null generators. This Bondi gauge has $g_{rr}=g_{rA}=0$.\n\nA **smooth Bondi expansion** is such an end with the differentiated uniform expansions\n\n$$\\gamma_{AB}=q_{AB}+\\frac{C_{AB}(u,x)}r+\\frac{P_{AB}(u,x)}{r^2}+O(r^{-3}),\\qquad \\beta=O(r^{-2}),\\qquad U^A=\\frac{U^A_{(2)}(u,x)}{r^2}+\\frac{U^A_{(3)}(u,x)}{r^3}+O(r^{-4}),\\qquad V=r-2m(u,x)+\\frac{V_{(1)}(u,x)}r+O(r^{-2}).$$\n\nHere $C_{AB}$, $P_{AB}$ and the displayed coefficients are smooth sphere fields on $I$; the determinant gauge imposes $q^{AB}C_{AB}=0$ and $q^{AB}P_{AB}=\\tfrac12 C_{AB}C^{AB}$. For every compact $I'\\subset I$, angular chart compact set, and derivative multi-index $\\alpha$ of total order at most two, the partial derivatives of each $O(r^{-k})$ remainder obey $\\partial_u^{\\alpha_u}D^{\\alpha_x}\\partial_r^{\\alpha_r}O(r^{-k})=O(r^{-k-\\alpha_r})$ uniformly as $r\\to\\infty$. Define the **mass aspect** $m$ by the $r^{-1}$ coefficient in $V$, the **Bondi shear** by $C_{AB}=\\lim_{r\\to\\infty}r(\\gamma_{AB}-q_{AB})$, the **Bondi news** by $N_{AB}:=\\partial_u C_{AB}$, and the **geometric Bondi mass** by $m_B(u):=\\frac1{4\\pi}\\int_{S^2}m(u,x)\\,d\\Omega$. The future null boundary used here is the formal $r\\to\\infty$ boundary $\\mathcal I^+=I\\times S^2$ with coordinates $(u,x^A)$; no conformal completion is included in this definition. A **vacuum Bondi expansion** means, in addition, that the Ricci tensor $\\operatorname{Ric}_{ab}$ defined by the curvature convention of [[def-gr-curvature-tensor-and-derived-tensors]] vanishes to the asymptotic coefficient orders under discussion, with no cosmological term.\n\n",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-gr-fx-bondi-mass-coefficient",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice for the smooth Lorentzian bundle conventions of the suppliers. Let a vacuum Bondi expansion be as in [[def-gr-fx-bondi-expansion]], with $R_{ab}=0$ in the curvature convention of [[def-gr-curvature-tensor-and-derived-tensors]]. Then, for the mass aspect $m$, shear $C_{AB}$, news $N_{AB}=\\partial_uC_{AB}$, unit sphere metric $q_{AB}$ and its Levi-Civita derivative $D_A$ specified there,\n\n$$\\partial_um=\\frac14D_AD_BN^{AB}-\\frac18N_{AB}N^{AB}.$$\n\nThe identity is the leading supplementary vacuum Einstein coefficient at future null infinity; it is not an exact finite-radius equation.\n\n",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-gr-fx-bondi-mass-loss",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice for the smooth Lorentzian sphere-bundle convention of [[def-gr-fx-bondi-expansion]]. Let a smooth vacuum Bondi expansion be defined on an open retarded-length interval $I$. Then\n\n$$\\frac{dm_B}{du}=-\\frac1{32\\pi}\\int_{S^2}N_{AB}N^{AB}\\,d\\Omega\\le0.$$\n\nIf $dm_B/du=0$ throughout an open subinterval $J\\subset I$ and $N_{AB}$ is continuous on $J\\times S^2$, then $N_{AB}=0$ on $J\\times S^2$.\n\n",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-gr-fx-memory-integral",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and a smooth Bondi expansion as in [[def-gr-fx-bondi-expansion]]. For $u_1<u_2$ in its retarded-length interval, define $\\Delta C_{AB}:=C_{AB}(u_2)-C_{AB}(u_1)$. Then\n\n$$\\Delta C_{AB}=\\int_{u_1}^{u_2}N_{AB}(u)\\,du.$$\n\nFor the detector clause, fix an angular point and a large fixed area radius $r$. Use the local flat observer and propagation direction of [[def-gr-wave-screen-and-tt-projection]] to identify the positive two-dimensional screen. A **linear transverse detector approximation** here means that the dimensionless screen metric perturbation is $H_{AB}(u)=C_{AB}(u,x)/r+\\rho_{AB}(u,r,x)$, where the screen-TT remainder and its first two $u$-derivatives are $O(r^{-2})$ uniformly on $[u_1,u_2]$; retain only first order in $H$ and first order in separation. Let $s^A(u)$ be the screen Jacobi field of a smooth timelike geodesic variation, with affine parameter $u$ (equivalently $x^0=ct=u+r$ along the background central geodesic), initial data $s^A(u_1)=s^A$ and $\\partial_us^A(u_1)=0$, and assume $N_{AB}(u_1)=N_{AB}(u_2)=0$. Then, at this linear separation order,\n\n$$s^A(u_2)-s^A(u_1)=\\frac{1}{2r}\\Delta C^A{}_B\\,s^B+O(r^{-2}|s|)+O(\\varepsilon^2|s|),\\qquad \\varepsilon:=\\sup_{[u_1,u_2]}|H|_q.$$\n\nUnder the same approximation, the endpoint relative screen velocity satisfies $\\partial_us^A(u_2)=O(r^{-2}|s|)+O(\\varepsilon^2|s|)$, so it has no leading $r^{-1}$ contribution when the news vanishes at both cuts.\n\nThe error constants depend on the fixed compact interval, angular patch and differentiated remainder bounds in [[def-gr-fx-bondi-expansion]]. No exact finite-radius identity $H_{AB}=C_{AB}/r$ is asserted.\n\n",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1.1",
+          "claim": "The scalar $Y$ is smooth because it is the restriction of a polynomial on $\\mathbb R^3$. By contraction, $q^{AB}T_{AB}=D^2Y-\\tfrac12(2)D^2Y=0$. In spherical coordinates at the equator $\\theta=\\pi/2$, $D_\\theta D_\\theta Y=3$, $D_\\phi D_\\phi Y=0$, and $D^2Y=3$, so $T_{\\theta\\theta}=3/2\\ne0$. Thus $T$ is a nonzero smooth trace-free tensor.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d1.2",
+          "claim": "Define $b(u)=e^{-1/(1-u^2)}$ for $|u|<1$ and $b(u)=0$ for $|u|\\ge1$, let $Z=\\int_{-1}^{1}b(u)\\,du>0$, and set $g=b/Z$. Every derivative of the interior formula is a polynomial in $(1-u^2)^{-1}$ and $u$ times $e^{-1/(1-u^2)}$, which tends to zero at both endpoints; hence the zero extension is smooth on $\\mathbb R$, has support $[-1,1]$, is nonnegative, and has integral one. The function $H(u)=\\int_{-\\infty}^u g$ is smooth, equals $0$ for $u\\le-1$, equals $1$ for $u\\ge1$, and $H'=g$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d2.1",
+          "claim": "The fields $C_{AB}=aHT_{AB}$ and $N_{AB}=agT_{AB}$ are smooth and trace-free, and $N=\\partial_uC$. Therefore $\\Delta C_{AB}=aT_{AB}$ by the normalization $\\int g=1$. Define $m(u,x)$ from $m(-1,x)=0$ by integrating the right side of the local mass-aspect equation in [F2]; its integrand is smooth, so this gives smooth formal Bondi mass-aspect data satisfying that constraint.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 1.2",
+            "A2",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d2.2",
+          "claim": "Applying [F2] over $[-1,1]$ gives the displayed mass change. The first integral is positive because $g$ is continuous and has unit integral; the sphere integral is positive because $q$ is positive definite and $T$ is continuous and nonzero by step 1.1. Since $a\\ne0$, the mass change is strictly negative.",
+          "step": "2.2",
+          "inputs": [
+            "A2",
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d3.1",
+          "claim": "The pulse has $N(-1)=N(1)=0$, so [F3] applies. Its integrated shear change is $\\Delta C=aT$, hence the leading detector displacement is $\\Delta s^A=\\tfrac{a}{2r}T^A{}_Bs^B+O(r^{-2}|s|)+O(\\varepsilon^2|s|)$, with exactly the stated finite-radius and nonlinear qualifications.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "step 2.1",
+            "A2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The constructed pulse interval [-1,1] is nonempty, and step 1.2 constructs a normalized bump on it."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The explicit g is nonzero and a is nonzero; steps 1.2 and 2.2 establish strict mass decrease."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 checks one explicit l=2 scalar harmonic and its trace-free Hessian."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The sphere metric is positive definite and a\u22600; step 1.1 proves T is nonzero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The pulse and news vanish at u=-1 and u=1 by step 1.2; step 3.1 applies endpoint hypotheses."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The bump is explicitly constructed in step 1.2; no choice principle is used to select it."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example asserts no biconditional."
+        }
+      ]
+    },
+    "ex-gr-fx05-2": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-gr-fx-bondi-expansion",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice for the smooth Lorentzian tangent-bundle conventions of the suppliers. Let $I\\subseteq\\mathbb R$ be a nonempty open interval, $r_0>0$, and $\\mathcal E=I\\times(r_0,\\infty)\\times S^2$, where $S^2=\\{x\\in\\mathbb R^3:|x|=1\\}$ has its unit round metric $q_{AB}$ and area form $d\\Omega$. Let $D_A$ be the Levi-Civita covariant derivative of $q$, and raise angular indices with $q^{AB}$. A **Bondi-Sachs end** is a smooth Lorentzian metric on $\\mathcal E$ written in coordinates $(u,r,x^A)$, $A,B=1,2$, as\n\n$$g=-\\left(e^{2\\beta}\\frac Vr-r^2\\gamma_{AB}U^AU^B\\right)du^2-2e^{2\\beta}du\\,dr-2r^2\\gamma_{AB}U^Bdu\\,dx^A+r^2\\gamma_{AB}dx^A dx^B,$$\n\nwhere $\\beta,V,U^A,\\gamma_{AB}$ are smooth, $\\gamma_{AB}$ is positive definite, $\\gamma^{AC}\\gamma_{CB}=\\delta^A_B$, and $\\det(\\gamma_{AB})=\\det(q_{AB})$. Thus $u=\\mathrm{constant}$ are outgoing null hypersurfaces, $r$ is the area radius, and $x^A$ are constant along their null generators. This Bondi gauge has $g_{rr}=g_{rA}=0$.\n\nA **smooth Bondi expansion** is such an end with the differentiated uniform expansions\n\n$$\\gamma_{AB}=q_{AB}+\\frac{C_{AB}(u,x)}r+\\frac{P_{AB}(u,x)}{r^2}+O(r^{-3}),\\qquad \\beta=O(r^{-2}),\\qquad U^A=\\frac{U^A_{(2)}(u,x)}{r^2}+\\frac{U^A_{(3)}(u,x)}{r^3}+O(r^{-4}),\\qquad V=r-2m(u,x)+\\frac{V_{(1)}(u,x)}r+O(r^{-2}).$$\n\nHere $C_{AB}$, $P_{AB}$ and the displayed coefficients are smooth sphere fields on $I$; the determinant gauge imposes $q^{AB}C_{AB}=0$ and $q^{AB}P_{AB}=\\tfrac12 C_{AB}C^{AB}$. For every compact $I'\\subset I$, angular chart compact set, and derivative multi-index $\\alpha$ of total order at most two, the partial derivatives of each $O(r^{-k})$ remainder obey $\\partial_u^{\\alpha_u}D^{\\alpha_x}\\partial_r^{\\alpha_r}O(r^{-k})=O(r^{-k-\\alpha_r})$ uniformly as $r\\to\\infty$. Define the **mass aspect** $m$ by the $r^{-1}$ coefficient in $V$, the **Bondi shear** by $C_{AB}=\\lim_{r\\to\\infty}r(\\gamma_{AB}-q_{AB})$, the **Bondi news** by $N_{AB}:=\\partial_u C_{AB}$, and the **geometric Bondi mass** by $m_B(u):=\\frac1{4\\pi}\\int_{S^2}m(u,x)\\,d\\Omega$. The future null boundary used here is the formal $r\\to\\infty$ boundary $\\mathcal I^+=I\\times S^2$ with coordinates $(u,x^A)$; no conformal completion is included in this definition. A **vacuum Bondi expansion** means, in addition, that the Ricci tensor $\\operatorname{Ric}_{ab}$ defined by the curvature convention of [[def-gr-curvature-tensor-and-derived-tensors]] vanishes to the asymptotic coefficient orders under discussion, with no cosmological term.\n\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-gr-fx-bms-supertranslation",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice for the smooth Lorentzian boundary conventions inherited from [[def-gr-fx-bondi-expansion]]. On its formal boundary $\\mathcal I^+=I\\times S^2$, let $\\ell_{\\mathcal I}=\\partial_u$ be the null-generator direction and let $q_{AB}$ be the unit round metric on the cuts; the degenerate boundary metric is $q_{AB}dx^A dx^B$ with kernel $\\mathbb R\\ell_{\\mathcal I}$. In a fixed Bondi frame with $q_{AB}$ held fixed, an **infinitesimal supertranslation** is the asymptotic vector field parametrized by a smooth real function $f:S^2\\to\\mathbb R$ whose leading boundary action is $\\delta_fu=f(x)$ and whose leading bulk generator is\n\n$$\\xi_f=f\\,\\partial_u-\\frac1rD^Af\\,\\partial_A+\\frac12D^AD_Af\\,\\partial_r+O(r^{-1})\\partial_u+O(r^{-2})\\partial_A+O(r^{-1})\\partial_r.$$\n\nThe displayed leading terms preserve Bondi gauge and the fixed round cut metric to the asymptotic orders used here; the omitted terms are not part of this definition. We use the active convention $\\delta_f=\\mathcal L_{\\xi_f}$. Its action on the shear and news of [[def-gr-fx-bondi-expansion]] is\n\n$$\\delta_f C_{AB}=fN_{AB}-2D_AD_Bf+q_{AB}D^CD_Cf,\\qquad \\delta_f N_{AB}=f\\,\\partial_uN_{AB}.$$\n\nThe function $f$ carries length units when the retarded coordinate $u$ is read in SI geometric coordinates; the sphere derivatives and angular coordinates are dimensionless. The Hessian term is trace-free because $q^{AB}q_{AB}=2$. When $N_{AB}=0$, an infinitesimal supertranslation therefore changes a time-independent shear by the sphere trace-free Hessian while leaving the news zero.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-gr-fx-bondi-mass-coefficient",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice for the smooth Lorentzian bundle conventions of the suppliers. Let a vacuum Bondi expansion be as in [[def-gr-fx-bondi-expansion]], with $R_{ab}=0$ in the curvature convention of [[def-gr-curvature-tensor-and-derived-tensors]]. Then, for the mass aspect $m$, shear $C_{AB}$, news $N_{AB}=\\partial_uC_{AB}$, unit sphere metric $q_{AB}$ and its Levi-Civita derivative $D_A$ specified there,\n\n$$\\partial_um=\\frac14D_AD_BN^{AB}-\\frac18N_{AB}N^{AB}.$$\n\nThe identity is the leading supplementary vacuum Einstein coefficient at future null infinity; it is not an exact finite-radius equation.\n\n",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-gr-fx-bondi-mass-loss",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice for the smooth Lorentzian sphere-bundle convention of [[def-gr-fx-bondi-expansion]]. Let a smooth vacuum Bondi expansion be defined on an open retarded-length interval $I$. Then\n\n$$\\frac{dm_B}{du}=-\\frac1{32\\pi}\\int_{S^2}N_{AB}N^{AB}\\,d\\Omega\\le0.$$\n\nIf $dm_B/du=0$ throughout an open subinterval $J\\subset I$ and $N_{AB}$ is continuous on $J\\times S^2$, then $N_{AB}=0$ on $J\\times S^2$.\n\n",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "prop-gr-fx-memory-integral",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and a smooth Bondi expansion as in [[def-gr-fx-bondi-expansion]]. For $u_1<u_2$ in its retarded-length interval, define $\\Delta C_{AB}:=C_{AB}(u_2)-C_{AB}(u_1)$. Then\n\n$$\\Delta C_{AB}=\\int_{u_1}^{u_2}N_{AB}(u)\\,du.$$\n\nFor the detector clause, fix an angular point and a large fixed area radius $r$. Use the local flat observer and propagation direction of [[def-gr-wave-screen-and-tt-projection]] to identify the positive two-dimensional screen. A **linear transverse detector approximation** here means that the dimensionless screen metric perturbation is $H_{AB}(u)=C_{AB}(u,x)/r+\\rho_{AB}(u,r,x)$, where the screen-TT remainder and its first two $u$-derivatives are $O(r^{-2})$ uniformly on $[u_1,u_2]$; retain only first order in $H$ and first order in separation. Let $s^A(u)$ be the screen Jacobi field of a smooth timelike geodesic variation, with affine parameter $u$ (equivalently $x^0=ct=u+r$ along the background central geodesic), initial data $s^A(u_1)=s^A$ and $\\partial_us^A(u_1)=0$, and assume $N_{AB}(u_1)=N_{AB}(u_2)=0$. Then, at this linear separation order,\n\n$$s^A(u_2)-s^A(u_1)=\\frac{1}{2r}\\Delta C^A{}_B\\,s^B+O(r^{-2}|s|)+O(\\varepsilon^2|s|),\\qquad \\varepsilon:=\\sup_{[u_1,u_2]}|H|_q.$$\n\nUnder the same approximation, the endpoint relative screen velocity satisfies $\\partial_us^A(u_2)=O(r^{-2}|s|)+O(\\varepsilon^2|s|)$, so it has no leading $r^{-1}$ contribution when the news vanishes at both cuts.\n\nThe error constants depend on the fixed compact interval, angular patch and differentiated remainder bounds in [[def-gr-fx-bondi-expansion]]. No exact finite-radius identity $H_{AB}=C_{AB}/r$ is asserted.\n\n",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1.1",
+          "claim": "The restriction $Y=\\tfrac12(3x_3^2-1)$ is smooth on the sphere because it is the restriction of a polynomial. Put $T_{AB}:=D_AD_BY-\\tfrac12q_{AB}D^2Y$. Its trace is zero. At $\\theta=\\pi/2$, $D_\\theta D_\\theta Y=3$, $D_\\phi D_\\phi Y=0$ and $D^2Y=3$, so $T_{\\theta\\theta}=3/2$; hence $T$ is nonzero.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d2.1",
+          "claim": "Since Y is independent of u, [F2] gives C_AB=delta_f C_AB=-2aT_AB, independent of u and nonzero; [F1] then gives N_AB=0. The data are formal infinitesimal boundary data, so no nonlinear finite transformation is asserted.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d3.1",
+          "claim": "Substitution of $N_{AB}=0$ in [F3] gives $\\partial_um=0$, and [F4] gives $dm_B/du=0$. For every $u_1<u_2$, [F5] gives $\\Delta C_{AB}=\\int_{u_1}^{u_2}0\\,du=0$ and hence zero leading memory displacement. Thus the static nonzero shear has no news flux and no shear change.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The formal interval and sphere in the Statement are nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The shear is nonzero while its news is exactly zero by steps 1.1 and 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 uses one explicit l=2 scalar harmonic."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The unit sphere metric is positive and a\u22600 in the Example."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The shear is independent of retarded time, so every pair of cuts has zero difference in step 3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The harmonic and parameter are explicitly prescribed; no choice principle is used in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example asserts no biconditional."
+        }
+      ]
+    }
+  }
+}

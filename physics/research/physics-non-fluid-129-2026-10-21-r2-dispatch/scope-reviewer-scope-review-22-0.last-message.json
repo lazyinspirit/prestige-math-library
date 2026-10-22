@@ -1,0 +1,52 @@
+{
+  "version": 1,
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "batch": "22",
+  "round": 0,
+  "reviewed_items": [
+    "def-emg-fx-extremal-test-scalar",
+    "thm-emg-fx-aretakis-spherical-charge",
+    "prop-emg-fx-conditional-horizon-growth",
+    "ex-emg-fx-constant-scalar-exception"
+  ],
+  "reviewed_pages": [
+    "emg-fx07",
+    "emg-fx07-examples"
+  ],
+  "decision": "repair",
+  "reason": "The approved scope and page prerequisites match the current inventory. The local charge and conditional-growth calculations are sound; source checks match the Aretakis normalization H=mH0 and Reall’s ingoing calculation ([Aretakis I](https://arxiv.org/pdf/1110.2007), [Aretakis II](https://arxiv.org/pdf/1110.2009), [Reall](https://hep.physics.uoc.gr/Erasmus-IP-2013/files/lectures/Reall/Reall.pdf)). One local repair should make the C3 operator extension and the Definition’s object terminology explicit.",
+  "findings": [
+    {
+      "id": "b22-c3-wave-operator",
+      "type": "prerequisite",
+      "reason": "The direct supplier def-emg-fx-wave-currents defines Box_g only for smooth scalars, while the density lemma states its divergence formula for smooth vector fields. This batch admits C3 scalars and uses the operator and divergence formula in the charge and growth proofs. Preserve the C3 scope by defining and justifying the local C3 extension, including the regularity needed for its coordinate formula."
+    },
+    {
+      "id": "b22-spherical-lift",
+      "type": "local",
+      "reason": "The Definition gives psi a domain R_v × (0,∞)_r, then says it is independent of the sphere variable. Define the full spherical scalar on R_v × (0,∞)_r × S², or state explicitly that the reduced function is lifted by psi(v,r,ω)=psi(v,r); the proofs use that lift."
+    },
+    {
+      "id": "b22-horizon-background-terms",
+      "type": "local",
+      "reason": "The Definition names r=m a degenerate Killing horizon and refers to a fixed Maxwell field without stating their relevant content. State the earlier suppliers’ exact content: xi=∂v generates the null level r=m with zero surface gravity, and F_in=−q_e r^−2 dv∧dr+q_mω_S² is the fixed field with no scalar coupling or backreaction."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "thm-emg-fx-aretakis-spherical-charge",
+      "decision": "repair",
+      "reason": "Its proof applies Box_g to every admissible C3 scalar and uses the smooth-only divergence supplier; review the proof against the repaired operator extension."
+    },
+    {
+      "id": "prop-emg-fx-conditional-horizon-growth",
+      "decision": "repair",
+      "reason": "Its proof repeats the C3 wave-operator and divergence uses, then differentiates the equation; review those steps against the repaired extension."
+    },
+    {
+      "id": "ex-emg-fx-constant-scalar-exception",
+      "decision": "accept",
+      "reason": "The constant scalar is smooth, its wave operator vanishes, and the charge and failed decay hypothesis are computed correctly; confirm against the clarified Definition."
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+# Batch 16 source reading — emg-fx01
+
+## Retrieval and search record
+
+The full 20-page PDF of Alcubierre, Degollado and Salgado, arXiv:0907.1151v2, and the full 220-page PDF of Gourgoulhon, 3+1 Formalism and Bases of Numerical Relativity, arXiv:gr-qc/0703035v1, were opened and inspected as full-text documents. The run-local command node tools/physics-support/source-fetch-check.mjs --coverage research/physics-non-fluid-129-2026-10-21-r2-batch-16.coverage.json --stamp then fetched and stamped all four page/source entries. Its actual output was 4/4 fetch-verified, 4/4 resolved, zero documented drops. The follow-up check without --stamp again returned 4/4 fetch-verified and 4/4 resolved.
+
+The searches recorded in the coverage file found the primary charged-data paper, the independent book-length lecture notes, and additional possible sources. No retrieval failed, so no recovery retry, source drop, or source_resolution decision was made. A broader 2021 conformal matter-scaling paper and Cook's initial-data paper were not selected: the pair-specific RN isotropic calculation is explicit in Alcubierre et al., and Gourgoulhon supplies the independent full derivation of the three-dimensional scalar-curvature transformation.
+
+## Treatments and harvested results
+
+- **A. I. Alcubierre, J. C. Degollado and M. Salgado, arXiv:0907.1151v2 (2009), complete 20-page paper.** Read Section III.A, equations (3.1)–(3.12), and Section III.B, equations (3.15)–(3.16), with their surrounding derivations. Equations (3.4)–(3.8) give the conformal spatial metric, vector divergence law and electric-vector weight; equations (3.11)–(3.12) give the transformed Hamiltonian equation; equations (3.15)–(3.16) give the single RN isotropic factor and radial field. These results are harvested into def-emg-fx-conformal-seed, lem-emg-fx-conformal-constraints, and prop-emg-fx-rn-isotropic-seed. The charge-density rescaling and sourced Gauss equation (3.9)–(3.10) are recorded out-of-scope: this pair treats smooth source-free data and no charged matter or distributional source. The paper's Gaussian/geometric units and its restricted flat, time-symmetric, zero-magnetic setup are compared, not silently imported.
+
+- **Eric Gourgoulhon, 3+1 Formalism and Bases of Numerical Relativity, Lecture Notes in Physics 846 (2012), complete 220-page author preprint.** Read Section 6.2.3, equations (6.14)–(6.24); Sections 6.3.1–6.3.3, equations (6.29)–(6.52); and Section 6.4.2, equations (6.81)–(6.83), including the complete connection-difference, Ricci-trace, and momentum-scaling derivations. Equations (6.34)–(6.38) give the vector-divergence law and (6.52) the scalar-curvature identity. These are harvested into the local definition, lemma, proposition, and worked example, with the exact local proof retained in each consuming item.
+
+## Convention and scope checks
+
+Gourgoulhon defines the extrinsic curvature with the opposite sign from the workspace convention: Section 2.3.4, equation (2.43), uses the negative projected derivative of the unit normal, while def-emg-constrained-electrovacuum-data uses $K(X,Y)=g(\nabla_Xn,Y)$. The conformal scalar-curvature identity is independent of this sign. No source momentum sign is imported; the local lemma derives the norm and trace weights with the workspace convention and explicitly retains the separate momentum equation.
+
+The local electric vectors are geometric-normalized by $\alpha=\sqrt{\kappa/(2\mu_0)}$ relative to the SI vectors. This turns the inherited SI Hamiltonian coefficient $\kappa/\mu_0$ into the coefficient $2$ used in the geometric seed equation. The source's Gaussian/geometric normalization is not substituted for that dictionary. The local proof treats arbitrary smooth positive $\psi$, a general smooth Riemannian seed metric, both electric and magnetic seed fields, trace-free seed curvature, nonconstant $\tau$, and constant $\Lambda$; it proves no nonlinear elliptic existence claim.
+
+The RN proposition states the exact positive domain and excludes $r=0$. Its direct calculations verify the field divergence and Hamiltonian equation there, with no delta-function source at the omitted point. The nonextreme minimal sphere and both asymptotic ends are proved in isotropic coordinates. The RN comparison is restricted to the $r>r_0$ exterior branch; no global event horizon or maximal extension is asserted. The extremal example separately proves the cylindrical puncture end and the absence of a centered minimal sphere.
+
+The coverage file records all 13 harvested results, their supported items and dispositions, exact section/equation locators, search history, and actual fetch stamps. Independent proof acceptance remains a later review responsibility.

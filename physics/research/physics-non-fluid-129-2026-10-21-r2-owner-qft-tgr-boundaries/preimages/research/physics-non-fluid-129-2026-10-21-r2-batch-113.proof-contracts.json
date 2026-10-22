@@ -1,0 +1,650 @@
+{
+  "version": 1,
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "batch": "113",
+  "level": 0,
+  "scope": [
+    "def-tgr-finite-cutoff-outside-entropy",
+    "lem-tgr-finite-cutoff-mode-entropy-growth",
+    "lem-tgr-renormalization-finite-part-ambiguity",
+    "ex-tgr-generalized-entropy-not-monotone-from-definition"
+  ],
+  "contracts": {
+    "def-tgr-finite-cutoff-outside-entropy": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-density-operator",
+          "source_section": "Definition",
+          "quote": "A **density operator** on $H$ is a non-negative endomorphism $\\rho:H\\to H$ with $\\operatorname{tr}(\\rho)=1$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-non-negative-and-positive-operator",
+          "source_section": "Definition",
+          "quote": "The operator $T$ is **non-negative** when $T$ is self-adjoint in the sense of [[def-self-adjoint-and-normal-endomorphism]] and $$\\langle Tv,v\\rangle\\ge 0$$ for every $v\\in V$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-tensor-register-and-permutation",
+          "source_section": "Definition",
+          "quote": "An **ordered tensor register** consists of a finite ordered list of finite-dimensional complex inner-product spaces $H_0,\\ldots,H_{n-1}$, each equipped with a specified ordered orthonormal basis. Its space is $H_0\\otimes\\cdots\\otimes H_{n-1}$, with factors retained in the displayed order. The product basis is ordered lexicographically by its tuple of factor indices.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-linear-map",
+          "source_section": "Definition",
+          "quote": "A function $T:V\\to W$ is **linear** when $$T(au+bv)=aT(u)+bT(v)$$ for all $a,b\\in F$ and $u,v\\in V$. Such a function is a **linear map**, or **linear transformation**.",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-coordinate-column-and-matrix-of-a-linear-map",
+          "source_section": "Definition",
+          "quote": "The **matrix of $T$ relative to $\\mathcal B$ and $\\mathcal C$** is the matrix $[T]_{\\mathcal B}^{\\mathcal C}\\in M_{m\\times n}(F)$ whose $j$-th column is $[T(b_j)]_{\\mathcal C}$.",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-unique-coordinates-with-respect-to-an-ordered-basis",
+          "source_section": "Statement",
+          "quote": "there is **exactly one** $\\lambda : n \\to F$ with $x = \\sum_{i<n}\\lambda_i v_i$.",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-trace-of-an-endomorphism",
+          "source_section": "Definition",
+          "quote": "This is independent of the chosen basis: matrices of the same endomorphism in two ordered bases are similar, and similar matrices have equal trace.",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-it-von-neumann-entropy",
+          "source_section": "Definition",
+          "quote": "If $\\lambda_1,\\ldots,\\lambda_d$ are its eigenvalues counted with multiplicity, define its **von Neumann entropy** by $$S(\\rho):=-\\operatorname{tr}(\\rho\\ln\\rho):=-\\sum_{j:\\lambda_j>0}\\lambda_j\\ln\\lambda_j.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Define the output endomorphism by its coordinates on the product basis. Each prescribed image is a finite sum, and the basis and coordinate suppliers give a unique linear map with the displayed entries.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The input density is self-adjoint and non-negative. The partial-trace matrix is self-adjoint, its quadratic form is a sum of non-negative input quadratic forms, and its diagonal sum equals the input trace one; hence it is a density operator.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "For every output endomorphism B, the finite matrix trace pairing identifies the partial-trace formula with the trace of the input against the factorwise operator I_in tensor B. This pairing is basis-independent and nondegenerate, so the induced output endomorphism is unique and basis-independent.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The output is a finite density operator, so its finite spectral entropy is real, includes zero eigenvalues by convention, and is basis-independent. Multiplication by the fixed real k_B preserves these properties.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F8",
+            "step 1.2",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Both Hilbert spaces are required to be nonzero in the Definition, so a zero-dimensional tensor factor is excluded."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition sets 0 log 0 to zero, and step 2.1 explicitly retains zero-eigenvalue terms by that convention."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Definition permits one-dimensional factors; step 2.1 applies the spectral sum, whose sole density eigenvalue is one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Definition counts eigenvalues with multiplicity, and step 2.1 depends only on their multiset."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Definition has no variable parameter or limiting endpoint; it is a finite-dimensional construction."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Only finite orthonormal bases for the two fixed finite-dimensional spaces are used; no arbitrary indexed family is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition asserts no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "one-dimensional input and maximally mixed qubit output",
+          "inputs": "H_in=C, H_out=C^2, rho=I_2/2",
+          "calculation": "The partial-trace sum has one term, tr(I_2/2)=1, and the two eigenvalues are 1/2.",
+          "result": "S_out=k_B log 2."
+        },
+        {
+          "case": "product pure state on two qubits",
+          "inputs": "rho=|0><0| tensor |1><1|",
+          "calculation": "The input-factor partial trace leaves |1><1|.",
+          "result": "The outside density is positive, trace one, and has entropy zero."
+        }
+      ]
+    },
+    "lem-tgr-finite-cutoff-mode-entropy-growth": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-tgr-finite-cutoff-outside-entropy",
+          "source_section": "Definition",
+          "quote": "The outside density $\\rho_{\\rm out}:H_{\\rm out}\\to H_{\\rm out}$ is the linear map whose matrix entries in $(f_a)$ are",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-density-operator",
+          "source_section": "Definition",
+          "quote": "A **density operator** on $H$ is a non-negative endomorphism $\\rho:H\\to H$ with $\\operatorname{tr}(\\rho)=1$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and $$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define $$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-exponential-addition-formula",
+          "source_section": "Statement",
+          "quote": "For all real $x,y$, $$\\exp(x+y)=\\exp(x)\\exp(y).$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-exponential-is-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "The exponential function is continuous and strictly increasing on $\\mathbb R$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-of-archimedean",
+          "source_section": "Statement",
+          "quote": "for every $x \\in F$ there is a natural number $n \\ge 1$ with $x < n \\cdot 1_F$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-qc-tensor-register-and-permutation",
+          "source_section": "Definition",
+          "quote": "Its space is $H_0\\otimes\\cdots\\otimes H_{n-1}$, with factors retained in the displayed order. The product basis is ordered lexicographically by its tuple of factor indices.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The tensor product basis has 2^N vectors by [F9]; the normalized identity matrix is non-negative and trace one, hence a density operator by [F2]. With one input basis vector its outside partial trace is the same matrix.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F9",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The outside density has 2^N eigenvalues equal to 2^-N. The exponential addition and reciprocal laws, followed by injectivity, give log(2^-N)=-N log 2.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "F6",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Substitution into the finite spectral sum gives k_B N log 2. The natural logarithm of 2 is positive because exp(0)=1<2=exp(log 2) and exp is strictly increasing.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F5",
+            "F7",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For c=k_B log 2>0, the Archimedean property supplies an integer N_0>M/c for any real M; every N>=N_0 then has entropy cN>M. Thus the sequence tends to +infinity.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F8",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement restricts N to integers N>=1 and both tensor factors are nonzero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For every finite N, step 1.2 gives eigenvalues 2^-N>0; the supplier Definition still specifies zero-eigenvalue handling in other cases."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "N=1 is admitted and step 2.1 gives the finite value k_B log 2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "All 2^N eigenvalues are equal and are counted with multiplicity in step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The only limiting endpoint is N to infinity, and step 3.1 verifies the epsilon-style divergence criterion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof treats one explicit finite-dimensional matrix for each positive integer and selects no arbitrary family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma asserts no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "N=1",
+          "inputs": "rho_out=I_2/2",
+          "calculation": "There are two eigenvalues 1/2, so -k_B sum lambda log lambda=k_B log 2.",
+          "result": "Matches the formula."
+        },
+        {
+          "case": "N=2",
+          "inputs": "rho_out=I_4/4",
+          "calculation": "There are four eigenvalues 1/4, so -k_B sum lambda log lambda=k_B log 4=2 k_B log 2.",
+          "result": "Matches the formula."
+        }
+      ]
+    },
+    "lem-tgr-renormalization-finite-part-ambiguity": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For fixed a and epsilon, the assumed convergence supplies an N_0 after which the subtracted sequence is within epsilon of L.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Substituting r_prime_N=r_N-a cancels a in the error from L+a, leaving exactly |x_N-r_N-L|; hence the shifted sequence converges to L+a.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The sequences are indexed by all integers N>=1, so the indexing domain is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Taking a=0 in the statement leaves the same finite limit, as step 2.1 shows."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Taking a=1 in step 2.1 shifts the limit from L to L+1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No spectral data, eigenvalues, or multiplicity cases occur in this sequence statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The epsilon condition in the Statement and steps 1.1 and 2.1 quantify all sufficiently large N."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Only one threshold N_0 is chosen for each epsilon using the given convergence; no arbitrary indexed family is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma asserts no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "constant finite difference",
+          "inputs": "x_N=N+5, r_N=N, L=5, a=3",
+          "calculation": "r_prime_N=N-3 and x_N-r_prime_N=8 for every N.",
+          "result": "The shifted finite limit is L+a=8."
+        }
+      ]
+    },
+    "ex-tgr-generalized-entropy-not-monotone-from-definition": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-density-operator",
+          "source_section": "Definition",
+          "quote": "A **density operator** on $H$ is a non-negative endomorphism $\\rho:H\\to H$ with $\\operatorname{tr}(\\rho)=1$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-tgr-finite-cutoff-outside-entropy",
+          "source_section": "Definition",
+          "quote": "Fix $k_B>0$ as a real scale.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-tensor-register-and-permutation",
+          "source_section": "Definition",
+          "quote": "An **ordered tensor register** consists of a finite ordered list of finite-dimensional complex inner-product spaces $H_0,\\ldots,H_{n-1}$, each equipped with a specified ordered orthonormal basis. Its space is $H_0\\otimes\\cdots\\otimes H_{n-1}$, with factors retained in the displayed order. The product basis is ordered lexicographically by its tuple of factor indices.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and $$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define $$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-exponential-is-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "The exponential function is continuous and strictly increasing on $\\mathbb R$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Both displayed matrices are self-adjoint, non-negative, and trace one, hence density operators.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The one-dimensional input partial trace leaves each matrix unchanged; their spectra are (1/2,1/2) and (1,0).",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Using the inverse-log definition, exp(0)=1, the reciprocal formula, and strict monotonicity gives log 1=0, log(1/2)=-log 2, and log 2>0; the entropy formula then gives k_B log 2 and 0.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The fixed additive term cancels, so G(1)-G(0)=-k_B log 2<0.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example uses nonzero spaces C and C^2 and contains no empty factor."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "rho_1 has a zero eigenvalue and step 3.1 applies the 0 log 0 convention from the Definition."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "rho_1 has eigenvalue one and step 3.1 obtains entropy zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "rho_0 has a repeated eigenvalue 1/2, counted twice in steps 2.1 and 3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The ordered set {0,1} has only two labels and no continuous or limiting endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The example fixes two explicit matrices and makes no arbitrary family selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example asserts no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "two one-qubit states",
+          "inputs": "rho_0=I_2/2, rho_1=diag(1,0)",
+          "calculation": "The spectra are (1/2,1/2) and (1,0); their entropies are k_B log 2 and 0.",
+          "result": "The fixed additive term cancels and G(1)<G(0)."
+        }
+      ]
+    }
+  }
+}

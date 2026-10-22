@@ -1,0 +1,1655 @@
+{
+  "version": 1,
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "batch": "50",
+  "scope": [
+    "def-nrqmx-finite-hermitian-frame-and-gram-pseudoinverse",
+    "lem-nrqmx-finite-hermitian-trace-inner-product",
+    "lem-nrqmx-frame-pseudoinverse-reconstruction",
+    "lem-nrqmx-bernoulli-hoeffding",
+    "thm-nrqmx-instrument-stinespring-register",
+    "thm-nrqmx-sharp-joint-measurability",
+    "alg-nrqmx-linear-tomography-procedure",
+    "thm-nrqmx-tomography-identifiability-stability",
+    "cex-nrqmx-same-povm-distinct-disturbance",
+    "ex-nrqmx-pauli-tomography"
+  ],
+  "contracts": {
+    "def-nrqmx-finite-hermitian-frame-and-gram-pseudoinverse": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition fixes positive d and m; synthesis sums run over the nonempty set {1,...,m}. It permits every frame operator to be zero, giving G=G+=0 and zero canonical dual, without claiming informational completeness in that case.",
+          "case_reasoning": "Definition fixes positive d and m; synthesis sums run over the nonempty set {1,...,m}. It permits every frame operator to be zero, giving G=G+=0 and zero canonical dual, without claiming informational completeness in that case. The data require positive d and m but allow a dependent or zero Hermitian family. The real Moore-Penrose inverse is defined also at singular Gram matrices; informational completeness is a definition, not assumed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero Hermitian entries are allowed; the real Moore–Penrose definition covers singular Gram matrices.",
+          "case_reasoning": "Zero Hermitian entries are allowed; the real Moore–Penrose definition covers singular Gram matrices. The data require positive d and m but allow a dependent or zero Hermitian family. The real Moore-Penrose inverse is defined also at singular Gram matrices; informational completeness is a definition, not assumed."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For m=1 the finite synthesis, Gram, and dual sums in the Definition are singleton sums.",
+          "case_reasoning": "For m=1 the finite synthesis, Gram, and dual sums in the Definition are singleton sums. The data require positive d and m but allow a dependent or zero Hermitian family. The real Moore-Penrose inverse is defined also at singular Gram matrices; informational completeness is a definition, not assumed."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Definition explicitly uses the Moore–Penrose inverse for potentially singular Gram matrices, including dependent families.",
+          "case_reasoning": "The Definition explicitly uses the Moore–Penrose inverse for potentially singular Gram matrices, including dependent families. The data require positive d and m but allow a dependent or zero Hermitian family. The real Moore-Penrose inverse is defined also at singular Gram matrices; informational completeness is a definition, not assumed."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint parameter or endpoint case occurs in the Definition.",
+          "case_reasoning": "No endpoint parameter or endpoint case occurs in the Definition. The data require positive d and m but allow a dependent or zero Hermitian family. The real Moore-Penrose inverse is defined also at singular Gram matrices; informational completeness is a definition, not assumed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "All operators and sums in the Definition are finite and explicitly indexed.",
+          "case_reasoning": "All operators and sums in the Definition are finite and explicitly indexed. The data require positive d and m but allow a dependent or zero Hermitian family. The real Moore-Penrose inverse is defined also at singular Gram matrices; informational completeness is a definition, not assumed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition asserts no equivalence.",
+          "case_reasoning": "The Definition asserts no equivalence. The data require positive d and m but allow a dependent or zero Hermitian family. The real Moore-Penrose inverse is defined also at singular Gram matrices; informational completeness is a definition, not assumed."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition asserts no equivalence.",
+          "case_reasoning": "The Definition asserts no equivalence. The data require positive d and m but allow a dependent or zero Hermitian family. The real Moore-Penrose inverse is defined also at singular Gram matrices; informational completeness is a definition, not assumed."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "The argument is symbolic for all finite inputs; no separate numerical enumeration is needed.",
+      "supplier_excerpts": [
+        {
+          "supplier": "lem-qsm-matrix-state-calculus",
+          "carrier": "items/lem-qsm-matrix-state-calculus.md",
+          "status": "Published carrier inspected in full for this dependency interface; no additional certification asserted.",
+          "source_section": "Statement",
+          "exact_statement": "Use the following conventions on a complex inner-product space $H$ of dimension $D\\geq1$, with inner product linear in its first argument. For an endomorphism $A$, define $\\operatorname{Tr}A:=\\sum_{j=1}^D\\langle Ae_j,e_j\\rangle$ in an orthonormal basis; step 3.1 proves basis independence. For any Hermitian $M$, its **positive spectral subspace** (called its positive support here) is $S_M:=\\bigoplus_{\\lambda>0}\\ker(M-\\lambda I)$; when $M\\geq0$ this equals $(\\ker M)^\\perp$. Its support logarithm is $\\log(M|_{S_M}):=\\sum_{\\lambda>0}(\\log\\lambda)P_\\lambda|_{S_M}$, where $P_\\lambda$ is the orthogonal projection onto that eigenspace. No value $\\log0$ is assigned; for $M=0$ this is the unique endomorphism of the zero space. For the set $\\mathcal D(H)$ of positive semidefinite Hermitian endomorphisms with trace one, a point $\\rho$ is **extreme** if every equality $\\rho=t\\sigma+(1-t)\\tau$ with $\\sigma,\\tau\\in\\mathcal D(H)$ and $0<t<1$ implies $\\sigma=\\tau=\\rho$.\n\nLet $H$ be a complex inner-product space of finite dimension $D\\geq1$, with inner product linear in its first argument. Every Hermitian endomorphism $M$ has an orthonormal eigenbasis with real eigenvalues. For a real function $f$ on its finite spectrum, define $f(M)$ by its spectral projections; this definition is independent of the choice of eigenbasis. In particular positive square roots, exponentials, and logarithms on positive supports are well defined.\n\nFor a density matrix $\\rho$ on $H$, meaning a Hermitian positive semidefinite operator with $\\operatorname{Tr}\\rho=1$, $\\operatorname{Tr}(\\rho A)=\\sum_jp_j\\langle Au_j,u_j\\rangle$ for bounded $A$, where $\\rho=\\sum_jp_j|u_j\\rangle\\langle u_j|$. The weighted form $(X,Y)_\\rho=\\operatorname{Tr}(\\rho X^*Y)$ satisfies Cauchy–Schwarz, $|(X,Y)_\\rho|^2\\leq(X,X)_\\rho(Y,Y)_\\rho$. Finally, $\\operatorname{Tr}(\\rho^2)\\leq1$, with equality exactly for rank-one densities, and those are exactly the extreme points of the finite density-matrix set.",
+          "relevant_hypotheses_and_conventions": "Use only under the exact domains, dimensions, and conventions in the quoted Statement section; the consumer restates the applicable hypotheses in its own Statement and Facts & Assumptions.",
+          "supplier_proof_status": "Carrier status is published; the complete current Proof section was inspected for its actual hypotheses and argument. This is a Step 1 dependency record, not independent approval.",
+          "consumer_use": "The exact definition/interface supplies the setup used in this item."
+        },
+        {
+          "supplier": "lem-qsm-dt-finite-trace-pairing-cyclicity",
+          "carrier": "items/lem-qsm-dt-finite-trace-pairing-cyclicity.md",
+          "status": "Published carrier inspected in full for this dependency interface; no additional certification asserted.",
+          "source_section": "Statement",
+          "exact_statement": "Let $d,e\\geq1$. For $A\\in M_{e\\times d}(\\mathbb C)$ and $B\\in M_{d\\times e}(\\mathbb C)$,\n$$ \\operatorname{Tr}_e(AB)=\\operatorname{Tr}_d(BA), $$\nwhere $\\operatorname{Tr}_r$ is the diagonal-sum trace on $M_r(\\mathbb C)$. This includes cyclicity for square matrices. For $C\\in M_d(\\mathbb C)$, the bilinear trace pairing is nondegenerate: if $\\operatorname{Tr}_d(XC)=0$ for every $X\\in M_d(\\mathbb C)$, then $C=0$. No adjoint is inserted in this pairing.",
+          "relevant_hypotheses_and_conventions": "Use only under the exact domains, dimensions, and conventions in the quoted Statement section; the consumer restates the applicable hypotheses in its own Statement and Facts & Assumptions.",
+          "supplier_proof_status": "Carrier status is published; the complete current Proof section was inspected for its actual hypotheses and argument. This is a Step 1 dependency record, not independent approval.",
+          "consumer_use": "The exact definition/interface supplies the setup used in this item."
+        },
+        {
+          "supplier": "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+          "carrier": "items/thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces.md",
+          "status": "Published carrier inspected in full for this dependency interface; no additional certification asserted.",
+          "source_section": "Statement",
+          "exact_statement": "For vectors $u,v$ in a real or complex inner product space,\n\n$$|\\langle u,v\\rangle|\\le\\lVert u\\rVert\\lVert v\\rVert.$$\n\nEquality holds if and only if $u$ and $v$ are linearly dependent, including the case in which either vector is zero.",
+          "relevant_hypotheses_and_conventions": "Use only under the exact domains, dimensions, and conventions in the quoted Statement section; the consumer restates the applicable hypotheses in its own Statement and Facts & Assumptions.",
+          "supplier_proof_status": "Carrier status is published; the complete current Proof section was inspected for its actual hypotheses and argument. This is a Step 1 dependency record, not independent approval.",
+          "consumer_use": "The exact definition/interface supplies the setup used in this item."
+        },
+        {
+          "supplier": "def-moore-penrose-pseudoinverse",
+          "carrier": "items/def-moore-penrose-pseudoinverse.md",
+          "status": "Published carrier inspected in full for this dependency interface; no additional certification asserted.",
+          "source_section": "Definition",
+          "exact_statement": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, and let\n$A\\in M_{m\\times n}(\\mathbb F)$. A matrix $B\\in M_{n\\times m}(\\mathbb F)$ is a\n**Moore--Penrose pseudoinverse** of $A$ when\n\n$$ABA=A,\\qquad BAB=B,$$\n\nand the two square products are self-adjoint:\n\n$$ (AB)^*=AB,\\qquad (BA)^*=BA. $$\n\nWhen such a matrix exists and is unique, it is denoted by $A^+$.\n\nThe four displayed relations are the **Penrose equations**. They are written in\nthe matrix product and adjoint conventions of\nRectangular matrix multiplication and the identity matrix $I_n$, including zero-sized shapes and\nIn orthonormal bases, the matrix of the adjoint is the conjugate transpose of the matrix.",
+          "relevant_hypotheses_and_conventions": "Use only under the exact domains, dimensions, and conventions in the quoted Definition section; the consumer restates the applicable hypotheses in its own Statement and Facts & Assumptions.",
+          "supplier_proof_status": "Carrier status is published; this definition has no Proof section, as appropriate to its item kind. Its exact interface was inspected.",
+          "consumer_use": "The exact definition/interface supplies the setup used in this item."
+        },
+        {
+          "supplier": "thm-moore-penrose-pseudoinverse-exists-and-is-unique",
+          "carrier": "items/thm-moore-penrose-pseudoinverse-exists-and-is-unique.md",
+          "status": "Published carrier inspected in full for this dependency interface; no additional certification asserted.",
+          "source_section": "Statement",
+          "exact_statement": "For every matrix $A\\in M_{m\\times n}(\\mathbb F)$ over $\\mathbb F=\\mathbb R$ or\n$\\mathbb C$, there exists a unique matrix $A^+\\in M_{n\\times m}(\\mathbb F)$\nsatisfying the four Penrose equations of\nThe Moore--Penrose pseudoinverse $A^+$ as the solution of the four Penrose equations.",
+          "relevant_hypotheses_and_conventions": "Use only under the exact domains, dimensions, and conventions in the quoted Statement section; the consumer restates the applicable hypotheses in its own Statement and Facts & Assumptions.",
+          "supplier_proof_status": "Carrier status is published; the complete current Proof section was inspected for its actual hypotheses and argument. This is a Step 1 dependency record, not independent approval.",
+          "consumer_use": "The exact definition/interface supplies the setup used in this item."
+        },
+        {
+          "supplier": "lem-nrqmx-finite-hermitian-trace-inner-product",
+          "carrier": "items/lem-nrqmx-finite-hermitian-trace-inner-product.md",
+          "status": "Draft carrier authored or inspected in batch 50; proof status is recorded separately.",
+          "source_section": "Statement",
+          "exact_statement": "Let $\\mathsf H_d$ be the real vector space of Hermitian $d\\times d$ complex matrices from the preceding definition. The pairing $\\langle A,B\\rangle_{\\mathrm{HS}}=\\operatorname{Tr}(AB)$ is real-valued, symmetric, real-bilinear, and positive definite on $\\mathsf H_d$. Its associated norm is $\\|A\\|_{\\mathrm{HS}}=\\sqrt{\\operatorname{Tr}(A^2)}$. For every $m\\ge1$ and finite family $F_1,\\ldots,F_m\\in\\mathsf H_d$, the Gram matrix $G_{ab}=\\operatorname{Tr}(F_aF_b)$ is real symmetric positive semidefinite, equals $S^*S$ for the synthesis map $S c=\\sum_ac_aF_a$, and satisfies $\\ker G=\\ker S$.",
+          "relevant_hypotheses_and_conventions": "Use only under the exact domains, dimensions, and conventions in the quoted Statement section; the consumer restates the applicable hypotheses in its own Statement and Facts & Assumptions.",
+          "supplier_proof_status": "Carrier status is draft; the complete current Proof section was inspected for its actual hypotheses and argument. This is a Step 1 dependency record, not independent approval.",
+          "consumer_use": "Definition validity is established by the linked local result."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "notes": "Checked the exact declared interfaces, hypotheses, finite/degenerate cases, and use of each supplier in this item. No independent proof approval is asserted."
+      },
+      "repair_confidence": 1,
+      "current_boundary_worksheet": {
+        "proposal": "research/physics-non-fluid-129-2026-10-21-r2-owner-step2-boundary-proposal-5/proposal.json",
+        "source_sha256": "910a77d9bff232078208083bfcd931dddc2ec55a0ab3ab8fc3138074626ac24e",
+        "qualification": "Released complete current source/eight-case semantic worksheet; root transcribed exact current rows. No independent acceptance or finite computation asserted."
+      }
+    },
+    "lem-nrqmx-finite-hermitian-trace-inner-product": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-nrqmx-finite-hermitian-frame-and-gram-pseudoinverse",
+          "source_section": "Definition",
+          "quote": "For an integer $d\\ge1$, let $\\mathsf H_d=\\{A\\in M_d(\\mathbb C):A=A^*\\}$, regarded as a real vector space. For $A,B\\in\\mathsf H_d$, define the trace pairing $\\langle A,B\\rangle_{\\mathrm{HS}}:=\\operatorname{Tr}(AB)$ and write $\\|A\\|_{\\mathrm{HS}}:=\\sqrt{\\operatorname{Tr}(A^2)}$. The following A-page lemma verifies that the pairing is a real inner product and that this expression is its norm.\n\nLet $m\\ge1$ and let $F=(F_a)_{a=1}^m$ be a finite family in $\\mathsf H_d$. It is informationally complete when its real linear span is all of $\\mathsf H_d$. Its synthesis map is $S:\\mathbb R^m\\to\\mathsf H_d$, $S c=\\sum_{a=1}^m c_aF_a$. Define the Gram matrix by $G_{ab}:=\\operatorname{Tr}(F_aF_b)$; the following well-definedness lemma establishes that the trace pairing makes $S^*$ well-defined and that $G=S^*S$ is real symmetric positive semidefinite.\n\nFor this positive semidefinite real matrix $G$, let $G^+$ be its unique Moore–Penrose pseudoinverse in $M_m(\\mathbb R)$, defined by the four Penrose equations over $\\mathbb R$. Define the canonical dual operators $D_a=\\sum_{b=1}^m(G^+)_{ba}F_b$ and the reconstruction map $D:\\mathbb R^m\\to\\mathsf H_d$, $D c=\\sum_{a=1}^m c_aD_a$. A later A-page lemma identifies this finite pseudoinverse with its spectral formula.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qsm-dt-finite-trace-pairing-cyclicity",
+          "source_section": "Statement",
+          "quote": "Let $d,e\\geq1$. For $A\\in M_{e\\times d}(\\mathbb C)$ and $B\\in M_{d\\times e}(\\mathbb C)$,\n$$ \\operatorname{Tr}_e(AB)=\\operatorname{Tr}_d(BA), $$\nwhere $\\operatorname{Tr}_r$ is the diagonal-sum trace on $M_r(\\mathbb C)$. This includes cyclicity for square matrices. For $C\\in M_d(\\mathbb C)$, the bilinear trace pairing is nondegenerate: if $\\operatorname{Tr}_d(XC)=0$ for every $X\\in M_d(\\mathbb C)$, then $C=0$. No adjoint is inserted in this pairing.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qsm-matrix-state-calculus",
+          "source_section": "Statement",
+          "quote": "Use the following conventions on a complex inner-product space $H$ of dimension $D\\geq1$, with inner product linear in its first argument. For an endomorphism $A$, define $\\operatorname{Tr}A:=\\sum_{j=1}^D\\langle Ae_j,e_j\\rangle$ in an orthonormal basis; step 3.1 proves basis independence. For any Hermitian $M$, its **positive spectral subspace** (called its positive support here) is $S_M:=\\bigoplus_{\\lambda>0}\\ker(M-\\lambda I)$; when $M\\geq0$ this equals $(\\ker M)^\\perp$. Its support logarithm is $\\log(M|_{S_M}):=\\sum_{\\lambda>0}(\\log\\lambda)P_\\lambda|_{S_M}$, where $P_\\lambda$ is the orthogonal projection onto that eigenspace. No value $\\log0$ is assigned; for $M=0$ this is the unique endomorphism of the zero space. For the set $\\mathcal D(H)$ of positive semidefinite Hermitian endomorphisms with trace one, a point $\\rho$ is **extreme** if every equality $\\rho=t\\sigma+(1-t)\\tau$ with $\\sigma,\\tau\\in\\mathcal D(H)$ and $0<t<1$ implies $\\sigma=\\tau=\\rho$.\n\nLet $H$ be a complex inner-product space of finite dimension $D\\geq1$, with inner product linear in its first argument. Every Hermitian endomorphism $M$ has an orthonormal eigenbasis with real eigenvalues. For a real function $f$ on its finite spectrum, define $f(M)$ by its spectral projections; this definition is independent of the choice of eigenbasis. In particular positive square roots, exponentials, and logarithms on positive supports are well defined.\n\nFor a density matrix $\\rho$ on $H$, meaning a Hermitian positive semidefinite operator with $\\operatorname{Tr}\\rho=1$, $\\operatorname{Tr}(\\rho A)=\\sum_jp_j\\langle Au_j,u_j\\rangle$ for bounded $A$, where $\\rho=\\sum_jp_j|u_j\\rangle\\langle u_j|$. The weighted form $(X,Y)_\\rho=\\operatorname{Tr}(\\rho X^*Y)$ satisfies Cauchy–Schwarz, $|(X,Y)_\\rho|^2\\leq(X,X)_\\rho(Y,Y)_\\rho$. Finally, $\\operatorname{Tr}(\\rho^2)\\leq1$, with equality exactly for rank-one densities, and those are exactly the extreme points of the finite density-matrix set.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+          "source_section": "Statement",
+          "quote": "For vectors $u,v$ in a real or complex inner product space,\n\n$$|\\langle u,v\\rangle|\\le\\lVert u\\rVert\\lVert v\\rVert.$$\n\nEquality holds if and only if $u$ and $v$ are linearly dependent, including the case in which either vector is zero.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "For Hermitian $A,B$, $\\overline{\\operatorname{Tr}(AB)}=\\operatorname{Tr}((AB)^*)=\\operatorname{Tr}(BA)=\\operatorname{Tr}(AB)$ by [F2]. The trace is additive and real-homogeneous, so the pairing is real-valued, symmetric, and real-bilinear.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Diagonalize $A\\in\\mathsf H_d$ by [F3] with real eigenvalues $\\lambda_1,\\ldots,\\lambda_d$. Then $\\operatorname{Tr}(A^2)=\\sum_j\\lambda_j^2\\ge0$, with equality exactly when all $\\lambda_j=0$, hence exactly when $A=0$. This proves positive definiteness and the displayed square-root formula.",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "For $c\\in\\mathbb R^m$, bilinearity gives $c^\\mathsf T Gc=\\operatorname{Tr}((Sc)^2)=\\|Sc\\|_{\\mathrm{HS}}^2\\ge0$. For $X\\in\\mathsf H_d$, the vector $v$ with coordinates $v_a=\\operatorname{Tr}(F_aX)$ satisfies $\\langle Sc,X\\rangle_{\\mathrm{HS}}=c^\\mathsf Tv$ for every $c$, so it is $S^*X$. By [F2], $v_a=\\operatorname{Tr}(XF_a)$; hence the matrix of $S^*S$ is precisely $G$. The equality $\\langle c,Gc\\rangle=\\|Sc\\|_{\\mathrm{HS}}^2$ implies $\\ker G=\\ker S$: $Sc=0$ gives $Gc=0$, while $Gc=0$ gives $\\|Sc\\|_{\\mathrm{HS}}^2=0$ and hence $Sc=0$ by step 2.1. By [F4], $|\\langle A,B\\rangle_{\\mathrm{HS}}|\\le\\|A\\|_{\\mathrm{HS}}\\|B\\|_{\\mathrm{HS}}$; expanding $\\|A+B\\|_{\\mathrm{HS}}^2$ and applying this bound gives $\\|A+B\\|_{\\mathrm{HS}}\\le\\|A\\|_{\\mathrm{HS}}+\\|B\\|_{\\mathrm{HS}}$. Thus the formula is a norm.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "F4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement requires a positive number m of frame operators and positive matrix dimension inherited from the Definition; zero operators are still allowed. Step 3.1 gives G=S* S and identical zero kernels when all frame operators vanish."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 handles A=0, and step 3.1 gives G=0 and matching kernels for a zero family."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 apply to a singleton family without a separate case assumption."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 proves the Gram/kernel identities for arbitrary finite families, including linearly dependent families."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint parameter occurs in the Statement.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/drift_materialization (gpt-6.1-sol owner)",
+            "reason": "For the endpoint axis, this finite algebraic claim has no interval to vary: Trace cyclicity and Hermitian eigenvalues prove a real positive pairing; the Gram calculation identifies the synthesis kernel, but the top-level result is not an iff criterion.",
+            "item_sha256": "26379ccab3e29da1734bb0201dcad5b68a316936b7cefccfc18528d63b9a605f",
+            "row_sha256": "29fc12ebadd6013dc017ca323aa6cff1888c180f61a27ed01c13e88f2d00eb27"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 uses finite coordinate sums and the explicit adjoint vector; no family of choices is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no equivalence.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/drift_materialization (gpt-6.1-sol owner)",
+            "reason": "The public claim and its entire argument have been read: Trace cyclicity and Hermitian eigenvalues prove a real positive pairing; the Gram calculation identifies the synthesis kernel, but the top-level result is not an iff criterion.",
+            "item_sha256": "26379ccab3e29da1734bb0201dcad5b68a316936b7cefccfc18528d63b9a605f",
+            "row_sha256": "8cc8dcde345f9af45440ffe2d14d3a5fd1b14958e7007e6080305a5a94b35fcc"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no equivalence.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/drift_materialization (gpt-6.1-sol owner)",
+            "reason": "The public claim and its entire argument have been read: Trace cyclicity and Hermitian eigenvalues prove a real positive pairing; the Gram calculation identifies the synthesis kernel, but the top-level result is not an iff criterion.",
+            "item_sha256": "26379ccab3e29da1734bb0201dcad5b68a316936b7cefccfc18528d63b9a605f",
+            "row_sha256": "e94cf68f7d647e4281cd9c09200edbe84199b3c3657c72e24c1387a862ffe7ad"
+          }
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "The argument is symbolic for all finite inputs; no separate numerical enumeration is needed.",
+      "supplier_excerpts": [
+        {
+          "supplier": "def-nrqmx-finite-hermitian-frame-and-gram-pseudoinverse",
+          "carrier": "items/def-nrqmx-finite-hermitian-frame-and-gram-pseudoinverse.md",
+          "status": "Draft carrier authored or inspected in batch 50; proof status is recorded separately.",
+          "source_section": "Definition",
+          "exact_statement": "For an integer $d\\ge1$, let $\\mathsf H_d=\\{A\\in M_d(\\mathbb C):A=A^*\\}$, regarded as a real vector space. For $A,B\\in\\mathsf H_d$, define the trace pairing $\\langle A,B\\rangle_{\\mathrm{HS}}:=\\operatorname{Tr}(AB)$ and write $\\|A\\|_{\\mathrm{HS}}:=\\sqrt{\\operatorname{Tr}(A^2)}$. The following A-page lemma verifies that the pairing is a real inner product and that this expression is its norm.\n\nLet $m\\ge1$ and let $F=(F_a)_{a=1}^m$ be a finite family in $\\mathsf H_d$. It is informationally complete when its real linear span is all of $\\mathsf H_d$. Its synthesis map is $S:\\mathbb R^m\\to\\mathsf H_d$, $S c=\\sum_{a=1}^m c_aF_a$. Define the Gram matrix by $G_{ab}:=\\operatorname{Tr}(F_aF_b)$; the following well-definedness lemma establishes that the trace pairing makes $S^*$ well-defined and that $G=S^*S$ is real symmetric positive semidefinite.\n\nFor this positive semidefinite real matrix $G$, let $G^+$ be its unique Moore–Penrose pseudoinverse in $M_m(\\mathbb R)$, defined by the four Penrose equations over $\\mathbb R$. Define the canonical dual operators $D_a=\\sum_{b=1}^m(G^+)_{ba}F_b$ and the reconstruction map $D:\\mathbb R^m\\to\\mathsf H_d$, $D c=\\sum_{a=1}^m c_aD_a$. A later A-page lemma identifies this finite pseudoinverse with its spectral formula.",
+          "relevant_hypotheses_and_conventions": "Use only under the exact domains, dimensions, and conventions in the quoted Definition section; the consumer restates the applicable hypotheses in its own Statement and Facts & Assumptions.",
+          "supplier_proof_status": "Carrier status is draft; this definition has no Proof section, as appropriate to its item kind. Its exact interface was inspected.",
+          "consumer_use": "F1 is used in proof steps 1.1, 3.1"
+        },
+        {
+          "supplier": "lem-qsm-matrix-state-calculus",
+          "carrier": "items/lem-qsm-matrix-state-calculus.md",
+          "status": "Published carrier inspected in full for this dependency interface; no additional certification asserted.",
+          "source_section": "Statement",
+          "exact_statement": "Use the following conventions on a complex inner-product space $H$ of dimension $D\\geq1$, with inner product linear in its first argument. For an endomorphism $A$, define $\\operatorname{Tr}A:=\\sum_{j=1}^D\\langle Ae_j,e_j\\rangle$ in an orthonormal basis; step 3.1 proves basis independence. For any Hermitian $M$, its **positive spectral subspace** (called its positive support here) is $S_M:=\\bigoplus_{\\lambda>0}\\ker(M-\\lambda I)$; when $M\\geq0$ this equals $(\\ker M)^\\perp$. Its support logarithm is $\\log(M|_{S_M}):=\\sum_{\\lambda>0}(\\log\\lambda)P_\\lambda|_{S_M}$, where $P_\\lambda$ is the orthogonal projection onto that eigenspace. No value $\\log0$ is assigned; for $M=0$ this is the unique endomorphism of the zero space. For the set $\\mathcal D(H)$ of positive semidefinite Hermitian endomorphisms with trace one, a point $\\rho$ is **extreme** if every equality $\\rho=t\\sigma+(1-t)\\tau$ with $\\sigma,\\tau\\in\\mathcal D(H)$ and $0<t<1$ implies $\\sigma=\\tau=\\rho$.\n\nLet $H$ be a complex inner-product space of finite dimension $D\\geq1$, with inner product linear in its first argument. Every Hermitian endomorphism $M$ has an orthonormal eigenbasis with real eigenvalues. For a real function $f$ on its finite spectrum, define $f(M)$ by its spectral projections; this definition is independent of the choice of eigenbasis. In particular positive square roots, exponentials, and logarithms on positive supports are well defined.\n\nFor a density matrix $\\rho$ on $H$, meaning a Hermitian positive semidefinite operator with $\\operatorname{Tr}\\rho=1$, $\\operatorname{Tr}(\\rho A)=\\sum_jp_j\\langle Au_j,u_j\\rangle$ for bounded $A$, where $\\rho=\\sum_jp_j|u_j\\rangle\\langle u_j|$. The weighted form $(X,Y)_\\rho=\\operatorname{Tr}(\\rho X^*Y)$ satisfies Cauchy–Schwarz, $|(X,Y)_\\rho|^2\\leq(X,X)_\\rho(Y,Y)_\\rho$. Finally, $\\operatorname{Tr}(\\rho^2)\\leq1$, with equality exactly for rank-one densities, and those are exactly the extreme points of the finite density-matrix set.",
+          "relevant_hypotheses_and_conventions": "Use only under the exact domains, dimensions, and conventions in the quoted Statement section; the consumer restates the applicable hypotheses in its own Statement and Facts & Assumptions.",
+          "supplier_proof_status": "Carrier status is published; the complete current Proof section was inspected for its actual hypotheses and argument. This is a Step 1 dependency record, not independent approval.",
+          "consumer_use": "F3 is used in proof step 2.1"
+        },
+        {
+          "supplier": "lem-qsm-dt-finite-trace-pairing-cyclicity",
+          "carrier": "items/lem-qsm-dt-finite-trace-pairing-cyclicity.md",
+          "status": "Published carrier inspected in full for this dependency interface; no additional certification asserted.",
+          "source_section": "Statement",
+          "exact_statement": "Let $d,e\\geq1$. For $A\\in M_{e\\times d}(\\mathbb C)$ and $B\\in M_{d\\times e}(\\mathbb C)$,\n$$ \\operatorname{Tr}_e(AB)=\\operatorname{Tr}_d(BA), $$\nwhere $\\operatorname{Tr}_r$ is the diagonal-sum trace on $M_r(\\mathbb C)$. This includes cyclicity for square matrices. For $C\\in M_d(\\mathbb C)$, the bilinear trace pairing is nondegenerate: if $\\operatorname{Tr}_d(XC)=0$ for every $X\\in M_d(\\mathbb C)$, then $C=0$. No adjoint is inserted in this pairing.",
+          "relevant_hypotheses_and_conventions": "Use only under the exact domains, dimensions, and conventions in the quoted Statement section; the consumer restates the applicable hypotheses in its own Statement and Facts & Assumptions.",
+          "supplier_proof_status": "Carrier status is published; the complete current Proof section was inspected for its actual hypotheses and argument. This is a Step 1 dependency record, not independent approval.",
+          "consumer_use": "F2 is used in proof steps 1.1, 3.1"
+        },
+        {
+          "supplier": "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+          "carrier": "items/thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces.md",
+          "status": "Published carrier inspected in full for this dependency interface; no additional certification asserted.",
+          "source_section": "Statement",
+          "exact_statement": "For vectors $u,v$ in a real or complex inner product space,\n\n$$|\\langle u,v\\rangle|\\le\\lVert u\\rVert\\lVert v\\rVert.$$\n\nEquality holds if and only if $u$ and $v$ are linearly dependent, including the case in which either vector is zero.",
+          "relevant_hypotheses_and_conventions": "Use only under the exact domains, dimensions, and conventions in the quoted Statement section; the consumer restates the applicable hypotheses in its own Statement and Facts & Assumptions.",
+          "supplier_proof_status": "Carrier status is published; the complete current Proof section was inspected for its actual hypotheses and argument. This is a Step 1 dependency record, not independent approval.",
+          "consumer_use": "F4 is used in proof step 3.1"
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "notes": "Checked the exact declared interfaces, hypotheses, finite/degenerate cases, and use of each supplier in this item. No independent proof approval is asserted."
+      },
+      "repair_confidence": 1
+    },
+    "lem-nrqmx-frame-pseudoinverse-reconstruction": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-nrqmx-finite-hermitian-frame-and-gram-pseudoinverse",
+          "source_section": "Definition",
+          "quote": "For an integer $d\\ge1$, let $\\mathsf H_d=\\{A\\in M_d(\\mathbb C):A=A^*\\}$, regarded as a real vector space. For $A,B\\in\\mathsf H_d$, define the trace pairing $\\langle A,B\\rangle_{\\mathrm{HS}}:=\\operatorname{Tr}(AB)$ and write $\\|A\\|_{\\mathrm{HS}}:=\\sqrt{\\operatorname{Tr}(A^2)}$. The following A-page lemma verifies that the pairing is a real inner product and that this expression is its norm.\n\nLet $m\\ge1$ and let $F=(F_a)_{a=1}^m$ be a finite family in $\\mathsf H_d$. It is informationally complete when its real linear span is all of $\\mathsf H_d$. Its synthesis map is $S:\\mathbb R^m\\to\\mathsf H_d$, $S c=\\sum_{a=1}^m c_aF_a$. Define the Gram matrix by $G_{ab}:=\\operatorname{Tr}(F_aF_b)$; the following well-definedness lemma establishes that the trace pairing makes $S^*$ well-defined and that $G=S^*S$ is real symmetric positive semidefinite.\n\nFor this positive semidefinite real matrix $G$, let $G^+$ be its unique Moore–Penrose pseudoinverse in $M_m(\\mathbb R)$, defined by the four Penrose equations over $\\mathbb R$. Define the canonical dual operators $D_a=\\sum_{b=1}^m(G^+)_{ba}F_b$ and the reconstruction map $D:\\mathbb R^m\\to\\mathsf H_d$, $D c=\\sum_{a=1}^m c_aD_a$. A later A-page lemma identifies this finite pseudoinverse with its spectral formula.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-nrqmx-finite-hermitian-trace-inner-product",
+          "source_section": "Statement",
+          "quote": "Let $\\mathsf H_d$ be the real vector space of Hermitian $d\\times d$ complex matrices from the preceding definition. The pairing $\\langle A,B\\rangle_{\\mathrm{HS}}=\\operatorname{Tr}(AB)$ is real-valued, symmetric, real-bilinear, and positive definite on $\\mathsf H_d$. Its associated norm is $\\|A\\|_{\\mathrm{HS}}=\\sqrt{\\operatorname{Tr}(A^2)}$. For every $m\\ge1$ and finite family $F_1,\\ldots,F_m\\in\\mathsf H_d$, the Gram matrix $G_{ab}=\\operatorname{Tr}(F_aF_b)$ is real symmetric positive semidefinite, equals $S^*S$ for the synthesis map $S c=\\sum_ac_aF_a$, and satisfies $\\ker G=\\ker S$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qsm-matrix-state-calculus",
+          "source_section": "Statement",
+          "quote": "Use the following conventions on a complex inner-product space $H$ of dimension $D\\geq1$, with inner product linear in its first argument. For an endomorphism $A$, define $\\operatorname{Tr}A:=\\sum_{j=1}^D\\langle Ae_j,e_j\\rangle$ in an orthonormal basis; step 3.1 proves basis independence. For any Hermitian $M$, its **positive spectral subspace** (called its positive support here) is $S_M:=\\bigoplus_{\\lambda>0}\\ker(M-\\lambda I)$; when $M\\geq0$ this equals $(\\ker M)^\\perp$. Its support logarithm is $\\log(M|_{S_M}):=\\sum_{\\lambda>0}(\\log\\lambda)P_\\lambda|_{S_M}$, where $P_\\lambda$ is the orthogonal projection onto that eigenspace. No value $\\log0$ is assigned; for $M=0$ this is the unique endomorphism of the zero space. For the set $\\mathcal D(H)$ of positive semidefinite Hermitian endomorphisms with trace one, a point $\\rho$ is **extreme** if every equality $\\rho=t\\sigma+(1-t)\\tau$ with $\\sigma,\\tau\\in\\mathcal D(H)$ and $0<t<1$ implies $\\sigma=\\tau=\\rho$.\n\nLet $H$ be a complex inner-product space of finite dimension $D\\geq1$, with inner product linear in its first argument. Every Hermitian endomorphism $M$ has an orthonormal eigenbasis with real eigenvalues. For a real function $f$ on its finite spectrum, define $f(M)$ by its spectral projections; this definition is independent of the choice of eigenbasis. In particular positive square roots, exponentials, and logarithms on positive supports are well defined.\n\nFor a density matrix $\\rho$ on $H$, meaning a Hermitian positive semidefinite operator with $\\operatorname{Tr}\\rho=1$, $\\operatorname{Tr}(\\rho A)=\\sum_jp_j\\langle Au_j,u_j\\rangle$ for bounded $A$, where $\\rho=\\sum_jp_j|u_j\\rangle\\langle u_j|$. The weighted form $(X,Y)_\\rho=\\operatorname{Tr}(\\rho X^*Y)$ satisfies Cauchy–Schwarz, $|(X,Y)_\\rho|^2\\leq(X,X)_\\rho(Y,Y)_\\rho$. Finally, $\\operatorname{Tr}(\\rho^2)\\leq1$, with equality exactly for rank-one densities, and those are exactly the extreme points of the finite density-matrix set.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-moore-penrose-pseudoinverse",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, and let\n$A\\in M_{m\\times n}(\\mathbb F)$. A matrix $B\\in M_{n\\times m}(\\mathbb F)$ is a\n**Moore--Penrose pseudoinverse** of $A$ when\n\n$$ABA=A,\\qquad BAB=B,$$\n\nand the two square products are self-adjoint:\n\n$$ (AB)^*=AB,\\qquad (BA)^*=BA. $$\n\nWhen such a matrix exists and is unique, it is denoted by $A^+$.\n\nThe four displayed relations are the **Penrose equations**. They are written in\nthe matrix product and adjoint conventions of\nRectangular matrix multiplication and the identity matrix $I_n$, including zero-sized shapes and\nIn orthonormal bases, the matrix of the adjoint is the conjugate transpose of the matrix.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-moore-penrose-pseudoinverse-exists-and-is-unique",
+          "source_section": "Statement",
+          "quote": "For every matrix $A\\in M_{m\\times n}(\\mathbb F)$ over $\\mathbb F=\\mathbb R$ or\n$\\mathbb C$, there exists a unique matrix $A^+\\in M_{n\\times m}(\\mathbb F)$\nsatisfying the four Penrose equations of\nThe Moore--Penrose pseudoinverse $A^+$ as the solution of the four Penrose equations.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "By [F2], $G$ is real symmetric positive semidefinite, $G=S^*S$, and $\\ker G=\\ker S$. The coordinate formula for the adjoint is $(S^*X)_a=\\langle F_a,X\\rangle_{\\mathrm{HS}}=\\operatorname{Tr}(XF_a)$ by [F1] and [F2].",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Regard the real symmetric positive semidefinite matrix $G$ as a complex Hermitian matrix and apply [F3]. Its eigenvalues are real. If $z=x+iy$ is in the complex eigenspace for a real eigenvalue $\\lambda$, then realness of $G$ gives $Gx=\\lambda x$ and $Gy=\\lambda y$; thus that eigenspace is the complexification of its real eigenspace. Real eigenspaces for distinct eigenvalues are orthogonal, since $Gu=\\lambda u$, $Gv=\\mu v$, and symmetry give $(\\lambda-\\mu)u^{\\mathsf T}v=0$. Their real direct sum is $\\mathbb R^m$ because the complex eigenspaces span $\\mathbb C^m$ by [F3] and each is the complexification of its real eigenspace. Choosing a real orthonormal basis in each gives a real spectral resolution $G=\\sum_{\\lambda\\ge0}\\lambda P_\\lambda$ with real orthogonal projections whose sum is $I$. Put $H_0=\\sum_{\\lambda>0}\\lambda^{-1}P_\\lambda$. Orthogonality gives $GH_0G=G$, $H_0GH_0=H_0$, and $GH_0=H_0G=\\sum_{\\lambda>0}P_\\lambda$, which are self-adjoint. Thus $H_0$ satisfies the four Penrose equations [F4], and uniqueness in [F5] gives $H_0=G^+$. Consequently $Q=G^+G=\\sum_{\\lambda>0}P_\\lambda$ is an orthogonal projection and $\\ker Q=\\ker G$, so $\\operatorname{Ran}(I-Q)=\\ker G=\\ker S$ by [F2].",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "The synthesis map of the canonical dual is $D=SG^+$ by [F1]. For any $X\\in\\mathsf H_d$, the spanning hypothesis [A1] supplies $c\\in\\mathbb R^m$ with $X=Sc$. Then $$ D(S^*X)=SG^+S^*Sc=SG^+Gc=SQc=Sc=X, $$ because $c-Qc\\in\\operatorname{Ran}(I-Q)=\\ker S$ by step 2.1. The coordinates of $S^*X$ are $\\operatorname{Tr}(XF_a)$ by step 1.1, which proves the stated sum.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement requires d,m positive and a spanning family in the nonzero space of Hermitian matrices. Thus at least one synthesis direction and positive Gram eigenvalue exists. Step 2.1 leaves the possibly zero-dimensional Gram kernel unrestricted and sums only positive eigenvalues."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 includes zero eigenvalues and identifies their eigenspace as ker G; redundant frames are explicitly allowed."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The finite formulas in steps 1.1–3.1 remain valid when a one-element family spans H_d."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement allows redundant families, and steps 2.1–3.1 handle ker G through the orthogonal projection Q."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint parameter occurs in the Statement.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/drift_materialization (gpt-6.1-sol owner)",
+            "reason": "For the endpoint axis, this finite algebraic claim has no interval to vary: The spectral Penrose formula and synthesis projection reconstruct every Hermitian matrix from a spanning family, including redundant frames; no converse spanning characterization is claimed.",
+            "item_sha256": "930bbb7ce1105b2e096ae615f99a4a24fbdf54f74eba9a1a88dc0d56e2a2027e",
+            "row_sha256": "29fc12ebadd6013dc017ca323aa6cff1888c180f61a27ed01c13e88f2d00eb27"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 selects a coefficient vector for the fixed X from the spanning hypothesis; no simultaneous selection is required."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no equivalence.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/drift_materialization (gpt-6.1-sol owner)",
+            "reason": "The public claim and its entire argument have been read: The spectral Penrose formula and synthesis projection reconstruct every Hermitian matrix from a spanning family, including redundant frames; no converse spanning characterization is claimed.",
+            "item_sha256": "930bbb7ce1105b2e096ae615f99a4a24fbdf54f74eba9a1a88dc0d56e2a2027e",
+            "row_sha256": "8cc8dcde345f9af45440ffe2d14d3a5fd1b14958e7007e6080305a5a94b35fcc"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no equivalence.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/drift_materialization (gpt-6.1-sol owner)",
+            "reason": "The public claim and its entire argument have been read: The spectral Penrose formula and synthesis projection reconstruct every Hermitian matrix from a spanning family, including redundant frames; no converse spanning characterization is claimed.",
+            "item_sha256": "930bbb7ce1105b2e096ae615f99a4a24fbdf54f74eba9a1a88dc0d56e2a2027e",
+            "row_sha256": "e94cf68f7d647e4281cd9c09200edbe84199b3c3657c72e24c1387a862ffe7ad"
+          }
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "The argument is symbolic for all finite inputs; no separate numerical enumeration is needed.",
+      "supplier_excerpts": [
+        {
+          "supplier": "def-nrqmx-finite-hermitian-frame-and-gram-pseudoinverse",
+          "carrier": "items/def-nrqmx-finite-hermitian-frame-and-gram-pseudoinverse.md",
+          "status": "Draft carrier authored or inspected in batch 50; proof status is recorded separately.",
+          "source_section": "Definition",
+          "exact_statement": "For an integer $d\\ge1$, let $\\mathsf H_d=\\{A\\in M_d(\\mathbb C):A=A^*\\}$, regarded as a real vector space. For $A,B\\in\\mathsf H_d$, define the trace pairing $\\langle A,B\\rangle_{\\mathrm{HS}}:=\\operatorname{Tr}(AB)$ and write $\\|A\\|_{\\mathrm{HS}}:=\\sqrt{\\operatorname{Tr}(A^2)}$. The following A-page lemma verifies that the pairing is a real inner product and that this expression is its norm.\n\nLet $m\\ge1$ and let $F=(F_a)_{a=1}^m$ be a finite family in $\\mathsf H_d$. It is informationally complete when its real linear span is all of $\\mathsf H_d$. Its synthesis map is $S:\\mathbb R^m\\to\\mathsf H_d$, $S c=\\sum_{a=1}^m c_aF_a$. Define the Gram matrix by $G_{ab}:=\\operatorname{Tr}(F_aF_b)$; the following well-definedness lemma establishes that the trace pairing makes $S^*$ well-defined and that $G=S^*S$ is real symmetric positive semidefinite.\n\nFor this positive semidefinite real matrix $G$, let $G^+$ be its unique Moore–Penrose pseudoinverse in $M_m(\\mathbb R)$, defined by the four Penrose equations over $\\mathbb R$. Define the canonical dual operators $D_a=\\sum_{b=1}^m(G^+)_{ba}F_b$ and the reconstruction map $D:\\mathbb R^m\\to\\mathsf H_d$, $D c=\\sum_{a=1}^m c_aD_a$. A later A-page lemma identifies this finite pseudoinverse with its spectral formula.",
+          "relevant_hypotheses_and_conventions": "Use only under the exact domains, dimensions, and conventions in the quoted Definition section; the consumer restates the applicable hypotheses in its own Statement and Facts & Assumptions.",
+          "supplier_proof_status": "Carrier status is draft; this definition has no Proof section, as appropriate to its item kind. Its exact interface was inspected.",
+          "consumer_use": "F1 is used in proof steps 1.1, 3.1"
+        },
+        {
+          "supplier": "lem-nrqmx-finite-hermitian-trace-inner-product",
+          "carrier": "items/lem-nrqmx-finite-hermitian-trace-inner-product.md",
+          "status": "Draft carrier authored or inspected in batch 50; proof status is recorded separately.",
+          "source_section": "Statement",
+          "exact_statement": "Let $\\mathsf H_d$ be the real vector space of Hermitian $d\\times d$ complex matrices from the preceding definition. The pairing $\\langle A,B\\rangle_{\\mathrm{HS}}=\\operatorname{Tr}(AB)$ is real-valued, symmetric, real-bilinear, and positive definite on $\\mathsf H_d$. Its associated norm is $\\|A\\|_{\\mathrm{HS}}=\\sqrt{\\operatorname{Tr}(A^2)}$. For every $m\\ge1$ and finite family $F_1,\\ldots,F_m\\in\\mathsf H_d$, the Gram matrix $G_{ab}=\\operatorname{Tr}(F_aF_b)$ is real symmetric positive semidefinite, equals $S^*S$ for the synthesis map $S c=\\sum_ac_aF_a$, and satisfies $\\ker G=\\ker S$.",
+          "relevant_hypotheses_and_conventions": "Use only under the exact domains, dimensions, and conventions in the quoted Statement section; the consumer restates the applicable hypotheses in its own Statement and Facts & Assumptions.",
+          "supplier_proof_status": "Carrier status is draft; the complete current Proof section was inspected for its actual hypotheses and argument. This is a Step 1 dependency record, not independent approval.",
+          "consumer_use": "F2 is used in proof steps 1.1, 2.1, 3.1"
+        },
+        {
+          "supplier": "lem-qsm-matrix-state-calculus",
+          "carrier": "items/lem-qsm-matrix-state-calculus.md",
+          "status": "Published carrier inspected in full for this dependency interface; no additional certification asserted.",
+          "source_section": "Statement",
+          "exact_statement": "Use the following conventions on a complex inner-product space $H$ of dimension $D\\geq1$, with inner product linear in its first argument. For an endomorphism $A$, define $\\operatorname{Tr}A:=\\sum_{j=1}^D\\langle Ae_j,e_j\\rangle$ in an orthonormal basis; step 3.1 proves basis independence. For any Hermitian $M$, its **positive spectral subspace** (called its positive support here) is $S_M:=\\bigoplus_{\\lambda>0}\\ker(M-\\lambda I)$; when $M\\geq0$ this equals $(\\ker M)^\\perp$. Its support logarithm is $\\log(M|_{S_M}):=\\sum_{\\lambda>0}(\\log\\lambda)P_\\lambda|_{S_M}$, where $P_\\lambda$ is the orthogonal projection onto that eigenspace. No value $\\log0$ is assigned; for $M=0$ this is the unique endomorphism of the zero space. For the set $\\mathcal D(H)$ of positive semidefinite Hermitian endomorphisms with trace one, a point $\\rho$ is **extreme** if every equality $\\rho=t\\sigma+(1-t)\\tau$ with $\\sigma,\\tau\\in\\mathcal D(H)$ and $0<t<1$ implies $\\sigma=\\tau=\\rho$.\n\nLet $H$ be a complex inner-product space of finite dimension $D\\geq1$, with inner product linear in its first argument. Every Hermitian endomorphism $M$ has an orthonormal eigenbasis with real eigenvalues. For a real function $f$ on its finite spectrum, define $f(M)$ by its spectral projections; this definition is independent of the choice of eigenbasis. In particular positive square roots, exponentials, and logarithms on positive supports are well defined.\n\nFor a density matrix $\\rho$ on $H$, meaning a Hermitian positive semidefinite operator with $\\operatorname{Tr}\\rho=1$, $\\operatorname{Tr}(\\rho A)=\\sum_jp_j\\langle Au_j,u_j\\rangle$ for bounded $A$, where $\\rho=\\sum_jp_j|u_j\\rangle\\langle u_j|$. The weighted form $(X,Y)_\\rho=\\operatorname{Tr}(\\rho X^*Y)$ satisfies Cauchy–Schwarz, $|(X,Y)_\\rho|^2\\leq(X,X)_\\rho(Y,Y)_\\rho$. Finally, $\\operatorname{Tr}(\\rho^2)\\leq1$, with equality exactly for rank-one densities, and those are exactly the extreme points of the finite density-matrix set.",
+          "relevant_hypotheses_and_conventions": "Use only under the exact domains, dimensions, and conventions in the quoted Statement section; the consumer restates the applicable hypotheses in its own Statement and Facts & Assumptions.",
+          "supplier_proof_status": "Carrier status is published; the complete current Proof section was inspected for its actual hypotheses and argument. This is a Step 1 dependency record, not independent approval.",
+          "consumer_use": "F3 is used in proof step 2.1"
+        },
+        {
+          "supplier": "def-moore-penrose-pseudoinverse",
+          "carrier": "items/def-moore-penrose-pseudoinverse.md",
+          "status": "Published carrier inspected in full for this dependency interface; no additional certification asserted.",
+          "source_section": "Definition",
+          "exact_statement": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, and let\n$A\\in M_{m\\times n}(\\mathbb F)$. A matrix $B\\in M_{n\\times m}(\\mathbb F)$ is a\n**Moore--Penrose pseudoinverse** of $A$ when\n\n$$ABA=A,\\qquad BAB=B,$$\n\nand the two square products are self-adjoint:\n\n$$ (AB)^*=AB,\\qquad (BA)^*=BA. $$\n\nWhen such a matrix exists and is unique, it is denoted by $A^+$.\n\nThe four displayed relations are the **Penrose equations**. They are written in\nthe matrix product and adjoint conventions of\nRectangular matrix multiplication and the identity matrix $I_n$, including zero-sized shapes and\nIn orthonormal bases, the matrix of the adjoint is the conjugate transpose of the matrix.",
+          "relevant_hypotheses_and_conventions": "Use only under the exact domains, dimensions, and conventions in the quoted Definition section; the consumer restates the applicable hypotheses in its own Statement and Facts & Assumptions.",
+          "supplier_proof_status": "Carrier status is published; this definition has no Proof section, as appropriate to its item kind. Its exact interface was inspected.",
+          "consumer_use": "F4 is used in proof step 2.1"
+        },
+        {
+          "supplier": "thm-moore-penrose-pseudoinverse-exists-and-is-unique",
+          "carrier": "items/thm-moore-penrose-pseudoinverse-exists-and-is-unique.md",
+          "status": "Published carrier inspected in full for this dependency interface; no additional certification asserted.",
+          "source_section": "Statement",
+          "exact_statement": "For every matrix $A\\in M_{m\\times n}(\\mathbb F)$ over $\\mathbb F=\\mathbb R$ or\n$\\mathbb C$, there exists a unique matrix $A^+\\in M_{n\\times m}(\\mathbb F)$\nsatisfying the four Penrose equations of\nThe Moore--Penrose pseudoinverse $A^+$ as the solution of the four Penrose equations.",
+          "relevant_hypotheses_and_conventions": "Use only under the exact domains, dimensions, and conventions in the quoted Statement section; the consumer restates the applicable hypotheses in its own Statement and Facts & Assumptions.",
+          "supplier_proof_status": "Carrier status is published; the complete current Proof section was inspected for its actual hypotheses and argument. This is a Step 1 dependency record, not independent approval.",
+          "consumer_use": "F5 is used in proof step 2.1"
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "notes": "Checked the exact declared interfaces, hypotheses, finite/degenerate cases, and use of each supplier in this item. No independent proof approval is asserted."
+      },
+      "repair_confidence": 1
+    },
+    "lem-nrqmx-bernoulli-hoeffding": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-bounded-variable-hoeffding-mgf",
+          "source_section": "Statement",
+          "quote": "Let $Y$ be a measurable real random variable on a probability space with $0\\le Y\\le1$ almost surely. Then, for every $\\lambda\\in\\mathbb R$,\n\n$$\\mathbb E\\exp\\{\\lambda(Y-\\mathbb EY)\\}\\le \\exp(\\lambda^2/8).$$\n\nThis proof uses only finite product and scalar integral arguments; it does not assume the Axiom of Choice.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Summing the product law [A1] over the other $n-1$ coordinates gives $\\mathbb P(X_k=1)=p\\prod_{j\\ne k}(p+(1-p))=p$, so $\\mathbb E X_k=p$. Put $S=\\sum_{k=1}^n(X_k-p)$. By [F1], $\\mathbb E e^{\\lambda(X_k-p)}\\le e^{\\lambda^2/8}$ for every real $\\lambda$. Expanding the finite expectation over $\\{0,1\\}^n$ and using [A1] factors it into the product of these $n$ expectations. Hence $\\mathbb E e^{\\lambda S}\\le e^{n\\lambda^2/8}$.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "For $\\lambda>0$, $S\\ge nt$ implies $e^{\\lambda S}\\ge e^{\\lambda nt}$. For any nonnegative $W$ and $c>0$, $W\\ge c\\,\\mathbf1_{\\{W\\ge c\\}}$, so $\\mathbb P(W\\ge c)\\le\\mathbb EW/c$. Apply this to $W=e^{\\lambda S}$ and then step 1.1 to get $\\mathbb P(f-p\\ge t)\\le e^{-\\lambda nt+n\\lambda^2/8}$. Setting $\\lambda=4t$ gives $e^{-2nt^2}$.",
+          "inputs": [
+            "given",
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Apply the same argument to $-S$, using step 1.1 at $-4t$; it gives $\\mathbb P(p-f\\ge t)\\le e^{-2nt^2}$. The union bound follows from $\\mathbf1_{A\\cup B}\\le\\mathbf1_A+\\mathbf1_B$, so adding the two tails proves the claim. Endpoints $p=0,1$ are included by [A1]: then every $X_k=p$ almost surely and the left side is zero for $t>0$.",
+          "inputs": [
+            "step 2.1",
+            "given",
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement requires n>=1, so the frequency denominator and sample list are nonempty. Step 1.1 includes n=1: the product over other coordinates is the empty product one. Endpoint laws p=0,1 are handled in step 3.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 explicitly handles p=0 and p=1, where the frequency equals p almost surely."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement has n≥1, and step 1.1 uses finite product factorization, so it includes n=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate object case is asserted beyond the endpoint laws handled in step 3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The probability parameter endpoints p=0,1 are explicitly treated in step 3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 factors a finite sum over {0,1}^n and uses no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no equivalence.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/drift_materialization (gpt-6.1-sol owner)",
+            "reason": "The public claim and its entire argument have been read: Finite product expectations and two exponential Markov bounds give the two-sided frequency tail, including endpoint Bernoulli laws; the tail inequality is not claimed equivalent to independence.",
+            "item_sha256": "88d76814431cd769304ef795b53c747ee7edba76cea68c38dac60120b854c844",
+            "row_sha256": "8cc8dcde345f9af45440ffe2d14d3a5fd1b14958e7007e6080305a5a94b35fcc"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no equivalence.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/drift_materialization (gpt-6.1-sol owner)",
+            "reason": "The public claim and its entire argument have been read: Finite product expectations and two exponential Markov bounds give the two-sided frequency tail, including endpoint Bernoulli laws; the tail inequality is not claimed equivalent to independence.",
+            "item_sha256": "88d76814431cd769304ef795b53c747ee7edba76cea68c38dac60120b854c844",
+            "row_sha256": "e94cf68f7d647e4281cd9c09200edbe84199b3c3657c72e24c1387a862ffe7ad"
+          }
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "The argument is symbolic for all finite inputs; no separate numerical enumeration is needed.",
+      "supplier_excerpts": [
+        {
+          "supplier": "lem-bounded-variable-hoeffding-mgf",
+          "carrier": "items/lem-bounded-variable-hoeffding-mgf.md",
+          "status": "Published carrier inspected in full for this dependency interface; no additional certification asserted.",
+          "source_section": "Statement",
+          "exact_statement": "Let $Y$ be a measurable real random variable on a probability space with $0\\le Y\\le1$ almost surely. Then, for every $\\lambda\\in\\mathbb R$,\n\n$$\\mathbb E\\exp\\{\\lambda(Y-\\mathbb EY)\\}\\le \\exp(\\lambda^2/8).$$\n\nThis proof uses only finite product and scalar integral arguments; it does not assume the Axiom of Choice.",
+          "relevant_hypotheses_and_conventions": "Use only under the exact domains, dimensions, and conventions in the quoted Statement section; the consumer restates the applicable hypotheses in its own Statement and Facts & Assumptions.",
+          "supplier_proof_status": "Carrier status is published; the complete current Proof section was inspected for its actual hypotheses and argument. This is a Step 1 dependency record, not independent approval.",
+          "consumer_use": "F1 is used in proof step 1.1"
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "notes": "Checked the exact declared interfaces, hypotheses, finite/degenerate cases, and use of each supplier in this item. No independent proof approval is asserted."
+      },
+      "repair_confidence": 1
+    },
+    "thm-nrqmx-instrument-stinespring-register": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qsm-dt-channel-definition",
+          "source_section": "Definition",
+          "quote": "Let $d,e\\geq1$ be integers, let $H_{\\mathrm{in}}=\\mathbb C^d$ and $H_{\\mathrm{out}}=\\mathbb C^e$ with their standard inner products, and write $M_d(\\mathbb C)$ and $M_e(\\mathbb C)$ for the complex linear maps on these spaces. A matrix $X$ is **positive semidefinite**, written $X\\geq0$, when it is Hermitian and $\\langle Xv,v\\rangle\\geq0$ for every vector $v$. The finite spectral convention in [[lem-qsm-matrix-state-calculus]] gives positive matrices their orthonormal eigenbases and positive square roots.\n\nA **positive map** is a complex-linear map $\\Phi:M_d(\\mathbb C)\\to M_e(\\mathbb C)$ such that $\\Phi(X)\\geq0$ whenever $X\\geq0$. For each integer $r\\geq1$, identify $M_r(\\mathbb C)\\otimes M_d(\\mathbb C)$ with matrices on $\\mathbb C^r\\otimes\\mathbb C^d$ in the ordered product basis. The map $\\Phi$ is **completely positive** when $\\operatorname{id}_r\\otimes\\Phi$ is positive for every such $r$, where $\\operatorname{id}_r$ is the identity map on $M_r(\\mathbb C)$.\n\nThe map $\\Phi$ is **trace-preserving** when $\\operatorname{Tr}(\\Phi(X))=\\operatorname{Tr}(X)$ for every $X\\in M_d(\\mathbb C)$. A **finite quantum channel** is a complex-linear map that is both completely positive and trace-preserving, abbreviated CPTP. Unitality, $\\Phi(I_d)=I_e$, is a separate condition and is not part of this definition.\n\nThis is a mathematical definition. A physical preparation, measurement, or open-system model must separately identify when one of these maps represents a physical transformation.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qsm-dt-choi-kraus",
+          "source_section": "Statement",
+          "quote": "Let $d,e\\geq1$ and let $\\Phi:M_d(\\mathbb C)\\to M_e(\\mathbb C)$ be complex-linear. Choose the standard input basis $(|i\\rangle)_{i=1}^d$, let $E_{ij}=|i\\rangle\\langle j|$, and use the ordered tensor convention input-reference $\\otimes$ output. Define the (unnormalized) Choi matrix\n\n$$J(\\Phi):=\\sum_{i,j=1}^{d}E_{ij}\\otimes\\Phi(E_{ij})\\in M_d(\\mathbb C)\\otimes M_e(\\mathbb C).$$ Then $\\Phi$ is completely positive if and only if $J(\\Phi)\\geq0$, and this holds if and only if there are $q\\leq de$ matrices $K_1,\\ldots,K_q:\\mathbb C^d\\to\\mathbb C^e$ such that $$\\Phi(X)=\\sum_{a=1}^{q}K_aXK_a^*\\qquad(X\\in M_d(\\mathbb C)).$$\n\nThe empty sum is allowed when $\\Phi=0$. For any such Kraus representation, $\\Phi$ is trace-preserving if and only if $\\sum_{a=1}^{q}K_a^*K_a=I_d$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "By [F1], each $I_a$ is completely positive in the finite matrix sense. Apply [F2] to obtain a finite Kraus family $(K_{a,r})_r$ for it, allowing the empty family for a zero map. Since $\\mathcal A$ is finite, these finitely many choices require only finite choice. Put $q=\\sum_aq_a$, where $q_a$ is the number of Kraus operators for outcome $a$.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The combined map $\\sum_aI_a$ has Kraus family $(K_{a,r})_{a,r}$ and is trace-preserving by [A1] and [F1]. Thus [F2] gives $\\sum_{a,r}K_{a,r}^*K_{a,r}=I_d$. Since $d\\ge1$, this identity implies $q\\ge1$.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Let $(e_{a,r})_{a,r}$ be the standard orthonormal basis of $\\mathbb C^q$ indexed by these labels. Define $Vx=\\sum_{a,r}K_{a,r}x\\otimes e_{a,r}$ and $Q_a=\\sum_r|e_{a,r}\\rangle\\langle e_{a,r}|$. Then $V^*V=\\sum_{a,r}K_{a,r}^*K_{a,r}=I_d$, so $V$ is an isometry. Disjoint label sets make the $Q_a$ pairwise orthogonal and their sum $I_q$.",
+          "inputs": [
+            "A1",
+            "step 2.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "Expanding the sandwich gives $\\sum_{r,s}K_{a,r}XK_{a,s}^*\\otimes|e_{a,r}\\rangle\\langle e_{a,s}|$ with both labels restricted to outcome $a$. The partial trace sends each register matrix unit $|e_{a,r}\\rangle\\langle e_{a,s}|$ to $\\delta_{rs}$, leaving $\\sum_rK_{a,r}XK_{a,r}^*=I_a(X)$ by step 1.1. This proves the claimed formula.",
+          "inputs": [
+            "A1",
+            "step 1.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1, 2.1, 3.1 and 4.1: outcome set and input dimension are nonempty, so trace preservation forces total Kraus count q>=1; a zero outcome may have an empty Kraus family, for which Q_a=0 and its partial-trace sum is zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement assigns an empty Kraus label set and Q_a=0 to a zero outcome map; steps 1.1 and 3.1 include it."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For a one-outcome instrument the label projection is the identity on the register, as in step 3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Zero outcome maps are explicitly permitted and are covered by the empty Kraus family in step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint parameter occurs in the Statement.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/drift_materialization (gpt-6.1-sol owner)",
+            "reason": "For the endpoint axis, this finite algebraic claim has no interval to vary: Finite Kraus labels construct an isometry and orthogonal outcome registers, and the partial trace recovers each map; this proves existence from the instrument hypotheses, without a reverse criterion.",
+            "item_sha256": "c8ef568085adc0044ef012afa6bfb9e7952246bf30e889bd4ee32829e7fc9caf",
+            "row_sha256": "29fc12ebadd6013dc017ca323aa6cff1888c180f61a27ed01c13e88f2d00eb27"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 makes only finitely many Kraus selections, one for each member of finite A."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way existence theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no converse."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "The argument is symbolic for all finite inputs; no separate numerical enumeration is needed.",
+      "supplier_excerpts": [
+        {
+          "supplier": "def-qsm-dt-channel-definition",
+          "carrier": "items/def-qsm-dt-channel-definition.md",
+          "status": "Published carrier inspected in full for this dependency interface; no additional certification asserted.",
+          "source_section": "Definition",
+          "exact_statement": "Let $d,e\\geq1$ be integers, let $H_{\\mathrm{in}}=\\mathbb C^d$ and $H_{\\mathrm{out}}=\\mathbb C^e$ with their standard inner products, and write $M_d(\\mathbb C)$ and $M_e(\\mathbb C)$ for the complex linear maps on these spaces. A matrix $X$ is **positive semidefinite**, written $X\\geq0$, when it is Hermitian and $\\langle Xv,v\\rangle\\geq0$ for every vector $v$. The finite spectral convention in [[lem-qsm-matrix-state-calculus]] gives positive matrices their orthonormal eigenbases and positive square roots.\n\nA **positive map** is a complex-linear map $\\Phi:M_d(\\mathbb C)\\to M_e(\\mathbb C)$ such that $\\Phi(X)\\geq0$ whenever $X\\geq0$. For each integer $r\\geq1$, identify $M_r(\\mathbb C)\\otimes M_d(\\mathbb C)$ with matrices on $\\mathbb C^r\\otimes\\mathbb C^d$ in the ordered product basis. The map $\\Phi$ is **completely positive** when $\\operatorname{id}_r\\otimes\\Phi$ is positive for every such $r$, where $\\operatorname{id}_r$ is the identity map on $M_r(\\mathbb C)$.\n\nThe map $\\Phi$ is **trace-preserving** when $\\operatorname{Tr}(\\Phi(X))=\\operatorname{Tr}(X)$ for every $X\\in M_d(\\mathbb C)$. A **finite quantum channel** is a complex-linear map that is both completely positive and trace-preserving, abbreviated CPTP. Unitality, $\\Phi(I_d)=I_e$, is a separate condition and is not part of this definition.\n\nThis is a mathematical definition. A physical preparation, measurement, or open-system model must separately identify when one of these maps represents a physical transformation.",
+          "relevant_hypotheses_and_conventions": "Use only under the exact domains, dimensions, and conventions in the quoted Definition section; the consumer restates the applicable hypotheses in its own Statement and Facts & Assumptions.",
+          "supplier_proof_status": "Carrier status is published; this definition has no Proof section, as appropriate to its item kind. Its exact interface was inspected.",
+          "consumer_use": "F1 is used in proof steps 1.1, 2.1"
+        },
+        {
+          "supplier": "thm-qsm-dt-choi-kraus",
+          "carrier": "items/thm-qsm-dt-choi-kraus.md",
+          "status": "Published carrier inspected in full for this dependency interface; no additional certification asserted.",
+          "source_section": "Statement",
+          "exact_statement": "Let $d,e\\geq1$ and let $\\Phi:M_d(\\mathbb C)\\to M_e(\\mathbb C)$ be complex-linear. Choose the standard input basis $(|i\\rangle)_{i=1}^d$, let $E_{ij}=|i\\rangle\\langle j|$, and use the ordered tensor convention input-reference $\\otimes$ output. Define the (unnormalized) Choi matrix\n\n$$J(\\Phi):=\\sum_{i,j=1}^{d}E_{ij}\\otimes\\Phi(E_{ij})\\in M_d(\\mathbb C)\\otimes M_e(\\mathbb C).$$ Then $\\Phi$ is completely positive if and only if $J(\\Phi)\\geq0$, and this holds if and only if there are $q\\leq de$ matrices $K_1,\\ldots,K_q:\\mathbb C^d\\to\\mathbb C^e$ such that $$\\Phi(X)=\\sum_{a=1}^{q}K_aXK_a^*\\qquad(X\\in M_d(\\mathbb C)).$$\n\nThe empty sum is allowed when $\\Phi=0$. For any such Kraus representation, $\\Phi$ is trace-preserving if and only if $\\sum_{a=1}^{q}K_a^*K_a=I_d$.",
+          "relevant_hypotheses_and_conventions": "Use only under the exact domains, dimensions, and conventions in the quoted Statement section; the consumer restates the applicable hypotheses in its own Statement and Facts & Assumptions.",
+          "supplier_proof_status": "Carrier status is published; the complete current Proof section was inspected for its actual hypotheses and argument. This is a Step 1 dependency record, not independent approval.",
+          "consumer_use": "F2 is used in proof steps 1.1, 2.1"
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "notes": "Checked the exact declared interfaces, hypotheses, finite/degenerate cases, and use of each supplier in this item. No independent proof approval is asserted."
+      },
+      "repair_confidence": 1
+    },
+    "thm-nrqmx-sharp-joint-measurability": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-nrqm-composites-finite-effects-and-instruments",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a finite-dimensional complex Hilbert space of dimension $d\\ge1$ ([[def-hilbert-space]]), with adjoints as in [[def-adjoint-of-a-linear-map-between-inner-product-spaces]] and the finite trace as in [[def-trace-of-an-endomorphism]]. Recall that an endomorphism $F$ is an **effect** when $F\\ge0$ and $I-F\\ge0$, i.e. $0\\le F\\le I$ in the quadratic-form order ([[def-non-negative-and-positive-operator]]).\n\n(a) *Definitions.* A finite POVM is a finite family $(F_a)_{a=1}^p$, $p\\ge1$, of effects with $\\sum_aF_a=I$. An **instrument** here is a finite family $(M_{a,r})_{1\\le a\\le p,\\,1\\le r\\le q_a}$ of endomorphisms of $H$, where each $q_a$ is a non-negative integer; its outcome operators and update maps are $F_a:=\\sum_rM_{a,r}^*M_{a,r}$ and $I_a:\\operatorname{End}(H)\\to\\operatorname{End}(H)$, $I_a(R):=\\sum_rM_{a,r}RM_{a,r}^*$, with empty sums equal to zero. It is **normalized** when $\\sum_{a,r}M_{a,r}^*M_{a,r}=I$. For a normalized instrument the $F_a$ are its **outcome effects**, as proved in (b); without normalization they need not be effects.\n\n(b) If $(F_a)$ is a finite POVM and $\\rho$ a density operator ([[lem-nrqm-composites-density-and-scalar-spectral-probability]]) then $p_a:=\\operatorname{tr}(\\rho F_a)\\ge0$ and $\\sum_ap_a=1$. If $(M_{a,r})$ is a normalized instrument then the $F_a$ form a finite POVM, $\\operatorname{tr}I_a(\\rho)=p_a$, each $I_a(\\rho)$ is non-negative, and whenever $p_a>0$ the normalized update $I_a(\\rho)/p_a$ is a density operator.\n\n(c) *Ideal Lüders case.* For an orthogonal projection $P$ ([[def-orthogonal-projection]]) put $M_0=P$, $M_1=I-P$. Then $\\sum_jM_j^*M_j=P+(I-P)=I$, the effects are $F_0=P$, $F_1=I-P$, and $I_j(\\rho)=P\\rho P$ or $(I-P)\\rho(I-P)$.\n\n(d) *Non-determination.* Effects alone do not determine the update: there are two normalized instruments on $\\mathbb C^2$ with the same outcome effects $F_0=\\operatorname{diag}(1,0)$, $F_1=\\operatorname{diag}(0,1)$ whose updates differ on the same input.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qsm-matrix-state-calculus",
+          "source_section": "Statement",
+          "quote": "Use the following conventions on a complex inner-product space $H$ of dimension $D\\geq1$, with inner product linear in its first argument. For an endomorphism $A$, define $\\operatorname{Tr}A:=\\sum_{j=1}^D\\langle Ae_j,e_j\\rangle$ in an orthonormal basis; step 3.1 proves basis independence. For any Hermitian $M$, its **positive spectral subspace** (called its positive support here) is $S_M:=\\bigoplus_{\\lambda>0}\\ker(M-\\lambda I)$; when $M\\geq0$ this equals $(\\ker M)^\\perp$. Its support logarithm is $\\log(M|_{S_M}):=\\sum_{\\lambda>0}(\\log\\lambda)P_\\lambda|_{S_M}$, where $P_\\lambda$ is the orthogonal projection onto that eigenspace. No value $\\log0$ is assigned; for $M=0$ this is the unique endomorphism of the zero space. For the set $\\mathcal D(H)$ of positive semidefinite Hermitian endomorphisms with trace one, a point $\\rho$ is **extreme** if every equality $\\rho=t\\sigma+(1-t)\\tau$ with $\\sigma,\\tau\\in\\mathcal D(H)$ and $0<t<1$ implies $\\sigma=\\tau=\\rho$.\n\nLet $H$ be a complex inner-product space of finite dimension $D\\geq1$, with inner product linear in its first argument. Every Hermitian endomorphism $M$ has an orthonormal eigenbasis with real eigenvalues. For a real function $f$ on its finite spectrum, define $f(M)$ by its spectral projections; this definition is independent of the choice of eigenbasis. In particular positive square roots, exponentials, and logarithms on positive supports are well defined.\n\nFor a density matrix $\\rho$ on $H$, meaning a Hermitian positive semidefinite operator with $\\operatorname{Tr}\\rho=1$, $\\operatorname{Tr}(\\rho A)=\\sum_jp_j\\langle Au_j,u_j\\rangle$ for bounded $A$, where $\\rho=\\sum_jp_j|u_j\\rangle\\langle u_j|$. The weighted form $(X,Y)_\\rho=\\operatorname{Tr}(\\rho X^*Y)$ satisfies Cauchy–Schwarz, $|(X,Y)_\\rho|^2\\leq(X,X)_\\rho(Y,Y)_\\rho$. Finally, $\\operatorname{Tr}(\\rho^2)\\leq1$, with equality exactly for rank-one densities, and those are exactly the extreme points of the finite density-matrix set.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Suppose all $P_i$ commute with all $Q_j$. Then $G_{ij}=P_iQ_j$ is self-adjoint, since $(P_iQ_j)^*=Q_jP_i=P_iQ_j$, and is idempotent, since $(P_iQ_j)^2=P_i^2Q_j^2=P_iQ_j$. For any $x$, $\\langle G_{ij}x,x\\rangle=\\langle G_{ij}x,G_{ij}x\\rangle\\ge0$, so each is positive; the sum identity makes each bounded above by $I_H$. Finite summation gives $\\sum_{i,j}G_{ij}=(\\sum_iP_i)(\\sum_jQ_j)=I_H$, and the two marginal sums are $P_i$ and $Q_j$. So this family is a joint POVM.",
+          "inputs": [
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "Conversely, suppose a joint POVM $(G_{ij})$ exists. For each pair, $0\\le G_{ij}\\le P_i$ because $P_i-G_{ij}=\\sum_{k\\ne j}G_{ik}\\ge0$, and similarly $0\\le G_{ij}\\le Q_j$. If $x\\in\\ker P_i$, then $0\\le\\langle G_{ij}x,x\\rangle\\le\\langle P_ix,x\\rangle=0$. By [F2], $\\langle G_{ij}x,x\\rangle=\\|G_{ij}^{1/2}x\\|^2$, hence $G_{ij}x=0$ and $G_{ij}(I-P_i)=0$. Taking adjoints gives $(I-P_i)G_{ij}=0$, so $G_{ij}=P_iG_{ij}P_i$. The same argument yields $G_{ij}=Q_jG_{ij}Q_j$.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Using $P_i=\\sum_kG_{ik}$ and $Q_j=\\sum_\\ell G_{\\ell j}$, we obtain $P_iQ_j=\\sum_kG_{ik}Q_j$. The support relation $G_{ik}=Q_kG_{ik}Q_k$ from step 1.2 makes every term with $k\\ne j$ zero, and the $k=j$ term is $G_{ij}$. Therefore $P_iQ_j=G_{ij}$. Since $G_{ij}$ is self-adjoint, taking adjoints gives $Q_jP_i=G_{ij}=P_iQ_j$. This proves commutation and uniqueness.",
+          "inputs": [
+            "A1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement requires finite nonempty I,J, so I times J is nonempty. In step 1.2 a marginal remainder sum may be empty for a singleton index set and equals zero; in step 2.1 the excluded-index terms vanish. The zero-dimensional Hilbert space is also harmless: all effects and identity are zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero projections are permitted; the product construction in step 1.1 and support argument in step 1.2 still apply."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A one-outcome PVM has its sole projection equal to I_H, and the construction in step 1.1 gives the joint."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Zero projections and zero joint effects are covered by the support relations in steps 1.2–2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No scalar endpoint parameter occurs in the Statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 use only finite sums indexed by I and J."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.1 proves commuting PVMs produce a joint POVM."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Steps 1.2–2.1 prove any joint POVM forces commutation and is uniquely the product family."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "The argument is symbolic for all finite inputs; no separate numerical enumeration is needed.",
+      "supplier_excerpts": [
+        {
+          "supplier": "lem-nrqm-composites-finite-effects-and-instruments",
+          "carrier": "items/lem-nrqm-composites-finite-effects-and-instruments.md",
+          "status": "Published carrier inspected in full for this dependency interface; no additional certification asserted.",
+          "source_section": "Statement",
+          "exact_statement": "Let $H$ be a finite-dimensional complex Hilbert space of dimension $d\\ge1$ ([[def-hilbert-space]]), with adjoints as in [[def-adjoint-of-a-linear-map-between-inner-product-spaces]] and the finite trace as in [[def-trace-of-an-endomorphism]]. Recall that an endomorphism $F$ is an **effect** when $F\\ge0$ and $I-F\\ge0$, i.e. $0\\le F\\le I$ in the quadratic-form order ([[def-non-negative-and-positive-operator]]).\n\n(a) *Definitions.* A finite POVM is a finite family $(F_a)_{a=1}^p$, $p\\ge1$, of effects with $\\sum_aF_a=I$. An **instrument** here is a finite family $(M_{a,r})_{1\\le a\\le p,\\,1\\le r\\le q_a}$ of endomorphisms of $H$, where each $q_a$ is a non-negative integer; its outcome operators and update maps are $F_a:=\\sum_rM_{a,r}^*M_{a,r}$ and $I_a:\\operatorname{End}(H)\\to\\operatorname{End}(H)$, $I_a(R):=\\sum_rM_{a,r}RM_{a,r}^*$, with empty sums equal to zero. It is **normalized** when $\\sum_{a,r}M_{a,r}^*M_{a,r}=I$. For a normalized instrument the $F_a$ are its **outcome effects**, as proved in (b); without normalization they need not be effects.\n\n(b) If $(F_a)$ is a finite POVM and $\\rho$ a density operator ([[lem-nrqm-composites-density-and-scalar-spectral-probability]]) then $p_a:=\\operatorname{tr}(\\rho F_a)\\ge0$ and $\\sum_ap_a=1$. If $(M_{a,r})$ is a normalized instrument then the $F_a$ form a finite POVM, $\\operatorname{tr}I_a(\\rho)=p_a$, each $I_a(\\rho)$ is non-negative, and whenever $p_a>0$ the normalized update $I_a(\\rho)/p_a$ is a density operator.\n\n(c) *Ideal Lüders case.* For an orthogonal projection $P$ ([[def-orthogonal-projection]]) put $M_0=P$, $M_1=I-P$. Then $\\sum_jM_j^*M_j=P+(I-P)=I$, the effects are $F_0=P$, $F_1=I-P$, and $I_j(\\rho)=P\\rho P$ or $(I-P)\\rho(I-P)$.\n\n(d) *Non-determination.* Effects alone do not determine the update: there are two normalized instruments on $\\mathbb C^2$ with the same outcome effects $F_0=\\operatorname{diag}(1,0)$, $F_1=\\operatorname{diag}(0,1)$ whose updates differ on the same input.",
+          "relevant_hypotheses_and_conventions": "Use only under the exact domains, dimensions, and conventions in the quoted Statement section; the consumer restates the applicable hypotheses in its own Statement and Facts & Assumptions.",
+          "supplier_proof_status": "Carrier status is published; the complete current Proof section was inspected for its actual hypotheses and argument. This is a Step 1 dependency record, not independent approval.",
+          "consumer_use": "F1 is used in proof step 1.2"
+        },
+        {
+          "supplier": "lem-qsm-matrix-state-calculus",
+          "carrier": "items/lem-qsm-matrix-state-calculus.md",
+          "status": "Published carrier inspected in full for this dependency interface; no additional certification asserted.",
+          "source_section": "Statement",
+          "exact_statement": "Use the following conventions on a complex inner-product space $H$ of dimension $D\\geq1$, with inner product linear in its first argument. For an endomorphism $A$, define $\\operatorname{Tr}A:=\\sum_{j=1}^D\\langle Ae_j,e_j\\rangle$ in an orthonormal basis; step 3.1 proves basis independence. For any Hermitian $M$, its **positive spectral subspace** (called its positive support here) is $S_M:=\\bigoplus_{\\lambda>0}\\ker(M-\\lambda I)$; when $M\\geq0$ this equals $(\\ker M)^\\perp$. Its support logarithm is $\\log(M|_{S_M}):=\\sum_{\\lambda>0}(\\log\\lambda)P_\\lambda|_{S_M}$, where $P_\\lambda$ is the orthogonal projection onto that eigenspace. No value $\\log0$ is assigned; for $M=0$ this is the unique endomorphism of the zero space. For the set $\\mathcal D(H)$ of positive semidefinite Hermitian endomorphisms with trace one, a point $\\rho$ is **extreme** if every equality $\\rho=t\\sigma+(1-t)\\tau$ with $\\sigma,\\tau\\in\\mathcal D(H)$ and $0<t<1$ implies $\\sigma=\\tau=\\rho$.\n\nLet $H$ be a complex inner-product space of finite dimension $D\\geq1$, with inner product linear in its first argument. Every Hermitian endomorphism $M$ has an orthonormal eigenbasis with real eigenvalues. For a real function $f$ on its finite spectrum, define $f(M)$ by its spectral projections; this definition is independent of the choice of eigenbasis. In particular positive square roots, exponentials, and logarithms on positive supports are well defined.\n\nFor a density matrix $\\rho$ on $H$, meaning a Hermitian positive semidefinite operator with $\\operatorname{Tr}\\rho=1$, $\\operatorname{Tr}(\\rho A)=\\sum_jp_j\\langle Au_j,u_j\\rangle$ for bounded $A$, where $\\rho=\\sum_jp_j|u_j\\rangle\\langle u_j|$. The weighted form $(X,Y)_\\rho=\\operatorname{Tr}(\\rho X^*Y)$ satisfies Cauchy–Schwarz, $|(X,Y)_\\rho|^2\\leq(X,X)_\\rho(Y,Y)_\\rho$. Finally, $\\operatorname{Tr}(\\rho^2)\\leq1$, with equality exactly for rank-one densities, and those are exactly the extreme points of the finite density-matrix set.",
+          "relevant_hypotheses_and_conventions": "Use only under the exact domains, dimensions, and conventions in the quoted Statement section; the consumer restates the applicable hypotheses in its own Statement and Facts & Assumptions.",
+          "supplier_proof_status": "Carrier status is published; the complete current Proof section was inspected for its actual hypotheses and argument. This is a Step 1 dependency record, not independent approval.",
+          "consumer_use": "F2 is used in proof step 1.2"
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "notes": "Checked the exact declared interfaces, hypotheses, finite/degenerate cases, and use of each supplier in this item. No independent proof approval is asserted."
+      },
+      "repair_confidence": 1
+    },
+    "alg-nrqmx-linear-tomography-procedure": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition fixes positive d,m and a spanning POVM with frequencies summing to one. Thus neither the effect index set nor the real Hermitian target can be empty; zero individual effects and frequencies remain allowed in the finite output sum."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition accepts zero frequencies and noninvertible Gram matrices through the Moore–Penrose inverse."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition and its supplied argument: A singleton POVM has F₁=I_d; it spans all real Hermitian d×d matrices only if d=1. In that admissible singleton case f₁=1, G=G⁺=(1), D₁=1 and X=1. No non-informationally-complete singleton in d>1 is admitted."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Redundant informationally complete POVMs are allowed because the Definition uses G^+."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Frequency inputs lie in the closed simplex f_a≥0, Σf_a=1. Zero entries and vertices f_a=1 are allowed in the finite linear sum; the Definition expressly makes no positivity claim for its output."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Definition specifies finite sums and a uniquely defined finite pseudoinverse."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition asserts no equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "The argument is symbolic for all finite inputs; no separate numerical enumeration is needed.",
+      "supplier_excerpts": [
+        {
+          "supplier": "def-nrqmx-finite-hermitian-frame-and-gram-pseudoinverse",
+          "carrier": "items/def-nrqmx-finite-hermitian-frame-and-gram-pseudoinverse.md",
+          "status": "Draft carrier authored or inspected in batch 50; proof status is recorded separately.",
+          "source_section": "Definition",
+          "exact_statement": "For an integer $d\\ge1$, let $\\mathsf H_d=\\{A\\in M_d(\\mathbb C):A=A^*\\}$, regarded as a real vector space. For $A,B\\in\\mathsf H_d$, define the trace pairing $\\langle A,B\\rangle_{\\mathrm{HS}}:=\\operatorname{Tr}(AB)$ and write $\\|A\\|_{\\mathrm{HS}}:=\\sqrt{\\operatorname{Tr}(A^2)}$. The following A-page lemma verifies that the pairing is a real inner product and that this expression is its norm.\n\nLet $m\\ge1$ and let $F=(F_a)_{a=1}^m$ be a finite family in $\\mathsf H_d$. It is informationally complete when its real linear span is all of $\\mathsf H_d$. Its synthesis map is $S:\\mathbb R^m\\to\\mathsf H_d$, $S c=\\sum_{a=1}^m c_aF_a$. Define the Gram matrix by $G_{ab}:=\\operatorname{Tr}(F_aF_b)$; the following well-definedness lemma establishes that the trace pairing makes $S^*$ well-defined and that $G=S^*S$ is real symmetric positive semidefinite.\n\nFor this positive semidefinite real matrix $G$, let $G^+$ be its unique Moore–Penrose pseudoinverse in $M_m(\\mathbb R)$, defined by the four Penrose equations over $\\mathbb R$. Define the canonical dual operators $D_a=\\sum_{b=1}^m(G^+)_{ba}F_b$ and the reconstruction map $D:\\mathbb R^m\\to\\mathsf H_d$, $D c=\\sum_{a=1}^m c_aD_a$. A later A-page lemma identifies this finite pseudoinverse with its spectral formula.",
+          "relevant_hypotheses_and_conventions": "Use only under the exact domains, dimensions, and conventions in the quoted Definition section; the consumer restates the applicable hypotheses in its own Statement and Facts & Assumptions.",
+          "supplier_proof_status": "Carrier status is draft; this definition has no Proof section, as appropriate to its item kind. Its exact interface was inspected.",
+          "consumer_use": "The exact definition/interface supplies the setup used in this item."
+        },
+        {
+          "supplier": "lem-nrqmx-finite-hermitian-trace-inner-product",
+          "carrier": "items/lem-nrqmx-finite-hermitian-trace-inner-product.md",
+          "status": "Draft carrier authored or inspected in batch 50; proof status is recorded separately.",
+          "source_section": "Statement",
+          "exact_statement": "Let $\\mathsf H_d$ be the real vector space of Hermitian $d\\times d$ complex matrices from the preceding definition. The pairing $\\langle A,B\\rangle_{\\mathrm{HS}}=\\operatorname{Tr}(AB)$ is real-valued, symmetric, real-bilinear, and positive definite on $\\mathsf H_d$. Its associated norm is $\\|A\\|_{\\mathrm{HS}}=\\sqrt{\\operatorname{Tr}(A^2)}$. For every $m\\ge1$ and finite family $F_1,\\ldots,F_m\\in\\mathsf H_d$, the Gram matrix $G_{ab}=\\operatorname{Tr}(F_aF_b)$ is real symmetric positive semidefinite, equals $S^*S$ for the synthesis map $S c=\\sum_ac_aF_a$, and satisfies $\\ker G=\\ker S$.",
+          "relevant_hypotheses_and_conventions": "Use only under the exact domains, dimensions, and conventions in the quoted Statement section; the consumer restates the applicable hypotheses in its own Statement and Facts & Assumptions.",
+          "supplier_proof_status": "Carrier status is draft; the complete current Proof section was inspected for its actual hypotheses and argument. This is a Step 1 dependency record, not independent approval.",
+          "consumer_use": "The exact definition/interface supplies the setup used in this item."
+        },
+        {
+          "supplier": "lem-nrqm-composites-finite-effects-and-instruments",
+          "carrier": "items/lem-nrqm-composites-finite-effects-and-instruments.md",
+          "status": "Published carrier inspected in full for this dependency interface; no additional certification asserted.",
+          "source_section": "Statement",
+          "exact_statement": "Let $H$ be a finite-dimensional complex Hilbert space of dimension $d\\ge1$ ([[def-hilbert-space]]), with adjoints as in [[def-adjoint-of-a-linear-map-between-inner-product-spaces]] and the finite trace as in [[def-trace-of-an-endomorphism]]. Recall that an endomorphism $F$ is an **effect** when $F\\ge0$ and $I-F\\ge0$, i.e. $0\\le F\\le I$ in the quadratic-form order ([[def-non-negative-and-positive-operator]]).\n\n(a) *Definitions.* A finite POVM is a finite family $(F_a)_{a=1}^p$, $p\\ge1$, of effects with $\\sum_aF_a=I$. An **instrument** here is a finite family $(M_{a,r})_{1\\le a\\le p,\\,1\\le r\\le q_a}$ of endomorphisms of $H$, where each $q_a$ is a non-negative integer; its outcome operators and update maps are $F_a:=\\sum_rM_{a,r}^*M_{a,r}$ and $I_a:\\operatorname{End}(H)\\to\\operatorname{End}(H)$, $I_a(R):=\\sum_rM_{a,r}RM_{a,r}^*$, with empty sums equal to zero. It is **normalized** when $\\sum_{a,r}M_{a,r}^*M_{a,r}=I$. For a normalized instrument the $F_a$ are its **outcome effects**, as proved in (b); without normalization they need not be effects.\n\n(b) If $(F_a)$ is a finite POVM and $\\rho$ a density operator ([[lem-nrqm-composites-density-and-scalar-spectral-probability]]) then $p_a:=\\operatorname{tr}(\\rho F_a)\\ge0$ and $\\sum_ap_a=1$. If $(M_{a,r})$ is a normalized instrument then the $F_a$ form a finite POVM, $\\operatorname{tr}I_a(\\rho)=p_a$, each $I_a(\\rho)$ is non-negative, and whenever $p_a>0$ the normalized update $I_a(\\rho)/p_a$ is a density operator.\n\n(c) *Ideal Lüders case.* For an orthogonal projection $P$ ([[def-orthogonal-projection]]) put $M_0=P$, $M_1=I-P$. Then $\\sum_jM_j^*M_j=P+(I-P)=I$, the effects are $F_0=P$, $F_1=I-P$, and $I_j(\\rho)=P\\rho P$ or $(I-P)\\rho(I-P)$.\n\n(d) *Non-determination.* Effects alone do not determine the update: there are two normalized instruments on $\\mathbb C^2$ with the same outcome effects $F_0=\\operatorname{diag}(1,0)$, $F_1=\\operatorname{diag}(0,1)$ whose updates differ on the same input.",
+          "relevant_hypotheses_and_conventions": "Use only under the exact domains, dimensions, and conventions in the quoted Statement section; the consumer restates the applicable hypotheses in its own Statement and Facts & Assumptions.",
+          "supplier_proof_status": "Carrier status is published; the complete current Proof section was inspected for its actual hypotheses and argument. This is a Step 1 dependency record, not independent approval.",
+          "consumer_use": "The exact definition/interface supplies the setup used in this item."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "notes": "Checked the exact declared interfaces, hypotheses, finite/degenerate cases, and use of each supplier in this item. No independent proof approval is asserted."
+      },
+      "repair_confidence": 1,
+      "current_boundary_worksheet": {
+        "proposal": "research/physics-non-fluid-129-2026-10-21-r2-owner-step2-boundary-proposal-4/proposal.json",
+        "source_sha256": "5302eafdaf903a698f0bc217d91ada0232017420b1fe0e3ee8c5ac3b4bd87e95",
+        "qualification": "Released complete current source/eight-case semantic worksheet; root transcribed exact current rows. No independent acceptance or finite computation asserted."
+      }
+    },
+    "thm-nrqmx-tomography-identifiability-stability": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-nrqmx-frame-pseudoinverse-reconstruction",
+          "source_section": "Statement",
+          "quote": "Let $d,m\\ge1$, let $F_1,\\ldots,F_m\\in\\mathsf H_d$ span $\\mathsf H_d$ over $\\mathbb R$, and form $S$, $G=S^*S$, $G^+$, and $D_a$ as in the preceding finite-frame definition. If $G=\\sum_{\\lambda>0}\\lambda P_\\lambda$ is its finite spectral resolution, then $G^+=\\sum_{\\lambda>0}\\lambda^{-1}P_\\lambda$. Moreover, every $X\\in\\mathsf H_d$ is reconstructed by\n$$\nX=\\sum_{a=1}^m\\operatorname{Tr}(XF_a)D_a.\n$$\nThis holds for redundant families as well as bases; $G$ need not be invertible.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-nrqm-composites-finite-effects-and-instruments",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a finite-dimensional complex Hilbert space of dimension $d\\ge1$ ([[def-hilbert-space]]), with adjoints as in [[def-adjoint-of-a-linear-map-between-inner-product-spaces]] and the finite trace as in [[def-trace-of-an-endomorphism]]. Recall that an endomorphism $F$ is an **effect** when $F\\ge0$ and $I-F\\ge0$, i.e. $0\\le F\\le I$ in the quadratic-form order ([[def-non-negative-and-positive-operator]]).\n\n(a) *Definitions.* A finite POVM is a finite family $(F_a)_{a=1}^p$, $p\\ge1$, of effects with $\\sum_aF_a=I$. An **instrument** here is a finite family $(M_{a,r})_{1\\le a\\le p,\\,1\\le r\\le q_a}$ of endomorphisms of $H$, where each $q_a$ is a non-negative integer; its outcome operators and update maps are $F_a:=\\sum_rM_{a,r}^*M_{a,r}$ and $I_a:\\operatorname{End}(H)\\to\\operatorname{End}(H)$, $I_a(R):=\\sum_rM_{a,r}RM_{a,r}^*$, with empty sums equal to zero. It is **normalized** when $\\sum_{a,r}M_{a,r}^*M_{a,r}=I$. For a normalized instrument the $F_a$ are its **outcome effects**, as proved in (b); without normalization they need not be effects.\n\n(b) If $(F_a)$ is a finite POVM and $\\rho$ a density operator ([[lem-nrqm-composites-density-and-scalar-spectral-probability]]) then $p_a:=\\operatorname{tr}(\\rho F_a)\\ge0$ and $\\sum_ap_a=1$. If $(M_{a,r})$ is a normalized instrument then the $F_a$ form a finite POVM, $\\operatorname{tr}I_a(\\rho)=p_a$, each $I_a(\\rho)$ is non-negative, and whenever $p_a>0$ the normalized update $I_a(\\rho)/p_a$ is a density operator.\n\n(c) *Ideal Lüders case.* For an orthogonal projection $P$ ([[def-orthogonal-projection]]) put $M_0=P$, $M_1=I-P$. Then $\\sum_jM_j^*M_j=P+(I-P)=I$, the effects are $F_0=P$, $F_1=I-P$, and $I_j(\\rho)=P\\rho P$ or $(I-P)\\rho(I-P)$.\n\n(d) *Non-determination.* Effects alone do not determine the update: there are two normalized instruments on $\\mathbb C^2$ with the same outcome effects $F_0=\\operatorname{diag}(1,0)$, $F_1=\\operatorname{diag}(0,1)$ whose updates differ on the same input.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-nrqmx-linear-tomography-procedure",
+          "source_section": "Definition",
+          "quote": "Input integers $d,m\\ge1$, a finite POVM $(F_a)_{a=1}^m$ on $\\mathbb C^d$ that spans the real Hermitian matrices, and real frequencies $f_a\\ge0$ with $\\sum_af_a=1$. Form the Gram matrix $G_{ab}=\\operatorname{Tr}(F_aF_b)$, compute its Moore–Penrose inverse $G^+$, set $D_a=\\sum_b(G^+)_{ba}F_b$, and return\n$$\nX=\\sum_{a=1}^m f_aD_a.\n$$\nAll sums and matrices are finite. The output is Hermitian. The procedure does not project $X$ onto the positive cone, and it makes no positivity claim for finite frequency inputs.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-nrqmx-bernoulli-hoeffding",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, $p\\in[0,1]$, and let $X_1,\\ldots,X_n:\\Omega\\to\\{0,1\\}$ be measurable on a probability space with\n$$\\mathbb P(X_1=x_1,\\ldots,X_n=x_n)=\\prod_{k=1}^n b_p(x_k)\\quad\\text{for every }(x_1,\\ldots,x_n)\\in\\{0,1\\}^n.$$\nHere $b_p(1)=p$ and $b_p(0)=1-p$, including $p=0$ and $p=1$. Thus the variables have the stated independent Bernoulli product law. For their frequency $f=n^{-1}\\sum_{k=1}^nX_k$ and every $t>0$,\n$$\n\\mathbb P(|f-p|\\ge t)\\le2e^{-2nt^2}.\n$$\nNo axiom of choice is assumed.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+          "source_section": "Statement",
+          "quote": "For vectors $u,v$ in a real or complex inner product space,\n\n$$|\\langle u,v\\rangle|\\le\\lVert u\\rVert\\lVert v\\rVert.$$\n\nEquality holds if and only if $u$ and $v$ are linearly dependent, including the case in which either vector is zero.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-cauchy-reals-lub-complete",
+          "source_section": "Statement",
+          "quote": "The Cauchy-sequence reals $\\mathbb{R}_C$ have the **least-upper-bound property**:\nevery nonempty $S \\subseteq \\mathbb{R}_C$ that is bounded above has a least upper\nbound $\\sup S \\in \\mathbb{R}_C$. Hence, together with The reals form a totally ordered field,\n$\\mathbb{R}_C$ is a **complete ordered field** (Complete ordered field (least-upper-bound property)).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-nrqmx-finite-hermitian-trace-inner-product",
+          "source_section": "Statement",
+          "quote": "Let $\\mathsf H_d$ be the real vector space of Hermitian $d\\times d$ complex matrices from the preceding definition. The pairing $\\langle A,B\\rangle_{\\mathrm{HS}}=\\operatorname{Tr}(AB)$ is real-valued, symmetric, real-bilinear, and positive definite on $\\mathsf H_d$. Its associated norm is $\\|A\\|_{\\mathrm{HS}}=\\sqrt{\\operatorname{Tr}(A^2)}$. For every $m\\ge1$ and finite family $F_1,\\ldots,F_m\\in\\mathsf H_d$, the Gram matrix $G_{ab}=\\operatorname{Tr}(F_aF_b)$ is real symmetric positive semidefinite, equals $S^*S$ for the synthesis map $S c=\\sum_ac_aF_a$, and satisfies $\\ker G=\\ker S$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Apply [F1] with $H=\\rho$. Then $\\sum_ap_aD_a=\\rho$, so [F3] gives $X(p)=\\rho$. The probabilities are in $[0,1]$ and sum to one by [F2].",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "For each sample $k$, $\\sum_{a=1}^m\\mathbf1_{\\{Y_k=a\\}}=1$, so $f_a\\ge0$ and $\\sum_af_a=1$, as required by [F3]. Fix an outcome $a$ and set $Z_k^a=\\mathbf1_{\\{Y_k=a\\}}$. For every $z\\in\\{0,1\\}^n$, summing [A1] over the finite outcome tuples with $\\mathbf1_{\\{Y_k=a\\}}=z_k$ gives $$\\mathbb P(Z_1^a=z_1,\\ldots,Z_n^a=z_n)=\\prod_{k=1}^n\\sum_{b:\\,\\mathbf1_{\\{b=a\\}}=z_k}p_b=\\prod_{k=1}^n b_{p_a}(z_k),$$ since [F2] gives $\\sum_bp_b=1$. Thus these indicators have the Bernoulli product law, and [F4] yields $\\mathbb P(|f_a-p_a|\\ge t)\\le2e^{-2nt^2}$. No independence between indicators for different outcomes is used.",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "By linearity, $X(f)-\\rho=D(f-p)$. Set $C=(\\sum_a\\|D_a\\|_{\\mathrm{HS}}^2)^{1/2}$. By [F7], this is the norm from a real inner product, so its triangle inequality follows from [F5] by expanding the square of a sum. Thus $\\|Dc\\|_{\\mathrm{HS}}\\le\\sum_a|c_a|\\|D_a\\|_{\\mathrm{HS}}\\le C\\|c\\|_2$. Since $m\\ge1$, the unit sphere in $\\mathbb R^m$ contains $e_1$, so the set $\\{\\|Dc\\|_{\\mathrm{HS}}:\\|c\\|_2=1\\}$ is nonempty; the bound makes it bounded above. Its supremum exists by [F6] and is the finite induced operator norm in the Statement. Scaling $c$ (and treating $c=0$ directly) gives $\\|Dc\\|_{\\mathrm{HS}}\\le\\|D\\|_{2\\to\\mathrm{HS}}\\|c\\|_2$, which proves the deterministic estimate.",
+          "inputs": [
+            "given",
+            "F5",
+            "F6",
+            "F7",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "A finite union bound gives $\\mathbb P(\\exists a:\\ |f_a-p_a|\\ge t)\\le2m e^{-2nt^2}$. Set $t=\\sqrt{\\log(2m/\\delta)/(2n)}$, which is positive since $2m/\\delta>1$; then the right side is $\\delta$. On the complementary event, $\\|f-p\\|_2\\le\\sqrt m\\,t$, and step 2.1 gives the asserted state-error bound.",
+          "inputs": [
+            "given",
+            "A1",
+            "step 2.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement requires d,m,n>=1 and a spanning POVM, so the sampling and outcome lists are nonempty. Step 1.2 nevertheless allows an empty set of outcomes with a given indicator value: the corresponding finite sum is zero and the Bernoulli product identity still holds."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero one-trial probabilities are permitted by F2 and the Bernoulli endpoint case in step 1.2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The assumptions and finite sums allow the one-outcome case when it spans H_d; steps 1.1–3.1 do not require m>1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement allows redundant spanning POVMs, with their possibly singular Gram matrix handled by F1 and the reconstruction lemma."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Bernoulli supplier includes p_a=0 and p_a=1; step 1.2 applies to each outcome probability."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.2–3.1 use finite product laws and a finite union bound only."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no equivalence.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/drift_materialization (gpt-6.1-sol owner)",
+            "reason": "The public claim and its entire argument have been read: Exact dual reconstruction and an induced norm bound are followed by a finite union of Bernoulli tails under the stipulated product law; no converse identifiability or independence theorem is asserted.",
+            "item_sha256": "decfb844d6b114666eefa48992d498eafa53396d3c9435cec5656f604418a046",
+            "row_sha256": "8cc8dcde345f9af45440ffe2d14d3a5fd1b14958e7007e6080305a5a94b35fcc"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no equivalence.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/drift_materialization (gpt-6.1-sol owner)",
+            "reason": "The public claim and its entire argument have been read: Exact dual reconstruction and an induced norm bound are followed by a finite union of Bernoulli tails under the stipulated product law; no converse identifiability or independence theorem is asserted.",
+            "item_sha256": "decfb844d6b114666eefa48992d498eafa53396d3c9435cec5656f604418a046",
+            "row_sha256": "e94cf68f7d647e4281cd9c09200edbe84199b3c3657c72e24c1387a862ffe7ad"
+          }
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "The argument is symbolic for all finite inputs; no separate numerical enumeration is needed.",
+      "supplier_excerpts": [
+        {
+          "supplier": "alg-nrqmx-linear-tomography-procedure",
+          "carrier": "items/alg-nrqmx-linear-tomography-procedure.md",
+          "status": "Draft carrier authored or inspected in batch 50; proof status is recorded separately.",
+          "source_section": "Definition",
+          "exact_statement": "Input integers $d,m\\ge1$, a finite POVM $(F_a)_{a=1}^m$ on $\\mathbb C^d$ that spans the real Hermitian matrices, and real frequencies $f_a\\ge0$ with $\\sum_af_a=1$. Form the Gram matrix $G_{ab}=\\operatorname{Tr}(F_aF_b)$, compute its Moore–Penrose inverse $G^+$, set $D_a=\\sum_b(G^+)_{ba}F_b$, and return\n$$\nX=\\sum_{a=1}^m f_aD_a.\n$$\nAll sums and matrices are finite. The output is Hermitian. The procedure does not project $X$ onto the positive cone, and it makes no positivity claim for finite frequency inputs.",
+          "relevant_hypotheses_and_conventions": "Use only under the exact domains, dimensions, and conventions in the quoted Definition section; the consumer restates the applicable hypotheses in its own Statement and Facts & Assumptions.",
+          "supplier_proof_status": "Carrier status is draft; this algorithm has no Proof section, as appropriate to its item kind. Its exact interface was inspected.",
+          "consumer_use": "F3 is used in proof steps 1.1, 1.2"
+        },
+        {
+          "supplier": "lem-nrqmx-frame-pseudoinverse-reconstruction",
+          "carrier": "items/lem-nrqmx-frame-pseudoinverse-reconstruction.md",
+          "status": "Draft carrier authored or inspected in batch 50; proof status is recorded separately.",
+          "source_section": "Statement",
+          "exact_statement": "Let $d,m\\ge1$, let $F_1,\\ldots,F_m\\in\\mathsf H_d$ span $\\mathsf H_d$ over $\\mathbb R$, and form $S$, $G=S^*S$, $G^+$, and $D_a$ as in the preceding finite-frame definition. If $G=\\sum_{\\lambda>0}\\lambda P_\\lambda$ is its finite spectral resolution, then $G^+=\\sum_{\\lambda>0}\\lambda^{-1}P_\\lambda$. Moreover, every $X\\in\\mathsf H_d$ is reconstructed by\n$$\nX=\\sum_{a=1}^m\\operatorname{Tr}(XF_a)D_a.\n$$\nThis holds for redundant families as well as bases; $G$ need not be invertible.",
+          "relevant_hypotheses_and_conventions": "Use only under the exact domains, dimensions, and conventions in the quoted Statement section; the consumer restates the applicable hypotheses in its own Statement and Facts & Assumptions.",
+          "supplier_proof_status": "Carrier status is draft; the complete current Proof section was inspected for its actual hypotheses and argument. This is a Step 1 dependency record, not independent approval.",
+          "consumer_use": "F1 is used in proof step 1.1"
+        },
+        {
+          "supplier": "lem-nrqmx-bernoulli-hoeffding",
+          "carrier": "items/lem-nrqmx-bernoulli-hoeffding.md",
+          "status": "Draft carrier authored or inspected in batch 50; proof status is recorded separately.",
+          "source_section": "Statement",
+          "exact_statement": "Let $n\\ge1$, $p\\in[0,1]$, and let $X_1,\\ldots,X_n:\\Omega\\to\\{0,1\\}$ be measurable on a probability space with\n$$\\mathbb P(X_1=x_1,\\ldots,X_n=x_n)=\\prod_{k=1}^n b_p(x_k)\\quad\\text{for every }(x_1,\\ldots,x_n)\\in\\{0,1\\}^n.$$\nHere $b_p(1)=p$ and $b_p(0)=1-p$, including $p=0$ and $p=1$. Thus the variables have the stated independent Bernoulli product law. For their frequency $f=n^{-1}\\sum_{k=1}^nX_k$ and every $t>0$,\n$$\n\\mathbb P(|f-p|\\ge t)\\le2e^{-2nt^2}.\n$$\nNo axiom of choice is assumed.",
+          "relevant_hypotheses_and_conventions": "Use only under the exact domains, dimensions, and conventions in the quoted Statement section; the consumer restates the applicable hypotheses in its own Statement and Facts & Assumptions.",
+          "supplier_proof_status": "Carrier status is draft; the complete current Proof section was inspected for its actual hypotheses and argument. This is a Step 1 dependency record, not independent approval.",
+          "consumer_use": "F4 is used in proof step 1.2"
+        },
+        {
+          "supplier": "lem-nrqm-composites-finite-effects-and-instruments",
+          "carrier": "items/lem-nrqm-composites-finite-effects-and-instruments.md",
+          "status": "Published carrier inspected in full for this dependency interface; no additional certification asserted.",
+          "source_section": "Statement",
+          "exact_statement": "Let $H$ be a finite-dimensional complex Hilbert space of dimension $d\\ge1$ ([[def-hilbert-space]]), with adjoints as in [[def-adjoint-of-a-linear-map-between-inner-product-spaces]] and the finite trace as in [[def-trace-of-an-endomorphism]]. Recall that an endomorphism $F$ is an **effect** when $F\\ge0$ and $I-F\\ge0$, i.e. $0\\le F\\le I$ in the quadratic-form order ([[def-non-negative-and-positive-operator]]).\n\n(a) *Definitions.* A finite POVM is a finite family $(F_a)_{a=1}^p$, $p\\ge1$, of effects with $\\sum_aF_a=I$. An **instrument** here is a finite family $(M_{a,r})_{1\\le a\\le p,\\,1\\le r\\le q_a}$ of endomorphisms of $H$, where each $q_a$ is a non-negative integer; its outcome operators and update maps are $F_a:=\\sum_rM_{a,r}^*M_{a,r}$ and $I_a:\\operatorname{End}(H)\\to\\operatorname{End}(H)$, $I_a(R):=\\sum_rM_{a,r}RM_{a,r}^*$, with empty sums equal to zero. It is **normalized** when $\\sum_{a,r}M_{a,r}^*M_{a,r}=I$. For a normalized instrument the $F_a$ are its **outcome effects**, as proved in (b); without normalization they need not be effects.\n\n(b) If $(F_a)$ is a finite POVM and $\\rho$ a density operator ([[lem-nrqm-composites-density-and-scalar-spectral-probability]]) then $p_a:=\\operatorname{tr}(\\rho F_a)\\ge0$ and $\\sum_ap_a=1$. If $(M_{a,r})$ is a normalized instrument then the $F_a$ form a finite POVM, $\\operatorname{tr}I_a(\\rho)=p_a$, each $I_a(\\rho)$ is non-negative, and whenever $p_a>0$ the normalized update $I_a(\\rho)/p_a$ is a density operator.\n\n(c) *Ideal Lüders case.* For an orthogonal projection $P$ ([[def-orthogonal-projection]]) put $M_0=P$, $M_1=I-P$. Then $\\sum_jM_j^*M_j=P+(I-P)=I$, the effects are $F_0=P$, $F_1=I-P$, and $I_j(\\rho)=P\\rho P$ or $(I-P)\\rho(I-P)$.\n\n(d) *Non-determination.* Effects alone do not determine the update: there are two normalized instruments on $\\mathbb C^2$ with the same outcome effects $F_0=\\operatorname{diag}(1,0)$, $F_1=\\operatorname{diag}(0,1)$ whose updates differ on the same input.",
+          "relevant_hypotheses_and_conventions": "Use only under the exact domains, dimensions, and conventions in the quoted Statement section; the consumer restates the applicable hypotheses in its own Statement and Facts & Assumptions.",
+          "supplier_proof_status": "Carrier status is published; the complete current Proof section was inspected for its actual hypotheses and argument. This is a Step 1 dependency record, not independent approval.",
+          "consumer_use": "F2 is used in proof steps 1.1, 1.2"
+        },
+        {
+          "supplier": "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+          "carrier": "items/thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces.md",
+          "status": "Published carrier inspected in full for this dependency interface; no additional certification asserted.",
+          "source_section": "Statement",
+          "exact_statement": "For vectors $u,v$ in a real or complex inner product space,\n\n$$|\\langle u,v\\rangle|\\le\\lVert u\\rVert\\lVert v\\rVert.$$\n\nEquality holds if and only if $u$ and $v$ are linearly dependent, including the case in which either vector is zero.",
+          "relevant_hypotheses_and_conventions": "Use only under the exact domains, dimensions, and conventions in the quoted Statement section; the consumer restates the applicable hypotheses in its own Statement and Facts & Assumptions.",
+          "supplier_proof_status": "Carrier status is published; the complete current Proof section was inspected for its actual hypotheses and argument. This is a Step 1 dependency record, not independent approval.",
+          "consumer_use": "F5 is used in proof step 2.1"
+        },
+        {
+          "supplier": "cor-cauchy-reals-lub-complete",
+          "carrier": "items/cor-cauchy-reals-lub-complete.md",
+          "status": "Published carrier inspected in full for this dependency interface; no additional certification asserted.",
+          "source_section": "Statement",
+          "exact_statement": "The Cauchy-sequence reals $\\mathbb{R}_C$ have the **least-upper-bound property**:\nevery nonempty $S \\subseteq \\mathbb{R}_C$ that is bounded above has a least upper\nbound $\\sup S \\in \\mathbb{R}_C$. Hence, together with The reals form a totally ordered field,\n$\\mathbb{R}_C$ is a **complete ordered field** (Complete ordered field (least-upper-bound property)).",
+          "relevant_hypotheses_and_conventions": "Use only under the exact domains, dimensions, and conventions in the quoted Statement section; the consumer restates the applicable hypotheses in its own Statement and Facts & Assumptions.",
+          "supplier_proof_status": "Carrier status is published; the complete current Proof section was inspected for its actual hypotheses and argument. This is a Step 1 dependency record, not independent approval.",
+          "consumer_use": "F6 is used in proof step 2.1"
+        },
+        {
+          "supplier": "lem-nrqmx-finite-hermitian-trace-inner-product",
+          "carrier": "items/lem-nrqmx-finite-hermitian-trace-inner-product.md",
+          "status": "Draft carrier authored or inspected in batch 50; proof status is recorded separately.",
+          "source_section": "Statement",
+          "exact_statement": "Let $\\mathsf H_d$ be the real vector space of Hermitian $d\\times d$ complex matrices from the preceding definition. The pairing $\\langle A,B\\rangle_{\\mathrm{HS}}=\\operatorname{Tr}(AB)$ is real-valued, symmetric, real-bilinear, and positive definite on $\\mathsf H_d$. Its associated norm is $\\|A\\|_{\\mathrm{HS}}=\\sqrt{\\operatorname{Tr}(A^2)}$. For every $m\\ge1$ and finite family $F_1,\\ldots,F_m\\in\\mathsf H_d$, the Gram matrix $G_{ab}=\\operatorname{Tr}(F_aF_b)$ is real symmetric positive semidefinite, equals $S^*S$ for the synthesis map $S c=\\sum_ac_aF_a$, and satisfies $\\ker G=\\ker S$.",
+          "relevant_hypotheses_and_conventions": "Use only under the exact domains, dimensions, and conventions in the quoted Statement section; the consumer restates the applicable hypotheses in its own Statement and Facts & Assumptions.",
+          "supplier_proof_status": "Carrier status is draft; the complete current Proof section was inspected for its actual hypotheses and argument. This is a Step 1 dependency record, not independent approval.",
+          "consumer_use": "F7 is used in proof step 2.1"
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "notes": "Checked the exact declared interfaces, hypotheses, finite/degenerate cases, and use of each supplier in this item. No independent proof approval is asserted."
+      },
+      "repair_confidence": 1
+    },
+    "cex-nrqmx-same-povm-distinct-disturbance": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-nrqm-composites-finite-effects-and-instruments",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a finite-dimensional complex Hilbert space of dimension $d\\ge1$ ([[def-hilbert-space]]), with adjoints as in [[def-adjoint-of-a-linear-map-between-inner-product-spaces]] and the finite trace as in [[def-trace-of-an-endomorphism]]. Recall that an endomorphism $F$ is an **effect** when $F\\ge0$ and $I-F\\ge0$, i.e. $0\\le F\\le I$ in the quadratic-form order ([[def-non-negative-and-positive-operator]]).\n\n(a) *Definitions.* A finite POVM is a finite family $(F_a)_{a=1}^p$, $p\\ge1$, of effects with $\\sum_aF_a=I$. An **instrument** here is a finite family $(M_{a,r})_{1\\le a\\le p,\\,1\\le r\\le q_a}$ of endomorphisms of $H$, where each $q_a$ is a non-negative integer; its outcome operators and update maps are $F_a:=\\sum_rM_{a,r}^*M_{a,r}$ and $I_a:\\operatorname{End}(H)\\to\\operatorname{End}(H)$, $I_a(R):=\\sum_rM_{a,r}RM_{a,r}^*$, with empty sums equal to zero. It is **normalized** when $\\sum_{a,r}M_{a,r}^*M_{a,r}=I$. For a normalized instrument the $F_a$ are its **outcome effects**, as proved in (b); without normalization they need not be effects.\n\n(b) If $(F_a)$ is a finite POVM and $\\rho$ a density operator ([[lem-nrqm-composites-density-and-scalar-spectral-probability]]) then $p_a:=\\operatorname{tr}(\\rho F_a)\\ge0$ and $\\sum_ap_a=1$. If $(M_{a,r})$ is a normalized instrument then the $F_a$ form a finite POVM, $\\operatorname{tr}I_a(\\rho)=p_a$, each $I_a(\\rho)$ is non-negative, and whenever $p_a>0$ the normalized update $I_a(\\rho)/p_a$ is a density operator.\n\n(c) *Ideal Lüders case.* For an orthogonal projection $P$ ([[def-orthogonal-projection]]) put $M_0=P$, $M_1=I-P$. Then $\\sum_jM_j^*M_j=P+(I-P)=I$, the effects are $F_0=P$, $F_1=I-P$, and $I_j(\\rho)=P\\rho P$ or $(I-P)\\rho(I-P)$.\n\n(d) *Non-determination.* Effects alone do not determine the update: there are two normalized instruments on $\\mathbb C^2$ with the same outcome effects $F_0=\\operatorname{diag}(1,0)$, $F_1=\\operatorname{diag}(0,1)$ whose updates differ on the same input.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-nrqmx-instrument-stinespring-register",
+          "source_section": "Statement",
+          "quote": "Let $d,e\\ge1$ and let $\\mathcal A$ be a finite nonempty outcome set. A finite completely positive instrument from $\\mathbb C^d$ to $\\mathbb C^e$ is a family of completely positive complex-linear maps $I_a:M_d(\\mathbb C)\\to M_e(\\mathbb C)$, indexed by $a\\in\\mathcal A$, whose sum is trace-preserving. Then there are an integer $q\\ge1$, an isometry $V:\\mathbb C^d\\to\\mathbb C^e\\otimes\\mathbb C^q$, and pairwise orthogonal projections $Q_a$ on $\\mathbb C^q$ with $\\sum_aQ_a=I_q$ such that, for every $X\\in M_d(\\mathbb C)$,\n$$\nI_a(X)=\\operatorname{Tr}_E\\!\\left[(I_e\\otimes Q_a)VXV^*(I_e\\otimes Q_a)\\right].\n$$\nHere $E=\\mathbb C^q$ is the finite register space with its displayed orthonormal basis, and the partial trace is defined on its matrix units by $\\operatorname{Tr}_E(Y\\otimes|e_{a,r}\\rangle\\langle e_{b,s}|)=\\delta_{(a,r),(b,s)}Y$, extended linearly. The register basis is indexed by the Kraus labels $(a,r)$; a zero outcome map has no labels and corresponds to $Q_a=0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qsm-dt-choi-kraus",
+          "source_section": "Statement",
+          "quote": "Let $d,e\\geq1$ and let $\\Phi:M_d(\\mathbb C)\\to M_e(\\mathbb C)$ be complex-linear. Choose the standard input basis $(|i\\rangle)_{i=1}^d$, let $E_{ij}=|i\\rangle\\langle j|$, and use the ordered tensor convention input-reference $\\otimes$ output. Define the (unnormalized) Choi matrix\n\n$$J(\\Phi):=\\sum_{i,j=1}^{d}E_{ij}\\otimes\\Phi(E_{ij})\\in M_d(\\mathbb C)\\otimes M_e(\\mathbb C).$$ Then $\\Phi$ is completely positive if and only if $J(\\Phi)\\geq0$, and this holds if and only if there are $q\\leq de$ matrices $K_1,\\ldots,K_q:\\mathbb C^d\\to\\mathbb C^e$ such that $$\\Phi(X)=\\sum_{a=1}^{q}K_aXK_a^*\\qquad(X\\in M_d(\\mathbb C)).$$\n\nThe empty sum is allowed when $\\Phi=0$. For any such Kraus representation, $\\Phi$ is trace-preserving if and only if $\\sum_{a=1}^{q}K_a^*K_a=I_d$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Since $P_a^*=P_a=P_a^2$, the Lüders Kraus operators have $M^{L*}_aM^L_a=P_a$. For the other family, $M^{R*}_aM^R_a=(|a\\rangle\\langle+|)(|+\\rangle\\langle a|)=\\langle+|+\\rangle P_a=P_a$, since the displayed normalized vector satisfies $\\langle+|+\\rangle=1$. Thus both families are normalized, with the same outcome effects, because $P_0+P_1=I$.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "By [F3], the one-operator Kraus forms give completely positive maps, and their sum is trace-preserving because the combined adjoint products sum to identity by step 1.1. Hence both are finite instruments in the sense of the A-page theorem, and each admits its stated outcome-register dilation by [F2].",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "On $\\rho=P_0$, the Lüders update for outcome $0$ is $I^L_0(P_0)=P_0$, whereas the other update is $I^R_0(P_0)=|+\\rangle\\langle+|$. These matrices differ: $P_0=\\begin{pmatrix}1&0\\\\0&0\\end{pmatrix}$ and $|+\\rangle\\langle+|=\\frac12\\begin{pmatrix}1&1\\\\1&1\\end{pmatrix}$. The outcome probabilities are nevertheless identical, $\\operatorname{Tr}(P_0P_0)=1$ and $\\operatorname{Tr}(P_0P_1)=0$. This refutes the statement.",
+          "inputs": [
+            "A1",
+            "F1",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample fixes two outcomes on C²."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 explicitly gives outcome 1 probability zero on input P_0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The counterexample fixes a two-outcome measurement."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 computes both outcome effects exactly and step 3.1 distinguishes the update matrices."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 exhibits the probabilities 1 and 0 on P_0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The two finite Kraus families are written explicitly in the Counterexample."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The refuted statement is an implication, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The refuted statement is an implication, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "two instruments with equal effects and unequal conditional states",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1"
+          ],
+          "expected": "Both effect families equal (P_0,P_1); on P_0 the outcome-0 updates are P_0 and |+><+|, so the outcome maps differ."
+        }
+      ],
+      "finite_checks_disposition": "The listed finite matrix checks are exact hand calculations recorded in the item proof.",
+      "supplier_excerpts": [
+        {
+          "supplier": "thm-nrqmx-instrument-stinespring-register",
+          "carrier": "items/thm-nrqmx-instrument-stinespring-register.md",
+          "status": "Draft carrier authored or inspected in batch 50; proof status is recorded separately.",
+          "source_section": "Statement",
+          "exact_statement": "Let $d,e\\ge1$ and let $\\mathcal A$ be a finite nonempty outcome set. A finite completely positive instrument from $\\mathbb C^d$ to $\\mathbb C^e$ is a family of completely positive complex-linear maps $I_a:M_d(\\mathbb C)\\to M_e(\\mathbb C)$, indexed by $a\\in\\mathcal A$, whose sum is trace-preserving. Then there are an integer $q\\ge1$, an isometry $V:\\mathbb C^d\\to\\mathbb C^e\\otimes\\mathbb C^q$, and pairwise orthogonal projections $Q_a$ on $\\mathbb C^q$ with $\\sum_aQ_a=I_q$ such that, for every $X\\in M_d(\\mathbb C)$,\n$$\nI_a(X)=\\operatorname{Tr}_E\\!\\left[(I_e\\otimes Q_a)VXV^*(I_e\\otimes Q_a)\\right].\n$$\nHere $E=\\mathbb C^q$ is the finite register space with its displayed orthonormal basis, and the partial trace is defined on its matrix units by $\\operatorname{Tr}_E(Y\\otimes|e_{a,r}\\rangle\\langle e_{b,s}|)=\\delta_{(a,r),(b,s)}Y$, extended linearly. The register basis is indexed by the Kraus labels $(a,r)$; a zero outcome map has no labels and corresponds to $Q_a=0$.",
+          "relevant_hypotheses_and_conventions": "Use only under the exact domains, dimensions, and conventions in the quoted Statement section; the consumer restates the applicable hypotheses in its own Statement and Facts & Assumptions.",
+          "supplier_proof_status": "Carrier status is draft; the complete current Proof section was inspected for its actual hypotheses and argument. This is a Step 1 dependency record, not independent approval.",
+          "consumer_use": "F2 is used in proof step 2.1"
+        },
+        {
+          "supplier": "lem-nrqm-composites-finite-effects-and-instruments",
+          "carrier": "items/lem-nrqm-composites-finite-effects-and-instruments.md",
+          "status": "Published carrier inspected in full for this dependency interface; no additional certification asserted.",
+          "source_section": "Statement",
+          "exact_statement": "Let $H$ be a finite-dimensional complex Hilbert space of dimension $d\\ge1$ ([[def-hilbert-space]]), with adjoints as in [[def-adjoint-of-a-linear-map-between-inner-product-spaces]] and the finite trace as in [[def-trace-of-an-endomorphism]]. Recall that an endomorphism $F$ is an **effect** when $F\\ge0$ and $I-F\\ge0$, i.e. $0\\le F\\le I$ in the quadratic-form order ([[def-non-negative-and-positive-operator]]).\n\n(a) *Definitions.* A finite POVM is a finite family $(F_a)_{a=1}^p$, $p\\ge1$, of effects with $\\sum_aF_a=I$. An **instrument** here is a finite family $(M_{a,r})_{1\\le a\\le p,\\,1\\le r\\le q_a}$ of endomorphisms of $H$, where each $q_a$ is a non-negative integer; its outcome operators and update maps are $F_a:=\\sum_rM_{a,r}^*M_{a,r}$ and $I_a:\\operatorname{End}(H)\\to\\operatorname{End}(H)$, $I_a(R):=\\sum_rM_{a,r}RM_{a,r}^*$, with empty sums equal to zero. It is **normalized** when $\\sum_{a,r}M_{a,r}^*M_{a,r}=I$. For a normalized instrument the $F_a$ are its **outcome effects**, as proved in (b); without normalization they need not be effects.\n\n(b) If $(F_a)$ is a finite POVM and $\\rho$ a density operator ([[lem-nrqm-composites-density-and-scalar-spectral-probability]]) then $p_a:=\\operatorname{tr}(\\rho F_a)\\ge0$ and $\\sum_ap_a=1$. If $(M_{a,r})$ is a normalized instrument then the $F_a$ form a finite POVM, $\\operatorname{tr}I_a(\\rho)=p_a$, each $I_a(\\rho)$ is non-negative, and whenever $p_a>0$ the normalized update $I_a(\\rho)/p_a$ is a density operator.\n\n(c) *Ideal Lüders case.* For an orthogonal projection $P$ ([[def-orthogonal-projection]]) put $M_0=P$, $M_1=I-P$. Then $\\sum_jM_j^*M_j=P+(I-P)=I$, the effects are $F_0=P$, $F_1=I-P$, and $I_j(\\rho)=P\\rho P$ or $(I-P)\\rho(I-P)$.\n\n(d) *Non-determination.* Effects alone do not determine the update: there are two normalized instruments on $\\mathbb C^2$ with the same outcome effects $F_0=\\operatorname{diag}(1,0)$, $F_1=\\operatorname{diag}(0,1)$ whose updates differ on the same input.",
+          "relevant_hypotheses_and_conventions": "Use only under the exact domains, dimensions, and conventions in the quoted Statement section; the consumer restates the applicable hypotheses in its own Statement and Facts & Assumptions.",
+          "supplier_proof_status": "Carrier status is published; the complete current Proof section was inspected for its actual hypotheses and argument. This is a Step 1 dependency record, not independent approval.",
+          "consumer_use": "F1 is used in proof steps 1.1, 3.1"
+        },
+        {
+          "supplier": "thm-qsm-dt-choi-kraus",
+          "carrier": "items/thm-qsm-dt-choi-kraus.md",
+          "status": "Published carrier inspected in full for this dependency interface; no additional certification asserted.",
+          "source_section": "Statement",
+          "exact_statement": "Let $d,e\\geq1$ and let $\\Phi:M_d(\\mathbb C)\\to M_e(\\mathbb C)$ be complex-linear. Choose the standard input basis $(|i\\rangle)_{i=1}^d$, let $E_{ij}=|i\\rangle\\langle j|$, and use the ordered tensor convention input-reference $\\otimes$ output. Define the (unnormalized) Choi matrix\n\n$$J(\\Phi):=\\sum_{i,j=1}^{d}E_{ij}\\otimes\\Phi(E_{ij})\\in M_d(\\mathbb C)\\otimes M_e(\\mathbb C).$$ Then $\\Phi$ is completely positive if and only if $J(\\Phi)\\geq0$, and this holds if and only if there are $q\\leq de$ matrices $K_1,\\ldots,K_q:\\mathbb C^d\\to\\mathbb C^e$ such that $$\\Phi(X)=\\sum_{a=1}^{q}K_aXK_a^*\\qquad(X\\in M_d(\\mathbb C)).$$\n\nThe empty sum is allowed when $\\Phi=0$. For any such Kraus representation, $\\Phi$ is trace-preserving if and only if $\\sum_{a=1}^{q}K_a^*K_a=I_d$.",
+          "relevant_hypotheses_and_conventions": "Use only under the exact domains, dimensions, and conventions in the quoted Statement section; the consumer restates the applicable hypotheses in its own Statement and Facts & Assumptions.",
+          "supplier_proof_status": "Carrier status is published; the complete current Proof section was inspected for its actual hypotheses and argument. This is a Step 1 dependency record, not independent approval.",
+          "consumer_use": "F3 is used in proof step 2.1"
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "notes": "Checked the exact declared interfaces, hypotheses, finite/degenerate cases, and use of each supplier in this item. No independent proof approval is asserted."
+      },
+      "repair_confidence": 1
+    },
+    "ex-nrqmx-pauli-tomography": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-nrqmx-tomography-identifiability-stability",
+          "source_section": "Statement",
+          "quote": "Let $d,m,n\\ge1$, let $(F_a)_{a=1}^m$ be a finite POVM on $\\mathbb C^d$ whose real span is $\\mathsf H_d$, and let $\\rho\\in\\mathsf H_d$ satisfy $\\rho\\ge0$ and $\\operatorname{Tr}\\rho=1$. Put $p_a=\\operatorname{Tr}(\\rho F_a)$, form the canonical dual $D_a$ from the Gram pseudoinverse, and write $D:\\mathbb R^m\\to\\mathsf H_d$ for $D c=\\sum_ac_aD_a$. Let $X(f)=\\sum_af_aD_a$ be the linear-inversion output and use the induced operator norm $\\|D\\|_{2\\to\\mathrm{HS}}=\\sup_{\\|c\\|_2=1}\\|Dc\\|_{\\mathrm{HS}}$.\n\nThen exact probabilities reconstruct the state: $X(p)=\\rho$. For every real frequency vector $f\\in\\mathbb R^m$,\n$$\n\\|X(f)-\\rho\\|_{\\mathrm{HS}}\\le\\|D\\|_{2\\to\\mathrm{HS}}\\|f-p\\|_2.\n$$\nLet $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space and let $Y_1,\\ldots,Y_n:\\Omega\\to\\{1,\\ldots,m\\}$ be measurable with the independent product law $\\mathbb P(Y_1=a_1,\\ldots,Y_n=a_n)=\\prod_kp_{a_k}$ for every outcome tuple. Define $f_a=n^{-1}\\sum_{k=1}^n\\mathbf1_{\\{Y_k=a\\}}$. Then for every $0<\\delta<1$,\n$$\n\\mathbb P\\!\\left(\\max_{1\\le a\\le m}|f_a-p_a|\\le\\sqrt{\\frac{\\log(2m/\\delta)}{2n}}\\right)\\ge1-\\delta.\n$$\nConsequently, with probability at least $1-\\delta$,\n$$\n\\|X(f)-\\rho\\|_{\\mathrm{HS}}\\le\\|D\\|_{2\\to\\mathrm{HS}}\\sqrt m\\sqrt{\\frac{\\log(2m/\\delta)}{2n}}.\n$$\nThese are conditional mathematical statements under the specified product sampling law; no empirical data or calibrated apparatus is asserted.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-nrqmx-frame-pseudoinverse-reconstruction",
+          "source_section": "Statement",
+          "quote": "Let $d,m\\ge1$, let $F_1,\\ldots,F_m\\in\\mathsf H_d$ span $\\mathsf H_d$ over $\\mathbb R$, and form $S$, $G=S^*S$, $G^+$, and $D_a$ as in the preceding finite-frame definition. If $G=\\sum_{\\lambda>0}\\lambda P_\\lambda$ is its finite spectral resolution, then $G^+=\\sum_{\\lambda>0}\\lambda^{-1}P_\\lambda$. Moreover, every $X\\in\\mathsf H_d$ is reconstructed by\n$$\nX=\\sum_{a=1}^m\\operatorname{Tr}(XF_a)D_a.\n$$\nThis holds for redundant families as well as bases; $G$ need not be invertible.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-nrqmx-finite-hermitian-frame-and-gram-pseudoinverse",
+          "source_section": "Definition",
+          "quote": "For an integer $d\\ge1$, let $\\mathsf H_d=\\{A\\in M_d(\\mathbb C):A=A^*\\}$, regarded as a real vector space. For $A,B\\in\\mathsf H_d$, define the trace pairing $\\langle A,B\\rangle_{\\mathrm{HS}}:=\\operatorname{Tr}(AB)$ and write $\\|A\\|_{\\mathrm{HS}}:=\\sqrt{\\operatorname{Tr}(A^2)}$. The following A-page lemma verifies that the pairing is a real inner product and that this expression is its norm.\n\nLet $m\\ge1$ and let $F=(F_a)_{a=1}^m$ be a finite family in $\\mathsf H_d$. It is informationally complete when its real linear span is all of $\\mathsf H_d$. Its synthesis map is $S:\\mathbb R^m\\to\\mathsf H_d$, $S c=\\sum_{a=1}^m c_aF_a$. Define the Gram matrix by $G_{ab}:=\\operatorname{Tr}(F_aF_b)$; the following well-definedness lemma establishes that the trace pairing makes $S^*$ well-defined and that $G=S^*S$ is real symmetric positive semidefinite.\n\nFor this positive semidefinite real matrix $G$, let $G^+$ be its unique Moore–Penrose pseudoinverse in $M_m(\\mathbb R)$, defined by the four Penrose equations over $\\mathbb R$. Define the canonical dual operators $D_a=\\sum_{b=1}^m(G^+)_{ba}F_b$ and the reconstruction map $D:\\mathbb R^m\\to\\mathsf H_d$, $D c=\\sum_{a=1}^m c_aD_a$. A later A-page lemma identifies this finite pseudoinverse with its spectral formula.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Direct multiplication gives $\\sigma_j^2=I$, $\\operatorname{Tr}(\\sigma_j)=0$, $\\sigma_x\\sigma_y=i\\sigma_z$, $\\sigma_y\\sigma_z=i\\sigma_x$, and $\\sigma_z\\sigma_x=i\\sigma_y$; reversing the order negates each mixed product. Thus $\\operatorname{Tr}(\\sigma_j\\sigma_k)=2\\delta_{jk}$. Since a Hermitian $2\\times2$ matrix has two real diagonal entries and one complex off-diagonal entry, $\\dim_{\\mathbb R}\\mathsf H_2=4$; the four nonzero orthogonal matrices $I,\\sigma_x,\\sigma_y,\\sigma_z$ form a basis. Every trace-one Hermitian $\\rho$ therefore has the stated form with $r_j=\\operatorname{Tr}(\\rho\\sigma_j)\\in\\mathbb R$. Positivity [A2] restricts $|r|\\le1$, since $(r_x\\sigma_x+r_y\\sigma_y+r_z\\sigma_z)^2=|r|^2I$ and the eigenvalues of $\\rho$ are $(1\\pm|r|)/2$.",
+          "inputs": [
+            "A1",
+            "A2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Each $\\sigma_j$ is Hermitian with eigenvalues $1,-1$ by step 1.1, so $F_{j,\\pm}$ has eigenvalues $1/3,0$ and is positive. For each $j$, $F_{j,+}+F_{j,-}=I/3$; summing over $x,y,z$ gives $I$. Also $F_{j,+}-F_{j,-}=\\sigma_j/3$, so each $\\sigma_j$ lies in the real span of the effects. Since $I$ is their sum, the basis in step 1.1 shows that the effects span $\\mathsf H_2$.",
+          "inputs": [
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "In the coordinate order $(x+,x-,y+,y-,z+,z-)$, direct multiplication and step 1.1 give $G_{(j,s),(k,t)}=\\frac1{36}\\operatorname{Tr}((I+s\\sigma_j)(I+t\\sigma_k))=\\frac1{18}(1+st\\,\\delta_{jk})$ for $s,t\\in\\{+1,-1\\}$. Thus the diagonal entries are $1/9$, opposite outcomes on one axis have entry $0$, and distinct axes have entry $1/18$. Let $u=(1,1,1,1,1,1)$ and $v_j=e_{j+}-e_{j-}$. Then $Gu=u/3$, $Gv_j=v_j/9$, and $G$ vanishes on vectors $(s_x,s_x,s_y,s_y,s_z,s_z)$ with $s_x+s_y+s_z=0$. These mutually orthogonal subspaces have dimensions $1,3,2$ and span $\\mathbb R^6$.",
+          "inputs": [
+            "A1",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "By [F2] and the eigenspaces in step 3.1, $G^+=3P_u+9\\sum_jP_{v_j}$, where $P_u=uu^\\mathsf T/6$ and $P_{v_j}=v_jv_j^\\mathsf T/2$. The $e_{j+}$ column of $G^+$ is $u/2+9v_j/2$. Applying the canonical-dual formula [F3], using $\\sum_{k,\\pm}F_{k,\\pm}=I$ and $F_{j,+}-F_{j,-}=\\sigma_j/3$, gives $D_{j,+}=\\frac12I+\\frac32\\sigma_j$; similarly $D_{j,-}=\\frac12I-\\frac32\\sigma_j$. The probabilities are $p_{j,\\pm}=\\operatorname{Tr}(\\rho F_{j,\\pm})=(1\\pm r_j)/6$, so $\\sum_{j,\\pm}p_{j,\\pm}D_{j,\\pm}=\\frac12I+\\frac12\\sum_jr_j\\sigma_j=\\rho$, in agreement with [F1].",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "step": "5.1",
+          "claim": "The frequency vector with $f_{x,+}=1$ and all other entries zero is nonnegative and sums to one. Its output is $D_{x,+}=\\frac12I+\\frac32\\sigma_x$, whose eigenvalues are $2$ and $-1$. It is Hermitian but not positive, so the linear-inversion procedure does not preserve positivity for every frequency vector.",
+          "inputs": [
+            "A1",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example fixes six effects on C²."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 gives each POVM effect eigenvalues1/3 and0; step 3.1 gives the two-dimensional Gram kernel, and step 5.1 separately exhibits a reconstruction eigenvalue−1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The Example fixes six outcomes. Six fixed qubit effects span Hermitian2, with Gram eigenspaces of dimensions1,3,2; exact probabilities reconstruct rho, but the simplex vertex produces eigenvalues2 and−1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 finds a two-dimensional Gram kernel for the redundant six-element frame."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 4.1 includes probability endpoints reached by pure Bloch states; step 5.1 checks a simplex vertex frequency."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–5.1 are explicit finite matrix multiplications and finite sums."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Six fixed qubit effects span Hermitian2, with Gram eigenspaces of dimensions1,3,2; exact probabilities reconstruct rho, but the simplex vertex produces eigenvalues2 and−1. The public claim does not assert a converse characterization; the displayed construction or estimate is the one-way conclusion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Six fixed qubit effects span Hermitian2, with Gram eigenspaces of dimensions1,3,2; exact probabilities reconstruct rho, but the simplex vertex produces eigenvalues2 and−1. The public claim does not assert a converse characterization; the displayed construction or estimate is the one-way conclusion."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "six-outcome Pauli Gram spectrum and nonpositive frequency output",
+          "inputs": [
+            "A1",
+            "A2",
+            "step 2.1",
+            "step 3.1",
+            "step 4.1"
+          ],
+          "expected": "G has eigenvalues 1/3 once, 1/9 three times, and 0 twice; D_(j,±)=I/2±3σ_j/2; the simplex vertex f_(x,+)=1 returns eigenvalues 2 and −1."
+        }
+      ],
+      "finite_checks_disposition": "The listed finite matrix checks are exact hand calculations recorded in the item proof.",
+      "supplier_excerpts": [
+        {
+          "supplier": "thm-nrqmx-tomography-identifiability-stability",
+          "carrier": "items/thm-nrqmx-tomography-identifiability-stability.md",
+          "status": "Draft carrier authored or inspected in batch 50; proof status is recorded separately.",
+          "source_section": "Statement",
+          "exact_statement": "Let $d,m,n\\ge1$, let $(F_a)_{a=1}^m$ be a finite POVM on $\\mathbb C^d$ whose real span is $\\mathsf H_d$, and let $\\rho\\in\\mathsf H_d$ satisfy $\\rho\\ge0$ and $\\operatorname{Tr}\\rho=1$. Put $p_a=\\operatorname{Tr}(\\rho F_a)$, form the canonical dual $D_a$ from the Gram pseudoinverse, and write $D:\\mathbb R^m\\to\\mathsf H_d$ for $D c=\\sum_ac_aD_a$. Let $X(f)=\\sum_af_aD_a$ be the linear-inversion output and use the induced operator norm $\\|D\\|_{2\\to\\mathrm{HS}}=\\sup_{\\|c\\|_2=1}\\|Dc\\|_{\\mathrm{HS}}$.\n\nThen exact probabilities reconstruct the state: $X(p)=\\rho$. For every real frequency vector $f\\in\\mathbb R^m$,\n$$\n\\|X(f)-\\rho\\|_{\\mathrm{HS}}\\le\\|D\\|_{2\\to\\mathrm{HS}}\\|f-p\\|_2.\n$$\nLet $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space and let $Y_1,\\ldots,Y_n:\\Omega\\to\\{1,\\ldots,m\\}$ be measurable with the independent product law $\\mathbb P(Y_1=a_1,\\ldots,Y_n=a_n)=\\prod_kp_{a_k}$ for every outcome tuple. Define $f_a=n^{-1}\\sum_{k=1}^n\\mathbf1_{\\{Y_k=a\\}}$. Then for every $0<\\delta<1$,\n$$\n\\mathbb P\\!\\left(\\max_{1\\le a\\le m}|f_a-p_a|\\le\\sqrt{\\frac{\\log(2m/\\delta)}{2n}}\\right)\\ge1-\\delta.\n$$\nConsequently, with probability at least $1-\\delta$,\n$$\n\\|X(f)-\\rho\\|_{\\mathrm{HS}}\\le\\|D\\|_{2\\to\\mathrm{HS}}\\sqrt m\\sqrt{\\frac{\\log(2m/\\delta)}{2n}}.\n$$\nThese are conditional mathematical statements under the specified product sampling law; no empirical data or calibrated apparatus is asserted.",
+          "relevant_hypotheses_and_conventions": "Use only under the exact domains, dimensions, and conventions in the quoted Statement section; the consumer restates the applicable hypotheses in its own Statement and Facts & Assumptions.",
+          "supplier_proof_status": "Carrier status is draft; the complete current Proof section was inspected for its actual hypotheses and argument. This is a Step 1 dependency record, not independent approval.",
+          "consumer_use": "F1 is used in proof step 4.1"
+        },
+        {
+          "supplier": "lem-nrqmx-frame-pseudoinverse-reconstruction",
+          "carrier": "items/lem-nrqmx-frame-pseudoinverse-reconstruction.md",
+          "status": "Draft carrier authored or inspected in batch 50; proof status is recorded separately.",
+          "source_section": "Statement",
+          "exact_statement": "Let $d,m\\ge1$, let $F_1,\\ldots,F_m\\in\\mathsf H_d$ span $\\mathsf H_d$ over $\\mathbb R$, and form $S$, $G=S^*S$, $G^+$, and $D_a$ as in the preceding finite-frame definition. If $G=\\sum_{\\lambda>0}\\lambda P_\\lambda$ is its finite spectral resolution, then $G^+=\\sum_{\\lambda>0}\\lambda^{-1}P_\\lambda$. Moreover, every $X\\in\\mathsf H_d$ is reconstructed by\n$$\nX=\\sum_{a=1}^m\\operatorname{Tr}(XF_a)D_a.\n$$\nThis holds for redundant families as well as bases; $G$ need not be invertible.",
+          "relevant_hypotheses_and_conventions": "Use only under the exact domains, dimensions, and conventions in the quoted Statement section; the consumer restates the applicable hypotheses in its own Statement and Facts & Assumptions.",
+          "supplier_proof_status": "Carrier status is draft; the complete current Proof section was inspected for its actual hypotheses and argument. This is a Step 1 dependency record, not independent approval.",
+          "consumer_use": "F2 is used in proof step 4.1"
+        },
+        {
+          "supplier": "def-nrqmx-finite-hermitian-frame-and-gram-pseudoinverse",
+          "carrier": "items/def-nrqmx-finite-hermitian-frame-and-gram-pseudoinverse.md",
+          "status": "Draft carrier authored or inspected in batch 50; proof status is recorded separately.",
+          "source_section": "Definition",
+          "exact_statement": "For an integer $d\\ge1$, let $\\mathsf H_d=\\{A\\in M_d(\\mathbb C):A=A^*\\}$, regarded as a real vector space. For $A,B\\in\\mathsf H_d$, define the trace pairing $\\langle A,B\\rangle_{\\mathrm{HS}}:=\\operatorname{Tr}(AB)$ and write $\\|A\\|_{\\mathrm{HS}}:=\\sqrt{\\operatorname{Tr}(A^2)}$. The following A-page lemma verifies that the pairing is a real inner product and that this expression is its norm.\n\nLet $m\\ge1$ and let $F=(F_a)_{a=1}^m$ be a finite family in $\\mathsf H_d$. It is informationally complete when its real linear span is all of $\\mathsf H_d$. Its synthesis map is $S:\\mathbb R^m\\to\\mathsf H_d$, $S c=\\sum_{a=1}^m c_aF_a$. Define the Gram matrix by $G_{ab}:=\\operatorname{Tr}(F_aF_b)$; the following well-definedness lemma establishes that the trace pairing makes $S^*$ well-defined and that $G=S^*S$ is real symmetric positive semidefinite.\n\nFor this positive semidefinite real matrix $G$, let $G^+$ be its unique Moore–Penrose pseudoinverse in $M_m(\\mathbb R)$, defined by the four Penrose equations over $\\mathbb R$. Define the canonical dual operators $D_a=\\sum_{b=1}^m(G^+)_{ba}F_b$ and the reconstruction map $D:\\mathbb R^m\\to\\mathsf H_d$, $D c=\\sum_{a=1}^m c_aD_a$. A later A-page lemma identifies this finite pseudoinverse with its spectral formula.",
+          "relevant_hypotheses_and_conventions": "Use only under the exact domains, dimensions, and conventions in the quoted Definition section; the consumer restates the applicable hypotheses in its own Statement and Facts & Assumptions.",
+          "supplier_proof_status": "Carrier status is draft; this definition has no Proof section, as appropriate to its item kind. Its exact interface was inspected.",
+          "consumer_use": "F3 is used in proof step 4.1"
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "notes": "Checked the exact declared interfaces, hypotheses, finite/degenerate cases, and use of each supplier in this item. No independent proof approval is asserted."
+      },
+      "repair_confidence": 1,
+      "current_boundary_worksheet": {
+        "proposal": "research/physics-non-fluid-129-2026-10-21-r2-owner-step2-boundary-proposal-6/proposal.json",
+        "source_sha256": "c728de71ab55810fbad19d5befe7bd65801c64391418ace7d51b880ac50d06c8",
+        "qualification": "Released complete current source/eight-case semantic worksheet; root transcribed exact current rows. No independent acceptance or finite computation asserted."
+      }
+    }
+  }
+}

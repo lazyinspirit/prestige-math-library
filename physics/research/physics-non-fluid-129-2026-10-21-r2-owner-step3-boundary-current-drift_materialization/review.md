@@ -1,0 +1,9 @@
+# Six current GR empty-boundary candidates
+
+All six complete current sources were read, including their full arguments. The compactness Definition and round-sphere example exclude the alleged empty inputs: an empty index set cannot cover nonempty Sigma, and the explicit sphere contains R e1. The three fixed-gauge items have actual supplied solution/reference data on a positive-length torus slab; their derivative and Fourier index sets include zero. Their not-applicable rows can be upheld with the distinct item-specific reasoning in the guarded proposal.
+
+The boost-normalization example differs: its open section U is not required nonempty. The empty open patch is permitted, the empty fields/congruence satisfy all pointwise conditions vacuously, and no focal or rescaling operation is evaluated at a nonexistent generator. Its empty row should therefore become checked, with the exact after-row supplied in proposal.json. The empty causal-union convention is also recorded conditionally if empty S is admitted, without relying on that convention to establish the correction. No source modification is needed.
+
+The proposal preserves each original row and gives its exact recommended replacement and source/raw/item guards. For the three template candidates it proposes fresh, distinct, hash-bound template-review evidence while preserving the original row text; the two other upheld contradiction candidates receive precise reviewed reasons. These are delegated owner research proposals, not fabricated independent Alpha acceptance.
+
+Additional complete context read: the null-screen Definition and the periodic-torus/Sobolev Definition. Native boundary row hashing and itemHashGuard implementations were inspected. No external source retrieval or whole transitive proof audit is claimed. No production source, contract, native verdict, controls or stamps were changed; root owns actual adoption and certification. All production ownership is released.

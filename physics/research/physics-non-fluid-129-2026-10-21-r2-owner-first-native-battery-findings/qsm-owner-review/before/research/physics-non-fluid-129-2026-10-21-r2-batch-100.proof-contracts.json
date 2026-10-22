@@ -1,0 +1,1618 @@
+{
+  "version": 1,
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "batch": "100",
+  "level": 1,
+  "scope": [
+    "lem-qsmx-modular-strip-analyticity",
+    "lem-qsmx-modular-unitary-strong-continuity",
+    "def-qsmx-von-neumann-kms-state",
+    "lem-qsmx-tomita-operator-involution",
+    "def-qsmx-standard-modular-data",
+    "thm-qsmx-finite-modular-density",
+    "lem-qsmx-modular-resolvent-core",
+    "thm-qsmx-tomita-takesaki",
+    "ex-qsmx-modular-is-not-physical-time"
+  ],
+  "contracts": {
+    "lem-qsmx-modular-strip-analyticity": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-spectral-theorem-for-unbounded-self-adjoint-operators",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $T$ be a self-adjoint operator on the nonzero\ncomplex Hilbert space $H$. Then there is a unique regular projection valued\nmeasure $E$ on the Borel $\\sigma$-algebra of $\\mathbb R$ such that\n$$\nD(T)=\\Bigl\\{x\\in H:\\int_{\\mathbb R}\\lambda^2\\,dE_x(\\lambda)<\\infty\\Bigr\\},\\qquad Tx=\\int_{\\mathbb R}\\lambda\\,dE(\\lambda)x\\quad(x\\in D(T)).\n$$\nConversely, if $E$ is a regular projection valued measure on $\\mathbb R$, then\nthe operator $\\int\\lambda\\,dE$ with that domain is self-adjoint and its\nspectral projection valued measure is $E$ again.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-unbounded-integral-against-a-pvm",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $E$ be a projection valued measure on the\nmeasurable space $(X,\\Sigma)$ acting on the complex Hilbert space $H$\n([[def-projection-valued-measure]]), and let $f:X\\to\\mathbb C$ be\n$\\Sigma$-measurable. Put\n$$D(f(E)):=\\Bigl\\{x\\in H:\\int_X|f|^2\\,dE_x<\\infty\\Bigr\\},\\qquad E_x(B)=\\langle E(B)x,x\\rangle,$$\nwhere the scalar measures $E_x$ are those of\n[[lem-scalar-and-complex-measures-from-a-pvm]], and for $x\\in D(f(E))$ set\n$$f(E)x:=\\lim_{n\\to\\infty}\\Phi_E\\bigl(f\\,\\mathbf 1_{\\{|f|\\le n\\}}\\bigr)x,$$\nFor $H\\ne\\{0\\}$, the bounded integrals $\\Phi_E$ are those of\n[[thm-bounded-borel-pvm-integral]], and the limit is taken in the norm of $H$.\nFor $H=\\{0\\}$, define $\\Phi_E(g)$ to be the unique operator on $H$ for every bounded measurable $g$. Then $E_0$ is the zero measure, $D(f(E))=H$, and $f(E)0=0$. Thus this case is defined directly without applying a theorem requiring a nonzero space.\n\n**Well-definedness.** $D(f(E))$ is a linear subspace: the estimate\n$E_{x+y}\\le2E_x+2E_y$ for scalar measures and $E_{\\alpha x}=|\\alpha|^2E_x$\nfollow from $\\|E(B)(x+y)\\|^2\\le2\\|E(B)x\\|^2+2\\|E(B)y\\|^2$ and\n$\\|E(B)\\alpha x\\|^2=|\\alpha|^2\\|E(B)x\\|^2$. Writing $f_n:=f\\mathbf 1_{\\{|f|\\le n\\}}$\nthe sets $\\{|f|\\le n\\}$ are measurable, so $f_n$ is bounded and measurable.\nFor $m,n\\ge N$,\n$$|f_n-f_m|^2\\le |f|^2\\mathbf1_{\\{|f|>N\\}}.$$\nThe integral of the right side against $E_x$ tends to zero by\n[[thm-dominated-convergence]], with the integrable majorant $|f|^2$ and\npointwise limit zero since $f$ is finite-valued. Linearity of the bounded\ncalculus ([[thm-pvm-integral-is-a-star-homomorphism]]) and its quadratic identity give\n$$\\|\\Phi_E(f_n)x-\\Phi_E(f_m)x\\|^2=\\int|f_n-f_m|^2\\,dE_x.$$\nThese clauses hold directly on the zero space as well. Hence the truncation\nvectors are Cauchy and converge uniquely by Hilbert-space completeness\n([[def-hilbert-space]]). The limit is linear in $x$ because every truncation\noperator is linear and addition and scalar multiplication are norm-continuous.\nCountable Choice is inherited from the bounded PVM suppliers; no further\nchoice is needed to take these specified limits.\n\nFinally, if two $\\Sigma$-measurable functions $f,g$ agree outside a measurable\nset $N$ with $E(N)=0$, then $E_x(N)=\\|E(N)x\\|^2=0$ for every $x$. Thus the\nintegrals of $|f|^2$ and $|g|^2$ agree, so their domains agree. At every\ntruncation level their bounded truncations agree outside $N$; the quadratic\nidentity applied to the difference gives equal truncation vectors for every\n$x$. Taking limits gives $f(E)x=g(E)x$ on their common domain.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-unbounded-borel-functional-calculus",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $T$ be a self-adjoint operator with spectral\nprojection valued measure $E$ on $\\mathbb R$ acting on a complex Hilbert space $H$\n([[thm-spectral-theorem-for-unbounded-self-adjoint-operators]]) and let\n$f,g:\\mathbb R\\to\\mathbb C$ be Borel. Write $u(T)=u(E)$, with the truncation definition below. If $H=\\{0\\}$, use its unique PVM and unique full-domain operator directly. Then:\n\n1. $f(T)^*=\\overline f(T)$;\n2. $f(T)g(T)$ has domain $D(g(T))\\cap D((fg)(T))$ and equals the restriction of\n   $(fg)(T)$ to that domain, and its closure is $(fg)(T)$;\n3. on $D(f(T))\\cap D(g(T))$ the sum $f(T)+g(T)$ equals the restriction of\n   $(f+g)(T)$, and the closure of $f(T)+g(T)$ is $(f+g)(T)$;\n4. the spectrum of $f(T)$ is the essential range\n   $\\{z\\in\\mathbb C:E(f^{-1}(B_\\varepsilon(z)))\\ne0$ for every\n   $\\varepsilon>0\\}$ of $f$ with respect to $E$;\n5. if $f$ is continuous then that essential range is the closure of\n   $f(\\sigma(T))$, with the closure redundant when $f(\\sigma(T))$ is closed.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. All functions below have domain $X$. Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Write $z=t+is$ with $0\\leq s\\leq1$. The spectral multiplier $f_z(\\lambda)=\\exp(-iz\\log(\\lambda)/2)$ has $|f_z(\\lambda)|^2=\\lambda^s$. Since $\\lambda^s\\leq1+\\lambda$ for every $\\lambda>0$ and $s\\in[0,1]$, [F2] gives $$\\|A^{-iz/2}\\xi\\|^2=\\int\\lambda^s\\,d\\mu_\\xi\\leq\\int(1+\\lambda)\\,d\\mu_\\xi=\\|\\xi\\|^2+\\|A^{1/2}\\xi\\|^2.$$ This also proves that every vector named in the Statement is in the domain of the indicated multiplier.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $z_n=t_n+is_n\\to z=t+is$ in $S$, then $f_{z_n}(\\lambda)\\to f_z(\\lambda)$ pointwise and $$|f_{z_n}(\\lambda)-f_z(\\lambda)|^2\\leq2\\lambda^{s_n}+2\\lambda^s\\leq4(1+\\lambda).$$ The majorant is integrable by $\\xi\\in D(A^{1/2})$. Dominated convergence applied to the scalar spectral measure therefore gives $\\|A^{-iz_n/2}\\xi-A^{-iz/2}\\xi\\|^2\\to0$, proving strong continuity on the closed strip.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Fix $z_0$ with $s_0=\\operatorname{Im}z_0\\in(0,1)$. Choose $\\delta>0$ so that $2\\delta<s_0<1-2\\delta$. For $|h|\\leq\\delta$, the scalar difference quotient of $f_z(\\lambda)$ along the segment from $z_0$ to $z_0+h$ is bounded by $$\\frac12|\\log\\lambda|\\sup_{0\\leq r\\leq1}\\lambda^{\\operatorname{Im}(z_0+rh)/2}.$$ When $0<\\lambda\\leq1$ this is bounded by $\\frac12|\\log\\lambda|\\lambda^{\\delta/2}$, and when $\\lambda\\geq1$ it is bounded by $\\frac12|\\log\\lambda|\\lambda^{(1-\\delta)/2}$. The first expression has a finite supremum and the second is bounded by a constant depending on $\\delta$ times $\\lambda^{1/2}$. Thus the difference quotients are dominated in $L^2(\\mu_\\xi)$ by a constant times $1+\\lambda^{1/2}$. Their pointwise limit is $(-i/2)(\\log\\lambda)f_{z_0}(\\lambda)$. Dominated convergence in the spectral norm proves that the vector difference quotient converges in $H$ to the spectral integral of this limit. Hence the vector map is complex-differentiable at $z_0$.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Step 2.2 applies at every point of $S^\\circ$, so the vector map is norm-holomorphic throughout the open strip. The estimate and closed-strip continuity were proved in steps 1.1–1.2.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Zero Hilbert space is permitted and the vector/domain statements reduce to the zero vector (step 1.1)."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero vector/operator is included in the displayed operator and norm identities (step 1.1)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "One-dimensional or identity-operator data satisfy the hypotheses and the proof formulas (step 1.1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The proof includes scalar, repeated-eigenvalue, or finite-trace degenerate cases under its hypotheses (step 3.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Closed-strip continuity is proved at Im z=0 and Im z=1; holomorphy is restricted to the open strip (step 2.1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The declared Axiom of Choice and exact transitive choice suppliers are used where needed (step 1.1)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No biconditional is asserted in this carrier."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No biconditional is asserted in this carrier."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "The statement is an operator-theoretic or definitional assertion over general Hilbert spaces/algebras; finite substitutions cannot replace its displayed proof. The scalar and endpoint boundary cases are recorded in the worksheet.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-100 authoring self-review",
+        "notes": "Complete local arguments and exact supplier interfaces inspected. This record is an authoring check, not independent scientific acceptance."
+      }
+    },
+    "lem-qsmx-modular-unitary-strong-continuity": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-spectral-theorem-for-unbounded-self-adjoint-operators",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $T$ be a self-adjoint operator on the nonzero\ncomplex Hilbert space $H$. Then there is a unique regular projection valued\nmeasure $E$ on the Borel $\\sigma$-algebra of $\\mathbb R$ such that\n$$\nD(T)=\\Bigl\\{x\\in H:\\int_{\\mathbb R}\\lambda^2\\,dE_x(\\lambda)<\\infty\\Bigr\\},\\qquad Tx=\\int_{\\mathbb R}\\lambda\\,dE(\\lambda)x\\quad(x\\in D(T)).\n$$\nConversely, if $E$ is a regular projection valued measure on $\\mathbb R$, then\nthe operator $\\int\\lambda\\,dE$ with that domain is self-adjoint and its\nspectral projection valued measure is $E$ again.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-unbounded-integral-against-a-pvm",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $E$ be a projection valued measure on the\nmeasurable space $(X,\\Sigma)$ acting on the complex Hilbert space $H$\n([[def-projection-valued-measure]]), and let $f:X\\to\\mathbb C$ be\n$\\Sigma$-measurable. Put\n$$D(f(E)):=\\Bigl\\{x\\in H:\\int_X|f|^2\\,dE_x<\\infty\\Bigr\\},\\qquad E_x(B)=\\langle E(B)x,x\\rangle,$$\nwhere the scalar measures $E_x$ are those of\n[[lem-scalar-and-complex-measures-from-a-pvm]], and for $x\\in D(f(E))$ set\n$$f(E)x:=\\lim_{n\\to\\infty}\\Phi_E\\bigl(f\\,\\mathbf 1_{\\{|f|\\le n\\}}\\bigr)x,$$\nFor $H\\ne\\{0\\}$, the bounded integrals $\\Phi_E$ are those of\n[[thm-bounded-borel-pvm-integral]], and the limit is taken in the norm of $H$.\nFor $H=\\{0\\}$, define $\\Phi_E(g)$ to be the unique operator on $H$ for every bounded measurable $g$. Then $E_0$ is the zero measure, $D(f(E))=H$, and $f(E)0=0$. Thus this case is defined directly without applying a theorem requiring a nonzero space.\n\n**Well-definedness.** $D(f(E))$ is a linear subspace: the estimate\n$E_{x+y}\\le2E_x+2E_y$ for scalar measures and $E_{\\alpha x}=|\\alpha|^2E_x$\nfollow from $\\|E(B)(x+y)\\|^2\\le2\\|E(B)x\\|^2+2\\|E(B)y\\|^2$ and\n$\\|E(B)\\alpha x\\|^2=|\\alpha|^2\\|E(B)x\\|^2$. Writing $f_n:=f\\mathbf 1_{\\{|f|\\le n\\}}$\nthe sets $\\{|f|\\le n\\}$ are measurable, so $f_n$ is bounded and measurable.\nFor $m,n\\ge N$,\n$$|f_n-f_m|^2\\le |f|^2\\mathbf1_{\\{|f|>N\\}}.$$\nThe integral of the right side against $E_x$ tends to zero by\n[[thm-dominated-convergence]], with the integrable majorant $|f|^2$ and\npointwise limit zero since $f$ is finite-valued. Linearity of the bounded\ncalculus ([[thm-pvm-integral-is-a-star-homomorphism]]) and its quadratic identity give\n$$\\|\\Phi_E(f_n)x-\\Phi_E(f_m)x\\|^2=\\int|f_n-f_m|^2\\,dE_x.$$\nThese clauses hold directly on the zero space as well. Hence the truncation\nvectors are Cauchy and converge uniquely by Hilbert-space completeness\n([[def-hilbert-space]]). The limit is linear in $x$ because every truncation\noperator is linear and addition and scalar multiplication are norm-continuous.\nCountable Choice is inherited from the bounded PVM suppliers; no further\nchoice is needed to take these specified limits.\n\nFinally, if two $\\Sigma$-measurable functions $f,g$ agree outside a measurable\nset $N$ with $E(N)=0$, then $E_x(N)=\\|E(N)x\\|^2=0$ for every $x$. Thus the\nintegrals of $|f|^2$ and $|g|^2$ agree, so their domains agree. At every\ntruncation level their bounded truncations agree outside $N$; the quadratic\nidentity applied to the difference gives equal truncation vectors for every\n$x$. Taking limits gives $f(E)x=g(E)x$ on their common domain.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-unbounded-borel-functional-calculus",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $T$ be a self-adjoint operator with spectral\nprojection valued measure $E$ on $\\mathbb R$ acting on a complex Hilbert space $H$\n([[thm-spectral-theorem-for-unbounded-self-adjoint-operators]]) and let\n$f,g:\\mathbb R\\to\\mathbb C$ be Borel. Write $u(T)=u(E)$, with the truncation definition below. If $H=\\{0\\}$, use its unique PVM and unique full-domain operator directly. Then:\n\n1. $f(T)^*=\\overline f(T)$;\n2. $f(T)g(T)$ has domain $D(g(T))\\cap D((fg)(T))$ and equals the restriction of\n   $(fg)(T)$ to that domain, and its closure is $(fg)(T)$;\n3. on $D(f(T))\\cap D(g(T))$ the sum $f(T)+g(T)$ equals the restriction of\n   $(f+g)(T)$, and the closure of $f(T)+g(T)$ is $(f+g)(T)$;\n4. the spectrum of $f(T)$ is the essential range\n   $\\{z\\in\\mathbb C:E(f^{-1}(B_\\varepsilon(z)))\\ne0$ for every\n   $\\varepsilon>0\\}$ of $f$ with respect to $E$;\n5. if $f$ is continuous then that essential range is the closure of\n   $f(\\sigma(T))$, with the closure redundant when $f(\\sigma(T))$ is closed.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. All functions below have domain $X$. Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $t_n\\to t$. For every $\\lambda>0$, $\\lambda^{it_n}\\to\\lambda^{it}$, while $|\\lambda^{it_n}-\\lambda^{it}|^2\\leq4$. Since $\\mu_\\xi((0,\\infty))=\\|\\xi\\|^2<\\infty$, [F1] and [F2] give\n$$\\|A^{it_n}\\xi-A^{it}\\xi\\|^2=\\int_{(0,\\infty)}|\\lambda^{it_n}-\\lambda^{it}|^2\\,d\\mu_\\xi(\\lambda)\\longrightarrow0.$$\nThus the orbit is sequentially continuous.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The real parameter space and Hilbert-space norm topology are metric, so sequential continuity is equivalent to continuity. Therefore $t\\mapsto A^{it}\\xi$ is norm-continuous for every $\\xi\\in H$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Zero Hilbert space is permitted and the vector/domain statements reduce to the zero vector (step 1.1)."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero vector/operator is included in the displayed operator and norm identities (step 1.1)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "One-dimensional or identity-operator data satisfy the hypotheses and the proof formulas (step 1.1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The proof includes scalar, repeated-eigenvalue, or finite-trace degenerate cases under its hypotheses (step 2.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No real/complex interval endpoint is part of this statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The declared Axiom of Choice and exact transitive choice suppliers are used where needed (step 1.1)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No biconditional is asserted in this carrier."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No biconditional is asserted in this carrier."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "The statement is an operator-theoretic or definitional assertion over general Hilbert spaces/algebras; finite substitutions cannot replace its displayed proof. The scalar and endpoint boundary cases are recorded in the worksheet.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-100 authoring self-review",
+        "notes": "Complete local arguments and exact supplier interfaces inspected. This record is an authoring check, not independent scientific acceptance."
+      }
+    },
+    "def-qsmx-von-neumann-kms-state": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition restricts to M≠{0}; the zero algebra is excluded (Definition)."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero values of observables are admitted by the definition (Definition)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The scalar algebra/unit vector case satisfies the stated definitions (Definition)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The proof includes scalar, repeated-eigenvalue, or finite-trace degenerate cases under its hypotheses (Definition)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Both boundary lines of the closed strip are included in the definition (Definition)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice principle or choice-selected object occurs in the KMS definition."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No biconditional is asserted in this carrier."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No biconditional is asserted in this carrier."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "The statement is an operator-theoretic or definitional assertion over general Hilbert spaces/algebras; finite substitutions cannot replace its displayed proof. The scalar and endpoint boundary cases are recorded in the worksheet.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-100 authoring self-review",
+        "notes": "Complete local arguments and exact supplier interfaces inspected. This record is an authoring check, not independent scientific acceptance."
+      }
+    },
+    "lem-qsmx-tomita-operator-involution": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qsmx-von-neumann-algebra",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. Let $H$ be a complex Hilbert space and\n$\\mathcal B(H)$ the space of bounded linear operators on $H$\n([[def-space-of-bounded-linear-operators]]). For a set\n$\\mathcal S\\subseteq\\mathcal B(H)$, write\n\n$$\\mathcal S':=\\{T\\in\\mathcal B(H):Ts=sT\\text{ for every }s\\in\\mathcal S\\}, \\qquad \\mathcal S'':=(\\mathcal S')'.$$\n\nThe strong operator topology on $\\mathcal B(H)$ is the topology of pointwise\nnorm convergence: $T_\\alpha\\to T$ strongly exactly when\n$\\|(T_\\alpha-T)\\xi\\|\\to0$ for every $\\xi\\in H$. The weak operator topology is\nthe topology of pointwise matrix-coefficient convergence: $T_\\alpha\\to T$\nweakly exactly when $\\langle T_\\alpha\\xi,\\eta\\rangle\\to\\langle T\\xi,\\eta\\rangle$\nfor every $\\xi,\\eta\\in H$. Use the linear-first inner-product convention.\n\nA **concrete von Neumann algebra** on $H$ is a unital star subalgebra\n$M\\subseteq\\mathcal B(H)$ satisfying $M=M''$. Under Choice, the double\ncommutant theorem makes this equivalent to being closed in the weak operator\ntopology.\n\nAn operator $a\\in\\mathcal B(H)$ is **positive** when $a=a^*$ and\n$\\langle a\\xi,\\xi\\rangle\\ge0$ for every $\\xi\\in H$, using the bounded\nadjoint convention of [[thm-hilbert-adjoint-properties]]. Write $M_+$ for the\npositive operators in $M$ and $a\\le b$ when $b-a$ is positive.\n\nA vector $\\Omega\\in H$ is **cyclic** for $M$ when\n$\\overline{M\\Omega}=H$, and is **separating** for $M$ when\n$x\\Omega=0$ for $x\\in M$ implies $x=0$. For a unit vector $\\Omega$, define its\nvector functional by $\\omega_\\Omega(x)=\\langle x\\Omega,\\Omega\\rangle$.\nIt is **faithful** when $\\omega_\\Omega(x^*x)=0$ implies $x=0$; this is\nequivalent to $\\Omega$ being separating because\n$\\omega_\\Omega(x^*x)=\\|x\\Omega\\|^2$.\n\nFor a bounded linear functional $\\varphi:M\\to\\mathbb C$, **positive** means\n$\\varphi(a)\\ge0$ for every $a\\in M_+$. A positive functional is **normal**\nwhen $\\varphi(\\sup_\\alpha x_\\alpha)=\\sup_\\alpha\\varphi(x_\\alpha)$ for each\nbounded increasing net $(x_\\alpha)$ in $M_+$ whose supremum is taken in $M$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qsmx-closed-antilinear-polar-calculus",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $H$ be a complex Hilbert space and let\n$S:D(S)\\subseteq H\\to H$ be a densely defined closable antilinear operator.\nIts graph closure $\\overline S$ is closed and has the polar decomposition\n$$\\overline S=J|\\overline S|,\\qquad |\\overline S|=(\\overline S^{\\,*}\\overline S)^{1/2}.$$\nHere $J$ is antilinear, vanishes on $\\ker\\overline S$, and is isometric on\n$(\\ker\\overline S)^\\perp$; if $\\overline S$ is injective and has dense range,\n$J$ is antiunitary.\n\nFor a concrete von Neumann algebra $M\\subseteq\\mathcal B(H)$ and a vector\n$\\Omega$ cyclic and separating for $M$, define\n$D(S_0)=M\\Omega$ and $S_0(x\\Omega)=x^*\\Omega$ for $x\\in M$. Then $S_0$ is\nwell defined, densely defined, antilinear, and closable.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qsmx-conjugate-hilbert-space-and-antilinear-adjoint",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. All inner products are linear in their first\nargument. If $H$ is a complex Hilbert space, its **conjugate Hilbert space**\n$\\overline H$ consists of symbols $\\overline x$ for $x\\in H$, with\n$\\overline x+\\overline y=\\overline{x+y}$,\n$a\\,\\overline x=\\overline{\\overline a\\,x}$ for $a\\in\\mathbb C$, and\n$$\\langle\\overline x,\\overline y\\rangle_{\\overline H} :=\\overline{\\langle x,y\\rangle_H}.$$\nThe canonical map $c_H:H\\to\\overline H$, $c_Hx=\\overline x$, is a\nconjugate-linear surjective isometry.\n\nFor complex Hilbert spaces $H_1,H_2$, a linear operator $A$ is a linear map\n$A:D(A)\\to H_2$ on a linear domain $D(A)\\subseteq H_1$. Its graph is\n$\\Gamma(A)=\\{(x,Ax):x\\in D(A)\\}\\subseteq H_1\\oplus H_2$, with the direct-sum\nHilbert norm. It is densely defined when $D(A)$ is dense in $H_1$, and closed\nwhen $\\Gamma(A)$ is closed.\n\nFor a densely defined linear operator $A:D(A)\\subseteq H_1\\to H_2$, define\n$D(A^*)$ to consist of those $y\\in H_2$ for which\n$x\\mapsto\\langle Ax,y\\rangle_{H_2}$ is bounded on $D(A)$ in the $H_1$ norm.\nThe bounded functional extends uniquely to $H_1$; its Riesz vector\n$A^*y\\in H_1$ is specified by\n$$\\langle Ax,y\\rangle_{H_2}=\\langle x,A^*y\\rangle_{H_1} \\qquad(x\\in D(A)).$$\nThis defines the linear adjoint $A^*:D(A^*)\\subseteq H_2\\to H_1$.\n\nAn operator $S:D(S)\\subseteq H\\to H$ is **antilinear** when\n$S(ax+by)=\\overline a\\,Sx+\\overline b\\,Sy$. Its associated linear operator\n$\\widetilde S:D(\\widetilde S)\\subseteq\\overline H\\to H$ is\n$D(\\widetilde S)=c_H(D(S))$ and\n$\\widetilde S(\\overline x)=Sx$. For densely defined antilinear $S$, define\n$$S^*:=c_H^{-1}\\widetilde S^*,$$\non the domain $D(S^*)=D(\\widetilde S^*)$. Thus $S^*$ is antilinear and\n$$\\langle Sx,y\\rangle_H=\\langle S^*y,x\\rangle_H \\qquad(x\\in D(S),\\ y\\in D(S^*)).$$",
+          "uses": [
+            "2.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qsmx-bicommutant-and-commutant-cyclicity",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $H$ be a complex Hilbert space and let\n$R\\subseteq\\mathcal B(H)$ be a unital star subalgebra. Its strong-operator\nclosure is $R''$. If $M\\subseteq\\mathcal B(H)$ is a concrete von Neumann\nalgebra and $\\Omega\\in H$, then $\\Omega$ is cyclic for $M$ exactly when it is\nseparating for $M'$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qsmx-von-neumann-algebra",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. Let $H$ be a complex Hilbert space and\n$\\mathcal B(H)$ the space of bounded linear operators on $H$\n([[def-space-of-bounded-linear-operators]]). For a set\n$\\mathcal S\\subseteq\\mathcal B(H)$, write\n\n$$\\mathcal S':=\\{T\\in\\mathcal B(H):Ts=sT\\text{ for every }s\\in\\mathcal S\\}, \\qquad \\mathcal S'':=(\\mathcal S')'.$$\n\nThe strong operator topology on $\\mathcal B(H)$ is the topology of pointwise\nnorm convergence: $T_\\alpha\\to T$ strongly exactly when\n$\\|(T_\\alpha-T)\\xi\\|\\to0$ for every $\\xi\\in H$. The weak operator topology is\nthe topology of pointwise matrix-coefficient convergence: $T_\\alpha\\to T$\nweakly exactly when $\\langle T_\\alpha\\xi,\\eta\\rangle\\to\\langle T\\xi,\\eta\\rangle$\nfor every $\\xi,\\eta\\in H$. Use the linear-first inner-product convention.\n\nA **concrete von Neumann algebra** on $H$ is a unital star subalgebra\n$M\\subseteq\\mathcal B(H)$ satisfying $M=M''$. Under Choice, the double\ncommutant theorem makes this equivalent to being closed in the weak operator\ntopology.\n\nAn operator $a\\in\\mathcal B(H)$ is **positive** when $a=a^*$ and\n$\\langle a\\xi,\\xi\\rangle\\ge0$ for every $\\xi\\in H$, using the bounded\nadjoint convention of [[thm-hilbert-adjoint-properties]]. Write $M_+$ for the\npositive operators in $M$ and $a\\le b$ when $b-a$ is positive.\n\nA vector $\\Omega\\in H$ is **cyclic** for $M$ when\n$\\overline{M\\Omega}=H$, and is **separating** for $M$ when\n$x\\Omega=0$ for $x\\in M$ implies $x=0$. For a unit vector $\\Omega$, define its\nvector functional by $\\omega_\\Omega(x)=\\langle x\\Omega,\\Omega\\rangle$.\nIt is **faithful** when $\\omega_\\Omega(x^*x)=0$ implies $x=0$; this is\nequivalent to $\\Omega$ being separating because\n$\\omega_\\Omega(x^*x)=\\|x\\Omega\\|^2$.\n\nFor a bounded linear functional $\\varphi:M\\to\\mathbb C$, **positive** means\n$\\varphi(a)\\ge0$ for every $a\\in M_+$. A positive functional is **normal**\nwhen $\\varphi(\\sup_\\alpha x_\\alpha)=\\sup_\\alpha\\varphi(x_\\alpha)$ for each\nbounded increasing net $(x_\\alpha)$ in $M_+$ whose supremum is taken in $M$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $x\\Omega=y\\Omega$ for $x,y\\in M$, then $(x-y)\\Omega=0$ and separatingness gives $x=y$. Thus $S_0$ is well defined; it is antilinear by $(ax+by)^*=\\bar a x^*+\\bar b y^*$, and its domain is dense by cyclicity. The same reasoning makes $F_0$ well defined; [F4] makes $M'\\Omega$ dense. Also $S_0^2(x\\Omega)=x\\Omega$ and $F_0^2(x'\\Omega)=x'\\Omega$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $x\\in M$ and $x'\\in M'$, the adjoint identity and commutation give $$(x'\\Omega|S_0x\\Omega)=(x'\\Omega|x^*\\Omega)=(x\\Omega|x'^*\\Omega)=(x\\Omega|F_0x'\\Omega).$$ By [F3] this says $F_0\\subseteq S_0^*$ and $S_0\\subseteq F_0^*$. In particular $F_0$ is closable, and $S_0$ is closable also by [F2].",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Let $\\xi\\in D(S)$ and choose $\\xi_n\\in M\\Omega$ with $\\xi_n\\to\\xi$ and $S_0\\xi_n\\to S\\xi$, using the definition of graph closure. Since $S_0^2\\xi_n=\\xi_n$, the graph points $(S\\xi_n,S(S\\xi_n))=(S_0\\xi_n,\\xi_n)$ converge to $(S\\xi,\\xi)$. Closedness of $S$ implies $S\\xi\\in D(S)$ and $S^2\\xi=\\xi$. Hence $S$ is an involution, so it is injective and its range is the dense domain $D(S)$.",
+          "step": "2.2",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Apply the closed-antilinear polar result [F2] to $S$. Injectivity and dense range make its partial anti-isometry $J$ antiunitary. The inverse of $S=J\\Delta^{1/2}$ is $\\Delta^{-1/2}J^*=J^*(J\\Delta^{-1/2}J^*)$, whose second factor is positive self-adjoint. Since $S^{-1}=S$, uniqueness of the polar decomposition gives $J=J^*$ and $\\Delta^{1/2}=J\\Delta^{-1/2}J$. Thus $J^2=I$ and $J\\Delta J=\\Delta^{-1}$. For antiunitary conjugation the functional-calculus rule is $Jf(\\Delta)J=\\overline f(J\\Delta J)$. Taking $f(s)=s^{it}$ gives $J\\Delta^{it}J=(\\Delta^{-1})^{-it}=\\Delta^{it}$, so $J$ commutes with every $\\Delta^{it}$.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Because $S$ is the graph closure of $S_0$, their adjoints agree: the adjoint identity for $S_0$ extends along convergent graph pairs to $S$, and restriction gives the converse. Hence $F=S^*=S_0^*$ and $F_0\\subseteq F$. From $S=J\\Delta^{1/2}$, the antilinear adjoint identity [F3] and self-adjointness of $\\Delta^{1/2}$ give $F=\\Delta^{1/2}J$. Functional calculus applied to $J\\Delta J=\\Delta^{-1}$ gives $\\Delta^{1/2}J=J\\Delta^{-1/2}$ on their common domain.",
+          "step": "4.1",
+          "inputs": [
+            "F3",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Since $S_0\\Omega=F_0\\Omega=\\Omega$ and $F_0\\subseteq F$, steps 3.1 and 4.1 give $\\Delta^{1/2}\\Omega=J\\Omega=\\Delta^{-1/2}\\Omega$. For the spectral measure of $\\Delta$, this equality has squared norm difference $\\int_{(0,\\infty)}|\\lambda^{1/2}-\\lambda^{-1/2}|^2\\,d\\mu_\\Omega(\\lambda)=0$. The integrand vanishes only at $\\lambda=1$, so $\\Delta\\Omega=\\Omega$ and then $J\\Omega=\\Omega$.",
+          "step": "5.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 3.1",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The hypotheses require a unit vector or n≥1; no empty carrier is admitted (step 1.1)."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero vector/operator is included in the displayed operator and norm identities (step 1.1)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "One-dimensional or identity-operator data satisfy the hypotheses and the proof formulas (step 1.1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The proof includes scalar, repeated-eigenvalue, or finite-trace degenerate cases under its hypotheses (step 5.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No real/complex interval endpoint is part of this statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The declared Axiom of Choice and exact transitive choice suppliers are used where needed (step 3.1)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No biconditional is asserted in this carrier."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No biconditional is asserted in this carrier."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "The statement is an operator-theoretic or definitional assertion over general Hilbert spaces/algebras; finite substitutions cannot replace its displayed proof. The scalar and endpoint boundary cases are recorded in the worksheet.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-100 authoring self-review",
+        "notes": "Complete local arguments and exact supplier interfaces inspected. This record is an authoring check, not independent scientific acceptance."
+      }
+    },
+    "def-qsmx-standard-modular-data": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "A unit vector cannot exist in the zero Hilbert space (Definition)."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero values of observables are admitted by the definition (Definition)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The scalar algebra/unit vector case satisfies the stated definitions (Definition)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The proof includes scalar, repeated-eigenvalue, or finite-trace degenerate cases under its hypotheses (Definition)."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no strip or interval endpoint in this definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The definition explicitly assumes AC for the modular-data interface (Definition)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No biconditional is asserted in this carrier."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No biconditional is asserted in this carrier."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "The statement is an operator-theoretic or definitional assertion over general Hilbert spaces/algebras; finite substitutions cannot replace its displayed proof. The scalar and endpoint boundary cases are recorded in the worksheet.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-100 authoring self-review",
+        "notes": "Complete local arguments and exact supplier interfaces inspected. This record is an authoring check, not independent scientific acceptance."
+      }
+    },
+    "thm-qsmx-finite-modular-density": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-qsm-matrix-state-calculus",
+          "source_section": "Statement",
+          "quote": "Use the following conventions on a complex inner-product space $H$ of dimension $D\\geq1$, with inner product linear in its first argument. For an endomorphism $A$, define $\\operatorname{Tr}A:=\\sum_{j=1}^D\\langle Ae_j,e_j\\rangle$ in an orthonormal basis; step 3.1 proves basis independence. For any Hermitian $M$, its **positive spectral subspace** (called its positive support here) is $S_M:=\\bigoplus_{\\lambda>0}\\ker(M-\\lambda I)$; when $M\\geq0$ this equals $(\\ker M)^\\perp$. Its support logarithm is $\\log(M|_{S_M}):=\\sum_{\\lambda>0}(\\log\\lambda)P_\\lambda|_{S_M}$, where $P_\\lambda$ is the orthogonal projection onto that eigenspace. No value $\\log0$ is assigned; for $M=0$ this is the unique endomorphism of the zero space. For the set $\\mathcal D(H)$ of positive semidefinite Hermitian endomorphisms with trace one, a point $\\rho$ is **extreme** if every equality $\\rho=t\\sigma+(1-t)\\tau$ with $\\sigma,\\tau\\in\\mathcal D(H)$ and $0<t<1$ implies $\\sigma=\\tau=\\rho$.\n\nLet $H$ be a complex inner-product space of finite dimension $D\\geq1$, with inner product linear in its first argument. Every Hermitian endomorphism $M$ has an orthonormal eigenbasis with real eigenvalues. For a real function $f$ on its finite spectrum, define $f(M)$ by its spectral projections; this definition is independent of the choice of eigenbasis. In particular positive square roots, exponentials, and logarithms on positive supports are well defined.\n\nFor a density matrix $\\rho$ on $H$, meaning a Hermitian positive semidefinite operator with $\\operatorname{Tr}\\rho=1$, $\\operatorname{Tr}(\\rho A)=\\sum_jp_j\\langle Au_j,u_j\\rangle$ for bounded $A$, where $\\rho=\\sum_jp_j|u_j\\rangle\\langle u_j|$. The weighted form $(X,Y)_\\rho=\\operatorname{Tr}(\\rho X^*Y)$ satisfies Cauchy–Schwarz, $|(X,Y)_\\rho|^2\\leq(X,X)_\\rho(Y,Y)_\\rho$. Finally, $\\operatorname{Tr}(\\rho^2)\\leq1$, with equality exactly for rank-one densities, and those are exactly the extreme points of the finite density-matrix set.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qsm-density-trace-state",
+          "source_section": "Definition",
+          "quote": "Let $H\\ne\\{0\\}$ be a separable complex Hilbert space, with inner product linear in its first argument. An operator $\\rho\\in\\mathcal B(H)$ is a **density operator** when it is positive, trace class, and $\\operatorname{Tr}\\rho=1$. Here trace class means compact with summable singular values, and $\\operatorname{Tr}$ is the basis-independent trace of a trace-class operator.\n\nThe **normal density state represented by $\\rho$** is the functional on bounded operators\n$\n\\omega_\\rho(A):=\\operatorname{Tr}(\\rho A),\\qquad A\\in\\mathcal B(H).\n$\nIn this page, “normal density state” means this specified trace-pairing representation; no equivalence with other definitions of normal functionals is assumed. The trace pairing is used only for bounded $A$. Unbounded observables are treated through their spectral probability measures in [[lem-qsm-trace-state-calculus]].",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qsmx-von-neumann-algebra",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. Let $H$ be a complex Hilbert space and\n$\\mathcal B(H)$ the space of bounded linear operators on $H$\n([[def-space-of-bounded-linear-operators]]). For a set\n$\\mathcal S\\subseteq\\mathcal B(H)$, write\n\n$$\\mathcal S':=\\{T\\in\\mathcal B(H):Ts=sT\\text{ for every }s\\in\\mathcal S\\}, \\qquad \\mathcal S'':=(\\mathcal S')'.$$\n\nThe strong operator topology on $\\mathcal B(H)$ is the topology of pointwise\nnorm convergence: $T_\\alpha\\to T$ strongly exactly when\n$\\|(T_\\alpha-T)\\xi\\|\\to0$ for every $\\xi\\in H$. The weak operator topology is\nthe topology of pointwise matrix-coefficient convergence: $T_\\alpha\\to T$\nweakly exactly when $\\langle T_\\alpha\\xi,\\eta\\rangle\\to\\langle T\\xi,\\eta\\rangle$\nfor every $\\xi,\\eta\\in H$. Use the linear-first inner-product convention.\n\nA **concrete von Neumann algebra** on $H$ is a unital star subalgebra\n$M\\subseteq\\mathcal B(H)$ satisfying $M=M''$. Under Choice, the double\ncommutant theorem makes this equivalent to being closed in the weak operator\ntopology.\n\nAn operator $a\\in\\mathcal B(H)$ is **positive** when $a=a^*$ and\n$\\langle a\\xi,\\xi\\rangle\\ge0$ for every $\\xi\\in H$, using the bounded\nadjoint convention of [[thm-hilbert-adjoint-properties]]. Write $M_+$ for the\npositive operators in $M$ and $a\\le b$ when $b-a$ is positive.\n\nA vector $\\Omega\\in H$ is **cyclic** for $M$ when\n$\\overline{M\\Omega}=H$, and is **separating** for $M$ when\n$x\\Omega=0$ for $x\\in M$ implies $x=0$. For a unit vector $\\Omega$, define its\nvector functional by $\\omega_\\Omega(x)=\\langle x\\Omega,\\Omega\\rangle$.\nIt is **faithful** when $\\omega_\\Omega(x^*x)=0$ implies $x=0$; this is\nequivalent to $\\Omega$ being separating because\n$\\omega_\\Omega(x^*x)=\\|x\\Omega\\|^2$.\n\nFor a bounded linear functional $\\varphi:M\\to\\mathbb C$, **positive** means\n$\\varphi(a)\\ge0$ for every $a\\in M_+$. A positive functional is **normal**\nwhen $\\varphi(\\sup_\\alpha x_\\alpha)=\\sup_\\alpha\\varphi(x_\\alpha)$ for each\nbounded increasing net $(x_\\alpha)$ in $M_+$ whose supremum is taken in $M$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-double-commutant-theorem-for-concrete-von-neumann-algebras",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $H$ be a complex Hilbert space and let $M\\subseteq\\mathcal B(H)$ be a unital $*$-subalgebra closed in the weak operator topology. Then $M''=M$, and $M$ is also closed in the strong operator topology. Consequently the concrete von Neumann algebras of [[def-von-neumann-algebra-and-commutant]] are exactly the unital $*$-subalgebras that are closed in either of these topologies. For an arbitrary set $\\mathcal S\\subseteq\\mathcal B(H)$ one has $W^*(\\mathcal S)''=W^*(\\mathcal S)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qsm-kms-state",
+          "source_section": "Definition",
+          "quote": "Here a complex C$^*$-algebra is a complex Banach algebra with associative bilinear multiplication, submultiplicative norm, and a conjugate-linear involution satisfying $\\|A^*A\\|=\\|A\\|^2$; **unital** means that it has a nonzero identity $I$ ([[def-c-star-algebra]]). A $*$-automorphism is a bijective complex-linear map preserving multiplication and involution. Let $t\\mapsto\\alpha_t$ be a strongly continuous one-parameter group of such automorphisms, so $\\alpha_0$ is the identity and $\\alpha_s\\alpha_t=\\alpha_{s+t}$. It is **strongly continuous** when $t\\mapsto\\alpha_t(A)$ is norm-continuous for each fixed $A\\in\\mathcal A$. A **state** is a bounded complex-linear functional $\\omega:\\mathcal A\\to\\mathbb C$ with $\\omega(I)=1$ and $\\omega(A^*A)\\ge0$ for every $A\\in\\mathcal A$; this is the state convention of [[def-qsm-infinite-algebraic-state]].\n\nFix absolute temperature $T>0$ in kelvins and Boltzmann's constant $k_B>0$ in J K$^{-1}$; the inverse-temperature parameter is $\\beta:=(k_BT)^{-1}>0$, measured in J$^{-1}$. Let the reduced Planck constant $\\hbar>0$ have units J s. Write $b:=\\beta\\hbar$, measured in seconds, and\n\n$$S_b:=\\{z\\in\\mathbb C:0\\le\\operatorname{Im}z\\le b\\},\\qquad S_b^\\circ:=\\{z\\in\\mathbb C:0<\\operatorname{Im}z<b\\}.$$\n\nA state $\\omega$ is a **$\\beta$-KMS state for $\\alpha$ in physical time** when for every $A,B\\in\\mathcal A$ there is a bounded function $F_{A,B}:S_b\\to\\mathbb C$ (that is, $\\sup_{z\\in S_b}|F_{A,B}(z)|<\\infty$) that is continuous on $S_b$, complex-differentiable at every point of $S_b^\\circ$, and satisfies\n\n$$F_{A,B}(t)=\\omega\\!\\left(A\\alpha_t(B)\\right),\\qquad F_{A,B}(t+ib)=\\omega\\!\\left(\\alpha_t(B)A\\right)\\quad(t\\in\\mathbb R).$$\n\nFor the assigned quantum spin model, $\\mathcal A$ is the norm-completed quasi-local algebra of [[def-qsm-quasilocal-spin-algebra]] and $\\alpha$ is the thermodynamic dynamics of [[thm-qsm-finite-range-spin-dynamics]], under that theorem's stated hypotheses. The strip width is $\\beta\\hbar$ in physical seconds; setting $\\hbar=1$ is a separate natural-unit convention. This is a mathematical equilibrium criterion for the specified algebra and dynamics. It does not assert that a model describes a material, that a system has dynamically relaxed, or that all stationary states are KMS.",
+          "uses": [
+            "1.2",
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $M=\\{L_A:A\\in M_n(\\mathbb C)\\}$ on $\\mathcal H_{\\rm HS}$, where $L_A X=AX$. The Hilbert-Schmidt adjoint satisfies $L_A^*=L_{A^*}$, so $M$ is a unital star subalgebra. The ambient operator space $\\mathcal B(\\mathcal H_{\\rm HS})$ is finite dimensional; hence $M$ is weak-operator closed. By [F2], $M$ is a concrete von Neumann algebra. Since $\\rho^{1/2}$ is invertible, every $X\\in\\mathcal H_{\\rm HS}$ equals $L_{X\\rho^{-1/2}}\\Omega$, so $\\Omega$ is cyclic. If $L_A\\Omega=0$, then $A\\rho^{1/2}=0$ and invertibility gives $A=0$, so $\\Omega$ is separating. Finally, $$\\langle L_A\\Omega,\\Omega\\rangle_{\\rm HS}=\\operatorname{Tr}(\\rho^{1/2}A\\rho^{1/2})=\\operatorname{Tr}(\\rho A),$$ using finite trace cyclicity.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For $A,B\\in M_n(\\mathbb C)$ define $$F_{A,B}(z)=\\operatorname{Tr}\\!\\left(\\rho A e^{izH/\\hbar}Be^{-izH/\\hbar}\\right).$$ Finite matrix exponentials are entire, so $F_{A,B}$ is entire. If $0\\leq\\operatorname{Im}z\\leq\\beta\\hbar$, the real-time factors are unitary and the two imaginary-time factors have norms at most $e^{\\beta\\|H\\|}$ each. Since $\\|\\rho\\|_1=1$, $|F_{A,B}(z)|\\leq\\|A\\|\\|B\\|e^{2\\beta\\|H\\|}$ uniformly on that strip. The group $\\alpha_s$ is norm-continuous because its matrix entries are continuous.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Choose an orthonormal eigenbasis of $\\rho$, with eigenvalues $p_j>0$, and write $E_{ij}=|i\\rangle\\langle j|$. Then $E_{ij}\\Omega=\\sqrt{p_j}E_{ij}$ and $E_{ij}^*\\Omega=\\sqrt{p_i}E_{ji}$, whence $S(E_{ij})=\\sqrt{p_i/p_j}\\,E_{ji}$. The maps $JX=X^*$ and $\\Delta X=\\rho X\\rho^{-1}$ satisfy $J\\Delta^{1/2}E_{ij}=\\sqrt{p_i/p_j}\\,E_{ji}$ and $\\Delta E_{ij}=(p_i/p_j)E_{ij}$. Thus $S=J\\Delta^{1/2}$ on a basis, so uniqueness of the polar decomposition gives the stated modular data.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For $X\\in\\mathcal H_{\\rm HS}$, $$\\Delta^{it}L_A\\Delta^{-it}X=\\rho^{it}A\\rho^{-it}X,$$ because $\\Delta^{-it}X=\\rho^{-it}X\\rho^{it}$ and the final right factor $\\rho^{it}$ cancels $\\rho^{-it}$. Hence $\\sigma_t(A)=\\rho^{it}A\\rho^{-it}$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For $\\rho=e^{-\\beta H}/Z$, functional calculus gives $\\rho^{it}=Z^{-it}e^{-i\\beta tH}$; the scalar factor cancels in conjugation. Substituting $t=-s/(\\beta\\hbar)$ into step 3.1 yields $\\sigma_{-s/(\\beta\\hbar)}(A)=e^{isH/\\hbar}Ae^{-isH/\\hbar}=\\alpha_s(A)$. Here $\\beta\\hbar$ has units seconds, so the modular parameter is dimensionless.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "At $z=t+i\\beta\\hbar$, write $U=e^{itH/\\hbar}$. Since $U$ commutes with $e^{\\pm\\beta H}$, $$F_{A,B}(t+i\\beta\\hbar)=Z^{-1}\\operatorname{Tr}\\!\\left(e^{-\\beta H}A e^{-\\beta H}\\alpha_t(B)e^{\\beta H}\\right) =Z^{-1}\\operatorname{Tr}\\!\\left(Ae^{-\\beta H}\\alpha_t(B)\\right) =\\operatorname{Tr}\\!\\left(\\rho\\alpha_t(B)A\\right).$$ The middle equality cycles $e^{\\beta H}$ past the trace, and the last cycles $A$ past the trace. The lower boundary is $F_{A,B}(t)=\\operatorname{Tr}(\\rho A\\alpha_t(B))$. Thus [F3] gives the physical-time $\\beta$-KMS condition with width $\\beta\\hbar$.",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The hypotheses require a unit vector or n≥1; no empty carrier is admitted (step 1.1)."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero vector/operator is included in the displayed operator and norm identities (step 1.1)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "One-dimensional or identity-operator data satisfy the hypotheses and the proof formulas (step 1.1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The proof includes scalar, repeated-eigenvalue, or finite-trace degenerate cases under its hypotheses (step 5.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Both physical-time KMS boundaries at Im z=0 and Im z=βℏ are computed (step 5.1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The declared Axiom of Choice and exact transitive choice suppliers are used where needed (step 1.1)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No biconditional is asserted in this carrier."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No biconditional is asserted in this carrier."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "n=1 scalar density",
+          "inputs": "n=1, ρ=[1], H=[E]",
+          "calculation": "J acts by conjugation, Δ=1, σ_t is the identity and ρ=e^{−βE}/Z is the unique scalar state.",
+          "result": "Modular and physical dynamics are both the identity; the KMS boundary identity is exact."
+        },
+        {
+          "case": "faithful two-level diagonal density",
+          "inputs": "ρ=diag(p,1−p), 0<p<1, A=E12",
+          "calculation": "ρ^{it}E12ρ^{−it}=e^{it log(p/(1−p))}E12; with ρ=e^{−βH}/Z, the coefficient is e^{−iβt(E1−E2)}.",
+          "result": "Setting t=−s/(βℏ) gives the physical phase e^{is(E1−E2)/ℏ}, matching steps 2.1–2.2."
+        },
+        {
+          "case": "upper physical strip boundary",
+          "inputs": "finite Hermitian H, β>0, A,B∈Mn(C)",
+          "calculation": "At z=t+iβℏ, cyclicity cancels e^{βH} against e^{−βH} and yields Tr(ρ α_t(B)A).",
+          "result": "The upper boundary agrees with the physical-time KMS definition in step 3.2."
+        }
+      ],
+      "finite_checks_disposition": "These finite substitutions check matrix units, units and KMS boundary interfaces only; the theorem proof remains the general finite-dimensional argument in the carrier, and the example does not infer a clock from state data.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-100 authoring self-review",
+        "notes": "Complete local arguments and exact supplier interfaces inspected. This record is an authoring check, not independent scientific acceptance."
+      }
+    },
+    "lem-qsmx-modular-resolvent-core": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "thm-choice-implies-dependent-implies-countable-choice",
+          "source_section": "Statement",
+          "quote": "In ZF,\n\n$$\\mathrm{AC}\\Longrightarrow\\mathrm{DC}\\Longrightarrow\\mathrm{AC}_\\omega\\Longrightarrow\\mathrm{AC}_{\\omega,\\mathrm{fin}}\\Longrightarrow\\mathrm{AC}_{\\omega,2},\\qquad \\mathrm{AC}\\Longrightarrow\\mathrm{AC}_2.$$\n\nDC here includes a prescribed initial point.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "thm-ultrafilter-lemma",
+          "source_section": "Statement",
+          "quote": "**Assume the Axiom of Choice** ([[def-axiom-of-choice]]). Let $X$ be a set and let\n$\\mathcal{F}_0$ be a filter on $X$ ([[def-filter]]). Then there is an ultrafilter\n$\\mathcal{U}$ on $X$ ([[def-ultrafilter]]) with $\\mathcal{F}_0 \\subseteq \\mathcal{U}$.\n\nThe hypothesis is spent exactly once, through Zorn's lemma at step 4.1; the rest\nof the argument is a theorem of ZF.\n\nIn particular, every set that carries a filter carries an ultrafilter. The proof\nuses Zorn's lemma ([[thm-zorn]]) and therefore the Axiom of Choice. That some\nchoice principle is unavoidable here, if ZF is consistent, is an external\nindependence result, not proved in this library; see the remarks below.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qsmx-standard-modular-data",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. Let $H$ be a complex Hilbert space with inner product linear in its first argument, let $M\\subseteq\\mathcal B(H)$ be a concrete von Neumann algebra, and let $\\Omega$ be a unit vector cyclic and separating for $M$. Define $D(S_0)=M\\Omega$ and $S_0(x\\Omega)=x^*\\Omega$ for $x\\in M$. Let $S=\\overline{S_0}$ and write its polar decomposition as $S=J\\Delta^{1/2}$. The preceding Tomita-operator lemma ensures this closure and polar data are well defined, with $\\Delta$ positive self-adjoint and injective. For $x\\in\\mathcal B(H)$ and dimensionless $t\\in\\mathbb R$, define\n$$\\sigma_t(x):=\\Delta^{it}x\\Delta^{-it}.$$\nSet $\\omega(x)=\\langle x\\Omega,\\Omega\\rangle$. The powers $\\Delta^{it}$ are the bounded unitary imaginary powers from the unbounded Borel functional calculus. At this definition stage $\\sigma_t$ is defined on $\\mathcal B(H)$; preservation of $M$ is established by a separate theorem.",
+          "uses": [
+            "1.1",
+            "1.4",
+            "2.2",
+            "3.1",
+            "4.1",
+            "5.1",
+            "7.1",
+            "8.1",
+            "9.1",
+            "10.1",
+            "11.1",
+            "12.1",
+            "13.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qsmx-tomita-operator-involution",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $H$ be a complex Hilbert space with inner product linear in its first argument, let $M\\subseteq\\mathcal B(H)$ be a concrete von Neumann algebra, and let $\\Omega$ be a unit vector that is cyclic and separating for $M$. Define $S_0(x\\Omega)=x^*\\Omega$ on $M\\Omega$ and $F_0(x'\\Omega)=x'^*\\Omega$ on $M'\\Omega$. Let $S=\\overline{S_0}$ and $F=S^*$. Then $S$ is a densely defined closed antilinear involution, its polar decomposition is $S=J\\Delta^{1/2}$ with $J$ antiunitary and $\\Delta$ positive self-adjoint and injective, and\n$$J=J^*=J^{-1},\\qquad J\\Delta J=\\Delta^{-1},\\qquad J\\Delta^{it}J=\\Delta^{it}\\ (t\\in\\mathbb R),\\qquad F=J\\Delta^{-1/2}=\\Delta^{1/2}J,\\qquad J\\Omega=\\Omega,\\qquad \\Delta\\Omega=\\Omega.$$",
+          "uses": [
+            "3.1",
+            "4.1",
+            "5.1",
+            "8.1",
+            "9.1",
+            "10.1",
+            "11.1",
+            "12.1",
+            "13.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qsmx-von-neumann-predual",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $M\\subseteq\\mathcal B(H)$ be a concrete von\nNeumann algebra on a complex Hilbert space $H$, and define\n$$M_\\perp:=\\{T\\in\\mathcal S_1(H):\\operatorname{Tr}(Tx)=0 \\text{ for every }x\\in M\\}.$$\nEquip the coset space $Q:=\\mathcal S_1(H)/M_\\perp$ with the quotient norm.\nThen the trace pairing\n$$\\Psi:M\\to Q^*,\\qquad (\\Psi(x))([T])=\\operatorname{Tr}(Tx),$$\nis a well-defined isometric bijection, and $Q$ is a Banach space. Thus $Q$ is\nan isometric predual of $M$, and its dual unit ball is weak-star compact.\nEvery vector functional $x\\mapsto\\langle x\\xi,\\xi\\rangle$ and every positive\nfunctional in $Q$ preserves suprema of bounded increasing positive nets in\n$M$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qsmx-trace-class-duality",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $H$ be a complex Hilbert space, and let\n$\\mathcal S_1(H)$ be its trace-class operators with trace norm $\\|\\cdot\\|_1$\nand trace $\\operatorname{Tr}$. Finite-rank operators are dense in\n$(\\mathcal S_1(H),\\|\\cdot\\|_1)$. For every bounded linear functional\n$\\Phi:\\mathcal S_1(H)\\to\\mathbb C$, there is a unique $X\\in\\mathcal B(H)$ such\nthat\n$$\\Phi(T)=\\operatorname{Tr}(TX)\\qquad(T\\in\\mathcal S_1(H)),$$\nand the correspondence is isometric:\n$\\|\\Phi\\|=\\|X\\|$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-banach-alaoglu",
+          "source_section": "Statement",
+          "quote": "**Assume the ultrafilter lemma.**  If $X$ is a real or complex normed space,\nthen its closed dual unit ball $B_{X^*}$ is compact in the weak-star topology\n$\\sigma(X^*,X)$.  Completeness of $X$ is not required.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-hahn-banach-dominated-extension",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $X$ be a real vector space, let\n$M \\subseteq X$ be a linear subspace, let\n$p:X \\to \\mathbb{R}$ be sublinear, and let $f:M \\to \\mathbb{R}$ be linear with\n$f(m) \\le p(m)$ for every $m \\in M$. Then there exists a linear functional\n$F:X \\to \\mathbb{R}$ such that $F|_M=f$ and $F(x) \\le p(x)$ for every $x \\in X$.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-continuous-functional-calculus-for-bounded-self-adjoint-operators",
+          "source_section": "Statement",
+          "quote": "Assume AC. For a bounded self-adjoint operator $T$ on a nonzero complex Hilbert space there is a unique isometric unital star-homomorphism $C(\\sigma(T))\\to\\mathcal B(H)$, $f\\mapsto f(T)$, sending the coordinate function $z$ to $T$, with range $C^*(I,T)$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-unbounded-borel-functional-calculus",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $T$ be a self-adjoint operator with spectral\nprojection valued measure $E$ on $\\mathbb R$ acting on a complex Hilbert space $H$\n([[thm-spectral-theorem-for-unbounded-self-adjoint-operators]]) and let\n$f,g:\\mathbb R\\to\\mathbb C$ be Borel. Write $u(T)=u(E)$, with the truncation definition below. If $H=\\{0\\}$, use its unique PVM and unique full-domain operator directly. Then:\n\n1. $f(T)^*=\\overline f(T)$;\n2. $f(T)g(T)$ has domain $D(g(T))\\cap D((fg)(T))$ and equals the restriction of\n   $(fg)(T)$ to that domain, and its closure is $(fg)(T)$;\n3. on $D(f(T))\\cap D(g(T))$ the sum $f(T)+g(T)$ equals the restriction of\n   $(f+g)(T)$, and the closure of $f(T)+g(T)$ is $(f+g)(T)$;\n4. the spectrum of $f(T)$ is the essential range\n   $\\{z\\in\\mathbb C:E(f^{-1}(B_\\varepsilon(z)))\\ne0$ for every\n   $\\varepsilon>0\\}$ of $f$ with respect to $E$;\n5. if $f$ is continuous then that essential range is the closure of\n   $f(\\sigma(T))$, with the closure redundant when $f(\\sigma(T))$ is closed.",
+          "uses": [
+            "1.1",
+            "1.4",
+            "2.2",
+            "5.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-residue-theorem-null-homologous-cycle",
+          "source_section": "Statement",
+          "quote": "Let $\\Omega\\subseteq\\mathbb C$ be open, let $f$ be meromorphic on $\\Omega$ with\npole set $S$, and let $\\Gamma$ be admissible for the residue theorem in\n$\\Omega$. Then\n\n$\\int_\\Gamma f(z)\\,dz=2\\pi i\\sum_{a\\in S}n(\\Gamma,a)\\operatorname{Res}(f,a),$\n\nwhere only finitely many terms are nonzero.",
+          "uses": [
+            "1.4",
+            "2.2",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-l-one-fourier-inversion",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. If $f\\in L^1(\\mathbb R^n;\\mathbb C)$ and $\\widehat f\\in L^1$, then\n$$g(x)=\\int\\widehat f(\\xi)e^{2\\pi ix\\cdot\\xi}\\,d\\xi$$\nis bounded and continuous, equals f almost everywhere, and equals the specified value at every Lebesgue point of f.",
+          "uses": [
+            "9.1",
+            "10.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "9.1",
+            "10.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-qsmx-modular-unitary-strong-continuity",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $H$ be a complex Hilbert space and let $A$ be a positive self-adjoint injective operator with spectral projection valued measure $E$ supported on $(0,\\infty)$. For $t\\in\\mathbb R$, the unbounded Borel functional calculus defines $A^{it}$ as a unitary on all of $H$. For every $\\xi\\in H$, the map $t\\mapsto A^{it}\\xi$ is norm-continuous.",
+          "uses": [
+            "1.4",
+            "2.2",
+            "9.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. All functions below have domain $X$. Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "9.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix $|\\lambda|=1$ with $\\lambda\\ne-1$. Write $\\lambda=e^{i\\theta}$ with $-\\pi<\\theta<\\pi$, set $\\alpha=(1+\\lambda)^{-1}$, and note $\\alpha+\\bar\\alpha=1$. Because $\\Delta$ is positive, its spectrum lies in $[0,\\infty)$; $-\\lambda\\notin[0,\\infty)$, so $(\\Delta+\\lambda)^{-1}$ is a bounded spectral multiplier.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F7",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "First let $x'\\in M'$ be a positive contraction. In the linear-second notation $(u|v)=\\langle v,u\\rangle$, define $\\psi(y)=(x'\\Omega|y\\Omega)=\\omega(x'y)$ and $\\psi_x(y)=\\omega(\\alpha xy+\\bar\\alpha yx)$ for $y\\in M$ and $x=x^*\\in M$. Since $x'$ commutes with $M$, $0\\leq\\psi\\leq\\omega$, and $\\psi$ is normal by its rank-one trace-class representation. Each $\\psi_x$ is self-adjoint. For fixed $y$, both $x\\mapsto\\omega(xy)$ and $x\\mapsto\\omega(yx)$ are normal matrix-coefficient functionals, so $x\\mapsto\\psi_x$ is continuous from the weak-star topology of $M_{\\rm sa}$ to the pointwise topology of $M_*^{\\rm sa}$. The self-adjoint unit ball of $M$ is weak-star closed; [F3]–[F4] make it compact. Hence $V=\\{\\psi_x:x=x^*,\\ \\|x\\|\\leq1\\}$ is compact and convex.",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "F4",
+            "F6",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Suppose $\\psi\\notin V$. The pointwise topology on $M_*^{\\rm sa}$ has a base of finite evaluation conditions, so there are self-adjoint $a_1,\\ldots,a_m\\in M$ for which $q=(\\psi(a_j))_{j=1}^m$ is outside the compact convex set $K=\\{(\\phi(a_j))_{j=1}^m:\\phi\\in V\\}\\subset\\mathbb R^m$. Choose $0<r<\\operatorname{dist}(q,K)$, put $U=K+B(0,r)$, choose $u_0\\in U$, and set $C=U-u_0$. The open convex neighborhood $C$ of $0$ is absorbing; its gauge $p(v)=\\inf\\{s>0:v\\in sC\\}$ is finite and sublinear, and convexity and openness give $C=\\{v:p(v)<1\\}$. With $v_0=q-u_0\\notin C$, $p(v_0)\\geq1$. On the line $\\mathbb Rv_0$ define $f(tv_0)=t\\,p(v_0)$. Positive homogeneity gives $f\\leq p$ for $t\\geq0$; for $t<0$ the inequality $p(v_0)+p(-v_0)\\geq0$ gives the same domination. By [F5], extend $f$ to a real linear $L$ on $\\mathbb R^m$ with $L\\leq p$. Then $L(k-u_0)<1\\leq L(q-u_0)$ for every $k\\in K$. Writing $L(z)=\\sum_j c_jz_j$ and $y_0=\\sum_jc_ja_j\\in M_{\\rm sa}$ gives $\\psi(y_0)>\\sup_{\\|x\\|\\leq1,\\ x=x^*}\\psi_x(y_0)$.",
+          "step": "1.3",
+          "inputs": [
+            "A1",
+            "F5",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "claim": "Fix $|\\lambda|=1$, $\\lambda=e^{i\\theta}$, $-\\pi<\\theta<\\pi$. For $n\\geq1$ let $E_n=1_{[1/n,n]}(\\Delta)$. On $E_nH$, $\\Delta$ and its inverse are bounded. Apply [F8] to each scalar matrix coefficient of $$f_n(z)=\\frac{e^{i\\theta z}}{\\sin(\\pi z)}\\Delta^{-z}E_nxE_n\\Delta^z$$ around the rectangle $-1/2\\leq\\operatorname{Re}z\\leq1/2$, $|\\operatorname{Im}z|\\leq R$. On $E_nH$, $\\log\\Delta$ is bounded, so $f_n$ is norm-meromorphic with simple poles at integers; the rectangle encloses only $0$, with residue $E_nxE_n/\\pi$. On the horizontal sides, the norm is at most $2e^{|\\theta|R}n^2\\|x\\|/(e^{\\pi R}-e^{-\\pi R})$, which tends to zero. On the right vertical side, $z=it+1/2$ gives $\\sin(\\pi z)=\\cosh(\\pi t)$, $e^{i\\theta z}=e^{-\\theta t}e^{i\\theta/2}$, and $\\Delta^{-z}E_nxE_n\\Delta^z=\\Delta^{-1/2}\\Delta^{-it}E_nxE_n\\Delta^{it}\\Delta^{1/2}$. On the left side, $z=it-1/2$ gives $\\sin(\\pi z)=-\\cosh(\\pi t)$ and the corresponding factors $\\Delta^{1/2}\\Delta^{-it}E_nxE_n\\Delta^{it}\\Delta^{-1/2}$ and $e^{-\\theta t}e^{-i\\theta/2}$. Substitution in the oriented contour formula therefore gives $$E_nxE_n=\\Delta^{1/2}E_n\\widetilde xE_n\\Delta^{-1/2}+\\lambda\\Delta^{-1/2}E_n\\widetilde xE_n\\Delta^{1/2},\\qquad \\widetilde x=e^{-i\\theta/2}\\int_{\\mathbb R}\\frac{e^{-\\theta t}}{e^{\\pi t}+e^{-\\pi t}}\\Delta^{-it}x\\Delta^{it}\\,dt.$$ The scalar weight is integrable because $|\\theta|<\\pi$. For fixed $\\xi\\in H$, the orbit $t\\mapsto\\Delta^{-it}x\\Delta^{it}\\xi$ is norm-continuous: writing $U_t=\\Delta^{-it}$, $\\|U_txU_t^*\\xi-U_sxU_s^*\\xi\\|\\leq\\|x\\|\\|(U_t^*-U_s^*)\\xi\\|+\\|(U_t-U_s)xU_s^*\\xi\\|,$ and each term tends to zero as $t\\to s$ by [F10]. Its norm is at most $\\|x\\|\\|\\xi\\|$. Define the integral as the norm limit of ordinary vector integrals over finite intervals; the integrable scalar weight makes the tails Cauchy. The resulting linear map has norm at most $\\|x\\|$ times the weight's $L^1$ norm, so it is a bounded operator. This contour identity has the normalization fixed by the residue $E_nxE_n/\\pi$.",
+          "step": "1.4",
+          "inputs": [
+            "A1",
+            "F1",
+            "F7",
+            "F8",
+            "F10",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The last strict inequality is impossible. Positivity and $0\\leq\\psi\\leq\\omega$ imply $\\psi(y_0)\\leq\\psi(|y_0|)\\leq\\omega(|y_0|)$. For $n\\geq1$, let $x_n=f_n(y_0)$ by [F6], where $f_n(s)=s/(|s|+1/n)$. Each $x_n$ is self-adjoint with $\\|x_n\\|\\leq1$ and commutes with $y_0$. The positive functions $g_n(s)=s^2/(|s|+1/n)$ increase to $|s|$, so $x_ny_0=y_0x_n=g_n(y_0)\\uparrow|y_0|$. Normality gives $\\psi_{x_n}(y_0)=\\omega(g_n(y_0))\\uparrow\\omega(|y_0|)$, contradicting the strict separator. Therefore $\\psi=\\psi_x$ for some self-adjoint contraction $x$.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F6",
+            "step 1.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Apply the same residue calculation to $g_n(z)=e^{i\\theta z}\\Delta^{-z}E_n/\\sin(\\pi z)$, whose residue at $0$ is $E_n/\\pi$. On the right vertical side its multiplier is $2e^{-\\theta t}e^{i\\theta/2}\\Delta^{-1/2}\\Delta^{-it}E_n/(e^{\\pi t}+e^{-\\pi t})$; on the left it is $-2e^{-\\theta t}e^{-i\\theta/2}\\Delta^{1/2}\\Delta^{-it}E_n/(e^{\\pi t}+e^{-\\pi t})$. Including the opposite orientations of the two vertical sides and using $\\lambda=e^{i\\theta}$ yields $$\\Delta^{1/2}(\\Delta+\\lambda)^{-1}E_n=e^{-i\\theta/2}\\left(\\int_{\\mathbb R}\\frac{e^{-\\theta t}}{e^{\\pi t}+e^{-\\pi t}}\\Delta^{-it}\\,dt\\right)E_n.$$ This follows by factoring $\\Delta^{-1/2}(\\Delta+\\lambda)=\\Delta^{1/2}+\\lambda\\Delta^{-1/2}$ from the vertical-side integral. Define the strong integral vectorwise as in step 1.4. The bounded spectral multiplier on the left and the integrable weight on the right allow $n\\to\\infty$ strongly, so the identity holds with $E_n$ omitted. In particular the scalar factor has no additional $i$: at $\\lambda=1$ and $\\Delta=I$ both sides equal $1/2$.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F7",
+            "F8",
+            "F10",
+            "step 1.4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For every $y\\in M$, $\\psi=\\psi_x$ and $\\alpha+\\bar\\alpha=1$ give $$(x'\\Omega-\\bar\\alpha x\\Omega|y\\Omega)=\\omega(x'y)-\\alpha\\omega(xy)=\\bar\\alpha\\,\\omega(yx)=(S_0y\\Omega|\\bar\\alpha x\\Omega).$$ The antilinear-adjoint definition therefore puts $\\bar\\alpha x\\Omega$ in $D(F)$ and gives $F(\\bar\\alpha x\\Omega)=x'\\Omega-\\bar\\alpha x\\Omega$, or $\\alpha F(x\\Omega)=x'\\Omega-\\bar\\alpha x\\Omega$. Since $x=x^*$, $Sx\\Omega=x\\Omega$; hence $x\\Omega\\in D(\\Delta)$ and $F(x\\Omega)=\\Delta x\\Omega$. Thus $x'\\Omega=(\\alpha\\Delta+\\bar\\alpha)x\\Omega=(\\Delta+\\lambda)x\\Omega/(1+\\lambda)$. Replacing $x$ by $x/(1+\\lambda)$ proves $(\\Delta+\\lambda)^{-1}x'\\Omega\\in M\\Omega$. For a general $x'\\in M'$, write $x'=h_1+ih_2$ with $h_j=h_j^*$. If $c\\geq\\max(1,\\|h_1\\|,\\|h_2\\|)$, each $(I\\pm h_j/c)/2$ is a positive contraction, so $x'$ is a complex linear combination of positive contractions. Linearity extends the inclusion to all of $M'\\Omega$. Uniqueness follows because $\\Delta+\\lambda$ is injective and $\\Omega$ is separating.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Let $x'\\in M'$ and $x\\in M$ satisfy $x'\\Omega=(\\Delta+\\lambda)x\\Omega$. For $y_1,y_2\\in M$, commutation, $\\Delta=FS$, $S(y\\Omega)=y^*\\Omega$, and $S=J\\Delta^{1/2}=\\Delta^{-1/2}J$ give $$(y_1\\Omega|x'y_2\\Omega)=(y_2^*y_1\\Omega|x'\\Omega)=(Sx\\Omega|S(y_2^*y_1\\Omega))+\\lambda(y_1\\Omega|y_2x\\Omega)=(y_1x^*\\Omega|y_2\\Omega)+\\lambda(y_1\\Omega|S(x^*S(y_2\\Omega)))=(\\Delta^{-1/2}JxJ\\Delta^{1/2}y_1\\Omega|y_2\\Omega)+\\lambda(y_1\\Omega|\\Delta^{-1/2}Jx^*J\\Delta^{1/2}y_2\\Omega).$$ If $y_1\\Omega,y_2\\Omega\\in(\\Delta+1)^{-1}M'\\Omega$, then both lie in $D(\\Delta^{1/2})\\cap D(\\Delta^{-1/2})$. Since $JxJ$ is bounded with adjoint $Jx^*J$, $$(\\Delta^{-1/2}JxJ\\Delta^{1/2}y_1\\Omega|y_2\\Omega)=(JxJ\\Delta^{1/2}y_1\\Omega|\\Delta^{-1/2}y_2\\Omega)=(\\Delta^{1/2}y_1\\Omega|Jx^*J\\Delta^{-1/2}y_2\\Omega),$$ and self-adjointness of $\\Delta^{-1/2}$ gives $$(y_1\\Omega|\\Delta^{-1/2}Jx^*J\\Delta^{1/2}y_2\\Omega)=(\\Delta^{-1/2}y_1\\Omega|Jx^*J\\Delta^{1/2}y_2\\Omega).$$ Therefore $$(y_1\\Omega|x'y_2\\Omega)=(\\Delta^{1/2}y_1\\Omega|Jx^*J\\Delta^{-1/2}y_2\\Omega)+\\lambda(\\Delta^{-1/2}y_1\\Omega|Jx^*J\\Delta^{1/2}y_2\\Omega).$$",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "The space $\\Delta^{-1/2}M'\\Omega$ is dense: $F(y'\\Omega)=y'^*\\Omega$ and $F=J\\Delta^{-1/2}$ give $\\Delta^{-1/2}M'\\Omega=JM'\\Omega$, which is dense by cyclicity of $\\Omega$ for $M'$. For $\\xi\\in D(\\Delta^{1/2})\\cap D(\\Delta^{-1/2})$, choose $y_n'\\in M'$ with $\\Delta^{-1/2}y_n'\\Omega\\to(\\Delta^{1/2}+\\Delta^{-1/2})\\xi$. By step 3.1 at $\\lambda=1$, choose $y_n\\in M$ with $y_n\\Omega=(\\Delta+1)^{-1}y_n'\\Omega$. The spectral multipliers $(\\Delta^{1/2}+\\Delta^{-1/2})^{-1}$, $\\Delta^{1/2}(\\Delta+1)^{-1}$, and $\\Delta^{-1/2}(\\Delta+1)^{-1}$ are bounded, so $y_n\\Omega\\to\\xi$ and $\\Delta^{\\pm1/2}y_n\\Omega\\to\\Delta^{\\pm1/2}\\xi$. Thus the core in step 4.1 is dense in the joint graph norms.",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F7",
+            "step 3.1",
+            "step 4.1"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "Both sides of the identity in step 4.1 are continuous in those graph norms: the left side is bounded by $\\|x'\\|\\|\\xi_1\\|\\|\\xi_2\\|$, and the right side by $\\|x\\|$ times the products of the indicated $\\Delta^{\\pm1/2}$ norms. Passing to the approximating sequences of step 5.1 proves the displayed form identity for every $\\xi_1,\\xi_2\\in D(\\Delta^{1/2})\\cap D(\\Delta^{-1/2})$.",
+          "step": "6.1",
+          "inputs": [
+            "step 4.1",
+            "step 5.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-7-1",
+          "claim": "If $y$ satisfies the form identity of step 6.1, compression to $E_nH$ and comparison with step 1.4 show that $v_n=E_n(y-\\widetilde x)E_n$ satisfies $\\Delta_n v_n+\\lambda v_n\\Delta_n=0$, where $\\Delta_n=\\Delta|_{E_nH}$. The spectra of $\\Delta_n$ and $-\\lambda\\Delta_n$ are disjoint compact sets: $\\sigma(\\Delta_n)\\subset[1/n,n]$ and $-\\lambda$ is not positive real. Choose a contour $\\Gamma$ enclosing $\\sigma(\\Delta_n)$ and excluding $\\sigma(-\\lambda\\Delta_n)$. For $z\\in\\Gamma$, multiplying the Sylvester equation by $(z-\\Delta_n)^{-1}$ on the left and $(z+\\lambda\\Delta_n)^{-1}$ on the right gives $$(z-\\Delta_n)^{-1}v_n=v_n(z+\\lambda\\Delta_n)^{-1}.$$ The spectral theorem and scalar residue formula give $(2\\pi i)^{-1}\\int_\\Gamma(z-\\Delta_n)^{-1}\\,dz=I$ and $(2\\pi i)^{-1}\\int_\\Gamma(z+\\lambda\\Delta_n)^{-1}\\,dz=0$. Integration yields $v_n=0$.",
+          "step": "7.1",
+          "inputs": [
+            "F1",
+            "F7",
+            "F8",
+            "step 6.1",
+            "step 1.4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-8-1",
+          "claim": "The projections $E_n$ increase strongly to $I$ because $\\ker\\Delta=0$. Thus $E_n(y-\\widetilde x)E_n=0$ for all $n$ implies $y=\\widetilde x$ by taking matrix coefficients and passing to the strong limit. Applying this to the form identity of step 6.1 proves the resolvent-core formula $$Jx^*J=e^{-i\\theta/2}\\int_{\\mathbb R}\\frac{e^{-\\theta t}}{e^{\\pi t}+e^{-\\pi t}}\\Delta^{-it}x'\\Delta^{it}\\,dt.$$ The displayed scalar factor is determined by step 1.4; for $\\lambda=1$ and $\\Delta=I$ the integral gives $x/2$, as required by the form identity.",
+          "step": "8.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 6.1",
+            "step 1.4",
+            "step 7.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-9-1",
+          "claim": "Fix $x',y'\\in M'$. Use step 3.1 to choose $x\\in M$ with $x'\\Omega=(\\Delta+\\lambda)x\\Omega$. Then step 8.1 and step 2.2 give, for each $-\\pi<\\theta<\\pi$, $$\\int_{\\mathbb R}\\frac{e^{-\\theta t}}{e^{\\pi t}+e^{-\\pi t}}\\Bigl(J\\Delta^{-it}x'\\Delta^{it}Jy'\\Omega-y'J\\Delta^{-it}x'\\Omega\\Bigr)\\,dt=0.$$ The first summand is bounded by $\\|x'\\|\\|y'\\|$ and norm-continuous by the conjugation-orbit estimate in step 1.4 applied to $x'$ and $Jy'\\Omega$; the second is bounded by the same constant and norm-continuous by [F10] applied to $x'\\Omega$, followed by the fixed bounded maps $J$ and $y'$. For any $\\eta\\in H$, let $c(t)$ be its scalar coefficient. If $|\\operatorname{Re}z|\\leq r<\\pi$, then $|c(t)e^{-zt}/(e^{\\pi t}+e^{-\\pi t})|\\leq C e^{-(\\pi-r)|t|}$ for a fixed $C$. For difference quotients with $|h|\\leq\\delta<\\pi-r$, the integral formula for $e^{-ht}-1$ gives the integrable bound $C|t|e^{-(\\pi-r-\\delta)|t|}$. By [F11], dominated convergence differentiates the integral in $z$ on every such compact substrip, so its Laplace transform is holomorphic on $|\\operatorname{Re}z|<\\pi$. It vanishes on the real interval $(-\\pi,\\pi)$. A scalar holomorphic function with zeros accumulating at an interior point is identically zero: its Taylor series at that point either has a first nonzero coefficient, which would make the zero isolated, or all coefficients vanish and it is zero in a neighborhood; the set of points with a zero neighborhood is then open and closed in the connected strip. Evaluating at $z=is$ shows the Fourier transform of that $L^1$ coefficient is zero for every $s\\in\\mathbb R$.",
+          "step": "9.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F9",
+            "F10",
+            "F11",
+            "step 1.4",
+            "step 3.1",
+            "step 8.1",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-10-1",
+          "claim": "By [F9] the scalar coefficient in step 9.1 vanishes almost everywhere; continuity makes it vanish everywhere. Since this holds for every $\\eta\\in H$, $$J\\Delta^{-it}x'\\Delta^{it}Jy'\\Omega=y'J\\Delta^{-it}x'\\Omega\\qquad(t\\in\\mathbb R).$$ For fixed $t,x'$, apply this identity with $y'_2$ and then with $y'_1y'_2$. It gives $$(y'_1J\\Delta^{-it}x'\\Delta^{it}J)y'_2\\Omega=y'_1y'_2J\\Delta^{-it}x'\\Omega =(J\\Delta^{-it}x'\\Delta^{it}J)y'_1y'_2\\Omega.$$ The vectors $M'\\Omega$ are dense, so $J\\Delta^{-it}x'\\Delta^{it}J$ commutes with every $y'_1\\in M'$. Thus it lies in $M''=M$. At $t=0$, $JM'J\\subseteq M$, hence $M'\\subseteq JMJ$.",
+          "step": "10.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F9",
+            "step 9.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-11-1",
+          "claim": "To prove the reverse inclusion, fix $x,y\\in M$ and $x'\\in M'$. Step 10.1 gives $Jx'J\\in M$. Using commutation of $x'$ and $y$, the identities $F=S^*=JSJ$, $S(x\\Omega)=x^*\\Omega$, and $(JxJ)^*=Jx^*J$, we obtain $$(x'^*\\Omega|yJx\\Omega)=(y^*\\Omega|x'Jx\\Omega) =(y^*\\Omega|J(Jx'J)x\\Omega) =(y^*\\Omega|JS(x^*Jx'^*J\\Omega)) =(y^*\\Omega|F(Jx^*Jx'^*\\Omega)) =(Jx^*Jx'^*\\Omega|Sy^*\\Omega) =(x'^*\\Omega|JxJy\\Omega).$$ Since $x'^*\\Omega$ ranges over the dense subspace $M'\\Omega$, this implies $yJx\\Omega=JxJy\\Omega$. For $y_1,y_2\\in M$, it follows that $y_1JxJy_2\\Omega=y_1y_2Jx\\Omega=JxJy_1y_2\\Omega$. Density of $M\\Omega$ then gives $JxJ\\in M'$. Therefore $JMJ\\subseteq M'$, and step 10.1 yields $JMJ=M'$.",
+          "step": "11.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 10.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-12-1",
+          "claim": "The inclusions $J\\Delta^{-it}M'\\Delta^{it}J\\subseteq M$ from step 10.1 and $JMJ=M'$ from step 11.1 imply $\\Delta^{-it}M'\\Delta^{it}\\subseteq M'$ for every $t$. Replacing $t$ by $-t$ and conjugating gives equality. Taking commutants and using $M''=M$ gives $\\Delta^{it}M\\Delta^{-it}=M$.",
+          "step": "12.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 10.1",
+            "step 11.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-13-1",
+          "claim": "For $x'\\in M'$, write $x'=JxJ$ with $x\\in M$ by step 11.1. Since $J\\Omega=\\Omega$ and $S_0(x\\Omega)=x^*\\Omega$, direct substitution gives $JS_0J(x'\\Omega)=x'^*\\Omega=F_0(x'\\Omega)$. Thus $F_0=JS_0J$, so graph closure gives $\\overline{F_0}=JSJ=F=S^*$. Steps 3.1, 11.1–12.1, and this closure identity establish all stated conclusions.",
+          "step": "13.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 3.1",
+            "step 11.1",
+            "step 12.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The hypotheses require a unit vector or n≥1; no empty carrier is admitted (step 1.1)."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero vector/operator is included in the displayed operator and norm identities (step 1.1)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "λ=1 is allowed and the Δ=I scalar case normalizes the contour kernel in step 3.1 (step 1.1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Δ=I normalization is checked explicitly in the resolvent formula (step 7.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The excluded endpoint λ=−1 is stated; all other unit-circle parameters have −λ outside the positive spectrum (step 1.1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The declared Axiom of Choice and exact transitive choice suppliers are used where needed (step 1.1)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No biconditional is asserted in this carrier."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No biconditional is asserted in this carrier."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "The statement is an operator-theoretic or definitional assertion over general Hilbert spaces/algebras; finite substitutions cannot replace its displayed proof. The scalar and endpoint boundary cases are recorded in the worksheet.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-100 authoring self-review",
+        "notes": "Complete local arguments and exact supplier interfaces inspected. This record is an authoring check, not independent scientific acceptance."
+      }
+    },
+    "thm-qsmx-tomita-takesaki": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qsmx-von-neumann-algebra",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. Let $H$ be a complex Hilbert space and\n$\\mathcal B(H)$ the space of bounded linear operators on $H$\n([[def-space-of-bounded-linear-operators]]). For a set\n$\\mathcal S\\subseteq\\mathcal B(H)$, write\n\n$$\\mathcal S':=\\{T\\in\\mathcal B(H):Ts=sT\\text{ for every }s\\in\\mathcal S\\}, \\qquad \\mathcal S'':=(\\mathcal S')'.$$\n\nThe strong operator topology on $\\mathcal B(H)$ is the topology of pointwise\nnorm convergence: $T_\\alpha\\to T$ strongly exactly when\n$\\|(T_\\alpha-T)\\xi\\|\\to0$ for every $\\xi\\in H$. The weak operator topology is\nthe topology of pointwise matrix-coefficient convergence: $T_\\alpha\\to T$\nweakly exactly when $\\langle T_\\alpha\\xi,\\eta\\rangle\\to\\langle T\\xi,\\eta\\rangle$\nfor every $\\xi,\\eta\\in H$. Use the linear-first inner-product convention.\n\nA **concrete von Neumann algebra** on $H$ is a unital star subalgebra\n$M\\subseteq\\mathcal B(H)$ satisfying $M=M''$. Under Choice, the double\ncommutant theorem makes this equivalent to being closed in the weak operator\ntopology.\n\nAn operator $a\\in\\mathcal B(H)$ is **positive** when $a=a^*$ and\n$\\langle a\\xi,\\xi\\rangle\\ge0$ for every $\\xi\\in H$, using the bounded\nadjoint convention of [[thm-hilbert-adjoint-properties]]. Write $M_+$ for the\npositive operators in $M$ and $a\\le b$ when $b-a$ is positive.\n\nA vector $\\Omega\\in H$ is **cyclic** for $M$ when\n$\\overline{M\\Omega}=H$, and is **separating** for $M$ when\n$x\\Omega=0$ for $x\\in M$ implies $x=0$. For a unit vector $\\Omega$, define its\nvector functional by $\\omega_\\Omega(x)=\\langle x\\Omega,\\Omega\\rangle$.\nIt is **faithful** when $\\omega_\\Omega(x^*x)=0$ implies $x=0$; this is\nequivalent to $\\Omega$ being separating because\n$\\omega_\\Omega(x^*x)=\\|x\\Omega\\|^2$.\n\nFor a bounded linear functional $\\varphi:M\\to\\mathbb C$, **positive** means\n$\\varphi(a)\\ge0$ for every $a\\in M_+$. A positive functional is **normal**\nwhen $\\varphi(\\sup_\\alpha x_\\alpha)=\\sup_\\alpha\\varphi(x_\\alpha)$ for each\nbounded increasing net $(x_\\alpha)$ in $M_+$ whose supremum is taken in $M$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qsmx-standard-modular-data",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. Let $H$ be a complex Hilbert space with inner product linear in its first argument, let $M\\subseteq\\mathcal B(H)$ be a concrete von Neumann algebra, and let $\\Omega$ be a unit vector cyclic and separating for $M$. Define $D(S_0)=M\\Omega$ and $S_0(x\\Omega)=x^*\\Omega$ for $x\\in M$. Let $S=\\overline{S_0}$ and write its polar decomposition as $S=J\\Delta^{1/2}$. The preceding Tomita-operator lemma ensures this closure and polar data are well defined, with $\\Delta$ positive self-adjoint and injective. For $x\\in\\mathcal B(H)$ and dimensionless $t\\in\\mathbb R$, define\n$$\\sigma_t(x):=\\Delta^{it}x\\Delta^{-it}.$$\nSet $\\omega(x)=\\langle x\\Omega,\\Omega\\rangle$. The powers $\\Delta^{it}$ are the bounded unitary imaginary powers from the unbounded Borel functional calculus. At this definition stage $\\sigma_t$ is defined on $\\mathcal B(H)$; preservation of $M$ is established by a separate theorem.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-qsmx-tomita-operator-involution",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $H$ be a complex Hilbert space with inner product linear in its first argument, let $M\\subseteq\\mathcal B(H)$ be a concrete von Neumann algebra, and let $\\Omega$ be a unit vector that is cyclic and separating for $M$. Define $S_0(x\\Omega)=x^*\\Omega$ on $M\\Omega$ and $F_0(x'\\Omega)=x'^*\\Omega$ on $M'\\Omega$. Let $S=\\overline{S_0}$ and $F=S^*$. Then $S$ is a densely defined closed antilinear involution, its polar decomposition is $S=J\\Delta^{1/2}$ with $J$ antiunitary and $\\Delta$ positive self-adjoint and injective, and\n$$J=J^*=J^{-1},\\qquad J\\Delta J=\\Delta^{-1},\\qquad J\\Delta^{it}J=\\Delta^{it}\\ (t\\in\\mathbb R),\\qquad F=J\\Delta^{-1/2}=\\Delta^{1/2}J,\\qquad J\\Omega=\\Omega,\\qquad \\Delta\\Omega=\\Omega.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qsmx-modular-resolvent-core",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice and the standard modular data of a concrete von Neumann algebra $M\\subseteq\\mathcal B(H)$ with unit cyclic-separating vector $\\Omega$. Let $F=S^*$, where $S$ is the closure of $S_0(x\\Omega)=x^*\\Omega$, and let $F_0(x'\\Omega)=x'^*\\Omega$ on $M'\\Omega$. For every $\\lambda\\in\\mathbb C$ with $|\\lambda|=1$ and $\\lambda\\ne-1$,\n$$(\\Delta+\\lambda)^{-1}M'\\Omega\\subseteq M\\Omega.$$\nThe modular conjugation and operator satisfy\n$$JMJ=M',\\qquad \\Delta^{it}M\\Delta^{-it}=M\\quad(t\\in\\mathbb R),\\qquad \\overline{F_0}=F=S^*.$$",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qsmx-standard-modular-data",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. Let $H$ be a complex Hilbert space with inner product linear in its first argument, let $M\\subseteq\\mathcal B(H)$ be a concrete von Neumann algebra, and let $\\Omega$ be a unit vector cyclic and separating for $M$. Define $D(S_0)=M\\Omega$ and $S_0(x\\Omega)=x^*\\Omega$ for $x\\in M$. Let $S=\\overline{S_0}$ and write its polar decomposition as $S=J\\Delta^{1/2}$. The preceding Tomita-operator lemma ensures this closure and polar data are well defined, with $\\Delta$ positive self-adjoint and injective. For $x\\in\\mathcal B(H)$ and dimensionless $t\\in\\mathbb R$, define\n$$\\sigma_t(x):=\\Delta^{it}x\\Delta^{-it}.$$\nSet $\\omega(x)=\\langle x\\Omega,\\Omega\\rangle$. The powers $\\Delta^{it}$ are the bounded unitary imaginary powers from the unbounded Borel functional calculus. At this definition stage $\\sigma_t$ is defined on $\\mathcal B(H)$; preservation of $M$ is established by a separate theorem.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qsmx-tomita-operator-involution",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $H$ be a complex Hilbert space with inner product linear in its first argument, let $M\\subseteq\\mathcal B(H)$ be a concrete von Neumann algebra, and let $\\Omega$ be a unit vector that is cyclic and separating for $M$. Define $S_0(x\\Omega)=x^*\\Omega$ on $M\\Omega$ and $F_0(x'\\Omega)=x'^*\\Omega$ on $M'\\Omega$. Let $S=\\overline{S_0}$ and $F=S^*$. Then $S$ is a densely defined closed antilinear involution, its polar decomposition is $S=J\\Delta^{1/2}$ with $J$ antiunitary and $\\Delta$ positive self-adjoint and injective, and\n$$J=J^*=J^{-1},\\qquad J\\Delta J=\\Delta^{-1},\\qquad J\\Delta^{it}J=\\Delta^{it}\\ (t\\in\\mathbb R),\\qquad F=J\\Delta^{-1/2}=\\Delta^{1/2}J,\\qquad J\\Omega=\\Omega,\\qquad \\Delta\\Omega=\\Omega.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qsmx-modular-strip-analyticity",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $H$ be a complex Hilbert space and let $A$ be a self-adjoint operator whose spectral projection valued measure $E$ is supported on $(0,\\infty)$. For $\\xi\\in H$, put $\\mu_\\xi(B)=\\langle E(B)\\xi,\\xi\\rangle$. Define\n$$D(A^{1/2})=\\left\\{\\xi\\in H:\\int_{(0,\\infty)}\\lambda\\,d\\mu_\\xi(\\lambda)<\\infty\\right\\}.$$\nFor $z\\in\\mathbb C$ and $\\xi\\in D(A^{1/2})$, define $A^{-iz/2}\\xi$ by the unbounded Borel functional calculus for the function $\\lambda\\mapsto \\exp(-iz\\log(\\lambda)/2)$. On the closed strip $S=\\{z:0\\leq\\operatorname{Im}z\\leq1\\}$, this vector is defined, strongly continuous in $z$, and satisfies\n$$\\|A^{-iz/2}\\xi\\|^2\\leq\\|\\xi\\|^2+\\|A^{1/2}\\xi\\|^2.$$\nThe map $z\\mapsto A^{-iz/2}\\xi$ is norm-holomorphic on the open strip $S^\\circ$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-qsmx-von-neumann-predual",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $M\\subseteq\\mathcal B(H)$ be a concrete von\nNeumann algebra on a complex Hilbert space $H$, and define\n$$M_\\perp:=\\{T\\in\\mathcal S_1(H):\\operatorname{Tr}(Tx)=0 \\text{ for every }x\\in M\\}.$$\nEquip the coset space $Q:=\\mathcal S_1(H)/M_\\perp$ with the quotient norm.\nThen the trace pairing\n$$\\Psi:M\\to Q^*,\\qquad (\\Psi(x))([T])=\\operatorname{Tr}(Tx),$$\nis a well-defined isometric bijection, and $Q$ is a Banach space. Thus $Q$ is\nan isometric predual of $M$, and its dual unit ball is weak-star compact.\nEvery vector functional $x\\mapsto\\langle x\\xi,\\xi\\rangle$ and every positive\nfunctional in $Q$ preserves suprema of bounded increasing positive nets in\n$M$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-qsmx-trace-class-duality",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $H$ be a complex Hilbert space, and let\n$\\mathcal S_1(H)$ be its trace-class operators with trace norm $\\|\\cdot\\|_1$\nand trace $\\operatorname{Tr}$. Finite-rank operators are dense in\n$(\\mathcal S_1(H),\\|\\cdot\\|_1)$. For every bounded linear functional\n$\\Phi:\\mathcal S_1(H)\\to\\mathbb C$, there is a unique $X\\in\\mathcal B(H)$ such\nthat\n$$\\Phi(T)=\\operatorname{Tr}(TX)\\qquad(T\\in\\mathcal S_1(H)),$$\nand the correspondence is isometric:\n$\\|\\Phi\\|=\\|X\\|$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-qsmx-von-neumann-kms-state",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. Let $M\\ne\\{0\\}$ be a concrete von Neumann algebra on a complex Hilbert space. Use the predual $M_*=Q$ of [[lem-qsmx-von-neumann-predual]]; its elements are the normal linear functionals, and the induced topology $\\sigma(M,Q)$ is the ultraweak topology. A **normal state** on $M$ is a bounded complex-linear functional $\\omega:M\\to\\mathbb C$ with $\\omega(I)=1$, $\\omega(a)\\geq0$ for every positive $a\\in M$, and\n$$\\omega\\!\\left(\\sup_i a_i\\right)=\\sup_i\\omega(a_i)$$\nfor every increasing net $(a_i)$ of positive elements with $0\\leq a_i\\leq C I$ for a common finite $C$ and supremum taken in $M$.\nAn automorphism of $M$ is **normal** when it preserves the suprema of all such bounded increasing positive nets.\nA **point-ultraweakly continuous one-parameter automorphism group** is a family $(\\alpha_t)_{t\\in\\mathbb R}$ of bijective unital complex-linear maps $M\\to M$ preserving multiplication and adjoints, with $\\alpha_0=\\operatorname{id}_M$, $\\alpha_s\\alpha_t=\\alpha_{s+t}$, and $t\\mapsto\\varphi(\\alpha_t(x))$ continuous for every $x\\in M$ and every normal linear functional $\\varphi\\in Q$.\nFor dimensionless $t$ and dimensionless $\\beta>0$, the normal state $\\omega$ satisfies the **upper-strip $(\\alpha,\\beta)$ KMS condition** when, for every $A,B\\in M$, there is a bounded scalar function $F_{A,B}$ on $S_\\beta=\\{z\\in\\mathbb C:0\\leq\\operatorname{Im}z\\leq\\beta\\}$ that is continuous on $S_\\beta$, holomorphic in its interior, and satisfies\n$$F_{A,B}(t)=\\omega(A\\alpha_t(B)),\\qquad F_{A,B}(t+i\\beta)=\\omega(\\alpha_t(B)A)\\quad(t\\in\\mathbb R).$$",
+          "uses": [
+            "1.1",
+            "2.3",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-qsmx-modular-unitary-strong-continuity",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $H$ be a complex Hilbert space and let $A$ be a positive self-adjoint injective operator with spectral projection valued measure $E$ supported on $(0,\\infty)$. For $t\\in\\mathbb R$, the unbounded Borel functional calculus defines $A^{it}$ as a unitary on all of $H$. For every $\\xi\\in H$, the map $t\\mapsto A^{it}\\xi$ is norm-continuous.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F2], $\\sigma_t(M)=M$. Each $\\sigma_t$ is conjugation by the unitary $\\Delta^{it}$, so it is complex-linear, multiplicative, adjoint-preserving and bijective, with inverse $\\sigma_{-t}$. The spectral calculus gives $\\Delta^{i(s+t)}=\\Delta^{is}\\Delta^{it}$, hence $\\sigma_s\\sigma_t=\\sigma_{s+t}$ and $\\sigma_0=I$. To check normality, let $0\\leq a_i\\uparrow a$ be a bounded increasing net in $M$. Unitary conjugation is an order isomorphism of $\\mathcal B(H)$: if $b$ bounds every $\\Delta^{it}a_i\\Delta^{-it}$, then $\\Delta^{-it}b\\Delta^{it}$ bounds every $a_i$, so $a\\leq\\Delta^{-it}b\\Delta^{it}$ and $\\Delta^{it}a\\Delta^{-it}\\leq b$. Thus $\\Delta^{it}a_i\\Delta^{-it}\\uparrow\\Delta^{it}a\\Delta^{-it}$ in $\\mathcal B(H)$. By [F2] the limit is in $M$, hence is also the supremum in $M$. By the definition in [F7], each restriction is a normal $*$-automorphism.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For $A,B\\in M$, both $A^*\\Omega$ and $B\\Omega$ lie in $D(\\Delta^{1/2})$, because $Sx\\Omega=x^*\\Omega$ for $x\\in M$ and $\\|Sx\\Omega\\|=\\|\\Delta^{1/2}x\\Omega\\|$. Define $$F_{A,B}(z)=\\bigl(\\Delta^{i\\overline z/2}A^*\\Omega\\,\\big|\\,\\Delta^{-iz/2}B\\Omega\\bigr),$$ where $(u|v)=\\langle v,u\\rangle$ is linear in its second argument. By [F3], both vectors $A^*\\Omega$ and $B\\Omega$ belong to $D(\\Delta^{1/2})$; [F4] then makes each vector factor bounded and continuous on the closed strip. The first is anti-holomorphic as a vector-valued function of $z$ and enters the first, conjugate-linear slot, while the second is holomorphic in the second slot. Hence $F_{A,B}$ is bounded and continuous on the strip and holomorphic inside.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F8], $t\\mapsto\\Delta^{it}\\xi$ is norm-continuous for every $\\xi\\in H$. For fixed $x\\in M$ and $\\xi,\\eta\\in H$, the coefficient $\\langle\\sigma_t(x)\\xi,\\eta\\rangle$ is therefore continuous. If $T$ is finite rank, $\\operatorname{Tr}(T\\sigma_t(x))$ is a finite sum of such continuous coefficients. For arbitrary trace-class $T$, choose finite-rank $T_n\\to T$ in trace norm by [F6]; uniformly in $t$, $|\\operatorname{Tr}((T-T_n)\\sigma_t(x))|\\leq\\|T-T_n\\|_1\\|x\\|$. Thus every element of the predual $Q$ evaluates continuously on $\\sigma_t(x)$, which is point-ultraweak continuity.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "F6",
+            "F8",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Since $\\Delta^{it}\\Omega=\\Omega$ and $\\Delta^{it}$ is unitary, $$\\omega(\\sigma_t(x))=\\langle\\Delta^{it}x\\Omega,\\Omega\\rangle=\\langle x\\Omega,\\Delta^{-it}\\Omega\\rangle=\\omega(x).$$ So $\\omega$ is invariant under $\\sigma_t$ and under $\\alpha_t=\\sigma_{-t}$.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-3",
+          "claim": "For real $t$, unitarity of $\\Delta^{it/2}$ and the identity $\\Delta^{-it}B\\Omega=\\sigma_{-t}(B)\\Omega$ give $$F_{A,B}(t)=(A^*\\Omega|\\Delta^{-it}B\\Omega)=(\\Omega|A\\Delta^{-it}B\\Omega)=\\omega(A\\alpha_t(B)).$$ This is the lower boundary in [F7].",
+          "step": "2.3",
+          "inputs": [
+            "F1",
+            "F7",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "At $z=t+i$, $\\Delta^{i\\overline z/2}A^*\\Omega=\\Delta^{it/2}J A\\Omega$ and $\\Delta^{-iz/2}B\\Omega=\\Delta^{-it/2}J B^*\\Omega$, because $Sx\\Omega=x^*\\Omega$ and $S=J\\Delta^{1/2}$. By [F2], $J$ commutes with $\\Delta^{it/2}$; antiunitarity gives $(Ju|Jv)=(v|u)$. Therefore $$F_{A,B}(t+i)=(\\Delta^{-it/2}B^*\\Omega|\\Delta^{it/2}A\\Omega)=(B^*\\Omega|\\Delta^{it}A\\Omega)=\\omega(B\\sigma_t(A)).$$ Invariance from step 2.2 changes the last expression to $\\omega(\\sigma_{-t}(B)A)=\\omega(\\alpha_t(B)A)$, the upper boundary in [F7].",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F7",
+            "step 2.2",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Steps 2.2–3.1 provide the bounded continuous strip function with both required boundary values for each $A,B\\in M$. By [F7], $\\omega$ is upper-strip $(\\alpha,1)$ KMS. Step 1.1 gives the asserted point-ultraweakly continuous automorphism group, and [F2] gives $JMJ=M'$. No norm-continuity assertion on all of $M$ is made.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "F7",
+            "step 1.1",
+            "step 1.2",
+            "step 2.2",
+            "step 2.3",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The hypotheses require a unit vector or n≥1; no empty carrier is admitted (step 1.1)."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero vector/operator is included in the displayed operator and norm identities (step 1.1)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "One-dimensional or identity-operator data satisfy the hypotheses and the proof formulas (step 1.1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The proof includes scalar, repeated-eigenvalue, or finite-trace degenerate cases under its hypotheses (step 4.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The lower boundary at Im z=0 is computed in step 2.3 and the upper boundary at Im z=1 in step 3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The declared Axiom of Choice and exact transitive choice suppliers are used where needed (step 1.1)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No biconditional is asserted in this carrier."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No biconditional is asserted in this carrier."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "The statement is an operator-theoretic or definitional assertion over general Hilbert spaces/algebras; finite substitutions cannot replace its displayed proof. The scalar and endpoint boundary cases are recorded in the worksheet.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-100 authoring self-review",
+        "notes": "Complete local arguments and exact supplier interfaces inspected. This record is an authoring check, not independent scientific acceptance."
+      }
+    },
+    "ex-qsmx-modular-is-not-physical-time": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-qsmx-finite-modular-density",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $n\\geq1$, let $\\mathcal H=\\mathbb C^n$, and let $\\rho$ be a positive-definite Hermitian matrix, meaning $\\langle\\rho v,v\\rangle>0$ for each nonzero $v\\in\\mathcal H$, with $\\operatorname{Tr}\\rho=1$. Write $\\mathcal H_{\\rm HS}=M_n(\\mathbb C)$ with inner product $\\langle X,Y\\rangle_{\\rm HS}=\\operatorname{Tr}(Y^*X)$, linear in the first argument, and let $M_n(\\mathbb C)$ act on $\\mathcal H_{\\rm HS}$ by left multiplication. For $\\Omega=\\rho^{1/2}$, the standard modular data are\n$$JX=X^*,\\qquad \\Delta X=\\rho X\\rho^{-1},\\qquad \\sigma_t(A)=\\rho^{it}A\\rho^{-it}\\quad(A\\in M_n(\\mathbb C),\\ t\\in\\mathbb R).$$\nThe vector state of $\\Omega$ is $\\omega(A)=\\operatorname{Tr}(\\rho A)$. If $H=H^*$ has energy unit joules, $\\beta>0$ has unit joules$^{-1}$, $\\hbar>0$ has unit joule-seconds, and $\\rho=e^{-\\beta H}/Z$ with $Z=\\operatorname{Tr}(e^{-\\beta H})$, then the physical-time dynamics\n$$\\alpha_s(A)=e^{isH/\\hbar}Ae^{-isH/\\hbar}\\quad(s\\text{ in seconds})$$\nsatisfies\n$$\\alpha_s=\\sigma_{-s/(\\beta\\hbar)}.$$\nOn the finite-dimensional C$^*$-algebra $M_n(\\mathbb C)$, $\\omega$ is a $\\beta$-KMS state for $\\alpha$ in the physical-time convention of the stated KMS definition, with strip width $\\beta\\hbar$ seconds. If $\\beta=(k_BT)^{-1}$, then $k_B$ has units joules per kelvin and $T$ has units kelvins.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $\\rho^{it}=\\operatorname{diag}(p^{it},(1-p)^{it})$, conjugating $E_{12}$ multiplies it by $p^{it}(1-p)^{-it}=e^{it\\log(p/(1-p))}$. Thus the modular parameter has coefficient $\\log(p/(1-p))$, which is dimensionless.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $\\rho=e^{-\\beta H}/Z$ with $H=\\operatorname{diag}(E_1,E_2)$, then $p/(1-p)=e^{-\\beta(E_1-E_2)}$ because the common partition function cancels. Hence $\\log(p/(1-p))=-\\beta(E_1-E_2)$, and substituting $t=-s/(\\beta\\hbar)$ yields $e^{is(E_1-E_2)/\\hbar}$. The energy gap alone gives no time frequency until $\\hbar$ is specified, and the state alone gives no energy gap until $H$ and $\\beta$ are specified.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The hypotheses require a unit vector or n≥1; no empty carrier is admitted (step 1.1)."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero vector/operator is included in the displayed operator and norm identities (step 1.1)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The identity matrix unit is not the off-diagonal claim; p=1/2 is separately checked in the example (step 1.1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The equal-population case p=1/2 has zero modular frequency (step 2.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The density endpoints p=0,1 are explicitly excluded by 0<p<1 (step 2.1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A1 explicitly supplies AC for the cited finite modular theorem (step 1.1)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No biconditional is asserted in this carrier."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No biconditional is asserted in this carrier."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "equal populations",
+          "inputs": "p=1/2, ρ=I2/2",
+          "calculation": "log(p/(1−p))=0 and ρ^{it}E12ρ^{−it}=E12.",
+          "result": "The modular frequency is zero, as stated."
+        },
+        {
+          "case": "unequal faithful populations",
+          "inputs": "p=1/3, ρ=diag(1/3,2/3)",
+          "calculation": "The coefficient is log(1/2)=−log 2, a dimensionless number; a Hamiltonian and β are required to assign seconds.",
+          "result": "The formula demonstrates that state data alone supply no physical clock."
+        }
+      ],
+      "finite_checks_disposition": "These finite substitutions check matrix units, units and KMS boundary interfaces only; the theorem proof remains the general finite-dimensional argument in the carrier, and the example does not infer a clock from state data.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-100 authoring self-review",
+        "notes": "Complete local arguments and exact supplier interfaces inspected. This record is an authoring check, not independent scientific acceptance."
+      }
+    }
+  }
+}

@@ -1,0 +1,3 @@
+For an undamped oscillator at a fixed point, with continuous E zero through onset tau and omega0>0, the retained finite-onset branch has
+P(t)=(a/omega0) integral_tau^t sin(omega0(t-s)) E(s) ds for t>=tau, and zero before tau.
+Differentiation on finite intervals gives Pt(t)=a integral_tau^t cos(omega0(t-s))E(s)ds and Ptt=aE-omega0^2 P. At tau E=P=Pt=Ptt=0, so the extension is C2 and solves the postulate. Thus the clarified postulate retains this causal undamped IVP; it does not assert an L1 stationary kernel for arbitrary full-past histories. General initial states additionally retain the homogeneous cos/sin solutions. This is an owner explanation of preservation, not a new production supplier or acceptance stamp.

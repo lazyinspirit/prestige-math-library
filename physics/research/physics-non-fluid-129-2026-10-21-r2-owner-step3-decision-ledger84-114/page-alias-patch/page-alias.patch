@@ -1,0 +1,96 @@
+--- a/tools/physics-support/step3-owner-finding-alias.mjs
++++ b/tools/physics-support/step3-owner-finding-alias.mjs
+@@ -32,10 +32,17 @@
+     if (primaryBatch !== aliasBatch || !['reader', 'flagged'].includes(prior.route)
+       || !['reader', 'flagged'].includes(decision.route) || prior.verdict !== decision.verdict
+       || entry.subject !== primary.id || entry.subject !== alias.id
+-      || entry.consumer_id !== primary.consumer_id || entry.consumer_id !== alias.consumer_id
++      || (entry.kind === 'same-page-carrier-classification'
++        ? (entry.consumer_id ?? null) !== (primary.consumer_id ?? null)
++          || (entry.consumer_id ?? null) !== (alias.consumer_id ?? null)
++        : entry.consumer_id !== primary.consumer_id || entry.consumer_id !== alias.consumer_id)
+       || entry.producer_batch !== primary.producer_batch || entry.producer_batch !== alias.producer_batch
+       || entry.primary_defect !== primary.defect || entry.alias_defect !== alias.defect
+       || entry.primary_finding_sha256 !== hashValue(primary) || entry.alias_finding_sha256 !== hashValue(alias)) return false;
++    if (entry.kind === 'same-page-carrier-classification') {
++      return reviewedPageClassification({run, group, prior, decision, primary, alias,
++        primaryBatch, entry, receipt, bytes, sha, hashValue});
++    }
+     const locationAlias = entry.kind === 'location-only-unbound-reader';
+     const distinctCarrierAlias = entry.kind === 'same-source-distinct-carrier';
+     if (locationAlias) {
+@@ -129,3 +136,74 @@
+     return false;
+   }
+ }
++
++// Page findings carry a page fingerprint, not an item observed_source. Keep
++// their guarded classification separate from the existing item-only aliases.
++function reviewedPageClassification({run, group, prior, decision, primary, alias,
++  primaryBatch, entry, receipt, bytes, sha, hashValue}) {
++  const bound = binding => {
++    if (!binding?.path?.startsWith(`research/${run}-`)
++      || !/^[a-f0-9]{64}$/.test(binding.sha256 ?? '')
++      || receipt.inputs?.[binding.path] !== binding.sha256
++      || sha(bytes(binding.path)) !== binding.sha256) throw Error('stale page alias evidence');
++    return bytes(binding.path);
++  };
++  if (prior.route !== 'reader' || decision.route !== 'flagged'
++    || !/^[a-z0-9-]+$/.test(entry.subject ?? '')
++    || primary.observed_sha256 !== alias.observed_sha256
++    || !/^[a-f0-9]{64}$/.test(primary.observed_sha256 ?? '')
++    || primary.defect === alias.defect
++    || primary.observed_source?.item_sha256 || alias.observed_source?.item_sha256
++    || !['pre', 'post'].includes(entry.observed_snapshot)) return false;
++  const scopeGuard = entry.frozen_scope_guard;
++  if (scopeGuard?.path !== `research/${run}-step3-scope-${primaryBatch}.json`) return false;
++  const scope = JSON.parse(bound(scopeGuard));
++  if (scope.run !== run || String(scope.batch) !== primaryBatch
++    || !scope.page_manifest_post?.includes(entry.subject)
++    || hashValue(scope.reader_findings?.find(row => row.obligation === prior.obligation)) !== hashValue(primary)
++    || hashValue(scope.refuter_findings?.find(row => row.obligation === decision.obligation)) !== hashValue(alias)) return false;
++  const frozen = entry.frozen_file_guards;
++  if (!Array.isArray(frozen) || frozen.length !== 2
++    || !frozen.some(g => g.path === `research/${run}-reader-findings-${primaryBatch}.json`)
++    || !frozen.some(g => g.path === `research/${run}-refute-${primaryBatch}.json`)) return false;
++  for (const guard of frozen) bound(guard);
++  const snapshotGuard = entry.observed_snapshot_guard;
++  if (snapshotGuard?.path !== `research/${run}-step3-hash-${primaryBatch}-${entry.observed_snapshot}.json`) return false;
++  const snapshot = JSON.parse(bound(snapshotGuard));
++  const observed = snapshot.page_hashes?.[entry.subject];
++  if (snapshot.run !== run || String(snapshot.batch) !== primaryBatch
++    || !observed || hashValue({file_sha256: observed.file_sha256,
++      manifest_sha256: observed.manifest_sha256}) !== primary.observed_sha256) return false;
++  const archive = entry.observed_raw_archive;
++  if (archive?.sha256 !== observed.file_sha256) return false;
++  const oldText = bound(archive).toString();
++  const manifestGuard = entry.page_manifest_guard;
++  if (manifestGuard?.path !== `research/${run}-batch-${primaryBatch}.pages.json`) return false;
++  const manifest = JSON.parse(bound(manifestGuard));
++  if (!Array.isArray(manifest)) return false;
++  const pages = manifest.filter(page => page.id === entry.subject);
++  if (pages.length !== 1 || !/^[a-z0-9-]+(?:\/[a-z0-9-]+)*$/.test(pages[0].category ?? '')) return false;
++  const expectedPath = `library/${pages[0].category}/${entry.subject}.md`;
++  const source = entry.current_source;
++  if (source?.path !== expectedPath || receipt.inputs?.[source.path] !== source.sha256
++    || !/^[a-f0-9]{64}$/.test(source.sha256 ?? '')
++    || sha(bytes(source.path)) !== source.sha256) return false;
++  const text = bytes(source.path).toString();
++  const pageId = value => value.match(/^---\r?\n[\s\S]*?^page:[ \t]*([a-z0-9-]+)[ \t]*\r?$/m)?.[1];
++  if (pageId(text) !== entry.subject || pageId(oldText) !== entry.subject) return false;
++  const owner = JSON.parse(bound(entry.scientific_owner_receipt));
++  if (owner.run !== run || owner.group !== group || owner.classification_approved !== true
++    || owner.one_underlying_issue !== true || owner.canonical_defect_id !== entry.original_defect_id
++    || !owner.obligations?.includes(prior.obligation) || !owner.obligations?.includes(decision.obligation)
++    || owner.original_labels_preserved?.[prior.obligation] !== primary.defect
++    || owner.original_labels_preserved?.[decision.obligation] !== alias.defect
++    || owner.original_severities_preserved?.[prior.obligation] !== primary.severity
++    || owner.original_severities_preserved?.[decision.obligation] !== alias.severity
++    || owner.current_source_guard?.path !== source.path || owner.current_source_guard?.sha256 !== source.sha256
++    || owner.observed_raw_page_archive?.path !== archive.path || owner.observed_raw_page_archive?.sha256 !== archive.sha256
++    || typeof owner.rationale !== 'string' || owner.rationale.length < 80) return false;
++  if (!Array.isArray(entry.reviewed_source_excerpts) || entry.reviewed_source_excerpts.length < 2
++    || entry.reviewed_source_excerpts.some(excerpt => typeof excerpt !== 'string'
++      || excerpt.length < 80 || !text.includes(excerpt))) return false;
++  return true;
++}

@@ -1,0 +1,991 @@
+{
+  "version": 1,
+  "level": "physics-non-fluid-129-2026-10-21-r2-batch-58",
+  "scope": [
+    "lem-qftx-wavefront-chart-invariance",
+    "thm-qftx-wavefront-product",
+    "lem-qftx-microcausal-star-product",
+    "prop-qftx-hadamard-wick-change",
+    "cex-qftx-square-delta"
+  ],
+  "contracts": {
+    "lem-qftx-wavefront-chart-invariance": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qftx-distributions-on-smooth-manifolds",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a Hausdorff, second-countable smooth $n$-manifold without boundary. In a smooth chart $x=(x^1,\\ldots,x^n)$, a smooth density is written $\\phi_x(x)|dx^1\\cdots dx^n|$. On a coordinate change $y=\\psi(x)$ its coefficient transforms by\n$$ \\phi_y(y)=\\phi_x(\\psi^{-1}(y))\\,|\\det D\\psi^{-1}(y)|. $$\nA compactly supported smooth density is one whose support is compact in $M$. Give their space $\\mathcal D(M;|\\Lambda^nT^*M|)$ the locally convex test-density topology obtained from the usual fixed-compact derivative seminorms in charts and the corresponding LF inductive limit. A scalar distribution on $M$ is a continuous complex-linear functional on this test-density space, with bilinear pairing $\\langle u,\\omega\\rangle$. Write $\\mathcal D'(M)$ for these distributions and $\\mathcal E'(M)$ for those with compact support. On a product manifold use the same definition with product densities. In a chart this definition is the ordinary distribution definition on an open subset of $\\mathbb R^n$; the displayed Jacobian law is the coordinate compatibility condition.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qftx-local-wavefront-set",
+          "source_section": "Definition",
+          "quote": "Let $\\Omega\\subseteq\\mathbb R^n$ be open and let $u\\in\\mathcal D'(\\Omega)$, using the local distribution convention of [[def-qftx-distributions-on-smooth-manifolds]]. For $p\\in\\Omega$ and $\\xi\\in\\mathbb R^n\\setminus\\{0\\}$, call $(p,\\xi)$ regular for $u$ if there are $\\chi\\in C_c^\\infty(\\Omega)$ with $\\chi=1$ near $p$ and an open cone $\\Gamma\\subseteq\\mathbb R^n\\setminus\\{0\\}$ containing $\\xi$ such that for every integer $N\\ge0$,\n$$ \\sup_{\\eta\\in\\Gamma}(1+|\\eta|)^N\\left|\\left\\langle u,\\chi(x)e^{-2\\pi i x\\cdot\\eta}|dx^1\\cdots dx^n|\\right\\rangle\\right|<\\infty. $$\nThe local wavefront set $\\operatorname{WF}_\\Omega(u)$ is the complement of these regular pairs in $T^*\\Omega\\setminus0$, with the standard cotangent coordinates $(p,\\xi)$. A cone is invariant under multiplication by positive scalars. This is a chart-level definition; this item makes no assertion about its behavior under a change of coordinates.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qftx-wavefront-hadamard",
+          "source_section": "Definition",
+          "quote": "Let $(M,g)$ be a Hausdorff, second-countable, oriented, time-oriented, globally hyperbolic smooth Lorentzian $n$-manifold without boundary, $n\\ge2$. Here $g$ is a smooth symmetric nondegenerate bilinear form on each tangent space with one negative and $n-1$ positive directions; in charts its signature is $(-,+,\\ldots,+)$. An orientation is a smooth choice of orientation in each tangent space. A time orientation selects one of the two components of $\\{v\\ne0:g(v,v)<0\\}$ as future. A tangent vector is causal when $g(v,v)\\le0$, and is future or past causal when it belongs to the closure of the selected future or past timelike cone. A causal curve is piecewise $C^1$ with causal tangent consistently future or past directed. Put $J^+(p)$ and $J^-(p)$ for the points reached from or reaching $p$ by such curves. Here globally hyperbolic means strongly causal and every causal diamond $J^+(p)\\cap J^-(q)$ is compact; strongly causal means every point has arbitrarily small neighborhoods which each causal curve meets in a connected parameter interval. A nonzero cotangent vector is future or past causal, or future or past null, when its metric dual under $g^{-1}$ has the corresponding tangent property.\n\nLet $\\nabla$ be the unique torsion-free connection with $\\nabla g=0$. Define the smooth metric density $\\mu_g=|\\det(g_{ab})|^{1/2}|dx^1\\cdots dx^n|$ in a chart. It is coordinate-independent: under $y=\\psi(x)$, $g_y=(D\\psi^{-1})^Tg_xD\\psi^{-1}$, so $|\\det g_y|^{1/2}=|\\det D\\psi^{-1}|\\,|\\det g_x|^{1/2}$, the density transformation law. Functional-kernel pairings and contractions on this page use $\\mu_g$ in each integrated variable; no physical units are assigned.\n\nFor each smooth chart $x:U\\to\\Omega\\subseteq\\mathbb R^n$, let $u_x\\in\\mathcal D'(\\Omega)$ be the coordinate representative of $u$ in the test-density convention of [[def-qftx-distributions-on-smooth-manifolds]]. Map a local covector $(x(p),\\xi)\\in T^*\\Omega$ to $(p,dx_p^T\\xi)\\in T^*M$. Define the global wavefront set by the union over all charts,\n$$ \\operatorname{WF}(u):=\\bigcup_{(U,x)}\\{(p,dx_p^T\\xi):(x(p),\\xi)\\in\\operatorname{WF}_{x(U)}(u_x)\\}\\subset T^*M\\setminus0, $$\nwhere the local sets are those of [[def-qftx-local-wavefront-set]]. Thus the global set is defined using all charts; equality of the chartwise descriptions on overlaps is a separate theorem. The Fourier convention is the displayed $2\\pi$ convention.\n\nAn affinely parametrized null geodesic is a smooth curve $\\gamma$ with $g(\\dot\\gamma,\\dot\\gamma)=0$ and $\\nabla_{\\dot\\gamma}\\dot\\gamma=0$; it is future-directed when $\\dot\\gamma$ lies in the chosen future causal cone. Two nonzero future-null cotangent vectors $(p,\\xi)$ and $(q,\\zeta)$ are related, written $(p,\\xi)\\sim(q,\\zeta)$, if $p=q$ and $\\zeta=\\xi$, or if there are a nonconstant future-directed affinely parametrized null geodesic $\\gamma:I\\to M$, parameters $s,t\\in I$ in either order, and a common scale $\\lambda>0$ such that\n$$p=\\gamma(s),\\qquad q=\\gamma(t),\\qquad \\xi=\\lambda g_p(\\dot\\gamma(s),\\cdot),\\qquad \\zeta=\\lambda g_q(\\dot\\gamma(t),\\cdot).$$\nThese covectors are the metric-dual tangents to that geodesic and are related by induced covector parallel transport. There is no requirement $s\\le t$: the future-frequency choice concerns the covectors, not an ordering of the two base points. The coincident case includes every nonzero future-null covector with $\\zeta=\\xi$. Define the positive-frequency null relation\n$$ \\mathcal C^+_g:=\\{(p,\\xi;q,-\\zeta): (p,\\xi)\\sim(q,\\zeta),\\ \\xi\\text{ future null}\\}\\subset T^*(M\\times M)\\setminus0. $$\nFor a fixed scalar second-order operator $P=-g^{ab}\\nabla_a\\nabla_b+X^a\\nabla_a+V$, with smooth vector field $X$, smooth scalar $V$, inverse metric $g^{ab}$, and Levi-Civita derivative $\\nabla$, a scalar Hadamard bisolution is a distribution $W\\in\\mathcal D'(M\\times M)$ satisfying $P_xW=P_yW=0$ and $\\operatorname{WF}(W)=\\mathcal C^+_g$. Write $W^{\\mathsf T}=\\tau^*W$ for the pullback by $\\tau(x,y)=(y,x)$. A fixed antisymmetric part means the equality $W-W^{\\mathsf T}=iE$ for one specified distribution $E$. This definition asserts no existence of $W$ and fixes no field-operator or commutator sign beyond the displayed convention.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-local-finite-order-characterization-of-distributions",
+          "source_section": "Statement",
+          "quote": "A complex-linear functional $u:\\mathcal D(\\Omega)\\to\\mathbb C$ is a distribution if and only if, for every compact $K\\subseteq\\Omega$, there are an integer $m_K\\ge0$ and a finite constant $C_K\\ge0$ such that\n$$|u(\\varphi)|\\le C_K p_{m_K}(\\varphi)\\qquad(\\varphi\\in\\mathcal D_K).$$\nThe quantifiers are $\\forall K\\,\\exists(m_K,C_K)$; no simultaneous selection of witnesses is asserted or needed. The equivalence holds in ZF.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-fourier-transform-of-a-compactly-supported-distribution-is-a-smooth-polynomially-bounded-multiplier",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice.  Let $v\\in\\mathcal D'(\\mathbb R^n)$ have compact\nsupport, let $\\widetilde v\\in\\mathcal S'$ be its canonical extension, and let\n$\\chi\\in\\mathcal D$ equal one on a neighborhood of $\\operatorname{supp}v$.\nThen $\\mathcal F\\widetilde v$ is the regular tempered distribution represented\nby\n\n$$V(\\xi)=\\left\\langle v_x,\\chi(x)e^{-2\\pi ix\\cdot\\xi}\\right\\rangle.$$\n\nThe function $V$ is independent of $\\chi$, is smooth, and for every\nmulti-index $\\alpha$ there are $C_\\alpha,m_\\alpha$ with\n$|\\partial^\\alpha V(\\xi)|\\leq C_\\alpha(1+|\\xi|)^{m_\\alpha}$.  Consequently\nmultiplication by $V$ is continuous on $\\mathcal S$ and, by transpose, on\n$\\mathcal S'$ in both dual topologies.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-fourier-inversion-on-schwartz-space",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. For every $f\\in\\mathcal S(\\mathbb R^n)$ and every $x\\in\\mathbb R^n$,\n$$f(x)=\\int_{\\mathbb R^n}\\widehat f(\\xi)e^{2\\pi ix\\cdot\\xi}\\,d\\xi.$$\nThe integral is absolutely convergent.",
+          "uses": [
+            "2.1",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-schwartz-parameter-pairing-and-integral-interchange",
+          "source_section": "Statement",
+          "quote": "For $\\varphi\\in\\mathcal S(\\mathbb R^n)$, the map\n\n$$x\\longmapsto T_x\\varphi,\\qquad (T_x\\varphi)(y)=\\varphi(x-y),$$\n\nis $C^\\infty$ as a map from $\\mathbb R^n$ to Schwartz space, with\n$\\partial_x^\\gamma T_x\\varphi=T_x(\\partial^\\gamma\\varphi)$.  This clause holds\nin ZF.\n\nAssume Countable Choice for the following integral clause.  Let $r\\geq1$ and\nlet $H:\\mathbb R^r\\to\\mathcal S(\\mathbb R^n)$ be continuous in every Schwartz\nseminorm.  Suppose each $\\partial_y^\\beta H(t,y)$ is jointly measurable and,\nfor every $\\alpha,\\beta$, there is $g_{\\alpha\\beta}\\in L^1(\\mathbb R^r)$ such\nthat\n\n$$p_{\\alpha\\beta}(H(t))\\leq g_{\\alpha\\beta}(t)$$\n\nfor almost every $t$.  Then\n$G(y)=\\int_{\\mathbb R^r}H(t,y)\\,dt$ belongs to $\\mathcal S$, derivatives pass\nunder the integral, and every $u\\in\\mathcal S'$ satisfies\n\n$$\\left\\langle u,\\int H(t)\\,dt\\right\\rangle =\\int\\langle u,H(t)\\rangle\\,dt.$$\n\nAll integrals in this clause are Lebesgue integrals.",
+          "uses": [
+            "2.1",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-cotangent-coordinate-changes-use-the-inverse-transpose-jacobian",
+          "source_section": "Statement",
+          "quote": "If $(U,x)$ and $(V,y)$ are smooth charts on $M$ with $p\\in U\\cap V$, then the coordinate change on cotangent-fiber coordinates is given by the inverse transpose Jacobian of $y\\circ x^{-1}$ at $x(p)$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-test-function-cutoffs-and-euclidean-localization",
+          "source_section": "Statement",
+          "quote": "In ZF, for compact $K\\subseteq\\Omega\\subseteq\\mathbb R^n$ with $\\Omega$ open, there is $\\chi\\in C_c^\\infty(\\Omega)$ with $0\\le\\chi\\le1$ and $\\chi=1$ on a neighborhood of $K$. Every open cover of $\\Omega$ admits an at most countable locally finite smooth partition of unity with compact supports, each support contained in some cover member. Subordination here asserts existence of such a member for each support; it does not select cover labels.",
+          "uses": [
+            "2.1",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to \\mathbb C$ belong to\n$L^1(\\mu \\times \\nu)$. Then:\n\n1. for $\\mu$-almost every $x$, the section $f_x$ belongs to $L^1(\\nu)$;\n2. for $\\nu$-almost every $y$, the section $f^y$ belongs to $L^1(\\mu)$;\n3. after assigning the value $0$ on the exceptional parameter sets, the\n   section-integral functions are integrable; and\n4. the three integrals agree:\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "3.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In a chart, localize $u$ by a cutoff $\\chi$ and write $\\widehat{\\chi u}(\\xi)=\\langle u,\\chi(x)e^{-2\\pi i x\\cdot\\xi}|dx|\\rangle$. The finite-order bound [F3] gives polynomial growth in $\\xi$ by differentiating the test at most its fixed order; parameter derivatives multiply it by powers of $x$, which remain bounded on the fixed compact support. Difference quotients converge in each fixed-support test seminorm by the Taylor remainder bound, so pairing shows that $\\widehat{\\chi u}$ is smooth. This is also the localized Fourier transform in [F4].",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Suppose $(p,\\xi_0)$ is regular for $u$ in the $x$ chart, witnessed by a cutoff $\\chi_x$ and an open cone $\\Gamma_x$. Let $y=\\psi(x)$ be a smooth coordinate change, restrict to a compact patch about $p$, and put $\\eta_0=(D\\psi(p))^{-T}\\xi_0$. Shrink the patch and choose nested cones $\\Gamma_0\\Subset\\Gamma_1\\Subset\\Gamma_x$ around $\\xi_0$ and a target cone $V$ around $\\eta_0$ so that $D\\psi(x)^TV\\subset\\Gamma_0$ throughout the patch. Choose a target cutoff $\\chi_y$ equal to one near $p$ and supported where $\\chi_x=1$, using [F8]. The target localized Fourier value is the source distribution paired with $a_\\eta(x)=\\chi_y(\\psi(x))|\\det D\\psi(x)|e^{-2\\pi i\\psi(x)\\cdot\\eta}$; because $\\chi_x=1$ on its support this is also the pairing with $\\chi_xu$. Fourier inversion [F5], passed through this compactly supported distribution by [F6], expresses the value as $\\int\\widehat{\\chi_xu}(\\xi)\\widehat{a_\\eta}(-\\xi)\\,d\\xi$. The phase in $\\widehat{a_\\eta}(-\\xi)$ is $2\\pi(x\\cdot\\xi-\\psi(x)\\cdot\\eta)$, with gradient $2\\pi(\\xi-D\\psi(x)^T\\eta)$. In the near-stationary region $|\\xi-D\\psi(x)^T\\eta|\\le c(|\\xi|+|\\eta|)$, for sufficiently small $c>0$, cone separation gives $\\xi\\in\\Gamma_x$ and $|\\xi|\\asymp|\\eta|$; there $\\widehat{\\chi_xu}(\\xi)$ decreases faster than every power, while $|\\widehat{a_\\eta}(-\\xi)|\\le\\|a_\\eta\\|_1$ is uniformly bounded, and the region has only polynomial volume in $|\\eta|$. On the complementary region the phase gradient is bounded below by $c(|\\xi|+|\\eta|)$; repeated integration by parts gives arbitrary powers of joint decay for $\\widehat{a_\\eta}(-\\xi)$. The polynomial bound [F3] for $\\widehat{\\chi_xu}$ then makes this part rapidly decreasing after integration. This proves regularity in the target chart.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Applying step 2.1 also to $\\psi^{-1}$ proves equivalence of regularity in both charts, and [F7] gives exactly $\\eta=(D\\psi)^{-T}\\xi$. Regularity is open because the same cutoff and a smaller cone work for nearby base points; positive rescaling of a covector does not change rapid decay. Hence its complement is closed and conic.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F7",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "step": "3.2",
+          "claim": "Suppose $\\chi_1$ is a regularity witness for $u$ on an open cone $\\Gamma$, and let $\\rho\\in C_c^\\infty$ have support where $\\chi_1=1$. If $\\Gamma'$ is an open cone whose closure of directions on the unit sphere is contained in $\\Gamma$, then $\\widehat{\\rho u}$ is rapidly decreasing on $\\Gamma'$. Indeed, $\\rho u=\\rho(\\chi_1u)$ and Fourier inversion gives $\\widehat{\\rho u}=\\widehat\\rho*\\widehat{\\chi_1u}$; passing the Schwartz integral through the compactly supported distribution uses [F6]. Repeated integration by parts makes $\\widehat\\rho$ rapidly decreasing, and [F3] bounds $\\widehat{\\chi_1u}$ polynomially. Choose an intermediate cone with closure of directions between those of $\\Gamma'$ and $\\Gamma$. In the convolution, for frequencies $\\eta$ in this intermediate cone with $|\\eta|\\ge|\\xi|/2$, the second factor is rapidly decreasing at frequency comparable to $|\\xi|$. If $|\\eta|<|\\xi|/2$, then $|\\xi-\\eta|>|\\xi|/2$; for the remaining frequencies, $\\eta$ lies outside the intermediate cone and $|\\eta|\\ge|\\xi|/2$, so angular separation gives $|\\xi-\\eta|\\ge c(|\\xi|+|\\eta|)$ for some $c>0$. In these latter regions the first factor is rapidly decreasing, while [F3] bounds the other factor polynomially. These estimates give the arbitrary-power bound for $|\\xi|\\ge1$ on $\\Gamma'$, and [F4] gives boundedness on bounded sets. The convolution is absolutely integrable by the same estimates, and [F9] justifies its Fourier-integral identity. Applying this cutoff transfer to a common $\\rho$ for witnesses for $u$ and $v$, and intersecting their smaller cones, gives rapid decay for $\\widehat{\\rho(u+v)}=\\widehat{\\rho u}+\\widehat{\\rho v}$. This proves $\\operatorname{WF}(u+v)\\subseteq\\operatorname{WF}(u)\\cup\\operatorname{WF}(v)$. For a diffeomorphism, step 2.1 gives the cotangent image inclusion for pullback; applying the same argument to $\\psi^{-1}$ gives the reverse inclusion.",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F8",
+            "F9",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "If $u$ is smooth, integration by parts in a compact chart cutoff gives rapid decay in every cone. Conversely, suppose $\\operatorname{WF}(u)=\\varnothing$ and fix a point $p$ in a chart. In dimension zero every distribution is locally a scalar function, so assume the chart dimension is at least one. Form the set of all open cones $\\Gamma'$ for which there exist a regularity witness $(\\chi,\\Gamma)$ at $p$ with the closure of the directions of $\\Gamma'$ on the unit sphere contained in $\\Gamma$. This set covers the unit covector sphere: every direction has a witness by emptiness of the local wavefront set, and its open cone contains a smaller cone about that direction. Compactness gives a finite subcover $\\Gamma'_1,\\ldots,\\Gamma'_m$. For each member of this finite family, take a corresponding witness $\\chi_j,\\Gamma_j$; finite choice suffices. Their witness cutoffs all equal one on a neighborhood of $p$. By [F8], choose one cutoff $\\rho$ equal to one near $p$ and supported in the intersection of those neighborhoods. Step 3.2 shows that the single localization $\\rho u$ has rapidly decreasing Fourier transform on each $\\Gamma'_j$. Since these finitely many cones cover the unit sphere, $\\widehat{\\rho u}$ is rapidly decreasing in every direction: for each $N$, take the maximum of the finitely many cone bounds outside a bounded ball. Therefore every differentiated inverse Fourier integral is absolutely convergent and defines a smooth function. Fourier inversion [F5] and the pairing interchange [F6], applied after a cutoff equal to one near $\\operatorname{supp}(\\rho u)$, identify this function with the compactly supported distribution $\\rho u$. Hence $u$ is smooth near $p$; as $p$ was arbitrary, it is smooth in every chart.",
+          "inputs": [
+            "A1",
+            "F2",
+            "F5",
+            "F6",
+            "F8",
+            "step 3.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The zero distribution has empty wavefront and is smooth, by the converse direction in step 4.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero distribution satisfies the rapid-decay criterion in step 4.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A smooth constant coefficient has rapid Fourier decay after compact localization, as established in step 4.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "A degenerate coordinate map is not a smooth coordinate change; the statement is restricted to charts with invertible transition maps."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Charts have open coordinate domains and the claimed local regularity has no interval endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The only choice-dependent Fourier inversion/pairing hypotheses are declared in A1 and used in steps 2.1 and 4.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.1 transports regularity from the source chart to the target chart."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 3.1 applies step 2.1 to the inverse transition and proves the reverse implication."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "identity coordinate change",
+          "calculation": "For ψ(x)=x, Dψ=I and η=ξ; localized Fourier rapid decay is unchanged.",
+          "disposition": "Exact coordinate specialization of steps 1.2–1.3."
+        }
+      ]
+    },
+    "thm-qftx-wavefront-product": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qftx-distributions-on-smooth-manifolds",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a Hausdorff, second-countable smooth $n$-manifold without boundary. In a smooth chart $x=(x^1,\\ldots,x^n)$, a smooth density is written $\\phi_x(x)|dx^1\\cdots dx^n|$. On a coordinate change $y=\\psi(x)$ its coefficient transforms by\n$$ \\phi_y(y)=\\phi_x(\\psi^{-1}(y))\\,|\\det D\\psi^{-1}(y)|. $$\nA compactly supported smooth density is one whose support is compact in $M$. Give their space $\\mathcal D(M;|\\Lambda^nT^*M|)$ the locally convex test-density topology obtained from the usual fixed-compact derivative seminorms in charts and the corresponding LF inductive limit. A scalar distribution on $M$ is a continuous complex-linear functional on this test-density space, with bilinear pairing $\\langle u,\\omega\\rangle$. Write $\\mathcal D'(M)$ for these distributions and $\\mathcal E'(M)$ for those with compact support. On a product manifold use the same definition with product densities. In a chart this definition is the ordinary distribution definition on an open subset of $\\mathbb R^n$; the displayed Jacobian law is the coordinate compatibility condition.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-compactly-supported-distributions-extend-to-smooth-functions",
+          "source_section": "Statement",
+          "quote": "Give $C^\\infty(\\Omega)$ the topology generated by $q_{K,m}(f)=\\max_{|\\alpha|\\le m}\\sup_K|\\partial^\\alpha f|$ for compact $K\\subseteq\\Omega$ and $m\\ge0$. A compactly supported distribution $u$ has a unique continuous complex-linear extension to this space, given by\n$$\\widetilde u(f)=u(\\chi f),$$\nwhere $\\chi\\in\\mathcal D(\\Omega)$ is any cutoff equal to one near $\\operatorname{supp}u$. The result is independent of $\\chi$. The extension vanishes on every smooth function zero near the support. No Hahn–Banach or choice axiom is needed.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qftx-wavefront-hadamard",
+          "source_section": "Definition",
+          "quote": "Let $(M,g)$ be a Hausdorff, second-countable, oriented, time-oriented, globally hyperbolic smooth Lorentzian $n$-manifold without boundary, $n\\ge2$. Here $g$ is a smooth symmetric nondegenerate bilinear form on each tangent space with one negative and $n-1$ positive directions; in charts its signature is $(-,+,\\ldots,+)$. An orientation is a smooth choice of orientation in each tangent space. A time orientation selects one of the two components of $\\{v\\ne0:g(v,v)<0\\}$ as future. A tangent vector is causal when $g(v,v)\\le0$, and is future or past causal when it belongs to the closure of the selected future or past timelike cone. A causal curve is piecewise $C^1$ with causal tangent consistently future or past directed. Put $J^+(p)$ and $J^-(p)$ for the points reached from or reaching $p$ by such curves. Here globally hyperbolic means strongly causal and every causal diamond $J^+(p)\\cap J^-(q)$ is compact; strongly causal means every point has arbitrarily small neighborhoods which each causal curve meets in a connected parameter interval. A nonzero cotangent vector is future or past causal, or future or past null, when its metric dual under $g^{-1}$ has the corresponding tangent property.\n\nLet $\\nabla$ be the unique torsion-free connection with $\\nabla g=0$. Define the smooth metric density $\\mu_g=|\\det(g_{ab})|^{1/2}|dx^1\\cdots dx^n|$ in a chart. It is coordinate-independent: under $y=\\psi(x)$, $g_y=(D\\psi^{-1})^Tg_xD\\psi^{-1}$, so $|\\det g_y|^{1/2}=|\\det D\\psi^{-1}|\\,|\\det g_x|^{1/2}$, the density transformation law. Functional-kernel pairings and contractions on this page use $\\mu_g$ in each integrated variable; no physical units are assigned.\n\nFor each smooth chart $x:U\\to\\Omega\\subseteq\\mathbb R^n$, let $u_x\\in\\mathcal D'(\\Omega)$ be the coordinate representative of $u$ in the test-density convention of [[def-qftx-distributions-on-smooth-manifolds]]. Map a local covector $(x(p),\\xi)\\in T^*\\Omega$ to $(p,dx_p^T\\xi)\\in T^*M$. Define the global wavefront set by the union over all charts,\n$$ \\operatorname{WF}(u):=\\bigcup_{(U,x)}\\{(p,dx_p^T\\xi):(x(p),\\xi)\\in\\operatorname{WF}_{x(U)}(u_x)\\}\\subset T^*M\\setminus0, $$\nwhere the local sets are those of [[def-qftx-local-wavefront-set]]. Thus the global set is defined using all charts; equality of the chartwise descriptions on overlaps is a separate theorem. The Fourier convention is the displayed $2\\pi$ convention.\n\nAn affinely parametrized null geodesic is a smooth curve $\\gamma$ with $g(\\dot\\gamma,\\dot\\gamma)=0$ and $\\nabla_{\\dot\\gamma}\\dot\\gamma=0$; it is future-directed when $\\dot\\gamma$ lies in the chosen future causal cone. Two nonzero future-null cotangent vectors $(p,\\xi)$ and $(q,\\zeta)$ are related, written $(p,\\xi)\\sim(q,\\zeta)$, if $p=q$ and $\\zeta=\\xi$, or if there are a nonconstant future-directed affinely parametrized null geodesic $\\gamma:I\\to M$, parameters $s,t\\in I$ in either order, and a common scale $\\lambda>0$ such that\n$$p=\\gamma(s),\\qquad q=\\gamma(t),\\qquad \\xi=\\lambda g_p(\\dot\\gamma(s),\\cdot),\\qquad \\zeta=\\lambda g_q(\\dot\\gamma(t),\\cdot).$$\nThese covectors are the metric-dual tangents to that geodesic and are related by induced covector parallel transport. There is no requirement $s\\le t$: the future-frequency choice concerns the covectors, not an ordering of the two base points. The coincident case includes every nonzero future-null covector with $\\zeta=\\xi$. Define the positive-frequency null relation\n$$ \\mathcal C^+_g:=\\{(p,\\xi;q,-\\zeta): (p,\\xi)\\sim(q,\\zeta),\\ \\xi\\text{ future null}\\}\\subset T^*(M\\times M)\\setminus0. $$\nFor a fixed scalar second-order operator $P=-g^{ab}\\nabla_a\\nabla_b+X^a\\nabla_a+V$, with smooth vector field $X$, smooth scalar $V$, inverse metric $g^{ab}$, and Levi-Civita derivative $\\nabla$, a scalar Hadamard bisolution is a distribution $W\\in\\mathcal D'(M\\times M)$ satisfying $P_xW=P_yW=0$ and $\\operatorname{WF}(W)=\\mathcal C^+_g$. Write $W^{\\mathsf T}=\\tau^*W$ for the pullback by $\\tau(x,y)=(y,x)$. A fixed antisymmetric part means the equality $W-W^{\\mathsf T}=iE$ for one specified distribution $E$. This definition asserts no existence of $W$ and fixes no field-operator or commutator sign beyond the displayed convention.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qftx-wavefront-chart-invariance",
+          "source_section": "Statement",
+          "quote": "For a distribution $u$ on a smooth manifold, the chartwise rapid-decay definition of its wavefront set is independent of the chart: if $y=\\psi(x)$, its covector coordinates satisfy $\\eta=(D\\psi(x))^{-T}\\xi$. The resulting $\\operatorname{WF}(u)$ is closed and conic in $T^*M\\setminus0$. For distributions $u,v$ and a smooth diffeomorphism $\\psi$, one has $\\operatorname{WF}(u+v)\\subseteq\\operatorname{WF}(u)\\cup\\operatorname{WF}(v)$ and $\\operatorname{WF}(\\psi^*u)=\\psi^*\\operatorname{WF}(u)$. Finally, $\\operatorname{WF}(u)=\\varnothing$ exactly when $u$ is represented by a smooth scalar function in every chart.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-local-finite-order-characterization-of-distributions",
+          "source_section": "Statement",
+          "quote": "A complex-linear functional $u:\\mathcal D(\\Omega)\\to\\mathbb C$ is a distribution if and only if, for every compact $K\\subseteq\\Omega$, there are an integer $m_K\\ge0$ and a finite constant $C_K\\ge0$ such that\n$$|u(\\varphi)|\\le C_K p_{m_K}(\\varphi)\\qquad(\\varphi\\in\\mathcal D_K).$$\nThe quantifiers are $\\forall K\\,\\exists(m_K,C_K)$; no simultaneous selection of witnesses is asserted or needed. The equivalence holds in ZF.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-fourier-transform-of-a-compactly-supported-distribution-is-a-smooth-polynomially-bounded-multiplier",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice.  Let $v\\in\\mathcal D'(\\mathbb R^n)$ have compact\nsupport, let $\\widetilde v\\in\\mathcal S'$ be its canonical extension, and let\n$\\chi\\in\\mathcal D$ equal one on a neighborhood of $\\operatorname{supp}v$.\nThen $\\mathcal F\\widetilde v$ is the regular tempered distribution represented\nby\n\n$$V(\\xi)=\\left\\langle v_x,\\chi(x)e^{-2\\pi ix\\cdot\\xi}\\right\\rangle.$$\n\nThe function $V$ is independent of $\\chi$, is smooth, and for every\nmulti-index $\\alpha$ there are $C_\\alpha,m_\\alpha$ with\n$|\\partial^\\alpha V(\\xi)|\\leq C_\\alpha(1+|\\xi|)^{m_\\alpha}$.  Consequently\nmultiplication by $V$ is continuous on $\\mathcal S$ and, by transpose, on\n$\\mathcal S'$ in both dual topologies.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-fourier-inversion-on-schwartz-space",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. For every $f\\in\\mathcal S(\\mathbb R^n)$ and every $x\\in\\mathbb R^n$,\n$$f(x)=\\int_{\\mathbb R^n}\\widehat f(\\xi)e^{2\\pi ix\\cdot\\xi}\\,d\\xi.$$\nThe integral is absolutely convergent.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-schwartz-parameter-pairing-and-integral-interchange",
+          "source_section": "Statement",
+          "quote": "For $\\varphi\\in\\mathcal S(\\mathbb R^n)$, the map\n\n$$x\\longmapsto T_x\\varphi,\\qquad (T_x\\varphi)(y)=\\varphi(x-y),$$\n\nis $C^\\infty$ as a map from $\\mathbb R^n$ to Schwartz space, with\n$\\partial_x^\\gamma T_x\\varphi=T_x(\\partial^\\gamma\\varphi)$.  This clause holds\nin ZF.\n\nAssume Countable Choice for the following integral clause.  Let $r\\geq1$ and\nlet $H:\\mathbb R^r\\to\\mathcal S(\\mathbb R^n)$ be continuous in every Schwartz\nseminorm.  Suppose each $\\partial_y^\\beta H(t,y)$ is jointly measurable and,\nfor every $\\alpha,\\beta$, there is $g_{\\alpha\\beta}\\in L^1(\\mathbb R^r)$ such\nthat\n\n$$p_{\\alpha\\beta}(H(t))\\leq g_{\\alpha\\beta}(t)$$\n\nfor almost every $t$.  Then\n$G(y)=\\int_{\\mathbb R^r}H(t,y)\\,dt$ belongs to $\\mathcal S$, derivatives pass\nunder the integral, and every $u\\in\\mathcal S'$ satisfies\n\n$$\\left\\langle u,\\int H(t)\\,dt\\right\\rangle =\\int\\langle u,H(t)\\rangle\\,dt.$$\n\nAll integrals in this clause are Lebesgue integrals.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-tensor-product-distributions-and-iterated-pairings",
+          "source_section": "Statement",
+          "quote": "For $u\\in\\mathcal D'(U)$ and $v\\in\\mathcal D'(V)$ the tensor candidate is a distribution on $U\\times V$, uniquely determined by $(u\\otimes v)(\\varphi\\otimes\\psi)=u(\\varphi)v(\\psi)$. Its two iterated pairing orders agree, and $\\operatorname{supp}(u\\otimes v)=\\operatorname{supp}u\\times\\operatorname{supp}v$. Three-factor pairings associate. Moreover $\\partial_x^\\alpha(u\\otimes v)=(\\partial^\\alpha u)\\otimes v$ and $\\partial_y^\\beta(u\\otimes v)=u\\otimes(\\partial^\\beta v)$. All claims hold in ZF.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to \\mathbb C$ belong to\n$L^1(\\mu \\times \\nu)$. Then:\n\n1. for $\\mu$-almost every $x$, the section $f_x$ belongs to $L^1(\\nu)$;\n2. for $\\nu$-almost every $y$, the section $f^y$ belongs to $L^1(\\mu)$;\n3. after assigning the value $0$ on the exceptional parameter sets, the\n   section-integral functions are integrable; and\n4. the three integrals agree:\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-test-function-cutoffs-and-euclidean-localization",
+          "source_section": "Statement",
+          "quote": "In ZF, for compact $K\\subseteq\\Omega\\subseteq\\mathbb R^n$ with $\\Omega$ open, there is $\\chi\\in C_c^\\infty(\\Omega)$ with $0\\le\\chi\\le1$ and $\\chi=1$ on a neighborhood of $K$. Every open cover of $\\Omega$ admits an at most countable locally finite smooth partition of unity with compact supports, each support contained in some cover member. Subordination here asserts existence of such a member for each support; it does not select cover labels.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In a pair of coordinate charts, localize compactly supported $u$ and $v$. By [F5], the localized tensor transform factors as $\\widehat{u\\otimes v}(\\xi,\\zeta)=\\widehat u(\\xi)\\widehat v(\\zeta)$. If both covectors are regular, each factor decreases faster than every power on a conic neighborhood; if only one is singular, the other factor still supplies rapid decay in that block. The finite-order bounds [F3] control the remaining factor polynomially. Thus $\\operatorname{WF}(u\\otimes v)\\subseteq(\\operatorname{WF}(u)\\times\\operatorname{WF}(v))\\cup(\\operatorname{WF}(u)\\times0_M)\\cup(0_M\\times\\operatorname{WF}(v))$. Finite chart covers and cutoffs [F7] give the same inclusion on manifolds.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "F5",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For a compactly supported test density $\\omega$ on $N$, localize $u$ by a cutoff equal to one near $f(\\operatorname{supp}\\omega)$ and set $T_\\omega(\\eta):=\\int_N e^{2\\pi i f(x)\\cdot\\eta}\\omega(x)$. In coordinates define $\\langle f^*u,\\omega\\rangle=\\int\\widehat u(\\eta)T_\\omega(\\eta)\\,d\\eta$, where $m=\\dim M$. The conormal condition and compactness give a cone $V$ around the directions where $df_x^T\\eta$ can vanish, disjoint from the localized wavefront directions of $u$. On $V$, $\\widehat u$ is rapidly decreasing and $T_\\omega$ is bounded by $\\int|\\omega|$. On the complementary cone, $|df_x^T\\eta|\\ge c|\\eta|$ on $\\operatorname{supp}\\omega$ for some $c>0$; repeated integration by parts with the operator $(df_x^T\\eta\\cdot\\nabla_x)/(2\\pi i|df_x^T\\eta|^2)$ gives $|T_\\omega(\\eta)|\\le C_N(1+|\\eta|)^{-N}$ for every $N$. Combining these bounds with [F3] makes the integral absolutely convergent and bounded by finitely many seminorms of $\\omega$, so it defines a distribution. For smooth $u$, [F4] and [F6] identify the integral with $\\int_Nu(f(x))\\omega(x)$. To obtain the wavefront estimate, localize the output at $x_0$ and Fourier transform in $x$; the coefficient is the same double integral with phase $2\\pi(f(x)\\cdot\\eta-x\\cdot\\xi)$, whose stationary equation is $\\xi=df_x^T\\eta$. If $(x_0,\\xi_0)$ is outside the displayed pullback of $\\operatorname{WF}(u)$, choose smaller cones so that either the stationary $\\eta$ lies in a regular cone of $u$, or the phase gradient is bounded below by $c(|\\eta|+|\\xi|)$. The first region is controlled by rapid decay of $\\widehat u$; in the second, repeated integration by parts gives arbitrary powers of decay in $|\\xi|+|\\eta|$. Integrating the polynomial bound from [F3] proves rapid output decay near $\\xi_0$.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "F4",
+            "F6",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For the diagonal $\\Delta:M\\to M\\times M$, $d\\Delta_x^T(\\eta,\\zeta)=\\eta+\\zeta$ and $N_\\Delta=\\{(x,x;\\eta,-\\eta):\\eta\\ne0\\}$. By step 1.1, $\\operatorname{WF}(u\\otimes v)$ can meet $N_\\Delta$ only if $(x,\\eta)\\in\\operatorname{WF}(u)$ and $(x,-\\eta)\\in\\operatorname{WF}(v)$ for a common nonzero $\\eta$. The hypothesis excludes this, so step 1.2 defines $\\Delta^*(u\\otimes v)$. When both factors are smooth, the Fourier pullback formula in step 1.2 gives their ordinary pointwise product.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F5",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "On a compact chart patch, the pullback formula in step 1.2 and the factorization in [F5] give the local Fourier-convolution expression $\\widehat{uv}(\\xi)=\\int\\widehat u(\\eta)\\widehat v(\\xi-\\eta)\\,d\\eta$. The no-opposite-covector hypothesis separates the closed conic directions of $\\widehat u$ and $\\widehat v$ from cancellation. On a compact base patch their unit directions have a positive angular separation, so when both frequencies lie in their singular cones, $|\\eta|+|\\xi-\\eta|\\le C|\\xi|$. In the tail $|\\eta|>2|\\xi|$, the two directions are nearly opposite, hence at least one factor is outside its singular cone and is rapidly decreasing; [F3] bounds the other polynomially. The integral is absolutely convergent and has polynomial growth, using [F6]. If $\\xi$ lies outside $\\operatorname{WF}(u)\\cup\\operatorname{WF}(v)\\cup(\\operatorname{WF}(u)+\\operatorname{WF}(v))$, choose a smaller cone still outside that union; the same split makes at least one factor rapidly decreasing in every part of the convolution, proving rapid decay there. This proves the displayed wavefront inclusion and shows that the convolution product is exactly the diagonal pullback from step 2.1. Cutoffs from [F7] and coordinate invariance [F2] glue these local products.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "F5",
+            "F6",
+            "F7",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For the projection $\\pi$ and smooth positive density $\\nu$, define $\\pi_{*,\\nu}t$ by pairing $t$ with $\\chi(\\pi^*\\omega\\otimes\\nu)$, where $\\chi=1$ near $\\operatorname{supp}t$. A change of cutoff pairs $t$ with a test density zero near its support, so the value is independent of $\\chi$; the support lies in the compact set $\\pi(\\operatorname{supp}t)$. In a product chart, multiplication by the smooth coefficient of $\\nu$ does not enlarge the wavefront set by step 3.1, and the localized Fourier transform in the base variables is the full transform of $\\chi t$ evaluated at vertical frequency zero. Therefore rapid decay can fail only if $(x,y;\\eta,0)\\in\\operatorname{WF}(t)$ for some $y$, giving the stated estimate. Finite chart covers and cutoffs [F7] give the manifold statement.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F7",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For zero input the tensor product and pullback are zero; the product agrees with this convention in steps 2.1–3.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Multiplication by the zero smooth distribution gives zero under the smooth-factor clause in step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "When both factors are smooth, step 2.1 identifies the diagonal pullback with ordinary multiplication."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "A map with nonzero conormal intersection is excluded by the stated hypothesis; step 1.2 constructs the pullback only under that condition."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The pullback and product statements are local on manifolds and do not involve an interval endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A1 records ACω for Fourier inversion and integrable parameter pairing used in steps 1.2 and 3.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem gives sufficient transversality and wavefront bounds; it asserts no converse criterion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse to the sufficient wavefront product or pullback condition is claimed."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "smooth factors",
+          "calculation": "If u and v are smooth, WF(u)=WF(v)=∅ and the diagonal pullback is the ordinary pointwise product.",
+          "disposition": "Exact special case in step 2.1."
+        },
+        {
+          "case": "zero factor",
+          "calculation": "If v=0 then u⊗v=0 and Δ*(u⊗v)=0.",
+          "disposition": "Exact zero specialization of step 2.1."
+        }
+      ]
+    },
+    "lem-qftx-microcausal-star-product": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qftx-polynomial-microcausal-functionals",
+          "source_section": "Definition",
+          "quote": "Let $M$ be an oriented, time-oriented, globally hyperbolic smooth Lorentzian $n$-manifold without boundary, $n\\ge2$, with signature $(-,+,\\ldots,+)$. A cotangent vector is future or past causal when its metric dual belongs to the corresponding closed causal tangent cone. For $r\\ge1$, let $\\overline V_\\pm^r\\subset T^*M^r\\setminus0$ consist of tuples $(x_1,\\ldots,x_r;\\xi_1,\\ldots,\\xi_r)$ such that every $\\xi_j$ is either zero or future causal for $+$, respectively past causal for $-$, and the total tuple is nonzero. The wavefront set used below is the set of nonzero cotangent tuples where compactly localized Fourier transforms fail rapid decay in every conic neighborhood.\n\nA compactly supported polynomial functional is a finite expression\n$$ F(\\phi)=\\sum_{m=0}^{N}\\left\\langle f_m,\\phi^{\\otimes m}\\mu_g^{\\otimes m}\\right\\rangle, $$\nwhere $\\phi\\in C^\\infty(M;\\mathbb R)$, $f_m\\in\\mathcal E'(M^m)$ is symmetric under permutations of its $m$ variables, $\\mu_g$ is the metric density fixed by the Lorentzian metric, and the pairing is defined by inserting a compactly supported cutoff equal to one near $\\operatorname{supp}f_m$ in the smooth factor. Its $r$th functional derivative $F^{(r)}(\\phi)\\in\\mathcal E'(M^r)$ is specified, for a test density $\\omega$ on $M^r$, by\n$$ \\left\\langle F^{(r)}(\\phi),\\omega\\right\\rangle =\\sum_{m=r}^{N}\\frac{m!}{(m-r)!} \\left\\langle f_m,\\omega\\otimes\\phi^{\\otimes(m-r)}\\mu_g^{\\otimes(m-r)}\\right\\rangle, $$\nwhere a compactly supported cutoff equal to one near $\\operatorname{supp}f_m$ is inserted in the smooth $\\phi$ factors. Expanding the finite polynomial shows that this kernel represents the directional derivative in smooth compactly supported real directions. The functional is microcausal when\n$$ \\operatorname{WF}(F^{(r)}(\\phi))\\cap(\\overline V_+^r\\cup\\overline V_-^r)=\\varnothing $$\nfor every $r\\ge1$ and every $\\phi\\in C^\\infty(M;\\mathbb R)$. Write $\\mathcal F_{\\mu c}^{\\mathrm{poly}}(M)$ for this class, including constants.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qftx-wavefront-hadamard",
+          "source_section": "Definition",
+          "quote": "Let $(M,g)$ be a Hausdorff, second-countable, oriented, time-oriented, globally hyperbolic smooth Lorentzian $n$-manifold without boundary, $n\\ge2$. Here $g$ is a smooth symmetric nondegenerate bilinear form on each tangent space with one negative and $n-1$ positive directions; in charts its signature is $(-,+,\\ldots,+)$. An orientation is a smooth choice of orientation in each tangent space. A time orientation selects one of the two components of $\\{v\\ne0:g(v,v)<0\\}$ as future. A tangent vector is causal when $g(v,v)\\le0$, and is future or past causal when it belongs to the closure of the selected future or past timelike cone. A causal curve is piecewise $C^1$ with causal tangent consistently future or past directed. Put $J^+(p)$ and $J^-(p)$ for the points reached from or reaching $p$ by such curves. Here globally hyperbolic means strongly causal and every causal diamond $J^+(p)\\cap J^-(q)$ is compact; strongly causal means every point has arbitrarily small neighborhoods which each causal curve meets in a connected parameter interval. A nonzero cotangent vector is future or past causal, or future or past null, when its metric dual under $g^{-1}$ has the corresponding tangent property.\n\nLet $\\nabla$ be the unique torsion-free connection with $\\nabla g=0$. Define the smooth metric density $\\mu_g=|\\det(g_{ab})|^{1/2}|dx^1\\cdots dx^n|$ in a chart. It is coordinate-independent: under $y=\\psi(x)$, $g_y=(D\\psi^{-1})^Tg_xD\\psi^{-1}$, so $|\\det g_y|^{1/2}=|\\det D\\psi^{-1}|\\,|\\det g_x|^{1/2}$, the density transformation law. Functional-kernel pairings and contractions on this page use $\\mu_g$ in each integrated variable; no physical units are assigned.\n\nFor each smooth chart $x:U\\to\\Omega\\subseteq\\mathbb R^n$, let $u_x\\in\\mathcal D'(\\Omega)$ be the coordinate representative of $u$ in the test-density convention of [[def-qftx-distributions-on-smooth-manifolds]]. Map a local covector $(x(p),\\xi)\\in T^*\\Omega$ to $(p,dx_p^T\\xi)\\in T^*M$. Define the global wavefront set by the union over all charts,\n$$ \\operatorname{WF}(u):=\\bigcup_{(U,x)}\\{(p,dx_p^T\\xi):(x(p),\\xi)\\in\\operatorname{WF}_{x(U)}(u_x)\\}\\subset T^*M\\setminus0, $$\nwhere the local sets are those of [[def-qftx-local-wavefront-set]]. Thus the global set is defined using all charts; equality of the chartwise descriptions on overlaps is a separate theorem. The Fourier convention is the displayed $2\\pi$ convention.\n\nAn affinely parametrized null geodesic is a smooth curve $\\gamma$ with $g(\\dot\\gamma,\\dot\\gamma)=0$ and $\\nabla_{\\dot\\gamma}\\dot\\gamma=0$; it is future-directed when $\\dot\\gamma$ lies in the chosen future causal cone. Two nonzero future-null cotangent vectors $(p,\\xi)$ and $(q,\\zeta)$ are related, written $(p,\\xi)\\sim(q,\\zeta)$, if $p=q$ and $\\zeta=\\xi$, or if there are a nonconstant future-directed affinely parametrized null geodesic $\\gamma:I\\to M$, parameters $s,t\\in I$ in either order, and a common scale $\\lambda>0$ such that\n$$p=\\gamma(s),\\qquad q=\\gamma(t),\\qquad \\xi=\\lambda g_p(\\dot\\gamma(s),\\cdot),\\qquad \\zeta=\\lambda g_q(\\dot\\gamma(t),\\cdot).$$\nThese covectors are the metric-dual tangents to that geodesic and are related by induced covector parallel transport. There is no requirement $s\\le t$: the future-frequency choice concerns the covectors, not an ordering of the two base points. The coincident case includes every nonzero future-null covector with $\\zeta=\\xi$. Define the positive-frequency null relation\n$$ \\mathcal C^+_g:=\\{(p,\\xi;q,-\\zeta): (p,\\xi)\\sim(q,\\zeta),\\ \\xi\\text{ future null}\\}\\subset T^*(M\\times M)\\setminus0. $$\nFor a fixed scalar second-order operator $P=-g^{ab}\\nabla_a\\nabla_b+X^a\\nabla_a+V$, with smooth vector field $X$, smooth scalar $V$, inverse metric $g^{ab}$, and Levi-Civita derivative $\\nabla$, a scalar Hadamard bisolution is a distribution $W\\in\\mathcal D'(M\\times M)$ satisfying $P_xW=P_yW=0$ and $\\operatorname{WF}(W)=\\mathcal C^+_g$. Write $W^{\\mathsf T}=\\tau^*W$ for the pullback by $\\tau(x,y)=(y,x)$. A fixed antisymmetric part means the equality $W-W^{\\mathsf T}=iE$ for one specified distribution $E$. This definition asserts no existence of $W$ and fixes no field-operator or commutator sign beyond the displayed convention.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qftx-wavefront-product",
+          "source_section": "Statement",
+          "quote": "Let $u\\in\\mathcal D'(M)$, where $M$ is a smooth manifold. For a smooth map $f:N\\to M$, define its nonzero conormal set by\n$$ N_f=\\{(f(x),\\eta)\\in T^*M\\setminus0: df_x^T\\eta=0\\}. $$\nIf $\\operatorname{WF}(u)\\cap N_f=\\varnothing$, there is a distributional pullback $f^*u\\in\\mathcal D'(N)$ and\n$$ \\operatorname{WF}(f^*u)\\subseteq \\{(x,df_x^T\\eta):(f(x),\\eta)\\in\\operatorname{WF}(u)\\}. $$\nFor $u,v\\in\\mathcal D'(M)$, if there is no nonzero covector $\\eta$ with both $(x,\\eta)\\in\\operatorname{WF}(u)$ and $(x,-\\eta)\\in\\operatorname{WF}(v)$ at the same $x$, their product is defined by $uv=\\Delta^*(u\\otimes v)$, where $\\Delta(x)=(x,x)$. It agrees with pointwise multiplication when $u,v$ are smooth and satisfies\n$$ \\operatorname{WF}(uv)\\subseteq \\{(x,\\eta+\\zeta):(x,\\eta)\\in\\operatorname{WF}(u)\\cup0_M,\\ (x,\\zeta)\\in\\operatorname{WF}(v)\\cup0_M,\\ \\eta+\\zeta\\ne0\\}. $$\nHere $0_M$ is the zero section. If $\\pi:X\\times Y\\to X$ is a coordinate projection, $\\nu$ is a smooth positive density on $Y$, and $t\\in\\mathcal E'(X\\times Y)$, define $\\pi_{*,\\nu}t$ by\n$$ \\langle \\pi_{*,\\nu}t,\\omega\\rangle =\\left\\langle t,\\chi(\\pi^*\\omega\\otimes\\nu)\\right\\rangle, $$\nwhere $\\omega$ is a compactly supported test density on $X$ and $\\chi$ is a compact cutoff equal to one near $\\operatorname{supp}t$. This pushforward is independent of $\\chi$, compactly supported, and\n$$ \\operatorname{WF}(\\pi_{*,\\nu}t)\\subseteq \\{(x,\\eta):\\text{ for some }y,\\ (x,y;\\eta,0)\\in\\operatorname{WF}(t)\\}. $$\nThe pullback condition is a local transversality requirement; this theorem does not define an arbitrary restriction of a singular kernel to a diagonal where the condition fails.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix a contraction order $r\\ge1$, a field $\\phi$, and put $A=F^{(r)}(\\phi)\\otimes G^{(r)}(\\phi)$ and $B=W^{\\otimes r}$. By [F3], each wavefront component of $B$ is either zero or a Hadamard pair $(k_i,-\\ell_i)$ with both $k_i,\\ell_i$ future null. If a nonzero covector of $\\operatorname{WF}(A)$ cancelled one of $B$, then in the $F$ block every contracted entry would be past null or zero and in the $G$ block every contracted entry would be future null or zero. Both full tuples would lie in the forbidden cones of [F1], contrary to microcausality. Hence $\\operatorname{WF}(A)$ has no covector opposite to $\\operatorname{WF}(B)$, and [F3] defines $A\\cdot B$. Its support is compact because it is contained in $\\operatorname{supp}A$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Push the product distribution forward over the $r$ contracted pairs, integrating against $\\mu_g^{\\otimes2r}$. The projection is proper on its compact support, so [F3] makes the result a compactly supported distribution in the remaining variables. Differentiating this finite expression in $\\phi$ uses the polynomial product rule: for any order $s$, each term assigns a subset of the $s$ labeled directions to $F$ and the rest to $G$, producing contractions of $F^{(r+a)}(\\phi)$ and $G^{(r+s-a)}(\\phi)$ with the same $W^{\\otimes r}$. This defines every output derivative as a finite sum of the same proper pushforwards. Since the polynomial degrees are finite, all contractions with $r>\\min(\\deg F,\\deg G)$ vanish and the displayed sum is finite.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Fix an output derivative order $s\\ge1$ and one term from step 2.1, with $a$ external directions assigned to $F$ and $s-a$ to $G$. Put $A=F^{(r+a)}(\\phi)\\otimes G^{(r+s-a)}(\\phi)$ and $B=W^{\\otimes r}$. Suppose a nonzero wavefront covector of the pushed-forward term were entirely future causal. By [F3] it lifts to a covector of $A\\cdot B$ with zero covectors in all contracted directions. The product wavefront bound in [F3] has three cases. A contribution from $\\operatorname{WF}(A)$ alone would give an all-future nonzero tuple in one of the two functional derivatives, forbidden by [F1]; a contribution from $\\operatorname{WF}(B)$ alone has zero external covectors and cannot give the nonzero output. In a sum contribution from $\\operatorname{WF}(A)+\\operatorname{WF}(B)$, the vertical zero condition makes each contracted $F$ entry past null or zero and each contracted $G$ entry future null or zero. The external entries of both blocks are the assumed future output entries. The full $G$ tuple is therefore nonzero and all future, forbidden by [F1]. If the output covector were all past, the same vertical equations make the full $F$ tuple nonzero and all past. Thus every output derivative kernel avoids both forbidden cones. The case $r=0$ is covered by the $\\operatorname{WF}(A)$-alone case.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "If $K$ is smooth, multiplying $F^{(2)}(\\phi)$ by $K$ is allowed by the smooth-factor case of [F3] and adds no wavefront directions. Pairing the result against the cutoff metric density $\\chi\\mu_g^{\\otimes2}$ is defined because the distribution has compact support. For each output derivative, the corresponding wavefront covectors of $F$ have zero entries in the two contracted slots; if the output had an all-future or all-past nonzero covector, adjoining those zeros would put $F^{(s+2)}(\\phi)$ in a forbidden cone from [F1]. Hence $\\Gamma_KF$ is microcausal. Its degree is at most $\\deg F-2$ because two functional derivative slots were contracted; constants and degree-one functionals give zero.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Constants have zero positive-order derivatives, so the r=0 term is ordinary multiplication; the finite contraction range is specified in step 2.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If F or G is zero, every coefficient vanishes by the multilinear contraction formula in steps 1.1–2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For degree-one inputs no contraction with r≥2 occurs; step 2.1 gives the finite upper bound."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For r=0 the contraction is the ordinary product and the WF exclusion follows from the standalone case in step 3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The sum terminates at min(deg F,deg G), and each derivative order is a finite Leibniz sum in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A1 records the stated ACω convention; all uses are finite contractions and are covered in steps 1.1–2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma proves closure of the microcausal class and does not characterize that class by an if and only if."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse to microcausal closure under the displayed operations is claimed."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "r=0 coefficient",
+          "calculation": "The r=0 term is FG; it is the constant term of the formal contraction series.",
+          "disposition": "Finite algebraic specialization of the displayed definition and step 1.2."
+        },
+        {
+          "case": "degree-one factors",
+          "calculation": "If deg F=deg G=1, only r=0 and r=1 occur.",
+          "disposition": "Finite degree-bound check from the sum in step 1.2."
+        }
+      ]
+    },
+    "prop-qftx-hadamard-wick-change": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qftx-wavefront-hadamard",
+          "source_section": "Definition",
+          "quote": "Let $(M,g)$ be a Hausdorff, second-countable, oriented, time-oriented, globally hyperbolic smooth Lorentzian $n$-manifold without boundary, $n\\ge2$. Here $g$ is a smooth symmetric nondegenerate bilinear form on each tangent space with one negative and $n-1$ positive directions; in charts its signature is $(-,+,\\ldots,+)$. An orientation is a smooth choice of orientation in each tangent space. A time orientation selects one of the two components of $\\{v\\ne0:g(v,v)<0\\}$ as future. A tangent vector is causal when $g(v,v)\\le0$, and is future or past causal when it belongs to the closure of the selected future or past timelike cone. A causal curve is piecewise $C^1$ with causal tangent consistently future or past directed. Put $J^+(p)$ and $J^-(p)$ for the points reached from or reaching $p$ by such curves. Here globally hyperbolic means strongly causal and every causal diamond $J^+(p)\\cap J^-(q)$ is compact; strongly causal means every point has arbitrarily small neighborhoods which each causal curve meets in a connected parameter interval. A nonzero cotangent vector is future or past causal, or future or past null, when its metric dual under $g^{-1}$ has the corresponding tangent property.\n\nLet $\\nabla$ be the unique torsion-free connection with $\\nabla g=0$. Define the smooth metric density $\\mu_g=|\\det(g_{ab})|^{1/2}|dx^1\\cdots dx^n|$ in a chart. It is coordinate-independent: under $y=\\psi(x)$, $g_y=(D\\psi^{-1})^Tg_xD\\psi^{-1}$, so $|\\det g_y|^{1/2}=|\\det D\\psi^{-1}|\\,|\\det g_x|^{1/2}$, the density transformation law. Functional-kernel pairings and contractions on this page use $\\mu_g$ in each integrated variable; no physical units are assigned.\n\nFor each smooth chart $x:U\\to\\Omega\\subseteq\\mathbb R^n$, let $u_x\\in\\mathcal D'(\\Omega)$ be the coordinate representative of $u$ in the test-density convention of [[def-qftx-distributions-on-smooth-manifolds]]. Map a local covector $(x(p),\\xi)\\in T^*\\Omega$ to $(p,dx_p^T\\xi)\\in T^*M$. Define the global wavefront set by the union over all charts,\n$$ \\operatorname{WF}(u):=\\bigcup_{(U,x)}\\{(p,dx_p^T\\xi):(x(p),\\xi)\\in\\operatorname{WF}_{x(U)}(u_x)\\}\\subset T^*M\\setminus0, $$\nwhere the local sets are those of [[def-qftx-local-wavefront-set]]. Thus the global set is defined using all charts; equality of the chartwise descriptions on overlaps is a separate theorem. The Fourier convention is the displayed $2\\pi$ convention.\n\nAn affinely parametrized null geodesic is a smooth curve $\\gamma$ with $g(\\dot\\gamma,\\dot\\gamma)=0$ and $\\nabla_{\\dot\\gamma}\\dot\\gamma=0$; it is future-directed when $\\dot\\gamma$ lies in the chosen future causal cone. Two nonzero future-null cotangent vectors $(p,\\xi)$ and $(q,\\zeta)$ are related, written $(p,\\xi)\\sim(q,\\zeta)$, if $p=q$ and $\\zeta=\\xi$, or if there are a nonconstant future-directed affinely parametrized null geodesic $\\gamma:I\\to M$, parameters $s,t\\in I$ in either order, and a common scale $\\lambda>0$ such that\n$$p=\\gamma(s),\\qquad q=\\gamma(t),\\qquad \\xi=\\lambda g_p(\\dot\\gamma(s),\\cdot),\\qquad \\zeta=\\lambda g_q(\\dot\\gamma(t),\\cdot).$$\nThese covectors are the metric-dual tangents to that geodesic and are related by induced covector parallel transport. There is no requirement $s\\le t$: the future-frequency choice concerns the covectors, not an ordering of the two base points. The coincident case includes every nonzero future-null covector with $\\zeta=\\xi$. Define the positive-frequency null relation\n$$ \\mathcal C^+_g:=\\{(p,\\xi;q,-\\zeta): (p,\\xi)\\sim(q,\\zeta),\\ \\xi\\text{ future null}\\}\\subset T^*(M\\times M)\\setminus0. $$\nFor a fixed scalar second-order operator $P=-g^{ab}\\nabla_a\\nabla_b+X^a\\nabla_a+V$, with smooth vector field $X$, smooth scalar $V$, inverse metric $g^{ab}$, and Levi-Civita derivative $\\nabla$, a scalar Hadamard bisolution is a distribution $W\\in\\mathcal D'(M\\times M)$ satisfying $P_xW=P_yW=0$ and $\\operatorname{WF}(W)=\\mathcal C^+_g$. Write $W^{\\mathsf T}=\\tau^*W$ for the pullback by $\\tau(x,y)=(y,x)$. A fixed antisymmetric part means the equality $W-W^{\\mathsf T}=iE$ for one specified distribution $E$. This definition asserts no existence of $W$ and fixes no field-operator or commutator sign beyond the displayed convention.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qftx-wavefront-chart-invariance",
+          "source_section": "Statement",
+          "quote": "For a distribution $u$ on a smooth manifold, the chartwise rapid-decay definition of its wavefront set is independent of the chart: if $y=\\psi(x)$, its covector coordinates satisfy $\\eta=(D\\psi(x))^{-T}\\xi$. The resulting $\\operatorname{WF}(u)$ is closed and conic in $T^*M\\setminus0$. For distributions $u,v$ and a smooth diffeomorphism $\\psi$, one has $\\operatorname{WF}(u+v)\\subseteq\\operatorname{WF}(u)\\cup\\operatorname{WF}(v)$ and $\\operatorname{WF}(\\psi^*u)=\\psi^*\\operatorname{WF}(u)$. Finally, $\\operatorname{WF}(u)=\\varnothing$ exactly when $u$ is represented by a smooth scalar function in every chart.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qftx-wavefront-product",
+          "source_section": "Statement",
+          "quote": "Let $u\\in\\mathcal D'(M)$, where $M$ is a smooth manifold. For a smooth map $f:N\\to M$, define its nonzero conormal set by\n$$ N_f=\\{(f(x),\\eta)\\in T^*M\\setminus0: df_x^T\\eta=0\\}. $$\nIf $\\operatorname{WF}(u)\\cap N_f=\\varnothing$, there is a distributional pullback $f^*u\\in\\mathcal D'(N)$ and\n$$ \\operatorname{WF}(f^*u)\\subseteq \\{(x,df_x^T\\eta):(f(x),\\eta)\\in\\operatorname{WF}(u)\\}. $$\nFor $u,v\\in\\mathcal D'(M)$, if there is no nonzero covector $\\eta$ with both $(x,\\eta)\\in\\operatorname{WF}(u)$ and $(x,-\\eta)\\in\\operatorname{WF}(v)$ at the same $x$, their product is defined by $uv=\\Delta^*(u\\otimes v)$, where $\\Delta(x)=(x,x)$. It agrees with pointwise multiplication when $u,v$ are smooth and satisfies\n$$ \\operatorname{WF}(uv)\\subseteq \\{(x,\\eta+\\zeta):(x,\\eta)\\in\\operatorname{WF}(u)\\cup0_M,\\ (x,\\zeta)\\in\\operatorname{WF}(v)\\cup0_M,\\ \\eta+\\zeta\\ne0\\}. $$\nHere $0_M$ is the zero section. If $\\pi:X\\times Y\\to X$ is a coordinate projection, $\\nu$ is a smooth positive density on $Y$, and $t\\in\\mathcal E'(X\\times Y)$, define $\\pi_{*,\\nu}t$ by\n$$ \\langle \\pi_{*,\\nu}t,\\omega\\rangle =\\left\\langle t,\\chi(\\pi^*\\omega\\otimes\\nu)\\right\\rangle, $$\nwhere $\\omega$ is a compactly supported test density on $X$ and $\\chi$ is a compact cutoff equal to one near $\\operatorname{supp}t$. This pushforward is independent of $\\chi$, compactly supported, and\n$$ \\operatorname{WF}(\\pi_{*,\\nu}t)\\subseteq \\{(x,\\eta):\\text{ for some }y,\\ (x,y;\\eta,0)\\in\\operatorname{WF}(t)\\}. $$\nThe pullback condition is a local transversality requirement; this theorem does not define an arbitrary restriction of a singular kernel to a diagonal where the condition fails.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qftx-microcausal-star-product",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$ and let $\\hbar$ be a formal indeterminate. Let $W\\in\\mathcal D'(M\\times M)$ be a scalar Hadamard bisolution. For $F,G\\in\\mathcal F_{\\mu c}^{\\mathrm{poly}}(M)$, let $\\deg F$ be the largest degree with nonzero coefficient kernel, with $\\deg 0=0$, and define, coefficientwise in $\\hbar$,\n$$ F\\star_W G =\\sum_{r=0}^{\\min(\\deg F,\\deg G)} \\frac{\\hbar^r}{r!} \\left\\langle F^{(r)}(\\phi)\\otimes G^{(r)}(\\phi),\\,W^{\\otimes r}\\right\\rangle. $$\nEach term is formed by the distribution product on the $r$ contracted variable pairs and proper pushforward over those pairs, as in [[thm-qftx-wavefront-product]], integrating with the metric density $\\mu_g$ in each contracted variable. The sum is finite and defines a member of $\\mathcal F_{\\mu c}^{\\mathrm{poly}}(M)\\llbracket\\hbar\\rrbracket$. If $K\\in C^\\infty(M\\times M)$ is symmetric, then\n$$ \\Gamma_KF(\\phi)=\\left\\langle F^{(2)}(\\phi),\\chi K\\mu_g^{\\otimes2}\\right\\rangle $$\nis also a compactly supported polynomial microcausal functional and lowers polynomial degree by two; here $\\chi$ is any compactly supported cutoff equal to one near $\\operatorname{supp}F^{(2)}(\\phi)$.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-qft-regular-wick-star-associativity",
+          "source_section": "Statement",
+          "quote": "Let $X=\\mathbb R^d$, $d\\ge1$, and let $W\\in\\mathcal D'(X\\times X)$ be\nany continuous complex bidistribution. For a real formal parameter $\\eta$\nand $F,G\\in\\mathcal P_{\\mathrm{reg}}(X)$, define\n$$ F\\star_W G=\\sum_{k\\ge0}\\frac{\\eta^k}{k!}\\left\\langle W^{\\otimes k},F^{(k)}(\\phi)\\otimes G^{(k)}(\\phi)\\right\\rangle . $$\nThe pairing is over $k$ independent pairs of variables; $W^{\\otimes k}$\nis formed by iterated distributional tensor products, not by multiplying\ndistributions at coincident points. The sum is finite because the inputs are\npolynomial. It defines an element of\n$\\mathcal P_{\\mathrm{reg}}(X)[\\eta]$, and $\\star_W$ is associative.\nHere complex conjugation is $\\overline{a+ib}=a-ib$ for $a,b\\in\\mathbb R$.\nIf $W$ is Hermitian in the sense\n$\\overline{\\langle W,\\overline g\\otimes\\overline f\\rangle}\n=\\langle W,f\\otimes g\\rangle$, then\n$(F\\star_W G)^*=G^*\\star_W F^*$, where $F^*(\\phi)=\\overline{F(\\phi)}$.\nFor $\\ell_f(\\phi)=\\int_X f(x)\\phi(x)\\,dx$,\n$$ [\\ell_f,\\ell_g]_{\\star_W}=\\eta\\bigl(W(f,g)-W(g,f)\\bigr), \\qquad W(f,g):=\\langle W,f\\otimes g\\rangle . $$",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-qft-regular-normal-order-isomorphism",
+          "source_section": "Statement",
+          "quote": "Let $W\\in\\mathcal D'(X\\times X)$, $X=\\mathbb R^d$, and let\n$K\\in\\mathcal D'(X\\times X)$ be symmetric under interchange of its\nvariables. Define\n$$ \\Gamma_KF(\\phi)=\\langle K,F^{(2)}(\\phi)\\rangle,\\qquad \\alpha_K=\\exp\\!\\left(\\frac{\\eta}{2}\\Gamma_K\\right) =\\sum_{j\\ge0}\\frac{(\\eta/2)^j}{j!}\\Gamma_K^j $$\non $\\mathcal P_{\\mathrm{reg}}(X)[\\eta]$. Each sum is finite on each\npolynomial because $\\Gamma_K$ lowers degree by two. Then $\\alpha_K$ is\ninvertible with inverse $\\alpha_{-K}$, and\n$$ \\alpha_K(F\\star_W G)=\\alpha_K(F)\\star_{W+K}\\alpha_K(G) $$\nfor all regular polynomial functionals $F,G$. Thus the change from $W$\nto $W+K$ is an exact algebra isomorphism on this regular class.",
+          "uses": [
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $K=W'-W$. The common antisymmetric part gives $K-K^{\\mathsf T}=0$, so $K$ is symmetric. By [F1]–[F2], $\\operatorname{WF}(K)\\subseteq\\operatorname{WF}(W)\\cup\\operatorname{WF}(W')=\\mathcal C_g^+$. Symmetry also gives $\\operatorname{WF}(K)=\\tau^*\\operatorname{WF}(K)\\subseteq\\mathcal C_g^-$, where $\\mathcal C_g^-$ has past-directed first covectors. A nonzero null covector cannot be both future and past, so $\\mathcal C_g^+\\cap\\mathcal C_g^-=\\varnothing$ and $\\operatorname{WF}(K)=\\varnothing$. By [F2], $K$ is smooth.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By [F3], $\\Gamma_K$ is defined on the class and preserves microcausality. On a polynomial of degree $d$, $\\Gamma_K^jF=0$ for $2j>d$, so $\\alpha_KF$ and $\\alpha_{-K}F$ are finite sums. The coefficient of $\\Gamma_K^q$ in either composition is multiplied by $\\sum_{j=0}^{q}\\binom qj(-1)^{q-j}=(1-1)^q$, which is zero for $q>0$ and one for $q=0$. Hence $\\alpha_K\\alpha_{-K}=\\alpha_{-K}\\alpha_K=I$.",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "On the regular polynomial subspace of a Euclidean chart, [F4]–[F5] fix the contraction ordering and the factor $\\hbar/2$. For the general class, label the two functional arguments by $1,2$ and define $D_L(F\\otimes G)$ by multiplying their first derivative distributions by $L$ and integrating the contracted pair with $\\mu_g^{\\otimes2}$. Let $\\Gamma_K^{(1)}$ and $\\Gamma_K^{(2)}$ contract two derivative slots within the first and second arguments using the same density. The finite Leibniz expansion of the second derivative gives\n$$ \\Gamma_K\\circ m =m\\circ(\\Gamma_K^{(1)}+\\Gamma_K^{(2)}+2D_K), $$\nwhere $m$ is pointwise multiplication. The factor $2$ consists of the two cross terms, equal because $K$ is symmetric. Every term is defined by [F3].",
+          "step": "1.3",
+          "inputs": [
+            "A1",
+            "F3",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Each contraction acts on distinct labelled derivative slots; the finite tensor-pairing construction in [F3] makes their order immaterial, and finite polynomial degree makes every coefficient sum finite. Thus $\\alpha_K(F\\star_WG)=m\\,e^{\\frac{\\hbar}{2}(\\Gamma_K^{(1)}+\\Gamma_K^{(2)}+2D_K)}e^{\\hbar D_W}(F\\otimes G)=m\\,e^{\\frac{\\hbar}{2}(\\Gamma_K^{(1)}+\\Gamma_K^{(2)})}e^{\\hbar D_{W+K}}(F\\otimes G)=\\alpha_KF\\star_{W+K}\\alpha_KG$. Here $D_{W+K}=D_W+D_K$ by bilinearity and $W+K=W'$. These are coefficientwise identities of finite sums, not analytic convergence claims. Together with step 1.2 this proves the stated intertwiner and bijectivity.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "step 1.2",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For K=0, ΓK=0 and αK is the identity; the finite exponential and inverse are verified in steps 1.2 and 2.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For the zero functional all derivatives and contractions vanish, so the intertwining identity in step 2.1 reduces to zero equals zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For a linear functional F^(2)=0, hence ΓK F=0 and αK fixes it by the definition in step 1.2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The K=0 case is included in step 1.2 and the identity specialization of the contraction formula in step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Each polynomial has finite degree, so every coefficient of the formal exponential is a finite sum by step 1.2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A1 states the ACω input for local wavefront estimates; finite coefficient algebra is completed in steps 1.1 and 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The proposition asserts an intertwining map for a given smooth symmetric difference; it does not state an iff criterion for equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The inverse map α−K is established, but no converse characterization of pairs of Hadamard kernels is asserted."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "K=0",
+          "calculation": "Γ0=0, α0=I, and W′=W, so the intertwining equality reduces to F⋆W G=F⋆W G.",
+          "disposition": "Exact specialization of steps 2.1 and 3.2."
+        },
+        {
+          "case": "linear functional",
+          "calculation": "For deg F≤1, F^(2)=0, hence ΓK F=0 and αK F=F.",
+          "disposition": "Exact degree specialization of step 2.1."
+        }
+      ]
+    },
+    "cex-qftx-square-delta": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "thm-qftx-wavefront-product",
+          "source_section": "Statement",
+          "quote": "Let $u\\in\\mathcal D'(M)$, where $M$ is a smooth manifold. For a smooth map $f:N\\to M$, define its nonzero conormal set by\n$$ N_f=\\{(f(x),\\eta)\\in T^*M\\setminus0: df_x^T\\eta=0\\}. $$\nIf $\\operatorname{WF}(u)\\cap N_f=\\varnothing$, there is a distributional pullback $f^*u\\in\\mathcal D'(N)$ and\n$$ \\operatorname{WF}(f^*u)\\subseteq \\{(x,df_x^T\\eta):(f(x),\\eta)\\in\\operatorname{WF}(u)\\}. $$\nFor $u,v\\in\\mathcal D'(M)$, if there is no nonzero covector $\\eta$ with both $(x,\\eta)\\in\\operatorname{WF}(u)$ and $(x,-\\eta)\\in\\operatorname{WF}(v)$ at the same $x$, their product is defined by $uv=\\Delta^*(u\\otimes v)$, where $\\Delta(x)=(x,x)$. It agrees with pointwise multiplication when $u,v$ are smooth and satisfies\n$$ \\operatorname{WF}(uv)\\subseteq \\{(x,\\eta+\\zeta):(x,\\eta)\\in\\operatorname{WF}(u)\\cup0_M,\\ (x,\\zeta)\\in\\operatorname{WF}(v)\\cup0_M,\\ \\eta+\\zeta\\ne0\\}. $$\nHere $0_M$ is the zero section. If $\\pi:X\\times Y\\to X$ is a coordinate projection, $\\nu$ is a smooth positive density on $Y$, and $t\\in\\mathcal E'(X\\times Y)$, define $\\pi_{*,\\nu}t$ by\n$$ \\langle \\pi_{*,\\nu}t,\\omega\\rangle =\\left\\langle t,\\chi(\\pi^*\\omega\\otimes\\nu)\\right\\rangle, $$\nwhere $\\omega$ is a compactly supported test density on $X$ and $\\chi$ is a compact cutoff equal to one near $\\operatorname{supp}t$. This pushforward is independent of $\\chi$, compactly supported, and\n$$ \\operatorname{WF}(\\pi_{*,\\nu}t)\\subseteq \\{(x,\\eta):\\text{ for some }y,\\ (x,y;\\eta,0)\\in\\operatorname{WF}(t)\\}. $$\nThe pullback condition is a local transversality requirement; this theorem does not define an arbitrary restriction of a singular kernel to a diagonal where the condition fails.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-dirac-delta-and-its-derivatives",
+          "source_section": "Definition",
+          "quote": "For $a\\in\\Omega$, the **Dirac distribution at $a$** is the complex-linear functional $\\delta_a(\\varphi)=\\varphi(a)$ on $\\mathcal D(\\Omega)$, with the bilinear convention of [[def-distribution]]. It is continuous: the seminorm $q(\\varphi)=|\\varphi(a)|$ restricts on each $\\mathcal D_K$ to a seminorm bounded by $p_0$ (and is zero if $a\\notin K$), so it is one of the admissible seminorms defining the test topology.\n\nIts derivatives are those of [[def-distributional-derivative]]:\n$$\\langle\\partial^\\alpha\\delta_a,\\varphi\\rangle=(-1)^{|\\alpha|}\\partial^\\alpha\\varphi(a).$$\nThey are distributions by that definition; on each fixed-support stage the absolute value is at most $p_{|\\alpha|}(\\varphi)$. If $a\\notin K$ all derivatives of the test vanish at $a$, so the bound has zero left side. For $\\alpha=0$ this is $\\delta_a$; a first derivative evaluates the negative first derivative of the test. No conjugation and no choice are involved. On the empty open set there is no permitted point $a$, rather than a new Dirac distribution. The sharp order of these distributions requires a test witness and is proved in the assigned example later.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qftx-wavefront-hadamard",
+          "source_section": "Definition",
+          "quote": "Let $(M,g)$ be a Hausdorff, second-countable, oriented, time-oriented, globally hyperbolic smooth Lorentzian $n$-manifold without boundary, $n\\ge2$. Here $g$ is a smooth symmetric nondegenerate bilinear form on each tangent space with one negative and $n-1$ positive directions; in charts its signature is $(-,+,\\ldots,+)$. An orientation is a smooth choice of orientation in each tangent space. A time orientation selects one of the two components of $\\{v\\ne0:g(v,v)<0\\}$ as future. A tangent vector is causal when $g(v,v)\\le0$, and is future or past causal when it belongs to the closure of the selected future or past timelike cone. A causal curve is piecewise $C^1$ with causal tangent consistently future or past directed. Put $J^+(p)$ and $J^-(p)$ for the points reached from or reaching $p$ by such curves. Here globally hyperbolic means strongly causal and every causal diamond $J^+(p)\\cap J^-(q)$ is compact; strongly causal means every point has arbitrarily small neighborhoods which each causal curve meets in a connected parameter interval. A nonzero cotangent vector is future or past causal, or future or past null, when its metric dual under $g^{-1}$ has the corresponding tangent property.\n\nLet $\\nabla$ be the unique torsion-free connection with $\\nabla g=0$. Define the smooth metric density $\\mu_g=|\\det(g_{ab})|^{1/2}|dx^1\\cdots dx^n|$ in a chart. It is coordinate-independent: under $y=\\psi(x)$, $g_y=(D\\psi^{-1})^Tg_xD\\psi^{-1}$, so $|\\det g_y|^{1/2}=|\\det D\\psi^{-1}|\\,|\\det g_x|^{1/2}$, the density transformation law. Functional-kernel pairings and contractions on this page use $\\mu_g$ in each integrated variable; no physical units are assigned.\n\nFor each smooth chart $x:U\\to\\Omega\\subseteq\\mathbb R^n$, let $u_x\\in\\mathcal D'(\\Omega)$ be the coordinate representative of $u$ in the test-density convention of [[def-qftx-distributions-on-smooth-manifolds]]. Map a local covector $(x(p),\\xi)\\in T^*\\Omega$ to $(p,dx_p^T\\xi)\\in T^*M$. Define the global wavefront set by the union over all charts,\n$$ \\operatorname{WF}(u):=\\bigcup_{(U,x)}\\{(p,dx_p^T\\xi):(x(p),\\xi)\\in\\operatorname{WF}_{x(U)}(u_x)\\}\\subset T^*M\\setminus0, $$\nwhere the local sets are those of [[def-qftx-local-wavefront-set]]. Thus the global set is defined using all charts; equality of the chartwise descriptions on overlaps is a separate theorem. The Fourier convention is the displayed $2\\pi$ convention.\n\nAn affinely parametrized null geodesic is a smooth curve $\\gamma$ with $g(\\dot\\gamma,\\dot\\gamma)=0$ and $\\nabla_{\\dot\\gamma}\\dot\\gamma=0$; it is future-directed when $\\dot\\gamma$ lies in the chosen future causal cone. Two nonzero future-null cotangent vectors $(p,\\xi)$ and $(q,\\zeta)$ are related, written $(p,\\xi)\\sim(q,\\zeta)$, if $p=q$ and $\\zeta=\\xi$, or if there are a nonconstant future-directed affinely parametrized null geodesic $\\gamma:I\\to M$, parameters $s,t\\in I$ in either order, and a common scale $\\lambda>0$ such that\n$$p=\\gamma(s),\\qquad q=\\gamma(t),\\qquad \\xi=\\lambda g_p(\\dot\\gamma(s),\\cdot),\\qquad \\zeta=\\lambda g_q(\\dot\\gamma(t),\\cdot).$$\nThese covectors are the metric-dual tangents to that geodesic and are related by induced covector parallel transport. There is no requirement $s\\le t$: the future-frequency choice concerns the covectors, not an ordering of the two base points. The coincident case includes every nonzero future-null covector with $\\zeta=\\xi$. Define the positive-frequency null relation\n$$ \\mathcal C^+_g:=\\{(p,\\xi;q,-\\zeta): (p,\\xi)\\sim(q,\\zeta),\\ \\xi\\text{ future null}\\}\\subset T^*(M\\times M)\\setminus0. $$\nFor a fixed scalar second-order operator $P=-g^{ab}\\nabla_a\\nabla_b+X^a\\nabla_a+V$, with smooth vector field $X$, smooth scalar $V$, inverse metric $g^{ab}$, and Levi-Civita derivative $\\nabla$, a scalar Hadamard bisolution is a distribution $W\\in\\mathcal D'(M\\times M)$ satisfying $P_xW=P_yW=0$ and $\\operatorname{WF}(W)=\\mathcal C^+_g$. Write $W^{\\mathsf T}=\\tau^*W$ for the pullback by $\\tau(x,y)=(y,x)$. A fixed antisymmetric part means the equality $W-W^{\\mathsf T}=iE$ for one specified distribution $E$. This definition asserts no existence of $W$ and fixes no field-operator or commutator sign beyond the displayed convention.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qftx-wavefront-product",
+          "source_section": "Statement",
+          "quote": "Let $u\\in\\mathcal D'(M)$, where $M$ is a smooth manifold. For a smooth map $f:N\\to M$, define its nonzero conormal set by\n$$ N_f=\\{(f(x),\\eta)\\in T^*M\\setminus0: df_x^T\\eta=0\\}. $$\nIf $\\operatorname{WF}(u)\\cap N_f=\\varnothing$, there is a distributional pullback $f^*u\\in\\mathcal D'(N)$ and\n$$ \\operatorname{WF}(f^*u)\\subseteq \\{(x,df_x^T\\eta):(f(x),\\eta)\\in\\operatorname{WF}(u)\\}. $$\nFor $u,v\\in\\mathcal D'(M)$, if there is no nonzero covector $\\eta$ with both $(x,\\eta)\\in\\operatorname{WF}(u)$ and $(x,-\\eta)\\in\\operatorname{WF}(v)$ at the same $x$, their product is defined by $uv=\\Delta^*(u\\otimes v)$, where $\\Delta(x)=(x,x)$. It agrees with pointwise multiplication when $u,v$ are smooth and satisfies\n$$ \\operatorname{WF}(uv)\\subseteq \\{(x,\\eta+\\zeta):(x,\\eta)\\in\\operatorname{WF}(u)\\cup0_M,\\ (x,\\zeta)\\in\\operatorname{WF}(v)\\cup0_M,\\ \\eta+\\zeta\\ne0\\}. $$\nHere $0_M$ is the zero section. If $\\pi:X\\times Y\\to X$ is a coordinate projection, $\\nu$ is a smooth positive density on $Y$, and $t\\in\\mathcal E'(X\\times Y)$, define $\\pi_{*,\\nu}t$ by\n$$ \\langle \\pi_{*,\\nu}t,\\omega\\rangle =\\left\\langle t,\\chi(\\pi^*\\omega\\otimes\\nu)\\right\\rangle, $$\nwhere $\\omega$ is a compactly supported test density on $X$ and $\\chi$ is a compact cutoff equal to one near $\\operatorname{supp}t$. This pushforward is independent of $\\chi$, compactly supported, and\n$$ \\operatorname{WF}(\\pi_{*,\\nu}t)\\subseteq \\{(x,\\eta):\\text{ for some }y,\\ (x,y;\\eta,0)\\in\\operatorname{WF}(t)\\}. $$\nThe pullback condition is a local transversality requirement; this theorem does not define an arbitrary restriction of a singular kernel to a diagonal where the condition fails.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-radial-mollifier-family-in-rn",
+          "source_section": "Definition",
+          "quote": "A radial mollifier family is $\\rho_\\varepsilon(x)=\\varepsilon^{-n}\\rho(x/\\varepsilon)$ as in [[def-mollifier-family-generated-by-a-unit-mass-smooth-bump]], where $\\rho\\ge0$, $\\int\\rho=1$, $\\rho\\in C_c^\\infty(\\mathbb R^n)$, $\\rho(x)=q(|x|)$, and $\\operatorname{supp}\\rho\\subset B_1(0)$. Thus $\\operatorname{supp}\\rho_\\varepsilon\\subset B_\\varepsilon(0)$.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Choose a compactly supported smooth cutoff $\\chi$ equal to one near $0$. By [F1], $\\chi\\delta_0=\\delta_0$ and $\\widehat{\\chi\\delta_0}(\\xi)=\\langle\\delta_0,\\chi(x)e^{-2\\pi i x\\cdot\\xi}\\rangle=1$ for every $\\xi$. This constant function is not rapidly decreasing in any open cone about a nonzero covector, so [F2] gives $(0,\\xi)\\in\\operatorname{WF}(\\delta_0)$ for every $\\xi\\ne0$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Since $\\rho\\ge0$ and $\\int\\rho=1$ by [F4], it is positive at some point. Continuity gives a ball on which $\\rho^2$ is bounded below by a positive constant, so $\\int\\rho^2>0$. Compact support and smoothness make $\\rho$ bounded, and $0\\le\\rho^2\\le\\|\\rho\\|_\\infty\\rho$ with $\\int\\rho=1$ gives $\\rho^2\\in L^1$.",
+          "step": "1.2",
+          "inputs": [
+            "F4",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For every $\\xi\\ne0$, both $(0,\\xi)$ and $(0,-\\xi)$ belong to $\\operatorname{WF}(\\delta_0)$ by step 1.1. The hypothesis of the product criterion [F3] therefore fails for $(u,v)=(\\delta_0,\\delta_0)$; the theorem does not define $\\delta_0^2$.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Let $f\\in\\mathcal D(\\mathbb R^n)$ equal one on a neighborhood of $0$. Since $\\operatorname{supp}\\rho\\subset B_1(0)$, for all sufficiently small $\\varepsilon$, $f(\\varepsilon y)=1$ on $\\operatorname{supp}\\rho$. Substitution $x=\\varepsilon y$ in the Lebesgue integral of the smooth compactly supported square gives $\\langle\\rho_\\varepsilon^2,f\\rangle=\\int \\varepsilon^{-2n}\\rho(x/\\varepsilon)^2f(x)\\,dx=\\varepsilon^{-n}\\int\\rho(y)^2\\,dy$. By step 1.2 this tends to $+\\infty$, whereas convergence in $\\mathcal D'$ would make the pairing with the fixed test $f$ converge to a finite scalar. Thus these unrenormalized squares have no distributional limit.",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample is specifically on R^n with n≥1 and uses the nonempty base point 0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Dirac distribution has Fourier transform 1 in step 1.1, so it is nonzero and the excluded product is not a zero-input case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The computation uses only n≥1 and the Jacobian power ε−n; step 3.1 includes n=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The mollifier is a nonnegative unit-mass smooth function; no degenerate or zero-mass mollifier is part of the stated example."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The family is considered for ε>0 and its limit as ε decreases to zero diverges by step 3.1; ε=0 is not an admissible smooth member."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A1 records ACω for the Fourier convention; the distributional and mollifier calculations themselves use the explicit witnesses in steps 1.1 and 1.2."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a one-way counterexample to universal definability, not an equivalence statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse criterion is stated; the example only shows failure of the sufficient product hypothesis."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "dimension n=1",
+          "calculation": "For n=1, ⟨ρε²,f⟩=ε−1∫ρ², which diverges because ∫ρ²>0.",
+          "disposition": "Exact finite-dimensional scaling specialization of steps 2.1–2.2."
+        }
+      ]
+    }
+  }
+}

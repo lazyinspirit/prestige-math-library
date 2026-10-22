@@ -1,0 +1,1000 @@
+{
+  "version": 1,
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "batch": "80",
+  "level": 4,
+  "scope": [
+    "lem-qftx-casimir-tensor-diagonal-invariance",
+    "lem-qftx-basic-form-scale",
+    "def-qftx-kz-connection",
+    "thm-qftx-kz-flatness",
+    "def-qftx-wzw-conformal-block-interface",
+    "ex-qftx-two-insertion-monodromy"
+  ],
+  "contracts": {
+    "lem-qftx-casimir-tensor-diagonal-invariance": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "prop-killing-form-is-invariant-and-nondegenerate-on-a-complex-semisimple-lie-algebra",
+          "source_section": "Statement",
+          "quote": "Let $\\mathfrak g$ be a complex semisimple Lie algebra, and let $B$ be its Killing form from [[def-killing-form-of-a-semisimple-lie-algebra]]. Then\n\n$$B([x,y],z)=B(x,[y,z]) \\qquad (x,y,z\\in \\mathfrak g),$$\n\nand $B$ is nondegenerate.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-the-casimir-element-is-independent-of-dual-bases",
+          "source_section": "Statement",
+          "quote": "Let $\\mathfrak g$ be a complex semisimple Lie algebra with Killing form $B$.\nFor any pair of $B$-dual bases $(x_i),(x^i)$, the tensor\n$\\sum_i x_i\\otimes x^i\\in\\mathfrak g\\otimes\\mathfrak g$, and hence its\nimage $\\sum_i x_ix^i\\in U(\\mathfrak g)$ under multiplication, is independent\nof the chosen pair.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Nondegeneracy [F1] makes $\\beta_B:v\\mapsto B(v,\\cdot)$ an isomorphism $\\mathfrak g\\to\\mathfrak g^*$. Since $\\mathfrak g$ is finite-dimensional, $u\\otimes\\lambda\\mapsto(y\\mapsto\\lambda(y)u)$ is an isomorphism $\\mathfrak g\\otimes\\mathfrak g^*\\to\\operatorname{End}(\\mathfrak g)$: in any basis and its dual, it sends the tensor basis to the matrix-unit basis. Their composite is $\\Phi_B$, hence $\\Phi_B$ is an isomorphism. Duality gives $\\sum_a x_a B(x^a,y)=y$ for every $y$, so $\\Phi_B(\\Omega)=I_{\\mathfrak g}$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Invariance and symmetry [F1] imply $B([x,u],v)=-B(u,[x,v])$: indeed $B(u,[x,v])=B([u,x],v)=-B([x,u],v)$. Thus $\\Phi_B(( [x,\\cdot]\\otimes 1)\\Omega)(y)=[x,y]$, while $\\Phi_B((1\\otimes[x,\\cdot])\\Omega)(y)=-\\sum_a x_aB(x^a,[x,y])=-[x,y]$, using step 1.1's dual-basis identity.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The two images in step 2.1 sum to zero for every $y$. Since $\\Phi_B$ is injective by step 1.1, the sum of tensors is zero. The tensor itself is independent of the dual bases by [F2], so this is the diagonal adjoint invariance of the canonical Casimir tensor.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The zero Lie algebra has empty dual-basis sums, both tensor spaces are zero, and the identity endomorphism of the zero space is the zero map. Step 1.1 uses the corresponding finite-dimensional tensor-to-endomorphism map."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For x=0 the diagonal-adjoint identity is the zero tensor, as the calculation in step 2.1 shows."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A nonzero one-dimensional complex Lie algebra is abelian and is not semisimple; no one-dimensional nonzero simple case is asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The Killing form is nondegenerate by [F1], so degenerate duality data are outside the hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no real parameter interval or endpoint claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Only a fixed finite-dimensional algebra and finite dual bases are used; no family selection is asserted."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma asserts no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "sl2 diagonal-invariance calculation",
+          "status": "checked",
+          "evidence": "For H=diag(1,-1), E and F the standard sl2 basis, the Killing Casimir tensor is H⊗H/8+(E⊗F+F⊗E)/4; [H,E]⊗F+E⊗[H,F]=0 and [H,F]⊗E+F⊗[H,E]=0, matching the claimed identity for x=H."
+        }
+      ]
+    },
+    "lem-qftx-basic-form-scale": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-killing-form-of-a-semisimple-lie-algebra",
+          "source_section": "Definition",
+          "quote": "Let $\\mathfrak g$ be a complex semisimple Lie algebra. For $x,y\\in \\mathfrak g$, let $\\operatorname{ad}_x,\\operatorname{ad}_y\\in \\operatorname{End}(\\mathfrak g)$ be the adjoint operators. The **Killing form** of $\\mathfrak g$ is the symmetric bilinear form\n\n$$B(x,y):=\\operatorname{tr}(\\operatorname{ad}_x\\operatorname{ad}_y).$$\n\nThe trace is taken on the finite-dimensional vector space $\\mathfrak g$. This is the invariant form used to define dual bases, the root-theoretic vectors $H_\\alpha$, and the quadratic Casimir element on this page.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-finite-semisimple-cartan-root-and-string-structure",
+          "source_section": "Statement",
+          "quote": "Let $\\mathfrak g$ be a finite-dimensional complex semisimple Lie algebra with Killing form $B$. A **Cartan subalgebra** here means a maximal toral subalgebra: a maximal abelian subalgebra $\\mathfrak h$ all of whose adjoint operators are diagonalizable. Such subalgebras exist, and every one is self-centralizing. There is a decomposition\n$$\\mathfrak g=\\mathfrak h\\oplus\\bigoplus_{\\alpha\\in\\Phi}\\mathfrak g_\\alpha,\\qquad \\mathfrak g_\\alpha=\\{x:[h,x]=\\alpha(h)x\\text{ for all }h\\in\\mathfrak h\\},$$\nwhere the nonzero weights $\\Phi$ are finite, span $\\mathfrak h^*$, and each root space has dimension one. The form is nondegenerate on $\\mathfrak h$, pairs $\\mathfrak g_\\alpha$ perfectly with $\\mathfrak g_{-\\alpha}$, and all other weight-space pairings are zero. Define $H_\\alpha\\in\\mathfrak h$ by $B(H_\\alpha,h)=\\alpha(h)$. Then $c_\\alpha=\\alpha(H_\\alpha)\\ne0$, and $h_\\alpha=2H_\\alpha/c_\\alpha$ admits root vectors $e_\\alpha,f_\\alpha$ with $[e_\\alpha,f_\\alpha]=h_\\alpha$, $[h_\\alpha,e_\\alpha]=2e_\\alpha$, $[h_\\alpha,f_\\alpha]=-2f_\\alpha$.\n\nThe real span $\\mathfrak h_{\\mathbb R}$ of the $h_\\alpha$ is a real form of $\\mathfrak h$ on which $B$ is positive definite. On $E=\\mathfrak h_{\\mathbb R}^*$ with the dual form, $\\Phi$ is a finite reduced crystallographic root system and $h_\\alpha$ is its coroot. In particular the preceding abstract finite-Weyl conventions apply. For nonproportional roots $\\alpha,\\beta$, the root spaces with roots $\\beta+k\\alpha$ form one simple rank-one module: the integers occurring are a consecutive interval, reflection in $\\alpha$ reverses it, and raising or lowering between adjacent spaces is nonzero with the positive $fe,ef$ coefficients of $V_m$. The adjoint operators of all root vectors are nilpotent. For any positive system, normalized triples $e_i,f_i,h_i$ of its simple roots generate $\\mathfrak g$, and the $h_i$ form a basis of $\\mathfrak h$. All assertions include $\\mathfrak g=0$ and use no AC.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-quadratic-casimir-element",
+          "source_section": "Definition",
+          "quote": "Let $\\mathfrak g$ be a complex semisimple Lie algebra, and let $B$ be the Killing form from [[def-killing-form-of-a-semisimple-lie-algebra]]. Choose dual bases $x_1,\\dots,x_n$ and $x^1,\\dots,x^n$ with respect to $B$, so $B(x_i,x^j)=\\delta_i^j$. The **quadratic Casimir element** is\n\n$$C:=\\sum_{i=1}^n x_i x^i \\in U(\\mathfrak g).$$\n\nBy [[lem-the-casimir-element-is-independent-of-dual-bases]], this element is independent of the chosen dual bases.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-weyl-vector-rho-for-a-chosen-positive-system",
+          "source_section": "Definition",
+          "quote": "Fix a positive root system $\\Phi^+$ as in [[thm-triangular-decomposition-from-a-chosen-positive-root-system]]. The **Weyl vector** for that choice is\n\n$$\\rho:=\\frac12\\sum_{\\alpha\\in \\Phi^+} \\alpha \\in \\mathfrak h^*.$$\n\nThis is the shift used in the dot action and in the quadratic Casimir eigenvalue formula on this page.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "prop-casimir-eigenvalue-on-a-highest-weight-module",
+          "source_section": "Statement",
+          "quote": "Let $M$ be a cyclic highest-weight module of highest weight $\\lambda$. Then the quadratic Casimir element acts on $M$ by the scalar\n\n$$ (\\lambda,\\lambda+2\\rho), $$\n\nwhere the pairing on $\\mathfrak h^*$ is induced by the Killing form and $\\rho$ is the Weyl vector from [[def-weyl-vector-rho-for-a-chosen-positive-system]].",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The adjoint module is irreducible because any invariant subspace of $\\mathfrak g$ is an ideal and $\\mathfrak g$ is simple. A highest-root vector generates this nonzero module, so [F5] with $\\lambda=\\theta$ says the Casimir [F3] acts on $\\mathfrak g$ by a scalar $\\lambda_{\\mathrm{ad}}=(\\theta,\\theta+2\\rho)_{\\mathrm{Kill}}$. On the other hand, for any Killing-dual bases $(x_a),(x^a)$, its adjoint action is $\\sum_a\\operatorname{ad}_{x_a}\\operatorname{ad}_{x^a}$; its trace is $\\sum_a B_{\\mathrm{Kill}}(x_a,x^a)=\\dim\\mathfrak g$ by [F1]. Since the action is scalar on the nonzero space $\\mathfrak g$, this trace gives $\\lambda_{\\mathrm{ad}}=1$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The induced root pairing scales inversely to the form on $\\mathfrak g$: since $B_0=B_{\\mathrm{Kill}}/c$, one has $(\\alpha,\\beta)_0=c(\\alpha,\\beta)_{\\mathrm{Kill}}$. The normalization gives $(\\theta,\\theta)_0=2$, hence $\\theta^\\vee=\\theta$, and the definition of $h^\\vee$ gives $(\\rho,\\theta)_0=h^\\vee-1$. Therefore $\\lambda_{\\mathrm{ad}}=(\\theta,\\theta+2\\rho)_{\\mathrm{Kill}}=c^{-1}(2+2(h^\\vee-1))=2h^\\vee/c$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Equating the two expressions for $\\lambda_{\\mathrm{ad}}$ from steps 1.1 and 2.1 gives $1=2h^\\vee/c$, hence $c=2h^\\vee$. Substitution into $B_0=B_{\\mathrm{Kill}}/c$ proves the asserted form identity.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The hypothesis is a finite-dimensional simple Lie algebra, so the empty algebra is excluded."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "A simple Lie algebra is nonzero; the zero algebra is outside the statement."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-dimensional simple Lie algebra exists; the root normalization applies to nonzero simple root systems."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The Killing form is nondegenerate on the stated simple algebra, and the basic form is its nonzero scalar normalization."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no variable parameter interval or endpoint claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "A Cartan, positive system, and highest root are fixed as hypotheses; the proof makes no selection from a family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma asserts an equality, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma asserts an equality, not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "sl2 normalization",
+          "status": "checked",
+          "evidence": "For sl2, h^vee=2 and B_Kill(H,H)=8 for H=diag(1,-1); dividing by 2h^vee=4 gives B_bas(H,H)=2, the long-root-length-two normalization."
+        }
+      ]
+    },
+    "def-qftx-kz-connection": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ordered-configuration-space",
+          "source_section": "Definition",
+          "quote": "Let $n\\in\\mathbb N$, so that $n=\\{0,1,\\dots,n-1\\}$ is the set of its\npredecessors ([[def-natural-numbers]]), and let $X$ be a topological space\n([[def-topological-space]]). Write\n\n$$X^n:=\\prod_{k<n}X$$\n\nfor the $n$-fold product, carrying the product topology ([[def-product-topology]]),\nand display its points as $(x_1,\\dots,x_n)$: the **label** $i\\in\\{1,\\dots,n\\}$\nnames the coordinate of index $i-1$ in the sense of that definition. The\n**ordered configuration space** of $n$ points in $X$ is the subspace\n\n$$F_n(X):=\\{\\,(x_1,\\dots,x_n)\\in X^n\\;:\\;x_i\\neq x_j\\ \\text{whenever}\\ i\\neq j\\,\\}$$\n\nwith the subspace topology inherited from $X^n$\n([[def-subspace-topology-top]]). Equivalently\n\n$$F_n(X)=X^n\\setminus\\bigcup_{i\\neq j}\\{(x_1,\\dots,x_n)\\in X^n:x_i=x_j\\},$$\n\nsince a tuple lies in $F_n(X)$ exactly when its entries are pairwise distinct:\nthe **collision diagonals** $x_i=x_j$, $i\\neq j$, are removed from the product.\nPoints of $F_n(X)$ are called **ordered configurations** of $n$ points in $X$.\n\n**The label set.** The labels $1,\\dots,n$ are part of the data, and throughout\nthis page they are identified with the set $n=\\{0,1,\\dots,n-1\\}$ by the\nbijection $\\kappa(i):=i-1$. It is through $\\kappa$ that the symmetric group\n$S_n=\\operatorname{Sym}(n)$ acts on $F_n(X)$, in\n[[prop-the-symmetric-group-acts-freely-on-ordered-configurations]].\n\n**Elementary cases.** For $n=0$ the product $X^0$ is a one-point space\n([[def-product-topology]]), and the defining condition is vacuous, so\n\n$$F_0(X)=\\{\\,\\text{the empty tuple}\\,\\}$$\n\nfor every $X$, including $X=\\varnothing$. For $n=1$ there is no pair $i\\neq j$,\nso single-coordinate evaluation $(x_1)\\mapsto x_1$ is a canonical\nhomeomorphism $F_1(X)\\cong X$. For $n\\geq2$ and any $X$ one has\n\n$$F_n(X)\\neq\\varnothing\\quad\\Longleftrightarrow\\quad X\\ \\text{has at least } n \\text{ distinct points}.$$\n\nif $X$ has at least $n$ points, an injection $\\{1,\\dots,n\\}\\to X$ is exactly a\ntuple of pairwise distinct points of $X$, and conversely such a tuple displays\n$n$ distinct points. In particular $F_n(X)=\\varnothing$ when $X$ is empty and\n$n\\geq1$.\n\n**Based configurations.** A **base configuration** in $F_n(X)$ is a point\n$q=(q_1,\\dots,q_n)$ of $F_n(X)$. Such a $q$ is fixed once and for all only when\n$F_n(X)$ is nonempty; when $n\\ge1$, $F_n(X)\\ne\\varnothing$, and $X$ is\ninfinite, $F_n(X)$ is infinite: from any one configuration, keep coordinates\n$2,\\dots,n$ fixed and vary the first coordinate among the infinitely many\npoints of $X\\setminus\\{q_2,\\dots,q_n\\}$. The choice of $q$ is part of the data\nof every construction below. All base configurations on this page are chosen in the ordered space\n$F_n(X)$; the corresponding basepoint of the unordered quotient is its orbit\n([[def-unordered-configuration-space]]).\n\n**Separation of distinct coordinates.** If $X$ is Hausdorff\n([[def-hausdorff-space]]) and $q\\in F_n(X)$, then the finitely many points\n$q_1,\\dots,q_n$ are pairwise distinct, and for each pair $i\\neq j$ Hausdorffness\nsupplies disjoint open sets separating $q_i$ from $q_j$; a finite intersection\nover the finitely many pairs $j\\neq i$ therefore gives, for every $i$, an open\nneighbourhood $U_i$ of $q_i$ with $U_i\\cap U_j=\\varnothing$ whenever $i\\neq j$.\nThis is used in\n[[lem-disjoint-coordinate-neighborhoods-evenly-cover-unordered-configurations]].",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-killing-form-of-a-semisimple-lie-algebra",
+          "source_section": "Definition",
+          "quote": "Let $\\mathfrak g$ be a complex semisimple Lie algebra. For $x,y\\in \\mathfrak g$, let $\\operatorname{ad}_x,\\operatorname{ad}_y\\in \\operatorname{End}(\\mathfrak g)$ be the adjoint operators. The **Killing form** of $\\mathfrak g$ is the symmetric bilinear form\n\n$$B(x,y):=\\operatorname{tr}(\\operatorname{ad}_x\\operatorname{ad}_y).$$\n\nThe trace is taken on the finite-dimensional vector space $\\mathfrak g$. This is the invariant form used to define dual bases, the root-theoretic vectors $H_\\alpha$, and the quadratic Casimir element on this page.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-the-casimir-element-is-independent-of-dual-bases",
+          "source_section": "Statement",
+          "quote": "Let $\\mathfrak g$ be a complex semisimple Lie algebra with Killing form $B$.\nFor any pair of $B$-dual bases $(x_i),(x^i)$, the tensor\n$\\sum_i x_i\\otimes x^i\\in\\mathfrak g\\otimes\\mathfrak g$, and hence its\nimage $\\sum_i x_ix^i\\in U(\\mathfrak g)$ under multiplication, is independent\nof the chosen pair.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-quadratic-casimir-element",
+          "source_section": "Definition",
+          "quote": "Let $\\mathfrak g$ be a complex semisimple Lie algebra, and let $B$ be the Killing form from [[def-killing-form-of-a-semisimple-lie-algebra]]. Choose dual bases $x_1,\\dots,x_n$ and $x^1,\\dots,x^n$ with respect to $B$, so $B(x_i,x^j)=\\delta_i^j$. The **quadratic Casimir element** is\n\n$$C:=\\sum_{i=1}^n x_i x^i \\in U(\\mathfrak g).$$\n\nBy [[lem-the-casimir-element-is-independent-of-dual-bases]], this element is independent of the chosen dual bases.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "prop-the-quadratic-casimir-element-is-central",
+          "source_section": "Statement",
+          "quote": "For every $x\\in \\mathfrak g$, the quadratic Casimir element $C$ from [[def-quadratic-casimir-element]] satisfies\n\n$$[x,C]=0.$$\n\nHence $C\\in Z(U(\\mathfrak g))$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each $i<j$, the sum defining $\\Omega_{ij}$ is a finite endomorphism sum. Changing the $B$-dual bases leaves $\\Omega$ unchanged by [F3], and applying $\\rho_i\\otimes\\rho_j$ and identities on the other factors therefore leaves $\\Omega_{ij}$ unchanged. Thus every $\\Omega_{ij}\\in\\operatorname{End}_{\\mathbb C}(V)$ is well-defined.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "On $F_n(\\mathbb C)$ the scalar $z_i-z_j$ is never zero by [F1]. Hence its reciprocal is smooth, so $\\eta_{ij}=(dz_i-dz_j)/(z_i-z_j)$ is a globally defined smooth one-form; the finite sum $A=\\kappa^{-1}\\sum_{i<j}\\Omega_{ij}\\eta_{ij}$ is a smooth $\\operatorname{End}(V)$-valued one-form.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For a smooth section $s:F_n(\\mathbb C)\\to V$ and smooth scalar function $f$, $\\nabla(fs)=d(fs)-A(fs)=df\\otimes s+f(ds-As)=df\\otimes s+f\\nabla s$, because each endomorphism coefficient in $A$ acts $\\mathbb C$-linearly on $s$. Thus $\\nabla=d-A$ is a connection on the stated trivial bundle. The operator is the Casimir KZ connection because its coefficients are the pairwise tensor Casimirs from [F3] and the associated quadratic Casimir [F4] is central by [F5].",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition requires n>=2 and a fixed finite list of modules."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero-dimensional modules give the zero fiber and zero endomorphism-valued form; the connection rule in step 2.1 remains defined on its unique section."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The definition requires n>=2, so the one-insertion case is excluded."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Trivial representations make every pairwise tensor zero, so the connection reduces to d without changing well-definedness in steps 1.1 and 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no parameter interval; the only scalar restriction is kappa != 0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The definition fixes dual bases and finite-dimensional modules and makes no nonempty-family choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition asserts no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "two-point coefficient",
+          "status": "checked",
+          "evidence": "For n=2 the finite pair sum has only Ω_12 η_12, and with w=z_1-z_2 the form is dw/w on C^*, as used in the Definition."
+        }
+      ]
+    },
+    "thm-qftx-kz-flatness": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qftx-kz-connection",
+          "source_section": "Definition",
+          "quote": "Let $\\mathfrak g$ be a finite-dimensional complex semisimple Lie algebra with Killing form $B$, let $n\\ge2$, and let $V_1,\\ldots,V_n$ be finite-dimensional complex vector spaces. A representation here is a complex-linear Lie algebra homomorphism $\\rho_i:\\mathfrak g\\to\\operatorname{End}_{\\mathbb C}(V_i)$, so $[\\rho_i(x),\\rho_i(y)]=\\rho_i([x,y])$. Let $F_n(\\mathbb C)=\\{(z_1,\\ldots,z_n)\\in\\mathbb C^n:z_i\\ne z_j\\text{ for }i\\ne j\\}$ be the ordered configuration space and put $V:=V_1\\otimes\\cdots\\otimes V_n$ in the indicated factor order. For any pair of $B$-dual bases $(x_a),(x^a)$ define $\\Omega_{ij}:=\\sum_a\\rho_i(x_a)^{(i)}\\rho_j(x^a)^{(j)}\\in\\operatorname{End}_{\\mathbb C}(V)$, where each superscript means that the operator acts on that tensor factor and as the identity on all other factors. For $i<j$ put $\\eta_{ij}:=(dz_i-dz_j)/(z_i-z_j)$, a globally defined complex-valued one-form on $F_n(\\mathbb C)$. For $\\kappa\\in\\mathbb C\\setminus\\{0\\}$, the **Casimir Knizhnik–Zamolodchikov connection** on the trivial vector bundle $F_n(\\mathbb C)\\times V\\to F_n(\\mathbb C)$ is\n\n$$\\nabla^{\\mathrm{KZ}}_\\kappa:=d-\\kappa^{-1}\\sum_{i<j}\\Omega_{ij}\\eta_{ij}.$$\n\nHere a connection on this trivial bundle is a complex-linear operator on smooth $V$-valued sections satisfying $\\nabla(fs)=df\\otimes s+f\\nabla s$ for every smooth scalar function $f$ and section $s$. The associated quadratic Casimir is $C_B:=\\sum_a x_ax^a$ in the universal enveloping algebra; with the Killing-form convention above it is central, and $\\Omega_{ij}$ is its tensor-level Casimir counterpart.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qftx-casimir-tensor-diagonal-invariance",
+          "source_section": "Statement",
+          "quote": "Let $\\mathfrak g$ be a finite-dimensional complex semisimple Lie algebra, let $B$ be its Killing form, and let $(x_a)$ and $(x^a)$ be $B$-dual bases. The tensor $\\Omega:=\\sum_a x_a\\otimes x^a\\in\\mathfrak g\\otimes\\mathfrak g$ corresponds to the identity map under $\\Phi_B(u\\otimes v)(y):=uB(v,y)$, and is invariant under the diagonal adjoint action:\n\n$$([x,\\cdot]\\otimes 1+1\\otimes[x,\\cdot])\\Omega=\\sum_a [x,x_a]\\otimes x^a+x_a\\otimes[x,x^a]=0\\qquad(x\\in\\mathfrak g).$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-a-flat-connection-admits-local-parallel-frames",
+          "source_section": "Statement",
+          "quote": "A connection on a finite-rank smooth vector bundle $E\\to M$ is flat if and\nonly if every point of $M$ has a neighborhood carrying a local frame\n$(e_1,\\ldots,e_r)$ of parallel sections, meaning $\\nabla_Xe_a=0$ for every\nlocal vector field $X$ and every $a$.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-parallel-transport-along-a-piecewise-smooth-curve",
+          "source_section": "Definition",
+          "quote": "For a piecewise smooth curve $\\gamma:[a,b]\\to M$ and $v\\in E_{\\gamma(a)}$, let $V_v$ be the unique continuous piecewise parallel section with $V_v(a)=v$, supplied by [[thm-existence-and-uniqueness-of-parallel-sections]]. Its **parallel transport** is\n$$P_\\gamma:E_{\\gamma(a)}\\to E_{\\gamma(b)},\\qquad P_\\gamma(v)=V_v(b).$$\nMore generally, $P_{\\gamma;s,t}$ sends initial data at $s$ to its value at $t$, allowing either order of the parameters. The same theorem gives independence from frames and subdivisions. On a singleton, $P_\\gamma$ is the identity of its fibre. An empty curve has no endpoint fibres and is not assigned such a map. Zero initial data maps to zero; the transport depends on the supplied connection as well as the curve. Linearity and invertibility are proved next.",
+          "uses": [
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-existence-and-uniqueness-of-parallel-sections",
+          "source_section": "Statement",
+          "quote": "Let $\\gamma:I\\to M$ be smooth on an interval, with smooth one-sided data at included endpoints. For every $t_0\\in I$ and $v_0\\in E_{\\gamma(t_0)}$ there is exactly one parallel section $V$ on all of $I$ with $V(t_0)=v_0$. The same holds for a piecewise smooth curve on a compact interval, with continuity at its finitely many corners. A singleton carries its prescribed vector. No AC is required for a supplied connection and curve.",
+          "uses": [
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-based-loops-and-fundamental-group",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a topological space and let $x_0\\in X$. A **based loop at $x_0$**\nis a path $\\alpha:I\\to X$ with $\\alpha(0)=x_0=\\alpha(1)$\n([[def-path-connected]]). Two based loops are equivalent when they are\npath-homotopic relative to the endpoints. This is an equivalence relation by\n[[cor-homotopy-relative-and-path-homotopy-are-equivalence-relations]].\n\nThe **fundamental group set** of $X$ at $x_0$ is\n\n$$\\pi_1(X,x_0):=\\{\\,[\\alpha]:\\alpha\\text{ is a based loop at }x_0\\,\\}.$$\n\nFor composable paths, write\n\n$$(\\alpha*\\beta)(s):=\\begin{cases}\\alpha(2s),&0\\leq s\\leq\\tfrac12,\\\\ \\beta(2s-1),&\\tfrac12\\leq s\\leq1.\\end{cases}$$\n\nThe finite closed-pasting argument already carried out in\n[[def-path-connected]] shows that this is a path. The multiplication proposed\non loop classes is\n\n$$[\\alpha][\\beta]:=[\\alpha*\\beta].$$\n\n**Order convention.** The product $[\\alpha][\\beta]$ traverses $\\alpha$ first\nand $\\beta$ second. Every product on this page uses this convention.\n\nThe constant loop at $x_0$ is denoted $c_{x_0}$, and the reversed loop is\n$\\bar\\alpha(s):=\\alpha(1-s)$. The next theorem proves that multiplication is\nindependent of representatives and that $[c_{x_0}]$ and $[\\bar\\alpha]$ are the\nidentity and inverse required by the group axioms.",
+          "uses": [
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-ordered-configuration-space",
+          "source_section": "Definition",
+          "quote": "Let $n\\in\\mathbb N$, so that $n=\\{0,1,\\dots,n-1\\}$ is the set of its\npredecessors ([[def-natural-numbers]]), and let $X$ be a topological space\n([[def-topological-space]]). Write\n\n$$X^n:=\\prod_{k<n}X$$\n\nfor the $n$-fold product, carrying the product topology ([[def-product-topology]]),\nand display its points as $(x_1,\\dots,x_n)$: the **label** $i\\in\\{1,\\dots,n\\}$\nnames the coordinate of index $i-1$ in the sense of that definition. The\n**ordered configuration space** of $n$ points in $X$ is the subspace\n\n$$F_n(X):=\\{\\,(x_1,\\dots,x_n)\\in X^n\\;:\\;x_i\\neq x_j\\ \\text{whenever}\\ i\\neq j\\,\\}$$\n\nwith the subspace topology inherited from $X^n$\n([[def-subspace-topology-top]]). Equivalently\n\n$$F_n(X)=X^n\\setminus\\bigcup_{i\\neq j}\\{(x_1,\\dots,x_n)\\in X^n:x_i=x_j\\},$$\n\nsince a tuple lies in $F_n(X)$ exactly when its entries are pairwise distinct:\nthe **collision diagonals** $x_i=x_j$, $i\\neq j$, are removed from the product.\nPoints of $F_n(X)$ are called **ordered configurations** of $n$ points in $X$.\n\n**The label set.** The labels $1,\\dots,n$ are part of the data, and throughout\nthis page they are identified with the set $n=\\{0,1,\\dots,n-1\\}$ by the\nbijection $\\kappa(i):=i-1$. It is through $\\kappa$ that the symmetric group\n$S_n=\\operatorname{Sym}(n)$ acts on $F_n(X)$, in\n[[prop-the-symmetric-group-acts-freely-on-ordered-configurations]].\n\n**Elementary cases.** For $n=0$ the product $X^0$ is a one-point space\n([[def-product-topology]]), and the defining condition is vacuous, so\n\n$$F_0(X)=\\{\\,\\text{the empty tuple}\\,\\}$$\n\nfor every $X$, including $X=\\varnothing$. For $n=1$ there is no pair $i\\neq j$,\nso single-coordinate evaluation $(x_1)\\mapsto x_1$ is a canonical\nhomeomorphism $F_1(X)\\cong X$. For $n\\geq2$ and any $X$ one has\n\n$$F_n(X)\\neq\\varnothing\\quad\\Longleftrightarrow\\quad X\\ \\text{has at least } n \\text{ distinct points}.$$\n\nif $X$ has at least $n$ points, an injection $\\{1,\\dots,n\\}\\to X$ is exactly a\ntuple of pairwise distinct points of $X$, and conversely such a tuple displays\n$n$ distinct points. In particular $F_n(X)=\\varnothing$ when $X$ is empty and\n$n\\geq1$.\n\n**Based configurations.** A **base configuration** in $F_n(X)$ is a point\n$q=(q_1,\\dots,q_n)$ of $F_n(X)$. Such a $q$ is fixed once and for all only when\n$F_n(X)$ is nonempty; when $n\\ge1$, $F_n(X)\\ne\\varnothing$, and $X$ is\ninfinite, $F_n(X)$ is infinite: from any one configuration, keep coordinates\n$2,\\dots,n$ fixed and vary the first coordinate among the infinitely many\npoints of $X\\setminus\\{q_2,\\dots,q_n\\}$. The choice of $q$ is part of the data\nof every construction below. All base configurations on this page are chosen in the ordered space\n$F_n(X)$; the corresponding basepoint of the unordered quotient is its orbit\n([[def-unordered-configuration-space]]).\n\n**Separation of distinct coordinates.** If $X$ is Hausdorff\n([[def-hausdorff-space]]) and $q\\in F_n(X)$, then the finitely many points\n$q_1,\\dots,q_n$ are pairwise distinct, and for each pair $i\\neq j$ Hausdorffness\nsupplies disjoint open sets separating $q_i$ from $q_j$; a finite intersection\nover the finitely many pairs $j\\neq i$ therefore gives, for every $i$, an open\nneighbourhood $U_i$ of $q_i$ with $U_i\\cap U_j=\\varnothing$ whenever $i\\neq j$.\nThis is used in\n[[lem-disjoint-coordinate-neighborhoods-evenly-cover-unordered-configurations]].",
+          "uses": [
+            "3.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-pure-braid-group-from-ordered-configurations",
+          "source_section": "Definition",
+          "quote": "Fix $n\\in\\mathbb N$ and a **base configuration** $q=(q_1,\\dots,q_n)$, an\nordered $n$-tuple of pairwise distinct points of the open unit disc\n$\\operatorname{int}D^2=\\{z\\in\\mathbb C:|z|<1\\}$, so that\n$$q\\in F_n(\\operatorname{int}D^2)\\subseteq F_n(D^2),\\qquad D^2=\\{z\\in\\mathbb C:|z|\\le1\\}$$\nin the notation of [[lem-interior-and-closed-disk-configuration-spaces-are-homotopy-equivalent]]\nand [[def-ordered-configuration-space]]. The **pure configuration braid\ngroup** on $n$ strands is the fundamental group\n([[def-based-loops-and-fundamental-group]])\n\n$$PB_n:=\\pi_1\\big(F_n(D^2),q\\big),$$\n\nthe group of based-loop classes at $q$ in the ordered configuration space of the\nclosed disc, with the first-then-second loop product.\n\n**The open-disc model.** The inclusion\n$F_n(\\operatorname{int}D^2)\\to F_n(D^2)$ induces an isomorphism\n$$\\pi_1\\big(F_n(\\operatorname{int}D^2),q\\big)\\longrightarrow\\pi_1\\big(F_n(D^2),q\\big)$$\nof fundamental groups at the same base configuration $q$\n([[def-induced-homomorphism-on-fundamental-groups]]); this is claim 3 of\n[[lem-interior-and-closed-disk-configuration-spaces-are-homotopy-equivalent]].\nThe isomorphism is canonical — it is induced by the inclusion and involves no\nchoice — so on this page and its consumers $PB_n$ may be computed from either\nthe closed-disc or the open-disc ordered configuration space. The closed-disc\nmodel is the one that matches the geometrically drawn braids, and the open-disc\nmodel is the one to which the forgetful fibrations for boundaryless manifolds\napply; both give the same group by the displayed isomorphism.\n\n**The basepoint.** The configuration $q$ is part of the data defining $PB_n$, and\nall groups on this page use the same $q$. Different choices of base\nconfiguration give isomorphic groups: $F_n(D^2)$ is path-connected for every\n$n$ (claim 2 of\n[[thm-ordered-configurations-cover-unordered-configurations-regularly]]), and a\npath between base configurations conjugates loop classes and induces an\nisomorphism ([[lem-path-conjugation-isomorphism-of-fundamental-groups]]). No\nparticular such isomorphism is fixed here. For $n=0$ the space $F_0(D^2)$ is a\npoint, so $PB_0$ is the one-element group; for $n=1$ single-coordinate\nevaluation gives $F_1(D^2)\\cong D^2$ and $PB_1$ is trivial.\n\n**Scope.** This is the configuration-space definition of the pure braid group,\nstated before any comparison with geometric strands or with the Artin\npresentation: no presentation of $PB_n$ is asserted here. The description by\ngeometric braids and the Artin presentation, and the configuration braid short\nexact sequence relating $PB_n$ to the unordered configuration braid group,\nbelong to the later items on braids, which consume this definition.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-unordered-configuration-space",
+          "source_section": "Definition",
+          "quote": "Let $n\\in\\mathbb N$ and let $X$ be a topological space\n([[def-ordered-configuration-space]], [[def-topological-space]]). The label\npermutation action\n\n$$S_n\\times F_n(X)\\longrightarrow F_n(X),\\qquad(\\sigma,x)\\longmapsto\\sigma\\cdot x,\\qquad(\\sigma\\cdot x)_i=x_{\\sigma^{-1}(i-1)+1},$$\n\nis a continuous free left action\n([[prop-the-symmetric-group-acts-freely-on-ordered-configurations]]). Its set of\norbits $S_n\\cdot x=\\{\\sigma\\cdot x:\\sigma\\in S_n\\}$\n([[def-orbit-and-stabilizer]]) is the **unordered configuration space** of $n$\npoints in $X$, written\n\n$$C_n(X):=F_n(X)/S_n=\\{S_n\\cdot x:x\\in F_n(X)\\},$$\n\nand it carries the **quotient topology** of the canonical projection\n\n$$p_n:F_n(X)\\longrightarrow C_n(X),\\qquad p_n(x):=S_n\\cdot x,$$\n\nin the sense of [[def-quotient-topology]]: a subset $V\\subseteq C_n(X)$ is open\nexactly when $p_n^{-1}(V)$ is open in $F_n(X)$. This projection is a quotient\nmap, hence continuous and surjective, and points of $C_n(X)$ are written\n$[x]:=p_n(x)$.\n\n**Basepoint.** For a base configuration $q\\in F_n(X)$ in the sense of\n[[def-ordered-configuration-space]], the **basepoint** of $C_n(X)$ is the orbit\n\n$$[q]=p_n(q)=S_n\\cdot q,$$\n\nand $C_n(X)$ is nonempty exactly when $F_n(X)$ is, in which case a basepoint can\nbe fixed. The unordered space is based by the orbit of the ordered base\nconfiguration, and this is the basepoint used in every later construction on\nthis page.\n\n**Elementary cases.** $C_0(X)$ is the quotient of the one-point space $F_0(X)$\nby the trivial group $S_0$, hence is a one-point space. Since $S_1$ is trivial,\n$p_1:F_1(X)\\to C_1(X)$ is a bijective quotient map and hence a\nhomeomorphism: for every open $U\\subseteq F_1(X)$, the equality\n$p_1^{-1}(p_1(U))=U$ makes $p_1(U)$ open by the quotient topology.\nThus $C_1(X)$ is canonically homeomorphic to $X$ by $[(x)]\\mapsto x$,\nusing the single-coordinate homeomorphism $F_1(X)\\to X$.\nThese are canonical identifications, not literal equalities of the orbit set\nwith the original set.\n\n**Elements are $n$-element subsets, as a set.** Because the coordinates of a\nconfiguration are pairwise distinct, two ordered configurations $x,y\\in F_n(X)$\nlie in the same orbit exactly when their underlying sets of coordinates agree:\nif $y=\\sigma\\cdot x$ then the coordinates of $y$ are those of $x$ in a different\norder, and conversely, if $\\{x_1,\\dots,x_n\\}=\\{y_1,\\dots,y_n\\}$, then for every\nlabel $i$ there is exactly one label $\\sigma(i)$ with $y_i=x_{\\sigma(i)}$, and\n$i\\mapsto\\sigma(i)$ is a bijection of $\\{1,\\dots,n\\}$\n([[def-injection-surjection-bijection]]); composing with the identification\n$\\kappa(i)=i-1$ of labels with $n$, the permutation\n$\\tau=\\kappa\\circ\\sigma^{-1}\\circ\\kappa^{-1}\\in S_n$ takes $x$ to $y$:\n$(\\tau\\cdot x)_i=x_{\\tau^{-1}(i-1)+1}=x_{\\sigma(i)}=y_i$. Hence\n\n$$C_n(X)\\longrightarrow\\{\\,S\\subseteq X:S \\text{ has exactly } n \\text{ elements}\\,\\},\\qquad [x]\\longmapsto\\{x_1,\\dots,x_n\\},$$\n\nis a bijection of sets, the inverse sending an $n$-element subset $S$ to the\norbit of any enumeration of $S$ ([[def-finite-cardinality]]). This identifies\nthe *elements* of $C_n(X)$ with $n$-element subsets of $X$; the topology on\n$C_n(X)$ is the quotient topology displayed above, and no topology on a set of\nsubsets is asserted here. In particular the quotient topology is not defined\nthrough any metric or hyperspace structure.",
+          "uses": [
+            "3.2",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-ordered-configurations-cover-unordered-configurations-regularly",
+          "source_section": "Statement",
+          "quote": "Let $M$ be a nonempty connected Hausdorff topological $d$-manifold with boundary, possibly empty boundary, in the sense of [[def-topological-manifold-with-boundary]], of dimension $d\\ge2$, and let $n\\in\\mathbb N$. Write $p:F_n(M)\\to C_n(M)$ for the quotient map from the ordered to the unordered configuration space ([[def-ordered-configuration-space]], [[def-unordered-configuration-space]]). Then:\n\n1. $p$ is a covering map in the sense of [[def-covering-map-and-evenly-covered-neighbourhoods]]; every fibre of $p$ has exactly $n!$ elements, so $p$ is an $n!$-sheeted covering, and each point of $C_n(M)$ has an evenly covered neighbourhood of the form supplied by [[lem-disjoint-coordinate-neighborhoods-evenly-cover-unordered-configurations]].\n2. $F_n(M)$ is path-connected, and so is $C_n(M)$; in particular $F_n(M)$ is connected and is a connected covering space of $C_n(M)$.\n3. The deck group $\\operatorname{Deck}(p)$ ([[def-deck-transformation-and-deck-group]]) is isomorphic to $S_n$: the map $\\sigma\\mapsto\\tau_\\sigma$, $\\tau_\\sigma(x):=\\sigma\\cdot x$, is an isomorphism of groups from $S_n$ onto $\\operatorname{Deck}(p)$, where $S_n$ acts on $F_n(M)$ by permuting the labels $1,\\dots,n$ ([[prop-the-symmetric-group-acts-freely-on-ordered-configurations]]).\n4. $p$ is a regular covering in the sense of [[def-regular-covering]]: its deck group acts transitively on every fibre.\n\nFor $n=0$ the spaces $F_0(M)$ and $C_0(M)$ are one-point spaces and $p$ is their unique homeomorphism, so the assertions hold with $0!=1$. No choice principle, paracompactness or second countability beyond the manifold definition is used.",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-braid-group-from-unordered-configurations",
+          "source_section": "Definition",
+          "quote": "Fix $n\\in\\mathbb N$ and the same base configuration $q=(q_1,\\dots,q_n)$ of\npairwise distinct points of $\\operatorname{int}D^2$ that is used in\n[[def-pure-braid-group-from-ordered-configurations]], with $D^2$ the closed unit\ndisc. Write $p:F_n(D^2)\\to C_n(D^2)$ for the quotient of the ordered by the\nunordered configuration space, so that $p(q)=[q]$ is the orbit of $q$\n([[def-unordered-configuration-space]]). The **configuration braid group** on\n$n$ strands is the fundamental group\n([[def-based-loops-and-fundamental-group]])\n\n$$B_n^{\\mathrm{conf}}:=\\pi_1\\big(C_n(D^2),[q]\\big),$$\n\nthe group of based-loop classes at the orbit $[q]$ in the unordered\nconfiguration space of the closed disc, with the first-then-second loop product.\n\n**The open-disc model.** The inclusion-induced map\n$\\iota^C:C_n(\\operatorname{int}D^2)\\to C_n(D^2)$ of\n[[lem-interior-and-closed-disk-configuration-spaces-are-homotopy-equivalent]]\ninduces an isomorphism\n$$\\pi_1\\big(C_n(\\operatorname{int}D^2),[q]\\big)\\longrightarrow\\pi_1\\big(C_n(D^2),[q]\\big)$$\nat the same basepoint (claim 3 of that lemma,\n[[def-induced-homomorphism-on-fundamental-groups]]), so $B_n^{\\mathrm{conf}}$\nmay be computed from either disc model exactly as $PB_n$ may. Both groups in\nthis definition and in\n[[def-pure-braid-group-from-ordered-configurations]] are taken at the\nbasepoints $[q]$ and $q$ coming from the same tuple $q$, which is what makes the\ncomparison map of the configuration braid short exact sequence, proved in a\nlater item on this page, a map of based fundamental groups.\n\n**The basepoint.** Since $F_n(D^2)\\to C_n(D^2)$ is surjective every basepoint of\n$C_n(D^2)$ is an orbit, and since $C_n(D^2)$ is path-connected (claim 2 of\n[[thm-ordered-configurations-cover-unordered-configurations-regularly]]) the\ngroups at different orbits are isomorphic by conjugation along a path\n([[lem-path-conjugation-isomorphism-of-fundamental-groups]]); no particular\nisomorphism is fixed. For $n=0$ the space $C_0(D^2)$ is a point and\n$B_0^{\\mathrm{conf}}$ is the one-element group.\n\n**The superscript.** The decoration $\\mathrm{conf}$ records that the group is\ndefined here through configuration spaces, and it is retained until the later\ngeometric identification of $B_n^{\\mathrm{conf}}$ with the braid group given by\nstrand diagrams and with its Artin presentation. No such identification and no\npresentation is asserted on this page; neither is any identification of\n$B_n^{\\mathrm{conf}}$ with a group of self-homeomorphisms of the disc.",
+          "uses": [
+            "6.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $\\{i,j\\}$ and $\\{k,l\\}$ are disjoint pairs, then $\\Omega_{ij}$ and $\\Omega_{kl}$ act on disjoint tensor factors. Each factorwise operator commutes with every operator on the other factors, so $[\\Omega_{ij},\\Omega_{kl}]=0$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For three distinct indices $i,j,k$, write $\\Omega=\\sum_a x_a\\otimes x^a$. Apply [F2] with $x=x_b$, place its two tensor factors in slots $i,j$, apply $\\rho_i\\otimes\\rho_j$, multiply on slot $k$ by $\\rho_k(x^b)$, and sum over $b$. The first resulting sum is $- [\\Omega_{ij},\\Omega_{ik}]$ and the second is $-[\\Omega_{ij},\\Omega_{jk}]$, because $[x_b,x_a]=-[x_a,x_b]$ and $[x_b,x^a]=-[x^a,x_b]$. Hence $[\\Omega_{ij},\\Omega_{ik}+\\Omega_{jk}]=0$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Set $u=z_i-z_j$ and $v=z_j-z_k$, so $z_i-z_k=u+v$. Then $\\eta_{ij}=du/u$, $\\eta_{jk}=dv/v$, and $\\eta_{ik}=(du+dv)/(u+v)$. Direct expansion gives $\\eta_{ij}\\wedge\\eta_{jk}+\\eta_{jk}\\wedge\\eta_{ik}+\\eta_{ik}\\wedge\\eta_{ij}=\\left(1/(uv)-1/(v(u+v))-1/(u(u+v))\\right)du\\wedge dv=0$, since the numerator after taking a common denominator is $(u+v)-u-v=0$.",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Put $B_0:=\\sum_{i<j}\\Omega_{ij}\\eta_{ij}$, so $\\nabla=d-\\kappa^{-1}B_0$. Each $\\eta_{ij}$ is closed because $d(dw/w)=0$ on $w\\ne0$, hence $dB_0=0$, and the curvature is $R^\\nabla=\\kappa^{-2}B_0\\wedge B_0$. Expanding the wedge product groups terms by disjoint pairs and by triples. The disjoint terms vanish by step 1.1. For $i<j<k$, the triple contribution is $C_{ijk}(\\eta_{ij}\\wedge\\eta_{ik}-\\eta_{ij}\\wedge\\eta_{jk}+\\eta_{ik}\\wedge\\eta_{jk})$, where $C_{ijk}:=[\\Omega_{ij},\\Omega_{ik}]$: step 1.2 gives the other two commutators as $-C_{ijk}$ and $C_{ijk}$. This form is the negative of the zero Arnold sum in step 1.3, so every triple contribution vanishes and $R^\\nabla=0$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 1.2",
+            "step 1.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F3], every point has a neighborhood with a parallel frame. A parallel section has constant coordinates in that frame. On an overlap, if one parallel frame is the other times a smooth matrix $G(x)$, the connection equation gives $dG=0$, so $G$ is constant on each connected component of the overlap. These charts therefore define a locally constant sheaf of horizontal sections; define its transport along a continuous path by subdividing the path into chart intervals and retaining the same frame coordinates. For a piecewise smooth path this agrees with differential parallel transport by [F4] and uniqueness in [F5].",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "step 2.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "Suppose $V_i=V_0$ and $\\rho_i=\\rho_0$ for every $i$. The coordinate-permutation action from [F7] lifts to the same permutation of tensor factors. Since $\\eta_{ij}$ is symmetric in $i,j$, and the factor permutation sends $\\Omega_{ij}$ to the correspondingly relabeled $\\Omega$, it preserves the connection. The action is free on $F_n(\\mathbb C)$ by [F7]. The usual $\\mathbb C$ is a connected Hausdorff real 2-manifold, so [F10] makes the quotient map a regular covering; the equivariant bundle and connection therefore descend to the associated vector bundle over $C_n(\\mathbb C)$, with descended fiber identified with $V_0^{\\otimes n}$ after choosing the representative $q$.",
+          "step": "3.2",
+          "inputs": [
+            "F1",
+            "F7",
+            "F9",
+            "F10",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For an endpoint-fixed homotopy of paths, pull back the parallel-frame neighborhoods to the compact square. A finite subcover has a positive Lebesgue number: choose finitely many smaller metric balls covering the square whose doubled balls lie in cover members, and take the minimum radius $\\delta$ of those smaller balls. Choose a rectangular grid whose cell diameters are less than $\\delta$; every cell then maps into one parallel-frame neighborhood. Transport around each cell is the identity because its four edges use one constant frame. Multiplying the cell identities cancels every interior edge with its reverse, so the boundary paths have identical local-system transport. By concatenating the unique parallel sections on successive path segments, [F5] gives $P_{\\alpha*\\beta}=P_\\beta P_\\alpha$; reversing a parallel section gives $P_{\\bar\\alpha}=P_\\alpha^{-1}$. The same composition and inverse rules hold for local-system transport by its subdivision definition.",
+          "step": "4.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "step 3.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Let $T_\\gamma$ denote the local-system transport for a continuous path. Step 4.1 makes it depend only on the path-homotopy class. Under [F6], the first-then-second product satisfies $T_{\\alpha*\\beta}=T_\\beta T_\\alpha$, so $\\rho([\\gamma]):=T_\\gamma^{-1}$ is a left representation because $\\rho([\\alpha][\\beta])=(T_\\beta T_\\alpha)^{-1}=T_\\alpha^{-1}T_\\beta^{-1}$. On piecewise smooth loops $T_\\gamma=P_\\gamma$ by step 3.1. The map $h(z)=z/(1+|z|)$ has inverse $h^{-1}(w)=w/(1-|w|)$ from $D^\\circ$ to $\\mathbb C$; its coordinatewise product restricts to a homeomorphism of ordered configuration spaces. It induces an isomorphism of fundamental groups, and [F8] identifies the resulting group with $PB_n$.",
+          "step": "5.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "step 3.1",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "The descended connection is flat because its pullback is the flat connection of step 2.1. Applying the local-system monodromy construction of steps 3.1 and 5.1 on the quotient gives its left monodromy representation of $\\pi_1(C_n(\\mathbb C),[q])$. The coordinatewise homeomorphism $h$ is $S_n$-equivariant, so it descends to a homeomorphism of unordered configuration spaces; [F11] identifies that fundamental group with the full configuration braid group. No identification with any quantum-group ribbon representation follows from this construction.",
+          "step": "6.1",
+          "inputs": [
+            "F6",
+            "F9",
+            "F11",
+            "step 2.1",
+            "step 3.1",
+            "step 5.1",
+            "step 3.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem requires n>=2 and a chosen basepoint in the nonempty configuration space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If any V_i is zero, the tensor fiber is zero, all Omega_ij vanish, and the rank-zero connection is flat; the curvature computation of step 2.1 still applies."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The theorem assumes n>=2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For trivial representations all Omega_ij vanish, so the KZ connection is d and has identity parallel transport; steps 2.1, 3.1, and 5.1 give this case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval endpoint or limiting assertion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The construction uses a fixed finite list of modules and finite sums; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem asserts implications and constructions, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem asserts no converse characterization of flatness."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "two-point curvature",
+          "status": "checked",
+          "evidence": "For n=2, B_0=Ω_12 dw/w; d(dw/w)=0 and (dw/w)∧(dw/w)=0, so the curvature formula in step 2.1 vanishes directly."
+        }
+      ]
+    },
+    "def-qftx-wzw-conformal-block-interface": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-qftx-basic-form-scale",
+          "source_section": "Statement",
+          "quote": "Let $\\mathfrak g$ be a finite-dimensional complex simple Lie algebra with Killing form $B_{\\mathrm{Kill}}$. Choose a Cartan subalgebra, a positive root system, its highest root $\\theta$, and the Weyl vector $\\rho$. Let $B_0:=B_{\\mathrm{Kill}}/c$ be the scalar normalization for which the induced form on the root space satisfies $(\\theta,\\theta)_0=2$; equivalently, define $c:=2/(\\theta,\\theta)_{\\mathrm{Kill}}$, where the root pairing is induced by $B_{\\mathrm{Kill}}$. Put $\\theta^\\vee:=2\\theta/(\\theta,\\theta)_0=\\theta$ and $h^\\vee:=1+(\\rho,\\theta^\\vee)_0$. Then\n\n$$B_{\\mathrm{Kill}}=2h^\\vee B_0.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qftx-kz-connection",
+          "source_section": "Definition",
+          "quote": "Let $\\mathfrak g$ be a finite-dimensional complex semisimple Lie algebra with Killing form $B$, let $n\\ge2$, and let $V_1,\\ldots,V_n$ be finite-dimensional complex vector spaces. A representation here is a complex-linear Lie algebra homomorphism $\\rho_i:\\mathfrak g\\to\\operatorname{End}_{\\mathbb C}(V_i)$, so $[\\rho_i(x),\\rho_i(y)]=\\rho_i([x,y])$. Let $F_n(\\mathbb C)=\\{(z_1,\\ldots,z_n)\\in\\mathbb C^n:z_i\\ne z_j\\text{ for }i\\ne j\\}$ be the ordered configuration space and put $V:=V_1\\otimes\\cdots\\otimes V_n$ in the indicated factor order. For any pair of $B$-dual bases $(x_a),(x^a)$ define $\\Omega_{ij}:=\\sum_a\\rho_i(x_a)^{(i)}\\rho_j(x^a)^{(j)}\\in\\operatorname{End}_{\\mathbb C}(V)$, where each superscript means that the operator acts on that tensor factor and as the identity on all other factors. For $i<j$ put $\\eta_{ij}:=(dz_i-dz_j)/(z_i-z_j)$, a globally defined complex-valued one-form on $F_n(\\mathbb C)$. For $\\kappa\\in\\mathbb C\\setminus\\{0\\}$, the **Casimir Knizhnik–Zamolodchikov connection** on the trivial vector bundle $F_n(\\mathbb C)\\times V\\to F_n(\\mathbb C)$ is\n\n$$\\nabla^{\\mathrm{KZ}}_\\kappa:=d-\\kappa^{-1}\\sum_{i<j}\\Omega_{ij}\\eta_{ij}.$$\n\nHere a connection on this trivial bundle is a complex-linear operator on smooth $V$-valued sections satisfying $\\nabla(fs)=df\\otimes s+f\\nabla s$ for every smooth scalar function $f$ and section $s$. The associated quadratic Casimir is $C_B:=\\sum_a x_ax^a$ in the universal enveloping algebra; with the Killing-form convention above it is central, and $\\Omega_{ij}$ is its tensor-level Casimir counterpart.",
+          "uses": [
+            "1.4",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qftx-loop-current-cocycle",
+          "source_section": "Definition",
+          "quote": "Let $\\mathfrak g$ be a finite-dimensional real Lie algebra. Let $\\kappa:\\mathfrak g\\times\\mathfrak g\\to\\mathbb R$ be a symmetric bilinear form that is invariant, meaning\n$$\\kappa([U,V],W)=\\kappa(U,[V,W])\\qquad(U,V,W\\in\\mathfrak g).$$\nNo nondegeneracy, positivity, simplicity, or compactness assumption is imposed. Put $S^1=\\mathbb R/(2\\pi\\mathbb Z)$ and $\\mathcal L\\mathfrak g=C^\\infty(S^1,\\mathfrak g)$, with pointwise bracket $[X,Y](\\theta)=[X(\\theta),Y(\\theta)]_{\\mathfrak g}$. For $Y\\in\\mathcal L\\mathfrak g$, write $Y'=\\partial_\\theta Y$ in the indicated periodic coordinate.\n\nA Lie-algebra $2$-cocycle for the trivial scalar action is an alternating bilinear map $\\omega:\\mathcal L\\mathfrak g\\times\\mathcal L\\mathfrak g\\to\\mathbb R$ satisfying\n$$\\omega([X,Y],Z)+\\omega([Y,Z],X)+\\omega([Z,X],Y)=0.$$\nDefine the candidate current cocycle and its candidate central-term bracket by\n$$\\omega(X,Y)=\\frac1{2\\pi}\\int_0^{2\\pi}\\kappa(X(\\theta),Y'(\\theta))\\,d\\theta,\\qquad \\widehat{\\mathcal L\\mathfrak g}=\\mathcal L\\mathfrak g\\oplus\\mathbb R,$$\n$$[(X,a),(Y,b)]=([X,Y],\\omega(X,Y)).$$\nThe real coordinates $a,b$ are central coordinates and do not enter the right-hand side. A one-dimensional central extension means a short exact sequence of Lie algebras $0\\to\\mathbb R\\to\\widehat{\\mathcal L\\mathfrak g}\\to\\mathcal L\\mathfrak g\\to0$ whose kernel is central. The proposition on this page verifies that the displayed operation has this Lie-algebra structure. The normalization is fixed as written; no integer level, integration to a loop group, or representation-theoretic existence or unitarity follows from this definition.",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-qftx-loop-cocycle-jacobi",
+          "source_section": "Statement",
+          "quote": "For the finite-dimensional real Lie algebra $\\mathfrak g$, invariant symmetric form $\\kappa$, smooth loop algebra $\\mathcal L\\mathfrak g$, and bilinear form $\\omega$ defined in [[def-qftx-loop-current-cocycle]], the form $\\omega$ is alternating and satisfies\n$$\\omega([X,Y],Z)+\\omega([Y,Z],X)+\\omega([Z,X],Y)=0\\qquad(X,Y,Z\\in\\mathcal L\\mathfrak g).$$\nConsequently the candidate bracket on $\\widehat{\\mathcal L\\mathfrak g}$ is a Lie bracket and gives a one-dimensional central extension of $\\mathcal L\\mathfrak g$ by $\\mathbb R$.",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qftx-braided-line-model",
+          "source_section": "Definition",
+          "quote": "Let $k$ be a field and let $\\mathcal C$ be a locally finite $k$-linear abelian rigid monoidal category whose tensor product is $k$-bilinear and whose tensor unit $\\mathbf1$ satisfies $\\operatorname{End}_{\\mathcal C}(\\mathbf1)\\cong k$. Here rigid means every object has left and right duals with evaluation and coevaluation maps satisfying the two snake identities. Equip $\\mathcal C$ with a braiding $c_{Y,Z}:Y\\otimes Z\\to Z\\otimes Y$, natural in $Y,Z$, satisfying the two hexagon identities with the associator $\\alpha$. Fix $X\\in\\mathcal C$, put $P_0(X)=\\mathbf1$, $P_1(X)=X$, and recursively put $P_{m+1}(X)=P_m(X)\\otimes X$.\n\nFor each $n\\ge2$ and $1\\le i<n$, let $Q_{n,i}(X)$ be the parenthesized product $\\bigl(P_{i-1}(X)\\otimes(X\\otimes X)\\bigr)\\otimes P_{n-i-1}(X)$, with the unit factors at either end removed by the fixed unitors when an exponent is zero. Choose a canonical rebracketing isomorphism $\\rho_{n,i}:P_n(X)\\to Q_{n,i}(X)$ made from associators, unitors, and their inverses, without permuting the ordered tensor factors. Define\n\n$$B_i^X:=\\rho_{n,i}^{-1}\\circ\\bigl(\\operatorname{id}_{P_{i-1}(X)}\\otimes c_{X,X}\\otimes\\operatorname{id}_{P_{n-i-1}(X)}\\bigr)\\circ\\rho_{n,i}\\in\\operatorname{End}_{\\mathcal C}(P_n(X)).$$\n\nThe family $B_i^X$ is independent of the chosen canonical rebracketing path and determines a homomorphism $\\varrho_n:B_n\\to\\operatorname{Aut}_{\\mathcal C}(P_n(X))$, where $B_n$ is the braid group with positive generator $\\sigma_i$ sent to $B_i^X$. These are exact algebraic morphisms.\n\n**Physical interpretation boundary.** A physical adiabatic-exchange interpretation needs additional data: a specified Hilbert space $\\mathcal H$ and a path $K(s)$, $s\\in[0,1]$, of self-adjoint operators on a stated common domain; a Borel set $\\Omega\\subseteq\\mathbb R$ for which the spectral projection $P(s)=\\mathbf1_\\Omega(K(s))$ has finite rank and $\\operatorname{dist}(\\Omega,\\sigma(K(s))\\setminus\\Omega)\\ge\\gamma>0$ uniformly in $s$; a connection $\\nabla$ on the vector bundle with fibers $\\operatorname{ran}P(s)$, which specifies parallel transport; and an explicit operator-norm error bound comparing that transport with the exact evolution in a stated slow-evolution regime. In a physical realization, $K(s)$ and $\\gamma$ have the model's energy units; no value is fixed here. The categorical data supply none of this and do not assert an experimental realization.",
+          "uses": [
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-modular-ribbon-category-and-hopf-link-data",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal C$ be a complex finite semisimple rigid tensor category with simple unit $\\mathbf 1$ and a finite set $I$ of isomorphism classes of simple objects. Fix a braiding $c$ and a ribbon twist $\\theta$. The induced pivotal map is $j_X=u_X\\theta_X:X\\to X^{\\vee\\vee}$, where $u$ is the Drinfeld morphism of [[thm-a-braided-rigid-category-has-a-drinfeld-morphism]]. Throughout this pair we use the associated spherical pivotal structure: $j$ is part of the data, and sphericality means $\\dim_j(X)=\\dim_j(X^\\vee)$ for every object, as in [[def-spherical-structure]]. Its trace is $\\operatorname{tr}_j(f)=\\operatorname{Tr}_L(j_Xf)$ for $f\\in\\operatorname{End}(X)$.\n\nWrite $0$ for the unit label and $i^*$ for the dual of $i$. Put $N_{ij}^k=\\dim_{\\mathbb C}\\operatorname{Hom}(k,i\\otimes j)$, $d_i=\\operatorname{tr}_j(1_i)$, and $s_{ij}=\\operatorname{tr}_j(c_{j,i}c_{i,j})$. Define $D^2=\\sum_{i\\in I}d_i^2$. The unnormalized Hopf-link matrix is $s=(s_{ij})$. The ribbon fusion category is **modular** when $s$ is invertible. When $D^2\\ne0$, either square root $D$ defines the normalized matrix $S=s/D$; for a modular category, [[lem-modular-hopf-matrix-squared]] proves this nonvanishing. No positivity of the general $d_i$ or of $D$ is assumed.",
+          "uses": [
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-su2-root-unity-ribbon-category-is-modular",
+          "source_section": "Statement",
+          "quote": "Let $\\ell\\ge3$, $q=e^{\\pi i/\\ell}$, and let $\\mathcal C_\\ell$ be the standard ribbon semisimplification of finite-dimensional integrable type-1 tilting modules for Lusztig's divided-power $U_q(\\mathfrak{sl}_2)$, using the positive-trace quantum ribbon convention. Then $\\mathcal C_\\ell$ is modular, with simples $a=0,\\ldots,\\ell-2$, dimensions $d_a=\\sin((a+1)\\pi/\\ell)/\\sin(\\pi/\\ell)$, twists $\\theta_a=q^{a(a+2)/2}$, and\n\n$$s_{ab}=\\frac{\\sin((a+1)(b+1)\\pi/\\ell)}{\\sin(\\pi/\\ell)},\\qquad S_{ab}=\\sqrt{\\frac2\\ell}\\sin\\frac{(a+1)(b+1)\\pi}{\\ell}.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-a-braided-rigid-category-has-a-drinfeld-morphism",
+          "source_section": "Statement",
+          "quote": "In a braided rigid monoidal category there is a natural isomorphism\n\n$$u_X:X\\to X^{\\vee\\vee},$$\n\ncalled the **Drinfeld morphism** (or **Drinfeld isomorphism**), defined by\n\n$$X\\xrightarrow{1_X\\otimes\\operatorname{coev}_{X^\\vee}}X\\otimes X^\\vee\\otimes X^{\\vee\\vee}\\xrightarrow{c_{X,X^\\vee}\\otimes1_{X^{\\vee\\vee}}}X^\\vee\\otimes X\\otimes X^{\\vee\\vee}\\xrightarrow{\\operatorname{ev}_X\\otimes1_{X^{\\vee\\vee}}}X^{\\vee\\vee}.$$\n\nWrite\n\n$$d_{X,Y}:X^{\\vee\\vee}\\otimes Y^{\\vee\\vee}\\xrightarrow{\\sim}(X\\otimes Y)^{\\vee\\vee}$$\n\nfor the monoidal comparison of the double-dual functor. Then\n\n$$d_{X,Y}\\circ(u_X\\otimes u_Y)=u_{X\\otimes Y}\\circ c_{Y,X}\\circ c_{X,Y}.$$\n\nThus $u$ need not be monoidal: the double braiding is precisely its\nmonoidality obstruction.",
+          "uses": [
+            "1.4"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $(x_a),(x^a_{\\mathrm{bas}})$ be $B_{\\mathrm{bas}}$-dual bases. By [F1], $(x_a,(2h^\\vee)^{-1}x^a_{\\mathrm{bas}})$ are $B_{\\mathrm{Kill}}$-dual, so their Casimir tensors satisfy $\\Omega_{\\mathrm{Kill}}=(2h^\\vee)^{-1}\\Omega_{\\mathrm{bas}}$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The current extension in [F3] satisfies Jacobi and has central kernel by [F4]. Extending its real bracket complex-bilinearly preserves skew-symmetry and Jacobi, since each is a finite polynomial identity in the structure constants; restriction to the Laurent-mode subalgebra preserves the same identities. Thus the central extension used for the affine module input is a Lie algebra.",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "For $J_m(x)=xe^{-im\\theta}$, the cocycle in [F3] gives $\\omega(J_m(x),J_n(y))=-in\\delta_{m+n,0}B_{\\mathrm{bas}}(x,y)=im\\delta_{m+n,0}B_{\\mathrm{bas}}(x,y)$. Replacing $K$ by $K_{\\mathrm{aff}}=iK$ yields the stated mode bracket. Also $d=i\\partial_\\theta$ sends $J_m(x)$ to $mJ_m(x)$. On noncentral terms the derivation identity is the equality $m+n=m+n$; on the central term both sides agree because it is supported on $m+n=0$, where the total degree is zero. Thus $d$ is a derivation and $[d,K_{\\mathrm{aff}}]=0$, fixing the affine mode and central-level conventions used by the Definition.",
+          "step": "1.3",
+          "inputs": [
+            "F3",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "claim": "[F5] supplies the braid-action interface only under its stated rigid monoidal category and coherence hypotheses. [F8] identifies the Drinfeld morphism used in the pivotal map of [F6], which separately fixes the ribbon and modular data conventions. These inputs specify what a comparison must preserve; neither statement asserts an equivalence with the KZ local system, so the Definition reserves an equivalence proof as a separate theorem obligation.",
+          "step": "1.4",
+          "inputs": [
+            "F2",
+            "F5",
+            "F6",
+            "F8"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The two KZ one-form coefficients agree exactly when $\\kappa_{\\mathrm{Kill}}^{-1}(2h^\\vee)^{-1}=\\kappa_{\\mathrm{bas}}^{-1}$. Substituting [F2] and $\\kappa_{\\mathrm{bas}}=k+h^\\vee$ gives $\\kappa_{\\mathrm{Kill}}=(k+h^\\vee)/(2h^\\vee)$, the conversion recorded in the Definition.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The actual theorem [F7] proves modularity only for its stated $\\mathfrak{sl}_2$ quotient and conventions. That category-specific result supplies the concrete modular input named in the Definition, but does not identify its ribbon exchanges with the WZW/KZ monodromy or establish factorization.",
+          "step": "3.1",
+          "inputs": [
+            "F7",
+            "step 1.4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The record is conditional on a fixed compact simple group, a positive level, and explicitly supplied module and category data."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The level is a positive integer and the listed input modules are not asserted to exist; zero-level behavior is outside the contract."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The contract makes no one-marked-point dimension or factorization claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The basic invariant form is nondegenerate under the simple Lie algebra hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No continuous level parameter or endpoint limit is considered."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The contract fixes the group, root data, level, and input modules rather than asserting a selection theorem."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition is an interface contract, not a biconditional theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse equivalence assertion is made."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "sl2 affine central mode",
+          "status": "checked",
+          "evidence": "With the fixed normalization B_bas(H,H)=2 and m=1,n=-1, the declared mode bracket gives [J_1(H),J_-1(H)]=J_0([H,H])+2K_aff=2K_aff, checking the central-coordinate scale in step 1.3."
+        }
+      ]
+    },
+    "ex-qftx-two-insertion-monodromy": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qftx-kz-connection",
+          "source_section": "Definition",
+          "quote": "Let $\\mathfrak g$ be a finite-dimensional complex semisimple Lie algebra with Killing form $B$, let $n\\ge2$, and let $V_1,\\ldots,V_n$ be finite-dimensional complex vector spaces. A representation here is a complex-linear Lie algebra homomorphism $\\rho_i:\\mathfrak g\\to\\operatorname{End}_{\\mathbb C}(V_i)$, so $[\\rho_i(x),\\rho_i(y)]=\\rho_i([x,y])$. Let $F_n(\\mathbb C)=\\{(z_1,\\ldots,z_n)\\in\\mathbb C^n:z_i\\ne z_j\\text{ for }i\\ne j\\}$ be the ordered configuration space and put $V:=V_1\\otimes\\cdots\\otimes V_n$ in the indicated factor order. For any pair of $B$-dual bases $(x_a),(x^a)$ define $\\Omega_{ij}:=\\sum_a\\rho_i(x_a)^{(i)}\\rho_j(x^a)^{(j)}\\in\\operatorname{End}_{\\mathbb C}(V)$, where each superscript means that the operator acts on that tensor factor and as the identity on all other factors. For $i<j$ put $\\eta_{ij}:=(dz_i-dz_j)/(z_i-z_j)$, a globally defined complex-valued one-form on $F_n(\\mathbb C)$. For $\\kappa\\in\\mathbb C\\setminus\\{0\\}$, the **Casimir Knizhnik–Zamolodchikov connection** on the trivial vector bundle $F_n(\\mathbb C)\\times V\\to F_n(\\mathbb C)$ is\n\n$$\\nabla^{\\mathrm{KZ}}_\\kappa:=d-\\kappa^{-1}\\sum_{i<j}\\Omega_{ij}\\eta_{ij}.$$\n\nHere a connection on this trivial bundle is a complex-linear operator on smooth $V$-valued sections satisfying $\\nabla(fs)=df\\otimes s+f\\nabla s$ for every smooth scalar function $f$ and section $s$. The associated quadratic Casimir is $C_B:=\\sum_a x_ax^a$ in the universal enveloping algebra; with the Killing-form convention above it is central, and $\\Omega_{ij}$ is its tensor-level Casimir counterpart.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qftx-kz-flatness",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge2$, let $\\mathfrak g$ be a finite-dimensional complex semisimple Lie algebra with Killing form $B$, let $V_i$ be finite-dimensional complex $\\mathfrak g$-modules, and let $\\kappa\\in\\mathbb C\\setminus\\{0\\}$. Fix a basepoint $q\\in F_n(\\mathbb C)$. On $F_n(\\mathbb C)=\\{(z_1,\\ldots,z_n):z_i\\ne z_j\\text{ for }i\\ne j\\}$ let $\\nabla^{\\mathrm{KZ}}_\\kappa=d-\\kappa^{-1}\\sum_{i<j}\\Omega_{ij}\\eta_{ij}$ be the connection defined from the pairwise Casimir tensors $\\Omega_{ij}=\\sum_a\\rho_i(x_a)^{(i)}\\rho_j(x^a)^{(j)}$ and forms $\\eta_{ij}=(dz_i-dz_j)/(z_i-z_j)$, using $B$-dual bases. Then $\\nabla^{\\mathrm{KZ}}_\\kappa$ is flat. Its sheaf of local horizontal sections is a local system with right monodromy action $T$ of the fundamental group of the ordered configuration space based at $q$. With the library convention that $[\\alpha][\\beta]$ traverses $\\alpha$ first and $\\beta$ second, the associated left representation is $[\\gamma]\\mapsto T_{[\\gamma]}^{-1}$; on piecewise smooth loops, $T_{[\\gamma]}$ is horizontal parallel transport $P_\\gamma$. The homeomorphism $z\\mapsto z/(1+|z|)$ identifies this fundamental group with the configuration pure braid group. If all $V_i$ are the same module with the same action, simultaneous label and tensor-factor permutation makes the connection equivariant: for $\\sigma\\in S_n$, set $\\sigma\\cdot(z_1,\\ldots,z_n)=(z_{\\sigma^{-1}(1)},\\ldots,z_{\\sigma^{-1}(n)})$ and $\\tau_\\sigma(v_1\\otimes\\cdots\\otimes v_n)=v_{\\sigma^{-1}(1)}\\otimes\\cdots\\otimes v_{\\sigma^{-1}(n)}$, and use $\\sigma\\cdot(z,v)=(\\sigma\\cdot z,\\tau_\\sigma v)$. The quotient bundle is $(F_n(\\mathbb C)\\times V^{\\otimes n})/S_n$ under this action, and the connection descends to the unordered configuration space, giving the corresponding full configuration braid-group representation based at $[q]$. No unitarity or equivalence with a quantum-group ribbon category is asserted.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-killing-form-of-a-semisimple-lie-algebra",
+          "source_section": "Definition",
+          "quote": "Let $\\mathfrak g$ be a complex semisimple Lie algebra. For $x,y\\in \\mathfrak g$, let $\\operatorname{ad}_x,\\operatorname{ad}_y\\in \\operatorname{End}(\\mathfrak g)$ be the adjoint operators. The **Killing form** of $\\mathfrak g$ is the symmetric bilinear form\n\n$$B(x,y):=\\operatorname{tr}(\\operatorname{ad}_x\\operatorname{ad}_y).$$\n\nThe trace is taken on the finite-dimensional vector space $\\mathfrak g$. This is the invariant form used to define dual bases, the root-theoretic vectors $H_\\alpha$, and the quadratic Casimir element on this page.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The horizontal-section equation $\\nabla s=0$ is $ds/dw=(\\Omega_{12}/(\\kappa w))s$. On a simply connected branch domain, differentiate the matrix exponential $s(w)=\\exp((\\Omega_{12}/\\kappa)\\log(w/w_*))v_*$; because its exponent is a scalar multiple of the fixed matrix $\\Omega_{12}$, differentiation gives $s'(w)=\\Omega_{12}s(w)/(\\kappa w)$ and $s(w_*)=v_*$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "In the defining two-dimensional representation take $H=\\mathrm{diag}(1,-1)$, $E=\\begin{pmatrix}0&1\\\\0&0\\end{pmatrix}$, and $F=\\begin{pmatrix}0&0\\\\1&0\\end{pmatrix}$. Their brackets are $[H,E]=2E$, $[H,F]=-2F$, and $[E,F]=H$. Computing the traces in [F3] gives $B(H,H)=8$, $B(E,F)=B(F,E)=4$, and all other pairings among these basis elements zero; hence the dual basis is $H/8,F/4,E/4$.",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The loop $w(t)=w_*e^{2\\pi i t}$ changes the continued logarithm by $2\\pi i$. Substitution into the solution from step 1.1 gives $P_\\gamma=\\exp(2\\pi i\\Omega_{12}/\\kappa)$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "With the first-then-second group product, uniqueness of horizontal transport gives $P_{\\alpha*\\beta}=P_\\beta P_\\alpha$. Therefore $\\rho([\\gamma]):=P_\\gamma^{-1}$ satisfies $\\rho([\\alpha][\\beta])=(P_\\beta P_\\alpha)^{-1}=P_\\alpha^{-1}P_\\beta^{-1}$, so the left representation convention agrees with [F2] while the right action uses $P_\\gamma$.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Thus $\\Omega_{12}=\\tfrac18H\\otimes H+\\tfrac14(E\\otimes F+F\\otimes E)$. On $e_1\\otimes e_1$ it acts as $\\tfrac18(e_1\\otimes e_1)$, so for $\\kappa=i$ the positive-loop transport in step 2.1 has eigenvalue $\\exp(2\\pi i(1/8)/i)=e^{\\pi/4}$. A unitary operator on a finite-dimensional Hermitian space has every eigenvalue of modulus one, whereas $|e^{\\pi/4}|>1$; thus this KZ monodromy is not unitary. Its inverse has eigenvalue $e^{-\\pi/4}$ and is also nonunitary.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example has two insertions and the punctured relative-coordinate domain C^*."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For v_*=0 the horizontal solution and transported vector are zero by the linear equation in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example fixes the two-dimensional standard representation and two insertions."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No repeated eigenvalue or degenerate representation case is asserted; the example fixes the standard two-dimensional representation."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The loop is closed in C^*; no interval endpoint or limiting claim occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The example fixes a basis and a logarithm branch locally and makes no nonempty-family selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example asserts no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "sl2 transport eigenvalue",
+          "status": "checked",
+          "evidence": "The displayed Killing-dual basis gives Ω_12(e_1⊗e_1)=(1/8)(e_1⊗e_1); at κ=i the positive-loop eigenvalue is exp(2πi(1/8)/i)=e^(π/4), as derived in steps 1.2 and 4.1."
+        }
+      ]
+    }
+  }
+}

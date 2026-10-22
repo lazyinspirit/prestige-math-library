@@ -1,0 +1,13 @@
+# Successor correction to batch 128 source reading
+
+This corrects the SSS density locator in the historical batch notes/source-reading record, two A-item reference locators, and the historical coverage harvest. The original records, stamps, reports, and claims about earlier reading are preserved. This successor records only the new inspection below; it does not retroactively certify the earlier reading.
+
+The authoritative arXiv HTML retrieved on 2026-10-21 UTC gives in §3.5: equation (143), the Laplace relation; equation (144), rho_0(E)=gamma/(2 pi^2) sinh(2 pi sqrt(2 gamma E)); equation (145), y(z)=gamma/(2 pi) sin(2 pi sqrt(2 gamma) z). Thus (145) is not the density. The preceding paragraph adjusts S_0 to set alpha=1. HTML §3.3.5 equation (125) is the disk Schwarzian factor.
+
+The PDF simultaneously retrieved from arxiv.org/pdf/1903.11115 has different equation numbering: on printed p.33/PDF p.34, the Laplace relation is (140), density (141), and curve (142); the disk factor is (122) on printed p.30/PDF p.31. These are format-specific locators bound to archived bytes, not an assertion that both representations have identical equation numbers.
+
+The local C is the source gamma. The source density is a genus coefficient without the topological factor. PDF printed p.18/PDF p.19, equation (63), explicitly defines Z_{g,n} with the S_0 term left out and weights it by exp[S_0(2-2g-n)]. For a disk g=0,n=1 this is exp(S_0), giving precisely the locally adopted density. The source disk coefficient gamma^(3/2)/(sqrt(2 pi) beta^(3/2)) exp(2 pi^2 gamma/beta) agrees with the local C sqrt(2C)/(2 sqrt(pi) beta^(3/2)) coefficient after gamma=C. No formula, ensemble claim, physical scope, Statement, Postulate, or proof correction is required.
+
+New reading limits: full HTML §3.5 was read; PDF pp.31 and 34 were read for the disk calculation and density, PDF p.19 for the topological weighting, PDF p.3 for the explicit non-unique matrix-integral introduction, and PDF p.32 for adjoining genus-coefficient assembly. PDF pp.2,33,35 were also inspected during locator search. No claim to new reading of all 78 PDF pages, all of §6, the other two source documents, or an independent reconstruction of the path integral is made. The complete three current batch items and historical batch notes/source-reading record were read. The local theorem remains a conditional Gaussian Laplace calculation; the ensemble/completion remark is unchanged.
+
+The earlier blanket “no retrieval failed” describes its historical attempt only. This new attempt retrieved both source byte streams successfully; the unavailable pdftotext utility was replaced with the already installed PyMuPDF extractor. No prior fetch stamp was edited.

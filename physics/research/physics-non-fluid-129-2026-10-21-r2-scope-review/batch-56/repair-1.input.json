@@ -1,0 +1,108 @@
+{
+  "phase": "repair",
+  "round": 1,
+  "role": "scope-repairer",
+  "label": "scope-repair-56-1",
+  "inventory": {
+    "pages": [
+      "nrqmx-certified-spectral-computation",
+      "nrqmx-certified-spectral-computation-examples"
+    ],
+    "items": [
+      "alg-nrqmx-rayleigh-ritz-procedure",
+      "thm-nrqmx-ritz-upper-bounds",
+      "thm-nrqmx-spectral-residual-certificate",
+      "thm-nrqmx-schrodinger-residual-bound",
+      "ex-nrqmx-oscillator-ritz-exact",
+      "cex-nrqmx-small-residual-no-label"
+    ],
+    "pairs": [
+      "nrqmx-certified-spectral-computation"
+    ]
+  },
+  "simple_loop": true,
+  "write_files": [
+    "items/alg-nrqmx-rayleigh-ritz-procedure.md",
+    "items/thm-nrqmx-ritz-upper-bounds.md",
+    "items/thm-nrqmx-spectral-residual-certificate.md",
+    "items/thm-nrqmx-schrodinger-residual-bound.md",
+    "items/ex-nrqmx-oscillator-ritz-exact.md",
+    "items/cex-nrqmx-small-residual-no-label.md",
+    "library/non-relativistic-quantum-mechanics-mathematics/nrqmx-certified-spectral-computation.md",
+    "library/non-relativistic-quantum-mechanics-mathematics/nrqmx-certified-spectral-computation-examples.md"
+  ],
+  "write_batches": [
+    "56"
+  ],
+  "consumer_scope": [
+    {
+      "id": "cex-nrqmx-small-residual-no-label",
+      "path": [
+        "thm-nrqmx-spectral-residual-certificate",
+        "cex-nrqmx-small-residual-no-label"
+      ],
+      "paths": [
+        [
+          "thm-nrqmx-spectral-residual-certificate",
+          "cex-nrqmx-small-residual-no-label"
+        ]
+      ]
+    },
+    {
+      "id": "ex-nrqmx-oscillator-ritz-exact",
+      "path": [
+        "alg-nrqmx-rayleigh-ritz-procedure",
+        "thm-nrqmx-ritz-upper-bounds",
+        "ex-nrqmx-oscillator-ritz-exact"
+      ],
+      "paths": [
+        [
+          "alg-nrqmx-rayleigh-ritz-procedure",
+          "thm-nrqmx-ritz-upper-bounds",
+          "ex-nrqmx-oscillator-ritz-exact"
+        ],
+        [
+          "thm-nrqmx-ritz-upper-bounds",
+          "ex-nrqmx-oscillator-ritz-exact"
+        ]
+      ]
+    },
+    {
+      "id": "thm-nrqmx-ritz-upper-bounds",
+      "path": [
+        "alg-nrqmx-rayleigh-ritz-procedure",
+        "thm-nrqmx-ritz-upper-bounds"
+      ],
+      "paths": [
+        [
+          "alg-nrqmx-rayleigh-ritz-procedure",
+          "thm-nrqmx-ritz-upper-bounds"
+        ]
+      ]
+    }
+  ],
+  "before_interfaces": {
+    "alg-nrqmx-rayleigh-ritz-procedure": [
+      null,
+      "## Definition\n\nLet $H$ be a nonzero complex Hilbert space whose inner product is linear in its first argument. Let $Q\\subseteq H$ be a dense linear subspace, and let $q:Q\\times Q\\to\\mathbb C$ be a symmetric sesquilinear form, linear in its first argument. Write $q[u]=q(u,u)$. Assume $q[u]\\ge-c\\|u\\|^2$ for some real $c\\ge0$, and assume $Q$ is complete in the form norm $\\|u\\|_{q,c}^2=q[u]+(c+1)\\|u\\|^2$; this is the meaning of a closed semibounded form here.\n\nFor an integer $n\\ge1$, let $\\phi_1,\\ldots,\\phi_n\\in Q$ be linearly independent. The exact input matrices are the Gram matrix $G$ and form matrix $A$ with entries\n\n$$G_{ij}=\\langle\\phi_j,\\phi_i\\rangle,\\qquad A_{ij}=q(\\phi_j,\\phi_i)\\qquad(1\\le i,j\\le n).$$\n\nFor every nonzero coefficient vector $z\\in\\mathbb C^n$, $z^*Gz=\\|\\sum_jz_j\\phi_j\\|^2>0$, so $G$ is positive definite; the symmetry of $q$ makes $A$ Hermitian.\n\nThe procedure is:\n\n1. Form $G$ and $A$ from the supplied vectors and form, using exact entries.\n2. Diagonalize the positive definite Hermitian matrix $G$ and form its unique positive inverse square root $G^{-1/2}$. Set $B=G^{-1/2}AG^{-1/2}$.\n3. Diagonalize the Hermitian matrix $B$, listing its real eigenvalues $\\rho_1\\le\\cdots\\le\\rho_n$ with multiplicity and selecting an orthonormal eigenbasis $y_1,\\ldots,y_n$. For each $j$, set $c_j=G^{-1/2}y_j$ and return $(\\rho_j,c_j)$.\n\nEach returned vector satisfies $Ac_j=\\rho_jGc_j$ and $c_j^*Gc_k=\\delta_{jk}$. Repeated eigenvalues may return any orthonormal basis of the corresponding eigenspace. The procedure uses trial vectors in $Q$ and does not require them to lie in the operator domain of an associated self-adjoint operator. It operates on exact matrix entries: if quadrature or an approximate eigensolver supplies numerical data, this procedure alone supplies no error enclosure or certification for those approximations."
+    ],
+    "thm-nrqmx-ritz-upper-bounds": [
+      null,
+      "## Statement\n\nAssume the Axiom of Choice and Countable Choice. Let $H\\ne\\{0\\}$ be a complex Hilbert space, let $A=A^*$ satisfy $A\\ge-cI$ for some $c\\ge0$, and set $Q(A)=D((A+cI)^{1/2})$. Define the associated closed form by\n\n$$q_A(u,v)=\\langle(A+cI)^{1/2}u,(A+cI)^{1/2}v\\rangle-c\\langle u,v\\rangle\\qquad(u,v\\in Q(A)).$$\n\nLet $\\sigma_{\\mathrm{ess}}(A)$ be the essential spectrum, the complement in $\\sigma(A)$ of isolated eigenvalues of finite multiplicity, and put $\\alpha=\\inf\\sigma_{\\mathrm{ess}}(A)$, with $\\alpha=+\\infty$ when this set is empty. For $k\\ge1$, define\n\n$$\\lambda_k(A)=\\inf_{\\substack{L\\subseteq Q(A)\\text{ linear},\\ \\dim L=k}}\\ \\sup_{\\substack{u\\in L\\\\\\|u\\|=1}}q_A[u],\\qquad q_A[u]=q_A(u,u),$$\n\nwhere the infimum over an empty family is $+\\infty$. For a finite-dimensional conforming subspace $V\\subseteq Q(A)$ and $1\\le k\\le\\dim V$, define its $k$th Ritz value\n\n$$\\theta_k(V)=\\inf_{\\substack{L\\subseteq V\\text{ linear},\\ \\dim L=k}}\\ \\sup_{\\substack{u\\in L\\\\\\|u\\|=1}}q_A[u].$$\n\nThen $\\theta_k(V)\\ge\\lambda_k(A)$. If $V_1\\subseteq V_2\\subseteq\\cdots\\subseteq Q(A)$ are finite-dimensional subspaces whose union is dense in $Q(A)$ in the form norm $\\|u\\|_{Q(A)}^2=q_A[u]+(c+1)\\|u\\|^2$, then for every fixed $k$ with $\\lambda_k(A)<\\alpha$ the values $\\theta_k(V_n)$, defined once $\\dim V_n\\ge k$, decrease to $\\lambda_k(A)$, the $k$th isolated eigenvalue below the essential spectrum counted with multiplicity."
+    ],
+    "thm-nrqmx-spectral-residual-certificate": [
+      null,
+      "## Statement\n\nAssume the Axiom of Choice and Countable Choice. Let $H\\ne\\{0\\}$ be a complex Hilbert space and let $T=T^*$ be self-adjoint on $H$, with spectral projection-valued measure $E_T$. Let $u\\in D(T)$ satisfy $\\|u\\|=1$, let $\\lambda\\in\\mathbb R$, and define the residual $r=(T-\\lambda I)u$. For a Borel set $\\Delta\\subseteq\\mathbb R$, write $P_\\Delta=E_T(\\Delta)$. If $g>0$ and $|x-\\lambda|\\ge g$ for every $x\\in\\sigma(T)\\setminus\\Delta$, then\n\n$$\\operatorname{dist}(\\lambda,\\sigma(T))\\le\\|r\\|,\\qquad \\|(I-P_\\Delta)u\\|\\le\\frac{\\|r\\|}{g},$$\n\nwhere $\\operatorname{dist}(\\lambda,S)=\\inf_{x\\in S}|x-\\lambda|$. If $\\sigma(T)\\setminus\\Delta=\\varnothing$, the second conclusion is $\\|(I-P_\\Delta)u\\|=0$."
+    ],
+    "thm-nrqmx-schrodinger-residual-bound": [
+      null,
+      "## Statement\n\nAssume the Axiom of Choice and Countable Choice. Let $H\\ne\\{0\\}$ be a complex Hilbert space, let $T=T^*$ be self-adjoint on $H$, and fix $\\hbar>0$. Let $I\\subseteq\\mathbb R$ be an open interval, let $t_0\\in I$, and let $v\\in C^1(I;H)$ satisfy $v(s)\\in D(T)$ for every $s\\in I$ and $s\\mapsto Tv(s)$ continuous. Define $r(s)=i\\hbar v'(s)-Tv(s)$ and $U_T(t,t_0)=e^{-i(t-t_0)T/\\hbar}$ by the Borel functional calculus. Then for every $t\\in I$,\n\n$$\\|v(t)-U_T(t,t_0)v(t_0)\\|\\le\\frac1\\hbar\\int_{\\min(t,t_0)}^{\\max(t,t_0)}\\|r(s)\\|\\,ds.$$\n\nThe integral is the ordinary integral of the continuous real-valued function $s\\mapsto\\|r(s)\\|$; the bound is conditional on the stated operator-domain regularity and makes no assertion about an asymptotic approximation outside this residual estimate."
+    ],
+    "ex-nrqmx-oscillator-ritz-exact": [
+      null
+    ],
+    "cex-nrqmx-small-residual-no-label": [
+      null
+    ]
+  }
+}

@@ -1,0 +1,583 @@
+{
+  "version": 1,
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "scope": [
+    "def-qftx-scaling-cocycle",
+    "prop-qftx-scale-cocycle-law",
+    "thm-qftx-truncated-rg-ode",
+    "ex-qftx-truncation-landau-pole"
+  ],
+  "contracts": {
+    "def-qftx-scaling-cocycle": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "Every family of nonempty sets has a choice function",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "Equivalently, in the vocabulary of Choice function: every at most countable family of nonempty sets has a choice function.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qftx-local-time-ordered-system",
+          "source_section": "Definition",
+          "quote": "A scalar time-ordered system is a sequence of symmetric multilinear maps",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-qftx-finite-renormalization-composition",
+          "source_section": "Statement",
+          "quote": "There is a unique formal map $Z(V)=V+O(V^2)$ from local polynomial functionals to local polynomial functionals such that $Z(0)=0$, $dZ_0=\\operatorname{id}$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qftx-local-time-ordered-system",
+          "source_section": "Definition",
+          "quote": "The proper orthochronous Poincare group consists of $\\gamma=(a,\\Lambda)$ with $a\\in\\mathbb M$ and $\\Lambda\\in SO^+(1,3)$. It acts by $(\\gamma\\cdot\\phi)(x)=\\phi(\\Lambda^{-1}(x-a))$ and $(\\gamma\\cdot F)(\\phi)=F(\\gamma^{-1}\\cdot\\phi)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qftx-local-time-ordered-system",
+          "source_section": "Definition",
+          "quote": "Covariance requires $T_n(\\gamma\\cdot F_1,\\ldots,\\gamma\\cdot F_n)=\\gamma\\cdot T_n(F_1,\\ldots,F_n)$ for each proper orthochronous Poincare transformation.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The field dilation and mass relabelling compose to give a group action, with inverse sigma_{rho^{-1}}; compact supports and Poincare covariance are preserved.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Under the explicit scale-admissibility assumption and AC plus Countable Choice, the finite-renormalization proposition supplies the unique local map Z_rho satisfying the defining equation.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "At unit scale the identity map satisfies the defining equation, and uniqueness gives Z_1=id.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The scale parameter is required to satisfy rho>0; rho=0 is outside the group."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 shows the mass relabelling is well defined at m=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 proves Z_1=id."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No inverse of the mass parameter or nonzero-mass hypothesis is used; m=0 is included in step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The scale group has domain rho>0 and no endpoint at rho=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC and Countable Choice are explicit in A1 and are supplied to the conditional finite-renormalization result in step 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition is not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "unit scale",
+          "inputs": "rho=1 and any admissible mass-indexed system",
+          "method": "Substitute sigma_1=id in the defining equation and apply uniqueness.",
+          "result": "Z_1=id.",
+          "limitation": "This checks the identity scale only; existence remains conditional on the supplied systems and finite-renormalization input."
+        },
+        {
+          "name": "massless component",
+          "inputs": "m=0 and rho>0",
+          "method": "Evaluate the relabelled mass rho^{-1}m.",
+          "result": "rho^{-1}m=0, so the massless component remains in the family.",
+          "limitation": "No claim is made that a massless time-ordered system exists unless it is supplied under A1."
+        }
+      ],
+      "finite_checks_disposition": "These finite checks address identity and mass-label boundaries only; the coefficientwise definition is established conditionally by the cited supplier.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-65 author",
+        "notes": "The scale action and mass index are explicit. The finite-renormalization prerequisite remains escalated, so no unconditional system-existence claim is made."
+      }
+    },
+    "prop-qftx-scale-cocycle-law": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "Every family of nonempty sets has a choice function",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "Equivalently, in the vocabulary of Choice function: every at most countable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qftx-scaling-cocycle",
+          "source_section": "Definition",
+          "quote": "It obeys $\\sigma_1=\\operatorname{id}$ and $\\sigma_{\\rho\\tau}=\\sigma_\\rho\\sigma_\\tau$; the mass label scales as $m\\mapsto\\rho m$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Conjugating the tau equation by sigma_rho and substituting the rho equation gives S composed with Z_rho composed with sigma_rho Z_tau sigma_rho^{-1}, in that order.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Both maps give the same scale-conjugated system, so uniqueness identifies them; trivial conjugation reduces the cocycle to composition.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The scale parameters satisfy rho,tau>0; zero is outside the scale group."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The massless component is retained by the mass relabelling in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For rho=1 or tau=1, sigma_1=id and Z_1=id by the definition's unit-scale case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 states the exact trivial-action condition under which the formula reduces to a subgroup law."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Both scale parameters range over the open multiplicative group rho,tau>0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The map supplier is conditional on AC and Countable Choice; the inherited assumptions are explicit in A1 and the cocycle calculation uses its uniqueness in steps 1.1–2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "left identity scale",
+          "inputs": "rho=1 and tau>0",
+          "method": "Substitute sigma_1=id and Z_1=id in the twisted law.",
+          "result": "Z_tau=Z_1 composed with Z_tau.",
+          "limitation": "This checks the identity boundary only."
+        },
+        {
+          "name": "right identity scale",
+          "inputs": "rho>0 and tau=1",
+          "method": "Substitute sigma_1=id and Z_1=id in the twisted law.",
+          "result": "Z_rho=Z_rho composed with Z_1.",
+          "limitation": "This checks the identity boundary only."
+        }
+      ],
+      "finite_checks_disposition": "The finite checks verify the identity-scale boundaries; the general law follows from coefficientwise uniqueness.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-65 author",
+        "notes": "Composition order is preserved. The law is twisted unless conjugation is explicitly trivial."
+      }
+    },
+    "thm-qftx-truncated-rg-ode": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "Every family of nonempty sets has a choice function",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "Equivalently, in the vocabulary of Choice function: every at most countable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qftx-scaling-cocycle",
+          "source_section": "Definition",
+          "quote": "The scale parameter $\\rho>0$ is dimensionless.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-first-order-ode-initial-value-problem-and-solution",
+          "source_section": "Definition",
+          "quote": "is a function $x:I\\to\\mathbb R^n$ such that $t_0\\in I$, $(t,x(t))\\in D$ for every $t\\in I$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-locally-lipschitz-in-the-state-variable",
+          "source_section": "Definition",
+          "quote": "if every compact time-state cylinder $C\\subseteq D$ has a finite $L\\ge0$ such that",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-picard-lindelof-local-existence-and-uniqueness",
+          "source_section": "Statement",
+          "quote": "Any two solutions through the same initial data agree on every common subinterval containing $t_0$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The constant candidate solves the zero-product cases; for nonzero bg0, direct difference quotients verify the rational candidate and its initial value.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The polynomial vector field is locally Lipschitz on compact cylinders, so Picard-Lindelof gives uniqueness; the pole limit proves maximality.",
+          "step": "2.1",
+          "inputs": [
+            "A2",
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The formal chain rule and tangent-to-identity inverse show that only the quadratic beta coefficient survives unchanged.",
+          "step": "3.1",
+          "inputs": [
+            "A3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The initial-value interval is required to contain t=0 and is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 covers b=0 and g_0=0; both give global constant solutions."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 applies the local Lipschitz and uniqueness theorem also to the one-dimensional state space."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The c=bg_0=0 branch is treated explicitly in step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 shows the solution becomes unbounded at t=c^{-1}, so that endpoint cannot be crossed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "AC and Countable Choice are explicit inherited premises, but no choice function or selected family is used in the scalar ODE or formal coefficient calculation."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "zero beta coefficient",
+          "inputs": "b=0 and any real g_0",
+          "method": "Substitute the constant candidate into the ODE.",
+          "result": "g(t)=g_0 on all of R.",
+          "limitation": "This checks one degenerate branch."
+        },
+        {
+          "name": "zero initial coupling",
+          "inputs": "g_0=0 and any real b",
+          "method": "Substitute the zero candidate into the ODE.",
+          "result": "g(t)=0 on all of R.",
+          "limitation": "Uniqueness still comes from the stated local-Lipschitz theorem."
+        },
+        {
+          "name": "unit coefficient pole",
+          "inputs": "b=1 and g_0=1",
+          "method": "Evaluate g(t)=1/(1-t) on t<1.",
+          "result": "The solution diverges as t approaches 1 from below.",
+          "limitation": "This is an exact check of the truncated equation, not of a higher-order or physical flow."
+        },
+        {
+          "name": "formal scheme coefficient",
+          "inputs": "b=1 and Phi(g)=g+ag^2+O(g^3)",
+          "method": "Expand Phi'(g)g^2 and replace g^2 by g_tilde^2+O(g_tilde^3).",
+          "result": "The coefficient of g_tilde^2 remains 1.",
+          "limitation": "No higher-order coefficient is claimed."
+        }
+      ],
+      "finite_checks_disposition": "Finite checks cover degenerate data, a simple pole, and one formal reparametrization; the general statements are established by the numbered proof.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-65 author",
+        "notes": "b is prescribed and no QFT graph calculation is supplied. The ODE is a formal truncation, and the pole gives no estimate of omitted terms or ultraviolet completion."
+      }
+    },
+    "ex-qftx-truncation-landau-pole": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "Every family of nonempty sets has a choice function",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "Equivalently, in the vocabulary of Choice function: every at most countable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-qftx-truncated-rg-ode",
+          "source_section": "Statement",
+          "quote": "If $c\\ne0$, its unique maximal solution through $t=0$ is",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The assigned theorem identifies the explicit maximal truncated solution and positive interval.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The denominator tends to zero from above while the numerator stays positive, giving divergence of this truncated solution only.",
+          "step": "2.1",
+          "inputs": [
+            "A2",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes positive b and g_0, so the solution interval contains t=0."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example assumes b>0 and g_0>0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The special values b=1,g_0=1 give t_*=1 by the formula in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The hypotheses exclude bg_0=0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 takes the one-sided limit t up to t_* from within the maximal interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "AC and Countable Choice are inherited premises, but the explicit endpoint limit uses no choice operation."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example is not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "positive scalar pole",
+          "inputs": "b=2 and g_0=3",
+          "method": "Set t_*=1/6 and evaluate at t=1/6-epsilon for epsilon>0.",
+          "result": "g(t)=1/(2 epsilon), which tends to positive infinity as epsilon decreases to zero.",
+          "limitation": "This evaluates only the exact truncated equation."
+        }
+      ],
+      "finite_checks_disposition": "The finite check verifies the endpoint limit for one positive parameter pair; no continuum claim is made.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-65 author",
+        "notes": "The title's qualification is part of the claim: truncation divergence is not a proof of continuum nonexistence."
+      }
+    }
+  }
+}

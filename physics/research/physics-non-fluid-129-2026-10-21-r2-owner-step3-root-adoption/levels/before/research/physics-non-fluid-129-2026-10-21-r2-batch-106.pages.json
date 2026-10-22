@@ -1,0 +1,333 @@
+[
+  {
+    "order": 909,
+    "id": "qsmx-integrable-transfer",
+    "kind": "A",
+    "category": "quantum-statistical-mechanics",
+    "library": "physics",
+    "title": "Rational Yang–Baxter transfer matrices and Heisenberg charges",
+    "companion": "qsmx-integrable-transfer-examples",
+    "requires": [
+      "qsm-local-ensemble-bridge",
+      "hopf-hecke-and-quantum-symmetry-interfaces"
+    ],
+    "items": [
+      {
+        "id": "def-qsmx-rational-monodromy",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Ordered auxiliary-space monodromy",
+        "reference": "items/def-qsmx-rational-monodromy.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "dependency_level": 0,
+        "deps": [
+          "def-hh-rational-spectral-r-matrix"
+        ],
+        "dependency_roles": {
+          "def-hh-rational-spectral-r-matrix": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Fix an integer $N\\ge3$. Let $V=\\mathbb C^2$ with ordered basis\n$e_\\uparrow,e_\\downarrow$, let $V_N=V^{\\otimes N}$ in left-to-right site\norder, and let $V_a=V$ be an auxiliary copy. For $u\\in\\mathbb C$, define\n$R_{aj}(u)=uI_{aj}+iP_{aj}$ on $V_a\\otimes V_N$, where $P_{aj}$ swaps the\nauxiliary factor and site $j$. Define\n$$T_a(u)=R_{aN}(u)\\cdots R_{a1}(u),\\qquad t(u)=\\operatorname{tr}_a T_a(u),$$\nwhere products mean composition with the rightmost factor acting first, and\n$\\operatorname{tr}_a$ is the ordinary finite-dimensional trace over $V_a$.\nFor distinct sites $j,k$, $P_{jk}$ swaps those two tensor factors. Define the\noriented cyclic shift by\n$$U(v_1\\otimes\\cdots\\otimes v_N)=v_N\\otimes v_1\\otimes\\cdots\\otimes v_{N-1}.$$\nThe spectral parameter $u$ is dimensionless. All operators in this definition\nare finite-dimensional complex-linear endomorphisms.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "L. D. Faddeev, How Algebraic Bethe Ansatz Works for Integrable Model",
+              "url": "https://arxiv.org/pdf/hep-th/9605187",
+              "locator": "Section 3, PDF pp. 7–9, equations (35)–(47): rational Lax operators, ordered monodromy and transfer trace."
+            },
+            {
+              "title": "Classical and Quantum Integrable Systems, Lecture 14: The quantum inverse scattering method, and its classical limit",
+              "url": "https://vu-ff.github.io/integrability/en/lectures/14/",
+              "locator": "Sections 14.3–14.5, equations (14.2)–(14.9): Heisenberg Lax operator, monodromy and transfer matrix."
+            }
+          ]
+        },
+        "library": "physics"
+      },
+      {
+        "id": "lem-qsmx-monodromy-rtt",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "The rational Yang–Baxter equation lifts to RTT",
+        "reference": "items/lem-qsmx-monodromy-rtt.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "dependency_level": 1,
+        "deps": [
+          "def-qsmx-rational-monodromy",
+          "lem-hh-rational-spectral-r-matrix-satisfies-yang-baxter"
+        ],
+        "dependency_roles": {
+          "def-qsmx-rational-monodromy": "mathematical-premise",
+          "lem-hh-rational-spectral-r-matrix-satisfies-yang-baxter": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "For the ordered periodic monodromies\n$$T_a(u):=R_{aN}(u)\\cdots R_{a1}(u),\\qquad T_b(v):=R_{bN}(v)\\cdots R_{b1}(v),$$\nthe finite-dimensional operator identity\n$$R_{ab}(u-v)T_a(u)T_b(v)=T_b(v)T_a(u)R_{ab}(u-v)$$\nholds on $V_a\\otimes V_b\\otimes V_N$ for every $u,v\\in\\mathbb C$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "L. D. Faddeev, How Algebraic Bethe Ansatz Works for Integrable Model",
+              "url": "https://arxiv.org/pdf/hep-th/9605187",
+              "locator": "Section 3, PDF pp. 7–8, equations (36)–(44): local FCR and its induction along the chain."
+            },
+            {
+              "title": "Classical and Quantum Integrable Systems, Lecture 14: The quantum inverse scattering method, and its classical limit",
+              "url": "https://vu-ff.github.io/integrability/en/lectures/14/",
+              "locator": "Section 14.4, Theorem 14.2 and its induction proof: local RLL implies the monodromy RTT identity."
+            }
+          ]
+        },
+        "library": "physics"
+      },
+      {
+        "id": "lem-qsmx-transfer-regular-point",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Regular point and exchange logarithmic derivative",
+        "reference": "items/lem-qsmx-transfer-regular-point.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "dependency_level": 1,
+        "deps": [
+          "def-qsmx-rational-monodromy"
+        ],
+        "dependency_roles": {
+          "def-qsmx-rational-monodromy": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $t(u)$ and $U$ be the transfer matrix and cyclic shift defined by the\nordered monodromy construction. Use the periodic convention\n$P_{N,N+1}:=P_{N,1}$. Then\n$$t(0)=i^N U,\\qquad i\\,t'(0)t(0)^{-1}=\\sum_{j=1}^N P_{j,j+1}.$$\nIn particular, $t(0)$ is invertible. The derivative is with respect to the\ndimensionless complex parameter $u$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "L. D. Faddeev, How Algebraic Bethe Ansatz Works for Integrable Model",
+              "url": "https://arxiv.org/pdf/hep-th/9605187",
+              "locator": "Section 3, PDF pp. 9–10, equations (49)–(65): regular-point shift and logarithmic derivative."
+            },
+            {
+              "title": "Classical and Quantum Integrable Systems, Lecture 15: The algebraic Bethe ansatz",
+              "url": "https://vu-ff.github.io/integrability/en/lectures/15/",
+              "locator": "Section 15.2, Proposition 15.1 and Proposition 15.3: cyclic shift, omitted-factor trace and Hamiltonian derivative."
+            }
+          ]
+        },
+        "library": "physics"
+      },
+      {
+        "id": "thm-qsmx-transfer-commutativity",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "RTT gives commuting periodic transfer matrices",
+        "reference": "items/thm-qsmx-transfer-commutativity.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "dependency_level": 2,
+        "deps": [
+          "def-qsmx-rational-monodromy",
+          "lem-qsmx-transfer-regular-point",
+          "lem-qsmx-monodromy-rtt"
+        ],
+        "dependency_roles": {
+          "def-qsmx-rational-monodromy": "mathematical-premise",
+          "lem-qsmx-transfer-regular-point": "mathematical-premise",
+          "lem-qsmx-monodromy-rtt": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "For every $u,v\\in\\mathbb C$, the transfer matrices $t(u),t(v)$ of the ordered\nperiodic monodromy on $V_N=(\\mathbb C^2)^{\\otimes N}$ satisfy\n$$[t(u),t(v)]=0.$$\nNear $u=0$, $M(u):=t(0)^{-1}t(u)$ has the analytic matrix logarithm with\n$\\log M(0)=0$. Its Taylor-coefficient matrices commute pairwise and commute\nwith every $t(v)$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "L. D. Faddeev, How Algebraic Bethe Ansatz Works for Integrable Model",
+              "url": "https://arxiv.org/pdf/hep-th/9605187",
+              "locator": "Section 3, PDF pp. 7–9, equations (36)–(47): local and monodromy fundamental commutation relations and transfer traces."
+            },
+            {
+              "title": "Classical and Quantum Integrable Systems, Lecture 14: The quantum inverse scattering method, and its classical limit",
+              "url": "https://vu-ff.github.io/integrability/en/lectures/14/",
+              "locator": "Sections 14.3–14.5, Theorems 14.1–14.3, equations (14.4)–(14.9): RLL, RTT, and transfer-matrix commutativity with polynomial continuation."
+            }
+          ]
+        },
+        "library": "physics"
+      },
+      {
+        "id": "thm-qsmx-transfer-heisenberg-charge",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Logarithmic derivative is periodic exchange",
+        "reference": "items/thm-qsmx-transfer-heisenberg-charge.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "dependency_level": 3,
+        "deps": [
+          "def-qsmx-rational-monodromy",
+          "lem-qsmx-transfer-regular-point",
+          "thm-qsmx-transfer-commutativity"
+        ],
+        "dependency_roles": {
+          "def-qsmx-rational-monodromy": "mathematical-premise",
+          "lem-qsmx-transfer-regular-point": "mathematical-premise",
+          "thm-qsmx-transfer-commutativity": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Use the periodic convention $P_{N,N+1}:=P_{N,1}$. The rational transfer\nmatrix satisfies\n$$i\\,t'(0)t(0)^{-1}=\\sum_{j=1}^N P_{j,j+1}.$$\nConsequently, for real $J,c$, the finite matrix\n$$H_N:=J\\sum_{j=1}^N P_{j,j+1}+cI$$\nis Hermitian and commutes with every $t(u)$. If $H_N$ is interpreted as a\nphysical energy in the stated QSM convention, $J$ and $c$ are in joules.\nFor the Pauli matrices\n$$X=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix},\\qquad Y=\\begin{pmatrix}0&-i\\\\i&0\\end{pmatrix},\\qquad Z=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix},$$\nthe adjacent swap on $V\\otimes V$ is\n$$P=\\frac{I+X\\otimes X+Y\\otimes Y+Z\\otimes Z}{2}.$$",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "L. D. Faddeev, How Algebraic Bethe Ansatz Works for Integrable Model",
+              "url": "https://arxiv.org/pdf/hep-th/9605187",
+              "locator": "Section 3, PDF pp. 9–10, equations (61)–(65): logarithmic derivative and spin-half Heisenberg Hamiltonian."
+            },
+            {
+              "title": "Classical and Quantum Integrable Systems, Lecture 15: The algebraic Bethe ansatz",
+              "url": "https://vu-ff.github.io/integrability/en/lectures/15/",
+              "locator": "Section 15.2, Proposition 15.3: logarithmic derivative gives the periodic exchange operator and commutes with the transfer family."
+            }
+          ]
+        },
+        "library": "physics"
+      },
+      {
+        "id": "def-qsmx-regular-bethe-data",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Regular on-shell Bethe data without a completeness assumption",
+        "reference": "items/def-qsmx-regular-bethe-data.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "dependency_level": 3,
+        "deps": [
+          "def-qsmx-rational-monodromy"
+        ],
+        "dependency_roles": {
+          "def-qsmx-rational-monodromy": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "For the ordered monodromy on $V_N$ with $V=\\mathbb C^2$, define the shifted\nsite operator $L_{aj}(u):=R_{aj}(u-i/2)$, shifted monodromy\n$T_a^L(u):=L_{aN}(u)\\cdots L_{a1}(u)$, and shifted transfer matrix\n$\\tau(u):=\\operatorname{tr}_aT_a^L(u)$. In the ordered auxiliary basis\n$e_\\uparrow,e_\\downarrow$, write\n$$T_a^L(u)=\\begin{pmatrix}A(u)&B(u)\\\\C(u)&D(u)\\end{pmatrix}_a, \\qquad \\Omega:=e_\\uparrow^{\\otimes N}.$$\nFor an integer $M$ with $0\\le M\\le N$, a **regular on-shell Bethe datum** is\na tuple of finite complex numbers $\\lambda_1,\\ldots,\\lambda_M$ satisfying all\nof the following conditions:\n\n1. The roots are pairwise distinct, none equals $i/2$ or $-i/2$, and no\n   difference $\\lambda_j-\\lambda_k$ for $j\\ne k$ equals $i$ or $-i$.\n2. For each $j=1,\\ldots,M$,\n   $$\\left(\\frac{\\lambda_j+i/2}{\\lambda_j-i/2}\\right)^N =\\prod_{k\\ne j}\\frac{\\lambda_j-\\lambda_k+i}{\\lambda_j-\\lambda_k-i}.$$\n3. The associated vector\n   $$\\Psi(\\lambda_1,\\ldots,\\lambda_M):= B(\\lambda_1)\\cdots B(\\lambda_M)\\Omega$$\n   is nonzero.\n\nFor $M=0$ the root tuple and products are empty and $\\Psi=\\Omega$. This\ndefinition records regular solutions and nonzero vectors only; it makes no\nclaim of completeness, covers no singular-root regularization, and does not\ninclude descendants generated from other reference vectors.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "L. D. Faddeev, How Algebraic Bethe Ansatz Works for Integrable Model",
+              "url": "https://arxiv.org/pdf/hep-th/9605187",
+              "locator": "Section 4, PDF pp. 10–14, equations (66)–(97): exchange relations, reference vector, regular Bethe vectors and Bethe equations."
+            },
+            {
+              "title": "Classical and Quantum Integrable Systems, Lecture 15: The algebraic Bethe ansatz",
+              "url": "https://vu-ff.github.io/integrability/en/lectures/15/",
+              "locator": "Sections 15.3–15.5, equations (15.2)–(15.17): monodromy entries, exchange relations, and Bethe data."
+            }
+          ]
+        },
+        "library": "physics"
+      },
+      {
+        "id": "thm-qsmx-regular-bethe-eigenpair",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Regular Bethe data give transfer-family eigenpairs",
+        "reference": "items/thm-qsmx-regular-bethe-eigenpair.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "dependency_level": 4,
+        "deps": [
+          "def-qsmx-rational-monodromy",
+          "def-qsmx-regular-bethe-data",
+          "lem-qsmx-monodromy-rtt"
+        ],
+        "dependency_roles": {
+          "def-qsmx-rational-monodromy": "mathematical-premise",
+          "def-qsmx-regular-bethe-data": "mathematical-premise",
+          "lem-qsmx-monodromy-rtt": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $V_N=(\\mathbb C^2)^{\\otimes N}$, $N\\ge3$, with auxiliary copy\n$V_a=\\mathbb C^2$, $R_{aj}(u)=uI+iP_{aj}$, where $P_{aj}$ swaps the auxiliary\nfactor with site $j$, and\n$L_{aj}(u)=R_{aj}(u-i/2)$. Define\n$T_a^L(u)=L_{aN}(u)\\cdots L_{a1}(u)$,\n$\\tau(u)=\\operatorname{tr}_aT_a^L(u)$, and the auxiliary entries\n$T_a^L(u)=\\begin{pmatrix}A(u)&B(u)\\\\C(u)&D(u)\\end{pmatrix}_a$ in the ordered\nbasis $e_\\uparrow,e_\\downarrow$. Put $\\Omega=e_\\uparrow^{\\otimes N}$. Suppose\nfinite roots $\\lambda_1,\\ldots,\\lambda_M$, $0\\le M\\le N$, are pairwise\ndistinct, avoid $\\pm i/2$, have no pairwise difference equal to $\\pm i$,\nsatisfy\n$$\\left(\\frac{\\lambda_j+i/2}{\\lambda_j-i/2}\\right)^N =\\prod_{k\\ne j}\\frac{\\lambda_j-\\lambda_k+i}{\\lambda_j-\\lambda_k-i} \\quad(1\\le j\\le M),$$\nand give the nonzero vector $\\Psi=\\prod_{j=1}^M B(\\lambda_j)\\Omega$. For\n$u\\notin\\{\\lambda_1,\\ldots,\\lambda_M\\}$ its eigenvalue is\n$$\\Lambda(u)=(u+i/2)^N\\prod_{j=1}^M\\frac{u-\\lambda_j-i}{u-\\lambda_j} +(u-i/2)^N\\prod_{j=1}^M\\frac{u-\\lambda_j+i}{u-\\lambda_j}.$$\nThe apparent poles cancel, so $\\Lambda$ extends to a polynomial and the\neigenvector identity holds for every $u\\in\\mathbb C$. This result asserts no\nconverse, singular-root regularization, descendant construction, or completeness.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "L. D. Faddeev, How Algebraic Bethe Ansatz Works for Integrable Model",
+              "url": "https://arxiv.org/pdf/hep-th/9605187",
+              "locator": "Section 4, PDF pp. 10–14, equations (66)–(97): RTT exchange relations, wanted/unwanted terms, and transfer eigenvalue."
+            },
+            {
+              "title": "Classical and Quantum Integrable Systems, Lecture 15: The algebraic Bethe ansatz",
+              "url": "https://vu-ff.github.io/integrability/en/lectures/15/",
+              "locator": "Sections 15.3–15.6, Lemma 15.5, Proposition 15.6, Lemma 15.8 and Theorem 15.7: reference state, exchange relations and eigenvalue formula."
+            }
+          ]
+        },
+        "library": "physics"
+      }
+    ]
+  },
+  {
+    "order": 910,
+    "id": "qsmx-integrable-transfer-examples",
+    "kind": "B",
+    "category": "quantum-statistical-mechanics",
+    "library": "physics",
+    "title": "Rational Yang–Baxter transfer matrices and Heisenberg charges — Examples",
+    "companion": "qsmx-integrable-transfer",
+    "requires": [
+      "qsmx-integrable-transfer"
+    ],
+    "items": [
+      {
+        "id": "ex-qsmx-one-magnon",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "One down-spin Fourier dispersion",
+        "reference": "items/ex-qsmx-one-magnon.md",
+        "design_state": "Step 1 complete draft; readiness recorded separately.",
+        "dependency_level": 4,
+        "deps": [
+          "thm-qsmx-transfer-heisenberg-charge"
+        ],
+        "dependency_roles": {
+          "thm-qsmx-transfer-heisenberg-charge": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Fix $N\\ge3$, $J\\in\\mathbb R$, and periodic bonds $P_{N,N+1}:=P_{N,1}$ on\n$V_N=(\\mathbb C^2)^{\\otimes N}$. Let $|j\\rangle$ be the basis vector with\n$e_\\downarrow$ at site $j$ and $e_\\uparrow$ at every other site. Set\n$H_N:=J\\sum_{j=1}^N P_{j,j+1}$. For each integer $m$ with $0\\le m<N$, put\n$k_m:=2\\pi m/N$ and\n$$|k_m\\rangle:=\\sum_{j=1}^N e^{ik_mj}|j\\rangle.$$\nThen $|k_m\\rangle$ is a nonzero eigenvector of $H_N$ with eigenvalue\n$$E_m=J\\big(N-2+2\\cos k_m\\big).$$\nIf interpreted as an energy, $J$ and $E_m$ are in joules.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Classical and Quantum Integrable Systems, Lecture 10: The coordinate Bethe ansatz: the Heisenberg chain",
+              "url": "https://vu-ff.github.io/integrability/en/lectures/10/",
+              "locator": "Sections 10.2–10.3, equations (10.2)–(10.5): periodic spin-half exchange convention and one-magnon plane-wave dispersion."
+            },
+            {
+              "title": "L. D. Faddeev, How Algebraic Bethe Ansatz Works for Integrable Model",
+              "url": "https://arxiv.org/pdf/hep-th/9605187",
+              "locator": "Section 4, PDF p. 15, equations (108)–(112): one-particle momentum and dispersion for H_source=(1/2) sum(P-I); the present H_N=J sum P has energy E=2J epsilon+JN."
+            }
+          ]
+        },
+        "library": "physics"
+      }
+    ]
+  }
+]

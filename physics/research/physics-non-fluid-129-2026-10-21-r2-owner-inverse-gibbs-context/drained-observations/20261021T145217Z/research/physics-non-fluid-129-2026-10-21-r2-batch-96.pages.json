@@ -1,0 +1,414 @@
+[
+  {
+    "order": 889,
+    "id": "csm-frontier-inverse-gibbs",
+    "kind": "A",
+    "category": "classical-statistical-mechanics",
+    "library": "physics",
+    "title": "Inverse Gibbs models, identifiability and correlated uncertainty",
+    "companion": "csm-frontier-inverse-gibbs-examples",
+    "requires": [
+      "csm-frontier-sampling-certificates",
+      "csm-frontier-large-deviation-ensembles",
+      "csm-phase-ensembles",
+      "bayesian-models-priors-and-posterior-laws"
+    ],
+    "items": [
+      {
+        "id": "def-csm-frontier-inverse-finite-exponential",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Finite exponential Gibbs family for inverse inference",
+        "statement": "Let $X$ be a finite nonempty set, let $k\\ge1$, let $w:X\\to(0,\\infty)$ be a positive reference weight, and let $T:X\\to\\mathbb R^k$. Use the Euclidean inner product $\\theta\\cdot T(x):=\\sum_{j=1}^k\\theta_jT_j(x)$. For $\\theta\\in\\mathbb R^k$, define the partition sum and log-partition function by",
+        "strategy": "direct",
+        "deps": [
+          "thm-csm-exponential-normalization-covariance",
+          "def-euclidean-inner-product",
+          "thm-extreme-value-metric"
+        ],
+        "dependency_roles": {
+          "thm-csm-exponential-normalization-covariance": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "thm-extreme-value-metric": "mathematical-premise"
+        },
+        "justified_by": [],
+        "aliases": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "physical_scope": null,
+        "sources": {
+          "references": [
+            {
+              "title": "Martin J. Wainwright and Michael I. Jordan, Graphical Models, Exponential Families, and Variational Inference",
+              "url": "https://people.eecs.berkeley.edu/~jordan/sail/readings/wainwright-jordan-fnt.pdf",
+              "locator": "§3.2 and §3.5.1, printed pp. 38–40 and 61–62 / PDF pp. 44–46 and 67–68: canonical exponential-family form, log partition function, mean, and covariance."
+            },
+            {
+              "title": "Charles J. Geyer, Stat 8931 (Exponential Families) Lecture Notes: Two Examples of Agresti",
+              "url": "https://www.stat.umn.edu/geyer/8931expfam/infinity.pdf",
+              "locator": "§2, printed pp. 1–2 / PDF pp. 0–1: full-support canonical exponential-family examples and the boundary-MLE distinction."
+            }
+          ]
+        },
+        "dependency_level": 0,
+        "axiom_use": "No choice principle is used."
+      },
+      {
+        "id": "thm-csm-frontier-inverse-identifiability",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Identifiability and covariance in a finite exponential Gibbs family",
+        "statement": "For the finite exponential family of the preceding Definition, write $\\mu_\\theta:=\\sum_{x\\in X}\\pi_\\theta(x)T(x)$. Define $\\operatorname{Cov}_{\\pi_\\theta}(T)$ by entries\n$\\operatorname{Cov}_{\\pi_\\theta}(T)_{ab}:=\\sum_{x\\in X}\\pi_\\theta(x)(T_a(x)-\\mu_{\\theta,a})(T_b(x)-\\mu_{\\theta,b})$.\nThe gradient and Hessian mean $\\nabla A(\\theta):=(\\partial_jA(\\theta))_{j=1}^k$ and $\\nabla^2A(\\theta):=(\\partial_i\\partial_jA(\\theta))_{i,j=1}^k$. A symmetric matrix is positive definite when its quadratic form is positive on every nonzero vector. The map $\\theta\\mapsto\\pi_\\theta$ is injective when $\\pi_\\theta(x)=\\pi_\\varphi(x)$ for every $x$ implies $\\theta=\\varphi$. The following conditions are equivalent: the representation is minimal; no nonzero $a\\in\\mathbb R^k$ makes $a\\cdot T(x)$ constant on $X$; the affine hull of $T(X)$ is $\\mathbb R^k$; $\\nabla^2 A(\\theta)$ is positive definite for every $\\theta$; and the map $\\theta\\mapsto\\pi_\\theta$ is injective.",
+        "strategy": "direct",
+        "deps": [
+          "def-csm-frontier-inverse-finite-exponential",
+          "thm-csm-exponential-normalization-covariance",
+          "thm-rank-nullity"
+        ],
+        "dependency_roles": {
+          "def-csm-frontier-inverse-finite-exponential": "mathematical-premise",
+          "thm-csm-exponential-normalization-covariance": "mathematical-premise",
+          "thm-rank-nullity": "mathematical-premise"
+        },
+        "justified_by": [],
+        "aliases": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "physical_scope": null,
+        "sources": {
+          "references": [
+            {
+              "title": "Martin J. Wainwright and Michael I. Jordan, Graphical Models, Exponential Families, and Variational Inference",
+              "url": "https://people.eecs.berkeley.edu/~jordan/sail/readings/wainwright-jordan-fnt.pdf",
+              "locator": "§3.5.1, Proposition 2, and §3.5.2, Proposition 3, printed pp. 61–63 / PDF pp. 67–69: the log-partition Hessian is covariance and minimality is equivalent to injectivity of the mean map."
+            },
+            {
+              "title": "Charles J. Geyer, Stat 8931 (Exponential Families) Lecture Notes: Two Examples of Agresti",
+              "url": "https://www.stat.umn.edu/geyer/8931expfam/infinity.pdf",
+              "locator": "§§2 and 3.2, printed pp. 1–2 and 8–9 / PDF pp. 0–1 and 8–9: boundary observations, full support, and finite-parameter MLE failure."
+            }
+          ]
+        },
+        "dependency_level": 1,
+        "axiom_use": "No choice principle is used."
+      },
+      {
+        "id": "lem-csm-frontier-finite-polytope-support",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Supporting direction at a boundary point of a finite full-dimensional polytope",
+        "statement": "Let $X=\\{x_1,\\dots,x_m\\}$ be finite and nonempty, let $k\\ge1$, and let $T:X\\to\\mathbb R^k$ have full affine hull, meaning that the affine combinations $\\sum_{j=1}^{m}a_jT(x_j)$ with $\\sum_ja_j=1$ fill $\\mathbb R^k$. Define the finite convex hull",
+        "strategy": "direct",
+        "deps": [
+          "thm-heine-borel-rn",
+          "thm-continuous-image-of-a-compact-space-is-compact",
+          "thm-compact-subset-is-closed-and-bounded",
+          "thm-metric-continuity-characterisations",
+          "thm-extreme-value-metric",
+          "thm-rationals-countable",
+          "thm-product-of-countable",
+          "lem-countable-iff-surjection-from-n",
+          "lem-rat-embeds-dense",
+          "cor-bolzano-weierstrass-in-rn",
+          "def-euclidean-inner-product"
+        ],
+        "dependency_roles": {
+          "thm-heine-borel-rn": "mathematical-premise",
+          "thm-continuous-image-of-a-compact-space-is-compact": "mathematical-premise",
+          "thm-compact-subset-is-closed-and-bounded": "mathematical-premise",
+          "thm-metric-continuity-characterisations": "mathematical-premise",
+          "thm-extreme-value-metric": "mathematical-premise",
+          "thm-rationals-countable": "mathematical-premise",
+          "thm-product-of-countable": "mathematical-premise",
+          "lem-countable-iff-surjection-from-n": "mathematical-premise",
+          "lem-rat-embeds-dense": "mathematical-premise",
+          "cor-bolzano-weierstrass-in-rn": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise"
+        },
+        "justified_by": [],
+        "aliases": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "physical_scope": null,
+        "sources": {
+          "references": [
+            {
+              "title": "Martin J. Wainwright and Michael I. Jordan, Graphical Models, Exponential Families, and Variational Inference",
+              "url": "https://people.eecs.berkeley.edu/~jordan/sail/readings/wainwright-jordan-fnt.pdf",
+              "locator": "§3.5.2 and Appendix B.1, printed pp. 62–63 and 257–258 / PDF pp. 68–70 and 263–264: finite-dimensional convex-support interiors and supporting-direction proof route."
+            },
+            {
+              "title": "Charles J. Geyer, Stat 8931 (Exponential Families) Lecture Notes: Two Examples of Agresti",
+              "url": "https://www.stat.umn.edu/geyer/8931expfam/infinity.pdf",
+              "locator": "§4.6.3, printed pp. 55–56 / PDF pp. 56–57: relative interiors of convex-support faces and finite-parameter MLE locations."
+            }
+          ]
+        },
+        "dependency_level": 0,
+        "axiom_use": "No choice principle is used; the rational approximants use least indices in a fixed countable enumeration, and the Bolzano–Weierstrass supplier states that its proof is choice-free."
+      },
+      {
+        "id": "thm-csm-frontier-finite-mle-existence",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Exact finite-MLE criterion for a minimal finite exponential Gibbs family",
+        "statement": "Use the finite exponential family, minimality, convex hull, affine hull, and relative-interior definitions from the A-page finite-family Definition. Assume the representation is minimal. The sample space is $X^n$ with product mass $\\prod_{i=1}^n\\pi_\\theta(x_i)$, which is the IID sampling model; $n\\ge1$. For a realized tuple $x_1,\\dots,x_n\\in X$, set $\\bar T=n^{-1}\\sum_{i=1}^nT(x_i)$ and $K=\\operatorname{conv}(T(X))$. A finite MLE is a parameter $\\hat\\theta\\in\\mathbb R^k$ attaining the maximum of that likelihood. Then a finite MLE exists if and only if $\\bar T\\in\\operatorname{ri}K$, and when it exists it is unique.",
+        "strategy": "direct",
+        "deps": [
+          "def-csm-frontier-inverse-finite-exponential",
+          "thm-csm-frontier-inverse-identifiability",
+          "lem-csm-frontier-finite-polytope-support",
+          "thm-csm-exponential-normalization-covariance",
+          "thm-extreme-value-metric",
+          "cor-euclidean-closed-balls-and-spheres-are-compact"
+        ],
+        "dependency_roles": {
+          "def-csm-frontier-inverse-finite-exponential": "mathematical-premise",
+          "thm-csm-frontier-inverse-identifiability": "mathematical-premise",
+          "lem-csm-frontier-finite-polytope-support": "mathematical-premise",
+          "thm-csm-exponential-normalization-covariance": "mathematical-premise",
+          "thm-extreme-value-metric": "mathematical-premise",
+          "cor-euclidean-closed-balls-and-spheres-are-compact": "mathematical-premise"
+        },
+        "justified_by": [],
+        "aliases": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "physical_scope": null,
+        "sources": {
+          "references": [
+            {
+              "title": "Martin J. Wainwright and Michael I. Jordan, Graphical Models, Exponential Families, and Variational Inference",
+              "url": "https://people.eecs.berkeley.edu/~jordan/sail/readings/wainwright-jordan-fnt.pdf",
+              "locator": "§3.6 and §6.1, printed pp. 64–66 and 146–147 / PDF pp. 70–72 and 152–153: moment matching, IID log likelihood, and unique MLE for means in the interior of the mean-parameter polytope; Appendix B.1 proves the gradient-map range."
+            },
+            {
+              "title": "Charles J. Geyer, Stat 8931 (Exponential Families) Lecture Notes: Two Examples of Agresti",
+              "url": "https://www.stat.umn.edu/geyer/8931expfam/infinity.pdf",
+              "locator": "§§2, 3.2, and 4.6.3, printed pp. 1–2, 8–9, and 55–56 / PDF pp. 0–1, 8–9, and 56–57: boundary observations can place the MLE at infinity and the relative-interior distinction."
+            }
+          ]
+        },
+        "dependency_level": 2,
+        "axiom_use": "No choice principle is used."
+      },
+      {
+        "id": "def-csm-frontier-latent-gibbs-observation",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Finite latent Gibbs observation model",
+        "statement": "Let $(\\Theta,\\mathcal T)$ be a nonempty measurable parameter space and let $\\vartheta:(\\Theta,\\mathcal T)\\to(\\mathbb R^k,\\mathcal B(\\mathbb R^k))$ be measurable. Let $X$ be the finite state set of the finite exponential Gibbs family from the A-page Definition, evaluated at canonical parameter $\\vartheta(\\theta)$; write its mass as $\\pi_{\\vartheta(\\theta)}(x)$. A finite latent Gibbs observation model consists of a prior probability measure $\\Pi$ on $(\\Theta,\\mathcal T)$ and a probability kernel $K$ from $(\\Theta\\times X,\\mathcal T\\otimes2^X)$ to a nonempty measurable data space $(\\mathsf Y,\\mathcal Y)$, where $2^X$ is the full power-set sigma-algebra on $X$ and $\\mathcal T\\otimes2^X$ is the product sigma-algebra. The kernel $K((\\theta,x),B)$ is the observation law for data event $B$ when parameter $\\theta$ and latent configuration $x$ are fixed. Define the marginal sampling kernel",
+        "strategy": "direct",
+        "deps": [
+          "def-csm-frontier-inverse-finite-exponential",
+          "def-bayesian-model-as-prior-and-sampling-kernel",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "def-measure-kernel-and-probability-kernel"
+        ],
+        "dependency_roles": {
+          "def-csm-frontier-inverse-finite-exponential": "mathematical-premise",
+          "def-bayesian-model-as-prior-and-sampling-kernel": "mathematical-premise",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras": "mathematical-premise",
+          "def-measure-kernel-and-probability-kernel": "mathematical-premise"
+        },
+        "justified_by": [],
+        "aliases": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "physical_scope": null,
+        "sources": {
+          "references": [
+            {
+              "title": "Martin J. Wainwright and Michael I. Jordan, Graphical Models, Exponential Families, and Variational Inference",
+              "url": "https://people.eecs.berkeley.edu/~jordan/sail/readings/wainwright-jordan-fnt.pdf",
+              "locator": "§6.2, especially §6.2.1, printed pp. 151–154 / PDF pp. 157–160: observed and latent components of exponential-family models."
+            },
+            {
+              "title": "Alicia A. Johnson, Miles Q. Ott, and Mine Dogucu, Bayes Rules!, Chapter 2",
+              "url": "https://www.bayesrulesbook.com/chapter-2.html",
+              "locator": "§§2.1.1–2.1.2 and 2.3.5, full chapter: prior, conditional sampling law, likelihood, marginal normalizer, and posterior model."
+            }
+          ]
+        },
+        "dependency_level": 1,
+        "axiom_use": "No choice principle is used."
+      },
+      {
+        "id": "thm-csm-frontier-inverse-posterior",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Posterior kernel and dominated formula for a latent Gibbs observation",
+        "statement": "Assume the Axiom of Choice. Let the parameter and data spaces $(\\Theta,\\mathcal T)$ and $(\\mathsf Y,\\mathcal Y)$ of a finite latent Gibbs observation model both be standard Borel, and let $\\Pi$ be its proper prior. Let $J$ be the joint prior-predictive probability determined by $\\Pi$ and the marginal sampling kernel $Q$, and let $J_Y$ be its data marginal. There exists a data-indexed probability kernel $y\\mapsto\\Pi_y$ satisfying",
+        "strategy": "direct",
+        "deps": [
+          "def-csm-frontier-latent-gibbs-observation",
+          "def-axiom-of-choice",
+          "def-standard-borel-space",
+          "def-measure-kernel-and-probability-kernel",
+          "thm-standard-borel-bayesian-posterior-kernel-exists",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces"
+        ],
+        "dependency_roles": {
+          "def-csm-frontier-latent-gibbs-observation": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-standard-borel-space": "mathematical-premise",
+          "def-measure-kernel-and-probability-kernel": "mathematical-premise",
+          "thm-standard-borel-bayesian-posterior-kernel-exists": "mathematical-premise",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces": "mathematical-premise"
+        },
+        "justified_by": [],
+        "aliases": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "physical_scope": null,
+        "sources": {
+          "references": [
+            {
+              "title": "Alicia A. Johnson, Miles Q. Ott, and Mine Dogucu, Bayes Rules!, Chapter 2",
+              "url": "https://www.bayesrulesbook.com/chapter-2.html",
+              "locator": "§§2.1.1–2.1.2 and 2.3.5–2.4, full chapter: the prior, likelihood, marginal normalizer, and normalized posterior formula in the finite/data-density case."
+            }
+          ]
+        },
+        "dependency_level": 2,
+        "axiom_use": "Assumes AC exactly as the standard-Borel posterior-kernel supplier does; no additional choice principle is used."
+      },
+      {
+        "id": "def-csm-frontier-pseudolikelihood",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Finite-volume Gibbs pseudo-likelihood with fixed boundary",
+        "statement": "Let $d\\ge1$, let $\\Lambda$ be a finite nonempty subset of $\\mathbb Z^d$, let $S$ be a finite nonempty spin set, let $(\\Theta,\\mathcal T)$ be a nonempty measurable parameter space, and fix a boundary configuration $\\eta\\in S^{\\mathbb Z^d\\setminus\\Lambda}$. Let $\\mathcal C$ be a finite collection of finite subsets $C\\subseteq\\mathbb Z^d$ with $C\\cap\\Lambda\\ne\\varnothing$. For each $C\\in\\mathcal C$, let $\\Phi_C:S^C\\times\\Theta\\to\\mathbb R$ be finite-valued and measurable in $\\theta$ for each spin assignment. For $\\sigma\\in S^\\Lambda$, let $\\bar\\sigma$ equal $\\sigma$ on $\\Lambda$ and $\\eta$ outside $\\Lambda$, and define the finite-volume energy",
+        "strategy": "direct",
+        "deps": [
+          "cor-exponential-reciprocal-and-positivity"
+        ],
+        "dependency_roles": {
+          "cor-exponential-reciprocal-and-positivity": "mathematical-premise"
+        },
+        "justified_by": [],
+        "aliases": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "physical_scope": null,
+        "sources": {
+          "references": [
+            {
+              "title": "Julian Besag, Statistical Analysis of Non-Lattice Data, The Statistician 24(3) (1975), 179–195",
+              "url": "https://www2.stat.duke.edu/~scs/Courses/Stat376/Papers/GibbsFieldEst/BesagPseudoLik1975.pdf",
+              "locator": "§1, printed pp. 179–181, for site-conditional distributions and neighborhoods; §3.3, printed pp. 190–192, especially equation (3.2), for the pseudo-likelihood product and its distinction from the true likelihood."
+            }
+          ]
+        },
+        "dependency_level": 0,
+        "forward_refs": [
+          "ex-csm-frontier-pseudolikelihood-not-joint"
+        ],
+        "axiom_use": "No choice principle is used."
+      }
+    ]
+  },
+  {
+    "order": 890,
+    "id": "csm-frontier-inverse-gibbs-examples",
+    "kind": "B",
+    "category": "classical-statistical-mechanics",
+    "library": "physics",
+    "title": "Inverse Gibbs models, identifiability and correlated uncertainty — Examples",
+    "companion": "csm-frontier-inverse-gibbs",
+    "requires": [
+      "csm-frontier-inverse-gibbs"
+    ],
+    "items": [
+      {
+        "id": "ex-csm-frontier-boundary-mle",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "All-plus data have no finite Bernoulli-spin field MLE",
+        "statement": "Let $X=\\{-1,+1\\}$, $w(-1)=w(+1)=1$, and $T(\\sigma)=\\sigma$. For a finite field $h\\in\\mathbb R$, the Gibbs probabilities are",
+        "strategy": "direct",
+        "deps": [
+          "thm-csm-frontier-finite-mle-existence",
+          "def-csm-frontier-inverse-finite-exponential"
+        ],
+        "dependency_roles": {
+          "thm-csm-frontier-finite-mle-existence": "mathematical-premise",
+          "def-csm-frontier-inverse-finite-exponential": "mathematical-premise"
+        },
+        "justified_by": [],
+        "aliases": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "physical_scope": null,
+        "sources": {
+          "references": [
+            {
+              "title": "Martin J. Wainwright and Michael I. Jordan, Graphical Models, Exponential Families, and Variational Inference",
+              "url": "https://people.eecs.berkeley.edu/~jordan/sail/readings/wainwright-jordan-fnt.pdf",
+              "locator": "§6.1, printed pp. 146–147 / PDF pp. 152–153, for finite IID likelihood and interior mean matching; the boundary calculation below is explicit."
+            },
+            {
+              "title": "Charles J. Geyer, Stat 8931 (Exponential Families) Lecture Notes: Two Examples of Agresti",
+              "url": "https://www.stat.umn.edu/geyer/8931expfam/infinity.pdf",
+              "locator": "§2 and §3.2, printed pp. 1–2 and 8–9 / PDF pp. 0–1 and 8–9: examples where boundary sufficient-statistic values have no finite canonical MLE."
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "ex-csm-frontier-pseudolikelihood-not-joint",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "Two-spin pseudo-likelihood is not the exact joint posterior input",
+        "statement": "Take $\\Lambda=\\{1,2\\}$, $S=\\{-1,+1\\}$, and any fixed exterior boundary; the sole interaction set $\\{1,2\\}$ has no exterior sites, so its energy is independent of that boundary. Use parameter space $\\Theta=\\{0,1\\}$ with its full power-set sigma-algebra, prior mass $1/2$ at each parameter, and the single potential $\\Phi_{\\{1,2\\}}((\\sigma_1,\\sigma_2);J)=-J\\sigma_1\\sigma_2$. Use the real exponential $\\exp$, put $e:=\\exp(1)$, and define $\\cosh J:=(\\exp(J)+\\exp(-J))/2$. For the hypothetical observation $(+1,+1)$, the exact joint likelihood is $\\exp(J)/(4\\cosh J)$, whereas the product of the two one-site Gibbs conditional probabilities is $[\\exp(J)/(2\\cosh J)]^2$. By pseudo-posterior I mean the probability vector obtained by multiplying this product by the prior weights and normalizing over $J\\in\\{0,1\\}$. The exact and pseudo-posterior distributions are different.",
+        "strategy": "direct",
+        "deps": [
+          "def-csm-frontier-pseudolikelihood",
+          "def-real-exponential-function-and-e",
+          "thm-exponential-is-strictly-increasing",
+          "cor-exponential-reciprocal-and-positivity"
+        ],
+        "dependency_roles": {
+          "def-csm-frontier-pseudolikelihood": "mathematical-premise",
+          "def-real-exponential-function-and-e": "mathematical-premise",
+          "thm-exponential-is-strictly-increasing": "mathematical-premise",
+          "cor-exponential-reciprocal-and-positivity": "mathematical-premise"
+        },
+        "justified_by": [],
+        "aliases": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "physical_scope": null,
+        "sources": {
+          "references": [
+            {
+              "title": "Julian Besag, Statistical Analysis of Non-Lattice Data, The Statistician 24(3) (1975), 179–195",
+              "url": "https://www2.stat.duke.edu/~scs/Courses/Stat376/Papers/GibbsFieldEst/BesagPseudoLik1975.pdf",
+              "locator": "§3.3, printed p. 190, equation (3.2): the product of site-conditional probabilities is not the true sample likelihood except for independent variables; the two-spin posterior calculation below is local."
+            }
+          ]
+        },
+        "dependency_level": 1
+      }
+    ]
+  }
+]

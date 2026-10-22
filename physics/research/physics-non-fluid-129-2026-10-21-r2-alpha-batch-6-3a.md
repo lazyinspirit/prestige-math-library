@@ -1,0 +1,58 @@
+# Batch 6 Step 3a adjudication
+
+Run: `physics-non-fluid-129-2026-10-21-r2`; group: `batch-6`; role: alpha.
+
+Scope owes only `touched:6:pthm-emx-uniaxial-dispersion`. Reader findings and refuter flags are empty. The critical-risk reviews are additional contract reviews, not decision obligations. No agents, judge cycle, stamps or engine gates are initiated.
+
+## Completed level-1 risk review
+
+`pthm-emx-lorentz-reciprocity`: independently checked steps 1.1–3.1 and all five direct suppliers. Complex products are bilinear; Maxwell substitution gives exactly E2·J1−E1·J2 plus transpose-symmetric terms that cancel. The cross-product lemma applies to the four real-pair expansions. Re X and Im X satisfy the bounded C1-domain divergence theorem, including AC_omega and the neighborhood C1 convention. Both integrals have units W and are finite. Zero fields, zero sources, omega=0 and singular symmetric tensors preserve the identity. There is no existence, converse, losslessness, empirical or time-reversal conclusion. Contract risk_review is complete. Reader/refuter reports contain no contrary finding. Published suppliers were inspected read-only; no new supplier defect found.
+
+Source retrieval was completed through direct HTTPS downloads and PyMuPDF text extraction after browser retrieval failed and pdftotext proved unavailable. The exact inspected sections and the minor locator correction are recorded below. Those tool limitations did not block the review.
+
+## Touched carrier: accepted reader repair
+
+`pthm-emx-uniaxial-dispersion`, obligation `touched:6:pthm-emx-uniaxial-dispersion`: **accepted_repair**, repair_confidence 1. The missing explicit rank justification is nonfatal polish: a singular nonzero 2×2 block has rank one, and its nonzero entry is immediately visible. The reader addition correctly makes this reasoning explicit without changing the claim. Retain the exact current proof and its matching step-1.2 contract derivation.
+
+The current raw item SHA256 is `2a435e1b569fc7fe58ea2a513406c131be4581855de72e5d3b923f438cff5da8`, matching the post snapshot. Removing exactly the added three sentences beginning “Away from an intersection, the $xz$ block is invertible” through “Thus both polarization spaces are one-dimensional away from intersections.” reproduces the frozen pre-reader hash `28e21348537126e5cffe9531218313cb42c6d37801ab31cdca666bcd25d9b5b6`. This is a hash-verified reconstruction, not a guessed historical delta. The only body change is that addition; Statement, scope, prerequisites and diagram are identical. The pre/post manifest hashes also agree; the contract delta is the matching step-1.2 elaboration.
+
+Independent check: expanding the symbol yields the displayed 3×3 matrix. Its middle eigenvalue vanishes on the ordinary sheet; the xz determinant has the stated factor and vanishes exactly on the extraordinary sheet. Off their intersection, one block is invertible and the other kernel is one-dimensional. On the extraordinary sheet the xz block is nonzero: use its off-diagonal entry if kx kz≠0, otherwise its positive untouched diagonal entry. Distinct principal permittivities force intersection kx=0 and kz²=mu epsilon_perp omega², where the full matrix is diag(0,0,omega² epsilon_parallel). In the isotropic case the parallel/transverse decomposition is valid over C because the real nonzero k has |k|²>0; the kernel on the sphere has complex dimension two. Both directions of mode existence, the axis cases, isotropic coincidence and excluded zero frequency/amplitude/vector were checked. No choice is used by the finite calculation.
+
+The TikZ axes, unit circle, ellipse with horizontal radius approximately sqrt(2), and marked (0,±1) intersections agree with the stated normalized representative. Its 1.414 drawing coordinate is a graphical approximation; the exact equations and proof are independent of it. No diagram addition is required. No public interface changed, so no consumer propagation is triggered. Completed local polish is recorded in the defect ledger; no unresolved uniaxial obligation remains.
+
+## Level-1 citation repair found during risk review
+
+`pthm-emx-lorentz-reciprocity`: Chew's §12.2, “Conditions for Reciprocity,” is on printed p.149 (PDF p.165), including equation (12.2.1) and its explicit inclusion of lossy anisotropic conductive media. The item incorrectly located that section on p.150, which starts §12.3. Corrected only the page number in the item and its owning pages-manifest source mirror. This is nonfatal citation polish, repair_confidence 1, recorded as `physics-non-fluid-129-2026-10-21-r2-3a-batch-6-chew-page-locator`. No statement, proof, physical scope, empirical qualification, prerequisite or source URL changed; provenance remains honestly ai-altered, and there was no judge stamp to invalidate. This risk-only carrier owes no additional routed decision under the frozen scope.
+
+## Completed level-2 risk review
+
+`ex-emx-reciprocity-not-time-reversal`: independently read both Verification steps, all four direct suppliers, the complete current Lorentz-susceptibility proof and its stated qualifications, and the reader/refuter evidence. The exact used supplier clauses are the harmonic particular-solution calculation in step 1.1 and pointwise-loss calculation in step 2.2. For N=1 and a,gamma,omega>0 the squared denominator is positive even at resonance, and Im(epsilon)>0. Scalar epsilon I3 is symmetric under ordinary transpose even when complex; the adopted reciprocity theorem remains conditional on C1 solutions on its bounded C1 domain, with AC_omega. No field existence is inferred from the local amplitude.
+
+The derivative of P1 has amplitude j=-i omega (epsilon−epsilon_infinity)e. Expanding the product of two real harmonic encodings and integrating over T=2pi/omega gives Re(j·e*)/2. Since Re(-i z)=Im(z) and epsilon_infinity is real, this equals omega Im(epsilon)|e|²/2, strictly positive for e≠0. The units are W/m³. Setting e=0 gives zero; static and undamped endpoints are excluded from strict positivity. This is a conditional local oscillator work calculation, not an observation, a proof of empirical validity or a time-reversal statement. The DC-dependent integrable-kernel Hilbert relation is unused. No defect found; the contract's critical-risk review is complete.
+
+## Sources and supplier boundaries
+
+Direct downloads were inspected using PyMuPDF; downloaded working copies are temporary retrieval aids, not independent acceptance receipts.
+
+- [Kong, Electromagnetic Wave Theory](https://piers.org/piers/files/BOOK_ElectromagneticWaveTheory_by_JINAUKONG_FreeRelease2021.pdf): §3.2.E, printed pp.299–300 / PDF pp.315–316, equations (3.2.15)–(3.2.26), supplies the transpose-symmetry context under the same temporal sign convention. The local finite-domain proof does not assume the source's whole-space far-field step. §3.3.E, printed pp.315–318 / PDF pp.331–334, supplies constitutive tensors and ordinary/extraordinary polarization cases. Printed p.320 / PDF p.336, equations (3.3.72)–(3.3.73), agrees exactly with the two sheets after kappa=1/epsilon_perp, kappa_z=1/epsilon_parallel and nu=1/mu. The figure on p.321 corroborates the normalized section. Nearby quarter-wave and group/energy-velocity discussions are unused; no endorsement of their generality is made.
+- [Chew, Electromagnetic Field Theory](https://engineering.purdue.edu/wcchew/ece604f23/EMFTEDX032124R.pdf): §7.1.2, printed pp.83–84 / PDF pp.99–100, supplies tensor constitutive context and the distinction between D and E directions. §§12.1–12.2, printed pp.146–149 / PDF pp.162–165, including (12.1.8)–(12.1.12) and (12.2.1), supports unconjugated tensor reciprocity and lossy symmetric media. Chew uses the opposite exp(+j omega t) convention; the local Maxwell substitution was checked independently. The obvious divergence/curl typo in Chew (12.1.5) is corrected by its subsequent equation (12.1.8); it is not imported into the local proof. No infinite-boundary cancellation is needed here.
+- [Beisert, Elektrodynamik](https://people.phys.ethz.ch/~nbeisert/lectures/ED-24FS-Skript.pdf): §12.1, printed pp.12.1–12.2 / PDF pp.142–143, especially (12.1), (12.6) and (12.9)–(12.10), checked for macroscopic Maxwell, phasor and frequency-response context only. Its group-velocity bound is unused and does not enter this review's conclusions.
+
+Exact local suppliers inspected include `def-emx-anisotropic-plane-symbol`, `def-emx-reciprocal-phasor-medium`, `def-countable-choice`, `lem-the-divergence-and-curl-of-a-cross-product`, `thm-divergence-theorem-for-bounded-c-one-euclidean-domains`, and `pthm-emx-lorentz-susceptibility`. Relevant upstream clauses in `post-em-material-closure`, `pthm-em-macroscopic-maxwell`, `def-em-plane-wave-definition`, `def-em-si-conventions` and `post-emx-lorentz-medium` were checked for formulation, smooth-source restrictions, rest frame and SI compatibility. The three imported mathematical suppliers were located in `research/math-imports.json` and left unchanged. This is a complete review of the assigned arguments and actual supplier uses, not a recursive audit of every upstream theorem or all cited books.
+
+## Records, checks and handoff
+
+There is exactly one decision, `touched:6:pthm-emx-uniaxial-dispersion`, in the task-named decisions JSON. Reader and refuter findings are empty; no fictitious decisions are added for unchanged risk carriers. Both confirmed polish issues have closed `fixed` defect-ledger rows owned at `3a-adjudicate`, with repair_confidence 1. The rank row is `physics-non-fluid-129-2026-10-21-r2-3a-batch-6-rank-clarification`. The locator row is named above. Published suppliers remain read-only, no new published defect was found, and no published-ledger entry or withdrawal is required.
+
+The cross-batch consumer input retains its three exact edges, with the oscillator example's evidence updated to the independently checked harmonic/loss clauses. `frontier-dependency-ledger.mjs refresh --run physics-non-fluid-129-2026-10-21-r2` refreshed and deduplicated the unified ledger successfully; it was not edited by hand. Public interfaces and dependency edges are unchanged, so no outside consumer repair or additional propagation is required. The reader's original current-boundary worksheet hash remains historical evidence for the original source, not a claim that the later rank elaboration existed before review.
+
+Local checks actually run, all exit 0:
+
+- `risk-report.mjs research/physics-non-fluid-129-2026-10-21-r2-batch-6.proof-contracts.json` before risk review: reciprocal theorem CRITICAL 8 and loss example CRITICAL 10. After completing both reviews, `--require-reviewed` reports 0 errors across four contracts.
+- `proof-contract.mjs research/physics-non-fluid-129-2026-10-21-r2-batch-6.proof-contracts.json --strict`: 4/4 items, 0 errors, 0 warnings.
+- `tsx-run.mjs tools/physics-support/reflow.mts` on the touched uniaxial theorem and locator-corrected reciprocity theorem: both unchanged.
+- `tsx-run.mjs tools/physics-support/precheck.mts` on the uniaxial theorem, reciprocity theorem and loss example: 3 checked, 0 failing.
+- `rendercheck.mjs` on those same three explicit carriers: YAML and KaTeX checks pass. Mathematical TikZ review is described above; no graphical compilation is claimed by this check.
+- Final `proof-layout.mjs items/pthm-emx-uniaxial-dispersion.md items/pthm-emx-lorentz-reciprocity.md`, after the last item edit and formatter: 2 items, 6 steps, 0 defects.
+
+No unresolved mathematical blocker or out-of-scope defect remains from this review. Engine decision hashing and the gate battery remain engine-owned; no stamping, self-certification, publication, commit or judge cycle was performed.

@@ -1,0 +1,250 @@
+[
+  {
+    "order": 883,
+    "id": "csm-frontier-kinetic-scaling",
+    "kind": "A",
+    "category": "classical-statistical-mechanics",
+    "library": "physics",
+    "title": "Kinetic relaxation, diffusive scaling and entropy dissipation",
+    "companion": "csm-frontier-kinetic-scaling-examples",
+    "requires": [
+      "csm-collision-transport",
+      "csm-mean-field-hierarchy",
+      "csm-frontier-probability-interfaces"
+    ],
+    "items": [
+      {
+        "id": "def-csm-frontier-two-velocity-scaling",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Two-velocity periodic diffusive-scaling model",
+        "statement": "Fix a period $L>0$ metres and let $\\mathbb T_L:=\\mathbb R/(L\\mathbb Z)$. A smooth periodic function on $\\mathbb T_L$ means an $L$-periodic $C^\\infty$ function on $\\mathbb R$. For a periodic integrable function $g$, use the normalized spatial measure $dm_L=dx/L$ on a period and write\n\n$$\\|g\\|_{2,L}^2:=\\frac1L\\int_0^L |g(x)|^2\\,dx.$$\n\nElements of $L^2(\\mathbb T_L,dm_L;\\mathbb C)$ are equivalence classes modulo equality almost everywhere. For $n\\in\\mathbb Z$, define the wave number $\\kappa_n:=2\\pi n/L$, character $e_n(x):=\\exp(i\\kappa_n x)$, and Fourier coefficient $\\widehat g(n):=L^{-1}\\int_0^L g(x)e^{-i\\kappa_nx}\\,dx$. These formulas are independent of the chosen representative of $x$ in $\\mathbb T_L$.\n\nLet $c>0$ be a speed in $\\mathrm{m\\,s^{-1}}$, let $\\lambda>0$ be a switching-rate parameter in $\\mathrm{s^{-1}}$, and let $\\epsilon>0$ be dimensionless. For smooth real initial data $f_{+,0},f_{-,0}$ on $\\mathbb T_L$, the two-velocity periodic model is the linear Cauchy problem below; when these functions represent physical densities, also require $f_{\\pm,0}\\ge0$.\n\n$$\\partial_t f_+^\\epsilon+\\frac{c}{\\epsilon}\\partial_x f_+^\\epsilon=\\frac{\\lambda}{\\epsilon^2}(f_-^\\epsilon-f_+^\\epsilon),\\qquad \\partial_t f_-^\\epsilon-\\frac{c}{\\epsilon}\\partial_x f_-^\\epsilon=\\frac{\\lambda}{\\epsilon^2}(f_+^\\epsilon-f_-^\\epsilon),\\qquad f_\\pm^\\epsilon(\\cdot,0)=f_{\\pm,0}.$$\n\nHere $x\\in\\mathbb T_L$, $t\\ge0$ is measured in seconds, and $f_\\pm$ have the units of a linear number density, $\\mathrm{m^{-1}}$. The speed magnitude is $c/\\epsilon$, and from either velocity state the rate of switching to the opposite state is $\\lambda/\\epsilon^2$. Define the total density $\\rho^\\epsilon:=f_+^\\epsilon+f_-^\\epsilon$, the flux $j^\\epsilon:=(c/\\epsilon)(f_+^\\epsilon-f_-^\\epsilon)$, and the total mass $M^\\epsilon(t):=\\int_0^L\\rho^\\epsilon(x,t)\\,dx$.",
+        "strategy": "Definition of two-velocity periodic diffusive-scaling model.",
+        "deps": [
+          "def-l-p-space-as-a-quotient-by-null-functions"
+        ],
+        "dependency_roles": {
+          "def-l-p-space-as-a-quotient-by-null-functions": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "physical_scope": null,
+        "sources": {
+          "references": [
+            {
+              "title": "Thomas Hillen and Amanda Swan, The Diffusion Limit of Transport Equations in Biology, Lecture Notes in Mathematics 2167, 2016",
+              "url": "https://www.math.ualberta.ca/~thillen/paper/HillenSwan12withStyle.pdf",
+              "locator": "§2.1, equations (8)–(13), for the two-velocity Goldstein–Kac system and its density/flux equations; §2.2 for periodic boundary conditions."
+            },
+            {
+              "title": "Thomas Hillen and Hans G. Othmer, The Diffusion Limit of Transport Equations Derived from Velocity-Jump Processes, SIAM Journal on Applied Mathematics 61(3), 2000",
+              "url": "https://www-users.cse.umn.edu/~othmer/papers/hill1.pdf",
+              "locator": "§1, equations (1.2)–(1.4), pp. 752–753: the velocity-jump model, its density/flux balance and telegraph equation."
+            },
+            {
+              "title": "Edward A. Codling, Michael J. Plank and Simon Benhamou, Random Walk Models in Biology, Journal of the Royal Society Interface 5(25), 2008",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2504494/",
+              "locator": "§2.7, equations (2.21)–(2.28): the symmetric two-velocity switching model, telegraph equation and convention for the turning rate."
+            }
+          ]
+        },
+        "dependency_level": 0,
+        "library": "physics"
+      },
+      {
+        "id": "def-csm-frontier-boltzmann-grad-scaling",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Periodic hard-sphere Boltzmann–Grad scaling convention",
+        "statement": "Fix a dimension $d\\ge2$, a period length $L>0$ metres, and an equal particle mass $m>0$ kilograms. The position space is the flat torus $\\mathbb T_L^d:=(\\mathbb R/L\\mathbb Z)^d$, with its quotient Euclidean distance. For each $N\\ge2$ under consideration, let $\\delta_N>0$ be the physical sphere diameter in metres and put $a_N:=\\delta_N/L$. An admissible configuration $(q_1,\\ldots,q_N)$ has pairwise torus distances strictly greater than $\\delta_N$. For a hard-sphere trajectory below, require $\\delta_N<L/2$; this restriction holds eventually in the scaling prescription. If two quotient displacement representatives of length $\\delta_N$ existed, their difference would be a nonzero vector in $L\\mathbb Z^d$, of length at least $L$, but the triangle inequality bounds its length by $2\\delta_N<L$; thus the contact normal is unique.\n\nA hard-sphere trajectory, when defined, has positions $q_i(t)\\in\\mathbb T_L^d$ and velocities $v_i(t)\\in\\mathbb R^d$ measured in $\\mathrm{m\\,s^{-1}}$, with time $t$ in seconds. Positions are continuous and the position and velocity paths are piecewise $C^1$. Between isolated binary contacts, $\\dot q_i=v_i$ and $\\dot v_i=0$. A binary contact of particles $i,j$ at time $t_c$ means $\\operatorname{dist}_{\\mathbb T_L^d}(q_i(t_c),q_j(t_c))=\\delta_N$, while no other pair is in contact at $t_c$. Write $v_i^-$ and $v_i^+$ for the one-sided velocity limits at the contact. Let $n$ be the unique unit vector from the centre of $j$ to the centre of $i$ along the shortest quotient displacement. The equal-mass elastic reflection rule is\n\n$$v_i^+=v_i^- -\\bigl((v_i^--v_j^-)\\cdot n\\bigr)n,\\qquad v_j^+=v_j^- +\\bigl((v_i^--v_j^-)\\cdot n\\bigr)n.$$\n\nThe Boltzmann–Grad scaling prescription is a sequence, indexed by all sufficiently large integers $N$, with $N\\to\\infty$, $a_N\\to0$, and\n\n$$N a_N^{d-1}=\\kappa$$\n\nfor a fixed dimensionless $\\kappa\\in(0,\\infty)$. Under this exact relation, $a_N=(\\kappa/N)^{1/(d-1)}\\to0$, so the trajectory restriction $\\delta_N<L/2$ holds for every sufficiently large $N$. The factor $a_N$ is the diameter measured relative to the fixed box length, so the displayed parameter is dimensionless. This is a definition of a finite hard-sphere model and a scaling prescription only; it asserts neither global existence of the hard-sphere flow nor convergence to a Boltzmann equation.",
+        "strategy": "Definition of periodic hard-sphere boltzmann–grad scaling convention.",
+        "deps": [],
+        "dependency_roles": {},
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "physical_scope": null,
+        "sources": {
+          "references": [
+            {
+              "title": "Isabelle Gallagher, Laure Saint-Raymond and Benjamin Texier, From Newton to Boltzmann: Hard Spheres and Short-Range Potentials, arXiv:1208.5753v2, 2013",
+              "url": "https://arxiv.org/pdf/1208.5753",
+              "locator": "Chapter 1, §1.0, equations (1.0.1)–(1.0.2), and §1.3, pp. 5–9: hard-sphere free flight/reflection and the N ε^(d−1) Boltzmann–Grad scaling."
+            }
+          ]
+        },
+        "dependency_level": 0,
+        "library": "physics"
+      },
+      {
+        "id": "lem-csm-frontier-two-velocity-contraction",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Well-posedness, positivity and contraction for two-velocity transport",
+        "statement": "Assume $\\mathrm{AC}_\\omega$. For every $\\epsilon>0$, $c,\\lambda,L>0$, and smooth real initial pair $(f_{+,0},f_{-,0})$ on $\\mathbb T_L$, the periodic system\n\n$$\\partial_t f_+^\\epsilon+\\frac c\\epsilon\\partial_x f_+^\\epsilon=\\frac\\lambda{\\epsilon^2}(f_-^\\epsilon-f_+^\\epsilon),\\qquad \\partial_t f_-^\\epsilon-\\frac c\\epsilon\\partial_x f_-^\\epsilon=\\frac\\lambda{\\epsilon^2}(f_+^\\epsilon-f_-^\\epsilon),\\qquad f_\\pm^\\epsilon(\\cdot,0)=f_{\\pm,0}$$\n\nhas a unique global smooth solution $(f_+^\\epsilon,f_-^\\epsilon)$. Its total mass $M^\\epsilon(t)$ is constant. If both initial densities are nonnegative, then both evolved densities are nonnegative. For any two smooth real initial pairs $F_0,G_0$, their solutions satisfy\n\n$$\\|F^\\epsilon(t)-G^\\epsilon(t)\\|_{2,L}^2\\le \\|F_0-G_0\\|_{2,L}^2\\qquad(t\\ge0),$$\n\nwhere $\\|(g_+,g_-)\\|_{2,L}^2:=L^{-1}\\int_0^L(|g_+|^2+|g_-|^2)\\,dx$. In particular, for one solution,\n\n$$\\frac{d}{dt}\\|F^\\epsilon(t)\\|_{2,L}^2=-\\frac{2\\lambda}{\\epsilon^2}\\|f_+^\\epsilon(t)-f_-^\\epsilon(t)\\|_{2,L}^2\\le0.$$",
+        "strategy": "direct",
+        "deps": [
+          "def-csm-frontier-two-velocity-scaling",
+          "thm-fourier-basis-and-parseval-on-the-n-torus",
+          "def-countable-choice",
+          "thm-ftc-second-part",
+          "lem-linear-matrix-odes-have-unique-global-solutions-on-a-given-interval",
+          "lem-exponential-series-of-a-bounded-operator",
+          "thm-euclidean-space-complete",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "def-euclidean-inner-product",
+          "def-operator-norm"
+        ],
+        "dependency_roles": {
+          "def-csm-frontier-two-velocity-scaling": "mathematical-premise",
+          "thm-fourier-basis-and-parseval-on-the-n-torus": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "thm-ftc-second-part": "mathematical-premise",
+          "lem-linear-matrix-odes-have-unique-global-solutions-on-a-given-interval": "mathematical-premise",
+          "lem-exponential-series-of-a-bounded-operator": "mathematical-premise",
+          "thm-euclidean-space-complete": "mathematical-premise",
+          "thm-cauchy-schwarz-and-the-euclidean-norm": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-operator-norm": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "physical_scope": null,
+        "sources": {
+          "references": [
+            {
+              "title": "Thomas Hillen and Amanda Swan, The Diffusion Limit of Transport Equations in Biology, Lecture Notes in Mathematics 2167, 2016",
+              "url": "https://www.math.ualberta.ca/~thillen/paper/HillenSwan12withStyle.pdf",
+              "locator": "§2.1, equations (8)–(10), for the Goldstein–Kac transport and density/flux variables; §2.2, for periodic boundary conditions."
+            },
+            {
+              "title": "Thomas Hillen and Hans G. Othmer, The Diffusion Limit of Transport Equations Derived from Velocity-Jump Processes, SIAM Journal on Applied Mathematics 61(3), 2000",
+              "url": "https://www-users.cse.umn.edu/~othmer/papers/hill1.pdf",
+              "locator": "§1, equations (1.2)–(1.3), pp. 752–753, for the two-state switching equation and its conserved density/flux balance."
+            }
+          ]
+        },
+        "dependency_level": 1,
+        "library": "physics"
+      },
+      {
+        "id": "thm-csm-frontier-two-velocity-heat-limit",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Periodic two-velocity heat limit for well-prepared data",
+        "statement": "Assume $\\mathrm{AC}_\\omega$. Fix $L>0$, $c,\\lambda>0$, and a nonnegative $\\rho_0\\in C^\\infty(\\mathbb T_L)$. For each $\\epsilon>0$, let $(f_+^\\epsilon,f_-^\\epsilon)$ solve the two-velocity periodic model with well-prepared initial data $f_+^\\epsilon(\\cdot,0)=f_-^\\epsilon(\\cdot,0)=\\rho_0/2$, and put $\\rho^\\epsilon=f_+^\\epsilon+f_-^\\epsilon$. Let $D:=c^2/(2\\lambda)$, which has units $\\mathrm{m^2\\,s^{-1}}$, and define the heat evolution\n\n$$u(t,x):=\\sum_{n\\in\\mathbb Z}\\widehat{\\rho_0}(n)e^{-D\\kappa_n^2t}e_n(x).$$\n\nThen $u$ is the smooth periodic solution of $\\partial_tu=D\\partial_x^2u$ with $u(0)=\\rho_0$, and for every finite $T>0$,\n\n$$\\lim_{\\epsilon\\downarrow0}\\sup_{0\\le t\\le T}\\|\\rho^\\epsilon(t)-u(t)\\|_{2,L}=0.$$\n\nThis conclusion concerns only the density of the stated linear two-velocity model with well-prepared data.",
+        "strategy": "direct",
+        "deps": [
+          "def-csm-frontier-two-velocity-scaling",
+          "lem-csm-frontier-two-velocity-contraction",
+          "thm-fourier-basis-and-parseval-on-the-n-torus",
+          "def-countable-choice",
+          "thm-ftc-second-part"
+        ],
+        "dependency_roles": {
+          "def-csm-frontier-two-velocity-scaling": "mathematical-premise",
+          "lem-csm-frontier-two-velocity-contraction": "mathematical-premise",
+          "thm-fourier-basis-and-parseval-on-the-n-torus": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "thm-ftc-second-part": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "physical_scope": null,
+        "sources": {
+          "references": [
+            {
+              "title": "Thomas Hillen and Amanda Swan, The Diffusion Limit of Transport Equations in Biology, Lecture Notes in Mathematics 2167, 2016",
+              "url": "https://www.math.ualberta.ca/~thillen/paper/HillenSwan12withStyle.pdf",
+              "locator": "§2.1, equations (8)–(13), for the telegraph model and diffusivity convention; §4.1–4.2, equations (21)–(25), for the formal parabolic scaling and diffusion coefficient."
+            },
+            {
+              "title": "Thomas Hillen and Hans G. Othmer, The Diffusion Limit of Transport Equations Derived from Velocity-Jump Processes, SIAM Journal on Applied Mathematics 61(3), 2000",
+              "url": "https://www-users.cse.umn.edu/~othmer/papers/hill1.pdf",
+              "locator": "§1, equations (1.2)–(1.4), pp. 752–753; §4, Theorem 4.1 and proof, pp. 768–771. The general estimate has different domain, regularity and initial-time hypotheses."
+            },
+            {
+              "title": "Edward A. Codling, Michael J. Plank and Simon Benhamou, Random Walk Models in Biology, Journal of the Royal Society Interface 5(25), 2008",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2504494/",
+              "locator": "§2.7, equations (2.23)–(2.28), and §2.8, equation (2.29), for the two-state telegraph model and the effective diffusivity; the limit discussion is a scaling argument."
+            }
+          ]
+        },
+        "dependency_level": 2,
+        "library": "physics"
+      }
+    ]
+  },
+  {
+    "order": 884,
+    "id": "csm-frontier-kinetic-scaling-examples",
+    "kind": "B",
+    "category": "classical-statistical-mechanics",
+    "library": "physics",
+    "title": "Kinetic relaxation, diffusive scaling and entropy dissipation — Examples",
+    "companion": "csm-frontier-kinetic-scaling",
+    "requires": [
+      "csm-frontier-kinetic-scaling",
+      "csm-mean-field-hierarchy"
+    ],
+    "items": [
+      {
+        "id": "ex-csm-frontier-distinct-scaling-limits",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "Distinct kinetic scaling limits",
+        "statement": "Fix an integer dimension $d\\ge2$ and a spatial side length $L>0$ in metres; compare three model families. In the smooth periodic mean-field family, $N\\ge2$ equal masses $m>0$ kilograms have positions $q_i\\in\\mathbb T_L^d$ and canonical momenta $p_i\\in\\mathbb R^d$ measured in $\\mathrm{kg\\,m\\,s^{-1}}$, and move under the Hamiltonian\n\n$$H_N=\\sum_{i=1}^N\\frac{|p_i|^2}{2m}+\\frac1N\\sum_{1\\le i<j\\le N}W(q_i-q_j),$$\n\nwhere $W\\in C^\\infty(\\mathbb T_L^d)$ is even and measured in joules. In the periodic hard-sphere family, the dimensionless diameter $a_N=\\delta_N/L$ obeys $N a_N^{d-1}=\\kappa$ for a fixed $\\kappa>0$. In the two-velocity family on $\\mathbb T_L$, the two densities have speeds $\\pm c/\\epsilon$ and switch to the opposite state at rate $\\lambda/\\epsilon^2$, with $\\epsilon\\downarrow0$; for well-prepared smooth data the density has the heat limit with $D=c^2/(2\\lambda)$.\n\nThese prescriptions use different model variables and interaction rules: respectively a smooth pair force with coefficient $1/N$, hard-core collisions with $N a_N^{d-1}$ fixed, and a two-state linear transport equation with $\\epsilon\\downarrow0$. The comparison asserts no implication among their limit theorems and no derivation of the nonlinear Boltzmann equation.",
+        "strategy": "direct",
+        "deps": [
+          "def-csm-dk-periodic-mean-field-model",
+          "def-csm-frontier-boltzmann-grad-scaling",
+          "def-csm-frontier-two-velocity-scaling",
+          "lem-csm-frontier-two-velocity-contraction",
+          "thm-csm-frontier-two-velocity-heat-limit",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "def-csm-dk-periodic-mean-field-model": "mathematical-premise",
+          "def-csm-frontier-boltzmann-grad-scaling": "mathematical-premise",
+          "def-csm-frontier-two-velocity-scaling": "mathematical-premise",
+          "lem-csm-frontier-two-velocity-contraction": "mathematical-premise",
+          "thm-csm-frontier-two-velocity-heat-limit": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "physical_scope": null,
+        "sources": {
+          "references": [
+            {
+              "title": "Edward A. Codling, Michael J. Plank and Simon Benhamou, Random Walk Models in Biology, Journal of the Royal Society Interface 5(25), 2008",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2504494/",
+              "locator": "§2.7, equations (2.21)–(2.29): two-state switching and the telegraph model's effective diffusivity."
+            },
+            {
+              "title": "Thomas Hillen and Amanda Swan, The Diffusion Limit of Transport Equations in Biology, Lecture Notes in Mathematics 2167, 2016",
+              "url": "https://www.math.ualberta.ca/~thillen/paper/HillenSwan12withStyle.pdf",
+              "locator": "§2.1, equations (8)–(13), and §4.1–4.2: the Goldstein–Kac model and formal parabolic scaling."
+            },
+            {
+              "title": "Isabelle Gallagher, Laure Saint-Raymond and Benjamin Texier, From Newton to Boltzmann: Hard Spheres and Short-Range Potentials, arXiv:1208.5753v2, 2013",
+              "url": "https://arxiv.org/pdf/1208.5753",
+              "locator": "Chapter 1, §1.0 equations (1.0.1)–(1.0.2), and §1.3, pp. 5–9: hard-sphere free flight, elastic reflection and the Boltzmann–Grad parameter."
+            }
+          ]
+        },
+        "dependency_level": 3,
+        "library": "physics"
+      }
+    ]
+  }
+]

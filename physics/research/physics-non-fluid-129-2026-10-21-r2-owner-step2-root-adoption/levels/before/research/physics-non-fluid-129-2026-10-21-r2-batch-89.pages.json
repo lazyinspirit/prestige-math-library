@@ -1,0 +1,587 @@
+[
+  {
+    "order": 875,
+    "id": "csm-frontier-critical-gaussian-rg",
+    "kind": "A",
+    "category": "classical-statistical-mechanics",
+    "library": "physics",
+    "title": "Criticality, Gaussian fields and exact block renormalization",
+    "companion": "csm-frontier-critical-gaussian-rg-examples",
+    "requires": [
+      "csm-frontier-large-deviation-ensembles",
+      "csm-frontier-quantitative-dlr",
+      "csm-exact-models",
+      "congruences-and-the-chinese-remainder-theorem",
+      "finite-fourier-analysis-and-the-fast-fourier-transform",
+      "direct-matrix-factorisations-lu-cholesky-and-qr"
+    ],
+    "items": [
+      {
+        "id": "def-csm-frontier-infinite-volume-criticality",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Infinite-volume nonanalytic-pressure criticality",
+        "statement": "Let $I\\subseteq\\mathbb R$ be a nonempty open interval of values of a scalar control parameter $\\theta$, expressed in one fixed unit if it is dimensional. A function $g:I\\to\\mathbb R$ is **real analytic** if for every $\\theta_0\\in I$ there are $\\epsilon>0$ and real coefficients $(a_k)_{k\\ge0}$ such that $(\\theta_0-\\epsilon,\\theta_0+\\epsilon)\\subseteq I$, the series $\\sum_{k=0}^{\\infty}a_k(\\theta-\\theta_0)^k$ converges there, and its sum equals $g(\\theta)$ throughout that interval. Let $(N_n)_{n\\ge1}$ be positive integers with $N_n\\to\\infty$, interpreted as finite system sizes such as site counts. A finite-volume partition-function sequence on $I$ is a sequence of real-analytic functions $Z_n:I\\to(0,\\infty)$. For each $n$, define its dimensionless log partition density per site by $p_n(\\theta):=N_n^{-1}\\log Z_n(\\theta)$, where $\\log$ is the natural logarithm. If the pointwise limit $p(\\theta):=\\lim_{n\\to\\infty}p_n(\\theta)$ exists as a finite real number for every $\\theta\\in I$, call $p$ the infinite-volume pressure associated with this sequence. A point $\\theta_c\\in I$ is critical under the nonanalytic-pressure criterion exactly when there do not exist $\\epsilon>0$ with $(\\theta_c-\\epsilon,\\theta_c+\\epsilon)\\subseteq I$ and real coefficients $(a_k)_{k\\ge0}$ such that $\\sum_{k=0}^{\\infty}a_k(\\theta-\\theta_c)^k$ converges and equals $p(\\theta)$ throughout that interval.\n\nThis definition specifies only the nonanalytic-pressure criterion and makes no claim that a particular model satisfies it.\n\n",
+        "strategy": "Explicit mathematical definition and conventions.",
+        "deps": [
+          "def-natural-logarithm"
+        ],
+        "dependency_roles": {
+          "def-natural-logarithm": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "physical_scope": null,
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Field Theory, complete Cambridge lecture notes",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/sft/sft.pdf",
+              "locator": "§1.2.3, printed pp. 16–20, on analytic finite-volume functions and possible thermodynamic-limit singularities; §§2.2.3–2.2.4 on diverging correlation length and critical scaling."
+            },
+            {
+              "title": "Sacha Friedli and Yvan Velenik, Statistical Mechanics of Lattice Systems (A Concrete Mathematical Introduction), complete book PDF",
+              "url": "https://www.unige.ch/math/folks/velenik/smbook/Statistical_Mechanics_of_Lattice_Systems.pdf",
+              "locator": "Chapter 3, §3.10, printed pp. 118–121, on finite-volume analyticity and failure of analyticity in the thermodynamic limit."
+            },
+            {
+              "title": "Hugo Touchette, The large deviation approach to statistical mechanics",
+              "url": "https://arxiv.org/pdf/0804.0327",
+              "locator": "§V.F, printed pp. 55–56 / PDF pp. 54–55, on thermodynamic limits of free-energy functions; §§V.D–V.E on canonical phase-transition qualifications."
+            }
+          ]
+        },
+        "dependency_level": 0,
+        "library": "physics"
+      },
+      {
+        "id": "def-csm-frontier-finite-gaussian-precision",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Finite Gaussian probability with a positive precision matrix",
+        "statement": "Assume the Axiom of Countable Choice: every sequence $(X_n)_{n\\in\\mathbb N}$ of nonempty sets has a function $f$ with $f(n)\\in X_n$ for every $n$. For $N\\ge1$, a real symmetric positive-definite matrix $K\\in\\mathbb R^{N\\times N}$ (meaning $z^{\\mathsf T}Kz>0$ for every nonzero $z\\in\\mathbb R^N$) defines the finite centered Gaussian probability $\\gamma_K$ on $\\mathbb R^N$ by\n\n$$Z_K:=\\int_{\\mathbb R^N}e^{-z^{\\mathsf T}Kz/2}\\,d\\lambda_N(z),\\qquad \\gamma_K(dz):=Z_K^{-1}e^{-z^{\\mathsf T}Kz/2}\\,d\\lambda_N(z).$$\n\nUnder the stated Axiom of Countable Choice, $Z_K=(2\\pi)^{N/2}(\\det K)^{-1/2}$, $\\mathbb E_{\\gamma_K}[z]=0$, and $\\operatorname{Cov}_{\\gamma_K}(z)=K^{-1}$; these identities are the positive-quadratic-form Gaussian theorem of the mathematical supplier. Here $K$ is called the precision matrix because it appears in the quadratic exponent, and the covariance is its inverse. For $N=0$, define $\\mathbb R^0$ to be the singleton containing the empty vector and define $\\gamma_{\\varnothing}$ to put mass one on that point; its partition factor and empty determinant are both $1$.\n\nThe variables $z_i$ and exponent $z^{\\mathsf T}Kz/2$ are dimensionless in this mathematical definition. In a physical quadratic model, if $\\Phi_i$ has field unit $\\Phi_*$ and $H(\\Phi)=\\frac12\\Phi^{\\mathsf T}K_{\\rm phys}\\Phi$, then each entry of $K_{\\rm phys}$ has units $\\mathrm J/(\\Phi_*)^2$. With $\\beta=(k_BT)^{-1}$ in $\\mathrm J^{-1}$ and $z_i=\\Phi_i/\\Phi_*$, the dimensionless precision is $K=\\beta\\Phi_*^2K_{\\rm phys}$. This dimensional conversion does not assert an empirical model.\n\n",
+        "strategy": "Explicit mathematical definition and conventions.",
+        "deps": [
+          "def-countable-choice",
+          "thm-csm-examples-quadratic-covariance"
+        ],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "thm-csm-examples-quadratic-covariance": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "physical_scope": null,
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Field Theory, complete Cambridge lecture notes",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/sft/sft.pdf",
+              "locator": "§2.2.1, printed pp. 41–43 / PDF pp. 44–46, finite-dimensional Gaussian integration by completing the square and the Gaussian path-integral normalization convention."
+            },
+            {
+              "title": "Sacha Friedli and Yvan Velenik, Statistical Mechanics of Lattice Systems (A Concrete Mathematical Introduction), complete book PDF",
+              "url": "https://www.unige.ch/math/folks/velenik/smbook/Statistical_Mechanics_of_Lattice_Systems.pdf",
+              "locator": "Chapter 8, §8.2, Theorem 8.4, printed pp. 385–386, Gaussian vectors and their density with positive-definite covariance."
+            }
+          ]
+        },
+        "dependency_level": 0,
+        "library": "physics"
+      },
+      {
+        "id": "lem-csm-frontier-periodic-laplacian-spectrum",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Fourier spectrum and positivity of the periodic lattice Laplacian",
+        "statement": "Let $d,L\\ge1$ be integers and let $\\Lambda_{d,L}:=(\\mathbb Z/L\\mathbb Z)^d$, where $\\mathbb Z/L\\mathbb Z$ is the quotient set of integers modulo $L$. Use the quotient addition $[a]_L+[b]_L=[a+b]_L$ and additive inverse $-[a]_L=[-a]_L$, and define these operations coordinatewise on $\\Lambda_{d,L}$. For $x\\in\\Lambda_{d,L}$, write $\\widetilde x=(\\widetilde x_1,\\ldots,\\widetilde x_d)\\in\\{0,\\ldots,L-1\\}^d$ for its unique coordinate representatives. For $1\\le j\\le d$, let $e_j\\in\\Lambda_{d,L}$ have coordinate $[1]_L$ in position $j$ and $[0]_L$ elsewhere. Count the two terms $x+e_j$ and $x-e_j$ separately even when they coincide for $L=1$ or $L=2$.\n\nFor a real-valued function $f:\\Lambda_{d,L}\\to\\mathbb R$, define\n\n$$(-\\Delta f)(x):=\\sum_{j=1}^d\\bigl(2f(x)-f(x+e_j)-f(x-e_j)\\bigr).$$\n\nFor a complex-valued function, use the same formula for $-\\Delta$, which is its complex-linear extension. Write $\\mathbb C^{\\Lambda_{d,L}}$ for the complex-valued functions on $\\Lambda_{d,L}$ with pointwise vector operations. For $r=(r_1,\\ldots,r_d)\\in\\{0,\\ldots,L-1\\}^d$, define the function $\\chi_r:\\Lambda_{d,L}\\to\\mathbb C$ by\n\n$$\\chi_r(x):=\\exp\\!\\left(\\frac{2\\pi i}{L}\\sum_{j=1}^d r_j\\widetilde x_j\\right).$$\n\nUse the inner product $\\langle f,g\\rangle:=L^{-d}\\sum_{x\\in\\Lambda_{d,L}}f(x)\\overline{g(x)}$. Identify real functions with coordinate vectors using the lexicographic order on the representatives $\\widetilde x$, and let $I_{\\Lambda_{d,L}}$ be the identity operator on those functions. A real matrix $A$ is symmetric when $A^{\\mathsf T}=A$; a real symmetric matrix is positive semidefinite when $v^{\\mathsf T}Av\\ge0$ for every real vector $v$, and positive definite when $v^{\\mathsf T}Av>0$ for every nonzero real vector $v$. For all $r,s\\in\\{0,\\ldots,L-1\\}^d$, the inner products satisfy $\\langle\\chi_r,\\chi_s\\rangle=1$ if $r=s$ and $0$ otherwise; every complex-valued function on $\\Lambda_{d,L}$ is a unique linear combination of the functions $\\chi_r$.\n\nFor each $r$, the equation $-\\Delta\\chi_r=\\lambda_r\\chi_r$ holds with $\\lambda_r:=4\\sum_{j=1}^d\\sin^2(\\pi r_j/L)$; this scalar is the eigenvalue associated with $\\chi_r$.\n\nConsequently $-\\Delta$ is real symmetric positive semidefinite, and for real $m^2>0$ and $\\kappa>0$ the matrix $m^2I_{\\Lambda_{d,L}}+\\kappa(-\\Delta)$ is real symmetric positive definite with eigenvalues $m^2+4\\kappa\\sum_{j=1}^d\\sin^2(\\pi r_j/L)>0$.\n\n",
+        "strategy": "direct",
+        "deps": [
+          "def-integers-modulo-n",
+          "thm-standard-representatives-modulo-n",
+          "def-addition-and-multiplication-modulo-n",
+          "thm-integers-modulo-n-basic-algebra",
+          "lem-orthogonality-of-characters-on-a-finite-cyclic-group",
+          "lem-finite-sum-reindexing-and-fubini",
+          "def-complex-exponential",
+          "thm-complex-exponential-addition-and-real-extension",
+          "thm-kernel-and-fibres-of-complex-exponential",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "lem-complex-conjugation-and-modulus-laws",
+          "thm-sine-and-cosine-addition-formulas",
+          "thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions"
+        ],
+        "dependency_roles": {
+          "def-integers-modulo-n": "mathematical-premise",
+          "thm-standard-representatives-modulo-n": "mathematical-premise",
+          "def-addition-and-multiplication-modulo-n": "mathematical-premise",
+          "thm-integers-modulo-n-basic-algebra": "mathematical-premise",
+          "lem-orthogonality-of-characters-on-a-finite-cyclic-group": "mathematical-premise",
+          "lem-finite-sum-reindexing-and-fubini": "mathematical-premise",
+          "def-complex-exponential": "mathematical-premise",
+          "thm-complex-exponential-addition-and-real-extension": "mathematical-premise",
+          "thm-kernel-and-fibres-of-complex-exponential": "mathematical-premise",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity": "mathematical-premise",
+          "lem-complex-conjugation-and-modulus-laws": "mathematical-premise",
+          "thm-sine-and-cosine-addition-formulas": "mathematical-premise",
+          "thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "physical_scope": null,
+        "sources": {
+          "references": [
+            {
+              "title": "Sacha Friedli and Yvan Velenik, Statistical Mechanics of Lattice Systems (A Concrete Mathematical Introduction), complete book PDF",
+              "url": "https://www.unige.ch/math/folks/velenik/smbook/Statistical_Mechanics_of_Lattice_Systems.pdf",
+              "locator": "Chapter 8, §§8.2–8.3, printed pp. 385–388, finite Gaussian fields and the discrete Laplacian/Green identities."
+            },
+            {
+              "title": "David Tong, Statistical Field Theory, complete Cambridge lecture notes",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/sft/sft.pdf",
+              "locator": "§2.2.2, printed pp. 44–46 / PDF pp. 45–47, Fourier representation of the Gaussian Green kernel."
+            }
+          ]
+        },
+        "dependency_level": 0,
+        "library": "physics"
+      },
+      {
+        "id": "lem-csm-frontier-sine-comparison",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Chord and Lipschitz bounds for sine",
+        "statement": "For $|u|\\le\\pi/2$, $2|u|/\\pi\\le|\\sin u|\\le|u|$. For all real $u,v$, $|\\sin u-\\sin v|\\le|u-v|$.\n\n",
+        "strategy": "direct",
+        "deps": [
+          "thm-sine-and-cosine-derivatives",
+          "thm-algebra-of-derivatives",
+          "lem-derivative-of-a-power",
+          "cor-differentiable-implies-continuous",
+          "cor-mean-value-theorem",
+          "thm-sine-cosine-signs-monotonicity-and-ranges",
+          "thm-quarter-turn-values-and-shift-formulas",
+          "thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions"
+        ],
+        "dependency_roles": {
+          "thm-sine-and-cosine-derivatives": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "lem-derivative-of-a-power": "mathematical-premise",
+          "cor-differentiable-implies-continuous": "mathematical-premise",
+          "cor-mean-value-theorem": "mathematical-premise",
+          "thm-sine-cosine-signs-monotonicity-and-ranges": "mathematical-premise",
+          "thm-quarter-turn-values-and-shift-formulas": "mathematical-premise",
+          "thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "physical_scope": null,
+        "sources": {
+          "references": [
+            {
+              "title": "NIST Digital Library of Mathematical Functions, Chapter 4, §4.18 Inequalities",
+              "url": "https://dlmf.nist.gov/4.18",
+              "locator": "Equations 4.18.1 and 4.18.3: Jordan's chord inequality and the sine-to-argument bounds; the global Lipschitz estimate is proved locally from the mean value theorem."
+            }
+          ]
+        },
+        "dependency_level": 0,
+        "library": "physics"
+      },
+      {
+        "id": "lem-csm-frontier-schur-complement-positive",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Positive Schur complements for finite Gaussian precisions",
+        "statement": "Let $r\\ge0$ and $s\\ge1$ be integers, and let\n\n$$K=\\begin{pmatrix}A&B\\\\B^{\\mathsf T}&C\\end{pmatrix}\\in\\mathbb R^{(r+s)\\times(r+s)}$$\n\nbe symmetric positive definite, with $A\\in\\mathbb R^{r\\times r}$ and $C\\in\\mathbb R^{s\\times s}$. Then $C$ is symmetric positive definite, $\\det C>0$, and $C^{-1}$ exists. The Schur complement $S:=A-BC^{-1}B^{\\mathsf T}$ is symmetric positive definite when $r\\ge1$; when $r=0$, $S$ is the empty $0\\times0$ matrix. For all $x\\in\\mathbb R^r$ and $y\\in\\mathbb R^s$,\n\n$$\\begin{pmatrix}x\\\\y\\end{pmatrix}^{\\mathsf T}K\\begin{pmatrix}x\\\\y\\end{pmatrix}=x^{\\mathsf T}Sx+(y+C^{-1}B^{\\mathsf T}x)^{\\mathsf T}C(y+C^{-1}B^{\\mathsf T}x).$$\n\nFor $r=0$, the first term and $S$ are interpreted on the singleton space $\\mathbb R^0$.\n\n",
+        "strategy": "direct",
+        "deps": [
+          "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique",
+          "thm-determinant-of-a-triangular-matrix",
+          "thm-determinant-multiplicative",
+          "thm-real-square-matrix-invertible-iff-determinant-nonzero"
+        ],
+        "dependency_roles": {
+          "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique": "mathematical-premise",
+          "thm-determinant-of-a-triangular-matrix": "mathematical-premise",
+          "thm-determinant-multiplicative": "mathematical-premise",
+          "thm-real-square-matrix-invertible-iff-determinant-nonzero": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "physical_scope": null,
+        "sources": {
+          "references": [
+            {
+              "title": "MIT OpenCourseWare, 2.154 Maneuvering and Control, lecture notes",
+              "url": "https://ocw.mit.edu/courses/2-154-maneuvering-and-control-of-surface-and-underwater-vehicles-13-49-fall-2004/2609f8b1bdebe4566891080afe007f51_1349_notes.pdf",
+              "locator": "§§25.1.4–25.1.5, printed pp. 135–136 / PDF pp. 141–142, block Schur complements and the congruence proof of positive-definite sign."
+            },
+            {
+              "title": "Nick Higham, What Is the Schur Complement of a Matrix?",
+              "url": "https://nhigham.com/2023/06/01/what-is-the-schur-complement-of-a-matrix/",
+              "locator": "Block factorization and positive-definite Schur-complement criterion; the present statement fixes the real symmetric convention used here."
+            }
+          ]
+        },
+        "dependency_level": 0,
+        "library": "physics"
+      },
+      {
+        "id": "lem-csm-frontier-massless-torus-normalization-diverges",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Unconstrained massless periodic Gaussian has infinite normalizer",
+        "statement": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$. Let $d,L\\ge1$ be integers, let $\\Lambda_{d,L}=(\\mathbb Z/L\\mathbb Z)^d$ have $N=L^d$ sites, and let $\\kappa>0$. Define the zero-mass precision $K:=\\kappa(-\\Delta)$ on $\\mathbb R^{\\Lambda_{d,L}}$, with the periodic Laplacian convention of [[lem-csm-frontier-periodic-laplacian-spectrum]]. Then the unrestricted Lebesgue normalizer diverges:\n\n$$\\int_{\\mathbb R^{\\Lambda_{d,L}}}\\exp\\!\\left(-\\frac12z^{\\mathsf T}Kz\\right)\\,d\\lambda_N(z)=+\\infty.$$\n\nThus this quadratic weight does not define a probability density on the full coordinate space. A finite-volume massless Gaussian must first restrict the field, for example to $\\{z:\\sum_{x\\in\\Lambda_{d,L}}z_x=0\\}$, before inverting the Laplacian.\n\n",
+        "strategy": "direct",
+        "deps": [
+          "lem-csm-frontier-periodic-laplacian-spectrum",
+          "def-countable-choice",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "def-nonnegative-lebesgue-integral",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-monotone-convergence-for-the-integral",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral"
+        ],
+        "dependency_roles": {
+          "lem-csm-frontier-periodic-laplacian-spectrum": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra": "mathematical-premise",
+          "def-nonnegative-lebesgue-integral": "mathematical-premise",
+          "thm-lebesgue-measure-of-a-box-of-every-kind": "mathematical-premise",
+          "thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets": "mathematical-premise",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions": "mathematical-premise",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces": "mathematical-premise",
+          "thm-monotone-convergence-for-the-integral": "mathematical-premise",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "physical_scope": null,
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Field Theory, complete Cambridge lecture notes",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/sft/sft.pdf",
+              "locator": "§2.2.1, printed pp. 41–43 / PDF pp. 44–46, finite-dimensional Gaussian integration and normalization conventions."
+            },
+            {
+              "title": "Sacha Friedli and Yvan Velenik, Statistical Mechanics of Lattice Systems (A Concrete Mathematical Introduction), complete book PDF",
+              "url": "https://www.unige.ch/math/folks/velenik/smbook/Statistical_Mechanics_of_Lattice_Systems.pdf",
+              "locator": "Chapter 8, §8.1, printed pp. 380–382, Remark 8.2 and Exercise 8.2 on zero modes and massless free or periodic boundary conditions."
+            }
+          ]
+        },
+        "dependency_level": 1,
+        "library": "physics"
+      },
+      {
+        "id": "def-csm-frontier-gaussian-lattice",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Finite periodic Gaussian lattice field with positive mass",
+        "statement": "Assume the Axiom of Countable Choice from [[def-countable-choice]]. Let integers $d,L\\ge1$ specify the periodic lattice $\\Lambda_{d,L}=(\\mathbb Z/L\\mathbb Z)^d$ and let $m^2>0$ and $\\kappa>0$ be dimensionless real parameters in lattice units. On the real coordinate space $\\mathbb R^{\\Lambda_{d,L}}$, let\n\n$$K_{d,L,m,\\kappa}:=m^2I+\\kappa(-\\Delta),$$\n\nwhere $-\\Delta$ is the periodic Laplacian of [[lem-csm-frontier-periodic-laplacian-spectrum]]. Its eigenvalues are\n\n$$m^2+4\\kappa\\sum_{j=1}^d\\sin^2(\\pi r_j/L),\\qquad r\\in\\{0,\\ldots,L-1\\}^d,$$\n\nso it is symmetric positive definite. The finite periodic Gaussian lattice field is the centered probability $\\gamma_{K_{d,L,m,\\kappa}}$ of [[def-csm-frontier-finite-gaussian-precision]], with density proportional to $\\exp(-z^{\\mathsf T}K_{d,L,m,\\kappa}z/2)$ against Lebesgue measure on $\\mathbb R^{L^d}$ and covariance $K_{d,L,m,\\kappa}^{-1}$ by [[thm-csm-examples-quadratic-covariance]] at $\\beta=1$.\n\nThe lattice coordinates $z_x$ and the quadratic exponent are dimensionless. A physical model may set $z_x=\\Phi_x/\\Phi_*$ and divide its energy by $k_BT$, where $\\Phi_*$ is a declared field unit and $T>0$ is temperature; this definition itself makes no empirical claim. At $m^2=0$, the constant field is a zero mode and the unrestricted normalizer diverges by [[lem-csm-frontier-massless-torus-normalization-diverges]], so the full-space positive-precision definition does not apply. A finite-volume massless model must first specify a restriction such as the subspace $\\sum_{x\\in\\Lambda_{d,L}}z_x=0$ before inverting the Laplacian.\n\n",
+        "strategy": "Explicit mathematical definition and conventions.",
+        "deps": [
+          "def-countable-choice",
+          "lem-csm-frontier-periodic-laplacian-spectrum",
+          "lem-csm-frontier-massless-torus-normalization-diverges",
+          "def-csm-frontier-finite-gaussian-precision",
+          "thm-csm-examples-quadratic-covariance"
+        ],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "lem-csm-frontier-periodic-laplacian-spectrum": "mathematical-premise",
+          "lem-csm-frontier-massless-torus-normalization-diverges": "mathematical-premise",
+          "def-csm-frontier-finite-gaussian-precision": "mathematical-premise",
+          "thm-csm-examples-quadratic-covariance": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "physical_scope": null,
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Field Theory, complete Cambridge lecture notes",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/sft/sft.pdf",
+              "locator": "§2.2.2, printed pp. 44–46 / PDF pp. 45–47, lattice Fourier Green functions and massive Gaussian covariance."
+            },
+            {
+              "title": "Sacha Friedli and Yvan Velenik, Statistical Mechanics of Lattice Systems (A Concrete Mathematical Introduction), complete book PDF",
+              "url": "https://www.unige.ch/math/folks/velenik/smbook/Statistical_Mechanics_of_Lattice_Systems.pdf",
+              "locator": "Chapter 8, §§8.2–8.3, printed pp. 385–389, finite Gaussian fields, discrete Laplacians and Green functions."
+            }
+          ]
+        },
+        "dependency_level": 2,
+        "library": "physics"
+      },
+      {
+        "id": "thm-csm-frontier-gaussian-massless-dimension",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Dimension threshold for the infinite-lattice massless Gaussian Green integral",
+        "statement": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$, meaning every sequence $(X_n)_{n\\in\\mathbb N}$ of nonempty sets has a function $f$ with $f(n)\\in X_n$ for every $n$. For integer $d\\ge1$, coupling $\\kappa>0$, and $k=(k_1,\\ldots,k_d)\\in[-\\pi,\\pi]^d$, put\n\n$$D_d(k):=4\\sum_{j=1}^d\\sin^2(k_j/2).$$\n\nHere $\\lambda_d$ is $d$-dimensional Lebesgue measure restricted to the cube. For a measurable function $h:[-\\pi,\\pi]^d\\to\\mathbb R$, write $h^+=\\max\\{h,0\\}$ and $h^-=\\max\\{-h,0\\}$; its signed Lebesgue integral is $\\int h^+\\,d\\lambda_d-\\int h^-\\,d\\lambda_d$ when at most one of these two integrals is infinite, and $h$ is integrable when $\\int |h|\\,d\\lambda_d<+\\infty$. For $x\\in\\mathbb Z^d$, define the massless infinite-lattice Green integral when it is finite by\n\n$$G_{d,\\kappa}(x):=(2\\pi)^{-d}\\int_{[-\\pi,\\pi]^d}\\frac{\\cos(k\\cdot x)}{\\kappa D_d(k)}\\,d\\lambda_d(k),$$\n\nwhere the integrand is assigned value $0$ at $k=0$, a choice that does not affect the integral because a singleton has Lebesgue measure zero. If $d>2$, this integral is absolutely finite for every fixed $x\\in\\mathbb Z^d$. If $1\\le d\\le2$, the nonnegative diagonal integral with $x=0$ is $+\\infty$. Thus the dimension threshold concerns this free Gaussian Fourier integral; it does not assert an interacting critical exponent or a continuum scaling limit.\n\n",
+        "strategy": "direct",
+        "deps": [
+          "def-csm-frontier-gaussian-lattice",
+          "lem-csm-frontier-sine-comparison",
+          "def-countable-choice",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "def-nonnegative-lebesgue-integral",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "thm-continuous-preimages-of-borel-sets-are-borel",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "cor-additivity-of-the-nonnegative-lebesgue-integral",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-geometric-series",
+          "thm-sine-cosine-signs-monotonicity-and-ranges"
+        ],
+        "dependency_roles": {
+          "def-csm-frontier-gaussian-lattice": "mathematical-premise",
+          "lem-csm-frontier-sine-comparison": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra": "mathematical-premise",
+          "def-nonnegative-lebesgue-integral": "mathematical-premise",
+          "def-integrable-real-and-complex-functions-and-their-integrals": "mathematical-premise",
+          "thm-lebesgue-measure-of-a-box-of-every-kind": "mathematical-premise",
+          "thm-continuous-preimages-of-borel-sets-are-borel": "mathematical-premise",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral": "mathematical-premise",
+          "cor-additivity-of-the-nonnegative-lebesgue-integral": "mathematical-premise",
+          "thm-monotone-convergence-for-the-integral": "mathematical-premise",
+          "thm-geometric-series": "mathematical-premise",
+          "thm-sine-cosine-signs-monotonicity-and-ranges": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "physical_scope": null,
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Field Theory, complete Cambridge lecture notes",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/sft/sft.pdf",
+              "locator": "§2.2.2, printed pp. 44–46 / PDF pp. 45–47, Fourier representation of the lattice Gaussian Green function and its low-momentum denominator."
+            },
+            {
+              "title": "Sacha Friedli and Yvan Velenik, Statistical Mechanics of Lattice Systems (A Concrete Mathematical Introduction), complete book PDF",
+              "url": "https://www.unige.ch/math/folks/velenik/smbook/Statistical_Mechanics_of_Lattice_Systems.pdf",
+              "locator": "Chapter 8, §§8.2–8.4, printed pp. 385–395, discrete Green kernels and dimension-dependent finiteness."
+            }
+          ]
+        },
+        "dependency_level": 3,
+        "library": "physics"
+      },
+      {
+        "id": "alg-csm-frontier-gaussian-block-rg",
+        "kind": "algorithm",
+        "domain": "mathematics",
+        "title": "Exact finite Gaussian block elimination",
+        "statement": "",
+        "strategy": "direct",
+        "deps": [
+          "def-csm-frontier-finite-gaussian-precision",
+          "lem-csm-frontier-schur-complement-positive",
+          "def-natural-logarithm"
+        ],
+        "dependency_roles": {
+          "def-csm-frontier-finite-gaussian-precision": "mathematical-premise",
+          "lem-csm-frontier-schur-complement-positive": "mathematical-premise",
+          "def-natural-logarithm": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "physical_scope": null,
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Field Theory, complete Cambridge lecture notes",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/sft/sft.pdf",
+              "locator": "§3.2, printed pp. 63–69 / PDF pp. 67–73, exact integration over Gaussian modes and resulting effective quadratic form."
+            },
+            {
+              "title": "MIT OpenCourseWare, 2.154 Maneuvering and Control, lecture notes",
+              "url": "https://ocw.mit.edu/courses/2-154-maneuvering-and-control-of-surface-and-underwater-vehicles-13-49-fall-2004/2609f8b1bdebe4566891080afe007f51_1349_notes.pdf",
+              "locator": "§§25.1.4–25.1.5, printed pp. 135–136 / PDF pp. 141–142, block partitioning and positive Schur complements."
+            }
+          ]
+        },
+        "dependency_level": 3,
+        "library": "physics"
+      },
+      {
+        "id": "thm-csm-frontier-gaussian-block-rg-correct",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Correctness of finite Gaussian block elimination",
+        "statement": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ and the hypotheses of [[alg-csm-frontier-gaussian-block-rg]] with input $K_0$ and retained sets $R_0,\\ldots,R_q$. Let $K_j,C_j,\\ell_j$ be the algorithm outputs. At each stage write $E_j=R_{j-1}\\setminus R_j$, and use the empty-set conventions of the algorithm. Then the algorithm terminates after $q$ stages, every nonempty retained precision $K_j$ is positive definite, and for every fixed retained vector $x\\in\\mathbb R^{R_q}$,\n\n$$\\int_{\\mathbb R^{\\bigcup_{j=1}^q E_j}}\\exp\\!\\left(-\\frac12 \\widetilde z(x,y)^{\\mathsf T}K_0\\widetilde z(x,y)\\right)\\,d\\lambda(y) =\\exp\\!\\left(\\sum_{j=1}^q\\ell_j\\right)\\exp\\!\\left(-\\frac12x^{\\mathsf T}K_qx\\right),$$\n\nwhere $y$ lists the eliminated coordinates in increasing order, $\\widetilde z(x,y)\\in\\mathbb R^{R_0}$ is the unique full coordinate vector agreeing with $x$ on $R_q$ and with $y$ on $R_0\\setminus R_q$, and $\\lambda$ is Euclidean Lebesgue measure in that finite-dimensional space. If $R_q\\ne\\varnothing$, the normalized marginal law of the retained coordinates under $\\gamma_{K_0}$ is exactly $\\gamma_{K_q}$; if $R_q=\\varnothing$, the final retained space is the singleton $\\mathbb R^0$ and the identity gives $Z_{K_0}=\\exp(\\sum_j\\ell_j)$. In all cases,\n\n$$\\ln Z_{K_0}=\\sum_{j=1}^q\\ell_j+\\ln Z_{K_q},$$\n\nwith $Z_{K_q}=1$ under the empty-space convention. These are exact finite-dimensional Gaussian identities and make no approximation or empirical claim.\n\n",
+        "strategy": "direct",
+        "deps": [
+          "alg-csm-frontier-gaussian-block-rg",
+          "def-csm-frontier-finite-gaussian-precision",
+          "thm-csm-examples-quadratic-covariance",
+          "lem-csm-frontier-schur-complement-positive",
+          "def-countable-choice",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "def-nonnegative-lebesgue-integral",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets",
+          "thm-natural-logarithm-laws",
+          "thm-complex-exponential-addition-and-real-extension"
+        ],
+        "dependency_roles": {
+          "alg-csm-frontier-gaussian-block-rg": "mathematical-premise",
+          "def-csm-frontier-finite-gaussian-precision": "mathematical-premise",
+          "thm-csm-examples-quadratic-covariance": "mathematical-premise",
+          "lem-csm-frontier-schur-complement-positive": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions": "mathematical-premise",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces": "mathematical-premise",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra": "mathematical-premise",
+          "def-nonnegative-lebesgue-integral": "mathematical-premise",
+          "thm-lebesgue-measure-of-a-box-of-every-kind": "mathematical-premise",
+          "thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets": "mathematical-premise",
+          "thm-natural-logarithm-laws": "mathematical-premise",
+          "thm-complex-exponential-addition-and-real-extension": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "physical_scope": null,
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Field Theory, complete Cambridge lecture notes",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/sft/sft.pdf",
+              "locator": "§3.2, printed pp. 63–69 / PDF pp. 67–73, Gaussian integration over eliminated modes and the resulting effective action."
+            },
+            {
+              "title": "Sacha Friedli and Yvan Velenik, Statistical Mechanics of Lattice Systems (A Concrete Mathematical Introduction), complete book PDF",
+              "url": "https://www.unige.ch/math/folks/velenik/smbook/Statistical_Mechanics_of_Lattice_Systems.pdf",
+              "locator": "Chapter 8, §§8.2–8.4, printed pp. 385–395, finite Gaussian normalization and Green-kernel covariance."
+            },
+            {
+              "title": "MIT OpenCourseWare, 2.154 Maneuvering and Control, lecture notes",
+              "url": "https://ocw.mit.edu/courses/2-154-maneuvering-and-control-of-surface-and-underwater-vehicles-13-49-fall-2004/2609f8b1bdebe4566891080afe007f51_1349_notes.pdf",
+              "locator": "§§25.1.4–25.1.5, printed pp. 135–136 / PDF pp. 141–142, completion-of-square and Schur-complement positivity."
+            }
+          ]
+        },
+        "dependency_level": 4,
+        "library": "physics"
+      },
+      {
+        "id": "lem-csm-frontier-quartic-engineering-scaling",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Engineering scaling of the Gaussian gradient and quartic actions",
+        "statement": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$, meaning every sequence $(X_n)_{n\\in\\mathbb N}$ of nonempty sets has a function $f$ with $f(n)\\in X_n$ for every $n$. Let integer $d\\ge1$, dimensionless scale factor $b>0$, and real smooth compactly supported field $\\varphi'\\in C_c^\\infty(\\mathbb R^d)$ be given. Define\n\n$$\\varphi_b(x):=b^{-(d-2)/2}\\varphi'(x/b),\\qquad x\\in\\mathbb R^d.$$\n\nFor a real smooth compactly supported field $\\psi$, define its Gaussian gradient action and quartic integral by\n\n$$S_2[\\psi]:=\\frac12\\int_{\\mathbb R^d}|\\nabla\\psi(x)|^2\\,d\\lambda_d(x),\\qquad Q_4[\\psi]:=\\frac1{4!}\\int_{\\mathbb R^d}\\psi(x)^4\\,d\\lambda_d(x),$$\n\nwhere $\\nabla$ is the vector of first partial derivatives. Then\n\n$$S_2[\\varphi_b]=S_2[\\varphi'],\\qquad Q_4[\\varphi_b]=b^{4-d}Q_4[\\varphi'].$$\n\nConsequently a coefficient $g$ multiplying $Q_4$ transforms to $g'=b^{4-d}g$ when the action is re-expressed in the rescaled coordinate $x'=x/b$. This is engineering power counting on smooth test fields; it neither constructs an interacting probability measure nor proves an interacting critical exponent.\n\n",
+        "strategy": "direct",
+        "deps": [
+          "def-countable-choice",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "thm-chain-rule"
+        ],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions": "mathematical-premise",
+          "thm-chain-rule": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "physical_scope": null,
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Field Theory, complete Cambridge lecture notes",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/sft/sft.pdf",
+              "locator": "§§3.1–3.2, printed pp. 59–69 / PDF pp. 63–73, Gaussian scaling dimensions and engineering power counting."
+            }
+          ]
+        },
+        "dependency_level": 0,
+        "library": "physics"
+      }
+    ]
+  },
+  {
+    "order": 876,
+    "id": "csm-frontier-critical-gaussian-rg-examples",
+    "kind": "B",
+    "category": "classical-statistical-mechanics",
+    "library": "physics",
+    "title": "Criticality, Gaussian fields and exact block renormalization — Examples",
+    "companion": "csm-frontier-critical-gaussian-rg",
+    "requires": [
+      "csm-frontier-critical-gaussian-rg"
+    ],
+    "items": [
+      {
+        "id": "ex-csm-frontier-rg-generates-couplings",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "Exact elimination of a Gaussian star generates pair couplings",
+        "statement": "Assume $\\mathrm{AC}_\\omega$ and let integer $n\\ge2$. Let $\\mathbf1_n\\in\\mathbb R^n$ have every coordinate equal to $1$, and define the precision matrix on $n$ leaf variables and one central variable by\n\n$$K_n:=\\begin{pmatrix}2nI_n&\\mathbf1_n\\\\\\mathbf1_n^{\\mathsf T}&1\\end{pmatrix}.$$\n\nThis matrix is positive definite, so it defines a finite centered Gaussian law with precision $K_n$. Its leaf-to-leaf precision entries are initially zero for distinct leaves. Eliminating the central coordinate exactly gives leaf precision\n\n$$K_{\\mathrm{leaf}}=2nI_n-\\mathbf1_n\\mathbf1_n^{\\mathsf T},$$\n\nwhose off-diagonal entry is $-1$ for every pair of distinct leaves. Thus one exact Gaussian block step creates a nonzero pair interaction between every two leaves, even though those pairs had no direct precision entry in the original star.\n\n",
+        "strategy": "direct",
+        "deps": [
+          "thm-csm-frontier-gaussian-block-rg-correct",
+          "def-csm-frontier-finite-gaussian-precision",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "thm-csm-frontier-gaussian-block-rg-correct": "mathematical-premise",
+          "def-csm-frontier-finite-gaussian-precision": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "physical_scope": null,
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Field Theory, complete Cambridge lecture notes",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/sft/sft.pdf",
+              "locator": "§3.2, printed pp. 63–69 / PDF pp. 67–73, integration of Gaussian modes and induced effective couplings."
+            },
+            {
+              "title": "MIT OpenCourseWare, 2.154 Maneuvering and Control, lecture notes",
+              "url": "https://ocw.mit.edu/courses/2-154-maneuvering-and-control-of-surface-and-underwater-vehicles-13-49-fall-2004/2609f8b1bdebe4566891080afe007f51_1349_notes.pdf",
+              "locator": "§§25.1.4–25.1.5, printed pp. 135–136 / PDF pp. 141–142, Schur-complement formula."
+            }
+          ]
+        },
+        "dependency_level": 5,
+        "library": "physics"
+      }
+    ]
+  }
+]

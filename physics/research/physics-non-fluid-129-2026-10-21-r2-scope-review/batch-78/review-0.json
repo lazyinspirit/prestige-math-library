@@ -1,0 +1,62 @@
+{
+  "version": 1,
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "batch": "78",
+  "round": 0,
+  "reviewed_items": [
+    "def-qftx-finite-groupoid-integration",
+    "def-qftx-finite-homotopy-pullback",
+    "def-qftx-finite-flat-connection-groupoid",
+    "lem-qftx-finite-groupoid-push-pull-fubini",
+    "thm-qftx-finite-bf-topological-invariance",
+    "def-qftx-finite-bordism-state-span",
+    "lem-qftx-finite-groupoid-gluing-descent",
+    "thm-qftx-finite-groupoid-gluing",
+    "ex-qftx-finite-bf-three-torus"
+  ],
+  "reviewed_pages": [
+    "qftx-finite-group-bf",
+    "qftx-finite-group-bf-examples"
+  ],
+  "decision": "repair",
+  "reason": "The full batch, approved scope, and actual supplier proofs were reviewed. Local repairs can resolve the remaining proof and convention gaps while preserving the approved claims.",
+  "findings": [
+    {
+      "id": "lem-qftx-finite-groupoid-push-pull-fubini",
+      "type": "local",
+      "reason": "Proof steps 2.2–3.1 do not complete the adjoint calculation: step 1.2 proves an integration identity, but the proof does not expand the matching a-fiber sum or justify pulling the conjugated function through that fiber; step 3.1 then calls step 1.2 itself the adjoint identity. Add the two fiber-sum equalities or the required projection-formula calculation. The statement is sound."
+    },
+    {
+      "id": "thm-qftx-finite-bf-topological-invariance",
+      "type": "prerequisite",
+      "reason": "The restriction-naturality claim in the Statement and proof step 2.1 uses induced fundamental-group maps without declaring or defining that supplier, and its hypotheses do not specify connected subcomplexes, basepoints, and base paths. Also, step 5.1 proves product groupoids and cardinalities for disconnected complexes, but not the componentwise representation-groupoid equivalence used by the cylinder consumer. Add the exact induced-map supplier or prove it locally, qualify the naturality data, and establish the productwise equivalence without narrowing the disconnected claim."
+    },
+    {
+      "id": "def-qftx-finite-bordism-state-span",
+      "type": "local",
+      "reason": "The Definition says manifold orientation reversal replaces each fixed oriented edge label by its inverse. For nonabelian G this is not gauge-equivariant with unchanged edge directions: the inverse of h_t g_e h_s^{-1} is h_s g_e^{-1} h_t^{-1}, unlike the stated action on g_e^{-1}. Specify whether edge directions are reoriented (with source and target swapped) or retained (with the same underlying groupoid), and make the incoming restriction r_0 use the resulting functor."
+    },
+    {
+      "id": "thm-qftx-finite-groupoid-gluing",
+      "type": "prerequisite",
+      "reason": "Step 1.2 applies the connected-case representation-groupoid equivalence to Σ, which may be disconnected, and infers that each cylinder restriction is an equivalence without showing the induced π1 map is an isomorphism. Use the componentwise extension above and show each end inclusion is a based deformation retract on every component; the published thm-induced-fundamental-group-map-functoriality supplies the needed based homotopy and functoriality and should be declared or replaced by a complete local proof. Step 1.4 also needs the corrected orientation convention from def-qftx-finite-bordism-state-span."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "lem-qftx-finite-groupoid-gluing-descent",
+      "decision": "accept",
+      "reason": "Its actual use of def-qftx-finite-bordism-state-span is only that boundary restriction is a functor; its proof does not use the orientation-inversion clause."
+    },
+    {
+      "id": "thm-qftx-finite-groupoid-gluing",
+      "decision": "repair",
+      "reason": "Its steps 1.2 and 1.4 use the connected restriction and orientation claims identified above, so they need review and correction against the repaired supplier statements."
+    },
+    {
+      "id": "ex-qftx-finite-bf-three-torus",
+      "decision": "accept",
+      "reason": "It uses the connected partition-function formula and CW presentation with matching hypotheses; the restriction-naturality and bordism-orientation repairs do not affect its argument."
+    }
+  ]
+}

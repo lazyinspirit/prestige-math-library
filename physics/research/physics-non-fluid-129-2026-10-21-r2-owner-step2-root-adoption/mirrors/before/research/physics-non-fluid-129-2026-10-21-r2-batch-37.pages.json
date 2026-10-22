@@ -1,0 +1,290 @@
+[
+  {
+    "order": 771,
+    "id": "gr-fx09-bootstrap-and-stability-boundaries",
+    "kind": "A",
+    "category": "general-relativity",
+    "library": "physics",
+    "title": "Bootstrap closure and nonlinear stability boundaries",
+    "companion": "gr-fx09-bootstrap-and-stability-boundaries-examples",
+    "requires": [
+      "gr-fx03-geometric-cauchy-stability",
+      "gr-fx08-wave-energy-and-black-hole-perturbations"
+    ],
+    "items": [
+      {
+        "id": "def-gr-fx-bootstrap-continuation-contract",
+        "kind": "definition",
+        "domain": "mathematics",
+        "library": "physics",
+        "title": "A quantitative continuation and bootstrap contract",
+        "reference": "prose-scaffold.md (FX09)",
+        "dependency_level": 2,
+        "deps": [
+          "thm-gr-fx-finite-slab-stability",
+          "def-gr-fx-fixed-gauge-data-topology"
+        ],
+        "dependency_roles": {
+          "thm-gr-fx-finite-slab-stability": "mathematical-premise",
+          "def-gr-fx-fixed-gauge-data-topology": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Fix one evolution problem, its state space and its declared classical solution class. For the general-relativity application here, use one fixed periodic symmetric-hyperbolic system on $\\mathbb T^3_{2\\pi}$ with integer regularity $s\\ge5$, a fixed gauge, smooth coefficient maps on an open state domain, symmetric principal matrices and a positive time matrix. On each compact time slab, its normalized state $u$ belongs to $L^\\infty H^s\\cap C^0H^{s-1}$ and has $\\partial_tu\\in L^\\infty H^{s-1}$, with the fixed-gauge data and coefficient bounds specified in the references below.\n\nA forward solution on $[0,T_{\\max})$ is **maximal** in this solution class when no solution on $[0,T_{\\max}+\\rho)$, for any $\\rho>0$, agrees with it on $[0,T_{\\max})$. Let $E_{\\rm raw}$ be a specified nonnegative scalar functional of the solution, continuous on every compact subinterval of $[0,T_{\\max})$. If $E_{\\rm raw}$ has units, choose a fixed positive scale $E_*$ with the same units and set $E=E_{\\rm raw}/E_*$. In the general-relativity convention the time coordinate is $x^0=ct_{\\rm phys}$ in metres; choose a fixed length scale $L_*>0$ and use the dimensionless time $t=x^0/L_*$. Thus $E$ and $t$ are dimensionless. The constants $A$, $\\epsilon$ and $\\eta$ below are dimensionless as well. In a purely mathematical application, take these variables as real scalars without a physical interpretation.\n\nSpecify a finite list of dimensionless margin functions $m_j:[0,T_{\\max})\\to\\mathbb R$ and thresholds $\\mu_j>0$. Write $\\mathcal M(T)$ when $m_j(t)\\ge\\mu_j$ for every listed $j$ and every $0\\le t<T$. The **continuation criterion** is a separate result for the chosen evolution problem: if a solution has a finite right endpoint $T$ with $E(t)\\le\\eta$ for every $0\\le t<T$ and $\\mathcal M(T)$, then it extends past $T$ in the same solution class.\n\nFor constants $A>0$, $\\epsilon>0$ and $\\eta>0$ with $2A\\epsilon^2<\\eta$, a **bootstrap estimate** is the implication, required on every finite $T<T_{\\max}$,\n\n$$\\left[ E(t)\\le2A\\epsilon^2\\text{ for all }0\\le t\\le T\\right]\\quad\\Longrightarrow\\quad\\left[ E(t)\\le A\\epsilon^2\\text{ for all }0\\le t\\le T\\right].$$\n\nThis contract records the continuity and continuation inputs needed by an application. It does not itself prove the bootstrap estimate, the margin bounds, or any Einstein evolution estimate.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "G. Métivier, The Mathematics of Nonlinear Optics (2009), Chapter 3, §§3.3–3.5, PDF pp. 23–29: symmetric-hyperbolic existence, stability, continuation and a bootstrap-continuation implication",
+              "url": "https://www.math.u-bordeaux.fr/~gmetivie/NLO2008.pdf"
+            },
+            {
+              "title": "Qian Wang, Lectures on Nonlinear Wave Equations (2015), §6.3, proof of Theorem 22, PDF pp. 174–186: continuity method, decay estimates and continuation",
+              "url": "https://people.maths.ox.ac.uk/wangq1/Lecture_notes/nonlinear_wave_9.pdf"
+            },
+            {
+              "title": "S. Klainerman and J. Szeftel, Kerr stability for small angular momentum, arXiv:2104.11857v1 (2021), abstract and §1.2.1, PDF pp. 2 and 22–24",
+              "url": "https://arxiv.org/pdf/2104.11857"
+            },
+            {
+              "title": "J. L. Jaramillo, J. A. Valiente Kroon and E. Gourgoulhon, From Geometry to Numerics: interdisciplinary aspects in mathematical and numerical relativity, arXiv:0712.2332v2 (2008), §§1.2.1 and 2.2, PDF pp. 2–3 and 11–12",
+              "url": "https://arxiv.org/pdf/0712.2332"
+            }
+          ]
+        },
+        "source_refs": [
+          "KS",
+          "JVG"
+        ],
+        "strategy": "Definition: objects, units and hypotheses specified; no proof obligation."
+      },
+      {
+        "id": "thm-gr-fx-bootstrap-closure",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "library": "physics",
+        "title": "Open-closed bootstrap continuation",
+        "reference": "prose-scaffold.md (FX09)",
+        "dependency_level": 3,
+        "deps": [
+          "def-gr-fx-bootstrap-continuation-contract",
+          "def-infimum",
+          "thm-infimum-property"
+        ],
+        "dependency_roles": {
+          "def-gr-fx-bootstrap-continuation-contract": "mathematical-premise",
+          "def-infimum": "mathematical-premise",
+          "thm-infimum-property": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let a solution of a fixed evolution problem be maximal on $[0,T_{\\max})$ and satisfy the preceding continuation and bootstrap contract, with its constants $A,\\epsilon,\\eta$ and initial bound $E(0)<A\\epsilon^2$. If the bootstrap improvement holds on every compact subinterval, then $E(t)\\le A\\epsilon^2$ for all $t<T_{\\max}$. If the listed margins persist throughout the interval, then $T_{\\max}=\\infty$.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "G. Métivier, The Mathematics of Nonlinear Optics (2009), Chapter 3, §§3.3–3.5, PDF pp. 23–29: symmetric-hyperbolic existence, stability, continuation and a bootstrap-continuation implication",
+              "url": "https://www.math.u-bordeaux.fr/~gmetivie/NLO2008.pdf"
+            },
+            {
+              "title": "Qian Wang, Lectures on Nonlinear Wave Equations (2015), §6.3, proof of Theorem 22, PDF pp. 174–186: continuity method, decay estimates and continuation",
+              "url": "https://people.maths.ox.ac.uk/wangq1/Lecture_notes/nonlinear_wave_9.pdf"
+            },
+            {
+              "title": "S. Klainerman and J. Szeftel, Kerr stability for small angular momentum, arXiv:2104.11857v1 (2021), abstract and §1.2.1, PDF pp. 2 and 22–24",
+              "url": "https://arxiv.org/pdf/2104.11857"
+            },
+            {
+              "title": "J. L. Jaramillo, J. A. Valiente Kroon and E. Gourgoulhon, From Geometry to Numerics: interdisciplinary aspects in mathematical and numerical relativity, arXiv:0712.2332v2 (2008), §§1.2.1 and 2.2, PDF pp. 2–3 and 11–12",
+              "url": "https://arxiv.org/pdf/0712.2332"
+            }
+          ]
+        },
+        "source_refs": [
+          "KS",
+          "JVG"
+        ],
+        "strategy": "direct"
+      },
+      {
+        "id": "rem-gr-fx-kerr-stability-source-boundary",
+        "kind": "remark",
+        "domain": "mathematics",
+        "library": "physics",
+        "title": "Scope of the accessed small-angular-momentum Kerr work",
+        "reference": "prose-scaffold.md (FX09)",
+        "dependency_level": 3,
+        "deps": [
+          "def-gr-fx-bootstrap-continuation-contract"
+        ],
+        "dependency_roles": {
+          "def-gr-fx-bootstrap-continuation-contract": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "The accessed 2021 Klainerman–Szeftel manuscript describes a nonlinear stability result for the Kerr family at sufficiently small angular momentum, in asymptotically flat solutions of the vacuum Einstein equations, and presents it as a multi-paper proof. This records the authors' stated scope; it is not a local proof or an independent acceptance of every companion paper. The 2008 review's discussion of then-known global constructions of dynamical vacuum black-hole spacetimes is historical and is not used here as current status. This remark makes no claim about whether the full subextremal or extremal Kerr stability problem is open or solved.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "S. Klainerman and J. Szeftel, Kerr stability for small angular momentum, arXiv:2104.11857v1 (2021), abstract and §1.2.1, PDF pp. 2 and 22–24",
+              "url": "https://arxiv.org/pdf/2104.11857"
+            },
+            {
+              "title": "J. L. Jaramillo, J. A. Valiente Kroon and E. Gourgoulhon, From Geometry to Numerics: interdisciplinary aspects in mathematical and numerical relativity, arXiv:0712.2332v2 (2008), §§1.2.1 and 2.2, PDF pp. 2–3 and 11–12",
+              "url": "https://arxiv.org/pdf/0712.2332"
+            }
+          ]
+        },
+        "source_refs": [
+          "KS",
+          "JVG"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 772,
+    "id": "gr-fx09-bootstrap-and-stability-boundaries-examples",
+    "kind": "B",
+    "category": "general-relativity",
+    "library": "physics",
+    "title": "Bootstrap closure and nonlinear stability boundaries — Examples",
+    "companion": "gr-fx09-bootstrap-and-stability-boundaries",
+    "requires": [
+      "gr-fx09-bootstrap-and-stability-boundaries"
+    ],
+    "items": [
+      {
+        "id": "ex-gr-fx09-1",
+        "kind": "example",
+        "domain": "mathematics",
+        "library": "physics",
+        "title": "Bootstrap closure and nonlinear stability boundaries — model 1",
+        "reference": "prose-scaffold.md (FX09)",
+        "dependency_level": 4,
+        "deps": [
+          "def-gr-fx-bootstrap-continuation-contract",
+          "thm-gr-fx-bootstrap-closure",
+          "thm-gronwall-integral-inequality",
+          "def-real-power",
+          "thm-real-power-continuity-and-derivatives",
+          "thm-chain-rule",
+          "thm-ftc-second-part",
+          "cor-exponential-reciprocal-and-positivity"
+        ],
+        "dependency_roles": {
+          "def-gr-fx-bootstrap-continuation-contract": "mathematical-premise",
+          "thm-gr-fx-bootstrap-closure": "mathematical-premise",
+          "thm-gronwall-integral-inequality": "mathematical-premise",
+          "def-real-power": "mathematical-premise",
+          "thm-real-power-continuity-and-derivatives": "mathematical-premise",
+          "thm-chain-rule": "mathematical-premise",
+          "thm-ftc-second-part": "mathematical-premise",
+          "cor-exponential-reciprocal-and-positivity": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $E:[0,T_{\\max})\\to[0,\\infty)$ be continuous, let $E_0\\ge0$, $C>0$, $\\epsilon>0$ and $\\delta>0$ be dimensionless, and suppose for every finite $t<T_{\\max}$ that\n\n$$E(t)\\le E_0+C\\epsilon\\int_0^t(1+s)^{-1-\\delta}E(s)\\,ds.$$\n\nUse the dimensionless thresholds $A,\\epsilon,\\eta$ in the cited continuation contract, with $2A\\epsilon^2<\\eta$. Then\n\n$E(t)\\le E_0\\exp\\!\\left(\\frac{C\\epsilon}{\\delta}\\left[1-(1+t)^{-\\delta}\\right]\\right)\\le E_0e^{C\\epsilon/\\delta}.$$\n\nUse the positive dimensionless thresholds $A$, $\\epsilon$ and $\\eta$ of the continuation contract below, with $2A\\epsilon^2<\\eta$. If $E_0e^{C\\epsilon/\\delta}<A\\epsilon^2$, this scalar estimate gives the strict improvement required by that contract. It supplies no Einstein decay estimate; an application must prove this integral inequality and its continuation margins separately.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "G. Métivier, The Mathematics of Nonlinear Optics (2009), Chapter 3, §§3.3–3.5, PDF pp. 23–29: symmetric-hyperbolic existence, stability, continuation and a bootstrap-continuation implication",
+              "url": "https://www.math.u-bordeaux.fr/~gmetivie/NLO2008.pdf"
+            },
+            {
+              "title": "Qian Wang, Lectures on Nonlinear Wave Equations (2015), §6.3, proof of Theorem 22, PDF pp. 174–186: continuity method, decay estimates and continuation",
+              "url": "https://people.maths.ox.ac.uk/wangq1/Lecture_notes/nonlinear_wave_9.pdf"
+            },
+            {
+              "title": "S. Klainerman and J. Szeftel, Kerr stability for small angular momentum, arXiv:2104.11857v1 (2021), abstract and §1.2.1, PDF pp. 2 and 22–24",
+              "url": "https://arxiv.org/pdf/2104.11857"
+            },
+            {
+              "title": "J. L. Jaramillo, J. A. Valiente Kroon and E. Gourgoulhon, From Geometry to Numerics: interdisciplinary aspects in mathematical and numerical relativity, arXiv:0712.2332v2 (2008), §§1.2.1 and 2.2, PDF pp. 2–3 and 11–12",
+              "url": "https://arxiv.org/pdf/0712.2332"
+            }
+          ]
+        },
+        "source_refs": [
+          "KS",
+          "JVG"
+        ],
+        "strategy": "direct",
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-gr-fx09-2",
+        "kind": "example",
+        "domain": "mathematics",
+        "library": "physics",
+        "title": "Bootstrap closure and nonlinear stability boundaries — model 2",
+        "reference": "prose-scaffold.md (FX09)",
+        "dependency_level": 4,
+        "deps": [
+          "def-gr-fx-bootstrap-continuation-contract",
+          "thm-gr-fx-bootstrap-closure",
+          "thm-gronwall-integral-inequality",
+          "def-real-power",
+          "thm-chain-rule",
+          "thm-ftc-second-part",
+          "thm-logarithm-derivative-and-integral"
+        ],
+        "dependency_roles": {
+          "def-gr-fx-bootstrap-continuation-contract": "mathematical-premise",
+          "thm-gr-fx-bootstrap-closure": "mathematical-premise",
+          "thm-gronwall-integral-inequality": "mathematical-premise",
+          "def-real-power": "mathematical-premise",
+          "thm-chain-rule": "mathematical-premise",
+          "thm-ftc-second-part": "mathematical-premise",
+          "thm-logarithm-derivative-and-integral": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $E:[0,T_{\\max})\\to[0,\\infty)$ be continuous, let $E_0\\ge0$, $C>0$ and $\\epsilon>0$ be dimensionless, and suppose for every finite $t<T_{\\max}$ that\n\n$$E(t)\\le E_0+C\\epsilon\\int_0^t(1+s)^{-1}E(s)\\,ds.$$\n\nUse the dimensionless thresholds $A,\\epsilon,\\eta$ in the cited continuation contract, with $2A\\epsilon^2<\\eta$. Gronwall gives the polynomial upper bound $E(t)\\le E_0(1+t)^{C\\epsilon}$. This inequality alone does not supply a uniform improvement: with $C\\epsilon=1$, $E_0=1$ and $E(t)=1+t$, equality holds. Let $B=A\\epsilon^2>1$ for the thresholds in the continuation contract below; then $2B<\\eta$. On the finite slab $0\\le t\\le B$ this example has $E(0)<B$, $E(t)\\le2B$, but $E(B)>B$. Thus the bootstrap implication from $2B$ to $B$ fails on that slab.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "G. Métivier, The Mathematics of Nonlinear Optics (2009), Chapter 3, §§3.3–3.5, PDF pp. 23–29: symmetric-hyperbolic existence, stability, continuation and a bootstrap-continuation implication",
+              "url": "https://www.math.u-bordeaux.fr/~gmetivie/NLO2008.pdf"
+            },
+            {
+              "title": "Qian Wang, Lectures on Nonlinear Wave Equations (2015), §6.3, proof of Theorem 22, PDF pp. 174–186: continuity method, decay estimates and continuation",
+              "url": "https://people.maths.ox.ac.uk/wangq1/Lecture_notes/nonlinear_wave_9.pdf"
+            },
+            {
+              "title": "S. Klainerman and J. Szeftel, Kerr stability for small angular momentum, arXiv:2104.11857v1 (2021), abstract and §1.2.1, PDF pp. 2 and 22–24",
+              "url": "https://arxiv.org/pdf/2104.11857"
+            },
+            {
+              "title": "J. L. Jaramillo, J. A. Valiente Kroon and E. Gourgoulhon, From Geometry to Numerics: interdisciplinary aspects in mathematical and numerical relativity, arXiv:0712.2332v2 (2008), §§1.2.1 and 2.2, PDF pp. 2–3 and 11–12",
+              "url": "https://arxiv.org/pdf/0712.2332"
+            }
+          ]
+        },
+        "source_refs": [
+          "KS",
+          "JVG"
+        ],
+        "strategy": "direct",
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

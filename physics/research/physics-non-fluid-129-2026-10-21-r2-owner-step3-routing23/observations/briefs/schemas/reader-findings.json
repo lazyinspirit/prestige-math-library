@@ -1,0 +1,44 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["batch", "findings", "coverage_note"],
+  "properties": {
+    "batch": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Use the bare batch id such as \"7\"; the gate also accepts legacy <run>-batch-<id> labels on frozen artifacts."
+    },
+    "findings": {
+      "type": "array",
+      "description": "Confirmed or suspected defects the reader was not licensed to edit. Repaired findings belong in the markdown report and byte-diff route, not here.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "subject_type", "consumer_id", "observed_source", "location", "defect", "evidence", "severity"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1, "description": "Exact existing item ID or page ID of the defective subject. Do not invent a finding label; the routing tool assigns the finding's obligation ID." },
+          "subject_type": { "type": "string", "enum": ["in-flight-item", "page", "published-dependency", "in-run-dependency"] },
+          "consumer_id": { "type": ["string", "null"], "minLength": 1, "description": "For a published or another-batch current-run dependency, the exact assigned item whose deps/justified_by closure reaches it; otherwise null." },
+          "observed_source": {
+            "type": ["object", "null"],
+            "additionalProperties": false,
+            "required": ["snapshot", "item_sha256"],
+            "description": "Set null unless an in-run-dependency finding can bind the exact observed bytes. pre means the producer's immutable pre-reader snapshot; current means the source bytes remain current at split. Never claim corrected current bytes were the old observed defect.",
+            "properties": {
+              "snapshot": { "type": "string", "enum": ["pre", "current"] },
+              "item_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+            }
+          },
+          "location": { "type": "string", "minLength": 1 },
+          "defect": {
+            "type": "string",
+            "enum": ["false-claim", "unlicensed-inference", "missing-hypothesis", "citation-inaccurate", "ill-formed", "overstrong-title-or-statement"]
+          },
+          "evidence": { "type": "string", "minLength": 1 },
+          "severity": { "type": "string", "enum": ["fatal", "nonfatal"] }
+        }
+      }
+    },
+    "coverage_note": { "type": "string", "minLength": 1 }
+  }
+}

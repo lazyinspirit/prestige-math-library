@@ -1,0 +1,153 @@
+--- 
++++ 
+@@ -10,18 +10,34 @@
+ physical_scope: null
+ dependency_level: 1
+ deps:
++  - def-bochner-integrable-function
+   - def-countable-choice
++  - def-qft-involutive-algebra-state
+   - def-qft-fock-and-test-spaces
+   - def-qft-scalar-mass-shell
+   - def-qftx-joint-spectrum-input
++  - def-strongly-measurable-banach-valued-function
++  - lem-bochner-integral-norm-inequality
++  - lem-scalar-and-complex-measures-from-a-pvm
++  - thm-bochner-integrability-criterion
+   - thm-bounded-borel-pvm-integral
++  - thm-dominated-convergence
++  - thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces
+   - thm-fourier-inversion-on-schwartz-space
+ dependency_roles:
++  def-bochner-integrable-function: mathematical-premise
+   def-countable-choice: mathematical-premise
++  def-qft-involutive-algebra-state: mathematical-premise
+   def-qft-fock-and-test-spaces: mathematical-premise
+   def-qft-scalar-mass-shell: mathematical-premise
+   def-qftx-joint-spectrum-input: mathematical-premise
++  def-strongly-measurable-banach-valued-function: mathematical-premise
++  lem-bochner-integral-norm-inequality: mathematical-premise
++  lem-scalar-and-complex-measures-from-a-pvm: mathematical-premise
++  thm-bochner-integrability-criterion: mathematical-premise
+   thm-bounded-borel-pvm-integral: mathematical-premise
++  thm-dominated-convergence: mathematical-premise
++  thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces: mathematical-premise
+   thm-fourier-inversion-on-schwartz-space: mathematical-premise
+ proof_strategy: not-applicable
+ provenance:
+@@ -47,8 +63,12 @@
+ $U:\mathbb R^4\to\mathcal B(\mathcal H)$, a projection-valued measure $E$ on
+ $\mathbb R^4$ with $U(a)=\int e^{ip\cdot a}\,dE(p)$ and
+ $E(\mathbb R^4\setminus\overline V_+)=0$, and an invariant unit cyclic vacuum
+-$\Omega$ for a specified unital $*$-subalgebra $\mathfrak A\subseteq
+-\mathcal B(\mathcal H)$, meaning
++$\Omega$ for a specified unital complex $*$-subalgebra
++$\mathfrak A\subseteq\mathcal B(\mathcal H)$. By
++the unital star-algebra definition listed below, a unital complex $*$-algebra has a
++complex-bilinear associative product, a specified unit, and a conjugate-linear
++involution reversing products, squaring to the identity, and fixing the unit;
++$\mathfrak A$ inherits these operations and contains $I$. Cyclicity means
+ $\overline{\{B\Omega:B\in\mathfrak A\}}=\mathcal H$. The pairing is
+ $p\cdot a=p^0a^0-\mathbf p\cdot\mathbf a$.
+ Use the shell coordinates and signature of the scalar future mass shell
+@@ -142,22 +162,56 @@
+ integral
+ $$A_t^\eta(f)=\mathrm{s}\!\!\int_{\mathbb R^3}u_{m,f}^\eta(t,\mathbf x)\,\alpha_{(\eta\ell_0t,\mathbf x)}(A)\,d^3\mathbf x.$$
+ The rapid-decay estimate with $N=4$ is integrable on $\mathbb R^3$, since in
+-spherical coordinates $\int_0^\infty r^2(1+r)^{-4}\,dr<\infty$. Strong
+-continuity of $U$ and boundedness of $A$ therefore make the vector-valued
+-integral well defined on each vector, and
+-$\|A_t^\eta(f)\|\le\|A\|\|u_{m,f}^\eta(t,\cdot)\|_{L^1}$. With the stated
+-translation and Fourier conventions, its mass-shell component on $\Omega$ is
+-exactly $\psi(A,f)$. Indeed,
++spherical coordinates $\int_0^\infty r^2(1+r)^{-4}\,dr<\infty$. For $\xi\in\mathcal H$
++put
++$$g_\xi(\mathbf x):=u_{m,f}^\eta(t,\mathbf x) U(\eta\ell_0t,\mathbf x)A U(\eta\ell_0t,\mathbf x)^*\xi.$$
++Strong continuity of $U$ and boundedness of $A$ make $g_\xi$ continuous, with
++$$\|g_\xi(\mathbf x)\|\le |u_{m,f}^\eta(t,\mathbf x)|\,\|A\|\,\|\xi\|.$$
++It is strongly measurable: on each $[-n,n)^3$, partition into finitely many
++half-open cubes of side $1/n$, use the value of $g_\xi$ at each cube's lower
++corner, and set the simple function to zero outside the box. These simple
++functions converge pointwise to $g_\xi$. The displayed majorant is integrable;
++the Bochner-integrability criterion therefore gives a Bochner integral for
++each $g_\xi$. By the Bochner-integrable-function definition listed below, this integral is the
++norm limit of integrals of integrable simple approximants. Define
++$A_t^\eta(f)\xi:=\int g_\xi(\mathbf x)\,d^3\mathbf x$.
++Linearity and the Bochner integral norm inequality give
++$$\|A_t^\eta(f)\xi\|\le\|A\|\,\|\xi\|\,\|u_{m,f}^\eta(t,\cdot)\|_{L^1},$$
++so this strong integral defines a bounded operator and
++$$\|A_t^\eta(f)\|\le\|A\|\|u_{m,f}^\eta(t,\cdot)\|_{L^1}.$$
++
++With the stated translation and Fourier conventions, its mass-shell component
++on $\Omega$ is exactly $\psi(A,f)$. In fact, invariance of $\Omega$ gives
+ $\alpha_{(\eta\ell_0t,\mathbf x)}(A)\Omega
+-=U(\eta\ell_0t,\mathbf x)A\Omega$
+-has spectral multiplier $e^{i\eta\ell_0tp^0-i\mathbf p\cdot\mathbf x}$;
+-Fourier inversion in the convention of the supplier listed under Definition
+-references, after the rescaling $\mathbf k=2\pi\boldsymbol\xi$, gives
++=U(\eta\ell_0t,\mathbf x)A\Omega$. For $\xi=A\Omega$ and any $y\in\mathcal H$,
++the bounded linear functional $v\mapsto(v,y)$ passes through the Bochner
++integral by its simple-function definition. The spectral representation of
++$U$, the polarization formula
++$E_{\xi,y}=\frac14\sum_{k=0}^3 i^k E_{\xi+i^ky}$, and Fubini's theorem yield
++$$\bigl(A_t^\eta(f)\Omega,y\bigr) =\int_{\mathbb R^4}G(p)\,dE_{\xi,y}(p) =\bigl(\Phi_E(G)\xi,y\bigr),\qquad G(p):=\int_{\mathbb R^3}u_{m,f}^\eta(t,\mathbf x) e^{i\eta\ell_0tp^0-i\mathbf p\cdot\mathbf x}\,d^3\mathbf x.$$
++For each $z=\xi+i^ky$, use the finite positive scalar measure $E_z$ from
++the scalar and complex PVM-measures lemma listed below, which has total mass
++$\|z\|^2$, and apply
++the sigma-finite Fubini theorem listed below to Lebesgue
++measure on $\mathbb R^3$ and the finite positive Borel measure $E_z$ on
++$\mathbb R^4$. The product integrand
++$F(\mathbf x,p):=u_{m,f}^\eta(t,\mathbf x)e^{i\eta\ell_0tp^0-i\mathbf p\cdot\mathbf x}$
++is continuous and has absolute integral
++$\|u_{m,f}^\eta(t,\cdot)\|_{L^1}\,\|z\|^2<\infty$.
++Thus $G$ is bounded, and dominated convergence with majorant
++$|u_{m,f}^\eta(t,\cdot)|$ makes it continuous, hence Borel. Fourier inversion in the convention
++of the supplier listed under Definition references, after rescaling
++$\mathbf k=2\pi\boldsymbol\xi$, gives
+ $$\int_{\mathbb R^3}u_{m,f}^\eta(t,\mathbf x)e^{-i\mathbf p\cdot\mathbf x}\,d^3\mathbf x=f(\mathbf p)e^{-i\eta\ell_0t\omega_m(\mathbf p)}.$$
+-On $\mathcal M_m$ the remaining time multiplier is
+-$e^{i\eta\ell_0t(p^0-\omega_m(\mathbf p))}=1$, yielding
+-$P_mA_t^\eta(f)\Omega=\Phi_E(\widehat f)P_mA\Omega$. Convergence of the full vector
+-$A_t^\eta(f)\Omega$ to that component is a separate construction obligation.
++Hence $G(p)=e^{i\eta\ell_0tp^0}f(\mathbf p)e^{-i\eta\ell_0t\omega_m(\mathbf p)}$;
++on $\mathcal M_m$ this is $f(\mathbf p)=\widehat f(p)$. The PVM product
++identity $E(M)\Phi_E(G)=\Phi_E(\mathbf1_MG)$ follows first for simple
++functions and then by uniform approximation. Since
++$\mathbf1_MG=\mathbf1_M\widehat f$, $M=\mathcal M_m$, and
++$P_m=E(\mathcal M_m)$, the same identity gives
++$$P_mA_t^\eta(f)\Omega=\Phi_E(\widehat f)P_mA\Omega.$$
++Convergence of the full vector $A_t^\eta(f)\Omega$ to that component is a
++separate construction obligation.
+ For a domain-valued variant, the corresponding integrals and all products
+ must instead be defined on the common invariant domain. Use the completed Hilbert tensor powers and their unitary
+ permutation action: $S_n$ is the permutation group of $\{1,\ldots,n\}$ and
+@@ -224,6 +278,8 @@
+ 
+ [[def-countable-choice]]
+ 
++[[def-qft-involutive-algebra-state]]
++
+ [[def-qftx-joint-spectrum-input]]
+ 
+ [[def-qft-scalar-mass-shell]]
+@@ -231,6 +287,20 @@
+ [[def-qft-fock-and-test-spaces]]
+ 
+ [[thm-bounded-borel-pvm-integral]]
++
++[[def-strongly-measurable-banach-valued-function]]
++
++[[def-bochner-integrable-function]]
++
++[[thm-bochner-integrability-criterion]]
++
++[[thm-dominated-convergence]]
++
++[[lem-bochner-integral-norm-inequality]]
++
++[[lem-scalar-and-complex-measures-from-a-pvm]]
++
++[[thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces]]
+ 
+ [[thm-fourier-inversion-on-schwartz-space]]
+ 

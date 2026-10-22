@@ -1,0 +1,461 @@
+[
+  {
+    "order": 799,
+    "id": "nrqmx-finite-open-dynamics",
+    "kind": "A",
+    "category": "non-relativistic-quantum-mechanics",
+    "library": "physics",
+    "title": "Finite reduced dynamics, memory and quantum trajectories",
+    "companion": "nrqmx-finite-open-dynamics-examples",
+    "requires": [
+      "nrqmx-measurement-compatibility",
+      "qsm-dt-channels",
+      "qm-composites-entanglement-and-reduced-states"
+    ],
+    "items": [
+      {
+        "id": "def-nrqmx-finite-channel-families",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Finite channel families, semigroups, and CP-divisibility",
+        "reference": "items/def-nrqmx-finite-channel-families.md",
+        "design_state": "Step 1 authored draft; readiness recorded separately.",
+        "dependency_level": 0,
+        "deps": [
+          "def-qsm-dt-channel-definition"
+        ],
+        "dependency_roles": {
+          "def-qsm-dt-channel-definition": "mathematical-premise"
+        },
+        "inventory_expansion_required": true,
+        "statement": "Let $d\\geq1$ and let $\\Phi_t:M_d(\\mathbb C)\\to M_d(\\mathbb C)$ be a family of finite quantum channels indexed by $t\\geq0$, where “finite quantum channel” has the meaning in [[def-qsm-dt-channel-definition]]. The family obeys the **semigroup law** when $\\Phi_0=\\operatorname{id}_{M_d(\\mathbb C)}$ and $\\Phi_{t+s}=\\Phi_t\\circ\\Phi_s$ for every $s,t\\geq0$.\n\nThe family is **CP-divisible** when for every $0\\leq s\\leq t$ there exists a finite quantum channel $V_{t,s}:M_d(\\mathbb C)\\to M_d(\\mathbb C)$ such that $\\Phi_t=V_{t,s}\\circ\\Phi_s$. CP-divisibility is this specified factorization property; the definition does not assert that it is a universal meaning of “Markovian”.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lin Lin and Nathan Wiebe, Quantum Algorithms for Scientific Computation, Chapter 21, §21.1",
+              "url": "https://math.berkeley.edu/~linlin/qasc/live_notes_0315.pdf",
+              "locator": "Equations (21.3)–(21.5), printed pp. 307–308: the norm-continuous channel-semigroup convention, cited as a contrast; this local definition retains the algebraic semigroup and CP-divisibility properties without adding continuity."
+            },
+            {
+              "title": "Ángel Rivas, Susana F. Huelga, and Martin B. Plenio, Quantum Non-Markovianity: Characterization, Quantification and Detection, §3.2",
+              "url": "https://arxiv.org/pdf/1405.0303",
+              "locator": "Definition 3.2 and equation (29), printed pp. 10–11: completely positive divisible quantum evolution."
+            }
+          ]
+        },
+        "library": "physics"
+      },
+      {
+        "id": "lem-nrqmx-continuous-simplex-integrals",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Continuous finite-dimensional ordered-simplex integrals",
+        "reference": "items/lem-nrqmx-continuous-simplex-integrals.md",
+        "design_state": "Step 2 owner-authorized same-pair local proof; source release recorded, ordinary native gates pending.",
+        "dependency_level": 0,
+        "deps": [
+          "def-darboux-integral",
+          "def-oriented-integral",
+          "thm-continuous-implies-integrable",
+          "thm-linearity-of-the-integral",
+          "thm-monotonicity-of-the-integral",
+          "thm-darboux-equals-riemann",
+          "thm-substitution",
+          "thm-heine-borel-rn",
+          "thm-heine-cantor-metric",
+          "thm-newton-leibniz-with-interior-derivative",
+          "lem-derivative-of-a-power"
+        ],
+        "dependency_roles": {
+          "def-darboux-integral": "mathematical-premise",
+          "def-oriented-integral": "mathematical-premise",
+          "thm-continuous-implies-integrable": "mathematical-premise",
+          "thm-linearity-of-the-integral": "mathematical-premise",
+          "thm-monotonicity-of-the-integral": "mathematical-premise",
+          "thm-darboux-equals-riemann": "mathematical-premise",
+          "thm-substitution": "mathematical-premise",
+          "thm-heine-borel-rn": "mathematical-premise",
+          "thm-heine-cantor-metric": "mathematical-premise",
+          "thm-newton-leibniz-with-interior-derivative": "mathematical-premise",
+          "lem-derivative-of-a-power": "mathematical-premise"
+        },
+        "physical_scope": null,
+        "statement": "Let $T\\geq0$, let $n\\geq0$ be an integer, and let $V$ be a finite-dimensional real or complex vector space with a specified finite ordered basis and its coordinate topology. Put $D_n(T)=\\{0\\leq s_1\\leq\\cdots\\leq s_n\\leq T\\}$, with $D_0(T)=\\{()\\}$. Let $F:D_n(T)\\to V$ have continuous coordinates. Set $G_0=F$. For $1\\leq k\\leq n$, write $y=(s_{k+1},\\ldots,s_n)\\in D_{n-k}(T)$ and put $b_k(y)=s_{k+1}$ if $k<n$, and $b_n(())=T$. Define recursively\n$$\nG_k(y)=\\int_0^{b_k(y)}G_{k-1}(s_k,y)\\,ds_k,\n$$\nintegrating real coordinates, and real and imaginary parts of complex coordinates. Every integral exists and every $G_k$ is continuous on its remaining parameter domain. Write $I_n(F)=G_n(())$; equivalently this is the iterated integral with limits $0\\leq s_1\\leq\\cdots\\leq s_n\\leq T$. Degenerate one-variable integrals are zero. For $n=0$, set $I_0(F)=F(())$; for $n\\geq1$ and $T=0$, $I_n(F)=0$.\n\nThese integrals are linear, independent of the chosen finite basis, and commute with finite-dimensional linear maps. For any norm $\\|\\cdot\\|$ on $V$, the corresponding one-variable integral satisfies $\\|\\int_a^b g(s)\\,ds\\|\\leq\\int_a^b\\|g(s)\\|\\,ds$ for continuous $g$ and $a\\leq b$. If $\\|F(s)\\|\\leq C$ on $D_n(T)$, where $C\\geq0$, then\n$$\n\\|I_n(F)\\|\\leq C\\frac{T^n}{n!}.\n$$\nHere the factor for $n=0$ is $1$, including $T=0$. For scalar $F=1$, $I_n(1)=T^n/n!$ with this convention. For real scalar $F\\geq0$, every partial integral $G_k$ is nonnegative. No differentiability of $F$ or choice principle is assumed.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Riemann integration and affine substitution",
+              "url": "https://en.wikipedia.org/wiki/Riemann_integral",
+              "locator": "The existing pinned scalar integration suppliers are used below; the parameter-continuity and ordered-simplex argument is proved locally, without new external full-text reading."
+            }
+          ]
+        },
+        "library": "physics"
+      },
+      {
+        "id": "def-nrqmx-finite-jump-trajectories",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Finite GKSL jump-trajectory branches",
+        "reference": "items/def-nrqmx-finite-jump-trajectories.md",
+        "design_state": "Step 1 authored draft; readiness recorded separately.",
+        "dependency_level": 0,
+        "deps": [
+          "def-qsm-dt-gksl-definition",
+          "lem-qsm-matrix-state-calculus",
+          "cor-finite-dimensional-normed-spaces-are-banach",
+          "lem-exponential-series-of-a-bounded-operator",
+          "def-darboux-integral",
+          "thm-continuous-implies-integrable",
+          "lem-nrqmx-continuous-simplex-integrals"
+        ],
+        "dependency_roles": {
+          "def-qsm-dt-gksl-definition": "mathematical-premise",
+          "lem-qsm-matrix-state-calculus": "mathematical-premise",
+          "cor-finite-dimensional-normed-spaces-are-banach": "mathematical-premise",
+          "lem-exponential-series-of-a-bounded-operator": "mathematical-premise",
+          "def-darboux-integral": "mathematical-premise",
+          "thm-continuous-implies-integrable": "mathematical-premise",
+          "lem-nrqmx-continuous-simplex-integrals": "mathematical-premise"
+        },
+        "inventory_expansion_required": true,
+        "statement": "Let $d\\geq1$, let $r\\geq0$ be an integer, let $H=H^*\\in M_d(\\mathbb C)$ have units joules, let $\\hbar>0$ have units joule-seconds, and let $L_1,\\ldots,L_r\\in M_d(\\mathbb C)$ have units $\\mathrm{s}^{-1/2}$, with the finite GKSL convention of [[def-qsm-dt-gksl-definition]]. Put $K=-iH/\\hbar-\\frac12\\sum_{a=1}^rL_a^*L_a$ and $R(u)=e^{uK}$ for $u\\geq0$, with the exponential defined by its norm-convergent power series. For a density matrix $\\rho\\in M_d(\\mathbb C)$, meaning $\\rho=\\rho^*\\geq0$ and $\\operatorname{Tr}\\rho=1$, define the no-jump branch at time $t\\geq0$ by $W_{\\varnothing,\\varnothing}(t)=R(t)$ and its branch state by $W_{\\varnothing,\\varnothing}(t)\\rho W_{\\varnothing,\\varnothing}(t)^*$.\n\nAll time variables $u,t,s_1,\\ldots,s_n$ are measured in seconds. For $n\\geq1$, a jump-history label is $\\mathbf a=(a_1,\\ldots,a_n)\\in\\{1,\\ldots,r\\}^n$ and its jump times are seconds $0<s_1<\\cdots<s_n<t$. Define the corresponding branch operator by $W_{\\mathbf a,\\mathbf s}(t)=R(t-s_n)L_{a_n}R(s_n-s_{n-1})\\cdots L_{a_2}R(s_2-s_1)L_{a_1}R(s_1)$ and the unnormalized branch state by $W_{\\mathbf a,\\mathbf s}(t)\\rho W_{\\mathbf a,\\mathbf s}(t)^*$. Its branch-weight density is the real-valued scalar function $w_{\\mathbf a,\\mathbf s}(t)=\\operatorname{Tr}(W_{\\mathbf a,\\mathbf s}(t)\\rho W_{\\mathbf a,\\mathbf s}(t)^*)$. For $n\\geq1$, let $\\overline{\\Delta}_n(t)=\\{(s_1,\\ldots,s_n)\\in\\mathbb R^n:0\\leq s_1\\leq\\cdots\\leq s_n\\leq t\\}$ and $\\Delta_n(t)=\\{(s_1,\\ldots,s_n)\\in\\mathbb R^n:0<s_1<\\cdots<s_n<t\\}$. Use the same formula for $W_{\\mathbf a,\\mathbf s}(t)$ on $\\overline{\\Delta}_n(t)$; it is continuous there because $R(u)=e^{uK}$ is continuous for $u\\geq0$. If $V$ is a finite-dimensional real or complex vector space and $F:\\overline{\\Delta}_n(t)\\to V$ has continuous coordinates in a basis, define $\\int_{\\Delta_n(t)}F(\\mathbf s)\\,d\\mathbf s$ as exactly the repeated one-variable Riemann integral over the closed limits shown here $\\int_0^t ds_n\\int_0^{s_n}ds_{n-1}\\cdots\\int_0^{s_2}F(s_1,\\ldots,s_n)\\,ds_1$, integrating each real coordinate; for complex coordinates, integrate their real and imaginary parts separately. This value is independent of the basis because a change of basis is a finite linear combination and scalar Riemann integration is linear. For $V=\\mathbb R$ this defines the scalar integral of the density $w_{\\mathbf a,\\mathbf s}(t)$; the same convention applies to branch-state integrands with values in $M_d(\\mathbb C)$ and to integrands with values in the finite-dimensional complex vector space of complex-linear maps $M_d(\\mathbb C)\\to M_d(\\mathbb C)$. The full recursion is well-defined for these arbitrary continuous integrands by [[lem-nrqmx-continuous-simplex-integrals]]: every inner integral is continuous in all remaining ordered parameters, so the next integral exists. That lemma also proves basis independence, linear-map commutation, the norm bound by the supremum times $t^n/n!$, and positivity for nonnegative real scalar integrands. Set $\\int_a^a f(s)\\,ds=0$ for a degenerate interval; hence every $n\\geq1$ ordered-simplex integral at $t=0$ is zero. Let $\\Delta_0(t)=\\{()\\}$ and define $\\int_{\\Delta_0(t)}F=F(())$; in the expansion, the $n=0$ contribution is the no-jump branch already defined above. For $n\\geq1$, $W_{\\mathbf a,\\mathbf s}$ has units $\\mathrm{s}^{-n/2}$ and $w_{\\mathbf a,\\mathbf s}$ has units $\\mathrm{s}^{-n}$; integrating over the $n$ time variables gives a dimensionless weight. If $r=0$, there are no branches with $n\\geq1$. This definition alone does not assert that the branch weights sum to one.\n\n",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lin Lin and Nathan Wiebe, Quantum Algorithms for Scientific Computation, Chapter 21, §21.1",
+              "url": "https://math.berkeley.edu/~linlin/qasc/live_notes_0315.pdf",
+              "locator": "Equation (21.1), printed p. 307: the finite GKSL generator and its jump-operator terms; the ordered branch construction here is defined locally."
+            }
+          ]
+        },
+        "library": "physics"
+      },
+      {
+        "id": "post-nrqmx-finite-open-model",
+        "kind": "postulate",
+        "domain": "physics",
+        "title": "Finite system-environment and Markov model assignments",
+        "reference": "items/post-nrqmx-finite-open-model.md",
+        "design_state": "Step 1 authored draft; readiness recorded separately.",
+        "dependency_level": 0,
+        "deps": [
+          "def-qc-partial-trace",
+          "def-qsm-dt-channel-definition",
+          "def-qsm-dt-gksl-definition",
+          "thm-qsm-dt-choi-kraus"
+        ],
+        "dependency_roles": {
+          "def-qc-partial-trace": "formulation-prerequisite",
+          "def-qsm-dt-channel-definition": "formulation-prerequisite",
+          "def-qsm-dt-gksl-definition": "formulation-prerequisite",
+          "thm-qsm-dt-choi-kraus": "formulation-prerequisite"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Work with finite-dimensional system and environment spaces $H_S=\\mathbb C^d$ and $H_E=\\mathbb C^m$, where $d,m\\geq1$, using the ordered tensor product $H_S\\otimes H_E$ with the system factor first. A system or environment state is a positive semidefinite Hermitian matrix of trace one; these state matrices are dimensionless. At the initial time, for every allowed system state $\\rho$, adopt the joint preparation $\\rho\\otimes\\eta$, where the fixed environment state $\\eta$ does not depend on $\\rho$. For each $t\\geq0$, choose a declared unitary $U_t$ on $H_S\\otimes H_E$, meaning $U_t^*U_t=U_tU_t^*=I$, with $U_0=I$. The reduced system dynamics is the map $\\Phi_t(\\rho)=\\operatorname{Tr}_E\\!\\left(U_t(\\rho\\otimes\\eta)U_t^*\\right)$, where for the fixed product basis the finite partial trace has entries $(\\operatorname{Tr}_E R)_{\\alpha\\beta}=\\sum_{j=1}^mR_{(\\alpha,j),(\\beta,j)}$. This assignment excludes initially correlated joint states. It imposes no one-parameter group, continuity, or semigroup law on $U_t$.\n\nA time-homogeneous finite GKSL model may instead be selected as a separate approximation: choose a fixed finite-dimensional Hamiltonian matrix $H=H^*$ in joules, a constant $\\hbar>0$ in joule-seconds, and finitely many jump matrices $L_a$ in $\\mathrm{s}^{-1/2}$, and use $T_t=e^{t\\mathcal L}$ for $t\\geq0$ with $\\mathcal L(X)=-\\frac{i}{\\hbar}[H,X]+\\sum_a\\left(L_aXL_a^*-\\frac12\\{L_a^*L_a,X\\}\\right)$. Each application must state its rates and physical regime. Selecting this approximation is not a consequence of the finite unitary reduction, and this postulate claims no weak-coupling or reservoir limit.\n\nIn both alternatives, the parameter $t$ indexing $U_t$ or $T_t$ denotes elapsed physical time measured in SI seconds. Thus $t\\mathcal L$ in the GKSL exponential is dimensionless, since the adopted finite GKSL generator has units $\\mathrm{s}^{-1}$.\n\n",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information, Chapter 2, §§2.1.3 and 2.2.2",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.2.pdf",
+              "locator": "Printed pp. 67–69, partial trace and reduced states; Theorem 2.22, printed pp. 82–84, finite Choi, Kraus, and Stinespring characterizations."
+            },
+            {
+              "title": "Lin Lin and Nathan Wiebe, Quantum Algorithms for Scientific Computation, Chapter 21, §21.1",
+              "url": "https://math.berkeley.edu/~linlin/qasc/live_notes_0315.pdf",
+              "locator": "Printed pp. 307–311, equations (21.1)–(21.5) and Theorem 21.2: finite GKSL model, channel semigroup, and its finite-dimensional channel property."
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "A finite-dimensional non-relativistic quantum system and finite environment with a fixed product initial assignment and a declared joint unitary family. A time-homogeneous finite GKSL model is an optional, separately adopted approximation. No initial system-environment correlations, continuum reservoir limit, microscopic Markov derivation, apparatus realization, or experimental observation is asserted.",
+        "empirical_premises": []
+      },
+      {
+        "id": "pthm-nrqmx-finite-reduction-channel",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Product-state reduced evolution is a channel",
+        "reference": "items/pthm-nrqmx-finite-reduction-channel.md",
+        "design_state": "Step 1 authored draft; readiness recorded separately.",
+        "dependency_level": 1,
+        "deps": [
+          "post-nrqmx-finite-open-model",
+          "def-nrqmx-finite-channel-families",
+          "def-qc-partial-trace",
+          "thm-qc-partial-trace-characterization-and-basis-independence",
+          "def-qsm-dt-channel-definition",
+          "thm-qsm-dt-choi-kraus",
+          "lem-qsm-matrix-state-calculus",
+          "def-complex-exponential",
+          "thm-complex-exponential-addition-and-real-extension",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "thm-sine-and-cosine-parametrize-the-unit-circle"
+        ],
+        "dependency_roles": {
+          "post-nrqmx-finite-open-model": "physical-assumption",
+          "def-nrqmx-finite-channel-families": "mathematical-premise",
+          "def-qc-partial-trace": "mathematical-premise",
+          "thm-qc-partial-trace-characterization-and-basis-independence": "mathematical-premise",
+          "def-qsm-dt-channel-definition": "mathematical-premise",
+          "thm-qsm-dt-choi-kraus": "mathematical-premise",
+          "lem-qsm-matrix-state-calculus": "mathematical-premise",
+          "def-complex-exponential": "mathematical-premise",
+          "thm-complex-exponential-addition-and-real-extension": "mathematical-premise",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity": "mathematical-premise",
+          "thm-sine-and-cosine-parametrize-the-unit-circle": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "In the finite product-state model, fix any $t\\geq0$ and define the complex-linear map $\\Phi_t:M_d(\\mathbb C)\\to M_d(\\mathbb C)$ by $\\Phi_t(X)=\\operatorname{Tr}_E\\!\\left(U_t(X\\otimes\\eta)U_t^*\\right)$. Then $\\Phi_t$ is a finite quantum channel. The family $t\\mapsto\\Phi_t$ need not obey the semigroup law and need not be CP-divisible. The terms “semigroup law” and “CP-divisible” have the definitions of [[def-nrqmx-finite-channel-families]].",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information, Chapter 2, §§2.1.3 and 2.2.2",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.2.pdf",
+              "locator": "Printed pp. 67–69, finite partial trace; Theorem 2.22, printed pp. 82–84, finite Kraus and Stinespring forms."
+            },
+            {
+              "title": "Lin Lin and Nathan Wiebe, Quantum Algorithms for Scientific Computation, Chapter 21, §21.1",
+              "url": "https://math.berkeley.edu/~linlin/qasc/live_notes_0315.pdf",
+              "locator": "Printed pp. 307–311, equations (21.1)–(21.5), Example 21.1, and the complete proof of Theorem 21.2."
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "Exact reduced maps of finite-dimensional system and environment models with a fixed product initial assignment and unitary joint evolution. The theorem permits neither an initial-correlation extension nor a continuum bath or Markov limit; its finite example is a conditional model calculation, not an experiment.",
+        "empirical_premises": []
+      },
+      {
+        "id": "pthm-nrqmx-amplitude-damping-model",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Amplitude damping with operational time units",
+        "reference": "items/pthm-nrqmx-amplitude-damping-model.md",
+        "design_state": "Step 1 authored draft; readiness recorded separately.",
+        "dependency_level": 1,
+        "deps": [
+          "post-nrqmx-finite-open-model",
+          "def-qsm-dt-gksl-definition",
+          "def-qsm-dt-channel-definition",
+          "thm-qsm-dt-gksl-sufficient",
+          "cor-finite-dimensional-normed-spaces-are-banach",
+          "lem-qsm-dt-finite-matrix-trace-ideal",
+          "lem-exponential-series-of-a-bounded-operator",
+          "def-complex-exponential",
+          "thm-complex-exponential-addition-and-real-extension"
+        ],
+        "dependency_roles": {
+          "post-nrqmx-finite-open-model": "physical-assumption",
+          "def-qsm-dt-gksl-definition": "mathematical-premise",
+          "def-qsm-dt-channel-definition": "mathematical-premise",
+          "thm-qsm-dt-gksl-sufficient": "mathematical-premise",
+          "cor-finite-dimensional-normed-spaces-are-banach": "mathematical-premise",
+          "lem-qsm-dt-finite-matrix-trace-ideal": "mathematical-premise",
+          "lem-exponential-series-of-a-bounded-operator": "mathematical-premise",
+          "def-complex-exponential": "mathematical-premise",
+          "thm-complex-exponential-addition-and-real-extension": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "For the separately selected qubit GKSL model, let $H=\\hbar\\omega|1\\rangle\\langle1|$ with $\\omega\\in\\mathbb R$ in $\\mathrm{s}^{-1}$ and $\\hbar>0$ in joule-seconds, and let $L=\\sqrt{\\gamma}|0\\rangle\\langle1|$ with $\\gamma\\geq0$ in $\\mathrm{s}^{-1}$, so $L$ has units $\\mathrm{s}^{-1/2}$. For any initial density matrix $\\rho(0)$ in the ordered basis $(|0\\rangle,|1\\rangle)$, the solution $\\rho(t)=e^{t\\mathcal L}\\rho(0)$ for $t\\geq0$ satisfies $\\rho_{11}(t)=e^{-\\gamma t}\\rho_{11}(0)$, $\\rho_{00}(t)=\\rho_{00}(0)+(1-e^{-\\gamma t})\\rho_{11}(0)$, $\\rho_{01}(t)=e^{(i\\omega-\\gamma/2)t}\\rho_{01}(0)$, and $\\rho_{10}(t)=e^{(-i\\omega-\\gamma/2)t}\\rho_{10}(0)$.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lin Lin and Nathan Wiebe, Quantum Algorithms for Scientific Computation, Chapter 21, §21.1",
+              "url": "https://math.berkeley.edu/~linlin/qasc/live_notes_0315.pdf",
+              "locator": "Equations (21.1)–(21.5), printed pp. 307–308, and Theorem 21.2, printed pp. 309–311: finite GKSL channel semigroups."
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "The exact finite-dimensional qubit time-homogeneous GKSL model with one amplitude-damping jump operator. The formulas are conditional model predictions; no vacuum continuum, reservoir limit, detector record, or empirical decay rate is asserted.",
+        "empirical_premises": []
+      },
+      {
+        "id": "pthm-nrqmx-jump-unravelling-finite",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Finite jump expansion and ensemble equation",
+        "reference": "items/pthm-nrqmx-jump-unravelling-finite.md",
+        "design_state": "Step 1 authored draft; readiness recorded separately.",
+        "dependency_level": 1,
+        "deps": [
+          "post-nrqmx-finite-open-model",
+          "def-nrqmx-finite-jump-trajectories",
+          "def-qsm-dt-gksl-definition",
+          "thm-qsm-dt-gksl-sufficient",
+          "lem-qsm-dt-finite-matrix-trace-ideal",
+          "cor-finite-dimensional-normed-spaces-are-banach",
+          "lem-exponential-series-of-a-bounded-operator",
+          "def-operator-norm",
+          "def-darboux-integral",
+          "thm-continuous-implies-integrable",
+          "thm-newton-leibniz-with-interior-derivative",
+          "lem-derivative-of-a-power",
+          "lem-nrqmx-continuous-simplex-integrals"
+        ],
+        "dependency_roles": {
+          "post-nrqmx-finite-open-model": "physical-assumption",
+          "def-nrqmx-finite-jump-trajectories": "mathematical-premise",
+          "def-qsm-dt-gksl-definition": "mathematical-premise",
+          "thm-qsm-dt-gksl-sufficient": "mathematical-premise",
+          "lem-qsm-dt-finite-matrix-trace-ideal": "mathematical-premise",
+          "cor-finite-dimensional-normed-spaces-are-banach": "mathematical-premise",
+          "lem-exponential-series-of-a-bounded-operator": "mathematical-premise",
+          "def-operator-norm": "mathematical-premise",
+          "def-darboux-integral": "mathematical-premise",
+          "thm-continuous-implies-integrable": "mathematical-premise",
+          "thm-newton-leibniz-with-interior-derivative": "mathematical-premise",
+          "lem-derivative-of-a-power": "mathematical-premise",
+          "lem-nrqmx-continuous-simplex-integrals": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $d\\geq1$, let $H=H^*\\in M_d(\\mathbb C)$ have units joules, let $\\hbar>0$ have units joule-seconds, and let $L_1,\\ldots,L_r\\in M_d(\\mathbb C)$ be a finite family with units $\\mathrm{s}^{-1/2}$, where $r\\geq0$. For the selected time-homogeneous finite GKSL model, put $\\mathcal L(X)=-\\frac{i}{\\hbar}[H,X]+\\sum_{a=1}^r(L_aXL_a^*-\\frac12\\{L_a^*L_a,X\\})$. With $K=-iH/\\hbar-\\frac12\\sum_aL_a^*L_a$ and the finite branch operators of [[def-nrqmx-finite-jump-trajectories]], each no-jump operator $R(u)=e^{uK}$ is a contraction, each branch state $W_{\\mathbf a,\\mathbf s}(t)\\rho W_{\\mathbf a,\\mathbf s}(t)^*$ is positive for $\\rho\\geq0$, and for every density matrix $\\rho$ and $t\\geq0$,\n\n$$e^{t\\mathcal L}(\\rho)=\\sum_{n=0}^{\\infty}\\ \\sum_{\\mathbf a\\in\\{1,\\ldots,r\\}^n}\\ \\int_{0<s_1<\\cdots<s_n<t}W_{\\mathbf a,\\mathbf s}(t)\\rho W_{\\mathbf a,\\mathbf s}(t)^*\\,ds_1\\cdots ds_n,$$\n\nwhere the $n=0$ term is $R(t)\\rho R(t)^*$ and branches with $n\\geq1$ are absent when $r=0$. The series converges in trace norm, uniformly on each bounded time interval; the sum of all branch weights is one. This is an ensemble representation of the finite GKSL solution, not a unique microscopic trajectory or a claim about a particular detector.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lin Lin and Nathan Wiebe, Quantum Algorithms for Scientific Computation, Chapter 21, §21.1",
+              "url": "https://math.berkeley.edu/~linlin/qasc/live_notes_0315.pdf",
+              "locator": "Equation (21.1), printed p. 307, for the finite GKSL generator and jump operators; the ordered finite-time branch expansion is derived locally."
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "The exact finite-dimensional time-homogeneous GKSL approximation with finitely many bounded jump matrices. The jump expansion is one mathematical ensemble representation; it is not asserted to be unique, to identify an actual measurement record, or to arise from a microscopic reservoir.",
+        "empirical_premises": []
+      }
+    ]
+  },
+  {
+    "order": 800,
+    "id": "nrqmx-finite-open-dynamics-examples",
+    "kind": "B",
+    "category": "non-relativistic-quantum-mechanics",
+    "library": "physics",
+    "title": "Finite reduced dynamics, memory and quantum trajectories — Examples",
+    "companion": "nrqmx-finite-open-dynamics",
+    "requires": [
+      "nrqmx-finite-open-dynamics"
+    ],
+    "items": [
+      {
+        "id": "ex-nrqmx-finite-environment-recurrence",
+        "kind": "example",
+        "domain": "physics",
+        "title": "A finite bath revives coherence",
+        "reference": "items/ex-nrqmx-finite-environment-recurrence.md",
+        "design_state": "Step 1 authored draft; readiness recorded separately.",
+        "dependency_level": 2,
+        "deps": [
+          "pthm-nrqmx-finite-reduction-channel",
+          "def-nrqmx-finite-channel-families",
+          "lem-qsm-matrix-state-calculus",
+          "def-complex-exponential",
+          "thm-complex-exponential-addition-and-real-extension",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "thm-sine-and-cosine-parametrize-the-unit-circle"
+        ],
+        "dependency_roles": {
+          "pthm-nrqmx-finite-reduction-channel": "physical-result",
+          "def-nrqmx-finite-channel-families": "mathematical-premise",
+          "lem-qsm-matrix-state-calculus": "mathematical-premise",
+          "def-complex-exponential": "mathematical-premise",
+          "thm-complex-exponential-addition-and-real-extension": "mathematical-premise",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity": "mathematical-premise",
+          "thm-sine-and-cosine-parametrize-the-unit-circle": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "For $H_S=H_E=\\mathbb C^2$, $Z=\\operatorname{diag}(1,-1)$, $g>0$ in $\\mathrm{s}^{-1}$, and $\\hbar>0$ in joule-seconds, choose $H_{\\mathrm{tot}}=\\hbar g\\,Z\\otimes Z$, $U_t=e^{-itH_{\\mathrm{tot}}/\\hbar}$, and the fixed environment state $|+\\rangle\\langle+|$ with $|+\\rangle=(|0\\rangle+|1\\rangle)/\\sqrt2$ in the displayed environment $Z$ eigenbasis. Here coherence means an off-diagonal matrix entry in the displayed system basis. The reduced map leaves the system populations unchanged and multiplies each coherence by $\\cos(2gt)$. At a positive time $s$ where the multiplier is zero, it erases the distinction between the two $X$ eigenstates; at $2s$ it restores them with their signs exchanged. Thus this finite reduced family is neither a semigroup nor CP-divisible.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information, Chapter 2, §§2.1.3 and 2.2.2",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.2.pdf",
+              "locator": "Printed pp. 67–69 and Theorem 2.22, printed pp. 82–84: finite reduced states and channels."
+            },
+            {
+              "title": "Lin Lin and Nathan Wiebe, Quantum Algorithms for Scientific Computation, Chapter 21, §21.1",
+              "url": "https://math.berkeley.edu/~linlin/qasc/live_notes_0315.pdf",
+              "locator": "Printed pp. 307–311: finite GKSL dynamics and channel semigroups, used as comparison model context."
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "A conditional two-qubit finite-environment unitary model with fixed product preparation. The coherence revival is an exact model prediction, not a reported experiment or a general claim about finite reservoirs.",
+        "empirical_premises": []
+      },
+      {
+        "id": "ex-nrqmx-amplitude-damping-jump-law",
+        "kind": "example",
+        "domain": "physics",
+        "title": "Single excitation jump law",
+        "reference": "items/ex-nrqmx-amplitude-damping-jump-law.md",
+        "design_state": "Step 1 authored draft; readiness recorded separately.",
+        "dependency_level": 2,
+        "deps": [
+          "pthm-nrqmx-jump-unravelling-finite",
+          "pthm-nrqmx-amplitude-damping-model",
+          "def-nrqmx-finite-jump-trajectories",
+          "thm-complex-exponential-addition-and-real-extension",
+          "thm-exponential-limits-and-range"
+        ],
+        "dependency_roles": {
+          "pthm-nrqmx-jump-unravelling-finite": "physical-result",
+          "pthm-nrqmx-amplitude-damping-model": "physical-result",
+          "def-nrqmx-finite-jump-trajectories": "mathematical-premise",
+          "thm-complex-exponential-addition-and-real-extension": "mathematical-premise",
+          "thm-exponential-limits-and-range": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "In the normalized jump-branch ensemble for the finite amplitude-damping model, let $\\gamma\\geq0$ be in $\\mathrm{s}^{-1}$ and take the initial qubit state $|1\\rangle\\langle1|$. The no-jump survival weight at time $t\\geq0$ is $e^{-\\gamma t}$. If $\\gamma>0$, the ensemble assigns the first-jump time density $\\gamma e^{-\\gamma t}$ and post-jump state $|0\\rangle\\langle0|$; because there is no drive and $L|0\\rangle=0$, there are no later jumps. If $\\gamma=0$, no jump occurs and the survival weight is one. This is a model branch distribution, not a detector observation.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lin Lin and Nathan Wiebe, Quantum Algorithms for Scientific Computation, Chapter 21, §21.1",
+              "url": "https://math.berkeley.edu/~linlin/qasc/live_notes_0315.pdf",
+              "locator": "Equation (21.1), printed p. 307, and Theorem 21.2, printed pp. 309–311: finite GKSL jump operators and channel dynamics."
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "An ideal trajectory-ensemble calculation for an undriven qubit in the finite amplitude-damping GKSL model. It predicts a model waiting-time law and state update; it is not a reported detector observation.",
+        "empirical_premises": []
+      }
+    ]
+  }
+]

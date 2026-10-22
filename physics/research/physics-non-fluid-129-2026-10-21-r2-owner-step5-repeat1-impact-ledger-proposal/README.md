@@ -1,0 +1,13 @@
+# Poynting repeat-impact compatibility correction
+
+Verified genuine `impact-repeat-1-collected.json`: zero errors, six reviews, one changed/restated subject (`pthm-emx-weak-poynting-uniqueness`), no created items. Its repaired review matches actual impact-repeat-r1-u2 and the collected post fingerprint exactly. The successful Sol 6.1 high repair dispatch and actual assignment are bound.
+
+The native repair replaces the old categorical “Separate Green compatibility of each pair does not imply that additional condition” sentence after the supplier gained independent smooth-test weak-trace identities. The replacement records the difference energy-pair identity as the explicit hypothesis used, and Proof 5.1 verifies the newly required linear trace identities for differences. This description is attributed to the actual native owner; no new proof or source review was performed here.
+
+The existing canonical initial-impact Poynting row concerns a different recorded issue: treating differences of arbitrary old scalar-Green-compatible boundary pairs as automatically admissible. Preserve that row, its original class and its repair history. The current correction addresses a categorical warning no longer appropriate to the strengthened weak-trace class, while retaining conditional uniqueness and the energy formulas. No supersession or duplicate of the prior finding is proposed.
+
+`adoption-proposal.json` preserves the exact review, Statement before/after, nested `repair_notes.ledger_reconciliation`, source/report/collection/dispatch guards and prior row. Top-level report ledger updates are absent and collection `ledger_updates` is empty; the actual nested reconciliation is retained separately. It says the supplied adjudicator proposals concerned other subjects and records the new draft wording correction without a fabricated original judge tuple.
+
+The actual report provides no severity or canonical taxonomy. `canonical-row-template.json` therefore leaves **class, subclass, severity and location null**, requiring explicit Root judgment. Do not transfer the supplier's fatal classification or the prior different consumer defect's nonfatal classification. The template is not append-ready.
+
+Only the target source is archived/guarded; downstream carriers, shared metadata and mutable runtime state are not frozen. The collection's three downstream targets remain for the ordinary native continuation, with no claim that later maintenance/certification has finished. Root should recheck these focused guards and same-defect absence, adopt taxonomy, then append the distinct fixed compatibility row if still needed. No production, source, native, canonical or state edit occurred.

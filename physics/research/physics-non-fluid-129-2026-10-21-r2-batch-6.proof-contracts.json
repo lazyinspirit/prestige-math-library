@@ -1,0 +1,590 @@
+{
+  "version": 1,
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "batch": "6",
+  "scope": [
+    "pthm-emx-uniaxial-dispersion",
+    "pthm-emx-lorentz-reciprocity",
+    "ex-emx-extraordinary-longitudinal-e",
+    "ex-emx-reciprocity-not-time-reversal"
+  ],
+  "contracts": {
+    "pthm-emx-uniaxial-dispersion": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-emx-anisotropic-plane-symbol",
+          "source_section": "Definition",
+          "quote": "A nonzero amplitude $e$ is a source-free plane-wave mode in this branch exactly when $\\mathcal M(k,\\omega)e=0$; its magnetic amplitudes are $b=(k\\times e)/\\omega$ and $h=b/\\mu$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Write $e=(e_x,e_y,e_z)$. Substituting the stated diagonal tensor and $k=(k_x,0,k_z)$ into [L1], and expanding the cross products componentwise, gives $\\begin{pmatrix}\\omega^2\\varepsilon_\\perp-k_z^2/\\mu&0&k_xk_z/\\mu\\\\0&\\omega^2\\varepsilon_\\perp-(k_x^2+k_z^2)/\\mu&0\\\\k_xk_z/\\mu&0&\\omega^2\\varepsilon_\\parallel-k_x^2/\\mu\\end{pmatrix}\\begin{pmatrix}e_x\\\\e_y\\\\e_z\\end{pmatrix}=0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "If $e_y\\ne0$, the middle row gives $k_x^2+k_z^2=\\mu\\varepsilon_\\perp\\omega^2$. If $(e_x,e_z)\\ne(0,0)$, the $xz$ block must be singular, and its determinant is $\\frac{\\omega^2\\varepsilon_\\perp\\varepsilon_\\parallel}{\\mu}\\left(\\mu\\omega^2-\\frac{k_x^2}{\\varepsilon_\\parallel}-\\frac{k_z^2}{\\varepsilon_\\perp}\\right)$, so it vanishes exactly on the second sheet. Conversely, on the first sheet $(0,1,0)$ is a nonzero kernel vector, and on the second sheet the singular $xz$ block has a nonzero kernel vector. Since the matrix separates the $y$ and $xz$ sectors, these are all nonzero modes. Away from an intersection, the $xz$ block is invertible on the first sheet, so its kernel is exactly the $y$ line. On the second sheet, away from an intersection, the middle coefficient is nonzero and the singular $xz$ block has rank one: its off-diagonal entry is nonzero when $k_xk_z\\ne0$, while on either coordinate axis its other diagonal entry is respectively $\\omega^2\\varepsilon_\\parallel$ or $\\omega^2\\varepsilon_\\perp$, both positive. Thus both polarization spaces are one-dimensional away from intersections.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "At an intersection with $\\varepsilon_\\perp\\ne\\varepsilon_\\parallel$, dividing the first sheet by $\\varepsilon_\\perp$ and subtracting the second gives $k_x^2(1/\\varepsilon_\\perp-1/\\varepsilon_\\parallel)=0$, hence $k_x=0$; either sheet then gives $k_z^2=\\mu\\varepsilon_\\perp\\omega^2$. Conversely, substituting these values into both sheets verifies an intersection. The matrix in step 1.1 is then $\\operatorname{diag}(0,0,\\omega^2\\varepsilon_\\parallel)$, so its kernel is the complex span of $\\hat x,\\hat y$. For $\\varepsilon_\\perp=\\varepsilon_\\parallel=\\varepsilon$, take any real $k\\in\\mathbb R^3\\setminus\\{0\\}$. Expanding the cross products in [L1] gives $\\mathcal M(k,\\omega)=(\\varepsilon\\omega^2-|k|^2/\\mu)I_3+kk^T/\\mu$. Every complex amplitude has the direct decomposition $e=e_\\parallel+e_\\perp$, where $e_\\parallel=k(k\\cdot e)/|k|^2$ and $k\\cdot e_\\perp=0$; the denominator is positive since $k$ is real and nonzero. The symbol acts by $\\mathcal M e_\\parallel=\\varepsilon\\omega^2e_\\parallel$ and $\\mathcal M e_\\perp=(\\varepsilon\\omega^2-|k|^2/\\mu)e_\\perp$. Because $\\varepsilon\\omega^2>0$, a nonzero kernel occurs exactly on $|k|^2=\\mu\\varepsilon\\omega^2$, and there it is precisely $k^\\perp=\\{e:k\\cdot e=0\\}$. This complex space has dimension two: choose an index with $k_i\\ne0$ and solve its one linear equation for $e_i$ in terms of the other two complex coordinates. For every real unit direction $n$, taking $k=\\omega\\sqrt{\\mu\\varepsilon}\\,n$ gives a point on that sphere. In the $xz$ section this kernel is the sum of the $y$ and transverse $xz$ coordinate sectors, verifying the common-circle section as well as the full-sphere claim. This proves the stated degeneracies and completes the conditional model classification.",
+          "inputs": [
+            "given",
+            "L1",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The zero electric amplitude is excluded in [L1]; step 1.2 classifies nonzero symbol kernels only."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1, 1.2 and 2.1: mu, epsilon_perp and epsilon_parallel are strictly positive, so all coefficient divisions are valid. Also omega>0 and k is nonzero; no static mode is claimed."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 treats equal principal permittivities: the two sheets coincide, and every direction on the isotropic sphere has the two-dimensional transverse kernel. A one-dimensional polarization sector occurs away from intersections by steps 1.1 and 1.2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 identifies the distinct-permittivity optic-axis kernel span(xhat,yhat) and the equal-permittivity transverse kernel; neither repeated polarization space is discarded."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement fixes omega>0 and k nonzero, so there is no static or zero-wavevector endpoint in the claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The componentwise matrix calculation selects no element from any nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.2 shows every nonzero kernel has an ordinary or extraordinary dispersion relation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 1.2 constructs a y-polarized kernel on the first sheet and a nonzero xz kernel on the second."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "Exact normalized extraordinary point",
+          "status": "checked",
+          "evidence": "Set epsilon_perp=1, epsilon_parallel=2 and mu*omega^2=1 in normalized units. At (kx,kz)=(1/sqrt(2),sqrt(3)/2), kx^2/epsilon_parallel+kz^2/epsilon_perp=1 and kx,kz are both nonzero; the ordinary sphere equation gives 5/4, so the selected point lies only on the extraordinary sheet."
+        }
+      ],
+      "finite_checks_disposition": "The proof is a finite matrix and determinant calculation; the exact normalized point is a consistency check, not empirical data.",
+      "supplier_excerpts": [
+        {
+          "supplier": "def-emx-anisotropic-plane-symbol",
+          "carrier": "items/def-emx-anisotropic-plane-symbol.md",
+          "status": "Current supplier statement and proof read and matched to this use; no independent supplier proof approval is asserted.",
+          "source_section": "Definition",
+          "exact_statement": "A nonzero amplitude $e$ is a source-free plane-wave mode in this branch exactly when $\\mathcal M(k,\\omega)e=0$; its magnetic amplitudes are $b=(k\\times e)/\\omega$ and $h=b/\\mu$."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-6-3a",
+        "notes": "Accepted reader rank clarification after independent matrix/determinant and both implication checks. Removing only the addition exactly reproduces frozen pre hash; current raw source matches frozen post. Nonzero xz block has rank one on extraordinary sheet, including both coordinate axes, while ordinary off-intersection block is invertible. Optic-axis and equal-permittivity kernels are two-dimensional over C; real k nonzero makes isotropic parallel/transverse decomposition valid. Checked diagram normalized circle/ellipse and both intersections. No interface, empirical input or choice use added. Kong §3.3.E pp.315–318 and k-surface equations (3.3.72)–(3.3.73), p.320, agree under kappa=1/epsilon_perp, kappa_z=1/epsilon_parallel and nu=1/mu."
+      },
+      "current_boundary_worksheet": {
+        "proposal": "research/physics-non-fluid-129-2026-10-21-r2-owner-step2-boundary-proposal-1/proposal.json",
+        "source_sha256": "28e21348537126e5cffe9531218313cb42c6d37801ab31cdca666bcd25d9b5b6",
+        "qualification": "Released complete current source/eight-case semantic worksheet; root transcribed exact current rows. No independent acceptance or finite computation asserted."
+      }
+    },
+    "pthm-emx-lorentz-reciprocity": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$. ",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-the-divergence-and-curl-of-a-cross-product",
+          "source_section": "Statement",
+          "quote": "$$\\operatorname{div}(F\\times G)=\\langle\\operatorname{curl}F,G\\rangle-\\langle F,\\operatorname{curl}G\\rangle,$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-divergence-theorem-for-bounded-c-one-euclidean-domains",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. For $n\\ge2$, a bounded $C^1$ domain Omega and $F\\in C^1(\\overline\\Omega;\\mathbb R^n)$, $\\int_\\Omega\\operatorname{div}F\\,dx=\\int_{\\partial\\Omega}F\\cdot\\nu\\,dS$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-emx-reciprocal-phasor-medium",
+          "source_section": "Definition",
+          "quote": "This definition calls the coefficient model **reciprocal** when $\\varepsilon(x)^T=\\varepsilon(x)$ and $\\mu(x)^T=\\mu(x)$ at every $x\\in\\overline\\Omega$. It places no Hermitian, positive-definite, or passivity condition on these complex matrices.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-emx-anisotropic-plane-symbol",
+          "source_section": "Definition",
+          "quote": "Use a material-rest frame: an inertial chart in which each modelled material element has fixed spatial coordinates. Use the macroscopic fields of the classical electromagnetic material model. For physical interpretation declare a finite angular-frequency band $I_\\omega=[\\omega_-,\\omega_+]$ with $0<\\omega_-<\\omega_+<\\infty$, in $\\mathrm{s^{-1}}$. The constant-coefficient branch below is adopted as an effective phase-response model only for $\\omega\\in I_\\omega$, as required by the material-closure postulate; it asserts no broadband material response or universal front speed. The symbol and its algebraic Maxwell equivalence remain defined for every $\\omega>0$. In a homogeneous source-free region take $\\rho_f=0$, $J_f=0$ and select the nonconducting, lossless constitutive branch",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $X=E_1\\times H_2-E_2\\times H_1$. For the first product write $E_1=U+iV$ and $H_2=W+iZ$ with real C1 fields. The complex-bilinear product is $E_1\\times H_2=(U\\times W-V\\times Z)+i(U\\times Z+V\\times W)$; applying [F1] to each real pair and using the componentwise real-linearity of curl and divergence gives $\\operatorname{div}(E_1\\times H_2)=H_2\\cdot\\operatorname{curl}E_1-E_1\\cdot\\operatorname{curl}H_2$. The same expansion for $E_2\\times H_1$ yields $\\operatorname{div}X=H_2\\cdot\\operatorname{curl}E_1-E_1\\cdot\\operatorname{curl}H_2-H_1\\cdot\\operatorname{curl}E_2+E_2\\cdot\\operatorname{curl}H_1$. Substituting [L1] yields $E_2\\cdot J_1-E_1\\cdot J_2+i\\omega(H_2\\cdot\\mu H_1-H_1\\cdot\\mu H_2+E_1\\cdot\\varepsilon E_2-E_2\\cdot\\varepsilon E_1)$. For any complex vectors $u,v$, $u\\cdot\\varepsilon v=\\sum_{r,s}u_r\\varepsilon_{rs}v_s=v\\cdot\\varepsilon u$ by swapping $r,s$ and using $\\varepsilon_{rs}=\\varepsilon_{sr}$; the same calculation applies to $\\mu$. Thus the tensor terms cancel without conjugation and $\\operatorname{div}X=E_2\\cdot J_1-E_1\\cdot J_2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The field $X$ is C1 on $\\overline\\Omega$. Apply [F2] separately to its real and imaginary parts, which satisfy the theorem's real-valued hypotheses, and combine the two identities complex-linearly. Substituting step 1.1 into the resulting equality gives the displayed boundary identity.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [L2], the lossless anisotropic plane-wave branch has a real symmetric tensor $\\varepsilon$ and scalar $\\mu$; therefore its ordinary transposes equal themselves, so it is a subcase of the coefficient class in [L1]. Applying step 2.1 to any two C1 phasor solutions in that subcase proves the anisotropic specialization, with its physical use restricted to the finite band in [L2].",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "L1",
+            "L2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "With J1=J2=0 the right side vanishes, so step 2.1 gives zero net bilinear boundary flux."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If either solution pair is zero, every term in step 1.1 and in the boundary identity vanishes by bilinearity."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The scalar isotropic subcase is included in step 3.1 because scalar multiples of the identity are transpose-symmetric."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 uses only pointwise transpose symmetry and no inverse or positive eigenvalue, so singular symmetric coefficients are allowed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "At omega=0 the frequency-multiplied tensor terms in step 1.1 vanish; step 2.1 remains the static divergence identity."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement assumes AC_omega; step 2.1 applies the divergence theorem separately to the real and imaginary parts under that premise. No additional family of witnesses is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item proves a boundary identity from transpose symmetry, not an if-and-only-if characterization of all reciprocal media."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item does not infer tensor symmetry from the boundary identity; it proves only the stated sufficient condition."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "Complex symmetric bilinear cancellation",
+          "status": "checked",
+          "evidence": "For epsilon=diag(1+i,2,3), u=(1,i,0), and v=(i,2,0), the unconjugated products u dot epsilon v and v dot epsilon u both equal -1+5i; no Hermitian conjugation is used."
+        }
+      ],
+      "finite_checks_disposition": "The proof is componentwise and applies to arbitrary fields under the hypotheses; the exact complex diagonal test checks the bilinear transpose cancellation.",
+      "supplier_excerpts": [
+        {
+          "supplier": "def-countable-choice",
+          "carrier": "items/def-countable-choice.md",
+          "status": "Current supplier statement and proof read and matched to this use; no independent supplier proof approval is asserted.",
+          "source_section": "Definition",
+          "exact_statement": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$. "
+        },
+        {
+          "supplier": "lem-the-divergence-and-curl-of-a-cross-product",
+          "carrier": "items/lem-the-divergence-and-curl-of-a-cross-product.md",
+          "status": "Current supplier statement and proof read and matched to this use; no independent supplier proof approval is asserted.",
+          "source_section": "Statement",
+          "exact_statement": "$$\\operatorname{div}(F\\times G)=\\langle\\operatorname{curl}F,G\\rangle-\\langle F,\\operatorname{curl}G\\rangle,$$"
+        },
+        {
+          "supplier": "thm-divergence-theorem-for-bounded-c-one-euclidean-domains",
+          "carrier": "items/thm-divergence-theorem-for-bounded-c-one-euclidean-domains.md",
+          "status": "Current supplier statement and proof read and matched to this use; no independent supplier proof approval is asserted.",
+          "source_section": "Statement",
+          "exact_statement": "Assume $\\mathrm{AC}_\\omega$. For $n\\ge2$, a bounded $C^1$ domain Omega and $F\\in C^1(\\overline\\Omega;\\mathbb R^n)$, $\\int_\\Omega\\operatorname{div}F\\,dx=\\int_{\\partial\\Omega}F\\cdot\\nu\\,dS$."
+        },
+        {
+          "supplier": "def-emx-reciprocal-phasor-medium",
+          "carrier": "items/def-emx-reciprocal-phasor-medium.md",
+          "status": "Current supplier statement and proof read and matched to this use; no independent supplier proof approval is asserted.",
+          "source_section": "Definition",
+          "exact_statement": "This definition calls the coefficient model **reciprocal** when $\\varepsilon(x)^T=\\varepsilon(x)$ and $\\mu(x)^T=\\mu(x)$ at every $x\\in\\overline\\Omega$. It places no Hermitian, positive-definite, or passivity condition on these complex matrices."
+        },
+        {
+          "supplier": "def-emx-anisotropic-plane-symbol",
+          "carrier": "items/def-emx-anisotropic-plane-symbol.md",
+          "status": "Current supplier statement and proof read and matched to this use; no independent supplier proof approval is asserted.",
+          "source_section": "Definition",
+          "exact_statement": "Use a material-rest frame: an inertial chart in which each modelled material element has fixed spatial coordinates. Use the macroscopic fields of the classical electromagnetic material model. For physical interpretation declare a finite angular-frequency band $I_\\omega=[\\omega_-,\\omega_+]$ with $0<\\omega_-<\\omega_+<\\infty$, in $\\mathrm{s^{-1}}$. The constant-coefficient branch below is adopted as an effective phase-response model only for $\\omega\\in I_\\omega$, as required by the material-closure postulate; it asserts no broadband material response or universal front speed. The symbol and its algebraic Maxwell equivalence remain defined for every $\\omega>0$. In a homogeneous source-free region take $\\rho_f=0$, $J_f=0$ and select the nonconducting, lossless constitutive branch"
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-6-3a",
+        "notes": "Independently checked current proof steps 1.1–3.1 against all five direct suppliers and reader-6/refute-6 (no findings). The real cross-product divergence identity extends by four real-pair expansions to the explicitly bilinear complex products. Maxwell substitution has the stated source signs under exp(-i omega t); ordinary transpose symmetry cancels electric and magnetic terms without conjugation, coefficient derivatives or invertibility. The C1-neighborhood convention ensures X is C1; the bounded C1-domain divergence theorem applies to Re X and Im X under explicitly inherited AC_omega, yielding finite integrals. Both sides have units W. Zero fields, zero sources, omega=0 and singular symmetric coefficients preserve the identity; no converse, existence, passivity, causality or time-reversal conclusion is used. The lossless scalar-mu branch is a symmetric subcase. Published mathematical supplier statements and displayed proofs inspected read-only without claiming a recursive audit. Direct downloads subsequently succeeded. Read Kong §3.2.E pp.299–300 and Chew §§12.1–12.2 pp.146–149; source transpose conventions and the finite-domain identity agree. Corrected Chew §12.2 locator from p.150 to p.149; no mathematical interface change."
+      }
+    },
+    "ex-emx-extraordinary-longitudinal-e": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "pthm-emx-uniaxial-dispersion",
+          "source_section": "Statement",
+          "quote": "For a nonzero source-free mode with real wavevector $k=(k_x,0,k_z)\\ne0$ in $\\mathrm{m^{-1}}$, the nonzero-mode wavevectors lie on exactly the following two sheets:",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $\\varepsilon_\\perp,\\varepsilon_\\parallel>0$, the diagonal matrix $\\varepsilon$ is invertible, so $e=\\varepsilon^{-1}d=d_0(k_z/\\varepsilon_\\perp,0,-k_x/\\varepsilon_\\parallel)$ is defined and nonzero. Direct contraction gives $k\\cdot d=d_0(k_xk_z-k_zk_x)=0$ and $k\\cdot e=d_0k_xk_z(1/\\varepsilon_\\perp-1/\\varepsilon_\\parallel)\\ne0$ by the nonzero-component and unequal-permittivity hypotheses.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The extraordinary dispersion relation gives $k_x^2/\\varepsilon_\\parallel+k_z^2/\\varepsilon_\\perp=\\mu\\omega^2$. Hence the $x$ and $z$ components of $k\\times(k\\times e)$ are $-d_0k_z(k_x^2/\\varepsilon_\\parallel+k_z^2/\\varepsilon_\\perp)=-\\mu\\omega^2d_0k_z$ and $d_0k_x(k_x^2/\\varepsilon_\\parallel+k_z^2/\\varepsilon_\\perp)=\\mu\\omega^2d_0k_x$, while the $y$ component is zero. Thus $\\mu^{-1}k\\times(k\\times e)+\\omega^2d=0$, so $e$ is an extraordinary symbol mode and the longitudinal-component claim follows.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "L1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 uses d0 nonzero; setting it to zero gives only the excluded zero amplitude."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example assumes omega>0 and nonzero kx and kz; no static or zero-component limit is asserted."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-dimensional polarization or one-axis claim is made; the example requires both k components nonzero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 shows the longitudinal component vanishes if either wavevector component is zero or the two permittivities coincide; those cases are excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The nonzero-component and unequal-permittivity hypotheses in step 1.1 are exactly the boundary exclusions for strict nonzero longitudinal amplitude."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The amplitude is explicitly constructed from the given nonzero d0; no choice from a family is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example proves one conditional nonorthogonality claim and makes no biconditional assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The converse that every longitudinal electric mode has these parameter conditions is not asserted."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "Exact normalized longitudinal amplitude",
+          "status": "checked",
+          "evidence": "With epsilon_perp=1, epsilon_parallel=2, mu*omega^2=1 and (kx,kz)=(1/sqrt(2),sqrt(3)/2), the extraordinary condition holds, k dot d=0, and k dot e=d0*sqrt(3)/(4*sqrt(2)) is nonzero for d0 nonzero."
+        }
+      ],
+      "finite_checks_disposition": "The exact normalized point checks the displayed extraordinary condition and strict longitudinal component; it is not a measured material.",
+      "supplier_excerpts": [
+        {
+          "supplier": "pthm-emx-uniaxial-dispersion",
+          "carrier": "items/pthm-emx-uniaxial-dispersion.md",
+          "status": "Current supplier statement and proof read and matched to this use; no independent supplier proof approval is asserted.",
+          "source_section": "Statement",
+          "exact_statement": "For a nonzero source-free mode with real wavevector $k=(k_x,0,k_z)\\ne0$ in $\\mathrm{m^{-1}}$, the nonzero-mode wavevectors lie on exactly the following two sheets:"
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-6-step1-author",
+        "notes": "The explicit amplitude is checked in the extraordinary symbol and the strict nonzero formula retains all anisotropy and nondegeneracy hypotheses."
+      }
+    },
+    "ex-emx-reciprocity-not-time-reversal": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$. ",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "pthm-emx-lorentz-susceptibility",
+          "source_section": "Statement",
+          "quote": "$$\\operatorname{Im}\\varepsilon(\\omega)=\\sum_{\\ell=1}^{N}\\frac{a_\\ell\\gamma_\\ell\\omega}{(\\omega_\\ell^2-\\omega^2)^2+\\gamma_\\ell^2\\omega^2}\\ge0.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-emx-reciprocal-phasor-medium",
+          "source_section": "Definition",
+          "quote": "This definition calls the coefficient model **reciprocal** when $\\varepsilon(x)^T=\\varepsilon(x)$ and $\\mu(x)^T=\\mu(x)$ at every $x\\in\\overline\\Omega$. It places no Hermitian, positive-definite, or passivity condition on these complex matrices.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "pthm-emx-lorentz-reciprocity",
+          "source_section": "Statement",
+          "quote": "Then\n\n$$\\int_{\\partial\\Omega}n\\cdot(E_1\\times H_2-E_2\\times H_1)\\,dS=\\int_\\Omega(E_2\\cdot J_1-E_1\\cdot J_2)\\,dV.$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The denominator $(\\omega_0^2-\\omega^2)^2+\\gamma^2\\omega^2$ is strictly positive because $\\gamma\\omega>0$. Therefore [F1] gives $\\operatorname{Im}\\varepsilon(\\omega)=a\\gamma\\omega/((\\omega_0^2-\\omega^2)^2+\\gamma^2\\omega^2)>0$. A scalar multiple of $I_3$ equals its ordinary transpose even when the scalar is complex, and the real scalar $\\mu$ also equals its transpose; hence [F2] places these coefficients in the reciprocal class. The reciprocity identity [L1] is consequently applicable whenever the corresponding C1 phasor solutions exist.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "By [F1], $P_1(t)=\\operatorname{Re}(p_1e^{-i\\omega t})$ has amplitude $p_1=(\\varepsilon-\\varepsilon_\\infty)e$, so $J_{\\mathrm{osc}}=\\partial_tP_1$ has phasor amplitude $j_{\\mathrm{osc}}=-i\\omega p_1$. For any complex scalar amplitudes $u,v$, write the product as $\\frac14(uv e^{-2i\\omega t}+uv^*+u^*v+u^*v^*e^{2i\\omega t})$. The period integrals of $e^{\\pm2i\\omega t}$ are zero because $\\omega>0$, so the average is $\\frac12\\operatorname{Re}(uv^*)$. Applying this componentwise gives $\\overline q_{\\mathrm{osc}}=\\frac12\\operatorname{Re}(j_{\\mathrm{osc}}\\cdot e^*)=\\frac{\\omega}{2}\\operatorname{Im}(\\varepsilon-\\varepsilon_\\infty)|e|^2=\\frac{\\omega}{2}\\operatorname{Im}\\varepsilon|e|^2>0$, since $\\varepsilon_\\infty$ is real and $e\\ne0$. Positive $\\overline q_{\\mathrm{osc}}$ is work transferred from the field to the oscillator-current contribution in the adopted Maxwell sign convention. This is a model deduction, not an observation.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The carrier is fixed C^3 and one prescribed oscillator; e=0 is a zero-amplitude limit, not an empty indexed family.",
+          "argument_steps": []
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The strict work conclusion assumes e nonzero and a,gamma,omega positive. In 2.1 setting e=0 gives zero work; omega=0 or gamma=0 is outside the stated strict-loss hypotheses.",
+          "argument_steps": [
+            "2.1"
+          ]
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 treats exactly one oscillator, as specified by the chosen susceptibility in [F1].",
+          "argument_steps": [
+            "1.1"
+          ]
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 shows the Lorentz denominator is strictly positive even at resonance because gamma*omega>0.",
+          "argument_steps": [
+            "1.1"
+          ]
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The strict conditions omega>0 and gamma>0 exclude the static and undamped endpoints. The conclusion exhibits reciprocal lossy coefficients and positive oscillator work, not a classification of every absorbing medium.",
+          "argument_steps": []
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A1 explicitly inherits AC_omega from the Lorentz-response supplier. The calculation in 1.1 and 2.1 fixes one oscillator and one amplitude and uses no additional selection principle.",
+          "argument_steps": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item exhibits one reciprocal absorbing model and does not classify all absorbing media. The conclusion exhibits reciprocal lossy coefficients and positive oscillator work, not a classification of every absorbing medium.",
+          "argument_steps": []
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse from reciprocity to positive absorption or from positive absorption to reciprocity is claimed. The conclusion exhibits reciprocal lossy coefficients and positive oscillator work, not a classification of every absorbing medium.",
+          "argument_steps": []
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "Single-oscillator loss sign",
+          "status": "checked",
+          "evidence": "In consistent normalized units choose epsilon_infinity=1, a=1, omega_0=2, gamma=1, omega=1. Then epsilon-epsilon_infinity=1/(3-i)=(3+i)/10, so Im(epsilon)=1/10 and for |e|^2=1 the averaged work density is 1/20>0."
+        }
+      ],
+      "finite_checks_disposition": "The exact normalized oscillator values check the loss sign and period-average coefficient; they are model values, not measurements.",
+      "supplier_excerpts": [
+        {
+          "supplier": "def-countable-choice",
+          "carrier": "items/def-countable-choice.md",
+          "status": "Current supplier statement and proof read and matched to this use; no independent supplier proof approval is asserted.",
+          "source_section": "Definition",
+          "exact_statement": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$. "
+        },
+        {
+          "supplier": "pthm-emx-lorentz-susceptibility",
+          "carrier": "items/pthm-emx-lorentz-susceptibility.md",
+          "status": "Current supplier statement and proof read and matched to this use; no independent supplier proof approval is asserted.",
+          "source_section": "Statement",
+          "exact_statement": "$$\\operatorname{Im}\\varepsilon(\\omega)=\\sum_{\\ell=1}^{N}\\frac{a_\\ell\\gamma_\\ell\\omega}{(\\omega_\\ell^2-\\omega^2)^2+\\gamma_\\ell^2\\omega^2}\\ge0.$$"
+        },
+        {
+          "supplier": "def-emx-reciprocal-phasor-medium",
+          "carrier": "items/def-emx-reciprocal-phasor-medium.md",
+          "status": "Current supplier statement and proof read and matched to this use; no independent supplier proof approval is asserted.",
+          "source_section": "Definition",
+          "exact_statement": "This definition calls the coefficient model **reciprocal** when $\\varepsilon(x)^T=\\varepsilon(x)$ and $\\mu(x)^T=\\mu(x)$ at every $x\\in\\overline\\Omega$. It places no Hermitian, positive-definite, or passivity condition on these complex matrices."
+        },
+        {
+          "supplier": "pthm-emx-lorentz-reciprocity",
+          "carrier": "items/pthm-emx-lorentz-reciprocity.md",
+          "status": "Current supplier statement and proof read and matched to this use; no independent supplier proof approval is asserted.",
+          "source_section": "Statement",
+          "exact_statement": "Then\n\n$$\\int_{\\partial\\Omega}n\\cdot(E_1\\times H_2-E_2\\times H_1)\\,dS=\\int_\\Omega(E_2\\cdot J_1-E_1\\cdot J_2)\\,dV.$$"
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-6-3a",
+        "notes": "Independently reviewed both verification steps, four direct suppliers, reader/refuter reports (no findings), and the complete current Lorentz-susceptibility statement/proof; consumer uses only harmonic multiplier step 1.1 and loss step 2.2, not the DC-dependent Hilbert relation. N=1, positive a,gamma,omega make denominator strictly positive including resonance. Scalar complex epsilon I and real mu I are transpose-symmetric; reciprocity remains conditional on existence of C1 solutions and the bounded C1-domain hypotheses and inherited AC_omega. The cycle average uses componentwise conjugation only in Re(j dot e*)/2, with j=-i omega (epsilon-epsilon_infinity)e; Re(-i z)=Im z gives positive omega Im(epsilon)|e|^2/2. Units W/m^3 verified. e=0 gives zero; omega=0 or gamma=0 excluded for strict positivity, no converse or time-reversal result asserted. Local amplitude is not claimed to be a global solution or a measured field. No empirical uncertainty is manufactured. Chew pp.146–149 establishes reciprocal lossy tensor context; Beisert §12.1 pp.12.1–12.2 is response context only. No new defect found."
+      },
+      "current_boundary_worksheet": {
+        "proposal": "research/physics-non-fluid-129-2026-10-21-r2-owner-step2-boundary-proposal-8/proposal.json",
+        "source_sha256": "c72e607c2a6ff964bb81fdfe874de4c5154f11936bf47e9eb181065715416893",
+        "qualification": "Released complete current source/eight-case semantic worksheet; root transcribed exact current rows. No independent acceptance or finite computation asserted."
+      }
+    }
+  }
+}

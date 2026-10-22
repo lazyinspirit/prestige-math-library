@@ -1,0 +1,207 @@
+---
+id: lem-nrqmx-landau-form-diagonalization
+kind: lemma
+domain: mathematics
+library: physics
+title: Closed-form diagonalization in Landau gauge
+status: draft
+origin: pipeline
+pipeline_run: physics-non-fluid-129-2026-10-21-r2
+dependency_level: 2
+deps:
+  - def-nrqmx-magnetic-form-data
+  - lem-nrqmx-magnetic-form-closability
+  - thm-nrqm-oscillator-oscillator-scaling-and-exact-realization
+  - def-fourier-transform-on-l-one-of-rn
+  - thm-plancherel
+  - cor-fourier-transform-is-a-topological-automorphism-of-schwartz-space
+  - lem-nrqm-composites-euclidean-l2-product-unitary
+  - cor-c-one-change-of-variables-for-l-one-functions
+  - thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces
+  - thm-tonelli-theorem-for-sigma-finite-product-spaces
+  - thm-integration-by-parts-for-absolutely-continuous-functions
+  - def-the-standard-smooth-step-function
+  - cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn
+  - lem-l-two-with-the-integral-pairing-is-a-hilbert-space
+  - def-countable-choice
+dependency_roles:
+  def-nrqmx-magnetic-form-data: mathematical-premise
+  lem-nrqmx-magnetic-form-closability: mathematical-premise
+  thm-nrqm-oscillator-oscillator-scaling-and-exact-realization: mathematical-premise
+  def-fourier-transform-on-l-one-of-rn: mathematical-premise
+  thm-plancherel: mathematical-premise
+  cor-fourier-transform-is-a-topological-automorphism-of-schwartz-space: mathematical-premise
+  lem-nrqm-composites-euclidean-l2-product-unitary: mathematical-premise
+  cor-c-one-change-of-variables-for-l-one-functions: mathematical-premise
+  thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces: mathematical-premise
+  thm-tonelli-theorem-for-sigma-finite-product-spaces: mathematical-premise
+  thm-integration-by-parts-for-absolutely-continuous-functions: mathematical-premise
+  def-the-standard-smooth-step-function: mathematical-premise
+  cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn: mathematical-premise
+  lem-l-two-with-the-integral-pairing-is-a-hilbert-space: mathematical-premise
+  def-countable-choice: mathematical-premise
+proof_strategy: direct
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+sources:
+  references:
+    - title: "David Tong, Applications of Quantum Mechanics, §1.2, Landau gauge and oscillator fibers"
+      url: "https://www.damtp.cam.ac.uk/user/tong/aqm/aqm.pdf"
+    - title: "Aram Harrow, MIT 8.06 Spring 2016 Lecture Notes, Chapter 4, §§3.1–3.2"
+      url: "https://ocw.mit.edu/courses/8-06-quantum-physics-iii-spring-2016/6e02558ecf4b7af37d2cdff550fc0f71_MIT8_06S16_chap4.pdf"
+    - title: "V. P. Nair, Notes on Quantum Mechanics, §13.2"
+      url: "https://nair.ccny.cuny.edu/Notes-QM.pdf"
+verification:
+  precheck: pass
+---
+
+## Statement
+
+Assume Countable Choice, $m,\hbar>0$, and real $q,B$ with $qB\ne0$. On
+$L^2(\mathbb R^2;\mathbb C)$ close the nonnegative form
+$$q_B[u]=\frac1{2m}\left(\|-i\hbar\partial_xu\|_2^2+\|(-i\hbar\partial_y-qBx)u\|_2^2\right),\qquad u\in C_c^\infty(\mathbb R^2;\mathbb C).$$
+Put $\omega_c=|qB|/m$,
+$E_n=\hbar\omega_c(n+\tfrac12)$, and let $(\psi_n)_{n\ge0}$ be the
+complete normalized eigenfunctions of the one-dimensional oscillator with
+mass $m$, frequency $\omega_c$, and action constant $\hbar$ in its exact
+self-adjoint oscillator realization. For
+Schwartz $u$ define
+$\mathcal F_yu(x,k)=(2\pi)^{-1/2}\int_{\mathbb R}e^{-iky}u(x,y)\,dy$,
+and use its unitary $L^2$ extension. Put $x_0(k)=\hbar k/(qB)$ and
+$(Uu)(\xi,k)=\mathcal F_yu(\xi+x_0(k),k)$.
+Then $U$ is unitary from $L^2(\mathbb R^2_{x,y})$ onto
+$L^2(\mathbb R^2_{\xi,k})$. Writing
+$$Uu(\xi,k)=\sum_{n=0}^\infty f_n(k)\psi_n(\xi),\qquad f_n\in L^2(\mathbb R_k),$$
+the form closure domain and value are exactly
+$$D(\overline q_B)=\left\{u:\sum_{n=0}^\infty E_n\|f_n\|_{L^2(k)}^2<\infty\right\},\qquad \overline q_B[u]=\sum_{n=0}^\infty E_n\|f_n\|_{L^2(k)}^2.$$
+Thus the form is the diagonal oscillator form with an unrestricted $L^2(k)$
+degeneracy factor; it asserts no finite-area state count.
+
+## Statement references
+
+[[def-nrqmx-magnetic-form-data]]
+
+[[lem-nrqmx-magnetic-form-closability]]
+
+[[thm-nrqm-oscillator-oscillator-scaling-and-exact-realization]]
+
+## Facts & Assumptions
+
+**Given:** Countable Choice, $m,\hbar>0$, $qB\ne0$, the form $q_B$, and the
+oscillator eigenfamily $(\psi_n)$ with energies $E_n$.
+
+[F1] The magnetic form on $C_c^\infty$ is the form of
+[[def-nrqmx-magnetic-form-data]] with $d=2$, $A=(0,Bx)$ and $V=0$; it is
+closable by [[lem-nrqmx-magnetic-form-closability]].
+
+[F2] The $2\pi$-frequency Fourier transform on $L^1$ has kernel
+$e^{-2\pi i y\xi}$ ([[def-fourier-transform-on-l-one-of-rn]]), and its
+extension to $L^2$ is unitary ([[thm-plancherel]]). The wave-number convention
+in the Statement is the unitary rescaling
+$\mathcal F_y g(k)=(2\pi)^{-1/2}\widehat g(k/(2\pi))$; for Schwartz $g$ it
+satisfies $\mathcal F_y(-i\partial_y g)=k\mathcal F_y g$ by integration by
+parts, and Fourier transform preserves Schwartz space
+([[cor-fourier-transform-is-a-topological-automorphism-of-schwartz-space]]).
+The Euclidean $L^2$ product identification and Fubini apply
+([[lem-nrqm-composites-euclidean-l2-product-unitary]],
+[[thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces]]); the
+integration-by-parts identity used for the derivative multiplier is
+[[thm-integration-by-parts-for-absolutely-continuous-functions]].
+
+[F3] For $\omega_c>0$, the oscillator Hamiltonian is self-adjoint with
+complete orthonormal basis $(\psi_n)$, eigenvalues $E_n$, and differential
+expression $-\hbar^2\partial_\xi^2/(2m)+m\omega_c^2\xi^2/2$ on its core
+([[thm-nrqm-oscillator-oscillator-scaling-and-exact-realization]]).
+
+[F4] Translation of one Lebesgue variable preserves its integral, and
+integration by parts holds for smooth compactly supported functions
+([[cor-c-one-change-of-variables-for-l-one-functions]],
+[[thm-integration-by-parts-for-absolutely-continuous-functions]]).
+
+[F5] Smooth compactly supported cutoffs equal to one on expanding balls and
+with first derivatives bounded by $C/R$ are obtained by rescaling the
+standard smooth step function ([[def-the-standard-smooth-step-function]]).
+
+[F6] Tonelli's theorem permits integration of the nonnegative oscillator
+energy series term by term over $(\xi,k)$ with Lebesgue measure
+([[thm-tonelli-theorem-for-sigma-finite-product-spaces]]).
+
+[F7] For every finite $p$ and dimension, compactly supported smooth
+functions are dense in $L^p(\mathbb R^d)$; in particular this holds for
+$L^2(\mathbb R_k)$ ([[cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn]]).
+
+[F8] The weighted sequence space in the Statement is complete: it is
+$L^2$ on $\mathbb N_0\times\mathbb R_k$ for the sigma-finite measure
+$(n,k)\mapsto E_n\,d\#(n)\,dk$, and $L^2$ of any measure space is
+Hilbert under Countable Choice
+([[lem-l-two-with-the-integral-pairing-is-a-hilbert-space]]).
+
+[A1] Countable Choice is assumed by the unitary Fourier, product-space, and
+oscillator suppliers ([[def-countable-choice]]).
+
+## Proof
+
+1.1 On the dense tensor core $a(x)b(y)$ with $a,b\in\mathcal S(\mathbb R)$,
+$\mathcal F_y$ is the identity on the first factor and the unitary Fourier
+transform on the second, by [F2] and the Euclidean $L^2$ product identification
+in [F2]. It extends uniquely to a unitary on $L^2(\mathbb R^2)$. For each
+$k$, translation $x=\xi+x_0(k)$ preserves the $x$-integral by [F4]; Fubini
+then shows that $Wg(\xi,k)=g(\xi+x_0(k),k)$ is an isometry with inverse
+$W^{-1}h(x,k)=h(x-x_0(k),k)$. Hence $U=W\mathcal F_y$ is unitary. [given, A1, F2, F4, construct]
+
+2.1 Let $u\in C_c^\infty(\mathbb R^2)$ and write
+$F(\xi,k)=Uu(\xi,k)$. For each fixed $k$, $F(\cdot,k)$ is smooth and
+compactly supported in $\xi$. Plancherel in $y$, the derivative identity
+in [F2], and the substitution $x=\xi+x_0(k)$ give
+$$q_B[u]=\int_{\mathbb R^2}\left(\frac{\hbar^2}{2m}|\partial_\xi F|^2+\frac{(qB)^2}{2m}\xi^2|F|^2\right)d\xi\,dk.$$
+For a compactly supported smooth $g(\xi)$, the oscillator differential
+expression in [F3] belongs to $L^2$, so $g\in D(H_{\mathrm{osc}})$.
+Integration by parts against each $\psi_n$ gives
+$\langle H_{\mathrm{osc}}g,\psi_n\rangle=E_n\langle g,\psi_n\rangle$.
+Completeness and Parseval yield
+$$\langle H_{\mathrm{osc}}g,g\rangle=\sum_{n=0}^\infty E_n|\langle g,\psi_n\rangle|^2.$$
+Integration by parts also identifies the left side with
+$$\frac1{2m}\left(\hbar^2\|g'\|_2^2+(qB)^2\|\xi g\|_2^2\right).$$
+Apply this identity to $F(\cdot,k)$ for almost every $k$. Tonelli [F6]
+permits integrating the nonnegative series, so the displayed core form is
+the coefficient form on every transformed core vector. [given, A1, F2, F3, F4, F6, step 1.1, algebra]
+
+3.1 For $N<\infty$ and $f_0,\ldots,f_N\in C_c^\infty(\mathbb R_k)$,
+$F_N(\xi,k)=\sum_{n=0}^Nf_n(k)\psi_n(\xi)$ has inverse
+$$U^{-1}F_N(x,y)=\frac1{\sqrt{2\pi}}\sum_{n=0}^N\int_{\mathbb R}e^{iky}f_n(k)\psi_n\!\left(x-\frac{\hbar k}{qB}\right)dk.$$
+The integrands have compact $k$-support and are Schwartz in $x$ uniformly
+there by the Hermite form in [F3]; differentiating under the integral and
+integrating by parts in $k$ show rapid decay in $y$, so the inverse is
+Schwartz. Define
+$$\chi_R(x,y)=\prod_{s\in\{x,y\}}\sigma(2-s/R)\sigma(2+s/R),$$
+using [F5]. These cutoffs are one on $[-R,R]^2$, vanish outside
+$[-2R,2R]^2$, and have $|\nabla\chi_R|\le C/R$. For each covariant
+derivative,
+$$\Pi_j^A(\chi_Rv)=\chi_R\Pi_j^Av-i\hbar(\partial_j\chi_R)v.$$
+Dominated convergence sends the $L^2$ tails of $v$ and $\Pi_j^Av$ to zero,
+and the extra term has norm at most $C\hbar\|v\|_2/R$. Thus each $F_N$
+lies in the transformed form closure. Finite coefficient families are dense
+in the weighted target: truncate its convergent nonnegative series, then
+approximate the remaining finitely many $L^2(k)$ coefficients by
+$C_c^\infty(k)$ using [F7]. [A1, F1, F3, F4, F5, F7, step 1.1, step 2.1, construct, algebra]
+
+4.1 Step 2.1 maps the transformed core isometrically into the weighted
+target. By [F8] the target is complete, so the isometric image of the form
+completion is closed there. Step 3.1 places a dense subspace of that target
+in the image; hence the image is the whole weighted space and the form
+closure is exactly the stated one. [F1, F8, step 2.1, step 3.1, algebra] ∎
+
+## Remarks
+
+The diagram records the unitary changes of representation used in the proof;
+the argument establishes each arrow and does not rely on the diagram.
+
+```tikzcd
+L^2(\mathbb R^2_{x,y}) \arrow[r,"\mathcal F_y"] & L^2(\mathbb R^2_{x,k}) \arrow[r,"W"] & L^2(\mathbb R^2_{\xi,k}) \arrow[r,"\mathcal H"] & L^2(\mathbb R_k;\ell^2(\mathbb N_0))
+```
+
+Here $\mathcal H$ is the coefficient map
+$F\mapsto(\langle F(k,\cdot),\psi_n\rangle)_{n\ge0}$, which is unitary by
+the complete oscillator basis. The linear Landau potential is unbounded, so
+no bounded-coefficient $H^2$ realization is invoked.

@@ -1,0 +1,122 @@
+{
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "phase": "initial",
+  "round": 1,
+  "unit": "10",
+  "input_sha256": "eaf0a68d231b0a7d0d042df337974eaab597dfd3432daa3ad0aaeebd32fe188c",
+  "decisions": [
+    {
+      "id": "pthm-emx-paraxial-error",
+      "model": "gpt-6-luna",
+      "context_sha256": "f99ac5ed98279b7136d34d9feb391f4fcf0f24a0c7c836b22b7a38e6e9b125f7",
+      "outcome": "confirmed_nonfatal",
+      "reason": "Proof step 3.1 incorrectly identifies the scalar L2 bound with field-amplitude units. With transverse Lebesgue area in m^2 and u in V/m, (integral |u|^2 d^2x)^(1/2) has units V. The multiplier prefactor remains dimensionless, and both scalar norms therefore have units V; the longitudinal amplitudes have units V/m. This explanatory error does not invalidate either stated inequality. Repaired the units explanation without changing the public claim.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "pthm-emx-paraxial-error",
+      "disposition": "repaired",
+      "post_sha256": "23d186b6aeed465a8d217b8589e9652d6bf51ec824c4e353d7f8075576144e5f",
+      "review_context_sha256": "3326948c203163cd6ba6f105759ddeb6318a63a2ba3b991a59025dad14c70cdf",
+      "reason": "Checked the supported n=2 unitary Fourier multiplier argument under its countable-choice hypothesis, the real-field divergence calculation at phases 0 and -pi/2, the positive axial-root bound, and the complex-bilinear two-component norm identity. These prove the scalar and individual-mode bounds, including zero data, z=0, negative z, and the cone edge with delta<1. Corrected only step 3.1 to distinguish area-integrated scalar norms in V from longitudinal field amplitudes in V/m, and synchronized its owning contract derivation. No empirical premise, claim of exact vector approximation, or public-interface change was introduced. This is the adjudicator review and repair, not an independent review of the repair.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "subject": "pthm-emx-paraxial-error",
+      "proposed_status": "fixed",
+      "severity": "nonfatal",
+      "location": "Proof 3.1",
+      "reason": "The scalar L2 norm includes the square root of transverse area. Its units are V for an electric scalar field in V/m. The revised proof explicitly computes this factor; both inequalities and their hypotheses remain unchanged.",
+      "adjudication_ref": {
+        "run": "physics-non-fluid-129-2026-10-21-r2",
+        "phase": "initial",
+        "round": 1,
+        "unit": "10",
+        "model": "gpt-6-luna",
+        "context_sha256": "f99ac5ed98279b7136d34d9feb391f4fcf0f24a0c7c836b22b7a38e6e9b125f7"
+      },
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "supporting_evidence": {
+    "research/physics-non-fluid-129-2026-10-21-r2-batch-10-step5-context.json": "042d442b5c2bcbc97dfbd4345f5abe1cc6637e5c67ff7458a81e3dd18c112741",
+    "research/physics-non-fluid-129-2026-10-21-r2-owner-step5-support-index.json": "0e5ab24286891cecba2dd2a7573f9221608d1307d7624db5e1fb22bc4093bf9b"
+  },
+  "repair_notes": {
+    "changes": [
+      {
+        "path": "items/pthm-emx-paraxial-error.md",
+        "location": "Proof 3.1",
+        "change": "Explicitly computed the spatial L2 norm units; retained the original F7 and algebra justifications."
+      },
+      {
+        "path": "research/physics-non-fluid-129-2026-10-21-r2-batch-10.proof-contracts.json",
+        "location": "contracts.pthm-emx-paraxial-error.derivations[step=3.1].claim",
+        "change": "Synchronized only the assigned derivation claim under the shared write lock; final inputs remain F7 and algebra."
+      }
+    ],
+    "public_interface": {
+      "before_sha256": "a85320417e7a776e66f5734c2a0b34b60e5066fe6f64523f64f14d10ac4d3e99",
+      "after_sha256": "a85320417e7a776e66f5734c2a0b34b60e5066fe6f64523f64f14d10ac4d3e99",
+      "unchanged": true,
+      "reason": "Statement and physical_scope are unchanged, as are empirical qualifications; a proof-only units correction triggers no consumer traversal."
+    },
+    "context": {
+      "current_suppliers_read": [
+        "items/def-emx-angular-spectrum.md",
+        "items/lem-emx-paraxial-phase-multiplier-bound.md",
+        "items/thm-plancherel.md (Statement and supplied proof)",
+        "items/def-l-p-space-as-a-quotient-by-null-functions.md (Definition)"
+      ],
+      "pages_read": [
+        "library/classical-electromagnetism/emx-paraxial-optics.md",
+        "library/classical-electromagnetism/emx-paraxial-optics-examples.md"
+      ],
+      "support_index": "No entry covers this subject or its paraxial suppliers; no prior scientific check was reused. No support supplements were present.",
+      "sources": "No external source retrieval claimed. The local elementary norm, phase, and transversality deductions are familiar and checked directly.",
+      "diagrams": "The assigned item contains no TikZ/tikzcd diagram, and neither proof requires a diagram.",
+      "outside_scope": "The Step-4 digest flags the opening inverse/extension wording in def-emx-angular-spectrum. Its Fact F1 and propagation formulas specify the correct unitary inverse. This supplier presentation concern remains with its owner; no supplier item was edited.",
+      "published_ledger": "No potentially defective published consumer or supplier was found; no published-ledger update is proposed."
+    },
+    "focused_checks": [
+      {
+        "command": "node tools/physics-support/tsx-run.mjs tools/physics-support/precheck.mts items/pthm-emx-paraxial-error.md",
+        "exit_code": 0,
+        "result": "1 checked, 0 failing; direct proof passes."
+      },
+      {
+        "command": "node tools/physics-support/rendercheck.mjs items/pthm-emx-paraxial-error.md",
+        "exit_code": 0,
+        "result": "1 file; YAML and all math spans parse."
+      },
+      {
+        "command": "node tools/physics-support/proof-contract.mjs research/physics-non-fluid-129-2026-10-21-r2-batch-10.proof-contracts.json --strict --items pthm-emx-paraxial-error --json",
+        "exit_code": 0,
+        "result": "ok:true; no errors or warnings."
+      },
+      {
+        "command": "node tools/physics-support/proof-layout.mjs items/pthm-emx-paraxial-error.md",
+        "exit_code": 0,
+        "result": "1 item, 5 steps, 0 defects."
+      }
+    ],
+    "check_history": "An initial contract check caught an unnecessary new F1 step tag missing from the citation-use mapping. Removed that tag because existing F7 already cites the angular-spectrum units convention; final contract and proof checks pass. Preliminary help probes used an unsupported direct .mts invocation and a nonexistent plural proof-contracts filename; the actual checks used the supported tsx wrapper and singular proof-contract tool.",
+    "review_context_command": "node tools/physics-support/step5-workflow.mjs review-contexts --run physics-non-fluid-129-2026-10-21-r2 --items pthm-emx-paraxial-error",
+    "unresolved_obligations": [],
+    "next_action": "Controller collects the report and performs its ordinary workflow duties; no judge, stamp, certificate, or shared ledger was written."
+  }
+}

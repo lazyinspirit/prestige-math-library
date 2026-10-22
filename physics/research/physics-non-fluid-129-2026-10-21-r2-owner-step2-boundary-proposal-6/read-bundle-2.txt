@@ -1,0 +1,431 @@
+ITEM 10 ex-gr-fx13-1
+---
+id: ex-gr-fx13-1
+kind: example
+title: Tetrads, Lorentz connections and spin interfaces — model 1
+status: draft
+origin: pipeline
+domain: mathematics
+library: physics
+dependency_level: 4
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+proof_strategy: direct
+deps:
+  - def-gr-fx-tetrad-spin-connection
+  - prop-gr-fx-torsion-free-tetrad-equivalence
+  - def-gr-fx-lorentz-spin-lift
+  - prop-gr-fx-spin-double-cover
+  - prop-gr-fx-lorentz-clifford-compatibility
+  - def-countable-choice
+dependency_roles:
+  def-gr-fx-tetrad-spin-connection: mathematical-premise
+  prop-gr-fx-torsion-free-tetrad-equivalence: mathematical-premise
+  def-gr-fx-lorentz-spin-lift: mathematical-premise
+  prop-gr-fx-spin-double-cover: mathematical-premise
+  prop-gr-fx-lorentz-clifford-compatibility: mathematical-premise
+  def-countable-choice: mathematical-premise
+sources:
+  references:
+    - title: "S. M. Carroll, Lecture Notes on General Relativity, arXiv:gr-qc/9712019v1 (1997), Chapter 3, tetrads and non-coordinate bases, printed pp. 88–95 (PDF pp. 95–102)"
+      url: "https://arxiv.org/pdf/gr-qc/9712019"
+      locator: "Equations (3.125)–(3.144), local Lorentz rotations, connection forms, and torsion/curvature."
+    - title: "Blagoje Oblak, From the Lorentz Group to the Celestial Sphere, arXiv:1508.00920 (2015)"
+      url: "https://arxiv.org/pdf/1508.00920"
+      locator: "§2.3.3, PDF pp. 26–27, explicit SL(2,C) matrices for a spatial rotation and a Lorentz boost."
+verification:
+  precheck: pass
+physical_scope: null
+---
+
+## Statement
+
+On $M=\mathbb R^4$ with coordinates $(x^0,x^1,x^2,x^3)$, metric
+$g=-(dx^0)^2+(dx^1)^2+(dx^2)^2+(dx^3)^2$, and Cartesian coframe
+$e=(dx^0,dx^1,dx^2,dx^3)^{\mathsf T}$, set
+$\theta(x)=x^1$ and let
+
+$$\Lambda(x)=\begin{pmatrix} 1&0&0&0\\ 0&\cos\theta&-\sin\theta&0\\ 0&\sin\theta&\cos\theta&0\\ 0&0&0&1 \end{pmatrix}.$$
+
+The changed coframe $e'=\Lambda e$ has the same metric, and its connection
+matrix
+$\omega'=-d\Lambda\,\Lambda^{-1}=-Jd\theta$, where
+$J^1{}_2=-1$, $J^2{}_1=1$ and all other entries vanish, is nonzero while
+its curvature is zero. This is a pure-gauge local Lorentz connection. The
+rotation has the local spin lift
+$A(x)=\exp(-i\theta(x)\sigma_3/2)\in SL(2,\mathbb C)$.
+
+## Facts & Assumptions
+
+**Given:** The Minkowski metric, Cartesian coframe, smooth function $\theta$,
+local Lorentz transformation convention, Lorentz spin covering, and Clifford
+compatibility from the referenced A-page items. Assume $\mathrm{AC}_\omega$.
+
+[A1] Assume $\mathrm{AC}_\omega$ ([[def-countable-choice]]).
+
+[F1] [[def-gr-fx-tetrad-spin-connection]]: $e'=\Lambda e$ and $\omega'=\Lambda\omega\Lambda^{-1}-d\Lambda\,\Lambda^{-1}$; torsion and curvature are $T=de+\omega\wedge e$ and $F=d\omega+\omega\wedge\omega$.
+
+[F2] [[prop-gr-fx-torsion-free-tetrad-equivalence]]: an $\eta$-skew connection with zero coframe torsion induces the unique Levi-Civita connection, and $F'=\Lambda F\Lambda^{-1}$, $T'=\Lambda T$.
+
+[F3] [[prop-gr-fx-spin-double-cover]]: $A\mapsto(X\mapsto AXA^\dagger)$ is the covering homomorphism $SL(2,\mathbb C)\to SO^+(1,3)$ with kernel $\{I,-I\}$.
+
+[F4] [[def-gr-fx-lorentz-spin-lift]]: a global spin structure and a lifted global connection are additional bundle data; for an open set $U\subseteq M$, a local lift of $\Lambda:U\to SO^+(1,3)$ means a map $A:U\to SL(2,\mathbb C)$ satisfying $\rho\circ A=\Lambda$.
+
+[F5] [[prop-gr-fx-lorentz-clifford-compatibility]]: for smooth local fields and constant gamma matrices satisfying the stated Clifford relation, the displayed $D$ satisfies a local matrix identity; that proposition does not assert compatibility with a separately supplied group representation.
+
+## Verification
+
+1.1 Let $J$ be the stated generator, so $\Lambda=\exp(\theta J)$. Its spatial block is an ordinary rotation, hence $\Lambda^{\mathsf T}\eta\Lambda=\eta$, $\det\Lambda=1$, and $\Lambda^0{}_0=1$; thus $\Lambda(x)\in SO^+(1,3)$. Since $d\Lambda\,\Lambda^{-1}=Jd\theta$, [F1] with initial $\omega=0$ gives $\omega'=-Jd\theta$. Because $d\theta=dx^1\ne0$ and $J\ne0$, this connection matrix is nonzero. The metric is unchanged because $\Lambda^{\mathsf T}\eta\Lambda=\eta$. [given, A1, F1, algebra]
+
+2.1 Initially $T=0$ and $F=0$. By [F2], $T'=\Lambda T=0$ and $F'=\Lambda F\Lambda^{-1}=0$. The connection is $\eta$-skew since $J^{\mathsf T}\eta+\eta J=0$; the torsion calculation and [F2] therefore identify it as the Levi-Civita connection in the rotated tetrad. [F1, F2, step 1.1, algebra]
+
+3.1 The matrix $A=\operatorname{diag}(e^{-i\theta/2},e^{i\theta/2})$ has determinant one. Conjugating $\sigma_1,\sigma_2$ by $A$ gives $A\sigma_1A^\dagger=\cos\theta\,\sigma_1+\sin\theta\,\sigma_2$ and $A\sigma_2A^\dagger=-\sin\theta\,\sigma_1+\cos\theta\,\sigma_2$, while $I$ and $\sigma_3$ are fixed. Thus [F3] sends $A(x)$ to $\Lambda(x)$, so $A$ is a local lift of this Lorentz-valued map; this asserts no global spin structure. In any chosen local $\mathbb C^n$ trivialization with constant gamma matrices satisfying the Clifford relation, [F5] gives the local matrix identity for $D=d+\frac14\omega'_{IJ}\gamma^I\gamma^J$, without asserting group-representation compatibility. [F3, F4, F5, step 1.1, algebra] ∎
+
+OLD BOUNDARIES
+[{"case": "empty", "status": "checked", "evidence": "Statement uses the nonempty domain R^4; no empty-domain conclusion is drawn."}, {"case": "zero", "status": "checked", "evidence": "Step 1.1 computes dtheta=dx^1 nonzero everywhere, so the resulting connection is not the zero connection."}, {"case": "one", "status": "checked", "evidence": "Step 3.1 checks the identity element and the explicit SL(2,C) lift A(theta)."}, {"case": "degenerate", "status": "checked", "evidence": "Step 1.1 verifies Lambda^T eta Lambda=eta and determinant one, so the transformed coframe remains nondegenerate."}, {"case": "endpoints", "status": "not_applicable", "reason": "The example has no interval or endpoint parameter."}, {"case": "nonempty-choice", "status": "checked", "evidence": "Statement and steps 1.1–3.1 record AC_omega; the coordinate fields, rotation matrix, and lift are explicit."}, {"case": "iff-forward", "status": "not_applicable", "reason": "The example is a verified construction, not a biconditional."}, {"case": "iff-reverse", "status": "not_applicable", "reason": "The example is a verified construction, not a biconditional."}]
+FLAGS
+{"reference": [{"id": "ex-gr-fx13-1", "batch": 41, "case": "one", "evidence": "Step 3.1 checks the identity element and the explicit SL(2,C) lift A(theta).", "unresolved_step_references": ["3.1"]}, {"id": "ex-gr-fx13-1", "batch": 41, "case": "nonempty-choice", "evidence": "Statement and steps 1.1–3.1 record AC_omega; the coordinate fields, rotation matrix, and lift are explicit.", "unresolved_step_references": ["3.1"]}], "audit": []}
+ITEM 11 prop-gr-fx-thin-path-quotient-groupoid
+---
+id: prop-gr-fx-thin-path-quotient-groupoid
+kind: proposition
+title: Thin path classes form a groupoid
+status: draft
+origin: pipeline
+domain: mathematics
+library: physics
+dependency_level: 1
+provenance:
+  statement: literature-derived
+  proof: ai-generated
+proof_strategy: direct
+deps:
+  - def-gr-fx-thin-paths
+  - def-equivalence-relation
+  - def-category
+  - def-isomorphism-groupoid-and-connected-category
+dependency_roles:
+  def-gr-fx-thin-paths: mathematical-premise
+  def-equivalence-relation: mathematical-premise
+  def-category: mathematical-premise
+  def-isomorphism-groupoid-and-connected-category: mathematical-premise
+physical_scope: null
+sources:
+  references:
+    - title: "Urs Schreiber and Konrad Waldorf, Parallel Transport and Functors, §2.1, Definition 2.2 and Lemma 2.3"
+      url: "https://arxiv.org/pdf/0705.0452"
+      locator: "PDF pp. 6–7, thin homotopy, its quotient, concatenation, identities, inverses, and associativity. The proof below checks these properties for the stated piecewise-smooth convention."
+verification:
+  precheck: pass
+---
+
+## Statement
+
+Let $M$ be a smooth manifold and $U\subseteq M$ open. For composable piecewise-smooth paths $\gamma:x\to y$ and $\delta:y\to z$ in $U$, define $\delta*\gamma:[0,1]\to U$ by $(\delta*\gamma)(t)=\gamma(2t)$ for $0\le t\le\tfrac12$ and $(\delta*\gamma)(t)=\delta(2t-1)$ for $\tfrac12\le t\le1$. Thus $\delta*\gamma$ traverses $\gamma$ first and then $\delta$. A groupoid means a category in which every morphism is an isomorphism.
+
+Then thin homotopy is an equivalence relation on each set of piecewise-smooth paths with fixed endpoints, and concatenation respects the equivalence classes. Tag a morphism by its endpoints and its path class. With objects the points of $U$, morphisms $x\to y$ the tagged classes $[\gamma]$ from $x$ to $y$, composition $[\delta]\circ[\gamma]=[\delta*\gamma]$, identity the class of the constant path, and inverse $[\gamma]^{-1}=[\bar\gamma]$ where $\bar\gamma(t)=\gamma(1-t)$, the resulting category is a groupoid.
+
+## Statement references
+
+[[def-gr-fx-thin-paths]]
+
+[[def-equivalence-relation]]
+
+[[def-category]]
+
+[[def-isomorphism-groupoid-and-connected-category]]
+
+## Facts & Assumptions
+
+**Given:** A smooth manifold $M$, an open set $U\subseteq M$, and the path and thin-homotopy data of Definition [[def-gr-fx-thin-paths]].
+
+[F1] [[def-gr-fx-thin-paths]]: paths have finite smooth subdivisions; a thin homotopy has fixed endpoints and rank at most one on each smooth curvilinear triangle.
+
+[F2] [[def-equivalence-relation]]: an equivalence relation is reflexive, symmetric, and transitive; its quotient consists of its equivalence classes.
+
+[F3] [[def-category]]: category composition is associative and has left and right identities; morphisms retain their domain and codomain.
+
+[F4] [[def-isomorphism-groupoid-and-connected-category]]: a groupoid is a category in which every morphism has a two-sided inverse.
+
+## Proof
+
+**Proof technique:** direct.
+
+1.1 The relation is reflexive because $H(s,t)=\gamma(t)$ has rank at most one and fixed endpoints; subdivide the square along each breakpoint of a finite smooth partition of $\gamma$ and triangulate the resulting strips. It is symmetric by replacing $s$ with $1-s$ and reflecting a witnessing subdivision. For transitivity, first take finite common refinements of the boundary subdivisions of $H_0$ and $H_1$ along their common path $\gamma_1$, then paste $H_0(2s,t)$ on $0\le s\le\tfrac12$ to $H_1(2s-1,t)$ on $\tfrac12\le s\le1$. The common boundary is the same path $\gamma_1$, so this paste is continuous; the scaled finite subdivisions on the two halves give a finite curvilinear-triangle subdivision after triangulating any resulting polygons. It fixes both path endpoints, and its differential has rank at most one on each triangle. Thus the relation is an equivalence relation. [given, F1, F2, construct]
+
+2.1 If $\gamma_0\sim_{\mathrm{thin}}\gamma_1$ and $\delta_0\sim_{\mathrm{thin}}\delta_1$ with matching endpoints, paste their homotopies on the first and second halves of the path parameter, scaling their finite subdivisions to those halves and taking a finite common refinement along their shared fixed endpoint. The shared endpoint is fixed throughout each homotopy, so the paste is continuous and piecewise smooth; on each triangle its differential has image contained in that of the corresponding homotopy differential, hence rank at most one. Therefore $\delta_0*\gamma_0\sim_{\mathrm{thin}}\delta_1*\gamma_1$, and composition of classes is well-defined. [F1, step 1.1, construct]
+
+3.1 Let $\Gamma$ be the path obtained by placing the three given paths, in order, on the three consecutive thirds of $[0,1]$. Each parenthesized concatenation is $\Gamma\circ\phi_j$ for an increasing piecewise-linear homeomorphism $\phi_j:[0,1]\to[0,1]$. Put $u(s,t)=(1-s)\phi_0(t)+s\phi_1(t)$ and $H(s,t)=\Gamma(u(s,t))$. Refine the $t$-partition by all breakpoints of $\phi_0$ and $\phi_1$. On each resulting strip $u$ is smooth and piecewise bilinear. For every breakpoint $b$ of the piecewise-smooth path $\Gamma$, also subdivide along the level set $u^{-1}(b)$; on each strip these finitely many level sets are smooth arcs, with their finitely many endpoints and intersections included in the subdivision. The resulting regions have finitely many smooth boundary arcs and can be triangulated into curvilinear triangles. On each triangle, $u$ remains in one smooth piece of $\Gamma$, so $H$ is smooth there and both differential columns are scalar multiples of the single vector $\Gamma'$. Its rank is at most one. Thus the two parenthesizations are thin-homotopic. For the right identity law use $\rho_0(t)=2t$ on $[0,\tfrac12]$ and $\rho_0(t)=1$ on $[\tfrac12,1]$, with $\rho_1(t)=t$; for the left identity law use $\rho_0(t)=0$ on $[0,\tfrac12]$ and $\rho_0(t)=2t-1$ on $[\tfrac12,1]$, again with $\rho_1(t)=t$. The corresponding homotopies $\gamma((1-s)\rho_0(t)+s\rho_1(t))$ have the required concatenated and unaltered paths as boundaries. Refine each square along the parameter-map breakpoints and the preimages of every breakpoint of $\gamma$; any region on which the argument is constant is already smooth. The same rank argument proves both identity laws. [given, F1, F3, step 2.1, construct]
+
+3.2 Put $\lambda(t)=2t$ for $0\le t\le\tfrac12$ and $\lambda(t)=2(1-t)$ for $\tfrac12\le t\le1$. Then $t\mapsto\gamma(\lambda(t))$ traverses $\gamma$ and then its reverse. The map $H(s,t)=\gamma((1-s)\lambda(t))$ joins this path to the constant path at $\gamma(0)$ with both endpoints fixed. Subdivide first at $t=\tfrac12$, then along the preimages of every breakpoint of a finite smooth partition of $\gamma$ under $(s,t)\mapsto(1-s)\lambda(t)$; these are finitely many smooth arcs or constant regions on the two parameter strips. Triangulating the resulting finite curvilinear regions makes $H$ smooth on each triangle. Its differential has rank at most one because both derivatives are scalar multiples of $\dot\gamma$. Applying the same construction to $\bar\gamma$ contracts the reverse-then-forward path at $\gamma(1)$. Hence $[\bar\gamma]$ is a two-sided inverse of $[\gamma]$. [given, F1, F3, step 2.1, construct]
+
+4.1 The tagged morphism set has well-defined domain and codomain by construction; step 2.1 makes composition independent of representatives, step 3.1 gives associativity, and step 3.2 gives the inverse axiom. Steps 3.1 and 3.2 also provide the two identity laws stated in [F3]. Thus the data form a category in which every morphism is invertible, which is a groupoid by [F4]. [F2, F3, F4, step 2.1, step 3.1, step 3.2] ∎
+
+OLD BOUNDARIES
+[{"case": "empty", "status": "checked", "evidence": "Statement: for U empty, there are no objects or paths, and the groupoid axioms are vacuous."}, {"case": "zero", "status": "checked", "evidence": "Step 3.2: constant paths and rank-zero homotopies supply identities and inverse contractions."}, {"case": "one", "status": "checked", "evidence": "Steps 3.1–3.2: one path and its reverse satisfy the class composition and inverse laws."}, {"case": "degenerate", "status": "checked", "evidence": "Steps 1.1 and 3.2: constant paths give rank-zero homotopies and the identity case."}, {"case": "endpoints", "status": "checked", "evidence": "Facts F1 and step 1.1: all homotopies preserve the specified source and target."}, {"case": "nonempty-choice", "status": "checked", "evidence": "Steps 1.1–3.2 construct homotopies by explicit formulas and finite pasting; no family choice is used."}, {"case": "iff-forward", "status": "not_applicable", "reason": "The Statement is a groupoid assertion, not an iff claim."}, {"case": "iff-reverse", "status": "not_applicable", "reason": "The Statement is a groupoid assertion, not an iff claim."}]
+FLAGS
+{"reference": [{"id": "prop-gr-fx-thin-path-quotient-groupoid", "batch": 42, "case": "zero", "evidence": "Step 3.2: constant paths and rank-zero homotopies supply identities and inverse contractions.", "unresolved_step_references": ["3.2"]}, {"id": "prop-gr-fx-thin-path-quotient-groupoid", "batch": 42, "case": "one", "evidence": "Steps 3.1–3.2: one path and its reverse satisfy the class composition and inverse laws.", "unresolved_step_references": ["3.1", "3.2"]}, {"id": "prop-gr-fx-thin-path-quotient-groupoid", "batch": 42, "case": "degenerate", "evidence": "Steps 1.1 and 3.2: constant paths give rank-zero homotopies and the identity case.", "unresolved_step_references": ["1.1", "3.2"]}, {"id": "prop-gr-fx-thin-path-quotient-groupoid", "batch": 42, "case": "endpoints", "evidence": "Facts F1 and step 1.1: all homotopies preserve the specified source and target.", "unresolved_step_references": ["1.1"]}, {"id": "prop-gr-fx-thin-path-quotient-groupoid", "batch": 42, "case": "nonempty-choice", "evidence": "Steps 1.1–3.2 construct homotopies by explicit formulas and finite pasting; no family choice is used.", "unresolved_step_references": ["1.1", "3.2"]}], "audit": []}
+ITEM 12 def-nrqmx-resonance-matrix-element-poles
+---
+id: def-nrqmx-resonance-matrix-element-poles
+kind: definition
+domain: mathematics
+library: mathematics
+title: Continued resolvent matrix elements and resonance poles
+status: draft
+origin: pipeline
+pipeline_run: physics-non-fluid-129-2026-10-21-r2
+dependency_level: 0
+deps:
+  - def-complex-differentiability-holomorphic-and-entire
+  - def-resolvent-and-spectrum-of-a-closed-unbounded-operator
+  - def-symmetric-self-adjoint-and-essentially-self-adjoint
+  - thm-self-adjoint-resolvent-estimate
+dependency_roles:
+  def-complex-differentiability-holomorphic-and-entire: mathematical-premise
+  def-resolvent-and-spectrum-of-a-closed-unbounded-operator: mathematical-premise
+  def-symmetric-self-adjoint-and-essentially-self-adjoint: mathematical-premise
+  thm-self-adjoint-resolvent-estimate: mathematical-premise
+proof_strategy: not-applicable
+provenance:
+  statement: ai-altered
+  proof: not-applicable
+sources:
+  references:
+    - title: "M. Gadella and G. Pronko, The Friedrichs Model and its Use in Resonance Phenomena, §1.1 and §2"
+      url: "https://arxiv.org/pdf/1106.5782"
+      locator: "PDF pp.2–4: resonance through analytic continuation of resolvent matrix elements and the reduced resolvent in the Friedrichs model."
+---
+
+## Definition
+
+Let $T$ be self-adjoint on a complex Hilbert space $\mathcal H$ whose inner product is linear in the first variable, use the resolvent convention $R_T(z)=(T-zI)^{-1}$, and let $X\subseteq\mathcal H$ be a specified vector subspace. For $f,h\in X$, the scalar resolvent matrix element is
+
+$$r_{f,h}(z):=\langle R_T(z)f,h\rangle,\qquad \operatorname{Im}z>0.$$
+
+Given an open real interval $I$, a point $E_0\in I$, and a disk $D$ centered at $E_0$, a local analytic continuation of these matrix elements through $E_0$ is a specified family of holomorphic functions $\widetilde r_{f,h}:D\to\mathbb C$ agreeing with $r_{f,h}$ on $D\cap\{\operatorname{Im}z>0\}$, for the stated $f,h\in X$. A **meromorphic continuation** on $D$ is instead a specified family $\widetilde r_{f,h}$ agreeing with $r_{f,h}$ on $D\cap\{\operatorname{Im}z>0\}$, holomorphic on $D$ except for isolated poles. At every crossing point where no pole occurs it is a regular analytic continuation on a smaller neighborhood. For such a meromorphic continuation, if $z_0\in D$ is nonreal and for some $f,h\in X$ the continued function satisfies
+
+$$\widetilde r_{f,h}(z)=(z-z_0)^{-k}q(z)$$
+
+on a punctured neighborhood of $z_0$, for an integer $k\ge1$ and a holomorphic $q$ with $q(z_0)\ne0$, then $z_0$ is a pole of order $k$ of that continued matrix element. Such a pole is called a resonance matrix-element pole for the specified pair $(T,X)$ and continuation. This definition asserts neither that a continuation exists nor that a pole is an eigenvalue of $T$; the continuation and the chosen test vectors are part of the data.
+
+## Definition references
+
+[[def-complex-differentiability-holomorphic-and-entire]]
+
+[[def-resolvent-and-spectrum-of-a-closed-unbounded-operator]]
+
+[[def-symmetric-self-adjoint-and-essentially-self-adjoint]]
+
+[[thm-self-adjoint-resolvent-estimate]]
+
+OLD BOUNDARIES
+[{"case": "empty", "status": "checked", "evidence": "For X={0} no test pair can meet the nonzero-pole premise; the Definition gives no pole in the absence of a qualifying pair. See the Statement."}, {"case": "zero", "status": "checked", "evidence": "A pole requires order k>=1 and a nonvanishing holomorphic factor at the pole. See the Statement."}, {"case": "one", "status": "checked", "evidence": "The Definition concerns one specified pair f,h, with no finite multiplicity restriction on the test space. See the Statement."}, {"case": "degenerate", "status": "checked", "evidence": "The Definition explicitly does not assert that analytic continuation or a pole exists. See the Statement."}, {"case": "endpoints", "status": "checked", "evidence": "The continuation is local through an interior point E0 in I; no interval endpoint is covered. See the Statement."}, {"case": "nonempty-choice", "status": "checked", "evidence": "The vectors and continuation family are part of the declared input data; the Definition makes no hidden selection. See the Statement."}, {"case": "iff-forward", "status": "not_applicable", "reason": "The statement is a definition or one-directional assertion and contains no biconditional."}, {"case": "iff-reverse", "status": "not_applicable", "reason": "The statement is a definition or one-directional assertion and contains no biconditional."}]
+FLAGS
+{"reference": [], "audit": []}
+ITEM 13 ex-nrqmx-gaussian-wigner-flow
+---
+id: ex-nrqmx-gaussian-wigner-flow
+kind: example
+domain: mathematics
+library: mathematics
+title: Exact harmonic-oscillator transport of a Gaussian Wigner density
+status: draft
+origin: pipeline
+dependency_level: 5
+deps:
+  - def-nrqmx-weyl-symbol-wigner
+  - thm-nrqmx-wigner-marginals
+  - thm-nrqmx-quadratic-egorov
+  - thm-nrqm-oscillator-oscillator-scaling-and-exact-realization
+  - thm-nrqm-oscillator-hermite-recurrence
+  - lem-euclidean-gaussian-fourier-transform-with-two-pi-normalization
+  - thm-chain-rule
+  - lem-complex-integration-by-parts-on-intervals-and-decaying-lines
+  - cor-c-one-change-of-variables-for-l-one-functions
+  - thm-cauchy-schwarz-in-an-inner-product-space
+  - lem-l-two-with-the-integral-pairing-is-a-hilbert-space
+  - def-countable-choice
+dependency_roles:
+  def-nrqmx-weyl-symbol-wigner: mathematical-premise
+  thm-nrqmx-wigner-marginals: mathematical-premise
+  thm-nrqmx-quadratic-egorov: mathematical-premise
+  thm-nrqm-oscillator-oscillator-scaling-and-exact-realization: mathematical-premise
+  thm-nrqm-oscillator-hermite-recurrence: mathematical-premise
+  lem-euclidean-gaussian-fourier-transform-with-two-pi-normalization: mathematical-premise
+  thm-chain-rule: mathematical-premise
+  lem-complex-integration-by-parts-on-intervals-and-decaying-lines: mathematical-premise
+  cor-c-one-change-of-variables-for-l-one-functions: mathematical-premise
+  thm-cauchy-schwarz-in-an-inner-product-space: mathematical-premise
+  lem-l-two-with-the-integral-pairing-is-a-hilbert-space: mathematical-premise
+  def-countable-choice: mathematical-premise
+justified_by: []
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+sources:
+  references:
+    - title: Gianfausto Dell’Antonio, Lectures on the Mathematics of Quantum Mechanics, Volume II (2016)
+      url: https://people.sissa.it/~gianfa/sito-web/%20Dell%27Antonio%20%20Mathematics%20of%20Quantum%20Mechanics%20II%20.pdf
+      locator: Lecture 1, §1, coherent states and their Wigner functions, printed pp. 17–20
+    - title: Stéphane Nonnenmacher, Introduction to Semiclassical Analysis, lecture notes (2019)
+      url: https://www.imo.universite-paris-saclay.fr/~stephane.nonnenmacher/enseign/Cours-Semiclassical-Analysis2019-lecture1-8.pdf
+      locator: Weyl/Wigner convention and Egorov theorem 4.14, printed pp. 16–17 and 40–42
+    - title: Lawrence C. Evans and Maciej Zworski, Lectures on Semiclassical Analysis
+      url: https://math.mit.edu/~vwg/semiclassicalEvansZworski.pdf
+      locator: Chapter 4, Weyl convention and bounded-symbol context, printed pp. 54–67
+verification:
+  precheck: pending
+---
+
+## Statement
+
+Assume Countable Choice, let $0<\epsilon\le1$, and use the one-dimensional oscillator
+$$ H_\epsilon=-\frac{\epsilon^2}{2}\frac{d^2}{dx^2}+\frac{x^2}{2} $$
+with its self-adjoint oscillator realization. For real $q,p$, the normalized Gaussian
+$$ \psi^\epsilon_{q,p}(x)=(\pi\epsilon)^{-1/4} \exp\!\left(-\frac{(x-q)^2}{2\epsilon}\right) \exp\!\left(\frac{ip(x-q/2)}{\epsilon}\right) $$
+has Wigner density
+$$ W_\epsilon[\psi^\epsilon_{q,p}](x,\xi)= \frac1{\pi\epsilon}\exp\!\left(-\frac{(x-q)^2+(\xi-p)^2}{\epsilon}\right). $$
+Write $z=(z_1,z_2)=(x,\xi)$. For a measurable density $\rho:\mathbb R^2\to[0,\infty)$ with $\int\rho=1$ and $\int(|z|+|z|^2)\rho(z)\,dz<\infty$, define its mean and covariance by
+$$ \mu_j(\rho):=\int_{\mathbb R^2}z_j\rho(z)\,dz,\qquad \Sigma_{jk}(\rho):=\int_{\mathbb R^2}(z_j-\mu_j(\rho))(z_k-\mu_k(\rho))\rho(z)\,dz. $$
+This Wigner density has mean $(q,p)$ and covariance $(\epsilon/2)I_2$. On $\mathcal S(\mathbb R)$ let $Qf(x)=xf(x)$ and $Pf(x)=-i\epsilon f'(x)$. For a normalized $\varphi\in\mathcal S(\mathbb R)$, define $\bar Q_\varphi=\langle Q\varphi,\varphi\rangle$, $\bar P_\varphi=\langle P\varphi,\varphi\rangle$, $\Delta_\varphi Q=\|(Q-\bar Q_\varphi)\varphi\|_2$, and $\Delta_\varphi P=\|(P-\bar P_\varphi)\varphi\|_2$. These standard deviations satisfy $\Delta_\varphi Q\,\Delta_\varphi P\ge\epsilon/2$, and the displayed Gaussian attains equality with both deviations $\sqrt{\epsilon/2}$.
+Let $U_\epsilon(t)=e^{-itH_\epsilon/\epsilon}$, and define the evolved state's distributional Wigner functional on $a\in C_c^\infty(\mathbb R^2)$ by
+$$ \langle W_t,a\rangle:=\langle \operatorname{Op}^W_\epsilon(a)U_\epsilon(t)\psi^\epsilon_{q,p}, U_\epsilon(t)\psi^\epsilon_{q,p}\rangle . $$
+Then it is represented by the exact density
+$$ W_t(x,\xi)=\frac1{\pi\epsilon} \exp\!\left(-\frac{(x-q_t)^2+(\xi-p_t)^2}{\epsilon}\right), \quad q_t=q\cos t+p\sin t,\quad p_t=p\cos t-q\sin t. $$
+Thus this quadratic model transports the Gaussian Wigner density exactly along its classical Hamiltonian flow; its phase-space mean follows $(q_t,p_t)$ and its covariance remains $(\epsilon/2)I_2$. This is a mathematical model calculation, not an experimental observation.
+
+## Statement references
+
+[[thm-nrqmx-quadratic-egorov]]
+
+[[def-nrqmx-weyl-symbol-wigner]]
+
+[[thm-nrqm-oscillator-oscillator-scaling-and-exact-realization]]
+
+[[thm-cauchy-schwarz-in-an-inner-product-space]]
+
+## Facts & Assumptions
+
+**Given:** Countable Choice, $0<\epsilon\le1$, real $q,p,t$, and the one-dimensional oscillator convention in the Statement.
+
+[A1] Assume the Axiom of Countable Choice $\mathrm{AC}_\omega$ ([[def-countable-choice]]).
+
+[F1] For $m=\omega=1$, $\hbar=\epsilon$, the scaled oscillator has a self-adjoint realization with complete Hermite eigenbasis; its finite Hermite span is a graph core, and on that core it equals $-\epsilon^2\partial_x^2/2+x^2/2$ ([[thm-nrqm-oscillator-oscillator-scaling-and-exact-realization]], [[thm-nrqm-oscillator-hermite-recurrence]]).
+
+[F2] The Wigner integral and Weyl pairing use the exact signs, factors, and inner-product convention of [[def-nrqmx-weyl-symbol-wigner]]; for Schwartz states, $\langle\operatorname{Op}^W_\epsilon(a)u,u\rangle=\int aW_\epsilon[u]$ ([[thm-nrqmx-wigner-marginals]]).
+
+[F3] The Gaussian Fourier integral is $\int_{\mathbb R}e^{-y^2/(4\epsilon)}e^{-iy\eta/\epsilon}dy=2\sqrt{\pi\epsilon}\,e^{-\eta^2/\epsilon}$ ([[lem-euclidean-gaussian-fourier-transform-with-two-pi-normalization]]).
+
+[F4] The exact quadratic Egorov identity holds for this self-adjoint realization when Schwartz space is a core ([[thm-nrqmx-quadratic-egorov]]).
+
+[F5] The chain rule and integration by parts apply to Schwartz functions, and the scaled Gaussian integral gives $\int e^{-x^2/\epsilon}dx=\sqrt{\pi\epsilon}$ ([[thm-chain-rule]], [[lem-complex-integration-by-parts-on-intervals-and-decaying-lines]], [[lem-euclidean-gaussian-fourier-transform-with-two-pi-normalization]]).
+
+[F6] In a real or complex inner-product space, $|\langle f,g\rangle|\le\|f\|\|g\|$ ([[thm-cauchy-schwarz-in-an-inner-product-space]]).
+
+[F7] The first-variable-linear pairing $\langle f,g\rangle=\int f\overline g$ makes complex $L^2(\mathbb R)$ a Hilbert space ([[lem-l-two-with-the-integral-pairing-is-a-hilbert-space]]).
+
+[F8] A $C^1$ diffeomorphism between open Euclidean sets changes integrals of complex $L^1$ functions by its absolute Jacobian. The positive Gaussian scalings and the phase-space rotation below satisfy these hypotheses; their integrands are absolutely integrable ([[cor-c-one-change-of-variables-for-l-one-functions]]).
+
+## Proof
+**Given:** The data and [A1], [F1]–[F8].
+
+1.1 The scaled oscillator eigenfunctions are polynomial multiples of $e^{-x^2/(2\epsilon)}$. To verify the core hypothesis of [[thm-nrqmx-quadratic-egorov]], take $f\in\mathcal S(\mathbb R)$ and set $L f=-\epsilon^2f''/2+x^2f/2\in L^2$. Integration by parts against each Hermite eigenfunction $\psi_n^\epsilon$, whose polynomial-Gaussian tails make the endpoint products vanish, gives
+$$ \langle Lf,\psi_n^\epsilon\rangle =\langle f,L\psi_n^\epsilon\rangle =\epsilon(n+\tfrac12)\langle f,\psi_n^\epsilon\rangle. $$
+Parseval for the complete basis [F1] yields
+$$ \sum_{n\ge0}\epsilon^2(n+\tfrac12)^2|\langle f,\psi_n^\epsilon\rangle|^2 =\|Lf\|_2^2<\infty. $$
+Thus $f\in D(H_\epsilon)$. The coefficients of $H_\epsilon f$ in the Hermite basis are $\epsilon(n+\tfrac12)\langle f,\psi_n^\epsilon\rangle$, the same coefficients as $Lf$; completeness of that basis gives $H_\epsilon f=Lf$. The finite Hermite span is contained in $\mathcal S$ and is a graph core by [F1]; since $\mathcal S\subset D(H_\epsilon)$, $\mathcal S$ is also a core. This checks every operator hypothesis of [F4]. [A1, F1, F5, algebra]
+
+1.2 The Gaussian integral [F5] and the positive scaling in [F8] give $\|\psi^\epsilon_{q,p}\|_2^2=(\pi\epsilon)^{-1/2}\int e^{-(x-q)^2/\epsilon}dx=1$. In its Wigner integral, the product of the two Gaussian factors is
+$$ (\pi\epsilon)^{-1/2} \exp\!\left(-\frac{(x-q)^2}{\epsilon}-\frac{y^2}{4\epsilon}\right) \exp\!\left(\frac{ipy}{\epsilon}\right). $$
+Multiplying by $e^{-iy\xi/\epsilon}$ and applying [F3] with $\eta=\xi-p$ gives
+$$ W_\epsilon[\psi^\epsilon_{q,p}](x,\xi) =(2\pi\epsilon)^{-1}(\pi\epsilon)^{-1/2} e^{-(x-q)^2/\epsilon} 2\sqrt{\pi\epsilon}\,e^{-(\xi-p)^2/\epsilon}, $$
+which is the stated nonnegative density. Its integral is $1$ by [F5] and [F8]. For its phase-space moments, apply [F8] to $x=q+\sqrt\epsilon s$ and $\xi=p+\sqrt\epsilon r$. The centered first moments vanish because $s e^{-s^2}$ and $r e^{-r^2}$ are odd; the cross-moment vanishes for the same reason. Integration by parts [F5] gives $\int s^2e^{-s^2}ds=\frac12\int e^{-s^2}ds$, so each centered variance is $\epsilon/2$. This verifies the mean and covariance definitions in the Statement.
+
+For the operator uncertainties, direct differentiation gives $P\psi^\epsilon_{q,p}=\bigl(p+i(x-q)\bigr)\psi^\epsilon_{q,p}$, while $Q\psi^\epsilon_{q,p}=x\psi^\epsilon_{q,p}$. Thus $\bar Q_\psi=q$, $\bar P_\psi=p$, and the two squared standard deviations are both $\int(x-q)^2|\psi|^2dx=\epsilon/2$ by the same Gaussian integration by parts. To prove the lower bound for every normalized $\varphi\in\mathcal S$, first note that $Q$ and $P$ are symmetric on $\mathcal S$: for $P$ this is [F5] applied to decaying Schwartz factors, and for $Q$ it follows from real multiplication. Hence $\bar Q_\varphi,\bar P_\varphi\in\mathbb R$. Put $A=Q-\bar Q_\varphi I$ and $B=P-\bar P_\varphi I$. Cauchy–Schwarz [F6], the commutator $[A,B]=[Q,P]=i\epsilon I$ from [F2], and symmetry give
+$$ \Delta_\varphi Q\,\Delta_\varphi P\ge|\langle A\varphi,B\varphi\rangle|\ge|\operatorname{Im}\langle A\varphi,B\varphi\rangle|=\frac12|\langle[A,B]\varphi,\varphi\rangle|=\frac\epsilon2. $$
+Indeed, under the first-variable-linear convention, $\langle A\varphi,B\varphi\rangle=\langle BA\varphi,\varphi\rangle$ and its conjugate is $\langle AB\varphi,\varphi\rangle$. Thus the Gaussian attains the lower bound. [A1, F1, F2, F5, F6, F7, F8, algebra]
+
+2.1 The classical Hamilton equations for $h(x,\xi)=(x^2+\xi^2)/2$ solve to
+$$ \Phi_t(x,\xi)=(x\cos t+\xi\sin t,\ \xi\cos t-x\sin t). $$
+This matrix is orthogonal with determinant $1$, and $\Phi_t(q,p)=(q_t,p_t)$. For $a\in C_c^\infty(\mathbb R^2)$, [F4] gives
+$$ \langle W_t,a\rangle =\langle\operatorname{Op}^W_\epsilon(a\circ\Phi_t)\psi^\epsilon_{q,p}, \psi^\epsilon_{q,p}\rangle =\int_{\mathbb R^2}a(\Phi_t z)W_\epsilon[\psi^\epsilon_{q,p}](z)\,dz, $$
+where the last equality is [F2]. The integrand is in $L^1$ because $a$ is compactly supported and the Gaussian is integrable. Apply [F8] to the rotation $z'=\Phi_tz$; its determinant is $1$, so the resulting density is $W_\epsilon[\psi^\epsilon_{q,p}](\Phi_{-t}z')$. Orthogonality gives
+$$ |\Phi_{-t}(x,\xi)-(q,p)|^2 =|(x,\xi)-\Phi_t(q,p)|^2, $$
+so this density is exactly the displayed $W_t$. The same change of variables sends its mean $(q,p)$ to $(q_t,p_t)$ and transforms covariance as $R_t(\epsilon I_2/2)R_t^T=\epsilon I_2/2$, since $R_t$ is orthogonal. This proves the asserted exact transport and covariance for every compactly supported smooth test symbol and hence for the distributional Wigner functional defined in the Statement. [step 1.1, step 1.2, F2, F4, F8, algebra] ∎
+
+OLD BOUNDARIES
+[{"case": "empty", "status": "not_applicable", "reason": "The example fixes a normalized Gaussian state and has no empty-state case."}, {"case": "zero", "status": "checked", "evidence": "Steps 1.2 and 2.1: q=p=0 gives the normalized centered Gaussian and its exact rotation."}, {"case": "one", "status": "checked", "evidence": "Statement: the example is explicitly one-dimensional."}, {"case": "degenerate", "status": "not_applicable", "reason": "The statement imposes no rank, gap, or nondegeneracy hypothesis; the proof uses only the displayed domain and regularity assumptions."}, {"case": "endpoints", "status": "checked", "evidence": "Step 2.1: t=0 is the identity rotation and the formula holds for all real t."}, {"case": "nonempty-choice", "status": "checked", "evidence": "Statement A1 assumes Countable Choice for the oscillator and analytic suppliers. Proof step 1.1 checks the fixed Hermite realization is the required core realization, and step 1.2 specifies the Gaussian directly for every real q,p."}, {"case": "iff-forward", "status": "not_applicable", "reason": "The statement is not an if-and-only-if characterization."}, {"case": "iff-reverse", "status": "not_applicable", "reason": "The statement is not an if-and-only-if characterization."}]
+FLAGS
+{"reference": [{"id": "ex-nrqmx-gaussian-wigner-flow", "batch": 46, "case": "zero", "evidence": "Steps 1.2 and 2.1: q=p=0 gives the normalized centered Gaussian and its exact rotation.", "unresolved_step_references": ["1.2", "2.1"]}, {"id": "ex-nrqmx-gaussian-wigner-flow", "batch": 46, "case": "endpoints", "evidence": "Step 2.1: t=0 is the identity rotation and the formula holds for all real t.", "unresolved_step_references": ["2.1"]}, {"id": "ex-nrqmx-gaussian-wigner-flow", "batch": 46, "case": "nonempty-choice", "evidence": "Statement A1 assumes Countable Choice for the oscillator and analytic suppliers. Proof step 1.1 checks the fixed Hermite realization is the required core realization, and step 1.2 specifies the Gaussian directly for every real q,p.", "unresolved_step_references": ["1.2"]}], "audit": []}
+ITEM 14 cex-nrqmx-gap-closing-adiabatic
+---
+id: cex-nrqmx-gap-closing-adiabatic
+kind: counterexample
+domain: mathematics
+library: mathematics
+title: Slow variation alone is insufficient
+status: draft
+origin: pipeline
+dependency_level: 4
+deps:
+  - def-countable-choice
+  - thm-nrqmx-adiabatic-geometric-phase-bound
+dependency_roles:
+  def-countable-choice: mathematical-premise
+  thm-nrqmx-adiabatic-geometric-phase-bound: mathematical-premise
+proof_strategy: direct
+verification:
+  precheck: pass
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+sources:
+  references:
+    - title: David Tong, Applications of Quantum Mechanics, University of Cambridge lecture notes
+      url: https://www.damtp.cam.ac.uk/user/tong/aqm/aqm.pdf
+    - title: J. E. Avron, R. Seiler, and L. G. Yaffe, Adiabatic Theorems and Applications to the Quantum Hall Effect
+      url: https://phsites.technion.ac.il/avron/wp-content/uploads/sites/3/2013/05/commun_math_phys_110_33-49_1987.pdf
+---
+
+## Statement refuted
+
+Assuming Countable Choice, slow scaling by $T$ alone guarantees a uniform $O(1/T)$ leakage bound for the pointwise ordered upper eigenspace of every finite-dimensional $C^2$ Hermitian family, even when its spectral gap may close.
+
+## Statement references
+
+[[thm-nrqmx-adiabatic-geometric-phase-bound]]
+
+## Facts & Assumptions
+
+**Given:** Countable Choice, $\hbar>0$ in joule-seconds, an energy $E_0>0$ in joules, and a duration $T>0$ in seconds.
+
+[A1] Countable Choice is [[def-countable-choice]], the hypothesis carried by [[thm-nrqmx-adiabatic-geometric-phase-bound]].
+
+[F1] [[thm-nrqmx-adiabatic-geometric-phase-bound]]: the $O(1/T)$ leakage conclusion requires a coherently followed spectral projection separated from the complementary spectrum by a uniform positive gap.
+
+## Counterexample
+
+1.1 On $\mathbb C^2$, let $e_\uparrow=(1,0)^T$, $e_\downarrow=(0,1)^T$, and $H(s)=E_0(2s-1)\operatorname{diag}(1,-1)$ for $s\in[0,1]$. For $s<1/2$ the ordered upper eigenvalue is $E_0(1-2s)$ and its projection is $P_{\rm up}(s)=e_\downarrow e_\downarrow^*$; for $s>1/2$ it is $E_0(2s-1)$ and its projection is $P_{\rm up}(s)=e_\uparrow e_\uparrow^*$. At $s=1/2$, $H(s)=0$, so the degenerate upper eigenspace is all of $\mathbb C^2$ and its spectral projection is $I_2$; the one-sided rank-one projections therefore have no continuous rank-one extension. The gap between the two eigenvalues is $2E_0|2s-1|$, which closes at $s=1/2$. [given, A1, algebra]
+
+2.1 The propagator from $s=0$ solves $i\hbar U_T'(s)=T H(s)U_T(s)$ and is
+$$U_T(s)=\exp\!\left(-\frac{iTE_0}{\hbar}(s^2-s)\operatorname{diag}(1,-1)\right),$$
+as direct differentiation verifies. In particular $U_T(1)=I_2$. [given, step 1.1, construct, algebra]
+
+3.1 At the endpoints, $P_{\rm up}(0)=e_\downarrow e_\downarrow^*$ and $P_{\rm up}(1)=e_\uparrow e_\uparrow^*$. Therefore
+$$\bigl\|(I-P_{\rm up}(1))U_T(1)P_{\rm up}(0)\bigr\|=\|e_\downarrow e_\downarrow^*\|=1$$
+for every $T>0$. No finite constant $C$ independent of $T$ can bound this leakage by $C/T$. The ordered projection fails the continuity and uniform-gap hypotheses in [F1]. [given, F1, step 1.1, step 2.1, algebra]
+
+4.1 The constant projection $P_\downarrow=e_\downarrow e_\downarrow^*$ commutes with every $H(s)$ and has zero leakage for all $T$. At the crossing it is not the spectral projection onto the degenerate eigenspace, which is all of $\mathbb C^2$; it is a continuous invariant rank-one subspace, not a coherently followed gapped spectral cluster. Thus the example refutes a gap-free uniform tracking claim for the ordered branch; it does not assert that every choice of state at a crossing causes transitions. [given, step 1.1, step 2.1, algebra] ∎
+
+## Counterexample references
+
+[[thm-nrqmx-adiabatic-geometric-phase-bound]]
+
+
+OLD BOUNDARIES
+[{"case": "empty", "status": "not_applicable", "reason": "The example is on the nonzero finite-dimensional space C^2."}, {"case": "zero", "status": "checked", "evidence": "The gap is exactly zero at s=0 by step 1.1, which is the boundary case under examination."}, {"case": "one", "status": "checked", "evidence": "The ordered endpoint projections in step 1.1 have rank one, so the leakage norm in step 3.1 is well defined."}, {"case": "degenerate", "status": "checked", "evidence": "step 1.1 exhibits the level crossing and step 3.1 computes leakage one for every T."}, {"case": "endpoints", "status": "checked", "evidence": "step 3.1 uses the exact initial endpoint s=-1 and final endpoint s=1."}, {"case": "nonempty-choice", "status": "checked", "evidence": "The Counterexample Statement retains Countable Choice in A1 from the referenced adiabatic theorem; the explicit diagonal calculation uses no further choice."}, {"case": "iff-forward", "status": "not_applicable", "reason": "The item is a counterexample to a universal claim, not an equivalence."}, {"case": "iff-reverse", "status": "not_applicable", "reason": "The item is a counterexample to a universal claim, not an equivalence."}]
+FLAGS
+{"reference": [{"id": "cex-nrqmx-gap-closing-adiabatic", "batch": 47, "case": "zero", "evidence": "The gap is exactly zero at s=0 by step 1.1, which is the boundary case under examination.", "unresolved_step_references": ["1.1"]}, {"id": "cex-nrqmx-gap-closing-adiabatic", "batch": 47, "case": "one", "evidence": "The ordered endpoint projections in step 1.1 have rank one, so the leakage norm in step 3.1 is well defined.", "unresolved_step_references": ["1.1", "3.1"]}, {"id": "cex-nrqmx-gap-closing-adiabatic", "batch": 47, "case": "degenerate", "evidence": "step 1.1 exhibits the level crossing and step 3.1 computes leakage one for every T.", "unresolved_step_references": ["1.1", "3.1"]}, {"id": "cex-nrqmx-gap-closing-adiabatic", "batch": 47, "case": "endpoints", "evidence": "step 3.1 uses the exact initial endpoint s=-1 and final endpoint s=1.", "unresolved_step_references": ["3.1"]}], "audit": []}

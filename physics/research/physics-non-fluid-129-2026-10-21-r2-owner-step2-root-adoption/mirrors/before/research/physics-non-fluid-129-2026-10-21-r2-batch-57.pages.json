@@ -1,0 +1,376 @@
+[
+  {
+    "order": 811,
+    "id": "nrqmx-quantum-optics-models",
+    "kind": "A",
+    "category": "non-relativistic-quantum-mechanics",
+    "library": "physics",
+    "title": "Finite-mode light–matter models and detection statistics",
+    "companion": "nrqmx-quantum-optics-models-examples",
+    "requires": [
+      "nrqmx-finite-mode-gaussian",
+      "nrqmx-finite-open-dynamics",
+      "qm-light-matter-and-spectral-transitions",
+      "qm-math-fock-and-equilibrium",
+      "qm-math-composites"
+    ],
+    "items": [
+      {
+        "id": "post-nrqmx-finite-mode-light-matter-model",
+        "kind": "postulate",
+        "domain": "physics",
+        "title": "Finite-mode dipole and detector assignment",
+        "reference": "items/post-nrqmx-finite-mode-light-matter-model.md",
+        "design_state": "Step 1 authored draft; readiness recorded separately.",
+        "dependency_level": 5,
+        "deps": [
+          "post-nrqmx-finite-open-model",
+          "def-nrqmx-finite-mode-symplectic-data",
+          "lem-nrqmx-finite-mode-fock-schr-identification",
+          "thm-nrqmx-finite-mode-bogoliubov",
+          "def-nrqm-framework-quantities-and-units",
+          "def-nrqm-measurement-framework-declared-measurements-and-instruments",
+          "def-axiom-of-choice",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "post-nrqmx-finite-open-model": "formulation-prerequisite",
+          "def-nrqmx-finite-mode-symplectic-data": "mathematical-premise",
+          "lem-nrqmx-finite-mode-fock-schr-identification": "mathematical-premise",
+          "thm-nrqmx-finite-mode-bogoliubov": "mathematical-premise",
+          "def-nrqm-framework-quantities-and-units": "formulation-prerequisite",
+          "def-nrqm-measurement-framework-declared-measurements-and-instruments": "operational-prerequisite",
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "**(a) Finite oscillator-mode data.** Choose an integer $M\\ge1$, the one-particle mode space $\\mathfrak h=\\mathbb C^M$ with a declared orthonormal mode basis $e_1,\\ldots,e_M$, and the bosonic Fock space $\\mathcal F_s(\\mathfrak h)=\\bigoplus_{n\\ge0}\\mathfrak h^{\\otimes_s n}$ with vacuum $\\Omega$. Here $\\mathfrak h^{\\otimes_s n}$ is the range of the orthogonal symmetrizer in the completed $n$-fold Hilbert tensor product, with the zero-particle sector $\\mathbb C\\Omega$. For $\\mathbf n=(n_1,\\ldots,n_M)\\in\\mathbb N_0^M$, let $|\\mathbf n\\rangle$ be the normalized occupation vector. The mode operators are dimensionless and on the finite-particle core satisfy $a_j|\\mathbf n\\rangle=\\sqrt{n_j}|\\mathbf n-\\mathbf e_j\\rangle$ and $a_j^*|\\mathbf n\\rangle=\\sqrt{n_j+1}|\\mathbf n+\\mathbf e_j\\rangle$, with the first expression zero if $n_j=0$. The Fock space is infinite-dimensional for each $M\\ge1$; no particle-number cutoff or tensor factorization of an individual photon into position and spin is part of this assignment.\n\nAssume the Axiom of Choice and countable choice wherever the finite-mode Fock, quadrature, and implementability suppliers require them. These are mathematical hypotheses of the assignment, not physical postulates.\n\n**Mode-frequency data.** For each selected mode $j$, choose a positive angular frequency $\\omega_j>0$ in seconds$^{-1}$; the assigned one-quantum energy scale is $\\hbar\\omega_j$ joules. These are parameters of the finite-mode model, not measured frequencies.\n\n**(b) Finite atom and dipole data.** Choose $d\\ge1$, an atomic Hilbert space $\\mathcal H_A=\\mathbb C^d$, a Hermitian atomic energy matrix $H_A$ in joules, Hermitian compressed dipole matrices $D_j$ in coulomb-metres, and real mode field scales $\\mathcal E_j$ in volts per metre. The matrix elements of $G_j:=\\mathcal E_jD_j/\\hbar$ have units seconds$^{-1}$, where $\\hbar>0$ is retained in joule-seconds. The finite matrices and scales are chosen model data. If they are obtained by compressing a larger atomic model, that compression's error is a separate model input and is not bounded here.\n\nThe assigned dipole interaction core expression is $V_{\\mathrm{dip}}=-\\sum_{j=1}^{M}\\mathcal E_jD_j\\otimes(a_j+a_j^*)$ in the ordered space $\\mathcal H_A\\otimes\\mathcal F_s(\\mathfrak h)$; each summand has units joules and acts on the finite-particle core. This clause assigns the finite matrix expression only. It does not assert that an arbitrary such sum has a self-adjoint realization or generate an evolution; any dynamical use must state and justify its operator domain. The Jaynes–Cummings supplier below gives one specific self-adjoint direct-sum realization.\n\n**(c) Mode transformations.** A finite mode-coordinate change is assigned only when its finite Bogoliubov matrices satisfy the exact hypotheses of the finite-mode implementability statement: for $U,V\\in M_M(\\mathbb C)$, $UU^*-VV^*=I_M$ and $UV^T=VU^T$. The resulting unitary acts on this finite-mode Fock space. The statement assumes the Axiom of Choice; this is a mathematical assumption, not a physical law. No infinite-mode implementability follows.\n\n**(d) Detector outcome models.** A detector's outcome space $(X,\\Sigma)$ and POVM $E:\\Sigma\\to\\mathcal B(\\mathcal H_A\\otimes\\mathcal F_s(\\mathfrak h))$ are declared model data: each $E(B)$ is bounded and positive, $E(X)=I$, and $E$ is countably additive in the weak operator topology. For a state $\\rho$, the assigned probability is $\\operatorname{tr}(\\rho E(B))$ under the framework's stated measurement convention. An ideal number-resolving model on the field has outcomes $\\mathbf n\\in\\mathbb N_0^M$ and effects $I_A\\otimes|\\mathbf n\\rangle\\langle\\mathbf n|$. For ideal homodyne of mode $j$ at phase $\\theta\\in\\mathbb R$, let $R_j(\\theta)|\\mathbf n\\rangle=e^{i\\theta n_j}|\\mathbf n\\rangle$ and $X_{j,\\theta}:=\\hbar^{-1/2}R_j(\\theta)Q_jR_j(\\theta)^*$, where $Q_j$ is the self-adjoint quadrature fixed by [[def-nrqmx-finite-mode-symplectic-data]]. Thus $X_{j,\\theta}$ is self-adjoint by unitary conjugation and on the finite-particle core equals $(e^{-i\\theta}a_j+e^{i\\theta}a_j^*)/\\sqrt2$. Its spectral PVM $B\\mapsto I_A\\otimes\\mathbf1_B(X_{j,\\theta})$ is the ideal homodyne POVM on the product space. These are ideal outcome assignments, not claims about a detector's optical local oscillator, efficiency, bandwidth, calibration or state update. If a state update or a finite detector environment is modeled, declare its instrument separately; the optional finite product-preparation/unitary/partial-trace assignment has the exact scope of the finite open-system postulate and implies no reservoir limit.\n\n**(e) Optional approximation regimes.** A long-wavelength identification with a spatial electromagnetic mode requires a separately declared atomic extent $L$ and wave number $k_j$ and the scale regime $k_jL\\ll1$; no error bound is supplied. A rotating-wave choice keeps only the excitation-exchange terms. For a two-level transition of frequency $\\omega_0$ coupled to a mode of frequency $\\omega$, its usual low-excitation regime is $|g|\\sqrt{n+1}\\ll\\omega,\\omega_0$ on the declared photon-number sectors; it is not uniform over the full Fock space. A Markov/GKSL approximation is another separate model choice and must state its rates, reservoir correlation time $\\tau_B$, system time scale $\\tau_S$, and regime $\\tau_B\\ll\\tau_S$. None of these optional approximations is derived from this assignment or from the finite system-environment model.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Carlos Navarrete-Benlloch, Introduction to Quantum Optics, full lecture notes, §§IV.1 and IV.2.1–2.2",
+              "url": "https://arxiv.org/pdf/2203.13206",
+              "locator": "The dipole interaction in §IV.1; single-mode, two-level and rotating-wave model in §IV.2.1; excitation sectors in §IV.2.2, Eqs. (267)–(271)."
+            },
+            {
+              "title": "Christian Weedbrook et al., Gaussian Quantum Information, §§II.2.6, II.5.1, II.5.4 and V.2",
+              "url": "https://arxiv.org/pdf/1110.3234",
+              "locator": "Complete PDF sections: passive beam splitter, homodyne, ideal number measurement, and vacuum-environment pure-loss dilation."
+            },
+            {
+              "title": "John Watrous, The Theory of Quantum Information, Chapter 2",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.2.pdf",
+              "locator": "§2.1.3, printed pp. 67–69, finite partial trace; §2.2.2, Theorem 2.22, printed pp. 82–84, finite Choi/Kraus/Stinespring forms. Used only for finite-dimensional detector-environment context, not for the infinite-dimensional oscillator channel."
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "An adopted effective model assignment for finitely many bosonic oscillator modes coupled to a finite atomic Hilbert space, together with explicitly selected ideal photon-counting and homodyne outcome models. It asserts no laboratory mode content, detector realization, measured coupling, controlled truncation error, continuum spontaneous-emission law, QED photon localization, photon position or spin tensor decomposition, helicity, angular-momentum split, or paraxial limit. Long-wavelength, rotating-wave and Markov regimes are optional, separately stated approximations.",
+        "empirical_premises": []
+      },
+      {
+        "id": "def-nrqmx-finite-mode-g2-statistic",
+        "kind": "definition",
+        "domain": "physics",
+        "title": "Ideal single-mode normally ordered second factorial statistic",
+        "reference": "items/def-nrqmx-finite-mode-g2-statistic.md",
+        "design_state": "Step 1 authored draft; readiness recorded separately.",
+        "dependency_level": 6,
+        "deps": [
+          "post-nrqmx-finite-mode-light-matter-model",
+          "thm-nrqm-fock-and-equilibrium-fixed-mode-number-law",
+          "def-nrqm-measurement-framework-declared-measurements-and-instruments",
+          "def-axiom-of-choice",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "post-nrqmx-finite-mode-light-matter-model": "physical-assumption",
+          "thm-nrqm-fock-and-equilibrium-fixed-mode-number-law": "mathematical-premise",
+          "def-nrqm-measurement-framework-declared-measurements-and-instruments": "operational-prerequisite",
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "inventory_expansion_required": true,
+        "statement": "Assume the finite-mode light–matter assignment and choose one of its modes. Let $\\rho$ be a density operator (a positive trace-class operator of trace one) on that mode's one-mode Fock space. Let $\\Pi_n:=|n\\rangle\\langle n|$ be the ideal number-count PVM on that mode, with probabilities $p_n:=\\operatorname{tr}(\\rho\\Pi_n)$. Suppose $\\bar n:=\\sum_{n\\ge0}np_n$ is finite and strictly positive, and $m_2:=\\sum_{n\\ge0}n(n-1)p_n$ is finite. Define the model's equal-time second factorial statistic by $g^{(2)}(0;\\rho):=m_2/\\bar n^2$. This is the number-distribution form of the ideal single-mode normally ordered factorial count statistic; the unambiguous numerator used here is the finite sum $m_2$ defined above. This definition uses the ideal counting outcome model only; it asserts no time-resolved photocurrent law, empirical detection, or detector realization.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Carlos Navarrete-Benlloch, Introduction to Quantum Optics, full lecture notes, §VI.2.1",
+              "url": "https://arxiv.org/pdf/2203.13206",
+              "locator": "Equation (491) and footnote 51 define normal ordering for output photodetection correlations; that continuous-time open-system correlation model is not imported here."
+            },
+            {
+              "title": "Christian Weedbrook et al., Gaussian Quantum Information, §II.5.4",
+              "url": "https://arxiv.org/pdf/1110.3234",
+              "locator": "The number-basis PVM E_n=|n><n| and the distinction between ideal number measurement and inefficient avalanche detection."
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "The dimensionless equal-time second factorial statistic of one selected bosonic oscillator mode under an ideal number-resolving count model. It is a model-defined normal-ordered moment for states with finite moments and positive mean number. No multimode output-field correlation, finite-trial observation, detector response, or laboratory antibunching result is asserted.",
+        "empirical_premises": []
+      },
+      {
+        "id": "pthm-nrqmx-jaynes-cummings-blocks",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Jaynes–Cummings invariant blocks and Rabi frequency",
+        "reference": "items/pthm-nrqmx-jaynes-cummings-blocks.md",
+        "design_state": "Step 1 authored draft; readiness recorded separately.",
+        "dependency_level": 6,
+        "deps": [
+          "post-nrqmx-finite-mode-light-matter-model",
+          "def-nrqm-framework-quantities-and-units",
+          "thm-nrqm-fock-and-equilibrium-closed-adjoint-sector-domains",
+          "thm-nrqm-fock-and-equilibrium-fixed-mode-number-law",
+          "lem-nrqm-composites-hilbert-tensor-construction",
+          "def-axiom-of-choice",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "post-nrqmx-finite-mode-light-matter-model": "physical-assumption",
+          "def-nrqm-framework-quantities-and-units": "formulation-prerequisite",
+          "thm-nrqm-fock-and-equilibrium-closed-adjoint-sector-domains": "mathematical-premise",
+          "thm-nrqm-fock-and-equilibrium-fixed-mode-number-law": "mathematical-premise",
+          "lem-nrqm-composites-hilbert-tensor-construction": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Take the one-mode, two-level specialization of the finite-mode assignment and use its SI convention with $\\hbar>0$ in joule-seconds. Let $\\omega>0$ be the selected angular frequency in seconds$^{-1}$, let $\\mathcal H_A=\\mathbb C^2$ have orthonormal states $|g\\rangle,|e\\rangle$, and choose $\\omega_0>0$ in seconds$^{-1}$, $d\\in\\mathbb R$ in coulomb-metres, and $\\mathcal E\\in\\mathbb R$ in volts per metre. Set $\\sigma_+=|e\\rangle\\langle g|$, $\\sigma_-=|g\\rangle\\langle e|$, $\\sigma_z=|e\\rangle\\langle e|-|g\\rangle\\langle g|$, and $\\sigma_x=\\sigma_++\\sigma_-$. Choose $H_A=(\\hbar\\omega_0/2)\\sigma_z$ and $D=d\\sigma_x$; then the dipole expression $-\\mathcal E D\\otimes(a+a^*)$ has energy units. Define the real coupling $g:=-\\mathcal E d/\\hbar$ in seconds$^{-1}$. Retaining from the dipole expression just the excitation-exchange terms $\\sigma_+\\otimes a$ and $\\sigma_-\\otimes a^*$ gives coefficient $-\\mathcal E d=\\hbar g$. Thus the rotating-wave Hamiltonian below is a specified specialization of the model assignment, not an independently measured interaction.\n\nLet $\\mathcal F_s(\\mathbb C)$ be the infinite-dimensional one-mode bosonic Fock space with occupation basis $|n\\rangle$, $n\\in\\mathbb N_0$, and operators $a|n\\rangle=\\sqrt n|n-1\\rangle$, $a^*|n\\rangle=\\sqrt{n+1}|n+1\\rangle$ on the finite-particle core. Write $I_A$ and $I_F$ for the identity operators on the atomic and field factors, respectively. Define $\\Delta=\\omega_0-\\omega$. For this rotating-wave model, whose usual scale $|g|\\sqrt{n+1}\\ll\\omega,\\omega_0$ applies only to the photon-number sectors under study and is not uniform over the full Fock space, set\n$$H_{\\rm core}=\\hbar\\omega\\,I_A\\otimes a^*a+\\frac{\\hbar\\omega_0}{2}\\sigma_z\\otimes I_F+\\hbar g(\\sigma_+\\otimes a+\\sigma_-\\otimes a^*)$$\non the finite-particle core of $\\mathbb C^2\\widehat\\otimes\\mathcal F_s(\\mathbb C)$. The Hamiltonian is the exact operator for the selected rotating-wave model; no error bound relative to the unapproximated dipole interaction is asserted.\n\nThe total excitation operator $N_{\\rm exc}:=I_A\\otimes a^*a+\\sigma_+\\sigma_-\\otimes I_F$ is conserved on that core. The ground line $\\mathbb C|g,0\\rangle$ is invariant. For each $n\\in\\mathbb N_0$, the subspace $\\mathcal K_n=\\operatorname{span}\\{|e,n\\rangle,|g,n+1\\rangle\\}$ is invariant and the restriction has matrix\n$$H_n=\\begin{pmatrix}\\hbar\\omega n+\\frac{\\hbar\\omega_0}{2}&\\hbar g\\sqrt{n+1}\\\\\\hbar g\\sqrt{n+1}&\\hbar\\omega(n+1)-\\frac{\\hbar\\omega_0}{2}\\end{pmatrix}.$$\nIts eigenvalue splitting is $\\hbar\\sqrt{\\Delta^2+4g^2(n+1)}$. Define the full Hamiltonian to act on the ground line by $-\\hbar\\omega_0/2$ and as the orthogonal direct sum of the $H_n$ on the $\\mathcal K_n$, with squared-block-norm domain\n$$D(H_{\\rm JC})=\\left\\{c|g,0\\rangle\\oplus\\bigoplus_{n\\ge0}\\psi_n:\\ c\\in\\mathbb C,\\ \\psi_n\\in\\mathcal K_n,\\ \\sum_{n\\ge0}\\|H_n\\psi_n\\|^2<\\infty\\right\\}.$$\nThis direct-sum operator is self-adjoint and extends $H_{\\rm core}$.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Carlos Navarrete-Benlloch, Introduction to Quantum Optics, full lecture notes, §§IV.2.1–2.2",
+              "url": "https://arxiv.org/pdf/2203.13206",
+              "locator": "The rotating-wave Jaynes–Cummings Hamiltonian and excitation sectors, Eqs. (267)–(271). The local proof fixes a different coupling phase and completes the operator-domain argument."
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "An exact conditional calculation for the single-mode, two-level rotating-wave model on the full infinite-dimensional oscillator Fock space. The excitation blocks and self-adjoint direct-sum realization are model deductions. The usual weak-coupling rotating-wave scale condition is not uniform over all Fock states; no continuum spontaneous-emission law, detector observation, or laboratory identification is asserted.",
+        "empirical_premises": []
+      },
+      {
+        "id": "pthm-nrqmx-beam-splitter-count-statistics",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Passive beam-splitter photon statistics",
+        "reference": "items/pthm-nrqmx-beam-splitter-count-statistics.md",
+        "design_state": "Step 1 authored draft; readiness recorded separately.",
+        "dependency_level": 6,
+        "deps": [
+          "post-nrqmx-finite-mode-light-matter-model",
+          "thm-nrqmx-finite-mode-bogoliubov",
+          "lem-nrqmx-finite-mode-fock-schr-identification",
+          "thm-nrqm-fock-and-equilibrium-fixed-mode-number-law",
+          "def-nrqm-measurement-framework-declared-measurements-and-instruments",
+          "def-axiom-of-choice",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "post-nrqmx-finite-mode-light-matter-model": "physical-assumption",
+          "thm-nrqmx-finite-mode-bogoliubov": "mathematical-premise",
+          "lem-nrqmx-finite-mode-fock-schr-identification": "mathematical-premise",
+          "thm-nrqm-fock-and-equilibrium-fixed-mode-number-law": "mathematical-premise",
+          "def-nrqm-measurement-framework-declared-measurements-and-instruments": "operational-prerequisite",
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume the finite-mode assignment with two modes and its ideal number PVM. Let $t,r\\in\\mathbb C$ be dimensionless amplitudes with $|t|^2+|r|^2=1$, and fix the complete unitary mode matrix $C=\\begin{pmatrix}t&-\\overline r\\\\r&\\overline t\\end{pmatrix}$. Use the state-action convention that the passive unitary $U_C$ satisfies $U_C\\Omega=\\Omega$, $U_Ca_1^*U_C^*=t a_1^*+r a_2^*$, and $U_Ca_2^*U_C^*=-\\overline r\\,a_1^*+\\overline t\\,a_2^*$ on the finite-particle core. Put $\\eta:=|t|^2$. For $n\\in\\mathbb N_0$ and $0\\le k\\le n$, write $\\binom nk:=n!/(k!(n-k)!)$. For input $|n,0\\rangle$ and $0<\\eta<1$, the joint output count law is\n$$\\mathbb P(k,\\ell)=\\begin{cases}\\binom nk\\eta^k(1-\\eta)^{n-k},&\\ell=n-k,\\ 0\\le k\\le n,\\\\0,&\\text{otherwise}.\\end{cases}$$\nAt $\\eta=0$ and $\\eta=1$ the joint laws are respectively point masses at $(0,n)$ and $(n,0)$. Thus the first output count is binomial with parameters $(n,\\eta)$. For a dimensionless coherent input $|\\alpha,0\\rangle$ with $|\\alpha\\rangle=e^{-|\\alpha|^2/2}\\sum_{n\\ge0}\\alpha^n|n\\rangle/\\sqrt{n!}$, the output state is $|t\\alpha\\rangle\\otimes|r\\alpha\\rangle$.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Christian Weedbrook et al., Gaussian Quantum Information, §II.2.6",
+              "url": "https://arxiv.org/pdf/1110.3234",
+              "locator": "The two-mode beam-splitter unitary and Heisenberg matrix, Eqs. (36)–(38); the item fixes its own state-action/port phase convention."
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "An exact two-mode passive-unitary model calculation in the infinite-dimensional finite-mode bosonic Fock space, with ideal number-resolving outcomes. It gives conditional count distributions for specified number and coherent inputs. The result is not an experiment or a claim that an actual optical device realizes the assigned unitary.",
+        "empirical_premises": []
+      },
+      {
+        "id": "pthm-nrqmx-finite-mode-loss-channel",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Pure loss channel and binomial thinning",
+        "reference": "items/pthm-nrqmx-finite-mode-loss-channel.md",
+        "design_state": "Step 1 authored draft; readiness recorded separately.",
+        "dependency_level": 7,
+        "deps": [
+          "post-nrqmx-finite-mode-light-matter-model",
+          "pthm-nrqmx-beam-splitter-count-statistics",
+          "lem-nrqm-composites-separable-partial-trace",
+          "lem-nrqm-composites-nuclear-bounded-cyclicity",
+          "lem-nrqm-composites-hilbert-tensor-construction",
+          "lem-nrqm-composites-bounded-tensor-maps",
+          "thm-nrqm-fock-and-equilibrium-fixed-mode-number-law",
+          "def-nrqm-measurement-framework-declared-measurements-and-instruments",
+          "def-axiom-of-choice",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "post-nrqmx-finite-mode-light-matter-model": "physical-assumption",
+          "pthm-nrqmx-beam-splitter-count-statistics": "physical-result",
+          "lem-nrqm-composites-separable-partial-trace": "mathematical-premise",
+          "lem-nrqm-composites-nuclear-bounded-cyclicity": "mathematical-premise",
+          "lem-nrqm-composites-hilbert-tensor-construction": "mathematical-premise",
+          "lem-nrqm-composites-bounded-tensor-maps": "mathematical-premise",
+          "thm-nrqm-fock-and-equilibrium-fixed-mode-number-law": "mathematical-premise",
+          "def-nrqm-measurement-framework-declared-measurements-and-instruments": "formulation-prerequisite",
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume AC and $\\mathrm{AC}_\\omega$, the assigned finite-mode model, a single input mode and a second mode prepared independently in vacuum $|0\\rangle\\langle0|$. For $0\\le\\eta\\le1$, choose the passive unitary $U_\\eta$ of the two-mode beam-splitter model with $t=\\sqrt\\eta$ and $r=\\sqrt{1-\\eta}$. For every trace-class operator $\\rho$ on the one-mode Fock space, define\n$$\\Phi_\\eta(\\rho):=\\operatorname{Tr}_2\\!\\left(U_\\eta(\\rho\\otimes|0\\rangle\\langle0|)U_\\eta^*\\right),$$\nwhere $\\operatorname{Tr}_2$ is the trace-class partial trace over the environment mode. Here CPTP means complex-linear, trace-preserving, and positive after every finite-dimensional ancilla amplification on trace-class operators. The map $\\Phi_\\eta$ is CPTP. For $0<\\eta<1$ and an input number state $|n\\rangle$, its output state is\n$$\\Phi_\\eta(|n\\rangle\\langle n|)=\\sum_{k=0}^n\\binom nk\\eta^k(1-\\eta)^{n-k}|k\\rangle\\langle k|,$$\nso ideal number detection has the binomial-thinning law. At $\\eta=0$ this number input is mapped to vacuum, and at $\\eta=1$ it is unchanged. For a coherent input $|\\alpha\\rangle$, its output is $|\\sqrt\\eta\\,\\alpha\\rangle\\langle\\sqrt\\eta\\,\\alpha|$ for every $0\\le\\eta\\le1$. On arbitrary input states, $\\Phi_0$ maps to vacuum and $\\Phi_1$ is the identity.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Christian Weedbrook et al., Gaussian Quantum Information, §§II.2.6 and V.2",
+              "url": "https://arxiv.org/pdf/1110.3234",
+              "locator": "§II.2.6, Eqs. (36)–(38), defines passive beam-splitter mixing; §V.2, the pure-loss case is a beam splitter mixing the signal with vacuum. The local proof establishes trace-class CPTP and the stated number/coherent outputs."
+            },
+            {
+              "title": "Carlos Navarrete-Benlloch, Introduction to Quantum Optics, full lecture notes, §§II and IV.2",
+              "url": "https://arxiv.org/pdf/2203.13206",
+              "locator": "Finite oscillator Fock modes and single-mode light–matter model conventions; no continuum or detector-data result is imported."
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "An exact conditional one-mode pure-loss model with a vacuum environment mode, a passive two-mode unitary and a trace over the environment. The channel, binomial thinning and coherent-state attenuation are model deductions on the full infinite-dimensional finite-mode Fock space. No detector efficiency, actual loss record, apparatus realization, continuum bath, weak-coupling limit or experimental data are asserted.",
+        "empirical_premises": []
+      }
+    ]
+  },
+  {
+    "order": 812,
+    "id": "nrqmx-quantum-optics-models-examples",
+    "kind": "B",
+    "category": "non-relativistic-quantum-mechanics",
+    "library": "physics",
+    "title": "Finite-mode light–matter models and detection statistics — Examples",
+    "companion": "nrqmx-quantum-optics-models",
+    "requires": [
+      "nrqmx-quantum-optics-models"
+    ],
+    "items": [
+      {
+        "id": "ex-nrqmx-jc-vacuum-rabi",
+        "kind": "example",
+        "domain": "physics",
+        "title": "Vacuum Rabi oscillation",
+        "reference": "items/ex-nrqmx-jc-vacuum-rabi.md",
+        "design_state": "Step 1 authored draft; readiness recorded separately.",
+        "dependency_level": 7,
+        "deps": [
+          "pthm-nrqmx-jaynes-cummings-blocks",
+          "post-nrqm-framework-autonomous-dynamics",
+          "def-nrqm-autonomous-dynamics-framework-evolution",
+          "def-nrqm-measurement-framework-declared-measurements-and-instruments",
+          "def-axiom-of-choice",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "pthm-nrqmx-jaynes-cummings-blocks": "physical-result",
+          "post-nrqm-framework-autonomous-dynamics": "physical-assumption",
+          "def-nrqm-autonomous-dynamics-framework-evolution": "formulation-prerequisite",
+          "def-nrqm-measurement-framework-declared-measurements-and-instruments": "operational-prerequisite",
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "In the resonant Jaynes–Cummings model ($\\omega_0=\\omega$), prepare the atom and field in $|e,0\\rangle$ and let the ideal model evolve for time $\\tau\\ge0$. The assigned excited-state PVM then gives excitation probability $\\cos^2(g\\tau)$. If $g\\ne0$, the population returns to one at $\\tau=k\\pi/|g|$, $k\\in\\mathbb N_0$; if $g=0$, it remains one. This is a periodic model prediction, not irreversible spontaneous decay or a reported observation.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Carlos Navarrete-Benlloch, Introduction to Quantum Optics, full lecture notes, §IV.2.2",
+              "url": "https://arxiv.org/pdf/2203.13206",
+              "locator": "Jaynes–Cummings invariant excitation sectors and dressed-state blocks, Eqs. (268)–(271); the local example computes the vacuum block independently."
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "A conditional single-excitation calculation in the ideal closed Jaynes–Cummings two-level, one-mode rotating-wave model. It predicts periodic excitation transfer and revival within that model, not irreversible decay or continuum spontaneous emission. No measured oscillation or apparatus record is asserted.",
+        "empirical_premises": []
+      },
+      {
+        "id": "ex-nrqmx-single-photon-antibunching",
+        "kind": "example",
+        "domain": "physics",
+        "title": "Ideal single-mode factorial moment",
+        "reference": "items/ex-nrqmx-single-photon-antibunching.md",
+        "design_state": "Step 1 authored draft; readiness recorded separately.",
+        "dependency_level": 7,
+        "deps": [
+          "def-nrqmx-finite-mode-g2-statistic",
+          "post-nrqmx-finite-mode-light-matter-model",
+          "pthm-nrqmx-beam-splitter-count-statistics",
+          "thm-nrqm-fock-and-equilibrium-fixed-mode-number-law",
+          "def-nrqm-measurement-framework-declared-measurements-and-instruments",
+          "def-axiom-of-choice",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "def-nrqmx-finite-mode-g2-statistic": "formulation-prerequisite",
+          "post-nrqmx-finite-mode-light-matter-model": "physical-assumption",
+          "pthm-nrqmx-beam-splitter-count-statistics": "physical-result",
+          "thm-nrqm-fock-and-equilibrium-fixed-mode-number-law": "mathematical-premise",
+          "def-nrqm-measurement-framework-declared-measurements-and-instruments": "operational-prerequisite",
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "For the one-mode number state $|1\\rangle$ and the ideal number-count model, the mean number is $\\langle a^*a\\rangle=1$ while the normally ordered second factorial moment is $\\langle a^*a^*aa\\rangle=0$, so the assigned $g^{(2)}(0)$ statistic is zero. If the input $|1,0\\rangle$ is mixed with vacuum at the declared passive beam splitter, its output has exactly one total count, split between the two ports with probabilities $\\eta$ and $1-\\eta$. These are model predictions only; no detector realization or experimental antibunching record is asserted.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Carlos Navarrete-Benlloch, Introduction to Quantum Optics, full lecture notes, §VI.2.1",
+              "url": "https://arxiv.org/pdf/2203.13206",
+              "locator": "Equation (491) and footnote 51 explain normal ordering in photodetection correlations; no output-field data or open-system formula is imported."
+            },
+            {
+              "title": "Christian Weedbrook et al., Gaussian Quantum Information, §§II.2.6 and II.5.4",
+              "url": "https://arxiv.org/pdf/1110.3234",
+              "locator": "Passive beam splitter transformation and ideal number-basis PVM; the local result is a finite-mode state calculation."
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "An ideal one-quantum Fock-state calculation of a single-mode normal-ordered factorial statistic and its passive beam-splitter count distribution. This is a conditional finite-mode model prediction, not a detector observation or experimental antibunching dataset.",
+        "empirical_premises": []
+      }
+    ]
+  }
+]

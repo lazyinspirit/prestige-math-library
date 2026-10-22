@@ -1,0 +1,903 @@
+{
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "phase": "impact-initial",
+  "round": 1,
+  "unit": "1",
+  "input_sha256": "3f2fa614d0f98bbfd2c8438fd7006c7b52852cc6cefd57d8e9a44738225ae4a6",
+  "decisions": [],
+  "reviews": [
+    {
+      "id": "alg-nrqmx-floquet-fourier-galerkin",
+      "disposition": "unaffected",
+      "post_sha256": "1d256e94ed92c0caf803a2550c1dd563043149a9c5167483db66be0f82ee80d9",
+      "review_context_sha256": "8e8fe2f5b78dea12433dc67595656b75eb879dc22731a7e929c2f4e3464dc313",
+      "reason": "The corrected correctness theorem explicitly requires integer d,b,N, already required by this Definition. Its justified_by use still proves Hermitian compression, exactly (2N+1)^2 assignments and the one total solver call. The b=1 diagram correctly sends input m to m+1 through H_1 and reverses through H_-1.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-emg-fx-finite-step-termination",
+      "disposition": "unaffected",
+      "post_sha256": "495633af26dc60041cba93cb37689a536e4813da04445bb63a16b6b596314b9d",
+      "review_context_sha256": "deefd950f4dd152a4d38c3b0b2a68c1c6c3ac28e61fab66b6ecdc0de90c4416a",
+      "reason": "The revised algorithm explicitly returns R alongside N+1 states, exactly the output already proved here. The Schur-complement positivity induction excludes zero pivots, including the empty-space convention; rational closure and finite arithmetic/storage counts remain applicable.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "prop-emg-fx-discrete-gauss-preservation",
+      "disposition": "unaffected",
+      "post_sha256": "60865d926a1575dbeb2beaa7c31c843522914ee6d304bd0b0eeccf3fa8942bb0",
+      "review_context_sha256": "bc6e5b3054948bc27ec0278e1f730a80b3269c3324db65a4f7256569e1d8a3a8",
+      "reason": "F2 and step 1.1 use the two unchanged updates, not the output container. D2D1=D1D0=0 preserves constraints; expanding the staggered quadratic form cancels the squared terms, and Cauchy-Schwarz gives positivity for tau sigma<2. Returning the inverse adds no premise.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "cex-emg-fx-cfl-discrete-growth",
+      "disposition": "unaffected",
+      "post_sha256": "8b8a7f797e0e2c6c374d79fed9147e60788bc2815ffd5100ce40668f807614ef",
+      "review_context_sha256": "7a5e1bf736c56085c62957ac664ad5838475ec8bda40405eb53cec4521a26ff7",
+      "reason": "F2 uses unchanged rational one-step updates. The tetrahedral complex gives D1D1^T=4I-cc^T and the invariant modal matrix [[1,-4],[4,-15]], with a nonzero growing eigenmode. Returning R with the state list changes neither this orbit nor its zero constraints.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-emg-fx-spherical-maxwell-reduction",
+      "disposition": "unaffected",
+      "post_sha256": "f3ff401c0515aac95a046c87c97a00eea19fb08d7ecf458ff83794c87c309750",
+      "review_context_sha256": "7a288e4de6b26a6a5852db0f7d8f92012eb775e8660c681c8686af7fb61c2358",
+      "reason": "F1 and steps 1.1-3.1 use the unchanged rotation action, product metric and volume convention. The clarification about larger-spacetime embeddings imposes no new condition. The half-turn kills mixed components and the two closedness equations make B and E*r^2 constant; signed Hodge fluxes agree.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "def-emg-fx-spherical-quotient",
+      "disposition": "unaffected",
+      "post_sha256": "6510816e9277f5097bf2a7099c0d0ada3e288d65e4984d6b117933564bedf1bf",
+      "review_context_sha256": "e76d6872c73cd756edd1cc52755639de3b6b5a42979940d2785ce4a9eacf76a1",
+      "reason": "The supplier now explicitly disclaims a larger-spacetime embedding; this definition already uses exactly U times S2 with its projections. The explicit pulled-back Maxwell form and its shorthand remain well typed, and neither Lambda equations nor charged-mass definition assumes any embedding.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-emg-fx-two-dimensional-ricci-trace",
+      "disposition": "unaffected",
+      "post_sha256": "5fdbc03acb1992a0073ef2b0ccb3e8158d979235edeb4c00541409d06ee9313a",
+      "review_context_sha256": "0eb534c90466984b0d9c2db3472af198fd3d17936c116337bdeddf7ec5204ebf",
+      "reason": "F1 takes only the oriented time-oriented Lorentzian base and its metric volume form. Both are unchanged. The product with flat R2 meets the four-dimensional supplier scope, and the two-dimensional curvature contraction and parallel-volume calculation are unaffected by the embedding clarification.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-emg-fx-warped-curvature",
+      "disposition": "unaffected",
+      "post_sha256": "82bf794b823a16785820c976e81a87adcf2b1c79e3cf4876d947b4df9ca26066",
+      "review_context_sha256": "659cb909960333fff642d468bd3a149223b1963317e272b92a6b4a813c79586a",
+      "reason": "F1 uses the same base/sphere blocks with now-explicit pullbacks. Product coordinates in 1.1-2.1 implement exactly this convention; the charge contractions, traced Hessian equation and differentiated mass cancellation in 3.1-4.1 stay valid. No changed base object is substituted for a product tensor.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-emg-fx-local-charged-birkhoff",
+      "disposition": "unaffected",
+      "post_sha256": "15cb93421d67c89042bda25c4ebc0e03e83e4912e5a6dcd59f874d703918fbf3",
+      "review_context_sha256": "89a00ea3d8e51981f179333dbc8ec8012c77869bf766a301cf24c7c61d72cc46",
+      "reason": "F1/F8 and steps 1.2/4.1 retain the same quotient tensors and orientation. The explicit pullback convention matches the lifted Killing field. Nonzero dr and z supply the transverse flow coordinates; diagonalization and epsilon2=-dt wedge dr fix the unchanged RN field sign. No larger embedding is used.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "cex-emx-rough-field-energy-limit",
+      "disposition": "unaffected",
+      "post_sha256": "67ec2ed31b3ccc22a73c889e97c7b9c7172cb79eed87ffdbee0fa49a723a5621",
+      "review_context_sha256": "5779ca1bf6c9e52679c1a3ecd2e99d07bafd9d9048e701ce7aa0220618caa6e4",
+      "reason": "F3 and Counterexample 2.1 require only the unchanged L2 finite-energy criterion. The Coulomb witness separately supplies all distributional Maxwell equations with point-charge data; the supplier now distinguishing Gauss constraints from curl evolution does not place this non-L2 field inside that class.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "def-emx-whitney-semidescretization",
+      "disposition": "unaffected",
+      "post_sha256": "bdbaca0af6417b5db0ff6130e058c3eebd870a72c1475e1b781fcbfb642f44c5",
+      "review_context_sha256": "fab415bd9e0a41566681043871601687af46f77744db4a3168a213650f4cfb1d",
+      "reason": "The revised supplier distinguishes curl evolution from additional volume-charge Gauss constraints. This Definition already specifies only the PEC weak curl Galerkin system, with DC=CG=0 and H_h only L2. It asserts neither continuum-solution membership nor automatic Gauss data; its finite matrix and SI energy definitions remain valid.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "def-qftx-local-wavefront-set",
+      "disposition": "unaffected",
+      "post_sha256": "25d434ac6bc36623de460712c05234ee1d12e0c0c61e575121fb9b1163a6c720",
+      "review_context_sha256": "e77d4c56e7e0f3632b0a3f55ea225e43732ad8e1d0b7a101c3c3bbefd778c0ee",
+      "reason": "The supplier extends Euclidean distributions to zero dimensions without changing positive-dimensional topology or Fourier pairing. For n=0 there is no nonzero covector, so this local WF definition is the empty subset of T*Omega minus zero, consistently with local scalar distributions.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "def-qftx-wavefront-hadamard",
+      "disposition": "unaffected",
+      "post_sha256": "5794edcf024dfc78ef531151b914206ed25747c3c7a53b495b8ebdc992353a7e",
+      "review_context_sha256": "67e00c87ceecd0cacfe9b51958375b1a471dda9236f69c201a5514d4e6f0818f",
+      "reason": "The metric-free first paragraph allows dimension zero; its chart representative now has an explicit supplied scalar dual and its cotangent nonzero set is empty. The Hadamard portion separately requires n>=2, so all null-geodesic, density, transpose and bisolution clauses retain exactly their prior meaning.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "def-qftx-off-shell-local-polynomial-functionals",
+      "disposition": "unaffected",
+      "post_sha256": "95fde56a99e5113c60bb7c355bc5d4d645df5e8b33f1a7bf6a65767724be7e20",
+      "review_context_sha256": "0449eeb23b6706f02a98d0688222a03174af2fcc6122d436be81338424d63ef3",
+      "reason": "The Definition uses only Minkowski R4 and its positive-dimensional Cartesian powers for functional derivative kernels. The supplier correction preserves their test-density topology, bilinear pairings and compact support. Integration by parts and the finite-jet polynomial construction do not use an omitted zero-dimensional Euclidean theorem.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "def-qftx-polynomial-microcausal-functionals",
+      "disposition": "unaffected",
+      "post_sha256": "3f47641e6219e6e2d1f6b9314b205631067b2219acb67f2e458dcc980df407b4",
+      "review_context_sha256": "1cb70e2aa02048609dce6814019ecf8a42c02008d107a532e43e7ba09f8c280a",
+      "reason": "The constant coefficient m=0 lives on M^0, a point; its distribution is now explicitly a scalar, as needed by the finite polynomial expression. For m,r>=1 with n>=2 the same positive-dimensional kernels, metric-density pairings and closed causal-cone exclusion are unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-qftx-wavefront-chart-invariance",
+      "disposition": "unaffected",
+      "post_sha256": "623a8581afc30c7661523a180c23bc3623c8fc3f87a3e2484ee3707f336ac4e1",
+      "review_context_sha256": "5950071676ed7d9568772bff1ef3531d312eabf1cc437407d70ca5e414c14065",
+      "reason": "The current Statement already assumes Countable Choice. The supplier zero-dimensional dual makes the explicit scalar-function case in proof 4.1 valid; dimension zero has no nonzero covectors. All Fourier/nonstationary steps operate in positive dimension with the same test-density Jacobian and AC_omega premise.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-qftx-global-microlocal-pullback",
+      "disposition": "unaffected",
+      "post_sha256": "c8eb093e158d900ae0f8a5c00ffdf4ede334f2694a3b06ed9296525b120ac84e",
+      "review_context_sha256": "10971f3cfbf8b44a34f7cd130d5b90d443d103d248931abf9d59c0067d7a6265",
+      "reason": "F1/F3 now include explicit zero-dimensional scalar distributions and the chart supplier explicitly assumes AC_omega, already adopted here. Step 7.1 treats point sources/targets: transversality forces local smoothness before evaluation, and scalar constants pull back to constants. Positive-dimensional controlled Fourier estimates and finite-test gluing are unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-qftx-wavefront-product",
+      "disposition": "unaffected",
+      "post_sha256": "4057fbb64429f92eb4af46ef9ef383d6f3b2ceae68b3150428d24b4ecd7b5a3a",
+      "review_context_sha256": "f355a4313906194189e76cb8aa47e69c9d2873f9b77a8eb7fb23c07a6441af85",
+      "reason": "The current Statement explicitly adopts Countable Choice, satisfying the chart-invariance and global pullback hypotheses. F1 uses the unchanged density dual; zero-dimensional tensor factors and compact pushforwards are scalar operations. Steps 1.2/2.1 still apply the proved transverse pullback before diagonal multiplication.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-qftx-microcausal-contraction-compatibility",
+      "disposition": "unaffected",
+      "post_sha256": "f46fa9d10cfa6644bd7b560cf7b0d5078d7a5e93a050c9075267773c628d24d6",
+      "review_context_sha256": "84dc07c26c47af656857c87eb79572f9c4dfce54207f666bb0e47e2253e8c56e",
+      "reason": "F4 and steps 1.2/3.1/4.1 use binary product and compact pushforward under AC_omega, explicitly assumed by this Statement. The matching zero-sum obstruction and zero-vertical-covector bounds remain identical; degree-zero kernels are explicitly scalars. The product supplier current AC qualification adds no missing premise.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-qftx-microcausal-star-product",
+      "disposition": "unaffected",
+      "post_sha256": "b1f7d4e36b024caa0f64e13bda10feef02f3f4dc6fc07367399301edd0975cc4",
+      "review_context_sha256": "c2a7eff628bf89580c8f60e2ea8647a536453c1f4561bf750db45f84a85f4453",
+      "reason": "A1 and Statement already adopt AC_omega, so the product supplier explicit hypothesis is met. F3 names its actual tensor-bound proof 1.1 and repeats it on product manifolds. Cross-block no-cancellation and compact pushforward in 1.1-3.1 remain valid; scalar degree-zero coefficients use the corrected point dual.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "def-qftx-local-time-ordered-system",
+      "disposition": "unaffected",
+      "post_sha256": "cff8e708f54661780df27ae510c052155941bd3c971c3f4b4bcf4458a93fa495",
+      "review_context_sha256": "1826152e3ba91fc6d8dd85396933fb552562594101d5ed474a100dd42a3cdb40",
+      "reason": "The star-product paragraph explicitly assumes Countable Choice for its contractions. This meets the revised product interface, while the Definition separately supplies causal antisymmetry and the engineering/actual-degree distinction. Its conditional W/H_F data assert no new singular diagonal product or existence from that theorem.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "cex-qftx-exact-differentiated-scaling-degree",
+      "disposition": "unaffected",
+      "post_sha256": "60d353a434435a7e27ae6361da18620360e8aea9aa39ce7bdfb4849fc131dff5",
+      "review_context_sha256": "b9ec3f937fca8b2ceb7d239c6f198b9c157e39d6aca543efb789ed134ee9398d",
+      "reason": "A1 supplies AC and AC_omega to the changed wavefront suppliers. F4 uses unchanged smooth localization and difference-map transport; F1 explicitly distinguishes the stronger refuted exact-degree demand from the corrected balanced extension contract. The forced P h_F=-i delta contact term and its engineering degree four still contradict only that stronger demand.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "cex-qftx-positive-not-reflection-positive",
+      "disposition": "unaffected",
+      "post_sha256": "90babae0f92bf811d02a78b42b48318f608555bd2db965a0bcd1882ea140ad9e",
+      "review_context_sha256": "79bfd8f7b43ccbce9697c8522485fd8881fcfa68842ac57b118862de79b18df9",
+      "reason": "The supplier now requires the finite-site quotient functional to descend. Here the functional is defined directly on the four-point function algebra; equivalently the polynomial evaluation kernel is annihilated pointwise, hence by expectation. The exchange involution preserves the relations, and the same positive-site test Y has expectation XY=-r<0.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "cex-qftx-square-delta",
+      "disposition": "unaffected",
+      "post_sha256": "694d13508de8d2dfcc172f08042b3205e035391795f103884eb9b892532238ba",
+      "review_context_sha256": "37d3f0b2a75966d5556e5ebb74795237a478f30ddf30b32f00ac739573300664",
+      "reason": "F3 and 2.1 inspect the unchanged no-opposite-covector condition: both delta directions occur, so the theorem supplies no product. Given/A1 also explicitly assume AC_omega. The separate mollifier-square calculation gives epsilon^-n times a strictly positive finite integral; the supplier qualification changes neither exclusion nor divergence.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-qsmx-exchange-lie-weight-blocks",
+      "disposition": "unaffected",
+      "post_sha256": "bf0676abe424716c3ad44dd701ab666beb1dadd10d1e402de244c0c3a9c1dee9",
+      "review_context_sha256": "0d1abcb91cc654bc80f1928764da2cf752ce5573e333df7408b3f721c81b4f98",
+      "reason": "F1 and proofs 1.1/4.1 consume only the unchanged one-site matrices and diagonal tensor action. The Hall endpoint-label quotient does not affect flip commutation, the auxiliary partial-trace identity or the weight-space exponential decomposition. The crossing diagram correctly swaps two downward-oriented tensor strands.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-qsmx-klr-character-specialization",
+      "disposition": "unaffected",
+      "post_sha256": "250ff8a98cb7b1e19b9e3ddba73013ff796ba633bf1974aaa3c16f58d01fb0c4",
+      "review_context_sha256": "d4c9c93c7d80d282af15bc1e9d1c052c2c04f488bb3164b3d2c79af396d47566",
+      "reason": "F3 and 1.2/1.3/2.1 consume the unchanged spin matrices and homogeneous-polynomial action. The clarified Hall count introduces no spin-module identification. KLR uses its separate supplier and AC premise; the binomial and highest-weight characters and zero-exchange partition trace retain their complete scope.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "cex-qsmx-categorification-not-spectrum",
+      "disposition": "unaffected",
+      "post_sha256": "29b90b1c536cf05a348c703035d961412d29261525d143134f9c66cfd56968f5",
+      "review_context_sha256": "8beb35a64768c8ba3d1a512e832c694024f2e2080a6ebd5ee3b4bbc36860f8e2",
+      "reason": "F1 uses the same q_H=2 Hall positive-half identification, which is preserved after counting endpoint-label orbits rather than labelled sequences. Neither Hall nor KLR data select a Hamiltonian. The unchanged commuting matrices 0 and JP have traces 4 and 7/2 at beta J=log 2, so the same algebraic data still fail to fix energy.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "def-gr-fx-bondi-expansion",
+      "disposition": "unaffected",
+      "post_sha256": "d14ce7c7ce2b7ee6599d2e5ef22a74b7edb4488c62ce0c4679debabede8e85fd",
+      "review_context_sha256": "6b478763458f16318ac490066526b4668c82cd644debcb5e034b46da38dd93be",
+      "reason": "The screen supplier now permits noncompact surfaces but retains compact cuts as the closed subclass and requires nonempty local patches. This end has nonempty S2 cuts with positive angular metric. Its Bondi shear/news are explicitly coefficient definitions; they assert no use of a screen inverse on a degenerate hypersurface. The formal-boundary diagram keeps u increasing and asserts no completion.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "def-gr-fx-bms-supertranslation",
+      "disposition": "unaffected",
+      "post_sha256": "ffa385c9bc26da94e6e0f4100572939d5fb1ecfe39ca4a86decd805cca5dacc4",
+      "review_context_sha256": "01531c8468381a112df4486ba7d324a31cf99bf67847433814a81729002b9a9a",
+      "reason": "The repaired Bondi supplier defines exact vacuum membership by Ric=0, while this consumer uses its general smooth expansion, formal boundary, fixed gauge and shear/news coefficients. The boundary diffeomorphism and trace-free Hessian formulas impose no claim that formal coefficients produce a Ricci-flat metric or a finite bulk extension.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "def-gr-fx-trapped-surface-and-black-region",
+      "disposition": "unaffected",
+      "post_sha256": "49aafa8f1fb6162ff8534943dbbb670fcf38b753e3e682831baf4129a4346a31",
+      "review_context_sha256": "8abb4dccdc03b1d1d8ee0f0c9886b0f236b5cf8c89b9f267625acc6d99e25fed",
+      "reason": "The supplier generalizes local screen geometry while preserving the compact closed subclass used here. S is already explicitly nonempty and compact; expansion signs are imposed at points of nonempty local patches and remain invariant under positive boosts and ray interchange. Completion, black-region and horizon definitions use no relaxed compactness inference.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-nrqmx-projector-bundle-kato-well-definedness",
+      "disposition": "unaffected",
+      "post_sha256": "7df37f5557f6d88ae2bb7dd414d50ac158edd3930d49f1b60c82aac2cba7ef4e",
+      "review_context_sha256": "f15cca7c9b37299b38517afa470484298f34e8db09f0dd8f17992640f0ce0da9",
+      "reason": "The supplier correction restricts only its Hamiltonian-generated example to a gapped interval and then M=(0,1). This lemma independently assumes C2 constant-rank orthogonal P on a manifold, builds finite Gram-Schmidt charts, and constructs the Kato solution by its own uniformly convergent iterated-integral series; it invokes no general spectral-regularity assertion.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "def-nrqmx-determinant-line-projector",
+      "disposition": "unaffected",
+      "post_sha256": "8bbdd67363b541e289b1c92adb340d800cec474dc7ee1010960dddcf3cb1d4d6",
+      "review_context_sha256": "31854efb491f00518ed5c83ba383dbcdbf9f45bd3793147d1b5afe74074d01bd",
+      "reason": "This Definition explicitly supplies C2 constant-rank P and uses only the projected image bundle and connection, unchanged by the supplier interval-example qualification. The exterior-power projector and its rank-one image depend on finite-dimensional wedge functoriality, not an inferred multidimensional Hamiltonian spectral theorem.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-qftx-transverse-center-scaling-bound",
+      "disposition": "unaffected",
+      "post_sha256": "f3b464e1121aa190cd9bd45391ee8c25841d0825cc838fa3500d6f7e1e1a34f9",
+      "review_context_sha256": "8883d80d7cd59b2d99ef245781fe506eb1d8caa7106e3cd4e232e9b423d74daa",
+      "reason": "A1 and Statement already give AC and AC_omega. F3/4.1 use the product supplier actual convolution construction and transverse-center criterion, preserved by its explicit AC hypothesis. The joint normalized-covector separation, uniform regular-cone bounds and integrable Fourier majorant retain all nonnegative-bound hypotheses.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-qftx-finite-graph-scaling-degree",
+      "disposition": "unaffected",
+      "post_sha256": "81aac6bdd74912acdd69bfdebf59d445a5de9112a6084f527583bd1a016cd93d",
+      "review_context_sha256": "2fddac37cff5294222b934b25a83bb31cd1bc2ce138cd10134f3e7d4ba1c6304",
+      "reason": "A1 and Statement already supply AC/AC_omega. F1 and 5.1 use exactly the contract distinction between same-actual-degree balanced extensions and engineering-bounded derivative descendants, including forced contact terms. The clarified extension terminology imposes no holomorphic-parameter condition. F3 product uses retain the full-center noncancellation established by block momentum sums.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "cex-emg-fx-constant-radius-rigidity",
+      "disposition": "repaired",
+      "post_sha256": "9378dd66eb55fdd2b6654e6b7a1a292519f7158df6fefa1971075fcfe18081a7",
+      "review_context_sha256": "9f3d3639e6c9b552740676a608ce1edd5ecdb2aceedb990982a25fa0857adbc7",
+      "reason": "Confirmed the inherited type-label defect in 1.1: -L d tau wedge dz is a two-form, as F1/F6 and the alternating tensor convention require. Replaced only one-form with two-form and synchronized the batch-18 derivation. The supplied rotational action fixes both base differentials; r=L still has dr=0 and cannot be a chart coordinate. Statement refuted unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "def-csm-frontier-latent-gibbs-observation",
+      "disposition": "unaffected",
+      "post_sha256": "469bea3a5f181ef8c9de8483fefb3da01ea1717130436c2081913e694b01ffcb",
+      "review_context_sha256": "0a2fc55f74a04a9f94682f139bd6833dc4d078dba7ba46a30e1a264473f70561",
+      "reason": "F1 and proof 1.1 use only the invariant Euclidean dot product u dot T(x), with no one-based coordinate evaluation. The supplier explicit relabeling therefore preserves pi, its continuity and normalization. The finite marginal kernel/density sums and their measurability are unchanged; no data or empirical inference is asserted.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-csm-frontier-finite-jump-path-density",
+      "disposition": "unaffected",
+      "post_sha256": "a16811532663dc8c08582ad0c7b4a598b3ffd348dcfb4b5da2f17ddc04bc54b8",
+      "review_context_sha256": "e15d0e0a64a299818a97a5b174447c1d23dd52b6517e992b9841e8c84d94c661",
+      "reason": "F1 and 1.1 multiply unchanged conditional first-jump survival/density factors on finite state sequences. The supplier now specifies P(E), which supports every finite state event already used here. A1 supplies AC_omega for time-simplex Lebesgue measure; the geometric tail bound and finite subdivision still prove nonexplosion.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-csm-frontier-finite-rate-forward-equation",
+      "disposition": "repaired",
+      "post_sha256": "3b286592baa96077a9de94cb9249d7c19243d975999e1bb057c7bbecc2d74424",
+      "review_context_sha256": "67e485acbfd82df937c108d40579f65383be7479589644e5427bfca6058d6854",
+      "reason": "Confirmed the inherited FTC citation gap at 2.1: first FTC differentiates an integral, but does not supply evaluation of a known derivative. Added published second FTC as a mathematical dependency and separate F4; checked C1 component derivatives on [0,t] for t>0 and handled t=0 separately. Synchronized the owning manifest and contract. The first-jump expansion and complete Statement remain unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "def-csm-frontier-stationary-path-entropy",
+      "disposition": "unaffected",
+      "post_sha256": "34364b7b72a6fa2e7caedf8a7ea85a0a4bd642c2ecebca3008b8da205074eb0a",
+      "review_context_sha256": "7d56143365985652bb1da76bf058e274b98c439be07e748df162b33ab11e7388",
+      "reason": "The state sigma-algebra is now explicit P(E); its coordinate path sigma-algebra and first-jump laws are unchanged. The positive-rate finite path strata used here remain measurable. Re-examined the stationary-law use after the forward-theorem proof repair: second FTC now explicitly supplies uniqueness, with its Statement unchanged. Positive pi and symmetric support still make each almost-sure finite log ratio well-defined.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "repair_notes": {
+    "status": "Completed this assigned impact review and both necessary proof-only repairs. All local focused checks passed; central collection, certification and gate battery remain controller work.",
+    "completed": [
+      "alg-nrqmx-floquet-fourier-galerkin",
+      "lem-emg-fx-finite-step-termination",
+      "prop-emg-fx-discrete-gauss-preservation",
+      "cex-emg-fx-cfl-discrete-growth",
+      "lem-emg-fx-spherical-maxwell-reduction",
+      "def-emg-fx-spherical-quotient",
+      "lem-emg-fx-two-dimensional-ricci-trace",
+      "lem-emg-fx-warped-curvature",
+      "thm-emg-fx-local-charged-birkhoff",
+      "cex-emx-rough-field-energy-limit",
+      "def-emx-whitney-semidescretization",
+      "def-qftx-local-wavefront-set",
+      "def-qftx-wavefront-hadamard",
+      "def-qftx-off-shell-local-polynomial-functionals",
+      "def-qftx-polynomial-microcausal-functionals",
+      "lem-qftx-wavefront-chart-invariance",
+      "lem-qftx-global-microlocal-pullback",
+      "thm-qftx-wavefront-product",
+      "lem-qftx-microcausal-contraction-compatibility",
+      "lem-qftx-microcausal-star-product",
+      "def-qftx-local-time-ordered-system",
+      "cex-qftx-exact-differentiated-scaling-degree",
+      "cex-qftx-positive-not-reflection-positive",
+      "cex-qftx-square-delta",
+      "thm-qsmx-exchange-lie-weight-blocks",
+      "thm-qsmx-klr-character-specialization",
+      "cex-qsmx-categorification-not-spectrum",
+      "def-gr-fx-bondi-expansion",
+      "def-gr-fx-bms-supertranslation",
+      "def-gr-fx-trapped-surface-and-black-region",
+      "lem-nrqmx-projector-bundle-kato-well-definedness",
+      "def-nrqmx-determinant-line-projector",
+      "lem-qftx-transverse-center-scaling-bound",
+      "lem-qftx-finite-graph-scaling-degree",
+      "cex-emg-fx-constant-radius-rigidity",
+      "def-csm-frontier-latent-gibbs-observation",
+      "lem-csm-frontier-finite-jump-path-density",
+      "thm-csm-frontier-finite-rate-forward-equation",
+      "def-csm-frontier-stationary-path-entropy"
+    ],
+    "pending": [],
+    "checks": [
+      {
+        "command": "node tools/physics-support/proof-contract.mjs research/physics-non-fluid-129-2026-10-21-r2-batch-108.proof-contracts.json --strict --items thm-qsmx-exchange-lie-weight-blocks,thm-qsmx-klr-character-specialization,cex-qsmx-categorification-not-spectrum --json",
+        "exit_code": 0,
+        "stage": "scoped contract check before final shared metadata repair",
+        "items": [
+          "thm-qsmx-exchange-lie-weight-blocks",
+          "thm-qsmx-klr-character-specialization",
+          "cex-qsmx-categorification-not-spectrum"
+        ],
+        "result": {
+          "ok": true,
+          "errors": [],
+          "warnings": [],
+          "scope": [
+            "thm-qsmx-klr-character-specialization",
+            "thm-qsmx-exchange-lie-weight-blocks",
+            "cex-qsmx-categorification-not-spectrum"
+          ],
+          "checked": [
+            "thm-qsmx-klr-character-specialization",
+            "thm-qsmx-exchange-lie-weight-blocks",
+            "cex-qsmx-categorification-not-spectrum"
+          ]
+        }
+      },
+      {
+        "command": "node tools/physics-support/proof-contract.mjs research/physics-non-fluid-129-2026-10-21-r2-batch-12.proof-contracts.json --strict --items def-emx-whitney-semidescretization --json",
+        "exit_code": 0,
+        "stage": "scoped contract check before final shared metadata repair",
+        "items": [
+          "def-emx-whitney-semidescretization"
+        ],
+        "result": {
+          "ok": true,
+          "errors": [],
+          "warnings": [],
+          "scope": [
+            "def-emx-whitney-semidescretization"
+          ],
+          "checked": [
+            "def-emx-whitney-semidescretization"
+          ]
+        }
+      },
+      {
+        "command": "node tools/physics-support/proof-contract.mjs research/physics-non-fluid-129-2026-10-21-r2-batch-18.proof-contracts.json --strict --items lem-emg-fx-spherical-maxwell-reduction,def-emg-fx-spherical-quotient,lem-emg-fx-two-dimensional-ricci-trace,lem-emg-fx-warped-curvature,thm-emg-fx-local-charged-birkhoff,cex-emg-fx-constant-radius-rigidity --json",
+        "exit_code": 0,
+        "stage": "scoped contract check before final shared metadata repair",
+        "items": [
+          "lem-emg-fx-spherical-maxwell-reduction",
+          "def-emg-fx-spherical-quotient",
+          "lem-emg-fx-two-dimensional-ricci-trace",
+          "lem-emg-fx-warped-curvature",
+          "thm-emg-fx-local-charged-birkhoff",
+          "cex-emg-fx-constant-radius-rigidity"
+        ],
+        "result": {
+          "ok": true,
+          "errors": [],
+          "warnings": [],
+          "scope": [
+            "lem-emg-fx-spherical-maxwell-reduction",
+            "lem-emg-fx-two-dimensional-ricci-trace",
+            "def-emg-fx-spherical-quotient",
+            "lem-emg-fx-warped-curvature",
+            "thm-emg-fx-local-charged-birkhoff",
+            "cex-emg-fx-constant-radius-rigidity"
+          ],
+          "checked": [
+            "lem-emg-fx-spherical-maxwell-reduction",
+            "lem-emg-fx-two-dimensional-ricci-trace",
+            "def-emg-fx-spherical-quotient",
+            "lem-emg-fx-warped-curvature",
+            "thm-emg-fx-local-charged-birkhoff",
+            "cex-emg-fx-constant-radius-rigidity"
+          ]
+        }
+      },
+      {
+        "command": "node tools/physics-support/proof-contract.mjs research/physics-non-fluid-129-2026-10-21-r2-batch-25.proof-contracts.json --strict --items lem-emg-fx-finite-step-termination,prop-emg-fx-discrete-gauss-preservation,cex-emg-fx-cfl-discrete-growth --json",
+        "exit_code": 0,
+        "stage": "scoped contract check before final shared metadata repair",
+        "items": [
+          "lem-emg-fx-finite-step-termination",
+          "prop-emg-fx-discrete-gauss-preservation",
+          "cex-emg-fx-cfl-discrete-growth"
+        ],
+        "result": {
+          "ok": true,
+          "errors": [],
+          "warnings": [],
+          "scope": [
+            "prop-emg-fx-discrete-gauss-preservation",
+            "lem-emg-fx-finite-step-termination",
+            "cex-emg-fx-cfl-discrete-growth"
+          ],
+          "checked": [
+            "prop-emg-fx-discrete-gauss-preservation",
+            "lem-emg-fx-finite-step-termination",
+            "cex-emg-fx-cfl-discrete-growth"
+          ]
+        }
+      },
+      {
+        "command": "node tools/physics-support/proof-contract.mjs research/physics-non-fluid-129-2026-10-21-r2-batch-33.proof-contracts.json --strict --items def-gr-fx-bondi-expansion,def-gr-fx-bms-supertranslation --json",
+        "exit_code": 0,
+        "stage": "scoped contract check before final shared metadata repair",
+        "items": [
+          "def-gr-fx-bondi-expansion",
+          "def-gr-fx-bms-supertranslation"
+        ],
+        "result": {
+          "ok": true,
+          "errors": [],
+          "warnings": [],
+          "scope": [
+            "def-gr-fx-bondi-expansion",
+            "def-gr-fx-bms-supertranslation"
+          ],
+          "checked": [
+            "def-gr-fx-bondi-expansion",
+            "def-gr-fx-bms-supertranslation"
+          ]
+        }
+      },
+      {
+        "command": "node tools/physics-support/proof-contract.mjs research/physics-non-fluid-129-2026-10-21-r2-batch-4.proof-contracts.json --strict --items cex-emx-rough-field-energy-limit --json",
+        "exit_code": 0,
+        "stage": "scoped contract check before final shared metadata repair",
+        "items": [
+          "cex-emx-rough-field-energy-limit"
+        ],
+        "result": {
+          "ok": true,
+          "errors": [],
+          "warnings": [],
+          "scope": [
+            "cex-emx-rough-field-energy-limit"
+          ],
+          "checked": [
+            "cex-emx-rough-field-energy-limit"
+          ]
+        }
+      },
+      {
+        "command": "node tools/physics-support/proof-contract.mjs research/physics-non-fluid-129-2026-10-21-r2-batch-47.proof-contracts.json --strict --items lem-nrqmx-projector-bundle-kato-well-definedness --json",
+        "exit_code": 0,
+        "stage": "scoped contract check before final shared metadata repair",
+        "items": [
+          "lem-nrqmx-projector-bundle-kato-well-definedness"
+        ],
+        "result": {
+          "ok": true,
+          "errors": [],
+          "warnings": [],
+          "scope": [
+            "lem-nrqmx-projector-bundle-kato-well-definedness"
+          ],
+          "checked": [
+            "lem-nrqmx-projector-bundle-kato-well-definedness"
+          ]
+        }
+      },
+      {
+        "command": "node tools/physics-support/proof-contract.mjs research/physics-non-fluid-129-2026-10-21-r2-batch-54.proof-contracts.json --strict --items def-nrqmx-determinant-line-projector --json",
+        "exit_code": 0,
+        "stage": "scoped contract check before final shared metadata repair",
+        "items": [
+          "def-nrqmx-determinant-line-projector"
+        ],
+        "result": {
+          "ok": true,
+          "errors": [],
+          "warnings": [],
+          "scope": [
+            "def-nrqmx-determinant-line-projector"
+          ],
+          "checked": [
+            "def-nrqmx-determinant-line-projector"
+          ]
+        }
+      },
+      {
+        "command": "node tools/physics-support/proof-contract.mjs research/physics-non-fluid-129-2026-10-21-r2-batch-58.proof-contracts.json --strict --items lem-qftx-wavefront-chart-invariance,lem-qftx-global-microlocal-pullback,thm-qftx-wavefront-product,lem-qftx-microcausal-contraction-compatibility,lem-qftx-microcausal-star-product,cex-qftx-square-delta --json",
+        "exit_code": 0,
+        "stage": "scoped contract check before final shared metadata repair",
+        "items": [
+          "lem-qftx-wavefront-chart-invariance",
+          "lem-qftx-global-microlocal-pullback",
+          "thm-qftx-wavefront-product",
+          "lem-qftx-microcausal-contraction-compatibility",
+          "lem-qftx-microcausal-star-product",
+          "cex-qftx-square-delta"
+        ],
+        "result": {
+          "ok": true,
+          "errors": [],
+          "warnings": [],
+          "scope": [
+            "lem-qftx-wavefront-chart-invariance",
+            "thm-qftx-wavefront-product",
+            "lem-qftx-microcausal-star-product",
+            "cex-qftx-square-delta",
+            "lem-qftx-global-microlocal-pullback",
+            "lem-qftx-microcausal-contraction-compatibility"
+          ],
+          "checked": [
+            "lem-qftx-wavefront-chart-invariance",
+            "thm-qftx-wavefront-product",
+            "lem-qftx-microcausal-star-product",
+            "cex-qftx-square-delta",
+            "lem-qftx-global-microlocal-pullback",
+            "lem-qftx-microcausal-contraction-compatibility"
+          ]
+        }
+      },
+      {
+        "command": "node tools/physics-support/proof-contract.mjs research/physics-non-fluid-129-2026-10-21-r2-batch-60.proof-contracts.json --strict --items cex-qftx-exact-differentiated-scaling-degree,lem-qftx-transverse-center-scaling-bound,lem-qftx-finite-graph-scaling-degree --json",
+        "exit_code": 0,
+        "stage": "scoped contract check before final shared metadata repair",
+        "items": [
+          "cex-qftx-exact-differentiated-scaling-degree",
+          "lem-qftx-transverse-center-scaling-bound",
+          "lem-qftx-finite-graph-scaling-degree"
+        ],
+        "result": {
+          "ok": true,
+          "errors": [],
+          "warnings": [],
+          "scope": [
+            "lem-qftx-transverse-center-scaling-bound",
+            "lem-qftx-finite-graph-scaling-degree",
+            "cex-qftx-exact-differentiated-scaling-degree"
+          ],
+          "checked": [
+            "lem-qftx-transverse-center-scaling-bound",
+            "lem-qftx-finite-graph-scaling-degree",
+            "cex-qftx-exact-differentiated-scaling-degree"
+          ]
+        }
+      },
+      {
+        "command": "node tools/physics-support/proof-contract.mjs research/physics-non-fluid-129-2026-10-21-r2-batch-69.proof-contracts.json --strict --items cex-qftx-positive-not-reflection-positive --json",
+        "exit_code": 0,
+        "stage": "scoped contract check before final shared metadata repair",
+        "items": [
+          "cex-qftx-positive-not-reflection-positive"
+        ],
+        "result": {
+          "ok": true,
+          "errors": [],
+          "warnings": [],
+          "scope": [
+            "cex-qftx-positive-not-reflection-positive"
+          ],
+          "checked": [
+            "cex-qftx-positive-not-reflection-positive"
+          ]
+        }
+      },
+      {
+        "command": "node tools/physics-support/proof-contract.mjs research/physics-non-fluid-129-2026-10-21-r2-batch-94.proof-contracts.json --strict --items lem-csm-frontier-finite-jump-path-density,thm-csm-frontier-finite-rate-forward-equation,def-csm-frontier-stationary-path-entropy --json",
+        "exit_code": 0,
+        "stage": "scoped contract check before final shared metadata repair",
+        "items": [
+          "lem-csm-frontier-finite-jump-path-density",
+          "thm-csm-frontier-finite-rate-forward-equation",
+          "def-csm-frontier-stationary-path-entropy"
+        ],
+        "result": {
+          "ok": true,
+          "errors": [],
+          "warnings": [],
+          "scope": [
+            "lem-csm-frontier-finite-jump-path-density",
+            "thm-csm-frontier-finite-rate-forward-equation",
+            "def-csm-frontier-stationary-path-entropy"
+          ],
+          "checked": [
+            "lem-csm-frontier-finite-jump-path-density",
+            "thm-csm-frontier-finite-rate-forward-equation",
+            "def-csm-frontier-stationary-path-entropy"
+          ]
+        }
+      },
+      {
+        "command": "node tools/physics-support/proof-contract.mjs research/physics-non-fluid-129-2026-10-21-r2-batch-96.proof-contracts.json --strict --items def-csm-frontier-latent-gibbs-observation --json",
+        "exit_code": 0,
+        "stage": "scoped contract check before final shared metadata repair",
+        "items": [
+          "def-csm-frontier-latent-gibbs-observation"
+        ],
+        "result": {
+          "ok": true,
+          "errors": [],
+          "warnings": [],
+          "scope": [
+            "def-csm-frontier-latent-gibbs-observation"
+          ],
+          "checked": [
+            "def-csm-frontier-latent-gibbs-observation"
+          ]
+        }
+      },
+      {
+        "command": "node tools/physics-support/proof-contract.mjs research/physics-non-fluid-129-2026-10-21-r2-batch-18.proof-contracts.json --strict --items cex-emg-fx-constant-radius-rigidity --json",
+        "exit_code": 0,
+        "stage": "final owning contract check inside released shared lock",
+        "items": [
+          "cex-emg-fx-constant-radius-rigidity"
+        ],
+        "result": {
+          "ok": true,
+          "errors": [],
+          "warnings": []
+        }
+      },
+      {
+        "command": "node tools/physics-support/proof-contract.mjs research/physics-non-fluid-129-2026-10-21-r2-batch-94.proof-contracts.json --strict --items thm-csm-frontier-finite-rate-forward-equation --json",
+        "exit_code": 0,
+        "stage": "final owning contract check inside released shared lock",
+        "items": [
+          "thm-csm-frontier-finite-rate-forward-equation"
+        ],
+        "result": {
+          "ok": true,
+          "errors": [],
+          "warnings": []
+        }
+      },
+      {
+        "command": "node tools/physics-support/proof-layout.mjs items/cex-emg-fx-constant-radius-rigidity.md items/thm-csm-frontier-finite-rate-forward-equation.md",
+        "exit_code": 0,
+        "items": [
+          "cex-emg-fx-constant-radius-rigidity",
+          "thm-csm-frontier-finite-rate-forward-equation"
+        ],
+        "result": "2 items, 5 steps, 0 defects"
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/physics-support/precheck.mts items/cex-emg-fx-constant-radius-rigidity.md items/thm-csm-frontier-finite-rate-forward-equation.md",
+        "exit_code": 0,
+        "items": [
+          "cex-emg-fx-constant-radius-rigidity",
+          "thm-csm-frontier-finite-rate-forward-equation"
+        ],
+        "result": "2 checked, 0 failing; both direct proofs pass"
+      },
+      {
+        "command": "node tools/physics-support/rendercheck.mjs items/cex-emg-fx-constant-radius-rigidity.md items/thm-csm-frontier-finite-rate-forward-equation.md --json",
+        "exit_code": 0,
+        "items": [
+          "cex-emg-fx-constant-radius-rigidity",
+          "thm-csm-frontier-finite-rate-forward-equation"
+        ],
+        "result": {
+          "checked": 2,
+          "errors": [],
+          "warnings": []
+        }
+      },
+      {
+        "command": "node tools/physics-support/depcheck.mjs --items-file /tmp/physics-impact-u1-changed-ids.json --json",
+        "exit_code": 0,
+        "items": [
+          "cex-emg-fx-constant-radius-rigidity",
+          "thm-csm-frontier-finite-rate-forward-equation"
+        ],
+        "selection": [
+          "cex-emg-fx-constant-radius-rigidity",
+          "thm-csm-frontier-finite-rate-forward-equation"
+        ],
+        "result": {
+          "summary": {
+            "items": 35387,
+            "published": 34544,
+            "pages": 3188,
+            "errors": 0,
+            "warnings": 0,
+            "scope": "focused-items",
+            "item_checks": [
+              "cex-emg-fx-constant-radius-rigidity",
+              "thm-csm-frontier-finite-rate-forward-equation"
+            ],
+            "page_checks": [
+              "csm-frontier-fluctuation-theorems",
+              "emg-fx03-examples"
+            ],
+            "prerequisite_item_cycle_checks": 1293,
+            "dependency_closure_items": 1293,
+            "dependency_closure_pages": 372,
+            "prerequisite_page_cycle_checks": 372
+          },
+          "errors": [],
+          "warns": []
+        }
+      }
+    ],
+    "pending_repairs": [],
+    "evidence_credit": "Reused the root-published QFT58 prior construction/consumer pointers to locate unchanged controlled-pullback and matching uses; the reviews here examine the current affected clauses independently. No historical source retrieval or whole-item acceptance is attributed to this dispatch.",
+    "ledger_reconciliation": [
+      {
+        "subject": "cex-emg-fx-constant-radius-rigidity",
+        "proposal": "Record the existing one-form/two-form owner referral as repaired by this dispatch; preserve its prior finding history. No judge tuple is fabricated.",
+        "disposition": "repaired",
+        "location": "Counterexample 1.1 and owning batch-18 derivation step-1-1"
+      },
+      {
+        "subject": "thm-csm-frontier-finite-rate-forward-equation",
+        "proposal": "Record the existing missing-second-FTC owner referral as repaired; retain its prior source report and classification.",
+        "disposition": "repaired",
+        "location": "Facts F4; Proof 2.1; owning batch-94 manifest and proof contract"
+      },
+      {
+        "subject": "published-consumer-supplier-ledger",
+        "proposal": "No new published-supplier defect or published-consumer repair was found in these exact affected uses. Existing outside maintenance remains separate; no ledger closure, supplier-wide acceptance or audit is claimed."
+      }
+    ],
+    "interface_comparison": {
+      "changed_items": [
+        "cex-emg-fx-constant-radius-rigidity",
+        "thm-csm-frontier-finite-rate-forward-equation"
+      ],
+      "public_interface_changes": [],
+      "reason": "The first edit replaces a type label within Counterexample 1.1 only. The second adds a mathematical dependency and F4 and justifies the existing Proof 2.1 integral equation. Neither edit changes Statement/Definition, Statement refuted, physical_scope or empirical qualifications. No downstream interface event is emitted."
+    },
+    "diagram_review": {
+      "alg-nrqmx-floquet-fourier-galerkin": "H_1 maps sector m to m+1 and H_-1 reverses, matching row n/column m block H_(n-m).",
+      "thm-qsmx-exchange-lie-weight-blocks": "Downward strands exchange two labelled tensor factors; the picture asserts the flip, not a nontrivial braid operator.",
+      "def-gr-fx-bondi-expansion": "Cylinder denotes formal I times S2 only; increasing-u arrow and spherical cuts agree with the text and assert no conformal completion."
+    },
+    "shared_write_protocol": {
+      "owner": "step5-v2-impact-initial-r1-u1",
+      "script": "research/physics-non-fluid-129-2026-10-21-r2-step5-impact-u1-scoped-metadata-update.mjs",
+      "files": [
+        "research/physics-non-fluid-129-2026-10-21-r2-batch-18.proof-contracts.json",
+        "research/physics-non-fluid-129-2026-10-21-r2-batch-94.proof-contracts.json",
+        "research/physics-non-fluid-129-2026-10-21-r2-batch-94.pages.json"
+      ],
+      "result": "Both shared patches used the run wrapper, reread owning files inside the lock, and released it. First validation exposed an overcombined F3 citation-use mapping; separating second FTC into F4 repaired that mapping. Final two owning-contract validations passed."
+    },
+    "scope_limits": "These are this dispatch\u2019s current affected-use reviews and own repairs. No judge verdict, stamp, published item edit, round state, certificate, worker launch or whole-library acceptance is supplied. Original proposals and historical reports remain immutable.",
+    "validation_recovery": [
+      "Direct node invocation of precheck.mts failed with unsupported .mts extension; the tools/tsx-run.mjs wrapper then treated --help as a filename. The actual explicit item invocation through the wrapper passed.",
+      "The first depcheck selection used newline text, but the tool requires JSON; reran with an explicit two-ID JSON array and obtained zero errors and warnings.",
+      "The first shared contract check detected F3 cited by step 1.1 but the new second-FTC entry mapped only step 2.1; separating that premise into F4 made the final exact-use mapping pass."
+    ],
+    "unresolved_obligations": [],
+    "next_action": "Handoff this exact report to the controller; do not launch judges or modify round state.",
+    "input_binding": "The required input_sha256 was checked against SHA-256(JSON.stringify(parsed frozen pack)), the native digest convention; raw JSON file bytes are a distinct hash."
+  },
+  "supporting_evidence": {
+    "research/physics-non-fluid-129-2026-10-21-r2-owner-step5-support-index.json": "0e5ab24286891cecba2dd2a7573f9221608d1307d7624db5e1fb22bc4093bf9b",
+    "research/physics-non-fluid-129-2026-10-21-r2-owner-step3-qft58-global-calculus/report.json": "9ddfa825942c77b45814f91b5841439f7c5e5011d720014538b80dec939fc9da",
+    "research/physics-non-fluid-129-2026-10-21-r2-owner-step3-qft58-global-calculus/final-consumer-dispositions.json": "73db24b9e9c28b592dc2e368747d5eb137c094047fe2e45ab8b18c662c4180ac"
+  }
+}

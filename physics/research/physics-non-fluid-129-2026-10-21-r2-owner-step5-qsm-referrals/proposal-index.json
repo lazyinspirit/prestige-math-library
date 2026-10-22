@@ -1,0 +1,149 @@
+{
+  "version": 1,
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "phase": "initial",
+  "round": 1,
+  "outside_cycle": 1,
+  "scientific_owner": "/root/step5_qsm_referrals",
+  "native_review": false,
+  "native_adjudication": false,
+  "independent_review": false,
+  "recertification": false,
+  "source_writes": false,
+  "proposals": [
+    {
+      "id": "thm-qsmx-schmidt-mps-error",
+      "source": "items/thm-qsmx-schmidt-mps-error.md",
+      "scientific_owner": "/root/step5_qsm_referrals",
+      "applied": false,
+      "preimage": {
+        "path": "research/physics-non-fluid-129-2026-10-21-r2-owner-step5-qsm-referrals/preimages/items/thm-qsmx-schmidt-mps-error.md",
+        "sha256": "4d570a81eef737e62ffcee64660459fb2442da085b2cf079b0f3e420909a25d9"
+      },
+      "before_raw_sha256": "4d570a81eef737e62ffcee64660459fb2442da085b2cf079b0f3e420909a25d9",
+      "before_content_sha256": "994aebce82788443457c03e290614f8e6d6639f5b1eca6145c9f79f363a3075f",
+      "before_interface_sha256": "71654587816462e5dbe4173cbf336a364bc41cfdb49d15b1c26bd67e47da983c",
+      "candidate": {
+        "path": "research/physics-non-fluid-129-2026-10-21-r2-owner-step5-qsm-referrals/candidates/thm-qsmx-schmidt-mps-error.md",
+        "sha256": "46c97344c3e146cdd461de32c4145a1d6fdf9fdda5162f319a6765f126e2d34d"
+      },
+      "after_raw_sha256": "46c97344c3e146cdd461de32c4145a1d6fdf9fdda5162f319a6765f126e2d34d",
+      "after_content_sha256": "ebbf3c52362ba31a1ee90c476a85c06550569e8938ed134089b49351fe645147",
+      "after_interface_sha256": "71654587816462e5dbe4173cbf336a364bc41cfdb49d15b1c26bd67e47da983c",
+      "public_interface_changed": false,
+      "patch": {
+        "path": "research/physics-non-fluid-129-2026-10-21-r2-owner-step5-qsm-referrals/diffs/thm-qsmx-schmidt-mps-error.patch",
+        "sha256": "9369ef481f7a281529ed11f85cc1ae8f1f7b5714442eb0e965cd9e3fbffd845a"
+      },
+      "exact_edits": [
+        {
+          "location": "Proof 1.1",
+          "old": "1.1 Since $\\|\\psi\\|=1$ and every cap $D_k\\ge1$, each current remainder has a positive singular value and the algorithm retains at least one; hence its subsequent remainders are nonzero and every retained bond dimension is positive. For each cut $k$, let $P_k$ be the orthogonal projection on the full tensor product onto the retained left Schmidt subspace at that cut tensored with the remaining right factors; set $P_0=I$. The current remainder before cut $k$ is $\\psi^{(k-1)}=P_{k-1}\\psi$. Its support in the first $k$ sites lies in the previous retained space tensored with $H_k$, so every positive left Schmidt vector retained by the next SVD lies in that previous space tensored with $H_k$. Hence $\\operatorname{ran}P_k\\subseteq\\operatorname{ran}P_{k-1}$, $P_kP_{k-1}=P_{k-1}P_k=P_k$, and the next remainder is $\\psi^{(k)}=P_k\\psi$. [given, F1, F3, construct]",
+          "replacement": "1.1 Since $\\|\\psi\\|=1$ and every cap $D_k\\ge1$, each current remainder has a positive singular value and the algorithm retains at least one; hence all subsequent remainders are nonzero and all retained bond dimensions are positive. The loop makes one SVD for each $k=1,\\ldots,N-1$, exactly $N-1$ in total. Put $\\mathcal H_{\\le k}:=H_1\\otimes\\cdots\\otimes H_k$ and $\\mathcal R_k:=H_{k+1}\\otimes\\cdots\\otimes H_N$, with $\\mathcal H_{\\le0}=\\mathbb C$. Let $U_k:S_k\\to S_{k-1}\\otimes H_k$ have the retained left singular columns, so $U_k^*U_k=I_{S_k}$ and $\\psi^{(k)}=(U_k^*\\otimes I_{\\mathcal R_k})\\psi^{(k-1)}$. Define $W_0=I_{\\mathbb C}$ and $W_k=(W_{k-1}\\otimes I_{H_k})U_k:S_k\\to\\mathcal H_{\\le k}$. Each $W_k$ is an isometry by induction. Under the canonical $\\mathbb C\\otimes\\mathcal H\\cong\\mathcal H$ identification, set $x_0=\\psi$, $P_0=I$, and, for $k\\ge1$, $x_k=(W_k\\otimes I_{\\mathcal R_k})\\psi^{(k)}$ and $P_k=(W_kW_k^*)\\otimes I_{\\mathcal R_k}$ on the full chain. The range of $W_k$ lies in $\\operatorname{ran}W_{k-1}\\otimes H_k$, so $\\operatorname{ran}P_k\\subseteq\\operatorname{ran}P_{k-1}$ and $P_kP_{k-1}=P_{k-1}P_k=P_k$. The remainder recurrence gives $x_k=P_kx_{k-1}=P_k\\psi$ inductively. Expanding $W_{N-1}$ in the stored site tensors shows that $x_{N-1}$ is exactly their contraction with the final remainder, hence is the returned unnormalized $\\phi$ in algorithm instruction 3. For $N=1$, $x_0=\\phi=\\psi$. [given, F1, F2, F3, construct, algebra]"
+        },
+        {
+          "location": "Proof 2.1",
+          "old": "2.1 Put $\\varepsilon_k:=\\psi^{(k-1)}-\\psi^{(k)}=(P_{k-1}-P_k)\\psi$. This vector lies in $\\operatorname{ran}P_{k-1}$ and is orthogonal to $\\operatorname{ran}P_k$. For $j>k$, nesting gives $\\varepsilon_j\\in\\operatorname{ran}P_{j-1}\\subseteq\\operatorname{ran}P_k$, so $\\langle\\varepsilon_k,\\varepsilon_j\\rangle=0$. Thus the discarded components from different cuts are pairwise orthogonal. [step 1.1, algebra]",
+          "replacement": "2.1 Put $\\varepsilon_k:=x_{k-1}-x_k=(P_{k-1}-P_k)\\psi$ in the full chain. This vector lies in $\\operatorname{ran}P_{k-1}$ and is orthogonal to $\\operatorname{ran}P_k$. For $j>k$, nesting gives $\\varepsilon_j\\in\\operatorname{ran}P_{j-1}\\subseteq\\operatorname{ran}P_k$, so $\\langle\\varepsilon_k,\\varepsilon_j\\rangle=0$. Thus the embedded discarded components from different cuts are pairwise orthogonal. [step 1.1, algebra]"
+        },
+        {
+          "location": "Proof 3.1",
+          "old": "3.1 At cut $k$, [F3] identifies the squared norm removed by the orthogonal Schmidt projection with the sum of squared discarded singular values, exactly $\\delta_k$ by [F1]. Since $\\psi-\\phi=\\sum_{k=1}^{N-1}\\varepsilon_k$, orthogonality from step 2.1 gives $\\|\\psi-\\phi\\|^2=\\sum_k\\|\\varepsilon_k\\|^2=\\sum_k\\delta_k$. For $N=1$ both sides are zero, so the equality also covers the empty sweep. [given, F1, F3, step 2.1, algebra]",
+          "replacement": "3.1 At cut $k$, $\\varepsilon_k=(W_{k-1}\\otimes I_{H_k\\otimes \\mathcal R_k})(\\psi^{(k-1)}-(U_k\\otimes I_{\\mathcal R_k})\\psi^{(k)})$. The map outside the parentheses is an isometry by step 1.1, and the vector in parentheses is the discarded Schmidt part of the current compressed remainder. Hence [F3] and [F1] give $\\|\\varepsilon_k\\|^2=\\delta_k$. Since $x_0=\\psi$ and $x_{N-1}=\\phi$, telescoping gives $\\psi-\\phi=\\sum_{k=1}^{N-1}\\varepsilon_k$; orthogonality from step 2.1 yields $\\|\\psi-\\phi\\|^2=\\sum_k\\|\\varepsilon_k\\|^2=\\sum_k\\delta_k$. For $N=1$ both sides are zero, so the equality also covers the empty sweep. [given, F1, F3, step 1.1, step 2.1, algebra]"
+        }
+      ],
+      "patch_applicability": {
+        "command": [
+          "git",
+          "apply",
+          "--check",
+          "--directory=physics",
+          "physics/research/physics-non-fluid-129-2026-10-21-r2-owner-step5-qsm-referrals/diffs/thm-qsmx-schmidt-mps-error.patch"
+        ],
+        "cwd": "/home/lazyinspirit/Projects/prestige-math-library",
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": "",
+        "checked_at": "2026-10-22T05:13:47.163Z"
+      },
+      "source_application": "Unapplied: root routes to the existing native owner queue; all raw/canonical guards must be rechecked before native application."
+    },
+    {
+      "id": "def-qsmx-spin-weight-and-hall-realization",
+      "source": "items/def-qsmx-spin-weight-and-hall-realization.md",
+      "scientific_owner": "/root/step5_qsm_referrals",
+      "applied": false,
+      "preimage": {
+        "path": "research/physics-non-fluid-129-2026-10-21-r2-owner-step5-qsm-referrals/preimages/items/def-qsmx-spin-weight-and-hall-realization.md",
+        "sha256": "a58716e277938cc0c8b3239147bd1a28f15681bd92ecddbfac430085d870a6bc"
+      },
+      "before_raw_sha256": "a58716e277938cc0c8b3239147bd1a28f15681bd92ecddbfac430085d870a6bc",
+      "before_content_sha256": "1f549c51b0c9bbddec2f1ed23c222a35c0be6eecfff138b663853c01f1e69863",
+      "before_interface_sha256": "1f549c51b0c9bbddec2f1ed23c222a35c0be6eecfff138b663853c01f1e69863",
+      "candidate": {
+        "path": "research/physics-non-fluid-129-2026-10-21-r2-owner-step5-qsm-referrals/candidates/def-qsmx-spin-weight-and-hall-realization.md",
+        "sha256": "67c1f6a0b64fc610c31912d704df329b890fd7136588250974cc73a7188c6cc0"
+      },
+      "after_raw_sha256": "67c1f6a0b64fc610c31912d704df329b890fd7136588250974cc73a7188c6cc0",
+      "after_content_sha256": "c7dbac28292bd68d6295dbef92886659afcd6859fd8f2450be3ae240bc70862e",
+      "after_interface_sha256": "c7dbac28292bd68d6295dbef92886659afcd6859fd8f2450be3ae240bc70862e",
+      "public_interface_changed": true,
+      "patch": {
+        "path": "research/physics-non-fluid-129-2026-10-21-r2-owner-step5-qsm-referrals/diffs/def-qsmx-spin-weight-and-hall-realization.patch",
+        "sha256": "931362d994b3dd502c08a4d855e160587884c2f47ac6e72ff2c9ad2a10e68151"
+      },
+      "exact_edits": [
+        {
+          "location": "Definition, Hall product coefficient paragraph",
+          "old": "where $g^L_{M,N}$ counts subspaces $N'\\subseteq L$ with $N'\\cong N$ and\n$L/N'\\cong M$, or equivalently short exact sequences\n$0\\to N\\to L\\to M\\to0$. Thus the twist is part of the multiplication.",
+          "replacement": "where $g^L_{M,N}$ counts subspaces $N'\\subseteq L$ with $N'\\cong N$ and\n$L/N'\\cong M$, or equivalently short exact sequences\n$0\\to N\\xrightarrow{i}L\\xrightarrow{p}M\\to0$ modulo changes of the\nendpoint labels: $(i,p)\\sim(i\\circ a,b\\circ p)$ for\n$a\\in\\operatorname{Aut}(N)$ and $b\\in\\operatorname{Aut}(M)$, with $L$\nfixed pointwise. Each orbit is determined by $\\operatorname{im}i=N'$;\nwithout this quotient, each such subspace contributes\n$|\\operatorname{Aut}(N)|\\,|\\operatorname{Aut}(M)|$ labelled sequences.\nThus the twist is part of the multiplication."
+        }
+      ],
+      "patch_applicability": {
+        "command": [
+          "git",
+          "apply",
+          "--check",
+          "--directory=physics",
+          "physics/research/physics-non-fluid-129-2026-10-21-r2-owner-step5-qsm-referrals/diffs/def-qsmx-spin-weight-and-hall-realization.patch"
+        ],
+        "cwd": "/home/lazyinspirit/Projects/prestige-math-library",
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": "",
+        "checked_at": "2026-10-22T05:13:47.166Z"
+      },
+      "source_application": "Unapplied: root routes to the existing native owner queue; all raw/canonical guards must be rechecked before native application."
+    }
+  ],
+  "context_guards": {
+    "path": "research/physics-non-fluid-129-2026-10-21-r2-owner-step5-qsm-referrals/guards.json",
+    "sha256": "79f12f80c0462da8edef2c39931a51139df8f02b09d21a08aca7f4cba1fcbffd"
+  },
+  "consumer_evidence": {
+    "path": "research/physics-non-fluid-129-2026-10-21-r2-owner-step5-qsm-referrals/consumer-scan.json",
+    "sha256": "0896c6259a21fc22dc68fbbe428fc4d0f858da4234ca05883f697207f977c6d9"
+  },
+  "scientific_report": {
+    "path": "research/physics-non-fluid-129-2026-10-21-r2-owner-step5-qsm-referrals/report.md",
+    "sha256": "ccbe32e99d56da0995a28cfa7e9d9419d2bffb1a590afc1635b19189c57e02d3"
+  },
+  "finite_checks": {
+    "path": "research/physics-non-fluid-129-2026-10-21-r2-owner-step5-qsm-referrals/finite-checks.json",
+    "sha256": "0665ac195e4194fefa3b4a95e00f4885b130e0193d83d348c940afa0eacb0e35"
+  },
+  "mechanical_checks": [
+    {
+      "path": "research/physics-non-fluid-129-2026-10-21-r2-owner-step5-qsm-referrals/check-1.json",
+      "sha256": "88e8dda8b86178b0c1b473a248ebeb061c40193a932c2f3d05e5a05cf8d3a91c"
+    },
+    {
+      "path": "research/physics-non-fluid-129-2026-10-21-r2-owner-step5-qsm-referrals/check-2.json",
+      "sha256": "6368fbd3f31f1b987f50cdc4d6fdc9443806210fcd7d5ed13faa2f8b77fa7ba2"
+    },
+    {
+      "path": "research/physics-non-fluid-129-2026-10-21-r2-owner-step5-qsm-referrals/check-3.json",
+      "sha256": "78ceddd02c9ef8770c05584c62442a396f00d32f11ba62ce3b43429a30fec314"
+    }
+  ]
+}

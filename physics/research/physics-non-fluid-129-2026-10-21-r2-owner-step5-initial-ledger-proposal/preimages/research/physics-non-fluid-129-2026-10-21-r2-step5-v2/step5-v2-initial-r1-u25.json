@@ -1,0 +1,153 @@
+{
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "phase": "initial",
+  "round": 1,
+  "unit": "25",
+  "input_sha256": "eaf0a68d231b0a7d0d042df337974eaab597dfd3432daa3ad0aaeebd32fe188c",
+  "decisions": [
+    {
+      "id": "alg-emg-fx-leapfrog-cochains",
+      "model": "gpt-6-luna",
+      "context_sha256": "50d2130054e7e2b4f3fe219a53be82cfec9af1129f6d209192148378bcd23ae3",
+      "outcome": "confirmed_nonfatal",
+      "reason": "Confirmed a nonfatal output-specification inconsistency: the Definition explicitly restricted output to the N+1 states while its final clause and the termination lemma promised the computed inverse too. The Schur-complement pivot proof and rational updates are sound; no numerical deduction changes. The return instruction now explicitly returns R together with the state list, preserving the stronger existing termination-lemma contract.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "alg-emg-fx-leapfrog-cochains",
+      "disposition": "repaired",
+      "post_sha256": "69323915726642a403ba37ce16ce06c0f75556ba87ce1eca911f54df76436232",
+      "review_context_sha256": "8db1fdb14ea02d08ff4b214f759e23ef21a536cfe2299464fc45f20d2e1f01e3",
+      "reason": "Reviewed the complete rational procedure against the finite-coordinate Definition and the complete justified-by lemma. Matrix products have the required shapes; the b-before-d update and all inputs remain unchanged. Positive-definite Schur complements make every prescribed pivot positive, including the explicit empty-matrix case; finite rational operations produce R=M1^{-1}. The final return now exposes R and precisely N+1 states, including N=0. This is the repair author review, not independent approval.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "prop-emg-fx-discrete-gauss-preservation",
+    "lem-emg-fx-finite-step-termination",
+    "cex-emg-fx-cfl-discrete-growth"
+  ],
+  "gate_resolutions": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "id": "alg-emg-fx-leapfrog-cochains",
+      "status": "fixed",
+      "severity": "nonfatal",
+      "reason": "Confirmed a nonfatal output-specification inconsistency: the Definition explicitly restricted output to the N+1 states while its final clause and the termination lemma promised the computed inverse too. The Schur-complement pivot proof and rational updates are sound; no numerical deduction changes. The return instruction now explicitly returns R together with the state list, preserving the stronger existing termination-lemma contract.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "supporting_evidence": {
+    "research/physics-non-fluid-129-2026-10-21-r2-batch-25-step5-context.json": "5bf869d5afc7fe79b4c18aa813ffc8a91fef5afded699791dd8c1d80d02dcef8"
+  },
+  "downstream_uses": {
+    "prop-emg-fx-discrete-gauss-preservation": "Statement, F2 and proof step 1.1 identify the algorithm update with the rational restriction of T_tau: b_new=b-tau D1 R d, then d_new=d+tau D1^T M2 b_new.",
+    "lem-emg-fx-finite-step-termination": "Statement promises the N+1 states and exact rational inverse M1^{-1}; F2 and proof steps 1.1, 2.1 and 3.1 use the elimination schedule, finite loop and retained inverse.",
+    "cex-emg-fx-cfl-discrete-growth": "Statement refuted, Given, F2 and Counterexample steps 2.1 and 4.1 use the same ordered one-step map and its rational admissible input convention."
+  },
+  "repair_notes": {
+    "interface_change": {
+      "section": "Definition",
+      "before": "The output consists of the $N+1$ states $(b_n,d_{n+1/2})$ for $0\\leq n\\leq N$.",
+      "after": "After the loop, return $R$ together with the list of the $N+1$ states $(b_n,d_{n+1/2})$ for $0\\leq n\\leq N$."
+    },
+    "mathematical_checks": "Checked the fixed-order Gauss-Jordan induction S_next=C-r p^{-1} r^T using the test vector (-p^{-1}r^T y,y); this gives positive pivots and the exact inverse. Empty spaces use the unique empty map. All update loops are finite and exact rational operations preserve rational entries. No choice, physical postulate, empirical premise, bit-complexity bound or continuum claim is introduced.",
+    "metadata_changes": [
+      "research/physics-non-fluid-129-2026-10-21-r2-batch-25.pages.json: synchronized only the assigned algorithm statement.",
+      "research/physics-non-fluid-129-2026-10-21-r2-batch-25.proof-contracts.json: corrected assigned algorithm zero-update output and single-pivot boundary records and zero-update finite-check expectation; synchronized the three direct-consumer exact supplier excerpts. Prior risk-review attribution is preserved."
+    ],
+    "consumer_reviews": [
+      {
+        "id": "prop-emg-fx-discrete-gauss-preservation",
+        "path": "items/prop-emg-fx-discrete-gauss-preservation.md",
+        "affected_use": "Statement, F2 and proof step 1.1 identify the algorithm update with the rational restriction of T_tau: b_new=b-tau D1 R d, then d_new=d+tau D1^T M2 b_new.",
+        "disposition": "unchanged_sound",
+        "reason": "Returning R additionally does not alter either update, its rational domain, or the state sequence. The constraint and energy calculations use those unchanged updates."
+      },
+      {
+        "id": "lem-emg-fx-finite-step-termination",
+        "path": "items/lem-emg-fx-finite-step-termination.md",
+        "affected_use": "Statement promises the N+1 states and exact rational inverse M1^{-1}; F2 and proof steps 1.1, 2.1 and 3.1 use the elimination schedule, finite loop and retained inverse.",
+        "disposition": "unchanged_sound",
+        "reason": "The corrected return instruction supplies exactly the promised output. The proof establishes positive pivots by the positive Schur complement, obtains the inverse through invertible row operations, and counts the already retained inverse. This adds no arithmetic work or rational storage; N=0 still performs elimination and returns the initial singleton state list with R."
+      },
+      {
+        "id": "cex-emg-fx-cfl-discrete-growth",
+        "path": "items/cex-emg-fx-cfl-discrete-growth.md",
+        "affected_use": "Statement refuted, Given, F2 and Counterexample steps 2.1 and 4.1 use the same ordered one-step map and its rational admissible input convention.",
+        "disposition": "unchanged_sound",
+        "reason": "The tetrahedral rational example, modal recurrence and exact constraint calculation depend only on the unchanged state update. Exposing the computed inverse changes none of those clauses or the unbounded orbit."
+      }
+    ],
+    "page_uses": [
+      {
+        "page": "emg-fx10",
+        "path": "library/einstein-maxwell-models-mathematics/emg-fx10.md",
+        "affected_use": "Frontmatter items list places the algorithm between its finite cochain Definition and the proposition/termination lemma; there is no page body.",
+        "disposition": "unchanged_sound",
+        "reason": "No page prose, inventory or prerequisite change is needed for the additional explicit inverse return."
+      },
+      {
+        "page": "emg-fx10-examples",
+        "path": "library/einstein-maxwell-models-mathematics/emg-fx10-examples.md",
+        "affected_use": "Frontmatter requires emg-fx10 and places the CFL counterexample; there is no page body.",
+        "disposition": "unchanged_sound",
+        "reason": "The example uses the unchanged update; this companion page has no separate output-format assertion."
+      }
+    ],
+    "outside_scope_findings": [
+      {
+        "id": "def-emg-fx-cochain-maxwell",
+        "path": "items/def-emg-fx-cochain-maxwell.md",
+        "location": "First Remarks paragraph",
+        "disposition": "refer_owner",
+        "affected_use": "The assigned algorithm uses the abstract matrix Definition, not the Remarks assertion that every finite oriented cell complex has incidence entries only +1, -1 or 0.",
+        "reason": "The current Remarks assertion needs a restricted cell class: under the general CW meaning, attaching a two-cell to a circle by a degree-two attaching map gives cellular boundary coefficient 2. This independently checks the digest concern. The algorithm needs only the explicitly assumed identities D1D0=D2D1=0, so its actual prerequisite remains valid. The supplier is outside this assignment and was not edited."
+      }
+    ],
+    "published_ledger_updates": [],
+    "published_consumer_findings": [],
+    "source_reading": "Used the current local item arguments and the batch-25 digest as evidence. The exact-run support index has no entry for this subject and no supplement was present. No external full text was retrieved in this dispatch; inherited source locators are not new reading attestations. The repair is an explicit output instruction justified by familiar finite rational linear algebra.",
+    "diagrams": "The assigned algorithm has no TikZ/tikzcd diagram and needs none for this return instruction. The supplier cochain diagram has the correct D0,D1,D2 arrow directions and objects; rigorous arguments use the stated matrix identities.",
+    "focused_checks": [
+      {
+        "command": "node tools/physics-support/proof-contract.mjs research/physics-non-fluid-129-2026-10-21-r2-batch-25.proof-contracts.json --strict --items alg-emg-fx-leapfrog-cochains --json",
+        "exit_code": 0,
+        "result": "ok:true; assigned scope checked; no errors or warnings. Earlier local check required explicit Definition anchors on the amended zero/one boundary evidence; those were added under the shared lock."
+      },
+      {
+        "command": "node tools/physics-support/rendercheck.mjs items/alg-emg-fx-leapfrog-cochains.md",
+        "exit_code": 0,
+        "result": "One file: all math parses under KaTeX and frontmatter parses under the renderer YAML parser."
+      },
+      {
+        "command": "node tools/physics-support/proof-layout.mjs items/alg-emg-fx-leapfrog-cochains.md",
+        "exit_code": 0,
+        "result": "1 items, 0 steps, 0 defects; run once after final item edit."
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/physics-support/precheck.mts items/alg-emg-fx-leapfrog-cochains.md --json",
+        "exit_code": 0,
+        "result": "One selected file, zero failures; phase-proof format not applicable to this algorithm Definition."
+      },
+      {
+        "command": "node tools/physics-support/step5-workflow.mjs review-contexts --run physics-non-fluid-129-2026-10-21-r2 --items alg-emg-fx-leapfrog-cochains",
+        "exit_code": 0,
+        "result": "post_sha256=69323915726642a403ba37ce16ce06c0f75556ba87ce1eca911f54df76436232; review_context_sha256=8db1fdb14ea02d08ff4b214f759e23ef21a536cfe2299464fc45f20d2e1f01e3. Invoked immediately after the repaired mathematical review; no later item edit."
+      }
+    ],
+    "operational_notes": "The shared manifest/contract changes used the step5-shared-write-lock run wrapper, reread current files inside the guarded process, and released the lock successfully. Initial validator-discovery attempts used a nonexistent plural proof-contracts entrypoint and direct node on an .mts file; corrected to the actual singular validator and tsx wrapper. No gate, judge, certificate, central ledger or round state was written.",
+    "unresolved_obligations": [],
+    "next_action": "Controller collects this native report and routes the recorded Definition interface event to the ordinary frontier consumer owners; the outside supplier Remarks referral stays with its owner."
+  }
+}

@@ -1,0 +1,997 @@
+{
+  "version": 1,
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "batch": "95",
+  "scope": [
+    "alg-csm-frontier-heat-bath-update",
+    "thm-csm-frontier-heat-bath-tv-bound",
+    "lem-csm-frontier-error-budget-composition",
+    "alg-csm-frontier-monotone-cftp",
+    "thm-csm-frontier-monotone-cftp-exact",
+    "alg-csm-frontier-swendsen-wang",
+    "thm-csm-frontier-swendsen-wang-invariance",
+    "ex-csm-frontier-metastable-diagnostic"
+  ],
+  "contracts": {
+    "alg-csm-frontier-heat-bath-update": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Definition admits m=0 observables and t=0 updates. Zero updates return (x0), and an empty observable family returns no observable values. V and S remain nonempty, so conditional denominators are positive finite sums.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/csm_boundary",
+            "reason": "The Definition admits m=0 observables and t=0 updates. Zero updates return (x0), and an empty observable family returns no observable values. V and S remain nonempty, so conditional denominators are positive finite sums.",
+            "item_sha256": "6b7e5161af16ebef55aa973d644ca3d0821a6d1bf08e2a710d247d027f17f925",
+            "row_sha256": "da2982f376e36cb639661d3715e63a9eab060a925be0b1389fe64cdf0232494d"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "This carrier defines a finite procedure; theorem boundary worksheets do not apply. Its exact endpoint and one-site behavior are covered by the finite checks below."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "This carrier defines a finite procedure; theorem boundary worksheets do not apply. Its exact endpoint and one-site behavior are covered by the finite checks below."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "This carrier defines a finite procedure; theorem boundary worksheets do not apply. Its exact endpoint and one-site behavior are covered by the finite checks below."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This carrier defines a finite procedure; theorem boundary worksheets do not apply. Its exact endpoint and one-site behavior are covered by the finite checks below."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "This carrier defines a finite procedure; theorem boundary worksheets do not apply. Its exact endpoint and one-site behavior are covered by the finite checks below."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This carrier defines a finite procedure; theorem boundary worksheets do not apply. Its exact endpoint and one-site behavior are covered by the finite checks below."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This carrier defines a finite procedure; theorem boundary worksheets do not apply. Its exact endpoint and one-site behavior are covered by the finite checks below."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "One site with two spins of weights 1 and 3, one update, and ordered spins 0<1.",
+          "result": "The conditional probabilities are 1/4 and 3/4; u=0 selects 0 and u=1 selects 1.",
+          "verifies": "Finite positive normalization, ordered cumulative intervals, and the last-interval endpoint convention."
+        },
+        {
+          "check": "The same inputs with t=0.",
+          "result": "The output trajectory consists only of the supplied initial state and its observable values.",
+          "verifies": "The zero-update branch."
+        }
+      ],
+      "finite_checks_disposition": "These finite checks cover positive normalization, the uniform-input endpoints and zero updates. They are examples, not a general distributional proof; separate result items analyze algorithmic properties.",
+      "definition_interface": "Input a finite nonempty site set $V$, a finite nonempty spin set $S$ with a fixed total order $s_1\\prec\\cdots\\prec s_r$, a strictly positive finite weight $w:S^V\\to(0,\\infty)$, an initial configuration $x_0\\in S^V$, an integer $t\\geq0$, a site schedule $i_1,\\ldots,i_t\\in V$, numbers $u_1,\\ldots,u_t\\in[0,1]$, and a finite family of observables $f_1,\\ldots,f_m:S^V\\to\\mathbb R$ (the family may be empty). Put $Z=\\sum_{x\\in S^V}w(x)$ and $\\pi(x)=w(x)/Z$. For $i\\in V$, an exterior configuration $\\eta\\in S^{V\\setminus\\{i\\}}$, and $s\\in S$, let $\\eta^{i,s}\\in S^V$ agree with $\\eta$ away from $i$ and have spin $s$ at $i$, and set\n$$q_i(s\\mid\\eta)=\\frac{w(\\eta^{i,s})}{\\sum_{a\\in S}w(\\eta^{i,a})}.$$\nThe denominator is finite and strictly positive. For $k=1,\\ldots,t$, set $\\eta=x_{k-1}|_{V\\setminus\\{i_k\\}}$, put $c_0=0$ and $c_j=\\sum_{\\ell=1}^j q_{i_k}(s_\\ell\\mid\\eta)$, and replace the spin at $i_k$ by the first $s_j$ for which $u_k<c_j$; when $u_k=1$, replace it by $s_r$. Leave every other spin unchanged to obtain $x_k$. Thus the intervals are $[c_{j-1},c_j)$ for $j<r$ and $[c_{r-1},1]$ for $j=r$. Return the trajectory $(x_0,\\ldots,x_t)$ and the values $f_a(x_k)$ for $a=1,\\ldots,m$ and $k=0,\\ldots,t$. For the random-scan heat-bath chain, take the $i_k$ independently uniform on $V$ and the $u_k$ independently uniform on $[0,1]$, with all site and uniform draws mutually independent. The procedure makes no independence claim about successive configurations or observable values."
+    },
+    "thm-csm-frontier-heat-bath-tv-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-csm-frontier-heat-bath-update",
+          "source_section": "Definition",
+          "quote": "Input a finite nonempty site set $V$, a finite nonempty spin set $S$ with a fixed total order $s_1\\prec\\cdots\\prec s_r$, a strictly positive finite weight $w:S^V\\to(0,\\infty)$, an initial configuration $x_0\\in S^V$, an integer $t\\geq0$, a site schedule $i_1,\\ldots,i_t\\in V$, numbers $u_1,\\ldots,u_t\\in[0,1]$, and a finite family of observables $f_1,\\ldots,f_m:S^V\\to\\mathbb R$ (the family may be empty). Put $Z=\\sum_{x\\in S^V}w(x)$ and $\\pi(x)=w(x)/Z$. For $i\\in V$, an exterior configuration $\\eta\\in S^{V\\setminus\\{i\\}}$, and $s\\in S$, let $\\eta^{i,s}\\in S^V$ agree with $\\eta$ away from $i$ and have spin $s$ at $i$, and set\n$$q_i(s\\mid\\eta)=\\frac{w(\\eta^{i,s})}{\\sum_{a\\in S}w(\\eta^{i,a})}.$$\nThe denominator is finite and strictly positive. For $k=1,\\ldots,t$, set $\\eta=x_{k-1}|_{V\\setminus\\{i_k\\}}$, put $c_0=0$ and $c_j=\\sum_{\\ell=1}^j q_{i_k}(s_\\ell\\mid\\eta)$, and replace the spin at $i_k$ by the first $s_j$ for which $u_k<c_j$; when $u_k=1$, replace it by $s_r$. Leave every other spin unchanged to obtain $x_k$. Thus the intervals are $[c_{j-1},c_j)$ for $j<r$ and $[c_{r-1},1]$ for $j=r$. Return the trajectory $(x_0,\\ldots,x_t)$ and the values $f_a(x_k)$ for $a=1,\\ldots,m$ and $k=0,\\ldots,t$. For the random-scan heat-bath chain, take the $i_k$ independently uniform on $V$ and the $u_k$ independently uniform on $[0,1]$, with all site and uniform draws mutually independent. The procedure makes no independence claim about successive configurations or observable values.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For any fixed site $i$, a configuration sampled from $\\pi$ has conditional distribution $q_i(\\cdot\\mid\\eta)$ at $i$ given its exterior $\\eta$. Replacing its spin by a fresh draw from that same conditional leaves the joint law unchanged: for each $\\eta$ and $s$, the resulting mass is $\\pi_{V\\setminus\\{i\\}}(\\eta)q_i(s\\mid\\eta)=\\pi(\\eta^{i,s})$. Averaging these invariant updates over the uniform site choice proves that $\\pi$ is invariant for $P$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For probability vectors $p,q$ on a finite set, put $r_s=\\min\\{p_s,q_s\\}$ and $\\alpha=\\sum_s r_s$. Assign joint mass $r_s$ to $(s,s)$. If $\\alpha<1$, add mass $(p_s-r_s)(q_a-r_a)/(1-\\alpha)$ to each pair $(s,a)$. The residual supports are disjoint, so this added mass is off the diagonal; summing rows and columns gives marginals $p$ and $q$, and the disagreement probability is $1-\\alpha=\\frac12\\sum_s|p_s-q_s|$. If $\\alpha=1$, the diagonal masses alone give the required joint law.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If configurations $x,y$ differ on the set $D=\\{j:x_j\\ne y_j\\}$, then for each site $i$ the triangle inequality, applied while changing the differing exterior coordinates one at a time, gives $\\|q_i(\\cdot\\mid x_{-i})-q_i(\\cdot\\mid y_{-i})\\|_{\\rm TV}\\leq\\sum_{j\\in D}c_{ij}$. Use the joint law from step 1.2 to resample the updated spins maximally, and choose the same uniformly random update site in both chains. If $d_H$ is the number of differing coordinates, the expected new Hamming distance is therefore at most $$d_H(x,y)-\\frac{d_H(x,y)}n+\\frac1n\\sum_{j\\in D}\\sum_i c_{ij}\\leq\\left(1-\\frac{1-c}{n}\\right)d_H(x,y).$$ The last inequality uses the column-sum bound in [A1]; the row-sum bound is retained as a stated hypothesis but is not needed for this estimate.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Repeat this joint construction at each update. Conditional expectation and induction give $\\mathbb E[d_H(X_t,Y_t)]\\leq n(1-(1-c)/n)^t$ when one chain starts at $x$ and the other starts with law $\\pi$: initially $d_H\\leq n$, and the second marginal remains $\\pi$ by step 1.1.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Since $\\mathbf1_{\\{X_t\\ne Y_t\\}}\\leq d_H(X_t,Y_t)$, for every event $A\\subseteq S^V$ the difference $|\\Pr(X_t\\in A)-\\Pr(Y_t\\in A)|$ is at most $\\Pr(X_t\\ne Y_t)$. For finite laws of equal mass, the supremum of this event difference equals half the $\\ell^1$ distance: the positive and negative parts of their signed difference have equal mass, each half the sum of absolute values. Taking the supremum over $A$ therefore proves the first total-variation bound in the Statement. For $t=0$ the exponential bound is equality; for $t\\geq1$, $(1-u)^t\\leq e^{-ut}$ with $u=(1-c)/n\\in(0,1]$ gives the stated exponential estimate.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "If $a=b$, the observable bound is immediate. Otherwise set $g=(f-a)/(b-a)$, so $0\\leq g\\leq1$. For the signed measure $\\Delta=\\mathcal L_x(X_t)-\\pi$, the positive and negative masses both equal $\\|\\Delta\\|_{\\rm TV}$ because $\\Delta(S^V)=0$; hence $|\\sum_z g(z)\\Delta(z)|\\leq\\|\\Delta\\|_{\\rm TV}$. Multiplying by $b-a$ and using step 4.1 proves the asserted bias bound.",
+          "step": "5.1",
+          "inputs": [
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes V is nonempty; n=0 is outside its stated domain.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/csm_boundary",
+            "reason": "Nonempty V gives n>=1 and nonempty S gives a nonempty finite configuration set with positive Z. Empty disagreement sets contribute zero in the Hamming contraction rather than creating an n=0 denominator case.",
+            "item_sha256": "38c0bdab5bf2ac9aef382967740e9c11c0f1a41c1695fc2b549a5b9a8e22d32c",
+            "row_sha256": "2a1a11459586c214d29fd68164e618a281e8c98d9c9d49793aef04c282706306"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/csm_boundary",
+            "reason": "Nonempty V gives n>=1 and nonempty S gives a nonempty finite configuration set with positive Z. Empty disagreement sets contribute zero in the Hamming contraction rather than creating an n=0 denominator case."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "With all influences zero, c=0; step 2.1 contracts Hamming distance by 1-1/n, and for n=1 one update is an exact draw."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For n=1, all c_ij are zero, and step 1.1 shows one heat-bath update has law π from every initial state."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "If S has one spin, every chain law and π are the same point mass; the left side of the Statement is zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "At t=0 the TV distance is at most 1 and the stated bound is n; the t=0 endpoint is retained in step 3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "All maxima, minima, couplings, and sums in steps 1.2 and 2.1 are over finite sets; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The result is a one-way inequality and contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The result is a one-way inequality and contains no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "One site with weights 1 and 3 and t=1.",
+          "result": "The heat-bath law is exactly π from every start, so the actual TV error is zero.",
+          "verifies": "Stationarity and the finite one-site boundary of steps 1.1–3.1."
+        },
+        {
+          "check": "One site, t=0.",
+          "result": "The bound is n=1, while every TV distance is at most one.",
+          "verifies": "The stated time-zero endpoint."
+        }
+      ],
+      "finite_checks_disposition": "The exact finite checks cover the listed boundary conventions; the full conditional result is established by the authored argument.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-95",
+        "notes": "Checked all six steps and the exact heat-bath Definition. Positive finite weights make every conditional defined; finite maximal coupling includes alpha=1. Exterior-coordinate telescoping plus column sums gives contraction 1-(1-c)/n; row bound is extra and is honestly identified as unused. Iteration retains stationary second marginal; event TV and signed-mass argument give the observable bound. Checked singleton S, n=1/c=0, t=0 (zero-th matrix/contraction power), a=b, and nonempty-state hypotheses. No arbitrary choice or empirical confidence claims. Reader/refuter no findings. Independently read LPW section 3.3.2 pp.42–43, section 14.2 pp.203–205, section 15.1 pp.215–217; finite general coefficient estimate is local, not an invocation of the infinite-volume Friedli–Velenik result. That external passage was not independently retrieved in this review."
+      }
+    },
+    "lem-csm-frontier-error-budget-composition": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Insert the intermediate real quantities in the order $\\widetilde m,\\widehat m,m,\\theta_T,\\theta$ and apply the real triangle inequality repeatedly: $$|\\widetilde m-\\theta|\\leq|\\widetilde m-\\widehat m|+|\\widehat m-m|+|m-\\theta_T|+|\\theta_T-\\theta|.$$ This bounds the total error by the sum of its four intermediate discrepancies.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Substitute the four assumed bounds into step 1.1 to obtain $|\\widetilde m-\\theta|\\leq\\epsilon_{\\rm arith}+\\epsilon_{\\rm stat}+\\epsilon_{\\rm mix}+\\epsilon_{\\rm tr}$. The proof is conditional on the statistical event in [A1] and asserts no confidence level or probability for it.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "A discrepancy known to vanish contributes zero in step 1.1, so its budget term can be omitted. For any prescribed nonnegative budgets, set $\\theta=0$, $\\theta_T=\\epsilon_{\\rm tr}$, $m=\\epsilon_{\\rm tr}+\\epsilon_{\\rm mix}$, $\\widehat m=\\epsilon_{\\rm tr}+\\epsilon_{\\rm mix}+\\epsilon_{\\rm stat}$, and $\\widetilde m=\\epsilon_{\\rm tr}+\\epsilon_{\\rm mix}+\\epsilon_{\\rm stat}+\\epsilon_{\\rm arith}$. All four signed increments are their respective nonnegative budgets, all four hypotheses hold with equality, and the total error equals their sum. Omitting any strictly positive term would make the proposed right-hand side smaller than this attained error, proving the uniform non-omission claim. This does not exclude a smaller bound in a particular instance with cancellations or additional information.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The result is a scalar inequality with no indexed state space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If all four error bounds are zero, step 2.1 gives |tilde m-theta|=0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "There is no cardinality or one-state parameter in this scalar inequality."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "If only one of the four error bounds is nonzero, step 2.1 reduces to that single bound."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Equality in any assumed error bound is permitted; steps 1.1–2.1 use non-strict inequalities throughout."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite scalar argument makes no selection from a family of sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma asserts an implication, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma asserts an implication, not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Set epsilon_tr=0.1, epsilon_mix=0.2, epsilon_stat=0.3, epsilon_arith=0.4 and make each intermediate deviation attain its bound with the same sign.",
+          "result": "The total deviation is 1.0, exactly the sum of the four bounds.",
+          "verifies": "The additive estimate in steps 1.1–2.1 and the sharp uniform non-omission claim proved in step 3.1; individual cancellations can allow a smaller bound."
+        }
+      ],
+      "finite_checks_disposition": "The exact finite checks cover the listed boundary conventions; the full conditional result is established by the authored argument."
+    },
+    "alg-csm-frontier-monotone-cftp": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Definition assumes finite nonempty V for extremal configurations and uniform site draws. An empty interaction set is allowed and gives H_i=h_i without invalidating doubling and replay.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/csm_boundary",
+            "reason": "The Definition assumes finite nonempty V for extremal configurations and uniform site draws. An empty interaction set is allowed and gives H_i=h_i without invalidating doubling and replay.",
+            "item_sha256": "689be6ac177568ac097d0a3042dc84d7fe4b3c7f36054a2b141b87fda41817c8",
+            "row_sha256": "a8c12332ce7a4d2e41900901ab848753bb3caa5aaf47f3af213db232d002c7b2"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/csm_boundary",
+            "reason": "The Definition assumes finite nonempty V for extremal configurations and uniform site draws. An empty interaction set is allowed and gives H_i=h_i without invalidating doubling and replay."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "This carrier defines a random procedure; theorem boundary worksheets do not apply. The one-site coalescence and shared-seed cases are covered by the finite checks below."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "This carrier defines a random procedure; theorem boundary worksheets do not apply. The one-site coalescence and shared-seed cases are covered by the finite checks below."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "This carrier defines a random procedure; theorem boundary worksheets do not apply. The one-site coalescence and shared-seed cases are covered by the finite checks below."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This carrier defines a random procedure; theorem boundary worksheets do not apply. The one-site coalescence and shared-seed cases are covered by the finite checks below."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "This carrier defines a random procedure; theorem boundary worksheets do not apply. The one-site coalescence and shared-seed cases are covered by the finite checks below."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The Definition sets the selected spin to +1 when U_s<exp(H_i)/(exp(H_i)+exp(-H_i)), and to -1 otherwise. Both directions of the exactly-when branch rule hold by instruction, including the equality threshold in the minus branch.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/csm_boundary",
+            "reason": "The Definition sets the selected spin to +1 when U_s<exp(H_i)/(exp(H_i)+exp(-H_i)), and to -1 otherwise. Both directions of the exactly-when branch rule hold by instruction, including the equality threshold in the minus branch.",
+            "item_sha256": "689be6ac177568ac097d0a3042dc84d7fe4b3c7f36054a2b141b87fda41817c8",
+            "row_sha256": "63724dccf1ffb5ee69300d6fef755b624fa352d0f416f379c060cfd20bd36347"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The Definition sets the selected spin to +1 when U_s<exp(H_i)/(exp(H_i)+exp(-H_i)), and to -1 otherwise. Both directions of the exactly-when branch rule hold by instruction, including the equality threshold in the minus branch.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/csm_boundary",
+            "reason": "The Definition sets the selected spin to +1 when U_s<exp(H_i)/(exp(H_i)+exp(-H_i)), and to -1 otherwise. Both directions of the exactly-when branch rule hold by instruction, including the equality threshold in the minus branch.",
+            "item_sha256": "689be6ac177568ac097d0a3042dc84d7fe4b3c7f36054a2b141b87fda41817c8",
+            "row_sha256": "25ff4af962589dd1b5c1095b364498d4b661db40b0a9e257dbeed89ba63e5a72"
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "One Ising site with K=0 and h=0.",
+          "result": "The plus threshold is 1/2; the lower and upper endpoints coalesce after the time-zero map whenever U_0<1/2 or U_0>=1/2.",
+          "verifies": "The one-site endpoint and stored-map execution branches."
+        }
+      ],
+      "finite_checks_disposition": "The exact finite checks cover the listed boundary conventions; the full conditional result is established by the authored argument.",
+      "definition_interface": "Input a finite nonempty set $V$, a set $E\\subseteq[V]^2$ of unordered pairs of distinct sites, finite dimensionless couplings $K_e\\geq0$, finite dimensionless fields $h_i\\in\\mathbb R$, and a two-sided iid stream $(I_s,U_s)_{s\\in\\mathbb Z}$ in which $I_s$ is uniform on $V$, $U_s$ is uniform on $[0,1]$, and all these variables are mutually independent. On $\\Omega=\\{-1,+1\\}^V$, define $\\sigma\\leq\\tau$ by $\\sigma_i\\leq\\tau_i$ for every $i\\in V$, using $-1<+1$; its least and greatest elements are $\\mathbf{-}$ and $\\mathbf{+}$. For the finite-spin heat-bath update, use the total sampling order $+1\\prec-1$, which is distinct from $\\leq$. Define the strictly positive finite weight\n$$w(\\sigma)=\\exp\\!\\left(\\sum_{\\{i,j\\}\\in E}K_{\\{i,j\\}}\\sigma_i\\sigma_j+\\sum_{i\\in V}h_i\\sigma_i\\right).$$\nAt time $s$, let $F_s:\\Omega\\to\\Omega$ be the one-site finite-spin heat-bath update at site $I_s$ with uniform value $U_s$, leaving every other spin unchanged; explicitly, site $i$ is set to $+1$ exactly when\n$$U_s<\\frac{\\exp(H_i(\\eta))}{\\exp(H_i(\\eta))+\\exp(-H_i(\\eta))},\\qquad H_i(\\eta)=h_i+\\sum_{\\{i,j\\}\\in E}K_{\\{i,j\\}}\\eta_j,$$\nwhere $\\eta$ is the exterior configuration at $i$, and otherwise is set to $-1$. For $T=1,2,4,\\ldots$, initialize lower and upper configurations at time $-T$ to $\\mathbf{-}$ and $\\mathbf{+}$, respectively, and apply in chronological order the same stored maps $F_{-T+1},\\ldots,F_0$ to both. If their time-zero outputs agree, return that common configuration. Otherwise double $T$ and replay all maps in the enlarged interval, reusing the already stored maps at every overlapping time. This is a random procedure; no finite running-time bound is part of its definition."
+    },
+    "thm-csm-frontier-monotone-cftp-exact": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-csm-frontier-monotone-cftp",
+          "source_section": "Definition",
+          "quote": "Input a finite nonempty set $V$, a set $E\\subseteq[V]^2$ of unordered pairs of distinct sites, finite dimensionless couplings $K_e\\geq0$, finite dimensionless fields $h_i\\in\\mathbb R$, and a two-sided iid stream $(I_s,U_s)_{s\\in\\mathbb Z}$ in which $I_s$ is uniform on $V$, $U_s$ is uniform on $[0,1]$, and all these variables are mutually independent. On $\\Omega=\\{-1,+1\\}^V$, define $\\sigma\\leq\\tau$ by $\\sigma_i\\leq\\tau_i$ for every $i\\in V$, using $-1<+1$; its least and greatest elements are $\\mathbf{-}$ and $\\mathbf{+}$. For the finite-spin heat-bath update, use the total sampling order $+1\\prec-1$, which is distinct from $\\leq$. Define the strictly positive finite weight\n$$w(\\sigma)=\\exp\\!\\left(\\sum_{\\{i,j\\}\\in E}K_{\\{i,j\\}}\\sigma_i\\sigma_j+\\sum_{i\\in V}h_i\\sigma_i\\right).$$\nAt time $s$, let $F_s:\\Omega\\to\\Omega$ be the one-site finite-spin heat-bath update at site $I_s$ with uniform value $U_s$, leaving every other spin unchanged; explicitly, site $i$ is set to $+1$ exactly when\n$$U_s<\\frac{\\exp(H_i(\\eta))}{\\exp(H_i(\\eta))+\\exp(-H_i(\\eta))},\\qquad H_i(\\eta)=h_i+\\sum_{\\{i,j\\}\\in E}K_{\\{i,j\\}}\\eta_j,$$\nwhere $\\eta$ is the exterior configuration at $i$, and otherwise is set to $-1$. For $T=1,2,4,\\ldots$, initialize lower and upper configurations at time $-T$ to $\\mathbf{-}$ and $\\mathbf{+}$, respectively, and apply in chronological order the same stored maps $F_{-T+1},\\ldots,F_0$ to both. If their time-zero outputs agree, return that common configuration. Otherwise double $T$ and replay all maps in the enlarged interval, reusing the already stored maps at every overlapping time. This is a random procedure; no finite running-time bound is part of its definition.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-csm-frontier-heat-bath-update",
+          "source_section": "Definition",
+          "quote": "Input a finite nonempty site set $V$, a finite nonempty spin set $S$ with a fixed total order $s_1\\prec\\cdots\\prec s_r$, a strictly positive finite weight $w:S^V\\to(0,\\infty)$, an initial configuration $x_0\\in S^V$, an integer $t\\geq0$, a site schedule $i_1,\\ldots,i_t\\in V$, numbers $u_1,\\ldots,u_t\\in[0,1]$, and a finite family of observables $f_1,\\ldots,f_m:S^V\\to\\mathbb R$ (the family may be empty). Put $Z=\\sum_{x\\in S^V}w(x)$ and $\\pi(x)=w(x)/Z$. For $i\\in V$, an exterior configuration $\\eta\\in S^{V\\setminus\\{i\\}}$, and $s\\in S$, let $\\eta^{i,s}\\in S^V$ agree with $\\eta$ away from $i$ and have spin $s$ at $i$, and set\n$$q_i(s\\mid\\eta)=\\frac{w(\\eta^{i,s})}{\\sum_{a\\in S}w(\\eta^{i,a})}.$$\nThe denominator is finite and strictly positive. For $k=1,\\ldots,t$, set $\\eta=x_{k-1}|_{V\\setminus\\{i_k\\}}$, put $c_0=0$ and $c_j=\\sum_{\\ell=1}^j q_{i_k}(s_\\ell\\mid\\eta)$, and replace the spin at $i_k$ by the first $s_j$ for which $u_k<c_j$; when $u_k=1$, replace it by $s_r$. Leave every other spin unchanged to obtain $x_k$. Thus the intervals are $[c_{j-1},c_j)$ for $j<r$ and $[c_{r-1},1]$ for $j=r$. Return the trajectory $(x_0,\\ldots,x_t)$ and the values $f_a(x_k)$ for $a=1,\\ldots,m$ and $k=0,\\ldots,t$. For the random-scan heat-bath chain, take the $i_k$ independently uniform on $V$ and the $u_k$ independently uniform on $[0,1]$, with all site and uniform draws mutually independent. The procedure makes no independence claim about successive configurations or observable values.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Every one-site conditional probability of either sign is strictly positive, because it is a ratio of positive finite weights and a positive finite sum. There are only finitely many sites and exterior configurations, so $$\\delta=\\min_{i\\in V,\\,\\eta\\in\\{-1,+1\\}^{V\\setminus\\{i\\}},\\,s\\in\\{-1,+1\\}}q_i(s\\mid\\eta)>0.$$",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For a fixed site $i$, the log odds of the plus conditional are $$\\log\\frac{q_i(+1\\mid\\eta)}{q_i(-1\\mid\\eta)}=2h_i+2\\sum_{\\{i,j\\}\\in E}K_{\\{i,j\\}}\\eta_j.$$ If $\\eta\\leq\\zeta$ coordinatewise, the right side for $\\eta$ is at most the right side for $\\zeta$ because each $K_{\\{i,j\\}}\\geq0$; hence $q_i(+1\\mid\\eta)\\leq q_i(+1\\mid\\zeta)$. Using the same $U_s$ in both updates therefore preserves coordinatewise order.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "The finite Gibbs law $\\pi$ is invariant under each heat-bath update: conditional on the spins off site $i$, the original spin and its replacement have the same conditional law $q_i(\\cdot\\mid\\eta)$. Thus replacing the spin preserves every joint probability, and the uniform mixture over sites preserves $\\pi$.",
+          "step": "1.3",
+          "inputs": [
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fix an ordering of the $n=|V|$ sites. A block of $n$ successive seeds selects these sites in that order and has every uniform value below $\\delta$ with probability $\\theta=n^{-n}\\delta^n>0$. On that event each update sets its selected spin to $+1$, whatever the other spins are, so the block maps every starting configuration to $\\mathbf{+}$. Disjoint blocks in the past are independent; the probability that none of the first $m$ blocks has this event is $(1-\\theta)^m\\to0$. Thus with probability one a forcing block lies inside some explored horizon. The two extremes then have the same time-zero image, so the doubling procedure terminates almost surely.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Every state lies between $\\mathbf{-}$ and $\\mathbf{+}$. By step 1.2, applying a shared sequence of update maps preserves these inequalities. If the lower and upper outputs agree, every state started at the same horizon has that common output. The algorithm's returned state is therefore the image of every possible initial state under that finite composition.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For each integer time $t$, almost-sure forcing blocks define $X_t$ as the common image at time $t$ of all initial states started sufficiently far in the past. Intersecting these probability-one events over the countably many integer times defines all $X_t$ simultaneously. The construction is consistent because once a composition maps all states to one value, every earlier extension followed by that composition has the same value. The variable $X_{t-1}$ depends only on seeds through time $t-1$, so it is independent of the seed at time $t$, and $X_t=F_t(X_{t-1})$. The two-sided iid stream is shift-invariant and this construction uses the same rule at every time, so the law $\\rho$ of $X_t$ does not depend on $t$. It follows from the definition [L1] that $\\rho$ is invariant for $P$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "L1",
+            "step 2.1",
+            "step 1.3",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Put $N=|\\Omega|=2^n$. From any state $x$ to any state $y$, the chain can select the fixed site ordering from step 2.1 and set each spin to its value in $y$; this has probability at least $n^{-n}\\delta^n>0$. Hence every entry of the $n$-step transition matrix $P^n$ is positive. Let $\\kappa=\\min_{x,y}P^n(x,y)>0$ and $\\lambda=N\\kappa\\in(0,1]$. If $\\lambda<1$, each row of $P^n$ is $\\lambda$ times the uniform law on $\\Omega$ plus $(1-\\lambda)$ times a probability law $R_x$. For any laws $\\mu,\\nu$, the positive and negative parts of $\\mu-\\nu$ each have mass $\\|\\mu-\\nu\\|_{\\rm TV}$; because $0\\leq R_x(A)\\leq1$, $|(\\mu R)(A)-(\\nu R)(A)|\\leq\\|\\mu-\\nu\\|_{\\rm TV}$ for every event $A$. Thus $P^n$ contracts total variation by at most $1-\\lambda$. If $\\lambda=1$, all rows are uniform. In either case two invariant laws for $P$ must coincide. Since $\\pi$ is invariant by step 1.3 and $\\rho$ is invariant by step 3.1, $\\rho=\\pi$.",
+          "step": "4.1",
+          "inputs": [
+            "L1",
+            "step 2.1",
+            "step 1.3",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "At time zero, the algorithm returns the common image whenever its explored interval contains a forcing block. By the definition of $X_0$ in step 3.1, this is exactly $X_0$ on the probability-one termination event. Its law is $\\rho=\\pi$ by step 4.1, proving exactness.",
+          "step": "5.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2",
+            "step 3.1",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes V is nonempty; an empty site set is outside its stated domain.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/csm_boundary",
+            "reason": "The forcing block uses an ordering of n>=1 sites and positive minimum conditional delta under the given seeds. Empty interaction sets are permitted without emptying V or Omega; the same forcing and invariant-law argument applies.",
+            "item_sha256": "269d7de384d4b7c2986a52db9345ae5c276f80eaa62622db521d8631bf973de9",
+            "row_sha256": "0832e79b48b33566dc381ae6099cc8e2f40e033e65d1245443409a581eec41e4"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/csm_boundary",
+            "reason": "The forcing block uses an ordering of n>=1 sites and positive minimum conditional delta under the given seeds. Empty interaction sets are permitted without emptying V or Omega; the same forcing and invariant-law argument applies."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "When all K_e and h_i are zero, q_i(+|eta)=q_i(-|eta)=1/2, so delta=1/2 in step 1.1 and the forcing event of step 1.2 has positive probability."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For one site, the forcing block in step 2.1 has length one and positive probability."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Zero couplings are allowed and finite fields keep both conditional spin probabilities positive, as shown in step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The event U<delta in step 2.1 has positive probability, and the conditional update treats U=0 and U=1 as defined by the algorithm."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The finite site order used in step 2.1 is a finite listing; all minima and conditional probabilities in step 1.1 are over finite sets, so no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem asserts exactness and termination, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem asserts exactness and termination, not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "One Ising site with K=0 and h=0.",
+          "result": "The forcing block has length one and probability 1/2; the returned sign has probability 1/2 each.",
+          "verifies": "The positive forcing-block termination argument and exact product Gibbs law."
+        },
+        {
+          "check": "All couplings zero and arbitrary finite fields.",
+          "result": "Every conditional spin probability remains strictly positive, so delta>0 and the same geometric block argument applies.",
+          "verifies": "The strict-positivity premise in step 1.1."
+        }
+      ],
+      "finite_checks_disposition": "The exact finite checks cover the listed boundary conventions; the full conditional result is established by the authored argument."
+    },
+    "alg-csm-frontier-swendsen-wang": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This carrier defines a finite two-stage procedure; theorem boundary worksheets do not apply. Zero activity and one-edge behavior are covered by the finite checks below."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "This carrier defines a finite two-stage procedure; theorem boundary worksheets do not apply. Zero activity and one-edge behavior are covered by the finite checks below."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "This carrier defines a finite two-stage procedure; theorem boundary worksheets do not apply. Zero activity and one-edge behavior are covered by the finite checks below."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "This carrier defines a finite two-stage procedure; theorem boundary worksheets do not apply. Zero activity and one-edge behavior are covered by the finite checks below."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This carrier defines a finite two-stage procedure; theorem boundary worksheets do not apply. Zero activity and one-edge behavior are covered by the finite checks below."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "This carrier defines a finite two-stage procedure; theorem boundary worksheets do not apply. Zero activity and one-edge behavior are covered by the finite checks below."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The Definition activates an equal-color edge in the branch U_e<v_e/(1+v_e) and leaves it absent otherwise; unequal-color edges are always absent. Both directions of the activation rule are specified, with equality in the absent branch.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/csm_boundary",
+            "reason": "The Definition activates an equal-color edge in the branch U_e<v_e/(1+v_e) and leaves it absent otherwise; unequal-color edges are always absent. Both directions of the activation rule are specified, with equality in the absent branch.",
+            "item_sha256": "bc83a4082a22896408190e958800968aa7126e56a59cf465cadcbf1b5fda1eef",
+            "row_sha256": "a3bd66b22c8ecbf64d2494bf04f902c47c1758c7440eb3891b7e43cb6e104021"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The Definition activates an equal-color edge in the branch U_e<v_e/(1+v_e) and leaves it absent otherwise; unequal-color edges are always absent. Both directions of the activation rule are specified, with equality in the absent branch.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/csm_boundary",
+            "reason": "The Definition activates an equal-color edge in the branch U_e<v_e/(1+v_e) and leaves it absent otherwise; unequal-color edges are always absent. Both directions of the activation rule are specified, with equality in the absent branch.",
+            "item_sha256": "bc83a4082a22896408190e958800968aa7126e56a59cf465cadcbf1b5fda1eef",
+            "row_sha256": "f8adf95287c72ffe5a406edcdc1a4da37e3e5d394579703a2905b4e6480afd7d"
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "One edge with v=0 and equal endpoint spins.",
+          "result": "The edge is never activated; the two singleton components are recolored independently.",
+          "verifies": "The zero-activity endpoint and independent component-color draws."
+        },
+        {
+          "check": "One isolated vertex.",
+          "result": "There is one component and it receives one uniform color.",
+          "verifies": "The empty-edge/component convention."
+        }
+      ],
+      "finite_checks_disposition": "The exact finite checks cover the listed boundary conventions; the full conditional result is established by the authored argument.",
+      "definition_interface": "Input a finite simple graph $G=(V,E)$, an integer $Q\\geq2$, finite activities $v_e\\geq0$ for $e\\in E$, and a spin configuration $\\sigma:V\\to[Q]$, using the Potts and FK conventions of the finite Potts/FK weight definition. For each edge $e=\\{u,v\\}$, if $\\sigma(u)\\ne\\sigma(v)$ set $e$ absent. If $\\sigma(u)=\\sigma(v)$, draw an independent uniform $U_e\\in[0,1]$ and place $e$ in $A$ exactly when $U_e<v_e/(1+v_e)$. For each connected component of $(V,A)$, draw an independent uniform $U_C\\in[0,1]$ and assign its vertices the common color $1+\\lfloor Q U_C\\rfloor$, with the value $Q$ used when $U_C=1$. Return the resulting spin configuration $\\sigma'$. The finite graph has finitely many edges and components, so the procedure uses finitely many draws and operations. At $v_e=0$ the edge is never activated; finite $v_e$ ensures the activation probability is less than one."
+    },
+    "thm-csm-frontier-swendsen-wang-invariance": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-csm-frontier-finite-potts-fk",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,E)$ be a finite simple graph, so $V$ is finite and $E$ is a set of two-element subsets of $V$. Fix an integer $Q\\geq2$, write $[Q]=\\{1,\\ldots,Q\\}$, and assign to each edge $e\\in E$ a finite activity $v_e\\in[0,\\infty)$. A spin configuration is a function $\\sigma:V\\to[Q]$. Its unnormalized Potts weight and partition function are\n$$w_P(\\sigma):=\\prod_{e=\\{u_e,w_e\\}\\in E}\\bigl(1+v_e\\mathbf1_{\\{\\sigma(u_e)=\\sigma(w_e)\\}}\\bigr),\\qquad Z_P(Q,\\mathbf v):=\\sum_{\\sigma:V\\to[Q]}w_P(\\sigma).$$\nFor $A\\subseteq E$, let $G_A=(V,A)$, and let $k_G(A)$ be its number of connected components, counting isolated vertices; equivalently, these are the equivalence classes generated by the endpoint pairs of edges in $A$. Put $v_A:=\\prod_{e\\in A}v_e$, with empty product $1$. The unnormalized Fortuin–Kasteleyn (FK) weight and partition function are\n$$w_{FK}(A):=Q^{k_G(A)}v_A,\\qquad Z_{FK}(Q,\\mathbf v):=\\sum_{A\\subseteq E}w_{FK}(A).$$\nBoth normalizers are finite and positive: the spin sum is finite with every term at least $1$, while the empty-edge FK term is $Q^{|V|}>0$. These are finite mathematical weights; no physical units or empirical status are assigned.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-csm-frontier-edwards-sokal",
+          "source_section": "Statement",
+          "quote": "Let $G=(V,E)$ be a finite simple graph, let $Q\\geq2$ be an integer, and let each edge activity $v_e$ be finite and nonnegative. Use the Potts weight $w_P(\\sigma)=\\prod_{e=\\{u_e,w_e\\}}(1+v_e\\mathbf1_{\\{\\sigma(u_e)=\\sigma(w_e)\\}})$ and FK weight $w_{FK}(A)=Q^{k_G(A)}\\prod_{e\\in A}v_e$ from the finite definitions. Define\n$$W(\\sigma,A):=\\prod_{e\\notin A}1\\prod_{e\\in A}v_e\\mathbf1_{\\{\\sigma(u_e)=\\sigma(w_e)\\}},\\qquad (\\sigma,A)\\in[Q]^V\\times2^E.$$\nThe normalized joint law $\\nu(\\sigma,A):=W(\\sigma,A)/\\sum_{\\tau,B}W(\\tau,B)$ has Potts marginal $w_P/Z_P$ and FK marginal $w_{FK}/Z_{FK}$, with $Z_P=Z_{FK}=\\sum_{\\tau,B}W(\\tau,B)$. Conditional on an edge set $A$ of positive probability, the colors of its connected components are independent and uniform on $[Q]$. Thus for every $x,y\\in V$,\n$$\\mathbb P(\\sigma(x)=\\sigma(y))=\\frac1Q+\\left(1-\\frac1Q\\right)\\mathbb P_{FK}(x\\leftrightarrow y),$$\nwhere $x\\leftrightarrow y$ means that $x$ and $y$ lie in the same component of $G_A$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-csm-frontier-swendsen-wang",
+          "source_section": "Definition",
+          "quote": "Input a finite simple graph $G=(V,E)$, an integer $Q\\geq2$, finite activities $v_e\\geq0$ for $e\\in E$, and a spin configuration $\\sigma:V\\to[Q]$, using the Potts and FK conventions of the finite Potts/FK weight definition. For each edge $e=\\{u,v\\}$, if $\\sigma(u)\\ne\\sigma(v)$ set $e$ absent. If $\\sigma(u)=\\sigma(v)$, draw an independent uniform $U_e\\in[0,1]$ and place $e$ in $A$ exactly when $U_e<v_e/(1+v_e)$. For each connected component of $(V,A)$, draw an independent uniform $U_C\\in[0,1]$ and assign its vertices the common color $1+\\lfloor Q U_C\\rfloor$, with the value $Q$ used when $U_C=1$. Return the resulting spin configuration $\\sigma'$. The finite graph has finitely many edges and components, so the procedure uses finitely many draws and operations. At $v_e=0$ the edge is never activated; finite $v_e$ ensures the activation probability is less than one.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each fixed spin configuration $\\sigma$, summing $W(\\sigma,A)$ over $A\\subseteq E$ factors over edges. An unequal-spin edge must be absent and contributes $1$; an equal-spin edge contributes either $1$ or $v_e$. Thus $\\sum_AW(\\sigma,A)=\\prod_{e\\in E}(1+v_e\\mathbf1_{\\{\\sigma(u_e)=\\sigma(w_e)\\}})=w_P(\\sigma)$, which is positive by [F1]. Dividing by this conditional normalizer shows that under $\\nu$, given $\\sigma$, unequal-spin edges are forced absent and equal-spin edges are independent Bernoulli variables with activation probabilities $v_e/(1+v_e)$, including probability zero when $v_e=0$. This is exactly the first stage of [F3].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Every edge set produced in step 1.1 has $W(\\sigma,A)>0$: all active edges have $v_e>0$ and equal endpoint spins, while inactive edges contribute $1$. Therefore $\\nu(A)>0$. By [F2], conditional on this edge set, its components receive independent uniform colors. This is exactly the second stage of [F3].",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Start with $\\sigma$ distributed as the spin marginal $\\pi_P$ of $\\nu$. By step 1.1, after the first stage the pair $(\\sigma,A)$ has joint law $\\nu$. By step 2.1, the new configuration $\\sigma'$ is then drawn from the spin conditional law $\\nu(\\cdot\\mid A)$. Summing over the finite edge-set space shows that its marginal is the spin marginal of $\\nu$, namely $\\pi_P$. Hence the update preserves $\\pi_P$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The graph has finitely many edges, so the first stage performs one draw per edge; the second stage performs one draw per connected component of a finite graph. Both stages therefore terminate after finitely many operations.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For V=E=empty there is one spin state and one edge set; the finite conditional law and operations in steps 1.1, 2.1, 3.1, and 4.1 reduce to the identity update."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "When v_e=0, step 1.1 gives activation probability zero and step 2.1 handles the positive-probability resulting edge set."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For one vertex and no edges, step 2.1 recolors its single component uniformly and step 3.1 returns the one-site Potts marginal."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "With no edges, every vertex is a singleton component; the independent recoloring in step 2.1 gives the uniform product Potts law in step 3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The activity endpoint v_e=0 is handled explicitly in step 1.1; finite v_e ensures v_e/(1+v_e)<1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The edge subsets and components are finite, and step 4.1 explicitly counts finitely many operations; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem asserts invariance and termination, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem asserts invariance and termination, not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "One edge with v=0.",
+          "result": "The edge is absent, the two vertices are independently recolored, and the Potts law is the uniform product law.",
+          "verifies": "The zero-activity conditional law and invariance composition in steps 1.1–2.1."
+        },
+        {
+          "check": "One vertex and no edges.",
+          "result": "The only component is recolored uniformly, preserving the one-site Potts law.",
+          "verifies": "The isolated-component boundary."
+        }
+      ],
+      "finite_checks_disposition": "The exact finite checks cover the listed boundary conventions; the full conditional result is established by the authored argument.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-95",
+        "notes": "Checked all four steps, the current finite Potts/FK Definition, and every step of Edwards–Sokal supplier proof. Sum over edge subsets factors exactly; spin weights are positive. Generated active edges have positive activity, so edge marginal is positive and component conditional is licensed. Marginal reconstruction preserves Potts law. Checked empty V, empty E, zero activities, singleton components, Q=2, and uniform endpoints including U=1. Finite draws/operations suffice; no rapid mixing or physical inference. Corrected ill-typed sigma(v_e) in proof step 1.1 to sigma(w_e), the existing endpoint convention, and synchronized derivation; Statement, dependencies and manifest unchanged. Repair confidence 1. Independently retrieved/read Grimmett section 2.3 pp.7–8 and section 8.3 p.39, and Duminil-Copin section 3.2 pp.24–26 (PDF32–34), especially free-boundary Remark 2.2. Sources give homogeneous activities; the supplier and consumer locally prove finite edge-dependent including zero activities. No diagrams. Reader/refuter no findings."
+      }
+    },
+    "ex-csm-frontier-metastable-diagnostic": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-standard-borel-space",
+          "source_section": "Definition",
+          "quote": "A measurable space $(E,\\mathcal E)$ is **standard Borel** if there are a Polish space $P$ and a bijection $h:E\\to P$ such that $A\\in\\mathcal E$ exactly when $h[A]$ is Borel in $P$. Thus the measurable structure is part of the datum; no particular compatible Polish topology on $E$ is selected.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-polish-space",
+          "source_section": "Definition",
+          "quote": "A topological space is **Polish** when it is separable ([[def-separable-space]]) and completely metrizable: its topology is induced by some complete metric ([[lem-complete-remetrisation]]). No particular compatible complete metric or countable dense subset is part of the structure.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ (Measures on sigma-algebras). The triple $(X,\\mathcal A,\\mathbb P)$ is a **probability space** (Measure spaces); $X$ is its sample space and the members of $\\mathcal A$ are its events.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-measure-kernel-and-probability-kernel",
+          "source_section": "Definition",
+          "quote": "A **measure kernel** from $(S,\\Sigma)$ to $(T,\\Tau)$ is a map $K:S\\times\\Tau\\to[0,\\infty]$ such that, for every $s\\in S$, $A\\mapsto K(s,A)$ is a measure on $(T,\\Tau)$, and for every $A\\in\\Tau$, $s\\mapsto K(s,A)$ is $\\Sigma$-measurable. Measures and measurability have the meanings in Measures on sigma-algebras and A measurable function between measurable spaces; the evaluation functions use the Borel sigma-algebra on $[0,\\infty]$.\n\nA **probability kernel** satisfies $K(s,T)=1$ for every s. A **finite kernel** satisfies $K(s,T)<\\infty$ for every s; there need not be a common bound on these masses. A **uniformly sigma-finite kernel**, in the convention of this page, comes with a specified sequence $T_n\\in\\Tau$ increasing to T such that $K(s,T_n)<\\infty$ for every s and n. This is a common measurable exhaustion, not a bound uniform in s. A finite kernel has the constant exhaustion $T_n=T$. An arbitrary measure kernel is not assumed to have such an exhaustion.\n\nAll these requirements are pointwise in s, not merely almost everywhere for an unspecified measure on S. If T is empty, its only measure is zero, so a probability kernel into T can exist only when S is empty. If S is empty, the kernel requirements are vacuous. The zero kernel is finite. This definition selects no versions and uses no choice axiom.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "alg-metropolis-hastings-kernel",
+          "source_section": "Definition",
+          "quote": "Assume AC. The **Metropolis–Hastings procedure** takes as input a standard-Borel\nspace $(\\mathsf X,\\mathcal X)$ ([[def-standard-borel-space]]), a target\nprobability measure $\\pi$ ([[def-probability-measure]]), and a probability\nkernel $Q$ from $(\\mathsf X,\\mathcal X)$ to itself\n([[def-measure-kernel-and-probability-kernel]]).\n\n1. On the product sigma-algebra ([[def-product-sigma-algebra-and-finite-product-sigma-algebras]]),\nform the proposal-flow measure $\\mu$ ([[def-measure]]) on\n$\\mathsf X\\times\\mathsf X$ by\n$$\\mu(C)=\\int_{\\mathsf X}Q(x,C_x)\\,\\pi(dx),\\qquad C_x=\\{y:(x,y)\\in C\\}.$$\nThis is a probability measure by [[lem-prior-and-model-kernel-define-joint-law]].\nLet $\\tau(x,y)=(y,x)$ and set $\\mu^{\\mathsf T}(C)=\\mu(\\tau^{-1}C)$.\n\n2. Set $\\eta=\\mu\\wedge\\mu^{\\mathsf T}$, the greatest measure dominated by both\nflows. Put $\\lambda_0=\\mu+\\mu^{\\mathsf T}$, which is a finite measure by\n[[thm-nonnegative-weighted-sums-of-measures]], and choose nonnegative measurable\nrepresentatives $f=d\\mu/d\\lambda_0$ and $g=d\\mu^{\\mathsf T}/d\\lambda_0$\nwith $f+g=1$ everywhere after modification on a $\\lambda_0$-null set. Define\n$$\\alpha(x,y)=\\begin{cases}\\min\\{1,g(x,y)/f(x,y)\\},&f(x,y)>0,\\\\1,&f(x,y)=0.\\end{cases}$$\nThis is a jointly measurable version of $d\\eta/d\\mu$ taking values in $[0,1]$.\n\n3. For $x\\in\\mathsf X$, compute the integrated acceptance probability\n$$a(x)=\\int_{\\mathsf X}\\alpha(x,y)\\,Q(x,dy)$$\nand rejection probability $r(x)=1-a(x)$.\n\n4. Return the transition rule\n$$P(x,A)=\\int_{\\mathsf X}\\mathbf1_A(y)\\alpha(x,y)\\,Q(x,dy)+\\mathbf1_A(x)r(x),\\qquad A\\in\\mathcal X.$$\nThe second term retains every rejected proposal as a self-transition.\n\nThe item [[lem-common-submeasure-and-bounded-radon-nikodym-density]] proves the\ncommon-submeasure construction and density-version claims in step 2.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-metropolis-hastings-kernel-is-reversible-and-invariant",
+          "source_section": "Statement",
+          "quote": "Assume AC and the hypotheses of [[alg-metropolis-hastings-kernel]]. Its output\n$P$ is a probability kernel, the joint measure\n$J_P(dx,dy)=\\pi(dx)P(x,dy)$ is symmetric under $(x,y)\\mapsto(y,x)$, and $\\pi$\nis invariant for $P$. Symmetry of this joint measure is reversibility. No\nirreducibility, uniqueness, convergence-rate, or central limit theorem\nconclusion is asserted.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-invariant-and-stationary-distribution-for-a-markov-kernel",
+          "source_section": "Definition",
+          "quote": "Let $K$ be a probability kernel on a measurable space $(E,\\mathcal E)$\n([[def-measure-kernel-and-probability-kernel]]), and let $\\pi$ be a\nprobability measure on $(E,\\mathcal E)$ ([[def-probability-measure]]). The\nprobability measure $\\pi$ is **invariant** for $K$, and $\\pi$ is a\n**stationary distribution** of $K$, when\n\n$$(\\pi K)(A):=\\int_E K(x,A)\\,\\pi(dx)=\\pi(A)\\qquad\\text{for every }A\\in\\mathcal E .$$\n\nThe set function $\\pi K$ is again a probability measure: for fixed $A$ the map\n$x\\mapsto K(x,A)$ is measurable and lies in $[0,1]$, so the integral exists in\n$[0,1]$; for pairwise disjoint $A_n\\in\\mathcal E$ the identity\n$K(x,\\bigcup_nA_n)=\\sum_nK(x,A_n)$ of the measure $K(x,\\cdot)$ and the\nmonotone convergence theorem for nonnegative functions\n([[thm-monotone-convergence-for-the-integral]]) give\n$\\sigma$-additivity of $\\pi K$; and $K(x,E)=1$ for every $x$ gives\n$(\\pi K)(E)=1$. Thus $(\\pi K)(A)=\\pi(A)$ is an identity between two probability\nmeasures evaluated at $A$.\n\nA $K$-chain whose initial law is $\\pi$ is called **stationary** when\n$\\pi K=\\pi$. Stationarity of the process is a statement about all of its\nfinite-dimensional laws and is proved, not assumed, from $\\pi K=\\pi$; see\n[[thm-invariant-initial-law-makes-the-chain-stationary]].\n\nOn a countable state space $E$ with sigma-algebra $2^E$ and transition matrix\n$p(x,y)=K(x,\\{y\\})$ ([[def-transition-matrix-and-n-step-transition-probabilities]]),\na measure on $E$ is its weighted sum of Dirac masses at singletons\n([[thm-measures-on-countable-discrete-spaces-are-weighted-dirac-sums]]), so\ninvariance is equivalent to the matrix identity\n\n$$\\pi(y)=\\sum_{x\\in E}\\pi(x)\\,p(x,y)\\qquad\\text{for every }y\\in E .$$\n\nThe definition fixes no irreducibility, aperiodicity or uniqueness hypothesis,\nand it selects no conditional-expectation versions; the display defines a\nsingle measure $\\pi K$ and asserts an identity for it. A transient, periodic or\nreducible chain may have several invariant probability measures or none.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The finite discrete metric on $\\Omega$ is complete and separable, so [F2] makes it Polish; the identity map then verifies [F1]. The weights sum to $4+\\epsilon$, so $\\pi$ is a probability measure by [F3]. Each row of $Q$ is nonnegative and sums to one, and on a finite discrete space every function is measurable; thus [F4] makes $Q$ a probability kernel. Consequently the inputs satisfy [F5].",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For states $x,y$ with $Q(x,y)>0$, the forward proposal-flow mass is $\\mu(x,y)=\\pi(x)Q(x,y)$ and the reversed mass is $\\mu^{\\mathsf T}(x,y)=\\pi(y)Q(y,x)$. On a finite set the greatest measure dominated by both has point mass $\\min\\{\\mu(x,y),\\mu^{\\mathsf T}(x,y)\\}$, so [F5] accepts with probability $\\min\\{1,\\pi(y)Q(y,x)/(\\pi(x)Q(x,y))\\}$. Symmetry of $Q$ reduces this to $\\min\\{1,e^{-\\beta(E(y)-E(x))}\\}$. Hence each $L_i$ and $R_i$ jumps to its partner with probability $1/4$, jumps to $H$ with probability $\\epsilon/4$, and stays put with probability $3/4-\\epsilon/4$; from $H$ it jumps to each of the four well states with probability $1/4$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F6] and [F7], $\\pi$ is invariant for $P$. Also $P^4(x,y)>0$ for all $x,y$: every state reaches $L_0$ in at most two positive-probability transitions, $L_0$ reaches every state in at most two, and any unused steps can be filled by the positive self-transition at $L_0$. Since $\\Omega$ is finite, let $\\kappa=\\min_{x,y}P^4(x,y)>0$, $N=|\\Omega|=5$, and $\\lambda=N\\kappa\\in(0,1]$. If $\\lambda<1$, each row of $P^4$ is $\\lambda$ times the uniform law plus $1-\\lambda$ times a probability row. For $\\Delta=\\mu-\\nu$ with total mass zero, its positive and negative parts each have mass $\\|\\mu-\\nu\\|_{\\rm TV}$; since every residual row assigns a number in $[0,1]$ to an event, integration against $\\Delta$ is bounded in absolute value by $\\|\\mu-\\nu\\|_{\\rm TV}$. Thus for every two laws $\\mu,\\nu$, $\\|\\mu P^4-\\nu P^4\\|_{\\rm TV}\\leq(1-\\lambda)\\|\\mu-\\nu\\|_{\\rm TV}$. If $\\lambda=1$, all rows are uniform. Therefore $\\pi$ is the unique invariant law and the chain converges to it.",
+          "step": "3.1",
+          "inputs": [
+            "F6",
+            "F7",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "The target assigns equal mass $1/(4+\\epsilon)$ to $L_0,L_1$, so $\\pi(\\cdot\\mid L)$ is uniform and $\\pi(L)=2/(4+\\epsilon)$. From either state in $L$, the exit probability to $H$ is $\\epsilon/4$, while the transition to the other state of $L$ has probability $1/4$. Conditioning a step on no exit gives flip probability $(1/4)/(1-\\epsilon/4)=1/(4-\\epsilon)$ and stay probability $(3-\\epsilon)/(4-\\epsilon)$. This symmetric two-state chain preserves the uniform law and has nonconstant eigenvalue $(2-\\epsilon)/(4-\\epsilon)\\leq1/2$, giving the stated within-well total-variation bound. The exit probability is constant across both states, so survival for $t$ steps has probability $(1-\\epsilon/4)^t$.",
+          "step": "3.2",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Survival implies $X_t\\in L$, so for the initial law $\\pi(\\cdot\\mid L)$, $\\Pr(X_t\\in L)\\geq(1-\\epsilon/4)^t$. On a finite space, if $\\Delta=\\mu-\\nu$ has total mass zero then $\\sup_A|\\Delta(A)|=\\frac12\\sum_x|\\Delta(x)|$, so the event $L$ gives $$\\|\\pi(\\cdot\\mid L)P^t-\\pi\\|_{\\rm TV}\\geq(1-\\epsilon/4)^t-\\pi(L).$$ For any mixture of starting states, the half-$\\ell^1$ triangle inequality bounds its distance from $\\pi$ by the largest component distance. Since $\\pi(\\cdot\\mid L)P^t$ is the mixture of $P^t(L_0,\\cdot)$ and $P^t(L_1,\\cdot)$ with weights $1/2$, it follows that $d(t)\\geq(1-\\epsilon/4)^t-2/(4+\\epsilon)$. If $t\\leq\\lfloor\\epsilon^{-1}\\rfloor$, Bernoulli's inequality gives $(1-\\epsilon/4)^t\\geq1-t\\epsilon/4\\geq3/4$, while $2/(4+\\epsilon)<1/2$; hence $d(t)\\geq1/4>1/8$. The definition of $t_{\\rm mix}(1/8)$ therefore gives the claimed lower bound.",
+          "step": "4.1",
+          "inputs": [
+            "F3",
+            "F7",
+            "step 3.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes a five-state space, so the empty-space case is outside its formulation."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The parameters satisfy beta>0 and B>0, hence epsilon is strictly positive; epsilon=0 is only a limiting value, not an included endpoint."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example fixes five states and has no one-state parameter case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For every 0<epsilon<1 the transition formulas in step 2.1 and the within-well survival calculation in step 3.2 remain finite."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "At t=0 and t=floor(epsilon^-1), the lower bound in step 4.1 remains valid."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The state set, proposal rows, path choices, and transition minimum in step 2.1 are finite; AC is carried only because [F5]–[F6] require it."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example gives a one-way lower bound, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example gives a one-way lower bound, not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Take epsilon=1/4 and t=4.",
+          "result": "The survival probability is (15/16)^4; pi(L)=8/17; the event-gap lower bound exceeds 1/4.",
+          "verifies": "The exact finite barrier formula and the nontrivial worst-start lower bound in step 3.1."
+        },
+        {
+          "check": "Take t=0.",
+          "result": "d(0)>=1-pi(L)>1/2.",
+          "verifies": "The time-zero endpoint of the lower-bound formula."
+        }
+      ],
+      "finite_checks_disposition": "The exact finite checks cover the listed boundary conventions; the full conditional result is established by the authored argument.",
+      "definition_interface": "Assume AC. Fix $\\beta>0$ in reciprocal-energy units and a finite barrier height $B>0$ in the corresponding energy unit, so $\\beta B$ is dimensionless; put $\\epsilon=e^{-\\beta B}\\in(0,1)$, and let the five states be $\\Omega=\\{L_0,L_1,H,R_0,R_1\\}$. The energies are $E(L_0)=E(L_1)=E(R_0)=E(R_1)=0$ and $E(H)=B$, so the Gibbs law is $\\pi(x)=e^{-\\beta E(x)}/(4+\\epsilon)$. Let $Q$ be the symmetric proposal matrix specified by\n$$Q(L_i,L_i)=Q(R_i,R_i)=\\frac12,\\quad Q(L_i,L_{1-i})=Q(R_i,R_{1-i})=\\frac14,\\quad Q(L_i,H)=Q(R_i,H)=\\frac14\\quad(i=0,1),$$\nand $Q(H,x)=1/4$ for $x\\in\\{L_0,L_1,R_0,R_1\\}$, with all other entries zero. Each row sums to one. Apply the Metropolis–Hastings procedure with target $\\pi$ and proposal $Q$, and denote its transition matrix by $P$. Write $L=\\{L_0,L_1\\}$ for the left well and define\n$$d(t)=\\max_{x\\in\\Omega}\\|P^t(x,\\cdot)-\\pi\\|_{\\rm TV},\\qquad \\|\\mu-\\nu\\|_{\\rm TV}=\\frac12\\sum_{x\\in\\Omega}|\\mu(x)-\\nu(x)|.$$\nThe Gibbs law is invariant, but the chain started with law $\\pi(\\cdot\\mid L)$ has probability $(1-\\epsilon/4)^t$ of making no exit from $L$ during its first $t$ steps. Conditional on no exit, its two-state within-well transition flips between $L_0$ and $L_1$ with probability $1/(4-\\epsilon)$; the conditional stationary law within the well is uniform, and from either state its within-well total-variation error after $t$ such updates is at most $\\frac12((2-\\epsilon)/(4-\\epsilon))^t\\leq2^{-t-1}$. Nevertheless,\n$$d(t)\\geq(1-\\epsilon/4)^t-\\frac{2}{4+\\epsilon}\\geq\\frac14\\qquad\\text{for every integer }0\\leq t\\leq\\lfloor\\epsilon^{-1}\\rfloor.$$\nThus the conventional worst-start mixing time $t_{\\rm mix}(1/8):=\\min\\{t:d(t)\\leq1/8\\}$ exceeds $\\lfloor e^{\\beta B}\\rfloor$, even though the chain can equilibrate quickly within one well. This is an exact finite mathematical example; it reports no simulated or measured data.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-95",
+        "notes": "Independently checked Verification 1.1–4.1 and all eight direct supplier interfaces. Finite discrete carrier meets standard-Borel hypotheses; AC is inherited only from general MH suppliers. Positive target gives the exact acceptance ratio with no null-state ambiguity. Well exits have constant probability epsilon/4; conditioned flips are 1/(4-epsilon) with eigenvalue (2-epsilon)/(4-epsilon). Positive P^4 and finite minorization give uniqueness/convergence; t=0 and 0<epsilon<1 satisfy survival and Bernoulli lower bounds. Convexity passes the conditional-left-well start to worst start. No measured data or statistical confidence is claimed. Reader/refuter contain no findings. Independently retrieved LPW PDF and read section 3.2, printed pp.38–41, confirming corrected citation; Gibbs normalization and all five-state bounds are local algebra. No diagrams or missing diagram needed."
+      }
+    }
+  }
+}

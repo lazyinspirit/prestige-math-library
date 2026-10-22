@@ -1,0 +1,140 @@
+{
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "phase": "initial",
+  "round": 1,
+  "unit": "103",
+  "input_sha256": "eaf0a68d231b0a7d0d042df337974eaab597dfd3432daa3ad0aaeebd32fe188c",
+  "decisions": [
+    {
+      "id": "alg-qsmx-schmidt-mps-truncation",
+      "model": "gpt-6-luna",
+      "context_sha256": "c99a33e85db38aaa1cd8b22d58909b8169e6a76e6767284d55f5a6e6ca2ab514",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "Definition instruction 2 passes a compressed coefficient array in S_k tensor H_(k+1) tensor ... tensor H_N. Instruction 3 identifies that array at k=N-1 with a full-chain vector; these have different domains, and even equal dimensions do not identify their coordinates. Replaced the ill-typed equality by the explicit contraction of all site tensors in the ordered physical product basis.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "alg-qsmx-schmidt-mps-truncation",
+      "disposition": "repaired",
+      "post_sha256": "0bd609aba78fc3b0937aee1718fa3216a2f471d8911a0f6553ae2766f2cb2ab1",
+      "review_context_sha256": "45440e67a728a88e261e7d62556bc1b371ae9dfe98c63b4416868fa80cb55f13",
+      "reason": "Checked the complete finite procedure against the ordered-basis MPS definition and finite Schmidt supplier. Retained SVD columns give matrices of size m_(k-1) by m_k; the final array has size m_(N-1) by dim(H_N), and contracting all bond indices gives exactly a full-chain vector. Rank caps retain a positive singular value; the tie rule uses finite projected-coordinate Gram-Schmidt; N=1 returns the input and empty lists. No new prerequisite, AC assumption or diagram is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "thm-qsmx-schmidt-mps-error"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "id": "alg-qsmx-schmidt-mps-truncation",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The compressed remainder was identified with the full-chain output in Definition instruction 3. The assigned repair supplies the full contraction formula and distinguishes its tensor space from the residual space.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "disposition": "fixed",
+      "defect_id": "physics-non-fluid-129-2026-10-21-r2-step5-u103-algorithm-output-space",
+      "subject": "alg-qsmx-schmidt-mps-truncation",
+      "batch": "103"
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "id": "thm-qsmx-schmidt-mps-error",
+      "route": "frontier-owner",
+      "reason": "Proof 1.1 identifies the algorithm compressed remainder psi^(k) with P_k psi in the full tensor product; proof 2.1 subtracts those remainders as full-chain vectors. A retained-left isometry must explicitly embed them. The theorem Statement remains correct; refer this proof-only repair to the native frontier owner, without editing the unassigned item.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "disposition": "open",
+      "defect_id": "physics-non-fluid-129-2026-10-21-r2-step5-u103-error-proof-embedding",
+      "subject": "thm-qsmx-schmidt-mps-error",
+      "batch": "103"
+    }
+  ],
+  "gate_resolutions": [],
+  "supporting_evidence": {
+    "research/physics-non-fluid-129-2026-10-21-r2-batch-103-step5-context.json": "c8ffcca31a206a722b7734779881043cf5993ddcf88068a11a85e8745ac89c37"
+  },
+  "repair_notes": {
+    "review_scope": "Current source review and self-check of the authored correction, not an independent review of this repair. No external source retrieval was performed or attributed; the supplied Step-4 digest was used as concern evidence only.",
+    "definitions_and_suppliers": [
+      {
+        "id": "def-qsmx-mps-and-transfer",
+        "path": "items/def-qsmx-mps-and-transfer.md",
+        "use": "Definition fixes the full-chain coefficient as ell* A_1 ... A_N r, ordered tensor basis, and star as conjugate transpose."
+      },
+      {
+        "id": "thm-qc-schmidt-decomposition",
+        "path": "items/thm-qc-schmidt-decomposition.md",
+        "use": "Statement and proof 1.1-3.1 identify positive singular families and conjugated right tensor coordinates; finite norm square is the singular-value square sum."
+      }
+    ],
+    "consumer_uses": [
+      {
+        "id": "thm-qsmx-schmidt-mps-error",
+        "path": "items/thm-qsmx-schmidt-mps-error.md",
+        "disposition": "refer_frontier_owner",
+        "affected_use": "Statement calls the algorithm for phi and delta_k; F1 specifies the retained SVD data; proof 1.1 asserts psi^(k)=P_k psi and proof 2.1 uses their differences in the full chain.",
+        "invalidated_claim": "The identifications in proof 1.1 and 2.1 are ill-typed for the compressed remainders of the algorithm. The norm-error Statement is unchanged and follows using their full-chain embeddings.",
+        "minimality": "Let U_k:S_k -> S_(k-1) tensor H_k have the retained left columns and W_0=id_C, W_k=(W_(k-1) tensor I)U_k. Use x_k=(W_k tensor I)psi^(k), P_k=(W_k W_k*) tensor I, and x_k=P_k psi; replace the psi^(k) in proof 1.1 and 2.1 with x_k and set x_(N-1)=phi. Isometries preserve the discarded norms, so the existing orthogonality argument and Statement are retained.",
+        "route": "native frontier-owner lane; not outside-consumer maintenance"
+      }
+    ],
+    "page_uses": [
+      {
+        "id": "qsmx-matrix-product-states",
+        "path": "library/quantum-statistical-mechanics/qsmx-matrix-product-states.md",
+        "disposition": "unaffected",
+        "affected_use": "Frontmatter places the algorithm before its error theorem; the body is empty and contains no mathematical claim requiring repair."
+      },
+      {
+        "id": "qsmx-matrix-product-states-examples",
+        "path": "library/quantum-statistical-mechanics/qsmx-matrix-product-states-examples.md",
+        "disposition": "unaffected",
+        "affected_use": "The examples page requires the A page but contains no direct algorithm invocation or output identification."
+      }
+    ],
+    "metadata_repair": "Updated only the assigned algorithm statement mirror in batch-103.pages.json under the shared-write lock; its existing contract boundaries remain accurate. No shared ledger was edited.",
+    "focused_checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/physics-support/precheck.mts items/alg-qsmx-schmidt-mps-truncation.md --json",
+        "exit_code": 0,
+        "result": "One file, no proof-format body, not-applicable; zero failures."
+      },
+      {
+        "command": "node tools/physics-support/rendercheck.mjs items/alg-qsmx-schmidt-mps-truncation.md --json",
+        "exit_code": 0,
+        "result": "Checked one item, zero errors and warnings."
+      },
+      {
+        "command": "node tools/physics-support/proof-layout.mjs items/alg-qsmx-schmidt-mps-truncation.md",
+        "exit_code": 0,
+        "result": "One item, zero proof steps, zero defects."
+      },
+      {
+        "command": "node tools/physics-support/proof-contract.mjs research/physics-non-fluid-129-2026-10-21-r2-batch-103.proof-contracts.json --strict --items alg-qsmx-schmidt-mps-truncation --json",
+        "exit_code": 0,
+        "result": "The assigned algorithm contract passes strict validation, with zero errors and warnings."
+      }
+    ],
+    "unresolved_obligations": [
+      "The unassigned draft frontier consumer thm-qsmx-schmidt-mps-error needs the described proof-only embedding clarification. Route to its native frontier owner; no consumer item was edited and no consumer repair or certification is claimed."
+    ],
+    "next_action": "Assigned algorithm adjudication and repair complete. Controller to merge ledger proposals and route the single affected frontier consumer before closure.",
+    "metadata_validation": "The guarded metadata command reread the owning manifest, changed only the algorithm statement mirror, restored that one field in a parsed comparison to verify all other data identical, and checked exact equality with the current Definition. A subsequent read confirmed that equality again.",
+    "review_context_validation": "After examining the manifest-only effect, reran the mandated read-only review-contexts command. Both hashes matched the initial completed review, confirming the same reviewed item and supplier context.",
+    "concrete_type_counterexample": "For N=2, H_1=H_2=C^2, psi=(|00>+|11>)/sqrt(2) and D_1=1, the tie rule retains the first coordinate. The remainder is a two-entry row in C tensor C^2; the returned vector is |00>/sqrt(2) in C^2 tensor C^2, a four-coordinate array. Contracting the stored first-site column with the row is essential.",
+    "published_consumer_findings": []
+  }
+}

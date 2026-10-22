@@ -1,0 +1,599 @@
+[
+  {
+    "order": 803,
+    "id": "nrqmx-magnetic-geometry",
+    "kind": "A",
+    "category": "non-relativistic-quantum-mechanics",
+    "library": "physics",
+    "title": "Uniform magnetic fields, flux topology and Pauli coupling",
+    "companion": "nrqmx-magnetic-geometry-examples",
+    "requires": [
+      "nrqmx-form-spectral-methods",
+      "nrqmx-adiabatic-holonomy",
+      "qm-math-magnetic-and-detection",
+      "qm-math-oscillator",
+      "nrqmx-operator-realizations"
+    ],
+    "items": [
+      {
+        "id": "def-nrqmx-magnetic-form-data",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Magnetic quadratic-form data",
+        "statement": "Assume Countable Choice and let $d\\ge1$ be an integer. Work in\n$H=L^2(\\mathbb R^d;\\mathbb C)$ with\n$\\langle u,v\\rangle=\\int_{\\mathbb R^d}u\\overline v$, linear in the first\nvariable, using the quotient and complex-function conventions of the linked\nEuclidean $L^2$ definitions. Fix real scalars $m>0$, $\\hbar>0$, and $q$.\nLet $A=(A_1,\\ldots,A_d)\\in C^\\infty(\\mathbb R^d;\\mathbb R^d)$ be real and\nlet $V\\in L^1_{\\mathrm{loc}}(\\mathbb R^d;\\mathbb R)$ satisfy\n$V\\ge-v_0$ almost everywhere for some finite $v_0\\ge0$. Put\n$\\mathscr D=C_c^\\infty(\\mathbb R^d;\\mathbb C)$ and, for $u\\in\\mathscr D$,\ndefine\n$$\\Pi_j^A u=-i\\hbar\\,\\partial_j u-qA_j u\\qquad (1\\le j\\le d).$$\nFor $u,v\\in\\mathscr D$ define the sesquilinear form\n$$q_{A,V}(u,v)=\\frac1{2m}\\sum_{j=1}^d\\langle\\Pi_j^A u,\\Pi_j^A v\\rangle+\\int_{\\mathbb R^d}V(x)u(x)\\overline{v(x)}\\,dx,$$\nand write $q_{A,V}[u]=q_{A,V}(u,u)$. Each integral is finite: the test\nfunctions and their magnetic derivatives are bounded with compact support,\nand $V$ is integrable on compact sets. The form is Hermitian, densely\ndefined, and bounded below by $-v_0\\|u\\|_2^2$.\n\nFor $\\varepsilon_0>0$ define its shifted form norm by\n$$\\|u\\|_{q,v_0,\\varepsilon_0}^2=q_{A,V}[u]+(v_0+\\varepsilon_0)\\|u\\|_2^2.$$\nThe form is **closable** when every sequence $(u_n)\\subset\\mathscr D$ with\n$\\|u_n\\|_2\\to0$ and\n$\\|u_n-u_m\\|_{q,v_0,\\varepsilon_0}\\to0$ as $n,m\\to\\infty$ also satisfies\n$\\|u_n\\|_{q,v_0,\\varepsilon_0}\\to0$. This condition is independent of the\nchoice of $\\varepsilon_0>0$. When it holds, the **closed form closure** is the\ncompletion of $\\mathscr D$ in this norm, identified with its $L^2$ limits;\nthe corresponding closed form is denoted $\\overline q_{A,V}$.",
+        "deps": [
+          "def-nrqm-magnetic-and-detection-position-and-momentum-operators",
+          "def-complex-lp-and-euclidean-test-function-conventions",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "def-nrqm-magnetic-and-detection-position-and-momentum-operators": "mathematical-premise",
+          "def-complex-lp-and-euclidean-test-function-conventions": "mathematical-premise",
+          "def-l-p-space-as-a-quotient-by-null-functions": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Applications of Quantum Mechanics, §1.1.1, magnetic Hamiltonian and gauge conventions",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/aqm/aqm.pdf"
+            },
+            {
+              "title": "V. P. Nair, Notes on Quantum Mechanics, §§11.3 and 13.1–13.2, Pauli and magnetic Hamiltonian conventions",
+              "url": "https://nair.ccny.cuny.edu/Notes-QM.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-nrqmx-periodic-ring-domain",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Periodic Sobolev domain for a circle",
+        "statement": "Assume the Axiom of Choice and Countable Choice. Let\n$S^1=\\mathbb R/(2\\pi\\mathbb Z)$ with angular coordinate $\\phi$, and identify\n$L^2(S^1;\\mathbb C)$ with $L^2((0,2\\pi),d\\phi;\\mathbb C)$; the omitted\nendpoint has measure zero. Let $H^2(0,2\\pi)$ be the interval Sobolev space whose elements and first two weak derivatives are in $L^2$. For $f\\in H^2(0,2\\pi)$ use the continuous endpoint representatives of $f$ and $f'$, and denote their traces by $f^*(0),f^*(2\\pi)$ and $(f')^*(0),(f')^*(2\\pi)$. Define\nthe periodic second-order domain\n$$H^2_{\\mathrm{per}}(S^1)=\\{f\\in H^2(0,2\\pi):f^*(0)=f^*(2\\pi),\\ (f')^*(0)=(f')^*(2\\pi)\\}.$$\nIt is the domain used for the periodic realization of the second derivative;\nit imposes no boundary at the angular seam beyond periodic matching.",
+        "deps": [
+          "def-nrqm-intervals-hilbert-sobolev-spaces",
+          "lem-nrqm-intervals-endpoint-trace-and-half-line-decay",
+          "def-axiom-of-choice",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "def-nrqm-intervals-hilbert-sobolev-spaces": "mathematical-premise",
+          "lem-nrqm-intervals-endpoint-trace-and-half-line-decay": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Mathematical Methods in Quantum Mechanics, 1st edition, Chapter 9, interval Sobolev domains and boundary traces",
+              "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
+            },
+            {
+              "title": "V. P. Nair, Notes on Quantum Mechanics, §13.1, particle configuration with a flux tube removed",
+              "url": "https://nair.ccny.cuny.edu/Notes-QM.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-nrqmx-magnetic-form-closability",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Closability of smooth magnetic forms with locally integrable potentials",
+        "statement": "Assume Countable Choice and Dependent Choice. Let $d,m,\\hbar,A,V,v_0$ and\n$q_{A,V}$ be the magnetic form on the test core, with $m,\\hbar>0$,\n$A\\in C^\\infty(\\mathbb R^d;\\mathbb R^d)$, $V\\in L^1_{\\mathrm{loc}}$\nreal-valued and $V\\ge-v_0$ almost everywhere. Then $q_{A,V}$ is closable on\n$C_c^\\infty(\\mathbb R^d;\\mathbb C)$ in the shifted form norm\n$\\|u\\|_{q,v_0,\\varepsilon_0}^2=q_{A,V}[u]+(v_0+\\varepsilon_0)\\|u\\|_2^2$\nfor every $\\varepsilon_0>0$. Its closure is a densely defined closed\nHermitian form bounded below by $-v_0$.",
+        "deps": [
+          "def-nrqmx-magnetic-form-data",
+          "def-nrqm-magnetic-and-detection-position-and-momentum-operators",
+          "def-countable-choice",
+          "def-dependent-choice",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-integration-by-parts-for-absolutely-continuous-functions",
+          "cor-cauchy-schwarz-inequality-for-l-two"
+        ],
+        "dependency_roles": {
+          "def-nrqmx-magnetic-form-data": "mathematical-premise",
+          "def-nrqm-magnetic-and-detection-position-and-momentum-operators": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-dependent-choice": "mathematical-premise",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces": "mathematical-premise",
+          "thm-integration-by-parts-for-absolutely-continuous-functions": "mathematical-premise",
+          "cor-cauchy-schwarz-inequality-for-l-two": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Mathematical Methods in Quantum Mechanics, 1st edition, §2.3, closed forms and Friedrichs construction",
+              "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
+            },
+            {
+              "title": "David Tong, Applications of Quantum Mechanics, §1.2, constant-field magnetic quadratic expression",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/aqm/aqm.pdf"
+            }
+          ]
+        },
+        "strategy": "direct"
+      },
+      {
+        "id": "lem-nrqmx-landau-form-diagonalization",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Closed-form diagonalization in Landau gauge",
+        "statement": "Assume Countable Choice and Dependent Choice, $m,\\hbar>0$, and real $q,B$\nwith $qB\\ne0$. On\n$L^2(\\mathbb R^2;\\mathbb C)$ close the nonnegative form\n$$q_B[u]=\\frac1{2m}\\left(\\|-i\\hbar\\partial_xu\\|_2^2+\\|(-i\\hbar\\partial_y-qBx)u\\|_2^2\\right),\\qquad u\\in C_c^\\infty(\\mathbb R^2;\\mathbb C).$$\nPut $\\omega_c=|qB|/m$,\n$E_n=\\hbar\\omega_c(n+\\tfrac12)$, and let $(\\psi_n)_{n\\ge0}$ be the\ncomplete normalized eigenfunctions of the one-dimensional oscillator with\nmass $m$, frequency $\\omega_c$, and action constant $\\hbar$ in its exact\nself-adjoint oscillator realization. For\nSchwartz $u$ define\n$\\mathcal F_yu(x,k)=(2\\pi)^{-1/2}\\int_{\\mathbb R}e^{-iky}u(x,y)\\,dy$,\nand use its unitary $L^2$ extension. Put $x_0(k)=\\hbar k/(qB)$ and\n$(Uu)(\\xi,k)=\\mathcal F_yu(\\xi+x_0(k),k)$.\nThen $U$ is unitary from $L^2(\\mathbb R^2_{x,y})$ onto\n$L^2(\\mathbb R^2_{\\xi,k})$. Writing\n$$Uu(\\xi,k)=\\sum_{n=0}^\\infty f_n(k)\\psi_n(\\xi),\\qquad f_n\\in L^2(\\mathbb R_k),$$\nthe form closure domain and value are exactly\n$$D(\\overline q_B)=\\left\\{u:\\sum_{n=0}^\\infty E_n\\|f_n\\|_{L^2(k)}^2<\\infty\\right\\},\\qquad \\overline q_B[u]=\\sum_{n=0}^\\infty E_n\\|f_n\\|_{L^2(k)}^2.$$\nThus the form is the diagonal oscillator form with an unrestricted $L^2(k)$\ndegeneracy factor; it asserts no finite-area state count.\n\n",
+        "deps": [
+          "def-nrqmx-magnetic-form-data",
+          "thm-nrqm-oscillator-oscillator-scaling-and-exact-realization",
+          "def-fourier-transform-on-l-one-of-rn",
+          "thm-plancherel",
+          "cor-fourier-transform-is-a-topological-automorphism-of-schwartz-space",
+          "lem-nrqm-composites-euclidean-l2-product-unitary",
+          "cor-c-one-change-of-variables-for-l-one-functions",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-integration-by-parts-for-absolutely-continuous-functions",
+          "def-the-standard-smooth-step-function",
+          "cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "def-countable-choice",
+          "def-dependent-choice",
+          "thm-dominated-convergence"
+        ],
+        "dependency_roles": {
+          "def-nrqmx-magnetic-form-data": "mathematical-premise",
+          "thm-nrqm-oscillator-oscillator-scaling-and-exact-realization": "mathematical-premise",
+          "def-fourier-transform-on-l-one-of-rn": "mathematical-premise",
+          "thm-plancherel": "mathematical-premise",
+          "cor-fourier-transform-is-a-topological-automorphism-of-schwartz-space": "mathematical-premise",
+          "lem-nrqm-composites-euclidean-l2-product-unitary": "mathematical-premise",
+          "cor-c-one-change-of-variables-for-l-one-functions": "mathematical-premise",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces": "mathematical-premise",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces": "mathematical-premise",
+          "thm-integration-by-parts-for-absolutely-continuous-functions": "mathematical-premise",
+          "def-the-standard-smooth-step-function": "mathematical-premise",
+          "cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn": "mathematical-premise",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-dependent-choice": "mathematical-premise",
+          "thm-dominated-convergence": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Applications of Quantum Mechanics, §1.2, Landau gauge and oscillator fibers",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/aqm/aqm.pdf"
+            },
+            {
+              "title": "Aram Harrow, MIT 8.06 Spring 2016 Lecture Notes, Chapter 4, §§3.1–3.2",
+              "url": "https://ocw.mit.edu/courses/8-06-quantum-physics-iii-spring-2016/6e02558ecf4b7af37d2cdff550fc0f71_MIT8_06S16_chap4.pdf"
+            },
+            {
+              "title": "V. P. Nair, Notes on Quantum Mechanics, §13.2",
+              "url": "https://nair.ccny.cuny.edu/Notes-QM.pdf"
+            }
+          ]
+        },
+        "strategy": "direct"
+      },
+      {
+        "id": "thm-nrqmx-periodic-flux-spectrum",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Spectrum and gauge periodicity of a periodic flux operator",
+        "statement": "Assume the Axiom of Choice, Countable Choice, and Dependent Choice. Let\n$\\kappa>0$ and $\\alpha\\in\\mathbb R$. On\n$H=L^2(S^1;\\mathbb C)=L^2((0,2\\pi),d\\phi;\\mathbb C)$ use the periodic domain\n$H^2_{\\mathrm{per}}(S^1)$ defined by periodic endpoint traces and define\n$$T_\\alpha f=\\kappa(-i\\partial_\\phi-\\alpha)^2f,\\qquad D(T_\\alpha)=H^2_{\\mathrm{per}}(S^1).$$\nThen $T_\\alpha$ is self-adjoint and the normalized characters\n$e_n(\\phi)=(2\\pi)^{-1/2}e^{in\\phi}$, $n\\in\\mathbb Z$, form a complete\northonormal eigenbasis with eigenvalues $\\lambda_n=\\kappa(n-\\alpha)^2$.\nIts spectrum is the closed set $\\{\\lambda_n:n\\in\\mathbb Z\\}$ and its\nspectral measures are purely atomic on that set. For every $j\\in\\mathbb Z$,\nmultiplication by $e^{ij\\phi}$ unitarily intertwines $T_\\alpha$ with\n$T_{\\alpha+j}$. A smooth periodic unit-modulus function $u$ satisfying\n$u^{-1}(-i\\partial_\\phi-\\alpha)u=-i\\partial_\\phi$ exists exactly when\n$\\alpha\\in\\mathbb Z$.",
+        "deps": [
+          "def-nrqmx-periodic-ring-domain",
+          "thm-nrqmx-interval-unitary-boundaries",
+          "lem-nrqm-intervals-integration-by-parts",
+          "def-fourier-coefficients-and-trigonometric-polynomials",
+          "thm-trigonometric-system-is-complete-in-l-two-of-the-torus",
+          "thm-kato-rellich",
+          "def-relative-boundedness-with-respect-to-an-operator",
+          "thm-spectral-theorem-for-unbounded-self-adjoint-operators",
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-dependent-choice"
+        ],
+        "dependency_roles": {
+          "def-nrqmx-periodic-ring-domain": "mathematical-premise",
+          "thm-nrqmx-interval-unitary-boundaries": "mathematical-premise",
+          "lem-nrqm-intervals-integration-by-parts": "mathematical-premise",
+          "def-fourier-coefficients-and-trigonometric-polynomials": "mathematical-premise",
+          "thm-trigonometric-system-is-complete-in-l-two-of-the-torus": "mathematical-premise",
+          "thm-kato-rellich": "mathematical-premise",
+          "def-relative-boundedness-with-respect-to-an-operator": "mathematical-premise",
+          "thm-spectral-theorem-for-unbounded-self-adjoint-operators": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-dependent-choice": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "dependency_level": 3,
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Applications of Quantum Mechanics, §1.3.1, particle on a ring around a flux tube",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/aqm/aqm.pdf"
+            },
+            {
+              "title": "V. P. Nair, Notes on Quantum Mechanics, §13.1, Aharonov–Bohm flux and phase",
+              "url": "https://nair.ccny.cuny.edu/Notes-QM.pdf"
+            }
+          ]
+        },
+        "strategy": "direct"
+      },
+      {
+        "id": "lem-nrqmx-landau-3d-form-diagonalization",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Closed-form diagonalization with free longitudinal motion",
+        "statement": "Assume Countable Choice and Dependent Choice, $m,\\hbar>0$, and real $q,B$\nwith $qB\\ne0$. Let\n$c=\\hbar^2/(2m)$, $\\omega_c=|qB|/m$, and\n$E_n=\\hbar\\omega_c(n+\\tfrac12)$ for $n\\in\\mathbb N_0$. On\n$L^2(\\mathbb R^3_{x,y,z};\\mathbb C)$ close the nonnegative form\n$$q^{(3)}_B[u]=\\frac1{2m}\\left(\\|-i\\hbar\\partial_xu\\|_2^2+\\|(-i\\hbar\\partial_y-qBx)u\\|_2^2+\\|-i\\hbar\\partial_zu\\|_2^2\\right),\\qquad u\\in C_c^\\infty(\\mathbb R^3;\\mathbb C).$$\nUse the wave-number Fourier convention\n$$\\mathcal F_yg(k_y)=(2\\pi)^{-1/2}\\int e^{-ik_yy}g(y)\\,dy,\\qquad \\mathcal F_zg(k_z)=(2\\pi)^{-1/2}\\int e^{-ik_zz}g(z)\\,dz.$$\nand set\n$$U_3u(\\xi,k_y,k_z)=\\mathcal F_z\\!\\left[\\mathcal F_yu\\!\\left(\\xi+\\frac{\\hbar k_y}{qB},k_y,z\\right)\\right](k_z).$$\nThen $U_3$ extends to a unitary map onto\n$L^2(\\mathbb R^2_{k_y,k_z};\\ell^2(\\mathbb N_0))$ by expansion in the\ncomplete transverse oscillator basis $\\psi_n(\\xi)$. If\n$$U_3u(\\xi,k_y,k_z)=\\sum_{n=0}^\\infty f_n(k_y,k_z)\\psi_n(\\xi),$$\nthe form closure domain and value are exactly\n$$D(\\overline q^{(3)}_B)=\\left\\{u:\\sum_{n=0}^\\infty\\int_{\\mathbb R^2}\\left(E_n+ck_z^2\\right)|f_n(k_y,k_z)|^2\\,dk_y\\,dk_z<\\infty\\right\\},$$\n$$\\overline q^{(3)}_B[u]=\\sum_{n=0}^\\infty\\int_{\\mathbb R^2}\\left(E_n+ck_z^2\\right)|f_n(k_y,k_z)|^2\\,dk_y\\,dk_z.$$\n\n",
+        "deps": [
+          "lem-nrqmx-landau-form-diagonalization",
+          "def-nrqmx-magnetic-form-data",
+          "def-fourier-transform-on-l-one-of-rn",
+          "thm-plancherel",
+          "cor-fourier-transform-is-a-topological-automorphism-of-schwartz-space",
+          "lem-nrqm-composites-euclidean-l2-product-unitary",
+          "cor-c-one-change-of-variables-for-l-one-functions",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-integration-by-parts-for-absolutely-continuous-functions",
+          "cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn",
+          "def-the-standard-smooth-step-function",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "thm-nrqm-oscillator-oscillator-scaling-and-exact-realization",
+          "thm-dominated-convergence",
+          "def-countable-choice",
+          "def-dependent-choice"
+        ],
+        "dependency_roles": {
+          "lem-nrqmx-landau-form-diagonalization": "mathematical-premise",
+          "def-nrqmx-magnetic-form-data": "mathematical-premise",
+          "def-fourier-transform-on-l-one-of-rn": "mathematical-premise",
+          "thm-plancherel": "mathematical-premise",
+          "cor-fourier-transform-is-a-topological-automorphism-of-schwartz-space": "mathematical-premise",
+          "lem-nrqm-composites-euclidean-l2-product-unitary": "mathematical-premise",
+          "cor-c-one-change-of-variables-for-l-one-functions": "mathematical-premise",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces": "mathematical-premise",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces": "mathematical-premise",
+          "thm-integration-by-parts-for-absolutely-continuous-functions": "mathematical-premise",
+          "cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn": "mathematical-premise",
+          "def-the-standard-smooth-step-function": "mathematical-premise",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space": "mathematical-premise",
+          "thm-nrqm-oscillator-oscillator-scaling-and-exact-realization": "mathematical-premise",
+          "thm-dominated-convergence": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-dependent-choice": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Applications of Quantum Mechanics, §1.2, Landau levels with longitudinal momentum",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/aqm/aqm.pdf"
+            },
+            {
+              "title": "V. P. Nair, Notes on Quantum Mechanics, §13.2, longitudinal momentum bands",
+              "url": "https://nair.ccny.cuny.edu/Notes-QM.pdf"
+            },
+            {
+              "title": "Aram Harrow, MIT 8.06 Spring 2016 Lecture Notes, Chapter 4, §§3.1–3.2",
+              "url": "https://ocw.mit.edu/courses/8-06-quantum-physics-iii-spring-2016/6e02558ecf4b7af37d2cdff550fc0f71_MIT8_06S16_chap4.pdf"
+            }
+          ]
+        },
+        "strategy": "direct"
+      },
+      {
+        "id": "post-nrqmx-magnetic-model-extension",
+        "kind": "postulate",
+        "domain": "physics",
+        "title": "Unbounded vector potential and effective Pauli model",
+        "statement": "Use SI units with mass $m>0$ in kilograms, charge $q\\in\\mathbb R$ in\ncoulombs, action constant $\\hbar>0$ in joule-seconds, vector-potential\ncomponents $A_j$ in tesla-metres, and scalar potential-energy function $V$ in\njoules. For each integer $d\\ge1$, let $A\\in C^\\infty(\\mathbb R^d;\\mathbb R^d)$\nbe real and let $V\\in L^1_{\\mathrm{loc}}(\\mathbb R^d;\\mathbb R)$ be bounded\nbelow. Adopt the general-dimensional minimal-coupling assignment whose core\nform is\n$$q_{A,V}[u]=\\frac1{2m}\\sum_{j=1}^d\\|(-i\\hbar\\partial_j-qA_j)u\\|_2^2+\\int_{\\mathbb R^d}V|u|^2,\\qquad u\\in C_c^\\infty(\\mathbb R^d;\\mathbb C).$$\nUse its closed form closure and the unique self-adjoint representing\nHamiltonian. For dimensional form norms use the fixed reference energy\n$E_0=1\\,\\mathrm J$: apply the closed-form representation to\n$q_{A,V}/E_0$ and multiply the representing operator by $E_0$.\n\nThe magnetic-field notation is dimension-specific. In $d=2$, with coordinates\n$(x,y)$ and $A=(A_x,A_y)$, define the scalar perpendicular field\n$$B_\\perp(x,y)=\\partial_xA_y(x,y)-\\partial_yA_x(x,y),$$\nin teslas. Thus $A=(0,Bx)$ gives $B_\\perp=B$ for a constant signed scalar\n$B$. In $d=3$, for coordinates $(x,y,z)$ and $A=(A_x,A_y,A_z)$, define the\nfield vector $\\mathbf B:\\mathbb R^3\\to\\mathbb R^3$ in teslas by\n$$\\mathbf B=(\\partial_yA_z-\\partial_zA_y,\\ \\partial_zA_x-\\partial_xA_z,\\ \\partial_xA_y-\\partial_yA_x)=\\nabla\\times A.$$\nNo magnetic-field object is assigned by this notation in $d=1$.\n\nFor an optional spin-half degree of freedom in three dimensions, define\n$$\\sigma_1=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix},\\quad \\sigma_2=\\begin{pmatrix}0&-i\\\\i&0\\end{pmatrix},\\quad \\sigma_3=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix},\\qquad S_j=\\frac{\\hbar}{2}\\sigma_j.$$\nFor a core spinor $u=(u_1,u_2)\\in C_c^\\infty(\\mathbb R^3;\\mathbb C^2)$,\ndefine the spin-independent form\n$$q^{(2)}_{A,V}[u]=q_{A,V}[u_1]+q_{A,V}[u_2].$$\nFor a declared dimensionless real coupling $g$, adopt the effective Pauli core\nform\n$$q^{\\mathrm P}_{A,V,g}[u]=q^{(2)}_{A,V}[u]-\\frac{gq}{2m}\\int_{\\mathbb R^3}u(x)^*(S\\cdot\\mathbf B(x))u(x)\\,dx,$$\nwhere $u^*$ is conjugate transpose and\n$(S\\cdot\\mathbf B)(x)=\\sum_{j=1}^3S_jB_j(x)$ for the three-dimensional\nfield vector just defined.\nInclude this term only in model instances where the resulting form is\nclosable and bounded below, and use its closed form closure and representing\nHamiltonian. No universal semiboundedness for arbitrary $A,V,g$ is asserted.\n\n",
+        "deps": [
+          "def-nrqmx-magnetic-form-data",
+          "lem-nrqmx-magnetic-form-closability",
+          "thm-nrqmx-closed-form-representation"
+        ],
+        "dependency_roles": {
+          "def-nrqmx-magnetic-form-data": "formulation-prerequisite",
+          "lem-nrqmx-magnetic-form-closability": "mathematical-premise",
+          "thm-nrqmx-closed-form-representation": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Applications of Quantum Mechanics, §§1.1.1 and 1.5, minimal coupling and spin in a magnetic field",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/aqm/aqm.pdf"
+            },
+            {
+              "title": "V. P. Nair, Notes on Quantum Mechanics, §§11.2–11.3, spin magnetic moment and Pauli equation",
+              "url": "https://nair.ccny.cuny.edu/Notes-QM.pdf"
+            },
+            {
+              "title": "Aram Harrow, MIT 8.06 Spring 2016 Lecture Notes, Chapter 4, §3.1, charged-particle Hamiltonian",
+              "url": "https://ocw.mit.edu/courses/8-06-quantum-physics-iii-spring-2016/6e02558ecf4b7af37d2cdff550fc0f71_MIT8_06S16_chap4.pdf"
+            }
+          ]
+        },
+        "physical_scope": "A nonrelativistic point-particle model with a static smooth external vector potential and locally integrable lower-bounded scalar potential on Euclidean R^d, d >= 1, in SI units. The planar field is the scalar perpendicular component and the three-dimensional field is the curl vector. The optional spin-half Pauli coupling is a three-dimensional effective model term only when its form is closable and semibounded; no measured g-factor or relativistic correction is asserted."
+      },
+      {
+        "id": "pthm-nrqmx-landau-direct-integral",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Exact planar Landau spectrum in the linear gauge",
+        "statement": "Assume the Axiom of Choice, Countable Choice, and Dependent Choice, and\nthe adopted spinless minimal-coupling form model. Let $m>0$ be mass in kilograms,\n$q\\ne0$ charge in coulombs, $B\\ne0$ the constant signed perpendicular\nfield component in teslas, and $\\hbar>0$ in joule-seconds. Let\n$A:\\mathbb R^2\\to\\mathbb R^2$ be $A(x,y)=(0,Bx)$ in tesla-metres; then\n$B_\\perp=\\partial_xA_y-\\partial_yA_x=B$ is its scalar perpendicular field.\nTake wavefunctions in $L^2(\\mathbb R^2;\\mathbb C)$. Set $V=0$ and define the Hamiltonian by the\nclosed form of the core expression\n$$q_B[u]=\\frac1{2m}\\left(\\|-i\\hbar\\partial_xu\\|_2^2+\\|(-i\\hbar\\partial_y-qBx)u\\|_2^2\\right),\\qquad u\\in C_c^\\infty(\\mathbb R^2;\\mathbb C).$$\nThe resulting Friedrichs Hamiltonian is unitarily equivalent, under partial\nFourier transformation in $y$ followed by\n$x=\\xi+\\hbar k/(qB)$, to the constant family of oscillators\n$$h(k)=-\\frac{\\hbar^2}{2m}\\partial_\\xi^2+\\frac{(qB\\xi)^2}{2m},\\qquad k\\in\\mathbb R,$$\nwith its form-closed realization. Its spectrum is\n$$\\left\\{\\frac{\\hbar|qB|}{m}\\left(n+\\frac12\\right):n\\in\\mathbb N_0\\right\\}.$$\nEvery listed eigenvalue has infinite multiplicity, and every spectral measure\nis purely atomic on this set; there is no continuous spectral measure. This is\na conditional model deduction, not a claim that a material realizes the\nideal infinite-plane Hamiltonian.\n\n",
+        "deps": [
+          "post-nrqmx-magnetic-model-extension",
+          "lem-nrqmx-landau-form-diagonalization",
+          "thm-nrqmx-closed-form-representation",
+          "thm-nrqm-oscillator-oscillator-scaling-and-exact-realization",
+          "thm-spectral-theorem-for-unbounded-self-adjoint-operators",
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-dependent-choice"
+        ],
+        "dependency_roles": {
+          "post-nrqmx-magnetic-model-extension": "physical-assumption",
+          "lem-nrqmx-landau-form-diagonalization": "mathematical-premise",
+          "thm-nrqmx-closed-form-representation": "mathematical-premise",
+          "thm-nrqm-oscillator-oscillator-scaling-and-exact-realization": "mathematical-premise",
+          "thm-spectral-theorem-for-unbounded-self-adjoint-operators": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-dependent-choice": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "dependency_level": 3,
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Applications of Quantum Mechanics, §1.2, Landau gauge and Landau levels",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/aqm/aqm.pdf"
+            },
+            {
+              "title": "V. P. Nair, Notes on Quantum Mechanics, §13.2, uniform-field Landau levels",
+              "url": "https://nair.ccny.cuny.edu/Notes-QM.pdf"
+            },
+            {
+              "title": "Aram Harrow, MIT 8.06 Spring 2016 Lecture Notes, Chapter 4, §3.2, Landau levels",
+              "url": "https://ocw.mit.edu/courses/8-06-quantum-physics-iii-spring-2016/6e02558ecf4b7af37d2cdff550fc0f71_MIT8_06S16_chap4.pdf"
+            }
+          ]
+        },
+        "strategy": "direct",
+        "physical_scope": "Exact spectral prediction of the adopted spinless nonrelativistic point-particle model on the infinite plane, for a constant nonzero perpendicular field in the unbounded linear Landau gauge. It makes no finite-sample degeneracy count, boundary claim, or empirical assertion."
+      },
+      {
+        "id": "pthm-nrqmx-flux-ring-spectrum",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Aharonov–Bohm ring spectrum and flux periodicity",
+        "statement": "Adopt the static ring model of a spinless particle of mass $m>0$ kilograms\nand charge $q\\ne0$ coulombs constrained to a circle of radius $R>0$ metres.\nUse $\\hbar>0$ in joule-seconds, flux $\\Phi$ in webers, and energies in joules.\nThe angular coordinate is $\\phi\\in\\mathbb R/(2\\pi\\mathbb Z)$; the\nsingle-valued wavefunction belongs to the periodic domain\n$H^2_{\\mathrm{per}}(S^1)$; the scalar potential is zero; and a static\ntangential vector potential $A_\\phi=\\Phi/(2\\pi R)$ has circulation\n$\\oint A\\cdot d\\ell=\\Phi$, where $\\Phi$ is flux in webers. Under the SI\nminimal-coupling assignment, the Hamiltonian is\n$$H_\\Phi=\\frac{\\hbar^2}{2mR^2}\\left(-i\\partial_\\phi-\\alpha\\right)^2,\\qquad \\alpha=\\frac{q\\Phi}{2\\pi\\hbar},$$\non that periodic domain. Its energies are\n$$E_n(\\Phi)=\\frac{\\hbar^2}{2mR^2}(n-\\alpha)^2,\\qquad n\\in\\mathbb Z,$$\nwith a complete periodic Fourier eigenbasis. For every $j\\in\\mathbb Z$,\n$\\Phi\\mapsto\\Phi+2\\pi\\hbar j/q$ gives a unitarily equivalent Hamiltonian;\na noninteger $\\alpha$ cannot be removed by a single-valued periodic gauge\nphase. These are conditional deductions of the ideal ring model.",
+        "deps": [
+          "post-nrqmx-magnetic-model-extension",
+          "def-nrqmx-periodic-ring-domain",
+          "thm-nrqmx-periodic-flux-spectrum",
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-dependent-choice"
+        ],
+        "dependency_roles": {
+          "post-nrqmx-magnetic-model-extension": "physical-assumption",
+          "def-nrqmx-periodic-ring-domain": "mathematical-premise",
+          "thm-nrqmx-periodic-flux-spectrum": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-dependent-choice": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "dependency_level": 4,
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Applications of Quantum Mechanics, §1.3.1, the flux-threaded ring",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/aqm/aqm.pdf"
+            },
+            {
+              "title": "V. P. Nair, Notes on Quantum Mechanics, §13.1, flux and the Aharonov–Bohm phase",
+              "url": "https://nair.ccny.cuny.edu/Notes-QM.pdf"
+            },
+            {
+              "title": "Aram Harrow, MIT 8.06 Spring 2016 Lecture Notes, Chapter 4, §3.5, Aharonov–Bohm effect",
+              "url": "https://ocw.mit.edu/courses/8-06-quantum-physics-iii-spring-2016/6e02558ecf4b7af37d2cdff550fc0f71_MIT8_06S16_chap4.pdf"
+            }
+          ]
+        },
+        "strategy": "direct",
+        "physical_scope": "Exact spectrum of an ideal spinless particle constrained to a zero-width circle with static enclosed magnetic flux and periodic wavefunctions. Finite-width rings, interactions, apparatus, and experimental identification are outside scope."
+      },
+      {
+        "id": "pthm-nrqmx-pauli-square-identity",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Pauli square identity and the formal g=2 coupling",
+        "statement": "Let $m>0$ be mass in kilograms, $q\\in\\mathbb R$ charge in coulombs,\n$\\hbar>0$ in joule-seconds, and let $A\\in C^\\infty(\\mathbb R^3;\\mathbb R^3)$\nbe a real SI vector potential in tesla-metres, with $B=\\nabla\\times A$ in\nteslas. On the two-component\ncore $C_c^\\infty(\\mathbb R^3;\\mathbb C^2)$ define\n$\\Pi_j=-i\\hbar\\partial_j-qA_j$. With the\nspin-half matrices and $S_j=\\hbar\\sigma_j/2$ fixed in the effective Pauli\nmodel, the following identity holds on that core:\n$$\\left(\\sum_{j=1}^3\\sigma_j\\Pi_j\\right)^2=\\sum_{j=1}^3\\Pi_j^2-q\\hbar\\sum_{j=1}^3\\sigma_j B_j.$$\nConsequently the quadratic Pauli expression\n$\\frac1{2m}(\\sum_j\\sigma_j\\Pi_j)^2$ equals the minimally coupled kinetic\nexpression plus the spin term $-\\frac{q}{m}S\\cdot B$, which is the formal\neffective Pauli coupling at $g=2$. This is a core identity only; it makes no\nclaim about closed operator domains or the measured magnetic moment of an\nelectron.",
+        "deps": [
+          "post-nrqmx-magnetic-model-extension",
+          "def-nrqmx-magnetic-form-data",
+          "def-divergence-and-curl-of-a-c1-vector-field",
+          "thm-algebra-of-derivatives"
+        ],
+        "dependency_roles": {
+          "post-nrqmx-magnetic-model-extension": "physical-assumption",
+          "def-nrqmx-magnetic-form-data": "mathematical-premise",
+          "def-divergence-and-curl-of-a-c1-vector-field": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "dependency_level": 3,
+        "sources": {
+          "references": [
+            {
+              "title": "V. P. Nair, Notes on Quantum Mechanics, §11.3, Pauli equation and commutator expansion",
+              "url": "https://nair.ccny.cuny.edu/Notes-QM.pdf"
+            },
+            {
+              "title": "David Tong, Applications of Quantum Mechanics, §1.5.2, spin and Zeeman coupling",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/aqm/aqm.pdf"
+            }
+          ]
+        },
+        "strategy": "direct",
+        "physical_scope": "Formal differential-operator identity on compactly supported two-component spinors for a smooth static SI vector potential in three-dimensional nonrelativistic Pauli-model kinematics. It asserts neither a closed-domain identity nor a measured particle g-factor."
+      }
+    ]
+  },
+  {
+    "order": 804,
+    "id": "nrqmx-magnetic-geometry-examples",
+    "kind": "B",
+    "category": "non-relativistic-quantum-mechanics",
+    "library": "physics",
+    "title": "Uniform magnetic fields, flux topology and Pauli coupling — Examples",
+    "companion": "nrqmx-magnetic-geometry",
+    "requires": [
+      "nrqmx-magnetic-geometry"
+    ],
+    "items": [
+      {
+        "id": "ex-nrqmx-landau-3d-continuum",
+        "kind": "example",
+        "domain": "physics",
+        "title": "Longitudinal free motion turns Landau levels into bands",
+        "statement": "Assume the Axiom of Choice, Countable Choice, and Dependent Choice. For the\nadopted spinless model on $L^2(\\mathbb R^3;\\mathbb C)$, take mass\n$m>0$ kilograms, charge $q\\ne0$ coulombs, and the constant field vector\n$\\mathbf B=(0,0,B)$ teslas with signed component $B\\ne0$. Let\n$A(x,y,z)=(0,Bx,0)$ in tesla-metres, so $\\nabla\\times A=\\mathbf B$;\ntake zero scalar potential and free motion along $z$. The closed Hamiltonian has bands\n$$E_n+\\frac{\\hbar^2k_z^2}{2m},\\qquad E_n=\\frac{\\hbar|qB|}{m}\\left(n+\\frac12\\right),\\quad n\\in\\mathbb N_0,$$\nwhere $k_z$ is a wave number in inverse metres and each $E_n$ is an energy\nin joules. Its spectrum is the absolutely continuous half-line\n$$\\left[\\frac{\\hbar|qB|}{2m},\\infty\\right).$$\n\n",
+        "deps": [
+          "pthm-nrqmx-landau-direct-integral",
+          "lem-nrqmx-landau-3d-form-diagonalization",
+          "thm-nrqmx-closed-form-representation",
+          "thm-spectral-theorem-for-unbounded-self-adjoint-operators",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "cor-c-one-change-of-variables-for-l-one-functions",
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-dependent-choice",
+          "post-nrqmx-magnetic-model-extension"
+        ],
+        "dependency_roles": {
+          "pthm-nrqmx-landau-direct-integral": "physical-result",
+          "lem-nrqmx-landau-3d-form-diagonalization": "mathematical-premise",
+          "thm-nrqmx-closed-form-representation": "mathematical-premise",
+          "thm-spectral-theorem-for-unbounded-self-adjoint-operators": "mathematical-premise",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces": "mathematical-premise",
+          "cor-c-one-change-of-variables-for-l-one-functions": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-dependent-choice": "mathematical-premise",
+          "post-nrqmx-magnetic-model-extension": "physical-assumption"
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "dependency_level": 4,
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Applications of Quantum Mechanics, §1.2, Landau levels with longitudinal momentum",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/aqm/aqm.pdf"
+            },
+            {
+              "title": "V. P. Nair, Notes on Quantum Mechanics, §13.2, longitudinal momentum bands",
+              "url": "https://nair.ccny.cuny.edu/Notes-QM.pdf"
+            },
+            {
+              "title": "Aram Harrow, MIT 8.06 Spring 2016 Lecture Notes, Chapter 4, §3.2, free longitudinal degree of freedom",
+              "url": "https://ocw.mit.edu/courses/8-06-quantum-physics-iii-spring-2016/6e02558ecf4b7af37d2cdff550fc0f71_MIT8_06S16_chap4.pdf"
+            }
+          ]
+        },
+        "strategy": "direct",
+        "physical_scope": "The exact absolutely continuous spectrum of the same ideal spinless point-particle model on R^3 with a constant perpendicular field and free motion in the field direction. No finite sample, material, or empirical claim is included."
+      },
+      {
+        "id": "ex-nrqmx-flux-half-crossing",
+        "kind": "example",
+        "domain": "physics",
+        "title": "Half-flux ground-state crossing on the ring",
+        "statement": "In the ideal spinless ring model, at dimensionless flux\n$\\alpha=q\\Phi/(2\\pi\\hbar)=1/2$ the ground energy is twofold degenerate at\nthe Fourier labels $n=0$ and $n=1$. At $\\alpha=0$ the ground state is unique\nat $n=0$. The scale $\\kappa=\\hbar^2/(2mR^2)$ is in joules and $\\alpha$ is\ndimensionless.",
+        "deps": [
+          "pthm-nrqmx-flux-ring-spectrum",
+          "thm-nrqmx-periodic-flux-spectrum",
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-dependent-choice"
+        ],
+        "dependency_roles": {
+          "pthm-nrqmx-flux-ring-spectrum": "physical-result",
+          "thm-nrqmx-periodic-flux-spectrum": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-dependent-choice": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "dependency_level": 5,
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Applications of Quantum Mechanics, §1.3.1, flux-shifted ring spectrum",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/aqm/aqm.pdf"
+            },
+            {
+              "title": "V. P. Nair, Notes on Quantum Mechanics, §13.1, flux-dependent Aharonov–Bohm phase",
+              "url": "https://nair.ccny.cuny.edu/Notes-QM.pdf"
+            }
+          ]
+        },
+        "strategy": "direct",
+        "physical_scope": "Exact level comparison in the ideal spinless ring model with periodic wavefunctions. It does not include spin, finite-width effects, disorder, or an experimental measurement."
+      }
+    ]
+  }
+]

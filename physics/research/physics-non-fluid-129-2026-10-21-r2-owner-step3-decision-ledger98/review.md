@@ -1,0 +1,13 @@
+# Batch98 decision/ledger classification proposal
+
+Recommend `reviewed_no_defect` with `change_kind: audit_enrichment` for all four invalid repair-token rows; retain empty defect IDs. The fifth interval-certificate decision already has this classification and is unchanged. Native Alpha explicitly found no mathematical defect and called the new finite factorization immediate polish; the verdict tokens alone conflict with that substantive disposition.
+
+All four archived pre-reader raw carriers match their native pre hashes. Three current carriers equal their native post hashes. Restoring exactly the two interval-algorithm inline links reproduces its post-reader hash; this reconstruction is saved with that explicit label, and native Alpha log records those exact removals. Exact before/after decision rows and pre/post/current source deltas are in proposal.json.
+
+The old interval algorithm already supplies rational enclosures and converts their endpoints before dyadic arithmetic; new ordering/maps explain the existing inputs. The old bridge algorithm already requires exact IID stage draws and mutual independence across stages. The old Example already uses finite positive product laws and its Verification expands their product masses. The old bridge proof already invokes independence for both finite moment factorizations, and the longer block-sum expansion makes routine finite distributivity explicit. These are not established counterexamples or absent substantive hypotheses. This classification preserves the reader observations rather than silently relabeling a confirmed defect.
+
+The actual run remains `physics-six-step-v1-construction-scope`, with no statement-first marker. WORKFLOW and readStatementPolicy preserve that policy. The interval inline-link cleanup is nonsemantic editorial enrichment here; applying the fresh-run hyperlink prohibition would invent a format defect. No editorial migration is proposed.
+
+No existing ledger row mentions any of the four IDs, including evidence text. No append is proposed solely to legitimize repair verdict tokens. The complete-ledger snapshot prefix is guarded. Reader and refuter arrays are empty; native Alpha completed successfully. This proposal does not itself grant new proof acceptance.
+
+Root owns original-record preservation, application of the four exact classification updates, an attributed report clarification, and any normal hash refresh. Production sources, decisions, ledger, controller state and tools are untouched. No gates were run. Static inspection confirms the projected five rows meet the clean-change predicates with exact obligation coverage; it is not a claimed native gate result.

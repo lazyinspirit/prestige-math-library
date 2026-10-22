@@ -1,0 +1,377 @@
+[
+  {
+    "order": 775,
+    "id": "gr-fx11-numerical-geometry-and-constraint-monitoring",
+    "kind": "A",
+    "category": "general-relativity",
+    "library": "physics",
+    "title": "Numerical geometry and constraint monitoring",
+    "companion": "gr-fx11-numerical-geometry-and-constraint-monitoring-examples",
+    "requires": [
+      "gr-fx03-geometric-cauchy-stability",
+      "gr-fx02-conformal-constraint-construction",
+      "gr-gr14-full-high-regularity-symmetric-hyperbolic-proof"
+    ],
+    "items": [
+      {
+        "id": "alg-gr-fx-periodic-wave-leapfrog",
+        "kind": "algorithm",
+        "domain": "mathematics",
+        "title": "A finite periodic scalar-wave benchmark",
+        "reference": "research/frontier-expansion-2026-10-19/general-relativity/prose-scaffold.md#numerical-geometry-and-constraint-monitoring",
+        "design_state": "draft-research",
+        "dependency_level": 1,
+        "deps": [
+          "def-gr-fx-fixed-gauge-data-topology"
+        ],
+        "dependency_roles": {
+          "def-gr-fx-fixed-gauge-data-topology": "mathematical-premise"
+        },
+        "justified_by": [],
+        "forward_refs": [],
+        "physical_scope": "A nondimensionalized, one-dimensional scalar wave benchmark on a periodic grid. It is not an Einstein evolution system, a production numerical-relativity solver, or an empirical model.",
+        "statement": "Use the first circle factor of the fixed periodic three-torus from the earlier\nfixed-gauge data definition. This item is a separate nondimensionalized scalar\nmodel: both the spatial coordinate $x$ and time $t$ are dimensionless, the\nperiod is $2\\pi$, and the model wave speed is $1$. Let $N\\ge3$ be an integer,\n$h:=2\\pi/N$, and $x_j:=jh\\pmod{2\\pi}$ for $j\\in\\mathbb Z/N\\mathbb Z$. A\nperiodic grid function is an $N$-tuple $u=(u_j)_{j\\in\\mathbb Z/N\\mathbb Z}$ of\nreal numbers. Define the centered periodic second-difference operator\n$$\n(D_hu)_j:=\\frac{u_{j+1}-2u_j+u_{j-1}}{h^2},\n$$\nwhere subscripts are reduced modulo $N$.\n\nThe algorithm takes as input such arrays $u^0,v^0$, a real time step $k>0$,\nand an integer $n_{\\max}\\ge1$. It sets\n$$\nu^1:=u^0+kv^0+\\frac{k^2}{2}D_hu^0,\n$$\nthen, for each integer $n=1,\\ldots,n_{\\max}-1$, computes\n$$\nu^{n+1}_j:=2u^n_j-u^{n-1}_j+k^2(D_hu^n)_j \\qquad(j\\in\\mathbb Z/N\\mathbb Z).\n$$\nIt outputs $(u^0,u^1,\\ldots,u^{n_{\\max}})$. All operations here are exact real\narithmetic. No rounding-error model or claim about a floating-point\nimplementation is part of the definition.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gilbert Strang, Mathematical Methods for Engineers II, MIT OpenCourseWare 18.086, Spring 2006, §5.3, complete 11-page lecture note",
+              "url": "https://ocw.mit.edu/courses/18-086-mathematical-methods-for-engineers-ii-spring-2006/8eaa23367474c809cc0816f24fdacc7f_am53.pdf"
+            },
+            {
+              "title": "Lloyd N. Trefethen, Finite Difference and Spectral Methods for Ordinary and Partial Differential Equations, unpublished text (1996), Chapter 3, complete 37-page author PDF",
+              "url": "https://people.maths.ox.ac.uk/trefethen/3all.pdf"
+            },
+            {
+              "title": "Lloyd N. Trefethen, Finite Difference and Spectral Methods for Ordinary and Partial Differential Equations, unpublished text (1996), Chapter 4, complete 40-page author PDF",
+              "url": "https://people.maths.ox.ac.uk/trefethen/4all.pdf"
+            }
+          ]
+        },
+        "library": "physics",
+        "empirical_premises": []
+      },
+      {
+        "id": "prop-gr-fx-leapfrog-termination",
+        "kind": "proposition",
+        "domain": "mathematics",
+        "title": "Termination and operation count of the periodic wave benchmark",
+        "reference": "research/frontier-expansion-2026-10-19/general-relativity/prose-scaffold.md#numerical-geometry-and-constraint-monitoring",
+        "design_state": "draft-research",
+        "dependency_level": 2,
+        "deps": [
+          "alg-gr-fx-periodic-wave-leapfrog"
+        ],
+        "dependency_roles": {
+          "alg-gr-fx-periodic-wave-leapfrog": "mathematical-premise"
+        },
+        "justified_by": [],
+        "forward_refs": [],
+        "physical_scope": "A finite exact-arithmetic property of the one-dimensional scalar benchmark; it asserts no numerical-relativity solver performance or physical observation.",
+        "statement": "For every admissible integer $N\\ge3$, time-step count $n_{\\max}\\ge1$, real\nstep $k>0$, and pair of real periodic input arrays, the algorithm terminates\nafter exactly $n_{\\max}-1$ update passes and outputs all levels through\n$u^{n_{\\max}}$. In the unit-cost exact-real-arithmetic model, where each scalar\narithmetic operation and each array read or write has bounded cost independent\nof $N$ and $n_{\\max}$, its operation count is $O(Nn_{\\max})$.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gilbert Strang, Mathematical Methods for Engineers II, MIT OpenCourseWare 18.086, Spring 2006, §5.3, complete 11-page lecture note",
+              "url": "https://ocw.mit.edu/courses/18-086-mathematical-methods-for-engineers-ii-spring-2006/8eaa23367474c809cc0816f24fdacc7f_am53.pdf"
+            },
+            {
+              "title": "Lloyd N. Trefethen, Finite Difference and Spectral Methods for Ordinary and Partial Differential Equations, unpublished text (1996), Chapter 3, complete 37-page author PDF",
+              "url": "https://people.maths.ox.ac.uk/trefethen/3all.pdf"
+            }
+          ]
+        },
+        "library": "physics",
+        "empirical_premises": []
+      },
+      {
+        "id": "thm-gr-fx-leapfrog-mode-stability",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Fourier-mode stability of the periodic leapfrog benchmark",
+        "reference": "research/frontier-expansion-2026-10-19/general-relativity/prose-scaffold.md#numerical-geometry-and-constraint-monitoring",
+        "design_state": "draft-research",
+        "dependency_level": 2,
+        "deps": [
+          "alg-gr-fx-periodic-wave-leapfrog",
+          "def-complex-exponential",
+          "def-complex-numbers-and-arithmetic",
+          "thm-complex-numbers-form-a-field",
+          "thm-eulers-formula",
+          "thm-sine-and-cosine-addition-formulas",
+          "thm-sine-and-cosine-derivatives",
+          "thm-sine-cosine-zero-sets-and-fundamental-period",
+          "thm-quarter-turn-values-and-shift-formulas",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "thm-nth-roots-exist",
+          "def-finite-sum",
+          "lem-finite-sum-reindexing-and-fubini"
+        ],
+        "dependency_roles": {
+          "alg-gr-fx-periodic-wave-leapfrog": "mathematical-premise",
+          "def-complex-exponential": "mathematical-premise",
+          "def-complex-numbers-and-arithmetic": "mathematical-premise",
+          "thm-complex-numbers-form-a-field": "mathematical-premise",
+          "thm-eulers-formula": "mathematical-premise",
+          "thm-sine-and-cosine-addition-formulas": "mathematical-premise",
+          "thm-sine-and-cosine-derivatives": "mathematical-premise",
+          "thm-sine-cosine-zero-sets-and-fundamental-period": "mathematical-premise",
+          "thm-quarter-turn-values-and-shift-formulas": "mathematical-premise",
+          "cor-trigonometric-parity-and-pythagorean-identity": "mathematical-premise",
+          "thm-nth-roots-exist": "mathematical-premise",
+          "def-finite-sum": "mathematical-premise",
+          "lem-finite-sum-reindexing-and-fubini": "mathematical-premise"
+        },
+        "justified_by": [],
+        "forward_refs": [],
+        "physical_scope": "A Fourier-mode calculation for the exact periodic scalar recurrence only. It gives no convergence theorem for Einstein evolution, no general nonlinear stability result, and no uniform-in-time displacement bound for a nonzero mean velocity.",
+        "statement": "Let $N\\ge3$, $h=2\\pi/N$, $k>0$, and $\\lambda=k/h$. Complexify the real\nlinear recurrence of the periodic wave algorithm. For each discrete Fourier\nindex $\\ell\\in\\{0,1,\\ldots,N-1\\}$ define the mode\n$$\ne_\\ell(j):=\\exp(2\\pi i\\ell j/N),\\qquad j\\in\\mathbb Z/N\\mathbb Z.\n$$\nIf $0<\\lambda<1$, every nonconstant mode ($\\ell\\ne0$) has recurrence\ncoefficient\n$$\nc_\\ell:=1-2\\lambda^2\\sin^2(\\pi\\ell/N)\\in(-1,1)\n$$\nand two distinct amplification roots\n$$\nz_{\\ell,\\pm}:=c_\\ell\\pm i\\sqrt{1-c_\\ell^2},\\qquad |z_{\\ell,\\pm}|=1.\n$$\nConsequently, each fixed nonconstant mode has bounded amplitude on every\nfinite slab. For arbitrary real initial arrays define their spatial means by\n$$\n\\bar u^0:=\\frac1N\\sum_{j=0}^{N-1}u^0_j,\\qquad \\bar v^0:=\\frac1N\\sum_{j=0}^{N-1}v^0_j.\n$$\nThe constant mode has the repeated root $1$ and evolves exactly as\n$\\bar u^0+nk\\bar v^0$; for any fixed $T\\ge0$ it is bounded on the slab\n$0\\le nk\\le T$ but has no uniform-in-time displacement bound when\n$\\bar v^0\\ne0$. This statement\ndoes not assert that the condition $0<\\lambda<1$ alone proves convergence of a\nnumerical relativity scheme. For each fixed $N$, define the nonzero discrete\nfrequencies $\\omega_\\ell:=2h^{-1}|\\sin(\\pi\\ell/N)|$, $1\\le\\ell<N$.\nThis finite list has a positive minimum; it is a fixed-grid fact and no bound\nuniform in $N$ is asserted.\nFor even $N$, the alternating mode with Fourier index $\\ell=N/2$ is called\nthe Nyquist mode. At the endpoint $\\lambda=1$, if $N$ is even and\n$u_j^0=a_0(-1)^j$, $v_j^0=\\beta_0(-1)^j$ for real amplitudes $a_0,\\beta_0$,\nthen each output level satisfies\n$$\nu_j^n=(-1)^j(-1)^n(a_0-nk\\beta_0).\n$$\nThe Nyquist amplification root is repeated at $-1$, and a nonzero Nyquist\nvelocity amplitude $\\beta_0$ gives linear growth in the step number.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gilbert Strang, Mathematical Methods for Engineers II, MIT OpenCourseWare 18.086, Spring 2006, §5.3, complete 11-page lecture note",
+              "url": "https://ocw.mit.edu/courses/18-086-mathematical-methods-for-engineers-ii-spring-2006/8eaa23367474c809cc0816f24fdacc7f_am53.pdf"
+            },
+            {
+              "title": "Lloyd N. Trefethen, Finite Difference and Spectral Methods for Ordinary and Partial Differential Equations, unpublished text (1996), Chapter 3, complete 37-page author PDF",
+              "url": "https://people.maths.ox.ac.uk/trefethen/3all.pdf"
+            },
+            {
+              "title": "Lloyd N. Trefethen, Finite Difference and Spectral Methods for Ordinary and Partial Differential Equations, unpublished text (1996), Chapter 4, complete 40-page author PDF",
+              "url": "https://people.maths.ox.ac.uk/trefethen/4all.pdf"
+            }
+          ]
+        },
+        "library": "physics",
+        "empirical_premises": []
+      },
+      {
+        "id": "thm-gr-fx-leapfrog-local-truncation",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Second-order local residual of the periodic wave benchmark",
+        "reference": "research/frontier-expansion-2026-10-19/general-relativity/prose-scaffold.md#numerical-geometry-and-constraint-monitoring",
+        "design_state": "draft-research",
+        "dependency_level": 2,
+        "deps": [
+          "alg-gr-fx-periodic-wave-leapfrog",
+          "cor-taylor-remainder-bound",
+          "thm-clairaut-schwarz-mixed-partials",
+          "thm-heine-borel-rn",
+          "thm-extreme-value-metric"
+        ],
+        "dependency_roles": {
+          "alg-gr-fx-periodic-wave-leapfrog": "mathematical-premise",
+          "cor-taylor-remainder-bound": "mathematical-premise",
+          "thm-clairaut-schwarz-mixed-partials": "mathematical-premise",
+          "thm-heine-borel-rn": "mathematical-premise",
+          "thm-extreme-value-metric": "mathematical-premise"
+        },
+        "justified_by": [],
+        "forward_refs": [],
+        "physical_scope": "A consistency estimate for a smooth nondimensionalized scalar wave on the periodic circle. It is not a global error or Einstein-equation convergence theorem.",
+        "statement": "Let $I\\subseteq\\mathbb R$ be open, and let $u:I\\times\\mathbb R\\to\\mathbb R$\nbe six times continuously differentiable and $2\\pi$-periodic in its spatial\nvariable $x$. Assume the nondimensional scalar wave equation\n$u_{tt}=u_{xx}$ on $I\\times\\mathbb R$. For $N\\ge3$, $h=2\\pi/N$, $k>0$,\n$x_j=jh$, and an integer $n$ with $t_n=nk$ and\n$[t_n-k,t_n+k]\\subset I$, put\n$$\nU_j^n:=u(x_j,t_n),\\qquad \\tau_j^n:=\\frac{U_j^{n+1}-2U_j^n+U_j^{n-1}}{k^2} -\\frac{U_{j+1}^n-2U_j^n+U_{j-1}^n}{h^2}.\n$$\nSet $M_n$ to be the supremum\n$$\nM_n:=\\sup\\{|\\partial_x^4u(x,t)|:0\\le x\\le2\\pi,\\ t_n-k\\le t\\le t_n+k\\}.\n$$\nThen for every grid index $j$,\n$$\n|\\tau_j^n|\\le\\frac{k^2+h^2}{12}M_n.\n$$\nThus the normalized local truncation residual is $O(k^2+h^2)$ on each\ncompact time window where the displayed fourth-derivative bound is uniform.\nThis consistency estimate alone is not a convergence theorem.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gilbert Strang, Mathematical Methods for Engineers II, MIT OpenCourseWare 18.086, Spring 2006, §5.3, complete 11-page lecture note",
+              "url": "https://ocw.mit.edu/courses/18-086-mathematical-methods-for-engineers-ii-spring-2006/8eaa23367474c809cc0816f24fdacc7f_am53.pdf"
+            },
+            {
+              "title": "Lloyd N. Trefethen, Finite Difference and Spectral Methods for Ordinary and Partial Differential Equations, unpublished text (1996), Chapter 3, complete 37-page author PDF",
+              "url": "https://people.maths.ox.ac.uk/trefethen/3all.pdf"
+            },
+            {
+              "title": "Lloyd N. Trefethen, Finite Difference and Spectral Methods for Ordinary and Partial Differential Equations, unpublished text (1996), Chapter 4, complete 40-page author PDF",
+              "url": "https://people.maths.ox.ac.uk/trefethen/4all.pdf"
+            }
+          ]
+        },
+        "library": "physics",
+        "empirical_premises": []
+      },
+      {
+        "id": "def-gr-fx-constraint-residual-diagnostic",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "A discrete Hamiltonian and momentum constraint diagnostic",
+        "reference": "research/frontier-expansion-2026-10-19/general-relativity/prose-scaffold.md#numerical-geometry-and-constraint-monitoring",
+        "design_state": "draft-research",
+        "dependency_level": 1,
+        "deps": [
+          "def-gr-fx-fixed-gauge-data-topology",
+          "thm-gr-constraint-equations-in-normal-frame"
+        ],
+        "dependency_roles": {
+          "def-gr-fx-fixed-gauge-data-topology": "mathematical-premise",
+          "thm-gr-constraint-equations-in-normal-frame": "mathematical-premise"
+        },
+        "justified_by": [],
+        "forward_refs": [],
+        "physical_scope": "A mathematical definition of finite-grid residuals in the stated general-relativity sign and SI-coordinate conventions. The values are diagnostics and do not certify a continuum development or a physical solution.",
+        "statement": "Use the dimensionless angular coordinates $x^i$ and the periodic spatial\nthree-torus from the earlier fixed-gauge data definition. Choose integers\n$N_i\\ge3$, coordinate spacings $\\Delta_i:=2\\pi/N_i$, and the finite periodic\ngrid\n$$\nG_{\\boldsymbol\\Delta}:=\\{(2\\pi j_1/N_1,2\\pi j_2/N_2,2\\pi j_3/N_3): 0\\le j_i<N_i\\}\\subset\\mathbb T^3_{2\\pi}.\n$$\nAt each grid node $p$, supply a real symmetric positive-definite matrix\n$h_{ij}(p)$ and its matrix inverse $h^{ij}(p)$ (so\n$h^{ik}(p)h_{kj}(p)=\\delta^i{}_j$), a real symmetric array $K_{ij}(p)$,\na scalar $\\rho(p)$, a covector array $j_i(p)$, and real constants $\\Lambda$\nand $\\kappa>0$. These are the sampled spatial metric, second fundamental\nform, energy density and momentum density in the convention of\n[[thm-gr-constraint-equations-in-normal-frame]]: for a future unit normal $n$\nand the coordinate basis $\\partial_i$, $K(X,Y)=g(\\nabla_Xn,Y)$,\n$\\rho=T(n,n)$ and $j_i=-T(n,\\partial_i)$, where $T$ is a smooth symmetric\ncovariant two-tensor. The array definition itself needs only the listed\nsamples and does not assume the continuum field equation. The vacuum case is\n$\\rho=j_i=\\Lambda=0$. In the SI angular-coordinate convention used here,\n$[x^i]=1$, $[h_{ij}]=\\mathrm m^2$, $[K_{ij}]=\\mathrm m$,\n$[\\rho]=\\mathrm{J\\,m^{-3}}$, $[j_i]=\\mathrm{J\\,m^{-2}}$,\n$[\\Lambda]=\\mathrm m^{-2}$, and\n$[\\kappa]=\\mathrm{m^{-1}\\,kg^{-1}\\,s^2}$. Thus the scalar residual below\nhas units $\\mathrm m^{-2}$ and its covector components in this angular basis\nhave units $\\mathrm m^{-1}$.\n\nLet $\\mathbb R^{G_{\\boldsymbol\\Delta}}$ denote the real arrays indexed by\nthe grid. Choose and specify linear maps\n$\\delta_i:\\mathbb R^{G_{\\boldsymbol\\Delta}}\\to\n\\mathbb R^{G_{\\boldsymbol\\Delta}}$ with $\\delta_i1=0$; apply them\ncomponentwise to tensor arrays. Periodic index wrapping is used here. Define\nthe discrete connection components, curvature, Ricci array and scalar\ncurvature by nodewise operations, with every index $i,j,k,\\ell,a,b$ ranging\nover $1,2,3$ and repeated upper/lower indices summed:\n$$\n\\Gamma^k{}_{ij,\\boldsymbol\\Delta}:= \\frac12h^{k\\ell}(\\delta_i h_{j\\ell}+\\delta_j h_{i\\ell}-\\delta_\\ell h_{ij}),\n$$\n$$\nR^a{}_{b i j,\\boldsymbol\\Delta}:= \\delta_i\\Gamma^a{}_{jb,\\boldsymbol\\Delta} -\\delta_j\\Gamma^a{}_{ib,\\boldsymbol\\Delta} +\\Gamma^a{}_{i\\ell,\\boldsymbol\\Delta}\\Gamma^\\ell{}_{jb,\\boldsymbol\\Delta} -\\Gamma^a{}_{j\\ell,\\boldsymbol\\Delta}\\Gamma^\\ell{}_{ib,\\boldsymbol\\Delta}, \\qquad \\operatorname{Ric}_{ij,\\boldsymbol\\Delta}:=R^k{}_{i k j,\\boldsymbol\\Delta}, \\qquad R_{\\boldsymbol\\Delta}:=h^{ij}\\operatorname{Ric}_{ij,\\boldsymbol\\Delta}.\n$$\nSet\n$$\n\\tau_{\\boldsymbol\\Delta}:=h^{ij}K_{ij},\\qquad |K|^2_{\\boldsymbol\\Delta}:=h^{ik}h^{j\\ell}K_{ij}K_{k\\ell},\n$$\n$$\n(D_i^{\\boldsymbol\\Delta}K)_{kj}:= \\delta_iK_{kj}-\\Gamma^\\ell{}_{ik,\\boldsymbol\\Delta}K_{\\ell j} -\\Gamma^\\ell{}_{ij,\\boldsymbol\\Delta}K_{k\\ell}.\n$$\nThe signed discrete Hamiltonian and momentum residuals are\n$$\n\\mathcal H_{\\boldsymbol\\Delta}:= R_{\\boldsymbol\\Delta}+\\tau_{\\boldsymbol\\Delta}^2 -|K|^2_{\\boldsymbol\\Delta}-2\\Lambda-2\\kappa\\rho,\n$$\n$$\n\\mathcal M_{\\boldsymbol\\Delta,j}:= h^{ik}(D_i^{\\boldsymbol\\Delta}K)_{kj} -\\delta_j\\tau_{\\boldsymbol\\Delta}+\\kappa j_j.\n$$\nThese signs match the Hamiltonian and momentum constraints in\n[[thm-gr-constraint-equations-in-normal-frame]] when its pointwise equation\n$G+\\Lambda g=\\kappa T$ is assumed. The displayed discrete formulas are array\noperations: they do not define a coordinate-covariant discrete connection or\nassume a discrete Leibniz rule. A reconstruction map has the exact type\n$$\n\\mathcal I_{\\boldsymbol\\Delta}:\\mathcal D_{\\boldsymbol\\Delta}\\longrightarrow \\mathcal C,\n$$\nwhere $\\mathcal D_{\\boldsymbol\\Delta}$ is the set of all grid arrays\n$(h_{ij},K_{ij},\\rho,j_i)$ with the pointwise symmetry and positive-definite\nconditions above, and $\\mathcal C$ is the set of pointwise assignments on\n$\\mathbb T^3_{2\\pi}$ of a positive-definite symmetric covariant two-tensor\n$h$, a symmetric covariant two-tensor $K$, a scalar $\\rho$ and a covector\n$j$, with the same units. No continuity or differentiability of a member of\n$\\mathcal C$ is implied; if continuum derivatives are used, the needed\nregularity must be stated separately. Specify $\\mathcal I_{\\boldsymbol\\Delta}$\nas part of each diagnostic, since it records which continuum field the grid\nis intended to represent. For every reported diagnostic, also record the grid\nnorm and its weights, the mesh hierarchy, the units, the derivative maps, the\nperiodic boundary treatment, and $\\mathcal I_{\\boldsymbol\\Delta}$. A small\nresidual by itself does not assert closeness to an exact constraint-satisfying\ndevelopment.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Éric Gourgoulhon, 3+1 Formalism and Bases of Numerical Relativity, Lecture Notes in Physics 846 (2012; author preprint arXiv:gr-qc/0703035v1), §§2.5, 4.4.3, 6.5.2–6.5.3 and 10.3.2; complete 220-page lecture notes",
+              "url": "https://arxiv.org/pdf/gr-qc/0703035"
+            },
+            {
+              "title": "Helmut Friedrich and Alan Rendall, The Cauchy Problem for the Einstein Equations, Living Reviews in Relativity 3 (2000), §§2.2 and 3.1; complete 97-page review",
+              "url": "https://arxiv.org/pdf/gr-qc/0002074"
+            },
+            {
+              "title": "José Luis Jaramillo, Juan Antonio Valiente Kroon and Éric Gourgoulhon, From Geometry to Numerics, arXiv:0712.2332v2 (2008), §§3.2, 4.1–4.2 and 5.1; complete 72-page review",
+              "url": "https://arxiv.org/pdf/0712.2332"
+            }
+          ]
+        },
+        "library": "physics",
+        "empirical_premises": []
+      }
+    ]
+  },
+  {
+    "order": 776,
+    "id": "gr-fx11-numerical-geometry-and-constraint-monitoring-examples",
+    "kind": "B",
+    "category": "general-relativity",
+    "library": "physics",
+    "title": "Numerical geometry and constraint monitoring — Examples",
+    "companion": "gr-fx11-numerical-geometry-and-constraint-monitoring",
+    "requires": [
+      "gr-fx11-numerical-geometry-and-constraint-monitoring"
+    ],
+    "items": [
+      {
+        "id": "ex-gr-fx11-1",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "Exponential growth of the Nyquist mode above the CFL bound",
+        "reference": "research/frontier-expansion-2026-10-19/general-relativity/prose-scaffold.md#numerical-geometry-and-constraint-monitoring",
+        "design_state": "draft-research",
+        "dependency_level": 3,
+        "deps": [
+          "alg-gr-fx-periodic-wave-leapfrog",
+          "prop-gr-fx-leapfrog-termination",
+          "thm-gr-fx-leapfrog-mode-stability",
+          "thm-nth-roots-exist"
+        ],
+        "dependency_roles": {
+          "alg-gr-fx-periodic-wave-leapfrog": "mathematical-premise",
+          "prop-gr-fx-leapfrog-termination": "mathematical-premise",
+          "thm-gr-fx-leapfrog-mode-stability": "mathematical-premise",
+          "thm-nth-roots-exist": "mathematical-premise"
+        },
+        "justified_by": [],
+        "forward_refs": [],
+        "physical_scope": "An exact mathematical failure mode of the scalar benchmark above its stated time-step bound; no Einstein solver or physical evolution is asserted.",
+        "statement": "Let $N\\ge4$ be even, let $h=2\\pi/N$, and choose the Courant--Friedrichs--Lewy\n(CFL) step ratio $\\lambda:=k/h>1$. Run the periodic wave algorithm with\n$u_j^0=(-1)^j$ and $v_j^0=0$, with any integer $n_{\\max}\\ge1$. For every integer\n$0\\le n\\le n_{\\max}$ the output has the form $u_j^n=a_n(-1)^j$, where, with\n$c:=1-2\\lambda^2<-1$,\n$$\na_n=\\frac{z_{\\rm grow}^n+z_{\\rm decay}^n}{2},\\qquad z_{\\rm grow}:=c-\\sqrt{c^2-1}<-1,\\qquad z_{\\rm decay}:=c+\\sqrt{c^2-1}\\in(-1,0).\n$$\nConsequently $|a_n|\\ge |z_{\\rm grow}|^n/2$, so allowing more time steps\ncauses exponential growth of this alternating mode. The strict hypothesis\n$0<k/h<1$ in the preceding mode theorem excludes this example; no endpoint\nclaim at $k/h=1$ is made here.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gilbert Strang, Mathematical Methods for Engineers II, MIT OpenCourseWare 18.086, Spring 2006, §5.3, complete 11-page lecture note",
+              "url": "https://ocw.mit.edu/courses/18-086-mathematical-methods-for-engineers-ii-spring-2006/8eaa23367474c809cc0816f24fdacc7f_am53.pdf"
+            },
+            {
+              "title": "Lloyd N. Trefethen, Finite Difference and Spectral Methods for Ordinary and Partial Differential Equations, unpublished text (1996), Chapters 3–4, complete author PDFs",
+              "url": "https://people.maths.ox.ac.uk/trefethen/3all.pdf"
+            },
+            {
+              "title": "Lloyd N. Trefethen, Finite Difference and Spectral Methods for Ordinary and Partial Differential Equations, unpublished text (1996), Chapter 4, complete 40-page author PDF",
+              "url": "https://people.maths.ox.ac.uk/trefethen/4all.pdf"
+            }
+          ]
+        },
+        "library": "physics",
+        "empirical_premises": []
+      },
+      {
+        "id": "ex-gr-fx11-2",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "Zero sampled constraint residual with unresolved smooth data",
+        "reference": "research/frontier-expansion-2026-10-19/general-relativity/prose-scaffold.md#numerical-geometry-and-constraint-monitoring",
+        "design_state": "draft-research",
+        "dependency_level": 2,
+        "deps": [
+          "alg-gr-fx-periodic-wave-leapfrog",
+          "def-gr-fx-constraint-residual-diagnostic",
+          "def-gr-fx-conformal-constraint-data",
+          "thm-gr-fx-lichnerowicz-reduction",
+          "def-countable-choice",
+          "prop-christoffel-formula-for-the-levi-civita-connection",
+          "def-curvature-of-an-affine-connection",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "thm-sine-cosine-zero-sets-and-fundamental-period",
+          "thm-quarter-turn-values-and-shift-formulas",
+          "thm-sine-and-cosine-derivatives",
+          "thm-chain-rule"
+        ],
+        "dependency_roles": {
+          "alg-gr-fx-periodic-wave-leapfrog": "mathematical-premise",
+          "def-gr-fx-constraint-residual-diagnostic": "mathematical-premise",
+          "def-gr-fx-conformal-constraint-data": "mathematical-premise",
+          "thm-gr-fx-lichnerowicz-reduction": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "prop-christoffel-formula-for-the-levi-civita-connection": "mathematical-premise",
+          "def-curvature-of-an-affine-connection": "mathematical-premise",
+          "cor-trigonometric-parity-and-pythagorean-identity": "mathematical-premise",
+          "thm-sine-cosine-zero-sets-and-fundamental-period": "mathematical-premise",
+          "thm-quarter-turn-values-and-shift-formulas": "mathematical-premise",
+          "thm-sine-and-cosine-derivatives": "mathematical-premise",
+          "thm-chain-rule": "mathematical-premise"
+        },
+        "justified_by": [],
+        "forward_refs": [],
+        "physical_scope": "A mathematical aliasing example for the discrete constraint diagnostic. It is not a reported simulation, a measurement, or a claim that the sampled data admit a spacetime development.",
+        "statement": "Let $N\\ge4$ be even, let $N_2,N_3\\ge3$, let $L_*>0$ be a length, and choose\n$0<\\varepsilon<1$. On $\\mathbb T^3_{2\\pi}$ with dimensionless angular\ncoordinates $x^i$, set\n$$\n\\widetilde h=L_*^2\\bigl((dx^1)^2+(dx^2)^2+(dx^3)^2\\bigr),\\qquad \\widetilde\\sigma=0,\\qquad \\tau=0,\\qquad \\phi_N(x)=1+\\varepsilon\\sin(Nx^1/2).\n$$\nTake the vacuum branch with $\\Lambda=0$ and $\\rho=j=0$, so the conformal data\nare $h=\\phi_N^4\\widetilde h$ and $K=0$. Use a periodic mesh with\n$N_1=N$ and counts $N_2,N_3$ in the other directions. Put\n$\\Delta_i=2\\pi/N_i$ and use nodes\n$x^i_{j_i}=2\\pi j_i/N_i$, $0\\le j_i<N_i$, with indices wrapped modulo each\n$N_i$. For $i=1,2,3$, let $\\mathbf e_i$ be the $i$th standard basis vector of\n$\\mathbb Z^3$. For a scalar grid array\n$f_{\\mathbf j}$, use the centered periodic maps\n$$\n(\\delta_i f)_{\\mathbf j}:= \\frac{f_{\\mathbf j+\\mathbf e_i}-f_{\\mathbf j-\\mathbf e_i}}{2\\Delta_i}, \\qquad i=1,2,3,\n$$\nwith indices reduced modulo $(N_1,N_2,N_3)$, and apply them componentwise.\nFor reconstruction, partition each periodic coordinate circle into the\nhalf-open cells\n$$\nC_{\\mathbf j}:=\\prod_{i=1}^3 \\left[\\frac{2\\pi(j_i-1/2)}{N_i}, \\frac{2\\pi(j_i+1/2)}{N_i}\\right)\\pmod{2\\pi},\n$$\nand assign every component on $C_{\\mathbf j}$ its value at node\n$\\mathbf j$. This specifies the piecewise-constant map\n$\\mathcal I_{\\boldsymbol\\Delta}$ in the constraint-residual definition.\nFor the reported residual arrays use uniform dimensionless weights\n$w_{\\mathbf j}:=(NN_2N_3)^{-1}$ and the norm\n$$\n\\| (\\mathcal H_{\\boldsymbol\\Delta},\\mathcal M_{\\boldsymbol\\Delta})\\|_{\\boldsymbol\\Delta,2} :=\\left(\\sum_{\\mathbf j}w_{\\mathbf j} \\left(|\\mathcal H_{\\boldsymbol\\Delta}(\\mathbf j)|^2+ h^{ik}(\\mathbf j)\\mathcal M_{\\boldsymbol\\Delta,i}(\\mathbf j) \\mathcal M_{\\boldsymbol\\Delta,k}(\\mathbf j)\\right)\\right)^{1/2}.\n$$\nThis example reports one mesh only, with no refinement hierarchy or\nconvergence comparison.\n\nThe discrete residuals $\\mathcal H_{\\boldsymbol\\Delta}$ and\n$\\mathcal M_{\\boldsymbol\\Delta}$ vanish at every grid node, so their stated\nweighted norm is zero. However, the\ncontinuum Hamiltonian residual at $x^1=\\pi/N$ is\n$$\n\\mathcal H(h,K)=\\frac{2\\varepsilon N^2}{L_*^2(1+\\varepsilon)^5}>0.\n$$\nThus a smooth high-frequency field can have the same samples and zero discrete\nresidual as flat data while violating the continuum constraint between grid\npoints. A small or vanishing grid residual alone does not certify continuum\nconstraint satisfaction or solution accuracy.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Éric Gourgoulhon, 3+1 Formalism and Bases of Numerical Relativity, Lecture Notes in Physics 846 (2012; author preprint arXiv:gr-qc/0703035v1), §§2.5, 4.4.3, 6.5.2–6.5.3 and 10.3.2; complete 220-page lecture notes",
+              "url": "https://arxiv.org/pdf/gr-qc/0703035"
+            },
+            {
+              "title": "Helmut Friedrich and Alan Rendall, The Cauchy Problem for the Einstein Equations, Living Reviews in Relativity 3 (2000), §§2.2 and 3.1; complete 97-page review",
+              "url": "https://arxiv.org/pdf/gr-qc/0002074"
+            },
+            {
+              "title": "José Luis Jaramillo, Juan Antonio Valiente Kroon and Éric Gourgoulhon, From Geometry to Numerics, arXiv:0712.2332v2 (2008), §§3.2, 4.1–4.2 and 5.1; complete 72-page review",
+              "url": "https://arxiv.org/pdf/0712.2332"
+            }
+          ]
+        },
+        "library": "physics",
+        "empirical_premises": []
+      }
+    ]
+  }
+]

@@ -1,0 +1,8 @@
+**Given:** The finite family and all-plus sample in the Example.
+
+1.1 The two statistic values are $-1$ and $+1$, so their affine hull is $\mathbb R$, the family is minimal, the convex hull is $[-1,1]$, and the sample mean is $1$, which is not in its interior $(-1,1)$. Hence [F2] already implies there is no finite MLE. [A1, F1, F2, algebra]
+
+2.1 Let $S(h)=e^h+e^{-h}$. Both exponential terms and hence $S(h)$ are positive by [F7]. For the fixed all-plus IID sample the product likelihood is $L(h)=\prod_{i=1}^n\pi_h(+1)=(e^h/S(h))^n>0$ by [A1, F1]. Applying the positive-product law [F8] repeatedly to these $n\ge1$ factors, then its quotient law and the inverse identity [F7], gives $\log L(h)=n(\log(e^h)-\log S(h))=n(h-\log S(h))=\ell(h)$. Since $\log$ is strictly increasing, this has exactly the same maximizers as $L$. By [F3] and [F5], the two exponential terms have derivatives $e^h$ and $-e^{-h}$; [F6] therefore gives $S'(h)=e^h-e^{-h}$. The identity function has derivative $1$ directly from its difference quotient. Applying the logarithm derivative [F4] and chain rule [F5] to this derived log likelihood gives
+$\ell'(h)=n\left(1-\frac{e^h-e^{-h}}{e^h+e^{-h}}\right)
+=\frac{2ne^{-h}}{e^h+e^{-h}}>0$
+for every finite $h$. The derived formula is differentiable on all of $\mathbb R$, hence continuous there: its increment is its convergent difference quotient times the real increment. For any $h_1<h_2$, [F9] applied on $[h_1,h_2]$ gives $\ell(h_2)-\ell(h_1)=\ell'(c)(h_2-h_1)>0$ for some $c\in(h_1,h_2)$. Thus $\ell$ is strictly increasing; by [F8] the likelihood also increases. In particular each finite field has a larger likelihood at a greater field, and no finite field maximizes it. [A1, F1, F3, F4, F5, F6, F7, F8, F9, step 1.1, algebra] ∎

@@ -1,0 +1,91 @@
+--- 
++++ 
+@@ -18,6 +18,7 @@
+   - def-qft-weak-operator-valued-tempered-distribution
+   - def-qft-poincare-test-action
+   - def-schwartz-space-and-its-seminorms
++  - lem-qft-poincare-pullback-continuity-on-schwartz
+ dependency_roles:
+   def-countable-choice: mathematical-premise
+   def-hilbert-space: mathematical-premise
+@@ -27,6 +28,7 @@
+   def-qft-weak-operator-valued-tempered-distribution: mathematical-premise
+   def-qft-poincare-test-action: mathematical-premise
+   def-schwartz-space-and-its-seminorms: mathematical-premise
++  lem-qft-poincare-pullback-continuity-on-schwartz: mathematical-premise
+ provenance:
+   statement: ai-altered
+   proof: not-applicable
+@@ -34,7 +36,7 @@
+   references:
+     - title: "Christopher J. Fewster and Kasia Rejzner, Algebraic Quantum Field Theory—an introduction, arXiv:1904.04051v2 (2019)"
+       url: https://arxiv.org/pdf/1904.04051
+-      locator: "§5.1, printed p. 25, proof of Theorem 26: bounded-insertion tube functions and the explicit edge-of-the-wedge invocation; the theorem proved there is Reeh–Schlieder."
++      locator: "§5.2, printed p. 25, proof of Theorem 26: bounded-insertion tube functions and the explicit edge-of-the-wedge invocation; the theorem proved there is Reeh–Schlieder."
+     - title: "Jens Mund, General Aspects of Relativistic Quantum Field Theory, incomplete lecture notes, DF-UFJF (2012)"
+       url: https://www.ufjf.br/fisica/files/2022/03/AQFT.pdf
+       locator: "§2.1, Theorems 2.6 and 2.8, PDF pp. 15–19: the exact reconstruction hypotheses, Fourier-support tube continuation, and an edge-of-the-wedge statement; the notes identify Theorem 2.8's proof as a reference rather than a local proof."
+@@ -53,12 +55,12 @@
+ sufficiency theorem, and it asserts neither conclusion.
+ 
+ The proposed field system must specify a nonzero complex Hilbert space
+-$\mathcal H$ as in [[def-hilbert-space]], with inner product linear in its
+-first argument as in [[def-real-and-complex-inner-product-space]], a dense
++$\mathcal H$ as in “Hilbert space”, with inner product linear in its
++first argument as in “Real and complex inner-product spaces and their induced length”, a dense
+ complex linear field domain
+ $\mathcal D_{\mathrm{field}}\subseteq\mathcal H$, and a finite-dimensional
+ complex component space $V$ with $1\le\dim_{\mathbb C}V<\infty$, together with a
+-distinguished unit vector $\Omega\in\mathcal D_{\mathrm{field}}$. A field multiplet is a finite family of complex-linear maps on Schwartz test functions, with the Schwartz topology of [[def-schwartz-space-and-its-seminorms]] and the Poincaré pullback convention of [[def-qft-poincare-test-action]]:
++distinguished unit vector $\Omega\in\mathcal D_{\mathrm{field}}$. A field multiplet is a finite family of complex-linear maps on Schwartz test functions, with the Schwartz topology of “Schwartz space and its seminorms” and the Poincaré pullback convention of “Proper-orthochronous Poincaré action and test pullback”:
+ $\Phi_\alpha:\mathcal S(\mathbb R^4;\mathbb C)\to
+ \operatorname{Lin}(\mathcal D_{\mathrm{field}})$, where
+ $\operatorname{Lin}(\mathcal D_{\mathrm{field}})$ is the vector space of
+@@ -67,6 +69,10 @@
+ $u,v\in\mathcal D_{\mathrm{field}}$,
+ $f\mapsto(\Phi_\alpha(f)u,v)$ is a continuous linear functional on Schwartz
+ space. Every finite product on $\mathcal D_{\mathrm{field}}$ must be defined.
++For $g=(A,a)$, use $T_gf(x)=f(\Lambda(A)^{-1}(x-a))$.
++The Poincaré pullback continuity lemma guarantees $T_gf\in\mathcal S$
++and continuity of $T_g$ and $T_{g^{-1}}$ in the Schwartz topology, so
++field covariance with these transformed tests is defined on the declared domain.
+ The associated
+ $n$-point function is the multilinear functional
+ $$(f_1,\ldots,f_n)\longmapsto (\Phi_{\alpha_1}(f_1)\cdots\Phi_{\alpha_n}(f_n)\Omega,\Omega);$$
+@@ -101,7 +107,10 @@
+ is dense in $\mathcal H$.
+ 
+ The positive-energy premise must be the joint PVM input of
+-[[def-qftx-joint-spectrum-input]], including its Countable Choice assumption.
++“Positive-energy joint spectral input”, including its Countable Choice assumption, on this same $\mathcal H$ with
++this same $\Omega$. Denote its translation representation by
++$U_{\mathrm{spec}}$ and require
++$$U((I,a))=U_{\mathrm{spec}}(a)=\Phi_E(p\mapsto e^{ip\cdot a})\qquad(a\in\mathbb R^4).$$
+ For $f,g\in\mathcal S(\mathbb R^4;\mathbb C)$ with compact spacelike-separated
+ supports, the field locality identity and its sign must be stated on
+ $\mathcal D_{\mathrm{field}}$. Here $\operatorname{supp}f$ is the closure of
+@@ -139,12 +148,14 @@
+ $\epsilon_{\rm spin}\in\{+1,-1\}$, and the actual spacelike exchange sign
+ $\epsilon_{\rm loc}\in\{+1,-1\}$ in
+ $\Phi_\alpha(f)\Phi_\beta(g)=\epsilon_{\rm loc}\Phi_\beta(g)\Phi_\alpha(f)$
+-on $\mathcal D$. For a multiplet with a single spin parity, the theorem must
++on $\mathcal D_{\mathrm{field}}$. For a multiplet with a single spin parity, the theorem must
+ derive the precise relation $\epsilon_{\mathrm{loc}}=\epsilon_{\mathrm{spin}}$. Any additional
+ theorem-specific assumptions remain explicit; this interface does not claim
+ that its checklist alone suffices.
+ 
+ ## Definition references
++
++[[lem-qft-poincare-pullback-continuity-on-schwartz]]
+ 
+ [[def-qftx-joint-spectrum-input]]
+ 
+@@ -162,7 +173,7 @@
+ 
+ [[def-countable-choice]]
+ 
+-[Fewster and Rejzner, §5.1](https://arxiv.org/pdf/1904.04051)
++[Fewster and Rejzner, §§5.1–5.2](https://arxiv.org/pdf/1904.04051)
+ 
+ [Mund, §2.1](https://www.ufjf.br/fisica/files/2022/03/AQFT.pdf)
+ 

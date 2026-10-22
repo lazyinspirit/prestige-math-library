@@ -1,0 +1,19 @@
+# Shared post-reader repair parity proposal
+
+This research-only patch adds the root-mathematics validator's `sharedPostReaderRepair` condition to the actual physics validator API. The production physics file is unchanged at SHA256 `9cd171d4223acbe4ddb112b1b6dd185557bcbe989737f0963b70db925de88b7f`. Root-mathematics code is a reference, not authority to mutate physics tooling. User permission and root application remain required.
+
+The defect is authentic: a touched repair and a same-batch refuter finding can refer to the same already observed reader-result defect. The old physics validator accepts finding/finding aliases or causal additions but rejects this repair/finding pair as double ownership. Giving this actual shared fault a fabricated second defect row would misdescribe the science.
+
+The candidate copies the exact root condition for a same-subject touched/page accepted or amended repair with confidence exactly1, a confirmed fatal/nonfatal refuter, an exact same-batch repair obligation, an exact original refuter-finding target, and the authentic typed frozen post-reader carrier. Pages use the unanchored observed carrier, separately from the repair's item-order anchor. Bidirectional explicit sharing requires at least40 characters of actual equivalence evidence. Retaining the sharing fields and repair confidence in the stored prior anchor makes the check independent of decision iteration order. Existing independent subject/route/ledger severity/disposition/application checks remain in force.
+
+`step3-scope.patch` is the narrow proposed production diff; `step3-scope.proposed.mjs` is its concrete full candidate. `guards.json` binds the exact production preimage, reference and candidate. No production tools, native states, source items, ledgers, decisions, or certification files were changed.
+
+## Actual tests
+
+`cli-regression.test.mjs` executes the actual candidate module as a CLI, with its required real imports supplied in temporary isolated fixture directories. Both batch3 and35 fixtures retain the exact original refuter findings and their exact native post-reader item triples/observed hashes. They reduce the manifest to the relevant two subjects, use current copied source/contract inputs, and invoke actual stamp/check commands only inside the disposable fixtures. This is a routing/validation regression, not scientific certification of the fixture content or an actual native run transition.
+
+For each batch, the unpatched production CLI demonstrably rejects the fixture with `ledger-double-owned`; the candidate passes actual adjudicate and final checks, and passes reversed decision order. Eight negative CLI fixtures reject invalid carrier, subject, batch, route, obligation, confidence, sharing evidence, or finding alias. Ten CLI tests pass. Negative fixtures retain the already stamped unchanged carriers; they are not all passing merely because unstamped decisions were introduced.
+
+`regression.test.mjs` additionally executes the exact branch extracted from the concrete candidate, with the actual production pageCarrier/hashSnapshotErrors functions. Twenty-six branch fixtures cover item/page acceptance, both directions, original batch3/35 carrier replay, malformed carrier types, snapshots, scope membership, finding/subject mismatch, confidence and sharing evidence. These supplement rather than replace the full CLI regression. Full CLI page-repair coverage is not asserted; page-specific conditions are exercised by the exact extracted branch tests. `node --check` of the full candidate passes.
+
+The independent page-classification-alias issue remains separately owned by `/root/csm_boundary`: its guarded helper patch targets `step3-owner-finding-alias.mjs`, not this `step3-scope.mjs` diff. The two scopes can be reviewed together without broadening either authorization. No alternative mathematical repair defect has been invented to evade sharing.

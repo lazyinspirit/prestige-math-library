@@ -1,0 +1,101 @@
+{
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "phase": "initial",
+  "round": 1,
+  "unit": "2",
+  "input_sha256": "eaf0a68d231b0a7d0d042df337974eaab597dfd3432daa3ad0aaeebd32fe188c",
+  "decisions": [
+    {
+      "id": "ex-emx-punctured-flux",
+      "model": "gpt-6-luna",
+      "context_sha256": "8d0d7bb6ea753f07b12a3254dc55600814fa7e4e84c43ec0144680f830b9dde3",
+      "outcome": "confirmed_nonfatal",
+      "reason": "Verification 4.1 contains undefined e0, but 3.1 already establishes the exact period 4π. The cycle cancellation, outward orientation, radial pullback, compact Jordan parameter integrals and sphere-area supplier justify that calculation; F11 then implies nonexactness. This is a nonfatal notation defect, repaired by replacing 4\\pi e0 with 4\\pi\\ne0 without changing any premise or claim.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "ex-emx-punctured-flux",
+      "disposition": "repaired",
+      "post_sha256": "6d1169123aa297fa452fa8d76342ccaaded4445037128927b1208b066962489c",
+      "review_context_sha256": "d88e82510104b1200bcd223ab83ac0724da5bb6ae1d05899638eacfca4796914",
+      "reason": "Reviewed all five Verification steps and actual prerequisite interfaces. Positive-base differentiation gives smoothness and dβ=0 away from the origin. Ordered tetrahedral faces with determinant -16 cancel identical edge maps. Radial projection preserves outward orientation and pulls ω back to β; coordinate swaps, null triangle boundaries and finite parametrizations give period 4π. The repaired final step correctly invokes the nonzero-period obstruction on this three-dimensional domain; it does not invoke the four-dimensional local homotopy clause. The owning contract derivation 4.1 now matches. This is an adjudicator repair review, not independent acceptance of my repair.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "defect-ledger",
+      "id": "ex-emx-punctured-flux",
+      "location": "Verification 4.1; owning proof contract derivation step-4-1",
+      "severity": "nonfatal",
+      "status": "fixed",
+      "reason": "Verification 4.1 contains undefined e0, but 3.1 already establishes the exact period 4π. The cycle cancellation, outward orientation, radial pullback, compact Jordan parameter integrals and sphere-area supplier justify that calculation; F11 then implies nonexactness. This is a nonfatal notation defect, repaired by replacing 4\\pi e0 with 4\\pi\\ne0 without changing any premise or claim."
+    }
+  ],
+  "gate_resolutions": [],
+  "supporting_evidence": {
+    "research/physics-non-fluid-129-2026-10-21-r2-batch-2-step5-context.json": "38953a9b356c8c09ed4b64de64ec82f9dbf8b6c3e05680409e8d23c578dc213a"
+  },
+  "repair_notes": {
+    "changes": [
+      "items/ex-emx-punctured-flux.md: only the malformed value in Verification 4.1 changed.",
+      "research/physics-non-fluid-129-2026-10-21-r2-batch-2.proof-contracts.json: only the matching derivation claim changed under the shared write lock, with reread, unique replacement and JSON reparse checks."
+    ],
+    "interfaces": "The complete Example exactly matches its original pages-manifest statement. Definition, Statement, dependencies, physical_scope and empirical qualifications were not changed. No new prerequisite; no downstream propagation.",
+    "mathematical_evidence": [
+      "items/lem-emx-unit-sphere-radial-flux.md: Statement and complete Proof, especially 2.1, establishing the outward-oriented integral 4π.",
+      "items/thm-emx-local-potential-homotopy.md: global Statement and Proof 3.1, using Stokes on finite smooth singular cycles; no dimensional restriction on the global obstruction.",
+      "items/prop-integration-of-top-forms-by-finite-parametrizations.md: Statement and Proof; four projected face charts satisfy the disjoint-interior, boundary regularity and compact-support hypotheses.",
+      "items/def-smooth-singular-chain-and-cochain-complexes.md and items/def-integral-of-a-form-over-a-smooth-singular-simplex.md: exact definitions of finite smooth chains, face boundary and affine pullback integrals.",
+      "Other declared prerequisite Statements/Definitions were checked against their actual use; no external literature retrieval or full audit of imported suppliers is claimed."
+    ],
+    "diagrams": "No TikZ/tikzcd diagram occurs; no diagram is required for this explicit coordinate and chain argument.",
+    "outside_scope_findings": [
+      {
+        "id": "thm-emx-local-potential-homotopy",
+        "location": "Facts & Assumptions F1",
+        "disposition": "refer_supplier_owner",
+        "reason": "Confirmed the batch digest attribution concern: def-emx-lorentz-star defines periods and exactness but does not state the component expansion F=½Fμν dxμ∧dxν. The theorem itself states that expansion; its global period obstruction used here is sound and does not depend on that attribution. No outside item was edited."
+      }
+    ],
+    "published_ledger_updates": "None: no potentially defective published consumer was identified.",
+    "focused_checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/physics-support/precheck.mts items/ex-emx-punctured-flux.md --json",
+        "exit_code": 0,
+        "result": "1 checked, 0 failing; direct strategy passes."
+      },
+      {
+        "command": "node tools/physics-support/rendercheck.mjs items/ex-emx-punctured-flux.md --json",
+        "exit_code": 0,
+        "result": "1 checked; errors=[], warnings=[]."
+      },
+      {
+        "command": "node tools/physics-support/proof-contract.mjs research/physics-non-fluid-129-2026-10-21-r2-batch-2.proof-contracts.json --strict --items ex-emx-punctured-flux --json",
+        "exit_code": 0,
+        "result": "ok=true; exact singleton scope checked; errors=[], warnings=[]."
+      },
+      {
+        "command": "node tools/physics-support/proof-layout.mjs items/ex-emx-punctured-flux.md",
+        "exit_code": 0,
+        "result": "1 items, 5 steps, 0 defects."
+      },
+      {
+        "command": "node tools/physics-support/step5-workflow.mjs review-contexts --run physics-non-fluid-129-2026-10-21-r2 --items ex-emx-punctured-flux",
+        "exit_code": 0,
+        "result": "Fresh post_sha256 and review_context_sha256 copied verbatim into the review immediately after mathematical review."
+      }
+    ],
+    "tool_invocation_recovery": "Exploratory direct-node precheck invocation failed because Node cannot load .mts; its --help attempt through tsx was interpreted as a filename. Used the documented tsx runner with the explicit item successfully. An exploratory plural proof-contracts tool name did not exist; used proof-contract.mjs successfully. These were invocation errors, not content failures.",
+    "unresolved_obligations": [],
+    "handoff": "Assigned tuple adjudicated, repair and scoped validation complete; controller owns collection and any subsequent rejudgment or certification."
+  }
+}

@@ -7,7 +7,7 @@ origin: pipeline
 domain: physics
 library: physics
 physical_scope: Local C1 constrained Gibbs-potential charts for a declared internal reaction network at fixed positive reservoir temperature and pressure; interior conclusions use the admitted process-record model, while boundary conclusions require the explicit boundary-inclusive entropy and auxiliary extension stated here.
-dependency_level: 9
+dependency_level: 1
 deps:
   - def-td-phase-and-coexistence-domain
   - def-td-si-quantities
@@ -63,9 +63,9 @@ Fix $T_0>0$ and $p_0>0$ in a declared natural-variable chart. On an open neighbo
 $$
 D\Phi(\xi)[h]=\sum_{j=1}^C\mu_j(\xi)(\nu h)_j=(\nu^{\mathsf T}\mu(\xi))\cdot h,
 $$
-where every $\mu_j$ is in $\mathrm{J\,mol^{-1}}$. At positive amounts, require $\Phi(\xi)=U_c(x(\xi))+p_0V_c(x(\xi))-T_0S_c(x(\xi))$ for the system state $x(\xi)$, with $U_c,V_c,S_c$ from [[def-td-equilibrium-state-domain]] and [[post-td-concave-fundamental-entropy]]; its derivative is that of the local Gibbs chart supplied by [[def-td-legendre-potentials]] and [[pthm-td-potential-differentials]].
+where every $\mu_j$ is in $\mathrm{J\,mol^{-1}}$. At positive amounts, require $\Phi(\xi)=U_c(x(\xi))+p_0V_c(x(\xi))-T_0S_c(x(\xi))$ for the system state $x(\xi)$, with $U_c,V_c,S_c$ from *Equilibrium state domains* and *Concave macroscopic fundamental entropy*; its derivative is that of the local Gibbs chart supplied by *Local thermodynamic Legendre potentials* and *Differentials of the thermodynamic potentials*.
 
-If all amounts at $\xi_*$ are positive, assume $\xi_*$ is the system endpoint of a closed system process record and its admitted isolated-compound extension exactly as in [[pthm-td-fixed-tp-reaction-potential-minimum]], is a global entropy-maximizing endpoint on that extension's exact feasible set, and the record's system projection contains every state $x(\xi)$ for $\xi\in\mathcal F_\nu\cap U$. If at least one amount is zero, it is outside [[def-td-equilibrium-state-domain]]; in that boundary case, assume instead that the model supplies a boundary-inclusive state domain with finite $C^1$ maps $\bar U_c,\bar V_c,\bar S_c:U\to\mathbb R$ in joules, $\mathrm{m^3}$, and $\mathrm{J\,K^{-1}}$, respectively, that $\Phi(\xi)=\bar U_c(\xi)+p_0\bar V_c(\xi)-T_0\bar S_c(\xi)$, and that its exact isolated-compound model has fixed total energy, an ideal reservoir with $S_R(E_R)=S_{R,0}+E_R/T_0$, a constant-entropy pressure store satisfying $E_B-p_0\bar V_c(\xi)=C_B$, and a feasible-set projection equal to $\mathcal F_\nu\cap U$. Assume $\xi_*$ is an attained global entropy maximum on that boundary-inclusive set. This additional boundary model premise is not supplied by the positive-mole state chart or by [[pthm-td-fixed-tp-reaction-potential-minimum]].
+If all amounts at $\xi_*$ are positive, assume $\xi_*$ is the system endpoint of a closed system process record and its admitted isolated-compound extension exactly as in *Fixed-temperature and fixed-pressure potential minimum with internal reactions*, is a global entropy-maximizing endpoint on that extension's exact feasible set, and the record's system projection contains every state $x(\xi)$ for $\xi\in\mathcal F_\nu\cap U$. If at least one amount is zero, it is outside *Equilibrium state domains*; in that boundary case, assume instead that the model supplies a boundary-inclusive state domain with finite $C^1$ maps $\bar U_c,\bar V_c,\bar S_c:U\to\mathbb R$ in joules, $\mathrm{m^3}$, and $\mathrm{J\,K^{-1}}$, respectively, that $\Phi(\xi)=\bar U_c(\xi)+p_0\bar V_c(\xi)-T_0\bar S_c(\xi)$, and that its exact isolated-compound model has fixed total energy, an ideal reservoir with $S_R(E_R)=S_{R,0}+E_R/T_0$, a constant-entropy pressure store satisfying $E_B-p_0\bar V_c(\xi)=C_B$, and a feasible-set projection equal to $\mathcal F_\nu\cap U$. Assume $\xi_*$ is an attained global entropy maximum on that boundary-inclusive set. This additional boundary model premise is not supplied by the positive-mole state chart or by *Fixed-temperature and fixed-pressure potential minimum with internal reactions*.
 
 Under the relevant interior or boundary assumptions above, $\xi_*$ locally minimizes $\Phi$ on $\mathcal F_\nu\cap U$. Let $J_*:=\{j:n^0_j+(\nu\xi_*)_j=0\}$ be the active species set. Then the first-order necessary condition is
 $$
@@ -76,6 +76,18 @@ $$
 T_{\mathcal F_\nu}(\xi_*):=\{h\in\mathbb R^R:(\nu h)_j\ge0\text{ for every }j\in J_*\}.
 $$
 If $\xi_*$ is interior to $\mathcal F_\nu$, this reduces to $\nu^{\mathsf T}\mu(\xi_*)=0$. If, in addition, $\Phi$ is convex and differentiable on a convex neighborhood containing the relevant feasible set, the same tangent inequality is sufficient for global minimization there.
+
+## Statement references
+
+[[def-td-equilibrium-state-domain]]
+
+[[post-td-concave-fundamental-entropy]]
+
+[[def-td-legendre-potentials]]
+
+[[pthm-td-potential-differentials]]
+
+[[pthm-td-fixed-tp-reaction-potential-minimum]]
 
 ## Facts & Assumptions
 

@@ -1,0 +1,73 @@
+{
+  "version": 1,
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "batch": "26",
+  "round": 0,
+  "reviewed_items": [
+    "def-emg-fx-nonlinear-lagrangian",
+    "prop-emg-fx-nonlinear-maxwell-variation",
+    "def-emg-fx-semiclassical-source-contract",
+    "prop-emg-fx-semiclassical-consistency",
+    "cex-emg-fx-eft-order-does-not-control-derivatives"
+  ],
+  "reviewed_pages": [
+    "emg-fx11",
+    "emg-fx11-examples"
+  ],
+  "decision": "repair",
+  "reason": "Request one local repair pass for the compact-variation supplier assumptions and regularity, the connection-variation typing, the missing constancy of κ, and the counterexample’s unnecessary proposition dependency. The imported choice-dependency concern is outside this batch and does not supply a premise used in these proofs.",
+  "findings": [
+    {
+      "id": "nonlinear-variation-supplier-hypotheses",
+      "type": "prerequisite",
+      "reason": "In prop-emg-fx-nonlinear-maxwell-variation, Step 2.1 integrates the divergence of W^a=H^{ab}a_b, which is only C¹ for L∈C²; lem-emg-maxwell-action-variation proves its compact-divergence rule for smooth fields. Its global-partition argument also uses ACω. Repair locally with a finite-cover C¹ integration-by-parts argument, or state and carry the exact supplier hypotheses."
+    },
+    {
+      "id": "nonlinear-connection-variation-typing",
+      "type": "local",
+      "reason": "def-emg-fx-nonlinear-lagrangian writes Aε=A+εa while a∈Ω¹(M) and A is a connection in a fixed bundle sector. Specify whether this denotes adding a to each compatible local physical potential, or adding its pullback to a bundle connection, including the physical normalization that yields Fε=F+εda."
+    },
+    {
+      "id": "semiclassical-kappa-constancy",
+      "type": "local",
+      "reason": "prop-emg-fx-semiclassical-consistency Step 1.2 factors κ outside the covariant derivative of the Einstein equation. The Statement gives κ≠0 but does not specify that κ is a real constant; add that hypothesis or account for the derivative term if κ varies."
+    },
+    {
+      "id": "eft-counterexample-proposition-edge",
+      "type": "local",
+      "reason": "cex-emg-fx-eft-order-does-not-control-derivatives attributes X, Y, and their parameter units to prop-emg-fx-nonlinear-maxwell-variation, although the Definition supplies them. The counterexample does not use the proposition’s field equation; reference the Definition or state the conventions locally and remove the unnecessary logical edge."
+    },
+    {
+      "id": "imported-countable-choice-dependency",
+      "type": "outside-batch",
+      "reason": "Read-only items/def-countable-choice.md defines ACω, while its deps also include def-axiom-of-choice for the AC⇒ACω remark. The assigned proof use requires at most ACω, not full Choice. Owner review of this imported supplier edge is outside this batch."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "prop-emg-fx-nonlinear-maxwell-variation",
+      "decision": "repair",
+      "reason": "Direct consumer of the nonlinear Definition’s variation interface; align its δF=da and compact-variation proof with the clarified connection notation and exact hypotheses."
+    },
+    {
+      "id": "cex-emg-fx-eft-order-does-not-control-derivatives",
+      "decision": "repair",
+      "reason": "Current direct consumer of the nonlinear-variation proposition, but its argument uses only conventions from the Definition and the explicit field construction, not the Euler–Lagrange conclusion."
+    },
+    {
+      "id": "post-emg-fx-classical-constitutive-adoption",
+      "decision": "accept",
+      "reason": "Its use of the Definition concerns the fixed-bundle field, invariants, constitutive tensor, and units; it does not use the connection-variation notation being clarified."
+    },
+    {
+      "id": "emg-fx11-examples",
+      "decision": "accept",
+      "reason": "Its page-level requirement on emg-fx11 remains valid context; the CEX item’s direct use is dispositioned separately."
+    },
+    {
+      "id": "emg-fx13",
+      "decision": "accept",
+      "reason": "The page remains later context via its emg-fx11 requirement, and its listed postulate’s use of the Definition is unaffected by the variation-notation clarification."
+    }
+  ]
+}

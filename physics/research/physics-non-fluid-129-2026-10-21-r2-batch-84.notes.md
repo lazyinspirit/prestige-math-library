@@ -1,0 +1,39 @@
+# Batch 84 authoring notes — `qftx-massive-scattering-estimates`
+
+## Inventory and plan reconciliation
+
+- The assigned plan and batch manifest agree on A page `qftx-massive-scattering-estimates` (order 865), B page `qftx-massive-scattering-estimates-examples` (order 866), title, category, library, companion, and page prerequisites `qftx-spectral-tube-analyticity` and `qft-mf02`. The detailed design assigns three A items and one B counterexample, with B a leaf; the plan-spec row has an empty item array because it is pre-authoring. No ID, page, title, prerequisite, or scope conflict was found.
+- No `research/physics-non-fluid-129-2026-10-21-r2-owner-authoring-direction.md` was present. The A page has three items and the B page one, well below the 100-item cap.
+- All four carriers retain `domain: mathematics`, `library: mathematics`, `physical_scope: null`, and mathematical-only dependencies. In addition to the page-level prerequisites, the approximant definition now names the implicit mathematical inputs for the shell coordinates, QFT Fock pairing, bounded PVM multiplier, and Fourier inversion. The direct in-run item edge is to `def-qftx-joint-spectrum-input` in batch 83.
+- The definition fixes the metric/signature and translation phase convention from its suppliers, treats `m` as a positive inverse-length shell parameter rather than a measured rest mass, and uses a fixed length unit `ell_0` to distinguish numerical time from coordinate time. It defines the packet multiplier, positive-energy packet profile, strong smearing integral, velocity support, common-domain variant, and the second-variable-linear Fock pairing. Its shell-component computation is explicit; convergence of the full one-particle vector remains a stated construction obligation.
+- The designed scope is preserved: the Cook theorem proves the abstract integrable-derivative limit and rate, with the Fock inner-product limit as a separate hypothesis; the proposition requires equal wave-map ranges for unitarity and distinguishes this from full asymptotic completeness; the B counterexample uses orthogonal embeddings `C -> C^2`. The items do not claim that locality alone proves the Cook estimate, and keep charged QED/infraparticles, LSZ, and Haag's no-go result as separate obligations.
+
+## Dependency and interface audit
+
+- The authored item order and computed levels are: `def-qftx-scattering-approximant-contract` level 1; `thm-qftx-cook-scattering-limit` level 2; `prop-qftx-scattering-isometry-not-completeness` level 3; and `cex-qftx-isometries-different-ranges` level 4. Batch 84 computes to level 1 and requires batch 83.
+- Scoped `dependencyLevels` over the batch-83 and batch-84 manifests found no cycles or label errors. Batch-83 `def-qftx-joint-spectrum-input` is level 0 and has the exact Hilbert-space, strongly continuous translation, joint PVM, closed-forward-cone support, invariant unit cyclic-vacuum, and global-algebra cyclicity interface used by the definition. `loadStep1Record` and `step1Decision` report current hash-valid ready records for that item and `thm-qftx-spectral-tube-holomorphy`. This is current authoring readiness, not independent proof approval.
+- The published `qft-mf02` page and the complete relevant scalar mass-shell definition and proofs were inspected. The scalar-shell parameter, signature, and coordinates match the local convention. The published QFT Fock definition, bounded Borel PVM integral theorem, Fourier inversion theorem, Countable Choice definition, and Cauchy–Schwarz statement/proof were inspected at their actual claims and hypotheses. Published mathematical suppliers without Step 1 records were not treated as gaps; their current statements and relevant proofs were checked.
+- The scoped item-level check returns `1, 2, 3, 4` for the assigned items with no errors. The run-wide `item-dependency-levels.mjs check` is not clean because 124 other scaffold pages have empty inventories and two other items have stale labels (`ex-gr-fx14-1`, `lem-nrqmx-finite-symplectic-implementers`). Neither issue belongs to batch 84.
+- A fresh whole-run batch-DAG calculation still gives batch 84 `level 1, requires [83]`, matching the existing row. The hash-bound shared batch-level snapshot is stale against the current manifests. The shared scheduling file was left unchanged for the run owner.
+- The cross-batch dependency array records the two supported edges: A page to batch-83 page `qftx-spectral-tube-analyticity`, and the definition item to batch-83 item `def-qftx-joint-spectrum-input`. Both are `verified` as interface checks only. The published `qft-mf02` prerequisite is outside this run and is recorded in the page manifest and dependency audit, not as a batch edge.
+
+## Sources and harvested results
+
+Both page coverage records identify the source URLs, locators, supported items, and a disposition for each harvested result. Each page has two independent full-text treatments, including complete lecture notes:
+
+- Detlev Buchholz and Wojciech Dybalski, [*Scattering in relativistic quantum field theory: basic concepts, tools, and results*](https://arxiv.org/pdf/math-ph/0509047), current arXiv v3 revised 2024-11-03; complete 15-page PDF retrieved and inspected at §1–2, PDF pp. 2–5. It supports the isolated-shell and interpolator setup, derivative-decay/Cook route, and distinction between scattering ranges and full completeness. Its stated stability/locality estimates are construction inputs, not replacements for the local conditional proof.
+- Klaus Fredenhagen, [*Quantum Field Theory*](https://www.physik.uni-hamburg.de/th2/ag-fredenhagen/dokumente/qft09-10.pdf), complete 143-page lecture-note PDF retrieved and inspected at Chapter IV §3, PDF pp. 82–85. It supports the upper-mass-gap/almost-local setup, velocity support, packet smearing, two-particle approximants, and wave-map range caveat; its discussion refers the complete Haag–Ruelle proof to the literature.
+
+The originally listed lqp2.org route for the Buchholz–Dybalski review returned HTTP 403 on one initial attempt and five recovery retries in each page record. A targeted search recovered the same authors' review at the official arXiv v3 PDF. The route-only disposition is `dropped` with certain confidence and recorded alternative arguments/dependencies for every affected item; no mathematical source result or claim was dropped. The required stamped check recorded four active source URLs as fetch-verified and all six page-source records as resolved; the final non-stamping check returned `4/6 fetch-verified, 6/6 resolved, 2 documented route drops`. Coverage records 12 harvested results across both pages.
+
+## Scoped checks and readiness
+
+- Precheck: all three proof-bearing items pass; the definition is nonproof and not applicable.
+- Rendercheck: all four items and both pages pass, including KaTeX and frontmatter parsing.
+- Proof layout: 4 changed items, 10 numbered steps, 0 defects.
+- Strict proof contracts: 4/4 items, 0 errors and 0 warnings.
+- Focused dependency check: 4 selected items; prerequisite-cycle context covers 1,292 items and 309 pages; no errors.
+- Content policy: 4 scoped items, 0 errors and 0 warnings. Manifest dependency check: 4 items, none missing.
+- Coverage checklist: 2 pages, 12 harvested results, 0 errors and 0 warnings. Final source-fetch check: 4/6 fetch-verified and 6/6 resolved, with two documented route drops.
+- The scoped item-level calculation is clean. The full run-wide item-level and hash-bound batch-level checks report only the unrelated blockers described above; shared scheduling metadata and other batch records were left untouched.
+- All four assigned items have explicit A/B placement, dependencies, proof contracts where applicable, and complete conditional arguments. Their Step 1 readiness records establish authoring readiness only; they do not record independent proof acceptance.

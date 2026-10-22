@@ -1,0 +1,126 @@
+{
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "phase": "initial",
+  "round": 1,
+  "unit": "15",
+  "input_sha256": "eaf0a68d231b0a7d0d042df337974eaab597dfd3432daa3ad0aaeebd32fe188c",
+  "decisions": [
+    {
+      "id": "pthm-emx-scattering-contraction",
+      "model": "gpt-6-luna",
+      "context_sha256": "c1571be60ecc4004260dff964dd88e06022f9cd1053a2b631e7be8d116c4a1bd",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The periodic real-field hypotheses do not explicitly identify those fields with the unique phasor solution whose amplitudes define S(omega). Periodicity alone allows higher harmonics, so the step-5.1 flux substitution needs that identification; moreover the matrix-wide conclusion needs the field and closure hypotheses for every input. The repair states E=Re(E_tilde_a exp(-i omega t)) and H analogously for each input of the same map, applies the same closure uniformly, and derives the cycle-average phasor identity in step 5.1. Both material branches and the original power-balance and unitarity conclusions are preserved.",
+      "uncertain": false,
+      "source_urls": [
+        "https://engineering.purdue.edu/wcchew/course/tgwAll20121211.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "pthm-emx-scattering-contraction",
+      "disposition": "repaired",
+      "post_sha256": "5bf852cf68b199de7686e3d013cb4c9d3720163e14e45198acf9be62427cd1f8",
+      "review_context_sha256": "b5405ea0c730446e2a7445feaa817a6c88248035ede72e9d5f25957a8c48c2f5",
+      "reason": "Checked the current port definition, both oscillator postulates and all ten direct prerequisite interfaces. Multiplication by P_t/a or V/a gives nonnegative damping loss; the smooth Maxwell curl identity gives u_t+div(E cross H)=-ell. Compact space-time integrability, the bounded-C1 divergence theorem under AC_omega, and Fubini justify integration; periodic material energy cancels. The explicit harmonic E,H identification now equates this boundary average to the same S(omega) power pairing. Uniform input hypotheses justify contractivity and the coordinate tests of the Hermitian zero quadratic form give S-dagger S=I; squareness gives two-sided unitarity. No empirical premise or existence claim was introduced. This is an adjudicator review of the repair, not independent approval.",
+      "uncertain": false,
+      "source_urls": [
+        "https://engineering.purdue.edu/wcchew/course/tgwAll20121211.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "pthm-emx-scattering-reciprocity",
+    "ex-emx-single-port-lossless-reflection",
+    "ex-emx-omitted-channel-subunitarity"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "id": "pthm-emx-scattering-contraction",
+      "status": "fixed",
+      "defect_type": "logic",
+      "reason": "Propose recording the missing real-field/phasor association and all-input hypotheses as repaired in the assigned draft; bind this native decision and its current review hashes. No shared ledger was edited."
+    }
+  ],
+  "gate_resolutions": [],
+  "supporting_evidence": {
+    "research/physics-non-fluid-129-2026-10-21-r2-batch-15-step5-context.json": "544a08763823359df59f7ae06e19b0e949d98eacd10291366c1473dcf004148e"
+  },
+  "repair_notes": {
+    "claim": "At one fixed real frequency, every solution of the same finite-port map satisfies one fixed homogeneous finite Lorentz or Drude closure, the stated smooth periodic regularity, and the passive boundary accounting. The exact loss identity, contraction and all-input zero-loss unitarity conclusions are unchanged.",
+    "conventions": "SI; exp(-i omega t); outward normals; incoming/outgoing amplitude units W^(1/2); total outgoing port power ||b||^2-||a||^2. Material states remain periodic and need not separately be purely harmonic; their full periodic stored energy cancels in the proof.",
+    "source_reading": {
+      "url": "https://engineering.purdue.edu/wcchew/course/tgwAll20121211.pdf",
+      "locators": "Chew sections 1.7.1-1.7.3, printed pp. 10-12, equations (1.7.1) and (1.7.12), read through the web PDF text. Screenshot attempts returned HTTP 429/cache miss and were not read.",
+      "limits": "No full-book reading or reading of the Beisert or Marks-Williams sources is claimed. The oscillator energy and phasor-average calculation are checked locally; the source is not used as an unrestricted dispersive energy theorem."
+    },
+    "metadata": "Under step5-shared-write-lock run --owner step5-v2-initial-r1-u15, reread the owning batch-15 manifest and proof contract, mirror only this item Statement and update only derivation step 5.1. Existing independent review/risk-review records were preserved.",
+    "diagrams": "The assigned item has no TikZ/tikzcd diagram and this energy deduction needs none. The port-definition orientation diagram was checked as prerequisite context: both incoming arrows enter the device and both outgoing arrows leave it.",
+    "consumer_uses": [
+      {
+        "id": "pthm-emx-scattering-reciprocity",
+        "path": "items/pthm-emx-scattering-reciprocity.md",
+        "affected_use": "Statement Lorentz/Drude sufficient cases; Facts L2; Proof 5.1 invoke the all-input zero-loss unitarity conclusion of the contraction result.",
+        "disposition": "unaffected",
+        "reason": "The current Statement already requires every input, the same phasor map and coefficients, purely single-frequency real fields/material states, and the same smooth closure. These hypotheses imply the repaired supplier hypotheses. Its general phasor identity is also independently proved."
+      },
+      {
+        "id": "ex-emx-single-port-lossless-reflection",
+        "path": "items/ex-emx-single-port-lossless-reflection.md",
+        "affected_use": "Example requires all hypotheses of the contraction result at each frequency; Fact F1 and Verification 1.1 use S-dagger S=I_1 to infer |r|=1.",
+        "disposition": "unaffected",
+        "reason": "The Example explicitly adopts all supplier hypotheses, including the now-explicit all-input phasor association; it already imposes zero losses for every input. The scalar division uses a nonzero input, so the modulus deduction is unchanged."
+      },
+      {
+        "id": "ex-emx-omitted-channel-subunitarity",
+        "path": "items/ex-emx-omitted-channel-subunitarity.md",
+        "affected_use": "Fact F1 and Verification 1.1 cite the exact contraction hypotheses only to interpret the independently verified stipulated two-channel swap matrix.",
+        "disposition": "unaffected",
+        "reason": "No Maxwell realization or inference from only periodic fields is claimed. The swap is directly proved unitary and its projected block is computed explicitly; the physical interpretation remains conditional on all exact supplier hypotheses."
+      }
+    ],
+    "page_uses": [
+      {
+        "path": "library/classical-electromagnetism/emx-waveguide-scattering-channels.md",
+        "disposition": "unaffected",
+        "reason": "Frontmatter-only owning page lists the same item inventory and prerequisite pages; no page prose makes a broader harmonic or all-input assertion."
+      },
+      {
+        "path": "library/classical-electromagnetism/emx-waveguide-scattering-channels-examples.md",
+        "disposition": "unaffected",
+        "reason": "Frontmatter-only companion lists the two examined examples and has no page prose affected by the clarification."
+      }
+    ],
+    "published_ledger": "No new potentially defective published supplier/consumer was found in this scoped review; no proposed published-consumer ledger modification.",
+    "checks": [
+      {
+        "command": "node tools/physics-support/tsx-run.mjs tools/physics-support/precheck.mts items/pthm-emx-scattering-contraction.md",
+        "exit_code": 0,
+        "result": "1 checked, 0 failing; direct proof passes."
+      },
+      {
+        "command": "node tools/physics-support/rendercheck.mjs items/pthm-emx-scattering-contraction.md",
+        "exit_code": 0,
+        "result": "1 file; YAML and every math span parse; no delimiter defects."
+      },
+      {
+        "command": "node tools/physics-support/proof-contract.mjs research/physics-non-fluid-129-2026-10-21-r2-batch-15.proof-contracts.json --strict --items pthm-emx-scattering-contraction",
+        "exit_code": 0,
+        "result": "0 errors, 0 warnings, 1/1 item checked."
+      },
+      {
+        "command": "node tools/physics-support/proof-layout.mjs items/pthm-emx-scattering-contraction.md",
+        "exit_code": 0,
+        "result": "1 item, 8 steps, 0 defects; completed after final item edits."
+      }
+    ],
+    "unresolved_obligations": [],
+    "next_action": "Controller collects the immutable original tuple and this repair review, routes the direct-consumer inventory, and runs the ordinary next-round and gate protocol; no judges or certification were launched."
+  }
+}

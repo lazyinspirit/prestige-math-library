@@ -1,0 +1,9 @@
+from pathlib import Path
+import json,subprocess,datetime,hashlib,concurrent.futures
+r='physics-non-fluid-129-2026-10-21-r2';b=Path(f'research/{r}-owner-hawking-metadata');pages=sum([json.loads(Path(f'research/{r}-batch-{n}.pages.json').read_text()) for n in [58,120]],[]);ids=[i['id'] for p in pages for i in p.get('items',[])+p.get('examples',[]) if isinstance(i,dict)];files=['items/'+i+'.md' for i in ids];(b/'relation-items.json').write_text(json.dumps(ids,indent=2)+'\n')
+checks={'proof-layout':['node','tools/physics-support/proof-layout.mjs',*files],'precheck':['node','tools/tsx-run.mjs','tools/physics-support/precheck.mts',*files],'rendercheck':['node','tools/physics-support/rendercheck.mjs',*files],'contract58':['node','tools/physics-support/proof-contract.mjs',f'research/{r}-batch-58.proof-contracts.json','--strict'],'contract120':['node','tools/physics-support/proof-contract.mjs',f'research/{r}-batch-120.proof-contracts.json','--strict'],'policy58':['node','tools/physics-support/content-policy.mjs',f'research/{r}-batch-58.pages.json'],'policy120':['node','tools/physics-support/content-policy.mjs',f'research/{r}-batch-120.pages.json'],'depcheck':['node','tools/physics-support/depcheck.mjs','--items-file',str(b/'relation-items.json'),'--json']}
+def run(row):
+ name,cmd=row;t=datetime.datetime.now(datetime.timezone.utc).isoformat();res=subprocess.run(cmd,capture_output=True,text=True);out=res.stdout+res.stderr;p=b/('relation-'+name+'.log');p.write_text(out);return dict(name=name,command=cmd,at=t,exit_code=res.returncode,output=str(p),sha256=hashlib.sha256(out.encode()).hexdigest())
+with concurrent.futures.ThreadPoolExecutor(max_workers=4) as pool:res=list(pool.map(run,checks.items()))
+(b/'relation-checks.json').write_text(json.dumps(res,indent=2)+'\n')
+for row in res:print(row['name'],row['exit_code']);print(Path(row['output']).read_text()[-1200:])

@@ -1,0 +1,95 @@
+---
+id: def-emx-finite-energy-boundary-model
+kind: definition
+title: "Finite-energy PEC and impedance boundary formulation"
+status: draft
+origin: pipeline
+domain: physics
+dependency_level: 0
+deps:
+  - def-countable-choice
+  - def-em-lab-geometry
+  - def-em-si-conventions
+  - def-na-hcurl-space
+  - def-na-zero-tangential-hcurl
+  - post-em-material-closure
+dependency_roles:
+  def-countable-choice: mathematical-premise
+  def-em-lab-geometry: formulation-prerequisite
+  def-em-si-conventions: formulation-prerequisite
+  def-na-hcurl-space: mathematical-premise
+  def-na-zero-tangential-hcurl: mathematical-premise
+  post-em-material-closure: physical-assumption
+verification:
+  precheck: n/a
+provenance:
+  statement: ai-altered
+  proof: not-applicable
+physical_scope: "A conditional, local, linear, nondispersive Maxwell boundary model in one SI inertial laboratory frame. It includes static measurable uniformly positive coefficient fields, the constant-coefficient branch of the material-closure postulate, a closure-defined PEC boundary condition, and an impedance branch only for fields carrying explicit Green-compatible L2 tangential boundary data. It asserts no existence theorem, no general L2 trace theorem, no validity for any actual material, and no empirical claim."
+sources:
+  references:
+    - title: "Niklas Beisert, Elektrodynamik, ETH Zurich 2024 FS lecture notes, 176 pp."
+      url: "https://people.phys.ethz.ch/~nbeisert/lectures/ED-24FS-Skript.pdf"
+      locator: "Section 5.3, printed p. 5.5 (PDF p. 65): dielectric-interface boundary conditions; Section 8.2, printed pp. 8.1-8.2 (PDF pp. 86-87): energy density, Poynting identity and fixed-volume boundary flux. These are smooth-field treatments; weak material claims below are proved locally."
+    - title: "Long Chen, Variational Formulation of Maxwell Equations, University of California, Irvine lecture note, updated May 12 2024, 8 pp."
+      url: "https://www.math.uci.edu/~chenlong/226/Maxwellweakform.pdf"
+      locator: "Sections 1-3.2, PDF pp. 1-5: H(curl) graph space, PEC and impedance boundary formulations, and trace/Green-identity conventions. The note's standard H(curl) trace-space theorem is not identified with an L2 trace."
+---
+
+## Definition
+
+Let $I\subseteq\mathbb R$ be a nonempty open interval and let $\Omega\subseteq\mathbb R^3$ be a nonempty bounded Lipschitz polyhedron in the laboratory frame. Its boundary $\Gamma=\partial\Omega$ has the outward unit normal $n$ on each open face, defined up to the edge set of surface measure zero. Use the SI conventions of this framework. In particular $E$ has units $\mathrm{V\,m^{-1}}$, $H$ has units $\mathrm{A\,m^{-1}}$, $D$ has units $\mathrm{C\,m^{-2}}$, $B$ has units $\mathrm T$, and a volume current density $J$ has units $\mathrm{A\,m^{-2}}$.
+
+For a real vector field $u\in L^2(\Omega;\mathbb R^3)$, its distributional curl is the distribution defined by
+
+$$\langle\operatorname{curl}u,\varphi\rangle=\int_\Omega u\cdot\operatorname{curl}\varphi\,d\lambda_3,\qquad \varphi\in C_c^\infty(\Omega;\mathbb R^3).$$
+
+As in the real graph space definition of the imported mathematical library, $H(\operatorname{curl};\Omega)$ consists of the $L^2$ vector fields whose distributional curl is represented by an $L^2$ vector field, with norm
+
+$$\|u\|_{H(\operatorname{curl};\Omega)}^2=\|u\|_{L^2(\Omega)}^2+\|\operatorname{curl}u\|_{L^2(\Omega)}^2.$$
+
+Assume the Axiom of Countable Choice $\mathrm{AC}_\omega$ as carried by that imported weak-derivative convention. Let $\varepsilon,\mu:\Omega\to\mathbb R^{3\times3}$ be measurable, essentially bounded, real symmetric coefficient fields, independent of time. Require constants $0<a_\varepsilon\le b_\varepsilon<\infty$ and $0<a_\mu\le b_\mu<\infty$ such that, for almost every $x\in\Omega$ and every $v\in\mathbb R^3$,
+
+$$a_\varepsilon |v|^2\le v\cdot\varepsilon(x)v\le b_\varepsilon |v|^2,\qquad a_\mu |v|^2\le v\cdot\mu(x)v\le b_\mu |v|^2.$$
+
+The coefficient units are $\mathrm{F\,m^{-1}}$ and $\mathrm{H\,m^{-1}}$, respectively. They define bounded symmetric multiplication operators on $L^2$. Define $D(t)=\varepsilon E(t)$ and $B(t)=\mu H(t)$. The spatially varying coefficient fields are explicit local model data; they are not inferred from the homogeneous material-closure postulate. Its constant symmetric branch is a special case.
+
+A field $E:I\to L^2(\Omega;\mathbb R^3)$ is in $C^1(I;L^2)$ when it has a derivative in the $L^2$ norm at every $t\in I$ and that derivative is norm-continuous. $C(I;H(\operatorname{curl};\Omega))$ means norm-continuity into the graph space. A finite-energy model solution is a pair
+
+$$E,H\in C^1(I;L^2(\Omega;\mathbb R^3))\cap C(I;H(\operatorname{curl};\Omega)),$$
+
+with $J\in C(I;L^2(\Omega;\mathbb R^3))$, satisfying the adopted evolution equations as $L^2$ identities for each $t\in I$,
+
+$$\varepsilon\,\partial_t E=\operatorname{curl}H-J,\qquad \mu\,\partial_t H=-\operatorname{curl}E.$$
+
+Its stored field energy is the finite real number
+
+$$W(t):=\frac12\int_\Omega\bigl(E(x,t)\cdot\varepsilon(x)E(x,t)+H(x,t)\cdot\mu(x)H(x,t)\bigr)\,d\lambda_3(x).$$
+
+There are two alternative boundary models.
+
+**PEC.** Perfect electric conductor means $E(t)\in H_0(\operatorname{curl};\Omega)$ for every $t$, where $H_0(\operatorname{curl};\Omega)$ is exactly the closure of $C_c^\infty(\Omega;\mathbb R^3)$ in the displayed graph norm. This closure definition is used; it is not replaced by an unproved identification with every possible trace kernel.
+
+**Impedance.** A Green-compatible tangential boundary pair consists of measurable fields $E_\tau,H_\tau\in L^2(\Gamma\times I;\mathbb R^3)$ with $n\cdot E_\tau=n\cdot H_\tau=0$ almost everywhere and, for almost every $t$,
+
+$$\int_\Omega\bigl(\operatorname{curl}H\cdot E-H\cdot\operatorname{curl}E\bigr)\,d\lambda_3=-\int_\Gamma n\cdot(E_\tau\times H_\tau)\,dS.$$
+
+This Green identity is part of impedance admissibility; membership in $H(\operatorname{curl})$ alone does not assert that such an $L^2$ pair exists. Let $Y\in L^\infty(\Gamma)$ be a time-independent scalar surface admittance, in siemens, with $Y\ge0$ almost everywhere. The impedance law is
+
+$$H_\tau=Y(n\times E_\tau)\quad\text{almost everywhere on }\Gamma\times I.$$
+
+Then $Y|E_\tau|^2\in L^1(\Gamma\times I)$ and is the nonnegative outward boundary-power density in $\mathrm{W\,m^{-2}}$. No pointwise boundary trace of an arbitrary $H(\operatorname{curl})$ field is asserted.
+
+## Definition references
+
+[[def-countable-choice]]
+
+[[def-em-lab-geometry]]
+
+[[def-em-si-conventions]]
+
+[[def-na-hcurl-space]]
+
+[[def-na-zero-tangential-hcurl]]
+
+[[post-em-material-closure]]

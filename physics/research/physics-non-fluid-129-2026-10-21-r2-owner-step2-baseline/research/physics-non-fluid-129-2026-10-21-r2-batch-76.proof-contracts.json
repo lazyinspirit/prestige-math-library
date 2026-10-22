@@ -1,0 +1,506 @@
+{
+  "version": 1,
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "batch": "76",
+  "level": 0,
+  "scope": [
+    "def-qftx-frobenius-semisimple-model",
+    "prop-qftx-frobenius-genus-amplitude",
+    "prop-qftx-frobenius-positive-reflection",
+    "ex-qftx-dual-number-topological-model"
+  ],
+  "contracts": {
+    "def-qftx-frobenius-semisimple-model": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-closed-oriented-two-dimensional-tqfts-are-commutative-frobenius-algebras",
+          "source_section": "Statement",
+          "quote": "For any field $k$, the category of strong symmetric monoidal functors $\\mathsf{Cob}^{\\mathrm{cl}}_2\\to\\mathrm{Vect}_{\\mathrm{fd}}(k)$ and monoidal natural transformations is equivalent to the category of finite-dimensional commutative Frobenius $k$-algebras and maps preserving multiplication, unit, comultiplication, and counit.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-closed-oriented-two-dimensional-tqfts-are-commutative-frobenius-algebras",
+          "source_section": "Statement",
+          "quote": "If $M$ is connected with genus $g$, $m$ incoming circles and $n$ outgoing circles, its value under the functor corresponding to $(C,\\mu,\\eta,\\Delta,\\epsilon)$ is $$ \\Delta_C^{[n]}\\circ H^g\\circ\\mu_C^{[m]}:C^{\\otimes m}\\to C^{\\otimes n}, \\qquad H:=\\mu_C\\Delta_C, $$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "def-pairing-nondegenerate",
+          "step": "1.1",
+          "claim": "Coordinatewise multiplication is associative and commutative with unit sum e_i; the pairing matrix is diagonal with entries w_i, so determinant product w_i is nonzero.",
+          "inputs": [
+            "given",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "def-frobenius-structure",
+          "step": "1.2",
+          "claim": "The displayed Delta and epsilon satisfy both counit equations, coassociativity and both typed Frobenius identities, checked on each idempotent basis element and extended by linearity.",
+          "inputs": [
+            "given",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "def-classified-sewing",
+          "step": "2.1",
+          "claim": "The finite-dimensional commutative Frobenius algebra meets the root classification hypotheses; the resulting closed functor has the stated genus evaluation and cylinder action.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [
+        {
+          "case": "r=1",
+          "calculation": "The pairing matrix is [w_1] with determinant w_1 != 0; Delta(e_1)=w_1^{-1}e_1 tensor e_1.",
+          "disposition": "The smallest admitted algebra is well-defined for each nonzero weight."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The definition includes the genus-zero closed surface and the empty source/target convention through the root classification in step 2.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Every weight is stipulated nonzero; the pairing determinant product is nonzero by step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The r=1 case is admitted and step 1.1 checks its one-entry pairing matrix."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "A zero weight is excluded by the definition, so no degenerate pairing is part of this model."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint parameter occurs in the closed surface category."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The definition records AC_omega as inherited only through the classification input; the finite coordinate calculations use the given finite basis."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition is not a forward implication with a converse."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition is not a reverse implication with a converse."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-76",
+        "notes": "The author checked each numbered step against its stated inputs, including the finite and degenerate cases; this is Step-1 authoring evidence, not independent proof approval."
+      }
+    },
+    "prop-qftx-frobenius-genus-amplitude": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qftx-frobenius-semisimple-model",
+          "source_section": "Definition",
+          "quote": "Fix an integer $r\\ge1$ and let $A=\\bigoplus_{i=1}^{r}\\mathbb C e_i$, with coordinatewise multiplication $e_i e_j=\\delta_{ij}e_i$ and unit $1_A=\\sum_{i=1}^{r}e_i$. Choose weights $w_i\\in\\mathbb C^\\times$ and define $\\epsilon(e_i)=w_i$ and $\\Delta(e_i)=w_i^{-1}e_i\\otimes e_i$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qftx-frobenius-semisimple-model",
+          "source_section": "Definition",
+          "quote": "For the connected closed surface $\\Sigma_g$ of genus $g\\ge0$, it assigns $Z_A(\\Sigma_g)=\\epsilon(H^g(\\eta(1)))$; the cylinder acts by $1_A$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "genus-handle-diagonal",
+          "step": "1.1",
+          "claim": "For each idempotent, H(e_i)=mu(w_i^{-1}e_i tensor e_i)=w_i^{-1}e_i.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "genus-handle-power",
+          "step": "2.1",
+          "claim": "Applying the diagonal H repeatedly to eta(1)=sum_i e_i gives sum_i w_i^{-g}e_i, including g=0 by the identity convention.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "genus-amplitude",
+          "step": "3.1",
+          "claim": "Applying epsilon gives sum_i w_i^{1-g}; for g=1 each summand equals one, and the cylinder is the identity by the definition.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [
+        {
+          "case": "g=0",
+          "calculation": "H^0 eta(1)=sum_i e_i, hence epsilon(H^0 eta(1))=sum_i w_i.",
+          "disposition": "Matches the genus-zero sphere amplitude."
+        },
+        {
+          "case": "g=1",
+          "calculation": "H(e_i)=w_i^{-1}e_i, so epsilon(H eta(1))=sum_i w_i*w_i^{-1}=r.",
+          "disposition": "Matches the torus amplitude."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The closed connected surface has no black boundary; its cup/handle/cap evaluation is given in the definition and used in step 3.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The exponent g=0 is allowed and step 2.1 uses H^0=id_A."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At g=1, w_i^(1-g)=1 for every i, so step 3.1 yields r."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "All w_i are nonzero by the model definition; zero weights are outside the hypothesis."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There are no time or interval endpoints in this surface amplitude."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The surface-existence/classification input carries AC_omega through its stated normal-form supplier; the finite sum in steps 1.1–3.1 uses no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The proposition asserts a formula, not an implication with a converse."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The proposition asserts a formula, not an implication with a converse."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-76",
+        "notes": "The author checked each numbered step against its stated inputs, including the finite and degenerate cases; this is Step-1 authoring evidence, not independent proof approval."
+      }
+    },
+    "prop-qftx-frobenius-positive-reflection": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qftx-frobenius-semisimple-model",
+          "source_section": "Definition",
+          "quote": "Fix an integer $r\\ge1$ and let $A=\\bigoplus_{i=1}^{r}\\mathbb C e_i$, with coordinatewise multiplication $e_i e_j=\\delta_{ij}e_i$ and unit $1_A=\\sum_{i=1}^{r}e_i$. Choose weights $w_i\\in\\mathbb C^\\times$ and define $\\epsilon(e_i)=w_i$ and $\\Delta(e_i)=w_i^{-1}e_i\\otimes e_i$.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qftx-frobenius-semisimple-model",
+          "source_section": "Definition",
+          "quote": "The supplied closed classification associates to $(A,\\mu,\\eta,\\Delta,\\epsilon)$ a closed oriented two-dimensional TQFT.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "reflection-form-diagonal",
+          "step": "1.1",
+          "claim": "The coordinatewise involution and idempotent multiplication give h(a,b)=sum_i w_i conjugate(a_i)b_i.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "reflection-form-sufficiency",
+          "step": "2.1",
+          "claim": "Positive real weights make h Hermitian and yield a strictly positive sum for every nonzero vector.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "reflection-form-necessity",
+          "step": "2.2",
+          "claim": "Testing e_i gives w_i=h(e_i,e_i)>0, and Hermitian symmetry forces w_i real.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "reflection-existence-boundary",
+          "step": "3.1",
+          "claim": "The algebraic closed classification requires nonzero Frobenius weights but no positivity condition.",
+          "inputs": [
+            "given",
+            "F2",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [
+        {
+          "case": "r=1",
+          "calculation": "For a=a_1e_1, h(a,a)=w_1|a_1|^2.",
+          "disposition": "The scalar case has the same positive-real criterion."
+        },
+        {
+          "case": "basis-vector necessity",
+          "calculation": "For each i, h(e_i,e_i)=w_i.",
+          "disposition": "Hermitian positive definiteness forces each weight to be positive real."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The statement fixes r>=1 and step 2.1 tests every nonzero vector in this finite-dimensional space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Each basis vector e_i is nonzero and h(e_i,e_i)=w_i, which is the necessity test in step 2.2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For r=1, step 2.1 reduces the form to the one-entry matrix [w_1]."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The underlying Frobenius model assumes every w_i is nonzero; degenerate pairings are excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint parameter occurs in the form."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The definition records inherited AC_omega for surface classification; steps 1.1–2.2 use only a given finite basis."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The forward direction from positive real weights to a Hermitian positive form is proved in step 2.1."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The reverse direction from positive definiteness to positive real weights is proved in step 2.2."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-76",
+        "notes": "The author checked each numbered step against its stated inputs, including the finite and degenerate cases; this is Step-1 authoring evidence, not independent proof approval."
+      }
+    },
+    "ex-qftx-dual-number-topological-model": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-closed-oriented-two-dimensional-tqfts-are-commutative-frobenius-algebras",
+          "source_section": "Statement",
+          "quote": "For any field $k$, the category of strong symmetric monoidal functors $\\mathsf{Cob}^{\\mathrm{cl}}_2\\to\\mathrm{Vect}_{\\mathrm{fd}}(k)$ and monoidal natural transformations is equivalent to the category of finite-dimensional commutative Frobenius $k$-algebras and maps preserving multiplication, unit, comultiplication, and counit.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "dual-number-algebra",
+          "step": "1.1",
+          "claim": "The quotient has basis 1,x and multiplication ac+(ad+bc)x; it is a two-dimensional commutative unital associative algebra with nonzero nilpotent x.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "dual-number-pairing",
+          "step": "1.2",
+          "claim": "The pairing matrix in basis (1,x) is [[0,1],[1,0]] with determinant -1, hence is nondegenerate.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "dual-number-comultiplication",
+          "step": "2.1",
+          "claim": "The displayed Delta satisfies both counits, coassociativity on both basis elements, and both Frobenius identities on the four basis pairs.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "dual-number-not-semisimple",
+          "step": "2.2",
+          "claim": "Every maximal ideal contains x because the image of x is nilpotent in a field; the maximal ideal (x) exists, so the radical is nonzero.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "dual-number-indefinite-form",
+          "step": "2.3",
+          "claim": "The coefficient formula is Hermitian and the vectors 1+x and 1-x have squared values 2 and -2.",
+          "inputs": [
+            "given",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "dual-number-tqft",
+          "step": "3.1",
+          "claim": "The finite-dimensional commutative Frobenius algebra satisfies the root classification hypotheses and therefore defines a closed-sector TQFT.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [
+        {
+          "case": "pairing determinant",
+          "calculation": "det([[0,1],[1,0]])=-1 != 0.",
+          "disposition": "Confirms nondegeneracy despite zero diagonal."
+        },
+        {
+          "case": "positive and negative vectors",
+          "calculation": "h(1+x,1+x)=2 and h(1-x,1-x)=-2.",
+          "disposition": "Confirms the form is indefinite."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The empty circle word is included in the closed category, and the classification is applied in step 3.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Frobenius pairing has zero diagonal entries but is nondegenerate because its determinant is -1 in step 1.2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The two basis vectors 1 and x are checked explicitly in steps 1.1–2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The pairing determinant is -1, so the example is not degenerate despite its zero diagonal."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoints occur in the closed cobordism category."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The classification input inherits AC_omega; steps 1.1–2.3 are finite calculations and step 3.1 applies the supplied theorem."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example asserts a concrete construction, not an implication with a converse."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example asserts a concrete construction, not an implication with a converse."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-76",
+        "notes": "The author checked each numbered step against its stated inputs, including the finite and degenerate cases; this is Step-1 authoring evidence, not independent proof approval."
+      }
+    }
+  }
+}

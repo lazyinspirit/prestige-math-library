@@ -1,0 +1,1111 @@
+{
+  "version": 1,
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "batch": "112",
+  "level": 3,
+  "scope": [
+    "def-qsmx-transverse-ising-majoranas",
+    "lem-qsmx-transverse-ising-majorana-car",
+    "lem-qsmx-real-skew-orthogonal-normal-form",
+    "thm-qsmx-open-ising-quadratic",
+    "lem-qsmx-l2-fourier-unitarity",
+    "thm-qsmx-ising-bulk-symbol-gap",
+    "ex-qsmx-ising-classical-and-field-limits"
+  ],
+  "contracts": {
+    "def-qsmx-transverse-ising-majoranas": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qsm-pauli-two-qubit-conventions",
+          "source_section": "Definition",
+          "quote": "For two $2\\times2$ matrices $A,B$, their tensor product acts by $(A\\otimes B)(u\\otimes v)=Au\\otimes Bv$ and is extended linearly.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The Pauli matrices on each fixed tensor factor are everywhere-defined finite-dimensional endomorphisms of the product Hilbert space.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The finite products defining the strings and Majorana operators, and the finite sums defining the Hamiltonian, are well-defined matrices; the bond sum stops at N-1 and has no periodic edge.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Although a zero-site Hilbert space is excluded, the bond index set is empty at N=1 and the initial Pauli string is empty at j=1. The Definition assigns that string the identity, and2.1 explicitly assigns the empty bond sum zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: For N=1, S_0 is the identity and the bond sum is empty."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: At N=1, both gamma operators are exactly X_1 and Y_1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The definition asserts no eigenvalue multiplicity claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The bond range 1<=j<N excludes a bond from N to 1 for every N."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Only a fixed finite tensor product is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition asserts no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/qsm_boundary (scientific owner; no independent acceptance)",
+            "reason": "The ordered tensor factors, empty initial Pauli string, and open bond indexing specify particular matrices. Defining those matrices imposes no two-direction theorem about arbitrary Majorana families.",
+            "item_sha256": "2eb534b732335fc62a8965995ae4fc4387d8d3bb23c85679fa9390a8ce341505",
+            "row_sha256": "51070631debe98e500295e6b00fef77049f5f4cecabbe56f4a46087a486154f9"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition asserts no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/qsm_boundary (scientific owner; no independent acceptance)",
+            "reason": "The ordered tensor factors, empty initial Pauli string, and open bond indexing specify particular matrices. Defining those matrices imposes no two-direction theorem about arbitrary Majorana families.",
+            "item_sha256": "2eb534b732335fc62a8965995ae4fc4387d8d3bb23c85679fa9390a8ce341505",
+            "row_sha256": "5bce79c5d516939961007101e8113df977a5078d6ae7e5d012786b21dc40a0d8"
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "one-site chain",
+          "inputs": "N=1",
+          "calculation": "S_0=I, H_1=-hZ_1, and the interaction sum has no terms.",
+          "result": "The construction is defined without a periodic boundary term."
+        }
+      ]
+    },
+    "lem-qsmx-transverse-ising-majorana-car": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qsmx-transverse-ising-majoranas",
+          "source_section": "Definition",
+          "quote": "The ordered Majorana operators are $$\\gamma_{2j-1}=S_{j-1}X_j,\\qquad \\gamma_{2j}=S_{j-1}Y_j\\qquad(1\\le j\\le N).$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qsm-pauli-two-qubit-conventions",
+          "source_section": "Definition",
+          "quote": "Direct conjugate-transpose and multiplication of the displayed matrices give $\\sigma_x^*=\\sigma_x$, $\\sigma_y^*=\\sigma_y$, $\\sigma_z^*=\\sigma_z$, and $\\sigma_x^2=\\sigma_y^2=\\sigma_z^2=I_2$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Each string commutes with its final-site X or Y factor, is Hermitian, and squares to identity; hence each gamma is Hermitian and squares to identity.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The two Majoranas at one site anticommute because XY=iZ and YX=-iZ.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For distinct sites, the later Jordan-Wigner string contains exactly one Z factor at the earlier site, producing exactly one minus sign; all distinct-site factors otherwise commute.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "N>=1 is assumed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The square relation gives {gamma_a,gamma_a}=2I."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: For N=1 the only distinct pair is X_1,Y_1 and XY+YX=0."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The result concerns operator relations, not eigenvalue multiplicities."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The same string argument applies to the first and last sites; strings stop at the listed site index."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All products are finite and fixed by the site order."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No biconditional is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/qsm_boundary (scientific owner; no independent acceptance)",
+            "reason": "Pauli strings are Hermitian involutions and acquire exactly one minus sign at distinct sites; the same-site computation completes the canonical anticommutator identity. The identity is asserted for the defined strings, without a converse reconstructing strings from arbitrary CAR matrices.",
+            "item_sha256": "70b969e0f4752f9ff000a468c2e67da6f9c850e037e2db1ab2a81d341829e755",
+            "row_sha256": "ad4b204283b07a27ed3883b73c27161e8cfe007a0f667b1dafdb4ff519529bef"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No biconditional is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/qsm_boundary (scientific owner; no independent acceptance)",
+            "reason": "Pauli strings are Hermitian involutions and acquire exactly one minus sign at distinct sites; the same-site computation completes the canonical anticommutator identity. The identity is asserted for the defined strings, without a converse reconstructing strings from arbitrary CAR matrices.",
+            "item_sha256": "70b969e0f4752f9ff000a468c2e67da6f9c850e037e2db1ab2a81d341829e755",
+            "row_sha256": "ce1c0bcd8ba2b402e69a71bb01172de14c252bd70a6171a827f5fa27494f4a33"
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "same-site pair",
+          "inputs": "gamma_(2j-1), gamma_(2j)",
+          "calculation": "Their products in opposite orders are iZ_j and -iZ_j.",
+          "result": "Their anticommutator is zero."
+        },
+        {
+          "case": "different-site pair",
+          "inputs": "j<ell",
+          "calculation": "Exactly one Z_j in the later string anticommutes with X_j or Y_j.",
+          "result": "The two gamma operators anticommute."
+        }
+      ]
+    },
+    "lem-qsmx-real-skew-orthogonal-normal-form": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-qsm-matrix-state-calculus",
+          "source_section": "Statement",
+          "quote": "Every Hermitian endomorphism $M$ has an orthonormal eigenbasis with real eigenvalues.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The complexification iA is Hermitian, so its finite real spectrum has an orthonormal eigenbasis; real conjugation pairs each positive eigenvalue with its negative.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The real and imaginary parts of a normalized positive-eigenvalue vector form an orthogonal equal-norm pair that realizes the displayed 2x2 skew block.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The positive eigenspace pairs give mutually orthogonal real planes; the remaining real kernel has even dimension and pairs into zero blocks.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "step 2.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The singular values are epsilon_r repeated twice on each block, so each positive block energy lists one positive singular value.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The matrix size is 2N with N>=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: A=0 has N zero blocks and a 2N-dimensional kernel."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: For N=1, every real 2x2 skew matrix already has the stated block form after choosing its orientation."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: An orthonormal basis is chosen within each repeated eigenspace, and all resulting real planes remain orthogonal."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no limiting parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Only finite-dimensional orthonormal bases are chosen."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No biconditional is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/qsm_boundary (scientific owner; no independent acceptance)",
+            "reason": "Positive eigenvectors of the Hermitian matrix iA pair with their conjugates to form real two-planes, and the even-dimensional kernel supplies zero blocks. Existence of this normal form is the conclusion; no converse about arbitrary matrices is claimed.",
+            "item_sha256": "55a507b92ebd3d53765d995467cc395845716dc3d39ee24b6617bebf30221fda",
+            "row_sha256": "ad4b204283b07a27ed3883b73c27161e8cfe007a0f667b1dafdb4ff519529bef"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No biconditional is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/qsm_boundary (scientific owner; no independent acceptance)",
+            "reason": "Positive eigenvectors of the Hermitian matrix iA pair with their conjugates to form real two-planes, and the even-dimensional kernel supplies zero blocks. Existence of this normal form is the conclusion; no converse about arbitrary matrices is claimed.",
+            "item_sha256": "55a507b92ebd3d53765d995467cc395845716dc3d39ee24b6617bebf30221fda",
+            "row_sha256": "ce1c0bcd8ba2b402e69a71bb01172de14c252bd70a6171a827f5fa27494f4a33"
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "zero matrix",
+          "inputs": "A=0 in M_(2N)(R)",
+          "calculation": "Every block has epsilon_r=0.",
+          "result": "The kernel is paired into N zero blocks."
+        },
+        {
+          "case": "single nonzero plane",
+          "inputs": "A=[[0,a],[-a,0]]",
+          "calculation": "Choose epsilon=|a| and, if needed, reverse one basis vector.",
+          "result": "The canonical block is [[0,epsilon],[-epsilon,0]]."
+        }
+      ]
+    },
+    "thm-qsmx-open-ising-quadratic": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following statement.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qsmx-transverse-ising-majoranas",
+          "source_section": "Definition",
+          "quote": "The upper limit $N-1$ is the open-boundary convention: no term couples site $N$ to site $1$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qsmx-transverse-ising-majorana-car",
+          "source_section": "Statement",
+          "quote": "Then each $\\gamma_a$ is Hermitian and $$\\gamma_a\\gamma_b+\\gamma_b\\gamma_a=2\\delta_{ab}I_{\\mathcal H_N}\\qquad(1\\le a,b\\le2N).$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qsmx-real-skew-orthogonal-normal-form",
+          "source_section": "Statement",
+          "quote": "For every integer $N\\ge1$ and real skew-symmetric matrix $A\\in M_{2N}(\\mathbb R)$, there are an orthogonal real matrix $O$ and numbers $\\epsilon_1,\\ldots,\\epsilon_N\\ge0$ such that $$OAO^{\\mathsf T}=\\bigoplus_{r=1}^N\\begin{pmatrix}0&\\epsilon_r\\\\-\\epsilon_r&0\\end{pmatrix}.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qsm-models-diagonal-occupation-trace",
+          "source_section": "Statement",
+          "quote": "\\Xi_F=\\operatorname{Tr}G_{\\beta,\\mu}=\\prod_j(1+q_j)<\\infty.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-qsm-matrix-state-calculus",
+          "source_section": "Statement",
+          "quote": "Every Hermitian endomorphism $M$ has an orthonormal eigenbasis with real eigenvalues.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The adjacent Majorana bilinears reproduce the field and open bond terms with the stated signs; the missing j=N bond is absent.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The skew coefficient entries 2h and 2J give exactly H=(i/4) gamma^T A_N gamma.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The real orthogonal change of Majoranas preserves CAR and block-diagonalizes the matrix expression from the preceding step into epsilon_r(n_r-1/2).",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "algebra",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The commuting occupation projections have 2^N one-dimensional joint eigenspaces, giving the finite fermionic occupation basis on the spin space.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "The finite fermionic trace supplier and the scalar energy shift yield the product of 2 cosh factors, with factor two for zero modes.",
+          "step": "5.1",
+          "inputs": [
+            "A1",
+            "F4",
+            "F5",
+            "step 3.1",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For N=1 the open bond contribution in1.1 is the zero sum, while the quadratic form has one onsite two-by-two block. The occupation proof4.1 has two one-dimensional sectors and5.1 has one cosh factor; no zero-site product is required."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: For epsilon_r=0 the mode has two occupations with equal zero energy and contributes 2 cosh(0)=2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: For N=1 the bond sum is empty and the trace is 2 cosh(beta |h|)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Repeated positive block energies are counted once per two-dimensional block, hence with the correct Fock multiplicity."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The open chain has bonds only for 1<=j<N; no parity-dependent wraparound term occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The mode set is finite; Countable Choice is retained only because the selected trace supplier assumes it."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No biconditional is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/qsm_boundary (scientific owner; no independent acceptance)",
+            "reason": "The open-chain field and bond products give a real skew quadratic form, real orthogonal blocks give fermionic occupations, and their finite trace factors into coshes. These formulas are consequences of the open-chain definition, not conditions equivalent to that definition.",
+            "item_sha256": "796908ef5e53b9faf1a36d4755bf785c3e50b9d2c02c6f8a4c97bb4beaf6822c",
+            "row_sha256": "ad4b204283b07a27ed3883b73c27161e8cfe007a0f667b1dafdb4ff519529bef"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No biconditional is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/qsm_boundary (scientific owner; no independent acceptance)",
+            "reason": "The open-chain field and bond products give a real skew quadratic form, real orthogonal blocks give fermionic occupations, and their finite trace factors into coshes. These formulas are consequences of the open-chain definition, not conditions equivalent to that definition.",
+            "item_sha256": "796908ef5e53b9faf1a36d4755bf785c3e50b9d2c02c6f8a4c97bb4beaf6822c",
+            "row_sha256": "ce1c0bcd8ba2b402e69a71bb01172de14c252bd70a6171a827f5fa27494f4a33"
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "one-site chain",
+          "inputs": "N=1, epsilon_1=2|h|",
+          "calculation": "Z=2 cosh(beta epsilon_1/2).",
+          "result": "Z=2 cosh(beta |h|), equal to Tr(exp(beta h Z_1))."
+        },
+        {
+          "case": "zero Hamiltonian",
+          "inputs": "h=J=0",
+          "calculation": "All N block energies vanish.",
+          "result": "Z=2^N, the dimension of the spin Hilbert space."
+        }
+      ]
+    },
+    "lem-qsmx-l2-fourier-unitarity": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following statement.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-the-one-dimensional-torus-and-normalized-haar-integral",
+          "source_section": "Definition",
+          "quote": "Thus $(\\mathbb T,\\mathcal B(\\mathbb T),m_{\\mathbb T})$ is a probability measure space",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-square-summable-family-on-an-arbitrary-index-set",
+          "source_section": "Definition",
+          "quote": "\\ell^2(I,\\mathbb F):=\\{\\,a=(a_i)_{i\\in I} : \\|a\\|_2<+\\infty\\,\\}.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-fourier-basis-and-parseval-on-the-n-torus",
+          "source_section": "Statement",
+          "quote": "the Fourier coefficient map is a surjective linear isometry of $L^2(\\mathbb T^n)$ onto $\\ell^2(\\mathbb Z^n,\\mathbb C)",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Orthogonality of the torus characters gives exact preservation of inner products for finite-support two-component sequences.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The inverse coefficient isometry is the finite Fourier polynomial on finite support and supplies the unique unitary completion; truncation proves uniqueness on a dense domain.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: The zero sequence maps to the zero L2 class."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The norm identity holds when all coefficients vanish."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: A single coefficient x_j maps to x_j e^{ijk}, whose L2 norm equals ||x_j||."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The lemma asserts a unitary map, not a spectral multiplicity statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no limiting parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Countable Choice is explicitly stated and matches the Fourier-basis supplier hypothesis."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No biconditional is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/qsm_boundary (scientific owner; no independent acceptance)",
+            "reason": "Finite character orthogonality preserves the sequence inner product, and the scalar Fourier-basis supplier gives the unique surjective isometric extension on two coordinates under Countable Choice. No reverse implication about the choice principle is asserted.",
+            "item_sha256": "bc5da6147f53907a3559a5d2e366545f30636898206294b79ca43b265eaefb0b",
+            "row_sha256": "ad4b204283b07a27ed3883b73c27161e8cfe007a0f667b1dafdb4ff519529bef"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No biconditional is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/qsm_boundary (scientific owner; no independent acceptance)",
+            "reason": "Finite character orthogonality preserves the sequence inner product, and the scalar Fourier-basis supplier gives the unique surjective isometric extension on two coordinates under Countable Choice. No reverse implication about the choice principle is asserted.",
+            "item_sha256": "bc5da6147f53907a3559a5d2e366545f30636898206294b79ca43b265eaefb0b",
+            "row_sha256": "ce1c0bcd8ba2b402e69a71bb01172de14c252bd70a6171a827f5fa27494f4a33"
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "one-site support",
+          "inputs": "x_j=w and x_l=0 for l!=j",
+          "calculation": "F_0 x(k)=w e^{ijk} and the normalized torus integral of |e^{ijk}|^2 is 1.",
+          "result": "The Fourier map preserves the norm of this sequence."
+        },
+        {
+          "case": "two distinct sites",
+          "inputs": "x_j=w, y_l=z with j!=l",
+          "calculation": "The integral of e^{i(j-l)k} is zero.",
+          "result": "Distinct lattice coordinates remain orthogonal."
+        }
+      ]
+    },
+    "thm-qsmx-ising-bulk-symbol-gap": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qsmx-transverse-ising-majoranas",
+          "source_section": "Definition",
+          "quote": "Let $N\\ge1$ be an integer and let $\\mathcal H_N=(\\mathbb C^2)^{\\otimes N}$ with the product inner product linear in its first argument. At each factor use\n$$\nX=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix},\\qquad Y=\\begin{pmatrix}0&-i\\\\i&0\\end{pmatrix},\\qquad Z=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix},\\qquad I_2=\\begin{pmatrix}1&0\\\\0&1\\end{pmatrix}.\n$$\nFor $1\\le j\\le N$, $X_j,Y_j,Z_j$ denote these matrices on factor $j$ and $I_2$ on every other factor. For real $h,J$ measured in joules define the finite open-chain matrix\n$$H_N(h,J)=-h\\sum_{j=1}^N Z_j-J\\sum_{j=1}^{N-1}X_jX_{j+1}.$$\nThe upper limit $N-1$ is the open-boundary convention: no term couples site $N$ to site $1$. Put $S_0=I_{\\mathcal H_N}$ and $S_{j-1}=Z_1\\cdots Z_{j-1}$ for $j>1$. The ordered Majorana operators are\n$$\\gamma_{2j-1}=S_{j-1}X_j,\\qquad \\gamma_{2j}=S_{j-1}Y_j\\qquad(1\\le j\\le N).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-qsmx-open-ising-quadratic",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $N\\ge1$, use the open-chain Hilbert space and Hamiltonian $H_N(h,J)$ of the ordered Majorana definition, and let $\\beta>0$ have units $\\mathrm{J}^{-1}$ while $h,J$ have units joules. Define the real skew matrix $A_N\\in M_{2N}(\\mathbb R)$ by $ (A_N)_{2j-1,2j}=2h$ for $1\\le j\\le N$, $(A_N)_{2j,2j+1}=2J$ for $1\\le j<N$, the opposite entries by skew-symmetry, and all other entries by zero. Let $\\epsilon_1,\\ldots,\\epsilon_N\\ge0$ be its real orthogonal block energies, including zero values. Then\n$$H_N(h,J)=\\frac{i}{4}\\gamma^{\\mathsf T}A_N\\gamma=\\sum_{r=1}^N\\epsilon_r\\left(b_r^*b_r-\\frac12I\\right)$$\nfor the transformed Majorana modes $b_r$ in the Proof, and its finite Gibbs trace is\n$$Z_N(\\beta;h,J):=\\operatorname{Tr}_{\\mathcal H_N}(e^{-\\beta H_N(h,J)})=\\prod_{r=1}^N2\\cosh\\!\\left(\\frac{\\beta\\epsilon_r}{2}\\right).$$\nEvery zero mode contributes a factor two. The chain is open throughout; no periodic Jordan–Wigner parity boundary term is included.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qsmx-l2-fourier-unitarity",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $\\mathbb T=\\mathbb R/(2\\pi\\mathbb Z)$ with normalized measure $dk/(2\\pi)$, and let $\\ell^2(\\mathbb Z;\\mathbb C^2)$ have inner product $\\langle x,y\\rangle=\\sum_{j\\in\\mathbb Z}\\langle x_j,y_j\\rangle_{\\mathbb C^2}$, linear in the first argument. For a finitely supported sequence $x=(x_j)_{j\\in\\mathbb Z}$ define\n$$\\mathcal F_0x(k)=\\sum_{j\\in\\mathbb Z}x_j e^{ijk},\\qquad k\\in\\mathbb T,$$\ncomponentwise. Then $\\mathcal F_0$ preserves inner products on finitely supported sequences and has a unique extension to a unitary $\\mathcal F:\\ell^2(\\mathbb Z;\\mathbb C^2)\\to L^2(\\mathbb T;\\mathbb C^2)$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-square-summable-family-on-an-arbitrary-index-set",
+          "source_section": "Definition",
+          "quote": "Throughout, $\\mathbb F$ is $\\mathbb R$ or $\\mathbb C$ and families are indexed by\nan arbitrary set $I$, with no enumeration or countability assumed. Finite real lists use [[def-finite-sum]], and sums over finite subsets use [[def-finite-sum-in-a-commutative-monoid]] in the additive monoid of the scalar field. Disjoint splitting is [[lem-finite-sum-reindexing-and-fubini]], and scalar modulus estimates use [[lem-complex-conjugation-and-modulus-laws]]; all suprema and infima of real sets below are\ntaken in the complete ordered field $\\mathbb R$\n([[def-complete-ordered-field]]) or in $[0,+\\infty]\\subseteq\\overline{\\mathbb R}$\n([[def-extended-reals]], [[lem-extended-reals-complete]]).\n\n**Sums of nonnegative families.** Let $(c_i)_{i\\in I}$ be a family of\nnonnegative reals and let $\\operatorname{Fin}(I)$ be the set of finite subsets of\n$I$, ordered by inclusion. Define\n\n$$\\sum_{i\\in I}c_i:=\\sup\\Bigl\\{\\sum_{i\\in F}c_i \\;:\\; F\\in\\operatorname{Fin}(I)\\Bigr\\}\\in[0,+\\infty] .$$\n\nThe set of finite subsums is nonempty, since $\\varnothing$ contributes the empty\nsum $0$, so the supremum exists in $[0,+\\infty]$; it is a real number exactly\nwhen the finite subsums are bounded above in $\\mathbb R$, and $+\\infty$\notherwise. For finite $I$ the finite subsum at $I$ is the largest of all finite\nsubsums, because all terms are nonnegative, so the definition agrees with the\nfinite sum; in particular $\\sum_{i\\in I}c_i=0$ when every $c_i$ is $0$, and\n$I=\\varnothing$ gives the empty sum $0$.\n\n**Splitting identity and small tails.** Fix a finite $F\\subseteq I$. Every\nfinite $G\\subseteq I$ splits as the disjoint union $(G\\cap F)\\cup(G\\setminus F)$,\nso $\\sum_{i\\in G}c_i=\\sum_{i\\in G\\cap F}c_i+\\sum_{i\\in G\\setminus F}c_i\\le\\sum_{i\\in F}c_i+\\sum_{i\\in I\\setminus F}c_i$;\nconversely the finite $G$ with $F\\subseteq G$ satisfy\n$\\sum_{i\\in G}c_i=\\sum_{i\\in F}c_i+\\sum_{i\\in G\\setminus F}c_i$. Taking suprema,\nwith the constant $\\sum_{i\\in F}c_i$ passing through the supremum,\n\n$$\\sum_{i\\in I}c_i=\\sum_{i\\in F}c_i+\\sum_{i\\in I\\setminus F}c_i . \\qquad (1)$$\n\nConsequently, if $S:=\\sum_{i\\in I}c_i$ is finite, then for every real\n$\\varepsilon>0$ there is a finite $F\\subseteq I$ with\n$\\sum_{i\\in I\\setminus F}c_i<\\varepsilon$: the finite subsums form a nonempty\nbounded-above set with supremum $S$, so by the epsilon characterisation of the\nsupremum ([[lem-sup-epsilon]]) some finite $F$ has\n$S-\\varepsilon<\\sum_{i\\in F}c_i$, and (1) gives\n$\\sum_{i\\in I\\setminus F}c_i=S-\\sum_{i\\in F}c_i<\\varepsilon$. Such an $F$ is\ncalled a **tail-control set** for $\\varepsilon$.\n\n**Sums of scalar families.** Now let $(a_i)_{i\\in I}$ be a family in $\\mathbb F$\nand put $s_F:=\\sum_{i\\in F}a_i$ for finite $F\\subseteq I$. The set\n$\\operatorname{Fin}(I)$ with inclusion is a directed preorder: it is nonempty and\n$F\\cup G$ is a common upper bound of $F$ and $G$\n([[def-directed-set-and-net]]). Hence $(s_F)_{F\\in\\operatorname{Fin}(I)}$ is a\nnet in $\\mathbb F$, the **finite-subset net** of the family, and the family is\n**summable** when this net converges\n([[def-net-convergence-and-cluster-point]]). The scalar metric is the usual real metric or [[def-complex-metric-convergence-and-continuity]]. These metric spaces are Hausdorff by [[thm-metric-hausdorff-separation]]. A net in $\\mathbb F$ has at most one limit\n([[thm-hausdorff-iff-net-limits-are-unique]]), so for a summable family the\nlimit is unique and we write $\\sum_{i\\in I}a_i:=\\lim_F s_F$ for it. The family is\n**absolutely summable** when $\\sum_{i\\in I}|a_i|<+\\infty$ in the sense above.\n\n**Every absolutely summable family is summable, in ZF.** Assume\n$S:=\\sum_{i\\in I}|a_i|$ is finite and put $S_F:=\\sum_{i\\in F}|a_i|$ for finite\n$F$. For finite $F,G\\subseteq I$ the triangle inequality for finite sums and the\nfact that a finite subsum is at most the whole nonnegative sum give\n\n$$|s_F-s_G|\\le\\sum_{i\\in F\\triangle G}|a_i|\\le S-S_{F\\cap G} . \\qquad (2)$$\n\nNow fix a real $\\varepsilon>0$, let $F_0$ be a tail-control set for\n$\\varepsilon$, and let $F,G\\supseteq F_0$ be finite. Then $F\\cap G\\supseteq F_0$,\nso $S-S_{F\\cap G}\\le S-S_{F_0}<\\varepsilon$ and (2) gives\n$|s_F-s_G|<\\varepsilon$.\n\nFirst suppose $\\mathbb F=\\mathbb R$. For each finite $F$ define\n$A_F:=\\inf\\{s_G : G\\supseteq F\\}$ and $B_F:=\\sup\\{s_G : G\\supseteq F\\}$ over\nfinite $G$. Both are real numbers, because $|s_G|\\le S_G\\le S$, so the two sets\nare nonempty and bounded, and $A_F\\le B_F$. If $H\\supseteq F$ then\n$A_H\\ge A_F$ and $B_H\\le B_F$. Let $L:=\\sup_FA_F$ and $U:=\\inf_FB_F$.\nSince $A_F\\le s_{F\\cup H}\\le B_H$ for all finite $F,H$, we get $L\\le U$.\nMoreover, the preceding estimate holds for every pair $F,G\\supseteq F_0$;\ntaking the supremum over $F$ and the infimum over $G$ gives\n$B_{F_0}-A_{F_0}\\le\\varepsilon$. Hence\n$0\\le U-L\\le B_{F_0}-A_{F_0}\\le\\varepsilon$ for every $\\varepsilon>0$, so\n$L=U=:s$. If $F\\supseteq F_0$, then both $s_F$ and $s$ lie in\n$[A_{F_0},B_{F_0}]$, and therefore $|s_F-s|\\le\\varepsilon$.\n\nIf $\\mathbb F=\\mathbb C$, apply the real argument just proved to the families\n$(\\operatorname{Re}a_i)$ and $(\\operatorname{Im}a_i)$. They are absolutely\nsummable because $|\\operatorname{Re}a_i|,|\\operatorname{Im}a_i|\\le|a_i|$.\nTheir finite-subset nets converge to real numbers $r$ and $t$, respectively,\nso $s_F\\to r+it$ in $\\mathbb C$. Thus every absolutely summable real or complex\nfamily is summable. **No choice principle is used**: the construction uses only\ntwo-sided suprema in $\\mathbb R$.\n\n**Linearity and absolute value.** If $(a_i)$ and $(b_i)$ are absolutely\nsummable and $\\lambda\\in\\mathbb F$, then so are $(a_i+b_i)$ and\n$(\\lambda a_i)$, and\n\n$$\\sum_{i\\in I}(a_i+b_i)=\\sum_{i\\in I}a_i+\\sum_{i\\in I}b_i,\\qquad \\sum_{i\\in I}\\lambda a_i=\\lambda\\sum_{i\\in I}a_i,\\qquad \\Bigl|\\sum_{i\\in I}a_i\\Bigr|\\le\\sum_{i\\in I}|a_i| ,$$\n\nbecause the corresponding identities hold for every finite subsum, both sides\nare limits of the corresponding finite-subset nets, and addition, scalar\nmultiplication and the modulus are continuous. The splitting identity (1)\nlikewise passes to absolutely summable scalar families:\n$\\sum_{i\\in I}a_i=\\sum_{i\\in F}a_i+\\sum_{i\\in I\\setminus F}a_i$ for every finite\n$F$, because finite subsums over sets containing $F$ converge to the left-hand\nside and equal the finite sum over $F$ plus the finite subsum of the tail, whose\nnet converges to the tail sum.\n\n**The finite-dimensional Cauchy-Schwarz inequality.** Let $(u_k)_{0\\le k<m}$ and $(v_k)_{0\\le k<m}$ be scalar lists, for $m\\in\\mathbb N$ and let $t\\in\\mathbb R$. Every term of\n$\\sum_{k<m}(|u_k|-t|v_k|)^2$ is nonnegative, so for all real $t$\n\n$$0\\le\\sum_{k<m}|u_k|^2-2t\\sum_{k<m}|u_k||v_k|+t^2\\sum_{k<m}|v_k|^2 .$$\n\nIf $\\sum_{k<m}|v_k|^2>0$, substituting\n$t=\\bigl(\\sum_{k<m}|u_k||v_k|\\bigr)/\\bigl(\\sum_{k<m}|v_k|^2\\bigr)$ gives\n$\\bigl(\\sum_{k<m}|u_k||v_k|\\bigr)^2\\le\\bigl(\\sum_{k<m}|u_k|^2\\bigr)\\bigl(\\sum_{k<m}|v_k|^2\\bigr)$;\nif $\\sum_{k<m}|v_k|^2=0$ then every $v_k=0$ and both sides are $0$. In either case\n$\\sum_{k<m}|u_k||v_k|\\le\\bigl(\\sum_{k<m}|u_k|^2\\bigr)^{1/2}\\bigl(\\sum_{k<m}|v_k|^2\\bigr)^{1/2}$\nafter taking square roots, and applying the modulus inequality for finite sums\nto $u_k\\overline{v_k}$ also gives\n\n$$\\Bigl|\\sum_{k<m}u_k\\overline{v_k}\\Bigr|\\le\\Bigl(\\sum_{k<m}|u_k|^2\\Bigr)^{1/2}\\Bigl(\\sum_{k<m}|v_k|^2\\Bigr)^{1/2} . \\qquad (3)$$\n\n**The space $\\ell^2(I)$.** For a family $a=(a_i)_{i\\in I}$ in $\\mathbb F$ define\n$Q(a):=\\sum_{i\\in I}|a_i|^2$. If $Q(a)$ is finite, set $\\|a\\|_2:=\\sqrt{Q(a)}$, using the nonnegative real square root of [[thm-of-square-roots]]; if $Q(a)=+\\infty$, set $\\|a\\|_2:=+\\infty$. This is a case definition, not exponentiation of an extended real. Let\n\n$$\\ell^2(I,\\mathbb F):=\\{\\,a=(a_i)_{i\\in I} : \\|a\\|_2<+\\infty\\,\\}.$$\n\nThe set $\\ell^2(I,\\mathbb F)$ is a vector space over $\\mathbb F$: it contains the\nzero family, is closed under scalar multiplication because\n$\\|\\lambda a\\|_2=|\\lambda|\\,\\|a\\|_2$, and is closed under addition because (3)\napplied to finite subsums gives $\\|a+b\\|_2\\le\\|a\\|_2+\\|b\\|_2<+\\infty$. The same\ninequality is the triangle inequality for $\\|\\cdot\\|_2$, which is moreover\nnonnegative, vanishes only for the zero family (an arbitrary sum of nonnegative\nterms with supremum $0$ has every term $0$) and satisfies\n$\\|\\lambda a\\|_2=|\\lambda|\\,\\|a\\|_2$; thus $\\|\\cdot\\|_2$ is a norm on\n$\\ell^2(I,\\mathbb F)$. Finally the **pairing**\n$\\langle a,b\\rangle:=\\sum_{i\\in I}a_i\\overline{b_i}$ is well defined on\n$\\ell^2(I,\\mathbb F)\\times\\ell^2(I,\\mathbb F)$, because\n$|a_i\\overline{b_i}|=|a_i||b_i|$ has finite nonnegative sum by (3); it is linear\nin the first variable, conjugate symmetric, positive definite, and satisfies\n$\\langle a,a\\rangle=\\|a\\|_2^2$, all by the corresponding finite identities and\nthe linearity of the sum. Consequently $\\ell^2(I,\\mathbb F)$ is an inner-product\nspace, and $e_i\\in\\ell^2(I,\\mathbb F)$ denotes the family that is $1$ at $i$ and\n$0$ elsewhere. **Nothing here asserts that $\\ell^2(I,\\mathbb F)$ is complete**;\nthat follows later, from an orthonormal basis of a Hilbert space.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-bounded-linear-operator",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be normed spaces over the same scalar field $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, read in\nthe real case from [[def-norm-and-normed-space]] and in the complex case from\n[[def-complex-norm-and-complex-normed-space]]. A $\\mathbb K$-linear map\n$T:X\\to Y$ ([[def-linear-map]]) is a **bounded linear operator** when there is a\nreal constant $C \\ge 0$ such that\n\n$$\\|Tx\\| \\le C\\|x\\| \\qquad \\text{for all } x \\in X.$$\n\nAny such $C$ is called a **bound** for $T$.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-resolvent-and-spectrum-of-a-closed-unbounded-operator",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a complex Hilbert space and $T$ a linear operator on $H$ with domain $D(T)$. Write $(z-T)x=zx-Tx$ for $x\\in D(T)$. The **resolvent set**\nof $T$ is\n$$\\rho(T):=\\{z\\in\\mathbb C:\\ z-T:D(T)\\to H\\text{ is bijective and }(z-T)^{-1}\\in\\mathcal B(H)\\},$$\nwhere $\\mathcal B(H)$ is the space of bounded everywhere defined operators on\n$H$ ([[def-bounded-linear-operator]]); the **spectrum** is\n$\\sigma(T):=\\mathbb C\\setminus\\rho(T)$. For $z\\in\\rho(T)$ the bounded operator\n$$R_T(z):=(z-T)^{-1}\\in\\mathcal B(H)$$\nis the **resolvent** of $T$ at $z$. This is the library convention used\nthroughout the page, matching the bounded resolvent of\n[[def-spectrum-and-resolvent-of-a-bounded-operator]]: the shift is $zI-T$, with coefficient $-1$ on $T$.\n\n**The resolvent determines $T$ back.** If $z\\in\\rho(T)$ and $R:=R_T(z)$, then\n$D(T)=\\operatorname{ran}R$ and $TRy=zRy-y$ for $y\\in H$; equivalently\n$T=zI-R^{-1}$ with $D(T)=\\operatorname{ran}R$, and $R(z-T)x=x$ for\n$x\\in D(T)$, $(z-T)Ry=y$ for $y\\in H$.\n\n**Nonempty resolvent set forces closedness, without the closed graph\ntheorem.** Assume $\\rho(T)\\ne\\varnothing$ and fix $z\\in\\rho(T)$ with\n$R:=R_T(z)$. Choose a bound $C\\ge0$ such that $\\|Rv\\|\\le C\\|v\\|$.\nThe map $F(v,w)=w-Rv$ is continuous, since\n$\\|F(v,w)-F(v',w')\\|\\le\\|w-w'\\|+C\\|v-v'\\|$.\nIts zero set $\\Gamma(R)=F^{-1}(\\{0\\})$ is closed. Because\n$D(T)=\\operatorname{ran}R$ and $(z-T)Rv=v$ for every $v\\in H$, the graph of $T$ is\n$$\\Gamma(T)=\\{(x,Tx):x\\in D(T)\\}=\\{(Rv,zRv-v):v\\in H\\}=\\Phi(\\Gamma(R)),$$\nwhere $\\Phi(v,w):=(w,zw-v)$ is a continuous linear bijection of $H\\oplus H$ with\ncontinuous inverse $\\Psi(u,v)=(zu-v,u)$, since $\\Phi(\\Psi(u,v))=(u,z u-(zu-v))=(u,v)$\nand $\\Psi(\\Phi(v,w))=\\Psi(w,zw-v)=(v,w)$. A homeomorphism carries closed sets\nto closed sets, so $\\Gamma(T)$ is closed and $T$ is closed.\nNo closed graph theorem and hence no choice principle is used here.\n\nFor the zero operator on a nonzero $H$, $\\rho(0)=\\mathbb C\\setminus\\{0\\}$: the nonzero shifts have inverse $z^{-1}I$, whereas the zero shift is not bijective. If $H=\\{0\\}$, every shift is the unique bijection of the zero space, so $\\rho(T)=\\mathbb C$ and $\\sigma(T)=\\varnothing$.",
+          "uses": [
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-hilbert-space-adjoint",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Countable Choice. Let $H$ and $K$ be real or complex Hilbert spaces and let $T\\in\\mathcal B(H,K)$ be a bounded linear operator ([[def-bounded-linear-operator]], [[def-space-of-bounded-linear-operators]]). For fixed $y\\in K$ the map\n\n$$x\\longmapsto\\langle Tx,y\\rangle_K$$\n\nis a bounded linear functional on $H$: it is linear in $x$ because $T$ is linear and the pairing is linear in its first argument, and $|\\langle Tx,y\\rangle_K|\\le\\|Tx\\|\\,\\|y\\|\\le\\|T\\|\\,\\|x\\|\\,\\|y\\|$ by Cauchy–Schwarz and the operator-norm inequality ([[thm-cauchy-schwarz-in-an-inner-product-space]], [[def-operator-norm]]). By Riesz representation ([[thm-riesz-representation-for-hilbert-space]]) there is therefore a unique vector $T^*y\\in H$ with\n\n$$\\langle Tx,y\\rangle_K=\\langle x,T^*y\\rangle_H\\qquad\\text{for every }x\\in H .$$\n\nThe **Hilbert adjoint** of $T$ is the map\n\n$$T^*:K\\longrightarrow H,\\qquad y\\longmapsto T^*y .$$\n\nIt is the unique map $K\\to H$ satisfying the displayed identity, since two such maps have $\\langle x,(T^*_1-T^*_2)y\\rangle=0$ for all $x$ and hence $(T^*_1-T^*_2)y=0$ by positive definiteness.\n\n**The dictionary with the Banach transpose.** Write $R_H:H\\to H^*$ and $R_K:K\\to K^*$ for the Riesz maps $R_H(x)=\\langle\\,\\cdot\\,,x\\rangle_H$ and $R_K(y)=\\langle\\,\\cdot\\,,y\\rangle_K$, and let $T'\\in\\mathcal B(K^*,H^*)$ be the transpose of $T$, $(T'g)(x)=g(Tx)$ ([[def-transpose-of-a-bounded-operator]]). Then for all $y\\in K$ and $x\\in H$,\n\n$$\\bigl(R_H(T^*y)\\bigr)(x)=\\langle x,T^*y\\rangle_H=\\langle Tx,y\\rangle_K=(R_Ky)(Tx)=\\bigl(T'(R_Ky)\\bigr)(x),$$\n\nso $R_H\\,T^*=T'\\,R_K$. The Hilbert adjoint is thus the Banach transpose conjugated by the Riesz identifications of $H$ and $K$ with their duals; it is a different operator from $T'$ whenever the Riesz maps are conjugate-linear.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $S_+f$ have coordinates $(S_+f)_j=f_{j+1}$ and let $S_-f$ have $(S_-f)_j=f_{j-1}$. Reindexing gives $\\|S_\\pm f\\|=\\|f\\|$ and $\\langle S_-f,g\\rangle=\\langle f,S_+g\\rangle$, so $S_-^*=S_+$ and $S_+^*=S_-$ by [F6]. The Fourier-unitarity fact [F2] makes $\\mathcal K$ a Hilbert space, so the bounded shifts and their bounded linear combinations have Hilbert adjoints under [F6]. With $B=2hI-2JS_-$, $B^*=2hI-2JS_+$; the block formula $A_\\infty=\\bigl(\\begin{smallmatrix}0&B\\\\-B^*&0\\end{smallmatrix}\\bigr)$ then gives $A_\\infty^*=-A_\\infty$. By [F3] and the triangle inequality, both $B$ and $B^*$ have bound $2(|h|+|J|)$, whence $\\|A_\\infty x\\|^2=\\|Bv\\|^2+\\|B^*u\\|^2\\le4(|h|+|J|)^2\\|x\\|^2$. Thus $A_\\infty$ and $K_\\infty=iA_\\infty$ are everywhere-defined bounded operators by [F4]. Finally $\\langle iA_\\infty x,y\\rangle=i\\langle x,A_\\infty^*y\\rangle=\\langle x,-iA_\\infty^*y\\rangle$, so $K_\\infty^*=-iA_\\infty^*=iA_\\infty=K_\\infty$ by [F6].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For a finitely supported sequence, $\\mathcal F(v_{j-1})(k)=e^{ik}\\widehat v(k)$ and $\\mathcal F(u_{j+1})(k)=e^{-ik}\\widehat u(k)$ by reindexing the sums. Therefore $\\mathcal F A_\\infty\\mathcal F^{-1}$ is multiplication by $\\bigl(\\begin{smallmatrix}0&2(h-Je^{ik})\\\\-2(h-Je^{-ik})&0\\end{smallmatrix}\\bigr)$; boundedness and density extend the identity to all of $\\ell^2$. Multiplication by $i$ gives the displayed $M(k)$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Put $a(k)=2i(h-Je^{ik})$. Then $M(k)=\\bigl(\\begin{smallmatrix}0&a(k)\\\\\\overline{a(k)}&0\\end{smallmatrix}\\bigr)$ and $M(k)^2=|a(k)|^2I$. Its characteristic polynomial is $\\lambda^2-|a(k)|^2$, so its two eigenvalues are $\\pm|a(k)|=\\pm2\\sqrt{h^2+J^2-2hJ\\cos k}$, including the double zero when $a(k)=0$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Let $\\lambda\\in\\mathbb C$ lie outside the union of the two continuous bands in the Statement. By step 3.1, $\\epsilon(k)=|a(k)|$ for every $k$. Compactness of $\\mathbb T$ therefore makes $|\\lambda^2-|a(k)|^2|$ bounded away from zero. The matrix identity $(M(k)-\\lambda I)(M(k)+\\lambda I)=(|a(k)|^2-\\lambda^2)I$ gives a uniformly bounded pointwise inverse. Multiplication by this inverse is a bounded two-sided inverse for the Fourier-side operator $M-\\lambda I$; conjugating by $\\mathcal F$ puts $\\lambda$ in the resolvent of $K_\\infty$ by [F5]. Thus the spectrum is contained in the two bands.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F4",
+            "F5",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-2",
+          "claim": "Fix $k_0\\in\\mathbb T$. When $a(k_0)\\ne0$, the vectors $w_+=(a(k_0)/|a(k_0)|,1)/\\sqrt2$ and $w_-=(-a(k_0)/|a(k_0)|,1)/\\sqrt2$ are unit eigenvectors of $M(k_0)$ with eigenvalues $\\pm\\epsilon(k_0)$ by step 3.1; when $a(k_0)=0$, $M(k_0)=0$ and either standard unit vector is an eigenvector. For either eigenvalue $\\lambda$, let $I_n$ be arcs about $k_0$ with positive normalized measure and lengths tending to zero, and set $\\psi_n(k)=\\mathbf1_{I_n}(k)w/\\sqrt{\\mu(I_n)}$ using the corresponding fixed vector $w$. Then $\\|\\psi_n\\|_2=1$ and continuity of $M$ gives $\\|(M-\\lambda I)\\psi_n\\|_2\\le\\sup_{k\\in I_n}\\|(M(k)-M(k_0))w\\|\\to0$. If $M-\\lambda I$ had a bounded inverse, these unit vectors would have residual norms bounded below by the reciprocal inverse norm, a contradiction. By [F5] and the unitary equivalence in step 2.1, every band value lies in the spectrum of $K_\\infty$.",
+          "step": "4.2",
+          "inputs": [
+            "A1",
+            "F2",
+            "F5",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Steps 4.1 and 4.2 give both inclusions, so the spectrum is exactly $\\bigcup_{k\\in\\mathbb T}\\{-\\epsilon(k),\\epsilon(k)\\}$. Since $\\cos k\\in[-1,1]$, step 3.1 gives $\\min_k\\epsilon(k)^2=4(h^2+J^2-2|hJ|)=4(|h|-|J|)^2$. The minimum is attained at $k=0$ when $hJ\\ge0$ and at $k=\\pi$ when $hJ<0$. Taking the nonnegative square root gives $\\Delta_{\\mathrm{bulk}}=2\\bigl||h|-|J|\\bigr|$, which vanishes exactly for $|h|=|J|$. This concerns the one-particle convolution operator only.",
+          "step": "5.1",
+          "inputs": [
+            "step 3.1",
+            "step 4.1",
+            "step 4.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The union is indexed by the torus, which contains k=0, and each two-by-two symbol has two eigenvalues even at h=J=0. The two spectral inclusions in4.1–4.2 therefore do not quantify over a potentially empty band-index set.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/qsm_boundary (scientific owner; no independent acceptance)",
+            "reason": "The union is indexed by the torus, which contains k=0, and each two-by-two symbol has two eigenvalues even at h=J=0. The two spectral inclusions in4.1–4.2 therefore do not quantify over a potentially empty band-index set."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: If h=J=0 then M(k)=0 for every k and the spectrum is {0}."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The operator is an infinite translation-invariant lattice operator."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: At a=0 both symbol eigenvalues are zero; the packet argument uses any fixed unit vector."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: For hJ>0 the minimum occurs at k=0; for hJ<0 it occurs at k=pi; if hJ=0 the dispersion is constant."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Countable Choice is explicitly carried from the Fourier-unitarity theorem."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Statement: The computed nonnegative minimum is zero when |h|=|J|."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Statement: If the minimum vanishes then (|h|-|J|)^2=0, hence |h|=|J|."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "zero field",
+          "inputs": "h=0, J real",
+          "calculation": "epsilon(k)=2|J| for all k.",
+          "result": "The positive band is gapped unless J=0."
+        },
+        {
+          "case": "zero interaction",
+          "inputs": "J=0, h real",
+          "calculation": "epsilon(k)=2|h| for all k.",
+          "result": "The positive band is gapped unless h=0."
+        },
+        {
+          "case": "positive critical line",
+          "inputs": "h=J>0",
+          "calculation": "epsilon(0)=0.",
+          "result": "The bulk band closes."
+        },
+        {
+          "case": "negative critical line",
+          "inputs": "h=-J with hJ<0 and |h|=|J|",
+          "calculation": "epsilon(pi)=0.",
+          "result": "The bulk band closes at the shifted momentum."
+        }
+      ]
+    },
+    "ex-qsmx-ising-classical-and-field-limits": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following statement.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "thm-qsmx-open-ising-quadratic",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qsmx-transverse-ising-majoranas",
+          "source_section": "Definition",
+          "quote": "For real $h,J$ measured in joules define the finite open-chain matrix $$H_N(h,J)=-h\\sum_{j=1}^N Z_j-J\\sum_{j=1}^{N-1}X_jX_{j+1}.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qsmx-open-ising-quadratic",
+          "source_section": "Statement",
+          "quote": "its finite Gibbs trace is $$Z_N(\\beta;h,J):=\\operatorname{Tr}_{\\mathcal H_N}(e^{-\\beta H_N(h,J)})=\\prod_{r=1}^N2\\cosh\\!\\left(\\frac{\\beta\\epsilon_r}{2}\\right).$$",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qsm-matrix-state-calculus",
+          "source_section": "Statement",
+          "quote": "Every Hermitian endomorphism $M$ has an orthonormal eigenbasis with real eigenvalues.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In the X basis the interaction-only energy is minimized exactly by the two constant spin configurations, including the N=1 case.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "In the Z basis each nonzero field term has one unique minimizing sign, giving the unique polarized product configuration.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "The finite trace product follows from the open-chain reduction for beta>0.",
+          "step": "1.3",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The finite matrix exponential is entire in its parameters by locally uniform convergence of its power series, and its real trace is strictly positive by the finite Hermitian spectral decomposition.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "N>=1 is assumed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: At h=J=0 all 2^N configurations have zero energy and Z_N=2^N."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: At N=1 there are no bonds; for h=0 both X configurations minimize, and for h!=0 one Z configuration minimizes."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: At h=0,J>0 the only minimizing X configurations are the two globally aligned ones."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The h=0 and J=0 parameter axes are evaluated directly."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The endpoint energy calculations are finite; Countable Choice is present only through the cited trace theorem."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No biconditional is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/qsm_boundary (scientific owner; no independent acceptance)",
+            "reason": "Aligned X-basis configurations minimize the zero-field chain and a polarized Z-basis configuration minimizes the zero-bond chain; a finite matrix exponential has positive analytic trace. The example supplies those computations and no biconditional inference from a ground configuration to a coupling value.",
+            "item_sha256": "c9887251b5efbd35721a28ea2f025e59770e36bb41700494ef3699e1594297ee",
+            "row_sha256": "ad4b204283b07a27ed3883b73c27161e8cfe007a0f667b1dafdb4ff519529bef"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No biconditional is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/qsm_boundary (scientific owner; no independent acceptance)",
+            "reason": "Aligned X-basis configurations minimize the zero-field chain and a polarized Z-basis configuration minimizes the zero-bond chain; a finite matrix exponential has positive analytic trace. The example supplies those computations and no biconditional inference from a ground configuration to a coupling value.",
+            "item_sha256": "c9887251b5efbd35721a28ea2f025e59770e36bb41700494ef3699e1594297ee",
+            "row_sha256": "ce1c0bcd8ba2b402e69a71bb01172de14c252bd70a6171a827f5fa27494f4a33"
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "N=1 field-only",
+          "inputs": "J=0, h>0",
+          "calculation": "The two energies are -h and +h.",
+          "result": "There is one ground configuration and Z_1=2 cosh(beta h)."
+        },
+        {
+          "case": "N=2 interaction-only",
+          "inputs": "h=0, J>0",
+          "calculation": "The four X configurations have energies -J,-J,+J,+J.",
+          "result": "Exactly the two aligned configurations are ground configurations."
+        }
+      ]
+    }
+  }
+}

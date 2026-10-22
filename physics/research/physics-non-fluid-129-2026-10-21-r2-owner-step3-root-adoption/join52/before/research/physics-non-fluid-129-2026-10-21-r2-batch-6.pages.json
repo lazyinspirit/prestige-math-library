@@ -1,0 +1,266 @@
+[
+  {
+    "order": 709,
+    "id": "emx-anisotropic-reciprocal-optics",
+    "kind": "A",
+    "category": "classical-electromagnetism",
+    "library": "physics",
+    "title": "Anisotropic waves and reciprocity",
+    "companion": "emx-anisotropic-reciprocal-optics-examples",
+    "requires": [
+      "em-material-response",
+      "em-vacuum-waves-and-polarization",
+      "em-wave-interfaces-and-conductors",
+      "emx-passive-dispersive-materials"
+    ],
+    "items": [
+      {
+        "id": "def-emx-anisotropic-plane-symbol",
+        "kind": "definition",
+        "domain": "physics",
+        "library": "physics",
+        "title": "Anisotropic Maxwell symbol",
+        "statement": "Use a material-rest frame: an inertial chart in which each modelled material element has fixed spatial coordinates. Use the macroscopic fields of the classical electromagnetic material model. In a homogeneous source-free region take $\\rho_f=0$, $J_f=0$ and select the nonconducting, lossless constitutive branch\n\n$$D=\\varepsilon E,\\qquad B=\\mu H,$$\n\nwhere $\\varepsilon\\in\\mathbb R^{3\\times3}$ is a constant real symmetric positive-definite absolute permittivity tensor in $\\mathrm{F\\,m^{-1}}$, and $\\mu>0$ is a constant real scalar absolute permeability in $\\mathrm{H\\,m^{-1}}$. These are declared model coefficients, not dimensionless relative coefficients. Here lossless means these coefficients are real and the conductive current density $J_c=\\sigma E$ is absent, $\\sigma=0$; no dispersive or absorbing coefficient is included. Fix right-handed Cartesian coordinates and the phasor convention\n\n$$E(x,t)=\\operatorname{Re}\\!\\left(e\\,e^{i(k\\cdot x-\\omega t)}\\right),\\qquad B(x,t)=\\operatorname{Re}\\!\\left(b\\,e^{i(k\\cdot x-\\omega t)}\\right),$$\n\nwith $k\\in\\mathbb R^3\\setminus\\{0\\}$ in $\\mathrm{m^{-1}}$, $\\omega>0$ in $\\mathrm{s^{-1}}$, and complex amplitudes $e,b\\in\\mathbb C^3$. Write $d=\\varepsilon e$ and $h=\\mu^{-1}b$ for the displacement and magnetic-intensity amplitudes, in $\\mathrm{C\\,m^{-2}}$ and $\\mathrm{A\\,m^{-1}}$. For complex vectors use the bilinear dot product $u\\cdot v=\\sum_{r=1}^3u_rv_r$, with no conjugation. The **anisotropic Maxwell symbol** is the linear map\n\n$$\\mathcal M(k,\\omega)e:=k\\times\\bigl(\\mu^{-1}(k\\times e)\\bigr)+\\omega^2\\varepsilon e.$$\n\nA nonzero amplitude $e$ is a source-free plane-wave mode in this branch exactly when $\\mathcal M(k,\\omega)e=0$; its magnetic amplitudes are $b=(k\\times e)/\\omega$ and $h=b/\\mu$. The cross product is extended complex-bilinearly. In this model $k\\cdot d=0$, while $k\\cdot e$ need not vanish.",
+        "deps": [
+          "post-em-material-closure",
+          "pthm-em-macroscopic-maxwell",
+          "def-em-plane-wave-definition",
+          "def-em-si-conventions"
+        ],
+        "dependency_roles": {
+          "post-em-material-closure": "physical-assumption",
+          "pthm-em-macroscopic-maxwell": "physical-result",
+          "def-em-plane-wave-definition": "formulation-prerequisite",
+          "def-em-si-conventions": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jin Au Kong, Electromagnetic Wave Theory, last edition 2008, PIERS free release 2021",
+              "url": "https://piers.org/piers/files/BOOK_ElectromagneticWaveTheory_by_JINAUKONG_FreeRelease2021.pdf",
+              "locator": "Chapter 3, §3.2.A, printed pp. 292–294: anisotropic constitutive tensors, the principal-coordinate uniaxial tensor and the separate gyrotropic-plasma example; §3.3.E, printed pp. 315–322: plane waves in uniaxial media and the ordinary/extraordinary wave surfaces."
+            },
+            {
+              "title": "Weng Cho Chew, Electromagnetic Field Theory, Purdue ECE 604 lecture notes, 2023–2024 revision",
+              "url": "https://engineering.purdue.edu/wcchew/ece604f23/EMFTEDX032124R.pdf",
+              "locator": "§7.1.2, printed pp. 83–84: anisotropic local constitutive tensors, complex permittivity for conductive media, and the distinction between D and E directions. Chew uses the exp(+jωt) convention; the definition below follows the library's exp(−iωt) convention."
+            }
+          ]
+        },
+        "dependency_level": 0,
+        "physical_scope": "A source-free bulk plane-wave sector of the macroscopic Maxwell model in one fixed material rest frame, with constant real symmetric positive-definite absolute permittivity tensor and constant positive scalar absolute permeability. Interfaces, spatial dispersion, loss, experimental material data and finite-energy conditions are outside this definition."
+      },
+      {
+        "id": "def-emx-reciprocal-phasor-medium",
+        "kind": "definition",
+        "domain": "physics",
+        "library": "physics",
+        "title": "Fixed-frequency reciprocal tensor medium",
+        "statement": "Fix a real angular frequency $\\omega\\in\\mathbb R$ and a bounded open region $\\Omega\\subset\\mathbb R^3$ with $C^1$ boundary in a material-rest frame. Here a material-rest frame is the inertial frame in which every modelled material element has fixed spatial coordinates, as stipulated by the framework's material-closure postulate. A map in $C^1(\\overline\\Omega)$ means the restriction of a $C^1$ map on an open neighborhood of $\\overline\\Omega$. Let $\\varepsilon,\\mu:\\overline\\Omega\\to\\mathbb C^{3\\times3}$ be continuous coefficient fields with units $\\mathrm{F\\,m^{-1}}$ and $\\mathrm{H\\,m^{-1}}$. They may be spatially varying and complex. Let $E_j,H_j\\in C^1(\\overline\\Omega;\\mathbb C^3)$ and $J_j\\in C^0(\\overline\\Omega;\\mathbb C^3)$, for $j=1,2$, be phasor amplitudes with SI units $\\mathrm{V\\,m^{-1}}$, $\\mathrm{A\\,m^{-1}}$, and $\\mathrm{A\\,m^{-2}}$. The corresponding real fields use $e^{-i\\omega t}$, for example $E_j^{\\mathrm{real}}(x,t)=\\operatorname{Re}(E_j(x)e^{-i\\omega t})$. Their displacement and magnetic-induction amplitudes are $D_j=\\varepsilon E_j$ in $\\mathrm{C\\,m^{-2}}$ and $B_j=\\mu H_j$ in $\\mathrm T$.\n\nThe fixed-frequency constitutive and source equations are\n\n$$D_j=\\varepsilon E_j,\\qquad B_j=\\mu H_j,\\qquad \\operatorname{curl}E_j=i\\omega B_j,\\qquad \\operatorname{curl}H_j=J_j-i\\omega D_j.$$\n\nAll operators act componentwise on the spatial variable. For $u,v\\in\\mathbb C^3$, define the **bilinear** dot product $u\\cdot v=\\sum_{r=1}^3u_rv_r$ and the complex-bilinear cross product by the usual right-handed component formula. Neither product conjugates either input. The transpose $T$ is the ordinary matrix transpose, without complex conjugation. This definition calls the coefficient model **reciprocal** when $\\varepsilon(x)^T=\\varepsilon(x)$ and $\\mu(x)^T=\\mu(x)$ at every $x\\in\\overline\\Omega$. It places no Hermitian, positive-definite, or passivity condition on these complex matrices.\n\nThis is a fixed-frequency phasor data class. Its possibly complex coefficients are not inferred from the framework's real, instantaneous material branch; a separate response model is required to justify any such interpretation.",
+        "deps": [
+          "post-em-material-closure",
+          "pthm-em-macroscopic-maxwell",
+          "def-em-si-conventions"
+        ],
+        "dependency_roles": {
+          "post-em-material-closure": "formulation-prerequisite",
+          "pthm-em-macroscopic-maxwell": "physical-result",
+          "def-em-si-conventions": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jin Au Kong, Electromagnetic Wave Theory, last edition 2008, PIERS free release 2021",
+              "url": "https://piers.org/piers/files/BOOK_ElectromagneticWaveTheory_by_JINAUKONG_FreeRelease2021.pdf",
+              "locator": "Chapter 3, §3.2.E, printed pp. 299–300, equations (3.2.15)–(3.2.26): the bilinear reciprocity identity and transpose-symmetry conditions for complex constitutive tensors."
+            },
+            {
+              "title": "Weng Cho Chew, Electromagnetic Field Theory, Purdue ECE 604 lecture notes, 2023–2024 revision",
+              "url": "https://engineering.purdue.edu/wcchew/ece604f23/EMFTEDX032124R.pdf",
+              "locator": "Chapter 12, §12.1–§12.1.1, printed pp. 146–148: reciprocity derivation for general linear anisotropic inhomogeneous tensor media, with no complex conjugation. The source uses exp(+jωt); the convention below is exp(−iωt)."
+            }
+          ]
+        },
+        "dependency_level": 0,
+        "physical_scope": "A local, linear, fixed-frequency macroscopic phasor model in a material-rest frame, on a bounded C1 Euclidean region, with continuous possibly complex tensor coefficients and C1 solution phasors. This definition imposes transpose symmetry as the reciprocal-coefficient condition; it does not assert causality, passivity, losslessness, existence, uniqueness, or empirical realization."
+      },
+      {
+        "id": "pthm-emx-uniaxial-dispersion",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "library": "physics",
+        "title": "Ordinary and extraordinary sheets",
+        "statement": "In the homogeneous lossless plane-wave model, let $\\varepsilon=\\operatorname{diag}(\\varepsilon_\\perp,\\varepsilon_\\perp,\\varepsilon_\\parallel)$ with $\\varepsilon_\\perp,\\varepsilon_\\parallel>0$ in $\\mathrm{F\\,m^{-1}}$, let $\\mu>0$ be a scalar in $\\mathrm{H\\,m^{-1}}$, and let $\\omega>0$ be in $\\mathrm{s^{-1}}$. For a nonzero source-free mode with real wavevector $k=(k_x,0,k_z)\\ne0$ in $\\mathrm{m^{-1}}$, the nonzero-mode wavevectors lie on exactly the following two sheets:\n\n$$k_x^2+k_z^2=\\mu\\varepsilon_\\perp\\omega^2,\\qquad \\frac{k_x^2}{\\varepsilon_\\parallel}+\\frac{k_z^2}{\\varepsilon_\\perp}=\\mu\\omega^2.$$\n\nAway from an intersection the first sheet is the ordinary sector, whose electric amplitude is parallel to $\\hat y$, and the second is the extraordinary sector, whose electric amplitude lies in the $xz$ plane; each then has a one-dimensional polarization space. At an intersection the two sectors span a two-dimensional polarization space. If $\\varepsilon_\\perp=\\varepsilon_\\parallel=\\varepsilon$, the isotropic specialization also allows arbitrary real $k\\ne0$, without the $xz$-plane restriction: its nonzero-mode wavevectors lie in every direction on the common sphere $|k|^2=\\mu\\varepsilon\\omega^2$, and at every such wavevector the polarization space is the two-dimensional complex subspace $\\{e\\in\\mathbb C^3:k\\cdot e=0\\}$. In the $xz$ section the ordinary/extraordinary labels then denote the two coordinate sectors, not distinct dispersion branches. If $\\varepsilon_\\perp\\ne\\varepsilon_\\parallel$, the sheets intersect only for $k_x=0$ and $k_z^2=\\mu\\varepsilon_\\perp\\omega^2$; at those optic-axis directions the polarization space is again two-dimensional. The zero amplitude is not a mode in this statement.\n\n",
+        "deps": [
+          "def-emx-anisotropic-plane-symbol"
+        ],
+        "dependency_roles": {
+          "def-emx-anisotropic-plane-symbol": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jin Au Kong, Electromagnetic Wave Theory, last edition 2008, PIERS free release 2021",
+              "url": "https://piers.org/piers/files/BOOK_ElectromagneticWaveTheory_by_JINAUKONG_FreeRelease2021.pdf",
+              "locator": "Chapter 3, §3.3.E, printed pp. 315–322, equations (3.3.54)–(3.3.73): ordinary and extraordinary wave-vector surfaces, polarization sectors, optic-axis degeneracy, the k-surface cross-section and the later group-velocity discussion. The quarter-wave plate and group-velocity conclusions on pp. 319–322 are not used."
+            },
+            {
+              "title": "Weng Cho Chew, Electromagnetic Field Theory, Purdue ECE 604 lecture notes, 2023–2024 revision",
+              "url": "https://engineering.purdue.edu/wcchew/ece604f23/EMFTEDX032124R.pdf",
+              "locator": "§7.1.2, printed pp. 83–84: the anisotropic tensor constitutive relation and the fact that D and E need not be parallel. These notes do not derive the uniaxial sheets; the local proof does. Its displayed phasor convention is exp(+jωt); the local derivation uses exp(−iωt)."
+            }
+          ]
+        },
+        "dependency_level": 1,
+        "physical_scope": "Conditional classification of nonzero real-wavevector source-free bulk plane-wave modes in a homogeneous lossless uniaxial dielectric with positive real principal permittivities and positive scalar permeability, in the material-rest frame and SI units. The general uniaxial classification uses the xz-plane section; the isotropic specialization covers all real-wavevector directions. Interfaces, absorption, spatial dispersion and empirical material claims are outside scope.",
+        "strategy": "direct"
+      },
+      {
+        "id": "pthm-emx-lorentz-reciprocity",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "library": "physics",
+        "title": "Reciprocity in reciprocal linear media",
+        "statement": "Assume $\\mathrm{AC}_\\omega$. Let $\\Omega\\subset\\mathbb R^3$ be a bounded domain with $C^1$ boundary and outward unit normal $n$. Fix a real angular frequency $\\omega$ in $\\mathrm{s^{-1}}$. Let $E_j,H_j\\in C^1(\\overline\\Omega;\\mathbb C^3)$ and $J_j\\in C^0(\\overline\\Omega;\\mathbb C^3)$, for $j=1,2$, be phasor fields and electric-current densities in $\\mathrm{V\\,m^{-1}}$, $\\mathrm{A\\,m^{-1}}$, and $\\mathrm{A\\,m^{-2}}$, respectively. Suppose both pairs solve the fixed-frequency Maxwell equations there with the same continuous coefficient maps $\\varepsilon,\\mu:\\overline\\Omega\\to\\mathbb C^{3\\times3}$ and $\\varepsilon(x)^T=\\varepsilon(x)$, $\\mu(x)^T=\\mu(x)$ at every $x$. Use Euclidean volume measure $dV$ and boundary area measure $dS$. Then\n\n$$\\int_{\\partial\\Omega}n\\cdot(E_1\\times H_2-E_2\\times H_1)\\,dS=\\int_\\Omega(E_2\\cdot J_1-E_1\\cdot J_2)\\,dV.$$\n\nThe dot and cross products in this identity are the complex-bilinear products defined in the reciprocal phasor model; no complex conjugation occurs. Both integrals have units W. In particular, the real symmetric positive permittivity tensor and positive scalar permeability of the lossless anisotropic plane-wave model satisfy these reciprocal-coefficient hypotheses, so the identity applies to any two such phasor solutions restricted to a bounded $C^1$ subdomain.",
+        "deps": [
+          "def-emx-anisotropic-plane-symbol",
+          "def-emx-reciprocal-phasor-medium",
+          "def-countable-choice",
+          "lem-the-divergence-and-curl-of-a-cross-product",
+          "thm-divergence-theorem-for-bounded-c-one-euclidean-domains"
+        ],
+        "dependency_roles": {
+          "def-emx-anisotropic-plane-symbol": "formulation-prerequisite",
+          "def-emx-reciprocal-phasor-medium": "formulation-prerequisite",
+          "def-countable-choice": "mathematical-premise",
+          "lem-the-divergence-and-curl-of-a-cross-product": "mathematical-premise",
+          "thm-divergence-theorem-for-bounded-c-one-euclidean-domains": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jin Au Kong, Electromagnetic Wave Theory, last edition 2008, PIERS free release 2021",
+              "url": "https://piers.org/piers/files/BOOK_ElectromagneticWaveTheory_by_JINAUKONG_FreeRelease2021.pdf",
+              "locator": "Chapter 3, §3.2.E, printed pp. 299–300, equations (3.2.15)–(3.2.26): reciprocal source identity and the transpose, not Hermitian, symmetry conditions for complex constitutive tensors."
+            },
+            {
+              "title": "Weng Cho Chew, Electromagnetic Field Theory, Purdue ECE 604 lecture notes, 2023–2024 revision",
+              "url": "https://engineering.purdue.edu/wcchew/ece604f23/EMFTEDX032124R.pdf",
+              "locator": "Chapter 12, §12.1–§12.1.1, printed pp. 146–148: derivation for general linear anisotropic inhomogeneous tensor media and the boundary identity; §12.2, printed p. 149: symmetric tensors can be lossy and reciprocal. The source uses exp(+jωt), opposite to the exp(−iωt) convention fixed here."
+            }
+          ]
+        },
+        "dependency_level": 1,
+        "physical_scope": "Conditional fixed-frequency reciprocity identity in the local linear macroscopic phasor model on a bounded C1 Euclidean domain, for C1 phasor solutions, continuous sources and pointwise transpose-symmetric possibly complex constitutive tensors. The result requires no passivity or losslessness and asserts no field existence, uniqueness, causal material response or empirical validity.",
+        "strategy": "direct"
+      }
+    ]
+  },
+  {
+    "order": 710,
+    "id": "emx-anisotropic-reciprocal-optics-examples",
+    "kind": "B",
+    "category": "classical-electromagnetism",
+    "library": "physics",
+    "title": "Anisotropic waves and reciprocity — Examples",
+    "companion": "emx-anisotropic-reciprocal-optics",
+    "requires": [
+      "emx-anisotropic-reciprocal-optics",
+      "emx-passive-dispersive-materials"
+    ],
+    "items": [
+      {
+        "id": "ex-emx-extraordinary-longitudinal-e",
+        "kind": "example",
+        "domain": "physics",
+        "library": "physics",
+        "title": "Electric amplitude has a longitudinal component",
+        "statement": "Let $\\varepsilon=\\operatorname{diag}(\\varepsilon_\\perp,\\varepsilon_\\perp,\\varepsilon_\\parallel)$ with $\\varepsilon_\\perp,\\varepsilon_\\parallel>0$ and $\\varepsilon_\\perp\\ne\\varepsilon_\\parallel$, and let $\\mu>0$. Fix $\\omega>0$ and real $k=(k_x,0,k_z)$ with $k_xk_z\\ne0$ on the extraordinary sheet $k_x^2/\\varepsilon_\\parallel+k_z^2/\\varepsilon_\\perp=\\mu\\omega^2$. Choose $d_0\\in\\mathbb C\\setminus\\{0\\}$ in $\\mathrm{C\\,m^{-1}}$ and set the displacement amplitude $d=d_0(k_z,0,-k_x)$ and electric amplitude $e=\\varepsilon^{-1}d$. Then $k\\cdot d=0$ but $k\\cdot e=d_0k_xk_z(1/\\varepsilon_\\perp-1/\\varepsilon_\\parallel)\\ne0$. Thus the extraordinary electric amplitude is not orthogonal to the wavevector even though the displacement amplitude is.",
+        "deps": [
+          "pthm-emx-uniaxial-dispersion"
+        ],
+        "dependency_roles": {
+          "pthm-emx-uniaxial-dispersion": "physical-result"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jin Au Kong, Electromagnetic Wave Theory, last edition 2008, PIERS free release 2021",
+              "url": "https://piers.org/piers/files/BOOK_ElectromagneticWaveTheory_by_JINAUKONG_FreeRelease2021.pdf",
+              "locator": "Chapter 3, §3.3.E, printed pp. 317–318, equations (3.3.68)–(3.3.71): the extraordinary displacement is perpendicular to k while its electric amplitude lies in the optic-axis plane and is generally not parallel to D."
+            }
+          ]
+        },
+        "dependency_level": 2,
+        "physical_scope": "A conditional bulk plane-wave example in a homogeneous lossless uniaxial dielectric with positive principal permittivities, positive scalar permeability, a real nonzero wavevector on the extraordinary sheet, and nonzero transverse and axial wavevector components. It makes no interface, finite-beam or empirical claim.",
+        "strategy": "direct"
+      },
+      {
+        "id": "ex-emx-reciprocity-not-time-reversal",
+        "kind": "example",
+        "domain": "physics",
+        "library": "physics",
+        "title": "Loss and reciprocity coexist",
+        "statement": "Assume $\\mathrm{AC}_\\omega$. Choose a one-oscillator Lorentz response with $\\varepsilon_\\infty>0$ in $\\mathrm{F\\,m^{-1}}$, $a>0$ in $\\mathrm{F\\,m^{-1}\\,s^{-2}}$, $\\omega_0>0$ and $\\gamma>0$ in $\\mathrm{s^{-1}}$, and fix $\\omega>0$ in $\\mathrm{s^{-1}}$. In the $e^{-i\\omega t}$ convention its scalar absolute permittivity is $\\varepsilon(\\omega)=\\varepsilon_\\infty+a/(\\omega_0^2-\\omega^2-i\\gamma\\omega)$. Let $I_3$ denote the $3\\times3$ identity matrix, and let the tensor coefficients be $\\boldsymbol\\varepsilon(\\omega)=\\varepsilon(\\omega)I_3$ and $\\boldsymbol\\mu=\\mu I_3$ with real $\\mu>0$ in $\\mathrm{H\\,m^{-1}}$. These coefficients satisfy the transpose-symmetry condition of the reciprocal phasor model, while $\\operatorname{Im}\\varepsilon(\\omega)>0$. For any nonzero local electric amplitude $e\\in\\mathbb C^3$ in $\\mathrm{V\\,m^{-1}}$, define the real electric field at a fixed material point by $E(t)=\\operatorname{Re}(e e^{-i\\omega t})$. Let $p_1=(\\varepsilon(\\omega)-\\varepsilon_\\infty)e$ be the oscillator polarization amplitude from the one-oscillator response, in $\\mathrm{C\\,m^{-2}}$; put $P_1(t)=\\operatorname{Re}(p_1e^{-i\\omega t})$, and define its polarization-current contribution by $J_{\\mathrm{osc}}(t):=\\partial_tP_1(t)$. Its phasor amplitude is $j_{\\mathrm{osc}}=-i\\omega(\\varepsilon(\\omega)-\\varepsilon_\\infty)e$ in $\\mathrm{A\\,m^{-2}}$. The cycle-averaged power density transferred from the electric field to the oscillator through this current contribution, in $\\mathrm{W\\,m^{-3}}$, is\n\n$$\\overline q_{\\mathrm{osc}}:=\\frac1T\\int_0^T J_{\\mathrm{osc}}(t)\\cdot E(t)\\,dt=\\frac{\\omega}{2}\\operatorname{Im}\\varepsilon(\\omega)|e|^2>0,\\qquad T=\\frac{2\\pi}{\\omega},\\qquad |e|^2:=e^*\\cdot e=\\sum_{r=1}^3|e_r|^2.$$\n\nHere $e^*$ is componentwise complex conjugation. The conjugate used in this cycle average is distinct from the bilinear, unconjugated product in the reciprocity identity.\n\nThus the coefficient condition that supplies the Lorentz reciprocity identity is compatible with positive cycle-averaged work on the oscillator-current contribution in this adopted model.\n\n",
+        "deps": [
+          "pthm-emx-lorentz-reciprocity",
+          "pthm-emx-lorentz-susceptibility",
+          "def-emx-reciprocal-phasor-medium",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "pthm-emx-lorentz-reciprocity": "physical-result",
+          "pthm-emx-lorentz-susceptibility": "physical-result",
+          "def-emx-reciprocal-phasor-medium": "formulation-prerequisite",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jin Au Kong, Electromagnetic Wave Theory, last edition 2008, PIERS free release 2021",
+              "url": "https://piers.org/piers/files/BOOK_ElectromagneticWaveTheory_by_JINAUKONG_FreeRelease2021.pdf",
+              "locator": "Chapter 3, §3.2.E, printed pp. 299–300: reciprocity is derived from transpose-symmetric constitutive tensors without complex conjugation."
+            },
+            {
+              "title": "Weng Cho Chew, Electromagnetic Field Theory, Purdue ECE 604 lecture notes, 2023–2024 revision",
+              "url": "https://engineering.purdue.edu/wcchew/ece604f23/EMFTEDX032124R.pdf",
+              "locator": "Chapter 12, §12.1, printed pp. 146–148: reciprocity for complex anisotropic tensors; the introductory phrase that a lossless reciprocal system is 'often' time-reversible is not used as a theorem."
+            },
+            {
+              "title": "Niklas Beisert, Elektrodynamik, ETH Zurich 2024 FS complete lecture script",
+              "url": "https://people.phys.ethz.ch/~nbeisert/lectures/ED-24FS-Skript.pdf",
+              "locator": "§12.1, printed pp. 12.1–12.2 (PDF pp. 142–143), equations (12.1)–(12.10): macroscopic Maxwell conventions and frequency-dependent material response. These pages do not establish this anisotropic reciprocity example; the response sign and absorption are derived from the current Lorentz-susceptibility supplier."
+            }
+          ]
+        },
+        "dependency_level": 2,
+        "physical_scope": "A conditional single-oscillator Lorentz phasor response with strictly positive damping and a nonzero local electric amplitude, together with a real positive scalar permeability. It shows positive cycle-averaged work on the oscillator contribution to the polarization-current density under the stated response model while the coefficient tensors satisfy the local reciprocity condition. It asserts no measured material response, global field existence, or time-reversal statement.",
+        "strategy": "direct"
+      }
+    ]
+  }
+]

@@ -1,0 +1,3 @@
+# Batch 128 notes correction
+
+The SSS density locator repeated through the historical source-reading and coverage records is corrected by [physics-non-fluid-129-2026-10-21-r2-owner-step2-jt128-locators/source-reading-correction.md](physics-non-fluid-129-2026-10-21-r2-owner-step2-jt128-locators/source-reading-correction.md). Original source-reading claims and validation/readiness receipts remain historical. The correction changes citations only: SSS HTML density (144), curve (145); retrieved PDF density (141), curve (142). The local C=source gamma and the separate disk weight exp(S_0) restore the locally adopted full density. No scientific body, physical scope, or ensemble claim changes.

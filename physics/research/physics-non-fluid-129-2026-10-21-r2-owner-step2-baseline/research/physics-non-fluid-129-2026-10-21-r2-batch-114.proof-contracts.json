@@ -1,0 +1,480 @@
+{
+  "version": 1,
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "batch": "114",
+  "level": 1,
+  "scope": [
+    "def-tgr-regulated-generalized-entropy",
+    "rem-tgr-generalized-entropy-no-automatic-second-law"
+  ],
+  "contracts": {
+    "def-tgr-regulated-generalized-entropy": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Definition requires a nonempty compact spacelike section and nonzero finite-dimensional Hilbert factors.",
+          "reviewed": {
+            "upheld": true,
+            "by": "same-owner-qft-green-maps scoped boundary review",
+            "reason": "A regulator sequence is named at every positive integer and each factor space is nonzero. The phrase sequence of nonempty sets appears only in the explanation of a conditional calibration choice axiom; the entropy definition selects no such family and asserts no empty-regulator limit."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: the finite outside entropy retains the explicit 0 log 0 := 0 convention."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: nonzero Hilbert factors may be one-dimensional; the finite spectral sum and partial trace remain defined."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: the finite spectral entropy counts eigenvalues with multiplicity, so repeated eigenvalues are included."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: the limit is along the named sequence n >= 1 as n tends to infinity; no finite-regulator endpoint value is identified with the limit."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The sequence of spaces, states, and regulator labels is supplied model data; the Definition performs no selection from an arbitrary family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Definition: a renormalized value is assigned exactly when the declared finite-sum sequence has a finite real limit."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Definition: whenever the declared finite-sum sequence converges to a finite real value, that limit is the assigned renormalized value."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "one-dimensional input and maximally mixed qubit outside factor",
+          "inputs": "H_in = C, H_out = C^2, rho = I_2/2",
+          "calculation": "The one-term input partial trace gives rho_out = I_2/2; its two eigenvalues are 1/2.",
+          "result": "S_out = k_B log 2 is finite."
+        },
+        {
+          "case": "pure outside density with a zero eigenvalue",
+          "inputs": "H_in = C, H_out = C^2, rho = diag(1,0)",
+          "calculation": "The outside eigenvalues are 1 and 0, with 0 log 0 assigned zero.",
+          "result": "S_out = 0."
+        },
+        {
+          "case": "area-term units",
+          "inputs": "k_B in J K^-1, c in m s^-1, A in m^2, G_Lambda in m^3 kg^-1 s^-2, hbar in J s",
+          "calculation": "k_B c^3 A/(G_Lambda hbar) has units J K^-1.",
+          "result": "The optional area summand has entropy units."
+        }
+      ],
+      "finite_checks_disposition": "Definition-only carrier. These finite substitutions check the interfaces and units; they do not prove convergence, scheme independence, or any entropy inequality.",
+      "supplier_excerpts": [
+        {
+          "supplier": "def-tgr-finite-cutoff-outside-entropy",
+          "carrier": "items/def-tgr-finite-cutoff-outside-entropy.md",
+          "status": "Current draft interface and complete proof inspected; current Step 1 record is ready. Independent proof acceptance is not inferred.",
+          "source_section": "Definition",
+          "exact_statement": "Let $H_{\\rm in}$ and $H_{\\rm out}$ be nonzero finite-dimensional complex inner-product spaces, and let $\\rho$ be a density operator on $H_{\\rm in}\\otimes H_{\\rm out}$.",
+          "relevant_hypotheses_and_conventions": "Finite nonzero complex inner-product spaces; a density operator on the ordered tensor product; the input-factor partial trace; natural logarithms; zero-eigenvalue contribution set to zero; k_B is a positive scalar in the mathematical item.",
+          "supplier_proof_status": "Draft status and precheck pending are preserved. The complete coordinate partial-trace, positivity, trace, basis-independence, and finite-entropy argument was inspected; the current loadStep1Record/step1Decision result is closed and ready.",
+          "consumer_use": "Defines the finite outside density and spectral entropy at each regulator; the physical definition supplies k_B with SI units."
+        },
+        {
+          "supplier": "lem-tgr-renormalization-finite-part-ambiguity",
+          "carrier": "items/lem-tgr-renormalization-finite-part-ambiguity.md",
+          "status": "Current draft interface and complete proof inspected; current Step 1 record is ready. Independent proof acceptance is not inferred.",
+          "source_section": "Statement",
+          "exact_statement": "For every $a\\in\\mathbb R$, the equally valid subtraction $r'_N=r_N-a$ satisfies",
+          "relevant_hypotheses_and_conventions": "Real sequences, finite real limit, epsilon definition of convergence, and an arbitrary real finite subtraction shift.",
+          "supplier_proof_status": "Draft status is preserved; its complete epsilon proof and current ready authoring record were inspected.",
+          "consumer_use": "Justifies treating all counterterms and the finite normalization condition as fixed scheme data."
+        },
+        {
+          "supplier": "pthm-tgr-area-entropy-calibration",
+          "carrier": "items/pthm-tgr-area-entropy-calibration.md",
+          "status": "Published out-of-run supplier; complete current Statement and Proof inspected. Its Step 1 record is absent because it is outside this run; no independent acceptance is inferred from that absence.",
+          "source_section": "Statement",
+          "exact_statement": "$$S_H=\\frac{k_B}{4\\ell_P^2}A_H+s_*=\\frac{k_Bc^3}{4G_N\\hbar}A_H+s_*,\\qquad \\ell_P^2:=\\frac{G_N\\hbar}{c^3}.$$",
+          "relevant_hypotheses_and_conventions": "The coefficient uses fixed G_N and applies only to the stated connected, strictly subextremal, zero-magnetic-flux stationary family with the physical family differential, the separate reversible-heat postulate, the reduced branch parameter matched pointwise, and the stated countable-choice premise. The offset remains free.",
+          "supplier_proof_status": "The published carrier's full proof was inspected. Its current verification has judge pass and precheck pending; no broader theorem, regulator-dependent G_Lambda calibration, or independent approval is inferred.",
+          "consumer_use": "Provides the restricted reference coefficient and the exact conditions that are not transferred to an arbitrary G_Lambda or background."
+        },
+        {
+          "supplier": "def-tgr-framework-units",
+          "carrier": "items/def-tgr-framework-units.md",
+          "status": "Published out-of-run physical definition; current Definition inspected.",
+          "source_section": "Definition",
+          "exact_statement": "The Boltzmann constant $k_B$ has units $\\mathrm{J\\,K^{-1}}$ and is used when a statistical entropy/temperature calibration is adopted.",
+          "relevant_hypotheses_and_conventions": "SI units in the TGR framework; G_N is not assigned a universal role outside the selected formulation, and hbar is used only in a quantum branch.",
+          "supplier_proof_status": "Definition carrier; no proof is applicable. The content was inspected at the current bytes.",
+          "consumer_use": "Supplies the physical units and role conventions for k_B, c, hbar, G_N, and the regulator-dependent G_Lambda model data."
+        },
+        {
+          "supplier": "def-tgr-horizon-screen-family",
+          "carrier": "items/def-tgr-horizon-screen-family.md",
+          "status": "Published out-of-run mathematical definition; current Definition inspected.",
+          "source_section": "Definition",
+          "exact_statement": "A **smooth affine null generator field** on $H$ is a smooth vector field $k$ along $H$ such that $k_p$ is a nonzero future-directed section of $L_p$ and $\\nabla_k k=0$ along $H$.",
+          "relevant_hypotheses_and_conventions": "A time-oriented smooth Lorentzian four-manifold with signature (-,+,+,+), the metric-selected connection, and a smooth embedded null hypersurface.",
+          "supplier_proof_status": "Definition carrier; it asserts no general completeness or compact-cross-section theorem. Its exact Definition was inspected.",
+          "consumer_use": "Supplies the null-hypersurface and affine-generator conventions used to specify Sigma."
+        },
+        {
+          "supplier": "def-countable-choice",
+          "carrier": "items/def-countable-choice.md",
+          "status": "Published out-of-run mathematical axiom definition; current Definition inspected.",
+          "source_section": "Definition",
+          "exact_statement": "> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by",
+          "relevant_hypotheses_and_conventions": "The axiom is countable choice, AC_omega; it is strictly the countable family convention, not the full Axiom of Choice.",
+          "supplier_proof_status": "Axiom definition; no proof is applicable.",
+          "consumer_use": "Makes explicit the choice assumption inherited by the restricted area-calibration result; the finite-regulator definition itself selects no family."
+        }
+      ]
+    },
+    "rem-tgr-generalized-entropy-no-automatic-second-law": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-tgr-regulated-generalized-entropy",
+          "source_section": "Definition",
+          "quote": "$$S_{\\mathrm{out},n}:=S_{\\mathrm{out}}(\\rho_n;H_{\\mathrm{in},n},H_{\\mathrm{out},n}),\\qquad S_{\\mathrm{gen},n}[\\Sigma]:=S_{\\mathrm{grav},n}[\\Sigma]+S_{\\mathrm{out},n}.$$",
+          "uses": [
+            "1.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-tgr-finite-cutoff-outside-entropy",
+          "source_section": "Definition",
+          "quote": "where $\\log$ is the natural logarithm and $0\\log0:=0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-density-operator",
+          "source_section": "Definition",
+          "quote": "A **density operator** on $H$ is a non-negative endomorphism $\\rho:H\\to H$ with $\\operatorname{tr}(\\rho)=1",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-non-negative-and-positive-operator",
+          "source_section": "Definition",
+          "quote": "The operator $T$ is **non-negative** when $T$ is self-adjoint",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define $$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-exponential-is-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "The exponential function is continuous and strictly increasing on $\\mathbb R$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and $$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "pthm-tgr-restricted-classical-area",
+          "source_section": "Statement",
+          "quote": "and $A_H(\\lambda_2)\\ge A_H(\\lambda_1)$ whenever $\\lambda_2\\ge\\lambda_1\\ge\\lambda_0$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "pthm-tgr-area-entropy-calibration",
+          "source_section": "Statement",
+          "quote": "The deduction determines the area coefficient within this adopted model and leaves the entropy zero unselected.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The two displayed matrices are self-adjoint, non-negative, and trace one. The partial trace over the one-dimensional input factor therefore returns the same matrices.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The regulator index labels the declared factorization sequence, not physical time; the definition supplies no map of states between physical cuts.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The spectra are {1/2,1/2} and {1,0}; the logarithm and exponential suppliers give outside entropies k_B log 2 and 0.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "With identical geometric terms, the generalized-entropy difference is -k_B log 2<0. This is a finite data comparison, not a physical process.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "A1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The restricted classical area result and stationary area calibration supply no inequality for the outside term; finite convergence and the additive definition therefore do not imply physical-process monotonicity.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F9",
+            "F10",
+            "A2",
+            "step 3.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The finite comparison uses nonzero finite-dimensional input and output spaces and two admitted density matrices."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 applies the explicit 0 log 0 := 0 convention to the zero eigenvalue of rho_1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 uses a one-dimensional input factor, for which the partial trace has one summand."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 counts the repeated eigenvalue 1/2 of rho_0 with multiplicity two."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The labels 0 and 1 index two finite data assignments only; they are not temporal endpoints or a physical path."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The matrices and finite-dimensional spaces are explicitly supplied; the calculation makes no arbitrary selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The remark states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The remark states no converse characterization."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "fixed geometric term and qubit outside entropy",
+          "inputs": "H_in=C, H_out=C^2, rho_0=I_2/2, rho_1=diag(1,0), S_grav,0=S_grav,1",
+          "calculation": "S_out,0=k_B log 2 and S_out,1=0 by the finite spectral sum.",
+          "result": "S_gen,1-S_gen,0=-k_B log 2<0; the two labels are model data and not a physical evolution."
+        }
+      ],
+      "finite_checks_disposition": "This finite calculation verifies only that the additive definition itself does not impose monotonicity. It is not a counterexample to a physical GSL with its own state evolution and hypotheses.",
+      "supplier_excerpts": [
+        {
+          "supplier": "def-tgr-regulated-generalized-entropy",
+          "carrier": "items/def-tgr-regulated-generalized-entropy.md",
+          "status": "Current assigned A-page definition inspected; no independent proof acceptance is asserted.",
+          "source_section": "Definition",
+          "exact_statement": "$$S_{\\mathrm{out},n}:=S_{\\mathrm{out}}(\\rho_n;H_{\\mathrm{in},n},H_{\\mathrm{out},n}),\\qquad S_{\\mathrm{gen},n}[\\Sigma]:=S_{\\mathrm{grav},n}[\\Sigma]+S_{\\mathrm{out},n}.$$",
+          "relevant_hypotheses_and_conventions": "One fixed smooth background and section, named finite factorizations, specified density matrices and geometric values; no physical state evolution is included.",
+          "supplier_proof_status": "Definition; no proof is applicable.",
+          "consumer_use": "Defines the additive quantity whose finite outside-state dependence is compared."
+        },
+        {
+          "supplier": "pthm-tgr-restricted-classical-area",
+          "carrier": "items/pthm-tgr-restricted-classical-area.md",
+          "status": "Published out-of-run physical theorem; complete current Statement and Proof inspected.",
+          "source_section": "Statement",
+          "exact_statement": "and $A_H(\\lambda_2)\\ge A_H(\\lambda_1)$ whenever $\\lambda_2\\ge\\lambda_1\\ge\\lambda_0$.",
+          "relevant_hypotheses_and_conventions": "Its area conclusion is restricted to the exact smooth model and future-complete congruence in its Statement; it has no outside quantum entropy term.",
+          "supplier_proof_status": "The complete current conditional proof was inspected. Its published status and judge/precheck fields are not extended into an unconditional area or entropy law.",
+          "consumer_use": "Provides the exact restricted classical-area input whose lack of an outside-entropy term is noted."
+        },
+        {
+          "supplier": "pthm-tgr-area-entropy-calibration",
+          "carrier": "items/pthm-tgr-area-entropy-calibration.md",
+          "status": "Published out-of-run physical theorem; complete current Statement and Proof inspected.",
+          "source_section": "Statement",
+          "exact_statement": "$$S_H=\\frac{k_B}{4\\ell_P^2}A_H+s_*=\\frac{k_Bc^3}{4G_N\\hbar}A_H+s_*,\\qquad \\ell_P^2:=\\frac{G_N\\hbar}{c^3}.$$",
+          "relevant_hypotheses_and_conventions": "The theorem applies to its connected strict subextremal, zero-magnetic-flux stationary Kerr-Newman family. It does not identify S_H with outside entropy or establish a dynamical process law.",
+          "supplier_proof_status": "The complete proof was inspected. The current out-of-run readiness lookup has no record; this is not treated as a prerequisite gap, and no extra proof approval is inferred.",
+          "consumer_use": "Supplies the exact stationary area-calibration scope contrasted with the unconstrained outside term."
+        },
+        {
+          "supplier": "def-tgr-finite-cutoff-outside-entropy",
+          "carrier": "items/def-tgr-finite-cutoff-outside-entropy.md",
+          "status": "Current batch-113 draft interface and complete proof inspected; current Step 1 record is ready.",
+          "source_section": "Definition",
+          "exact_statement": "Let $H_{\\rm in}$ and $H_{\\rm out}$ be nonzero finite-dimensional complex inner-product spaces, and let $\\rho$ be a density operator on $H_{\\rm in}\\otimes H_{\\rm out}$.",
+          "relevant_hypotheses_and_conventions": "Nonzero finite-dimensional complex inner-product spaces, an ordered input/output factorization, a density operator, and natural logarithms.",
+          "supplier_proof_status": "Draft status and precheck pending are preserved; current authoring readiness is ready, with independent proof acceptance not inferred.",
+          "consumer_use": "Supplies the exact partial-trace entropy used in the finite comparison."
+        },
+        {
+          "supplier": "def-qc-density-operator",
+          "carrier": "items/def-qc-density-operator.md",
+          "status": "Published imported mathematical definition; current Definition inspected.",
+          "source_section": "Definition",
+          "exact_statement": "A **density operator** on $H$ is a non-negative endomorphism $\\rho:H\\to H$ with $\\operatorname{tr}(\\rho)=1",
+          "relevant_hypotheses_and_conventions": "The Hilbert space is nonzero and finite dimensional.",
+          "supplier_proof_status": "Definition; no proof is applicable.",
+          "consumer_use": "Checks that the two displayed matrices are admissible finite states."
+        },
+        {
+          "supplier": "def-non-negative-and-positive-operator",
+          "carrier": "items/def-non-negative-and-positive-operator.md",
+          "status": "Published imported mathematical definition; current Definition inspected.",
+          "source_section": "Definition",
+          "exact_statement": "The operator $T$ is **non-negative** when $T$ is",
+          "relevant_hypotheses_and_conventions": "Finite-dimensional real or complex inner-product space.",
+          "supplier_proof_status": "Definition; no proof is applicable.",
+          "consumer_use": "Verifies positivity of I_2/2 and diag(1,0)."
+        },
+        {
+          "supplier": "def-natural-logarithm",
+          "carrier": "items/def-natural-logarithm.md",
+          "status": "Published imported mathematical definition; current Definition inspected.",
+          "source_section": "Definition",
+          "exact_statement": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$.",
+          "relevant_hypotheses_and_conventions": "The logarithm has domain (0,infinity) and is the inverse of the real exponential.",
+          "supplier_proof_status": "Definition; no proof is applicable.",
+          "consumer_use": "Interprets log(1/2), log 1, and log 2 in the spectral entropy calculation."
+        },
+        {
+          "supplier": "def-real-exponential-function-and-e",
+          "carrier": "items/def-real-exponential-function-and-e.md",
+          "status": "Published imported mathematical definition; current Definition inspected.",
+          "source_section": "Definition",
+          "exact_statement": "For $x\\in\\mathbb R$, define $$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$",
+          "relevant_hypotheses_and_conventions": "The exponential is defined by its all-real convergent power series.",
+          "supplier_proof_status": "Definition; no proof is applicable.",
+          "consumer_use": "At x=0 the power series gives exp(0)=1."
+        },
+        {
+          "supplier": "thm-exponential-is-strictly-increasing",
+          "carrier": "items/thm-exponential-is-strictly-increasing.md",
+          "status": "Published imported mathematical theorem; complete proof and current verification inspected.",
+          "source_section": "Statement",
+          "exact_statement": "The exponential function is continuous and strictly increasing on $\\mathbb R$.",
+          "relevant_hypotheses_and_conventions": "The real exponential defined by its power series.",
+          "supplier_proof_status": "Published, current precheck pass and verified marker; exact theorem interface inspected.",
+          "consumer_use": "Shows log 2 > 0 from exp(0)=1<2=exp(log 2)."
+        },
+        {
+          "supplier": "cor-exponential-reciprocal-and-positivity",
+          "carrier": "items/cor-exponential-reciprocal-and-positivity.md",
+          "status": "Published imported mathematical corollary; current Statement inspected.",
+          "source_section": "Statement",
+          "exact_statement": "For every real $x$, $\\exp(x)>0$ and",
+          "relevant_hypotheses_and_conventions": "The real exponential on R.",
+          "supplier_proof_status": "Published result; current exact Statement inspected.",
+          "consumer_use": "Derives log(1/2)=-log 2 from the inverse definition."
+        },
+        {
+          "supplier": "def-countable-choice",
+          "carrier": "items/def-countable-choice.md",
+          "status": "Published imported mathematical axiom definition; current Definition inspected.",
+          "source_section": "Definition",
+          "exact_statement": "> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by",
+          "relevant_hypotheses_and_conventions": "This is countable choice, AC_omega, not the full Axiom of Choice.",
+          "supplier_proof_status": "Axiom definition; no proof is applicable.",
+          "consumer_use": "States the inherited choice premise used by the contextual classical-area and stationary-area suppliers."
+        }
+      ]
+    }
+  }
+}

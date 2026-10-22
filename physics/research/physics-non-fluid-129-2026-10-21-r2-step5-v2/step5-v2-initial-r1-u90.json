@@ -1,0 +1,132 @@
+{
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "phase": "initial",
+  "round": 1,
+  "unit": "90",
+  "input_sha256": "eaf0a68d231b0a7d0d042df337974eaab597dfd3432daa3ad0aaeebd32fe188c",
+  "decisions": [
+    {
+      "id": "ex-csm-frontier-potts-two-vertices",
+      "model": "gpt-6-luna",
+      "context_sha256": "52049d49b4fcdde12f80c01d33c18b7f016133d0083a206d229d96f6d2e13e04",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The original wording specifies distinct vertices x,y and their sole edge without explicitly exhausting V. On the literal reading allowing V={x,y,z}, E={{x,y}}, the supplier counts three empty-edge components and two occupied-edge components, giving Z_FK=Z_P=Q^3+Q^2v, not Q^2+Qv. The proof's two-component and Q^2-spin counts require exactly V={x,y}. Repaired Example and Given by specifying V={x,y}, x!=y and E={e}, preserving the intended two-vertex example and every claimed formula.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "ex-csm-frontier-potts-two-vertices",
+      "disposition": "repaired",
+      "post_sha256": "e6651f1f067c1bab69ce77bc95e5d85428f55db385d18b0ea446b10e3c3b7c94",
+      "review_context_sha256": "c11a9e9efcc5951b0f204198a5baa9bc1b527c79fa7b21a15dd8885ee2dc8fa9",
+      "reason": "Rechecked the repaired instance against the complete current finite-weight definition and Edwards–Sokal argument. Exactly two edge subsets have weights Q^2 and Qv. The Q equal-color and Q(Q-1) unequal-color spin assignments yield the same positive normalizer, and the correlation identity simplifies to (1+v)/(Q+v), including v=0. All hypotheses hold for integer Q>=2 and finite v>=0. The owning manifest now mirrors the Example exactly; the unchanged proof steps and contract remain valid. This is the adjudicator's repair review, not independent review of the repair.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "id": "ex-csm-frontier-potts-two-vertices",
+      "status": "fixed",
+      "severity": "fatal",
+      "defect_type": "logic",
+      "reason": "Propose recording the missing exhaustive vertex-set hypothesis and its completed repair. An additional isolated vertex changes both normalizers by Q. Explicit V={x,y}, E={e} now makes the existing component and spin enumerations correct; no formula or dependency was removed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "supporting_evidence": {
+    "research/physics-non-fluid-129-2026-10-21-r2-batch-90-step5-context.json": "a95d1760278386a9905986cfa3f42e6e279dfd3c4e2e8fbe8147aaf47e0bfc1d"
+  },
+  "repair_notes": {
+    "exact_claim": "For G=({x,y},{{x,y}}), x!=y, integer Q>=2 and finite v>=0: Z_FK=Z_P=Q^2+Qv, P_FK(x connected to y)=v/(Q+v), and P(sigma(x)=sigma(y))=(1+v)/(Q+v). These are finite mathematical laws with no empirical premises or units.",
+    "local_evidence": [
+      {
+        "path": "items/def-csm-frontier-finite-potts-fk.md",
+        "locator": "Definition",
+        "use": "Spin maps V->[Q], Potts weights, FK weights, isolated-vertex component convention and positive finite normalizers."
+      },
+      {
+        "path": "items/thm-csm-frontier-edwards-sokal.md",
+        "locator": "Statement and complete Proof, steps 1.1–3.1",
+        "use": "Checked the finite expansion, component coloring, marginals and connectivity identity, including conditioning only on positive-probability edge sets."
+      },
+      {
+        "path": "items/def-finite-simple-graph.md",
+        "locator": "Definition",
+        "use": "A finite graph is the pair (V,E); specifying one edge does not determine V. Imported published supplier read only."
+      },
+      {
+        "path": "research/physics-non-fluid-129-2026-10-21-r2-batch-90.proof-contracts.json",
+        "locator": "contracts.ex-csm-frontier-potts-two-vertices",
+        "use": "Its empty-case boundary already describes an example fixing two vertices and one edge. All three existing derivations and supplier quotes remain accurate after the explicit graph repair."
+      }
+    ],
+    "source_reading": "The finite enumeration and coupling argument are familiar mathematics and were checked directly in the current local suppliers. No external source retrieval or reading is claimed. The Step-4 digest supplied convention context, not acceptance authority. The run-specific support index contains no entry for this assigned subject; no supplements were present when checked.",
+    "changes": [
+      "Changed only the opening graph specification in ## Example and **Given:**; all numbered proof steps, dependencies, formulas, provenance and verification metadata remain unchanged.",
+      "Updated only /1/items/0/statement in research/physics-non-fluid-129-2026-10-21-r2-batch-90.pages.json under the shared write lock. Reread both current files inside the guarded command and checked exact parsed equality. No contract amendment was necessary."
+    ],
+    "metadata_update": {
+      "command": "node tools/physics-support/step5-shared-write-lock.mjs run --owner step5-v2-initial-r1-u90 -- node /tmp/physics-non-fluid-129-2026-10-21-r2-u90-scoped-metadata-update.mjs",
+      "exit_code": 0,
+      "result": "Lock acquired and released; owning manifest reread, only assigned statement mirror changed, exact JSON equality checked.",
+      "operational_history": "An initial guarded attempt detected replacement-string dollar-sign expansion in its prewrite assertion and exited without writing. The temporary script was corrected to use a replacement callback; the subsequent guarded update passed."
+    },
+    "interface_examination": "Compared the original and repaired sections directly: ## Example and Given changed, while no ## Statement or ## Definition section exists. As a precaution, searched every current item and page for the canonical ID; aliases are empty. There are no item dependency/reference consumers. The only external content occurrence is the companion page's placement entry, which requires no repair.",
+    "page_uses": [
+      {
+        "path": "library/classical-statistical-mechanics/csm-frontier-fk-loop-algebra-examples.md",
+        "affected_use": "Frontmatter examples list contains ex-csm-frontier-potts-two-vertices; the page has no prose or mathematical claim using the example's hypotheses or normalizers.",
+        "disposition": "unaffected",
+        "reason": "The explicit two-vertex instance preserves this placement and needs no page change."
+      }
+    ],
+    "diagrams": "The assigned item and owning pages contain no TikZ/tikzcd diagrams. The finite enumeration requires no additional diagram.",
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/physics-support/precheck.mts items/ex-csm-frontier-potts-two-vertices.md",
+        "exit_code": 0,
+        "result": "PASS; 1 checked, 0 failing."
+      },
+      {
+        "command": "node tools/physics-support/rendercheck.mjs items/ex-csm-frontier-potts-two-vertices.md",
+        "exit_code": 0,
+        "result": "OK; 1 file, math and YAML parse successfully."
+      },
+      {
+        "command": "node tools/physics-support/proof-contract.mjs research/physics-non-fluid-129-2026-10-21-r2-batch-90.proof-contracts.json --strict --items ex-csm-frontier-potts-two-vertices",
+        "exit_code": 0,
+        "result": "0 errors, 0 warnings, 1/1 items checked."
+      },
+      {
+        "command": "node tools/physics-support/depcheck.mjs --items-file /tmp/physics-step5-u90-items.json --json",
+        "exit_code": 0,
+        "result": "Focused selection contains only the assigned example; 0 errors, 0 warnings, 59 prerequisite items and 108 prerequisite pages checked for dependency context."
+      },
+      {
+        "command": "node tools/physics-support/proof-layout.mjs items/ex-csm-frontier-potts-two-vertices.md",
+        "exit_code": 0,
+        "result": "1 item, 3 steps, 0 defects; run after the final item edit."
+      },
+      {
+        "command": "node tools/physics-support/step5-workflow.mjs review-contexts --run physics-non-fluid-129-2026-10-21-r2 --items ex-csm-frontier-potts-two-vertices",
+        "exit_code": 0,
+        "result": "Returned the exact post_sha256 and review_context_sha256 copied into reviews. The same hashes were returned after checking the completed manifest mirror."
+      }
+    ],
+    "published_consumer_ledger": "No potentially defective published consumer was found and no published-consumer ledger update is proposed.",
+    "unresolved_obligations": [],
+    "next_action": "Controller collects this report and routes the confirmed fatal through the required subsequent native round; no judge, stamp, certificate or round-state update was performed."
+  }
+}

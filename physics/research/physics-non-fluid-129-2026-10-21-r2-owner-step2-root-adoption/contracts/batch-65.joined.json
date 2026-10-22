@@ -1,0 +1,534 @@
+{
+  "version": 1,
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "scope": [
+    "def-qftx-scaling-cocycle",
+    "prop-qftx-scale-cocycle-law",
+    "thm-qftx-truncated-rg-ode",
+    "ex-qftx-truncation-landau-pole"
+  ],
+  "contracts": {
+    "def-qftx-scaling-cocycle": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qftx-local-time-ordered-system",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb M=\\mathbb R^4$ have metric $\\eta=\\operatorname{diag}(-1,1,1,1)$, orientation $dx^0\\wedge dx^1\\wedge dx^2\\wedge dx^3$, and future direction given by increasing $x^0$. Use units $c=1$, so a mass parameter has inverse-length units. Define $x\\in J^+(y)$ by $x^0-y^0\\ge|\\mathbf x-\\mathbf y|$ and $x\\in J^-(y)$ by $y^0-x^0\\ge|\\mathbf y-\\mathbf x|$; for $A\\subseteq\\mathbb M$, put $J^\\pm(A)=\\bigcup_{y\\in A}J^\\pm(y)$. A field configuration is any smooth real function $\\phi$; it is off shell because no field equation is imposed. The allowed local interactions are compactly supported finite polynomial functionals of $\\phi$ and finitely many coordinate derivatives, integrated against $d^4x$. The support of a functional $F$ is the closed set of points each of whose neighborhoods contains the support of a compactly supported variation that changes $F$ for some configuration.\n\nFor $\\Lambda\\in SO^+(1,3)$, require $\\Lambda^{\\mathsf T}\\eta\\Lambda=\\eta$, $\\det\\Lambda=1$, and preservation of the chosen future cone; $SO^+(1,3)$ denotes this identity component. The proper orthochronous Poincare group consists of $\\gamma=(a,\\Lambda)$ with $a\\in\\mathbb M$ and $\\Lambda\\in SO^+(1,3)$. It acts by $(\\gamma\\cdot\\phi)(x)=\\phi(\\Lambda^{-1}(x-a))$ and $(\\gamma\\cdot F)(\\phi)=F(\\gamma^{-1}\\cdot\\phi)$.\n\nFor a distribution on a coordinate chart, its wavefront set consists of the nonzero cotangent directions where every compact localization fails to have a rapidly decreasing Fourier transform in every conic neighborhood. Covectors are future or past causal when their metric-dual vectors are causal with the indicated time orientation; a nonzero causal covector has a nonzero time component. Write $\\Delta=\\{(x,x):x\\in\\mathbb M\\}$ and $N^*\\Delta=\\{(x,\\xi;x,-\\xi):\\xi\\ne0\\}$. Write $(x,\\xi)\\sim(y,\\zeta)$ when both covectors are nonzero null and cotangent to the same null straight line, with parallel transport carrying $\\xi$ to $\\zeta$. Precisely, for $x\\ne y$ there must be a future-directed nonconstant affinely parametrized null straight line $\\gamma$ and parameters $s,t$ in either order with $x=\\gamma(s)$, $y=\\gamma(t)$ and a real $\\lambda\\ne0$ such that $\\xi=\\lambda\\eta(\\dot\\gamma(s),\\cdot)$ and $\\zeta=\\lambda\\eta(\\dot\\gamma(t),\\cdot)$. When $x=y$, require $\\xi=\\zeta$ and allow every nonzero null covector. This relation is unsigned: the future first-covector condition below selects $\\lambda>0$, while the Feynman past branch selects $\\lambda<0$. A fixed free scalar input consists of $m\\ge0$, a two-point distribution $W$ satisfying\n$$P_xW=P_yW=0,\\qquad P=-\\eta^{ab}\\partial_a\\partial_b+m^2,$$\nand the positive-frequency null wavefront condition\n$$\\operatorname{WF}(W)=\\mathcal C^+:=\\{(x,\\xi;y,-\\eta):(x,\\xi)\\sim(y,\\eta),\\ \\xi\\text{ future null}\\}.$$\nFor a two-point distribution $U$, set $U^{\\mathsf T}(x,y)=U(y,x)$ and let $U^*$ be complex conjugation. Assume $W$ is invariant under translations and $SO^+(1,3)$, satisfies $W-W^{\\mathsf T}=iE$ for a fixed distribution $E$ supported where $x-y$ is causal, and satisfies $W^*=W^{\\mathsf T}$.\n\nThe prescribed scalar time-ordered contraction input is a symmetric distribution $H_F\\in\\mathcal D'(\\mathbb M^2)$ invariant under translations and $SO^+(1,3)$, equal to $W(x,y)$ on the open set $x^0>y^0$ and to $W(y,x)$ on $y^0>x^0$. The two prescriptions agree on spacelike-separated open supports because $E$ is supported on causal pairs. Translation invariance gives $H_F(x,y)=h_F(x-y)$ and $W(x,y)=w(x-y)$. For a distribution $T$ on $\\mathbb R^4$, set $T_\\rho(\\varphi)=\\rho^{-4}T(\\varphi(\\cdot/\\rho))$ and define $\\operatorname{sd}_0(T)$ as the infimum of real $\\omega$ for which $\\rho^\\omega T_\\rho\\to0$ on each fixed test as $\\rho\\downarrow0$. Require $\\operatorname{sd}_0(h_F),\\operatorname{sd}_0(w)\\le2$ and\n$$\\operatorname{WF}(H_F)\\subseteq\\Gamma_F:=N^*\\Delta\\cup\\{(x,\\xi;y,-\\eta):x\\ne y,\\ (x,\\xi)\\sim(y,\\eta),\\ \\xi\\text{ future null if }x\\in J^+(y),\\ \\xi\\text{ past null if }x\\in J^-(y)\\}.$$\nThis is fixed conditional data: it does not claim existence of $W$ or $H_F$, and it does not define any singular restriction or product of $H_F$ on a diagonal.\n\nFor $r\\ge1$, $F^{(r)}(\\phi)$ denotes the distribution kernel on $\\mathbb M^r$ of the mixed variation in $r$ compactly supported smooth directions, and set $F^{(0)}(\\phi)=F(\\phi)$. Define $\\deg F$ as the largest positive $r$ with $F^{(r)}\\ne0$, or $0$ if all positive-order derivative kernels vanish; in particular $\\deg0=0$. The class $\\mathcal F_{\\mu c}^{\\mathrm{poly}}(\\mathbb M)$ consists of finite polynomial functionals with compactly supported derivative kernels such that every nonzero wavefront tuple of each derivative kernel avoids both the cone of tuples whose entries are all future causal and the cone of tuples whose entries are all past causal; zero entries in either cone are allowed. For $F,G$ in this class, define\n$$F\\star_WG=\\sum_{r=0}^{\\min(\\deg F,\\deg G)}\\frac{\\hbar^r}{r!}\\left\\langle F^{(r)}(\\phi)\\otimes G^{(r)}(\\phi),W^{\\otimes r}\\right\\rangle,$$\nusing distribution products and pushforwards under the stated wavefront transversality conditions, with the $r=0$ pairing interpreted as the pointwise product $F(\\phi)G(\\phi)$. Here $\\hbar$ is a formal indeterminate, and Countable Choice is assumed for the supplier theorem defining these contractions.\n\nA scalar time-ordered system is a sequence of symmetric multilinear maps\n$$T_n:\\big(\\mathcal F_{\\mathrm{loc}}^{\\mathrm{poly}}(\\mathbb M)\\big)^n\\longrightarrow \\mathcal F_{\\mu c}^{\\mathrm{poly}}(\\mathbb M)\\llbracket\\hbar\\rrbracket,\\qquad T_0=1,\\quad T_1=\\operatorname{id}.$$\nFor $I\\subseteq\\{1,\\ldots,n\\}$ put $S_I=\\bigcup_{i\\in I}\\operatorname{supp}F_i$ and $F_I=(F_i)_{i\\in I}$. Causal factorization requires\n$$T_n(F_1,\\ldots,F_n)=T_{|I|}(F_I)\\star_W T_{|I^c|}(F_{I^c})$$\nfor every nonempty proper $I$ such that $S_I\\cap J^-(S_{I^c})=\\varnothing$; an empty block is the unit.\n\nField independence means that each numerical graph distribution is independent of the background field $\\phi$; all $\\phi$-dependence enters through the vertex kernels $F_i^{(r)}(\\phi)$. In the graph expansion of $T_n$, vertices are labeled by $1,\\ldots,n$ and an edge between distinct vertices contracts one derivative slot at each endpoint by $H_F$. A graph is a finite loopless multigraph, so parallel edges are allowed; if $r_{ij}$ edges join vertices $i$ and $j$, the Wick coefficient for that choice includes $\\hbar^{\\sum_{i<j}r_{ij}}/\\prod_{i<j}r_{ij}!$. Finite-order local jet derivatives may act on incident edge kernels. Each coefficient is a finite sum of such contractions, since every input has finite polynomial degree. No graph term uses a singular product at a diagonal before extension.\n\nFor $n\\ge2$, use relative coordinates $z_i=x_i-x_n$ ($1\\le i<n$), so the total diagonal corresponds to $0\\in\\mathbb R^{4(n-1)}$. The relative scaling degree $\\delta_\\Gamma$ of a numerical graph distribution is defined by the same positive-dilation rule above in this relative dimension. The scaling condition is imposed compatibly with integration by parts in the local functionals. First write every local density in its unique balanced-jet representative, in which the derivative variables at a degree-$r$ vertex are the relative combinations $q_a=p_a-r^{-1}\\sum_bp_b$. At the extension stage, numerical coefficients on independent balanced labels admit extensions across the total diagonal preserving their actual scaling degree; the final normalization conditions below are imposed within the engineering upper bounds. General jet labels are recovered by total coordinate differentiation of the already extended full coefficients and by linearity; this includes differentiation of the remaining field jets. For a primitive differentiated graph the required upper scaling bound is the engineering degree\n$$B_\\Gamma=2|E(\\Gamma)|+\\sum_e|\\alpha_e|.$$\nFor a graph containing proper subgraphs, use a finite upper bound obtained by causal block induction from the edge degrees and the finite derivative orders of the chosen lower-order local counterterms; total derivatives add their orders to that bound. Any two extensions of a fixed punctured coefficient with upper bound $B_\\Gamma$ differ by derivatives $\\partial^\\beta\\delta_0$ of order $|\\beta|\\le\\lfloor B_\\Gamma-4(n-1)\\rfloor$ when $B_\\Gamma\\ge4(n-1)$, and agree when $B_\\Gamma<4(n-1)$. The allowed counterterms must also satisfy the stated linearity and derivative identities. For the analytic degree-preserving extension family of an independent balanced coefficient, its actual degree replaces $B_\\Gamma$ in this ambiguity bound. A differentiated coefficient is not required to retain the exact scaling degree of a punctured linear combination that vanishes: total differentiation may force a contact term at the diagonal.\n\nCovariance requires $T_n(\\gamma\\cdot F_1,\\ldots,\\gamma\\cdot F_n)=\\gamma\\cdot T_n(F_1,\\ldots,F_n)$ for each proper orthochronous Poincare transformation. Fix the Lorentz Lie-algebra convention $[J_i,J_j]=\\epsilon_{ijk}J_k$, $[J_i,K_j]=\\epsilon_{ijk}K_j$, and $[K_i,K_j]=-\\epsilon_{ijk}J_i$. For a formal coupling $g$, define coefficientwise\n$$\\mathcal S_g(V)=\\sum_{n=0}^{\\infty}\\frac{(ig/\\hbar)^n}{n!}T_n(V,\\ldots,V).$$\nThe anti-time-ordered series is $\\overline{\\mathcal S}_g(V):=\\mathcal S_g(V)^*$, where the involution conjugates scalar coefficients, fixes real $g,\\hbar$, and reverses the order of factors; $W^*=W^{\\mathsf T}$ gives $(F\\star_WG)^*=G^*\\star_WF^*$. Formal unitarity requires $\\overline{\\mathcal S}_g(V)\\star_W\\mathcal S_g(V)=1$ for every real $V=V^*$. At each $g$-order, coefficients are finite Laurent polynomials in $\\hbar$ before cancellation and are compared algebraically; there is no analytic convergence, positivity of formal coefficients, adiabatic limit, or gauge/Ward identity in this contract.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-qftx-finite-renormalization-composition",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. For two scalar time-ordered systems $T$ and $T'$ satisfying the local scalar contract for the same free data and with $T_0=T'_0=1$, $T_1=T'_1=\\operatorname{id}$, define their normalized formal S-maps by\n$$\\mathcal S(V)=\\sum_{n=0}^{\\infty}\\frac{1}{n!}T_n(V,\\ldots,V),\\qquad \\mathcal S'(V)=\\sum_{n=0}^{\\infty}\\frac{1}{n!}T'_n(V,\\ldots,V).$$\nThere is a unique formal map $Z(V)=V+O(V^2)$ from local polynomial functionals to local polynomial functionals such that $Z(0)=0$, $dZ_0=\\operatorname{id}$, $Z$ preserves supports and scalar Poincare covariance, and\n$$\\mathcal S'(V)=\\mathcal S(Z(V))$$\ncoefficientwise. Such maps compose, and each has a recursively defined formal inverse; hence they form a group under composition.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qftx-local-time-ordered-system",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb M=\\mathbb R^4$ have metric $\\eta=\\operatorname{diag}(-1,1,1,1)$, orientation $dx^0\\wedge dx^1\\wedge dx^2\\wedge dx^3$, and future direction given by increasing $x^0$. Use units $c=1$, so a mass parameter has inverse-length units. Define $x\\in J^+(y)$ by $x^0-y^0\\ge|\\mathbf x-\\mathbf y|$ and $x\\in J^-(y)$ by $y^0-x^0\\ge|\\mathbf y-\\mathbf x|$; for $A\\subseteq\\mathbb M$, put $J^\\pm(A)=\\bigcup_{y\\in A}J^\\pm(y)$. A field configuration is any smooth real function $\\phi$; it is off shell because no field equation is imposed. The allowed local interactions are compactly supported finite polynomial functionals of $\\phi$ and finitely many coordinate derivatives, integrated against $d^4x$. The support of a functional $F$ is the closed set of points each of whose neighborhoods contains the support of a compactly supported variation that changes $F$ for some configuration.\n\nFor $\\Lambda\\in SO^+(1,3)$, require $\\Lambda^{\\mathsf T}\\eta\\Lambda=\\eta$, $\\det\\Lambda=1$, and preservation of the chosen future cone; $SO^+(1,3)$ denotes this identity component. The proper orthochronous Poincare group consists of $\\gamma=(a,\\Lambda)$ with $a\\in\\mathbb M$ and $\\Lambda\\in SO^+(1,3)$. It acts by $(\\gamma\\cdot\\phi)(x)=\\phi(\\Lambda^{-1}(x-a))$ and $(\\gamma\\cdot F)(\\phi)=F(\\gamma^{-1}\\cdot\\phi)$.\n\nFor a distribution on a coordinate chart, its wavefront set consists of the nonzero cotangent directions where every compact localization fails to have a rapidly decreasing Fourier transform in every conic neighborhood. Covectors are future or past causal when their metric-dual vectors are causal with the indicated time orientation; a nonzero causal covector has a nonzero time component. Write $\\Delta=\\{(x,x):x\\in\\mathbb M\\}$ and $N^*\\Delta=\\{(x,\\xi;x,-\\xi):\\xi\\ne0\\}$. Write $(x,\\xi)\\sim(y,\\zeta)$ when both covectors are nonzero null and cotangent to the same null straight line, with parallel transport carrying $\\xi$ to $\\zeta$. Precisely, for $x\\ne y$ there must be a future-directed nonconstant affinely parametrized null straight line $\\gamma$ and parameters $s,t$ in either order with $x=\\gamma(s)$, $y=\\gamma(t)$ and a real $\\lambda\\ne0$ such that $\\xi=\\lambda\\eta(\\dot\\gamma(s),\\cdot)$ and $\\zeta=\\lambda\\eta(\\dot\\gamma(t),\\cdot)$. When $x=y$, require $\\xi=\\zeta$ and allow every nonzero null covector. This relation is unsigned: the future first-covector condition below selects $\\lambda>0$, while the Feynman past branch selects $\\lambda<0$. A fixed free scalar input consists of $m\\ge0$, a two-point distribution $W$ satisfying\n$$P_xW=P_yW=0,\\qquad P=-\\eta^{ab}\\partial_a\\partial_b+m^2,$$\nand the positive-frequency null wavefront condition\n$$\\operatorname{WF}(W)=\\mathcal C^+:=\\{(x,\\xi;y,-\\eta):(x,\\xi)\\sim(y,\\eta),\\ \\xi\\text{ future null}\\}.$$\nFor a two-point distribution $U$, set $U^{\\mathsf T}(x,y)=U(y,x)$ and let $U^*$ be complex conjugation. Assume $W$ is invariant under translations and $SO^+(1,3)$, satisfies $W-W^{\\mathsf T}=iE$ for a fixed distribution $E$ supported where $x-y$ is causal, and satisfies $W^*=W^{\\mathsf T}$.\n\nThe prescribed scalar time-ordered contraction input is a symmetric distribution $H_F\\in\\mathcal D'(\\mathbb M^2)$ invariant under translations and $SO^+(1,3)$, equal to $W(x,y)$ on the open set $x^0>y^0$ and to $W(y,x)$ on $y^0>x^0$. The two prescriptions agree on spacelike-separated open supports because $E$ is supported on causal pairs. Translation invariance gives $H_F(x,y)=h_F(x-y)$ and $W(x,y)=w(x-y)$. For a distribution $T$ on $\\mathbb R^4$, set $T_\\rho(\\varphi)=\\rho^{-4}T(\\varphi(\\cdot/\\rho))$ and define $\\operatorname{sd}_0(T)$ as the infimum of real $\\omega$ for which $\\rho^\\omega T_\\rho\\to0$ on each fixed test as $\\rho\\downarrow0$. Require $\\operatorname{sd}_0(h_F),\\operatorname{sd}_0(w)\\le2$ and\n$$\\operatorname{WF}(H_F)\\subseteq\\Gamma_F:=N^*\\Delta\\cup\\{(x,\\xi;y,-\\eta):x\\ne y,\\ (x,\\xi)\\sim(y,\\eta),\\ \\xi\\text{ future null if }x\\in J^+(y),\\ \\xi\\text{ past null if }x\\in J^-(y)\\}.$$\nThis is fixed conditional data: it does not claim existence of $W$ or $H_F$, and it does not define any singular restriction or product of $H_F$ on a diagonal.\n\nFor $r\\ge1$, $F^{(r)}(\\phi)$ denotes the distribution kernel on $\\mathbb M^r$ of the mixed variation in $r$ compactly supported smooth directions, and set $F^{(0)}(\\phi)=F(\\phi)$. Define $\\deg F$ as the largest positive $r$ with $F^{(r)}\\ne0$, or $0$ if all positive-order derivative kernels vanish; in particular $\\deg0=0$. The class $\\mathcal F_{\\mu c}^{\\mathrm{poly}}(\\mathbb M)$ consists of finite polynomial functionals with compactly supported derivative kernels such that every nonzero wavefront tuple of each derivative kernel avoids both the cone of tuples whose entries are all future causal and the cone of tuples whose entries are all past causal; zero entries in either cone are allowed. For $F,G$ in this class, define\n$$F\\star_WG=\\sum_{r=0}^{\\min(\\deg F,\\deg G)}\\frac{\\hbar^r}{r!}\\left\\langle F^{(r)}(\\phi)\\otimes G^{(r)}(\\phi),W^{\\otimes r}\\right\\rangle,$$\nusing distribution products and pushforwards under the stated wavefront transversality conditions, with the $r=0$ pairing interpreted as the pointwise product $F(\\phi)G(\\phi)$. Here $\\hbar$ is a formal indeterminate, and Countable Choice is assumed for the supplier theorem defining these contractions.\n\nA scalar time-ordered system is a sequence of symmetric multilinear maps\n$$T_n:\\big(\\mathcal F_{\\mathrm{loc}}^{\\mathrm{poly}}(\\mathbb M)\\big)^n\\longrightarrow \\mathcal F_{\\mu c}^{\\mathrm{poly}}(\\mathbb M)\\llbracket\\hbar\\rrbracket,\\qquad T_0=1,\\quad T_1=\\operatorname{id}.$$\nFor $I\\subseteq\\{1,\\ldots,n\\}$ put $S_I=\\bigcup_{i\\in I}\\operatorname{supp}F_i$ and $F_I=(F_i)_{i\\in I}$. Causal factorization requires\n$$T_n(F_1,\\ldots,F_n)=T_{|I|}(F_I)\\star_W T_{|I^c|}(F_{I^c})$$\nfor every nonempty proper $I$ such that $S_I\\cap J^-(S_{I^c})=\\varnothing$; an empty block is the unit.\n\nField independence means that each numerical graph distribution is independent of the background field $\\phi$; all $\\phi$-dependence enters through the vertex kernels $F_i^{(r)}(\\phi)$. In the graph expansion of $T_n$, vertices are labeled by $1,\\ldots,n$ and an edge between distinct vertices contracts one derivative slot at each endpoint by $H_F$. A graph is a finite loopless multigraph, so parallel edges are allowed; if $r_{ij}$ edges join vertices $i$ and $j$, the Wick coefficient for that choice includes $\\hbar^{\\sum_{i<j}r_{ij}}/\\prod_{i<j}r_{ij}!$. Finite-order local jet derivatives may act on incident edge kernels. Each coefficient is a finite sum of such contractions, since every input has finite polynomial degree. No graph term uses a singular product at a diagonal before extension.\n\nFor $n\\ge2$, use relative coordinates $z_i=x_i-x_n$ ($1\\le i<n$), so the total diagonal corresponds to $0\\in\\mathbb R^{4(n-1)}$. The relative scaling degree $\\delta_\\Gamma$ of a numerical graph distribution is defined by the same positive-dilation rule above in this relative dimension. The scaling condition is imposed compatibly with integration by parts in the local functionals. First write every local density in its unique balanced-jet representative, in which the derivative variables at a degree-$r$ vertex are the relative combinations $q_a=p_a-r^{-1}\\sum_bp_b$. At the extension stage, numerical coefficients on independent balanced labels admit extensions across the total diagonal preserving their actual scaling degree; the final normalization conditions below are imposed within the engineering upper bounds. General jet labels are recovered by total coordinate differentiation of the already extended full coefficients and by linearity; this includes differentiation of the remaining field jets. For a primitive differentiated graph the required upper scaling bound is the engineering degree\n$$B_\\Gamma=2|E(\\Gamma)|+\\sum_e|\\alpha_e|.$$\nFor a graph containing proper subgraphs, use a finite upper bound obtained by causal block induction from the edge degrees and the finite derivative orders of the chosen lower-order local counterterms; total derivatives add their orders to that bound. Any two extensions of a fixed punctured coefficient with upper bound $B_\\Gamma$ differ by derivatives $\\partial^\\beta\\delta_0$ of order $|\\beta|\\le\\lfloor B_\\Gamma-4(n-1)\\rfloor$ when $B_\\Gamma\\ge4(n-1)$, and agree when $B_\\Gamma<4(n-1)$. The allowed counterterms must also satisfy the stated linearity and derivative identities. For the analytic degree-preserving extension family of an independent balanced coefficient, its actual degree replaces $B_\\Gamma$ in this ambiguity bound. A differentiated coefficient is not required to retain the exact scaling degree of a punctured linear combination that vanishes: total differentiation may force a contact term at the diagonal.\n\nCovariance requires $T_n(\\gamma\\cdot F_1,\\ldots,\\gamma\\cdot F_n)=\\gamma\\cdot T_n(F_1,\\ldots,F_n)$ for each proper orthochronous Poincare transformation. Fix the Lorentz Lie-algebra convention $[J_i,J_j]=\\epsilon_{ijk}J_k$, $[J_i,K_j]=\\epsilon_{ijk}K_j$, and $[K_i,K_j]=-\\epsilon_{ijk}J_i$. For a formal coupling $g$, define coefficientwise\n$$\\mathcal S_g(V)=\\sum_{n=0}^{\\infty}\\frac{(ig/\\hbar)^n}{n!}T_n(V,\\ldots,V).$$\nThe anti-time-ordered series is $\\overline{\\mathcal S}_g(V):=\\mathcal S_g(V)^*$, where the involution conjugates scalar coefficients, fixes real $g,\\hbar$, and reverses the order of factors; $W^*=W^{\\mathsf T}$ gives $(F\\star_WG)^*=G^*\\star_WF^*$. Formal unitarity requires $\\overline{\\mathcal S}_g(V)\\star_W\\mathcal S_g(V)=1$ for every real $V=V^*$. At each $g$-order, coefficients are finite Laurent polynomials in $\\hbar$ before cancellation and are compared algebraically; there is no analytic convergence, positivity of formal coefficients, adiabatic limit, or gauge/Ward identity in this contract.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qftx-local-time-ordered-system",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb M=\\mathbb R^4$ have metric $\\eta=\\operatorname{diag}(-1,1,1,1)$, orientation $dx^0\\wedge dx^1\\wedge dx^2\\wedge dx^3$, and future direction given by increasing $x^0$. Use units $c=1$, so a mass parameter has inverse-length units. Define $x\\in J^+(y)$ by $x^0-y^0\\ge|\\mathbf x-\\mathbf y|$ and $x\\in J^-(y)$ by $y^0-x^0\\ge|\\mathbf y-\\mathbf x|$; for $A\\subseteq\\mathbb M$, put $J^\\pm(A)=\\bigcup_{y\\in A}J^\\pm(y)$. A field configuration is any smooth real function $\\phi$; it is off shell because no field equation is imposed. The allowed local interactions are compactly supported finite polynomial functionals of $\\phi$ and finitely many coordinate derivatives, integrated against $d^4x$. The support of a functional $F$ is the closed set of points each of whose neighborhoods contains the support of a compactly supported variation that changes $F$ for some configuration.\n\nFor $\\Lambda\\in SO^+(1,3)$, require $\\Lambda^{\\mathsf T}\\eta\\Lambda=\\eta$, $\\det\\Lambda=1$, and preservation of the chosen future cone; $SO^+(1,3)$ denotes this identity component. The proper orthochronous Poincare group consists of $\\gamma=(a,\\Lambda)$ with $a\\in\\mathbb M$ and $\\Lambda\\in SO^+(1,3)$. It acts by $(\\gamma\\cdot\\phi)(x)=\\phi(\\Lambda^{-1}(x-a))$ and $(\\gamma\\cdot F)(\\phi)=F(\\gamma^{-1}\\cdot\\phi)$.\n\nFor a distribution on a coordinate chart, its wavefront set consists of the nonzero cotangent directions where every compact localization fails to have a rapidly decreasing Fourier transform in every conic neighborhood. Covectors are future or past causal when their metric-dual vectors are causal with the indicated time orientation; a nonzero causal covector has a nonzero time component. Write $\\Delta=\\{(x,x):x\\in\\mathbb M\\}$ and $N^*\\Delta=\\{(x,\\xi;x,-\\xi):\\xi\\ne0\\}$. Write $(x,\\xi)\\sim(y,\\zeta)$ when both covectors are nonzero null and cotangent to the same null straight line, with parallel transport carrying $\\xi$ to $\\zeta$. Precisely, for $x\\ne y$ there must be a future-directed nonconstant affinely parametrized null straight line $\\gamma$ and parameters $s,t$ in either order with $x=\\gamma(s)$, $y=\\gamma(t)$ and a real $\\lambda\\ne0$ such that $\\xi=\\lambda\\eta(\\dot\\gamma(s),\\cdot)$ and $\\zeta=\\lambda\\eta(\\dot\\gamma(t),\\cdot)$. When $x=y$, require $\\xi=\\zeta$ and allow every nonzero null covector. This relation is unsigned: the future first-covector condition below selects $\\lambda>0$, while the Feynman past branch selects $\\lambda<0$. A fixed free scalar input consists of $m\\ge0$, a two-point distribution $W$ satisfying\n$$P_xW=P_yW=0,\\qquad P=-\\eta^{ab}\\partial_a\\partial_b+m^2,$$\nand the positive-frequency null wavefront condition\n$$\\operatorname{WF}(W)=\\mathcal C^+:=\\{(x,\\xi;y,-\\eta):(x,\\xi)\\sim(y,\\eta),\\ \\xi\\text{ future null}\\}.$$\nFor a two-point distribution $U$, set $U^{\\mathsf T}(x,y)=U(y,x)$ and let $U^*$ be complex conjugation. Assume $W$ is invariant under translations and $SO^+(1,3)$, satisfies $W-W^{\\mathsf T}=iE$ for a fixed distribution $E$ supported where $x-y$ is causal, and satisfies $W^*=W^{\\mathsf T}$.\n\nThe prescribed scalar time-ordered contraction input is a symmetric distribution $H_F\\in\\mathcal D'(\\mathbb M^2)$ invariant under translations and $SO^+(1,3)$, equal to $W(x,y)$ on the open set $x^0>y^0$ and to $W(y,x)$ on $y^0>x^0$. The two prescriptions agree on spacelike-separated open supports because $E$ is supported on causal pairs. Translation invariance gives $H_F(x,y)=h_F(x-y)$ and $W(x,y)=w(x-y)$. For a distribution $T$ on $\\mathbb R^4$, set $T_\\rho(\\varphi)=\\rho^{-4}T(\\varphi(\\cdot/\\rho))$ and define $\\operatorname{sd}_0(T)$ as the infimum of real $\\omega$ for which $\\rho^\\omega T_\\rho\\to0$ on each fixed test as $\\rho\\downarrow0$. Require $\\operatorname{sd}_0(h_F),\\operatorname{sd}_0(w)\\le2$ and\n$$\\operatorname{WF}(H_F)\\subseteq\\Gamma_F:=N^*\\Delta\\cup\\{(x,\\xi;y,-\\eta):x\\ne y,\\ (x,\\xi)\\sim(y,\\eta),\\ \\xi\\text{ future null if }x\\in J^+(y),\\ \\xi\\text{ past null if }x\\in J^-(y)\\}.$$\nThis is fixed conditional data: it does not claim existence of $W$ or $H_F$, and it does not define any singular restriction or product of $H_F$ on a diagonal.\n\nFor $r\\ge1$, $F^{(r)}(\\phi)$ denotes the distribution kernel on $\\mathbb M^r$ of the mixed variation in $r$ compactly supported smooth directions, and set $F^{(0)}(\\phi)=F(\\phi)$. Define $\\deg F$ as the largest positive $r$ with $F^{(r)}\\ne0$, or $0$ if all positive-order derivative kernels vanish; in particular $\\deg0=0$. The class $\\mathcal F_{\\mu c}^{\\mathrm{poly}}(\\mathbb M)$ consists of finite polynomial functionals with compactly supported derivative kernels such that every nonzero wavefront tuple of each derivative kernel avoids both the cone of tuples whose entries are all future causal and the cone of tuples whose entries are all past causal; zero entries in either cone are allowed. For $F,G$ in this class, define\n$$F\\star_WG=\\sum_{r=0}^{\\min(\\deg F,\\deg G)}\\frac{\\hbar^r}{r!}\\left\\langle F^{(r)}(\\phi)\\otimes G^{(r)}(\\phi),W^{\\otimes r}\\right\\rangle,$$\nusing distribution products and pushforwards under the stated wavefront transversality conditions, with the $r=0$ pairing interpreted as the pointwise product $F(\\phi)G(\\phi)$. Here $\\hbar$ is a formal indeterminate, and Countable Choice is assumed for the supplier theorem defining these contractions.\n\nA scalar time-ordered system is a sequence of symmetric multilinear maps\n$$T_n:\\big(\\mathcal F_{\\mathrm{loc}}^{\\mathrm{poly}}(\\mathbb M)\\big)^n\\longrightarrow \\mathcal F_{\\mu c}^{\\mathrm{poly}}(\\mathbb M)\\llbracket\\hbar\\rrbracket,\\qquad T_0=1,\\quad T_1=\\operatorname{id}.$$\nFor $I\\subseteq\\{1,\\ldots,n\\}$ put $S_I=\\bigcup_{i\\in I}\\operatorname{supp}F_i$ and $F_I=(F_i)_{i\\in I}$. Causal factorization requires\n$$T_n(F_1,\\ldots,F_n)=T_{|I|}(F_I)\\star_W T_{|I^c|}(F_{I^c})$$\nfor every nonempty proper $I$ such that $S_I\\cap J^-(S_{I^c})=\\varnothing$; an empty block is the unit.\n\nField independence means that each numerical graph distribution is independent of the background field $\\phi$; all $\\phi$-dependence enters through the vertex kernels $F_i^{(r)}(\\phi)$. In the graph expansion of $T_n$, vertices are labeled by $1,\\ldots,n$ and an edge between distinct vertices contracts one derivative slot at each endpoint by $H_F$. A graph is a finite loopless multigraph, so parallel edges are allowed; if $r_{ij}$ edges join vertices $i$ and $j$, the Wick coefficient for that choice includes $\\hbar^{\\sum_{i<j}r_{ij}}/\\prod_{i<j}r_{ij}!$. Finite-order local jet derivatives may act on incident edge kernels. Each coefficient is a finite sum of such contractions, since every input has finite polynomial degree. No graph term uses a singular product at a diagonal before extension.\n\nFor $n\\ge2$, use relative coordinates $z_i=x_i-x_n$ ($1\\le i<n$), so the total diagonal corresponds to $0\\in\\mathbb R^{4(n-1)}$. The relative scaling degree $\\delta_\\Gamma$ of a numerical graph distribution is defined by the same positive-dilation rule above in this relative dimension. The scaling condition is imposed compatibly with integration by parts in the local functionals. First write every local density in its unique balanced-jet representative, in which the derivative variables at a degree-$r$ vertex are the relative combinations $q_a=p_a-r^{-1}\\sum_bp_b$. At the extension stage, numerical coefficients on independent balanced labels admit extensions across the total diagonal preserving their actual scaling degree; the final normalization conditions below are imposed within the engineering upper bounds. General jet labels are recovered by total coordinate differentiation of the already extended full coefficients and by linearity; this includes differentiation of the remaining field jets. For a primitive differentiated graph the required upper scaling bound is the engineering degree\n$$B_\\Gamma=2|E(\\Gamma)|+\\sum_e|\\alpha_e|.$$\nFor a graph containing proper subgraphs, use a finite upper bound obtained by causal block induction from the edge degrees and the finite derivative orders of the chosen lower-order local counterterms; total derivatives add their orders to that bound. Any two extensions of a fixed punctured coefficient with upper bound $B_\\Gamma$ differ by derivatives $\\partial^\\beta\\delta_0$ of order $|\\beta|\\le\\lfloor B_\\Gamma-4(n-1)\\rfloor$ when $B_\\Gamma\\ge4(n-1)$, and agree when $B_\\Gamma<4(n-1)$. The allowed counterterms must also satisfy the stated linearity and derivative identities. For the analytic degree-preserving extension family of an independent balanced coefficient, its actual degree replaces $B_\\Gamma$ in this ambiguity bound. A differentiated coefficient is not required to retain the exact scaling degree of a punctured linear combination that vanishes: total differentiation may force a contact term at the diagonal.\n\nCovariance requires $T_n(\\gamma\\cdot F_1,\\ldots,\\gamma\\cdot F_n)=\\gamma\\cdot T_n(F_1,\\ldots,F_n)$ for each proper orthochronous Poincare transformation. Fix the Lorentz Lie-algebra convention $[J_i,J_j]=\\epsilon_{ijk}J_k$, $[J_i,K_j]=\\epsilon_{ijk}K_j$, and $[K_i,K_j]=-\\epsilon_{ijk}J_i$. For a formal coupling $g$, define coefficientwise\n$$\\mathcal S_g(V)=\\sum_{n=0}^{\\infty}\\frac{(ig/\\hbar)^n}{n!}T_n(V,\\ldots,V).$$\nThe anti-time-ordered series is $\\overline{\\mathcal S}_g(V):=\\mathcal S_g(V)^*$, where the involution conjugates scalar coefficients, fixes real $g,\\hbar$, and reverses the order of factors; $W^*=W^{\\mathsf T}$ gives $(F\\star_WG)^*=G^*\\star_WF^*$. Formal unitarity requires $\\overline{\\mathcal S}_g(V)\\star_W\\mathcal S_g(V)=1$ for every real $V=V^*$. At each $g$-order, coefficients are finite Laurent polynomials in $\\hbar$ before cancellation and are compared algebraically; there is no analytic convergence, positivity of formal coefficients, adiabatic limit, or gauge/Ward identity in this contract.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Direct substitution gives $C_\\rho C_\\tau\\phi(x)=(\\rho\\tau)^{-1}\\phi((\\rho\\tau)^{-1}x)=C_{\\rho\\tau}\\phi(x)$. Repeated chain rule gives $\\partial^\\alpha(C_\\rho\\phi)(x)=\\rho^{-1-|\\alpha|}(\\partial^\\alpha\\phi)(\\rho^{-1}x)$, so field substitution preserves finite polynomial jets; positive dilations also send compact coefficient supports to compact sets. Thus the induced functional pullback preserves the local polynomial class and has inverse $C_{\\rho^{-1}}^*$. The mass relabelling composes as $\\tau^{-1}\\rho^{-1}m=(\\rho\\tau)^{-1}m$, including $m=0$, so the functional action obeys $\\sigma_{\\rho\\tau}=\\sigma_\\rho\\sigma_\\tau$ and $\\sigma_{\\rho^{-1}}$ is its inverse. The induced conjugations on map families obey the same composition law, because the pullbacks compose as $C_\\rho^*C_\\tau^*=C_{\\rho\\tau}^*$ and the mass labels reindex in that same order. For $T_a\\phi(x)=\\phi(x-a)$, direct substitution gives $C_\\rho T_a C_\\rho^{-1}=T_{\\rho a}$; scalar dilations commute with each Lorentz transformation. By [F3] this action normalizes the proper orthochronous Poincare group, and by [F4] conjugation preserves covariance of the time-ordered system.",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The displayed componentwise definition gives symmetric multilinear maps $T'^{(m)}_{n,\\rho}$, and summing their diagonal values with coefficients $1/n!$ gives $C_\\rho^*\\circ\\mathcal S_{\\rho^{-1}m}\\circ(C_\\rho^*)^{-1}$ coefficientwise. At each mass component the sequences $(T_n^{(m)})_{n\\ge0}$ and $(T'^{(m)}_{n,\\rho})_{n\\ge0}$ have the same free data and satisfy the normalization hypotheses of [F2] by the scale-admissibility condition in the Definition. Under [A1], applying [F2] gives a unique formal local map $Z_\\rho(V)=V+O(V^2)$ preserving support and covariance and satisfying the displayed equation. This defines $Z_\\rho$ only under these hypotheses.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "For $\\rho=1$, step 1.1 gives $\\sigma_1=\\operatorname{id}$, so the defining equation is $\\mathcal S=\\mathcal S\\circ Z_1$. The identity map also satisfies the finite-renormalization conditions, and uniqueness in [F2] gives $Z_1=\\operatorname{id}$.",
+          "inputs": [
+            "A1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Definition permits N=0 integral summands, leaving the constant functional; step 1.1 preserves that class under dilation. The formal S-map still has its prescribed unit term, and the mass family includes m=0.",
+          "case_reasoning": "The Definition permits N=0 integral summands, leaving the constant functional; step 1.1 preserves that class under dilation. The formal S-map still has its prescribed unit term, and the mass family includes m=0. The mass-indexed dilation acts on finite-jet functionals and conjugates the actual multilinear sequence. Comparison is conditional on the supplied normalized systems and scale admissibility; it makes no new extension choice."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 shows the mass relabelling is well defined at m=0.",
+          "case_reasoning": "Step 1.1 shows the mass relabelling is well defined at m=0. The mass-indexed dilation acts on finite-jet functionals and conjugates the actual multilinear sequence. Comparison is conditional on the supplied normalized systems and scale admissibility; it makes no new extension choice."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 proves Z_1=id.",
+          "case_reasoning": "Step 3.1 proves Z_1=id. The mass-indexed dilation acts on finite-jet functionals and conjugates the actual multilinear sequence. Comparison is conditional on the supplied normalized systems and scale admissibility; it makes no new extension choice."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No inverse of the mass parameter or nonzero-mass hypothesis is used; m=0 is included in step 1.1.",
+          "case_reasoning": "No inverse of the mass parameter or nonzero-mass hypothesis is used; m=0 is included in step 1.1. The mass-indexed dilation acts on finite-jet functionals and conjugates the actual multilinear sequence. Comparison is conditional on the supplied normalized systems and scale admissibility; it makes no new extension choice."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The scale group has domain rho>0 and no endpoint at rho=0.",
+          "case_reasoning": "The scale group has domain rho>0 and no endpoint at rho=0. The mass-indexed dilation acts on finite-jet functionals and conjugates the actual multilinear sequence. Comparison is conditional on the supplied normalized systems and scale admissibility; it makes no new extension choice."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice in the Statement and [A1] is retained for the supplied-system contraction contract; the comparison recursion makes no arbitrary new extension choice.",
+          "case_reasoning": "Countable Choice in the Statement and [A1] is retained for the supplied-system contraction contract; the comparison recursion makes no arbitrary new extension choice. The mass-indexed dilation acts on finite-jet functionals and conjugates the actual multilinear sequence. Comparison is conditional on the supplied normalized systems and scale admissibility; it makes no new extension choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition is not a biconditional.",
+          "case_reasoning": "The Definition is not a biconditional. The mass-indexed dilation acts on finite-jet functionals and conjugates the actual multilinear sequence. Comparison is conditional on the supplied normalized systems and scale admissibility; it makes no new extension choice."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition is not a biconditional.",
+          "case_reasoning": "The Definition is not a biconditional. The mass-indexed dilation acts on finite-jet functionals and conjugates the actual multilinear sequence. Comparison is conditional on the supplied normalized systems and scale admissibility; it makes no new extension choice."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "unit scale",
+          "inputs": "rho=1 and any admissible mass-indexed system",
+          "method": "Substitute sigma_1=id in the defining equation and apply uniqueness.",
+          "result": "Z_1=id.",
+          "limitation": "This checks the identity scale only; existence remains conditional on the supplied systems and finite-renormalization input."
+        },
+        {
+          "name": "massless component",
+          "inputs": "m=0 and rho>0",
+          "method": "Evaluate the relabelled mass rho^{-1}m.",
+          "result": "rho^{-1}m=0, so the massless component remains in the family.",
+          "limitation": "No claim is made that a massless time-ordered system exists unless it is supplied under A1."
+        }
+      ],
+      "finite_checks_disposition": "These finite checks address identity and mass-label boundaries only; the coefficientwise definition is established conditionally by the cited supplier.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-65 author",
+        "notes": "The scale action and mass index are explicit. The finite-renormalization prerequisite remains escalated, so no unconditional system-existence claim is made."
+      },
+      "current_boundary_worksheet": {
+        "proposal": "research/physics-non-fluid-129-2026-10-21-r2-owner-step2-boundary-proposal-5/proposal.json",
+        "source_sha256": "81072c587d11096500e1142c0adfe0fdbe20d8ebd495fa58ec8b20350e002335",
+        "qualification": "Released complete current source/eight-case semantic worksheet; root transcribed exact current rows. No independent acceptance or finite computation asserted."
+      }
+    },
+    "prop-qftx-scale-cocycle-law": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qftx-scaling-cocycle",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice.\n\nLet $\\mathbb M=\\mathbb R^4$ have Minkowski metric $\\eta=\\operatorname{diag}(-1,1,1,1)$. A scalar local polynomial functional is a finite sum\n$$F(\\phi)=c+\\sum_{j=1}^{N}\\int_{\\mathbb M} f_j(x)P_j(j^{s_j}\\phi(x))\\,d^4x,$$\nwhere $N$ is a finite nonnegative integer, $\\phi\\in C^\\infty(\\mathbb M;\\mathbb R)$, $c\\in\\mathbb C$, and $f_j\\in C_c^\\infty(\\mathbb M;\\mathbb C)$. For a finite integer $s_j\\ge0$, the $s_j$-jet is $j^{s_j}\\phi(x)=(\\partial^\\alpha\\phi(x))_{\\alpha\\in\\{0,1,2,\\ldots\\}^4,\\,|\\alpha|\\le s_j}$; each $P_j$ is a complex polynomial in these finitely many jet coordinates. This is the local functional class used by the supplied scalar time-ordered system.\n\nFor every mass label $m\\ge0$, suppose a normalized scalar time-ordered system $T_n^{(m)}$ with the same local scalar contract is supplied. Define its coefficientwise formal S-map by\n$$\\mathcal S_m(V)=\\sum_{n=0}^{\\infty}\\frac{1}{n!}T_n^{(m)}(V,\\ldots,V),\\qquad T_0^{(m)}=1,\\quad T_1^{(m)}=\\operatorname{id}.$$\nThe series is formal in the interaction degree; no analytic convergence is asserted.\n\nUse units $c=\\hbar=1$, so the mass label $m$ has mass dimension one. The scale parameter $\\rho>0$ is dimensionless. On scalar field configurations put\n$$(C_\\rho\\phi)(x)=\\rho^{-1}\\phi(\\rho^{-1}x),$$\nthe engineering scaling of a four-dimensional scalar field. For a mass-indexed family of functionals $F=(F_m)_{m\\ge0}$, define\n$$(\\sigma_\\rho F)_m=C_\\rho^*F_{\\rho^{-1}m},\\qquad (C_\\rho^*F)(\\phi)=F(C_{\\rho^{-1}}\\phi).$$\nThus the component at mass $m$ is pulled back from the component at mass $\\rho^{-1}m$; equivalently the mass label scales as $m\\mapsto\\rho m$. If $A=(A_m)_{m\\ge0}$ is instead a family of maps from local functionals (or their formal series) to local or microcausal functionals (or their formal series), define its induced scale conjugate, denoted $\\sigma_\\rho A\\sigma_\\rho^{-1}$, by\n$$(\\sigma_\\rho A\\sigma_\\rho^{-1})_m=C_\\rho^*\\circ A_{\\rho^{-1}m}\\circ(C_\\rho^*)^{-1},\\qquad (C_\\rho^*)^{-1}=C_{\\rho^{-1}}^*.$$\nHere the rightmost pullback acts on the input, the leftmost pullback acts on every output coefficient, and formal indeterminates are fixed. In particular the mass-$m$ component of the scale-conjugated formal S-map is\n$$ (\\sigma_\\rho\\mathcal S\\sigma_\\rho^{-1})_m=C_\\rho^*\\circ\\mathcal S_{\\rho^{-1}m}\\circ(C_\\rho^*)^{-1}.$$\nThese functional and map actions are extended coefficientwise to formal series. They obey $\\sigma_1=\\operatorname{id}$ and $\\sigma_{\\rho\\tau}=\\sigma_\\rho\\sigma_\\tau$; the dilation sends compact supports to compact supports and normalizes the proper orthochronous Poincare action.\n\nFor $m\\ge0$, $\\rho>0$ and each $n\\ge0$, define the conjugated sequence of multilinear maps componentwise by\n$$T'^{(m)}_{n,\\rho}(F_1,\\ldots,F_n):=C_\\rho^*\\!\\left[T_n^{(\\rho^{-1}m)}\\bigl((C_\\rho^*)^{-1}F_1,\\ldots,(C_\\rho^*)^{-1}F_n\\bigr)\\right].$$\nFor $n=0$ this means $T'^{(m)}_{0,\\rho}=C_\\rho^*1=1$; for $n=1$ it gives $T'^{(m)}_{1,\\rho}=\\operatorname{id}$. Assume for every $m\\ge0$ and $\\rho>0$ that this sequence, as well as the supplied sequence $(T_n^{(m)})_{n\\ge0}$, satisfies the normalized local scalar time-ordered-system contract for the same free data at mass $m$, after transporting the free data at mass $\\rho^{-1}m$ by the stated pullback. This is the scale-admissibility condition on the sequences. Their formal S-maps are distinct objects: by multilinearity and coefficientwise pullback, the S-map of $(T'^{(m)}_{n,\\rho})_{n\\ge0}$ is exactly $(\\sigma_\\rho\\mathcal S\\sigma_\\rho^{-1})_m$ displayed above. Define $Z_\\rho=(Z_{\\rho,m})_{m\\ge0}$ by the componentwise equations\n$$C_\\rho^*\\circ\\mathcal S_{\\rho^{-1}m}\\circ(C_\\rho^*)^{-1}=\\mathcal S_m\\circ Z_{\\rho,m}\\qquad(m\\ge0),$$\nwhere each $Z_{\\rho,m}$ is the unique formal local map with identity linear term, supplied by the finite-renormalization comparison proposition under these hypotheses. The notation $Z_{\\rho,m}(V)=V+O(V^2)$ means that all terms after the linear term have interaction degree at least two. This is a conditional definition: no existence of a time-ordered system for any particular model is asserted.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Under [A1], conjugating the defining equation for $Z_\\tau$ by $\\sigma_\\rho$ and using the group law for $\\sigma$ gives\n$$\\sigma_{\\rho\\tau}\\mathcal S\\sigma_{\\rho\\tau}^{-1}=\\sigma_\\rho(\\mathcal S\\circ Z_\\tau)\\sigma_\\rho^{-1}=(\\sigma_\\rho\\mathcal S\\sigma_\\rho^{-1})\\circ(\\sigma_\\rho Z_\\tau\\sigma_\\rho^{-1})=\\mathcal S\\circ Z_\\rho\\circ(\\sigma_\\rho Z_\\tau\\sigma_\\rho^{-1}).$$\nThe conjugated map is local, support-preserving, Poincare-covariant, and has identity linear term because $\\sigma_\\rho$ is an automorphism normalizing the Poincare action and $Z_\\tau$ has those properties.",
+          "inputs": [
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The left side of step 1.1 also equals $\\mathcal S\\circ Z_{\\rho\\tau}$ by [F1]. Both maps composed with $\\mathcal S$ satisfy the same finite-renormalization conditions, so uniqueness in [F1] gives\n$$Z_{\\rho\\tau}=Z_\\rho\\circ(\\sigma_\\rho Z_\\tau\\sigma_\\rho^{-1}).$$\nWhen the conjugation action is trivial the factor in parentheses is $Z_\\tau$, giving the stated special case.",
+          "inputs": [
+            "A1",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The scale parameters satisfy rho,tau>0; zero is outside the scale group."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The massless component is retained by the mass relabelling in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For rho=1 or tau=1, sigma_1=id and Z_1=id by the definition's unit-scale case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 states the exact trivial-action condition under which the formula reduces to a subgroup law."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Both scale parameters range over the open multiplicative group rho,tau>0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice in the Statement and [A1] is retained for the supplied-system contraction contract; the comparison recursion makes no arbitrary new extension choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "left identity scale",
+          "inputs": "rho=1 and tau>0",
+          "method": "Substitute sigma_1=id and Z_1=id in the twisted law.",
+          "result": "Z_tau=Z_1 composed with Z_tau.",
+          "limitation": "This checks the identity boundary only."
+        },
+        {
+          "name": "right identity scale",
+          "inputs": "rho>0 and tau=1",
+          "method": "Substitute sigma_1=id and Z_1=id in the twisted law.",
+          "result": "Z_rho=Z_rho composed with Z_1.",
+          "limitation": "This checks the identity boundary only."
+        }
+      ],
+      "finite_checks_disposition": "The finite checks verify the identity-scale boundaries; the general law follows from coefficientwise uniqueness.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-65 author",
+        "notes": "Composition order is preserved. The law is twisted unless conjugation is explicitly trivial."
+      }
+    },
+    "thm-qftx-truncated-rg-ode": {
+      "citations": [
+        {
+          "fact": "F2",
+          "source": "def-first-order-ode-initial-value-problem-and-solution",
+          "source_section": "Definition",
+          "quote": "Let $D\\subseteq\\mathbb R\\times\\mathbb R^n$ be open, let $F:D\\to\\mathbb R^n$, and let $n\\ge1$. The equation\n\n$$x'(t)=F(t,x(t))$$\n\nis a **first-order system**. An **initial value problem** consists of this equation and data $(t_0,x_0)\\in D$, written $x(t_0)=x_0$.\n\nA **solution on an interval** $I$ is a function $x:I\\to\\mathbb R^n$ such that $t_0\\in I$, $(t,x(t))\\in D$ for every $t\\in I$, $x$ is differentiable on $I$ in the domain-relative sense of [[def-vector-valued-derivative-and-integral]], and\n\n$$x(t_0)=x_0,\\qquad x'(t)=F(t,x(t))\\quad(t\\in I).$$\n\nEndpoints of $I$ use the corresponding one-sided, domain-relative derivative. A local solution is one whose interval contains a nondegenerate neighborhood of $t_0$ relative to the time projection of $D$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-locally-lipschitz-in-the-state-variable",
+          "source_section": "Definition",
+          "quote": "Let $n\\in\\mathbb N$ with $n\\ge1$, let $D\\subseteq\\mathbb R\\times\\mathbb R^n$ be open, and let $F:D\\to\\mathbb R^n$. The map $F$ is **locally Lipschitz in the state variable, locally uniformly in time**, if every compact time-state cylinder $C\\subseteq D$ has a finite $L\\ge0$ such that\n\n$$\\|F(t,x)-F(t,y)\\|_2\\le L\\|x-y\\|_2$$\n\nwhenever $(t,x),(t,y)\\in C$ have the same time coordinate.\n\nOn every compact time-state cylinder the state-variable inequality holds with one finite constant $L$. More generally, let $p\\ge1$, let $\\Lambda\\subseteq\\mathbb R^p$, let $D_\\Lambda\\subseteq\\mathbb R\\times\\mathbb R^n\\times\\Lambda$ be open in its relative Euclidean topology, and let $F:D_\\Lambda\\to\\mathbb R^n$. The parameter family is **locally Lipschitz in the state variable, locally uniform in time and parameters** when every compact time-state-parameter cylinder $C\\subseteq D_\\Lambda$ has one finite $L\\ge0$ such that\n\n$$\\|F(t,x,\\lambda)-F(t,y,\\lambda)\\|_2\\le L\\|x-y\\|_2$$\n\nwhenever $(t,x,\\lambda),(t,y,\\lambda)\\in C$ have the same time and parameter coordinates.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-picard-lindelof-local-existence-and-uniqueness",
+          "source_section": "Statement",
+          "quote": "Let $D\\subseteq\\mathbb R\\times\\mathbb R^n$ be open, let $F:D\\to\\mathbb R^n$ be continuous and locally Lipschitz in the state variable, and let $(t_0,x_0)\\in D$. Then a unique local solution of the IVP exists on some interval around the initial time. More quantitatively, if $h,r>0$ make\n\n$$[t_0-h,t_0+h]\\times\\overline B(x_0,r)\\subseteq D,$$\n\nif $\\|F\\|_2\\le M$ and $F$ has state-Lipschitz constant $L$ on this cylinder, and if $hM\\le r$ and $Lh<1$, then there is exactly one solution on $[t_0-h,t_0+h]$ through $(t_0,x_0)$ whose graph lies in the cylinder. Any two solutions through the same initial data agree on every common subinterval containing $t_0$.\n\nIn particular, a unique local solution exists on an interval around the initial time.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Under [A1], [F1] fixes $t=\\log\\rho$ as the dimensionless scale coordinate and the vector field is the prescribed $F(t,g)=bg^2$. If $c=0$, the constant function $g(t)=g_0$ has derivative zero and $bg_0^2=0$, so it solves the IVP on all of $\\mathbb R$. If $c\\ne0$, set $\\gamma(t)=g_0/(1-ct)$ on the interval specified in the Statement. For every interior $t$,\n$$\\frac{\\gamma(t+h)-\\gamma(t)}{h}=\\frac{g_0c}{(1-ct)(1-c(t+h))}\\longrightarrow\\frac{g_0c}{(1-ct)^2}=b\\gamma(t)^2,$$\nand $\\gamma(0)=g_0$, so it solves the IVP.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The vector field $F(t,x)=bx^2$ is continuous on the open domain $D=\\mathbb R^2$. On any compact time-state cylinder with $|x|,|y|\\le R$,\n$$|F(t,x)-F(t,y)|=|b||x-y||x+y|\\le2|b|R|x-y|,$$\nso it is locally Lipschitz in the state variable by [F3]. Uniqueness from [F4] shows that every solution through $(0,g_0)$ agrees with step 1.1 on its common interval. If $c\\ne0$, any strictly larger interval containing the stated interval must contain $c^{-1}$. A solution $G$ on such an interval would be continuous at $c^{-1}$, while uniqueness forces $G=\\gamma$ on the original interval and $|\\gamma(t)|\\to\\infty$ as $t$ approaches $c^{-1}$ from within it, a contradiction. When $c=0$, the constant solution already exists on all of $\\mathbb R$. These facts establish the stated maximal intervals.",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Termwise differentiation in $\\mathbb R[ [u] ]$ gives $\\Phi'(u)=1+2au+O(u^2)$. Since $\\Phi$ has linear term $u$, recursive coefficient matching gives $\\Phi^{-1}(\\widetilde u)=\\widetilde u+O(\\widetilde u^2)$, hence $u^2=\\widetilde u^2+O(\\widetilde u^3)$. Therefore $\\Phi'(u)\\beta(u)=bu^2+O(u^3)$ and re-expression in $\\widetilde u$ yields $\\widetilde\\beta(\\widetilde u)=b\\widetilde u^2+O(\\widetilde u^3)$. The coefficient $b$ is unchanged; no coefficient at higher order is determined here.",
+          "inputs": [
+            "A2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The initial-value interval is required to contain t=0 and is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 covers b=0 and g_0=0; both give global constant solutions."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 applies the local Lipschitz and uniqueness theorem also to the one-dimensional state space."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The c=bg_0=0 branch is treated explicitly in step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 shows the solution becomes unbounded at t=c^{-1}, so that endpoint cannot be crossed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The Statement concerns an explicitly prescribed scalar ODE and coefficientwise formal algebra; no Choice or time-ordered-system existence premise is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The prescribed scalar ODE has an explicit constant or rational maximal real solution, and coefficientwise invertible formal reparametrization preserves only its quadratic beta coefficient. The public claim does not assert a converse characterization; the displayed construction or estimate is the one-way conclusion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The prescribed scalar ODE has an explicit constant or rational maximal real solution, and coefficientwise invertible formal reparametrization preserves only its quadratic beta coefficient. The public claim does not assert a converse characterization; the displayed construction or estimate is the one-way conclusion."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "zero beta coefficient",
+          "inputs": "b=0 and any real g_0",
+          "method": "Substitute the constant candidate into the ODE.",
+          "result": "g(t)=g_0 on all of R.",
+          "limitation": "This checks one degenerate branch."
+        },
+        {
+          "name": "zero initial coupling",
+          "inputs": "g_0=0 and any real b",
+          "method": "Substitute the zero candidate into the ODE.",
+          "result": "g(t)=0 on all of R.",
+          "limitation": "Uniqueness still comes from the stated local-Lipschitz theorem."
+        },
+        {
+          "name": "unit coefficient pole",
+          "inputs": "b=1 and g_0=1",
+          "method": "Evaluate g(t)=1/(1-t) on t<1.",
+          "result": "The solution diverges as t approaches 1 from below.",
+          "limitation": "This is an exact check of the truncated equation, not of a higher-order or physical flow."
+        },
+        {
+          "name": "formal scheme coefficient",
+          "inputs": "b=1 and Phi(g)=g+ag^2+O(g^3)",
+          "method": "Expand Phi'(g)g^2 and replace g^2 by g_tilde^2+O(g_tilde^3).",
+          "result": "The coefficient of g_tilde^2 remains 1.",
+          "limitation": "No higher-order coefficient is claimed."
+        }
+      ],
+      "finite_checks_disposition": "Finite checks cover degenerate data, a simple pole, and one formal reparametrization; the general statements are established by the numbered proof.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-65 author",
+        "notes": "b is prescribed and no QFT graph calculation is supplied. The ODE is a formal truncation, and the pole gives no estimate of omitted terms or ultraviolet completion."
+      },
+      "current_boundary_worksheet": {
+        "proposal": "research/physics-non-fluid-129-2026-10-21-r2-owner-step2-boundary-proposal-6/proposal.json",
+        "source_sha256": "a10096b4659432329abebcc8aaa2ce8397075a687a1c219631e58f27ca382167",
+        "qualification": "Released complete current source/eight-case semantic worksheet; root transcribed exact current rows. No independent acceptance or finite computation asserted."
+      }
+    },
+    "ex-qftx-truncation-landau-pole": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-qftx-truncated-rg-ode",
+          "source_section": "Statement",
+          "quote": "Let $\\rho>0$ be a dimensionless scale and put $t=\\log\\rho\\in\\mathbb R$. Take $I\\subseteq\\mathbb R$ to be an interval containing $0$. Let $g:I\\to\\mathbb R$ be a differentiable real coupling and let $b,g_0\\in\\mathbb R$ be dimensionless constants; require $g$ to satisfy the truncated scalar initial-value problem\n$$\\frac{dg}{dt}=bg^2,\\qquad g(0)=g_0.$$\nA solution through $(0,g_0)$ is **maximal** if there is no strictly larger interval $J\\supsetneq I$ and solution $G:J\\to\\mathbb R$ of the same initial-value problem with $G|_I=g$. If $c:=bg_0=0$, the unique maximal real solution is $g(t)=g_0$ on $\\mathbb R$. If $c\\ne0$, the unique maximal solution through $t=0$ is\n$$g(t)=\\frac{g_0}{1-bg_0t}$$\non $(-\\infty,c^{-1})$ when $c>0$ and on $(c^{-1},\\infty)$ when $c<0$.\n\nFor the formal beta-series calculation, let $u$ be an indeterminate and work in $\\mathbb R[ [u] ]$. Write $\\beta(u)=bu^2+O(u^3)$ and let $\\Phi(u)=u+au^2+O(u^3)$ be an invertible formal change of dimensionless coupling, with dimensionless $a\\in\\mathbb R$. The notation $O(u^k)$ means an element of $u^k\\mathbb R[ [u] ]$, so its terms have degree at least $k$; the real trajectory $g(t)$ is distinct from the formal indeterminate $u$. Put $\\widetilde u=\\Phi(u)$, let $\\Phi'$ be the termwise formal derivative, and define the transformed formal vector field in $\\mathbb R[ [\\widetilde u] ]$ by\n$$\\widetilde\\beta(\\widetilde u)=\\bigl(\\Phi'(u)\\beta(u)\\bigr)\\big|_{u=\\Phi^{-1}(\\widetilde u)}.$$\nThe quadratic coefficient of $\\widetilde\\beta$ is $b$. The real ODE is exact only for the displayed truncation; neither it nor the formal scheme-change statement determines $b$ from a QFT graph or bounds omitted higher-order terms. Its pole is a property of this truncated equation, not a theorem about an ultraviolet completion.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Under [A1], [F1] gives the denominator positive on the interval containing zero with $t<t_*$, and $g$ is the exact solution of the truncated equation there.",
+          "inputs": [
+            "A1",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "As $t\\uparrow t_*$, $1-bg_0t\\downarrow0$ while $g_0>0$ stays fixed, so $g(t)\\to+\\infty$. Since [F1] states only the truncated equation, neither this limit nor the calculation gives a bound on omitted terms or a conclusion about continuum nonexistence.",
+          "inputs": [
+            "A1",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes positive b and g_0, so the solution interval contains t=0."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example assumes b>0 and g_0>0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The special values b=1,g_0=1 give t_*=1 by the formula in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The hypotheses exclude bg_0=0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 takes the one-sided limit t up to t_* from within the maximal interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The Statement concerns an explicitly prescribed scalar ODE and coefficientwise formal algebra; no Choice or time-ordered-system existence premise is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example is not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "positive scalar pole",
+          "inputs": "b=2 and g_0=3",
+          "method": "Set t_*=1/6 and evaluate at t=1/6-epsilon for epsilon>0.",
+          "result": "g(t)=1/(2 epsilon), which tends to positive infinity as epsilon decreases to zero.",
+          "limitation": "This evaluates only the exact truncated equation."
+        }
+      ],
+      "finite_checks_disposition": "The finite check verifies the endpoint limit for one positive parameter pair; no continuum claim is made.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-65 author",
+        "notes": "The title's qualification is part of the claim: truncation divergence is not a proof of continuum nonexistence."
+      }
+    }
+  }
+}

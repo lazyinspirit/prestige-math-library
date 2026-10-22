@@ -1,0 +1,536 @@
+ITEM 30 lem-csm-frontier-finite-box-cube-max-fiber-influence
+---
+id: lem-csm-frontier-finite-box-cube-max-fiber-influence
+kind: lemma
+title: "Maximum endpoint influence for an increasing finite-box set"
+status: draft
+origin: pipeline
+pipeline_run: physics-non-fluid-129-2026-10-21-r2
+domain: mathematics
+library: physics
+dependency_level: 0
+deps: []
+dependency_roles: {}
+justified_by: []
+aliases: []
+proof_strategy: direct
+physical_scope: null
+provenance:
+  statement: literature-derived
+  proof: ai-generated
+sources:
+  references:
+    - title: "Geoffrey Grimmett, Svante Janson, and James Norris, Influence in Product Spaces"
+      url: https://arxiv.org/pdf/1207.1780
+      locator: "Theorem 2.3 and Remark 2.1: influence bounds and the endpoint/nonconstant-fiber convention; the finite-box increasing-set specialization is proved here."
+    - title: "Ryan O'Donnell, Analysis of Boolean Functions"
+      url: https://arxiv.org/pdf/2105.10386
+      locator: "Section 9.3, Theorem 9.18, and Section 9.4: two-point hypercontractivity and its product extension. The scalar and tensor estimates needed here are proved locally."
+verification:
+  precheck: pass
+---
+
+## Statement
+
+Let $n\ge2$ be an integer and let $C\subseteq[0,1]^n$ be coordinatewise increasing and a finite union of axis-parallel boxes, with specified open or closed endpoint conventions. Degenerate boxes are allowed. Let $v_r$ denote elementary $r$-dimensional box volume: a box has the product of its side lengths as volume, and finite unions are evaluated by a common coordinate-endpoint subdivision, with coordinate faces assigned volume zero. Put $f=\mathbf1_C$, $a=v_n(C)$, and
+
+$$F_i=v_{n-1}\{x_{-i}\in[0,1]^{n-1}:f(x_{-i},1)-f(x_{-i},0)=1\},\qquad M=\max_{1\le i\le n}F_i.$$
+
+If $M=0$, then $a(1-a)=0$. If $M>0$, then
+
+$$a(1-a)\le\frac{2\sum_{i=1}^nF_i}{1+\log(1/M)}.$$
+
+In every case,
+
+$$\max_{1\le i\le n}F_i\ge\frac14a(1-a)\frac{\log n}{n}.$$
+
+Logarithms are natural. Endpoint influence uses the actual values on the faces. The assertion and proof use only finite box volumes, finite probability spaces and elementary real calculus; they require no countable product measure or choice principle.
+
+## Facts & Assumptions
+
+**Given:** An integer $n\ge2$ and an increasing finite-box set $C$ as in the statement. A rectangular step function is constant on every open cell of a finite coordinate grid, with its restrictions to grid hyperplanes also rectangular step functions in the remaining coordinates. Its elementary integral is the sum of its full-dimensional cell values times products of cell lengths. To integrate an endpoint section, first restrict the actual function to the specified face and then use the same rule in the remaining dimensions. Dimension-zero integration means evaluation. All continuous-cube integrals below have this finite meaning. Norms on finite probability spaces are normalized probability norms.
+
+## Proof
+
+1.1 The elementary integral is well-defined: adjoining an endpoint splits an interval into two whose lengths sum to its original length, so finite common refinement leaves each integral unchanged. Indicators of finite-box sets, their fixed-coordinate sections, and their finite products and differences are rectangular step functions. Common refinement proves linearity, positivity and the integral triangle inequality. It also proves equality of iterated and full integrals, because both sum the same finitely many cell values times products of lengths; outer grid endpoints have zero length. A translation preserves side lengths, so a piecewise translation bijectively exchanging finitely many boxes preserves these integrals. These are all the continuous-cube integration rules used below. [given, construct, algebra]
+
+1.2 For $1\le p\le2$ and real $u,v$, we prove $(u^2+(p-1)v^2)^{1/2}\le((|u+v|^p+|u-v|^p)/2)^{1/p}$. At $p=1$ this follows from the triangle inequality, and at $p=2$ it is equality. For $1<p<2$ signs can be removed. If $|v|>|u|$, interchange their absolute values: the right side is unchanged and the squared left side increases by $(2-p)(v^2-u^2)$. It therefore suffices to take $u>0$ and $0\le t=v/u\le1$, apart from the trivial zero case. For $t<1$ put $H(t)=((1+t)^p+(1-t)^p)/2$. The convexity of $s^{p-2}$, obtained by two differentiations, gives $H''(t)\ge p(p-1)$. Since $H(0)=1$ and $H'(0)=0$, integration twice gives $H(t)\ge1+p(p-1)t^2/2$. Concavity of $s^{p/2}$ gives $(1+(p-1)t^2)^{p/2}\le1+p(p-1)t^2/2$. Multiply by $u^p$ and take the $p$th root; continuity includes $t=1$. This proves the claimed two-point inequality. [given, algebra]
+
+2.1 On a uniform bit $x\in\{-1,1\}$ define $T_\rho(u+vx)=u+\rho vx$, for $0\le\rho\le1$. Step 1.2 with $p=1+\rho^2$ proves $\|T_\rho h\|_2\le\|h\|_p$. To extend this to $d$ bits, first note that finite-sum Minkowski gives $\|h\|_{L_y^2(L_x^p)}\le\|h\|_{L_x^p(L_y^2)}$ for finite probability spaces and $1\le p\le2$: its $p$th-power form is the triangle inequality for $\mathbb E_x|h(x,\cdot)|^p$ in $L_y^{2/p}$. For completeness, finite weighted Minkowski at exponent $r>1$ follows by multiplying $|z+w|\le|z|+|w|$ by $|z+w|^{r-1}$, summing, applying Hölder and dividing by $\|z+w\|_r^{r-1}$ if nonzero. Weighted Hölder follows by normalizing the two norms and summing Young's inequality $ab\le a^r/r+b^{r'}/r'$, which follows by minimizing $a^r/r-ab$ in $a\ge0$; zero norms and $r=1$ are immediate. If $T_X,T_Y$ contract $L^p$ into $L^2$ on two blocks, apply the $X$ contraction pointwise in $y$, the mixed-norm inequality, and then the $Y$ contraction pointwise in $x$ to obtain $\|T_XT_Yh\|_2\le\|T_Yh\|_{L_y^2(L_x^p)}\le\|T_Yh\|_{L_x^p(L_y^2)}\le\|h\|_p$. Induction therefore gives $\|T_\rho h\|_2\le\|h\|_{1+\rho^2}$ on every finite Boolean cube, where $T_\rho$ applies the one-bit operator in each coordinate. [step 1.2, construct, algebra]
+
+2.2 Put $N=2^m$ for $m\ge1$ and partition $[0,1)^n$ into the dyadic cells $Q_a=\prod_i[a_i/N,(a_i+1)/N)$, with $0\le a_i<N$. On $Q_a$ let $\ell_m=f(a/N)$, $u_m=f((a+\mathbf1)/N)$ and $g_m=N^n\int_{Q_a}f$. Faces at coordinate one may be assigned arbitrary values for integration. Monotonicity gives $\ell_m\le f,g_m\le u_m$. Telescope each difference $u_m-\ell_m$ one coordinate at a time. For coordinate $i$, summation over $a_i$ at fixed remaining upper/lower corner coordinates telescopes to a difference of values at coordinate one and zero, at most one. There are $N^{n-1}$ choices of the other indices, hence $\int(u_m-\ell_m)\le n/N$ and $\delta_m:=\int|g_m-f|\le n/N$. Cell averaging gives $\int g_m=\int f=a$, while $|g_m^2-f^2|\le2|g_m-f|$. Therefore $|\operatorname{Var}(g_m)-a(1-a)|\le2\delta_m\to0$. This uses an explicit numerical error bound, not a theorem interchanging a limit and an integral. [given, step 1.1, construct, algebra]
+
+3.1 On $\{-1,1\}^d$ let $x^{(j)}$ flip bit $j$ and set $D_jh=(h(x)-h(x^{(j)}))/2$. Suppose numbers $b_j\in[0,1]$ satisfy $\|D_jh\|_p\le b_j^{1/p}/2$ for every $1\le p\le2$. We will prove $\operatorname{Var}(h)\le\sum_j b_j/(1+\log(1/b_j))$, interpreting the summand at zero as zero. For $S\subseteq\{1,\ldots,d\}$ define $\chi_S(x)=\prod_{j\in S}x_j$. Independence and zero mean of each bit show these $2^d$ functions are orthonormal. Since the function space has dimension $2^d$, they form a basis; write $h=\sum_S\widehat h(S)\chi_S$. Then $D_jh=\sum_{S\ni j}\widehat h(S)\chi_S$ and $T_\rho\chi_S=\rho^{|S|}\chi_S$. Parseval and finite-sum integration yield the exact identity
+$$\operatorname{Var}(h)=2\sum_j\int_0^1\|T_\rho D_jh\|_2^2\,\frac{d\rho}{\rho},$$
+because the coefficient of each $\widehat h(S)^2$ for nonempty $S$ is $2|S|\int_0^1\rho^{2|S|-1}\,d\rho=1$. These are ordinary one-variable Riemann integrals of finite polynomials after cancellation of the factor $\rho$; no singularity at zero occurs. [given, step 2.1, construct, algebra]
+
+4.1 Identify each cell index $a_i$ with its $m$ binary digits, most significant first; the uniform distribution of the $nm$ bits is the uniform distribution of the equal-volume cells. Regard $g_m$ as a real function on this finite Boolean cube. For $1\le k\le m$, let $R_{ik}$ flip the $k$th binary digit of coordinate $i$ on $[0,1)$: in every prefix interval of length $2^{1-k}$ translate its lower half up by $2^{-k}$ and its upper half down by $2^{-k}$. Define it arbitrarily at coordinate one. This is a finite piecewise translation preserving elementary integrals, and it pairs the level-$m$ cells with that digit flipped. Let $b_{ik}=\int|f-f\circ R_{ik}|$. The bit derivative of $g_m$ on a cell is the cell average of $(f-f\circ R_{ik})/2$. For such an average $z=|Q|^{-1}\int_Q(f-f\circ R_{ik})$, the finite triangle inequality gives $|z|\le|Q|^{-1}\int_Q|f-f\circ R_{ik}|\le1$, so $|z|^p\le|z|$ for $p\ge1$. Multiplying by $2^{-p}|Q|$ and summing cells yields $\|D_{ik}g_m\|_p^p\le2^{-p}b_{ik}$, the hypothesis of step 3.1. [step 1.1, step 2.2, step 3.1, construct, algebra]
+
+4.2 Write $D_jh=x_jg_j(x_{-j})$. The product noise operator gives $T_\rho D_jh=\rho x_jT_\rho g_j$, so step 2.1 and the norm hypothesis in step 3.1 imply $\|T_\rho D_jh\|_2^2\le\rho^2 b_j^{2/(1+\rho^2)}/4$. For $b=b_j>0$ put $L=\log(1/b)$. Its contribution to the integral in step 3.1 is at most
+$$\frac12\int_0^1\rho b^{2/(1+\rho^2)}\,d\rho\le\frac b4\int_0^1e^{-Ls/2}\,ds\le\frac b{1+L}.$$
+The middle inequality substitutes $s=1-\rho^2$ and uses $2/(1+\rho^2)\ge1+(1-\rho^2)/2$. The last integral is at most one, proving the last inequality when $0\le L\le1$, and at most $2/L$, proving it when $L\ge1$. At $b_j=0$ the norm hypothesis gives $D_jh=0$. Summing establishes the variance estimate claimed in step 3.1. [step 2.1, step 3.1, algebra]
+
+5.1 Fix the coordinates other than $i$. The fiber indicator is an increasing zero-one function of one real variable, hence a threshold indicator except possibly at its threshold. If the endpoint values agree it is constant everywhere. Otherwise flipping the $k$th digit can change its value only in the single prefix interval of length $2^{1-k}$ containing the threshold. If the threshold is a prefix endpoint, disagreement at that endpoint has length zero; other intervals are constant. Thus the disagreement length is at most $2^{1-k}(f(x_{-i},1)-f(x_{-i},0))$. All these sections and disagreement sets are finite-box sets. Finite-sum iterated integration from step 1.1 gives $b_{ik}\le2^{1-k}F_i$, and consequently $\sum_{k=1}^m b_{ik}\le2F_i$ and $b_{ik}\le M$. [given, step 1.1, step 4.1, algebra]
+
+6.1 If $M=0$, steps 4.1–5.1 make every bit derivative of every $g_m$ zero, so every $g_m$ is constant, and step 2.2 gives $a(1-a)=0$. If $M>0$, apply the variance bound of step 4.2 to $g_m$, using steps 4.1–5.1. Each nonzero denominator is at least $1+\log(1/M)$, giving $\operatorname{Var}(g_m)\le2\sum_iF_i/(1+\log(1/M))$. Taking the limit with the explicit error in step 2.2 proves the first stated inequality. [step 4.2, step 2.2, step 4.1, step 5.1, algebra]
+
+7.1 If $0<M<n^{-1/2}$, step 6.1 gives $a(1-a)\le4nM/\log n$, which is the required lower bound on $M$. If $M\ge n^{-1/2}$, use $a(1-a)\le1/4$ and $\log n\le\sqrt n$ to get $a(1-a)\log n/(4n)\le1/(16\sqrt n)\le M$. The elementary bound $\log t\le\sqrt t$ for $t\ge1$ follows by differentiating $(\log t)/\sqrt t$: its maximum is $2/e<1$. The case $M=0$ was settled in step 6.1. This proves the stated bound for every integer $n\ge2$. [step 6.1, algebra] ∎
+
+## Remarks
+
+The finite-box hypothesis permits every cube integral to be evaluated by finite endpoint subdivision. The only limits are explicit real sequences and one-variable Riemann integrals. This does not assert a choice-free construction of general Lebesgue product measure or the stronger null-invariant influence theorem for arbitrary measurable sets.
+
+OLD BOUNDARIES
+[{"case": "empty", "status": "checked", "evidence": "step 6.1 covers zero influence and zero variance, including empty/full sets."}, {"case": "zero", "status": "checked", "evidence": "step 6.1 treats M=0 without dividing by it."}, {"case": "one", "status": "checked", "evidence": "step 7.1 includes the full variance range 0<=a(1-a)<=1/4."}, {"case": "degenerate", "status": "checked", "evidence": "step 1.1 assigns coordinate faces zero volume and handles degenerate boxes."}, {"case": "endpoints", "status": "checked", "evidence": "step 5.1 uses actual endpoint fiber values and proves the threshold disagreement bound."}, {"case": "nonempty-choice", "status": "not_applicable", "reason": "The statement assumes any probability space it uses; all new selections in this finite or numerical proof have explicit rules and require no additional nonempty-family choice."}, {"case": "iff-forward", "status": "not_applicable", "reason": "The statement gives quantitative bounds and existence assertions, not an equivalence requiring a separate reverse implication."}, {"case": "iff-reverse", "status": "not_applicable", "reason": "The statement gives quantitative bounds and existence assertions, not an equivalence requiring a separate reverse implication."}]
+FLAGS
+{"reference": [], "audit": []}
+ITEM 31 def-qsmx-standard-modular-data
+---
+id: def-qsmx-standard-modular-data
+kind: definition
+title: Tomita graph and standard modular data
+status: draft
+origin: pipeline
+domain: mathematics
+library: physics
+dependency_level: 4
+physical_scope: null
+deps:
+  - def-qsmx-von-neumann-algebra
+  - lem-qsmx-tomita-operator-involution
+  - thm-unbounded-borel-functional-calculus
+  - def-axiom-of-choice
+dependency_roles:
+  def-qsmx-von-neumann-algebra: mathematical-premise
+  lem-qsmx-tomita-operator-involution: mathematical-premise
+  thm-unbounded-borel-functional-calculus: mathematical-premise
+  def-axiom-of-choice: mathematical-premise
+justified_by: []
+aliases: []
+proof_strategy: not-applicable
+provenance:
+  statement: literature-derived
+  proof: not-applicable
+sources:
+  references:
+    - title: F. Hiai, Concise lectures on selected topics of von Neumann algebras
+      url: https://arxiv.org/pdf/2004.02383
+      locator: §2.1, Definition 2.3 and Lemma 2.1, printed pp. 10–11
+    - title: Edward Witten, Notes on Some Entanglement Properties of Quantum Field Theory
+      url: https://arxiv.org/pdf/1803.04993
+      locator: §3.1, equations (3.1)–(3.19), printed pp. 18–20 (PDF pp. 19–21)
+---
+
+## Definition
+
+Assume the Axiom of Choice. Let $H$ be a complex Hilbert space with inner product linear in its first argument, let $M\subseteq\mathcal B(H)$ be a concrete von Neumann algebra, and let $\Omega$ be a unit vector cyclic and separating for $M$. Define $D(S_0)=M\Omega$ and $S_0(x\Omega)=x^*\Omega$ for $x\in M$. Let $S=\overline{S_0}$ and write its polar decomposition as $S=J\Delta^{1/2}$. The preceding Tomita-operator lemma ensures this closure and polar data are well defined, with $\Delta$ positive self-adjoint and injective. For $x\in\mathcal B(H)$ and dimensionless $t\in\mathbb R$, define
+$$\sigma_t(x):=\Delta^{it}x\Delta^{-it}.$$
+Set $\omega(x)=\langle x\Omega,\Omega\rangle$. The powers $\Delta^{it}$ are the bounded unitary imaginary powers from the unbounded Borel functional calculus. At this definition stage $\sigma_t$ is defined on $\mathcal B(H)$; preservation of $M$ is established by a separate theorem.
+
+## Definition references
+
+[[def-qsmx-von-neumann-algebra]]
+
+[[lem-qsmx-tomita-operator-involution]]
+
+[[thm-unbounded-borel-functional-calculus]]
+
+[[def-axiom-of-choice]]
+
+OLD BOUNDARIES
+[{"case": "empty", "status": "checked", "evidence": "A unit vector cannot exist in the zero Hilbert space (Definition)."}, {"case": "zero", "status": "checked", "evidence": "Zero values of observables are admitted by the definition (Definition)."}, {"case": "one", "status": "checked", "evidence": "The scalar algebra/unit vector case satisfies the stated definitions (Definition)."}, {"case": "degenerate", "status": "checked", "evidence": "The proof includes scalar, repeated-eigenvalue, or finite-trace degenerate cases under its hypotheses (Definition)."}, {"case": "endpoints", "status": "not_applicable", "reason": "There is no strip or interval endpoint in this definition."}, {"case": "nonempty-choice", "status": "checked", "evidence": "The definition explicitly assumes AC for the modular-data interface (Definition)."}, {"case": "iff-forward", "status": "not_applicable", "reason": "No biconditional is asserted in this carrier."}, {"case": "iff-reverse", "status": "not_applicable", "reason": "No biconditional is asserted in this carrier."}]
+FLAGS
+{"reference": [], "audit": []}
+ITEM 32 thm-qsmx-tomita-takesaki
+---
+id: thm-qsmx-tomita-takesaki
+kind: theorem
+title: Tomita modular automorphisms and the upper-strip KMS condition
+status: draft
+origin: pipeline
+domain: mathematics
+library: physics
+dependency_level: 6
+physical_scope: null
+deps:
+  - def-qsmx-standard-modular-data
+  - def-qsmx-von-neumann-algebra
+  - lem-qsmx-tomita-operator-involution
+  - def-qsmx-von-neumann-kms-state
+  - lem-qsmx-modular-strip-analyticity
+  - lem-qsmx-modular-unitary-strong-continuity
+  - lem-qsmx-modular-resolvent-core
+  - lem-qsmx-von-neumann-predual
+  - lem-qsmx-trace-class-duality
+  - def-axiom-of-choice
+dependency_roles:
+  def-qsmx-standard-modular-data: mathematical-premise
+  def-qsmx-von-neumann-algebra: mathematical-premise
+  lem-qsmx-tomita-operator-involution: mathematical-premise
+  def-qsmx-von-neumann-kms-state: mathematical-premise
+  lem-qsmx-modular-strip-analyticity: mathematical-premise
+  lem-qsmx-modular-unitary-strong-continuity: mathematical-premise
+  lem-qsmx-modular-resolvent-core: mathematical-premise
+  lem-qsmx-von-neumann-predual: mathematical-premise
+  lem-qsmx-trace-class-duality: mathematical-premise
+  def-axiom-of-choice: mathematical-premise
+justified_by: []
+aliases: []
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+sources:
+  references:
+    - title: F. Hiai, Concise lectures on selected topics of von Neumann algebras
+      url: https://arxiv.org/pdf/2004.02383
+      locator: §2.1, Theorem 2.2, printed pp. 11 and 15–16; §2.2, Theorem 2.14, printed pp. 18–19
+    - title: Edward Witten, Notes on Some Entanglement Properties of Quantum Field Theory
+      url: https://arxiv.org/pdf/1803.04993
+      locator: §3.1, equations (3.10)–(3.19), printed pp. 19–20 (PDF pp. 20–21)
+---
+## Statement
+
+Assume the Axiom of Choice. Let $M\subseteq\mathcal B(H)$ be a concrete von Neumann algebra and $\Omega$ a unit cyclic-separating vector with standard modular data $(J,\Delta,\sigma_t)$ and vector state $\omega(x)=\langle x\Omega,\Omega\rangle$. Then $\sigma_t(x)=\Delta^{it}x\Delta^{-it}$ restricts to a one-parameter group of normal $*$-automorphisms of $M$ that is point-ultraweakly continuous, and $JMJ=M'$. The vector state $\omega$ is faithful and normal and is an upper-strip $(\alpha,1)$ KMS state, in the definition of the preceding item, for $\alpha_t=\sigma_{-t}$. This is a dimensionless W*-algebra KMS assertion; it does not assert norm continuity of $\sigma_t$ on all of $M$.
+
+## Statement references
+
+[[def-qsmx-standard-modular-data]]
+
+[[def-qsmx-von-neumann-algebra]]
+
+[[lem-qsmx-tomita-operator-involution]]
+
+[[def-qsmx-von-neumann-kms-state]]
+
+[[lem-qsmx-modular-resolvent-core]]
+
+[[lem-qsmx-modular-strip-analyticity]]
+
+[[lem-qsmx-modular-unitary-strong-continuity]]
+
+[[lem-qsmx-von-neumann-predual]]
+
+[[lem-qsmx-trace-class-duality]]
+
+[[def-axiom-of-choice]]
+
+## Facts & Assumptions
+
+**Given:** The Axiom of Choice, standard modular data for $M$ and $\Omega$, the vector functional $\omega$, and the quotient-trace-class predual of $M$.
+
+[A1] Assume the Axiom of Choice ([[def-axiom-of-choice]]).
+
+[F1] A concrete von Neumann algebra, its commutant, and its unit cyclic-separating vector are defined in [[def-qsmx-von-neumann-algebra]]. The standard modular data define $\sigma_t(x)=\Delta^{it}x\Delta^{-it}$, give $\Delta^{it}\Omega=\Omega$, and fix $\omega(x)=\langle x\Omega,\Omega\rangle$ ([[def-qsmx-standard-modular-data]], [[lem-qsmx-tomita-operator-involution]]).
+
+[F2] The modular resolvent-core lemma proves $JMJ=M'$ and $\Delta^{it}M\Delta^{-it}=M$ for every real $t$ ([[lem-qsmx-modular-resolvent-core]]).
+
+[F3] For every $x\in M$, $x\Omega\in D(\Delta^{1/2})$ and $\Delta^{1/2}x\Omega=Jx^*\Omega$, because $S=J\Delta^{1/2}$ extends $S_0$ ([[def-qsmx-standard-modular-data]], [[lem-qsmx-tomita-operator-involution]]).
+
+[F4] For $\xi\in D(\Delta^{1/2})$, $z\mapsto\Delta^{-iz/2}\xi$ is bounded and continuous on $0\leq\operatorname{Im}z\leq1$ and norm-holomorphic inside ([[lem-qsmx-modular-strip-analyticity]]).
+
+[F5] The trace-class quotient $Q$ is a predual of $M$, and vector functionals are normal ([[lem-qsmx-von-neumann-predual]]).
+
+[F6] Finite-rank operators are dense in trace norm, and rank-one trace pairing gives every matrix coefficient as an ultraweakly continuous functional ([[lem-qsmx-trace-class-duality]]).
+
+[F7] The upper-strip $(\alpha,\beta)$ KMS condition uses $F(t)=\omega(A\alpha_t(B))$ and $F(t+i\beta)=\omega(\alpha_t(B)A)$ ([[def-qsmx-von-neumann-kms-state]]).
+
+[F8] For every $\xi\in H$, $t\mapsto\Delta^{it}\xi$ is norm-continuous ([[lem-qsmx-modular-unitary-strong-continuity]]).
+
+## Proof
+
+**Proof technique:** modular invariance and a spectral vector function give the two KMS boundaries.
+
+**Given:** [A1], [F1]–[F8], $M$, $\Omega$, and $\omega$.
+
+1.1 By [F2], $\sigma_t(M)=M$. Each $\sigma_t$ is conjugation by the unitary $\Delta^{it}$, so it is complex-linear, multiplicative, adjoint-preserving and bijective, with inverse $\sigma_{-t}$. The spectral calculus gives $\Delta^{i(s+t)}=\Delta^{is}\Delta^{it}$, hence $\sigma_s\sigma_t=\sigma_{s+t}$ and $\sigma_0=I$. To check normality, let $0\leq a_i\uparrow a$ be a bounded increasing net in $M$. Unitary conjugation is an order isomorphism of $\mathcal B(H)$: if $b$ bounds every $\Delta^{it}a_i\Delta^{-it}$, then $\Delta^{-it}b\Delta^{it}$ bounds every $a_i$, so $a\leq\Delta^{-it}b\Delta^{it}$ and $\Delta^{it}a\Delta^{-it}\leq b$. Thus $\Delta^{it}a_i\Delta^{-it}\uparrow\Delta^{it}a\Delta^{-it}$ in $\mathcal B(H)$. By [F2] the limit is in $M$, hence is also the supremum in $M$. By the definition in [F7], each restriction is a normal $*$-automorphism. [A1, F1, F2, F7, algebra]
+
+1.2 For $A,B\in M$, both $A^*\Omega$ and $B\Omega$ lie in $D(\Delta^{1/2})$, because $Sx\Omega=x^*\Omega$ for $x\in M$ and $\|Sx\Omega\|=\|\Delta^{1/2}x\Omega\|$. Define $$F_{A,B}(z)=\bigl(\Delta^{i\overline z/2}A^*\Omega\,\big|\,\Delta^{-iz/2}B\Omega\bigr),$$ where $(u|v)=\langle v,u\rangle$ is linear in its second argument. By [F3], both vectors $A^*\Omega$ and $B\Omega$ belong to $D(\Delta^{1/2})$; [F4] then makes each vector factor bounded and continuous on the closed strip. The first is anti-holomorphic as a vector-valued function of $z$ and enters the first, conjugate-linear slot, while the second is holomorphic in the second slot. Hence $F_{A,B}$ is bounded and continuous on the strip and holomorphic inside. [F1, F3, F4, given]
+
+2.1 By [F8], $t\mapsto\Delta^{it}\xi$ is norm-continuous for every $\xi\in H$. For fixed $x\in M$ and $\xi,\eta\in H$, the coefficient $\langle\sigma_t(x)\xi,\eta\rangle$ is therefore continuous. If $T$ is finite rank, $\operatorname{Tr}(T\sigma_t(x))$ is a finite sum of such continuous coefficients. For arbitrary trace-class $T$, choose finite-rank $T_n\to T$ in trace norm by [F6]; uniformly in $t$, $|\operatorname{Tr}((T-T_n)\sigma_t(x))|\leq\|T-T_n\|_1\|x\|$. Thus every element of the predual $Q$ evaluates continuously on $\sigma_t(x)$, which is point-ultraweak continuity. [F1, F5, F6, F8, step 1.1, algebra]
+
+2.2 Since $\Delta^{it}\Omega=\Omega$ and $\Delta^{it}$ is unitary, $$\omega(\sigma_t(x))=\langle\Delta^{it}x\Omega,\Omega\rangle=\langle x\Omega,\Delta^{-it}\Omega\rangle=\omega(x).$$ So $\omega$ is invariant under $\sigma_t$ and under $\alpha_t=\sigma_{-t}$. Also $\omega(I)=\|\Omega\|^2=1$ and $\omega(x^*x)=\|x\Omega\|^2\geq0$, so $\omega$ is a state; because $\Omega$ is separating for $M$, this same identity shows that $\omega$ is faithful. By [F5], $\omega$ is a normal vector functional on $M$. Hence it is a faithful normal state as asserted. [F1, F5, step 1.1, algebra]
+
+2.3 For real $t$, unitarity of $\Delta^{it/2}$ and the identity $\Delta^{-it}B\Omega=\sigma_{-t}(B)\Omega$ give $$F_{A,B}(t)=(A^*\Omega|\Delta^{-it}B\Omega)=(\Omega|A\Delta^{-it}B\Omega)=\omega(A\alpha_t(B)).$$ This is the lower boundary in [F7]. [F1, F7, step 1.2, algebra]
+
+3.1 At $z=t+i$, $\Delta^{i\overline z/2}A^*\Omega=\Delta^{it/2}J A\Omega$ and $\Delta^{-iz/2}B\Omega=\Delta^{-it/2}J B^*\Omega$, because $Sx\Omega=x^*\Omega$ and $S=J\Delta^{1/2}$. By [F2], $J$ commutes with $\Delta^{it/2}$; antiunitarity gives $(Ju|Jv)=(v|u)$. Therefore $$F_{A,B}(t+i)=(\Delta^{-it/2}B^*\Omega|\Delta^{it/2}A\Omega)=(B^*\Omega|\Delta^{it}A\Omega)=\omega(B\sigma_t(A)).$$ Invariance from step 2.2 changes the last expression to $\omega(\sigma_{-t}(B)A)=\omega(\alpha_t(B)A)$, the upper boundary in [F7]. [F1, F2, F7, step 2.2, step 1.2, algebra]
+
+4.1 Steps 2.2–3.1 provide the bounded continuous strip function with both required boundary values for each $A,B\in M$. By [F7], $\omega$ is upper-strip $(\alpha,1)$ KMS. Step 1.1 gives the asserted point-ultraweakly continuous automorphism group, and [F2] gives $JMJ=M'$. No norm-continuity assertion on all of $M$ is made. [F2, F7, step 1.1, step 1.2, step 2.2, step 2.3, step 3.1] ∎
+
+OLD BOUNDARIES
+[{"case": "empty", "status": "not_applicable", "reason": "The unit cyclic-separating vector excludes the zero Hilbert representation and zero algebra. The state in the Statement therefore has omega(I)=1, while the proof quantifies over the resulting nonempty algebra of observables."}, {"case": "zero", "status": "checked", "evidence": "Zero x remains zero under the conjugations in1.1. If either A or B is zero, the strip pairing in1.2 vanishes identically and both boundary expressions in2.3 and3.1 are zero; the normalized vector state itself is never the zero functional."}, {"case": "one", "status": "checked", "evidence": "In the scalar standard representation Delta=I and modular conjugation is scalar complex conjugation. The scalar strip function1.2 is the constant product of A and B; normality and ultraweak continuity in1.1 and2.1 reduce to identity maps."}, {"case": "degenerate", "status": "checked", "evidence": "Neither the scalar spectral strip bounds from F4 nor trace-norm approximation in2.1 requires a simple modular spectrum. In3.1 antiunitarity and fixed Omega give the upper KMS value even when Delta=I has full multiplicity."}, {"case": "endpoints", "status": "checked", "evidence": "The lower boundary at Im z=0 is computed in step 2.3 and the upper boundary at Im z=1 in step 3.1."}, {"case": "nonempty-choice", "status": "checked", "evidence": "A1 carries Choice through F2 resolvent-core modular invariance, F4 spectral strip calculus and F5 trace-class quotient predual. These suppliers enter respectively1.1,1.2 and2.1; no independent-review or source-acceptance claim is made."}, {"case": "iff-forward", "status": "not_applicable", "reason": "No biconditional is asserted in this carrier."}, {"case": "iff-reverse", "status": "not_applicable", "reason": "No biconditional is asserted in this carrier."}]
+FLAGS
+{"reference": [], "audit": []}
+ITEM 33 thm-qsmx-double-lattice-projectors
+---
+id: thm-qsmx-double-lattice-projectors
+kind: theorem
+title: Gauge averaging and flatness commute
+status: draft
+origin: pipeline
+pipeline_run: physics-non-fluid-129-2026-10-21-r2
+domain: mathematics
+library: physics
+dependency_level: 2
+deps:
+  - def-qsmx-finite-group-double
+  - def-qsmx-finite-group-lattice-operators
+dependency_roles:
+  def-qsmx-finite-group-double: mathematical-premise
+  def-qsmx-finite-group-lattice-operators: mathematical-premise
+justified_by: []
+physical_scope: Exact finite-dimensional group-valued lattice projector model on a closed connected cellulation; no perturbation-stability or thermodynamic-limit claim.
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+sources:
+  references:
+    - title: A. Yu. Kitaev, Fault-tolerant quantum computation by anyons
+      url: https://arxiv.org/pdf/quant-ph/9707021
+      locator: "§4, equations (11)–(14), PDF pp. 11–12; vertex gauge averaging, face flatness, commuting projectors, and frustration-free Hamiltonian."
+    - title: Alexander Cowtan and Shahn Majid, Quantum Double Aspects of Surface Code Models
+      url: https://arxiv.org/pdf/2107.04411
+      locator: "§3, PDF pp. 7–9; oriented finite-group lattice actions, orthogonal projectors, their commutation, and the vacuum subspace."
+verification:
+  precheck: pass
+---
+
+## Statement
+
+Let $G$ be a finite group and let $\Sigma$ be a finite oriented cellulation of a closed connected surface, with vertex gauge permutations $U_v(x)$, vertex averages $A_v$, face flatness projectors $B_f$, and Hamiltonian $H_\Sigma$ defined using the group-element edge basis and oriented boundary holonomies. Here an orthogonal projection means a linear map $P$ with $P=P^*=P^2$; a self-adjoint operator $T$ is positive when $\langle\psi,T\psi\rangle\ge0$ for every $\psi$; and the finite sum is **frustration-free** when its summands have a common nonzero kernel vector. Its ground energy means its least eigenvalue. Then all $A_v$ and $B_f$ are commuting orthogonal projections. The Hamiltonian $H_\Sigma$ is positive and has a nonzero common zero vector for all terms $I-A_v$ and $I-B_f$; hence the finite model is frustration-free with ground energy zero.
+
+## Statement references
+
+[[def-qsmx-finite-group-double]]
+
+[[def-qsmx-finite-group-lattice-operators]]
+
+[A. Yu. Kitaev, “Fault-tolerant quantum computation by anyons,” §4](https://arxiv.org/pdf/quant-ph/9707021)
+
+[Alexander Cowtan and Shahn Majid, “Quantum Double Aspects of Surface Code Models,” §3](https://arxiv.org/pdf/2107.04411)
+
+## Facts & Assumptions
+
+**Given:** A finite group $G$ and a finite oriented cellulation of a closed connected surface with the edge basis, gauge permutations, face holonomies, projectors, and Hamiltonian specified above.
+
+[F1] [[def-qsmx-finite-group-double]]: $G$ is finite and the local edge factor is the Hilbert space $\mathbb C[G]$ with orthonormal group basis.
+
+[F2] [[def-qsmx-finite-group-lattice-operators]]: $U_v(x)$ sends each edge label $g_a$ to $k_{s(a)}g_a k_{t(a)}^{-1}$; $A_v$ averages these permutations; $B_f$ is diagonal with eigenvalue $1$ exactly when the oriented face holonomy is $e$.
+
+## Proof
+
+1.1 For a fixed vertex $v$, applying $U_v(y)$ and then $U_v(x)$ sends each edge label to $(xy)g_a$ at an outgoing incidence, to $g_a(xy)^{-1}$ at an incoming incidence, and to $(xy)g_a(xy)^{-1}$ on a loop based at $v$. All other labels remain fixed. Thus $U_v(x)U_v(y)=U_v(xy)$; each $U_v(x)$ is a permutation of an orthonormal basis and is unitary. [F2, algebra]
+
+1.2 In the configuration basis, each $B_f$ is diagonal with entries in $\{0,1\}$. Therefore $B_f^*=B_f$ and $B_f^2=B_f$, so every $B_f$ is an orthogonal projection. [F2, algebra]
+
+1.3 For distinct vertices $v,w$, their gauge permutations commute: on a shared edge they act at opposite ends, as left multiplication by one group element and right multiplication by the inverse of the other, and these operations commute; on all other edges at least one action is the identity. Thus $A_vA_w=A_wA_v$. Since all $B_f$ are diagonal in the same configuration basis, they commute pairwise. [F2, algebra]
+
+1.4 Under a gauge change $k_u=x$ at $u=v$ and $k_u=e$ elsewhere, a face-boundary holonomy based at a vertex $u_0$ changes to $k_{u_0}H_fk_{u_0}^{-1}$: along the closed boundary walk the intermediate factors $k_u^{-1}k_u$ cancel. The condition $H_f=e$ is invariant under conjugation, so $U_v(x)$ preserves every eigenspace of $B_f$ and commutes with $B_f$. Averaging over $x$ gives $A_vB_f=B_fA_v$. [F2, algebra]
+
+2.1 Taking adjoints in the finite average gives $A_v^*=|G|^{-1}\sum_xU_v(x^{-1})=A_v$. Also $A_v^2=|G|^{-2}\sum_{x,y}U_v(xy)=|G|^{-1}\sum_zU_v(z)=A_v$, since each $z\in G$ has exactly $|G|$ factorizations $xy=z$. Hence $A_v$ is an orthogonal projection. [given, F1, step 1.1, algebra]
+
+3.1 Each complement $I-A_v$ and $I-B_f$ is an orthogonal projection, hence positive. Their finite sum $H_\Sigma$ is positive. [step 2.1, step 1.2, algebra]
+
+4.1 For a vertex assignment $\mathbf y=(y_v)_{v\in V}\in G^V$, define the pure-gauge edge configuration $g_a=y_{s(a)}y_{t(a)}^{-1}$. The holonomy around every face telescopes to $e$, so each such basis vector lies in the $+1$ eigenspace of every $B_f$. The set $\mathcal P$ of distinct pure-gauge configurations is finite because $G^V$ is finite, and nonempty by taking every $y_v=e$. Each $U_v(x)$ permutes $\mathcal P$, because it replaces $y_v$ by $xy_v$ and leaves other vertex labels fixed. Therefore $\psi:=\sum_{\mathbf g\in\mathcal P}|\mathbf g\rangle$ is nonzero, $U_v(x)\psi=\psi$ for every $v,x$, and consequently $A_v\psi=B_f\psi=\psi$ for every $v,f$. This gives a common zero vector of all positive terms in $H_\Sigma$, proving frustration-freeness and ground energy zero. [F1, F2, step 1.1, step 2.1, step 1.2, step 3.1, construct] ∎
+
+OLD BOUNDARIES
+[{"case": "empty", "status": "not_applicable", "reason": "A closed connected surface cellulation has nonempty cells, so the empty edge model is outside the hypotheses."}, {"case": "zero", "status": "not_applicable", "reason": "A finite group has positive order and all vertex averages are defined with divisor |G|."}, {"case": "one", "status": "checked", "evidence": "For G={e}, every U_v(e), A_v, and B_f is the identity and step 4.1 gives the unique configuration as a common zero vector."}, {"case": "degenerate", "status": "checked", "evidence": "The theorem permits multiple flat configurations; step 4.1 sums over the full finite set of distinct pure-gauge configurations without a nondegeneracy assumption."}, {"case": "endpoints", "status": "not_applicable", "reason": "The cellulation is closed and the theorem has no path endpoint hypotheses."}, {"case": "nonempty-choice", "status": "checked", "evidence": "The set G^V is finite, and step 4.1 explicitly chooses the all-identity assignment to show it is nonempty."}, {"case": "iff-forward", "status": "not_applicable", "reason": "The statement is not an equivalence."}, {"case": "iff-reverse", "status": "not_applicable", "reason": "The statement is not an equivalence."}]
+FLAGS
+{"reference": [], "audit": []}
+ITEM 34 thm-qsmx-klr-character-specialization
+---
+id: thm-qsmx-klr-character-specialization
+kind: theorem
+title: KLR grading gives integral multiplicity bookkeeping
+status: draft
+origin: pipeline
+pipeline_run: physics-non-fluid-129-2026-10-21-r2
+domain: mathematics
+library: physics
+dependency_level: 1
+deps:
+  - def-axiom-of-choice
+  - def-nrqmx-finite-hermitian-matrix-exponential
+  - def-quiver-hecke-klr-algebra-for-a-symmetrizable-cartan-datum
+  - def-qsmx-spin-weight-and-hall-realization
+  - def-trace-of-an-endomorphism
+  - thm-klr-categorification-of-the-negative-quantum-half
+dependency_roles:
+  def-axiom-of-choice: mathematical-premise
+  def-nrqmx-finite-hermitian-matrix-exponential: mathematical-premise
+  def-quiver-hecke-klr-algebra-for-a-symmetrizable-cartan-datum: mathematical-premise
+  def-qsmx-spin-weight-and-hall-realization: mathematical-premise
+  def-trace-of-an-endomorphism: mathematical-premise
+  thm-klr-categorification-of-the-negative-quantum-half: mathematical-premise
+justified_by: []
+aliases: []
+landmark: false
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-generated
+sources:
+  references:
+    - title: "Mikhail Khovanov and Aaron D. Lauda, A diagrammatic approach to categorification of quantum groups I, arXiv:0803.4121v2"
+      url: "https://arxiv.org/pdf/0803.4121"
+      locator: "Theorem 1.1, PDF pp. 2–3, and §3.2, PDF pp. 39–43: the divided-power Grothendieck map and its isomorphism."
+    - title: "Mikhail Khovanov and Aaron D. Lauda, A diagrammatic approach to categorification of quantum groups II, arXiv:0804.2080v1"
+      url: "https://arxiv.org/pdf/0804.2080"
+      locator: "Theorem 8, PDF pp. 13–14: the divided-power Grothendieck isomorphism for arbitrary Cartan datum and arbitrary ground field."
+    - title: "Alexander Kleshchev, Representation theory of symmetric groups and related Hecke algebras, arXiv:0909.4844"
+      url: "https://arxiv.org/pdf/0909.4844"
+      locator: "§9.1, Theorem 9.1, printed pp. 39–40: an independent symmetric-group/Hecke realization of the divided-power isomorphism on the graded projective Grothendieck group."
+verification:
+  precheck: pass
+---
+
+## Statement
+
+Let $D$ be a KLR datum on a symmetrizable Cartan datum with no imaginary
+simple roots, over a field $k$, in the conventions of
+[[def-quiver-hecke-klr-algebra-for-a-symmetrizable-cartan-datum]]. Let $R_D$
+be the resulting graded KLR algebra, and let $K_0(R_D)$ be the Grothendieck
+group of its graded projectives. Put
+$\mathcal A=\mathbb Z[q_{\mathrm{gr}},q_{\mathrm{gr}}^{-1}]$, where
+$q_{\mathrm{gr}}$ is the Laurent grading variable denoted by $q$ in the
+divided-power integral form, and let $\mathcal A f_D$ be the integral
+negative quantum half. The canonical map
+$\gamma_D:\mathcal A f_D\to K_0(R_D)$ is an isomorphism of
+$\mathcal A$-algebras and graded twisted bialgebras; $q_{\mathrm{gr}}$ records
+the grading shift. Assume the Axiom of Choice inherited through this supplier.
+
+For each integer $n\geq1$, the irreducible highest-weight-$n$ module $V(n)$
+defined by homogeneous polynomials of degree $n$ has $H$-weights
+$n,n-2,\ldots,-n$, each with multiplicity one. The diagonal
+$\mathfrak{sl}_2$-module
+$V(1)^{\otimes n}$ has $H$-weight $n-2k$ with multiplicity
+$\binom nk$ for $0\leq k\leq n$. Here $H=2S^z$.
+
+For real $h$ and $\beta$, define the zero-exchange finite matrix
+$H_n^{(0)}=-hS_n^z$ on $V(1)^{\otimes n}$. Use
+$\exp(A)=\sum_{r=0}^{\infty}A^r/r!$ for the finite-dimensional matrix
+exponential, convergent in operator norm, and let $\operatorname{Tr}$ denote
+the basis-independent trace of a finite-dimensional endomorphism. Define its
+partition trace by
+$Z_n(\beta)=\operatorname{Tr}_{V(1)^{\otimes n}}\exp(-\beta H_n^{(0)})$.
+Then
+$$ Z_n(\beta)=\bigl(2\cosh(\beta h/2)\bigr)^n, \qquad \cosh x:=\frac{e^x+e^{-x}}2. $$
+For a Gibbs interpretation, $h$ is an energy coefficient, $S_n^z$ is
+dimensionless, and $\beta$ has inverse-energy units. The KLR isomorphism
+supplies the negative-half categorification stated above; it supplies no
+identification with either finite-dimensional spin module, no
+tensor-product categorical realization, and no spin-chain energy spectrum.
+
+## Statement references
+
+[[def-axiom-of-choice]]
+
+[[def-quiver-hecke-klr-algebra-for-a-symmetrizable-cartan-datum]]
+
+[[def-qsmx-spin-weight-and-hall-realization]]
+
+[[thm-klr-categorification-of-the-negative-quantum-half]]
+
+[[def-nrqmx-finite-hermitian-matrix-exponential]]
+
+[[def-trace-of-an-endomorphism]]
+
+[Khovanov–Lauda, Theorem 1.1 and §3.2](https://arxiv.org/pdf/0803.4121)
+
+[Khovanov–Lauda II, Theorem 8](https://arxiv.org/pdf/0804.2080)
+
+[Kleshchev, §9.1, Theorem 9.1](https://arxiv.org/pdf/0909.4844)
+
+## Facts & Assumptions
+
+**Given:** An integer $n\geq1$, a KLR datum and ground field satisfying the
+stated imported theorem, and real scalars $h,\beta$. For a physical
+interpretation of the Gibbs trace, $h$ is measured in joules and $\beta$ in
+inverse joules; the algebraic identity itself is dimensionally expressed by
+the product $\beta h$.
+
+[A1] Adopt the Axiom of Choice ([[def-axiom-of-choice]]). In the cited KLR
+supplier its exact use is the nondegeneracy of the form used in the proof of
+injectivity; no arbitrary family choice is used in the finite-dimensional
+calculations below.
+
+[F1] [[thm-klr-categorification-of-the-negative-quantum-half]]: for the
+stated KLR datum over a field, the canonical map from the divided-power
+integral negative half to the graded projective Grothendieck group is an isomorphism
+of $\mathcal A$-algebras and graded twisted bialgebras. Its proof uses [A1] through the
+nondegeneracy supplier for the injectivity step.
+
+[F2] [[def-quiver-hecke-klr-algebra-for-a-symmetrizable-cartan-datum]]: this
+KLR datum has a symmetrizable Cartan datum with no imaginary simple roots, a
+field $k$, and polynomials $Q_{ij}$ satisfying the stated (Q1)–(Q4)
+conditions; $R_D$ is the graded algebra with the displayed idempotent, dot,
+and crossing generators and relations.
+
+[F3] [[def-qsmx-spin-weight-and-hall-realization]]: on $V=\mathbb C^2$ the
+generators are $E,F,H$ as displayed there, $V(r)=\mathbb C[x,y]_r$ with
+$E=x\partial_y$, $F=y\partial_x$, $H=x\partial_x-y\partial_y$, and the
+tensor-product action is the sum over factors.
+
+[F4] [[def-nrqmx-finite-hermitian-matrix-exponential]]: for every finite
+complex matrix $A$, $\exp(A)=\sum_{r\geq0}A^r/r!$ converges in operator norm.
+
+[F5] [[def-trace-of-an-endomorphism]]: for a finite-dimensional endomorphism,
+the trace is the matrix trace in any chosen basis and is independent of the
+basis.
+
+## Proof
+
+1.1 Under [A1], apply [F1] to the KLR datum in the Given. Its hypotheses are
+the datum and field specified in [F2], and its conclusion is exactly the
+isomorphism $\gamma_D:A f_D\to K_0(R_D)$ with the Laurent grading parameter
+$q_{\mathrm{gr}}$. This use makes no claim about a representation on the
+spin spaces. [given, A1, F1, F2]
+
+1.2 In $V(1)$, $H$ has eigenvalue $1$ on $|\uparrow\rangle$ and $-1$ on
+$|\downarrow\rangle$. The elementary tensor basis of $V(1)^{\otimes n}$
+therefore consists of $H$-eigenvectors. A tensor with exactly $k$ down
+factors has eigenvalue $n-2k$, and there are exactly $\binom nk$ such
+tensors. Hence its weight character is
+$(z+z^{-1})^n=\sum_{k=0}^n\binom nk z^{n-2k}$. [given, F3, algebra]
+
+1.3 The monomials $x^{n-k}y^k$ form a basis of $V(n)$. Applying
+$H=x\partial_x-y\partial_y$ gives
+$H(x^{n-k}y^k)=(n-2k)x^{n-k}y^k$, so each listed weight space is
+one-dimensional. For $k>0$, $E(x^{n-k}y^k)=k x^{n-k+1}y^{k-1}$ is nonzero;
+for $k<n$, $F(x^{n-k}y^k)=(n-k)x^{n-k-1}y^{k+1}$ is nonzero. Any nonzero
+submodule has a nonzero $H$-weight vector, since the eigenvalues are distinct
+and the corresponding projections are polynomials in $H$. Repeated $E$
+then reaches $x^n$, and repeated $F$ from $x^n$ reaches every basis
+monomial. Thus $V(n)$ is irreducible and its weights have multiplicity one.
+[given, F3, algebra]
+
+2.1 On a tensor basis vector with $k$ down factors,
+$S_n^z$ has eigenvalue $(n-2k)/2$, so $H_n^{(0)}$ has eigenvalue
+$-h(n-2k)/2$. Summing the exponentials over the basis gives
+$$ Z_n(\beta)=\sum_{k=0}^n\binom nk e^{\beta h(n-2k)/2} =\bigl(e^{\beta h/2}+e^{-\beta h/2}\bigr)^n =\bigl(2\cosh(\beta h/2)\bigr)^n. $$
+The series [F4] acts diagonally on this eigenbasis, and [F5] identifies its
+trace with the sum of these diagonal entries. This is an exact finite-matrix
+trace identity for the stated operator. [given, F3, F4, F5, step 1.2, algebra]
+
+3.1 The isomorphism in [F1] identifies $A f_D$ with $K_0(R_D)$ only.
+For $n\geq2$, the weight $n-2$ has multiplicity $n$ in step 1.2 and
+multiplicity one in step 1.3, so the two characters differ; for $n=1$ they
+coincide. The map in [F1] assigns neither module to its Grothendieck group.
+Likewise, [F1] has no Hamiltonian operator, while step 2.1 computes the trace
+only after $H_n^{(0)}$ is specified. A tensor-product categorical action or
+a spin-chain spectrum therefore requires additional data. [F1, step 1.2, step 1.3, step 2.1] ∎
+
+## Remarks
+
+The KLR Laurent variable $q_{\mathrm{gr}}$ records internal grading shifts.
+It is distinct from the finite-field cardinality $q_H$ and from the Hall
+parameter $\nu=\sqrt{q_H}$ in [[def-qsmx-spin-weight-and-hall-realization]].
+The character and trace computations are finite-dimensional algebraic
+identities; their physical interpretation is conditional on the stated
+Hamiltonian convention.
+
+OLD BOUNDARIES
+[{"case": "empty", "status": "not_applicable", "reason": "The spin statements require n>=1; the KLR datum is taken under the imported theorem hypotheses."}, {"case": "zero", "status": "checked", "evidence": "Step 2.1: h=0 or beta=0 gives Z_n=2^n."}, {"case": "one", "status": "checked", "evidence": "Steps 1.2 and 2.1: for n=1 both spin characters are z+z^-1 and the trace has two terms."}, {"case": "degenerate", "status": "checked", "evidence": "Step 1.2: at n=2 the tensor-product weight 0 has multiplicity 2; step 1.3 has multiplicity 1."}, {"case": "endpoints", "status": "checked", "evidence": "Steps 1.2–1.3: k=0,n are the unique highest and lowest weight basis vectors."}, {"case": "nonempty-choice", "status": "checked", "evidence": "Step 1.1: the imported KLR isomorphism uses the stated AC premise; steps 1.2–2.1 use finite bases."}, {"case": "iff-forward", "status": "not_applicable", "reason": "The theorem asserts no if-and-only-if claim."}, {"case": "iff-reverse", "status": "not_applicable", "reason": "The theorem asserts no if-and-only-if claim."}]
+FLAGS
+{"reference": [{"id": "thm-qsmx-klr-character-specialization", "batch": 108, "case": "zero", "evidence": "Step 2.1: h=0 or beta=0 gives Z_n=2^n.", "unresolved_step_references": ["2.1"]}, {"id": "thm-qsmx-klr-character-specialization", "batch": 108, "case": "one", "evidence": "Steps 1.2 and 2.1: for n=1 both spin characters are z+z^-1 and the trace has two terms.", "unresolved_step_references": ["2.1"]}, {"id": "thm-qsmx-klr-character-specialization", "batch": 108, "case": "nonempty-choice", "evidence": "Step 1.1: the imported KLR isomorphism uses the stated AC premise; steps 1.2–2.1 use finite bases.", "unresolved_step_references": ["2.1"]}], "audit": [{"id": "thm-qsmx-klr-character-specialization", "case": "empty", "why": "the item quantifies over a family or indexed aggregate (\\\\sum_\\{)", "reason": "The spin statements require n>=1; the KLR datum is taken under the imported theorem hypotheses.", "file": "research/physics-non-fluid-129-2026-10-21-r2-owner-step2-root-adoption/contracts/merged.proposal.json"}]}

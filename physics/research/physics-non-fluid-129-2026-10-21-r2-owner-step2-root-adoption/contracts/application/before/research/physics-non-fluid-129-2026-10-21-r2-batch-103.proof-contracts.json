@@ -1,0 +1,825 @@
+{
+  "version": 1,
+  "scope": [
+    "def-qsmx-mps-and-transfer",
+    "def-qsmx-transfer-infinite-state",
+    "alg-qsmx-schmidt-mps-truncation",
+    "thm-qsmx-schmidt-mps-error",
+    "thm-qsmx-primitive-transfer-clustering",
+    "ex-qsmx-ghz-noninjective"
+  ],
+  "contracts": {
+    "def-qsmx-mps-and-transfer": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-qc-schmidt-decomposition",
+          "source_section": "Statement",
+          "quote": "Let $H,K$ be finite-dimensional complex-inner-product spaces with the tensor-product convention of [[def-qc-tensor-register-and-permutation]]. For every $\\Psi\\in H\\otimes K$ there are an integer $r\\ge0$, positive numbers $s_1,\\ldots,s_r$, and orthonormal families $u_1,\\ldots,u_r\\in H$ and $v_1,\\ldots,v_r\\in K$ such that\n\n$$\\Psi=\\sum_{j=1}^r s_j u_j\\otimes v_j,\\qquad \\|\\Psi\\|^2=\\sum_{j=1}^r s_j^2.$$\n\nFor $\\Psi=0$ take $r=0$ and the empty sum. For any chosen ordered pair of orthonormal bases, the construction below obtains the $s_j$ as the positive singular values of the coefficient matrix of $\\Psi$ in their ordered product basis.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "source_section": "Statement",
+          "quote": "Every finite-dimensional real or complex inner product space has an orthonormal basis. In dimension zero, this is the empty basis.",
+          "uses": [
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For a nonzero vector, reshape its coefficient array as a matrix with row index $i_1$ and column index $(i_2,\\ldots,i_N)$. By [F1] this gives an exact finite sum of products of a first-site coefficient and a residual coefficient array. Reshape the residual array at site $2$ with row index $(a_1,i_2)$ and remaining sites as column index, apply [F1] again, and store the resulting left coefficient array as the entries of $A_2^{i_2}$ with virtual indices $(a_1,a_2)$. Repeating this finite operation through site $N-1$ leaves a final array defining $A_N^{i_N}$; every SVD factorization is exact, so the original coefficient of each ordered product-basis vector is the displayed matrix product. For $N=1$ take the coefficients as scalar matrices. For the zero vector take all bond dimensions equal to $1$ and set the first site matrices to zero. Thus all finite vectors admit the stated representation.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For any integer $q\\ge1$ and positive semidefinite $Y\\in M_q(\\mathbb C)\\otimes M_D(\\mathbb C)$, the amplification is $({\\rm id}_{M_q}\\otimes\\mathcal E)(Y)=\\sum_{i=1}^d(I_q\\otimes A^i)Y(I_q\\otimes A^{i*})$. Each summand is positive semidefinite, so every amplification is positive and $\\mathcal E$ is completely positive. The displayed definition also fixes its exact input and output spaces and makes no trace-preserving or unitality assertion.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "The map $\\Gamma_L$ is linear and its image is a finite-dimensional subspace of $(\\mathbb C^d)^{\\otimes L}$. By [F2], choose an orthonormal basis $u_1,\\ldots,u_s$ of that image and define $P_Lv:=\\sum_{a=1}^s\\langle v,u_a\\rangle u_a$. Orthonormality gives $P_L^*=P_L$ and $P_L^2=P_L$, and $v-P_Lv$ is orthogonal to every $u_a$. Thus $h_L=I-P_L$ is the orthogonal projection onto the complement, with $\\langle h_Lv,v\\rangle=\\|h_Lv\\|^2\\ge0$ and kernel $\\operatorname{im}\\Gamma_L$.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F2",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fix a finite open MPS made from the same tensor and a block of $L$ consecutive sites. For each fixed physical-basis configuration outside that block, contraction of the outside tensors leaves a row $\\alpha$ on the left and a column $\\beta$ on the right. With $X=\\beta\\alpha$, direct coordinates give $\\operatorname{tr}(XA^{i_1}\\cdots A^{i_L})=\\sum_{u,v}\\beta_u\\alpha_v(A^{i_1}\\cdots A^{i_L})_{vu}=\\alpha A^{i_1}\\cdots A^{i_L}\\beta$, so that block slice is $\\Gamma_L(X)$. The outside basis configurations are orthonormal, so the full vector is a sum of outside basis vectors tensored with block vectors in $\\operatorname{im}\\Gamma_L$; the corresponding $h_L$ therefore annihilates it. Each term in $H_{N,L}$ is positive semidefinite by step 1.3, and their sum annihilates the MPS. If that vector is nonzero, zero is an eigenvalue and the minimum possible energy, so the vector is a zero-energy ground state. The zero vector is annihilated but supplies no eigenstate: for example, if all tensor matrices vanish, then $\\Gamma_L=0$, $h_L=I$ and $H_{N,L}=(N-L+1)I$, whose ground energy is positive. No uniqueness or positive-gap conclusion for a nonzero MPS follows from this argument.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Positive site and bond dimensions exclude a zero-site tensor, but all tensor coefficients may vanish. Then Gamma has zero image; the orthonormal image basis in1.3 is empty and P_L=0, h_L=I. The corrected2.1 claims annihilation for the zero vector and ground energy only for nonzero vectors."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 constructs the zero vector separately and the normalization clause never divides by zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 handles N=1, and step 1.3 allows a one-dimensional image or block space."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the full Schmidt expansion and imposes no distinct-singular-value condition."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The finite-chain endpoints D0 and DN and the single-site case are specified in the Definition and step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.3 use finite Schmidt decompositions and a finite orthonormal basis only."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition states no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/qsm_boundary (scientific owner; no independent acceptance)",
+            "reason": "Finite matrix contractions define open vectors and a completely positive transfer map; the parent projection annihilates each tensor contraction and nonzero contractions give zero-energy ground states. No converse identifies all ground vectors as contractions.",
+            "item_sha256": "395be05cea0e370c748fd970d4b47ea98ca8cf976de887532dff2950049e63e2",
+            "row_sha256": "31370f327412a840690aaa717329d4c81bd6da08235697608d7f95b15cec128f"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition states no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/qsm_boundary (scientific owner; no independent acceptance)",
+            "reason": "Finite matrix contractions define open vectors and a completely positive transfer map; the parent projection annihilates each tensor contraction and nonzero contractions give zero-energy ground states. No converse identifies all ground vectors as contractions.",
+            "item_sha256": "395be05cea0e370c748fd970d4b47ea98ca8cf976de887532dff2950049e63e2",
+            "row_sha256": "49ba4c83cf590689797d6d7c04bbef61a9945c57f49b6ef109c106216d45c1e4"
+          }
+        }
+      ]
+    },
+    "def-qsmx-transfer-infinite-state": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qsmx-mps-and-transfer",
+          "source_section": "Definition",
+          "quote": "Let $N\\ge1$ and $d_1,\\ldots,d_N,D_0,\\ldots,D_N\\ge1$ be integers. Give each site $j$ the Hilbert space $H_j=\\mathbb C^{d_j}$ with standard inner product $\\langle x,y\\rangle:=\\sum_{i=1}^{d_j}x_i\\overline{y_i}$, linear in its first argument, and its fixed ordered standard basis $(|i_j\\rangle)_{i_j=1}^{d_j}$. Tensor products use the ordered product basis and the product inner product. For every site and physical index choose a matrix $A_j^{i_j}\\in M_{D_{j-1}\\times D_j}(\\mathbb C)$, a boundary column $\\ell\\in\\mathbb C^{D_0}$, and a boundary column $r\\in\\mathbb C^{D_N}$. Here $M_{m\\times n}(\\mathbb C)$ is the space of $m$-by-$n$ complex matrices and $A^*$ denotes conjugate transpose. The associated finite open matrix product state (MPS) is the vector\n\n$$|\\psi_A\\rangle:=\\sum_{i_1=1}^{d_1}\\cdots\\sum_{i_N=1}^{d_N}\\ell^*A_1^{i_1}\\cdots A_N^{i_N}r\\,|i_1\\rangle\\otimes\\cdots\\otimes|i_N\\rangle\\in H_1\\otimes\\cdots\\otimes H_N.$$\n\nThe dimensions $D_j$ are the bond dimensions; the virtual indices between adjacent matrices are matrix indices summed in their product. The zero vector is allowed. A nonzero vector is normalized by division by its norm, and normalization is defined only when $\\langle\\psi_A,\\psi_A\\rangle>0$. Every vector in a finite tensor product of these site spaces has an exact open MPS representation.\n\nFor a translation invariant tensor, let $d,D\\ge1$ and use one family $A^i\\in M_D(\\mathbb C)$ for every site. Its transfer map is the completely positive linear map\n\n$$\\mathcal E:M_D(\\mathbb C)\\to M_D(\\mathbb C),\\qquad \\mathcal E(X):=\\sum_{i=1}^d A^iXA^{i*}.$$\n\nHere complete positivity means that for every integer $q\\ge1$, the amplified map $\\operatorname{id}_{M_q}\\otimes\\mathcal E$ sends positive semidefinite matrices to positive semidefinite matrices; a matrix is positive semidefinite when it is Hermitian and has nonnegative quadratic form on every vector.\n\nThe tensor is injective at length $L\\ge1$ when the matrices $A^{i_1}\\cdots A^{i_L}$, over all $i_1,\\ldots,i_L\\in\\{1,\\ldots,d\\}$, span the full vector space $M_D(\\mathbb C)$. No injectivity or transfer-spectrum condition is assumed by this definition.\n\nFor each block length $L\\ge1$, define the blocked boundary map\n\n$$\\Gamma_L:M_D(\\mathbb C)\\to(\\mathbb C^d)^{\\otimes L},\\qquad \\Gamma_L(X):=\\sum_{i_1,\\ldots,i_L=1}^d\\operatorname{tr}(XA^{i_1}\\cdots A^{i_L})\\,|i_1\\rangle\\otimes\\cdots\\otimes|i_L\\rangle,$$\n\nwhere $\\operatorname{tr}(Y):=\\sum_{a=1}^D Y_{aa}$. Let $P_L$ be the orthogonal projection onto $\\operatorname{im}\\Gamma_L$, set $h_L:=I-P_L$, and, for $N\\ge L$, define the open-chain parent Hamiltonian\n\n$$H_{N,L}:=\\sum_{j=1}^{N-L+1}I^{\\otimes(j-1)}\\otimes h_L\\otimes I^{\\otimes(N-j-L+1)}.$$\n\nEach local term is positive semidefinite with kernel $\\operatorname{im}\\Gamma_L$, and $H_{N,L}$ annihilates every finite open MPS formed from the same translation invariant tensor. Every nonzero such vector is a zero-energy ground state of $H_{N,L}$. This definition asserts no uniqueness of that ground state and no spectral-gap bound.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qsm-local-spin-algebras",
+          "source_section": "Definition",
+          "quote": "Fix an integer dimension $d\\ge1$, the countable site set $\\Gamma=\\mathbb{Z}^d$ of [[lem-qsm-integer-lattice-countable]], and one finite spin dimension $q\\ge1$, where $q$ is a positive integer (so $q\\in\\mathbb N$ and $1\\le q$, by [[def-natural-numbers]] and [[def-nat-order]]). For $n\\in\\mathbb Z$, define $|n|=n$ if $0\\le n$ and $|n|=-n$ if $n<0$, using the integer order and additive inverse of [[def-int-order]] and [[def-int-operations]]. Totality and compatibility of the integer order with addition ([[thm-int-ordered-ring]]) give $0\\le|n|$ and $-|n|\\le n\\le|n|$. Adding these bounds for $m,n\\in\\mathbb Z$ gives $|m+n|\\le|m|+|n|$. Equip $\\Gamma$ with the max-coordinate metric $d_\\infty(x,y)=\\max_{1\\le r\\le d}|x_r-y_r|$; the maximum exists because the coordinate set is finite and nonempty, symmetry and separation hold coordinatewise, and the absolute-value triangle inequality gives $|x_r-z_r|\\le|x_r-y_r|+|y_r-z_r|$ for every coordinate, hence the triangle inequality for $d_\\infty$. A **finite region** is a finite subset $\\Lambda\\subseteq\\Gamma$; its cardinality is $|\\Lambda|$ ([[def-finite-cardinality]]).\n\nFor a finite region $\\Lambda$, let $S_\\Lambda=\\{1,\\ldots,q\\}^{\\Lambda}$ be the set of spin configurations on $\\Lambda$. Induction on $|\\Lambda|$ gives $|S_\\Lambda|=q^{|\\Lambda|}$: the empty region has one configuration, and for $x\\in\\Lambda$ the restriction map $s\\mapsto(s|_{\\Lambda\\setminus\\{x\\}},s(x))$ is a bijection $S_\\Lambda\\to S_{\\Lambda\\setminus\\{x\\}}\\times\\{1,\\ldots,q\\}$, so adjoining one site multiplies the number of configurations by $q$, according to the recursion defining natural-number powers in [[def-nat-power]]. Let $\\mathcal H_\\Lambda$ be the vector space of functions $f:S_\\Lambda\\to\\mathbb C$ with inner product $\\langle f,g\\rangle=\\sum_{s\\in S_\\Lambda}f(s)\\overline{g(s)}$. For each $s\\in S_\\Lambda$, let $e_s$ be the indicator function of $\\{s\\}$; these vectors form an orthonormal basis. For $\\Lambda=\\varnothing$, $S_\\Lambda$ is a singleton and $\\mathcal H_\\Lambda\\cong\\mathbb C$. The **local spin matrix algebra** is\n\n$$\\mathcal A_\\Lambda:=\\mathcal B(\\mathcal H_\\Lambda)\\cong M_{q^{|\\Lambda|}}(\\mathbb C),$$\n\nHere $\\mathcal B(\\mathcal H_\\Lambda)$ denotes all complex-linear endomorphisms of the finite-dimensional Hilbert space; they are bounded. The algebra has composition, Hilbert adjoint, identity $I_\\Lambda$, and induced operator norm\n\n$$\\|T\\|:=\\sup_{\\|\\xi\\|=1}\\|T\\xi\\|.$$\n\nThe **finite local trace** is $\\operatorname{Tr}_\\Lambda(T):=\\sum_{s\\in S_\\Lambda}\\langle T e_s,e_s\\rangle$ in the displayed configuration basis $(e_s)$. This is the usual finite-matrix trace; basis independence and its cyclic/unitary identities are supplied by [[lem-qsm-matrix-state-calculus]].\n\nIf $\\Lambda\\subseteq\\Lambda'$, restriction of configurations gives the canonical factorization $\\mathcal H_{\\Lambda'}\\cong\\mathcal H_\\Lambda\\otimes\\mathcal H_{\\Lambda'\\setminus\\Lambda}$, with sites ordered lexicographically. The **factor inclusion** is the unital $*$-homomorphism $\\iota_{\\Lambda,\\Lambda'}:\\mathcal A_\\Lambda\\to\\mathcal A_{\\Lambda'}$ given by $T\\mapsto T\\otimes I_{\\Lambda'\\setminus\\Lambda}$. A **localization region** for $T$ is any finite $\\Lambda$ for which $T\\in\\mathcal A_\\Lambda$ under these inclusions; a localization region need not be minimal.\n\nThe ordinary operator norm makes each local matrix algebra a nonzero unital complete C*-algebra, and every positive normalized complex-linear functional is uniquely a trace pairing with a density matrix, by [[lem-qsm-finite-matrix-cstar-and-state-duality]]. This includes the empty region, whose Hilbert space is $\\mathbb C$. This definition does not posit an infinite-dimensional tensor-product Hilbert space.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qsm-quasilocal-spin-algebra",
+          "source_section": "Definition",
+          "quote": "Use the finite local matrix algebras and isometric factor inclusions of [[def-qsm-local-spin-algebras]] and [[lem-qsm-local-spin-inclusions-isometric]]. Identify $A\\in\\mathcal A_\\Lambda$ with its image in every larger finite-region algebra. The directed union\n\n$$\\mathcal A_{\\mathrm{loc}}:=\\bigcup_{\\Lambda\\subseteq\\Gamma,\\ |\\Lambda|<\\infty}\\mathcal A_\\Lambda$$\n\nis the algebra of **strictly local observables**. Its norm is $\\|A\\|=\\|A\\|_{\\mathcal A_\\Lambda}$ for any finite localization region $\\Lambda$ of $A$; isometric inclusions make this independent of the chosen region. The **quasi-local spin algebra** is the norm completion\n\n$$\\mathcal A:=\\overline{\\mathcal A_{\\mathrm{loc}}}^{\\,\\|\\cdot\\|}.$$\n\nThe C*-algebra structure on this completion has product and adjoint extended continuously from the finite local matrix algebras. Countable Choice is assumed for the published existence theorem for metric completions; [[lem-qsm-quasilocal-completion]] supplies the full extension argument using the finite C*-identity of [[lem-qsm-finite-matrix-cstar-and-state-duality]].\n\n**No global Hilbert tensor product is selected.** \u201cQuasi-local\u201d means norm completion of the directed algebra of finite-region observables; it does not mean a chosen representation as operators on an infinite tensor-product Hilbert space. A local operator $A\\in\\mathcal A_\\Lambda$ may have more than one localization region. Disjoint finite local factors commute in their common finite tensor algebra.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qsm-finite-matrix-cstar-and-state-duality",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space, $D=\\dim H\\ge1$, with inner product linear in its first argument. With composition, Hilbert adjoint, identity and the induced operator norm, $\\mathcal B(H)$ is a nonzero unital complex C*-algebra in the sense of [[def-c-star-algebra]]. In particular it is complete, $\\|AB\\|\\le\\|A\\|\\|B\\|$, $\\|A^*A\\|=\\|A\\|^2$, $\\|A^*\\|=\\|A\\|$ and $\\|I\\|=1$. The matrix $\\|A\\|^2I-A^*A$ is positive semidefinite and has a positive square root in $\\mathcal B(H)$.\n\nEvery complex-linear functional $\\omega:\\mathcal B(H)\\to\\mathbb C$ that is positive, meaning $\\omega(B^*B)\\ge0$ for all $B$, has a unique positive semidefinite matrix $\\rho$ such that $\\omega(A)=\\operatorname{Tr}(\\rho A)$ for all $A$. It is bounded and satisfies\n\n$$|\\omega(A)|\\le\\operatorname{Tr}(\\rho)\\|A\\|\\quad(A\\in\\mathcal B(H)),\\qquad \\|\\omega\\|=\\operatorname{Tr}(\\rho)=\\omega(I).$$\n\nConsequently the canonical states of [[def-state-on-a-c-star-algebra]] are exactly the trace pairings of density operators of [[def-qc-density-operator]]; for a positive functional, normalization $\\omega(I)=1$ is equivalent to norm one. The result includes zero positive functionals, nonfaithful densities and $D=1$; it makes no infinite-dimensional density representation assertion.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qsm-infinite-algebraic-state",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal A$ be the unital quasi-local spin C*-algebra of [[def-qsm-quasilocal-spin-algebra]], whose C*-structure uses Countable Choice as in [[lem-qsm-quasilocal-completion]]. An **infinite algebraic state** is a bounded complex-linear functional $\\omega:\\mathcal A\\to\\mathbb C$ satisfying $\\omega(I)=1$ and $\\omega(A^*A)\\ge0$ for every $A\\in\\mathcal A$.\n\nFor each finite region $\\Lambda\\subseteq\\mathbb Z^d$, the restriction $\\omega|_{\\mathcal A_\\Lambda}$ is a finite-matrix state. By [[lem-qsm-finite-matrix-cstar-and-state-duality]], every positive normalized functional on a finite matrix algebra is represented by a unique density matrix. Define its **local density matrix** $\\rho_\\Lambda$ by\n\n$$\\omega(A)=\\operatorname{Tr}_{\\Lambda}(\\rho_\\Lambda A)\\qquad(A\\in\\mathcal A_\\Lambda),$$\n\nwhere $\\rho_\\Lambda=\\rho_\\Lambda^*\\ge0$ and $\\operatorname{Tr}_{\\Lambda}\\rho_\\Lambda=1$. For $\\Lambda\\subseteq\\Lambda'$, put $\\Delta=\\Lambda'\\setminus\\Lambda$ and use the configuration-basis factorization $\\mathcal H_{\\Lambda'}\\cong\\mathcal H_\\Lambda\\otimes\\mathcal H_\\Delta$ of [[def-qsm-local-spin-algebras]]. If $T\\in\\mathcal A_{\\Lambda'}$, define its **partial trace over $\\Delta$**, $\\operatorname{Tr}_\\Delta(T)\\in\\mathcal A_\\Lambda$, by its matrix coefficients\n\n$$\\langle \\operatorname{Tr}_\\Delta(T)e_s,e_{s'}\\rangle:=\\sum_{t\\in S_\\Delta}\\langle T(e_s\\otimes e_t),e_{s'}\\otimes e_t\\rangle\\qquad(s,s'\\in S_\\Lambda),$$\n\nwhere $e_s$ and $e_t$ are the configuration basis vectors of $\\mathcal H_\\Lambda$ and $\\mathcal H_\\Delta$. The finite sums depend linearly on $T$, so they define a linear map $\\mathcal A_{\\Lambda'}\\to\\mathcal A_\\Lambda$ with a unique output matrix for each $T$. Expanding both configuration-basis traces gives its pairing identity\n\n$$\\operatorname{Tr}_\\Lambda\\!\\left(A\\operatorname{Tr}_\\Delta(T)\\right)=\\operatorname{Tr}_{\\Lambda'}\\!\\left((A\\otimes I_\\Delta)T\\right)\\qquad(A\\in\\mathcal A_\\Lambda),$$\n\nwith the common value given by\n\n$$\\sum_{s,s'\\in S_\\Lambda}\\sum_{t\\in S_\\Delta}\\langle A e_{s'},e_s\\rangle\\langle T(e_s\\otimes e_t),e_{s'}\\otimes e_t\\rangle.$$\n\nThe pairing identity determines this matrix uniquely: if $D\\in\\mathcal A_\\Lambda$ pairs to zero with every $A$, taking the configuration-basis matrix units $A=E_{ji}$ gives $\\operatorname{Tr}_\\Lambda(E_{ji}D)=\\langle D e_j,e_i\\rangle=0$ for every $i,j$, so $D=0$. The local densities are **consistent** when $\\operatorname{Tr}_{\\Lambda'\\setminus\\Lambda}(\\rho_{\\Lambda'})=\\rho_\\Lambda$. No density operator on a globally chosen Hilbert space is part of this definition.\n\nThis agrees with the canonical state convention of [[def-state-on-a-c-star-algebra]]: the finite restrictions have norm one by [[lem-qsm-finite-matrix-cstar-and-state-duality]], giving $|\\omega(A)|\\le\\|A\\|$ on the dense local algebra and hence on its completion; evaluation at the norm-one identity gives $\\|\\omega\\|=1$. Conversely a canonical state has local restrictions with density matrices of trace one, since the finite norm formula and continuity on the dense local algebra imply $\\|\\omega\\|=\\omega(I)$. No global density representation is asserted.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-qsm-consistent-local-states",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice for the norm completion in [[def-qsm-quasilocal-spin-algebra]]. Let $\\{\\rho_\\Lambda\\}$ be positive trace-one matrices, one on each finite-region algebra $\\mathcal A_\\Lambda$ of [[def-qsm-local-spin-algebras]], such that for every $\\Lambda\\subseteq\\Lambda'$ their partial traces agree: $\\operatorname{Tr}_{\\Lambda'\\setminus\\Lambda}(\\rho_{\\Lambda'})=\\rho_\\Lambda$. There is a unique infinite algebraic state $\\omega$ on $\\mathcal A$ whose restriction to each $\\mathcal A_\\Lambda$ is $A\\mapsto\\operatorname{Tr}_{\\Lambda}(\\rho_\\Lambda A)$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-qsm-matrix-state-calculus",
+          "source_section": "Statement",
+          "quote": "Use the following conventions on a complex inner-product space $H$ of dimension $D\\geq1$, with inner product linear in its first argument. For an endomorphism $A$, define $\\operatorname{Tr}A:=\\sum_{j=1}^D\\langle Ae_j,e_j\\rangle$ in an orthonormal basis; step 3.1 proves basis independence. For any Hermitian $M$, its **positive spectral subspace** (called its positive support here) is $S_M:=\\bigoplus_{\\lambda>0}\\ker(M-\\lambda I)$; when $M\\geq0$ this equals $(\\ker M)^\\perp$. Its support logarithm is $\\log(M|_{S_M}):=\\sum_{\\lambda>0}(\\log\\lambda)P_\\lambda|_{S_M}$, where $P_\\lambda$ is the orthogonal projection onto that eigenspace. No value $\\log0$ is assigned; for $M=0$ this is the unique endomorphism of the zero space. For the set $\\mathcal D(H)$ of positive semidefinite Hermitian endomorphisms with trace one, a point $\\rho$ is **extreme** if every equality $\\rho=t\\sigma+(1-t)\\tau$ with $\\sigma,\\tau\\in\\mathcal D(H)$ and $0<t<1$ implies $\\sigma=\\tau=\\rho$.\n\nLet $H$ be a complex inner-product space of finite dimension $D\\geq1$, with inner product linear in its first argument. Every Hermitian endomorphism $M$ has an orthonormal eigenbasis with real eigenvalues. For a real function $f$ on its finite spectrum, define $f(M)$ by its spectral projections; this definition is independent of the choice of eigenbasis. In particular positive square roots, exponentials, and logarithms on positive supports are well defined.\n\nFor a density matrix $\\rho$ on $H$, meaning a Hermitian positive semidefinite operator with $\\operatorname{Tr}\\rho=1$, $\\operatorname{Tr}(\\rho A)=\\sum_jp_j\\langle Au_j,u_j\\rangle$ for bounded $A$, where $\\rho=\\sum_jp_j|u_j\\rangle\\langle u_j|$. The weighted form $(X,Y)_\\rho=\\operatorname{Tr}(\\rho X^*Y)$ satisfies Cauchy\u2013Schwarz, $|(X,Y)_\\rho|^2\\leq(X,X)_\\rho(Y,Y)_\\rho$. Finally, $\\operatorname{Tr}(\\rho^2)\\leq1$, with equality exactly for rank-one densities, and those are exactly the extreme points of the finite density-matrix set.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The finite coefficient sum defining $\\mathcal E_O(X)$ is complex-linear in both $O$ and $X$. For $O\\ge0$, write its spectral decomposition as $O=\\sum_\\alpha|v_\\alpha\\rangle\\langle v_\\alpha|$, absorbing the square roots of the nonnegative eigenvalues into $v_\\alpha$, and put $v_{\\alpha,I}=\\langle v_\\alpha,e_I\\rangle$. Then $O_{I,J}=\\sum_\\alpha v_{\\alpha,I}\\overline{v_{\\alpha,J}}$, so with $K_\\alpha:=\\sum_J\\overline{v_{\\alpha,J}}A^J$ the insertion map satisfies $\\mathcal E_O(X)=\\sum_\\alpha K_\\alpha X K_\\alpha^*\\ge0$ whenever $X\\ge0$. Diagonalizing $\\ell$ by [F7] and expanding $\\operatorname{tr}(\\ell\\mathcal E_O(\\rho))$ as a weighted sum of nonnegative diagonal expectations shows $\\omega_k(O)\\ge0$. For $O=I_{d^k}$, $O_{I,J}=1$ if $I=J$ and $0$ otherwise, so the insertion sums over all length-$k$ words and equals $\\mathcal E^k$. The fixed-point equations and $\\operatorname{tr}(\\ell\\rho)=1$ give $\\omega_k(I)=\\operatorname{tr}(\\ell\\mathcal E^k(\\rho))=1$. Thus each contiguous-block functional is positive and normalized.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Tensor-factor order in the definition gives $\\mathcal E_{O\\otimes P}=\\mathcal E_O\\circ\\mathcal E_P$ for consecutive blocks: expanding both sides gives the same ordered product $A^{J_O}A^{J_P}X(A^{I_P})^*(A^{I_O})^*$. Inserting an identity site on the right composes with $\\mathcal E$ on the input, which leaves $\\rho$ fixed; inserting one on the left composes with $\\mathcal E$ on the output, which leaves the trace pairing with $\\ell$ fixed. Repeating these identities shows that the value is independent of the chosen containing interval and that restrictions to nested finite regions agree. A positive observable remains positive when identity factors are inserted, so the local functionals on arbitrary finite regions are positive and normalized as well. The empty-region convention is consistent because every local functional assigns one to the identity.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F2]\u2013[F4] each local positive normalized functional has a unique trace-one density $\\rho_\\Lambda$. For nested regions, step 2.1 gives $\\operatorname{tr}_{\\Lambda'}((O\\otimes I)\\rho_{\\Lambda'})=\\operatorname{tr}_\\Lambda(O\\rho_\\Lambda)$ for every $O\\in\\mathcal A_\\Lambda$. Applying the defining partial-trace pairing [F5] shows $\\operatorname{tr}_\\Lambda(O\\operatorname{Tr}_{\\Lambda'\\setminus\\Lambda}(\\rho_{\\Lambda'}))=\\operatorname{tr}_\\Lambda(O\\rho_\\Lambda)$ for all $O$. Taking $O$ to be each matrix unit makes every matrix entry of the two matrices equal, so the density family is consistent.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F4",
+            "F5",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Apply [F6] to the consistent finite-region density family from step 3.1. Its hypotheses hold by [A1], [F2], [F3], and the positive trace-one property just proved. It yields a unique infinite algebraic state on the specified quasi-local algebra, with exactly these local restrictions and no chosen global Hilbert-space representation. This establishes that the transfer contractions in the Definition are well defined.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "F3",
+            "F6",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The empty-region functional is defined explicitly in the Definition and checked in step 2.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 maps a zero positive observable to zero and retains the finite matrix conventions."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 handles the identity insertion and one-dimensional transfer matrices through the fixed-point pairing."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 uses spectral projections for positive block observables; no simple spectrum is assumed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 proves invariance when the containing interval is enlarged on either side."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 4.1 uses exactly Countable Choice through the consistent-local-state extension supplier, stated in A1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition asserts no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/qsm_boundary (scientific owner; no independent acceptance)",
+            "reason": "Fixed positive transfer data define insertion contractions, compatible finite-region densities, and a unique completed state under Countable Choice. The definition establishes compatibility and does not assert that every infinite state has such transfer data.",
+            "item_sha256": "d82c63c3e62c16061f1d0c79c9e7abf3b284e08202ef9fa577df257ba16a0ee2",
+            "row_sha256": "40660fbc54669470a785f356893d3c1113fea922d7060433f5cd460345461eca"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition asserts no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/qsm_boundary (scientific owner; no independent acceptance)",
+            "reason": "Fixed positive transfer data define insertion contractions, compatible finite-region densities, and a unique completed state under Countable Choice. The definition establishes compatibility and does not assert that every infinite state has such transfer data.",
+            "item_sha256": "d82c63c3e62c16061f1d0c79c9e7abf3b284e08202ef9fa577df257ba16a0ee2",
+            "row_sha256": "4f9637bb4abf2742f25729263efbfb4ea69d8de8193f5f5180a62cb8a8bf664d"
+          }
+        }
+      ]
+    },
+    "alg-qsmx-schmidt-mps-truncation": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The algorithm statement in its Definition explicitly permits the empty cap list at N=1. At N=1 there are no caps, cuts, discarded values, or intermediate tensors. The explicit first and last algorithm clauses return phi=psi with empty lists; positive input norm avoids a zero remainder."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: The input is normalized and the optional normalization branch checks the output norm before division."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: For N=1 the procedure returns the input and empty cut and discarded-norm lists."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: The procedure fixes a basis in each repeated singular subspace by lexicographic projection and Gram-Schmidt."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: Step 3 explicitly handles N=1, the no-cut endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: All decompositions are finite and tied singular subspaces use the explicit deterministic basis rule."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The algorithm asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The algorithm asserts no biconditional."
+        }
+      ]
+    },
+    "thm-qsmx-schmidt-mps-error": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-qsmx-schmidt-mps-truncation",
+          "source_section": "Definition",
+          "quote": "Input an integer $N\\ge1$, nonzero finite-dimensional complex inner-product spaces $H_1,\\ldots,H_N$ with fixed ordered orthonormal bases, a normalized vector $\\psi\\in H_1\\otimes\\cdots\\otimes H_N$ with exact coefficients in those bases, and integer rank caps $D_k\\ge1$ for $1\\le k<N$. For $N=1$ the cap list is empty. The algorithm performs the following exact finite procedure.\n\n1. Set the current remainder to $\\psi^{(0)}:=\\psi$, the retained left space before the first cut to $S_0:=\\mathbb C$, and an empty list of site tensors and discarded squared norms.\n\n2. For each $k=1,\\ldots,N-1$, reshape the current remainder as a matrix whose row index is the retained left index in $S_{k-1}$ together with the physical basis index in $H_k$, and whose column index is the ordered product basis of $H_{k+1}\\otimes\\cdots\\otimes H_N$. Compute an exact singular value decomposition. Order the positive singular values nonincreasingly. Within each repeated positive singular value, form a deterministic orthonormal basis of its left singular subspace by projecting the row-coordinate standard basis vectors in lexicographic order and applying Gram\u2013Schmidt, discarding zero residuals; obtain the corresponding right singular vector as $M^*u/s$ for singular value $s>0$. Retain the first $m_k:=\\min(D_k,r_k)$ positive singular directions, where $r_k$ is the number of positive singular values, and record $\\delta_k:=\\sum_{j=m_k+1}^{r_k}s_{k,j}^2$ from this current unnormalized remainder. Reshape the retained left singular vectors into a site tensor $A_k^{i_k}$ with left index in $S_{k-1}$ and right index in $S_k:=\\mathbb C^{m_k}$; pass the retained singular values times the adjoints of the retained right singular vectors as the next current remainder $\\psi^{(k)}$. Since the input has norm one and $D_k\\ge1$, every current remainder is nonzero and each $m_k\\ge1$.\n\n3. After the last cut, reshape the remaining array as the final site tensor $A_N^{i_N}$, use outer bond dimensions $D_0=D_N=1$ with scalar boundary columns $\\ell=r=(1)$, and return the resulting unnormalized open MPS $\\phi=\\psi^{(N-1)}$, the list $(\\delta_1,\\ldots,\\delta_{N-1})$, and the bond dimensions $(m_1,\\ldots,m_{N-1})$. For $N=1$, return $\\phi=\\psi$ and empty lists with the same scalar boundaries. If $\\|\\phi\\|^2=0$, return a norm-zero flag and do not normalize. Otherwise an optional normalized copy is $\\phi/\\|\\phi\\|$; the returned $\\phi$ and discarded norms always refer to the unnormalized sweep output.\n\nAll coefficients and SVDs are exact mathematical objects; no floating-point threshold is used. The tie rule fixes a choice even when a rank cap cuts through a degenerate singular-value subspace.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qsmx-mps-and-transfer",
+          "source_section": "Definition",
+          "quote": "Let $N\\ge1$ and $d_1,\\ldots,d_N,D_0,\\ldots,D_N\\ge1$ be integers. Give each site $j$ the Hilbert space $H_j=\\mathbb C^{d_j}$ with standard inner product $\\langle x,y\\rangle:=\\sum_{i=1}^{d_j}x_i\\overline{y_i}$, linear in its first argument, and its fixed ordered standard basis $(|i_j\\rangle)_{i_j=1}^{d_j}$. Tensor products use the ordered product basis and the product inner product. For every site and physical index choose a matrix $A_j^{i_j}\\in M_{D_{j-1}\\times D_j}(\\mathbb C)$, a boundary column $\\ell\\in\\mathbb C^{D_0}$, and a boundary column $r\\in\\mathbb C^{D_N}$. Here $M_{m\\times n}(\\mathbb C)$ is the space of $m$-by-$n$ complex matrices and $A^*$ denotes conjugate transpose. The associated finite open matrix product state (MPS) is the vector\n\n$$|\\psi_A\\rangle:=\\sum_{i_1=1}^{d_1}\\cdots\\sum_{i_N=1}^{d_N}\\ell^*A_1^{i_1}\\cdots A_N^{i_N}r\\,|i_1\\rangle\\otimes\\cdots\\otimes|i_N\\rangle\\in H_1\\otimes\\cdots\\otimes H_N.$$\n\nThe dimensions $D_j$ are the bond dimensions; the virtual indices between adjacent matrices are matrix indices summed in their product. The zero vector is allowed. A nonzero vector is normalized by division by its norm, and normalization is defined only when $\\langle\\psi_A,\\psi_A\\rangle>0$. Every vector in a finite tensor product of these site spaces has an exact open MPS representation.\n\nFor a translation invariant tensor, let $d,D\\ge1$ and use one family $A^i\\in M_D(\\mathbb C)$ for every site. Its transfer map is the completely positive linear map\n\n$$\\mathcal E:M_D(\\mathbb C)\\to M_D(\\mathbb C),\\qquad \\mathcal E(X):=\\sum_{i=1}^d A^iXA^{i*}.$$\n\nHere complete positivity means that for every integer $q\\ge1$, the amplified map $\\operatorname{id}_{M_q}\\otimes\\mathcal E$ sends positive semidefinite matrices to positive semidefinite matrices; a matrix is positive semidefinite when it is Hermitian and has nonnegative quadratic form on every vector.\n\nThe tensor is injective at length $L\\ge1$ when the matrices $A^{i_1}\\cdots A^{i_L}$, over all $i_1,\\ldots,i_L\\in\\{1,\\ldots,d\\}$, span the full vector space $M_D(\\mathbb C)$. No injectivity or transfer-spectrum condition is assumed by this definition.\n\nFor each block length $L\\ge1$, define the blocked boundary map\n\n$$\\Gamma_L:M_D(\\mathbb C)\\to(\\mathbb C^d)^{\\otimes L},\\qquad \\Gamma_L(X):=\\sum_{i_1,\\ldots,i_L=1}^d\\operatorname{tr}(XA^{i_1}\\cdots A^{i_L})\\,|i_1\\rangle\\otimes\\cdots\\otimes|i_L\\rangle,$$\n\nwhere $\\operatorname{tr}(Y):=\\sum_{a=1}^D Y_{aa}$. Let $P_L$ be the orthogonal projection onto $\\operatorname{im}\\Gamma_L$, set $h_L:=I-P_L$, and, for $N\\ge L$, define the open-chain parent Hamiltonian\n\n$$H_{N,L}:=\\sum_{j=1}^{N-L+1}I^{\\otimes(j-1)}\\otimes h_L\\otimes I^{\\otimes(N-j-L+1)}.$$\n\nEach local term is positive semidefinite with kernel $\\operatorname{im}\\Gamma_L$, and $H_{N,L}$ annihilates every finite open MPS formed from the same translation invariant tensor. Every nonzero such vector is a zero-energy ground state of $H_{N,L}$. This definition asserts no uniqueness of that ground state and no spectral-gap bound.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qc-schmidt-decomposition",
+          "source_section": "Statement",
+          "quote": "Let $H,K$ be finite-dimensional complex-inner-product spaces with the tensor-product convention of [[def-qc-tensor-register-and-permutation]]. For every $\\Psi\\in H\\otimes K$ there are an integer $r\\ge0$, positive numbers $s_1,\\ldots,s_r$, and orthonormal families $u_1,\\ldots,u_r\\in H$ and $v_1,\\ldots,v_r\\in K$ such that\n\n$$\\Psi=\\sum_{j=1}^r s_j u_j\\otimes v_j,\\qquad \\|\\Psi\\|^2=\\sum_{j=1}^r s_j^2.$$\n\nFor $\\Psi=0$ take $r=0$ and the empty sum. For any chosen ordered pair of orthonormal bases, the construction below obtains the $s_j$ as the positive singular values of the coefficient matrix of $\\Psi$ in their ordered product basis.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-singular-value-decomposition",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces, and let $r$ be the number of positive singular values of $T$.\nThen there exist orthonormal bases $(e_1,\\dots,e_n)$ of $V$ and\n$(f_1,\\dots,f_m)$ of $W$, together with singular values\n\n$$s_1\\ge\\cdots\\ge s_r>0,$$\n\nsuch that\n\n$$Tv=\\sum_{j=1}^r s_j\\langle v,e_j\\rangle f_j$$\n\nfor every $v\\in V$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qsmx-information-conventions",
+          "source_section": "Definition",
+          "quote": "All Hilbert spaces in this item are nonzero and finite-dimensional over $\\mathbb C$. A density operator $\\rho$ on $H$ is a Hermitian positive semidefinite endomorphism with $\\operatorname{Tr}\\rho=1$. Its dimensionless von Neumann entropy, in nats, is\n\n$$S(\\rho):=-\\operatorname{Tr}(\\rho\\log\\rho)=-\\sum_{j:\\lambda_j>0}\\lambda_j\\log\\lambda_j,$$\n\nwhere $\\lambda_j$ are the eigenvalues of $\\rho$, the logarithm is natural, and $0\\log0:=0$. For any positive semidefinite endomorphisms $X,Y$ on one finite-dimensional $H$, let $\\operatorname{supp}X:=(\\ker X)^\\perp$. Define\n\n$$D(X\\|Y):=\\operatorname{Tr}(X\\log X)-\\operatorname{Tr}(X\\log Y)$$\n\nwhen $\\operatorname{supp}X\\subseteq\\operatorname{supp}Y$, taking each logarithm spectrally on its positive support and setting zero-eigenvalue contributions to zero; set $D(X\\|Y):=+\\infty$ otherwise. For density operators this is the finite-dimensional quantum relative entropy in nats.\n\nFor a density operator $\\rho_{AB}$ on the ordered product $H_A\\otimes H_B$, define $\\rho_A:=\\operatorname{Tr}_B\\rho_{AB}$ and $\\rho_B:=\\operatorname{Tr}_A\\rho_{AB}$, where in orthonormal product bases $\\bigl(\\operatorname{Tr}_B R\\bigr)_{ii'}=\\sum_jR_{(i,j),(i',j)}$ and the first factor is retained. Define\n\n$$I(A:B)_\\rho:=S(\\rho_A)+S(\\rho_B)-S(\\rho_{AB}).$$\n\nFor a density operator $\\rho_{ABC}$ on $H_A\\otimes H_B\\otimes H_C$, define\n\n$$\\rho_{AB}:=\\operatorname{Tr}_C\\rho_{ABC},\\qquad \\rho_{BC}:=\\operatorname{Tr}_A\\rho_{ABC},\\qquad \\rho_B:=\\operatorname{Tr}_A(\\operatorname{Tr}_C\\rho_{ABC}),$$\n\nwhere each partial trace contracts the indicated tensor factor and retains the other factors in their displayed order.\n\n$$I(A:C\\mid B)_\\rho:=S(\\rho_{AB})+S(\\rho_{BC})-S(\\rho_B)-S(\\rho_{ABC}),$$\n\nusing the partial traces in the displayed factor order. For any fixed positive conversion factor $k_B$ with units J/K, the corresponding physical entropy is $S_{\\mathrm{phys}}(\\rho):=k_BS(\\rho)$; no numerical value of $k_B$ is specified here.",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ (Continuity of $f : A \\to \\mathbb{R}$ at a point of $A$ and on $A$: the $\\varepsilon$-$\\delta$ condition, its agreement with $\\lim_{x \\to c} f(x) = f(c)$ at a limit point, and continuity at an isolated point, Intervals of $\\mathbb{R}$: the nine order-convex forms, nondegeneracy, and length) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n(The derivative $f'(c) = \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c}$ of $f : A \\to \\mathbb{R}$ at a point $c \\in A$ that is a limit point of $A$, and differentiability on a set). Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$\n\nEquivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which\n$f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals\nthe average rate of change across the whole interval.\n\n**Continuity on the closed interval cannot be dropped.** Differentiability at\nevery point of $(a,b)$ alone does not suffice: a function on $[0,1]$,\ndifferentiable at every point of $(0,1)$ with derivative constantly $1$, for\nwhich no $c$ works, is exhibited later on this page as a false statement, and\nthe companion page works the same witness out in full.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $\\|\\psi\\|=1$ and every cap $D_k\\ge1$, each current remainder has a positive singular value and the algorithm retains at least one; hence its subsequent remainders are nonzero and every retained bond dimension is positive. For each cut $k$, let $P_k$ be the orthogonal projection on the full tensor product onto the retained left Schmidt subspace at that cut tensored with the remaining right factors; set $P_0=I$. The current remainder before cut $k$ is $\\psi^{(k-1)}=P_{k-1}\\psi$. Its support in the first $k$ sites lies in the previous retained space tensored with $H_k$, so every positive left Schmidt vector retained by the next SVD lies in that previous space tensored with $H_k$. Hence $\\operatorname{ran}P_k\\subseteq\\operatorname{ran}P_{k-1}$, $P_kP_{k-1}=P_{k-1}P_k=P_k$, and the next remainder is $\\psi^{(k)}=P_k\\psi$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Across cut $k$, the coefficient matrix of an exact MPS factors as $L_kR_k$ by summing over its $D_k$-dimensional virtual index. Its matrix rank is therefore at most $D_k$. By [F3]\u2013[F4], the Schmidt rank is the number of positive singular values, so it is at most $D_k$. Writing the Schmidt expansion as $\\psi=\\sum_{j=1}^q s_j u_j\\otimes v_j$ gives $q\\le D_k$, $p_j:=s_j^2>0$, and $\\sum_jp_j=1$. Expanding the partial trace in [F5] gives $\\rho_{1\\cdots k}=\\sum_jp_j|u_j\\rangle\\langle u_j|$, so these $p_j$ are exactly its positive eigenvalues.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Put $\\varepsilon_k:=\\psi^{(k-1)}-\\psi^{(k)}=(P_{k-1}-P_k)\\psi$. This vector lies in $\\operatorname{ran}P_{k-1}$ and is orthogonal to $\\operatorname{ran}P_k$. For $j>k$, nesting gives $\\varepsilon_j\\in\\operatorname{ran}P_{j-1}\\subseteq\\operatorname{ran}P_k$, so $\\langle\\varepsilon_k,\\varepsilon_j\\rangle=0$. Thus the discarded components from different cuts are pairwise orthogonal.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "At cut $k$, [F3] identifies the squared norm removed by the orthogonal Schmidt projection with the sum of squared discarded singular values, exactly $\\delta_k$ by [F1]. Since $\\psi-\\phi=\\sum_{k=1}^{N-1}\\varepsilon_k$, orthogonality from step 2.1 gives $\\|\\psi-\\phi\\|^2=\\sum_k\\|\\varepsilon_k\\|^2=\\sum_k\\delta_k$. For $N=1$ both sides are zero, so the equality also covers the empty sweep.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For every $x>1$, apply [F8] to $\\log$ on $[1,x]$; [F6]\u2013[F7] give $\\log x=(x-1)/c\\le x-1$ for some $c\\in(1,x)$. For $0<x<1$, apply [F8] on $[x,1]$ to get $-\\log x=(1-x)/c$ for some $c\\in(x,1)$, hence $\\log x\\le x-1$; equality holds at $x=1$. Apply this inequality to $x=(q p_j)^{-1}$, multiply by $p_j>0$, and sum: $\\sum_jp_j\\log((q p_j)^{-1})\\le\\sum_j(1/q-p_j)=0$. The logarithm product law [F6] then gives $\\log q-S(\\rho_{1\\cdots k})=\\sum_jp_j\\log(qp_j)\\ge0$. Since $q\\le D_k$ and $\\log$ is increasing, $S(\\rho_{1\\cdots k})\\le\\log q\\le\\log D_k$. The zero-eigenvalue convention in [F5] includes rank-deficient reductions.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The N=1 sweep has zero SVDs and phi=psi. In3.1 the discarded-component sum and discarded-norm sum are both empty and zero, proving the displayed error equality without a hidden nonempty-cut assumption."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The input has norm one; zero singular values are omitted and the entropy convention assigns zero contribution."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: For N=1 the sweep has no SVD and the proof states both error and discarded sums are zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The proof uses orthogonal retained subspaces and eigenvalues with multiplicity; no distinct Schmidt values are assumed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 treats the empty N=1 sweep and the Statement restricts cuts to 1<=k<N."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The exact sweep uses finite SVDs and a deterministic finite tie rule; no arbitrary-index choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement gives an equality and an entropy inequality, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement gives an equality and an entropy inequality, not a biconditional."
+        }
+      ]
+    },
+    "thm-qsmx-primitive-transfer-clustering": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qsmx-mps-and-transfer",
+          "source_section": "Definition",
+          "quote": "Let $N\\ge1$ and $d_1,\\ldots,d_N,D_0,\\ldots,D_N\\ge1$ be integers. Give each site $j$ the Hilbert space $H_j=\\mathbb C^{d_j}$ with standard inner product $\\langle x,y\\rangle:=\\sum_{i=1}^{d_j}x_i\\overline{y_i}$, linear in its first argument, and its fixed ordered standard basis $(|i_j\\rangle)_{i_j=1}^{d_j}$. Tensor products use the ordered product basis and the product inner product. For every site and physical index choose a matrix $A_j^{i_j}\\in M_{D_{j-1}\\times D_j}(\\mathbb C)$, a boundary column $\\ell\\in\\mathbb C^{D_0}$, and a boundary column $r\\in\\mathbb C^{D_N}$. Here $M_{m\\times n}(\\mathbb C)$ is the space of $m$-by-$n$ complex matrices and $A^*$ denotes conjugate transpose. The associated finite open matrix product state (MPS) is the vector\n\n$$|\\psi_A\\rangle:=\\sum_{i_1=1}^{d_1}\\cdots\\sum_{i_N=1}^{d_N}\\ell^*A_1^{i_1}\\cdots A_N^{i_N}r\\,|i_1\\rangle\\otimes\\cdots\\otimes|i_N\\rangle\\in H_1\\otimes\\cdots\\otimes H_N.$$\n\nThe dimensions $D_j$ are the bond dimensions; the virtual indices between adjacent matrices are matrix indices summed in their product. The zero vector is allowed. A nonzero vector is normalized by division by its norm, and normalization is defined only when $\\langle\\psi_A,\\psi_A\\rangle>0$. Every vector in a finite tensor product of these site spaces has an exact open MPS representation.\n\nFor a translation invariant tensor, let $d,D\\ge1$ and use one family $A^i\\in M_D(\\mathbb C)$ for every site. Its transfer map is the completely positive linear map\n\n$$\\mathcal E:M_D(\\mathbb C)\\to M_D(\\mathbb C),\\qquad \\mathcal E(X):=\\sum_{i=1}^d A^iXA^{i*}.$$\n\nHere complete positivity means that for every integer $q\\ge1$, the amplified map $\\operatorname{id}_{M_q}\\otimes\\mathcal E$ sends positive semidefinite matrices to positive semidefinite matrices; a matrix is positive semidefinite when it is Hermitian and has nonnegative quadratic form on every vector.\n\nThe tensor is injective at length $L\\ge1$ when the matrices $A^{i_1}\\cdots A^{i_L}$, over all $i_1,\\ldots,i_L\\in\\{1,\\ldots,d\\}$, span the full vector space $M_D(\\mathbb C)$. No injectivity or transfer-spectrum condition is assumed by this definition.\n\nFor each block length $L\\ge1$, define the blocked boundary map\n\n$$\\Gamma_L:M_D(\\mathbb C)\\to(\\mathbb C^d)^{\\otimes L},\\qquad \\Gamma_L(X):=\\sum_{i_1,\\ldots,i_L=1}^d\\operatorname{tr}(XA^{i_1}\\cdots A^{i_L})\\,|i_1\\rangle\\otimes\\cdots\\otimes|i_L\\rangle,$$\n\nwhere $\\operatorname{tr}(Y):=\\sum_{a=1}^D Y_{aa}$. Let $P_L$ be the orthogonal projection onto $\\operatorname{im}\\Gamma_L$, set $h_L:=I-P_L$, and, for $N\\ge L$, define the open-chain parent Hamiltonian\n\n$$H_{N,L}:=\\sum_{j=1}^{N-L+1}I^{\\otimes(j-1)}\\otimes h_L\\otimes I^{\\otimes(N-j-L+1)}.$$\n\nEach local term is positive semidefinite with kernel $\\operatorname{im}\\Gamma_L$, and $H_{N,L}$ annihilates every finite open MPS formed from the same translation invariant tensor. Every nonzero such vector is a zero-energy ground state of $H_{N,L}$. This definition asserts no uniqueness of that ground state and no spectral-gap bound.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qsmx-transfer-infinite-state",
+          "source_section": "Definition",
+          "quote": "Fix integers $d,D\\ge1$ and a translation invariant tensor $A^1,\\ldots,A^d\\in M_D(\\mathbb C)$ with transfer map $\\mathcal E(X):=\\sum_iA^iXA^{i*}$. A matrix is positive semidefinite when it is Hermitian with nonnegative quadratic form on every vector. Let $\\rho,\\ell\\in M_D(\\mathbb C)$ be positive semidefinite matrices satisfying\n\n$$\\operatorname{tr}\\rho=1,\\qquad \\mathcal E(\\rho)=\\rho,\\qquad \\mathcal E^*(\\ell)=\\ell,\\qquad \\operatorname{tr}(\\ell\\rho)=1,$$\n\nwhere $\\mathcal E^*(Y):=\\sum_iA^{i*}YA^i$, equivalently the trace-pairing adjoint determined by $\\operatorname{tr}(Y\\mathcal E(X))=\\operatorname{tr}(\\mathcal E^*(Y)X)$. For a contiguous block of $k\\ge1$ sites, write $I=(i_1,\\ldots,i_k)$ and $J=(j_1,\\ldots,j_k)$ for physical multi-indices, let $e_I$ be its ordered standard product basis, put $O_{I,J}:=\\langle Oe_J,e_I\\rangle$ for $O\\in M_{d^k}(\\mathbb C)$, and set $A^I:=A^{i_1}\\cdots A^{i_k}$. Define the transfer insertion map and local expectation by\n\n$$\\mathcal E_O(X):=\\sum_{I,J}O_{I,J}A^JX(A^I)^*,\\qquad \\omega_k(O):=\\operatorname{tr}(\\ell\\mathcal E_O(\\rho)).$$\n\nFor any finite nonempty $\\Lambda\\subset\\mathbb Z$ and local observable $O\\in\\mathcal A_\\Lambda$, embed $O$ into the interval $[\\min\\Lambda,\\max\\Lambda]$ by inserting identities at missing sites and evaluate the same formula. For the empty region set $\\omega_\\varnothing(cI):=c$. These definitions give compatible positive normalized local functionals. Their unique density matrices $\\rho_\\Lambda$ obey $\\operatorname{Tr}_{\\Lambda'\\setminus\\Lambda}(\\rho_{\\Lambda'})=\\rho_\\Lambda$ whenever $\\Lambda\\subseteq\\Lambda'$. Assume Countable Choice. The transfer-generated infinite-chain state is the unique infinite algebraic state $\\omega$ on the norm-completed quasi-local spin algebra whose restriction to every finite region is the defined local functional. No infinite tensor-product Hilbert space is selected.\n\nFor observables $O_A\\in M_{d^a}(\\mathbb C)$ and $O_B\\in M_{d^b}(\\mathbb C)$ on two fixed consecutive blocks, with $g\\ge0$ identity sites between the blocks, the connected correlation is\n\n$$\\omega(O_A\\otimes I^{\\otimes g}\\otimes O_B)-\\omega(O_A)\\omega(O_B).$$",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-eigenvalue-eigenvector-eigenspace-and-spectrum",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a vector space over a field $F$ and let $T:V\\to V$ be linear. A scalar $\\lambda\\in F$ is an **eigenvalue** of $T$ when there is a nonzero vector $v\\in V$ such that\n\n$$T(v)=\\lambda v.$$\n\nSuch a vector is an **eigenvector belonging to $\\lambda$**. The **eigenspace** belonging to $\\lambda$ is\n\n$$E_\\lambda(T):=\\ker(T-\\lambda I_V)=\\{v\\in V:T(v)=\\lambda v\\}.$$\n\nThus $E_\\lambda(T)$ is a linear subspace and always contains $0_V$, while $\\lambda$ is an eigenvalue exactly when $E_\\lambda(T)\\ne\\{0_V\\}$. The **spectrum of $T$ over $F$** is\n\n$$\\sigma_F(T):=\\{\\lambda\\in F:\\lambda\\text{ is an eigenvalue of }T\\}.$$\n\nIn particular, the unique endomorphism of the zero space has empty spectrum.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-fundamental-theorem-of-algebra-minimum-modulus-proof",
+          "source_section": "Statement",
+          "quote": "Every nonconstant complex polynomial has a complex root. The conventions and prerequisite facts used below are recorded in [[lem-complex-polynomial-growth-and-minimum-modulus]], [[lem-dalembert-minimum-modulus-descent]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-jordan-canonical-form-from-pid-module-structure",
+          "source_section": "Statement",
+          "quote": "Let $T$ be an endomorphism of a finite-dimensional $F$-vector space whose characteristic polynomial splits over $F$. If the elementary divisors of $V_T$ are $(x-\\lambda)^e$, then $T$ has a Jordan canonical form with one block $J_e(\\lambda)$ for each elementary divisor. The multiset of blocks is unique, and conversely each Jordan block yields its corresponding cyclic primary module. The zero space has empty lists.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-qsm-matrix-state-calculus",
+          "source_section": "Statement",
+          "quote": "Use the following conventions on a complex inner-product space $H$ of dimension $D\\geq1$, with inner product linear in its first argument. For an endomorphism $A$, define $\\operatorname{Tr}A:=\\sum_{j=1}^D\\langle Ae_j,e_j\\rangle$ in an orthonormal basis; step 3.1 proves basis independence. For any Hermitian $M$, its **positive spectral subspace** (called its positive support here) is $S_M:=\\bigoplus_{\\lambda>0}\\ker(M-\\lambda I)$; when $M\\geq0$ this equals $(\\ker M)^\\perp$. Its support logarithm is $\\log(M|_{S_M}):=\\sum_{\\lambda>0}(\\log\\lambda)P_\\lambda|_{S_M}$, where $P_\\lambda$ is the orthogonal projection onto that eigenspace. No value $\\log0$ is assigned; for $M=0$ this is the unique endomorphism of the zero space. For the set $\\mathcal D(H)$ of positive semidefinite Hermitian endomorphisms with trace one, a point $\\rho$ is **extreme** if every equality $\\rho=t\\sigma+(1-t)\\tau$ with $\\sigma,\\tau\\in\\mathcal D(H)$ and $0<t<1$ implies $\\sigma=\\tau=\\rho$.\n\nLet $H$ be a complex inner-product space of finite dimension $D\\geq1$, with inner product linear in its first argument. Every Hermitian endomorphism $M$ has an orthonormal eigenbasis with real eigenvalues. For a real function $f$ on its finite spectrum, define $f(M)$ by its spectral projections; this definition is independent of the choice of eigenbasis. In particular positive square roots, exponentials, and logarithms on positive supports are well defined.\n\nFor a density matrix $\\rho$ on $H$, meaning a Hermitian positive semidefinite operator with $\\operatorname{Tr}\\rho=1$, $\\operatorname{Tr}(\\rho A)=\\sum_jp_j\\langle Au_j,u_j\\rangle$ for bounded $A$, where $\\rho=\\sum_jp_j|u_j\\rangle\\langle u_j|$. The weighted form $(X,Y)_\\rho=\\operatorname{Tr}(\\rho X^*Y)$ satisfies Cauchy\u2013Schwarz, $|(X,Y)_\\rho|^2\\leq(X,X)_\\rho(Y,Y)_\\rho$. Finally, $\\operatorname{Tr}(\\rho^2)\\leq1$, with equality exactly for rank-one densities, and those are exactly the extreme points of the finite density-matrix set.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Define the linear functional $\\varphi(X):=\\operatorname{tr}(\\ell X)$ and the rank-one map $P(X):=\\rho\\,\\varphi(X)$. The normalization $\\varphi(\\rho)=1$ gives $P^2=P$. The fixed-point equations give $\\mathcal EP=P$ and $P\\mathcal E=P$, since $\\varphi(\\mathcal E(X))=\\operatorname{tr}(\\mathcal E^*(\\ell)X)=\\varphi(X)$. Hence $M_D(\\mathbb C)=\\mathbb C\\rho\\oplus\\ker\\varphi$ is an $\\mathcal E$-invariant direct sum, $\\mathcal E$ is the identity on $\\mathbb C\\rho$, and $P$ is zero on $\\ker\\varphi$. The restriction of $\\mathcal E$ to $\\ker\\varphi$ has no eigenvalue $1$: such an eigenvector together with $\\rho$ would give two independent eigenvectors for $1$, contradicting algebraic simplicity. Therefore $\\mathcal E^g-P$ is zero on $\\mathbb C\\rho$ and equals $(\\mathcal E|_{\\ker\\varphi})^g$ on the invariant complement.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Use $\\|X\\|_{\\mathrm{op}}:=\\sup_{\\|v\\|=1}\\|Xv\\|$ on $M_D(\\mathbb C)$ and the induced norm $\\|\\Phi\\|:=\\sup_{\\|X\\|_{\\mathrm{op}}=1}\\|\\Phi(X)\\|_{\\mathrm{op}}$ on its linear maps. If $\\ker\\varphi=\\{0\\}$, then $\\mathcal E=P$ and $\\mathcal E^g-P=0$ for every $g\\ge1$, with the $g=0$ value absorbed into a constant. Otherwise the restriction is a finite-dimensional complex endomorphism. Its characteristic polynomial splits by [F4], so [F5] gives a similarity to finitely many Jordan blocks $J_s(\\lambda)=\\lambda I+N$ with $N^s=0$. Every such $\\lambda$ belongs to $\\sigma_{\\mathbb C}(\\mathcal E)\\setminus\\{1\\}$, so $|\\lambda|\\le q$. If $q=0$, all blocks are nilpotent and their powers vanish beyond their finite sizes; finitely many earlier powers are bounded. If $q>0$, fix $r>q$. For a block with $\\lambda\\ne0$ and $g\\ge s$, the binomial expansion gives $J_s(\\lambda)^g=\\sum_{j=0}^{s-1}\\binom gj\\lambda^{g-j}N^j$. For every fixed $j$, $g^j(|\\lambda|/r)^g$ is bounded because the ratio of consecutive terms tends to $|\\lambda|/r<1$; hence each summand is bounded by a constant times $r^g$. Blocks with $\\lambda=0$ vanish for $g\\ge s$, and all finitely many smaller $g$ are absorbed into the constant. The fixed similarity matrix and its inverse have finite induced matrix norms; submultiplicativity follows from the definition of the induced norm. Thus $\\|\\mathcal E^g-P\\|\\le K_r r^g$ in the stated superoperator norm for a finite $K_r$ and all $g\\ge0$.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "By [F1]\u2013[F2], the transfer contraction for the two blocks with a gap of $g$ identities is $\\operatorname{tr}(\\ell\\mathcal E_{O_A}\\mathcal E^g\\mathcal E_{O_B}(\\rho))$. The product of the separate expectations equals $\\operatorname{tr}(\\ell\\mathcal E_{O_A}P\\mathcal E_{O_B}(\\rho))$, since $P(X)=\\rho\\operatorname{tr}(\\ell X)$. Subtracting gives $C_g=\\operatorname{tr}(\\ell\\mathcal E_{O_A}(\\mathcal E^g-P)\\mathcal E_{O_B}(\\rho))$.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Diagonalize $\\ell\\ge0$ using [F6] as $\\ell=\\sum_j t_j|u_j\\rangle\\langle u_j|$ with $t_j>0$. For every matrix $X$, $|\\operatorname{tr}(\\ell X)|=|\\sum_jt_j\\langle Xu_j,u_j\\rangle|\\le\\operatorname{tr}(\\ell)\\|X\\|_{\\mathrm{op}}$. The block insertion maps are finite sums of matrix multiplications, so their induced norms in step 2.1 are finite; submultiplicativity gives $|C_g|\\le\\operatorname{tr}(\\ell)\\,\\|\\mathcal E_{O_A}\\|\\,K_r\\,\\|\\mathcal E_{O_B}(\\rho)\\|_{\\mathrm{op}}\\,r^g$. All factors before $r^g$ are finite and independent of $g$, so their product is an admissible $C$. This proves the claimed exponential clustering bound, including Jordan blocks and the case $q=0$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F6",
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The nonleading spectrum may be empty, notably at virtual dimension D=1. The maximum includes zero by definition;1.1 gives a zero-dimensional complement and2.1 explicitly treats it, with the gap-zero finite power absorbed in the constant."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 covers q=0 nilpotent Jordan blocks, and step 3.1 permits zero observables with C=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 handles ker(phi)={0}, including the one-dimensional transfer space."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 treats arbitrary Jordan blocks for subleading eigenvalues; only eigenvalue 1 is algebraically simple."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The rate is any q<r<1; the proof handles q=0 and does not assert the excluded endpoint r=q or r=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The infinite-state construction assumes exactly Countable Choice in A1; no stronger choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement gives a conditional decay bound, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement gives a conditional decay bound, not a biconditional."
+        }
+      ]
+    },
+    "ex-qsmx-ghz-noninjective": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qsmx-mps-and-transfer",
+          "source_section": "Definition",
+          "quote": "Let $N\\ge1$ and $d_1,\\ldots,d_N,D_0,\\ldots,D_N\\ge1$ be integers. Give each site $j$ the Hilbert space $H_j=\\mathbb C^{d_j}$ with standard inner product $\\langle x,y\\rangle:=\\sum_{i=1}^{d_j}x_i\\overline{y_i}$, linear in its first argument, and its fixed ordered standard basis $(|i_j\\rangle)_{i_j=1}^{d_j}$. Tensor products use the ordered product basis and the product inner product. For every site and physical index choose a matrix $A_j^{i_j}\\in M_{D_{j-1}\\times D_j}(\\mathbb C)$, a boundary column $\\ell\\in\\mathbb C^{D_0}$, and a boundary column $r\\in\\mathbb C^{D_N}$. Here $M_{m\\times n}(\\mathbb C)$ is the space of $m$-by-$n$ complex matrices and $A^*$ denotes conjugate transpose. The associated finite open matrix product state (MPS) is the vector\n\n$$|\\psi_A\\rangle:=\\sum_{i_1=1}^{d_1}\\cdots\\sum_{i_N=1}^{d_N}\\ell^*A_1^{i_1}\\cdots A_N^{i_N}r\\,|i_1\\rangle\\otimes\\cdots\\otimes|i_N\\rangle\\in H_1\\otimes\\cdots\\otimes H_N.$$\n\nThe dimensions $D_j$ are the bond dimensions; the virtual indices between adjacent matrices are matrix indices summed in their product. The zero vector is allowed. A nonzero vector is normalized by division by its norm, and normalization is defined only when $\\langle\\psi_A,\\psi_A\\rangle>0$. Every vector in a finite tensor product of these site spaces has an exact open MPS representation.\n\nFor a translation invariant tensor, let $d,D\\ge1$ and use one family $A^i\\in M_D(\\mathbb C)$ for every site. Its transfer map is the completely positive linear map\n\n$$\\mathcal E:M_D(\\mathbb C)\\to M_D(\\mathbb C),\\qquad \\mathcal E(X):=\\sum_{i=1}^d A^iXA^{i*}.$$\n\nHere complete positivity means that for every integer $q\\ge1$, the amplified map $\\operatorname{id}_{M_q}\\otimes\\mathcal E$ sends positive semidefinite matrices to positive semidefinite matrices; a matrix is positive semidefinite when it is Hermitian and has nonnegative quadratic form on every vector.\n\nThe tensor is injective at length $L\\ge1$ when the matrices $A^{i_1}\\cdots A^{i_L}$, over all $i_1,\\ldots,i_L\\in\\{1,\\ldots,d\\}$, span the full vector space $M_D(\\mathbb C)$. No injectivity or transfer-spectrum condition is assumed by this definition.\n\nFor each block length $L\\ge1$, define the blocked boundary map\n\n$$\\Gamma_L:M_D(\\mathbb C)\\to(\\mathbb C^d)^{\\otimes L},\\qquad \\Gamma_L(X):=\\sum_{i_1,\\ldots,i_L=1}^d\\operatorname{tr}(XA^{i_1}\\cdots A^{i_L})\\,|i_1\\rangle\\otimes\\cdots\\otimes|i_L\\rangle,$$\n\nwhere $\\operatorname{tr}(Y):=\\sum_{a=1}^D Y_{aa}$. Let $P_L$ be the orthogonal projection onto $\\operatorname{im}\\Gamma_L$, set $h_L:=I-P_L$, and, for $N\\ge L$, define the open-chain parent Hamiltonian\n\n$$H_{N,L}:=\\sum_{j=1}^{N-L+1}I^{\\otimes(j-1)}\\otimes h_L\\otimes I^{\\otimes(N-j-L+1)}.$$\n\nEach local term is positive semidefinite with kernel $\\operatorname{im}\\Gamma_L$, and $H_{N,L}$ annihilates every finite open MPS formed from the same translation invariant tensor. Every nonzero such vector is a zero-energy ground state of $H_{N,L}$. This definition asserts no uniqueness of that ground state and no spectral-gap bound.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qsmx-transfer-infinite-state",
+          "source_section": "Definition",
+          "quote": "Fix integers $d,D\\ge1$ and a translation invariant tensor $A^1,\\ldots,A^d\\in M_D(\\mathbb C)$ with transfer map $\\mathcal E(X):=\\sum_iA^iXA^{i*}$. A matrix is positive semidefinite when it is Hermitian with nonnegative quadratic form on every vector. Let $\\rho,\\ell\\in M_D(\\mathbb C)$ be positive semidefinite matrices satisfying\n\n$$\\operatorname{tr}\\rho=1,\\qquad \\mathcal E(\\rho)=\\rho,\\qquad \\mathcal E^*(\\ell)=\\ell,\\qquad \\operatorname{tr}(\\ell\\rho)=1,$$\n\nwhere $\\mathcal E^*(Y):=\\sum_iA^{i*}YA^i$, equivalently the trace-pairing adjoint determined by $\\operatorname{tr}(Y\\mathcal E(X))=\\operatorname{tr}(\\mathcal E^*(Y)X)$. For a contiguous block of $k\\ge1$ sites, write $I=(i_1,\\ldots,i_k)$ and $J=(j_1,\\ldots,j_k)$ for physical multi-indices, let $e_I$ be its ordered standard product basis, put $O_{I,J}:=\\langle Oe_J,e_I\\rangle$ for $O\\in M_{d^k}(\\mathbb C)$, and set $A^I:=A^{i_1}\\cdots A^{i_k}$. Define the transfer insertion map and local expectation by\n\n$$\\mathcal E_O(X):=\\sum_{I,J}O_{I,J}A^JX(A^I)^*,\\qquad \\omega_k(O):=\\operatorname{tr}(\\ell\\mathcal E_O(\\rho)).$$\n\nFor any finite nonempty $\\Lambda\\subset\\mathbb Z$ and local observable $O\\in\\mathcal A_\\Lambda$, embed $O$ into the interval $[\\min\\Lambda,\\max\\Lambda]$ by inserting identities at missing sites and evaluate the same formula. For the empty region set $\\omega_\\varnothing(cI):=c$. These definitions give compatible positive normalized local functionals. Their unique density matrices $\\rho_\\Lambda$ obey $\\operatorname{Tr}_{\\Lambda'\\setminus\\Lambda}(\\rho_{\\Lambda'})=\\rho_\\Lambda$ whenever $\\Lambda\\subseteq\\Lambda'$. Assume Countable Choice. The transfer-generated infinite-chain state is the unique infinite algebraic state $\\omega$ on the norm-completed quasi-local spin algebra whose restriction to every finite region is the defined local functional. No infinite tensor-product Hilbert space is selected.\n\nFor observables $O_A\\in M_{d^a}(\\mathbb C)$ and $O_B\\in M_{d^b}(\\mathbb C)$ on two fixed consecutive blocks, with $g\\ge0$ identity sites between the blocks, the connected correlation is\n\n$$\\omega(O_A\\otimes I^{\\otimes g}\\otimes O_B)-\\omega(O_A)\\omega(O_B).$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Each $A^i$ is the diagonal projection $E_{ii}$. A product $A^{i_1}\\cdots A^{i_N}$ is zero if the word contains both $0$ and $1$, and is $E_{00}$ or $E_{11}$ for the two constant words. Its trace is therefore one exactly for those two words and zero otherwise, proving the unnormalized periodic vector formula. The two basis vectors $|0^N\\rangle$ and $|1^N\\rangle$ are orthonormal, so its squared norm is $2$ and the stated normalization follows.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "On the matrix-unit basis, $\\mathcal E(E_{00})=E_{00}$, $\\mathcal E(E_{11})=E_{11}$, and $\\mathcal E(E_{01})=\\mathcal E(E_{10})=0$; hence its eigenvalue $1$ has algebraic multiplicity exactly two. Also $\\mathcal E(\\rho)=\\rho$, $\\mathcal E^*(\\ell)=\\ell$, and $\\operatorname{tr}(\\ell\\rho)=1$, so [F2] applies under [A1]. The insertion for $Z$ is $\\mathcal E_Z(X)=A^0XA^{0*}-A^1XA^{1*}$, whence $\\mathcal E_Z(\\rho)=(E_{00}-E_{11})/2$, $\\mathcal E^g\\mathcal E_Z(\\rho)=\\mathcal E_Z(\\rho)$, and $\\mathcal E_Z\\mathcal E^g\\mathcal E_Z(\\rho)=I_2/2$. Therefore $\\omega(Z_1)=\\operatorname{tr}(\\ell\\mathcal E_Z(\\rho))=0$ and $\\omega(Z_1I^{\\otimes g}Z_{g+2})=\\operatorname{tr}(\\ell I_2/2)=1$ for every $g\\ge0$. Subtracting the product of the one-point expectations gives connected correlation $1$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example fixes a two-dimensional site space and ring lengths N>=2."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly shows mixed words have zero amplitude; their zero coefficients are part of the computation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 includes the adjacent-block case g=0 and the rank-one diagonal projectors."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 computes the two-dimensional fixed eigenspace at eigenvalue 1 exactly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 proves the correlation value for every integer gap g>=0, including g=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example: The infinite transfer-state use carries only the Countable Choice hypothesis A1; all matrix computations are explicit and finite."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example asserts no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/qsm_boundary (scientific owner; no independent acceptance)",
+            "reason": "The two diagonal tensor projections retain the two constant words and two transfer fixed directions; the normalized infinite transfer state has a constant connected Z correlation. The example computes failure of decay without a converse for general noninjective tensors.",
+            "item_sha256": "ef95947157712656f420407be395c7018658c4005df52f4a2e95b18ec926ec49",
+            "row_sha256": "a5072be23b5bfb7ac8e0aafab204b5529e8851df50371b28f2fb987fa2619bb6"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example asserts no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/qsm_boundary (scientific owner; no independent acceptance)",
+            "reason": "The two diagonal tensor projections retain the two constant words and two transfer fixed directions; the normalized infinite transfer state has a constant connected Z correlation. The example computes failure of decay without a converse for general noninjective tensors.",
+            "item_sha256": "ef95947157712656f420407be395c7018658c4005df52f4a2e95b18ec926ec49",
+            "row_sha256": "77756435c13a762ce71040cdd7a689e2d5dce488291672d43c3d1f4e1e39c801"
+          }
+        }
+      ]
+    }
+  }
+}

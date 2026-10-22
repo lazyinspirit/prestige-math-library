@@ -1,0 +1,119 @@
+# Current QFT boundary review
+
+Read-only, seven complete current sources and seventeen exact scoped candidates. All source, audit and semantic-contract guards matched before reading and after proposal preparation. No production source, contract, native artifact, stamp or certification was changed.
+
+Four corrections change only inaccurate/generic reasons: the compact support-overlap lemma is a compactness implication, not a construction/uniqueness result; the two fixed-scalar problems have no varying one-element/rank parameter. All four not_applicable statuses are preserved. The other thirteen rows are upheld with distinct source-specific argument checks.
+
+## def-qftx-kz-connection — iff-forward
+
+UPHOLD: Given the semisimple Lie algebra, finite representations, noncolliding insertion points and nonzero kappa, the displayed formula constructs a connection. The forward argument is the Leibniz calculation, not one direction of a claimed classification equivalence.
+
+Support: Proof 2.1: Thus $\nabla=d-A$ is a connection on the stated trivial bundle.
+
+## def-qftx-kz-connection — iff-reverse
+
+UPHOLD: No converse recovers semisimple representation data or the pair Casimirs from an arbitrary connection. Dual-basis independence and smoothness justify this prescribed construction; they do not define a necessary-and-sufficient property of all connections.
+
+Support: Proof 1.1: Changing the $B$-dual bases leaves $\Omega$ unchanged by [F3]; Definition: the **Casimir Knizhnik–Zamolodchikov connection**
+
+## ex-qftx-two-insertion-monodromy — iff-forward
+
+UPHOLD: The example computes positive-loop transport from one fixed logarithmic ODE and exhibits a nonunitary eigenvalue at kappa=i. It does not assert a necessary-and-sufficient condition on kappa for unitarity.
+
+Support: Verification 2.1: $P_\gamma=\exp(2\pi i\Omega_{12}/\kappa)$; Verification 4.1: has eigenvalue $\exp(2\pi i(1/8)/i)=e^{\pi/4}$
+
+## ex-qftx-two-insertion-monodromy — iff-reverse
+
+UPHOLD: The inverse transport is used only to convert the first-then-second loop convention to a left action. That inverse relationship is a convention identity, not a converse unitarity theorem or a characterization of all monodromy operators.
+
+Support: Verification 3.1: the left representation convention agrees with [F2] while the right action uses $P_\gamma$.; Verification 4.1: Its inverse has eigenvalue $e^{-\pi/4}$ and is also nonunitary.
+
+## lem-qftx-casimir-tensor-diagonal-invariance — iff-forward
+
+UPHOLD: Under the supplied invariant nondegenerate Killing form, Phi_B sends the canonical tensor to I. The two adjoint-action images cancel and injectivity proves the claimed tensor identity. The lemma asserts this implication, not an iff.
+
+Support: Proof 1.1: $\Phi_B(\Omega)=I_{\mathfrak g}$; Proof 3.1: Since $\Phi_B$ is injective by step 1.1, the sum of tensors is zero.
+
+## lem-qftx-casimir-tensor-diagonal-invariance — iff-reverse
+
+UPHOLD: The isomorphism Phi_B is an intermediate finite-dimensional identification. There is no converse that an arbitrary invariant tensor determines this Killing form or that diagonal invariance characterizes complex semisimplicity.
+
+Support: Statement: The tensor $\Omega:=\sum_a x_a\otimes x^a; Proof 3.1: this is the diagonal adjoint invariance of the canonical Casimir tensor.
+
+## lem-qftx-compact-green-support-overlap — iff-forward
+
+CORRECT: The inapplicable-iff status is sound, but calling this lemma a construction/uniqueness statement misdescribes its actual public compactness implication. The proof encloses the causal overlap in finitely many compact point diamonds; it constructs no Green operator and proves no uniqueness claim.
+
+Support: Statement: More generally every closed subset of $J^+(K)\cap J^-(L)$ is compact.; Proof 2.1: Every closed subset of the left side is a closed subset of this compact union and therefore compact by [F2].
+
+Exact replacement reason: The lemma proves compactness of closed subsets of the stated causal overlap under its globally hyperbolic geometric hypotheses; it asserts no biconditional characterization.
+
+## lem-qftx-compact-green-support-overlap — iff-reverse
+
+CORRECT: No converse derives global hyperbolicity, compactness of K/L, or closedness of causal futures from one compact overlap. The template phrase construction/uniqueness is inaccurate here; the result is a one-way compact enclosure argument.
+
+Support: Statement: This assertion requires no Green maps and does not assume that $J^\pm(K)$ themselves are closed.; Proof 2.1: The right side is a finite union of compact diamonds by [F1].
+
+Exact replacement reason: The compact-overlap conclusion is one-way: no converse from compactness of a particular overlap to the global geometry or to closedness of causal futures is asserted.
+
+## lem-qftx-smooth-scalar-cauchy-evolution — one
+
+CORRECT: Keep not_applicable, but replace the generic one-equivalence wording. The unknown is already one real scalar field on a four-manifold; neither a variable bundle rank nor a one-element carrier is a parameter. The five first-order components (and auxiliary source variable) are a reduction of that same scalar equation.
+
+Support: Statement: there is a unique smooth solution; Proof 1.2: $U=(u,v,w_1,w_2,w_3)$; Proof 2.1: append the scalar $z$ with $z_t=0$
+
+Exact replacement reason: The problem already fixes one real scalar unknown on a Lorentzian four-manifold. No variable rank, insertion count, or one-element carrier is part of the claim; the first-order component vector is only a reduction of that scalar equation.
+
+## lem-qftx-smooth-scalar-cauchy-evolution — iff-forward
+
+UPHOLD: The public result constructs and estimates the Cauchy solution under the stated geometry and CC+DC; it does not characterize which geometries admit such evolution. The proof equivalence between the constrained first-order reduction and Pu=f, and the exact causal-covector condition for flux positivity, are local reductions inside that forward construction.
+
+Support: Proof 1.2: the displayed expansion proves equivalence with $Pu=f$.; Proof 2.2: its condition is exactly the future causal covector condition
+
+## lem-qftx-smooth-scalar-cauchy-evolution — iff-reverse
+
+UPHOLD: Uniqueness follows by applying finite metric-cone energy and compact causal-past propagation to differences. It is not a converse deducing global hyperbolicity, the splitting or Choice assumptions from uniqueness. The local first-order equivalence does not turn the public existence theorem into an iff.
+
+Support: Proof 3.1: Applying this to differences proves global uniqueness, even for smooth solutions with no support assumption; Proof 4.1: Repeat over the countable slabs $[a-n,a+n]$
+
+## prop-qftx-helicity-chern-obstruction — empty
+
+UPHOLD: The flagged sum is the two-term sum over i!=j in the fixed three-coordinate graph-chart formula; it cannot be an empty indexed aggregate. The base S2 and the two sigma labels are fixed and nonempty, and F1 gives a rank-one fiber at every point. Thus no empty-base or empty-fiber boundary is admitted.
+
+Support: Statement: for $j\in\{1,2,3\}$ and $\varepsilon\in\{+1,-1\}$; Statement: n_j=\varepsilon\sqrt{1-\sum_{i\ne j}n_i^2}; Facts F1: a smooth rank-one orthogonal projection
+
+## prop-qftx-helicity-chern-obstruction — iff-forward
+
+UPHOLD: The actual exactly-when sentence defines the outward orientation of an ordered tangent basis by u cross v=lambda n, lambda>0. It does not assert an iff between Berry/Chern flux and existence of a global section. The proposition computes flux and derives nonexistence by contradiction in one direction.
+
+Support: Statement: an ordered tangent basis $(u,v)$ is positive exactly when $u\times v=\lambda\mathbf n$ for some real $\lambda>0$; Proof 3.1: This contradicts $\int_{S^2}F_\sigma=4\pi\sigma\ne0$
+
+## prop-qftx-helicity-chern-obstruction — iff-reverse
+
+UPHOLD: The reverse direction of the orientation convention simply assigns positive orientation to the stated tangent basis. The proposition makes no converse claiming that zero flux suffices for a global helicity section, and no converse claim about triviality of the rank-two transverse bundle.
+
+Support: Statement: This obstruction concerns each line separately and makes no nontriviality claim about the rank-two transverse complex bundle.; Remarks: both numbers are nonzero and give the same obstruction.
+
+## thm-qftx-green-hyperbolic-existence — one
+
+CORRECT: Keep not_applicable, but identify this scalar operator theorem rather than a generic cardinality boundary. The domain and target are real scalar smooth-function spaces on a four-manifold; the advanced and retarded maps are a fixed pair, with no varying rank or number-of-maps parameter.
+
+Support: Statement: $E_+,E_-:C_c^\infty(M;\mathbb R)\to C^\infty(M;\mathbb R)$; Proof 1.1: Reversing time constructs $E_-f$
+
+Exact replacement reason: The statement fixes real scalar test functions on a Lorentzian four-manifold and the two advanced/retarded maps. It has no varying rank, insertion count, or one-element carrier parameter.
+
+## thm-qftx-green-hyperbolic-existence — iff-forward
+
+UPHOLD: The public statement constructs the two Green maps and proves their identities, support, continuity and uniqueness. Proof3.1 does contain precisely when, but only for the defining LF inductive-limit continuity criterion: a linear map is continuous iff every fixed-compact restriction is continuous. That contextual topology criterion is not a Green-existence/global-hyperbolicity biconditional.
+
+Support: Proof 3.1: a linear map into the locally convex space $C^\infty(M)$ is continuous precisely when all such restrictions are continuous.; Statement: No Green-map existence or scalar Cauchy solvability is assumed.
+
+## thm-qftx-green-hyperbolic-existence — iff-reverse
+
+UPHOLD: The LF continuity criterion has its ordinary reverse implication as a topology construction, but the theorem asserts no converse from one pair of Green maps to global hyperbolicity or the geometric input hypotheses. The actual map-uniqueness argument compares equal-source solutions with common zero Cauchy data.
+
+Support: Proof 2.1: proving uniqueness of the maps.; Proof 3.1: No sequential-continuity substitute or unsupported closed-graph argument is used.
+
+The helicity positive-basis iff is an orientation definition, not a triviality classification. The Green-map continuity iff is the LF-topology criterion, not a converse to the globally hyperbolic existence theorem. These real contextual equivalences were inspected rather than denied by a keyword rule.
+
+No new scientific source gap was identified in these scoped boundary cases. This is not a claim to have independently re-proved every transitive analytic or geometric supplier. No external source retrieval was performed. Root owns applying any reason changes, current hashes and certification.

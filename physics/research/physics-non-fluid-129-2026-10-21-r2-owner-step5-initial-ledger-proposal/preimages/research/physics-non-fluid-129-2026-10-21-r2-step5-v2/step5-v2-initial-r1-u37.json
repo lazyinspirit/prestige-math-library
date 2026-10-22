@@ -1,0 +1,106 @@
+{
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "phase": "initial",
+  "round": 1,
+  "unit": "37",
+  "input_sha256": "eaf0a68d231b0a7d0d042df337974eaab597dfd3432daa3ad0aaeebd32fe188c",
+  "decisions": [
+    {
+      "id": "ex-gr-fx09-1",
+      "model": "gpt-6-luna",
+      "context_sha256": "e4c5d682fb0b7b985de4d73256967f201e71571473f751af0bf67596ec94c797",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The original step 3.1 applied F10 after supplying only scalar smallness and margins, omitting a maximal solution and its problem-specific continuation criterion. E=0 on [0,1), E0=0 and constant margins satisfy the scalar data for positive A, epsilon, delta, C with eta>2A epsilon^2, while the declared endpoint remains 1. Those data therefore do not imply an infinite solution lifespan. The repair makes all solution and continuation assumptions explicit before invoking F10.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "ex-gr-fx09-1",
+      "disposition": "repaired",
+      "post_sha256": "5d49c67f434d10f1b8e026eca5b1ab4d04b5f7a7192f37f22090eaac7c0df2c5",
+      "review_context_sha256": "21b614edda284ee1213742a608ba223a6f183fd86e910f6bcea6d5303b1f212f",
+      "reason": "Checked the complete scalar argument and exact statements of all ten direct suppliers: Gronwall applies to continuous nonnegative E and kernel with constant nondecreasing a=E0; the positive-base primitive has continuous derivative and FTC applies for t>0, with the zero endpoint separate. Exponential positivity and monotonicity yield the uniform bound, including E0=0. Strict smallness gives the required improvement. Repaired F9, F10 and step 3.1 now require E to be a maximal solution energy, the separate finite-endpoint criterion and all margin bounds before deducing Tmax=infinity. This is an author repair review, not independent acceptance.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "id": "ex-gr-fx09-1",
+      "status": "fixed",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "location": "Facts F9/F10 and Verification 3.1",
+      "reason": "The original step 3.1 applied F10 after supplying only scalar smallness and margins, omitting a maximal solution and its problem-specific continuation criterion. E=0 on [0,1), E0=0 and constant margins satisfy the scalar data for positive A, epsilon, delta, C with eta>2A epsilon^2, while the declared endpoint remains 1. Those data therefore do not imply an infinite solution lifespan. The repair makes all solution and continuation assumptions explicit before invoking F10.",
+      "repair": "Restored the full maximal-solution and finite-endpoint continuation hypotheses in the F9/F10 restatements and explicitly assumed them in step 3.1 before applying F10. The scalar claim and all dependency interfaces remain unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "supporting_evidence": {
+    "research/physics-non-fluid-129-2026-10-21-r2-batch-37-step5-context.json": "d7b8dada07a58a18c02003747c4dccca5cf0f998ba04f166e0a31203a0fe3912"
+  },
+  "repair_notes": {
+    "items": [
+      "ex-gr-fx09-1"
+    ],
+    "claim_and_conventions": "Pure mathematical scalar estimate on [0,Tmax), continuous E>=0, E0>=0, C,epsilon,delta>0, dimensionless variables and thresholds; no empirical input or Einstein decay assertion. Preserve the complete Example and all dependencies.",
+    "sources_checked": [
+      "items/ex-gr-fx09-1.md: complete carrier",
+      "items/def-gr-fx-bootstrap-continuation-contract.md: complete Definition and Remarks",
+      "items/thm-gr-fx-bootstrap-closure.md: complete Statement, Facts and Proof",
+      "items/thm-gronwall-integral-inequality.md: Statement",
+      "items/def-real-power.md: Definition",
+      "items/thm-real-power-continuity-and-derivatives.md: Statement",
+      "items/thm-chain-rule.md: Statement",
+      "items/thm-ftc-second-part.md: Statement",
+      "items/cor-exponential-reciprocal-and-positivity.md: Statement",
+      "items/thm-exponential-is-strictly-increasing.md: Statement",
+      "items/def-real-exponential-function-and-e.md: Definition"
+    ],
+    "source_limits": "No external source retrieval performed or claimed. The scalar argument and conditional continuation reasoning are familiar; no PDE continuation theorem or transitive GR supplier is independently certified. The Step-4 digest was read as context and its earlier acceptance does not override the present finding. The support index has no entry for this subject and no supplement was present.",
+    "interface_change": false,
+    "interface_evidence": "Only Facts F9/F10 and Verification 3.1 changed; the complete Example section, its references, and all metadata/dependencies are byte-identical. No Statement, Definition, physical scope or empirical qualification changes. No downstream examination is triggered.",
+    "diagrams": "No TikZ or tikzcd diagrams occur in the assigned item, and none is needed for this scalar inequality.",
+    "validation": [
+      {
+        "command": "node tools/physics-support/tsx-run.mjs tools/physics-support/precheck.mts items/ex-gr-fx09-1.md",
+        "exit_code": 0,
+        "result": "PASS; 1 checked, 0 failing.",
+        "status": "pass"
+      },
+      {
+        "command": "node tools/physics-support/rendercheck.mjs items/ex-gr-fx09-1.md",
+        "exit_code": 0,
+        "result": "OK; 1 file, YAML and all math spans parse.",
+        "status": "pass"
+      },
+      {
+        "command": "node tools/physics-support/proof-contract.mjs research/physics-non-fluid-129-2026-10-21-r2-batch-37.proof-contracts.json --strict --items ex-gr-fx09-1",
+        "exit_code": 0,
+        "result": "0 errors, 0 warnings; 1/1 items checked.",
+        "status": "pass"
+      },
+      {
+        "command": "node tools/physics-support/proof-layout.mjs items/ex-gr-fx09-1.md",
+        "exit_code": 0,
+        "result": "1 item, 3 steps, 0 defects.",
+        "status": "pass"
+      }
+    ],
+    "unresolved_obligations": [],
+    "next_action": "Handoff to the controller for collection and the ordinary subsequent rejudgment/closure workflow; no judge, stamp, certificate, or round state was written.",
+    "metadata_repair": "Under the shared-write lock, reread the current owning batch-37 proof-contract file and surgically replaced only ex-gr-fx09-1 derivation 3.1 claim with the repaired proof text. All other contract rows and historical independent reviews were preserved; the temporary scoped update script was removed.",
+    "published_ledger_updates": "None: the assigned carrier and both bootstrap suppliers are draft, the repair changes no interface, and no new published-consumer defect was established. The digest's unrelated published-supplier alert is preserved as preexisting read-only context, not independently adjudicated here."
+  }
+}

@@ -1,0 +1,273 @@
+{
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "phase": "initial",
+  "round": 1,
+  "unit": "94",
+  "input_sha256": "eaf0a68d231b0a7d0d042df337974eaab597dfd3432daa3ad0aaeebd32fe188c",
+  "decisions": [
+    {
+      "id": "def-csm-frontier-finite-rate-process",
+      "model": "gpt-6-luna",
+      "context_sha256": "5853a4bc5016b42affa97c3ab6960d7cc2542196247d972acedb911eed74de31",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The random-element supplier requires a measurable codomain, but the Definition omitted its sigma-algebra. Explicitly supplied the usual discrete sigma-algebra P(E) and measurable maps; the finite-state rate convention and all claims are preserved. Also cited the second FTC for integration of the survival derivative.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-csm-frontier-finite-jump-feynman-kac",
+      "model": "gpt-6-luna",
+      "context_sha256": "a67556917cd4a11f50af38c881c1b7261a885a12ac9785ba39c062ae6f066ac7",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The original fixed-start right-hand expansion proves neither left continuity nor a remainder estimate as its starting time approaches t from below. Thus step 2.1 did not establish the claimed two-sided differentiability. Repaired with an explicit uniform increment bound and uniform short-time remainder, preserving the entire Statement.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-csm-frontier-finite-rate-process",
+      "disposition": "repaired",
+      "post_sha256": "93c0a5be99628084b52fdd8d7d652f4e10f4823f81a0639bc99d2821798aa7d2",
+      "review_context_sha256": "934f7c627a0dbe6b0f40d3a703d2761891aa406af2b86cee2cc57754c326c322",
+      "reason": "Checked the entire Definition against its exact probability, random-element, measure, integral, exponential and chain-rule suppliers. P(E) is a sigma-algebra and makes singleton events measurable. H is C1 with derivative -lambda H, whose continuous integrability permits the second FTC normalization. Singleton E, zero rates, terminal time and T=0 preserve unit no-jump mass. No existence theorem or physical realization is asserted.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-csm-frontier-finite-jump-feynman-kac",
+      "disposition": "repaired",
+      "post_sha256": "f2ac386bc1c21907eabbc6e719238533936f8ef6ddeb2e7213979d4a88e7b1af",
+      "review_context_sha256": "e91b53331b06a0a91e93f2311b699e2971cccc3b8bbb75684f4043de4745264e",
+      "reason": "Reviewed the complete weighted endpoint deduction using the repaired measurable state space and actual path-density supplier. Bounded piecewise continuous path integrands give measurable integrable weights. The bound |G_y(v)-G_y(u)| <= exp(KT)(exp(Kh)-1+Mh) gives closed-interval continuity. A common modulus of continuity and conditional two-jump bound make the expansion uniform in its starting time, justifying the left derivative and both endpoints. The second FTC now supplies the integral equation; the explicit induced matrix norm and factorial induction prove uniqueness, including zero coefficients. T=0 remains value-only. This is author repair review, not independent certification.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "lem-csm-frontier-finite-jump-path-density",
+    "thm-csm-frontier-finite-rate-forward-equation",
+    "def-csm-frontier-stationary-path-entropy",
+    "lem-csm-frontier-finite-rate-jump-count-expectation",
+    "lem-csm-frontier-finite-jump-feynman-kac",
+    "thm-csm-frontier-finite-path-fluctuation",
+    "thm-csm-frontier-finite-jarzynski",
+    "ex-csm-frontier-biased-ring-entropy"
+  ],
+  "repair_notes": {
+    "completed": [
+      "Definition repaired and owning manifest/contract mirrors updated under shared lock; strict scoped contract validation passed; native current review hashes recorded.",
+      "Feynman-Kac repaired, canonical step numbering adopted after precheck diagnostic, owning contract/manifest refreshed under lock, current native review hashes recorded, and all scoped validators passed."
+    ],
+    "pending": [],
+    "source_reading": "Local exact suppliers only; no external retrieval claimed. Support index has no entry for either assigned subject.",
+    "consumer_reviews": [
+      {
+        "supplier": "def-csm-frontier-finite-rate-process",
+        "id": "lem-csm-frontier-finite-jump-path-density",
+        "path": "items/lem-csm-frontier-finite-jump-path-density.md",
+        "location": "Facts F1; Proof 1.1-1.2",
+        "affected_use": "conditional on state $x$ at time $s$ the next-jump survival is $H_x(s,t)=\\exp(-\\int_s^t\\lambda_x(u)\\,du)$",
+        "disposition": "remains_sound",
+        "reason": "Multiplication of holding-time factors and the rate-sum tail bound use the same normalized conditional law. Adding P(E) makes the state events explicit; all density and nonexplosion conclusions remain sound.",
+        "interface_induced_repair_needed": false
+      },
+      {
+        "supplier": "def-csm-frontier-finite-rate-process",
+        "id": "thm-csm-frontier-finite-rate-forward-equation",
+        "path": "items/thm-csm-frontier-finite-rate-forward-equation.md",
+        "location": "Facts F1; Proof 1.1",
+        "affected_use": "the no-jump survival over $[t,t+h]$ is $\\exp(-\\int_t^{t+h}\\lambda_x(s)\\,ds)$",
+        "disposition": "remains_sound",
+        "reason": "Its marginal events and conditional expansions use the discrete state sigma-algebra and unchanged jump rule. The interface clarification does not alter its equation. The separate existing second-FTC citation gap in Proof 2.1 is referred below.",
+        "interface_induced_repair_needed": false
+      },
+      {
+        "supplier": "def-csm-frontier-finite-rate-process",
+        "id": "def-csm-frontier-stationary-path-entropy",
+        "path": "items/def-csm-frontier-stationary-path-entropy.md",
+        "location": "Definition, measurable entropy path strata",
+        "affected_use": "Its Borel preimages are countable unions of measurable path strata indexed by jump number and finite state sequence",
+        "disposition": "remains_sound",
+        "reason": "Discrete measurable coordinate events support exactly the same finite-state path strata and entropy random variable. No logarithm, null-set convention or probability law changes.",
+        "interface_induced_repair_needed": false
+      },
+      {
+        "supplier": "def-csm-frontier-finite-rate-process",
+        "id": "lem-csm-frontier-finite-rate-jump-count-expectation",
+        "path": "items/lem-csm-frontier-finite-rate-jump-count-expectation.md",
+        "location": "Facts F1; Proof 2.1 and 3.1",
+        "affected_use": "the Markov property factors its path density into the prefix density through state $x$, the transition factor",
+        "disposition": "remains_sound",
+        "reason": "The prefix/suffix factorization, no-jump survival and continuity bound for p_x all retain their hypotheses. P(E) makes their endpoint events measurable without changing the count expectation.",
+        "interface_induced_repair_needed": false
+      },
+      {
+        "supplier": "def-csm-frontier-finite-rate-process",
+        "id": "lem-csm-frontier-finite-jump-feynman-kac",
+        "path": "items/lem-csm-frontier-finite-jump-feynman-kac.md",
+        "location": "Facts F1; repaired Proof 1.1-2.1",
+        "affected_use": "conditional on state $x$ at time $t$, no-jump survival over $[t,t+h]$ is",
+        "disposition": "remains_sound",
+        "reason": "Reviewed here under the clarified measurable state space. The unchanged rate rule supplies the new increment bound and conditional expansion; its separately assigned proof defect is repaired without a Statement change.",
+        "interface_induced_repair_needed": false
+      },
+      {
+        "supplier": "def-csm-frontier-finite-rate-process",
+        "id": "thm-csm-frontier-finite-path-fluctuation",
+        "path": "items/thm-csm-frontier-finite-path-fluctuation.md",
+        "location": "Facts F1; Proof 1.2",
+        "affected_use": "a time-homogeneous finite-state process has row generator $Q_{xy}=q_{xy}$ for $x\\ne y$",
+        "disposition": "remains_sound",
+        "reason": "The same generator, finite-state path law and holding factors support its reversal density ratio. P(E) only specifies the existing coordinate events; reversal and entropy formulas are unaffected.",
+        "interface_induced_repair_needed": false
+      },
+      {
+        "supplier": "def-csm-frontier-finite-rate-process",
+        "id": "thm-csm-frontier-finite-jarzynski",
+        "path": "items/thm-csm-frontier-finite-jarzynski.md",
+        "location": "Statement; Facts F1-F2; Proof 1.2 and 2.1",
+        "affected_use": "Apply [F2] with potential $V_y(t)=\\beta E'_y(t)$ and initial law $\\pi_0$",
+        "disposition": "remains_sound",
+        "reason": "Its process assumption inherits the explicit discrete sigma-algebra; its application of the unchanged Feynman-Kac Statement still has continuous potential beta E-prime and matching initial vector. The separate existing common-shift FTC citation gap is referred below.",
+        "interface_induced_repair_needed": false
+      },
+      {
+        "supplier": "def-csm-frontier-finite-rate-process",
+        "id": "ex-csm-frontier-biased-ring-entropy",
+        "path": "items/ex-csm-frontier-biased-ring-entropy.md",
+        "location": "Facts F1; Verification 1.1 and 1.3",
+        "affected_use": "from each state $i$, the only transitions are $i\\to i+1$ at rate $a$ and $i\\to i-1$ at rate $b$",
+        "disposition": "remains_sound",
+        "reason": "The finite ring has the discrete measurable structure and the same two outgoing rates, with N>=3 making the destinations distinct. Stationarity, detailed balance and entropy increments are unchanged.",
+        "interface_induced_repair_needed": false
+      }
+    ],
+    "page_uses": [
+      {
+        "id": "csm-frontier-fluctuation-theorems",
+        "path": "library/classical-statistical-mechanics/csm-frontier-fluctuation-theorems.md",
+        "affected_use": "The frontmatter inventory places the changed rate-process definition before all finite-state path and fluctuation items.",
+        "disposition": "unaffected",
+        "reason": "The page has no prose body or additional mathematical claim. Its inventory and page prerequisites remain valid."
+      }
+    ],
+    "interface_comparison": {
+      "def-csm-frontier-finite-rate-process": "Definition changed only to specify P(E), measurable coordinate maps, and the exact second-FTC normalization justification; the rate/path law is preserved.",
+      "lem-csm-frontier-finite-jump-feynman-kac": "Statement unchanged byte-for-byte; changes occur only in proof, Facts, dependency metadata and owning contract. No additional downstream propagation originates here."
+    },
+    "metadata_paths": [
+      "research/physics-non-fluid-129-2026-10-21-r2-batch-94.proof-contracts.json",
+      "research/physics-non-fluid-129-2026-10-21-r2-batch-94.pages.json"
+    ],
+    "metadata_changes": "Surgical locked updates mirror only the two assigned dependency lists/roles, the clarified Definition, repaired proof derivations/citation uses and endpoint boundary evidence. Existing independent review evidence was retained. No shared ledger, judge stamp or certificate was written.",
+    "diagrams": "Neither assigned item contains TikZ/tikzcd; no diagram is required for these scalar finite-state arguments.",
+    "focused_checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/physics-support/precheck.mts items/def-csm-frontier-finite-rate-process.md items/lem-csm-frontier-finite-jump-feynman-kac.md",
+        "exit_code": 0,
+        "output": "1 proof-bearing item checked, 0 failing; definition correctly skipped."
+      },
+      {
+        "command": "node tools/physics-support/rendercheck.mjs items/def-csm-frontier-finite-rate-process.md items/lem-csm-frontier-finite-jump-feynman-kac.md",
+        "exit_code": 0,
+        "output": "2 files; all math and YAML parse; no delimiter defects."
+      },
+      {
+        "command": "node tools/physics-support/proof-contract.mjs research/physics-non-fluid-129-2026-10-21-r2-batch-94.proof-contracts.json --strict --items def-csm-frontier-finite-rate-process,lem-csm-frontier-finite-jump-feynman-kac",
+        "exit_code": 0,
+        "output": "0 errors, 0 warnings, 2/2 checked."
+      },
+      {
+        "command": "node tools/physics-support/proof-layout.mjs items/def-csm-frontier-finite-rate-process.md items/lem-csm-frontier-finite-jump-feynman-kac.md",
+        "exit_code": 0,
+        "output": "2 items, 4 steps, 0 defects; run after final item edit."
+      },
+      {
+        "command": "node tools/physics-support/depcheck.mjs --items-file /tmp/u94-items.json",
+        "exit_code": 0,
+        "output": "2 selected items; prerequisite cycle checks cover 610 items and 118 pages; selected checks passed.",
+        "selected_items": [
+          "def-csm-frontier-finite-rate-process",
+          "lem-csm-frontier-finite-jump-feynman-kac"
+        ]
+      }
+    ],
+    "validation_history": "Initial precheck requested canonical phase numbering; adopted 1.1,2.1,3.1,4.1 with all references and contract mirrors updated, then repeated the affected validators successfully. No mathematics or Statement changed in that formatting correction.",
+    "authoritative_local_suppliers": [
+      "items/def-random-element-and-real-random-variable.md: Definition (measurable codomain requirement)",
+      "items/def-probability-measure.md: Definition (probability space)",
+      "items/lem-csm-frontier-finite-jump-path-density.md: entire Statement and Proof (density, short-interval tail and nonexplosion)",
+      "items/thm-ftc-first-part.md: Statement (derivative of integral function, including endpoints)",
+      "items/thm-ftc-second-part.md: entire Statement and Proof (integral of integrable derivative, endpoint increment)",
+      "items/thm-chain-rule.md: Statement",
+      "items/thm-derivative-of-exponential.md: Statement",
+      "items/def-countable-choice.md: Definition",
+      "items/def-lebesgue-measure-and-the-lebesgue-sigma-algebra.md: Definition",
+      "items/thm-lebesgue-measure-is-a-complete-measure.md: Statement",
+      "items/def-oriented-integral.md: Definition",
+      "items/thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral.md: Statement",
+      "items/def-expectation-of-a-nonnegative-or-integrable-random-variable.md: Definition"
+    ],
+    "unresolved_obligations": "No unresolved mathematical uncertainty remains in the two assigned items. Unassigned preexisting citation gaps are explicit owner referrals, not repaired or certified here. Native rejudgment and round closure remain controller duties."
+  },
+  "ledger_updates": {
+    "defect_ledger": [
+      {
+        "ledger": "research/defect-ledger.jsonl",
+        "id": "def-csm-frontier-finite-rate-process",
+        "proposed_status": "fixed",
+        "severity": "nonfatal",
+        "finding": "Random-element codomain omitted its sigma-algebra.",
+        "repair": "Explicit P(E) and measurable coordinate maps; additionally supplied the second FTC prerequisite for normalization.",
+        "evidence": "research/physics-non-fluid-129-2026-10-21-r2-step5-v2/step5-v2-initial-r1-u94.json"
+      },
+      {
+        "ledger": "research/defect-ledger.jsonl",
+        "id": "lem-csm-frontier-finite-jump-feynman-kac",
+        "proposed_status": "fixed",
+        "severity": "fatal",
+        "defect_type": "logic",
+        "finding": "Fixed-start right expansions did not establish left continuity or left derivatives.",
+        "repair": "Uniform increment estimate plus uniform conditional expansion, with second-FTC integral uniqueness justification.",
+        "evidence": "research/physics-non-fluid-129-2026-10-21-r2-step5-v2/step5-v2-initial-r1-u94.json"
+      },
+      {
+        "ledger": "research/defect-ledger.jsonl",
+        "id": "thm-csm-frontier-finite-jarzynski",
+        "proposed_status": "open",
+        "severity": "nonfatal",
+        "route": "frontier_owner",
+        "location": "Facts F4 and Proof 4.1",
+        "affected_use": "F4 attributes integral_0^T a-prime = a(T)-a(0) to thm-ftc-first-part; step 4.1 uses that endpoint evaluation for common energy shifts.",
+        "invalidated_claim": "Only the cited supplier implication is missing; the C1 energy-shift conclusion itself is valid by thm-ftc-second-part.",
+        "minimality": "Add second FTC to deps/roles and cite it in F4; preserve the complete Statement and proof calculation. Outside assigned ownership, so no item edit or adjudication performed.",
+        "evidence": "research/physics-non-fluid-129-2026-10-21-r2-step5-v2/step5-v2-initial-r1-u94.json"
+      },
+      {
+        "ledger": "research/defect-ledger.jsonl",
+        "id": "thm-csm-frontier-finite-rate-forward-equation",
+        "proposed_status": "open",
+        "severity": "nonfatal",
+        "route": "frontier_owner",
+        "location": "Facts F3 and Proof 2.1",
+        "affected_use": "Proof 2.1 converts d-prime=dQ and d(0)=0 into d(t)=integral_0^t d(s)Q(s) ds, while F3 cites only the first FTC.",
+        "invalidated_claim": "The cited first FTC supplies a derivative of an integral, but does not directly evaluate the integral of d-prime. The continuous solution has the hypotheses of the second FTC.",
+        "minimality": "Add/cite the existing second FTC for the displayed integral equation, without changing the Statement or uniqueness argument. This preexisting supplier-citation gap was observed in the direct consumer check and is referred without editing.",
+        "evidence": "research/physics-non-fluid-129-2026-10-21-r2-step5-v2/step5-v2-initial-r1-u94.json"
+      }
+    ],
+    "published_consumer_supplier_ledger": [],
+    "published_ledger_reason": "No defective published supplier or published consumer was identified. All eight direct consumers of the changed Definition are draft items in the frozen frontier; no published maintenance or outside-frontier interface event is proposed."
+  },
+  "gate_resolutions": [],
+  "supporting_evidence": {
+    "research/physics-non-fluid-129-2026-10-21-r2-batch-94-step5-context.json": "0b0705b156a745ee8317a35e73ecc7b183c053aa9e167bc1f358c1be7b6739f8"
+  }
+}

@@ -1,0 +1,101 @@
+{
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "phase": "initial",
+  "round": 1,
+  "unit": "89",
+  "input_sha256": "eaf0a68d231b0a7d0d042df337974eaab597dfd3432daa3ad0aaeebd32fe188c",
+  "decisions": [
+    {
+      "id": "lem-csm-frontier-sine-comparison",
+      "model": "gpt-6-luna",
+      "context_sha256": "78ecf851443d403449420858fe35cc6ce67fc21715522d0c1cf59fe6b1662bc2",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "Step 1.2 invoked cor-mean-value-theorem on [0,|u|] without excluding u=0, although its exact Statement requires a<b and an interior witness. At u=0 that interior is empty. The repair proves |sin 0|=0 from F1 first, then applies MVT only for |u|>0 with continuity supplied by F1 and F3; F4 now records a<b explicitly.",
+      "uncertain": false,
+      "source_urls": [
+        "https://dlmf.nist.gov/4.18"
+      ],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-csm-frontier-sine-comparison",
+      "disposition": "repaired",
+      "post_sha256": "59bc4f4f1a7c85368ed35434af64836b0ce9fd58d0239d803fbd366e76d54be8",
+      "review_context_sha256": "d574c3bbf1c2e4b3dec3ea7cac8f116cd9eee55e0112d24cfeb0d73adc894512",
+      "reason": "Checked all four proof steps against the eight current published supplier statements. The derivative hprime=t sin(t) is nonnegative on the first quadrant; MVT gives h>=0 on nondegenerate intervals. The quotient derivative is -h/t^2 for t>0, and comparison with pi/2 yields the lower chord bound, with zero and quarter-turn endpoints handled directly and parity covering negative inputs. The upper bound now separates u=0; the global Lipschitz argument already separates u=v. DLMF 4.18.1 confirms the closed-interval chord statement. The item remains purely mathematical, uses no choice principle, and contains no diagrams. This is the repair author’s current review, not independent acceptance.",
+      "uncertain": false,
+      "source_urls": [
+        "https://dlmf.nist.gov/4.18"
+      ],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "propose_fixed_finding",
+      "subject": "lem-csm-frontier-sine-comparison",
+      "class": "accuracy",
+      "subclass": "invalid-inference",
+      "severity": "fatal",
+      "location": "proof-step",
+      "disposition": "fixed",
+      "caught_at_stage": "4-judge",
+      "caught_by_role": "unknown",
+      "adjudicator": "step5-v2-initial-r1-u89",
+      "reason": "Step 1.2 invoked cor-mean-value-theorem on [0,|u|] without excluding u=0, although its exact Statement requires a<b and an interior witness. At u=0 that interior is empty. The repair proves |sin 0|=0 from F1 first, then applies MVT only for |u|>0 with continuity supplied by F1 and F3; F4 now records a<b explicitly.",
+      "repair_evidence": "research/physics-non-fluid-129-2026-10-21-r2-step5-v2/step5-v2-initial-r1-u89.json",
+      "uncertain": false,
+      "caught_by_model": "gpt-6-luna"
+    },
+    {
+      "ledger": "research/published-consumer-supplier-ledger.md",
+      "action": "no_update",
+      "reason": "No published carrier was changed, and no defective published supplier or consumer was identified in this scoped review."
+    }
+  ],
+  "supporting_evidence": {},
+  "repair_notes": {
+    "scope": "Only the assigned draft item and its owning proof-contract entry were repaired. Shared metadata was reread and surgically updated under the required step5 shared write lock; the temporary scoped updater was removed afterward.",
+    "metadata_repairs": "Aligned derivation 1.2 and F3 use mappings with the item, recorded the strict MVT endpoint condition, made zero/degenerate boundary checks explicit, and replaced the finite-check reference to nonexistent step 2.2 with the actual steps 1.2 and 2.1. Other contract entries and prior review records were preserved.",
+    "validation_history": "The first strict contract check found an omitted 1.2 use on one of the grouped F3 citation rows. Both F3 citation-use mappings were then aligned under the shared lock, and the final strict check passed.",
+    "interface_comparison": {
+      "statement_unchanged": true,
+      "before_statement_sha256": "1de24c3ddb38d32c6dab02e4777ab400ebdf36ce17e9b592f4001c0f98b98427",
+      "after_statement_sha256": "1de24c3ddb38d32c6dab02e4777ab400ebdf36ce17e9b592f4001c0f98b98427",
+      "consequence": "The exact original Statement is unchanged; no consumer propagation is triggered by these Facts, proof and contract repairs."
+    },
+    "source_reading": "Personally consulted DLMF section 4.18, including the full 4.18.1 inequality and its domain. Used the current local supplier statements and the complete MVT, sine/cosine derivative and monotonicity arguments. Did not retrieve Copson or claim to read its proof.",
+    "support_index": "The exact-run support index had no entry for this subject or batch; no supplement was present. No outside proposed repair or prior focused check was reused.",
+    "checks": [
+      {
+        "command": "node tools/physics-support/proof-layout.mjs items/lem-csm-frontier-sine-comparison.md",
+        "exit_code": 0,
+        "result": "proof-layout: 1 items, 4 steps, 0 defects"
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/physics-support/precheck.mts items/lem-csm-frontier-sine-comparison.md --json",
+        "exit_code": 0,
+        "result": "1 checked, 0 failed; direct proof passes without proposed repair"
+      },
+      {
+        "command": "node tools/physics-support/rendercheck.mjs items/lem-csm-frontier-sine-comparison.md --json",
+        "exit_code": 0,
+        "result": "1 checked; no errors or warnings"
+      },
+      {
+        "command": "node tools/physics-support/proof-contract.mjs research/physics-non-fluid-129-2026-10-21-r2-batch-89.proof-contracts.json --strict --items lem-csm-frontier-sine-comparison --json",
+        "exit_code": 0,
+        "result": "ok: true; no errors or warnings"
+      }
+    ],
+    "review_hash_command": "node tools/physics-support/step5-workflow.mjs review-contexts --run physics-non-fluid-129-2026-10-21-r2 --items lem-csm-frontier-sine-comparison",
+    "unresolved_obligations": [],
+    "next_action": "Controller collection and ordinary native rejudgment; this report neither certifies the repair nor closes the run."
+  }
+}

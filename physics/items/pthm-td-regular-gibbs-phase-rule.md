@@ -7,7 +7,7 @@ origin: pipeline
 domain: physics
 library: physics
 physical_scope: Interior compositions of finitely many C1 intensive phase branches with energy, volume, all listed species exchanges, and internal reactions allowed in every phase with auxiliary states fixed along the stipulated pairwise transfer curves and vanishing derivative of total auxiliary entropy along each stipulated reaction curve at the coexistence point, at a solution where the combined coexistence-and-affinity Jacobian has a nonsingular minor; phase amounts and externally fixed variables are excluded, and the conclusion is not asserted where a C1 phase chart fails, composition lies on the simplex boundary, or the nonsingular-minor hypothesis fails.
-dependency_level: 10
+dependency_level: 2
 deps:
   - def-td-phase-and-coexistence-domain
   - def-td-equilibrium-state-domain
@@ -52,7 +52,7 @@ verification:
 
 Assume the entropy of each phase is $C^2$ on its physical state chart and its derivative-defined temperature at the endpoint is finite and positive. The equation-set dimension below concerns this smooth interior state only.
 
-Let $C\ge1$ be the number of named species, $P\ge1$ the number of coexisting phase branches, and $R\ge0$ the number of independent internal reaction directions. Consider an attained global entropy-maximizing endpoint on the exact feasible set of [[def-td-isolated-compound-feasible-set]]. For each phase $\alpha$, use an intensive phase branch from [[def-td-phase-and-coexistence-domain]] and an interior composition $x^\alpha\in\Delta_{C-1}^{\circ}$. Let each branch chemical-potential map
+Let $C\ge1$ be the number of named species, $P\ge1$ the number of coexisting phase branches, and $R\ge0$ the number of independent internal reaction directions. Consider an attained global entropy-maximizing endpoint on the exact feasible set of *Isolated compound and feasible equilibrium set*. For each phase $\alpha$, use an intensive phase branch from *Phase branches and coexistence domains* and an interior composition $x^\alpha\in\Delta_{C-1}^{\circ}$. Let each branch chemical-potential map
 $$
 \mu^\alpha(T,p,x^\alpha)=(\mu_1^\alpha,\ldots,\mu_C^\alpha)
 $$
@@ -65,6 +65,12 @@ $$
 n-q-R=C-P+2-R.
 $$
 This is the dimension of the equation zero set in intensive coordinates only; phase amounts and their extensive conservation constraints are not counted, and the actual stable-coexistence set may be a proper subset after additional stability constraints. If the nonsingular-minor condition fails, no dimension formula is asserted.
+
+## Statement references
+
+[[def-td-isolated-compound-feasible-set]]
+
+[[def-td-phase-and-coexistence-domain]]
 
 ## Facts & Assumptions
 
@@ -80,7 +86,7 @@ This is the dimension of the equation zero set in intensive coordinates only; ph
 
 [F3] [[def-td-temperature-pressure-chemical-potential]]: On each single-phase chart, $S_{n_j}=-\mu_j/T$ at fixed energy, volume, and other species amounts; branch temperatures are positive.
 
-[L1] [[thm-tdmath-local-implicit-rank]]: If a C1 map $F:U\to\mathbb R^m$ is defined on an open set $U\subseteq\mathbb R^n$, vanishes at $z_*$, and has an invertible $m\times m$ derivative minor there, then its local zero set is a graph of dimension $n-m$. This statement has no sign restriction on the coordinates of the open set; its current carrier is a draft with a complete conditional proof, not an independent acceptance stamp.
+[L1] [[thm-tdmath-local-implicit-rank]]: Its current mathematical carrier is published and has verification evidence. Its Statement gives a local graph of dimension $n-m$ for a $C^1$ map $F:U\to\mathbb R^m$ on an open set $U\subseteq\mathbb R^n$ when $F(z_*)=0$ and an $m\times m$ derivative minor is invertible; if $m=n$, the zero is locally isolated. Its Proof reduces by a coordinate permutation to the Euclidean implicit-function theorem for $m<n$ and to the inverse-function theorem for $m=n$. The combined coexistence-and-affinity map here is $C^1$ on the stated open chart, and the Statement explicitly assumes its required nonsingular minor with $m=q+R\le n$.
 
 ## Proof
 

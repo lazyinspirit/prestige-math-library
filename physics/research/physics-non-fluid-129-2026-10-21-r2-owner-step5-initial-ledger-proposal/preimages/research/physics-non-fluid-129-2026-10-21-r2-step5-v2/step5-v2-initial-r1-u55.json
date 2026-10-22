@@ -1,0 +1,109 @@
+{
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "phase": "initial",
+  "round": 1,
+  "unit": "55",
+  "input_sha256": "eaf0a68d231b0a7d0d042df337974eaab597dfd3432daa3ad0aaeebd32fe188c",
+  "decisions": [
+    {
+      "id": "thm-nrqmx-floquet-galerkin-correctness",
+      "model": "gpt-6-luna",
+      "context_sha256": "3f9290cec700d786cd6305ddaef1a4fb91b7bb0b9031c72b500130a3b9fe8a81",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "Confirmed a missing input-domain hypothesis: with integer Fourier harmonics, d=1, b=0 and N=1/2 leave only harmonic zero, so the compression has size 1 and one block assignment, whereas q=2 and (2N+1)^2=4. The algorithm explicitly requires integer d,b,N; the theorem independently restates its inputs without that restriction. Added explicit integer domains to match the algorithm, preserving its full admissible scope.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "thm-nrqmx-floquet-galerkin-correctness",
+      "disposition": "repaired",
+      "post_sha256": "65c4f1a10b011b4bad630c5e0c2e1163bf68bec9f6eb402bab24ac6b269e3659",
+      "review_context_sha256": "d749a80adae5fbd20808e5b1922adf673eb7f6a37f6ee91fb30bef496630b993",
+      "reason": "Reviewed all four proof steps against the current algorithm Definition and the exact Sambe and periodic-momentum supplier statements. A finite Hermitian Fourier polynomial meets the C1 periodic hypothesis. Integer Fourier basis vectors lie in the periodic H1 domain; multiplication contributes H_(n-m), while differentiation contributes m*hbar*omega only on n=m. Coefficient symmetry proves Hermiticity. Explicit integer d,b,N now justify q=(2N+1)d, exactly (2N+1)^2 assignments (including N=b=0), and admissibility of the single total-solver call. The theorem retains its exact-compression-only and conditional solver guarantees. This is an adjudicator review of my repair, not independent acceptance.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "alg-nrqmx-floquet-fourier-galerkin"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "id": "thm-nrqmx-floquet-galerkin-correctness",
+      "status": "fixed",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "Confirmed a missing input-domain hypothesis: with integer Fourier harmonics, d=1, b=0 and N=1/2 leave only harmonic zero, so the compression has size 1 and one block assignment, whereas q=2 and (2N+1)^2=4. The algorithm explicitly requires integer d,b,N; the theorem independently restates its inputs without that restriction. Added explicit integer domains to match the algorithm, preserving its full admissible scope.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "supporting_evidence": {
+    "research/physics-non-fluid-129-2026-10-21-r2-batch-55-step5-context.json": "753b37438ff4dc1dfe2effffd2015ddd96a3035551c0dc7d7d5794bbc31db68c"
+  },
+  "repair_notes": {
+    "changed_paths": [
+      "items/thm-nrqmx-floquet-galerkin-correctness.md",
+      "research/physics-non-fluid-129-2026-10-21-r2-batch-55.pages.json"
+    ],
+    "interface_change": "Only the opening parameter declaration in Statement changed: d>=1 and b,N>=0 are explicitly integers, and positive hbar,omega are explicitly real. The owning manifest statement was synchronized under the shared write lock. Proof, dependencies, physical scope and empirical qualifications did not change.",
+    "contract_review": "The existing contract quotes the unchanged algorithm and supplier sections, and its four derivations still match the unchanged proof. Rechecked all eight boundary dispositions and the displayed d=1,b=N=1 matrix directly. The prior current_boundary_worksheet source hash is retained as historical evidence of its earlier carrier, not asserted as current review evidence; current native review hashes are supplied above. No contract amendment was necessary.",
+    "consumer_uses": [
+      {
+        "id": "alg-nrqmx-floquet-fourier-galerkin",
+        "path": "items/alg-nrqmx-floquet-fourier-galerkin.md",
+        "affected_use": "Frontmatter justified_by names the repaired theorem to establish well-definedness of Definition steps 1-3. The Definition already fixes integers d>=1 and b,N>=0 and supplies the identical total Hermitian-matrix solver interface.",
+        "invalidated_claim": null,
+        "disposition": "unaffected",
+        "minimality": "All algorithm inputs satisfy the corrected theorem exactly; no Definition or metadata change is needed, so propagation stops at this consumer."
+      }
+    ],
+    "page_uses": [
+      {
+        "id": "nrqmx-floquet-control",
+        "path": "library/non-relativistic-quantum-mechanics-mathematics/nrqmx-floquet-control.md",
+        "affected_use": "The frontmatter inventory places the theorem immediately after its algorithm. The page has no body or additional mathematical use.",
+        "disposition": "unaffected"
+      }
+    ],
+    "diagrams": "The assigned theorem has no TikZ/tikzcd diagram and needs none for this coefficient computation. The algorithm supplier diagram for b=1 correctly maps sector m to m+1 by H_1 and to m-1 by H_(-1); it is unchanged.",
+    "published_consumer_findings": [],
+    "source_limits": "No external source retrieval is claimed. The finite Fourier computation and integer counting are familiar; checked the actual local supplier statements and algorithm rather than adopting the batch digest as authority. The support index contains no pointer for this assigned subject; no support supplement was present when searched.",
+    "focused_checks": [
+      {
+        "command": "node tools/physics-support/tsx-run.mjs tools/physics-support/precheck.mts items/thm-nrqmx-floquet-galerkin-correctness.md",
+        "exit_code": 0,
+        "output": "PASS items/thm-nrqmx-floquet-galerkin-correctness.md (direct); 1 checked, 0 failing — all clean"
+      },
+      {
+        "command": "node tools/physics-support/rendercheck.mjs items/thm-nrqmx-floquet-galerkin-correctness.md",
+        "exit_code": 0,
+        "output": "OK — 1 file(s); mathematics and frontmatter parse successfully."
+      },
+      {
+        "command": "node tools/physics-support/proof-contract.mjs research/physics-non-fluid-129-2026-10-21-r2-batch-55.proof-contracts.json --strict --items thm-nrqmx-floquet-galerkin-correctness",
+        "exit_code": 0,
+        "output": "proof-contract: 0 error(s), 0 warning(s), 1/1 item(s) checked"
+      },
+      {
+        "command": "node tools/physics-support/proof-layout.mjs items/thm-nrqmx-floquet-galerkin-correctness.md",
+        "exit_code": 0,
+        "output": "proof-layout: 1 items, 4 steps, 0 defects"
+      }
+    ],
+    "unresolved_obligations": [],
+    "next_action": "Controller collects this report and schedules the ordinary frontier impact/rejudgment work. No judge, gate, certificate, ledger merge or round transition was launched by this unit."
+  },
+  "downstream_uses": {
+    "alg-nrqmx-floquet-fourier-galerkin": "The algorithm frontmatter justified_by invokes the theorem to establish that Definition steps 1-3 construct a Hermitian matrix of dimension (2N+1)d and make one admissible total-solver call; its Definition already restricts d,b,N to integers, so that use remains sound."
+  }
+}

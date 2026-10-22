@@ -1,0 +1,875 @@
+{
+  "version": 1,
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "batch": "88",
+  "scope": [
+    "def-csm-frontier-mean-field-ensemble",
+    "thm-csm-frontier-compact-laplace-tilt",
+    "thm-csm-frontier-mean-field-supporting-lines",
+    "thm-csm-frontier-curie-weiss-bifurcation",
+    "ex-csm-frontier-nonexposed-energy"
+  ],
+  "contracts": {
+    "def-csm-frontier-mean-field-ensemble": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Definition permits empty microcanonical shells but defines their conditional law only for positive reference probability. A is nonempty and n>=1, so the canonical configuration set and positive partition sum remain nonempty.",
+          "historical_template_review": {
+            "upheld": true,
+            "by": "/root/csm_boundary",
+            "reason": "The Definition permits empty microcanonical shells but defines their conditional law only for positive reference probability. A is nonempty and n>=1, so the canonical configuration set and positive partition sum remain nonempty.",
+            "item_sha256": "ef35f5d6ddb5c847ed9e8e07dfe42471fe7f126eab2445fcbf15e368424bb9cf",
+            "row_sha256": "9b441ddb90854070ee96aac3925d6f67f5638efc9f41ea6abad007dd41eb1395"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "This carrier is a definition that fixes a finite probability-model interface and proves no theorem case."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "This carrier is a definition that fixes a finite probability-model interface and proves no theorem case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "This carrier is a definition that fixes a finite probability-model interface and proves no theorem case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This carrier is a definition that fixes a finite probability-model interface and proves no theorem case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "This carrier is a definition that fixes a finite probability-model interface and proves no theorem case."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This carrier is a definition that fixes a finite probability-model interface and proves no theorem case."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This carrier is a definition that fixes a finite probability-model interface and proves no theorem case."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "No computation is applicable to a definition; the complete finite-alphabet state spaces, product weights, tilt, and shell conventions appear in the interface.",
+      "definition_interface": "Let $\\mathcal A$ be a finite nonempty alphabet, let $p=(p(a))_{a\\in\\mathcal A}$ be a probability vector with $p(a)>0$ for every $a$, and write\n$$\\Delta(\\mathcal A):=\\left\\{q\\in[0,1]^{\\mathcal A}:\\sum_{a\\in\\mathcal A}q(a)=1\\right\\}$$\nwith the metric $d_1(q,r):=\\sum_{a\\in\\mathcal A}|q(a)-r(a)|$ and its induced topology, called the $\\ell^1$ topology. This is a metric: symmetry, nonnegativity and separation follow coordinatewise, and the triangle inequality follows by summing $|q(a)-s(a)|\\leq|q(a)-r(a)|+|r(a)-s(a)|$. For each integer $n\\geq1$, the configuration space is $\\Omega_n:=\\mathcal A^n$ with the full power-set $\\sigma$-algebra. Its reference probability is the product law $p^{\\otimes n}$, which gives the word $x^n=(x_1,\\ldots,x_n)$ mass $\\prod_{i=1}^n p(x_i)$. By [[lem-it-finite-product-law-is-iid]], this mass assignment is normalized and is a probability law; explicitly, $\\sum_{x^n\\in\\mathcal A^n}\\prod_{i=1}^np(x_i)=\\prod_{i=1}^n\\sum_{a\\in\\mathcal A}p(a)=1$. The empirical macrostate is the probability vector\n$$L_n(x^n)(a):=\\frac1n\\#\\{i\\in\\{1,\\ldots,n\\}:x_i=a\\},\\qquad a\\in\\mathcal A.$$\nThus $L_n$ is the empirical type defined by the finite-alphabet supplier.\n\nFor a continuous function $h:\\Delta(\\mathcal A)\\to\\mathbb R$ and a real parameter $\\beta$, define the finite canonical normalizer and word law by\n$$Z_{n,\\beta}:=\\sum_{x^n\\in\\Omega_n}p^{\\otimes n}(x^n)e^{-n\\beta h(L_n(x^n))},\\qquad p_{n,\\beta}(x^n):=\\frac{p^{\\otimes n}(x^n)e^{-n\\beta h(L_n(x^n))}}{Z_{n,\\beta}}.$$\nThe normalizer is finite and positive because the sum is finite and every summand is finite and positive. The canonical macrostate law is the probability measure on Borel subsets $B\\subseteq\\Delta(\\mathcal A)$ that assigns mass\n$$p_{n,\\beta}\\bigl(\\{x^n\\in\\Omega_n:L_n(x^n)\\in B\\}\\bigr).$$\n\nFor a real-valued function $f$ on a nonempty set $S$, define $\\operatorname*{argmin}_{x\\in S}f(x):=\\{x\\in S:f(x)=\\inf_{y\\in S}f(y)\\}$ and $\\operatorname*{argmax}_{x\\in S}f(x):=\\{x\\in S:f(x)=\\sup_{y\\in S}f(y)\\}$; either set is empty if the corresponding extremum is not attained. For $q\\in\\Delta(\\mathcal A)$, set\n$$D(q\\|p):=\\sum_{a:q(a)>0}q(a)\\ln\\frac{q(a)}{p(a)},$$\nomitting zero-mass terms, as in the finite relative-entropy convention. For $u\\in h(\\Delta(\\mathcal A))$, define the constrained cost, entropy, canonical variational set, and constrained variational set by\n$$d(u):=\\inf_{q\\in\\Delta(\\mathcal A):h(q)=u}D(q\\|p),\\qquad s(u):=-d(u),$$\n$$\\mathcal M_\\beta:=\\operatorname*{argmin}_{q\\in\\Delta(\\mathcal A)}\\bigl[D(q\\|p)+\\beta h(q)\\bigr],\\qquad \\mathcal M_u:=\\operatorname*{argmin}_{q\\in\\Delta(\\mathcal A):h(q)=u}D(q\\|p).$$\nFor $A\\subseteq\\Omega_n$ and an event $E\\subseteq\\Omega_n$ with $p^{\\otimes n}(E)>0$, define the conditional probability by $p^{\\otimes n}(A\\mid E):=p^{\\otimes n}(A\\cap E)/p^{\\otimes n}(E)$. For $\\delta>0$, the microcanonical shell event is $E_{n,\\delta,u}:=\\{x^n:|h(L_n(x^n))-u|<\\delta\\}$. Whenever $p^{\\otimes n}(E_{n,\\delta,u})>0$, its microcanonical shell law is the conditional probability $p^{\\otimes n}(\\,\\cdot\\mid E_{n,\\delta,u})$."
+    },
+    "thm-csm-frontier-compact-laplace-tilt": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "For each integer $m\\geq1$, put $U_m:=\\{x\\in K:|F(x)|<m\\}$. These sets are open by continuity of $F$: if $x\\in U_m$, continuity gives a neighborhood on which $|F(y)-F(x)|<m-|F(x)|$, hence $|F(y)|<m$. They cover $K$ because every real $|F(x)|$ is less than some positive integer. By the finite-open-cover meaning of compactness in [A2], finitely many $U_{m_1},\\ldots,U_{m_k}$ cover $K$, with $k\\geq1$ since $K$ is nonempty. Let $M:=\\max\\{m_1,\\ldots,m_k\\}$; then $-M<F(x)<M$ for every $x\\in K$. Thus $F$ is bounded above and below. This uses the explicitly defined cover and a maximum of finitely many integers, without any simultaneous choice of pointwise neighborhoods. Since $I$ is not identically $+\\infty$, choose $x_0\\in K$ with $I(x_0)<+\\infty$. Therefore $F(x_0)-I(x_0)\\leq c\\leq\\sup_K F<+\\infty$, so $c$ is finite. The integrand $e^{nF}$ is bounded above and bounded below by the positive constant $e^{n\\inf_KF}$, and $\\mu_n$ is a probability measure, hence $0<Z_n<+\\infty$ and $\\nu_n^F$ is a probability measure.",
+          "inputs": [
+            "A2",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Let $G\\subseteq K$ be open, let $x\\in G$ with $I(x)<+\\infty$, and let $\\varepsilon>0$. Continuity of $F$ gives an open neighborhood $U$ with $x\\in U\\subseteq G$ and $F(y)>F(x)-\\varepsilon$ for every $y\\in U$. Hence $\\int_G e^{nF}\\,d\\mu_n\\geq e^{n(F(x)-\\varepsilon)}\\mu_n(U)$. By [A1], the logarithm of this integral divided by $n$ has liminf at least $F(x)-\\varepsilon-\\inf_U I\\geq F(x)-\\varepsilon-I(x)$. Taking the supremum over finite-rate $x\\in G$ and then $\\varepsilon\\downarrow0$ proves the open-set integral lower bound $\\liminf_n n^{-1}\\ln\\int_G e^{nF}\\,d\\mu_n\\geq\\sup_{x\\in G}(F(x)-I(x))$.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "A2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "step": "1.3",
+          "claim": "Let $C\\subseteq K$ be closed and put $c_C:=\\sup_{x\\in C}(F(x)-I(x))$, with $\\sup\\varnothing=-\\infty$. If $C=\\varnothing$, its integral is zero and the required bound is immediate. Since $F$ is bounded and $I\\geq0$, either $c_C$ is finite or $c_C=-\\infty$. Suppose first that $c_C$ is finite, and fix $\\varepsilon>0$. For each $x\\in C$ with $I(x)<+\\infty$, lower semicontinuity of $I$ and continuity of $F$ give an open neighborhood $V_x$ on which $F\\leq F(x)+\\varepsilon$ and $I\\geq I(x)-\\varepsilon$. Choose a ball $U_x$ centered at $x$ with $\\overline U_x\\subseteq V_x$. For each $x\\in C$ with $I(x)=+\\infty$, choose $M>\\sup_KF-c_C+1$; lower semicontinuity gives an open neighborhood $V_x$ on which $I>M$, and choose such a ball $U_x$. Take the family of all centered balls satisfying these conditions; it covers $C$. A closed subset $C$ of compact $K$ is compact: adjoining $K\\setminus C$ to any relative open cover of $C$ gives an open cover of $K$. Thus finitely many admissible balls suffice, and only finitely many centers and neighborhood witnesses are selected. Put $C_j:=C\\cap\\overline U_{x_j}$ for the resulting centers. Each $C_j$ is closed. At a finite-rate center,\n$$\\sup_{C_j}F-\\inf_{C_j}I\\leq F(x_j)-I(x_j)+2\\varepsilon\\leq c_C+2\\varepsilon;$$\nat an infinite-rate center,\n$$\\sup_{C_j}F-\\inf_{C_j}I\\leq\\sup_KF-M<c_C-1.$$\nThe integral over $C$ is bounded by the finite sum $\\sum_j e^{n\\sup_{C_j}F}\\mu_n(C_j)$. Applying [A1] to each closed $C_j$ and using that a finite sum has logarithmic limsup no greater than its largest summand gives\n$$\\limsup_n\\frac1n\\ln\\int_Ce^{nF}\\,d\\mu_n\\leq c_C+2\\varepsilon.$$\nLetting $\\varepsilon\\downarrow0$ proves the localized bound in this case. If $c_C=-\\infty$, every point of $C$ has infinite $I$. For any real $M$, lower semicontinuity gives, at each $x\\in C$, an open neighborhood $V_x$ with $I>M$; take all centered balls with closures in such neighborhoods and then a finite subcover of $C$. The corresponding closed pieces $C_j$ then satisfy $\\sup_{C_j}F-\\inf_{C_j}I\\leq\\sup_KF-M$. The same finite-sum and LDP argument gives a logarithmic limsup at most $\\sup_KF-M$. Since $M$ is arbitrary, this limsup is $-\\infty=c_C$. Thus in all cases\n$$\\limsup_n\\frac1n\\ln\\int_Ce^{nF}\\,d\\mu_n\\leq\\sup_{x\\in C}(F(x)-I(x)).$$",
+          "inputs": [
+            "A1",
+            "A2",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Taking $G=K$ in step 1.2 and $C=K$ in step 1.3 gives $\\liminf_n n^{-1}\\ln Z_n\\geq c$ and $\\limsup_n n^{-1}\\ln Z_n\\leq c$, proving the log-Laplace limit. The function $I_F=I-F+c$ is lower semicontinuous, is nonnegative by the definition of $c$, and has compact sublevel sets because those sets are closed in compact $K$. To prove attainment, set $f:=F-I$, which is upper semicontinuous and bounded above by $\\sup_KF$. For every integer $k\\geq1$, the set $A_k:=\\{x\\in K:f(x)\\geq c-1/k\\}$ is closed and nonempty by the definition of $c$; these sets are nested. Compactness gives $\\bigcap_{k\\geq1}A_k\\ne\\varnothing$: otherwise their open complements would cover $K$, and a finite subcover would contradict that a nested finite intersection is nonempty. Every point of this intersection has $f(x)\\geq c-1/k$ for all $k$, hence $f(x)\\geq c$ and therefore $f(x)=c$. Equality $I_F(x)=0$ holds exactly when $F(x)-I(x)=c$, so its nonempty zero set is precisely the stated maximizing set.",
+          "inputs": [
+            "A2",
+            "step 1.1",
+            "step 1.2",
+            "step 1.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For open $G\\subseteq K$, apply the open-set integral lower bound from step 1.2 and subtract the log-normalizer limit in step 2.1. Since $\\sup_G(F-I)-c=-\\inf_G I_F$, this is the LDP lower bound for $\\nu_n^F$.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For closed $C\\subseteq K$, apply the closed-set integral upper bound from step 1.3 and subtract the log-normalizer limit in step 2.1. Since $\\sup_C(F-I)-c=-\\inf_C I_F$, this is the LDP upper bound for $\\nu_n^F$.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.3",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "K is nonempty by A2. For empty closed C,1.3 explicitly uses integral0 and c_C=-infinity; for an empty open set 1.2/3.1 give the vacuous lower bound with the Statement extended-real conventions.",
+          "argument_steps": [
+            "1.3",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The rate may vanish; step 2.1 identifies exactly the zero set of the tilted rate.",
+          "argument_steps": [
+            "2.1"
+          ]
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "If K is a singleton, its probability is1, the LDP upper/lower bounds on K force I=0, Z_n=exp(nF) and the tilted rate is0; this is the single-atom specialization of 1.1-2.1.",
+          "argument_steps": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "If I has a single finite rate point, the same finite-cover and lower estimates hold in steps 1.2–2.1.",
+          "argument_steps": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "K is a general compact metric space; the theorem has no interval endpoints.",
+          "argument_steps": []
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "1.1 proves boundedness via the explicit integer-indexed open cover and a finite subcover/max.1.3 uses compact closed C and finitely many admissible balls; taking the family of all admissible centered balls and then finitely many witnesses requires no simultaneous choice over x.2.1 proves maximizing-set nonemptiness by nested closed sets, without selecting a sequence of points.",
+          "argument_steps": [
+            "1.1"
+          ]
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.1 proves I_F(x)=0 only at maximizers of F-I.",
+          "argument_steps": [
+            "2.1"
+          ]
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1 proves every maximizer of F-I has I_F(x)=0.",
+          "argument_steps": [
+            "2.1"
+          ]
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Take K={x}, μ_n=δ_x, and a finite value I(x)=0.",
+          "result": "Z_n=e^{nF(x)}, c=F(x), and ν_n^F=δ_x with tilted rate zero at x.",
+          "verifies": "Singleton boundary and the normalization formula in steps 1.1 and 2.1."
+        }
+      ],
+      "finite_checks_disposition": "The singleton check verifies the degenerate compact boundary; the finite-cover proof establishes the general compact-metric result.",
+      "current_boundary_worksheet": {
+        "proposal": "research/physics-non-fluid-129-2026-10-21-r2-owner-step2-boundary-proposal-8/proposal.json",
+        "source_sha256": "56aeadd4637b9d521954b5d775e0552df2b64cde025977e541e1dc0b05f255ea",
+        "qualification": "Released complete current source/eight-case semantic worksheet; root transcribed exact current rows. No independent acceptance or finite computation asserted."
+      },
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-88",
+        "notes": "Read every current step and reader/refuter reports. Confirmed refuter:88:1 as nonfatal missing extended-real lower-semicontinuity definition; supplied open strict-superlevel definition, good-rate/sublevel and maximizing-set conventions. Finite I(x) uses threshold I(x)-epsilon; infinite I(x) permits every finite M. F bounded via explicit integer cover makes c finite and Z positive; empty open/closed sets and all-infinite-rate closed C have the correct -infinity bounds. Closed C compactness and all-admissible-ball finite subcovers avoid arbitrary choice. Finite-sum log limsup proves localized upper bound; nested closed near-maximizer sets prove attainment without selecting a sequence. Subtract finite c for both tilted LDP bounds; I-F+c has closed compact sublevels and exact nonempty zero set. Read Poisat 3.1/Exercise 14 and 3.4/Theorem 3.8 proof prompts, and Touchette III.E.4 equations 59-60 as context, not a substitute for the local proof. Same-batch supporting-lines F3/1.1 uses finite continuous nonnegative D on compact simplex and continuous -beta h; no consumer repair is needed. No external consumer, choice or physical/empirical premise."
+      }
+    },
+    "thm-csm-frontier-mean-field-supporting-lines": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-csm-frontier-mean-field-ensemble",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal A$ be a finite nonempty alphabet, let $p=(p(a))_{a\\in\\mathcal A}$ be a probability vector with $p(a)>0$ for every $a$, and write\n$$\\Delta(\\mathcal A):=\\left\\{q\\in[0,1]^{\\mathcal A}:\\sum_{a\\in\\mathcal A}q(a)=1\\right\\}$$\nwith the metric $d_1(q,r):=\\sum_{a\\in\\mathcal A}|q(a)-r(a)|$ and its induced topology, called the $\\ell^1$ topology. This is a metric: symmetry, nonnegativity and separation follow coordinatewise, and the triangle inequality follows by summing $|q(a)-s(a)|\\leq|q(a)-r(a)|+|r(a)-s(a)|$. For each integer $n\\geq1$, the configuration space is $\\Omega_n:=\\mathcal A^n$ with the full power-set $\\sigma$-algebra. Its reference probability is the product law $p^{\\otimes n}$, which gives the word $x^n=(x_1,\\ldots,x_n)$ mass $\\prod_{i=1}^n p(x_i)$. By [[lem-it-finite-product-law-is-iid]], this mass assignment is normalized and is a probability law; explicitly, $\\sum_{x^n\\in\\mathcal A^n}\\prod_{i=1}^np(x_i)=\\prod_{i=1}^n\\sum_{a\\in\\mathcal A}p(a)=1$. The empirical macrostate is the probability vector\n$$L_n(x^n)(a):=\\frac1n\\#\\{i\\in\\{1,\\ldots,n\\}:x_i=a\\},\\qquad a\\in\\mathcal A.$$\nThus $L_n$ is the empirical type defined by the finite-alphabet supplier.\n\nFor a continuous function $h:\\Delta(\\mathcal A)\\to\\mathbb R$ and a real parameter $\\beta$, define the finite canonical normalizer and word law by\n$$Z_{n,\\beta}:=\\sum_{x^n\\in\\Omega_n}p^{\\otimes n}(x^n)e^{-n\\beta h(L_n(x^n))},\\qquad p_{n,\\beta}(x^n):=\\frac{p^{\\otimes n}(x^n)e^{-n\\beta h(L_n(x^n))}}{Z_{n,\\beta}}.$$\nThe normalizer is finite and positive because the sum is finite and every summand is finite and positive. The canonical macrostate law is the probability measure on Borel subsets $B\\subseteq\\Delta(\\mathcal A)$ that assigns mass\n$$p_{n,\\beta}\\bigl(\\{x^n\\in\\Omega_n:L_n(x^n)\\in B\\}\\bigr).$$\n\nFor a real-valued function $f$ on a nonempty set $S$, define $\\operatorname*{argmin}_{x\\in S}f(x):=\\{x\\in S:f(x)=\\inf_{y\\in S}f(y)\\}$ and $\\operatorname*{argmax}_{x\\in S}f(x):=\\{x\\in S:f(x)=\\sup_{y\\in S}f(y)\\}$; either set is empty if the corresponding extremum is not attained. For $q\\in\\Delta(\\mathcal A)$, set\n$$D(q\\|p):=\\sum_{a:q(a)>0}q(a)\\ln\\frac{q(a)}{p(a)},$$\nomitting zero-mass terms, as in the finite relative-entropy convention. For $u\\in h(\\Delta(\\mathcal A))$, define the constrained cost, entropy, canonical variational set, and constrained variational set by\n$$d(u):=\\inf_{q\\in\\Delta(\\mathcal A):h(q)=u}D(q\\|p),\\qquad s(u):=-d(u),$$\n$$\\mathcal M_\\beta:=\\operatorname*{argmin}_{q\\in\\Delta(\\mathcal A)}\\bigl[D(q\\|p)+\\beta h(q)\\bigr],\\qquad \\mathcal M_u:=\\operatorname*{argmin}_{q\\in\\Delta(\\mathcal A):h(q)=u}D(q\\|p).$$\nFor $A\\subseteq\\Omega_n$ and an event $E\\subseteq\\Omega_n$ with $p^{\\otimes n}(E)>0$, define the conditional probability by $p^{\\otimes n}(A\\mid E):=p^{\\otimes n}(A\\cap E)/p^{\\otimes n}(E)$. For $\\delta>0$, the microcanonical shell event is $E_{n,\\delta,u}:=\\{x^n:|h(L_n(x^n))-u|<\\delta\\}$. Whenever $p^{\\otimes n}(E_{n,\\delta,u})>0$, its microcanonical shell law is the conditional probability $p^{\\otimes n}(\\,\\cdot\\mid E_{n,\\delta,u})$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-it-finite-alphabet-sanov-theorem",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal A$ be finite, let $p$ be a probability vector on $\\mathcal A$, and set $S:=\\operatorname{supp}(p)=\\{a\\in\\mathcal A:p(a)>0\\}$. Then $S$ is finite nonempty and $p(a)>0$ on $S$. For each $n\\ge1$, use the finite product law $p^{\\otimes n}$ from [[def-it-finite-alphabet-product-law]] and [[lem-it-finite-product-law-is-iid]] on $\\mathcal A^n$, and let $X_1^{(n)},\\ldots,X_n^{(n)}$ be its coordinate maps. Let $\\widehat P_n$ be the empirical type of this coordinate word, viewed as a $\\Delta(\\mathcal A)$-valued map. Identify the support simplex\n$$\\Delta(S):=\\{q\\in[0,1]^S:\\sum_{a\\in S}q(a)=1\\}$$\nwith the face of $\\Delta(\\mathcal A)$ whose coordinates outside $S$ vanish. Then $\\widehat P_n\\in\\Delta(S)$ almost surely under $p^{\\otimes n}$. For any set $\\Gamma\\subseteq\\Delta(S)$, let $\\Gamma^\\circ$ and $\\overline\\Gamma$ denote its interior and closure in the relative topology induced by $\\|\\cdot\\|_1$.\nWith $\\inf\\varnothing=+\\infty$ and $\\ln0=-\\infty$,\n$$\\liminf_{n\\to\\infty}\\frac1n\\ln p^{\\otimes n}(\\widehat P_n\\in\\Gamma)\\ge-\\inf_{q\\in\\Gamma^\\circ}D(q\\|p),$$\nand\n$$\\limsup_{n\\to\\infty}\\frac1n\\ln p^{\\otimes n}(\\widehat P_n\\in\\Gamma)\\le-\\inf_{q\\in\\overline\\Gamma}D(q\\|p).$$\nFor every $n\\ge1$ the finite upper bound\n$$p^{\\otimes n}(\\widehat P_n\\in\\Gamma)\\le(n+1)^{|S|-1}\\exp\\!\\left(-n\\inf_{q\\in\\overline\\Gamma}D(q\\|p)\\right)$$\nalso holds. If the two infima agree, the limit exists and equals their negative common value. Equivalently, when $S\\ne\\mathcal A$, one may restrict the product sample space to $S^n$ without changing these event probabilities, since every word outside $S^n$ has zero product mass.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-csm-frontier-compact-laplace-tilt",
+          "source_section": "Statement",
+          "quote": "Let $(K,d_K)$ be a nonempty compact metric space and let $(\\mu_n)_{n\\geq1}$ be Borel probability measures on $K$. Let $I:K\\to[0,+\\infty]$ be lower semicontinuous, meaning that $\\{x\\in K:I(x)>a\\}$ is open for every real $a$, and not identically $+\\infty$. Assume the speed-$n$ large-deviation bounds\n$$\\liminf_{n\\to\\infty}\\frac1n\\ln\\mu_n(G)\\geq-\\inf_{x\\in G}I(x)\\quad\\text{for every open }G\\subseteq K,$$\n$$\\limsup_{n\\to\\infty}\\frac1n\\ln\\mu_n(C)\\leq-\\inf_{x\\in C}I(x)\\quad\\text{for every closed }C\\subseteq K,$$\nwith $\\inf\\varnothing=+\\infty$ and $\\ln0=-\\infty$. Let $F:K\\to\\mathbb R$ be continuous and put\n$$Z_n:=\\int_K e^{nF(x)}\\,d\\mu_n(x),\\qquad c:=\\sup_{x\\in K}\\bigl(F(x)-I(x)\\bigr).$$\nFor Borel $B\\subseteq K$, define the normalized exponential tilt\n$$\\nu_n^F(B):=Z_n^{-1}\\int_B e^{nF(x)}\\,d\\mu_n(x).$$\nHere a good rate function is a lower semicontinuous map $J:K\\to[0,+\\infty]$ whose sublevel sets $\\{x:J(x)\\leq a\\}$ are compact for every real $a$. Then $Z_n$ is finite and positive,\n$$\\lim_{n\\to\\infty}\\frac1n\\ln Z_n=c,$$\nand $(\\nu_n^F)$ satisfies a speed-$n$ large-deviation principle with the good rate function $I_F(x):=I(x)-F(x)+c$. Its zero set is precisely $\\operatorname*{argmax}_{x\\in K}(F(x)-I(x)):=\\{x\\in K:F(x)-I(x)=c\\}$, with $F(x)-(+\\infty):=-\\infty$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-it-finite-relative-entropy-continuity-on-simplex",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal A$ be finite and let $p$ be a probability vector with $p(a)>0$ for every $a\\in\\mathcal A$. Then $q\\mapsto D(q\\|p)$ is finite and continuous on the probability simplex $\\Delta(\\mathcal A)$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-it-finite-classical-kl-nonnegative-equality",
+          "source_section": "Statement",
+          "quote": "For probability vectors $p=(p_i)_{i\\in I}$ and $q=(q_i)_{i\\in I}$ on a finite nonempty set $I$, define\n\n$$D(p\\|q):=\\begin{cases}\\displaystyle\\sum_{i:p_i>0}p_i\\ln\\frac{p_i}{q_i},&p_i>0\\Rightarrow q_i>0,\\\\+\\infty,&\\text{otherwise.}\\end{cases}$$\n\nThen $D(p\\|q)\\ge0$, and $D(p\\|q)=0$ if and only if $p=q$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-heine-borel-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions\n$n \\to \\mathbb{R}$ and let $d_2$ be the Euclidean metric on it\n($\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it). Then:\n\n1. **Closed boxes are compact.** For reals $a_k \\le b_k$ $(k < n)$ the box\n   $Q = \\{\\, x \\in \\mathbb{R}^n : a_k \\le x_k \\le b_k \\text{ for every } k < n \\,\\}$\n   is a compact subset of $(\\mathbb{R}^n, d_2)$ (Open cover, subcover, compact metric space, and compact subset of a metric space).\n2. **Heine-Borel.** A subset $K \\subseteq \\mathbb{R}^n$ is a compact subset of\n   $(\\mathbb{R}^n, d_2)$ if and only if $K$ is closed in $\\mathbb{R}^n$\n   (The metric topology: a set is open when every one of its points has a ball around it inside the set; closed means open complement) and bounded\n   (Bounded subset, diameter, distance from a point to a set, and distance between two sets in a metric space).\n3. **The real line.** A subset $K \\subseteq \\mathbb{R}$ is a compact subset of\n   $(\\mathbb{R}, d_{\\mathbb{R}})$, the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   (The absolute value makes $\\mathbb{R}$ a metric space: $d(x,y) = |x-y|$ is a metric, its open balls are the intervals $(x-r, x+r)$, and it is unbounded), if and only if $K$ is closed in\n   $\\mathbb{R}$ and bounded.\n\n**No choice principle is used.** The bisection below halves one coordinate at a\ntime and takes the **left** half whenever the left half still fails to be finitely\ncovered, the right half otherwise: a rule with two outcomes, decided by a\nproperty of the box, not a selection. That is the whole reason the theorem is\navailable in ZF, while the general \"complete and totally bounded implies compact\"\n(A complete, totally bounded metric space is compact, proved from countable choice used exactly once) is not.\n\nThe hypothesis $n \\ge 1$ is inherited from $\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it, which defines\n$\\mathbb{R}^n$ and its metrics only there; the last remark below records what\nhappens at $n = 0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-closed-subspace-of-a-compact-space-is-compact",
+          "source_section": "Statement",
+          "quote": "Let $(X, \\mathcal{T})$ be a topological space ([[def-topological-space]]), with\nsubspaces as in [[def-subspace-topology-top]] and compactness as in\n[[def-compact-space]]. Then:\n\n1. **Closed in compact is compact.** If $(X, \\mathcal{T})$ is compact and\n   $F \\subseteq X$ is closed in $X$, then $F$ is a compact subset of $X$.\n2. **Finite unions.** If $n \\in \\mathbb{N}$ and $K_0, \\dots, K_n$ are compact\n   subsets of $X$, then $K_0 \\cup \\dots \\cup K_n$ is a compact subset of $X$. The\n   union of the empty list is $\\varnothing$, which is a compact subset of every\n   space.\n\nClaim 1 needs $X$ to be compact and claim 2 does not; no hypothesis of any kind\nis placed on $X$ in claim 2. **No choice principle is used**: claim 1 selects\nnothing, taking a least index where a selection would be natural, and claim 2\nmakes finitely many selections through [[lem-finite-choice]], a theorem of ZF.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-compactness-under-continuous-maps",
+          "source_section": "Statement",
+          "quote": "Let $(X, \\mathcal{T}_X)$ and $(Y, \\mathcal{T}_Y)$ be topological spaces\n([[def-topological-space]]), and let $\\mathbb{R}$ carry its usual topology, the\nmetric topology of $d_{\\mathbb{R}}(s,t) = |s-t|$\n([[lem-real-line-is-a-metric-space]], [[def-metric-topology]],\n[[def-metrizable-space]]). Then:\n\n1. **Continuous images.** If $f : X \\to Y$ is continuous\n   ([[def-continuous-map-top]]) and $(X, \\mathcal{T}_X)$ is compact\n   ([[def-compact-space]]), then $f[X]$ is a compact subset of $Y$. More\n   generally, if $K \\subseteq X$ is a compact subset of $X$ then $f[K]$ is a\n   compact subset of $Y$.\n2. **Extreme values.** If $(X, \\mathcal{T}_X)$ is compact and nonempty and\n   $g : X \\to \\mathbb{R}$ is continuous, then $g[X]$ has a maximum and a minimum\n   ([[def-max-min]]): there are $x_{\\max}, x_{\\min} \\in X$ with\n   $$g(x_{\\min}) \\;\\le\\; g(x) \\;\\le\\; g(x_{\\max}) \\qquad \\text{for every } x \\in X .$$\n3. **Compact to Hausdorff.** If $(X, \\mathcal{T}_X)$ is compact, $(Y,\n   \\mathcal{T}_Y)$ is Hausdorff ([[def-hausdorff-space]]) and $f : X \\to Y$ is a\n   continuous bijection, then $f$ is a homeomorphism\n   ([[def-homeomorphism-and-open-maps]]).\n\nNonemptiness in claim 2 is a hypothesis and not an oversight: for\n$X = \\varnothing$ the image is empty and has neither a maximum nor a minimum. **No\nchoice principle is used**: the one selection made below is over a finite index\nset, where [[lem-finite-choice]] is a theorem of ZF.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Enumerate $\\mathcal A=\\{a_1,\\ldots,a_d\\}$, with $d\\geq1$, and identify $\\mathbb R^{\\mathcal A}$ with Euclidean $\\mathbb R^d$. Write $\\|x\\|_1:=\\sum_{i=1}^d|x_i|$ and $\\|x\\|_2:=(\\sum_{i=1}^dx_i^2)^{1/2}$; the declared $\\ell^1$ topology on the simplex is the topology from $\\|\\cdot\\|_1$. The simplex is closed because it is the intersection of the closed coordinate constraints $0\\leq q(a_i)\\leq1$ and the closed affine constraint $\\sum_iq(a_i)=1$; these are closed since coordinate maps and their finite sum are continuous. It is bounded because $\\|q\\|_2^2=\\sum_iq(a_i)^2\\leq\\sum_iq(a_i)=1$. By [F6] it is compact in the Euclidean topology. For every $x\\in\\mathbb R^d$, $\\|x\\|_2\\leq\\|x\\|_1$ because $(\\sum_i|x_i|)^2\\geq\\sum_ix_i^2$, and $\\|x\\|_1\\leq d\\|x\\|_2$ because $\\sum_i|x_i|\\leq d\\max_i|x_i|\\leq d\\|x\\|_2$. These inequalities show that the Euclidean and $\\ell^1$ metrics have the same open sets, so the simplex is compact in its declared topology. By continuity of $h$ and $D$, each fiber $h^{-1}(\\{u\\})$ and each sublevel set $\\{q:D(q\\|p)\\leq r\\}$ is closed in the simplex and hence compact by [F7]. The continuous-image and extreme-value conclusions in [F8] therefore apply to these sets. In particular, [F4] makes $q\\mapsto D(q\\|p)+\\beta h(q)$ continuous on the compact simplex, so it attains a finite minimum $m_\\beta$. The rate $D$ is nonnegative by [F5]. The empirical macrostate law under $p^{\\otimes n}$ has rate $D(q\\|p)$ by [F2]. For every Borel $B\\subseteq\\Delta(\\mathcal A)$, the canonical macrostate probability is exactly\n$$p_{n,\\beta}(L_n\\in B)=\\frac{\\int_Be^{-n\\beta h(q)}\\,d\\mu_n(q)}{\\int_{\\Delta(\\mathcal A)}e^{-n\\beta h(q)}\\,d\\mu_n(q)},$$\nwhere $\\mu_n$ is the base law of $L_n$; this follows by summing the word weights in [F1] over the fiber $L_n^{-1}(B)$. Thus it is the tilt in [F3] with $F=-\\beta h$, and its rate is $D+\\beta h-m_\\beta$. Its zero set is $\\mathcal M_\\beta$. Let $U$ be any open neighborhood of $\\mathcal M_\\beta$ and put $C:=\\Delta(\\mathcal A)\\setminus U$. If $C=\\varnothing$, the probability of the complement is zero. Otherwise $C$ is a nonempty closed subset of the compact simplex, hence compact by [F7]. The continuous rate is positive at every point of $C$ because its zero set is $\\mathcal M_\\beta\\subset U$; by [F8] it attains a strictly positive minimum on $C$, and the LDP upper bound makes the canonical macrostate probability of that complement exponentially small.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Let $q\\in\\mathcal M_\\beta$ and put $u=h(q)$. If $r\\in H_u$, then $D(r)+\\beta u\\geq D(q)+\\beta u$, so $q\\in\\mathcal M_u$ and $D(q)=d(u)$. For any $v$ in the energy range, minimizing over $H_v$ gives $d(v)+\\beta v\\geq d(u)+\\beta u$, equivalently $s(v)-\\beta v\\leq s(u)-\\beta u$. Thus $u$ maximizes the stated entropy-minus-energy expression.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The fiber $H_u:=\\{q\\in\\Delta(\\mathcal A):h(q)=u\\}$ is nonempty and closed, hence compact by step 1.1 and [F7], because $u$ is in the range of continuous $h$. By [F4] and [F8], $D$ attains its finite minimum $d(u)$ on $H_u$, so $\\mathcal M_u$ is nonempty. For fixed $\\delta>0$, put $B_\\delta:=\\{q:|h(q)-u|<\\delta\\}$; it is open and contains $H_u$. By [F2],\n$$-\\inf_{B_\\delta}D\\leq\\liminf_n\\frac1n\\ln p^{\\otimes n}(L_n\\in B_\\delta)\\leq\\limsup_n\\frac1n\\ln p^{\\otimes n}(L_n\\in B_\\delta)\\leq-\\inf_{\\overline B_\\delta}D.$$\nFor each matching radius $\\delta_j$ in the Statement the two infima agree, so the inner limit exists and equals their negative common value. The lower bound is finite because $B_{\\delta_j}$ contains a finite-rate point of $H_u$; hence the conditioning event has positive probability for all sufficiently large $n$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F7",
+            "F8",
+            "given",
+            "algebra",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Write $d_\\delta:=\\inf_{\\overline B_\\delta}D$ for any $\\delta>0$; since $H_u\\subseteq\\overline B_\\delta$, $d_\\delta\\leq d(u)$. Fix $\\varepsilon>0$ and let $K_\\varepsilon:=\\{q\\in\\Delta(\\mathcal A):D(q\\|p)\\leq d(u)-\\varepsilon\\}$. By [F4], this set is closed and hence compact by [F7]; it is disjoint from $H_u$ by the definition of $d(u)$. Thus its compact image $h(K_\\varepsilon)$ does not contain $u$ by [F8]. If it is nonempty, the continuous function $v\\mapsto|v-u|$ on that compact image attains a positive minimum by [F8]; continuity follows from $\\big||v-u|-|w-u|\\big|\\leq|v-w|$. Therefore the image is separated from $u$; if it is empty the conclusion is immediate. For every sufficiently small $\\delta$, the closed shell $\\overline B_\\delta$ misses $K_\\varepsilon$, so $d_\\delta\\geq d(u)-\\varepsilon$. Together with $d_\\delta\\leq d(u)$, this proves $d_\\delta\\to d(u)$ as $\\delta\\downarrow0$, in particular along the matching sequence $\\delta_j$. Step 2.1 now gives the iterated shell limit $-d(u)=s(u)$.",
+          "inputs": [
+            "F1",
+            "F4",
+            "F7",
+            "F8",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "Let $U$ be an open neighborhood of $\\mathcal M_u$ and put $C:=\\Delta(\\mathcal A)\\setminus U$, which is closed and hence compact by step 1.1 and [F7]. If $C\\cap H_u=\\varnothing$, then $h(C)$ is compact by [F8] and does not contain $u$; if $C$ is nonempty, the continuous function $v\\mapsto|v-u|$ attains a positive minimum there by [F8], using $\\big||v-u|-|w-u|\\big|\\leq|v-w|$. Thus sufficiently small shells miss $C$; this is also immediate when $C=\\varnothing$. Otherwise, $C\\cap H_u$ is a nonempty closed subset of the compact simplex and is compact by [F7]. Continuity of $D$ and [F8] give $d_C:=\\min_{C\\cap H_u}D>d(u)$, since $C$ contains no constrained minimizer. Choose $0<\\eta<d_C-d(u)$ and set $K:=\\{q\\in C:D(q\\|p)\\leq d(u)+\\eta\\}$; it is closed and hence compact by [F4] and [F7], and it is disjoint from $H_u$. Therefore $h(K)$ is compact by [F8] and does not contain $u$. If empty it is already separated from $u$; otherwise, the continuous distance function $v\\mapsto|v-u|$ attains a positive minimum there by [F8], so $h(K)$ is separated from $u$. Hence for all sufficiently small $\\delta$, $\\inf_{C\\cap\\overline B_\\delta}D\\geq d(u)+\\eta$. For every sufficiently small matching radius $\\delta_j$, we also have $d_{\\delta_j}<d(u)+\\eta/2$. The LDP upper bound [F2] on the closed set $\\overline{C\\cap B_{\\delta_j}}\\subseteq C\\cap\\overline B_{\\delta_j}$ bounds the numerator's logarithmic limsup exponent by $-d(u)-\\eta$. By step 2.1 the denominator's logarithmic limit exponent is $-d_{\\delta_j}$, so subtracting gives a conditional logarithmic limsup at most $d_{\\delta_j}-d(u)-\\eta<-\\eta/2$. Thus for every sufficiently large $j$ the conditional probability tends to zero exponentially as $n\\to\\infty$, which gives the asserted iterated concentration limit.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F7",
+            "F8",
+            "step 2.1",
+            "step 3.1",
+            "algebra",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Conversely, let $u$ maximize $s(v)-\\beta v$ and let $q\\in\\mathcal M_u$. For any $r\\in\\Delta(\\mathcal A)$, put $v=h(r)$. Then $D(r)+\\beta v\\geq d(v)+\\beta v\\geq d(u)+\\beta u=D(q)+\\beta u$, so $q\\in\\mathcal M_\\beta$. This proves both the equality of energy sets and the macrostate criterion. Rearranging $s(v)-\\beta v\\leq s(u)-\\beta u$ gives exactly $s(v)\\leq s(u)+\\beta(v-u)$; hence the criterion is the stated upper-supporting-line condition, with no formal inverse-transform assumption.",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement restricts u to h(Δ(A)), so every constrained fiber H_u is nonempty; step 2.1 records this."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Full support makes D finite and continuous even at simplex coordinates q(a)=0 by F4 and step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For a one-letter alphabet Δ(A) is a singleton, and the compact-minimum and variational identities in steps 1.1–5.1 remain valid."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "If h is constant, its range is a one-point energy set; steps 1.2 and 5.1 still apply."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "For endpoint energies in h(Δ(A)), the fiber remains compact and nonempty; step 2.1 uses no interior-energy assumption."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 obtain minima from compactness; steps 3.1–4.1 use compact image separation, with no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.2 proves a canonical q is constrained-minimizing and its energy maximizes s(v)-βv."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 5.1 proves every constrained minimizer at a maximizing energy is canonical."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Use A={0,1}, p=(r,1-r) with 0<r<1, h(q)=q(0), and β=0.",
+          "result": "Each energy fiber is the single q=(u,1-u), s(u)=-D(q||p), and D≥0 with equality only at u=r; the canonical and supported energy sets are both {r}.",
+          "verifies": "The finite-alphabet variational and upper-supporting-line equivalence in steps 1.1–4.1."
+        }
+      ],
+      "finite_checks_disposition": "The binary check is a symbolic finite-alphabet sanity case; the proof establishes the exact shell and equilibrium results for every finite alphabet and continuous h.",
+      "current_boundary_worksheet": {
+        "proposal": "research/physics-non-fluid-129-2026-10-21-r2-owner-step2-boundary-proposal-2/proposal.json",
+        "source_sha256": "b78c28f9955294083bb10824134552465c70907ee6946a0ecdfd8d1e8ea70499",
+        "qualification": "Released complete current source/eight-case semantic worksheet; root transcribed exact current rows. No independent acceptance or finite computation asserted.",
+        "previous_source_sha256": "67a15baf90fbcc3e7a5dc2a7dfc7fca025da7793ef27e6868cb75bf9ef1d952f",
+        "whitespace_rebinding_receipt": "research/physics-non-fluid-129-2026-10-21-r2-owner-step2-render-whitespace/receipt.json"
+      },
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-88",
+        "notes": "Read all six current proof steps, all eight exact direct supplier Statements/Definitions, reader and refuter evidence, and local Touchette IV.B/Sanov and V.E/nonequivalence context. Full support gives support simplex S=A; finite D is continuous and nonnegative. Finite-dimension d>=1 and explicit norm comparisons transfer Euclidean compactness to d1; all invoked minima have nonempty compact domains. Fiber H_u is explicitly defined in 2.1; its use earlier in 1.2 is harmless forward notation, since the Statement gives the identical constraint. For B_delta the actual closure can be smaller than the closed energy shell: matching open/closed-shell infima sandwich its infimum, so the inner limit remains valid without assuming equality of sets. Finite lower rate ensures eventual positive shell probability. Compact low-cost sets separated in energy prove d_delta to d(u); the same argument outside a minimizer neighborhood supplies a uniform positive conditional rate gap. Empty complement/fiber intersections handled separately. Steps 1.2 and 5.1 prove both canonical/constrained directions and the slope sign s(v)<=s(u)+beta(v-u). The diagram arrows have probability-law domains, pushforward horizontal maps and normalized tilt vertical maps; regrouping finite sums proves commutation for every input law. No diagram dependence, empirical premise or choice axiom. Definition clarification and compact-theorem terminology repair require no source consumer change."
+      }
+    },
+    "thm-csm-frontier-curie-weiss-bifurcation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-csm-frontier-mean-field-ensemble",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal A$ be a finite nonempty alphabet, let $p=(p(a))_{a\\in\\mathcal A}$ be a probability vector with $p(a)>0$ for every $a$, and write\n$$\\Delta(\\mathcal A):=\\left\\{q\\in[0,1]^{\\mathcal A}:\\sum_{a\\in\\mathcal A}q(a)=1\\right\\}$$\nwith the metric $d_1(q,r):=\\sum_{a\\in\\mathcal A}|q(a)-r(a)|$ and its induced topology, called the $\\ell^1$ topology. This is a metric: symmetry, nonnegativity and separation follow coordinatewise, and the triangle inequality follows by summing $|q(a)-s(a)|\\leq|q(a)-r(a)|+|r(a)-s(a)|$. For each integer $n\\geq1$, the configuration space is $\\Omega_n:=\\mathcal A^n$ with the full power-set $\\sigma$-algebra. Its reference probability is the product law $p^{\\otimes n}$, which gives the word $x^n=(x_1,\\ldots,x_n)$ mass $\\prod_{i=1}^n p(x_i)$. By [[lem-it-finite-product-law-is-iid]], this mass assignment is normalized and is a probability law; explicitly, $\\sum_{x^n\\in\\mathcal A^n}\\prod_{i=1}^np(x_i)=\\prod_{i=1}^n\\sum_{a\\in\\mathcal A}p(a)=1$. The empirical macrostate is the probability vector\n$$L_n(x^n)(a):=\\frac1n\\#\\{i\\in\\{1,\\ldots,n\\}:x_i=a\\},\\qquad a\\in\\mathcal A.$$\nThus $L_n$ is the empirical type defined by the finite-alphabet supplier.\n\nFor a continuous function $h:\\Delta(\\mathcal A)\\to\\mathbb R$ and a real parameter $\\beta$, define the finite canonical normalizer and word law by\n$$Z_{n,\\beta}:=\\sum_{x^n\\in\\Omega_n}p^{\\otimes n}(x^n)e^{-n\\beta h(L_n(x^n))},\\qquad p_{n,\\beta}(x^n):=\\frac{p^{\\otimes n}(x^n)e^{-n\\beta h(L_n(x^n))}}{Z_{n,\\beta}}.$$\nThe normalizer is finite and positive because the sum is finite and every summand is finite and positive. The canonical macrostate law is the probability measure on Borel subsets $B\\subseteq\\Delta(\\mathcal A)$ that assigns mass\n$$p_{n,\\beta}\\bigl(\\{x^n\\in\\Omega_n:L_n(x^n)\\in B\\}\\bigr).$$\n\nFor a real-valued function $f$ on a nonempty set $S$, define $\\operatorname*{argmin}_{x\\in S}f(x):=\\{x\\in S:f(x)=\\inf_{y\\in S}f(y)\\}$ and $\\operatorname*{argmax}_{x\\in S}f(x):=\\{x\\in S:f(x)=\\sup_{y\\in S}f(y)\\}$; either set is empty if the corresponding extremum is not attained. For $q\\in\\Delta(\\mathcal A)$, set\n$$D(q\\|p):=\\sum_{a:q(a)>0}q(a)\\ln\\frac{q(a)}{p(a)},$$\nomitting zero-mass terms, as in the finite relative-entropy convention. For $u\\in h(\\Delta(\\mathcal A))$, define the constrained cost, entropy, canonical variational set, and constrained variational set by\n$$d(u):=\\inf_{q\\in\\Delta(\\mathcal A):h(q)=u}D(q\\|p),\\qquad s(u):=-d(u),$$\n$$\\mathcal M_\\beta:=\\operatorname*{argmin}_{q\\in\\Delta(\\mathcal A)}\\bigl[D(q\\|p)+\\beta h(q)\\bigr],\\qquad \\mathcal M_u:=\\operatorname*{argmin}_{q\\in\\Delta(\\mathcal A):h(q)=u}D(q\\|p).$$\nFor $A\\subseteq\\Omega_n$ and an event $E\\subseteq\\Omega_n$ with $p^{\\otimes n}(E)>0$, define the conditional probability by $p^{\\otimes n}(A\\mid E):=p^{\\otimes n}(A\\cap E)/p^{\\otimes n}(E)$. For $\\delta>0$, the microcanonical shell event is $E_{n,\\delta,u}:=\\{x^n:|h(L_n(x^n))-u|<\\delta\\}$. Whenever $p^{\\otimes n}(E_{n,\\delta,u})>0$, its microcanonical shell law is the conditional probability $p^{\\otimes n}(\\,\\cdot\\mid E_{n,\\delta,u})$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-csm-frontier-mean-field-supporting-lines",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal A$ be finite and nonempty, let $p(a)>0$ for every $a\\in\\mathcal A$, and let $h:\\Delta(\\mathcal A)\\to\\mathbb R$ be continuous, where $\\Delta(\\mathcal A)$ is the probability simplex with its $\\ell^1$ topology. Let $L_n$ be the empirical probability vector of an $n$-word drawn from $p^{\\otimes n}$, and use $D(q\\|p)=\\sum_{a:q(a)>0}q(a)\\ln(q(a)/p(a))$ with zero-mass terms omitted. For $\\beta\\in\\mathbb R$, the canonical word law weights $x^n$ proportionally to $p^{\\otimes n}(x^n)e^{-n\\beta h(L_n(x^n))}$.\n\nThe canonical macrostate law of $L_n$ satisfies a speed-$n$ large-deviation principle with rate\n$$R_\\beta(q)=D(q\\|p)+\\beta h(q)-m_\\beta,\\qquad m_\\beta:=\\min_{r\\in\\Delta(\\mathcal A)}\\bigl[D(r\\|p)+\\beta h(r)\\bigr].$$\nThus its canonical equilibrium macrostate set is $\\mathcal M_\\beta=\\operatorname*{argmin}_{q\\in\\Delta(\\mathcal A)}[D(q\\|p)+\\beta h(q)]$.\n\nFor $u\\in h(\\Delta(\\mathcal A))$, let $d(u):=\\min_{h(q)=u}D(q\\|p)$, $s(u):=-d(u)$, and $\\mathcal M_u:=\\operatorname*{argmin}_{h(q)=u}D(q\\|p)$. If there is a sequence $\\delta_j\\downarrow0$ for which\n$$\\inf_{|h(q)-u|<\\delta_j}D(q\\|p)=\\inf_{|h(q)-u|\\leq\\delta_j}D(q\\|p)\\quad\\text{for every }j,$$\nthen the iterated microcanonical shell limit exists and is\n$$\\lim_{j\\to\\infty}\\lim_{n\\to\\infty}\\frac1n\\ln p^{\\otimes n}\\!\\left(|h(L_n)-u|<\\delta_j\\right)=s(u).$$\nIn the same iterated limit, for every open neighborhood $U$ of $\\mathcal M_u$,\n$$\\lim_{j\\to\\infty}\\limsup_{n\\to\\infty}p^{\\otimes n}\\!\\left(L_n\\notin U\\mid |h(L_n)-u|<\\delta_j\\right)=0.$$\nFinally,\n$$h(\\mathcal M_\\beta)=\\operatorname*{argmax}_{v\\in h(\\Delta(\\mathcal A))}\\bigl[s(v)-\\beta v\\bigr],$$\nand a macrostate $q$ is canonical at $\\beta$ exactly when $q\\in\\mathcal M_{h(q)}$ and $h(q)$ maximizes $s(v)-\\beta v$. Equivalently, $u$ is a canonical energy at $\\beta$ exactly when $v\\mapsto s(u)+\\beta(v-u)$ is an upper supporting affine function for $s$ on the whole energy range. An energy with no upper supporting line for any slope is not realized by a canonical ensemble.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because The exponential is a continuous bijection from $\\mathbb{R}$ onto $(0,\\infty)$ states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-chain-rule",
+          "source_section": "Statement",
+          "quote": "Let $A, B \\subseteq \\mathbb{R}$, let $g : A \\to \\mathbb{R}$ with\n$g[A] \\subseteq B$ and let $f : B \\to \\mathbb{R}$, so that the composite\n$f \\circ g : A \\to \\mathbb{R}$ is defined. Let $c \\in A$ be a limit point of\n$A$ (Limit point, isolated point, adherent point, derived set, and dense subset of $\\mathbb{R}$) at which $g$ is differentiable\n(The derivative $f'(c) = \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c}$ of $f : A \\to \\mathbb{R}$ at a point $c \\in A$ that is a limit point of $A$, and differentiability on a set), put $b := g(c)$, and suppose $b$ is a limit point of $B$\nat which $f$ is differentiable. Then $f \\circ g$ is differentiable at $c$ and\n\n$$(f \\circ g)'(c) \\;=\\; f'\\bigl(g(c)\\bigr)\\,g'(c) .$$\n\n**Both limit-point hypotheses are needed, and neither is automatic.** That $c$\nis a limit point of $A$ is what makes $g'(c)$ and $(f \\circ g)'(c)$ defined\nsymbols; that $b = g(c)$ is a limit point of $B$ is what makes $f'(b)$ one.\nNothing forces the second: $g$ may be differentiable at $c$ and send $c$ to an\nisolated point of $B$, and there $f'(b)$ is not defined and the formula asserts\nnothing.\n\n**No case analysis appears anywhere.** The naive difference-quotient proof\nwrites $\\frac{f(g(x)) - f(g(c))}{g(x) - g(c)} \\cdot \\frac{g(x) - g(c)}{x - c}$\nand then has to say what happens where $g(x) = g(c)$, which may occur at points\narbitrarily close to $c$. Carathéodory's factorisation never divides by the\ninner increment, so the difficulty does not arise.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ (Continuity of $f : A \\to \\mathbb{R}$ at a point of $A$ and on $A$: the $\\varepsilon$-$\\delta$ condition, its agreement with $\\lim_{x \\to c} f(x) = f(c)$ at a limit point, and continuity at an isolated point, Intervals of $\\mathbb{R}$: the nine order-convex forms, nondegeneracy, and length) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n(The derivative $f'(c) = \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c}$ of $f : A \\to \\mathbb{R}$ at a point $c \\in A$ that is a limit point of $A$, and differentiability on a set). Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$\n\nEquivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which\n$f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals\nthe average rate of change across the whole interval.\n\n**Continuity on the closed interval cannot be dropped.** Differentiability at\nevery point of $(a,b)$ alone does not suffice: a function on $[0,1]$,\ndifferentiable at every point of $(0,1)$ with derivative constantly $1$, for\nwhich no $c$ works, is exhibited later on this page as a false statement, and\nthe companion page works the same witness out in full.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-intermediate-value",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a \\le b$, let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on the closed bounded interval $[a,b]$ (Intervals of $\\mathbb{R}$: the nine order-convex forms, nondegeneracy, and length,\nContinuity of $f : A \\to \\mathbb{R}$ at a point of $A$ and on $A$: the $\\varepsilon$-$\\delta$ condition, its agreement with $\\lim_{x \\to c} f(x) = f(c)$ at a limit point, and continuity at an isolated point), and let $y \\in \\mathbb{R}$ satisfy\n\n$$f(a) \\le y \\le f(b) \\qquad \\text{or} \\qquad f(b) \\le y \\le f(a) .$$\n\nThen there is $c \\in [a,b]$ with $f(c) = y$.\n\n**The construction is canonical, so no choice principle is used.** The bisection\nbelow tests the left half first and takes the right half only when the left one\nhas been ruled out, so the passage from one interval to the next is a *function*\nof that interval, and The recursion theorem applies with nothing selected. This is\nthe same discipline the library uses wherever a sequence is built one term at a\ntime.\n\n**Completeness of $\\mathbb{R}$ is what does the work.** The bisection produces a\nnested sequence of closed bounded intervals whose lengths tend to $0$, and it is\nA nested sequence of nonempty closed bounded intervals has nonempty intersection, and the intersection is a single point exactly when the lengths tend to $0$ — hence the least-upper-bound property — that\nsupplies the point. Over an ordered field that is not complete the theorem\nfails; the witness for that, stated for an arbitrary ordered field and worked\nover $\\mathbb{Q}$, is\nOn a closed interval of $\\mathbb{Q}$ there is a continuous unbounded function, a bounded one with no maximum, and one without the intermediate value property, which states its own\n$\\varepsilon$-$\\delta$ continuity inline and is not an instance of this page's\ndefinition.",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-it-finite-relative-entropy-continuity-on-simplex",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal A$ be finite and let $p$ be a probability vector with $p(a)>0$ for every $a\\in\\mathcal A$. Then $q\\mapsto D(q\\|p)$ is finite and continuous on the probability simplex $\\Delta(\\mathcal A)$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Write $q(+1)=(1+m)/2$ and $q(-1)=(1-m)/2$. Substituting into [F1] with $p(+1)=p(-1)=1/2$ gives\n$$D(q\\|p)=\\frac{1+m}{2}\\ln(1+m)+\\frac{1-m}{2}\\ln(1-m),$$\nwith the zero-mass endpoint term omitted. Since $q$ depends continuously on $m\\in[-1,1]$ and [F8] makes $D(q\\|p)$ continuous on the whole simplex, adding $\\beta h(q)=-\\beta Jm^2/2$ shows that $\\Phi_\\beta$ is continuous on $[-1,1]$; [F8] supplies the boundary limit $t\\ln t\\to0$ behind the convention $0\\ln0=0$. The formula is even in $m$.",
+          "inputs": [
+            "F1",
+            "F8",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For $|m|<1$ define $a(m):=\\operatorname{atanh}(m):=\\tfrac12\\ln\\frac{1+m}{1-m}$. By [F3]–[F5] and direct differentiation, $$a'(m)=\\frac1{1-m^2},\\qquad \\Phi_\\beta'(m)=a(m)-\\beta Jm.$$ For $0<m<1$ put $g(m):=a(m)/m$ and define $r:[0,1)\\to\\mathbb R$ by $r(m):=m/(1-m^2)-a(m)$. Then $g'(m)=r(m)/m^2$, $r(0)=0$, and $r'(m)=2m^2/(1-m^2)^2>0$ for $0<m<1$. The mean value theorem [F6] applies to $r$ on $[0,m]$ because $r$ is continuous there and differentiable on $(0,m)$; it gives $r(m)>0$, hence $g'(m)>0$.",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The same theorem [F6] applied to $a$ on $[0,m]$ gives $g(m)=a'(c_m)$ for some $c_m\\in(0,m)$; as $m\\downarrow0$, $c_m\\downarrow0$ and $a'(c_m)\\to1$, so $\\lim_{m\\downarrow0}g(m)=1$. As $m\\uparrow1$, $(1+m)/(1-m)\\to+\\infty$, and the increasing onto logarithm [F3] gives $a(m)\\to+\\infty$, hence $g(m)\\to+\\infty$. Thus $g$ is continuous, strictly increasing from limiting value $1$ to $+\\infty$ on $(0,1)$.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F6",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $\\beta J\\leq1$, then for $0<m<1$, $\\Phi_\\beta'(m)=m(g(m)-\\beta J)>0$ by step 2.1. The mean value theorem [F6] on each subinterval of $[0,1]$ makes $\\Phi_\\beta$ strictly increasing there; continuity includes the endpoint $m=1$. Evenness then shows $\\Phi_\\beta(m)>\\Phi_\\beta(0)$ for every $m\\neq0$, so $0$ is the unique global minimizer.",
+          "step": "3.1",
+          "inputs": [
+            "F6",
+            "step 2.1",
+            "algebra",
+            "cases"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "If $\\beta J>1$, the limits in step 2.1 give $a,b$ with $0<a<b<1$, $g(a)<\\beta J<g(b)$. Continuity of $g$ on $[a,b]$ and the intermediate value theorem [F7] give an $m_\\beta\\in(a,b)$ with $g(m_\\beta)=\\beta J$; strict increase of $g$ makes it unique on $(0,1)$. The derivative formula in step 1.2 is negative for $0<m<m_\\beta$ and positive for $m_\\beta<m<1$. By [F6], $\\Phi_\\beta$ strictly decreases on $[0,m_\\beta]$ and strictly increases on $[m_\\beta,1]$, including the endpoint by continuity. Evenness proves that the only global minimizers on $[-1,1]$ are $\\pm m_\\beta$; in particular the stationary point $m=0$ is not a minimizer.",
+          "step": "3.2",
+          "inputs": [
+            "F6",
+            "F7",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The equation $g(m_\\beta)=\\beta J$ is $\\operatorname{atanh}(m_\\beta)=\\beta Jm_\\beta$. If $r=(1+m_\\beta)/(1-m_\\beta)$, then $\\exp(2\\operatorname{atanh}(m_\\beta))=\\exp(\\ln r)=r$ by [F3], so the stated formula for $\\tanh$ gives $\\tanh(\\operatorname{atanh}(m_\\beta))=(r-1)/(r+1)=m_\\beta$. Hence $m_\\beta=\\tanh(\\beta Jm_\\beta)$. Conversely, any $m\\in(0,1)$ solving this fixed-point equation yields $\\exp(2\\beta Jm)=(1+m)/(1-m)$ by rearrangement of the stated $\\tanh$ formula; applying $\\ln$ and [F3] gives $g(m)=\\beta J$. Strict increase of $g$ therefore proves uniqueness of the positive fixed point. By [F2], the global minimizers just classified are exactly the canonical equilibrium magnetizations.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 2.1",
+            "step 3.1",
+            "step 3.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The spin alphabet has two states and the magnetization domain is the nonempty interval [-1,1]; see the Statement and step 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 includes m=0 and proves it is the unique minimizer when βJ≤1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement includes beta J=1. Steps 2.1 and 3.1 use g(m)>1 for every 0<m<1, so m=0 remains the unique minimizer even though the quadratic Hessian there vanishes. The alphabet remains two-state."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 includes beta=0 and the critical case beta J=1. The proof uses strict increase away from zero, not a strictly positive second derivative at the critical stationary point."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 3.1 and 3.2 include m=±1 by continuity and strict monotonicity up to the closed endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The unique positive root is obtained by the intermediate value theorem in step 3.2; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Steps 3.1 and 3.2 show every global minimizer is 0 for beta J<=1, and belongs to {minus m_beta,plus m_beta} for beta J>1. Step 4.1 converts the unique positive g(m)=beta J root to the tanh fixed-point equation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Steps 3.1 and 3.2 prove the listed magnetizations really minimize on all of [-1,1], including endpoints. Step 4.1 proves a positive tanh fixed point yields g(m)=beta J and hence is the unique m_beta; it does not classify the always-present zero stationary point as a supercritical minimizer."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Set β=0 in the Curie-Weiss objective.",
+          "result": "The objective is D(q||p), whose unique minimizer is the uniform q and hence m=0, matching βJ≤1.",
+          "verifies": "The subcritical classification in step 3.1."
+        }
+      ],
+      "finite_checks_disposition": "The β=0 symbolic case is an exact boundary check; steps 1.1–3.1 prove the full continuous-parameter classification.",
+      "current_boundary_worksheet": {
+        "proposal": "research/physics-non-fluid-129-2026-10-21-r2-owner-step2-boundary-proposal-1/proposal.json",
+        "source_sha256": "01340cffd5368b847ae6d0fb7c30e5e50a7da42806d4b8d27546e5e7d2356e00",
+        "qualification": "Released complete current source/eight-case semantic worksheet; root transcribed exact current rows. No independent acceptance or finite computation asserted."
+      },
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-88",
+        "notes": "Independently read six current steps, nine actual direct suppliers and exact pre-reader source at owner-step2-csm88-laplace/before/items; raw hashes match pre/post snapshots. Reader delta replaces conventional e^x notation by exp(x) in tanh and 4.1, a harmless audit clarification, with unchanged objective and conclusions. Read Poisat Exercise/Solution 19 (PDF pp.11,20) and Touchette canonical/nonequivalence context. Model is explicitly dimensionless, J>0 and beta>=0. Substitution q(±1)=(1±m)/2 gives the entropy objective; continuity lemma handles both m endpoints. Differentiate a and g: r(0)=0, r prime=2m^2/(1-m^2)^2>0, hence g strictly increases from 1 to infinity. MVT at positive m gives 1<g(m), including critical beta J=1 and beta=0. IVT on an interior closed bracket yields a unique positive root when beta J>1; derivative signs and evenness give exactly both nonzero global minima, exclude zero and endpoints. The intermediate c_m is bounded by 0<c_m<m; convergence to zero needs no monotone selection or choice axiom. Both tanh/atanh directions use the stated exponential inverse and positive denominator. Chain-rule domains are open intervals with positive log arguments; MVT closed-interval continuity holds. No actual item consumers found. No empirical premise or uncertainty is inferred from the model calculation."
+      }
+    },
+    "ex-csm-frontier-nonexposed-energy": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-csm-frontier-mean-field-ensemble",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal A$ be a finite nonempty alphabet, let $p=(p(a))_{a\\in\\mathcal A}$ be a probability vector with $p(a)>0$ for every $a$, and write\n$$\\Delta(\\mathcal A):=\\left\\{q\\in[0,1]^{\\mathcal A}:\\sum_{a\\in\\mathcal A}q(a)=1\\right\\}$$\nwith the metric $d_1(q,r):=\\sum_{a\\in\\mathcal A}|q(a)-r(a)|$ and its induced topology, called the $\\ell^1$ topology. This is a metric: symmetry, nonnegativity and separation follow coordinatewise, and the triangle inequality follows by summing $|q(a)-s(a)|\\leq|q(a)-r(a)|+|r(a)-s(a)|$. For each integer $n\\geq1$, the configuration space is $\\Omega_n:=\\mathcal A^n$ with the full power-set $\\sigma$-algebra. Its reference probability is the product law $p^{\\otimes n}$, which gives the word $x^n=(x_1,\\ldots,x_n)$ mass $\\prod_{i=1}^n p(x_i)$. By [[lem-it-finite-product-law-is-iid]], this mass assignment is normalized and is a probability law; explicitly, $\\sum_{x^n\\in\\mathcal A^n}\\prod_{i=1}^np(x_i)=\\prod_{i=1}^n\\sum_{a\\in\\mathcal A}p(a)=1$. The empirical macrostate is the probability vector\n$$L_n(x^n)(a):=\\frac1n\\#\\{i\\in\\{1,\\ldots,n\\}:x_i=a\\},\\qquad a\\in\\mathcal A.$$\nThus $L_n$ is the empirical type defined by the finite-alphabet supplier.\n\nFor a continuous function $h:\\Delta(\\mathcal A)\\to\\mathbb R$ and a real parameter $\\beta$, define the finite canonical normalizer and word law by\n$$Z_{n,\\beta}:=\\sum_{x^n\\in\\Omega_n}p^{\\otimes n}(x^n)e^{-n\\beta h(L_n(x^n))},\\qquad p_{n,\\beta}(x^n):=\\frac{p^{\\otimes n}(x^n)e^{-n\\beta h(L_n(x^n))}}{Z_{n,\\beta}}.$$\nThe normalizer is finite and positive because the sum is finite and every summand is finite and positive. The canonical macrostate law is the probability measure on Borel subsets $B\\subseteq\\Delta(\\mathcal A)$ that assigns mass\n$$p_{n,\\beta}\\bigl(\\{x^n\\in\\Omega_n:L_n(x^n)\\in B\\}\\bigr).$$\n\nFor a real-valued function $f$ on a nonempty set $S$, define $\\operatorname*{argmin}_{x\\in S}f(x):=\\{x\\in S:f(x)=\\inf_{y\\in S}f(y)\\}$ and $\\operatorname*{argmax}_{x\\in S}f(x):=\\{x\\in S:f(x)=\\sup_{y\\in S}f(y)\\}$; either set is empty if the corresponding extremum is not attained. For $q\\in\\Delta(\\mathcal A)$, set\n$$D(q\\|p):=\\sum_{a:q(a)>0}q(a)\\ln\\frac{q(a)}{p(a)},$$\nomitting zero-mass terms, as in the finite relative-entropy convention. For $u\\in h(\\Delta(\\mathcal A))$, define the constrained cost, entropy, canonical variational set, and constrained variational set by\n$$d(u):=\\inf_{q\\in\\Delta(\\mathcal A):h(q)=u}D(q\\|p),\\qquad s(u):=-d(u),$$\n$$\\mathcal M_\\beta:=\\operatorname*{argmin}_{q\\in\\Delta(\\mathcal A)}\\bigl[D(q\\|p)+\\beta h(q)\\bigr],\\qquad \\mathcal M_u:=\\operatorname*{argmin}_{q\\in\\Delta(\\mathcal A):h(q)=u}D(q\\|p).$$\nFor $A\\subseteq\\Omega_n$ and an event $E\\subseteq\\Omega_n$ with $p^{\\otimes n}(E)>0$, define the conditional probability by $p^{\\otimes n}(A\\mid E):=p^{\\otimes n}(A\\cap E)/p^{\\otimes n}(E)$. For $\\delta>0$, the microcanonical shell event is $E_{n,\\delta,u}:=\\{x^n:|h(L_n(x^n))-u|<\\delta\\}$. Whenever $p^{\\otimes n}(E_{n,\\delta,u})>0$, its microcanonical shell law is the conditional probability $p^{\\otimes n}(\\,\\cdot\\mid E_{n,\\delta,u})$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-csm-frontier-mean-field-supporting-lines",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal A$ be finite and nonempty, let $p(a)>0$ for every $a\\in\\mathcal A$, and let $h:\\Delta(\\mathcal A)\\to\\mathbb R$ be continuous, where $\\Delta(\\mathcal A)$ is the probability simplex with its $\\ell^1$ topology. Let $L_n$ be the empirical probability vector of an $n$-word drawn from $p^{\\otimes n}$, and use $D(q\\|p)=\\sum_{a:q(a)>0}q(a)\\ln(q(a)/p(a))$ with zero-mass terms omitted. For $\\beta\\in\\mathbb R$, the canonical word law weights $x^n$ proportionally to $p^{\\otimes n}(x^n)e^{-n\\beta h(L_n(x^n))}$.\n\nThe canonical macrostate law of $L_n$ satisfies a speed-$n$ large-deviation principle with rate\n$$R_\\beta(q)=D(q\\|p)+\\beta h(q)-m_\\beta,\\qquad m_\\beta:=\\min_{r\\in\\Delta(\\mathcal A)}\\bigl[D(r\\|p)+\\beta h(r)\\bigr].$$\nThus its canonical equilibrium macrostate set is $\\mathcal M_\\beta=\\operatorname*{argmin}_{q\\in\\Delta(\\mathcal A)}[D(q\\|p)+\\beta h(q)]$.\n\nFor $u\\in h(\\Delta(\\mathcal A))$, let $d(u):=\\min_{h(q)=u}D(q\\|p)$, $s(u):=-d(u)$, and $\\mathcal M_u:=\\operatorname*{argmin}_{h(q)=u}D(q\\|p)$. If there is a sequence $\\delta_j\\downarrow0$ for which\n$$\\inf_{|h(q)-u|<\\delta_j}D(q\\|p)=\\inf_{|h(q)-u|\\leq\\delta_j}D(q\\|p)\\quad\\text{for every }j,$$\nthen the iterated microcanonical shell limit exists and is\n$$\\lim_{j\\to\\infty}\\lim_{n\\to\\infty}\\frac1n\\ln p^{\\otimes n}\\!\\left(|h(L_n)-u|<\\delta_j\\right)=s(u).$$\nIn the same iterated limit, for every open neighborhood $U$ of $\\mathcal M_u$,\n$$\\lim_{j\\to\\infty}\\limsup_{n\\to\\infty}p^{\\otimes n}\\!\\left(L_n\\notin U\\mid |h(L_n)-u|<\\delta_j\\right)=0.$$\nFinally,\n$$h(\\mathcal M_\\beta)=\\operatorname*{argmax}_{v\\in h(\\Delta(\\mathcal A))}\\bigl[s(v)-\\beta v\\bigr],$$\nand a macrostate $q$ is canonical at $\\beta$ exactly when $q\\in\\mathcal M_{h(q)}$ and $h(q)$ maximizes $s(v)-\\beta v$. Equivalently, $u$ is a canonical energy at $\\beta$ exactly when $v\\mapsto s(u)+\\beta(v-u)$ is an upper supporting affine function for $s$ on the whole energy range. An energy with no upper supporting line for any slope is not realized by a canonical ensemble.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because The exponential is a continuous bijection from $\\mathbb{R}$ onto $(0,\\infty)$ states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-chain-rule",
+          "source_section": "Statement",
+          "quote": "Let $A, B \\subseteq \\mathbb{R}$, let $g : A \\to \\mathbb{R}$ with\n$g[A] \\subseteq B$ and let $f : B \\to \\mathbb{R}$, so that the composite\n$f \\circ g : A \\to \\mathbb{R}$ is defined. Let $c \\in A$ be a limit point of\n$A$ (Limit point, isolated point, adherent point, derived set, and dense subset of $\\mathbb{R}$) at which $g$ is differentiable\n(The derivative $f'(c) = \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c}$ of $f : A \\to \\mathbb{R}$ at a point $c \\in A$ that is a limit point of $A$, and differentiability on a set), put $b := g(c)$, and suppose $b$ is a limit point of $B$\nat which $f$ is differentiable. Then $f \\circ g$ is differentiable at $c$ and\n\n$$(f \\circ g)'(c) \\;=\\; f'\\bigl(g(c)\\bigr)\\,g'(c) .$$\n\n**Both limit-point hypotheses are needed, and neither is automatic.** That $c$\nis a limit point of $A$ is what makes $g'(c)$ and $(f \\circ g)'(c)$ defined\nsymbols; that $b = g(c)$ is a limit point of $B$ is what makes $f'(b)$ one.\nNothing forces the second: $g$ may be differentiable at $c$ and send $c$ to an\nisolated point of $B$, and there $f'(b)$ is not defined and the formula asserts\nnothing.\n\n**No case analysis appears anywhere.** The naive difference-quotient proof\nwrites $\\frac{f(g(x)) - f(g(c))}{g(x) - g(c)} \\cdot \\frac{g(x) - g(c)}{x - c}$\nand then has to say what happens where $g(x) = g(c)$, which may occur at points\narbitrarily close to $c$. Carathéodory's factorisation never divides by the\ninner increment, so the difficulty does not arise.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ (Continuity of $f : A \\to \\mathbb{R}$ at a point of $A$ and on $A$: the $\\varepsilon$-$\\delta$ condition, its agreement with $\\lim_{x \\to c} f(x) = f(c)$ at a limit point, and continuity at an isolated point, Intervals of $\\mathbb{R}$: the nine order-convex forms, nondegeneracy, and length) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n(The derivative $f'(c) = \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c}$ of $f : A \\to \\mathbb{R}$ at a point $c \\in A$ that is a limit point of $A$, and differentiability on a set). Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$\n\nEquivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which\n$f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals\nthe average rate of change across the whole interval.\n\n**Continuity on the closed interval cannot be dropped.** Differentiability at\nevery point of $(a,b)$ alone does not suffice: a function on $[0,1]$,\ndifferentiable at every point of $(0,1)$ with derivative constantly $1$, for\nwhich no $c$ works, is exhibited later on this page as a false statement, and\nthe companion page works the same witness out in full.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "If $u=0$, then $h(q)=0$ forces $q(1)=0$ and $q(0)=1$, so the constraint fiber is the singleton $(0,1)$. By [F1], $D((0,1)\\|p)=\\ln2$, and therefore $s(0)=-\\ln2=H_2(0)-\\ln2$. If $0<u\\leq1$, then $h(q)=u$ forces $q(1)=u^4$ and $q(0)=1-u^4$, again a singleton fiber. The relative-entropy formula in [F1] gives $D(q\\|p)=u^4\\ln(2u^4)+(1-u^4)\\ln(2(1-u^4))=\\ln2-H_2(u^4)$; hence $s(u)=H_2(u^4)-\\ln2$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $0<u<1$, [F4]–[F5] give $H_2'(x)=\\ln((1-x)/x)$ and therefore $s'(u)=4u^3\\ln((1-u^4)/u^4)$. Differentiating once more yields $s''(u)=u^2 B(u)$, where $B(u):=12\\ln((1-u^4)/u^4)-16/(1-u^4)$.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "On $0<u\\leq1/9$, $R(u):=(1-u^4)/u^4=u^{-4}-1$ decreases and $1/(1-u^4)$ increases, so $B(u)$ decreases. At $u=1/9$, $R(u)=6560$ and $B(1/9)=12\\ln6560-16\\cdot6561/6560$. Since $6560>16$, [F3] gives $\\ln6560>\\ln16=4\\ln2$; and [F4] gives $\\ln2=\\int_1^2dt/t>1/2$ because $1/t\\geq1/2$ on $[1,2]$ with strict inequality on $[1,2)$. Thus $12\\ln6560>24$. Also $16\\cdot6561/6560<17$ by integer multiplication, so $B(1/9)>7$ and $B(u)>0$ throughout $(0,1/9]$. In particular $s''(u)>0$ on that interval. By applying [F6] first to $s'$ and then to $s$, positive second derivative makes $s'$ strictly increasing and every interior chord lie strictly above the graph; hence $s$ is strictly convex on $(0,1/9)$.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F6",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Fix $u\\in(0,1/10]$ and choose $t>0$ so that $0<u-t<u+t<1/9$, possible because $1/10<1/9$. Strict convexity from step 3.1 gives $s(u-t)+s(u+t)>2s(u)$. If an upper supporting line with slope $\\beta$ existed at $u$, its inequalities at $u-t$ and $u+t$ would instead give $s(u-t)+s(u+t)\\leq[s(u)-\\beta t]+[s(u)+\\beta t]=2s(u)$, a contradiction. By [F2], no such energy is canonical for any real $\\beta$.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "step 3.1",
+            "choose",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For u in the stated energy interval, q(1)=u^4 and q(0)=1-u^4 give the unique constrained point in step 1.1.",
+          "case_reasoning": "Every u in [0,1] has the explicit singleton constraint fiber, so empty infimum never occurs."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Verification 1.1 computes the entropy at u=0 using its singleton fiber and 0ln0 convention. The strict-convexity/noncanonical conclusion only concerns u>0.",
+          "case_reasoning": "1.1 explicitly computes s(0)=-ln2, but no positive-curvature or noncanonical assertion is made at u=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For each u in [0,1], Verification 1.1 proves the constraint fiber is the single probability vector (u^4,1-u^4); this singleton is the relevant cardinality-one case.",
+          "case_reasoning": "Alphabet has two states, yet each constraint fiber is a singleton and is computed explicitly."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Each positive energy in the stated interval determines a unique nondegenerate constrained probability vector; see step 1.1.",
+          "case_reasoning": "Positive u<=1/10 gives both probability coordinates strictly positive; u=0,1 are entropy-boundary points with 0ln0 convention."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The upper endpoint u=1/10 lies strictly inside the proved convexity interval (0,1/9), so step 4.1 has a two-sided neighborhood.",
+          "case_reasoning": "1/10 is inside enlarged convexity interval (0,1/9); 4.1 can take a two-sided neighborhood even at the claimed upper endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The constrained vector is explicitly solved as q(1)=u^4 in step 1.1; the proof uses no choice axiom.",
+          "case_reasoning": "Explicit constraint vector and a single sufficiently small t are constructed; no indexed selection principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example proves absence of a supporting line, not an equivalence.",
+          "case_reasoning": "Canonicality implies supporting line by F2, which is contradicted locally."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example proves absence of a supporting line, not an equivalence.",
+          "case_reasoning": "No reverse statement claims all energies without this convexity mechanism are canonical."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Evaluate the curvature bracket at u=1/9.",
+          "result": "B(1/9)=12 ln(6560)-16·6561/6560>24-17=7, so B(u)>0 for 0<u≤1/9.",
+          "verifies": "The explicit positive-curvature bound in step 3.1."
+        }
+      ],
+      "finite_checks_disposition": "The exact endpoint inequality supplies the finite arithmetic check; the monotonicity proof establishes positivity throughout the interval.",
+      "current_boundary_worksheet": {
+        "proposal": "research/physics-non-fluid-129-2026-10-21-r2-owner-step2-boundary-proposal-7/proposal.json",
+        "source_sha256": "1cff814bb305bd63a25e4e1713b96a277d589ce9c43e5510ceb5243d17ce65da",
+        "qualification": "Released complete current source/eight-case semantic worksheet; root transcribed exact current rows. No independent acceptance or finite computation asserted."
+      },
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-88",
+        "notes": "Read all four Verification steps, all seven direct supplier statements, reader/refuter reports, and Touchette V.E / Poisat 3.4 and Exercise 19 as context. Every u in [0,1] gives exactly q(1)=u^4 and q(0)=1-u^4, including u=0 and u=1 with the declared zero-log convention, hence s=H2(u^4)-ln2. Differentiation only for 0<u<1 gives s double-prime=u^2[12ln((1-u^4)/u^4)-16/(1-u^4)]. Its bracket decreases; at 1/9 it exceeds 24-17=7 via ln2>1/2 and 16*6561<17*6560. Therefore strict convexity holds on a larger interval containing every u in (0,1/10], including the upper endpoint. Two-sided midpoint comparison contradicts any affine upper support of any real slope; supporting-lines supplies canonicality implies such support with the right sign. No noncanonical assertion is made at 0 or 1. Chain-rule arguments stay positive; MVT intervals stay in (0,1). Technical strict-convexity content is explicitly the chord/midpoint inequality. No arbitrary choice or empirical premise. The exact example is local ai-generated mathematics, not attributed to the contextual sources. Definition reader clarification requires no change."
+      }
+    }
+  }
+}

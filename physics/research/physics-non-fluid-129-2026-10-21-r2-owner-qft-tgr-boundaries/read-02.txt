@@ -1,0 +1,286 @@
+
+ITEM lem-tgr-finite-cutoff-mode-entropy-growth
+
+## Statement
+
+Fix a real number $k_B>0$. For each integer $N\ge1$, let $H_{\rm in}=\mathbb C$ with its standard inner product and basis $1$, and let $H_{{\rm out},N}=(\mathbb C^2)^{\otimes N}$ with the standard product inner product and product basis. Identify the product basis of $\mathbb C\otimes H_{{\rm out},N}$ with that of $H_{{\rm out},N}$. For the density operator $\rho_N=I_{2^N}/2^N$, where $I_{2^N}$ is the identity matrix on this $2^N$-dimensional space, the outside entropy is
+
+$$ S_{\rm out}(\rho_N;\mathbb C,H_{{\rm out},N})=k_BN\log2, $$
+
+which tends to $+\infty$ as $N\to\infty$.
+
+## Facts & Assumptions
+
+**Given:** A positive real $k_B$, an integer $N\ge1$, the one-dimensional input space $\mathbb C$, and the $N$-factor output space $(\mathbb C^2)^{\otimes N}$.
+
+[F1] [[def-tgr-finite-cutoff-outside-entropy]]: the outside density is obtained by summing the diagonal blocks over an orthonormal basis of the input factor, and its entropy is $-k_B$ times the natural-log spectral sum.
+
+[F2] [[def-qc-density-operator]]: a density operator on a nonzero finite-dimensional space is non-negative and has trace one.
+
+[F3] [[def-natural-logarithm]]: $\log$ is the inverse of the real exponential on $(0,\infty)$.
+
+[F4] [[cor-exponential-reciprocal-and-positivity]]: for every real $x$, $\exp(x)>0$ and $\exp(-x)=1/\exp(x)$.
+
+[F5] [[def-real-exponential-function-and-e]]: the real exponential is defined by its power series; at input $0$, every positive-degree term vanishes and the zero-degree term is $1$, so $\exp(0)=1$.
+
+[F6] [[thm-exponential-addition-formula]]: $\exp(x+y)=\exp(x)\exp(y)$ for real $x,y$.
+
+[F7] [[thm-exponential-is-strictly-increasing]]: the real exponential is strictly increasing, hence injective.
+
+[F8] [[thm-of-archimedean]]: for every real $x$ there is an integer $n\ge1$ with $x<n$.
+
+[F9] [[def-qc-tensor-register-and-permutation]]: tensoring the standard basis in each $\mathbb C^2$ factor gives the ordered product basis of $H_{{\rm out},N}$, so its dimension is $2^N$.
+
+## Proof
+
+1.1 The matrix $\rho_N=I_{2^N}/2^N$ is non-negative and has trace $2^N/2^N=1$, so it is a density operator by [F2] and [F9]. Since the input factor is one-dimensional, the defining partial trace in [F1] has one summand and gives $\rho_{{\rm out},N}=I_{2^N}/2^N$. [given, F1, F2, F9, algebra]
+
+1.2 The spectrum of $\rho_{{\rm out},N}$ consists of $2^N$ copies of $2^{-N}$. For $N=1$, $\exp(N\log2)=2$ by [F3]; if $\exp(N\log2)=2^N$, [F6] gives $\exp((N+1)\log2)=\exp(N\log2)\exp(\log2)=2^{N+1}$. Induction yields $\exp(N\log2)=2^N$ for every $N\ge1$. By [F4], $\exp(-N\log2)=1/2^N=2^{-N}$, so [F3] and injectivity in [F7] give $\log(2^{-N})=-N\log2$. [given, F3, F4, F6, F7, algebra]
+
+2.1 Substitution into [F1] gives $S_{\rm out}=-k_B\,2^N2^{-N}\log(2^{-N})=k_BN\log2$. Also $\log2>0$, because [F5] gives $\exp(0)=1<2=\exp(\log2)$ and [F7] is strictly increasing. [given, F1, F5, F7, step 1.2, algebra]
+
+3.1 Let $c=k_B\log2>0$. For any real $M$, [F8] supplies an integer $N_0\ge1$ with $N_0>M/c$. For every $N\ge N_0$, step 2.1 gives $S_{\rm out}=cN\ge cN_0>M$, which is exactly convergence to $+\infty$. [given, F8, step 2.1, algebra] ∎
+
+ITEM lem-tgr-renormalization-finite-part-ambiguity
+
+## Statement
+
+Let $x=(x_N)_{N\ge1}$ and $r=(r_N)_{N\ge1}$ be real sequences, and let $L\in\mathbb R$. Here $x_N-r_N\to L$ means that for every $\varepsilon>0$ there is an integer $N_0$ such that $|x_N-r_N-L|<\varepsilon$ for all $N\ge N_0$. For every $a\in\mathbb R$, the equally valid subtraction $r'_N=r_N-a$ satisfies
+
+$$ x_N-r'_N\longrightarrow L+a. $$
+
+Thus existence of a finite subtracted limit alone does not select its additive finite part; no particular divergence expansion or physical renormalization scheme is assumed.
+
+## Facts & Assumptions
+
+**Given:** Real sequences $x=(x_N)_{N\ge1}$ and $r=(r_N)_{N\ge1}$, a finite real number $L$, and $x_N-r_N\to L$ in the epsilon definition stated above.
+
+[A1] For every $\varepsilon>0$, some $N_0$ satisfies $|x_N-r_N-L|<\varepsilon$ for all $N\ge N_0$.
+
+## Proof
+
+1.1 Fix any real $a$ and any $\varepsilon>0$. By [A1], choose $N_0$ so that $|x_N-r_N-L|<\varepsilon$ for every $N\ge N_0$. [given, A1, choose]
+
+2.1 For every $N\ge N_0$, $|x_N-r'_N-(L+a)|=|x_N-(r_N-a)-(L+a)|=|x_N-r_N-L|<\varepsilon$. Since $a$ and $\varepsilon$ were arbitrary, the claimed limit is $L+a$ for every $a\in\mathbb R$. [given, step 1.1, algebra] ∎
+
+ITEM def-tgrx-curvature-squared-variation-tensors
+
+## Definition
+
+Let $(M,g)$ be a smooth Lorentzian four-manifold of signature $(-,+,+,+)$.
+Use its unique torsion-free, metric-compatible connection $\nabla$ and the curvature convention
+$R(X,Y)Z=\nabla_X\nabla_YZ-\nabla_Y\nabla_XZ-\nabla_{[X,Y]}Z$. Define
+$R^a{}_{bcd}$ in each chart by
+$R(\partial_c,\partial_d)\partial_b=R^a{}_{bcd}\partial_a$, and sum
+repeated indices; $g^{ab}$ denotes the inverse matrix to $g_{ab}$. Then set
+$R_{abcd}=g_{ae}R^e{}_{bcd}$,
+$\operatorname{Ric}_{bd}=g^{ac}R_{abcd}$,
+$S=g^{bd}\operatorname{Ric}_{bd}$, and
+$G_{ab}=\operatorname{Ric}_{ab}-\tfrac12Sg_{ab}$ using this convention.
+In a chart whose coordinates have units of length, use the positive metric volume density
+$$d\mathrm{vol}_g=|\det(g_{ab})|^{1/2}|dx^0\,dx^1\,dx^2\,dx^3|.$$
+
+A **compactly supported inverse-metric variation** is a smooth family of
+smooth Lorentzian metrics $g_\epsilon$ for $\epsilon$ in an open interval
+about $0$, with $g_0=g$, for which
+$h^{ab}:=\left.\partial_\epsilon g_\epsilon^{ab}\right|_{\epsilon=0}$ is a
+compactly supported smooth symmetric contravariant two-tensor. Every such
+$h^{ab}$ is admissible for a sufficiently small parameter interval because
+Lorentzian signature is open and $h^{ab}$ has compact support. Define the
+first variations $\delta I_{R^2}[g;h]$ and
+$\delta I_{\operatorname{Ric}^2}[g;h]$ by
+differentiating, at $\epsilon=0$, the differences of the respective
+curvature-squared integrals for $g_\epsilon$ and $g$. These differences have
+compact support, so their integrals are finite.
+
+For a particular model instance, supply smooth symmetric covariant
+two-tensors $H^{(R^2)}_{ab}$ and $H^{(\operatorname{Ric}^2)}_{ab}$ that
+satisfy, for every compactly supported inverse-metric variation,
+$$\delta I_{R^2}[g;h]=\left.\frac{d}{d\epsilon}\right|_{\epsilon=0}\left(\int_M S[g_\epsilon]^2\,d\mathrm{vol}_{g_\epsilon}-\int_M S[g]^2\,d\mathrm{vol}_g\right)=\int_M H^{(R^2)}_{ab}h^{ab}\,d\mathrm{vol}_g,$$
+$$\delta I_{\operatorname{Ric}^2}[g;h]=\left.\frac{d}{d\epsilon}\right|_{\epsilon=0}\left(\int_M \operatorname{Ric}_{cd}[g_\epsilon]\operatorname{Ric}^{cd}[g_\epsilon]\,d\mathrm{vol}_{g_\epsilon}-\int_M \operatorname{Ric}_{cd}[g]\operatorname{Ric}^{cd}[g]\,d\mathrm{vol}_g\right)=\int_M H^{(\operatorname{Ric}^2)}_{ab}h^{ab}\,d\mathrm{vol}_g.$$
+The displayed positive signs, inverse-metric variation, and curvature
+convention fix the counterterm sign and normalization. In length
+coordinates both tensors have units $\mathrm{m^{-4}}$. This Definition
+specifies the selected tensors as model inputs and does not assert their
+existence for every possible background or any solution of a gravitational
+field equation.
+
+
+ITEM def-tgrx-hadamard-stress-contract
+
+## Definition
+
+Let $(M,g)$ be a Hausdorff, second-countable, oriented, time-oriented,
+globally hyperbolic smooth Lorentzian four-manifold without boundary, with
+signature $(-,+,+,+)$. An orientation is a smooth choice of orientation in
+each tangent space, and a time orientation selects the future timelike cone.
+A causal curve is piecewise $C^1$ with tangent consistently future- or
+past-directed and causal; $J^\pm(p)$ denote points reachable from or reaching
+$p$ by such curves. Strong causality means every point has arbitrarily small
+neighborhoods that each causal curve meets in a connected parameter
+interval. Global hyperbolicity means strong causality and compact causal
+diamonds $J^+(p)\cap J^-(q)$. Fix a real scalar Klein-Gordon operator
+$P=-g^{ab}\nabla_a\nabla_b+V$, where $\nabla$ is the Levi-Civita connection
+and $V$ is a prescribed smooth real scalar of dimension $\mathrm{m^{-2}}$ in
+length coordinates. Use the canonical field length degree
+$\mathrm{m^{-1}}$ used for the framework's free scalar field, so its
+two-point distribution and subtraction kernel have length degree
+$\mathrm{m^{-2}}$. Supply the free-field $*$-algebra $\mathcal A_P$ and its
+real test-function smearing map $\Phi:C_c^\infty(M;\mathbb R)\to\mathcal A_P$;
+smearing uses $d\mathrm{vol}_g$. This is model input, not a field-algebra
+construction claim. In the massless minimally coupled collapse
+specialization, [[post-tgrx-free-collapse-scattering]] specifies bosonic
+Fock quantization, the smeared field operators, and the positive normalized
+state convention. A **state** $\omega$ is a positive normalized linear
+functional on $\mathcal A_P$, so $\omega(A^*A)\ge0$ and $\omega(1)=1$.
+Its two-point distribution $W_\omega\in\mathcal D'(M\times M)$, in the
+test-density convention, is defined by the pairings
+$W_\omega(f,h)=\omega(\Phi(f)\Phi(h))$ for compactly supported smooth real
+tests $f,h$, extended complex linearly. Require
+$P_xW_\omega=P_yW_\omega=0$ and
+$\operatorname{WF}(W_\omega)=\mathcal C_g^+$, where $\mathcal C_g^+$ consists
+of pairs $(x,\xi;y,-\zeta)$ with nonzero future-null covectors $\xi,\zeta$
+that are equal at a coincident point or are the metric-dual tangents, with a
+common positive scale, along one nonconstant future-directed null geodesic;
+the two base points need not be ordered along that geodesic. This is the
+positive-frequency Hadamard convention in [[def-qftx-wavefront-hadamard]],
+whose definition fixes this relation without a base-point order.
+$\operatorname{WF}$ records nonzero cotangent directions in which localized
+Fourier transforms fail rapid decay. The
+framework's massless, minimally coupled collapse scalar is one
+specialization; its Schwarzschild and scattering assumptions are not imposed
+on this general contract.
+
+For each open convex normal neighborhood $U\subset M$ (an open set such that
+for every $p\in U$ the exponential map at $p$ restricts to a diffeomorphism
+from a star-shaped open neighborhood of $0\in T_pM$ onto $U$), supply a
+locally covariant Hadamard singular bidistribution $H_\mu$ for $P$. The scale
+$\mu>0$ is fixed and has units $\mathrm{m^{-1}}$. “Hadamard singular
+bidistribution” here means the prescribed local, state-independent singular
+part determined by $(g,P,\mu)$, with
+$W_\omega-H_\mu\in C^\infty(U\times U)$. The parametrix pieces, the
+bidifferential operators below, and their resulting coincident values must be
+compatible on overlaps. This is supplied data: the definition proves no
+parametrix construction or general existence theorem.
+
+Supply a finite-order bidifferential operator $D_{ab}(x,y)$ which maps a
+smooth biscalar on $U\times U$ to a smooth covariant symmetric two-tensor at
+$x$; any coefficient bitensors and parallel transports needed to define its
+indices are part of the supplied operator. Also supply a smooth, symmetric,
+state-independent local curvature tensor $C_{ab}[g;\mu,\mathbf c]$, where
+$\mathbf c$ is the fixed list of finite renormalization conditions. “Local”
+means determined by the values of $g$, $P$, and their derivatives at the
+point, through finitely many curvature contractions; it has no state or
+distant-geometry dependence. Require local covariance: whenever
+$\psi:(M,g)\to(M',g')$ is a smooth embedding with $\psi^*g'=g$, preserves the
+time orientation, and has causally convex image (every causal curve segment
+in $M'$ with endpoints in the image stays in the image), the assigned local
+prescription on $(M,g)$ is the pullback of the one on $(M',g')$. Require
+conservation,
+$\nabla^aT^{\mathrm{ren}}_{ab}=0$, with the index raised using $g^{ab}$.
+
+Define the renormalized stress tensor by
+$$T^{\mathrm{ren}}_{ab}[g,\omega](x):=\lim_{y\to x}D_{ab}(x,y)\bigl(W_\omega-H_\mu\bigr)(x,y)+C_{ab}[g;\mu,\mathbf c](x).$$
+The limit is taken inside a convex normal neighborhood. It exists because
+$W_\omega-H_\mu$ is smooth and $D_{ab}$ has finite order. In SI units and
+length coordinates $x^0=ct$, the normalization of $D_{ab}$ is part of the
+chosen scalar-field prescription and its output, as well as $C_{ab}$, has
+stress-energy units $\mathrm{J\,m^{-3}}$. No pointwise product of the
+singular distributions $W_\omega$ and $H_\mu$ is taken.
+
+
+ITEM ex-tgrx-quasistatic-is-not-backreaction
+
+## Example
+
+Assume the Axiom of Countable Choice, meaning every at most countable family of
+nonempty sets has a choice function. Let $G,c,\hbar,M_0,M_{\min}>0$ and
+$\eta$ dimensionless with $0<\eta\le1$, and $0<M_{\min}<M_0$; use SI units with $G$ in
+$\mathrm{m^3\,kg^{-1}\,s^{-2}}$, $c$ in $\mathrm{m\,s^{-1}}$, $\hbar$ in
+$\mathrm{J\,s}$, masses in kilograms, and $t_\infty$ in seconds. Put
+$$\alpha:=\frac{\eta\hbar c^4}{15360\pi G^2},\qquad M(t_\infty):=(M_0^3-3\alpha t_\infty)^{1/3},\qquad \tau:=\frac{M_0^3-M_{\min}^3}{3\alpha}.$$
+Here $\alpha$ has units $\mathrm{kg^3\,s^{-1}}$, $\tau$ has units seconds,
+and $M(t_\infty)\ge M_{\min}>0$ on $[0,\tau]$.
+On $[0,\tau]$ the exact ODE diagnostic is
+$$\epsilon_{\mathrm{qs}}(t_\infty):=\frac{2G\alpha}{c^3M(t_\infty)^2}.$$
+This diagnostic and the threshold $\epsilon_0>0$ are dimensionless.
+For any $\epsilon_0>0$ such that $M_{\min}^2\ge2G\alpha/(c^3\epsilon_0)$, the scalar ratio obeys $\epsilon_{\mathrm{qs}}\le\epsilon_0$ throughout the interval. This ODE bound does not by itself bound the residual of the semiclassical field equation. For a supplied candidate metric $g$ and state $\omega$ on the modeled domain, not assumed to solve the adopted equation, together with its scale and renormalization prescription, define that tensor residual by
+$$\mathcal R_{ab}[g,\omega]:=G_{ab}+\Lambda_{\mathrm{cc}}g_{ab}+\alpha_{\mathrm{ct}}H^{(R^2)}_{ab}+\beta_{\mathrm{ct}}H^{(\operatorname{Ric}^2)}_{ab}-\frac{8\pi G}{c^4}T^{\mathrm{ren}}_{ab}[g,\omega].$$
+Here $G_{ab}$ is the Einstein tensor, $\alpha_{\mathrm{ct}}$ and
+$\beta_{\mathrm{ct}}$ are curvature-counterterm couplings, the $H$ tensors
+are the specified curvature-squared variation tensors, and $T^{\mathrm{ren}}_{ab}$ is the
+fixed Hadamard-subtracted state-dependent stress tensor.
+The ODE bound concerns only its scalar mass history; it supplies no coupled field-equation solution or estimate of the curvature and renormalized stress along a changing geometry.
+
+## Facts & Assumptions
+
+[F1] [[lem-tgr-emitter-quasistatic-bounds]]: the fixed-reference ideal-emitter ODE supplies $M(t_\infty)=(M_0^3-3\alpha t_\infty)^{1/3}$, $\alpha=\eta\hbar c^4/(15360\pi G^2)$, and $\epsilon_{\mathrm{qs}}=2G\alpha/(c^3M^2)$; under its positive-mass cutoff hypotheses it proves the stated scalar bounds.
+
+[F2] [[post-tgrx-semiclassical-equation]]: the new model equation is a tensor equation for a metric, fixed curvature counterterms, a specified state, and the renormalized stress tensor under a chosen prescription.
+
+[A1] [[def-countable-choice]]: $\mathrm{AC}_\omega$ means every at most countable family of nonempty sets has a choice function; this is the exact choice hypothesis in [F1].
+
+## Verification
+
+**Given:** Countable choice, the scalar ODE and diagnostic of [F1], and the metric/state-dependent equation of [F2].
+
+1.1 Under [A1], apply the exact diagnostic formula and bound in [F1]. They depend only on the ODE mass history and constants in that ODE; neither contains a spacetime metric $g$, state $\omega$, curvature tensor, or renormalized stress tensor. [given, A1, F1, algebra]
+
+2.1 By [F1], the formula and upper bound use only the scalar history $M(t_\infty)$ and ODE constants; no metric, state, curvature tensor, or stress tensor occurs in them. Thus step 1.1 establishes only a bound for this scalar diagnostic. [given, A1, F1, step 1.1, algebra]
+
+2.2 By [F2], the residual $\mathcal R_{ab}[g,\omega]$ depends on a supplied metric, its curvature tensors, the selected state and the renormalized stress prescription. These are additional inputs and are not quantities in the ODE diagnostic of step 1.1. [given, F2, step 1.1]
+
+3.1 The ODE diagnostic in step 1.1 supplies no state or renormalized-stress estimate for the residual in step 2.2, and neither [F1] nor [F2] supplies a relation that bounds the candidate metric and state in terms of that scalar diagnostic. Hence no component estimate for $\mathcal R_{ab}$ follows from the ODE bound alone. Obtaining one would require an additional metric/state relation and curvature/stress estimates. This is a limit of the stated inputs; it asserts neither an unbounded residual nor an instability. [given, A1, F1, F2, step 1.1, step 2.1, step 2.2] ∎
+
+
+ITEM def-tgrx-thermal-vorticity
+
+## Definition
+
+Let $O$ be a nonempty connected open subset of a smooth time-oriented Lorentzian four-manifold $(M,g)$ of signature $(-,+,+,+)$, with its Levi-Civita connection $\nabla$ and length-coordinate convention $x^0=ct$. Let $\beta$ be a smooth future-directed timelike Killing vector field on $O$, with components in $\mathrm{J}^{-1}$, and fix $k_B>0$ in $\mathrm{J\,K}^{-1}$. On $O$ define
+
+$$T:=\frac{1}{k_B\sqrt{-g(\beta,\beta)}},\qquad u:=k_BT\,\beta,\qquad \varpi_{ab}:=-\frac12(\nabla_a\beta_b-\nabla_b\beta_a).$$
+
+Thus $T$ is in kelvins, $g(u,u)=-1$, and the covariant two-form $\varpi$ has units $\mathrm{J}^{-1}\mathrm{m}^{-1}$. For a smooth chemical-potential scalar $\mu:O\to\mathbb R$ in joules, set $\zeta:=\mu/(k_BT)$ and $\alpha:=-\zeta$, both dimensionless. These fields are defined only on the region where $\beta$ is future timelike; no thermal state or material realization is part of this definition.
+
+## Facts & Assumptions
+
+**Given:** The smooth time-oriented Lorentzian domain, its Levi-Civita connection, a smooth future-timelike Killing field $\beta$, a smooth scalar $\mu$, and $k_B>0$ as specified in the Definition.
+
+[F1] [[def-gr-smooth-lorentzian-objects]]: $M$ is a smooth time-oriented four-manifold, $g$ is a smooth Lorentzian metric of signature $(-,+,+,+)$, timelike means $g(v,v)<0$, and future direction is fixed by the time orientation.
+
+[F2] [[def-gr-killing-field]]: a smooth vector field is Killing when $\mathcal L_\beta g=0$.
+
+[F3] [[def-tgr-stationary-thermal-carriers]]: the metric-selected connection is Levi-Civita; the length-coordinate convention is $x^0=ct$, vector $u$ is unit timelike, $\beta$ has inverse-joule units, and $\mu$ is in joules.
+
+[F4] [[def-countable-choice]]: $\mathrm{AC}_\omega$ says that every sequence of nonempty sets has a choice function. It is the inherited foundational assumption of the stationary geometric carrier; this definition uses no stronger choice principle.
+
+## Proof
+
+1.1 The scalar $s:=-g(\beta,\beta)$ is smooth and strictly positive on $O$. Hence $s^{-1/2}$ is smooth and positive, so $T=(k_B\sqrt{s})^{-1}$ is a smooth positive kelvin-valued scalar and $u=\beta/\sqrt{s}$ is a smooth future-directed vector field. Direct contraction gives $g(u,u)=g(\beta,\beta)/s=-1$. [given, F1, F3, algebra]
+
+2.1 Lowering the smooth vector field $\beta$ with $g$ gives a smooth one-form, and its covariant derivative is a smooth covariant two-tensor. Antisymmetrizing this tensor gives the smooth two-form $\varpi$; the inverse-length derivative of the inverse-joule components of $\beta$ gives its stated units. Since $\mu$ and $k_BT>0$ are smooth, $\zeta$ and $\alpha=-\zeta$ are defined and dimensionless on all of $O$. The only foundational assumption in this construction is the inherited $\mathrm{AC}_\omega$ in [F4]; no selection or stronger choice principle is used. [given, F1, F2, F3, F4, algebra] ∎
+
+ITEM def-tgrx-period-of-one-form
+
+## Definition
+
+Let $M$ be a smooth manifold, let $\omega$ be a smooth real one-form on $M$, and let $\gamma:[0,1]\to M$ be a piecewise-$C^1$ curve with a finite subdivision into chartwise $C^1$ pieces and $\gamma(0)=\gamma(1)$. Define its oriented period by
+
+$$\operatorname{Per}_\gamma(\omega):=\sum_j\int_{t_j}^{t_{j+1}}\omega_{\gamma(t)}(\dot\gamma(t))\,dt,$$
+
+where $0=t_0<\cdots<t_m=1$ is any subdivision on whose pieces $\gamma$ is $C^1$. The covector-vector pairing is intrinsic, and additivity makes this value independent of further subdivision. No invariance under homotopy is asserted by this definition.
+
+## Facts & Assumptions
+
+**Given:** A smooth real one-form $\omega$ and a closed piecewise-$C^1$ curve $\gamma:[0,1]\to M$ with a finite chartwise $C^1$ subdivision as stated in the Definition.
+
+[F1] [[thm-continuous-implies-integrable]]: a continuous real function on a closed bounded interval is Riemann integrable.
+
+[F2] [[thm-additivity-over-subintervals]]: the oriented integral over an interval equals the sum of its integrals over a finite subdivision, and this identity includes coincident subdivision endpoints.
+
+## Proof
+
+1.1 On each chartwise $C^1$ piece, $t\mapsto\omega_{\gamma(t)}(\dot\gamma(t))$ is continuous because $\omega$ and the coordinate representative of $\gamma$ are continuous and the one-form evaluation is bilinear. Thus each displayed piece integral exists by [F1]. The covector-vector pairing has the same value after a chart change, so the integrand is intrinsically defined. [given, F1, algebra]
+
+2.1 Any two admissible finite subdivisions have a finite common refinement. Repeatedly applying [F2] shows that subdividing a piece leaves the sum unchanged; hence the defined period is a unique real number independent of the chosen subdivision. [given, F2, algebra] ∎

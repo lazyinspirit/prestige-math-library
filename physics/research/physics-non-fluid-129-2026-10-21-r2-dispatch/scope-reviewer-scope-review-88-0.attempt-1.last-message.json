@@ -1,0 +1,68 @@
+{
+  "version": 1,
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "batch": "88",
+  "round": 0,
+  "reviewed_items": [
+    "def-csm-frontier-mean-field-ensemble",
+    "thm-csm-frontier-compact-laplace-tilt",
+    "thm-csm-frontier-mean-field-supporting-lines",
+    "thm-csm-frontier-curie-weiss-bifurcation",
+    "ex-csm-frontier-nonexposed-energy"
+  ],
+  "reviewed_pages": [
+    "csm-frontier-large-deviation-ensembles",
+    "csm-frontier-large-deviation-ensembles-examples"
+  ],
+  "decision": "repair",
+  "reason": "The A/B inventory matches the current approved scope. The items are mathematical model results with no empirical premises; their direct imported supplier claims and hypotheses fit the stated uses. Local proof and prerequisite repairs are needed.",
+  "findings": [
+    {
+      "id": "def-csm-frontier-mean-field-ensemble",
+      "type": "prerequisite",
+      "reason": "The Definition calls p^{⊗n} a reference probability and conditions on shell events, but its listed product-mass supplier defines atom weights without proving they sum to one. Add the published lem-it-finite-product-law-is-iid supplier (whose proof establishes normalization) or prove normalization locally."
+    },
+    {
+      "id": "thm-csm-frontier-compact-laplace-tilt",
+      "type": "local",
+      "reason": "In proof step 1.3, the threshold M for infinite-rate centers yields only a bound below the global c, not the claimed localized bound by sup_C(F−I); it fails when that supremum is much smaller than c or is −∞. Choose M relative to the target and handle the all-infinite case. Step 2.1 also asserts that F−I attains c without proof or a supplier."
+    },
+    {
+      "id": "thm-csm-frontier-mean-field-supporting-lines",
+      "type": "prerequisite",
+      "reason": "Proof steps 1.1, 1.2, 2.1, and 3.1 use compactness of the finite simplex and its closed fibers/sublevel sets, attainment of extrema, and compact-image separation, but neither prove nor cite these facts. Add the appropriate mathematical suppliers for compactness in the declared ℓ¹ topology, closed subsets, continuous images, and extrema, or prove the needed facts locally."
+    },
+    {
+      "id": "thm-csm-frontier-curie-weiss-bifurcation",
+      "type": "prerequisite",
+      "reason": "Proof step 1.1 infers endpoint continuity of Φβ from the convention 0 ln 0 = 0. Steps 3.1–3.2 then use the mean value theorem on intervals with endpoint 1. Supply or prove the boundary limit t ln t → 0, for example by directly depending on lem-it-finite-relative-entropy-continuity-on-simplex."
+    },
+    {
+      "id": "thm-csm-frontier-curie-weiss-bifurcation",
+      "type": "scope",
+      "reason": "The Statement calls β an inverse-temperature parameter and J a coupling but gives no dimensional convention. State that this is a dimensionless mathematical model, or specify units and normalization making βJ dimensionless."
+    },
+    {
+      "id": "ex-csm-frontier-nonexposed-energy",
+      "type": "local",
+      "reason": "Verification step 1.1 handles only u > 0, while the Statement gives s(u) on 0 ≤ u ≤ 1. Add the u = 0 case: the constraint forces q = (0,1), so s(0) = −ln 2 = H₂(0) − ln 2."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "thm-csm-frontier-mean-field-supporting-lines",
+      "decision": "repair",
+      "reason": "Its application of the compact tilt theorem with F = −βh matches that supplier’s statement; this item separately needs the compactness and attainment prerequisites identified above."
+    },
+    {
+      "id": "thm-csm-frontier-curie-weiss-bifurcation",
+      "decision": "repair",
+      "reason": "Its use of the mean-field variational criterion is sound, but the endpoint-continuity prerequisite and dimensional convention require repair."
+    },
+    {
+      "id": "ex-csm-frontier-nonexposed-energy",
+      "decision": "repair",
+      "reason": "Its use of the supporting-line criterion is sound; the verification must also establish the stated entropy formula at u = 0."
+    }
+  ]
+}

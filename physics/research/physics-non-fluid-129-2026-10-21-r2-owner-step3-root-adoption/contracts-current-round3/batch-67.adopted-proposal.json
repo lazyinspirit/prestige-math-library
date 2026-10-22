@@ -1,0 +1,926 @@
+{
+  "version": 1,
+  "level": "physics-non-fluid-129-2026-10-21-r2",
+  "scope": [
+    "def-qftx-resolved-soft-poisson",
+    "lem-qftx-coherent-band-poisson",
+    "prop-qftx-soft-unresolved-cancellation",
+    "prop-qftx-soft-energy-finite",
+    "ex-qftx-resolution-probability"
+  ],
+  "contracts": {
+    "def-qftx-resolved-soft-poisson": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: the leg set I and angular region A may be empty; then K, b and C are zero and the zero displacement is defined."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: Q_i=0 data or A=empty give b=0 and C=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: a one-leg dataset is allowed when its charge number is zero, satisfying the stated charge-balance premise."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: zero transverse current gives C=0; the definitions remain valid without division by C."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: epsilon<Delta<Lambda are positive angular-frequency cutoffs; the threshold is assigned to the resolved band and its single-frequency set has zero measure."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The Definition takes the finite leg data and Borel region A as supplied data; it selects no element from an unspecified nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition specifies a model and asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition specifies a model and asserts no converse characterization."
+        }
+      ],
+      "finite_checks": [],
+      "definition_review": {
+        "statement": "The Definition fixes SI units, finite leg data, the conserved eikonal current, the Borel angular profile, the transverse coherent displacement, the normalized Fock vector, the finite band partition, its orthogonal frequency-band projections, and the resolution convention.",
+        "inputs": [
+          "def-complex-exponential",
+          "def-countable-choice",
+          "def-euclidean-inner-product",
+          "def-factorial-and-falling-factorial",
+          "def-integer-power",
+          "def-qft-example-data",
+          "def-qft-fock-and-test-spaces",
+          "def-qft-photon-transverse-space",
+          "def-qft-qed-photon-energy-multiplier",
+          "def-surface-integral-on-a-compact-c-one-hypersurface",
+          "lem-complex-exponential-series-converges-everywhere",
+          "lem-euclidean-chart-measure-agrees-with-polar-surface-measure",
+          "thm-complex-exponential-addition-and-real-extension",
+          "thm-logarithm-derivative-and-integral",
+          "thm-polar-coordinates-formula-for-lebesgue-measure",
+          "thm-qft-example-soft-current-angular-coherent"
+        ],
+        "edge_cases": "Empty leg set and angular acceptance, zero profile, one leg with balanced zero charge, positive strict cutoffs, and the single-frequency threshold convention are stated explicitly.",
+        "well_definedness": "The Definition delegates finiteness of C, transverse L2 membership, coherent-vector normalization, and the band probability law to lem-qftx-coherent-band-poisson; that local carrier is the definition item’s justified_by record."
+      },
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-67",
+        "notes": "Checked finite possibly empty leg data, strict subluminal denominators, charge balance, SI dimensions and second-variable-linear pairing against the actual suppliers. The bounded continuous angular current on the finite-measure sphere gives C finite, independently of the current theorem’s unrelated conditional infrared conclusion. Scalar indicator multipliers preserve transversality, are self-adjoint idempotents, have closed ranges and disjoint orthogonal ranges. The explicit symmetric sectors and occupation projections are defined; normalization and probability summation are discharged by the following lemma. Zero profile, empty A/I and null threshold all work. PTB p.3 unnumbered display following (12) checked directly. No mathematical gap in current content; pre-reader raw definition bytes were not recovered, so historical touched disposition remains escalated."
+      }
+    },
+    "lem-qftx-coherent-band-poisson": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qftx-resolved-soft-poisson",
+          "source_section": "Definition",
+          "quote": "Assume $\\mathrm{AC}_\\omega$: every sequence $(X_n)_{n\\in\\mathbb N}$ of\nnonempty sets admits a function $s$ with $s(n)\\in X_n$ for every $n$.\nUse the following SI constants and meanings: $c>0$ is the speed of light in\nvacuum, in m s$^{-1}$; $\\hbar>0$ is the reduced Planck constant, in J s;\n$e>0$ is the magnitude of the elementary charge, in C; and $\\mu_0>0$ is the\nvacuum permeability, in H m$^{-1}$, used here as a positive parameter without\nassigning it a numerical value. Set\n$$g=e\\sqrt{\\frac{\\mu_0c}{\\hbar}}>0,$$\nwhich is dimensionless. These are the adopted QFT SI conventions.\n\nLet $I$ be a finite, possibly empty, set of leg labels. For each $i\\in I$,\nchoose an energy $E_i>0$ in J and a physical velocity\n$\\mathbf v_{i,\\mathrm{phys}}\\in\\mathbb R^3$ in m s$^{-1}$ with\n$|\\mathbf v_{i,\\mathrm{phys}}|<c$. Write\n$v_i=\\mathbf v_{i,\\mathrm{phys}}/c\\in\\mathbb R^3$, so $v_i$ is\ndimensionless and $|v_i|<1$. Also choose a dimensionless charge number\n$Q_i\\in\\mathbb R$ (the assigned physical charge is $eQ_i$ in C) and an\norientation $\\eta_i\\in\\{-1,1\\}$, where $-1$ denotes an incoming leg and\n$+1$ an outgoing leg. Assume charge balance\n$\\sum_{i\\in I}\\eta_iQ_i=0$. For four-vectors\n$a=(a^0,\\mathbf a),b=(b^0,\\mathbf b)\\in\\mathbb R^4$, write\n$h=\\operatorname{diag}(1,-1,-1,-1)$ and\n$h(a,b)=a^0b^0-\\mathbf a\\cdot\\mathbf b$ for the algebraic contraction\nwith signature $(+,-,-,-)$ used in this model.\n\nFor $n\\in S^2=\\{x\\in\\mathbb R^3:|x|=1\\}$ and angular frequency\n$\\nu>0$ in s$^{-1}$, with associated model photon energy $\\hbar\\nu$ in J,\nput $p_i=E_i(1,v_i)$ and $q=\\hbar\\nu(1,n)$ in $\\mathbb R^4$. On\n$$\\mathscr Q=\\{\\hbar\\nu(1,n):\\nu>0,\\ n\\in S^2\\}\\subset\\mathbb R^4,$$\ndefine the prescribed current $J:\\mathscr Q\\to\\mathbb R^4$ and angular\ncoefficient $K:S^2\\to\\mathbb R^4$ by\n$$J(q)=\\sum_{i\\in I}\\eta_iQ_i\\frac{p_i}{h(p_i,q)},\\qquad K(n)=\\sum_{i\\in I}\\eta_iQ_i\\frac{(1,v_i)}{1-v_i\\cdot n}.$$\nBecause $|v_i\\cdot n|\\le |v_i|<1$, every denominator\n$1-v_i\\cdot n$ is strictly positive.\nThe data make $h(p_i,q)=E_i\\hbar\\nu(1-v_i\\cdot n)>0$ and\n$J(q)=K(n)/(\\hbar\\nu)$. The balance condition gives\n$h(J(q),q)=0$; this is the conservation convention for this prescribed\neikonal current in the model. Here “prescribed eikonal current” means exactly\nthe displayed rational map $J$ on these model photon energy four-vectors; no\nscattering-amplitude factorization or approximation is asserted.\n\nLet $A\\subseteq S^2$ be a Borel angular acceptance region. The sphere\n$S^2\\subset\\mathbb R^3$ is a compact embedded smooth hypersurface, and\n$d\\Omega$ denotes its Euclidean chart surface measure: for a finite regular\ninjective $C^1$ chart cover $X_j:V_j\\to S^2$, where each $V_j$ is open in\n$\\mathbb R^2$, with $C^1$ coordinate\ntransitions and a subordinate ambient partition of unity $\\chi_j$ whose supports are compactly\ncontained in the chart neighborhoods, its integral on a nonnegative Borel\nfunction $F$ is\n$$\\int_{S^2}F\\,d\\Omega=\\sum_j\\int_{V_j}(\\chi_jF)(X_j(y))\\sqrt{\\det(DX_j(y)^TDX_j(y))}\\,dy.$$\nThis is the chart-independent induced surface integral. Write\n$K(n)=(K^0(n),\\mathbf K(n))$ and define\n$K_\\perp(n)=(I_3-nn^T)\\mathbf K(n)$, where $I_3$ is the $3\\times3$\nidentity matrix. Put\n$$b_0(n)=\\frac{gK_\\perp(n)}{\\sqrt{2(2\\pi)^3}},\\qquad b(n)=\\mathbf1_A(n)b_0(n),\\qquad C=\\int_{S^2}|b(n)|^2\\,d\\Omega(n).$$\nThe earlier current theorem proves $b_0\\in L^2(S^2,d\\Omega;\\mathbb R^3)$\nfor these finite balanced subluminal legs; since $A$ is Borel,\n$b\\in L^2$ and $0\\le C\\le\\int_{S^2}|b_0|^2d\\Omega<\\infty$.\nThus $b$ and $C$ are dimensionless.\n\nFor the one-particle space, write\n$$x\\cdot y=\\sum_{j=1}^3x_jy_j\\quad(x,y\\in\\mathbb R^3),\\qquad a\\cdot b=\\sum_{j=1}^3a_jb_j\\quad(a,b\\in\\mathbb C^3),$$\nwhere the second dot product is the complex-bilinear extension. The fiber\nHermitian pairing is $\\overline a\\cdot b=\\sum_j\\overline{a_j}b_j$, with\nnorm $|a|^2=\\sum_j|a_j|^2$. Set\n$$\\mathcal H=L^2(\\mathbb R^3,d^3\\mathbf k;\\mathbb C^3),\\qquad \\langle u,v\\rangle_2=\\int_{\\mathbb R^3}\\overline{u(\\mathbf k)}\\cdot v(\\mathbf k)\\,d^3\\mathbf k,$$\nHere $d^3\\mathbf k$ is Lebesgue measure, and this pairing is\nsecond-variable-linear. For $\\mathbf k\\ne0$,\nput $\\widehat{\\mathbf k}=\\mathbf k/|\\mathbf k|$\nand $P_T(\\mathbf k)=I_3-\\widehat{\\mathbf k}\\widehat{\\mathbf k}^{T}$, the\nEuclidean orthogonal projection onto the fiber plane perpendicular to\n$\\mathbf k$; assign any value at $\\mathbf k=0$. Its multiplier is an\northogonal projection on $\\mathcal H$, so its range is closed. The transverse\none-particle Hilbert space\nis\n$$\\mathcal H_T=\\operatorname{Ran}M_{P_T}=\\{u\\in\\mathcal H:\\mathbf k\\cdot u(\\mathbf k)=0\\text{ for a.e. }\\mathbf k\\ne0\\},$$\nwhere $M_{P_T}$ is multiplication by $P_T$, and the real Euclidean dot\nproduct is extended complex-bilinearly in the transverse condition. This is\nthe transverse one-particle space used in this model.\n\nFor $m\\ge1$, use the iterated Hilbert tensor completion\n$\\mathcal H_T^{\\widehat\\otimes m}$, with product pairing on elementary\ntensors. Here $S_m$ is the permutation group and\n$U_\\pi(u_1\\otimes\\cdots\\otimes u_m)=\nu_{\\pi^{-1}(1)}\\otimes\\cdots\\otimes u_{\\pi^{-1}(m)}$. Set\n$$P_{s,m}=\\frac1{m!}\\sum_{\\pi\\in S_m}U_\\pi,\\qquad \\mathcal H_s^{(m)}=\\operatorname{Ran}P_{s,m};$$\nput $P_{s,0}=I_{\\mathbb C}$ and $\\mathcal H_s^{(0)}=\\mathbb C$. The\nsymmetric bosonic Fock space is\n$$\\mathcal F_s(\\mathcal H_T)=\\left\\{(\\Psi_m)_{m\\ge0}:\\Psi_m\\in\\mathcal H_s^{(m)},\\ \\sum_{m\\ge0}\\|\\Psi_m\\|^2<\\infty\\right\\},$$\nwith componentwise pairing and vacuum $1\\in\\mathbb C$ in sector zero.\nFor $f\\in\\mathcal H_T$, define the exponential-vector map\n$\\epsilon:\\mathcal H_T\\to\\mathcal F_s(\\mathcal H_T)$ by\n$$\\epsilon(f)=\\bigoplus_{m=0}^{\\infty}\\frac{P_{s,m}(f^{\\otimes m})}{\\sqrt{m!}}.$$\nHere $f^{\\otimes0}=1$ in the vacuum sector.\nSince $f^{\\otimes m}$ is already symmetric,\n$P_{s,m}(f^{\\otimes m})=f^{\\otimes m}$ for $m\\ge1$; write this tensor as\n$f^{\\otimes_s m}$.\n\nFor fixed angular-frequency cutoffs $0<\\varepsilon<\\Delta<\\Lambda$, let\n$\\nu(\\mathbf k)=c|\\mathbf k|$ in s$^{-1}$, with $\\mathbf k$ in m$^{-1}$.\nThe one-particle coherent displacement is the transverse mode function\n$$f_{\\varepsilon,\\Lambda}(\\mathbf k)= \\mathbf1_{\\{\\varepsilon<\\nu(\\mathbf k)<\\Lambda\\}}|\\mathbf k|^{-3/2} {}\\times b\\!\\left(\\frac{\\mathbf k}{|\\mathbf k|}\\right) \\quad(\\mathbf k\\ne0), \\qquad f_{\\varepsilon,\\Lambda}(0)=0.$$\nThe function $f_{\\varepsilon,\\Lambda}$ has units m$^{3/2}$ in\n$\\mathcal H_T$; the associated free one-photon energy is\n$\\hbar\\nu(\\mathbf k)=\\hbar c|\\mathbf k|$ in J. Define its normalized\ncoherent vector by\n$$\\Psi_{\\varepsilon,\\Lambda}=\\exp\\!\\left(-\\frac{\\|f_{\\varepsilon,\\Lambda}\\|^2}{2}\\right)\\epsilon(f_{\\varepsilon,\\Lambda}).$$\nFor a finite partition\n$B_1,\\ldots,B_r$ of $(\\varepsilon,\\Lambda)$ into disjoint Borel intervals,\nlet\n$H_j=\\{u\\in\\mathcal H_T:u(\\mathbf k)=0\\text{ a.e. unless }\\nu(\\mathbf k)\\in B_j\\}$.\nLet $P_j$ be multiplication on $\\mathcal H_T$ by\n$\\mathbf1_{\\{\\nu(\\mathbf k)\\in B_j\\}}$. This bounded self-adjoint idempotent\npreserves transversality because it is scalar-valued, so it is an orthogonal\nprojection. Its range is exactly $H_j$, making $H_j$ closed. For $j\\ne k$,\ndisjointness gives $P_jP_k=0$, hence the ranges are orthogonal.\nFor a tuple $(m_1,\\ldots,m_r)\\in\\mathbb N_0^r$, put $M=\\sum_jm_j$.\nIts occupation subspace is the closed span in sector $\\mathcal H_s^{(M)}$\nof the vectors\n$$P_{s,M}\\left(\\bigotimes_{j=1}^r\\bigotimes_{\\ell=1}^{m_j}u_{j,\\ell}\\right),\\qquad u_{j,\\ell}\\in H_j,$$\nwhere the empty tensor for $M=0$ is the vacuum $1\\in\\mathbb C$. It has\nexactly $m_j$ factors in $H_j$ and no factor outside $\\bigoplus_jH_j$.\nDefine $N(B_j)$ to have value $m_j$ on this subspace.\nThe model assigns the tuple\nprobability equal to the squared norm of the projection of\n$\\Psi_{\\varepsilon,\\Lambda}$ onto it. Its resolution parameter\n$\\Delta$ divides $(\\varepsilon,\\Lambda)$ into the unresolved band\n$(\\varepsilon,\\Delta)$ and the resolved band $[\\Delta,\\Lambda)$. The\nthreshold frequency is assigned to the resolved band; its exact assignment\ndoes not change any $L^2$ vector or probability because a single frequency\nhas zero one-particle measure.\nThis is a finite-cutoff free coherent-state model; it does not posit a\ndetector response or an interacting QED scattering law.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qft-fock-and-test-spaces",
+          "source_section": "Definition",
+          "quote": "For an integer $d\\ge1$, let $\\mathcal S(\\mathbb R^d)$ be the complex Schwartz space with seminorms\n$p_{\\alpha\\beta}(f)=\\sup_{x\\in\\mathbb R^d}|x^\\alpha\\partial^\\beta f(x)|$\nfor all multi-indices $\\alpha,\\beta$; this is exactly\n[[def-schwartz-space-and-its-seminorms]]. Let\n$\\mathcal D(\\mathbb R^d)=C_c^\\infty(\\mathbb R^d;\\mathbb C)$ with the support convention of\n[[def-test-function-space-d-of-an-open-set]] and the locally convex LF topology of\n[[def-test-function-topology]]. The tempered-distribution space $\\mathcal S'(\\mathbb R^d)$\nis the space of continuous complex-linear functionals on this topological\n$\\mathcal S(\\mathbb R^d)$, paired bilinearly with test functions, as in\n[[def-tempered-distribution]].\n\nFor every complex Hilbert space $H$, use the second-variable-linear pairing\n$\\langle u,v\\rangle_2:=(v,u)_1$, where $(\\cdot,\\cdot)_1$ is the first-variable-linear\nHilbert pairing of [[def-real-and-complex-inner-product-space]]. Thus\n$\\langle u,v\\rangle_2$ is linear in $v$ and conjugate-linear in $u$.\nFor each tensor product, use the same norm completion as\n[[lem-nrqm-composites-hilbert-tensor-construction]], but equip it with the\nsecond-variable-linear pairing obtained by conjugating that supplier's\nfirst-variable-linear pairing. This leaves the norm and completion unchanged;\non elementary tensors it gives the product of the second-variable pairings.\nLet $H^{\\widehat\\otimes n}$ be the iterated Hilbert tensor completion, with\n$H^{\\widehat\\otimes0}:=\\mathbb C$; the tensor inner product is the product of\nthe factor pairings. Identify parenthesizations by the isometry fixing\nelementary tensors: the product pairing is the same on their dense span,\nso the map and its inverse extend to the completions. For $n\\ge1$, let\n$P_{s,n}=n!^{-1}\\sum_{\\pi\\in S_n}U_\\pi$ and\n$P_{a,n}=n!^{-1}\\sum_{\\pi\\in S_n}\\operatorname{sgn}(\\pi)U_\\pi$, using the\npermutation action and the orthogonal projections of\n[[lem-nrqm-composites-permutation-sector-projections]]. Define\n$H_s^{(n)}=\\operatorname{ran}P_{s,n}$ and\n$H_a^{(n)}=\\operatorname{ran}P_{a,n}$, with\n$H_s^{(0)}=H_a^{(0)}=\\mathbb C$. These are the symmetric and antisymmetric\n$n$-particle sectors.\n\nThe bosonic and fermionic Fock Hilbert spaces are the square-summable direct\nsums\n$\\mathcal F_s(H)=\\{(\\Psi_n)_{n\\ge0}:\\Psi_n\\in H_s^{(n)},\\\n\\sum_n\\|\\Psi_n\\|^2<\\infty\\}$ and\n$\\mathcal F_a(H)=\\{(\\Psi_n)_{n\\ge0}:\\Psi_n\\in H_a^{(n)},\\\n\\sum_n\\|\\Psi_n\\|^2<\\infty\\}$, with the componentwise inner product.\nTheir vacuum is $\\Omega=(1,0,0,\\ldots)$. The finite-particle subspace\n$\\mathcal D_{\\rm fin}$ consists of sequences with only finitely many nonzero\ncomponents.\n\nFor $h\\in H$, the map $C_h:H\\to\\mathbb C$, $C_h(v)=\\langle h,v\\rangle_2$, is linear and bounded:\n$|C_h(v)|=|(v,h)_1|\\le\\|h\\|\\,\\|v\\|$ by\n[[thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces]].\nFor any Hilbert space $K$, identify $\\mathbb C\\widehat\\otimes K$ with $K$\nby $J_K(z\\otimes v)=zv$. Every algebraic tensor is $1\\otimes w$;\nthe tensor norm is then $\\|w\\|$, so $J_K$ extends to a surjective isometry\non the completion (with inverse $w\\mapsto1\\otimes w$).\nThroughout the following formulas, $C_h\\otimes I^{\\otimes(n-1)}$ means\n$J_{H^{\\widehat\\otimes(n-1)}}\\circ(C_h\\widehat\\otimes I)$, with\n$I$ the identity on $H^{\\widehat\\otimes(n-1)}$.\nThe bounded tensor-map supplier therefore applies and gives norm at most\n$\\|h\\|$. This includes $n=1$, where $H^{\\widehat\\otimes0}=\\mathbb C$.\nContraction commutes with permutations of the remaining $n-1$ factors,\nso it takes symmetric or antisymmetric tensors to the corresponding\n$(n-1)$-particle sector (and to $\\mathbb C$ for $n=1$).\n\nFor $n\\ge0$, bosonic creation on sector $n$ is\n$a_n^\\dagger(h)\\Psi_n=\\sqrt{n+1}P_{s,n+1}(h\\otimes\\Psi_n)$; for $n\\ge1$,\nbosonic annihilation is\n$a_n(h)\\Psi_n=\\sqrt n(C_h\\otimes I^{\\otimes(n-1)})\\Psi_n$, where\n$C_h$ is the bounded functional above, its tensor extension is supplied by\n[[lem-nrqm-composites-bounded-tensor-maps]], and $a(h)\\Omega=0$. Define fermionic creation\nby $c_n^\\dagger(h)\\Psi_n=\\sqrt{n+1}P_{a,n+1}(h\\otimes\\Psi_n)$; for $n\\ge1$,\nfermionic annihilation is the corresponding first-factor contraction\n$c_n(h)\\Psi_n=\\sqrt n(C_h\\otimes I^{\\otimes(n-1)})\\Psi_n$, and\n$c(h)\\Omega=0$. The annihilation maps are conjugate-linear in $h$; the\ncreation maps are linear in $h$. These formulas define sector maps on the\nfinite-particle subspace; their maximal closed domains and operator relations are proved in\n[[lem-qft-fock-ccr-car]]. No physical statistics assignment or spin–statistics\ntheorem is part of these mathematical definitions.",
+          "uses": [
+            "3.1",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qft-photon-transverse-space",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice [[def-countable-choice]]. Let\n$$\\mathcal H=L^2(\\mathbb R^3,d^3\\mathbf k;\\mathbb C^3),\\qquad \\langle u,v\\rangle_2=\\int_{\\mathbb R^3}\\overline{u(\\mathbf k)}\\cdot v(\\mathbf k)\\,d^3\\mathbf k,$$\nwith the second-variable-linear convention of [[def-qft-fock-and-test-spaces]]; the real momentum dot product and norm are those of\n[[def-euclidean-inner-product]]. Explicitly extend the real dot product\ncomplex-bilinearly to $a\\cdot b=\\sum_{j=1}^3a_jb_j$ for $a,b\\in\\mathbb C^3$.\nEach complex fiber instead has the positive Hermitian pairing\n$\\langle a,b\\rangle_2=\\overline a\\cdot b=\\sum_j\\overline a_jb_j$ and\nnorm $\\|a\\|^2=\\sum_j|a_j|^2$; the displayed integral uses this pairing.\nHilbert completeness follows from [[lem-l-two-with-the-integral-pairing-is-a-hilbert-space]]. For $\\mathbf k\\ne0$, write $n(\\mathbf k)=\\mathbf k/|\\mathbf k|$ and\n$$P_T(\\mathbf k)=I_3-n(\\mathbf k)n(\\mathbf k)^T.$$\nAssign any value at $\\mathbf k=0$, which is a Lebesgue-null set. Let $M_{P_T}$ be multiplication by this measurable matrix field and define the positive transverse photon space\n$$\\mathcal H_T=\\operatorname{Ran}M_{P_T} =\\{u\\in\\mathcal H:\\mathbf k\\cdot u(\\mathbf k)=0\\text{ for almost every }\\mathbf k\\ne0\\}.$$\nThe inner product on $\\mathcal H_T$ is the restriction of that on $\\mathcal H$. Each nonzero momentum fiber is the two-complex-dimensional plane $\\{a\\in\\mathbb C^3:\\mathbf k\\cdot a=0\\}$ perpendicular to the real vector $\\mathbf k$ in that Hermitian pairing; no global continuous polarization frame is part of the definition.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ (The natural numbers $\\mathbb{N}$ (von Neumann),\nOn $\\mathbb{N}$ the order is membership: $m < n \\iff m \\in n$), so\n\n$$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n \\to \\mathbb{R} \\,\\}$$\n\nis the function space of The vector space $F^{X}$ of all functions $X \\to F$ with pointwise operations, and $F^{n}$ as the case $X = n = \\{0, 1, \\dots, n-1\\}$ at $F = \\mathbb{R}$ and $X = n$,\na vector space over $\\mathbb{R}$ under the pointwise operations\n(Vector space over a field). We write $x_k := x(k)$ for $k < n$, and two elements of\n$\\mathbb{R}^{n}$ are equal exactly when they agree at every $k < n$. This is the\nsame set that $\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it calls $\\mathbb{R}^{n}$.\n\nThe **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number\n\n$$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$\n\nthe finite sum of Finite sums and finite products, by recursion applied to the list $k \\mapsto x_k y_k$\n(extended by $0$ beyond $n$, as every finite list in this library is). The\n**Euclidean norm** of $x$ is\n\n$$\\lVert x\\rVert_2 \\;:=\\; \\sqrt{\\langle x, x\\rangle},$$\n\nwhich is defined because $\\langle x,x\\rangle = \\sum_{k<n} x_k^{2} \\ge 0$ (a sum\nof nonnegative terms, Laws of finite sums and finite products clause 4 and\nSquares of nonzero elements are positive, the case $x_k = 0$ giving $x_k^2 = 0$ by\nInteger powers $a^m$) and every nonnegative real has a unique nonnegative square\nroot (Square roots exist: a unique $\\sqrt{a} \\ge 0$ with $(\\sqrt{a})^2 = a$; the positives are $\\{x^2 : x \\neq 0\\}$).\n\n### Both are defined for every $n$, including $n = 0$\n\nAt $n = 0$ the set $\\mathbb{R}^{0}$ has exactly one element, the empty function,\nand it is the zero vector space (The standard list $e : n \\to F^{n}$ with $e_i(i) = 1_F$ and $e_i(j) = 0_F$ for $j \\ne i$ is an ordered basis of $F^{n}$; hence $\\dim_F F^{n} = n$, and $F^{0}$ is the zero space with basis $\\varnothing$ and dimension $0$ clause 5); the sum\nabove is the empty sum, so $\\langle x,y\\rangle = 0$ and $\\lVert x\\rVert_2 = 0$.\n**This is the first place on this page where the two index regimes diverge, and\nthe divergence is deliberate.** The published metrics $d_1$, $d_2$, $d_\\infty$ of\n$\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it are defined only for $n \\ge 1$, because $d_\\infty$ would\notherwise be a maximum over the empty index set; the algebra above needs no such\nrestriction. The boundary in this page runs between the algebra and the metric,\nnot where a reader would guess, and Conventions of this page, the standing $n \\ge 1$ hypothesis, and what is taken up elsewhere in the reading order lists\nexactly which items inherit $n \\ge 1$.\n\n### The algebra of the inner product\n\nFor all $x, y, z \\in \\mathbb{R}^{n}$ and $\\lambda \\in \\mathbb{R}$:\n\n1. **Symmetry.** $\\langle x,y\\rangle = \\langle y,x\\rangle$, since $x_ky_k = y_kx_k$\n   termwise.\n2. **Additivity in the first argument.**\n   $\\langle x + y, z\\rangle = \\langle x,z\\rangle + \\langle y,z\\rangle$: the list\n   $k \\mapsto (x_k+y_k)z_k$ is the termwise sum of $k \\mapsto x_kz_k$ and\n   $k \\mapsto y_kz_k$, so Laws of finite sums and finite products clause 1 applies.\n3. **Homogeneity in the first argument.**\n   $\\langle \\lambda x, y\\rangle = \\lambda\\langle x,y\\rangle$, by\n   Laws of finite sums and finite products clause 2.\n4. **Bilinearity.** Clauses 2 and 3 together with symmetry give the same two laws\n   in the second argument.\n5. **Positive definiteness.** $\\langle x,x\\rangle \\ge 0$, and\n   $\\langle x,x\\rangle = 0$ if and only if $x = 0$. Indeed a vanishing sum of\n   nonnegative terms has every term $0$ (Laws of finite sums and finite products clause 4), so\n   $x_k^{2} = 0$ for every $k < n$, and a nonzero real has a positive square\n   (Squares of nonzero elements are positive), whence $x_k = 0$ for every $k < n$ and $x = 0$.\n6. **Agreement with the published Euclidean metric.** For $n \\ge 1$ and\n   $x, y \\in \\mathbb{R}^{n}$,\n   $\\lVert x - y\\rVert_2 = \\sqrt{\\sum_{k<n}(x_k-y_k)^{2}} = d_2(x,y)$, the two\n   sides being the same expression ($\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it). In particular\n   $\\lVert x\\rVert_2 = d_2(x, 0)$.\n\nThat $\\lVert\\cdot\\rVert_2$ is a norm in the sense of A norm on a real vector space, the induced metric, and the dictionary with the metric axioms\nis proved in Cauchy-Schwarz $\\lvert\\langle x,y\\rangle\\rvert \\le \\lVert x\\rVert_2\\lVert y\\rVert_2$ with its equality case, the triangle inequality for $\\lVert\\cdot\\rVert_2$, the parallelogram law and polarisation, where the triangle\ninequality is obtained from the Cauchy-Schwarz inequality; it is not assumed\nhere.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-surface-integral-on-a-compact-c-one-hypersurface",
+          "source_section": "Definition",
+          "quote": "Assume the $\\mathrm{AC}_\\omega$ convention of [[def-bounded-c-one-domain-boundary-charts-and-outward-normal]]. Let S be a compact embedded $C^1$ hypersurface in $\\mathbb R^n$, $n\\ge2$. Choose finitely many regular injective $C^1$ parametrizations $X_j:V_j\\to S\\cap O_j$ with $C^1$ coordinate transitions, and an ambient partition $\\chi_j$ from [[lem-finite-ambient-partitions-for-euclidean-boundary-integration]], with supports compactly contained in the corresponding chart neighborhoods. Put $J_{X_j}=\\sqrt{\\det(DX_j^TDX_j)}$, using [[def-gram-matrix-and-gram-determinant]].\n\nFor a nonnegative Borel f on S define $\\int_S f\\,dS=\\sum_j\\int_{V_j}(\\chi_j f)(X_j(y))J_{X_j}(y)\\,dy$, where the integrals on the right are those of [[def-nonnegative-lebesgue-integral]] and $0\\cdot\\infty=0$. Set $S(A)=\\int_S\\mathbf1_A\\,dS$ for Borel A. For signed f with $\\int_S|f|\\,dS<\\infty$ use the difference of the positive and negative integrals. The same chart formula restricts to a compact Borel face contained in a regular patch. The empty surface has zero integral. Independence and finiteness are established by the following chart-independence lemma.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-euclidean-chart-measure-agrees-with-polar-surface-measure",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$ and $n\\ge2$. The chart surface measure on $S^{n-1}$ equals the polar measure $\\sigma$. Orthogonal transformations preserve it. The map $\\omega\\mapsto a+R\\omega$, $R>0$, multiplies surface measure by $R^{n-1}$, and $|S^{n-1}|=n|B_1|$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-polar-coordinates-formula-for-lebesgue-measure",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $n \\ge 1$,\nlet $S^{n-1} \\subseteq \\mathbb R^n$ be the unit sphere, and let $\\sigma$ be the\nset function of [[def-polar-surface-measure-on-the-unit-sphere]]. Then $\\sigma$\nis a finite Borel measure on $S^{n-1}$, and for every Borel measurable\n$f : \\mathbb R^n \\to [0,\\infty]$,\n$$\\int_{\\mathbb R^n} f(x)\\,d\\lambda_n(x) = \\int_0^\\infty \\int_{S^{n-1}} f(r\\omega) r^{n-1}\\,d\\sigma(\\omega)\\,dr.$$\nMoreover, $\\sigma$ is the unique Borel measure on $S^{n-1}$ with this\nproperty.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-complex-exponential",
+          "source_section": "Definition",
+          "quote": "Let $\\iota_{\\mathbb R}\\colon\\mathbb N\\to\\mathbb R$ be the canonical-natural map\nof [[def-canonical-natural]], and let $j\\colon\\mathbb R\\to\\mathbb C$ be the real\nembedding $j(x)=x+i0$ from [[def-complex-numbers-and-arithmetic]]. For every\n$n\\in\\mathbb N$, the factorial $n!$ is nonzero by\n[[def-factorial-and-falling-factorial]], so\n$\\iota_{\\mathbb R}(n!)>0$ by [[lem-of-naturals-positive]] and consequently\n$j(\\iota_{\\mathbb R}(n!))\\ne0$ in the complex field\n[[thm-complex-numbers-form-a-field]].\n\nFor $z\\in\\mathbb C$, define\n$$ \\exp z:=\\sum_{n=0}^{\\infty}\\frac{z^n}{j(\\iota_{\\mathbb R}(n!))}. $$\nwhenever this complex series converges. Inside a complex expression we\nabbreviate the embedded denominator $j(\\iota_{\\mathbb R}(n!))$ by $n!$, so the\nsame definition may be written $\\exp z=\\sum z^n/n!$ without identifying a\nnatural number with a complex number. Powers and series are those of\n[[def-complex-integer-powers]] and\n[[def-complex-series-power-series-and-absolute-convergence]]. The convergence\nfor every $z\\in\\mathbb C$ is discharged by\n[[lem-complex-exponential-series-converges-everywhere]].",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-complex-exponential-series-converges-everywhere",
+          "source_section": "Statement",
+          "quote": "For every $z\\in\\mathbb C$, the series $\\sum z^n/n!$ converges absolutely.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-complex-exponential-addition-and-real-extension",
+          "source_section": "Statement",
+          "quote": "For all $z,w\\in\\mathbb C$, $\\exp(z+w)=\\exp z\\exp w$. For real $x$, the complex value $\\exp(x+0i)$ equals the published real exponential $e^x$. The conventions and prerequisite facts used below are recorded in [[def-complex-exponential]], [[lem-complex-exponential-series-converges-everywhere]], [[lem-cauchy-product-of-absolutely-convergent-complex-series]], [[def-real-exponential-function-and-e]], [[lem-binomial-theorem-over-complex-numbers]], [[thm-binomial-closed-formula]].",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-factorial-and-falling-factorial",
+          "source_section": "Definition",
+          "quote": "**The factorial.** By the recursion theorem (The recursion theorem) applied to the\nset $\\mathbb{N}\\times\\mathbb{N}$, the starting element $(0,1)$ and the function\n$f(k, v) = (\\sigma(k),\\, v \\cdot \\sigma(k))$, and by the same induction on the\nfirst coordinate as in Finite sums and finite products of natural numbers, $\\sum_{k<n} a_k$ and $\\prod_{k<n} a_k$ in $\\mathbb{N}$, there is a unique\n$F : \\mathbb{N} \\to \\mathbb{N}$ with\n\n$$F(0) = 1, \\qquad F(\\sigma(n)) = F(n)\\cdot\\sigma(n) \\quad (n \\in \\mathbb{N}).$$\n\nWe write $n! := F(n)$. Thus $0! = 1$, $1! = 0!\\cdot 1 = 1$, $2! = 1!\\cdot 2 = 2$,\n$3! = 6$, $4! = 24$, $5! = 120$, $6! = 720$.\n\n**$0! = 1$ is the base clause of this recursion**, not a convention imported from\nelsewhere. Nothing about empty products is presupposed; the agreement with the\nempty product is proved below, in clause (a), rather than assumed.\n\n**Truncated difference.** Throughout, $n - k$ is the operation fixed in\nFinite sums and finite products of natural numbers, $\\sum_{k<n} a_k$ and $\\prod_{k<n} a_k$ in $\\mathbb{N}$: the unique $j$ with $k + j = n$ when\n$k \\le n$, and $0$ when $n < k$.\n\n**The falling factorial.** For $n \\in \\mathbb{N}$ define $n^{\\underline{k}}$ by\nrecursion on $k$, by the recursion theorem applied to\n$\\mathbb{N}\\times\\mathbb{N}$ with starting element $(0,1)$ and\n$f(k, v) = (\\sigma(k),\\, v \\cdot (n-k))$:\n\n$$n^{\\underline{0}} = 1, \\qquad n^{\\underline{\\sigma(k)}} = n^{\\underline{k}}\\cdot(n-k) .$$\n\nSo $n^{\\underline{1}} = 1\\cdot(n-0) = n$ and $n^{\\underline{2}} = n\\,(n-1)$, and\nfor $k \\le n$ the value is the product $n(n-1)\\cdots(n-k+1)$ of the $k$ topmost\nfactors.\n\n**Four facts, proved here because the page uses each of them.**\n\n**(a) The factorial is the product of the first $n$ positive naturals.**\n$n! = \\prod_{j<n}\\sigma(j) = \\prod_{j<n}(j+1)$, the $\\mathbb{N}$-valued product of\nFinite sums and finite products of natural numbers, $\\sum_{k<n} a_k$ and $\\prod_{k<n} a_k$ in $\\mathbb{N}$. Induction (The principle of mathematical induction): at\n$n = 0$ both sides are $1$, the empty product and the base clause agreeing; and\n$\\prod_{j<\\sigma(n)}\\sigma(j) = \\big(\\prod_{j<n}\\sigma(j)\\big)\\cdot\\sigma(n) = n!\\cdot\\sigma(n) = \\sigma(n)!$.\n**So the empty-product reading and the base-clause reading are the same reading**,\nand neither was assumed.\n\n**(b) $n! \\ne 0$, and $\\iota(n!) = \\prod^{\\mathbb{R}}_{j<n}\\iota(j+1)$.** For the\nfirst, $0! = 1 \\ne 0$ (The von Neumann naturals form a Peano system) and\n$\\sigma(n)! = n!\\cdot\\sigma(n)$ is a product of two nonzero naturals, which is\nnonzero: if $xy = 0$ with $y \\ne 0$ then $xy = 0\\cdot y$\n(Zero and one under multiplication) and cancellation gives $x = 0$\n(Cancellation for multiplication by a nonzero factor). So $n! \\ne 0$ for every $n$ by induction. For the second, apply the bridge clause\n6 of that lemma to clause (a) above. This is what makes the factorial of this\npage and the real-valued product $\\prod_{j<n}(j+1)$ used elsewhere in the library\n**one object seen twice**, rather than two unrelated notions.\n\n**(c) $n^{\\underline{k}}\\cdot(n-k)! = n!$ for $k \\le n$.** Induction on $k$, for\nall $n$ at once. At $k = 0$ this reads $1 \\cdot n! = n!$. Assume it at $k$ and\nlet $\\sigma(k) \\le n$; then $k \\le n$, and writing $d := n - k$ we have\n$k + d = n$ and $d \\ne 0$, since $k + 0 = k \\ne n$; so $d = \\sigma(e)$ for a\nunique $e$ (Every nonzero natural number is a successor), and $\\sigma(k) + e = n$, that is\n$e = n - \\sigma(k)$ (Addition is cancellative). Therefore\n$n^{\\underline{\\sigma(k)}}\\cdot\\big(n-\\sigma(k)\\big)! = n^{\\underline{k}}\\cdot(n-k)\\cdot e! = n^{\\underline{k}}\\cdot\\big(e!\\cdot\\sigma(e)\\big) = n^{\\underline{k}}\\cdot\\sigma(e)! = n^{\\underline{k}}\\cdot(n-k)! = n!$,\nusing commutativity and associativity of multiplication\n(Multiplication is associative, Multiplication is commutative) and the recursion\nclause for the factorial.\n\n**(d) Boundary values.** $n^{\\underline{0}} = 1$ for every $n$, by the base\nclause; $n^{\\underline{n}} = n!$, since clause (c) at $k = n$ gives\n$n^{\\underline{n}}\\cdot 0! = n!$ and $0! = 1$; and\n$n^{\\underline{k}} = 0$ whenever $k > n$. For the last, $n - n = 0$ gives\n$n^{\\underline{\\sigma(n)}} = n^{\\underline{n}}\\cdot 0 = 0$, the clause\n$x \\cdot 0 = 0$ being definitional (Multiplication of natural numbers), and if\n$n^{\\underline{k}} = 0$ then\n$n^{\\underline{\\sigma(k)}} = 0$ as well, so $n^{\\underline{k}} = 0$ for every\n$k \\ge \\sigma(n)$ by induction.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-integer-power",
+          "source_section": "Definition",
+          "quote": "Let $a \\in \\mathbb{R}$, where $\\mathbb{R}$ is the ambient ordered field\n(Ordered field, Field).\n\n**Natural exponents.** By the recursion theorem (The recursion theorem) applied to\nthe set $\\mathbb{R}$, the starting element $1$ and the function\n$f(x) = x \\cdot a$, there is a unique function $\\mathbb{N} \\to \\mathbb{R}$,\nwritten $n \\mapsto a^n$, with\n\n$$a^0 = 1, \\qquad a^{n+1} = a^n \\cdot a \\quad (n \\in \\mathbb{N}).$$\n\nThus $a^1 = a$, $a^2 = a \\cdot a$, and so on. Note that this is defined for\n**every** $a$, including $a = 0$.\n\n**Negative exponents.** If $a \\ne 0$ and $n \\in \\mathbb{N}$ with $n \\ge 1$, set\n\n$$a^{-n} := (a^n)^{-1}.$$\n\n**Why that is legitimate.** The right-hand side presupposes that $a^n$ is\ninvertible, that is, that $a^n \\ne 0$. This is a proof obligation and not an\nobservation, and it is discharged by claim 2 of Laws of integer exponents: for $a \\ne 0$\nin a field, $a^n \\ne 0$ for every $n \\in \\mathbb{N}$, proved there by induction on\n$n$ from the fact that a field has no zero divisors (A field has no zero divisors: $ab = 0 \\Rightarrow a = 0$ or $b = 0$).\nThat lemma is a statement *about* the operation introduced here, so it depends on\nthis definition and is recorded in this item's `justified_by` rather than in its\n`deps` (SCHEMA §3). Given $a^n \\ne 0$, the value $(a^n)^{-1}$ is a single\nwell-determined element, because multiplicative inverses in a field are unique\n(Identities and inverses in a field are unique).\n\n**Integer exponents.** Every integer $m$ (The integers as equivalence classes of pairs of naturals) is either\n$n$ or $-n$ for a unique natural $n$, where $n$ in these integer expressions denotes its image under the\nembedding $\\iota : \\mathbb{N} \\to \\mathbb{Z}$ (The naturals embed in the integers,\nArithmetic on the integers). This too is a citation and not a slogan: the order on\n$\\mathbb{Z}$ is total (The integers form a totally ordered ring), so $m \\ge 0$ or $m < 0$; the\nimage of $\\iota$ is exactly the set of nonnegative integers, and each of them is\n$n$ for a unique natural $n$ (The naturals embed in the integers); and if $m < 0$ then\n$-m > 0$, by compatibility of the order with addition (The integers form a totally ordered ring),\nso $-m = n$ and $m = -n$, with $n$ unique because $\\iota$ is\ninjective. The two clauses above therefore define $a^m$ for every\n$m \\in \\mathbb{Z}$ whenever $a \\ne 0$, and for every $m \\in \\mathbb{N}$ for\narbitrary $a$. The two exponent domains are disjoint: the natural clause\nhandles $m \\ge 0$, including $m = 0$, while the negative clause requires\n$n \\ge 1$ and therefore handles only $m < 0$.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-qft-example-soft-current-angular-coherent",
+          "source_section": "Statement",
+          "quote": "This is a conditional mathematical theorem about the prescribed current and\nfree coherent-state construction defined below, under the exact supplier\ninterfaces [F2] and [L1]. Here “soft current” is only a name for the displayed\nrational function: no scattering-amplitude factorization or approximation\nclaim is made. The weak-zero and no-strong-limit conclusions are conditional\non [L1]; the projective-ray conclusion is proved separately in step 7.1.\n\nAssume $\\mathrm{AC}_\\omega$, the constants and conventions of\n[[def-qft-example-data]], and that the two supplier interfaces [F2]\nand [L1] hold exactly as stated below. Let $I$ be a finite, possibly empty,\nset of leg labels. A leg $i\\in I$ carries an energy $E_i>0$ in joules,\na dimensionless velocity $v_i=\\mathbf v_{i,\\rm phys}/c\\in\\mathbb R^3$ with\n$\\mathbf v_{i,\\rm phys}$ in m s$^{-1}$ and\n$|v_i|<1$, a dimensionless charge number $Q_i\\in\\mathbb R$ (physical charge\n$eQ_i$ coulombs), and an orientation sign $\\eta_i\\in\\{-1,1\\}$, with\n$\\eta_i=-1$ for an incoming leg and $+1$ for an outgoing leg. Require charge\nbalance $\\sum_{i\\in I}\\eta_iQ_i=0$. Use\n$h=\\operatorname{diag}(1,-1,-1,-1)$ and\n$h(a,b)=a^0b^0-\\mathbf a\\cdot\\mathbf b$ for algebraic four-vector\ncontractions. For $n\\in S^2:=\\{x\\in\\mathbb R^3:|x|=1\\}$ and energy\n$\\omega>0$ in joules, put\n$$ p_i=E_i(1,v_i),\\qquad q=\\omega(1,n),\\qquad K:S^2\\to\\mathbb R^4,\\quad K(n)=\\sum_{i\\in I}\\eta_iQ_i\\frac{(1,v_i)}{1-v_i\\cdot n}. $$\nEach $p_i$ has positive energy and\n$h(p_i,p_i)=E_i^2(1-|v_i|^2)>0$; this timelike condition is the precise\nmeaning of “massive” here, with rest mass\n$m_i=E_i\\sqrt{1-|v_i|^2}/c^2>0$. The prescribed current is the function\n$J(q)=\\sum_{i\\in I}\\eta_iQ_i\\,p_i/h(p_i,q)$ on\n$\\{\\omega(1,n):\\omega>0,\\ n\\in S^2\\}$. Since\n$h(p_i,q)=E_i\\omega(1-v_i\\cdot n)>0$, this equals $K(n)/\\omega$.\nThus $K$ is dimensionless and $J(q)$ has units $\\mathrm J^{-1}$.\nWrite $K(n)=(K^0(n),\\mathbf K(n))$, let $P_T(n)=I-n\\otimes n$, and\n$K_\\perp(n)=P_T(n)\\mathbf K(n)$. Define $d\\Omega$ as Euclidean chart\nsurface measure on $S^2$ and\n$$ C=\\frac{g^2}{2(2\\pi)^3}\\int_{S^2}|K_\\perp(n)|^2\\,d\\Omega(n)\\ge0. $$\nHere $g>0$ is the dimensionless coupling of [[def-qft-example-data]] and\n$\\lambda,\\Lambda$ are energy cutoffs in joules. Write $\\mathbf q=\\omega n$\nfor the spatial energy coordinate, distinct from the four-vector\n$q=(\\omega,\\mathbf q)$ above. For $\\mathbf q\\ne0$, put $\\omega=|\\mathbf q|$\nand $n=\\mathbf q/|\\mathbf q|$ and define\n$$ h_\\lambda(\\mathbf q)=g\\frac{K_\\perp(n)}{\\omega}\\mathbf1_{\\{\\lambda<\\omega<\\Lambda\\}},\\qquad 0<\\lambda<\\Lambda; $$\nSet $h_\\lambda(0)=0$ and regard $h_\\lambda$ as a function of $\\mathbf q$.\nDefine\n$\\mathcal H_{E,T}:=\\{h\\in L^2(\\mathbb R^3,d^3\\mathbf q/[(2\\pi)^3 2|\\mathbf q|];\\mathbb C^3):\\mathbf q\\cdot h(\\mathbf q)=0\\ {\\rm a.e.}\\}$,\nwith the componentwise Hermitian integral pairing linear in its second\nvariable. On this energy-coordinate transverse Hilbert space the exact norm is\n$$ N_\\lambda=\\|h_\\lambda\\|^2=C\\log(\\Lambda/\\lambda). $$\nThe energy-coordinate wavefunction has units $\\mathrm J^{-1}$ and its\none-particle measure has units $\\mathrm J^2$, so $N_\\lambda$ and $C$ are\ndimensionless; its value at $q=0$ is immaterial to this $L^2$ vector.\nUnder the canonical unitary $U:\\mathcal H_{E,T}\\to\\mathcal H_T$ specified and proved in step 3.1,\nthe same vector is represented by the length-coordinate vector $f_\\lambda$\ndefined as follows. Set $f_\\lambda(0)=0$ and, for $k\\ne0$, define\n$$ f_\\lambda(k)=\\mathbf1_{\\{\\lambda/(\\hbar c)<|k|<\\Lambda/(\\hbar c)\\}} |k|^{-3/2}b(k/|k|),\\qquad b(n)=\\frac{gK_\\perp(n)}{\\sqrt{2(2\\pi)^3}},\\qquad \\int_{S^2}|b|^2\\,d\\Omega=C. $$\nHere $b$ is dimensionless and the $L^2(d^3k)$ wavefunction $f_\\lambda$ has\nunits $\\mathrm m^{3/2}$.\nThe normalized coherent vector\n$\\Psi_\\lambda=W(-i\\sqrt2 f_\\lambda)\\Omega\n=\\exp(-N_\\lambda/2)\\epsilon(f_\\lambda)$ has squared norm in sector $m$\n$$ s_m=\\exp(-N_\\lambda)\\frac{N_\\lambda^m}{m!},\\qquad \\sum_{m\\ge0}s_m=1,\\qquad \\sum_{m\\ge0}m s_m=N_\\lambda, $$\nwith $N_\\lambda^0=1$ also when $N_\\lambda=0$.\nThese are Hilbert-space sector norms and their index sum; no measured\nprobability is asserted. For the free photon energy operator\n$H_\\gamma=\\hbar c\\,d\\Gamma(|k|)$, $\\Psi_\\lambda$ is in its operator domain\nand its quadratic expectation is $C(\\Lambda-\\lambda)$ joules.\n\nIf $C=0$, $f_\\lambda=0$ almost everywhere and $\\Psi_\\lambda=\\Omega$ for each\ncutoff. If $C>0$, the exact hypotheses of the current [L1] hold with\n$\\epsilon=\\lambda/(\\hbar c)$, $\\kappa=\\Lambda/(\\hbar c)$ and the displayed\nnonzero transverse angular function $b$. Conditional on [L1], the family has\nno strong Fock-vector limit and converges weakly to zero, while its free\nenergy expectation stays bounded. For a unit Fock vector $u$, define its\nprojective ray $[u]:=\\{zu:z\\in\\mathbb C,\\ |z|=1\\}$. For unit vectors $u,v$\ndefine their projective-ray distance by\n$d([u],[v]):=\\inf_{|z|=1}\\|u-zv\\|$. This is a metric on phase classes: symmetry follows by replacing $z$ with\n$\\overline z$, the triangle inequality follows from the norm triangle\ninequality and phase invariance, and compactness of the unit circle makes zero\ndistance equivalent to equality of the classes. Projective convergence means convergence in this\ndistance, equivalently norm convergence to a fixed unit vector after allowing\na unit-modulus phase at each cutoff. Step 7.1 proves separately that\nthese rays have no projective limit, including after arbitrary phase choices. This is\nnot a result about full interacting QED, universal charged sectors,\ndetector-inclusive observables, or measured photon statistics.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For every leg and every $n\\in S^2$, $1-v_i\\cdot n\\ge1-|v_i|>0$. The finite sum defining $K(n)$ is therefore continuous and bounded on $S^2$. Charge balance gives $h(K(n),(1,n))=\\sum_i\\eta_iQ_i=0$, so $K^0(n)=n\\cdot\\mathbf K(n)$ and $K_\\perp(n)$ is the transverse component. The current theorem [F10] uses the same $K_\\perp$, $g$, and $d\\Omega$ with energy variable $\\omega=\\hbar\\nu$ and proves that the full-sphere coefficient $C_0$ is finite. Here $b=\\mathbf1_A b_0$, so $C=\\int_A|b_0|^2d\\Omega\\le C_0$; the Borel restriction remains transverse. Thus the angular coefficient is square-integrable and $C$ is finite and nonnegative.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F4",
+            "F5",
+            "F10",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $\\mathbf k=rn\\ne0$, the coefficient $b(n)$ is perpendicular to\n$n$, so $\\mathbf k\\cdot f_{\\varepsilon,\\Lambda}(\\mathbf k)=0$; hence\n$f_{\\varepsilon,\\Lambda}\\in\\mathcal H_T$ once its $L^2$ norm is finite.\nThe Borel cutoff and Borel angular coefficient make the squared norm\nintegrand nonnegative and Borel. Applying [F6] and then $\\nu=cr$ gives\n$$\\|f_{\\varepsilon,\\Lambda}\\|^2 =\\int_A|b(n)|^2\\,d\\Omega(n) \\int_{\\varepsilon/c}^{\\Lambda/c}\\frac{dr}{r} =C\\int_\\varepsilon^\\Lambda\\frac{d\\nu}{\\nu} =C\\log\\frac{\\Lambda}{\\varepsilon}<\\infty.$$\nFor each band define\n$f_j(\\mathbf k)=\\mathbf1_{\\{\\nu(\\mathbf k)\\in B_j\\}}\nf_{\\varepsilon,\\Lambda}(\\mathbf k)$. The same change of variables gives\n$\\|f_j\\|^2=C\\int_{B_j}d\\nu/\\nu=\\lambda_j$. A singleton endpoint has zero\none-dimensional Lebesgue measure, since it is covered by intervals of\narbitrarily small length; therefore any endpoint convention gives the same\nintegral. Thus the band components belong to\npairwise orthogonal closed subspaces of $\\mathcal H_T$, and their squared\nnorms sum to $\\lambda=C\\log(\\Lambda/\\varepsilon)$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F5",
+            "F6",
+            "F7",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "In the $m$-particle sector, $\\|f^{\\otimes_s m}/\\sqrt{m!}\\|^2=\\lambda^m/m!$. By [F8] and [F9], their sum over $m\\ge0$ is $\\exp(\\lambda)<\\infty$. Therefore $\\epsilon(f_{\\varepsilon,\\Lambda})$ is a Fock vector of squared norm $\\exp(\\lambda)$, and the prescribed scalar $\\exp(-\\lambda/2)$ normalizes $\\Psi_{\\varepsilon,\\Lambda}$ to norm one.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F8",
+            "F9",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "Put $M=\\sum_jm_j$. The symmetrized tensors with different band\noccupancy tuples are orthogonal because some tensor factor then lies in\northogonal frequency subspaces. For\n$x=f_1^{\\otimes m_1}\\otimes\\cdots\\otimes f_r^{\\otimes m_r}$, the projection\nformula [F2] gives\n$$\\|P_{s,M}x\\|^2 =\\langle x,P_{s,M}x\\rangle =\\frac{\\prod_jm_j!}{M!}\\prod_j\\|f_j\\|^{2m_j}.$$\nIndeed, in the permutation sum only permutations within each band block\nhave nonzero inner product with $x$; there are $\\prod_jm_j!$ such\npermutations, each contributing $\\prod_j\\|f_j\\|^{2m_j}$. Expanding\n$f^{\\otimes M}=(\\sum_j f_j)^{\\otimes M}$, the component with occupancy\n$(m_1,\\ldots,m_r)$ is\n$\\frac{M!}{\\prod_jm_j!}P_{s,M}x$.",
+          "step": "3.2",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The squared norm of the normalized coherent-state projection onto\noccupancy $(m_1,\\ldots,m_r)$ is consequently\n$$\\exp(-\\lambda)\\frac{M!}{\\prod_jm_j!^2}\\|P_{s,M}x\\|^2 =\\exp\\!\\left(-\\sum_j\\lambda_j\\right) \\prod_j\\frac{\\lambda_j^{m_j}}{m_j!} =\\prod_j\\left(\\exp(-\\lambda_j)\\frac{\\lambda_j^{m_j}}{m_j!}\\right).$$\nEach factor sums to one by [F8], so this is a joint probability law that\nfactors into Poisson distributions of means $\\lambda_j$. If $C=0$, all\n$\\lambda_j=0$; [F9] makes the only nonzero outcome the all-zero tuple.\nThe marked frequency intensity is $|b(n)|^2d\\Omega(n)d\\nu/\\nu$ because\n$|f(rn)|^2d^3\\mathbf k=|b(n)|^2d\\Omega(n)d\\nu/\\nu$ under $\\nu=cr$.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F8",
+            "F9",
+            "step 2.1",
+            "step 3.1",
+            "step 3.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 4.1: when C=0 every band mean vanishes and the all-zero occupancy has probability one."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 4.1: the C=0 case is explicitly the all-zero tuple; the exponential-vector normalization also covers lambda=0 in step 3.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 3.2 and 4.1: the occupancy computation applies to a partition with one band as well as to any finite number of bands."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 4.1: zero-measure bands have lambda_j=0 and hence only zero occupation; the formulas include C=0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1: a singleton frequency endpoint has zero one-particle measure, so open or closed band-end conventions give the same norm and mean."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1: the proof uses the finitely supplied Borel interval partition and constructs each band component directly; no unspecified choices are made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Lemma asserts a probability law, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Lemma asserts no converse characterization of coherent vectors from a Poisson law."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-67",
+        "notes": "Checked every proof step and all exact cited supplier interfaces. Step 1.1 bounds the angular rational map by finite subluminal denominators; polar integration in dimension 3 with AC_omega and chart/polar equality gives dr/r=dnu/nu. Step 3.1 sums sector norms using the exponential series. In 3.2 precisely product(m_j!) permutations survive, giving norm squared product(m_j!)/M! times product(lambda_j^m_j); expansion multiplicity M!/product(m_j!) then yields the normalized product Poisson law in 4.1. Zero band means use 0^0=1; singleton bands and zero angular acceptance are harmless. PTB single-mode citation corrected from p.2 Eq.(12) to p.3 unnumbered probability display. Independence and continuum intensity are proved locally, not imported from PTB. No interacting or empirical claim."
+      }
+    },
+    "prop-qftx-soft-unresolved-cancellation": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-qftx-resolved-soft-poisson",
+          "source_section": "Definition",
+          "quote": "Assume $\\mathrm{AC}_\\omega$: every sequence $(X_n)_{n\\in\\mathbb N}$ of\nnonempty sets admits a function $s$ with $s(n)\\in X_n$ for every $n$.\nUse the following SI constants and meanings: $c>0$ is the speed of light in\nvacuum, in m s$^{-1}$; $\\hbar>0$ is the reduced Planck constant, in J s;\n$e>0$ is the magnitude of the elementary charge, in C; and $\\mu_0>0$ is the\nvacuum permeability, in H m$^{-1}$, used here as a positive parameter without\nassigning it a numerical value. Set\n$$g=e\\sqrt{\\frac{\\mu_0c}{\\hbar}}>0,$$\nwhich is dimensionless. These are the adopted QFT SI conventions.\n\nLet $I$ be a finite, possibly empty, set of leg labels. For each $i\\in I$,\nchoose an energy $E_i>0$ in J and a physical velocity\n$\\mathbf v_{i,\\mathrm{phys}}\\in\\mathbb R^3$ in m s$^{-1}$ with\n$|\\mathbf v_{i,\\mathrm{phys}}|<c$. Write\n$v_i=\\mathbf v_{i,\\mathrm{phys}}/c\\in\\mathbb R^3$, so $v_i$ is\ndimensionless and $|v_i|<1$. Also choose a dimensionless charge number\n$Q_i\\in\\mathbb R$ (the assigned physical charge is $eQ_i$ in C) and an\norientation $\\eta_i\\in\\{-1,1\\}$, where $-1$ denotes an incoming leg and\n$+1$ an outgoing leg. Assume charge balance\n$\\sum_{i\\in I}\\eta_iQ_i=0$. For four-vectors\n$a=(a^0,\\mathbf a),b=(b^0,\\mathbf b)\\in\\mathbb R^4$, write\n$h=\\operatorname{diag}(1,-1,-1,-1)$ and\n$h(a,b)=a^0b^0-\\mathbf a\\cdot\\mathbf b$ for the algebraic contraction\nwith signature $(+,-,-,-)$ used in this model.\n\nFor $n\\in S^2=\\{x\\in\\mathbb R^3:|x|=1\\}$ and angular frequency\n$\\nu>0$ in s$^{-1}$, with associated model photon energy $\\hbar\\nu$ in J,\nput $p_i=E_i(1,v_i)$ and $q=\\hbar\\nu(1,n)$ in $\\mathbb R^4$. On\n$$\\mathscr Q=\\{\\hbar\\nu(1,n):\\nu>0,\\ n\\in S^2\\}\\subset\\mathbb R^4,$$\ndefine the prescribed current $J:\\mathscr Q\\to\\mathbb R^4$ and angular\ncoefficient $K:S^2\\to\\mathbb R^4$ by\n$$J(q)=\\sum_{i\\in I}\\eta_iQ_i\\frac{p_i}{h(p_i,q)},\\qquad K(n)=\\sum_{i\\in I}\\eta_iQ_i\\frac{(1,v_i)}{1-v_i\\cdot n}.$$\nBecause $|v_i\\cdot n|\\le |v_i|<1$, every denominator\n$1-v_i\\cdot n$ is strictly positive.\nThe data make $h(p_i,q)=E_i\\hbar\\nu(1-v_i\\cdot n)>0$ and\n$J(q)=K(n)/(\\hbar\\nu)$. The balance condition gives\n$h(J(q),q)=0$; this is the conservation convention for this prescribed\neikonal current in the model. Here “prescribed eikonal current” means exactly\nthe displayed rational map $J$ on these model photon energy four-vectors; no\nscattering-amplitude factorization or approximation is asserted.\n\nLet $A\\subseteq S^2$ be a Borel angular acceptance region. The sphere\n$S^2\\subset\\mathbb R^3$ is a compact embedded smooth hypersurface, and\n$d\\Omega$ denotes its Euclidean chart surface measure: for a finite regular\ninjective $C^1$ chart cover $X_j:V_j\\to S^2$, where each $V_j$ is open in\n$\\mathbb R^2$, with $C^1$ coordinate\ntransitions and a subordinate ambient partition of unity $\\chi_j$ whose supports are compactly\ncontained in the chart neighborhoods, its integral on a nonnegative Borel\nfunction $F$ is\n$$\\int_{S^2}F\\,d\\Omega=\\sum_j\\int_{V_j}(\\chi_jF)(X_j(y))\\sqrt{\\det(DX_j(y)^TDX_j(y))}\\,dy.$$\nThis is the chart-independent induced surface integral. Write\n$K(n)=(K^0(n),\\mathbf K(n))$ and define\n$K_\\perp(n)=(I_3-nn^T)\\mathbf K(n)$, where $I_3$ is the $3\\times3$\nidentity matrix. Put\n$$b_0(n)=\\frac{gK_\\perp(n)}{\\sqrt{2(2\\pi)^3}},\\qquad b(n)=\\mathbf1_A(n)b_0(n),\\qquad C=\\int_{S^2}|b(n)|^2\\,d\\Omega(n).$$\nThe earlier current theorem proves $b_0\\in L^2(S^2,d\\Omega;\\mathbb R^3)$\nfor these finite balanced subluminal legs; since $A$ is Borel,\n$b\\in L^2$ and $0\\le C\\le\\int_{S^2}|b_0|^2d\\Omega<\\infty$.\nThus $b$ and $C$ are dimensionless.\n\nFor the one-particle space, write\n$$x\\cdot y=\\sum_{j=1}^3x_jy_j\\quad(x,y\\in\\mathbb R^3),\\qquad a\\cdot b=\\sum_{j=1}^3a_jb_j\\quad(a,b\\in\\mathbb C^3),$$\nwhere the second dot product is the complex-bilinear extension. The fiber\nHermitian pairing is $\\overline a\\cdot b=\\sum_j\\overline{a_j}b_j$, with\nnorm $|a|^2=\\sum_j|a_j|^2$. Set\n$$\\mathcal H=L^2(\\mathbb R^3,d^3\\mathbf k;\\mathbb C^3),\\qquad \\langle u,v\\rangle_2=\\int_{\\mathbb R^3}\\overline{u(\\mathbf k)}\\cdot v(\\mathbf k)\\,d^3\\mathbf k,$$\nHere $d^3\\mathbf k$ is Lebesgue measure, and this pairing is\nsecond-variable-linear. For $\\mathbf k\\ne0$,\nput $\\widehat{\\mathbf k}=\\mathbf k/|\\mathbf k|$\nand $P_T(\\mathbf k)=I_3-\\widehat{\\mathbf k}\\widehat{\\mathbf k}^{T}$, the\nEuclidean orthogonal projection onto the fiber plane perpendicular to\n$\\mathbf k$; assign any value at $\\mathbf k=0$. Its multiplier is an\northogonal projection on $\\mathcal H$, so its range is closed. The transverse\none-particle Hilbert space\nis\n$$\\mathcal H_T=\\operatorname{Ran}M_{P_T}=\\{u\\in\\mathcal H:\\mathbf k\\cdot u(\\mathbf k)=0\\text{ for a.e. }\\mathbf k\\ne0\\},$$\nwhere $M_{P_T}$ is multiplication by $P_T$, and the real Euclidean dot\nproduct is extended complex-bilinearly in the transverse condition. This is\nthe transverse one-particle space used in this model.\n\nFor $m\\ge1$, use the iterated Hilbert tensor completion\n$\\mathcal H_T^{\\widehat\\otimes m}$, with product pairing on elementary\ntensors. Here $S_m$ is the permutation group and\n$U_\\pi(u_1\\otimes\\cdots\\otimes u_m)=\nu_{\\pi^{-1}(1)}\\otimes\\cdots\\otimes u_{\\pi^{-1}(m)}$. Set\n$$P_{s,m}=\\frac1{m!}\\sum_{\\pi\\in S_m}U_\\pi,\\qquad \\mathcal H_s^{(m)}=\\operatorname{Ran}P_{s,m};$$\nput $P_{s,0}=I_{\\mathbb C}$ and $\\mathcal H_s^{(0)}=\\mathbb C$. The\nsymmetric bosonic Fock space is\n$$\\mathcal F_s(\\mathcal H_T)=\\left\\{(\\Psi_m)_{m\\ge0}:\\Psi_m\\in\\mathcal H_s^{(m)},\\ \\sum_{m\\ge0}\\|\\Psi_m\\|^2<\\infty\\right\\},$$\nwith componentwise pairing and vacuum $1\\in\\mathbb C$ in sector zero.\nFor $f\\in\\mathcal H_T$, define the exponential-vector map\n$\\epsilon:\\mathcal H_T\\to\\mathcal F_s(\\mathcal H_T)$ by\n$$\\epsilon(f)=\\bigoplus_{m=0}^{\\infty}\\frac{P_{s,m}(f^{\\otimes m})}{\\sqrt{m!}}.$$\nHere $f^{\\otimes0}=1$ in the vacuum sector.\nSince $f^{\\otimes m}$ is already symmetric,\n$P_{s,m}(f^{\\otimes m})=f^{\\otimes m}$ for $m\\ge1$; write this tensor as\n$f^{\\otimes_s m}$.\n\nFor fixed angular-frequency cutoffs $0<\\varepsilon<\\Delta<\\Lambda$, let\n$\\nu(\\mathbf k)=c|\\mathbf k|$ in s$^{-1}$, with $\\mathbf k$ in m$^{-1}$.\nThe one-particle coherent displacement is the transverse mode function\n$$f_{\\varepsilon,\\Lambda}(\\mathbf k)= \\mathbf1_{\\{\\varepsilon<\\nu(\\mathbf k)<\\Lambda\\}}|\\mathbf k|^{-3/2} {}\\times b\\!\\left(\\frac{\\mathbf k}{|\\mathbf k|}\\right) \\quad(\\mathbf k\\ne0), \\qquad f_{\\varepsilon,\\Lambda}(0)=0.$$\nThe function $f_{\\varepsilon,\\Lambda}$ has units m$^{3/2}$ in\n$\\mathcal H_T$; the associated free one-photon energy is\n$\\hbar\\nu(\\mathbf k)=\\hbar c|\\mathbf k|$ in J. Define its normalized\ncoherent vector by\n$$\\Psi_{\\varepsilon,\\Lambda}=\\exp\\!\\left(-\\frac{\\|f_{\\varepsilon,\\Lambda}\\|^2}{2}\\right)\\epsilon(f_{\\varepsilon,\\Lambda}).$$\nFor a finite partition\n$B_1,\\ldots,B_r$ of $(\\varepsilon,\\Lambda)$ into disjoint Borel intervals,\nlet\n$H_j=\\{u\\in\\mathcal H_T:u(\\mathbf k)=0\\text{ a.e. unless }\\nu(\\mathbf k)\\in B_j\\}$.\nLet $P_j$ be multiplication on $\\mathcal H_T$ by\n$\\mathbf1_{\\{\\nu(\\mathbf k)\\in B_j\\}}$. This bounded self-adjoint idempotent\npreserves transversality because it is scalar-valued, so it is an orthogonal\nprojection. Its range is exactly $H_j$, making $H_j$ closed. For $j\\ne k$,\ndisjointness gives $P_jP_k=0$, hence the ranges are orthogonal.\nFor a tuple $(m_1,\\ldots,m_r)\\in\\mathbb N_0^r$, put $M=\\sum_jm_j$.\nIts occupation subspace is the closed span in sector $\\mathcal H_s^{(M)}$\nof the vectors\n$$P_{s,M}\\left(\\bigotimes_{j=1}^r\\bigotimes_{\\ell=1}^{m_j}u_{j,\\ell}\\right),\\qquad u_{j,\\ell}\\in H_j,$$\nwhere the empty tensor for $M=0$ is the vacuum $1\\in\\mathbb C$. It has\nexactly $m_j$ factors in $H_j$ and no factor outside $\\bigoplus_jH_j$.\nDefine $N(B_j)$ to have value $m_j$ on this subspace.\nThe model assigns the tuple\nprobability equal to the squared norm of the projection of\n$\\Psi_{\\varepsilon,\\Lambda}$ onto it. Its resolution parameter\n$\\Delta$ divides $(\\varepsilon,\\Lambda)$ into the unresolved band\n$(\\varepsilon,\\Delta)$ and the resolved band $[\\Delta,\\Lambda)$. The\nthreshold frequency is assigned to the resolved band; its exact assignment\ndoes not change any $L^2$ vector or probability because a single frequency\nhas zero one-particle measure.\nThis is a finite-cutoff free coherent-state model; it does not posit a\ndetector response or an interacting QED scattering law.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-qftx-coherent-band-poisson",
+          "source_section": "Statement",
+          "quote": "Fix the finite-leg current data and cutoffs of the resolved-soft model. For every\nfinite partition $B_1,\\ldots,B_r$ of $(\\varepsilon,\\Lambda)$ into disjoint\nBorel frequency intervals, the coherent state\n$\\Psi_{\\varepsilon,\\Lambda}$ has independent band counts. For each $j$,\n$N(B_j)$ has Poisson distribution with mean\n$$\\lambda_j=C\\int_{B_j}\\frac{d\\nu}{\\nu},$$\nwhere $\\nu$ is angular frequency in s$^{-1}$. Thus\n$\\lambda_j=C\\log(b_j/a_j)$ for an interval with endpoints\n$0<a_j<b_j$; endpoint conventions do not matter because $d\\nu/\\nu$\nassigns a singleton zero measure. For $C=0$ every band count is zero.\nThe model's marked frequency density is the one-particle coherent\nintensity $|b(n)|^2\\,d\\Omega(n)\\,d\\nu/\\nu$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-complex-exponential",
+          "source_section": "Definition",
+          "quote": "Let $\\iota_{\\mathbb R}\\colon\\mathbb N\\to\\mathbb R$ be the canonical-natural map\nof [[def-canonical-natural]], and let $j\\colon\\mathbb R\\to\\mathbb C$ be the real\nembedding $j(x)=x+i0$ from [[def-complex-numbers-and-arithmetic]]. For every\n$n\\in\\mathbb N$, the factorial $n!$ is nonzero by\n[[def-factorial-and-falling-factorial]], so\n$\\iota_{\\mathbb R}(n!)>0$ by [[lem-of-naturals-positive]] and consequently\n$j(\\iota_{\\mathbb R}(n!))\\ne0$ in the complex field\n[[thm-complex-numbers-form-a-field]].\n\nFor $z\\in\\mathbb C$, define\n$$ \\exp z:=\\sum_{n=0}^{\\infty}\\frac{z^n}{j(\\iota_{\\mathbb R}(n!))}. $$\nwhenever this complex series converges. Inside a complex expression we\nabbreviate the embedded denominator $j(\\iota_{\\mathbb R}(n!))$ by $n!$, so the\nsame definition may be written $\\exp z=\\sum z^n/n!$ without identifying a\nnatural number with a complex number. Powers and series are those of\n[[def-complex-integer-powers]] and\n[[def-complex-series-power-series-and-absolute-convergence]]. The convergence\nfor every $z\\in\\mathbb C$ is discharged by\n[[lem-complex-exponential-series-converges-everywhere]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-complex-exponential-series-converges-everywhere",
+          "source_section": "Statement",
+          "quote": "For every $z\\in\\mathbb C$, the series $\\sum z^n/n!$ converges absolutely.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-complex-exponential-addition-and-real-extension",
+          "source_section": "Statement",
+          "quote": "For all $z,w\\in\\mathbb C$, $\\exp(z+w)=\\exp z\\exp w$. For real $x$, the complex value $\\exp(x+0i)$ equals the published real exponential $e^x$. The conventions and prerequisite facts used below are recorded in [[def-complex-exponential]], [[lem-complex-exponential-series-converges-everywhere]], [[lem-cauchy-product-of-absolutely-convergent-complex-series]], [[def-real-exponential-function-and-e]], [[lem-binomial-theorem-over-complex-numbers]], [[thm-binomial-closed-formula]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-factorial-and-falling-factorial",
+          "source_section": "Definition",
+          "quote": "**The factorial.** By the recursion theorem (The recursion theorem) applied to the\nset $\\mathbb{N}\\times\\mathbb{N}$, the starting element $(0,1)$ and the function\n$f(k, v) = (\\sigma(k),\\, v \\cdot \\sigma(k))$, and by the same induction on the\nfirst coordinate as in Finite sums and finite products of natural numbers, $\\sum_{k<n} a_k$ and $\\prod_{k<n} a_k$ in $\\mathbb{N}$, there is a unique\n$F : \\mathbb{N} \\to \\mathbb{N}$ with\n\n$$F(0) = 1, \\qquad F(\\sigma(n)) = F(n)\\cdot\\sigma(n) \\quad (n \\in \\mathbb{N}).$$\n\nWe write $n! := F(n)$. Thus $0! = 1$, $1! = 0!\\cdot 1 = 1$, $2! = 1!\\cdot 2 = 2$,\n$3! = 6$, $4! = 24$, $5! = 120$, $6! = 720$.\n\n**$0! = 1$ is the base clause of this recursion**, not a convention imported from\nelsewhere. Nothing about empty products is presupposed; the agreement with the\nempty product is proved below, in clause (a), rather than assumed.\n\n**Truncated difference.** Throughout, $n - k$ is the operation fixed in\nFinite sums and finite products of natural numbers, $\\sum_{k<n} a_k$ and $\\prod_{k<n} a_k$ in $\\mathbb{N}$: the unique $j$ with $k + j = n$ when\n$k \\le n$, and $0$ when $n < k$.\n\n**The falling factorial.** For $n \\in \\mathbb{N}$ define $n^{\\underline{k}}$ by\nrecursion on $k$, by the recursion theorem applied to\n$\\mathbb{N}\\times\\mathbb{N}$ with starting element $(0,1)$ and\n$f(k, v) = (\\sigma(k),\\, v \\cdot (n-k))$:\n\n$$n^{\\underline{0}} = 1, \\qquad n^{\\underline{\\sigma(k)}} = n^{\\underline{k}}\\cdot(n-k) .$$\n\nSo $n^{\\underline{1}} = 1\\cdot(n-0) = n$ and $n^{\\underline{2}} = n\\,(n-1)$, and\nfor $k \\le n$ the value is the product $n(n-1)\\cdots(n-k+1)$ of the $k$ topmost\nfactors.\n\n**Four facts, proved here because the page uses each of them.**\n\n**(a) The factorial is the product of the first $n$ positive naturals.**\n$n! = \\prod_{j<n}\\sigma(j) = \\prod_{j<n}(j+1)$, the $\\mathbb{N}$-valued product of\nFinite sums and finite products of natural numbers, $\\sum_{k<n} a_k$ and $\\prod_{k<n} a_k$ in $\\mathbb{N}$. Induction (The principle of mathematical induction): at\n$n = 0$ both sides are $1$, the empty product and the base clause agreeing; and\n$\\prod_{j<\\sigma(n)}\\sigma(j) = \\big(\\prod_{j<n}\\sigma(j)\\big)\\cdot\\sigma(n) = n!\\cdot\\sigma(n) = \\sigma(n)!$.\n**So the empty-product reading and the base-clause reading are the same reading**,\nand neither was assumed.\n\n**(b) $n! \\ne 0$, and $\\iota(n!) = \\prod^{\\mathbb{R}}_{j<n}\\iota(j+1)$.** For the\nfirst, $0! = 1 \\ne 0$ (The von Neumann naturals form a Peano system) and\n$\\sigma(n)! = n!\\cdot\\sigma(n)$ is a product of two nonzero naturals, which is\nnonzero: if $xy = 0$ with $y \\ne 0$ then $xy = 0\\cdot y$\n(Zero and one under multiplication) and cancellation gives $x = 0$\n(Cancellation for multiplication by a nonzero factor). So $n! \\ne 0$ for every $n$ by induction. For the second, apply the bridge clause\n6 of that lemma to clause (a) above. This is what makes the factorial of this\npage and the real-valued product $\\prod_{j<n}(j+1)$ used elsewhere in the library\n**one object seen twice**, rather than two unrelated notions.\n\n**(c) $n^{\\underline{k}}\\cdot(n-k)! = n!$ for $k \\le n$.** Induction on $k$, for\nall $n$ at once. At $k = 0$ this reads $1 \\cdot n! = n!$. Assume it at $k$ and\nlet $\\sigma(k) \\le n$; then $k \\le n$, and writing $d := n - k$ we have\n$k + d = n$ and $d \\ne 0$, since $k + 0 = k \\ne n$; so $d = \\sigma(e)$ for a\nunique $e$ (Every nonzero natural number is a successor), and $\\sigma(k) + e = n$, that is\n$e = n - \\sigma(k)$ (Addition is cancellative). Therefore\n$n^{\\underline{\\sigma(k)}}\\cdot\\big(n-\\sigma(k)\\big)! = n^{\\underline{k}}\\cdot(n-k)\\cdot e! = n^{\\underline{k}}\\cdot\\big(e!\\cdot\\sigma(e)\\big) = n^{\\underline{k}}\\cdot\\sigma(e)! = n^{\\underline{k}}\\cdot(n-k)! = n!$,\nusing commutativity and associativity of multiplication\n(Multiplication is associative, Multiplication is commutative) and the recursion\nclause for the factorial.\n\n**(d) Boundary values.** $n^{\\underline{0}} = 1$ for every $n$, by the base\nclause; $n^{\\underline{n}} = n!$, since clause (c) at $k = n$ gives\n$n^{\\underline{n}}\\cdot 0! = n!$ and $0! = 1$; and\n$n^{\\underline{k}} = 0$ whenever $k > n$. For the last, $n - n = 0$ gives\n$n^{\\underline{\\sigma(n)}} = n^{\\underline{n}}\\cdot 0 = 0$, the clause\n$x \\cdot 0 = 0$ being definitional (Multiplication of natural numbers), and if\n$n^{\\underline{k}} = 0$ then\n$n^{\\underline{\\sigma(k)}} = 0$ as well, so $n^{\\underline{k}} = 0$ for every\n$k \\ge \\sigma(n)$ by induction.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-integer-power",
+          "source_section": "Definition",
+          "quote": "Let $a \\in \\mathbb{R}$, where $\\mathbb{R}$ is the ambient ordered field\n(Ordered field, Field).\n\n**Natural exponents.** By the recursion theorem (The recursion theorem) applied to\nthe set $\\mathbb{R}$, the starting element $1$ and the function\n$f(x) = x \\cdot a$, there is a unique function $\\mathbb{N} \\to \\mathbb{R}$,\nwritten $n \\mapsto a^n$, with\n\n$$a^0 = 1, \\qquad a^{n+1} = a^n \\cdot a \\quad (n \\in \\mathbb{N}).$$\n\nThus $a^1 = a$, $a^2 = a \\cdot a$, and so on. Note that this is defined for\n**every** $a$, including $a = 0$.\n\n**Negative exponents.** If $a \\ne 0$ and $n \\in \\mathbb{N}$ with $n \\ge 1$, set\n\n$$a^{-n} := (a^n)^{-1}.$$\n\n**Why that is legitimate.** The right-hand side presupposes that $a^n$ is\ninvertible, that is, that $a^n \\ne 0$. This is a proof obligation and not an\nobservation, and it is discharged by claim 2 of Laws of integer exponents: for $a \\ne 0$\nin a field, $a^n \\ne 0$ for every $n \\in \\mathbb{N}$, proved there by induction on\n$n$ from the fact that a field has no zero divisors (A field has no zero divisors: $ab = 0 \\Rightarrow a = 0$ or $b = 0$).\nThat lemma is a statement *about* the operation introduced here, so it depends on\nthis definition and is recorded in this item's `justified_by` rather than in its\n`deps` (SCHEMA §3). Given $a^n \\ne 0$, the value $(a^n)^{-1}$ is a single\nwell-determined element, because multiplicative inverses in a field are unique\n(Identities and inverses in a field are unique).\n\n**Integer exponents.** Every integer $m$ (The integers as equivalence classes of pairs of naturals) is either\n$n$ or $-n$ for a unique natural $n$, where $n$ in these integer expressions denotes its image under the\nembedding $\\iota : \\mathbb{N} \\to \\mathbb{Z}$ (The naturals embed in the integers,\nArithmetic on the integers). This too is a citation and not a slogan: the order on\n$\\mathbb{Z}$ is total (The integers form a totally ordered ring), so $m \\ge 0$ or $m < 0$; the\nimage of $\\iota$ is exactly the set of nonnegative integers, and each of them is\n$n$ for a unique natural $n$ (The naturals embed in the integers); and if $m < 0$ then\n$-m > 0$, by compatibility of the order with addition (The integers form a totally ordered ring),\nso $-m = n$ and $m = -n$, with $n$ unique because $\\iota$ is\ninjective. The two clauses above therefore define $a^m$ for every\n$m \\in \\mathbb{Z}$ whenever $a \\ne 0$, and for every $m \\in \\mathbb{N}$ for\narbitrary $a$. The two exponent domains are disjoint: the natural clause\nhandles $m \\ge 0$, including $m = 0$, while the negative clause requires\n$n \\ge 1$ and therefore handles only $m < 0$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Define\n$\\lambda_u=C\\int_\\varepsilon^\\Delta d\\nu/\\nu$ and\n$\\lambda_r=C\\int_\\Delta^\\Lambda d\\nu/\\nu$. By [F2],\n$\\lambda_u=C\\log(\\Delta/\\varepsilon)$,\n$\\lambda_r=C\\log(\\Lambda/\\Delta)$, and\n$\\lambda_u+\\lambda_r=C\\log(\\Lambda/\\varepsilon)$. The endpoint $\\nu=\\Delta$\nhas zero one-particle measure, so assigning it to the resolved interval\ndoes not change either mean.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Independence in [F1] gives\n$\\mathbb P(N_u=n,N_r=0)=\n\\exp(-\\lambda_u)\\lambda_u^n/n!\\,\\exp(-\\lambda_r)$ for every\n$n\\in\\mathbb N_0$. This also covers $C=0$: at $n=0$, the convention\n$0^0=1$ gives probability one, and at positive $n$ the probability is\nzero. In particular the case $n=0$ is the exclusive no-emission\nprobability.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Summing the joint probabilities over $n$ and using the everywhere\nconvergent exponential series [F3] gives\n$$\\sum_{n=0}^\\infty\\mathbb P(N_u=n,N_r=0) =\\exp(-\\lambda_u-\\lambda_r) \\sum_{n=0}^\\infty\\frac{\\lambda_u^n}{n!} =\\exp(-\\lambda_r).$$\nThe terms are nonnegative and the series is absolutely convergent, so this\nsum is the probability of the disjoint union of the events\n$\\{N_u=n,N_r=0\\}$.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Substituting $\\lambda_r=C\\log(\\Lambda/\\Delta)$ from step 1.1 yields\n$\\mathbb P(N_r=0)=\\exp(-C\\log(\\Lambda/\\Delta))$, with no remaining\n$\\varepsilon$. The conclusion is a model deduction from the finite-band\nPoisson law, not a statement about virtual amplitudes in QED.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.2: if C=0, both band counts are zero almost surely and summing over unresolved counts leaves probability one."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2: n=0 uses 0^0=1, while positive n have probability zero when C=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2: the n=0 term is the exclusive no-emission probability; every n in N_0 is covered."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1: the boundary frequency Delta is a singleton of zero one-particle measure, so its band assignment does not affect either mean."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1: the intervals use positive cutoffs and the endpoint Delta has zero measure."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1: the disjoint union over all n in N_0 is summed by the absolutely convergent exponential series; no selection from a family is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Proposition is a direct inclusive-probability identity, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Proposition makes no converse claim about identifying a model from cutoff independence."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-67",
+        "notes": "Checked steps 1.1–3.1: lambda_u+lambda_r=C log(Lambda/epsilon); product Poisson probabilities include the zero/vacuum convention. The nonnegative exponential series sums exactly to exp(-lambda_r), independent of epsilon, without an exchange of improper cutoffs or a limiting state. The sole TikZ interval diagram has increasing frequency axis and correct unresolved/resolved labels; endpoint ownership is explicitly in prose and proof independent of sketch. All sources are context or exact earlier suppliers; Srednicki ch.26 Eq.(26.3) concerns unresolved splitting in scalar theory, not a QED theorem. No material reader item delta: item pre/post hashes coincide; only contract changed."
+      }
+    },
+    "prop-qftx-soft-energy-finite": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qftx-resolved-soft-poisson",
+          "source_section": "Definition",
+          "quote": "Assume $\\mathrm{AC}_\\omega$: every sequence $(X_n)_{n\\in\\mathbb N}$ of\nnonempty sets admits a function $s$ with $s(n)\\in X_n$ for every $n$.\nUse the following SI constants and meanings: $c>0$ is the speed of light in\nvacuum, in m s$^{-1}$; $\\hbar>0$ is the reduced Planck constant, in J s;\n$e>0$ is the magnitude of the elementary charge, in C; and $\\mu_0>0$ is the\nvacuum permeability, in H m$^{-1}$, used here as a positive parameter without\nassigning it a numerical value. Set\n$$g=e\\sqrt{\\frac{\\mu_0c}{\\hbar}}>0,$$\nwhich is dimensionless. These are the adopted QFT SI conventions.\n\nLet $I$ be a finite, possibly empty, set of leg labels. For each $i\\in I$,\nchoose an energy $E_i>0$ in J and a physical velocity\n$\\mathbf v_{i,\\mathrm{phys}}\\in\\mathbb R^3$ in m s$^{-1}$ with\n$|\\mathbf v_{i,\\mathrm{phys}}|<c$. Write\n$v_i=\\mathbf v_{i,\\mathrm{phys}}/c\\in\\mathbb R^3$, so $v_i$ is\ndimensionless and $|v_i|<1$. Also choose a dimensionless charge number\n$Q_i\\in\\mathbb R$ (the assigned physical charge is $eQ_i$ in C) and an\norientation $\\eta_i\\in\\{-1,1\\}$, where $-1$ denotes an incoming leg and\n$+1$ an outgoing leg. Assume charge balance\n$\\sum_{i\\in I}\\eta_iQ_i=0$. For four-vectors\n$a=(a^0,\\mathbf a),b=(b^0,\\mathbf b)\\in\\mathbb R^4$, write\n$h=\\operatorname{diag}(1,-1,-1,-1)$ and\n$h(a,b)=a^0b^0-\\mathbf a\\cdot\\mathbf b$ for the algebraic contraction\nwith signature $(+,-,-,-)$ used in this model.\n\nFor $n\\in S^2=\\{x\\in\\mathbb R^3:|x|=1\\}$ and angular frequency\n$\\nu>0$ in s$^{-1}$, with associated model photon energy $\\hbar\\nu$ in J,\nput $p_i=E_i(1,v_i)$ and $q=\\hbar\\nu(1,n)$ in $\\mathbb R^4$. On\n$$\\mathscr Q=\\{\\hbar\\nu(1,n):\\nu>0,\\ n\\in S^2\\}\\subset\\mathbb R^4,$$\ndefine the prescribed current $J:\\mathscr Q\\to\\mathbb R^4$ and angular\ncoefficient $K:S^2\\to\\mathbb R^4$ by\n$$J(q)=\\sum_{i\\in I}\\eta_iQ_i\\frac{p_i}{h(p_i,q)},\\qquad K(n)=\\sum_{i\\in I}\\eta_iQ_i\\frac{(1,v_i)}{1-v_i\\cdot n}.$$\nBecause $|v_i\\cdot n|\\le |v_i|<1$, every denominator\n$1-v_i\\cdot n$ is strictly positive.\nThe data make $h(p_i,q)=E_i\\hbar\\nu(1-v_i\\cdot n)>0$ and\n$J(q)=K(n)/(\\hbar\\nu)$. The balance condition gives\n$h(J(q),q)=0$; this is the conservation convention for this prescribed\neikonal current in the model. Here “prescribed eikonal current” means exactly\nthe displayed rational map $J$ on these model photon energy four-vectors; no\nscattering-amplitude factorization or approximation is asserted.\n\nLet $A\\subseteq S^2$ be a Borel angular acceptance region. The sphere\n$S^2\\subset\\mathbb R^3$ is a compact embedded smooth hypersurface, and\n$d\\Omega$ denotes its Euclidean chart surface measure: for a finite regular\ninjective $C^1$ chart cover $X_j:V_j\\to S^2$, where each $V_j$ is open in\n$\\mathbb R^2$, with $C^1$ coordinate\ntransitions and a subordinate ambient partition of unity $\\chi_j$ whose supports are compactly\ncontained in the chart neighborhoods, its integral on a nonnegative Borel\nfunction $F$ is\n$$\\int_{S^2}F\\,d\\Omega=\\sum_j\\int_{V_j}(\\chi_jF)(X_j(y))\\sqrt{\\det(DX_j(y)^TDX_j(y))}\\,dy.$$\nThis is the chart-independent induced surface integral. Write\n$K(n)=(K^0(n),\\mathbf K(n))$ and define\n$K_\\perp(n)=(I_3-nn^T)\\mathbf K(n)$, where $I_3$ is the $3\\times3$\nidentity matrix. Put\n$$b_0(n)=\\frac{gK_\\perp(n)}{\\sqrt{2(2\\pi)^3}},\\qquad b(n)=\\mathbf1_A(n)b_0(n),\\qquad C=\\int_{S^2}|b(n)|^2\\,d\\Omega(n).$$\nThe earlier current theorem proves $b_0\\in L^2(S^2,d\\Omega;\\mathbb R^3)$\nfor these finite balanced subluminal legs; since $A$ is Borel,\n$b\\in L^2$ and $0\\le C\\le\\int_{S^2}|b_0|^2d\\Omega<\\infty$.\nThus $b$ and $C$ are dimensionless.\n\nFor the one-particle space, write\n$$x\\cdot y=\\sum_{j=1}^3x_jy_j\\quad(x,y\\in\\mathbb R^3),\\qquad a\\cdot b=\\sum_{j=1}^3a_jb_j\\quad(a,b\\in\\mathbb C^3),$$\nwhere the second dot product is the complex-bilinear extension. The fiber\nHermitian pairing is $\\overline a\\cdot b=\\sum_j\\overline{a_j}b_j$, with\nnorm $|a|^2=\\sum_j|a_j|^2$. Set\n$$\\mathcal H=L^2(\\mathbb R^3,d^3\\mathbf k;\\mathbb C^3),\\qquad \\langle u,v\\rangle_2=\\int_{\\mathbb R^3}\\overline{u(\\mathbf k)}\\cdot v(\\mathbf k)\\,d^3\\mathbf k,$$\nHere $d^3\\mathbf k$ is Lebesgue measure, and this pairing is\nsecond-variable-linear. For $\\mathbf k\\ne0$,\nput $\\widehat{\\mathbf k}=\\mathbf k/|\\mathbf k|$\nand $P_T(\\mathbf k)=I_3-\\widehat{\\mathbf k}\\widehat{\\mathbf k}^{T}$, the\nEuclidean orthogonal projection onto the fiber plane perpendicular to\n$\\mathbf k$; assign any value at $\\mathbf k=0$. Its multiplier is an\northogonal projection on $\\mathcal H$, so its range is closed. The transverse\none-particle Hilbert space\nis\n$$\\mathcal H_T=\\operatorname{Ran}M_{P_T}=\\{u\\in\\mathcal H:\\mathbf k\\cdot u(\\mathbf k)=0\\text{ for a.e. }\\mathbf k\\ne0\\},$$\nwhere $M_{P_T}$ is multiplication by $P_T$, and the real Euclidean dot\nproduct is extended complex-bilinearly in the transverse condition. This is\nthe transverse one-particle space used in this model.\n\nFor $m\\ge1$, use the iterated Hilbert tensor completion\n$\\mathcal H_T^{\\widehat\\otimes m}$, with product pairing on elementary\ntensors. Here $S_m$ is the permutation group and\n$U_\\pi(u_1\\otimes\\cdots\\otimes u_m)=\nu_{\\pi^{-1}(1)}\\otimes\\cdots\\otimes u_{\\pi^{-1}(m)}$. Set\n$$P_{s,m}=\\frac1{m!}\\sum_{\\pi\\in S_m}U_\\pi,\\qquad \\mathcal H_s^{(m)}=\\operatorname{Ran}P_{s,m};$$\nput $P_{s,0}=I_{\\mathbb C}$ and $\\mathcal H_s^{(0)}=\\mathbb C$. The\nsymmetric bosonic Fock space is\n$$\\mathcal F_s(\\mathcal H_T)=\\left\\{(\\Psi_m)_{m\\ge0}:\\Psi_m\\in\\mathcal H_s^{(m)},\\ \\sum_{m\\ge0}\\|\\Psi_m\\|^2<\\infty\\right\\},$$\nwith componentwise pairing and vacuum $1\\in\\mathbb C$ in sector zero.\nFor $f\\in\\mathcal H_T$, define the exponential-vector map\n$\\epsilon:\\mathcal H_T\\to\\mathcal F_s(\\mathcal H_T)$ by\n$$\\epsilon(f)=\\bigoplus_{m=0}^{\\infty}\\frac{P_{s,m}(f^{\\otimes m})}{\\sqrt{m!}}.$$\nHere $f^{\\otimes0}=1$ in the vacuum sector.\nSince $f^{\\otimes m}$ is already symmetric,\n$P_{s,m}(f^{\\otimes m})=f^{\\otimes m}$ for $m\\ge1$; write this tensor as\n$f^{\\otimes_s m}$.\n\nFor fixed angular-frequency cutoffs $0<\\varepsilon<\\Delta<\\Lambda$, let\n$\\nu(\\mathbf k)=c|\\mathbf k|$ in s$^{-1}$, with $\\mathbf k$ in m$^{-1}$.\nThe one-particle coherent displacement is the transverse mode function\n$$f_{\\varepsilon,\\Lambda}(\\mathbf k)= \\mathbf1_{\\{\\varepsilon<\\nu(\\mathbf k)<\\Lambda\\}}|\\mathbf k|^{-3/2} {}\\times b\\!\\left(\\frac{\\mathbf k}{|\\mathbf k|}\\right) \\quad(\\mathbf k\\ne0), \\qquad f_{\\varepsilon,\\Lambda}(0)=0.$$\nThe function $f_{\\varepsilon,\\Lambda}$ has units m$^{3/2}$ in\n$\\mathcal H_T$; the associated free one-photon energy is\n$\\hbar\\nu(\\mathbf k)=\\hbar c|\\mathbf k|$ in J. Define its normalized\ncoherent vector by\n$$\\Psi_{\\varepsilon,\\Lambda}=\\exp\\!\\left(-\\frac{\\|f_{\\varepsilon,\\Lambda}\\|^2}{2}\\right)\\epsilon(f_{\\varepsilon,\\Lambda}).$$\nFor a finite partition\n$B_1,\\ldots,B_r$ of $(\\varepsilon,\\Lambda)$ into disjoint Borel intervals,\nlet\n$H_j=\\{u\\in\\mathcal H_T:u(\\mathbf k)=0\\text{ a.e. unless }\\nu(\\mathbf k)\\in B_j\\}$.\nLet $P_j$ be multiplication on $\\mathcal H_T$ by\n$\\mathbf1_{\\{\\nu(\\mathbf k)\\in B_j\\}}$. This bounded self-adjoint idempotent\npreserves transversality because it is scalar-valued, so it is an orthogonal\nprojection. Its range is exactly $H_j$, making $H_j$ closed. For $j\\ne k$,\ndisjointness gives $P_jP_k=0$, hence the ranges are orthogonal.\nFor a tuple $(m_1,\\ldots,m_r)\\in\\mathbb N_0^r$, put $M=\\sum_jm_j$.\nIts occupation subspace is the closed span in sector $\\mathcal H_s^{(M)}$\nof the vectors\n$$P_{s,M}\\left(\\bigotimes_{j=1}^r\\bigotimes_{\\ell=1}^{m_j}u_{j,\\ell}\\right),\\qquad u_{j,\\ell}\\in H_j,$$\nwhere the empty tensor for $M=0$ is the vacuum $1\\in\\mathbb C$. It has\nexactly $m_j$ factors in $H_j$ and no factor outside $\\bigoplus_jH_j$.\nDefine $N(B_j)$ to have value $m_j$ on this subspace.\nThe model assigns the tuple\nprobability equal to the squared norm of the projection of\n$\\Psi_{\\varepsilon,\\Lambda}$ onto it. Its resolution parameter\n$\\Delta$ divides $(\\varepsilon,\\Lambda)$ into the unresolved band\n$(\\varepsilon,\\Delta)$ and the resolved band $[\\Delta,\\Lambda)$. The\nthreshold frequency is assigned to the resolved band; its exact assignment\ndoes not change any $L^2$ vector or probability because a single frequency\nhas zero one-particle measure.\nThis is a finite-cutoff free coherent-state model; it does not posit a\ndetector response or an interacting QED scattering law.",
+          "uses": [
+            "1.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qftx-coherent-band-poisson",
+          "source_section": "Statement",
+          "quote": "Fix the finite-leg current data and cutoffs of the resolved-soft model. For every\nfinite partition $B_1,\\ldots,B_r$ of $(\\varepsilon,\\Lambda)$ into disjoint\nBorel frequency intervals, the coherent state\n$\\Psi_{\\varepsilon,\\Lambda}$ has independent band counts. For each $j$,\n$N(B_j)$ has Poisson distribution with mean\n$$\\lambda_j=C\\int_{B_j}\\frac{d\\nu}{\\nu},$$\nwhere $\\nu$ is angular frequency in s$^{-1}$. Thus\n$\\lambda_j=C\\log(b_j/a_j)$ for an interval with endpoints\n$0<a_j<b_j$; endpoint conventions do not matter because $d\\nu/\\nu$\nassigns a singleton zero measure. For $C=0$ every band count is zero.\nThe model's marked frequency density is the one-particle coherent\nintensity $|b(n)|^2\\,d\\Omega(n)\\,d\\nu/\\nu$.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qft-fock-and-test-spaces",
+          "source_section": "Definition",
+          "quote": "For an integer $d\\ge1$, let $\\mathcal S(\\mathbb R^d)$ be the complex Schwartz space with seminorms\n$p_{\\alpha\\beta}(f)=\\sup_{x\\in\\mathbb R^d}|x^\\alpha\\partial^\\beta f(x)|$\nfor all multi-indices $\\alpha,\\beta$; this is exactly\n[[def-schwartz-space-and-its-seminorms]]. Let\n$\\mathcal D(\\mathbb R^d)=C_c^\\infty(\\mathbb R^d;\\mathbb C)$ with the support convention of\n[[def-test-function-space-d-of-an-open-set]] and the locally convex LF topology of\n[[def-test-function-topology]]. The tempered-distribution space $\\mathcal S'(\\mathbb R^d)$\nis the space of continuous complex-linear functionals on this topological\n$\\mathcal S(\\mathbb R^d)$, paired bilinearly with test functions, as in\n[[def-tempered-distribution]].\n\nFor every complex Hilbert space $H$, use the second-variable-linear pairing\n$\\langle u,v\\rangle_2:=(v,u)_1$, where $(\\cdot,\\cdot)_1$ is the first-variable-linear\nHilbert pairing of [[def-real-and-complex-inner-product-space]]. Thus\n$\\langle u,v\\rangle_2$ is linear in $v$ and conjugate-linear in $u$.\nFor each tensor product, use the same norm completion as\n[[lem-nrqm-composites-hilbert-tensor-construction]], but equip it with the\nsecond-variable-linear pairing obtained by conjugating that supplier's\nfirst-variable-linear pairing. This leaves the norm and completion unchanged;\non elementary tensors it gives the product of the second-variable pairings.\nLet $H^{\\widehat\\otimes n}$ be the iterated Hilbert tensor completion, with\n$H^{\\widehat\\otimes0}:=\\mathbb C$; the tensor inner product is the product of\nthe factor pairings. Identify parenthesizations by the isometry fixing\nelementary tensors: the product pairing is the same on their dense span,\nso the map and its inverse extend to the completions. For $n\\ge1$, let\n$P_{s,n}=n!^{-1}\\sum_{\\pi\\in S_n}U_\\pi$ and\n$P_{a,n}=n!^{-1}\\sum_{\\pi\\in S_n}\\operatorname{sgn}(\\pi)U_\\pi$, using the\npermutation action and the orthogonal projections of\n[[lem-nrqm-composites-permutation-sector-projections]]. Define\n$H_s^{(n)}=\\operatorname{ran}P_{s,n}$ and\n$H_a^{(n)}=\\operatorname{ran}P_{a,n}$, with\n$H_s^{(0)}=H_a^{(0)}=\\mathbb C$. These are the symmetric and antisymmetric\n$n$-particle sectors.\n\nThe bosonic and fermionic Fock Hilbert spaces are the square-summable direct\nsums\n$\\mathcal F_s(H)=\\{(\\Psi_n)_{n\\ge0}:\\Psi_n\\in H_s^{(n)},\\\n\\sum_n\\|\\Psi_n\\|^2<\\infty\\}$ and\n$\\mathcal F_a(H)=\\{(\\Psi_n)_{n\\ge0}:\\Psi_n\\in H_a^{(n)},\\\n\\sum_n\\|\\Psi_n\\|^2<\\infty\\}$, with the componentwise inner product.\nTheir vacuum is $\\Omega=(1,0,0,\\ldots)$. The finite-particle subspace\n$\\mathcal D_{\\rm fin}$ consists of sequences with only finitely many nonzero\ncomponents.\n\nFor $h\\in H$, the map $C_h:H\\to\\mathbb C$, $C_h(v)=\\langle h,v\\rangle_2$, is linear and bounded:\n$|C_h(v)|=|(v,h)_1|\\le\\|h\\|\\,\\|v\\|$ by\n[[thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces]].\nFor any Hilbert space $K$, identify $\\mathbb C\\widehat\\otimes K$ with $K$\nby $J_K(z\\otimes v)=zv$. Every algebraic tensor is $1\\otimes w$;\nthe tensor norm is then $\\|w\\|$, so $J_K$ extends to a surjective isometry\non the completion (with inverse $w\\mapsto1\\otimes w$).\nThroughout the following formulas, $C_h\\otimes I^{\\otimes(n-1)}$ means\n$J_{H^{\\widehat\\otimes(n-1)}}\\circ(C_h\\widehat\\otimes I)$, with\n$I$ the identity on $H^{\\widehat\\otimes(n-1)}$.\nThe bounded tensor-map supplier therefore applies and gives norm at most\n$\\|h\\|$. This includes $n=1$, where $H^{\\widehat\\otimes0}=\\mathbb C$.\nContraction commutes with permutations of the remaining $n-1$ factors,\nso it takes symmetric or antisymmetric tensors to the corresponding\n$(n-1)$-particle sector (and to $\\mathbb C$ for $n=1$).\n\nFor $n\\ge0$, bosonic creation on sector $n$ is\n$a_n^\\dagger(h)\\Psi_n=\\sqrt{n+1}P_{s,n+1}(h\\otimes\\Psi_n)$; for $n\\ge1$,\nbosonic annihilation is\n$a_n(h)\\Psi_n=\\sqrt n(C_h\\otimes I^{\\otimes(n-1)})\\Psi_n$, where\n$C_h$ is the bounded functional above, its tensor extension is supplied by\n[[lem-nrqm-composites-bounded-tensor-maps]], and $a(h)\\Omega=0$. Define fermionic creation\nby $c_n^\\dagger(h)\\Psi_n=\\sqrt{n+1}P_{a,n+1}(h\\otimes\\Psi_n)$; for $n\\ge1$,\nfermionic annihilation is the corresponding first-factor contraction\n$c_n(h)\\Psi_n=\\sqrt n(C_h\\otimes I^{\\otimes(n-1)})\\Psi_n$, and\n$c(h)\\Omega=0$. The annihilation maps are conjugate-linear in $h$; the\ncreation maps are linear in $h$. These formulas define sector maps on the\nfinite-particle subspace; their maximal closed domains and operator relations are proved in\n[[lem-qft-fock-ccr-car]]. No physical statistics assignment or spin–statistics\ntheorem is part of these mathematical definitions.",
+          "uses": [
+            "2.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qft-photon-transverse-space",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice [[def-countable-choice]]. Let\n$$\\mathcal H=L^2(\\mathbb R^3,d^3\\mathbf k;\\mathbb C^3),\\qquad \\langle u,v\\rangle_2=\\int_{\\mathbb R^3}\\overline{u(\\mathbf k)}\\cdot v(\\mathbf k)\\,d^3\\mathbf k,$$\nwith the second-variable-linear convention of [[def-qft-fock-and-test-spaces]]; the real momentum dot product and norm are those of\n[[def-euclidean-inner-product]]. Explicitly extend the real dot product\ncomplex-bilinearly to $a\\cdot b=\\sum_{j=1}^3a_jb_j$ for $a,b\\in\\mathbb C^3$.\nEach complex fiber instead has the positive Hermitian pairing\n$\\langle a,b\\rangle_2=\\overline a\\cdot b=\\sum_j\\overline a_jb_j$ and\nnorm $\\|a\\|^2=\\sum_j|a_j|^2$; the displayed integral uses this pairing.\nHilbert completeness follows from [[lem-l-two-with-the-integral-pairing-is-a-hilbert-space]]. For $\\mathbf k\\ne0$, write $n(\\mathbf k)=\\mathbf k/|\\mathbf k|$ and\n$$P_T(\\mathbf k)=I_3-n(\\mathbf k)n(\\mathbf k)^T.$$\nAssign any value at $\\mathbf k=0$, which is a Lebesgue-null set. Let $M_{P_T}$ be multiplication by this measurable matrix field and define the positive transverse photon space\n$$\\mathcal H_T=\\operatorname{Ran}M_{P_T} =\\{u\\in\\mathcal H:\\mathbf k\\cdot u(\\mathbf k)=0\\text{ for almost every }\\mathbf k\\ne0\\}.$$\nThe inner product on $\\mathcal H_T$ is the restriction of that on $\\mathcal H$. Each nonzero momentum fiber is the two-complex-dimensional plane $\\{a\\in\\mathbb C^3:\\mathbf k\\cdot a=0\\}$ perpendicular to the real vector $\\mathbf k$ in that Hermitian pairing; no global continuous polarization frame is part of the definition.",
+          "uses": [
+            "2.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qft-qed-photon-energy-multiplier",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice [[def-countable-choice]]. Use the transverse space $\\mathcal H_T=\\operatorname{Ran}M_{P_T}$ of [[def-qft-photon-transverse-space]], with $P_T(\\mathbf k)=I_3-\\mathbf n\\mathbf n^T$ for $\\mathbf k\\ne0$ and any assigned value at the null point $\\mathbf k=0$. In the QFT length convention, assign $\\mathbf k$ units m$^{-1}$ and define the nonnegative measurable multiplier\n$$ \\omega(\\mathbf k):=|\\mathbf k|. $$\nIts maximal multiplication operator on $\\mathcal H_T$ is\n$$ (M_\\omega f)(\\mathbf k):=\\omega(\\mathbf k)f(\\mathbf k),\\qquad D(M_\\omega):=\\{f\\in\\mathcal H_T:\\omega f\\in L^2(\\mathbb R^3,d^3\\mathbf k;\\mathbb C^3)\\}. $$\nBecause $\\omega$ is a scalar multiplier, $\\mathbf k\\cdot f(\\mathbf k)=0$ a.e. implies $\\mathbf k\\cdot(M_\\omega f)(\\mathbf k)=0$ a.e.; thus the displayed multiplication maps its stated domain into $\\mathcal H_T$. The value $\\omega(0)=0$ is immaterial to the $L^2$ operator. For $\\hbar,c>0$, the corresponding one-particle energy convention is $E_1:=\\hbar c M_\\omega$, in joules.",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-qft-second-quantized-spectrum",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice [[def-countable-choice]]. Let\n$(X,\\mathcal A,\\mu)$ be a sigma-finite measure space and let\n$\\boldsymbol\\omega=(\\omega_1,\\ldots,\\omega_d):X\\to\\mathbb R^d$ be a\nfinite-valued measurable map, where $d\\ge1$. Put\n$H=L^2(X,\\mu;\\mathbb C)$ with the second-variable-linear pairing of\n[[def-qft-fock-and-test-spaces]], and form the bosonic Fock space\n$\\mathcal F_s(H)$. For $n\\ge1$, identify $H_s^{(n)}$ with the symmetric\nsubspace of $L^2(X^n,\\overline{\\mu^{\\times n}};\\mathbb C)$ by iterating\n[[lem-qft-l2-product-tensor-identification]]. Set $X^0=\\{\\star\\}$,\n$s_0(\\star)=0$, and for $n\\ge1$ set\n$$s_n(x_1,\\ldots,x_n)=\\sum_{r=1}^n\\boldsymbol\\omega(x_r)\\in\\mathbb R^d.$$\nFor $1\\le j\\le d$, define $H_j$ by multiplication by the $j$th coordinate\n$s_{n,j}$ on sector $n$, with exact domain\n$$D(H_j)=\\left\\{\\Psi=(\\Psi_n): \\sum_{n\\ge1}\\int_{X^n}|s_{n,j}|^2|\\Psi_n|^2\\,d\\overline{\\mu^{\\times n}}<\\infty\\right\\}.$$\nEach $H_j$ is self-adjoint, and $\\mathcal D_{\\rm fin}\\cap D(H_j)$ is a\ngraph core. The joint projection-valued measure\n[[def-projection-valued-measure]] on $\\mathbb R^d$ is\n$$(E(B)\\Psi)_n=\\mathbf1_{s_n^{-1}(B)}\\Psi_n\\quad(n\\ge1),\\qquad (E(B)\\Psi)_0=\\mathbf1_B(0)\\Psi_0.$$\nFor $\\theta\\in\\mathbb R^d$, let $H_\\theta$ be multiplication on sector $n$\nby $\\theta\\cdot s_n$, with its maximal square-integrability domain. Then\n$$U_\\theta(t)\\Psi:=\\bigl(e^{it\\theta\\cdot s_n}\\Psi_n\\bigr)_{n\\ge0}$$\nis a strongly continuous unitary group on all of Fock space, and its norm\nderivative at zero exists exactly for $\\Psi\\in D(H_\\theta)$, where it is\n$iH_\\theta\\Psi$. The zero-particle sector is the vacuum eigenvector at joint\nvalue $0$.",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-surface-integral-on-a-compact-c-one-hypersurface",
+          "source_section": "Definition",
+          "quote": "Assume the $\\mathrm{AC}_\\omega$ convention of [[def-bounded-c-one-domain-boundary-charts-and-outward-normal]]. Let S be a compact embedded $C^1$ hypersurface in $\\mathbb R^n$, $n\\ge2$. Choose finitely many regular injective $C^1$ parametrizations $X_j:V_j\\to S\\cap O_j$ with $C^1$ coordinate transitions, and an ambient partition $\\chi_j$ from [[lem-finite-ambient-partitions-for-euclidean-boundary-integration]], with supports compactly contained in the corresponding chart neighborhoods. Put $J_{X_j}=\\sqrt{\\det(DX_j^TDX_j)}$, using [[def-gram-matrix-and-gram-determinant]].\n\nFor a nonnegative Borel f on S define $\\int_S f\\,dS=\\sum_j\\int_{V_j}(\\chi_j f)(X_j(y))J_{X_j}(y)\\,dy$, where the integrals on the right are those of [[def-nonnegative-lebesgue-integral]] and $0\\cdot\\infty=0$. Set $S(A)=\\int_S\\mathbf1_A\\,dS$ for Borel A. For signed f with $\\int_S|f|\\,dS<\\infty$ use the difference of the positive and negative integrals. The same chart formula restricts to a compact Borel face contained in a regular patch. The empty surface has zero integral. Independence and finiteness are established by the following chart-independence lemma.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-euclidean-chart-measure-agrees-with-polar-surface-measure",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$ and $n\\ge2$. The chart surface measure on $S^{n-1}$ equals the polar measure $\\sigma$. Orthogonal transformations preserve it. The map $\\omega\\mapsto a+R\\omega$, $R>0$, multiplies surface measure by $R^{n-1}$, and $|S^{n-1}|=n|B_1|$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-polar-coordinates-formula-for-lebesgue-measure",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $n \\ge 1$,\nlet $S^{n-1} \\subseteq \\mathbb R^n$ be the unit sphere, and let $\\sigma$ be the\nset function of [[def-polar-surface-measure-on-the-unit-sphere]]. Then $\\sigma$\nis a finite Borel measure on $S^{n-1}$, and for every Borel measurable\n$f : \\mathbb R^n \\to [0,\\infty]$,\n$$\\int_{\\mathbb R^n} f(x)\\,d\\lambda_n(x) = \\int_0^\\infty \\int_{S^{n-1}} f(r\\omega) r^{n-1}\\,d\\sigma(\\omega)\\,dr.$$\nMoreover, $\\sigma$ is the unique Borel measure on $S^{n-1}$ with this\nproperty.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-complex-exponential",
+          "source_section": "Definition",
+          "quote": "Let $\\iota_{\\mathbb R}\\colon\\mathbb N\\to\\mathbb R$ be the canonical-natural map\nof [[def-canonical-natural]], and let $j\\colon\\mathbb R\\to\\mathbb C$ be the real\nembedding $j(x)=x+i0$ from [[def-complex-numbers-and-arithmetic]]. For every\n$n\\in\\mathbb N$, the factorial $n!$ is nonzero by\n[[def-factorial-and-falling-factorial]], so\n$\\iota_{\\mathbb R}(n!)>0$ by [[lem-of-naturals-positive]] and consequently\n$j(\\iota_{\\mathbb R}(n!))\\ne0$ in the complex field\n[[thm-complex-numbers-form-a-field]].\n\nFor $z\\in\\mathbb C$, define\n$$ \\exp z:=\\sum_{n=0}^{\\infty}\\frac{z^n}{j(\\iota_{\\mathbb R}(n!))}. $$\nwhenever this complex series converges. Inside a complex expression we\nabbreviate the embedded denominator $j(\\iota_{\\mathbb R}(n!))$ by $n!$, so the\nsame definition may be written $\\exp z=\\sum z^n/n!$ without identifying a\nnatural number with a complex number. Powers and series are those of\n[[def-complex-integer-powers]] and\n[[def-complex-series-power-series-and-absolute-convergence]]. The convergence\nfor every $z\\in\\mathbb C$ is discharged by\n[[lem-complex-exponential-series-converges-everywhere]].",
+          "uses": [
+            "1.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-complex-exponential-series-converges-everywhere",
+          "source_section": "Statement",
+          "quote": "For every $z\\in\\mathbb C$, the series $\\sum z^n/n!$ converges absolutely.",
+          "uses": [
+            "1.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-complex-exponential-addition-and-real-extension",
+          "source_section": "Statement",
+          "quote": "For all $z,w\\in\\mathbb C$, $\\exp(z+w)=\\exp z\\exp w$. For real $x$, the complex value $\\exp(x+0i)$ equals the published real exponential $e^x$. The conventions and prerequisite facts used below are recorded in [[def-complex-exponential]], [[lem-complex-exponential-series-converges-everywhere]], [[lem-cauchy-product-of-absolutely-convergent-complex-series]], [[def-real-exponential-function-and-e]], [[lem-binomial-theorem-over-complex-numbers]], [[thm-binomial-closed-formula]].",
+          "uses": [
+            "1.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-factorial-and-falling-factorial",
+          "source_section": "Definition",
+          "quote": "**The factorial.** By the recursion theorem (The recursion theorem) applied to the\nset $\\mathbb{N}\\times\\mathbb{N}$, the starting element $(0,1)$ and the function\n$f(k, v) = (\\sigma(k),\\, v \\cdot \\sigma(k))$, and by the same induction on the\nfirst coordinate as in Finite sums and finite products of natural numbers, $\\sum_{k<n} a_k$ and $\\prod_{k<n} a_k$ in $\\mathbb{N}$, there is a unique\n$F : \\mathbb{N} \\to \\mathbb{N}$ with\n\n$$F(0) = 1, \\qquad F(\\sigma(n)) = F(n)\\cdot\\sigma(n) \\quad (n \\in \\mathbb{N}).$$\n\nWe write $n! := F(n)$. Thus $0! = 1$, $1! = 0!\\cdot 1 = 1$, $2! = 1!\\cdot 2 = 2$,\n$3! = 6$, $4! = 24$, $5! = 120$, $6! = 720$.\n\n**$0! = 1$ is the base clause of this recursion**, not a convention imported from\nelsewhere. Nothing about empty products is presupposed; the agreement with the\nempty product is proved below, in clause (a), rather than assumed.\n\n**Truncated difference.** Throughout, $n - k$ is the operation fixed in\nFinite sums and finite products of natural numbers, $\\sum_{k<n} a_k$ and $\\prod_{k<n} a_k$ in $\\mathbb{N}$: the unique $j$ with $k + j = n$ when\n$k \\le n$, and $0$ when $n < k$.\n\n**The falling factorial.** For $n \\in \\mathbb{N}$ define $n^{\\underline{k}}$ by\nrecursion on $k$, by the recursion theorem applied to\n$\\mathbb{N}\\times\\mathbb{N}$ with starting element $(0,1)$ and\n$f(k, v) = (\\sigma(k),\\, v \\cdot (n-k))$:\n\n$$n^{\\underline{0}} = 1, \\qquad n^{\\underline{\\sigma(k)}} = n^{\\underline{k}}\\cdot(n-k) .$$\n\nSo $n^{\\underline{1}} = 1\\cdot(n-0) = n$ and $n^{\\underline{2}} = n\\,(n-1)$, and\nfor $k \\le n$ the value is the product $n(n-1)\\cdots(n-k+1)$ of the $k$ topmost\nfactors.\n\n**Four facts, proved here because the page uses each of them.**\n\n**(a) The factorial is the product of the first $n$ positive naturals.**\n$n! = \\prod_{j<n}\\sigma(j) = \\prod_{j<n}(j+1)$, the $\\mathbb{N}$-valued product of\nFinite sums and finite products of natural numbers, $\\sum_{k<n} a_k$ and $\\prod_{k<n} a_k$ in $\\mathbb{N}$. Induction (The principle of mathematical induction): at\n$n = 0$ both sides are $1$, the empty product and the base clause agreeing; and\n$\\prod_{j<\\sigma(n)}\\sigma(j) = \\big(\\prod_{j<n}\\sigma(j)\\big)\\cdot\\sigma(n) = n!\\cdot\\sigma(n) = \\sigma(n)!$.\n**So the empty-product reading and the base-clause reading are the same reading**,\nand neither was assumed.\n\n**(b) $n! \\ne 0$, and $\\iota(n!) = \\prod^{\\mathbb{R}}_{j<n}\\iota(j+1)$.** For the\nfirst, $0! = 1 \\ne 0$ (The von Neumann naturals form a Peano system) and\n$\\sigma(n)! = n!\\cdot\\sigma(n)$ is a product of two nonzero naturals, which is\nnonzero: if $xy = 0$ with $y \\ne 0$ then $xy = 0\\cdot y$\n(Zero and one under multiplication) and cancellation gives $x = 0$\n(Cancellation for multiplication by a nonzero factor). So $n! \\ne 0$ for every $n$ by induction. For the second, apply the bridge clause\n6 of that lemma to clause (a) above. This is what makes the factorial of this\npage and the real-valued product $\\prod_{j<n}(j+1)$ used elsewhere in the library\n**one object seen twice**, rather than two unrelated notions.\n\n**(c) $n^{\\underline{k}}\\cdot(n-k)! = n!$ for $k \\le n$.** Induction on $k$, for\nall $n$ at once. At $k = 0$ this reads $1 \\cdot n! = n!$. Assume it at $k$ and\nlet $\\sigma(k) \\le n$; then $k \\le n$, and writing $d := n - k$ we have\n$k + d = n$ and $d \\ne 0$, since $k + 0 = k \\ne n$; so $d = \\sigma(e)$ for a\nunique $e$ (Every nonzero natural number is a successor), and $\\sigma(k) + e = n$, that is\n$e = n - \\sigma(k)$ (Addition is cancellative). Therefore\n$n^{\\underline{\\sigma(k)}}\\cdot\\big(n-\\sigma(k)\\big)! = n^{\\underline{k}}\\cdot(n-k)\\cdot e! = n^{\\underline{k}}\\cdot\\big(e!\\cdot\\sigma(e)\\big) = n^{\\underline{k}}\\cdot\\sigma(e)! = n^{\\underline{k}}\\cdot(n-k)! = n!$,\nusing commutativity and associativity of multiplication\n(Multiplication is associative, Multiplication is commutative) and the recursion\nclause for the factorial.\n\n**(d) Boundary values.** $n^{\\underline{0}} = 1$ for every $n$, by the base\nclause; $n^{\\underline{n}} = n!$, since clause (c) at $k = n$ gives\n$n^{\\underline{n}}\\cdot 0! = n!$ and $0! = 1$; and\n$n^{\\underline{k}} = 0$ whenever $k > n$. For the last, $n - n = 0$ gives\n$n^{\\underline{\\sigma(n)}} = n^{\\underline{n}}\\cdot 0 = 0$, the clause\n$x \\cdot 0 = 0$ being definitional (Multiplication of natural numbers), and if\n$n^{\\underline{k}} = 0$ then\n$n^{\\underline{\\sigma(k)}} = 0$ as well, so $n^{\\underline{k}} = 0$ for every\n$k \\ge \\sigma(n)$ by induction.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-integer-power",
+          "source_section": "Definition",
+          "quote": "Let $a \\in \\mathbb{R}$, where $\\mathbb{R}$ is the ambient ordered field\n(Ordered field, Field).\n\n**Natural exponents.** By the recursion theorem (The recursion theorem) applied to\nthe set $\\mathbb{R}$, the starting element $1$ and the function\n$f(x) = x \\cdot a$, there is a unique function $\\mathbb{N} \\to \\mathbb{R}$,\nwritten $n \\mapsto a^n$, with\n\n$$a^0 = 1, \\qquad a^{n+1} = a^n \\cdot a \\quad (n \\in \\mathbb{N}).$$\n\nThus $a^1 = a$, $a^2 = a \\cdot a$, and so on. Note that this is defined for\n**every** $a$, including $a = 0$.\n\n**Negative exponents.** If $a \\ne 0$ and $n \\in \\mathbb{N}$ with $n \\ge 1$, set\n\n$$a^{-n} := (a^n)^{-1}.$$\n\n**Why that is legitimate.** The right-hand side presupposes that $a^n$ is\ninvertible, that is, that $a^n \\ne 0$. This is a proof obligation and not an\nobservation, and it is discharged by claim 2 of Laws of integer exponents: for $a \\ne 0$\nin a field, $a^n \\ne 0$ for every $n \\in \\mathbb{N}$, proved there by induction on\n$n$ from the fact that a field has no zero divisors (A field has no zero divisors: $ab = 0 \\Rightarrow a = 0$ or $b = 0$).\nThat lemma is a statement *about* the operation introduced here, so it depends on\nthis definition and is recorded in this item's `justified_by` rather than in its\n`deps` (SCHEMA §3). Given $a^n \\ne 0$, the value $(a^n)^{-1}$ is a single\nwell-determined element, because multiplicative inverses in a field are unique\n(Identities and inverses in a field are unique).\n\n**Integer exponents.** Every integer $m$ (The integers as equivalence classes of pairs of naturals) is either\n$n$ or $-n$ for a unique natural $n$, where $n$ in these integer expressions denotes its image under the\nembedding $\\iota : \\mathbb{N} \\to \\mathbb{Z}$ (The naturals embed in the integers,\nArithmetic on the integers). This too is a citation and not a slogan: the order on\n$\\mathbb{Z}$ is total (The integers form a totally ordered ring), so $m \\ge 0$ or $m < 0$; the\nimage of $\\iota$ is exactly the set of nonnegative integers, and each of them is\n$n$ for a unique natural $n$ (The naturals embed in the integers); and if $m < 0$ then\n$-m > 0$, by compatibility of the order with addition (The integers form a totally ordered ring),\nso $-m = n$ and $m = -n$, with $n$ unique because $\\iota$ is\ninjective. The two clauses above therefore define $a^m$ for every\n$m \\in \\mathbb{Z}$ whenever $a \\ne 0$, and for every $m \\in \\mathbb{N}$ for\narbitrary $a$. The two exponent domains are disjoint: the natural clause\nhandles $m \\ge 0$, including $m = 0$, while the negative clause requires\n$n \\ge 1$ and therefore handles only $m < 0$.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-qft-qed-coherent-ir-obstruction",
+          "source_section": "Statement",
+          "quote": "Use the transverse one-particle space $\\mathcal H_T$ and multiplier $\\omega(\\mathbf k)$ of [[def-qft-qed-photon-energy-multiplier]], and form its symmetric Fock space $\\mathcal F_s(\\mathcal H_T)$. Let $H_{\\rm ph}:=\\hbar c\\,d\\Gamma(\\omega)$, with $\\hbar,c>0$ and $d\\Gamma(\\omega)$ acting on the $n$-particle sector as multiplication by $\\sum_{j=1}^n|\\mathbf k_j|$, as in [[lem-qft-second-quantized-spectrum]]. For a coherent vector use\n$$ \\epsilon(f):=\\bigoplus_{n=0}^{\\infty}\\frac{f^{\\otimes n}}{\\sqrt{n!}},\\qquad C(f):=e^{-\\|f\\|^2/2}\\epsilon(f), $$\nusing the tensor and direct-sum conventions of [[def-qft-fock-and-test-spaces]].\n\nLet $\\kappa>0$. Let $b:S^2\\to\\mathbb C^3$ be measurable with $b\\in L^2(S^2,d\\Omega;\\mathbb C^3)$, $\\mathbf n\\cdot b(\\mathbf n)=0$ for a.e. $\\mathbf n$, and\n$$ C_b:=\\int_{S^2}|b(\\mathbf n)|^2\\,d\\Omega>0. $$\nTake $\\mathbf k,\\kappa,\\epsilon$ in inverse metres and $b$ dimensionless; then $f_\\epsilon$ has momentum-wavefunction units $\\mathrm m^{3/2}$, $C_b$ is dimensionless, and $\\hbar c(\\kappa-\\epsilon)$ has energy units.\nFor $0<\\epsilon<\\kappa$, define $f_\\epsilon(0)=0$ and\n$$ f_\\epsilon(\\mathbf k):=\\mathbf1_{\\{\\epsilon<|\\mathbf k|<\\kappa\\}}|\\mathbf k|^{-3/2}b\\!\\left(\\frac{\\mathbf k}{|\\mathbf k|}\\right). $$\nThen\n$$ \\|f_\\epsilon\\|^2=C_b\\log\\frac{\\kappa}{\\epsilon},\\qquad \\langle C(f_\\epsilon),H_{\\rm ph}C(f_\\epsilon)\\rangle =\\hbar c\\,C_b(\\kappa-\\epsilon). $$\nEach $C(f_\\epsilon)$ is a unit vector in $D(H_{\\rm ph})$. As $\\epsilon\\downarrow0$, $C(f_\\epsilon)\\rightharpoonup0$ weakly, but the family has no strong Fock-space limit. The statement is an exact free transverse-mode construction; it asserts no interacting charged sector, continuum QED limit, or empirical observation.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $\\lambda=C\\log(\\Delta/\\varepsilon)$. By [F2], the count\ndistribution is $p_m=e^{-\\lambda}\\lambda^m/m!$. Reindexing the nonnegative\nseries gives\n$$\\mathbb E N_{(\\varepsilon,\\Delta)} =e^{-\\lambda}\\sum_{m\\ge1}\\frac{m\\lambda^m}{m!} =\\lambda e^{-\\lambda}\\sum_{j\\ge0}\\frac{\\lambda^j}{j!} =\\lambda.$$\nThis calculation also gives zero mean when $C=0$ by [F9].",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F8",
+            "F9",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "If $C>0$, fix $\\Delta$ and set $\\kappa=\\Delta/c$ and $\\delta=\\varepsilon/c$. The Definition's profile $f_{\\varepsilon,\\Delta}$ is exactly the supplier profile with these cutoffs and the same transverse angular function $b$; its hypotheses hold because $\\kappa>0$ and $C_b=C>0$. Applying [F10] shows that $\\Psi_{\\varepsilon,\\Delta}$ has no strong Fock-space limit as $\\varepsilon\\downarrow0$.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F1",
+            "F10",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $C>0$, then for every integer $q\\ge1$, whenever $\\varepsilon<\\Delta\\,2^{-q}$, $\\log(\\Delta/\\varepsilon)>q\\log2\\ge q/2$, since $\\log2=\\int_1^2dt/t\\ge1/2$ by [F7]. Hence $C\\log(\\Delta/\\varepsilon)\\to\\infty$ as $\\varepsilon\\downarrow0$. For $C=0$ the count and its mean remain zero.",
+          "step": "2.1",
+          "inputs": [
+            "F7",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Under the isometry in [F5], multiplication by $|\\mathbf k|$ and by the\nfrequency-band indicator commutes pointwise with $P_T(\\mathbf k)$,\nso the scalar sector multiplier of [F5] restricts to the transverse Fock\nspace. On the support of $f_{\\varepsilon,\\Delta}$,\n$0<\\hbar c|\\mathbf k|<\\hbar\\Delta$. By [F5], the squared norm of the\nenergy-operator image is bounded by\n$$\\|H_\\gamma\\Psi_{\\varepsilon,\\Delta}\\|^2 \\le(\\hbar\\Delta)^2e^{-\\lambda} \\sum_{m\\ge0}\\frac{m^2\\lambda^m}{m!} =(\\hbar\\Delta)^2(\\lambda^2+\\lambda)<\\infty.$$\nThe identity follows by writing $m^2=m(m-1)+m$ and shifting indices in\nthe two exponential series [F8], with [F9] covering $\\lambda=0$.\nThus $\\Psi_{\\varepsilon,\\Delta}\\in D(H_\\gamma)$.",
+          "step": "2.2",
+          "inputs": [
+            "A1",
+            "F3",
+            "F4",
+            "F5",
+            "F8",
+            "F9",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "On sector $m$, the energy multiplier is the sum of the $m$ one-particle\nenergies. Product tensor pairings make each summand contribute\n$\\langle f_{\\varepsilon,\\Delta},\n\\hbar c|\\mathbf k| f_{\\varepsilon,\\Delta}\\rangle\n\\|f_{\\varepsilon,\\Delta}\\|^{2(m-1)}$. Including the coherent-state factor\nand the sector normalization gives\n$$\\langle\\Psi_{\\varepsilon,\\Delta},H_\\gamma\\Psi_{\\varepsilon,\\Delta}\\rangle =e^{-\\lambda}\\sum_{m\\ge1} \\frac{m\\langle f_{\\varepsilon,\\Delta}, \\hbar c|\\mathbf k| f_{\\varepsilon,\\Delta}\\rangle\\lambda^{m-1}}{m!} =\\langle f_{\\varepsilon,\\Delta}, \\hbar c|\\mathbf k| f_{\\varepsilon,\\Delta}\\rangle,$$\nwhere $e^{-\\lambda}\\sum_{m\\ge1}m\\lambda^{m-1}/m!=1$ by [F8].\nPolar coordinates [F6], $\\nu=cr$, and the definition of $C$ give\n$$\\langle f_{\\varepsilon,\\Delta}, \\hbar c|\\mathbf k| f_{\\varepsilon,\\Delta}\\rangle =\\int_A|b(n)|^2d\\Omega(n) \\int_{\\varepsilon/c}^{\\Delta/c}\\hbar c\\,dr =\\hbar C(\\Delta-\\varepsilon).$$\nIt is bounded by $\\hbar C\\Delta$ and tends to that finite value as\n$\\varepsilon\\downarrow0$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "F6",
+            "F8",
+            "step 1.1",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "If $C=0$, [F1] gives $\\|b\\|_{L^2}^2=0$, so $b$ is the zero $L^2$ equivalence class and hence $b=0$ almost everywhere. The same radial norm calculation in [F2] gives $\\|f_{\\varepsilon,\\Delta}\\|^2=C\\log(\\Delta/\\varepsilon)$. For $C>0$ this is unbounded as $\\varepsilon\\downarrow0$ by step 2.1. If $f_{\\varepsilon,\\Delta}$ had a norm limit $f$, choose a sequence $\\varepsilon_j\\downarrow0$ with $\\|f_{\\varepsilon_j,\\Delta}-f\\|<1$ for all sufficiently large $j$. The Hilbert-space triangle inequality would then give $\\|f_{\\varepsilon_j,\\Delta}\\|\\le\\|f\\|+1$, contradicting the divergence in step 2.1. For $C=0$ the displacement is the zero $L^2$ vector at every cutoff by [F2].",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 4.1: for C=0 the count mean, energy expectation and displacement are zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.2: lambda=0 leaves only the vacuum sector, which lies in the energy domain with zero energy."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.1: the Poisson mean and energy expectation formulas include the one-particle contribution and the vacuum term."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 2.2 and 3.1: a vanishing angular profile C=0 gives zero energy; the finite-band multiplier estimate remains valid without nonzero C."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1: the lower-cutoff count divergence for C>0 and finite energy limit as epsilon decreases to zero are proved explicitly."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: the model data and Borel angular acceptance region are supplied in A1; proof step 2.2 performs fixed integrals and makes no unspecified selections."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Proposition gives a conditional energy and norm conclusion, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Proposition asserts no converse characterization from finite energy to a particular coherent profile."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-67",
+        "notes": "Checked all six steps and exact supplier hypotheses. The scalar L2 identification uses Lebesgue times counting measure on R3 x {1,2,3}, a sigma-finite space; the norm identity and commuting transverse projection justify restriction of the sector multiplier. Fixed positive cutoffs bound energy by m hbar Delta in sector m, with Poisson second moment lambda^2+lambda, proving the operator domain. Sectorwise expectation and polar integration give hbar C(Delta-epsilon), with angular-frequency/radial conversion nu=cr. For C>0 logarithmic count divergence prevents a displacement norm limit; C=0 gives b=0 a.e. and vacuum. The additional Fock nonlimit step maps kappa=Delta/c and delta=epsilon/c into the actual infrared supplier, whose proof was read. No energy convergence claim for a limiting vector or empirical counts. Current mathematics is sound; pre-reader raw bytes unavailable, historical touched review remains escalated."
+      }
+    },
+    "ex-qftx-resolution-probability": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "prop-qftx-soft-unresolved-cancellation",
+          "source_section": "Statement",
+          "quote": "In the defined finite-cutoff coherent model, let\n$0<\\varepsilon<\\Delta<\\Lambda$ and $C\\ge0$. Let $N_u$ and $N_r$ be the\ncounts in the unresolved band\n$(\\varepsilon,\\Delta)$ and resolved band $[\\Delta,\\Lambda)$,\nrespectively. The exclusive no-emission probability is\n$$\\mathbb P(N_u=0,N_r=0)= \\exp\\!\\left(-C\\log\\frac{\\Lambda}{\\varepsilon}\\right).$$\nFor every $n\\in\\mathbb N_0$,\n$$\\mathbb P(N_u=n,N_r=0)= \\exp\\!\\left(-C\\log\\frac{\\Lambda}{\\varepsilon}\\right) \\frac{\\left(C\\log\\frac{\\Delta}{\\varepsilon}\\right)^n}{n!}.$$\nSumming over all unresolved counts gives the finite-resolution inclusive\nprobability\n$$\\mathbb P(N_r=0)= \\exp\\!\\left(-C\\log\\frac{\\Lambda}{\\Delta}\\right),$$\nwhich is independent of the lower cutoff $\\varepsilon$. This is an exact\nidentity in the defined free coherent model; it does not assert real–virtual\ncancellation in interacting QED or a detector's empirical response.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-exponential-is-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "The exponential function is continuous and strictly increasing on $\\mathbb R$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], $P(\\Delta_j)=\\exp(-C\\log(\\Lambda/\\Delta_j))$ for $j=1,2$. By [F2], $\\log(\\Lambda/\\Delta_1)-\\log(\\Lambda/\\Delta_2) =\\int_{\\Delta_1}^{\\Delta_2}d\\nu/\\nu>0$, so $-C\\log(\\Lambda/\\Delta_2)>-C\\log(\\Lambda/\\Delta_1)$ because $C>0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply strict monotonicity [F3] to the two real exponents in step 1.1. It gives $P(\\Delta_2)>P(\\Delta_1)$. This compares two predictions of the specified model and asserts no empirical observation.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1: the no-resolved-emission event is assigned its exact probability for each admissible threshold."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The Example assumes C>0, so the zero-profile case C=0 is excluded."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 applies to either one of the two admissible thresholds; step 2.1 compares the pair."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The Example assumes strict inequalities epsilon<Delta_1<Delta_2<Lambda, excluding coincident thresholds."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Both thresholds are strictly inside (epsilon,Lambda), so no endpoint threshold is used."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 takes any supplied pair Delta_1<Delta_2 in the stated interval and uses the positive integral between them."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example establishes one monotonicity comparison, not an iff characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse claim that every monotone probability curve comes from this model is made."
+        }
+      ],
+      "finite_checks": []
+    }
+  }
+}

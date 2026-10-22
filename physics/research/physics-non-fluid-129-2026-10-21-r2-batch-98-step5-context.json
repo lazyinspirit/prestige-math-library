@@ -1,0 +1,149 @@
+{
+  "group": "j",
+  "batches": [
+    "98"
+  ],
+  "pages_read": [
+    "csm-frontier-rare-event-numerics",
+    "csm-frontier-rare-event-numerics-examples"
+  ],
+  "items_read": [
+    "thm-csm-frontier-partition-ratio-overlap",
+    "alg-csm-frontier-independent-bridge-ratios",
+    "thm-csm-frontier-bridge-ratio-variance",
+    "alg-csm-frontier-interval-finite-partition",
+    "thm-csm-frontier-interval-partition-certificate",
+    "ex-csm-frontier-product-overlap-explosion"
+  ],
+  "conventions": [
+    {
+      "convention": "State spaces are finite and nonempty; all raw weights are strictly positive and finite. The directed divergence is χ²(ν∥μ)=Σx μ(x)(ν(x)/μ(x)−1)².",
+      "fixed_by": "thm-csm-frontier-partition-ratio-overlap",
+      "matters_for": [
+        "alg-csm-frontier-independent-bridge-ratios",
+        "thm-csm-frontier-bridge-ratio-variance",
+        "ex-csm-frontier-product-overlap-explosion"
+      ]
+    },
+    {
+      "convention": "Bridge stages have indices 0≤k<K, K≥1, and positive integer sample counts. All supplied draws across all stages are mutually independent and have their specified exact stage laws.",
+      "fixed_by": "alg-csm-frontier-independent-bridge-ratios",
+      "matters_for": [
+        "thm-csm-frontier-bridge-ratio-variance"
+      ]
+    },
+    {
+      "convention": "Partition sums define the sampling laws and target ratios but are not numerical inputs to the raw-weight estimators.",
+      "fixed_by": "thm-csm-frontier-partition-ratio-overlap",
+      "matters_for": [
+        "alg-csm-frontier-independent-bridge-ratios",
+        "thm-csm-frontier-bridge-ratio-variance"
+      ]
+    },
+    {
+      "convention": "Rational weight and observable intervals are certified input premises. They are converted outward to finite dyadic intervals; the algorithm does not derive weight bounds from energies or evaluate exponentials.",
+      "fixed_by": "alg-csm-frontier-interval-finite-partition",
+      "matters_for": [
+        "thm-csm-frontier-interval-partition-certificate"
+      ]
+    },
+    {
+      "convention": "An expectation enclosure is returned only when the partition interval has strictly positive lower endpoint and the quotient operation is finite. Overflow and other unresolved branches carry no normalized-expectation enclosure claim.",
+      "fixed_by": "alg-csm-frontier-interval-finite-partition",
+      "matters_for": [
+        "thm-csm-frontier-interval-partition-certificate"
+      ]
+    },
+    {
+      "convention": "The product-law example assumes distinct strictly positive probability mass functions, m,N≥1, and a fixed tolerance ε>0. Its exponential sample-size requirement concerns only the specified one-stage estimator.",
+      "fixed_by": "ex-csm-frontier-product-overlap-explosion",
+      "matters_for": [
+        "ex-csm-frontier-product-overlap-explosion"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "thm-csm-frontier-partition-ratio-overlap",
+      "statement": "For finite nonempty X, finite strictly positive weights w0,w1, and n≥1 independent draws with common law π0=w0/Z0, the raw-ratio sample mean has expectation Z1/Z0 and relative variance χ²(π1∥π0)/n.",
+      "used_by": [
+        "alg-csm-frontier-independent-bridge-ratios",
+        "thm-csm-frontier-bridge-ratio-variance",
+        "ex-csm-frontier-product-overlap-explosion"
+      ]
+    },
+    {
+      "id": "alg-csm-frontier-interval-finite-partition",
+      "statement": "Given an enumerated finite nonempty state space, positive exact weights, a real observable, certified rational input intervals and a finite dyadic format, convert endpoints outward, form outward-rounded partition and weighted sums, and return their finite intervals or an unresolved status. Return the outward expectation quotient only with a strictly positive denominator lower endpoint.",
+      "used_by": [
+        "thm-csm-frontier-interval-partition-certificate"
+      ]
+    },
+    {
+      "id": "alg-csm-frontier-independent-bridge-ratios",
+      "statement": "For K≥1 adjacent pairs of finite positive weights and supplied mutually independent exact stage samples, compute each adjacent raw-ratio sample mean and return their product; no partition sum is required as a numerical input.",
+      "used_by": [
+        "thm-csm-frontier-bridge-ratio-variance"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "alg-importance-sampling",
+      "used_for": "The formal normalized weighted variable in the partition-ratio proof. Its known-normalizer requirement is explicitly preserved rather than imposed on the raw-ratio computation.",
+      "opened": true
+    },
+    {
+      "id": "thm-ordinary-importance-sampling-finite-variance-under-weighted-second-moment",
+      "used_for": "The finite-sample variance-of-an-average identity. Finite positive weights ensure full support and finite second moment; the AC-dependent CLT conclusion is unused.",
+      "opened": true
+    },
+    {
+      "id": "def-dyadic-floating-point-format-and-directed-rounding",
+      "used_for": "Finite dyadic formats, directed conversion of rational endpoints, and explicit overflow handling.",
+      "opened": true
+    },
+    {
+      "id": "def-intervals-rectangles-and-complex-balls",
+      "used_for": "Finite dyadic real intervals and finite expression DAGs with shared exact intermediate values.",
+      "opened": true
+    },
+    {
+      "id": "def-outward-rounded-interval-and-ball-operations",
+      "used_for": "Outward-rounded addition, multiplication and division with denominator-domain and overflow restrictions.",
+      "opened": true
+    },
+    {
+      "id": "lem-directed-dyadic-rounding-enclosure-and-error",
+      "used_for": "Containment after finite endpoint conversion and the separation of overflow from finite enclosure claims.",
+      "opened": true
+    },
+    {
+      "id": "lem-real-interval-arithmetic-preserves-enclosure",
+      "used_for": "Enclosure propagation through the finite partition, weighted-sum and quotient DAGs, including shared nodes.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [
+    {
+      "item": "lem-directed-dyadic-rounding-enclosure-and-error",
+      "finding": "Proof step 2.1 writes “N_{\\max}<x<+infty”. The positive-infinity endpoint lacks the backslash in \\infty; the negative-overflow clause uses the correct notation. This is a presentation typo in the overflow argument.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "csm-frontier-rare-event-numerics",
+      "to": "csm-frontier-sampling-certificates",
+      "faithful": true,
+      "note": "Checked the declared prerequisite against the supplier page and its heat-bath and monotone-CFTP interfaces. The consuming items assume exact independent draws as supplied inputs; they neither identify correlated heat-bath trajectories with IID samples nor extend restricted Ising CFTP exactness to arbitrary weights. No supplier proposition is quoted more strongly."
+    },
+    {
+      "from": "csm-frontier-rare-event-numerics",
+      "to": "csm-frontier-inverse-gibbs",
+      "faithful": true,
+      "note": "Checked both page inventories and the supplier's finite exponential-family definition. The consumer treats arbitrary finite positive weights and invokes no inverse-Gibbs theorem as a proof premise. The existing cross-batch record leaves manifest/readiness reconciliation open; that administrative obligation does not supply an unstated mathematical premise here."
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+--- 
++++ 
+@@ -12,9 +12,13 @@
+ deps:
+   - def-qftx-scattering-approximant-contract
+   - def-qft-fock-and-test-spaces
++  - lem-fundamental-theorem-of-calculus-for-banach-valued-continuous-curves
++  - lem-bochner-integral-norm-inequality
+ dependency_roles:
+   def-qftx-scattering-approximant-contract: mathematical-premise
+   def-qft-fock-and-test-spaces: mathematical-premise
++  lem-fundamental-theorem-of-calculus-for-banach-valued-continuous-curves: mathematical-premise
++  lem-bochner-integral-norm-inequality: mathematical-premise
+ proof_strategy: direct
+ provenance:
+   statement: literature-derived
+@@ -73,7 +77,8 @@
+ Hilbert-space-valued norm-$C^1$ functions on each time half-line; their
+ one-particle limits, smooth packet labels, and symmetric or antisymmetric
+ packet-domain inner product are part of the construction data. The derivative
+-and Fock inner-product estimates remain hypotheses of this theorem.
++and Fock inner-product estimates remain hypotheses of this theorem. The
++contract assumes Countable Choice.
+ 
+ [F2] [[def-qft-fock-and-test-spaces]]: the bosonic and fermionic Fock spaces
+ are square-summable direct sums of the symmetric and antisymmetric completed
+@@ -81,24 +86,38 @@
+ first-variable-linear counterpart is
+ $(f,g)_{\mathcal F,1}=\langle g,f\rangle_{\mathcal F,2}$.
+ 
++[F3] [[lem-fundamental-theorem-of-calculus-for-banach-valued-continuous-curves]]:
++under Countable Choice, for real $s<t$, a real or complex Banach space $X$,
++and a continuous curve $\varphi:[s,t]\to X$ that is differentiable on
++$(s,t)$ with derivative extending continuously to $[s,t]$, the Bochner
++integral with respect to Lebesgue measure satisfies
++$\varphi(t)-\varphi(s)=\int_s^t\varphi'(r)\,dr$. The contract's Countable
++Choice assumption in [F1] supplies this hypothesis; a complex Hilbert space is
++a Banach space, and the contract's norm-$C^1$ condition supplies the required
++curve and derivative regularity on each compact interval.
++
++[F4] [[lem-bochner-integral-norm-inequality]]: for a Bochner-integrable
++Banach-valued function $g$ on a measurable set $E$,
++$\left\|\int_Eg\right\|\le\int_E\|g\|$. The continuous derivative in [F3]
++is Bochner integrable on $[s,t]$.
++
+ [A1] For all $f,g\in\mathcal D_\sigma$,
+ $\lim_{t\to\infty}(\Psi_t^\eta(f),\Psi_t^\eta(g))
+ =(f,g)_{\mathcal F,1}$.
+ 
+ ## Proof
+ 
+-1.1 Fix $1\le s\le t$ and $\xi\in\mathcal H$. The scalar function
+-$r\mapsto(\Psi_r^\eta(f),\xi)$ is continuously differentiable, so the scalar
+-fundamental theorem of calculus gives its increment as the integral of
+-$(\partial_r\Psi_r^\eta(f),\xi)$. The Riemann sums of the continuous
+-$\mathcal H$-valued function $\partial_r\Psi_r^\eta(f)$ converge on $[s,t]$:
+-uniform continuity makes the sums Cauchy as the mesh tends to zero, and
+-completeness of $\mathcal H$ gives their limit. Pairing that limit with every
+-$\xi$ shows $\Psi_t^\eta(f)-\Psi_s^\eta(f)=\int_s^t
+-\partial_r\Psi_r^\eta(f)\,dr$. The triangle inequality for the same Riemann
+-sums therefore yields
++1.1 Fix $1\le s\le t$. If $s=t$ the increment inequality is immediate.
++If $s<t$, restrict $r\mapsto\Psi_r^\eta(f)$ to $[s,t]$. By [F1] this is a
++continuous curve into the Banach space $\mathcal H$, differentiable on $(s,t)$
++with derivative extending continuously to $[s,t]$.
++The contract's Countable Choice premise satisfies the hypothesis of [F3], so
++the Banach-valued fundamental theorem gives
++$\Psi_t^\eta(f)-\Psi_s^\eta(f)=\int_s^t\partial_r\Psi_r^\eta(f)\,dr$.
++The derivative is continuous and hence Bochner integrable on this compact
++interval; [F4] then gives
+ $\|\Psi_t^\eta(f)-\Psi_s^\eta(f)\|\le\int_s^t
+-\|\partial_r\Psi_r^\eta(f)\|\,dr$. [F1, given, construct, algebra]
++\|\partial_r\Psi_r^\eta(f)\|\,dr$. [F1, F3, F4, given]
+ 
+ 2.1 Apply the derivative bound in [F1] and integrate the scalar power:
+ $$\|\Psi_t^\eta(f)-\Psi_s^\eta(f)\|\le \frac{C_{\eta,f}}{\epsilon_{\eta,f}}\bigl((1+s)^{-\epsilon_{\eta,f}}-(1+t)^{-\epsilon_{\eta,f}}\bigr)\le \frac{C_{\eta,f}}{\epsilon_{\eta,f}}(1+s)^{-\epsilon_{\eta,f}}.$$

@@ -1,0 +1,949 @@
+{
+  "version": 1,
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "batch": 73,
+  "scope": [
+    "def-qftx-paraxial-cone",
+    "lem-qftx-paraxial-vortex-packet-existence",
+    "prop-qftx-paraxial-spin-error",
+    "prop-qftx-spin-to-orbit-constraint",
+    "ex-qftx-vortex-paraxial-label"
+  ],
+  "contracts": {
+    "def-qftx-paraxial-cone": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "is the following statement.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qftx-photon-helicity-bundle",
+          "source_section": "Definition",
+          "quote": "The transverse one-photon Hilbert space",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-qftx-helicity-chern-obstruction",
+          "source_section": "Statement",
+          "quote": "neither helicity line admits a global smooth unit section.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qftx-photon-rotations-helicity",
+          "source_section": "Statement",
+          "quote": "The unique self-adjoint Stone generator",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-choice-implies-dependent-implies-countable-choice",
+          "source_section": "Statement",
+          "quote": "In ZF,\n\n$$\\mathrm{AC}\\Longrightarrow\\mathrm{DC}\\Longrightarrow\\mathrm{AC}_\\omega\\Longrightarrow\\mathrm{AC}_{\\omega,\\mathrm{fin}}\\Longrightarrow\\mathrm{AC}_{\\omega,2},\\qquad \\mathrm{AC}\\Longrightarrow\\mathrm{AC}_2.$$\n\nDC here includes a prescribed initial point.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "By [F4], the Axiom of Choice in [A1] implies Countable Choice, so the countable-choice hypotheses in [F1] and [F2] hold. The vectors $\\mathbf e_\\theta$ and $\\mathbf e_\\varphi$ are orthonormal, transverse to $\\mathbf n$, and satisfy $\\mathbf n\\times\\mathbf e_\\theta=\\mathbf e_\\varphi$ and $\\mathbf n\\times\\mathbf e_\\varphi=-\\mathbf e_\\theta$. Thus $e_\\sigma$ has unit norm and $h e_\\sigma=\\sigma e_\\sigma$; multiplication by the phase $e^{i\\sigma\\varphi}$ preserves both properties. By [F2], the resulting north gauge extends smoothly through $+e_z$, while the stated transition prevents treating it as a global frame.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "For $\\ell\\ne0$, $(\\sin\\theta)^{|\\ell|}e^{i\\ell\\varphi}=(n_x+i\\operatorname{sgn}(\\ell)n_y)^{|\\ell|}$, a polynomial in the smooth Cartesian coordinates $n_x,n_y$; for $\\ell=0$ the factor is $1$. Therefore the stated vanishing condition makes the vortex coefficient smooth at the axis. An envelope supported away from the axis has no coordinate singularity there.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Since $R_z(t)\\mathbf e_\\theta(\\theta,\\varphi-t)=\\mathbf e_\\theta(\\theta,\\varphi)$ and $R_z(t)\\mathbf e_\\varphi(\\theta,\\varphi-t)=\\mathbf e_\\varphi(\\theta,\\varphi)$, the local frame obeys $R_z(t)e_\\sigma^N(\\theta,\\varphi-t)=e^{-i\\sigma t}e_\\sigma^N(\\theta,\\varphi)$. This identity fixes the phase contribution of the chosen gauge under the rotation convention in [F3].",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The definition may name an empty packet class and asserts no existence (Statement).",
+          "argument_steps": []
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The normalized packet definition excludes the zero vector (Statement).",
+          "argument_steps": []
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Each selected helicity range is rank one by F1;1.1 verifies the unit north frame for each sign sigma. A rank-one fibre does not mean a global unit section exists.",
+          "argument_steps": [
+            "1.1"
+          ]
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The cone keeps r strictly positive and theta strictly below the south patch boundary (Statement).",
+          "argument_steps": []
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The cone includes its stated closed radial and angular boundaries; regular packet profiles are handled in step 1.2 (Statement; step 1.2).",
+          "argument_steps": [
+            "1.2"
+          ]
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A1 explicitly assumes full AC for the Stone generator, and F4/1.1 derive AC_omega for the helicity-bundle suppliers. No additional arbitrary normalized packet is selected by this required-data Definition.",
+          "argument_steps": [
+            "1.1"
+          ]
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition contains no biconditional. The Definition specifies normalized cone packets and a local north gauge; its axis vanishing form is sufficient and no necessity or global orbital labeling is claimed.",
+          "argument_steps": []
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition contains no biconditional. The Definition specifies normalized cone packets and a local north gauge; its axis vanishing form is sufficient and no necessity or global orbital labeling is claimed.",
+          "argument_steps": []
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-73 author",
+        "notes": "The helicity frame is explicitly local. The coefficient winding is gauge-patch dependent, and no global photon polarization frame or apparatus OAM label is asserted."
+      },
+      "current_boundary_worksheet": {
+        "proposal": "research/physics-non-fluid-129-2026-10-21-r2-owner-step2-boundary-proposal-8/proposal.json",
+        "source_sha256": "9c7a5aab221e91ce3508a6b9c68d045dbd0ab6154f99979dd10af2308ea68f32",
+        "qualification": "Released complete current source/eight-case semantic worksheet; root transcribed exact current rows. No independent acceptance or finite computation asserted."
+      }
+    },
+    "lem-qftx-paraxial-vortex-packet-existence": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "is the following statement.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "is the following statement.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qftx-paraxial-cone",
+          "source_section": "Definition",
+          "quote": "Use the transverse Hilbert space",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-smooth-bump-between-concentric-euclidean-balls",
+          "source_section": "Statement",
+          "quote": "Then there exists a smooth function",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-euclidean-chart-measure-agrees-with-polar-surface-measure",
+          "source_section": "Statement",
+          "quote": "The chart surface measure on",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "be sigma-finite measure spaces",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-qftx-photon-rotations-helicity",
+          "source_section": "Statement",
+          "quote": "The unique self-adjoint Stone generator",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "For any nonempty bounded open interval $(u,v)$, choose $c$ and $\\varepsilon>0$ with $[c-\\varepsilon,c+\\varepsilon]\\subset(u,v)$. Apply [F2] in $\\mathbb R^3$ with radii $\\varepsilon/2<\\varepsilon$, obtaining a smooth $\\rho$ equal to $1$ on the smaller ball and supported in the larger. The restriction $g(x)=\\rho((x-c)e_1)$ is smooth, equals $1$ on a neighborhood of $c$, and is supported in $(u,v)$. Applying this construction to $(\\kappa_-,\\kappa_+)$ and $(\\theta_1,\\theta_2)$ gives the required nonzero functions $a$ and $b$.",
+          "inputs": [
+            "F2",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The integrand $|a(r)|^2|b(\\theta)|^2$ is bounded and supported in a finite radial annulus and a finite-measure spherical chart, so it is integrable. By [F1], [F3], and [F4],\n$$\\|f^0_{\\sigma,\\ell}\\|_\\nu^2=\\frac12\\left(\\int_{\\kappa_-}^{\\kappa_+}r|a(r)|^2\\,dr\\right)\\left(\\int_{S^2}|b(\\theta)|^2\\,d\\Omega\\right)=\\pi AB.$$\nThe first factor $A$ is finite and positive because $a$ is bounded, compactly supported, and equals $1$ on an interval. The spherical chart gives $\\int_{S^2}|b(\\theta)|^2d\\Omega=2\\pi B$, so $B$ is finite and positive for the same reason. Thus $0<\\|f^0_{\\sigma,\\ell}\\|_\\nu^2=\\pi AB<\\infty$, and the stated normalization is valid.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "The support lies in $\\kappa_-<r<\\kappa_+$ and $\\theta_1<\\theta<\\theta_2$, a compact region away from $\\mathbf k=0$ and the azimuthal axis after taking the compact supports of $a,b$. The frame $e_\\sigma^N$ is smooth and transverse with $P_\\sigma e_\\sigma^N=e_\\sigma^N$ by [F1]; because $\\ell$ is integral, $e^{i\\ell\\varphi}$ is single-valued and smooth on this region. Extension by zero is smooth since $a,b$ have compact support in the open intervals. Hence $f^0_{\\sigma,\\ell}\\in\\mathcal D$, and dividing by its positive norm preserves membership and helicity while giving norm one.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "Under $R_z(-t)$, $r$ and $n_z$ stay fixed and $\\varphi$ becomes $\\varphi-t$. Therefore [F1] gives $U(R_z(t))f_{\\sigma,\\ell}=e^{-i\\ell t}e^{-i\\sigma t}f_{\\sigma,\\ell}=e^{-i(\\ell+\\sigma)t}f_{\\sigma,\\ell}$. Since $f_{\\sigma,\\ell}\\in\\mathcal D\\subseteq D(J_z)$ by [F5], differentiating at $t=0$ in the Stone convention of [F5] yields $J_zf_{\\sigma,\\ell}=(\\ell+\\sigma)\\hbar f_{\\sigma,\\ell}$.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F5",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 chooses envelopes equal to one on nonempty subintervals; step 2.1 gives A and B positive (steps 1.1, 2.1)."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The computed norm pi A B is strictly positive and is divided out (step 2.1)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The construction works for sigma equal to either helicity sign (Statement; step 3.1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The angular support stays away from the axis, so every integer winding is smooth (step 3.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The envelopes are compactly supported inside the open radial and angular intervals (step 1.1; step 3.1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The two scalar bumps are explicitly constructed by line restriction; the stated Choice assumptions cover the measure and Stone suppliers (step 1.1; step 4.1)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma asserts a construction, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma asserts a construction, not a biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-73 author",
+        "notes": "The construction has compact radial and angular support and is a genuine L2 transverse vector. The phase eigenvalue uses the north gauge and the stated U(Rz(t)) convention."
+      }
+    },
+    "prop-qftx-paraxial-spin-error": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "is the following statement.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "is the following statement.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qftx-paraxial-cone",
+          "source_section": "Definition",
+          "quote": "A normalized helicity",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-qftx-photon-fock-angular-lift",
+          "source_section": "Statement",
+          "quote": "is a normalized one-photon helicity",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qftx-photon-projected-angular",
+          "source_section": "Definition",
+          "quote": "Define the bounded projected spin operator",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-qftx-photon-rotations-helicity",
+          "source_section": "Statement",
+          "quote": "The unique self-adjoint Stone generator",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-qftx-paraxial-vortex-packet-existence",
+          "source_section": "Statement",
+          "quote": "The packet has compact positive radial support",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-sine-and-cosine-are-one-lipschitz",
+          "source_section": "Statement",
+          "quote": "For all real $u,v$,",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-sine-cosine-signs-monotonicity-and-ranges",
+          "source_section": "Statement",
+          "quote": "Cosine is strictly decreasing on",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-sine-and-cosine-addition-formulas",
+          "source_section": "Statement",
+          "quote": "For all real $x,y$,",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-trigonometric-parity-and-pythagorean-identity",
+          "source_section": "Statement",
+          "quote": "For every real $x$,",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Under the Choice assumptions [A1], [F2] gives $\\langle f,S'_zf\\rangle_\\nu=\\hbar\\sigma\\int_M\\cos\\theta\\,d\\rho$, where $d\\rho=|f|^2d\\nu$ is a probability measure because $\\|f\\|_\\nu=1$. Since $|\\sigma|=1$, $\\left|\\langle f,S'_zf\\rangle_\\nu-\\hbar\\sigma\\right|=\\hbar\\left(1-\\int_M\\cos\\theta\\,d\\rho\\right)$; the right side is nonnegative by the range bound in [F7].",
+          "inputs": [
+            "A1",
+            "F2",
+            "F7",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "On the support, $0\\le\\theta\\le\\theta_{\\max}<\\pi/2$. The monotonicity in [F7] gives $0\\le1-\\cos\\theta\\le1-\\cos\\theta_{\\max}$ pointwise. Integrating against the probability measure $\\rho$ in step 1.1 proves the first upper bound.",
+          "inputs": [
+            "F1",
+            "F7",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "By [F8], $1-\\cos\\theta_{\\max}=2\\sin^2(\\theta_{\\max}/2)$. Applying [F6] with $u=\\theta_{\\max}/2$ gives $2\\sin^2(\\theta_{\\max}/2)\\le2(\\theta_{\\max}/2)^2=\\theta_{\\max}^2/2$. Combining this with step 2.1 proves the spin estimate.",
+          "inputs": [
+            "F6",
+            "F8",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "Under [A1], the preceding lemma [F5] gives $J_zf=(\\ell+\\sigma)\\hbar f$ and $f\\in D(J_z)$ in the rotation convention [F4]. By [F3], $L'_z=J_z-S'_z$ on that domain, so $\\langle f,L'_zf\\rangle_\\nu=(\\ell+\\sigma)\\hbar-\\langle f,S'_zf\\rangle_\\nu$. Substituting [F2] gives the displayed exact orbital expectation; subtracting $\\ell\\hbar$ and applying step 3.1 gives its stated bound.",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The norm-one hypothesis excludes the zero packet (Statement)."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The normalized probability measure in step 1.1 has total mass one (step 1.1)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Both helicity signs are included and |sigma| equals one (Statement; step 1.1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The bound remains valid at theta zero and at the included cone boundary theta_max (step 2.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The pointwise estimate is inclusive at theta=theta_max (step 2.1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Choice assumptions are explicit; the packet is constructed in the preceding lemma (A1; step 4.1)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The proposition gives inequalities and identities, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The proposition gives inequalities and identities, not a biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-73 author",
+        "notes": "The estimate is a conditional expectation bound for normalized Hilbert packets. It does not say that each photon has a definite projected spin sigma hbar, and the orbital label remains gauge-local."
+      }
+    },
+    "prop-qftx-spin-to-orbit-constraint": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "is the following statement.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "is the following statement.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qftx-photon-helicity-bundle",
+          "source_section": "Definition",
+          "quote": "The transverse one-photon Hilbert space",
+          "uses": [
+            "1.2",
+            "1.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qftx-photon-projected-angular",
+          "source_section": "Definition",
+          "quote": "Define the bounded projected spin operator",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qftx-photon-rotations-helicity",
+          "source_section": "Statement",
+          "quote": "The unique self-adjoint Stone generator",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-qftx-paraxial-spin-error",
+          "source_section": "Statement",
+          "quote": "For the exact north-gauge vortex packet",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qftx-paraxial-vortex-packet-existence",
+          "source_section": "Statement",
+          "quote": "The packet has compact positive radial support",
+          "uses": [
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "By the hypotheses on $U$, $\\psi_{\\rm out}\\in D(J_z)$ and $J_z\\psi_{\\rm out}=UJ_z\\psi$. Unitarity and the second-variable-linear Hilbert pairing give $\\langle\\psi_{\\rm out},J_z\\psi_{\\rm out}\\rangle_\\nu=\\langle U\\psi,UJ_z\\psi\\rangle_\\nu=\\langle\\psi,J_z\\psi\\rangle_\\nu$.",
+          "inputs": [
+            "A1",
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "If $Uh=hU$, then $U^*hU=h$ and unitarity gives $\\langle U\\psi,hU\\psi\\rangle_\\nu=\\langle\\psi,h\\psi\\rangle_\\nu$ for every $\\psi$. Conversely, if these expectations agree for every unit vector, homogeneity gives equality for every vector. The bounded self-adjoint operator $A=U^*hU-h$ therefore has $\\langle x,Ax\\rangle_\\nu=0$ for every $x$. Expanding this identity at $x+y$, $x-y$, $x+iy$, and $x-iy$ shows both real and imaginary parts of $\\langle x,Ay\\rangle_\\nu$ vanish for every $x,y$, so the polarization identity gives $A=0$ and hence $Uh=hU$.",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "step": "1.3",
+          "claim": "Under the Choice assumptions [A1], choose the two packets $f_+=f_{+1,0}$ and $f_-=f_{-1,2}$ from [F4]. They are normalized and orthogonal because $P_+P_-=0$ by [F1]. Both have $J_z$ eigenvalue $\\hbar$, while $hf_+=f_+$ and $hf_-=-f_-$. Let $K=\\operatorname{span}\\{f_+,f_-\\}$, let $U_0$ exchange $f_+$ and $f_-$ on $K$, and let $U_0$ be the identity on $K^\\perp$. Its matrix on the ordered orthonormal basis $(f_+,f_-)$ is $\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix}$, whose square and adjoint are both the identity; thus $U_0$ is unitary.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F4",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "By [F2], $L'_z=J_z-S'_z$ on the domain containing both input and output. Subtracting the finite expectations in step 1.1 gives $\\Delta\\langle L'_z\\rangle=\\Delta\\langle J_z\\rangle-\\Delta\\langle S'_z\\rangle=-\\Delta\\langle S'_z\\rangle$. When the input is a paraxial packet, [F3] gives the qualification of its spin expectation in this balance; the identity itself assumes no spin conservation.",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "step": "2.2",
+          "claim": "The finite-dimensional subspace $K$ lies in the $\\hbar$ eigenspace of the self-adjoint $J_z$. Its orthogonal projection $P_K$ preserves $D(J_z)$ and satisfies $J_zP_K\\eta=\\hbar P_K\\eta$. If $\\eta\\in D(J_z)\\cap K^\\perp$, self-adjointness gives $\\langle v,J_z\\eta\\rangle_\\nu=\\langle J_zv,\\eta\\rangle_\\nu=0$ for every $v\\in K$, so $J_z\\eta\\in K^\\perp$. Thus both $K$ and $K^\\perp$ reduce $J_z$, and $U_0$ preserves $D(J_z)$ and commutes with $J_z$ there.",
+          "inputs": [
+            "A1",
+            "F2",
+            "step 1.3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "But $U_0hf_+=f_-$ whereas $hU_0f_+=-f_-$. Hence $U_0h\\ne hU_0$ although $U_0$ is unitary and commutes with $J_z$; by step 1.2 it changes mean helicity for an input. This proves that axial symmetry alone does not imply helicity conservation.",
+          "inputs": [
+            "F1",
+            "step 1.3",
+            "step 2.2",
+            "algebra",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The statement applies to any normalized input in D(Jz), so no zero-vector first moment is claimed (Statement)."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The hypotheses explicitly require a normalized input; the operator identity itself is defined on D(Jz) (Statement)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The counterexample uses both helicity sectors and the general balance applies to any normalized input (step 1.3; step 2.1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The repeated Jz eigenvalue hbar across opposite helicities is the explicit degeneracy used by the counterexample (steps 1.3, 2.2)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The unbounded generator is used only on its exact domain, preserved by U (Statement; steps 1.1, 2.2)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The hypotheses and the finite packet witnesses are explicit (A1; step 1.3)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "If U commutes with h, all mean-helicity expectations are preserved (step 1.2)."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Preservation of every mean-helicity expectation implies U* h U=h by polarization, hence Uh=hU (step 1.2)."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-73 author",
+        "notes": "The commutation hypothesis includes domain invariance for unbounded Jz. The finite swap proves that axial symmetry alone is insufficient; it is a mathematical unitary, not an apparatus model."
+      }
+    },
+    "ex-qftx-vortex-paraxial-label": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "is the following statement.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "is the following statement.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-qftx-paraxial-vortex-packet-existence",
+          "source_section": "Statement",
+          "quote": "The packet has compact positive radial support and nonzero angular width",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-qftx-paraxial-spin-error",
+          "source_section": "Statement",
+          "quote": "For the exact north-gauge vortex packet",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-qftx-photon-fock-angular-lift",
+          "source_section": "Statement",
+          "quote": "is a normalized one-photon helicity",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qftx-photon-helicity-bundle",
+          "source_section": "Definition",
+          "quote": "The transverse one-photon Hilbert space",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-euclidean-chart-measure-agrees-with-polar-surface-measure",
+          "source_section": "Statement",
+          "quote": "The chart surface measure on",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "be sigma-finite measure spaces",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "By [F1], $f_{\\sigma,\\ell}$ is a unit vector and vanishes unless $|\\mathbf k|<\\kappa_+$. Since the integrand is nonnegative, $E_0(f_{\\sigma,\\ell})=\\hbar\\int|\\mathbf k||f_{\\sigma,\\ell}|^2d\\nu\\le\\hbar\\kappa_+\\int|f_{\\sigma,\\ell}|^2d\\nu=\\hbar\\kappa_+<\\infty$. The radial multiplier is the phase generator in [F3]; with $|\\mathbf k|$ in inverse-length units and $c=1$, this functional has energy units.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "Fix $0<\\theta_0<\\pi$ and $m\\ge2$. On the radial annulus $1/m\\le r\\le m$, the polar formula in [F4] and the chart formula in [F5] give\n$$\\nu(\\{1/m\\le r\\le m,\\ \\theta=\\theta_0\\})=\\frac12\\int_{1/m}^{m}r\\,dr\\int_0^{2\\pi}\\int_{\\{\\theta_0\\}}\\sin\\theta\\,d\\theta\\,d\\varphi=0,$$\nbecause the singleton $\\{\\theta_0\\}$ has one-dimensional Lebesgue measure zero; [F6] justifies the iterated integral on this finite-measure annulus. The whole exact cone is the countable union of these null annular intersections, hence is $\\nu$-null. Also, for any fixed $r_0>0$, the polar formula gives $\\nu(\\{|\\mathbf k|=r_0\\})=\\frac12\\int_{\\{r_0\\}}r\\,dr\\int_{S^2}d\\Omega=0$, since the radial singleton has one-dimensional Lebesgue measure zero and the sphere measure is finite. Thus an exact monochromatic shell is null as well. An $L^2(M,\\nu;\\mathbb C^3)$ vector supported on either null set is zero almost everywhere and cannot be normalized. The construction uses genuine finite radial and angular widths rather than a distributional delta-cone mode.",
+          "inputs": [
+            "A1",
+            "F4",
+            "F5",
+            "F6",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The same supplier gives $J_zf_{\\sigma,\\ell}=(\\ell+\\sigma)\\hbar f_{\\sigma,\\ell}$ and helicity $\\sigma$. Substitution into [F2] yields the stated exact projected-spin expectation and, by the orbital identity there, $\\langle L'_z\\rangle=(\\ell+\\sigma)\\hbar-\\langle S'_z\\rangle$. The normalization and finite radial support are as established in step 1.1.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "The angular support has $0\\le\\theta\\le\\theta_2$. The cosine monotonicity and quadratic bound proved in the preceding proposition give $|\\langle S'_z\\rangle-\\hbar\\sigma|\\le\\hbar(1-\\cos\\theta_2)\\le\\hbar\\theta_2^2/2$. The packet is normalized, so this is a model expectation bound, not an empirical statement.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "step 2.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The local packet lemma chooses envelopes equal to one on subintervals and computes positive normalization (Statement; step 1.1)."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The packet has unit norm by its construction and the energy estimate uses that normalization (Statement; step 1.1)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The construction and spin formula hold for both helicity signs (Statement; steps 2.1, 3.1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "An exact angular cone and exact radial shell are proved null; the example instead has positive radial bandwidth and angular width (step 1.2)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The finite packet is compactly supported strictly inside the chosen radial and angular intervals (step 1.1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Choice assumptions are explicit and the packet envelopes are constructed in the preceding lemma (A1; step 2.1)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example contains no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "same-owner-qft-green-maps scoped boundary review",
+            "reason": "The normalized packet has genuine radial and angular width, finite energy, and a controlled projected-spin expectation. Exact cones and shells are null for the weighted measure and cannot carry a nonzero Hilbert vector; no equivalence with a measured orbital label is asserted.",
+            "item_sha256": "102d03a26139826b69bd178dc64a014ef05fedb23f065dd8ac5894a1cce75dff",
+            "row_sha256": "669e6646c72ffa3ee12ea5a61d74493a12ad7eacf10059443fb5ab1cf7d346f7"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example contains no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "same-owner-qft-green-maps scoped boundary review",
+            "reason": "The normalized packet has genuine radial and angular width, finite energy, and a controlled projected-spin expectation. Exact cones and shells are null for the weighted measure and cannot carry a nonzero Hilbert vector; no equivalence with a measured orbital label is asserted.",
+            "item_sha256": "102d03a26139826b69bd178dc64a014ef05fedb23f065dd8ac5894a1cce75dff",
+            "row_sha256": "5954e29746bd36f2147ac660de461c43a668001da4872533250f4824717c953a"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-73 author",
+        "notes": "The energy is the explicitly defined c=1 radial functional. Ideal delta-cone or delta-radius distributions are not L2 vectors; no detector result or classical Poynting/OAM identification is claimed."
+      }
+    }
+  }
+}

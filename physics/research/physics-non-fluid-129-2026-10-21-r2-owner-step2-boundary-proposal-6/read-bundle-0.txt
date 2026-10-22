@@ -1,0 +1,677 @@
+ITEM 0 def-emx-surface-divergence
+---
+id: def-emx-surface-divergence
+kind: definition
+title: "Weak surface divergence of a tangential field"
+status: draft
+origin: pipeline
+domain: mathematics
+dependency_level: 0
+deps:
+  - def-countable-choice
+  - def-em-surface-distribution
+  - def-euclidean-inner-product
+dependency_roles:
+  def-countable-choice: mathematical-premise
+  def-em-surface-distribution: mathematical-premise
+  def-euclidean-inner-product: mathematical-premise
+verification:
+  precheck: n/a
+provenance:
+  statement: ai-altered
+  proof: not-applicable
+sources:
+  references:
+    - title: "Long Chen, Variational Formulation of Maxwell Equations, University of California, Irvine lecture note, updated May 12 2024, 8 pp."
+      url: "https://www.math.uci.edu/~chenlong/226/Maxwellweakform.pdf"
+      locator: "Section 3.2, PDF p. 5, introduces the intrinsic surface divergence/curl on tangent fields and relates them to tangential traces. The weak functional below is stated independently and explicitly."
+---
+
+## Definition
+
+Assume the surface-measure convention with $\mathrm{AC}_\omega$ of the mathematical definition of the stationary surface distribution. Let $S\subset\mathbb R^3$ be a compact embedded $C^2$ hypersurface without manifold boundary, with a chosen continuous unit normal $n$ and its finite surface measure $dS$. At $x\in S$, define the tangent plane
+
+$$T_xS:=\{v\in\mathbb R^3:v\cdot n(x)=0\}.$$
+
+For $\phi\in C^1(S)$, meaning that its composition with each local $C^2$ surface chart is $C^1$, its surface gradient $\nabla_S\phi(x)\in T_xS$ is the unique vector satisfying
+
+$$v\cdot\nabla_S\phi(x)=d\phi_x(v)\qquad\text{for every }v\in T_xS,$$
+
+where $d\phi_x$ is the derivative of $\phi$ in tangent directions. For a measurable tangential field $K:S\to\mathbb R^3$ with $\int_S|K|\,dS<\infty$, define its **weak surface divergence** $\operatorname{Div}_S K$ as the linear functional on $C^1(S)$
+
+$$\langle\operatorname{Div}_S K,\phi\rangle:=-\int_S K\cdot\nabla_S\phi\,dS.$$
+
+This functional is well-defined because $S$ is compact, $\nabla_S\phi$ is continuous and bounded, and $K$ is integrable. If it has a continuous density $g:S\to\mathbb R$, meaning
+
+$$\langle\operatorname{Div}_S K,\phi\rangle=\int_S g\phi\,dS\qquad\text{for every }\phi\in C^1(S),$$
+
+then $g$ is called a continuous representative of the weak surface divergence. The definition itself does not assert that such a representative exists or is unique; a result using pointwise $\operatorname{div}_S K$ must establish both.
+
+## Definition references
+
+[[def-countable-choice]]
+
+[[def-em-surface-distribution]]
+
+[[def-euclidean-inner-product]]
+
+OLD BOUNDARIES
+[{"case": "empty", "status": "checked", "evidence": "Definition also applies to an empty surface: the integral functional is zero on the unique scalar test function and the only possible continuous density is the empty function. No nonempty-surface hypothesis is stated."}, {"case": "zero", "status": "checked", "evidence": "Definition: K=0 gives minus the integral of zero against every tangential gradient, hence the zero functional; the continuous density g=0 satisfies the displayed pairing condition."}, {"case": "one", "status": "not_applicable", "reason": "No rank, one-element carrier, or one-step parameter occurs in this statement."}, {"case": "degenerate", "status": "not_applicable", "reason": "The definition assumes a regular embedded surface with its stated finite surface measure."}, {"case": "endpoints", "status": "not_applicable", "reason": "There is no time interval or endpoint parameter in this definition."}, {"case": "nonempty-choice", "status": "not_applicable", "reason": "No element or representative is selected by the definition."}, {"case": "iff-forward", "status": "not_applicable", "reason": "The statement is not an equivalence."}, {"case": "iff-reverse", "status": "not_applicable", "reason": "The statement is not an equivalence."}]
+FLAGS
+{"reference": [], "audit": []}
+ITEM 1 pthm-emx-lorentz-susceptibility
+---
+id: pthm-emx-lorentz-susceptibility
+kind: physics-theorem
+title: "Analytic susceptibility and dispersion restrictions"
+status: draft
+origin: pipeline
+domain: physics
+dependency_level: 1
+proof_strategy: direct
+deps:
+  - post-emx-lorentz-medium
+  - pthm-em-causal-dispersive-response
+  - def-countable-choice
+  - def-dependent-choice
+  - def-complex-exponential
+  - thm-algebra-of-derivatives
+  - thm-derivative-of-exponential
+  - thm-complex-exponential-is-entire-with-derivative-itself
+  - thm-sine-and-cosine-derivatives
+  - thm-of-square-roots
+  - thm-integration-by-parts
+  - thm-differentiation-under-the-integral-sign
+  - thm-exponential-beats-every-polynomial
+dependency_roles:
+  post-emx-lorentz-medium: physical-assumption
+  pthm-em-causal-dispersive-response: physical-result
+  def-countable-choice: mathematical-premise
+  def-dependent-choice: mathematical-premise
+  def-complex-exponential: mathematical-premise
+  thm-algebra-of-derivatives: mathematical-premise
+  thm-derivative-of-exponential: mathematical-premise
+  thm-complex-exponential-is-entire-with-derivative-itself: mathematical-premise
+  thm-sine-and-cosine-derivatives: mathematical-premise
+  thm-of-square-roots: mathematical-premise
+  thm-integration-by-parts: mathematical-premise
+  thm-differentiation-under-the-integral-sign: mathematical-premise
+  thm-exponential-beats-every-polynomial: mathematical-premise
+verification:
+  precheck: pass
+provenance:
+  statement: ai-altered
+  proof: ai-altered
+physical_scope: "Conditional frequency response of the finite homogeneous Lorentz oscillator model in its material rest frame. Upper-half-plane analyticity holds for all declared nonnegative damping rates; the unsubtracted Hilbert-transform relation is asserted only for strictly positive damping, under the exact integrable causal-response hypotheses. Undamped real poles have no pointwise response or pointwise dispersion formula. No universal group-velocity bound or empirical material claim is asserted."
+sources:
+  references:
+    - title: "David Tong, Electromagnetism, University of Cambridge Part II Mathematical Tripos lecture notes (236-page complete text)"
+      url: "https://davidtong.org/pdfs/teaching/electromagnetism/electro.pdf"
+      locator: "§7.5.1, printed pp. 193–194, equations (7.29)–(7.30): the forced damped oscillator and complex frequency-dependent polarizability; §7.5.4, pp. 200–204: causal response and the additional high-frequency decay needed for the unsubtracted Kramers–Kronig relation."
+    - title: "MIT OpenCourseWare 6.007, Electromagnetic Energy: From Motors to Lasers, Lecture 22: Interaction of atoms and EM waves (Lorentz oscillator)"
+      url: "https://ocw.mit.edu/courses/6-007-electromagnetic-energy-from-motors-to-lasers-spring-2011/6434fa7aae0266ed6d40109d70c724f9_MIT6_007S11_lec22.pdf"
+      locator: "Slides 9–15 (PDF pp. 9–15): damped oscillator equation, harmonic response and the Lorentz-model dielectric function. The local theorem separately proves analyticity, passivity and the conditional Hilbert relation."
+    - title: "Niklas Beisert, Elektrodynamik, ETH Zurich 2024 FS complete lecture script"
+      url: "https://people.phys.ethz.ch/~nbeisert/lectures/ED-24FS-Skript.pdf"
+      locator: "§12.1, printed p. 12.2 (PDF p. 143), equations (12.9)–(12.10): frequency-dependent permittivity and the wavenumber-frequency relation; the separate general group-velocity discussion is §10.10 (PDF pp. 117–118), and its bound is not asserted here."
+---
+
+## Statement
+
+Use the finite Lorentz oscillator closure in its homogeneous material rest frame. Let $N\ge1$ be finite, with $\varepsilon_\infty>0$ in F m$^{-1}$, $a_\ell>0$ in F m$^{-1}$ s$^{-2}$, $\omega_\ell>0$ in s$^{-1}$ and $\gamma_\ell\ge0$ in s$^{-1}$ as in that model. Assume Countable Choice; for the strictly damped integrable-kernel dispersion clause also assume Dependent Choice, as required by the causal-response supplier. For the time convention $e^{-i\omega t}$, let $z$ denote complex angular frequency in s$^{-1}$ and define the absolute oscillator susceptibility, with units F m$^{-1}$, by
+
+$$\chi_{\mathrm{abs}}(z):=\sum_{\ell=1}^{N}\frac{a_\ell}{\omega_\ell^2-z^2-i\gamma_\ell z},\qquad \varepsilon(z):=\varepsilon_\infty+\chi_{\mathrm{abs}}(z).$$
+
+The dimensionless transfer function in the causal-response theorem is $\chi_{\mathrm{norm}}(z):=\chi_{\mathrm{abs}}(z)/\varepsilon_0$, so that it has the theorem's convention $P=\varepsilon_0\chi_{\mathrm{norm}}E$ for harmonic histories.
+
+The function $\chi_{\mathrm{abs}}$ is analytic for $\operatorname{Im}z>0$ for every $\gamma_\ell\ge0$. For real angular frequency $\omega>0$ in s$^{-1}$ away from undamped poles, $\chi_{\mathrm{abs}}(\omega)$ is the scalar multiplier for a harmonic particular solution: if $E(t)=\operatorname{Re}(e e^{-i\omega t})$ and $P_\ell(t)=\operatorname{Re}(p_\ell e^{-i\omega t})$, then $p_\ell=a_\ell e/(\omega_\ell^2-\omega^2-i\gamma_\ell\omega)$ and $p=\sum_\ell p_\ell=\chi_{\mathrm{abs}}(\omega)e$. This coefficient calculation is not by itself a zero-past response to an eternal harmonic input. In the undamped branch the retarded onset solution is specified by initial data and the real poles are excluded; when every $\gamma_\ell>0$, the separately stated integrable retarded kernels realize the same harmonic multiplier.
+
+$$\operatorname{Im}\varepsilon(\omega)=\sum_{\ell=1}^{N}\frac{a_\ell\gamma_\ell\omega}{(\omega_\ell^2-\omega^2)^2+\gamma_\ell^2\omega^2}\ge0.$$
+
+When every $\gamma_\ell>0$, each causal impulse-response kernel is exponentially decaying, satisfies the integrable-kernel hypotheses of the causal-response theorem, and $\varepsilon-\varepsilon_\infty$ obeys its unsubtracted Hilbert-transform relations. When $\gamma_\ell=0$, that oscillator's poles lie at $z=\pm\omega_\ell$ on the real boundary; the transfer function has no pointwise value at those poles, and no pointwise dispersion formula there is asserted. The theorem makes no universal group-velocity bound.
+
+## Statement references
+
+[[post-emx-lorentz-medium]]
+
+[[pthm-em-causal-dispersive-response]]
+
+[[def-countable-choice]]
+
+[[def-dependent-choice]]
+
+## Facts & Assumptions
+
+**Given:** The finite homogeneous Lorentz oscillator model with real parameters $\varepsilon_\infty,a_\ell,\omega_\ell>0$, $\gamma_\ell\ge0$, real electric fields, and the temporal Fourier convention $e^{-i\omega t}$. For the Hilbert-transform conclusion, also assume the Countable and Dependent Choice hypotheses carried by the integrable branch of the causal-response supplier.
+
+[A1] At each material point, the polarization solves $P_{\ell,tt}+\gamma_\ell P_{\ell,t}+\omega_\ell^2P_\ell=a_\ell E$ with initial oscillator state specified; the medium is homogeneous and spatially local, and the time-domain model is adopted, not derived ([[post-emx-lorentz-medium]]).
+
+[L1] For the declared memory branch, an integrable real causal kernel $K$ gives normalized response $P(t)=\varepsilon_0\int_0^\infty K(s)E(t-s)\,ds$; when $K$ is locally absolutely continuous with $K,K'\in L^1$ and $sK\in L^1$, the transfer $\chi(z)=\int_0^\infty K(s)e^{izs}ds$ is holomorphic on $\operatorname{Im}z>0$, has the stated real-boundary regularity, and obeys the unsubtracted principal-value dispersion relations ([[pthm-em-causal-dispersive-response]], clauses (a)–(b)).
+
+[F1] Countable Choice is assumed for the smooth comparison route, and Dependent Choice is assumed in the integrable-kernel branch used for the causal convolution and dispersion result ([[def-countable-choice]], [[def-dependent-choice]], [[pthm-em-causal-dispersive-response]]).
+
+[F2] The real exponential has derivative $\exp'=\exp$, the complex exponential is defined by its series and is entire with the same derivative, sine and cosine have their usual derivatives, products satisfy the product rule, and integration by parts applies componentwise on finite intervals to the oscillator kernels and $C^2$ histories used below ([[def-complex-exponential]], [[thm-derivative-of-exponential]], [[thm-complex-exponential-is-entire-with-derivative-itself]], [[thm-sine-and-cosine-derivatives]], [[thm-algebra-of-derivatives]], [[thm-integration-by-parts]]).
+
+[F3] Every nonnegative real has its unique nonnegative square root; for $x\to+\infty$ and $\lambda>0$, $x/\exp(\lambda x)\to0$ ([[thm-of-square-roots]], [[thm-exponential-beats-every-polynomial]]).
+
+[F4] If an integrand is differentiable in a parameter and its derivative has a common integrable majorant, differentiation passes through the integral ([[thm-differentiation-under-the-integral-sign]]).
+
+## Proof
+**Proof technique:** solve the harmonic oscillator algebraically, locate its characteristic roots, construct its retarded Green kernel under positive damping, and apply the exact integrable causal-response theorem only in that branch.
+
+1.1 For a real harmonic history $E(t)=\operatorname{Re}(e e^{-i\omega t})$, complexify the real linear ODE [A1] by extending its real coefficients complex-linearly and use the ansatz $\widetilde P_\ell(t)=p_\ell e^{-i\omega t}$. By the derivative of the complex exponential and the chain rule, one and two time derivatives multiply the amplitude by $-i\omega$ and $-\omega^2$, respectively, so the complex amplitude equation is $(\omega_\ell^2-\omega^2-i\gamma_\ell\omega)p_\ell=a_\ell e$. Its real part is a real harmonic particular solution of [A1]. Wherever this scalar denominator is nonzero, the amplitude is uniquely $p_\ell=\frac{a_\ell}{\omega_\ell^2-\omega^2-i\gamma_\ell\omega}e$, including when $e=0$. Summing gives the stated harmonic particular-solution multiplier without dividing by the vector amplitude. This does not identify the undamped coefficient with a retarded zero-past response. [given, A1, F2, algebra]
+
+1.2 The roots of $\omega_\ell^2-z^2-i\gamma_\ell z=0$ are $z=-i\gamma_\ell/2\pm\sqrt{\omega_\ell^2-\gamma_\ell^2/4}$. If $0\le\gamma_\ell<2\omega_\ell$, the square root is real and both roots have imaginary part $-\gamma_\ell/2\le0$; at $\gamma_\ell=0$ they are the real values $\pm\omega_\ell$. If $\gamma_\ell=2\omega_\ell$, the repeated root is $-i\omega_\ell$. If $\gamma_\ell>2\omega_\ell$, write $\beta=\sqrt{\gamma_\ell^2/4-\omega_\ell^2}$; then $0<\beta<\gamma_\ell/2$ and the roots $-i(\gamma_\ell/2\mp\beta)$ both have strictly negative imaginary part. Hence no denominator vanishes in the open upper half-plane, proving analyticity there; the undamped real poles are exactly the stated boundary exceptions. [given, A1, F3, algebra]
+
+1.3 Fix one oscillator, denote its parameters by $a,\omega_0,\gamma$, assume $\gamma>0$, and set $g(t)=0$ for $t<0$. For $t\ge0$, define the retarded kernel by $g(t)=e^{-\gamma t/2}\sin(\alpha t)/\alpha$ if $0<\gamma<2\omega_0$, $g(t)=te^{-\omega_0t}$ if $\gamma=2\omega_0$, and $g(t)=\bigl(e^{-(\gamma/2-\beta)t}-e^{-(\gamma/2+\beta)t}\bigr)/(2\beta)$ if $\gamma>2\omega_0$, where $\alpha=\sqrt{\omega_0^2-\gamma^2/4}$ and $\beta=\sqrt{\gamma^2/4-\omega_0^2}$ in their respective cases. Differentiating with [F2] gives $g(0)=0$, $g'(0+)=1$ and $g''+\gamma g'+\omega_0^2g=0$ for $t>0$. The underdamped $g,g'$ decay at rate $\gamma/2$; the critical formula and derivative are bounded by $Ce^{-\omega_0t/2}$; the overdamped formula and derivative are bounded by $Ce^{-(\gamma/2-\beta)t}$, with $\gamma/2-\beta>0$. Hence $g,g'\in L^1(0,\infty)$. For each positive decay rate $\lambda$, $te^{-\lambda t}$ is integrable by integration by parts on $[0,T]$ and [F3] as $T\to\infty$, so also $tg\in L^1(0,\infty)$. [given, A1, F2, F3, algebra]
+
+2.1 For each real vector history $E\in C^2(\mathbb R;\mathbb R^3)$ with $E,E',E''$ bounded, set $P(t)=a\int_0^\infty g(s)E(t-s)\,ds$. Apply [F4] componentwise: the derivative integrands are measurable and bounded, uniformly in $t$, by $\|E'\|_\infty|g|$ and $\|E''\|_\infty|g|$, which are integrable by step 1.3. Thus $P_{tt}+\gamma P_t+\omega_0^2P=a\int_0^\infty[g(s)E''(t-s)+\gamma g(s)E'(t-s)+\omega_0^2g(s)E(t-s)]\,ds$. [F4, step 1.3, algebra]
+
+2.2 For real $\omega>0$, put $A_\ell=\omega_\ell^2-\omega^2$ and $B_\ell=\gamma_\ell\omega$. Away from an undamped pole, $A_\ell-iB_\ell\ne0$ and $\frac{a_\ell}{A_\ell-iB_\ell}=\frac{a_\ell(A_\ell+iB_\ell)}{A_\ell^2+B_\ell^2}$, so $\operatorname{Im}(a_\ell/(A_\ell-iB_\ell))=a_\ell\gamma_\ell\omega/(A_\ell^2+\gamma_\ell^2\omega^2)\ge0$. Since $\varepsilon_\infty$ is real, summing these expressions proves the displayed nonnegative imaginary part of $\varepsilon$. At $\gamma_\ell=0$ and $\omega=\omega_\ell$ the denominator vanishes, so this pointwise computation and pointwise formula do not apply. [given, A1, step 1.1, algebra]
+
+3.1 Integrating by parts twice on $[0,T]$ and taking $T\to\infty$ is valid because $g,g'$ decay by step 1.3, $g''=-\gamma g'-\omega_0^2g\in L^1$, and $E,E'$ are bounded. The boundary values $g(0)=0$, $g'(0+)=1$ give $\int_0^\infty g(s)E''(t-s)\,ds=E(t)+\int_0^\infty g''(s)E(t-s)\,ds$ and $\int_0^\infty g(s)E'(t-s)\,ds=\int_0^\infty g'(s)E(t-s)\,ds$. Substitution in step 2.1 cancels the integral by $g''+\gamma g'+\omega_0^2g=0$, leaving $P_{tt}+\gamma P_t+\omega_0^2P=aE$. [step 1.3, step 2.1, F2, algebra]
+
+4.1 The normalized kernel $K=(a/\varepsilon_0)g$ is real, causal and locally absolutely continuous; step 1.3 gives $K,K'\in L^1$ and $sK\in L^1$. For $\operatorname{Im}z>0$, exponential decay makes the boundary terms vanish in integration by parts, so $\int_0^\infty g'(s)e^{izs}ds=-izG(z)$ and $\int_0^\infty g''(s)e^{izs}ds=-1-z^2G(z)$, where $G(z)=\int_0^\infty g(s)e^{izs}ds$. The Green equation gives $(\omega_0^2-z^2-i\gamma z)G(z)=1$, hence the normalized transfer is $(a/\varepsilon_0)/(\omega_0^2-z^2-i\gamma z)$. Summing the finite kernels gives $\chi_{\mathrm{norm}}=\chi_{\mathrm{abs}}/\varepsilon_0$; with [F1], this kernel satisfies every hypothesis of [L1], which yields causality, upper-half-plane analyticity and the unsubtracted Hilbert relations for the strictly damped branch. Multiplication by $\varepsilon_0$ gives the same relations for $\varepsilon-\varepsilon_\infty=\chi_{\mathrm{abs}}$. [A1, step 1.3, step 3.1, F1, L1, algebra]
+
+5.1 Steps 1.1–4.1 establish the rational susceptibility, its upper-half-plane analyticity, the nonnegative loss for every real positive frequency where the pointwise response exists, and the unsubtracted dispersion relation exactly in the strictly damped integrable-kernel branch. The undamped poles and their pointwise exclusions remain as stated; no assertion about a universal group-velocity bound follows from these calculations. [step 1.1, step 1.2, step 2.2, step 4.1] ∎
+
+OLD BOUNDARIES
+[{"case": "empty", "status": "checked", "evidence": "Statement assumes finite N>=1. Thus the susceptibility and loss sums in steps 1.1 and 2.2 have a nonempty oscillator index set; step 4.1 sums precisely those finite kernels."}, {"case": "zero", "status": "checked", "evidence": "For e=0 the harmonic oscillator response and pointwise work vanish; the transfer and pole statements are independent of amplitude."}, {"case": "one", "status": "checked", "evidence": "For N=1 the finite sum in step 1.1 is its single rational term, and step 2.2 gives its loss formula."}, {"case": "degenerate", "status": "checked", "evidence": "All a_l and omega_l are positive. Gamma_l=0 is included, with its real poles explicitly excluded in steps 1.2 and 2.2; positive damping includes under-, critical- and over-damped cases in step 1.3."}, {"case": "endpoints", "status": "checked", "evidence": "The Statement restricts pointwise loss to omega>0 and excludes undamped poles; step 2.2 verifies the pole exception and step 4.1 limits the dispersion conclusion."}, {"case": "nonempty-choice", "status": "checked", "evidence": "The Statement declares Countable Choice and Dependent Choice for the strictly damped integrable-kernel dispersion use; step 4.1 invokes the supplier only under those assumptions."}, {"case": "iff-forward", "status": "not_applicable", "reason": "The statement is not an equivalence."}, {"case": "iff-reverse", "status": "not_applicable", "reason": "The statement is not an equivalence."}]
+FLAGS
+{"reference": [{"id": "pthm-emx-lorentz-susceptibility", "batch": 5, "case": "empty", "evidence": "Statement assumes finite N>=1. Thus the susceptibility and loss sums in steps 1.1 and 2.2 have a nonempty oscillator index set; step 4.1 sums precisely those finite kernels.", "unresolved_step_references": ["1.1"]}, {"id": "pthm-emx-lorentz-susceptibility", "batch": 5, "case": "one", "evidence": "For N=1 the finite sum in step 1.1 is its single rational term, and step 2.2 gives its loss formula.", "unresolved_step_references": ["1.1"]}], "audit": []}
+ITEM 2 pthm-emx-retarded-history-localization
+---
+id: pthm-emx-retarded-history-localization
+kind: physics-theorem
+title: "Retarded Maxwell fields for spatially compact smooth histories"
+domain: physics
+status: draft
+origin: pipeline
+dependency_level: 0
+deps:
+  - def-countable-choice
+  - def-ck-euclidean-maps-and-diffeomorphisms
+  - cor-c-one-change-of-variables-for-l-one-functions
+  - def-em-fields
+  - def-em-lab-geometry
+  - def-em-potential-gauge-and-field-conventions
+  - def-em-si-conventions
+  - def-em-sources
+  - lem-em-retarded-wave-kernel
+  - lem-test-function-cutoffs-and-euclidean-localization
+  - post-em-radiation-selection
+  - post-em-vacuum-maxwell
+  - prop-order-and-scalar-rules-for-the-nonnegative-integral
+  - pthm-em-lorenz-gauge-wave-form
+  - thm-ck-euclidean-maps-closed-under-algebra-and-composition
+  - thm-heine-borel-rn
+  - thm-dominated-convergence
+  - thm-polar-coordinates-formula-for-lebesgue-measure
+  - def-polar-surface-measure-on-the-unit-sphere
+  - cor-mean-value-theorem
+dependency_roles:
+  def-countable-choice: mathematical-premise
+  def-ck-euclidean-maps-and-diffeomorphisms: mathematical-premise
+  cor-c-one-change-of-variables-for-l-one-functions: mathematical-premise
+  def-em-fields: formulation-prerequisite
+  def-em-lab-geometry: formulation-prerequisite
+  def-em-potential-gauge-and-field-conventions: mathematical-premise
+  def-em-si-conventions: formulation-prerequisite
+  def-em-sources: formulation-prerequisite
+  lem-em-retarded-wave-kernel: mathematical-premise
+  lem-test-function-cutoffs-and-euclidean-localization: mathematical-premise
+  post-em-radiation-selection: physical-assumption
+  post-em-vacuum-maxwell: physical-assumption
+  prop-order-and-scalar-rules-for-the-nonnegative-integral: mathematical-premise
+  pthm-em-lorenz-gauge-wave-form: physical-result
+  thm-ck-euclidean-maps-closed-under-algebra-and-composition: mathematical-premise
+  thm-heine-borel-rn: mathematical-premise
+  thm-dominated-convergence: mathematical-premise
+  thm-polar-coordinates-formula-for-lebesgue-measure: mathematical-premise
+  def-polar-surface-measure-on-the-unit-sphere: mathematical-premise
+  cor-mean-value-theorem: mathematical-premise
+proof_strategy: direct
+provenance:
+  statement: ai-altered
+  proof: ai-altered
+physical_scope: "The smooth retarded solution branch of classical vacuum electromagnetism for conserved volume sources supported in one fixed spatial ball at every time, including histories that are not compactly supported in time. The result establishes local finiteness, smoothness, the sourced wave equations, Lorenz gauge and the smooth Maxwell system for the selected retarded potentials. Point, sheet and other singular sources, self-force, radiation reaction, finite-energy claims and empirical claims are excluded."
+sources:
+  references:
+    - title: "Niklas Beisert, Elektrodynamik, Vorlesungsskript, ETH Zürich 2024 FS, complete 176-page course script"
+      url: "https://people.phys.ethz.ch/~nbeisert/lectures/ED-24FS-Skript.pdf"
+      locator: "§11.2, printed pp. 11.4–11.7 (PDF pp. 124–127): retarded and advanced Green kernels, the sourced wave equations and the retarded-potential construction; the source-history localization used here is proved independently."
+    - title: "Richard Fitzpatrick, Classical Electromagnetism: An intermediate level course, University of Texas at Austin, complete author-hosted HTML lecture notes"
+      url: "https://farside.ph.utexas.edu/teaching/em/lectures/node50.html"
+      locator: "Chapter 4, node 50, “Retarded potentials”: the retarded Green-function construction for scalar and vector potentials and its retardation convention; the arbitrary-time-history extension is proved independently."
+---
+
+## Statement
+
+Assume Countable Choice. Let $a,c,\mu_0>0$, let $\varepsilon_0=(\mu_0c^2)^{-1}$, and let $\rho:\mathbb R^3\times\mathbb R\to\mathbb R$ and $J:\mathbb R^3\times\mathbb R\to\mathbb R^3$ be jointly $C^\infty$. Suppose $\rho(y,t)=J(y,t)=0$ whenever $|y|>a$ and suppose the continuity equation $\partial_t\rho+\operatorname{div}_yJ=0$ holds everywhere.
+
+Adopt the smooth vacuum Maxwell equations and the retarded, no-free-addition selection as the physical model assumptions. In the SI laboratory convention, define
+
+$$\varphi(x,t):=\frac{\mu_0c^2}{4\pi}\int_{\mathbb R^3}\frac{\rho(y,t-|x-y|/c)}{|x-y|}\,dy,\qquad A(x,t):=\frac{\mu_0}{4\pi}\int_{\mathbb R^3}\frac{J(y,t-|x-y|/c)}{|x-y|}\,dy.$$
+
+The integrals converge absolutely at every $(x,t)$. The resulting potentials are jointly $C^\infty$ and satisfy $W\varphi=\rho/\varepsilon_0$, $WA=\mu_0J$, and $\operatorname{div}A+c^{-2}\partial_t\varphi=0$ on $\mathbb R^3\times\mathbb R$, where $W=c^{-2}\partial_t^2-\Delta$. Consequently $E=-\nabla\varphi-\partial_tA$ and $B=\operatorname{curl}A$ are jointly smooth and satisfy the smooth vacuum Maxwell equations for $(\rho,J)$ everywhere. This is the selected retarded solution, with no independent homogeneous field added. No compact support in time is assumed.
+
+## Statement references
+
+[[def-em-lab-geometry]]
+
+[[def-em-si-conventions]]
+
+[[def-em-sources]]
+
+[[def-em-fields]]
+
+[[def-em-potential-gauge-and-field-conventions]]
+
+[[post-em-vacuum-maxwell]]
+
+[[post-em-radiation-selection]]
+
+[[lem-em-retarded-wave-kernel]]
+
+[[pthm-em-lorenz-gauge-wave-form]]
+
+## Facts & Assumptions
+
+**Given:** Countable Choice; constants $a,c,\mu_0>0$ with $\varepsilon_0=(\mu_0c^2)^{-1}$; jointly smooth $\rho,J$ supported in $\overline B_a(0)$ in space at every time and satisfying $\partial_t\rho+\operatorname{div}_yJ=0$; and the retarded-potential formulas in the Statement.
+
+[A1] Countable Choice is available for the polar integral, Lebesgue change of variables and retarded-kernel suppliers. ([[def-countable-choice]])
+
+[F1] The source pair consists of smooth volume density and current maps of the framework; $C^\infty$ means that every iterated coordinate partial derivative exists and is continuous, and finite products of smooth maps are smooth. The source definition does not itself impose conservation. Here conservation and fixed-ball support are explicit hypotheses. ([[def-em-sources]], [[def-ck-euclidean-maps-and-diffeomorphisms]], [[thm-ck-euclidean-maps-closed-under-algebra-and-composition]])
+
+[F2] For every $h\in C_c^\infty(\mathbb R^3\times\mathbb R)$, $K*h(x,t):=\int h(y,t-|x-y|/c)/(4\pi|x-y|)\,dy$ is absolutely convergent, is jointly $C^\infty$, and satisfies $W(K*h)=h$ pointwise, with $W=c^{-2}\partial_t^2-\Delta$. ([[lem-em-retarded-wave-kernel]] (b))
+
+[F3] For a compact subset $C$ of an open set $O\subseteq\mathbb R$, there is $\chi\in C_c^\infty(O)$ with $0\le\chi\le1$ and $\chi=1$ on a neighborhood of $C$. Closed bounded Euclidean boxes are compact. ([[lem-test-function-cutoffs-and-euclidean-localization]], [[thm-heine-borel-rn]])
+
+[F4] Translation is a $C^1$ change of variables with unit Jacobian; the mean value theorem bounds each scalar component's difference quotient by a derivative supremum. Dominated convergence applies when the difference quotients converge pointwise and are bounded by one integrable function. ([[cor-c-one-change-of-variables-for-l-one-functions]], [[cor-mean-value-theorem]], [[thm-dominated-convergence]])
+
+[F5] The integral of $|z|^{-1}$ over a bounded ball in $\mathbb R^3$ is finite: by polar coordinates it is $\sigma(S^2)\int_0^Rr\,dr$, with finite sphere measure. Nonnegative integrals are monotone and positively homogeneous. ([[thm-polar-coordinates-formula-for-lebesgue-measure]], [[def-polar-surface-measure-on-the-unit-sphere]], [[prop-order-and-scalar-rules-for-the-nonnegative-integral]])
+
+[F6] For a $C^2$ potential pair in Lorenz gauge, the decoupled equations $W\varphi=\rho/\varepsilon_0$ and $WA=\mu_0J$ imply the smooth sourced Maxwell system; the fields are $E=-\nabla\varphi-\partial_tA$ and $B=\operatorname{curl}A$. ([[pthm-em-lorenz-gauge-wave-form]] (c), [[def-em-potential-gauge-and-field-conventions]])
+
+[F7] The SI constants satisfy $\varepsilon_0=(\mu_0c^2)^{-1}$; the adopted physical solution is the retarded branch with no free addition. ([[def-em-si-conventions]], [[post-em-radiation-selection]] (b))
+
+## Proof
+
+**Proof technique:** localize each arbitrary history to the finite time interval sampled near an observation event, use the compactly supported retarded kernel theorem there, and derive the Lorenz condition from continuity.
+
+1.1 Fix $(x,t)$. The source integrands vanish off $\overline B_a$. On this compact ball the retarded time $t-|x-y|/c$ lies in the bounded interval $[t-(|x|+a)/c,t]$, so smoothness bounds both source functions there by a finite constant $M$. The triangle inequality and [F5] give $\int_{B_a}|h(y,t-|x-y|/c)|/|x-y|\,dy\le M\int_{B(x,|x|+a)}|x-y|^{-1}dy<\infty$ for $h=\rho$ and each component of $J$; the possible point $y=x$ is harmless because $|z|^{-1}$ is locally integrable in three dimensions. Thus both retarded integrals are absolutely convergent. [given, F1, F5, A1]
+
+2.1 Fix an event $(x_0,t_0)$ and choose a bounded open ball $O$ around it. Its closure is compact by [F3], as is the source ball $\overline B_a$. On $\overline O\times\overline B_a$, both observation times and all values $t-|x-y|/c$ lie in one bounded interval because $|x-y|\le|x|+a$; take a closed finite interval containing these times. By [F3] choose a smooth compactly supported time cutoff $\chi$ equal to one on a neighborhood of this interval. Then $h_\rho(y,s):=\chi(s)\rho(y,s)$ and $h_J(y,s):=\chi(s)J(y,s)$ belong to $C_c^\infty(\mathbb R^3\times\mathbb R)$ by [F1], since their supports are contained in $\overline B_a\times\operatorname{supp}\chi$. On $O$, every retarded source value and every observation-time value sees $\chi=1$, so the potentials in the Statement equal $\mu_0c^2 K*h_\rho$ and $\mu_0K*h_J$, and the localized sources equal $\rho$ and $J$. By [F2] these potentials are smooth on $O$ and satisfy $W\varphi=\mu_0c^2\rho=\rho/\varepsilon_0$ and $WA=\mu_0J$ there. Since $(x_0,t_0)$ was arbitrary, the potentials are smooth globally and the two wave equations hold everywhere. [step 1.1, F1, F2, F3, F7, A1]
+
+3.1 On a smaller neighborhood of the same event, change variables $z=x-y$ in the localized convolution: $K*h(x,t)=\int h(x-z,t-|z|/c)/(4\pi|z|)\,dz$. For a spatial difference quotient, the mean value theorem bounds the quotient of $h(x-z,t-|z|/c)$ by the supremum of $|\nabla_yh|$ on a common compact neighborhood, times $1/(4\pi|z|)$; for a time difference quotient the same bound uses the supremum of $|\partial_th|$. These bounds are integrable on a fixed ball by [F5]. The pointwise limits are the corresponding derivatives of $h$, so [F4] permits dominated convergence and yields $\partial_{x_i}(K*h)=K*(\partial_{y_i}h)$ and $\partial_t(K*h)=K*(\partial_th)$ on that neighborhood. For $h_J=\chi J$, $\operatorname{div}_y h_J=\chi\operatorname{div}_yJ$; for $h_\rho=\chi\rho$, $\partial_t h_\rho=\chi'\rho+\chi\partial_t\rho$. At every retarded argument sampled on the neighborhood, $\chi=1$ and $\chi'=0$ by the cutoff choice in step 2.1. Therefore $\displaystyle \operatorname{div}A+c^{-2}\partial_t\varphi=\mu_0 K*(\operatorname{div}_yJ+\partial_t\rho)=0$ there by the assumed continuity equation. The event was arbitrary, so the Lorenz condition holds everywhere. [step 2.1, F1, F2, F3, F4, F5, F7, A1]
+
+4.1 The pair is jointly smooth by step 2.1, satisfies the two wave equations there, and is in Lorenz gauge by step 3.1. Applying [F6] on $\mathbb R^3\times\mathbb R$ gives the two sourced Maxwell equations; the other two equations are the automatic identities of the potential representation included in [F6]. The selection postulate [F7] identifies this retarded solution with the model's physical branch and excludes an independent homogeneous addition. [step 2.1, step 3.1, F6, F7, A1] ∎
+
+OLD BOUNDARIES
+[{"case": "empty", "status": "checked", "evidence": "Steps 1.1–4.1 apply to zero source maps: retarded integrands and potentials vanish and the equations reduce to zero."}, {"case": "zero", "status": "checked", "evidence": "Steps 1.1–4.1 remain valid when rho and J are zero."}, {"case": "one", "status": "not_applicable", "reason": "No one-dimensional special case is asserted or used."}, {"case": "degenerate", "status": "not_applicable", "reason": "The source-support radius a, wave speed c and mu0 are strictly positive. Temporal localization is chosen separately near each observation event; the Statement contains no fixed compact interval K to degenerate."}, {"case": "endpoints", "status": "not_applicable", "reason": "No applicable boundary instance is present in the stated claim."}, {"case": "nonempty-choice", "status": "checked", "evidence": "Statement assumes Countable Choice; Fact A1 records its use by the integration suppliers."}, {"case": "iff-forward", "status": "not_applicable", "reason": "The item asserts and uses no biconditional or equivalence."}, {"case": "iff-reverse", "status": "not_applicable", "reason": "The item asserts and uses no biconditional or equivalence."}]
+FLAGS
+{"reference": [], "audit": []}
+ITEM 3 def-emx-angular-spectrum
+---
+id: def-emx-angular-spectrum
+kind: definition
+title: Forward angular-spectrum beam
+status: draft
+origin: pipeline
+domain: physics
+library: physics
+dependency_level: 1
+deps:
+  - cor-complex-exponential-cartesian-form-modulus-and-eulers-identity
+  - def-complex-conjugate-real-imaginary-part-and-modulus
+  - def-complex-exponential
+  - def-countable-choice
+  - def-em-lab-geometry
+  - def-em-complex-plane-wave
+  - def-em-si-conventions
+  - def-emx-transverse-fourier-field
+  - lem-emx-paraxial-phase-multiplier-bound
+  - lem-of-square-monotone
+  - post-em-scalar-aperture-model
+  - post-em-vacuum-maxwell
+  - thm-fourier-inversion-on-schwartz-space
+  - thm-plancherel
+  - thm-reals-cauchy-complete
+  - thm-of-square-roots
+dependency_roles:
+  cor-complex-exponential-cartesian-form-modulus-and-eulers-identity: mathematical-premise
+  def-complex-conjugate-real-imaginary-part-and-modulus: mathematical-premise
+  def-complex-exponential: mathematical-premise
+  def-countable-choice: mathematical-premise
+  def-em-lab-geometry: formulation-prerequisite
+  def-em-complex-plane-wave: formulation-prerequisite
+  def-em-si-conventions: formulation-prerequisite
+  def-emx-transverse-fourier-field: formulation-prerequisite
+  lem-emx-paraxial-phase-multiplier-bound: mathematical-premise
+  lem-of-square-monotone: mathematical-premise
+  post-em-scalar-aperture-model: formulation-prerequisite
+  post-em-vacuum-maxwell: physical-assumption
+  thm-fourier-inversion-on-schwartz-space: mathematical-premise
+  thm-plancherel: mathematical-premise
+  thm-reals-cauchy-complete: mathematical-premise
+  thm-of-square-roots: mathematical-premise
+justified_by: []
+proof_strategy: direct
+physical_scope: >-
+  Idealized classical scalar optics in a fixed inertial laboratory chart and SI units,
+  for square-integrable plane data whose two-dimensional spatial-frequency support
+  lies in a forward propagating cone strictly inside the vacuum light cone. The
+  compact-aperture postulate supplies scalar-optics context but does not imply that
+  every compact-aperture output belongs to this band-limited finite-energy class.
+  The scalar propagation operators are not asserted to be exact Maxwell fields;
+  exact vector plane-wave modes are treated separately. No empirical claim,
+  measurement, or quantization is made.
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+sources:
+  references:
+    - title: "Konijnenberg, Adam and Urbach, BSc Optics, §6.3 Angular Spectrum Method"
+      url: "https://phys.libretexts.org/Bookshelves/Optics/BSc_Optics_%28Konijnenberg_Adam_and_Urbach%29/06%3A_Scalar_diffraction_optics/6.04%3A_Angular_Spectrum_Method"
+      locator: "Complete §6.3: two-dimensional Fourier decomposition, positive square-root longitudinal wave number for forward propagation with $e^{-i\\omega t}$, and the propagating/evanescent split."
+    - title: "Niklas Beisert, Elektrodynamik, ETH Zürich 2024 FS lecture notes"
+      url: "https://people.phys.ethz.ch/~nbeisert/lectures/ED-24FS-Skript.pdf"
+      locator: "§11.1 'Fourier-Raum', equations (11.5)–(11.10), PDF pp. 121–122: source-free Maxwell Fourier modes, dispersion, transversality, and the electric/magnetic amplitude relation."
+    - title: "Alexander Cerjan and Charles Cerjan, Orbital angular momentum of Laguerre–Gaussian beams beyond the paraxial approximation, JOSA A 28 (2011)"
+      url: "https://alexcerjan.com/documents/papers/cerjan_JOSA_2011.pdf"
+      locator: "§2, equations (2), (8), PDF pp. 2253–2254: angular-spectrum data and the positive propagation branch; no arbitrary compact-aperture data are inferred."
+verification:
+  precheck: pending
+---
+
+## Definition
+
+Fix a named positively oriented inertial laboratory chart with coordinates
+$(x,y,z,t)$, spatial domain $\mathbb R^3$, and time domain $\mathbb R$. Adopt SI
+units, a vacuum speed $c>0$, an angular frequency $\omega>0$, and
+$k_0:=\omega/c$ (so $[k_0]=\mathrm{m}^{-1}$). Let
+$\mathbf x_\perp:=(x,y)\in\mathbb R^2$. Use the unitary two-dimensional
+Fourier transform $\mathcal F_2$ whose Schwartz-space convention is
+$$\widehat f(\boldsymbol\xi)=\int_{\mathbb R^2}f(\mathbf x_\perp) e^{-2\pi i\mathbf x_\perp\cdot\boldsymbol\xi}\,d^2\mathbf x_\perp,$$
+and whose inverse is its unitary $L^2$ extension. The variable
+$\boldsymbol\xi$ is in cycles per metre; its associated angular spatial
+wavevector is $\mathbf q:=2\pi\boldsymbol\xi$ in $\mathrm{m}^{-1}$, with
+$|\mathbf q|^2:=q_x^2+q_y^2$.
+
+Choose $0<\delta<1$ and $u_0\in L^2(\mathbb R^2;\mathbb C)$ with
+$\mathcal F_2u_0$ supported, up to null sets, in
+$D_\delta:=\{\boldsymbol\xi:|2\pi\boldsymbol\xi|\le\delta k_0\}$.
+For $\boldsymbol\xi\in D_\delta$ put
+$$k_z(\boldsymbol\xi):=\sqrt{k_0^2-|2\pi\boldsymbol\xi|^2},$$
+which is real and strictly positive there. For each $z\in\mathbb R$, define the
+exact multiplier on all of $\mathbb R^2$ by
+$$m_{\mathrm{exact}}(z,\boldsymbol\xi):=\begin{cases}e^{izk_z(\boldsymbol\xi)},&\boldsymbol\xi\in D_\delta,\\0,&\boldsymbol\xi\notin D_\delta,\end{cases}$$
+and define the paraxial multiplier on all of $\mathbb R^2$ by
+$$m_{\mathrm{par}}(z,\boldsymbol\xi):=e^{ik_0z}e^{-iz|2\pi\boldsymbol\xi|^2/(2k_0)}.$$
+The exact scalar and paraxial scalar propagators are the $L^2$ equivalence
+classes
+$$u_{\mathrm{exact}}(z):=\mathcal F_2^{-1}\!\left[m_{\mathrm{exact}}(z,\boldsymbol\xi)\,\mathcal F_2u_0(\boldsymbol\xi)\right],\qquad u_{\mathrm{par}}(z):=\mathcal F_2^{-1}\!\left[m_{\mathrm{par}}(z,\boldsymbol\xi)\,\mathcal F_2u_0(\boldsymbol\xi)\right].$$
+The associated real scalar fields are the real parts of these phasors multiplied
+by $e^{-i\omega t}$. If $u_0$ carries $\mathrm{V\,m^{-1}}$, both propagated
+fields carry the same unit. “Exact” here names the exact positive axial
+dispersion multiplier inside this scalar model; it does not assert exact
+Maxwell validity. Forward propagation is $z\ge0$; the formulas also define the
+mathematical continuation to negative $z$.
+
+At a fixed $\boldsymbol\xi\in D_\delta$, write
+$\mathbf K(\boldsymbol\xi):=(2\pi\xi_x,2\pi\xi_y,k_z(\boldsymbol\xi))$.
+A candidate monochromatic vector plane-wave mode at frequency $\omega$ has
+complex amplitudes $\mathbf e,\mathbf b\in\mathbb C^3$ in the real-field
+encoding $e^{i(\mathbf K\cdot(x,y,z)-\omega t)}$. It is called an exact
+source-free vacuum mode only when its associated real fields satisfy the
+adopted source-free vacuum Maxwell equations. The longitudinal electric
+coefficient is $e_z$, and
+$\mathbf e_\perp:=(e_x,e_y)$ has norm
+$|\mathbf e_\perp|^2:=|e_x|^2+|e_y|^2$. No scalar/vector polarization
+factorization is part of this definition.
+
+## Definition references
+
+[[def-em-lab-geometry]]
+
+[[def-em-si-conventions]]
+
+[[thm-fourier-inversion-on-schwartz-space]]
+
+[[thm-plancherel]]
+
+[[def-countable-choice]]
+
+[[def-complex-exponential]]
+
+[[def-complex-conjugate-real-imaginary-part-and-modulus]]
+
+[[post-em-scalar-aperture-model]]
+
+[[def-emx-transverse-fourier-field]]
+
+[[post-em-vacuum-maxwell]]
+
+[[def-em-complex-plane-wave]]
+
+[[thm-reals-cauchy-complete]]
+
+[[thm-of-square-roots]]
+
+[[lem-of-square-monotone]]
+
+[[cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]]
+
+[[lem-emx-paraxial-phase-multiplier-bound]]
+
+## Facts & Assumptions
+
+**Given:** A fixed inertial chart, $c>0$, $\omega>0$, $0<\delta<1$, and
+$u_0\in L^2(\mathbb R^2;\mathbb C)$ with Fourier support in $D_\delta$.
+
+[F1] The Schwartz Fourier convention is the displayed $e^{-2\pi i x\cdot\xi}$
+integral, and under countable choice it extends uniquely to a unitary map on
+complex $L^2$; its inverse is the unitary inverse. [[thm-fourier-inversion-on-schwartz-space]] [[thm-plancherel]] [[def-countable-choice]]
+
+[F2] The laboratory chart has spatial coordinates in metres and time in seconds;
+$c$ carries $\mathrm{m\,s^{-1}}$, $\omega$ carries $\mathrm{s^{-1}}$, and
+$E$ carries $\mathrm{V\,m^{-1}}$. [[def-em-lab-geometry]] [[def-em-si-conventions]]
+
+[A1] The adopted scalar aperture model takes a finite complex measure supported
+on a compact planar aperture and assigns an outgoing scalar Helmholtz field in
+a polarization-insensitive regime; it does not assert exact Maxwell validity or
+that every aperture output is band-limited or square-integrable on a plane.
+[[post-em-scalar-aperture-model]]
+
+[F3] The existing transverse Fourier-field definition uses a smooth compactly
+supported three-dimensional wavevector amplitude supported away from zero and
+imposes the bilinear condition $\mathbf k\cdot\mathbf a(\mathbf k)=0$; its
+three-dimensional Schwartz-packet class is distinct from the present
+two-dimensional fixed-frequency $L^2$ data. [[def-emx-transverse-fourier-field]]
+
+[F4] A real plane-wave electric field is the componentwise real part of a
+complex amplitude times $e^{i(\mathbf K\cdot\mathbf x-\omega t)}$.
+[[def-em-complex-plane-wave]]
+
+[A2] The adopted smooth vacuum Maxwell branch includes
+$\operatorname{div}E=0$ for source-free fields; it is a physical assumption,
+not an empirical observation. [[post-em-vacuum-maxwell]]
+
+[F5] Complex exponential and real-part operations are defined on every complex
+number; the real-field encoding is componentwise. [[def-complex-exponential]] [[def-complex-conjugate-real-imaginary-part-and-modulus]]
+
+[F6] The real numbers are a complete ordered field. [[thm-reals-cauchy-complete]]
+
+[F7] Every nonnegative real has a unique nonnegative square root, and a
+positive real has a positive root. [[thm-of-square-roots]]
+
+[F8] Squaring preserves and reflects the order on nonnegative real numbers.
+[[lem-of-square-monotone]]
+
+[F9] For real $\theta$, $|e^{i\theta}|=1$; for $w=a+ib$,
+$|\operatorname{Re}w|^2=a^2\le a^2+b^2=|w|^2$, hence
+$|\operatorname{Re}w|\le|w|$. [[cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]] [[def-complex-conjugate-real-imaginary-part-and-modulus]] [[lem-of-square-monotone]]
+
+[F10] For real $a,b$, $|e^{ia}-e^{ib}|\le|a-b|$.
+[[lem-emx-paraxial-phase-multiplier-bound]]
+
+## Verification
+
+1.1 For $\boldsymbol\xi\in D_\delta$, put $\mathbf q:=2\pi\boldsymbol\xi$, $a:=k_0^2-|\mathbf q|^2$ and $b:=k_0^2(1-\delta^2)$. The support condition gives $0<b\le a\le k_0^2$. By [F6] and [F7] the roots in the definition exist; uniqueness and $k_0>0$ give $\sqrt b=k_0\sqrt{1-\delta^2}$ and $\sqrt{k_0^2}=k_0$. Applying [F8] to these nonnegative roots yields $0<k_0\sqrt{1-\delta^2}\le k_z(\boldsymbol\xi)\le k_0$. [given, F6, F7, F8, algebra]
+
+1.2 The transverse and axial coordinates are measured in metres, while $\mathbf q,k_z,k_0$ are in $\mathrm{m}^{-1}$; thus every propagation-phase exponent is dimensionless. The multipliers preserve the unit of $u_0$. [given, F2, algebra]
+
+1.3 [A1] fixes a separate scalar optical model, while the present Definition additionally restricts its plane data by $L^2$ and $D_\delta$ support; hence no existence or band-limit claim for every compact-aperture output is being made. [given, A1]
+
+2.1 For $\boldsymbol\xi,\boldsymbol\eta\in D_\delta$, rationalizing gives $$|k_z(\boldsymbol\xi)-k_z(\boldsymbol\eta)|= \frac{\bigl||2\pi\boldsymbol\xi|^2-|2\pi\boldsymbol\eta|^2\bigr|} {k_z(\boldsymbol\xi)+k_z(\boldsymbol\eta)}.$$ The denominator is at least $2k_0\sqrt{1-\delta^2}>0$ by step 1.1, and the numerator is continuous in $(\boldsymbol\xi,\boldsymbol\eta)$; hence $k_z$ is continuous on $D_\delta$. By [F10], $|e^{izk_z(\boldsymbol\xi)}-e^{izk_z(\boldsymbol\eta)}|\le|z|\,|k_z(\boldsymbol\xi)-k_z(\boldsymbol\eta)|$, so the exact exponential branch is continuous on $D_\delta$; since $D_\delta$ is closed, its zero extension $m_{\mathrm{exact}}$ is measurable on $\mathbb R^2$. The paraxial phase is a continuous real polynomial in the spatial frequencies; applying the same [F10] estimate to its real phase values makes $m_{\mathrm{par}}$ continuous and hence measurable on $\mathbb R^2$. [F9] gives modulus one for $m_{\mathrm{exact}}$ on $D_\delta$ and for $m_{\mathrm{par}}$ everywhere; $m_{\mathrm{exact}}$ is zero off $D_\delta$. [step 1.1, F9, F10, algebra]
+
+3.1 Both multipliers are measurable and bounded by one, so their products with $\mathcal F_2u_0$ are in $L^2$. Since $\mathcal F_2u_0$ vanishes almost everywhere off $D_\delta$, the exact multiplier's modulus one on $D_\delta$ and the paraxial multiplier's modulus one everywhere show that each product has the same $L^2$ norm as $\mathcal F_2u_0$. The unitary inverse in [F1] defines the propagated classes. For each fixed $t$, [F9] gives $|\operatorname{Re}(e^{-i\omega t}u)|\le|e^{-i\omega t}u|=|u|$, so the real scalar fields are in $L^2$ and independent of the representative. [step 2.1, F1, F5, F9, algebra]
+
+4.1 The fixed-frequency modes named above are not identified with the three-dimensional smooth Fourier packets of [F3]; their Maxwell constraint and the longitudinal estimate are established conditionally from the real field postulate and plane-wave convention in [F4] and [A2]. [given, F3, F4, A2] ∎
+
+## Remarks
+
+The following normalized cross-section uses $Q=q_x/k_0$ and $K_z=k_z/k_0$,
+sets $q_y=0$, and sketches the illustrative value $\delta=1/2$. The exact
+admissible region in the Definition is the disk $|q|\le\delta k_0$; the
+diagram is only a cross-section and is not used in any proof.
+
+~~~tikz
+\begin{tikzpicture}[x=2.2cm,y=1.7cm]
+  \draw[->] (-1.15,0) -- (1.2,0) node[right] {$Q$};
+  \draw[->] (0,0) -- (0,1.2) node[above] {$K_z$};
+  \draw[thick,domain=-1:1,samples=80]
+    plot (\x,{sqrt(1-\x*\x)});
+  \draw[dashed,thick,domain=-0.5:0.5,samples=40]
+    plot (\x,{1-\x*\x/2});
+  \draw[dotted] (-0.5,0) -- (-0.5,1.08);
+  \draw[dotted] (0.5,0) -- (0.5,1.08);
+  \node[above right] at (0.56,0.84) {$1-Q^2/2$};
+  \node[above left] at (-0.88,0.47) {$\sqrt{1-Q^2}$};
+  \node[below] at (-0.5,0) {$-\delta$};
+  \node[below] at (0.5,0) {$\delta$};
+\end{tikzpicture}
+~~~
+
+OLD BOUNDARIES
+[{"case": "empty", "status": "checked", "evidence": "Step 3.1 gives zero propagated classes when u0=0."}, {"case": "zero", "status": "checked", "evidence": "Step 1.1 includes q=0, where kz=k0 and both multipliers are defined."}, {"case": "one", "status": "checked", "evidence": "The statement assumes delta<1; step 1.1 gives kz>=k0 sqrt(1-delta^2)>0 at the cone edge."}, {"case": "degenerate", "status": "checked", "evidence": "The strict inequality delta<1 in step 1.1 prevents a zero axial wave number."}, {"case": "endpoints", "status": "checked", "evidence": "The closed support disk includes |q|=delta k0 and all z values in the statement."}, {"case": "nonempty-choice", "status": "checked", "evidence": "Fact F1 and step 3.1 use the unitary L2 extension under countable choice."}, {"case": "iff-forward", "status": "not_applicable", "reason": "The definition gives propagators and scope conditions, not an equivalence."}, {"case": "iff-reverse", "status": "not_applicable", "reason": "The definition gives propagators and scope conditions, not an equivalence."}]
+FLAGS
+{"reference": [{"id": "def-emx-angular-spectrum", "batch": 10, "case": "empty", "evidence": "Step 3.1 gives zero propagated classes when u0=0.", "unresolved_step_references": ["3.1"]}, {"id": "def-emx-angular-spectrum", "batch": 10, "case": "nonempty-choice", "evidence": "Fact F1 and step 3.1 use the unitary L2 extension under countable choice.", "unresolved_step_references": ["3.1"]}], "audit": []}
+ITEM 4 def-emx-helicity-line-bundle
+---
+id: def-emx-helicity-line-bundle
+kind: definition
+title: Helicity eigenlines over the direction sphere
+status: draft
+origin: pipeline
+domain: physics
+library: physics
+dependency_level: 2
+deps:
+  - pthm-emx-helicity-projection
+  - def-emx-transverse-fourier-field
+  - def-emx-lorentz-star
+  - def-cross-product-in-r3
+  - def-euclidean-inner-product
+  - def-oriented-smooth-manifold-and-oriented-chart
+  - def-smooth-differential-k-form
+  - def-wedge-product-of-differential-forms
+  - def-exterior-derivative-by-the-invariant-vector-field-formula
+dependency_roles:
+  pthm-emx-helicity-projection: physical-result
+  def-emx-transverse-fourier-field: formulation-prerequisite
+  def-emx-lorentz-star: mathematical-premise
+  def-cross-product-in-r3: mathematical-premise
+  def-euclidean-inner-product: mathematical-premise
+  def-oriented-smooth-manifold-and-oriented-chart: mathematical-premise
+  def-smooth-differential-k-form: mathematical-premise
+  def-wedge-product-of-differential-forms: mathematical-premise
+  def-exterior-derivative-by-the-invariant-vector-field-formula: mathematical-premise
+proof_strategy: direct
+physical_scope: >-
+  Conditional classical Maxwell-Lorentz vacuum model in the smooth source-free
+  nonzero-Fourier-mode regime stated by the supplier. The construction is the
+  direction-sphere geometry of those modes, with no additional approximation.
+  Directions, unit polarization vectors, the helicity sigma, and angular
+  coordinates are dimensionless; the Berry connection and holonomy are
+  dimensionless. There is no quantization, photon position operator, material
+  medium, measurement, or empirical claim.
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+sources:
+  references:
+    - title: "K. Y. Bliokh, F. J. Rodríguez-Fortuño, F. Nori and A. V. Zayats, Spin-orbit interactions of light, Nature Photonics 9 (2015), arXiv:1505.02864"
+      url: "https://arxiv.org/pdf/1505.02864"
+      locator: "Section 'Angular momenta and geometric phases', Box 2, PDF pp. 3–4: helicity basis and direction-sphere Berry connection; the exact classical projector convention is fixed by the local supplier."
+    - title: "David Tong, The Quantum Hall Effect, TIFR Infosys Lecture Notes (2016)"
+      url: "https://www.damtp.cam.ac.uk/user/tong/qhe/qhe.pdf"
+      locator: "§1.5.1, printed pp. 28–31: Berry connection as a parameter-space one-form and its phase-gauge transformation. Tong uses -i⟨n|dn⟩; this item fixes +i v†dv and does not import the adiabatic quantum model."
+verification:
+  precheck: pending
+---
+
+## Definition
+
+For $u,v\in\mathbb C^3$, extend the real Euclidean dot and right-handed cross products complex-bilinearly, with coordinate formulas
+$$u\cdot v:=\sum_{j=1}^3u_jv_j,\qquad u\times v:=(u_2v_3-u_3v_2,\ u_3v_1-u_1v_3,\ u_1v_2-u_2v_1).$$
+The dot product in these formulas uses no complex conjugation; it differs from the Hermitian product $\langle u,v\rangle_H:=\sum_{j=1}^3\overline{u_j}v_j$. Write $\|z\|_H:=\sqrt{\langle z,z\rangle_H}$ for the associated nonnegative norm on $\mathbb C^3$.
+
+Let $S^2:=\{n\in\mathbb R^3:n\cdot n=1\}$ with the smooth structure given by the six graph charts solving $n_j=\pm\sqrt{1-\sum_{k\ne j}n_k^2}$ on the hemispheres $\pm n_j>0$. Orient it outward using the ordered spatial basis $x^1,x^2,x^3$. Its tangent plane is $T_nS^2=\{X\in\mathbb R^3:n\cdot X=0\}$. Physically, $n=k/|k|$ for a nonzero spatial wavevector $k$ in the SI Fourier description, where $k$ has units $\mathrm{m^{-1}}$; hence $n$ is dimensionless and the radial magnitude is discarded. For $\sigma\in\{+1,-1\}$, set $C_nz:=i\,n\times z$, $P_T(n)z:=z-n(n\cdot z)$, and $P_\sigma(n):=\tfrac12(P_T(n)+\sigma C_n)$ on $\mathbb C^3$. Define the helicity fibre $L_\sigma(n):=\operatorname{range}P_\sigma(n)$ and the total space $L_\sigma:=\{(n,z):n\in S^2,\ z\in L_\sigma(n)\}$, projected to $S^2$ by $(n,z)\mapsto n$.
+
+For an open set $U\subseteq S^2$, a unit frame of $L_\sigma$ over $U$ is a smooth map $v:U\to\mathbb C^3$ such that $v(n)\in L_\sigma(n)$ and $\langle v(n),v(n)\rangle_H=1$ for every $n\in U$. Since each fibre is a complex line, this vector spans that fibre. A local unit frame is such a map on an open neighborhood in $S^2$; a global unit frame is one defined on all of $S^2$.
+
+Fibrewise addition and scalar multiplication are inherited from $\mathbb C^3$. A unit frame $v$ gives the local trivialization $(n,a)\mapsto(n,a v(n))$ from $U\times\mathbb C$ to $L_\sigma|_U$, with inverse $(n,z)\mapsto(n,\langle v(n),z\rangle_H)$. The construction in the Proof supplies such a frame near every $n$, so $L_\sigma$ is a smooth rank-one complex vector subbundle of the product bundle $S^2\times\mathbb C^3\to S^2$, whose projection is $(n,z)\mapsto n$.
+
+On a spherical chart with $0<\theta<\pi$ and a smooth longitude branch $\phi$, write $n=(\sin\theta\cos\phi,\sin\theta\sin\phi,\cos\theta)$, $e_\theta=(\cos\theta\cos\phi,\cos\theta\sin\phi,-\sin\theta)$, and $e_\phi=(-\sin\phi,\cos\phi,0)$. The local unit helicity frame is $v_\sigma:=(e_\theta+i\sigma e_\phi)/\sqrt2$. For any unit frame $v$ over an open set $U$, write $v^\dagger d v:=\sum_{j=1}^3\overline{v_j}\,d v_j$, where $d v_j$ is the exterior derivative of its $j$th component. Define its Berry connection one-form by $A:=i v^\dagger d v$. A smooth phase change $v'=e^{i\chi}v$, with real smooth $\chi$, changes this local form to $A'=A-d\chi$. The local Berry curvature is the real two-form $F:=dA$ on $U$; no global gluing assertion is made here.
+
+## Definition references
+
+[[pthm-emx-helicity-projection]]
+
+[[def-emx-transverse-fourier-field]]
+
+[[def-emx-lorentz-star]]
+
+[[def-cross-product-in-r3]]
+
+[[def-euclidean-inner-product]]
+
+[[def-oriented-smooth-manifold-and-oriented-chart]]
+
+[[def-smooth-differential-k-form]]
+
+[[def-wedge-product-of-differential-forms]]
+
+[[def-exterior-derivative-by-the-invariant-vector-field-formula]]
+
+## Facts & Assumptions
+
+**Given:** The oriented unit direction sphere, its standard Hermitian space $\mathbb C^3$, and one fixed $\sigma\in\{+1,-1\}$.
+
+[F1] [[pthm-emx-helicity-projection]] defines $C_n=i n\times$, $P_Tz=z-n(n\cdot z)$, and $P_\sigma=\tfrac12(P_T+\sigma C_n)$ for unit directions; it proves that $P_\sigma$ is smooth and is an orthogonal rank-one projection onto the $\sigma$ helicity eigenspace.
+
+[F2] [[def-emx-transverse-fourier-field]] defines $k$ as a spatial wavevector with SI units $\mathrm{m^{-1}}$ and uses nonzero $k$ for its transverse Fourier amplitudes; normalizing $k$ gives the dimensionless direction $n$.
+
+[F3] [[def-emx-lorentz-star]] fixes the ordered coframe $dx^0,dx^1,dx^2,dx^3$ and volume $dx^0\wedge dx^1\wedge dx^2\wedge dx^3$; restricting to the spatial subspace gives the ordered orientation used here.
+
+[F4] [[def-cross-product-in-r3]] fixes the coordinate formula for the right-handed cross product; [[def-euclidean-inner-product]] fixes the real Euclidean dot product and norm.
+
+[F5] [[def-oriented-smooth-manifold-and-oriented-chart]] defines an orientation as a smoothly chosen orientation ray; the outward normal and fixed spatial orientation specify that ray here.
+
+[F6] [[def-smooth-differential-k-form]] defines smooth $k$-forms as smooth sections of $\bigwedge^kT^*S^2$; [[def-wedge-product-of-differential-forms]] defines their wedge product pointwise, and [[def-exterior-derivative-by-the-invariant-vector-field-formula]] defines $d$.
+
+## Proof
+
+1.1 The six graph charts in the Definition are smooth coordinate charts on open hemispheres and cover $S^2$; their square-root transition formulas are smooth on overlaps. The outward tangent orientation ray is smooth by the nonvanishing normal $n$, with ambient spatial orientation fixed in [F3] and orientation-ray convention [F5]. By [F1], each $P_\sigma(n)$ is a smooth rank-one projection, so each fibre is a complex line. [F2] identifies the physical direction index with a nonzero SI wavevector normalized to unit length. At any $n_0$, choose a fixed $w\in\mathbb C^3$ with $P_\sigma(n_0)w\ne0$, which exists because the projection has nonzero range. Continuity makes $P_\sigma(n)w\ne0$ on a neighborhood of $n_0$, and $P_\sigma(n)w/\|P_\sigma(n)w\|$ is a smooth unit local section there. This proves local triviality without choosing a frame family over the whole sphere. [F1, F2, F3, F5, given, construct]
+
+1.2 The coordinate vectors satisfy $n\cdot e_\theta=n\cdot e_\phi=e_\theta\cdot e_\phi=0$, $\|e_\theta\|=\|e_\phi\|=1$, and $n\times e_\theta=e_\phi$, $n\times e_\phi=-e_\theta$, by the coordinate formulas in [F4]. Hence $v_\sigma^\dagger v_\sigma=1$, $P_Tv_\sigma=v_\sigma$, and $C_nv_\sigma=\sigma v_\sigma$. Substitution gives $P_\sigma v_\sigma=v_\sigma$, so this is a unit local frame of the stated fibre. [F1, F4, algebra]
+
+2.1 For a smooth section $s$ on a chart, define $\nabla s:=P_\sigma d s$. Since $P_\sigma s=s$, this is again $L_\sigma$-valued. For every smooth scalar $f$, the product rule gives $\nabla(fs)=P_\sigma(df\,s+f\,ds)=df\,s+f\nabla s$, so $\nabla$ is a connection on the line bundle. In a unit frame $v$, writing $s=a v$ gives $\nabla s=(da+a v^\dagger dv)v=(da-iAa)v$ because $A=i v^\dagger dv$. [F1, F6, step 1.1, step 1.2, algebra]
+
+3.1 Differentiating $\langle v,v\rangle_H=1$ gives $2\operatorname{Re}(\sum_j\overline{v_j}\,d v_j)=0$, so $A=i\sum_j\overline{v_j}\,d v_j$ is real-valued. Under $v'=e^{i\chi}v$, direct differentiation gives $v'^\dagger d v'=i\,d\chi+v^\dagger dv$, hence $A'=i v'^\dagger d v'=A-d\chi$. This verifies the declared local gauge transformation and completes the definition of the local connection and curvature conventions. [given, F6, step 2.1, algebra] ∎
+
+OLD BOUNDARIES
+[{"case": "empty", "status": "checked", "evidence": "Definition sums the Hermitian product over j=1,2,3, a fixed nonempty coordinate set. The direction sphere has unit points; step 1.1 constructs a local section at each supplied n0 using its nonzero rank-one range."}, {"case": "zero", "status": "checked", "evidence": "Definition and step 1.1: the direction variable satisfies n dot n=1, so the zero vector is excluded."}, {"case": "one", "status": "not_applicable", "reason": "This definition has no cardinality, iteration count, or one-object exception."}, {"case": "degenerate", "status": "checked", "evidence": "Steps 1.1–1.2: every rank-one projector has local frames, including at the coordinate poles where the spherical frame is unavailable."}, {"case": "endpoints", "status": "checked", "evidence": "Statement and step 1.2: angular coordinates are used only on charts with 0<theta<pi; the bundle is defined on all S^2."}, {"case": "nonempty-choice", "status": "checked", "evidence": "Step 1.1 uses one witness w at a fixed point to build a local frame and makes no simultaneous selection over S^2."}, {"case": "iff-forward", "status": "not_applicable", "reason": "The definition gives objects and local formulas, not an if-and-only-if claim."}, {"case": "iff-reverse", "status": "not_applicable", "reason": "The definition gives objects and local formulas, not an if-and-only-if claim."}]
+FLAGS
+{"reference": [{"id": "def-emx-helicity-line-bundle", "batch": 14, "case": "empty", "evidence": "Definition sums the Hermitian product over j=1,2,3, a fixed nonempty coordinate set. The direction sphere has unit points; step 1.1 constructs a local section at each supplied n0 using its nonzero rank-one range.", "unresolved_step_references": ["1.1"]}, {"id": "def-emx-helicity-line-bundle", "batch": 14, "case": "zero", "evidence": "Definition and step 1.1: the direction variable satisfies n dot n=1, so the zero vector is excluded.", "unresolved_step_references": ["1.1"]}, {"id": "def-emx-helicity-line-bundle", "batch": 14, "case": "degenerate", "evidence": "Steps 1.1–1.2: every rank-one projector has local frames, including at the coordinate poles where the spherical frame is unavailable.", "unresolved_step_references": ["1.1", "1.2"]}, {"id": "def-emx-helicity-line-bundle", "batch": 14, "case": "endpoints", "evidence": "Statement and step 1.2: angular coordinates are used only on charts with 0<theta<pi; the bundle is defined on all S^2.", "unresolved_step_references": ["1.2"]}, {"id": "def-emx-helicity-line-bundle", "batch": 14, "case": "nonempty-choice", "evidence": "Step 1.1 uses one witness w at a fixed point to build a local frame and makes no simultaneous selection over S^2.", "unresolved_step_references": ["1.1"]}], "audit": []}

@@ -1,0 +1,87 @@
+{
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "phase": "initial",
+  "round": 1,
+  "unit": "91",
+  "input_sha256": "eaf0a68d231b0a7d0d042df337974eaab597dfd3432daa3ad0aaeebd32fe188c",
+  "decisions": [
+    {
+      "id": "lem-csm-frontier-ssep-bracket",
+      "model": "gpt-6-luna",
+      "context_sha256": "72ed49a31ce8027641dd5323bee2b88f89cc18b8002dec06ca4464783e516487",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F1 incorrectly assigned transition rate N^2 to equal-occupation swaps. The model assigns that rate only to occupation-changing swaps. Such unchanged swaps have zero observable increment, so extending the generator and squared-jump sums to all bonds is valid; the martingale, bracket formula and bound remain correct. Corrected F1 and made this zero-increment extension explicit.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-csm-frontier-ssep-bracket",
+      "disposition": "repaired",
+      "post_sha256": "8fe0fe45fa089e8dc0a19bf146bbfcb8de80c7ca982a74a3831a99ed50c3f661",
+      "review_context_sha256": "55a87b17fe55a5ce8d0a2217a4d7aaf232309ba588ed9eb9746f213f28b0cd76",
+      "reason": "Checked the complete current two-step proof, model Definition, finite-chain martingale Statement and proof, and owning contract/page. The swap increment has the stated sign; reindexing gives the centered discrete Laplacian. Squaring and multiplying by N^2 gives N^(2-2d), and N^d bonds per direction with the periodic gradient bound gives T N^(-d) times the sum of squared derivative norms. Boundedness supplies square integrability; the finite-chain supplier supplies the continuous predictable compensator under Choice. Constant tests, equal occupations, empty/full configurations and T=0 give zero. Only F1 changed; Statement and Proof sections are byte-identical to the assigned carrier.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "gate_resolutions": [],
+  "ledger_updates": {
+    "defect_ledger": [
+      {
+        "id": "lem-csm-frontier-ssep-bracket",
+        "status": "fixed",
+        "severity": "nonfatal",
+        "location": "Facts & Assumptions, F1",
+        "reason": "F1 incorrectly assigned transition rate N^2 to equal-occupation swaps. The model assigns that rate only to occupation-changing swaps. Such unchanged swaps have zero observable increment, so extending the generator and squared-jump sums to all bonds is valid; the martingale, bracket formula and bound remain correct. Corrected F1 and made this zero-increment extension explicit."
+      }
+    ],
+    "published_consumer_ledger": []
+  },
+  "supporting_evidence": {
+    "research/physics-non-fluid-129-2026-10-21-r2-batch-91-step5-context.json": "8d7af1c816c1670388c60ddf2241e5cf6b694c8c922df92b3cca1de253c3079f"
+  },
+  "repair_notes": {
+    "interface_changed": false,
+    "changed_paths": [
+      "items/lem-csm-frontier-ssep-bracket.md"
+    ],
+    "dependencies": [
+      "def-axiom-of-choice",
+      "def-csm-frontier-ssep-diffusive-model",
+      "lem-csm-frontier-finite-chain-martingale"
+    ],
+    "source_reading": "Current local suppliers inspected directly; no external literature retrieval or independent review of this repair claimed. Support index read; no outside proposal adopted. No support supplements were present at discovery.",
+    "contract": "Existing F1 supplier quote already records occupation-changing rates correctly; proof derivations and public claim are unchanged, so no owning metadata repair was needed.",
+    "diagrams": "No TikZ/tikzcd diagrams are present in the assigned item or its owning page; this algebraic proof needs no diagram.",
+    "checks": [
+      {
+        "command": "node tools/physics-support/proof-layout.mjs items/lem-csm-frontier-ssep-bracket.md",
+        "exit_code": 0,
+        "result": "1 item, 2 steps, 0 defects"
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/physics-support/precheck.mts items/lem-csm-frontier-ssep-bracket.md",
+        "exit_code": 0,
+        "result": "1 checked, 0 failing"
+      },
+      {
+        "command": "node tools/physics-support/rendercheck.mjs items/lem-csm-frontier-ssep-bracket.md",
+        "exit_code": 0,
+        "result": "1 file passed YAML and real KaTeX rendering checks"
+      },
+      {
+        "command": "node tools/physics-support/proof-contract.mjs research/physics-non-fluid-129-2026-10-21-r2-batch-91.proof-contracts.json --strict --items lem-csm-frontier-ssep-bracket",
+        "exit_code": 0,
+        "result": "0 errors, 0 warnings, 1/1 items checked"
+      }
+    ],
+    "unresolved_obligations": [],
+    "next_action": "Controller collection and ordinary native follow-up; no judge, stamp, certificate or round-state mutation performed."
+  }
+}

@@ -1,0 +1,33 @@
+# Batch 38 Step 3a adjudication
+
+Run: physics-non-fluid-129-2026-10-21-r2; group: batch-38.
+
+Completed levels 0–2 in the dispatched order. The data, fixed-atlas C2 curvature definition, and all three curvature-lemma steps were independently reviewed against their actual supplier definitions; complete risk reviews are in the owning contract. No defect or diagram requiring repair was found. The nonempty open interval, strict scale-factor positivity, inherited AC_omega, curvature sign and units are retained. These are mathematical model calculations, without empirical claims.
+
+Source passages retrieved: https://arxiv.org/pdf/1003.3491, Section 2 (2.1)–(2.2), PDF pp. 3–4; https://arxiv.org/pdf/2204.03537, Section 4.3.1. Further Kasner/shear source reading and higher-level obligations remain in progress.
+
+Completed level 3: shear proof accepted with the reader's units correction, including exact pre/post hash comparison and both direct-consumer uses. Kasner proof passes both implications and the static branch. Sources read through Jha (172) and Caceres (2.17); source-specific tensor and regularity limits remain explicit. No external consumer needs repair.
+
+Completed level 4: both examples and every supplier use pass review. The nonflat example has R0101=-4a1^2/(9t^2); the flat example has vanishing full curvature and an explicit smooth local inverse with pullback Minkowski metric. No global quotient map or endpoint extension is asserted. Reversing exactly the reported reader edits reproduces all three immutable pre-reader item hashes; each current item equals its post-reader hash. F5 enrichment in example 1 is reviewed_no_defect/audit_enrichment; the units and eta/theta repairs are accepted_repair. All seven risk reviews are complete.
+
+Completed page obligations: `reader:38:1` and `refuter:38:1` are `confirmed_nonfatal`, sharing one defect row because the frozen observation fingerprint, subject, defect and severity coincide. The page omitted the exact manifest/plan prerequisite `gr-fx03-geometric-cauchy-stability`; restored that entry between the other two existing prerequisites. The supplier page explicitly describes finite-slab comparison with bounded data, gauge and regularity hypotheses. No local Bianchi theorem cites or needs its stability conclusions. The cross-batch record already truthfully describes context only and remains unchanged. No new page obligation is invented beyond the routed five decisions.
+
+The other two closed defects retain the reader's shear-constant unit correction and eta/theta disambiguation. Example 1's F5 enrichment introduces no independent defect. No item bytes were changed during this adjudication. The shear manifest Statement now includes the units and its title mirrors the existing current item; its dependencies and item order are unchanged. Reader pre/post snapshots, independent reports, and scope are preserved.
+
+All seven carriers have `domain: mathematics`; metric/source equations are mathematical hypotheses and the examples make no claim about observed cosmology. No physical postulate, experiment, sampling model or empirical precision is inferred. The sole foundational assumption carried through the torus/product suppliers is AC_omega; the finite coordinate computations use no further choice. No TikZ/tikzcd diagrams occur, and the explicit formulas/inverse maps need no added diagram. No defective published mathematical supplier was found in the uses reviewed; no import, published carrier, or original mathematics file was edited. No withdrawal is proposed and no substantial unmet prerequisite remains.
+
+Sources actually read: Jha, Section 4.3.1, (164)–(172), PDF pp. 37–39, https://arxiv.org/pdf/2204.03537 (power-law family and Kasner sums); Caceres, Castaneda and Tejeiro, Section 2 (2.1)–(2.2) and Section 2.1 through (2.17), including its referenced (1.6), PDF pp. 3–5, https://arxiv.org/pdf/1003.3491 (diagonal metric/connection and perfect-fluid shear). These are bounded passage reads, not whole-paper attestations. Local proofs independently retain repeated/static exponents, C2 regularity, restored c factors and source forcing. Exact supplier definitions read: def-gr-periodic-torus-and-sobolev-spaces (a) and relevant smoothness conventions, def-gr-smooth-lorentzian-objects (a)–(e), def-gr-curvature-tensor-and-derived-tensors, def-countable-choice, and the complete Statement and proof of cor-zero-derivative-implies-constant. The latter applies to the C1 function V Delta on the open order-convex I. All in-batch suppliers and each authored step were reviewed in the required dependency order, with per-item evidence in risk_review.
+
+Local validation:
+
+- Initial risk-report routed all seven items (three HIGH, four CRITICAL); final `--require-reviewed` reports zero errors and seven reviewed items.
+- Reflow on the three reader-touched items: all unchanged.
+- Precheck on those same explicit three paths: three checked, zero failing.
+- Rendercheck on the seven items and two assigned pages: nine files, no errors.
+- `node tools/physics-support/proof-contract.mjs research/physics-non-fluid-129-2026-10-21-r2-batch-38.proof-contracts.json --strict`: zero errors, zero warnings, 7/7 checked.
+- Final `node tools/physics-support/proof-layout.mjs items/prop-gr-fx-bianchi-shear-decay.md items/ex-gr-fx10-1.md items/ex-gr-fx10-2.md`: three items, ten steps, zero defects. No item edits or formatter followed this check.
+- Preliminary command discovery found that precheck does not implement --help and that proof-contract uses a singular filename; those command-discovery failures are not content defects or claimed successful checks.
+
+Exactly five decisions are supplied, with repair_confidence 1 on completed repairs. No judge, stamp, certification or engine gate battery was run. Engine owns stamping and subsequent gates. Blockers: none in the dispatched mathematical scope. Next action: owner/engine collection of the report and decisions, retaining the original independent observations.
+
+Final bookkeeping checks: exact decision coverage is 5/5 with no duplicate or extra obligation; all three touched current raw item hashes equal the immutable post-reader hashes and each decision cites the exact pre-reader fingerprint. Canonical plan inspection confirms the three page prerequisites. Repaired page raw SHA256: `df2a3edaa2dbb03d8ef63355660720b5f2ca56c9e7e782e7de994294c8cd196c`. Native append added exactly three closed defect rows and refreshed the generated ledger view. Both page decisions share the one prerequisite row with explicit same_defect_as/evidence; independent observations are preserved.

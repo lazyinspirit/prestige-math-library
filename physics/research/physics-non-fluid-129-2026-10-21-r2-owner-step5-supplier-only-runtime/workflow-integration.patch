@@ -1,0 +1,21 @@
+--- a/tools/physics-support/step5-workflow.mjs
++++ b/tools/physics-support/step5-workflow.mjs
+@@ -12,6 +12,7 @@
+ import { publishedMaintenance, isPublishedMaintenance } from './step5-published-maintenance.mjs';
+ import { explanatoryReviewPhase, explanatoryReviewProgressPath, prepareExplanatoryReview, explanatoryReviewCompletion, isExplanatoryReviewCompletion, verifyExplanatoryReviewReplay } from './step5-explanatory-edit-review.mjs';
+ import { itemHashGuard } from './item-hash.mjs';
++import { supplierResolvedNonfatal } from './step5-supplier-resolution.mjs';
+ import { currentHashesMany } from './step5-terminal-resolution.mjs';
+ import { MODELS } from './models.mjs';
+ import { gateDiagnostics } from './step5-gate-diagnostics.mjs';
+@@ -471,7 +472,9 @@
+   }
+   for(const id of Object.keys(pack.before))if(!now[id])errors.push(`unlicensed deletion ${id}`);
+   for(const id of creatorById.keys())if(!changed.includes(id))errors.push(`claimed creation without new item ${id}`);
+-  for(const row of decisions)if(['confirmed_fatal','confirmed_nonfatal'].includes(row.outcome)&&!changed.includes(row.id))errors.push(`confirmed defect not repaired ${row.id}`);
++  for(const row of decisions)if(['confirmed_fatal','confirmed_nonfatal'].includes(row.outcome)&&!changed.includes(row.id)
++    &&!supplierResolvedNonfatal({root,pack,reports,now,decision:row,matchesCurrent:reviewMatchesCurrent}))
++    errors.push(`confirmed defect not repaired ${row.id}`);
+   for(const row of reviews)if(['repaired','authored'].includes(row.disposition)&&!changed.includes(row.id)&&!corrected(row.id))errors.push(`claimed repair or authorship without change ${row.id}`);
+   if(createdItems.length&&root){
+     try{

@@ -7,7 +7,7 @@ origin: pipeline
 domain: physics
 library: physics
 physical_scope: A specified sequence of finite-state macroscopic models at positive temperature with a declared density, interactions, boundary conditions, and normalization; no limiting existence, ensemble equivalence, or critical singularity is asserted.
-dependency_level: 3
+dependency_level: 0
 deps:
   - def-td-equilibrium-state-domain
   - def-td-si-quantities
@@ -41,14 +41,23 @@ verification:
 
 ## Definition
 
-Use $\mathbb N$ from [[def-natural-numbers]], which includes $0$, and define $\mathbb N_{>0}:=\mathbb N\setminus\{0\}$. A **finite-state thermodynamic-limit contract** specifies a sequence $(X_k,E_k,g_k,V_k,n_k)_{k\in\mathbb N_{>0}}$, where each $X_k$ is a finite nonempty state set, $E_k:X_k\to\mathbb R$ assigns finite energies in joules, $g_k:X_k\to(0,\infty)$ assigns positive dimensionless weights, $V_k>0$ is physical volume in $\mathrm{m^3}$, and, for one declared species, $n_k>0$ is its amount in moles. A fixed-density sequence has $V_k\to\infty$ and $n_k/V_k\to\rho\in(0,\infty)$ in $\mathrm{mol\,m^{-3}}$. Boundary conditions, interaction rules, and the choice of a volume or amount normalization are part of the contract and must be held fixed or explicitly tracked as $k$ varies.
+Use $\mathbb N$ from *The natural numbers $\mathbb{N}$ (von Neumann)*, which includes $0$, and define $\mathbb N_{>0}:=\mathbb N\setminus\{0\}$. A **finite-state thermodynamic-limit contract** specifies a sequence $(X_k,E_k,g_k,V_k,n_k)_{k\in\mathbb N_{>0}}$, where each $X_k$ is a finite nonempty state set, $E_k:X_k\to\mathbb R$ assigns finite energies in joules, $g_k:X_k\to(0,\infty)$ assigns positive dimensionless weights, $V_k>0$ is physical volume in $\mathrm{m^3}$, and, for one declared species, $n_k>0$ is its amount in moles. A fixed-density sequence has $V_k\to\infty$ and $n_k/V_k\to\rho\in(0,\infty)$ in $\mathrm{mol\,m^{-3}}$. Boundary conditions, interaction rules, and the choice of a volume or amount normalization are part of the contract and must be held fixed or explicitly tracked as $k$ varies.
 
-For $T>0$, set $\beta:=(k_BT)^{-1}$ in $\mathrm{J^{-1}}$, with $k_B$ and units from [[def-td-si-quantities]]. The finite-state canonical partition sum is
+For $T>0$, set $\beta:=(k_BT)^{-1}$ in $\mathrm{J^{-1}}$, with $k_B$ and units from *SI quantities and unit conventions*. The finite-state canonical partition sum is
 
 $$
 Z_k(\beta):=\sum_{x\in X_k}g_k(x)e^{-\beta E_k(x)},
 $$
 
-as the finite case of [[def-tdmath-countable-canonical-model]]. It is a positive finite real number. Define $F_k(\beta):=-\beta^{-1}\log Z_k(\beta)$ in joules and $f_k(\beta):=F_k(\beta)/V_k$ in $\mathrm{J\,m^{-3}}$. The specified thermodynamic-limit value is $f(\beta,\rho):=\lim_{k\to\infty} f_k(\beta)$ **if this limit exists**. A limit per mole or per lattice site is a different normalization and must be stated separately.
+as the finite case of *Countable canonical model*. It is a positive finite real number. Define $F_k(\beta):=-\beta^{-1}\log Z_k(\beta)$ in joules and $f_k(\beta):=F_k(\beta)/V_k$ in $\mathrm{J\,m^{-3}}$. The specified thermodynamic-limit value is $f(\beta,\rho):=\lim_{k\to\infty} f_k(\beta)$ **if this limit exists**. A limit per mole or per lattice site is a different normalization and must be stated separately.
 
 This is a contract for what a limit claim must specify, not a theorem that the limit exists. It asserts no uniformity in $\beta$, derivative interchange, ensemble equivalence, convergence rate, or nonanalyticity. A finite model's regularity and any limiting singularity require their own arguments; neither is inferred from the word “thermodynamic limit.”
+
+## Definition references
+
+[[def-natural-numbers]]
+
+[[def-td-si-quantities]]
+
+[[def-tdmath-countable-canonical-model]]
+

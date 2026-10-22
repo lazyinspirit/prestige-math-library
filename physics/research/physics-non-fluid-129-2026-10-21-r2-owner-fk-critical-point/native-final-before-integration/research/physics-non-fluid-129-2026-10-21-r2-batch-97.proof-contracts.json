@@ -1,0 +1,1246 @@
+{
+  "version": 1,
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "batch": "97",
+  "scope": [
+    "lem-csm-frontier-fk-fkg-spatial-markov",
+    "lem-csm-frontier-fk-planar-duality",
+    "lem-csm-frontier-fk-free-wired-limits",
+    "lem-csm-frontier-grid-crossings-intersect",
+    "thm-csm-frontier-fk-torus-rsw",
+    "lem-csm-frontier-fk-influence-threshold",
+    "lem-csm-frontier-fk-crossing-amplification",
+    "thm-csm-frontier-fk-square-critical-point",
+    "thm-csm-frontier-potts-square-critical-temperature",
+    "ex-csm-frontier-ising-coupling-conversion"
+  ],
+  "contracts": {
+    "lem-csm-frontier-fk-fkg-spatial-markov": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-csm-frontier-fk-real-boundaries",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,E,\\partial)$ be a finite undirected multigraph: $V$ and the edge-label set $E$ are finite, and each $e\\in E$ has a singleton or two-element endpoint set $\\partial e\\subseteq V$. Distinct labels may have the same endpoint set. Let $B\\subseteq V$ be a designated boundary set and let $\\xi$ be an equivalence relation on $B$; vertices in each $\\xi$-class are wired together, while vertices outside $B$ remain separate. For $A\\subseteq E$, let $k_\\xi(A)$ be the number of connected components, including isolated vertices, after wiring the $\\xi$-classes and opening exactly the edges in $A$. A loop does not join distinct vertices.\n\nFor $q\\in[1,\\infty)$ and $p\\in(0,1)$, the finite FK weight of $A$ and its partition function are\n\n$$w_{G,p,q}^{\\xi}(A):=p^{|A|}(1-p)^{|E\\setminus A|}q^{k_\\xi(A)},\\qquad Z_{G,p,q}^{\\xi}:=\\sum_{A\\subseteq E}w_{G,p,q}^{\\xi}(A).$$\n\nThe finite FK random-cluster probability is $\\phi_{G,p,q}^{\\xi}(A):=w_{G,p,q}^{\\xi}(A)/Z_{G,p,q}^{\\xi}$. Every weight is positive and finite, and the finite sum $Z_{G,p,q}^{\\xi}$ is positive and finite. The free boundary condition is the identity partition on $B$; the wired boundary condition identifies all vertices of $B$ in one class.\n\nWhen $G$ is a finite simple graph with the Potts/FK convention of the earlier finite Potts definition, $\\xi$ is free, $q=Q$ is an integer at least two, and every activity equals $v=p/(1-p)$, this definition gives the same normalized FK law, since $w_{FK}(A)=(1-p)^{-|E|}w_{G,p,Q}^{\\xi}(A)$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-multigraph-loop-and-digraph",
+          "source_section": "Definition",
+          "quote": "A **finite undirected multigraph** consists of a finite vertex set $V$, a finite\nedge set $M$, and an endpoint map assigning to each $e\\in M$ either a singleton\n$\\{v\\}$ or a two-element subset $\\{u,v\\}$ of $V$. An edge assigned $\\{v\\}$ is a\n**loop** at $v$. Distinct members of $M$ assigned the same endpoint set are\n**parallel edges**.\n\nA **finite directed graph**, or **digraph**, consists of a finite vertex set $V$\nand a set $A\\subseteq V\\times V$ of **arcs**. An arc $(u,v)$ is directed from\n$u$ to $v$; an arc $(v,v)$ is a directed loop.\n\nThese objects are variants, not instances of the default graph convention in\n[[def-finite-simple-graph]] and [[rem-finite-simple-graph-convention]]. A theorem\nstated merely for a graph therefore neither permits loops or parallel edges nor\nsupplies directions to its edges.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Form the quotient vertex set $V_\\xi$ by identifying each $\\xi$-class. For an edge with distinct quotient endpoints $u,v$, let its incidence vector be $e_u+e_v\\in\\mathbb F_2^{V_\\xi}$; a quotient loop has zero vector. In a component $C$ of the opened quotient graph $(V_\\xi,A)$, every edge vector has even coordinate sum, so their span lies in the even-sum subspace, of dimension $|C|-1$. Conversely choose a root $r\\in C$. For every $v\\in C\\setminus\\{r\\}$, connectedness [F2] gives an open path from $r$ to $v$; summing its edge vectors over $\\mathbb F_2$ cancels each internal vertex twice and gives $e_r+e_v$. These $|C|-1$ vectors are linearly independent by their distinct $v$-coordinates. Thus the incidence rank on $C$ is $|C|-1$, and summing over components gives $r(A)=|V_\\xi|-k_\\xi(A)$, including isolated vertices and quotient loops. If $U_A$ and $U_C$ are the spans of incidence vectors from edge sets $A$ and $C$, then $U_{A\\cup C}=U_A+U_C$ and $U_{A\\cap C}\\subseteq U_A\\cap U_C$. The subspace dimension formula therefore gives $r(A)+r(C)\\geq r(A\\cup C)+r(A\\cap C)$, hence $k_\\xi(A\\cup C)+k_\\xi(A\\cap C)\\geq k_\\xi(A)+k_\\xi(C)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Since $|A\\cup C|+|A\\cap C|=|A|+|C|$, the factors $p^{|A|}(1-p)^{|E\\setminus A|}$ have equality in the lattice condition. The component inequality in step 1.1 and $q\\geq1$ give the displayed log-supermodular inequality; every mass is positive by $0<p<1$ and $q\\geq1$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "We prove positive association for a strictly positive log-supermodular measure on $\\{0,1\\}^n$ by induction on $n$. It is trivial at $n=0$. For the last coordinate $s\\in\\{0,1\\}$, each conditional measure $\\mu_s$ on the first $n-1$ coordinates remains log-supermodular, so induction makes each $\\mu_s$ positively associated. The ratio $R(x)=\\mu(X_n=1,x)/\\mu(X_n=0,x)$ is increasing in $x$: for $x\\leq y$, apply log-supermodularity to $(y,0)$ and $(x,1)$ to obtain $R(y)\\geq R(x)$. Thus for every increasing $h$, $\\mathbb E_{\\mu_1}h=\\mathbb E_{\\mu_0}(hR)/\\mathbb E_{\\mu_0}R\\geq\\mathbb E_{\\mu_0}h$ by positive association under $\\mu_0$. For increasing $f,g$, their conditional means $F_s=\\mathbb E[f\\mid X_n=s]$ and $G_s=\\mathbb E[g\\mid X_n=s]$ therefore satisfy $F_1\\geq F_0$ and $G_1\\geq G_0$. The conditional association and the nonnegative covariance of two increasing functions of the single Bernoulli coordinate give $\\mathbb E(fg)\\geq\\sum_s\\mu(X_n=s)F_sG_s\\geq\\mathbb E f\\,\\mathbb E g$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "algebra",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Fix the exterior edge states outside a finite $F\\subseteq E$. For an interior edge set $A\\subseteq F$, the total number of components of the combined graph is the number of exterior-only components disjoint from the boundary of $F$, plus the number of components of the graph on $F$ after identifying its boundary vertices that are connected by the fixed exterior open edges or by $\\xi$. The first summand and all exterior edge factors are constant in $A$; they cancel when the conditional weights are normalized. Hence the conditional law on $F$ is exactly the finite FK law with this induced boundary partition.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Given all edges except $e$, let $s$ be the conditional number of components when $e$ is closed. If its endpoints are already connected, opening it leaves $s$ unchanged, so open-to-closed odds are $p/(1-p)$ and the open probability is $p$. If the endpoints are not connected, opening it changes the component factor from $q^s$ to $q^{s-1}$, so the odds are $p/[q(1-p)]$ and the open probability is $p/(p+q(1-p))$. Both expressions increase with $p$; making the boundary partition coarser can only turn the second case into the first.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-2",
+          "claim": "For two parameter/boundary choices ordered by $p_1\\leq p_2$ and by refinement $\\xi_1\\leq\\xi_2$, run random-scan heat-bath chains from the all-closed configuration, choosing the same edge and uniform random number at each update. Each update resamples one edge from its conditional FK law, so it preserves the corresponding FK law. Step 4.1 makes every coupled update preserve coordinatewise order. On each finite state space, all conditional probabilities lie strictly between zero and one, so the chain is irreducible and aperiodic and converges to its stationary FK law. Taking the time limit in the coupled chains proves stochastic domination.",
+          "step": "4.2",
+          "inputs": [
+            "step 4.1",
+            "construct",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 2.1 treats the zero-coordinate induction base."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.2 allows q=1 and retains strictly positive masses for p in (0,1)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 2.1 includes constant increasing functions in the association inequality."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.1 handles loops and parallel labelled edges in the incidence-rank argument."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement assumes 0<p<1; p=0 and p=1 are excluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 4.2 chooses heat-bath edges when E is nonempty; the empty case is covered by step 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a one-way bound or a parameter value, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse implication is part of this item statement."
+        }
+      ]
+    },
+    "lem-csm-frontier-fk-planar-duality": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-csm-frontier-fk-real-boundaries",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,E,\\partial)$ be a finite undirected multigraph: $V$ and the edge-label set $E$ are finite, and each $e\\in E$ has a singleton or two-element endpoint set $\\partial e\\subseteq V$. Distinct labels may have the same endpoint set. Let $B\\subseteq V$ be a designated boundary set and let $\\xi$ be an equivalence relation on $B$; vertices in each $\\xi$-class are wired together, while vertices outside $B$ remain separate. For $A\\subseteq E$, let $k_\\xi(A)$ be the number of connected components, including isolated vertices, after wiring the $\\xi$-classes and opening exactly the edges in $A$. A loop does not join distinct vertices.\n\nFor $q\\in[1,\\infty)$ and $p\\in(0,1)$, the finite FK weight of $A$ and its partition function are\n\n$$w_{G,p,q}^{\\xi}(A):=p^{|A|}(1-p)^{|E\\setminus A|}q^{k_\\xi(A)},\\qquad Z_{G,p,q}^{\\xi}:=\\sum_{A\\subseteq E}w_{G,p,q}^{\\xi}(A).$$\n\nThe finite FK random-cluster probability is $\\phi_{G,p,q}^{\\xi}(A):=w_{G,p,q}^{\\xi}(A)/Z_{G,p,q}^{\\xi}$. Every weight is positive and finite, and the finite sum $Z_{G,p,q}^{\\xi}$ is positive and finite. The free boundary condition is the identity partition on $B$; the wired boundary condition identifies all vertices of $B$ in one class.\n\nWhen $G$ is a finite simple graph with the Potts/FK convention of the earlier finite Potts definition, $\\xi$ is free, $q=Q$ is an integer at least two, and every activity equals $v=p/(1-p)$, this definition gives the same normalized FK law, since $w_{FK}(A)=(1-p)^{-|E|}w_{G,p,Q}^{\\xi}(A)$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-plane-graph-face-and-boundary",
+          "source_section": "Definition",
+          "quote": "A **plane graph** is a finite simple graph ([[def-finite-simple-graph]]) together with distinct points of $\\mathbb R^2$ for its vertices and a polygonal arc ([[def-polygonal-arc-and-polygon]]) for each edge, joining its endpoints, such that an edge interior contains no vertex and two edge arcs meet only at a common endpoint. A finite simple graph is **planar** if it is isomorphic to the abstract graph underlying some plane graph.\n\nA **face** is a region of the complement of the drawing ([[def-plane-region-and-frontier]]). The **boundary subgraph** of a face consists of the vertices and whole edges lying in its frontier; this is a subgraph in the sense of [[def-subgraph-induced-subgraph-and-spanning-subgraph]].\n\nFor a connected plane graph, walking once around a face with that face locally on the same side gives its **facial boundary walk**. Its **length** is the number of edge traversals, not the number of distinct edges: an edge incident with the same face on both local sides is traversed twice. For a disconnected plane graph a face may have several boundary walks; its boundary length is the sum of their lengths. No boundary walk is assumed to be a cycle unless a later connectivity result proves it.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-plane-dual-multigraph",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a connected plane graph with face set $F(G)$ ([[def-plane-graph-face-and-boundary]]). Its **dual multigraph** $G^*$ has vertex set $F(G)$ and one edge $e^*$ for every primal edge $e$. If the two local sides of $e$ belong to faces $f$ and $g$, then $e^*$ has endpoints $f,g$.\n\nBy [[lem-plane-edge-face-incidence]], a bridge has the same face on both local sides, so its dual edge is a loop. Different primal edges may have the same incident face pair, so their duals may be parallel. These are permitted by [[def-multigraph-loop-and-digraph]]. The definition is attached to the fixed plane embedding: different embeddings of the same abstract planar graph may have nonisomorphic dual multigraphs.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-euler-formula-for-disconnected-plane-graphs",
+          "source_section": "Statement",
+          "quote": "If a plane graph has $c$ connected components, then\n\n$$|V|-|E|+|F|=1+c.$$\n\nThis includes the null graph, for which $c=0$ and the complement is its single face. Component sets and their finite cardinalities are those of [[cor-connected-components-partition-the-vertex-set]] and [[def-finite-cardinality]], and face finiteness is [[lem-plane-graph-faces-are-finite-with-one-unbounded-face]].",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-plane-edge-face-incidence",
+          "source_section": "Statement",
+          "quote": "In a plane graph ([[def-plane-graph-face-and-boundary]]), if the relative interior of an edge meets the frontier of a face, then the whole edge lies in that frontier. An edge on a cycle is incident with two distinct faces, one on each local side. A bridge is incident with one face on both local sides and is therefore traversed twice in that face's boundary walk. Edge deletion is as in [[def-graph-deletion-contraction-minor-and-subdivision]], and the bridge cases use the arc-complement fact [[lem-polygonal-arc-does-not-separate-the-plane]].",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For the spanning subgraph $(V,A)$, write $F_A$ for its faces. Starting with $A=E$, the dual open set is empty, so its components are the individual faces of $G$. Delete primal edges one at a time. If a deleted edge is a bridge of the current subgraph, its component count increases by one while its edge count decreases by one; [F3] therefore leaves the face count unchanged. By [F4] its two local sides lie in one current face, hence in one current dual component by induction, so adding its dual edge does not change the dual component count (the edge may be a loop in the original dual or may join vertices already connected by previously opened dual edges). If it is not a bridge, its component count is unchanged while its edge count decreases by one; [F3] therefore lowers the face count by one. By [F4], the edge has two distinct incident current faces, hence two distinct current dual components by induction; opening its dual edge merges exactly those components. Induction over the finitely many deleted edges proves that dual components correspond to faces of the current primal subgraph; in particular $k_{G^*}(A^*)=|F_A|$.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "algebra",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Apply [F3] to $(V,A)$, whose number of components is $k_G(A)$. It gives $|V|-|A|+|F_A|=1+k_G(A)$. Substituting step 1.1 and rearranging yields $k_G(A)=k_{G^*}(A^*)+|V|-|A|-1$.",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $a=|A|$ and $m=|E|$. By step 1.2, the ratio of primal and dual unnormalized weights is $\\frac{p^a(1-p)^{m-a}q^{k_G(A)}}{(p^*)^{m-a}(1-p^*)^a q^{k_{G^*}(A^*)}}=q^{|V|-1}\\left(\\frac{p}{q(1-p^*)}\\right)^a\\left(\\frac{1-p}{p^*}\\right)^{m-a}$. The defining relation for $p^*$ gives $p/[q(1-p^*)]=(1-p)/p^*$, so this ratio is $q^{|V|-1}((1-p)/p^*)^m$, independent of $A$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since $A\\mapsto A^*$ is a bijection from primal edge subsets to dual edge subsets, normalizing the proportional weights in step 2.1 proves the asserted equality of probability laws. The factor $q^{|V|-1}$ is the contribution of the unique exterior face under this free dual convention; the identity is not a criticality argument.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 1.1 starts with A=E and handles the no-deletion base, with |V|>=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "the statement includes q=1; step 2.1 uses positive p and p-star."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 3.1 normalizes over the full bijection of primal and dual subsets."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "steps 1.1-1.2 account for bridges, cycles, dual loops and parallel edges."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement restricts p to (0,1), so endpoint weights are not claimed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1 is a finite edge-deletion induction and includes its base case."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a one-way bound or a parameter value, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse implication is part of this item statement."
+        }
+      ]
+    },
+    "lem-csm-frontier-fk-free-wired-limits": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-csm-frontier-fk-fkg-spatial-markov",
+          "source_section": "Statement",
+          "quote": "For every finite undirected multigraph $G=(V,E,\\partial)$, boundary set $B\\subseteq V$, boundary partition $\\xi$ on $B$, $q\\geq1$, and $p\\in(0,1)$, the finite FK law defined by the stated finite weights is strictly positive and log-supermodular on the Boolean lattice $2^E$: for $A,C\\subseteq E$,\n\n$$\\phi_{G,p,q}^{\\xi}(A\\cup C)\\phi_{G,p,q}^{\\xi}(A\\cap C)\\geq\\phi_{G,p,q}^{\\xi}(A)\\phi_{G,p,q}^{\\xi}(C).$$\n\nConsequently it is positively associated: $\\phi(fg)\\geq\\phi(f)\\phi(g)$ for increasing real functions $f,g:2^E\\to\\mathbb R$. Conditioning on the states of all edges outside a finite edge set $F$ gives a finite FK law on $F$ whose boundary partition wires exactly the vertices joined by the fixed exterior open edges and the original partition $\\xi$. Given all other edge states, an edge is open with conditional probability $p$ if its endpoints are already connected, and $p/(p+q(1-p))$ otherwise. If $p_1\\leq p_2$ and $\\xi_1$ refines $\\xi_2$ (each $\\xi_1$-class lies in a $\\xi_2$-class), then $\\phi_{p_1,q}^{\\xi_1}\\leq_{st}\\phi_{p_2,q}^{\\xi_2}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-csm-lattice-product-and-measure-compactness",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $d\\geq1$, let $A$ be a finite nonempty set, and put $X=A^{\\mathbb Z^d}$. Fix a bijection $(i_n)_{n\\geq1}:\\mathbb N_{>0}\\to\\mathbb Z^d$ and give $X$ the metric\n$$d_X(\\sigma,\\eta)=\\sum_{n\\geq1}2^{-n}\\mathbf 1_{\\{\\sigma_{i_n}\\ne\\eta_{i_n}\\}}.$$\nFor a finite $F\\subseteq\\mathbb Z^d$ and $B\\subseteq A^F$, write $[F,B]=\\{\\sigma\\in X:\\sigma|_F\\in B\\}$ and let $\\mathcal C=\\{[F,B]:F\\subseteq\\mathbb Z^d\\text{ finite},\\ B\\subseteq A^F\\}$ be the cylinder algebra. A family $(\\nu_F)_{F\\subseteq\\mathbb Z^d\\text{ finite}}$ of probability measures on $A^F$ is **consistent** if $(\\pi_E^F)_*\\nu_F=\\nu_E$ whenever $E\\subseteq F$, where $\\pi_E^F:A^F\\to A^E$ is restriction. Such a family defines $\\mu_0([F,B])=\\nu_F(B)$; consistency makes this a well-defined normalized finitely additive probability on $\\mathcal C$. Then $X$ is compact, the Borel sigma-algebra is $\\sigma(\\mathcal C)$, and $\\mu_0$ extends uniquely to a probability on $\\sigma(\\mathcal C)$. Moreover, every sequence of probabilities on this sigma-algebra has a subsequence whose cylinder probabilities converge to those of a probability measure; along that subsequence integrals of every continuous $f:X\\to\\mathbb R$ converge.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-csm-frontier-fk-infinite-volume-states",
+          "source_section": "Definition",
+          "quote": "Let $E_\\infty$ be the nearest-neighbor edge set of $\\mathbb Z^2$, and let $\\Lambda_n=[-n,n]^2\\cap\\mathbb Z^2$. Let $E_n$ contain the edges with both endpoints in $\\Lambda_n$, and let $\\partial\\Lambda_n$ be the vertices of $\\Lambda_n$ adjacent to a vertex outside it. Fix $q\\geq1$ and $p\\in(0,1)$. For each boundary partition $\\xi_n$ on $\\partial\\Lambda_n$, let $\\phi_{n,p,q}^{\\xi_n}$ be the finite FK law of [[def-csm-frontier-fk-real-boundaries]] on $(\\Lambda_n,E_n)$ and extend its configurations to $\\{0,1\\}^{E_\\infty}$ by setting all edges outside $E_n$ closed.\n\nAn **infinite-volume FK state** at $(p,q)$ is any probability measure on $\\{0,1\\}^{E_\\infty}$ that is a cylinder-probability limit of such extended finite-volume laws along a sequence $n_j\\to\\infty$ and boundary partitions $\\xi_{n_j}$. Cylinder-probability convergence means convergence of the probability of every assignment on every finite set of edges. When they exist, the **free FK state** and **wired FK state** are the cylinder limits for the identity and one-class partitions, respectively, at every $n$. Their existence and uniqueness as cylinder limits are established by a later A-page lemma. For either state $\\phi^b_{p,q}$, $b\\in\\{0,1\\}$, define $\\theta^b(p,q):=\\phi^b_{p,q}(0\\leftrightarrow\\infty)$, where $0\\leftrightarrow\\infty$ means that the open cluster of the origin is not contained in any finite box, and define\n\n$$p_c^b(q):=\\inf\\{p\\in(0,1):\\theta^b(p,q)>0\\}.$$\n\nNo equality of free and wired states at $p=p_c$ is part of this definition.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix $n<m$ and condition the law on $E_m$ on every edge outside $E_n$. By [F1], the conditional law on $E_n$ is an FK law whose boundary partition records connections made by those fixed exterior edges. This partition is at least as wired as the free partition, so averaging the conditional laws gives $\\phi^0_{m,p,q}|_{E_n}\\geq_{st}\\phi^0_{n,p,q}$. For the wired law on $E_m$, each induced partition on $\\partial\\Lambda_n$ is at most as wired as the one-class wired partition, so the same conditional comparison gives $\\phi^1_{m,p,q}|_{E_n}\\leq_{st}\\phi^1_{n,p,q}$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For each finite edge set $F\\subset E_\\infty$ and each $S\\subseteq F$, the event that every edge in $S$ is open is increasing. Its free probabilities therefore have a bounded monotone limit by step 1.1, and its wired probabilities also have a bounded monotone limit. Every atom on $F$ is recovered from these all-open probabilities by finite inclusion-exclusion: if $O$ is the prescribed open set and $C=F\\setminus O$ the prescribed closed set, then $P(\\omega|_F=O)=\\sum_{T\\subseteq C}(-1)^{|T|}P(\\omega_e=1\\text{ for all }e\\in O\\cup T)$. Hence every finite-dimensional atom probability converges for both sequences.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The limits in step 2.1 are consistent under restriction, because the finite-volume atom probabilities are consistent whenever the smaller edge set lies inside $E_n$. By [F2], each limiting consistent family extends to a probability measure; the same cylinder limits make it the unique subsequential limit of the corresponding sequence. Therefore the free and wired cylinder limits exist and are unique.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 2.1 recovers the probability of the empty finite cylinder by inclusion-exclusion."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "the statement permits q=1 and keeps p in (0,1)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 3.1 constructs consistent probability families with values in [0,1]."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The state space is the fixed nearest-neighbor square lattice and its nonempty boxes."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item assumes 0<p<1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1 compares arbitrary nested boxes n<m."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a one-way bound or a parameter value, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse implication is part of this item statement."
+        }
+      ]
+    },
+    "thm-csm-frontier-fk-torus-rsw": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-csm-frontier-fk-real-boundaries",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,E,\\partial)$ be a finite undirected multigraph: $V$ and the edge-label set $E$ are finite, and each $e\\in E$ has a singleton or two-element endpoint set $\\partial e\\subseteq V$. Distinct labels may have the same endpoint set. Let $B\\subseteq V$ be a designated boundary set and let $\\xi$ be an equivalence relation on $B$; vertices in each $\\xi$-class are wired together, while vertices outside $B$ remain separate. For $A\\subseteq E$, let $k_\\xi(A)$ be the number of connected components, including isolated vertices, after wiring the $\\xi$-classes and opening exactly the edges in $A$. A loop does not join distinct vertices.\n\nFor $q\\in[1,\\infty)$ and $p\\in(0,1)$, the finite FK weight of $A$ and its partition function are\n\n$$w_{G,p,q}^{\\xi}(A):=p^{|A|}(1-p)^{|E\\setminus A|}q^{k_\\xi(A)},\\qquad Z_{G,p,q}^{\\xi}:=\\sum_{A\\subseteq E}w_{G,p,q}^{\\xi}(A).$$\n\nThe finite FK random-cluster probability is $\\phi_{G,p,q}^{\\xi}(A):=w_{G,p,q}^{\\xi}(A)/Z_{G,p,q}^{\\xi}$. Every weight is positive and finite, and the finite sum $Z_{G,p,q}^{\\xi}$ is positive and finite. The free boundary condition is the identity partition on $B$; the wired boundary condition identifies all vertices of $B$ in one class.\n\nWhen $G$ is a finite simple graph with the Potts/FK convention of the earlier finite Potts definition, $\\xi$ is free, $q=Q$ is an integer at least two, and every activity equals $v=p/(1-p)$, this definition gives the same normalized FK law, since $w_{FK}(A)=(1-p)^{-|E|}w_{G,p,Q}^{\\xi}(A)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-csm-frontier-fk-fkg-spatial-markov",
+          "source_section": "Statement",
+          "quote": "For every finite undirected multigraph $G=(V,E,\\partial)$, boundary set $B\\subseteq V$, boundary partition $\\xi$ on $B$, $q\\geq1$, and $p\\in(0,1)$, the finite FK law defined by the stated finite weights is strictly positive and log-supermodular on the Boolean lattice $2^E$: for $A,C\\subseteq E$,\n\n$$\\phi_{G,p,q}^{\\xi}(A\\cup C)\\phi_{G,p,q}^{\\xi}(A\\cap C)\\geq\\phi_{G,p,q}^{\\xi}(A)\\phi_{G,p,q}^{\\xi}(C).$$\n\nConsequently it is positively associated: $\\phi(fg)\\geq\\phi(f)\\phi(g)$ for increasing real functions $f,g:2^E\\to\\mathbb R$. Conditioning on the states of all edges outside a finite edge set $F$ gives a finite FK law on $F$ whose boundary partition wires exactly the vertices joined by the fixed exterior open edges and the original partition $\\xi$. Given all other edge states, an edge is open with conditional probability $p$ if its endpoints are already connected, and $p/(p+q(1-p))$ otherwise. If $p_1\\leq p_2$ and $\\xi_1$ refines $\\xi_2$ (each $\\xi_1$-class lies in a $\\xi_2$-class), then $\\phi_{p_1,q}^{\\xi_1}\\leq_{st}\\phi_{p_2,q}^{\\xi_2}$.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-csm-frontier-fk-planar-duality",
+          "source_section": "Statement",
+          "quote": "Let $G=(V,E)$ be a finite connected plane graph with a fixed embedding and $|V|\\geq1$. Use the free partition on all primal vertices, $B=V$. Its plane dual multigraph $G^*$ has one vertex for each face, including the unbounded face, and one dual edge $e^*$ crossing each primal edge $e$; use the identity partition on the dual face-vertices. The unbounded face is one dual vertex, so this convention retains the exterior-face connection in the dual. For a primal open set $A\\subseteq E$, let $A^*:=\\{e^*:e\\in E\\setminus A\\}$, so a dual edge is open exactly when its crossing primal edge is closed. For $q\\geq1$ and $p\\in(0,1)$ define $p^*\\in(0,1)$ by\n\n$$\\frac{p^*}{1-p^*}=q\\frac{1-p}{p}.$$\n\nThen complementing the primal edges sends the finite FK law $\\phi_{G,p,q}^{\\mathrm{free}}$ to the dual FK law $\\phi_{G^*,p^*,q}^{\\mathrm{free}}$: the random dual edge set $A^*$ has exactly that distribution. The unnormalized weight ratio is the configuration-independent factor $q^{|V|-1}((1-p)/p^*)^{|E|}$; the exponent $|V|-1$ includes the exterior-face contribution under this identity-partition convention.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-polygonal-jordan-curve",
+          "source_section": "Statement",
+          "quote": "If $P\\subseteq\\mathbb R^2$ is a polygon, then $\\mathbb R^2\\setminus P$ has exactly two regions, one bounded and one unbounded, and\n\n$$\\operatorname{Fr}(U)=P$$\n\nfor each of them. Regions and frontiers are from [[def-plane-region-and-frontier]]. The proof uses the finite simple edge cycle of [[def-polygonal-arc-and-polygon]] and polygonal crossing parity from [[lem-polygonal-crossing-parity-is-locally-constant]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-csm-frontier-grid-crossings-intersect",
+          "source_section": "Statement",
+          "quote": "Let $a,b\\geq1$ be integers and let $Q_{a,b}=\\{0,\\ldots,a\\}\\times\\{0,\\ldots,b\\}$ have its nearest-neighbor square-grid edges, drawn as unit horizontal and vertical segments. A left-to-right path is a finite edge path whose endpoints lie on the sides $x=0$ and $x=a$; a bottom-to-top path is defined analogously using $y=0$ and $y=b$. Every left-to-right path and every bottom-to-top path in $Q_{a,b}$ share a vertex.",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For a square $S_n=\\{0,\\ldots,n\\}^2$ in the torus, its missing horizontal crossing is the vertical dual-open crossing of the dual rectangle, and these two events are complementary by planar separation [F4]. The dual parameter relation in [F3] gives $p^*=p$ at $p=p_{\\rm sd}(q)$; the torus dual is a translated quarter-turn of the same torus. By [A1], the dual-crossing probability is at most $q^2$ times the horizontal-crossing probability. Therefore $1\\leq(1+q^2)\\phi_{T_m,p,q}(H(S_n))$, so every admissible torus has square-crossing probability at least $c_1(q):=(1+q^2)^{-1}$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "To prove the base aspect $3/2$, fix an even positive integer $n$ and any torus side $m>3n/2$. Put $R=[0,3n/2]\\times[0,n]$, $R_1=[0,n]\\times[0,n]$, and $R_2=[n/2,3n/2]\\times[0,n]$. Let $D$ be the event that each of $R_1$ and $R_2$ has a horizontal crossing and that the bottom overlap segment of $R_2$ connects inside $R_2$ to its top side. The first two events each have probability at least $c_1(q)$ by step 1.1 and translation invariance. A full vertical crossing of $R_2$ has probability at least $c_1(q)$ by square symmetry. Split this event according as a crossing starts in the left or right half of the bottom side. These two increasing events have equal probabilities by reflection symmetry and their union is the full vertical-crossing event, so the specified left-half event has probability at least $c_1(q)/2$. FKG [F2] now gives $\\phi(D)\\geq c_1(q)^3/2$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "On $D$, choose the topmost horizontal crossing $\\Gamma_1$ of $R_1$ and the rightmost vertical crossing $\\Gamma_2$ of $R_2$ from the specified bottom overlap segment to the top. The horizontal crossing of $R_2$ intersects $\\Gamma_2$ by [F5], so $\\Gamma_2$ is connected to the right side of $R$; $\\Gamma_1$ reaches the left side of $R$. If $\\Gamma_1$ and $\\Gamma_2$ are connected by an open path contained in $R$, that path and the two boundary-reaching crossings concatenate to a horizontal crossing of $R$. Otherwise expose the top-left medial exploration of $\\Gamma_1$ and the right-side medial exploration of $\\Gamma_2$; these reveal only edges above $\\Gamma_1$ and to the right of $\\Gamma_2$. The reflected surgery in [A2] selects an unexplored component between them with two boundary arcs wired separately. By the spatial Markov property [F2], its conditional law is FK with the induced partition; [A2] supplies stochastic domination of the mixed law and a connection probability at least $c_2(q)=(1+q^2)^{-1}$. A connection inside that component joins $\\Gamma_1$ to $\\Gamma_2$ within $R$, so conditionally on their exploration the probability of a horizontal crossing of $R$ is at least $c_2(q)$.",
+          "step": "2.2",
+          "inputs": [
+            "A2",
+            "F2",
+            "F5",
+            "step 2.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-3",
+          "claim": "Averaging the conditional estimate of step 2.2 over $D$ gives $\\phi(H(R))\\geq c_1(q)^3/[2(1+q^2)]$. This is a uniform positive crossing bound for every $3/2$-aspect rectangle of even integer height.",
+          "step": "2.3",
+          "inputs": [
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Let $W=\\lfloor\\alpha n\\rfloor$ and $r_q=p_{\\rm sd}(q)/[p_{\\rm sd}(q)+q(1-p_{\\rm sd}(q))]>0$. If $n=1$ or $W<3$, a fixed row path of $W$ edges crosses the target; exposing its edges successively and using the lower conditional-open bound in [F2] gives probability at least $r_q^{\\lceil\\alpha\\rceil+2}$. Now suppose $n\\geq2$ and $W\\geq3$. If $1<\\alpha\\leq3/2$, put $k=\\lfloor W/3\\rfloor$ and $h=2k$. Then $h\\leq n$, and step 2.3 gives probability at least $c_3(q)$ for a horizontal crossing of $[0,3k]\\times[0,h]$. The right endpoint is at most two columns short of $W$. Given the configuration in this rectangle, choose the first such crossing by a fixed lexicographic rule and expose the at most two horizontal edges continuing from its right endpoint to $x=W$. Each has conditional-open probability at least $r_q$ by [F2], so the target crossing probability is at least $c_3(q)r_q^2$. If $\\alpha>3/2$, let $h=2\\lfloor n/2\\rfloor$, $w=3h/2$, $d=h/2$, and $T=W-w\\geq0$. Set $K=0$ if $T=0$ and otherwise $K=\\lceil T/d\\rceil$; choose starts $s_j=jd$ for $0\\leq j<K$ and $s_K=T$. Use the wide rectangles $[s_j,s_j+w]\\times[0,h]$, $0\\leq j\\leq K$, and, for each $j<K$, the square $[s_{j+1},s_{j+1}+h]\\times[0,h]$. Each overlap contains that square because every start increment is at most $d$ and $w-d=h$. The wide rectangle crossing probability is at least $c_3(q)$ by step 2.3, and each vertical square crossing probability is at least $c_1(q)$ by step 1.1. By [F5], each square crossing intersects the horizontal crossings in both adjacent rectangles. Their paths therefore concatenate to a target crossing; FKG [F2] bounds the joint probability below by $\\min\\{c_1(q),c_3(q)\\}^{2K+1}$. Since $K\\leq3\\alpha+1$ for $n\\geq2$, this is uniformly positive. All rectangles lie inside the target, hence inside the torus because $m>\\lceil\\alpha n\\rceil$. The resulting constant depends only on $q,\\alpha$, proving the assertion conditional on [A1] and [A2].",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F2",
+            "F5",
+            "step 1.1",
+            "step 2.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The crossing statement assumes positive scale and a nonempty finite torus."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 gives c1=1/2 at q=1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 uses the complementary dual-crossing event; finite weights keep the no-crossing event positive."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 3.1 records the finite-energy lower bound for the finitely many small rounded scales."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "For finite q>=1, p_sd lies strictly between 0 and 1; alpha is assumed greater than 1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "steps 2.1-2.2 choose the crossings on the event D."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a one-way bound or a parameter value, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse implication is part of this item statement."
+        }
+      ]
+    },
+    "lem-csm-frontier-fk-influence-threshold": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-csm-frontier-fk-fkg-spatial-markov",
+          "source_section": "Statement",
+          "quote": "For every finite undirected multigraph $G=(V,E,\\partial)$, boundary set $B\\subseteq V$, boundary partition $\\xi$ on $B$, $q\\geq1$, and $p\\in(0,1)$, the finite FK law defined by the stated finite weights is strictly positive and log-supermodular on the Boolean lattice $2^E$: for $A,C\\subseteq E$,\n\n$$\\phi_{G,p,q}^{\\xi}(A\\cup C)\\phi_{G,p,q}^{\\xi}(A\\cap C)\\geq\\phi_{G,p,q}^{\\xi}(A)\\phi_{G,p,q}^{\\xi}(C).$$\n\nConsequently it is positively associated: $\\phi(fg)\\geq\\phi(f)\\phi(g)$ for increasing real functions $f,g:2^E\\to\\mathbb R$. Conditioning on the states of all edges outside a finite edge set $F$ gives a finite FK law on $F$ whose boundary partition wires exactly the vertices joined by the fixed exterior open edges and the original partition $\\xi$. Given all other edge states, an edge is open with conditional probability $p$ if its endpoints are already connected, and $p/(p+q(1-p))$ otherwise. If $p_1\\leq p_2$ and $\\xi_1$ refines $\\xi_2$ (each $\\xi_1$-class lies in a $\\xi_2$-class), then $\\phi_{p_1,q}^{\\xi_1}\\leq_{st}\\phi_{p_2,q}^{\\xi_2}$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-csm-frontier-fk-real-boundaries",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,E,\\partial)$ be a finite undirected multigraph: $V$ and the edge-label set $E$ are finite, and each $e\\in E$ has a singleton or two-element endpoint set $\\partial e\\subseteq V$. Distinct labels may have the same endpoint set. Let $B\\subseteq V$ be a designated boundary set and let $\\xi$ be an equivalence relation on $B$; vertices in each $\\xi$-class are wired together, while vertices outside $B$ remain separate. For $A\\subseteq E$, let $k_\\xi(A)$ be the number of connected components, including isolated vertices, after wiring the $\\xi$-classes and opening exactly the edges in $A$. A loop does not join distinct vertices.\n\nFor $q\\in[1,\\infty)$ and $p\\in(0,1)$, the finite FK weight of $A$ and its partition function are\n\n$$w_{G,p,q}^{\\xi}(A):=p^{|A|}(1-p)^{|E\\setminus A|}q^{k_\\xi(A)},\\qquad Z_{G,p,q}^{\\xi}:=\\sum_{A\\subseteq E}w_{G,p,q}^{\\xi}(A).$$\n\nThe finite FK random-cluster probability is $\\phi_{G,p,q}^{\\xi}(A):=w_{G,p,q}^{\\xi}(A)/Z_{G,p,q}^{\\xi}$. Every weight is positive and finite, and the finite sum $Z_{G,p,q}^{\\xi}$ is positive and finite. The free boundary condition is the identity partition on $B$; the wired boundary condition identifies all vertices of $B$ in one class.\n\nWhen $G$ is a finite simple graph with the Potts/FK convention of the earlier finite Potts definition, $\\xi$ is free, $q=Q$ is an integer at least two, and every activity equals $v=p/(1-p)$, this definition gives the same normalized FK law, since $w_{FK}(A)=(1-p)^{-|E|}w_{G,p,Q}^{\\xi}(A)$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Order the edges as $e_1,\\ldots,e_n$. For every prefix configuration $\\eta$ define $a_j(\\eta):=\\phi(\\omega_{e_j}=1\\mid\\omega_{e_i}=\\eta_i,\\ i<j)$. Positivity makes each conditional probability lie in $(0,1)$. To compare prefixes $\\eta\\leq\\eta'$, change their coordinates from $0$ to $1$ one at a time. For one such change, condition on the other fixed prefix coordinates and let $\\mu_0,\\mu_1$ be the two conditional laws on the remaining edges. Both are positive and log-supermodular by [F1]. Their likelihood ratio $R(z)=\\mu_1(z)/\\mu_0(z)$ is increasing in $z$: for $z\\leq z'$, the log-supermodular inequality applied to $(z',1)$ and $(z,0)$ gives $\\mu_1(z')\\mu_0(z)\\geq\\mu_1(z)\\mu_0(z')$. Since $\\mu_0$ is FKG-associated by [F1], every increasing $h$ satisfies $\\mathbb E_{\\mu_1}h=\\mathbb E_{\\mu_0}(hR)/\\mathbb E_{\\mu_0}R\\geq\\mathbb E_{\\mu_0}h$. Apply this with $h=\\mathbf1_{\\{\\omega_{e_j}=1\\}}$ at each prefix change to see that $a_j$ is increasing. With independent uniform coordinates $U_1,\\ldots,U_n$, recursively set $\\omega_{e_j}=\\mathbf1_{\\{U_j>1-a_j(\\omega_{e_1},\\ldots,\\omega_{e_{j-1}})\\}}$. The chain rule for conditional probabilities gives law $\\phi$, while monotonicity of the $a_j$ makes the map $U\\mapsto\\omega$ coordinatewise increasing. Hence $C:=\\{U:\\omega(U)\\in A\\}$ is increasing and $\\lambda(C)=\\phi(A)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fix $e\\in E$ and repeat the construction with $e$ first; call its preimage of $A$ the increasing set $C_e$. Fix all uniforms except $U_e$. In the original ordering, $U_e=1$ forces $e$ open because every threshold is below $1$; in the reordered construction it is open first. For any fixed previously generated prefix, the conditional FK law on the remaining edges is FKG; positive association gives $\\mathbb E[h\\mid e=1]\\geq\\mathbb E[h]$ for every increasing $h$, since $\\operatorname{Cov}(h,\\mathbf1_{\\{e=1\\}})\\geq0$, and conditioning on $e=0$ gives the reverse stochastic order. Thus, while the prefix edges before $e$ in the original order are sampled without conditioning on $e$, the reordered construction samples them conditional on $e=1$ and the same uniforms make each reordered prefix edge at least its original value. The later edges preserve that order by induction using the increasing thresholds from step 1.1. With $U_e=0$, both constructions force $e$ closed and the conditional-prefix inequalities reverse, so the reordered output is coordinatewise no larger. As $A$ is increasing, these pointwise comparisons give $\\lambda(C\\mid U_e=1)\\leq\\lambda(C_e\\mid U_e=1)$ and $\\lambda(C\\mid U_e=0)\\geq\\lambda(C_e\\mid U_e=0)$. In the reordered construction, conditioning $U_e$ to $1$ or $0$ samples exactly the FK law conditional on $e$ being open or closed, so its endpoint fiber difference is $I_A(e)$. Subtracting the two inequalities proves that the fiber influence of $C$ in coordinate $e$ is at most $I_A(e)$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Apply [A1] to the increasing set $C$ from step 1.1. For some edge coordinate $e$, its fiber influence is at least $c_0\\phi(A)(1-\\phi(A))\\log n/n$. Step 2.1 bounds this fiber influence above by $I_A(e)$, giving the claimed inequality with $c(q,\\varepsilon)=c_0$. This is a conditional deduction from [A1]; it does not establish [A1].",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes |E|>=2."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The event assumption is 0<phi(A), excluding probability zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The event assumption is phi(A)<1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.1 uses labelled edges, and the conditional law also covers loops and parallel edges."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The parameter is restricted to p in [epsilon,1-epsilon]."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 3.1 selects a coordinate among the n>=2 edge coordinates."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a one-way bound or a parameter value, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse implication is part of this item statement."
+        }
+      ]
+    },
+    "lem-csm-frontier-fk-crossing-amplification": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-csm-frontier-fk-real-boundaries",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,E,\\partial)$ be a finite undirected multigraph: $V$ and the edge-label set $E$ are finite, and each $e\\in E$ has a singleton or two-element endpoint set $\\partial e\\subseteq V$. Distinct labels may have the same endpoint set. Let $B\\subseteq V$ be a designated boundary set and let $\\xi$ be an equivalence relation on $B$; vertices in each $\\xi$-class are wired together, while vertices outside $B$ remain separate. For $A\\subseteq E$, let $k_\\xi(A)$ be the number of connected components, including isolated vertices, after wiring the $\\xi$-classes and opening exactly the edges in $A$. A loop does not join distinct vertices.\n\nFor $q\\in[1,\\infty)$ and $p\\in(0,1)$, the finite FK weight of $A$ and its partition function are\n\n$$w_{G,p,q}^{\\xi}(A):=p^{|A|}(1-p)^{|E\\setminus A|}q^{k_\\xi(A)},\\qquad Z_{G,p,q}^{\\xi}:=\\sum_{A\\subseteq E}w_{G,p,q}^{\\xi}(A).$$\n\nThe finite FK random-cluster probability is $\\phi_{G,p,q}^{\\xi}(A):=w_{G,p,q}^{\\xi}(A)/Z_{G,p,q}^{\\xi}$. Every weight is positive and finite, and the finite sum $Z_{G,p,q}^{\\xi}$ is positive and finite. The free boundary condition is the identity partition on $B$; the wired boundary condition identifies all vertices of $B$ in one class.\n\nWhen $G$ is a finite simple graph with the Potts/FK convention of the earlier finite Potts definition, $\\xi$ is free, $q=Q$ is an integer at least two, and every activity equals $v=p/(1-p)$, this definition gives the same normalized FK law, since $w_{FK}(A)=(1-p)^{-|E|}w_{G,p,Q}^{\\xi}(A)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-csm-frontier-fk-fkg-spatial-markov",
+          "source_section": "Statement",
+          "quote": "For every finite undirected multigraph $G=(V,E,\\partial)$, boundary set $B\\subseteq V$, boundary partition $\\xi$ on $B$, $q\\geq1$, and $p\\in(0,1)$, the finite FK law defined by the stated finite weights is strictly positive and log-supermodular on the Boolean lattice $2^E$: for $A,C\\subseteq E$,\n\n$$\\phi_{G,p,q}^{\\xi}(A\\cup C)\\phi_{G,p,q}^{\\xi}(A\\cap C)\\geq\\phi_{G,p,q}^{\\xi}(A)\\phi_{G,p,q}^{\\xi}(C).$$\n\nConsequently it is positively associated: $\\phi(fg)\\geq\\phi(f)\\phi(g)$ for increasing real functions $f,g:2^E\\to\\mathbb R$. Conditioning on the states of all edges outside a finite edge set $F$ gives a finite FK law on $F$ whose boundary partition wires exactly the vertices joined by the fixed exterior open edges and the original partition $\\xi$. Given all other edge states, an edge is open with conditional probability $p$ if its endpoints are already connected, and $p/(p+q(1-p))$ otherwise. If $p_1\\leq p_2$ and $\\xi_1$ refines $\\xi_2$ (each $\\xi_1$-class lies in a $\\xi_2$-class), then $\\phi_{p_1,q}^{\\xi_1}\\leq_{st}\\phi_{p_2,q}^{\\xi_2}$.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-csm-frontier-fk-infinite-volume-states",
+          "source_section": "Definition",
+          "quote": "Let $E_\\infty$ be the nearest-neighbor edge set of $\\mathbb Z^2$, and let $\\Lambda_n=[-n,n]^2\\cap\\mathbb Z^2$. Let $E_n$ contain the edges with both endpoints in $\\Lambda_n$, and let $\\partial\\Lambda_n$ be the vertices of $\\Lambda_n$ adjacent to a vertex outside it. Fix $q\\geq1$ and $p\\in(0,1)$. For each boundary partition $\\xi_n$ on $\\partial\\Lambda_n$, let $\\phi_{n,p,q}^{\\xi_n}$ be the finite FK law of [[def-csm-frontier-fk-real-boundaries]] on $(\\Lambda_n,E_n)$ and extend its configurations to $\\{0,1\\}^{E_\\infty}$ by setting all edges outside $E_n$ closed.\n\nAn **infinite-volume FK state** at $(p,q)$ is any probability measure on $\\{0,1\\}^{E_\\infty}$ that is a cylinder-probability limit of such extended finite-volume laws along a sequence $n_j\\to\\infty$ and boundary partitions $\\xi_{n_j}$. Cylinder-probability convergence means convergence of the probability of every assignment on every finite set of edges. When they exist, the **free FK state** and **wired FK state** are the cylinder limits for the identity and one-class partitions, respectively, at every $n$. Their existence and uniqueness as cylinder limits are established by a later A-page lemma. For either state $\\phi^b_{p,q}$, $b\\in\\{0,1\\}$, define $\\theta^b(p,q):=\\phi^b_{p,q}(0\\leftrightarrow\\infty)$, where $0\\leftrightarrow\\infty$ means that the open cluster of the origin is not contained in any finite box, and define\n\n$$p_c^b(q):=\\inf\\{p\\in(0,1):\\theta^b(p,q)>0\\}.$$\n\nNo equality of free and wired states at $p=p_c$ is part of this definition.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-csm-frontier-fk-free-wired-limits",
+          "source_section": "Statement",
+          "quote": "For every $q\\geq1$ and $p\\in(0,1)$, the free finite-volume FK laws on $\\Lambda_n$ are stochastically increasing under restriction as $n$ grows, and the wired finite-volume FK laws are stochastically decreasing under restriction. Both sequences therefore have unique cylinder-probability limits, and those limits are probability measures on $\\{0,1\\}^{E_\\infty}$; hence the free and wired infinite-volume states are well-defined.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-csm-frontier-fk-torus-rsw",
+          "source_section": "Statement",
+          "quote": "For each $q\\geq1$ and aspect ratio $\\alpha>1$, there is a constant $c(\\alpha,q)>0$ such that the following holds. Let $n,m$ be positive integers with $m>\\lceil\\alpha n\\rceil$, let $T_m=(\\mathbb Z/m\\mathbb Z)^2$ with its nearest-neighbor horizontal and vertical edges and periodic boundary conditions, and give its edges the FK law with no boundary wiring, parameter $q$, and $p_{\\rm sd}(q)=\\sqrt q/(1+\\sqrt q)$. The probability of a horizontal open crossing of the vertex rectangle $\\{0,\\ldots,\\lfloor\\alpha n\\rfloor\\}\\times\\{0,\\ldots,n\\}$ is at least $c(\\alpha,q)$, uniformly in $n$ and $m$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-csm-frontier-fk-influence-threshold",
+          "source_section": "Statement",
+          "quote": "Let $G=(V,E,\\partial)$ be a finite undirected multigraph, let $B\\subseteq V$ have boundary partition $\\xi$, fix $q\\geq1$, $\\varepsilon\\in(0,1/2)$, and $p\\in[\\varepsilon,1-\\varepsilon]$, and let $\\phi=\\phi_{G,p,q}^{\\xi}$ be the finite FK law. For every increasing event $A\\subseteq2^E$ with $0<\\phi(A)<1$ and $|E|\\geq2$, define the conditional influence of edge $e$ by\n\n$$I_A(e):=\\phi(A\\mid \\omega_e=1)-\\phi(A\\mid\\omega_e=0).$$\n\nThere is a constant $c(q,\\varepsilon)>0$ such that\n\n$$\\max_{e\\in E}I_A(e)\\geq c(q,\\varepsilon)\\,\\phi(A)(1-\\phi(A))\\frac{\\log|E|}{|E|}.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-csm-frontier-fk-planar-duality",
+          "source_section": "Statement",
+          "quote": "Let $G=(V,E)$ be a finite connected plane graph with a fixed embedding and $|V|\\geq1$. Use the free partition on all primal vertices, $B=V$. Its plane dual multigraph $G^*$ has one vertex for each face, including the unbounded face, and one dual edge $e^*$ crossing each primal edge $e$; use the identity partition on the dual face-vertices. The unbounded face is one dual vertex, so this convention retains the exterior-face connection in the dual. For a primal open set $A\\subseteq E$, let $A^*:=\\{e^*:e\\in E\\setminus A\\}$, so a dual edge is open exactly when its crossing primal edge is closed. For $q\\geq1$ and $p\\in(0,1)$ define $p^*\\in(0,1)$ by\n\n$$\\frac{p^*}{1-p^*}=q\\frac{1-p}{p}.$$\n\nThen complementing the primal edges sends the finite FK law $\\phi_{G,p,q}^{\\mathrm{free}}$ to the dual FK law $\\phi_{G^*,p^*,q}^{\\mathrm{free}}$: the random dual edge set $A^*$ has exactly that distribution. The unnormalized weight ratio is the configuration-independent factor $q^{|V|-1}((1-p)/p^*)^{|E|}$; the exponent $|V|-1$ includes the exterior-face contribution under this identity-partition convention.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A3",
+          "source": "def-csm-frontier-fk-infinite-volume-states",
+          "source_section": "Definition",
+          "quote": "Let $E_\\infty$ be the nearest-neighbor edge set of $\\mathbb Z^2$, and let $\\Lambda_n=[-n,n]^2\\cap\\mathbb Z^2$. Let $E_n$ contain the edges with both endpoints in $\\Lambda_n$, and let $\\partial\\Lambda_n$ be the vertices of $\\Lambda_n$ adjacent to a vertex outside it. Fix $q\\geq1$ and $p\\in(0,1)$. For each boundary partition $\\xi_n$ on $\\partial\\Lambda_n$, let $\\phi_{n,p,q}^{\\xi_n}$ be the finite FK law of [[def-csm-frontier-fk-real-boundaries]] on $(\\Lambda_n,E_n)$ and extend its configurations to $\\{0,1\\}^{E_\\infty}$ by setting all edges outside $E_n$ closed.\n\nAn **infinite-volume FK state** at $(p,q)$ is any probability measure on $\\{0,1\\}^{E_\\infty}$ that is a cylinder-probability limit of such extended finite-volume laws along a sequence $n_j\\to\\infty$ and boundary partitions $\\xi_{n_j}$. Cylinder-probability convergence means convergence of the probability of every assignment on every finite set of edges. When they exist, the **free FK state** and **wired FK state** are the cylinder limits for the identity and one-class partitions, respectively, at every $n$. Their existence and uniqueness as cylinder limits are established by a later A-page lemma. For either state $\\phi^b_{p,q}$, $b\\in\\{0,1\\}$, define $\\theta^b(p,q):=\\phi^b_{p,q}(0\\leftrightarrow\\infty)$, where $0\\leftrightarrow\\infty$ means that the open cluster of the origin is not contained in any finite box, and define\n\n$$p_c^b(q):=\\inf\\{p\\in(0,1):\\theta^b(p,q)>0\\}.$$\n\nNo equality of free and wired states at $p=p_c$ is part of this definition.",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $G=(V,E)$ be any finite graph with $m=|E|$, and let $B\\subseteq2^E$ be increasing. Differentiating the finite FK mass in [F1] gives $\\frac{d}{dp}\\phi_p(B)=\\operatorname{Cov}_p(\\mathbf1_B,|\\omega|)/(p(1-p))$. Expanding $|\\omega|=\\sum_e\\mathbf1_{\\{e\\text{ open}\\}}$ and conditioning on one edge gives\n$$\\frac{d}{dp}\\phi_p(B)=\\sum_{e\\in E}\\frac{u_e(1-u_e)}{p(1-p)}I_B(e),\\qquad u_e=\\phi_p(e\\text{ open}).$$\nBy [F2], every edge conditional-open probability lies between $p/[p+q(1-p)]$ and $p$; therefore for fixed $q$ and $p\\in[\\varepsilon,1-\\varepsilon]$ the displayed coefficient has a positive lower bound $a(q,\\varepsilon)$. Hence $\\phi_p'(B)\\geq a(q,\\varepsilon)\\sum_e I_B(e)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For each torus side $m\\geq12$, put $n_m=\\lfloor m/12\\rfloor$ and let $B_m$ be the event that some translate of a vertical crossing of a strip of width $n_m$ and height $3n_m$ occurs. This event is increasing and translation invariant. Rotating the strip and applying the torus RSW bound [F4] at aspect ratio $3$ gives $\\phi_{p_{\\rm sd}}(B_m)\\geq b(q)>0$, because $m>3n_m$. The two translation-orbits of edges each contain $m^2$ edges; translation invariance makes the conditional influence constant on each orbit. Thus the maximum influence bound [F5] implies $\\sum_e I_{B_m}(e)\\geq a_1(q,\\varepsilon)\\phi_p(B_m)(1-\\phi_p(B_m))\\log m$. Combining with step 1.1 yields $\\frac{d}{dp}\\log\\frac{\\phi_p(B_m)}{1-\\phi_p(B_m)}\\geq a_2(q,\\varepsilon)\\log m$.",
+          "step": "1.2",
+          "inputs": [
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Integrate step 1.2 from $p_{\\rm sd}$ to fixed $p>p_{\\rm sd}$, choosing $\\varepsilon$ so the interval lies in $[\\varepsilon,1-\\varepsilon]$. The initial lower bound $b(q,\\alpha)$ gives $1-\\phi_p(B_m)\\leq K m^{-a_2(q,\\varepsilon)(p-p_{\\rm sd})}$ for a constant $K$ independent of $m$. This is the polynomial torus crossing estimate required by [A1].",
+          "step": "1.3",
+          "inputs": [
+            "step 1.2",
+            "algebra",
+            "A1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [A1] and step 1.3, $\\theta^1(p,q)>0$ for every $p>p_{\\rm sd}(q)$. If $p<p_{\\rm sd}(q)$, [F6] gives a dual parameter $p^*$ with $p^*/(1-p^*)=q(1-p)/p>\\sqrt q=p_{\\rm sd}/(1-p_{\\rm sd})$, hence $p^*>p_{\\rm sd}$. The dual annulus route in [A2] then supplies the wired two-point bound $C(p,q)e^{-c(p,q)\\lVert x-y\\rVert_2}$. The probability that the origin connects to the vertex boundary of the radius-$r$ box is at most $\\sum_{y\\in\\partial\\Lambda_r}C(p,q)e^{-c(p,q)\\lVert y\\rVert_2}$, which tends to zero because $|\\partial\\Lambda_r|=8r$ and each boundary vertex has Euclidean norm at least $r$. An infinite origin cluster would connect to every such boundary, so $\\theta^1(p,q)=0$. The infimum in the definition of $p_c^1$ is therefore $p_{\\rm sd}(q)$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F3",
+            "F6",
+            "step 1.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "For an arbitrary cylinder-limit FK state and fixed vertices $x,y$, the event that a path from $x$ to $y$ lies inside a finite box is an increasing cylinder event. These events increase with the box and their union is $\\{x\\leftrightarrow y\\}$. By finite-volume boundary monotonicity [F2] and the cylinder limits [F3], each such event has probability at most its wired-state probability; continuity from below gives the same inequality for $\\{x\\leftrightarrow y\\}$. Applying [A2] to the wired probability gives the same exponential upper bound in every cylinder-limit state. By [A3], the free and wired thresholds agree; hence both equal $p_{\\rm sd}(q)$. No comparison in this proof identifies the measures at $p=p_{\\rm sd}(q)$.",
+          "step": "2.2",
+          "inputs": [
+            "A2",
+            "A3",
+            "F2",
+            "F3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim concerns infinite square-lattice states and positive-size torus crossings."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1 derives zero percolation below p_sd from the subcritical two-point input."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.3 yields polynomial convergence of the torus event probability to one."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The lattice and torus are fixed regular square-lattice graphs."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement restricts p to (0,1); the differential step uses a compact subinterval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.2 uses the two finite translation-orbits of torus edges."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a one-way bound or a parameter value, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse implication is part of this item statement."
+        }
+      ]
+    },
+    "thm-csm-frontier-fk-square-critical-point": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-csm-frontier-fk-infinite-volume-states",
+          "source_section": "Definition",
+          "quote": "Let $E_\\infty$ be the nearest-neighbor edge set of $\\mathbb Z^2$, and let $\\Lambda_n=[-n,n]^2\\cap\\mathbb Z^2$. Let $E_n$ contain the edges with both endpoints in $\\Lambda_n$, and let $\\partial\\Lambda_n$ be the vertices of $\\Lambda_n$ adjacent to a vertex outside it. Fix $q\\geq1$ and $p\\in(0,1)$. For each boundary partition $\\xi_n$ on $\\partial\\Lambda_n$, let $\\phi_{n,p,q}^{\\xi_n}$ be the finite FK law of [[def-csm-frontier-fk-real-boundaries]] on $(\\Lambda_n,E_n)$ and extend its configurations to $\\{0,1\\}^{E_\\infty}$ by setting all edges outside $E_n$ closed.\n\nAn **infinite-volume FK state** at $(p,q)$ is any probability measure on $\\{0,1\\}^{E_\\infty}$ that is a cylinder-probability limit of such extended finite-volume laws along a sequence $n_j\\to\\infty$ and boundary partitions $\\xi_{n_j}$. Cylinder-probability convergence means convergence of the probability of every assignment on every finite set of edges. When they exist, the **free FK state** and **wired FK state** are the cylinder limits for the identity and one-class partitions, respectively, at every $n$. Their existence and uniqueness as cylinder limits are established by a later A-page lemma. For either state $\\phi^b_{p,q}$, $b\\in\\{0,1\\}$, define $\\theta^b(p,q):=\\phi^b_{p,q}(0\\leftrightarrow\\infty)$, where $0\\leftrightarrow\\infty$ means that the open cluster of the origin is not contained in any finite box, and define\n\n$$p_c^b(q):=\\inf\\{p\\in(0,1):\\theta^b(p,q)>0\\}.$$\n\nNo equality of free and wired states at $p=p_c$ is part of this definition.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-csm-frontier-fk-crossing-amplification",
+          "source_section": "Statement",
+          "quote": "Put $p_{\\rm sd}(q)=\\sqrt q/(1+\\sqrt q)$. Assume the periodic-torus crossing estimates at $p_{\\rm sd}(q)$ from [[thm-csm-frontier-fk-torus-rsw]], the influence inequality from [[lem-csm-frontier-fk-influence-threshold]], and the following two unresolved inputs. First, the source's wired-boundary path construction must convert the polynomial high-probability torus crossing estimates into $\\theta^1(p,q)>0$ for every $p>p_{\\rm sd}(q)$. Second, its subcritical finite-size/Hamming-distance argument, including the greedy-lattice-animal bound, must give constants $C,c>0$ such that $\\phi^1_{p,q}(x\\leftrightarrow y)\\leq C e^{-c\\lVert x-y\\rVert_2}$ for $p<p_{\\rm sd}(q)$. Under these hypotheses, both conclusions hold. In particular, $p_c^1(q)=p_{\\rm sd}(q)$, where $p_c^1$ is defined in [[def-csm-frontier-fk-infinite-volume-states]].\n\nThe same hypotheses imply the identical free threshold if, in addition, the planar free/wired threshold-coincidence input recorded below is supplied. They do not assert equality of the free and wired measures at $p=p_{\\rm sd}(q)$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix $q\\geq1$ and write $p_s=p_{\\rm sd}(q)$. By [F2], $\\theta^1(p,q)>0$ for every $p>p_s$ and $\\theta^1(p,q)=0$ for every $p<p_s$. Therefore the infimum defining $p_c^1(q)$ is $p_s$: no parameter below $p_s$ belongs to the defining set, while every parameter above $p_s$ does.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The free/wired threshold-coincidence conclusion in [F2] gives $p_c^0(q)=p_c^1(q)=p_s$. This is a statement about the two infima; it does not identify the measures or their percolation probabilities at $p=p_s$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $p<p_s$, [F2] supplies constants $C(p,q),c(p,q)>0$ for the wired two-point function. The same crossing-amplification result proves that every cylinder-limit state is stochastically dominated by the wired state on connection events, so the identical bound holds for every $\\phi$ in the statement. This is an FK model deduction under the unresolved hypotheses carried by [F2].",
+          "step": "2.1",
+          "inputs": [
+            "F2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem is on the nonempty infinite square lattice."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1 records zero free and wired percolation below p_sd."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 records wired positivity above p_sd."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate lattice or graph is in the stated domain."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The parameter p is in (0,1) and p_sd(q) is interior for finite q>=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof only applies the crossing-amplification conclusions and makes no finite selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a one-way bound or a parameter value, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse implication is part of this item statement."
+        }
+      ]
+    },
+    "thm-csm-frontier-potts-square-critical-temperature": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-csm-frontier-finite-potts-fk",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,E)$ be a finite simple graph, so $V$ is finite and $E$ is a set of two-element subsets of $V$. Fix an integer $Q\\geq2$, write $[Q]=\\{1,\\ldots,Q\\}$, and assign to each edge $e\\in E$ a finite activity $v_e\\in[0,\\infty)$. A spin configuration is a function $\\sigma:V\\to[Q]$. Its unnormalized Potts weight and partition function are\n$$w_P(\\sigma):=\\prod_{e=\\{u_e,w_e\\}\\in E}\\bigl(1+v_e\\mathbf1_{\\{\\sigma(u_e)=\\sigma(w_e)\\}}\\bigr),\\qquad Z_P(Q,\\mathbf v):=\\sum_{\\sigma:V\\to[Q]}w_P(\\sigma).$$\nFor $A\\subseteq E$, let $G_A=(V,A)$, and let $k_G(A)$ be its number of connected components, counting isolated vertices; equivalently, these are the equivalence classes generated by the endpoint pairs of edges in $A$. Put $v_A:=\\prod_{e\\in A}v_e$, with empty product $1$. The unnormalized Fortuin–Kasteleyn (FK) weight and partition function are\n$$w_{FK}(A):=Q^{k_G(A)}v_A,\\qquad Z_{FK}(Q,\\mathbf v):=\\sum_{A\\subseteq E}w_{FK}(A).$$\nBoth normalizers are finite and positive: the spin sum is finite with every term at least $1$, while the empty-edge FK term is $Q^{|V|}>0$. These are finite mathematical weights; no physical units or empirical status are assigned.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-csm-frontier-edwards-sokal",
+          "source_section": "Statement",
+          "quote": "Let $G=(V,E)$ be a finite simple graph, let $Q\\geq2$ be an integer, and let each edge activity $v_e$ be finite and nonnegative. Use the Potts weight $w_P(\\sigma)=\\prod_{e=\\{u_e,w_e\\}}(1+v_e\\mathbf1_{\\{\\sigma(u_e)=\\sigma(w_e)\\}})$ and FK weight $w_{FK}(A)=Q^{k_G(A)}\\prod_{e\\in A}v_e$ from the finite definitions. Define\n$$W(\\sigma,A):=\\prod_{e\\notin A}1\\prod_{e\\in A}v_e\\mathbf1_{\\{\\sigma(u_e)=\\sigma(w_e)\\}},\\qquad (\\sigma,A)\\in[Q]^V\\times2^E.$$\nThe normalized joint law $\\nu(\\sigma,A):=W(\\sigma,A)/\\sum_{\\tau,B}W(\\tau,B)$ has Potts marginal $w_P/Z_P$ and FK marginal $w_{FK}/Z_{FK}$, with $Z_P=Z_{FK}=\\sum_{\\tau,B}W(\\tau,B)$. Conditional on an edge set $A$ of positive probability, the colors of its connected components are independent and uniform on $[Q]$. Thus for every $x,y\\in V$,\n$$\\mathbb P(\\sigma(x)=\\sigma(y))=\\frac1Q+\\left(1-\\frac1Q\\right)\\mathbb P_{FK}(x\\leftrightarrow y),$$\nwhere $x\\leftrightarrow y$ means that $x$ and $y$ lie in the same component of $G_A$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-csm-frontier-fk-real-boundaries",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,E,\\partial)$ be a finite undirected multigraph: $V$ and the edge-label set $E$ are finite, and each $e\\in E$ has a singleton or two-element endpoint set $\\partial e\\subseteq V$. Distinct labels may have the same endpoint set. Let $B\\subseteq V$ be a designated boundary set and let $\\xi$ be an equivalence relation on $B$; vertices in each $\\xi$-class are wired together, while vertices outside $B$ remain separate. For $A\\subseteq E$, let $k_\\xi(A)$ be the number of connected components, including isolated vertices, after wiring the $\\xi$-classes and opening exactly the edges in $A$. A loop does not join distinct vertices.\n\nFor $q\\in[1,\\infty)$ and $p\\in(0,1)$, the finite FK weight of $A$ and its partition function are\n\n$$w_{G,p,q}^{\\xi}(A):=p^{|A|}(1-p)^{|E\\setminus A|}q^{k_\\xi(A)},\\qquad Z_{G,p,q}^{\\xi}:=\\sum_{A\\subseteq E}w_{G,p,q}^{\\xi}(A).$$\n\nThe finite FK random-cluster probability is $\\phi_{G,p,q}^{\\xi}(A):=w_{G,p,q}^{\\xi}(A)/Z_{G,p,q}^{\\xi}$. Every weight is positive and finite, and the finite sum $Z_{G,p,q}^{\\xi}$ is positive and finite. The free boundary condition is the identity partition on $B$; the wired boundary condition identifies all vertices of $B$ in one class.\n\nWhen $G$ is a finite simple graph with the Potts/FK convention of the earlier finite Potts definition, $\\xi$ is free, $q=Q$ is an integer at least two, and every activity equals $v=p/(1-p)$, this definition gives the same normalized FK law, since $w_{FK}(A)=(1-p)^{-|E|}w_{G,p,Q}^{\\xi}(A)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-csm-frontier-fk-infinite-volume-states",
+          "source_section": "Definition",
+          "quote": "Let $E_\\infty$ be the nearest-neighbor edge set of $\\mathbb Z^2$, and let $\\Lambda_n=[-n,n]^2\\cap\\mathbb Z^2$. Let $E_n$ contain the edges with both endpoints in $\\Lambda_n$, and let $\\partial\\Lambda_n$ be the vertices of $\\Lambda_n$ adjacent to a vertex outside it. Fix $q\\geq1$ and $p\\in(0,1)$. For each boundary partition $\\xi_n$ on $\\partial\\Lambda_n$, let $\\phi_{n,p,q}^{\\xi_n}$ be the finite FK law of [[def-csm-frontier-fk-real-boundaries]] on $(\\Lambda_n,E_n)$ and extend its configurations to $\\{0,1\\}^{E_\\infty}$ by setting all edges outside $E_n$ closed.\n\nAn **infinite-volume FK state** at $(p,q)$ is any probability measure on $\\{0,1\\}^{E_\\infty}$ that is a cylinder-probability limit of such extended finite-volume laws along a sequence $n_j\\to\\infty$ and boundary partitions $\\xi_{n_j}$. Cylinder-probability convergence means convergence of the probability of every assignment on every finite set of edges. When they exist, the **free FK state** and **wired FK state** are the cylinder limits for the identity and one-class partitions, respectively, at every $n$. Their existence and uniqueness as cylinder limits are established by a later A-page lemma. For either state $\\phi^b_{p,q}$, $b\\in\\{0,1\\}$, define $\\theta^b(p,q):=\\phi^b_{p,q}(0\\leftrightarrow\\infty)$, where $0\\leftrightarrow\\infty$ means that the open cluster of the origin is not contained in any finite box, and define\n\n$$p_c^b(q):=\\inf\\{p\\in(0,1):\\theta^b(p,q)>0\\}.$$\n\nNo equality of free and wired states at $p=p_c$ is part of this definition.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-csm-frontier-fk-free-wired-limits",
+          "source_section": "Statement",
+          "quote": "For every $q\\geq1$ and $p\\in(0,1)$, the free finite-volume FK laws on $\\Lambda_n$ are stochastically increasing under restriction as $n$ grows, and the wired finite-volume FK laws are stochastically decreasing under restriction. Both sequences therefore have unique cylinder-probability limits, and those limits are probability measures on $\\{0,1\\}^{E_\\infty}$; hence the free and wired infinite-volume states are well-defined.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-csm-frontier-fk-square-critical-point",
+          "source_section": "Statement",
+          "quote": "For every real $q\\geq1$, put $p_{\\rm sd}(q)=\\sqrt q/(1+\\sqrt q)$. For every $p>p_{\\rm sd}(q)$, the wired state has $\\theta^1(p,q)>0$; for every $p<p_{\\rm sd}(q)$, both free and wired states have zero percolation probability and the free and wired critical thresholds defined in [[def-csm-frontier-fk-infinite-volume-states]] equal $p_{\\rm sd}(q)$. For every $p<p_{\\rm sd}(q)$, there are constants $C(p,q),c(p,q)>0$ such that every cylinder-limit FK state $\\phi$ on $\\mathbb Z^2$ satisfies\n$$\\phi(x\\leftrightarrow y)\\leq C(p,q)e^{-c(p,q)\\lVert x-y\\rVert_2}\\qquad(x,y\\in\\mathbb Z^2).$$\nNo equality of the free and wired measures at $p=p_{\\rm sd}(q)$, critical exponent, or order of transition is asserted.",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $v=e^{\\beta J}-1$ and $p=v/(1+v)=1-e^{-\\beta J}$. The normalized free Edwards–Sokal law of [F2], conditioned on the positive-probability event that every boundary spin equals $1$, has the following joint weights on the finite set of spin and edge configurations with $\\sigma|_{B_n}=1$:\n$$W_n^+(\\sigma,A)=\\prod_{e\\notin A}1\\prod_{e\\in A}v\\mathbf1_{\\{\\sigma_x=\\sigma_y\\}}.$$\nFor fixed $\\sigma$, summing over $A\\subseteq E_n$ gives $\\prod_{e\\in E_n}(1+v\\mathbf1_{\\{\\sigma_x=\\sigma_y\\}})=e^{-\\beta H_n(\\sigma)}$. For fixed $A$, the constraints force a common color on each component of $(\\Lambda_n,A)$; each component meeting $B_n$ must have color $1$, and every other component has $Q$ choices. Thus the edge marginal is proportional to $Q^{k_{\\xi_n}(A)}v^{|A|}$, with $\\xi_n$ wiring all of $B_n$. Since $v=p/(1-p)$, this normalized edge law is exactly the finite wired FK law.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "algebra",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Conditional on $A$, the same finite count shows that components not meeting $B_n$ receive independent uniform colors, while every component meeting $B_n$ has color $1$. Because $0\\notin B_n$, its conditional probability of color $1$ is $1$ if $0$ connects to $B_n$ and $1/Q$ otherwise. Averaging with the wired FK marginal from step 1.1 gives\n$$\\mathbb P_{\\beta,n}^+(\\sigma_0=1)=Q^{-1}+(1-Q^{-1})\\phi^1_{n,p,Q}(0\\leftrightarrow B_n).$$\nThis is the pinned-boundary extension of the component-color identity in [F2], with its finite counting argument supplied here.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Write $\\phi^1_{p,Q}$ for the wired cylinder limit from [F4], and let $\\theta^1(p,Q)=\\phi^1_{p,Q}(0\\leftrightarrow\\infty)$. The finite wired law on $\\Lambda_n$ stochastically dominates the restriction of $\\phi^1_{p,Q}$ to $E_n$, because the wired finite-volume laws decrease under restriction as the volume grows. The event $0\\leftrightarrow B_n$ depends only on $E_n$ and contains the event $0\\leftrightarrow\\infty$ under the infinite-volume law. Therefore\n$$\\phi^1_{n,p,Q}(0\\leftrightarrow B_n)\\geq\\phi^1_{p,Q}(0\\leftrightarrow B_n)\\geq\\theta^1(p,Q).$$\nFor a fixed $r<n$, connection to $B_n$ implies connection to the vertex boundary $\\partial\\Lambda_r$, so\n$$\\phi^1_{n,p,Q}(0\\leftrightarrow B_n)\\leq\\phi^1_{n,p,Q}(0\\leftrightarrow\\partial\\Lambda_r).$$\nThe event on the right is a finite-edge cylinder event; as $n\\to\\infty$ its probability tends to $\\phi^1_{p,Q}(0\\leftrightarrow\\partial\\Lambda_r)$. These boundary-connection events decrease as $r$ increases and their intersection is the event that the origin cluster is unbounded, which in the locally finite square lattice is $0\\leftrightarrow\\infty$. Hence the limit of the finite boundary-connection probabilities is $\\theta^1(p,Q)$.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Steps 1.2 and 2.1 show that the defining limit exists and\n$$m_Q^+(\\beta)=(1-Q^{-1})\\theta^1(1-e^{-\\beta J},Q).$$\nThe prefactor is positive, and $\\beta\\mapsto1-e^{-\\beta J}$ is strictly increasing from $0$ to $1$. Thus the infimum where $m_Q^+(\\beta)>0$ is the inverse image of $p_c^1(Q)$ under this map.",
+          "step": "2.2",
+          "inputs": [
+            "F5",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F5], $p_c^1(Q)=\\sqrt Q/(1+\\sqrt Q)$. Solving $1-e^{-\\beta_cJ}=p_c^1(Q)$ gives $e^{-\\beta_cJ}=1/(1+\\sqrt Q)$ and therefore $\\beta_cJ=\\log(1+\\sqrt Q)$. This is a conditional deduction from the FK threshold and finite coupling interfaces; no empirical premise is involved.",
+          "step": "3.1",
+          "inputs": [
+            "F5",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The finite boxes have n>=1 and a nonempty spin set."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The hypotheses require Q>=2, J>0 and beta>0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.2 treats the boundary-connected cluster fixed to color 1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The model uses the fixed nearest-neighbor square-lattice edges."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The inverse temperature and coupling are strictly positive and finite."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1 sums over the finite nonempty spin and edge configuration sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a one-way bound or a parameter value, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse implication is part of this item statement."
+        }
+      ]
+    },
+    "ex-csm-frontier-ising-coupling-conversion": {
+      "citations": [
+        {
+          "fact": "F2",
+          "source": "thm-csm-frontier-potts-square-critical-temperature",
+          "source_section": "Statement",
+          "quote": "Let $Q\\geq2$ be an integer, $J>0$, and $\\beta>0$. On $\\Lambda_n=[-n,n]^2\\cap\\mathbb Z^2$, let $B_n=\\{x\\in\\Lambda_n:\\lVert x\\rVert_\\infty=n\\}$ and let $E_n$ be the nearest-neighbor edges with both endpoints in $\\Lambda_n$. The $Q$-state Potts model has spins $\\sigma:\\Lambda_n\\to\\{1,\\ldots,Q\\}$, fixed plus boundary $\\sigma|_{B_n}=1$, and finite-volume Gibbs probabilities proportional to $e^{-\\beta H_n(\\sigma)}$, where\n$$H_n(\\sigma)=-J\\sum_{\\{x,y\\}\\in E_n}\\mathbf1_{\\{\\sigma_x=\\sigma_y\\}}.$$\nDefine its plus-boundary order parameter by\n$$m_Q^+(\\beta):=\\lim_{n\\to\\infty}\\mathbb P_{\\beta,n}^+(\\sigma_0=1)-Q^{-1},$$\nwhen the limit exists, and define $\\beta_c:=\\inf\\{\\beta>0:m_Q^+(\\beta)>0\\}$. Then the limit exists and\n$$\\beta_c J=\\log(1+\\sqrt Q).$$\nThe assertion is conditional on the FK exact-threshold input in [[thm-csm-frontier-fk-square-critical-point]] and the current finite Potts/FK interfaces identified below.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each finite box and edge, [F1] gives $-J_P\\mathbf1_{\\{\\sigma_x=\\sigma_y\\}}=-(J_P/2)\\sigma_x\\sigma_y-J_P/2$. Setting $J_P=2J_I$ makes the finite Potts Hamiltonian equal to $H_{I,n}(\\sigma)-J_I|E_n|$. The difference is independent of $\\sigma$, so it cancels from the normalized finite Gibbs probabilities. The boundary color $1$ in the Potts model corresponds to the Ising plus spin $+1$. Thus the two models have the same plus-boundary probabilities and the same critical inverse temperature.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $\\beta_c^P$ and $\\beta_c^I$ denote the critical inverse temperatures in the two definitions. Step 1.1 gives $\\beta_c^I=\\beta_c^P$. By [F2] with $J_P=2J_I$, $\\beta_c^P(2J_I)=\\log(1+\\sqrt2)$. Divide by $2$ to obtain $\\beta_c^I J_I=\\tfrac12\\log(1+\\sqrt2)$. This is an exact coupling conversion; the constant energy shift does not affect probabilities.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example uses nonempty finite square-lattice boxes."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example assumes J_I>0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 checks the identity for both possible spin products."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The graph is the regular nearest-neighbor square-lattice box."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The critical parameter is defined for beta>0 and J_I>0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The conversion uses finite edgewise algebra and makes no nonempty selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a one-way bound or a parameter value, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse implication is part of this item statement."
+        }
+      ]
+    },
+    "lem-csm-frontier-grid-crossings-intersect": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-polygonal-jordan-curve",
+          "source_section": "Statement",
+          "quote": "If $P\\subseteq\\mathbb R^2$ is a polygon, then $\\mathbb R^2\\setminus P$ has exactly two regions, one bounded and one unbounded, and\n\n$$\\operatorname{Fr}(U)=P$$\n\nfor each of them. Regions and frontiers are from [[def-plane-region-and-frontier]]. The proof uses the finite simple edge cycle of [[def-polygonal-arc-and-polygon]] and polygonal crossing parity from [[lem-polygonal-crossing-parity-is-locally-constant]].",
+          "uses": [
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Delete loops from each finite path until it is simple, preserving its endpoints. In the square grid, two unit edges can meet only at a shared endpoint, so if the paths do not share a vertex their polygonal realizations are disjoint compact sets. Their distance is then positive.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Suppose the paths are disjoint and denote the simple left-to-right path by $\\gamma$. Perturb its finitely many interior vertices and boundary contacts by less than one third of the distance in step 1.1, pushing every nonendpoint boundary contact slightly into the rectangle. Since $\\gamma$ is a finite simple polygonal arc, choose disjoint small neighborhoods of its nonadjacent segments; local polygonal detours inside those neighborhoods preserve simplicity, keep its endpoints on the left and right sides, and preserve disjointness from the other path. The resulting simple arc $\\widetilde\\gamma$ meets the rectangle boundary only at its two endpoints.",
+          "step": "1.2",
+          "inputs": [
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Join the endpoints of $\\widetilde\\gamma$ by a simple polygonal arc lying outside the rectangle and running around its top side. Their union is a simple polygonal closed curve by the boundary-contact property in step 1.2. By [F1], its bounded component contains the part of the rectangle immediately below the top side and above $\\widetilde\\gamma$, while the bottom side lies in the unbounded component. A bottom-to-top path staying in the rectangle must therefore cross this Jordan curve; it cannot meet the outside closing arc, so it must meet $\\widetilde\\gamma$. This contradicts the preserved disjointness in step 1.2. Thus the original paths intersect; grid edges intersect only at shared vertices, proving the claim.",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "step 1.2",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes a rectangle with a>=1 and b>=1."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The claim concerns finite paths, not probabilities or zero-valued parameters."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The claim concerns paths with opposite-side endpoints, not probability-one events."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.1 handles repeated vertices by loop erasure and grid-edge intersections at shared endpoints."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 1.3 treats endpoints on the rectangle boundary arcs and uses the prescribed left/right and bottom/top sides."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1 performs a finite loop-erasure procedure on each path."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts an intersection conclusion, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse implication is part of the crossing statement."
+        }
+      ]
+    }
+  }
+}

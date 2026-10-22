@@ -1,0 +1,766 @@
+
+=== PDF PAGE 1 ===
+c⃝2006 Gilbert Strang
+5.3
+The Wave Equation and Staggered Leapfrog
+This section focuses on the second-order wave equation utt = c2uxx. We ﬁnd
+the exact solution u(x, t).
+Accuracy and stability are conﬁrmed for the leapfrog
+method (centered second diﬀerences in t and x). This two-step method requires that
+we rethink the growth factor G, which was clear for a single step. The result will be
+p = 2 for the order of accuracy, and c∆t/∆x ≤1 for stability.
+It is useful to rewrite the wave equation as a ﬁrst-order system. The components
+v1 and v2 of the vector unknown can be ∂u/∂t and c ∂u/∂x. Then we are back to a
+single-step growth factor, but G is now a 2 by 2 matrix.
+Second-order accuracy extends to this system vt = Avx if we use a staggered
+mesh.
+The mesh for v2 lies in between the mesh for v1.
+This has become the
+standard method in computational electromagnetics (solving Maxwell’s equations).
+The physical laws relating the electric ﬁeld E and the magnetic ﬁeld H are beautifully
+copied by the diﬀerence equations on a staggered mesh. The mesh becomes especially
+important in more space dimensions (x-y and x-y-z), and in ﬁnite volume methods.
+This section goes beyond the one-way wave equation in at least ﬁve ways:
+1.
+Two characteristic lines x+ct = Cleft and x−ct = Cright go through each (x, t).
+2.
+The leapfrog method involves three time levels t + ∆t, t, and t −∆t.
+3.
+First-order systems have vector unknowns v(x, t) and growth matrices G.
+4.
+Staggered grids give the much-used FDTD method for Maxwell’s equations.
+5.
+More space dimensions lead to new CFL and vN stability conditions on ∆t.
+With −∞< x < ∞, we don’t yet have boundary conditions in space. And we are
+not facing real problems like utt = c2(x) uxx + Feikx, with a high frequency forcing
+terms (k >> 1) and a varying speed c(x).
+Solution of the Wave Equation
+Exactly as for the one-way equation ut = cux, we solve the two-way wave equation
+utt = c2uxx for each pure exponential. That allows us to separate the variables.
+The space variable is in eikx, and we look for solutions u(x, t) = G(t)eikx:
+Each k
+∂2u
+∂t2 = c2 ∂2u
+∂x2
+becomes
+d2G
+dt2 eikx = i2c2k2G eikx .
+(1)
+Thus Gtt = i2c2k2G. This second-order equation has two solutions, Gleft = eickt and
+Gright = e−ickt. So there are two waves with speed c:
+Pure waves
+uleft(x, t) = eik(x+ct)
+and
+uright(x, t) = eik(x−ct) .
+(2)
+
+
+=== PDF PAGE 2 ===
+5.3. THE WAVE EQUATION AND STAGGERED LEAPFROG c⃝2006 Gilbert Strang
+Combinations of left-going waves eik(x+ct) will give a general function F1(x + ct).
+Combinations of eik(x−ct) give F2(x −ct). The complete solution includes both:
+u(x, t) = uleft(x, t) + uright(x, t) = F1(x + ct) + F2(x −ct) .
+(3)
+We need those two functions to match an initial shape u(x, 0) and velocity ut(x, 0):
+At t = 0
+u(x, 0) = F1(x) + F2(x)
+and
+ut(x, 0) = c F ′
+1(x) −c F ′
+2(x) .
+(4)
+Solving for F1 and F2 gives the unique solution that matches u(x, 0) and ut(x, 0):
+Solution
+u(x, t) = u(x + ct, 0) + u(x −ct, 0)
+2
++ 1
+2c
+Z x+ct
+x−ct
+ut(x, 0) dx .
+(5)
+The “domain of dependence” of u(x, t) includes the initial values from x−ct to x+ct.
+That domain is on the left side of Figure 5.9, bounded by the characteristic lines.
+Example 1
+Starting with zero velocity, ut(x, 0) = 0, the integrated term in formula (5)
+is zero. A step function S(x) (wall of water) will travel left and right along characteristic
+lines, as in Figure 5.8. It reaches the points x = 1 and x = −1 at time t = 1/c:
+Two walls
+u(x, t) = 1
+2 S(x + ct) + 1
+2 S(x −ct) =
+
+0 or 1
+2 or 1
+
+.
+By time t, the initial jump at x = 0 aﬀects the solution between x = −ct and x = ct.
+That is the “domain of inﬂuence” of the point x = 0, t = 0.
+-
+Time 0
+x
+u(x, 0) = 0
+u(x, 0) = 1
+0
+- x
+Time t
+characteristic
+u(x, t) = 1
+2
+u(x, t) = 1
+−ct
+0
+ct
+Figure 5.8: Two-wall solution to the wave equation starting from a step function.
+The Semidiscrete Wave Equation
+Let me start by discretizing only the space derivative uxx. The second diﬀerence
+Uj+1 −2Uj + Uj−1 is the natural choice, divided by (∆x)2. For the approximations
+Uj(t) at the meshpoints x = j∆x, we have a family of ODEs in the time direction
+(method of lines):
+Semidiscrete utt = c2uxx
+U ′′
+j =
+c2
+(∆x)2 (Uj+1 −2Uj + Uj−1 .
+(6)
+
+
+=== PDF PAGE 3 ===
+c⃝2006 Gilbert Strang
+Again we follow every exponential, looking for Uj(t) = G(t)eikj∆x. Substitute into (6)
+and cancel the common factor eikj∆x. Instead of Gtt = −c2k2G we have
+Growth equation Gtt =
+c2
+(∆x)2 (eik∆x −2 + e−ik∆x)G = −
+c2
+(∆x)2 (2 −2 cos k∆x)G .
+(7)
+The correct right side −c2k2G is multiplied by a factor F 2. This F 2 turns up so often
+that we need to recognize it! Use 2 −2 cos θ = 4 sin2(θ/2):
+Sinc squared F 2 = 2 −2 cos k∆x
+k2(∆x)2
+= 4 sin2(k∆x/2)
+k2(∆x)2
+=
+sin(k∆x/2)
+k∆x/2
+2
+.
+(8)
+The “sinc function” is deﬁned as sin θ divided by θ. When θ = k∆x is small, this is
+1 + 0(θ2). Then F 2 near 1 and equation (7) is close to the correct Gtt = −c2k2G.
+For every k∆x, the growth equation (7) has two exponential solutions:
+Semidiscrete growth
+Gtt = −c2F 2k2G
+gives
+G(t) = e±icF kt .
+(9)
+The wave speed c is multiplied by F to give the numerical “phase velocity” cF. Notice
+that F depends on k. Diﬀerent frequencies eikx are traveling at diﬀerent speeds cF(k).
+This is dispersion and we will see it again in Section 5.
+.
+I will mention that the “group velocity”—the derivative of cFk with respect to
+k—is a more important quantity than the phase velocity cF.
+The semidiscrete form suggests a good algorithm for the wave equation, if we have
+boundary conditions (say u = 0 along the lines t = 0 and t = π). If h = ∆x =
+π
+n+1,
+this interval has interior meshpoints.
+The n by n second diﬀerence matrix is the
+special K from earlier chapters (but now we have −K):
+Semidiscrete with boundaries
+U ′′(t) =
+c2
+(∆x)2 KU .
+(10)
+This is just the equation MU ′′ + KU = 0 of oscillating springs in Section 2.2.
+The n eigenvalues of K are positive numbers 2 −2 cos j∆x. The only change
+from the equation on an inﬁnite line is that j takes only the values 1, 2, . . . , n. The
+oscillations go on forever as in (8), the energy is conserved, and now the waves bounce
+back from the boundaries instead of continuing out to x = ±∞.
+Leapfrog from Centered Diﬀerences
+A fully discrete method also approximates utt by a centered diﬀerences. This time
+diﬀerence “leaps over” the space diﬀerence at t = n∆t:
+Leapfrog method
+Uj,n+1 −2Uj,n + Uj,n−1
+(∆t)2
+= c2 Uj+1,n −2Uj,n + Uj−1,n
+(∆x)2
+.
+(11)
+This has two key diﬀerences from the 5-point molecule for uxx + uyy = 0 (Laplace).
+First, utt −c2uxx has a minus sign. Second, we have two conditions at t = 0 and no
+
+
+=== PDF PAGE 4 ===
+5.3. THE WAVE EQUATION AND STAGGERED LEAPFROG c⃝2006 Gilbert Strang
+conditions at a later time. We are marching forward in time (marching with Laplace’s
+equation would be totally unstable). A separate calculation for the ﬁrst time step
+computes Uj,1 from the initial shape u(x, 0) and the velocity ut(x, 0).
+The accuracy of leapfrog is normally second-order.
+Substitute the true u(x, t)
+into (11), and use the Taylor series for second diﬀerences (Section 1.2). The ﬁrst
+terms in the local error give consistency.
+Second-order
+utt + 1
+12(∆t)2utttt + · · · = c2(uxx + 1
+12(∆x)2uxxxx + · · ·).
+(12)
+In this case utttt = c2uxxtt = c2uttxx = c4uxxxx. The two sides of (12) diﬀer by
+Local discretization error
+1
+12[(∆t)2c4 −(∆x)2c2]uxxxx + · · ·
+(13)
+Again c∆t = ∆x is the golden time step that follows the characteristic exactly. The
+two triangles in Figure 5.9 become exactly the same in this borderline case r = 1.
+The CFL reasoning shows instability for r > 1. We now show that r ≤1 is stable.
+-
+6
+t
+x
+u(x, t)
+x −ct
+x + ct
+characteristic
+lines
+slopes
+1
+c and −1
+c
+6
+- x
+U(x, n∆t)
+x −n∆x
+x + n∆x
+slope ∆t
+∆x
+slope −∆t
+∆x
+Figure 5.9: Domains of dependence: u from wave equation and U from leapfrog.
+Stability of the Leapfrog Method
+A diﬀerence equation must use the initial conditions in this whole interval, to have
+a chance of converging to u(x, t). The domain of dependence for U must include the
+domain of dependence for u. The slopes must have ∆t/∆x ≤1/c. Since convergence
+requires stability, we have a Courant-Friedrichs-Lewy condition on ∆t:
+CFL condition
+The leapfrog method will require r = c ∆t/∆x ≤1.
+For a double-step diﬀerence equation, we still look for pure solutions U(x, n∆t) =
+Gneikx, separating time from space. In the leapfrog equation (11) this gives
+Gn+1 −2Gn + Gn−1
+(∆t)2
+
+eikx = c2Gn
+eik∆x −2 + e−ik∆x
+(∆x)2
+
+eikx .
+Set r = c∆t/∆x and cancel Gn−1eikx. This leaves a quadratic equation for G:
+G2 −2G + 1 = r2 G (2 cos k∆x −2) .
+(14)
+
+
+=== PDF PAGE 5 ===
+c⃝2006 Gilbert Strang
+The two-step leapfrog equation allows two G’s (of course !). For stability, both must
+satisfy |G| ≤1 for all frequencies k. Rewrite equation (14) for G:
+Growth factor equation
+G2 −2
+
+1 −r2 + r2 cos k∆x
+
+G + 1 = 0 .
+(15)
+The roots of G2 −2aG + 1 = 0 are G = a ±
+√
+a2 −1. Everything depends on that
+square root giving an imaginary number, when a2 = [1 −r2 + r2 cos k∆x]2 ≤1:
+If
+a2 ≤1
+then
+G = a ± i
+√
+1 −a2
+has
+|G|2 = a2 + (1 −a2) = 1 .
+The CFL condition r ≤1 does produce a2 ≤1 and the leapfrog method is stable:
+Stability
+If r ≤1 then |a| = |1 −r2 + r2 cos k∆x| ≤(1 −r2) + r2 = 1 .
+(16)
+An unstable r > 1 would produce |a| = |1 −2r2| > 1 at the dangerous k∆x = π.
+Then both G’s are real, and their product is 1, and one of them has |G| > 1.
+Note 1
+Suppose r is exactly 1, so that c∆t = ∆x. At this “golden ratio” we
+expect perfect accuracy. The middle terms −2Uj,n and −2r2Uj,n cancel in the leapfrog
+equation (11), leaving a complete leap over the center points at (j, n) when r = 1:
+Exact leapfrog
+Uj,n+1 + Uj,n−1 = Uj+1,n + Uj−1,n .
+(17)
+The diﬀerence equation is satisﬁed by u(x, t), because it is satisﬁed by every wave
+U(x + ct) and U(x −ct). Take Uj,n = U(j∆x + cn∆t) and use c∆t = ∆x:
+Uj,n+1 and Uj+1,n
+are both equal to
+U(j∆x + cn∆t + ∆x)
+Uj,n−1 and Uj−1,n
+are both equal to
+U(j∆x + cn∆t −∆x)
+So (17) is satisﬁed by all traveling waves U(x + ct), and similarly by U(x −ct).
+Note 2
+You could also apply leapfrog to the one-way equation ut = c ux:
+One-way leapfrog
+Uj,n+1 −Uj,n−1 = c∆t
+∆x (Uj+1,n −Uj−1,n).
+(18)
+Now the growth factor equation is G2 −2(ir sin k∆x)G −1 = 0.
+Problem
+conﬁrms that the stability condition is again r ≤1. In that stable case, one growth
+factor is sensible and the other is strange:
+G1 = eir sin k∆x ≈eick∆t
+and
+G2 = −e−ir sin k∆x ≈−1 .
+(19)
+G1 and G2 are exactly on the unit circle. With |G| = 1 there is no room to move.
+Numerical diﬀusion α(Uj+1,n −2Uj,n + Uj−1,n) usually adds extra stability, but not
+here. So leapfrog for ﬁrst-order equations can be dangerous.
+Section 5.4 will study the convection-diﬀusion equation ut = c ux + d uxx.
+
+
+=== PDF PAGE 6 ===
+5.3. THE WAVE EQUATION AND STAGGERED LEAPFROG c⃝2006 Gilbert Strang
+Wave Equation in Higher Dimensions
+The wave equation extends to three-dimensional space (with speed set at c = 1):
+3D Wave equation
+utt = uxx + uyy + uzz .
+(20)
+Waves go in all directions, and the solution is a superposition of pure harmonics.
+These plane waves now have three wave numbers k, ℓ, m, and frequency w:
+Exponential solutions
+u(x, y, z, t) = ei(ωt + kx + ℓy + mz) .
+Substituting into the wave equation gives ω2 = k2 + ℓ2 + m2.
+So there are two
+frequencies ± ω. These exponential solutions combine to match the initial wave height
+u(x, y, z, 0) and its velocity ut(x, y, z, 0).
+Suppose the initial velocity is a three-dimensional delta function δ(x, y, z):
+δ(x, y, z) = δ(x)δ(y)δ(z)
+gives
+ZZZ
+f(x, y, z) δ(x, y, z) dV = f(0, 0, 0) .
+(21)
+The resulting u(x, y, z, t) will be the fundamental solution of the wave equation. It is
+the response to the delta function, which gives equal weight to all harmonics. Rather
+than computing that superposition we ﬁnd it from the wave equation itself. Spherical
+symmetry greatly simpliﬁes uxx + uyy + uzz, when u depends only on r and t:
+Symmetry produces u(r, t)
+∂2u
+∂t2 = ∂2u
+∂r2 + 2
+r
+∂u
+∂r .
+(22)
+Multiplying by r, this is a one-dimensional equation (ru)tt = (ru)rr ! Its
+solutions ru will be functions of r −t and r + t. Starting from a delta function is like
+sound going out from a bell, or light from a point source. The solution is nonzero
+only on the sphere r = t. So every point hears the bell only once, as the sound wave
+passes by. An impulse in 3D produces a sharp response (this is Huygen’s principle).
+In 2D, the solution does not return to zero for t > r. We couldn’t hear or see
+clearly in Flatland. You might imagine a point source in two dimensions as a line
+source in the z-direction in three dimensions. The solution is independent of z, so it
+satisﬁes utt = uxx +uyy. But in three dimensions, spheres starting from sources along
+the line continue to hit the listener. They come from further and further away, so the
+solution decays—but it is not zero. The wave front passes, but waves keep coming.
+EXERCISE ON EQ.(26)
+Leapfrog Method in Higher Dimensions
+In one dimension, two characteristics go out from each point (x, 0). In 2D and 3D,
+a characteristic cone goes out from (x, y, 0) and (x, y, z, 0). It is essential to see how
+the stability condition changes from r = c∆t/∆x ≤1.
+
+
+=== PDF PAGE 7 ===
+c⃝2006 Gilbert Strang
+The leapfrog method replaces uxx and uyy by centered diﬀerences at time n∆t:
+Leapfrog for utt = uxx + uyy
+Un+1 −2Un + Un−1
+(∆t)2
+= ∆2
+x Un
+(∆x)2 + ∆2
+y Un
+(∆y)2 .
+U0 and U1 come from the given initial conditions u(x, y, 0) and ut(x, y, 0). We look
+for a solution Un = Gneikxeiℓy with separation of variables. Substituting into the
+leapfrog equation and canceling Gn−1eikxeiℓy produces the 2D equation for two G’s:
+Growth factor
+G2 −2G + 1
+(∆t)2
+= G (2 cos k ∆x −2)
+(∆x)2
++ G (2 cos ℓ∆y −2)
+(∆y)2
+.
+(23)
+Again this has the form G2 −2aG + 1 = 0. You can see a in brackets:
+G2 −2
+"
+1 −
+ ∆t
+∆x
+2
+(1 −cos k ∆x) −
+ ∆t
+∆y
+2
+(1 −cos ℓ∆y)
+#
+G + 1 = 0 .
+(24)
+Both roots must have |G| = 1 for stability. This still requires −1 ≤a ≤1. When the
+cosines are −1 (the dangerous value) we ﬁnd the stability condition for leapfrog:
+Stability
+−1 ≤1 −2
+ ∆t
+∆x
+2
+−2
+ ∆t
+∆y
+2
+needs
+ ∆t
+∆x
+2
++
+ ∆t
+∆y
+2
+≤1.
+(25)
+For ∆x = ∆y on a square grid, this is ∆t ≤∆x/
+√
+2. In three dimensions it would be
+∆t ≤∆x/
+√
+3. Those also come from the CFL condition, that the characteristic cone
+must lie inside the pyramid that gives the leapfrog domain of dependence. Figure 5.10
+shows the cone and pyramid just touching, when ∆t = ∆x/
+√
+2.
+Cone has circular base for utt = uxx + uyy
+Pyramid has diamond base for leapfrog
+Cone and pyramid go up to (0, 0, ∆t)
+∆t
+(∆x, 0, 0)
+(0, ∆x, 0)
+Figure 5.10: The pyramid contains and touches the cone when (∆t)2 = (∆x)2/2.
+An Equivalent First-order System
+I can display a system of two equations vt = Avx that is equivalent to utt = c2uxx:
+First-order system
+∂
+∂t
+
+ut
+cux
+
+=
+
+0
+c
+c
+0
+ ∂
+∂x
+
+ut
+cux
+
+.
+(26)
+The ﬁrst equation recovers utt = c2uxx. The second is the identity cuxt = cutx. Notice
+that the 2 by 2 matrix is symmetric and its eigenvalues are the wave velocities ±c.
+
+
+=== PDF PAGE 8 ===
+5.3. THE WAVE EQUATION AND STAGGERED LEAPFROG c⃝2006 Gilbert Strang
+This “symmetric hyperbolic” form vt = Avx is useful in theory and practice. The
+energy E(t) =
+R 1
+2∥v(x, t)∥2 dx is automatically constant in time ! Here is the proof
+for any equation vt = Avx with a symmetric matrix A:
+∂
+∂t
+1
+2∥v∥2
+
+=
+X
+vi
+∂vi
+∂t = vTvt = vTAvx = ∂
+∂x
+1
+2vTAv
+
+.
+(27)
+When you integrate over all x, the left side is ∂E/∂t. The right side is
+1
+2vTAv at
+the limits x = ±∞. Those limits give zero (no signal has reached that far). So the
+derivative of E(t) is zero, and E(t) stays constant.
+The Euler equations of compressible ﬂow are also a ﬁrst-order system, but not
+linear. In physics and engineering, a linear equation deals with a small disturbance.
+Something from outside acts to change the equilibrium, but not by much:
+in acoustics it is a slowly moving body
+in aerodynamics it is a slender wing
+in elasticity it is a small load
+in electromagnetism it is a small source.
+Below some level, the cause-eﬀect relation is very close to linear. In acoustics, the
+sound speed is steady when pressure is nearly constant. In elasticity, Hooke’s law
+holds until the geometry changes or the material begins to break down. In electro-
+magnetism, nonlinearity comes with relativistic and quantum eﬀects.
+The case to understand has A = constant matrix, with n real eigenvalues λ and
+eigenvectors w. The vector equation vt = Avx will split into n scalar one-way wave
+equations Ut = λ Ux. When Aw = λw we look for v(x, t) = U(x, t)w:
+vt = Avx
+becomes
+∂U
+∂t w = A ∂U
+∂x w = λ ∂U
+∂x w
+so
+∂U
+∂t = λ ∂U
+∂x .
+(28)
+The complete solution vector is v(x, t) = U1(x + λ1t)w1 + · · · + Un(x + λnt)wn. The
+problem vt = Avx has n signal speeds λi and it sends out n waves.
+There are n characteristic lines x + λit = constant. The wave equation has
+ 0 c
+c 0
+
+and two eigenvalues λ = c and λ = −c. The eigenvectors w are ( 1
+2, −1
+2) and ( 1
+2, 1
+2).
+Then the two scalar equations Ut = λUx produce left and right waves:
+λ1 =
+c
+∂
+∂t(ut + c ux) =
+c ∂
+∂x(ut + c ux)
+λ2 = −c
+∂
+∂t(ut −c ux) = −c ∂
+∂x(ut −c ux) .
+(29)
+Each equation agrees with utt = c2uxx. The one-way waves are U(x, t) = U(x+λt, 0).
+The vector solution v(x, t) is recovered from U1w1 + U2w2:
+v =
+ ut
+c ux
+
+= (ut + c ux)
+
+1
+2
+−1
+2
+
++ (ut −c ux)
+ 1
+21
+2
+
+.
+(30)
+A stable diﬀerence method for vt = Avx comes from a stable method for ut = ±cux.
+Just replace c by A in Lax-Friedrichs and Lax-Wendroﬀ, or go to leapfrog.
+
+
+=== PDF PAGE 9 ===
+c⃝2006 Gilbert Strang
+Leapfrog on a Staggered Grid
+The discrete case should copy the continuous case. The two-step leapfrog diﬀerence
+equation should reduce to a pair of one-step equations. But if we don’t keep the
+individual equations centered, they will lose second-order accuracy. The way to
+center both ﬁrst-order equations is to use a staggered grid (Figure 5.11).
+Please allow me to name the two components v1 = E and v2 = H. Then the
+staggered grid for the wave equation matches Yee’s method for Maxwell’s equations.
+Yee’s idea transformed the whole subject of computational electromagnetics (it is
+now called the FDTD method: ﬁnite diﬀerences in the time domain). Previously
+the moment method, which is Galerkin’s method, had been dominant—but staggered
+grids are so natural for E and H. We stay with the wave equation here, copying (26):
+Maxwell in 1D
+(normalized)
+∂E/∂t = c ∂H/∂x
+∂H/∂t = c ∂E/∂x
+becomes ∆tE/∆t=c∆xH/∆x
+∆tH/∆t=c∆xE/∆x .
+(31)
+Those ﬁrst derivatives of E and H are replaced by ﬁrst diﬀerences. I will put E
+on the standard grid and H on the staggered (half-integer) grid. Notice how all the
+diﬀerences are centered in Figure 5.11a. This gives second-order accuracy.
+The identities Etx = Ext and Htx = Hxt lead to wave equations for E and H:
+Et
+=
+cHx
+Ht
+=
+cEx
+becomes
+Ett
+=
+cHxt
+=
+cHtx
+=
+c2Exx
+Htt
+=
+cExt
+=
+cEtx
+=
+c2Hxx
+(32)
+In the discrete case, the identity is ∆x(∆t) = ∆t(∆x). Diﬀerences copy derivatives.
+When we eliminate H, we get the two-step leapfrog equation for E.
+And eliminating E gives the leapfrog equation for H. This all comes from the ﬁnite
+diﬀerence analogue of the cross-derivative identity utx = uxt:
+∂
+∂x
+∂u
+∂t
+
+= ∂
+∂t
+∂u
+∂x
+
+corresponds to
+∆x(∆tU)
+(∆x)(∆t) = ∆t(∆xU)
+(∆t)(∆x) .
+(33)
+With equal denominators, we only need to check the numerators. On any grid, the
+same 1’s and −1’s appear both ways in ∆x∆t and ∆t∆x !
+1
+−1
+1
+−1
+∆x(∆tU)
+=
+(Un+1,j+1 −Un,j+1)
+−
+(Un+1,j −Un,j)
+∆t(∆xU)
+=
+(Un+1,j+1 −Un+1,j)
+−
+(Un,j+1 −Un,j)
+You could compare ( ) with the Cauchy-Riemann equations ux = sy and uy = −sx
+for the potential u(x, y) and stream function s(x, y). (Those solve Laplace’s equation
+and not the wave equation.) It would be natural to discretize the Cauchy-Riemann
+equations on a staggered grid.
+May I emphasize that these grids are useful for many other equations too. We will
+see the “half-point” grid values in Section 5.
+for the ﬂux F in the conservation
+law ut + F(u)x = 0, which is a nonlinear extension of the one-way wave equation.
+Half-point values are centrally important throughout the ﬁnite volume method.
+Maxwell’s equations in integral form lead to the ﬁnite integration technique [
+].
+
+
+=== PDF PAGE 10 ===
+5.3. THE WAVE EQUATION AND STAGGERED LEAPFROG c⃝2006 Gilbert Strang
+Maxwell’s Equations
+For electrodynamics, the number c in the wave equation is the speed of light. It is the
+same large number that appears in Einstein’s e = mc2. The CFL stability condition
+c2(∆t)2 ≤(∆x)2 + (∆y)2 + (∆z)2 for the leapfrog method might require very small
+time steps (on the scale of ordinary life). But we all know that the wavelength for light
+is nothing like a meter or a centimeter. The leapfrog method is entirely appropriate,
+and we write Maxwell’s equations without source terms:
+Maxwell’s equations in free space
+∂E
+∂t = 1
+ϵ curl H
+and
+∂H
+∂t = −1
+µ curl E .
+(34)
+An important application is the reﬂection of a radar signal by an airplane. The region
+of interest is exterior to the plane. In principle that region extends inﬁnitely far
+in all directions. In practice we compute inside a large box, and choose boundary
+conditions that don’t reﬂect waves back into the box from its artiﬁcial boundary
+(which is a computational region and not physical).
+Those absorbing boundary conditions [ ] are crucial to a good discretization.
+Chapter 7 of [
+] describes how a “perfectly matched layer” can select coeﬃcients
+so that waves go through the boundary with very little reﬂection. Applications of
+Maxwell’s equations range all the way from the Earth’s electromagnetic environment
+to cell phones (safety of the user) to micron-scale lasers and photonics.
+The ﬁrst of Maxwell’s six equations in (
+) involves the electric ﬁeld component
+Ex:
+∂
+∂t Ex = 1
+ϵ
+ ∂
+∂y Hz −∂
+∂z Hy
+
+.
+(35)
+Yee’s diﬀerence equation computes Ex at the new time (n + 1)∆t from Ex at time
+n∆t and the space diﬀerences of Hz and Hy at time (n + 1
+2)∆t.
+Figure 5.11
+shows how those components of the magnetic ﬁeld H are on a grid that is staggered
+with respect to the grid for E. We have six diﬀerential equations like (35) and six
+diﬀerence equations, to produce Ex, Ey, Ez at time (n + 1)∆t and then Hx, Hy, Hz at
+time (n + 1.5)∆t.
+The stability condition c2(∆t)2 ≤(∆x)2+(∆y)2+(∆z)2 is acceptable. Perhaps the
+greatest drawback is the rectangular grid (ﬁnite elements are always more adaptable).
+But the FDTD method has been used with 109 meshpoints, which we cannot aﬀord
+on an unstructured mesh.
+Finite diﬀerences also have numerical dispersion—the
+discrete wave speeds depend on the wave number k = (kx, ky, kz).
+Those speeds
+don’t exactly match c. We will have phase factors like F in equation (
+), extended
+to include ∆y and ∆z. When the dispersion creates signiﬁcant errors, we can upgrade
+the spatial diﬀerences to fourth-order accuracy (using more mesh values). But those
+wider diﬀerence methods can go across material interfaces and external boundaries.
+This produces the ever-present give and take of numerical analysis: higher accuracy
+brings greater complexity. We can take larger steps ∆t but every step is slower (and
+harder to code).
+
+
+=== PDF PAGE 11 ===
+c⃝2006 Gilbert Strang
+FIGURE TO COME...
+Figure 5.11: ∆E
+∆t = c ∆H
+∆x and ∆H
+∆t = c ∆E
+∆x are staggered but centered.
+Problem Set 5.3
+1
+Write the equation utt = uxx + uyy as a ﬁrst-order system vt = Avx + Bvy
+with the vector unknown v = (ut, ux, uy). The matrices A and B should be
+symmetric. Then the energy E(t) = 1
+2
+R
+(u2
+t + u2
+x + u2
+y) dx is constant.
+2
+How was the symmetry of A used in the ﬁnal step vTAvx = ( 1
+2vTAv)x in equa-
+tion (27) ? You could write out vTAv = P P aijvi(x)vj(x) and take the deriva-
+tive of each term by the product rule.
+3
+Add Gauss law div D = 0 and div B = 0 with D = ϵE and B = µH.

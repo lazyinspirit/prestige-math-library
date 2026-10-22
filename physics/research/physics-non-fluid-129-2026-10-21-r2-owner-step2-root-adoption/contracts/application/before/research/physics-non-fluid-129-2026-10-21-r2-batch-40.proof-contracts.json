@@ -1,0 +1,1206 @@
+{
+  "version": 1,
+  "level": "physics-non-fluid-129-2026-10-21-r2",
+  "scope": [
+    "lem-gr-fx-star-shaped-poincare-homotopy",
+    "lem-gr-fx-differentiation-under-finite-chain-integral",
+    "lem-gr-fx-variation-commutator-identity",
+    "prop-gr-fx-field-space-closedness",
+    "prop-gr-fx-on-shell-current-closure",
+    "prop-gr-fx-potential-ambiguity",
+    "prop-gr-fx-diffeomorphism-current-identity",
+    "ex-gr-fx12-1",
+    "ex-gr-fx12-2"
+  ],
+  "contracts": {
+    "lem-gr-fx-star-shaped-poincare-homotopy": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-star-shaped-open-subset-of-rn",
+          "source_section": "Definition",
+          "quote": "A nonempty open set $U\\subseteq\\mathbb R^n$ is **star-shaped with respect to** $a\\in U$ when\n\n$$a+t(x-a)\\in U\\qquad\\text{for every }x\\in U\\text{ and }0\\le t\\le1.$$\n\nThe point $a$ is a **star centre**. Every convex open set of [[def-convex-subset-of-euclidean-space]] is star-shaped with respect to each of its points. The nonemptiness and the chosen centre are part of the definition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-pullback-of-a-differential-form",
+          "source_section": "Definition",
+          "quote": "Let $F:M\\to N$ be smooth, and let $\\omega\\in\\Omega^k(N)$. The **pullback**\n$F^*\\omega$ is the pullback of $\\omega$ viewed as an alternating covariant\n$k$-tensor field:\n\n$$ (F^*\\omega)_p(v_1,\\ldots,v_k)=\\omega_{F(p)}(dF_pv_1,\\ldots,dF_pv_k). $$",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-the-exterior-derivative-commutes-with-pullback",
+          "source_section": "Statement",
+          "quote": "For every smooth map $F:M\\to N$ and every form $\\omega$ on $N$, $$d(F^*\\omega)=F^*(d\\omega).$$",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-differentiation-under-the-integral-sign-on-a-compact-rectangle",
+          "source_section": "Statement",
+          "quote": "Let $a<b$ and $c<d$. Suppose $g,h:[a,b]\\times[c,d]\\to\\mathbb R$ are continuous and, for every fixed $t\\in[c,d]$, the function $x\\mapsto g(x,t)$ is differentiable on $(a,b)$ with derivative $h(x,t)$. Define\n\n$$G(x):=\\int_c^d g(x,t)\\,dt.$$\n\nThen $G$ is differentiable on $[a,b]$ as a function on that interval and\n\n$$G'(x)=\\int_c^d h(x,t)\\,dt\\qquad(x\\in[a,b]).$$\n\nAt $a$ and $b$ the derivative is relative and one-sided. The derivative hypothesis is imposed only for interior parameter values; continuity of $h$ supplies its endpoint values.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-newton-leibniz-with-interior-derivative",
+          "source_section": "Statement",
+          "quote": "Let $a<b$. Suppose $G:[a,b]\\to\\mathbb R$ is continuous on $[a,b]$ and differentiable on $(a,b)$. If $f:[a,b]\\to\\mathbb R$ is Riemann integrable and\n\n$$f(x)=G'(x)\\qquad(a<x<b),$$\n\nthen\n\n$$\\int_a^b f=G(b)-G(a).$$\n\nNo derivative of $G$ at either endpoint is assumed, and the two endpoint values assigned to the integrable extension $f$ do not enter the conclusion.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Define $F:[0,1]\\times U\\to U$ by $F(t,x)=a+t(x-a)$. By [F1] this map has image in $U$. In coordinates on $U\\subseteq\\mathbb R^n$, decompose its pullback as $F^*\\alpha=\\gamma_t+dt\\wedge\\eta_t$, where $\\gamma_t$ is a $k$-form and $\\eta_t$ a $(k-1)$-form on $U$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The integrand defining $K\\alpha$ is alternating and multilinear in $v_1,\\ldots,v_{k-1}$, so its integral is a $(k-1)$-covariant alternating tensor at each $x$. Its coefficient functions are smooth in $(x,t)$. Restricting $x$ to a compact coordinate rectangle inside $U$ and using [F4] on each coordinate derivative shows that parameter derivatives pass through the $t$-integral; iteration gives smooth coefficients, hence a smooth $(k-1)$-form $K\\alpha$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Since $d\\alpha=0$, [F3] gives $d(F^*\\alpha)=0$. In product coordinates $d=d_U+dt\\wedge\\partial_t$, so the coefficient of $dt$ in this equality is $\\partial_t\\gamma_t-d_U\\eta_t=0$. The pullback formula [F2] gives $(\\eta_t)_x(v_1,\\ldots,v_{k-1}) =t^{k-1}\\alpha_{a+t(x-a)}(x-a,v_1,\\ldots,v_{k-1})$.",
+          "step": "2.2",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Thus $K\\alpha=\\int_0^1\\eta_t\\,dt$. By step 2.1 and [F4], $d_U\\int_0^1\\eta_t\\,dt=\\int_0^1d_U\\eta_t\\,dt$. Apply [F5] to the coefficient functions of $\\gamma_t$ and use step 2.2: $\\gamma_1-\\gamma_0=\\int_0^1\\partial_t\\gamma_t\\,dt =d_U\\int_0^1\\eta_t\\,dt$. Here $\\gamma_1=\\alpha$ because $F(1,x)=x$, while $\\gamma_0=0$ because $F(0,x)=a$ is constant and $k\\ge1$. Hence $d(K\\alpha)=\\alpha$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2",
+            "F4",
+            "F5"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The hypothesis a∈U makes U nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For α=0 the defining integral is zero and step 3.1 gives d(Kα)=α."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The case k=1 is allowed by the statement; step 3.1 uses only k≥1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "No nondegeneracy of α is assumed; steps 1.1–3.1 also apply to the zero form."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.1 use both homotopy endpoints t=0 and t=1 explicitly."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no choice from an arbitrary family; it fixes the given centre and a local compact rectangle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is an exactness implication, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is an exactness implication, not a biconditional."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "No independent finite computation applies; the item is established by the symbolic proof steps."
+    },
+    "lem-gr-fx-differentiation-under-finite-chain-integral": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-smooth-singular-chain-and-cochain-complexes",
+          "source_section": "Definition",
+          "quote": "For a smooth manifold $M$, possibly with boundary, let\n$$C_k^\\infty(M;\\mathbb R)=\\mathbb R^{(S_k^\\infty(M))}\\quad(k\\ge0),\\qquad C_k^\\infty(M;\\mathbb R)=0\\quad(k<0),$$\nusing [[def-smooth-singular-simplex]]. It is the subspace of [[def-real-singular-chain-complex]] spanned by the smooth simplices, with the same signed face differential.\n\nThis is a subcomplex: an affine face map $\\delta_i:A^{k-1}\\to A^k$ has the open inverse image $\\delta_i^{-1}(O)$ containing $\\Delta^{k-1}$. Composing $\\bar\\sigma$ with this affine map on that inverse image extends $\\sigma\\delta_i$ smoothly into $M$. Thus every face is smooth, and the already proved signed cancellation gives $\\partial^2=0$ on this subspace.\n\nDefine the **smooth singular cochain complex** by\n$$C_\\infty^k(M;\\mathbb R)=\\operatorname{Hom}_{\\mathbb R}(C_k^\\infty(M;\\mathbb R),\\mathbb R),\\qquad \\delta\\varphi=\\varphi\\partial.$$\nAs for [[def-real-singular-cochain-complex]], these are arbitrary real functions on the supplied smooth-simplex basis, evaluated by finite sums. Precomposition gives $\\delta^2\\varphi=\\varphi\\partial^2=0$. Define $H_k^\\infty(M;\\mathbb R)=\\ker\\partial_k/\\operatorname{im}\\partial_{k+1}$ and $H_\\infty^k(M;\\mathbb R)=\\ker\\delta^k/\\operatorname{im}\\delta^{k-1}$; both quotients are licensed by square-zero.\n\nNegative groups vanish and the degree-zero boundary is zero. On a point all simplices are smooth, so the complexes are the ordinary unnormalized point complexes; no constant simplices are discarded. For the empty manifold all groups are zero. The specified subspaces and duals require no choice of extensions or bases.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-integral-of-a-form-over-a-smooth-singular-simplex",
+          "source_section": "Definition",
+          "quote": "Let $\\sigma:\\Delta^k\\to M$ be a smooth singular simplex and let $\\omega$ be a smooth $k$-form on an open neighbourhood of its image in $M$. For $k\\ge1$ put\n$$T_k=\\{x\\in\\mathbb R^k:x_j\\ge0,\\ \\sum_jx_j\\le1\\},\\qquad a(x)=v_0+\\sum_{j=1}^kx_j(v_j-v_0).$$\nTake a smooth extension $\\bar\\sigma$ near $\\Delta^k$, restrict its domain so that $\\omega$ is defined on its image, and write $a^*\\bar\\sigma^*\\omega=f(x)\\,dx_1\\wedge\\cdots\\wedge dx_k$. Define\n$$\\int_\\sigma\\omega:=\\int_{T_k}f(x)\\,dx.$$\nThe right side is the Jordan-set Riemann integral. In degree zero define $\\int_\\sigma\\omega=\\omega(\\sigma(v_0))$. This fixes the positive point convention. Reversing the domain orientation negates the integral. Independence of other positive affine coordinates is the forward justification [[lem-simplex-integrals-are-independent-of-affine-coordinate-identification]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-riemann-integral-over-a-jordan-set",
+          "source_section": "Definition",
+          "quote": "Let $E\\subseteq\\mathbb R^m$ be bounded in the metric sense of\n[[def-metric-bounded-diameter]] and Jordan measurable, and let\n$f:E\\to\\mathbb R$ be bounded. Choose a nondegenerate rectangle\n$Q\\supseteq E$, whose existence follows from\n[[def-jordan-inner-and-outer-content]], and define the zero extension\n$$\\widetilde f_Q(x):=\\begin{cases}f(x),&x\\in E,\\\\0,&x\\in Q\\setminus E.\\end{cases}$$\nThe function $f$ is **Riemann integrable over $E$** when $\\widetilde f_Q$ is integrable over $Q$, and then\n$$\\int_Ef:=\\int_Q\\widetilde f_Q.$$\nIndependence of the bounding rectangle, for both integrability and value, is proved in [[lem-jordan-set-integral-well-defined]] and recorded as the definition's forward justification. For $f=1$, the zero extension is $1_E$, so [[thm-jordan-content-and-indicator-integrability]] gives $\\int_E1=\\operatorname{cont}(E)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-multidimensional-darboux-integral",
+          "source_section": "Definition",
+          "quote": "For a bounded function $f:Q\\to\\mathbb R$ on a nondegenerate rectangle\n$Q\\subseteq\\mathbb R^m$, define\n$$\\underline{\\int_Q}f:=\\sup_P L(f,P),\\qquad \\overline{\\int_Q}f:=\\inf_P U(f,P),$$\nover all grid partitions $P$ of $Q$. The grid family is nonempty, since the endpoints in each coordinate give a one-cell grid. Every lower sum is at most every upper sum by a common refinement and [[lem-multidimensional-refinement-inequalities]], so the two sets of sums are nonempty and bounded and the extrema exist ([[def-complete-ordered-field]], [[thm-infimum-property]], [[def-infimum]], [[lem-sup-unique]]).\n\nThe function is **Riemann integrable over $Q$** when the two values agree.\nTheir unique common real is $\\int_Q f$. No integral is defined here for a\ndegenerate rectangle, because the grid definition requires every coordinate\ninterval to have distinct endpoints. This is the multidimensional Darboux\ndefinition; its agreement with the published one-dimensional definition is\nproved separately.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-multidimensional-rectangle-and-volume",
+          "source_section": "Definition",
+          "quote": "Fix a natural number $m\\ge1$. For $a,b\\in\\mathbb R^m$ with $a_j\\le b_j$ for $j<m$, define\n$$[a,b]:=\\{x\\in\\mathbb R^m:a_j\\le x_j\\le b_j\\ (j<m)\\},\\qquad \\operatorname{vol}[a,b]:=\\prod_{j<m}(b_j-a_j).$$\nThe product is the recursively defined finite product of [[def-finite-sum]]. The rectangle is **nondegenerate** when every $a_j<b_j$, and it is a **cube** when all side lengths are equal.\n\nEvery factor is nonnegative, so volume is nonnegative. For a coordinate index $r<m$, cutting at $c\\in[a_r,b_r]$ gives two rectangles whose volumes add to the original, by distributivity in that factor and [[lem-finite-sum-laws]]. Under the standard identification $\\mathbb R^1\\cong\\mathbb R$ ([[lem-metrics-on-rn]], [[def-p-norms-on-rn]]), this is the interval $[a_0,b_0]$ and its length.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-heine-borel-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions\n$n \\to \\mathbb{R}$ and let $d_2$ be the Euclidean metric on it\n($\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it). Then:\n\n1. **Closed boxes are compact.** For reals $a_k \\le b_k$ $(k < n)$ the box\n   $Q = \\{\\, x \\in \\mathbb{R}^n : a_k \\le x_k \\le b_k \\text{ for every } k < n \\,\\}$\n   is a compact subset of $(\\mathbb{R}^n, d_2)$ (Open cover, subcover, compact metric space, and compact subset of a metric space).\n2. **Heine-Borel.** A subset $K \\subseteq \\mathbb{R}^n$ is a compact subset of\n   $(\\mathbb{R}^n, d_2)$ if and only if $K$ is closed in $\\mathbb{R}^n$\n   (The metric topology: a set is open when every one of its points has a ball around it inside the set; closed means open complement) and bounded\n   (Bounded subset, diameter, distance from a point to a set, and distance between two sets in a metric space).\n3. **The real line.** A subset $K \\subseteq \\mathbb{R}$ is a compact subset of\n   $(\\mathbb{R}, d_{\\mathbb{R}})$, the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   (The absolute value makes $\\mathbb{R}$ a metric space: $d(x,y) = |x-y|$ is a metric, its open balls are the intervals $(x-r, x+r)$, and it is unbounded), if and only if $K$ is closed in\n   $\\mathbb{R}$ and bounded.\n\n**No choice principle is used.** The bisection below halves one coordinate at a\ntime and takes the **left** half whenever the left half still fails to be finitely\ncovered, the right half otherwise: a rule with two outcomes, decided by a\nproperty of the box, not a selection. That is the whole reason the theorem is\navailable in ZF, while the general \"complete and totally bounded implies compact\"\n(A complete, totally bounded metric space is compact, proved from countable choice used exactly once) is not.\n\nThe hypothesis $n \\ge 1$ is inherited from $\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it, which defines\n$\\mathbb{R}^n$ and its metrics only there; the last remark below records what\nhappens at $n = 0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-heine-cantor-metric",
+          "source_section": "Statement",
+          "quote": "Let $(X,d_X)$ be a compact metric space (Open cover, subcover, compact metric space, and compact subset of a metric space), let\n$(Y,d_Y)$ be any metric space (Metric space: $d(x,y) = 0$ iff $x = y$, symmetry, and the triangle inequality; pseudometric and ultrametric) and let $f : X \\to Y$ be\ncontinuous (Continuity of a map between metric spaces, at a point and globally, in the $\\varepsilon$-$\\delta$ form). Then $f$ is uniformly continuous\n(Uniform continuity of a map of metric spaces: one $\\delta$ serving every point).\n\nNo choice principle is used: the cover built below is cut out by a property, and\nthe Lebesgue number lemma it is fed to is itself choice free\n(Every open cover of a compact metric space has a Lebesgue number: a $\\delta > 0$ such that every nonempty subset of diameter less than $\\delta$ lies inside a single member of the cover).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-newton-leibniz-with-interior-derivative",
+          "source_section": "Statement",
+          "quote": "Let $a<b$. Suppose $G:[a,b]\\to\\mathbb R$ is continuous on $[a,b]$ and differentiable on $(a,b)$. If $f:[a,b]\\to\\mathbb R$ is Riemann integrable and\n\n$$f(x)=G'(x)\\qquad(a<x<b),$$\n\nthen\n\n$$\\int_a^b f=G(b)-G(a).$$\n\nNo derivative of $G$ at either endpoint is assumed, and the two endpoint values assigned to the integrable extension $f$ do not enter the conclusion.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "First consider integration on one simplex, using the zero extension in [F3] to a bounded nondegenerate rectangle $Q$. The Darboux definitions [F4] give linearity: for integrable $u,w$, choose grid partitions whose upper-minus lower sums for each are arbitrarily small, take a common refinement, and use $\\inf(u+w)\\ge\\inf u+\\inf w$ and $\\sup(u+w)\\le\\sup u+\\sup w$ on each cell. The upper-minus-lower gap for $u+w$ is therefore bounded by the sum of the chosen gaps, so $u+w$ is integrable. Its lower and upper integrals are squeezed between the sums of the lower integrals of $u,w$ and the sums of their upper integrals; letting the gaps tend to zero gives $\\int_Q(u+w)=\\int_Qu+\\int_Qw$. For a scalar $c>0$, upper and lower sums scale by $c$; for $c<0$ they exchange after scaling, giving $\\int_Q(cu)=c\\int_Qu$, and $c=0$ gives zero. Also, if $|u|\\le\\varepsilon$ on $Q$, each lower sum is at least $-\\varepsilon\\operatorname{vol}(Q)$ and each upper sum at most $\\varepsilon\\operatorname{vol}(Q)$, since cell volumes add to $\\operatorname{vol}(Q)$ by [F5]. Thus $|\\int_\\sigma u|\\le\\varepsilon\\operatorname{vol}(Q)$ for an integrable function on the simplex bounded by $\\varepsilon$.",
+          "step": "1.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fix a parameter chart and a point $p$. For one simplex $\\sigma$ write $\\sigma^*\\alpha_p=f(p,z)\\,dz_1\\wedge dz_2\\wedge dz_3$ on $T_3$. Choose a closed parameter rectangle $R$ around $p$ inside the chart. The displayed inequalities defining $T_3$ make it closed and bounded, hence compact by [F6]; [F2] identifies it as the integration domain. The product $R\\times T_3$ is a closed bounded Euclidean set, hence compact by [F6], so $\\partial_a f$ is uniformly continuous there by [F7]. For a small nonzero increment $h$ in coordinate $p^a$, [F8] gives $$\\frac{f(p+he_a,z)-f(p,z)}{h}-\\partial_af(p,z) =\\frac1h\\int_0^h\\bigl(\\partial_af(p+se_a,z)-\\partial_af(p,z)\\bigr)\\,ds.$$ Uniform continuity makes the right side tend uniformly to zero on $T_3$ as $h\\to0$. By step 1.1, the integral of this error tends to zero. Linearity therefore gives $$\\partial_a\\int_\\sigma f(p,z)\\,dz=\\int_\\sigma\\partial_af(p,z)\\,dz.$$ Applying the same argument to every parameter derivative of $f$ proves that all parameter partial derivatives of the simplex integral exist and are integrals of the corresponding derivatives. They are continuous: on a compact parameter rectangle, uniform continuity of each next derivative and step 1.1 bound the change in its integral by the uniform coefficient change times $\\operatorname{vol}(Q)$. Hence this simplex integral is smooth.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F6",
+            "F7",
+            "F8",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F1], $\\Sigma$ is a finite linear combination of such simplices. Linearity from step 1.1 makes $I$ the corresponding finite linear combination of their smooth integrals and gives the asserted derivative formula for every parameter coordinate. Linearity in the tangent vector then gives the formula for every $v\\in T_pP$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The empty chain gives I=0 by the finite-sum statement and step 3.1; the derivative formula is then 0=0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For the zero form or zero chain both sides vanish by the linearity proved in step 1.1 and used in step 3.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The theorem fixes three-dimensional simplex domains and does not quantify over a variable dimension."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Degenerate simplex maps are allowed by the stated smooth-chain input; steps 2.1 and 3.1 use only their smooth pullback coefficients."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 applies Newton–Leibniz to each closed segment contained in the chosen parameter rectangle, including its simplex boundary points."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Only finitely many containing rectangles are needed, one per simplex of the given finite chain; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a derivative formula, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a derivative formula, not a biconditional."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "No independent finite computation applies; the item is established by the symbolic proof steps."
+    },
+    "lem-gr-fx-variation-commutator-identity": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-gr-fx-covariant-presymplectic-current",
+          "source_section": "Definition",
+          "quote": "Let $M$ be an oriented smooth four-manifold and let $\\phi$ be a field\nconfiguration in a specified smooth field bundle. A **local Lagrangian\nfour-form** $\\mathcal L(\\phi)$ is a smooth four-form whose coordinate\ncoefficients depend smoothly on the field components and finitely many\nspacetime derivatives at each point. A **chosen first-variation\ndecomposition** consists of a linear Euler functional $E_\\phi[\\eta]$ with\nvalues in four-forms and a three-form $\\theta(\\phi;\\eta)$, each linear in the\nfield variation $\\eta$ and its derivatives, such that every smooth\none-parameter field family satisfies\n\n$$\\delta\\mathcal L=E_\\phi[\\delta\\phi]+d_M\\theta(\\phi;\\delta\\phi).$$\n\nThe choice is part of the data; it is not asserted to be unique. In a\nparameter family, $\\delta_iE_\\phi$ means the derivative of the coefficients\nof $E_\\phi$ with its variation input held fixed. Thus the total derivative of\n$E_{\\phi(p)}[\\eta(p)]$ is\n$(\\delta_iE_\\phi)[\\eta]+E_\\phi[\\delta_i\\eta]$. For a smooth\nfinite-dimensional field family with parameter exterior derivative $d_P$,\nthe one-form $\\Theta$ on parameter space with values in spacetime three-forms\nis $\\Theta_p(v)=\\theta(\\phi_p;\\delta_v\\phi_p)$. Define the **covariant\npresymplectic current** by $\\omega:=-d_P\\Theta$. For commuting parameter\ncoordinates $s_1,s_2$ this is\n\n$$\\omega(\\delta_1\\phi,\\delta_2\\phi) =\\delta_2\\theta(\\phi;\\delta_1\\phi) -\\delta_1\\theta(\\phi;\\delta_2\\phi).$$\n\nFor a finite oriented smooth singular three-chain $\\Sigma$, define the\nintegrated two-form by\n$\\Omega_\\Sigma(\\delta_1\\phi,\\delta_2\\phi)=\\int_\\Sigma\\omega$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-gr-fx-covariant-field-variations",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a smooth four-manifold and let $\\pi:E\\to M$ be a smooth fibre\nbundle. A **field configuration** is a smooth section $\\phi:M\\to E$, so\n$\\pi\\circ\\phi=\\operatorname{id}_M$. For a finite-dimensional smooth manifold\n$P$, a **smooth field family** is a smooth map\n$\\Phi:P\\times M\\to E$ with $\\pi(\\Phi(p,x))=x$ for all $(p,x)$; it gives\nconfigurations $\\phi_p(x)=\\Phi(p,x)$. For $u\\in T_pP$, the **variation**\n$\\delta_u\\phi_p$ at $x$ is the tangent vector\n$d(r\\mapsto\\Phi(c(r),x))|_{r=0}$, where $c(0)=p$ and $c'(0)=u$. In a local\nfibre chart this is the ordinary derivative of the field components with\nrespect to the parameter. For commuting parameter coordinates $s_1,s_2$,\n$\\delta_i\\phi=\\partial_{s_i}\\phi$ and\n$\\delta_1\\delta_2\\phi=\\delta_2\\delta_1\\phi$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Differentiate [A1] in direction $\\delta_2$ with input $\\delta_1\\phi$ held fixed, and in direction $\\delta_1$ with input $\\delta_2\\phi$ held fixed. The total derivatives of the Euler terms are respectively $(\\delta_2E_\\phi)[\\delta_1\\phi]+E_\\phi[\\delta_2\\delta_1\\phi]$ and $(\\delta_1E_\\phi)[\\delta_2\\phi]+E_\\phi[\\delta_1\\delta_2\\phi]$ by the definition of $\\delta_iE_\\phi$ in [A1]. Subtract the second differentiated identity from the first. The second-variation terms cancel by [A2], and the left-hand sides cancel by commutation of mixed derivatives. The remaining identity is $$0=(\\delta_2E_\\phi)[\\delta_1\\phi]-(\\delta_1E_\\phi)[\\delta_2\\phi] -d_M\\omega(\\delta_1\\phi,\\delta_2\\phi).$$",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Rearranging step 1.1 gives $d_M\\omega=(\\delta_1E_\\phi)[\\delta_2\\phi]-(\\delta_2E_\\phi)[\\delta_1\\phi]$, with the stated sign fixed by the Iyer–Wald ordering in [A1].",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "A1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement fixes a smooth two-parameter family and two named commuting variations. Taking either variation to be zero is allowed and gives the zero identity, but there is no varying-cardinality or empty family of variations.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/supplier_cycle, Step 1 escalation owner",
+            "reason": "The Statement fixes a smooth two-parameter family and two named commuting variations. Taking either variation to be zero is allowed and gives the zero identity, but there is no varying-cardinality or empty family of variations. The flagged surface expression does not introduce the excluded empty or zero case; this is an item-specific source-use review, not an independent proof acceptance."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If either variation is zero, both sides vanish by linearity; the identity in step 1.1 covers this case."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Exactly two commuting parameter directions are fixed by the statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "If the two directions coincide, the alternating current and the two Euler terms cancel in step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The identity is evaluated at an interior point of a smooth parameter chart and has no endpoint operation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof differentiates the supplied family and makes no selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Two commuting parameter variations give the stated exterior derivative of omega by subtraction; no converse existence of a Lagrangian decomposition is asserted. This public claim is not a biconditional requiring a separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Two commuting parameter variations give the stated exterior derivative of omega by subtraction; no converse existence of a Lagrangian decomposition is asserted. This public claim is not a biconditional requiring a separate reverse implication."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "No independent finite computation applies; the item is established by the symbolic proof steps."
+    },
+    "prop-gr-fx-field-space-closedness": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-gr-fx-covariant-presymplectic-current",
+          "source_section": "Definition",
+          "quote": "Let $M$ be an oriented smooth four-manifold and let $\\phi$ be a field\nconfiguration in a specified smooth field bundle. A **local Lagrangian\nfour-form** $\\mathcal L(\\phi)$ is a smooth four-form whose coordinate\ncoefficients depend smoothly on the field components and finitely many\nspacetime derivatives at each point. A **chosen first-variation\ndecomposition** consists of a linear Euler functional $E_\\phi[\\eta]$ with\nvalues in four-forms and a three-form $\\theta(\\phi;\\eta)$, each linear in the\nfield variation $\\eta$ and its derivatives, such that every smooth\none-parameter field family satisfies\n\n$$\\delta\\mathcal L=E_\\phi[\\delta\\phi]+d_M\\theta(\\phi;\\delta\\phi).$$\n\nThe choice is part of the data; it is not asserted to be unique. In a\nparameter family, $\\delta_iE_\\phi$ means the derivative of the coefficients\nof $E_\\phi$ with its variation input held fixed. Thus the total derivative of\n$E_{\\phi(p)}[\\eta(p)]$ is\n$(\\delta_iE_\\phi)[\\eta]+E_\\phi[\\delta_i\\eta]$. For a smooth\nfinite-dimensional field family with parameter exterior derivative $d_P$,\nthe one-form $\\Theta$ on parameter space with values in spacetime three-forms\nis $\\Theta_p(v)=\\theta(\\phi_p;\\delta_v\\phi_p)$. Define the **covariant\npresymplectic current** by $\\omega:=-d_P\\Theta$. For commuting parameter\ncoordinates $s_1,s_2$ this is\n\n$$\\omega(\\delta_1\\phi,\\delta_2\\phi) =\\delta_2\\theta(\\phi;\\delta_1\\phi) -\\delta_1\\theta(\\phi;\\delta_2\\phi).$$\n\nFor a finite oriented smooth singular three-chain $\\Sigma$, define the\nintegrated two-form by\n$\\Omega_\\Sigma(\\delta_1\\phi,\\delta_2\\phi)=\\int_\\Sigma\\omega$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-the-exterior-derivative-squares-to-zero",
+          "source_section": "Statement",
+          "quote": "For every differential form $\\omega$, $d(d\\omega)=0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-gr-fx-differentiation-under-finite-chain-integral",
+          "source_section": "Statement",
+          "quote": "Let $P$ be a finite-dimensional smooth manifold, let $M$ be an oriented smooth\nfour-manifold, and let $\\Sigma$ be a fixed finite oriented smooth singular\nthree-chain in $M$. Let $\\alpha_p$ be a smooth parameter-dependent\nspacetime three-form, and assume that for every simplex in $\\Sigma$ its\npullback coefficient is jointly smooth in the parameter coordinates and the\nstandard simplex coordinates. Define\n$$I(p):=\\int_\\Sigma\\alpha_p.$$\nThen $I$ is smooth and, for every $v\\in T_pP$,\n$$d_PI_p(v)=\\int_\\Sigma d_P\\alpha_p(v).$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In commuting parameter coordinates $p^a,p^b$, [F1] and [F3] give\n$(\\Omega_\\Sigma)_{ab}\n=\\partial_b(\\Theta_\\Sigma)_a-\\partial_a(\\Theta_\\Sigma)_b\n=-(d_P\\Theta_\\Sigma)_{ab}$, where\n$\\Theta_\\Sigma=\\int_\\Sigma\\Theta$. The same differentiation formula applies\nto each coefficient of the parameter-space form $\\Theta$, so\n$\\Omega_\\Sigma=-d_P\\Theta_\\Sigma$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply [F2] to step 1.1:\n$d_P\\Omega_\\Sigma=-d_P^2\\Theta_\\Sigma=0$. The same computation applies to\nany smooth subfamily of solutions, proving closedness of its restricted\ntwo-form without asserting that a global solution manifold exists.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For the zero chain ΩΣ=0, so dPΩΣ=0 directly from the definition in [F1]."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If Θ=0 then ΩΣ=0; steps 1.1–2.1 also cover this degenerate case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "When dim P<2 the two-form is zero; otherwise the coordinate calculation in steps 1.1–2.1 applies."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "No nondegeneracy is assumed for ΩΣ; step 2.1 proves closedness for any such two-form."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "P is a smooth parameter manifold without boundary in the statement, and no boundary value is used."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The fixed finite chain and given family require no arbitrary selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The proposition asserts closedness only and contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The proposition asserts closedness only and contains no biconditional."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "No independent finite computation applies; the item is established by the symbolic proof steps."
+    },
+    "prop-gr-fx-on-shell-current-closure": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-gr-fx-variation-commutator-identity",
+          "source_section": "Statement",
+          "quote": "Use the chosen first-variation decomposition and its Iyer–Wald current\nordering. For a smooth two-parameter family with commuting variations\n$\\delta_1,\\delta_2$,\n\n$$d_M\\omega(\\delta_1\\phi,\\delta_2\\phi) =(\\delta_1E_\\phi)[\\delta_2\\phi]-(\\delta_2E_\\phi)[\\delta_1\\phi].$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-stokes-theorem-for-smooth-singular-chains",
+          "source_section": "Statement",
+          "quote": "Let $M$ be a smooth manifold, possibly with boundary. For $k\\ge1$, $c\\in C_k^\\infty(M;\\mathbb R)$ and $\\omega\\in\\Omega^{k-1}(M)$, define integration over a chain by the finite linear sum of its simplex integrals. Then\n$$\\int_c d\\omega=\\int_{\\partial c}\\omega.$$\nThe zero chain has integral zero. In degree zero the boundary is zero; no degree-minus-one form is required by this statement.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-gr-fx-covariant-presymplectic-current",
+          "source_section": "Definition",
+          "quote": "Let $M$ be an oriented smooth four-manifold and let $\\phi$ be a field\nconfiguration in a specified smooth field bundle. A **local Lagrangian\nfour-form** $\\mathcal L(\\phi)$ is a smooth four-form whose coordinate\ncoefficients depend smoothly on the field components and finitely many\nspacetime derivatives at each point. A **chosen first-variation\ndecomposition** consists of a linear Euler functional $E_\\phi[\\eta]$ with\nvalues in four-forms and a three-form $\\theta(\\phi;\\eta)$, each linear in the\nfield variation $\\eta$ and its derivatives, such that every smooth\none-parameter field family satisfies\n\n$$\\delta\\mathcal L=E_\\phi[\\delta\\phi]+d_M\\theta(\\phi;\\delta\\phi).$$\n\nThe choice is part of the data; it is not asserted to be unique. In a\nparameter family, $\\delta_iE_\\phi$ means the derivative of the coefficients\nof $E_\\phi$ with its variation input held fixed. Thus the total derivative of\n$E_{\\phi(p)}[\\eta(p)]$ is\n$(\\delta_iE_\\phi)[\\eta]+E_\\phi[\\delta_i\\eta]$. For a smooth\nfinite-dimensional field family with parameter exterior derivative $d_P$,\nthe one-form $\\Theta$ on parameter space with values in spacetime three-forms\nis $\\Theta_p(v)=\\theta(\\phi_p;\\delta_v\\phi_p)$. Define the **covariant\npresymplectic current** by $\\omega:=-d_P\\Theta$. For commuting parameter\ncoordinates $s_1,s_2$ this is\n\n$$\\omega(\\delta_1\\phi,\\delta_2\\phi) =\\delta_2\\theta(\\phi;\\delta_1\\phi) -\\delta_1\\theta(\\phi;\\delta_2\\phi).$$\n\nFor a finite oriented smooth singular three-chain $\\Sigma$, define the\nintegrated two-form by\n$\\Omega_\\Sigma(\\delta_1\\phi,\\delta_2\\phi)=\\int_\\Sigma\\omega$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Substitute $E_\\phi=0$ and $\\delta_iE_\\phi=0$ from [A1] into [F1]. Both terms on its right vanish, so $d_M\\omega=0$ throughout the region.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply [F2] to $C$: $0=\\int_Cd_M\\omega=\\int_{\\partial C}\\omega =\\Omega_{\\Sigma_2}-\\Omega_{\\Sigma_1}+\\int_B\\omega$. The last equality uses the oriented boundary decomposition in the Given line and the linearity in [F2]–[F3].",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Rearranging step 2.1 gives $\\Omega_{\\Sigma_2}-\\Omega_{\\Sigma_1}=-\\int_B\\omega$. If $\\int_B\\omega=0$, the two cut forms agree; without that condition the identity permits a nonzero difference.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For C=0 the chain identity is zero on both sides by step 2.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero variations make ω and both Euler terms zero in steps 1.1–2.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement fixes two variations and does not quantify over a variable number of directions."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "No nondegeneracy of Ω is assumed; the closure and Stokes calculation in steps 1.1–3.1 remain valid."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "If B=0, step 3.1 gives equality of the two cut forms; nonzero B retains its oriented flux."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses the supplied finite chain and no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is an implication and flux identity, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is an implication and flux identity, not a biconditional."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "No independent finite computation applies; the item is established by the symbolic proof steps."
+    },
+    "prop-gr-fx-potential-ambiguity": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-gr-fx-covariant-presymplectic-current",
+          "source_section": "Definition",
+          "quote": "Let $M$ be an oriented smooth four-manifold and let $\\phi$ be a field\nconfiguration in a specified smooth field bundle. A **local Lagrangian\nfour-form** $\\mathcal L(\\phi)$ is a smooth four-form whose coordinate\ncoefficients depend smoothly on the field components and finitely many\nspacetime derivatives at each point. A **chosen first-variation\ndecomposition** consists of a linear Euler functional $E_\\phi[\\eta]$ with\nvalues in four-forms and a three-form $\\theta(\\phi;\\eta)$, each linear in the\nfield variation $\\eta$ and its derivatives, such that every smooth\none-parameter field family satisfies\n\n$$\\delta\\mathcal L=E_\\phi[\\delta\\phi]+d_M\\theta(\\phi;\\delta\\phi).$$\n\nThe choice is part of the data; it is not asserted to be unique. In a\nparameter family, $\\delta_iE_\\phi$ means the derivative of the coefficients\nof $E_\\phi$ with its variation input held fixed. Thus the total derivative of\n$E_{\\phi(p)}[\\eta(p)]$ is\n$(\\delta_iE_\\phi)[\\eta]+E_\\phi[\\delta_i\\eta]$. For a smooth\nfinite-dimensional field family with parameter exterior derivative $d_P$,\nthe one-form $\\Theta$ on parameter space with values in spacetime three-forms\nis $\\Theta_p(v)=\\theta(\\phi_p;\\delta_v\\phi_p)$. Define the **covariant\npresymplectic current** by $\\omega:=-d_P\\Theta$. For commuting parameter\ncoordinates $s_1,s_2$ this is\n\n$$\\omega(\\delta_1\\phi,\\delta_2\\phi) =\\delta_2\\theta(\\phi;\\delta_1\\phi) -\\delta_1\\theta(\\phi;\\delta_2\\phi).$$\n\nFor a finite oriented smooth singular three-chain $\\Sigma$, define the\nintegrated two-form by\n$\\Omega_\\Sigma(\\delta_1\\phi,\\delta_2\\phi)=\\int_\\Sigma\\omega$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-gr-fx-covariant-field-variations",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a smooth four-manifold and let $\\pi:E\\to M$ be a smooth fibre\nbundle. A **field configuration** is a smooth section $\\phi:M\\to E$, so\n$\\pi\\circ\\phi=\\operatorname{id}_M$. For a finite-dimensional smooth manifold\n$P$, a **smooth field family** is a smooth map\n$\\Phi:P\\times M\\to E$ with $\\pi(\\Phi(p,x))=x$ for all $(p,x)$; it gives\nconfigurations $\\phi_p(x)=\\Phi(p,x)$. For $u\\in T_pP$, the **variation**\n$\\delta_u\\phi_p$ at $x$ is the tangent vector\n$d(r\\mapsto\\Phi(c(r),x))|_{r=0}$, where $c(0)=p$ and $c'(0)=u$. In a local\nfibre chart this is the ordinary derivative of the field components with\nrespect to the parameter. For commuting parameter coordinates $s_1,s_2$,\n$\\delta_i\\phi=\\partial_{s_i}\\phi$ and\n$\\delta_1\\delta_2\\phi=\\delta_2\\delta_1\\phi$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-the-exterior-derivative-squares-to-zero",
+          "source_section": "Statement",
+          "quote": "For every differential form $\\omega$, $d(d\\omega)=0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-stokes-theorem-for-smooth-singular-chains",
+          "source_section": "Statement",
+          "quote": "Let $M$ be a smooth manifold, possibly with boundary. For $k\\ge1$, $c\\in C_k^\\infty(M;\\mathbb R)$ and $\\omega\\in\\Omega^{k-1}(M)$, define integration over a chain by the finite linear sum of its simplex integrals. Then\n$$\\int_c d\\omega=\\int_{\\partial c}\\omega.$$\nThe zero chain has integral zero. In degree zero the boundary is zero; no degree-minus-one form is required by this statement.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Varying $\\mathcal L'$ gives $\\delta\\mathcal L'=\\delta\\mathcal L+d_M(\\delta\\mu)$ because parameter differentiation commutes with spacetime differentiation on the smooth family. Since $d_M^2Y=0$ by [F1], the stated $\\theta'$ is a valid selected potential for $\\mathcal L'$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Substitute $\\theta'$ into [A1] for both ordered pairs. The added $\\delta_2\\delta_1\\mu-\\delta_1\\delta_2\\mu$ terms cancel by [A2], while the remaining terms are $d_M(\\delta_2Y(\\delta_1\\phi)-\\delta_1Y(\\delta_2\\phi))$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Integrate step 2.1 over $\\Sigma$ and apply [F2]. This gives exactly the integral of the displayed two-form over $\\partial\\Sigma$; if $\\partial\\Sigma=0$, that contribution vanishes.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "With μ=0 and Y=0 the change is zero in steps 1.1–3.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If Y=0 the corner change vanishes by step 2.1; if μ=0 its commuting variations cancel in step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The chain dimension is fixed at three and no variable dimension is quantified."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The proof allows Y=0 and also handles closed Σ, for which the corner integral vanishes in step 3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The identity is a variation identity on a smooth parameter chart and has no endpoint operation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The family and forms μ,Y are supplied; the proof makes no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The proposition asserts an identity and consequence, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The proposition asserts an identity and consequence, not a biconditional."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "No independent finite computation applies; the item is established by the symbolic proof steps."
+    },
+    "prop-gr-fx-diffeomorphism-current-identity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-gr-fx-covariant-presymplectic-current",
+          "source_section": "Definition",
+          "quote": "Let $M$ be an oriented smooth four-manifold and let $\\phi$ be a field\nconfiguration in a specified smooth field bundle. A **local Lagrangian\nfour-form** $\\mathcal L(\\phi)$ is a smooth four-form whose coordinate\ncoefficients depend smoothly on the field components and finitely many\nspacetime derivatives at each point. A **chosen first-variation\ndecomposition** consists of a linear Euler functional $E_\\phi[\\eta]$ with\nvalues in four-forms and a three-form $\\theta(\\phi;\\eta)$, each linear in the\nfield variation $\\eta$ and its derivatives, such that every smooth\none-parameter field family satisfies\n\n$$\\delta\\mathcal L=E_\\phi[\\delta\\phi]+d_M\\theta(\\phi;\\delta\\phi).$$\n\nThe choice is part of the data; it is not asserted to be unique. In a\nparameter family, $\\delta_iE_\\phi$ means the derivative of the coefficients\nof $E_\\phi$ with its variation input held fixed. Thus the total derivative of\n$E_{\\phi(p)}[\\eta(p)]$ is\n$(\\delta_iE_\\phi)[\\eta]+E_\\phi[\\delta_i\\eta]$. For a smooth\nfinite-dimensional field family with parameter exterior derivative $d_P$,\nthe one-form $\\Theta$ on parameter space with values in spacetime three-forms\nis $\\Theta_p(v)=\\theta(\\phi_p;\\delta_v\\phi_p)$. Define the **covariant\npresymplectic current** by $\\omega:=-d_P\\Theta$. For commuting parameter\ncoordinates $s_1,s_2$ this is\n\n$$\\omega(\\delta_1\\phi,\\delta_2\\phi) =\\delta_2\\theta(\\phi;\\delta_1\\phi) -\\delta_1\\theta(\\phi;\\delta_2\\phi).$$\n\nFor a finite oriented smooth singular three-chain $\\Sigma$, define the\nintegrated two-form by\n$\\Omega_\\Sigma(\\delta_1\\phi,\\delta_2\\phi)=\\int_\\Sigma\\omega$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-cartans-magic-formula",
+          "source_section": "Statement",
+          "quote": "For every vector field $X$ and differential form $\\omega$, $$\\mathcal L_X\\omega=d(\\iota_X\\omega)+\\iota_X(d\\omega).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-gr-fx-star-shaped-poincare-homotopy",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open and star-shaped with\nrespect to $a\\in U$, and let $\\alpha\\in\\Omega^k(U)$ be a smooth closed\ndifferential form with $1\\le k\\le n$. Define\n\n$$(K\\alpha)_x(v_1,\\ldots,v_{k-1}) :=\\int_0^1 t^{k-1} \\alpha_{a+t(x-a)}(x-a,v_1,\\ldots,v_{k-1})\\,dt .$$\n\nThen $K\\alpha$ is a smooth $(k-1)$-form on $U$ and $d(K\\alpha)=\\alpha$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-lie-derivative-of-a-tensor-field",
+          "source_section": "Definition",
+          "quote": "If $X$ has local flow $\\Phi_t$ and $T$ is a smooth tensor field of type $(r,s)$, its Lie derivative is $$\\mathcal L_XT=\\left.\\frac d{dt}\\right|_{t=0}\\Phi_t^*T,$$ on every local flow domain where this derivative is defined. Here the pullback by the local diffeomorphism $\\Phi_t$ acts by $d\\Phi_{-t}$ on each contravariant slot and by $d\\Phi_t$ on each covariant slot.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F4], $\\mathcal L_\\xi\\mathcal L$ is the derivative of the pullback of $\\mathcal L$ along the local flow. Since $\\mathcal L$ is a four-form on a four-manifold, $d_M\\mathcal L=0$ by degree. Cartan's identity [F2] gives $\\delta_\\xi\\mathcal L=\\mathcal L_\\xi\\mathcal L =d_M(\\iota_\\xi\\mathcal L)$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply [F1] to the variation $\\delta_\\xi\\phi=\\mathcal L_\\xi\\phi$ and equate it with step 1.1: $E_\\phi[\\mathcal L_\\xi\\phi]+d_M\\theta(\\phi;\\mathcal L_\\xi\\phi) =d_M(\\iota_\\xi\\mathcal L)$. Rearranging gives $d_MJ_\\xi=-E_\\phi[\\mathcal L_\\xi\\phi]$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $E_\\phi=0$, step 2.1 gives $d_MJ_\\xi=0$. Restrict to any star-shaped coordinate neighborhood and apply [F3] with $k=3$; this yields a two-form $Q_\\xi$ on that neighborhood such that $J_\\xi=d_MQ_\\xi$ there.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A star-shaped neighborhood contains its centre a and is nonempty; no empty domain is claimed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For ξ=0 the current is zero by variation-linearity, and the identity reduces to Eφ[0]=0; the identity in step 2.1 covers it."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The spacetime dimension and current degree are fixed at four and three."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The claim concerns the Noether current and does not assume or analyze nondegeneracy of a phase-space form."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Only a local flow derivative at zero and a local coordinate neighborhood are used; there is no endpoint charge claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The vector field, local flow, and star-shaped neighborhood are supplied; no arbitrary selection is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The proposition is a divergence identity with a local existence consequence, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The proposition is a divergence identity with a local existence consequence, not a biconditional."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "No independent finite computation applies; the item is established by the symbolic proof steps."
+    },
+    "ex-gr-fx12-1": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-gr-fx-covariant-presymplectic-current",
+          "source_section": "Definition",
+          "quote": "Let $M$ be an oriented smooth four-manifold and let $\\phi$ be a field\nconfiguration in a specified smooth field bundle. A **local Lagrangian\nfour-form** $\\mathcal L(\\phi)$ is a smooth four-form whose coordinate\ncoefficients depend smoothly on the field components and finitely many\nspacetime derivatives at each point. A **chosen first-variation\ndecomposition** consists of a linear Euler functional $E_\\phi[\\eta]$ with\nvalues in four-forms and a three-form $\\theta(\\phi;\\eta)$, each linear in the\nfield variation $\\eta$ and its derivatives, such that every smooth\none-parameter field family satisfies\n\n$$\\delta\\mathcal L=E_\\phi[\\delta\\phi]+d_M\\theta(\\phi;\\delta\\phi).$$\n\nThe choice is part of the data; it is not asserted to be unique. In a\nparameter family, $\\delta_iE_\\phi$ means the derivative of the coefficients\nof $E_\\phi$ with its variation input held fixed. Thus the total derivative of\n$E_{\\phi(p)}[\\eta(p)]$ is\n$(\\delta_iE_\\phi)[\\eta]+E_\\phi[\\delta_i\\eta]$. For a smooth\nfinite-dimensional field family with parameter exterior derivative $d_P$,\nthe one-form $\\Theta$ on parameter space with values in spacetime three-forms\nis $\\Theta_p(v)=\\theta(\\phi_p;\\delta_v\\phi_p)$. Define the **covariant\npresymplectic current** by $\\omega:=-d_P\\Theta$. For commuting parameter\ncoordinates $s_1,s_2$ this is\n\n$$\\omega(\\delta_1\\phi,\\delta_2\\phi) =\\delta_2\\theta(\\phi;\\delta_1\\phi) -\\delta_1\\theta(\\phi;\\delta_2\\phi).$$\n\nFor a finite oriented smooth singular three-chain $\\Sigma$, define the\nintegrated two-form by\n$\\Omega_\\Sigma(\\delta_1\\phi,\\delta_2\\phi)=\\int_\\Sigma\\omega$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-gr-fx-on-shell-current-closure",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal L$ have a chosen first-variation decomposition with Euler\nfunctional $E_\\phi$. If $E_\\phi=0$ and both variations satisfy the\nlinearized equations, so $\\delta_iE_\\phi=0$, then $d_M\\omega=0$. For a finite\noriented smooth singular four-chain $C$ with\n$\\partial C=\\Sigma_2-\\Sigma_1+B$, where the $\\Sigma_i$ are oriented\nthree-chains and $B$ is the remaining oriented boundary chain,\n\n$$\\Omega_{\\Sigma_2}-\\Omega_{\\Sigma_1}=-\\int_B\\omega.$$\n\nThus on-shell closure alone gives independence between cuts only when the\nside flux vanishes.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-gr-fx-potential-ambiguity",
+          "source_section": "Statement",
+          "quote": "For a fixed smooth two-parameter family of commuting variations, replace the\nLagrangian and its selected potential by\n\n$$\\mathcal L'=\\mathcal L+d_M\\mu,\\qquad \\theta'(\\phi;\\delta\\phi) =\\theta(\\phi;\\delta\\phi)+\\delta\\mu(\\phi;\\delta\\phi) +d_MY(\\phi;\\delta\\phi),$$\n\nwhere $\\mu$ is a local spacetime three-form and $Y$ is a local spacetime\ntwo-form linear in the variation. Then\n\n$$\\omega'-\\omega =d_M\\bigl(\\delta_2Y(\\delta_1\\phi)-\\delta_1Y(\\delta_2\\phi)\\bigr).$$\n\nConsequently, for a finite oriented smooth singular three-chain $\\Sigma$,\nthe integrated form changes by the integral of this two-form over\n$\\partial\\Sigma$.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-gr-fx-admissible-phase-reduction",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal S$ be a specified finite-dimensional smooth solution manifold\nwith specified admissible variations and boundary conditions, and let\n$\\Omega$ be a smooth closed two-form on $\\mathcal S$, obtained by restricting\nan integrated form $\\Omega_\\Sigma$ from the chosen covariant variation data.\nThe pair $(\\mathcal S,\\Omega)$ is **presymplectic** when $\\Omega$ is allowed\nto be degenerate. At $p\\in\\mathcal S$, its pointwise null space is\n$$\\ker\\Omega_p:=\\{v\\in T_p\\mathcal S:\\Omega_p(v,w)=0 \\text{ for every }w\\in T_p\\mathcal S\\}.$$\nA **presymplectic reduction** is defined here only when there is a specified\nsmooth Hausdorff manifold $\\mathcal R$ and a surjective submersion\n$q:\\mathcal S\\to\\mathcal R$ with connected fibers such that\n$$\\ker(dq_p)=\\ker\\Omega_p\\qquad(p\\in\\mathcal S),$$\nwhere $\\ker(dq_p)$ consists of tangent vectors mapped to zero by the\ndifferential. This condition makes the quotient fibers exactly the connected\ndirections annihilated by $\\Omega$. The reduction further requires a smooth\nclosed nondegenerate two-form $\\bar\\Omega$ on $\\mathcal R$ satisfying\n$q^*\\bar\\Omega=\\Omega$. For a smooth vector field $X$ and smooth function\n$H$ on a specified phase space, the Hamiltonian convention is\n$\\iota_X\\Omega=dH$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-the-exterior-derivative-is-a-graded-derivation",
+          "source_section": "Statement",
+          "quote": "Let $M$ be a smooth manifold. The exterior derivative is an\n$\\mathbb R$-linear map $d:\\Omega^*(M)\\to\\Omega^*(M)$ of degree one.\nFor homogeneous smooth forms $\\alpha\\in\\Omega^p(M)$ and\n$\\beta\\in\\Omega^q(M)$, $$d(\\alpha\\wedge\\beta)=d\\alpha\\wedge\\beta+(-1)^{\\deg\\alpha}\\alpha\\wedge d\\beta.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-local-coordinate-formula-for-the-exterior-derivative",
+          "source_section": "Statement",
+          "quote": "Let $(U,x^1,\\ldots,x^n)$ be a smooth chart on a smooth manifold and\n$\\omega$ a smooth $k$-form on $U$, with $k\\ge0$. Summing over increasing\n$k$-tuples $I$, and writing $dx^I=dx^{i_1}\\wedge\\cdots\\wedge dx^{i_k}$, if $\\omega=\\sum_I\\omega_I\\,dx^I$, then $$d\\omega=\\sum_I d\\omega_I\\wedge dx^I.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-wedge-product-of-differential-forms",
+          "source_section": "Definition",
+          "quote": "Let $\\alpha\\in\\Omega^k(M)$ and $\\beta\\in\\Omega^\\ell(M)$. Their **wedge product**\nis the differential form defined pointwise by\n\n$$ (\\alpha\\wedge\\beta)_p:=\\alpha_p\\wedge\\beta_p\\in\\operatorname{Alt}^{k+\\ell}(T_pM). $$\n\nThe next proposition verifies that this pointwise field is smooth.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In coordinates, $\\mathcal L=\\bigl(\\frac12\\psi_t^2-\\frac12|\\nabla\\psi|^2-\\frac12\\mu^2\\psi^2\\bigr)\\mathrm{vol}$, so $\\delta\\mathcal L=(\\psi_t\\delta\\psi_t-\\nabla\\psi\\cdot\\nabla\\delta\\psi-\\mu^2\\psi\\delta\\psi)\\mathrm{vol}$. The graded product rule [F5] and the displayed Hodge map give $d_M(\\delta\\psi*d\\psi)=d\\delta\\psi\\wedge*d\\psi+\\delta\\psi\\,d_M*d_M\\psi$, and [F6] gives $d_M*d_M\\psi=(-\\psi_{tt}+\\Delta\\psi)\\mathrm{vol}$. Therefore $\\delta\\mathcal L=\\delta\\psi(-\\psi_{tt}+\\Delta\\psi-\\mu^2\\psi)\\mathrm{vol} -d_M(\\delta\\psi*d\\psi)$, so the selected potential is $\\theta=-\\delta\\psi*d\\psi$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F5",
+            "F6",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply the two commuting parameter derivatives to $\\theta$. The terms containing $\\delta_1\\delta_2\\psi$ cancel, leaving $\\delta_2\\theta(\\delta_1)-\\delta_1\\theta(\\delta_2) =\\delta_2\\psi*d_M\\delta_1\\psi-\\delta_1\\psi*d_M\\delta_2\\psi$. This is [F1]'s current in the chosen sign order.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "On a constant-$t$ cut, the pullbacks satisfy $(*df)|_{\\Sigma_t}=-(\\partial_tf)\\,dx\\wedge dy\\wedge dz$ for every smooth $f$. Step 2.1 therefore gives $\\omega|_{\\Sigma_t} =(\\delta_1\\psi\\,\\partial_t\\delta_2\\psi -\\delta_2\\psi\\,\\partial_t\\delta_1\\psi)\\,dx\\wedge dy\\wedge dz$. Integrating over the six tetrahedra of the unit-cube triangulation gives the displayed integral. The tetrahedra cover the cube by coordinate-order regions; internal faces cancel with opposite induced orientations, and the identified opposite outer faces cancel on $\\mathbb T^3$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The coordinate density gives $\\pi=\\partial\\mathcal L_{\\mathrm{coord}}/\\partial\\psi_t=\\psi_t$. Substitution into step 3.1 yields $\\Omega_{\\Sigma_t}(\\delta_1,\\delta_2) =\\int(\\delta_1\\psi\\,\\delta_2\\pi-\\delta_2\\psi\\,\\delta_1\\pi)$, the canonical Cauchy-data pairing.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "At $\\psi=0$, the Euler equation is $-\\psi_{tt}+\\Delta\\psi-\\mu^2\\psi=0$. The linearized variations obey the same equation, so [F2] gives $d_M\\omega=0$. Since $\\partial\\Sigma_t=0$, [F3] shows that a potential ambiguity does not change the integrated pairing on this cut.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Step 4.1 computes the integrated two-form but does not prove the global smooth solution-space or quotient hypotheses in [F4]. Thus this example asserts the Cauchy pairing for the displayed model and cut only; it claims no general symplectic reduction.",
+          "step": "5.1",
+          "inputs": [
+            "F4",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated spatial domain is the nonempty torus T³ and the cut is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At μ=0 the massless constant-mode pair δ₁ψ=1, δ₂ψ=t gives Ω=1, confirming the displayed sign convention; the general formula is proved in steps 2.1–4.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example fixes four-dimensional spacetime and a three-dimensional spatial cut."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The example asserts no nondegeneracy or quotient; step 5.1 explicitly limits the conclusion to the pairing."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The cut uses a closed unit-cube triangulation with identified opposite faces; step 3.1 verifies cancellation of all boundary faces."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The triangulation is a finite six-simplex decomposition of the specified unit cube."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example gives calculations, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example gives calculations, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "For μ>0 use δ₁ψ=cos(μt), δ₂ψ=sin(μt), constant in space; for μ=0 use δ₁ψ=1, δ₂ψ=t.",
+          "result": "Both pairs solve the stated linearized scalar equation and give the constant Cauchy pairing Ω=μ for μ>0 and Ω=1 for μ=0 on the unit-volume torus.",
+          "verifies": "Steps 2.1 and 4.1; exact single-mode sign check, not a replacement for the general variation and integration proof."
+        }
+      ],
+      "finite_checks_disposition": "The exact scalar mode check verifies the current sign and canonical pairing; the general result is proved in steps 1.1–5.1."
+    },
+    "ex-gr-fx12-2": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-gr-fx-covariant-presymplectic-current",
+          "source_section": "Definition",
+          "quote": "Let $M$ be an oriented smooth four-manifold and let $\\phi$ be a field\nconfiguration in a specified smooth field bundle. A **local Lagrangian\nfour-form** $\\mathcal L(\\phi)$ is a smooth four-form whose coordinate\ncoefficients depend smoothly on the field components and finitely many\nspacetime derivatives at each point. A **chosen first-variation\ndecomposition** consists of a linear Euler functional $E_\\phi[\\eta]$ with\nvalues in four-forms and a three-form $\\theta(\\phi;\\eta)$, each linear in the\nfield variation $\\eta$ and its derivatives, such that every smooth\none-parameter field family satisfies\n\n$$\\delta\\mathcal L=E_\\phi[\\delta\\phi]+d_M\\theta(\\phi;\\delta\\phi).$$\n\nThe choice is part of the data; it is not asserted to be unique. In a\nparameter family, $\\delta_iE_\\phi$ means the derivative of the coefficients\nof $E_\\phi$ with its variation input held fixed. Thus the total derivative of\n$E_{\\phi(p)}[\\eta(p)]$ is\n$(\\delta_iE_\\phi)[\\eta]+E_\\phi[\\delta_i\\eta]$. For a smooth\nfinite-dimensional field family with parameter exterior derivative $d_P$,\nthe one-form $\\Theta$ on parameter space with values in spacetime three-forms\nis $\\Theta_p(v)=\\theta(\\phi_p;\\delta_v\\phi_p)$. Define the **covariant\npresymplectic current** by $\\omega:=-d_P\\Theta$. For commuting parameter\ncoordinates $s_1,s_2$ this is\n\n$$\\omega(\\delta_1\\phi,\\delta_2\\phi) =\\delta_2\\theta(\\phi;\\delta_1\\phi) -\\delta_1\\theta(\\phi;\\delta_2\\phi).$$\n\nFor a finite oriented smooth singular three-chain $\\Sigma$, define the\nintegrated two-form by\n$\\Omega_\\Sigma(\\delta_1\\phi,\\delta_2\\phi)=\\int_\\Sigma\\omega$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-gr-fx-on-shell-current-closure",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal L$ have a chosen first-variation decomposition with Euler\nfunctional $E_\\phi$. If $E_\\phi=0$ and both variations satisfy the\nlinearized equations, so $\\delta_iE_\\phi=0$, then $d_M\\omega=0$. For a finite\noriented smooth singular four-chain $C$ with\n$\\partial C=\\Sigma_2-\\Sigma_1+B$, where the $\\Sigma_i$ are oriented\nthree-chains and $B$ is the remaining oriented boundary chain,\n\n$$\\Omega_{\\Sigma_2}-\\Omega_{\\Sigma_1}=-\\int_B\\omega.$$\n\nThus on-shell closure alone gives independence between cuts only when the\nside flux vanishes.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-gr-fx-potential-ambiguity",
+          "source_section": "Statement",
+          "quote": "For a fixed smooth two-parameter family of commuting variations, replace the\nLagrangian and its selected potential by\n\n$$\\mathcal L'=\\mathcal L+d_M\\mu,\\qquad \\theta'(\\phi;\\delta\\phi) =\\theta(\\phi;\\delta\\phi)+\\delta\\mu(\\phi;\\delta\\phi) +d_MY(\\phi;\\delta\\phi),$$\n\nwhere $\\mu$ is a local spacetime three-form and $Y$ is a local spacetime\ntwo-form linear in the variation. Then\n\n$$\\omega'-\\omega =d_M\\bigl(\\delta_2Y(\\delta_1\\phi)-\\delta_1Y(\\delta_2\\phi)\\bigr).$$\n\nConsequently, for a finite oriented smooth singular three-chain $\\Sigma$,\nthe integrated form changes by the integral of this two-form over\n$\\partial\\Sigma$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-gr-fx-admissible-phase-reduction",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal S$ be a specified finite-dimensional smooth solution manifold\nwith specified admissible variations and boundary conditions, and let\n$\\Omega$ be a smooth closed two-form on $\\mathcal S$, obtained by restricting\nan integrated form $\\Omega_\\Sigma$ from the chosen covariant variation data.\nThe pair $(\\mathcal S,\\Omega)$ is **presymplectic** when $\\Omega$ is allowed\nto be degenerate. At $p\\in\\mathcal S$, its pointwise null space is\n$$\\ker\\Omega_p:=\\{v\\in T_p\\mathcal S:\\Omega_p(v,w)=0 \\text{ for every }w\\in T_p\\mathcal S\\}.$$\nA **presymplectic reduction** is defined here only when there is a specified\nsmooth Hausdorff manifold $\\mathcal R$ and a surjective submersion\n$q:\\mathcal S\\to\\mathcal R$ with connected fibers such that\n$$\\ker(dq_p)=\\ker\\Omega_p\\qquad(p\\in\\mathcal S),$$\nwhere $\\ker(dq_p)$ consists of tangent vectors mapped to zero by the\ndifferential. This condition makes the quotient fibers exactly the connected\ndirections annihilated by $\\Omega$. The reduction further requires a smooth\nclosed nondegenerate two-form $\\bar\\Omega$ on $\\mathcal R$ satisfying\n$q^*\\bar\\Omega=\\Omega$. For a smooth vector field $X$ and smooth function\n$H$ on a specified phase space, the Hamiltonian convention is\n$\\iota_X\\Omega=dH$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-the-exterior-derivative-is-a-graded-derivation",
+          "source_section": "Statement",
+          "quote": "Let $M$ be a smooth manifold. The exterior derivative is an\n$\\mathbb R$-linear map $d:\\Omega^*(M)\\to\\Omega^*(M)$ of degree one.\nFor homogeneous smooth forms $\\alpha\\in\\Omega^p(M)$ and\n$\\beta\\in\\Omega^q(M)$, $$d(\\alpha\\wedge\\beta)=d\\alpha\\wedge\\beta+(-1)^{\\deg\\alpha}\\alpha\\wedge d\\beta.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-local-coordinate-formula-for-the-exterior-derivative",
+          "source_section": "Statement",
+          "quote": "Let $(U,x^1,\\ldots,x^n)$ be a smooth chart on a smooth manifold and\n$\\omega$ a smooth $k$-form on $U$, with $k\\ge0$. Summing over increasing\n$k$-tuples $I$, and writing $dx^I=dx^{i_1}\\wedge\\cdots\\wedge dx^{i_k}$, if $\\omega=\\sum_I\\omega_I\\,dx^I$, then $$d\\omega=\\sum_I d\\omega_I\\wedge dx^I.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-wedge-product-of-differential-forms",
+          "source_section": "Definition",
+          "quote": "Let $\\alpha\\in\\Omega^k(M)$ and $\\beta\\in\\Omega^\\ell(M)$. Their **wedge product**\nis the differential form defined pointwise by\n\n$$ (\\alpha\\wedge\\beta)_p:=\\alpha_p\\wedge\\beta_p\\in\\operatorname{Alt}^{k+\\ell}(T_pM). $$\n\nThe next proposition verifies that this pointwise field is smooth.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The scalar-current formula from the chosen decomposition is $\\omega=\\delta_2\\psi*d\\delta_1\\psi-\\delta_1\\psi*d\\delta_2\\psi$. Substitution of the displayed variations and Hodge map gives $$\\omega=(x^2-t^2)\\,dx\\wedge dy\\wedge dz -2tx\\,dt\\wedge dy\\wedge dz.$$ By [F6], differentiating the first term gives $-2t\\,dt\\wedge dx\\wedge dy\\wedge dz$; differentiating the second gives $+2t\\,dt\\wedge dx\\wedge dy\\wedge dz$. The graded product rule [F5] justifies the coefficient differentiations. Thus $d_M\\omega=0$, agreeing with [F2].",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F5",
+            "F6",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "On a cut with orientation $dx\\wedge dy\\wedge dz$, $$\\Omega_{\\Sigma_t}=\\int_0^L\\int_0^1\\int_0^1(x^2-t^2)\\,dy\\,dz\\,dx =\\frac{L^3}{3}-Lt^2.$$ Therefore $\\Omega_{\\Sigma_{t_2}}-\\Omega_{\\Sigma_{t_1}} =-L(t_2^2-t_1^2)$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "algebra",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "At $x=L$, the outward-normal-first boundary orientation is $-dt\\wedge dy\\wedge dz$, while $\\omega|_{x=L}=-2tL\\,dt\\wedge dy\\wedge dz$; the oriented flux is $L(t_2^2-t_1^2)$. At $x=0$ the pullback is zero because the coefficient $2tx$ vanishes. The $y$ and $z$ faces have zero pullback because each term in $\\omega$ contains respectively $dy$ or $dz$. Hence the total oriented side flux is $\\int_B\\omega=L(t_2^2-t_1^2)$, verifying [F2].",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For each cut, [F3] identifies any potential-induced change with an integral over its boundary; the explicit calculation is for the fixed potential in the Statement and makes no claim that a boundary counterterm vanishes on these cuts.",
+          "step": "4.1",
+          "inputs": [
+            "F3",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "The nonzero difference in step 2.1 shows that this bulk-closed current does not define a cut-independent integrated form without a boundary-flux condition. The example supplies no quotient or descended symplectic form beyond the hypotheses in [F4].",
+          "step": "5.1",
+          "inputs": [
+            "F4",
+            "step 2.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The hypotheses L>0 and t₁<t₂ make the box nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The x=0 side flux is zero by the factor x in step 3.1; the nonzero x=L flux is computed explicitly."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example fixes a four-dimensional box and does not vary dimension."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The strict hypotheses L>0 and t₁<t₂ exclude a degenerate box."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 2.1–3.1 use the lower and upper time cuts and induced side orientations, with the finite balance checked in step 3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The 24-simplex coordinate-order triangulation is specified explicitly and uses no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is a finite-region identity and counterexample to cut independence, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example is a finite-region identity and counterexample to cut independence, not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Set L=1, t₁=1, t₂=2 in the exact formulas.",
+          "result": "ΩΣ₂−ΩΣ₁=−3 and ∫Bω=3, so ΩΣ₂−ΩΣ₁=−∫Bω.",
+          "verifies": "Steps 2.1–3.1; exact parameter substitution, not a numerical approximation."
+        }
+      ],
+      "finite_checks_disposition": "The exact box substitution verifies the finite-flux sign; the general parameter identity is proved in steps 1.1–5.1."
+    }
+  }
+}

@@ -1,0 +1,1074 @@
+{
+  "version": 1,
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "batch": "102",
+  "level": 1,
+  "scope": [
+    "lem-qsmx-lattice-weight-convolution",
+    "thm-qsmx-weighted-lieb-robinson",
+    "lem-qsmx-local-expectation-locality",
+    "lem-qsmx-filtered-spectral-generator",
+    "lem-qsmx-filtered-generator-locality",
+    "thm-qsmx-gapped-spectral-flow",
+    "cex-qsmx-gap-not-automatic"
+  ],
+  "contracts": {
+    "lem-qsmx-lattice-weight-convolution": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qsm-local-spin-algebras",
+          "source_section": "Definition",
+          "quote": "Fix an integer dimension $d\\ge1$, the countable site set $\\Gamma=\\mathbb{Z}^d$ of [[lem-qsm-integer-lattice-countable]], and one finite spin dimension $q\\ge1$, where $q$ is a positive integer (so $q\\in\\mathbb N$ and $1\\le q$, by [[def-natural-numbers]] and [[def-nat-order]]). For $n\\in\\mathbb Z$, define $|n|=n$ if $0\\le n$ and $|n|=-n$ if $n<0$, using the integer order and additive inverse of [[def-int-order]] and [[def-int-operations]]. Totality and compatibility of the integer order with addition ([[thm-int-ordered-ring]]) give $0\\le|n|$ and $-|n|\\le n\\le|n|$. Adding these bounds for $m,n\\in\\mathbb Z$ gives $|m+n|\\le|m|+|n|$. Equip $\\Gamma$ with the max-coordinate metric $d_\\infty(x,y)=\\max_{1\\le r\\le d}|x_r-y_r|$; the maximum exists because the coordinate set is finite and nonempty, symmetry and separation hold coordinatewise, and the absolute-value triangle inequality gives $|x_r-z_r|\\le|x_r-y_r|+|y_r-z_r|$ for every coordinate, hence the triangle inequality for $d_\\infty$. A **finite region** is a finite subset $\\Lambda\\subseteq\\Gamma$; its cardinality is $|\\Lambda|$ ([[def-finite-cardinality]]).\n\nFor a finite region $\\Lambda$, let $S_\\Lambda=\\{1,\\ldots,q\\}^{\\Lambda}$ be the set of spin configurations on $\\Lambda$. Induction on $|\\Lambda|$ gives $|S_\\Lambda|=q^{|\\Lambda|}$: the empty region has one configuration, and for $x\\in\\Lambda$ the restriction map $s\\mapsto(s|_{\\Lambda\\setminus\\{x\\}},s(x))$ is a bijection $S_\\Lambda\\to S_{\\Lambda\\setminus\\{x\\}}\\times\\{1,\\ldots,q\\}$, so adjoining one site multiplies the number of configurations by $q$, according to the recursion defining natural-number powers in [[def-nat-power]]. Let $\\mathcal H_\\Lambda$ be the vector space of functions $f:S_\\Lambda\\to\\mathbb C$ with inner product $\\langle f,g\\rangle=\\sum_{s\\in S_\\Lambda}f(s)\\overline{g(s)}$. For each $s\\in S_\\Lambda$, let $e_s$ be the indicator function of $\\{s\\}$; these vectors form an orthonormal basis. For $\\Lambda=\\varnothing$, $S_\\Lambda$ is a singleton and $\\mathcal H_\\Lambda\\cong\\mathbb C$. The **local spin matrix algebra** is\n\n$$\\mathcal A_\\Lambda:=\\mathcal B(\\mathcal H_\\Lambda)\\cong M_{q^{|\\Lambda|}}(\\mathbb C),$$\n\nHere $\\mathcal B(\\mathcal H_\\Lambda)$ denotes all complex-linear endomorphisms of the finite-dimensional Hilbert space; they are bounded. The algebra has composition, Hilbert adjoint, identity $I_\\Lambda$, and induced operator norm\n\n$$\\|T\\|:=\\sup_{\\|\\xi\\|=1}\\|T\\xi\\|.$$\n\nThe **finite local trace** is $\\operatorname{Tr}_\\Lambda(T):=\\sum_{s\\in S_\\Lambda}\\langle T e_s,e_s\\rangle$ in the displayed configuration basis $(e_s)$. This is the usual finite-matrix trace; basis independence and its cyclic/unitary identities are supplied by [[lem-qsm-matrix-state-calculus]].\n\nIf $\\Lambda\\subseteq\\Lambda'$, restriction of configurations gives the canonical factorization $\\mathcal H_{\\Lambda'}\\cong\\mathcal H_\\Lambda\\otimes\\mathcal H_{\\Lambda'\\setminus\\Lambda}$, with sites ordered lexicographically. The **factor inclusion** is the unital $*$-homomorphism $\\iota_{\\Lambda,\\Lambda'}:\\mathcal A_\\Lambda\\to\\mathcal A_{\\Lambda'}$ given by $T\\mapsto T\\otimes I_{\\Lambda'\\setminus\\Lambda}$. A **localization region** for $T$ is any finite $\\Lambda$ for which $T\\in\\mathcal A_\\Lambda$ under these inclusions; a localization region need not be minimal.\n\nThe ordinary operator norm makes each local matrix algebra a nonzero unital complete C*-algebra, and every positive normalized complex-linear functional is uniquely a trace pairing with a density matrix, by [[lem-qsm-finite-matrix-cstar-and-state-duality]]. This includes the empty region, whose Hilbert space is $\\mathbb C$. This definition does not posit an infinite-dimensional tensor-product Hilbert space.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qsmx-summable-interaction-norm",
+          "source_section": "Definition",
+          "quote": "Fix $d\\ge1$, the site set $\\Gamma=\\mathbb Z^d$, its max-coordinate metric $d_\\infty$, and the local spin algebras $\\mathcal A_\\Lambda$ of the uniformly finite-dimensional spin system. A finite interaction is a family $\\Phi(Z)=\\Phi(Z)^*\\in\\mathcal A_Z$ indexed by finite nonempty $Z\\subset\\Gamma$. For a finite $\\Lambda\\subset\\Gamma$, define\n\n$$H_\\Lambda^\\Phi:=\\sum_{\\varnothing\\ne Z\\subseteq\\Lambda}\\Phi(Z),\\qquad \\tau_t^{\\Lambda,\\Phi}(A):=e^{itH_\\Lambda^\\Phi/\\hbar}Ae^{-itH_\\Lambda^\\Phi/\\hbar},$$\n\nwhere $\\hbar>0$, $A$ is embedded in a common finite local algebra, and the finite sum is a self-adjoint matrix. When a path $\\Phi_s$, $s\\in[0,1]$, is used, each $\\Phi_s(Z)$ is $C^1$ in matrix norm and the derivative is taken term by term.\n\nFor $r\\ge0$ put $F(r)=(1+r)^{-d-1}$. The admissible weights used here are\n\n$$F_a(r):=e^{-ar}F(r)\\quad(a>0),\\qquad F_\\rho(r):=(1+r)^{-\\rho}\\quad(\\rho>d).$$\n\nFor an admissible weight $G$, define the weighted interaction norm\n\n$$\\|\\Phi\\|_G:=\\sup_{x,y\\in\\Gamma}\\frac{1}{G(d_\\infty(x,y))} \\sum_{\\substack{Z\\subset\\Gamma\\ {\\rm finite,\\ nonempty}\\\\x,y\\in Z}}\\|\\Phi(Z)\\|.$$\n\nThe derivative norm of a path is\n\n$$\\|\\partial\\Phi\\|_G:=\\sup_{s\\in[0,1]}\\sup_{x,y\\in\\Gamma} \\frac{1}{G(d_\\infty(x,y))} \\sum_{Z\\ni x,y}|Z|\\,\\|\\partial_s\\Phi_s(Z)\\|.$$\n\nA finite-volume spectral band is a nonempty selected subset $\\Sigma_\\Lambda(s)\\subseteq\\sigma(H_\\Lambda^{\\Phi_s})$ together with the orthogonal projection onto the sum of its eigenspaces. It may be specified by an interval $I_\\Lambda(s)$ with smoothly varying endpoints, in which case $\\Sigma_\\Lambda(s)=\\sigma(H_\\Lambda^{\\Phi_s})\\cap I_\\Lambda(s)$. The band is uniformly isolated with gap $\\gamma>0$ along a specified finite-volume exhaustion when\n\n$$\\operatorname{dist}\\!\\left(\\Sigma_\\Lambda(s),\\sigma(H_\\Lambda^{\\Phi_s})\\setminus\\Sigma_\\Lambda(s)\\right)\\ge\\gamma$$\n\nfor every volume in that exhaustion and every $s\\in[0,1]$. For spectral-flow arguments, the selected eigenvalues must also form a locally fixed spectral cluster: for each $s_0$, a contour in the resolvent set encloses exactly the selected eigenvalues for all $s$ in a neighborhood of $s_0$. In finite dimension this implies that its projection is $C^1$ when the Hamiltonian path is $C^1$. This cluster condition holds, for example, for the first $r_\\Lambda$ eigenvalues counted with multiplicity when the integer $r_\\Lambda$ is fixed along the path and the gap after them stays open. Uniform distance between the selected and unselected spectra alone does not prevent an interval from changing membership discontinuously. A ground band is such a band containing the lowest eigenvalue or a finite-volume cluster of lowest eigenvalues; no uniqueness is implicit.\n\nFor physical units, take interaction terms and Hamiltonians in joules, time in seconds, and $\\hbar$ in joule-seconds. The path parameter $s$, lattice distance, and admissible weights are dimensionless; the interaction norm therefore has energy units and the derivative norm has energy units per dimensionless path parameter.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $k\\ge1$, the $d_\\infty$-shell of radius $k$ has $(2k+1)^d-(2k-1)^d\\le c_d(k+1)^{d-1}$ sites, by factoring the difference of powers; the radius-zero shell has one site. Therefore $\\sum_z F_\\rho(d_\\infty(x,z))\\le c_d\\sum_{k\\ge0}(k+1)^{d-1-\\rho}<\\infty$, and $\\sum_zF_a(d_\\infty(x,z))\\le\\sum_zF(d_\\infty(x,z))<\\infty$. The bounds are independent of $x$ by translation invariance.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Write $r=d_\\infty(x,y)$. For $G=F_\\rho$, the triangle inequality places every $z$ in at least one of the sets $d_\\infty(x,z)\\ge r/2$ or $d_\\infty(z,y)\\ge r/2$. On the first set, $G(d_\\infty(x,z))\\le2^\\rho G(r)$; summing the other factor over all $z$ is bounded by the finite shell sum in step 1.1. The second set gives the same bound with $x,y$ exchanged. Hence $C_{F_\\rho}\\le2^{\\rho+1}\\sum_zF_\\rho(d_\\infty(0,z))<\\infty$. For $F_a$, the triangle inequality gives $e^{-a(d(x,z)+d(z,y))}\\le e^{-ar}$; the same splitting argument applied to $F=F_{d+1}$, for which $d+1>d$, yields $C_F<\\infty$, and then $\\sum_zF_a(d(x,z))F_a(d(z,y))\\le C_FF_a(r)$. Positivity of each weight and the $z=x$ summand show $C_G>0$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Every convolution sum is indexed by all integer lattice sites and contains z=x; its denominator is a strictly positive weight. The statement does not quantify over arbitrary finite supports or allow an empty lattice.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/qsm_boundary (scientific owner; no independent acceptance)",
+            "reason": "Every convolution sum is indexed by all integer lattice sites and contains z=x; its denominator is a strictly positive weight. The statement does not quantify over arbitrary finite supports or allow an empty lattice."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At separation r=0 the denominator is G(0)=1 and1.1 sums the squared radial weight. The shell of radius zero is explicitly one site; positivity of that summand proves C_G>0 in2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At d=1 the positive-radius max-metric shell has exactly two sites and the radius-zero shell has one. The convergent series exponent in1.1 is minus-rho with rho>1; the same convolution splitting in2.1 applies."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Summability and convolution are scalar positive-weight inequalities on the integer lattice. No matrix spectrum, eigenspace, or eigenvalue multiplicity is used in either proof step."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The weight parameters satisfy a>0 or rho>d. The proof makes no extension claim at the excluded nonsummable rho=d boundary and has no finite time or spectral-flow interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Lattice shells are explicit coordinate sets and the two-set splitting is determined by distances. The proof uses nonnegative convergent series and no choice function or arbitrary selection of witnesses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a construction, bound, identity, or counterexample rather than an if-and-only-if claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/qsm_boundary (scientific owner; no independent acceptance)",
+            "reason": "Explicit max-metric shell counts prove weight summability and the distance splitting proves a positive finite convolution constant. These are estimates for the specified weights, with no converse criterion for an arbitrary weight.",
+            "item_sha256": "fd496bd4a1877bc541af51ae0d2a9925b9960fd4faf544fde06594f8efb72bca",
+            "row_sha256": "748da61e0470ef5b1fabce5f31a30d166a9e9c9329cf97223b5e8a01e807870c"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a construction, bound, identity, or counterexample rather than an if-and-only-if claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/qsm_boundary (scientific owner; no independent acceptance)",
+            "reason": "Explicit max-metric shell counts prove weight summability and the distance splitting proves a positive finite convolution constant. These are estimates for the specified weights, with no converse criterion for an arbitrary weight.",
+            "item_sha256": "fd496bd4a1877bc541af51ae0d2a9925b9960fd4faf544fde06594f8efb72bca",
+            "row_sha256": "409a84ed5df12b861621ef24a6e4ebddda706ebb62026aeb5ece79fe4b574690"
+          }
+        }
+      ]
+    },
+    "thm-qsmx-weighted-lieb-robinson": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qsmx-summable-interaction-norm",
+          "source_section": "Definition",
+          "quote": "Fix $d\\ge1$, the site set $\\Gamma=\\mathbb Z^d$, its max-coordinate metric $d_\\infty$, and the local spin algebras $\\mathcal A_\\Lambda$ of the uniformly finite-dimensional spin system. A finite interaction is a family $\\Phi(Z)=\\Phi(Z)^*\\in\\mathcal A_Z$ indexed by finite nonempty $Z\\subset\\Gamma$. For a finite $\\Lambda\\subset\\Gamma$, define\n\n$$H_\\Lambda^\\Phi:=\\sum_{\\varnothing\\ne Z\\subseteq\\Lambda}\\Phi(Z),\\qquad \\tau_t^{\\Lambda,\\Phi}(A):=e^{itH_\\Lambda^\\Phi/\\hbar}Ae^{-itH_\\Lambda^\\Phi/\\hbar},$$\n\nwhere $\\hbar>0$, $A$ is embedded in a common finite local algebra, and the finite sum is a self-adjoint matrix. When a path $\\Phi_s$, $s\\in[0,1]$, is used, each $\\Phi_s(Z)$ is $C^1$ in matrix norm and the derivative is taken term by term.\n\nFor $r\\ge0$ put $F(r)=(1+r)^{-d-1}$. The admissible weights used here are\n\n$$F_a(r):=e^{-ar}F(r)\\quad(a>0),\\qquad F_\\rho(r):=(1+r)^{-\\rho}\\quad(\\rho>d).$$\n\nFor an admissible weight $G$, define the weighted interaction norm\n\n$$\\|\\Phi\\|_G:=\\sup_{x,y\\in\\Gamma}\\frac{1}{G(d_\\infty(x,y))} \\sum_{\\substack{Z\\subset\\Gamma\\ {\\rm finite,\\ nonempty}\\\\x,y\\in Z}}\\|\\Phi(Z)\\|.$$\n\nThe derivative norm of a path is\n\n$$\\|\\partial\\Phi\\|_G:=\\sup_{s\\in[0,1]}\\sup_{x,y\\in\\Gamma} \\frac{1}{G(d_\\infty(x,y))} \\sum_{Z\\ni x,y}|Z|\\,\\|\\partial_s\\Phi_s(Z)\\|.$$\n\nA finite-volume spectral band is a nonempty selected subset $\\Sigma_\\Lambda(s)\\subseteq\\sigma(H_\\Lambda^{\\Phi_s})$ together with the orthogonal projection onto the sum of its eigenspaces. It may be specified by an interval $I_\\Lambda(s)$ with smoothly varying endpoints, in which case $\\Sigma_\\Lambda(s)=\\sigma(H_\\Lambda^{\\Phi_s})\\cap I_\\Lambda(s)$. The band is uniformly isolated with gap $\\gamma>0$ along a specified finite-volume exhaustion when\n\n$$\\operatorname{dist}\\!\\left(\\Sigma_\\Lambda(s),\\sigma(H_\\Lambda^{\\Phi_s})\\setminus\\Sigma_\\Lambda(s)\\right)\\ge\\gamma$$\n\nfor every volume in that exhaustion and every $s\\in[0,1]$. For spectral-flow arguments, the selected eigenvalues must also form a locally fixed spectral cluster: for each $s_0$, a contour in the resolvent set encloses exactly the selected eigenvalues for all $s$ in a neighborhood of $s_0$. In finite dimension this implies that its projection is $C^1$ when the Hamiltonian path is $C^1$. This cluster condition holds, for example, for the first $r_\\Lambda$ eigenvalues counted with multiplicity when the integer $r_\\Lambda$ is fixed along the path and the gap after them stays open. Uniform distance between the selected and unselected spectra alone does not prevent an interval from changing membership discontinuously. A ground band is such a band containing the lowest eigenvalue or a finite-volume cluster of lowest eigenvalues; no uniqueness is implicit.\n\nFor physical units, take interaction terms and Hamiltonians in joules, time in seconds, and $\\hbar$ in joule-seconds. The path parameter $s$, lattice distance, and admissible weights are dimensionless; the interaction norm therefore has energy units and the derivative norm has energy units per dimensionless path parameter.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qsmx-lattice-weight-convolution",
+          "source_section": "Statement",
+          "quote": "Let $d\\ge1$, $\\Gamma=\\mathbb Z^d$, and $d_\\infty$ be the max-coordinate metric. For $F(r)=(1+r)^{-d-1}$, $F_a(r)=e^{-ar}F(r)$ with $a>0$, and $F_\\rho(r)=(1+r)^{-\\rho}$ with $\\rho>d$, each weight $G\\in\\{F_a,F_\\rho\\}$ is summable on $\\Gamma$. Its convolution constant\n\n$$C_G:=\\sup_{x,y\\in\\Gamma} \\frac{\\sum_{z\\in\\Gamma}G(d_\\infty(x,z))G(d_\\infty(z,y))} {G(d_\\infty(x,y))}$$\n\nis finite and positive. In particular, for all $x,y\\in\\Gamma$,\n\n$$\\sum_{z\\in\\Gamma}G(d_\\infty(x,z))G(d_\\infty(z,y)) \\le C_G\\,G(d_\\infty(x,y)).$$\n\nThe constant $C_{F_a}$ may be taken to be the convolution constant $C_F$ of $F$, independently of $a$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qsm-local-spin-algebras",
+          "source_section": "Definition",
+          "quote": "Fix an integer dimension $d\\ge1$, the countable site set $\\Gamma=\\mathbb{Z}^d$ of [[lem-qsm-integer-lattice-countable]], and one finite spin dimension $q\\ge1$, where $q$ is a positive integer (so $q\\in\\mathbb N$ and $1\\le q$, by [[def-natural-numbers]] and [[def-nat-order]]). For $n\\in\\mathbb Z$, define $|n|=n$ if $0\\le n$ and $|n|=-n$ if $n<0$, using the integer order and additive inverse of [[def-int-order]] and [[def-int-operations]]. Totality and compatibility of the integer order with addition ([[thm-int-ordered-ring]]) give $0\\le|n|$ and $-|n|\\le n\\le|n|$. Adding these bounds for $m,n\\in\\mathbb Z$ gives $|m+n|\\le|m|+|n|$. Equip $\\Gamma$ with the max-coordinate metric $d_\\infty(x,y)=\\max_{1\\le r\\le d}|x_r-y_r|$; the maximum exists because the coordinate set is finite and nonempty, symmetry and separation hold coordinatewise, and the absolute-value triangle inequality gives $|x_r-z_r|\\le|x_r-y_r|+|y_r-z_r|$ for every coordinate, hence the triangle inequality for $d_\\infty$. A **finite region** is a finite subset $\\Lambda\\subseteq\\Gamma$; its cardinality is $|\\Lambda|$ ([[def-finite-cardinality]]).\n\nFor a finite region $\\Lambda$, let $S_\\Lambda=\\{1,\\ldots,q\\}^{\\Lambda}$ be the set of spin configurations on $\\Lambda$. Induction on $|\\Lambda|$ gives $|S_\\Lambda|=q^{|\\Lambda|}$: the empty region has one configuration, and for $x\\in\\Lambda$ the restriction map $s\\mapsto(s|_{\\Lambda\\setminus\\{x\\}},s(x))$ is a bijection $S_\\Lambda\\to S_{\\Lambda\\setminus\\{x\\}}\\times\\{1,\\ldots,q\\}$, so adjoining one site multiplies the number of configurations by $q$, according to the recursion defining natural-number powers in [[def-nat-power]]. Let $\\mathcal H_\\Lambda$ be the vector space of functions $f:S_\\Lambda\\to\\mathbb C$ with inner product $\\langle f,g\\rangle=\\sum_{s\\in S_\\Lambda}f(s)\\overline{g(s)}$. For each $s\\in S_\\Lambda$, let $e_s$ be the indicator function of $\\{s\\}$; these vectors form an orthonormal basis. For $\\Lambda=\\varnothing$, $S_\\Lambda$ is a singleton and $\\mathcal H_\\Lambda\\cong\\mathbb C$. The **local spin matrix algebra** is\n\n$$\\mathcal A_\\Lambda:=\\mathcal B(\\mathcal H_\\Lambda)\\cong M_{q^{|\\Lambda|}}(\\mathbb C),$$\n\nHere $\\mathcal B(\\mathcal H_\\Lambda)$ denotes all complex-linear endomorphisms of the finite-dimensional Hilbert space; they are bounded. The algebra has composition, Hilbert adjoint, identity $I_\\Lambda$, and induced operator norm\n\n$$\\|T\\|:=\\sup_{\\|\\xi\\|=1}\\|T\\xi\\|.$$\n\nThe **finite local trace** is $\\operatorname{Tr}_\\Lambda(T):=\\sum_{s\\in S_\\Lambda}\\langle T e_s,e_s\\rangle$ in the displayed configuration basis $(e_s)$. This is the usual finite-matrix trace; basis independence and its cyclic/unitary identities are supplied by [[lem-qsm-matrix-state-calculus]].\n\nIf $\\Lambda\\subseteq\\Lambda'$, restriction of configurations gives the canonical factorization $\\mathcal H_{\\Lambda'}\\cong\\mathcal H_\\Lambda\\otimes\\mathcal H_{\\Lambda'\\setminus\\Lambda}$, with sites ordered lexicographically. The **factor inclusion** is the unital $*$-homomorphism $\\iota_{\\Lambda,\\Lambda'}:\\mathcal A_\\Lambda\\to\\mathcal A_{\\Lambda'}$ given by $T\\mapsto T\\otimes I_{\\Lambda'\\setminus\\Lambda}$. A **localization region** for $T$ is any finite $\\Lambda$ for which $T\\in\\mathcal A_\\Lambda$ under these inclusions; a localization region need not be minimal.\n\nThe ordinary operator norm makes each local matrix algebra a nonzero unital complete C*-algebra, and every positive normalized complex-linear functional is uniquely a trace pairing with a density matrix, by [[lem-qsm-finite-matrix-cstar-and-state-duality]]. This includes the empty region, whose Hilbert space is $\\mathbb C$. This definition does not posit an infinite-dimensional tensor-product Hilbert space.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For a finite nonempty $S\\subseteq\\Lambda$, define $C_B^\\Lambda(S,u)=\\sup_{D\\in\\mathcal A_S,\\;D\\ne0}\\|[\\alpha_u^\\Lambda(D),B]\\|/\\|D\\|$. Let $U_S(u)$ solve $U_S'(u)=-iH_S(u)U_S(u)/\\hbar$, $U_S(0)=I$, where $H_S(u)=\\sum_{\\varnothing\\ne Z\\subseteq S}\\Phi_u(Z)$. Put $\\widetilde\\alpha_u^S(D)=U_S(u)D U_S(u)^*$ and $f(u)=[\\alpha_u^\\Lambda(\\widetilde\\alpha_u^S(D)),B]$. Product differentiation and the Jacobi identity give $f'(u)=\\frac{i}{\\hbar}[K_S(u),f(u)]+\\frac{i}{\\hbar}\\sum_{\\substack{Z\\subseteq\\Lambda\\\\Z\\cap S\\ne\\varnothing,\\;Z\\not\\subseteq S}} [\\alpha_u^\\Lambda(\\widetilde\\alpha_u^S(D)),[B,\\alpha_u^\\Lambda(\\Phi_u(Z))]],$ where $K_S(u)=\\sum_{Z\\subseteq\\Lambda:\\,Z\\cap S\\ne\\varnothing,\\;Z\\not\\subseteq S}\\alpha_u^\\Lambda(\\Phi_u(Z))$ is self-adjoint. Indeed, the local propagator cancels the terms contained in $S$, and terms disjoint from $S$ commute with $D$ by [F3]. The homogeneous equation $g'=(i/\\hbar)[K_S(u),g]$ preserves norm because its propagator is unitary; existence follows from the uniformly convergent finite-dimensional Picard series. Variation of constants, $\\|[R,Q]\\|\\le2\\|R\\|\\|Q\\|$, and enlargement of the crossing-support sum to all terms meeting $S$ therefore give $C_B^\\Lambda(S,u)\\le C_B^\\Lambda(S,0)+\\frac{2}{\\hbar}\\sum_{\\substack{Z\\subseteq\\Lambda\\\\Z\\cap S\\ne\\varnothing}}\\int_0^u\\|\\Phi_v(Z)\\|C_B^\\Lambda(Z,v)\\,dv.$ The same inequality applies to the inverse path, which is generated over a reversed parameter interval by the interaction $-\\Phi_{u-v}$ and has the same norm bound.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "At $u=0$, disjointness gives $C_B^\\Lambda(S,0)=0$ when $S\\cap Y=\\varnothing$, while $C_B^\\Lambda(S,u)\\le2\\|B\\|$ for all supports and times by the commutator inequality and isometry of the dynamics. Iteration of step 1.1 produces time-ordered integrals over $0\\le v_n\\le\\cdots\\le v_1\\le u$ and chains $Z_1,\\ldots,Z_n$ with $Z_1\\cap S\\ne\\varnothing$, $Z_{j+1}\\cap Z_j\\ne\\varnothing$ and $Z_n\\cap Y\\ne\\varnothing$, with product $\\prod_{j=1}^n\\|\\Phi_{v_j}(Z_j)\\|$. All support sums are finite. For the iteration remainder, put $Q_\\Lambda=\\sum_{\\varnothing\\ne Z\\subseteq\\Lambda}\\sup_{v\\in[0,T]}\\|\\Phi_v(Z)\\|<\\infty$, which is finite by norm continuity and compactness. Its absolute size after $n$ iterations is at most $2\\|B\\|(2Q_\\Lambda u/\\hbar)^n/n!$, so it tends to zero. This volume-dependent number is used only to discard the remainder. For the chain terms, define the time-dependent kernel $K_v(x,y)=\\sum_{Z\\subseteq\\Lambda:\\,x,y\\in Z}\\|\\Phi_v(Z)\\|$. At each fixed time tuple, summing over all endpoint and overlap sites overcounts each nonnegative interaction-chain term at least once. Thus the order-$n$ contribution for $S=X$ is at most $$2\\|B\\|(2/\\hbar)^n\\int_{0\\le v_n\\le\\cdots\\le v_1\\le u}\\sum_{x\\in X,y\\in Y}(K_{v_1}\\cdots K_{v_n})(x,y)\\,dv_n\\cdots dv_1.$$ Kernel products here sum only over sites of the finite volume. No supremum over time has been moved inside an interaction sum for this bound.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F1], for each $v\\in[0,T]$ separately, $K_v(x,y)\\le M_GG(d_\\infty(x,y))$. Induction using [F2] gives $$(K_{v_1}\\cdots K_{v_n})(x,y)\\le M_G^n C_G^{n-1}G(d_\\infty(x,y))\\qquad(n\\ge1):$$ the intermediate-site convolution over the finite volume is bounded by the full nonnegative lattice convolution. This bound is uniform in every time tuple. Its integral over the time-ordered simplex is $u^n/n!$ times that bound. Substituting into step 2.1 and summing the convergent exponential series gives $C_B^\\Lambda(X,u)\\le \\frac{2\\|B\\|}{C_G}(e^{2C_GM_Gu/\\hbar}-1)\\sum_{x\\in X,y\\in Y}G(d_\\infty(x,y))$. The finite-volume remainder justifies the iteration limit; alternatively the displayed factorial majorant dominates every partial chain sum. Multiplication by $\\|A\\|$ proves the path estimate, including $A=0$. Applying the same time-ordered argument to the reversed interaction path, whose norm at every time is bounded by $M_G$, proves the inverse estimate. For a constant interaction take $u=|t|$; reversal changes its sign but not its norm. All constants in the resulting estimates depend only on $C_G,M_G$, not on the volume-dependent remainder bound.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Both localization supports X and Y are expressly finite and nonempty, disjoint and contained in Lambda. This rules out empty volume as well; the Hamiltonian may have zero coefficients but the spatial claim has no empty-support instance.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/qsm_boundary (scientific owner; no independent acceptance)",
+            "reason": "Both localization supports X and Y are expressly finite and nonempty, disjoint and contained in Lambda. This rules out empty volume as well; the Hamiltonian may have zero coefficients but the spatial claim has no empty-support instance."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If A or B is zero, its commutator and the norm product on the right vanish. If M_G=0, every interaction term is zero and disjoint supports commute for the identity evolution; at u=0 the exponential-minus-one is zero, as used in2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The bound permits singleton X and singleton Y and local spin dimension one. The chain counting in2.1 is over their actual sites and the commutator norm vanishes for scalar local algebras, without requiring extra support cardinality."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The proof differentiates matrix propagators and estimates commutators, never diagonalizes a Hamiltonian. Degenerate energy levels are unrestricted and require no separate eigenvalue argument."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The interval u∈[0,T] includes zero and its finite upper endpoint. The Volterra estimate in1.1 starts with the zero disjoint-support commutator and the uniformly convergent exponential series in3.1 bounds it for all u≤T, including T."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In a fixed finite volume there are finitely many interaction supports and time-ordered finite sums. Overlap-site counting in2.1 is a nonnegative overcount, not a simultaneous selection on an arbitrary family; the argument introduces no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a construction, bound, identity, or counterexample rather than an if-and-only-if claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/qsm_boundary (scientific owner; no independent acceptance)",
+            "reason": "Time-ordered interaction chains and the positive convolution constant bound the evolved commutator for disjoint supports. The result is a sufficient locality estimate under a weighted norm bound, not an equivalence between that bound and a light-cone property.",
+            "item_sha256": "dd6f030cbfef4024d206c718d7bd209673563e4df94a5cd471e7d211c0b53862",
+            "row_sha256": "748da61e0470ef5b1fabce5f31a30d166a9e9c9329cf97223b5e8a01e807870c"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a construction, bound, identity, or counterexample rather than an if-and-only-if claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/qsm_boundary (scientific owner; no independent acceptance)",
+            "reason": "Time-ordered interaction chains and the positive convolution constant bound the evolved commutator for disjoint supports. The result is a sufficient locality estimate under a weighted norm bound, not an equivalence between that bound and a light-cone property.",
+            "item_sha256": "dd6f030cbfef4024d206c718d7bd209673563e4df94a5cd471e7d211c0b53862",
+            "row_sha256": "409a84ed5df12b861621ef24a6e4ebddda706ebb62026aeb5ece79fe4b574690"
+          }
+        }
+      ]
+    },
+    "lem-qsmx-local-expectation-locality": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qsmx-local-conditional-expectation",
+          "source_section": "Definition",
+          "quote": "Let $X,Y\\subset\\mathbb Z^d$ be finite regions and $A\\in\\mathcal A_Y$. Embed $A$ in $\\mathcal A_{X\\cup Y}$, use the canonical site-order permutation to group factors in $X\\cap Y$ and $Y\\setminus X$, and apply the normalized trace on the omitted factors:\n\n$$E_X(A):=\\bigl(\\operatorname{id}_{\\mathcal A_{X\\cap Y}}\\otimes \\tau_{Y\\setminus X}\\bigr)(A)\\otimes I_{X\\setminus Y}\\in\\mathcal A_X,\\qquad \\tau_D:=q^{-|D|}\\operatorname{Tr}_D.$$\n\nThe empty tensor factor has normalized trace $1$. Since $\\tau_D(I_D)=1$, adding an identity factor does not change the result, so this formula consistently defines $E_X$ on the directed union $\\mathcal A_{\\mathrm{loc}}$. This definition alone asserts no norm extension to its completion.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qsm-local-spin-algebras",
+          "source_section": "Definition",
+          "quote": "Fix an integer dimension $d\\ge1$, the countable site set $\\Gamma=\\mathbb{Z}^d$ of [[lem-qsm-integer-lattice-countable]], and one finite spin dimension $q\\ge1$, where $q$ is a positive integer (so $q\\in\\mathbb N$ and $1\\le q$, by [[def-natural-numbers]] and [[def-nat-order]]). For $n\\in\\mathbb Z$, define $|n|=n$ if $0\\le n$ and $|n|=-n$ if $n<0$, using the integer order and additive inverse of [[def-int-order]] and [[def-int-operations]]. Totality and compatibility of the integer order with addition ([[thm-int-ordered-ring]]) give $0\\le|n|$ and $-|n|\\le n\\le|n|$. Adding these bounds for $m,n\\in\\mathbb Z$ gives $|m+n|\\le|m|+|n|$. Equip $\\Gamma$ with the max-coordinate metric $d_\\infty(x,y)=\\max_{1\\le r\\le d}|x_r-y_r|$; the maximum exists because the coordinate set is finite and nonempty, symmetry and separation hold coordinatewise, and the absolute-value triangle inequality gives $|x_r-z_r|\\le|x_r-y_r|+|y_r-z_r|$ for every coordinate, hence the triangle inequality for $d_\\infty$. A **finite region** is a finite subset $\\Lambda\\subseteq\\Gamma$; its cardinality is $|\\Lambda|$ ([[def-finite-cardinality]]).\n\nFor a finite region $\\Lambda$, let $S_\\Lambda=\\{1,\\ldots,q\\}^{\\Lambda}$ be the set of spin configurations on $\\Lambda$. Induction on $|\\Lambda|$ gives $|S_\\Lambda|=q^{|\\Lambda|}$: the empty region has one configuration, and for $x\\in\\Lambda$ the restriction map $s\\mapsto(s|_{\\Lambda\\setminus\\{x\\}},s(x))$ is a bijection $S_\\Lambda\\to S_{\\Lambda\\setminus\\{x\\}}\\times\\{1,\\ldots,q\\}$, so adjoining one site multiplies the number of configurations by $q$, according to the recursion defining natural-number powers in [[def-nat-power]]. Let $\\mathcal H_\\Lambda$ be the vector space of functions $f:S_\\Lambda\\to\\mathbb C$ with inner product $\\langle f,g\\rangle=\\sum_{s\\in S_\\Lambda}f(s)\\overline{g(s)}$. For each $s\\in S_\\Lambda$, let $e_s$ be the indicator function of $\\{s\\}$; these vectors form an orthonormal basis. For $\\Lambda=\\varnothing$, $S_\\Lambda$ is a singleton and $\\mathcal H_\\Lambda\\cong\\mathbb C$. The **local spin matrix algebra** is\n\n$$\\mathcal A_\\Lambda:=\\mathcal B(\\mathcal H_\\Lambda)\\cong M_{q^{|\\Lambda|}}(\\mathbb C),$$\n\nHere $\\mathcal B(\\mathcal H_\\Lambda)$ denotes all complex-linear endomorphisms of the finite-dimensional Hilbert space; they are bounded. The algebra has composition, Hilbert adjoint, identity $I_\\Lambda$, and induced operator norm\n\n$$\\|T\\|:=\\sup_{\\|\\xi\\|=1}\\|T\\xi\\|.$$\n\nThe **finite local trace** is $\\operatorname{Tr}_\\Lambda(T):=\\sum_{s\\in S_\\Lambda}\\langle T e_s,e_s\\rangle$ in the displayed configuration basis $(e_s)$. This is the usual finite-matrix trace; basis independence and its cyclic/unitary identities are supplied by [[lem-qsm-matrix-state-calculus]].\n\nIf $\\Lambda\\subseteq\\Lambda'$, restriction of configurations gives the canonical factorization $\\mathcal H_{\\Lambda'}\\cong\\mathcal H_\\Lambda\\otimes\\mathcal H_{\\Lambda'\\setminus\\Lambda}$, with sites ordered lexicographically. The **factor inclusion** is the unital $*$-homomorphism $\\iota_{\\Lambda,\\Lambda'}:\\mathcal A_\\Lambda\\to\\mathcal A_{\\Lambda'}$ given by $T\\mapsto T\\otimes I_{\\Lambda'\\setminus\\Lambda}$. A **localization region** for $T$ is any finite $\\Lambda$ for which $T\\in\\mathcal A_\\Lambda$ under these inclusions; a localization region need not be minimal.\n\nThe ordinary operator norm makes each local matrix algebra a nonzero unital complete C*-algebra, and every positive normalized complex-linear functional is uniquely a trace pairing with a density matrix, by [[lem-qsm-finite-matrix-cstar-and-state-duality]]. This includes the empty region, whose Hilbert space is $\\mathbb C$. This definition does not posit an infinite-dimensional tensor-product Hilbert space.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "On $\\mathbb C^q$ in the standard basis $e_j$, $0\\le j<q$, define $S e_j=e_{j+1\\ {\\rm mod}\\ q}$ and $D e_j=e^{2\\pi i j/q}e_j$. The $q^2$ unitaries $S^aD^b$, $0\\le a,b<q$, satisfy $q^{-2}\\sum_{a,b=0}^{q-1}(S^aD^b)^*R(S^aD^b) =q^{-1}\\operatorname{Tr}(R)I_q\\qquad(R\\in M_q(\\mathbb C)).$ Indeed, averaging over $b$ cancels each off-diagonal matrix unit because its phase is a nontrivial $q$-th root sum, and averaging the surviving diagonal units over $a$ gives their arithmetic mean times $I_q$; for $q=1$ the formula is the identity. Applying this one-site twirl on each factor in $Y\\setminus X$ yields the normalized partial trace of [F1]. Each twirl is an average of unitary conjugations, so it is unital, positive, and contractive. The formula is unchanged when an extra identity factor is added, since its normalized trace is $1$; hence $E_X$ is consistent on $\\mathcal A_{\\mathrm{loc}}$. Contractivity extends it uniquely to the completion, and its range remains in the closed finite-dimensional subalgebra $\\mathcal A_X$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Enumerate $Y\\setminus X=\\{z_1,\\ldots,z_k\\}$ and write $E_{z_j}$ for the one-site twirl. The commuting twirls satisfy $B-E_X(B)=\\sum_{j=1}^k E_{z_1}\\cdots E_{z_{j-1}}\\bigl(B-E_{z_j}(B)\\bigr).$ For any $C\\in\\mathcal A_Y$, the average formula gives $\\|C-E_{z_j}(C)\\|\\le\\sup_{V_z}\\|C-V_z^*CV_z\\|=\\sup_{V_z}\\|[C,V_z]\\|$, where $V_z$ ranges over the one-site unitaries. Each preceding twirl is contractive and commutes with conjugation by $V_z$, so its term in the displayed sum is at most $\\sup_{V_z}\\|[B,V_z]\\|$. The triangle inequality and the finite sum over sites give the stated bound.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Empty X gives the normalized full trace onto scalars. If the set difference of Y and X is empty,2.1 has an empty telescoping sum, E_X(B)=B and both sides of the commutator bound are zero. The one-site twirl construction1.1 is still consistent."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For B=0 every twirl and commutator in1.1–2.1 is zero. The contraction inequality also sends the zero observable to zero on completion, so neither the range nor telescoping estimate needs normalization of B."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 treats q=1, where the twirl is the identity."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Normalized partial trace is a finite average of explicit shift-clock unitary conjugations. Its contractivity and commutator error do not involve a Hamiltonian spectrum or a simplicity assumption."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "E_X is defined for fixed finite localization regions, not along a real path. The completion step uses norm continuity of a contraction, with no real-interval endpoint asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The q-squared one-site unitaries are explicitly enumerated and the complement of the retained region is finite. The telescoping enumeration in2.1 is finite and the extension is unique; no arbitrary-index choice is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a construction, bound, identity, or counterexample rather than an if-and-only-if claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/qsm_boundary (scientific owner; no independent acceptance)",
+            "reason": "A finite shift-clock unitary average realizes partial trace and a telescoping product bounds its error by one-site commutators. The stated contractivity and error bound do not characterize all conditional expectations.",
+            "item_sha256": "82194005313a315c88780c3c6614c603e50f3f0de2f55a996937286944078cbd",
+            "row_sha256": "748da61e0470ef5b1fabce5f31a30d166a9e9c9329cf97223b5e8a01e807870c"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a construction, bound, identity, or counterexample rather than an if-and-only-if claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/qsm_boundary (scientific owner; no independent acceptance)",
+            "reason": "A finite shift-clock unitary average realizes partial trace and a telescoping product bounds its error by one-site commutators. The stated contractivity and error bound do not characterize all conditional expectations.",
+            "item_sha256": "82194005313a315c88780c3c6614c603e50f3f0de2f55a996937286944078cbd",
+            "row_sha256": "409a84ed5df12b861621ef24a6e4ebddda706ebb62026aeb5ece79fe4b574690"
+          }
+        }
+      ]
+    },
+    "lem-qsmx-filtered-spectral-generator": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qsmx-summable-interaction-norm",
+          "source_section": "Definition",
+          "quote": "Fix $d\\ge1$, the site set $\\Gamma=\\mathbb Z^d$, its max-coordinate metric $d_\\infty$, and the local spin algebras $\\mathcal A_\\Lambda$ of the uniformly finite-dimensional spin system. A finite interaction is a family $\\Phi(Z)=\\Phi(Z)^*\\in\\mathcal A_Z$ indexed by finite nonempty $Z\\subset\\Gamma$. For a finite $\\Lambda\\subset\\Gamma$, define\n\n$$H_\\Lambda^\\Phi:=\\sum_{\\varnothing\\ne Z\\subseteq\\Lambda}\\Phi(Z),\\qquad \\tau_t^{\\Lambda,\\Phi}(A):=e^{itH_\\Lambda^\\Phi/\\hbar}Ae^{-itH_\\Lambda^\\Phi/\\hbar},$$\n\nwhere $\\hbar>0$, $A$ is embedded in a common finite local algebra, and the finite sum is a self-adjoint matrix. When a path $\\Phi_s$, $s\\in[0,1]$, is used, each $\\Phi_s(Z)$ is $C^1$ in matrix norm and the derivative is taken term by term.\n\nFor $r\\ge0$ put $F(r)=(1+r)^{-d-1}$. The admissible weights used here are\n\n$$F_a(r):=e^{-ar}F(r)\\quad(a>0),\\qquad F_\\rho(r):=(1+r)^{-\\rho}\\quad(\\rho>d).$$\n\nFor an admissible weight $G$, define the weighted interaction norm\n\n$$\\|\\Phi\\|_G:=\\sup_{x,y\\in\\Gamma}\\frac{1}{G(d_\\infty(x,y))} \\sum_{\\substack{Z\\subset\\Gamma\\ {\\rm finite,\\ nonempty}\\\\x,y\\in Z}}\\|\\Phi(Z)\\|.$$\n\nThe derivative norm of a path is\n\n$$\\|\\partial\\Phi\\|_G:=\\sup_{s\\in[0,1]}\\sup_{x,y\\in\\Gamma} \\frac{1}{G(d_\\infty(x,y))} \\sum_{Z\\ni x,y}|Z|\\,\\|\\partial_s\\Phi_s(Z)\\|.$$\n\nA finite-volume spectral band is a nonempty selected subset $\\Sigma_\\Lambda(s)\\subseteq\\sigma(H_\\Lambda^{\\Phi_s})$ together with the orthogonal projection onto the sum of its eigenspaces. It may be specified by an interval $I_\\Lambda(s)$ with smoothly varying endpoints, in which case $\\Sigma_\\Lambda(s)=\\sigma(H_\\Lambda^{\\Phi_s})\\cap I_\\Lambda(s)$. The band is uniformly isolated with gap $\\gamma>0$ along a specified finite-volume exhaustion when\n\n$$\\operatorname{dist}\\!\\left(\\Sigma_\\Lambda(s),\\sigma(H_\\Lambda^{\\Phi_s})\\setminus\\Sigma_\\Lambda(s)\\right)\\ge\\gamma$$\n\nfor every volume in that exhaustion and every $s\\in[0,1]$. For spectral-flow arguments, the selected eigenvalues must also form a locally fixed spectral cluster: for each $s_0$, a contour in the resolvent set encloses exactly the selected eigenvalues for all $s$ in a neighborhood of $s_0$. In finite dimension this implies that its projection is $C^1$ when the Hamiltonian path is $C^1$. This cluster condition holds, for example, for the first $r_\\Lambda$ eigenvalues counted with multiplicity when the integer $r_\\Lambda$ is fixed along the path and the gap after them stays open. Uniform distance between the selected and unselected spectra alone does not prevent an interval from changing membership discontinuously. A ground band is such a band containing the lowest eigenvalue or a finite-volume cluster of lowest eigenvalues; no uniqueness is implicit.\n\nFor physical units, take interaction terms and Hamiltonians in joules, time in seconds, and $\\hbar$ in joule-seconds. The path parameter $s$, lattice distance, and admissible weights are dimensionless; the interaction norm therefore has energy units and the derivative norm has energy units per dimensionless path parameter.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qsm-matrix-state-calculus",
+          "source_section": "Statement",
+          "quote": "Use the following conventions on a complex inner-product space $H$ of dimension $D\\geq1$, with inner product linear in its first argument. For an endomorphism $A$, define $\\operatorname{Tr}A:=\\sum_{j=1}^D\\langle Ae_j,e_j\\rangle$ in an orthonormal basis; step 3.1 proves basis independence. For any Hermitian $M$, its **positive spectral subspace** (called its positive support here) is $S_M:=\\bigoplus_{\\lambda>0}\\ker(M-\\lambda I)$; when $M\\geq0$ this equals $(\\ker M)^\\perp$. Its support logarithm is $\\log(M|_{S_M}):=\\sum_{\\lambda>0}(\\log\\lambda)P_\\lambda|_{S_M}$, where $P_\\lambda$ is the orthogonal projection onto that eigenspace. No value $\\log0$ is assigned; for $M=0$ this is the unique endomorphism of the zero space. For the set $\\mathcal D(H)$ of positive semidefinite Hermitian endomorphisms with trace one, a point $\\rho$ is **extreme** if every equality $\\rho=t\\sigma+(1-t)\\tau$ with $\\sigma,\\tau\\in\\mathcal D(H)$ and $0<t<1$ implies $\\sigma=\\tau=\\rho$.\n\nLet $H$ be a complex inner-product space of finite dimension $D\\geq1$, with inner product linear in its first argument. Every Hermitian endomorphism $M$ has an orthonormal eigenbasis with real eigenvalues. For a real function $f$ on its finite spectrum, define $f(M)$ by its spectral projections; this definition is independent of the choice of eigenbasis. In particular positive square roots, exponentials, and logarithms on positive supports are well defined.\n\nFor a density matrix $\\rho$ on $H$, meaning a Hermitian positive semidefinite operator with $\\operatorname{Tr}\\rho=1$, $\\operatorname{Tr}(\\rho A)=\\sum_jp_j\\langle Au_j,u_j\\rangle$ for bounded $A$, where $\\rho=\\sum_jp_j|u_j\\rangle\\langle u_j|$. The weighted form $(X,Y)_\\rho=\\operatorname{Tr}(\\rho X^*Y)$ satisfies Cauchy–Schwarz, $|(X,Y)_\\rho|^2\\leq(X,X)_\\rho(Y,Y)_\\rho$. Finally, $\\operatorname{Tr}(\\rho^2)\\leq1$, with equality exactly for rank-one densities, and those are exactly the extreme points of the finite density-matrix set.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-fourier-inversion-on-schwartz-space",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. For every $f\\in\\mathcal S(\\mathbb R^n)$ and every $x\\in\\mathbb R^n$,\n$$f(x)=\\int_{\\mathbb R^n}\\widehat f(\\xi)e^{2\\pi ix\\cdot\\xi}\\,d\\xi.$$\nThe integral is absolutely convergent.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-fourier-transform-maps-schwartz-space-continuously-to-itself",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. The negative-sign, $2\\pi$-normalized Fourier transform is continuous $\\mathcal F:\\mathcal S\\to\\mathcal S$, and\n$$\\mathcal F(\\partial^\\alpha f)(\\xi)=(2\\pi i\\xi)^\\alpha\\widehat f(\\xi),\\qquad \\partial^\\beta\\widehat f=\\mathcal F((-2\\pi ix)^\\beta f).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-residue-theorem-null-homologous-cycle",
+          "source_section": "Statement",
+          "quote": "Let $\\Omega\\subseteq\\mathbb C$ be open, let $f$ be meromorphic on $\\Omega$ with\npole set $S$, and let $\\Gamma$ be admissible for the residue theorem in\n$\\Omega$. Then\n\n$\\int_\\Gamma f(z)\\,dz=2\\pi i\\sum_{a\\in S}n(\\Gamma,a)\\operatorname{Res}(f,a),$\n\nwhere only finitely many terms are nonzero.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Define $\\chi(\\omega)=e\\exp(-1/(1-(\\omega/\\gamma)^2))$ for $|\\omega|<\\gamma$, and $\\chi(\\omega)=0$ otherwise. The exponential tends to zero faster than every power at the endpoints, so $\\chi$ is real, even, smooth, compactly supported in $[-\\gamma,\\gamma]$, and $\\chi(0)=1$. Define $w(t)=(2\\pi)^{-1}\\int\\chi(\\omega)e^{-it\\omega}\\,d\\omega$. By [A1], [F3], and the sign/scale conversion stated in [F3], $w$ is Schwartz, real and even, its Fourier transform $\\widehat w(\\omega)=\\int w(t)e^{it\\omega}dt$ equals $\\chi(\\omega)$, and $\\int w=1$. For $t>0$ put $W_\\gamma(t)=\\int_t^\\infty w(v)\\,dv$; for $t<0$ put $W_\\gamma(t)=-\\int_{-\\infty}^t w(v)\\,dv$; set $W_\\gamma(0)=0$. Evenness and unit integral make $W_\\gamma$ odd with one-sided limits $W_\\gamma(0^\\pm)=\\pm\\frac12$. For every $N$, a Schwartz bound $|w(v)|\\le c(1+|v|)^{-N-2}$ on either tail gives $|W_\\gamma(t)|\\le c'(1+|t|)^{-N-1}$; hence $W_\\gamma\\in L^1$ and has the stated tail estimate. Integration by parts on the two half-lines, accounting for the jump of size $1$ at zero and using $W_\\gamma'=-w$ away from zero, gives $-\\widehat w(\\omega)=-1-i\\omega\\widehat W_\\gamma(\\omega)$. Thus $\\widehat W_\\gamma(\\omega)=i(1-\\chi(\\omega))/\\omega$ for $\\omega\\ne0$, so it equals $i/\\omega$ for $|\\omega|\\ge\\gamma$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F3",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Fix $s_0$. By the locally fixed spectral-cluster hypothesis and [F2], choose a finite union of positively oriented contours $\\Gamma$ surrounding exactly the selected eigenvalues and staying a positive distance from the remaining spectrum, with the same selected eigenvalues enclosed for nearby $s$. For $s$ near $s_0$, $\\|H_\\Lambda(s)-H_\\Lambda(s_0)\\|$ is small; factoring $zI-H_\\Lambda(s)$ through $zI-H_\\Lambda(s_0)$ and using the norm-convergent Neumann series keeps every $z\\in\\Gamma$ in the resolvent set. The contour projection $P_\\Lambda(s)=\\frac{1}{2\\pi i}\\int_\\Gamma(zI-H_\\Lambda(s))^{-1}\\,dz$ is therefore $C^1$, since the inverse matrix is $C^1$ in $s$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "In an orthonormal eigenbasis of $H_\\Lambda(s)$, write its eigenvalues as $E_m$ and the band indicator as $p_m\\in\\{0,1\\}$. Differentiating $P^2=P$ gives $P'_{mn}=0$ when $p_m=p_n$. Differentiating $HP=PH$ gives $P'_{mn}=(p_m-p_n)H'_{mn}/(E_m-E_n)$ when $p_m\\ne p_n$; the denominator has magnitude at least $\\gamma$. The integral defining $D_\\Lambda$ converges in norm because $W_\\gamma\\in L^1$; it is self-adjoint because $W_\\gamma$ is real and each conjugated $H_\\Lambda'$ is self-adjoint. Dominated convergence, using continuity and boundedness of $H_\\Lambda'(s)$ on the compact interval and the integrable majorant $2\\sup_s\\|H_\\Lambda'(s)\\||W_\\gamma(t)|$, shows $D_\\Lambda(s)$ is norm-continuous. Its matrix entries are $(D_\\Lambda)_{mn}=H'_{mn}\\widehat W_\\gamma(E_m-E_n)=iH'_{mn}/(E_m-E_n)$ across the band gap. Hence $i[D_\\Lambda,P_\\Lambda]_{mn}=(p_n-p_m)i(D_\\Lambda)_{mn}=(p_m-p_n)H'_{mn}/(E_m-E_n)=P'_{mn}$ across the gap, and both sides vanish within either band block. This proves the identity in every matrix entry.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The selected cluster is nonempty, but its complement can be empty. Then P=I and1.2 gives P_prime=0; in2.1 every pair has equal band indicator and the commutator also vanishes. A zero-dimensional or zero-rank selected band is not assumed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If H_prime=0, the filtered integral is D=0 and the differentiated projection is P_prime=0 in2.1. Zero spectral differences within a band are never divided by: equal band indicators give zero entries before the across-gap denominator is used."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For a one-dimensional finite Hilbert space the nonempty selected cluster is the full spectrum, so P=I and its derivative is zero. The within-band case of2.1 proves the commutator formula, while a positive reference energy and gamma remain allowed."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 uses eigenspace projections and band indicators, allowing degeneracy within each spectral block."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The C1 interaction path is on the closed interval. The local contour formula1.2 differentiates with one-sided derivatives at s=0,1, and2.1 gives the same matrix-entry identity there; the gap bound remains uniform through both ends."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 carries Countable Choice for the supplied Fourier inversion and Schwartz-space interface."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a construction, bound, identity, or counterexample rather than an if-and-only-if claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/qsm_boundary (scientific owner; no independent acceptance)",
+            "reason": "A smooth Fourier cutoff yields an integrable odd filter and the isolated spectral cluster gives a differentiable projection satisfying a commutator identity. These are conditional construction claims with no reverse implication that a commutator identity supplies a spectral gap.",
+            "item_sha256": "3100e0ffb17579df8c09c6eadb406bda6bbac76f939343266de99506dd179390",
+            "row_sha256": "748da61e0470ef5b1fabce5f31a30d166a9e9c9329cf97223b5e8a01e807870c"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a construction, bound, identity, or counterexample rather than an if-and-only-if claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/qsm_boundary (scientific owner; no independent acceptance)",
+            "reason": "A smooth Fourier cutoff yields an integrable odd filter and the isolated spectral cluster gives a differentiable projection satisfying a commutator identity. These are conditional construction claims with no reverse implication that a commutator identity supplies a spectral gap.",
+            "item_sha256": "3100e0ffb17579df8c09c6eadb406bda6bbac76f939343266de99506dd179390",
+            "row_sha256": "409a84ed5df12b861621ef24a6e4ebddda706ebb62026aeb5ece79fe4b574690"
+          }
+        }
+      ]
+    },
+    "lem-qsmx-filtered-generator-locality": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-qsm-finite-matrix-cstar-and-state-duality",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space, $D=\\dim H\\ge1$, with inner product linear in its first argument. With composition, Hilbert adjoint, identity and the induced operator norm, $\\mathcal B(H)$ is a nonzero unital complex C*-algebra in the sense of [[def-c-star-algebra]]. In particular it is complete, $\\|AB\\|\\le\\|A\\|\\|B\\|$, $\\|A^*A\\|=\\|A\\|^2$, $\\|A^*\\|=\\|A\\|$ and $\\|I\\|=1$. The matrix $\\|A\\|^2I-A^*A$ is positive semidefinite and has a positive square root in $\\mathcal B(H)$.\n\nEvery complex-linear functional $\\omega:\\mathcal B(H)\\to\\mathbb C$ that is positive, meaning $\\omega(B^*B)\\ge0$ for all $B$, has a unique positive semidefinite matrix $\\rho$ such that $\\omega(A)=\\operatorname{Tr}(\\rho A)$ for all $A$. It is bounded and satisfies\n\n$$|\\omega(A)|\\le\\operatorname{Tr}(\\rho)\\|A\\|\\quad(A\\in\\mathcal B(H)),\\qquad \\|\\omega\\|=\\operatorname{Tr}(\\rho)=\\omega(I).$$\n\nConsequently the canonical states of [[def-state-on-a-c-star-algebra]] are exactly the trace pairings of density operators of [[def-qc-density-operator]]; for a positive functional, normalization $\\omega(I)=1$ is equivalent to norm one. The result includes zero positive functionals, nonfaithful densities and $D=1$; it makes no infinite-dimensional density representation assertion.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qsmx-summable-interaction-norm",
+          "source_section": "Definition",
+          "quote": "Fix $d\\ge1$, the site set $\\Gamma=\\mathbb Z^d$, its max-coordinate metric $d_\\infty$, and the local spin algebras $\\mathcal A_\\Lambda$ of the uniformly finite-dimensional spin system. A finite interaction is a family $\\Phi(Z)=\\Phi(Z)^*\\in\\mathcal A_Z$ indexed by finite nonempty $Z\\subset\\Gamma$. For a finite $\\Lambda\\subset\\Gamma$, define\n\n$$H_\\Lambda^\\Phi:=\\sum_{\\varnothing\\ne Z\\subseteq\\Lambda}\\Phi(Z),\\qquad \\tau_t^{\\Lambda,\\Phi}(A):=e^{itH_\\Lambda^\\Phi/\\hbar}Ae^{-itH_\\Lambda^\\Phi/\\hbar},$$\n\nwhere $\\hbar>0$, $A$ is embedded in a common finite local algebra, and the finite sum is a self-adjoint matrix. When a path $\\Phi_s$, $s\\in[0,1]$, is used, each $\\Phi_s(Z)$ is $C^1$ in matrix norm and the derivative is taken term by term.\n\nFor $r\\ge0$ put $F(r)=(1+r)^{-d-1}$. The admissible weights used here are\n\n$$F_a(r):=e^{-ar}F(r)\\quad(a>0),\\qquad F_\\rho(r):=(1+r)^{-\\rho}\\quad(\\rho>d).$$\n\nFor an admissible weight $G$, define the weighted interaction norm\n\n$$\\|\\Phi\\|_G:=\\sup_{x,y\\in\\Gamma}\\frac{1}{G(d_\\infty(x,y))} \\sum_{\\substack{Z\\subset\\Gamma\\ {\\rm finite,\\ nonempty}\\\\x,y\\in Z}}\\|\\Phi(Z)\\|.$$\n\nThe derivative norm of a path is\n\n$$\\|\\partial\\Phi\\|_G:=\\sup_{s\\in[0,1]}\\sup_{x,y\\in\\Gamma} \\frac{1}{G(d_\\infty(x,y))} \\sum_{Z\\ni x,y}|Z|\\,\\|\\partial_s\\Phi_s(Z)\\|.$$\n\nA finite-volume spectral band is a nonempty selected subset $\\Sigma_\\Lambda(s)\\subseteq\\sigma(H_\\Lambda^{\\Phi_s})$ together with the orthogonal projection onto the sum of its eigenspaces. It may be specified by an interval $I_\\Lambda(s)$ with smoothly varying endpoints, in which case $\\Sigma_\\Lambda(s)=\\sigma(H_\\Lambda^{\\Phi_s})\\cap I_\\Lambda(s)$. The band is uniformly isolated with gap $\\gamma>0$ along a specified finite-volume exhaustion when\n\n$$\\operatorname{dist}\\!\\left(\\Sigma_\\Lambda(s),\\sigma(H_\\Lambda^{\\Phi_s})\\setminus\\Sigma_\\Lambda(s)\\right)\\ge\\gamma$$\n\nfor every volume in that exhaustion and every $s\\in[0,1]$. For spectral-flow arguments, the selected eigenvalues must also form a locally fixed spectral cluster: for each $s_0$, a contour in the resolvent set encloses exactly the selected eigenvalues for all $s$ in a neighborhood of $s_0$. In finite dimension this implies that its projection is $C^1$ when the Hamiltonian path is $C^1$. This cluster condition holds, for example, for the first $r_\\Lambda$ eigenvalues counted with multiplicity when the integer $r_\\Lambda$ is fixed along the path and the gap after them stays open. Uniform distance between the selected and unselected spectra alone does not prevent an interval from changing membership discontinuously. A ground band is such a band containing the lowest eigenvalue or a finite-volume cluster of lowest eigenvalues; no uniqueness is implicit.\n\nFor physical units, take interaction terms and Hamiltonians in joules, time in seconds, and $\\hbar$ in joule-seconds. The path parameter $s$, lattice distance, and admissible weights are dimensionless; the interaction norm therefore has energy units and the derivative norm has energy units per dimensionless path parameter.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qsmx-filtered-spectral-generator",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $H_\\Lambda(s)$ be the finite-volume self-adjoint matrix of a $C^1$ interaction path on the dimensionless parameter $s\\in[0,1]$, and let the selected spectral band be a locally fixed spectral cluster, separated from its complement by $\\gamma>0$ uniformly in $s$, in the sense of the interaction definition. Choose a positive reference energy $E_0$ and measure physical energies in units of $E_0$; $H_\\Lambda$, $H'_\\Lambda$, and $\\gamma$ in this statement are dimensionless, and the Fourier evolution uses $\\hbar=1$. Let $P_\\Lambda(s)$ be the orthogonal spectral projection onto that band. Then $P_\\Lambda$ is $C^1$. There is a real, odd, integrable function $W_\\gamma\\in L^1(\\mathbb R)$, with Fourier convention\n\n$$\\widehat W_\\gamma(\\omega):=\\int_{\\mathbb R}W_\\gamma(t)e^{it\\omega}\\,dt,$$\n\nsuch that $\\widehat W_\\gamma(\\omega)=i/\\omega$ whenever $|\\omega|\\ge\\gamma$, and for every integer $N\\ge0$ there is $c_N<\\infty$ with\n\n$$\\int_{|t|>T}|W_\\gamma(t)|\\,dt\\le c_N(1+T)^{-N}\\qquad(T\\ge0).$$\n\nThe finite matrix\n\n$$D_\\Lambda(s):=\\int_{\\mathbb R}W_\\gamma(t)e^{itH_\\Lambda(s)} H_\\Lambda'(s)e^{-itH_\\Lambda(s)}\\,dt$$\n\nis self-adjoint and satisfies\n\n$$P_\\Lambda'(s)=i[D_\\Lambda(s),P_\\Lambda(s)].$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qsmx-weighted-lieb-robinson",
+          "source_section": "Statement",
+          "quote": "Let $G$ be either $F_a$, $a>0$, or $F_\\rho$, $\\rho>d$, as in the weighted-interaction definition. Let $\\Phi_u$ be a norm-continuous family of finite interactions on $\\mathbb Z^d$, indexed by $u\\in[0,T]$, with $M_G:=\\sup_{u\\in[0,T]}\\|\\Phi_u\\|_G<\\infty$. For finite $\\Lambda\\subset\\mathbb Z^d$, define $H_\\Lambda(u)=\\sum_{\\varnothing\\ne Z\\subseteq\\Lambda}\\Phi_u(Z)$ and let $U_\\Lambda(0)=I$ solve\n\n$$\\frac{d}{du}U_\\Lambda(u)=-iH_\\Lambda(u)U_\\Lambda(u)/\\hbar.$$\n\nSet $\\alpha_u^\\Lambda(A)=U_\\Lambda(u)^* A U_\\Lambda(u)$, extended by the identity outside $\\Lambda$. If $A\\in\\mathcal A_X$, $B\\in\\mathcal A_Y$ for disjoint finite nonempty $X,Y\\subset\\Lambda$, then\n\n$$\\|[\\alpha_u^\\Lambda(A),B]\\|\\le \\frac{2\\|A\\|\\|B\\|}{C_G} \\left(e^{2C_GM_Gu/\\hbar}-1\\right) \\sum_{x\\in X,\\,y\\in Y}G(d_\\infty(x,y)).$$\n\nThe same estimate holds for the inverse path. In particular, for a constant interaction $\\Phi$ evolved in physical time $t$ by $\\tau_t^{\\Lambda,\\Phi}$, take $u=|t|$ and the constant path $\\Phi_u=\\Phi$ to obtain\n\n$$\\|[\\tau_t^{\\Lambda,\\Phi}(A),B]\\|\\le \\frac{2\\|A\\|\\|B\\|}{C_G} \\left(e^{2C_G\\|\\Phi\\|_G|t|/\\hbar}-1\\right) \\sum_{x\\in X,\\,y\\in Y}G(d_\\infty(x,y)).$$\n\nIn physical units, $u,T,t$ are times, $M_G$ and $\\|\\Phi\\|_G$ have energy units, and $\\hbar$ has energy-times-time units; the weights and convolution constants are dimensionless, so the exponential arguments are dimensionless.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qsmx-local-conditional-expectation",
+          "source_section": "Definition",
+          "quote": "Let $X,Y\\subset\\mathbb Z^d$ be finite regions and $A\\in\\mathcal A_Y$. Embed $A$ in $\\mathcal A_{X\\cup Y}$, use the canonical site-order permutation to group factors in $X\\cap Y$ and $Y\\setminus X$, and apply the normalized trace on the omitted factors:\n\n$$E_X(A):=\\bigl(\\operatorname{id}_{\\mathcal A_{X\\cap Y}}\\otimes \\tau_{Y\\setminus X}\\bigr)(A)\\otimes I_{X\\setminus Y}\\in\\mathcal A_X,\\qquad \\tau_D:=q^{-|D|}\\operatorname{Tr}_D.$$\n\nThe empty tensor factor has normalized trace $1$. Since $\\tau_D(I_D)=1$, adding an identity factor does not change the result, so this formula consistently defines $E_X$ on the directed union $\\mathcal A_{\\mathrm{loc}}$. This definition alone asserts no norm extension to its completion.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qsmx-local-expectation-locality",
+          "source_section": "Statement",
+          "quote": "For every finite $X\\subset\\mathbb Z^d$, the map $E_X$ of the normalized-trace-expectation definition is a unital positive contraction on $\\mathcal A_{\\mathrm{loc}}$ and has a unique contractive extension $E_X:\\mathcal A\\to\\mathcal A_X$. For $B\\in\\mathcal A_Y$, $Y$ finite,\n\n$$\\|B-E_X(B)\\|\\le \\sum_{z\\in Y\\setminus X}\\ \\sup_{\\substack{V\\in\\mathcal A_{\\{z\\}}\\\\V^*V=VV^*=I}} \\|[B,V]\\|.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-qsm-finite-range-spin-dynamics",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and the finite-matrix C*-identity condition [A1] below. Let $\\mathcal A_{\\mathrm{loc}}=\\bigcup_{\\Lambda\\subset\\mathbb Z^d,\\ |\\Lambda|<\\infty}\\mathcal A_\\Lambda$ and let $\\mathcal A$ be its norm completion as in [[def-qsm-quasilocal-spin-algebra]]. These assumptions give the conditional unital C*-algebra structure supplied by [[lem-qsm-quasilocal-completion]]. Let $\\Phi$ be a uniformly bounded finite-range interaction of [[def-qsm-bounded-finite-range-interaction]].\n\nFor any increasing finite exhaustion $(\\Lambda_n)_{n\\ge1}$ in the convention of [[lem-qsm-boundary-dynamics-cauchy]]—that is, each $\\Lambda_n$ is finite, $\\Lambda_n\\subseteq\\Lambda_{n+1}$, and $\\bigcup_{n\\ge1}\\Lambda_n=\\mathbb Z^d$—the free-boundary finite-volume maps $\\alpha_t^{\\Lambda_n}$ converge in norm on every local observable, uniformly for $t$ in compact intervals. Their limit is independent of the exhaustion and extends uniquely to a strongly continuous one-parameter group $\\alpha_t$ of maps $\\alpha_t:\\mathcal A\\to\\mathcal A$. Here “one-parameter group” means $\\alpha_0=\\operatorname{id}_{\\mathcal A}$ and $\\alpha_{s+t}=\\alpha_s\\circ\\alpha_t$ for all $s,t\\in\\mathbb R$. Each $\\alpha_t$ is a bijective complex-linear unital $*$-homomorphism (a $*$-automorphism), with inverse $\\alpha_{-t}$. Strong continuity means $t\\mapsto\\alpha_t(A)$ is norm-continuous for every fixed $A\\in\\mathcal A$. This result does not assert that an infinite-volume Hamiltonian is an element of $\\mathcal A$ or a bounded operator on a preselected infinite tensor-product Hilbert space.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each finite nonempty $Y\\subseteq\\Lambda_n$, set $B_{Y,n}(s)=\\int_{\\mathbb R}W_\\gamma(t)\\, \\tau_t^{\\Lambda_n,\\Phi_s}(\\Phi'_s(Y))\\,dt.$ For fixed $n,Y,t$, the finite matrix integrand is continuous in $s$, and it is bounded by $\\sup_s\\|\\Phi'_s(Y)\\||W_\\gamma(t)|$, an integrable majorant. Dominated convergence makes $B_{Y,n}(s)$ norm-continuous. Linearity of the finite sum and [F2] give $D_{\\Lambda_n}(s)=\\sum_{\\varnothing\\ne Y\\subseteq\\Lambda_n}B_{Y,n}(s)$. Define $Y_k=\\{x:d_\\infty(x,Y)\\le k\\}$, $E_{Y_k}^{(n)}:=E_{Y_k\\cap\\Lambda_n}$, and shells $\\Delta^0_{Y,n}=E_{Y_0}^{(n)}(B_{Y,n}),\\qquad \\Delta^k_{Y,n}=E_{Y_k}^{(n)}(B_{Y,n})-E_{Y_{k-1}}^{(n)}(B_{Y,n})\\quad(k\\ge1).$ For all sufficiently large $k$, $Y_k\\cap\\Lambda_n=\\Lambda_n$, so the sum of these shells is $B_{Y,n}$. Each shell is self-adjoint and supported in $Y_k\\cap\\Lambda_n$. Grouping the finitely many shells by this support defines $\\Psi_{\\Lambda_n}(Z,s)$ and proves the displayed decomposition. Each expectation is a fixed linear map, so the shell and grouped coefficients are norm-continuous in $s$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "F4",
+            "F5",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $a>0$ be the weight parameter and $v=2C_{F_a}\\sup_s\\|\\Phi_s\\|_{F_a}$, with $V=1+v$. For $z\\in\\Lambda_n\\setminus Y_k$, the supports $Y$ and $\\{z\\}$ are disjoint; [F3] and the local-expectation estimate [F4] give $\\left\\|\\tau_t^{\\Lambda_n,\\Phi_s}(\\Phi'_s(Y)) -E_{Y_k}^{(n)}\\tau_t^{\\Lambda_n,\\Phi_s}(\\Phi'_s(Y))\\right\\| \\le C|Y|\\|\\Phi'_s(Y)\\|e^{v|t|}e^{-ak/2},$ where the lattice shell count and the exponential factor in $F_a$ give one constant $C$ independent of $Y,n,s,t$. The same difference is at most $2\\|\\Phi'_s(Y)\\|$ by contractivity. Split the filtered integral at $T_k=ak/(4V)$. On $|t|\\le T_k$ the first bound is at most $C|Y|\\|\\Phi'_s(Y)\\|e^{-ak/4}$; on $|t|>T_k$, the Schwartz-tail construction in [F2] gives $\\int_{|t|>T_k}|W_\\gamma(t)|dt\\le C_N(1+k)^{-N}$ for each $N$. Since $\\Delta^k_{Y,n}$ is a difference of the (k)- and $(k-1)$-expectations, its norm is bounded by the sum of these two expectation errors. Thus, after increasing $C_N$, for every $N$ there is a constant $C_N$ independent of $Y,n,s,k$ such that $\\|\\Delta^k_{Y,n}(s)\\|\\le C_N|Y|\\|\\Phi'_s(Y)\\|(1+k)^{-N}.$ For $k=0$, the same estimate with an enlarged $C_N$ follows from $\\|E_Y(B_{Y,n})\\|\\le\\|W_\\gamma\\|_1\\|\\Phi'_s(Y)\\|$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The finite-range path has a uniform range $R$, so $x,y\\in Y_k$ implies $d_\\infty(x,y)\\le R+2k$. Also [F1] at $x=y$ gives $\\sup_s\\sum_{Y\\ni x}|Y|\\|\\Phi'_s(Y)\\|<\\infty$. Since $x\\in Y_k$ forces $Y\\cap B_k(x)\\ne\\varnothing$, the sum of $|Y|\\|\\Phi'_s(Y)\\|$ over such $Y$ is at most $C(k+1)^d$. For each fixed $s$, summing the shell estimate from step 2.1 over all $Y,k$ with $x,y\\in Y_k$ gives $\\sum_{\\substack{Z\\subseteq\\Lambda_n\\\\x,y\\in Z}}\\|\\Psi_{\\Lambda_n}(Z,s)\\| \\le C_N\\sum_{k\\ge (d_\\infty(x,y)-R)/2}(1+k)^{d-N}.$ For any prescribed $\\rho>d$, choose $N>\\rho+d+1$; the last tail is bounded by $C_\\rho(1+d_\\infty(x,y))^{-\\rho}$. The bound is independent of $s$ and $n$, so taking their suprema outside the support sum proves the stated uniform $F_\\rho$-norm bound. No sum of separate time suprema is asserted; all finite-volume sums are finite and their nonnegative shell bounds are dominated by the displayed convergent scalar series.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Fix a finite support $Z$. Once $\\Lambda_n$ contains the $(2\\operatorname{diam}Z+1)$-neighborhood of $Z$, any shell with support $Y_k\\cap\\Lambda_n=Z$ has $Y\\subseteq Z$ and $k\\le\\operatorname{diam}Z$; otherwise $Y_k\\cap\\Lambda_n$ would contain a point in that neighborhood outside $Z$. Thus only finitely many pairs $(Y,k)$ contribute to $\\Psi_{\\Lambda_n}(Z,s)$, and their shell projections are the fixed $E_{Y_k}$ once $n$ is large. By [A1], [F6], and [F5], for each fixed $s$, $\\tau_t^{\\Lambda_n,\\Phi_s}(A)$ converges locally uniformly on compact $t$-intervals. The same boundary estimate in the proof of [F5] is uniform in $s$, because the path has uniform finite range and interaction bounds. For $A=\\Phi'_s(Y)$, uniformity over $s$ follows by covering the compact finite-dimensional set $\\{\\Phi'_s(Y):s\\in[0,1]\\}$ by a finite norm net and using contractivity of the dynamics. The tails $|t|>T$ are bounded uniformly by $2\\sup_s\\|\\Phi'_s(Y)\\|\\int_{|t|>T}|W_\\gamma(t)|dt$, which tends to zero by [F2]. Hence every contributing filtered term converges uniformly in $s$, defining $\\Psi_\\infty(Z,s)$. The $F_\\rho$-norm bound passes to the limit by taking the limit on each finite set of support terms and then the supremum.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "F4",
+            "F5",
+            "F6",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The decomposition is indexed by subsets of a finite volume, but1.1 starts only from nonempty Y. No shell has empty support, so the coefficient for the empty Z is zero. Vanishing derivative terms give zero shells and do not invalidate finite grouping."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "A zero derivative interaction gives B_{Y,n}=0 in1.1 and every expectation difference zero. All shell bounds in2.1 and uniform interaction sums in3.1 then vanish; they never divide by a derivative norm."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Singleton interaction supports have |Y|=1 and their k-neighborhoods are the explicit lattice balls. The expectation-error and shell estimates2.1 include k=0, and the counting argument3.1 remains valid in the least lattice dimension d=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "A selected band may have repeated energies or internal crossings. F2 requires only separation from its complement;1.1 and2.1 apply bounded conjugations and local expectations to that matrix derivative, without resolving individual eigenvectors."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "For fixed n,Y,t,1.1 uses continuity of the closed-interval derivative and an integrable kernel majorant, including s=0,1. Step4.1 proves convergence uniformly over that same whole compact interval, hence retains both endpoint coefficients."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 4.1 carries Countable Choice for the completion and finite-range dynamics suppliers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a construction, bound, identity, or counterexample rather than an if-and-only-if claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/qsm_boundary (scientific owner; no independent acceptance)",
+            "reason": "Local conditional expectations split the filtered derivative into rapidly decaying shells; finite-range counting yields uniform interaction bounds and coefficient limits. The statement asserts this construction under a uniform gap, not a converse characterization of gapped paths.",
+            "item_sha256": "c8a3a061cedd45e26d388b1ead29ee18a4d9f03ec3bf91afd791a8244474aa3d",
+            "row_sha256": "748da61e0470ef5b1fabce5f31a30d166a9e9c9329cf97223b5e8a01e807870c"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a construction, bound, identity, or counterexample rather than an if-and-only-if claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/qsm_boundary (scientific owner; no independent acceptance)",
+            "reason": "Local conditional expectations split the filtered derivative into rapidly decaying shells; finite-range counting yields uniform interaction bounds and coefficient limits. The statement asserts this construction under a uniform gap, not a converse characterization of gapped paths.",
+            "item_sha256": "c8a3a061cedd45e26d388b1ead29ee18a4d9f03ec3bf91afd791a8244474aa3d",
+            "row_sha256": "409a84ed5df12b861621ef24a6e4ebddda706ebb62026aeb5ece79fe4b574690"
+          }
+        }
+      ]
+    },
+    "thm-qsmx-gapped-spectral-flow": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qsmx-summable-interaction-norm",
+          "source_section": "Definition",
+          "quote": "Fix $d\\ge1$, the site set $\\Gamma=\\mathbb Z^d$, its max-coordinate metric $d_\\infty$, and the local spin algebras $\\mathcal A_\\Lambda$ of the uniformly finite-dimensional spin system. A finite interaction is a family $\\Phi(Z)=\\Phi(Z)^*\\in\\mathcal A_Z$ indexed by finite nonempty $Z\\subset\\Gamma$. For a finite $\\Lambda\\subset\\Gamma$, define\n\n$$H_\\Lambda^\\Phi:=\\sum_{\\varnothing\\ne Z\\subseteq\\Lambda}\\Phi(Z),\\qquad \\tau_t^{\\Lambda,\\Phi}(A):=e^{itH_\\Lambda^\\Phi/\\hbar}Ae^{-itH_\\Lambda^\\Phi/\\hbar},$$\n\nwhere $\\hbar>0$, $A$ is embedded in a common finite local algebra, and the finite sum is a self-adjoint matrix. When a path $\\Phi_s$, $s\\in[0,1]$, is used, each $\\Phi_s(Z)$ is $C^1$ in matrix norm and the derivative is taken term by term.\n\nFor $r\\ge0$ put $F(r)=(1+r)^{-d-1}$. The admissible weights used here are\n\n$$F_a(r):=e^{-ar}F(r)\\quad(a>0),\\qquad F_\\rho(r):=(1+r)^{-\\rho}\\quad(\\rho>d).$$\n\nFor an admissible weight $G$, define the weighted interaction norm\n\n$$\\|\\Phi\\|_G:=\\sup_{x,y\\in\\Gamma}\\frac{1}{G(d_\\infty(x,y))} \\sum_{\\substack{Z\\subset\\Gamma\\ {\\rm finite,\\ nonempty}\\\\x,y\\in Z}}\\|\\Phi(Z)\\|.$$\n\nThe derivative norm of a path is\n\n$$\\|\\partial\\Phi\\|_G:=\\sup_{s\\in[0,1]}\\sup_{x,y\\in\\Gamma} \\frac{1}{G(d_\\infty(x,y))} \\sum_{Z\\ni x,y}|Z|\\,\\|\\partial_s\\Phi_s(Z)\\|.$$\n\nA finite-volume spectral band is a nonempty selected subset $\\Sigma_\\Lambda(s)\\subseteq\\sigma(H_\\Lambda^{\\Phi_s})$ together with the orthogonal projection onto the sum of its eigenspaces. It may be specified by an interval $I_\\Lambda(s)$ with smoothly varying endpoints, in which case $\\Sigma_\\Lambda(s)=\\sigma(H_\\Lambda^{\\Phi_s})\\cap I_\\Lambda(s)$. The band is uniformly isolated with gap $\\gamma>0$ along a specified finite-volume exhaustion when\n\n$$\\operatorname{dist}\\!\\left(\\Sigma_\\Lambda(s),\\sigma(H_\\Lambda^{\\Phi_s})\\setminus\\Sigma_\\Lambda(s)\\right)\\ge\\gamma$$\n\nfor every volume in that exhaustion and every $s\\in[0,1]$. For spectral-flow arguments, the selected eigenvalues must also form a locally fixed spectral cluster: for each $s_0$, a contour in the resolvent set encloses exactly the selected eigenvalues for all $s$ in a neighborhood of $s_0$. In finite dimension this implies that its projection is $C^1$ when the Hamiltonian path is $C^1$. This cluster condition holds, for example, for the first $r_\\Lambda$ eigenvalues counted with multiplicity when the integer $r_\\Lambda$ is fixed along the path and the gap after them stays open. Uniform distance between the selected and unselected spectra alone does not prevent an interval from changing membership discontinuously. A ground band is such a band containing the lowest eigenvalue or a finite-volume cluster of lowest eigenvalues; no uniqueness is implicit.\n\nFor physical units, take interaction terms and Hamiltonians in joules, time in seconds, and $\\hbar$ in joule-seconds. The path parameter $s$, lattice distance, and admissible weights are dimensionless; the interaction norm therefore has energy units and the derivative norm has energy units per dimensionless path parameter.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qsmx-filtered-spectral-generator",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $H_\\Lambda(s)$ be the finite-volume self-adjoint matrix of a $C^1$ interaction path on the dimensionless parameter $s\\in[0,1]$, and let the selected spectral band be a locally fixed spectral cluster, separated from its complement by $\\gamma>0$ uniformly in $s$, in the sense of the interaction definition. Choose a positive reference energy $E_0$ and measure physical energies in units of $E_0$; $H_\\Lambda$, $H'_\\Lambda$, and $\\gamma$ in this statement are dimensionless, and the Fourier evolution uses $\\hbar=1$. Let $P_\\Lambda(s)$ be the orthogonal spectral projection onto that band. Then $P_\\Lambda$ is $C^1$. There is a real, odd, integrable function $W_\\gamma\\in L^1(\\mathbb R)$, with Fourier convention\n\n$$\\widehat W_\\gamma(\\omega):=\\int_{\\mathbb R}W_\\gamma(t)e^{it\\omega}\\,dt,$$\n\nsuch that $\\widehat W_\\gamma(\\omega)=i/\\omega$ whenever $|\\omega|\\ge\\gamma$, and for every integer $N\\ge0$ there is $c_N<\\infty$ with\n\n$$\\int_{|t|>T}|W_\\gamma(t)|\\,dt\\le c_N(1+T)^{-N}\\qquad(T\\ge0).$$\n\nThe finite matrix\n\n$$D_\\Lambda(s):=\\int_{\\mathbb R}W_\\gamma(t)e^{itH_\\Lambda(s)} H_\\Lambda'(s)e^{-itH_\\Lambda(s)}\\,dt$$\n\nis self-adjoint and satisfies\n\n$$P_\\Lambda'(s)=i[D_\\Lambda(s),P_\\Lambda(s)].$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qsmx-filtered-generator-locality",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and the finite-matrix $C^*$-identity for the local spin algebras. Let $\\Phi_s$, $s\\in[0,1]$, be a $C^1$ finite-range interaction path on $\\mathbb Z^d$, with uniform range, support-cardinality, weighted interaction norm, and weighted derivative norm as in the interaction definition. Assume the selected finite-volume bands along a fixed increasing exhaustion $\\Lambda_n\\uparrow\\mathbb Z^d$ are locally fixed spectral clusters with uniform gap $\\gamma>0$. Let\n\n$$D_{\\Lambda_n}(s)=\\int_{\\mathbb R}W_\\gamma(t)\\, \\tau_t^{\\Lambda_n,\\Phi_s}\\!\\left(H'_{\\Lambda_n}(s)\\right)\\,dt,$$\n\nwhere energies are dimensionless ($\\hbar=1$) and $W_\\gamma$ and the filtered derivative are as in the finite-volume spectral-generator lemma. For every $\\rho>d$, there are self-adjoint local interactions $\\Psi_{\\Lambda_n}(Z,s)$, supported in $Z\\subseteq\\Lambda_n$, such that\n\n$$D_{\\Lambda_n}(s)=\\sum_{Z\\subseteq\\Lambda_n}\\Psi_{\\Lambda_n}(Z,s),\\qquad \\sup_n\\sup_{s\\in[0,1]}\\|\\Psi_{\\Lambda_n}(s)\\|_{F_\\rho}<\\infty.$$\n\nFor every fixed finite $Z\\subset\\mathbb Z^d$, the coefficient $\\Psi_{\\Lambda_n}(Z,s)$, set to zero when $Z\\not\\subseteq\\Lambda_n$, converges in norm uniformly in $s$ to a self-adjoint $\\Psi_\\infty(Z,s)$. The limiting interaction has finite $F_\\rho$-norm for every $\\rho>d$.\n\nFor every finite $\\Lambda_n$ and support $Z\\subseteq\\Lambda_n$, the coefficient $s\\mapsto\\Psi_{\\Lambda_n}(Z,s)$ is norm-continuous.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-qsmx-weighted-lieb-robinson",
+          "source_section": "Statement",
+          "quote": "Let $G$ be either $F_a$, $a>0$, or $F_\\rho$, $\\rho>d$, as in the weighted-interaction definition. Let $\\Phi_u$ be a norm-continuous family of finite interactions on $\\mathbb Z^d$, indexed by $u\\in[0,T]$, with $M_G:=\\sup_{u\\in[0,T]}\\|\\Phi_u\\|_G<\\infty$. For finite $\\Lambda\\subset\\mathbb Z^d$, define $H_\\Lambda(u)=\\sum_{\\varnothing\\ne Z\\subseteq\\Lambda}\\Phi_u(Z)$ and let $U_\\Lambda(0)=I$ solve\n\n$$\\frac{d}{du}U_\\Lambda(u)=-iH_\\Lambda(u)U_\\Lambda(u)/\\hbar.$$\n\nSet $\\alpha_u^\\Lambda(A)=U_\\Lambda(u)^* A U_\\Lambda(u)$, extended by the identity outside $\\Lambda$. If $A\\in\\mathcal A_X$, $B\\in\\mathcal A_Y$ for disjoint finite nonempty $X,Y\\subset\\Lambda$, then\n\n$$\\|[\\alpha_u^\\Lambda(A),B]\\|\\le \\frac{2\\|A\\|\\|B\\|}{C_G} \\left(e^{2C_GM_Gu/\\hbar}-1\\right) \\sum_{x\\in X,\\,y\\in Y}G(d_\\infty(x,y)).$$\n\nThe same estimate holds for the inverse path. In particular, for a constant interaction $\\Phi$ evolved in physical time $t$ by $\\tau_t^{\\Lambda,\\Phi}$, take $u=|t|$ and the constant path $\\Phi_u=\\Phi$ to obtain\n\n$$\\|[\\tau_t^{\\Lambda,\\Phi}(A),B]\\|\\le \\frac{2\\|A\\|\\|B\\|}{C_G} \\left(e^{2C_G\\|\\Phi\\|_G|t|/\\hbar}-1\\right) \\sum_{x\\in X,\\,y\\in Y}G(d_\\infty(x,y)).$$\n\nIn physical units, $u,T,t$ are times, $M_G$ and $\\|\\Phi\\|_G$ have energy units, and $\\hbar$ has energy-times-time units; the weights and convolution constants are dimensionless, so the exponential arguments are dimensionless.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qsmx-local-conditional-expectation",
+          "source_section": "Definition",
+          "quote": "Let $X,Y\\subset\\mathbb Z^d$ be finite regions and $A\\in\\mathcal A_Y$. Embed $A$ in $\\mathcal A_{X\\cup Y}$, use the canonical site-order permutation to group factors in $X\\cap Y$ and $Y\\setminus X$, and apply the normalized trace on the omitted factors:\n\n$$E_X(A):=\\bigl(\\operatorname{id}_{\\mathcal A_{X\\cap Y}}\\otimes \\tau_{Y\\setminus X}\\bigr)(A)\\otimes I_{X\\setminus Y}\\in\\mathcal A_X,\\qquad \\tau_D:=q^{-|D|}\\operatorname{Tr}_D.$$\n\nThe empty tensor factor has normalized trace $1$. Since $\\tau_D(I_D)=1$, adding an identity factor does not change the result, so this formula consistently defines $E_X$ on the directed union $\\mathcal A_{\\mathrm{loc}}$. This definition alone asserts no norm extension to its completion.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-qsmx-local-expectation-locality",
+          "source_section": "Statement",
+          "quote": "For every finite $X\\subset\\mathbb Z^d$, the map $E_X$ of the normalized-trace-expectation definition is a unital positive contraction on $\\mathcal A_{\\mathrm{loc}}$ and has a unique contractive extension $E_X:\\mathcal A\\to\\mathcal A_X$. For $B\\in\\mathcal A_Y$, $Y$ finite,\n\n$$\\|B-E_X(B)\\|\\le \\sum_{z\\in Y\\setminus X}\\ \\sup_{\\substack{V\\in\\mathcal A_{\\{z\\}}\\\\V^*V=VV^*=I}} \\|[B,V]\\|.$$",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-qsm-quasilocal-spin-algebra",
+          "source_section": "Definition",
+          "quote": "Use the finite local matrix algebras and isometric factor inclusions of [[def-qsm-local-spin-algebras]] and [[lem-qsm-local-spin-inclusions-isometric]]. Identify $A\\in\\mathcal A_\\Lambda$ with its image in every larger finite-region algebra. The directed union\n\n$$\\mathcal A_{\\mathrm{loc}}:=\\bigcup_{\\Lambda\\subseteq\\Gamma,\\ |\\Lambda|<\\infty}\\mathcal A_\\Lambda$$\n\nis the algebra of **strictly local observables**. Its norm is $\\|A\\|=\\|A\\|_{\\mathcal A_\\Lambda}$ for any finite localization region $\\Lambda$ of $A$; isometric inclusions make this independent of the chosen region. The **quasi-local spin algebra** is the norm completion\n\n$$\\mathcal A:=\\overline{\\mathcal A_{\\mathrm{loc}}}^{\\,\\|\\cdot\\|}.$$\n\nThe C*-algebra structure on this completion has product and adjoint extended continuously from the finite local matrix algebras. Countable Choice is assumed for the published existence theorem for metric completions; [[lem-qsm-quasilocal-completion]] supplies the full extension argument using the finite C*-identity of [[lem-qsm-finite-matrix-cstar-and-state-duality]].\n\n**No global Hilbert tensor product is selected.** “Quasi-local” means norm completion of the directed algebra of finite-region observables; it does not mean a chosen representation as operators on an infinite tensor-product Hilbert space. A local operator $A\\in\\mathcal A_\\Lambda$ may have more than one localization region. Disjoint finite local factors commute in their common finite tensor algebra.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-qsm-local-spin-inclusions-isometric",
+          "source_section": "Statement",
+          "quote": "Fix $d\\ge1$, $q\\ge1$, and finite regions $\\Lambda\\subseteq\\Lambda'\\subseteq\\mathbb Z^d$ as in [[def-qsm-local-spin-algebras]]. Then the factor inclusion $\\iota_{\\Lambda,\\Lambda'}(T)=T\\otimes I$ is an isometric unital $*$-homomorphism:\n\n$$\\|\\iota_{\\Lambda,\\Lambda'}(T)\\|=\\|T\\|\\qquad(T\\in\\mathcal A_\\Lambda).$$\n\nFor nested finite regions $\\Lambda\\subseteq\\Lambda'\\subseteq\\Lambda''$, the inclusions compose: $\\iota_{\\Lambda',\\Lambda''}\\circ\\iota_{\\Lambda,\\Lambda'}=\\iota_{\\Lambda,\\Lambda''}$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-qsm-quasilocal-completion",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice ([[def-countable-choice]]) for the Cauchy-sequence completion. For the local spin system of [[def-qsm-local-spin-algebras]], the normed $*$-algebra $\\mathcal A_{\\mathrm{loc}}$ and its completion $\\mathcal A$ of [[def-qsm-quasilocal-spin-algebra]] are well defined; $\\mathcal A$ is a unital complex C*-algebra and $\\mathcal A_{\\mathrm{loc}}$ is norm dense in it. If $A\\in\\mathcal A_\\Lambda$ and $B\\in\\mathcal A_\\Delta$ for disjoint finite regions $\\Lambda,\\Delta$, then $AB=BA$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-qsm-finite-matrix-cstar-and-state-duality",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space, $D=\\dim H\\ge1$, with inner product linear in its first argument. With composition, Hilbert adjoint, identity and the induced operator norm, $\\mathcal B(H)$ is a nonzero unital complex C*-algebra in the sense of [[def-c-star-algebra]]. In particular it is complete, $\\|AB\\|\\le\\|A\\|\\|B\\|$, $\\|A^*A\\|=\\|A\\|^2$, $\\|A^*\\|=\\|A\\|$ and $\\|I\\|=1$. The matrix $\\|A\\|^2I-A^*A$ is positive semidefinite and has a positive square root in $\\mathcal B(H)$.\n\nEvery complex-linear functional $\\omega:\\mathcal B(H)\\to\\mathbb C$ that is positive, meaning $\\omega(B^*B)\\ge0$ for all $B$, has a unique positive semidefinite matrix $\\rho$ such that $\\omega(A)=\\operatorname{Tr}(\\rho A)$ for all $A$. It is bounded and satisfies\n\n$$|\\omega(A)|\\le\\operatorname{Tr}(\\rho)\\|A\\|\\quad(A\\in\\mathcal B(H)),\\qquad \\|\\omega\\|=\\operatorname{Tr}(\\rho)=\\omega(I).$$\n\nConsequently the canonical states of [[def-state-on-a-c-star-algebra]] are exactly the trace pairings of density operators of [[def-qc-density-operator]]; for a positive functional, normalization $\\omega(I)=1$ is equivalent to norm one. The result includes zero positive functionals, nonfaithful densities and $D=1$; it makes no infinite-dimensional density representation assertion.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-qsm-spin-state-compactness",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice ([[def-countable-choice]]) for the countable union of finite regions and the finite-dimensional state/density interface explicitly stated in Facts [F3]. Let $\\Gamma=\\mathbb Z^d$, $d\\ge1$, and $q\\ge1$ be as in [[def-qsm-local-spin-algebras]]. For every sequence of algebraic states $\\omega_n$ on the quasi-local spin algebra $\\mathcal A$, there is a subsequence $\\omega_{n_k}$ and an algebraic state $\\omega$ such that $\\omega_{n_k}(A)\\to\\omega(A)$ for every $A\\in\\mathcal A$. Thus the state space is sequentially compact in the pointwise topology, meaning convergence on every fixed observable. The conclusion concerns functional values; it does not assert convergence of global density matrices or a global trace-class representation.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-qsm-matrix-state-calculus",
+          "source_section": "Statement",
+          "quote": "Use the following conventions on a complex inner-product space $H$ of dimension $D\\geq1$, with inner product linear in its first argument. For an endomorphism $A$, define $\\operatorname{Tr}A:=\\sum_{j=1}^D\\langle Ae_j,e_j\\rangle$ in an orthonormal basis; step 3.1 proves basis independence. For any Hermitian $M$, its **positive spectral subspace** (called its positive support here) is $S_M:=\\bigoplus_{\\lambda>0}\\ker(M-\\lambda I)$; when $M\\geq0$ this equals $(\\ker M)^\\perp$. Its support logarithm is $\\log(M|_{S_M}):=\\sum_{\\lambda>0}(\\log\\lambda)P_\\lambda|_{S_M}$, where $P_\\lambda$ is the orthogonal projection onto that eigenspace. No value $\\log0$ is assigned; for $M=0$ this is the unique endomorphism of the zero space. For the set $\\mathcal D(H)$ of positive semidefinite Hermitian endomorphisms with trace one, a point $\\rho$ is **extreme** if every equality $\\rho=t\\sigma+(1-t)\\tau$ with $\\sigma,\\tau\\in\\mathcal D(H)$ and $0<t<1$ implies $\\sigma=\\tau=\\rho$.\n\nLet $H$ be a complex inner-product space of finite dimension $D\\geq1$, with inner product linear in its first argument. Every Hermitian endomorphism $M$ has an orthonormal eigenbasis with real eigenvalues. For a real function $f$ on its finite spectrum, define $f(M)$ by its spectral projections; this definition is independent of the choice of eigenbasis. In particular positive square roots, exponentials, and logarithms on positive supports are well defined.\n\nFor a density matrix $\\rho$ on $H$, meaning a Hermitian positive semidefinite operator with $\\operatorname{Tr}\\rho=1$, $\\operatorname{Tr}(\\rho A)=\\sum_jp_j\\langle Au_j,u_j\\rangle$ for bounded $A$, where $\\rho=\\sum_jp_j|u_j\\rangle\\langle u_j|$. The weighted form $(X,Y)_\\rho=\\operatorname{Tr}(\\rho X^*Y)$ satisfies Cauchy–Schwarz, $|(X,Y)_\\rho|^2\\leq(X,X)_\\rho(Y,Y)_\\rho$. Finally, $\\operatorname{Tr}(\\rho^2)\\leq1$, with equality exactly for rank-one densities, and those are exactly the extreme points of the finite density-matrix set.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-qsm-infinite-algebraic-state",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal A$ be the unital quasi-local spin C*-algebra of [[def-qsm-quasilocal-spin-algebra]], whose C*-structure uses Countable Choice as in [[lem-qsm-quasilocal-completion]]. An **infinite algebraic state** is a bounded complex-linear functional $\\omega:\\mathcal A\\to\\mathbb C$ satisfying $\\omega(I)=1$ and $\\omega(A^*A)\\ge0$ for every $A\\in\\mathcal A$.\n\nFor each finite region $\\Lambda\\subseteq\\mathbb Z^d$, the restriction $\\omega|_{\\mathcal A_\\Lambda}$ is a finite-matrix state. By [[lem-qsm-finite-matrix-cstar-and-state-duality]], every positive normalized functional on a finite matrix algebra is represented by a unique density matrix. Define its **local density matrix** $\\rho_\\Lambda$ by\n\n$$\\omega(A)=\\operatorname{Tr}_{\\Lambda}(\\rho_\\Lambda A)\\qquad(A\\in\\mathcal A_\\Lambda),$$\n\nwhere $\\rho_\\Lambda=\\rho_\\Lambda^*\\ge0$ and $\\operatorname{Tr}_{\\Lambda}\\rho_\\Lambda=1$. For $\\Lambda\\subseteq\\Lambda'$, put $\\Delta=\\Lambda'\\setminus\\Lambda$ and use the configuration-basis factorization $\\mathcal H_{\\Lambda'}\\cong\\mathcal H_\\Lambda\\otimes\\mathcal H_\\Delta$ of [[def-qsm-local-spin-algebras]]. If $T\\in\\mathcal A_{\\Lambda'}$, define its **partial trace over $\\Delta$**, $\\operatorname{Tr}_\\Delta(T)\\in\\mathcal A_\\Lambda$, by its matrix coefficients\n\n$$\\langle \\operatorname{Tr}_\\Delta(T)e_s,e_{s'}\\rangle:=\\sum_{t\\in S_\\Delta}\\langle T(e_s\\otimes e_t),e_{s'}\\otimes e_t\\rangle\\qquad(s,s'\\in S_\\Lambda),$$\n\nwhere $e_s$ and $e_t$ are the configuration basis vectors of $\\mathcal H_\\Lambda$ and $\\mathcal H_\\Delta$. The finite sums depend linearly on $T$, so they define a linear map $\\mathcal A_{\\Lambda'}\\to\\mathcal A_\\Lambda$ with a unique output matrix for each $T$. Expanding both configuration-basis traces gives its pairing identity\n\n$$\\operatorname{Tr}_\\Lambda\\!\\left(A\\operatorname{Tr}_\\Delta(T)\\right)=\\operatorname{Tr}_{\\Lambda'}\\!\\left((A\\otimes I_\\Delta)T\\right)\\qquad(A\\in\\mathcal A_\\Lambda),$$\n\nwith the common value given by\n\n$$\\sum_{s,s'\\in S_\\Lambda}\\sum_{t\\in S_\\Delta}\\langle A e_{s'},e_s\\rangle\\langle T(e_s\\otimes e_t),e_{s'}\\otimes e_t\\rangle.$$\n\nThe pairing identity determines this matrix uniquely: if $D\\in\\mathcal A_\\Lambda$ pairs to zero with every $A$, taking the configuration-basis matrix units $A=E_{ji}$ gives $\\operatorname{Tr}_\\Lambda(E_{ji}D)=\\langle D e_j,e_i\\rangle=0$ for every $i,j$, so $D=0$. The local densities are **consistent** when $\\operatorname{Tr}_{\\Lambda'\\setminus\\Lambda}(\\rho_{\\Lambda'})=\\rho_\\Lambda$. No density operator on a globally chosen Hilbert space is part of this definition.\n\nThis agrees with the canonical state convention of [[def-state-on-a-c-star-algebra]]: the finite restrictions have norm one by [[lem-qsm-finite-matrix-cstar-and-state-duality]], giving $|\\omega(A)|\\le\\|A\\|$ on the dense local algebra and hence on its completion; evaluation at the norm-one identity gives $\\|\\omega\\|=1$. Conversely a canonical state has local restrictions with density matrices of trace one, since the finite norm formula and continuity on the dense local algebra imply $\\|\\omega\\|=\\omega(I)$. No global density representation is asserted.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each $n$, [F2] gives a norm-continuous self-adjoint $D_n(s)$. The finite-dimensional matrix ODE $U_n'=iD_nU_n$, $U_n(0)=I$, has a solution by its uniformly convergent Picard series; differentiating $U_n^*U_n$ gives $U_n^*U_n=I$. Differentiate $Q_n(s):=U_n(s)^*P_n(s)U_n(s)$. Since $U_n'=iD_nU_n$, $U_n^{*'}=-iU_n^*D_n$, and $P_n'=i[D_n,P_n]$, the three terms in $Q_n'$ cancel. Hence $Q_n(s)=P_n(0)$, or $P_n(s)=U_n(s)P_n(0)U_n(s)^*$. If $\\rho_0$ is a finite-volume band density at $s=0$, then $U_n\\rho_0U_n^*$ is a band density at $s$. The normalized-trace expectation satisfies $E_{\\Lambda_n}(U_n^*AU_n)=U_n^*E_{\\Lambda_n}(A)U_n$, first on finite tensor products and then by continuity. Cyclicity [F9] therefore gives $\\omega^\\Lambda_{\\rho_0}\\circ\\alpha_{n,s}=\\omega^\\Lambda_{U_n\\rho_0U_n^*}$. The density/state correspondence [F7, F10] makes both extensions states on $\\mathcal A$. Reversing $U_n$ proves equality of the finite-volume state sets in both directions.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F5",
+            "F7",
+            "F9",
+            "F10",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By [F3], the generator interactions $\\Psi_{\\Lambda_n}$ have a common $F_\\rho$-norm bound $K_\\rho$ for every $\\rho>d$. The path $U_n'=iD_nU_n$ is the Heisenberg flow of the interaction $-\\Psi_{\\Lambda_n}$ with $\\hbar=1$; its inverse is the reversed path with the same norm bound.",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fix a local $A\\in\\mathcal A_X$. For a finite ball $B_R\\supset X$, let $\\alpha_{n,s}^{(R)}$ be the flow generated by the restriction of $-\\Psi_{\\Lambda_n}$ to supports $Z\\subseteq B_R$. For two finite-volume propagators $U_J,U_K$, set $F(u)=\\alpha^J_{u,0}(\\alpha^K_{s,u}(A))$. The composition rule gives $F(0)=\\alpha^K_{s,0}(A)$ and $F(s)=\\alpha^J_{s,0}(A)$. The endpoint evolution equations are $\\partial_u\\alpha^J_{u,0}(B)=i\\alpha^J_{u,0}([J(u),B])$ and $\\partial_u\\alpha^K_{s,u}(A)=-i[K(u),\\alpha^K_{s,u}(A)]$. Product differentiation and integration therefore give $\\alpha^J_{s,0}(A)-\\alpha^K_{s,0}(A) =i\\int_0^s \\alpha^J_{u,0}\\!\\left([J(u)-K(u),\\alpha^K_{s,u}(A)]\\right)\\,du.$ Apply this with $J=-\\Psi_{\\Lambda_n}$ and $K=J|_{Z\\subseteq B_R}$. In the Duhamel integrand, the removed terms are exactly those $\\Psi_{\\Lambda_n}(Z,u)$ with $Z\\not\\subseteq B_R$. For terms with $Z\\cap X=\\varnothing$, the initial supports are disjoint, so [F4] gives the commutator estimate. Their total contribution is at most $L_\\rho\\|A\\|K_\\rho\\sum_{x\\in X}\\sum_{y\\in\\mathbb Z^d} F_\\rho(d_\\infty(x,y))\\sum_{z\\notin B_R}F_\\rho(d_\\infty(y,z)),$ where $L_\\rho=2C_{F_\\rho}^{-1}(e^{2C_{F_\\rho}K_\\rho}-1)$ is the uniform commutator coefficient from [F4]. For each removed support choose an outside site $z\\in Z\\setminus B_R$, sum over $y\\in Z$, and use $\\sum_{Z\\ni y,z}\\|\\Psi_{\\Lambda_n}(Z,u)\\|\\le K_\\rho F_\\rho(d_\\infty(y,z))$. The displayed tail tends to zero by dominated convergence: for fixed $y$, the inner tail tends to zero and is bounded by the full finite lattice sum of $F_\\rho$, while the outer sum is finite by [F3]. If $Z\\cap X\\ne\\varnothing$, the disjoint-support hypothesis of [F4] is unavailable, so use $\\|[\\alpha^K_{s,u}(A),\\Psi_{\\Lambda_n}(Z,u)]\\|\\le2\\|A\\|\\|\\Psi_{\\Lambda_n}(Z,u)\\|$. Summing over $x\\in Z\\cap X$ and $z\\in Z\\setminus B_R$ bounds this contribution by $2\\|A\\|K_\\rho\\sum_{x\\in X}\\sum_{z\\notin B_R}F_\\rho(d_\\infty(x,z)),$ which also tends to zero by summability. Thus the full-flow versus restricted-flow error tends to zero uniformly in $n,s$. For fixed $R$, only finitely many $Z\\subseteq B_R$ occur. By [F3], their generator coefficients converge uniformly in $s$; the finite-dimensional Duhamel bound makes $\\alpha_{n,s}^{(R)}(A)$ uniformly Cauchy. Combining this local convergence with the uniform tail shows $\\alpha_{n,s}(A)$ is uniformly Cauchy as $n\\to\\infty$. Applying the same argument to the inverse paths gives a uniform pointwise limit for $\\alpha_{n,s}^{-1}$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Each $\\alpha_{n,s}$ and inverse preserves the norm and the $C^*$-operations. Their uniform limits on the dense local algebra extend by isometry to $\\mathcal A$; continuity of multiplication and adjoint passes the $C^*$-operations to the limits. Taking limits in the two composition identities on local observables shows that the two limits are inverses. Thus $\\alpha_s$ is an automorphism, norm-continuous in $s$ on each local observable. Taking limits in [F4] gives the stated $F_\\rho$ commutator bound, with $K_\\rho$ from [F3].",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F3",
+            "F4",
+            "F6",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For every $n$, the normalized projection $P_n(s)/\\operatorname{Tr}P_n(s)$ is a band density, since the band is nonempty. [F5, F7, F10] extend its trace pairing to a state on $\\mathcal A$, and [F8] gives at least one subsequential limit; hence each $\\mathcal S(s)$ is nonempty. Let $\\omega_0\\in\\mathcal S(0)$, witnessed by band states $\\omega_k^0$ along a subsequence $n_k$. Step 1.1 gives $\\omega_k^s=\\omega_k^0\\circ\\alpha_{n_k,s}\\in\\mathcal S_{\\Lambda_{n_k}}(s)$. For local $A$, $|\\omega_k^s(A)-(\\omega_0\\circ\\alpha_s)(A)| \\le\\|\\alpha_{n_k,s}(A)-\\alpha_s(A)\\| +|\\omega_k^0(\\alpha_s(A))-\\omega_0(\\alpha_s(A))|,$ which tends to zero by pointwise convergence of the states and uniform norm convergence of the automorphisms. Density and the state norm-one bounds extend convergence to all $A\\in\\mathcal A$. Thus $\\omega_0\\circ\\alpha_s\\in\\mathcal S(s)$. Conversely, for any $\\omega_s\\in\\mathcal S(s)$, use the inverse finite-volume transport in step 1.1 and the convergent inverse flows from step 2.1 to obtain $\\omega_s\\circ\\alpha_s^{-1}\\in\\mathcal S(0)$. Both inclusions prove the asserted set equality.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F5",
+            "F7",
+            "F8",
+            "F10",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Each selected band has rank at least one and smaller than the ambient dimension. The shell decomposition may contain no nonzero terms, in which case1.1 gives D=0 and U=I. Step4.1 constructs a normalized projection state, so the limiting band-state set is demonstrably nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "When the filtered generator vanishes, the Picard solution in1.1 is U=I and transport is identity. Zero local observables also have zero commutator and zero Duhamel errors in2.1; no inverse generator norm is used."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The selected rank r_n may equal one, so1.1 transports a one-dimensional band projection and4.1 uses its trace-one normalized density. Singleton supports and d=1 also satisfy the same lattice tail estimates2.1; no spectral multiplicity lower bound is imposed."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement permits degeneracy inside the fixed-rank band, and step 1.1 transports the full spectral projection."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The ODE starts at U_n(0)=I and has a continuous generator up to s=1. The uniform-in-s estimates2.1 and coefficient convergence from F3 pass the full closed interval to the limit;4.1 therefore transports the band-state sets at s=0 and s=1 as well."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 3.1 and 4.1 carry Countable Choice for completion and state compactness."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a construction, bound, identity, or counterexample rather than an if-and-only-if claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/qsm_boundary (scientific owner; no independent acceptance)",
+            "reason": "Finite filtered unitaries transport band projections; summable interaction tails give limiting automorphisms and transport limiting state sets. The set equality is proved by forward and inverse transport, not a logical equivalence of distinct hypothesis packages.",
+            "item_sha256": "78c29fc6b9f5280b946b7e2e4166b0d67afde8e03fba15173627b61b93e12566",
+            "row_sha256": "748da61e0470ef5b1fabce5f31a30d166a9e9c9329cf97223b5e8a01e807870c"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a construction, bound, identity, or counterexample rather than an if-and-only-if claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/qsm_boundary (scientific owner; no independent acceptance)",
+            "reason": "Finite filtered unitaries transport band projections; summable interaction tails give limiting automorphisms and transport limiting state sets. The set equality is proved by forward and inverse transport, not a logical equivalence of distinct hypothesis packages.",
+            "item_sha256": "78c29fc6b9f5280b946b7e2e4166b0d67afde8e03fba15173627b61b93e12566",
+            "row_sha256": "409a84ed5df12b861621ef24a6e4ebddda706ebb62026aeb5ece79fe4b574690"
+          }
+        }
+      ]
+    },
+    "cex-qsmx-gap-not-automatic": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qsmx-summable-interaction-norm",
+          "source_section": "Definition",
+          "quote": "Fix $d\\ge1$, the site set $\\Gamma=\\mathbb Z^d$, its max-coordinate metric $d_\\infty$, and the local spin algebras $\\mathcal A_\\Lambda$ of the uniformly finite-dimensional spin system. A finite interaction is a family $\\Phi(Z)=\\Phi(Z)^*\\in\\mathcal A_Z$ indexed by finite nonempty $Z\\subset\\Gamma$. For a finite $\\Lambda\\subset\\Gamma$, define\n\n$$H_\\Lambda^\\Phi:=\\sum_{\\varnothing\\ne Z\\subseteq\\Lambda}\\Phi(Z),\\qquad \\tau_t^{\\Lambda,\\Phi}(A):=e^{itH_\\Lambda^\\Phi/\\hbar}Ae^{-itH_\\Lambda^\\Phi/\\hbar},$$\n\nwhere $\\hbar>0$, $A$ is embedded in a common finite local algebra, and the finite sum is a self-adjoint matrix. When a path $\\Phi_s$, $s\\in[0,1]$, is used, each $\\Phi_s(Z)$ is $C^1$ in matrix norm and the derivative is taken term by term.\n\nFor $r\\ge0$ put $F(r)=(1+r)^{-d-1}$. The admissible weights used here are\n\n$$F_a(r):=e^{-ar}F(r)\\quad(a>0),\\qquad F_\\rho(r):=(1+r)^{-\\rho}\\quad(\\rho>d).$$\n\nFor an admissible weight $G$, define the weighted interaction norm\n\n$$\\|\\Phi\\|_G:=\\sup_{x,y\\in\\Gamma}\\frac{1}{G(d_\\infty(x,y))} \\sum_{\\substack{Z\\subset\\Gamma\\ {\\rm finite,\\ nonempty}\\\\x,y\\in Z}}\\|\\Phi(Z)\\|.$$\n\nThe derivative norm of a path is\n\n$$\\|\\partial\\Phi\\|_G:=\\sup_{s\\in[0,1]}\\sup_{x,y\\in\\Gamma} \\frac{1}{G(d_\\infty(x,y))} \\sum_{Z\\ni x,y}|Z|\\,\\|\\partial_s\\Phi_s(Z)\\|.$$\n\nA finite-volume spectral band is a nonempty selected subset $\\Sigma_\\Lambda(s)\\subseteq\\sigma(H_\\Lambda^{\\Phi_s})$ together with the orthogonal projection onto the sum of its eigenspaces. It may be specified by an interval $I_\\Lambda(s)$ with smoothly varying endpoints, in which case $\\Sigma_\\Lambda(s)=\\sigma(H_\\Lambda^{\\Phi_s})\\cap I_\\Lambda(s)$. The band is uniformly isolated with gap $\\gamma>0$ along a specified finite-volume exhaustion when\n\n$$\\operatorname{dist}\\!\\left(\\Sigma_\\Lambda(s),\\sigma(H_\\Lambda^{\\Phi_s})\\setminus\\Sigma_\\Lambda(s)\\right)\\ge\\gamma$$\n\nfor every volume in that exhaustion and every $s\\in[0,1]$. For spectral-flow arguments, the selected eigenvalues must also form a locally fixed spectral cluster: for each $s_0$, a contour in the resolvent set encloses exactly the selected eigenvalues for all $s$ in a neighborhood of $s_0$. In finite dimension this implies that its projection is $C^1$ when the Hamiltonian path is $C^1$. This cluster condition holds, for example, for the first $r_\\Lambda$ eigenvalues counted with multiplicity when the integer $r_\\Lambda$ is fixed along the path and the gap after them stays open. Uniform distance between the selected and unselected spectra alone does not prevent an interval from changing membership discontinuously. A ground band is such a band containing the lowest eigenvalue or a finite-volume cluster of lowest eigenvalues; no uniqueness is implicit.\n\nFor physical units, take interaction terms and Hamiltonians in joules, time in seconds, and $\\hbar$ in joule-seconds. The path parameter $s$, lattice distance, and admissible weights are dimensionless; the interaction norm therefore has energy units and the derivative norm has energy units per dimensionless path parameter.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The interaction has only one nonzero term, on a singleton support, with coefficient $1-2s$; its derivative is the constant $-2$. The two weighted norms are finite because the support and coefficient are bounded and every admissible weight is positive at distance zero.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The eigenvalues of $H(s)$ are $1-2s$ and $-(1-2s)$. The ground eigenvalue is $-|1-2s|$, the excited eigenvalue is $+|1-2s|$, so the gap is $2|1-2s|$. It is $2$ at each endpoint and $0$ at $s=\\frac12$. The path therefore has gapped endpoints but no uniform positive gap on $[0,1]$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample fixes one spin on a singleton lattice support with Hilbert space C2. The other interaction coefficients are zero, but the counterexample itself is not a family over arbitrary possibly empty supports."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 computes the zero gap at the midpoint."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The model has exactly one active site, as used in1.1. A lattice of dimension d=1 is permitted because the only nonzero interaction is still a singleton and its weighted denominator is its positive distance-zero value."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "At s=one-half the two displayed eigenvalues in2.1 coincide at zero. This is exactly the degeneracy exhibiting failure of a uniform positive gap, while the two endpoint spectra are distinct."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Substitution of s=0 and s=1 into2.1 gives eigenvalues plus/minus one and gap two. The intermediate s=one-half has gap zero; the counterexample therefore explicitly contrasts both closed-interval endpoints with the interior."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "One specified two-by-two diagonal matrix and its two eigenvalues give the entire counterexample. Its singleton interaction and explicit coefficient require no choice of a family of witnesses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a construction, bound, identity, or counterexample rather than an if-and-only-if claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/qsm_boundary (scientific owner; no independent acceptance)",
+            "reason": "The explicit one-spin coefficient changes sign and vanishes at the midpoint, so endpoint gaps fail to imply a uniform path gap. A counterexample to this sufficient-condition claim is not a biconditional assertion.",
+            "item_sha256": "c213343a73207f1456933c580f166249cf56b4e42019786f71e672e2b86a3b0f",
+            "row_sha256": "748da61e0470ef5b1fabce5f31a30d166a9e9c9329cf97223b5e8a01e807870c"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a construction, bound, identity, or counterexample rather than an if-and-only-if claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/qsm_boundary (scientific owner; no independent acceptance)",
+            "reason": "The explicit one-spin coefficient changes sign and vanishes at the midpoint, so endpoint gaps fail to imply a uniform path gap. A counterexample to this sufficient-condition claim is not a biconditional assertion.",
+            "item_sha256": "c213343a73207f1456933c580f166249cf56b4e42019786f71e672e2b86a3b0f",
+            "row_sha256": "409a84ed5df12b861621ef24a6e4ebddda706ebb62026aeb5ece79fe4b574690"
+          }
+        }
+      ]
+    }
+  }
+}

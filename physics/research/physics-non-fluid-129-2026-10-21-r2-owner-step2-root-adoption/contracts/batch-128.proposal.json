@@ -1,0 +1,308 @@
+{
+  "version": 1,
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "batch": "128",
+  "level": 4,
+  "scope": [
+    "post-tgrx-jt-disk-spectral-model",
+    "pthm-tgrx-jt-disk-laplace",
+    "rem-tgrx-jt-completion-notunique"
+  ],
+  "contracts": {
+    "post-tgrx-jt-disk-spectral-model": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [],
+      "finite_checks": [],
+      "physics_review": {
+        "formulation": {
+          "verdict": "pass",
+          "evidence": "The postulate defines its local JT disk model as the continuous density rho_0(E)dE on E>0, states c=hbar=k_B=1 and the dimensions of E, beta, C, and S_0, and defines the genus-zero disk contribution and spectral density used by the item."
+        },
+        "scope": {
+          "verdict": "pass",
+          "evidence": "Only the single disk-level continuous density is adopted. No discrete Hamiltonian, higher-topology contribution, nonperturbative completion, or empirical claim is included."
+        },
+        "sources": {
+          "verdict": "pass",
+          "evidence": "The complete SSS article and Mertens–Turiaci review were inspected at their disk-density and ensemble locators; Sárosi's complete lecture notes were inspected for the Schwarzian disk context and natural-unit convention. Exact source harvest and dispositions are in batch-128.coverage.json and batch-128-sources/source-reading.md."
+        },
+        "non_derivation": {
+          "verdict": "pass",
+          "evidence": "The density is an adopted physical model input. The prior AdS entropy dictionary is a formulation prerequisite only and is expressly not used to derive this density."
+        }
+      },
+      "supplier_excerpts": [
+        {
+          "supplier": "post-tgrx-semiclassical-ads-dictionary",
+          "carrier": "items/post-tgrx-semiclassical-ads-dictionary.md",
+          "status": "Current draft postulate; complete Statement inspected. Current Step 1 readiness record is missing.",
+          "source_section": "Postulate",
+          "exact_statement": "Adopt $$S_{\\partial}^{\\rm model}(A):=\\min_{X\\in\\mathcal Q_A}S_{\\rm gen}^{\\rm ren}[X]$$ as the model's semiclassical boundary-entropy prediction only when $\\mathcal Q_A$ is nonempty, the values are finite, and the minimum is attained.",
+          "relevant_hypotheses_and_conventions": "The prior carrier fixes one restricted asymptotically locally AdS model, a prescribed candidate class, one boundary region, and a fixed scheme. It does not provide the JT density.",
+          "supplier_proof_status": "Adopted draft postulate; no deductive Proof section is required or supplied. The missing Step 1 readiness record remains unresolved; no independent approval is inferred.",
+          "consumer_use": "Formulation context only. The JT disk density is separately adopted in this item and is not derived from the boundary-entropy dictionary."
+        }
+      ]
+    },
+    "pthm-tgrx-jt-disk-laplace": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "post-tgrx-jt-disk-spectral-model",
+          "source_section": "Postulate",
+          "quote": "A **continuous spectral density** here is a nonnegative function $\\rho_0:(0,\\infty)\\to[0,\\infty)$ whose measure $\\rho_0(E)\\,dE$ assigns model spectral weight to energy intervals.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-gaussian-integral",
+          "source_section": "Statement",
+          "quote": "\\int_{-\\infty}^{\\infty}e^{-x^2}\\,dx=\\sqrt\\pi.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-differentiation-under-dominated-improper-multiple-integrals",
+          "source_section": "Statement",
+          "quote": "Let $D\\subseteq\\mathbb R^n$ be open and $I\\subseteq\\mathbb R$ be an open interval. Suppose $f$ and $\\partial_tf$ are continuous on $D\\times I$, one slice $f_{t_*}$ is absolutely improperly integrable, and for every compact interval $C\\subseteq I$ there is a nonnegative improperly integrable $g_C$ with $|\\partial_tf(x,t)|\\le g_C(x)$ for $x\\in D$ and $t\\in C$. Then every slice is absolutely improperly integrable, the function $F(t)=\\int_Df(x,t)\\,dx$ is continuously differentiable, and $$F'(t)=\\int_D\\partial_tf(x,t)\\,dx.$$",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Fix $\\beta>0$ and set $a:=2\\pi\\sqrt{2C}$. Completing the square gives $-\\beta x^2+ax=-\\beta(x-a/(2\\beta))^2+a^2/(4\\beta)$. By scaling and translation in [F1], $\\int_{-\\infty}^{\\infty}e^{-\\beta x^2+ax}\\,dx=e^{a^2/(4\\beta)}\\sqrt{\\pi/\\beta}$. Since $e^{-\\beta x^2}\\cosh(ax)$ is even, the function $F(a):=\\int_0^\\infty e^{-\\beta x^2}\\cosh(ax)\\,dx$ therefore equals $\\frac{\\sqrt\\pi}{2\\sqrt\\beta}e^{a^2/(4\\beta)}$.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "For each compact $J=[-A,A]\\subset\\mathbb R$, $f(x,t):=e^{-\\beta x^2}\\cosh(tx)$ and $\\partial_t f=x e^{-\\beta x^2}\\sinh(tx)$ are continuous on $(0,\\infty)\\times\\mathbb R$. The inequality $A x\\le \\beta x^2/2+A^2/(2\\beta)$ bounds $|\\partial_t f|$ on $J$ by $e^{A^2/(2\\beta)}x e^{-\\beta x^2/2}$, whose integral is $e^{A^2/(2\\beta)}/\\beta<\\infty$; the base slice $f(x,0)=e^{-\\beta x^2}$ is absolutely integrable by [F1] and scaling. Thus [F2] applies and $F'(a)=\\int_0^\\infty x e^{-\\beta x^2}\\sinh(ax)\\,dx$. Differentiating the closed form in step 1.1 yields $F'(a)=a\\sqrt\\pi\\,e^{a^2/(4\\beta)}/(4\\beta^{3/2})$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "In the defining integral for $Z_0$, the substitution $E=x^2$ on finite truncations followed by their limits gives $Z_0(\\beta)=e^{S_0}C\\pi^{-2}\\int_0^\\infty x e^{-\\beta x^2}\\sinh(ax)\\,dx=e^{S_0}C\\pi^{-2}F'(a)$, with $a=2\\pi\\sqrt{2C}$. Substitution of step 2.1 gives the stated formula for $Z_0$. It is finite and strictly positive because $C,\\beta>0$ and the displayed factors are finite and positive.",
+          "inputs": [
+            "given",
+            "A1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "For $f(E,\\beta):=\\rho_0(E)e^{-\\beta E}$ on $(0,\\infty)\\times(0,\\infty)$, both $f$ and $\\partial_\\beta f=-E\\rho_0(E)e^{-\\beta E}$ are continuous. On a compact $J\\subset(0,\\infty)$ let $\\beta_0:=\\min J>0$. Since $\\sinh(a\\sqrt E)\\le e^{a\\sqrt E}/2$ and $a\\sqrt E\\le \\beta_0 E/2+a^2/(2\\beta_0)$, the derivative magnitude is bounded on $J$ by a constant times $E e^{-\\beta_0 E/2}$, which has finite integral; the same estimate without the factor $E$ gives an integrable base slice. Apply [F2] on $(0,\\infty)$ to differentiate $Z_0$: $Z_0'(\\beta)=-\\int_0^\\infty E\\rho_0(E)e^{-\\beta E}\\,dE$. Hence $\\bar E=-\\partial_\\beta\\log Z_0=3/(2\\beta)+2\\pi^2C/\\beta^2$.",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "step": "5.1",
+          "claim": "At fixed $C,S_0$, $T=1/\\beta$ gives $d\\beta/dT=-\\beta^2$, so $C_V/k_B=d\\bar E/dT=-\\beta^2\\partial_\\beta\\bar E=3/2+4\\pi^2C/\\beta$. Since $C>0$ and $\\beta>0$, this coefficient is strictly positive.",
+          "inputs": [
+            "given",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem uses the nonempty continuous energy domain (0,infinity) and has no empty state-space case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "As E decreases to zero, sinh(a sqrt(E)) is O(sqrt(E)); the density therefore has no lower-endpoint divergence, as used in steps 2.1 and 4.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "There is no one-element finite set or counting parameter; the claim is an integral over a continuous positive-energy domain."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "C=0 is excluded by the strict hypothesis C>0; no degenerate-coupling formula is asserted."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The lower endpoint is locally integrable by the square-root behavior in step 4.1; at infinity the Gaussian bounds in steps 2.1 and 4.1 are integrable."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no choice from a family of nonempty sets and uses no form of the axiom of choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The result is a direct integral and derivative calculation, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The result is a direct integral and derivative calculation, not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "exact parameter substitution C=beta=1 and S0=0",
+          "status": "checked",
+          "evidence": "The formulas give Z0=sqrt(2) exp(2 pi^2)/(2 sqrt(pi)), Ebar=3/2+2 pi^2, and C_V/k_B=3/2+4 pi^2; these follow by direct substitution and retain the positive signs."
+        },
+        {
+          "name": "beta rescaling",
+          "status": "checked",
+          "evidence": "Replacing beta by lambda beta and C by lambda C for lambda>0 leaves C/beta and the dimensionless prefactor C^(3/2)/beta^(3/2) unchanged, while Ebar scales by lambda^(-1), consistent with its inverse-time units."
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "post-tgrx-jt-disk-spectral-model",
+          "carrier": "items/post-tgrx-jt-disk-spectral-model.md",
+          "status": "Current assigned draft postulate; full Statement inspected. Its Step 1 readiness remains escalated pending the batch-126 formulation supplier record.",
+          "source_section": "Postulate",
+          "exact_statement": "Adopt $$\\rho_0(E):=e^{S_0}\\frac{C}{2\\pi^2}\\sinh\\!\\left(2\\pi\\sqrt{2CE}\\right),\\qquad E>0.$$",
+          "relevant_hypotheses_and_conventions": "Natural units c=hbar=k_B=1; E>0, beta>0 and C>0; the density is continuous and disk-level only.",
+          "supplier_proof_status": "Adopted postulate with no deductive Proof section; no nature claim or independent acceptance is asserted.",
+          "consumer_use": "Supplies the physical density used as the conditional input in steps 3.1 and 4.1."
+        },
+        {
+          "supplier": "post-tgrx-semiclassical-ads-dictionary",
+          "carrier": "items/post-tgrx-semiclassical-ads-dictionary.md",
+          "status": "Current batch-126 draft postulate; actual Statement inspected. Its Step 1 readiness record is missing.",
+          "source_section": "Postulate",
+          "exact_statement": "Adopt $$S_{\\partial}^{\\rm model}(A):=\\min_{X\\in\\mathcal Q_A}S_{\\rm gen}^{\\rm ren}[X]$$ as the model's semiclassical boundary-entropy prediction only when $\\mathcal Q_A$ is nonempty, the values are finite, and the minimum is attained.",
+          "relevant_hypotheses_and_conventions": "This is a transitive formulation-context supplier for A1; it does not supply the JT density or any mathematical step in the Laplace calculation.",
+          "supplier_proof_status": "Draft adopted postulate; no deductive Proof section is required or supplied. Missing readiness remains open.",
+          "consumer_use": "Context only through the JT postulate; no derivation is attributed to it."
+        },
+        {
+          "supplier": "thm-gaussian-integral",
+          "carrier": "items/thm-gaussian-integral.md",
+          "status": "Published mathematical theorem; full Statement and Proof inspected.",
+          "source_section": "Statement",
+          "exact_statement": "$$\\int_{-\\infty}^{\\infty}e^{-x^2}\\,dx=\\sqrt\\pi.$$",
+          "relevant_hypotheses_and_conventions": "The full line integral is finite and positive; its proof squares the integral and uses the plane Gaussian polar-coordinate calculation.",
+          "supplier_proof_status": "Published result with precheck pass and audit stamp; complete proof is present in the current carrier.",
+          "consumer_use": "Evaluates the shifted and rescaled one-dimensional Gaussian in step 1.1 and the base slice in step 2.1."
+        },
+        {
+          "supplier": "thm-differentiation-under-dominated-improper-multiple-integrals",
+          "carrier": "items/thm-differentiation-under-dominated-improper-multiple-integrals.md",
+          "status": "Published mathematical theorem; full Statement and Proof inspected.",
+          "source_section": "Statement",
+          "exact_statement": "Let $D\\subseteq\\mathbb R^n$ be open and $I\\subseteq\\mathbb R$ be an open interval. Suppose $f$ and $\\partial_tf$ are continuous on $D\\times I$, one slice $f_{t_*}$ is absolutely improperly integrable, and for every compact interval $C\\subseteq I$ there is a nonnegative improperly integrable $g_C$ with $|\\partial_tf(x,t)|\\le g_C(x)$ for $x\\in D$ and $t\\in C$. Then every slice is absolutely improperly integrable, the function $F(t)=\\int_Df(x,t)\\,dx$ is continuously differentiable, and $$F'(t)=\\int_D\\partial_tf(x,t)\\,dx.$$",
+          "relevant_hypotheses_and_conventions": "The parameter interval is open; the integrand and derivative are continuous; one base slice is absolutely improperly integrable; the derivative has an integrable bound uniform on each compact parameter interval.",
+          "supplier_proof_status": "Published result with complete proof and audited stamp; the proof uses finite-core convergence and uniform tail bounds.",
+          "consumer_use": "The exact compact-parameter derivative theorem is applied with explicit Gaussian dominators in steps 2.1 and 4.1."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "step1-beta-128",
+        "notes": "The theorem is conditional on an adopted continuous disk density. Both improper differentiations list the exact continuity, base-integrability, and compact-parameter domination checks. The final positivity applies only for C,beta>0; no discrete-spectrum or nonperturbative inference is made. The upstream formulation supplier's missing readiness is recorded separately and prevents a ready Step 1 disposition."
+      }
+    },
+    "rem-tgrx-jt-completion-notunique": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This remark records a source-backed model boundary and has no empty-domain proof case."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "This remark is not a zero-parameter calculation; the disk density's parameter domain is handled in the A-page postulate and theorem."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement does not count finite sets or candidate solutions."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate mathematical case is asserted; the item only records the scope of cited model completions."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The remark makes no parameter-limit claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No set-selection premise or choice principle occurs."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The remark states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The remark states no biconditional."
+        }
+      ],
+      "finite_checks": [],
+      "supplier_excerpts": [
+        {
+          "supplier": "post-tgrx-jt-disk-spectral-model",
+          "carrier": "items/post-tgrx-jt-disk-spectral-model.md",
+          "status": "Current assigned draft postulate; actual Statement inspected and its source-backed scope retained.",
+          "source_section": "Postulate",
+          "exact_statement": "This postulate specifies a continuous disk-level input only. It does not specify an individual discrete energy spectrum, sum higher-topology terms, choose a nonperturbative completion, or assert that the model describes nature.",
+          "relevant_hypotheses_and_conventions": "The remark concerns this exact continuous genus-zero density in the stated natural units.",
+          "supplier_proof_status": "Adopted postulate; no deductive proof or empirical claim is made.",
+          "consumer_use": "Fixes the specific disk density whose interpretation is limited by this remark."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "step1-beta-128",
+        "notes": "The statement is deliberately limited to the cited matrix-integral ensemble completion. It neither asserts that every JT realization is an ensemble nor rules out every fixed-Hamiltonian completion."
+      }
+    }
+  }
+}

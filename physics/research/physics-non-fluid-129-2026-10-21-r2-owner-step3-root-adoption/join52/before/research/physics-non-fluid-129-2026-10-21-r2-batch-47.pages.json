@@ -1,0 +1,519 @@
+[
+  {
+    "order": 791,
+    "id": "nrqmx-adiabatic-holonomy",
+    "kind": "A",
+    "category": "non-relativistic-quantum-mechanics-mathematics",
+    "library": "mathematics",
+    "title": "Projector geometry, adiabatic transport and Berry curvature",
+    "companion": "nrqmx-adiabatic-holonomy-examples",
+    "requires": [
+      "qm-math-controlled-dynamics",
+      "chern-weil-theory-and-characteristic-forms",
+      "lie-groups-invariant-fields-and-the-exponential-map",
+      "manifolds-with-boundary-collars-and-orientations",
+      "integration-of-forms-and-the-general-stokes-theorem",
+      "the-riemann-integral-in-rn-and-jordan-content",
+      "tensor-fields-exterior-algebra-and-differential-forms",
+      "chern-and-pontryagin-classes-by-splitting-and-complexification",
+      "the-de-rham-theorem-and-degree",
+      "orientations-poincare-lefschetz-and-alexander-duality",
+      "singular-cohomology-and-coefficient-theorems",
+      "singular-cochains-mayer-vietoris-and-smooth-singular-comparison"
+    ],
+    "items": [
+      {
+        "id": "def-nrqmx-smooth-projector-bundle",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "C2 projector bundles and Kato transport",
+        "reference": "items/def-nrqmx-smooth-projector-bundle.md#definition",
+        "design_state": "Planned A/B interface; complete local proof and source coverage authored for this batch.",
+        "deps": [
+          "def-smooth-manifold",
+          "def-c-r-and-smooth-maps-between-smooth-manifolds",
+          "def-finite-dimensional-vector-valued-forms-and-their-exterior-derivative",
+          "def-countable-choice",
+          "thm-nrqm-controlled-dynamics-finite-gapped-adiabatic-estimate"
+        ],
+        "justified_by": [
+          "lem-nrqmx-projector-bundle-kato-well-definedness"
+        ],
+        "dependency_roles": {
+          "def-smooth-manifold": "mathematical-premise",
+          "def-c-r-and-smooth-maps-between-smooth-manifolds": "mathematical-premise",
+          "def-finite-dimensional-vector-valued-forms-and-their-exterior-derivative": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "thm-nrqm-controlled-dynamics-finite-gapped-adiabatic-estimate": "mathematical-premise"
+        },
+        "dependency_level": 0,
+        "statement": "Let $M$ be a finite-dimensional smooth manifold, let $d\\geq1$ be an integer, and give $\\mathbb C^d$ its standard Hermitian inner product. Let $P:M\\to\\operatorname{End}(\\mathbb C^d)$ be a $C^2$ map such that $P(x)^2=P(x)=P(x)^*$ and $\\operatorname{rank}P(x)=r$ is constant. Define\n$$E_P=\\{(x,v)\\in M\\times\\mathbb C^d:P(x)v=v\\},\\qquad \\pi(x,v)=x.$$\nIts fiber at $x$ is $\\operatorname{ran}P(x)$ with the inner product inherited from $\\mathbb C^d$, using $\\langle v,w\\rangle=v^*w$. The following finite-regularity convention fixes the meaning of $d$ here. If $s:U\\to\\mathbb C^d$ is $C^1$, then $ds_x:T_xM\\to\\mathbb C^d$ is its differential, whose coordinate coefficients are continuous. If a $C^1$ one-form is written in coordinates as $\\alpha=\\sum_{j=1}^n\\alpha_j\\,dx^j$, define\n$$d\\alpha=\\sum_{1\\leq j<k\\leq n}(\\partial_j\\alpha_k-\\partial_k\\alpha_j)\\,dx^j\\wedge dx^k$$\ncomponentwise, whenever its coefficients are $C^1$. These derivatives have continuous coefficients. The chain rule and symmetry of mixed second derivatives make the definitions independent of $C^2$ coordinate changes; on smooth forms they agree with the componentwise exterior derivative. Wedge products of these forms are the pointwise alternating products, with matrix multiplication in the coefficient factors when present. In particular, $dP$ is a $C^1$ matrix-valued one-form.\n\nFor an open $U\\subseteq M$, a $C^1$ section of $E_P$ is a $C^1$ map $s:U\\to\\mathbb C^d$ with $Ps=s$. A Hermitian connection at this regularity is a complex-linear operation from such sections to continuous $E_P$-valued one-forms satisfying $\\nabla(fs)=df\\,s+f\\nabla s$ for $f\\in C^1(U,\\mathbb C)$ and\n$$d(s^*t)=(\\nabla s)^*t+s^*\\nabla t$$\nfor all $C^1$ sections $s,t$. Define the projected connection by $\\nabla s=P\\,ds$.\n\nFor a $C^2$ path $\\gamma:[0,1]\\to M$, with derivatives extending continuously to the endpoints, put $P_\\gamma(t)=P(\\gamma(t))$ and $K_\\gamma(t)=[P_\\gamma'(t),P_\\gamma(t)]$. Kato transport along $\\gamma$ is the matrix solution $W_\\gamma'(t)=K_\\gamma(t)W_\\gamma(t)$, $W_\\gamma(0)=I_d$.\n\nThe connection and Kato transport are defined from the projector family itself; no Schr\u00f6dinger Hamiltonian or physical time evolution is needed. A coherent uniformly gapped spectral projection of a $C^2$ finite Hermitian family is one source of such a $C^2$ family: under Countable Choice, an earlier finite-dimensional adiabatic result supplies that regularity.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Applications of Quantum Mechanics, University of Cambridge lecture notes",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/aqm/aqm.pdf"
+            },
+            {
+              "title": "J. E. Avron, R. Seiler, and L. G. Yaffe, Adiabatic Theorems and Applications to the Quantum Hall Effect",
+              "url": "https://phsites.technion.ac.il/avron/wp-content/uploads/sites/3/2013/05/commun_math_phys_110_33-49_1987.pdf"
+            }
+          ]
+        },
+        "library": "mathematics",
+        "proof_route": "Construct local frames by projecting a fixed independent r-tuple and Gram-Schmidt in a neighborhood; finite ODE gives unique transport."
+      },
+      {
+        "id": "lem-nrqmx-projector-bundle-kato-well-definedness",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Projected connection and Kato transport are well defined",
+        "reference": "items/lem-nrqmx-projector-bundle-kato-well-definedness.md#statement",
+        "design_state": "Local mathematical prerequisite added on the assigned A page; complete proof is supplied before its consumers.",
+        "deps": [
+          "def-nrqmx-smooth-projector-bundle"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-nrqmx-smooth-projector-bundle": "mathematical-premise"
+        },
+        "dependency_level": 1,
+        "statement": "Let $M$ be a finite-dimensional smooth manifold, let $d\\geq1$, and let $P:M\\to\\operatorname{End}(\\mathbb C^d)$ be a $C^2$ map satisfying $P(x)^2=P(x)=P(x)^*$ and $\\operatorname{rank}P(x)=r$ for a fixed $r$. Set\n$$E_P=\\{(x,v)\\in M\\times\\mathbb C^d:P(x)v=v\\},\\qquad \\pi(x,v)=x.$$\nHere a rank-$r$ $C^2$ complex vector bundle means a surjection that has local trivializations over open subsets of $M$ with fiber maps complex-linear and transition matrices of class $C^2$. Then $E_P\\to M$ is such a bundle. On each open $U\\subseteq M$, the projected operation $\\nabla s=P\\,ds$ is complex-linear from $C^1$ sections to continuous $E_P$-valued one-forms, satisfies $\\nabla(fs)=df\\,s+f\\nabla s$ for $f\\in C^1(U,\\mathbb C)$, and satisfies $d(s^*t)=(\\nabla s)^*t+s^*\\nabla t$ for $C^1$ sections $s,t$; these are the connection and Hermitian compatibility conditions. For every $C^2$ path $\\gamma:[0,1]\\to M$ whose derivatives extend continuously to the endpoints, the Kato equation\n$$W'(t)=[P_\\gamma'(t),P_\\gamma(t)]W(t),\\qquad W(0)=I_d,$$\nhas a unique $C^2$ solution. That solution is unitary and satisfies $P_\\gamma(t)W(t)=W(t)P_\\gamma(0)$ for every $t\\in[0,1]$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Applications of Quantum Mechanics, University of Cambridge lecture notes",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/aqm/aqm.pdf"
+            },
+            {
+              "title": "J. E. Avron, R. Seiler, and L. G. Yaffe, Adiabatic Theorems and Applications to the Quantum Hall Effect",
+              "url": "https://phsites.technion.ac.il/avron/wp-content/uploads/sites/3/2013/05/commun_math_phys_110_33-49_1987.pdf"
+            }
+          ]
+        },
+        "library": "mathematics",
+        "strategy": "direct",
+        "inventory_expansion_required": true
+      },
+      {
+        "id": "lem-nrqmx-c1-stokes-compact-surface",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Stokes for C1 one-forms on compact surface regions",
+        "reference": "items/lem-nrqmx-c1-stokes-compact-surface.md#statement",
+        "deps": [
+          "def-countable-choice",
+          "def-smooth-chart-atlas-and-structure-on-a-manifold-with-boundary",
+          "def-c-r-and-smooth-maps-between-smooth-manifolds",
+          "thm-euclidean-inverse-function-theorem",
+          "thm-heine-borel-rn",
+          "thm-smooth-partitions-of-unity-exist-on-manifolds-with-boundary",
+          "def-induced-boundary-orientation",
+          "cor-change-of-variables-for-compactly-supported-functions",
+          "thm-multidimensional-integral-properties",
+          "thm-continuous-on-a-rectangle-is-riemann-integrable",
+          "thm-heine-cantor-metric",
+          "thm-ftc-second-part"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "def-smooth-chart-atlas-and-structure-on-a-manifold-with-boundary": "mathematical-premise",
+          "def-c-r-and-smooth-maps-between-smooth-manifolds": "mathematical-premise",
+          "thm-euclidean-inverse-function-theorem": "mathematical-premise",
+          "thm-heine-borel-rn": "mathematical-premise",
+          "thm-smooth-partitions-of-unity-exist-on-manifolds-with-boundary": "mathematical-premise",
+          "def-induced-boundary-orientation": "mathematical-premise",
+          "cor-change-of-variables-for-compactly-supported-functions": "mathematical-premise",
+          "thm-multidimensional-integral-properties": "mathematical-premise",
+          "thm-continuous-on-a-rectangle-is-riemann-integrable": "mathematical-premise",
+          "thm-heine-cantor-metric": "mathematical-premise",
+          "thm-ftc-second-part": "mathematical-premise"
+        },
+        "dependency_level": 0,
+        "statement": "Assume Countable Choice. Let $M$ be a compact oriented smooth surface with boundary. Let $D\\subseteq M$ be a compact oriented region with the following local regularity: its interior points have disk charts, its smooth boundary points have half-disk charts, and each of its finitely many corners has a chart in which it is a quadrant or the complement of an open quadrant. Its boundary is a finite union of embedded $C^2$ arcs with pairwise disjoint interiors; each arc is the image of an injective $C^2$ parametrization with nonzero derivative, including one-sided derivatives at endpoints. Arcs meet only at their common endpoints, and at every corner their one-sided tangent vectors are linearly independent. Let $\\eta=a\\,dx+b\\,dy$ be a complex-valued $C^1$ one-form on a neighborhood of $D$ in each local chart, where $C^1$ means its coefficients and first partial derivatives are continuous up to the boundary. Define $d\\eta=(\\partial_xb-\\partial_ya)\\,dx\\wedge dy$ in each chart; the chain rule and symmetry of second derivatives make this expression coordinate-independent. Orient every open boundary arc outward-normal-first: $(\\nu_{\\rm out},\\tau)$ is a positive basis of $TD$, where $\\nu_{\\rm out}$ is outward and $\\tau$ is the positive boundary tangent. Integrals over $D$ use oriented coordinate Riemann integrals, and the boundary integral is the sum of the line integrals over its finitely many oriented arcs. Then\n$$\\int_D d\\eta=\\int_{\\partial D}\\eta.$$",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John M. Lee, Introduction to Smooth Manifolds, 2nd ed., \u00a716, Theorem 16.11 and Theorem 16.25",
+              "url": "https://julianchaidez.net/materials/reu/lee_smooth_manifolds.pdf",
+              "locator": "Theorem 16.11, pp. 411\u2013414, proves smooth Stokes by half-space calculation and partition localization; Theorem 16.25, pp. 419\u2013420, treats corners. The local C1 formula for regular piecewise-C2 boundaries is proved here by boundary straightening and direct coordinate integration."
+            }
+          ]
+        },
+        "library": "mathematics",
+        "strategy": "direct",
+        "design_state": "Local mathematical prerequisite added on the assigned A page with a complete proof before its consuming example.",
+        "proof_route": "Approximate C1 forms in C1 by chartwise mollification, apply smooth Stokes after corner rounding, and pass to the limit.",
+        "inventory_expansion_required": true
+      },
+      {
+        "id": "thm-nrqmx-berry-projector-curvature",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Projector curvature and frame covariance",
+        "reference": "items/thm-nrqmx-berry-projector-curvature.md#statement",
+        "design_state": "Planned A/B interface; complete local proof and source coverage authored for this batch.",
+        "deps": [
+          "def-nrqmx-smooth-projector-bundle",
+          "lem-nrqmx-projector-bundle-kato-well-definedness",
+          "def-finite-dimensional-vector-valued-forms-and-their-exterior-derivative",
+          "def-wedge-product-of-differential-forms"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-nrqmx-smooth-projector-bundle": "mathematical-premise",
+          "lem-nrqmx-projector-bundle-kato-well-definedness": "mathematical-premise",
+          "def-finite-dimensional-vector-valued-forms-and-their-exterior-derivative": "mathematical-premise",
+          "def-wedge-product-of-differential-forms": "mathematical-premise"
+        },
+        "dependency_level": 2,
+        "statement": "Let $M$ be a finite-dimensional smooth manifold, let $d\\geq1$, and let $P:M\\to\\operatorname{End}(\\mathbb C^d)$ be a $C^2$ map satisfying $P^2=P=P^*$ and $\\operatorname{rank}P=r$ for a fixed $r$. Write $E_{P,x}=\\operatorname{ran}P(x)$ and define $\\nabla_Xs=P\\,ds(X)$ for a $C^1$ section $s$ and a vector field $X$. For a $C^2$ section $s$ and smooth vector fields $X,Y$, define the curvature by\n$$F_\\nabla(X,Y)s=\\nabla_X(\\nabla_Ys)-\\nabla_Y(\\nabla_Xs)-\\nabla_{[X,Y]}s.$$\nAs an endomorphism of $E_{P,x}$ extended by zero on $E_{P,x}^{\\perp}$, it is the continuous two-form\n$$F=P(dP\\wedge dP)P,\\qquad (dP\\wedge dP)(X,Y)=dP(X)dP(Y)-dP(Y)dP(X).$$\nFor any local $C^2$ orthonormal frame $V:U\\to\\mathbb C^{d\\times r}$ with $V^*V=I_r$ and $P=VV^*$, the connection matrix $A=V^*dV$ is a $C^1$ anti-Hermitian matrix-valued one-form, and its curvature matrix is\n$$F_{\\mathrm{fr}}=dA+A\\wedge A=V^*FV,\\qquad (A\\wedge A)(X,Y)=A(X)A(Y)-A(Y)A(X).$$\nIf $V'=Vg$ for a $C^2$ map $g:U\\to U(r):=\\{h\\in\\mathbb C^{r\\times r}:h^*h=hh^*=I_r\\}$, then $A'=g^{-1}Ag+g^{-1}dg$ and $F'_{\\mathrm{fr}}=g^{-1}F_{\\mathrm{fr}}g$. Along every $C^2$ path, Kato transport is unitary and intertwines the endpoint projectors.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Applications of Quantum Mechanics, University of Cambridge lecture notes",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/aqm/aqm.pdf"
+            },
+            {
+              "title": "J. E. Avron, R. Seiler, and L. G. Yaffe, Adiabatic Theorems and Applications to the Quantum Hall Effect",
+              "url": "https://phsites.technion.ac.il/avron/wp-content/uploads/sites/3/2013/05/commun_math_phys_110_33-49_1987.pdf"
+            }
+          ]
+        },
+        "library": "mathematics",
+        "strategy": "direct",
+        "proof_route": "Differentiate P\u00b2=P to obtain PdPP=0; expand \u2207\u00b2 and use the local frame identity. Differentiate W*W and W*PW."
+      },
+      {
+        "id": "lem-nrqmx-c2-projector-chern-integrality",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "C2 projector curvature has integral Chern number",
+        "reference": "items/lem-nrqmx-c2-projector-chern-integrality.md#statement",
+        "design_state": "Local mathematical prerequisite added on the assigned A page; complete proof is supplied before its consumers.",
+        "deps": [
+          "def-smooth-manifold",
+          "def-c-r-and-smooth-maps-between-smooth-manifolds",
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "thm-smooth-partitions-of-unity-exist-on-manifolds",
+          "def-nrqmx-smooth-projector-bundle",
+          "thm-nrqmx-berry-projector-curvature",
+          "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "thm-cauchy-integral-formula-circle",
+          "def-chern-classes-from-the-projective-bundle-relation",
+          "lem-first-chern-form-agrees-with-the-topological-line-class",
+          "thm-de-rham-theorem",
+          "def-fundamental-class-of-a-compact-oriented-manifold",
+          "def-kronecker-evaluation-pairing",
+          "def-de-rham-integration-cochain-map",
+          "thm-smooth-singular-chains-compute-singular-homology",
+          "cor-change-of-variables-for-compactly-supported-functions",
+          "def-integral-of-a-compactly-supported-top-form-on-an-oriented-manifold",
+          "thm-global-form-integration-is-independent-of-the-atlas-partition-and-refinement",
+          "thm-multidimensional-integral-properties",
+          "thm-continuous-on-a-rectangle-is-riemann-integrable"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-smooth-manifold": "mathematical-premise",
+          "def-c-r-and-smooth-maps-between-smooth-manifolds": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "thm-smooth-partitions-of-unity-exist-on-manifolds": "mathematical-premise",
+          "def-nrqmx-smooth-projector-bundle": "mathematical-premise",
+          "thm-nrqmx-berry-projector-curvature": "mathematical-premise",
+          "thm-complex-spectral-theorem-for-normal-endomorphisms": "mathematical-premise",
+          "thm-cauchy-integral-formula-circle": "mathematical-premise",
+          "def-chern-classes-from-the-projective-bundle-relation": "mathematical-premise",
+          "lem-first-chern-form-agrees-with-the-topological-line-class": "mathematical-premise",
+          "thm-de-rham-theorem": "mathematical-premise",
+          "def-fundamental-class-of-a-compact-oriented-manifold": "mathematical-premise",
+          "def-kronecker-evaluation-pairing": "mathematical-premise",
+          "def-de-rham-integration-cochain-map": "mathematical-premise",
+          "thm-smooth-singular-chains-compute-singular-homology": "mathematical-premise",
+          "cor-change-of-variables-for-compactly-supported-functions": "mathematical-premise",
+          "def-integral-of-a-compactly-supported-top-form-on-an-oriented-manifold": "mathematical-premise",
+          "thm-global-form-integration-is-independent-of-the-atlas-partition-and-refinement": "mathematical-premise",
+          "thm-multidimensional-integral-properties": "mathematical-premise",
+          "thm-continuous-on-a-rectangle-is-riemann-integrable": "mathematical-premise"
+        },
+        "dependency_level": 3,
+        "statement": "Assume the full Axiom of Choice. Let $\\Sigma$ be a compact boundaryless oriented smooth surface, let $d\\geq1$, and let $P:\\Sigma\\to\\operatorname{End}(\\mathbb C^d)$ be a $C^2$ family of rank-one orthogonal projections. Let $E_P\\to\\Sigma$ be the complex line bundle with fibers $\\operatorname{ran}P(x)$, let $\\nabla=P\\,d$, and let $F=P(dP\\wedge dP)P$ be the curvature of this projected connection. Then\n$$\\frac{i}{2\\pi}\\int_\\Sigma\\operatorname{tr}F=\\langle c_1(E_P),[\\Sigma]\\rangle\\in\\mathbb Z.$$\nHere $c_1(E_P)$ is the first integral Chern class of the underlying topological complex line bundle, and $[\\Sigma]$ is the fundamental class for the stated orientation.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Applications of Quantum Mechanics, University of Cambridge lecture notes",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/aqm/aqm.pdf"
+            },
+            {
+              "title": "J. E. Avron, R. Seiler, and L. G. Yaffe, Adiabatic Theorems and Applications to the Quantum Hall Effect",
+              "url": "https://phsites.technion.ac.il/avron/wp-content/uploads/sites/3/2013/05/commun_math_phys_110_33-49_1987.pdf"
+            }
+          ]
+        },
+        "library": "mathematics",
+        "strategy": "direct",
+        "inventory_expansion_required": true
+      },
+      {
+        "id": "thm-nrqmx-adiabatic-geometric-phase-bound",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Physical adiabatic phase with explicit scale",
+        "reference": "items/thm-nrqmx-adiabatic-geometric-phase-bound.md#statement",
+        "design_state": "Planned A/B interface; complete local proof and source coverage authored for this batch.",
+        "deps": [
+          "def-countable-choice",
+          "thm-nrqm-controlled-dynamics-finite-gapped-adiabatic-estimate",
+          "thm-nrqmx-berry-projector-curvature"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "thm-nrqm-controlled-dynamics-finite-gapped-adiabatic-estimate": "mathematical-premise",
+          "thm-nrqmx-berry-projector-curvature": "mathematical-premise"
+        },
+        "dependency_level": 3,
+        "statement": "Assume Countable Choice. Let $d\\geq1$, let $H\\in C^2([0,1],\\operatorname{Herm}(\\mathbb C^d))$ have entries whose derivatives through order two extend continuously to the endpoints, and assign its eigenvalues energy unit joules. Let $\\hbar>0$ have unit joule-seconds. A spectral cluster at $s$ is a subset $\\sigma_P(s)$ of the finite spectrum of $H(s)$, and $P(s)$ is the orthogonal projection onto the sum of its eigenspaces. Coherently followed means that $s\\mapsto P(s)$ is continuous in operator norm (equivalently, it agrees locally with the Riesz continuation of its initial cluster). Assume the distance from $\\sigma_P(s)$ to the complementary spectrum is at least a uniform $g>0$ in joules. Let $T>0$ be a total duration in seconds, let $s=t/T$ be dimensionless, and let $U_T(0)=I$ solve\n$$i\\hbar\\,\\partial_sU_T(s)=T H(s)U_T(s).$$\nPut $K(s)=[P'(s),P(s)]$. There is a $C^1$ Hermitian matrix $X(s)$ solving $[H(s),X(s)]=K(s)$. With\n$$C=2\\sup_{s\\in[0,1]}\\|X(s)\\|+\\int_0^1\\bigl(\\|X'(s)\\|+\\|K(s)\\|\\,\\|X(s)\\|\\bigr)\\,ds,$$\nthe leakage satisfies\n$$\\|(I-P(s))U_T(s)P(0)\\|\\leq\\frac{\\hbar C}{T}\\qquad(0\\leq s\\leq1).$$\nThe supplier provides a $C^1$ Hermitian $X$ solving the displayed commutator equation. For that $X$, $C$ has unit joule-inverse, so $\\hbar C/T$ is dimensionless. If the cluster has rank one, define $E(s):=\\operatorname{tr}(H(s)P(s))$; then $E$ is real and $C^2$ and $H(s)P(s)=E(s)P(s)$. Define $U_A(0)=I$ by\n$$i\\,\\partial_sU_A(s)=\\left(\\frac{T}{\\hbar}H(s)+iK(s)\\right)U_A(s).$$\nFor Kato transport $W'(s)=K(s)W(s)$, $W(0)=I$, the comparison evolution factors exactly on the initial eigenspace:\n$$U_A(s)P(0)=\\exp\\!\\left(-\\frac{iT}{\\hbar}\\int_0^sE(u)\\,du\\right)W(s)P(0).$$\nThe leakage estimate is finite-dimensional and conditional on the stated uniform positive gap.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Applications of Quantum Mechanics, University of Cambridge lecture notes",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/aqm/aqm.pdf"
+            },
+            {
+              "title": "J. E. Avron, R. Seiler, and L. G. Yaffe, Adiabatic Theorems and Applications to the Quantum Hall Effect",
+              "url": "https://phsites.technion.ac.il/avron/wp-content/uploads/sites/3/2013/05/commun_math_phys_110_33-49_1987.pdf"
+            }
+          ]
+        },
+        "library": "mathematics",
+        "strategy": "direct",
+        "proof_route": "Rescale the actual finite adiabatic supplier H\u2192H/\u210f or T\u2192T/\u210f; compute constants with energy units and use its intertwining evolution. Derive scalar phase by projecting the equation."
+      },
+      {
+        "id": "thm-nrqmx-rank-one-chern-holonomy",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Rank-one holonomy and integral curvature",
+        "reference": "items/thm-nrqmx-rank-one-chern-holonomy.md#statement",
+        "design_state": "Planned A/B interface; complete local proof and source coverage authored for this batch.",
+        "deps": [
+          "def-nrqmx-smooth-projector-bundle",
+          "thm-nrqmx-berry-projector-curvature",
+          "lem-nrqmx-c2-projector-chern-integrality",
+          "lem-first-chern-form-agrees-with-the-topological-line-class",
+          "lem-nrqmx-c1-stokes-compact-surface",
+          "def-axiom-of-choice",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-nrqmx-smooth-projector-bundle": "mathematical-premise",
+          "thm-nrqmx-berry-projector-curvature": "mathematical-premise",
+          "lem-nrqmx-c2-projector-chern-integrality": "mathematical-premise",
+          "lem-first-chern-form-agrees-with-the-topological-line-class": "mathematical-premise",
+          "lem-nrqmx-c1-stokes-compact-surface": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "dependency_level": 4,
+        "statement": "Assume full AC. Let $\\Sigma$ be a compact boundaryless oriented smooth surface, and let $P:\\Sigma\\to\\operatorname{End}(\\mathbb C^d)$ be a $C^2$ rank-one orthogonal projection family. Let $E_P$ be its complex line bundle, $\\nabla=P\\,d$, and $F=P(dP\\wedge dP)P$. Then\n$$\\frac{i}{2\\pi}\\int_\\Sigma\\operatorname{tr}F=\\langle c_1(E_P),[\\Sigma]\\rangle\\in\\mathbb Z.$$\nFor any $C^2$ closed path $\\gamma$ subdivided into local unit frames $u_j$, with $A_j=u_j^*du_j$ and transition $u_{j+1}=u_jg_j$ for $g_j$ valued in $U(1)$ at the crossing points, the holonomy is the scalar by which parallel transport acts on its one-dimensional initial fiber. This scalar is the product of the local factors $\\exp(-\\int_{\\gamma_j}A_j)$ and the transition factors $g_j^{-1}$. Thus geometric holonomy includes the frame-transition scalars whenever one frame does not cover the path.\n\nIn addition, suppose $\\Sigma=\\Sigma_N\\cup\\Sigma_S$ is a decomposition into compact oriented subsurfaces with disjoint interiors and common finite boundary $\\Gamma=\\partial\\Sigma_N=-\\partial\\Sigma_S$, a finite union of oriented smooth circles. If $E_P$ has supplied $C^2$ unit frames $u_N,u_S$ on these subsurfaces and $u_S=u_Ng$ on $\\Gamma$ for a $C^2$ map $g:\\Gamma\\to U(1)$, then\n$$\\langle c_1(E_P),[\\Sigma]\\rangle=\\operatorname{wind}(g):=\\sum_{\\Gamma_j\\subset\\Gamma}\\frac{1}{2\\pi i}\\int_{\\Gamma_j}g^{-1}dg\\in\\mathbb Z,$$\nwhere each component $\\Gamma_j$ has the orientation induced by $\\partial\\Sigma_N$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Applications of Quantum Mechanics, University of Cambridge lecture notes",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/aqm/aqm.pdf"
+            },
+            {
+              "title": "J. E. Avron, R. Seiler, and L. G. Yaffe, Adiabatic Theorems and Applications to the Quantum Hall Effect",
+              "url": "https://phsites.technion.ac.il/avron/wp-content/uploads/sites/3/2013/05/commun_math_phys_110_33-49_1987.pdf"
+            }
+          ]
+        },
+        "library": "mathematics",
+        "strategy": "direct",
+        "proof_route": "Use first Chern form agreement with topological line class; give two-chart clutching derivation using Stokes and winding, fixing orientation."
+      },
+      {
+        "id": "lem-nrqmx-spin-half-solid-angle-period",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Spin-half curvature and solid-angle filling period",
+        "reference": "items/lem-nrqmx-spin-half-solid-angle-period.md#statement",
+        "deps": [
+          "def-smooth-manifold",
+          "def-c-r-and-smooth-maps-between-smooth-manifolds",
+          "def-finite-dimensional-vector-valued-forms-and-their-exterior-derivative",
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-wedge-product-of-differential-forms",
+          "thm-nrqmx-berry-projector-curvature",
+          "lem-nrqmx-c2-projector-chern-integrality"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-smooth-manifold": "mathematical-premise",
+          "def-c-r-and-smooth-maps-between-smooth-manifolds": "mathematical-premise",
+          "def-finite-dimensional-vector-valued-forms-and-their-exterior-derivative": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-wedge-product-of-differential-forms": "mathematical-premise",
+          "thm-nrqmx-berry-projector-curvature": "mathematical-premise",
+          "lem-nrqmx-c2-projector-chern-integrality": "mathematical-premise"
+        },
+        "dependency_level": 4,
+        "statement": "Assume full AC. Let $S^2=\\{n\\in\\mathbb R^3:|n|=1\\}$ have the metric induced from $\\mathbb R^3$ and the outward orientation; its area form is $\\omega_n(u,v)=n\\cdot(u\\times v)$ for $u,v\\in T_nS^2$, so $\\omega=\\sin\\theta\\,d\\theta\\wedge d\\phi$ in spherical coordinates. Let $D^2=\\{x\\in\\mathbb R^2:|x|\\leq1\\}$ have orientation $dx\\wedge dy$; $C^2$ maps on $D^2$ have derivatives through order two extending continuously to the boundary. Set\n$$\\sigma_x=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix},\\qquad\\sigma_y=\\begin{pmatrix}0&-i\\\\i&0\\end{pmatrix},\\qquad\\sigma_z=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix},\\qquad P_+(n)=\\frac{I+n_x\\sigma_x+n_y\\sigma_y+n_z\\sigma_z}{2}.$$\nFor any two $C^2$ maps $f_0,f_1:D^2\\to S^2$ from an oriented disk, with the same boundary map and its induced boundary orientation, the two oriented solid-angle integrals differ by a multiple of $4\\pi$:\n$$\\int_{D^2}f_0^*\\omega-\\int_{D^2}f_1^*\\omega\\in4\\pi\\mathbb Z.$$",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Applications of Quantum Mechanics, University of Cambridge lecture notes",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/aqm/aqm.pdf"
+            }
+          ]
+        },
+        "library": "mathematics",
+        "strategy": "direct",
+        "design_state": "Local mathematical prerequisite added on the assigned A page with a complete proof before its consuming example.",
+        "proof_route": "Flatten two C2 disk fillings in collars, glue them to a closed surface, and apply the local C2 Chern-integrality result to the pulled-back spin line.",
+        "inventory_expansion_required": true
+      }
+    ]
+  },
+  {
+    "order": 792,
+    "id": "nrqmx-adiabatic-holonomy-examples",
+    "kind": "B",
+    "category": "non-relativistic-quantum-mechanics-mathematics",
+    "library": "mathematics",
+    "title": "Projector geometry, adiabatic transport and Berry curvature \u2014 Examples",
+    "companion": "nrqmx-adiabatic-holonomy",
+    "requires": [
+      "nrqmx-adiabatic-holonomy"
+    ],
+    "items": [
+      {
+        "id": "ex-nrqmx-spin-half-monopole",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "Spin-half curvature and a solid angle",
+        "reference": "items/ex-nrqmx-spin-half-monopole.md#example",
+        "design_state": "Planned A/B interface; complete local proof and source coverage authored for this batch.",
+        "deps": [
+          "def-countable-choice",
+          "def-axiom-of-choice",
+          "thm-heine-borel-rn",
+          "thm-lebesgue-number-lemma",
+          "lem-nrqmx-c1-stokes-compact-surface",
+          "thm-nrqmx-berry-projector-curvature",
+          "thm-nrqmx-rank-one-chern-holonomy",
+          "lem-nrqmx-spin-half-solid-angle-period"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise",
+          "thm-heine-borel-rn": "mathematical-premise",
+          "thm-lebesgue-number-lemma": "mathematical-premise",
+          "lem-nrqmx-c1-stokes-compact-surface": "mathematical-premise",
+          "thm-nrqmx-berry-projector-curvature": "mathematical-premise",
+          "thm-nrqmx-rank-one-chern-holonomy": "mathematical-premise",
+          "lem-nrqmx-spin-half-solid-angle-period": "mathematical-premise"
+        },
+        "dependency_level": 5,
+        "statement": "Assume full AC. Give $S^2$ its unit-sphere metric and outward orientation. Let\n$$\\sigma_x=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix},\\qquad \\sigma_y=\\begin{pmatrix}0&-i\\\\i&0\\end{pmatrix},\\qquad \\sigma_z=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}.$$\nand for $n=(\\sin\\theta\\cos\\phi,\\sin\\theta\\sin\\phi,\\cos\\theta)$ set $P_+=(I+n\\cdot\\sigma)/2$. The positive eigenline has northern unit frame\n$$u_N(\\theta,\\phi)=\\begin{pmatrix}\\cos(\\theta/2)\\\\ e^{i\\phi}\\sin(\\theta/2)\\end{pmatrix},\\qquad 0\\leq\\theta<\\pi.$$\nIn this frame $A_N=u_N^*du_N=i(1-\\cos\\theta)d\\phi/2$, and the curvature is $F=i\\sin\\theta\\,d\\theta\\wedge d\\phi/2$. The positive eigenline has Chern number $-1$. Let $\\omega_{S^2}$ be the outward-oriented area form, which in spherical coordinates is $\\sin\\theta\\,d\\theta\\wedge d\\phi$. For any piecewise $C^2$ closed loop with a $C^2$ oriented disk filling $S$, its oriented solid angle is $\\Omega=\\int_S\\omega_{S^2}$ modulo $4\\pi$. Its holonomy is $\\exp(-i\\Omega/2)$; in particular a latitude at polar angle $\\theta$ has $\\Omega=2\\pi(1-\\cos\\theta)$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Applications of Quantum Mechanics, University of Cambridge lecture notes",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/aqm/aqm.pdf"
+            },
+            {
+              "title": "J. E. Avron, R. Seiler, and L. G. Yaffe, Adiabatic Theorems and Applications to the Quantum Hall Effect",
+              "url": "https://phsites.technion.ac.il/avron/wp-content/uploads/sites/3/2013/05/commun_math_phys_110_33-49_1987.pdf"
+            }
+          ]
+        },
+        "library": "mathematics",
+        "strategy": "direct",
+        "proof_route": "Differentiate normalized spinor (cos(\u03b8/2),e^(i\u03c6)sin(\u03b8/2))\u1d40; integrate F with frame patch bookkeeping."
+      },
+      {
+        "id": "cex-nrqmx-gap-closing-adiabatic",
+        "kind": "counterexample",
+        "domain": "mathematics",
+        "title": "Slow variation alone is insufficient",
+        "reference": "items/cex-nrqmx-gap-closing-adiabatic.md#statement-refuted",
+        "design_state": "Planned A/B interface; complete local proof and source coverage authored for this batch.",
+        "deps": [
+          "def-countable-choice",
+          "thm-nrqmx-adiabatic-geometric-phase-bound"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "thm-nrqmx-adiabatic-geometric-phase-bound": "mathematical-premise"
+        },
+        "dependency_level": 4,
+        "statement": "Assuming Countable Choice, slow scaling by $T$ alone guarantees a uniform $O(1/T)$ leakage bound for the pointwise ordered upper eigenspace of every finite-dimensional $C^2$ Hermitian family, even when its spectral gap may close.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Applications of Quantum Mechanics, University of Cambridge lecture notes",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/aqm/aqm.pdf"
+            },
+            {
+              "title": "J. E. Avron, R. Seiler, and L. G. Yaffe, Adiabatic Theorems and Applications to the Quantum Hall Effect",
+              "url": "https://phsites.technion.ac.il/avron/wp-content/uploads/sites/3/2013/05/commun_math_phys_110_33-49_1987.pdf"
+            }
+          ]
+        },
+        "library": "mathematics",
+        "strategy": "direct",
+        "proof_route": "Use H(s)=s \u03c3z and a chosen branch whose labeling swaps at s=0; distinguish an actual discontinuous spectral choice from a coherently followed gapped projector."
+      }
+    ]
+  }
+]

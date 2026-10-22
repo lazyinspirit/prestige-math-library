@@ -1,0 +1,810 @@
+{
+  "version": 1,
+  "level": "physics-non-fluid-129-2026-10-21-r2-batch-111",
+  "scope": [
+    "lem-qsmx-finite-car-quasifree-gibbs-construction",
+    "thm-qsmx-quasifree-entropy",
+    "thm-qsmx-finite-boson-stability",
+    "cex-qsmx-bogoliubov-zero-mode"
+  ],
+  "contracts": {
+    "lem-qsmx-finite-car-quasifree-gibbs-construction": {
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 normalizes the finite product probabilities; the empty moment is ω(I)=1 by the definition."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 include covariance eigenvalue ν=0; only the vacuum occupation has nonzero probability and all positive-degree moments vanish."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 include ν=1; only the occupied one-mode state has nonzero probability, with its CAR moments given by the determinant rule."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.1 allow repeated covariance eigenvalues; uniqueness from the full matrix-unit span makes the density independent of eigenbasis choice."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 define p_m using ν_j and 1−ν_j, including exact zero probabilities at ν_j=0 or 1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The statement fixes r≥1 and an ordered finite mode basis; step 1.1 uses its finite unitary diagonalization."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma proves existence, uniqueness, and the Gibbs covariance formula; it states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse implication or biconditional occurs in the finite CAR construction."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "one-mode diagonal covariance",
+          "input": "r=1, C=[ν], 0≤ν≤1",
+          "calculation": "The constructed density is diag(1−ν,ν); its trace is 1, Tr(ρc* c)=ν, and the two-creator determinant vanishes because repeated rows are equal.",
+          "result": "Normalization and covariance agree with the definition; ν=0 and ν=1 give the vacuum and occupied pure states.",
+          "steps": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "name": "one-mode grand Gibbs state",
+          "input": "r=1, h=[ε]",
+          "calculation": "Z=1+e^{−β(ε−μ)} and the occupation probability is e^{−β(ε−μ)}/Z=(1+e^{β(ε−μ)})^{−1}.",
+          "result": "Matches the displayed finite Gibbs covariance.",
+          "steps": [
+            "1.2",
+            "4.1"
+          ]
+        }
+      ],
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qsmx-quasifree-finite-covariance",
+          "source_section": "Definition",
+          "quote": "Let $r\\geq1$, let $H_1=\\mathbb C^r$ with ordered orthonormal basis\n$e_1,\\ldots,e_r$, and let\n$\\mathcal F_-(H_1)=\\bigoplus_{k=0}^{r}\\bigwedge^k H_1$ be its finite-mode\nfermionic Fock space. Let $\\mathcal A_r$ be the unital *-algebra generated\nby its annihilation and creation operators; it is finite-dimensional. Let\n$c_j,c_j^*$ be those operators in this basis, satisfying\n$$c_ic_j+c_jc_i=0,\\qquad c_ic_j^*+c_j^*c_i=\\delta_{ij}I,\\qquad c_i^*c_j^*+c_j^*c_i^*=0.$$\nA state is a complex-linear functional $\\omega$ on $\\mathcal A_r$ such that\n$\\omega(I)=1$ and $\\omega(X^*X)\\geq0$ for every $X\\in\\mathcal A_r$. Define\nthe gauge automorphism $\\gamma_\\theta$ by\n$\\gamma_\\theta(c_j)=e^{-i\\theta}c_j$ and\n$\\gamma_\\theta(c_j^*)=e^{i\\theta}c_j^*$ for $\\theta\\in\\mathbb R$; the CAR\nrelations are preserved, so these assignments extend to a one-parameter\nfamily of algebra automorphisms. A state is gauge invariant when\n$\\omega(\\gamma_\\theta(X))=\\omega(X)$ for every $X$ and every $\\theta$.\n\nFor a gauge-invariant state, define its one-particle covariance matrix\n$C\\in M_r(\\mathbb C)$ by $C_{ji}:=\\omega(c_i^*c_j)$. A finite\ngauge-invariant state is quasifree when $C=C^*$, $0\\leq C\\leq I$, and its\nnormally ordered moments obey the following rule: for $p\\neq q$,\n$$\\omega(c_{i_1}^*\\cdots c_{i_p}^*c_{j_q}\\cdots c_{j_1})=0,$$\nand for $p=q$,\n$$\\omega(c_{i_1}^*\\cdots c_{i_p}^*c_{j_p}\\cdots c_{j_1})=\\det\\!\\left[\\omega(c_{i_a}^*c_{j_b})\\right]_{a,b=1}^{p}=\\det\\!\\left[C_{j_bi_a}\\right]_{a,b=1}^{p}.$$\nThe empty moment is $\\omega(I)=1$. The inequalities $0\\leq C\\leq I$ mean\n$\\langle Cv,v\\rangle\\geq0$ and\n$\\langle(I-C)v,v\\rangle\\geq0$ for all $v\\in H_1$. Moments of words not\nin normal order are obtained by reordering with the displayed CAR relations.\n\nFor a Hermitian one-particle matrix $h=h^*$, a real chemical potential $\\mu$,\nand $\\beta>0$, define\n$$d\\Gamma(h-\\mu I):=\\sum_{i,j=1}^{r}c_i^*(h-\\mu I)_{ij}c_j,\\qquad Z:=\\operatorname{Tr}\\!\\left(e^{-\\beta d\\Gamma(h-\\mu I)}\\right),\\qquad \\rho:=Z^{-1}e^{-\\beta d\\Gamma(h-\\mu I)}.$$\nThe finite grand Gibbs state has covariance\n$$C=(I+e^{\\beta(h-\\mu I)})^{-1}.$$\nHere $h$ and $\\mu$ are in joules, $\\beta$ is in inverse joules, and $C$ is\ndimensionless. The existence and uniqueness of the state for every\nHermitian contraction $C$, and the displayed finite Gibbs covariance formula,\nare established by an earlier finite-dimensional result.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qsm-fock-occupation-basis-and-car-relations",
+          "source_section": "Statement",
+          "quote": "Let $I$ and $\\mathcal F_\\pm(\\ell^2(I))$ be as in\n[[def-qsm-identical-particle-fock-sectors]]. Define\n$$\n\\Omega_B:=\\{m:I\\to\\mathbb N_0:m\\text{ has finite support}\\},\\qquad \\Omega_F:=\\{m:I\\to\\{0,1\\}:m\\text{ has finite support}\\}.\n$$\nFor either statistics choice, write $|m|=\\sum_jm_j$. If $m\\in\\Omega_B$, choose the elementary tensor $x_m$ containing $m_j$ copies of each mode $j$ in the fixed order and set\n$$\n|m\\rangle_B:=\\sqrt{\\frac{|m|!}{\\prod_jm_j!}}\\,P_+^{(|m|)}x_m.\n$$\nIf $m\\in\\Omega_F$, list its occupied modes increasingly in the fixed enumeration, let $x_m$ be their elementary tensor and set\n$$\n|m\\rangle_F:=\\sqrt{|m|!}\\,P_-^{(|m|)}x_m.\n$$\nFor $|m|=0$, both vectors are the vacuum. These vectors form orthonormal bases and define unitary identifications $\\mathcal F_+(\\ell^2(I))\\cong\\ell^2(\\Omega_B)$ and $\\mathcal F_-(\\ell^2(I))\\cong\\ell^2(\\Omega_F)$.\n\nOn the finite-support span $\\mathcal D_{\\rm fin}$ of the bosonic basis, define\n$$\na_j|m\\rangle_B=\\sqrt{m_j}|m-\\mathbf1_j\\rangle_B,\\qquad a_j^\\dagger|m\\rangle_B=\\sqrt{m_j+1}|m+\\mathbf1_j\\rangle_B,\n$$\nwhere the annihilation term is zero when $m_j=0$. Their maximal closed extensions have domains\n$$\nD(a_j)=\\left\\{c:\\sum_{m\\in\\Omega_B}m_j|c_m|^2<\\infty\\right\\},\\qquad D(a_j^\\dagger)=\\left\\{c:\\sum_{m\\in\\Omega_B}(m_j+1)|c_m|^2<\\infty\\right\\},\n$$\nand $a_j^\\dagger=a_j^*$. On $\\mathcal D_{\\rm fin}$, they satisfy\n$[a_i,a_j^\\dagger]=\\delta_{ij}I$, $[a_i,a_j]=0$, and $[a_i^\\dagger,a_j^\\dagger]=0$.\n\nOn the fermionic basis define\n$$\nc_j|m\\rangle_F=(-1)^{\\sum_{i<j}m_i}m_j|m-\\mathbf1_j\\rangle_F,\\qquad c_j^\\dagger|m\\rangle_F=(-1)^{\\sum_{i<j}m_i}(1-m_j)|m+\\mathbf1_j\\rangle_F.\n$$\nThese operators are bounded on the full fermionic Fock space and satisfy\n$\\{c_i,c_j^\\dagger\\}=\\delta_{ij}I$ and $\\{c_i,c_j\\}=\\{c_i^\\dagger,c_j^\\dagger\\}=0$. These are mathematical sector relations; they do not select a physical species or imply a spin-statistics theorem.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qsm-matrix-state-calculus",
+          "source_section": "Statement",
+          "quote": "Use the following conventions on a complex inner-product space $H$ of dimension $D\\geq1$, with inner product linear in its first argument. For an endomorphism $A$, define $\\operatorname{Tr}A:=\\sum_{j=1}^D\\langle Ae_j,e_j\\rangle$ in an orthonormal basis; step 3.1 proves basis independence. For any Hermitian $M$, its **positive spectral subspace** (called its positive support here) is $S_M:=\\bigoplus_{\\lambda>0}\\ker(M-\\lambda I)$; when $M\\geq0$ this equals $(\\ker M)^\\perp$. Its support logarithm is $\\log(M|_{S_M}):=\\sum_{\\lambda>0}(\\log\\lambda)P_\\lambda|_{S_M}$, where $P_\\lambda$ is the orthogonal projection onto that eigenspace. No value $\\log0$ is assigned; for $M=0$ this is the unique endomorphism of the zero space. For the set $\\mathcal D(H)$ of positive semidefinite Hermitian endomorphisms with trace one, a point $\\rho$ is **extreme** if every equality $\\rho=t\\sigma+(1-t)\\tau$ with $\\sigma,\\tau\\in\\mathcal D(H)$ and $0<t<1$ implies $\\sigma=\\tau=\\rho$.\n\nLet $H$ be a complex inner-product space of finite dimension $D\\geq1$, with inner product linear in its first argument. Every Hermitian endomorphism $M$ has an orthonormal eigenbasis with real eigenvalues. For a real function $f$ on its finite spectrum, define $f(M)$ by its spectral projections; this definition is independent of the choice of eigenbasis. In particular positive square roots, exponentials, and logarithms on positive supports are well defined.\n\nFor a density matrix $\\rho$ on $H$, meaning a Hermitian positive semidefinite operator with $\\operatorname{Tr}\\rho=1$, $\\operatorname{Tr}(\\rho A)=\\sum_jp_j\\langle Au_j,u_j\\rangle$ for bounded $A$, where $\\rho=\\sum_jp_j|u_j\\rangle\\langle u_j|$. The weighted form $(X,Y)_\\rho=\\operatorname{Tr}(\\rho X^*Y)$ satisfies Cauchy–Schwarz, $|(X,Y)_\\rho|^2\\leq(X,X)_\\rho(Y,Y)_\\rho$. Finally, $\\operatorname{Tr}(\\rho^2)\\leq1$, with equality exactly for rank-one densities, and those are exactly the extreme points of the finite density-matrix set.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F3], write $C=V\\operatorname{diag}(\\nu_1,\\ldots,\\nu_r)V^*$ with $V$ unitary and $0\\leq\\nu_j\\leq1$ . On the exterior-power decomposition define $\\Gamma_-(V):=\\bigoplus_{k=0}^{r}\\bigwedge^kV$ ; each summand is unitary, so $\\Gamma_-(V)$ is unitary: inner products of simple exterior products are determinants of their Gram matrices, and $V$ preserves each Gram matrix. In the occupation basis for the eigenmodes, define $w_j(0):=1-\\nu_j$ and $w_j(1):=\\nu_j$ , and define the product density $\\rho_D$ by $$\\rho_D|m\\rangle=\\left(\\prod_{j=1}^{r}w_j(m_j)\\right)|m\\rangle,\\qquad m\\in\\{0,1\\}^r.$$ Each diagonal entry is nonnegative and the sum of the entries is $\\prod_j((1-\\nu_j)+\\nu_j)=1$ , so $\\rho_D$ is positive with trace one. Set $\\rho_C:=\\Gamma_-(V)\\rho_D\\Gamma_-(V)^*$ .",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For the Gibbs assertion, diagonalize $h=W\\operatorname{diag} (\\epsilon_1,\\ldots,\\epsilon_r)W^*$ by [F3], and set $d=W^*c$ in column notation. The unitary $\\Gamma_-(W)^*$ changes the occupation basis to these eigenmodes. On the occupation vector $|m\\rangle$ it gives $$d\\Gamma(h-\\mu I)|m\\rangle=\\left(\\sum_{j=1}^{r}(\\epsilon_j-\\mu)m_j\\right)|m\\rangle.$$ Therefore the positive exponential has eigenvalues $\\prod_j q_j^{m_j}$ , where $q_j=e^{-\\beta(\\epsilon_j-\\mu)}>0$ , and its finite trace is $$Z=\\prod_{j=1}^{r}(1+q_j)\\in(0,\\infty).$$ The normalized density is a product Bernoulli density with occupation probabilities $p_j=q_j/(1+q_j)=(1+e^{\\beta(\\epsilon_j-\\mu)})^{-1}$ .",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The density $\\rho_D$ is diagonal in the occupation basis, so its state is invariant under the global gauge rotation. For a normally ordered monomial, repeated creation or annihilation indices give zero by the CAR. If the distinct creator and annihilator index sets differ, the monomial changes an occupation vector and has zero diagonal expectation. If the sets agree at $S$ , the CAR relations reorder the product to its permutation sign times $\\prod_{j\\in S}c_j^*c_j$ ; its product-state expectation is that sign times $\\prod_{j\\in S}\\nu_j$ . The determinant of the diagonal two-point matrix has exactly the same value: it is zero for unequal index sets and, for equal sets $S$ , is the permutation sign times $\\prod_{j\\in S}\\nu_j$ . Thus $\\rho_D$ obeys the quasifree moment rule with diagonal covariance $\\operatorname{diag}(\\nu_1,\\ldots,\\nu_r)$ . Moreover, every $c_i$ is a linear combination of the eigenmode annihilators and every $c_i^*$ is the corresponding conjugate linear combination. Expanding a normal-ordered product and using multilinearity of the determinant carries the Wick rule to covariance $V\\operatorname{diag}(\\nu_1,\\ldots,\\nu_r)V^*$ . The unitary $\\Gamma_-(V)$ commutes with total particle number, so it preserves gauge invariance. Hence $\\rho_C$ has the required covariance and moments.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The CAR relations reorder any word in the generators into a linear combination of normally ordered monomials. These monomials determine the functional on the full finite matrix algebra: the vacuum projection is $P_0=\\prod_{j=1}^{r}(I-c_j^*c_j)$ , and for any two occupation subsets $S,T$ , the operator obtained by creating the modes in $S$ , applying $P_0$ , and annihilating the modes in $T$ is a nonzero scalar multiple of $|S\\rangle\\langle T|$ . Expanding $P_0$ and reordering with CAR expresses each such matrix unit as a linear combination of normally ordered monomials. Since these matrix units span the full algebra, no two states can have the same stated moments unless they are equal. This proves uniqueness of $\\rho_C$ .",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The product density in the eigenmode basis obeys the determinant moment rule proved in step 2.1. Its covariance is $W\\operatorname{diag}(p_1,\\ldots,p_r)W^*$ by the convention [F1], and the finite spectral calculus [F3] identifies this matrix with $(I+e^{\\beta(h-\\mu I)})^{-1}$ . Uniqueness from step 3.1 identifies the Gibbs density with $\\rho_C$ . All sums are finite-mode sums; no infinite-mode implementability or thermodynamic limit is involved.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 2.1",
+            "step 3.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": []
+    },
+    "thm-qsmx-quasifree-entropy": {
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires r≥1 and a nonzero retained subspace K, so the empty-mode and empty-retained-factor cases are excluded."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1 use 0 ln 0=0 for covariance eigenvalue 0 and give zero entropy for a deterministic empty occupation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1 use 0 ln 0=0 for eigenvalue 1 and give zero entropy for a deterministic occupied mode."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.1 use spectral traces and unitary invariance, so repeated covariance eigenvalues do not change either entropy."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 handles ν_j=0 and ν_j=1 separately; step 3.1 applies the same endpoint convention to compressed covariance eigenvalues."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The statement has r≥1 and K nonzero; step 1.2 chooses finite ordered orthonormal bases and step 3.1 proves independence of those choices."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem gives entropy identities and a restriction statement, not an iff characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "There is no reverse implication in the entropy or mode-restriction claims."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "one-mode entropy",
+          "input": "r=1, C=[ν], K=ℂ",
+          "calculation": "The density eigenvalues are 1−ν and ν, so −Tr(ρ ln ρ)=−(1−ν)ln(1−ν)−νlnν.",
+          "result": "Equals −Tr[C ln C+(I−C)ln(I−C)], including ν=0,1 by convention.",
+          "steps": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "name": "two-mode restriction",
+          "input": "r=2, C=diag(ν1,ν2), K=span(e1)",
+          "calculation": "The ordered Fock factorization gives ρK=diag(1−ν1,ν1), while CK=[ν1].",
+          "result": "The reduced state is quasifree with compressed covariance and its entropy is the binary entropy of ν1.",
+          "steps": [
+            "1.2",
+            "3.1"
+          ]
+        }
+      ],
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qsmx-quasifree-finite-covariance",
+          "source_section": "Definition",
+          "quote": "Let $r\\geq1$, let $H_1=\\mathbb C^r$ with ordered orthonormal basis\n$e_1,\\ldots,e_r$, and let\n$\\mathcal F_-(H_1)=\\bigoplus_{k=0}^{r}\\bigwedge^k H_1$ be its finite-mode\nfermionic Fock space. Let $\\mathcal A_r$ be the unital *-algebra generated\nby its annihilation and creation operators; it is finite-dimensional. Let\n$c_j,c_j^*$ be those operators in this basis, satisfying\n$$c_ic_j+c_jc_i=0,\\qquad c_ic_j^*+c_j^*c_i=\\delta_{ij}I,\\qquad c_i^*c_j^*+c_j^*c_i^*=0.$$\nA state is a complex-linear functional $\\omega$ on $\\mathcal A_r$ such that\n$\\omega(I)=1$ and $\\omega(X^*X)\\geq0$ for every $X\\in\\mathcal A_r$. Define\nthe gauge automorphism $\\gamma_\\theta$ by\n$\\gamma_\\theta(c_j)=e^{-i\\theta}c_j$ and\n$\\gamma_\\theta(c_j^*)=e^{i\\theta}c_j^*$ for $\\theta\\in\\mathbb R$; the CAR\nrelations are preserved, so these assignments extend to a one-parameter\nfamily of algebra automorphisms. A state is gauge invariant when\n$\\omega(\\gamma_\\theta(X))=\\omega(X)$ for every $X$ and every $\\theta$.\n\nFor a gauge-invariant state, define its one-particle covariance matrix\n$C\\in M_r(\\mathbb C)$ by $C_{ji}:=\\omega(c_i^*c_j)$. A finite\ngauge-invariant state is quasifree when $C=C^*$, $0\\leq C\\leq I$, and its\nnormally ordered moments obey the following rule: for $p\\neq q$,\n$$\\omega(c_{i_1}^*\\cdots c_{i_p}^*c_{j_q}\\cdots c_{j_1})=0,$$\nand for $p=q$,\n$$\\omega(c_{i_1}^*\\cdots c_{i_p}^*c_{j_p}\\cdots c_{j_1})=\\det\\!\\left[\\omega(c_{i_a}^*c_{j_b})\\right]_{a,b=1}^{p}=\\det\\!\\left[C_{j_bi_a}\\right]_{a,b=1}^{p}.$$\nThe empty moment is $\\omega(I)=1$. The inequalities $0\\leq C\\leq I$ mean\n$\\langle Cv,v\\rangle\\geq0$ and\n$\\langle(I-C)v,v\\rangle\\geq0$ for all $v\\in H_1$. Moments of words not\nin normal order are obtained by reordering with the displayed CAR relations.\n\nFor a Hermitian one-particle matrix $h=h^*$, a real chemical potential $\\mu$,\nand $\\beta>0$, define\n$$d\\Gamma(h-\\mu I):=\\sum_{i,j=1}^{r}c_i^*(h-\\mu I)_{ij}c_j,\\qquad Z:=\\operatorname{Tr}\\!\\left(e^{-\\beta d\\Gamma(h-\\mu I)}\\right),\\qquad \\rho:=Z^{-1}e^{-\\beta d\\Gamma(h-\\mu I)}.$$\nThe finite grand Gibbs state has covariance\n$$C=(I+e^{\\beta(h-\\mu I)})^{-1}.$$\nHere $h$ and $\\mu$ are in joules, $\\beta$ is in inverse joules, and $C$ is\ndimensionless. The existence and uniqueness of the state for every\nHermitian contraction $C$, and the displayed finite Gibbs covariance formula,\nare established by an earlier finite-dimensional result.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qsmx-finite-car-quasifree-gibbs-construction",
+          "source_section": "Statement",
+          "quote": "Let $r\\geq1$ and let $C=C^*$ be an $r\\times r$ matrix with\n$0\\leq C\\leq I$. There is a unique finite density operator $\\rho_C$ on\n$\\mathcal F_-(\\mathbb C^r)$ whose state is gauge-invariant quasifree with\ncovariance $C$ in the convention\n$C_{ji}=\\operatorname{Tr}(\\rho_Cc_i^*c_j)$. If $h=h^*$, $\\mu\\in\\mathbb R$,\nand $\\beta>0$, then the finite Gibbs density\n$$\\rho_{h,\\beta,\\mu}:=\\frac{e^{-\\beta d\\Gamma(h-\\mu I)}}{\\operatorname{Tr}(e^{-\\beta d\\Gamma(h-\\mu I)})}$$\nis quasifree and equals $\\rho_C$ for\n$$C=(I+e^{\\beta(h-\\mu I)})^{-1}.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qsmx-information-conventions",
+          "source_section": "Definition",
+          "quote": "All Hilbert spaces in this item are nonzero and finite-dimensional over $\\mathbb C$. A density operator $\\rho$ on $H$ is a Hermitian positive semidefinite endomorphism with $\\operatorname{Tr}\\rho=1$. Its dimensionless von Neumann entropy, in nats, is\n\n$$S(\\rho):=-\\operatorname{Tr}(\\rho\\log\\rho)=-\\sum_{j:\\lambda_j>0}\\lambda_j\\log\\lambda_j,$$\n\nwhere $\\lambda_j$ are the eigenvalues of $\\rho$, the logarithm is natural, and $0\\log0:=0$. For any positive semidefinite endomorphisms $X,Y$ on one finite-dimensional $H$, let $\\operatorname{supp}X:=(\\ker X)^\\perp$. Define\n\n$$D(X\\|Y):=\\operatorname{Tr}(X\\log X)-\\operatorname{Tr}(X\\log Y)$$\n\nwhen $\\operatorname{supp}X\\subseteq\\operatorname{supp}Y$, taking each logarithm spectrally on its positive support and setting zero-eigenvalue contributions to zero; set $D(X\\|Y):=+\\infty$ otherwise. For density operators this is the finite-dimensional quantum relative entropy in nats.\n\nFor a density operator $\\rho_{AB}$ on the ordered product $H_A\\otimes H_B$, define $\\rho_A:=\\operatorname{Tr}_B\\rho_{AB}$ and $\\rho_B:=\\operatorname{Tr}_A\\rho_{AB}$, where in orthonormal product bases $\\bigl(\\operatorname{Tr}_B R\\bigr)_{ii'}=\\sum_jR_{(i,j),(i',j)}$ and the first factor is retained. Define\n\n$$I(A:B)_\\rho:=S(\\rho_A)+S(\\rho_B)-S(\\rho_{AB}).$$\n\nFor a density operator $\\rho_{ABC}$ on $H_A\\otimes H_B\\otimes H_C$, define\n\n$$\\rho_{AB}:=\\operatorname{Tr}_C\\rho_{ABC},\\qquad \\rho_{BC}:=\\operatorname{Tr}_A\\rho_{ABC},\\qquad \\rho_B:=\\operatorname{Tr}_A(\\operatorname{Tr}_C\\rho_{ABC}),$$\n\nwhere each partial trace contracts the indicated tensor factor and retains the other factors in their displayed order.\n\n$$I(A:C\\mid B)_\\rho:=S(\\rho_{AB})+S(\\rho_{BC})-S(\\rho_B)-S(\\rho_{ABC}),$$\n\nusing the partial traces in the displayed factor order. For any fixed positive conversion factor $k_B$ with units J/K, the corresponding physical entropy is $S_{\\mathrm{phys}}(\\rho):=k_BS(\\rho)$; no numerical value of $k_B$ is specified here.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qsm-fock-occupation-basis-and-car-relations",
+          "source_section": "Statement",
+          "quote": "Let $I$ and $\\mathcal F_\\pm(\\ell^2(I))$ be as in\n[[def-qsm-identical-particle-fock-sectors]]. Define\n$$\n\\Omega_B:=\\{m:I\\to\\mathbb N_0:m\\text{ has finite support}\\},\\qquad \\Omega_F:=\\{m:I\\to\\{0,1\\}:m\\text{ has finite support}\\}.\n$$\nFor either statistics choice, write $|m|=\\sum_jm_j$. If $m\\in\\Omega_B$, choose the elementary tensor $x_m$ containing $m_j$ copies of each mode $j$ in the fixed order and set\n$$\n|m\\rangle_B:=\\sqrt{\\frac{|m|!}{\\prod_jm_j!}}\\,P_+^{(|m|)}x_m.\n$$\nIf $m\\in\\Omega_F$, list its occupied modes increasingly in the fixed enumeration, let $x_m$ be their elementary tensor and set\n$$\n|m\\rangle_F:=\\sqrt{|m|!}\\,P_-^{(|m|)}x_m.\n$$\nFor $|m|=0$, both vectors are the vacuum. These vectors form orthonormal bases and define unitary identifications $\\mathcal F_+(\\ell^2(I))\\cong\\ell^2(\\Omega_B)$ and $\\mathcal F_-(\\ell^2(I))\\cong\\ell^2(\\Omega_F)$.\n\nOn the finite-support span $\\mathcal D_{\\rm fin}$ of the bosonic basis, define\n$$\na_j|m\\rangle_B=\\sqrt{m_j}|m-\\mathbf1_j\\rangle_B,\\qquad a_j^\\dagger|m\\rangle_B=\\sqrt{m_j+1}|m+\\mathbf1_j\\rangle_B,\n$$\nwhere the annihilation term is zero when $m_j=0$. Their maximal closed extensions have domains\n$$\nD(a_j)=\\left\\{c:\\sum_{m\\in\\Omega_B}m_j|c_m|^2<\\infty\\right\\},\\qquad D(a_j^\\dagger)=\\left\\{c:\\sum_{m\\in\\Omega_B}(m_j+1)|c_m|^2<\\infty\\right\\},\n$$\nand $a_j^\\dagger=a_j^*$. On $\\mathcal D_{\\rm fin}$, they satisfy\n$[a_i,a_j^\\dagger]=\\delta_{ij}I$, $[a_i,a_j]=0$, and $[a_i^\\dagger,a_j^\\dagger]=0$.\n\nOn the fermionic basis define\n$$\nc_j|m\\rangle_F=(-1)^{\\sum_{i<j}m_i}m_j|m-\\mathbf1_j\\rangle_F,\\qquad c_j^\\dagger|m\\rangle_F=(-1)^{\\sum_{i<j}m_i}(1-m_j)|m+\\mathbf1_j\\rangle_F.\n$$\nThese operators are bounded on the full fermionic Fock space and satisfy\n$\\{c_i,c_j^\\dagger\\}=\\delta_{ij}I$ and $\\{c_i,c_j\\}=\\{c_i^\\dagger,c_j^\\dagger\\}=0$. These are mathematical sector relations; they do not select a physical species or imply a spin-statistics theorem.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-qsm-matrix-state-calculus",
+          "source_section": "Statement",
+          "quote": "Use the following conventions on a complex inner-product space $H$ of dimension $D\\geq1$, with inner product linear in its first argument. For an endomorphism $A$, define $\\operatorname{Tr}A:=\\sum_{j=1}^D\\langle Ae_j,e_j\\rangle$ in an orthonormal basis; step 3.1 proves basis independence. For any Hermitian $M$, its **positive spectral subspace** (called its positive support here) is $S_M:=\\bigoplus_{\\lambda>0}\\ker(M-\\lambda I)$; when $M\\geq0$ this equals $(\\ker M)^\\perp$. Its support logarithm is $\\log(M|_{S_M}):=\\sum_{\\lambda>0}(\\log\\lambda)P_\\lambda|_{S_M}$, where $P_\\lambda$ is the orthogonal projection onto that eigenspace. No value $\\log0$ is assigned; for $M=0$ this is the unique endomorphism of the zero space. For the set $\\mathcal D(H)$ of positive semidefinite Hermitian endomorphisms with trace one, a point $\\rho$ is **extreme** if every equality $\\rho=t\\sigma+(1-t)\\tau$ with $\\sigma,\\tau\\in\\mathcal D(H)$ and $0<t<1$ implies $\\sigma=\\tau=\\rho$.\n\nLet $H$ be a complex inner-product space of finite dimension $D\\geq1$, with inner product linear in its first argument. Every Hermitian endomorphism $M$ has an orthonormal eigenbasis with real eigenvalues. For a real function $f$ on its finite spectrum, define $f(M)$ by its spectral projections; this definition is independent of the choice of eigenbasis. In particular positive square roots, exponentials, and logarithms on positive supports are well defined.\n\nFor a density matrix $\\rho$ on $H$, meaning a Hermitian positive semidefinite operator with $\\operatorname{Tr}\\rho=1$, $\\operatorname{Tr}(\\rho A)=\\sum_jp_j\\langle Au_j,u_j\\rangle$ for bounded $A$, where $\\rho=\\sum_jp_j|u_j\\rangle\\langle u_j|$. The weighted form $(X,Y)_\\rho=\\operatorname{Tr}(\\rho X^*Y)$ satisfies Cauchy–Schwarz, $|(X,Y)_\\rho|^2\\leq(X,X)_\\rho(Y,Y)_\\rho$. Finally, $\\operatorname{Tr}(\\rho^2)\\leq1$, with equality exactly for rank-one densities, and those are exactly the extreme points of the finite density-matrix set.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "source_section": "Statement",
+          "quote": "Every finite-dimensional real or complex inner product space has an orthonormal basis. In dimension zero, this is the empty basis.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F5], write $C=V\\operatorname{diag}(\\nu_1,\\ldots,\\nu_r)V^*$ with $V$ unitary and $\\nu_j\\in[0,1]$ . By [F2], after conjugation by the induced exterior-power unitary, $\\rho_C$ is diagonal on the occupation basis with probabilities $p_m=\\prod_j w_j(m_j)$ , where $w_j(0)=1-\\nu_j$ and $w_j(1)=\\nu_j$ . These probabilities sum to one because $\\sum_{m\\in\\{0,1\\}^r}p_m=\\prod_j((1-\\nu_j)+\\nu_j)=1$ .",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Choose the ordered orthonormal bases of $K$ and $K^\\perp$ using [F6]. The map from the full occupation vector to the tensor product of its $K$ -occupation and $K^\\perp$ -occupation vectors sends one orthonormal basis onto another, hence extends to a unitary factorization. Because the $K$ modes come first, their creation and annihilation operators act on the first factor as $c_j^K\\otimes I$ ; the CAR parity signs from preceding modes are therefore entirely within that first factor. The partial trace over $K^\\perp$ has the same expectation as $\\rho_C$ for every word in the $K$ modes. Restricting the determinant rule [F1] to those words gives the compressed covariance $C_K=P_KC|_K$ and the quasifree moment rule; gauge invariance is inherited under restriction. Thus $\\rho_K$ is the unique quasifree density for $C_K$ by [F2].",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Unitary conjugation preserves the eigenvalues, so the entropy is $-\\sum_m p_m\\ln p_m$ , with zero terms omitted under [F3]. When $0<\\nu_j<1$ , expand $\\ln p_m=\\sum_j[m_j\\ln\\nu_j+(1-m_j)\\ln(1-\\nu_j)]$ and sum the finite product distribution; its $j$ th occupation has mean $\\nu_j$ . The result is $-\\sum_j[\\nu_j\\ln\\nu_j+(1-\\nu_j)\\ln(1-\\nu_j)]$ . If $\\nu_j=0$ or $1$ , that mode has a deterministic occupation and contributes zero by [F3], which is the same formula with $0\\ln0=0$ . Spectral calculus for $C$ and $I-C$ now identifies this sum with the displayed matrix trace.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Apply the calculation of step 2.1 to the finite quasifree density $\\rho_K$ and its positive contraction $C_K$ . The same endpoint convention $0\\ln0=0$ handles pure or rank-deficient reduced states. A change of orthonormal basis in $K$ conjugates $\\rho_K$ by the induced unitary and $C_K$ by the corresponding matrix unitary, so [F3] makes the trace entropy unchanged. A change of basis in $K^\\perp$ conjugates only the traced factor; for a unitary matrix $U$ on that factor, the partial-trace entry sum in [F3] contains $\\sum_j U_{ja}\\overline{U_{jb}}=\\delta_{ab}$ , so $\\rho_K$ is unchanged. This proves the restriction formula and its basis independence.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 2.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": []
+    },
+    "thm-qsmx-finite-boson-stability": {
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The mode count is explicitly r≥1 and every certified frequency is positive. Thus the displayed finite product has at least one factor and the occupation basis contains the vacuum. The theorem intentionally makes no zero-mode-count Fock-space assertion.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/qsm_boundary (scientific owner; no independent acceptance)",
+            "reason": "The mode count is explicitly r≥1 and every certified frequency is positive. Thus the displayed finite product has at least one factor and the occupation basis contains the vacuum. The theorem intentionally makes no zero-mode-count Fock-space assertion."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement requires every certificate frequency ω_j>0; step 7.1 derives 0<q_j<1 and excludes zero frequency."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 3.1 and 7.1 reduce r=1 to E_n=c+ℏω(n+1/2) and the single factor [2 sinh(βℏω/2)]⁻¹."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 3.1 and 7.1 permit equal positive frequencies; each occupation coordinate contributes its own finite geometric factor."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 7.1 uses β>0 and ω_j>0, so q_j lies strictly between 0 and 1; β=0 and ω_j=0 are outside the hypotheses."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement fixes finite r≥1 and explicitly adopts AC and Countable Choice; step 4.1 uses the countable occupation basis."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is a one-way conditional normalizability statement and contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse claim that finite trace implies a positive quadratic certificate is made."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "one-mode oscillator",
+          "input": "r=1, G=ωI₂, U=I, V=0, c=0, ω>0",
+          "calculation": "The certificate has Sg=I and E_n=ℏω(n+1/2); summing e^{−βE_n} gives e^{−βℏω/2}/(1−e^{−βℏω})=1/[2 sinh(βℏω/2)].",
+          "result": "Matches the theorem factor and is finite exactly for βω>0.",
+          "steps": [
+            "3.1",
+            "7.1"
+          ]
+        },
+        {
+          "name": "two distinct modes",
+          "input": "r=2, G=diag(ω1,ω2,ω1,ω2), U=I₂, V=0",
+          "calculation": "Sg=I and the two occupation sums factor as ∏j e^{−βℏωj/2}/(1−e^{−βℏωj}).",
+          "result": "Matches the stated product, including repeated-frequency specializations.",
+          "steps": [
+            "2.1",
+            "7.1"
+          ]
+        }
+      ],
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "4.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1",
+            "4.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-qsmx-finite-boson-quadratic-form",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice and Countable Choice. Fix an integer $r\\geq1$,\nan action scale $\\hbar>0$ in joule-seconds, and\nthe finite-mode Fock-to-Schrödinger unitary\n$\\mathcal U:\\mathcal F_s(\\mathbb C^r)\\to L^2(\\mathbb R^r)$. In Schrödinger\ncoordinates, let $\\mathcal S(\\mathbb R^r)$ be the Schwartz space\n$$\\{f\\in C^\\infty(\\mathbb R^r):\\sup_{x\\in\\mathbb R^r}|x^\\alpha\\partial^\\gamma f(x)|<\\infty\\text{ for every }\\alpha,\\gamma\\in\\mathbb N_0^r\\}.$$\nHere $\\mathbb N_0$ denotes the nonnegative integers,\n$x^\\alpha=\\prod_jx_j^{\\alpha_j}$, and\n$\\partial^\\gamma=\\prod_j\\partial_{x_j}^{\\gamma_j}$.\nUse the dense domain $\\mathcal D:=\\mathcal U^{-1}\\mathcal S(\\mathbb R^r)$ and\ndefine on it the operators $Q_j$ and $P_j$ by transporting multiplication\nby $\\sqrt{\\hbar}\\,x_j$ and differentiation $-i\\sqrt{\\hbar}\\,\\partial_{x_j}$\nthrough $\\mathcal U$. Thus, for $f\\in\\mathcal S$,\n$(Q_j\\mathcal U^{-1}f)=\\mathcal U^{-1}(\\sqrt{\\hbar}\\,x_jf)$ and\n$(P_j\\mathcal U^{-1}f)=\\mathcal U^{-1}(-i\\sqrt{\\hbar}\\,\\partial_{x_j}f)$.\nUse the commutator convention $[A,B]=AB-BA$ on common invariant domains.\nThese quadratures satisfy $[Q_j,P_k]=i\\hbar\\delta_{jk}I$ on $\\mathcal D$\nand have units $\\sqrt{\\mathrm{joule}\\cdot\\mathrm{second}}$. Each product\nHermite function is a polynomial times a Gaussian; all its derivatives and\npolynomial multiples remain a polynomial times that Gaussian and are bounded\non $\\mathbb R^r$. Thus the complete product Hermite family lies in\n$\\mathcal S$, so $\\mathcal D$ is dense. The finite-mode Fock-to-Schrödinger\nsupplier establishes completeness and the quadrature actions used here.\nReorder the quadrature column to grouped order\n$R_g:=(Q_1,\\ldots,Q_r,P_1,\\ldots,P_r)^T$.\n\nA finite positive quadratic canonical operator is specified by a real\nsymmetric matrix $G\\in M_{2r}(\\mathbb R)$ with\n$x^TGx>0$ for every $x\\neq0$, and a real constant $c$. The coefficient\n$G$ has units of inverse seconds and $c$ has units of joules. On $\\mathcal D$\ndefine the symmetrically ordered operator\n$$H_{G,c}^{(0)}:=\\frac14\\sum_{a,b=1}^{2r}G_{ab}(R_{g,a}R_{g,b}+R_{g,b}R_{g,a})+cI.$$\nThe real multiplication and derivative operators preserve Schwartz space,\nso this finite sum maps $\\mathcal D$ into $\\mathcal F_s(\\mathbb C^r)$.\nIntegration by parts makes each $Q_j,P_j$ symmetric on $\\mathcal D$. For\n$f,g\\in\\mathcal D$, symmetry and invariance of $\\mathcal D$ give\n$\\langle R_{g,a}R_{g,b}f,g\\rangle\n=\\langle R_{g,b}f,R_{g,a}g\\rangle\n=\\langle f,R_{g,b}R_{g,a}g\\rangle$; the same identity with $a,b$\ninterchanged proves that each symmetrized summand is symmetric. Since\n$G_{ab}=G_{ba}\\in\\mathbb R$, the finite sum is symmetric. Its quadratic\ncoefficients are strictly positive in the stated matrix sense. The statement\ndoes not yet assert that this symmetric operator is self-adjoint.\n\nIn grouped coordinates set\n$$J_g:=\\begin{pmatrix}0&I_r\\\\-I_r&0\\end{pmatrix},\\qquad D_\\omega:=\\operatorname{diag}(\\omega_1,\\ldots,\\omega_r,\\omega_1,\\ldots,\\omega_r).$$\nA finite diagonalization certificate for $G$ consists of matrices\n$U,V\\in M_r(\\mathbb C)$ and positive angular frequencies $\\omega_j>0$ in\ninverse seconds such that, with $^*$ denoting conjugate transpose and $^T$\ntranspose without conjugation,\n$$UU^*-VV^*=I_r,\\qquad UV^T=VU^T,$$\n$$S_g:=\\begin{pmatrix}\\operatorname{Re}(U+V)&-\\operatorname{Im}(U-V)\\\\\\operatorname{Im}(U+V)&\\operatorname{Re}(U-V)\\end{pmatrix},\\qquad S_g^TJ_gS_g=J_g,\\qquad S_g^TGS_g=D_\\omega.$$\nThis certificate is explicit finite-dimensional data. No claim is made here\nthat every positive $G$ has such a certificate; the theorem on this page\nuses it as a stated hypothesis. Each term in $H_{G,c}^{(0)}$ has units of\njoules because $Q_j$ and $P_j$ have units $\\sqrt{\\mathrm{joule}\\cdot\\mathrm{second}}$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qsmx-finite-boson-quadratic-form",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice and Countable Choice. Fix an integer $r\\geq1$,\nan action scale $\\hbar>0$ in joule-seconds, and\nthe finite-mode Fock-to-Schrödinger unitary\n$\\mathcal U:\\mathcal F_s(\\mathbb C^r)\\to L^2(\\mathbb R^r)$. In Schrödinger\ncoordinates, let $\\mathcal S(\\mathbb R^r)$ be the Schwartz space\n$$\\{f\\in C^\\infty(\\mathbb R^r):\\sup_{x\\in\\mathbb R^r}|x^\\alpha\\partial^\\gamma f(x)|<\\infty\\text{ for every }\\alpha,\\gamma\\in\\mathbb N_0^r\\}.$$\nHere $\\mathbb N_0$ denotes the nonnegative integers,\n$x^\\alpha=\\prod_jx_j^{\\alpha_j}$, and\n$\\partial^\\gamma=\\prod_j\\partial_{x_j}^{\\gamma_j}$.\nUse the dense domain $\\mathcal D:=\\mathcal U^{-1}\\mathcal S(\\mathbb R^r)$ and\ndefine on it the operators $Q_j$ and $P_j$ by transporting multiplication\nby $\\sqrt{\\hbar}\\,x_j$ and differentiation $-i\\sqrt{\\hbar}\\,\\partial_{x_j}$\nthrough $\\mathcal U$. Thus, for $f\\in\\mathcal S$,\n$(Q_j\\mathcal U^{-1}f)=\\mathcal U^{-1}(\\sqrt{\\hbar}\\,x_jf)$ and\n$(P_j\\mathcal U^{-1}f)=\\mathcal U^{-1}(-i\\sqrt{\\hbar}\\,\\partial_{x_j}f)$.\nUse the commutator convention $[A,B]=AB-BA$ on common invariant domains.\nThese quadratures satisfy $[Q_j,P_k]=i\\hbar\\delta_{jk}I$ on $\\mathcal D$\nand have units $\\sqrt{\\mathrm{joule}\\cdot\\mathrm{second}}$. Each product\nHermite function is a polynomial times a Gaussian; all its derivatives and\npolynomial multiples remain a polynomial times that Gaussian and are bounded\non $\\mathbb R^r$. Thus the complete product Hermite family lies in\n$\\mathcal S$, so $\\mathcal D$ is dense. The finite-mode Fock-to-Schrödinger\nsupplier establishes completeness and the quadrature actions used here.\nReorder the quadrature column to grouped order\n$R_g:=(Q_1,\\ldots,Q_r,P_1,\\ldots,P_r)^T$.\n\nA finite positive quadratic canonical operator is specified by a real\nsymmetric matrix $G\\in M_{2r}(\\mathbb R)$ with\n$x^TGx>0$ for every $x\\neq0$, and a real constant $c$. The coefficient\n$G$ has units of inverse seconds and $c$ has units of joules. On $\\mathcal D$\ndefine the symmetrically ordered operator\n$$H_{G,c}^{(0)}:=\\frac14\\sum_{a,b=1}^{2r}G_{ab}(R_{g,a}R_{g,b}+R_{g,b}R_{g,a})+cI.$$\nThe real multiplication and derivative operators preserve Schwartz space,\nso this finite sum maps $\\mathcal D$ into $\\mathcal F_s(\\mathbb C^r)$.\nIntegration by parts makes each $Q_j,P_j$ symmetric on $\\mathcal D$. For\n$f,g\\in\\mathcal D$, symmetry and invariance of $\\mathcal D$ give\n$\\langle R_{g,a}R_{g,b}f,g\\rangle\n=\\langle R_{g,b}f,R_{g,a}g\\rangle\n=\\langle f,R_{g,b}R_{g,a}g\\rangle$; the same identity with $a,b$\ninterchanged proves that each symmetrized summand is symmetric. Since\n$G_{ab}=G_{ba}\\in\\mathbb R$, the finite sum is symmetric. Its quadratic\ncoefficients are strictly positive in the stated matrix sense. The statement\ndoes not yet assert that this symmetric operator is self-adjoint.\n\nIn grouped coordinates set\n$$J_g:=\\begin{pmatrix}0&I_r\\\\-I_r&0\\end{pmatrix},\\qquad D_\\omega:=\\operatorname{diag}(\\omega_1,\\ldots,\\omega_r,\\omega_1,\\ldots,\\omega_r).$$\nA finite diagonalization certificate for $G$ consists of matrices\n$U,V\\in M_r(\\mathbb C)$ and positive angular frequencies $\\omega_j>0$ in\ninverse seconds such that, with $^*$ denoting conjugate transpose and $^T$\ntranspose without conjugation,\n$$UU^*-VV^*=I_r,\\qquad UV^T=VU^T,$$\n$$S_g:=\\begin{pmatrix}\\operatorname{Re}(U+V)&-\\operatorname{Im}(U-V)\\\\\\operatorname{Im}(U+V)&\\operatorname{Re}(U-V)\\end{pmatrix},\\qquad S_g^TJ_gS_g=J_g,\\qquad S_g^TGS_g=D_\\omega.$$\nThis certificate is explicit finite-dimensional data. No claim is made here\nthat every positive $G$ has such a certificate; the theorem on this page\nuses it as a stated hypothesis. Each term in $H_{G,c}^{(0)}$ has units of\njoules because $Q_j$ and $P_j$ have units $\\sqrt{\\mathrm{joule}\\cdot\\mathrm{second}}$.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-nrqmx-finite-mode-bogoliubov",
+          "source_section": "Statement",
+          "quote": "Assume AC, $r\\ge1$, and the finite-mode Fock conventions of\n[[def-nrqmx-finite-mode-symplectic-data]]. Let $U,V\\in M_r(\\mathbb C)$ obey\n$$UU^*-VV^*=I_r,\\qquad UV^T=VU^T,$$\nwhere $^*$ is conjugate transpose and $^T$ is transpose without conjugation.\nOn the finite Hermite core define\n$$a'_j=\\sum_k(U_{jk}a_k+V_{jk}a_k^*).$$\nThen the $a'_j$ satisfy $[a'_j,(a'_k)^*]=\\delta_{jk}I$ and\n$[a'_j,a'_k]=0$ on that core. The real matrix\n$$S_g=\\begin{pmatrix}\\operatorname{Re}(U+V)&-\\operatorname{Im}(U-V)\\\\ \\operatorname{Im}(U+V)&\\operatorname{Re}(U-V)\\end{pmatrix}$$\nis symplectic in grouped coordinate order $(Q_1,\\ldots,Q_r,P_1,\\ldots,P_r)$.\nThere is a unitary $M$ on finite-mode Fock, obtained by transporting an\nindividual finite symplectic implementer through the Fock–Schrödinger\nunitary, such that $M^*aM=a'$ on the transported Schwartz core and\n$M^*W(z)M=W(S_g^Tz)$ in grouped Weyl-label order. The transformed vacuum\n$M\\Omega$ has finite mean number\n$$\\sum_j\\|a_jM\\Omega\\|^2=\\operatorname{tr}(VV^*).$$\nNo infinite-mode implementability assertion is made.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-nrqmx-finite-metaplectic-construction",
+          "source_section": "Statement",
+          "quote": "Assume AC, $r\\ge1$, and $\\hbar>0$. Let $R=(Q_1,P_1,\\ldots,Q_r,P_r)^T$,\n$J=\\bigoplus_{j=1}^r\\begin{pmatrix}0&1\\\\-1&0\\end{pmatrix}$,\nand let $W(z)$ be the regular irreducible Weyl system of\n[[def-nrqmx-finite-mode-symplectic-data]]. For every real\n$S\\in\\operatorname{Sp}(2r,\\mathbb R)$, there is a unitary $M_S$ on\n$L^2(\\mathbb R^r)$ such that\n$$M_S^*W(z)M_S=W(S^Tz)\\qquad(z\\in\\mathbb R^{2r});$$\nequivalently, $M_S^*RM_S=SR$ on the common transported Schwartz core.\nAny two such implementers differ by a scalar of modulus one. The same\nconstruction applies in every nonzero irreducible regular representation\nwith this finite phase space and fixed central parameter $\\hbar$, after the\nunitary equivalence of\n[[thm-nrqmx-finite-weyl-uniqueness-interface]].\n\nThere is also a connected topological group\n$\\operatorname{Mp}(2r,\\mathbb R)$ of normalized propagators of real\nhomogeneous quadratic Hamiltonians on this finite-mode Schrödinger space.\nHere a unitary Schwartz automorphism means a unitary on $L^2(\\mathbb R^r)$\nwhose restriction is a continuous linear bijection of the Schwartz space\n$\\mathcal S(\\mathbb R^r)$ with continuous inverse. A normalized propagator is defined on a compact interval $[0,T]$ with $0<T<\\infty$. Its coefficient path $K:[0,T]\\to M_{2r}(\\mathbb R)$ has Lebesgue-integrable entries and is symmetric, $K(t)=K(t)^T$ for every $t$; an almost-everywhere symmetric integrable path is understood through a symmetric representative. In the displayed interleaved quadrature order put\n$$H_t=\\frac14\\sum_{a,b=1}^{2r}K_{ab}(t)(R_aR_b+R_bR_a)\\quad\\text{on }\\mathcal S(\\mathbb R^r),$$\nwith no linear or scalar term. The path $U:[0,T]\\to\\mathcal U(L^2(\\mathbb R^r))$ consists of unitary Schwartz automorphisms, has $U(0)=I$, and for every $f\\in\\mathcal S(\\mathbb R^r)$ its trajectory $U(t)f$ is absolutely continuous in each Schwartz seminorm $p_{\\alpha,\\beta}(g)=\\sup_x|x^\\alpha\\partial^\\beta g(x)|$ and satisfies $i\\hbar\\,\\partial_tU(t)f=H_tU(t)f$ almost everywhere. Absolute continuity in a seminorm means the finite disjoint-interval condition for the seminorms of the increments. The construction below proves existence, uniqueness and continuity of the inverse path in the same pointwise Schwartz topology. Precisely, $\\operatorname{Mp}(2r,\\mathbb R)$ is the set of all endpoint operators $U(T)$ for this integrable-coefficient class, over all such $T$ and $K$. Piecewise-smooth coefficient paths are included and yield the same endpoint set, as proved below; the definition does not restrict the admissible propagators to that subclass.\nGive $\\operatorname{Mp}$ the topology of pointwise convergence of $U$ and\n$U^{-1}$ on $\\mathcal S(\\mathbb R^r)$ in its Schwartz topology; give\n$\\operatorname{Sp}(2r,\\mathbb R)$ its usual matrix topology.\nThe map\n$$\\pi:\\operatorname{Mp}(2r,\\mathbb R)\\longrightarrow \\operatorname{Sp}(2r,\\mathbb R),\\qquad M\\longmapsto S \\quad\\text{when }M^*W(z)M=W(S^Tz),$$\nis a two-fold covering homomorphism. Its two points over $S$ act by $M_S$\nand $-M_S$ when $M_S$ denotes either normalized lift; an arbitrary Weyl\nimplementer may differ from them by any scalar phase. This connected double\ncover and its unitary action are the metaplectic group and metaplectic\nrepresentation. All mode counts here are finite; no infinite-mode\nimplementation claim is part of the statement.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-nrqmx-finite-mode-fock-schr-identification",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $r\\ge1$, fix a positive real action-scale parameter\n$\\hbar>0$, and let $H=\\mathbb C^r$ with orthonormal basis\n$e_1,\\ldots,e_r$, and let $\\mathcal F_s(H)=\\bigoplus_{n\\ge0}H^{\\otimes_s n}$\nbe the bosonic Fock space with vacuum $\\Omega$ and creation and annihilation\noperators $a_j^*,a_j$ from\n[[thm-nrqm-fock-and-equilibrium-hilbert-direct-sum-construction]] and\n[[lem-nrqm-fock-and-equilibrium-creation-contraction-bounds]]. For\n$N=(n_1,\\ldots,n_r)\\in\\mathbb N_0^r$, set\n$$|N\\rangle:=\\prod_{j=1}^r\\frac{(a_j^*)^{n_j}}{\\sqrt{n_j!}}\\Omega.$$\nLet $g_N(x)=\\prod_{j=1}^r g_{n_j}(x_j)$ be the normalized product Hermite\nfunction from [[thm-nrqm-oscillator-multidimensional-oscillator-completeness]].\nThen $(|N\\rangle)_N$ and $(g_N)_N$ are complete orthonormal families, and the\nmap $\\mathcal U|N\\rangle=g_N$ extends uniquely to a unitary\n$$\\mathcal U:\\mathcal F_s(\\mathbb C^r)\\longrightarrow L^2(\\mathbb R^r).$$\nOn the algebraic finite-particle span, $\\mathcal U a_j\\mathcal U^{-1}$ and\n$\\mathcal U a_j^*\\mathcal U^{-1}$ are respectively\n$(x_j+\\partial_{x_j})/\\sqrt2$ and $(x_j-\\partial_{x_j})/\\sqrt2$ on product\nHermite functions. In particular the quadratures\n$$Q_j=\\sqrt{\\hbar/2}(a_j+a_j^*),\\qquad P_j=-i\\sqrt{\\hbar/2}(a_j-a_j^*)$$\nact there as multiplication by $\\sqrt\\hbar x_j$ and as\n$-i\\sqrt\\hbar\\,\\partial_{x_j}$, respectively. These are core identities;\nthey do not assert that a finite number cutoff preserves the canonical\ncommutation relations.",
+          "uses": [
+            "3.1",
+            "5.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-qsm-models-diagonal-occupation-trace",
+          "source_section": "Statement",
+          "quote": "Assume [[def-countable-choice]]. Let $I$ be finite or countably infinite with a specified enumeration, let $m\\in\\Omega_\\pm$ be the occupation configurations of [[lem-qsm-fock-occupation-basis-and-car-relations]], and let $\\epsilon_j\\in\\mathbb R$ be finite mode energies. For each finite-support configuration put\n$$\nE(m):=\\sum_j\\epsilon_jm_j,\\qquad N(m):=|m|=\\sum_jm_j.\n$$\nThese are finite sums. On $\\ell^2(\\Omega_\\pm)$, define the real diagonal multipliers\n$$\nD(H)=\\left\\{c:\\sum_mE(m)^2|c_m|^2<\\infty\\right\\},\\quad (Hc)_m=E(m)c_m,\n$$\n$$\nD(N)=\\left\\{c:\\sum_m|m|^2|c_m|^2<\\infty\\right\\},\\quad (Nc)_m=|m|c_m,\n$$\nand, for $\\mu\\in\\mathbb R$,\n$$\nD(K_\\mu)=\\left\\{c:\\sum_m|E(m)-\\mu|m||^2|c_m|^2<\\infty\\right\\},\\quad (K_\\mu c)_m=(E(m)-\\mu|m|)c_m.\n$$\nEach is self-adjoint on its displayed domain. No equality between $D(K_\\mu)$ and $D(H)\\cap D(N)$ is asserted.\n\nFor $\\beta>0$, set $q_j=e^{-\\beta(\\epsilon_j-\\mu)}$. In the bosonic case assume\n$$\n0<q_j<1,\\qquad q_*:=\\sup_jq_j<1,\\qquad \\sum_jq_j<\\infty;\n$$\nHere $q_*=0$ by convention when $I$ is empty; for nonempty $I$ the displayed supremum is unchanged. In the fermionic case assume $q_j>0$, $\\sum_jq_j<\\infty$, and only finitely many gaps $\\epsilon_j-\\mu$ are negative. Define the positive diagonal multiplier $G_{\\beta,\\mu}$ by $G_{\\beta,\\mu}|m\\rangle=e^{-\\beta(E(m)-\\mu|m|)}|m\\rangle$. Then $G_{\\beta,\\mu}$ is trace class, with\n$$\n\\Xi_B=\\operatorname{Tr}G_{\\beta,\\mu}=\\prod_j(1-q_j)^{-1}<\\infty,\\qquad \\Xi_F=\\operatorname{Tr}G_{\\beta,\\mu}=\\prod_j(1+q_j)<\\infty.\n$$\nThus $\\rho_{\\beta,\\mu}=\\Xi^{-1}G_{\\beta,\\mu}$ is a positive trace-class operator of trace one. Its finite-mode marginals are independent: bosonic occupation $n_j\\in\\mathbb N_0$ has law $(1-q_j)q_j^{n_j}$, and fermionic occupation $n_j\\in\\{0,1\\}$ has probabilities $(1+q_j)^{-1}$ and $q_j(1+q_j)^{-1}$. In particular\n$$\n\\mathbb E_BN_j=\\frac{q_j}{1-q_j},\\quad \\operatorname{Var}_B(N_j)=\\frac{q_j}{(1-q_j)^2},\\qquad \\mathbb E_FN_j=\\frac{q_j}{1+q_j},\\quad \\operatorname{Var}_F(N_j)=\\frac{q_j}{(1+q_j)^2}.\n$$\nThe total number has finite mean and variance under the stated mode conditions. The trace hypotheses alone do not imply finite energy moments or differentiability in $\\beta,\\mu$.\n\nFor an additional compact-parameter envelope, the corresponding response identities hold. For fixed $\\mu$, let $J\\subset(0,\\infty)$ be a nonempty open interval. If for every compact $B\\subset J$ a summable $(a_m)$ satisfies $(1+|E(m)-\\mu|m||^2)e^{-\\beta(E(m)-\\mu|m|)}\\le a_m$ for all $m$ and $\\beta\\in B$, then throughout $J$, $-\\partial_\\beta\\log\\Xi=\\mathbb E(K_\\mu)$ and $\\partial_\\beta^2\\log\\Xi=\\operatorname{Var}(K_\\mu)$. If $(\\beta,\\mu)$ varies over an open set and a summable compact-parameter envelope dominates $e^{-\\beta(E(m)-\\mu|m|)}(1+|E(m)|^2+|m|^2)$, then at fixed $\\beta$, $\\partial_\\mu\\mathbb E(N)=\\beta\\operatorname{Var}(N)$ and $\\partial_\\mu\\mathbb E(E)=\\beta\\operatorname{Cov}(E,N)$. These stronger moment envelopes are additional hypotheses, not consequences of trace-class normalization.\n\nFor a finite mode set $J$, the canonical fixed-number coefficients are defined by\n$$\n\\prod_{j\\in J}(1-ze^{-\\beta\\epsilon_j})^{-1}=\\sum_{N\\ge0}Z_{B,N}(J)z^N,\\qquad \\prod_{j\\in J}(1+ze^{-\\beta\\epsilon_j})=\\sum_{N=0}^{|J|}Z_{F,N}(J)z^N.\n$$\nEach coefficient is the sum of the Boltzmann weights over the corresponding number sector; for a countable mode set it is the increasing limit over finite mode sets and is finite under the stated grand-trace hypotheses. A fixed-number law is the grand law conditioned on total number, so its occupations are generally coupled. The oscillator specialization uses the actual one-particle Hermite basis and diagonal domain of [[thm-nrqm-oscillator-oscillator-scaling-and-exact-realization]], not a formal differential eigenfunction list.",
+          "uses": [
+            "4.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-trace-of-a-positive-operator-is-the-sum-of-its-eigenvalues",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $H$ be a\nreal or complex Hilbert space ([[def-hilbert-space]]) and let\n$T\\in\\mathcal B(H)$ be a **self-adjoint positive** trace-class operator\n([[def-self-adjoint-positive-unitary-and-normal-operator]],\n[[def-trace-class-operator]]), so that $\\langle Tx,x\\rangle\\ge0$ for every\n$x\\in H$. Let $\\lambda_1\\ge\\lambda_2\\ge\\cdots>0$ be the positive eigenvalues of\n$T$ listed with multiplicity\n([[def-eigenvalue-eigenvector-eigenspace-and-spectrum]]) and let\n$(s_n(T))_{n\\ge1}$ be the zero-padded singular-value sequence\n([[def-absolute-value-and-singular-values-of-a-compact-operator]]). Then\n$s_n(T)=\\lambda_n$ for every $n$, and\n$$\\operatorname{tr}(T)=\\sum_{n\\ge1}\\lambda_n=\\|T\\|_1 ,$$\nwhere the sum is over the positive eigenvalues with multiplicity and the\nequalities are also valid in the finite-rank case (then $\\lambda_n:=0$ for\n$n$ beyond the rank). This is the positive compact self-adjoint case only; it is\n**not** Lidskii's theorem for arbitrary trace-class operators, which is not\nclaimed here.",
+          "uses": [
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-adjoint-of-a-densely-defined-unbounded-operator",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $T$ be a\ndensely defined linear operator on $H$, with domain $D(T)$ dense in $H$\n([[def-densely-defined-closed-and-closable-operator]], [[def-dense-top]]).\nSince $D(T)$ is dense, and since $H$ is complete ([[def-hilbert-space]]), every\nbounded linear functional on the normed space $(D(T),\\|\\cdot\\|)$\n([[def-bounded-linear-operator]]) extends uniquely to a bounded linear\nfunctional $\\widetilde\\varphi$ on $H$ of the same norm, by setting\n$\\widetilde\\varphi(z)=\\lim_n\\varphi(z_n)$ for any sequence $z_n\\in D(T)$ with\n$z_n\\to z$ in $H$; the limit exists because $\\varphi$ is bounded on a dense\nsubspace and $H$ is complete, and it does not depend on the sequence because a\nbounded functional is uniformly continuous.\n\nA vector $y\\in H$ belongs to the **adjoint domain** $D(T^*)$ when the linear\nfunctional $\\varphi_y:D(T)\\to\\mathbb C$, $\\varphi_y(x)=\\langle Tx,y\\rangle$, is\nbounded on $(D(T),\\|\\cdot\\|)$. In that case Hilbert space Riesz representation\n([[thm-riesz-representation-for-hilbert-space]]) applied to the extension\n$\\widetilde{\\varphi_y}$ produces a unique vector $T^*y\\in H$ with\n$$T^*y\\text{ is the unique }w\\in H\\text{ such that }\\langle Tx,y\\rangle=\\langle x,w\\rangle\\quad\\text{for all }x\\in D(T),$$\nequivalently $\\widetilde{\\varphi_y}(z)=\\langle z,T^*y\\rangle$ for all $z\\in H$.\nThe map $T^*:D(T^*)\\to H$, $y\\mapsto T^*y$, is the **adjoint** of $T$.\n\n**Well-definedness.** The functional $\\varphi_y$ is linear in $x$ for each\n$y$, so its domain of boundedness $D(T^*)$ is a linear subspace: if\n$\\varphi_y,\\varphi_{y'}$ are bounded so is $\\varphi_{ay+by'}$ for scalars\n$a,b$, because the first-variable-linear convention gives\n$\\varphi_{ay+by'}=\\overline a\\,\\varphi_y+\\overline b\\,\\varphi_{y'}$. On\n$D(T^*)$ the map $T^*$ is linear: if $y,y'$ are represented by $w,w'$, then\n$ay+by'$ is represented by $aw+bw'$, since\n$\\langle x,aw+bw'\\rangle=\\overline a\\langle x,w\\rangle+\n\\overline b\\langle x,w'\\rangle$; the representing vector is unique. By Riesz representation for the Hilbert space\n$H$ a vector $w\\in H$ is determined by the values $\\langle z,w\\rangle$ with\n$z$ ranging over $H$, and those values are determined by the functional\n$\\widetilde{\\varphi_y}$. Equivalently, if $w,w'$ both represent $\\varphi_y$,\nthen $\\langle x,w-w'\\rangle=0$ for every $x\\in D(T)$; density of $D(T)$ and\ncontinuity of the inner product extend this equality to every $x\\in H$, and\ntaking $x=w-w'$ gives $w=w'$. Finally only\nambient-norm boundedness of $\\varphi_y$ on $D(T)$ is required: no extension,\nno closure and no closedness of $T$ is presupposed.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-densely-defined-closed-and-closable-operator",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice ([[def-countable-choice]]). Let $T$ be a linear\noperator on $H$ with domain $D(T)$ and graph $\\Gamma(T)$\n([[def-unbounded-linear-operator-domain-and-graph]]).\n\n$T$ is **densely defined** when $D(T)$ is a dense subset of $H$\n([[def-dense-top]]); **closed** when $\\Gamma(T)$ is a closed subset of\n$H\\oplus H$; and **closable** when $T$ has a closed extension.\nRecall that the graph norm is $\\|x\\|_T=(\\|x\\|^2+\\|Tx\\|^2)^{1/2}$.\n\n**The graph-norm dictionary.** The following three statements are part of the\ndefinition's content and are proved in the remarks below rather than assumed:\n\n1. $\\|\\cdot\\|_T$ is a norm on $D(T)$, and\n   $x\\mapsto(x,Tx)$ is an isometric isomorphism of $(D(T),\\|\\cdot\\|_T)$ onto\n   $\\Gamma(T)$;\n2. $T$ is closed if and only if $(D(T),\\|\\cdot\\|_T)$ is a complete metric space\n   ([[def-complete-metric-space]]);\n3. if $T$ is closed, then $D(T)$ is a Hilbert space for the inner product\n   $\\langle x,y\\rangle_T=\\langle x,y\\rangle+\\langle Tx,Ty\\rangle$ whose induced\n   norm is $\\|\\cdot\\|_T$.\n\nA linear subspace $D_0\\subseteq D(T)$ is a **core** for a closed operator $T$\nwhen $D_0$ is dense in $(D(T),\\|\\cdot\\|_T)$, equivalently when\n$\\overline{\\Gamma(T|_{D_0})}=\\Gamma(T)$, where the closure is taken in\n$H\\oplus H$ and $T|_{D_0}$ denotes the restriction of $T$ to $D_0$.",
+          "uses": [
+            "4.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-unbounded-borel-functional-calculus",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $T$ be a self-adjoint operator with spectral\nprojection valued measure $E$ on $\\mathbb R$ acting on a complex Hilbert space $H$\n([[thm-spectral-theorem-for-unbounded-self-adjoint-operators]]) and let\n$f,g:\\mathbb R\\to\\mathbb C$ be Borel. Write $u(T)=u(E)$, with the truncation definition below. If $H=\\{0\\}$, use its unique PVM and unique full-domain operator directly. Then:\n\n1. $f(T)^*=\\overline f(T)$;\n2. $f(T)g(T)$ has domain $D(g(T))\\cap D((fg)(T))$ and equals the restriction of\n   $(fg)(T)$ to that domain, and its closure is $(fg)(T)$;\n3. on $D(f(T))\\cap D(g(T))$ the sum $f(T)+g(T)$ equals the restriction of\n   $(f+g)(T)$, and the closure of $f(T)+g(T)$ is $(f+g)(T)$;\n4. the spectrum of $f(T)$ is the essential range\n   $\\{z\\in\\mathbb C:E(f^{-1}(B_\\varepsilon(z)))\\ne0$ for every\n   $\\varepsilon>0\\}$ of $f$ with respect to $E$;\n5. if $f$ is continuous then that essential range is the closure of\n   $f(\\sigma(T))$, with the closure redundant when $f(\\sigma(T))$ is closed.",
+          "uses": [
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-trace-class-operator",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $H$ and\n$K$ be Hilbert spaces over the same field $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$\n([[def-hilbert-space]]) and let\n$T\\in\\mathcal B(H,K)$ be a compact operator ([[def-compact-linear-operator]])\nwith zero-padded singular-value sequence $(s_n(T))_{n\\ge1}$\n([[def-absolute-value-and-singular-values-of-a-compact-operator]]).\n\n**Trace class.** The operator $T$ is **trace class** when\n$$\\sum_{n\\ge1}s_n(T):=\\sum_{m\\in\\mathbb N}s_{m+1}(T)<+\\infty .$$\nThus the series in the zero-based convention of\n[[def-series-and-absolute-convergence-in-a-normed-space]] is formed from the\nexplicit sequence $(s_{m+1}(T))_{m\\in\\mathbb N}$. In that case its **trace\nnorm** is\n$$\\|T\\|_1:=\\sum_{m\\in\\mathbb N}s_{m+1}(T)\\in[0,+\\infty),$$\nand $\\|T\\|_1$ is also written $\\|T\\|_{\\mathrm{tr}}$. The set of trace-class\noperators $H\\to K$ is written $\\mathcal S_1(H,K)$.\n\n**Immediate consequences.** Since $0\\le s_n(T)\\le s_1(T)=\\|T\\|$\n([[def-absolute-value-and-singular-values-of-a-compact-operator]]), the terms\nare nonnegative and $\\|T\\|_1\\ge\\|T\\|\\ge0$ whenever $T$ is trace class; the zero\noperator is trace class with $\\|0\\|_1=0$. When $T$ has finite rank $r$ the\nsequence is zero-padded, the series is the finite sum\n$\\sum_{n=1}^r s_n(T)=\\sum_{\\lambda>0}\\lambda\\dim_{\\mathbb F} E_\\lambda(|T|)$ over the finitely\nmany positive eigenvalues of $|T|$ counted with multiplicity ([[def-dimension]]),\nand every finite-rank operator is compact\n([[lem-finite-rank-operators-are-compact]]) and therefore trace class; in particular every\noperator with finite-dimensional range and every rank-one operator is trace\nclass. If $T$ has infinite rank then $s_n(T)>0$ for every $n$ and the series\n$\\sum_{n\\ge1}s_n(T)$ converges in the summable case. By the necessary\ncondition for convergence of a scalar series ([[lem-nth-term-test]]), a\ntrace-class operator with infinite rank has $s_n(T)\\to0$, hence\nis a norm limit of finite-rank operators\n([[thm-singular-value-decomposition-for-compact-operators]]).\n\n**Choice accounting.** Trace class is defined through the singular values of\n[[def-absolute-value-and-singular-values-of-a-compact-operator]], whose\nconstruction uses $\\mathrm{AC}_\\omega$ through the countable selection of finite\northonormal bases of the eigenspaces of $|T|$ and the spectral theorem; no\nHilbert basis of the ambient space, and no stronger choice, is used here.",
+          "uses": [
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-absolute-value-and-singular-values-of-a-compact-operator",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $H$ and\n$K$ be real or complex Hilbert spaces ([[def-hilbert-space]]) and let\n$T\\in\\mathcal B(H,K)$ be a compact operator ([[def-compact-linear-operator]],\n[[def-bounded-linear-operator]]), with Hilbert adjoint $T^*\\in\\mathcal B(K,H)$\n([[def-hilbert-space-adjoint]], [[thm-hilbert-adjoint-properties]]).\n\n**The absolute value.** The operator $T^*T\\in\\mathcal B(H)$ is compact, since it\nis the composite of the compact $T$ with the bounded $T^*$\n([[lem-compositions-with-a-compact-operator-are-compact]]); it is self-adjoint,\nbecause $(T^*T)^*=T^*T^{**}=T^*T$ ([[thm-hilbert-adjoint-properties]]); and it\nis positive, because\n$$\\langle T^*Tx,x\\rangle=\\langle Tx,Tx\\rangle=\\|Tx\\|^{2}\\ge0$$\nfor every $x\\in H$ ([[def-self-adjoint-positive-unitary-and-normal-operator]]).\nThe **absolute value** of $T$ is the unique compact self-adjoint positive\noperator\n$$|T|:=(T^*T)^{1/2}$$\nwith $|T|^{2}=T^*T$, whose existence and uniqueness are the preceding square-root\nlemma ([[lem-positive-square-root-of-a-compact-positive-operator]]). It satisfies\n$$\\||T|x\\|^{2}=\\langle|T|^{2}x,x\\rangle=\\langle T^*Tx,x\\rangle=\\|Tx\\|^{2}\\qquad(x\\in H),$$\nso in particular $\\bigl\\||T|\\bigr\\|=\\|T\\|$ ([[def-operator-norm]]) and\n$\\ker|T|=\\ker T$, since $\\||T|x\\|=\\|Tx\\|$ for every $x$.\n\n**The singular values.** By the spectral theorem for $|T|$\n([[thm-spectral-theorem-for-compact-self-adjoint-operators]]) the nonzero\neigenvalues of $|T|$ form a finite or countably infinite set of positive reals,\neach with finite multiplicity, and for every real $\\varepsilon>0$ only finitely\nmany of them exceed $\\varepsilon$; positivity rules out negative eigenvalues and\n$0$ already corresponds to the kernel. The **multiset of positive singular\nvalues of $T$** is the multiset of positive eigenvalues of $|T|$, counted with\nmultiplicity ([[def-eigenvalue-eigenvector-eigenspace-and-spectrum]]).\n\n**The ordered singular-value sequence.** The **distinct** positive singular\nvalues are listed with positive labels in *decreasing* order $\\mu_1>\\mu_2>\\cdots$ as follows:\nif the multiset of positive eigenvalues is empty (equivalently $|T|=0$,\nequivalently $T=0$), the list is empty; otherwise $\\mu_1:=\\max\\{\\lambda>0:\\lambda$\nis an eigenvalue of $|T|\\}$, a maximum and not merely a supremum, because a\nsupremum value not attained would be an accumulation point different from $0$;\nhaving chosen $\\mu_1,\\dots,\\mu_k$, put $\\mu_{k+1}:=\\max\\{\\lambda>0:\\lambda$ is an\neigenvalue of $|T|$ and $\\lambda<\\mu_k\\}$ whenever that set is nonempty, and stop\notherwise. Each step is legitimate by the finiteness-above-thresholds property\nabove, and an infinite list satisfies $\\mu_k\\to0$ (otherwise its decreasing\nlimit would be a nonzero accumulation point). Writing $d_k$ for the multiplicity\nof $\\mu_k$ (a positive integer), the **zero-padded singular-value sequence** is\n$$s_1\\ge s_2\\ge s_3\\ge\\cdots$$\nwhere $s_1=\\cdots=s_{d_1}=\\mu_1$, $s_{d_1+1}=\\cdots=s_{d_1+d_2}=\\mu_2$, and so\non; if the multiset is finite with total multiplicity $r=d_1+\\cdots+d_m$, one\nsets $s_n:=0$ for every $n>r$, and if $T=0$ one sets $s_n:=0$ for every\n$n\\ge1$. The number $s_n$ is written $s_n(T)$ and called the $n$-th **singular\nvalue** of $T$.\n\n**Zero-based domain and positive labels.** Set $s_0(T):=\\|T\\|=s_1(T)$.\nThus the numerical sequence is the function $n\\mapsto s_n(T)$ on all of\n$\\mathbb N$, including zero. The positive-labelled tail $(s_{m+1}(T))_{m\\in\\mathbb N}$\nis the multiplicity-counting list constructed above. The auxiliary initial\nvalue $s_0$ is not an additional entry of the eigenvalue multiset, does not index\na singular vector, and is excluded from multiplicity counts and singular-value\nsums, which use $n\\ge1$. The full sequence satisfies\n$s_0\\ge s_1\\ge s_2\\ge\\cdots$ and tends to zero. This preserves the page's\npositive rank labels while giving convergence statements a zero-based domain.\n\n**Rank and the finiteness of the list.** The map $\\Phi:\\operatorname{ran}|T|\\to\\operatorname{ran}T$\ngiven by $\\Phi(|T|x):=Tx$ is well defined and linear, because $|T|x=|T|x'$ forces\n$x-x'\\in\\ker|T|=\\ker T$ and hence $Tx=Tx'$; it is injective, because $Tx=0$ gives\n$x\\in\\ker T=\\ker|T|$ and $|T|x=0$; it is surjective onto $\\operatorname{ran}T$\nbecause $T=\\Phi\\circ|T|$; and it is isometric, $\\|Tx\\|=\\||T|x\\|$. Hence\n$\\operatorname{ran}T$ is finite-dimensional if and only if\n$\\operatorname{ran}|T|$ is finite-dimensional; in that case the linear\nbijection $\\Phi$ gives\n$\\dim\\operatorname{ran}T=\\dim\\operatorname{ran}|T|$\n([[def-dimension]]). Consequently, whenever $T$ has finite rank, the positive\nsingular values with multiplicity number exactly\n$\\dim\\operatorname{ran}T$, the rank of $T$, and all later $s_n$ vanish, so the\nsequence is **zero-padded**. If $T$ does not have finite rank, the multiset of\npositive singular values is infinite and countable\n([[def-countable]]) and $s_n>0$ for every $n$, with $s_n\\downarrow0$; in\nparticular finite rank of $T$ is characterised by the eventual vanishing $s_n=0$ for all sufficiently large\n$n$, and conversely such eventual vanishing forces finite rank. The sequence $(s_n)$ is numerical data only: no orthonormal system is\nselected here, and the zero padding is *not* an indexing of any family of\nvectors. The unordered multiset determines $(s_n)$ uniquely, so $(s_n)$ is well\ndefined, and $s_1(T)=\\||T|\\|=\\|T\\|$.",
+          "uses": [
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-positive-square-root-of-a-compact-positive-operator",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $H$ be a\nreal or complex Hilbert space ([[def-hilbert-space]]) and let\n$T\\in\\mathcal B(H)$ be a compact self-adjoint positive operator\n([[def-compact-linear-operator]],\n[[def-self-adjoint-positive-unitary-and-normal-operator]],\n[[def-bounded-linear-operator]]), so that $\\langle Tx,x\\rangle$ is a\nnonnegative real for every $x$. Then there is a compact self-adjoint positive\noperator $S\\in\\mathcal B(H)$ with $S^{2}=T$, and it is unique: if\n$R\\in\\mathcal B(H)$ is compact and positive\n([[def-self-adjoint-positive-unitary-and-normal-operator]]) with $R^{2}=T$,\nthen $R=S$. The root acts by multiplication by $\\sqrt\\lambda$ on each positive\neigenspace $E_\\lambda(T)=\\ker(T-\\lambda I)$, $\\lambda>0$, and by zero on\n$\\ker T$; in particular $S$ is the operator denoted $\\sqrt T$ or $T^{1/2}$.",
+          "uses": [
+            "7.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F2], the certificate's matrices give a unitary $M$ satisfying $M^*R_gM=S_gR_g$ on the common transported Schwartz core. By [F3], we may take this implementer to preserve Schwartz space: its normalized metaplectic implementer has that property, and multiplying by a scalar phase leaves $M^*R_gM$ unchanged.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Conjugating each symmetrically ordered term of $H_{G,c}^{(0)}$ by $M$ replaces $R_g$ by $S_gR_g$ . Collecting the finite sums gives $$M^*H_{G,c}^{(0)}M=\\frac14\\sum_{a,b}(S_g^TGS_g)_{ab}(R_{g,a}R_{g,b}+R_{g,b}R_{g,a})+cI.$$ By [A2] this is the diagonal quadratic with coefficient $D_\\omega$ on the same core.",
+          "step": "2.1",
+          "inputs": [
+            "A2",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "On the finite Hermite core put $a_j=(Q_j+iP_j)/\\sqrt{2\\hbar}$ and $a_j^*=(Q_j-iP_j)/\\sqrt{2\\hbar}$ . The relation $[Q_j,P_j]=i\\hbar I$ gives $Q_j^2+P_j^2=2\\hbar(a_j^*a_j+\\tfrac12 I)$ by direct multiplication. Consequently the diagonal quadratic is $\\sum_j\\hbar\\omega_j(a_j^*a_j+\\tfrac12 I)+cI$ . Write $g_{\\mathbf n}\\in L^2(\\mathbb R^r)$ for the product Hermite basis and set $\\phi_{\\mathbf n}:=\\mathcal U^{-1}g_{\\mathbf n}\\in\\mathcal F_s(\\mathbb C^r)$ . Then $\\mathcal U\\phi_{\\mathbf n}=g_{\\mathbf n}$ , and the diagonal quadratic has eigenvalue $E_{\\mathbf n}=c+\\sum_j\\hbar\\omega_j(n_j+\\tfrac12)$ . Denote this diagonal differential expression on $\\mathcal S$ by $\\widetilde T_\\omega^{(0)}$ , and its Fock-space transport on $\\mathcal D$ by $T_\\omega^{(0)}:=\\mathcal U^{-1}\\widetilde T_\\omega^{(0)}\\mathcal U$ .",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Put $\\epsilon_j=\\hbar\\omega_j$ and let $A$ be the maximal diagonal multiplier in the basis $(\\phi_{\\mathbf n})$ with eigenvalues $\\sum_j\\epsilon_jn_j$ . By [F5], $A$ is self-adjoint on the domain where $\\sum_{\\mathbf n}|\\sum_j\\epsilon_jn_j|^2|f_{\\mathbf n}|^2<\\infty$ . The diagonal operator with eigenvalues $E_{\\mathbf n}$ is $A+c_0I$ , where $c_0=c+\\tfrac12\\sum_j\\epsilon_j$ . Its domain is the same: for real $x,c_0$ , $|x+c_0|^2\\leq2|x|^2+2|c_0|^2$ and $|x|^2\\leq2|x+c_0|^2+2|c_0|^2$ , and each coefficient sequence $(f_{\\mathbf n})$ is in $\\ell^2$ . For $g\\in D((A+c_0I)^*)$ , [F7] says that boundedness of $f\\mapsto\\langle(A+c_0I)f,g\\rangle$ and boundedness of $f\\mapsto c_0\\langle f,g\\rangle$ imply boundedness of $f\\mapsto\\langle Af,g\\rangle$ . Thus $g\\in D(A^*)=D(A)$ and $(A+c_0I)^*g=Ag+c_0g$ . Conversely, every $g\\in D(A)$ satisfies this adjoint identity, so $T=A+c_0I$ is self-adjoint. Finite Hermite truncations converge in its graph norm, because the tail of $\\sum_{\\mathbf n}(1+|E_{\\mathbf n}|^2)|f_{\\mathbf n}|^2$ tends to zero. Thus finite Hermite sums are a core for $T$ in the graph norm of [F8].",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "F5",
+            "F7",
+            "F8",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "For $\\psi\\in\\mathcal D$ , put $f=\\mathcal U\\psi\\in\\mathcal S$ . The coordinate expression $\\widetilde T_\\omega^{(0)}$ sends $f$ to an $L^2$ function. Integration by parts against each Schwartz Hermite function gives $\\langle T_\\omega^{(0)}\\psi,\\phi_{\\mathbf n}\\rangle =E_{\\mathbf n}\\langle\\psi,\\phi_{\\mathbf n}\\rangle$ ; equivalently, this is the $L^2$ pairing of the differential expression on $f$ with $g_{\\mathbf n}=\\mathcal U\\phi_{\\mathbf n}$ . Boundary terms vanish because both functions are Schwartz. For every finite set $F$ of occupation indices, orthogonal projection therefore gives $\\sum_{\\mathbf n\\in F}|E_{\\mathbf n}\\langle\\psi,\\phi_{\\mathbf n}\\rangle|^2 \\leq\\|T_\\omega^{(0)}\\psi\\|^2$ . These coefficients are square-summable, and completeness of $(\\phi_{\\mathbf n})$ from [F4] identifies their vector with $T_\\omega^{(0)}\\psi$ . Hence $\\mathcal D\\subseteq D(T)$ and the diagonal expression is $T$ on $\\mathcal D$ . The finite Hermite sums from step 4.1 lie in $\\mathcal D$ because [F1] places each $g_{\\mathbf n}$ in $\\mathcal S$ , and are graph-norm dense in $D(T)$ ; so the graph closure of this restriction is $T$.",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "F8",
+            "step 3.1",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "By step 1.1, $M$ and $M^*$ preserve Schwartz space, and by step 2.1 $H_{G,c}^{(0)}=M T_\\omega^{(0)}M^*$ there. Step 5.1 gives graph closure $T$ for the diagonal restriction. Conjugation by the unitary $M$ carries the graph and its closure in $\\mathcal F_s\\oplus\\mathcal F_s$ to the graph and closure of $H_{G,c}^{(0)}$ , so $H=\\overline{H_{G,c}^{(0)}}=MTM^*$ . This is self-adjoint because $T$ is self-adjoint and $M$ is unitary.",
+          "step": "6.1",
+          "inputs": [
+            "F8",
+            "step 1.1",
+            "step 2.1",
+            "step 5.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-7-1",
+          "claim": "Set $q_j=e^{-\\beta\\epsilon_j}=e^{-\\beta\\hbar\\omega_j}$ . Since $\\beta>0$ and every $\\omega_j>0$ , $0<q_j<1$ ; the mode set is finite, so $q_*<1$ and $\\sum_jq_j<\\infty$ . Apply [F5] to the diagonal number-energy operator $A$ to get $\\operatorname{Tr}(e^{-\\beta A})=\\prod_j(1-q_j)^{-1}<\\infty$ . On the occupation basis, $T$ has eigenvalues $E_{\\mathbf n}=c_0+\\sum_j\\epsilon_jn_j$ , so the spectral exponential has positive eigenvalues $e^{-\\beta E_{\\mathbf n}}=e^{-\\beta c_0}\\prod_jq_j^{n_j}$ by [F9]. Thus $e^{-\\beta T}=e^{-\\beta c_0}e^{-\\beta A}$ on the occupation basis; [F10] and the trace-class conclusion for $e^{-\\beta A}$ from [F5] show that $e^{-\\beta T}$ is positive trace class. Its eigenvalue sum is $e^{-\\beta c_0}\\prod_j(1-q_j)^{-1}<\\infty$ by [F5], so [F6] identifies that sum with its trace. By steps 6.1 and 5.1, the vectors $M\\phi_{\\mathbf n}$ form a complete orthonormal eigenbasis for $H$ with the same eigenvalues; equivalently $e^{-\\beta H}=M e^{-\\beta T}M^*$ . The unitary invariance in [F10] makes $e^{-\\beta H}$ trace class with the same eigenvalue sum, and [F6] gives the same trace. Finally, $$e^{-\\beta c_0}\\prod_j(1-e^{-\\beta\\hbar\\omega_j})^{-1}=e^{-\\beta c}\\prod_j\\frac{e^{-\\beta\\hbar\\omega_j/2}}{1-e^{-\\beta\\hbar\\omega_j}}=e^{-\\beta c}\\prod_j\\left[2\\sinh\\!\\left(\\frac{\\beta\\hbar\\omega_j}{2}\\right)\\right]^{-1}.$$ Every factor is strictly positive and finite, proving $Z_\\beta\\in(0,\\infty)$ . The only infinite-dimensional Hilbert space used here is the bosonic Fock space for the stated finite number $r$ of modes.",
+          "step": "7.1",
+          "inputs": [
+            "A1",
+            "F4",
+            "F5",
+            "F6",
+            "F9",
+            "F10",
+            "step 4.1",
+            "step 6.1",
+            "algebra",
+            "step 5.1"
+          ]
+        }
+      ],
+      "routine_steps": []
+    },
+    "cex-qsmx-bogoliubov-zero-mode": {
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 treat r=1, where the positive-frequency set is empty and its product is 1, while partial sums are N+1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1 explicitly include ω_1=0 and show the zero-energy occupation contributes N+1 states to each partial sum."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For r=1, step 2.1 gives the exact divergent partial sum N+1 with no positive-frequency modes."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 applies to any finite list of positive ω_k, including repeated values; their finite positive product is multiplied by N+1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 show that positive modes have βℏω_k>0 and finite factors, while the excluded zero-frequency mode is the sole divergent factor."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement requires r≥1 and designates the first mode; steps 1.1–2.1 check both r=1 and r>1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The counterexample refutes a finite-partition claim and makes no iff assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse implication is stated; the argument only exhibits a divergent zero-mode occupation sum."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "single zero mode",
+          "input": "r=1, ω1=0",
+          "calculation": "E(n1)=0 for every n1, so the partial sum through n1=N is ∑_{n1=0}^N 1=N+1.",
+          "result": "The full partition sum diverges and the empty positive-mode product 1 is not the full sum.",
+          "steps": [
+            "2.1"
+          ]
+        },
+        {
+          "name": "one zero and one positive mode",
+          "input": "r=2, ω1=0, ω2=ω>0",
+          "calculation": "The partial sum with n1≤N and all n2 is (N+1)e^{−βℏω/2}/(1−e^{−βℏω}).",
+          "result": "A finite positive oscillator factor cannot remove the linear divergence in N.",
+          "steps": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-qsmx-finite-boson-stability",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice and Countable Choice. Let $r\\geq1$,\n$\\hbar>0$ in joule-seconds, $\\beta>0$ in inverse joules, $c\\in\\mathbb R$ in\njoules, and let $G=G^T$ be a strictly positive real $2r\\times2r$ matrix\nwhose entries have units of inverse seconds. Assume $(U,V,\\omega_1,\\ldots,\\omega_r)$\nis a finite diagonalization certificate for $G$ as defined earlier, with\neach $\\omega_j>0$ in inverse seconds. Let $H_{G,c}^{(0)}$ be the symmetric\nquadratic operator on the stated Schwartz domain. Then its graph closure\n$H:=\\overline{H_{G,c}^{(0)}}$ exists and is self-adjoint, and its finite-mode\nGibbs partition sum is\n$$Z_\\beta:=\\operatorname{Tr}(e^{-\\beta H})=e^{-\\beta c}\\prod_{j=1}^{r}\\left[2\\sinh\\!\\left(\\frac{\\beta\\hbar\\omega_j}{2}\\right)\\right]^{-1}\\in(0,\\infty),\\qquad \\sinh x:=\\frac{e^x-e^{-x}}{2}.$$\nThe matrix $G$ acts on the finite grouped quadratures; the bosonic Fock\nspace remains infinite-dimensional at each $r\\geq1$. This conditional\nfinite-mode conclusion neither proves that every positive $G$ has a\ndiagonalization certificate nor asserts infinite-mode implementability,\ninteracting depletion bounds, or superfluidity.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qsm-models-diagonal-occupation-trace",
+          "source_section": "Statement",
+          "quote": "Assume [[def-countable-choice]]. Let $I$ be finite or countably infinite with a specified enumeration, let $m\\in\\Omega_\\pm$ be the occupation configurations of [[lem-qsm-fock-occupation-basis-and-car-relations]], and let $\\epsilon_j\\in\\mathbb R$ be finite mode energies. For each finite-support configuration put\n$$\nE(m):=\\sum_j\\epsilon_jm_j,\\qquad N(m):=|m|=\\sum_jm_j.\n$$\nThese are finite sums. On $\\ell^2(\\Omega_\\pm)$, define the real diagonal multipliers\n$$\nD(H)=\\left\\{c:\\sum_mE(m)^2|c_m|^2<\\infty\\right\\},\\quad (Hc)_m=E(m)c_m,\n$$\n$$\nD(N)=\\left\\{c:\\sum_m|m|^2|c_m|^2<\\infty\\right\\},\\quad (Nc)_m=|m|c_m,\n$$\nand, for $\\mu\\in\\mathbb R$,\n$$\nD(K_\\mu)=\\left\\{c:\\sum_m|E(m)-\\mu|m||^2|c_m|^2<\\infty\\right\\},\\quad (K_\\mu c)_m=(E(m)-\\mu|m|)c_m.\n$$\nEach is self-adjoint on its displayed domain. No equality between $D(K_\\mu)$ and $D(H)\\cap D(N)$ is asserted.\n\nFor $\\beta>0$, set $q_j=e^{-\\beta(\\epsilon_j-\\mu)}$. In the bosonic case assume\n$$\n0<q_j<1,\\qquad q_*:=\\sup_jq_j<1,\\qquad \\sum_jq_j<\\infty;\n$$\nHere $q_*=0$ by convention when $I$ is empty; for nonempty $I$ the displayed supremum is unchanged. In the fermionic case assume $q_j>0$, $\\sum_jq_j<\\infty$, and only finitely many gaps $\\epsilon_j-\\mu$ are negative. Define the positive diagonal multiplier $G_{\\beta,\\mu}$ by $G_{\\beta,\\mu}|m\\rangle=e^{-\\beta(E(m)-\\mu|m|)}|m\\rangle$. Then $G_{\\beta,\\mu}$ is trace class, with\n$$\n\\Xi_B=\\operatorname{Tr}G_{\\beta,\\mu}=\\prod_j(1-q_j)^{-1}<\\infty,\\qquad \\Xi_F=\\operatorname{Tr}G_{\\beta,\\mu}=\\prod_j(1+q_j)<\\infty.\n$$\nThus $\\rho_{\\beta,\\mu}=\\Xi^{-1}G_{\\beta,\\mu}$ is a positive trace-class operator of trace one. Its finite-mode marginals are independent: bosonic occupation $n_j\\in\\mathbb N_0$ has law $(1-q_j)q_j^{n_j}$, and fermionic occupation $n_j\\in\\{0,1\\}$ has probabilities $(1+q_j)^{-1}$ and $q_j(1+q_j)^{-1}$. In particular\n$$\n\\mathbb E_BN_j=\\frac{q_j}{1-q_j},\\quad \\operatorname{Var}_B(N_j)=\\frac{q_j}{(1-q_j)^2},\\qquad \\mathbb E_FN_j=\\frac{q_j}{1+q_j},\\quad \\operatorname{Var}_F(N_j)=\\frac{q_j}{(1+q_j)^2}.\n$$\nThe total number has finite mean and variance under the stated mode conditions. The trace hypotheses alone do not imply finite energy moments or differentiability in $\\beta,\\mu$.\n\nFor an additional compact-parameter envelope, the corresponding response identities hold. For fixed $\\mu$, let $J\\subset(0,\\infty)$ be a nonempty open interval. If for every compact $B\\subset J$ a summable $(a_m)$ satisfies $(1+|E(m)-\\mu|m||^2)e^{-\\beta(E(m)-\\mu|m|)}\\le a_m$ for all $m$ and $\\beta\\in B$, then throughout $J$, $-\\partial_\\beta\\log\\Xi=\\mathbb E(K_\\mu)$ and $\\partial_\\beta^2\\log\\Xi=\\operatorname{Var}(K_\\mu)$. If $(\\beta,\\mu)$ varies over an open set and a summable compact-parameter envelope dominates $e^{-\\beta(E(m)-\\mu|m|)}(1+|E(m)|^2+|m|^2)$, then at fixed $\\beta$, $\\partial_\\mu\\mathbb E(N)=\\beta\\operatorname{Var}(N)$ and $\\partial_\\mu\\mathbb E(E)=\\beta\\operatorname{Cov}(E,N)$. These stronger moment envelopes are additional hypotheses, not consequences of trace-class normalization.\n\nFor a finite mode set $J$, the canonical fixed-number coefficients are defined by\n$$\n\\prod_{j\\in J}(1-ze^{-\\beta\\epsilon_j})^{-1}=\\sum_{N\\ge0}Z_{B,N}(J)z^N,\\qquad \\prod_{j\\in J}(1+ze^{-\\beta\\epsilon_j})=\\sum_{N=0}^{|J|}Z_{F,N}(J)z^N.\n$$\nEach coefficient is the sum of the Boltzmann weights over the corresponding number sector; for a countable mode set it is the increasing limit over finite mode sets and is finite under the stated grand-trace hypotheses. A fixed-number law is the grand law conditioned on total number, so its occupations are generally coupled. The oscillator specialization uses the actual one-particle Hermite basis and diagonal domain of [[thm-nrqm-oscillator-oscillator-scaling-and-exact-realization]], not a formal differential eigenfunction list.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Apply [F2] to the reduced finite mode set $\\{2,\\ldots,r\\}$ with $\\epsilon_k=\\hbar\\omega_k$ . Its factors satisfy $q_k=e^{-\\beta\\epsilon_k}\\in(0,1)$ , and the set is finite, so the hypotheses $q_*<1$ and $\\sum_{k=2}^rq_k<\\infty$ hold. Its occupation partition sum is $\\prod_{k=2}^{r}(1-q_k)^{-1}$ ; adding each oscillator's zero-point energy $\\hbar\\omega_k/2$ multiplies this by $e^{-\\beta\\sum_{k=2}^r\\hbar\\omega_k/2}$ , giving $\\prod_{k=2}^{r}[2\\sinh(\\beta\\hbar\\omega_k/2)]^{-1}$ . If $r=1$ , the reduced set is empty and its sum and product are both $1$ .",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For each $k\\geq2$ , put $x_k=\\beta\\hbar\\omega_k>0$ . Its one-mode occupation sum is $$\\sum_{n_k=0}^{\\infty}e^{-x_k(n_k+1/2)}=\\frac{e^{-x_k/2}}{1-e^{-x_k}}=\\left[2\\sinh(x_k/2)\\right]^{-1},$$ which is positive and finite. If the first occupation is restricted to $0\\leq n_1\\leq N$ and the remaining modes are summed, the resulting partial sum is $$(N+1)\\prod_{k=2}^{r}\\left[2\\sinh(x_k/2)\\right]^{-1}.$$ This tends to $+\\infty$ as $N\\to\\infty$ ; when $r=1$ the product is empty and the same partial sum is $N+1$ . Hence $Z_\\beta=+\\infty$ .",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "given",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Removing mode $1$ changes the occupation Hilbert space and leaves only the finite product over $k\\geq2$ . The full system has an additional countably infinite zero-energy occupation degeneracy, so its positive Gibbs weights cannot be normalized. The finite positive-frequency theorem does not apply at $\\omega_1=0$ , and the omitted-mode product is the partition sum of a different model.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": []
+    }
+  }
+}

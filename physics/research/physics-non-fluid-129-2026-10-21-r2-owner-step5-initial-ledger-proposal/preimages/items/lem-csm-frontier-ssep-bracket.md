@@ -1,0 +1,69 @@
+---
+id: lem-csm-frontier-ssep-bracket
+kind: lemma
+title: "SSEP empirical-field martingale and bracket"
+status: draft
+origin: pipeline
+domain: mathematics
+library: physics
+dependency_level: 3
+deps:
+  - def-axiom-of-choice
+  - def-csm-frontier-ssep-diffusive-model
+  - lem-csm-frontier-finite-chain-martingale
+dependency_roles:
+  def-axiom-of-choice: mathematical-premise
+  def-csm-frontier-ssep-diffusive-model: mathematical-premise
+  lem-csm-frontier-finite-chain-martingale: mathematical-premise
+proof_strategy: direct
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+physical_scope: null
+sources:
+  references:
+    - title: "S. R. S. Varadhan, Hydrodynamic Scaling, Chapter 4 lecture notes"
+      url: "https://math.nyu.edu/~varadhan/Spring2012/Chapter4.pdf"
+      locator: "Section 4.3, printed pp. 54–56: empirical-field generator, martingale, and quadratic-variation estimate."
+    - title: "Claudio Landim, Hydrodynamic Limit of Interacting Particle Systems, complete lecture notes"
+      url: "https://math.arizona.edu/~sethuram/588/Landim.pdf"
+      locator: "Chapter 2, Sections 2.3–2.4, printed pp. 77–82: weak empirical equation and martingale bracket scale."
+verification:
+  precheck: pending
+---
+
+## Statement
+
+Assume the Axiom of Choice. Let $d\ge1$, $N\ge3$, $T\ge0$, and let $(\eta_t)_{0\le t\le T}$ be the SSEP from the diffusive-model definition with any initial probability vector. For a real smooth periodic $G:\mathbb T^d\to\mathbb R$, set
+
+$$M_t^{N,G}:=\langle\pi_t^N,G\rangle-\langle\pi_0^N,G\rangle-\int_0^t\langle\pi_s^N,\Delta_NG\rangle\,ds.$$
+
+Then $M^{N,G}$ is a square-integrable martingale. Its continuous predictable bracket is
+
+$$A_t^{N,G}=N^{2-2d}\int_0^t\sum_{i=1}^d\sum_{x\in\Lambda_N}(\eta_{x+e_i}(s)-\eta_x(s))^2\bigl(G((x+e_i)/N)-G(x/N)\bigr)^2\,ds,$$
+
+in the continuous predictable compensator convention of the finite-chain martingale supplier. In particular,
+
+$$A_T^{N,G}\le T N^{-d}\sum_{i=1}^d\|\partial_iG\|_\infty^2.$$
+
+## Statement references
+
+[[def-csm-frontier-ssep-diffusive-model]]
+
+[[lem-csm-frontier-finite-chain-martingale]]
+
+## Facts & Assumptions
+
+**Given:** The Axiom of Choice, a finite SSEP rate matrix, its uniformized realization, a smooth real periodic $G$, and a finite horizon $T$.
+
+[A1] Assume the Axiom of Choice, meaning every family of nonempty sets has a choice function; the finite-chain martingale supplier requires it ([[def-axiom-of-choice]]).
+
+[F1] [[def-csm-frontier-ssep-diffusive-model]]: $\Omega_N$ is finite; each occupation-changing unordered nearest-neighbor swap has rate $N^2$. Equal endpoint occupations give no off-diagonal transition and zero observable increment, so generator and squared-jump sums may be extended over all bonds with coefficient $N^2$. Also $\pi_t^N=N^{-d}\sum_x\eta_x(t)\delta_{x/N}$ and $\langle\pi,G\rangle=N^{-d}\sum_x\eta_xG(x/N)$.
+
+[F2] [[lem-csm-frontier-finite-chain-martingale]]: for a finite rate matrix $L$, bounded $f$, and its uniformized realization, $f(X_t)-f(X_0)-\int_0^tLf(X_s)ds$ is a square-integrable martingale with continuous predictable bracket $\int_0^t\sum_{j\ne i}L_{ij}(f(j)-f(i))^2\,ds$ along the chain.
+
+## Proof
+
+1.1 Put $f_G(\eta)=N^{-d}\sum_x\eta_xG(x/N)$. For the bond $\{x,x+e_i\}$, $f_G(\eta^{x,x+e_i})-f_G(\eta)=N^{-d}(\eta_{x+e_i}-\eta_x)(G(x/N)-G((x+e_i)/N))$. Summing its rate-$N^2$ contribution over all $x,i$ and reindexing the terms containing $\eta_{x+e_i}$ gives $L_Nf_G(\eta)=N^{-d}\sum_x\eta_xN^2\sum_i[G((x+e_i)/N)+G((x-e_i)/N)-2G(x/N)]=\langle\pi^N(\eta),\Delta_NG\rangle$. Thus the finite-chain martingale in [F2], applied to $f_G$, is exactly $M_t^{N,G}$ and has bracket given by the sum of rates times squared jumps. [A1, F1, F2, algebra]
+
+2.1 A bond with equal endpoint occupations has zero jump; otherwise its squared jump is $N^{-2d}(G((x+e_i)/N)-G(x/N))^2$. Substituting these jumps and rate $N^2$ into [F2] gives the displayed bracket. By the fundamental theorem of calculus along the coordinate segment, $|G((x+e_i)/N)-G(x/N)|\le N^{-1}\|\partial_iG\|_\infty$, while $(\eta_{x+e_i}-\eta_x)^2\le1$. There are $N^d$ bonds in each coordinate direction, so the bracket is increasing, continuous, predictable, and bounded by $TN^{-d}\sum_i\|\partial_iG\|_\infty^2$. The finite state space makes $f_G$ bounded, hence [F2] also gives square integrability. [F1, F2, step 1.1, algebra] ∎

@@ -1,0 +1,9 @@
+# Boundary proposal 3
+
+All39 assigned complete current sources, all312 old boundary rows, and the supplied exact reference/heuristic flags were inspected. Source SHA256 bindings and current semantic proposals are in proposal.json, keyed by item ID. This is boundary worksheet maintenance, not a new independent proof acceptance or recursive supplier audit. No production source, contract, manifest, readiness, native state, or root guard was edited.
+
+The flagged arguments were located by content. Four sources were reordered or renumbered during reading (ball branch, spin-cover rotations, metaplectic construction, periodic Laplacian); their complete current arguments were reread and semantic maps refreshed. proposal.json retains the exact current paragraphs and the old-to-current maps. Sound old text is retained. Specific corrections include the actual empty quasi-potential admissible family (+infinity), zero-intensity coherency domain, finite polymer height-zero recursion location, full inherited choice premises for scattering/occupation-trace suppliers, spin descent directions, and the precise direction order of the scattering iff. The two sum heuristics are addressed by concrete finite-mode/root/module domain analysis, without hiding the admissible zero Hamiltonian or categorical unit tensor. All real q>=1 torus likelihood claims remain intact.
+
+Reading limits: the39 actual current source bodies/frontmatter and their complete local arguments were read; no new external-source retrieval or fresh recursive proof audit of every referenced supplier was performed. Proposed case reasoning assesses these current claimed boundaries under the carrier’s exact stated hypotheses. Root owns guards, recertification, current currency and final adoption.
+
+Production writer ownership released; this task wrote proposals only.

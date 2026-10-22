@@ -1,0 +1,1058 @@
+{
+  "version": 1,
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "scope": [
+    "prop-emg-fx-affine-connection-sector",
+    "def-emg-fx-maxwell-presymplectic-current",
+    "lem-emg-fx-symplectic-current-boundary",
+    "prop-emg-fx-finite-coisotropic-pairing",
+    "ex-emg-fx-flat-holonomy-circle"
+  ],
+  "contracts": {
+    "prop-emg-fx-affine-connection-sector": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-emg-local-potentials-and-circle-data",
+          "source_section": "Definition",
+          "quote": "Let $(M,g,N,o)$ be the smooth, Hausdorff, second-countable, boundaryless oriented and time-oriented Lorentzian four-manifold of [[def-emg-lorentzian-forms]]. Its smooth real $k$-forms are sections of $\\bigwedge^kT^*M$, written $\\Omega^k(M)$, and $d$ is the exterior derivative of [[lem-emg-lorentz-hodge-calculus]]. A smooth two-form $F$ is **closed** when $dF=0$ and **exact** when $F=dA$ for some smooth real one-form $A$ on the whole base.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-emg-circle-connection-gluing",
+          "source_section": "Statement",
+          "quote": "Let $M$ be a smooth, Hausdorff, second-countable oriented four-manifold, and let $(U_i,g_{ij},a_i;\\kappa_0)$ be a normalized circle-connection datum as in [[def-emg-local-potentials-and-circle-data]]. Use the set-sized-object and quotient convention of [[def-emg-set-size-and-class-schema]]. Then the chart data construct a smooth Hausdorff second-countable right principal $U(1)$-bundle $\\pi:P\\to M$ and a global smooth real connection one-form $\\omega$ on $P$. Its curvature is basic: there is a smooth closed two-form $f\\in\\Omega^2(M)$ with $d\\omega=\\pi^*f$ and $f|_{U_i}=da_i$. The local potentials $A_i=\\kappa_0a_i$ satisfy $dA_i=F$, where $F=\\kappa_0 f$ is global. For two connections on the same fixed bundle with the same transition functions, their local-form differences are restrictions of one global base one-form; adding a global one-form to all local representatives stays in that bundle sector.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-gauge-transformations-act-on-principal-connections",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. Let $P\\to M$ be a smooth right principal\n$G$-bundle with a principal connection $H$, and let\n$\\Phi\\in\\mathcal G(P)$. Then\n$$\\Phi_*H:=d\\Phi(H)$$\nis a principal connection. If $K_H$ and $K_{\\Phi_*H}$ are the vertical-valued\ncurvatures from\n[[def-principal-connection-and-vertical-curvature]], then for\n$X,Y\\in T_pP$,\n$$K_{\\Phi_*H}(d\\Phi_pX,d\\Phi_pY)=d\\Phi_p(K_H(X,Y)).$$\nComposition makes this a left action of $\\mathcal G(P)$ on the set of\nprincipal connections.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-the-exterior-derivative-commutes-with-pullback",
+          "source_section": "Statement",
+          "quote": "For every smooth map $F:M\\to N$ and every form $\\omega$ on $N$, $$d(F^*\\omega)=F^*(d\\omega).$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-finite-chart-localization-defines-choice-free-integration-and-compact-stokes",
+          "source_section": "Statement",
+          "quote": "Let $M^n$ be an oriented smooth manifold without boundary. For each compact set $K\\subseteq M$ there are finitely many nonnegative smooth functions $\\chi_i$ with compact supports contained in connected coordinate domains $U_i$, such that $\\sum_i\\chi_i=1$ on a neighbourhood of $K$. For $\\omega\\in\\Omega_c^n(M)$ define\n$$\\mathcal I_M(\\omega)=\\sum_i I_{\\phi_i}(\\chi_i\\omega)\\quad(K=\\operatorname{supp}\\omega),$$\nusing the signed chart integrals. This value is independent of the finite functions and charts. It defines a linear functional, is local under restriction to an open set containing the support, and for $n\\ge1$ satisfies\n$$\\mathcal I_M(d\\eta)=0\\qquad(\\eta\\in\\Omega_c^{n-1}(M)).$$\nFor $n=0$ it is the finite signed sum $\\sum_{p\\in\\operatorname{supp}\\omega}\\varepsilon(p)\\omega(p)$. All assertions are choice-free: no partition on the entire manifold is required.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-emg-lorentz-hodge-calculus",
+          "source_section": "Statement",
+          "quote": "Let $(M,g,N,o)$ have the oriented, time-oriented Lorentzian structure and volume form of [[def-emg-lorentzian-forms]]. On decomposable $k$-covectors define the induced exterior pairing by",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "On each overlap $U_i\\cap U_j$, compatibility gives $\\alpha_j=a_j'-a_j=(a_i'+\\lambda(g_{ij}))-(a_i+\\lambda(g_{ij}))=\\alpha_i$. The forms therefore agree on overlaps and define one global smooth real one-form $\\alpha$; uniqueness follows because the $U_i$ cover $M$. No global phase lift of any transition function is chosen.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "Conversely, if $\\alpha\\in\\Omega^1(M)$ is any smooth global real one-form, then $(a_i+\\alpha|_{U_i})_i$ obeys $(a_j+\\alpha|_{U_j})=(a_i+\\alpha|_{U_i})+\\lambda(g_{ij})$ because the restrictions of $\\alpha$ agree on overlaps. Thus translation by $\\alpha$ stays in the same bundle sector, and the set of representatives is affine over $\\Omega^1(M)$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "By the curvature definitions in [F2], on every $U_i$ we have $f'-f=da_i'-da_i=d(a_i'-a_i)=d\\alpha|_{U_i}$. Both sides are global, so the local equalities give $f'-f=d\\alpha$ on $M$. Multiplying by the same constant $\\kappa_0$ gives $F'-F=\\kappa_0d\\alpha$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "For a compact oriented smooth surface $S$ without boundary, pullback commutes with $d$ by [F4], so $\\iota^*(F'-F)=\\kappa_0d(\\iota^*\\alpha)$. The one-form $\\iota^*\\alpha$ has compact support because $S$ is compact; [F5] therefore gives $\\int_S\\iota^*(F'-F)=\\kappa_0\\int_Sd(\\iota^*\\alpha)=0$. Hence the physical curvature integrals agree.",
+          "inputs": [
+            "F4",
+            "F5",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "On a trivializing chart, let $\\Phi_h(x,z)=(x,h(x)z)$. Its inverse sends $(x,z)$ to $(x,h(x)^{-1}z)$. The connection form for the pushed-forward horizontal distribution is $(\\Phi_h^{-1})^*\\omega$, because its kernel is $d\\Phi_h(\\ker\\omega)$. With $\\omega=\\eta+a_i$ from [F2] and $\\eta=-iz^{-1}dz$, the product rule [F6] gives $(\\Phi_h^{-1})^*\\eta=\\eta-\\lambda(h)$ and hence $a_i'=a_i-\\lambda(h)$. This is the pushforward sign; a pullback action by $\\Phi_h$ instead has the opposite sign.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F6",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement is vacuous for an empty base; step 1.1 uses only the supplied cover and overlap agreement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1 gives zero curvature change when the global translation is zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The integrated statement concerns compact two-dimensional surfaces; no one-dimensional surface case is asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The fixed background is Lorentzian and nondegenerate; degenerate metrics are outside the normalized-data supplier."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The proposition has no parameter interval or endpoint claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1 uses only the supplied countable cover and makes no choices of phases or representatives."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a direct difference and integral identity, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse implication or classification is claimed."
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "def-countable-choice",
+          "carrier": "items/def-countable-choice.md",
+          "status": "Current supplier interface inspected for this item; no additional review approval asserted.",
+          "source_section": "Definition",
+          "exact_statement": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "relevant_hypotheses_and_conventions": "[A1] [[def-countable-choice]]: $\\mathrm{AC}_\\omega$ asserts that every at most countable family of nonempty sets has a choice function. It is used only to meet the smooth tangent-bundle and principal-connection convention required by [F3]; the overlap, curvature, surface-integration, and local sign calculations below make no selections.",
+          "supplier_proof_status": "published; exact current interface and proof inspected; no new independent certification asserted.",
+          "consumer_use": "Used in proof step(s): 1.1, 4.1."
+        },
+        {
+          "supplier": "def-emg-local-potentials-and-circle-data",
+          "carrier": "items/def-emg-local-potentials-and-circle-data.md",
+          "status": "Current supplier interface inspected for this item; no additional review approval asserted.",
+          "source_section": "Definition",
+          "exact_statement": "Let $(M,g,N,o)$ be the smooth, Hausdorff, second-countable, boundaryless oriented and time-oriented Lorentzian four-manifold of [[def-emg-lorentzian-forms]]. Its smooth real $k$-forms are sections of $\\bigwedge^kT^*M$, written $\\Omega^k(M)$, and $d$ is the exterior derivative of [[lem-emg-lorentz-hodge-calculus]]. A smooth two-form $F$ is **closed** when $dF=0$ and **exact** when $F=dA$ for some smooth real one-form $A$ on the whole base.",
+          "relevant_hypotheses_and_conventions": "[F1] [[def-emg-local-potentials-and-circle-data]]: a normalized circle-connection datum has transitions $g_{ij}$ with $g_{ij}g_{jk}=g_{ik}$, local real one-forms with $a_j=a_i+\\lambda(g_{ij})$, $\\lambda(g)=-ig^{-1}dg$, and physical local potential $A_i=\\kappa_0a_i$ with $\\kappa_0$ in webers.",
+          "supplier_proof_status": "published; exact current interface and proof inspected; no new independent certification asserted.",
+          "consumer_use": "Used in proof step(s): 1.1, 1.2, 2.1, 4.1."
+        },
+        {
+          "supplier": "lem-emg-circle-connection-gluing",
+          "carrier": "items/lem-emg-circle-connection-gluing.md",
+          "status": "Current supplier interface inspected for this item; no additional review approval asserted.",
+          "source_section": "Statement",
+          "exact_statement": "Let $M$ be a smooth, Hausdorff, second-countable oriented four-manifold, and let $(U_i,g_{ij},a_i;\\kappa_0)$ be a normalized circle-connection datum as in [[def-emg-local-potentials-and-circle-data]]. Use the set-sized-object and quotient convention of [[def-emg-set-size-and-class-schema]]. Then the chart data construct a smooth Hausdorff second-countable right principal $U(1)$-bundle $\\pi:P\\to M$ and a global smooth real connection one-form $\\omega$ on $P$. Its curvature is basic: there is a smooth closed two-form $f\\in\\Omega^2(M)$ with $d\\omega=\\pi^*f$ and $f|_{U_i}=da_i$. The local potentials $A_i=\\kappa_0a_i$ satisfy $dA_i=F$, where $F=\\kappa_0 f$ is global. For two connections on the same fixed bundle with the same transition functions, their local-form differences are restrictions of one global base one-form; adding a global one-form to all local representatives stays in that bundle sector.",
+          "relevant_hypotheses_and_conventions": "[F2] [[lem-emg-circle-connection-gluing]]: the compatible local data construct a smooth principal connection with local connection form $\\eta+a_i$, where $\\eta=-iz^{-1}dz$; for fixed transition functions, local-form differences patch to one global base one-form, and adding any global base one-form preserves the fixed bundle sector.",
+          "supplier_proof_status": "published; exact current interface and proof inspected; no new independent certification asserted.",
+          "consumer_use": "Used in proof step(s): 1.2, 2.1, 4.1."
+        },
+        {
+          "supplier": "prop-gauge-transformations-act-on-principal-connections",
+          "carrier": "items/prop-gauge-transformations-act-on-principal-connections.md",
+          "status": "Current supplier interface inspected for this item; no additional review approval asserted.",
+          "source_section": "Statement",
+          "exact_statement": "Assume $\\mathrm{AC}_\\omega$. Let $P\\to M$ be a smooth right principal\n$G$-bundle with a principal connection $H$, and let\n$\\Phi\\in\\mathcal G(P)$. Then\n$$\\Phi_*H:=d\\Phi(H)$$\nis a principal connection. If $K_H$ and $K_{\\Phi_*H}$ are the vertical-valued\ncurvatures from\n[[def-principal-connection-and-vertical-curvature]], then for\n$X,Y\\in T_pP$,\n$$K_{\\Phi_*H}(d\\Phi_pX,d\\Phi_pY)=d\\Phi_p(K_H(X,Y)).$$\nComposition makes this a left action of $\\mathcal G(P)$ on the set of\nprincipal connections.",
+          "relevant_hypotheses_and_conventions": "[F3] [[prop-gauge-transformations-act-on-principal-connections]]: a smooth gauge transformation acts on horizontal distributions by $H\\mapsto d\\Phi(H)$.",
+          "supplier_proof_status": "published; exact current interface and proof inspected; no new independent certification asserted.",
+          "consumer_use": "Used in proof step(s): 4.1."
+        },
+        {
+          "supplier": "thm-the-exterior-derivative-commutes-with-pullback",
+          "carrier": "items/thm-the-exterior-derivative-commutes-with-pullback.md",
+          "status": "Current supplier interface inspected for this item; no additional review approval asserted.",
+          "source_section": "Statement",
+          "exact_statement": "For every smooth map $F:M\\to N$ and every form $\\omega$ on $N$, $$d(F^*\\omega)=F^*(d\\omega).$$",
+          "relevant_hypotheses_and_conventions": "[F4] [[thm-the-exterior-derivative-commutes-with-pullback]]: for every smooth map $F$ and differential form $\\omega$, $d(F^*\\omega)=F^*(d\\omega)$.",
+          "supplier_proof_status": "published; verification.audited=2026-09-06; exact current interface and proof inspected; no new independent certification asserted.",
+          "consumer_use": "Used in proof step(s): 3.1."
+        },
+        {
+          "supplier": "lem-finite-chart-localization-defines-choice-free-integration-and-compact-stokes",
+          "carrier": "items/lem-finite-chart-localization-defines-choice-free-integration-and-compact-stokes.md",
+          "status": "Current supplier interface inspected for this item; no additional review approval asserted.",
+          "source_section": "Statement",
+          "exact_statement": "Let $M^n$ be an oriented smooth manifold without boundary. For each compact set $K\\subseteq M$ there are finitely many nonnegative smooth functions $\\chi_i$ with compact supports contained in connected coordinate domains $U_i$, such that $\\sum_i\\chi_i=1$ on a neighbourhood of $K$. For $\\omega\\in\\Omega_c^n(M)$ define\n$$\\mathcal I_M(\\omega)=\\sum_i I_{\\phi_i}(\\chi_i\\omega)\\quad(K=\\operatorname{supp}\\omega),$$\nusing the signed chart integrals. This value is independent of the finite functions and charts. It defines a linear functional, is local under restriction to an open set containing the support, and for $n\\ge1$ satisfies\n$$\\mathcal I_M(d\\eta)=0\\qquad(\\eta\\in\\Omega_c^{n-1}(M)).$$\nFor $n=0$ it is the finite signed sum $\\sum_{p\\in\\operatorname{supp}\\omega}\\varepsilon(p)\\omega(p)$. All assertions are choice-free: no partition on the entire manifold is required.",
+          "relevant_hypotheses_and_conventions": "[F5] [[lem-finite-chart-localization-defines-choice-free-integration-and-compact-stokes]]: on a compact oriented smooth manifold without boundary, integration of a smooth top form is defined by finite chart localization and the integral of an exact top form is zero.",
+          "supplier_proof_status": "published; verification.audited=2026-09-13; exact current interface and proof inspected; no new independent certification asserted.",
+          "consumer_use": "Used in proof step(s): 3.1."
+        },
+        {
+          "supplier": "lem-emg-lorentz-hodge-calculus",
+          "carrier": "items/lem-emg-lorentz-hodge-calculus.md",
+          "status": "Current supplier interface inspected for this item; no additional review approval asserted.",
+          "source_section": "Statement",
+          "exact_statement": "Let $(M,g,N,o)$ have the oriented, time-oriented Lorentzian structure and volume form of [[def-emg-lorentzian-forms]]. On decomposable $k$-covectors define the induced exterior pairing by",
+          "relevant_hypotheses_and_conventions": "[F6] [[lem-emg-lorentz-hodge-calculus]]: the exterior derivative is a graded derivation of the wedge product; in particular, local product and inverse formulas for circle-valued functions use the ordinary product rule.",
+          "supplier_proof_status": "published; exact current interface and proof inspected; no new independent certification asserted.",
+          "consumer_use": "Used in proof step(s): 4.1."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-24 author self-review",
+        "notes": "Checked the fixed-transition subtraction, physical and normalized units, compact surface integration, and pushforward-versus-pullback sign. No bundle classification or gauge-triviality claim is inferred."
+      },
+      "finite_checks": [
+        {
+          "name": "zero translation",
+          "inputs": [
+            "step 1.2",
+            "step 2.1"
+          ],
+          "expected": "For alpha=0, the translated representative is unchanged and f-prime-f=0."
+        },
+        {
+          "name": "closed but not assumed exact translation",
+          "inputs": [
+            "step 1.2",
+            "step 2.1"
+          ],
+          "expected": "If d alpha=0, the curvature is unchanged; the item does not conclude that alpha is a gauge shift."
+        }
+      ]
+    },
+    "def-emg-fx-maxwell-presymplectic-current": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition requires a fixed Lorentzian four-manifold, metric, and connection sector."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition gives zero current when either variation is zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The form degrees are fixed by the four-dimensional Maxwell construction; no one-dimensional case is defined."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The Hodge map requires the stated nondegenerate Lorentzian metric."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The definition has no parameter interval or endpoint assertion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition uses supplied global one-forms and makes no selection from a family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition imposes two equations and does not state a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse characterization of solutions is asserted."
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "def-countable-choice",
+          "carrier": "items/def-countable-choice.md",
+          "status": "Current supplier interface inspected for this item; no additional review approval asserted.",
+          "source_section": "Definition",
+          "exact_statement": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "relevant_hypotheses_and_conventions": "The item uses the exact definition interface under its stated hypotheses and conventions.",
+          "supplier_proof_status": "published; exact current interface and proof inspected; no new independent certification asserted.",
+          "consumer_use": "Used in the Definition's stated hypotheses, object types, or fixed-normalization convention."
+        },
+        {
+          "supplier": "prop-emg-fx-affine-connection-sector",
+          "carrier": "items/prop-emg-fx-affine-connection-sector.md",
+          "status": "Current supplier interface inspected for this item; no additional review approval asserted.",
+          "source_section": "Statement",
+          "exact_statement": "Assume $\\mathrm{AC}_\\omega$ for the smooth tangent-bundle and principal-connection convention. Let $(M,g,N,o)$ be the smooth, Hausdorff, second-countable, oriented and time-oriented Lorentzian four-manifold used for normalized circle-connection data. Fix a smooth right principal $U(1)$ bundle $P\\to M$, one countable trivializing cover $(U_i)$ with transition functions $g_{ij}$ in the convention $z_j=g_{ij}^{-1}z_i$, and one normalization constant $\\kappa_0>0$ measured in webers. Let $(a_i)$ and $(a_i')$ be two smooth normalized connection representatives for this same atlas, each satisfying $a_j=a_i+\\lambda(g_{ij})$ and $a_j'=a_i'+\\lambda(g_{ij})$, where $\\lambda(g):=-i g^{-1}dg$. In length-coordinate charts, the components of $a_i$ and $a_i'$ have units $\\mathrm m^{-1}$; the physical potentials $A_i=\\kappa_0a_i$ and $A_i'=\\kappa_0a_i'$ have components $\\mathrm{Wb}\\,\\mathrm m^{-1}$.",
+          "relevant_hypotheses_and_conventions": "The item uses the exact statement interface under its stated hypotheses and conventions.",
+          "supplier_proof_status": "draft; exact current interface inspected and complete local proof read where supplied; no independent approval inferred.",
+          "consumer_use": "Used in the Definition's stated hypotheses, object types, or fixed-normalization convention."
+        },
+        {
+          "supplier": "def-emg-local-potentials-and-circle-data",
+          "carrier": "items/def-emg-local-potentials-and-circle-data.md",
+          "status": "Current supplier interface inspected for this item; no additional review approval asserted.",
+          "source_section": "Definition",
+          "exact_statement": "Let $(M,g,N,o)$ be the smooth, Hausdorff, second-countable, boundaryless oriented and time-oriented Lorentzian four-manifold of [[def-emg-lorentzian-forms]]. Its smooth real $k$-forms are sections of $\\bigwedge^kT^*M$, written $\\Omega^k(M)$, and $d$ is the exterior derivative of [[lem-emg-lorentz-hodge-calculus]]. A smooth two-form $F$ is **closed** when $dF=0$ and **exact** when $F=dA$ for some smooth real one-form $A$ on the whole base.",
+          "relevant_hypotheses_and_conventions": "The item uses the exact definition interface under its stated hypotheses and conventions.",
+          "supplier_proof_status": "published; exact current interface and proof inspected; no new independent certification asserted.",
+          "consumer_use": "Used in the Definition's stated hypotheses, object types, or fixed-normalization convention."
+        },
+        {
+          "supplier": "def-emg-fx-linearized-electrovac",
+          "carrier": "items/def-emg-fx-linearized-electrovac.md",
+          "status": "Current supplier interface inspected for this item; no additional review approval asserted.",
+          "source_section": "Definition",
+          "exact_statement": "For a smooth real two-form $\\mathcal F$, put\n$$Q_{ab}(g,\\mathcal F):=\\mathcal F_{ac}\\mathcal F_b{}^c-\\frac14 g_{ab}\\mathcal F_{cd}\\mathcal F^{cd},$$\nwhere all raised indices use $g^{-1}$. Its length-coordinate components have unit $\\mathrm{m}^{-2}$. Fix $\\Lambda\\in\\mathbb R$ with unit $\\mathrm{m}^{-2}$. An **exact geometric electrovacuum background on $U\\subseteq M$** is a smooth pair $(g,\\mathcal F)$ on the same open set satisfying\n$$\\operatorname{Ric}_{ab}[g]-\\Lambda g_{ab}=2Q_{ab}(g,\\mathcal F),\\qquad d\\mathcal F=0,\\qquad d(\\star_g\\mathcal F)=0.$$\nFor $\\Lambda=0$ this is the geometric normalization of [[def-emg-xs-geometric-electrovac]]. The symbol $\\mathcal F$ here is geometric-normalized; it is not the SI-normalized field tensor used in [[def-emg-electrovacuum-cauchy-system]].",
+          "relevant_hypotheses_and_conventions": "The item uses the exact definition interface under its stated hypotheses and conventions.",
+          "supplier_proof_status": "draft; verification.precheck=pending; exact current interface inspected and complete local proof read where supplied; no independent approval inferred. Current in-run Step 1 record was checked and is ready for its dependency closure; this is authoring readiness, not independent review approval.",
+          "consumer_use": "Used in the Definition's stated hypotheses, object types, or fixed-normalization convention."
+        },
+        {
+          "supplier": "lem-emg-fx-linearized-hodge",
+          "carrier": "items/lem-emg-fx-linearized-hodge.md",
+          "status": "Current supplier interface inspected for this item; no additional review approval asserted.",
+          "source_section": "Statement",
+          "exact_statement": "Let $g_\\epsilon=g+\\epsilon h+O(\\epsilon^2)$ be a smooth variation of an oriented Lorentzian metric on a four-manifold, and let $\\omega_\\epsilon=\\omega+\\epsilon\\tau+O(\\epsilon^2)$ be a smooth variation of a $k$-form, $0\\le k\\le4$. Define $h_a{}^b:=g^{bc}h_{ac}$, $\\operatorname{tr}_g h:=g^{ab}h_{ab}$, and\n$$\\bigl(h^\\sharp\\!\\cdot\\omega\\bigr)_{a_1\\ldots a_k}:=\\sum_{j=1}^k h_{a_j}{}^b\\omega_{a_1\\ldots a_{j-1}b a_{j+1}\\ldots a_k},$$\nwith $h^\\sharp\\!\\cdot\\omega:=0$ for $k=0$. Then\n$$\\left.\\frac{d}{d\\epsilon}\\right|_0\\star_{g_\\epsilon}\\omega_\\epsilon=\\star_g\\left(\\tau+\\frac12(\\operatorname{tr}_g h)\\omega-h^\\sharp\\!\\cdot\\omega\\right).$$\nIn particular, for the geometric background $\\mathcal F$ and perturbation $f$ of [[def-emg-fx-linearized-electrovac]],\n$$\\delta(\\star\\mathcal F)=\\star_g\\left(f+\\frac12(\\operatorname{tr}_g h)\\mathcal F-h^\\sharp\\!\\cdot\\mathcal F\\right).$$\nIf $(h,f)$ satisfies the linearized Maxwell equation, then $d\\,\\delta(\\star\\mathcal F)=0$; this last condition is exactly the derivative of $d(\\star_{g_\\epsilon}\\mathcal F_\\epsilon)=0$, not a consequence of the variation formula alone.",
+          "relevant_hypotheses_and_conventions": "The item uses the exact statement interface under its stated hypotheses and conventions.",
+          "supplier_proof_status": "draft; verification.precheck=pending; exact current interface inspected and complete local proof read where supplied; no independent approval inferred. Current in-run Step 1 record was checked and is ready for its dependency closure; this is authoring readiness, not independent review approval.",
+          "consumer_use": "Used in the Definition's stated hypotheses, object types, or fixed-normalization convention."
+        },
+        {
+          "supplier": "lem-emg-lorentz-hodge-calculus",
+          "carrier": "items/lem-emg-lorentz-hodge-calculus.md",
+          "status": "Current supplier interface inspected for this item; no additional review approval asserted.",
+          "source_section": "Statement",
+          "exact_statement": "Let $(M,g,N,o)$ have the oriented, time-oriented Lorentzian structure and volume form of [[def-emg-lorentzian-forms]]. On decomposable $k$-covectors define the induced exterior pairing by",
+          "relevant_hypotheses_and_conventions": "The item uses the exact statement interface under its stated hypotheses and conventions.",
+          "supplier_proof_status": "published; exact current interface and proof inspected; no new independent certification asserted.",
+          "consumer_use": "Used in the Definition's stated hypotheses, object types, or fixed-normalization convention."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-24 author self-review",
+        "notes": "Checked globality of connection variations, form degrees, Lorentzian Hodge convention, units, fixed metric, and the express absence of a geometric field-normalization identification or mixed metric terms."
+      },
+      "finite_checks": [
+        {
+          "name": "zero and swapped variations",
+          "inputs": [
+            "Definition"
+          ],
+          "expected": "The current vanishes if either input is zero and satisfies omega_g(beta,alpha)=-omega_g(alpha,beta) by its displayed formula."
+        }
+      ]
+    },
+    "lem-emg-fx-symplectic-current-boundary": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-emg-fx-maxwell-presymplectic-current",
+          "source_section": "Definition",
+          "quote": "Assume $\\mathrm{AC}_\\omega$ as inherited from the smooth principal-connection convention. Fix an oriented, time-oriented smooth Lorentzian four-manifold $(M,g,N,o)$ and a fixed normalized $U(1)$ connection sector as in the fixed-topology affine-sector result. Its connection variations are global smooth real one-forms $\\alpha,\\beta\\in\\Omega^1(M)$, with components of unit $\\mathrm m^{-1}$ in length-coordinate charts. Length-coordinate charts use metre-valued coordinates, with $x^0=ct_{\\mathrm{sec}}$ when time is recorded in seconds; $c$ is a coordinate unit-conversion scale in $\\mathrm m\\,\\mathrm s^{-1}$, with no numerical measured value or physical role asserted. Impose the fixed-background Maxwell operator equations $d\\star_g d\\alpha=0$ and $d\\star_g d\\beta=0$, where $\\star_g$ is the oriented Lorentzian Hodge map of signature $(-,+,+,+)$. Define the real three-form\n\n$$\\omega_g(\\alpha,\\beta):=\\alpha\\wedge\\star_g d\\beta-\\beta\\wedge\\star_g d\\alpha.$$\n\nLet $\\iota_\\Sigma:\\Sigma\\hookrightarrow M$ be an oriented smooth embedding of a possibly noncompact three-dimensional manifold, and require the induced metric $\\gamma:=\\iota_\\Sigma^*g$ to be positive definite. Its oriented Riemannian volume form is the nowhere-vanishing three-form $\\mathrm{vol}_\\gamma$ whose expression in each positively oriented chart $y=(y^1,y^2,y^3)$ is $\\sqrt{\\det(\\gamma_{ij})}\\,dy^1\\wedge dy^2\\wedge dy^3$. Let $\\mu_\\gamma$ be the positive smooth density measure with coordinate expression $d\\mu_\\gamma=\\sqrt{\\det(\\gamma_{ij})}\\,d^3y$. The density-measure integration supplier listed below gives the chart-independent measure and integral; for a real $L^1(\\mu_\\gamma)$ function its signed integral is the finite difference of the integrals of its positive and negative parts, and its chart formula is absolutely convergent.\n\nThere is a unique smooth real function $u_{\\alpha,\\beta}$ on $\\Sigma$ such that $\\iota_\\Sigma^*\\omega_g(\\alpha,\\beta)=u_{\\alpha,\\beta}\\,\\mathrm{vol}_\\gamma$. Define the pairing $\\Omega_\\Sigma(\\alpha,\\beta)$ precisely when $u_{\\alpha,\\beta}\\in L^1(\\Sigma,\\mu_\\gamma)$, meaning $\\int_\\Sigma|u_{\\alpha,\\beta}|\\,d\\mu_\\gamma<\\infty$, and then set $\\Omega_\\Sigma(\\alpha,\\beta):=\\int_\\Sigma u_{\\alpha,\\beta}\\,d\\mu_\\gamma$. This absolute-integrability condition is the convergence convention on noncompact $\\Sigma$ and makes the value independent of any exhaustion or ordering. In length coordinates on $\\Sigma$, the coefficients of $d\\alpha$ and $d\\beta$ have units $\\mathrm m^{-2}$, those of $\\omega_g$ have units $\\mathrm m^{-3}$, $u_{\\alpha,\\beta}$ has units $\\mathrm m^{-3}$, and $d\\mu_\\gamma$ has volume units $\\mathrm m^3$; thus the normalized integral is dimensionless. Replacing normalized variations by physical-potential variations $\\kappa_0\\alpha$ and $\\kappa_0\\beta$ multiplies the current by $\\kappa_0^2$; an action prefactor is not fixed here.\n\nThis is a mathematical fixed-metric Maxwell-block definition. The equations are imposed on the normalized connection variations. The item does not identify $\\kappa_0d\\alpha$ with the geometric-normalized electrovac field of the coupled Einstein–Maxwell equations, prescribe a conversion between those normalizations, include metric variations, or claim to define the full coupled covariant phase-space current.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-emg-lorentz-hodge-calculus",
+          "source_section": "Statement",
+          "quote": "Let $(M,g,N,o)$ have the oriented, time-oriented Lorentzian structure and volume form of [[def-emg-lorentzian-forms]]. On decomposable $k$-covectors define the induced exterior pairing by",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-stokes-theorem-for-smooth-singular-chains",
+          "source_section": "Statement",
+          "quote": "Let $M$ be a smooth manifold, possibly with boundary. For $k\\ge1$, $c\\in C_k^\\infty(M;\\mathbb R)$ and $\\omega\\in\\Omega^{k-1}(M)$, define integration over a chain by the finite linear sum of its simplex integrals. Then\n$$\\int_c d\\omega=\\int_{\\partial c}\\omega.$$\nThe zero chain has integral zero. In degree zero the boundary is zero; no degree-minus-one form is required by this statement.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f_n:X\\to[0,+\\infty]$ be measurable for every $n\\ge1$, with $0\\le f_1\\le f_2\\le\\cdots$, and suppose $f_n(x)\\uparrow f(x)$ for every $x\\in X$. Then\n$$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Applying the graded product rule to each term of [F1] gives $d\\omega_g=d\\alpha\\wedge\\star_g d\\beta-\\alpha\\wedge d\\star_g d\\beta-d\\beta\\wedge\\star_g d\\alpha+\\beta\\wedge d\\star_g d\\alpha$. The first and third terms cancel because the two-form pairing in [F2] is symmetric, and the other two vanish by the stated equations. Hence $d\\omega_g=0$.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "Since $d^2\\chi=0$ by [F2], the change in [F1] under $\\alpha\\mapsto\\alpha+d\\chi$ is exactly $d\\chi\\wedge\\star_g d\\beta$. On the other hand, $d(\\chi\\star_g d\\beta)=d\\chi\\wedge\\star_g d\\beta+\\chi\\,d\\star_g d\\beta=d\\chi\\wedge\\star_g d\\beta$. The current change is therefore the exact three-form $d(\\chi\\star_g d\\beta)$.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Integrating the exact change over a finite smooth singular three-chain $c$ and applying [F3] gives $\\int_c d(\\chi\\star_g d\\beta)=\\int_{\\partial c}\\chi\\star_g d\\beta$. This is zero when $c$ is a cycle, while for a chain with boundary it is the displayed boundary flux.",
+          "inputs": [
+            "given",
+            "F3",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Now let $\\Sigma$ be noncompact, assume both current pairings in the Statement are defined, and choose a compact Borel exhaustion with finite-chain representatives as in the Statement. Write $\\iota_\\Sigma^*(\\omega_g(\\alpha+d\\chi,\\beta)-\\omega_g(\\alpha,\\beta))=u\\,\\mathrm{vol}_\\gamma$. The two current coefficients are in $L^1(\\mu_\\gamma)$, so their difference $u$ is also in $L^1(\\mu_\\gamma)$ by $|u|\\leq |u_{\\alpha+d\\chi,\\beta}|+|u_{\\alpha,\\beta}|$. Since $K_n\\uparrow\\Sigma$, both $\\mathbf1_{K_n}u^+$ and $\\mathbf1_{K_n}u^-$ increase pointwise to $u^+$ and $u^-$. Applying [F4] separately to these nonnegative functions and subtracting their finite limits gives $\\int_{K_n}u\\,d\\mu_\\gamma\\to\\int_\\Sigma u\\,d\\mu_\\gamma$. By the defining property of $c_n$ and [F3], $\\int_{\\partial c_n}\\chi\\star_g d\\beta=\\int_{c_n}d(\\chi\\star_g d\\beta)=\\int_{K_n}u\\,d\\mu_\\gamma$. This proves the stated flux identity. For the fixed $\\beta$, the shift vanishes exactly when the limiting flux is zero; on a specified test space this must hold for every allowed $\\beta$ for the gauge direction to be degenerate. No falloff condition is inferred from the field equations alone.",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F4",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement concerns smooth forms on a fixed Lorentzian four-manifold."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 and step 1.2 reduce to zero current and zero boundary change for zero variations or parameter."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The current is a three-form in four dimensions; no one-dimensional spacetime case is asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The Hodge operator is defined only for the stated nondegenerate Lorentzian metric."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No parameter-family endpoint statement occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "steps 1.1, 1.2, and 2.1 use fixed forms and finite chains without selecting a family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement gives a closure identity and an exact gauge change, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse classification of degenerate gauge directions is claimed."
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "def-countable-choice",
+          "carrier": "items/def-countable-choice.md",
+          "status": "Current supplier interface inspected for this item; no additional review approval asserted.",
+          "source_section": "Definition",
+          "exact_statement": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "relevant_hypotheses_and_conventions": "[A1] [[def-countable-choice]]: $\\mathrm{AC}_\\omega$ is the background assumption for the inherited smooth tangent and principal-connection convention; the exterior-calculus identities and finite-chain Stokes calculation use no further choice.",
+          "supplier_proof_status": "published; exact current interface and proof inspected; no new independent certification asserted.",
+          "consumer_use": "Used in proof step(s): 1.1, 1.2."
+        },
+        {
+          "supplier": "def-emg-fx-maxwell-presymplectic-current",
+          "carrier": "items/def-emg-fx-maxwell-presymplectic-current.md",
+          "status": "Exact current public interface transcribed by root at the drained Step2 join; original substantive source-use review retained in historical_source_interface and native/same-owner reports. No renewed full supplier-proof reading asserted.",
+          "source_section": "Definition",
+          "exact_statement": "Assume $\\mathrm{AC}_\\omega$ as inherited from the smooth principal-connection convention. Fix an oriented, time-oriented smooth Lorentzian four-manifold $(M,g,N,o)$ and a fixed normalized $U(1)$ connection sector as in the fixed-topology affine-sector result. Its connection variations are global smooth real one-forms $\\alpha,\\beta\\in\\Omega^1(M)$, with components of unit $\\mathrm m^{-1}$ in length-coordinate charts. Length-coordinate charts use metre-valued coordinates, with $x^0=ct_{\\mathrm{sec}}$ when time is recorded in seconds; $c$ is a coordinate unit-conversion scale in $\\mathrm m\\,\\mathrm s^{-1}$, with no numerical measured value or physical role asserted. Impose the fixed-background Maxwell operator equations $d\\star_g d\\alpha=0$ and $d\\star_g d\\beta=0$, where $\\star_g$ is the oriented Lorentzian Hodge map of signature $(-,+,+,+)$. Define the real three-form\n\n$$\\omega_g(\\alpha,\\beta):=\\alpha\\wedge\\star_g d\\beta-\\beta\\wedge\\star_g d\\alpha.$$\n\nLet $\\iota_\\Sigma:\\Sigma\\hookrightarrow M$ be an oriented smooth embedding of a possibly noncompact three-dimensional manifold, and require the induced metric $\\gamma:=\\iota_\\Sigma^*g$ to be positive definite. Its oriented Riemannian volume form is the nowhere-vanishing three-form $\\mathrm{vol}_\\gamma$ whose expression in each positively oriented chart $y=(y^1,y^2,y^3)$ is $\\sqrt{\\det(\\gamma_{ij})}\\,dy^1\\wedge dy^2\\wedge dy^3$. Let $\\mu_\\gamma$ be the positive smooth density measure with coordinate expression $d\\mu_\\gamma=\\sqrt{\\det(\\gamma_{ij})}\\,d^3y$. The density-measure integration supplier listed below gives the chart-independent measure and integral; for a real $L^1(\\mu_\\gamma)$ function its signed integral is the finite difference of the integrals of its positive and negative parts, and its chart formula is absolutely convergent.\n\nThere is a unique smooth real function $u_{\\alpha,\\beta}$ on $\\Sigma$ such that $\\iota_\\Sigma^*\\omega_g(\\alpha,\\beta)=u_{\\alpha,\\beta}\\,\\mathrm{vol}_\\gamma$. Define the pairing $\\Omega_\\Sigma(\\alpha,\\beta)$ precisely when $u_{\\alpha,\\beta}\\in L^1(\\Sigma,\\mu_\\gamma)$, meaning $\\int_\\Sigma|u_{\\alpha,\\beta}|\\,d\\mu_\\gamma<\\infty$, and then set $\\Omega_\\Sigma(\\alpha,\\beta):=\\int_\\Sigma u_{\\alpha,\\beta}\\,d\\mu_\\gamma$. This absolute-integrability condition is the convergence convention on noncompact $\\Sigma$ and makes the value independent of any exhaustion or ordering. In length coordinates on $\\Sigma$, the coefficients of $d\\alpha$ and $d\\beta$ have units $\\mathrm m^{-2}$, those of $\\omega_g$ have units $\\mathrm m^{-3}$, $u_{\\alpha,\\beta}$ has units $\\mathrm m^{-3}$, and $d\\mu_\\gamma$ has volume units $\\mathrm m^3$; thus the normalized integral is dimensionless. Replacing normalized variations by physical-potential variations $\\kappa_0\\alpha$ and $\\kappa_0\\beta$ multiplies the current by $\\kappa_0^2$; an action prefactor is not fixed here.\n\nThis is a mathematical fixed-metric Maxwell-block definition. The equations are imposed on the normalized connection variations. The item does not identify $\\kappa_0d\\alpha$ with the geometric-normalized electrovac field of the coupled Einstein–Maxwell equations, prescribe a conversion between those normalizations, include metric variations, or claim to define the full coupled covariant phase-space current.",
+          "relevant_hypotheses_and_conventions": "[F1] [[def-emg-fx-maxwell-presymplectic-current]]: the normalized Maxwell current is $\\omega_g(\\alpha,\\beta)=\\alpha\\wedge\\star_g d\\beta-\\beta\\wedge\\star_g d\\alpha$ on global connection variations satisfying the fixed-background equations.",
+          "supplier_proof_status": "draft; this exact-quote refresh does not grant independent proof acceptance",
+          "consumer_use": "Used in proof step(s): 1.1, 1.2.",
+          "historical_source_interface": {
+            "source_section": "Definition",
+            "exact_statement": "Assume $\\mathrm{AC}_\\omega$ as inherited from the smooth principal-connection convention. Fix an oriented, time-oriented smooth Lorentzian four-manifold $(M,g,N,o)$ and a fixed normalized $U(1)$ connection sector as in the fixed-topology affine-sector result. Its connection variations are global smooth real one-forms $\\alpha,\\beta\\in\\Omega^1(M)$, with components of unit $\\mathrm m^{-1}$ in length-coordinate charts. Impose the fixed-background Maxwell operator equations $d\\star_g d\\alpha=0$ and $d\\star_g d\\beta=0$, where $\\star_g$ is the oriented Lorentzian Hodge map of signature $(-,+,+,+)$. Define the real three-form",
+            "status": "Current supplier interface inspected for this item; no additional review approval asserted.",
+            "supplier_proof_status": "draft; exact current interface inspected and complete local proof read where supplied; no independent approval inferred."
+          }
+        },
+        {
+          "supplier": "lem-emg-lorentz-hodge-calculus",
+          "carrier": "items/lem-emg-lorentz-hodge-calculus.md",
+          "status": "Current supplier interface inspected for this item; no additional review approval asserted.",
+          "source_section": "Statement",
+          "exact_statement": "Let $(M,g,N,o)$ have the oriented, time-oriented Lorentzian structure and volume form of [[def-emg-lorentzian-forms]]. On decomposable $k$-covectors define the induced exterior pairing by",
+          "relevant_hypotheses_and_conventions": "[F2] [[lem-emg-lorentz-hodge-calculus]]: the Hodge identity is $\\mu\\wedge\\star_g\\nu=\\langle\\mu,\\nu\\rangle_g\\,\\mathrm{vol}_g$, the two-form pairing is symmetric, the exterior derivative obeys the graded product rule, and $d^2=0$.",
+          "supplier_proof_status": "published; exact current interface and proof inspected; no new independent certification asserted.",
+          "consumer_use": "Used in proof step(s): 1.1, 1.2."
+        },
+        {
+          "supplier": "thm-stokes-theorem-for-smooth-singular-chains",
+          "carrier": "items/thm-stokes-theorem-for-smooth-singular-chains.md",
+          "status": "Current supplier interface inspected for this item; no additional review approval asserted.",
+          "source_section": "Statement",
+          "exact_statement": "Let $M$ be a smooth manifold, possibly with boundary. For $k\\ge1$, $c\\in C_k^\\infty(M;\\mathbb R)$ and $\\omega\\in\\Omega^{k-1}(M)$, define integration over a chain by the finite linear sum of its simplex integrals. Then\n$$\\int_c d\\omega=\\int_{\\partial c}\\omega.$$\nThe zero chain has integral zero. In degree zero the boundary is zero; no degree-minus-one form is required by this statement.",
+          "relevant_hypotheses_and_conventions": "[F3] [[thm-stokes-theorem-for-smooth-singular-chains]]: for a finite smooth singular three-chain $c$ and smooth two-form $\\eta$, $\\int_c d\\eta=\\int_{\\partial c}\\eta$.",
+          "supplier_proof_status": "published; verification.audited=2026-09-13; exact current interface and proof inspected; no new independent certification asserted.",
+          "consumer_use": "Used in proof step(s): 2.1."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-24 author self-review",
+        "notes": "Checked the graded signs, symmetry of the two-form pairing, exact gauge variation, finite-chain Stokes statement, and explicit boundary/decay caveat."
+      },
+      "finite_checks": [
+        {
+          "name": "zero gauge parameter",
+          "inputs": [
+            "step 1.2"
+          ],
+          "expected": "For chi=0 the exact current change and its boundary flux vanish."
+        },
+        {
+          "name": "closed finite chain",
+          "inputs": [
+            "step 2.1"
+          ],
+          "expected": "If partial c=0, Stokes makes the integrated exact gauge change zero; a chain with boundary retains the boundary term."
+        }
+      ]
+    },
+    "prop-emg-fx-finite-coisotropic-pairing": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-isotropic-coisotropic-symplectic-and-lagrangian-subspaces",
+          "source_section": "Definition",
+          "quote": "Let $W$ be a subspace of a symplectic vector space $(V,\\omega)$, with\n[[def-symplectic-orthogonal-complement|symplectic orthogonal]] $W^\\omega$.\nThen $W$ is",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-symplectic-reduction-of-a-coisotropic-vector-subspace",
+          "source_section": "Statement",
+          "quote": "If $W$ is coisotropic in $(V,\\omega)$, then $W/W^\\omega$ has the symplectic\nform",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The hypothesis $W^\\omega\\subseteq W$ is exactly the coisotropic condition in [F1]. Thus the quotient and descended form in [F2] apply to this $(V,\\omega,W)$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "By [F2], changing either representative by an element of $W^\\omega$ leaves $\\omega(u,v)$ unchanged, and a class in the radical has representative in $W^\\omega$, so the descended form is well-defined and nondegenerate. It is alternating by the alternation of $\\omega$. Since $W$ is a subspace of finite-dimensional $V$, $W/W^\\omega$ is finite-dimensional, so it is a finite-dimensional symplectic vector space. No infinite-dimensional quotient regularity is used.",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 2.1 includes the zero-dimensional quotient case by the imported proposition."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1 covers W=0 when coisotropic, which forces V=0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A one-dimensional real vector space cannot carry a nondegenerate alternating form."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The hypothesis requires a symplectic, hence nondegenerate, form on V."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No parameter interval or endpoint claim occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1 and step 2.1 are algebraic and use no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The proposition is a direct implication, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse criterion for coisotropy is asserted."
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "def-isotropic-coisotropic-symplectic-and-lagrangian-subspaces",
+          "carrier": "items/def-isotropic-coisotropic-symplectic-and-lagrangian-subspaces.md",
+          "status": "Current supplier interface inspected for this item; no additional review approval asserted.",
+          "source_section": "Definition",
+          "exact_statement": "Let $W$ be a subspace of a symplectic vector space $(V,\\omega)$, with\n[[def-symplectic-orthogonal-complement|symplectic orthogonal]] $W^\\omega$.\nThen $W$ is",
+          "relevant_hypotheses_and_conventions": "[F1] [[def-isotropic-coisotropic-symplectic-and-lagrangian-subspaces]]: coisotropic means $W^\\omega\\subseteq W$, where $W^\\omega=\\{v\\in V:\\omega(v,w)=0\\text{ for every }w\\in W\\}$.",
+          "supplier_proof_status": "published; verification.audited=2026-09-14; exact current interface and proof inspected; no new independent certification asserted.",
+          "consumer_use": "Used in proof step(s): 1.1."
+        },
+        {
+          "supplier": "prop-symplectic-reduction-of-a-coisotropic-vector-subspace",
+          "carrier": "items/prop-symplectic-reduction-of-a-coisotropic-vector-subspace.md",
+          "status": "Current supplier interface inspected for this item; no additional review approval asserted.",
+          "source_section": "Statement",
+          "exact_statement": "If $W$ is coisotropic in $(V,\\omega)$, then $W/W^\\omega$ has the symplectic\nform",
+          "relevant_hypotheses_and_conventions": "[F2] [[prop-symplectic-reduction-of-a-coisotropic-vector-subspace]]: for a symplectic vector space and coisotropic subspace $W$, $W/W^\\omega$ has the well-defined nondegenerate alternating form $\\overline\\omega([u],[v])=\\omega(u,v)$.",
+          "supplier_proof_status": "published; verification.audited=2026-09-14; exact current interface and proof inspected; no new independent certification asserted.",
+          "consumer_use": "Used in proof step(s): 1.1, 2.1."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-24 author self-review",
+        "notes": "Checked the exact finite-dimensional coisotropic hypothesis and quotient radical. No smooth infinite-dimensional solution-space reduction is inferred."
+      },
+      "finite_checks": [
+        {
+          "name": "W=V",
+          "inputs": [
+            "step 2.1"
+          ],
+          "expected": "W-orthogonal is zero and the quotient recovers V with its original symplectic form."
+        },
+        {
+          "name": "Lagrangian W",
+          "inputs": [
+            "step 2.1"
+          ],
+          "expected": "W-orthogonal equals W, so the quotient is the zero symplectic vector space."
+        }
+      ]
+    },
+    "ex-emg-fx-flat-holonomy-circle": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-emg-sphere-flux-holonomy",
+          "source_section": "Statement",
+          "quote": "There is also a flat example with nontrivial holonomy. On $M_0=\\mathbb R\\times S^1\\times\\mathbb R^2$ with product smooth structure, take $S^1=U(1)$ with the smooth structure defined above. Write $w\\in S^1$ for the base-circle coordinate and let $\\nu=-i w^{-1}dw$ be its global real angular one-form, normalized by $\\int_{S^1}\\nu=2\\pi$. For dimensionless $a\\in\\mathbb R$, set $A=\\kappa_0 a\\,\\nu$. On the product bundle $P_0=M_0\\times U(1)$ with projection $\\pi(x,z)=x$ and right action $(x,z)\\cdot\\zeta=(x,z\\zeta)$, use $\\omega=\\vartheta+a\\pi^*\\nu$, where $z\\in U(1)$ is the fibre coordinate and $\\vartheta=-i z^{-1}dz$ is its real angular form. Holonomy means the fibre multiplier of the horizontal lift around the indicated base loop; gauge trivial means gauge-equivalent to $\\vartheta$ under a smooth bundle map $G_u(x,z)=(x,z u(x))$ covering the identity. Then $F=dA=0$ but holonomy around the circle is $e^{-2\\pi ia}$, so this connection is gauge trivial exactly when $a\\in\\mathbb Z$. If $b$ and $\\kappa_0$ are assigned physical units, both are measured in webers; the ratio $2b/\\kappa_0$ is dimensionless. No general classification of circle bundles is asserted.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-emg-fx-affine-connection-sector",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$ for the smooth tangent-bundle and principal-connection convention. Let $(M,g,N,o)$ be the smooth, Hausdorff, second-countable, oriented and time-oriented Lorentzian four-manifold used for normalized circle-connection data. Fix a smooth right principal $U(1)$ bundle $P\\to M$, one countable trivializing cover $(U_i)$ with transition functions $g_{ij}$ in the convention $z_j=g_{ij}^{-1}z_i$, and one normalization constant $\\kappa_0>0$ measured in webers. Let $(a_i)$ and $(a_i')$ be two smooth normalized connection representatives for this same atlas, each satisfying $a_j=a_i+\\lambda(g_{ij})$ and $a_j'=a_i'+\\lambda(g_{ij})$, where $\\lambda(g):=-i g^{-1}dg$. In length-coordinate charts, the components of $a_i$ and $a_i'$ have units $\\mathrm m^{-1}$; the physical potentials $A_i=\\kappa_0a_i$ and $A_i'=\\kappa_0a_i'$ have components $\\mathrm{Wb}\\,\\mathrm m^{-1}$.",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-gauge-group-of-a-smooth-principal-bundle",
+          "source_section": "Definition",
+          "quote": "Let $\\pi:P\\to M$ be a smooth right principal $G$-bundle as in\n[[def-smooth-principal-g-bundle]]. A **smooth gauge transformation** of $P$ is\na smooth diffeomorphism $\\Phi:P\\to P$ satisfying\n$$\\pi\\circ\\Phi=\\pi,\\qquad \\Phi(pg)=\\Phi(p)g\\quad(p\\in P,\\ g\\in G).$$\nHere diffeomorphism has the meaning of\n[[def-diffeomorphism-and-local-diffeomorphism-of-manifolds]]. The **gauge\ngroup** $\\mathcal G(P)$ is the set of these transformations under composition.\nThe identity is a smooth diffeomorphism and composites of smooth maps are\nsmooth by\n[[prop-identity-maps-and-composites-of-smooth-maps-are-smooth]]; composites of\ndiffeomorphisms are diffeomorphisms because their inverses are composites of\nthe smooth inverses. The identity covers $M$ and commutes with the right\naction. If $\\Phi,\\Psi\\in\\mathcal G(P)$, then $\\Phi\\circ\\Psi$ covers $M$ and\n$(\\Phi\\circ\\Psi)(pg)=\\Phi(\\Psi(p)g)=\\Phi(\\Psi(p))g$, so the conditions are\nclosed under composition. The inverse of such a $\\Phi$ also covers $M$: if\n$q=\\Phi(p)$ then $\\pi(\\Phi^{-1}(q))=\\pi(p)=\\pi(q)$. Equivariance gives\n$$\\Phi^{-1}(qg)=\\Phi^{-1}(\\Phi(p)g)=\\Phi^{-1}(\\Phi(pg))=pg.$$\nIts smoothness is part of the diffeomorphism condition. Hence these maps form a\ngroup under the composition law of [[def-group]].",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-gauge-transformations-act-on-principal-connections",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. Let $P\\to M$ be a smooth right principal\n$G$-bundle with a principal connection $H$, and let\n$\\Phi\\in\\mathcal G(P)$. Then\n$$\\Phi_*H:=d\\Phi(H)$$\nis a principal connection. If $K_H$ and $K_{\\Phi_*H}$ are the vertical-valued\ncurvatures from\n[[def-principal-connection-and-vertical-curvature]], then for\n$X,Y\\in T_pP$,\n$$K_{\\Phi_*H}(d\\Phi_pX,d\\Phi_pY)=d\\Phi_p(K_H(X,Y)).$$\nComposition makes this a left action of $\\mathcal G(P)$ on the set of\nprincipal connections.",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-emg-local-potentials-and-circle-data",
+          "source_section": "Definition",
+          "quote": "Let $(M,g,N,o)$ be the smooth, Hausdorff, second-countable, boundaryless oriented and time-oriented Lorentzian four-manifold of [[def-emg-lorentzian-forms]]. Its smooth real $k$-forms are sections of $\\bigwedge^kT^*M$, written $\\Omega^k(M)$, and $d$ is the exterior derivative of [[lem-emg-lorentz-hodge-calculus]]. A smooth two-form $F$ is **closed** when $dF=0$ and **exact** when $F=dA$ for some smooth real one-form $A$ on the whole base.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-kernel-and-fibres-of-complex-exponential",
+          "source_section": "Statement",
+          "quote": "$$\\ker(\\exp)=2\\pi i\\mathbb Z,$$\nand $\\exp z=\\exp w$ exactly when $z-w\\in2\\pi i\\mathbb Z$. The conventions and prerequisite facts used below are recorded in [[cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]], [[thm-exponential-is-strictly-increasing]], [[thm-sine-cosine-zero-sets-and-fundamental-period]], [[thm-sine-and-cosine-parametrize-the-unit-circle]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-emg-lorentz-hodge-calculus",
+          "source_section": "Statement",
+          "quote": "Let $(M,g,N,o)$ have the oriented, time-oriented Lorentzian structure and volume form of [[def-emg-lorentzian-forms]]. On decomposable $k$-covectors define the induced exterior pairing by",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-emg-lorentzian-forms",
+          "source_section": "Definition",
+          "quote": "Let $(M,g,N)$ be a smooth, Hausdorff, second-countable four-manifold without boundary, with smooth Lorentzian metric $g$ of signature $(-,+,+,+)$ and smooth time-orientation field $N$, as in [[def-gr-smooth-lorentzian-objects]]. Supply an independent orientation $o$ of $M$ in the sense of [[def-oriented-smooth-manifold-and-oriented-chart]]. The metric and time orientation do not select $o$. Write $\\mathrm{vol}_g$ for the oriented metric volume form of [[def-gr-metric-volume-form-and-current-flux]]; in any positively oriented chart it has components $\\sqrt{|\\det(g_{ab})|}\\,dx^0\\wedge dx^1\\wedge dx^2\\wedge dx^3$.\n\nA smooth real $k$-form is a smooth section of $\\bigwedge^kT^*M$, and its space is denoted $\\Omega^k(M)$, as in [[def-smooth-differential-k-form]]. In this page, $F\\in\\Omega^2(M)$ means an arbitrary smooth real two-form. No equation such as $dF=0$, no global potential, and no physical field law is included in this definition.\n\nAn **observer at $p\\in M$** is a vector $n\\in T_pM$ with $g_p(n,n)=-1$ and $g_p(n,N_p)<0$; its **rest space** is $n^\\perp=\\{v:g_p(v,n)=0\\}$, as in [[def-gr-observer-and-rest-space]]. A smooth **observer congruence** on an open set $U\\subseteq M$ is a smooth vector field whose value at every point is an observer. Its observer curves are the maximal integral curves, and a chart is adapted to it when its three spatial coordinate functions are constant along those curves, as in [[def-gr-observer-congruence-and-adapted-charts]]. Such a congruence need not be hypersurface-orthogonal.\n\nA **local frame field** on $U$ is an ordered smooth basis field of $TM|_U$. A **coordinate frame** is the basis of coordinate vector fields supplied by a chart. A **tetrad field** is a local frame $(E_0,E_1,E_2,E_3)$ with $g(E_A,E_B)=\\operatorname{diag}(-1,1,1,1)_{AB}$; it is future-directed when $E_0$ is future-directed, as in [[def-gr-local-frame-and-tetrad-fields]]. These are distinct objects: an observer congruence is a vector field, an adapted chart is a coordinate chart, and a tetrad is a basis field. A tetrad field is not presumed to be a coordinate frame. For every observer congruence $n$, each point has a neighborhood carrying an $n$-adapted tetrad; this is a local assertion only.\n\nA **worldline** on this Lorentzian manifold means a $C^1$ or piecewise-$C^1$ regular curve with future-timelike tangent and specified interval domain, as defined precisely in [[def-gr-timelike-worldline-and-proper-time]]. Its parameter is arbitrary; the proper-time and four-velocity constructions of that definition apply under their stated hypotheses. A worldline is a mathematical curve here and does not assert the existence or motion of a physical body.\n\nFor coordinate bookkeeping only, when a chart is chosen with all four coordinate values assigned the metre, write $x^0=ct$, where $t$ is assigned seconds and $c>0$ is the corresponding scale in $\\mathrm m\\,\\mathrm s^{-1}$. Then $g_{ab}$ is recorded as dimensionless. This is a unit convention on a chart, not a claim that the chart is inertial, orthonormal, global, or physically realized; $c$ in this mathematical convention has no asserted measured value.\n\nUse the unique torsion-free metric-compatible connection $\\nabla^g$ and the curvature convention of [[def-gr-metric-selected-connection]] and [[thm-gr-curvature-tensoriality-and-coordinate-formula]]. In a length-coordinate chart, the displayed Christoffel formula differentiates dimensionless metric components once, so $\\Gamma^a{}_{bc}$ is recorded in $\\mathrm m^{-1}$. The curvature coordinate formula contains one derivative of $\\Gamma$ or a product of two $\\Gamma$ components, so $R^a{}_{bcd}$ and its Ricci and scalar contractions are recorded in $\\mathrm m^{-2}$. These component assignments apply only in length-coordinate charts; other coordinate units transform by their Jacobians.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "In each angular chart $\\nu=d\\phi$, so $d\\nu=d^2\\phi=0$ by [F7] locally and therefore globally; the normalized connection form $\\eta+\\theta\\pi^*\\nu$ is the product-bundle connection of [F1], and its curvature is $\\theta d\\nu=0$. The temporal length coordinate is $x^0=ct_{\\mathrm{sec}}$ under [F8], with $c$ only the stated unit-conversion scale. In the length coordinate $s=R\\phi$, its base component is $\\theta/R$ with units $\\mathrm m^{-1}$, while the physical potential component $\\kappa_0\\theta/R$ has units $\\mathrm{Wb}\\,\\mathrm m^{-1}$.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F5",
+            "F7",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "Along the loop parameterized by $\\phi\\in[0,2\\pi]$, write the fibre coordinate as $z(\\phi)=e^{i\\psi(\\phi)}$. The horizontality equation is $\\dot\\psi+\\theta=0$, so $\\psi(2\\pi)-\\psi(0)=-2\\pi\\theta$ and the principal holonomy is $e^{-2\\pi i\\theta}$. The inverse Wilson variable is $e^{i\\int_\\gamma\\theta\\nu}=e^{2\\pi i\\theta}$.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "step": "1.3",
+          "claim": "Every gauge transformation of the product bundle has the form $\\Phi_h(x,z)=(x,h(x)z)$: set $\\Phi_h(x,1)=(x,h(x))$ and use right equivariance in [F3] on $(x,z)=(x,1)\\cdot z$. The pushforward convention in [F4] is the one used in [F2], so the local normalized potential changes by $a\\mapsto a-\\lambda(h)$.",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "If $\\theta=n\\in\\mathbb Z$, the map $h(w)=w^n$ is single-valued and smooth, with smooth inverse $w^{-n}$, because the group multiplication and inversion on $U(1)$ are smooth. On each phase chart $w=e^{i\\phi}$, the phase rule in [F5] gives $\\lambda(h)=d(n\\phi)=n\\nu$; thus the pushforward gauge action in [F2] sends $a=n\\nu$ to zero. Conversely, if a gauge transformation sends $\\omega_\\theta$ to the trivial connection, it maps a horizontal lift to a horizontal lift and preserves its fibre multiplier: if a lifted loop ends at $p\\cdot u$, its gauge image ends at $\\Phi_h(p)\\cdot u$ by equivariance. The trivial connection has multiplier $1$, so $e^{-2\\pi i\\theta}=1$; [F6] implies $\\theta\\in\\mathbb Z$. Thus gauge triviality is equivalent to integrality, while every nonintegral $\\theta$ gives a flat connection with nontrivial holonomy.",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "step 1.2",
+            "step 1.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The product base M0 is explicitly nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.2 and step 2.1 give unit holonomy and the identity gauge when theta=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 2.1 gives the explicit smooth map h(w)=w and trivializes theta=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The product metric is the fixed nondegenerate flat Lorentzian metric."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 1.2 evaluates the horizontal lift at both phi=0 and phi=2 pi."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 2.1 constructs h explicitly from the given gauge map and makes no arbitrary selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "step 2.1 proves integer theta gives a smooth gauge map to the trivial connection."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "step 2.1 proves triviality forces e^{-2 pi i theta}=1 and hence integer theta."
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "def-countable-choice",
+          "carrier": "items/def-countable-choice.md",
+          "status": "Current supplier interface inspected for this item; no additional review approval asserted.",
+          "source_section": "Definition",
+          "exact_statement": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "relevant_hypotheses_and_conventions": "[A1] [[def-countable-choice]]: $\\mathrm{AC}_\\omega$ is the background assumption for the inherited smooth tangent and principal-connection convention; the explicit product connection and the finite holonomy calculation make no additional selections.",
+          "supplier_proof_status": "published; exact current interface and proof inspected; no new independent certification asserted.",
+          "consumer_use": "Used in proof step(s): 1.1, 1.2, 1.3, 2.1."
+        },
+        {
+          "supplier": "prop-emg-fx-affine-connection-sector",
+          "carrier": "items/prop-emg-fx-affine-connection-sector.md",
+          "status": "Current supplier interface inspected for this item; no additional review approval asserted.",
+          "source_section": "Statement",
+          "exact_statement": "Assume $\\mathrm{AC}_\\omega$ for the smooth tangent-bundle and principal-connection convention. Let $(M,g,N,o)$ be the smooth, Hausdorff, second-countable, oriented and time-oriented Lorentzian four-manifold used for normalized circle-connection data. Fix a smooth right principal $U(1)$ bundle $P\\to M$, one countable trivializing cover $(U_i)$ with transition functions $g_{ij}$ in the convention $z_j=g_{ij}^{-1}z_i$, and one normalization constant $\\kappa_0>0$ measured in webers. Let $(a_i)$ and $(a_i')$ be two smooth normalized connection representatives for this same atlas, each satisfying $a_j=a_i+\\lambda(g_{ij})$ and $a_j'=a_i'+\\lambda(g_{ij})$, where $\\lambda(g):=-i g^{-1}dg$. In length-coordinate charts, the components of $a_i$ and $a_i'$ have units $\\mathrm m^{-1}$; the physical potentials $A_i=\\kappa_0a_i$ and $A_i'=\\kappa_0a_i'$ have components $\\mathrm{Wb}\\,\\mathrm m^{-1}$.",
+          "relevant_hypotheses_and_conventions": "[F2] [[prop-emg-fx-affine-connection-sector]]: normalized connections on the same fixed bundle and atlas differ by a global one-form, and the adopted pushforward action sends a local representative $a_i$ to $a_i-\\lambda(h)$ for $\\Phi_h(x,z)=(x,h(x)z)$.",
+          "supplier_proof_status": "draft; exact current interface inspected and complete local proof read where supplied; no independent approval inferred.",
+          "consumer_use": "Used in proof step(s): 1.3, 2.1."
+        },
+        {
+          "supplier": "def-emg-local-potentials-and-circle-data",
+          "carrier": "items/def-emg-local-potentials-and-circle-data.md",
+          "status": "Current supplier interface inspected for this item; no additional review approval asserted.",
+          "source_section": "Definition",
+          "exact_statement": "Let $(M,g,N,o)$ be the smooth, Hausdorff, second-countable, boundaryless oriented and time-oriented Lorentzian four-manifold of [[def-emg-lorentzian-forms]]. Its smooth real $k$-forms are sections of $\\bigwedge^kT^*M$, written $\\Omega^k(M)$, and $d$ is the exterior derivative of [[lem-emg-lorentz-hodge-calculus]]. A smooth two-form $F$ is **closed** when $dF=0$ and **exact** when $F=dA$ for some smooth real one-form $A$ on the whole base.",
+          "relevant_hypotheses_and_conventions": "[F5] [[def-emg-local-potentials-and-circle-data]]: $U(1)$ has smooth multiplication and inversion, $\\eta=-iz^{-1}dz$ is the real angular normalization, and $\\kappa_0$ converts normalized to physical potential units.",
+          "supplier_proof_status": "published; exact current interface and proof inspected; no new independent certification asserted.",
+          "consumer_use": "Used in proof step(s): 1.1, 2.1."
+        },
+        {
+          "supplier": "lem-emg-sphere-flux-holonomy",
+          "carrier": "items/lem-emg-sphere-flux-holonomy.md",
+          "status": "Current supplier interface inspected for this item; no additional review approval asserted.",
+          "source_section": "Statement",
+          "exact_statement": "There is also a flat example with nontrivial holonomy. On $M_0=\\mathbb R\\times S^1\\times\\mathbb R^2$ with product smooth structure, take $S^1=U(1)$ with the smooth structure defined above. Write $w\\in S^1$ for the base-circle coordinate and let $\\nu=-i w^{-1}dw$ be its global real angular one-form, normalized by $\\int_{S^1}\\nu=2\\pi$. For dimensionless $a\\in\\mathbb R$, set $A=\\kappa_0 a\\,\\nu$. On the product bundle $P_0=M_0\\times U(1)$ with projection $\\pi(x,z)=x$ and right action $(x,z)\\cdot\\zeta=(x,z\\zeta)$, use $\\omega=\\vartheta+a\\pi^*\\nu$, where $z\\in U(1)$ is the fibre coordinate and $\\vartheta=-i z^{-1}dz$ is its real angular form. Holonomy means the fibre multiplier of the horizontal lift around the indicated base loop; gauge trivial means gauge-equivalent to $\\vartheta$ under a smooth bundle map $G_u(x,z)=(x,z u(x))$ covering the identity. Then $F=dA=0$ but holonomy around the circle is $e^{-2\\pi ia}$, so this connection is gauge trivial exactly when $a\\in\\mathbb Z$. If $b$ and $\\kappa_0$ are assigned physical units, both are measured in webers; the ratio $2b/\\kappa_0$ is dimensionless. No general classification of circle bundles is asserted.",
+          "relevant_hypotheses_and_conventions": "[F1] [[lem-emg-sphere-flux-holonomy]]: on $\\mathbb R\\times U(1)\\times\\mathbb R^2$ the normalized connection $\\eta+a\\pi^*\\nu$ has zero curvature and principal horizontal-lift holonomy $e^{-2\\pi ia}$; it is gauge-trivial exactly when $a\\in\\mathbb Z$. Its proof records the local phase and winding argument.",
+          "supplier_proof_status": "published; exact current interface and proof inspected; no new independent certification asserted.",
+          "consumer_use": "Used in proof step(s): 1.1, 1.2."
+        },
+        {
+          "supplier": "def-gauge-group-of-a-smooth-principal-bundle",
+          "carrier": "items/def-gauge-group-of-a-smooth-principal-bundle.md",
+          "status": "Current supplier interface inspected for this item; no additional review approval asserted.",
+          "source_section": "Definition",
+          "exact_statement": "Let $\\pi:P\\to M$ be a smooth right principal $G$-bundle as in\n[[def-smooth-principal-g-bundle]]. A **smooth gauge transformation** of $P$ is\na smooth diffeomorphism $\\Phi:P\\to P$ satisfying\n$$\\pi\\circ\\Phi=\\pi,\\qquad \\Phi(pg)=\\Phi(p)g\\quad(p\\in P,\\ g\\in G).$$\nHere diffeomorphism has the meaning of\n[[def-diffeomorphism-and-local-diffeomorphism-of-manifolds]]. The **gauge\ngroup** $\\mathcal G(P)$ is the set of these transformations under composition.\nThe identity is a smooth diffeomorphism and composites of smooth maps are\nsmooth by\n[[prop-identity-maps-and-composites-of-smooth-maps-are-smooth]]; composites of\ndiffeomorphisms are diffeomorphisms because their inverses are composites of\nthe smooth inverses. The identity covers $M$ and commutes with the right\naction. If $\\Phi,\\Psi\\in\\mathcal G(P)$, then $\\Phi\\circ\\Psi$ covers $M$ and\n$(\\Phi\\circ\\Psi)(pg)=\\Phi(\\Psi(p)g)=\\Phi(\\Psi(p))g$, so the conditions are\nclosed under composition. The inverse of such a $\\Phi$ also covers $M$: if\n$q=\\Phi(p)$ then $\\pi(\\Phi^{-1}(q))=\\pi(p)=\\pi(q)$. Equivariance gives\n$$\\Phi^{-1}(qg)=\\Phi^{-1}(\\Phi(p)g)=\\Phi^{-1}(\\Phi(pg))=pg.$$\nIts smoothness is part of the diffeomorphism condition. Hence these maps form a\ngroup under the composition law of [[def-group]].",
+          "relevant_hypotheses_and_conventions": "[F3] [[def-gauge-group-of-a-smooth-principal-bundle]]: a gauge transformation is a smooth diffeomorphism $\\Phi$ over the identity satisfying $\\Phi(pu)=\\Phi(p)u$.",
+          "supplier_proof_status": "published; exact current interface and proof inspected; no new independent certification asserted.",
+          "consumer_use": "Used in proof step(s): 1.3, 2.1."
+        },
+        {
+          "supplier": "prop-gauge-transformations-act-on-principal-connections",
+          "carrier": "items/prop-gauge-transformations-act-on-principal-connections.md",
+          "status": "Current supplier interface inspected for this item; no additional review approval asserted.",
+          "source_section": "Statement",
+          "exact_statement": "Assume $\\mathrm{AC}_\\omega$. Let $P\\to M$ be a smooth right principal\n$G$-bundle with a principal connection $H$, and let\n$\\Phi\\in\\mathcal G(P)$. Then\n$$\\Phi_*H:=d\\Phi(H)$$\nis a principal connection. If $K_H$ and $K_{\\Phi_*H}$ are the vertical-valued\ncurvatures from\n[[def-principal-connection-and-vertical-curvature]], then for\n$X,Y\\in T_pP$,\n$$K_{\\Phi_*H}(d\\Phi_pX,d\\Phi_pY)=d\\Phi_p(K_H(X,Y)).$$\nComposition makes this a left action of $\\mathcal G(P)$ on the set of\nprincipal connections.",
+          "relevant_hypotheses_and_conventions": "[F4] [[prop-gauge-transformations-act-on-principal-connections]]: the adopted action sends horizontal distribution $H$ to $d\\Phi(H)$.",
+          "supplier_proof_status": "published; exact current interface and proof inspected; no new independent certification asserted.",
+          "consumer_use": "Used in proof step(s): 1.3, 2.1."
+        },
+        {
+          "supplier": "thm-kernel-and-fibres-of-complex-exponential",
+          "carrier": "items/thm-kernel-and-fibres-of-complex-exponential.md",
+          "status": "Current supplier interface inspected for this item; no additional review approval asserted.",
+          "source_section": "Statement",
+          "exact_statement": "$$\\ker(\\exp)=2\\pi i\\mathbb Z,$$\nand $\\exp z=\\exp w$ exactly when $z-w\\in2\\pi i\\mathbb Z$. The conventions and prerequisite facts used below are recorded in [[cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]], [[thm-exponential-is-strictly-increasing]], [[thm-sine-cosine-zero-sets-and-fundamental-period]], [[thm-sine-and-cosine-parametrize-the-unit-circle]].",
+          "relevant_hypotheses_and_conventions": "[F6] [[thm-kernel-and-fibres-of-complex-exponential]]: $e^{is}=1$ for real $s$ exactly when $s\\in2\\pi\\mathbb Z$.",
+          "supplier_proof_status": "published; verification.audited=2026-08-02; exact current interface and proof inspected; no new independent certification asserted.",
+          "consumer_use": "Used in proof step(s): 2.1."
+        },
+        {
+          "supplier": "lem-emg-lorentz-hodge-calculus",
+          "carrier": "items/lem-emg-lorentz-hodge-calculus.md",
+          "status": "Current supplier interface inspected for this item; no additional review approval asserted.",
+          "source_section": "Statement",
+          "exact_statement": "Let $(M,g,N,o)$ have the oriented, time-oriented Lorentzian structure and volume form of [[def-emg-lorentzian-forms]]. On decomposable $k$-covectors define the induced exterior pairing by",
+          "relevant_hypotheses_and_conventions": "[F7] [[lem-emg-lorentz-hodge-calculus]]: $d^2=0$ and $d$ obeys the graded product rule; in each local phase chart $\\nu=d\\phi$.",
+          "supplier_proof_status": "published; exact current interface and proof inspected; no new independent certification asserted.",
+          "consumer_use": "Used in proof step(s): 1.1, 2.1."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-24 author self-review",
+        "notes": "Checked the product metric and connection, principal holonomy sign, inverse Wilson convention, large gauge map, and both directions of the integer criterion. No quantum or empirical charge condition is used."
+      },
+      "finite_checks": [
+        {
+          "name": "theta=0",
+          "inputs": [
+            "step 1.2",
+            "step 2.1"
+          ],
+          "expected": "Principal holonomy and Wilson phase are both 1; the identity map trivializes the connection."
+        },
+        {
+          "name": "theta=1/2",
+          "inputs": [
+            "step 1.2",
+            "step 2.1"
+          ],
+          "expected": "Principal holonomy is -1, so no gauge transformation makes the connection trivial."
+        },
+        {
+          "name": "theta=1",
+          "inputs": [
+            "step 2.1"
+          ],
+          "expected": "The global map h(w)=w has lambda(h)=nu and trivializes the pushed-forward connection."
+        }
+      ]
+    }
+  }
+}

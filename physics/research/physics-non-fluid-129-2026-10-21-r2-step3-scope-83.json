@@ -1,0 +1,204 @@
+{
+  "version": 2,
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "batch": "83",
+  "group": "af",
+  "manifest_pre": [
+    "def-qftx-joint-spectrum-input",
+    "thm-qftx-spectral-tube-holomorphy",
+    "def-qftx-cpt-spin-statistics-interface",
+    "ex-qftx-positive-frequency-tube"
+  ],
+  "manifest_post": [
+    "def-qftx-joint-spectrum-input",
+    "thm-qftx-spectral-tube-holomorphy",
+    "def-qftx-cpt-spin-statistics-interface",
+    "ex-qftx-positive-frequency-tube"
+  ],
+  "added": [],
+  "removed": [],
+  "page_manifest_pre": [
+    "qftx-spectral-tube-analyticity",
+    "qftx-spectral-tube-analyticity-examples"
+  ],
+  "page_manifest_post": [
+    "qftx-spectral-tube-analyticity",
+    "qftx-spectral-tube-analyticity-examples"
+  ],
+  "pages_added": [],
+  "pages_removed": [],
+  "pages_touched": [],
+  "refuter_pages": [
+    "qftx-spectral-tube-analyticity",
+    "qftx-spectral-tube-analyticity-examples"
+  ],
+  "page_order_anchors": {
+    "qftx-spectral-tube-analyticity": [
+      "def-qftx-joint-spectrum-input",
+      "thm-qftx-spectral-tube-holomorphy",
+      "def-qftx-cpt-spin-statistics-interface"
+    ],
+    "qftx-spectral-tube-analyticity-examples": [
+      "ex-qftx-positive-frequency-tube"
+    ]
+  },
+  "touched": [],
+  "untouched": [
+    "def-qftx-cpt-spin-statistics-interface",
+    "def-qftx-joint-spectrum-input",
+    "ex-qftx-positive-frequency-tube",
+    "thm-qftx-spectral-tube-holomorphy"
+  ],
+  "high_risk": [
+    "def-qftx-cpt-spin-statistics-interface",
+    "ex-qftx-positive-frequency-tube",
+    "thm-qftx-spectral-tube-holomorphy"
+  ],
+  "refuter_scope": [
+    "def-qftx-cpt-spin-statistics-interface",
+    "def-qftx-joint-spectrum-input",
+    "ex-qftx-positive-frequency-tube",
+    "qftx-spectral-tube-analyticity",
+    "qftx-spectral-tube-analyticity-examples",
+    "thm-qftx-spectral-tube-holomorphy"
+  ],
+  "opened": [
+    "def-qftx-cpt-spin-statistics-interface",
+    "def-qftx-joint-spectrum-input",
+    "ex-qftx-positive-frequency-tube",
+    "qftx-spectral-tube-analyticity",
+    "qftx-spectral-tube-analyticity-examples",
+    "thm-qftx-spectral-tube-holomorphy"
+  ],
+  "not_opened": [],
+  "flagged": [
+    "def-qftx-cpt-spin-statistics-interface",
+    "def-qftx-joint-spectrum-input",
+    "thm-qftx-spectral-tube-holomorphy"
+  ],
+  "refuter_findings": [
+    {
+      "obligation": "refuter:83:1",
+      "id": "def-qftx-joint-spectrum-input",
+      "location": "Definition, paragraph beginning “Fix a translation-invariant unit vector”",
+      "defect": "ill-formed",
+      "evidence": "The Definition requires “a specified unital $*$-subalgebra $\u001b[0m\\mathfrak A\\subseteq\\mathcal B(\\mathcal H)$” but does not state the inherited operations or the conditions that make this subset a unital $*$-subalgebra. The related `def-qft-involutive-algebra-state` defines an abstract unital complex star algebra, but is neither a dependency nor a reference and does not define this concrete subalgebra condition.",
+      "severity": "nonfatal",
+      "observed_sha256": "1304556489e560a560fd76f6c7909718fd2733bcf00ab49c904b4d08e6f30082"
+    },
+    {
+      "obligation": "refuter:83:2",
+      "id": "thm-qftx-spectral-tube-holomorphy",
+      "location": "Proof 1.2, first sentence defining $\\delta_K$",
+      "defect": "ill-formed",
+      "evidence": "The proof says “Let $K\\subset V_+$ be compact and set $\\delta_K:=\\min_{b\\in K}(b^0-|\\mathbf b|)>0$.” Compact subsets may be empty, in which case this minimum is undefined. The later application uses a singleton, so requiring nonempty $K$ repairs the gap.",
+      "severity": "nonfatal",
+      "observed_sha256": "256bc3d970326bf8c4a296d8d36b1c4f3cf3469f1d16bd43e8b76fc3e5c043a7"
+    },
+    {
+      "obligation": "refuter:83:3",
+      "id": "def-qftx-cpt-spin-statistics-interface",
+      "location": "Definition, symmetry-representation paragraph and paragraph beginning “The positive-energy premise”",
+      "defect": "missing-hypothesis",
+      "evidence": "The interface requires a representation $U$ of $SL(2,\\mathbb C)\\ltimes\\mathbb R^4$ and then says the positive-energy premise must be the joint-PVM input of `def-qftx-joint-spectrum-input`. That supplier defines a translation representation $U_{\\mathrm{spec}}:\\mathbb R^4\\to\\mathcal B(\\mathcal H)$, but the interface never identifies it with the restriction of the field representation, $U((I,a))=U_{\\mathrm{spec}}(a)$. Without that identity, the PVM's tube analyticity need not apply to the translations implementing field covariance.",
+      "severity": "fatal",
+      "observed_sha256": "a892640df7bda8df509eb02a51027fe50028e8e9639f743fffb48c3c69c70a43"
+    },
+    {
+      "obligation": "refuter:83:4",
+      "id": "def-qftx-cpt-spin-statistics-interface",
+      "location": "Definition, field-multiplet and covariance paragraphs",
+      "defect": "missing-hypothesis",
+      "evidence": "The interface defines fields on $\\mathcal S(\\mathbb R^4;\\mathbb C)$ using the pullback convention of `def-qft-poincare-test-action`, then requires a field covariance identity involving that pullback. The supplier explicitly says its formula “does not assert that $T_gf$ belongs to $S$.” The interface omits `lem-qft-poincare-pullback-continuity-on-schwartz` and supplies no preservation condition or local proof, so the covariance expression is not established to be defined on the declared Schwartz domain.",
+      "severity": "fatal",
+      "observed_sha256": "a892640df7bda8df509eb02a51027fe50028e8e9639f743fffb48c3c69c70a43"
+    },
+    {
+      "obligation": "refuter:83:5",
+      "id": "def-qftx-cpt-spin-statistics-interface",
+      "location": "Definition, final spin-statistics paragraph",
+      "defect": "ill-formed",
+      "evidence": "The item defines the common field domain as $\\mathcal D_{\\mathrm{field}}$, but the exchange identity ends “on $\\mathcal D$.” It never defines $\\mathcal D$ or identifies it with $\\mathcal D_{\\mathrm{field}}$.",
+      "severity": "nonfatal",
+      "observed_sha256": "a892640df7bda8df509eb02a51027fe50028e8e9639f743fffb48c3c69c70a43"
+    }
+  ],
+  "reader_findings": [
+    {
+      "obligation": "reader:83:1",
+      "id": "def-qftx-joint-spectrum-input",
+      "location": "Definition, paragraph beginning “Fix a translation-invariant unit vector,” phrase “specified unital *-subalgebra”.",
+      "defect": "ill-formed",
+      "evidence": "The item does not define the inherited algebra operations or state the closure conditions for 𝔄⊂B(H), and cites no exact supplier. The published def-qft-involutive-algebra-state defines a unital complex *-algebra but is not a dependency or reference here; the subalgebra conditions still need to be stated.",
+      "severity": "nonfatal",
+      "subject_type": "in-flight-item",
+      "consumer_id": null,
+      "observed_sha256": "1304556489e560a560fd76f6c7909718fd2733bcf00ab49c904b4d08e6f30082"
+    },
+    {
+      "obligation": "reader:83:2",
+      "id": "thm-qftx-spectral-tube-holomorphy",
+      "location": "Proof 1.2, first sentence defining δ_K.",
+      "defect": "ill-formed",
+      "evidence": "K is only assumed compact in V_+, so it may be empty; min_{b∈K}(b⁰−|b|) is then undefined. The later use is K={b}, so require K to be nonempty.",
+      "severity": "nonfatal",
+      "subject_type": "in-flight-item",
+      "consumer_id": null,
+      "observed_sha256": "256bc3d970326bf8c4a296d8d36b1c4f3cf3469f1d16bd43e8b76fc3e5c043a7"
+    },
+    {
+      "obligation": "reader:83:3",
+      "id": "def-qftx-cpt-spin-statistics-interface",
+      "location": "Definition, symmetry-representation paragraph and the paragraph beginning “The positive-energy premise”.",
+      "defect": "missing-hypothesis",
+      "evidence": "The item requires U as a representation of SL(2,C)⋉R⁴ and separately requires the joint-PVM input, whose supplier defines a translation representation U_spec:R⁴→B(H). It does not identify U((I,a)) with U_spec(a). The tube theorem is proved for U_spec, while field covariance uses the full-group U; without this restriction identity, the positive-spectrum analyticity is not connected to the field-covariant translations.",
+      "severity": "fatal",
+      "subject_type": "in-flight-item",
+      "consumer_id": null,
+      "observed_sha256": "a892640df7bda8df509eb02a51027fe50028e8e9639f743fffb48c3c69c70a43"
+    },
+    {
+      "obligation": "reader:83:4",
+      "id": "def-qftx-cpt-spin-statistics-interface",
+      "location": "Definition, field-multiplet and covariance paragraphs.",
+      "defect": "missing-hypothesis",
+      "evidence": "The interface requires covariance using the Poincaré pullback on Schwartz functions, but depends only on def-qft-poincare-test-action, whose definition explicitly does not assert T_g f∈S. It omits the published lem-qft-poincare-pullback-continuity-on-schwartz and supplies no local proof or preservation condition, so Φ(T_g f) is not established to be defined on the declared Schwartz domain.",
+      "severity": "fatal",
+      "subject_type": "in-flight-item",
+      "consumer_id": null,
+      "observed_sha256": "a892640df7bda8df509eb02a51027fe50028e8e9639f743fffb48c3c69c70a43"
+    },
+    {
+      "obligation": "reader:83:5",
+      "id": "def-qftx-cpt-spin-statistics-interface",
+      "location": "Definition, final spin-statistics paragraph, exchange identity ending “on 𝒟”.",
+      "defect": "ill-formed",
+      "evidence": "The item defines the common field domain as 𝒟_field but does not define 𝒟. The exchange identity must name the domain on which the operator products act.",
+      "severity": "nonfatal",
+      "subject_type": "in-flight-item",
+      "consumer_id": null,
+      "observed_sha256": "a892640df7bda8df509eb02a51027fe50028e8e9639f743fffb48c3c69c70a43"
+    },
+    {
+      "obligation": "reader:83:6",
+      "id": "cm-math-numerical",
+      "location": "Page summary, final paragraph: “All content is draft and awaits independent workflow review.”",
+      "defect": "false-claim",
+      "evidence": "The page's item inventory includes def-cm-complex-phase-domains-and-holomorphic-maps, whose current carrier has status: published. The assigned theorem depends on that item. This is a draft page outside batch 83 and outside the current-run manifests; it was not edited.",
+      "severity": "nonfatal",
+      "subject_type": "published-dependency",
+      "consumer_id": "thm-qftx-spectral-tube-holomorphy",
+      "carrier_kind": "page",
+      "observation_basis": "split-current",
+      "page_dependency": {
+        "path": "library/non-relativistic-classical-mechanics-mathematics/cm-math-numerical.md",
+        "supplier_ids": [
+          "def-cm-complex-phase-domains-and-holomorphic-maps"
+        ]
+      },
+      "observed_sha256": "27bfd2ff0438edf14b37cf8c092eb406a7a634339178cbafae9b4ebbd4e5bcde"
+    }
+  ],
+  "reader_report_sha256": "baef208d01b7fbf08298fbfae05945aca0c15c57a20223b1dc1c242c9d97ad38",
+  "refuter_report_sha256": "50ac701edc6fc7105f918678ae6b3341180f2b23219338dd580a6eb3c00211f1"
+}

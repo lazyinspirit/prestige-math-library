@@ -1,0 +1,1634 @@
+{
+  "version": 1,
+  "scope": [
+    "def-nrqmx-bloch-fiber-model",
+    "lem-nrqmx-bloch-fiber-model-properties",
+    "def-nrqmx-determinant-line-projector",
+    "lem-nrqmx-determinant-line-projector-well-defined",
+    "lem-nrqmx-determinant-curvature-is-trace",
+    "lem-nrqmx-degree-area-formula",
+    "thm-nrqmx-bloch-projector-chern",
+    "thm-nrqmx-two-band-degree-formula",
+    "thm-nrqmx-finite-band-adiabatic-velocity",
+    "ex-nrqmx-two-band-gap-closures",
+    "cex-nrqmx-smooth-frame-obstruction"
+  ],
+  "contracts": {
+    "def-nrqmx-bloch-fiber-model": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: a finite symmetric S may be empty. Then the hopping sum and Bloch matrix are zero; the sequence Fourier transform is unchanged. Dimensions d,r are positive, and any selected band cluster is explicitly nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero hopping family is allowed; h(k)=0 and the full-spectrum projector is I_r. See the item Statement or Definition."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For r=1 the fiber is scalar and a full-spectrum projector is I_1. See the item Statement or Definition."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Internal eigenvalue crossings are allowed inside a selected cluster; only the boundary gap is required. See the item Statement or Definition."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The torus is compact and periodic; no boundary condition at a chart edge is added. See the item Statement or Definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice is explicit for the Fourier unitary; the finite matrix and operator bounds use no arbitrary choices. See the item Statement or Definition."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a direct definition or result, not an if-and-only-if claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/drift_materialization (gpt-6.1-sol owner)",
+            "reason": "The public claim and its entire argument have been read: The Definition specifies finite-range shifts, the Fourier transform and a nonempty band cluster; it does not characterize a property by equivalent conditions.",
+            "item_sha256": "7ca61e2ce8afae16acd879c56f1ff64dabfeacb6e0d9320648212c8490fe7c80",
+            "row_sha256": "f3bbe9deea3ca7aa0499a0716628f3e25077e73fa72449b1e9ce7762b490a6ac"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a direct definition or result, not an if-and-only-if claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/drift_materialization (gpt-6.1-sol owner)",
+            "reason": "The public claim and its entire argument have been read: The Definition specifies finite-range shifts, the Fourier transform and a nonempty band cluster; it does not characterize a property by equivalent conditions.",
+            "item_sha256": "7ca61e2ce8afae16acd879c56f1ff64dabfeacb6e0d9320648212c8490fe7c80",
+            "row_sha256": "f4268fcf0a0b9828830396b3e426b3cf3172a02c523f2ac1a0a0dc73c66008fa"
+          }
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-54-author",
+        "notes": "Checked the exact interfaces and assumptions, curvature and orientation signs, degenerate and boundary cases, and the conditional effective-model scope. This is authoring evidence, not independent proof approval."
+      }
+    },
+    "lem-nrqmx-bloch-fiber-model-properties": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-fourier-basis-and-parseval-on-the-n-torus",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $n\\ge1$\nand let $e_k(x)=\\exp(2\\pi i\\,k\\cdot x)$, $k\\in\\mathbb Z^n$, be the coordinate\ncharacters on $\\mathbb T^n$\n([[def-the-one-dimensional-torus-and-normalized-haar-integral]],\n[[def-fourier-coefficients-and-trigonometric-polynomials]]). Then:",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-parseval-equivalences-for-a-complete-orthonormal-family",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let\n$(e_i)_{i\\in I}$ be an orthonormal family in a real or complex Hilbert space $H$\n([[def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis]]), and\nfor $x\\in H$ and finite $F\\subseteq I$ put",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional complex inner product space and let $T:V\\to V$\nbe linear. Then $T$ is normal if and only if $V$ has an orthonormal basis\nconsisting of eigenvectors of $T$.",
+          "uses": [
+            "1.4",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-cauchy-integral-formula-circle",
+          "source_section": "Statement",
+          "quote": "Let $a\\in\\mathbb C$, let $R>0$, and let $f$ be holomorphic on the disc",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For finitely supported $\\psi$, each shift $\\psi_n\\mapsto\\psi_{n-\\delta}$ preserves the $\\ell^2$ norm, so the triangle inequality gives $\\|H_0\\psi\\|_2\\le(\\sum_{\\delta\\in S}\\|T_\\delta\\|)\\|\\psi\\|_2$. Hence $H_0$ extends uniquely to a bounded operator $H$. For finitely supported $\\psi,\\phi$, reindexing the finite sum gives $\\langle H_0\\psi,\\phi\\rangle=\\sum_{m,\\delta}\\langle T_\\delta\\psi_m,\\phi_{m+\\delta}\\rangle=\\sum_{m,\\delta}\\langle\\psi_m,T_\\delta^*\\phi_{m+\\delta}\\rangle=\\langle\\psi,H_0\\phi\\rangle$, because $T_\\delta^*=T_{-\\delta}$ and $S=-S$. Density and boundedness extend symmetry to all of $\\mathcal H$, so $H=H^*$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Under $k=2\\pi x$, the functions $e^{-ik\\cdot n}$ are the characters $e_{-n}(x)$. By [F1] and [F2], applied to each of the finitely many internal coordinates, $\\mathcal F_0$ preserves the $L^2$ norm and its range contains the dense trigonometric polynomials; it therefore has a unique isometric extension $\\mathcal F$, and the completeness clause of [F1] makes that extension onto. Thus $\\mathcal F$ is unitary.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Direct substitution and the change of index $m=n-\\delta$ give, for finitely supported $\\psi$, $\\mathcal F_0(H_0\\psi)(k)=\\sum_{\\delta\\in S}T_\\delta e^{-ik\\cdot\\delta}\\sum_m\\psi_m e^{-ik\\cdot m}=h(k)\\mathcal F_0\\psi(k)$. The finite sum defining $h$ is continuous and satisfies $\\sup_k\\|h(k)\\|\\le\\sum_{\\delta\\in S}\\|T_\\delta\\|$, so multiplication by $h$ is bounded on $L^2$. Extending the identity from the dense finitely supported sequences proves the claimed unitary equivalence. Also, $h(k)^*=\\sum_\\delta T_\\delta^*e^{ik\\cdot\\delta}=\\sum_\\delta T_{-\\delta}e^{-ik\\cdot(-\\delta)}=h(k)$, and its entries are trigonometric polynomials, hence smooth.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "claim": "Write the eigenvalues of $h(k)$ in nondecreasing order as $\\lambda_1(k)\\le\\cdots\\le\\lambda_r(k)$. For a Hermitian matrix $A$ with eigenbasis $e_1,\\ldots,e_r$, its $j$th eigenvalue satisfies $\\lambda_j(A)=\\max_{\\dim L=r-j+1}\\min_{\\|v\\|=1,\\,v\\in L}\\langle Av,v\\rangle$: every such $L$ intersects $\\operatorname{span}(e_1,\\ldots,e_j)$ nontrivially, while $L=\\operatorname{span}(e_j,\\ldots,e_r)$ attains the value. Since every unit-vector Rayleigh quotient changes by at most $\\|A-B\\|$ when $A$ is replaced by $B$, this formula gives $|\\lambda_j(A)-\\lambda_j(B)|\\le\\|A-B\\|$. Thus each $\\lambda_j(k)$ is continuous.",
+          "step": "1.4",
+          "inputs": [
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fix $k_0$. The gap and continuity in step 1.4 let us choose disjoint small circles around the distinct eigenvalues in the selected block at $k_0$ so that, on some neighborhood of $k_0$, all selected eigenvalues stay inside their union and all complementary eigenvalues stay outside. The inverse matrix $(zI-h(k))^{-1}$ is $C^\\infty$ in $k$ on this fixed contour: differentiating the inverse gives $\\partial_j(zI-h)^{-1}=(zI-h)^{-1}(\\partial_jh)(zI-h)^{-1}$, and repeated differentiation gives finite sums of products of smooth matrices. Therefore its contour integral is $C^\\infty$. At each $k$, [F3] diagonalizes $h(k)$, and [F4] evaluates the contour integral on each eigenvector, proving that it is exactly the orthogonal projector onto the selected eigenvalues. On overlaps the local definitions project onto the same selected eigenspaces, so they agree and define the asserted global projector.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.4",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1 and 1.3: for empty S every hopping sum and its norm bound are zero, so H=h=0; the Fourier transform still extends unitarily by step 1.2. Any selected spectral block is explicitly nonempty; the full block gives the identity projector."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If every Tδ=0, H=0 and h=0; the full-spectrum projector is constant I_r. See the item Statement or Definition."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For r=1 all spectral statements reduce to a real scalar fiber. See the item Statement or Definition."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Internal eigenvalues may be degenerate; the proof groups their eigenspaces and only separates the selected cluster from its complement. See the item Statement or Definition."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The uniform gap γ>0 is required at every k, including all torus points. See the item Statement or Definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice is explicitly assumed for Fourier completeness; other steps use finite-dimensional or explicit constructions. See the item Statement or Definition."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a direct definition or result, not an if-and-only-if claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/drift_materialization (gpt-6.1-sol owner)",
+            "reason": "The public claim and its entire argument have been read: The argument bounds the shift sum, extends the Fourier isometry, and constructs smooth gapped Riesz projectors; no converse to these conclusions is claimed.",
+            "item_sha256": "8a0ea7fd5f4a9967ebb9e55e9330735e3d718b304bcda3bcdb28565efd9bf496",
+            "row_sha256": "f3bbe9deea3ca7aa0499a0716628f3e25077e73fa72449b1e9ce7762b490a6ac"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a direct definition or result, not an if-and-only-if claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/drift_materialization (gpt-6.1-sol owner)",
+            "reason": "The public claim and its entire argument have been read: The argument bounds the shift sum, extends the Fourier isometry, and constructs smooth gapped Riesz projectors; no converse to these conclusions is claimed.",
+            "item_sha256": "8a0ea7fd5f4a9967ebb9e55e9330735e3d718b304bcda3bcdb28565efd9bf496",
+            "row_sha256": "f4268fcf0a0b9828830396b3e426b3cf3172a02c523f2ac1a0a0dc73c66008fa"
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Take r=1 and S={0} with T0=a∈R.",
+          "result": "H and h(k) are multiplication by a, the Fourier transform intertwines them, and the full-spectrum projector is the constant I1.",
+          "verifies": "Numbered steps: 1.1, 1.2, 1.3, 1.4, 2.1."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-54-author",
+        "notes": "Checked the exact interfaces and assumptions, curvature and orientation signs, degenerate and boundary cases, and the conditional effective-model scope. This is authoring evidence, not independent proof approval."
+      }
+    },
+    "def-nrqmx-determinant-line-projector": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition assumes 1≤m≤r; rank zero is outside the determinant-line construction used here."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For m=r, the determinant line is the top exterior power of C^r and Q=Λ^rP. See the item Statement or Definition."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For m=1, det E_P is E_P itself and Q=P. See the item Statement or Definition."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Constant rank m is required so the fiber dimension and wedge degree do not jump. See the item Statement or Definition."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The construction is pointwise on the stated manifold; no boundary or endpoint assertion is made. See the item Statement or Definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "No choice axiom is used in this finite-dimensional definition. See the item Statement or Definition."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a direct definition or result, not an if-and-only-if claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/drift_materialization (gpt-6.1-sol owner)",
+            "reason": "The public claim and its entire argument have been read: The Definition forms the top exterior power of a positive-rank range bundle and names its projector; it asserts no equivalence between predicates.",
+            "item_sha256": "8bbdd67363b541e289b1c92adb340d800cec474dc7ee1010960dddcf3cb1d4d6",
+            "row_sha256": "f3bbe9deea3ca7aa0499a0716628f3e25077e73fa72449b1e9ce7762b490a6ac"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a direct definition or result, not an if-and-only-if claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/drift_materialization (gpt-6.1-sol owner)",
+            "reason": "The public claim and its entire argument have been read: The Definition forms the top exterior power of a positive-rank range bundle and names its projector; it asserts no equivalence between predicates.",
+            "item_sha256": "8bbdd67363b541e289b1c92adb340d800cec474dc7ee1010960dddcf3cb1d4d6",
+            "row_sha256": "f4268fcf0a0b9828830396b3e426b3cf3172a02c523f2ac1a0a0dc73c66008fa"
+          }
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-54-author",
+        "notes": "Checked the exact interfaces and assumptions, curvature and orientation signs, degenerate and boundary cases, and the conditional effective-model scope. This is authoring evidence, not independent proof approval."
+      }
+    },
+    "lem-nrqmx-determinant-line-projector-well-defined": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-nrqmx-determinant-line-projector",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a smooth manifold, let $r\\ge1$, and let $P:M\\to M_r(\\mathbb C)$ be a $C^2$ orthogonal projector of constant rank $m$, with $1\\le m\\le r$. Its image bundle is $E_P=\\{(x,v):P(x)v=v\\}$, with the projected connection $\\nabla s=P\\,ds$ of [[def-nrqmx-smooth-projector-bundle]]. The **determinant line bundle** is the complex line bundle",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-exterior-powers-are-functorial",
+          "source_section": "Statement",
+          "quote": "For linear maps $T:V\\to W$ and $S:W\\to U$ and every $k\\ge0$, the induced maps of [[def-kth-exterior-power-of-a-linear-map]] satisfy",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-the-matrix-of-an-exterior-power-is-the-signed-minor-matrix",
+          "source_section": "Statement",
+          "quote": "Let $V,W$ be finite-dimensional with ordered bases $(e_1,\\ldots,e_n)$ and $(f_1,\\ldots,f_m)$, let $T:V\\to W$ be linear with matrix $A=(a_{ij})$, so $T(e_j)=\\sum_ia_{ij}f_i$, and let $1\\le k\\le\\min(n,m)$. In the wedge bases $(e_I)$ and $(f_J)$ of [[thm-increasing-basis-wedges-form-a-basis]], the matrix of $\\Lambda^kT$ has entries",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-increasing-basis-wedges-form-a-basis",
+          "source_section": "Statement",
+          "quote": "Let $V$ have the ordered basis $(e_1,\\ldots,e_n)$ over $F$ and let $0\\le k\\le n$. For each $k$-element subset $I=\\{i_1<\\cdots<i_k\\}\\subseteq\\{1,\\ldots,n\\}$ write",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In the standard orthonormal wedge basis from [F4], the matrix entry of $\\bigwedge^m T$ in row $I$, column $J$ is $\\det T_{I,J}$ by [F3]. Consequently $[(\\bigwedge^mT)^*]_{I,J}=\\overline{\\det T_{J,I}}=\\det (T^*)_{I,J}$, so $(\\bigwedge^mT)^*=\\bigwedge^m(T^*)$. Applying this to $P=P^*$ shows $Q=Q^*$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Functoriality [F2] gives $Q^2=\\bigwedge^m(P^2)=\\bigwedge^mP=Q$. Hence $Q$ is a Hermitian idempotent by step 1.1; for $x=Qy$ and $Qz=0$, $\\langle x,z\\rangle=\\langle Qy,z\\rangle=\\langle y,Qz\\rangle=0$, so its range and kernel are orthogonal and it is the orthogonal projection onto its range.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Every decomposable wedge in the image of $Q$ is a wedge of $m$ vectors in $\\operatorname{im}P$, so the full image lies in $\\bigwedge^m\\operatorname{im}P$. Conversely, for a basis $v_1,\\ldots,v_m$ of the $m$-dimensional range of $P$, $Q(v_1\\wedge\\cdots\\wedge v_m)=v_1\\wedge\\cdots\\wedge v_m\\ne0$. The increasing-wedge basis theorem [F4], applied to this basis of the range, says $\\bigwedge^m\\operatorname{im}P$ is one-dimensional; thus it equals $\\operatorname{im}Q$ and $Q$ has rank one.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Each matrix entry of $Q(x)$ is a polynomial minor in the entries of $P(x)$ by [F3], hence is $C^2$. Together with step 2.1 this proves that $Q$ is a $C^2$ rank-one orthogonal projector with the stated range, and its ranges form the determinant line subbundle.",
+          "step": "4.1",
+          "inputs": [
+            "F3",
+            "step 2.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes 1≤m≤r; zero rank is excluded."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For m=r the only top wedge is fixed by Q and Q has rank one. See the item Statement or Definition."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For m=1 the induced map is P itself, so its rank is one. See the item Statement or Definition."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The proof does not require simple eigenvalues of P beyond its projection eigenvalues 0 and 1. See the item Statement or Definition."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The claim is pointwise and does not add a boundary condition on M. See the item Statement or Definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The proof uses only finite-dimensional basis and matrix identities, not AC. See the item Statement or Definition."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a direct definition or result, not an if-and-only-if claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/drift_materialization (gpt-6.1-sol owner)",
+            "reason": "The public claim and its entire argument have been read: The argument uses polynomial minors and wedge functoriality to show that the exterior projector is smooth, Hermitian, idempotent and rank one, without a reverse implication.",
+            "item_sha256": "8870db607cb05767bf25ac56a05da63f561c9efe7369bc0773c45681665d2536",
+            "row_sha256": "f3bbe9deea3ca7aa0499a0716628f3e25077e73fa72449b1e9ce7762b490a6ac"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a direct definition or result, not an if-and-only-if claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/drift_materialization (gpt-6.1-sol owner)",
+            "reason": "The public claim and its entire argument have been read: The argument uses polynomial minors and wedge functoriality to show that the exterior projector is smooth, Hermitian, idempotent and rank one, without a reverse implication.",
+            "item_sha256": "8870db607cb05767bf25ac56a05da63f561c9efe7369bc0773c45681665d2536",
+            "row_sha256": "f4268fcf0a0b9828830396b3e426b3cf3172a02c523f2ac1a0a0dc73c66008fa"
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Take r=m=1 and P=[1].",
+          "result": "Λ1P=P=[1], a smooth rank-one orthogonal projector onto the determinant line.",
+          "verifies": "Numbered steps: 1.1, 2.1, 3.1, 4.1."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-54-author",
+        "notes": "Checked the exact interfaces and assumptions, curvature and orientation signs, degenerate and boundary cases, and the conditional effective-model scope. This is authoring evidence, not independent proof approval."
+      }
+    },
+    "lem-nrqmx-determinant-curvature-is-trace": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-nrqmx-determinant-line-projector",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a smooth manifold, let $r\\ge1$, and let $P:M\\to M_r(\\mathbb C)$ be a $C^2$ orthogonal projector of constant rank $m$, with $1\\le m\\le r$. Its image bundle is $E_P=\\{(x,v):P(x)v=v\\}$, with the projected connection $\\nabla s=P\\,ds$ of [[def-nrqmx-smooth-projector-bundle]]. The **determinant line bundle** is the complex line bundle",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-nrqmx-determinant-line-projector-well-defined",
+          "source_section": "Statement",
+          "quote": "For the projector of [[def-nrqmx-determinant-line-projector]], $Q(x)=\\bigwedge^mP(x)$ is a $C^2$ orthogonal projector of rank one. Its range is exactly $\\det E_P(x)=\\bigwedge^m\\operatorname{im}P(x)$, so these ranges form the determinant line bundle.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-nrqmx-berry-projector-curvature",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $M$, $d$, and $P$ satisfy [[def-nrqmx-smooth-projector-bundle]], with constant rank $r$. The curvature of the projected connection $\\nabla=P\\,d$, as an endomorphism-valued two-form on $\\mathbb C^d$, is\n$$F=P(dP\\wedge dP)P.$$\nFor any local $C^2$ orthonormal frame $V:U\\to\\mathbb C^{d\\times r}$ with $V^*V=I_r$ and $P=VV^*$, its connection matrix $A=V^*dV$ is anti-Hermitian and its curvature matrix is $F_{\\mathrm{fr}}=dA+A\\wedge A=V^*FV$. If $V'=Vg$ for a $C^2$ map $g:U\\to U(r)$, then $A'=g^{-1}Ag+g^{-1}dg$ and $F'_{\\mathrm{fr}}=g^{-1}F_{\\mathrm{fr}}g$. Along every $C^2$ path, Kato transport is unitary and intertwines the endpoint projectors.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Because the columns of $V$ are orthonormal, $w=v_1\\wedge\\cdots\\wedge v_m$ has unit norm and spans the determinant line. Differentiating by the product rule gives $dw=\\sum_j v_1\\wedge\\cdots\\wedge dv_j\\wedge\\cdots\\wedge v_m$. The projected connection applies $P$ to each differentiated factor. Since $P\\,dv_j=\\sum_a v_a A_{aj}$, each term with $a\\ne j$ vanishes from a repeated wedge factor, while the $a=j$ term is $A_{jj}w$. Summing gives $Qdw=(\\operatorname{tr}A)w$, so the determinant connection form is $a=\\operatorname{tr}A$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "A line connection with scalar one-form $a$ has curvature $da+a\\wedge a=da$, since a scalar one-form wedges with itself to zero. By [F3], $\\operatorname{tr}F=\\operatorname{tr}(dA)+\\operatorname{tr}(A\\wedge A)$. In coordinates, $\\operatorname{tr}(A\\wedge A)=\\sum_{i,j}A_{ij}\\wedge A_{ji}=0$: diagonal terms vanish and each off-diagonal pair cancels because one-forms anticommute. Therefore $da=d\\operatorname{tr}A=\\operatorname{tr}F_{\\mathrm{fr}}=\\operatorname{tr}(V^*FV)$. Finally, since $PFP=F$ and $VV^*=P$, cyclicity of finite-dimensional trace gives $\\operatorname{tr}(V^*FV)=\\operatorname{tr}(FVV^*)=\\operatorname{tr}(FP)=\\operatorname{tr}F$.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "An empty frame domain has no local curvature claim; the statement is on each open set carrying a frame. See the item Statement or Definition."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For a constant projector and constant frame, A=0 and both curvature expressions vanish. See the item Statement or Definition."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At m=1, tr A=A and the determinant-line connection is the original line connection. See the item Statement or Definition."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Repeated eigenvalues within the rank-m bundle do not affect the frame computation. See the item Statement or Definition."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The identity is local and applies up to any chart boundary where the stated C2 frame is defined. See the item Statement or Definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice is explicit for the curvature supplier; the wedge and trace identities are finite algebra. See the item Statement or Definition."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a direct definition or result, not an if-and-only-if claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/drift_materialization (gpt-6.1-sol owner)",
+            "reason": "The public claim and its entire argument have been read: The calculation differentiates the top wedge frame and cancels off-diagonal one-form pairs to obtain trace curvature; this identity is not an iff criterion.",
+            "item_sha256": "291837494d55b96b4015afb559fe2df0216c8ffd207f89d27e246f7d30433ffb",
+            "row_sha256": "f3bbe9deea3ca7aa0499a0716628f3e25077e73fa72449b1e9ce7762b490a6ac"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a direct definition or result, not an if-and-only-if claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/drift_materialization (gpt-6.1-sol owner)",
+            "reason": "The public claim and its entire argument have been read: The calculation differentiates the top wedge frame and cancels off-diagonal one-form pairs to obtain trace curvature; this identity is not an iff criterion.",
+            "item_sha256": "291837494d55b96b4015afb559fe2df0216c8ffd207f89d27e246f7d30433ffb",
+            "row_sha256": "f4268fcf0a0b9828830396b3e426b3cf3172a02c523f2ac1a0a0dc73c66008fa"
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Take a constant rank-m projector with a constant orthonormal frame.",
+          "result": "A=0, F=0, and the determinant-line curvature da is zero.",
+          "verifies": "Numbered steps: 1.1, 2.1."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-54-author",
+        "notes": "Checked the exact interfaces and assumptions, curvature and orientation signs, degenerate and boundary cases, and the conditional effective-model scope. This is authoring evidence, not independent proof approval."
+      }
+    },
+    "lem-nrqmx-degree-area-formula": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "thm-de-rham-theorem",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. For every finite-dimensional Hausdorff second-countable smooth manifold $M$, possibly with boundary, integration on smooth simplices followed by the inverse of restriction from continuous to smooth singular cohomology gives a natural isomorphism of unital graded real algebras\n$$J_M:H^*_{\\mathrm{dR}}(M)\\xrightarrow{\\cong}H^*_{\\mathrm{sing}}(M;\\mathbb R).$$\nThe source product is wedge of form classes, the target product is the front/back singular cup product, and both stars denote direct sums of the homogeneous groups. Naturality is for smooth maps. No compactness assumption is imposed.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-degree-of-a-map-between-oriented-closed-manifolds",
+          "source_section": "Definition",
+          "quote": "Let $f:M\\to N$ be continuous, where $M,N$ are **nonempty connected closed integrally oriented $n$-manifolds** of the same dimension. Closed means compact and boundaryless. Write $[M],[N]$ for their specified fundamental classes from [[def-fundamental-class-of-a-compact-oriented-manifold]]. The **degree** of $f$ is the integer $d=\\deg(f)$ determined by\n$$f_*[M]=d[N]\\quad\\text{in }H_n(N;\\mathbb Z).$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-fundamental-class-of-a-compact-oriented-manifold",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a compact boundaryless $n$-manifold with a specified $R$-orientation $\\mu$, where $R$ is a commutative unital ring. Its **fundamental class** is\n$$[M]=[M]_M\\in H_n(M,M\\setminus M;R)=H_n(M;R),$$\nusing [[lem-compatible-local-orientation-classes-exist-over-compact-subsets]] with the compact support $K=M$. The final equality holds at the chain-complex level: $C_*(\\varnothing;R)=0$, so quotienting by it leaves $C_*(M;R)$. The cited lemma proves existence and uniqueness of this class with point restriction $\\mu_x$ at every $x\\in M$. Thus the notation denotes a class determined by the supplied orientation, not an arbitrary generator chosen afterward.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-de-rham-theorem",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. For every finite-dimensional Hausdorff second-countable smooth manifold $M$, possibly with boundary, integration on smooth simplices followed by the inverse of restriction from continuous to smooth singular cohomology gives a natural isomorphism of unital graded real algebras\n$$J_M:H^*_{\\mathrm{dR}}(M)\\xrightarrow{\\cong}H^*_{\\mathrm{sing}}(M;\\mathbb R).$$\nThe source product is wedge of form classes, the target product is the front/back singular cup product, and both stars denote direct sums of the homogeneous groups. Naturality is for smooth maps. No compactness assumption is imposed.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-kronecker-evaluation-pairing",
+          "source_section": "Definition",
+          "quote": "Fix a space $X$, abelian group $G$ and integer $n\\ge0$. For a singular cocycle $\\varphi\\in Z^n(X;G)$ and an integral singular cycle $c\\in Z_n(X;\\mathbb Z)$, define their **evaluation** to be $\\varphi(c)\\in G$, using [[def-singular-cohomology-with-coefficients]] and [[def-singular-chain-complex-and-singular-homology]]. If $c=\\sum_\\sigma a_\\sigma\\sigma$ is its finite formal expansion, this value is $\\sum_\\sigma a_\\sigma\\varphi(\\sigma)$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-the-kronecker-pairing-is-independent-of-cocycle-and-cycle-representatives",
+          "source_section": "Statement",
+          "quote": "The Kronecker rule $\\langle[\\varphi],[c]\\rangle=\\varphi(c)$ is independent of both cocycle and cycle representatives and is additive in both variables. For a continuous $f:X\\to Y$, $\\alpha\\in H^n(Y;G)$ and $z\\in H_n(X;\\mathbb Z)$, it satisfies\n$$\\langle f^*\\alpha,z\\rangle=\\langle\\alpha,f_*z\\rangle.$$\nFor a coefficient homomorphism $u:G\\to G'$, it satisfies $\\langle u_*\\alpha,z\\rangle=u\\langle\\alpha,z\\rangle$. The same representative-independence argument gives the $R$-bilinear pairing for $R$-linear cochains on chains over a commutative ring $R$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-de-rham-top-integral-is-fundamental-class-evaluation",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $M$ be a compact oriented smooth boundaryless\n$m$-manifold and let $\\alpha\\in\\Omega^m(M)$ be a smooth real or complex top form.\nLet $J_M:H^m_{\\mathrm{dR}}(M)\\to H^m_{\\mathrm{sing}}(M;\\mathbb R)$ be the de Rham\ncomparison of [[thm-de-rham-theorem]] for real forms, extended\ncomplex-linearly with codomain $H^m_{\\mathrm{sing}}(M;\\mathbb C)$ for complex\nforms. Use the smooth-orientation normalization: a positively oriented affine\n$m$-simplex represents the positive local homology generator at each interior\npoint. Let $[M]\\in H_m(M;\\mathbb R)$ be the real fundamental class of\n[[def-fundamental-class-of-a-compact-oriented-manifold]], and let\n$\\langle\\,,\\rangle$ be the Kronecker evaluation pairing\n([[def-kronecker-evaluation-pairing]]). Then",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-singular-chain-complex-and-singular-homology",
+          "source_section": "Definition",
+          "quote": "For a topological space $X$ and an abelian group $G$, the singular chain groups\nand boundary maps of [[def-singular-boundary-operator]] form the\n**singular chain complex**\n$$C_\\bullet(X;G):=\\bigl(\\cdots\\to C_n(X;G)\\xrightarrow{\\partial_n}C_{n-1}(X;G)\\to\\cdots\\bigr),$$\nbecause [[thm-the-singular-boundary-squares-to-zero]] gives\n$\\partial_{n-1}\\partial_n=0$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-induced-singular-chain-map",
+          "source_section": "Definition",
+          "quote": "Let $f:X\\to Y$ be a continuous map of topological spaces. For each $n\\geq 0$,\nthe **induced singular chain map in degree $n$** is the homomorphism\n$$f_{\\#,n}:C_n(X;\\mathbb Z)\\to C_n(Y;\\mathbb Z)$$\ndefined on a singular simplex $\\sigma:\\Delta^n\\to X$ by\n$$f_{\\#,n}(\\sigma):=f\\circ\\sigma,$$\nand extended $\\mathbb Z$-linearly.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "prop-singular-chains-and-homology-are-covariantly-functorial",
+          "source_section": "Statement",
+          "quote": "For each abelian group $G$, the assignments\n$$X\\mapsto C_\\bullet(X;G),\\qquad f\\mapsto f_\\#$$\nand\n$$X\\mapsto H_n^{\\mathrm{sing}}(X;G),\\qquad f\\mapsto H_n(f_\\#)$$\ndefine covariant functors from topological spaces to chain complexes and to\nabelian groups, respectively. Equivalently,\n$$\\operatorname{id}_{X,\\#}=\\operatorname{id}_{C_\\bullet(X;G)},\\qquad (g\\circ f)_\\#=g_\\#\\circ f_\\#,$$\nand for every $n\\geq 0$,\n$$H_n((g\\circ f)_\\#)=H_n(g_\\#)\\circ H_n(f_\\#),\\qquad H_n(\\operatorname{id}_{X,\\#})=\\operatorname{id}_{H_n(X;G)}.$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In spherical coordinates $x=\\sin\\theta\\cos\\phi$, $y=\\sin\\theta\\sin\\phi$, $z=\\cos\\theta$, the unnormalized displayed two-form is $\\sin\\theta\\,d\\theta\\wedge d\\phi$. Integrating for $0\\le\\theta\\le\\pi$ and $0\\le\\phi\\le2\\pi$ gives $4\\pi$, so $\\omega_{S^2}$ is a smooth closed form with integral one; its displayed ambient expression shows it extends smoothly across the coordinate poles.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $J$ be the natural comparison in [F3]. By [F5], $\\int_{\\mathbb T^2}n^*\\omega_{S^2}=\\langle J([n^*\\omega_{S^2}]),[\\mathbb T^2]_{\\mathbb R}\\rangle$. Naturality of $J$ and of the real-coefficient Kronecker pairing [F4] then gives $\\int_{\\mathbb T^2}n^*\\omega_{S^2}=\\langle J([\\omega_{S^2}]),n_*[\\mathbb T^2]_{\\mathbb R}\\rangle$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F1], $n_*[\\mathbb T^2]_{\\mathbb Z}=\\deg(n)[S^2]_{\\mathbb Z}$. The coefficient map $\\iota:C_\\bullet(X;\\mathbb Z)\\to C_\\bullet(X;\\mathbb R)$ sends each finite sum $\\sum_j a_j\\sigma_j$ to $\\sum_j a_j\\sigma_j$ with the same coefficients viewed in $\\mathbb R$. It commutes with boundaries because [F6] defines the singular boundary as an integer linear combination of faces and $\\iota$ is additive; it commutes with $n_\\#$ because [F6] postcomposes each simplex without changing its coefficient. Hence it induces a coefficient-change map on homology and carries each integral fundamental class to its real fundamental class: it sends the positive local orientation generator $1$ to $1$, so uniqueness of the class with those local restrictions in [F2] identifies the image. Applying $\\iota$ to the degree equation gives $n_*[\\mathbb T^2]_{\\mathbb R}=\\deg(n)[S^2]_{\\mathbb R}$. By the real-coefficient bilinearity of [F4], step 2.1 becomes $\\int_{\\mathbb T^2}n^*\\omega_{S^2}=\\deg(n)\\langle J([\\omega_{S^2}]),[S^2]_{\\mathbb R}\\rangle=\\deg(n)\\int_{S^2}\\omega_{S^2}=\\deg(n)$ by [F5] and step 1.1.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "F6",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement uses the nonempty connected closed surfaces T² and S²; empty domains and targets are excluded."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For a constant map n, n*ω=0 and its homological degree is zero. See the item Statement or Definition."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The identity map S²→S² has integral one under the normalized area form and degree one. See the item Statement or Definition."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Critical points of n are allowed; the de Rham and Kronecker argument does not assume a regular value. See the item Statement or Definition."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Both surfaces are closed, so no boundary term enters the homological degree pairing. See the item Statement or Definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Axiom of Choice and Countable Choice are explicit for the top-form evaluation and de Rham comparison; coefficient change itself is choice-free. See the item Statement or Definition."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a direct definition or result, not an if-and-only-if claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/drift_materialization (gpt-6.1-sol owner)",
+            "reason": "The public claim and its entire argument have been read: The proof normalizes the sphere area and applies naturality of the homology pairing to compute the degree integral; it states an equality, not an equivalence of properties.",
+            "item_sha256": "5aee1b66dc5b61565e0dd7aa3d7e695bae305d78f3f4457863a96003b37e3684",
+            "row_sha256": "f3bbe9deea3ca7aa0499a0716628f3e25077e73fa72449b1e9ce7762b490a6ac"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a direct definition or result, not an if-and-only-if claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/drift_materialization (gpt-6.1-sol owner)",
+            "reason": "The public claim and its entire argument have been read: The proof normalizes the sphere area and applies naturality of the homology pairing to compute the degree integral; it states an equality, not an equivalence of properties.",
+            "item_sha256": "5aee1b66dc5b61565e0dd7aa3d7e695bae305d78f3f4457863a96003b37e3684",
+            "row_sha256": "f4268fcf0a0b9828830396b3e426b3cf3172a02c523f2ac1a0a0dc73c66008fa"
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Take n:T²→S² constant.",
+          "result": "The pullback two-form vanishes and the induced map on top homology is zero, so both sides are zero.",
+          "verifies": "Numbered steps: 1.1, 2.1, 3.1."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-54-author",
+        "notes": "Checked the exact interfaces and assumptions, curvature and orientation signs, degenerate and boundary cases, and the conditional effective-model scope. This is authoring evidence, not independent proof approval."
+      }
+    },
+    "thm-nrqmx-bloch-projector-chern": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-nrqmx-determinant-line-projector",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a smooth manifold, let $r\\ge1$, and let $P:M\\to M_r(\\mathbb C)$ be a $C^2$ orthogonal projector of constant rank $m$, with $1\\le m\\le r$. Its image bundle is $E_P=\\{(x,v):P(x)v=v\\}$, with the projected connection $\\nabla s=P\\,ds$ of [[def-nrqmx-smooth-projector-bundle]]. The **determinant line bundle** is the complex line bundle",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-nrqmx-determinant-line-projector-well-defined",
+          "source_section": "Statement",
+          "quote": "For the projector of [[def-nrqmx-determinant-line-projector]], $Q(x)=\\bigwedge^mP(x)$ is a $C^2$ orthogonal projector of rank one. Its range is exactly $\\det E_P(x)=\\bigwedge^m\\operatorname{im}P(x)$, so these ranges form the determinant line bundle.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-nrqmx-determinant-curvature-is-trace",
+          "source_section": "Statement",
+          "quote": "Let $P$ be a $C^2$ rank-$m$ orthogonal projector and let $F=P(dP\\wedge dP)P$ be the curvature of its projected connection. On any open set with a $C^2$ orthonormal frame $V=(v_1,\\ldots,v_m)$, put $A=V^*dV$ and $w=v_1\\wedge\\cdots\\wedge v_m$. The induced projected connection on $\\det E_P$ has local connection one-form $a=\\operatorname{tr}A$ in the unit frame $w$, and its scalar curvature is",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-nrqmx-rank-one-chern-holonomy",
+          "source_section": "Statement",
+          "quote": "Assume full AC. Let $\\Sigma$ be a compact boundaryless oriented smooth surface, and let $P:\\Sigma\\to\\operatorname{End}(\\mathbb C^d)$ be a $C^2$ rank-one orthogonal projection family. Let $E_P$ be its complex line bundle, $\\nabla=P\\,d$, and $F=P(dP\\wedge dP)P$. Then\n$$\\frac{i}{2\\pi}\\int_\\Sigma\\operatorname{tr}F=\\langle c_1(E_P),[\\Sigma]\\rangle\\in\\mathbb Z.$$\nFor any $C^2$ closed path $\\gamma$ subdivided into local unit frames $u_j$, with $A_j=u_j^*du_j$ and transition $u_{j+1}=u_jg_j$ for $g_j$ valued in $U(1)$ at the crossing points, the holonomy is the scalar by which parallel transport acts on its one-dimensional initial fiber. This scalar is the product of the local factors $\\exp(-\\int_{\\gamma_j}A_j)$ and the transition factors $g_j^{-1}$. Thus geometric holonomy includes the frame-transition scalars whenever one frame does not cover the path.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-nrqmx-c1-stokes-compact-surface",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $M$ be a compact oriented smooth surface with boundary, and let $D\\subseteq M$ be a compact oriented region whose boundary consists of finitely many $C^2$ arcs meeting at finitely many corners. Let $\\eta=a\\,dx+b\\,dy$ be a complex-valued $C^1$ one-form on a neighborhood of $D$ in each local chart, where $C^1$ means its coefficients and first partial derivatives are continuous up to the boundary. Define $d\\eta=(\\partial_xb-\\partial_ya)\\,dx\\wedge dy$ in each chart; the chain rule and symmetry of second derivatives make this expression coordinate-independent. Give $\\partial D$ the outward-normal-first orientation. Then\n$$\\int_D d\\eta=\\int_{\\partial D}\\eta.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-chern-classes-from-the-projective-bundle-relation",
+          "source_section": "Definition",
+          "quote": "Assume AC. Let $E\\to B$ be a numerable complex rank-$n$ bundle with $n\\geq1$\nover a path-connected CW complex $B$ (or over one of the CW-type bases of\n[[thm-integral-complex-projective-bundle-theorem]]). By that theorem there are\nunique classes $a_i\\in H^{2i}(B;\\mathbb Z)$, $1\\leq i\\leq n$, such that\n$$x_E^{\\,n}-a_1x_E^{\\,n-1}+a_2x_E^{\\,n-2}-\\cdots+(-1)^na_n=0\\qquad\\text{in }H^{2n}(P(E);\\mathbb Z),$$\nwhere $x_E\\in H^2(P(E);\\mathbb Z)$ is the Euler class of the underlying real\nbundle of the tautological line\n([[def-complex-projective-bundle-and-tautological-complex-line]]). The\n**Chern classes** of $E$ are these coefficients:\n$$c_i(E):=a_i\\in H^{2i}(B;\\mathbb Z)\\qquad(1\\leq i\\leq n),$$\ncompleted by the conventions $c_0(E):=1\\in H^0(B;\\mathbb Z)$ and\n$c_i(E):=0$ for $i>n$, and the **total Chern class** is the finite sum\n$c(E):=\\sum_{i\\geq0}c_i(E)=1+c_1(E)+\\cdots+c_n(E)\\in H^*(B;\\mathbb Z)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-nrqmx-bloch-fiber-model-properties",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and the data of [[def-nrqmx-bloch-fiber-model]]. The finite-range operator $H_0$ extends uniquely to a bounded self-adjoint operator $H$ on $\\ell^2(\\mathbb Z^d;\\mathbb C^r)$, and $\\mathcal F_0$ extends uniquely to a unitary map $\\mathcal F:\\mathcal H\\to L^2(\\mathbb T^d_{2\\pi};\\mathbb C^r)$. For every $k$, $h(k)$ is Hermitian, $\\|h(k)\\|\\le\\sum_{\\delta\\in S}\\|T_\\delta\\|$, and",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each fixed $t$ (or for the single projector), [F1] gives the rank-one projector $Q_t=\\bigwedge^mP_t$ onto $\\det E_{P_t}$. Its image is a complex line bundle over the compact torus, hence is numerable; the torus is a compact smooth CW complex. The determinant-line curvature lemma [F2] gives $\\operatorname{tr}F_t=\\operatorname{tr}(Q_t(dQ_t\\wedge dQ_t)Q_t)$ pointwise, with the same orientation convention. Applying [F3] to $Q_t$ proves the displayed equality and integrality, with $c_1$ interpreted by [F5].",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For a jointly $C^2$ family, the coefficient function $g(k,t)$ of the two-form $\\operatorname{tr}(P_t(dP_t\\wedge dP_t)P_t)$ is continuous on the compact set $\\mathbb T^2\\times[0,1]$, so it is uniformly continuous. If $t_j\\to t$, then $\\sup_k|g(k,t_j)-g(k,t)|\\to0$; therefore $C(P_{t_j})\\to C(P_t)$ by bounding the difference of integrals by the torus's finite area times this supremum. Thus $t\\mapsto C(P_t)$ is continuous. Step 1.1 makes it integer-valued, and a continuous integer-valued function on the connected interval $[0,1]$ is constant: otherwise the intermediate-value theorem would give a noninteger value between two distinct integer values. For a uniformly gapped Hamiltonian deformation, [F6] supplies the required joint $C^2$ spectral projectors by the local contour formula.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F6",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $V$ is a global $C^2$ periodic orthonormal frame, then $A=V^*dV$ is a globally defined $C^1$ matrix-valued one-form. By [F2] and its proof, $\\operatorname{tr}F=d\\operatorname{tr}A$ (the trace of $A\\wedge A$ vanishes). Hence $C(P)=\\frac{i}{2\\pi}\\int_{\\mathbb T^2}d\\operatorname{tr}A=0$ by [F4], since the torus has empty boundary.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement fixes the base to the nonempty two-torus, rank m>=1, and the parameter family to [0,1], which includes both endpoints. Proof step 1.1 constructs the determinant line for every parameter and step 2.1 uses continuity on that connected nonempty interval; no arbitrary empty family is selected."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "A constant projector has global constant frame, so C=0. See the item Statement or Definition."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For m=1, det E_P=E_P and the result is the supplied rank-one Chern theorem. See the item Statement or Definition."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The rank-m cluster may have internal degeneracies; only constant rank and the external gap matter. See the item Statement or Definition."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The homotopy interval endpoints t=0 and t=1 are included in the jointly C2 family. See the item Statement or Definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC and CC are explicit and match the Chern, curvature, and Stokes suppliers. See the item Statement or Definition."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a direct definition or result, not an if-and-only-if claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/drift_materialization (gpt-6.1-sol owner)",
+            "reason": "The public claim and its entire argument have been read: The determinant-line reduction gives integrality, continuity gives homotopy invariance, and Stokes gives zero Chern number from a global frame; no converse frame-existence assertion is made.",
+            "item_sha256": "5cb0003098000c294e01c2de2d0dff0fced8284a97a4af9dce7e167b47cbef69",
+            "row_sha256": "f3bbe9deea3ca7aa0499a0716628f3e25077e73fa72449b1e9ce7762b490a6ac"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a direct definition or result, not an if-and-only-if claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/drift_materialization (gpt-6.1-sol owner)",
+            "reason": "The public claim and its entire argument have been read: The determinant-line reduction gives integrality, continuity gives homotopy invariance, and Stokes gives zero Chern number from a global frame; no converse frame-existence assertion is made.",
+            "item_sha256": "5cb0003098000c294e01c2de2d0dff0fced8284a97a4af9dce7e167b47cbef69",
+            "row_sha256": "f4268fcf0a0b9828830396b3e426b3cf3172a02c523f2ac1a0a0dc73c66008fa"
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Take P(k)=diag(1,0,…,0) constant.",
+          "result": "The determinant frame is global, F=0, and C(P)=0, an integer unchanged by the constant homotopy.",
+          "verifies": "Numbered steps: 1.1, 2.1, 3.1."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-54-author",
+        "notes": "Checked the exact interfaces and assumptions, curvature and orientation signs, degenerate and boundary cases, and the conditional effective-model scope. This is authoring evidence, not independent proof approval."
+      }
+    },
+    "thm-nrqmx-two-band-degree-formula": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-nrqmx-bloch-fiber-model",
+          "source_section": "Definition",
+          "quote": "Let $d,r\\ge1$ be integers, let $S\\subset\\mathbb Z^d$ be finite with $S=-S$, and let $T_\\delta\\in M_r(\\mathbb C)$ satisfy $T_{-\\delta}=T_\\delta^*$ for each $\\delta\\in S$. Give $\\mathbb C^r$ its standard Hermitian inner product, conjugate-linear in the first variable, and set $\\mathcal H=\\ell^2(\\mathbb Z^d;\\mathbb C^r)$ with the sum inner product. On finitely supported $\\psi\\in\\mathcal H$ define",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-nrqmx-bloch-fiber-model-properties",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and the data of [[def-nrqmx-bloch-fiber-model]]. The finite-range operator $H_0$ extends uniquely to a bounded self-adjoint operator $H$ on $\\ell^2(\\mathbb Z^d;\\mathbb C^r)$, and $\\mathcal F_0$ extends uniquely to a unitary map $\\mathcal F:\\mathcal H\\to L^2(\\mathbb T^d_{2\\pi};\\mathbb C^r)$. For every $k$, $h(k)$ is Hermitian, $\\|h(k)\\|\\le\\sum_{\\delta\\in S}\\|T_\\delta\\|$, and",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-nrqmx-bloch-projector-chern",
+          "source_section": "Statement",
+          "quote": "Assume Axiom of Choice and Countable Choice. Let $P:\\mathbb T^2_{2\\pi}\\to M_r(\\mathbb C)$ be a $C^2$ orthogonal projector of constant rank $m\\ge1$; in particular it may be the projector of an isolated band cluster of a finite-range Bloch Hamiltonian. Use the orientation $dk_1\\wedge dk_2$, let $E_P=\\operatorname{im}P$, and let $F=P(dP\\wedge dP)P$ be the curvature of the projected connection $\\nabla=P\\,d$. Then",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-nrqmx-degree-area-formula",
+          "source_section": "Statement",
+          "quote": "Orient the unit sphere $S^2\\subset\\mathbb R^3$ outward and let $\\omega_{S^2}$ be its normalized area form",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Direct multiplication of the displayed Pauli matrices gives $\\sigma_a\\sigma_b=\\delta_{ab}I+i\\sum_c\\epsilon_{abc}\\sigma_c$, $\\operatorname{tr}\\sigma_a=0$, and $\\operatorname{tr}(\\sigma_a\\sigma_b)=2\\delta_{ab}$. Thus $(n\\cdot\\sigma)^2=|n|^2I=I$, and $h=d_0I+|d|(n\\cdot\\sigma)$ has eigenvalues $d_0\\pm|d|$ with the stated orthogonal projectors. Since $|d|$ is continuous and positive on compact $\\mathbb T^2$, its minimum is positive, so the two bands are uniformly separated; $n$ and $P_s$ are smooth.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Differentiating $P_s=(I+s n\\cdot\\sigma)/2$ gives $\\partial_jP_s=(s/2)(\\partial_jn)\\cdot\\sigma$. The Pauli product identity yields $[a\\cdot\\sigma,b\\cdot\\sigma]=2i(a\\times b)\\cdot\\sigma$, hence $[\\partial_1P_s,\\partial_2P_s]=\\frac{i}{2}(\\partial_1n\\times\\partial_2n)\\cdot\\sigma$. Using $\\operatorname{tr}(P_s\\sigma_a)=s n_a$, which follows from the trace identities in step 1.1, we obtain $\\operatorname{tr}(P_s[\\partial_1P_s,\\partial_2P_s])=\\frac{i s}{2}n\\cdot(\\partial_1n\\times\\partial_2n)$. In dimension two this is the coefficient of $\\operatorname{tr}(P_s(dP_s\\wedge dP_s)P_s)$: cyclicity and $P_s^2=P_s$ give $\\operatorname{tr}(P_sXP_s)=\\operatorname{tr}(P_sX)$. Multiplying by $i/(2\\pi)$ therefore gives $C(P_s)=-s(4\\pi)^{-1}\\int n\\cdot(\\partial_1n\\times\\partial_2n)\\,dk_1dk_2$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The normalized area form in [F3] pulls back to $(4\\pi)^{-1}n\\cdot(\\partial_1n\\times\\partial_2n)\\,dk_1\\wedge dk_2$, by the defining outward area form on the unit sphere. Hence its integral is $\\deg(n)$ by [F3]. Substitution into step 2.1 gives $C(P_s)=-s\\deg(n)$, which is the two displayed upper- and lower-band formulas.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes d nowhere zero, excluding gap-closing points."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If d is constant with d3>0, n is the north pole, and both Chern numbers and degree are zero. See the item Statement or Definition."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Each P± has rank one; the upper and lower formulas have opposite signs. See the item Statement or Definition."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "No simplicity condition inside an individual band beyond the two distinct eigenvalues ±|d| is needed; |d|>0 separates them. See the item Statement or Definition."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The torus is closed and its orientation dk1∧dk2 fixes the degree sign. See the item Statement or Definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC and CC are explicitly assumed for the Chern and degree suppliers; the Pauli calculation itself uses no choice. See the item Statement or Definition."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a direct definition or result, not an if-and-only-if claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/drift_materialization (gpt-6.1-sol owner)",
+            "reason": "The public claim and its entire argument have been read: The Pauli trace calculation computes the upper and lower Chern numbers from the sphere degree under a nowhere-zero d vector; it does not characterize when a general projector has that degree.",
+            "item_sha256": "0f74cb1515c611ddcd6c2d41d797bfe9b15a523adf8f0b8e5584abeb5f6aeae9",
+            "row_sha256": "f3bbe9deea3ca7aa0499a0716628f3e25077e73fa72449b1e9ce7762b490a6ac"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a direct definition or result, not an if-and-only-if claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/drift_materialization (gpt-6.1-sol owner)",
+            "reason": "The public claim and its entire argument have been read: The Pauli trace calculation computes the upper and lower Chern numbers from the sphere degree under a nowhere-zero d vector; it does not characterize when a general projector has that degree.",
+            "item_sha256": "0f74cb1515c611ddcd6c2d41d797bfe9b15a523adf8f0b8e5584abeb5f6aeae9",
+            "row_sha256": "f4268fcf0a0b9828830396b3e426b3cf3172a02c523f2ac1a0a0dc73c66008fa"
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Take d(k)=(0,0,1) and d0(k)=0.",
+          "result": "n is the north pole, both projectors are constant, and the two Chern numbers and degree are zero.",
+          "verifies": "Numbered steps: 1.1, 2.1, 3.1."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-54-author",
+        "notes": "Checked the exact interfaces and assumptions, curvature and orientation signs, degenerate and boundary cases, and the conditional effective-model scope. This is authoring evidence, not independent proof approval."
+      }
+    },
+    "thm-nrqmx-finite-band-adiabatic-velocity": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-nrqmx-bloch-fiber-model",
+          "source_section": "Definition",
+          "quote": "Let $d,r\\ge1$ be integers, let $S\\subset\\mathbb Z^d$ be finite with $S=-S$, and let $T_\\delta\\in M_r(\\mathbb C)$ satisfy $T_{-\\delta}=T_\\delta^*$ for each $\\delta\\in S$. Give $\\mathbb C^r$ its standard Hermitian inner product, conjugate-linear in the first variable, and set $\\mathcal H=\\ell^2(\\mathbb Z^d;\\mathbb C^r)$ with the sum inner product. On finitely supported $\\psi\\in\\mathcal H$ define",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-nrqmx-bloch-fiber-model-properties",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and the data of [[def-nrqmx-bloch-fiber-model]]. The finite-range operator $H_0$ extends uniquely to a bounded self-adjoint operator $H$ on $\\ell^2(\\mathbb Z^d;\\mathbb C^r)$, and $\\mathcal F_0$ extends uniquely to a unitary map $\\mathcal F:\\mathcal H\\to L^2(\\mathbb T^d_{2\\pi};\\mathbb C^r)$. For every $k$, $h(k)$ is Hermitian, $\\|h(k)\\|\\le\\sum_{\\delta\\in S}\\|T_\\delta\\|$, and",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-nrqmx-two-band-degree-formula",
+          "source_section": "Statement",
+          "quote": "Assume Axiom of Choice and Countable Choice. Let a two-orbital finite-range Bloch Hamiltonian on the oriented torus $\\mathbb T^2_{2\\pi}$ have the form",
+          "uses": [
+            "2.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Differentiating $u^*u=1$ gives $(\\partial_j u)^*u+u^*\\partial_j u=0$, so $u^*\\partial_j u$ is purely imaginary and $\\mathcal A_j=i u^*\\partial_j u$ is real. If only the smooth rank-one projector $P(k)$ is given, fix a unit vector $v\\in\\operatorname{im}P(k_0)$; by continuity $P(k)v\\ne0$ near $k_0$, and $u(k)=P(k)v/\\|P(k)v\\|$ supplies the required local $C^2$ normalized section. Under $u'=e^{i\\chi}u$, direct differentiation gives $\\mathcal A'=\\mathcal A-\\nabla_k\\chi$, so $\\boldsymbol\\Omega'=\\boldsymbol\\Omega$ and the Lagrangian changes by $-\\hbar\\,d\\chi/dt$, a total derivative. Thus the equations are chart independent.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For each coordinate $x_j$, $\\partial L/\\partial\\dot x_j=\\hbar k_j$ and $\\partial L/\\partial x_j=q(E_{\\rm ext})_j$. The Euler–Lagrange equation $\\frac{d}{dt}(\\partial L/\\partial\\dot x_j)-\\partial L/\\partial x_j=0$ therefore gives $\\hbar\\dot k_j=q(E_{\\rm ext})_j$, the first vector equation.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "For each $k_j$, $\\partial L/\\partial\\dot k_j=\\hbar\\mathcal A_j$ and $\\partial L/\\partial k_j=\\hbar\\dot x_j+\\hbar\\sum_i(\\partial_j\\mathcal A_i)\\dot k_i-\\partial_j\\varepsilon$. Applying Euler–Lagrange and the chain rule gives $\\hbar\\dot x_j=\\partial_j\\varepsilon+\\hbar\\sum_i(\\partial_i\\mathcal A_j-\\partial_j\\mathcal A_i)\\dot k_i=\\partial_j\\varepsilon-\\hbar(\\dot k\\times\\boldsymbol\\Omega)_j$, where the last equality is the component identity $\\partial_i\\mathcal A_j-\\partial_j\\mathcal A_i=-\\epsilon_{j i\\ell}(\\nabla_k\\times\\mathcal A)_\\ell$. Dividing by $\\hbar>0$ gives the second vector equation.",
+          "step": "2.2",
+          "inputs": [
+            "A1",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-3",
+          "claim": "On a two-band chart with $P_s=u u^*$, direct differentiation of $P_s$ gives $\\Omega_{12}=i\\,\\operatorname{tr}(P_s[\\partial_1P_s,\\partial_2P_s])$. Thus $(2\\pi)^{-1}\\int\\Omega_{12}=C(P_s)$ in the projector convention, and [F2] gives its signed degree value; this confirms that the anomalous term uses the same sign convention as the preceding band formula. The variational derivation itself does not depend on a two-band restriction.",
+          "step": "2.3",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The result is the Euler–Lagrange consequence of the adopted finite-dimensional effective Lagrangian. It does not establish that a physical wave packet follows these equations, nor quantify any error from neglected interband transitions or higher spatial and temporal derivatives of the field.",
+          "step": "3.1",
+          "inputs": [
+            "A2",
+            "step 2.1",
+            "step 2.2",
+            "step 2.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The chart U is an open coordinate chart and the statement is local in k. See the item Statement or Definition."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For zero electric field, the first equation gives constant k; with constant ε and zero curvature, x is constant. See the item Statement or Definition."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For r=1 the local band section is scalar phase and the same gauge and Euler–Lagrange calculations apply. See the item Statement or Definition."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Other bands may be degenerate with one another; only the selected eigenvalue is simple and locally isolated. See the item Statement or Definition."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "No temporal endpoint condition is imposed; the Euler–Lagrange equations hold on the interior of any stationary curve interval. See the item Statement or Definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC and CC are carried for the cited two-band sign-convention comparison; the local variational calculation uses no choice. See the item Statement or Definition."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a direct definition or result, not an if-and-only-if claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/drift_materialization (gpt-6.1-sol owner)",
+            "reason": "The public claim and its entire argument have been read: Euler–Lagrange differentiation of the explicitly adopted single-band action yields the velocity equations; it neither proves a converse variational claim nor a quantum approximation error.",
+            "item_sha256": "52a80ec524696de20d66c70aafd134c7e16ed409055fb2354c98e6287f445c61",
+            "row_sha256": "f3bbe9deea3ca7aa0499a0716628f3e25077e73fa72449b1e9ce7762b490a6ac"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a direct definition or result, not an if-and-only-if claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/drift_materialization (gpt-6.1-sol owner)",
+            "reason": "The public claim and its entire argument have been read: Euler–Lagrange differentiation of the explicitly adopted single-band action yields the velocity equations; it neither proves a converse variational claim nor a quantum approximation error.",
+            "item_sha256": "52a80ec524696de20d66c70aafd134c7e16ed409055fb2354c98e6287f445c61",
+            "row_sha256": "f4268fcf0a0b9828830396b3e426b3cf3172a02c523f2ac1a0a0dc73c66008fa"
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Take u(k) constant, ε(k)=ℏ²|k|²/(2m), and Eext=0.",
+          "result": "A=Ω=0, k is constant, and xdot=ℏk/m, the free-band group velocity.",
+          "verifies": "Numbered steps: 1.1, 2.1, 2.2, 2.3, 3.1."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-54-author",
+        "notes": "Checked the exact interfaces and assumptions, curvature and orientation signs, degenerate and boundary cases, and the conditional effective-model scope. This is authoring evidence, not independent proof approval."
+      }
+    },
+    "ex-nrqmx-two-band-gap-closures": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-nrqmx-two-band-degree-formula",
+          "source_section": "Statement",
+          "quote": "Assume Axiom of Choice and Countable Choice. Let a two-orbital finite-range Bloch Hamiltonian on the oriented torus $\\mathbb T^2_{2\\pi}$ have the form",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-regular-value-formula-for-degree",
+          "source_section": "Statement",
+          "quote": "Let $F:M^n\\to N^n$ be proper and smooth between nonempty connected oriented smooth manifolds without boundary, and let $y\\in N$ be a regular value. Then the fibre is finite and\n$$\\deg(F)=\\sum_{p\\in F^{-1}(y)}\\operatorname{sgn}(dF_p)\\in\\mathbb Z.$$\nIf $M,N$ are closed, this scalar is also their integral homological degree: with the integral orientations induced by the supplied smooth orientations using the same Euclidean generator convention,\n$$F_*[M]=\\deg(F)[N]\\quad\\text{in }H_n(N;\\mathbb Z).$$\nThe formula includes the empty regular fibre and dimension zero. This comparison at a supplied regular value is choice-free; it does not assert existence of regular values as an additional premise-free conclusion.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Write $d_M=(\\sin k_1,\\sin k_2,M+\\cos k_1+\\cos k_2)$. The band energies are $\\pm|d_M|$, so the gap is $2|d_M|$ and closes exactly if all three components vanish. The first two vanish only when each $k_j$ is $0$ or $\\pi$ modulo $2\\pi$; the third component at $(0,0),(\\pi,0),(0,\\pi),(\\pi,\\pi)$ is respectively $M+2,M,M,M-2$. Thus a zero exists exactly at $M=-2,0,2$. For every other fixed $M$, compactness of the torus and continuity give $\\min_k|d_M(k)|>0$, so the two bands have a uniform gap. The sine and cosine terms are finite Fourier sums with nearest-neighbor support, hence this is a finite-range Hermitian Bloch matrix.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fix $M$ outside the closing set and let $N=(0,0,1)\\in S^2$. The preimages of $N$ under $n_M=d_M/|d_M|$ are exactly the four candidate points above for which the third component is positive. Near such a point, use the oriented coordinates $(n_1,n_2)$ at $N$. The derivative matrix is diagonal with entries $\\cos k_1/d_3$ and $\\cos k_2/d_3$, where $d_3=M+\\cos k_1+\\cos k_2>0$; its determinant is nonzero. Therefore $N$ is a regular value, and the local orientation signs at $(0,0),(\\pi,0),(0,\\pi),(\\pi,\\pi)$, whenever present, are respectively $+1,-1,-1,+1$. By [F2], degree is the sum of the signs for those points with $d_3>0$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $M<-2$, no candidate has $d_3>0$ and the sum is $0$. If $-2<M<0$, only $(0,0)$ contributes, giving $+1$. If $0<M<2$, $(0,0),(\\pi,0),(0,\\pi)$ contribute $+1-1-1=-1$. If $M>2$, all four contribute $+1-1-1+1=0$. Substitution into [F1] gives every table entry. For any two values in one of the four intervals, the closed segment between them remains in that interval; the joint function $|d_M(k)|$ is positive on the compact torus times that segment, so it has a positive minimum and supplies a gap-preserving deformation.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "M ranges over R; at M=−2,0,2 the example explicitly excludes a Chern number for the closing bands. See the item Statement or Definition."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At M>2, the four north-pole signs sum to zero and both Chern numbers vanish. See the item Statement or Definition."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The lower and upper bands are rank one and have opposite Chern numbers. See the item Statement or Definition."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "At each nonclosing M, the two energies ±|dM| are distinct; degeneracies occur exactly at the listed closures. See the item Statement or Definition."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Each parameter interval is open; any closed segment between two parameters inside it has a positive uniform gap. See the item Statement or Definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC and CC are explicit for the Chern-degree supplier; the signed preimage count is finite. See the item Statement or Definition."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Verification step 1.1: a gap zero forces both sine components to vanish, leaving four momenta whose third components are M+2, M, M and M-2. Therefore closure forces M in {-2,0,2}."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Verification step 1.1: at M=-2,0,2 one of the four sine-zero momenta has third component zero, so the gap closes. For other masses compactness gives a strictly positive minimum gap."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Take M=3.",
+          "result": "All four north-pole preimages are present with signs +1,−1,−1,+1; their sum is zero and both Chern numbers vanish.",
+          "verifies": "Numbered steps: 1.1, 2.1, 3.1."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-54-author",
+        "notes": "Checked the exact interfaces and assumptions, curvature and orientation signs, degenerate and boundary cases, and the conditional effective-model scope. This is authoring evidence, not independent proof approval."
+      }
+    },
+    "cex-nrqmx-smooth-frame-obstruction": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "ex-nrqmx-two-band-gap-closures",
+          "source_section": "Example",
+          "quote": "Assume Axiom of Choice and Countable Choice. For $M\\in\\mathbb R$, consider the two-orbital finite-range Bloch Hamiltonian",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-nrqmx-bloch-projector-chern",
+          "source_section": "Statement",
+          "quote": "Assume Axiom of Choice and Countable Choice. Let $P:\\mathbb T^2_{2\\pi}\\to M_r(\\mathbb C)$ be a $C^2$ orthogonal projector of constant rank $m\\ge1$; in particular it may be the projector of an isolated band cluster of a finite-range Bloch Hamiltonian. Use the orientation $dk_1\\wedge dk_2$, let $E_P=\\operatorname{im}P$, and let $F=P(dP\\wedge dP)P$ be the curvature of the projected connection $\\nabla=P\\,d$. Then",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], this is a smooth rank-one orthogonal band projector with $C(P_-)=-1\\ne0$. Suppose it had a global smooth periodic normalized eigenvector $u(k)$. Since its range is one-dimensional, $u(k)$ would be a global orthonormal frame of the line bundle.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply [F2] to that frame: it would force $C(P_-)=0$, contradicting step 1.1's value $-1$. Thus this smooth isolated band has no global smooth periodic normalized eigenvector, refuting the universal statement.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example uses a nonempty compact torus and a rank-one lower-band bundle."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At M=1 the lower Chern number is −1, hence is nonzero. See the item Statement or Definition."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The lower band has rank one, so one normalized global eigenvector would be an orthonormal frame. See the item Statement or Definition."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The band is isolated on the full torus at M=1, as verified in the example. See the item Statement or Definition."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The entire Brillouin torus is covered periodically; the contradiction uses global periodicity. See the item Statement or Definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC and CC are explicit assumptions inherited from the cited Chern computation. See the item Statement or Definition."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a direct definition or result, not an if-and-only-if claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/drift_materialization (gpt-6.1-sol owner)",
+            "reason": "The public claim and its entire argument have been read: The lower band at mass one has Chern number minus one; a global periodic frame would force zero, giving one counterexample to a universal frame assertion rather than an iff theorem.",
+            "item_sha256": "1a6ae754c9efcf5e497e562b8002485bc943ead382a21347f016d252a94dd2d4",
+            "row_sha256": "f3bbe9deea3ca7aa0499a0716628f3e25077e73fa72449b1e9ce7762b490a6ac"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a direct definition or result, not an if-and-only-if claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/drift_materialization (gpt-6.1-sol owner)",
+            "reason": "The public claim and its entire argument have been read: The lower band at mass one has Chern number minus one; a global periodic frame would force zero, giving one counterexample to a universal frame assertion rather than an iff theorem.",
+            "item_sha256": "1a6ae754c9efcf5e497e562b8002485bc943ead382a21347f016d252a94dd2d4",
+            "row_sha256": "f4268fcf0a0b9828830396b3e426b3cf3172a02c523f2ac1a0a0dc73c66008fa"
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Take the lower band at M=1.",
+          "result": "Its Chern number is −1, so the global-frame conclusion C=0 contradicts the computed value.",
+          "verifies": "Numbered steps: 1.1, 2.1."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-54-author",
+        "notes": "Checked the exact interfaces and assumptions, curvature and orientation signs, degenerate and boundary cases, and the conditional effective-model scope. This is authoring evidence, not independent proof approval."
+      }
+    }
+  }
+}

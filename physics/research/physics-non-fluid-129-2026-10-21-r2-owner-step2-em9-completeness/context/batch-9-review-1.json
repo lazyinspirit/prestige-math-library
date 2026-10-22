@@ -1,0 +1,134 @@
+{
+  "version": 1,
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "batch": "9",
+  "round": 1,
+  "reviewed_items": [
+    "def-emx-transverse-fourier-field",
+    "pthm-emx-helicity-projection",
+    "def-emx-angular-momentum-split",
+    "pthm-emx-canonical-kinetic-integral",
+    "cex-emx-plane-wave-spin-integral-failure",
+    "ex-emx-gauge-boundary-term"
+  ],
+  "reviewed_pages": [
+    "emx-classical-helicity-angular-momentum",
+    "emx-classical-helicity-angular-momentum-examples"
+  ],
+  "decision": "escalate",
+  "reason": "The repair resolves the prior componentwise-integral and cube-limit issue. Final review still finds unsupported real-completeness uses in the suppliers; under the two-review limit these unresolved issues go to the owner.",
+  "findings": [
+    {
+      "id": "def-emx-transverse-fourier-field",
+      "type": "prerequisite",
+      "reason": "The whole-space integral definition uses convergence of Cauchy sequences in R, and Verification 3.1 takes a supremum to establish the energy limit. Facts [F8] cites only def-complete-ordered-field, which defines the least-upper-bound property but does not establish it for R. Although thm-reals-cauchy-complete is in deps, its conclusions are not identified as the supplier for these uses. The exact needed claims are its Cauchy convergence result and its least-upper-bound result (proof steps 6.1 and 8.1). The downstream finite-energy premise in cex-emx-plane-wave-spin-integral-failure [F4, step 2.1] is therefore not established."
+    },
+    {
+      "id": "def-emx-angular-momentum-split",
+      "type": "prerequisite",
+      "reason": "The item depends on def-complete-ordered-field alone. Verification 1.1 takes A(V) as the supremum of bounded cube integrals and uses that supremum to prove convergence; the definition of completeness does not establish that R has the property. The smallest missing supplier is thm-reals-cauchy-complete, specifically its least-upper-bound result (proof step 8.1). This blocks the global well-definedness claim used in pthm-emx-canonical-kinetic-integral part (a), Proof 3.1, and cex-emx-plane-wave-spin-integral-failure [F4, step 2.1]."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "cex-emx-paraxial-distance-failure",
+      "decision": "accept",
+      "reason": "Uses the 2D L2 angular-spectrum multipliers and paraxial bound, not the revised 3D cube-integral convention."
+    },
+    {
+      "id": "cex-emx-plane-wave-spin-integral-failure",
+      "decision": "escalate",
+      "reason": "Its [F4] and step 2.1 use the finite-energy Fourier-packet domain, whose energy-limit proof in def-emx-transverse-fourier-field still lacks an explicitly used real-completeness supplier."
+    },
+    {
+      "id": "cex-emx-polarization-gauge-singularity",
+      "decision": "accept",
+      "reason": "Uses the pointwise helicity projector and local smooth frames; it does not use whole-space integrals."
+    },
+    {
+      "id": "cex-emx-zero-intensity-degree",
+      "decision": "accept",
+      "reason": "Uses the two-component coherency matrix and its normalization domain, not the changed R3 integral convention."
+    },
+    {
+      "id": "def-emx-angular-momentum-split",
+      "decision": "escalate",
+      "reason": "Verification 1.1 needs the least-upper-bound theorem to prove its absolute cube-integral limits and global functionals exist."
+    },
+    {
+      "id": "def-emx-angular-spectrum",
+      "decision": "accept",
+      "reason": "Its use of the Fourier-field definition distinguishes the 3D packet class from 2D L2 data; it does not rely on the changed whole-space integrals."
+    },
+    {
+      "id": "def-emx-coherency-matrix",
+      "decision": "accept",
+      "reason": "Its second-moment construction uses finite-dimensional expectations, not the 3D Riemann-integral convention."
+    },
+    {
+      "id": "def-emx-helicity-line-bundle",
+      "decision": "accept",
+      "reason": "Its relevant use is pointwise on nonzero Fourier directions and does not rely on whole-space integral convergence."
+    },
+    {
+      "id": "ex-emx-gauge-boundary-term",
+      "decision": "accept",
+      "reason": "Its actual calculation uses the finite-cube identity and compactly supported integrands with the repaired componentwise convention; it does not invoke the global identity in part (a)."
+    },
+    {
+      "id": "ex-emx-longitudinal-focused-field",
+      "decision": "accept",
+      "reason": "Uses a single plane-wave transversality relation and the cone bound, not whole-space integrals."
+    },
+    {
+      "id": "ex-emx-polarization-latitude-phase",
+      "decision": "accept",
+      "reason": "Uses direction-sphere path and curvature integrals, not the changed R3 cube-exhaustion convention."
+    },
+    {
+      "id": "ex-emx-unpolarized-nonzero-field",
+      "decision": "accept",
+      "reason": "Uses a finite two-outcome ensemble and coherency-matrix calculations only."
+    },
+    {
+      "id": "pthm-emx-canonical-kinetic-integral",
+      "decision": "escalate",
+      "reason": "Part (a), especially Proof 3.1, relies on the global integrability results in def-emx-angular-momentum-split, whose supremum-limit step lacks the least-upper-bound theorem. Part (b)'s finite-cube identity is independently established."
+    },
+    {
+      "id": "pthm-emx-classical-visibility",
+      "decision": "accept",
+      "reason": "Uses ensemble second moments and the coherency-matrix positivity result, not the changed whole-space integrals."
+    },
+    {
+      "id": "pthm-emx-helicity-berry-curvature",
+      "decision": "accept",
+      "reason": "Uses local differential forms and finite smooth singular-chain integrals on the sphere, not the changed R3 convention."
+    },
+    {
+      "id": "pthm-emx-helicity-projection",
+      "decision": "accept",
+      "reason": "Its projector identities are pointwise algebraic consequences on the transverse fibre; no whole-space integral is used."
+    },
+    {
+      "id": "pthm-emx-helicity-rotation-weight",
+      "decision": "accept",
+      "reason": "Uses curve integrals on compact path segments and local frame transitions, not whole-space cube limits."
+    },
+    {
+      "id": "pthm-emx-paraxial-error",
+      "decision": "accept",
+      "reason": "Uses the 2D L2 Plancherel estimate and pointwise plane-wave constraint; it does not use the changed 3D cube integrals."
+    },
+    {
+      "id": "pthm-emx-scalar-vortex-eigenvalue",
+      "decision": "accept",
+      "reason": "Uses a 2D L2 pairing for a scalar field, not the revised 3D vector-integral convention."
+    },
+    {
+      "id": "pthm-emx-stokes-positivity",
+      "decision": "accept",
+      "reason": "Uses finite-dimensional ensemble expectations and matrix algebra only."
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+# Batch126 local-excision ownership
+
+Recommend one current decision successor: remove local-excision from the touched lemma decision’s defect_ids, retaining its actual fixed relative-cycles defect. Keep the refuter decision, verdict and local-excision ID unchanged. Add the supplied evidence sentence explaining that the current amended source retains both repairs, while the refuter finding uniquely owns local-excision. The complete exact proposed decision file and both original decisions are retained.
+
+The original routed refuter finding specifically observes the missing local-homology inclusion/excision at Proof3.1. The existing fixed nonfatal ledger row is exactly that omission; the current proof has the explicit closure/interior hypothesis and inclusion isomorphism. The touched amendment separately repairs the genuinely absent relative-cycle hypotheses. These are two distinct defects, not two aliases of one observation.
+
+The validator’s shared-finding route requires reader/flagged decisions, while this duplicate is touched versus flagged; its added-causal-subject alternative cannot apply because batch126 added no subjects. Therefore adding same_defect_as is neither supported nor necessary. Leaving only the proper refuter owner resolves this particular double ownership without inventing a new observation, modifying the closed ledger row, changing scientific content or reducing obligation coverage. Keep the historical ledger adjudication_ref and original dual-reference version as provenance.
+
+The supplied full diagnostic names no other error for batches115–129. This is a scoped statement about that diagnostic, not a fresh native validation or run-wide pass. No production edits, source changes, stamps, ledger appends or gate calls were made. Root owns application and recertification.

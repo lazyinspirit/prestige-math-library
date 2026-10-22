@@ -1,0 +1,18 @@
+import {readFileSync,writeFileSync} from 'node:fs';
+import {dirname,resolve,join} from 'node:path';
+import {fileURLToPath} from 'node:url';
+import {createHash} from 'node:crypto';
+import {loadPhysicsRepository,validatePhysicsContent} from './candidate/tools/physics-support/physics-content.mjs';
+import {recordedPublishedRepair} from './candidate/tools/physics-support/published-repair-policy.mjs';
+import {frontierGateScope} from './candidate/tools/physics-support/frontier-gate-scope.mjs';
+const here=dirname(fileURLToPath(import.meta.url)),repo=resolve(here,'../../..'),root=join(repo,'physics'),run='physics-non-fluid-129-2026-10-21-r2';
+const original=await import(repo+'/tools/physics-support/physics-content.mjs');
+const scope=frontierGateScope({repo:root,run},{requireItemFiles:true});
+const loaded=loadPhysicsRepository(root,null,scope.pages);
+const options={...loaded,requireBodies:true,selectedItems:scope.items,selectedPages:scope.pages};
+const before=original.validatePhysicsContent(options),after=validatePhysicsContent(options);
+const td=['pthm-td-intensive-coexistence-conditions','pthm-td-clapeyron-local'];
+const files=[repo+'/tools/physics-support/physics-content.mjs',repo+'/tools/physics-support/published-repair-policy.mjs',root+'/research/'+run+'-step5-v2/initial-1-collected.json',...td.map(id=>root+'/items/'+id+'.md')];
+const hash=x=>createHash('sha256').update(x).digest('hex');
+const result={run,at:new Date().toISOString(),scope:'Read-only metadata diagnostic. No live gate, certification, scientific review, source edit or publication attempted.',items:scope.items.size,pages:scope.pages.size,before,after,td:td.map(id=>{const item=loaded.items.find(row=>row.id===id);return{id,verification:item.verification,policy:recordedPublishedRepair(root,id,item.raw,item.verification?.repair),withoutFilesystemContext:validatePhysicsContent({...options,sourceContext:null,selectedItems:new Set([id]),selectedPages:new Set()}).filter(row=>row.id===id)}}),inputHashes:Object.fromEntries(files.map(path=>[path.slice(repo.length+1),hash(readFileSync(path))]))};
+writeFileSync(join(here,'reproduction.json'),JSON.stringify(result,null,2)+'\n');console.log(JSON.stringify(result,null,2));

@@ -1,0 +1,716 @@
+{
+  "version": 1,
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "batch": "98",
+  "level": "physics-non-fluid-129-2026-10-21-r2",
+  "scope": [
+    "thm-csm-frontier-partition-ratio-overlap",
+    "thm-csm-frontier-bridge-ratio-variance",
+    "thm-csm-frontier-interval-partition-certificate",
+    "ex-csm-frontier-product-overlap-explosion"
+  ],
+  "contracts": {
+    "thm-csm-frontier-partition-ratio-overlap": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-importance-sampling",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathsf X,\\mathcal X,\\mu)$ be a measure space. An **unnormalized target density** is a measurable function $\\tilde p:\\mathsf X\\to[0,\\infty)$ with\n$$Z_p:=\\int_{\\mathsf X}\\tilde p\\,d\\mu\\in(0,\\infty).$$\nThe target probability measure is $\\pi(dx)=\\tilde p(x)\\mu(dx)/Z_p$. A **proposal density** is a measurable $q:\\mathsf X\\to[0,\\infty)$ with $\\int q\\,d\\mu=1$; write $Q(dx)=q(x)\\mu(dx)$. The input integrand $f:\\mathsf X\\to\\mathbb R$ is measurable, and the input sample $X_1,\\ldots,X_n$ is IID with law $Q$, in the sense of [[def-identically-distributed-and-iid-random-variables]]. The normalizing constant $Z_p$ is known for this algorithm.\n\n**Admissible conditions for an unbiased estimate:** $n\\ge1$, $q>0$ $\\mu$-almost everywhere on $\\{x:f(x)\\tilde p(x)\\ne0\\}$, and the random variable\n$$Y:=\\begin{cases}f(X_1)\\tilde p(X_1)/(Z_pq(X_1)),&q(X_1)>0,\\\\0,&q(X_1)=0\\end{cases}$$\nis integrable under $Q$. The support condition makes the value on $q=0$ immaterial to the target integral.\n\n**Well-defined weights:** The reciprocal map $r(s)=1/s$ for $s>0$ and $r(s)=0$ for $s\\le0$ is Borel. Its composition with $q$, multiplied by the measurable inputs, makes the piecewise weight and weighted integrand measurable ([[thm-composition-with-borel-functions-preserves-measurability]], [[thm-arithmetic-and-lattice-operations-preserve-measurability]]).\n\n**Procedure and output:** For each supplied draw $X_i$, set $Y_i=f(X_i)\\tilde p(X_i)/(Z_pq(X_i))$ when $q(X_i)>0$ and set $Y_i=0$ otherwise. Return\n$$\\hat\\mu_{\\mathrm{IS}}:=\\frac1n\\sum_{i=1}^nY_i.$$\nSeparate variance and central limit claims require the corresponding weighted second-moment hypothesis.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-ordinary-importance-sampling-finite-variance-under-weighted-second-moment",
+          "source_section": "Statement",
+          "quote": "Use the hypotheses and notation of [[thm-ordinary-importance-sampling-is-unbiased]]. Define\n$$Y_i:=\\begin{cases}f(X_i)\\tilde p(X_i)/(Z_pq(X_i)),&q(X_i)>0,\\\\0,&q(X_i)=0\\end{cases},\\qquad \\theta:=\\int f\\,d\\pi,\\qquad \\sigma^2:=\\operatorname{Var}_Q(Y_1).$$\nIf $\\mathbb E_Q[Y_1^2]<\\infty$, then $\\hat\\mu_{\\mathrm{IS}}$ has finite variance and\n$$\\operatorname{Var}_Q(\\hat\\mu_{\\mathrm{IS}})=\\frac{\\sigma^2}{n}=\\frac1n\\left(\\frac1{Z_p^2}\\int_{\\{q>0\\}}\\frac{f(x)^2\\tilde p(x)^2}{q(x)}\\,d\\mu(x)-\\theta^2\\right).$$\nThis finite-sample conclusion is choice-free. For the central limit conclusion, let $(X_i)_{i\\ge1}$ be an IID sequence with law $Q$, and apply the estimator to its first $n$ draws for each $n\\ge1$. If, in addition, AC holds, then\n$$\\sqrt n\\bigl(\\hat\\mu_{\\mathrm{IS}}-\\theta\\bigr)\\Rightarrow N(0,\\sigma^2).$$\nNo finite variance or normal-limit claim is made when the weighted second moment is infinite.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $R=w_1/w_0$. Finite summation gives $\\mathbb E_{\\pi_0}R=\\sum_x(w_0(x)/Z_0)(w_1(x)/w_0(x))=Z_1/Z_0$. Since $w_0(x),w_1(x)>0$ on every point of $\\mathsf X$, the formal ordinary-importance-sampling setup with counting measure, $\\tilde p=w_1$, $q=\\pi_0$, $f\\equiv1$, and $Z_p=Z_1$ has full support and finite weighted second moment. Its weighted value is $Y=(Z_0/Z_1)R=\\pi_1/\\pi_0$, and finite summation gives $\\mathbb E_{\\pi_0}Y=(Z_0/Z_1)\\mathbb E_{\\pi_0}R=1$. Here $Z_1$ is used only to identify this mathematical random variable; it is not supplied to or computed by the raw-weight ratio estimator.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply [F2] to this formal weighted variable with mean $1$ from step 1.1. It gives $\\operatorname{Var}(\\overline Y_n)=n^{-1}(\\mathbb E_{\\pi_0}[Y^2]-1)$. Since $\\overline Y_n=(Z_0/Z_1)\\widehat r_n$, rescaling gives $\\operatorname{Var}(\\widehat r_n)/(Z_1/Z_0)^2=n^{-1}(\\sum_x\\pi_0(x)(\\pi_1(x)/\\pi_0(x))^2-1)$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The probability masses sum to one, so expanding the square gives $\\chi^2(\\pi_1\\Vert\\pi_0)=\\sum_x\\pi_0(x)(\\pi_1(x)/\\pi_0(x))^2-2\\sum_x\\pi_1(x)+\\sum_x\\pi_0(x)=\\sum_x\\pi_0(x)(\\pi_1(x)/\\pi_0(x))^2-1$. Substitution into step 2.1 proves the variance identity.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement requires a finite nonempty state space.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/csm_boundary",
+            "reason": "Finite positive raw-weight ratios have the displayed expectation and relative variance by IID averaging. Nonempty X and n>=1 exclude empty normalizers and samples; the moment identities state no logical equivalence.",
+            "item_sha256": "d1a0446c39d4c7eacf944770627d16a033393bbb8951375c8fd1de03dba0b149",
+            "row_sha256": "1329297a601ae4db902ff900ce55d99ad0667b4b489f9660a9e3860c95d2d803"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/csm_boundary",
+            "reason": "Finite positive raw-weight ratios have the displayed expectation and relative variance by IID averaging. Nonempty X and n>=1 exclude empty normalizers and samples; the moment identities state no logical equivalence."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The Statement requires strictly positive weights and positive sample counts."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement permits the one-state or one-stage case; the displayed finite sums and products reduce directly."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement remains valid when adjacent probability laws coincide; the corresponding chi-square term is zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement requires positive finite weights on every state, so no zero-support endpoint enters a ratio."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement uses only finite sums, products, and explicitly supplied samples; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Finite positive weight sums give the raw-ratio expectation. Symbolic normalization identifies the ordinary-importance-sampling random variable, after which IID averaging and finite chi-square expansion give the relative variance. These exact finite moment identities are not an iff characterization of overlap or sampling assumptions.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root adopting /root/csm_boundary",
+            "reason": "Root adopts /root/csm_boundary current case review in research/physics-non-fluid-129-2026-10-21-r2-owner-step3-boundary-current-csm_boundary/proposal.json: Finite positive weight sums give the raw-ratio expectation. Symbolic normalization identifies the ordinary-importance-sampling random variable, after which IID averaging and finite chi-square expansion give the relative variance. These exact finite moment identities are not an iff characterization of overlap or sampling assumptions. Source reading limits and exact support remain in the sealed proposal; no independent native proof acceptance is asserted.",
+            "item_sha256": "d1a0446c39d4c7eacf944770627d16a033393bbb8951375c8fd1de03dba0b149",
+            "row_sha256": "118d22224a79ea13ce429de5e209c7a5dfe2102cc8988d029e0326de76232c8d"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root adopting /root/csm_boundary",
+            "reason": "Root adopts /root/csm_boundary current case review in research/physics-non-fluid-129-2026-10-21-r2-owner-step3-boundary-current-csm_boundary/proposal.json: Finite positive weight sums give the raw-ratio expectation. Symbolic normalization identifies the ordinary-importance-sampling random variable, after which IID averaging and finite chi-square expansion give the relative variance. These exact finite moment identities are not an iff characterization of overlap or sampling assumptions. Source reading limits and exact support remain in the sealed proposal; no independent native proof acceptance is asserted.",
+            "item_sha256": "d1a0446c39d4c7eacf944770627d16a033393bbb8951375c8fd1de03dba0b149",
+            "row_sha256": "118d22224a79ea13ce429de5e209c7a5dfe2102cc8988d029e0326de76232c8d"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The expectation and chi-square variance formula do not claim that equal moments conversely identify the two laws, establish independent sampling or supply an unknown normalizer to the algorithm. Both weights have full positive support and n>=1 is supplied; no reverse characterization is stated.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root adopting /root/csm_boundary",
+            "reason": "Root adopts /root/csm_boundary current case review in research/physics-non-fluid-129-2026-10-21-r2-owner-step3-boundary-current-csm_boundary/proposal.json: The expectation and chi-square variance formula do not claim that equal moments conversely identify the two laws, establish independent sampling or supply an unknown normalizer to the algorithm. Both weights have full positive support and n>=1 is supplied; no reverse characterization is stated. Source reading limits and exact support remain in the sealed proposal; no independent native proof acceptance is asserted.",
+            "item_sha256": "d1a0446c39d4c7eacf944770627d16a033393bbb8951375c8fd1de03dba0b149",
+            "row_sha256": "a93af25fd3f65e79d2a9df8749febc1692c7d8dbb15fac787873e03c68028591"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root adopting /root/csm_boundary",
+            "reason": "Root adopts /root/csm_boundary current case review in research/physics-non-fluid-129-2026-10-21-r2-owner-step3-boundary-current-csm_boundary/proposal.json: The expectation and chi-square variance formula do not claim that equal moments conversely identify the two laws, establish independent sampling or supply an unknown normalizer to the algorithm. Both weights have full positive support and n>=1 is supplied; no reverse characterization is stated. Source reading limits and exact support remain in the sealed proposal; no independent native proof acceptance is asserted.",
+            "item_sha256": "d1a0446c39d4c7eacf944770627d16a033393bbb8951375c8fd1de03dba0b149",
+            "row_sha256": "a93af25fd3f65e79d2a9df8749febc1692c7d8dbb15fac787873e03c68028591"
+          }
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "alg-importance-sampling",
+          "carrier": "items/alg-importance-sampling.md",
+          "status": "Published imported mathematical carrier; exact current Definition was inspected, and its bytes match the local research/math-imports.json pin.",
+          "source_section": "Definition",
+          "exact_statement": "Let $(\\mathsf X,\\mathcal X,\\mu)$ be a measure space. An **unnormalized target density** is a measurable function $\\tilde p:\\mathsf X\\to[0,\\infty)$ with\n$$Z_p:=\\int_{\\mathsf X}\\tilde p\\,d\\mu\\in(0,\\infty).$$\nThe target probability measure is $\\pi(dx)=\\tilde p(x)\\mu(dx)/Z_p$. A **proposal density** is a measurable $q:\\mathsf X\\to[0,\\infty)$ with $\\int q\\,d\\mu=1$; write $Q(dx)=q(x)\\mu(dx)$. The input integrand $f:\\mathsf X\\to\\mathbb R$ is measurable, and the input sample $X_1,\\ldots,X_n$ is IID with law $Q$, in the sense of [[def-identically-distributed-and-iid-random-variables]]. The normalizing constant $Z_p$ is known for this algorithm.\n\n**Admissible conditions for an unbiased estimate:** $n\\ge1$, $q>0$ $\\mu$-almost everywhere on $\\{x:f(x)\\tilde p(x)\\ne0\\}$, and the random variable\n$$Y:=\\begin{cases}f(X_1)\\tilde p(X_1)/(Z_pq(X_1)),&q(X_1)>0,\\\\0,&q(X_1)=0\\end{cases}$$\nis integrable under $Q$. The support condition makes the value on $q=0$ immaterial to the target integral.\n\n**Well-defined weights:** The reciprocal map $r(s)=1/s$ for $s>0$ and $r(s)=0$ for $s\\le0$ is Borel. Its composition with $q$, multiplied by the measurable inputs, makes the piecewise weight and weighted integrand measurable ([[thm-composition-with-borel-functions-preserves-measurability]], [[thm-arithmetic-and-lattice-operations-preserve-measurability]]).\n\n**Procedure and output:** For each supplied draw $X_i$, set $Y_i=f(X_i)\\tilde p(X_i)/(Z_pq(X_i))$ when $q(X_i)>0$ and set $Y_i=0$ otherwise. Return\n$$\\hat\\mu_{\\mathrm{IS}}:=\\frac1n\\sum_{i=1}^nY_i.$$\nSeparate variance and central limit claims require the corresponding weighted second-moment hypothesis.",
+          "relevant_hypotheses_and_conventions": "Let $(\\mathsf X,\\mathcal X,\\mu)$ be a measure space. An **unnormalized target density** is a measurable function $\\tilde p:\\mathsf X\\to[0,\\infty)$ with\n$$Z_p:=\\int_{\\mathsf X}\\tilde p\\,d\\mu\\in(0,\\infty).$$\nThe target probability measure is $\\pi(dx)=\\tilde p(x)\\mu(dx)/Z_p$. A **proposal density** is a measurable $q:\\mathsf X\\to[0,\\infty)$ with $\\int q\\,d\\mu=1$; write $Q(dx)=q(x)\\mu(dx)$. The input integrand $f:\\mathsf X\\to\\mathbb R$ is measurable, and the input sample $X_1,\\ldots,X_n$ is IID with law $Q$, in the sense of [[def-identically-distributed-and-iid-random-variables]]. The normalizing constant $Z_p$ is known for this algorithm.\n\n**Admissible conditions for an unbiased estimate:** $n\\ge1$, $q>0$ $\\mu$-almost everywhere on $\\{x:f(x)\\tilde p(x)\\ne0\\}$, and the random variable\n$$Y:=\\begin{cases}f(X_1)\\tilde p(X_1)/(Z_pq(X_1)),&q(X_1)>0,\\\\0,&q(X_1)=0\\end{cases}$$\nis integrable under $Q$. The support condition makes the value on $q=0$ immaterial to the target integral.\n\n**Well-defined weights:** The reciprocal map $r(s)=1/s$ for $s>0$ and $r(s)=0$ for $s\\le0$ is Borel. Its composition with $q$, multiplied by the measurable inputs, makes the piecewise weight and weighted integrand measurable ([[thm-composition-with-borel-functions-preserves-measurability]], [[thm-arithmetic-and-lattice-operations-preserve-measurability]]).\n\n**Procedure and output:** For each supplied draw $X_i$, set $Y_i=f(X_i)\\tilde p(X_i)/(Z_pq(X_i))$ when $q(X_i)>0$ and set $Y_i=0$ otherwise. Return\n$$\\hat\\mu_{\\mathrm{IS}}:=\\frac1n\\sum_{i=1}^nY_i.$$\nSeparate variance and central limit claims require the corresponding weighted second-moment hypothesis.",
+          "supplier_proof_status": "Published imported mathematical carrier; exact current Definition was inspected, and its bytes match the local research/math-imports.json pin.",
+          "consumer_use": "Use its exact weighted-variable formula, support condition, finite-moment requirement, and known-normalizer warning to identify a symbolic scaled variable; do not execute it as an unknown-normalizer estimator."
+        },
+        {
+          "supplier": "thm-ordinary-importance-sampling-finite-variance-under-weighted-second-moment",
+          "carrier": "items/thm-ordinary-importance-sampling-finite-variance-under-weighted-second-moment.md",
+          "status": "Published imported mathematical carrier; complete current Statement and Proof were inspected, and its bytes match the local research/math-imports.json pin.",
+          "source_section": "Statement",
+          "exact_statement": "Use the hypotheses and notation of [[thm-ordinary-importance-sampling-is-unbiased]]. Define\n$$Y_i:=\\begin{cases}f(X_i)\\tilde p(X_i)/(Z_pq(X_i)),&q(X_i)>0,\\\\0,&q(X_i)=0\\end{cases},\\qquad \\theta:=\\int f\\,d\\pi,\\qquad \\sigma^2:=\\operatorname{Var}_Q(Y_1).$$\nIf $\\mathbb E_Q[Y_1^2]<\\infty$, then $\\hat\\mu_{\\mathrm{IS}}$ has finite variance and\n$$\\operatorname{Var}_Q(\\hat\\mu_{\\mathrm{IS}})=\\frac{\\sigma^2}{n}=\\frac1n\\left(\\frac1{Z_p^2}\\int_{\\{q>0\\}}\\frac{f(x)^2\\tilde p(x)^2}{q(x)}\\,d\\mu(x)-\\theta^2\\right).$$\nThis finite-sample conclusion is choice-free. For the central limit conclusion, let $(X_i)_{i\\ge1}$ be an IID sequence with law $Q$, and apply the estimator to its first $n$ draws for each $n\\ge1$. If, in addition, AC holds, then\n$$\\sqrt n\\bigl(\\hat\\mu_{\\mathrm{IS}}-\\theta\\bigr)\\Rightarrow N(0,\\sigma^2).$$\nNo finite variance or normal-limit claim is made when the weighted second moment is infinite.",
+          "relevant_hypotheses_and_conventions": "Use the hypotheses and notation of [[thm-ordinary-importance-sampling-is-unbiased]]. Define\n$$Y_i:=\\begin{cases}f(X_i)\\tilde p(X_i)/(Z_pq(X_i)),&q(X_i)>0,\\\\0,&q(X_i)=0\\end{cases},\\qquad \\theta:=\\int f\\,d\\pi,\\qquad \\sigma^2:=\\operatorname{Var}_Q(Y_1).$$\nIf $\\mathbb E_Q[Y_1^2]<\\infty$, then $\\hat\\mu_{\\mathrm{IS}}$ has finite variance and\n$$\\operatorname{Var}_Q(\\hat\\mu_{\\mathrm{IS}})=\\frac{\\sigma^2}{n}=\\frac1n\\left(\\frac1{Z_p^2}\\int_{\\{q>0\\}}\\frac{f(x)^2\\tilde p(x)^2}{q(x)}\\,d\\mu(x)-\\theta^2\\right).$$\nThis finite-sample conclusion is choice-free. For the central limit conclusion, let $(X_i)_{i\\ge1}$ be an IID sequence with law $Q$, and apply the estimator to its first $n$ draws for each $n\\ge1$. If, in addition, AC holds, then\n$$\\sqrt n\\bigl(\\hat\\mu_{\\mathrm{IS}}-\\theta\\bigr)\\Rightarrow N(0,\\sigma^2).$$\nNo finite variance or normal-limit claim is made when the weighted second moment is infinite.",
+          "supplier_proof_status": "Published imported mathematical carrier; complete current Statement and Proof were inspected, and its bytes match the local research/math-imports.json pin.",
+          "consumer_use": "Use only the finite-sample weighted variance identity; the separate CLT and AC branch is not used."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "two-state exact ratio",
+          "method": "finite exact summation",
+          "input": "X={a,b}, w0=(1,1), w1=(3,1), n=2",
+          "expected": "Z1/Z0=2, chi-square=1/4, relative variance=1/8"
+        }
+      ]
+    },
+    "thm-csm-frontier-bridge-ratio-variance": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-csm-frontier-partition-ratio-overlap",
+          "source_section": "Statement",
+          "quote": "Let $\\mathsf X$ be a finite nonempty set equipped with counting measure. For $a\\in\\{0,1\\}$, let $w_a:\\mathsf X\\to(0,\\infty)$ be a finite positive weight, define $Z_a=\\sum_{x\\in\\mathsf X}w_a(x)$, and define the probability mass function $\\pi_a(x)=w_a(x)/Z_a$. For an integer $n\\geq1$, let $X_1,\\ldots,X_n$ be independent random variables with common law $\\pi_0$. Define $R(x)=w_1(x)/w_0(x)$, $\\widehat r_n=n^{-1}\\sum_{j=1}^nR(X_j)$, and $\\chi^2(\\pi_1\\Vert\\pi_0)=\\sum_{x\\in\\mathsf X}\\pi_0(x)(\\pi_1(x)/\\pi_0(x)-1)^2$. Then\n\n$$\\mathbb E_{\\pi_0}[\\widehat r_n]=\\frac{Z_1}{Z_0},\\qquad \\frac{\\operatorname{Var}_{\\pi_0}(\\widehat r_n)}{(Z_1/Z_0)^2}=\\frac{\\chi^2(\\pi_1\\Vert\\pi_0)}{n}.$$\n\nThe estimator uses only the finite raw-weight ratios $w_1(X_j)/w_0(X_j)$; the partition sums define the target ratio and probability laws but are not inputs to its computation.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-csm-frontier-independent-bridge-ratios",
+          "source_section": "Definition",
+          "quote": "Input a finite nonempty state space $\\mathsf X$, an integer $K\\geq1$, positive finite weights $w_0,\\ldots,w_K:\\mathsf X\\to(0,\\infty)$, positive integers $n_0,\\ldots,n_{K-1}$, and, on a common probability space $(\\Omega,\\mathcal F,\\mathbb P)$, supplied random variables $X_{k,j}:\\Omega\\to(\\mathsf X,\\mathcal P(\\mathsf X))$ for $0\\le k<K$ and $1\\le j\\le n_k$. For each $k$, set $Z_k=\\sum_{x\\in\\mathsf X}w_k(x)$ and $\\pi_k(x)=w_k(x)/Z_k$, a probability mass function on $\\mathsf X$ and thus a probability measure on $\\mathcal P(\\mathsf X)$. Require $\\mathbb P(X_{k,j}=x)=\\pi_k(x)$ for every $x\\in\\mathsf X$ and require the entire finite family $(X_{k,j})_{k,j}$ to be mutually independent. These exact draws are inputs, not outputs of this procedure; approximate Gibbs draws, correlated trajectories, and adaptively chosen bridges are outside its contract.\n\nFor each $k=0,\\ldots,K-1$, compute $\\overline R_k=n_k^{-1}\\sum_{j=1}^{n_k}w_{k+1}(X_{k,j})/w_k(X_{k,j})$. Return $\\widehat R=\\prod_{k=0}^{K-1}\\overline R_k$. The procedure evaluates only raw-weight ratios; it neither computes nor requires any $Z_k$ as a numeric input.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each $k$, apply [F1] to $(w_k,w_{k+1})$ and the $n_k$ independent samples with common law $\\pi_k$. With $r_k=Z_{k+1}/Z_k$, the stage mean $\\overline R_k$ satisfies $\\mathbb E[\\overline R_k]=r_k$ and $\\operatorname{Var}(\\overline R_k)/r_k^2=\\chi^2(\\pi_{k+1}\\Vert\\pi_k)/n_k$. Since $\\mathbb E[\\overline R_k^2]=\\operatorname{Var}(\\overline R_k)+(\\mathbb E[\\overline R_k])^2$, it follows that $\\mathbb E[\\overline R_k^2]/r_k^2=1+\\chi^2(\\pi_{k+1}\\Vert\\pi_k)/n_k$. All moments are finite because $\\mathsf X$ is finite and the weights are positive and finite.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Write $B_k=(X_{k,1},\\ldots,X_{k,n_k})\\in\\mathsf X^{n_k}$. The blocks are independent finite-valued random elements, and $\\overline R_k$ is a function of $B_k$. If $\\mu_k(b)=\\mathbb P(B_k=b)$, then for any functions $G_k$ of the respective blocks, independence and finite summation give $$\\mathbb E\\left[\\prod_{k=0}^{K-1}G_k(B_k)\\right]=\\sum_{b_0\\in\\mathsf X^{n_0},\\ldots,b_{K-1}\\in\\mathsf X^{n_{K-1}}}\\prod_{k=0}^{K-1}\\mu_k(b_k)G_k(b_k)=\\prod_{k=0}^{K-1}\\mathbb E[G_k(B_k)].$$ Apply this first with $G_k=\\overline R_k$ and then with $G_k=\\overline R_k^2$. Thus $\\mathbb E[\\widehat R]=\\prod_k\\mathbb E[\\overline R_k]=\\prod_k(Z_{k+1}/Z_k)=Z_K/Z_0$, while $\\mathbb E[\\widehat R^2]/(Z_K/Z_0)^2=\\prod_k\\mathbb E[\\overline R_k^2]/r_k^2$. Substitution from step 1.1 gives the stated product, and subtracting one yields the relative variance.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement requires a finite nonempty state space and K>=1.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/csm_boundary",
+            "reason": "Independence factors the moments of K adjacent ratio means and telescoping identifies the target. Nonempty X, K>=1 and n_k>=1 keep every stage defined; these moment equalities are not biconditionals.",
+            "item_sha256": "3ff8856b110ef7021624543fc2ae3e1345479294574b0d4c11dac20b8db675f7",
+            "row_sha256": "62cf3d7eab0af9b9e7751688ab0200deae03e322eea3e3524a1463b4b1f33078"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/csm_boundary",
+            "reason": "Independence factors the moments of K adjacent ratio means and telescoping identifies the target. Nonempty X, K>=1 and n_k>=1 keep every stage defined; these moment equalities are not biconditionals."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: if two adjacent normalized laws coincide, that stage has chi-square zero and its raw ratio is constant."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: K=1 reduces to the one-stage partition-ratio formula."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement remains valid when adjacent probability laws coincide; the corresponding chi-square term is zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: every n_k is an integer at least one, including a single draw at a stage."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement uses only finite sums, products, and explicitly supplied samples; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The supplied exact mutually independent sample blocks give stage means and relative second moments. Finite factorization over independent blocks and telescoping Z_{k+1}/Z_k give the exact product moment identity. The theorem asserts these moments under independence, not an iff characterization of independence or exact sampling.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root adopting /root/csm_boundary",
+            "reason": "Root adopts /root/csm_boundary current case review in research/physics-non-fluid-129-2026-10-21-r2-owner-step3-boundary-current-csm_boundary/proposal.json: The supplied exact mutually independent sample blocks give stage means and relative second moments. Finite factorization over independent blocks and telescoping Z_{k+1}/Z_k give the exact product moment identity. The theorem asserts these moments under independence, not an iff characterization of independence or exact sampling. Source reading limits and exact support remain in the sealed proposal; no independent native proof acceptance is asserted.",
+            "item_sha256": "038c901dcb889eba51cbbbc9ff4f7cee190bd3fdc54c56bc3d2a22f112839922",
+            "row_sha256": "278594d4f2c3a1e9da366ae853e5a30f6bdf9d3f02bfd0a2a398e4e8ce22b4cd"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root adopting /root/csm_boundary",
+            "reason": "Root adopts /root/csm_boundary current case review in research/physics-non-fluid-129-2026-10-21-r2-owner-step3-boundary-current-csm_boundary/proposal.json: The supplied exact mutually independent sample blocks give stage means and relative second moments. Finite factorization over independent blocks and telescoping Z_{k+1}/Z_k give the exact product moment identity. The theorem asserts these moments under independence, not an iff characterization of independence or exact sampling. Source reading limits and exact support remain in the sealed proposal; no independent native proof acceptance is asserted.",
+            "item_sha256": "038c901dcb889eba51cbbbc9ff4f7cee190bd3fdc54c56bc3d2a22f112839922",
+            "row_sha256": "278594d4f2c3a1e9da366ae853e5a30f6bdf9d3f02bfd0a2a398e4e8ce22b4cd"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The displayed product of relative second moments is a consequence of finite independent exact stages. It is not claimed that observing that moment formula forces independence, exact Gibbs draws or the chosen bridge family; reused trajectories and adaptive bridges are expressly outside the guarantee.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root adopting /root/csm_boundary",
+            "reason": "Root adopts /root/csm_boundary current case review in research/physics-non-fluid-129-2026-10-21-r2-owner-step3-boundary-current-csm_boundary/proposal.json: The displayed product of relative second moments is a consequence of finite independent exact stages. It is not claimed that observing that moment formula forces independence, exact Gibbs draws or the chosen bridge family; reused trajectories and adaptive bridges are expressly outside the guarantee. Source reading limits and exact support remain in the sealed proposal; no independent native proof acceptance is asserted.",
+            "item_sha256": "038c901dcb889eba51cbbbc9ff4f7cee190bd3fdc54c56bc3d2a22f112839922",
+            "row_sha256": "3e0f7b82bd60aa9405343c584264685b46135006a9a25e4018bdc99e82b50b55"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root adopting /root/csm_boundary",
+            "reason": "Root adopts /root/csm_boundary current case review in research/physics-non-fluid-129-2026-10-21-r2-owner-step3-boundary-current-csm_boundary/proposal.json: The displayed product of relative second moments is a consequence of finite independent exact stages. It is not claimed that observing that moment formula forces independence, exact Gibbs draws or the chosen bridge family; reused trajectories and adaptive bridges are expressly outside the guarantee. Source reading limits and exact support remain in the sealed proposal; no independent native proof acceptance is asserted.",
+            "item_sha256": "038c901dcb889eba51cbbbc9ff4f7cee190bd3fdc54c56bc3d2a22f112839922",
+            "row_sha256": "3e0f7b82bd60aa9405343c584264685b46135006a9a25e4018bdc99e82b50b55"
+          }
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "alg-csm-frontier-independent-bridge-ratios",
+          "carrier": "items/alg-csm-frontier-independent-bridge-ratios.md",
+          "status": "Current batch-98 draft definition/example; its exact current interface and status were inspected. No independent acceptance is inferred.",
+          "source_section": "Definition",
+          "exact_statement": "Input a finite nonempty state space $\\mathsf X$, an integer $K\\geq1$, positive finite weights $w_0,\\ldots,w_K:\\mathsf X\\to(0,\\infty)$, positive integers $n_0,\\ldots,n_{K-1}$, and, on a common probability space $(\\Omega,\\mathcal F,\\mathbb P)$, supplied random variables $X_{k,j}:\\Omega\\to(\\mathsf X,\\mathcal P(\\mathsf X))$ for $0\\le k<K$ and $1\\le j\\le n_k$. For each $k$, set $Z_k=\\sum_{x\\in\\mathsf X}w_k(x)$ and $\\pi_k(x)=w_k(x)/Z_k$, a probability mass function on $\\mathsf X$ and thus a probability measure on $\\mathcal P(\\mathsf X)$. Require $\\mathbb P(X_{k,j}=x)=\\pi_k(x)$ for every $x\\in\\mathsf X$ and require the entire finite family $(X_{k,j})_{k,j}$ to be mutually independent. These exact draws are inputs, not outputs of this procedure; approximate Gibbs draws, correlated trajectories, and adaptively chosen bridges are outside its contract.\n\nFor each $k=0,\\ldots,K-1$, compute $\\overline R_k=n_k^{-1}\\sum_{j=1}^{n_k}w_{k+1}(X_{k,j})/w_k(X_{k,j})$. Return $\\widehat R=\\prod_{k=0}^{K-1}\\overline R_k$. The procedure evaluates only raw-weight ratios; it neither computes nor requires any $Z_k$ as a numeric input.",
+          "relevant_hypotheses_and_conventions": "Input a finite nonempty state space $\\mathsf X$, an integer $K\\geq1$, positive finite weights $w_0,\\ldots,w_K:\\mathsf X\\to(0,\\infty)$, positive integers $n_0,\\ldots,n_{K-1}$, and, on a common probability space $(\\Omega,\\mathcal F,\\mathbb P)$, supplied random variables $X_{k,j}:\\Omega\\to(\\mathsf X,\\mathcal P(\\mathsf X))$ for $0\\le k<K$ and $1\\le j\\le n_k$. For each $k$, set $Z_k=\\sum_{x\\in\\mathsf X}w_k(x)$ and $\\pi_k(x)=w_k(x)/Z_k$, a probability mass function on $\\mathsf X$ and thus a probability measure on $\\mathcal P(\\mathsf X)$. Require $\\mathbb P(X_{k,j}=x)=\\pi_k(x)$ for every $x\\in\\mathsf X$ and require the entire finite family $(X_{k,j})_{k,j}$ to be mutually independent. These exact draws are inputs, not outputs of this procedure; approximate Gibbs draws, correlated trajectories, and adaptively chosen bridges are outside its contract.\n\nFor each $k=0,\\ldots,K-1$, compute $\\overline R_k=n_k^{-1}\\sum_{j=1}^{n_k}w_{k+1}(X_{k,j})/w_k(X_{k,j})$. Return $\\widehat R=\\prod_{k=0}^{K-1}\\overline R_k$. The procedure evaluates only raw-weight ratios; it neither computes nor requires any $Z_k$ as a numeric input.",
+          "supplier_proof_status": "Current batch-98 draft definition/example; its exact current interface and status were inspected. No independent acceptance is inferred.",
+          "consumer_use": "Use its product-of-stage-means output and its mutual-independence input condition."
+        },
+        {
+          "supplier": "thm-csm-frontier-partition-ratio-overlap",
+          "carrier": "items/thm-csm-frontier-partition-ratio-overlap.md",
+          "status": "Current batch-98 draft carrier; its complete current Statement and Proof were inspected. No independent proof acceptance is inferred.",
+          "source_section": "Statement",
+          "exact_statement": "Let $\\mathsf X$ be a finite nonempty set equipped with counting measure. For $a\\in\\{0,1\\}$, let $w_a:\\mathsf X\\to(0,\\infty)$ be a finite positive weight, define $Z_a=\\sum_{x\\in\\mathsf X}w_a(x)$, and define the probability mass function $\\pi_a(x)=w_a(x)/Z_a$. For an integer $n\\geq1$, let $X_1,\\ldots,X_n$ be independent random variables with common law $\\pi_0$. Define $R(x)=w_1(x)/w_0(x)$, $\\widehat r_n=n^{-1}\\sum_{j=1}^nR(X_j)$, and $\\chi^2(\\pi_1\\Vert\\pi_0)=\\sum_{x\\in\\mathsf X}\\pi_0(x)(\\pi_1(x)/\\pi_0(x)-1)^2$. Then\n\n$$\\mathbb E_{\\pi_0}[\\widehat r_n]=\\frac{Z_1}{Z_0},\\qquad \\frac{\\operatorname{Var}_{\\pi_0}(\\widehat r_n)}{(Z_1/Z_0)^2}=\\frac{\\chi^2(\\pi_1\\Vert\\pi_0)}{n}.$$\n\nThe estimator uses only the finite raw-weight ratios $w_1(X_j)/w_0(X_j)$; the partition sums define the target ratio and probability laws but are not inputs to its computation.",
+          "relevant_hypotheses_and_conventions": "Let $\\mathsf X$ be a finite nonempty set equipped with counting measure. For $a\\in\\{0,1\\}$, let $w_a:\\mathsf X\\to(0,\\infty)$ be a finite positive weight, define $Z_a=\\sum_{x\\in\\mathsf X}w_a(x)$, and define the probability mass function $\\pi_a(x)=w_a(x)/Z_a$. For an integer $n\\geq1$, let $X_1,\\ldots,X_n$ be independent random variables with common law $\\pi_0$. Define $R(x)=w_1(x)/w_0(x)$, $\\widehat r_n=n^{-1}\\sum_{j=1}^nR(X_j)$, and $\\chi^2(\\pi_1\\Vert\\pi_0)=\\sum_{x\\in\\mathsf X}\\pi_0(x)(\\pi_1(x)/\\pi_0(x)-1)^2$. Then\n\n$$\\mathbb E_{\\pi_0}[\\widehat r_n]=\\frac{Z_1}{Z_0},\\qquad \\frac{\\operatorname{Var}_{\\pi_0}(\\widehat r_n)}{(Z_1/Z_0)^2}=\\frac{\\chi^2(\\pi_1\\Vert\\pi_0)}{n}.$$\n\nThe estimator uses only the finite raw-weight ratios $w_1(X_j)/w_0(X_j)$; the partition sums define the target ratio and probability laws but are not inputs to its computation.",
+          "supplier_proof_status": "Current batch-98 draft carrier; its complete current Statement and Proof were inspected. No independent proof acceptance is inferred.",
+          "consumer_use": "Apply its exact mean and relative-variance formula to each adjacent pair of weights and each exact IID stage."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "one-stage reduction",
+          "method": "substitute K=1 in the stated product",
+          "input": "K=1, w0=(1,1), w1=(3,1), n0=2",
+          "expected": "mean=2 and relative second moment=1+1/(4*2)=9/8"
+        }
+      ]
+    },
+    "thm-csm-frontier-interval-partition-certificate": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-csm-frontier-interval-finite-partition",
+          "source_section": "Definition",
+          "quote": "Input a finite nonempty set $\\mathsf X$ with an explicit enumeration, functions $w:\\mathsf X\\to(0,\\infty)$ and $f:\\mathsf X\\to\\mathbb R$, and, for each $x\\in\\mathsf X$, rational numbers $a_x\\le b_x$ and $c_x\\le d_x$ such that $w(x)\\in W_x:=[a_x,b_x]$ and $f(x)\\in F_x:=[c_x,d_x]$. Here a closed rational input interval $[a,b]$ means $a,b\\in\\mathbb Q$ and $a\\le b$; its endpoints need not be dyadic, so before conversion it is distinct from the finite-dyadic real interval defined in def-intervals-rectangles-and-complex-balls. Choose a finite dyadic format $\\mathbb F$ as in def-dyadic-floating-point-format-and-directed-rounding, with its directed roundings. The interval assertions are certified input premises; this procedure does not derive them from energies or evaluate an exponential or logarithm.\n\nFor each input interval, convert its lower rational endpoint by directed rounding down and its upper rational endpoint by directed rounding up into $\\mathbb F$. If any conversion overflows, return unresolved-overflow and no finite enclosure claim. Using the resulting dyadic intervals and the outward-rounded operations, construct the finite expression DAG for\n\n$$\\mathcal Z=\\sum_{x\\in\\mathsf X}W_x,\\qquad \\mathcal N=\\sum_{x\\in\\mathsf X}W_xF_x.$$\n\nEvery addition and multiplication uses the outward-rounded interval operations; division is used only for a denominator interval excluding zero. If any operation returns a non-finite status, return unresolved-operation and no finite enclosure claim. Otherwise return the finite intervals $\\mathcal Z$ and $\\mathcal N$. If the lower endpoint of $\\mathcal Z$ is strictly positive, also return the outward interval quotient $\\mathcal E=\\mathcal N/\\mathcal Z$; if that endpoint is nonpositive, return unresolved-denominator and no normalized-expectation enclosure.\n\nThis is finite enumeration and can require exponentially many operations in the model size. It certifies arithmetic from supplied weight intervals; it does not certify how those intervals were obtained.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-dyadic-floating-point-format-and-directed-rounding",
+          "source_section": "Definition",
+          "quote": "An exact dyadic rational is a number $m2^q$ with integers $m,q$.\nFix integers $p\\ge2$ and $e_{\\min}\\le e_{\\max}$. Put\n$\\eta=2^{e_{\\min}-p+1}$ and\n$N_{\\max}=(2^p-1)2^{e_{\\max}-p+1}$. The finite representable set $\\mathbb F$\nconsists of zero, both signs of every normal number $k2^{e-p+1}$ with integers $e,k$ satisfying\n$e_{\\min}\\le e\\le e_{\\max}$ and $2^{p-1}\\le k<2^p$, and both signs of every\nsubnormal number $k\\eta$ with integer $k$ satisfying $1\\le k<2^{p-1}$. The smallest positive\nsubnormal is $\\eta$, the smallest positive normal is $2^{e_{\\min}}$, and the\nlargest finite magnitude is $N_{\\max}$. The extended endpoint set also contains\n$-\\infty$ and $+\\infty$ as enclosure sentinels; they are not finite machine\nnumbers.\n\nFor a real $x$ with $|x|\\le N_{\\max}$, define $\\operatorname{rd}(x)$ as the\ngreatest member of $\\mathbb F$ not exceeding $x$, and $\\operatorname{ru}(x)$ as\nthe least member of $\\mathbb F$ not less than $x$. Define\n$\\rho(x)=\\operatorname{ru}(x)-\\operatorname{rd}(x)$. Set $\\epsilon_{\\rm abs}(0)=0$.\nFor nonzero $x$ in the\nsubnormal range, define the absolute-error bound $\\epsilon_{\\rm abs}(x)=\\eta$;\nfor $2^e\\le |x|<2^{e+1}$ in the normal range, define\n$\\epsilon_{\\rm abs}(x)=2^{e-p+2}$. For $x>N_{\\max}$, set\n$(\\operatorname{rd}(x),\\operatorname{ru}(x))=(N_{\\max},+\\infty)$; for\n$x<-N_{\\max}$, set\n$(\\operatorname{rd}(x),\\operatorname{ru}(x))=(-\\infty,-N_{\\max})$.\nIn either overflow case set $\\epsilon_{\\rm abs}(x)=+\\infty$ and report\n`overflow`, even when the selected directed endpoint is finite.\nThe rounding procedure reports `finite`, `subnormal`, or\n`overflow`, so no relative-error assumption is implicit.\n\nAn exact rational intermediate may be converted by comparing integer\nnumerators and denominators after clearing powers of two. A directed interval\nendpoint is the resulting greatest lower or least upper member of the\nextended endpoint set $\\mathbb F\\cup\\{-\\infty,+\\infty\\}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-intervals-rectangles-and-complex-balls",
+          "source_section": "Definition",
+          "quote": "A **real interval** is a closed set $[a,b]\\subset\\mathbb R$ with finite dyadic\nendpoints $a\\le b$. Its width is $b-a$, midpoint is $(a+b)/2$, and its\nmidpoint-radius form is $m+[-r,r]$ with $m=(a+b)/2$ and $r=(b-a)/2$. The empty\nset is the status `empty`; the whole real line is `entire`. `overflow`,\n`domain-error`, `split-domain`, and `inconclusive` are computation statuses,\nnot finite intervals.\n\nA **complex rectangle** is $X+iY=\\{x+iy:x\\in X,\\ y\\in Y\\}$ for real intervals\n$X,Y$. Complex addition and multiplication use\n$(x+iy)+(u+iv)=(x+u)+i(y+v)$ and\n$(x+iy)(u+iv)=(xu-yv)+i(xv+yu)$. For $z=x+iy$, its complex modulus is\n$|z|=\\sqrt{x^2+y^2}$, and for $z\\ne0$ its reciprocal is\n$1/z=(x-iy)/(x^2+y^2)$. A\n**complex ball** $B(c,r)$ is\n$\\{z\\in\\mathbb C:|z-c|\\le r\\}$ with dyadic complex center $c$ and dyadic\n$r\\ge0$. For any two represented sets $S,T$, the inclusion order is\n$S\\sqsubseteq T$ iff $S\\subseteq T$.\n\nThe width of a complex rectangle with coordinate widths $w_X,w_Y$ is its\nEuclidean diameter $\\sqrt{w_X^2+w_Y^2}$; the width of a ball $B(c,r)$ is its\ndiameter $2r$. Width comparisons against a dyadic tolerance can be decided by\nexact rational comparisons after squaring the nonnegative quantities.\n\nThe **range** of a real or complex function $f$ on a set $S$ is\n$f(S)=\\{f(x):x\\in S\\cap\\operatorname{dom}(f)\\}$. A finite expression DAG is a\nfinite directed acyclic graph with input nodes, constant nodes, and operation\nnodes; constants are exact dyadics or are supplied with certified enclosing\nintervals. Sharing a node means the exact same intermediate value is reused.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-outward-rounded-interval-and-ball-operations",
+          "source_section": "Definition",
+          "quote": "For real intervals $X=[a,b]$ and $Y=[c,d]$, compute the displayed exact\nendpoint formulas and round the lower endpoint down and the upper endpoint up\nin the format of\n[[def-dyadic-floating-point-format-and-directed-rounding]]. If either exact\nendpoint overflows, return `overflow` with the outward extended endpoints;\nnever substitute a finite endpoint for an overflow sentinel. Addition is\n$[a+c,b+d]$, subtraction is $[a-d,b-c]$, and multiplication is\n$[\\min(ac,ad,bc,bd),\\max(ac,ad,bc,bd)]$. Division is defined only when\n$0\\notin Y$ and is $X[1/d,1/c]$, with reciprocal endpoints computed as exact\nrationals before outward rounding. Squaring is\n$[0,\\max(a^2,b^2)]$ when $0\\in X$ and\n$[\\min(a^2,b^2),\\max(a^2,b^2)]$ otherwise. Square root is defined only for\n$X\\subseteq[0,\\infty)$ and is enclosed by applying\n[[alg-dyadic-square-root-bisection]] to the exact dyadic endpoints with\nrequest $n=p$, where $p$ is the selected format precision, and rounding\noutward for storage.\n\nIf $0\\in Y$ for division, return `split-domain` with the two subdomains\n$Y\\cap(-\\infty,0)$ and $Y\\cap(0,\\infty)$, or `entire` when the caller does not\nrequest subdivision. No finite quotient interval is returned in this case.\nAn invalid square-root domain returns `domain-error` or an explicitly\nrestricted nonnegative subdomain.\n\nComplex-rectangle addition, subtraction and multiplication use\n$(x+iy)(u+iv)=(xu-yv)+i(xv+yu)$, applying the real interval operations to\neach component. For a rectangle $X+iY$ excluding $0$, define its reciprocal by\n$(X-iY)/(X^2+Y^2)$, computing the square hulls, their sum, and the\ncomponent quotient endpoint formulas as exact rationals before rounding the\nfinal reciprocal components outward. The exact denominator interval is\nstrictly positive because at least one coordinate interval excludes zero;\ndo not round it before division, since underflow could introduce zero.\nPropagate any final endpoint overflow. Division multiplies by this reciprocal.\n\nFor a ball $B(c,r)$, let $X_B=[\\Re c-r,\\Re c+r]$ and\n$Y_B=[\\Im c-r,\\Im c+r]$ be its coordinate projection intervals. For a real\ninterval $J$, let $M(J)=\\max(|\\inf J|,|\\sup J|)$ and let $d(J)=0$ if\n$0\\in J$, otherwise $d(J)=\\min(|\\inf J|,|\\sup J|)$. Put\n$M_B=M(X_B)+M(Y_B)$ and $m_B=\\max(d(X_B),d(Y_B))$. Then\n$|z|\\le M_B$ for every $z\\in B(c,r)$ and $|z|\\ge m_B$ for every such $z$.\nDefine ball addition and subtraction as\n$B(0,\\operatorname{ru}(M_{B_1}+M_{B_2}))$, multiplication as\n$B(0,\\operatorname{ru}(M_{B_1}M_{B_2}))$, and division as\n$B(0,\\operatorname{ru}(M_{B_1}/m_{B_2}))$ only when $m_{B_2}>0$. These\norigin-centered output balls are conservative but inclusion-isotone. If\n$m_{B_2}=0$, return `split-domain`, `entire`, or `inconclusive`; if a radius\noverlows, return `overflow`.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-directed-dyadic-rounding-enclosure-and-error",
+          "source_section": "Statement",
+          "quote": "For finite $x$ with $|x|\\le N_{\\max}$, the directed roundings defined in\n[[def-dyadic-floating-point-format-and-directed-rounding]] satisfy\n$\\operatorname{rd}(x)\\le x\\le\\operatorname{ru}(x)$ and each endpoint error is\nat most the stated $\\epsilon_{\\rm abs}(x)$ (with zero error when $x$ is\nrepresentable). For $x>N_{\\max}$ the pair $(N_{\\max},+\\infty)$ encloses $x$;\nfor $x<-N_{\\max}$ the pair $(-\\infty,-N_{\\max})$ encloses $x$. Overflow has\nerror bound $+\\infty$ and cannot be reported as a finite-error result.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-real-interval-arithmetic-preserves-enclosure",
+          "source_section": "Statement",
+          "quote": "For finite real intervals on which the operation is defined, each finite result of addition, subtraction, multiplication, division, and squaring in [[def-outward-rounded-interval-and-ball-operations]] contains the exact set of values of the corresponding real operation. For a finite expression directed acyclic graph using these operations, supply each input node with a finite interval containing all its admissible values and each constant node with a finite interval containing its exact value. If all operation nodes return finite interval results, the interval computed at every node contains its exact value for every admissible input assignment; in particular, the root interval contains the exact range. A non-finite status makes no finite enclosure claim.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The finite enumeration supplies one input interval for each exact weight and observable. By [F2] and [F5], when endpoint conversion is finite, rounding the lower endpoint down and upper endpoint up preserves containment of each input interval; if conversion overflows, the algorithm returns unresolved and the theorem makes no finite-enclosure claim. The partition sum and weighted sum are finite acyclic expression DAGs by [F1] and [F3].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Order the nodes of each finite DAG topologically. Each input node encloses its exact value by step 1.1. At every operation node with a finite result, [F4] gives the interval extension prescribed for that operation and [F6] proves that its value encloses the exact operation on the predecessor values. Induction over the finite node order therefore places $Z$ in $\\mathcal Z$ and $N$ in $\\mathcal N$ whenever those intervals are returned.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F6",
+            "step 1.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The exact partition sum satisfies $Z>0$ because $\\mathsf X$ is nonempty and every $w(x)>0$. If the returned lower endpoint of $\\mathcal Z$ is positive, then $0\\notin\\mathcal Z$ and [F4] defines outward interval division; applying [F6] to this final operation gives $N/Z\\in\\mathcal N/\\mathcal Z=\\mathcal E$. If the lower endpoint is nonpositive, or any operation is non-finite, [F1] returns an unresolved status and no quotient enclosure is claimed. Finally, the procedure performs finitely many conversions and finitely many operations because $\\mathsf X$ is finite, and every operation returns a finite interval or a status; hence it terminates.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F6",
+            "step 2.1",
+            "given",
+            "algebra",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement requires a finite nonempty configuration set.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/csm_boundary",
+            "reason": "Finite DAG enclosure induction proves the conditional guarantee. Nonempty X and positive exact weights give Z>0; only the positive denominator-lower-endpoint branch returns an expectation enclosure, while an unresolved branch is explicit.",
+            "item_sha256": "7198fde67c54b75899e6164b7110d95c8b475249359abfe63d714a051620fc8c",
+            "row_sha256": "636858319f934178625ebafa725ec7147b0f7265f3c7dcf10533a368e93655cf"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/csm_boundary",
+            "reason": "Finite DAG enclosure induction proves the conditional guarantee. Nonempty X and positive exact weights give Z>0; only the positive denominator-lower-endpoint branch returns an expectation enclosure, while an unresolved branch is explicit."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 leaves the normalized result unresolved when the returned denominator lower endpoint is nonpositive."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For one state the same finite DAG and termination proof apply. When finite intervals are returned they enclose the one weight and weighted observable; only a returned positive denominator lower endpoint permits normalized division. A one-state input may still return unresolved on conversion overflow or a nonpositive denominator lower endpoint, exactly as in Proof1.1 and3.1.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root adopting /root/csm_boundary",
+            "reason": "Root adopts /root/csm_boundary current case review in research/physics-non-fluid-129-2026-10-21-r2-owner-step3-boundary-current-csm_boundary/proposal.json: Existing row says a one-state sum has a finite partition enclosure without its return-branch condition. A singleton still can overflow its finite format; the source Statement correctly keeps enclosure conditional. Source reading limits and exact support remain in the sealed proposal; no independent native proof acceptance is asserted.",
+            "item_sha256": "7198fde67c54b75899e6164b7110d95c8b475249359abfe63d714a051620fc8c",
+            "row_sha256": "21a36fb0f54f7710cb31bc6fdb6f734f7d0de992997554b39c2c09846ce4aa09"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: constant observables are still enclosed by the finite weighted-sum and positive-denominator operations."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.1 route endpoint overflow and a denominator interval meeting zero to unresolved statuses."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 uses only a finite explicit enumeration and no selection from an infinite family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is conditional soundness and termination: certified input intervals propagate enclosure through a finite DAG; an expectation enclosure is returned only on the positive-denominator-lower-endpoint finite branch. These one-way return-branch guarantees are not a logical equivalence between program success and exact positivity.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root adopting /root/csm_boundary",
+            "reason": "Root adopts /root/csm_boundary current case review in research/physics-non-fluid-129-2026-10-21-r2-owner-step3-boundary-current-csm_boundary/proposal.json: This is conditional soundness and termination: certified input intervals propagate enclosure through a finite DAG; an expectation enclosure is returned only on the positive-denominator-lower-endpoint finite branch. These one-way return-branch guarantees are not a logical equivalence between program success and exact positivity. Source reading limits and exact support remain in the sealed proposal; no independent native proof acceptance is asserted.",
+            "item_sha256": "7198fde67c54b75899e6164b7110d95c8b475249359abfe63d714a051620fc8c",
+            "row_sha256": "dad5d0029c2a258c1a4f9eea00281ef7faa74bd206b0c2206b45ad3f0edf4e38"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root adopting /root/csm_boundary",
+            "reason": "Root adopts /root/csm_boundary current case review in research/physics-non-fluid-129-2026-10-21-r2-owner-step3-boundary-current-csm_boundary/proposal.json: This is conditional soundness and termination: certified input intervals propagate enclosure through a finite DAG; an expectation enclosure is returned only on the positive-denominator-lower-endpoint finite branch. These one-way return-branch guarantees are not a logical equivalence between program success and exact positivity. Source reading limits and exact support remain in the sealed proposal; no independent native proof acceptance is asserted.",
+            "item_sha256": "7198fde67c54b75899e6164b7110d95c8b475249359abfe63d714a051620fc8c",
+            "row_sha256": "dad5d0029c2a258c1a4f9eea00281ef7faa74bd206b0c2206b45ad3f0edf4e38"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Exact Z>0 follows from nonempty X and positive weights, but does not force the computed lower endpoint positive or exclude overflow. The theorem explicitly allows unresolved status with no normalized enclosure claim, so it asserts no converse that exact positivity guarantees a successful interval certificate.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root adopting /root/csm_boundary",
+            "reason": "Root adopts /root/csm_boundary current case review in research/physics-non-fluid-129-2026-10-21-r2-owner-step3-boundary-current-csm_boundary/proposal.json: Exact Z>0 follows from nonempty X and positive weights, but does not force the computed lower endpoint positive or exclude overflow. The theorem explicitly allows unresolved status with no normalized enclosure claim, so it asserts no converse that exact positivity guarantees a successful interval certificate. Source reading limits and exact support remain in the sealed proposal; no independent native proof acceptance is asserted.",
+            "item_sha256": "7198fde67c54b75899e6164b7110d95c8b475249359abfe63d714a051620fc8c",
+            "row_sha256": "494311d5b27205b0dca8303fe0c860b7c77ace9fe5e62aff7ae001630acefb98"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root adopting /root/csm_boundary",
+            "reason": "Root adopts /root/csm_boundary current case review in research/physics-non-fluid-129-2026-10-21-r2-owner-step3-boundary-current-csm_boundary/proposal.json: Exact Z>0 follows from nonempty X and positive weights, but does not force the computed lower endpoint positive or exclude overflow. The theorem explicitly allows unresolved status with no normalized enclosure claim, so it asserts no converse that exact positivity guarantees a successful interval certificate. Source reading limits and exact support remain in the sealed proposal; no independent native proof acceptance is asserted.",
+            "item_sha256": "7198fde67c54b75899e6164b7110d95c8b475249359abfe63d714a051620fc8c",
+            "row_sha256": "494311d5b27205b0dca8303fe0c860b7c77ace9fe5e62aff7ae001630acefb98"
+          }
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "alg-csm-frontier-interval-finite-partition",
+          "carrier": "items/alg-csm-frontier-interval-finite-partition.md",
+          "status": "Current batch-98 draft definition/example; its exact current interface and status were inspected. No independent acceptance is inferred.",
+          "source_section": "Definition",
+          "exact_statement": "Input a finite nonempty set $\\mathsf X$ with an explicit enumeration, functions $w:\\mathsf X\\to(0,\\infty)$ and $f:\\mathsf X\\to\\mathbb R$, and, for each $x\\in\\mathsf X$, rational numbers $a_x\\le b_x$ and $c_x\\le d_x$ such that $w(x)\\in W_x:=[a_x,b_x]$ and $f(x)\\in F_x:=[c_x,d_x]$. Here a closed rational input interval $[a,b]$ means $a,b\\in\\mathbb Q$ and $a\\le b$; its endpoints need not be dyadic, so before conversion it is distinct from the finite-dyadic real interval defined in def-intervals-rectangles-and-complex-balls. Choose a finite dyadic format $\\mathbb F$ as in def-dyadic-floating-point-format-and-directed-rounding, with its directed roundings. The interval assertions are certified input premises; this procedure does not derive them from energies or evaluate an exponential or logarithm.\n\nFor each input interval, convert its lower rational endpoint by directed rounding down and its upper rational endpoint by directed rounding up into $\\mathbb F$. If any conversion overflows, return unresolved-overflow and no finite enclosure claim. Using the resulting dyadic intervals and the outward-rounded operations, construct the finite expression DAG for\n\n$$\\mathcal Z=\\sum_{x\\in\\mathsf X}W_x,\\qquad \\mathcal N=\\sum_{x\\in\\mathsf X}W_xF_x.$$\n\nEvery addition and multiplication uses the outward-rounded interval operations; division is used only for a denominator interval excluding zero. If any operation returns a non-finite status, return unresolved-operation and no finite enclosure claim. Otherwise return the finite intervals $\\mathcal Z$ and $\\mathcal N$. If the lower endpoint of $\\mathcal Z$ is strictly positive, also return the outward interval quotient $\\mathcal E=\\mathcal N/\\mathcal Z$; if that endpoint is nonpositive, return unresolved-denominator and no normalized-expectation enclosure.\n\nThis is finite enumeration and can require exponentially many operations in the model size. It certifies arithmetic from supplied weight intervals; it does not certify how those intervals were obtained.",
+          "relevant_hypotheses_and_conventions": "Input a finite nonempty set $\\mathsf X$ with an explicit enumeration, functions $w:\\mathsf X\\to(0,\\infty)$ and $f:\\mathsf X\\to\\mathbb R$, and, for each $x\\in\\mathsf X$, rational numbers $a_x\\le b_x$ and $c_x\\le d_x$ such that $w(x)\\in W_x:=[a_x,b_x]$ and $f(x)\\in F_x:=[c_x,d_x]$. Here a closed rational input interval $[a,b]$ means $a,b\\in\\mathbb Q$ and $a\\le b$; its endpoints need not be dyadic, so before conversion it is distinct from the finite-dyadic real interval defined in def-intervals-rectangles-and-complex-balls. Choose a finite dyadic format $\\mathbb F$ as in def-dyadic-floating-point-format-and-directed-rounding, with its directed roundings. The interval assertions are certified input premises; this procedure does not derive them from energies or evaluate an exponential or logarithm.\n\nFor each input interval, convert its lower rational endpoint by directed rounding down and its upper rational endpoint by directed rounding up into $\\mathbb F$. If any conversion overflows, return unresolved-overflow and no finite enclosure claim. Using the resulting dyadic intervals and the outward-rounded operations, construct the finite expression DAG for\n\n$$\\mathcal Z=\\sum_{x\\in\\mathsf X}W_x,\\qquad \\mathcal N=\\sum_{x\\in\\mathsf X}W_xF_x.$$\n\nEvery addition and multiplication uses the outward-rounded interval operations; division is used only for a denominator interval excluding zero. If any operation returns a non-finite status, return unresolved-operation and no finite enclosure claim. Otherwise return the finite intervals $\\mathcal Z$ and $\\mathcal N$. If the lower endpoint of $\\mathcal Z$ is strictly positive, also return the outward interval quotient $\\mathcal E=\\mathcal N/\\mathcal Z$; if that endpoint is nonpositive, return unresolved-denominator and no normalized-expectation enclosure.\n\nThis is finite enumeration and can require exponentially many operations in the model size. It certifies arithmetic from supplied weight intervals; it does not certify how those intervals were obtained.",
+          "supplier_proof_status": "Current batch-98 draft definition/example; its exact current interface and status were inspected. No independent acceptance is inferred.",
+          "consumer_use": "Use its finite enumeration, endpoint conversions, expression DAG, outward operations, success condition, and unresolved branches."
+        },
+        {
+          "supplier": "def-dyadic-floating-point-format-and-directed-rounding",
+          "carrier": "items/def-dyadic-floating-point-format-and-directed-rounding.md",
+          "status": "Published imported mathematical carrier; exact current Definition was inspected, and its bytes match the local research/math-imports.json pin.",
+          "source_section": "Definition",
+          "exact_statement": "An exact dyadic rational is a number $m2^q$ with integers $m,q$.\nFix integers $p\\ge2$ and $e_{\\min}\\le e_{\\max}$. Put\n$\\eta=2^{e_{\\min}-p+1}$ and\n$N_{\\max}=(2^p-1)2^{e_{\\max}-p+1}$. The finite representable set $\\mathbb F$\nconsists of zero, both signs of every normal number $k2^{e-p+1}$ with integers $e,k$ satisfying\n$e_{\\min}\\le e\\le e_{\\max}$ and $2^{p-1}\\le k<2^p$, and both signs of every\nsubnormal number $k\\eta$ with integer $k$ satisfying $1\\le k<2^{p-1}$. The smallest positive\nsubnormal is $\\eta$, the smallest positive normal is $2^{e_{\\min}}$, and the\nlargest finite magnitude is $N_{\\max}$. The extended endpoint set also contains\n$-\\infty$ and $+\\infty$ as enclosure sentinels; they are not finite machine\nnumbers.\n\nFor a real $x$ with $|x|\\le N_{\\max}$, define $\\operatorname{rd}(x)$ as the\ngreatest member of $\\mathbb F$ not exceeding $x$, and $\\operatorname{ru}(x)$ as\nthe least member of $\\mathbb F$ not less than $x$. Define\n$\\rho(x)=\\operatorname{ru}(x)-\\operatorname{rd}(x)$. Set $\\epsilon_{\\rm abs}(0)=0$.\nFor nonzero $x$ in the\nsubnormal range, define the absolute-error bound $\\epsilon_{\\rm abs}(x)=\\eta$;\nfor $2^e\\le |x|<2^{e+1}$ in the normal range, define\n$\\epsilon_{\\rm abs}(x)=2^{e-p+2}$. For $x>N_{\\max}$, set\n$(\\operatorname{rd}(x),\\operatorname{ru}(x))=(N_{\\max},+\\infty)$; for\n$x<-N_{\\max}$, set\n$(\\operatorname{rd}(x),\\operatorname{ru}(x))=(-\\infty,-N_{\\max})$.\nIn either overflow case set $\\epsilon_{\\rm abs}(x)=+\\infty$ and report\n`overflow`, even when the selected directed endpoint is finite.\nThe rounding procedure reports `finite`, `subnormal`, or\n`overflow`, so no relative-error assumption is implicit.\n\nAn exact rational intermediate may be converted by comparing integer\nnumerators and denominators after clearing powers of two. A directed interval\nendpoint is the resulting greatest lower or least upper member of the\nextended endpoint set $\\mathbb F\\cup\\{-\\infty,+\\infty\\}$.",
+          "relevant_hypotheses_and_conventions": "An exact dyadic rational is a number $m2^q$ with integers $m,q$.\nFix integers $p\\ge2$ and $e_{\\min}\\le e_{\\max}$. Put\n$\\eta=2^{e_{\\min}-p+1}$ and\n$N_{\\max}=(2^p-1)2^{e_{\\max}-p+1}$. The finite representable set $\\mathbb F$\nconsists of zero, both signs of every normal number $k2^{e-p+1}$ with integers $e,k$ satisfying\n$e_{\\min}\\le e\\le e_{\\max}$ and $2^{p-1}\\le k<2^p$, and both signs of every\nsubnormal number $k\\eta$ with integer $k$ satisfying $1\\le k<2^{p-1}$. The smallest positive\nsubnormal is $\\eta$, the smallest positive normal is $2^{e_{\\min}}$, and the\nlargest finite magnitude is $N_{\\max}$. The extended endpoint set also contains\n$-\\infty$ and $+\\infty$ as enclosure sentinels; they are not finite machine\nnumbers.\n\nFor a real $x$ with $|x|\\le N_{\\max}$, define $\\operatorname{rd}(x)$ as the\ngreatest member of $\\mathbb F$ not exceeding $x$, and $\\operatorname{ru}(x)$ as\nthe least member of $\\mathbb F$ not less than $x$. Define\n$\\rho(x)=\\operatorname{ru}(x)-\\operatorname{rd}(x)$. Set $\\epsilon_{\\rm abs}(0)=0$.\nFor nonzero $x$ in the\nsubnormal range, define the absolute-error bound $\\epsilon_{\\rm abs}(x)=\\eta$;\nfor $2^e\\le |x|<2^{e+1}$ in the normal range, define\n$\\epsilon_{\\rm abs}(x)=2^{e-p+2}$. For $x>N_{\\max}$, set\n$(\\operatorname{rd}(x),\\operatorname{ru}(x))=(N_{\\max},+\\infty)$; for\n$x<-N_{\\max}$, set\n$(\\operatorname{rd}(x),\\operatorname{ru}(x))=(-\\infty,-N_{\\max})$.\nIn either overflow case set $\\epsilon_{\\rm abs}(x)=+\\infty$ and report\n`overflow`, even when the selected directed endpoint is finite.\nThe rounding procedure reports `finite`, `subnormal`, or\n`overflow`, so no relative-error assumption is implicit.\n\nAn exact rational intermediate may be converted by comparing integer\nnumerators and denominators after clearing powers of two. A directed interval\nendpoint is the resulting greatest lower or least upper member of the\nextended endpoint set $\\mathbb F\\cup\\{-\\infty,+\\infty\\}$.",
+          "supplier_proof_status": "Published imported mathematical carrier; exact current Definition was inspected, and its bytes match the local research/math-imports.json pin.",
+          "consumer_use": "Use its finite dyadic format and exact rational endpoint conversion by directed rounding."
+        },
+        {
+          "supplier": "def-intervals-rectangles-and-complex-balls",
+          "carrier": "items/def-intervals-rectangles-and-complex-balls.md",
+          "status": "Published imported mathematical carrier; exact current Definition was inspected, and its bytes match the local research/math-imports.json pin.",
+          "source_section": "Definition",
+          "exact_statement": "A **real interval** is a closed set $[a,b]\\subset\\mathbb R$ with finite dyadic\nendpoints $a\\le b$. Its width is $b-a$, midpoint is $(a+b)/2$, and its\nmidpoint-radius form is $m+[-r,r]$ with $m=(a+b)/2$ and $r=(b-a)/2$. The empty\nset is the status `empty`; the whole real line is `entire`. `overflow`,\n`domain-error`, `split-domain`, and `inconclusive` are computation statuses,\nnot finite intervals.\n\nA **complex rectangle** is $X+iY=\\{x+iy:x\\in X,\\ y\\in Y\\}$ for real intervals\n$X,Y$. Complex addition and multiplication use\n$(x+iy)+(u+iv)=(x+u)+i(y+v)$ and\n$(x+iy)(u+iv)=(xu-yv)+i(xv+yu)$. For $z=x+iy$, its complex modulus is\n$|z|=\\sqrt{x^2+y^2}$, and for $z\\ne0$ its reciprocal is\n$1/z=(x-iy)/(x^2+y^2)$. A\n**complex ball** $B(c,r)$ is\n$\\{z\\in\\mathbb C:|z-c|\\le r\\}$ with dyadic complex center $c$ and dyadic\n$r\\ge0$. For any two represented sets $S,T$, the inclusion order is\n$S\\sqsubseteq T$ iff $S\\subseteq T$.\n\nThe width of a complex rectangle with coordinate widths $w_X,w_Y$ is its\nEuclidean diameter $\\sqrt{w_X^2+w_Y^2}$; the width of a ball $B(c,r)$ is its\ndiameter $2r$. Width comparisons against a dyadic tolerance can be decided by\nexact rational comparisons after squaring the nonnegative quantities.\n\nThe **range** of a real or complex function $f$ on a set $S$ is\n$f(S)=\\{f(x):x\\in S\\cap\\operatorname{dom}(f)\\}$. A finite expression DAG is a\nfinite directed acyclic graph with input nodes, constant nodes, and operation\nnodes; constants are exact dyadics or are supplied with certified enclosing\nintervals. Sharing a node means the exact same intermediate value is reused.",
+          "relevant_hypotheses_and_conventions": "A **real interval** is a closed set $[a,b]\\subset\\mathbb R$ with finite dyadic\nendpoints $a\\le b$. Its width is $b-a$, midpoint is $(a+b)/2$, and its\nmidpoint-radius form is $m+[-r,r]$ with $m=(a+b)/2$ and $r=(b-a)/2$. The empty\nset is the status `empty`; the whole real line is `entire`. `overflow`,\n`domain-error`, `split-domain`, and `inconclusive` are computation statuses,\nnot finite intervals.\n\nA **complex rectangle** is $X+iY=\\{x+iy:x\\in X,\\ y\\in Y\\}$ for real intervals\n$X,Y$. Complex addition and multiplication use\n$(x+iy)+(u+iv)=(x+u)+i(y+v)$ and\n$(x+iy)(u+iv)=(xu-yv)+i(xv+yu)$. For $z=x+iy$, its complex modulus is\n$|z|=\\sqrt{x^2+y^2}$, and for $z\\ne0$ its reciprocal is\n$1/z=(x-iy)/(x^2+y^2)$. A\n**complex ball** $B(c,r)$ is\n$\\{z\\in\\mathbb C:|z-c|\\le r\\}$ with dyadic complex center $c$ and dyadic\n$r\\ge0$. For any two represented sets $S,T$, the inclusion order is\n$S\\sqsubseteq T$ iff $S\\subseteq T$.\n\nThe width of a complex rectangle with coordinate widths $w_X,w_Y$ is its\nEuclidean diameter $\\sqrt{w_X^2+w_Y^2}$; the width of a ball $B(c,r)$ is its\ndiameter $2r$. Width comparisons against a dyadic tolerance can be decided by\nexact rational comparisons after squaring the nonnegative quantities.\n\nThe **range** of a real or complex function $f$ on a set $S$ is\n$f(S)=\\{f(x):x\\in S\\cap\\operatorname{dom}(f)\\}$. A finite expression DAG is a\nfinite directed acyclic graph with input nodes, constant nodes, and operation\nnodes; constants are exact dyadics or are supplied with certified enclosing\nintervals. Sharing a node means the exact same intermediate value is reused.",
+          "supplier_proof_status": "Published imported mathematical carrier; exact current Definition was inspected, and its bytes match the local research/math-imports.json pin.",
+          "consumer_use": "Use its finite interval and acyclic expression-DAG conventions."
+        },
+        {
+          "supplier": "def-outward-rounded-interval-and-ball-operations",
+          "carrier": "items/def-outward-rounded-interval-and-ball-operations.md",
+          "status": "Published imported mathematical carrier; exact current Definition was inspected, and its bytes match the local research/math-imports.json pin.",
+          "source_section": "Definition",
+          "exact_statement": "For real intervals $X=[a,b]$ and $Y=[c,d]$, compute the displayed exact\nendpoint formulas and round the lower endpoint down and the upper endpoint up\nin the format of\n[[def-dyadic-floating-point-format-and-directed-rounding]]. If either exact\nendpoint overflows, return `overflow` with the outward extended endpoints;\nnever substitute a finite endpoint for an overflow sentinel. Addition is\n$[a+c,b+d]$, subtraction is $[a-d,b-c]$, and multiplication is\n$[\\min(ac,ad,bc,bd),\\max(ac,ad,bc,bd)]$. Division is defined only when\n$0\\notin Y$ and is $X[1/d,1/c]$, with reciprocal endpoints computed as exact\nrationals before outward rounding. Squaring is\n$[0,\\max(a^2,b^2)]$ when $0\\in X$ and\n$[\\min(a^2,b^2),\\max(a^2,b^2)]$ otherwise. Square root is defined only for\n$X\\subseteq[0,\\infty)$ and is enclosed by applying\n[[alg-dyadic-square-root-bisection]] to the exact dyadic endpoints with\nrequest $n=p$, where $p$ is the selected format precision, and rounding\noutward for storage.\n\nIf $0\\in Y$ for division, return `split-domain` with the two subdomains\n$Y\\cap(-\\infty,0)$ and $Y\\cap(0,\\infty)$, or `entire` when the caller does not\nrequest subdivision. No finite quotient interval is returned in this case.\nAn invalid square-root domain returns `domain-error` or an explicitly\nrestricted nonnegative subdomain.\n\nComplex-rectangle addition, subtraction and multiplication use\n$(x+iy)(u+iv)=(xu-yv)+i(xv+yu)$, applying the real interval operations to\neach component. For a rectangle $X+iY$ excluding $0$, define its reciprocal by\n$(X-iY)/(X^2+Y^2)$, computing the square hulls, their sum, and the\ncomponent quotient endpoint formulas as exact rationals before rounding the\nfinal reciprocal components outward. The exact denominator interval is\nstrictly positive because at least one coordinate interval excludes zero;\ndo not round it before division, since underflow could introduce zero.\nPropagate any final endpoint overflow. Division multiplies by this reciprocal.\n\nFor a ball $B(c,r)$, let $X_B=[\\Re c-r,\\Re c+r]$ and\n$Y_B=[\\Im c-r,\\Im c+r]$ be its coordinate projection intervals. For a real\ninterval $J$, let $M(J)=\\max(|\\inf J|,|\\sup J|)$ and let $d(J)=0$ if\n$0\\in J$, otherwise $d(J)=\\min(|\\inf J|,|\\sup J|)$. Put\n$M_B=M(X_B)+M(Y_B)$ and $m_B=\\max(d(X_B),d(Y_B))$. Then\n$|z|\\le M_B$ for every $z\\in B(c,r)$ and $|z|\\ge m_B$ for every such $z$.\nDefine ball addition and subtraction as\n$B(0,\\operatorname{ru}(M_{B_1}+M_{B_2}))$, multiplication as\n$B(0,\\operatorname{ru}(M_{B_1}M_{B_2}))$, and division as\n$B(0,\\operatorname{ru}(M_{B_1}/m_{B_2}))$ only when $m_{B_2}>0$. These\norigin-centered output balls are conservative but inclusion-isotone. If\n$m_{B_2}=0$, return `split-domain`, `entire`, or `inconclusive`; if a radius\noverlows, return `overflow`.",
+          "relevant_hypotheses_and_conventions": "For real intervals $X=[a,b]$ and $Y=[c,d]$, compute the displayed exact\nendpoint formulas and round the lower endpoint down and the upper endpoint up\nin the format of\n[[def-dyadic-floating-point-format-and-directed-rounding]]. If either exact\nendpoint overflows, return `overflow` with the outward extended endpoints;\nnever substitute a finite endpoint for an overflow sentinel. Addition is\n$[a+c,b+d]$, subtraction is $[a-d,b-c]$, and multiplication is\n$[\\min(ac,ad,bc,bd),\\max(ac,ad,bc,bd)]$. Division is defined only when\n$0\\notin Y$ and is $X[1/d,1/c]$, with reciprocal endpoints computed as exact\nrationals before outward rounding. Squaring is\n$[0,\\max(a^2,b^2)]$ when $0\\in X$ and\n$[\\min(a^2,b^2),\\max(a^2,b^2)]$ otherwise. Square root is defined only for\n$X\\subseteq[0,\\infty)$ and is enclosed by applying\n[[alg-dyadic-square-root-bisection]] to the exact dyadic endpoints with\nrequest $n=p$, where $p$ is the selected format precision, and rounding\noutward for storage.\n\nIf $0\\in Y$ for division, return `split-domain` with the two subdomains\n$Y\\cap(-\\infty,0)$ and $Y\\cap(0,\\infty)$, or `entire` when the caller does not\nrequest subdivision. No finite quotient interval is returned in this case.\nAn invalid square-root domain returns `domain-error` or an explicitly\nrestricted nonnegative subdomain.\n\nComplex-rectangle addition, subtraction and multiplication use\n$(x+iy)(u+iv)=(xu-yv)+i(xv+yu)$, applying the real interval operations to\neach component. For a rectangle $X+iY$ excluding $0$, define its reciprocal by\n$(X-iY)/(X^2+Y^2)$, computing the square hulls, their sum, and the\ncomponent quotient endpoint formulas as exact rationals before rounding the\nfinal reciprocal components outward. The exact denominator interval is\nstrictly positive because at least one coordinate interval excludes zero;\ndo not round it before division, since underflow could introduce zero.\nPropagate any final endpoint overflow. Division multiplies by this reciprocal.\n\nFor a ball $B(c,r)$, let $X_B=[\\Re c-r,\\Re c+r]$ and\n$Y_B=[\\Im c-r,\\Im c+r]$ be its coordinate projection intervals. For a real\ninterval $J$, let $M(J)=\\max(|\\inf J|,|\\sup J|)$ and let $d(J)=0$ if\n$0\\in J$, otherwise $d(J)=\\min(|\\inf J|,|\\sup J|)$. Put\n$M_B=M(X_B)+M(Y_B)$ and $m_B=\\max(d(X_B),d(Y_B))$. Then\n$|z|\\le M_B$ for every $z\\in B(c,r)$ and $|z|\\ge m_B$ for every such $z$.\nDefine ball addition and subtraction as\n$B(0,\\operatorname{ru}(M_{B_1}+M_{B_2}))$, multiplication as\n$B(0,\\operatorname{ru}(M_{B_1}M_{B_2}))$, and division as\n$B(0,\\operatorname{ru}(M_{B_1}/m_{B_2}))$ only when $m_{B_2}>0$. These\norigin-centered output balls are conservative but inclusion-isotone. If\n$m_{B_2}=0$, return `split-domain`, `entire`, or `inconclusive`; if a radius\noverlows, return `overflow`.",
+          "supplier_proof_status": "Published imported mathematical carrier; exact current Definition was inspected, and its bytes match the local research/math-imports.json pin.",
+          "consumer_use": "Use its exact interval endpoint hulls, outward rounding, and division-domain rule."
+        },
+        {
+          "supplier": "lem-directed-dyadic-rounding-enclosure-and-error",
+          "carrier": "items/lem-directed-dyadic-rounding-enclosure-and-error.md",
+          "status": "Published imported mathematical carrier; complete current Statement and Proof were inspected, and its bytes match the local research/math-imports.json pin.",
+          "source_section": "Statement",
+          "exact_statement": "For finite $x$ with $|x|\\le N_{\\max}$, the directed roundings defined in\n[[def-dyadic-floating-point-format-and-directed-rounding]] satisfy\n$\\operatorname{rd}(x)\\le x\\le\\operatorname{ru}(x)$ and each endpoint error is\nat most the stated $\\epsilon_{\\rm abs}(x)$ (with zero error when $x$ is\nrepresentable). For $x>N_{\\max}$ the pair $(N_{\\max},+\\infty)$ encloses $x$;\nfor $x<-N_{\\max}$ the pair $(-\\infty,-N_{\\max})$ encloses $x$. Overflow has\nerror bound $+\\infty$ and cannot be reported as a finite-error result.",
+          "relevant_hypotheses_and_conventions": "For finite $x$ with $|x|\\le N_{\\max}$, the directed roundings defined in\n[[def-dyadic-floating-point-format-and-directed-rounding]] satisfy\n$\\operatorname{rd}(x)\\le x\\le\\operatorname{ru}(x)$ and each endpoint error is\nat most the stated $\\epsilon_{\\rm abs}(x)$ (with zero error when $x$ is\nrepresentable). For $x>N_{\\max}$ the pair $(N_{\\max},+\\infty)$ encloses $x$;\nfor $x<-N_{\\max}$ the pair $(-\\infty,-N_{\\max})$ encloses $x$. Overflow has\nerror bound $+\\infty$ and cannot be reported as a finite-error result.",
+          "supplier_proof_status": "Published imported mathematical carrier; complete current Statement and Proof were inspected, and its bytes match the local research/math-imports.json pin.",
+          "consumer_use": "Use its guarantee that finite down/up endpoint roundings enclose the exact rational endpoints and its no-finite-claim overflow branch."
+        },
+        {
+          "supplier": "lem-real-interval-arithmetic-preserves-enclosure",
+          "carrier": "items/lem-real-interval-arithmetic-preserves-enclosure.md",
+          "status": "Published imported mathematical carrier; complete current Statement and Proof were inspected, and its bytes match the local research/math-imports.json pin.",
+          "source_section": "Statement",
+          "exact_statement": "For finite real intervals on which the operation is defined, each finite result of addition, subtraction, multiplication, division, and squaring in [[def-outward-rounded-interval-and-ball-operations]] contains the exact set of values of the corresponding real operation. For a finite expression directed acyclic graph using these operations, supply each input node with a finite interval containing all its admissible values and each constant node with a finite interval containing its exact value. If all operation nodes return finite interval results, the interval computed at every node contains its exact value for every admissible input assignment; in particular, the root interval contains the exact range. A non-finite status makes no finite enclosure claim.",
+          "relevant_hypotheses_and_conventions": "For finite real intervals on which the operation is defined, each finite result of addition, subtraction, multiplication, division, and squaring in [[def-outward-rounded-interval-and-ball-operations]] contains the exact set of values of the corresponding real operation. For a finite expression directed acyclic graph using these operations, supply each input node with a finite interval containing all its admissible values and each constant node with a finite interval containing its exact value. If all operation nodes return finite interval results, the interval computed at every node contains its exact value for every admissible input assignment; in particular, the root interval contains the exact range. A non-finite status makes no finite enclosure claim.",
+          "supplier_proof_status": "Published imported mathematical carrier; complete current Statement and Proof were inspected, and its bytes match the local research/math-imports.json pin.",
+          "consumer_use": "Use its finite-DAG induction that every finite computed interval encloses the exact node value."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "finite exact intervals",
+          "method": "exact enumeration with dyadic endpoints",
+          "input": "X={a,b}, w=(1,2), f=(-1,2), all point intervals exact",
+          "expected": "Z=[3,3], N=[3,3], E=[1,1]"
+        },
+        {
+          "name": "unresolved denominator",
+          "method": "follow the algorithm branch",
+          "input": "positive exact weights with supplied enclosures W_a=[0,1], W_b=[0,2]",
+          "expected": "partition lower endpoint is zero; return unresolved-denominator and no E interval"
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-98",
+        "notes": "Independently read all three current proof steps, algorithm Definition, five imported interval suppliers, reader report and empty findings, refuter report and empty flagged array. Rational input enclosures convert outward into the finite dyadic format; subnormal conversion is allowed, both overflow signs produce unresolved. Finite topological induction applies to sums and signed products, including repeated nodes; constant zero and singleton enumeration need no division. Nonempty X and strictly positive exact weights imply Z>0, but not a positive enclosure lower bound: zero or negative lower endpoints correctly give unresolved-denominator. Only a finite successful final quotient with lower denominator endpoint >0 encloses N/Z; quotient overflow is unresolved-operation. Termination follows from finite enumeration and rational endpoint formulas with finite representable comparisons. No exponential evaluation, empirical premise, infinite choice or iff claim is used. External numerical references provide context; exact local definitions and enclosure lemmas supply the proof. Statement unchanged; only supplier quotation layout refreshed. No remaining mathematical defect found."
+      }
+    },
+    "ex-csm-frontier-product-overlap-explosion": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-csm-frontier-partition-ratio-overlap",
+          "source_section": "Statement",
+          "quote": "Let $\\mathsf X$ be a finite nonempty set equipped with counting measure. For $a\\in\\{0,1\\}$, let $w_a:\\mathsf X\\to(0,\\infty)$ be a finite positive weight, define $Z_a=\\sum_{x\\in\\mathsf X}w_a(x)$, and define the probability mass function $\\pi_a(x)=w_a(x)/Z_a$. For an integer $n\\geq1$, let $X_1,\\ldots,X_n$ be independent random variables with common law $\\pi_0$. Define $R(x)=w_1(x)/w_0(x)$, $\\widehat r_n=n^{-1}\\sum_{j=1}^nR(X_j)$, and $\\chi^2(\\pi_1\\Vert\\pi_0)=\\sum_{x\\in\\mathsf X}\\pi_0(x)(\\pi_1(x)/\\pi_0(x)-1)^2$. Then\n\n$$\\mathbb E_{\\pi_0}[\\widehat r_n]=\\frac{Z_1}{Z_0},\\qquad \\frac{\\operatorname{Var}_{\\pi_0}(\\widehat r_n)}{(Z_1/Z_0)^2}=\\frac{\\chi^2(\\pi_1\\Vert\\pi_0)}{n}.$$\n\nThe estimator uses only the finite raw-weight ratios $w_1(X_j)/w_0(X_j)$; the partition sums define the target ratio and probability laws but are not inputs to its computation.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "For $x=(x_1,\\ldots,x_m)\\in\\mathsf S^m$, the likelihood ratio is $\\pi_1^{(m)}(x)/\\pi_0^{(m)}(x)=\\prod_{j=1}^m p_1(x_j)/p_0(x_j)$. Factoring the finite sum gives $1+\\chi^2(\\pi_1^{(m)}\\Vert\\pi_0^{(m)})=\\sum_x\\pi_0^{(m)}(x)(\\pi_1^{(m)}(x)/\\pi_0^{(m)}(x))^2=\\left(\\sum_{s\\in\\mathsf S}p_0(s)(p_1(s)/p_0(s))^2\\right)^m=(1+\\chi^2(p_1\\Vert p_0))^m$.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Because $p_0\\ne p_1$ and $p_0(s)>0$ at every $s$, at least one term in $\\sum_s p_0(s)(p_1(s)/p_0(s)-1)^2$ is positive, so $\\rho:=1+\\chi^2(p_1\\Vert p_0)>1$. Applying [F1] with $N$ draws gives relative variance $(\\rho^m-1)/N$; the bound $(\\rho^m-1)/N\\leq\\varepsilon$ forces $N\\geq(\\rho^m-1)/\\varepsilon$. This establishes exponential growth for the stated one-stage estimator and makes no cost claim for bridge or other methods.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example requires a finite nonempty alphabet."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The Example assumes p0 and p1 are distinct, so their chi-square divergence is positive."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: m=1 reduces the product identity to the one-site chi-square definition."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The Example excludes identical one-site laws."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: p0 and p1 are strictly positive, so every likelihood ratio is finite and defined."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 factors a finite sum over the explicitly finite alphabet; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example asserts no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example asserts no if-and-only-if claim."
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "thm-csm-frontier-partition-ratio-overlap",
+          "carrier": "items/thm-csm-frontier-partition-ratio-overlap.md",
+          "status": "Current batch-98 draft carrier; its complete current Statement and Proof were inspected. No independent proof acceptance is inferred.",
+          "source_section": "Statement",
+          "exact_statement": "Let $\\mathsf X$ be a finite nonempty set equipped with counting measure. For $a\\in\\{0,1\\}$, let $w_a:\\mathsf X\\to(0,\\infty)$ be a finite positive weight, define $Z_a=\\sum_{x\\in\\mathsf X}w_a(x)$, and define the probability mass function $\\pi_a(x)=w_a(x)/Z_a$. For an integer $n\\geq1$, let $X_1,\\ldots,X_n$ be independent random variables with common law $\\pi_0$. Define $R(x)=w_1(x)/w_0(x)$, $\\widehat r_n=n^{-1}\\sum_{j=1}^nR(X_j)$, and $\\chi^2(\\pi_1\\Vert\\pi_0)=\\sum_{x\\in\\mathsf X}\\pi_0(x)(\\pi_1(x)/\\pi_0(x)-1)^2$. Then\n\n$$\\mathbb E_{\\pi_0}[\\widehat r_n]=\\frac{Z_1}{Z_0},\\qquad \\frac{\\operatorname{Var}_{\\pi_0}(\\widehat r_n)}{(Z_1/Z_0)^2}=\\frac{\\chi^2(\\pi_1\\Vert\\pi_0)}{n}.$$\n\nThe estimator uses only the finite raw-weight ratios $w_1(X_j)/w_0(X_j)$; the partition sums define the target ratio and probability laws but are not inputs to its computation.",
+          "relevant_hypotheses_and_conventions": "Let $\\mathsf X$ be a finite nonempty set equipped with counting measure. For $a\\in\\{0,1\\}$, let $w_a:\\mathsf X\\to(0,\\infty)$ be a finite positive weight, define $Z_a=\\sum_{x\\in\\mathsf X}w_a(x)$, and define the probability mass function $\\pi_a(x)=w_a(x)/Z_a$. For an integer $n\\geq1$, let $X_1,\\ldots,X_n$ be independent random variables with common law $\\pi_0$. Define $R(x)=w_1(x)/w_0(x)$, $\\widehat r_n=n^{-1}\\sum_{j=1}^nR(X_j)$, and $\\chi^2(\\pi_1\\Vert\\pi_0)=\\sum_{x\\in\\mathsf X}\\pi_0(x)(\\pi_1(x)/\\pi_0(x)-1)^2$. Then\n\n$$\\mathbb E_{\\pi_0}[\\widehat r_n]=\\frac{Z_1}{Z_0},\\qquad \\frac{\\operatorname{Var}_{\\pi_0}(\\widehat r_n)}{(Z_1/Z_0)^2}=\\frac{\\chi^2(\\pi_1\\Vert\\pi_0)}{n}.$$\n\nThe estimator uses only the finite raw-weight ratios $w_1(X_j)/w_0(X_j)$; the partition sums define the target ratio and probability laws but are not inputs to its computation.",
+          "supplier_proof_status": "Current batch-98 draft carrier; its complete current Statement and Proof were inspected. No independent proof acceptance is inferred.",
+          "consumer_use": "Use its relative-variance identity to translate the product chi-square formula into the one-stage sample-size requirement."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "binary Bernoulli product",
+          "method": "finite exact product sum",
+          "input": "p0=(1/2,1/2), p1=(3/4,1/4), m=2, N=1, epsilon=1/4",
+          "expected": "one-site chi-square=1/4; product chi-square=9/16; N must be at least 9/4, hence integer N>=3"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,85 @@
+--- before/items/thm-nrqmx-finite-mode-bogoliubov.md
++++ final/items/thm-nrqmx-finite-mode-bogoliubov.md
+@@ -33,15 +33,24 @@
+ where $^*$ is conjugate transpose and $^T$ is transpose without conjugation.
+ On the finite Hermite core define
+ $$a'_j=\sum_k(U_{jk}a_k+V_{jk}a_k^*).$$
++Let $R=(Q_1,P_1,\ldots,Q_r,P_r)^T$, $J$ and $W(z)$ have the
++interleaved conventions of the definition. Define the real permutation
++matrix $\Pi$ by
++$$\Pi(x_1,y_1,\ldots,x_r,y_r)^T=(x_1,\ldots,x_r,y_1,\ldots,y_r)^T,$$
++and, writing $Q=(Q_1,\ldots,Q_r)^T$ and $P=(P_1,\ldots,P_r)^T$, set
++$$R_g=\Pi R=\begin{pmatrix}Q\\P\end{pmatrix},\qquad J_0=\Pi J\Pi^T=\begin{pmatrix}0&I_r\\-I_r&0\end{pmatrix},\qquad W_g(w)=W(\Pi^Tw).$$
+ Then the $a'_j$ satisfy $[a'_j,(a'_k)^*]=\delta_{jk}I$ and
+-$[a'_j,a'_k]=0$ on that core. The real matrix
++$[a'_j,a'_k]=0$ on the finite Hermite core. The real matrix
+ $$S_g=\begin{pmatrix}\operatorname{Re}(U+V)&-\operatorname{Im}(U-V)\\ \operatorname{Im}(U+V)&\operatorname{Re}(U-V)\end{pmatrix}$$
+-is symplectic in grouped coordinate order $(Q_1,\ldots,Q_r,P_1,\ldots,P_r)$.
++is symplectic in grouped coordinate order: $S_g^TJ_0S_g=J_0$.
+ There is a unitary $M$ on finite-mode Fock, obtained by transporting an
+ individual finite symplectic implementer through the Fock–Schrödinger
+-unitary, such that $M^*aM=a'$ on the transported Schwartz core and
+-$M^*W(z)M=W(S_g^Tz)$ in grouped Weyl-label order. The transformed vacuum
+-$M\Omega$ has finite mean number
++unitary, such that $M^*aM=a'$ and $M^*R_gM=S_gR_g$ on the transported
++Schwartz core, and
++$$M^*W_g(w)M=W_g(S_g^Tw)\qquad(w\in\mathbb R^{2r}).$$
++Equivalently, with the interleaved matrix $S_i=\Pi^TS_g\Pi$,
++$M^*W(z)M=W(S_i^Tz)$ for every interleaved label $z$.
++The transformed vacuum $M\Omega$ has finite mean number
+ $$\sum_j\|a_jM\Omega\|^2=\operatorname{tr}(VV^*).$$
+ No infinite-mode implementability assertion is made.
+ 
+@@ -63,11 +72,13 @@
+ [F2] With $Q_j=\sqrt{\hbar/2}(a_j+a_j^*)$ and
+ $P_j=-i\sqrt{\hbar/2}(a_j-a_j^*)$, the matrix $S_g$ is the unique real
+ coefficient matrix satisfying
+-$$a'=\frac{(S_gR)_Q+i(S_gR)_P}{\sqrt{2\hbar}}$$
+-on that core; this follows by separating real and imaginary parts.
++$$a'=\frac{(S_gR_g)_Q+i(S_gR_g)_P}{\sqrt{2\hbar}}$$
++on that core, where $Q=(Q_1,\ldots,Q_r)^T$, $P=(P_1,\ldots,P_r)^T$
++and the subscripts denote the first and last $r$ grouped components; this
++follows by separating real and imaginary parts.
+ 
+ [F3] Every interleaved finite symplectic matrix $S_i$ has an implementer
+-$M^*W_i(z)M=W_i(S_i^Tz)$ and $M^*R_iM=S_iR_i$ on the transported Schwartz
++$M^*W(z)M=W(S_i^Tz)$ and $M^*RM=S_iR$ on the transported Schwartz
+ core; conjugating by the fixed interleaved-to-grouped permutation gives the
+ same covariance for grouped matrices
+ ([[thm-nrqmx-finite-metaplectic-construction]]).
+@@ -89,19 +100,25 @@
+ 2.1 Substitute $a=(Q+iP)/\sqrt{2\hbar}$ and
+ $a^*=(Q-iP)/\sqrt{2\hbar}$ into $Ua+Va^*$. Its real quadrature part is
+ $\operatorname{Re}(U+V)Q-\operatorname{Im}(U-V)P$ and its imaginary part is
+-$\operatorname{Im}(U+V)Q+\operatorname{Re}(U-V)P$. This is exactly $S_gR$.
++$\operatorname{Im}(U+V)Q+\operatorname{Re}(U-V)P$. These two blocks form $S_gR_g$.
+ Since step 1.1 gives the canonical commutators for these transformed
+ quadratures, bilinearity yields
+-$$[ (S_gR)_j,(S_gR)_k]=i\hbar(S_gJ_0S_g^T)_{jk} =i\hbar(J_0)_{jk}.$$
+-As $\hbar>0$, this matrix identity implies $S_gJ_0S_g^T=J_0$, hence
+-$S_g$ is invertible and symplectic. [F1, F2, step 1.1, algebra]
++$$[ (S_gR_g)_j,(S_gR_g)_k]=i\hbar(S_gJ_0S_g^T)_{jk} =i\hbar(J_0)_{jk}.$$
++Here $[R_{g,j},R_{g,k}]=i\hbar(J_0)_{jk}$ follows from
++$R_g=\Pi R$ and $J_0=\Pi J\Pi^T$. Since $\hbar>0$, the displayed identity
++implies $S_gJ_0S_g^T=J_0$. Taking determinants shows $(\det S_g)^2=1$,
++so $S_g$ is invertible. Inverting this identity and using $J_0^{-1}=-J_0$
++gives $S_g^TJ_0S_g=J_0$, as required. [F1, F2, step 1.1, algebra]
+ 
+-3.1 Let $P$ be the fixed permutation from interleaved to grouped coordinates
+-and set $S_i=P^TS_gP$. The symplectic identity for $S_g$ makes $S_i$
+-symplectic in interleaved order. Apply [F3] to $S_i$ and transport its
+-unitary to Fock by [F4]. Converting by $P$ gives
+-$M^*W_g(w)M=W_g(S_g^Tw)$ on every label and $M^*R_gM=S_gR_g$ on the
+-transported Schwartz core. The Weyl covariance holds on all Fock space
++3.1 Use the permutation $\Pi$ defined in the Statement and set
++$S_i=\Pi^TS_g\Pi$. Since $\Pi^T\Pi=I$ and $J_0=\Pi J\Pi^T$, step 2.1
++gives $S_i^TJS_i=J$, so $S_i$ is symplectic in interleaved order. Apply [F3] to $S_i$ and transport its
++unitary to Fock by [F4]. For every grouped label $w$, the definition of
++$W_g$ gives
++$$M^*W_g(w)M=W(S_i^T\Pi^Tw)=W(\Pi^TS_g^Tw)=W_g(S_g^Tw).$$
++Likewise, on the transported Schwartz core,
++$$M^*R_gM=\Pi M^*RM=\Pi S_iR=S_gR_g.$$
++The Weyl covariance holds on all Fock space
+ because each Weyl operator and the implementer are bounded. The complex
+ recombination in step 2.1 gives
+ $M^*aM=a'$. Each generator in [F3] preserves Schwartz space, so $M\Omega$

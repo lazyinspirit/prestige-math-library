@@ -1,0 +1,1292 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-nrqmx-finite-hermitian-matrix-exponential",
+    "thm-nrqmx-finite-floquet-normal-form",
+    "thm-nrqmx-floquet-sambe-domain",
+    "thm-nrqmx-finite-level-duhamel-error",
+    "thm-nrqmx-floquet-galerkin-correctness",
+    "ex-nrqmx-driven-two-level-floquet",
+    "cex-nrqmx-quasienergy-no-order"
+  ],
+  "contracts": {
+    "lem-nrqmx-finite-hermitian-matrix-exponential": {
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes d≥1, so the zero-dimensional space is excluded."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 gives E_0(t)=I and step 3.1 gives derivative zero for A=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 reduces a one-dimensional Hermitian matrix to a real scalar exponential."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 is basis independent on a repeated eigenspace."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 includes t=0 and step 3.1 differentiates for every real t; ℏ>0 is explicit in the Statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and step 1.1 use only the finite-dimensional spectral theorem; no arbitrary choice principle is assumed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma states direct properties, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma states direct properties, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Take d=1 and A=[a] with a real.",
+          "result": "E_A(t)=[exp(-ita/ℏ)] is unitary, its group law is scalar exponential addition, and its derivative is (-ia/ℏ)E_A(t).",
+          "verifies": "Steps 1.1, 2.1, and 3.1."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-55",
+        "notes": "Independently checked Definition convergence using complete finite matrix space; spectral theorem hypotheses hold for Hermitian hence normal A. First-linear inner product gives real eigenvalues. Series action on each finite eigenbasis vector, modulus-one phases, scalar addition and chain rule give unitarity, group law and norm derivative. Repeated/zero eigenvalues, d=1, t=s=0 and negative times satisfy the same argument. No infinite spectral sum or extra choice is used; reader/refuter supplied no findings. Exact scalar and spectral supplier statements were opened."
+      },
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-self-adjoint-and-normal-endomorphism",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner product space and let\n$T:V\\to V$ be an endomorphism. The endomorphism $T$ is **self-adjoint** when\n\n$$T^*=T,$$\n\nand **normal** when\n\n$$TT^*=T^*T,$$\n\nwhere $T^*$ is the adjoint from\n[[def-adjoint-of-a-linear-map-between-inner-product-spaces]].\n\nEvery self-adjoint endomorphism is normal, because $TT^*=T^2=T^*T$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional complex inner product space and let $T:V\\to V$\nbe linear. Then $T$ is normal if and only if $V$ has an orthonormal basis\nconsisting of eigenvectors of $T$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-nrqmx-finite-hermitian-matrix-exponential",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge1$. Regard $\\mathbb C^d$ as column vectors with the standard complex inner product\n$$\\langle x,y\\rangle:=\\sum_{j=1}^d x_j\\overline{y_j},$$\nlinear in the first argument, and induced norm $\\|x\\|=(\\sum_{j=1}^d|x_j|^2)^{1/2}$. A matrix $A=(a_{ij})\\in M_d(\\mathbb C)$ acts by $(Ax)_i=\\sum_{j=1}^d a_{ij}x_j$, and its adjoint for this inner product is $A^*=\\overline A^{\\mathsf T}$.\n\nFor $A\\in M_d(\\mathbb C)$ and $z\\in\\mathbb C$, define the finite-dimensional matrix exponential by\n$$e^{zA}:=\\sum_{k=0}^{\\infty}\\frac{z^kA^k}{k!},\\qquad A^0=I_d.$$\nThe scalar exponential convention is $\\exp w=\\sum_{k\\ge0}w^k/k!$.\n\nEvery matrix $B=(b_{ij})\\in M_d(\\mathbb C)$ is bounded on $\\mathbb C^d$: since $|x_j|\\le\\|x\\|$, one has\n$$\\|Bx\\|^2\\le\\sum_{i=1}^d\\left(\\sum_{j=1}^d|b_{ij}|\\right)^2\\|x\\|^2.$$\nThus its operator norm is defined by the unit-ball supremum in the operator-norm definition listed in Definition references. For $B,C\\in M_d(\\mathbb C)$ and $\\|x\\|\\le1$, the operator-norm bound gives $\\|BCx\\|\\le\\|B\\|\\|Cx\\|\\le\\|B\\|\\|C\\|$; taking the supremum proves $\\|BC\\|\\le\\|B\\|\\|C\\|$. Since $d\\ge1$, the coordinate vector $e_1$ with first entry $1$ and other entries $0$ is a unit vector, so $\\|I_d\\|=1$. Homogeneity and the triangle inequality follow from the unit-ball supremum, and $\\|B\\|=0$ forces $Be_j=0$ for each coordinate vector $e_j$ (with entry $1$ at $j$ and $0$ elsewhere), hence $B=0$. Therefore $M_d(\\mathbb C)$ with this operator norm is a normed $\\mathbb C$-vector space; the matrices $E_{ij}$ with entry $1$ at $(i,j)$ and $0$ elsewhere form a basis of size $d^2$.\n\nCompleteness of the complex plane and finite-dimensional norm equivalence (the two theorems in Definition references) make $M_d(\\mathbb C)$ complete in this operator norm. By induction and submultiplicativity, $\\|A^k\\|\\le\\|A\\|^k$ for every $k\\ge1$, while $\\|A^0\\|=1$. The scalar series $\\sum_{k\\ge0}(|z|\\|A\\|)^k/k!$ converges by the scalar exponential convergence lemma in Definition references. Hence for $m>n$,\n$$\\left\\|\\sum_{k=n+1}^{m}\\frac{z^kA^k}{k!}\\right\\|\\le\\sum_{k=n+1}^{m}\\frac{(|z|\\|A\\|)^k}{k!}\\longrightarrow0\\quad(n\\to\\infty).$$\nThe partial sums are Cauchy, so completeness gives their operator-norm limit; the same estimate proves absolute convergence in operator norm.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-complex-exponential-addition-and-real-extension",
+          "source_section": "Statement",
+          "quote": "For all $z,w\\in\\mathbb C$, $\\exp(z+w)=\\exp z\\exp w$. For real $x$, the complex value $\\exp(x+0i)$ equals the published real exponential $e^x$. The conventions and prerequisite facts used below are recorded in [[def-complex-exponential]], [[lem-complex-exponential-series-converges-everywhere]], [[lem-cauchy-product-of-absolutely-convergent-complex-series]], [[def-real-exponential-function-and-e]], [[lem-binomial-theorem-over-complex-numbers]], [[thm-binomial-closed-formula]].",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-complex-exponential-is-entire-with-derivative-itself",
+          "source_section": "Statement",
+          "quote": "The complex exponential is entire, and\n\n$$ \\exp'(z)=\\exp z $$\n\nfor every $z\\in\\mathbb C$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "source_section": "Statement",
+          "quote": "For real $x,y$, $\\exp(x+iy)=e^x(\\cos y+i\\sin y)$ and $|\\exp(x+iy)|=e^x$. In particular $e^{i\\pi}+1=0$. The conventions and prerequisite facts used below are recorded in [[thm-complex-exponential-addition-and-real-extension]], [[thm-eulers-formula]], [[lem-complex-conjugation-and-modulus-laws]], [[thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions]], [[cor-exponential-reciprocal-and-positivity]], [[thm-quarter-turn-values-and-shift-formulas]], [[def-pi-via-first-positive-cosine-zero]].",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Choose an orthonormal eigenbasis $v_1,\\ldots,v_d$ of $A$ from [F1], with real eigenvalues $\\lambda_1,\\ldots,\\lambda_d$. Applying the defining power series term-by-term to $v_j$ gives $E_A(t)v_j=\\exp(-it\\lambda_j/\\hbar)v_j$. Since each scalar has modulus one by [F2], $E_A(t)$ maps an orthonormal basis to an orthonormal basis and is therefore unitary.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "On each $v_j$, [F2] gives $E_A(t)E_A(s)v_j=\\exp(-i(t+s)\\lambda_j/\\hbar)v_j=E_A(t+s)v_j$. Equality on the basis proves $E_A(t)E_A(s)=E_A(t+s)$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The same finite eigenbasis expression is a finite sum of scalar exponential functions. Differentiating each summand by [F2] and the chain rule gives $E_A'(t)v_j=(-i\\lambda_j/\\hbar)E_A(t)v_j$. Because the basis is finite, these scalar derivatives give the operator-norm derivative, and the equality on every $v_j$ yields $E_A'(t)=(-i/\\hbar)AE_A(t)=(-i/\\hbar)E_A(t)A$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": []
+    },
+    "thm-nrqmx-finite-floquet-normal-form": {
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes d≥1, so the zero-dimensional state space is excluded."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 2.1 allow U(T,0)=I and give HF=0, with periodic P."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 constructs a real phase lift for a one-dimensional unitary."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.2–1.3 allow repeated eigenphases and choose a basis and integer branch for each eigenvector."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 cover t=0 and t=T; the Statement assumes T>0 and ℏ>0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice is explicit in the Statement and used through the controlled-dynamics supplier in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is an existence and factorization theorem, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is an existence and factorization theorem, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Take d=1 and H(t)=E0 constant.",
+          "result": "U(T,0)=exp(-iE0T/ℏ); choosing HF=E0 and P(t)=1 satisfies the factorization, while every shift E0+nℏω preserves the period phase.",
+          "verifies": "Steps 1.2, 1.3, and 2.1."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-55",
+        "notes": "Independently checked norm-continuous finite Hermitian hypotheses for compact-interval Dyson supplier (CC), uniqueness patching via a common interval containing both times, time-translation and composition. Unitary monodromy is normal; finite eigenbasis and unit-circle parametrization give real lifts with correct negative phase. Kernel theorem proves both directions of branch equivalence modulo hbar*omega; periodic micromotion follows without commuting H(t) with monodromy. d=1, H=0, repeated phases and all real times are covered. Opened exact suppliers and read Viebahn II (10)-(19), Eckardt 2.1-2.2 and Appendix A (A.1)-(A.6); corrected locator is accurate. Reader/refuter findings empty."
+      },
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-nrqm-controlled-dynamics-norm-dyson-series-and-uniqueness",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice ([[def-countable-choice]]). Let $H$ be an arbitrary complex Hilbert space ([[def-hilbert-space]]), $I=[a,b]\\subset\\mathbb R$ a nonempty compact interval, $\\hbar>0$, and $\\mathcal H:I\\to\\mathcal B(H)$ a norm-continuous family of bounded self-adjoint operators. Put $A(t)=-i\\mathcal H(t)/\\hbar$ and $K=\\sup_{t\\in I}\\|A(t)\\|<\\infty$. For every $s,t\\in I$ define $U_0(t,s)=I_H$ and, recursively, the oriented Bochner integrals\n$$U_{n+1}(t,s)=\\int_s^t A(r)U_n(r,s)\\,dr,$$\nwhere $\\int_s^t=-\\int_t^s$ when $t<s$. Equivalently, for $s\\le t$ these are the **latest-time-left** ordered integrals\n$$U_n(t,s)=\\Bigl(\\frac{-i}{\\hbar}\\Bigr)^n\\int_{s<t_1<\\cdots<t_n<t}\\mathcal H(t_n)\\cdots\\mathcal H(t_1)\\,dt_1\\cdots dt_n,$$\nwith the simplex integral meaning the nested integral with $t_n$ outermost and $t_1$ innermost. For arbitrary $s,t$ its unambiguous nested form is $\\int_s^t dr_1\\int_s^{r_1}dr_2\\cdots\\int_s^{r_{n-1}}dr_n\\,A(r_1)\\cdots A(r_n)$. Then:\n\n(a) $\\|U_n(t,s)\\|\\le(K|t-s|)^n/n!$ for all $n\\ge0$ and all $s,t\\in I$.\n\n(b) $U(t,s)=\\sum_{n\\ge0}U_n(t,s)$ converges in operator norm uniformly on $I\\times I$, is jointly norm-continuous, satisfies $U(s,s)=I_H$, and obeys $\\|U(t,s)-I_H\\|\\le e^{K|t-s|}-1$. In particular all original forward-time convergence claims hold.\n\n(c) For every $s,t\\in I$,\n$$U(t,s)=I_H-\\frac{i}{\\hbar}\\int_s^t\\mathcal H(r)U(r,s)\\,dr.$$\nFor fixed $s$ this is the unique continuous $\\mathcal B(H)$-valued solution on $I$. More generally, the solution with initial value $C\\in\\mathcal B(H)$ at $s$ is $U(t,s)C$. For $a<b$, the operator-norm derivatives are\n$$\\partial_tU(t,s)=-\\frac{i}{\\hbar}\\mathcal H(t)U(t,s),\\qquad \\partial_sU(t,s)=+\\frac{i}{\\hbar}U(t,s)\\mathcal H(s),$$\nwith the corresponding one-sided derivatives at the endpoints. Therefore, for every $\\psi\\in H$, $U(t,s)\\psi$ is strongly continuously differentiable in either variable and satisfies the same equations applied to $\\psi$, with the common bounded-generator domain equal to all of $H$.\n\n(d) Every $U(t,s)$ is unitary, $U(t,s)^*=U(s,t)=U(t,s)^{-1}$, and\n$$U(t,s)U(s,r)=U(t,r)\\qquad(r,s,t\\in I).$$\nThese conclusions include both orientations of the time interval and intervals containing positive and negative times. If $a=b$, all terms with $n\\ge1$ vanish and $U(a,a)=I_H$; the derivative assertions then have no nontrivial interval on which to apply.\n\nNo separability hypothesis on $H$, invariant domain for an unbounded operator, differentiability of $\\mathcal H$, spectral theorem or physical interpretation is required.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-self-adjoint-and-normal-endomorphism",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner product space and let\n$T:V\\to V$ be an endomorphism. The endomorphism $T$ is **self-adjoint** when\n\n$$T^*=T,$$\n\nand **normal** when\n\n$$TT^*=T^*T,$$\n\nwhere $T^*$ is the adjoint from\n[[def-adjoint-of-a-linear-map-between-inner-product-spaces]].\n\nEvery self-adjoint endomorphism is normal, because $TT^*=T^2=T^*T$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional complex inner product space and let $T:V\\to V$\nbe linear. Then $T$ is normal if and only if $V$ has an orthonormal basis\nconsisting of eigenvectors of $T$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-sine-and-cosine-parametrize-the-unit-circle",
+          "source_section": "Statement",
+          "quote": "The map $t\\mapsto(\\cos t,\\sin t)$ is a bijection from $[0,2\\pi)$ onto $S^1=\\{(x,y)\\in\\mathbb R^2:x^2+y^2=1\\}$. The conventions and prerequisite facts used below are recorded in [[cor-trigonometric-parity-and-pythagorean-identity]], [[thm-sine-cosine-signs-monotonicity-and-ranges]], [[thm-sine-cosine-zero-sets-and-fundamental-period]], [[def-pi-via-first-positive-cosine-zero]].",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "source_section": "Statement",
+          "quote": "For real $x,y$, $\\exp(x+iy)=e^x(\\cos y+i\\sin y)$ and $|\\exp(x+iy)|=e^x$. In particular $e^{i\\pi}+1=0$. The conventions and prerequisite facts used below are recorded in [[thm-complex-exponential-addition-and-real-extension]], [[thm-eulers-formula]], [[lem-complex-conjugation-and-modulus-laws]], [[thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions]], [[cor-exponential-reciprocal-and-positivity]], [[thm-quarter-turn-values-and-shift-formulas]], [[def-pi-via-first-positive-cosine-zero]].",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-kernel-and-fibres-of-complex-exponential",
+          "source_section": "Statement",
+          "quote": "$$\\ker(\\exp)=2\\pi i\\mathbb Z,$$\nand $\\exp z=\\exp w$ exactly when $z-w\\in2\\pi i\\mathbb Z$. The conventions and prerequisite facts used below are recorded in [[cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]], [[thm-exponential-is-strictly-increasing]], [[thm-sine-cosine-zero-sets-and-fundamental-period]], [[thm-sine-and-cosine-parametrize-the-unit-circle]].",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-nrqmx-finite-hermitian-matrix-exponential",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge1$. Regard $\\mathbb C^d$ as column vectors with the standard complex inner product\n$$\\langle x,y\\rangle:=\\sum_{j=1}^d x_j\\overline{y_j},$$\nlinear in the first argument, and induced norm $\\|x\\|=(\\sum_{j=1}^d|x_j|^2)^{1/2}$. A matrix $A=(a_{ij})\\in M_d(\\mathbb C)$ acts by $(Ax)_i=\\sum_{j=1}^d a_{ij}x_j$, and its adjoint for this inner product is $A^*=\\overline A^{\\mathsf T}$.\n\nFor $A\\in M_d(\\mathbb C)$ and $z\\in\\mathbb C$, define the finite-dimensional matrix exponential by\n$$e^{zA}:=\\sum_{k=0}^{\\infty}\\frac{z^kA^k}{k!},\\qquad A^0=I_d.$$\nThe scalar exponential convention is $\\exp w=\\sum_{k\\ge0}w^k/k!$.\n\nEvery matrix $B=(b_{ij})\\in M_d(\\mathbb C)$ is bounded on $\\mathbb C^d$: since $|x_j|\\le\\|x\\|$, one has\n$$\\|Bx\\|^2\\le\\sum_{i=1}^d\\left(\\sum_{j=1}^d|b_{ij}|\\right)^2\\|x\\|^2.$$\nThus its operator norm is defined by the unit-ball supremum in the operator-norm definition listed in Definition references. For $B,C\\in M_d(\\mathbb C)$ and $\\|x\\|\\le1$, the operator-norm bound gives $\\|BCx\\|\\le\\|B\\|\\|Cx\\|\\le\\|B\\|\\|C\\|$; taking the supremum proves $\\|BC\\|\\le\\|B\\|\\|C\\|$. Since $d\\ge1$, the coordinate vector $e_1$ with first entry $1$ and other entries $0$ is a unit vector, so $\\|I_d\\|=1$. Homogeneity and the triangle inequality follow from the unit-ball supremum, and $\\|B\\|=0$ forces $Be_j=0$ for each coordinate vector $e_j$ (with entry $1$ at $j$ and $0$ elsewhere), hence $B=0$. Therefore $M_d(\\mathbb C)$ with this operator norm is a normed $\\mathbb C$-vector space; the matrices $E_{ij}$ with entry $1$ at $(i,j)$ and $0$ elsewhere form a basis of size $d^2$.\n\nCompleteness of the complex plane and finite-dimensional norm equivalence (the two theorems in Definition references) make $M_d(\\mathbb C)$ complete in this operator norm. By induction and submultiplicativity, $\\|A^k\\|\\le\\|A\\|^k$ for every $k\\ge1$, while $\\|A^0\\|=1$. The scalar series $\\sum_{k\\ge0}(|z|\\|A\\|)^k/k!$ converges by the scalar exponential convergence lemma in Definition references. Hence for $m>n$,\n$$\\left\\|\\sum_{k=n+1}^{m}\\frac{z^kA^k}{k!}\\right\\|\\le\\sum_{k=n+1}^{m}\\frac{(|z|\\|A\\|)^k}{k!}\\longrightarrow0\\quad(n\\to\\infty).$$\nThe partial sums are Cauchy, so completeness gives their operator-norm limit; the same estimate proves absolute convergence in operator norm.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-nrqmx-finite-hermitian-matrix-exponential",
+          "source_section": "Statement",
+          "quote": "Let $d\\ge1$, let $A=A^*$ be an endomorphism of $\\mathbb C^d$ with its standard complex inner product, and let $\\hbar>0$. For real $t$, define $E_A(t):=e^{-itA/\\hbar}$ by the finite-dimensional matrix exponential defined on this page. Then $E_A(t)$ is unitary, $E_A(t+s)=E_A(t)E_A(s)$ for all real $s,t$, and its operator-norm derivative is\n$$\\frac{d}{dt}E_A(t)=-\\frac{i}{\\hbar}AE_A(t)= -\\frac{i}{\\hbar}E_A(t)A.$$",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "On any compact interval, $H$ is a norm-continuous bounded self-adjoint family, so [F1] supplies the unique unitary propagator there. On overlapping compact intervals the propagators agree by uniqueness; hence $U(t,s)$ is consistently defined for all real $s,t$. For each fixed $t$, the curves $r\\mapsto U(r+T,T)$ and $r\\mapsto U(r,0)$ solve the same differential equation because $H(r+T)=H(r)$, and both equal $I_d$ at $r=0$. Uniqueness in [F1] gives $U(t+T,T)=U(t,0)$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Put $M=U(T,0)$. By [F1], $M$ is unitary, so [F2] gives an orthonormal eigenbasis $v_j$ with eigenvalues $\\lambda_j$ of modulus one. Write $\\lambda_j=x_j+iy_j$; then $(x_j,-y_j)$ lies on the real unit circle. By [F3], choose $\\theta_j\\in[0,2\\pi)$ with $x_j=\\cos\\theta_j$ and $-y_j=\\sin\\theta_j$, so $\\lambda_j=e^{-i\\theta_j}$. Set $\\varepsilon_j=\\hbar\\theta_j/T$ and define $H_Fv_j=\\varepsilon_jv_j$. Each $\\varepsilon_j$ is real, hence $H_F$ is Hermitian, and [F5] gives $e^{-iTH_F/\\hbar}v_j=e^{-i\\theta_j}v_j=\\lambda_jv_j$. Equality on the basis proves $e^{-iTH_F/\\hbar}=U(T,0)$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "If $\\varepsilon'_j$ gives the same eigenphase as $\\varepsilon_j$, then $\\exp(-iT(\\varepsilon'_j-\\varepsilon_j)/\\hbar)=1$. By [F4], $T(\\varepsilon'_j-\\varepsilon_j)/\\hbar\\in2\\pi\\mathbb Z$, so $\\varepsilon'_j-\\varepsilon_j\\in\\hbar\\omega\\mathbb Z$. Conversely adding $n\\hbar\\omega$ multiplies the phase by $e^{-i2\\pi n}=1$. Thus the class stated is independent of the real lift.",
+          "step": "1.3",
+          "inputs": [
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Define $P(t)=U(t,0)e^{itH_F/\\hbar}$. Both factors are unitary by [F1] and [F5], so $P(t)$ is unitary, and the group law in [F5] gives $P(t)e^{-itH_F/\\hbar}=U(t,0)$. By composition and step 1.1, $U(t+T,0)=U(t+T,T)U(T,0)=U(t,0)e^{-iTH_F/\\hbar}$. Therefore\n$$P(t+T)=U(t,0)e^{-iTH_F/\\hbar}e^{i(t+T)H_F/\\hbar}=U(t,0)e^{itH_F/\\hbar}=P(t),$$\nwhere the middle cancellation follows from [F5]. This proves the factorization and periodicity.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": []
+    },
+    "thm-nrqmx-floquet-sambe-domain": {
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes d≥1, so the zero internal space is excluded."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 gives the periodic derivative eigenbasis when H(t)=0; step 2.1 shifts its eigenvalues by zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 applies to the scalar periodic derivative, and step 2.1 includes d=1 with its scalar Fourier basis."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 retains a complete orthonormal basis when quasienergies coincide; no distinct-eigenvalue assumption is used."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 use equal endpoint traces and all integer harmonics; T>0 and ℏ>0 are explicit."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement carries AC for Kato–Rellich and AC plus Countable Choice for the periodic derivative supplier."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement asserts self-adjointness and a basis, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement asserts self-adjointness and a basis, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Take d=1 and H(t)=E0 constant.",
+          "result": "P(t)=1, K=E0-iℏD, and the periodic modes T^-1/2 exp(inωt) have eigenvalues E0+nℏω.",
+          "verifies": "Steps 1.1, 2.1, and 3.1."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-55",
+        "notes": "Independently checked the scalar periodic momentum theorem at L=T, theta=0, its complete Fourier family and exact adjoint domain; finite direct-sum and positive real scaling preserve self-adjointness by adjoint testing. Compact continuity bounds multiplication H and pointwise Hermiticity gives symmetry, so Kato-Rellich applies with relative bound zero on exactly periodic componentwise H1. AC covers supplier hypotheses and implies DC used by trace context; CC is retained. P is C1 from normal form and its propagator dependency, and its periodic pointwise unitary multiplication is onto L2. Each eigenfunction is C1 with matching endpoint traces. Corrected the missing T^(-1/2) in the intermediate eigen-equation and the F1/F3 attribution; normalization, derivative sign and degeneracies now check for all positive T and d>=1. Basis completeness uses a unitary image, not an unproved Fourier limit. Both reader/refuter findings are empty; Appendix B Fourier locators checked in retrieved PDF page 39."
+      },
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-nrqm-intervals-twisted-periodic-momentum-domain",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice and Countable Choice ([[def-axiom-of-choice]],\n[[def-countable-choice]]). Let $0<L<\\infty$ and $\\theta\\in[0,2\\pi)$. Put\n$D_\\theta:=\\{u\\in H^1(0,L):u^*(L)=e^{i\\theta}u^*(0)\\},\\qquad\nP_\\theta u:=-i\\,Du,$\nwith $H^1$ and the trace $u^*$ of [[def-nrqm-intervals-hilbert-sobolev-spaces]]\nand [[lem-nrqm-intervals-integration-by-parts]] clause (b). Then:\n\n(a) $D_\\theta$ is dense in $L^2(0,L;\\mathbb C)$, $P_\\theta$ is symmetric and\nself-adjoint;\n\n(b) the functions\n$\\varphi_n(x):=\\frac{1}{\\sqrt L}e^{i(2\\pi n+\\theta)x/L}\\qquad(n\\in\\mathbb Z)$\nform a complete orthonormal family of $L^2(0,L;\\mathbb C)$, each\n$\\varphi_n\\in D_\\theta$, and $P_\\theta\\varphi_n=\\kappa_n\\varphi_n$ with\n$\\kappa_n:=\\frac{2\\pi n+\\theta}{L};$\nthe eigenvalues $\\kappa_n$ are simple and\n$\\sigma(P_\\theta)=\\{\\kappa_n:n\\in\\mathbb Z\\}$;\n\n(c) $P_\\theta$ is the unique self-adjoint extension of the symmetric operator\n$P_\\theta$ restricted to the finite linear span of the $\\varphi_n$, and its\ndomain is exactly\n$D_\\theta=\\Bigl\\{\\sum_nc_n\\varphi_n:\\sum_n\\kappa_n^2|c_n|^2<\\infty\\Bigr\\}.$",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-nrqm-intervals-hilbert-sobolev-spaces",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Fix complex\nscalars. Let $I\\subseteq\\mathbb R$ be a nonempty open interval, bounded or\nunbounded, and write $L^2(I;\\mathbb C)$ for the complex Hilbert space of\nLebesgue (equivalence classes of) square-integrable functions with the inner\nproduct $\\langle u,v\\rangle=\\int_Iu\\overline v$ linear in the first argument\n([[def-complex-lp-and-euclidean-test-function-conventions]],\n[[def-l-p-space-as-a-quotient-by-null-functions]],\n[[lem-l-two-with-the-integral-pairing-is-a-hilbert-space]]).\n\n**First-order space.** Define\n$H^1(I):=\\{u\\in L^2(I;\\mathbb C):\\ \\text{the weak derivative }Du\\text{ of the class }u\\text{ exists and }Du\\in L^2(I;\\mathbb C)\\},$\nwhere $Du$ is the weak derivative of\n[[def-weak-derivative-of-a-locally-integrable-function]]: a class\n$Du\\in L^1_{\\mathrm{loc}}(I;\\mathbb C)$ with\n$\\int_Iu\\,\\varphi'=(-1)\\int_I(Du)\\varphi\\qquad\\text{for every }\\varphi\\in C_c^\\infty(I),$\nan identity that is choice-free\n([[def-locally-integrable-function-as-a-regular-distribution]]). Equip\n$H^1(I)$ with the sesquilinear form\n$\\langle u,v\\rangle_{H^1}:=\\int_Iu\\overline v+\\int_I(Du)\\overline{Dv},$\nwhose associated norm is $\\|u\\|_{H^1}=(\\|u\\|_{L^2}^2+\\|Du\\|_{L^2}^2)^{1/2}$;\nthe symbol $u'$ denotes the same weak derivative $Du$ throughout the page.\n\n**Second-order space.** Define\n$H^2(I):=\\{u\\in H^1(I):Du\\in H^1(I)\\},$\nand for $u\\in H^2(I)$ write $D^2u:=D(Du)\\in L^2(I;\\mathbb C)$; the norm is\n$\\|u\\|_{H^2}=(\\|u\\|_{L^2}^2+\\|Du\\|_{L^2}^2+\\|D^2u\\|_{L^2}^2)^{1/2}$.\nThus $H^2(I)$ consists exactly of the classes in $L^2(I)$ whose first and\nsecond weak derivatives exist and lie in $L^2(I)$, and $H^2(I)\\subseteq\nH^1(I)$.\n\n**Endpoint-vanishing first-order space and the Dirichlet form.** For the\nbounded interval $(0,L)$, $L>0$, define\n$H^1_0(0,L):=\\overline{C_c^\\infty(0,L)}^{\\,\\|\\cdot\\|_{H^1}},$\nthe closure of the test functions in $H^1(0,L)$, and define the **Dirichlet\nform** on it by $q_D[u]:=\\|Du\\|_{L^2(0,L)}^2=\\int_0^L|Du|^2$.\n\n**Elementary consequences, recorded for reuse.** Weak derivatives are unique\nas locally integrable classes under Countable Choice, are additive and\n$\\mathbb C$-homogeneous, and classical derivatives of continuously\ndifferentiable functions are weak derivatives. The cited published items\nsupply these facts, so $H^1(I)$ and $H^2(I)$ are well-defined linear\nsubspaces of $L^2(I;\\mathbb C)$. No claim is made here that $H^1_0(0,L)$\nequals the set of classes with vanishing endpoint values; that identification\nis proved on this page from the trace estimates.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-adjoint-of-a-densely-defined-unbounded-operator",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $T$ be a\ndensely defined linear operator on $H$, with domain $D(T)$ dense in $H$\n([[def-densely-defined-closed-and-closable-operator]], [[def-dense-top]]).\nSince $D(T)$ is dense, and since $H$ is complete ([[def-hilbert-space]]), every\nbounded linear functional on the normed space $(D(T),\\|\\cdot\\|)$\n([[def-bounded-linear-operator]]) extends uniquely to a bounded linear\nfunctional $\\widetilde\\varphi$ on $H$ of the same norm, by setting\n$\\widetilde\\varphi(z)=\\lim_n\\varphi(z_n)$ for any sequence $z_n\\in D(T)$ with\n$z_n\\to z$ in $H$; the limit exists because $\\varphi$ is bounded on a dense\nsubspace and $H$ is complete, and it does not depend on the sequence because a\nbounded functional is uniformly continuous.\n\nA vector $y\\in H$ belongs to the **adjoint domain** $D(T^*)$ when the linear\nfunctional $\\varphi_y:D(T)\\to\\mathbb C$, $\\varphi_y(x)=\\langle Tx,y\\rangle$, is\nbounded on $(D(T),\\|\\cdot\\|)$. In that case Hilbert space Riesz representation\n([[thm-riesz-representation-for-hilbert-space]]) applied to the extension\n$\\widetilde{\\varphi_y}$ produces a unique vector $T^*y\\in H$ with\n$$T^*y\\text{ is the unique }w\\in H\\text{ such that }\\langle Tx,y\\rangle=\\langle x,w\\rangle\\quad\\text{for all }x\\in D(T),$$\nequivalently $\\widetilde{\\varphi_y}(z)=\\langle z,T^*y\\rangle$ for all $z\\in H$.\nThe map $T^*:D(T^*)\\to H$, $y\\mapsto T^*y$, is the **adjoint** of $T$.\n\n**Well-definedness.** The functional $\\varphi_y$ is linear in $x$ for each\n$y$, so its domain of boundedness $D(T^*)$ is a linear subspace: if\n$\\varphi_y,\\varphi_{y'}$ are bounded so is $\\varphi_{ay+by'}$ for scalars\n$a,b$, because the first-variable-linear convention gives\n$\\varphi_{ay+by'}=\\overline a\\,\\varphi_y+\\overline b\\,\\varphi_{y'}$. On\n$D(T^*)$ the map $T^*$ is linear: if $y,y'$ are represented by $w,w'$, then\n$ay+by'$ is represented by $aw+bw'$, since\n$\\langle x,aw+bw'\\rangle=\\overline a\\langle x,w\\rangle+\n\\overline b\\langle x,w'\\rangle$; the representing vector is unique. By Riesz representation for the Hilbert space\n$H$ a vector $w\\in H$ is determined by the values $\\langle z,w\\rangle$ with\n$z$ ranging over $H$, and those values are determined by the functional\n$\\widetilde{\\varphi_y}$. Equivalently, if $w,w'$ both represent $\\varphi_y$,\nthen $\\langle x,w-w'\\rangle=0$ for every $x\\in D(T)$; density of $D(T)$ and\ncontinuity of the inner product extend this equality to every $x\\in H$, and\ntaking $x=w-w'$ gives $w=w'$. Finally only\nambient-norm boundedness of $\\varphi_y$ on $D(T)$ is required: no extension,\nno closure and no closedness of $T$ is presupposed.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-kato-rellich",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Work on a complex Hilbert space with inner product linear in the first variable. Let $A$ be self-adjoint and let $B$ be symmetric with $D(A)\\subseteq D(B)$ and\n$A$-bound less than one ([[def-relative-boundedness-with-respect-to-an-operator]]).\nThen $A+B$ with domain $D(A)$ is self-adjoint. If $A$ is merely essentially\nself-adjoint and $B$ is symmetric with $D(A)\\subseteq D(B)$ and $A$-bound less\nthan one, then $A+B$ on $D(A)$ is essentially self-adjoint and its closure is\nthe self-adjoint operator obtained by applying the first part to $\\overline A$\nand the graph-norm extension of $B|_{D(A)}$ to $D(\\overline A)$. If $A\\ge\\gamma$ and\n$(a,b)$ is an admissible pair for $B$ with $a<1$, then\n$A+B\\ge\\gamma-\\max\\{a|\\gamma|+b,\\ b/(1-a)\\}$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-relative-boundedness-with-respect-to-an-operator",
+          "source_section": "Definition",
+          "quote": "Let $A$ be a linear operator on $H$ with domain $D(A)$. An operator $B$ is\n**$A$-bounded**, or **relatively bounded with respect to $A$**, when\n$D(A)\\subseteq D(B)$ and there are finite constants $a,b\\ge0$ with\n$$\\|Bx\\|\\le a\\|Ax\\|+b\\|x\\|\\qquad\\text{for all }x\\in D(A).$$\nThe infimum of the admissible constants $a$ is the **$A$-bound** of $B$, and\none says the $A$-bound is *below one* when some $a<1$ is admissible.\n\n**Equivalent form.** $B$ is $A$-bounded exactly when $B$ is bounded on $D(A)$\nfor the graph norm $\\|x\\|_A=(\\|x\\|^2+\\|Ax\\|^2)^{1/2}$ of\n[[def-unbounded-linear-operator-domain-and-graph]]: each estimate\n$\\|Bx\\|\\le a\\|Ax\\|+b\\|x\\|$ gives\n$\\|Bx\\|\\le\\max(a,b)\\sqrt2\\,\\|x\\|_A$, and conversely a graph-norm bound\n$\\|Bx\\|\\le C\\|x\\|_A$ gives the estimate with $a=b=C$. The constant $b$ is not\nintrinsic, and no closedness, density or resolvent hypothesis is needed for\nthe definition. If $A$ is closed with nonempty resolvent set, then $A$-bounded\noperators are exactly those with $D(A)\\subseteq D(B)$ for which $BR_A(z)$ is\nbounded for some, equivalently every, $z\\in\\rho(A)$\n([[def-resolvent-and-spectrum-of-a-closed-unbounded-operator]]). Indeed, an\n$A$-bound makes $BR_A(z)$ bounded because\n$AR_A(z)=zR_A(z)-I$; conversely, if $BR_A(z)$ is bounded, then\n$Bx=BR_A(z)(z-A)x$ gives an $A$-bound. Thus boundedness for one resolvent\nimplies relative boundedness and hence boundedness for every resolvent. This\nis used in the Kato-Rellich theorem below and recorded here as an interface.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-bounded-linear-operator",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be normed spaces over the same scalar field $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, read in\nthe real case from [[def-norm-and-normed-space]] and in the complex case from\n[[def-complex-norm-and-complex-normed-space]]. A $\\mathbb K$-linear map\n$T:X\\to Y$ ([[def-linear-map]]) is a **bounded linear operator** when there is a\nreal constant $C \\ge 0$ such that\n\n$$\\|Tx\\| \\le C\\|x\\| \\qquad \\text{for all } x \\in X.$$\n\nAny such $C$ is called a **bound** for $T$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-operator-norm",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be normed spaces over the same scalar field, and let\n$T:X\\to Y$ be bounded in the sense of [[def-bounded-linear-operator]]. The\n**operator norm** of $T$ is\n\n$$\\|T\\| := \\sup\\{\\|Tx\\| : x \\in X,\\ \\|x\\| \\le 1\\}.$$\n\nThe set on the right contains $0$ and every bound $C$ for $T$ bounds it\nabove. Thus its finite real supremum exists by the proved least-upper-bound\nproperty of the library's real field ([[cor-cauchy-reals-lub-complete]]).\nIn particular every number strictly below the supremum is exceeded by a\nmember of this set; otherwise it would be a smaller upper bound. No choice\nprinciple is used for this assertion.\n\nThe same number is the least bound of $T$:\n\n$$\\|T\\| = \\inf\\{C \\ge 0 : \\|Tx\\| \\le C\\|x\\| \\text{ for all } x \\in X\\}.$$\n\nIf $X \\ne \\{0\\}$, positive homogeneity also gives\n\n$$\\|T\\| = \\sup\\{\\|Tx\\| : \\|x\\| = 1\\}.$$\n\nWhen $X = \\{0\\}$, the unit sphere is empty and the unit-ball supremum is $0$,\nso $\\|T\\| = 0$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-euclidean-heine-borel-pseudocompactness-and-extreme-values",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$ and let $A\\subseteq\\mathbb{R}^n$ be nonempty. The following are equivalent.\n\n1. $A$ is compact.\n2. $A$ is closed and bounded.\n3. $A$ is pseudocompact.\n4. Every continuous $f:A\\to\\mathbb{R}$ attains a maximum and a minimum on $A$.\n\nThis theorem is a ZF statement. The nonemptiness hypothesis is necessary for condition 4, because the empty image has neither a maximum nor a minimum.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-nrqmx-finite-floquet-normal-form",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $d\\ge1$, $T>0$, $\\hbar>0$, $\\omega=2\\pi/T$, and let $H:\\mathbb R\\to M_d(\\mathbb C)$ be continuous, $T$-periodic, and Hermitian at every time. Let $U(t,s)$ be the unitary propagator solving $i\\hbar\\,\\partial_tU(t,s)=H(t)U(t,s)$ and $U(s,s)=I_d$. There are an orthonormal basis $v_1,\\ldots,v_d$ and real numbers $\\varepsilon_1,\\ldots,\\varepsilon_d$ such that\n$$U(T,0)v_j=e^{-iT\\varepsilon_j/\\hbar}v_j\\qquad(1\\le j\\le d).$$\nDefine the Hermitian matrix $H_Fv_j=\\varepsilon_jv_j$ and the quasienergy classes $\\varepsilon_j+\\hbar\\omega\\mathbb Z$. With $P(t):=U(t,0)e^{itH_F/\\hbar}$, $P(t)$ is a $T$-periodic unitary matrix and\n$$U(t,0)=P(t)e^{-itH_F/\\hbar}\\qquad(t\\in\\mathbb R).$$\nThe real representative $\\varepsilon_j$ may be changed by any integer multiple of $\\hbar\\omega$ without changing its eigenphase; no preferred real branch is asserted.",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-nrqmx-finite-hermitian-matrix-exponential",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge1$. Regard $\\mathbb C^d$ as column vectors with the standard complex inner product\n$$\\langle x,y\\rangle:=\\sum_{j=1}^d x_j\\overline{y_j},$$\nlinear in the first argument, and induced norm $\\|x\\|=(\\sum_{j=1}^d|x_j|^2)^{1/2}$. A matrix $A=(a_{ij})\\in M_d(\\mathbb C)$ acts by $(Ax)_i=\\sum_{j=1}^d a_{ij}x_j$, and its adjoint for this inner product is $A^*=\\overline A^{\\mathsf T}$.\n\nFor $A\\in M_d(\\mathbb C)$ and $z\\in\\mathbb C$, define the finite-dimensional matrix exponential by\n$$e^{zA}:=\\sum_{k=0}^{\\infty}\\frac{z^kA^k}{k!},\\qquad A^0=I_d.$$\nThe scalar exponential convention is $\\exp w=\\sum_{k\\ge0}w^k/k!$.\n\nEvery matrix $B=(b_{ij})\\in M_d(\\mathbb C)$ is bounded on $\\mathbb C^d$: since $|x_j|\\le\\|x\\|$, one has\n$$\\|Bx\\|^2\\le\\sum_{i=1}^d\\left(\\sum_{j=1}^d|b_{ij}|\\right)^2\\|x\\|^2.$$\nThus its operator norm is defined by the unit-ball supremum in the operator-norm definition listed in Definition references. For $B,C\\in M_d(\\mathbb C)$ and $\\|x\\|\\le1$, the operator-norm bound gives $\\|BCx\\|\\le\\|B\\|\\|Cx\\|\\le\\|B\\|\\|C\\|$; taking the supremum proves $\\|BC\\|\\le\\|B\\|\\|C\\|$. Since $d\\ge1$, the coordinate vector $e_1$ with first entry $1$ and other entries $0$ is a unit vector, so $\\|I_d\\|=1$. Homogeneity and the triangle inequality follow from the unit-ball supremum, and $\\|B\\|=0$ forces $Be_j=0$ for each coordinate vector $e_j$ (with entry $1$ at $j$ and $0$ elsewhere), hence $B=0$. Therefore $M_d(\\mathbb C)$ with this operator norm is a normed $\\mathbb C$-vector space; the matrices $E_{ij}$ with entry $1$ at $(i,j)$ and $0$ elsewhere form a basis of size $d^2$.\n\nCompleteness of the complex plane and finite-dimensional norm equivalence (the two theorems in Definition references) make $M_d(\\mathbb C)$ complete in this operator norm. By induction and submultiplicativity, $\\|A^k\\|\\le\\|A\\|^k$ for every $k\\ge1$, while $\\|A^0\\|=1$. The scalar series $\\sum_{k\\ge0}(|z|\\|A\\|)^k/k!$ converges by the scalar exponential convergence lemma in Definition references. Hence for $m>n$,\n$$\\left\\|\\sum_{k=n+1}^{m}\\frac{z^kA^k}{k!}\\right\\|\\le\\sum_{k=n+1}^{m}\\frac{(|z|\\|A\\|)^k}{k!}\\longrightarrow0\\quad(n\\to\\infty).$$\nThe partial sums are Cauchy, so completeness gives their operator-norm limit; the same estimate proves absolute convergence in operator norm.",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-nrqmx-finite-hermitian-matrix-exponential",
+          "source_section": "Statement",
+          "quote": "Let $d\\ge1$, let $A=A^*$ be an endomorphism of $\\mathbb C^d$ with its standard complex inner product, and let $\\hbar>0$. For real $t$, define $E_A(t):=e^{-itA/\\hbar}$ by the finite-dimensional matrix exponential defined on this page. Then $E_A(t)$ is unitary, $E_A(t+s)=E_A(t)E_A(s)$ for all real $s,t$, and its operator-norm derivative is\n$$\\frac{d}{dt}E_A(t)=-\\frac{i}{\\hbar}AE_A(t)= -\\frac{i}{\\hbar}E_A(t)A.$$",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$\n(Limit point, isolated point, adherent point, derived set, and dense subset of $\\mathbb{R}$), let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$\n(The derivative $f'(c) = \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c}$ of $f : A \\to \\mathbb{R}$ at a point $c \\in A$ that is a limit point of $A$, and differentiability on a set) and let $\\alpha \\in \\mathbb{R}$. Then:\n\n1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$;\n2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;\n3. $fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and is a limit point of $A_0$, the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is differentiable\n   at $c$ as a function on $A_0$, and\n   $$\\bigl((f/g)|_{A_0}\\bigr)'(c) \\;=\\; \\frac{f'(c)\\,g(c) - f(c)\\,g'(c)}{g(c)^{2}} .$$\n\nEach claim asserts two things: that the derivative on the left exists, and that\nit has the stated value. Both are proved.\n\n**Why claim 4 is stated on $A_0$.** The function $f/g$ is not defined where $g$\nvanishes, and $g$ may vanish at points of $A$ far from $c$; restricting to $A_0$\nis forced. That the restriction still has $c$ as a limit point, so that a\nderivative there means anything at all, is not free either, and it is the last\nclaim of If $\\lim_{x \\to c} f(x) = L \\ne 0$ then $|f| > |L|/2$ on a punctured neighbourhood of $c$; in particular if $L > 0$ then $f > L/2 > 0$ there applied to $g$. The hypothesis\nis $g(c) \\ne 0$, not \"$g$ vanishes nowhere\".\n\n**Everything is proved through\nCarathéodory's characterisation: $f$ is differentiable at $c$ if and only if there is $\\varphi : A \\to \\mathbb{R}$, continuous at $c$, with $f(x) - f(c) = \\varphi(x)(x - c)$ for every $x \\in A$, and then $\\varphi$ is unique and $\\varphi(c) = f'(c)$.** No difference quotient is estimated and\nno limit theorem beyond continuity is used, so no choice principle is spent.\nThe four identities are four algebraic rearrangements of an increment, each\nfollowed by a reading of Sums, scalar multiples, products, absolute values, maxima, minima and quotients with nonvanishing denominator of continuous functions are continuous, as are constants, the identity and every polynomial function.",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-classical-derivatives-are-weak-derivatives",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open,\n$n\\ge1$, let $k\\in\\mathbb N_0$, and let $u:\\Omega\\to\\mathbb C$ have real\nand imaginary parts of class $C^k$. For each multi-index\n$\\alpha\\in\\mathbb N_0^n$ with $|\\alpha|\\le k$, the componentwise classical\nderivative $\\partial^\\alpha u$ is locally integrable and is the weak\nderivative $D^\\alpha u$. By the uniqueness lemma, it represents the unique\nlocally integrable weak-derivative class. For $\\alpha=0$, this says\n$D^0u=u$.\n\nIf $\\Omega=\\varnothing$, the assertion is vacuous: there is only the zero\nclass and every displayed test identity is zero.",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-nrqm-intervals-hilbert-sobolev-spaces",
+          "source_section": "Definition",
+          "quote": "Define\n$H^1(I):=\\{u\\in L^2(I;\\mathbb C):\\ \\text{the weak derivative }Du\\text{ of the class }u\\text{ exists and }Du\\in L^2(I;\\mathbb C)\\},$\nwhere $Du$ is the weak derivative of\n[[def-weak-derivative-of-a-locally-integrable-function]]: a class\n$Du\\in L^1_{\\mathrm{loc}}(I;\\mathbb C)$ with\n$\\int_Iu\\,\\varphi'=(-1)\\int_I(Du)\\varphi\\qquad\\text{for every }\\varphi\\in C_c^\\infty(I),$\nan identity that is choice-free\n([[def-locally-integrable-function-as-a-regular-distribution]]). Equip\n$H^1(I)$ with the sesquilinear form\n$\\langle u,v\\rangle_{H^1}:=\\int_Iu\\overline v+\\int_I(Du)\\overline{Dv},$\nwhose associated norm is $\\|u\\|_{H^1}=(\\|u\\|_{L^2}^2+\\|Du\\|_{L^2}^2)^{1/2}$;\nthe symbol $u'$ denotes the same weak derivative $Du$ throughout the page.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $A_0=-i\\hbar D$ on the componentwise periodic $H^1$ domain. For one component, [F1] makes $-iD$ self-adjoint; multiplying by the real scalar $\\hbar$ preserves self-adjointness because $(\\hbar S)^*=\\hbar S^*=\\hbar S$ on the same domain by the adjoint definition in [F1]. For $d$ components, the finite orthogonal direct sum is self-adjoint: testing the adjoint identity against vectors with only one nonzero component gives the scalar adjoint domain in each component, hence the full adjoint domain is exactly the componentwise domain. Its orthonormal eigenbasis is $T^{-1/2}e^{in\\omega t}e_a$ with eigenvalue $n\\hbar\\omega$, where $e_a$ is the standard basis of $\\mathbb C^d$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Multiplication by $H(t)$ defines a bounded symmetric operator $B$ on $\\mathscr H_T$. Indeed, continuity on the compact interval gives $M:=\\sup_{t\\in[0,T]}\\|H(t)\\|<\\infty$, and $\\|Bf\\|_2^2\\le M^2\\|f\\|_2^2$; pointwise Hermiticity gives $\\langle Bf,g\\rangle=\\langle f,Bg\\rangle$. Thus $B$ has relative bound zero with respect to $A_0$, and [F2] makes $K=A_0+B$ self-adjoint on exactly $D(A_0)=D(K)$.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "The propagator $U(t,0)$ is $C^1$ by [F3], and the finite exponential in the normal form is $C^1$ by [F3], so $P(t)=U(t,0)e^{itH_F/\\hbar}$ is $C^1$. Differentiating $U(t,0)=P(t)e^{-itH_F/\\hbar}$ with the product rule [F4] and using the Schrödinger equation gives $H(t)P(t)-i\\hbar P'(t)=P(t)H_F$. Pointwise unitarity of $P(t)$ makes multiplication by $P$ unitary on $\\mathscr H_T$.",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For each $j,n$, $\\phi_{jn}(t)=T^{-1/2}e^{in\\omega t}P(t)v_j$ is $C^1$ and periodic; [F5] and [F4] therefore put it in $D(K)$. Using the identity of step 1.3 and the product rule [F4] gives\n$$K\\phi_{jn}=T^{-1/2}e^{in\\omega t}P(t)(H_F+n\\hbar\\omega I_d)v_j=(\\varepsilon_j+n\\hbar\\omega)\\phi_{jn}.$$\nThe untransformed family $T^{-1/2}e^{in\\omega t}v_j$ is a complete orthonormal basis by [F1] in each of the $d$ internal coordinates. Multiplication by $P$ is unitary by step 1.3, so its image $\\{\\phi_{jn}\\}$ is also a complete orthonormal basis.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": []
+    },
+    "thm-nrqmx-finite-level-duhamel-error": {
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes d≥1, so the zero-dimensional matrix space is excluded."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 and step 2.1 give zero difference and leakage when V=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "In d=1 every orthogonal projection is 0 or I, so step 1.1 gives V=0 and both estimates are exact."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 uses only differentiability and unitarity, not distinct spectra."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 includes t=0, when both sides vanish, and treats negative t by the oriented integral; ℏ>0 is stated."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice is explicit for the Banach-valued FTC in the Statement and step 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The estimate is a one-way bound, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The estimate is a one-way bound, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Take H=[[0,g],[g,0]] with real g and P=diag(1,0).",
+          "result": "HD=0, ||V||=|g|, ||exp(-itH/ℏ)-I||=2|sin(gt/(2ℏ))|≤|gt|/ℏ, and the leakage norm is |sin(gt/ℏ)|≤|gt|/ℏ.",
+          "verifies": "Steps 1.1, 2.1, and 3.1."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-55",
+        "notes": "Independently checked Hermiticity of diagonal compression, invariance and orthogonal contraction bounds for P=0, I and intermediate projections. Differentiated F(s) with the plus sign on the first factor, preserving noncommuting order, and integrated the C1 matrix curve in a complete finite matrix space using the CC FTC supplier. Oriented integration gives |t| for negative t; t=0 is immediate and V=0 gives exact equality. Unitary factors and submultiplicativity give both bounds, with no probability estimate, unbounded coupling or limit assertion. Exact FTC and norm-inequality statements/proofs opened; reader/refuter findings empty."
+      },
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "lem-fundamental-theorem-of-calculus-for-banach-valued-continuous-curves",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice ([[def-countable-choice]]) for the Lebesgue-measure interfaces. Let $X$ be a real or complex Banach space, let $a<b$, and let $f:[a,b]\\to X$ be continuous. Differentiation uses the underlying real structure. Then $G(t):=\\int_a^t f(s)\\,ds$ is differentiable on $(a,b)$ and has the corresponding one-sided derivatives at $a,b$, with $G'(t)=f(t)$, and this derivative extends continuously to $[a,b]$. Consequently, if $\\varphi:[a,b]\\to X$ is continuous, differentiable on $(a,b)$ with $\\varphi'$ continuous on $(a,b)$ and extendable to a continuous $X$-valued function on $[a,b]$, then $\\int_a^b\\varphi'(s)\\,ds=\\varphi(b)-\\varphi(a)$. The Bochner integral here is the one of [[def-bochner-integrable-function]]; the identities also hold for continuous curves on $[0,\\infty)$ restricted to compact subintervals.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-nrqmx-finite-hermitian-matrix-exponential",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge1$. Regard $\\mathbb C^d$ as column vectors with the standard complex inner product\n$$\\langle x,y\\rangle:=\\sum_{j=1}^d x_j\\overline{y_j},$$\nlinear in the first argument, and induced norm $\\|x\\|=(\\sum_{j=1}^d|x_j|^2)^{1/2}$. A matrix $A=(a_{ij})\\in M_d(\\mathbb C)$ acts by $(Ax)_i=\\sum_{j=1}^d a_{ij}x_j$, and its adjoint for this inner product is $A^*=\\overline A^{\\mathsf T}$.\n\nFor $A\\in M_d(\\mathbb C)$ and $z\\in\\mathbb C$, define the finite-dimensional matrix exponential by\n$$e^{zA}:=\\sum_{k=0}^{\\infty}\\frac{z^kA^k}{k!},\\qquad A^0=I_d.$$\nThe scalar exponential convention is $\\exp w=\\sum_{k\\ge0}w^k/k!$.\n\nEvery matrix $B=(b_{ij})\\in M_d(\\mathbb C)$ is bounded on $\\mathbb C^d$: since $|x_j|\\le\\|x\\|$, one has\n$$\\|Bx\\|^2\\le\\sum_{i=1}^d\\left(\\sum_{j=1}^d|b_{ij}|\\right)^2\\|x\\|^2.$$\nThus its operator norm is defined by the unit-ball supremum in the operator-norm definition listed in Definition references. For $B,C\\in M_d(\\mathbb C)$ and $\\|x\\|\\le1$, the operator-norm bound gives $\\|BCx\\|\\le\\|B\\|\\|Cx\\|\\le\\|B\\|\\|C\\|$; taking the supremum proves $\\|BC\\|\\le\\|B\\|\\|C\\|$. Since $d\\ge1$, the coordinate vector $e_1$ with first entry $1$ and other entries $0$ is a unit vector, so $\\|I_d\\|=1$. Homogeneity and the triangle inequality follow from the unit-ball supremum, and $\\|B\\|=0$ forces $Be_j=0$ for each coordinate vector $e_j$ (with entry $1$ at $j$ and $0$ elsewhere), hence $B=0$. Therefore $M_d(\\mathbb C)$ with this operator norm is a normed $\\mathbb C$-vector space; the matrices $E_{ij}$ with entry $1$ at $(i,j)$ and $0$ elsewhere form a basis of size $d^2$.\n\nCompleteness of the complex plane and finite-dimensional norm equivalence (the two theorems in Definition references) make $M_d(\\mathbb C)$ complete in this operator norm. By induction and submultiplicativity, $\\|A^k\\|\\le\\|A\\|^k$ for every $k\\ge1$, while $\\|A^0\\|=1$. The scalar series $\\sum_{k\\ge0}(|z|\\|A\\|)^k/k!$ converges by the scalar exponential convergence lemma in Definition references. Hence for $m>n$,\n$$\\left\\|\\sum_{k=n+1}^{m}\\frac{z^kA^k}{k!}\\right\\|\\le\\sum_{k=n+1}^{m}\\frac{(|z|\\|A\\|)^k}{k!}\\longrightarrow0\\quad(n\\to\\infty).$$\nThe partial sums are Cauchy, so completeness gives their operator-norm limit; the same estimate proves absolute convergence in operator norm.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-nrqmx-finite-hermitian-matrix-exponential",
+          "source_section": "Statement",
+          "quote": "Let $d\\ge1$, let $A=A^*$ be an endomorphism of $\\mathbb C^d$ with its standard complex inner product, and let $\\hbar>0$. For real $t$, define $E_A(t):=e^{-itA/\\hbar}$ by the finite-dimensional matrix exponential defined on this page. Then $E_A(t)$ is unitary, $E_A(t+s)=E_A(t)E_A(s)$ for all real $s,t$, and its operator-norm derivative is\n$$\\frac{d}{dt}E_A(t)=-\\frac{i}{\\hbar}AE_A(t)= -\\frac{i}{\\hbar}E_A(t)A.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-operator-norm",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be normed spaces over the same scalar field, and let\n$T:X\\to Y$ be bounded in the sense of [[def-bounded-linear-operator]]. The\n**operator norm** of $T$ is\n\n$$\\|T\\| := \\sup\\{\\|Tx\\| : x \\in X,\\ \\|x\\| \\le 1\\}.$$\n\nThe set on the right contains $0$ and every bound $C$ for $T$ bounds it\nabove. Thus its finite real supremum exists by the proved least-upper-bound\nproperty of the library's real field ([[cor-cauchy-reals-lub-complete]]).\nIn particular every number strictly below the supremum is exceeded by a\nmember of this set; otherwise it would be a smaller upper bound. No choice\nprinciple is used for this assertion.\n\nThe same number is the least bound of $T$:\n\n$$\\|T\\| = \\inf\\{C \\ge 0 : \\|Tx\\| \\le C\\|x\\| \\text{ for all } x \\in X\\}.$$\n\nIf $X \\ne \\{0\\}$, positive homogeneity also gives\n\n$$\\|T\\| = \\sup\\{\\|Tx\\| : \\|x\\| = 1\\}.$$\n\nWhen $X = \\{0\\}$, the unit sphere is empty and the unit-ball supremum is $0$,\nso $\\|T\\| = 0$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-bounded-linear-operator",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be normed spaces over the same scalar field $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, read in\nthe real case from [[def-norm-and-normed-space]] and in the complex case from\n[[def-complex-norm-and-complex-normed-space]]. A $\\mathbb K$-linear map\n$T:X\\to Y$ ([[def-linear-map]]) is a **bounded linear operator** when there is a\nreal constant $C \\ge 0$ such that\n\n$$\\|Tx\\| \\le C\\|x\\| \\qquad \\text{for all } x \\in X.$$\n\nAny such $C$ is called a **bound** for $T$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-fundamental-theorem-of-calculus-for-banach-valued-continuous-curves",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice ([[def-countable-choice]]) for the Lebesgue-measure interfaces. Let $X$ be a real or complex Banach space, let $a<b$, and let $f:[a,b]\\to X$ be continuous. Differentiation uses the underlying real structure. Then $G(t):=\\int_a^t f(s)\\,ds$ is differentiable on $(a,b)$ and has the corresponding one-sided derivatives at $a,b$, with $G'(t)=f(t)$, and this derivative extends continuously to $[a,b]$. Consequently, if $\\varphi:[a,b]\\to X$ is continuous, differentiable on $(a,b)$ with $\\varphi'$ continuous on $(a,b)$ and extendable to a continuous $X$-valued function on $[a,b]$, then $\\int_a^b\\varphi'(s)\\,ds=\\varphi(b)-\\varphi(a)$. The Bochner integral here is the one of [[def-bochner-integrable-function]]; the identities also hold for continuous curves on $[0,\\infty)$ restricted to compact subintervals.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-bochner-integral-norm-inequality",
+          "source_section": "Statement",
+          "quote": "If $f:\\Omega\\to X$ is Bochner integrable, then for every measurable $E$,\n\n$$\\left\\|\\int_E f\\,d\\mu\\right\\|\\leq\\int_E\\|f\\|\\,d\\mu.$$",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-self-adjoint-and-normal-endomorphism",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner product space and let\n$T:V\\to V$ be an endomorphism. The endomorphism $T$ is **self-adjoint** when\n\n$$T^*=T,$$\n\nand **normal** when\n\n$$TT^*=T^*T,$$\n\nwhere $T^*$ is the adjoint from\n[[def-adjoint-of-a-linear-map-between-inner-product-spaces]].\n\nEvery self-adjoint endomorphism is normal, because $TT^*=T^2=T^*T$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F3], $H_D$ is Hermitian because $P=P^*$, $P^\\perp=(P^\\perp)^*$, and $H=H^*$. Also $PH_DP^\\perp=P^\\perp H_DP=0$, so $H_D$ preserves both $\\operatorname{ran}P$ and $\\operatorname{ran}P^\\perp$. Its power-series exponential therefore preserves those subspaces and commutes with $P$, giving $P^\\perp e^{-itH_D/\\hbar}P=0$. The vectors $Px$ and $P^\\perp x$ are orthogonal because $PP^\\perp=0$ and $P=P^*$; hence $\\|x\\|^2=\\|Px\\|^2+\\|P^\\perp x\\|^2$, so $\\|P\\|,\\|P^\\perp\\|\\le1$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For $s$ between $0$ and $t$, set $F(s)=e^{-i(t-s)H/\\hbar}e^{-isH_D/\\hbar}$. By [F1] and the product rule,\n$$F'(s)=\\frac{i}{\\hbar}e^{-i(t-s)H/\\hbar}(H-H_D)e^{-isH_D/\\hbar}=\\frac{i}{\\hbar}e^{-i(t-s)H/\\hbar}Ve^{-isH_D/\\hbar}.$$\nIntegrating this continuous matrix curve from $0$ to $t$ by [F2] gives\n$$e^{-itH_D/\\hbar}-e^{-itH/\\hbar}=\\frac{i}{\\hbar}\\int_0^t e^{-i(t-s)H/\\hbar}Ve^{-isH_D/\\hbar}\\,ds.$$\nThis oriented integral identity holds also for $t<0$.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The two exponentials in the integrand of step 1.2 are unitary by [F1], so its integrand has norm at most $\\|V\\|$ by [F2]. Taking norms in that identity and using the interval length $|t|$ proves the first bound.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Step 1.1 gives $P^\\perp e^{-itH_D/\\hbar}P=0$. Hence $P^\\perp e^{-itH/\\hbar}P=P^\\perp(e^{-itH/\\hbar}-e^{-itH_D/\\hbar})P$. The contraction bounds for $P$ and $P^\\perp$ from step 1.1 and the first estimate in step 2.1 yield the claimed leakage bound.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": []
+    },
+    "thm-nrqmx-floquet-galerkin-correctness": {
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement allows b=N=0 but retains the harmonic zero, so both harmonic index lists are nonempty. Proof steps 1.1 and 3.1 then give the single block H_0 and one assignment; d>=1 fixes its positive size."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "With H_k=0, step 1.1 gives only the diagonal derivative blocks nℏωI_d."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 and step 2.1 apply unchanged for d=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 proves Hermiticity by coefficient symmetry and does not assume simple eigenvalues."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 includes N=0 (one block) and b=0; T>0 and ℏ>0 are stated."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC and Countable Choice are carried explicitly from the self-adjoint Sambe supplier in the Statement."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem proves an exact compression identity, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem proves an exact compression identity, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Take d=1, b=N=1, H0=c real, H1=a, H-1=conjugate(a).",
+          "result": "The assembled matrix is [[c-ℏω, conjugate(a),0],[a,c,conjugate(a)],[0,a,c+ℏω]], exactly the compression of K and Hermitian.",
+          "verifies": "Steps 1.1, 1.2, and 2.1."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-55",
+        "notes": "Independently recomputed compression on e_m(t)v=T^(-1/2) exp(i*m*omega*t)v: multiplication contributes H_(n-m), derivative contributes m*hbar*omega only at n=m, hence the written n-diagonal term agrees. Finite Fourier polynomials satisfy the C1 periodic Hermitian Sambe hypotheses; basis vectors lie in the exact H1 trace domain. H_(-k)=H_k* proves block Hermiticity and therefore admissibility of the single S_tau call. Counted exactly (2N+1)^2 block assignments, including N=0 and b=0 and b>2N with zero extension. Termination and residual output are conditional on the stipulated total solver, not a constructed computational oracle or a spectral approximation theorem. The T normalization and first-linear L2 convention were checked. Corrected source locators verified in Eckardt Section 2.3 (22) and Appendix B (B.1)-(B.3). Reader/refuter findings empty."
+      },
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-nrqmx-floquet-sambe-domain",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice and Countable Choice. Let $d\\ge1$, $T>0$, $\\omega=2\\pi/T$, $\\hbar>0$, and let $H:\\mathbb R\\to M_d(\\mathbb C)$ be $C^1$, $T$-periodic, and Hermitian at every time. On $\\mathscr H_T=L^2((0,T),dt;\\mathbb C^d)$ define\n$$D(K)=\\{f=(f_1,\\ldots,f_d): f_a\\in H^1(0,T)\\text{ for every }a,\\ f(0)=f(T)\\},\\qquad (Kf)(t)=H(t)f(t)-i\\hbar f'(t).$$\nHere each $H^1(0,T)$ function is represented by its unique absolutely continuous representative, so endpoint values are its traces, and $f'$ is its componentwise weak derivative. Then $K$ is self-adjoint on exactly $D(K)$. Choose $v_j$ and $\\varepsilon_j$ from the finite Floquet normal form, so $H_Fv_j=\\varepsilon_jv_j$ and $P(t)$ is its periodic unitary. The functions\n$$\\phi_{jn}(t)=T^{-1/2}e^{in\\omega t}P(t)v_j\\qquad(1\\le j\\le d,\\ n\\in\\mathbb Z)$$\nform an orthonormal basis of $\\mathscr H_T$ and satisfy $K\\phi_{jn}=(\\varepsilon_j+n\\hbar\\omega)\\phi_{jn}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-nrqm-intervals-twisted-periodic-momentum-domain",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice and Countable Choice ([[def-axiom-of-choice]],\n[[def-countable-choice]]). Let $0<L<\\infty$ and $\\theta\\in[0,2\\pi)$. Put\n$D_\\theta:=\\{u\\in H^1(0,L):u^*(L)=e^{i\\theta}u^*(0)\\},\\qquad\nP_\\theta u:=-i\\,Du,$\nwith $H^1$ and the trace $u^*$ of [[def-nrqm-intervals-hilbert-sobolev-spaces]]\nand [[lem-nrqm-intervals-integration-by-parts]] clause (b). Then:\n\n(a) $D_\\theta$ is dense in $L^2(0,L;\\mathbb C)$, $P_\\theta$ is symmetric and\nself-adjoint;\n\n(b) the functions\n$\\varphi_n(x):=\\frac{1}{\\sqrt L}e^{i(2\\pi n+\\theta)x/L}\\qquad(n\\in\\mathbb Z)$\nform a complete orthonormal family of $L^2(0,L;\\mathbb C)$, each\n$\\varphi_n\\in D_\\theta$, and $P_\\theta\\varphi_n=\\kappa_n\\varphi_n$ with\n$\\kappa_n:=\\frac{2\\pi n+\\theta}{L};$\nthe eigenvalues $\\kappa_n$ are simple and\n$\\sigma(P_\\theta)=\\{\\kappa_n:n\\in\\mathbb Z\\}$;\n\n(c) $P_\\theta$ is the unique self-adjoint extension of the symmetric operator\n$P_\\theta$ restricted to the finite linear span of the $\\varphi_n$, and its\ndomain is exactly\n$D_\\theta=\\Bigl\\{\\sum_nc_n\\varphi_n:\\sum_n\\kappa_n^2|c_n|^2<\\infty\\Bigr\\}.$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-nrqmx-floquet-fourier-galerkin",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice and Countable Choice. Fix integers $d\\ge1$, $b,N\\ge0$, and real numbers $\\hbar>0$, $\\omega>0$, and $\\tau>0$. On every coordinate space $\\mathbb C^r$ used below, use the standard inner product $\\langle x,y\\rangle:=\\sum_{a=1}^{r}x_a\\overline{y_a}$, linear in the first argument, and induced norm $\\|x\\|=(\\sum_{a=1}^{r}|x_a|^2)^{1/2}$, as fixed in the finite-dimensional matrix exponential definition; matrix adjoints are conjugate transposes. Let $H_k\\in M_d(\\mathbb C)$ for $-b\\le k\\le b$ satisfy $H_{-k}=H_k^*$; set $H_k=0$ when $|k|>b$. Thus $H(t)=\\sum_{k=-b}^{b}H_ke^{ik\\omega t}$ is a finite Fourier polynomial with period $T=2\\pi/\\omega$. Put $q=(2N+1)d$ and use this coordinate inner product and norm on $\\mathbb C^q$. Let $S_\\tau$ be a caller-supplied total classical routine on $\\{M\\in M_q(\\mathbb C):M=M^*\\}$ whose declared interface, on input $M$, returns real numbers $\\widetilde\\lambda_1,\\ldots,\\widetilde\\lambda_q$, an orthonormal basis $x_1,\\ldots,x_q$ for this inner product, and residuals $r_j=\\|Mx_j-\\widetilde\\lambda_jx_j\\|\\le\\tau$ for $1\\le j\\le q$. This algorithm returns that finite record unchanged and does not independently certify its residual claims.\n\nThe algorithm takes $(d,b,N,\\hbar,\\omega,(H_k)_{|k|\\le b},\\tau,S_\\tau)$ and returns a matrix $K_N$ and the eigensolver's output record:\n\n1. Order the Fourier indices as $-N,-N+1,\\ldots,N$ and allocate a $(2N+1)d$ by $(2N+1)d$ block matrix.\n\n2. For each ordered pair $n,m\\in\\{-N,\\ldots,N\\}$, assign the $d$ by $d$ block\n$$ (K_N)_{nm}:=H_{n-m}+n\\hbar\\omega\\,\\delta_{nm}I_d,$$\nwhere $\\delta_{nm}=1$ if $n=m$ and $0$ otherwise.\n\n3. Set $R:=S_\\tau(K_N)$ by one call, then return $(K_N,R)$.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $-N\\le m\\le N$ and $v\\in\\mathbb C^d$, $e_m(t)v=T^{-1/2}e^{im\\omega t}v$ is smooth and periodic, so it lies in $D(K)$ by [F1]. Multiplication by $H(t)$ gives $\\sum_kT^{-1/2}e^{i(m+k)\\omega t}H_kv$; its coefficient in harmonic $n$ is $H_{n-m}v$. The derivative term is $-i\\hbar\\,\\partial_t(e_m v)=m\\hbar\\omega e_m v$, which contributes only when $n=m$. Thus $\\Pi_NK(e_m v)$ has $n$th coefficient $(H_{n-m}+n\\hbar\\omega\\delta_{nm}I_d)v$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For every pair $n,m$, [F3] gives $(K_N)_{nm}^*=H_{n-m}^*+n\\hbar\\omega\\delta_{nm}I_d=H_{m-n}+m\\hbar\\omega\\delta_{mn}I_d=(K_N)_{mn}$, since $H_{-k}=H_k^*$ and the diagonal term is present only when $n=m$. Hence $K_N$ is Hermitian.",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The coefficient just computed is precisely the block assigned by [F3] in row $n$, column $m$. Since the ordered Fourier basis spans $\\mathcal S_N$, equality of all its matrix blocks proves that $K_N$ is exactly the matrix of $\\Pi_NK|_{\\mathcal S_N}$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "There are $(2N+1)^2$ ordered pairs $(n,m)$, each assignment fills one finite $d$ by $d$ block, so the block assembly terminates after exactly that many assignments. By step 1.2, $K_N$ is Hermitian, and it has dimension $q=(2N+1)d$; hence it is in the domain of the total routine $S_\\tau$ in [F4]. The algorithm makes one call $R:=S_\\tau(K_N)$ after assembly, and totality gives a returned finite record. Thus the complete procedure is well-defined and terminates. This exact compression and termination argument proves no convergence as $N\\to\\infty$, spectral accuracy, or residual claim beyond the routine's stipulated interface.",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.2",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "current_boundary_worksheet": {
+        "proposal": "research/physics-non-fluid-129-2026-10-21-r2-owner-step2-boundary-proposal-3/proposal.json",
+        "source_sha256": "1476e1ace529132844a18db5d052a804ea2cc46100de50fc3f7a4e45142441ab",
+        "qualification": "The eight-case worksheet remains applicable to the current carrier; the reader rechecked its statement and proof, and the only carrier edit was the corrected source locator. No independent acceptance or finite computation asserted."
+      }
+    },
+    "ex-nrqmx-driven-two-level-floquet": {
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes the state space to C^2, so dimension zero is outside its formulation."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 with A=0 reduces P to I and the constant-Hamiltonian factorization remains exact."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example is specifically a two-level C^2 construction."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 permits E0=0, so HF has a repeated eigenvalue and the factorization is unchanged."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 has U(0)=I and step 2.1 has P(0)=P(T)=I; T and ℏ are strictly positive."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice is explicit in the example and supplies uniqueness in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is an example calculation, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is an example calculation, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Set E0=0 and A=0.",
+          "result": "H(t)=0, U(t)=I, HF=0, and P(t)=I for every t.",
+          "verifies": "Steps 1.1 and 2.1."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-55",
+        "notes": "Independently checked F(t)=E0*t+(A/omega)*sin(omega*t) has derivative E0+A*cos(omega*t), F(0)=0. The Hermitian sigma_z exponential differentiates along F using the scalar chain rule, satisfying the exact finite bounded Dyson hypotheses and unique initial-value equation. Splitting the same sigma_z exponential gives the displayed HF and periodic unitary P. Checked E0=0,A=0 and arbitrary signs, all real t, repeated monodromy phases and omega>0; no high-frequency or noncommuting approximation is asserted. Exact trigonometric derivative/period supplier statements opened. Reader source clarification correctly attributes only Floquet formalism to the references and marks the longitudinal computation local. Reader/refuter findings empty."
+      },
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-sine-and-cosine-derivatives",
+          "source_section": "Statement",
+          "quote": "The functions $\\sin$ and $\\cos$ are differentiable on $\\mathbb R$, with\n$$(\\sin x)'=\\cos x,\\qquad(\\cos x)'=-\\sin x.$$\nAlso $\\sin0=0$ and $\\cos0=1$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-sine-cosine-zero-sets-and-fundamental-period",
+          "source_section": "Statement",
+          "quote": "For every real $x$,\n$$\\sin x=0\\Longleftrightarrow x=m\\pi\\text{ for some }m\\in\\mathbb Z,\\qquad \\cos x=0\\Longleftrightarrow x=(m+1/2)\\pi\\text{ for some }m\\in\\mathbb Z.$$\nBoth sine and cosine have period $2\\pi$, and no smaller positive number is a common period.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-nrqm-controlled-dynamics-norm-dyson-series-and-uniqueness",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice ([[def-countable-choice]]). Let $H$ be an arbitrary complex Hilbert space ([[def-hilbert-space]]), $I=[a,b]\\subset\\mathbb R$ a nonempty compact interval, $\\hbar>0$, and $\\mathcal H:I\\to\\mathcal B(H)$ a norm-continuous family of bounded self-adjoint operators. Put $A(t)=-i\\mathcal H(t)/\\hbar$ and $K=\\sup_{t\\in I}\\|A(t)\\|<\\infty$. For every $s,t\\in I$ define $U_0(t,s)=I_H$ and, recursively, the oriented Bochner integrals\n$$U_{n+1}(t,s)=\\int_s^t A(r)U_n(r,s)\\,dr,$$\nwhere $\\int_s^t=-\\int_t^s$ when $t<s$. Equivalently, for $s\\le t$ these are the **latest-time-left** ordered integrals\n$$U_n(t,s)=\\Bigl(\\frac{-i}{\\hbar}\\Bigr)^n\\int_{s<t_1<\\cdots<t_n<t}\\mathcal H(t_n)\\cdots\\mathcal H(t_1)\\,dt_1\\cdots dt_n,$$\nwith the simplex integral meaning the nested integral with $t_n$ outermost and $t_1$ innermost. For arbitrary $s,t$ its unambiguous nested form is $\\int_s^t dr_1\\int_s^{r_1}dr_2\\cdots\\int_s^{r_{n-1}}dr_n\\,A(r_1)\\cdots A(r_n)$. Then:\n\n(a) $\\|U_n(t,s)\\|\\le(K|t-s|)^n/n!$ for all $n\\ge0$ and all $s,t\\in I$.\n\n(b) $U(t,s)=\\sum_{n\\ge0}U_n(t,s)$ converges in operator norm uniformly on $I\\times I$, is jointly norm-continuous, satisfies $U(s,s)=I_H$, and obeys $\\|U(t,s)-I_H\\|\\le e^{K|t-s|}-1$. In particular all original forward-time convergence claims hold.\n\n(c) For every $s,t\\in I$,\n$$U(t,s)=I_H-\\frac{i}{\\hbar}\\int_s^t\\mathcal H(r)U(r,s)\\,dr.$$\nFor fixed $s$ this is the unique continuous $\\mathcal B(H)$-valued solution on $I$. More generally, the solution with initial value $C\\in\\mathcal B(H)$ at $s$ is $U(t,s)C$. For $a<b$, the operator-norm derivatives are\n$$\\partial_tU(t,s)=-\\frac{i}{\\hbar}\\mathcal H(t)U(t,s),\\qquad \\partial_sU(t,s)=+\\frac{i}{\\hbar}U(t,s)\\mathcal H(s),$$\nwith the corresponding one-sided derivatives at the endpoints. Therefore, for every $\\psi\\in H$, $U(t,s)\\psi$ is strongly continuously differentiable in either variable and satisfies the same equations applied to $\\psi$, with the common bounded-generator domain equal to all of $H$.\n\n(d) Every $U(t,s)$ is unitary, $U(t,s)^*=U(s,t)=U(t,s)^{-1}$, and\n$$U(t,s)U(s,r)=U(t,r)\\qquad(r,s,t\\in I).$$\nThese conclusions include both orientations of the time interval and intervals containing positive and negative times. If $a=b$, all terms with $n\\ge1$ vanish and $U(a,a)=I_H$; the derivative assertions then have no nontrivial interval on which to apply.\n\nNo separability hypothesis on $H$, invariant domain for an unbounded operator, differentiability of $\\mathcal H$, spectral theorem or physical interpretation is required.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-nrqmx-finite-hermitian-matrix-exponential",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge1$. Regard $\\mathbb C^d$ as column vectors with the standard complex inner product\n$$\\langle x,y\\rangle:=\\sum_{j=1}^d x_j\\overline{y_j},$$\nlinear in the first argument, and induced norm $\\|x\\|=(\\sum_{j=1}^d|x_j|^2)^{1/2}$. A matrix $A=(a_{ij})\\in M_d(\\mathbb C)$ acts by $(Ax)_i=\\sum_{j=1}^d a_{ij}x_j$, and its adjoint for this inner product is $A^*=\\overline A^{\\mathsf T}$.\n\nFor $A\\in M_d(\\mathbb C)$ and $z\\in\\mathbb C$, define the finite-dimensional matrix exponential by\n$$e^{zA}:=\\sum_{k=0}^{\\infty}\\frac{z^kA^k}{k!},\\qquad A^0=I_d.$$\nThe scalar exponential convention is $\\exp w=\\sum_{k\\ge0}w^k/k!$.\n\nEvery matrix $B=(b_{ij})\\in M_d(\\mathbb C)$ is bounded on $\\mathbb C^d$: since $|x_j|\\le\\|x\\|$, one has\n$$\\|Bx\\|^2\\le\\sum_{i=1}^d\\left(\\sum_{j=1}^d|b_{ij}|\\right)^2\\|x\\|^2.$$\nThus its operator norm is defined by the unit-ball supremum in the operator-norm definition listed in Definition references. For $B,C\\in M_d(\\mathbb C)$ and $\\|x\\|\\le1$, the operator-norm bound gives $\\|BCx\\|\\le\\|B\\|\\|Cx\\|\\le\\|B\\|\\|C\\|$; taking the supremum proves $\\|BC\\|\\le\\|B\\|\\|C\\|$. Since $d\\ge1$, the coordinate vector $e_1$ with first entry $1$ and other entries $0$ is a unit vector, so $\\|I_d\\|=1$. Homogeneity and the triangle inequality follow from the unit-ball supremum, and $\\|B\\|=0$ forces $Be_j=0$ for each coordinate vector $e_j$ (with entry $1$ at $j$ and $0$ elsewhere), hence $B=0$. Therefore $M_d(\\mathbb C)$ with this operator norm is a normed $\\mathbb C$-vector space; the matrices $E_{ij}$ with entry $1$ at $(i,j)$ and $0$ elsewhere form a basis of size $d^2$.\n\nCompleteness of the complex plane and finite-dimensional norm equivalence (the two theorems in Definition references) make $M_d(\\mathbb C)$ complete in this operator norm. By induction and submultiplicativity, $\\|A^k\\|\\le\\|A\\|^k$ for every $k\\ge1$, while $\\|A^0\\|=1$. The scalar series $\\sum_{k\\ge0}(|z|\\|A\\|)^k/k!$ converges by the scalar exponential convergence lemma in Definition references. Hence for $m>n$,\n$$\\left\\|\\sum_{k=n+1}^{m}\\frac{z^kA^k}{k!}\\right\\|\\le\\sum_{k=n+1}^{m}\\frac{(|z|\\|A\\|)^k}{k!}\\longrightarrow0\\quad(n\\to\\infty).$$\nThe partial sums are Cauchy, so completeness gives their operator-norm limit; the same estimate proves absolute convergence in operator norm.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-nrqmx-finite-hermitian-matrix-exponential",
+          "source_section": "Statement",
+          "quote": "Let $d\\ge1$, let $A=A^*$ be an endomorphism of $\\mathbb C^d$ with its standard complex inner product, and let $\\hbar>0$. For real $t$, define $E_A(t):=e^{-itA/\\hbar}$ by the finite-dimensional matrix exponential defined on this page. Then $E_A(t)$ is unitary, $E_A(t+s)=E_A(t)E_A(s)$ for all real $s,t$, and its operator-norm derivative is\n$$\\frac{d}{dt}E_A(t)=-\\frac{i}{\\hbar}AE_A(t)= -\\frac{i}{\\hbar}E_A(t)A.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-nrqmx-finite-floquet-normal-form",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $d\\ge1$, $T>0$, $\\hbar>0$, $\\omega=2\\pi/T$, and let $H:\\mathbb R\\to M_d(\\mathbb C)$ be continuous, $T$-periodic, and Hermitian at every time. Let $U(t,s)$ be the unitary propagator solving $i\\hbar\\,\\partial_tU(t,s)=H(t)U(t,s)$ and $U(s,s)=I_d$. There are an orthonormal basis $v_1,\\ldots,v_d$ and real numbers $\\varepsilon_1,\\ldots,\\varepsilon_d$ such that\n$$U(T,0)v_j=e^{-iT\\varepsilon_j/\\hbar}v_j\\qquad(1\\le j\\le d).$$\nDefine the Hermitian matrix $H_Fv_j=\\varepsilon_jv_j$ and the quasienergy classes $\\varepsilon_j+\\hbar\\omega\\mathbb Z$. With $P(t):=U(t,0)e^{itH_F/\\hbar}$, $P(t)$ is a $T$-periodic unitary matrix and\n$$U(t,0)=P(t)e^{-itH_F/\\hbar}\\qquad(t\\in\\mathbb R).$$\nThe real representative $\\varepsilon_j$ may be changed by any integer multiple of $\\hbar\\omega$ without changing its eigenphase; no preferred real branch is asserted.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-sine-and-cosine-derivatives",
+          "source_section": "Statement",
+          "quote": "The functions $\\sin$ and $\\cos$ are differentiable on $\\mathbb R$, with\n$$(\\sin x)'=\\cos x,\\qquad(\\cos x)'=-\\sin x.$$\nAlso $\\sin0=0$ and $\\cos0=1$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $F(t)=E_0t+(A/\\omega)\\sin(\\omega t)$. By [F1] and [F4], $F'(t)=E_0+A\\cos(\\omega t)$. The diagonal entries of $\\exp[-iF(t)\\sigma_z/\\hbar]$ are $e^{-iF(t)/\\hbar}$ and $e^{iF(t)/\\hbar}$; differentiating them using [F2] gives $i\\hbar\\,\\partial_tU(t,0)=F'(t)\\sigma_zU(t,0)=H(t)U(t,0)$. At $t=0$ the exponential is $I_2$, so uniqueness in [F2] identifies it with the propagator.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The finite exponential group law in [F2] splits $U(t,0)=e^{-iA\\sin(\\omega t)\\sigma_z/(\\hbar\\omega)}e^{-itE_0\\sigma_z/\\hbar}$. Thus $H_F=E_0\\sigma_z$ and the stated $P(t)$ give the required factorization. The matrix exponential is unitary by [F2], and $P(t+T)=P(t)$ by the $2\\pi$ period in [F1]. Hence this is a Floquet normal form with quasienergies $E_0$ and $-E_0$, each understood modulo $\\hbar\\omega$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": []
+    },
+    "cex-nrqmx-quasienergy-no-order": {
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample uses a one-dimensional state space and does not formulate the zero space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the zero Hamiltonian and identity monodromy as the witness."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 is exactly one-dimensional, the smallest nonzero case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the one-dimensional identity monodromy, for which the single phase has infinitely many real logarithm branches."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "T>0 and ℏ>0 are stated; the period phase is evaluated exactly at T in step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice is carried from the finite Floquet normal-form supplier in the item Statement."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The counterexample refutes a uniqueness claim; it is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The counterexample refutes a uniqueness claim; it is not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Take n=0 and n=1 in H_F^(n)=nℏω on C.",
+          "result": "Both exponentials over T equal 1, while their least (only) real eigenvalues are 0 and ℏω.",
+          "verifies": "Steps 1.1 and 2.1."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-55",
+        "notes": "Independently checked d=1,H(t)=0 gives U(T,0)=1 under the CC Dyson supplier. Every real n*hbar*omega has period exponential exp(-2*pi*i*n)=1 by exact exponential kernel. Its sole eigenvalue is its least, and n=0 versus n=1 already disproves branch-independent least representative; n over Z is unbounded below. The invariant is the quotient class, not a preferred real order or any empirical ground energy. T,hbar>0 exclude division and zero-step degeneracies. Item bytes match frozen pre/post; only contract audit enrichment changed. Reader/refuter findings empty."
+      },
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "thm-nrqmx-finite-floquet-normal-form",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $d\\ge1$, $T>0$, $\\hbar>0$, $\\omega=2\\pi/T$, and let $H:\\mathbb R\\to M_d(\\mathbb C)$ be continuous, $T$-periodic, and Hermitian at every time. Let $U(t,s)$ be the unitary propagator solving $i\\hbar\\,\\partial_tU(t,s)=H(t)U(t,s)$ and $U(s,s)=I_d$. There are an orthonormal basis $v_1,\\ldots,v_d$ and real numbers $\\varepsilon_1,\\ldots,\\varepsilon_d$ such that\n$$U(T,0)v_j=e^{-iT\\varepsilon_j/\\hbar}v_j\\qquad(1\\le j\\le d).$$\nDefine the Hermitian matrix $H_Fv_j=\\varepsilon_jv_j$ and the quasienergy classes $\\varepsilon_j+\\hbar\\omega\\mathbb Z$. With $P(t):=U(t,0)e^{itH_F/\\hbar}$, $P(t)$ is a $T$-periodic unitary matrix and\n$$U(t,0)=P(t)e^{-itH_F/\\hbar}\\qquad(t\\in\\mathbb R).$$\nThe real representative $\\varepsilon_j$ may be changed by any integer multiple of $\\hbar\\omega$ without changing its eigenphase; no preferred real branch is asserted.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-nrqmx-finite-floquet-normal-form",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $d\\ge1$, $T>0$, $\\hbar>0$, $\\omega=2\\pi/T$, and let $H:\\mathbb R\\to M_d(\\mathbb C)$ be continuous, $T$-periodic, and Hermitian at every time. Let $U(t,s)$ be the unitary propagator solving $i\\hbar\\,\\partial_tU(t,s)=H(t)U(t,s)$ and $U(s,s)=I_d$. There are an orthonormal basis $v_1,\\ldots,v_d$ and real numbers $\\varepsilon_1,\\ldots,\\varepsilon_d$ such that\n$$U(T,0)v_j=e^{-iT\\varepsilon_j/\\hbar}v_j\\qquad(1\\le j\\le d).$$\nDefine the Hermitian matrix $H_Fv_j=\\varepsilon_jv_j$ and the quasienergy classes $\\varepsilon_j+\\hbar\\omega\\mathbb Z$. With $P(t):=U(t,0)e^{itH_F/\\hbar}$, $P(t)$ is a $T$-periodic unitary matrix and\n$$U(t,0)=P(t)e^{-itH_F/\\hbar}\\qquad(t\\in\\mathbb R).$$\nThe real representative $\\varepsilon_j$ may be changed by any integer multiple of $\\hbar\\omega$ without changing its eigenphase; no preferred real branch is asserted.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-nrqmx-finite-hermitian-matrix-exponential",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge1$. Regard $\\mathbb C^d$ as column vectors with the standard complex inner product\n$$\\langle x,y\\rangle:=\\sum_{j=1}^d x_j\\overline{y_j},$$\nlinear in the first argument, and induced norm $\\|x\\|=(\\sum_{j=1}^d|x_j|^2)^{1/2}$. A matrix $A=(a_{ij})\\in M_d(\\mathbb C)$ acts by $(Ax)_i=\\sum_{j=1}^d a_{ij}x_j$, and its adjoint for this inner product is $A^*=\\overline A^{\\mathsf T}$.\n\nFor $A\\in M_d(\\mathbb C)$ and $z\\in\\mathbb C$, define the finite-dimensional matrix exponential by\n$$e^{zA}:=\\sum_{k=0}^{\\infty}\\frac{z^kA^k}{k!},\\qquad A^0=I_d.$$\nThe scalar exponential convention is $\\exp w=\\sum_{k\\ge0}w^k/k!$.\n\nEvery matrix $B=(b_{ij})\\in M_d(\\mathbb C)$ is bounded on $\\mathbb C^d$: since $|x_j|\\le\\|x\\|$, one has\n$$\\|Bx\\|^2\\le\\sum_{i=1}^d\\left(\\sum_{j=1}^d|b_{ij}|\\right)^2\\|x\\|^2.$$\nThus its operator norm is defined by the unit-ball supremum in the operator-norm definition listed in Definition references. For $B,C\\in M_d(\\mathbb C)$ and $\\|x\\|\\le1$, the operator-norm bound gives $\\|BCx\\|\\le\\|B\\|\\|Cx\\|\\le\\|B\\|\\|C\\|$; taking the supremum proves $\\|BC\\|\\le\\|B\\|\\|C\\|$. Since $d\\ge1$, the coordinate vector $e_1$ with first entry $1$ and other entries $0$ is a unit vector, so $\\|I_d\\|=1$. Homogeneity and the triangle inequality follow from the unit-ball supremum, and $\\|B\\|=0$ forces $Be_j=0$ for each coordinate vector $e_j$ (with entry $1$ at $j$ and $0$ elsewhere), hence $B=0$. Therefore $M_d(\\mathbb C)$ with this operator norm is a normed $\\mathbb C$-vector space; the matrices $E_{ij}$ with entry $1$ at $(i,j)$ and $0$ elsewhere form a basis of size $d^2$.\n\nCompleteness of the complex plane and finite-dimensional norm equivalence (the two theorems in Definition references) make $M_d(\\mathbb C)$ complete in this operator norm. By induction and submultiplicativity, $\\|A^k\\|\\le\\|A\\|^k$ for every $k\\ge1$, while $\\|A^0\\|=1$. The scalar series $\\sum_{k\\ge0}(|z|\\|A\\|)^k/k!$ converges by the scalar exponential convergence lemma in Definition references. Hence for $m>n$,\n$$\\left\\|\\sum_{k=n+1}^{m}\\frac{z^kA^k}{k!}\\right\\|\\le\\sum_{k=n+1}^{m}\\frac{(|z|\\|A\\|)^k}{k!}\\longrightarrow0\\quad(n\\to\\infty).$$\nThe partial sums are Cauchy, so completeness gives their operator-norm limit; the same estimate proves absolute convergence in operator norm.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-kernel-and-fibres-of-complex-exponential",
+          "source_section": "Statement",
+          "quote": "$$\\ker(\\exp)=2\\pi i\\mathbb Z,$$\nand $\\exp z=\\exp w$ exactly when $z-w\\in2\\pi i\\mathbb Z$. The conventions and prerequisite facts used below are recorded in [[cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]], [[thm-exponential-is-strictly-increasing]], [[thm-sine-cosine-zero-sets-and-fundamental-period]], [[thm-sine-and-cosine-parametrize-the-unit-circle]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-nrqm-controlled-dynamics-norm-dyson-series-and-uniqueness",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice ([[def-countable-choice]]). Let $H$ be an arbitrary complex Hilbert space ([[def-hilbert-space]]), $I=[a,b]\\subset\\mathbb R$ a nonempty compact interval, $\\hbar>0$, and $\\mathcal H:I\\to\\mathcal B(H)$ a norm-continuous family of bounded self-adjoint operators. Put $A(t)=-i\\mathcal H(t)/\\hbar$ and $K=\\sup_{t\\in I}\\|A(t)\\|<\\infty$. For every $s,t\\in I$ define $U_0(t,s)=I_H$ and, recursively, the oriented Bochner integrals\n$$U_{n+1}(t,s)=\\int_s^t A(r)U_n(r,s)\\,dr,$$\nwhere $\\int_s^t=-\\int_t^s$ when $t<s$. Equivalently, for $s\\le t$ these are the **latest-time-left** ordered integrals\n$$U_n(t,s)=\\Bigl(\\frac{-i}{\\hbar}\\Bigr)^n\\int_{s<t_1<\\cdots<t_n<t}\\mathcal H(t_n)\\cdots\\mathcal H(t_1)\\,dt_1\\cdots dt_n,$$\nwith the simplex integral meaning the nested integral with $t_n$ outermost and $t_1$ innermost. For arbitrary $s,t$ its unambiguous nested form is $\\int_s^t dr_1\\int_s^{r_1}dr_2\\cdots\\int_s^{r_{n-1}}dr_n\\,A(r_1)\\cdots A(r_n)$. Then:\n\n(a) $\\|U_n(t,s)\\|\\le(K|t-s|)^n/n!$ for all $n\\ge0$ and all $s,t\\in I$.\n\n(b) $U(t,s)=\\sum_{n\\ge0}U_n(t,s)$ converges in operator norm uniformly on $I\\times I$, is jointly norm-continuous, satisfies $U(s,s)=I_H$, and obeys $\\|U(t,s)-I_H\\|\\le e^{K|t-s|}-1$. In particular all original forward-time convergence claims hold.\n\n(c) For every $s,t\\in I$,\n$$U(t,s)=I_H-\\frac{i}{\\hbar}\\int_s^t\\mathcal H(r)U(r,s)\\,dr.$$\nFor fixed $s$ this is the unique continuous $\\mathcal B(H)$-valued solution on $I$. More generally, the solution with initial value $C\\in\\mathcal B(H)$ at $s$ is $U(t,s)C$. For $a<b$, the operator-norm derivatives are\n$$\\partial_tU(t,s)=-\\frac{i}{\\hbar}\\mathcal H(t)U(t,s),\\qquad \\partial_sU(t,s)=+\\frac{i}{\\hbar}U(t,s)\\mathcal H(s),$$\nwith the corresponding one-sided derivatives at the endpoints. Therefore, for every $\\psi\\in H$, $U(t,s)\\psi$ is strongly continuously differentiable in either variable and satisfies the same equations applied to $\\psi$, with the common bounded-generator domain equal to all of $H$.\n\n(d) Every $U(t,s)$ is unitary, $U(t,s)^*=U(s,t)=U(t,s)^{-1}$, and\n$$U(t,s)U(s,r)=U(t,r)\\qquad(r,s,t\\in I).$$\nThese conclusions include both orientations of the time interval and intervals containing positive and negative times. If $a=b$, all terms with $n\\ge1$ vanish and $U(a,a)=I_H$; the derivative assertions then have no nontrivial interval on which to apply.\n\nNo separability hypothesis on $H$, invariant domain for an unbounded operator, differentiability of $\\mathcal H$, spectral theorem or physical interpretation is required.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Take the constant zero Hamiltonian $H(t)=0$ on $\\mathbb C$. Its propagator is $U(t,0)=1$ by [F3]. For each integer $n$, the Hermitian scalar $H_F^{(n)}=n\\hbar\\omega$ satisfies $e^{-iTH_F^{(n)}/\\hbar}=e^{-i2\\pi n}=1=U(T,0)$, so each is a valid logarithm of the same monodromy.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "In dimension one the only eigenvalue of $H_F^{(n)}$, and hence its least quasienergy representative, is $n\\hbar\\omega$. It varies with $n$, while all representatives have the same class modulo $\\hbar\\omega$ by [F1, F2]. Therefore the period unitary determines a quasienergy class but no branch-independent least real quasienergy.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": []
+    }
+  }
+}

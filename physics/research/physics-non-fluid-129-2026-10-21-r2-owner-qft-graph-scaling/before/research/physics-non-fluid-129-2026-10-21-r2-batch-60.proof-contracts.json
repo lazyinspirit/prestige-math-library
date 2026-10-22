@@ -1,0 +1,1042 @@
+{
+  "version": 1,
+  "level": "physics-non-fluid-129-2026-10-21-r2-batch-60",
+  "scope": [
+    "lem-qftx-local-polynomial-functionals-are-microcausal",
+    "lem-qftx-finite-graph-scaling-degree",
+    "thm-qftx-scalar-eg-induction",
+    "prop-qftx-finite-renormalization-composition",
+    "ex-qftx-two-vertex-log"
+  ],
+  "contracts": {
+    "lem-qftx-local-polynomial-functionals-are-microcausal": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qftx-off-shell-local-polynomial-functionals",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb M=\\mathbb R^4$ with coordinates $x=(x^0,x^1,x^2,x^3)$, metric $\\eta=\\operatorname{diag}(-1,1,1,1)$ and time orientation given by increasing $x^0$. A field configuration is any smooth real function $\\phi\\in C^\\infty(\\mathbb M;\\mathbb R)$; it is off shell, meaning that it is not required to satisfy a field equation. For an integer $s\\ge0$, its finite jet at $x$ is the finite tuple $j^s\\phi(x)=(\\partial^\\alpha\\phi(x))_{|\\alpha|\\le s}$, with multi-index derivatives in these coordinates.\n\nAn off-shell local polynomial scalar functional is a finite sum\n$$F(\\phi)=c+\\sum_{a=1}^{N}\\int_{\\mathbb M} f_a(x)\\,P_a(j^{s_a}\\phi(x))\\,d^4x,$$\nwhere $c\\in\\mathbb C$, $f_a\\in C_c^\\infty(\\mathbb M;\\mathbb C)$, each $P_a$ is a polynomial in the finitely many jet coordinates, and each $s_a$ is finite. Its support is contained in the compact set $\\bigcup_{a=1}^{N}\\operatorname{supp}f_a$. The collection of these functionals is denoted $\\mathcal F_{\\mathrm{loc}}^{\\mathrm{poly}}(\\mathbb M)$. The involution is $F^*(\\phi)=\\overline{F(\\phi)}$. No physical units or field equation are imposed.\n\nPrecisely, $\\operatorname{supp}F$ is the set of $x\\in\\mathbb M$ such that every neighborhood $U$ of $x$ contains the support of some $h\\in C_c^\\infty(\\mathbb M;\\mathbb R)$ for which $F(\\phi+h)\\ne F(\\phi)$ for some smooth configuration $\\phi$. It is closed and is contained in the displayed compact union, so it is compact. This definition is independent of the chosen finite presentation of $F$.\n\nFor $r\\ge1$, define the $r$th functional derivative by\n$$F^{(r)}(\\phi)(h_1,\\ldots,h_r)=\\left.\\frac{\\partial^r}{\\partial t_1\\cdots\\partial t_r}F\\!\\left(\\phi+\\sum_{j=1}^{r}t_jh_j\\right)\\right|_{t_1=\\cdots=t_r=0},\\qquad h_j\\in C_c^\\infty(\\mathbb M;\\mathbb R).$$\nThe finite polynomial expansion makes this a symmetric multilinear form. Repeated integration by parts in each $h_j$ writes it as a compactly supported distribution kernel on the thin diagonal $\\{(x,\\ldots,x):x\\in\\mathbb M\\}\\subset\\mathbb M^r$. Integrals use the fixed Minkowski density $d^4x$; all kernels are paired bilinearly with compactly supported smooth tests.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qftx-local-wavefront-set",
+          "source_section": "Definition",
+          "quote": "Let $\\Omega\\subseteq\\mathbb R^n$ be open and let $u\\in\\mathcal D'(\\Omega)$, using the local distribution convention of [[def-qftx-distributions-on-smooth-manifolds]]. For $p\\in\\Omega$ and $\\xi\\in\\mathbb R^n\\setminus\\{0\\}$, call $(p,\\xi)$ regular for $u$ if there are $\\chi\\in C_c^\\infty(\\Omega)$ with $\\chi=1$ near $p$ and an open cone $\\Gamma\\subseteq\\mathbb R^n\\setminus\\{0\\}$ containing $\\xi$ such that for every integer $N\\ge0$,\n$$ \\sup_{\\eta\\in\\Gamma}(1+|\\eta|)^N\\left|\\left\\langle u,\\chi(x)e^{-2\\pi i x\\cdot\\eta}|dx^1\\cdots dx^n|\\right\\rangle\\right|<\\infty. $$\nThe local wavefront set $\\operatorname{WF}_\\Omega(u)$ is the complement of these regular pairs in $T^*\\Omega\\setminus0$, with the standard cotangent coordinates $(p,\\xi)$. A cone is invariant under multiplication by positive scalars. This is a chart-level definition; this item makes no assertion about its behavior under a change of coordinates.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qftx-polynomial-microcausal-functionals",
+          "source_section": "Definition",
+          "quote": "Let $M$ be an oriented, time-oriented, globally hyperbolic smooth Lorentzian $n$-manifold without boundary, $n\\ge2$, with signature $(-,+,\\ldots,+)$. A cotangent vector is future or past causal when its metric dual belongs to the corresponding closed causal tangent cone. For $r\\ge1$, let $\\overline V_\\pm^r\\subset T^*M^r\\setminus0$ consist of tuples $(x_1,\\ldots,x_r;\\xi_1,\\ldots,\\xi_r)$ such that every $\\xi_j$ is either zero or future causal for $+$, respectively past causal for $-$, and the total tuple is nonzero. The wavefront set used below is the set of nonzero cotangent tuples where compactly localized Fourier transforms fail rapid decay in every conic neighborhood.\n\nA compactly supported polynomial functional is a finite expression\n$$ F(\\phi)=\\sum_{m=0}^{N}\\left\\langle f_m,\\phi^{\\otimes m}\\mu_g^{\\otimes m}\\right\\rangle, $$\nwhere $\\phi\\in C^\\infty(M;\\mathbb R)$, $f_m\\in\\mathcal E'(M^m)$ is symmetric under permutations of its $m$ variables, $\\mu_g$ is the metric density fixed by the Lorentzian metric, and the pairing is defined by inserting a compactly supported cutoff equal to one near $\\operatorname{supp}f_m$ in the smooth factor. Its $r$th functional derivative $F^{(r)}(\\phi)\\in\\mathcal E'(M^r)$ is specified, for a test density $\\omega$ on $M^r$, by\n$$ \\left\\langle F^{(r)}(\\phi),\\omega\\right\\rangle =\\sum_{m=r}^{N}\\frac{m!}{(m-r)!} \\left\\langle f_m,\\omega\\otimes\\phi^{\\otimes(m-r)}\\mu_g^{\\otimes(m-r)}\\right\\rangle, $$\nwhere a compactly supported cutoff equal to one near $\\operatorname{supp}f_m$ is inserted in the smooth $\\phi$ factors. Expanding the finite polynomial shows that this kernel represents the directional derivative in smooth compactly supported real directions. The functional is microcausal when\n$$ \\operatorname{WF}(F^{(r)}(\\phi))\\cap(\\overline V_+^r\\cup\\overline V_-^r)=\\varnothing $$\nfor every $r\\ge1$ and every $\\phi\\in C^\\infty(M;\\mathbb R)$. Write $\\mathcal F_{\\mu c}^{\\mathrm{poly}}(M)$ for this class, including constants.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qftx-wavefront-hadamard",
+          "source_section": "Definition",
+          "quote": "Let $(M,g)$ be a Hausdorff, second-countable, oriented, time-oriented, globally hyperbolic smooth Lorentzian $n$-manifold without boundary, $n\\ge2$. Here $g$ is a smooth symmetric nondegenerate bilinear form on each tangent space with one negative and $n-1$ positive directions; in charts its signature is $(-,+,\\ldots,+)$. An orientation is a smooth choice of orientation in each tangent space. A time orientation selects one of the two components of $\\{v\\ne0:g(v,v)<0\\}$ as future. A tangent vector is causal when $g(v,v)\\le0$, and is future or past causal when it belongs to the closure of the selected future or past timelike cone. A causal curve is piecewise $C^1$ with causal tangent consistently future or past directed. Put $J^+(p)$ and $J^-(p)$ for the points reached from or reaching $p$ by such curves. Here globally hyperbolic means strongly causal and every causal diamond $J^+(p)\\cap J^-(q)$ is compact; strongly causal means every point has arbitrarily small neighborhoods which each causal curve meets in a connected parameter interval. A nonzero cotangent vector is future or past causal, or future or past null, when its metric dual under $g^{-1}$ has the corresponding tangent property.\n\nLet $\\nabla$ be the unique torsion-free connection with $\\nabla g=0$. Define the smooth metric density $\\mu_g=|\\det(g_{ab})|^{1/2}|dx^1\\cdots dx^n|$ in a chart. It is coordinate-independent: under $y=\\psi(x)$, $g_y=(D\\psi^{-1})^Tg_xD\\psi^{-1}$, so $|\\det g_y|^{1/2}=|\\det D\\psi^{-1}|\\,|\\det g_x|^{1/2}$, the density transformation law. Functional-kernel pairings and contractions on this page use $\\mu_g$ in each integrated variable; no physical units are assigned.\n\nFor each smooth chart $x:U\\to\\Omega\\subseteq\\mathbb R^n$, let $u_x\\in\\mathcal D'(\\Omega)$ be the coordinate representative of $u$ in the test-density convention of [[def-qftx-distributions-on-smooth-manifolds]]. Map a local covector $(x(p),\\xi)\\in T^*\\Omega$ to $(p,dx_p^T\\xi)\\in T^*M$. Define the global wavefront set by the union over all charts,\n$$ \\operatorname{WF}(u):=\\bigcup_{(U,x)}\\{(p,dx_p^T\\xi):(x(p),\\xi)\\in\\operatorname{WF}_{x(U)}(u_x)\\}\\subset T^*M\\setminus0, $$\nwhere the local sets are those of [[def-qftx-local-wavefront-set]]. Thus the global set is defined using all charts; equality of the chartwise descriptions on overlaps is a separate theorem. The Fourier convention is the displayed $2\\pi$ convention.\n\nAn affinely parametrized null geodesic is a smooth curve $\\gamma$ with $g(\\dot\\gamma,\\dot\\gamma)=0$ and $\\nabla_{\\dot\\gamma}\\dot\\gamma=0$; it is future-directed when $\\dot\\gamma$ lies in the chosen future causal cone. Two nonzero future-null cotangent vectors $(p,\\xi)$ and $(q,\\zeta)$ are related, written $(p,\\xi)\\sim(q,\\zeta)$, if a future-directed affinely parametrized null geodesic from $p$ to $q$ carries $\\xi$ to $\\zeta$ by the induced parallel transport on covectors; for $p=q$ the zero-length segment has $\\zeta=\\xi$. Define the positive-frequency null relation\n$$ \\mathcal C^+_g:=\\{(p,\\xi;q,-\\zeta): (p,\\xi)\\sim(q,\\zeta),\\ \\xi\\text{ future null}\\}\\subset T^*(M\\times M)\\setminus0. $$\nFor a fixed scalar second-order operator $P=-g^{ab}\\nabla_a\\nabla_b+X^a\\nabla_a+V$, with smooth vector field $X$, smooth scalar $V$, inverse metric $g^{ab}$, and Levi-Civita derivative $\\nabla$, a scalar Hadamard bisolution is a distribution $W\\in\\mathcal D'(M\\times M)$ satisfying $P_xW=P_yW=0$ and $\\operatorname{WF}(W)=\\mathcal C^+_g$. Write $W^{\\mathsf T}=\\tau^*W$ for the pullback by $\\tau(x,y)=(y,x)$. A fixed antisymmetric part means the equality $W-W^{\\mathsf T}=iE$ for one specified distribution $E$. This definition asserts no existence of $W$ and fixes no field-operator or commutator sign beyond the displayed convention.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Expand the finite polynomial in the definition of $F$ after substituting $\\phi+\\sum_jt_jh_j$ and take the coefficient of $t_1\\cdots t_r$. Each resulting term has the form $\\int a(x)\\prod_{j=1}^{r}\\partial^{\\alpha_j}h_j(x)\\,d^4x$ with $a\\in C_c^\\infty(\\mathbb M)$. Integrating by parts in the compactly supported directions moves every $\\partial^{\\alpha_j}$ onto the smooth coefficient, so the term becomes $\\int b(x)\\prod_jh_j(x)\\,d^4x$ for a smooth compactly supported $b$. Its distribution kernel on $\\mathbb M^r$ is $b(x)\\prod_{j<r}\\delta(x_j-x_r)$, supported on $\\Delta_r$.",
+          "inputs": [
+            "F1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "In coordinates $x=x_r$ and $z_j=x_j-x_r$ for $j<r$, a compact localization of this kernel is $b_0(x)\\prod_{j<r}\\delta(z_j)$ with $b_0\\in C_c^\\infty$. Its Fourier transform in $(x,z)$ is $\\widehat b_0(\\kappa)$, independent of the normal frequencies $\\zeta_j$. Since $\\widehat b_0$ is rapidly decreasing in $\\kappa$, rapid decay holds in every closed cone where $|\\kappa|\\ge\\epsilon|(\\kappa,\\zeta)|$ for some $\\epsilon>0$. Therefore any wavefront covector has $\\kappa=0$, so it is conormal to $\\Delta_r$. In the original coordinates this is exactly $\\sum_j\\xi_j=0$.",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "If $\\xi_1,\\ldots,\\xi_r$ are all future causal covectors in this Minkowski chart, their metric-dual time components have one weak sign, and a nonzero causal covector has a strictly nonzero time component. Thus $\\sum_j\\xi_j=0$ forces every $\\xi_j=0$. The same argument applies to past causal covectors. By step 2.1 the wavefront set is conormal, so it contains no nonzero tuple in either forbidden cone of [F3]. This proves microcausality.",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "A constant functional has zero derivative kernels, so its wavefront set is empty (Definition)."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero kernel has empty wavefront set by the localized Fourier criterion in step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For r=1, conormality forces ξ1=0, so the nonzero wavefront set is empty by step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Coincident points are exactly the thin diagonal Δr handled in steps 1.1–2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Future and past null covectors are included in the causal cones; their time components are strictly signed in step 3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses finite polynomial expansion, integration by parts and local Fourier decay; no choice axiom occurs."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a one-way wavefront inclusion and contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a one-way wavefront inclusion and contains no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "r=1",
+          "calculation": "For one derivative variable, ξ1=0 is the conormal equation; WF excludes the zero section, so the kernel is smooth.",
+          "disposition": "Direct finite specialization of steps 2.1–3.1."
+        },
+        {
+          "case": "r=2",
+          "calculation": "For Δ2 the conormal equation is ξ1+ξ2=0; two future causal covectors can sum to zero only when both vanish.",
+          "disposition": "Direct finite cone check in step 3.1."
+        }
+      ]
+    },
+    "lem-qftx-finite-graph-scaling-degree": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qftx-local-time-ordered-system",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb M=\\mathbb R^4$ have metric $\\eta=\\operatorname{diag}(-1,1,1,1)$, orientation $dx^0\\wedge dx^1\\wedge dx^2\\wedge dx^3$, and future direction given by increasing $x^0$. Use units $c=1$, so a mass parameter has inverse-length units. Define $x\\in J^+(y)$ by $x^0-y^0\\ge|\\mathbf x-\\mathbf y|$ and $x\\in J^-(y)$ by $y^0-x^0\\ge|\\mathbf y-\\mathbf x|$; for $A\\subseteq\\mathbb M$, put $J^\\pm(A)=\\bigcup_{y\\in A}J^\\pm(y)$. A field configuration is any smooth real function $\\phi$; it is off shell because no field equation is imposed. The allowed local interactions are compactly supported finite polynomial functionals of $\\phi$ and finitely many coordinate derivatives, integrated against $d^4x$. The support of a functional $F$ is the closed set of points each of whose neighborhoods contains the support of a compactly supported variation that changes $F$ for some configuration.\n\nFor $\\Lambda\\in SO^+(1,3)$, require $\\Lambda^{\\mathsf T}\\eta\\Lambda=\\eta$, $\\det\\Lambda=1$, and preservation of the chosen future cone; $SO^+(1,3)$ denotes this identity component. The proper orthochronous Poincare group consists of $\\gamma=(a,\\Lambda)$ with $a\\in\\mathbb M$ and $\\Lambda\\in SO^+(1,3)$. It acts by $(\\gamma\\cdot\\phi)(x)=\\phi(\\Lambda^{-1}(x-a))$ and $(\\gamma\\cdot F)(\\phi)=F(\\gamma^{-1}\\cdot\\phi)$.\n\nFor a distribution on a coordinate chart, its wavefront set consists of the nonzero cotangent directions where every compact localization fails to have a rapidly decreasing Fourier transform in every conic neighborhood. Covectors are future or past causal when their metric-dual vectors are causal with the indicated time orientation; a nonzero causal covector has a nonzero time component. Write $\\Delta=\\{(x,x):x\\in\\mathbb M\\}$ and $N^*\\Delta=\\{(x,\\xi;x,-\\xi):\\xi\\ne0\\}$. Write $(x,\\xi)\\sim(y,\\eta)$ when $x,y$ lie on one null straight segment (a zero-length segment is allowed), and parallel transport along that segment carries $\\xi$ to $\\eta$. A fixed free scalar input consists of $m\\ge0$, a two-point distribution $W$ satisfying\n$$P_xW=P_yW=0,\\qquad P=-\\eta^{ab}\\partial_a\\partial_b+m^2,$$\nand the positive-frequency null wavefront condition\n$$\\operatorname{WF}(W)=\\mathcal C^+:=\\{(x,\\xi;y,-\\eta):(x,\\xi)\\sim(y,\\eta),\\ \\xi\\text{ future null}\\}.$$\nFor a two-point distribution $U$, set $U^{\\mathsf T}(x,y)=U(y,x)$ and let $U^*$ be complex conjugation. Assume $W$ is invariant under translations and $SO^+(1,3)$, satisfies $W-W^{\\mathsf T}=iE$ for a fixed distribution $E$ supported where $x-y$ is causal, and satisfies $W^*=W^{\\mathsf T}$.\n\nThe prescribed scalar time-ordered contraction input is a symmetric distribution $H_F\\in\\mathcal D'(\\mathbb M^2)$ invariant under translations and $SO^+(1,3)$, equal to $W(x,y)$ on the open set $x^0>y^0$ and to $W(y,x)$ on $y^0>x^0$. The two prescriptions agree on spacelike-separated open supports because $E$ is supported on causal pairs. Translation invariance gives $H_F(x,y)=h_F(x-y)$ and $W(x,y)=w(x-y)$. For a distribution $T$ on $\\mathbb R^4$, set $T_\\rho(\\varphi)=\\rho^{-4}T(\\varphi(\\cdot/\\rho))$ and define $\\operatorname{sd}_0(T)$ as the infimum of real $\\omega$ for which $\\rho^\\omega T_\\rho\\to0$ on each fixed test as $\\rho\\downarrow0$. Require $\\operatorname{sd}_0(h_F),\\operatorname{sd}_0(w)\\le2$ and\n$$\\operatorname{WF}(H_F)\\subseteq\\Gamma_F:=N^*\\Delta\\cup\\{(x,\\xi;y,-\\eta):x\\ne y,\\ (x,\\xi)\\sim(y,\\eta),\\ \\xi\\text{ future null if }x\\in J^+(y),\\ \\xi\\text{ past null if }x\\in J^-(y)\\}.$$\nThis is fixed conditional data: it does not claim existence of $W$ or $H_F$, and it does not define any singular restriction or product of $H_F$ on a diagonal.\n\nFor $r\\ge1$, $F^{(r)}(\\phi)$ denotes the distribution kernel on $\\mathbb M^r$ of the mixed variation in $r$ compactly supported smooth directions, and set $F^{(0)}(\\phi)=F(\\phi)$. Define $\\deg F$ as the largest positive $r$ with $F^{(r)}\\ne0$, or $0$ if all positive-order derivative kernels vanish; in particular $\\deg0=0$. The class $\\mathcal F_{\\mu c}^{\\mathrm{poly}}(\\mathbb M)$ consists of finite polynomial functionals with compactly supported derivative kernels such that every nonzero wavefront tuple of each derivative kernel avoids both the cone of tuples whose entries are all future causal and the cone of tuples whose entries are all past causal; zero entries in either cone are allowed. For $F,G$ in this class, define\n$$F\\star_WG=\\sum_{r=0}^{\\min(\\deg F,\\deg G)}\\frac{\\hbar^r}{r!}\\left\\langle F^{(r)}(\\phi)\\otimes G^{(r)}(\\phi),W^{\\otimes r}\\right\\rangle,$$\nusing distribution products and pushforwards under the stated wavefront transversality conditions, with the $r=0$ pairing interpreted as the pointwise product $F(\\phi)G(\\phi)$. Here $\\hbar$ is a formal indeterminate, and Countable Choice is assumed for the supplier theorem defining these contractions.\n\nA scalar time-ordered system is a sequence of symmetric multilinear maps\n$$T_n:\\big(\\mathcal F_{\\mathrm{loc}}^{\\mathrm{poly}}(\\mathbb M)\\big)^n\\longrightarrow \\mathcal F_{\\mu c}^{\\mathrm{poly}}(\\mathbb M)\\llbracket\\hbar\\rrbracket,\\qquad T_0=1,\\quad T_1=\\operatorname{id}.$$\nFor $I\\subseteq\\{1,\\ldots,n\\}$ put $S_I=\\bigcup_{i\\in I}\\operatorname{supp}F_i$ and $F_I=(F_i)_{i\\in I}$. Causal factorization requires\n$$T_n(F_1,\\ldots,F_n)=T_{|I|}(F_I)\\star_W T_{|I^c|}(F_{I^c})$$\nfor every nonempty proper $I$ such that $S_I\\cap J^-(S_{I^c})=\\varnothing$; an empty block is the unit.\n\nField independence means that each numerical graph distribution is independent of the background field $\\phi$; all $\\phi$-dependence enters through the vertex kernels $F_i^{(r)}(\\phi)$. In the graph expansion of $T_n$, vertices are labeled by $1,\\ldots,n$ and an edge between distinct vertices contracts one derivative slot at each endpoint by $H_F$. A graph is a finite loopless multigraph, so parallel edges are allowed; if $r_{ij}$ edges join vertices $i$ and $j$, the Wick coefficient for that choice includes $\\hbar^{\\sum_{i<j}r_{ij}}/\\prod_{i<j}r_{ij}!$. Finite-order local jet derivatives may act on incident edge kernels. Each coefficient is a finite sum of such contractions, since every input has finite polynomial degree. No graph term uses a singular product at a diagonal before extension.\n\nFor $n\\ge2$, use relative coordinates $z_i=x_i-x_n$ ($1\\le i<n$), so the total diagonal corresponds to $0\\in\\mathbb R^{4(n-1)}$. The relative scaling degree $\\delta_\\Gamma$ of a numerical graph distribution is defined by the same positive-dilation rule above in this relative dimension. The scaling condition requires each graph distribution on the punctured relative space, after its proper partial diagonals have been extended at lower vertex orders, to have a finite degree $\\delta_\\Gamma$, and each total-diagonal extension to retain that degree. Any two such extensions differ by derivatives $\\partial^\\beta\\delta_0$ of order $|\\beta|\\le\\lfloor\\delta_\\Gamma-4(n-1)\\rfloor$ when $\\delta_\\Gamma\\ge4(n-1)$, and agree when $\\delta_\\Gamma<4(n-1)$.\n\nCovariance requires $T_n(\\gamma\\cdot F_1,\\ldots,\\gamma\\cdot F_n)=\\gamma\\cdot T_n(F_1,\\ldots,F_n)$ for each proper orthochronous Poincare transformation. Fix the Lorentz Lie-algebra convention $[J_i,J_j]=\\epsilon_{ijk}J_k$, $[J_i,K_j]=\\epsilon_{ijk}K_j$, and $[K_i,K_j]=-\\epsilon_{ijk}J_i$. For a formal coupling $g$, define coefficientwise\n$$\\mathcal S_g(V)=\\sum_{n=0}^{\\infty}\\frac{(ig/\\hbar)^n}{n!}T_n(V,\\ldots,V).$$\nThe anti-time-ordered series is $\\overline{\\mathcal S}_g(V):=\\mathcal S_g(V)^*$, where the involution conjugates scalar coefficients, fixes real $g,\\hbar$, and reverses the order of factors; $W^*=W^{\\mathsf T}$ gives $(F\\star_WG)^*=G^*\\star_WF^*$. Formal unitarity requires $\\overline{\\mathcal S}_g(V)\\star_W\\mathcal S_g(V)=1$ for every real $V=V^*$. At each $g$-order, coefficients are finite Laurent polynomials in $\\hbar$ before cancellation and are compared algebraically; there is no analytic convergence, positivity of formal coefficients, adiabatic limit, or gauge/Ward identity in this contract.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qft-distribution-scaling-degree",
+          "source_section": "Definition",
+          "quote": "Fix an integer $n\\ge1$, put $U=\\mathbb R^n\\setminus\\{0\\}$, and use the continuous complex-linear test-function pairing of [[def-distribution]]. For $t\\in\\mathcal D'(U)$ and $\\rho>0$, define its dilation at the origin by\n\n$$\\langle t_\\rho,\\varphi\\rangle:=\\rho^{-n}\\langle t,\\varphi(\\cdot/\\rho)\\rangle,\\qquad \\varphi\\in\\mathcal D(U).$$\n\nPositive dilations preserve $U$, so the displayed pairing is defined for every test function in $\\mathcal D(U)$. If $t$ is the regular distribution induced by a locally integrable function $g$, change of variables gives $\\langle t_\\rho,\\varphi\\rangle=\\int_U g(\\rho x)\\varphi(x)\\,dx$.\n\nConvergence $s_\\rho\\to0$ in $\\mathcal D'(U)$ as $\\rho\\downarrow0$ means $\\langle s_\\rho,\\varphi\\rangle\\to0$ for every fixed $\\varphi\\in\\mathcal D(U)$. The **scaling degree at the origin** is\n\n$$\\operatorname{sd}_0(t):=\\inf\\{\\omega\\in\\mathbb R:\\rho^\\omega t_\\rho\\to0\\text{ in }\\mathcal D'(U)\\}.$$\n\nThe infimum of the empty set is $+\\infty$; if every real $\\omega$ belongs to the set, the infimum is $-\\infty$. A finite scaling degree means a real value $\\delta\\in\\mathbb R$. For a distribution $T\\in\\mathcal D'(\\mathbb R^n)$ use the same dilation formula on tests in $\\mathcal D(\\mathbb R^n)$. An **extension** of $t$ is a distribution $T$ on $\\mathbb R^n$ whose restriction to $U$ equals $t$. The degree of divergence associated with a finite scaling degree $\\delta$ in dimension $n$ is $\\delta-n$. Exact homogeneity of scaling degree $\\delta$ means $\\rho^\\delta T_\\rho=T$ for every $\\rho>0$.\n\nFor this fixed $t$, define its **local extension family** by\n\n$$\\mathcal E(t):=\\{T\\in\\mathcal D'(\\mathbb R^n):T|_U=t\\}.$$\n\nHere $T|_U=t$ means $\\langle T,\\widetilde\\varphi\\rangle=\\langle t,\\varphi\\rangle$ for every $\\varphi\\in\\mathcal D(U)$, where $\\widetilde\\varphi\\in\\mathcal D(\\mathbb R^n)$ is its smooth extension by zero. When $\\delta=\\operatorname{sd}_0(t)\\in\\mathbb R$, the **scaling-degree-preserving local extension family** is\n\n$$\\mathcal E_\\delta(t):=\\{T\\in\\mathcal E(t):\\operatorname{sd}_0(T)=\\delta\\}.$$\n\nExistence of members and the affine structure of these families require separate results; the set definitions alone assert neither.\n\nThe definitions use Euclidean dilations about the specified point only. They do not assert that a given distribution arises from a product of fields or that an extension is physically selected.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qftx-wavefront-product",
+          "source_section": "Statement",
+          "quote": "Let $u\\in\\mathcal D'(M)$, where $M$ is a smooth manifold. For a smooth map $f:N\\to M$, define its nonzero conormal set by\n$$ N_f=\\{(f(x),\\eta)\\in T^*M\\setminus0: df_x^T\\eta=0\\}. $$\nIf $\\operatorname{WF}(u)\\cap N_f=\\varnothing$, there is a distributional pullback $f^*u\\in\\mathcal D'(N)$ and\n$$ \\operatorname{WF}(f^*u)\\subseteq \\{(x,df_x^T\\eta):(f(x),\\eta)\\in\\operatorname{WF}(u)\\}. $$\nFor $u,v\\in\\mathcal D'(M)$, if there is no nonzero covector $\\eta$ with both $(x,\\eta)\\in\\operatorname{WF}(u)$ and $(x,-\\eta)\\in\\operatorname{WF}(v)$ at the same $x$, their product is defined by $uv=\\Delta^*(u\\otimes v)$, where $\\Delta(x)=(x,x)$. It agrees with pointwise multiplication when $u,v$ are smooth and satisfies\n$$ \\operatorname{WF}(uv)\\subseteq \\{(x,\\eta+\\zeta):(x,\\eta)\\in\\operatorname{WF}(u)\\cup0_M,\\ (x,\\zeta)\\in\\operatorname{WF}(v)\\cup0_M,\\ \\eta+\\zeta\\ne0\\}. $$\nHere $0_M$ is the zero section. If $\\pi:X\\times Y\\to X$ is a coordinate projection, $\\nu$ is a smooth positive density on $Y$, and $t\\in\\mathcal E'(X\\times Y)$, define $\\pi_{*,\\nu}t$ by\n$$ \\langle \\pi_{*,\\nu}t,\\omega\\rangle =\\left\\langle t,\\chi(\\pi^*\\omega\\otimes\\nu)\\right\\rangle, $$\nwhere $\\omega$ is a compactly supported test density on $X$ and $\\chi$ is a compact cutoff equal to one near $\\operatorname{supp}t$. This pushforward is independent of $\\chi$, compactly supported, and\n$$ \\operatorname{WF}(\\pi_{*,\\nu}t)\\subseteq \\{(x,\\eta):\\text{ for some }y,\\ (x,y;\\eta,0)\\in\\operatorname{WF}(t)\\}. $$\nThe pullback condition is a local transversality requirement; this theorem does not define an arbitrary restriction of a singular kernel to a diagonal where the condition fails.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-qft-finite-scaling-degree-extension",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $n\\ge1$, $U=\\mathbb R^n\\setminus\\{0\\}$, and let $t\\in\\mathcal D'(U)$ have finite real scaling degree $\\delta=\\operatorname{sd}_0(t)$. Then there exists $T\\in\\mathcal D'(\\mathbb R^n)$ such that $T|_U=t$ and $\\operatorname{sd}_0(T)=\\delta$. The result applies to arbitrary distributions with finite real scaling degree; it assumes no smooth kernel or pointwise product representation.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "prop-qft-local-counterterm-jet-classification",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $n\\ge1$, let $t\\in\\mathcal D'(\\mathbb R^n\\setminus\\{0\\})$ have finite real scaling degree $\\delta$, and let $\\mathcal E_\\delta(t)$ be the set of its extensions in $\\mathcal D'(\\mathbb R^n)$ having scaling degree exactly $\\delta$. This set is nonempty by [[thm-qft-finite-scaling-degree-extension]]. If $\\delta<n$, then $\\mathcal E_\\delta(t)$ has exactly one member. If $\\delta\\ge n$, let $k$ be the unique nonnegative integer with $k\\le\\delta-n<k+1$ (the floor of $\\delta-n$). Then, for any $T_0\\in\\mathcal E_\\delta(t)$,\n\n$$\\mathcal E_\\delta(t)=T_0+\\operatorname{span}_{\\mathbb C}\\{\\partial^\\alpha\\delta_0:|\\alpha|\\le k\\}.$$\n\nHere a **point-local counterterm** means a distribution whose support, as defined in [[def-support-of-a-distribution]], is contained in $\\{0\\}$. Thus the same-degree freedom is finite dimensional, with precisely the displayed delta derivatives as its basis; at the threshold $\\delta=n$, only a multiple of $\\delta_0$ is allowed.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "If $T$ has finite scaling degree $\\delta$ in dimension $d$, then for a multi-index $\\alpha$,\n$$\\langle(\\partial^\\alpha T)_\\rho,\\varphi\\rangle=\\rho^{-|\\alpha|}\\langle T_\\rho,\\partial^\\alpha\\varphi\\rangle.$$\nThus every exponent strictly above $\\delta+|\\alpha|$ makes the scaled derivative tend to zero, so $\\operatorname{sd}_0(\\partial^\\alpha T)\\le\\delta+|\\alpha|$. For a surjective linear map $L:\\mathbb R^D\\to\\mathbb R^d$, choose linear coordinates $(y,w)$ with $y=Lx$ and $w\\in\\ker L$. The pullback $L^*T$ is $T(y)\\otimes1(w)$ when it exists; integrating a test in $w$ shows the dilation factors $\\rho^{-D}$ and the $w$-Jacobian $\\rho^{D-d}$ cancel to the ordinary relative factor $\\rho^{-d}$. Hence $\\operatorname{sd}_0(L^*T)\\le\\operatorname{sd}_0(T)$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "For a wavefront-transversal pair $u,v$ on a resolved stratum, apply (PB) [A2] to obtain a finite-degree product and the bound $\\operatorname{sd}_0(uv)\\le\\operatorname{sd}_0(u)+\\operatorname{sd}_0(v)$. This step is exactly the extra product-scaling input; no conclusion that it follows from ordinary scaling degrees alone is used.",
+          "inputs": [
+            "A2",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "On a causal configuration stratum after proper partial diagonals have been resolved, a primitive graph coefficient is a finite product of edge kernels $\\partial^{\\alpha_e}H_F(x_i-x_j)$. Each difference map $(x_1,\\ldots,x_n)\\mapsto x_i-x_j$ is surjective in relative coordinates. By steps 1.1–1.2 and [F1], each pulled-back edge has finite scaling degree at most $2+|\\alpha_e|$, and each successive product is defined by [F3] on the stated stratum. Iterating the product bound gives\n$$\\operatorname{sd}_0(t_\\Gamma)\\le\\sum_{e\\in E(\\Gamma)}(2+|\\alpha_e|).$$\nThe sum is finite because $\\Gamma$ has finitely many edges and each vertex functional has finite jet order.",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "For a graph with proper subgraphs, apply [F4] to each already finite-degree subgraph distribution in its relative coordinates. By [F5], its extension ambiguity is a finite list of delta derivatives of bounded order. Inserting any such counterterm contracts that subgraph to a local vertex and adds only its finite derivative order to the remaining edge factors. The contracted graph has fewer vertices, so induction and steps 1.1–2.1 give finite scaling degree for each resulting term. A fixed finite graph has only finitely many proper subgraphs, forests, edge derivatives and allowed counterterm jets; the maximum of these finitely many finite bounds is finite. This is the required bound for the graph after all proper partial diagonals have been resolved.",
+          "inputs": [
+            "A1",
+            "A2",
+            "F4",
+            "F5",
+            "step 1.1",
+            "step 2.1",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For an edgeless graph the product is the smooth unit and the primitive bound is 0 by step 2.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "A zero graph coefficient has no singular edge factors; the bound in step 2.1 is nonnegative."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement assumes n≥2 labeled vertices, so the one-vertex case is outside its domain."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "At the total diagonal the relative origin is removed first and extensions are handled in step 3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "At δΓ=4(n−1), the floor bound allows only order-zero delta terms by [F5] in step 3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Axiom of Choice is used for the extension theorem in [A1] and step 3.1; Countable Choice is assumed for products."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is an upper-bound implication, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is an upper-bound implication, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "one edge, n=2",
+          "calculation": "The conditional primitive bound is 2+|α| in relative dimension 4; for |α|=0 it is below 4 and the extension is unique.",
+          "disposition": "Arithmetic check of steps 2.1 and 3.1, conditional on PB."
+        },
+        {
+          "case": "two parallel edges, n=2",
+          "calculation": "For αe=0 the bound is 2·2=4 in dimension 4, so the permitted local ambiguity has derivative order floor(4−4)=0.",
+          "disposition": "Arithmetic check of the Statement and [F5], conditional on PB."
+        }
+      ]
+    },
+    "thm-qftx-scalar-eg-induction": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.2",
+            "4.1",
+            "4.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "2.2",
+            "4.1",
+            "4.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "thm-choice-implies-dependent-implies-countable-choice",
+          "source_section": "Statement",
+          "quote": "In ZF,\n\n$$\\mathrm{AC}\\Longrightarrow\\mathrm{DC}\\Longrightarrow\\mathrm{AC}_\\omega\\Longrightarrow\\mathrm{AC}_{\\omega,\\mathrm{fin}}\\Longrightarrow\\mathrm{AC}_{\\omega,2},\\qquad \\mathrm{AC}\\Longrightarrow\\mathrm{AC}_2.$$\n\nDC here includes a prescribed initial point.",
+          "uses": [
+            "2.2",
+            "4.1",
+            "4.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "lem-qftx-finite-graph-scaling-degree",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice and Countable Choice and fix admissible scalar free data as defined by the local time-ordered product contract. In addition assume the following product-scaling bound (PB): whenever two finite-scaling-degree distributions $u,v$ on one resolved causal stratum have a wavefront-transversal product, their product has finite relative scaling degree and\n$$\\operatorname{sd}_0(uv)\\le\\operatorname{sd}_0(u)+\\operatorname{sd}_0(v).$$\nAssume (PB) at every successive product of edge pullbacks and lower-order local counterterms used below. Fix a finite loopless multigraph $\\Gamma$ with $n\\ge2$ labeled vertices, parallel edges allowed, and a finite multi-index derivative $\\alpha_e$ on each edge $e$. Suppose every proper partial-diagonal subgraph has already received an extension of finite scaling degree by induction on its number of vertices. Then the numerical graph distribution on the complement of the total diagonal has finite scaling degree in the $4(n-1)$ relative coordinates. For a primitive graph, with no proper divergent subgraph, the bound is\n$$\\operatorname{sd}_0(t_\\Gamma)\\le 2|E(\\Gamma)|+\\sum_{e\\in E(\\Gamma)}|\\alpha_e|.$$\nFor a graph with proper subgraphs, the same induction gives a finite bound obtained from this edge estimate and the finitely many derivative orders of its lower-order local counterterms.",
+          "uses": [
+            "4.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qftx-local-time-ordered-system",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb M=\\mathbb R^4$ have metric $\\eta=\\operatorname{diag}(-1,1,1,1)$, orientation $dx^0\\wedge dx^1\\wedge dx^2\\wedge dx^3$, and future direction given by increasing $x^0$. Use units $c=1$, so a mass parameter has inverse-length units. Define $x\\in J^+(y)$ by $x^0-y^0\\ge|\\mathbf x-\\mathbf y|$ and $x\\in J^-(y)$ by $y^0-x^0\\ge|\\mathbf y-\\mathbf x|$; for $A\\subseteq\\mathbb M$, put $J^\\pm(A)=\\bigcup_{y\\in A}J^\\pm(y)$. A field configuration is any smooth real function $\\phi$; it is off shell because no field equation is imposed. The allowed local interactions are compactly supported finite polynomial functionals of $\\phi$ and finitely many coordinate derivatives, integrated against $d^4x$. The support of a functional $F$ is the closed set of points each of whose neighborhoods contains the support of a compactly supported variation that changes $F$ for some configuration.\n\nFor $\\Lambda\\in SO^+(1,3)$, require $\\Lambda^{\\mathsf T}\\eta\\Lambda=\\eta$, $\\det\\Lambda=1$, and preservation of the chosen future cone; $SO^+(1,3)$ denotes this identity component. The proper orthochronous Poincare group consists of $\\gamma=(a,\\Lambda)$ with $a\\in\\mathbb M$ and $\\Lambda\\in SO^+(1,3)$. It acts by $(\\gamma\\cdot\\phi)(x)=\\phi(\\Lambda^{-1}(x-a))$ and $(\\gamma\\cdot F)(\\phi)=F(\\gamma^{-1}\\cdot\\phi)$.\n\nFor a distribution on a coordinate chart, its wavefront set consists of the nonzero cotangent directions where every compact localization fails to have a rapidly decreasing Fourier transform in every conic neighborhood. Covectors are future or past causal when their metric-dual vectors are causal with the indicated time orientation; a nonzero causal covector has a nonzero time component. Write $\\Delta=\\{(x,x):x\\in\\mathbb M\\}$ and $N^*\\Delta=\\{(x,\\xi;x,-\\xi):\\xi\\ne0\\}$. Write $(x,\\xi)\\sim(y,\\eta)$ when $x,y$ lie on one null straight segment (a zero-length segment is allowed), and parallel transport along that segment carries $\\xi$ to $\\eta$. A fixed free scalar input consists of $m\\ge0$, a two-point distribution $W$ satisfying\n$$P_xW=P_yW=0,\\qquad P=-\\eta^{ab}\\partial_a\\partial_b+m^2,$$\nand the positive-frequency null wavefront condition\n$$\\operatorname{WF}(W)=\\mathcal C^+:=\\{(x,\\xi;y,-\\eta):(x,\\xi)\\sim(y,\\eta),\\ \\xi\\text{ future null}\\}.$$\nFor a two-point distribution $U$, set $U^{\\mathsf T}(x,y)=U(y,x)$ and let $U^*$ be complex conjugation. Assume $W$ is invariant under translations and $SO^+(1,3)$, satisfies $W-W^{\\mathsf T}=iE$ for a fixed distribution $E$ supported where $x-y$ is causal, and satisfies $W^*=W^{\\mathsf T}$.\n\nThe prescribed scalar time-ordered contraction input is a symmetric distribution $H_F\\in\\mathcal D'(\\mathbb M^2)$ invariant under translations and $SO^+(1,3)$, equal to $W(x,y)$ on the open set $x^0>y^0$ and to $W(y,x)$ on $y^0>x^0$. The two prescriptions agree on spacelike-separated open supports because $E$ is supported on causal pairs. Translation invariance gives $H_F(x,y)=h_F(x-y)$ and $W(x,y)=w(x-y)$. For a distribution $T$ on $\\mathbb R^4$, set $T_\\rho(\\varphi)=\\rho^{-4}T(\\varphi(\\cdot/\\rho))$ and define $\\operatorname{sd}_0(T)$ as the infimum of real $\\omega$ for which $\\rho^\\omega T_\\rho\\to0$ on each fixed test as $\\rho\\downarrow0$. Require $\\operatorname{sd}_0(h_F),\\operatorname{sd}_0(w)\\le2$ and\n$$\\operatorname{WF}(H_F)\\subseteq\\Gamma_F:=N^*\\Delta\\cup\\{(x,\\xi;y,-\\eta):x\\ne y,\\ (x,\\xi)\\sim(y,\\eta),\\ \\xi\\text{ future null if }x\\in J^+(y),\\ \\xi\\text{ past null if }x\\in J^-(y)\\}.$$\nThis is fixed conditional data: it does not claim existence of $W$ or $H_F$, and it does not define any singular restriction or product of $H_F$ on a diagonal.\n\nFor $r\\ge1$, $F^{(r)}(\\phi)$ denotes the distribution kernel on $\\mathbb M^r$ of the mixed variation in $r$ compactly supported smooth directions, and set $F^{(0)}(\\phi)=F(\\phi)$. Define $\\deg F$ as the largest positive $r$ with $F^{(r)}\\ne0$, or $0$ if all positive-order derivative kernels vanish; in particular $\\deg0=0$. The class $\\mathcal F_{\\mu c}^{\\mathrm{poly}}(\\mathbb M)$ consists of finite polynomial functionals with compactly supported derivative kernels such that every nonzero wavefront tuple of each derivative kernel avoids both the cone of tuples whose entries are all future causal and the cone of tuples whose entries are all past causal; zero entries in either cone are allowed. For $F,G$ in this class, define\n$$F\\star_WG=\\sum_{r=0}^{\\min(\\deg F,\\deg G)}\\frac{\\hbar^r}{r!}\\left\\langle F^{(r)}(\\phi)\\otimes G^{(r)}(\\phi),W^{\\otimes r}\\right\\rangle,$$\nusing distribution products and pushforwards under the stated wavefront transversality conditions, with the $r=0$ pairing interpreted as the pointwise product $F(\\phi)G(\\phi)$. Here $\\hbar$ is a formal indeterminate, and Countable Choice is assumed for the supplier theorem defining these contractions.\n\nA scalar time-ordered system is a sequence of symmetric multilinear maps\n$$T_n:\\big(\\mathcal F_{\\mathrm{loc}}^{\\mathrm{poly}}(\\mathbb M)\\big)^n\\longrightarrow \\mathcal F_{\\mu c}^{\\mathrm{poly}}(\\mathbb M)\\llbracket\\hbar\\rrbracket,\\qquad T_0=1,\\quad T_1=\\operatorname{id}.$$\nFor $I\\subseteq\\{1,\\ldots,n\\}$ put $S_I=\\bigcup_{i\\in I}\\operatorname{supp}F_i$ and $F_I=(F_i)_{i\\in I}$. Causal factorization requires\n$$T_n(F_1,\\ldots,F_n)=T_{|I|}(F_I)\\star_W T_{|I^c|}(F_{I^c})$$\nfor every nonempty proper $I$ such that $S_I\\cap J^-(S_{I^c})=\\varnothing$; an empty block is the unit.\n\nField independence means that each numerical graph distribution is independent of the background field $\\phi$; all $\\phi$-dependence enters through the vertex kernels $F_i^{(r)}(\\phi)$. In the graph expansion of $T_n$, vertices are labeled by $1,\\ldots,n$ and an edge between distinct vertices contracts one derivative slot at each endpoint by $H_F$. A graph is a finite loopless multigraph, so parallel edges are allowed; if $r_{ij}$ edges join vertices $i$ and $j$, the Wick coefficient for that choice includes $\\hbar^{\\sum_{i<j}r_{ij}}/\\prod_{i<j}r_{ij}!$. Finite-order local jet derivatives may act on incident edge kernels. Each coefficient is a finite sum of such contractions, since every input has finite polynomial degree. No graph term uses a singular product at a diagonal before extension.\n\nFor $n\\ge2$, use relative coordinates $z_i=x_i-x_n$ ($1\\le i<n$), so the total diagonal corresponds to $0\\in\\mathbb R^{4(n-1)}$. The relative scaling degree $\\delta_\\Gamma$ of a numerical graph distribution is defined by the same positive-dilation rule above in this relative dimension. The scaling condition requires each graph distribution on the punctured relative space, after its proper partial diagonals have been extended at lower vertex orders, to have a finite degree $\\delta_\\Gamma$, and each total-diagonal extension to retain that degree. Any two such extensions differ by derivatives $\\partial^\\beta\\delta_0$ of order $|\\beta|\\le\\lfloor\\delta_\\Gamma-4(n-1)\\rfloor$ when $\\delta_\\Gamma\\ge4(n-1)$, and agree when $\\delta_\\Gamma<4(n-1)$.\n\nCovariance requires $T_n(\\gamma\\cdot F_1,\\ldots,\\gamma\\cdot F_n)=\\gamma\\cdot T_n(F_1,\\ldots,F_n)$ for each proper orthochronous Poincare transformation. Fix the Lorentz Lie-algebra convention $[J_i,J_j]=\\epsilon_{ijk}J_k$, $[J_i,K_j]=\\epsilon_{ijk}K_j$, and $[K_i,K_j]=-\\epsilon_{ijk}J_i$. For a formal coupling $g$, define coefficientwise\n$$\\mathcal S_g(V)=\\sum_{n=0}^{\\infty}\\frac{(ig/\\hbar)^n}{n!}T_n(V,\\ldots,V).$$\nThe anti-time-ordered series is $\\overline{\\mathcal S}_g(V):=\\mathcal S_g(V)^*$, where the involution conjugates scalar coefficients, fixes real $g,\\hbar$, and reverses the order of factors; $W^*=W^{\\mathsf T}$ gives $(F\\star_WG)^*=G^*\\star_WF^*$. Formal unitarity requires $\\overline{\\mathcal S}_g(V)\\star_W\\mathcal S_g(V)=1$ for every real $V=V^*$. At each $g$-order, coefficients are finite Laurent polynomials in $\\hbar$ before cancellation and are compared algebraically; there is no analytic convergence, positivity of formal coefficients, adiabatic limit, or gauge/Ward identity in this contract.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1",
+            "2.2",
+            "3.1",
+            "3.2",
+            "4.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qftx-off-shell-local-polynomial-functionals",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb M=\\mathbb R^4$ with coordinates $x=(x^0,x^1,x^2,x^3)$, metric $\\eta=\\operatorname{diag}(-1,1,1,1)$ and time orientation given by increasing $x^0$. A field configuration is any smooth real function $\\phi\\in C^\\infty(\\mathbb M;\\mathbb R)$; it is off shell, meaning that it is not required to satisfy a field equation. For an integer $s\\ge0$, its finite jet at $x$ is the finite tuple $j^s\\phi(x)=(\\partial^\\alpha\\phi(x))_{|\\alpha|\\le s}$, with multi-index derivatives in these coordinates.\n\nAn off-shell local polynomial scalar functional is a finite sum\n$$F(\\phi)=c+\\sum_{a=1}^{N}\\int_{\\mathbb M} f_a(x)\\,P_a(j^{s_a}\\phi(x))\\,d^4x,$$\nwhere $c\\in\\mathbb C$, $f_a\\in C_c^\\infty(\\mathbb M;\\mathbb C)$, each $P_a$ is a polynomial in the finitely many jet coordinates, and each $s_a$ is finite. Its support is contained in the compact set $\\bigcup_{a=1}^{N}\\operatorname{supp}f_a$. The collection of these functionals is denoted $\\mathcal F_{\\mathrm{loc}}^{\\mathrm{poly}}(\\mathbb M)$. The involution is $F^*(\\phi)=\\overline{F(\\phi)}$. No physical units or field equation are imposed.\n\nPrecisely, $\\operatorname{supp}F$ is the set of $x\\in\\mathbb M$ such that every neighborhood $U$ of $x$ contains the support of some $h\\in C_c^\\infty(\\mathbb M;\\mathbb R)$ for which $F(\\phi+h)\\ne F(\\phi)$ for some smooth configuration $\\phi$. It is closed and is contained in the displayed compact union, so it is compact. This definition is independent of the chosen finite presentation of $F$.\n\nFor $r\\ge1$, define the $r$th functional derivative by\n$$F^{(r)}(\\phi)(h_1,\\ldots,h_r)=\\left.\\frac{\\partial^r}{\\partial t_1\\cdots\\partial t_r}F\\!\\left(\\phi+\\sum_{j=1}^{r}t_jh_j\\right)\\right|_{t_1=\\cdots=t_r=0},\\qquad h_j\\in C_c^\\infty(\\mathbb M;\\mathbb R).$$\nThe finite polynomial expansion makes this a symmetric multilinear form. Repeated integration by parts in each $h_j$ writes it as a compactly supported distribution kernel on the thin diagonal $\\{(x,\\ldots,x):x\\in\\mathbb M\\}\\subset\\mathbb M^r$. Integrals use the fixed Minkowski density $d^4x$; all kernels are paired bilinearly with compactly supported smooth tests.",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qftx-local-polynomial-functionals-are-microcausal",
+          "source_section": "Statement",
+          "quote": "For every $F\\in\\mathcal F_{\\mathrm{loc}}^{\\mathrm{poly}}(\\mathbb M)$, every $\\phi\\in C^\\infty(\\mathbb M;\\mathbb R)$ and every $r\\ge1$, the kernel $F^{(r)}(\\phi)$ satisfies\n$$\\operatorname{WF}(F^{(r)}(\\phi))\\subseteq N^*\\Delta_r\\setminus0,$$\nwhere $\\Delta_r=\\{(x,\\ldots,x):x\\in\\mathbb M\\}$ and\n$$N^*\\Delta_r=\\{(x,\\ldots,x;\\xi_1,\\ldots,\\xi_r):\\xi_1+\\cdots+\\xi_r=0\\}.$$\nConsequently $F^{(r)}(\\phi)$ avoids the all-future and all-past causal cotangent cones and $F$ belongs to $\\mathcal F_{\\mu c}^{\\mathrm{poly}}(\\mathbb M)$.",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qftx-microcausal-star-product",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$ and let $\\hbar$ be a formal indeterminate. Let $W\\in\\mathcal D'(M\\times M)$ be a scalar Hadamard bisolution. For $F,G\\in\\mathcal F_{\\mu c}^{\\mathrm{poly}}(M)$, let $\\deg F$ be the largest degree with nonzero coefficient kernel, with $\\deg 0=0$, and define, coefficientwise in $\\hbar$,\n$$ F\\star_W G =\\sum_{r=0}^{\\min(\\deg F,\\deg G)} \\frac{\\hbar^r}{r!} \\left\\langle F^{(r)}(\\phi)\\otimes G^{(r)}(\\phi),\\,W^{\\otimes r}\\right\\rangle. $$\nEach term is formed by the distribution product on the $r$ contracted variable pairs and proper pushforward over those pairs, as in [[thm-qftx-wavefront-product]], integrating with the metric density $\\mu_g$ in each contracted variable. The sum is finite and defines a member of $\\mathcal F_{\\mu c}^{\\mathrm{poly}}(M)\\llbracket\\hbar\\rrbracket$. If $K\\in C^\\infty(M\\times M)$ is symmetric, then\n$$ \\Gamma_KF(\\phi)=\\left\\langle F^{(2)}(\\phi),\\chi K\\mu_g^{\\otimes2}\\right\\rangle $$\nis also a compactly supported polynomial microcausal functional and lowers polynomial degree by two; here $\\chi$ is any compactly supported cutoff equal to one near $\\operatorname{supp}F^{(2)}(\\phi)$.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-qftx-wavefront-product",
+          "source_section": "Statement",
+          "quote": "Let $u\\in\\mathcal D'(M)$, where $M$ is a smooth manifold. For a smooth map $f:N\\to M$, define its nonzero conormal set by\n$$ N_f=\\{(f(x),\\eta)\\in T^*M\\setminus0: df_x^T\\eta=0\\}. $$\nIf $\\operatorname{WF}(u)\\cap N_f=\\varnothing$, there is a distributional pullback $f^*u\\in\\mathcal D'(N)$ and\n$$ \\operatorname{WF}(f^*u)\\subseteq \\{(x,df_x^T\\eta):(f(x),\\eta)\\in\\operatorname{WF}(u)\\}. $$\nFor $u,v\\in\\mathcal D'(M)$, if there is no nonzero covector $\\eta$ with both $(x,\\eta)\\in\\operatorname{WF}(u)$ and $(x,-\\eta)\\in\\operatorname{WF}(v)$ at the same $x$, their product is defined by $uv=\\Delta^*(u\\otimes v)$, where $\\Delta(x)=(x,x)$. It agrees with pointwise multiplication when $u,v$ are smooth and satisfies\n$$ \\operatorname{WF}(uv)\\subseteq \\{(x,\\eta+\\zeta):(x,\\eta)\\in\\operatorname{WF}(u)\\cup0_M,\\ (x,\\zeta)\\in\\operatorname{WF}(v)\\cup0_M,\\ \\eta+\\zeta\\ne0\\}. $$\nHere $0_M$ is the zero section. If $\\pi:X\\times Y\\to X$ is a coordinate projection, $\\nu$ is a smooth positive density on $Y$, and $t\\in\\mathcal E'(X\\times Y)$, define $\\pi_{*,\\nu}t$ by\n$$ \\langle \\pi_{*,\\nu}t,\\omega\\rangle =\\left\\langle t,\\chi(\\pi^*\\omega\\otimes\\nu)\\right\\rangle, $$\nwhere $\\omega$ is a compactly supported test density on $X$ and $\\chi$ is a compact cutoff equal to one near $\\operatorname{supp}t$. This pushforward is independent of $\\chi$, compactly supported, and\n$$ \\operatorname{WF}(\\pi_{*,\\nu}t)\\subseteq \\{(x,\\eta):\\text{ for some }y,\\ (x,y;\\eta,0)\\in\\operatorname{WF}(t)\\}. $$\nThe pullback condition is a local transversality requirement; this theorem does not define an arbitrary restriction of a singular kernel to a diagonal where the condition fails.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-test-function-cutoffs-and-euclidean-localization",
+          "source_section": "Statement",
+          "quote": "In ZF, for compact $K\\subseteq\\Omega\\subseteq\\mathbb R^n$ with $\\Omega$ open, there is $\\chi\\in C_c^\\infty(\\Omega)$ with $0\\le\\chi\\le1$ and $\\chi=1$ on a neighborhood of $K$. Every open cover of $\\Omega$ admits an at most countable locally finite smooth partition of unity with compact supports, each support contained in some cover member. Subordination here asserts existence of such a member for each support; it does not select cover labels.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-qftx-finite-graph-scaling-degree",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice and Countable Choice and fix admissible scalar free data as defined by the local time-ordered product contract. In addition assume the following product-scaling bound (PB): whenever two finite-scaling-degree distributions $u,v$ on one resolved causal stratum have a wavefront-transversal product, their product has finite relative scaling degree and\n$$\\operatorname{sd}_0(uv)\\le\\operatorname{sd}_0(u)+\\operatorname{sd}_0(v).$$\nAssume (PB) at every successive product of edge pullbacks and lower-order local counterterms used below. Fix a finite loopless multigraph $\\Gamma$ with $n\\ge2$ labeled vertices, parallel edges allowed, and a finite multi-index derivative $\\alpha_e$ on each edge $e$. Suppose every proper partial-diagonal subgraph has already received an extension of finite scaling degree by induction on its number of vertices. Then the numerical graph distribution on the complement of the total diagonal has finite scaling degree in the $4(n-1)$ relative coordinates. For a primitive graph, with no proper divergent subgraph, the bound is\n$$\\operatorname{sd}_0(t_\\Gamma)\\le 2|E(\\Gamma)|+\\sum_{e\\in E(\\Gamma)}|\\alpha_e|.$$\nFor a graph with proper subgraphs, the same induction gives a finite bound obtained from this edge estimate and the finitely many derivative orders of its lower-order local counterterms.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-qft-distribution-scaling-degree",
+          "source_section": "Definition",
+          "quote": "Fix an integer $n\\ge1$, put $U=\\mathbb R^n\\setminus\\{0\\}$, and use the continuous complex-linear test-function pairing of [[def-distribution]]. For $t\\in\\mathcal D'(U)$ and $\\rho>0$, define its dilation at the origin by\n\n$$\\langle t_\\rho,\\varphi\\rangle:=\\rho^{-n}\\langle t,\\varphi(\\cdot/\\rho)\\rangle,\\qquad \\varphi\\in\\mathcal D(U).$$\n\nPositive dilations preserve $U$, so the displayed pairing is defined for every test function in $\\mathcal D(U)$. If $t$ is the regular distribution induced by a locally integrable function $g$, change of variables gives $\\langle t_\\rho,\\varphi\\rangle=\\int_U g(\\rho x)\\varphi(x)\\,dx$.\n\nConvergence $s_\\rho\\to0$ in $\\mathcal D'(U)$ as $\\rho\\downarrow0$ means $\\langle s_\\rho,\\varphi\\rangle\\to0$ for every fixed $\\varphi\\in\\mathcal D(U)$. The **scaling degree at the origin** is\n\n$$\\operatorname{sd}_0(t):=\\inf\\{\\omega\\in\\mathbb R:\\rho^\\omega t_\\rho\\to0\\text{ in }\\mathcal D'(U)\\}.$$\n\nThe infimum of the empty set is $+\\infty$; if every real $\\omega$ belongs to the set, the infimum is $-\\infty$. A finite scaling degree means a real value $\\delta\\in\\mathbb R$. For a distribution $T\\in\\mathcal D'(\\mathbb R^n)$ use the same dilation formula on tests in $\\mathcal D(\\mathbb R^n)$. An **extension** of $t$ is a distribution $T$ on $\\mathbb R^n$ whose restriction to $U$ equals $t$. The degree of divergence associated with a finite scaling degree $\\delta$ in dimension $n$ is $\\delta-n$. Exact homogeneity of scaling degree $\\delta$ means $\\rho^\\delta T_\\rho=T$ for every $\\rho>0$.\n\nFor this fixed $t$, define its **local extension family** by\n\n$$\\mathcal E(t):=\\{T\\in\\mathcal D'(\\mathbb R^n):T|_U=t\\}.$$\n\nHere $T|_U=t$ means $\\langle T,\\widetilde\\varphi\\rangle=\\langle t,\\varphi\\rangle$ for every $\\varphi\\in\\mathcal D(U)$, where $\\widetilde\\varphi\\in\\mathcal D(\\mathbb R^n)$ is its smooth extension by zero. When $\\delta=\\operatorname{sd}_0(t)\\in\\mathbb R$, the **scaling-degree-preserving local extension family** is\n\n$$\\mathcal E_\\delta(t):=\\{T\\in\\mathcal E(t):\\operatorname{sd}_0(T)=\\delta\\}.$$\n\nExistence of members and the affine structure of these families require separate results; the set definitions alone assert neither.\n\nThe definitions use Euclidean dilations about the specified point only. They do not assert that a given distribution arises from a product of fields or that an extension is physically selected.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-qft-finite-scaling-degree-extension",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $n\\ge1$, $U=\\mathbb R^n\\setminus\\{0\\}$, and let $t\\in\\mathcal D'(U)$ have finite real scaling degree $\\delta=\\operatorname{sd}_0(t)$. Then there exists $T\\in\\mathcal D'(\\mathbb R^n)$ such that $T|_U=t$ and $\\operatorname{sd}_0(T)=\\delta$. The result applies to arbitrary distributions with finite real scaling degree; it assumes no smooth kernel or pointwise product representation.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "prop-qft-local-counterterm-jet-classification",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $n\\ge1$, let $t\\in\\mathcal D'(\\mathbb R^n\\setminus\\{0\\})$ have finite real scaling degree $\\delta$, and let $\\mathcal E_\\delta(t)$ be the set of its extensions in $\\mathcal D'(\\mathbb R^n)$ having scaling degree exactly $\\delta$. This set is nonempty by [[thm-qft-finite-scaling-degree-extension]]. If $\\delta<n$, then $\\mathcal E_\\delta(t)$ has exactly one member. If $\\delta\\ge n$, let $k$ be the unique nonnegative integer with $k\\le\\delta-n<k+1$ (the floor of $\\delta-n$). Then, for any $T_0\\in\\mathcal E_\\delta(t)$,\n\n$$\\mathcal E_\\delta(t)=T_0+\\operatorname{span}_{\\mathbb C}\\{\\partial^\\alpha\\delta_0:|\\alpha|\\le k\\}.$$\n\nHere a **point-local counterterm** means a distribution whose support, as defined in [[def-support-of-a-distribution]], is contained in $\\{0\\}$. Thus the same-degree freedom is finite dimensional, with precisely the displayed delta derivatives as its basis; at the threshold $\\delta=n$, only a multiple of $\\delta_0$ is allowed.",
+          "uses": [
+            "2.2",
+            "3.2",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-qftx-finite-lorentz-cocycle-splitting",
+          "source_section": "Statement",
+          "quote": "Let $\\mathfrak l$ be the six-dimensional real Lie algebra with basis $J_1,J_2,J_3,K_1,K_2,K_3$ and brackets $[J_i,J_j]=\\epsilon_{ijk}J_k$, $[J_i,K_j]=\\epsilon_{ijk}K_k$, and $[K_i,K_j]=-\\epsilon_{ijk}J_k$, where $\\epsilon_{ijk}$ is the alternating symbol with $\\epsilon_{123}=1$. This fixes the convention for $\\mathfrak{so}(1,3)$. Let $V$ be a finite-dimensional complex vector space and let $\\rho:\\mathfrak l\\to\\operatorname{End}_{\\mathbb C}(V)$ be a real-linear representation, meaning $\\rho([X,Y])=[\\rho(X),\\rho(Y)]$. If a real-linear map $c:\\mathfrak l\\to V$ satisfies the Lie-algebra $1$-cocycle identity\n\n$$c([X,Y])=\\rho(X)c(Y)-\\rho(Y)c(X)\\qquad(X,Y\\in\\mathfrak l),$$\n\nthen there is $v\\in V$ such that $c(X)=\\rho(X)v$ for every $X\\in\\mathfrak l$. No infinite-dimensional module, gauge cohomology, or interacting-field conclusion is asserted.",
+          "uses": [
+            "3.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Set $T_0=1$ and $T_1=\\operatorname{id}$, as required. Assume $T_k$ has been constructed with all contract properties for every $k<n$, where $n\\ge2$.",
+          "inputs": [
+            "given",
+            "F1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "In $\\mathbb M^n$ let $\\Delta_n=\\{x_1=\\cdots=x_n\\}$. For every nonempty proper $I\\subset\\{1,\\ldots,n\\}$ define\n$$C_I=\\{(x_1,\\ldots,x_n):x_i\\notin J^-(x_j)\\text{ for all }i\\in I,\\ j\\notin I\\}.$$\nEach $C_I$ is open because the Minkowski causal relation is closed. To see these sets cover $\\mathbb M^n\\setminus\\Delta_n$, choose two distinct coordinates $p,q$ in a configuration. The open cone of past-timelike covectors cannot annihilate the nonzero displacement $p-q$, so choose a past-timelike covector $\\tau$ with $\\tau(p)\\ne\\tau(q)$. Choose $s$ strictly between these values and different from the finitely many $\\tau(x_j)$, and put $I=\\{j:\\tau(x_j)>s\\}$. The hyperplane $\\tau(x)=s$ is spacelike, and $\\tau$ is strictly increasing on every future causal curve. Thus no $x_i$ with $i\\in I$ can lie in $J^-(x_j)$ for $j\\notin I$, so the configuration lies in $C_I$.",
+          "inputs": [
+            "F1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "step": "1.3",
+          "claim": "Expand the finite local polynomial derivatives in the graph convention of [F1]. For each fixed $n$, finite jet order and finite polynomial degree allow only finitely many labeled multigraphs, and every edge derivative order is finite. By [F6], after the already constructed proper subgraph extensions, each numerical coefficient $t_\\Gamma$ on the punctured relative space $\\mathbb R^{4(n-1)}\\setminus\\{0\\}$ has a finite real scaling degree $\\delta_\\Gamma$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F6"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "On $C_I$, define the lower-order product $T^I_n=T_{|I|}(F_I)\\star_WT_{|I^c|}(F_{I^c})$. The factors are microcausal by [F2] and the inductive hypothesis, so [F3] makes the product well-defined; each contraction in its finite graph expansion uses only the pullbacks and distribution products supplied by [F4]. The graph-kernel restriction on this stratum is therefore a distribution, and no separate product at the total diagonal is taken here.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "step": "2.2",
+          "claim": "Apply [F7] to each $t_\\Gamma$ in relative dimension $d=4(n-1)$. The extension has degree $\\delta_\\Gamma$; [F8] says its ambiguity is exactly a finite jet of the diagonal delta, with the order bound in the Statement. Lift the chosen relative extension back to $\\mathbb M^n$ by translation: in coordinates $z_i=x_i-x_n$ and $y=x_n$, pair the relative distribution with $z\\mapsto\\int_{\\mathbb M}\\Psi(y+z_1,\\ldots,y+z_{n-1},y)\\,d^4y$. The inner function is a compactly supported smooth test by differentiation under a compact integral. This defines a translation-covariant distribution extending the off-diagonal coefficient. The finite graph sum yields a full extension $T_n^1$; its numerical kernels remain independent of $\\phi$, so field independence is preserved.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F7",
+            "F8",
+            "step 1.3",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "If $C_I$ and $C_J$ overlap, put $A=I\\cap J$, $B=I\\setminus J$, $C=J\\setminus I$, and $D=(I\\cup J)^c$. The defining inequalities give $A$ later than or spacelike to $B$, $C$ later than or spacelike to $D$, $A$ later than or spacelike to $C$, and $B$ later than or spacelike to $D$. They also imply that every point of $B$ is spacelike to every point of $C$: neither causal ordering is possible. Lower-order causal factorization rewrites both local expressions as $T_A\\star_WT_B\\star_WT_C\\star_WT_D$; associativity follows by indexing each finite contraction term by its three pairwise contraction counts. Since $E$ is causally supported, $W=W^{\\mathsf T}$ on the spacelike-separated supports of $B,C$, so locality gives $T_B\\star_WT_C=T_C\\star_WT_B$. Thus the two local expressions agree on the overlap, including empty blocks interpreted as units.",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "step": "3.2",
+          "claim": "Each graph ambiguity space is finite-dimensional because the allowed derivative order is finite. For a graph let $c(X)=X\\cdot T_n^1$ be the infinitesimal Lorentz variation of the chosen extension. Since the off-diagonal graph data are Lorentz invariant, $c(X)$ vanishes off $\\Delta_n$ and lies in that finite-dimensional local jet space. The representation law gives the cocycle identity $c([X,Y])=\\rho(X)c(Y)-\\rho(Y)c(X)$. By [F9] there is a local jet $v$ with $c(X)=\\rho(X)v$; replacing the extension by $T_n^1-v$ makes its infinitesimal defect zero. The proper-orthochronous group is connected, so invariance along every smooth path from the identity gives full $SO^+(1,3)$ covariance. Translation covariance already holds by the relative-coordinate lift.",
+          "inputs": [
+            "F1",
+            "F8",
+            "F9",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "Apply [F5] to the open cover $\\{C_I\\}$ of $\\mathbb M^n\\setminus\\Delta_n$, and use [A1] to assign each locally finite partition function to one cover member containing its support. The sum of the corresponding partition functions times $T^I_n$ is locally finite and defines a distribution $T_n^0$ on the complement of $\\Delta_n$. Step 3.1 makes it independent of the partition choice locally; the cover is permutation-invariant, so a finite permutation average gives a symmetric extension on this complement. It satisfies causal factorization there by construction.",
+          "inputs": [
+            "A1",
+            "F5",
+            "step 1.2",
+            "step 3.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-4-2",
+          "step": "4.2",
+          "claim": "Symmetrize the covariant extension over the finite permutation group; the diagonal value $T_n(V,\\ldots,V)$ is unchanged, so covariance and unitarity are preserved. Let $D_n(V)$ be the coefficient of $g^n$ in $\\mathcal S_g(V)^*\\star_W\\mathcal S_g(V)-1$ after the lower orders have been made unitary. Associativity and $(F\\star_WG)^*=G^*\\star_WF^*$ follow from the finite contraction formula and $W^*=W^{\\mathsf T}$. On each causal cover set $C_I$, factorization reduces the defect to products of lower-order unitary blocks, so $D_n$ vanishes away from $\\Delta_n$. It is self-adjoint because the full product $\\mathcal S_g(V)^*\\star_W\\mathcal S_g(V)$ is self-adjoint. The graphwise scaling bounds and [F8] place each diagonal part of $D_n$ in a finite local jet space with the permitted derivative order. Define the correction by\n$$\\frac{i^n}{\\hbar^n n!}\\,\\Delta T_n(V,\\ldots,V)=-\\frac12D_n(V).$$\nThis is an allowed formal correction: every order-$n$ defect term has $\\hbar$-degree at least $-n$, so multiplication by $\\hbar^n$ inverts the displayed prefactor without introducing negative powers of $\\hbar$; polarization gives a symmetric local $n$-linear map. In the order-$n$ defect, this changes only the two terms paired with the unit coefficient, adding $-D_n/2+(-D_n/2)^*=-D_n$. Thus it cancels the defect, preserves the per-graph local scaling bounds and covariance, and leaves all off-diagonal causal products unchanged. Formal unitarity holds through order $n$.",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F3",
+            "F8",
+            "step 3.1",
+            "step 3.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "step": "5.1",
+          "claim": "The construction at order $n$ uses only finite graph sums, finite-dimensional jet corrections and the already constructed orders below $n$. The Axiom of Choice supplies dependent choice for the recursive order-by-order selections and Countable Choice for the microlocal contractions in [F3]. Induction therefore constructs the sequence for every finite order and verifies every clause of the system contract in [F1]. No limit in $g$ is taken.",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F3",
+            "step 1.1",
+            "step 4.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "T0=1 is imposed in the base case in step 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For V=0 every positive-g coefficient vanishes and Sg(0)=1 by step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "T1=id is the induction base in step 1.1; no diagonal extension is needed at n=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Configurations on the total diagonal are precisely the point where step 2.2 extends graph coefficients."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Null and equal-time causal relations lie in J± and are excluded from a split; the open cover proof in step 1.2 uses strict timelike separation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC and CC are explicit in [A1]; the choices of extensions and recursive normalizations occur in steps 4.1, 2.2 and 4.2."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem asserts existence and extension bounds, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem asserts existence and extension bounds, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "n=2 relative dimension",
+          "calculation": "The total diagonal has relative dimension 4(n−1)=4; a graph with two undifferentiated edges has δ≤4 under PB, hence only an order-zero delta ambiguity.",
+          "disposition": "Finite arithmetic check of steps 2.2 and 4.2, conditional on PB."
+        },
+        {
+          "case": "unitarity correction",
+          "calculation": "For self-adjoint D, K=−D/2 gives K+K*=−D, exactly canceling the order-n defect.",
+          "disposition": "Coefficient check of the correction in step 4.2."
+        }
+      ]
+    },
+    "prop-qftx-finite-renormalization-composition": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "lem-qftx-finite-graph-scaling-degree",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice and Countable Choice and fix admissible scalar free data as defined by the local time-ordered product contract. In addition assume the following product-scaling bound (PB): whenever two finite-scaling-degree distributions $u,v$ on one resolved causal stratum have a wavefront-transversal product, their product has finite relative scaling degree and\n$$\\operatorname{sd}_0(uv)\\le\\operatorname{sd}_0(u)+\\operatorname{sd}_0(v).$$\nAssume (PB) at every successive product of edge pullbacks and lower-order local counterterms used below. Fix a finite loopless multigraph $\\Gamma$ with $n\\ge2$ labeled vertices, parallel edges allowed, and a finite multi-index derivative $\\alpha_e$ on each edge $e$. Suppose every proper partial-diagonal subgraph has already received an extension of finite scaling degree by induction on its number of vertices. Then the numerical graph distribution on the complement of the total diagonal has finite scaling degree in the $4(n-1)$ relative coordinates. For a primitive graph, with no proper divergent subgraph, the bound is\n$$\\operatorname{sd}_0(t_\\Gamma)\\le 2|E(\\Gamma)|+\\sum_{e\\in E(\\Gamma)}|\\alpha_e|.$$\nFor a graph with proper subgraphs, the same induction gives a finite bound obtained from this edge estimate and the finitely many derivative orders of its lower-order local counterterms.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "thm-qftx-scalar-eg-induction",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice and Countable Choice. Fix any admissible flat scalar free datum and local scalar polynomial class as defined by the local time-ordered product contract. Also assume the graphwise product-scaling bound (PB) from [A2] below at every successive product of edge pullbacks and lower-order local counterterms. Then there exists a sequence of symmetric multilinear maps $T_n$ satisfying that contract at every finite perturbative order. At order $n$, each numerical graph distribution extends across the total diagonal in the $4(n-1)$ relative coordinates with its finite scaling degree; its extension ambiguity is a finite linear combination of derivatives of the diagonal delta distribution, of order at most $\\lfloor\\delta_\\Gamma-4(n-1)\\rfloor$ when $\\delta_\\Gamma\\ge4(n-1)$ and zero when $\\delta_\\Gamma<4(n-1)$. Thus the coefficients form a formal series only; no convergence in the coupling, adiabatic limit, positivity claim, or gauge/Ward identity is asserted.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-qftx-scalar-eg-induction",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice and Countable Choice. Fix any admissible flat scalar free datum and local scalar polynomial class as defined by the local time-ordered product contract. Also assume the graphwise product-scaling bound (PB) from [A2] below at every successive product of edge pullbacks and lower-order local counterterms. Then there exists a sequence of symmetric multilinear maps $T_n$ satisfying that contract at every finite perturbative order. At order $n$, each numerical graph distribution extends across the total diagonal in the $4(n-1)$ relative coordinates with its finite scaling degree; its extension ambiguity is a finite linear combination of derivatives of the diagonal delta distribution, of order at most $\\lfloor\\delta_\\Gamma-4(n-1)\\rfloor$ when $\\delta_\\Gamma\\ge4(n-1)$ and zero when $\\delta_\\Gamma<4(n-1)$. Thus the coefficients form a formal series only; no convergence in the coupling, adiabatic limit, positivity claim, or gauge/Ward identity is asserted.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qftx-local-time-ordered-system",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb M=\\mathbb R^4$ have metric $\\eta=\\operatorname{diag}(-1,1,1,1)$, orientation $dx^0\\wedge dx^1\\wedge dx^2\\wedge dx^3$, and future direction given by increasing $x^0$. Use units $c=1$, so a mass parameter has inverse-length units. Define $x\\in J^+(y)$ by $x^0-y^0\\ge|\\mathbf x-\\mathbf y|$ and $x\\in J^-(y)$ by $y^0-x^0\\ge|\\mathbf y-\\mathbf x|$; for $A\\subseteq\\mathbb M$, put $J^\\pm(A)=\\bigcup_{y\\in A}J^\\pm(y)$. A field configuration is any smooth real function $\\phi$; it is off shell because no field equation is imposed. The allowed local interactions are compactly supported finite polynomial functionals of $\\phi$ and finitely many coordinate derivatives, integrated against $d^4x$. The support of a functional $F$ is the closed set of points each of whose neighborhoods contains the support of a compactly supported variation that changes $F$ for some configuration.\n\nFor $\\Lambda\\in SO^+(1,3)$, require $\\Lambda^{\\mathsf T}\\eta\\Lambda=\\eta$, $\\det\\Lambda=1$, and preservation of the chosen future cone; $SO^+(1,3)$ denotes this identity component. The proper orthochronous Poincare group consists of $\\gamma=(a,\\Lambda)$ with $a\\in\\mathbb M$ and $\\Lambda\\in SO^+(1,3)$. It acts by $(\\gamma\\cdot\\phi)(x)=\\phi(\\Lambda^{-1}(x-a))$ and $(\\gamma\\cdot F)(\\phi)=F(\\gamma^{-1}\\cdot\\phi)$.\n\nFor a distribution on a coordinate chart, its wavefront set consists of the nonzero cotangent directions where every compact localization fails to have a rapidly decreasing Fourier transform in every conic neighborhood. Covectors are future or past causal when their metric-dual vectors are causal with the indicated time orientation; a nonzero causal covector has a nonzero time component. Write $\\Delta=\\{(x,x):x\\in\\mathbb M\\}$ and $N^*\\Delta=\\{(x,\\xi;x,-\\xi):\\xi\\ne0\\}$. Write $(x,\\xi)\\sim(y,\\eta)$ when $x,y$ lie on one null straight segment (a zero-length segment is allowed), and parallel transport along that segment carries $\\xi$ to $\\eta$. A fixed free scalar input consists of $m\\ge0$, a two-point distribution $W$ satisfying\n$$P_xW=P_yW=0,\\qquad P=-\\eta^{ab}\\partial_a\\partial_b+m^2,$$\nand the positive-frequency null wavefront condition\n$$\\operatorname{WF}(W)=\\mathcal C^+:=\\{(x,\\xi;y,-\\eta):(x,\\xi)\\sim(y,\\eta),\\ \\xi\\text{ future null}\\}.$$\nFor a two-point distribution $U$, set $U^{\\mathsf T}(x,y)=U(y,x)$ and let $U^*$ be complex conjugation. Assume $W$ is invariant under translations and $SO^+(1,3)$, satisfies $W-W^{\\mathsf T}=iE$ for a fixed distribution $E$ supported where $x-y$ is causal, and satisfies $W^*=W^{\\mathsf T}$.\n\nThe prescribed scalar time-ordered contraction input is a symmetric distribution $H_F\\in\\mathcal D'(\\mathbb M^2)$ invariant under translations and $SO^+(1,3)$, equal to $W(x,y)$ on the open set $x^0>y^0$ and to $W(y,x)$ on $y^0>x^0$. The two prescriptions agree on spacelike-separated open supports because $E$ is supported on causal pairs. Translation invariance gives $H_F(x,y)=h_F(x-y)$ and $W(x,y)=w(x-y)$. For a distribution $T$ on $\\mathbb R^4$, set $T_\\rho(\\varphi)=\\rho^{-4}T(\\varphi(\\cdot/\\rho))$ and define $\\operatorname{sd}_0(T)$ as the infimum of real $\\omega$ for which $\\rho^\\omega T_\\rho\\to0$ on each fixed test as $\\rho\\downarrow0$. Require $\\operatorname{sd}_0(h_F),\\operatorname{sd}_0(w)\\le2$ and\n$$\\operatorname{WF}(H_F)\\subseteq\\Gamma_F:=N^*\\Delta\\cup\\{(x,\\xi;y,-\\eta):x\\ne y,\\ (x,\\xi)\\sim(y,\\eta),\\ \\xi\\text{ future null if }x\\in J^+(y),\\ \\xi\\text{ past null if }x\\in J^-(y)\\}.$$\nThis is fixed conditional data: it does not claim existence of $W$ or $H_F$, and it does not define any singular restriction or product of $H_F$ on a diagonal.\n\nFor $r\\ge1$, $F^{(r)}(\\phi)$ denotes the distribution kernel on $\\mathbb M^r$ of the mixed variation in $r$ compactly supported smooth directions, and set $F^{(0)}(\\phi)=F(\\phi)$. Define $\\deg F$ as the largest positive $r$ with $F^{(r)}\\ne0$, or $0$ if all positive-order derivative kernels vanish; in particular $\\deg0=0$. The class $\\mathcal F_{\\mu c}^{\\mathrm{poly}}(\\mathbb M)$ consists of finite polynomial functionals with compactly supported derivative kernels such that every nonzero wavefront tuple of each derivative kernel avoids both the cone of tuples whose entries are all future causal and the cone of tuples whose entries are all past causal; zero entries in either cone are allowed. For $F,G$ in this class, define\n$$F\\star_WG=\\sum_{r=0}^{\\min(\\deg F,\\deg G)}\\frac{\\hbar^r}{r!}\\left\\langle F^{(r)}(\\phi)\\otimes G^{(r)}(\\phi),W^{\\otimes r}\\right\\rangle,$$\nusing distribution products and pushforwards under the stated wavefront transversality conditions, with the $r=0$ pairing interpreted as the pointwise product $F(\\phi)G(\\phi)$. Here $\\hbar$ is a formal indeterminate, and Countable Choice is assumed for the supplier theorem defining these contractions.\n\nA scalar time-ordered system is a sequence of symmetric multilinear maps\n$$T_n:\\big(\\mathcal F_{\\mathrm{loc}}^{\\mathrm{poly}}(\\mathbb M)\\big)^n\\longrightarrow \\mathcal F_{\\mu c}^{\\mathrm{poly}}(\\mathbb M)\\llbracket\\hbar\\rrbracket,\\qquad T_0=1,\\quad T_1=\\operatorname{id}.$$\nFor $I\\subseteq\\{1,\\ldots,n\\}$ put $S_I=\\bigcup_{i\\in I}\\operatorname{supp}F_i$ and $F_I=(F_i)_{i\\in I}$. Causal factorization requires\n$$T_n(F_1,\\ldots,F_n)=T_{|I|}(F_I)\\star_W T_{|I^c|}(F_{I^c})$$\nfor every nonempty proper $I$ such that $S_I\\cap J^-(S_{I^c})=\\varnothing$; an empty block is the unit.\n\nField independence means that each numerical graph distribution is independent of the background field $\\phi$; all $\\phi$-dependence enters through the vertex kernels $F_i^{(r)}(\\phi)$. In the graph expansion of $T_n$, vertices are labeled by $1,\\ldots,n$ and an edge between distinct vertices contracts one derivative slot at each endpoint by $H_F$. A graph is a finite loopless multigraph, so parallel edges are allowed; if $r_{ij}$ edges join vertices $i$ and $j$, the Wick coefficient for that choice includes $\\hbar^{\\sum_{i<j}r_{ij}}/\\prod_{i<j}r_{ij}!$. Finite-order local jet derivatives may act on incident edge kernels. Each coefficient is a finite sum of such contractions, since every input has finite polynomial degree. No graph term uses a singular product at a diagonal before extension.\n\nFor $n\\ge2$, use relative coordinates $z_i=x_i-x_n$ ($1\\le i<n$), so the total diagonal corresponds to $0\\in\\mathbb R^{4(n-1)}$. The relative scaling degree $\\delta_\\Gamma$ of a numerical graph distribution is defined by the same positive-dilation rule above in this relative dimension. The scaling condition requires each graph distribution on the punctured relative space, after its proper partial diagonals have been extended at lower vertex orders, to have a finite degree $\\delta_\\Gamma$, and each total-diagonal extension to retain that degree. Any two such extensions differ by derivatives $\\partial^\\beta\\delta_0$ of order $|\\beta|\\le\\lfloor\\delta_\\Gamma-4(n-1)\\rfloor$ when $\\delta_\\Gamma\\ge4(n-1)$, and agree when $\\delta_\\Gamma<4(n-1)$.\n\nCovariance requires $T_n(\\gamma\\cdot F_1,\\ldots,\\gamma\\cdot F_n)=\\gamma\\cdot T_n(F_1,\\ldots,F_n)$ for each proper orthochronous Poincare transformation. Fix the Lorentz Lie-algebra convention $[J_i,J_j]=\\epsilon_{ijk}J_k$, $[J_i,K_j]=\\epsilon_{ijk}K_j$, and $[K_i,K_j]=-\\epsilon_{ijk}J_i$. For a formal coupling $g$, define coefficientwise\n$$\\mathcal S_g(V)=\\sum_{n=0}^{\\infty}\\frac{(ig/\\hbar)^n}{n!}T_n(V,\\ldots,V).$$\nThe anti-time-ordered series is $\\overline{\\mathcal S}_g(V):=\\mathcal S_g(V)^*$, where the involution conjugates scalar coefficients, fixes real $g,\\hbar$, and reverses the order of factors; $W^*=W^{\\mathsf T}$ gives $(F\\star_WG)^*=G^*\\star_WF^*$. Formal unitarity requires $\\overline{\\mathcal S}_g(V)\\star_W\\mathcal S_g(V)=1$ for every real $V=V^*$. At each $g$-order, coefficients are finite Laurent polynomials in $\\hbar$ before cancellation and are compared algebraically; there is no analytic convergence, positivity of formal coefficients, adiabatic limit, or gauge/Ward identity in this contract.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qftx-off-shell-local-polynomial-functionals",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb M=\\mathbb R^4$ with coordinates $x=(x^0,x^1,x^2,x^3)$, metric $\\eta=\\operatorname{diag}(-1,1,1,1)$ and time orientation given by increasing $x^0$. A field configuration is any smooth real function $\\phi\\in C^\\infty(\\mathbb M;\\mathbb R)$; it is off shell, meaning that it is not required to satisfy a field equation. For an integer $s\\ge0$, its finite jet at $x$ is the finite tuple $j^s\\phi(x)=(\\partial^\\alpha\\phi(x))_{|\\alpha|\\le s}$, with multi-index derivatives in these coordinates.\n\nAn off-shell local polynomial scalar functional is a finite sum\n$$F(\\phi)=c+\\sum_{a=1}^{N}\\int_{\\mathbb M} f_a(x)\\,P_a(j^{s_a}\\phi(x))\\,d^4x,$$\nwhere $c\\in\\mathbb C$, $f_a\\in C_c^\\infty(\\mathbb M;\\mathbb C)$, each $P_a$ is a polynomial in the finitely many jet coordinates, and each $s_a$ is finite. Its support is contained in the compact set $\\bigcup_{a=1}^{N}\\operatorname{supp}f_a$. The collection of these functionals is denoted $\\mathcal F_{\\mathrm{loc}}^{\\mathrm{poly}}(\\mathbb M)$. The involution is $F^*(\\phi)=\\overline{F(\\phi)}$. No physical units or field equation are imposed.\n\nPrecisely, $\\operatorname{supp}F$ is the set of $x\\in\\mathbb M$ such that every neighborhood $U$ of $x$ contains the support of some $h\\in C_c^\\infty(\\mathbb M;\\mathbb R)$ for which $F(\\phi+h)\\ne F(\\phi)$ for some smooth configuration $\\phi$. It is closed and is contained in the displayed compact union, so it is compact. This definition is independent of the chosen finite presentation of $F$.\n\nFor $r\\ge1$, define the $r$th functional derivative by\n$$F^{(r)}(\\phi)(h_1,\\ldots,h_r)=\\left.\\frac{\\partial^r}{\\partial t_1\\cdots\\partial t_r}F\\!\\left(\\phi+\\sum_{j=1}^{r}t_jh_j\\right)\\right|_{t_1=\\cdots=t_r=0},\\qquad h_j\\in C_c^\\infty(\\mathbb M;\\mathbb R).$$\nThe finite polynomial expansion makes this a symmetric multilinear form. Repeated integration by parts in each $h_j$ writes it as a compactly supported distribution kernel on the thin diagonal $\\{(x,\\ldots,x):x\\in\\mathbb M\\}\\subset\\mathbb M^r$. Integrals use the fixed Minkowski density $d^4x$; all kernels are paired bilinearly with compactly supported smooth tests.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-qft-local-counterterm-jet-classification",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $n\\ge1$, let $t\\in\\mathcal D'(\\mathbb R^n\\setminus\\{0\\})$ have finite real scaling degree $\\delta$, and let $\\mathcal E_\\delta(t)$ be the set of its extensions in $\\mathcal D'(\\mathbb R^n)$ having scaling degree exactly $\\delta$. This set is nonempty by [[thm-qft-finite-scaling-degree-extension]]. If $\\delta<n$, then $\\mathcal E_\\delta(t)$ has exactly one member. If $\\delta\\ge n$, let $k$ be the unique nonnegative integer with $k\\le\\delta-n<k+1$ (the floor of $\\delta-n$). Then, for any $T_0\\in\\mathcal E_\\delta(t)$,\n\n$$\\mathcal E_\\delta(t)=T_0+\\operatorname{span}_{\\mathbb C}\\{\\partial^\\alpha\\delta_0:|\\alpha|\\le k\\}.$$\n\nHere a **point-local counterterm** means a distribution whose support, as defined in [[def-support-of-a-distribution]], is contained in $\\{0\\}$. Thus the same-degree freedom is finite dimensional, with precisely the displayed delta derivatives as its basis; at the threshold $\\delta=n$, only a multiple of $\\delta_0$ is allowed.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-finite-sums-of-product-tests-are-dense-on-product-open-sets",
+          "source_section": "Statement",
+          "quote": "For integers $p,q\\ge 1$ and open $U\\subseteq\\mathbb R^p$, $V\\subseteq\\mathbb R^q$, every $\\Phi\\in\\mathcal D(U\\times V)$ is a limit in the LF test topology of finite sums of products $f(x)g(y)$ with $f\\in\\mathcal D(U)$ and $g\\in\\mathcal D(V)$. All approximating supports and the target support lie in one compact product inside $U\\times V$. This holds in ZF.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "By [A2] the conditional existence result [F1] applies to the common free data; the Statement also supplies the two systems explicitly. Introduce a formal degree parameter $\\lambda$ and write $\\mathcal S(\\lambda V)=1+\\sum_{n\\ge1}\\lambda^nS_n(V)$ and $\\mathcal S'(\\lambda V)=1+\\sum_{n\\ge1}\\lambda^nS'_n(V)$. Since $T_1=T'_1=\\operatorname{id}$, the degree-one coefficients agree. Set $Z_1(V)=V$.",
+          "inputs": [
+            "given",
+            "A2",
+            "F1",
+            "F2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Suppose homogeneous maps $Z_j$ are defined for $1\\le j<n$, with finite-jet kernels supported on the total diagonal and preserving supports and covariance, and $\\mathcal S(Z_{<n}(\\lambda V))$ agrees with $\\mathcal S'(\\lambda V)$ through degree $n-1$. In the degree-$n$ coefficient of $\\mathcal S(Z_{<n}(\\lambda V)+\\lambda^nZ_n(V))$, the only occurrence of $Z_n$ is the linear term $T_1(Z_n)=Z_n$: every term with $T_k$ for $k\\ge2$ has $k$ positive degrees summing to $n$, so each degree is at most $n-1$. Therefore there is exactly one choice of $Z_n$, namely the degree-$n$ residual of $\\mathcal S'$ minus the already known coefficient of $\\mathcal S\\circ Z_{<n}$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Polarize the homogeneous residual from step 2.1 into its symmetric $n$-linear vertex kernel. Fix a point of a causal cover set $C_I$ and choose small coordinate neighborhoods of its $n$ entries whose product lies in $C_I$. For arbitrary $f_i\\in C_c^\\infty$ in those neighborhoods, take the linear local functionals $F_i(\\phi)=\\int f_i(x)\\phi(x)\\,d^4x$; their supports satisfy the same causal split. Introduce independent formal variables $t_1,\\ldots,t_n$. Each lower map $Z_j$, $j<n$, has a kernel supported on the total diagonal by the induction hypothesis in step 2.1; because the two block supports are disjoint, every mixed term of $Z_j(\\sum_i t_iF_i)$ containing variables from both blocks vanishes, so $Z_j$ splits as the sum of its block restrictions. The causal-factorization identity for $\\mathcal S'$ and for $\\mathcal S\\circ Z_{<n}$ then expresses the coefficient of $t_1\\cdots t_n$ as a star product of block coefficients of degrees $|I|$ and $|I^c|$. Both degrees are strictly below $n$, so these coefficients agree by the induction hypothesis and the coefficient vanishes. Thus the residual distribution pairs to zero with every product test $f_1\\otimes\\cdots\\otimes f_n$ in this neighborhood. Iterating [F4] over the $n$ factors shows finite sums of these product tests are dense in its test-function space, so the residual distribution vanishes on the neighborhood. Since the causal cover sets cover the complement of the total diagonal, the residual kernel is supported on that diagonal.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F4",
+            "step 2.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "By [F1] the residual has finite scaling degree, and under [A1] the classification [F3] identifies it with a finite jet of the diagonal delta distribution. Pairing this jet with the finite local polynomial derivative kernels of [F2] gives a local polynomial functional of finite jet order. It is supported where the original vertices meet, hence its support lies in the support of $V$. Its covariance follows from the covariance of both systems and the invariant diagonal. Therefore the unique residual $Z_n$ chosen in step 2.1 is local, support-preserving and covariant.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "step 2.1",
+            "step 3.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "step": "5.1",
+          "claim": "Induction defines every $Z_n$ uniquely, and each coefficient of a composition uses only finitely many partitions of its total degree. If $Z(V)=V+\\sum_{n\\ge2}Z_n(V)$, solve $Z(X(V))=V$ recursively: the unknown degree-$n$ term of $X$ again occurs through the identity linear coefficient, while all other terms use lower degrees. This gives a unique formal inverse with local support-preserving coefficients. Formal composition is associative coefficientwise and preserves the identity linear term, so these maps form a group.",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Z(0)=0 follows from the zero constant term in the residual recursion (Statement and step 1.1)."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If the homogeneous residual is zero, the unique correction Zn in step 2.1 is zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Z1=id is fixed by T1=T1′=id in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The residual is supported on the total diagonal by step 3.1 and becomes a finite local jet in step 4.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "At scaling degree δ=d the local counterterm has order zero by [F3], covered in step 4.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC and CC are stated in [A1] and used for finite graph extensions and contractions in steps 3.1–4.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The proposition states a unique formal map, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The proposition states a unique formal map, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "degree two",
+          "calculation": "With S(λV)=1+λV+λ²S2+…, Z(λV)=λV+λ²Z2+…, the degree-two coefficient of S∘Z is Z2+S2, so Z2=S2′−S2 uniquely.",
+          "disposition": "Finite coefficient check of steps 1.1–2.1."
+        },
+        {
+          "case": "degree three partitions",
+          "calculation": "The known degree-three terms use the finite partitions 1+2, 2+1 and 1+1+1; the only new term Z3 enters linearly through T1.",
+          "disposition": "Finite partition check of the triangular recursion in step 2.1."
+        }
+      ]
+    },
+    "ex-qftx-two-vertex-log": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "prop-qft-four-dimensional-log-scale-anomaly",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. On $\\mathbb R^4\\setminus\\{0\\}$ let $u(x)=1/(16\\pi^4|x|^4)$, equivalently the square of the displayed Euclidean kernel $C_0(x)=1/(4\\pi^2|x|^2)$; interpret $u$ as its regular distribution there. Choose $\\chi\\in\\mathcal D(\\mathbb R^4)$ equal to one near $0$. For $\\mu>0$ define\n\n$$T_\\mu(\\varphi):=\\int_{\\mathbb R^4\\setminus\\{0\\}}\\frac{\\varphi(x)-\\chi(\\mu x)\\varphi(0)}{16\\pi^4|x|^4}\\,d^4x.$$\n\nThen $T_\\mu$ is a distribution extending $u$, has scaling degree $4$, and for every $\\mu,\\nu>0$,\n\n$$T_\\mu-T_\\nu=\\frac{1}{8\\pi^2}\\log(\\mu/\\nu)\\,\\delta_0.$$\n\nIn particular, no extension of $u$ with scaling degree $4$ is exactly homogeneous, where exact homogeneity means $\\rho^4T_\\rho=T$ for every $\\rho>0$. Coordinates use one fixed Euclidean unit; if units are assigned, $\\mu$ and $\\nu$ have reciprocal coordinate units, so the logarithm's ratio is dimensionless. This is a Euclidean distribution identity and does not identify a measured coupling or physical beta function.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "thm-qftx-scalar-eg-induction",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice and Countable Choice. Fix any admissible flat scalar free datum and local scalar polynomial class as defined by the local time-ordered product contract. Also assume the graphwise product-scaling bound (PB) from [A2] below at every successive product of edge pullbacks and lower-order local counterterms. Then there exists a sequence of symmetric multilinear maps $T_n$ satisfying that contract at every finite perturbative order. At order $n$, each numerical graph distribution extends across the total diagonal in the $4(n-1)$ relative coordinates with its finite scaling degree; its extension ambiguity is a finite linear combination of derivatives of the diagonal delta distribution, of order at most $\\lfloor\\delta_\\Gamma-4(n-1)\\rfloor$ when $\\delta_\\Gamma\\ge4(n-1)$ and zero when $\\delta_\\Gamma<4(n-1)$. Thus the coefficients form a formal series only; no convergence in the coupling, adiabatic limit, positivity claim, or gauge/Ward identity is asserted.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-qftx-scalar-eg-induction",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice and Countable Choice. Fix any admissible flat scalar free datum and local scalar polynomial class as defined by the local time-ordered product contract. Also assume the graphwise product-scaling bound (PB) from [A2] below at every successive product of edge pullbacks and lower-order local counterterms. Then there exists a sequence of symmetric multilinear maps $T_n$ satisfying that contract at every finite perturbative order. At order $n$, each numerical graph distribution extends across the total diagonal in the $4(n-1)$ relative coordinates with its finite scaling degree; its extension ambiguity is a finite linear combination of derivatives of the diagonal delta distribution, of order at most $\\lfloor\\delta_\\Gamma-4(n-1)\\rfloor$ when $\\delta_\\Gamma\\ge4(n-1)$ and zero when $\\delta_\\Gamma<4(n-1)$. Thus the coefficients form a formal series only; no convergence in the coupling, adiabatic limit, positivity claim, or gauge/Ward identity is asserted.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-qft-four-dimensional-log-scale-anomaly",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. On $\\mathbb R^4\\setminus\\{0\\}$ let $u(x)=1/(16\\pi^4|x|^4)$, equivalently the square of the displayed Euclidean kernel $C_0(x)=1/(4\\pi^2|x|^2)$; interpret $u$ as its regular distribution there. Choose $\\chi\\in\\mathcal D(\\mathbb R^4)$ equal to one near $0$. For $\\mu>0$ define\n\n$$T_\\mu(\\varphi):=\\int_{\\mathbb R^4\\setminus\\{0\\}}\\frac{\\varphi(x)-\\chi(\\mu x)\\varphi(0)}{16\\pi^4|x|^4}\\,d^4x.$$\n\nThen $T_\\mu$ is a distribution extending $u$, has scaling degree $4$, and for every $\\mu,\\nu>0$,\n\n$$T_\\mu-T_\\nu=\\frac{1}{8\\pi^2}\\log(\\mu/\\nu)\\,\\delta_0.$$\n\nIn particular, no extension of $u$ with scaling degree $4$ is exactly homogeneous, where exact homogeneity means $\\rho^4T_\\rho=T$ for every $\\rho>0$. Coordinates use one fixed Euclidean unit; if units are assigned, $\\mu$ and $\\nu$ have reciprocal coordinate units, so the logarithm's ratio is dimensionless. This is a Euclidean distribution identity and does not identify a measured coupling or physical beta function.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qft-distribution-scaling-degree",
+          "source_section": "Definition",
+          "quote": "Fix an integer $n\\ge1$, put $U=\\mathbb R^n\\setminus\\{0\\}$, and use the continuous complex-linear test-function pairing of [[def-distribution]]. For $t\\in\\mathcal D'(U)$ and $\\rho>0$, define its dilation at the origin by\n\n$$\\langle t_\\rho,\\varphi\\rangle:=\\rho^{-n}\\langle t,\\varphi(\\cdot/\\rho)\\rangle,\\qquad \\varphi\\in\\mathcal D(U).$$\n\nPositive dilations preserve $U$, so the displayed pairing is defined for every test function in $\\mathcal D(U)$. If $t$ is the regular distribution induced by a locally integrable function $g$, change of variables gives $\\langle t_\\rho,\\varphi\\rangle=\\int_U g(\\rho x)\\varphi(x)\\,dx$.\n\nConvergence $s_\\rho\\to0$ in $\\mathcal D'(U)$ as $\\rho\\downarrow0$ means $\\langle s_\\rho,\\varphi\\rangle\\to0$ for every fixed $\\varphi\\in\\mathcal D(U)$. The **scaling degree at the origin** is\n\n$$\\operatorname{sd}_0(t):=\\inf\\{\\omega\\in\\mathbb R:\\rho^\\omega t_\\rho\\to0\\text{ in }\\mathcal D'(U)\\}.$$\n\nThe infimum of the empty set is $+\\infty$; if every real $\\omega$ belongs to the set, the infimum is $-\\infty$. A finite scaling degree means a real value $\\delta\\in\\mathbb R$. For a distribution $T\\in\\mathcal D'(\\mathbb R^n)$ use the same dilation formula on tests in $\\mathcal D(\\mathbb R^n)$. An **extension** of $t$ is a distribution $T$ on $\\mathbb R^n$ whose restriction to $U$ equals $t$. The degree of divergence associated with a finite scaling degree $\\delta$ in dimension $n$ is $\\delta-n$. Exact homogeneity of scaling degree $\\delta$ means $\\rho^\\delta T_\\rho=T$ for every $\\rho>0$.\n\nFor this fixed $t$, define its **local extension family** by\n\n$$\\mathcal E(t):=\\{T\\in\\mathcal D'(\\mathbb R^n):T|_U=t\\}.$$\n\nHere $T|_U=t$ means $\\langle T,\\widetilde\\varphi\\rangle=\\langle t,\\varphi\\rangle$ for every $\\varphi\\in\\mathcal D(U)$, where $\\widetilde\\varphi\\in\\mathcal D(\\mathbb R^n)$ is its smooth extension by zero. When $\\delta=\\operatorname{sd}_0(t)\\in\\mathbb R$, the **scaling-degree-preserving local extension family** is\n\n$$\\mathcal E_\\delta(t):=\\{T\\in\\mathcal E(t):\\operatorname{sd}_0(T)=\\delta\\}.$$\n\nExistence of members and the affine structure of these families require separate results; the set definitions alone assert neither.\n\nThe definitions use Euclidean dilations about the specified point only. They do not assert that a given distribution arises from a product of fields or that an extension is physically selected.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-qft-local-counterterm-jet-classification",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $n\\ge1$, let $t\\in\\mathcal D'(\\mathbb R^n\\setminus\\{0\\})$ have finite real scaling degree $\\delta$, and let $\\mathcal E_\\delta(t)$ be the set of its extensions in $\\mathcal D'(\\mathbb R^n)$ having scaling degree exactly $\\delta$. This set is nonempty by [[thm-qft-finite-scaling-degree-extension]]. If $\\delta<n$, then $\\mathcal E_\\delta(t)$ has exactly one member. If $\\delta\\ge n$, let $k$ be the unique nonnegative integer with $k\\le\\delta-n<k+1$ (the floor of $\\delta-n$). Then, for any $T_0\\in\\mathcal E_\\delta(t)$,\n\n$$\\mathcal E_\\delta(t)=T_0+\\operatorname{span}_{\\mathbb C}\\{\\partial^\\alpha\\delta_0:|\\alpha|\\le k\\}.$$\n\nHere a **point-local counterterm** means a distribution whose support, as defined in [[def-support-of-a-distribution]], is contained in $\\{0\\}$. Thus the same-degree freedom is finite dimensional, with precisely the displayed delta derivatives as its basis; at the threshold $\\delta=n$, only a multiple of $\\delta_0$ is allowed.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The graph in the Example has two distinct vertices and two parallel internal edges, so its numerical relative kernel is the product of the two Euclidean edge kernels, $C_0(z)^2=u(z)$. By [F2], this punctured distribution has scaling degree $4$; under the additional causal-graph hypothesis [A2], the conditional extension theorem [F1] applies at the stated formal order.",
+          "inputs": [
+            "given",
+            "A2",
+            "F1",
+            "F2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "Here the relative dimension is $4$ and the scaling degree is also $4$. Thus $\\lfloor4-4\\rfloor=0$, so [F4] says every two same-degree extensions differ by $c\\delta_0$ for a scalar $c\\in\\mathbb C$; no derivative of $\\delta_0$ is allowed. This proves the local ambiguity claim without identifying the Euclidean kernel with $H_F$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Applying the exact Euclidean calculation in [F2] to the chosen scale parameters gives $T_\\mu-T_\\nu=(8\\pi^2)^{-1}\\log(\\mu/\\nu)\\delta_0$. Since the difference is supported at $z=0$ and is proportional to $\\delta_0$, it is local. The calculation concerns only the stated Euclidean extension family, so it supplies no Lorentzian amplitude or measured probability.",
+          "inputs": [
+            "A1",
+            "F2",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The worked graph is fixed to have two vertices and two internal edges."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The displayed kernel is fixed as C0(z)^2 and no zero-coupling limit is claimed."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example is specifically the two-vertex graph; no one-vertex case is stated."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The singular point z=0 is the relative diagonal and is extended in steps 1.2–2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "At μ=ν the logarithm is zero, matching Tμ−Tν=0 in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC and CC are declared in [A1] for the extension and polar-integral suppliers, used in step 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example states identities and an ambiguity, with no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example states identities and an ambiguity, with no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "scale ratio one",
+          "calculation": "μ=ν gives log(μ/ν)=0 and therefore Tμ−Tν=0.",
+          "disposition": "Substitution in the exact identity in step 2.1."
+        },
+        {
+          "case": "relative dimension four",
+          "calculation": "δ=4 and d=4 give floor(δ−d)=0, so the extension difference is cδ0 and has no derivatives.",
+          "disposition": "Finite arithmetic check of step 1.2."
+        }
+      ]
+    }
+  }
+}

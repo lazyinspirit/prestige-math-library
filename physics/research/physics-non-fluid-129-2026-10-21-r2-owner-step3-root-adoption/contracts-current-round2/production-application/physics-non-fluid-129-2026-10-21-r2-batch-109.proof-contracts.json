@@ -1,0 +1,588 @@
+{
+  "version": 1,
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "batch": "109",
+  "level": 1,
+  "scope": [
+    "def-qsmx-secular-thermal-generator",
+    "thm-qsmx-secular-gibbs-stationarity",
+    "thm-qsmx-spohn-finite-inequality",
+    "cex-qsmx-stationarity-without-relaxation"
+  ],
+  "contracts": {
+    "def-qsmx-secular-thermal-generator": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-qsm-matrix-state-calculus",
+          "source_section": "Statement",
+          "quote": "Use the following conventions on a complex inner-product space $H$ of dimension $D\\geq1$, with inner product linear in its first argument. For an endomorphism $A$, define $\\operatorname{Tr}A:=\\sum_{j=1}^D\\langle Ae_j,e_j\\rangle$ in an orthonormal basis; step 3.1 proves basis independence. For any Hermitian $M$, its **positive spectral subspace** (called its positive support here) is $S_M:=\\bigoplus_{\\lambda>0}\\ker(M-\\lambda I)$; when $M\\geq0$ this equals $(\\ker M)^\\perp$. Its support logarithm is $\\log(M|_{S_M}):=\\sum_{\\lambda>0}(\\log\\lambda)P_\\lambda|_{S_M}$, where $P_\\lambda$ is the orthogonal projection onto that eigenspace. No value $\\log0$ is assigned; for $M=0$ this is the unique endomorphism of the zero space. For the set $\\mathcal D(H)$ of positive semidefinite Hermitian endomorphisms with trace one, a point $\\rho$ is **extreme** if every equality $\\rho=t\\sigma+(1-t)\\tau$ with $\\sigma,\\tau\\in\\mathcal D(H)$ and $0<t<1$ implies $\\sigma=\\tau=\\rho$.\n\nLet $H$ be a complex inner-product space of finite dimension $D\\geq1$, with inner product linear in its first argument. Every Hermitian endomorphism $M$ has an orthonormal eigenbasis with real eigenvalues. For a real function $f$ on its finite spectrum, define $f(M)$ by its spectral projections; this definition is independent of the choice of eigenbasis. In particular positive square roots, exponentials, and logarithms on positive supports are well defined.\n\nFor a density matrix $\\rho$ on $H$, meaning a Hermitian positive semidefinite operator with $\\operatorname{Tr}\\rho=1$, $\\operatorname{Tr}(\\rho A)=\\sum_jp_j\\langle Au_j,u_j\\rangle$ for bounded $A$, where $\\rho=\\sum_jp_j|u_j\\rangle\\langle u_j|$. The weighted form $(X,Y)_\\rho=\\operatorname{Tr}(\\rho X^*Y)$ satisfies Cauchy\u2013Schwarz, $|(X,Y)_\\rho|^2\\leq(X,X)_\\rho(Y,Y)_\\rho$. Finally, $\\operatorname{Tr}(\\rho^2)\\leq1$, with equality exactly for rank-one densities, and those are exactly the extreme points of the finite density-matrix set.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "By [F1], $\\operatorname{spec}(H)$ is finite and the projections $P_E$ are well-defined, pairwise orthogonal, and sum to $I_d$. Therefore $\\Omega_H$ is finite and symmetric, and each $S_a(\\omega)$ is a finite sum of endomorphisms of $\\mathcal H$; when $m=0$ or a frequency block is empty, the corresponding sum is the zero matrix.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Every term in the displayed formula is a product and finite sum of matrices on $\\mathcal H$, so $\\mathcal L$ is a complex-linear endomorphism of $M_d(\\mathbb C)$. The Hamiltonian coefficient has units joules/(joule-seconds) = seconds$^{-1}$; each dissipative term has units $\\gamma_{ab}=\\mathrm{s}^{-1}$ times dimensionless matrices. Thus the formula is a well-defined finite linear map with the stated units.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The definition requires d\u22651, permits m=0, and states empty sums are zero; see Definition and step 1.1.",
+          "argument_steps": [
+            "1.1"
+          ]
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero rate matrices or couplings yield zero dissipative terms without affecting finite well-definedness; see Definition and step 2.1.",
+          "argument_steps": [
+            "2.1"
+          ]
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For d=1, spec(H)={E} for its real scalar energy E, while Omega_H={0};1.1-2.1 still define all couplings and the generator. The old claim spec(H)={0} is not correct without E=0.",
+          "argument_steps": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Repeated eigenvalues are represented by their full spectral projections and all sums remain finite; see Definition and step 1.1.",
+          "argument_steps": [
+            "1.1"
+          ]
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This item defines a finite linear generator with real finite beta and finite positive-semidefinite rate matrices; it states no evolution-time endpoint or bath-limit convergence.",
+          "argument_steps": []
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Only finite spectral decompositions and finite sums are used; no choice principle is invoked. See step 1.1.",
+          "argument_steps": [
+            "1.1"
+          ]
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item contains no biconditional claim, so no forward direction is asserted. The Definition supplies energy-resolved finite sums and a balance convention, without claiming microscopic weak-coupling equivalence.",
+          "argument_steps": []
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item contains no biconditional claim, so no reverse direction is asserted. The Definition supplies energy-resolved finite sums and a balance convention, without claiming microscopic weak-coupling equivalence.",
+          "argument_steps": []
+        }
+      ],
+      "current_boundary_worksheet": {
+        "proposal": "research/physics-non-fluid-129-2026-10-21-r2-owner-step2-boundary-proposal-8/proposal.json",
+        "source_sha256": "e2acbcce5e2f6d370cbcf76d86c0c7bfea6677b7c983fbc76f27c9d1d0ebe316",
+        "qualification": "Released complete current source/eight-case semantic worksheet; root transcribed exact current rows. No independent acceptance or finite computation asserted."
+      },
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-109",
+        "notes": "Read both proof steps and lem-qsm-matrix-state-calculus Statement and Proof 1.1\u20133.1. For d>=1 spectral projections are intrinsic, Omega_H finite and symmetric, and all terms finite complex-linear operations. Checked m=0, zero rates/couplings, d=1 with arbitrary scalar energy, degeneracies, beta=0 and negative finite beta. Units give inverse seconds; no time limit, empirical premise or arbitrary choice is claimed. Rivas\u2013Huelga \u00a76.2.8 Eq.109 and Lin \u00a73 Eq.37 support the transpose/sign balance convention; bath physics is not derived. No defect or interface edit."
+      }
+    },
+    "thm-qsmx-secular-gibbs-stationarity": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-qsmx-secular-thermal-generator",
+          "source_section": "Definition",
+          "quote": "Let $d\\geq1$ and let $\\mathcal H=\\mathbb C^d$ with its standard complex inner product. Let $H=H^*$ on $\\mathcal H$ be a Hamiltonian matrix with entries in joules, let $\\hbar>0$ have units joule-seconds, and let $S_1,\\ldots,S_m$ be a finite family of dimensionless Hermitian matrices, where $m\\geq0$. Write the finite spectral decomposition $H=\\sum_{E\\in\\operatorname{spec}(H)} E P_E$, where $P_E$ are pairwise orthogonal spectral projections and $\\sum_E P_E=I_d$. The Bohr-frequency set is\n\n$$\\Omega_H:=\\{(E'-E)/\\hbar:E,E'\\in\\operatorname{spec}(H)\\}\\subset\\mathbb R,$$\n\nwhose frequencies have units seconds$^{-1}$. For each $\\omega\\in\\Omega_H$ and $1\\leq a\\leq m$, define the dimensionless energy-resolved coupling\n\n$$S_a(\\omega):=\\sum_{\\substack{E,E'\\in\\operatorname{spec}(H)\\\\E'-E=\\hbar\\omega}}P_E S_a P_{E'}.$$\n\nLet $\\beta\\in\\mathbb R$ have units joules$^{-1}$. For each $\\omega\\in\\Omega_H$, choose a finite rate matrix $\\Gamma(\\omega)=(\\gamma_{ab}(\\omega))_{a,b=1}^m$, with entries in seconds$^{-1}$, that is positive semidefinite in the explicit sense that $\\Gamma(\\omega)=\\Gamma(\\omega)^*$ and $v^*\\Gamma(\\omega)v\\geq0$ for every $v\\in\\mathbb C^m$, and require the thermal balance relation\n\n$$\\gamma_{ab}(-\\omega)=e^{-\\beta\\hbar\\omega}\\gamma_{ba}(\\omega).$$\n\nLet $H_{\\rm LS}=H_{\\rm LS}^*$ be a Hermitian matrix with units joules satisfying $[H_{\\rm LS},H]=0$. For dimensionless $X\\in M_d(\\mathbb C)$, the finite energy-resolved generator is the linear map\n\n$$\\mathcal L(X)=-\\frac{i}{\\hbar}[H+H_{\\rm LS},X]+\\sum_{\\omega\\in\\Omega_H}\\sum_{a,b=1}^{m}\\gamma_{ab}(\\omega)\\left(S_b(\\omega)X S_a(\\omega)^*-\\frac12\\{S_a(\\omega)^*S_b(\\omega),X\\}\\right),$$\n\nwhere $[A,B]=AB-BA$, $\\{A,B\\}=AB+BA$, and $A^*$ is the conjugate transpose. The finite sums define a linear map with units seconds$^{-1}$. This is an adopted finite effective model specification; the definition asserts no microscopic weak-coupling convergence or physical applicability.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qsm-dt-channel-definition",
+          "source_section": "Definition",
+          "quote": "Let $d,e\\geq1$ be integers, let $H_{\\mathrm{in}}=\\mathbb C^d$ and $H_{\\mathrm{out}}=\\mathbb C^e$ with their standard inner products, and write $M_d(\\mathbb C)$ and $M_e(\\mathbb C)$ for the complex linear maps on these spaces. A matrix $X$ is **positive semidefinite**, written $X\\geq0$, when it is Hermitian and $\\langle Xv,v\\rangle\\geq0$ for every vector $v$. The finite spectral convention in [[lem-qsm-matrix-state-calculus]] gives positive matrices their orthonormal eigenbases and positive square roots.\n\nA **positive map** is a complex-linear map $\\Phi:M_d(\\mathbb C)\\to M_e(\\mathbb C)$ such that $\\Phi(X)\\geq0$ whenever $X\\geq0$. For each integer $r\\geq1$, identify $M_r(\\mathbb C)\\otimes M_d(\\mathbb C)$ with matrices on $\\mathbb C^r\\otimes\\mathbb C^d$ in the ordered product basis. The map $\\Phi$ is **completely positive** when $\\operatorname{id}_r\\otimes\\Phi$ is positive for every such $r$, where $\\operatorname{id}_r$ is the identity map on $M_r(\\mathbb C)$.\n\nThe map $\\Phi$ is **trace-preserving** when $\\operatorname{Tr}(\\Phi(X))=\\operatorname{Tr}(X)$ for every $X\\in M_d(\\mathbb C)$. A **finite quantum channel** is a complex-linear map that is both completely positive and trace-preserving, abbreviated CPTP. Unitality, $\\Phi(I_d)=I_e$, is a separate condition and is not part of this definition.\n\nThis is a mathematical definition. A physical preparation, measurement, or open-system model must separately identify when one of these maps represents a physical transformation.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qsm-dt-gksl-definition",
+          "source_section": "Definition",
+          "quote": "Fix a finite dimension $d\\geq1$, a positive constant $\\hbar$ in joule-seconds, a Hermitian matrix $H\\in M_d(\\mathbb C)$ in joules, and a finite family $L_1,\\ldots,L_m\\in M_d(\\mathbb C)$ with units ${\\rm s}^{-1/2}$, where $m\\geq0$. On dimensionless matrices $X\\in M_d(\\mathbb C)$, define the **finite Gorini\u2013Kossakowski\u2013Sudarshan\u2013Lindblad (GKSL) generator**\n\n$$\\mathcal L(X)=-\\frac{i}{\\hbar}[H,X]+\\sum_{a=1}^{m}\\left(L_aXL_a^*-\\frac12\\{L_a^*L_a,X\\}\\right),$$\n\nwhere $[A,B]=AB-BA$, $\\{A,B\\}=AB+BA$, and $A^*$ is the conjugate transpose. Each summand has units ${\\rm s}^{-1}$ times the units of $X$. An empty sum when $m=0$ is zero. The resulting $\\mathcal L$ is a linear map on the matrix space used in the finite-channel definition [[def-qsm-dt-channel-definition]].\n\nFor a compact time interval $I\\subset\\mathbb R$ whose coordinate is time in seconds, continuous functions $H:I\\to M_d(\\mathbb C)$ and $L_a:I\\to M_d(\\mathbb C)$ with $H(t)=H(t)^*$ define the corresponding **continuous finite GKSL family** $\\mathcal L_t$ by the same formula at each $t$. A propagator for this family means a family of linear maps $\\Lambda(t,s)$, $s\\leq t$ in $I$, satisfying $\\partial_t\\Lambda(t,s)=\\mathcal L_t\\circ\\Lambda(t,s)$ and $\\Lambda(s,s)=\\operatorname{id}$. This definition alone asserts neither existence nor uniqueness.\n\nThese are finite-dimensional mathematical definitions. They do not assert that a physical system follows this generator or that a microscopic bath has a Markovian limit.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qsm-dt-gksl-sufficient",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal L$ be a finite GKSL generator on $M_d(\\mathbb C)$, $d\\geq1$, with the units and conventions of [[def-qsm-dt-gksl-definition]]. For a bounded operator $A$ on a complex Banach space, write $e^{tA}:=\\sum_{n=0}^{\\infty}t^nA^n/n!$ for the operator-norm convergent series of [[lem-exponential-series-of-a-bounded-operator]]. Then $T_t=e^{t\\mathcal L}$ is a finite channel for every $t\\geq0$. The family satisfies $T_0=\\operatorname{id}$, $T_{t+s}=T_t\\circ T_s$, and is norm-continuous. Time is measured in seconds; no negative-time channel or physical bath limit is asserted.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qsm-matrix-state-calculus",
+          "source_section": "Statement",
+          "quote": "Use the following conventions on a complex inner-product space $H$ of dimension $D\\geq1$, with inner product linear in its first argument. For an endomorphism $A$, define $\\operatorname{Tr}A:=\\sum_{j=1}^D\\langle Ae_j,e_j\\rangle$ in an orthonormal basis; step 3.1 proves basis independence. For any Hermitian $M$, its **positive spectral subspace** (called its positive support here) is $S_M:=\\bigoplus_{\\lambda>0}\\ker(M-\\lambda I)$; when $M\\geq0$ this equals $(\\ker M)^\\perp$. Its support logarithm is $\\log(M|_{S_M}):=\\sum_{\\lambda>0}(\\log\\lambda)P_\\lambda|_{S_M}$, where $P_\\lambda$ is the orthogonal projection onto that eigenspace. No value $\\log0$ is assigned; for $M=0$ this is the unique endomorphism of the zero space. For the set $\\mathcal D(H)$ of positive semidefinite Hermitian endomorphisms with trace one, a point $\\rho$ is **extreme** if every equality $\\rho=t\\sigma+(1-t)\\tau$ with $\\sigma,\\tau\\in\\mathcal D(H)$ and $0<t<1$ implies $\\sigma=\\tau=\\rho$.\n\nLet $H$ be a complex inner-product space of finite dimension $D\\geq1$, with inner product linear in its first argument. Every Hermitian endomorphism $M$ has an orthonormal eigenbasis with real eigenvalues. For a real function $f$ on its finite spectrum, define $f(M)$ by its spectral projections; this definition is independent of the choice of eigenbasis. In particular positive square roots, exponentials, and logarithms on positive supports are well defined.\n\nFor a density matrix $\\rho$ on $H$, meaning a Hermitian positive semidefinite operator with $\\operatorname{Tr}\\rho=1$, $\\operatorname{Tr}(\\rho A)=\\sum_jp_j\\langle Au_j,u_j\\rangle$ for bounded $A$, where $\\rho=\\sum_jp_j|u_j\\rangle\\langle u_j|$. The weighted form $(X,Y)_\\rho=\\operatorname{Tr}(\\rho X^*Y)$ satisfies Cauchy\u2013Schwarz, $|(X,Y)_\\rho|^2\\leq(X,X)_\\rho(Y,Y)_\\rho$. Finally, $\\operatorname{Tr}(\\rho^2)\\leq1$, with equality exactly for rank-one densities, and those are exactly the extreme points of the finite density-matrix set.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "For each $\\omega$, positive semidefiniteness of the finite matrix $\\Gamma(\\omega)$ gives a finite factorization $\\gamma_{ab}(\\omega)=\\sum_r\\overline{c_{ra}(\\omega)}c_{rb}(\\omega)$, with $c_{ra}(\\omega)$ in seconds$^{-1/2}$. Define $J_{r,\\omega}:=\\sum_b c_{rb}(\\omega)S_b(\\omega)$. Expanding yields $\\sum_rJ_{r,\\omega}XJ_{r,\\omega}^*=\\sum_{a,b}\\gamma_{ab}(\\omega)S_b(\\omega)XS_a(\\omega)^*$ and $\\sum_rJ_{r,\\omega}^*J_{r,\\omega}=\\sum_{a,b}\\gamma_{ab}(\\omega)S_a(\\omega)^*S_b(\\omega)$. Thus the displayed generator has the finite GKSL form of [F2] with Hamiltonian $H+H_{\\rm LS}$ and finite jumps $J_{r,\\omega}$, so [F3] gives a finite channel semigroup; [F1] states its complete-positivity and trace-preservation content.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "From the spectral definition, $[H,S_a(\\omega)]=-\\hbar\\omega S_a(\\omega)$ and $S_a(\\omega)^*=S_a(-\\omega)$. Therefore $S_a(\\omega)e^{-\\beta H}=e^{-\\beta\\hbar\\omega}e^{-\\beta H}S_a(\\omega)$. Every $S_a(-\\omega)S_b(\\omega)$ commutes with $H$ because its two energy shifts cancel, hence it commutes with each spectral projection of $H$ and with $\\sigma_\\beta$. Also $[H_{\\rm LS},H]=0$ implies $H_{\\rm LS}$ preserves every eigenspace of $H$: if $Hx=Ex$, then $H(H_{\\rm LS}x)=H_{\\rm LS}(Hx)=E(H_{\\rm LS}x)$. Thus $H_{\\rm LS}$ commutes with every spectral projection of $H$ and with $\\sigma_\\beta$. Finally, the exponential $e^{-\\beta H}$ is positive definite with positive finite trace, making $\\sigma_\\beta$ a faithful density.",
+          "inputs": [
+            "given",
+            "A1",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Fix $\\omega>0$ and put $q=e^{-\\beta\\hbar\\omega}$. The $\\omega$ contribution is $\\mathcal D_{\\omega}(\\sigma_\\beta)=\\sigma_\\beta\\sum_{a,b}\\gamma_{ab}(\\omega)(qS_b(\\omega)S_a(-\\omega)-S_a(-\\omega)S_b(\\omega))$, using $S_b(\\omega)\\sigma_\\beta=q\\sigma_\\beta S_b(\\omega)$ and commutation of the anticommutator product with $\\sigma_\\beta$. For the negative frequency, substitute $\\gamma_{ab}(-\\omega)=q\\gamma_{ba}(\\omega)$ and $S_a(-\\omega)^*=S_a(\\omega)$, then reindex $a,b$ to obtain $\\mathcal D_{-\\omega}(\\sigma_\\beta)=\\sigma_\\beta\\sum_{a,b}\\gamma_{ab}(\\omega)(S_a(-\\omega)S_b(\\omega)-qS_b(\\omega)S_a(-\\omega))=-\\mathcal D_{\\omega}(\\sigma_\\beta)$. Thus every nonzero frequency pair cancels.",
+          "inputs": [
+            "given",
+            "A1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "At $\\omega=0$, the balance relation gives $\\gamma_{ab}(0)=\\gamma_{ba}(0)$. Each $S_a(0)$ is Hermitian and commutes with $H$, hence with $\\sigma_\\beta$; consequently the zero-frequency contribution is $\\sigma_\\beta\\sum_{a,b}\\gamma_{ab}(0)(S_b(0)S_a(0)-S_a(0)S_b(0))=0$, after swapping $a,b$ in the first finite sum. The Hamiltonian contribution vanishes because both $H$ and $H_{\\rm LS}$ commute with $\\sigma_\\beta$. Together with step 2.1 this gives $\\mathcal L(\\sigma_\\beta)=0$, and the exponential series then gives $T_t(\\sigma_\\beta)=\\sigma_\\beta$ for all $t\\geq0$.",
+          "inputs": [
+            "given",
+            "A1",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The statement has d\u22651, permits m=0, and all dissipative sums then vanish; the commuting Hamiltonian still fixes the Gibbs density; see steps 1.1 and 3.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If every rate is zero, the commuting Hamiltonian and Lamb shift still annihilate the Gibbs density; see steps 1.2 and 3.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For d=1 all commutators vanish and the only density is the Gibbs density; see steps 1.2 and 3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The proof uses full spectral projections, including degenerate eigenspaces, and products with opposite energy shifts; see steps 1.2 and 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The semigroup and fixed-state conclusion hold for every t\u22650, including t=0; see steps 1.1 and 3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The construction factors finitely many finite matrices and uses finite sums; no choice principle is invoked; see step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Transpose thermal balance makes the Gibbs density stationary for the finite secular channel semigroup; no necessary balance criterion, uniqueness or convergence follows from stationarity alone."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Transpose thermal balance makes the Gibbs density stationary for the finite secular channel semigroup; no necessary balance criterion, uniqueness or convergence follows from stationarity alone."
+        }
+      ],
+      "current_boundary_worksheet": {
+        "proposal": "research/physics-non-fluid-129-2026-10-21-r2-owner-step2-boundary-proposal-1/proposal.json",
+        "source_sha256": "ca38e42b6cb5d5b5020d898e33dc67b91b6d4633fa2b50581e10cf232de9934e",
+        "qualification": "Released complete current source/eight-case semantic worksheet; root transcribed exact current rows. No independent acceptance or finite computation asserted."
+      },
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-109",
+        "notes": "Read all four steps and all five direct suppliers, including the complete GKSL-sufficiency proof. Positive spectral square roots factor each rate matrix as C* C; expanding jumps with the displayed index order gives exactly gamma_ab S_b X S_a*. Verified the lowering relation and q=exp(-beta hbar omega), cancellation of each positive/negative frequency pair, separate zero-frequency cancellation from transpose symmetry, and Lamb-shift commutation with every spectral projection. Gibbs eigenvalues are positive for every finite real beta; d=1, m=0, zero rates and repeated energies remain valid. GKSL supplies CPTP for t>=0 and the series fixes sigma from L(sigma)=0; uniqueness and convergence are not asserted. Independently read Rivas\u2013Huelga \u00a76.2.8 Eqs.109\u2013111 through the nonconvergence caveat and Lin \u00a73 Eqs.37\u201341. No choice or empirical premise is added; no defect or edit."
+      }
+    },
+    "thm-qsmx-spohn-finite-inequality": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "thm-qsmx-cmi-and-channel-dpi",
+          "source_section": "Statement",
+          "quote": "Let $H_A,H_B,H_C$ be nonzero finite-dimensional complex inner-product spaces and let $\\rho_{ABC}$ be a density operator on $H_A\\otimes H_B\\otimes H_C$. With dimensionless entropy $S$ and conditional mutual information $I(A:C\\mid B)$ defined by the conventions below,\n\n$$I(A:C\\mid B)_\\rho=S(\\rho_{AB})+S(\\rho_{BC})-S(\\rho_B)-S(\\rho_{ABC})\\ge0.$$\n\nAlso let $d,e\\ge1$ and let $\\Phi:M_d(\\mathbb C)\\to M_e(\\mathbb C)$ be a finite completely positive trace-preserving map. For all positive semidefinite $X,Y\\in M_d(\\mathbb C)$,\n\n$$D(\\Phi(X)\\|\\Phi(Y))\\le D(X\\|Y),$$\n\nwhere $D$ is the support-sensitive finite-dimensional quantum relative entropy: it equals $\\operatorname{Tr}(X\\log X)-\\operatorname{Tr}(X\\log Y)$ when $\\operatorname{supp}X\\subseteq\\operatorname{supp}Y$, and $+\\infty$ otherwise. These are finite-dimensional mathematical statements. The channel inequality is one-sided and asserts no equality condition, recovery map, or infinite-dimensional extension.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qsm-dt-channel-definition",
+          "source_section": "Definition",
+          "quote": "Let $d,e\\geq1$ be integers, let $H_{\\mathrm{in}}=\\mathbb C^d$ and $H_{\\mathrm{out}}=\\mathbb C^e$ with their standard inner products, and write $M_d(\\mathbb C)$ and $M_e(\\mathbb C)$ for the complex linear maps on these spaces. A matrix $X$ is **positive semidefinite**, written $X\\geq0$, when it is Hermitian and $\\langle Xv,v\\rangle\\geq0$ for every vector $v$. The finite spectral convention in [[lem-qsm-matrix-state-calculus]] gives positive matrices their orthonormal eigenbases and positive square roots.\n\nA **positive map** is a complex-linear map $\\Phi:M_d(\\mathbb C)\\to M_e(\\mathbb C)$ such that $\\Phi(X)\\geq0$ whenever $X\\geq0$. For each integer $r\\geq1$, identify $M_r(\\mathbb C)\\otimes M_d(\\mathbb C)$ with matrices on $\\mathbb C^r\\otimes\\mathbb C^d$ in the ordered product basis. The map $\\Phi$ is **completely positive** when $\\operatorname{id}_r\\otimes\\Phi$ is positive for every such $r$, where $\\operatorname{id}_r$ is the identity map on $M_r(\\mathbb C)$.\n\nThe map $\\Phi$ is **trace-preserving** when $\\operatorname{Tr}(\\Phi(X))=\\operatorname{Tr}(X)$ for every $X\\in M_d(\\mathbb C)$. A **finite quantum channel** is a complex-linear map that is both completely positive and trace-preserving, abbreviated CPTP. Unitality, $\\Phi(I_d)=I_e$, is a separate condition and is not part of this definition.\n\nThis is a mathematical definition. A physical preparation, measurement, or open-system model must separately identify when one of these maps represents a physical transformation.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qsm-matrix-state-calculus",
+          "source_section": "Statement",
+          "quote": "Use the following conventions on a complex inner-product space $H$ of dimension $D\\geq1$, with inner product linear in its first argument. For an endomorphism $A$, define $\\operatorname{Tr}A:=\\sum_{j=1}^D\\langle Ae_j,e_j\\rangle$ in an orthonormal basis; step 3.1 proves basis independence. For any Hermitian $M$, its **positive spectral subspace** (called its positive support here) is $S_M:=\\bigoplus_{\\lambda>0}\\ker(M-\\lambda I)$; when $M\\geq0$ this equals $(\\ker M)^\\perp$. Its support logarithm is $\\log(M|_{S_M}):=\\sum_{\\lambda>0}(\\log\\lambda)P_\\lambda|_{S_M}$, where $P_\\lambda$ is the orthogonal projection onto that eigenspace. No value $\\log0$ is assigned; for $M=0$ this is the unique endomorphism of the zero space. For the set $\\mathcal D(H)$ of positive semidefinite Hermitian endomorphisms with trace one, a point $\\rho$ is **extreme** if every equality $\\rho=t\\sigma+(1-t)\\tau$ with $\\sigma,\\tau\\in\\mathcal D(H)$ and $0<t<1$ implies $\\sigma=\\tau=\\rho$.\n\nLet $H$ be a complex inner-product space of finite dimension $D\\geq1$, with inner product linear in its first argument. Every Hermitian endomorphism $M$ has an orthonormal eigenbasis with real eigenvalues. For a real function $f$ on its finite spectrum, define $f(M)$ by its spectral projections; this definition is independent of the choice of eigenbasis. In particular positive square roots, exponentials, and logarithms on positive supports are well defined.\n\nFor a density matrix $\\rho$ on $H$, meaning a Hermitian positive semidefinite operator with $\\operatorname{Tr}\\rho=1$, $\\operatorname{Tr}(\\rho A)=\\sum_jp_j\\langle Au_j,u_j\\rangle$ for bounded $A$, where $\\rho=\\sum_jp_j|u_j\\rangle\\langle u_j|$. The weighted form $(X,Y)_\\rho=\\operatorname{Tr}(\\rho X^*Y)$ satisfies Cauchy\u2013Schwarz, $|(X,Y)_\\rho|^2\\leq(X,X)_\\rho(Y,Y)_\\rho$. Finally, $\\operatorname{Tr}(\\rho^2)\\leq1$, with equality exactly for rank-one densities, and those are exactly the extreme points of the finite density-matrix set.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-finite-dimensional-normed-spaces-are-banach",
+          "source_section": "Statement",
+          "quote": "is a Banach space",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-exponential-series-of-a-bounded-operator",
+          "source_section": "Statement",
+          "quote": "$E(0)=I$ and $E(t+s)=E(t)E(s)$ for all $s,t\\in\\mathbb R$; $t\\mapsto E(t)$ is of class $C^\\infty$ in the operator norm with $$E'(t)=AE(t)=E(t)A,$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "On $M_d(\\mathbb C)$ use the max-entry norm $\\|X\\|_{\\max}:=\\max_{i,j}|X_{ij}|$. The space is finite-dimensional and Banach by [F3]. In coordinates, $(\\mathcal L X)_{ij}=\\sum_{k,l}a_{ij,kl}X_{kl}$ for finitely many coefficients, so $\\|\\mathcal L X\\|_{\\max}\\leq C\\|X\\|_{\\max}$ with $C:=\\max_{i,j}\\sum_{k,l}|a_{ij,kl}|<\\infty$; thus $\\mathcal L$ is bounded. Hence [F4] gives operator-norm convergence of the exponential series, its compact-uniform convergence, and the law $T_uT_v=T_{u+v}$. For $0\\leq s\\leq t$, put $u=t-s$ and $v=s$. The map $T_{t-s}$ is a finite channel by the hypothesis and [F1], and fixes $\\sigma$ by stationarity. Apply [A1] to $X=T_s\\rho$ and $Y=\\sigma$; these are positive semidefinite, so $D(T_t\\rho\\|\\sigma)\\leq D(T_s\\rho\\|\\sigma)$. This proves global monotonicity, including singular initial densities, because $\\sigma>0$ makes every displayed relative entropy finite.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "For $x>0$ and $R>0$, direct integration gives $\\int_0^R((1+s)^{-1}-(x+s)^{-1})\\,ds=\\log x+\\log(1+R)-\\log(x+R)$, which tends to $\\log x$ as $R\\to\\infty$. Applying this scalar identity to each eigenvalue using [F2] yields $\\log A=\\int_0^\\infty((1+s)^{-1}I-(A+sI)^{-1})\\,ds$ for positive definite $A$. Let $u\\mapsto A(u)$ be a $C^1$ path of positive-definite matrices on an open interval, or on a one-sided interval at an endpoint, around the parameter under consideration, and write $X=\\dot A(u)$. Differentiating $(A+sI)(A+sI)^{-1}=I$ gives $\\frac{d}{du}(A+sI)^{-1}=-(A+sI)^{-1}X(A+sI)^{-1}$, so $\\frac{d}{du}\\log A=\\int_0^\\infty(A+sI)^{-1}X(A+sI)^{-1}\\,ds$. At a fixed parameter $u_0$, let $\\lambda_0>0$ be the least eigenvalue of $A(u_0)$. By continuity, on a neighborhood $\\|A(u)-A(u_0)\\|<\\lambda_0/2$, so $A(u)\\geq(\\lambda_0/2)I$ there; since $A'$ is locally bounded, the derivative integrand is uniformly bounded by $C(\\lambda_0/2+s)^{-2}$ nearby for some finite $C$, an integrable function. The product rule gives $\\frac{d}{du}\\operatorname{Tr}(A\\log A)=\\operatorname{Tr}(X\\log A)+\\int_0^\\infty\\operatorname{Tr}(A(A+sI)^{-1}X(A+sI)^{-1})\\,ds$. Diagonalize $A$ with eigenvalues $\\lambda_j>0$; the integral is $\\sum_j X_{jj}\\int_0^\\infty\\lambda_j(\\lambda_j+s)^{-2}\\,ds=\\sum_jX_{jj}=\\operatorname{Tr}X$. Hence $\\frac{d}{du}\\operatorname{Tr}(A\\log A)=\\operatorname{Tr}(X(\\log A+I))$.",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "For $f(t):=D(T_t\\rho\\|\\sigma)$, every quotient $(f(t+h)-f(t))/h$ with $h>0$ is nonpositive by step 1.1. Thus $D^+f(t):=\\limsup_{h\\downarrow0}(f(t+h)-f(t))/h\\leq0$ as an extended-real upper right Dini derivative, without inserting $\\log\\rho_t$ when $\\rho_t$ is singular.",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "If $\\rho_t>0$, continuity gives a positive-definite neighborhood (right-sided at $t=0$). By [F4], $T_t$ is differentiable in operator norm and $\\dot\\rho_t=\\mathcal L(\\rho_t)$. Trace preservation implies $\\operatorname{Tr}\\dot\\rho_t=0$, by differentiating $\\operatorname{Tr}(T_t\\rho)=\\operatorname{Tr}\\rho$. Apply step 1.2 to $A=\\rho_t$ and differentiate the linear term $-\\operatorname{Tr}(\\rho_t\\log\\sigma)$ to obtain the displayed derivative formula. Its sign is nonpositive because the same function is nonincreasing by step 1.1.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F4",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The dimension satisfies d\u22651; the zero-dimensional matrix algebra is excluded; see Statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The density rho may be singular, including rank deficient, because sigma is faithful and the monotonicity proof uses DPI; see steps 1.1 and 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "When d=1 there is a single density and the relative entropy is identically zero; see Statement and step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "No nondegeneracy of the spectrum is needed; sigma is positive definite while rho may have repeated or zero eigenvalues; see Statement and step 1.2."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Monotonicity includes t=0; the derivative there is explicitly a right derivative when rho is positive definite; see Statement and step 3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The current carrier uses finite-dimensional exponential/logarithm operations, local finite-matrix integration and the cited DPI interface. Proof 1.1 applies DPI and 1.2 supplies the resolvent integral; 2.1 is the Dini-sign argument, not a construction of integrals. No new choice axiom is introduced here beyond supplier hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Proof 1.1 applies channel DPI to a stationary semigroup and 3.1 differentiates at faithful times. No converse characterizes channel semigroups by entropy monotonicity."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Proof 1.1 applies channel DPI to a stationary semigroup and 3.1 differentiates at faithful times. No converse characterizes channel semigroups by entropy monotonicity."
+        }
+      ],
+      "current_boundary_worksheet": {
+        "proposal": "research/physics-non-fluid-129-2026-10-21-r2-owner-step2-boundary-proposal-2/proposal.json",
+        "source_sha256": "fcba9cc05cd423c4910ad33b72b67a874bf522bda7827dea2ed06402e382ad64",
+        "qualification": "Released complete current source/eight-case semantic worksheet; root transcribed exact current rows. No independent acceptance or finite computation asserted."
+      },
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-109",
+        "notes": "Read all four current proof steps, all five direct suppliers and the exact pre-reader carrier authenticated by the native pre snapshot. Finite coordinate boundedness plus Banach completeness meets every exponential-lemma hypothesis. DPI is applied to channel T_(t-s), positive density T_s rho and fixed faithful sigma, so all entropy values are finite even for singular rho. Independently checked current batch-101 producer Proof 1.2\u20133.1: nonempty Kraus list gives an isometry, partial trace gives the channel, support-restricted spectral logarithms give isometric invariance, and the published partial-trace DPI applies. Read the latter complete proof and Choi\u2013Kraus proof. Watrous Thm.5.35 and complete proof pp.280\u2013281 agree; its base-2 convention changes by a positive factor to the local natural logarithm. Wilde Thm.11.8.1 is statement-only here; its proof is deferred in that source. For the local resolvent differentiation use the Euclidean induced matrix norm: A>=lambda0/2 locally, A-prime bounded, and C(lambda0/2+s)^(-2) integrable give differentiation of finite matrix entries. Trace cyclicity gives the integral Tr X and trace preservation removes it. Checked t=0 right derivative, singular-state Dini derivative only, d=1 and repeated eigenvalues. No strict decay, convergence, detailed balance, empirical premise or new choice is asserted. Reader repair accepted; no new carrier edit."
+      }
+    },
+    "cex-qsmx-stationarity-without-relaxation": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "thm-qsmx-spohn-finite-inequality",
+          "source_section": "Statement",
+          "quote": "Let $d\\geq1$ and let $\\mathcal L:M_d(\\mathbb C)\\to M_d(\\mathbb C)$ be complex-linear. Define $T_t:=e^{t\\mathcal L}:=\\sum_{n=0}^{\\infty}t^n\\mathcal L^n/n!$ for $t\\geq0$, and assume that each $T_t$ is completely positive and trace-preserving; the exponential gives $T_{t+s}=T_t\\circ T_s$. Let $\\sigma=\\sigma^*>0$ satisfy $\\operatorname{Tr}\\sigma=1$ and $T_t(\\sigma)=\\sigma$ for every $t\\geq0$. A density matrix $\\rho$ means $\\rho=\\rho^*$, $v^*\\rho v\\geq0$ for every $v\\in\\mathbb C^d$, and $\\operatorname{Tr}\\rho=1$. For such a density matrix $\\rho$, define the finite quantum relative entropy\n\n$$D(\\rho\\|\\sigma):=\\operatorname{Tr}(\\rho\\log\\rho)-\\operatorname{Tr}(\\rho\\log\\sigma),$$\n\nusing the natural logarithm, the finite spectral logarithm on the support of $\\rho$, and $0\\log0:=0$. Since $\\sigma$ is positive definite, $D(\\rho\\|\\sigma)$ is finite for every density $\\rho$. Then $t\\mapsto D(T_t\\rho\\|\\sigma)$ is nonincreasing on $[0,\\infty)$. If $t$ is interpreted as seconds, $\\mathcal L$ has units seconds$^{-1}$; the statement is mathematical and asserts no physical applicability. At every $t\\geq0$ for which $\\rho_t:=T_t\\rho$ is positive definite, its derivative exists (as a right derivative at $t=0$) and\n\n$$\\frac{d}{dt}D(\\rho_t\\|\\sigma)=\\operatorname{Tr}\\!\\left(\\mathcal L(\\rho_t)(\\log\\rho_t-\\log\\sigma)\\right)\\leq0.$$\n\nAt singular $\\rho_t$ this logarithmic derivative is not asserted; the extended-real upper right Dini derivative is at most zero. No detailed-balance assumption, strict decay, unique stationary state, or convergence to $\\sigma$ is asserted.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qsm-dt-channel-definition",
+          "source_section": "Definition",
+          "quote": "Let $d,e\\geq1$ be integers, let $H_{\\mathrm{in}}=\\mathbb C^d$ and $H_{\\mathrm{out}}=\\mathbb C^e$ with their standard inner products, and write $M_d(\\mathbb C)$ and $M_e(\\mathbb C)$ for the complex linear maps on these spaces. A matrix $X$ is **positive semidefinite**, written $X\\geq0$, when it is Hermitian and $\\langle Xv,v\\rangle\\geq0$ for every vector $v$. The finite spectral convention in [[lem-qsm-matrix-state-calculus]] gives positive matrices their orthonormal eigenbases and positive square roots.\n\nA **positive map** is a complex-linear map $\\Phi:M_d(\\mathbb C)\\to M_e(\\mathbb C)$ such that $\\Phi(X)\\geq0$ whenever $X\\geq0$. For each integer $r\\geq1$, identify $M_r(\\mathbb C)\\otimes M_d(\\mathbb C)$ with matrices on $\\mathbb C^r\\otimes\\mathbb C^d$ in the ordered product basis. The map $\\Phi$ is **completely positive** when $\\operatorname{id}_r\\otimes\\Phi$ is positive for every such $r$, where $\\operatorname{id}_r$ is the identity map on $M_r(\\mathbb C)$.\n\nThe map $\\Phi$ is **trace-preserving** when $\\operatorname{Tr}(\\Phi(X))=\\operatorname{Tr}(X)$ for every $X\\in M_d(\\mathbb C)$. A **finite quantum channel** is a complex-linear map that is both completely positive and trace-preserving, abbreviated CPTP. Unitality, $\\Phi(I_d)=I_e$, is a separate condition and is not part of this definition.\n\nThis is a mathematical definition. A physical preparation, measurement, or open-system model must separately identify when one of these maps represents a physical transformation.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qsm-dt-gksl-definition",
+          "source_section": "Definition",
+          "quote": "Fix a finite dimension $d\\geq1$, a positive constant $\\hbar$ in joule-seconds, a Hermitian matrix $H\\in M_d(\\mathbb C)$ in joules, and a finite family $L_1,\\ldots,L_m\\in M_d(\\mathbb C)$ with units ${\\rm s}^{-1/2}$, where $m\\geq0$. On dimensionless matrices $X\\in M_d(\\mathbb C)$, define the **finite Gorini\u2013Kossakowski\u2013Sudarshan\u2013Lindblad (GKSL) generator**\n\n$$\\mathcal L(X)=-\\frac{i}{\\hbar}[H,X]+\\sum_{a=1}^{m}\\left(L_aXL_a^*-\\frac12\\{L_a^*L_a,X\\}\\right),$$\n\nwhere $[A,B]=AB-BA$, $\\{A,B\\}=AB+BA$, and $A^*$ is the conjugate transpose. Each summand has units ${\\rm s}^{-1}$ times the units of $X$. An empty sum when $m=0$ is zero. The resulting $\\mathcal L$ is a linear map on the matrix space used in the finite-channel definition [[def-qsm-dt-channel-definition]].\n\nFor a compact time interval $I\\subset\\mathbb R$ whose coordinate is time in seconds, continuous functions $H:I\\to M_d(\\mathbb C)$ and $L_a:I\\to M_d(\\mathbb C)$ with $H(t)=H(t)^*$ define the corresponding **continuous finite GKSL family** $\\mathcal L_t$ by the same formula at each $t$. A propagator for this family means a family of linear maps $\\Lambda(t,s)$, $s\\leq t$ in $I$, satisfying $\\partial_t\\Lambda(t,s)=\\mathcal L_t\\circ\\Lambda(t,s)$ and $\\Lambda(s,s)=\\operatorname{id}$. This definition alone asserts neither existence nor uniqueness.\n\nThese are finite-dimensional mathematical definitions. They do not assert that a physical system follows this generator or that a microscopic bath has a Markovian limit.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qsm-dt-gksl-sufficient",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal L$ be a finite GKSL generator on $M_d(\\mathbb C)$, $d\\geq1$, with the units and conventions of [[def-qsm-dt-gksl-definition]]. For a bounded operator $A$ on a complex Banach space, write $e^{tA}:=\\sum_{n=0}^{\\infty}t^nA^n/n!$ for the operator-norm convergent series of [[lem-exponential-series-of-a-bounded-operator]]. Then $T_t=e^{t\\mathcal L}$ is a finite channel for every $t\\geq0$. The family satisfies $T_0=\\operatorname{id}$, $T_{t+s}=T_t\\circ T_s$, and is norm-continuous. Time is measured in seconds; no negative-time channel or physical bath limit is asserted.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-finite-dimensional-normed-spaces-are-banach",
+          "source_section": "Statement",
+          "quote": "is a Banach space",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-exponential-series-of-a-bounded-operator",
+          "source_section": "Statement",
+          "quote": "Then the series converges absolutely in the operator norm",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Let $J=\\sqrt{\\gamma}Z$, which is Hermitian and has units seconds$^{-1/2}$, so $J^*J=\\gamma I_2$. Substitution of $H=0$ and this jump into [F2] gives $J\\rho J^*-\\frac12\\{J^*J,\\rho\\}=\\gamma(Z\\rho Z-\\rho)=\\mathcal L(\\rho)$. Use the max-entry norm on $M_2(\\mathbb C)$; the space is finite-dimensional and hence Banach by [F4]. Since $Z$ is diagonal with entries $1,-1$, $\\|\\mathcal L(X)\\|_{\\max}\\leq2\\gamma\\|X\\|_{\\max}$, so $\\mathcal L$ is bounded. Thus [F5] supplies the norm-convergent exponential series. By [F3] and [F1], this generator produces a finite channel semigroup.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "Since $H=0$, $e^{-\\beta H}=I_2$ and $Z_\\beta=\\operatorname{Tr}I_2=2$, so the faithful Gibbs density is $\\sigma_\\beta=I_2/2>0$. Direct multiplication gives $\\mathcal L(E_{00})=\\mathcal L(E_{11})=0$ and $\\mathcal L(E_{01})=-2\\gamma E_{01}$, $\\mathcal L(E_{10})=-2\\gamma E_{10}$. Since $\\rho(0)=pE_{00}+(1-p)E_{11}+zE_{01}+\\overline zE_{10}$, applying the exponential series [F5] to these four eigenmatrices yields $T_t\\rho(0)=pE_{00}+(1-p)E_{11}+e^{-2\\gamma t}zE_{01}+e^{-2\\gamma t}\\overline zE_{10}=\\begin{pmatrix}p&e^{-2\\gamma t}z\\\\e^{-2\\gamma t}\\overline z&1-p\\end{pmatrix}$. Every diagonal density is therefore stationary, including the faithful Gibbs density $I_2/2$ and the distinct density $\\operatorname{diag}(1,0)$.",
+          "inputs": [
+            "given",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The hypotheses of [A1] hold by steps 1.1 and 1.2, so relative entropy to $I_2/2$ is nonincreasing in this example. Yet $\\operatorname{diag}(1,0)$ remains fixed and differs from $I_2/2$ for every $t\\geq0$. Hence the Gibbs density is not the unique stationary density, and this initial state does not converge to it, refuting both conclusions.",
+          "inputs": [
+            "given",
+            "A1",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The example fixes the two-dimensional Hilbert space and one positive rate, so the empty system or jump case is outside the example; see Counterexample.",
+          "case_reasoning": "Example has fixed C\u00b2 and one positive-rate jump; no empty state/jump case needed for witness."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "H=0 joules and every real beta, including zero, give sigma=I2/2 in 1.2; z=0 gives diagonal stationary states. gamma>0 is required, so gamma=0 is outside this witness.",
+          "case_reasoning": "H=0 and beta=0 are allowed (indeed all real beta); z=0 yields stationary diagonal states, while gamma=0 is excluded."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "One positive-rate jump J=sqrt(gamma)Z is explicitly sufficient in 1.1; the witness dimension is two, whereas d=1 has no distinct normalized densities.",
+          "case_reasoning": "One jump J=sqrtgamma Z suffices; d=1 cannot have two distinct density matrices and is not the witness."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Hamiltonian H=0 is fully degenerate, and the construction works for every beta; see steps 1.2 and 2.1.",
+          "case_reasoning": "H fully degenerate gives I/2 independent of beta; rank-deficient diag(1,0) is allowed initial density while reference is faithful."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The exact solution is valid at t=0 and all t\u22650; the nonconvergent diagonal state is fixed throughout; see Counterexample and step 1.2.",
+          "case_reasoning": "Exact scalar solution valid t=0 and all t>=0; t\u2192infinity keeps p fixed and does not converge to I/2 when p!=1/2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The four explicit matrix units and their exponential-series evolution in step 1.2 require no choice principle.",
+          "case_reasoning": "Explicit finite eigenmatrix calculation requires no family choice; A1 is used with the actual channel-semigroup and faithful stationary-reference premises."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item contains no biconditional claim, so no forward direction is asserted.",
+          "case_reasoning": "Refutes sufficiency of entropy nonincrease for uniqueness/convergence; stationary definition fixes every t."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item contains no biconditional claim, so no reverse direction is asserted.",
+          "case_reasoning": "No reverse implication or universal failure of thermal relaxation is asserted."
+        }
+      ],
+      "current_boundary_worksheet": {
+        "proposal": "research/physics-non-fluid-129-2026-10-21-r2-owner-step2-boundary-proposal-7/proposal.json",
+        "source_sha256": "2360a5f2b1cc1ca74f7b84076fd7ad6a45863433a068bec0cc33e0de45f79eaf",
+        "qualification": "Released complete current source/eight-case semantic worksheet; root transcribed exact current rows. No independent acceptance or finite computation asserted."
+      },
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-109",
+        "notes": "Read all three steps, all six suppliers and the authenticated pre-reader witness. J=sqrt(gamma) Z gives exactly gamma(Z X Z-X) and inverse-second units. Max-entry estimate gives boundedness; matrix units have generator eigenvalues 0,0,-2gamma,-2gamma, so the exponential series yields the exact claimed evolution without any ODE existence gap. Every diagonal density is fixed; I2/2 is faithful Gibbs for H=0 for every finite real beta, while diag(1,0) is a distinct stationary initial density and never converges to it. Spohn applies with its actual channel, exponential-semigroup and faithful-reference hypotheses; monotonicity is not strict decay. Checked p=0,1, z=0, saturated determinant bound, t=0 and infinity, negative/zero beta; gamma>0 and d=2 are explicit witness restrictions. TikZ has two Z-eigenvector vertices, no transfer arrows, fixed populations and coherence exp(-2 gamma t); both vectors lie in the same degenerate H=0 eigenspace. The diagram is correct and proof-independent. No arbitrary choice or empirical premise. Reader repair accepted; only owning metadata synchronized."
+      }
+    }
+  }
+}

@@ -1,0 +1,13 @@
+--- a/tools/physics-support/validate-plan.mjs
++++ b/tools/physics-support/validate-plan.mjs
+@@ -443,7 +443,9 @@
+   const plannedItems = (p?.items ?? []).map(it => it.id);
+   const roots = selectedPages === null ? plannedItems
+     : selectedPage(pid) ? [...new Set([...plannedItems, ...(itemsOnHomePage.get(pid) ?? [])])]
+-    : (itemsOnHomePage.get(pid) ?? plannedItems);
++    // Outside page contents are supplier context only for the actual scoped
++    // item closure; reaching one supplier must not audit every page neighbour.
++    : (itemsOnHomePage.get(pid) ?? plannedItems).filter(id => itemContext.has(canonicalItem(id)));
+   for (const id of roots) {
+     const deps = selectedPages === null ? itemById.get(id)?.deps ?? [] : itemSucc(id);
+     for (const dep of deps) {

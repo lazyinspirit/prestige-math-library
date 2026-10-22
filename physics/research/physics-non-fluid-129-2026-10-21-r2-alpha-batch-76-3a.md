@@ -1,0 +1,52 @@
+# Batch 76 Step-3a adjudication
+
+Run: `physics-non-fluid-129-2026-10-21-r2`; group: `batch-76`; role: Alpha.
+
+Scope: three touched obligations; no reader/refuter findings or page obligations. Current item bytes match all four immutable post-reader item hashes. The scope assignment group `ad` is preserved. No agents, judgment, stamping, scheduling or gate battery were initiated.
+
+## Level 0: semisimple definition
+
+`def-qftx-frobenius-semisimple-model`: reader source repair accepted on mathematical review; final carrier disposition will include manifest synchronization. Alpha batch-76 independently checked every proof step and F1/F2 against the published closed-classification Statement and proof 1.1–3.1, its closed Frobenius equations, and normal-form steps 10.1–14.1. For r>=1 and every nonzero complex weight, the diagonal pairing is invertible, the two counits and coassociative composites agree on e_i, and all three Frobenius composites agree on e_i tensor e_j, including i!=j. At r=1 the same identities hold; zero weights and r=0 are excluded. The no-free-boundary category, empty word, genus-zero unit/counit, and cylinder identity match the supplier; AC_omega is inherited only through the surface normal form, with no choice in the finite calculation. The diagram types A -> A tensor A -> A and its corrected single-backslash labels are sound. No positivity, open sector, empirical or unitary-theory conclusion is used. Kock §§1.3.6, 3.1.12–3.1.13 independently support the closed correspondence; reader and refuter reported no finding. No unresolved prerequisite found in this use.
+
+The pre-reader bytes were recovered in memory by reversing only the two diagram label escapes; their SHA-256 equals `a39925ca7dded4a62acdca232ac0188ed142218f68edc1c9ab4ab409b8e1bb2e`. Thus the Definition and proof are unchanged; the label correction does not trigger interface propagation. Risk review complete.
+
+## Level 0: dual-number example
+
+`ex-qftx-dual-number-topological-model` owes no decision: it is untouched and unflagged. Alpha independently checked Verification 1.1–3.1 and the exact closed-classification supplier. Division by the monic polynomial x^2 gives unique coordinates a+bx and nonzero x; the pairing determinant is -1. On 1 and x, both counits are identities and both coassociative composites equal the displayed three-term tensor or x tensor x tensor x. On (1,1),(1,x),(x,1),(x,x), all three Frobenius composites are respectively Delta(1),Delta(x),Delta(x),0. Commutativity makes maximal left ideals maximal ideals; their field quotients kill x, while (x) itself is maximal, so x is a nonzero radical element. The conjugation fixes x and gives the displayed Hermitian form with values +2 and -2 on 1+x and 1-x. The classification requires no semisimplicity or positivity and supplies only the closed no-free-boundary theory, including the empty word. AC_omega remains solely inherited through surface normal form. No diagram occurs in this example. Reader/refuter evidence is consistent; there is no empirical inference or unresolved prerequisite in the checked use. Risk review complete.
+
+Next: complete the two level-1 carriers.
+
+
+## Level 1: genus amplitude
+
+`prop-qftx-frobenius-genus-amplitude`: all three proof steps are sound. H(e_i)=w_i^{-1}e_i gives H^g eta(1)=sum_i w_i^{-g}e_i for every integer g>=0; epsilon then gives sum_i w_i^{1-g}. At g=0 the value is sum_i w_i; at g=1 it is r. Nonzero weights make all inverse powers meaningful, including complex and negative real weights. The cylinder is the identity linear map, using the supplier category convention for 1_A. The displayed composition has types C -> A -> A -> C and its scalar is obtained by evaluation at 1. Both corrected diagram labels match the exact unit and counit. Reversing those two escapes recovers the pre hash `1b5f023f5d64e8e409bd96353fd6edbb01b66a5485b7a00ee2e84e4f43b57843`. The Statement is unchanged.
+
+## Level 1: positivity criterion
+
+`prop-qftx-frobenius-positive-reflection`: Alpha checked Proof 1.1, 2.1, 2.2 and 3.1 against the supplied idempotent Definition and current closed-classification theorem. The coordinate formula is conjugate-linear in a and linear in b; for positive real weights it is Hermitian and strictly positive on every nonzero vector. Conversely, each basis vector gives h(e_i,e_i)=w_i, forcing a real positive weight. This checks both directions, r=1, zero vector h(0,0)=0, and excluded zero weights; negative or nonreal nonzero weights still give an algebraic closed TQFT without a positive inner product. The renamed title and explicit sesquilinearity/Hermitian conventions describe precisely this matrix claim and make no reflection-positive or unitary functor assertion. No diagram occurs here. Only classification inherits AC_omega; the coordinate proof uses no choice or empirical premises. Reader/refuter reports raise no current finding; no unresolved prerequisite found.
+
+Historical preimage: the recorded reader diff in `research/physics-non-fluid-129-2026-10-21-r2-dispatch/reader-reader-76.attempt-2.log` supplies the original Given paragraph, ending with the requirement that h also satisfies Hermitian symmetry. Reversing that exact paragraph, title and final heading recovers SHA-256 `d63fc8ac57b7a2381e4b99532b2c0722b7a42fcd158cb0ea017217eb95c86704`. The complete Statement and every numbered proof step are unchanged. Thus no missing-byte or historical disposition is inferred. Risk review complete.
+
+## Dispositions and maintenance
+
+All three source repairs are retained. Verdicts are `amended_repair` because Alpha additionally synchronized the owning manifest strategy mirrors (and the positivity title) to the repaired carriers. All repaired source bytes remain exactly the reader postimages. Three closed polish defects record the two corrupt diagram label sets and the imprecise reflection-form title; these are authored-content defects, not failed-command ledger entries. Every repair has confidence 1. No material proof rewrite or judge record occurred. Definition/Statement interfaces are unchanged, so no propagation or outside consumer repair is required. Both actual pages have empty prose and retain their inventories; no page-only obligation exists.
+
+
+## Source and prerequisite evidence
+
+The current published classification `items/thm-closed-oriented-two-dimensional-tqfts-are-commutative-frobenius-algebras.md` was read in full: its Statement supplies the equivalence over every field and the connected formula Delta^[n] H^g mu^[m], with mu^[0]=eta and Delta^[0]=epsilon. Proof 1.2 constructs the functor by formal Frobenius reduction, 2.1 supplies the boundary conventions, and 2.2–3.1 supply morphisms and quasi-inverses. Its relevant prerequisite Definition sections were checked for category identities, equivalence, strong monoidal structure, symmetry preservation and monoidal transformations. The closed-sector part of `def-frobenius-object-and-knowledgeable-sewing-data`, `def-oriented-open-closed-surface-category`, `lem-elementary-surface-sewing-relations`, and normal-form Statement/Facts and closed steps 10.1–14.1 support the precise applications above. `def-countable-choice` states choice for an N-indexed family of nonempty sets; the finite coordinate proofs spend no choice. These are published mathematical suppliers, not physical assumptions. No published defect was identified in the examined uses, and no imported or root supplier was edited. This is scoped prerequisite review, not a complete transitive audit.
+
+Primary text independently opened: [Kock, short notes](https://mat.uab.cat/~kock/TQFT/FS.pdf), §§1.3.5–1.3.6 (PDF p. 14; connected surface normal form including empty input/output), §§3.1.12–3.1.13 (PDF pp. 34–36; Frobenius-to-TQFT construction and categorical correspondence, including arrows), and identity conventions in §§0.1.4 and 1.3.10. The hypotheses match finite-dimensional commutative Frobenius algebras over C and ordinary tensor symmetry. No semisimplicity or positivity hypothesis is imposed. I did not independently reopen the Cambridge excerpt or Lauda–Pfeiffer paper; those bibliographic references and the reader's reading limits remain unchanged. The published local classification is the actual logical supplier. No empirical observation, statistical inference or claim about nature occurs in this mathematics-domain batch.
+
+## Local checks
+
+- Risk report before review: three HIGH items (scores 7, 5, 5), ordinary genus proposition. After specific Alpha reviews, `risk-report.mjs research/physics-non-fluid-129-2026-10-21-r2-batch-76.proof-contracts.json --require-reviewed`: 0 errors, four routed items.
+- `proof-contract.mjs research/physics-non-fluid-129-2026-10-21-r2-batch-76.proof-contracts.json --strict`: 0 errors, 0 warnings, 4/4 checked.
+- `tsx-run.mjs tools/physics-support/precheck.mts` on all four batch items: 4 checked, 0 failing. An initial exploratory direct Node invocation of the .mts checker was unsupported; the successful run used its TypeScript launcher. An exploratory nonexistent plural proof-contract helper was replaced by the actual singular helper; neither failed invocation is mathematical evidence.
+- `rendercheck.mjs` on the four items and both owning pages: six files clean.
+- Defect-ledger append: three closed polish rows, serialized by the standard append helper; generated view refreshed.
+
+No source item was edited by Alpha. The reader postimages remain current, and the only carrier amendments are manifest mirrors and complete Alpha risk-review metadata. No public interface changed. No unresolved owner escalation, proposed withdrawal, outside consumer repair or published-supplier maintenance finding was identified. Final proof-layout and output-shape checks are pending below.
+
+
+Final checks: `node tools/physics-support/proof-layout.mjs items/def-qftx-frobenius-semisimple-model.md items/prop-qftx-frobenius-genus-amplitude.md items/prop-qftx-frobenius-positive-reflection.md` returned **3 items, 10 steps, 0 defects**. Output JSON has exactly the three owed touched obligations, group `batch-76`, confidence 1 and three corresponding closed ledger rows. All four item raw hashes still equal the immutable post-reader hashes. The direct classification import and root original both hash to `04b09ab9ba7757b618b51e7f2f9ca3d08bbc947be550be6a1c5b2a0ef8cf15fd`. Local work is complete; engine stamping and its gate battery remain owner/engine work.

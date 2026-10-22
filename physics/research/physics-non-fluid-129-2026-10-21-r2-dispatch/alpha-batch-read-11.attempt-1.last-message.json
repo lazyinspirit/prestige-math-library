@@ -1,0 +1,197 @@
+{
+  "group": "d",
+  "batches": ["11"],
+  "pages_read": [
+    "emx-compatible-matrix-evolution",
+    "emx-compatible-matrix-evolution-examples"
+  ],
+  "items_read": [
+    "def-emx-matrix-maxwell-system",
+    "thm-emx-matrix-energy-constraints",
+    "alg-emx-staggered-leapfrog",
+    "thm-emx-leapfrog-cfl",
+    "cex-emx-explicit-euler-growth",
+    "cex-emx-cfl-endpoint"
+  ],
+  "conventions": [
+    {
+      "convention": "All state dimensions are nonnegative integers. R^0 has one empty vector, and its unique square matrix acts as the identity. Mass matrices are real symmetric positive definite; S is symmetric positive semidefinite; DC=CG=0.",
+      "fixed_by": "def-emx-matrix-maxwell-system",
+      "matters_for": [
+        "thm-emx-matrix-energy-constraints",
+        "alg-emx-staggered-leapfrog",
+        "thm-emx-leapfrog-cfl",
+        "cex-emx-explicit-euler-growth",
+        "cex-emx-cfl-endpoint"
+      ]
+    },
+    {
+      "convention": "The equations are M_e e'=C^T M_b b-Se-j and b'=-Ce. Energy is W=(e^T M_e e+b^T M_b b)/2, and q=-G^T M_e e. These are finite mathematical data without an assumed mesh or continuum interpretation.",
+      "fixed_by": "def-emx-matrix-maxwell-system",
+      "matters_for": [
+        "thm-emx-matrix-energy-constraints",
+        "alg-emx-staggered-leapfrog",
+        "thm-emx-leapfrog-cfl",
+        "cex-emx-explicit-euler-growth"
+      ]
+    },
+    {
+      "convention": "Leapfrog uses S=0 and j=0, h>0, and an integer N≥0. At each n=0,...,N-1 it updates b first, then solves the electric mass equation exactly. Initial magnetic data are indexed -1/2; N=0 returns only the initial vectors.",
+      "fixed_by": "alg-emx-staggered-leapfrog",
+      "matters_for": [
+        "thm-emx-leapfrog-cfl",
+        "cex-emx-cfl-endpoint"
+      ]
+    },
+    {
+      "convention": "Positive mass roots use positive square roots of eigenvalues; empty roots are the unique empty matrices. K=M_b^(1/2) C M_e^(-1/2), its norm is zero on a zero-dimensional domain, and strict CFL means h||K||₂<2. The modified energy has cross term -h y^T Kx.",
+      "fixed_by": "thm-emx-leapfrog-cfl",
+      "matters_for": [
+        "cex-emx-cfl-endpoint"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-emx-matrix-maxwell-system",
+      "statement": "For the specified finite real matrices, continuous j on an open interval I, and C¹ states, the system is M_e e'=C^T M_b b-Se-j, b'=-Ce. Its energy is W=(e^T M_e e+b^T M_b b)/2, magnetic constraint is Db, and weak-divergence coordinate is q=-G^T M_e e. If the columns of G form a basis of ker C, then q=0 exactly when M_e e∈im C^T.",
+      "used_by": [
+        "thm-emx-matrix-energy-constraints",
+        "alg-emx-staggered-leapfrog",
+        "thm-emx-leapfrog-cfl",
+        "cex-emx-explicit-euler-growth",
+        "def-emx-whitney-semidescretization"
+      ]
+    },
+    {
+      "id": "thm-emx-matrix-energy-constraints",
+      "statement": "For every t₀∈I and initial pair, continuous forcing gives a unique C¹ solution on all of I. It satisfies W'=-e^TSe-e^Tj, Db(t)=Db(t₀), and q'=G^T(Se+j).",
+      "used_by": [
+        "pthm-emx-discrete-maxwell-balance"
+      ]
+    },
+    {
+      "id": "alg-emx-staggered-leapfrog",
+      "statement": "For the unforced system with S=0, perform N updates b_(n+1/2)=b_(n-1/2)-hCe_n, solve M_e v_n=C^T M_b b_(n+1/2) exactly, and set e_(n+1)=e_n+h v_n; output the specified integer-indexed electric and half-integer-indexed magnetic vectors.",
+      "used_by": [
+        "thm-emx-leapfrog-cfl",
+        "cex-emx-cfl-endpoint"
+      ]
+    },
+    {
+      "id": "thm-emx-leapfrog-cfl",
+      "statement": "The algorithm terminates after N updates and preserves Db. Under h||K||₂<2 it preserves E_h=(||x||₂²+||y||₂²-hy^TKx)/2, bounded below and above by (1∓h||K||₂/2)(||x||₂²+||y||₂²)/2. If h||K||₂>2, a largest-singular-value mode has a real update eigenvalue of modulus greater than one and corresponding eigenvector states grow by that factor each update. No stability claim is made at equality.",
+      "used_by": [
+        "cex-emx-cfl-endpoint"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "thm-finite-dimensional-orthogonal-decomposition",
+      "used_for": "Identifying (ker C)⊥ with im C^T in the matrix-system definition.",
+      "opened": true
+    },
+    {
+      "id": "lem-xd-finite-matrix-exponential-series",
+      "used_for": "Differentiation and inverse identities for the matrix exponential in global existence and uniqueness, including empty matrices.",
+      "opened": true
+    },
+    {
+      "id": "thm-continuous-on-a-rectangle-is-riemann-integrable",
+      "used_for": "Coordinatewise integrability of the continuous variation-of-constants integrand on nondegenerate compact intervals.",
+      "opened": true
+    },
+    {
+      "id": "def-riemann-integral-over-a-jordan-set",
+      "used_for": "Identifying the Jordan-set integral with the rectangular integral when the bounding rectangle is the interval itself.",
+      "opened": true
+    },
+    {
+      "id": "def-jordan-inner-and-outer-content",
+      "used_for": "Jordan measurability of compact nondegenerate intervals.",
+      "opened": true
+    },
+    {
+      "id": "def-multidimensional-darboux-integral",
+      "used_for": "Evaluating constant integrals from coincident lower and upper sums.",
+      "opened": true
+    },
+    {
+      "id": "def-multidimensional-darboux-sums",
+      "used_for": "Computing Darboux sums for constant functions.",
+      "opened": true
+    },
+    {
+      "id": "def-multidimensional-grid-partition",
+      "used_for": "Summing cell volumes in the constant-integral calculation.",
+      "opened": true
+    },
+    {
+      "id": "def-multidimensional-rectangle-and-volume",
+      "used_for": "The one-dimensional volume convention vol([a,b])=b-a.",
+      "opened": true
+    },
+    {
+      "id": "thm-multidimensional-integral-properties",
+      "used_for": "Linearity, monotonicity, absolute-value estimates and interior-cut additivity in the local proof that H'=g.",
+      "opened": true
+    },
+    {
+      "id": "cor-zero-derivative-implies-constant",
+      "used_for": "Coordinatewise uniqueness and conservation of Db on the open interval I.",
+      "opened": true
+    },
+    {
+      "id": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+      "used_for": "Constructing positive mass roots from orthonormal eigenbases.",
+      "opened": true
+    },
+    {
+      "id": "thm-singular-value-decomposition",
+      "used_for": "Obtaining the singular pair defining an invariant supercritical two-dimensional mode.",
+      "opened": true
+    },
+    {
+      "id": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+      "used_for": "The maximum-over-unit-vectors definition and zero-domain convention.",
+      "opened": true
+    },
+    {
+      "id": "thm-operator-norm-is-the-largest-singular-value",
+      "used_for": "Norm attainment and selection of the largest singular value for supercritical growth.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+      "used_for": "Bounding the modified-energy cross term.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "alg-emx-staggered-leapfrog",
+      "concern": "The diagram's Remarks say, “The horizontal coordinate in the diagram is the time index divided by h.” The plotted coordinates are the indices n and n±1/2 themselves, and the axis is labelled t/h. The intended description is time divided by h, with time origin zero. The diagram's positions and state labels otherwise agree with the procedure.",
+      "severity": "presentation"
+    },
+    {
+      "id": "cex-emx-explicit-euler-growth",
+      "concern": "The references heading is “## Statement refuted references”. SCHEMA.md explicitly requires “## Statement references” for a Statement refuted section. The counterexample calculation itself is sound.",
+      "severity": "presentation"
+    },
+    {
+      "id": "cex-emx-cfl-endpoint",
+      "concern": "The references heading is “## Statement refuted references”. SCHEMA.md explicitly requires “## Statement references” for a Statement refuted section. The endpoint matrix, nilpotent calculation and horizon-independent-bound refutation check out.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "emx-compatible-finite-elements",
+      "to": "emx-compatible-matrix-evolution",
+      "faithful": true,
+      "note": "Checked the supplier interfaces against def-emx-whitney-semidescretization and pthm-emx-discrete-maxwell-balance. The assembled matrices have the required symmetry, positivity and DC=CG=0 identities; continuity of each load coordinate follows from the fixed L² pairing. The consumer uses precisely the global finite-dimensional existence, energy and constraint identities, retaining q=-G^T M_e e. The mathematical suppliers impose no mesh, continuum convergence or physical-realization conclusion, and the physical consumer does not attribute one to them. No reverse logical dependency occurs."
+    }
+  ]
+}

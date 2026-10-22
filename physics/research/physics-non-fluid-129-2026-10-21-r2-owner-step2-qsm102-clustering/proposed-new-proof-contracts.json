@@ -1,0 +1,1176 @@
+{
+  "version": 1,
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "batch": "102",
+  "scope": [
+    "lem-qsmx-separable-positive-generator-spectral-measures",
+    "lem-qsmx-gaussian-ground-correlation-filter",
+    "thm-qsmx-gapped-ground-state-clustering",
+    "cex-qsmx-degenerate-gap-not-clustering"
+  ],
+  "contracts": {
+    "lem-qsmx-separable-positive-generator-spectral-measures": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-symmetric-self-adjoint-and-essentially-self-adjoint",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $T$ be a densely defined linear operator on $H$.\n\n- $T$ is **symmetric** when $T\\subseteq T^*$, that is, $D(T)\\subseteq D(T^*)$ and\n  $Tx=T^*x$ for all $x\\in D(T)$; equivalently\n  $\\langle Tx,y\\rangle=\\langle x,Ty\\rangle$ for all $x,y\\in D(T)$.\n- $T$ is **self-adjoint** when $T=T^*$, that is, the domains and the values\n  agree.\n- $T$ is **essentially self-adjoint** when its closure $\\overline T$ is\n  self-adjoint; by [[thm-closable-iff-adjoint-domain-is-dense]] this presupposes\n  that $T$ is closable.\n\n**Consequences, with proofs.** These are part of the content of the definition.\n\n1. *A symmetric $T$ is closable.* $T\\subseteq T^*$ and $T^*$ is closed\n   ([[lem-unbounded-adjoint-is-well-defined-and-closed]]), so $T^*$ is a closed\n   extension of $T$. In particular the closure $\\overline T$ exists and\n   $\\overline T\\subseteq T^*$.\n2. *The closure of a symmetric operator is symmetric.* If $T\\subseteq T^*$,\n   the inclusion reversal of\n   [[lem-unbounded-adjoint-is-well-defined-and-closed]] applied to\n   $T\\subseteq T^*$ gives $(T^*)^*\\subseteq T^*$, that is\n   $T^{**}\\subseteq T^*$. Applying it once more to the inclusion\n   $T^{**}\\subseteq T^*$ gives $(T^*)^*\\subseteq(T^{**})^*$, that is\n   $T^{**}\\subseteq T^{***}$. Since $\\overline T=T^{**}$ and\n   $(\\overline T)^*=T^{***}$\n   ([[thm-closable-iff-adjoint-domain-is-dense]]), this reads\n   $\\overline T\\subseteq(\\overline T)^*$: the closure is symmetric. (Each\n   application is legitimate because the adjoint is defined once its operator\n   is densely defined, and $D(T^{**})$ is dense because\n   $T\\subseteq T^{**}=\\overline T$, so that $D(T^{**})$ contains the dense\n   domain $D(T)$.)\n3. *A self-adjoint operator has no proper symmetric extension.* If $T=T^*$ and\n   $T\\subseteq S\\subseteq S^*$, then $S^*\\subseteq T^*$ by inclusion reversal,\n   so $T\\subseteq S\\subseteq S^*\\subseteq T^*=T$ and all inclusions are\n   equalities.\n4. *A self-adjoint operator is closed*, being equal to the adjoint $T^*$ of the\n   densely defined $T$, and *an essentially self-adjoint operator has exactly\n   one self-adjoint extension*, namely $\\overline T$: a self-adjoint extension\n   $S$ of $T$ is closed, hence contains the least closed extension\n   $\\overline T$, and then $S\\subseteq S^*\\subseteq(\\overline T)^*=\\overline T$\n   by item 2 and symmetry, so $S=\\overline T$.",
+          "uses": [
+            "1.1",
+            "2.2",
+            "5.3"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-unbounded-adjoint-is-well-defined-and-closed",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. For a densely defined linear operator $T$ on $H$ the\nadjoint $T^*$ is well defined and linear with linear domain $D(T^*)$; $T^*$ is\nclosed; for every $z\\in\\mathbb C$\n$$\\operatorname{ran}(T-z)^\\perp=\\ker(T^*-\\overline z),$$\nand if $S\\subseteq T$ and both are densely defined, then $T^*\\subseteq S^*$.",
+          "uses": [
+            "1.1",
+            "2.2",
+            "5.3"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-orthogonal-decomposition-by-a-closed-subspace",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $M$ be a closed linear subspace of a real or complex Hilbert space $H$. Then every $x\\in H$ has a unique decomposition\n\n$$x=m+n,\\qquad m\\in M,\\quad n\\in M^\\perp ,$$\n\nso that $H=M\\oplus M^\\perp$ as a direct sum of the subspace $M$ and its orthogonal complement.",
+          "uses": [
+            "1.1",
+            "2.2",
+            "5.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qsm-matrix-state-calculus",
+          "source_section": "Statement",
+          "quote": "Use the following conventions on a complex inner-product space $H$ of dimension $D\\geq1$, with inner product linear in its first argument. For an endomorphism $A$, define $\\operatorname{Tr}A:=\\sum_{j=1}^D\\langle Ae_j,e_j\\rangle$ in an orthonormal basis; step 3.1 proves basis independence. For any Hermitian $M$, its **positive spectral subspace** (called its positive support here) is $S_M:=\\bigoplus_{\\lambda>0}\\ker(M-\\lambda I)$; when $M\\geq0$ this equals $(\\ker M)^\\perp$. Its support logarithm is $\\log(M|_{S_M}):=\\sum_{\\lambda>0}(\\log\\lambda)P_\\lambda|_{S_M}$, where $P_\\lambda$ is the orthogonal projection onto that eigenspace. No value $\\log0$ is assigned; for $M=0$ this is the unique endomorphism of the zero space. For the set $\\mathcal D(H)$ of positive semidefinite Hermitian endomorphisms with trace one, a point $\\rho$ is **extreme** if every equality $\\rho=t\\sigma+(1-t)\\tau$ with $\\sigma,\\tau\\in\\mathcal D(H)$ and $0<t<1$ implies $\\sigma=\\tau=\\rho$.\n\nLet $H$ be a complex inner-product space of finite dimension $D\\geq1$, with inner product linear in its first argument. Every Hermitian endomorphism $M$ has an orthonormal eigenbasis with real eigenvalues. For a real function $f$ on its finite spectrum, define $f(M)$ by its spectral projections; this definition is independent of the choice of eigenbasis. In particular positive square roots, exponentials, and logarithms on positive supports are well defined.\n\nFor a density matrix $\\rho$ on $H$, meaning a Hermitian positive semidefinite operator with $\\operatorname{Tr}\\rho=1$, $\\operatorname{Tr}(\\rho A)=\\sum_jp_j\\langle Au_j,u_j\\rangle$ for bounded $A$, where $\\rho=\\sum_jp_j|u_j\\rangle\\langle u_j|$. The weighted form $(X,Y)_\\rho=\\operatorname{Tr}(\\rho X^*Y)$ satisfies Cauchy–Schwarz, $|(X,Y)_\\rho|^2\\leq(X,X)_\\rho(Y,Y)_\\rho$. Finally, $\\operatorname{Tr}(\\rho^2)\\leq1$, with equality exactly for rank-one densities, and those are exactly the extreme points of the finite density-matrix set.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-hilbert-adjoint-properties",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $H,K,L$ be real or complex Hilbert spaces and let $R,S\\in\\mathcal B(H,K)$ and $T\\in\\mathcal B(K,L)$ be bounded linear operators. Then the Hilbert adjoints satisfy:\n\n1. $(aR+bS)^*=\\overline a\\,R^*+\\overline b\\,S^*$ for scalars $a,b$, and the adjoint of an operator is unique;\n2. $(TS)^*=S^*T^*$;\n3. $T^{**}=T$ and $\\|T^*\\|=\\|T\\|$;\n4. $\\|T^*T\\|=\\|T\\|^2$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-weierstrass-approximation-on-a-closed-interval",
+          "source_section": "Statement",
+          "quote": "For $a\\le b$, every continuous real function on $[a,b]$ is a uniform limit of polynomials.",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-bounded-operator-space-is-banach",
+          "source_section": "Statement",
+          "quote": "Let $X$ and $Y$ be normed spaces over the same scalar field. If $Y$ is Banach,\nthen $\\mathcal B(X,Y)$ is Banach for the operator norm.",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-positive-functionals-on-compact-metric-spaces-have-probability-representations",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $K$ be a nonempty compact metric space and let $\\Lambda:C(K,\\mathbb R)\\to\\mathbb R$ be real-linear, positive in the sense that $f\\ge0$ implies $\\Lambda(f)\\ge0$, and normalized by $\\Lambda(1)=1$. Then there is a Borel probability $\\mu$ on $K$ with $\\Lambda(f)=\\int_K f\\,d\\mu$ for every continuous real $f$. It is outer regular on Borel sets and inner regular on open sets by compact subsets. No Dependent Choice is required.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. All functions below have domain $X$. Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "1.2",
+            "1.3",
+            "5.3",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to \\mathbb C$ belong to\n$L^1(\\mu \\times \\nu)$. Then:\n\n1. for $\\mu$-almost every $x$, the section $f_x$ belongs to $L^1(\\nu)$;\n2. for $\\nu$-almost every $y$, the section $f^y$ belongs to $L^1(\\mu)$;\n3. after assigning the value $0$ on the exceptional parameter sets, the\n   section-integral functions are integrable; and\n4. the three integrals agree:\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "1.2",
+            "1.3",
+            "5.3",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-dynkin-pi-lambda",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal P$ be a pi-system on $X$. Then\n$\\lambda_X(\\mathcal P)=\\sigma_X(\\mathcal P)$. Consequently, if $\\mathcal D$ is\nany lambda-system on $X$ with $\\mathcal P\\subseteq\\mathcal D$, then\n$\\sigma_X(\\mathcal P)\\subseteq\\mathcal D$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice (The Axiom of Countable Choice ($\\mathrm{AC}_\\omega$)). Let\n$U,V \\subseteq \\mathbb R^n$ be open and let $T : U \\to V$ be a\n$C^1$ diffeomorphism. For every nonnegative Lebesgue measurable\n$f : V \\to [0,\\infty]$,\n$$ \\int_V f(y)\\,d\\lambda_n(y) = \\int_U f(T(x))\\,|\\det DT(x)|\\,d\\lambda_n(x). $$",
+          "uses": [
+            "1.3",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-derivative-of-exponential",
+          "source_section": "Statement",
+          "quote": "The real exponential function is $C^\\infty$, and for every $m\\in\\mathbb N$,\n$$\\exp^{(m)}=\\exp.$$\nIn particular $(\\exp)'=\\exp$.",
+          "uses": [
+            "1.3",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "1.3",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-fundamental-theorem-of-calculus-for-banach-valued-continuous-curves",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice ([[def-countable-choice]]) for the Lebesgue-measure interfaces. Let $X$ be a real or complex Banach space, let $a<b$, and let $f:[a,b]\\to X$ be continuous. Differentiation uses the underlying real structure. Then $G(t):=\\int_a^t f(s)\\,ds$ is differentiable on $(a,b)$ and has the corresponding one-sided derivatives at $a,b$, with $G'(t)=f(t)$, and this derivative extends continuously to $[a,b]$. Consequently, if $\\varphi:[a,b]\\to X$ is continuous, differentiable on $(a,b)$ with $\\varphi'$ continuous on $(a,b)$ and extendable to a continuous $X$-valued function on $[a,b]$, then $\\int_a^b\\varphi'(s)\\,ds=\\varphi(b)-\\varphi(a)$. The Bochner integral here is the one of [[def-bochner-integrable-function]]; the identities also hold for continuous curves on $[0,\\infty)$ restricted to compact subintervals.",
+          "uses": [
+            "1.3",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Positivity gives $\\|(I+K)x\\|\\ge\\|x\\|$ on $D(K)$, by pairing $(I+K)x$ with $x$. Its range is closed: if $(I+K)x_n$ converges, the bound makes $x_n$ Cauchy, and $Kx_n=(I+K)x_n-x_n$ converges, so closedness in [F1] identifies the limit in $D(K)$. The range has zero orthogonal complement because $\\ker(I+K)^*=\\ker(I+K)=0$; [F1] makes the closed range all of $\\mathcal H$. Thus $B=(I+K)^{-1}$ exists, $\\|B\\|\\le1$, $\\ker B=0$ and $\\operatorname{ran}B=D(K)$ is dense. For $x=(I+K)u$ and $y=(I+K)v$, symmetry gives $\\langle Bx,y\\rangle=\\langle x,By\\rangle$, while $\\langle Bx,x\\rangle=\\|u\\|^2+\\langle Ku,u\\rangle\\ge0$. Hence $B$ is a positive self-adjoint contraction and $KB=I-B$.",
+          "inputs": [
+            "A1",
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "We shall use uniqueness of finite complex measures on $[0,1]$ from their continuous integrals. If their difference $\\nu$ integrates every continuous function to zero, then for any relatively open $O\\subseteq[0,1]$ the continuous functions $f_n(b)=\\min(1,n\\operatorname{dist}(b,[0,1]\\setminus O))$ increase to $\\mathbf1_O$; take $f_n=1$ when $O=[0,1]$. Dominated convergence against its finite total variation gives $\\nu(O)=0$. Since also $\\nu([0,1])=0$, the sets where $\\nu$ vanishes form a lambda-system. The relatively open sets form a generating pi-system, so [F6] proves $\\nu=0$ on all Borel sets. This also applies to any finite linear combination of positive measures.",
+          "inputs": [
+            "F5",
+            "F6",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "step": "1.3",
+          "claim": "Scalar Laplace uniqueness will identify the evolution. If a bounded continuous $h:[0,\\infty)\\to\\mathbb C$ satisfies $\\int_0^\\infty e^{-zt}h(t)\\,dt=0$ for every real $z>0$, apply [F7] to the $C^1$ diffeomorphism $t\\mapsto s=e^{-t}$ from $(0,\\infty)$ to $(0,1)$, with inverse $-\\log s$ and absolute Jacobian $e^{-t}=s$, and take $z=n+1$. The endpoints have Lebesgue measure zero; boundedness of $h$ makes the complex integrands absolutely integrable. Then $\\int_0^1s^n h(-\\log s)\\,ds=0$ for all integers $n\\ge0$, with any value assigned at $s=0$. Polynomial approximation [F3] implies the same equality against every continuous test on $[0,1]$. If $h(t_0)\\ne0$, multiplication by a constant complex phase and continuity give a time interval on which its real part is strictly positive. A nonnegative continuous piecewise-linear hat supported inside the corresponding interval of $s$ has strictly positive integral against that real part, contradicting the preceding test identity. For $t_0=0$ use a one-sided time neighborhood and a smaller interior interval. Therefore $h=0$.",
+          "inputs": [
+            "F3",
+            "F5",
+            "F7",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Fix a dense sequence in $\\mathcal H$ and let $P_n$ be the projection onto the span of its first $n$ terms. Finite Gram–Schmidt, skipping zero remainders and using positive real normalizations, constructs these projections deterministically, and density gives $P_nx\\to x$ for every $x$. The compression $B_n=P_nBP_n$ is a positive contraction on that finite-dimensional span and zero on its complement. For every complex polynomial $p$, diagonalize the compression using [F2], with eigenvalues $b_j\\in[0,1]$. For $x=\\sum_j c_j e_j+x_\\perp$ its squared image norm is $\\sum_j|p(b_j)|^2|c_j|^2+|p(0)|^2\\|x_\\perp\\|^2\\le(\\sup_{0\\le b\\le1}|p(b)|)^2\\|x\\|^2$. Thus $\\|p(B_n)\\|\\le\\sup_{0\\le b\\le1}|p(b)|$, including the zero complement. Boundedness and strong convergence $B_n\\to B$ imply $p(B_n)x\\to p(B)x$ by induction on powers. Hence the same norm bound holds for $p(B)$. By [F3], polynomial approximations define $f(B)$ for every $f\\in C([0,1];\\mathbb C)$, independently of the approximation, with $\\|f(B)\\|\\le\\|f\\|_\\infty$. Norm limits preserve sums, products, the identity and conjugate adjoints. If $f\\ge0$, approximating its continuous square root gives $f(B)=\\sqrt f(B)^*\\sqrt f(B)\\ge0$. This constructs the required continuous calculus without a spectral theorem.",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "step": "2.2",
+          "claim": "For $z>0$ the strong improper integral $R_zx=\\int_0^\\infty e^{-zt}U_tx\\,dt$ exists. The identity $\\|U_tx-U_sx\\|=\\|(U_{t-s}-I)x\\|$ and strong continuity at zero give uniform norm-continuity of the orbit, and the scalar exponential factor is uniformly continuous on each finite interval by its bounded derivative. Hence on a finite interval the integrand is uniformly norm-continuous, so uniform-mesh Riemann sums are Cauchy in $\\mathcal H$; their tails have norm at most $e^{-zT}\\|x\\|/z$. Thus $R_z$ is bounded by $1/z$. The group law makes $U_tD(K)=D(K)$ and $KU_tx=U_tKx$ by difference quotients. For $x\\in D(K)$ the same Riemann sums converge also after applying $K$, and closedness gives differentiation/integration in its graph. The continuous-curve fundamental theorem [F7], followed by the exponentially small endpoint limit, applied to $(e^{-zt}U_tx)'=e^{-zt}(iK-z)U_tx$ yields $(z-iK)R_zx=x$. The estimate $\\|(z-iK)x\\|^2=z^2\\|x\\|^2+\\|Kx\\|^2$, closedness and the zero kernel of the adjoint $z+iK$ show that $z-iK$ is onto with inverse norm at most $1/z$, just as in step 1.1. Density extends $R_z=(z-iK)^{-1}$ to every $x$.",
+          "inputs": [
+            "F1",
+            "F7",
+            "step 1.1",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "For $x\\ne0$, the real functional $f\\mapsto\\langle f(B)x,x\\rangle/\\|x\\|^2$ is positive and normalized. Apply [F4] on $[0,1]$ and multiply its probability measure by $\\|x\\|^2$, obtaining a positive measure $\\nu_x$; set $\\nu_0=0$. Its continuous integrals are $\\langle f(B)x,x\\rangle$, first for real $f$, then for complex $f$ by linearity. Define $$\\nu_{x,y}=\\frac14\\sum_{j=0}^3 i^j\\nu_{x+i^j y}.$$ Polarization gives $\\int f\\,d\\nu_{x,y}=\\langle f(B)x,y\\rangle$. Uniqueness from step 1.2 makes these measures linear in $x$, conjugate-linear in $y$, with $\\nu_{y,x}=\\overline{\\nu_{x,y}}$ and diagonal $\\nu_{x,x}=\\nu_x$. Their total masses are $\\langle x,y\\rangle$. Because the representing measure is unique, this defines the entire indexed family without an uncountable choice of representatives.",
+          "inputs": [
+            "F4",
+            "step 1.2",
+            "step 2.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "For every Borel $D$, the form $(x,y)\\mapsto\\nu_{x,y}(D)$ is positive sesquilinear. Expanding its nonnegative value on $x+cy$, and minimizing over $c\\in\\mathbb C$ (with the zero-diagonal case treated by arbitrary large multiples), gives $|\\nu_{x,y}(D)|^2\\le\\nu_x(D)\\nu_y(D)$. On any finite Borel partition $(D_j)$, finite scalar Cauchy–Schwarz now gives $\\sum_j|\\nu_{x,y}(D_j)|\\le\\sqrt{\\sum_j\\nu_x(D_j)}\\sqrt{\\sum_j\\nu_y(D_j)}\\le\\|x\\|\\,\\|y\\|$. Taking the partition supremum yields $|\\nu_{x,y}|([0,1])\\le\\|x\\|\\,\\|y\\|$. In particular all bounded measurable scalar functions are integrable against these measures.",
+          "inputs": [
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-2",
+          "step": "4.2",
+          "claim": "For continuous $f,h$, multiplicativity of the calculus gives $$\\int h\\,d\\nu_{f(B)x,y}=\\langle h(B)f(B)x,y\\rangle=\\int hf\\,d\\nu_{x,y}.$$ Step 1.2 implies $d\\nu_{f(B)x,y}=f\\,d\\nu_{x,y}$ as measures. Conjugate symmetry yields $d\\nu_{f(B)x}=|f|^2d\\nu_x$; in particular $$\\|f(B)x\\|^2=\\int|f|^2\\,d\\nu_x.$$ These identities use only continuous factors and scalar measures, not a postulated Borel operator calculus.",
+          "inputs": [
+            "step 1.2",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "step": "5.1",
+          "claim": "Since $\\nu_{Bz}(\\{0\\})=0$ by step 4.2, step 4.1 makes its mixed measure with any vector zero on $\\{0\\}$. Hence $\\nu_x(\\{0\\})=\\nu_{x-Bz}(\\{0\\})\\le\\|x-Bz\\|^2$. The dense range from step 1.1 allows this upper bound to be arbitrarily small, proving $\\nu_x(\\{0\\})=0$ and then $\\nu_{x,y}(\\{0\\})=0$ for all $x,y$. Thus no zero-endpoint mass is hidden by the reciprocal change of variable below.",
+          "inputs": [
+            "step 1.1",
+            "step 4.1",
+            "step 4.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-2",
+          "step": "5.2",
+          "claim": "If a real $b_0$ is in the resolvent of $B$, let $L=(B-b_0)^{-1}$. For every positive integer $n$, step 4.2 with $x=L^nz$ gives $d\\nu_z=|b-b_0|^{2n}d\\nu_{L^nz}$. Thus on $|b-b_0|<\\varepsilon$, $$\\nu_z(\\{|b-b_0|<\\varepsilon\\})\\le(\\varepsilon\\|L\\|)^{2n}\\|z\\|^2.$$ Choose $\\varepsilon\\|L\\|<1$ and let $n\\to\\infty$. The neighborhood is null for every diagonal measure and therefore for every mixed measure by step 4.1. The real resolvent set is open by the inverse Neumann series. It is covered by the rational intervals contained in these null neighborhoods; this is a subfamily of a fixed countable base. Countable subadditivity proves that all $\\nu_{x,y}$ are carried by $\\sigma(B)\\cap[0,1]$.",
+          "inputs": [
+            "step 4.1",
+            "step 4.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-3",
+          "step": "5.3",
+          "claim": "The identity in step 4.2 makes $(B^nx)$ Cauchy: for $n,m\\ge N$ its squared difference is at most $4\\int_{[0,1)}b^{2N}d\\nu_x$, which tends to zero by [F5]. Let its limit be $Px$. Again $\\|(B-I)B^nx\\|^2=\\int(1-b)^2b^{2n}d\\nu_x\\to0$, so $Px\\in\\ker(I-B)$. For $y$ in this kernel, self-adjointness gives $\\langle B^nx,y\\rangle=\\langle x,y\\rangle$, and therefore $x-Px$ is orthogonal to the kernel. Thus $P$ is its orthogonal projection by [F1]. This kernel equals $\\ker K$, since $KB=I-B$. Dominated convergence in $\\langle B^nx,y\\rangle=\\int b^n d\\nu_{x,y}$ gives $\\nu_{x,y}(\\{1\\})=\\langle P_0x,y\\rangle$.",
+          "inputs": [
+            "F1",
+            "F5",
+            "step 1.1",
+            "step 4.1",
+            "step 4.2",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "step": "6.1",
+          "claim": "On $(0,1]$ put $\\lambda(b)=b^{-1}-1$ and define $g_{x,y}(t)=\\int e^{it\\lambda(b)}d\\nu_{x,y}(b)$, omitting the null endpoint by step 5.1. It is bounded and continuous by dominated convergence and step 4.1. For $z>0$, scalar Fubini, applied to the finite positive measures in the polarization formula, gives its Laplace transform as $\\int (z-i\\lambda(b))^{-1}d\\nu_{x,y}(b)$. The reciprocal is the continuous function $$r_z(b)=\\frac{b}{zb-i(1-b)},\\qquad r_z(0)=0.$$ By step 2.1, $r_z(B)=B(zB-i(I-B))^{-1}$, and $KB=I-B$ shows $(z-iK)r_z(B)=I$ on $\\mathcal H$. Step 2.2 identifies this with $R_z$. Thus $g_{x,y}$ and $\\langle U_tx,y\\rangle$ have equal Laplace transforms. Step 1.3 gives equality for $t\\ge0$; conjugate symmetry and $U_{-t}=U_t^*$ give it for negative $t$ as well.",
+          "inputs": [
+            "F5",
+            "step 1.3",
+            "step 2.1",
+            "step 2.2",
+            "step 3.1",
+            "step 4.1",
+            "step 5.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-2",
+          "step": "6.2",
+          "claim": "Push $\\nu_{x,y}|_{(0,1]}$ forward by $\\lambda$ to obtain $\\mu_{x,y}$. Positivity, total mass, sesquilinearity and the variation bound pass to the pushforward. If $E\\ge0$ is in the resolvent of $K$ and $b_0=(1+E)^{-1}$, the bounded inverse identity $$(B-b_0)^{-1}=-(1+E)I-(1+E)^2(K-E)^{-1}$$ follows by multiplying on $D(K)=\\operatorname{ran}B$. Therefore $b_0$ is in the resolvent of $B$. Step 5.2 and the homeomorphism $(0,1]\\to[0,\\infty)$ show that the pushed measures are carried by $\\sigma(K)$. Their atom at $E=0$ is the atom at $b=1$, computed in step 5.3. All these statements include vectors in the ground subspace and the possibility that the excited subspace is zero.",
+          "inputs": [
+            "step 1.1",
+            "step 4.1",
+            "step 5.1",
+            "step 5.2",
+            "step 5.3",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-7-1",
+          "step": "7.1",
+          "claim": "Step 6.1 proves the Fourier pairing formula, and step 6.2 proves the remaining measure properties. For $Q=I-P_0$, its measures have zero atom at zero by that formula for the atom and are carried by $\\sigma(K)$; the stated gap therefore places them in $[g,\\infty)$. Every construction used only [A1] and the displayed suppliers; no general spectral theorem or existence of a PVM was invoked.",
+          "inputs": [
+            "A1",
+            "step 6.1",
+            "step 6.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement requires a nonzero Hilbert space; step 6.2 explicitly retains an empty excited subspace."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 3.1 and 5.1 set the zero-vector measure to zero and remove the zero endpoint; step 5.3 retains the zero-energy atom."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 includes a one-dimensional compression and its zero complement; the normalized probability in step 3.1 has mass one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 5.3 projects onto the entire kernel without a simplicity assumption, including K=0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 5.1 proves no b=0 atom; step 5.3 computes b=1 exactly before step 6.2 pushes forward."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement assumes CC; step 2.1 uses deterministic finite Gram–Schmidt, and step 3.1 uniquely defines all representing measures without uncountable choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "lem-qsmx-separable-positive-generator-spectral-measures: the public Statement is a forward construction/estimate, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "lem-qsmx-separable-positive-generator-spectral-measures: no reverse characterization is asserted; the hypotheses are sufficient conditions only."
+        }
+      ]
+    },
+    "lem-qsmx-gaussian-ground-correlation-filter": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-qsmx-separable-positive-generator-spectral-measures",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $\\mathcal H\\ne\\{0\\}$ be a separable complex Hilbert space with inner product linear in its first argument. Let $K:D(K)\\to\\mathcal H$ be densely defined, self-adjoint and positive, meaning $\\langle Kx,x\\rangle\\ge0$ for $x\\in D(K)$. Let $(U_t)_{t\\in\\mathbb R}$ be a strongly continuous unitary group with generator $iK$: its strong derivative at zero exists exactly on $D(K)$ and equals $iKx$. The spectrum $\\sigma(K)$ is the complement of the set of $z$ for which $K-z:D(K)\\to\\mathcal H$ has a bounded everywhere-defined inverse.\n\nFor every $x,y\\in\\mathcal H$ there is a finite complex Borel measure $\\mu_{x,y}$ on $[0,\\infty)$ such that\n\n$$\\langle U_t x,y\\rangle=\\int_{[0,\\infty)}e^{itE}\\,d\\mu_{x,y}(E),\\qquad |\\mu_{x,y}|([0,\\infty))\\le\\|x\\|\\,\\|y\\|.$$\n\nThe measures are sesquilinear in $(x,y)$, $\\mu_x:=\\mu_{x,x}$ is positive with total mass $\\|x\\|^2$, and every $\\mu_{x,y}$ is carried by $\\sigma(K)$. If $P_0$ is the orthogonal projection onto $\\ker K$, then\n\n$$\\mu_{x,y}(\\{0\\})=\\langle P_0x,y\\rangle.$$\n\nIn particular, if $\\sigma(K)\\subseteq\\{0\\}\\cup[g,\\infty)$ with $g>0$, the measures $\\mu_{(I-P_0)x,(I-P_0)y}$ are carried by $[g,\\infty)$. Spectral measures and a projection-valued spectral resolution are not assumptions of this statement.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-fourier-transform-of-a-gaussian",
+          "source_section": "Statement",
+          "quote": "For $t>0$ and $\\widehat f(\\xi)=\\int_{\\mathbb R}f(x)e(-x\\xi)\\,dx$,\n$$\\widehat{e^{-\\pi t x^2}}(\\xi)=t^{-1/2}e^{-\\pi\\xi^2/t}.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to \\mathbb C$ belong to\n$L^1(\\mu \\times \\nu)$. Then:\n\n1. for $\\mu$-almost every $x$, the section $f_x$ belongs to $L^1(\\nu)$;\n2. for $\\nu$-almost every $y$, the section $f^y$ belongs to $L^1(\\mu)$;\n3. after assigning the value $0$ on the exceptional parameter sets, the\n   section-integral functions are integrable; and\n4. the three integrals agree:\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. All functions below have domain $X$. Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice (The Axiom of Countable Choice ($\\mathrm{AC}_\\omega$)). Let\n$U,V \\subseteq \\mathbb R^n$ be open and let $T : U \\to V$ be a\n$C^1$ diffeomorphism. For every nonnegative Lebesgue measurable\n$f : V \\to [0,\\infty]$,\n$$ \\int_V f(y)\\,d\\lambda_n(y) = \\int_U f(T(x))\\,|\\det DT(x)|\\,d\\lambda_n(x). $$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-derivative-of-exponential",
+          "source_section": "Statement",
+          "quote": "The real exponential function is $C^\\infty$, and for every $m\\in\\mathbb N$,\n$$\\exp^{(m)}=\\exp.$$\nIn particular $(\\exp)'=\\exp$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-complex-exponential-is-entire-with-derivative-itself",
+          "source_section": "Statement",
+          "quote": "The complex exponential is entire, and\n\n$$ \\exp'(z)=\\exp z $$\n\nfor every $z\\in\\mathbb C$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-fundamental-theorem-of-calculus-for-banach-valued-continuous-curves",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice ([[def-countable-choice]]) for the Lebesgue-measure interfaces. Let $X$ be a real or complex Banach space, let $a<b$, and let $f:[a,b]\\to X$ be continuous. Differentiation uses the underlying real structure. Then $G(t):=\\int_a^t f(s)\\,ds$ is differentiable on $(a,b)$ and has the corresponding one-sided derivatives at $a,b$, with $G'(t)=f(t)$, and this derivative extends continuously to $[a,b]$. Consequently, if $\\varphi:[a,b]\\to X$ is continuous, differentiable on $(a,b)$ with $\\varphi'$ continuous on $(a,b)$ and extendable to a continuous $X$-valued function on $[a,b]$, then $\\int_a^b\\varphi'(s)\\,ds=\\varphi(b)-\\varphi(a)$. The Bochner integral here is the one of [[def-bochner-integrable-function]]; the identities also hold for continuous curves on $[0,\\infty)$ restricted to compact subintervals.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The positive and negative frequency measures $$\\mu_+=\\mu_{Qb\\Omega,Qa^*\\Omega},\\qquad \\mu_-=\\mu_{Qa\\Omega,Qb^*\\Omega}$$ are carried by $[g,\\infty)$ and each has total variation at most $\\|A\\|\\|B\\|$, since $\\pi$ and $Q$ are contractions. Using $U_t\\Omega=\\Omega$ and the linear-first pairing gives $$\\omega(AB)-\\omega(A)\\omega(B)=\\mu_+([g,\\infty)),\\qquad f(t)=\\int e^{itE}d\\mu_+(E)-\\int e^{-itE}d\\mu_-(E).$$ Indeed $\\omega(A\\alpha_t(B))=\\langle U_tb\\Omega,a^*\\Omega\\rangle$ and $\\omega(\\alpha_t(B)A)=\\langle U_{-t}a\\Omega,b^*\\Omega\\rangle$. Their ground-vector terms are both $\\omega(A)\\omega(B)$ and cancel. Commutativity also gives $f(0)=0$.",
+          "inputs": [
+            "A1",
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "For $\\varepsilon>0$, the exponential primitive and its limit at infinity in [F4] give $1/(\\varepsilon+it)=\\int_0^\\infty e^{-\\varepsilon w}e^{-itw}dw$. The Gaussian factor makes the resulting double integral absolutely integrable, with majorant $e^{-qt^2}e^{-\\varepsilon w}$ of finite integral. Hence [F2] and [F3] give $$h_{q,\\varepsilon}(E):=\\int_{\\mathbb R}\\frac{e^{-qt^2}e^{itE}}{2\\pi(\\varepsilon+it)}dt=\\frac{1}{2\\sqrt{\\pi q}}\\int_0^\\infty e^{-\\varepsilon w}e^{-(E-w)^2/(4q)}dw.$$ It lies between zero and one and converges as $\\varepsilon\\downarrow0$ to $h_q(E)$ given by the same right side without $e^{-\\varepsilon w}$. For $E\\ge g$, substituting $u=(E-w)/(2\\sqrt q)$ in its complementary Gaussian tail gives $$0\\le1-h_q(E)=h_q(-E)\\le\\tfrac12 e^{-E^2/(4q)}\\le\\tfrac12 e^{-g^2/(4q)}.$$ For completeness, the tail estimate is $\\int_z^\\infty e^{-u^2}du\\le e^{-z^2}\\int_0^\\infty e^{-v^2}dv$ for $z\\ge0$, obtained by $u=z+v$ and $(z+v)^2\\ge z^2+v^2$; the Gaussian integral in [F2] normalizes the final half.",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "step": "1.3",
+          "claim": "The unregularized time integrand is integrable near zero because $|f(t)|/|t|\\le L$ there. Away from zero, $|f(t)|\\le2\\|A\\|\\|B\\|$, so the Gaussian divided by $|t|$ is an integrable majorant on each tail. For $t\\ne0$ one has $|\\varepsilon+it|\\ge|t|$. Dominated convergence in time thus proves $I_{q,\\varepsilon}\\to I_q(A,B)$, and also establishes the asserted absolute convergence without a principal-value convention.",
+          "inputs": [
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Insert the two measures of step 1.1 into the regularized integral $I_{q,\\varepsilon}=\\int e^{-qt^2}f(t)/(2\\pi(\\varepsilon+it))dt$. Scalar Fubini is legitimate at fixed $\\varepsilon>0$: their finite variations and the integrable Gaussian divided by $\\varepsilon$ give an absolute majorant. Equivalently apply it to the four positive measures in each polarization formula of [F1]. Therefore $$I_{q,\\varepsilon}=\\int h_{q,\\varepsilon}(E)d\\mu_+(E)-\\int h_{q,\\varepsilon}(-E)d\\mu_-(E).$$ The bound $0\\le h_{q,\\varepsilon}\\le1$ and finite variations permit dominated convergence on these measures. Its limit is $\\int h_q(E)d\\mu_+-\\int h_q(-E)d\\mu_-$.",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "By steps 1.1, 2.1 and 1.3, the difference from the connected correlation is the sum of an integral of $1-h_q(E)$ against $\\mu_+$ and an integral of $h_q(-E)$ against $\\mu_-$. Both measures are carried by $E\\ge g$. Step 1.2 bounds each multiplier by $\\tfrac12e^{-g^2/(4q)}$, and step 1.1 bounds each variation by $\\|A\\|\\|B\\|$. The two halves give exactly the stated estimate, with no factor from replacing $A,B$ by centered operators.",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement requires a unit ground vector and g,q>0; an empty excited subspace gives zero mixed measures in step 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero observables give zero measures and integrals in step 1.1; step 1.3 assigns any value at the null time t=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement normalizes the ground vector; step 1.1 uses its rank-one orthogonal complement."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement explicitly requires ker K=CΩ; no degenerate-ground conclusion is inferred."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 retains E=g and the Gaussian tail; step 1.3 controls t=0 and both infinite tails, and step 2.1 takes the regularization limit."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement assumes CC and step 1.1 invokes precisely the CC scalar-measure helper; all remaining integrations are scalar dominated/Fubini limits."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "lem-qsmx-gaussian-ground-correlation-filter: the public Statement is a forward construction/estimate, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "lem-qsmx-gaussian-ground-correlation-filter: no reverse characterization is asserted; the hypotheses are sufficient conditions only."
+        }
+      ]
+    },
+    "thm-qsmx-gapped-ground-state-clustering": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "lem-qsm-finite-matrix-cstar-and-state-duality",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space, $D=\\dim H\\ge1$, with inner product linear in its first argument. With composition, Hilbert adjoint, identity and the induced operator norm, $\\mathcal B(H)$ is a nonzero unital complex C*-algebra in the sense of [[def-c-star-algebra]]. In particular it is complete, $\\|AB\\|\\le\\|A\\|\\|B\\|$, $\\|A^*A\\|=\\|A\\|^2$, $\\|A^*\\|=\\|A\\|$ and $\\|I\\|=1$. The matrix $\\|A\\|^2I-A^*A$ is positive semidefinite and has a positive square root in $\\mathcal B(H)$.\n\nEvery complex-linear functional $\\omega:\\mathcal B(H)\\to\\mathbb C$ that is positive, meaning $\\omega(B^*B)\\ge0$ for all $B$, has a unique positive semidefinite matrix $\\rho$ such that $\\omega(A)=\\operatorname{Tr}(\\rho A)$ for all $A$. It is bounded and satisfies\n\n$$|\\omega(A)|\\le\\operatorname{Tr}(\\rho)\\|A\\|\\quad(A\\in\\mathcal B(H)),\\qquad \\|\\omega\\|=\\operatorname{Tr}(\\rho)=\\omega(I).$$\n\nConsequently the canonical states of [[def-state-on-a-c-star-algebra]] are exactly the trace pairings of density operators of [[def-qc-density-operator]]; for a positive functional, normalization $\\omega(I)=1$ is equivalent to norm one. The result includes zero positive functionals, nonfaithful densities and $D=1$; it makes no infinite-dimensional density representation assertion.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qsm-local-spin-algebras",
+          "source_section": "Definition",
+          "quote": "Fix an integer dimension $d\\ge1$, the countable site set $\\Gamma=\\mathbb{Z}^d$ of [[lem-qsm-integer-lattice-countable]], and one finite spin dimension $q\\ge1$, where $q$ is a positive integer (so $q\\in\\mathbb N$ and $1\\le q$, by [[def-natural-numbers]] and [[def-nat-order]]). For $n\\in\\mathbb Z$, define $|n|=n$ if $0\\le n$ and $|n|=-n$ if $n<0$, using the integer order and additive inverse of [[def-int-order]] and [[def-int-operations]]. Totality and compatibility of the integer order with addition ([[thm-int-ordered-ring]]) give $0\\le|n|$ and $-|n|\\le n\\le|n|$. Adding these bounds for $m,n\\in\\mathbb Z$ gives $|m+n|\\le|m|+|n|$. Equip $\\Gamma$ with the max-coordinate metric $d_\\infty(x,y)=\\max_{1\\le r\\le d}|x_r-y_r|$; the maximum exists because the coordinate set is finite and nonempty, symmetry and separation hold coordinatewise, and the absolute-value triangle inequality gives $|x_r-z_r|\\le|x_r-y_r|+|y_r-z_r|$ for every coordinate, hence the triangle inequality for $d_\\infty$. A **finite region** is a finite subset $\\Lambda\\subseteq\\Gamma$; its cardinality is $|\\Lambda|$ ([[def-finite-cardinality]]).\n\nFor a finite region $\\Lambda$, let $S_\\Lambda=\\{1,\\ldots,q\\}^{\\Lambda}$ be the set of spin configurations on $\\Lambda$. Induction on $|\\Lambda|$ gives $|S_\\Lambda|=q^{|\\Lambda|}$: the empty region has one configuration, and for $x\\in\\Lambda$ the restriction map $s\\mapsto(s|_{\\Lambda\\setminus\\{x\\}},s(x))$ is a bijection $S_\\Lambda\\to S_{\\Lambda\\setminus\\{x\\}}\\times\\{1,\\ldots,q\\}$, so adjoining one site multiplies the number of configurations by $q$, according to the recursion defining natural-number powers in [[def-nat-power]]. Let $\\mathcal H_\\Lambda$ be the vector space of functions $f:S_\\Lambda\\to\\mathbb C$ with inner product $\\langle f,g\\rangle=\\sum_{s\\in S_\\Lambda}f(s)\\overline{g(s)}$. For each $s\\in S_\\Lambda$, let $e_s$ be the indicator function of $\\{s\\}$; these vectors form an orthonormal basis. For $\\Lambda=\\varnothing$, $S_\\Lambda$ is a singleton and $\\mathcal H_\\Lambda\\cong\\mathbb C$. The **local spin matrix algebra** is\n\n$$\\mathcal A_\\Lambda:=\\mathcal B(\\mathcal H_\\Lambda)\\cong M_{q^{|\\Lambda|}}(\\mathbb C),$$\n\nHere $\\mathcal B(\\mathcal H_\\Lambda)$ denotes all complex-linear endomorphisms of the finite-dimensional Hilbert space; they are bounded. The algebra has composition, Hilbert adjoint, identity $I_\\Lambda$, and induced operator norm\n\n$$\\|T\\|:=\\sup_{\\|\\xi\\|=1}\\|T\\xi\\|.$$\n\nThe **finite local trace** is $\\operatorname{Tr}_\\Lambda(T):=\\sum_{s\\in S_\\Lambda}\\langle T e_s,e_s\\rangle$ in the displayed configuration basis $(e_s)$. This is the usual finite-matrix trace; basis independence and its cyclic/unitary identities are supplied by [[lem-qsm-matrix-state-calculus]].\n\nIf $\\Lambda\\subseteq\\Lambda'$, restriction of configurations gives the canonical factorization $\\mathcal H_{\\Lambda'}\\cong\\mathcal H_\\Lambda\\otimes\\mathcal H_{\\Lambda'\\setminus\\Lambda}$, with sites ordered lexicographically. The **factor inclusion** is the unital $*$-homomorphism $\\iota_{\\Lambda,\\Lambda'}:\\mathcal A_\\Lambda\\to\\mathcal A_{\\Lambda'}$ given by $T\\mapsto T\\otimes I_{\\Lambda'\\setminus\\Lambda}$. A **localization region** for $T$ is any finite $\\Lambda$ for which $T\\in\\mathcal A_\\Lambda$ under these inclusions; a localization region need not be minimal.\n\nThe ordinary operator norm makes each local matrix algebra a nonzero unital complete C*-algebra, and every positive normalized complex-linear functional is uniquely a trace pairing with a density matrix, by [[lem-qsm-finite-matrix-cstar-and-state-duality]]. This includes the empty region, whose Hilbert space is $\\mathbb C$. This definition does not posit an infinite-dimensional tensor-product Hilbert space.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qsm-quasilocal-spin-algebra",
+          "source_section": "Definition",
+          "quote": "Use the finite local matrix algebras and isometric factor inclusions of [[def-qsm-local-spin-algebras]] and [[lem-qsm-local-spin-inclusions-isometric]]. Identify $A\\in\\mathcal A_\\Lambda$ with its image in every larger finite-region algebra. The directed union\n\n$$\\mathcal A_{\\mathrm{loc}}:=\\bigcup_{\\Lambda\\subseteq\\Gamma,\\ |\\Lambda|<\\infty}\\mathcal A_\\Lambda$$\n\nis the algebra of **strictly local observables**. Its norm is $\\|A\\|=\\|A\\|_{\\mathcal A_\\Lambda}$ for any finite localization region $\\Lambda$ of $A$; isometric inclusions make this independent of the chosen region. The **quasi-local spin algebra** is the norm completion\n\n$$\\mathcal A:=\\overline{\\mathcal A_{\\mathrm{loc}}}^{\\,\\|\\cdot\\|}.$$\n\nThe C*-algebra structure on this completion has product and adjoint extended continuously from the finite local matrix algebras. Countable Choice is assumed for the published existence theorem for metric completions; [[lem-qsm-quasilocal-completion]] supplies the full extension argument using the finite C*-identity of [[lem-qsm-finite-matrix-cstar-and-state-duality]].\n\n**No global Hilbert tensor product is selected.** “Quasi-local” means norm completion of the directed algebra of finite-region observables; it does not mean a chosen representation as operators on an infinite tensor-product Hilbert space. A local operator $A\\in\\mathcal A_\\Lambda$ may have more than one localization region. Disjoint finite local factors commute in their common finite tensor algebra.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-qsm-quasilocal-completion",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice ([[def-countable-choice]]) for the Cauchy-sequence completion. For the local spin system of [[def-qsm-local-spin-algebras]], the normed $*$-algebra $\\mathcal A_{\\mathrm{loc}}$ and its completion $\\mathcal A$ of [[def-qsm-quasilocal-spin-algebra]] are well defined; $\\mathcal A$ is a unital complex C*-algebra and $\\mathcal A_{\\mathrm{loc}}$ is norm dense in it. If $A\\in\\mathcal A_\\Lambda$ and $B\\in\\mathcal A_\\Delta$ for disjoint finite regions $\\Lambda,\\Delta$, then $AB=BA$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qsm-infinite-algebraic-state",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal A$ be the unital quasi-local spin C*-algebra of [[def-qsm-quasilocal-spin-algebra]], whose C*-structure uses Countable Choice as in [[lem-qsm-quasilocal-completion]]. An **infinite algebraic state** is a bounded complex-linear functional $\\omega:\\mathcal A\\to\\mathbb C$ satisfying $\\omega(I)=1$ and $\\omega(A^*A)\\ge0$ for every $A\\in\\mathcal A$.\n\nFor each finite region $\\Lambda\\subseteq\\mathbb Z^d$, the restriction $\\omega|_{\\mathcal A_\\Lambda}$ is a finite-matrix state. By [[lem-qsm-finite-matrix-cstar-and-state-duality]], every positive normalized functional on a finite matrix algebra is represented by a unique density matrix. Define its **local density matrix** $\\rho_\\Lambda$ by\n\n$$\\omega(A)=\\operatorname{Tr}_{\\Lambda}(\\rho_\\Lambda A)\\qquad(A\\in\\mathcal A_\\Lambda),$$\n\nwhere $\\rho_\\Lambda=\\rho_\\Lambda^*\\ge0$ and $\\operatorname{Tr}_{\\Lambda}\\rho_\\Lambda=1$. For $\\Lambda\\subseteq\\Lambda'$, put $\\Delta=\\Lambda'\\setminus\\Lambda$ and use the configuration-basis factorization $\\mathcal H_{\\Lambda'}\\cong\\mathcal H_\\Lambda\\otimes\\mathcal H_\\Delta$ of [[def-qsm-local-spin-algebras]]. If $T\\in\\mathcal A_{\\Lambda'}$, define its **partial trace over $\\Delta$**, $\\operatorname{Tr}_\\Delta(T)\\in\\mathcal A_\\Lambda$, by its matrix coefficients\n\n$$\\langle \\operatorname{Tr}_\\Delta(T)e_s,e_{s'}\\rangle:=\\sum_{t\\in S_\\Delta}\\langle T(e_s\\otimes e_t),e_{s'}\\otimes e_t\\rangle\\qquad(s,s'\\in S_\\Lambda),$$\n\nwhere $e_s$ and $e_t$ are the configuration basis vectors of $\\mathcal H_\\Lambda$ and $\\mathcal H_\\Delta$. The finite sums depend linearly on $T$, so they define a linear map $\\mathcal A_{\\Lambda'}\\to\\mathcal A_\\Lambda$ with a unique output matrix for each $T$. Expanding both configuration-basis traces gives its pairing identity\n\n$$\\operatorname{Tr}_\\Lambda\\!\\left(A\\operatorname{Tr}_\\Delta(T)\\right)=\\operatorname{Tr}_{\\Lambda'}\\!\\left((A\\otimes I_\\Delta)T\\right)\\qquad(A\\in\\mathcal A_\\Lambda),$$\n\nwith the common value given by\n\n$$\\sum_{s,s'\\in S_\\Lambda}\\sum_{t\\in S_\\Delta}\\langle A e_{s'},e_s\\rangle\\langle T(e_s\\otimes e_t),e_{s'}\\otimes e_t\\rangle.$$\n\nThe pairing identity determines this matrix uniquely: if $D\\in\\mathcal A_\\Lambda$ pairs to zero with every $A$, taking the configuration-basis matrix units $A=E_{ji}$ gives $\\operatorname{Tr}_\\Lambda(E_{ji}D)=\\langle D e_j,e_i\\rangle=0$ for every $i,j$, so $D=0$. The local densities are **consistent** when $\\operatorname{Tr}_{\\Lambda'\\setminus\\Lambda}(\\rho_{\\Lambda'})=\\rho_\\Lambda$. No density operator on a globally chosen Hilbert space is part of this definition.\n\nThis agrees with the canonical state convention of [[def-state-on-a-c-star-algebra]]: the finite restrictions have norm one by [[lem-qsm-finite-matrix-cstar-and-state-duality]], giving $|\\omega(A)|\\le\\|A\\|$ on the dense local algebra and hence on its completion; evaluation at the norm-one identity gives $\\|\\omega\\|=1$. Conversely a canonical state has local restrictions with density matrices of trace one, since the finite norm formula and continuity on the dense local algebra imply $\\|\\omega\\|=\\omega(I)$. No global density representation is asserted.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qsm-bounded-finite-range-interaction",
+          "source_section": "Definition",
+          "quote": "Use the lattice $\\Gamma=\\mathbb Z^d$, $d\\ge1$, the finite spin dimension $q\\ge1$, the local matrix algebras $\\mathcal A_\\Lambda$, and the max-coordinate metric $d_\\infty$ of [[def-qsm-local-spin-algebras]]. For finite nonempty $Z\\subset\\Gamma$, write $\\operatorname{diam}_\\infty Z=\\max_{x,y\\in Z}d_\\infty(x,y)$; for finite nonempty $X,Y\\subset\\Gamma$, write $\\operatorname{dist}_\\infty(X,Y)=\\min_{x\\in X,y\\in Y}d_\\infty(x,y)$.\n\nA **uniformly bounded finite-range interaction** is a family $\\Phi(Z)\\in\\mathcal A_Z$, indexed by finite nonempty $Z\\subset\\Gamma$, such that $\\Phi(Z)^*=\\Phi(Z)$ and there are an integer $M\\ge1$, a finite $R\\ge0$, and $\\kappa<\\infty$ satisfying\n\n$$\\Phi(Z)=0\\quad\\text{if }|Z|>M\\text{ or }\\operatorname{diam}_\\infty Z>R,\\qquad\\kappa:=\\sup_{x\\in\\Gamma}\\sum_{Z\\ni x}\\|\\Phi(Z)\\|<\\infty.$$\n\nThe norm in this sum is the operator norm in the local matrix algebra $\\mathcal A_Z$. If a model lists several terms with the same support, first add them in that local algebra; the resulting single operator is $\\Phi(Z)$, and $\\kappa$ uses its norm. Thus no multiplicity is implicit.\n\nFor a finite region $\\Lambda\\subset\\Gamma$, define the **free-boundary finite-volume Hamiltonian** by summing only terms whose complete support lies inside $\\Lambda$; terms meeting $\\Lambda$ but extending outside it are omitted:\n\n$$H_\\Lambda:=\\sum_{\\varnothing\\ne Z\\subseteq\\Lambda}\\Phi(Z)\\in\\mathcal A_\\Lambda.$$\n\nIt is a finite sum of self-adjoint matrices. For a fixed scale $\\hbar>0$ and any finite $\\Omega\\supseteq\\Lambda$, embed $H_\\Lambda$ in $\\mathcal A_\\Omega$ by the canonical factor inclusion and define\n\n$$\\alpha_t^\\Lambda(A):=e^{itH_\\Lambda/\\hbar}Ae^{-itH_\\Lambda/\\hbar}\\qquad(A\\in\\mathcal A_\\Omega,\\ t\\in\\mathbb R).$$\n\nThese actions are compatible as $\\Omega$ increases, because the extra tensor factors carry the identity. On $\\mathcal A_\\Lambda$ this is the ordinary finite matrix Heisenberg dynamics.\n\nIn physical SI bookkeeping, when $\\Phi(Z)$ is interpreted as an energy, $\\Phi(Z)$, $\\kappa$, and $H_\\Lambda$ have units J, $t$ has units s, and $\\hbar$ is the adopted reduced Planck constant with units J s. The mathematics below uses only $\\hbar>0$ and asserts no measured parameter value.",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qsm-finite-range-spin-dynamics",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and the finite-matrix C*-identity condition [A1] below. Let $\\mathcal A_{\\mathrm{loc}}=\\bigcup_{\\Lambda\\subset\\mathbb Z^d,\\ |\\Lambda|<\\infty}\\mathcal A_\\Lambda$ and let $\\mathcal A$ be its norm completion as in [[def-qsm-quasilocal-spin-algebra]]. These assumptions give the conditional unital C*-algebra structure supplied by [[lem-qsm-quasilocal-completion]]. Let $\\Phi$ be a uniformly bounded finite-range interaction of [[def-qsm-bounded-finite-range-interaction]].\n\nFor any increasing finite exhaustion $(\\Lambda_n)_{n\\ge1}$ in the convention of [[lem-qsm-boundary-dynamics-cauchy]]—that is, each $\\Lambda_n$ is finite, $\\Lambda_n\\subseteq\\Lambda_{n+1}$, and $\\bigcup_{n\\ge1}\\Lambda_n=\\mathbb Z^d$—the free-boundary finite-volume maps $\\alpha_t^{\\Lambda_n}$ converge in norm on every local observable, uniformly for $t$ in compact intervals. Their limit is independent of the exhaustion and extends uniquely to a strongly continuous one-parameter group $\\alpha_t$ of maps $\\alpha_t:\\mathcal A\\to\\mathcal A$. Here “one-parameter group” means $\\alpha_0=\\operatorname{id}_{\\mathcal A}$ and $\\alpha_{s+t}=\\alpha_s\\circ\\alpha_t$ for all $s,t\\in\\mathbb R$. Each $\\alpha_t$ is a bijective complex-linear unital $*$-homomorphism (a $*$-automorphism), with inverse $\\alpha_{-t}$. Strong continuity means $t\\mapsto\\alpha_t(A)$ is norm-continuous for every fixed $A\\in\\mathcal A$. This result does not assert that an infinite-volume Hamiltonian is an element of $\\mathcal A$ or a bounded operator on a preselected infinite tensor-product Hilbert space.",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qsmx-summable-interaction-norm",
+          "source_section": "Definition",
+          "quote": "Fix $d\\ge1$, the site set $\\Gamma=\\mathbb Z^d$, its max-coordinate metric $d_\\infty$, and the local spin algebras $\\mathcal A_\\Lambda$ of the uniformly finite-dimensional spin system. A finite interaction is a family $\\Phi(Z)=\\Phi(Z)^*\\in\\mathcal A_Z$ indexed by finite nonempty $Z\\subset\\Gamma$. For a finite $\\Lambda\\subset\\Gamma$, define\n\n$$H_\\Lambda^\\Phi:=\\sum_{\\varnothing\\ne Z\\subseteq\\Lambda}\\Phi(Z),\\qquad \\tau_t^{\\Lambda,\\Phi}(A):=e^{itH_\\Lambda^\\Phi/\\hbar}Ae^{-itH_\\Lambda^\\Phi/\\hbar},$$\n\nwhere $\\hbar>0$, $A$ is embedded in a common finite local algebra, and the finite sum is a self-adjoint matrix. When a path $\\Phi_s$, $s\\in[0,1]$, is used, each $\\Phi_s(Z)$ is $C^1$ in matrix norm and the derivative is taken term by term.\n\nFor $r\\ge0$ put $F(r)=(1+r)^{-d-1}$. The admissible weights used here are\n\n$$F_a(r):=e^{-ar}F(r)\\quad(a>0),\\qquad F_\\rho(r):=(1+r)^{-\\rho}\\quad(\\rho>d).$$\n\nFor an admissible weight $G$, define the weighted interaction norm\n\n$$\\|\\Phi\\|_G:=\\sup_{x,y\\in\\Gamma}\\frac{1}{G(d_\\infty(x,y))} \\sum_{\\substack{Z\\subset\\Gamma\\ {\\rm finite,\\ nonempty}\\\\x,y\\in Z}}\\|\\Phi(Z)\\|.$$\n\nThe derivative norm of a path is\n\n$$\\|\\partial\\Phi\\|_G:=\\sup_{s\\in[0,1]}\\sup_{x,y\\in\\Gamma} \\frac{1}{G(d_\\infty(x,y))} \\sum_{Z\\ni x,y}|Z|\\,\\|\\partial_s\\Phi_s(Z)\\|.$$\n\nA finite-volume spectral band is a nonempty selected subset $\\Sigma_\\Lambda(s)\\subseteq\\sigma(H_\\Lambda^{\\Phi_s})$ together with the orthogonal projection onto the sum of its eigenspaces. It may be specified by an interval $I_\\Lambda(s)$ with smoothly varying endpoints, in which case $\\Sigma_\\Lambda(s)=\\sigma(H_\\Lambda^{\\Phi_s})\\cap I_\\Lambda(s)$. The band is uniformly isolated with gap $\\gamma>0$ along a specified finite-volume exhaustion when\n\n$$\\operatorname{dist}\\!\\left(\\Sigma_\\Lambda(s),\\sigma(H_\\Lambda^{\\Phi_s})\\setminus\\Sigma_\\Lambda(s)\\right)\\ge\\gamma$$\n\nfor every volume in that exhaustion and every $s\\in[0,1]$. For spectral-flow arguments, the selected eigenvalues must also form a locally fixed spectral cluster: for each $s_0$, a contour in the resolvent set encloses exactly the selected eigenvalues for all $s$ in a neighborhood of $s_0$. In finite dimension this implies that its projection is $C^1$ when the Hamiltonian path is $C^1$. This cluster condition holds, for example, for the first $r_\\Lambda$ eigenvalues counted with multiplicity when the integer $r_\\Lambda$ is fixed along the path and the gap after them stays open. Uniform distance between the selected and unselected spectra alone does not prevent an interval from changing membership discontinuously. A ground band is such a band containing the lowest eigenvalue or a finite-volume cluster of lowest eigenvalues; no uniqueness is implicit.\n\nFor physical units, take interaction terms and Hamiltonians in joules, time in seconds, and $\\hbar$ in joule-seconds. The path parameter $s$, lattice distance, and admissible weights are dimensionless; the interaction norm therefore has energy units and the derivative norm has energy units per dimensionless path parameter.",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qsmx-lattice-weight-convolution",
+          "source_section": "Statement",
+          "quote": "Let $d\\ge1$, $\\Gamma=\\mathbb Z^d$, and $d_\\infty$ be the max-coordinate metric. For $F(r)=(1+r)^{-d-1}$, $F_a(r)=e^{-ar}F(r)$ with $a>0$, and $F_\\rho(r)=(1+r)^{-\\rho}$ with $\\rho>d$, each weight $G\\in\\{F_a,F_\\rho\\}$ is summable on $\\Gamma$. Its convolution constant\n\n$$C_G:=\\sup_{x,y\\in\\Gamma} \\frac{\\sum_{z\\in\\Gamma}G(d_\\infty(x,z))G(d_\\infty(z,y))} {G(d_\\infty(x,y))}$$\n\nis finite and positive. In particular, for all $x,y\\in\\Gamma$,\n\n$$\\sum_{z\\in\\Gamma}G(d_\\infty(x,z))G(d_\\infty(z,y)) \\le C_G\\,G(d_\\infty(x,y)).$$\n\nThe constant $C_{F_a}$ may be taken to be the convolution constant $C_F$ of $F$, independently of $a$.",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qsmx-weighted-lieb-robinson",
+          "source_section": "Statement",
+          "quote": "Let $G$ be either $F_a$, $a>0$, or $F_\\rho$, $\\rho>d$, as in the weighted-interaction definition. Let $\\Phi_u$ be a norm-continuous family of finite interactions on $\\mathbb Z^d$, indexed by $u\\in[0,T]$, with $M_G:=\\sup_{u\\in[0,T]}\\|\\Phi_u\\|_G<\\infty$. For finite $\\Lambda\\subset\\mathbb Z^d$, define $H_\\Lambda(u)=\\sum_{\\varnothing\\ne Z\\subseteq\\Lambda}\\Phi_u(Z)$ and let $U_\\Lambda(0)=I$ solve\n\n$$\\frac{d}{du}U_\\Lambda(u)=-iH_\\Lambda(u)U_\\Lambda(u)/\\hbar.$$\n\nSet $\\alpha_u^\\Lambda(A)=U_\\Lambda(u)^* A U_\\Lambda(u)$, extended by the identity outside $\\Lambda$. If $A\\in\\mathcal A_X$, $B\\in\\mathcal A_Y$ for disjoint finite nonempty $X,Y\\subset\\Lambda$, then\n\n$$\\|[\\alpha_u^\\Lambda(A),B]\\|\\le \\frac{2\\|A\\|\\|B\\|}{C_G} \\left(e^{2C_GM_Gu/\\hbar}-1\\right) \\sum_{x\\in X,\\,y\\in Y}G(d_\\infty(x,y)).$$\n\nThe same estimate holds for the inverse path. In particular, for a constant interaction $\\Phi$ evolved in physical time $t$ by $\\tau_t^{\\Lambda,\\Phi}$, take $u=|t|$ and the constant path $\\Phi_u=\\Phi$ to obtain\n\n$$\\|[\\tau_t^{\\Lambda,\\Phi}(A),B]\\|\\le \\frac{2\\|A\\|\\|B\\|}{C_G} \\left(e^{2C_G\\|\\Phi\\|_G|t|/\\hbar}-1\\right) \\sum_{x\\in X,\\,y\\in Y}G(d_\\infty(x,y)).$$\n\nIn physical units, $u,T,t$ are times, $M_G$ and $\\|\\Phi\\|_G$ have energy units, and $\\hbar$ has energy-times-time units; the weights and convolution constants are dimensionless, so the exponential arguments are dimensionless.",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qsm-state-gns-construction",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice ([[def-countable-choice]]), the C*-algebra completion interface of [[lem-qsm-quasilocal-completion]], and the finite-matrix positive square-root interface of [[lem-qsm-matrix-state-calculus]]. Let $\\{\\rho_\\Lambda\\}$ be a consistent family of finite local density matrices as in [[lem-qsm-consistent-local-states]], and let $\\omega$ be its extended algebraic state on the unital quasi-local algebra $\\mathcal A$. Then there are a complex Hilbert space $\\mathcal H_\\omega$, a unital $*$-representation $\\pi_\\omega:\\mathcal A\\to\\mathcal B(\\mathcal H_\\omega)$, and a unit vector $\\Omega_\\omega$ cyclic for $\\pi_\\omega$ such that\n\n$$\\omega(A)=\\langle \\pi_\\omega(A)\\Omega_\\omega,\\Omega_\\omega\\rangle\\qquad(A\\in\\mathcal A),$$\n\nusing the linear-first inner-product convention. Here $\\mathcal B(\\mathcal H_\\omega)$ is the space of bounded linear operators with its operator norm, a $*$-representation is a complex-linear map preserving products, adjoints and the identity, and cyclic means that $\\{\\pi_\\omega(A)\\Omega_\\omega:A\\in\\mathcal A\\}$ is norm dense in $\\mathcal H_\\omega$. The theorem asserts existence of a cyclic representation, not uniqueness up to unitary equivalence.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qsmx-separable-positive-generator-spectral-measures",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $\\mathcal H\\ne\\{0\\}$ be a separable complex Hilbert space with inner product linear in its first argument. Let $K:D(K)\\to\\mathcal H$ be densely defined, self-adjoint and positive, meaning $\\langle Kx,x\\rangle\\ge0$ for $x\\in D(K)$. Let $(U_t)_{t\\in\\mathbb R}$ be a strongly continuous unitary group with generator $iK$: its strong derivative at zero exists exactly on $D(K)$ and equals $iKx$. The spectrum $\\sigma(K)$ is the complement of the set of $z$ for which $K-z:D(K)\\to\\mathcal H$ has a bounded everywhere-defined inverse.\n\nFor every $x,y\\in\\mathcal H$ there is a finite complex Borel measure $\\mu_{x,y}$ on $[0,\\infty)$ such that\n\n$$\\langle U_t x,y\\rangle=\\int_{[0,\\infty)}e^{itE}\\,d\\mu_{x,y}(E),\\qquad |\\mu_{x,y}|([0,\\infty))\\le\\|x\\|\\,\\|y\\|.$$\n\nThe measures are sesquilinear in $(x,y)$, $\\mu_x:=\\mu_{x,x}$ is positive with total mass $\\|x\\|^2$, and every $\\mu_{x,y}$ is carried by $\\sigma(K)$. If $P_0$ is the orthogonal projection onto $\\ker K$, then\n\n$$\\mu_{x,y}(\\{0\\})=\\langle P_0x,y\\rangle.$$\n\nIn particular, if $\\sigma(K)\\subseteq\\{0\\}\\cup[g,\\infty)$ with $g>0$, the measures $\\mu_{(I-P_0)x,(I-P_0)y}$ are carried by $[g,\\infty)$. Spectral measures and a projection-valued spectral resolution are not assumptions of this statement.",
+          "uses": [
+            "1.3",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qsmx-gaussian-ground-correlation-filter",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $\\mathcal A$ be a unital complex $C^*$-algebra with a strongly continuous automorphism group $\\alpha_t$. Let $\\pi:\\mathcal A\\to\\mathcal B(\\mathcal H)$ be a contractive unital $*$-representation on a separable Hilbert space, with linear-first inner product, and let $\\Omega$ be a unit vector. Suppose a strongly continuous unitary group $U_t$ implements $\\pi(\\alpha_t(A))=U_t\\pi(A)U_t^*$, fixes $\\Omega$, and has positive self-adjoint generator $iK$ satisfying\n\n$$\\ker K=\\mathbb C\\Omega,\\qquad \\sigma(K)\\subseteq\\{0\\}\\cup[g,\\infty),\\qquad g>0.$$\n\nWrite $\\omega(A)=\\langle\\pi(A)\\Omega,\\Omega\\rangle$. Let $A,B\\in\\mathcal A$ commute, put $f(t)=\\omega([A,\\alpha_t(B)])$, and suppose $|f(t)|\\le L|t|$ for $|t|\\le\\eta$, for some finite $L$ and $\\eta>0$. For every $q>0$, the scalar integral\n\n$$I_q(A,B):=\\int_{\\mathbb R}\\frac{e^{-qt^2}}{2\\pi it}\\,f(t)\\,dt$$\n\nis absolutely convergent, with any value assigned to its integrand at $t=0$, and satisfies\n\n$$\\left|\\omega(AB)-\\omega(A)\\omega(B)-I_q(A,B)\\right|\\le\\|A\\|\\,\\|B\\|e^{-g^2/(4q)}.$$\n\nThe gap is that of this infinite- or finite-dimensional representation; no finite-volume approximating gaps are assumed.",
+          "uses": [
+            "1.3",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-orthogonal-decomposition-by-a-closed-subspace",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $M$ be a closed linear subspace of a real or complex Hilbert space $H$. Then every $x\\in H$ has a unique decomposition\n\n$$x=m+n,\\qquad m\\in M,\\quad n\\in M^\\perp ,$$\n\nso that $H=M\\oplus M^\\perp$ as a direct sum of the subspace $M$ and its orthogonal complement.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-unbounded-adjoint-is-well-defined-and-closed",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. For a densely defined linear operator $T$ on $H$ the\nadjoint $T^*$ is well defined and linear with linear domain $D(T^*)$; $T^*$ is\nclosed; for every $z\\in\\mathbb C$\n$$\\operatorname{ran}(T-z)^\\perp=\\ker(T^*-\\overline z),$$\nand if $S\\subseteq T$ and both are densely defined, then $T^*\\subseteq S^*$.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice (The Axiom of Countable Choice ($\\mathrm{AC}_\\omega$)). Let\n$U,V \\subseteq \\mathbb R^n$ be open and let $T : U \\to V$ be a\n$C^1$ diffeomorphism. For every nonnegative Lebesgue measurable\n$f : V \\to [0,\\infty]$,\n$$ \\int_V f(y)\\,d\\lambda_n(y) = \\int_U f(T(x))\\,|\\det DT(x)|\\,d\\lambda_n(x). $$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-derivative-of-exponential",
+          "source_section": "Statement",
+          "quote": "The real exponential function is $C^\\infty$, and for every $m\\in\\mathbb N$,\n$$\\exp^{(m)}=\\exp.$$\nIn particular $(\\exp)'=\\exp$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-fundamental-theorem-of-calculus-for-banach-valued-continuous-curves",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice ([[def-countable-choice]]) for the Lebesgue-measure interfaces. Let $X$ be a real or complex Banach space, let $a<b$, and let $f:[a,b]\\to X$ be continuous. Differentiation uses the underlying real structure. Then $G(t):=\\int_a^t f(s)\\,ds$ is differentiable on $(a,b)$ and has the corresponding one-sided derivatives at $a,b$, with $G'(t)=f(t)$, and this derivative extends continuously to $[a,b]$. Consequently, if $\\varphi:[a,b]\\to X$ is continuous, differentiable on $(a,b)$ with $\\varphi'$ continuous on $(a,b)$ and extendable to a continuous $X$-valued function on $[a,b]$, then $\\int_a^b\\varphi'(s)\\,ds=\\varphi(b)-\\varphi(a)$. The Bochner integral here is the one of [[def-bochner-integrable-function]]; the identities also hold for continuous curves on $[0,\\infty)$ restricted to compact subintervals.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ (Continuity of $f : A \\to \\mathbb{R}$ at a point of $A$ and on $A$: the $\\varepsilon$-$\\delta$ condition, its agreement with $\\lim_{x \\to c} f(x) = f(c)$ at a limit point, and continuity at an isolated point, Intervals of $\\mathbb{R}$: the nine order-convex forms, nondegeneracy, and length) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n(The derivative $f'(c) = \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c}$ of $f : A \\to \\mathbb{R}$ at a point $c \\in A$ that is a limit point of $A$, and differentiability on a set). Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$\n\nEquivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which\n$f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals\nthe average rate of change across the whole interval.\n\n**Continuity on the closed interval cannot be dropped.** Differentiability at\nevery point of $(a,b)$ alone does not suffice: a function on $[0,1]$,\ndifferentiable at every point of $(0,1)$ with derivative constantly $1$, for\nwhich no $c$ works, is exhibited later on this page as a false statement, and\nthe companion page works the same witness out in full.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "A cyclic representation of the spin algebra is separable. Indeed, finite tuples of the countable lattice enumerate its finite subsets, and rational real/imaginary entries form a countable dense family in each finite local matrix algebra. Countable Choice permits their countable union. Density follows, for a $D\\times D$ matrix, from $\\|T\\|\\le D\\max_{i,j}|T_{ij}|$, obtained by finite Cauchy–Schwarz. The resulting countable family is dense in the completion, and its vectors $\\pi(A)\\Omega$ are dense in the cyclic Hilbert space by contractivity. The cyclic representation supplied by [F3] has the same state pairings as any given cyclic representation: the map $[A]\\mapsto\\pi(A)\\Omega$ preserves $\\langle[A],[B]\\rangle=\\omega(B^*A)$ and extends by density to a unitary. Thus the chosen cyclic ground representation is a separable realization of the actual GNS state, with no extra representation hypothesis.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "We verify the advertised finite-range instance of the commutator premise. If $\\Phi$ has range $R$ and per-site norm bound $\\kappa$, a pair separated by more than $R$ contributes no interaction term, while for a pair of distance at most $R$ the numerator of the weighted norm is at most $\\kappa$. Hence $\\|\\Phi\\|_{F_a}\\le\\kappa/F_a(R)<\\infty$. The uniform finite-volume bound [F2] passes to the thermodynamic limit for each local $A,B$ and fixed $t$, by norm continuity of commutators. The group is isometric, so $\\|[A,\\alpha_t(B)]\\|=\\|[\\alpha_{-t}(A),B]\\|$, matching exactly the supplier's time/support convention. This establishes the stated constants without replacing a general infinite-volume gap by a finite-volume gap.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "step": "1.3",
+          "claim": "The cyclic restriction in the ground-state definition preserves positive energy. Let $\\mathcal L=\\overline{\\pi(\\mathcal A)\\Omega}$ in a ground representation. Covariance and $U_t\\Omega=\\Omega$ imply that $U_t$ and $U_{-t}$ preserve $\\mathcal L$; its orthogonal projection commutes with $U_t$. For $x\\in D(K)$, difference quotients show that this projection preserves $D(K)$ and commutes with $K$. The generator domain inside $\\mathcal L$ is dense: the vectors $h^{-1}\\int_0^hU_tx\\,dt$ lie in it and tend to $x$ for $x\\in\\mathcal L$, as their difference quotients give $iK$ equal to $(U_hx-x)/h$. The restriction is self-adjoint because $K\\pm i$ are onto, their bounded inverses preserve $\\mathcal L$ by the commuting projection, and the restricted symmetric operator has both ranges onto; directly, if $y$ is in its adjoint domain, solve $(K+i)x=(K_{\\mathcal L}^*+i)y$ in $\\mathcal L$, and the zero kernel of $K_{\\mathcal L}^*+i$ forces $x=y$. It is positive by restriction. More generally, for every $z$ in the resolvent of $K$, commutation of the projection with $K$ on its domain implies commutation with $(K-z)^{-1}$: apply $(K-z)$ and its injectivity to the two candidate images. This inverse therefore restricts to the inverse on $\\mathcal L$, so $\\sigma(K_{\\mathcal L})\\subseteq\\sigma(K)$ and the spectral gap is inherited, as is a simple ground kernel. The resolvent surjectivity follows from the self-adjoint closed-range estimate exactly as in the spectral-measure helper. Thus the definition using a possibly noncyclic representation agrees with its cyclic restriction, without a Stone or spectral-existence theorem.",
+          "inputs": [
+            "F4",
+            "F5",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Let $P_0$ be the ground-kernel projection in the separable representation. A unit vector $\\psi\\in\\ker K$ satisfies $U_t\\psi=\\psi$, since its orbit derivative is $iU_tK\\psi=0$. Its vector state $\\eta_\\psi(A)=\\langle\\pi(A)\\psi,\\psi\\rangle$ is a positive-energy ground state using the same representation; step 1.3 also supplies its cyclic version if desired. Uniqueness gives $\\eta_\\psi=\\omega$. Scaling and polarization inside $\\ker K$ therefore yield $P_0\\pi(A)P_0=\\omega(A)P_0$ for every $A$. If $\\psi\\in\\ker K$ is orthogonal to $\\Omega$, this identity implies $\\langle\\pi(A)\\Omega,\\psi\\rangle=0$ for every $A$. Cyclicity forces $\\psi=0$. Since the fixed vector $\\Omega$ has zero orbit derivative, $\\Omega\\in D(K)$ and $K\\Omega=0$, so we have $\\ker K=\\mathbb C\\Omega$. The alternative hypothesis stated in the theorem supplies this directly and needs no uniqueness argument.",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.1",
+            "step 1.3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "step": "2.2",
+          "claim": "Put $N=\\|A\\|\\|B\\|$ and $f(t)=\\omega([A,\\alpha_t(B)])$. The displayed Lieb–Robinson premise, $F_a(s)\\le e^{-as}$ and $d_\\infty(x,y)\\ge r$ give $$|f(t)|\\le\\frac{2N}{C}|X||Y|e^{-ar}(e^{v|t|}-1),\\qquad |f(t)|\\le2N.$$ The first bound is $O(t)$ at zero, including $v=0$. The local observables commute by [F1], so all time-integral hypotheses in [F4] hold. The same estimates apply to the finite-range instance justified in step 1.2.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "step 1.2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Apply [F4] using step 2.1. For any $q,\\tau>0$, split its absolutely convergent integral at $|t|=\\tau$. Step 2.2 gives the short-time bound $$\\frac{2N|X||Y|}{\\pi C}e^{-ar}\\int_0^\\tau\\frac{e^{vt}-1}{t}dt\\le\\frac{2N|X||Y|}{\\pi C}e^{-ar+v\\tau},$$ by [F6], because $(e^{vt}-1)/t\\le ve^{vt}$ and $e^{v\\tau}-1\\le e^{v\\tau}$, with zero left side when $v=0$. On the long-time part the trivial bound gives $$\\frac{2N}{\\pi}\\int_\\tau^\\infty\\frac{e^{-qt^2}}t dt=\\frac N\\pi\\int_{q\\tau^2}^\\infty\\frac{e^{-u}}u du\\le\\frac{N}{\\pi q\\tau^2}e^{-q\\tau^2}.$$ Adding the filter error $Ne^{-g^2/(4q)}$ bounds the connected correlation. These estimates use only the supplied dynamics and its infinite-volume ground representation.",
+          "inputs": [
+            "F4",
+            "F6",
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "Choose $\\tau=ar/(v+g/2)$ and $q=g/(2\\tau)$. They are positive for $r\\ge1$ and $g,a>0$, even when $v=0$. Then $$ar-v\\tau=q\\tau^2=\\frac{g^2}{4q}=\\frac{ag}{2v+g}r=\\mu r,\\qquad \\frac1{q\\tau^2}=\\frac{2v+g}{agr}.$$ Substitution into step 3.1 proves the displayed bound. Zero observables give $N=0$ and require no division by $N$. The independent finite-volume band multiplicity and transport statements on this page are unchanged; this proof adds no claim that a degenerate gapped state has ordinary connected clustering. The clock conversion $g=\\gamma/\\hbar$ gives exactly the units in the Statement.",
+          "inputs": [
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement requires finite nonempty disjoint supports and r≥1; step 4.1 separately permits zero observables."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.2 includes v=0, step 3.1 makes its short-time term zero, and step 4.1 treats N=0 without division."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 4.1 applies at r=1; step 2.1 proves the normalized ground vector spans the kernel."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 derives a simple kernel from uniqueness; the alternative Statement explicitly assumes it. A degenerate gap alone is not used."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 treats t=0 through the O(t) filter and both infinite tails; step 4.1 keeps positive q,τ when v=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 constructs a countable dense cyclic realization under CC, and steps 1.3 and 2.1 use closed-subspace projections with their CC supplier."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "thm-qsmx-gapped-ground-state-clustering: the public Statement is a forward construction/estimate, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "thm-qsmx-gapped-ground-state-clustering: no reverse characterization is asserted; the hypotheses are sufficient conditions only."
+        }
+      ]
+    },
+    "cex-qsmx-degenerate-gap-not-clustering": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "lem-qsm-finite-matrix-cstar-and-state-duality",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space, $D=\\dim H\\ge1$, with inner product linear in its first argument. With composition, Hilbert adjoint, identity and the induced operator norm, $\\mathcal B(H)$ is a nonzero unital complex C*-algebra in the sense of [[def-c-star-algebra]]. In particular it is complete, $\\|AB\\|\\le\\|A\\|\\|B\\|$, $\\|A^*A\\|=\\|A\\|^2$, $\\|A^*\\|=\\|A\\|$ and $\\|I\\|=1$. The matrix $\\|A\\|^2I-A^*A$ is positive semidefinite and has a positive square root in $\\mathcal B(H)$.\n\nEvery complex-linear functional $\\omega:\\mathcal B(H)\\to\\mathbb C$ that is positive, meaning $\\omega(B^*B)\\ge0$ for all $B$, has a unique positive semidefinite matrix $\\rho$ such that $\\omega(A)=\\operatorname{Tr}(\\rho A)$ for all $A$. It is bounded and satisfies\n\n$$|\\omega(A)|\\le\\operatorname{Tr}(\\rho)\\|A\\|\\quad(A\\in\\mathcal B(H)),\\qquad \\|\\omega\\|=\\operatorname{Tr}(\\rho)=\\omega(I).$$\n\nConsequently the canonical states of [[def-state-on-a-c-star-algebra]] are exactly the trace pairings of density operators of [[def-qc-density-operator]]; for a positive functional, normalization $\\omega(I)=1$ is equivalent to norm one. The result includes zero positive functionals, nonfaithful densities and $D=1$; it makes no infinite-dimensional density representation assertion.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qsm-local-spin-algebras",
+          "source_section": "Definition",
+          "quote": "Fix an integer dimension $d\\ge1$, the countable site set $\\Gamma=\\mathbb{Z}^d$ of [[lem-qsm-integer-lattice-countable]], and one finite spin dimension $q\\ge1$, where $q$ is a positive integer (so $q\\in\\mathbb N$ and $1\\le q$, by [[def-natural-numbers]] and [[def-nat-order]]). For $n\\in\\mathbb Z$, define $|n|=n$ if $0\\le n$ and $|n|=-n$ if $n<0$, using the integer order and additive inverse of [[def-int-order]] and [[def-int-operations]]. Totality and compatibility of the integer order with addition ([[thm-int-ordered-ring]]) give $0\\le|n|$ and $-|n|\\le n\\le|n|$. Adding these bounds for $m,n\\in\\mathbb Z$ gives $|m+n|\\le|m|+|n|$. Equip $\\Gamma$ with the max-coordinate metric $d_\\infty(x,y)=\\max_{1\\le r\\le d}|x_r-y_r|$; the maximum exists because the coordinate set is finite and nonempty, symmetry and separation hold coordinatewise, and the absolute-value triangle inequality gives $|x_r-z_r|\\le|x_r-y_r|+|y_r-z_r|$ for every coordinate, hence the triangle inequality for $d_\\infty$. A **finite region** is a finite subset $\\Lambda\\subseteq\\Gamma$; its cardinality is $|\\Lambda|$ ([[def-finite-cardinality]]).\n\nFor a finite region $\\Lambda$, let $S_\\Lambda=\\{1,\\ldots,q\\}^{\\Lambda}$ be the set of spin configurations on $\\Lambda$. Induction on $|\\Lambda|$ gives $|S_\\Lambda|=q^{|\\Lambda|}$: the empty region has one configuration, and for $x\\in\\Lambda$ the restriction map $s\\mapsto(s|_{\\Lambda\\setminus\\{x\\}},s(x))$ is a bijection $S_\\Lambda\\to S_{\\Lambda\\setminus\\{x\\}}\\times\\{1,\\ldots,q\\}$, so adjoining one site multiplies the number of configurations by $q$, according to the recursion defining natural-number powers in [[def-nat-power]]. Let $\\mathcal H_\\Lambda$ be the vector space of functions $f:S_\\Lambda\\to\\mathbb C$ with inner product $\\langle f,g\\rangle=\\sum_{s\\in S_\\Lambda}f(s)\\overline{g(s)}$. For each $s\\in S_\\Lambda$, let $e_s$ be the indicator function of $\\{s\\}$; these vectors form an orthonormal basis. For $\\Lambda=\\varnothing$, $S_\\Lambda$ is a singleton and $\\mathcal H_\\Lambda\\cong\\mathbb C$. The **local spin matrix algebra** is\n\n$$\\mathcal A_\\Lambda:=\\mathcal B(\\mathcal H_\\Lambda)\\cong M_{q^{|\\Lambda|}}(\\mathbb C),$$\n\nHere $\\mathcal B(\\mathcal H_\\Lambda)$ denotes all complex-linear endomorphisms of the finite-dimensional Hilbert space; they are bounded. The algebra has composition, Hilbert adjoint, identity $I_\\Lambda$, and induced operator norm\n\n$$\\|T\\|:=\\sup_{\\|\\xi\\|=1}\\|T\\xi\\|.$$\n\nThe **finite local trace** is $\\operatorname{Tr}_\\Lambda(T):=\\sum_{s\\in S_\\Lambda}\\langle T e_s,e_s\\rangle$ in the displayed configuration basis $(e_s)$. This is the usual finite-matrix trace; basis independence and its cyclic/unitary identities are supplied by [[lem-qsm-matrix-state-calculus]].\n\nIf $\\Lambda\\subseteq\\Lambda'$, restriction of configurations gives the canonical factorization $\\mathcal H_{\\Lambda'}\\cong\\mathcal H_\\Lambda\\otimes\\mathcal H_{\\Lambda'\\setminus\\Lambda}$, with sites ordered lexicographically. The **factor inclusion** is the unital $*$-homomorphism $\\iota_{\\Lambda,\\Lambda'}:\\mathcal A_\\Lambda\\to\\mathcal A_{\\Lambda'}$ given by $T\\mapsto T\\otimes I_{\\Lambda'\\setminus\\Lambda}$. A **localization region** for $T$ is any finite $\\Lambda$ for which $T\\in\\mathcal A_\\Lambda$ under these inclusions; a localization region need not be minimal.\n\nThe ordinary operator norm makes each local matrix algebra a nonzero unital complete C*-algebra, and every positive normalized complex-linear functional is uniquely a trace pairing with a density matrix, by [[lem-qsm-finite-matrix-cstar-and-state-duality]]. This includes the empty region, whose Hilbert space is $\\mathbb C$. This definition does not posit an infinite-dimensional tensor-product Hilbert space.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qsm-quasilocal-spin-algebra",
+          "source_section": "Definition",
+          "quote": "Use the finite local matrix algebras and isometric factor inclusions of [[def-qsm-local-spin-algebras]] and [[lem-qsm-local-spin-inclusions-isometric]]. Identify $A\\in\\mathcal A_\\Lambda$ with its image in every larger finite-region algebra. The directed union\n\n$$\\mathcal A_{\\mathrm{loc}}:=\\bigcup_{\\Lambda\\subseteq\\Gamma,\\ |\\Lambda|<\\infty}\\mathcal A_\\Lambda$$\n\nis the algebra of **strictly local observables**. Its norm is $\\|A\\|=\\|A\\|_{\\mathcal A_\\Lambda}$ for any finite localization region $\\Lambda$ of $A$; isometric inclusions make this independent of the chosen region. The **quasi-local spin algebra** is the norm completion\n\n$$\\mathcal A:=\\overline{\\mathcal A_{\\mathrm{loc}}}^{\\,\\|\\cdot\\|}.$$\n\nThe C*-algebra structure on this completion has product and adjoint extended continuously from the finite local matrix algebras. Countable Choice is assumed for the published existence theorem for metric completions; [[lem-qsm-quasilocal-completion]] supplies the full extension argument using the finite C*-identity of [[lem-qsm-finite-matrix-cstar-and-state-duality]].\n\n**No global Hilbert tensor product is selected.** “Quasi-local” means norm completion of the directed algebra of finite-region observables; it does not mean a chosen representation as operators on an infinite tensor-product Hilbert space. A local operator $A\\in\\mathcal A_\\Lambda$ may have more than one localization region. Disjoint finite local factors commute in their common finite tensor algebra.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-qsm-quasilocal-completion",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice ([[def-countable-choice]]) for the Cauchy-sequence completion. For the local spin system of [[def-qsm-local-spin-algebras]], the normed $*$-algebra $\\mathcal A_{\\mathrm{loc}}$ and its completion $\\mathcal A$ of [[def-qsm-quasilocal-spin-algebra]] are well defined; $\\mathcal A$ is a unital complex C*-algebra and $\\mathcal A_{\\mathrm{loc}}$ is norm dense in it. If $A\\in\\mathcal A_\\Lambda$ and $B\\in\\mathcal A_\\Delta$ for disjoint finite regions $\\Lambda,\\Delta$, then $AB=BA$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qsm-bounded-finite-range-interaction",
+          "source_section": "Definition",
+          "quote": "Use the lattice $\\Gamma=\\mathbb Z^d$, $d\\ge1$, the finite spin dimension $q\\ge1$, the local matrix algebras $\\mathcal A_\\Lambda$, and the max-coordinate metric $d_\\infty$ of [[def-qsm-local-spin-algebras]]. For finite nonempty $Z\\subset\\Gamma$, write $\\operatorname{diam}_\\infty Z=\\max_{x,y\\in Z}d_\\infty(x,y)$; for finite nonempty $X,Y\\subset\\Gamma$, write $\\operatorname{dist}_\\infty(X,Y)=\\min_{x\\in X,y\\in Y}d_\\infty(x,y)$.\n\nA **uniformly bounded finite-range interaction** is a family $\\Phi(Z)\\in\\mathcal A_Z$, indexed by finite nonempty $Z\\subset\\Gamma$, such that $\\Phi(Z)^*=\\Phi(Z)$ and there are an integer $M\\ge1$, a finite $R\\ge0$, and $\\kappa<\\infty$ satisfying\n\n$$\\Phi(Z)=0\\quad\\text{if }|Z|>M\\text{ or }\\operatorname{diam}_\\infty Z>R,\\qquad\\kappa:=\\sup_{x\\in\\Gamma}\\sum_{Z\\ni x}\\|\\Phi(Z)\\|<\\infty.$$\n\nThe norm in this sum is the operator norm in the local matrix algebra $\\mathcal A_Z$. If a model lists several terms with the same support, first add them in that local algebra; the resulting single operator is $\\Phi(Z)$, and $\\kappa$ uses its norm. Thus no multiplicity is implicit.\n\nFor a finite region $\\Lambda\\subset\\Gamma$, define the **free-boundary finite-volume Hamiltonian** by summing only terms whose complete support lies inside $\\Lambda$; terms meeting $\\Lambda$ but extending outside it are omitted:\n\n$$H_\\Lambda:=\\sum_{\\varnothing\\ne Z\\subseteq\\Lambda}\\Phi(Z)\\in\\mathcal A_\\Lambda.$$\n\nIt is a finite sum of self-adjoint matrices. For a fixed scale $\\hbar>0$ and any finite $\\Omega\\supseteq\\Lambda$, embed $H_\\Lambda$ in $\\mathcal A_\\Omega$ by the canonical factor inclusion and define\n\n$$\\alpha_t^\\Lambda(A):=e^{itH_\\Lambda/\\hbar}Ae^{-itH_\\Lambda/\\hbar}\\qquad(A\\in\\mathcal A_\\Omega,\\ t\\in\\mathbb R).$$\n\nThese actions are compatible as $\\Omega$ increases, because the extra tensor factors carry the identity. On $\\mathcal A_\\Lambda$ this is the ordinary finite matrix Heisenberg dynamics.\n\nIn physical SI bookkeeping, when $\\Phi(Z)$ is interpreted as an energy, $\\Phi(Z)$, $\\kappa$, and $H_\\Lambda$ have units J, $t$ has units s, and $\\hbar$ is the adopted reduced Planck constant with units J s. The mathematics below uses only $\\hbar>0$ and asserts no measured parameter value.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qsm-finite-range-spin-dynamics",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and the finite-matrix C*-identity condition [A1] below. Let $\\mathcal A_{\\mathrm{loc}}=\\bigcup_{\\Lambda\\subset\\mathbb Z^d,\\ |\\Lambda|<\\infty}\\mathcal A_\\Lambda$ and let $\\mathcal A$ be its norm completion as in [[def-qsm-quasilocal-spin-algebra]]. These assumptions give the conditional unital C*-algebra structure supplied by [[lem-qsm-quasilocal-completion]]. Let $\\Phi$ be a uniformly bounded finite-range interaction of [[def-qsm-bounded-finite-range-interaction]].\n\nFor any increasing finite exhaustion $(\\Lambda_n)_{n\\ge1}$ in the convention of [[lem-qsm-boundary-dynamics-cauchy]]—that is, each $\\Lambda_n$ is finite, $\\Lambda_n\\subseteq\\Lambda_{n+1}$, and $\\bigcup_{n\\ge1}\\Lambda_n=\\mathbb Z^d$—the free-boundary finite-volume maps $\\alpha_t^{\\Lambda_n}$ converge in norm on every local observable, uniformly for $t$ in compact intervals. Their limit is independent of the exhaustion and extends uniquely to a strongly continuous one-parameter group $\\alpha_t$ of maps $\\alpha_t:\\mathcal A\\to\\mathcal A$. Here “one-parameter group” means $\\alpha_0=\\operatorname{id}_{\\mathcal A}$ and $\\alpha_{s+t}=\\alpha_s\\circ\\alpha_t$ for all $s,t\\in\\mathbb R$. Each $\\alpha_t$ is a bijective complex-linear unital $*$-homomorphism (a $*$-automorphism), with inverse $\\alpha_{-t}$. Strong continuity means $t\\mapsto\\alpha_t(A)$ is norm-continuous for every fixed $A\\in\\mathcal A$. This result does not assert that an infinite-volume Hamiltonian is an element of $\\mathcal A$ or a bounded operator on a preselected infinite tensor-product Hilbert space.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-completion-of-an-inner-product-space-is-hilbert",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $X$ be a real or complex inner-product space and let $(\\widehat X,\\kappa)$ be its norm completion ([[def-completion-of-a-normed-space]]). Then $\\widehat X$ carries a unique inner product that extends the given one along $\\kappa$ and whose induced length is the completion norm; with it $\\widehat X$ is a Hilbert space, and the extension is unique among inner products that extend the given pairing and induce the completion norm.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-bounded-operator-space-is-banach",
+          "source_section": "Statement",
+          "quote": "Let $X$ and $Y$ be normed spaces over the same scalar field. If $Y$ is Banach,\nthen $\\mathcal B(X,Y)$ is Banach for the operator norm.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. All functions below have domain $X$. Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-complex-exponential-is-entire-with-derivative-itself",
+          "source_section": "Statement",
+          "quote": "The complex exponential is entire, and\n\n$$ \\exp'(z)=\\exp z $$\n\nfor every $z\\in\\mathbb C$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-fundamental-theorem-of-calculus-for-banach-valued-continuous-curves",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice ([[def-countable-choice]]) for the Lebesgue-measure interfaces. Let $X$ be a real or complex Banach space, let $a<b$, and let $f:[a,b]\\to X$ be continuous. Differentiation uses the underlying real structure. Then $G(t):=\\int_a^t f(s)\\,ds$ is differentiable on $(a,b)$ and has the corresponding one-sided derivatives at $a,b$, with $G'(t)=f(t)$, and this derivative extends continuously to $[a,b]$. Consequently, if $\\varphi:[a,b]\\to X$ is continuous, differentiable on $(a,b)$ with $\\varphi'$ continuous on $(a,b)$ and extendable to a continuous $X$-valued function on $[a,b]$, then $\\int_a^b\\varphi'(s)\\,ds=\\varphi(b)-\\varphi(a)$. The Bochner integral here is the one of [[def-bochner-integrable-function]]; the identities also hold for continuous curves on $[0,\\infty)$ restricted to compact subintervals.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Each interaction term is an orthogonal projection of norm one. The interaction is self-adjoint, has support size two, range one and per-site sum $\\kappa=2$. It satisfies the finite-range hypotheses in [F2], so its thermodynamic dynamics $\\alpha_t$ exists. This conclusion requires no choice of a finite-volume ground state.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "Let $\\mathcal F$ be the set of finite subsets of $\\mathbb Z$. It is countable under [A1], by enumerating finite tuples and taking their ranges. Complete the finitely supported complex functions on $\\{+1,-1\\}\\times\\mathcal F$ for their linear-first sum inner product, obtaining $\\mathcal H=\\ell^2(\\{+1,-1\\}\\times\\mathcal F)$ by [F3]. Denote its orthonormal basis by $|\\sigma,F\\rangle$. Define $$\\pi(Z_j)|\\sigma,F\\rangle=\\sigma(-1)^{\\mathbf1_F(j)}|\\sigma,F\\rangle,\\qquad \\pi(X_j)|\\sigma,F\\rangle=|\\sigma,F\\triangle\\{j\\}\\rangle.$$ Here $X=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix}$, and $\\triangle$ denotes symmetric difference. These operators are self-adjoint unitaries, anticommute at the same site and commute at distinct sites. Thus they give the usual local Pauli matrix representations, including $Y_j=iX_jZ_j$. On a finite region $\\Lambda$, decompose $\\mathcal H$ into the subspaces with fixed $\\sigma$ and fixed finite $F\\setminus\\Lambda$; each has the $2^{|\\Lambda|}$ basis vectors indexed by $F\\cap\\Lambda$ and is a standard matrix representation of $\\mathcal A_\\Lambda$. Therefore $\\|\\pi(A)\\|=\\|A\\|$ locally. These compatible representations extend by norm continuity and [F3] to a unital contractive $*$-representation of $\\mathcal A$.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "For $F\\in\\mathcal F$, put $w(F)=|\\{j\\in\\mathbb Z:\\mathbf1_F(j)\\ne\\mathbf1_F(j+1)\\}|$. This number is finite, is zero exactly when $F=\\varnothing$, and is at least two otherwise: a nonempty finite set has both a left and a right boundary. More precisely it is twice the number of finite interval components of $F$. Define the diagonal operator $$K|\\sigma,F\\rangle=w(F)|\\sigma,F\\rangle,\\qquad D(K)=\\left\\{\\xi:\\sum_{\\sigma,F}w(F)^2|\\xi_{\\sigma,F}|^2<\\infty\\right\\}.$$ Finite-support vectors make the domain dense and the quadratic form is nonnegative. If $\\xi$ lies in the adjoint domain with $K^*\\xi=\\zeta$, testing on each basis vector gives $\\zeta_{\\sigma,F}=w(F)\\xi_{\\sigma,F}$, so $\\xi\\in D(K)$. Conversely that square-summability condition makes the adjoint identity hold by sum Cauchy–Schwarz. Thus $K=K^*$ on exactly this domain.",
+          "inputs": [
+            "step 1.2",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Set $U_t|\\sigma,F\\rangle=e^{itw(F)}|\\sigma,F\\rangle$. It is a unitary group. For each $\\xi$, dominated convergence with majorant $4|\\xi_{\\sigma,F}|^2$ proves strong continuity. For $\\xi\\in D(K)$, $|e^{itw}-1|/|t|\\le w$ and [F4] show its norm derivative at zero is $iK\\xi$. Conversely, if that norm derivative exists, its coordinates must be $iw(F)\\xi_{\\sigma,F}$, whose square sum is finite, so the exact generator domain is $D(K)$. The kernel has basis $|+,\\varnothing\\rangle,|-,\\varnothing\\rangle$. Every other diagonal energy is at least two and energy two occurs for a singleton $F$. For $0<\\lambda<2$, the diagonal inverse $(w(F)-\\lambda)^{-1}$ is bounded by $\\max(1/\\lambda,1/(2-\\lambda))$ and maps into $D(K)$ since $w/(w-\\lambda)$ is bounded. The same diagonal argument excludes negative real and nonreal spectrum. Consequently $\\sigma(K)\\subseteq\\{0\\}\\cup[2,\\infty)$, with excitation gap exactly two.",
+          "inputs": [
+            "F4",
+            "F5",
+            "step 2.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "The representation is covariant for the actual dynamics in step 1.1. Every interaction term is diagonal in the Pauli $Z$ basis, and these terms commute. Finite-volume conjugation of a local observable therefore depends only on the finitely many bonds meeting its support. In particular the evolution of $Z_j$ is constant. On $X_j|\\sigma,F\\rangle$ the phase of $U_t\\pi(X_j)U_t^*$ is $e^{it(w(F\\triangle\\{j\\})-w(F))}$; the energy difference involves only the two bonds adjacent to $j$. It is exactly the phase from every finite-volume Hamiltonian containing these bonds. The local Pauli matrices generate every finite matrix algebra, so the covariance identity holds for every local $A$, and the norm completion gives $$\\pi(\\alpha_t(A))=U_t\\pi(A)U_t^*\\qquad(A\\in\\mathcal A).$$ This verifies the relation to the thermodynamic dynamics rather than choosing an unrelated diagonal operator.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "step": "5.1",
+          "claim": "Let $\\Omega=(|+,\\varnothing\\rangle+|-,\\varnothing\\rangle)/\\sqrt2$. It is a unit zero-energy vector fixed by $U_t$, so its state $\\omega(A)=\\langle\\pi(A)\\Omega,\\Omega\\rangle$ is a positive-energy ground state. Its finite restrictions have density $$\\rho_\\Lambda=\\tfrac12|+\\cdots+\\rangle\\langle+\\cdots+|+\\tfrac12|-\\cdots-\\rangle\\langle-\\cdots-|,$$ with the empty-region density one; these are the consistent equal mixture of the two product phases. This representation is cyclic. Given finite $F$ and $\\sigma\\in\\{+1,-1\\}$, choose $j\\notin F$ and let $P_{\\sigma,j}=(I+\\sigma Z_j)/2$. Then $$\\sqrt2\\,\\pi\\left(\\prod_{i\\in F}X_i\\,P_{\\sigma,j}\\right)\\Omega=|\\sigma,F\\rangle.$$ Thus every displayed basis vector is generated by a local observable, proving cyclicity and identifying the gap in step 3.1 as a gap of the state's own ground representation.",
+          "inputs": [
+            "F1",
+            "step 1.2",
+            "step 3.1",
+            "step 4.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "step": "6.1",
+          "claim": "In the two product vectors $Z_i$ has respective expectations $+1$ and $-1$, whereas $Z_iZ_j$ has expectation one in each for $i\\ne j$. Hence the equal mixture has $\\omega(Z_j)=0$ and $\\omega(Z_iZ_j)=1$. For every integer $r\\ge1$ its connected $Z_0,Z_r$ correlation is therefore one. No finite $C_0$ and positive $\\mu$ can satisfy $1\\le C_0e^{-\\mu r}$ for all $r$. The two product vector states are distinct positive-energy ground states, so uniqueness fails exactly where needed. This gives a gapped degenerate counterexample without altering any assertion about transport of an entire gapped ground band.",
+          "inputs": [
+            "step 3.1",
+            "step 5.1",
+            "algebra",
+            "discharge-contradiction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 proves w(F)=0 exactly for F=empty; step 5.1 includes the empty-region density one."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1 identify the two zero-energy basis vectors; step 6.1 gives zero one-site expectations and nonzero connected correlations."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 computes each bond projection norm one; step 6.1 gives correlation exactly one for every r≥1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 3.1 and 5.1 prove the two-dimensional ground kernel and cyclicity of the actual mixture representation, retaining the excitation gap two."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 proves the resolvent on 0<λ<2 and an eigenvalue at 2; step 6.1 includes r=1 and arbitrarily large integer r."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 enumerates finite subsets and uses the CC Hilbert completion; step 5.1 chooses one site outside a given finite set, with no infinite product-state selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "cex-qsmx-degenerate-gap-not-clustering: the public Statement refuted is a false implication refuted by the explicit Ising model, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "cex-qsmx-degenerate-gap-not-clustering: no reverse characterization is asserted; the counterexample disproves sufficiency of a degenerate gap."
+        }
+      ]
+    }
+  },
+  "owner_note": "Research-only proposed entries by same scientific owner /root/qft_green_maps; no independent acceptance or readiness asserted."
+}

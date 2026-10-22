@@ -1,0 +1,784 @@
+{
+  "version": 1,
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "batch": 14,
+  "level": "physics-non-fluid-129-2026-10-21-r2",
+  "scope": [
+    "def-emx-helicity-line-bundle",
+    "pthm-emx-helicity-berry-curvature",
+    "pthm-emx-helicity-rotation-weight",
+    "ex-emx-polarization-latitude-phase",
+    "cex-emx-polarization-gauge-singularity"
+  ],
+  "contracts": {
+    "def-emx-helicity-line-bundle": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "pthm-emx-helicity-projection",
+          "source_section": "Statement",
+          "quote": "For $k\\in\\mathbb R^3\\setminus\\{0\\}$, let $n:=k/|k|$ and let the complex\ntransverse fibre be\n$T_k:=\\{v\\in\\mathbb C^3:\\sum_j k_jv_j=0\\}$. On $\\mathbb C^3$ define\n$C(k)v:=i\\,n\\times v$ and\n$P_T(k)v:=v-n\\sum_j n_jv_j$. Define\n$P_\\sigma(k):=\\tfrac12(P_T(k)+\\sigma C(k))$ for $\\sigma\\in\\{+1,-1\\}$.\nUse the Hermitian product\n$\\langle u,v\\rangle_H:=\\sum_j\\overline{u_j}v_j$. Then $P_T(k)$ is the\northogonal projection onto $T_k$; $C(k)$ is Hermitian, vanishes on the\nlongitudinal line, and satisfies $C(k)^2=P_T(k)$. The restrictions of\n$P_{+1}(k)$ and $P_{-1}(k)$ to $T_k$ are orthogonal rank-one projections with\nsum $P_T(k)$. Their ranges are the two helicity eigenspaces, with eigenvalues\n$+1$ and $-1$ for $C(k)$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-emx-transverse-fourier-field",
+          "source_section": "Definition",
+          "quote": "Here $k$ is a spatial wavevector with units $\\mathrm{m^{-1}}$, $|k|$ is its\nEuclidean norm, $t$ is in seconds, and $i^2=-1$; thus the phase is\ndimensionless and real part is taken componentwise.\nIf $a$ carries units $\\mathrm{T\\,m^4}$, then $A$ carries $\\mathrm{T\\,m}$,\n$E$ carries $\\mathrm{V\\,m^{-1}}$, and $B$ carries $\\mathrm T$. These fields are\nreal and jointly smooth on $\\mathbb R^3\\times\\mathbb R$; at each fixed time\n$A,E,B$ are Schwartz functions of $x$, and their spatial Schwartz seminorms are\nbounded on every compact time interval. They satisfy the smooth source-free\nvacuum Maxwell equations and the Coulomb condition\n$\\operatorname{div}A=0$ with the stated scalar potential $\\varphi=0$. Their\ntotal field energy\n$W(t):=\\lim_{R\\to\\infty}\\int_{[-R,R]^3}u(x,t)\\,d^3x$, with $u$ the vacuum\nenergy density, is finite for every $t$. The amplitudes are a classical Fourier\ndescription; no photon state is defined.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-emx-lorentz-star",
+          "source_section": "Definition",
+          "quote": "Let $V=\\mathbb R^4$ with ordered coframe $e^0=dx^0,e^1=dx^1,e^2=dx^2,e^3=dx^3$, bilinear form $\\eta=\\operatorname{diag}(-1,1,1,1)$, inverse $\\eta^{-1}=\\eta$, and volume form $\\mathrm{vol}_\\eta=e^0\\wedge e^1\\wedge e^2\\wedge e^3$. For $0\\le k\\le4$, give $\\Lambda^kV^*$ the induced bilinear pairing $\\langle\\alpha,\\beta\\rangle_\\eta:=\\frac1{k!}\\alpha_{\\mu_1\\cdots\\mu_k}\\beta^{\\mu_1\\cdots\\mu_k}$, with indices raised by $\\eta^{-1}$. The Lorentzian Hodge star is the unique linear map $\\star_\\eta:\\Lambda^kV^*\\to\\Lambda^{4-k}V^*$ satisfying $\\alpha\\wedge\\star_\\eta\\beta=\\langle\\alpha,\\beta\\rangle_\\eta\\,\\mathrm{vol}_\\eta$ for all $\\alpha,\\beta\\in\\Lambda^kV^*$. For an increasing index set $I\\subseteq\\{0,1,2,3\\}$, write $e^I$ for the corresponding wedge, $I^c$ for its increasing complement, $s(I,I^c)$ for the sign of the concatenation $(I,I^c)$ relative to $(0,1,2,3)$, and $\\epsilon_I:=\\prod_{i\\in I}\\epsilon_i$, where $\\epsilon_0=-1$ and $\\epsilon_1=\\epsilon_2=\\epsilon_3=1$. The equivalent basis formula is $\\star_\\eta e^I=\\epsilon_I s(I,I^c)e^{I^c}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-cross-product-in-r3",
+          "source_section": "Definition",
+          "quote": "For $u=(u_x,u_y,u_z)$ and $v=(v_x,v_y,v_z)$ in $\\mathbb R^3$, define $u\\times v=(u_yv_z-u_zv_y,\\,u_zv_x-u_xv_z,\\,u_xv_y-u_yv_x)$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "$$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-oriented-smooth-manifold-and-oriented-chart",
+          "source_section": "Definition",
+          "quote": "An orientation of an $n$-manifold is a smooth choice of a ray in $\\det T_pM$ for every $p$. For $n>0$, a chart is oriented when its coordinate frame is in that ray. For $n=0$, the datum is a sign at each point; the unique empty frame does not encode both choices.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-smooth-differential-k-form",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a smooth manifold and $k\\ge 0$. A **smooth differential $k$-form**\non $M$ is a smooth section of $\\bigwedge^kT^*M\\to M$. The space of such forms\nis denoted $\\Omega^k(M)$, and $\\Omega^0(M)=C^\\infty(M)$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-wedge-product-of-differential-forms",
+          "source_section": "Definition",
+          "quote": "$$ (\\alpha\\wedge\\beta)_p:=\\alpha_p\\wedge\\beta_p\\in\\operatorname{Alt}^{k+\\ell}(T_pM). $$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-exterior-derivative-by-the-invariant-vector-field-formula",
+          "source_section": "Definition",
+          "quote": "For $\\omega\\in\\Omega^k(M)$, define the candidate $d\\omega$ on smooth vector fields by $$d\\omega(X_0,\\ldots,X_k)=\\sum_i(-1)^iX_i\\omega(X_0,\\widehat X_i,\\ldots,X_k)+\\sum_{i<j}(-1)^{i+j}\\omega([X_i,X_j],X_0,\\widehat X_i,\\widehat X_j,\\ldots,X_k).$$ The next lemma proves that this candidate is a form.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The six graph charts in the Definition are smooth coordinate charts on open hemispheres and cover $S^2$; their square-root transition formulas are smooth on overlaps. The outward tangent orientation ray is smooth by the nonvanishing normal $n$, with ambient spatial orientation fixed in [F3] and orientation-ray convention [F5]. By [F1], each $P_\\sigma(n)$ is a smooth rank-one projection, so each fibre is a complex line. [F2] identifies the physical direction index with a nonzero SI wavevector normalized to unit length. At any $n_0$, choose a fixed $w\\in\\mathbb C^3$ with $P_\\sigma(n_0)w\\ne0$, which exists because the projection has nonzero range. Continuity makes $P_\\sigma(n)w\\ne0$ on a neighborhood of $n_0$, and $P_\\sigma(n)w/\\|P_\\sigma(n)w\\|$ is a smooth unit local section there. This proves local triviality without choosing a frame family over the whole sphere.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "The coordinate vectors satisfy $n\\cdot e_\\theta=n\\cdot e_\\phi=e_\\theta\\cdot e_\\phi=0$, $\\|e_\\theta\\|=\\|e_\\phi\\|=1$, and $n\\times e_\\theta=e_\\phi$, $n\\times e_\\phi=-e_\\theta$, by the coordinate formulas in [F4]. Hence $v_\\sigma^\\dagger v_\\sigma=1$, $P_Tv_\\sigma=v_\\sigma$, and $C_nv_\\sigma=\\sigma v_\\sigma$. Substitution gives $P_\\sigma v_\\sigma=v_\\sigma$, so this is a unit local frame of the stated fibre.",
+          "inputs": [
+            "F1",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "For a smooth section $s$ on a chart, define $\\nabla s:=P_\\sigma d s$. Since $P_\\sigma s=s$, this is again $L_\\sigma$-valued. For every smooth scalar $f$, the product rule gives $\\nabla(fs)=P_\\sigma(df\\,s+f\\,ds)=df\\,s+f\\nabla s$, so $\\nabla$ is a connection on the line bundle. In a unit frame $v$, writing $s=a v$ gives $\\nabla s=(da+a v^\\dagger dv)v=(da-iAa)v$ because $A=i v^\\dagger dv$.",
+          "inputs": [
+            "F1",
+            "F6",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Differentiating $\\langle v,v\\rangle_H=1$ gives $2\\operatorname{Re}(\\sum_j\\overline{v_j}\\,d v_j)=0$, so $A=i\\sum_j\\overline{v_j}\\,d v_j$ is real-valued. Under $v'=e^{i\\chi}v$, direct differentiation gives $v'^\\dagger d v'=i\\,d\\chi+v^\\dagger dv$, hence $A'=i v'^\\dagger d v'=A-d\\chi$. This verifies the declared local gauge transformation and completes the definition of the local connection and curvature conventions.",
+          "inputs": [
+            "given",
+            "F6",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition sums the Hermitian product over j=1,2,3, a fixed nonempty coordinate set. The direction sphere has unit points; step 1.1 constructs a local section at each supplied n0 using its nonzero rank-one range."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition and step 1.1: the direction variable satisfies n dot n=1, so the zero vector is excluded."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition and steps 1.1 and 1.2 give a complex line of rank exactly one and a unit spanning vector; no higher-rank eigenbundle is silently treated by the line connection formula."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1–1.2: every rank-one projector has local frames, including at the coordinate poles where the spherical frame is unavailable."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition restricts the displayed spherical frame to0<theta<pi with a longitude branch. Step 1.1 instead uses graph charts and a nonzero projector image near every direction, so both poles remain in the bundle."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses one witness w at a fixed point to build a local frame and makes no simultaneous selection over S^2."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For each unit direction and helicity sign the smooth rank-one orthogonal projector has local unit frames, including poles via graph charts; A=i v†dv changes to A−dχ under a local phase change. The public claim does not assert a converse characterization; its definitions specify the data and conventions rather than an iff test."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For each unit direction and helicity sign the smooth rank-one orthogonal projector has local unit frames, including poles via graph charts; A=i v†dv changes to A−dχ under a local phase change. The public claim does not assert a converse characterization; its definitions specify the data and conventions rather than an iff test."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "north-pole projector",
+          "status": "checked",
+          "evidence": "At n=e_3, direct substitution gives P_sigma=1/2[[1,-i sigma,0],[i sigma,1,0],[0,0,0]], a smooth rank-one projection for both sigma=+1 and sigma=-1."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-14 author",
+        "notes": "The local frame is a chart choice, not a global section. The line bundle uses the current projector theorem and the fixed (-+++) spatial orientation; no simultaneous choice of frames or quantum position operator is used."
+      },
+      "current_boundary_worksheet": {
+        "proposal": "research/physics-non-fluid-129-2026-10-21-r2-owner-step2-boundary-proposal-6/proposal.json",
+        "source_sha256": "b07518871141d71987a91e0202ec4cb970c0d6971641c7160876dd773aa08f3d",
+        "qualification": "Released complete current source/eight-case semantic worksheet; root transcribed exact current rows. No independent acceptance or finite computation asserted."
+      }
+    },
+    "pthm-emx-helicity-berry-curvature": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-emx-helicity-line-bundle",
+          "source_section": "Definition",
+          "quote": "For $u,v\\in\\mathbb C^3$, extend the real Euclidean dot and right-handed cross products complex-bilinearly, with coordinate formulas\n$$u\\cdot v:=\\sum_{j=1}^3u_jv_j,\\qquad u\\times v:=(u_2v_3-u_3v_2,\\ u_3v_1-u_1v_3,\\ u_1v_2-u_2v_1).$$\nThe dot product in these formulas uses no complex conjugation; it differs from the Hermitian product $\\langle u,v\\rangle_H:=\\sum_{j=1}^3\\overline{u_j}v_j$. Write $\\|z\\|_H:=\\sqrt{\\langle z,z\\rangle_H}$ for the associated nonnegative norm on $\\mathbb C^3$.\n\nLet $S^2:=\\{n\\in\\mathbb R^3:n\\cdot n=1\\}$ with the smooth structure given by the six graph charts solving $n_j=\\pm\\sqrt{1-\\sum_{k\\ne j}n_k^2}$ on the hemispheres $\\pm n_j>0$. Orient it outward using the ordered spatial basis $x^1,x^2,x^3$. Its tangent plane is $T_nS^2=\\{X\\in\\mathbb R^3:n\\cdot X=0\\}$. Physically, $n=k/|k|$ for a nonzero spatial wavevector $k$ in the SI Fourier description, where $k$ has units $\\mathrm{m^{-1}}$; hence $n$ is dimensionless and the radial magnitude is discarded. For $\\sigma\\in\\{+1,-1\\}$, set $C_nz:=i\\,n\\times z$, $P_T(n)z:=z-n(n\\cdot z)$, and $P_\\sigma(n):=\\tfrac12(P_T(n)+\\sigma C_n)$ on $\\mathbb C^3$. Define the helicity fibre $L_\\sigma(n):=\\operatorname{range}P_\\sigma(n)$ and the total space $L_\\sigma:=\\{(n,z):n\\in S^2,\\ z\\in L_\\sigma(n)\\}$, projected to $S^2$ by $(n,z)\\mapsto n$.\n\nFor an open set $U\\subseteq S^2$, a unit frame of $L_\\sigma$ over $U$ is a smooth map $v:U\\to\\mathbb C^3$ such that $v(n)\\in L_\\sigma(n)$ and $\\langle v(n),v(n)\\rangle_H=1$ for every $n\\in U$. Since each fibre is a complex line, this vector spans that fibre. A local unit frame is such a map on an open neighborhood in $S^2$; a global unit frame is one defined on all of $S^2$.\n\nFibrewise addition and scalar multiplication are inherited from $\\mathbb C^3$. A unit frame $v$ gives the local trivialization $(n,a)\\mapsto(n,a v(n))$ from $U\\times\\mathbb C$ to $L_\\sigma|_U$, with inverse $(n,z)\\mapsto(n,\\langle v(n),z\\rangle_H)$. The construction in the Proof supplies such a frame near every $n$, so $L_\\sigma$ is a smooth rank-one complex vector subbundle of the product bundle $S^2\\times\\mathbb C^3\\to S^2$, whose projection is $(n,z)\\mapsto n$.\n\nOn a spherical chart with $0<\\theta<\\pi$ and a smooth longitude branch $\\phi$, write $n=(\\sin\\theta\\cos\\phi,\\sin\\theta\\sin\\phi,\\cos\\theta)$, $e_\\theta=(\\cos\\theta\\cos\\phi,\\cos\\theta\\sin\\phi,-\\sin\\theta)$, and $e_\\phi=(-\\sin\\phi,\\cos\\phi,0)$. The local unit helicity frame is $v_\\sigma:=(e_\\theta+i\\sigma e_\\phi)/\\sqrt2$. For any unit frame $v$ over an open set $U$, write $v^\\dagger d v:=\\sum_{j=1}^3\\overline{v_j}\\,d v_j$, where $d v_j$ is the exterior derivative of its $j$th component. Define its Berry connection one-form by $A:=i v^\\dagger d v$. A smooth phase change $v'=e^{i\\chi}v$, with real smooth $\\chi$, changes this local form to $A'=A-d\\chi$. The local Berry curvature is the real two-form $F:=dA$ on $U$; no global gluing assertion is made here.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-stokes-theorem-for-smooth-singular-chains",
+          "source_section": "Statement",
+          "quote": "Let $M$ be a smooth manifold, possibly with boundary. For $k\\ge1$, $c\\in C_k^\\infty(M;\\mathbb R)$ and $\\omega\\in\\Omega^{k-1}(M)$, define integration over a chain by the finite linear sum of its simplex integrals. Then\n$$\\int_c d\\omega=\\int_{\\partial c}\\omega.$$\nThe zero chain has integral zero. In degree zero the boundary is zero; no degree-minus-one form is required by this statement.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-smooth-singular-chain-and-cochain-complexes",
+          "source_section": "Definition",
+          "quote": "For a smooth manifold $M$, possibly with boundary, let\n$$C_k^\\infty(M;\\mathbb R)=\\mathbb R^{(S_k^\\infty(M))}\\quad(k\\ge0),\\qquad C_k^\\infty(M;\\mathbb R)=0\\quad(k<0),$$\nusing [[def-smooth-singular-simplex]]. It is the subspace of [[def-real-singular-chain-complex]] spanned by the smooth simplices, with the same signed face differential.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-integral-of-a-form-over-a-smooth-singular-simplex",
+          "source_section": "Definition",
+          "quote": "Let $\\sigma:\\Delta^k\\to M$ be a smooth singular simplex and let $\\omega$ be a smooth $k$-form on an open neighbourhood of its image in $M$. For $k\\ge1$ put\n$$T_k=\\{x\\in\\mathbb R^k:x_j\\ge0,\\ \\sum_jx_j\\le1\\},\\qquad a(x)=v_0+\\sum_{j=1}^kx_j(v_j-v_0).$$\nTake a smooth extension $\\bar\\sigma$ near $\\Delta^k$, restrict its domain so that $\\omega$ is defined on its image, and write $a^*\\bar\\sigma^*\\omega=f(x)\\,dx_1\\wedge\\cdots\\wedge dx_k$. Define\n$$\\int_\\sigma\\omega:=\\int_{T_k}f(x)\\,dx.$$\nThe right side is the Jordan-set Riemann integral. In degree zero define $\\int_\\sigma\\omega=\\omega(\\sigma(v_0))$. This fixes the positive point convention. Reversing the domain orientation negates the integral. Independence of other positive affine coordinates is the forward justification [[lem-simplex-integrals-are-independent-of-affine-coordinate-identification]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-the-exterior-derivative-squares-to-zero",
+          "source_section": "Statement",
+          "quote": "For every differential form $\\omega$, $d(d\\omega)=0$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "In spherical coordinates, $\\partial_\\theta e_\\theta=-n$, $\\partial_\\theta e_\\phi=0$, $\\partial_\\phi e_\\theta=\\cos\\theta\\,e_\\phi$, and $\\partial_\\phi e_\\phi=-\\cos\\theta\\,e_\\theta+\\sin\\theta\\,n$. Using $e_\\theta\\cdot e_\\theta=e_\\phi\\cdot e_\\phi=1$, $e_\\theta\\cdot e_\\phi=0$, and $e_\\theta\\cdot n=e_\\phi\\cdot n=0$, direct expansion gives $v_\\sigma^\\dagger\\partial_\\theta v_\\sigma=0$ and $v_\\sigma^\\dagger\\partial_\\phi v_\\sigma=-i\\sigma\\cos\\theta$. Thus $A_\\sigma=i v_\\sigma^\\dagger d v_\\sigma=\\sigma\\cos\\theta\\,d\\phi$.",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Differentiating the preceding local form yields $dA_\\sigma=-\\sigma\\sin\\theta\\,d\\theta\\wedge d\\phi$. The globally defined form $\\omega_{S^2,n}(X,Y)=n\\cdot(X\\times Y)$ is smooth because its coefficients are polynomial in the embedded coordinates and tangent vectors; since $\\partial_\\theta n=e_\\theta$ and $\\partial_\\phi n=\\sin\\theta\\,e_\\phi$, it satisfies $\\omega_{S^2}=\\sin\\theta\\,d\\theta\\wedge d\\phi$. Therefore $dA_\\sigma=-\\sigma\\omega_{S^2}$ away from the poles. On any overlap neighborhood where two unit frames differ by a smooth real phase $\\chi$, [F1] changes $A$ by $-d\\chi$, so [F4] gives $dA'=dA$; the local curvatures glue smoothly, and equality with the smooth form $-\\sigma\\omega_{S^2}$ extends by continuity to the poles.",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "To compute the flux with [F3], take the boundary $O=\\{|x_1|+|x_2|+|x_3|=1\\}$ of the unit octahedron. Fix one order of its six vertices. For each of its eight triangular faces, let $\\tau_f:\\Delta^2\\to f$ be the affine simplex using that global vertex order, and compose it with the radial projection $r(x)=x/\\|x\\|$ to $S^2$. The denominator is nonzero on $O$, so each face map extends smoothly to a neighborhood of its simplex. Give each map coefficient $+1$ or $-1$ so its orientation agrees with the outward sphere orientation. A shared edge then has the same ordered affine edge map in the two adjacent faces and opposite boundary coefficients, so the finite sum $z$ of the eight maps satisfies $\\partial z=0$. Each spherical octant has $\\omega_{S^2}=\\sin\\theta\\,d\\theta\\wedge d\\phi$ and area $\\int_0^{\\pi/2}\\sin\\theta\\,d\\theta\\int_0^{\\pi/2}d\\phi=\\pi/2$; the eight octants cover the sphere and their edges contribute no two-dimensional integral. Hence $\\int_z\\omega_{S^2}=8(\\pi/2)=4\\pi$, and step 2.1 gives $\\int_{S^2}F_\\sigma:=\\int_zF_\\sigma=-4\\pi\\sigma$. Dividing by $2\\pi$ gives $-2\\sigma$.",
+          "inputs": [
+            "F3",
+            "step 2.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "Suppose a global smooth unit frame $v$ existed. Then $A=i v^\\dagger d v$ would be a global smooth one-form and its curvature would be $F_\\sigma=dA$. Applying [F2] to the finite cycle $z$ from step 3.1 gives $\\int_zF_\\sigma=\\int_zdA=\\int_{\\partial z}A=0$, contradicting $\\int_zF_\\sigma=-4\\pi\\sigma\\ne0$ by the nonzero values of $\\sigma$ in [F1] and step 3.1. Therefore no global smooth unit frame exists.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem concerns the nonempty unit sphere S^2."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 4.1 uses sigma=+/-1, so the computed flux is nonzero; no zero-helicity fibre is included."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The theorem contains no object count or one-object exception."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1: the curvature extends across both coordinate poles and the finite cycle includes every octant face."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 3.1 and 4.1: the closed finite cycle has cancelling face boundaries, then Stokes applies to its zero boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement supplies a fixed helicity and its local spherical frame. Steps 1.1 and 3.1 use explicit formulas and the finite eight-face cycle; no simultaneous choice of local frames is performed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a direct curvature and obstruction claim, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a direct curvature and obstruction claim, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "both helicity flux signs",
+          "status": "checked",
+          "evidence": "Substituting sigma=+1 gives flux -4 pi and normalized flux -2; substituting sigma=-1 gives flux +4 pi and normalized flux +2, exactly as the displayed formulas state."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-14 author",
+        "notes": "The sign follows A=i v-dagger d v and the outward area orientation. The spin-1/2 lecture convention is not imported; the finite smooth cycle and Stokes hypotheses are written explicitly."
+      }
+    },
+    "pthm-emx-helicity-rotation-weight": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-emx-helicity-line-bundle",
+          "source_section": "Definition",
+          "quote": "For $u,v\\in\\mathbb C^3$, extend the real Euclidean dot and right-handed cross products complex-bilinearly, with coordinate formulas\n$$u\\cdot v:=\\sum_{j=1}^3u_jv_j,\\qquad u\\times v:=(u_2v_3-u_3v_2,\\ u_3v_1-u_1v_3,\\ u_1v_2-u_2v_1).$$\nThe dot product in these formulas uses no complex conjugation; it differs from the Hermitian product $\\langle u,v\\rangle_H:=\\sum_{j=1}^3\\overline{u_j}v_j$. Write $\\|z\\|_H:=\\sqrt{\\langle z,z\\rangle_H}$ for the associated nonnegative norm on $\\mathbb C^3$.\n\nLet $S^2:=\\{n\\in\\mathbb R^3:n\\cdot n=1\\}$ with the smooth structure given by the six graph charts solving $n_j=\\pm\\sqrt{1-\\sum_{k\\ne j}n_k^2}$ on the hemispheres $\\pm n_j>0$. Orient it outward using the ordered spatial basis $x^1,x^2,x^3$. Its tangent plane is $T_nS^2=\\{X\\in\\mathbb R^3:n\\cdot X=0\\}$. Physically, $n=k/|k|$ for a nonzero spatial wavevector $k$ in the SI Fourier description, where $k$ has units $\\mathrm{m^{-1}}$; hence $n$ is dimensionless and the radial magnitude is discarded. For $\\sigma\\in\\{+1,-1\\}$, set $C_nz:=i\\,n\\times z$, $P_T(n)z:=z-n(n\\cdot z)$, and $P_\\sigma(n):=\\tfrac12(P_T(n)+\\sigma C_n)$ on $\\mathbb C^3$. Define the helicity fibre $L_\\sigma(n):=\\operatorname{range}P_\\sigma(n)$ and the total space $L_\\sigma:=\\{(n,z):n\\in S^2,\\ z\\in L_\\sigma(n)\\}$, projected to $S^2$ by $(n,z)\\mapsto n$.\n\nFor an open set $U\\subseteq S^2$, a unit frame of $L_\\sigma$ over $U$ is a smooth map $v:U\\to\\mathbb C^3$ such that $v(n)\\in L_\\sigma(n)$ and $\\langle v(n),v(n)\\rangle_H=1$ for every $n\\in U$. Since each fibre is a complex line, this vector spans that fibre. A local unit frame is such a map on an open neighborhood in $S^2$; a global unit frame is one defined on all of $S^2$.\n\nFibrewise addition and scalar multiplication are inherited from $\\mathbb C^3$. A unit frame $v$ gives the local trivialization $(n,a)\\mapsto(n,a v(n))$ from $U\\times\\mathbb C$ to $L_\\sigma|_U$, with inverse $(n,z)\\mapsto(n,\\langle v(n),z\\rangle_H)$. The construction in the Proof supplies such a frame near every $n$, so $L_\\sigma$ is a smooth rank-one complex vector subbundle of the product bundle $S^2\\times\\mathbb C^3\\to S^2$, whose projection is $(n,z)\\mapsto n$.\n\nOn a spherical chart with $0<\\theta<\\pi$ and a smooth longitude branch $\\phi$, write $n=(\\sin\\theta\\cos\\phi,\\sin\\theta\\sin\\phi,\\cos\\theta)$, $e_\\theta=(\\cos\\theta\\cos\\phi,\\cos\\theta\\sin\\phi,-\\sin\\theta)$, and $e_\\phi=(-\\sin\\phi,\\cos\\phi,0)$. The local unit helicity frame is $v_\\sigma:=(e_\\theta+i\\sigma e_\\phi)/\\sqrt2$. For any unit frame $v$ over an open set $U$, write $v^\\dagger d v:=\\sum_{j=1}^3\\overline{v_j}\\,d v_j$, where $d v_j$ is the exterior derivative of its $j$th component. Define its Berry connection one-form by $A:=i v^\\dagger d v$. A smooth phase change $v'=e^{i\\chi}v$, with real smooth $\\chi$, changes this local form to $A'=A-d\\chi$. The local Berry curvature is the real two-form $F:=dA$ on $U$; no global gluing assertion is made here.",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "pthm-emx-helicity-projection",
+          "source_section": "Statement",
+          "quote": "For $k\\in\\mathbb R^3\\setminus\\{0\\}$, let $n:=k/|k|$ and let the complex\ntransverse fibre be\n$T_k:=\\{v\\in\\mathbb C^3:\\sum_j k_jv_j=0\\}$. On $\\mathbb C^3$ define\n$C(k)v:=i\\,n\\times v$ and\n$P_T(k)v:=v-n\\sum_j n_jv_j$. Define\n$P_\\sigma(k):=\\tfrac12(P_T(k)+\\sigma C(k))$ for $\\sigma\\in\\{+1,-1\\}$.\nUse the Hermitian product\n$\\langle u,v\\rangle_H:=\\sum_j\\overline{u_j}v_j$. Then $P_T(k)$ is the\northogonal projection onto $T_k$; $C(k)$ is Hermitian, vanishes on the\nlongitudinal line, and satisfies $C(k)^2=P_T(k)$. The restrictions of\n$P_{+1}(k)$ and $P_{-1}(k)$ to $T_k$ are orthogonal rank-one projections with\nsum $P_T(k)$. Their ranges are the two helicity eigenspaces, with eigenvalues\n$+1$ and $-1$ for $C(k)$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "pthm-emx-helicity-berry-curvature",
+          "source_section": "Statement",
+          "quote": "Fix $\\sigma\\in\\{+1,-1\\}$ and let $L_\\sigma(n)$ be the range of the helicity projector $P_\\sigma(n)$ over the outward-oriented unit sphere $S^2$. On an angular chart with $0<\\theta<\\pi$ and a smooth longitude branch $\\phi$, use $v_\\sigma=(e_\\theta+i\\sigma e_\\phi)/\\sqrt2$ and the connection convention $A_\\sigma=i v_\\sigma^\\dagger d v_\\sigma$. The spherical frame has Berry one-form $A_\\sigma=\\sigma\\cos\\theta\\,d\\phi$ and curvature $F_\\sigma=dA_\\sigma=-\\sigma\\sin\\theta\\,d\\theta\\wedge d\\phi$. If $\\omega_{S^2,n}(X,Y):=n\\cdot(X\\times Y)$ is the outward area form for $X,Y\\in T_nS^2$, then this curvature extends smoothly to the whole sphere as $F_\\sigma=-\\sigma\\omega_{S^2}$. Write $\\int_{S^2}$ for the outward-oriented integral, evaluated as the sum over the eight radially projected octant triangles described in the Proof. Its total flux is $\\int_{S^2}F_\\sigma=-4\\pi\\sigma$, so the flux divided by $2\\pi$ is $-2\\sigma$ in this convention. The line bundle has no globally smooth unit frame.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-stokes-theorem-for-smooth-singular-chains",
+          "source_section": "Statement",
+          "quote": "Let $M$ be a smooth manifold, possibly with boundary. For $k\\ge1$, $c\\in C_k^\\infty(M;\\mathbb R)$ and $\\omega\\in\\Omega^{k-1}(M)$, define integration over a chain by the finite linear sum of its simplex integrals. Then\n$$\\int_c d\\omega=\\int_{\\partial c}\\omega.$$\nThe zero chain has integral zero. In degree zero the boundary is zero; no degree-minus-one form is required by this statement.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "For $z\\in L_\\sigma(n)$, [F2] gives $n\\cdot z=0$ and $n\\times z=-i\\sigma z$. The defining formula therefore reduces to $R_{n,\\alpha}z=(\\cos\\alpha-i\\sigma\\sin\\alpha)z=e^{-i\\sigma\\alpha}z$. The phase is unchanged when $\\alpha$ is increased by $2\\pi$ because $\\sigma$ is an integer, and addition of angles multiplies phases, proving it is the stated character.",
+          "inputs": [
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Choose a real unit vector $u\\perp n$ and put $v=n\\times u$. The real cross-product identities give $|v|=1$, $u\\cdot v=0$, and $n\\times v=-u$, so $(u,v,n)$ is a positively oriented orthonormal basis. In this basis the real rotation formula has matrix $\\begin{pmatrix}\\cos\\alpha&-\\sin\\alpha&0\\\\ \\sin\\alpha&\\cos\\alpha&0\\\\0&0&1\\end{pmatrix}$, which is orthogonal with determinant one. Thus $R_{n,\\alpha}$ is proper.",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "step": "2.2",
+          "claim": "Write a section on one chart as $s(t)=a(t)v_j(\\gamma(t))$. Since $P_\\sigma$ is the orthogonal projection onto the line spanned by the unit vector $v_j$, the projected derivative is $\\nabla_{\\dot\\gamma}s=(\\dot a+a\\,v_j^\\dagger\\dot v_j)v_j=(\\dot a-iA_j(\\dot\\gamma)a)v_j$. Thus $\\nabla_{\\dot\\gamma}s=0$ is the scalar ODE $\\dot a=iA_j(\\dot\\gamma)a$, whose solution across that subpath multiplies $a$ by $\\exp(i\\int A_j)$. At an internal join, equality of the section on both frames gives $a_{j+1}v_{j+1}=a_jv_j$, hence $a_{j+1}=g_j^{-1}a_j$. At the end, $v_m(\\gamma(1))=g_mv_1(\\gamma(0))$ converts the final coefficient to $g_ma_m$ in the starting frame. Multiplying these scalar factors gives the formula in the Statement.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "If a frame on subpath $j$ is changed to $v'_j=h_jv_j$ with $h_j$ smooth and $U(1)$-valued, the local connection changes by $A'_j=A_j+i h_j^{-1}dh_j$ (locally $h_j=e^{i\\chi_j}$ this is $A_j-d\\chi_j$). The segment exponential acquires the endpoint ratio $h_j(t_j)^{-1}h_j(t_{j-1})$; the adjacent transition factors change by the inverse endpoint ratios. These factors cancel at every internal join and at the identified loop endpoint. Thus the product formula is independent of the chosen local frames; no single global $A$ is assumed.",
+          "inputs": [
+            "F1",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "For the Stokes clause, one frame is defined on the open set containing the image of $\\Sigma$. By the line-integral definition and the affine reparametrizations in $c_\\gamma$, $\\int_{c_\\gamma}A=\\oint_\\gamma A$. Since $\\partial\\Sigma=c_\\gamma$, the cited Stokes theorem [F4] gives $\\int_\\Sigma dA=\\int_{\\partial\\Sigma}A=\\int_{c_\\gamma}A$. The local curvature is $F_\\sigma=dA$ by [F3], so exponentiation gives $\\mathrm{Hol}_\\gamma=\\exp(i\\int_\\Sigma F_\\sigma)$. For paths or surfaces requiring more than one patch, the transition factors in step 2.2 are part of the holonomy; a bare integral of a nonexistent global one-form is not asserted.",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement has 0=t0<...<tm=1, so m>=1. When m=1 the internal join product over j=1,...,m-1 is empty and equals 1; step 2.2 then leaves one segment exponential and the final frame factor g_m.",
+          "argument_steps": [
+            "2.2"
+          ]
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 gives the identity character at alpha=0.",
+          "argument_steps": [
+            "1.1"
+          ]
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.2 covers m=1: the product has one segment factor and the endpoint identification g_m.",
+          "argument_steps": [
+            "2.2"
+          ]
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The unit helicity fibre remains a line; frame changes are canceled explicitly in 3.1, and 4.1 uses only a supplied single-frame surface. A constant loop has zero segment integrals and telescoping frame factors, giving identity holonomy.",
+          "argument_steps": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.2 includes the final loop identification by g_m, even when the last frame differs from the initial one.",
+          "argument_steps": [
+            "2.2"
+          ]
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement supplies a finite path subdivision and local frames; 2.2 uses their scalar transition factors and 3.1 cancels frame choices. No global unit frame or simultaneous uncountable choice is asserted.",
+          "argument_steps": [
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem states direct rotation and holonomy formulas, not an equivalence. The statement gives an active SO2 character and a transition-corrected holonomy formula, not a reconstruction of a path or connection from a phase.",
+          "argument_steps": []
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem states direct rotation and holonomy formulas, not an equivalence. The statement gives an active SO2 character and a transition-corrected holonomy formula, not a reconstruction of a path or connection from a phase.",
+          "argument_steps": []
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "identity and full-turn rotations",
+          "status": "checked",
+          "evidence": "At alpha=0 the character is 1; at alpha=2 pi it is exp(-2 pi i sigma)=1 for sigma=+/-1, so the action is well-defined on the angle class modulo 2 pi."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-14 author",
+        "notes": "Active rotations and the sign of the projected connection are explicit. The transition product is primary for loops crossing charts; no global one-form or dynamical phase is assumed."
+      },
+      "current_boundary_worksheet": {
+        "proposal": "research/physics-non-fluid-129-2026-10-21-r2-owner-step2-boundary-proposal-8/proposal.json",
+        "source_sha256": "54a88f78099d777bd3bcc1355a54ed11f5287131dda0868c9b5d14d25b3904df",
+        "qualification": "Released complete current source/eight-case semantic worksheet; root transcribed exact current rows. No independent acceptance or finite computation asserted."
+      }
+    },
+    "ex-emx-polarization-latitude-phase": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "pthm-emx-helicity-rotation-weight",
+          "source_section": "Statement",
+          "quote": "For $u,v\\in\\mathbb C^3$, the dot and cross products are the complex-bilinear extensions with coordinate formulas $u\\cdot v=\\sum_{j=1}^3u_jv_j$ and $u\\times v=(u_2v_3-u_3v_2,u_3v_1-u_1v_3,u_1v_2-u_2v_1)$, as defined in the helicity line-bundle item.\n\nFix $n\\in S^2$ and $\\sigma\\in\\{+1,-1\\}$. Put $U(1):=\\{z\\in\\mathbb C:|z|=1\\}$. For $n\\in\\mathbb R^3$ and $z\\in\\mathbb C^3$, the dot in the rotation formula is $n\\cdot z=\\sum_{j=1}^3n_jz_j$, the complex-bilinear dot product defined in the earlier helicity line-bundle definition. For the dimensionless angle $\\alpha\\in\\mathbb R/(2\\pi\\mathbb Z)$, define the proper active rotation fixing $n$ by $R_{n,\\alpha}z=(n\\cdot z)n+\\cos\\alpha\\,(z-(n\\cdot z)n)+\\sin\\alpha\\,(n\\times z)$ on $\\mathbb C^3$, with the complex-linear extension of the real rotation action, and set $SO(2)_n:=\\{R_{n,\\alpha}:\\alpha\\in\\mathbb R/(2\\pi\\mathbb Z)\\}$. It acts on the whole helicity fibre $L_\\sigma(n)$ by $R_{n,\\alpha}z=e^{-i\\sigma\\alpha}z$, so the fibre carries the character $\\rho_\\sigma(R_{n,\\alpha})=e^{-i\\sigma\\alpha}$. For a piecewise $C^1$ closed direction path $\\gamma:[0,1]\\to S^2$, choose a finite subdivision $0=t_0<\\cdots<t_m=1$ on whose closed subintervals $\\gamma$ is $C^1$. For each segment choose an open set $U_j\\subseteq S^2$ containing its image and a unit frame $v_j:U_j\\to\\mathbb C^3$ as defined in the helicity line-bundle definition; write $A_j:=i\\sum_{\\ell=1}^3\\overline{(v_j)_\\ell}\\,d(v_j)_\\ell$. For a one-form $A_j$ on $U_j$, define its oriented curve integral on this segment by\n$$\\int_{\\gamma|[t_{j-1},t_j]}A_j:=\\int_{t_{j-1}}^{t_j}(A_j)_{\\gamma(t)}(\\dot\\gamma(t))\\,dt,$$\nthe ordinary Riemann integral of the continuous integrand on that segment. For a $C^1$ section $s(t)\\in L_\\sigma(\\gamma(t))$, define its projected derivative by $\\nabla_{\\dot\\gamma}s(t):=P_\\sigma(\\gamma(t))\\dot s(t)$, with the derivative taken componentwise in $\\mathbb C^3$; parallel transport is the solution of $\\nabla_{\\dot\\gamma}s=0$ on each segment. If $v_{j+1}(\\gamma(t_j))=g_jv_j(\\gamma(t_j))$ at each internal join and $v_m(\\gamma(1))=g_mv_1(\\gamma(0))$, where $g_j,g_m\\in U(1)$, then its holonomy, the scalar multiplying an initial fibre vector after transport around $\\gamma$, is $\\mathrm{Hol}_\\gamma=\\bigl(\\prod_{j=1}^m\\exp(i\\int_{\\gamma|[t_{j-1},t_j]}A_j)\\bigr)\\bigl(\\prod_{j=1}^{m-1}g_j^{-1}\\bigr)g_m$. In one unit frame defined on a neighborhood of the whole loop, write $\\oint_\\gamma A:=\\sum_{j=1}^m\\int_{\\gamma|[t_{j-1},t_j]}A$; then the formula reduces to $\\mathrm{Hol}_\\gamma=\\exp(i\\oint_\\gamma A)$. If in addition $\\gamma$ is piecewise smooth in the sense that each rescaled segment $\\gamma_j(u):=\\gamma(t_{j-1}+(t_j-t_{j-1})u)$, $0\\le u\\le1$, is a smooth singular $1$-simplex, define the finite smooth singular $1$-chain $c_\\gamma:=\\sum_{j=1}^m\\gamma_j$ with its positive path orientation. If a finite oriented smooth singular $2$-chain $\\Sigma$ has image in one open frame domain $U$ and $\\partial\\Sigma=c_\\gamma$, then $\\mathrm{Hol}_\\gamma=\\exp(i\\int_\\Sigma F_\\sigma)$.\n\nThe piecewise $C^1$ subdivision is understood with one-sided derivatives continuous up to each subinterval endpoint. In the final clause, each rescaled path segment must extend to a smooth map from an open neighborhood of its affine interval into $S^2$; this is the neighborhood-extension condition for a smooth singular $1$-simplex. The open frame domain $U$ is an open subset of $S^2$ carrying one smooth unit frame on all of $U$, and the image of $\\Sigma$ lies in $U$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "pthm-emx-helicity-berry-curvature",
+          "source_section": "Statement",
+          "quote": "Fix $\\sigma\\in\\{+1,-1\\}$ and let $L_\\sigma(n)$ be the range of the helicity projector $P_\\sigma(n)$ over the outward-oriented unit sphere $S^2$. On an angular chart with $0<\\theta<\\pi$ and a smooth longitude branch $\\phi$, use $v_\\sigma=(e_\\theta+i\\sigma e_\\phi)/\\sqrt2$ and the connection convention $A_\\sigma=i v_\\sigma^\\dagger d v_\\sigma$. The spherical frame has Berry one-form $A_\\sigma=\\sigma\\cos\\theta\\,d\\phi$ and curvature $F_\\sigma=dA_\\sigma=-\\sigma\\sin\\theta\\,d\\theta\\wedge d\\phi$. If $\\omega_{S^2,n}(X,Y):=n\\cdot(X\\times Y)$ is the outward area form for $X,Y\\in T_nS^2$, then this curvature extends smoothly to the whole sphere as $F_\\sigma=-\\sigma\\omega_{S^2}$. Write $\\int_{S^2}$ for the outward-oriented integral, evaluated as the sum over the eight radially projected octant triangles described in the Proof. Its total flux is $\\int_{S^2}F_\\sigma=-4\\pi\\sigma$, so the flux divided by $2\\pi$ is $-2\\sigma$ in this convention. The line bundle has no globally smooth unit frame.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "pthm-emx-helicity-rotation-weight",
+          "source_section": "Statement",
+          "quote": "For $u,v\\in\\mathbb C^3$, the dot and cross products are the complex-bilinear extensions with coordinate formulas $u\\cdot v=\\sum_{j=1}^3u_jv_j$ and $u\\times v=(u_2v_3-u_3v_2,u_3v_1-u_1v_3,u_1v_2-u_2v_1)$, as defined in the helicity line-bundle item.\n\nFix $n\\in S^2$ and $\\sigma\\in\\{+1,-1\\}$. Put $U(1):=\\{z\\in\\mathbb C:|z|=1\\}$. For $n\\in\\mathbb R^3$ and $z\\in\\mathbb C^3$, the dot in the rotation formula is $n\\cdot z=\\sum_{j=1}^3n_jz_j$, the complex-bilinear dot product defined in the earlier helicity line-bundle definition. For the dimensionless angle $\\alpha\\in\\mathbb R/(2\\pi\\mathbb Z)$, define the proper active rotation fixing $n$ by $R_{n,\\alpha}z=(n\\cdot z)n+\\cos\\alpha\\,(z-(n\\cdot z)n)+\\sin\\alpha\\,(n\\times z)$ on $\\mathbb C^3$, with the complex-linear extension of the real rotation action, and set $SO(2)_n:=\\{R_{n,\\alpha}:\\alpha\\in\\mathbb R/(2\\pi\\mathbb Z)\\}$. It acts on the whole helicity fibre $L_\\sigma(n)$ by $R_{n,\\alpha}z=e^{-i\\sigma\\alpha}z$, so the fibre carries the character $\\rho_\\sigma(R_{n,\\alpha})=e^{-i\\sigma\\alpha}$. For a piecewise $C^1$ closed direction path $\\gamma:[0,1]\\to S^2$, choose a finite subdivision $0=t_0<\\cdots<t_m=1$ on whose closed subintervals $\\gamma$ is $C^1$. For each segment choose an open set $U_j\\subseteq S^2$ containing its image and a unit frame $v_j:U_j\\to\\mathbb C^3$ as defined in the helicity line-bundle definition; write $A_j:=i\\sum_{\\ell=1}^3\\overline{(v_j)_\\ell}\\,d(v_j)_\\ell$. For a one-form $A_j$ on $U_j$, define its oriented curve integral on this segment by\n$$\\int_{\\gamma|[t_{j-1},t_j]}A_j:=\\int_{t_{j-1}}^{t_j}(A_j)_{\\gamma(t)}(\\dot\\gamma(t))\\,dt,$$\nthe ordinary Riemann integral of the continuous integrand on that segment. For a $C^1$ section $s(t)\\in L_\\sigma(\\gamma(t))$, define its projected derivative by $\\nabla_{\\dot\\gamma}s(t):=P_\\sigma(\\gamma(t))\\dot s(t)$, with the derivative taken componentwise in $\\mathbb C^3$; parallel transport is the solution of $\\nabla_{\\dot\\gamma}s=0$ on each segment. If $v_{j+1}(\\gamma(t_j))=g_jv_j(\\gamma(t_j))$ at each internal join and $v_m(\\gamma(1))=g_mv_1(\\gamma(0))$, where $g_j,g_m\\in U(1)$, then its holonomy, the scalar multiplying an initial fibre vector after transport around $\\gamma$, is $\\mathrm{Hol}_\\gamma=\\bigl(\\prod_{j=1}^m\\exp(i\\int_{\\gamma|[t_{j-1},t_j]}A_j)\\bigr)\\bigl(\\prod_{j=1}^{m-1}g_j^{-1}\\bigr)g_m$. In one unit frame defined on a neighborhood of the whole loop, write $\\oint_\\gamma A:=\\sum_{j=1}^m\\int_{\\gamma|[t_{j-1},t_j]}A$; then the formula reduces to $\\mathrm{Hol}_\\gamma=\\exp(i\\oint_\\gamma A)$. If in addition $\\gamma$ is piecewise smooth in the sense that each rescaled segment $\\gamma_j(u):=\\gamma(t_{j-1}+(t_j-t_{j-1})u)$, $0\\le u\\le1$, is a smooth singular $1$-simplex, define the finite smooth singular $1$-chain $c_\\gamma:=\\sum_{j=1}^m\\gamma_j$ with its positive path orientation. If a finite oriented smooth singular $2$-chain $\\Sigma$ has image in one open frame domain $U$ and $\\partial\\Sigma=c_\\gamma$, then $\\mathrm{Hol}_\\gamma=\\exp(i\\int_\\Sigma F_\\sigma)$.\n\nThe piecewise $C^1$ subdivision is understood with one-sided derivatives continuous up to each subinterval endpoint. In the final clause, each rescaled path segment must extend to a smooth map from an open neighborhood of its affine interval into $S^2$; this is the neighborhood-extension condition for a smooth singular $1$-simplex. The open frame domain $U$ is an open subset of $S^2$ carrying one smooth unit frame on all of $U$, and the image of $\\Sigma$ lies in $U$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "On the punctured cap, the phase change $v_N=e^{i\\sigma\\phi}v_\\sigma$ gives $A_N=A_\\sigma-\\sigma d\\phi=\\sigma(\\cos\\theta-1)d\\phi$. Put $x=\\sin\\theta\\cos\\phi$, $y=\\sin\\theta\\sin\\phi$, and $z=\\cos\\theta$. Since $d\\phi=(x\\,dy-y\\,dx)/(1-z^2)$, this is $A_N=-\\sigma(x\\,dy-y\\,dx)/(1+z)$, which extends smoothly across the north pole because $1+z>0$ there. The rephased frame itself also extends: for $\\sigma=+1$ its components are $\\frac{1}{2\\sqrt2(1+z)}\\bigl((1+z)^2-(x+iy)^2,\\ i((1+z)^2+(x+iy)^2),\\ -2(x+iy)(1+z)\\bigr)^T$, and for $\\sigma=-1$ they are the complex conjugates. These formulas have nonzero denominator throughout the north patch.",
+          "inputs": [
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Along the loop, $\\oint_\\gamma A_N=\\int_0^{2\\pi}\\sigma(\\cos\\theta_0-1)\\,d\\phi=-\\sigma\\Omega$, so [F1] gives $\\mathrm{Hol}_\\gamma=e^{-i\\sigma\\Omega}$. Direct integration of the global curvature over the north cap gives $\\int_{\\Sigma_N}F_\\sigma=-\\sigma\\int_0^{2\\pi}\\int_0^{\\theta_0}\\sin\\theta\\,d\\theta\\,d\\phi=-\\sigma\\Omega$ as well. Thus the cap-flux expression agrees without using the singular spherical gauge at its pole.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "In the spherical gauge, $\\oint_\\gamma A_\\sigma=2\\pi\\sigma\\cos\\theta_0=-\\sigma\\Omega+2\\pi\\sigma$. Since $e^{i2\\pi\\sigma}=1$ for the integer helicities specified by [F1], exponentiation gives the same holonomy in both gauges.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example uses one nonempty latitude loop.",
+          "case_reasoning": "One fixed nonempty latitude loop with0<theta0<pi is supplied; there is no sum over a possibly empty path collection."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "As theta_0 tends to 0, step 2.1 gives Omega tending to 0 and holonomy tending to 1.",
+          "case_reasoning": "At the north-angle limit the explicit Omega=2pi(1-cos theta0) tends0 and Hol tends1 by Verification2.1; theta0=0 itself is outside the admitted loop domain."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The allowed unit helicities are sigma=+1 and-1. Verification1.1 gives the +1 regular frame and its conjugate for-1;2.1-3.1 give the phase for each.",
+          "case_reasoning": "The allowed unit helicities are sigma=+1 and-1. Verification1.1 gives the +1 regular frame and its conjugate for-1;2.1-3.1 give the phase for each."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 gives a north-regular frame; theta_0=0 and pi are excluded from the stated loop.",
+          "case_reasoning": "The north regular gauge has denominator1+z>0 on the cap for theta0<pi. Its pole extension is proved in1.1, while degenerate polar loops at theta0=0,pi remain excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The limiting cap angles theta_0=0 and pi give Omega=0 and 4pi, respectively, and phase 1; the Statement excludes the degenerate endpoint loops.",
+          "case_reasoning": "The path parameter endpoints t0,1 coincide on the sphere and the integer-helicity phase is single valued by3.1. Angle limits give Omega0 or4pi and phase1 without admitting the excluded polar loops."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The path, frame and cap are explicitly specified; no choice from a family is used.",
+          "case_reasoning": "Loop, cap and regular frame are explicitly constructed. No arbitrary cap or gauge family is selected by a choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is a direct computation, not a biconditional.",
+          "case_reasoning": "This is an equality of explicitly computed holonomies in two gauges, not a necessary-and-sufficient condition on general loops."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example is a direct computation, not a biconditional.",
+          "case_reasoning": "No reverse characterization of a latitude, its cap or its solid angle from a holonomy value is asserted."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "equatorial latitude",
+          "status": "checked",
+          "evidence": "At theta_0=pi/2, Omega=2 pi and both gauges give exp(-2 pi i sigma)=1 for sigma=+/-1."
+        },
+        {
+          "name": "pole limits",
+          "status": "checked",
+          "evidence": "As theta_0 tends to 0 or pi, Omega tends to 0 or 4 pi and the phase tends to 1; the exact pole loops are excluded from the Statement."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-14 author",
+        "notes": "The north gauge is checked by smooth Cartesian components and a regular one-form. The latitude result is a constructed model calculation, not a reported observation."
+      },
+      "current_boundary_worksheet": {
+        "proposal": "research/physics-non-fluid-129-2026-10-21-r2-owner-step2-boundary-proposal-7/proposal.json",
+        "source_sha256": "91be838dea320783b7d6da0e3aa963c6e2d480be580172e2315c735f0d0ad066",
+        "qualification": "Released complete current source/eight-case semantic worksheet; root transcribed exact current rows. No independent acceptance or finite computation asserted."
+      }
+    },
+    "cex-emx-polarization-gauge-singularity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-emx-helicity-line-bundle",
+          "source_section": "Definition",
+          "quote": "For $u,v\\in\\mathbb C^3$, extend the real Euclidean dot and right-handed cross products complex-bilinearly, with coordinate formulas\n$$u\\cdot v:=\\sum_{j=1}^3u_jv_j,\\qquad u\\times v:=(u_2v_3-u_3v_2,\\ u_3v_1-u_1v_3,\\ u_1v_2-u_2v_1).$$\nThe dot product in these formulas uses no complex conjugation; it differs from the Hermitian product $\\langle u,v\\rangle_H:=\\sum_{j=1}^3\\overline{u_j}v_j$. Write $\\|z\\|_H:=\\sqrt{\\langle z,z\\rangle_H}$ for the associated nonnegative norm on $\\mathbb C^3$.\n\nLet $S^2:=\\{n\\in\\mathbb R^3:n\\cdot n=1\\}$ with the smooth structure given by the six graph charts solving $n_j=\\pm\\sqrt{1-\\sum_{k\\ne j}n_k^2}$ on the hemispheres $\\pm n_j>0$. Orient it outward using the ordered spatial basis $x^1,x^2,x^3$. Its tangent plane is $T_nS^2=\\{X\\in\\mathbb R^3:n\\cdot X=0\\}$. Physically, $n=k/|k|$ for a nonzero spatial wavevector $k$ in the SI Fourier description, where $k$ has units $\\mathrm{m^{-1}}$; hence $n$ is dimensionless and the radial magnitude is discarded. For $\\sigma\\in\\{+1,-1\\}$, set $C_nz:=i\\,n\\times z$, $P_T(n)z:=z-n(n\\cdot z)$, and $P_\\sigma(n):=\\tfrac12(P_T(n)+\\sigma C_n)$ on $\\mathbb C^3$. Define the helicity fibre $L_\\sigma(n):=\\operatorname{range}P_\\sigma(n)$ and the total space $L_\\sigma:=\\{(n,z):n\\in S^2,\\ z\\in L_\\sigma(n)\\}$, projected to $S^2$ by $(n,z)\\mapsto n$.\n\nFor an open set $U\\subseteq S^2$, a unit frame of $L_\\sigma$ over $U$ is a smooth map $v:U\\to\\mathbb C^3$ such that $v(n)\\in L_\\sigma(n)$ and $\\langle v(n),v(n)\\rangle_H=1$ for every $n\\in U$. Since each fibre is a complex line, this vector spans that fibre. A local unit frame is such a map on an open neighborhood in $S^2$; a global unit frame is one defined on all of $S^2$.\n\nFibrewise addition and scalar multiplication are inherited from $\\mathbb C^3$. A unit frame $v$ gives the local trivialization $(n,a)\\mapsto(n,a v(n))$ from $U\\times\\mathbb C$ to $L_\\sigma|_U$, with inverse $(n,z)\\mapsto(n,\\langle v(n),z\\rangle_H)$. The construction in the Proof supplies such a frame near every $n$, so $L_\\sigma$ is a smooth rank-one complex vector subbundle of the product bundle $S^2\\times\\mathbb C^3\\to S^2$, whose projection is $(n,z)\\mapsto n$.\n\nOn a spherical chart with $0<\\theta<\\pi$ and a smooth longitude branch $\\phi$, write $n=(\\sin\\theta\\cos\\phi,\\sin\\theta\\sin\\phi,\\cos\\theta)$, $e_\\theta=(\\cos\\theta\\cos\\phi,\\cos\\theta\\sin\\phi,-\\sin\\theta)$, and $e_\\phi=(-\\sin\\phi,\\cos\\phi,0)$. The local unit helicity frame is $v_\\sigma:=(e_\\theta+i\\sigma e_\\phi)/\\sqrt2$. For any unit frame $v$ over an open set $U$, write $v^\\dagger d v:=\\sum_{j=1}^3\\overline{v_j}\\,d v_j$, where $d v_j$ is the exterior derivative of its $j$th component. Define its Berry connection one-form by $A:=i v^\\dagger d v$. A smooth phase change $v'=e^{i\\chi}v$, with real smooth $\\chi$, changes this local form to $A'=A-d\\chi$. The local Berry curvature is the real two-form $F:=dA$ on $U$; no global gluing assertion is made here.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "pthm-emx-helicity-berry-curvature",
+          "source_section": "Statement",
+          "quote": "Fix $\\sigma\\in\\{+1,-1\\}$ and let $L_\\sigma(n)$ be the range of the helicity projector $P_\\sigma(n)$ over the outward-oriented unit sphere $S^2$. On an angular chart with $0<\\theta<\\pi$ and a smooth longitude branch $\\phi$, use $v_\\sigma=(e_\\theta+i\\sigma e_\\phi)/\\sqrt2$ and the connection convention $A_\\sigma=i v_\\sigma^\\dagger d v_\\sigma$. The spherical frame has Berry one-form $A_\\sigma=\\sigma\\cos\\theta\\,d\\phi$ and curvature $F_\\sigma=dA_\\sigma=-\\sigma\\sin\\theta\\,d\\theta\\wedge d\\phi$. If $\\omega_{S^2,n}(X,Y):=n\\cdot(X\\times Y)$ is the outward area form for $X,Y\\in T_nS^2$, then this curvature extends smoothly to the whole sphere as $F_\\sigma=-\\sigma\\omega_{S^2}$. Write $\\int_{S^2}$ for the outward-oriented integral, evaluated as the sum over the eight radially projected octant triangles described in the Proof. Its total flux is $\\int_{S^2}F_\\sigma=-4\\pi\\sigma$, so the flux divided by $2\\pi$ is $-2\\sigma$ in this convention. The line bundle has no globally smooth unit frame.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Since $n\\cdot n=1$, the formula in [F1] is equivalently $P_\\sigma(n)=\\tfrac12(I-nn^T+\\sigma i N_n)$, where $N_nz=n\\times z$. Each matrix entry is a polynomial in the real coordinates of $n$, so $n\\mapsto P_\\sigma(n)$ is smooth on all of $S^2$, including both poles.",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The local formula for $v_\\sigma$ uses $\\phi$, which is not a coordinate at either pole, while the projection matrix from step 1.1 is defined and smooth there. By [F1], projecting a fixed vector with nonzero projection at a given point and normalizing it gives a smooth local unit frame near that point. Thus local polarization sections remain smooth; [F2] rules out only a single nowhere-zero unit frame on the entire sphere. The displayed false implication is refuted.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample is on the nonempty sphere S^2."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 applies to unit n only; the zero wavevector is excluded by the direction-sphere definition."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The counterexample has no integer count or one-object exception."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 evaluates the projector at the coordinate poles, where the spherical frame is unavailable."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and step 1.1 include both poles as points of S^2; the polynomial projector remains defined there."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 uses the pointwise local-frame construction from the definition and makes no global selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The counterexample refutes a one-way implication, not an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The counterexample refutes a one-way implication, not an iff statement."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "north and south pole matrices",
+          "status": "checked",
+          "evidence": "At n=+e_3 and n=-e_3, substitution gives smooth 3 by 3 matrices with a 2 by 2 rank-one projection block for each sigma=+/-1; no phi coordinate occurs."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-14 author",
+        "notes": "The false implication concerns a chart frame, while the projection is a global polynomial map. The counterexample keeps the no-global-unit-frame theorem and does not claim a global nonzero field."
+      }
+    }
+  }
+}

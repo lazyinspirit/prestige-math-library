@@ -1,0 +1,961 @@
+{
+  "version": 1,
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "scope": [
+    "thm-qftx-positive-unbounded-spectral-calculus",
+    "lem-qftx-hermite-coefficient-decay",
+    "thm-qftx-tempered-massive-gaussian-field",
+    "lem-qftx-finite-lorentz-cocycle-splitting",
+    "cex-qftx-resolvent-zero-continuous-spectrum"
+  ],
+  "contracts": {
+    "thm-qftx-positive-unbounded-spectral-calculus": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "3.1",
+            "4.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-spectral-theorem-for-bounded-normal-operators-pvm-form",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $T$ be a bounded normal operator on a nonzero complex Hilbert\nspace $H$, with operator spectrum $\\sigma(T)$\n([[def-spectrum-and-resolvent-of-a-bounded-operator]]). Then:\n\n1. there is a unique regular projection valued measure $E$ on the Borel\n   $\\sigma$-algebra of the nonempty compact set $\\sigma(T)\\subseteq\\mathbb C$\n   such that $\\int z\\,dE(z)=T$ and, equivalently,\n   $$\\Phi_E(f)=f(T)\\qquad\\text{for every continuous }f:\\sigma(T)\\to\\mathbb C,$$\n   where $f(T)$ is the continuous functional calculus of\n   [[thm-continuous-functional-calculus-for-bounded-normal-operators]] and\n   $\\Phi_E$ is the bounded Borel integral of the projection valued measure $E$;\n   this $E$ is the **spectral projection valued measure** of $T$;\n2. conversely, if $\\Lambda\\subseteq\\mathbb C$ is nonempty and compact and $E$ is\n   a regular projection valued measure on the Borel $\\sigma$-algebra of\n   $\\Lambda$, then $T_E:=\\int z\\,dE(z)=\\Phi_E(z)$ is a bounded normal operator\n   with $\\sigma(T_E)\\subseteq\\Lambda$ and $\\|T_E\\|\\le\\max_{z\\in\\Lambda}|z|$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-projection-valued-measure",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $(X,\\Sigma)$ be a measurable space\n([[def-measurable-space]], [[def-sigma-algebra]]) and let $H$ be a complex\nHilbert space ([[def-hilbert-space]]). A **projection valued measure** (PVM) on\n$(X,\\Sigma)$ is a map\n\n$$E:\\Sigma\\longrightarrow\\mathcal B(H),\\qquad B\\longmapsto E(B),$$\n\nsuch that:\n\n1. $E(B)$ is an **orthogonal projection** for every $B\\in\\Sigma$, that is, a\n   bounded operator with $E(B)^2=E(B)=E(B)^*$; there is no finite-dimensional\n   restriction;\n2. $E(\\varnothing)=0$ and $E(X)=I$;\n3. $E(B\\cap C)=E(B)E(C)$ for all $B,C\\in\\Sigma$;\n4. for every pairwise disjoint sequence $(B_n)_{n\\in\\mathbb N}$ in $\\Sigma$ with\n   union $B$ and every $x\\in H$, the series $\\sum_nE(B_n)x$ converges in norm\n   to $E(B)x$, that is\n   $$E(B)x=\\sum_{n=0}^{\\infty}E(B_n)x .$$\n\nClause 4 is **strong countable additivity**. A PVM is called **regular** when\n$X$ is a locally compact Hausdorff space ([[def-locally-compact-space]]), the\n$\\sigma$-algebra is the Borel $\\sigma$-algebra, and every one of the finite\npositive measures\n\n$$E_x(B):=\\langle E(B)x,x\\rangle,\\qquad x\\in H,\\ B\\in\\Sigma,$$\n\nis a regular Borel measure ([[def-regular-borel-measure-on-an-lch-space]]). Inner\nproducts are linear in the first variable and conjugate-linear in the second\n([[def-real-and-complex-inner-product-space]]); this fixed convention is the one\nused for every pairing $E_{x,y}(B)=\\langle E(B)x,y\\rangle$ on this page.\n\n**Well-definedness: the projection clause.** The conditions $P^2=P=P^*$ are\nsimultaneously meaningful and describe exactly the Hilbert orthogonal\nprojections, with no hidden finite-dimensional hypothesis. Indeed, for a\nbounded $P$ with $P^2=P=P^*$ the range $\\operatorname{ran}P$ is a linear\nsubspace, and for $y=Pw$ one has\n$\\langle x-Px,y\\rangle=\\langle P(x-Px),w\\rangle=\\langle Px-P^2x,w\\rangle=0$, so\n$x-Px\\perp\\operatorname{ran}P$; conversely $\\langle Pz,Pz\\rangle=\\langle z,P^*Pz\\rangle=\\langle z,Pz\\rangle=0$\nfor $z\\perp\\operatorname{ran}P$, so $z\\in\\ker P$, while\n$\\langle z,Px\\rangle=\\langle Pz,x\\rangle=0$ for $z\\in\\ker P$ gives\n$\\ker P=(\\operatorname{ran}P)^\\perp$\n([[thm-hilbert-adjoint-properties]],\n[[def-real-and-complex-inner-product-space]]). Hence\n$\\operatorname{ran}P=(\\ker P)^\\perp$ is closed, and the two defining properties\n$Px\\in\\operatorname{ran}P$, $x-Px\\in(\\operatorname{ran}P)^\\perp$ of\n[[def-hilbert-orthogonal-projection]] show that $P=P_{\\operatorname{ran}P}$ is\nthe Hilbert orthogonal projection onto a closed subspace, and conversely every\nsuch $P_M$ is idempotent and self-adjoint by\n[[lem-orthogonal-projection-is-linear-self-adjoint-contractive]] and\n[[thm-orthogonal-decomposition-by-a-closed-subspace]]. Finally $P$ is\ncontractive: from $\\langle Px,x\\rangle=\\langle Px,Px\\rangle=\\|Px\\|^2$ and\nCauchy–Schwarz, $\\|Px\\|^2\\le\\|Px\\|\\,\\|x\\|$, so $\\|Px\\|\\le\\|x\\|$ for all $x$,\nand $\\langle Px,x\\rangle=\\|Px\\|^2\\ge0$ is a nonnegative real number.\n\n**Well-definedness: the regularity clause.** For an orthogonal projection value\nthe pairing $E_x(B)=\\langle E(B)x,x\\rangle$ is a nonnegative real number and\n$E_x(X)=\\langle x,x\\rangle=\\|x\\|^2<+\\infty$, so every $E_x$ is a finite\nnonnegative set function and the regularity requirement is a meaningful\ncondition on it; that each $E_x$ is genuinely a countably additive measure of\ntotal mass $\\|x\\|^2$, and that the polarized pairings $E_{x,y}$ are finite\ncomplex measures, is proved as\n[[lem-scalar-and-complex-measures-from-a-pvm]] before either is used.",
+          "uses": [
+            "3.1",
+            "4.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-bounded-borel-pvm-integral",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $(X,\\Sigma)$ be a measurable space, let $H$ be a\nnonzero complex Hilbert space, let $E$ be a projection valued measure on\n$(X,\\Sigma)$, and let $f:X\\to\\mathbb C$ be bounded and $\\Sigma$-measurable\n([[def-measurable-function-between-measurable-spaces]]). Then:\n\n1. there is a unique operator $\\Phi_E(f)\\in\\mathcal B(H)$ with\n   $$\\langle\\Phi_E(f)x,y\\rangle=\\int f\\,dE_{x,y}\\qquad(x,y\\in H),$$\n   and for every sequence $(s_n)$ of complex simple functions with\n   $\\|f-s_n\\|_\\infty\\to0$ one has $\\|\\Phi_E(f)-\\int s_n\\,dE\\|\\to0$: the integral\n   is obtained from uniform simple approximations and is independent of the\n   approximating sequence;\n2. $\\|\\Phi_E(f)\\|\\le\\|f\\|_\\infty$, and for every $x\\in H$\n$$\\langle\\Phi_E(f)x,x\\rangle=\\int f\\,dE_x,\\qquad \\|\\Phi_E(f)x\\|^2=\\int|f|^2\\,dE_x ;$$\n3. the exact norm is the **$E$-essential supremum**\n$$\\|f\\|_{E,\\infty}:=\\sup\\bigl\\{\\|f\\|_{\\infty,E_x}:\\ x\\in H,\\ \\|x\\|=1\\bigr\\}, \\qquad \\|\\Phi_E(f)\\|=\\|f\\|_{E,\\infty},$$\n   where $\\|f\\|_{\\infty,E_x}$ denotes the essential supremum of the real measurable function $|f|$ with respect to\n   the finite measure $E_x$ ([[def-essential-supremum-with-respect-to-a-measure]]).",
+          "uses": [
+            "3.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-pvm-integral-is-a-star-homomorphism",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $(X,\\Sigma)$ be a measurable space, let $H$ be a\nnonzero complex Hilbert space, let $E$ be a projection valued measure on\n$(X,\\Sigma)$, and for a bounded measurable $f$ write $\\Phi_E(f)=\\int f\\,dE$ for\nthe operator of [[thm-bounded-borel-pvm-integral]]. Then:\n\n1. $\\Phi_E$ is linear and unital: $\\Phi_E(\\mathbf 1_X)=I$ and\n   $\\Phi_E(af+bg)=a\\Phi_E(f)+b\\Phi_E(g)$ for bounded measurable $f,g$ and\n   $a,b\\in\\mathbb C$;\n2. $\\Phi_E$ is multiplicative: $\\Phi_E(fg)=\\Phi_E(f)\\Phi_E(g)$;\n3. $\\Phi_E$ preserves conjugation: $\\Phi_E(\\overline f)=\\Phi_E(f)^*$;\n4. if $(f_n)$ are bounded measurable with $\\sup_n\\|f_n\\|_\\infty<\\infty$, $f$\n   is bounded measurable, and $f_n\\to f$ pointwise $E$-almost everywhere,\n   meaning $E_x$-almost everywhere for every $x\\in H$, then\n   $\\Phi_E(f_n)\\to\\Phi_E(f)$ in the strong operator topology.",
+          "uses": [
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-cauchy-schwarz-in-an-inner-product-space",
+          "source_section": "Statement",
+          "quote": "For all vectors $x,y$ in a real or complex inner-product space,\n\n$$|\\langle x,y\\rangle|\\le\\|x\\|\\,\\|y\\| ,$$\n\nwith equality if and only if $x$ and $y$ are linearly dependent.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "For $u\\in D(A)$, [F5] and nonnegativity give $\\|(I+A)u\\|\\,\\|u\\|\\ge|\\langle(I+A)u,u\\rangle|=\\|u\\|^2+\\langle Au,u\\rangle\\ge\\|u\\|^2$. Hence $I+A$ is injective and bounded below by $1$. To prove $A$ is closed, suppose $u_n\\in D(A)$, $u_n\\to u$, and $Au_n\\to v$. For every $w\\in D(A)$, self-adjointness gives $\\langle Aw,u\\rangle=\\lim_n\\langle Aw,u_n\\rangle=\\lim_n\\langle w,Au_n\\rangle=\\langle w,v\\rangle$; by the defining criterion for the adjoint, $u\\in D(A^*)$ and $A^*u=v$. Self-adjointness, including equality of domains, yields $u\\in D(A)$ and $Au=v$. Thus $A$ is closed. For $w\\in D((I+A)^*)$, subtracting the identity term from the defining adjoint relation gives $w\\in D(A^*)$ and $(I+A)^*w=w+A^*w$. Conversely, if $w\\in D(A^*)$, then $\\langle(I+A)u,w\\rangle=\\langle u,w+A^*w\\rangle$ for every $u\\in D(A)$, so $w\\in D((I+A)^*)$ with $(I+A)^*w=w+A^*w$. Thus $(I+A)^*=I+A^*=I+A$ with domain $D(A)$, so $I+A$ is self-adjoint. If $u_n\\in D(A)$ and $(I+A)u_n$ converges, the lower bound makes $(u_n)$ Cauchy; closedness then puts the limit in the range, so the range of $I+A$ is closed. A vector orthogonal to that range lies in $\\ker(I+A)^*=\\ker(I+A)$, which is zero by the same lower bound; the range is therefore dense and hence all of $H$. Thus $B=(I+A)^{-1}$ exists everywhere, is bounded with norm at most $1$, is injective, and has range $D(A)$, which is dense.",
+          "inputs": [
+            "given",
+            "A1",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "If $x=(I+A)u$ and $y=(I+A)v$, then $\\langle Bx,y\\rangle=\\langle u,(I+A)v\\rangle=\\langle(I+A)u,v\\rangle=\\langle x,By\\rangle$, so $B$ is self-adjoint. Also $\\langle Bx,x\\rangle=\\langle u,(I+A)u\\rangle=\\|u\\|^2+\\langle Au,u\\rangle\\ge0$, so $B$ is positive. For nonreal $z$, Cauchy–Schwarz [F5] and self-adjointness give $\\|(B-zI)w\\|\\ge|\\operatorname{Im}z|\\,\\|w\\|$ and the same lower bound for its adjoint, so its range is closed and dense. For real $z<0$, positivity and [F5] give $\\|(B-zI)w\\|\\ge(-z)\\|w\\|$, again giving closed and dense range. For real $z>1$, the Neumann series $(zI-B)^{-1}=z^{-1}\\sum_{n\\ge0}(B/z)^n$ converges in operator norm, so $B-zI$ is invertible as well. Hence $\\sigma(B)\\subseteq[0,1]$.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [A1] and [F1], $B$ has its regular spectral PVM $E_B$ on $\\sigma(B)$. If $x=E_B(\\{0\\})y$, then [F4] gives $Bx=\\Phi_{E_B}(b\\mathbf1_{\\{0\\}})y=0$, so $E_B(\\{0\\})H\\subseteq\\ker B$. Conversely, if $Bx=0$, [F3] gives $0=\\|Bx\\|^2=\\int b^2\\,dE_x(b)$. Since $\\{b>0\\}=\\bigcup_{n\\ge1}[1/n,1]$ and $b^2\\ge n^{-2}$ on each such interval, $E_x([1/n,1])=0$ for every $n$. Strong countable additivity and $E_B(\\sigma(B))=I$ then imply $x=E_B(\\{0\\})x$. Since $B$ is injective, $E_B(\\{0\\})=0$. This is a zero spectral projection; it does not remove $0$ from the operator spectrum.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "The map $\\phi(b)=b^{-1}-1$ on $\\sigma(B)\\setminus\\{0\\}$ is Borel. For a Borel set $S\\subseteq[0,\\infty)$ set $E_A(S):=E_B(\\{b\\in\\sigma(B)\\setminus\\{0\\}:\\phi(b)\\in S\\})$. Inverse images preserve disjoint unions and intersections, so [F2] makes $E_A$ a PVM; its total value is $E_B(\\sigma(B)\\setminus\\{0\\})=I$ because $E_B(\\{0\\})=0$. The defining identity on indicator functions, extended first to simple functions and then by uniform approximation, gives $\\Phi_{E_A}(f)=\\Phi_{E_B}(g)$ for every bounded Borel $f$ on $[0,\\infty)$, where $g(b)=f(\\phi(b))$ for $b>0$ and $g(0)=0$.",
+          "inputs": [
+            "A2",
+            "F2",
+            "F4",
+            "step 3.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "step": "5.1",
+          "claim": "Write $\\mu_x^B(S)=\\langle E_B(S)x,x\\rangle$. From the definition in step 4.1, $\\mu_x(S)=\\mu_x^B(\\{b>0:\\phi(b)\\in S\\})$, so $\\int\\lambda^2\\,d\\mu_x(\\lambda)=\\int\\phi(b)^2\\,d\\mu_x^B(b)$. If $x=By$, multiplicativity and the star-homomorphism identity [F4] give $d\\mu_x^B(b)=b^2d\\mu_y^B(b)$; hence $\\int\\phi(b)^2\\,d\\mu_x^B(b)=\\int_{(0,1]}(1-b)^2\\,d\\mu_y^B(b)\\le\\|y\\|^2$. Thus $x$ lies in the domain defining $T_A$. Conversely, if $\\int\\phi^2\\,d\\mu_x^B<\\infty$, then $\\int_{(0,1]}b^{-2}\\,d\\mu_x^B=\\int(\\phi+1)^2\\,d\\mu_x^B\\le2\\int\\phi^2\\,d\\mu_x^B+2\\|x\\|^2<\\infty$. The bounded truncations $y_N:=\\Phi_{E_B}(b^{-1}\\mathbf1_{[1/N,1]})(x)$ are Cauchy by the quadratic identity [F3], since their squared tails are tails of this finite integral, and converge to some $y\\in H$. Multiplying by $B$ gives $By_N=E_B([1/N,1])x\\to x$ by strong countable additivity and $E_B(\\{0\\})=0$, so $By=x$. Hence $D(T_A)=\\operatorname{Ran}B=D(A)$. For $x=By$, the truncation in the definition of $T_A$ is, by step 4.1, $\\Phi_{E_B}((1-b)\\mathbf1_{[1/(N+1),1]})(y)$. These bounded multipliers converge pointwise off $\\{0\\}$ to $1-b$ and are uniformly bounded by $1$; [F4] gives strong convergence to $\\Phi_{E_B}(1-b)y=(I-B)y=y-x=Ax$. Thus $T_A=A$ on the common domain, proving the operator identity.",
+          "inputs": [
+            "A2",
+            "F3",
+            "F4",
+            "step 3.1",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "step": "6.1",
+          "claim": "If $f$ is bounded Borel on $[0,\\infty)$, step 4.1 gives $f(A)=\\Phi_{E_B}(g)$ for $g(b)=f(\\phi(b))$ on $b>0$ and $g(0)=0$. By [F3], $\\|f(A)\\|\\le\\|g\\|_\\infty\\le\\sup_{\\lambda\\ge0}|f(\\lambda)|$, and $\\|f(A)u\\|^2=\\int|f|^2\\,d\\mu_u$. This proves the bounded Borel calculus claims.",
+          "inputs": [
+            "A2",
+            "F2",
+            "F3",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement fixes H≠{0} and a normalized total PVM."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 proves E_B({0})=0; step 5.1 uses it in the inverse-domain truncation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 4.1 maps b=1 to λ=0 and step 5.1 includes this endpoint."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The allowed A=0 case gives B=I and E_A concentrated at λ=0; steps 1.1–6.1 still apply."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 3.1, 4.1 and 5.1 treat b=0 and b=1 explicitly."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Axiom of Choice [A1] is used with [F1] in step 3.1; Countable Choice [A2] supports PVM integral suppliers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 5.1 proves x=By implies the λ² integral is finite."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 5.1 constructs y from a finite λ² integral and proves By=x."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Take H=C² and A=diag(0,1).",
+          "result": "B=diag(1,1/2), the push-forward atoms are λ=0 and λ=1, D(A)=C², and f(A)=diag(f(0),f(1)) has norm at most sup|f|.",
+          "verifies": "Steps 1.1–6.1; hand calculation only."
+        }
+      ],
+      "finite_checks_disposition": "The finite diagonal case checks transform convention and bounded calculus, not the general unbounded domain statement.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-59",
+        "notes": "Authoring-stage contract records local supplier interfaces and boundary checks; independent review and approval remain separate downstream gates."
+      }
+    },
+    "lem-qftx-hermite-coefficient-decay": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-qft-hermite-oscillator-research-supplier",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $N\\ge1$, $a_1,\\ldots,a_N>0$ and $c>0$. Let\n$Q_{\\mathrm{osc}}$ be the completion of $C_c^\\infty(\\mathbb R^N;\\mathbb C)$\nfor the form inner product\n$$a_{\\mathrm{osc}}(u,v):=\\sum_{j=1}^N a_j\\int (\\partial_j u)\\overline{\\partial_jv} +\\int (c|q|^2+2)u\\overline v.$$\nThis is the space $Q$ of\n[[lem-qft-coercive-polynomial-form-domain]] for $V(q)=c|q|^2$ and $C_0=0$.\nFor $\\mathbf n=(n_1,\\ldots,n_N)\\in\\mathbb N_0^N$, there is a smooth product\nHermite function $\\psi_{\\mathbf n}$ such that\n$$\\langle\\psi_{\\mathbf n},\\psi_{\\mathbf m}\\rangle_{L^2}=\\delta_{\\mathbf n\\mathbf m},\\qquad \\overline{\\operatorname{span}}\\{\\psi_{\\mathbf n}\\}=L^2(\\mathbb R^N),$$\nand\n$$\\left(-\\sum_{j=1}^Na_j\\partial_j^2+c|q|^2\\right)\\psi_{\\mathbf n} =\\epsilon_{\\mathbf n}\\psi_{\\mathbf n},\\qquad \\epsilon_{\\mathbf n}:=\\sum_{j=1}^N(2n_j+1)\\sqrt{a_jc}.$$\nFor the ground multi-index $\\mathbf0$, the smooth representative is\n$$\\psi_{\\mathbf0}(q)=\\prod_{j=1}^N(b_j/\\pi)^{1/4}e^{-b_jq_j^2/2}, \\qquad b_j:=\\sqrt{c/a_j}.$$\nEach $\\psi_{\\mathbf n}$ belongs to $Q_{\\mathrm{osc}}$, and every $u\\in\nQ_{\\mathrm{osc}}$ satisfies the exact form expansion\n$$\\sum_{j=1}^N a_j\\|\\partial_j u\\|_2^2+ c\\||q|u\\|_2^2 =\\sum_{\\mathbf n\\in\\mathbb N_0^N}\\epsilon_{\\mathbf n} |\\langle u,\\psi_{\\mathbf n}\\rangle|^2.$$\nAll parameters are positive real mathematical parameters; this lemma makes no\nphysical identification.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-nrqm-oscillator-multidimensional-oscillator-completeness",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]) and let $d\\ge1$. For each $j\\in\\{1,\\dots,d\\}$ put $K_j^y:=L^2(\\mathbb R,dy_j)$ and take a copy $(g^{(j)}_n)_{n\\in\\mathbb N}$ of the Hermite family of [[thm-nrqm-oscillator-hermite-recurrence]] in $K_j^y$. Define the left-associated completed tensor products by $\\mathcal K_1^y:=K_1^y$ and $\\mathcal K_r^y:=\\mathcal K_{r-1}^y\\widehat\\otimes K_r^y$ for $2\\le r\\le d$. Let $\\Theta_y^{(1)}:K_1^y\\to L^2(\\mathbb R,dy_1)$ be the identity; recursively, for $2\\le r\\le d$, let\n\n$$\\Theta_y^{(r)}:=\\Theta_{r-1,1}^y\\circ\\bigl(\\Theta_y^{(r-1)}\\otimes I_{K_r^y}\\bigr):\\mathcal K_r^y\\longrightarrow L^2(\\mathbb R^r,dy),$$\n\nwhere $\\Theta_{r-1,1}^y:L^2(\\mathbb R^{r-1},dy)\\widehat\\otimes K_r^y\\to L^2(\\mathbb R^r,dy)$ is the two-factor Euclidean product unitary of [[lem-nrqm-composites-euclidean-l2-product-unitary]], and $\\Theta_y^{(r-1)}\\otimes I_{K_r^y}$ is the bounded tensor map of [[lem-nrqm-composites-bounded-tensor-maps]]. Thus $\\Theta_y^{(r)}$ is a specified unitary, with $\\Theta_y^{(r)}(u\\otimes v)(y',y_r)=\\Theta_y^{(r-1)}u(y')v(y_r)$ almost everywhere. For $N=(n_1,\\dots,n_d)\\in\\mathbb N^d$, set $G_N^{y,1}:=g^{(1)}_{n_1}$ and recursively $G_N^{y,r}:=G_N^{y,r-1}\\otimes g^{(r)}_{n_r}$; define $g_N:=\\Theta_y^{(d)}G_N^{y,d}\\in L^2(\\mathbb R^d,dy)$.\n\nLet $\\varphi:\\mathbb N\\to\\mathbb N^d$ list the multi-indices by increasing total degree $M=\\sum_jn_j$ and, within each finite level, in lexicographic order. By [[thm-stars-and-bars]] each level is finite and the levels exhaust $\\mathbb N^d$, so this specifies a bijection. All sums indexed by $\\mathbb N^d$ below are taken in this order; nonnegative sums equivalently mean the supremum of finite subsums.\n\nThe functions $g_N$ have smooth product representatives from the recursive construction. These representatives are unique: a continuous difference that is nonzero at a point remains nonzero on a ball of positive Lebesgue measure. The coordinate derivatives in (b) and (c) are taken on these representatives and their scaled products.\n\nThen:\n\n(a) $(g_N)_{N\\in\\mathbb N^d}$ is a complete orthonormal family of $L^2(\\mathbb R^d,dy)$: $\\langle g_N,g_M\\rangle=\\delta_{NM}$ and every $f\\in L^2(\\mathbb R^d,dy)$ has $f=\\sum_{N\\in\\mathbb N^d}\\langle f,g_N\\rangle g_N$ with $\\|f\\|^2=\\sum_{N\\in\\mathbb N^d}|\\langle f,g_N\\rangle|^2$, the sum being the supremum over finite subfamilies ([[def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis]], [[thm-parseval-equivalences-for-a-complete-orthonormal-family]]);\n\n(b) with the eigenvalues $\\lambda_N:=\\sum_{j=1}^d(2n_j+1)=2M+d$, $M:=\\sum_jn_j$, let $A_d$ be the diagonal operator of [[lem-nrqm-oscillator-diagonal-adjoint-and-graph-core-lemma]] for the enumerated family $e_m:=g_{\\varphi(m)}$ and eigenvalue sequence $\\lambda_{\\varphi(m)}$. Then $A_d$ is self-adjoint with\n\n$$A_dg_N=\\lambda_Ng_N,\\qquad D(A_d)=\\Bigl\\{f:\\sum_{N\\in\\mathbb N^d}\\lambda_N^2|\\langle f,g_N\\rangle|^2<\\infty\\Bigr\\},\\qquad \\sigma(A_d)=\\{2M+d:M\\in\\mathbb N\\}$$\n\n(the spectrum by [[thm-nrqm-oscillator-diagonal-spectrum]]); the algebraic span of the $g_N$ is a core, and on that span\n\n$$A_d=\\sum_{j=1}^d\\bigl(-\\partial_{y_j}^2+y_j^2\\bigr)$$\n\nas operators, the $j$-th summand acting in the $j$-th coordinate;\n\n(c) for real $m_j,\\omega_j,\\hbar>0$ put $\\ell_j:=\\sqrt{\\hbar/(m_j\\omega_j)}$ and let $D_j:K_j^y\\to K_j^x:=L^2(\\mathbb R,dx_j)$ be the one-dimensional unitary of [[thm-nrqm-oscillator-oscillator-scaling-and-exact-realization]]. Define $\\mathcal K_1^x:=K_1^x$ and $\\mathcal K_r^x:=\\mathcal K_{r-1}^x\\widehat\\otimes K_r^x$ for $2\\le r\\le d$, and define $\\Theta_x^{(1)}$ and $\\Theta_x^{(r)}$ by the same recursion as $\\Theta_y^{(r)}$, using the two-factor Euclidean product unitaries on the $x$-coordinate spaces. Let $\\mathcal D_1:=D_1$ and recursively $\\mathcal D_r:=\\mathcal D_{r-1}\\otimes D_r:\\mathcal K_r^y\\to\\mathcal K_r^x$; each $\\mathcal D_r$ is unitary by [[lem-nrqm-composites-bounded-tensor-maps]]. Put $D_d:=\\Theta_x^{(d)}\\mathcal D_d(\\Theta_y^{(d)})^{-1}:L^2(\\mathbb R^d,dy)\\to L^2(\\mathbb R^d,dx)$. For $N\\in\\mathbb N^d$, define $G_N^{x,1}:=D_1g^{(1)}_{n_1}=:\\psi^{(1)}_{n_1}$ and recursively $G_N^{x,r}:=G_N^{x,r-1}\\otimes\\psi^{(r)}_{n_r}$; then $\\psi_N:=D_dg_N=\\Theta_x^{(d)}G_N^{x,d}$. Let $H$ be the diagonal operator of [[lem-nrqm-oscillator-diagonal-adjoint-and-graph-core-lemma]] for the enumerated family $\\psi_{\\varphi(m)}$ and eigenvalue sequence $E_{\\varphi(m)}$, where $E_N:=\\hbar\\sum_{j=1}^d\\omega_j(n_j+\\frac12)$. Then $H$ is self-adjoint with\n\n$$H\\psi_N=E_N\\psi_N,\\qquad D(H)=\\Bigl\\{f:\\sum_N E_N^2|\\langle f,\\psi_N\\rangle|^2<\\infty\\Bigr\\},\\qquad \\sigma(H)=\\overline{\\{E_N:N\\in\\mathbb N^d\\}},$$\n\nthe span of the $\\psi_N$ is a core, and on that core\n\n$$H=\\sum_{j=1}^d\\Bigl(-\\frac{\\hbar^2}{2m_j}\\partial_{x_j}^2+\\frac{m_j\\omega_j^2}{2}x_j^2\\Bigr);$$\n\n(d) if $\\omega_1=\\cdots=\\omega_d=\\omega$, then $\\sigma(H)=\\{\\hbar\\omega(M+\\frac d2):M\\in\\mathbb N\\}$, and the eigenvalue $\\hbar\\omega(M+\\frac d2)$ has multiplicity\n\n$$\\bigl|\\{(n_1,\\dots,n_d)\\in\\mathbb N^d:n_1+\\cdots+n_d=M\\}\\bigr|=\\binom{M+d-1}{d-1};$$\n\nin particular for $d=3$ the multiplicity is $(M+1)(M+2)/2$ ([[thm-stars-and-bars]]). All parameters are positive real numbers; no physical interpretation is asserted.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-nrqm-oscillator-hermite-recurrence",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $L^2=L^2(\\mathbb R,dy)$ be the complex Lebesgue space with inner product $\\langle\\varphi,\\psi\\rangle=\\int_{\\mathbb R}\\varphi(y)\\overline{\\psi(y)}\\,dy$ linear in the first argument ([[def-l-p-space-as-a-quotient-by-null-functions]], [[def-complex-lp-and-euclidean-test-function-conventions]]); this pairing makes $L^2$ a complex Hilbert space by [[lem-l-two-with-the-integral-pairing-is-a-hilbert-space]]. For complex-valued functions, smoothness and derivatives use the componentwise convention of [[def-complex-lp-and-euclidean-test-function-conventions]]. Write $g_0$ for the function $g_0(y):=\\pi^{-1/4}e^{-y^{2}/2}$ and also for its class in $L^2$. Put\n\n$$P:=\\{p\\,g_0:\\ p\\in\\mathbb C[y]\\}\\subseteq L^2 ,$$\n\nthe set of classes of polynomial multiples of $g_0$. Each class in $P$ has a unique representative of the form $p g_0$: if $p g_0=qg_0$ almost everywhere, the continuous function $(p-q)g_0$ vanishes almost everywhere and therefore everywhere, and $g_0(y)>0$ for every $y$, so $p=q$. Let $Y$ be multiplication by $y$ and $\\partial_y$ the derivative, acting on this unique smooth representative. Set $g_{-1}:=0$ for use in the recurrence formulas at $n=0$. Define\n\n$$a:=\\frac{Y+\\partial_y}{\\sqrt2},\\qquad a^\\dagger:=\\frac{Y-\\partial_y}{\\sqrt2},\\qquad g_n:=\\frac{(a^\\dagger)^ng_0}{\\sqrt{n!}}\\quad(n\\in\\mathbb N).$$\n\nThen:\n\n(a) $g_0\\in L^2$ with $\\|g_0\\|=1$; more generally $y^kg_0\\in L^2$ for every $k\\in\\mathbb N$, so $P$ is a linear subspace of $L^2$ all of whose members are represented by $C^\\infty$ functions;\n\n(b) $Y,\\partial_y,a,a^\\dagger$ map $P$ into $P$, and $\\partial_y(pg_0)=(p'-yp)g_0$ for every polynomial $p$;\n\n(c) for all $\\varphi,\\psi\\in P$, $\\langle a^\\dagger\\varphi,\\psi\\rangle=\\langle\\varphi,a\\psi\\rangle$ and $\\langle a\\varphi,\\psi\\rangle=\\langle\\varphi,a^\\dagger\\psi\\rangle$;\n\n(d) $a^\\dagger a-a a^\\dagger=-I$ on $P$, i.e. $[a,a^\\dagger]=aa^\\dagger-a^\\dagger a=I$ on $P$, and $ag_0=0$;\n\n(e) for every $n\\in\\mathbb N$: $ag_n=\\sqrt n\\,g_{n-1}$ (with $ag_0=0$), $a^\\dagger g_n=\\sqrt{n+1}\\,g_{n+1}$, $a^\\dagger ag_n=ng_n$ and $aa^\\dagger g_n=(n+1)g_n$;\n\n(f) the polynomials\n\n$$H_n(y):=(-1)^ne^{y^2}\\frac{d^n}{dy^n}e^{-y^2}$$\n\nare polynomials of degree $n$ with leading coefficient $2^n$, $H_0=1$, $H_1(y)=2y$, $H_n(-y)=(-1)^nH_n(y)$, and they satisfy\n\n$$H_n'=2nH_{n-1},\\qquad H_{n+1}=2yH_n-2nH_{n-1}\\qquad(n\\ge1);$$\n\nmoreover\n\n$$g_n=\\frac{H_ng_0}{\\sqrt{2^nn!}};$$\n\n(g) consequently\n\n$$\\sqrt2\\,y\\,g_n=\\sqrt n\\,g_{n-1}+\\sqrt{n+1}\\,g_{n+1},\\qquad \\sqrt2\\,g_n'=\\sqrt n\\,g_{n-1}-\\sqrt{n+1}\\,g_{n+1}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-hilbert-space-fourier-expansion",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let\n$(e_i)_{i\\in I}$ be a complete orthonormal family in a real or complex Hilbert\nspace $H$\n([[def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis]]) and\nlet $x\\in H$, with partial sums\n$P_Fx=\\sum_{i\\in F}\\langle x,e_i\\rangle e_i$ over finite $F\\subseteq I$. Then:\n\n1. $x$ is the norm limit of the finite-subset net $(P_Fx)$, that is\n   $$x=\\sum_{i\\in I}\\langle x,e_i\\rangle e_i$$\n   in the sense of convergence of the net of finite subsums;\n2. **the coefficients are unique**: if $(a_i)_{i\\in I}$ is a family in\n   $\\mathbb F$ whose finite-subset net $\\sum_{i\\in F}a_ie_i$ converges to $x$,\n   then $a_i=\\langle x,e_i\\rangle$ for every $i\\in I$;\n3. the support $\\{i : \\langle x,e_i\\rangle\\ne0\\}$ is at most countable, and the\n   expansion does not depend on an ordering: if $(i_k)_{k\\in\\mathbb N}$ is a\n   sequence of pairwise distinct elements of $I$ whose image contains the\n   support, then the sequence of partial sums\n   $\\sum_{k<n}\\langle x,e_{i_k}\\rangle e_{i_k}$ also converges to $x$.\n\nClaim 3 is the sense in which the expansion is **unconditional**: the sum is\nindependent of any ordering, because the finite-subset net converges and any\nenumeration of a set containing the support by pairwise distinct indices is\ncofinal in the squared mass.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "With these parameters, $\\hbar^2/(2m_j)=1$, $m_j\\omega_j^2/2=1$, and $\\ell_j=\\sqrt{\\hbar/(m_j\\omega_j)}=1$. The parameter substitution in the inspected proof of [F1] uses precisely this scaling; [F2] specifies the resulting unscaled product basis $h_\\alpha=g_{\\alpha_1}(x_1)g_{\\alpha_2}(x_2)$ and its eigenvalue $\\lambda_\\alpha=\\sum_{j=1}^2(2\\alpha_j+1)=2|\\alpha|+2$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F3] each Hermite factor is a polynomial times $e^{-x_j^2/2}$, so $h_\\alpha$ and all its derivatives decay rapidly enough for integration by parts against any Schwartz function. The operator $H^r$ is a finite sum of polynomial-coefficient derivatives and maps Schwartz space continuously to itself, hence $H^r f\\in L^2$. Repeated integration by parts in $x_1$ and $x_2$ has no boundary terms; it gives $\\langle H^r f,h_\\alpha\\rangle=\\langle f,H^r h_\\alpha\\rangle=\\lambda_\\alpha^r\\langle f,h_\\alpha\\rangle$.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Parseval for the complete orthonormal basis [F1]–[F2] is supplied by [F4] and gives $\\|H^r f\\|_2^2=\\sum_\\alpha|\\langle H^r f,h_\\alpha\\rangle|^2=\\sum_\\alpha(2|\\alpha|+2)^{2r}|\\langle f,h_\\alpha\\rangle|^2$. Since $1+|\\alpha|\\le2|\\alpha|+2$, the asserted weighted bound follows.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Each $H^r$ is a finite differential expression with polynomial coefficients, so its Schwartz seminorms bound the pointwise polynomially weighted derivatives in that expression. In two dimensions, $\\|u\\|_2\\le C\\sup_x(1+|x|)^2|u(x)|$ because $(1+|x|)^{-4}$ is integrable. Thus $f\\mapsto\\|H^r f\\|_2$ is a continuous seminorm on Schwartz space, and the weighted coefficient map is continuous.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The coefficient index set is the fixed nonempty set N0².",
+          "reviewed": {
+            "upheld": true,
+            "by": "same-owner-qft-green-maps scoped boundary review",
+            "reason": "The coefficient index set is the fixed nonempty set of pairs of nonnegative integers, including the oscillator ground state. Parseval and the explicit positive oscillator eigenvalues control all coefficients; no optional empty orthonormal family is substituted."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For f=0 both sides vanish; r=0 reduces to Parseval in step 3.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The ground-state index α=(0,0) has weight one in step 3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The zero function and r=0 are allowed and covered in step 3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The endpoint r=0 and lowest index α=(0,0) are covered in steps 2.1 and 3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice [A1] is used for countable Hermite suppliers in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma is a weighted estimate, not an if-and-only-if statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma is a weighted estimate, not an if-and-only-if statement."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Use h_(0,0) and r=1 in the declared scaling.",
+          "result": "Hh_(0,0)=2h_(0,0), so the weighted coefficient sum is 1 and ||Hh_(0,0)||²=4.",
+          "verifies": "Steps 1.1–3.1; one basis vector only."
+        }
+      ],
+      "finite_checks_disposition": "The ground-state calculation checks normalization; Parseval and integration by parts prove the full estimate.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-59",
+        "notes": "Authoring-stage contract records local supplier interfaces and boundary checks; independent review and approval remain separate downstream gates."
+      }
+    },
+    "thm-qftx-tempered-massive-gaussian-field": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-kolmogorov-extension-for-standard-borel-coordinate-spaces",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. For any set $I$, standard-Borel coordinate spaces $(E_i,\\mathcal E_i)$, and consistent finite-dimensional laws $(\\mu_F)_{F\\Subset I}$, there is a unique probability measure $\\mu$ on $\\mathcal C_I$ whose $F$-coordinate marginal is $\\mu_F$ for each finite $F$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qft-hermite-oscillator-research-supplier",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $N\\ge1$, $a_1,\\ldots,a_N>0$ and $c>0$. Let\n$Q_{\\mathrm{osc}}$ be the completion of $C_c^\\infty(\\mathbb R^N;\\mathbb C)$\nfor the form inner product\n$$a_{\\mathrm{osc}}(u,v):=\\sum_{j=1}^N a_j\\int (\\partial_j u)\\overline{\\partial_jv} +\\int (c|q|^2+2)u\\overline v.$$\nThis is the space $Q$ of\n[[lem-qft-coercive-polynomial-form-domain]] for $V(q)=c|q|^2$ and $C_0=0$.\nFor $\\mathbf n=(n_1,\\ldots,n_N)\\in\\mathbb N_0^N$, there is a smooth product\nHermite function $\\psi_{\\mathbf n}$ such that\n$$\\langle\\psi_{\\mathbf n},\\psi_{\\mathbf m}\\rangle_{L^2}=\\delta_{\\mathbf n\\mathbf m},\\qquad \\overline{\\operatorname{span}}\\{\\psi_{\\mathbf n}\\}=L^2(\\mathbb R^N),$$\nand\n$$\\left(-\\sum_{j=1}^Na_j\\partial_j^2+c|q|^2\\right)\\psi_{\\mathbf n} =\\epsilon_{\\mathbf n}\\psi_{\\mathbf n},\\qquad \\epsilon_{\\mathbf n}:=\\sum_{j=1}^N(2n_j+1)\\sqrt{a_jc}.$$\nFor the ground multi-index $\\mathbf0$, the smooth representative is\n$$\\psi_{\\mathbf0}(q)=\\prod_{j=1}^N(b_j/\\pi)^{1/4}e^{-b_jq_j^2/2}, \\qquad b_j:=\\sqrt{c/a_j}.$$\nEach $\\psi_{\\mathbf n}$ belongs to $Q_{\\mathrm{osc}}$, and every $u\\in\nQ_{\\mathrm{osc}}$ satisfies the exact form expansion\n$$\\sum_{j=1}^N a_j\\|\\partial_j u\\|_2^2+ c\\||q|u\\|_2^2 =\\sum_{\\mathbf n\\in\\mathbb N_0^N}\\epsilon_{\\mathbf n} |\\langle u,\\psi_{\\mathbf n}\\rangle|^2.$$\nAll parameters are positive real mathematical parameters; this lemma makes no\nphysical identification.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qftx-hermite-coefficient-decay",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $\\mathcal S(\\mathbb R^2;\\mathbb C)$ be the space of smooth complex-valued functions $f$ for which $\\sup_{x\\in\\mathbb R^2}|x^\\alpha\\partial^\\beta f(x)|<\\infty$ for every pair of multi-indices $\\alpha,\\beta\\in\\mathbb N_0^2$. Let $(h_\\alpha)_{\\alpha\\in\\mathbb N_0^2}$ be the product Hermite basis of $L^2(\\mathbb R^2)$ obtained from the multidimensional oscillator at $\\hbar=1$, $m_1=m_2=1/2$, and $\\omega_1=\\omega_2=2$, and write $|\\alpha|=\\alpha_1+\\alpha_2$. For $H=-\\partial_{x_1}^2-\\partial_{x_2}^2+|x|^2$ on $\\mathcal S(\\mathbb R^2;\\mathbb C)$, every integer $r\\ge0$ and every $f\\in\\mathcal S(\\mathbb R^2;\\mathbb C)$ satisfy\n\n$$\\sum_{\\alpha\\in\\mathbb N_0^2}(1+|\\alpha|)^{2r}|\\langle f,h_\\alpha\\rangle_{L^2}|^2\\le\\|H^r f\\|_{L^2}^2<\\infty.$$\n\nConsequently the map $f\\mapsto(\\langle f,h_\\alpha\\rangle)_\\alpha$ is continuous from Schwartz space to each weighted square-summable sequence space with norm $\\bigl(\\sum_\\alpha(1+|\\alpha|)^{2r}|c_\\alpha|^2\\bigr)^{1/2}$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-standard-borel-space",
+          "source_section": "Definition",
+          "quote": "A measurable space $(E,\\mathcal E)$ is **standard Borel** if there are a Polish space $P$ and a bijection $h:E\\to P$ such that $A\\in\\mathcal E$ exactly when $h[A]$ is Borel in $P$. Thus the measurable structure is part of the datum; no particular compatible Polish topology on $E$ is selected.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-euclidean-gaussian-fourier-transform-with-two-pi-normalization",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. For $n\\ge1$, $t>0$, and $\\xi\\in\\mathbb R^n$,\n$$\\mathcal F(e^{-\\pi t|x|^2})(\\xi)=t^{-n/2}e^{-\\pi|\\xi|^2/t}.$$\nEvery polynomial times a positive real Gaussian is absolutely integrable.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to \\mathbb C$ belong to\n$L^1(\\mu \\times \\nu)$. Then:\n\n1. for $\\mu$-almost every $x$, the section $f_x$ belongs to $L^1(\\nu)$;\n2. for $\\nu$-almost every $y$, the section $f^y$ belongs to $L^1(\\mu)$;\n3. after assigning the value $0$ on the exceptional parameter sets, the\n   section-integral functions are integrable; and\n4. the three integrals agree:\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-fourier-transform-on-l-one-of-rn",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$ and $f\\in L^1(\\mathbb R^n;\\mathbb C)$, with the componentwise integral and quotient conventions of [[def-complex-lp-and-euclidean-test-function-conventions]], [[def-l-p-space-as-a-quotient-by-null-functions]] and [[def-l-one-of-a-measure]]. Define\n$$\\widehat f(\\xi)=\\mathcal Ff(\\xi):=\\int_{\\mathbb R^n}f(x)\\exp(-2\\pi i x\\cdot\\xi)\\,dx,\\qquad \\xi\\in\\mathbb R^n.$$\nHere $x\\cdot\\xi=\\sum_{j=1}^n x_j\\xi_j$, Lebesgue measure is used, and the exponential is [[def-complex-exponential]]. Its unit modulus follows from [[cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]]. The integral is evaluated using any measurable representative. Absolute convergence and representative independence are the obligations discharged by [[lem-l-one-fourier-transform-is-well-defined]]. The output is a function defined at every frequency, not merely an almost-everywhere class. At frequency zero the formula reads $\\widehat f(0)=\\int f$. No choice selection of representatives for a family of classes is part of this definition.",
+          "uses": [
+            "1.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-fourier-transform-is-a-topological-automorphism-of-schwartz-space",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. The Fourier transform is a topological automorphism of $\\mathcal S(\\mathbb R^n)$, with $\\mathcal F^2=R$ and $\\mathcal F^{-1}=R\\mathcal F$, where $Rf(x)=f(-x)$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-parseval-pairing-on-schwartz-space",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. For $f,g\\in\\mathcal S(\\mathbb R^n)$,\n$$\\int\\widehat f(\\xi)\\overline{\\widehat g(\\xi)}\\,d\\xi=\\int f(x)\\overline{g(x)}\\,dx.$$\nThe pairing is complex-linear in the first variable. In particular $\\|\\widehat f\\|_2=\\|f\\|_2$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-hilbert-space-fourier-expansion",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let\n$(e_i)_{i\\in I}$ be a complete orthonormal family in a real or complex Hilbert\nspace $H$\n([[def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis]]) and\nlet $x\\in H$, with partial sums\n$P_Fx=\\sum_{i\\in F}\\langle x,e_i\\rangle e_i$ over finite $F\\subseteq I$. Then:\n\n1. $x$ is the norm limit of the finite-subset net $(P_Fx)$, that is\n   $$x=\\sum_{i\\in I}\\langle x,e_i\\rangle e_i$$\n   in the sense of convergence of the net of finite subsums;\n2. **the coefficients are unique**: if $(a_i)_{i\\in I}$ is a family in\n   $\\mathbb F$ whose finite-subset net $\\sum_{i\\in F}a_ie_i$ converges to $x$,\n   then $a_i=\\langle x,e_i\\rangle$ for every $i\\in I$;\n3. the support $\\{i : \\langle x,e_i\\rangle\\ne0\\}$ is at most countable, and the\n   expansion does not depend on an ordering: if $(i_k)_{k\\in\\mathbb N}$ is a\n   sequence of pairwise distinct elements of $I$ whose image contains the\n   support, then the sequence of partial sums\n   $\\sum_{k<n}\\langle x,e_{i_k}\\rangle e_{i_k}$ also converges to $x$.\n\nClaim 3 is the sense in which the expansion is **unconditional**: the sum is\nindependent of any ordering, because the finite-subset net converges and any\nenumeration of a set containing the support by pairwise distinct indices is\ncofinal in the squared mass.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-cauchy-schwarz-in-an-inner-product-space",
+          "source_section": "Statement",
+          "quote": "For all vectors $x,y$ in a real or complex inner-product space,\n\n$$|\\langle x,y\\rangle|\\le\\|x\\|\\,\\|y\\| ,$$\n\nwith equality if and only if $x$ and $y$ are linearly dependent.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $I=\\mathbb N_0^2$, enumerated by total degree and lexicographic order. For each finite $F\\subset I$, let $\\mu_F$ have density $\\prod_{\\alpha\\in F}(2\\pi)^{-1/2}e^{-x_\\alpha^2/2}$ on $\\mathbb R^F$. [F5] makes these probability laws; integrating out coordinates with [F6] proves their consistency. Each coordinate space $(\\mathbb R,\\mathcal B(\\mathbb R))$ is standard Borel by [F4]. Applying [F1] with [A1] yields $\\Omega=\\mathbb R^I$ with its cylinder $\\sigma$-algebra and a probability $\\mathbb P$ having these finite marginals. The coordinate variables $\\xi_\\alpha(\\omega)=\\omega_\\alpha$ are therefore independent standard normals.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F4",
+            "F5",
+            "F6",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For $p\\in\\mathbb R^2$ put $w_m(p)=(|p|^2+m^2)^{-1/2}$. Since $m>0$, $w_m$ is smooth, and every derivative is bounded: its derivatives are finite sums of polynomial factors divided by positive powers of $|p|^2+m^2$, bounded near the origin and decaying at infinity. The product rule therefore shows multiplication by $w_m$ maps Schwartz space continuously to itself. Define $T_mf=\\mathcal F_{2\\pi}^{-1}\\bigl(w_m(2\\pi\\cdot)\\mathcal F_{2\\pi}f\\bigr)$. By [F8], $T_mf$ is Schwartz; because $w_m$ is real and even, $T_mf$ is real for real $f$. Under the exact convention in the Statement, $\\widehat f(p)=\\mathcal F_{2\\pi}f(p/(2\\pi))$, and the change of variables $p=2\\pi\\xi$ gives $\\widehat{T_mf}(p)=w_m(p)\\widehat f(p)$.",
+          "step": "1.2",
+          "inputs": [
+            "F7",
+            "F8",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For a finite initial segment $I_N$ of the fixed enumeration set $S_N=\\sum_{\\alpha\\in I_N}(1+|\\alpha|)^{-4}\\xi_\\alpha^2$. The density in [F5] is normalized, and integration by parts using $(-xe^{-x^2/2})'=(x^2-1)e^{-x^2/2}$ gives $\\mathbb E\\xi_\\alpha^2=1$. Hence $\\mathbb E S_N=\\sum_{\\alpha\\in I_N}(1+|\\alpha|)^{-4}\\le\\sum_{n\\ge0}(n+1)(n+1)^{-4}=\\sum_{n\\ge0}(n+1)^{-3}=:C<\\infty$: grouping $n+1$ in dyadic blocks $[2^j,2^{j+1})$ bounds each block by $2^j2^{-3j}=2^{-2j}$, a summable geometric series. Markov's inequality, which follows from $\\mathbf1_{\\{S_N>M\\}}\\le S_N/M$, gives $\\mathbb P(S_N>M)\\le C/M$. Since the events increase to $\\{S:=\\sum_\\alpha(1+|\\alpha|)^{-4}\\xi_\\alpha^2>M\\}$, countable additivity gives $\\mathbb P(S>M)\\le C/M$; letting integer $M\\to\\infty$ shows $S<\\infty$ on a common event $\\Omega_0$ of probability one.",
+          "step": "2.1",
+          "inputs": [
+            "F5",
+            "F6",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For $f\\in\\mathcal S_\\mathbb R(\\mathbb R^2)$ put $c_\\alpha(f)=\\langle f,h_\\alpha\\rangle$. On $\\Omega_0$, [F11] and [F3] give $\\sum_\\alpha|\\xi_\\alpha c_\\alpha(f)|\\le S^{1/2}\\bigl(\\sum_\\alpha(1+|\\alpha|)^4|c_\\alpha(f)|^2\\bigr)^{1/2}<\\infty$. Thus $W_0(f):=\\sum_\\alpha\\xi_\\alpha c_\\alpha(f)$ converges absolutely for every $f$ on the same event, is real-linear, and satisfies $|W_0(f)|\\le S^{1/2}\\|H^2f\\|_2$. The last quantity is a continuous Schwartz seminorm by [F3], so each sample is a tempered distribution. Set $W_0=0$ outside $\\Omega_0$. Every evaluation $W_0(f)$ is measurable as the almost-sure limit of measurable finite sums, hence $W_0$ is measurable for the cylinder $\\sigma$-algebra.",
+          "step": "3.1",
+          "inputs": [
+            "A2",
+            "F2",
+            "F3",
+            "F11",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The partial sums for $W_0(f)$ converge in $L^2(\\Omega,\\mathbb P)$ as well: independence, unit variance, and Parseval in [F10] make their squared $L^2$ tail equal to the corresponding tail of $\\sum_\\alpha|c_\\alpha(f)|^2=\\|f\\|_2^2$. For any finite real combination $\\sum_j t_jW_0(f_j)$, a finite partial sum is a linear combination of independent standard normals, with characteristic function $\\prod_\\alpha e^{-t^2c_\\alpha^2/2}=e^{-t^2\\sum_\\alpha c_\\alpha^2/2}$; by [F10] its variance converges to $\\|\\sum_jt_jf_j\\|_2^2$. If $X_N\\to X$ in $L^2$, then $|\\mathbb E e^{itX_N}-\\mathbb E e^{itX}|\\le|t|\\,\\mathbb E|X_N-X|\\le|t|\\|X_N-X\\|_2\\to0$, so the limit has the centered normal characteristic function with that variance. Hence the family is jointly Gaussian, centered, and $\\mathbb E[W_0(f)W_0(g)]=\\int f(x)g(x)\\,d^2x$.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "F10",
+            "step 1.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Set $\\Phi(f)=W_0(T_mf)$. Each sample in $\\Omega_0$ is a continuous real-linear functional of $f$ because both $W_0$ and $T_m$ are continuous on Schwartz space; outside $\\Omega_0$ it is zero. Thus $\\Phi$ is a measurable $\\mathcal S'_\\mathbb R$-valued random variable for the cylinder $\\sigma$-algebra. From step 4.1 its covariance is $\\mathbb E[\\Phi(f)\\Phi(g)]=\\int T_mf(x)T_mg(x)\\,d^2x$. Applying [F9] and changing variables $p=2\\pi\\xi$ gives $(2\\pi)^{-2}\\int\\widehat{T_mf}(p)\\overline{\\widehat{T_mg}(p)}\\,d^2p$. Since $f,g$ are real, $\\widehat f(-p)=\\overline{\\widehat f(p)}$ and $\\widehat g(-p)=\\overline{\\widehat g(p)}$; the substitution $p\\mapsto-p$ changes this to $(2\\pi)^{-2}\\int\\overline{\\widehat f(p)}\\widehat g(p)w_m(p)^2\\,d^2p=C_m(f,g)$ by step 1.2. The finite-dimensional distributions remain centered Gaussian by step 4.1 and linearity of $T_m$.",
+          "step": "5.1",
+          "inputs": [
+            "F7",
+            "F9",
+            "step 4.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 allows an empty finite coordinate set as the normalized empty product."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For f=0 the series and covariance vanish in steps 3.1 and 4.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-test and one-coordinate cases are included in steps 1.1 and 4.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The theorem assumes m>0 and makes no massless m=0 claim, where the multiplier can be singular at p=0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "At p=0 the denominator is m²>0, so the multiplier in step 5.1 is nonsingular."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC [A1] is used in step 1.1; CC [A2] supports Hermite summability in step 3.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is an existence theorem with no if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is an existence theorem with no if-and-only-if assertion."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "For finite F set W_F(f)=Σ_(α∈F)ξ_αc_α(f).",
+          "result": "Independence and unit variance give E[W_F(f)W_F(g)]=Σ_(α∈F)c_α(f)c_α(g); finite linear combinations have characteristic function exp(-t²Σc_α²/2).",
+          "verifies": "Step 4.1; finite-coordinate calculation only."
+        }
+      ],
+      "finite_checks_disposition": "The finite normal-coordinate calculation checks Gaussian laws and covariance truncations; it does not replace the common full-measure temperedness proof.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-59",
+        "notes": "Authoring-stage contract records local supplier interfaces and boundary checks; independent review and approval remain separate downstream gates."
+      }
+    },
+    "lem-qftx-finite-lorentz-cocycle-splitting": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-riemannian-metric-and-riemannian-manifold",
+          "source_section": "Definition",
+          "quote": "A **Riemannian metric** on a Hausdorff second-countable smooth manifold $M$ is a smooth symmetric covariant two-tensor $g$ such that $g_p(v,v)>0$ for every point $p$ and every nonzero $v\\in T_pM$. A **Riemannian manifold** is the pair $(M,g)$.\n\nThis is a [[def-smooth-tensor-field]] giving a [[def-smooth-bundle-metric]] on $TM$. Dimension zero is allowed: its zero bilinear form is positive definite because there are no nonzero vectors. The empty manifold has its unique empty metric. Boundaries are allowed where stated, with smoothness understood up to the boundary.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "ex-the-round-metric-on-the-sphere-as-an-induced-metric",
+          "source_section": "Example",
+          "quote": "The Euclidean inclusion of $S^n$ induces its round metric. In spherical coordinates on $S^2$, $g=d\\theta^2+\\sin^2\\theta\\,d\\varphi^2$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-riemannian-volume-density",
+          "source_section": "Definition",
+          "quote": "The **Riemannian volume density** is $\\mu_g=\\sqrt{\\det G_x}\\,|dx^1\\cdots dx^n|$ in coordinates.\n\nThe matrix is that of [[prop-coordinate-criterion-for-a-riemannian-metric]], so its determinant is positive and smooth. The density frames and their absolute-Jacobian law are [[def-density-bundle-and-smooth-density]]. In dimension zero take the empty determinant to be one, giving weight one at every point, independently of orientation. The compatibility of these local formulas is proved in [[lem-the-riemannian-volume-density-is-coordinate-independent]].",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-support-and-compactly-supported-riemann-integral-in-rn",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$. For $f:\\mathbb R^n\\to\\mathbb R$, its **support** is\n$$\\operatorname{supp}f:=\\overline{\\{x\\in\\mathbb R^n:f(x)\\ne0\\}}.$$\nThe function is **compactly supported** if $\\operatorname{supp}f$ is compact.\n\nA compactly supported $f$ is **compactly supported Riemann integrable** if there is a nondegenerate closed rectangle $Q$ with $\\operatorname{supp}f\\subseteq\\operatorname{int}Q$ such that $f|_Q$ is Riemann integrable. Its integral over Euclidean space is defined by\n$$\\int_{\\mathbb R^n}f:=\\int_Qf.$$\nThe value is independent of $Q$ by [[lem-compactly-supported-riemann-integral-is-well-defined]]. When the support is empty, $f=0$ and the value is $0$.",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-continuous-functions-on-compact-jordan-sets-are-integrable",
+          "source_section": "Statement",
+          "quote": "Every continuous real function on a compact Jordan measurable set $E\\subseteq\\mathbb R^m$ is Riemann integrable over $E$.",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-heine-borel-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions\n$n \\to \\mathbb{R}$ and let $d_2$ be the Euclidean metric on it\n($\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it). Then:\n\n1. **Closed boxes are compact.** For reals $a_k \\le b_k$ $(k < n)$ the box\n   $Q = \\{\\, x \\in \\mathbb{R}^n : a_k \\le x_k \\le b_k \\text{ for every } k < n \\,\\}$\n   is a compact subset of $(\\mathbb{R}^n, d_2)$ (Open cover, subcover, compact metric space, and compact subset of a metric space).\n2. **Heine-Borel.** A subset $K \\subseteq \\mathbb{R}^n$ is a compact subset of\n   $(\\mathbb{R}^n, d_2)$ if and only if $K$ is closed in $\\mathbb{R}^n$\n   (The metric topology: a set is open when every one of its points has a ball around it inside the set; closed means open complement) and bounded\n   (Bounded subset, diameter, distance from a point to a set, and distance between two sets in a metric space).\n3. **The real line.** A subset $K \\subseteq \\mathbb{R}$ is a compact subset of\n   $(\\mathbb{R}, d_{\\mathbb{R}})$, the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   (The absolute value makes $\\mathbb{R}$ a metric space: $d(x,y) = |x-y|$ is a metric, its open balls are the intervals $(x-r, x+r)$, and it is unbounded), if and only if $K$ is closed in\n   $\\mathbb{R}$ and bounded.\n\n**No choice principle is used.** The bisection below halves one coordinate at a\ntime and takes the **left** half whenever the left half still fails to be finitely\ncovered, the right half otherwise: a rule with two outcomes, decided by a\nproperty of the box, not a selection. That is the whole reason the theorem is\navailable in ZF, while the general \"complete and totally bounded implies compact\"\n(A complete, totally bounded metric space is compact, proved from countable choice used exactly once) is not.\n\nThe hypothesis $n \\ge 1$ is inherited from $\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it, which defines\n$\\mathbb{R}^n$ and its metrics only there; the last remark below records what\nhappens at $n = 0$.",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-c-one-change-of-variables-for-continuous-compactly-supported-integrands",
+          "source_section": "Statement",
+          "quote": "Let $U,V \\subseteq \\mathbb R^n$ be open and let $T : U \\to V$ be a\n $C^1$ diffeomorphism. If $f : V \\to \\mathbb R$ is continuous and compactly\nsupported, then\n$$ \\int_V f(y)\\,d\\lambda_n(y) = \\int_U f(T(x))\\,|\\det DT(x)|\\,d\\lambda_n(x). $$",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In $\\mathfrak l_{\\mathbb C}$ set $L_i=(J_i+iK_i)/2$ and $R_i=(J_i-iK_i)/2$. Expanding the stated brackets gives $[L_i,L_j]=\\epsilon_{ijk}L_k$, $[R_i,R_j]=\\epsilon_{ijk}R_k$, and $[L_i,R_j]=0$. The real span $\\mathfrak k=\\operatorname{span}_{\\mathbb R}\\{L_i,R_i\\}$ has compact Lie-algebra bracket: with $\\sigma_1=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix}$, $\\sigma_2=\\begin{pmatrix}0&-i\\\\i&0\\end{pmatrix}$, $\\sigma_3=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}$, the basis $-i\\sigma_i/2$ of $\\mathfrak{su}(2)$ has the same $\\epsilon_{ijk}$ brackets. The two summands commute, and $\\mathfrak k\\otimes_{\\mathbb R}\\mathbb C=\\mathfrak l_{\\mathbb C}$ because $J_i=L_i+R_i$ and $K_i=(L_i-R_i)/i$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Let $G=\\mathrm{SU}(2)\\times\\mathrm{SU}(2)$, whose Lie algebra is $\\mathfrak k$. The matrices $\\begin{pmatrix}a&b\\\\-\\overline b&\\overline a\\end{pmatrix}$ with $|a|^2+|b|^2=1$ identify $\\mathrm{SU}(2)$ with the unit quaternions and hence with $S^3\\subset\\mathbb R^4$, so $G$ is compact. To prove simple connectivity in the form needed here, take any piecewise-smooth based loop in $S^3$. Uniform continuity gives a finite subdivision on which each subarc lies in an open hemisphere. If $\\delta(t)$ is the short great-circle arc between its endpoints, then $H(s,t)=((1-s)\\gamma(t)+s\\delta(t))/\\|(1-s)\\gamma(t)+s\\delta(t)\\|$ is defined throughout that hemisphere, fixes the endpoints, and homotopes the subarc to $\\delta$. Each great-circle arc lies in the intersection of $S^3$ with a proper two-dimensional linear subspace $P_j\\subset\\mathbb R^4$. A finite union of proper linear subspaces cannot cover $\\mathbb R^4$: induct on their number; after choosing $x$ outside $P_1,\\ldots,P_{n-1}$, if $x\\notin P_n$ we are done, and otherwise choose $y\\notin P_n$; the line $x+ty$ meets each $P_j$ in at most one parameter value, so a real $t$ outside the finite forbidden set gives a point outside all $P_j$. Thus the resulting polygonal loop omits some $q\\in S^3$. Stereographic projection identifies $S^3\\setminus\\{q\\}$ with $\\mathbb R^3$; straight-line contraction there to the basepoint fixes the loop endpoints and is piecewise smooth. Hence every piecewise-smooth based loop contracts through piecewise-smooth based loops. Applying this factorwise proves the required property for $G$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Complexify $\\rho$ and $c$ and, on $W=V\\oplus\\mathbb C$, define $\\widetilde\\rho(X)(v,z)=(\\rho(X)v+zc(X),0)$ for $X\\in\\mathfrak k$. The representation identity for $\\rho$ and the cocycle identity for $c$ give $[\\widetilde\\rho(X),\\widetilde\\rho(Y)](v,z)=([\\rho(X),\\rho(Y)]v+z(\\rho(X)c(Y)-\\rho(Y)c(X)),0)=\\widetilde\\rho([X,Y])(v,z)$, so $\\widetilde\\rho$ is a finite-dimensional Lie-algebra representation.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Reparameterize each smooth path segment to $[0,1]$. For a piecewise-smooth path $\\gamma$ put $a(t)=\\gamma(t)^{-1}\\dot\\gamma(t)\\in\\mathfrak k$ and $A(t)=\\widetilde\\rho(a(t))$. Solve $U'=UA$, $U(0)=I$, separately on each segment and concatenate. On a segment with $\\|A\\|\\le M$, the Picard series has $n$th term $\\int_{0\\le t_1\\le\\cdots\\le t_n\\le t}A(t_1)\\cdots A(t_n)\\,dt_1\\cdots dt_n$, bounded by $M^n/n!$; it converges uniformly and termwise integration verifies the integral equation. If $D$ is the difference of two solutions with $D(0)=0$, then $\\|D(t)\\|\\le M\\int_0^t\\|D(r)\\|dr$; iterating gives $\\|D(t)\\|\\le\\sup\\|D\\|M^nt^n/n!\\to0$, proving uniqueness. Solving $V'=-AV$, $V(0)=I$, by the same series gives $(UV)'=0$ and $UV=I$, so each transport matrix is invertible. Concatenating paths multiplies their transports in order, since on the second segment the solution with initial value $U_1$ is $U_1$ times the solution with initial value $I$. For a piecewise-smooth endpoint-fixed homotopy $\\Gamma(s,t)$, the series terms and their $s$-derivatives are uniformly bounded by $M^n/n!$ and $nLM^{n-1}/n!$, respectively, where $L=\\sup\\|\\partial_sA\\|$ and we enlarge $M$ so $M\\ge1$. Both series converge uniformly; integrating the derivative series in $s$ shows the limit $U$ is differentiable in $s$. Put $a=\\Gamma^{-1}\\partial_t\\Gamma$ and $b=\\Gamma^{-1}\\partial_s\\Gamma$. Direct differentiation yields $\\partial_sa-\\partial_tb=[a,b]$. The matrix-valued form $\\theta=g^{-1}dg$ satisfies $d\\theta=-\\theta\\wedge\\theta$, by differentiating $g^{-1}g=I$; equivalently $d\\theta+\\frac12[\\theta,\\theta]=0$. Applying the representation from step 2.1 gives $A_s-B_t=[A,B]$, where $B=\\widetilde\\rho(b)$. For $K=U_s-UB$, differentiation now gives $K_t=KA+U(BA+A_s-AB-B_t)=KA$, and $K(s,0)=0$ because the initial endpoint is fixed. The uniqueness just proved gives $K=0$; at the fixed terminal endpoint $B(s,1)=0$, so $U_s(s,1)=0$. Thus transport is invariant under these homotopies. If $\\gamma_1,\\gamma_2$ run from $e$ to the same $g$, the loop $\\gamma_1$ followed by the reverse of $\\gamma_2$ contracts by step 1.2, so its transport is $I$; the analogous loop using $\\gamma_2$ shows the two transports agree. Hence transport is path-independent. Locally near $g_0$, choose paths from $e$ to $g_0^{-1}g$ varying smoothly with $g$ in a coordinate ball; the same uniform-series bounds imply continuous dependence on $g$, so $U$ is continuous. Finally, left-translating a path from $e$ to $h$ and concatenating it after a path from $e$ to $g$ gives $U(gh)=U(g)U(h)$, since left translation preserves $\\gamma^{-1}\\dot\\gamma$. Thus $U$ is a continuous group representation.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "The block form of $\\widetilde\\rho$ makes $U(g)=\\begin{pmatrix}R(g)&b(g)\\\\0&1\\end{pmatrix}$, and its group law gives $b(hg)=R(h)b(g)+b(h)$. Identify each $\\mathrm{SU}(2)$ with the unit quaternions and regard $S^3$ as the unit quaternions. For an explicit normalized round-volume integral, let $\\chi(t)=0$ for $t\\le1/3$ and $\\chi(t)=e^{-1/(t-1/3)}$ for $t>1/3$. For $x=(x_1,\\ldots,x_4)\\in S^3$, put $D(x)=\\sum_{j=1}^4(\\chi(x_j)+\\chi(-x_j))$ and $\\psi_{j,\\pm}(x)=\\chi(\\pm x_j)/D(x)$. Since some $|x_j|\\ge1/2$, $D(x)>0$; these eight smooth nonnegative functions sum to $1$ and have supports compactly contained in $U_{j,\\pm}=\\{\\pm x_j>1/4\\}$. In the chart given by the other three coordinates $y$, the sphere is $x_j=\\pm\\sqrt{1-|y|^2}$, the metric matrix is $G=I+yy^{\\mathsf T}/(1-|y|^2)$, and therefore $\\sqrt{\\det G}=(1-|y|^2)^{-1/2}$. By [L1], integrate each complex chart integrand and each finite-dimensional $V$-valued function coordinatewise in any basis. Define\n$$I(f)=\\sum_{j,\\pm}\\int_{\\mathbb R^3}\\psi_{j,\\pm}(x(y))f(x(y))(1-|y|^2)^{-1/2}\\,dy,$$\nextending each integrand by zero outside its chart. Each real and imaginary part is continuous with compact support inside the chart, so [F1]–[F2] make each coordinate integral finite. The chart weights are nonnegative, and their partition-of-unity sum gives $I(1)$; applying the triangle inequality to the complex Riemann sums and passing to their limits gives $|I(h)|\\le\\sup_{S^3}|h|\\,I(1)$. The number $I(1)$ is finite and positive: at $x=(1,0,0,0)$ one partition function is positive on a neighborhood, and on a small coordinate cube there the integrand has a positive lower bound. Thus $\\nu(h):=I(h)/I(1)$ is complex-linear, normalized, positive on nonnegative real functions, and satisfies $|\\nu(h)|\\le\\sup_{S^3}|h|$. Its chart definition is independent of a finite subordinate chart partition: insert the second partition into each summand; each product has compact support in the chart overlap, and the metric identity $G(x)=DT(x)^{\\mathsf T}G(Tx)DT(x)$ gives $\\sqrt{\\det G(x)}=|\\det DT(x)|\\sqrt{\\det G(Tx)}$. Apply [F3] to real and imaginary parts separately to transfer each compactly supported integral; summing the finite terms gives equality. Quaternion left multiplication $L_q(x)=qx$ is real-linear; using $q\\bar q=|q|^2$, $\\overline{qx}=\\bar x\\bar q$, and associativity gives $|qx|^2=(qx)\\overline{qx}=q(x\\bar x)\\bar q=|x|^2|q|^2=|x|^2$ for unit $q$, so $L_q$ is orthogonal and an isometry of the induced metric; using the transported charts and partition in the same identity gives $\\nu(h\\circ L_q)=\\nu(h)$. Extend $\\nu$ to continuous $V$-valued maps by the same coordinatewise rule and call this extension $\\nu_V$. Define the product functional on continuous $F:G\\to V$ by $\\mu(F)=\\nu_V(q\\mapsto\\nu_V(r\\mapsto F(q,r)))$. For continuity, fix $q_0\\in S^3$ and $\\varepsilon>0$. For each $r\\in S^3$, continuity of the finitely many coordinate functions of $F$ at $(q_0,r)$ gives neighborhoods in both factors on which their values differ from $F(q_0,r)$ by less than $\\varepsilon/3$. Compactness of the second $S^3$ selects finitely many such neighborhoods; intersecting their first-factor neighborhoods gives $U\\ni q_0$ with $\\sup_r|F_j(q,r)-F_j(q_0,r)|<2\\varepsilon/3$ for each coordinate $j$ and $q\\in U$. The scalar bound for $\\nu$ therefore makes each coordinate of $q\\mapsto\\nu_V(r\\mapsto F(q,r))$ continuous. The product functional is linear, normalized, and left invariant by applying the factor identity twice. Since $b$ is continuous on compact $G$ and $V$ is finite-dimensional, $\\bar v:=\\mu(b)$ exists coordinatewise. Left invariance and the cocycle formula give $R(h)\\bar v+b(h)=\\mu(g\\mapsto b(hg))=\\bar v$ for every $h\\in G$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "L1",
+            "step 1.2",
+            "step 3.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Differentiate the fixed-point identity of step 4.1 at $h=\\exp(tX)$ and $t=0$. The path equation defining $U$ gives $dR_e(X)=\\rho(X)$ and $db_e(X)=c(X)$: these are the upper-left and upper-right blocks of $\\widetilde\\rho(X)$ in step 2.1. Hence $\\rho(X)\\bar v+c(X)=0$ for $X\\in\\mathfrak k$. Set $v=-\\bar v$. The identity $c(X)=\\rho(X)v$ extends complex-linearly from $\\mathfrak k$ to $\\mathfrak l_{\\mathbb C}$ by step 1.1, and hence holds for every original $X\\in\\mathfrak l$.",
+          "step": "5.1",
+          "inputs": [
+            "A1",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "V=0 is allowed; the affine block construction and averaging still apply in steps 3.1 and 5.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For c=0 the fixed point v=0 satisfies the conclusion in step 5.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "No lower bound on dim V is used; the argument includes dim V=1 in steps 3.1–5.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The trivial representation and zero cocycle are permitted in the fixed-point argument in step 5.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no time interval or endpoint variable in the Lie-algebra statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 5.1 constructs the normalized round-volume functional from a fixed finite chart partition."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement asserts cocycle splitting, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement asserts cocycle splitting, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Substitute i=1,j=2 into the L_i and R_i definitions.",
+          "result": "The brackets give [L_1,L_2]=L_3 and [L_1,R_2]=0.",
+          "verifies": "Step 1.1 sign check only; it does not prove cocycle splitting."
+        }
+      ],
+      "finite_checks_disposition": "A single bracket substitution checks signs; compact-form integration and averaging prove the general result.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-59",
+        "notes": "Authoring-stage contract records local supplier interfaces and boundary checks; independent review and approval remain separate downstream gates."
+      }
+    },
+    "cex-qftx-resolvent-zero-continuous-spectrum": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-qftx-positive-unbounded-spectral-calculus",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $H\\ne\\{0\\}$ be a complex Hilbert space, with inner product linear in its first variable, and let $A:D(A)\\subseteq H\\to H$ be densely defined, self-adjoint, and nonnegative, meaning $\\langle Au,u\\rangle\\ge0$ for every $u\\in D(A)$. Here self-adjoint means equality with the Hilbert-space adjoint, including equality of domains. A projection-valued measure (PVM) on a measurable space $(X,\\Sigma)$ is a map $E:\\Sigma\\to\\mathcal B(H)$ such that every $E(S)$ is a bounded orthogonal projection ($E(S)^2=E(S)=E(S)^*$), $E(\\varnothing)=0$, $E(X)=I$, $E(S\\cap T)=E(S)E(T)$, and $E(\\bigcup_n S_n)u=\\sum_nE(S_n)u$ in norm for each disjoint sequence $(S_n)$ and each $u\\in H$. On a locally compact Hausdorff Borel space, such a PVM is regular when each finite scalar measure $\\mu_u(S):=\\langle E(S)u,u\\rangle$ is inner regular on Borel sets and outer regular by open supersets. Then $I+A:D(A)\\to H$ is bijective. Its inverse $B:=(I+A)^{-1}$ is a bounded positive (meaning $\\langle Bx,x\\rangle\\ge0$ for all $x\\in H$) self-adjoint injection with $\\|B\\|\\le1$ and dense range $D(A)$. For a bounded operator, its spectrum $\\sigma(B)$ is the set of complex $z$ for which $B-zI$ has no bounded two-sided inverse. Let $E_B$ be the regular spectral PVM on the Borel subsets of the nonempty compact set $\\sigma(B)$ satisfying $B=\\int_{\\sigma(B)}b\\,dE_B(b)$. Then $\\sigma(B)\\subseteq[0,1]$ and $E_B(\\{0\\})=0$. Define $\\phi(b)=b^{-1}-1$ for $b\\in\\sigma(B)\\setminus\\{0\\}$ and, for every Borel $S\\subseteq[0,\\infty)$, define\n\n$$E_A(S):=E_B(\\{b\\in\\sigma(B)\\setminus\\{0\\}:\\phi(b)\\in S\\}).$$\n\nThis is a PVM on the Borel subsets of $[0,\\infty)$. For each $u\\in H$ put $\\mu_u(S):=\\langle E_A(S)u,u\\rangle$. The unbounded integral $\\int_{[0,\\infty)}\\lambda\\,dE_A(\\lambda)$ denotes the operator $T_A$ with domain\n\n$$D(T_A):=\\left\\{u\\in H:\\int_{[0,\\infty)}\\lambda^2\\,d\\mu_u(\\lambda)<\\infty\\right\\}$$\n\nand action\n\n$$T_Au:=\\lim_{N\\to\\infty}\\Phi_{E_A}(\\lambda\\mathbf1_{[0,N]})(u),$$\n\nwhere $\\Phi_{E_A}(g)$ is the bounded Borel PVM integral of $g$. Then $A=T_A$ and hence\n\n$$A=\\int_{[0,\\infty)}\\lambda\\,dE_A(\\lambda),\\qquad D(A)=\\left\\{u\\in H:\\int_{[0,\\infty)}\\lambda^2\\,d\\langle E_A(\\lambda)u,u\\rangle<\\infty\\right\\}.$$\n\nFor every bounded Borel function $f:[0,\\infty)\\to\\mathbb C$, $f(A):=\\Phi_{E_A}(f)$ is bounded, satisfies $\\|f(A)\\|\\le\\sup_{\\lambda\\ge0}|f(\\lambda)|$, and obeys $\\|f(A)u\\|^2=\\int|f|^2\\,d\\mu_u$. The condition $E_B(\\{0\\})=0$ does not assert that $0\\notin\\sigma(B)$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-cauchy-schwarz-in-an-inner-product-space",
+          "source_section": "Statement",
+          "quote": "For all vectors $x,y$ in a real or complex inner-product space,\n\n$$|\\langle x,y\\rangle|\\le\\|x\\|\\,\\|y\\| ,$$\n\nwith equality if and only if $x$ and $y$ are linearly dependent.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "On $H=\\ell^2(\\mathbb N)$ with standard basis $(e_n)_{n\\ge1}$ define $D(A)=\\{x=(x_n):\\sum_{n\\ge1}n^2|x_n|^2<\\infty\\}$ and $(Ax)_n=nx_n$. Finite sequences lie in $D(A)$ and are dense. For $x\\in D(A)$, Cauchy–Schwarz [F2] gives $\\sum n|x_n|^2\\le(\\sum n^2|x_n|^2)^{1/2}(\\sum|x_n|^2)^{1/2}<\\infty$, so $\\langle Ax,x\\rangle=\\sum n|x_n|^2\\ge0$ and $A$ is nonnegative.",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The operator is self-adjoint. If $y\\in D(A^*)$, there is $z\\in\\ell^2$ with $\\langle Ax,y\\rangle=\\langle x,z\\rangle$ for every finite sequence $x$; choosing $x=e_n$ gives $z_n=ny_n$, so $\\sum n^2|y_n|^2=\\|z\\|^2<\\infty$ and $y\\in D(A)$. Conversely, if $y\\in D(A)$ then $z=(ny_n)\\in\\ell^2$ satisfies the adjoint identity for every $x\\in D(A)$: both inner-product series converge by [F2] because $Ax,y,x,z\\in\\ell^2$, and their terms agree. Thus $D(A^*)=D(A)$ and $A^*=A$.",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "The inverse of $I+A$ is the bounded diagonal operator $B e_n=(n+1)^{-1}e_n$. Indeed for any $x\\in\\ell^2$, $y_n=x_n/(n+1)$ satisfies $\\sum n^2|y_n|^2\\le\\sum|x_n|^2$, and $(I+A)y=x$. The operator $B$ is positive and injective, but it is not bounded below because $\\|Be_n\\|=(n+1)^{-1}\\to0$ for unit vectors $e_n$. The vector $y=(1/n)_{n\\ge1}$ belongs to $\\ell^2$: for $n\\ge2$, $n^{-2}\\le(n-1)^{-1}-n^{-1}$, so $\\sum_{n\\ge1}n^{-2}\\le2$. It is not in $\\operatorname{Ran}B$, since $Bx=y$ would require $x_n=(n+1)/n>1$ for every $n$, which is not square-summable. Hence $B$ is not surjective and $0\\in\\sigma(B)$.",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "Define $E_B(S)x=\\sum_{n:(n+1)^{-1}\\in S}x_ne_n$ for Borel $S\\subseteq\\sigma(B)$. Its values are orthogonal coordinate projections, and the coordinate definition gives $E_B(\\varnothing)=0$, $E_B(\\sigma(B))=I$, and $E_B(S)E_B(T)=E_B(S\\cap T)$. For disjoint Borel $S_k$, each coordinate $n$ occurs in at most one projection, so the partial sums $\\sum_{k\\le N}E_B(S_k)x$ converge in $\\ell^2$ to $E_B(\\bigcup_kS_k)x$: the squared norm of the omitted coordinates is a tail of the convergent nonnegative series $\\sum_n|x_n|^2$. Thus $E_B$ is strongly countably additive. It integrates the coordinate function to $B$, because its integral acts diagonally by $(n+1)^{-1}$ on each $e_n$. For every $x$, its finite scalar measure is $\\mu_x(S):=\\langle E_B(S)x,x\\rangle=\\sum_{n:(n+1)^{-1}\\in S}|x_n|^2$. For any Borel $S\\subseteq\\sigma(B)$, the finite set $K_N:=\\{(n+1)^{-1}:n\\le N,\\ (n+1)^{-1}\\in S\\}$ is compact and contained in $S$, and $\\mu_x(K_N)\\uparrow\\mu_x(S)$ because $\\sum_n|x_n|^2<\\infty$. Hence $\\mu_x$ is inner regular on every Borel set. Since $\\sigma(B)$ is compact, for any Borel $S$ and $\\varepsilon>0$, inner regularity of $S^c$ gives a compact $K\\subseteq S^c$ with $\\mu_x(S^c\\setminus K)<\\varepsilon$; then the open set $\\sigma(B)\\setminus K$ contains $S$ and its excess measure is less than $\\varepsilon$. Thus $\\mu_x$ is also outer regular, so $E_B$ is a regular PVM. Hence [F1] identifies it with the bounded-resolvent spectral PVM. Since no atom is at zero, $E_B(\\{0\\})=0$, although step 3.1 proves $0\\in\\sigma(B)$. This refutes the asserted implication and shows why a zero spectral projection must be distinguished from a spectral value.",
+          "inputs": [
+            "A1",
+            "F1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample fixes the nonzero space ℓ²(N)."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 proves 0∈σ(B), while step 4.1 proves E_B({0})=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The first diagonal coordinate b1=1/2 is included in step 3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Finite truncations are invertible but infinite eigenvalues tend to zero; steps 3.1–4.1 handle the infinite case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Positive eigenvalues tend to 0; steps 3.1–4.1 show zero is spectral with no atom."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Axiom of Choice [A1] accompanies the PVM supplier [F1] in step 4.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The counterexample refutes a one-way implication and claims no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The counterexample refutes a one-way implication and claims no equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "The first two diagonal entries of B are 1/2 and 1/3.",
+          "result": "A finite truncation B_N is invertible with inverse norm N+1, which grows without bound; step 3.1 proves the full operator is not surjective.",
+          "verifies": "Step 3.1; finite truncations illustrate the infinite sequence."
+        }
+      ],
+      "finite_checks_disposition": "Finite truncations illustrate loss of a uniform inverse bound; step 3.1 proves the infinite-operator claim.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-59",
+        "notes": "Authoring-stage contract records local supplier interfaces and boundary checks; independent review and approval remain separate downstream gates."
+      }
+    }
+  }
+}

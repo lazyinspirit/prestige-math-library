@@ -1,0 +1,500 @@
+{
+  "version": 1,
+  "level": "physics-non-fluid-129-2026-10-21-r2",
+  "batch": "119",
+  "scope": [
+    "def-tgrx-exponential-ray-channel",
+    "prop-tgrx-collapse-channel-spectrum",
+    "ex-tgrx-greybody-nonplanck"
+  ],
+  "contracts": {
+    "def-tgrx-exponential-ray-channel": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by > $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that > $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-tgr-exponential-current",
+          "source_section": "Statement",
+          "quote": "The vacuum two-point form is positive type and has boundary kernel $$C(s)=-\\frac{1}{4\\pi(s-i0)^2},$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qft-fock-and-test-spaces",
+          "source_section": "Definition",
+          "quote": "Their vacuum is $\\Omega=(1,0,0,\\ldots)$. The finite-particle subspace $\\mathcal D_{\\rm fin}$ consists of sequences with only finitely many nonzero components",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qft-fock-ccr-car",
+          "source_section": "Statement",
+          "quote": "The bosonic operators on their displayed domains are closed and mutually adjoint, and on $\\mathcal D_{\\rm fin}$ satisfy $$[a(h),a^\\dagger(k)]=\\langle h,k\\rangle_2I,\\qquad [a(h),a(k)]=[a^\\dagger(h),a^\\dagger(k)]=0.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-c-one-change-of-variables-for-l-one-functions",
+          "source_section": "Statement",
+          "quote": "$$ \\int_V f(y)\\,d\\lambda_n(y) = \\int_U f(T(x))\\,|\\det DT(x)|\\,d\\lambda_n(x). $$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The positive derivative and endpoint limits make ell a smooth increasing diffeomorphism. A compact support [a,b] for g maps into the compact interval [ell(a),ell(b)] below ell_H, so f_g is a compact smooth test and J(f_g) is defined.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Pulling back the two-variable test pairing gives the Jacobian ell'(u)ell'(v). The positive coordinate scale chi cancels in the lower-boundary kernel, and the supplied Fock norm identity gives W(g,g)=||h_{f_g}||_2^2>=0.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Commuting the leftmost annihilator through the remaining fields yields the two-point contraction recurrence. With M_0=1 and M_1=0, induction gives the Wick-pairing formula and zero odd moments.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition and step 1.1: the zero test has zero pullback, field, and tested covariance."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The scale and rate are restricted by A>0 and k>0; the zero-map boundary is outside the stated domain."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The definition has no one-element cardinality parameter."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 treats the diagonal as a distributional lower boundary; it never evaluates the singular kernel pointwise."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 maps every compact test support to a compact interval strictly below ell_H, so the zero extension is smooth."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses exactly A1, Countable Choice, for the supplied Fock construction; no arbitrary-index choice is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition is not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "positive affine rescaling of the lower boundary",
+          "status": "checked",
+          "evidence": "For chi>0, chi^2[-(4 pi)^-1(chi s-i epsilon)^-2]=-(4 pi)^-1(s-i epsilon/chi)^-2, and epsilon/chi decreases to zero."
+        },
+        {
+          "name": "vacuum Wick recurrence",
+          "status": "checked",
+          "evidence": "The CCR commutator supplies one scalar contraction per later field; the annihilator term reaching the right vacuum vanishes, giving the displayed recurrence."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-119",
+        "notes": "Checked the positive-coordinate orientation, compact-support extension, exact i0 scaling, positivity as a Fock norm, and Gaussianity by a CCR induction on the finite-particle domain. Only the two-point channel is used downstream; no 4D field restriction or scattering existence is inferred."
+      }
+    },
+    "prop-tgrx-collapse-channel-spectrum": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by > $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that > $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-tgrx-exponential-ray-channel",
+          "source_section": "Definition",
+          "quote": "The tested form is of positive type: $W(g,g)\\ge0$ for every $g$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-tgr-exponential-current",
+          "source_section": "Statement",
+          "quote": "Its vacuum covariance is the positive-type distribution $$C_\\kappa(s)=-\\frac{\\kappa^2}{16\\pi}\\,\\operatorname{csch}^2\\!\\left(\\frac{\\kappa}{2}(s-i0)\\right).$$ Here the notation is fixed as follows: for $b=\\kappa/2$, set $Y_b(s)=\\sinh(bs)/b$. Since $Y_b'(s)=\\cosh(bs)>0$ and $Y_b(s)\\to\\pm\\infty$ as $s\\to\\pm\\infty$, it is a smooth increasing diffeomorphism. Define $\\operatorname{csch}^2(b(s-i0)):=b^{-2}Y_b^*((y-i0)^{-2})$, where $$\\langle Y_b^*T,\\varphi\\rangle:=\\left\\langle T,\\varphi(Y_b^{-1}(y))(Y_b^{-1})'(y)\\right\\rangle.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-tgr-thermal-contour-spectrum",
+          "source_section": "Statement",
+          "quote": "$S_{A,b}(\\omega)=\\frac{2\\pi(A/b^2)\\omega}{e^{\\pi\\omega/b}-1},\\qquad S_{A,b}(0)=\\frac{2\\pi L}{\\beta}=\\frac{2A}{b}.$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qft-fock-and-test-spaces",
+          "source_section": "Definition",
+          "quote": "$a(h)\\Omega=0$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-qft-fock-ccr-car",
+          "source_section": "Statement",
+          "quote": "The bosonic operators on their displayed domains are closed and mutually adjoint, and on $\\mathcal D_{\\rm fin}$ satisfy $$[a(h),a^\\dagger(k)]=\\langle h,k\\rangle_2I,\\qquad [a(h),a(k)]=[a^\\dagger(h),a^\\dagger(k)]=0.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-derivative-of-exponential",
+          "source_section": "Statement",
+          "quote": "In particular $(\\exp)'=\\exp$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-mean-value-theorem-on-closed-interval",
+          "source_section": "Statement",
+          "quote": "Let $f:[a,b]\\to\\mathbb R$ be continuous on $[a,b]$ and differentiable on $(a,b)$, with $a<b$. Then there is $c\\in(a,b)$ such that $$ f(b)-f(a)=f'(c)(b-a). $$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-exponential-addition-formula",
+          "source_section": "Statement",
+          "quote": "For all real $x,y$, $$\\exp(x+y)=\\exp(x)\\exp(y).$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Writing the seconds coordinate as a positive affine transform of the canonical length coordinate and using lambda^2 C_epsilon(lambda s)=C_(epsilon/lambda) proves invariance of the lower boundary. The supplier's chiral covariance then gives the displayed centered-time kernel after the unit conversion.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "The real orthogonal two-mode rotation preserves the CCR. Since the environment vacuum is killed by e, b(psi tensor Omega_e)=sqrt(Gamma)(a psi tensor Omega_e), so the output number expectation is Gamma times the signal occupation.",
+          "inputs": [
+            "A1",
+            "given",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The contour-spectrum supplier at A=kappa^2/(16 pi), b=kappa/2 gives the length spectrum and zero limit. Fourier rescaling gives S_k(omega), and substitution of -omega gives detailed balance at theta=2 pi/k.",
+          "inputs": [
+            "A1",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Mean-value positivity gives n_theta(omega)>0, so preserving the same Planck width forces Gamma=1 at every positive frequency. The exponential is strictly increasing, hence Gamma_* lies in (0,1) and is nonconstant; the addition law proves Gamma_* n_theta=n_(2 theta).",
+          "inputs": [
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The occupation-channel statement is for a fixed positive frequency and a normalized signal vector."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2: setting Gamma=0 gives b=e, which annihilates the environment vacuum and has zero output occupation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2: setting Gamma=1 gives b=a and retains the input occupation."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 gives the removable value S_k(0)=k/(4 pi); step 1.2 also covers Gamma endpoints."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 includes Gamma=0 and Gamma=1, where the output reduces to the environment or signal mode."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 use A1, Countable Choice, only through the supplied contour and Fock constructions."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The proposition states identities and implications, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The proposition states identities and implications, not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "single-mode loss endpoints",
+          "status": "checked",
+          "evidence": "Substitution of Gamma=0 and Gamma=1 in b gives respectively the vacuum environment output and the untouched signal output."
+        },
+        {
+          "name": "variable filter preserving a different Planck width",
+          "status": "checked",
+          "evidence": "For every omega>0, Gamma_*=1/(exp(theta omega)+1) lies in (0,1), is nonconstant, and Gamma_* n_theta=n_(2 theta)."
+        },
+        {
+          "name": "same-width Planck preservation",
+          "status": "checked",
+          "evidence": "Step 3.1 divides Gamma(omega)n_theta(omega)=n_theta(omega) by the proved positive occupation, forcing Gamma(omega)=1 at every positive frequency."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-119",
+        "notes": "Checked the exact lower-boundary scaling, thermal contour interface and units, CCR-preserving two-mode rotation, uniqueness of the unit filter at a fixed Planck width, and the explicit variable-filter identity at a different width. The 4D greybody probability in the sources is not conflated with the local Gamma."
+      }
+    },
+    "ex-tgrx-greybody-nonplanck": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by > $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that > $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "prop-tgrx-collapse-channel-spectrum",
+          "source_section": "Statement",
+          "quote": "For the Planck occupation function $n_\\theta(\\omega)=(\\exp(\\theta\\omega)-1)^{-1}$ with width $\\theta>0$ measured in seconds, one has $n_\\theta(\\omega)>0$ for every $\\omega>0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-tgrx-collapse-channel-spectrum",
+          "source_section": "Statement",
+          "quote": "Then $\\mathfrak n_{\\rm out}(\\omega)=\\Gamma(\\omega)n_\\omega$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Substituting Gamma(omega_1)=1 and Gamma(omega_2)=0 in the channel law gives a positive Planck occupation at omega_1 and zero at omega_2.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Every finite positive width Planck function is strictly positive at omega_2>0, contradicting the zero output. Hence no common finite positive width fits both values.",
+          "inputs": [
+            "A1",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example assumes two distinct positive frequencies."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 gives exactly zero output at the zero-transmission frequency."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 retains the positive input occupation at the unit-transmission frequency."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The two selected frequencies are distinct by hypothesis."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 uses both channel endpoints Gamma=0 and Gamma=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The two frequencies are given explicitly; no choice principle is used in the construction."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example proves an incompatibility, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example proves an incompatibility, not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "two-frequency filter",
+          "status": "checked",
+          "evidence": "The output profile at the selected pair is (n_theta(omega_1),0), whereas every finite positive-width Planck profile is positive at both frequencies."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-119",
+        "notes": "Checked the endpoint substitutions and the strictly positive Planck denominator at a positive frequency. This is a constructed scalar filter example, not a claim about measured or actual black-hole scattering."
+      }
+    }
+  }
+}

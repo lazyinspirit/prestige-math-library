@@ -1,0 +1,25 @@
+Cycle-1 research-only delivery for the actual 07:26:37.624Z native Step-5.5 handoff blocker. No production tool, source, state, metadata, native report, finding, pointer, collection or certificate was edited. All files authored by this task are in this research directory. No live gate, collection, certification, queue advertisement or scientific review was performed.
+
+The exact cause is confirmed. The global owner-finding advertisement still truthfully names the consumed initial-round-1 v2 request. ownerFindingRequest authenticated those bytes, then unconditionally compared that old request's phase/round to repeat/1 and threw `invalid explicit root finding queue`. The initial queue and native reports are genuine preserved history, not a current repeat finding request.
+
+Apply `repeat-owner-queue.patch` from the repository root. It adds one local consumed-history guard to step5-owner-finding-queue.mjs, a small historical replay branch to step5-workflow.mjs, a focused regression test file, and the corresponding physics/WORKFLOW.md paragraph. Both separate code integration patches are retained for review; never copy the complete candidate workflow over production. The combined patch checks cleanly against the unchanged production files bound in reproduction.json.
+
+The new guard ignores only a strictly earlier advertised wave, after validating its exact immutable request, progress, pack, all frozen progress inputs, three completed native repair reports and authorized dispatches, native child completion, consumed parent collection, and those exact evidence hashes under the old wave's sealed impact certificate. It recomputes the existing ownerFindingCompletion at the genuine historical child snapshot. It never recomputes old review contexts against current sources. Later authorized repairs may therefore evolve old subjects without invalidating this historical consumption proof. The certificate's other evidence and mathematical acceptance remain the ordinary certification machinery's responsibility; this guard does not waive or reseal anything.
+
+A fresh unconsumed earlier request, future request, malformed identity, changed evidence, wrong state-directory advertisement or missing consumption chain remains blocking. Same-wave intake keeps all original stage, source, ownership, finding, tuple and native-dispatch checks. The old pointer remains intact until Root deliberately advertises the genuine new repeat request. No unconsumed request is silently dropped.
+
+The related replay branch handles the reverse transition: once Root advertises a genuine newer repeat queue, an already-collected initial parent must replay its own historical queue. The branch invokes the existing ordinary collect replay validation before returning parent_collected; it does not compare historical authority against the newer global advertisement. The exact old progress/request/children remain bound by the immutable old parent. Corrupting old progress still fails that existing replay path.
+
+reproduction.json is the actual read-only current diagnostic: all 129 repeat-round-1 reports are present, 126 mechanical-zero-work reports and the three real native Sol-high reports u4/u8/u60. All three actual decisions remain confirmed_fatal. Existing validateReports returns no shape/licensing errors. The production request function reproduces the exact native blocker; the candidate authenticates the sealed old initial queue and returns null for repeat intake. This is no claim that repeat collection, a gate or the forthcoming owner referral has completed.
+
+final-tests.tap records the focused wave-history cases plus the existing owner-finding queue suite. Tests construct genuine synthetic intake, completed three-lane native reports, and ordinary parent collection through exported controller functions; only their final impact certificate is a synthetic sealed historical anchor. They do not represent a real gate or scientific audit. Covered cases include initial-to-repeat and repeat-1-to-repeat-2 retention; legitimate later source changes; tampered request/progress/pack/original evidence/tasks/native reports/dispatch/child/parent/certificate; missing consumed anchors; unconsumed, same-wave and future request blocking; and genuine fresh repeat intake alongside old initial-parent replay. No fabricated tuple, finding or evidence enters the actual run.
+
+Suggested Root commands after reviewing the patch:
+
+```bash
+git apply --check physics/research/physics-non-fluid-129-2026-10-21-r2-owner-step5-repeat-owner-queue-runtime/repeat-owner-queue.patch
+git apply physics/research/physics-non-fluid-129-2026-10-21-r2-owner-step5-repeat-owner-queue-runtime/repeat-owner-queue.patch
+node --test tools/physics-support/step5-owner-finding-wave-history.test.mjs tools/physics-support/step5-owner-finding-queue.test.mjs
+```
+
+Root owns integrating/committing the engineering correction, preserving the prior advertisement preimage, preparing the actual distinct repeat referral and canonical finding, and fresh formatting/metadata recertification before the complete native gate battery.

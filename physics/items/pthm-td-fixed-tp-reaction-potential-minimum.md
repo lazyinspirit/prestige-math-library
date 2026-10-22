@@ -7,7 +7,7 @@ origin: pipeline
 domain: physics
 library: physics
 physical_scope: A closed reacting system at fixed positive reservoir temperature and fixed external pressure, represented by a system process record and an admitted isolated-compound extension with the exact ideal-reservoir, pressure-store, and feasible-set data stated here; no external matter exchange, omitted work channel, nonideal reservoir, or kinetic relaxation claim is included.
-dependency_level: 7
+dependency_level: 0
 deps:
   - def-td-equilibrium-state-domain
   - def-td-si-quantities
@@ -50,17 +50,17 @@ verification:
 
 ## Statement
 
-Fix a closed system $s$ of constitution $c$, with equilibrium domain $D_c$ from [[def-td-equilibrium-state-domain]], and fix $T_0>0$ and $p_0>0$. Define, for $x\in D_c$,
+Fix a closed system $s$ of constitution $c$, with equilibrium domain $D_c$ from *Equilibrium state domains*, and fix $T_0>0$ and $p_0>0$. Define, for $x\in D_c$,
 $$
 \Phi_{T_0,p_0}(x):=U_c(x)+p_0V_c(x)-T_0S_c(x),
 $$
-where $U_c,V_c$ are the dimensioned energy and volume maps of [[def-td-equilibrium-state-domain]] and $S_c$ is the adopted entropy of [[post-td-concave-fundamental-entropy]]. Thus $\Phi_{T_0,p_0}$ has units joules.
+where $U_c,V_c$ are the dimensioned energy and volume maps of *Equilibrium state domains* and $S_c$ is the adopted entropy of *Concave macroscopic fundamental entropy*. Thus $\Phi_{T_0,p_0}$ has units joules.
 
-Let $P_s\in\mathcal P_{\mathrm{cl}}(s)$ be an admitted closed system process record as defined in [[def-td-process-and-protocol]], with system endpoints $x_{P_s}^-,x_{P_s}^+\in D_c$. Let $R$ be its ideal thermal reservoir and $B$ its ideal pressure store; both lie inside a declared isolated-compound outer boundary. Let $\widehat P\in\mathcal P_{\mathrm{cl}}(s\sqcup R\sqcup B)$ be an admitted core closed process record for that isolated compound, whose supplied total mass is positive, whose endpoint center-of-mass velocities are defined in one fixed Galilean chart, and whose compound center-of-mass kinetic and separately tracked external-field potential energies have zero endpoint change. These are conditions on the whole compound, additional to the system-record conditions. By an extension, require that $\widehat P$ has the same time interval, system endpoints, system configuration path, and system-side protocol and transfer records as $P_s$, together with the reservoir and store records. Write its compound endpoint association as
+Let $P_s\in\mathcal P_{\mathrm{cl}}(s)$ be an admitted closed system process record as defined in *Thermodynamic process records and transfer conventions*, with system endpoints $x_{P_s}^-,x_{P_s}^+\in D_c$. Let $R$ be its ideal thermal reservoir and $B$ its ideal pressure store; both lie inside a declared isolated-compound outer boundary. Let $\widehat P\in\mathcal P_{\mathrm{cl}}(s\sqcup R\sqcup B)$ be an admitted core closed process record for that isolated compound, whose supplied total mass is positive, whose endpoint center-of-mass velocities are defined in one fixed Galilean chart, and whose compound center-of-mass kinetic and separately tracked external-field potential energies have zero endpoint change. These are conditions on the whole compound, additional to the system-record conditions. By an extension, require that $\widehat P$ has the same time interval, system endpoints, system configuration path, and system-side protocol and transfer records as $P_s$, together with the reservoir and store records. Write its compound endpoint association as
 $$
 \rho_{\widehat P}(\pm)=(x_{P_s}^\pm,y_R^\pm,y_B^\pm)\in\mathcal F\subseteq D_c\times Y_R\times Y_B,
 $$
-where $Y_R,Y_B$ are the model-declared reservoir and store equilibrium state sets, represented as admitted constituent state domains (or subsets thereof) in the second-law endpoint split; $E_R,E_B$ and their entropies are the corresponding dimensioned state maps. The split is admitted as independent separated macroscopic systems by [[post-td-concave-fundamental-entropy]]. The set $\mathcal F$ is the exact feasible endpoint set from [[def-td-isolated-compound-feasible-set]]. The system protocol assigns heat $Q[P_s]$ and work $W_{\rm on}[P_s]$ to $P_s$; the auxiliary endpoint changes in $\widehat P$ satisfy the reservoir and store relations in [A1]–[A2] below. No matter crosses the compound boundary, no work channel other than pressure-store work acts on the system, and no other energy-coordinate changes are omitted.
+where $Y_R,Y_B$ are the model-declared reservoir and store equilibrium state sets, represented as admitted constituent state domains (or subsets thereof) in the second-law endpoint split; $E_R,E_B$ and their entropies are the corresponding dimensioned state maps. The split is admitted as independent separated macroscopic systems by *Concave macroscopic fundamental entropy*. The set $\mathcal F$ is the exact feasible endpoint set from *Isolated compound and feasible equilibrium set*. The system protocol assigns heat $Q[P_s]$ and work $W_{\rm on}[P_s]$ to $P_s$; the auxiliary endpoint changes in $\widehat P$ satisfy the reservoir and store relations in [A1]–[A2] below. No matter crosses the compound boundary, no work channel other than pressure-store work acts on the system, and no other energy-coordinate changes are omitted.
 
 Then the system endpoint difference obeys
 $$
@@ -71,6 +71,16 @@ $$
 \Pi_s(\mathcal F):=\{x\in D_c:\exists y_R\in Y_R,\ y_B\in Y_B\text{ with }(x,y_R,y_B)\in\mathcal F\}.
 $$
 This is a conditional model deduction; it does not assert that arbitrary fixed-$T,p$ reactions have this preparation or that the system reaches the minimum dynamically.
+
+## Statement references
+
+[[def-td-equilibrium-state-domain]]
+
+[[post-td-concave-fundamental-entropy]]
+
+[[def-td-process-and-protocol]]
+
+[[def-td-isolated-compound-feasible-set]]
 
 ## Facts & Assumptions
 

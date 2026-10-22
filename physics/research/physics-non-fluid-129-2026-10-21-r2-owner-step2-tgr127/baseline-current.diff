@@ -1,0 +1,126 @@
+--- baseline/items/def-tgrx-finite-fusion-count-model.md
++++ current/items/def-tgrx-finite-fusion-count-model.md
+@@ -9,9 +9,9 @@
+ library: mathematics
+ dependency_level: 2
+ deps:
+-  - def-tgrx-sector-code
++  - def-inner-product-space
+ dependency_roles:
+-  def-tgrx-sector-code: mathematical-premise
++  def-inner-product-space: mathematical-premise
+ justified_by: []
+ aliases: []
+ forward_refs: []
+@@ -33,11 +33,11 @@
+ 
+ ## Definition
+ 
+-A **finite fusion transfer count model** consists of a finite nonempty label set $I$, a distinguished label $0\in I$, and an explicitly supplied matrix $N=(N_{ab})_{a,b\in I}$ whose entries lie in $\{0,1,2,\ldots\}$. The entry $N_{ab}$ is the multiplicity of elementary transitions from label $b$ to label $a$; formally, the transition copies from $b$ to $a$ are the triples $(b,a,j)$ with integer $1\leq j\leq N_{ab}$. A length-$n$ path is a sequence of $n+1$ labels together with a chosen transition copy between each consecutive pair. For each integer $n\geq0$, define the vacuum-return count $D_n:=(N^n)_{00}$. If $D_n>0$, set $H_n:=\mathbb C^{D_n}$ with its standard inner product and define $\rho_n:=D_n^{-1}I_{H_n}$. If $D_n=0$, no normalized operator $\rho_n$ is assigned. The matrix $N$ is model data; no fusion category, quantum group, or representation is presumed to realize it.
++A **finite fusion transfer count model** consists of a finite nonempty label set $I$, a distinguished label $0\in I$, and an explicitly supplied matrix $N=(N_{ab})_{a,b\in I}$ whose entries lie in $\{0,1,2,\ldots\}$. The entry $N_{ab}$ is the multiplicity of elementary transitions from label $b$ to label $a$; formally, the transition copies from $b$ to $a$ are the triples $(b,a,j)$ with integer $1\leq j\leq N_{ab}$. A length-$n$ path is a sequence of $n+1$ labels together with a chosen transition copy between each consecutive pair. For matrices $A,B$ indexed by $I$, matrix multiplication is $(AB)_{ac}:=\sum_{b\in I}A_{ab}B_{bc}$; it is associative by regrouping finite sums. Let $I_I$ be the identity matrix with entries $(I_I)_{ab}=1$ if $a=b$ and $0$ otherwise, and use the power convention $N^0:=I_I$ and $N^{n+1}:=NN^n$ for $n\geq0$. Define the vacuum-return count $D_n:=(N^n)_{00}$. If $D_n>0$, set $H_n:=\mathbb C^{D_n}$, with coordinates $x=(x_1,\ldots,x_{D_n})$ and inner product $\langle x,y\rangle:=\sum_{j=1}^{D_n}x_j\overline{y_j}$, linear in the first argument. Let $I_{H_n}$ be its identity endomorphism and define $\rho_n:=D_n^{-1}I_{H_n}$. If $D_n=0$, no normalized operator $\rho_n$ is assigned. The matrix $N$ is model data; no fusion category, quantum group, or representation is presumed to realize it.
+ 
+ ## Definition references
+ 
+-[[def-tgrx-sector-code]]
++[[def-inner-product-space]]
+ 
+ [Daniel Harlow, The Ryu-Takayanagi Formula from Quantum Error Correction](https://arxiv.org/pdf/1607.03901)
+ 
+--- baseline/items/prop-tgrx-fusion-count-entropy.md
++++ current/items/prop-tgrx-fusion-count-entropy.md
+@@ -78,7 +78,7 @@
+ 
+ **Given:** The finite set $I$, label $0$, matrix $N$, and counts $D_n$ of the Definition, together with the displayed two-label specialization.
+ 
+-[F1] [[def-tgrx-finite-fusion-count-model]]: $N_{ab}$ counts transitions from $b$ to $a$, $D_n=(N^n)_{00}$, and $\rho_n=I/D_n$ is assigned only for $D_n>0$.
++[F1] [[def-tgrx-finite-fusion-count-model]]: $N_{ab}$ counts transitions from $b$ to $a$, $(AB)_{ac}=\sum_{b\in I}A_{ab}B_{bc}$, $N^0=I_I$, $N^{n+1}=NN^n$, $D_n=(N^n)_{00}$, and $\rho_n=I_{H_n}/D_n$ is assigned only for $D_n>0$; its coordinate inner product is linear in the first argument and is $\langle x,y\rangle=\sum_jx_j\overline{y_j}$.
+ 
+ [F2] [[def-tgrx-sector-code]]: a density matrix on a finite-dimensional complex inner-product space is self-adjoint, has nonnegative eigenvalues, and has trace one.
+ 
+@@ -92,8 +92,10 @@
+ 
+ ## Proof
+ 
+-1.1 For each $a\in I$, matrix multiplication gives $(Nv_n)_a=\sum_{b\in I}N_{ab}(N^n)_{b0}=(N^{n+1})_{a0}$. Each summand appends one of the $N_{ab}$ transitions from $b$ to $a$ to a length-$n$ path from $0$ to $b$. Thus $v_{n+1}=Nv_n$ and $(v_n)_a=(N^n)_{a0}$, with $v_0=e_0$. [given, F1, algebra]
++1.1 For $n=0$, the unique path of length zero is the empty path from $0$ to $0$, and there is no length-zero path from $0$ to any $a\ne0$. Thus the number of length-zero paths from $0$ to $a$ is $(I_I)_{a0}=(N^0)_{a0}=(e_0)_a$. [given, F1, base]
+ 
+-1.2 If $D_n>0$, then $D_n$ is a positive integer and $\rho_n=D_n^{-1}I$ has eigenvalue $1/D_n$ with multiplicity $D_n$. Its trace is $D_n(1/D_n)=1$, and it is self-adjoint with nonnegative eigenvalues; hence it is a density matrix by [F2]. Substitution into [F3] gives $s(\rho_n)=-D_n(1/D_n)\log(1/D_n)=\log D_n$ by [F5]. [F1, F2, F3, F4, F5, algebra]
++1.2 Suppose for a fixed $n\geq0$ that the number of length-$n$ paths from $0$ to each $b\in I$ is $(N^n)_{b0}$. Every length-$(n+1)$ path from $0$ to $a$ has a unique penultimate label $b$ and a final transition copy from $b$ to $a$, so the number of such paths is $\sum_{b\in I}N_{ab}(N^n)_{b0}=(NN^n)_{a0}=(N^{n+1})_{a0}$ by the stated matrix-product and power conventions. Induction proves $(v_n)_a=(N^n)_{a0}$ for every $n\geq0$ and $a\in I$; in particular $v_0=e_0$ and $v_{n+1}=Nv_n$. [step 1.1, F1, algebra, induction, discharge-induction]
+ 
+-2.1 Under [A1], direct multiplication gives $N^2=\begin{pmatrix}1&1\\1&2\end{pmatrix}=N+I$. Therefore $D_0=1$, $D_1=0$, and $D_2=1$. For every $n\geq0$, $N^{n+2}=N^nN^2=N^{n+1}+N^n$; taking the $(0,0)$ entry proves $D_{n+2}=D_{n+1}+D_n$. [A1, F1, algebra] ∎
++2.1 If $D_n>0$, then $D_n$ is a positive integer and $\rho_n=D_n^{-1}I_{H_n}$ has eigenvalue $1/D_n$ with multiplicity $D_n$. Its trace is $D_n(1/D_n)=1$, and it is self-adjoint with nonnegative eigenvalues; hence it is a density matrix by [F2]. Substitution into [F3] gives $s(\rho_n)=-D_n(1/D_n)\log(1/D_n)=\log D_n$ by [F5]. [F1, F2, F3, F4, F5, algebra]
++
++3.1 Under [A1], direct multiplication gives $N^2=\begin{pmatrix}1&1\\1&2\end{pmatrix}=N+I_I$. Therefore $D_0=1$, $D_1=0$, and $D_2=1$. From the power recursion and associativity, $N^{n+2}=N^2N^n=(N+I_I)N^n=N^{n+1}+N^n$ for every $n\geq0$; taking the $(0,0)$ entry proves $D_{n+2}=D_{n+1}+D_n$. [A1, F1, algebra] ∎
+--- baseline/items/def-tgrx-tl-boundary-representation.md
++++ current/items/def-tgrx-tl-boundary-representation.md
+@@ -16,6 +16,7 @@
+   - def-temperley-lieb-jones-wenzl-recursion-over-unit-denominators
+   - lem-temperley-lieb-jones-wenzl-partial-trace-and-uniqueness
+   - def-kernel-and-image-of-a-linear-map
++  - def-inner-product-space
+ dependency_roles:
+   def-temperley-lieb-generator-presentation: mathematical-premise
+   def-temperley-lieb-diagram-category: mathematical-premise
+@@ -24,6 +25,7 @@
+   def-temperley-lieb-jones-wenzl-recursion-over-unit-denominators: mathematical-premise
+   lem-temperley-lieb-jones-wenzl-partial-trace-and-uniqueness: mathematical-premise
+   def-kernel-and-image-of-a-linear-map: mathematical-premise
++  def-inner-product-space: mathematical-premise
+ justified_by: []
+ aliases: []
+ forward_refs: []
+@@ -58,7 +60,7 @@
+ 
+ The denominator hypotheses make this recursion defined. For each $1\leq r\leq n$, let $\widehat p_r:=\Phi_r^{-1}(p_r)$. The cited Jones-Wenzl result gives $p_n^2=p_n$ under these unit-denominator hypotheses. For $1\leq r\leq n$, let $\iota_{r,n}:P_r(\mathbb C,\delta)\to P_n(\mathbb C,\delta)$ send each generator $u_i$ to the same-named generator, and let $\jmath_{r,n}:\mathrm{TL}_r(\mathbb C,\delta)\to\mathrm{TL}_n(\mathbb C,\delta)$ append $n-r$ rightmost vertical strands. The maps commute with $\Phi$: on each generator, both composites send $u_i$ to $d_i$ with those added strands, and both send the unit to the identity diagram. Since generators and unit generate $P_r$, the composites agree on every element.
+ 
+-Let $H$ be a nonzero finite-dimensional complex inner-product space. A unital representation is a unital complex-algebra homomorphism $\pi:P_n(\mathbb C,\delta)\to\operatorname{End}_{\mathbb C}(H)$, where $\operatorname{End}_{\mathbb C}(H)$ is the algebra of complex-linear endomorphisms of $H$. Require each $\pi(u_i)$ to be self-adjoint, meaning $\langle\pi(u_i)x,y\rangle=\langle x,\pi(u_i)y\rangle$ for all $x,y\in H$. Define $P:=\pi(\widehat p_n)$, define $\operatorname{rank}P:=\dim_{\mathbb C}\operatorname{im}P$, and restrict to data with $\operatorname{rank}P>0$. The algebraic representation as a physical boundary state space is an additional model identification and is not part of this definition.
++Let $H$ be a nonzero finite-dimensional complex inner-product space whose inner product is linear in its first argument and conjugate-linear in its second. A unital complex-algebra representation is a complex-linear map $\pi:P_n(\mathbb C,\delta)\to\operatorname{End}_{\mathbb C}(H)$ such that $\pi(xy)=\pi(x)\pi(y)$ for all $x,y\in P_n(\mathbb C,\delta)$ and $\pi(1)=I_H$. Here $\operatorname{End}_{\mathbb C}(H)$ is the algebra of complex-linear endomorphisms, with composition as multiplication and $I_H$ as unit. Require each generator image to be self-adjoint, meaning $\langle\pi(u_i)x,y\rangle=\langle x,\pi(u_i)y\rangle$ for all $x,y\in H$. Define $P:=\pi(\widehat p_n)$, define $\operatorname{rank}P:=\dim_{\mathbb C}\operatorname{im}P$, and restrict to data with $\operatorname{rank}P>0$. The algebraic representation as a physical boundary state space is an additional model identification and is not part of this definition.
+ 
+ ## Definition references
+ 
+@@ -76,6 +78,8 @@
+ 
+ [[def-kernel-and-image-of-a-linear-map]]
+ 
++[[def-inner-product-space]]
++
+ [Joshua Chen, The Temperley-Lieb Categories and Skein Modules](https://arxiv.org/pdf/1502.06845)
+ 
+ [Zhenghan Wang, Topological Quantum Computation](https://web.math.ucsb.edu/~zhenghwa/data/course/cbms.pdf)
+@@ -84,7 +88,7 @@
+ 
+ ## Tower-map convention
+ 
+-For $r<n$, the presentation tower map $\iota_{r,n}$ is well-defined because the defining relations are unchanged. The diagram tower map $\jmath_{r,n}$ appends $n-r$ rightmost vertical strands. The commuting identity $\Phi_n\circ\iota_{r,n}=\jmath_{r,n}\circ\Phi_r$ transfers the unit-denominator recursion on diagrams to the presentation used by $\pi$.
++For $r<n$, the presentation tower map $\iota_{r,n}$ is well-defined because the defining relations are unchanged and it preserves the unit. For basis diagrams $E,D\in\mathrm{TL}_r$, appending $n-r$ rightmost vertical strands before stacking gives the same matching as stacking $E$ above $D$ first and then appending those strands; the appended strands create no closed loops. Hence $\jmath_{r,n}(E\circ D)=\jmath_{r,n}(E)\circ\jmath_{r,n}(D)$, and $\jmath_{r,n}(1_r)=1_n$. Bilinearity then makes $\jmath_{r,n}$ a unital algebra homomorphism. The two unital algebra homomorphisms $\Phi_n\circ\iota_{r,n}$ and $\jmath_{r,n}\circ\Phi_r$ agree on every generator and the unit, so they agree on all of $P_r$; this identity transfers the unit-denominator recursion on diagrams to the presentation used by $\pi$.
+ 
+ ## Diagram convention
+ 
+--- baseline/items/prop-tgrx-tl-projector-entropy.md
++++ current/items/prop-tgrx-tl-projector-entropy.md
+@@ -56,7 +56,7 @@
+ 
+ ## Statement
+ 
+-Under the finite Hilbert representation data, let $r:=\operatorname{rank}P>0$ and $\rho:=P/r$. Then $P$ is an orthogonal projection, $\rho$ is a density matrix with eigenvalue $1/r$ of multiplicity $r$ and eigenvalue $0$ on $\ker P$, and its entropy is $s(\rho)=\log r$ in nats. Under the published closure convention, the unnormalized diagrammatic closure trace of the algebraic Jones-Wenzl element is $\operatorname{Tr}_n(p_n)=[n+1]_\delta$. The proposition records this separately from the ordinary Hilbert-space trace $\operatorname{tr}_H(P)=r$ and does not assert the two values agree. A sufficient additional hypothesis for equality on this element is that the representation preserve these traces, $\operatorname{tr}_H(\pi(\Phi_n^{-1}(X)))=\operatorname{Tr}_n(X)$ for every $X\in\mathrm{TL}_n(\mathbb C,\delta)$.
++Under the finite Hilbert representation data, let $r:=\operatorname{rank}P>0$ and $\rho:=P/r$. An **orthogonal projection** on $H$ means a complex-linear endomorphism $Q$ satisfying $Q^2=Q$ and $\langle Qx,y\rangle=\langle x,Qy\rangle$ for all $x,y\in H$. Then $P$ is an orthogonal projection, $\rho$ is a density matrix with eigenvalue $1/r$ of multiplicity $r$ and eigenvalue $0$ on $\ker P$, and its entropy is $s(\rho)=\log r$ in nats. Under the published closure convention, the unnormalized diagrammatic closure trace of the algebraic Jones-Wenzl element is $\operatorname{Tr}_n(p_n)=[n+1]_\delta$. The proposition records this separately from the ordinary Hilbert-space trace $\operatorname{tr}_H(P)=r$ and does not assert the two values agree. A sufficient additional hypothesis for equality on this element is that the representation preserve these traces, $\operatorname{tr}_H(\pi(\Phi_n^{-1}(X)))=\operatorname{Tr}_n(X)$ for every $X\in\mathrm{TL}_n(\mathbb C,\delta)$.
+ 
+ ## Statement references
+ 
+@@ -116,12 +116,12 @@
+ 
+ 1.2 The imported projector result [F2] gives the unnormalized closure value $\operatorname{Tr}_n(p_n)=[n+1]_\delta$, where [F3] defines $\operatorname{Tr}_n$ by closing the corresponding diagram endpoints and weighting each resulting loop by $\delta$. This is the diagram-algebra functional recorded separately from the Hilbert-space trace. [F2, F3]
+ 
+-1.3 At recursion index $1$, $Q_1:=\pi(\iota_{1,n}(\widehat p_1))=I_H$ is self-adjoint because $\widehat p_1=1$. [L1, F1, base]
++1.3 At recursion index $1$, $Q_1:=\pi(\iota_{1,n}(\widehat p_1))=I_H$ is self-adjoint because $\widehat p_1=1$ and $\langle I_Hx,y\rangle=\langle x,I_Hy\rangle$ for all $x,y\in H$. [L1, F1, base]
+ 
+-1.4 Suppose $1\leq k<n$ and $Q_k:=\pi(\iota_{k,n}(\widehat p_k))$ is self-adjoint. By the commuting tower identity in [L1], the diagram recursion [F1] transfers under $\Phi_n^{-1}$ and $\pi$ to $Q_{k+1}=Q_k-c_kQ_k\pi(u_k)Q_k$, where $c_k=[k]_\delta/[k+1]_\delta\in\mathbb R$ because $\delta$ is real and the recurrence defines real quantum integers. Since $\pi(u_k)$ and $Q_k$ are self-adjoint, $(Q_k\pi(u_k)Q_k)^*=Q_k\pi(u_k)Q_k$, so $Q_{k+1}^*=Q_{k+1}$. [L1, F1, ih, algebra]
++1.4 Suppose $1\leq k<n$ and $Q_k:=\pi(\iota_{k,n}(\widehat p_k))$ is self-adjoint. By the commuting tower identity in [L1], the diagram recursion [F1] transfers under $\Phi_n^{-1}$ and $\pi$ to $Q_{k+1}=Q_k-c_kQ_k\pi(u_k)Q_k$, where $c_k=[k]_\delta/[k+1]_\delta\in\mathbb R$ because $\delta$ is real and the recurrence defines real quantum integers. For all $x,y\in H$, self-adjointness of $Q_k$ and $\pi(u_k)$, together with $c_k\in\mathbb R$, gives $\langle Q_{k+1}x,y\rangle=\langle Q_kx,y\rangle-c_k\langle Q_k\pi(u_k)Q_kx,y\rangle=\langle x,Q_ky\rangle-c_k\langle x,Q_k\pi(u_k)Q_ky\rangle=\langle x,Q_{k+1}y\rangle$. Thus $Q_{k+1}$ is self-adjoint. [L1, F1, ih, algebra]
+ 
+-2.1 Applying the finite step 1.4 from base step 1.3 through $k=n-1$ gives $Q_n=P=P^*$; when $n=1$, step 1.3 already gives the conclusion. [step 1.3, step 1.4, induction, discharge-induction]
++2.1 Applying the finite step 1.4 from base step 1.3 through $k=n-1$ gives $Q_n=P$, with $P$ self-adjoint in the stated inner-product sense; when $n=1$, step 1.3 already gives the conclusion. [step 1.3, step 1.4, induction, discharge-induction]
+ 
+-3.1 For every $x\in H$, $x=Px+(I_H-P)x$, with $Px\in\operatorname{im}P$ and $P(I_H-P)x=0$, so $(I_H-P)x\in\ker P$ by [F8]. If $y=Pu\in\operatorname{im}P$ and $z\in\ker P$, then $\langle y,z\rangle=\langle Pu,z\rangle=\langle u,P^*z\rangle=0$ by step 2.1. Thus the two subspaces are orthogonal and sum to $H$, so their intersection is zero and $H=\operatorname{im}P\oplus\ker P$. The idempotent $P$ acts as the identity on $\operatorname{im}P$ and as zero on $\ker P$, so it is an orthogonal projection with eigenvalues $1$ on its $r$-dimensional image and $0$ on the kernel. [F8, step 1.1, step 2.1, algebra]
++3.1 For every $x\in H$, $x=Px+(I_H-P)x$, with $Px\in\operatorname{im}P$ and $P(I_H-P)x=0$, so $(I_H-P)x\in\ker P$ by [F8]. If $y=Pu\in\operatorname{im}P$ and $z\in\ker P$, then $\langle y,z\rangle=\langle Pu,z\rangle=\langle u,Pz\rangle=0$ by step 2.1 and $Pz=0$. Thus the two subspaces are orthogonal and sum to $H$, so their intersection is zero and $H=\operatorname{im}P\oplus\ker P$. The idempotent $P$ acts as the identity on $\operatorname{im}P$ and as zero on $\ker P$, so it is an orthogonal projection with eigenvalues $1$ on its $r$-dimensional image and $0$ on the kernel. [F8, step 1.1, step 2.1, algebra]
+ 
+ 4.1 By step 3.1 and [F5], the ordinary Hilbert-space trace is $\operatorname{tr}_H(P)=r$, while step 1.2 gives the separate diagrammatic closure value. The operator $\rho=P/r$ is self-adjoint and has eigenvalues $1/r$ on $\operatorname{im}P$ and $0$ on $\ker P$. In a basis formed from bases of these subspaces its trace is $r(1/r)=1$, so it is a density matrix by [F4,F5]. Its entropy is $-r(1/r)\log(1/r)=\log r$ by [F6,F7]. This concludes the proof using the self-adjointness established by induction in step 2.1. [F4, F5, F6, F7, step 1.2, step 3.1, step 2.1, algebra, discharge-induction] ∎

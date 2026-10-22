@@ -1,0 +1,896 @@
+{
+  "version": 1,
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "batch": 73,
+  "scope": [
+    "def-qftx-paraxial-cone",
+    "lem-qftx-paraxial-vortex-packet-existence",
+    "prop-qftx-paraxial-spin-error",
+    "prop-qftx-spin-to-orbit-constraint",
+    "ex-qftx-vortex-paraxial-label"
+  ],
+  "contracts": {
+    "def-qftx-paraxial-cone": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "is the following statement.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qftx-photon-helicity-bundle",
+          "source_section": "Definition",
+          "quote": "The transverse one-photon Hilbert space",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-qftx-helicity-chern-obstruction",
+          "source_section": "Statement",
+          "quote": "neither helicity line admits a global smooth unit section.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qftx-photon-rotations-helicity",
+          "source_section": "Statement",
+          "quote": "The unique self-adjoint Stone generator",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "local-helicity-frame",
+          "claim": "The phase-adjusted spherical frame is a local unit helicity section and has no global extension.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "axis-regularity",
+          "claim": "The chosen integer-winding factor extends smoothly through the north axis under the stated regular profile.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "rotation-phase",
+          "claim": "The north-gauge frame acquires the stated helicity phase under axial rotations.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The definition may name an empty packet class and asserts no existence (Statement)."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The normalized packet definition excludes the zero vector (Statement)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The definition permits each helicity sign sigma (Statement)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The cone keeps r strictly positive and theta strictly below the south patch boundary (Statement)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The cone includes its stated closed radial and angular boundaries; regular packet profiles are handled in step 1.2 (Statement; step 1.2)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The definition introduces a class but makes no arbitrary element selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition contains no biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-73 author",
+        "notes": "The helicity frame is explicitly local. The coefficient winding is gauge-patch dependent, and no global photon polarization frame or apparatus OAM label is asserted."
+      }
+    },
+    "lem-qftx-paraxial-vortex-packet-existence": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "is the following statement.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "is the following statement.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qftx-paraxial-cone",
+          "source_section": "Definition",
+          "quote": "Use the transverse Hilbert space",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-smooth-bump-between-concentric-euclidean-balls",
+          "source_section": "Statement",
+          "quote": "Then there exists a smooth function",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-euclidean-chart-measure-agrees-with-polar-surface-measure",
+          "source_section": "Statement",
+          "quote": "The chart surface measure on",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "be sigma-finite measure spaces",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-qftx-photon-rotations-helicity",
+          "source_section": "Statement",
+          "quote": "The unique self-adjoint Stone generator",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "interval-bump-construction",
+          "claim": "Restricting the supplied Euclidean bump to a line constructs nonzero smooth envelopes in both open intervals.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "normalization-integral",
+          "claim": "Polar measure, the chart area element, and Fubini give the exact positive finite norm pi A B.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "transverse-regular-vector",
+          "claim": "The support avoids the axis, the helicity frame is smooth there, and normalization preserves the transverse helicity vector.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "axial-eigenvalue",
+          "claim": "The coefficient winding and north-frame phase give the exact Stone eigenvalue ell plus sigma.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F5",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 chooses envelopes equal to one on nonempty subintervals; step 2.1 gives A and B positive (steps 1.1, 2.1)."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The computed norm pi A B is strictly positive and is divided out (step 2.1)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The construction works for sigma equal to either helicity sign (Statement; step 3.1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The angular support stays away from the axis, so every integer winding is smooth (step 3.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The envelopes are compactly supported inside the open radial and angular intervals (step 1.1; step 3.1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The two scalar bumps are explicitly constructed by line restriction; the stated Choice assumptions cover the measure and Stone suppliers (step 1.1; step 4.1)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma asserts a construction, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma asserts a construction, not a biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-73 author",
+        "notes": "The construction has compact radial and angular support and is a genuine L2 transverse vector. The phase eigenvalue uses the north gauge and the stated U(Rz(t)) convention."
+      }
+    },
+    "prop-qftx-paraxial-spin-error": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "is the following statement.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "is the following statement.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qftx-paraxial-cone",
+          "source_section": "Definition",
+          "quote": "A normalized helicity",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-qftx-photon-fock-angular-lift",
+          "source_section": "Statement",
+          "quote": "is a normalized one-photon helicity",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qftx-photon-projected-angular",
+          "source_section": "Definition",
+          "quote": "Define the bounded projected spin operator",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-qftx-photon-rotations-helicity",
+          "source_section": "Statement",
+          "quote": "The unique self-adjoint Stone generator",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-qftx-paraxial-vortex-packet-existence",
+          "source_section": "Statement",
+          "quote": "The packet has compact positive radial support",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-sine-and-cosine-are-one-lipschitz",
+          "source_section": "Statement",
+          "quote": "For all real $u,v$,",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-sine-cosine-signs-monotonicity-and-ranges",
+          "source_section": "Statement",
+          "quote": "Cosine is strictly decreasing on",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-sine-and-cosine-addition-formulas",
+          "source_section": "Statement",
+          "quote": "For all real $x,y$,",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-trigonometric-parity-and-pythagorean-identity",
+          "source_section": "Statement",
+          "quote": "For every real $x$,",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "projected-spin-average",
+          "claim": "The supplied one-photon formula turns the normalized helicity packet into a probability average of cos theta.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F7",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "support-cone-estimate",
+          "claim": "Monotonicity of cosine on the declared cone bounds one minus its probability average.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F7",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "quadratic-angle-estimate",
+          "claim": "The double-angle identity and the sine Lipschitz bound yield the quadratic error.",
+          "step": "3.1",
+          "inputs": [
+            "F6",
+            "F8",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "orbital-remainder-expectation",
+          "claim": "The exact vortex Jz eigenvalue and Lz prime definition give the orbital expectation identity and inherited bound.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The norm-one hypothesis excludes the zero packet (Statement)."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The normalized probability measure in step 1.1 has total mass one (step 1.1)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Both helicity signs are included and |sigma| equals one (Statement; step 1.1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The bound remains valid at theta zero and at the included cone boundary theta_max (step 2.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The pointwise estimate is inclusive at theta=theta_max (step 2.1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Choice assumptions are explicit; the packet is constructed in the preceding lemma (A1; step 4.1)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The proposition gives inequalities and identities, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The proposition gives inequalities and identities, not a biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-73 author",
+        "notes": "The estimate is a conditional expectation bound for normalized Hilbert packets. It does not say that each photon has a definite projected spin sigma hbar, and the orbital label remains gauge-local."
+      }
+    },
+    "prop-qftx-spin-to-orbit-constraint": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "is the following statement.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "is the following statement.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qftx-photon-helicity-bundle",
+          "source_section": "Definition",
+          "quote": "The transverse one-photon Hilbert space",
+          "uses": [
+            "1.2",
+            "1.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qftx-photon-projected-angular",
+          "source_section": "Definition",
+          "quote": "Define the bounded projected spin operator",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qftx-photon-rotations-helicity",
+          "source_section": "Statement",
+          "quote": "The unique self-adjoint Stone generator",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-qftx-paraxial-spin-error",
+          "source_section": "Statement",
+          "quote": "For the exact north-gauge vortex packet",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qftx-paraxial-vortex-packet-existence",
+          "source_section": "Statement",
+          "quote": "The packet has compact positive radial support",
+          "uses": [
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "Jz-expectation-conservation",
+          "claim": "Domain-preserving commutation and unitarity conserve the finite Jz expectation.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "helicity-commutant-equivalence",
+          "claim": "The bounded self-adjoint helicity multiplier is conserved on all vectors exactly when U commutes with it.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "Jz-reducing-swap-domain",
+          "claim": "The selected eigenspace span reduces Jz, so its swap extends to a domain-preserving Jz commutant.",
+          "step": "2.2",
+          "inputs": [
+            "A1",
+            "F2",
+            "step 1.3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "helicity-change-under-swap",
+          "claim": "The swap reverses the helicity of f plus and therefore violates operator commutation.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 1.2",
+            "step 1.3",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "projected-spin-orbit-balance",
+          "claim": "Subtracting the bounded projected-spin expectation from the conserved total Jz expectation gives the exact orbital-spin balance.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [
+        {
+          "id": "two-state-swap-matrix",
+          "claim": "The two normalized opposite-helicity packets share the Jz eigenvalue hbar, and their finite two-state swap matrix [[0,1],[1,0]] is unitary.",
+          "step": "1.3",
+          "inputs": [
+            "A1",
+            "F1",
+            "F4",
+            "construct",
+            "algebra"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The statement applies to any normalized input in D(Jz), so no zero-vector first moment is claimed (Statement)."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The hypotheses explicitly require a normalized input; the operator identity itself is defined on D(Jz) (Statement)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The counterexample uses both helicity sectors and the general balance applies to any normalized input (step 1.3; step 2.1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The repeated Jz eigenvalue hbar across opposite helicities is the explicit degeneracy used by the counterexample (steps 1.3, 2.2)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The unbounded generator is used only on its exact domain, preserved by U (Statement; steps 1.1, 2.2)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The hypotheses and the finite packet witnesses are explicit (A1; step 1.3)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "If U commutes with h, all mean-helicity expectations are preserved (step 1.2)."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Preservation of every mean-helicity expectation implies U* h U=h by polarization, hence Uh=hU (step 1.2)."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-73 author",
+        "notes": "The commutation hypothesis includes domain invariance for unbounded Jz. The finite swap proves that axial symmetry alone is insufficient; it is a mathematical unitary, not an apparatus model."
+      }
+    },
+    "ex-qftx-vortex-paraxial-label": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "is the following statement.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "is the following statement.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-qftx-paraxial-vortex-packet-existence",
+          "source_section": "Statement",
+          "quote": "The packet has compact positive radial support and nonzero angular width",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-qftx-paraxial-spin-error",
+          "source_section": "Statement",
+          "quote": "For the exact north-gauge vortex packet",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-qftx-photon-fock-angular-lift",
+          "source_section": "Statement",
+          "quote": "is a normalized one-photon helicity",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qftx-photon-helicity-bundle",
+          "source_section": "Definition",
+          "quote": "The transverse one-photon Hilbert space",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-euclidean-chart-measure-agrees-with-polar-surface-measure",
+          "source_section": "Statement",
+          "quote": "The chart surface measure on",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "be sigma-finite measure spaces",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "finite-natural-unit-energy",
+          "claim": "Compact positive radial support bounds the explicitly defined radial-energy expectation by hbar kappa plus.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "exact-cone-null-boundary",
+          "claim": "The spherical measure of a fixed interior polar angle and the radial measure of a singleton both vanish.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F4",
+            "F5",
+            "F6",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "vortex-spin-and-orbital-values",
+          "claim": "The normalized helicity vortex packet has the exact total Jz label and the stated projected expectation decomposition.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "finite-cone-spin-error",
+          "claim": "The declared angular support applies the quantitative spin-error bound with theta two.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "step 2.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The local packet lemma chooses envelopes equal to one on subintervals and computes positive normalization (Statement; step 1.1)."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The packet has unit norm by its construction and the energy estimate uses that normalization (Statement; step 1.1)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The construction and spin formula hold for both helicity signs (Statement; steps 2.1, 3.1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "An exact angular cone and exact radial shell are proved null; the example instead has positive radial bandwidth and angular width (step 1.2)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The finite packet is compactly supported strictly inside the chosen radial and angular intervals (step 1.1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Choice assumptions are explicit and the packet envelopes are constructed in the preceding lemma (A1; step 2.1)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example contains no biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-73 author",
+        "notes": "The energy is the explicitly defined c=1 radial functional. Ideal delta-cone or delta-radius distributions are not L2 vectors; no detector result or classical Poynting/OAM identification is claimed."
+      }
+    }
+  }
+}

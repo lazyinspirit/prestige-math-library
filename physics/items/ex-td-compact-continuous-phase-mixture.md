@@ -7,7 +7,7 @@ origin: pipeline
 domain: physics
 library: physics
 physical_scope: A constructed finite two-generator mixture with a continuous concave entropy functional; its values are illustrative and are not observations.
-dependency_level: 10
+dependency_level: 2
 deps:
   - def-borel-sigma-algebra
   - def-probability-measure

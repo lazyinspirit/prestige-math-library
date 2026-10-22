@@ -1,0 +1,15 @@
+# Batch 44: repair 1
+
+Run: physics-non-fluid-129-2026-10-21-r2
+Batch: 44
+Round: 1
+Read the complete assigned A/B pages and items, approved scope and actual supplier claims/proofs. Review the whole batch before reporting.
+Pages: nrqmx-form-spectral-methods, nrqmx-form-spectral-methods-examples
+Items: thm-nrqmx-closed-form-representation, thm-nrqmx-rank-one-resolvent, thm-nrqmx-free-laplacian-form-domain, thm-nrqmx-form-min-max, lem-nrqmx-yukawa-resolvent-kernel, thm-nrqmx-birman-schwinger-negative-spectrum, ex-nrqmx-attractive-separable-bound-state, cex-nrqmx-trial-vector-domain
+Consolidated findings: [{"id":"lem-nrqmx-yukawa-resolvent-kernel","type":"prerequisite","reason":"Proof 3.1 applies the L² Fourier transform to Gκ*f after showing it lies in L¹∩L². Plancherel alone does not establish agreement with the integral transform for this non-Schwartz input. Add thm-fourier-transform-agrees-with-l-one-and-plancherel-transforms to deps and state its use, or prove that interface locally."},{"id":"thm-nrqmx-birman-schwinger-negative-spectrum","type":"local","reason":"The Statement treats s as a multiplication operator but later writes s(x) in the kernel, subtracts W as an operator without defining M_W, and uses H² where the free-Laplacian supplier gives D(H₀)=W²,². Define s(x)=√W(x), M_s and M_W, and state the domain as W²,² (or define H² exactly). Also state the positive Fourier multiplier used in proof 3.1 before using its square root."}]
+Authorized source files: ["items/thm-nrqmx-closed-form-representation.md","items/thm-nrqmx-rank-one-resolvent.md","items/thm-nrqmx-free-laplacian-form-domain.md","items/thm-nrqmx-form-min-max.md","items/lem-nrqmx-yukawa-resolvent-kernel.md","items/thm-nrqmx-birman-schwinger-negative-spectrum.md","items/ex-nrqmx-attractive-separable-bound-state.md","items/cex-nrqmx-trial-vector-domain.md","library/non-relativistic-quantum-mechanics-mathematics/nrqmx-form-spectral-methods.md","library/non-relativistic-quantum-mechanics-mathematics/nrqmx-form-spectral-methods-examples.md"]. Edit these assigned source files directly. Resolve prerequisite gaps locally on the same page where possible.
+Repair suppliers before their affected consumers; pair dispatch has no prerequisite-completion requirement. Preserve sound approved claims and avoid Statement/Definition changes when possible. If a public interface changes, the same repairer owns all affected direct/indirect consumer checks and authorized repairs.
+Your duties are review, repair and escalation only. Do not hash, recertify, reconcile dependency levels, maintain manifests/coverage/contracts/ledgers, or run formatting/gate batteries. The owner orchestrator handles that work.
+Return only the result schema with prepared reviewed_items/reviewed_pages, verdict, concise findings and consumer_checks. Do not edit reports or engine state.
+Escalate to the owner if the final second review remains unsatisfied, or a significant prerequisite gap cannot be resolved locally on the same page. Otherwise use the single local repair and final review.
+Previous repair consumers: [].

@@ -1,0 +1,65 @@
+--- owner-preimage
++++ owner-final
+@@ -94,10 +94,9 @@
+ $0\le nk\le T$ but has no uniform-in-time displacement bound when
+ $\bar v^0\ne0$. This statement
+ does not assert that the condition $0<\lambda<1$ alone proves convergence of a
+-numerical relativity scheme. For each fixed $N$, define the nonzero discrete
+-frequencies $\omega_\ell:=2h^{-1}|\sin(\pi\ell/N)|$, $1\le\ell<N$.
+-This finite list has a positive minimum; it is a fixed-grid fact and no bound
+-uniform in $N$ is asserted.
++numerical relativity scheme. Define the nonzero discrete frequencies $\omega_\ell:=2h^{-1}|\sin(\pi\ell/N)|$, $1\le\ell<N$. On this fixed torus they satisfy the mesh-independent lower bound
++$$\omega_\ell\ge\frac2\pi\qquad(N\ge3,\ 1\le\ell<N).$$
++In particular each fixed grid has a positive minimum. This frequency bound is not a mesh-independent amplitude bound for arbitrary unscaled two-step data $(a_0,a_1)$: the distinct-root coefficients in the mode solution can depend on the grid and the initial data. The constant-mode qualifications above are unchanged.
+ For even $N$, the alternating mode with Fourier index $\ell=N/2$ is called
+ the Nyquist mode. At the endpoint $\lambda=1$, if $N$ is even and
+ $u_j^0=a_0(-1)^j$, $v_j^0=\beta_0(-1)^j$ for real amplitudes $a_0,\beta_0$,
+@@ -149,6 +148,10 @@
+ [[def-finite-sum]]
+ 
+ [[lem-finite-sum-reindexing-and-fubini]]
++
++[[cor-mean-value-theorem]]
++
++[[cor-pi-is-the-first-positive-sine-zero]]
+ 
+ ## Facts & Assumptions
+ 
+@@ -170,7 +173,7 @@
+ power series.
+ 
+ [F3] [[thm-eulers-formula]], [[thm-sine-and-cosine-derivatives]]:
+-$\exp(i\theta)=\cos\theta+i\sin\theta$, $\cos0=1$, and $\sin0=0$.
++$\exp(i\theta)=\cos\theta+i\sin\theta$, $\sin'=\cos$, $\cos'=-\sin$, $\cos0=1$, and $\sin0=0$.
+ 
+ [F4] [[thm-sine-and-cosine-addition-formulas]],
+ [[cor-trigonometric-parity-and-pythagorean-identity]]: the double-angle
+@@ -190,7 +193,7 @@
+ cyclic shifts preserve the sum of an $N$-tuple.
+ 
+ [F9] [[thm-quarter-turn-values-and-shift-formulas]]: shifts by $\pi$ negate
+-sine and cosine, and $\sin\pi=0$, $\cos\pi=-1$.
++sine and cosine, and $\sin(\pi/2)=1$, $\sin\pi=0$, $\cos\pi=-1$.
+ 
+ [F10] [[def-complex-conjugate-real-imaginary-part-and-modulus]]: for the unique
+ coordinates $z=a+bi$, $\overline z=a-bi$ and the complex modulus is
+@@ -217,6 +220,10 @@
+ [F16] [[thm-of-archimedean]]: for every $x\in\mathbb R$ there is a natural
+ $n\ge1$ with $x<n$.
+ 
++[F17] [[cor-mean-value-theorem]]: if a real function is continuous on $[a,b]$ and differentiable on $(a,b)$, with $a<b$, then $f(b)-f(a)=f'(c)(b-a)$ for some $c\in(a,b)$.
++
++[F18] [[cor-pi-is-the-first-positive-sine-zero]]: $\sin x>0$ for $0<x<\pi$, and $\sin\pi=0$.
++
+ ## Proof
+ 
+ **Proof technique:** direct.
+@@ -225,7 +232,7 @@
+ 
+ 1.2 For the constant mode, define $\bar u^n=N^{-1}\sum_{j=0}^{N-1}u_j^n$. By [F8], a cyclic shift preserves a finite sum, so $\sum_j(D_hu^n)_j=0$. Averaging the update [F1] therefore gives $\bar u^{n+1}=2\bar u^n-\bar u^{n-1}$, and averaging the startup gives $\bar u^1=\bar u^0+k\bar v^0$. Induction yields $\bar u^n=\bar u^0+nk\bar v^0$. If $0\le nk\le T$, then [F12, F13] give $|nk\bar v^0|=nk|\bar v^0|\le T|\bar v^0|$, and the real triangle inequality [F15] gives $|\bar u^n|\le|\bar u^0|+T|\bar v^0|$. If $\bar v^0\ne0$, then [F13] gives $|\bar v^0|>0$. Given any $M>0$, [F16] supplies a natural $n\ge1$ with $n>(M+|\bar u^0|)/(k|\bar v^0|)$; this quotient is defined because $k|\bar v^0|>0$. Since $nk\ge0$, [F12, F13] give $|nk\bar v^0|=nk|\bar v^0|$, and [F15] applied to $nk\bar v^0=(\bar u^0+nk\bar v^0)-\bar u^0$ yields $|\bar u^0+nk\bar v^0|\ge nk|\bar v^0|-|\bar u^0|>M$, proving unboundedness. [F1, F8, F12, F13, F15, F16, algebra]
+ 
+-1.3 For fixed $N$, list the $N-1$ numbers $2h^{-1}|\sin(\pi\ell/N)|$, $1\le\ell<N$. Each sine is nonzero by [F5], so its real absolute value is nonzero and nonnegative by [F13], hence positive; also $h>0$ by [F1]. Taking the smaller of the first two positive numbers and then successively the smaller with each next number gives, by induction over this finite list, an attained positive minimum. The argument is for fixed $N$ only. [F1, F5, F12, F13, algebra]
++1.3 The derivative identities in [F3] give $\sin'=\cos$ and $\cos'=-\sin$ everywhere, so both functions are continuous and differentiable on the closed subintervals used here. By [F18], $\cos'<0$ on $(0,\pi/2)$; applying [F17] to cosine on any $[a,b]\subseteq[0,\pi/2]$ with $a<b$ shows $\cos b<\cos a$. For $0<x<\pi/2$, apply [F17] to sine on $[0,x]$ and $[x,\pi/2]$. Since [F3, F9] give $\sin0=0$ and $\sin(\pi/2)=1$, there are $c_1\in(0,x)$ and $c_2\in(x,\pi/2)$ with $\sin x/x=\cos c_1$ and $(1-\sin x)/(\pi/2-x)=\cos c_2$. The just-proved decrease gives $\sin x/x\ge(1-\sin x)/(\pi/2-x)$. Multiplying by the positive denominators and rearranging gives $\sin x\ge2x/\pi$. This also holds at $x=0,\pi/2$ by their stated values. For $1\le\ell<N$, let $m=\min\{\ell,N-\ell\}$, so $1\le m\le N/2$. Parity and the $\pi$ shift in [F4, F9] give $\sin(\pi\ell/N)=\sin(\pi m/N)>0$. Applying the chord bound at $x=\pi m/N$ gives $|\sin(\pi\ell/N)|\ge2m/N$. Consequently, since $h=2\pi/N$, one has $\omega_\ell=2h^{-1}|\sin(\pi\ell/N)|\ge2m/\pi\ge2/\pi$, uniformly in $N$. Taking successive minima over the finite list still gives an attained positive minimum on each grid. This proof is a frequency bound only and does not bound the initial-data-dependent coefficients of the two-root representation uniformly over arbitrary unscaled pairs. [F1, F3, F4, F9, F12, F13, F17, F18, algebra]
+ 
+ 1.4 Suppose $N$ is even and $\lambda=1$. Repeated $\pi$-shift use of [F9] gives $\sin(\pi j)=0$ and $\cos(\pi j)=(-1)^j$ for every grid index $0\le j<N$; Euler's formula [F3] identifies the Fourier character $e_{N/2}(j)$ with the alternating array $(-1)^j$. Its periodic neighbors are equal to its negative. By [F1], $(D_h((-1)^\cdot))_j=-4h^{-2}(-1)^j$, so the mode recurrence has coefficient $c=1-2\lambda^2=-1$ and characteristic polynomial $(z+1)^2$. [F1, F3, F9, algebra]
+ 

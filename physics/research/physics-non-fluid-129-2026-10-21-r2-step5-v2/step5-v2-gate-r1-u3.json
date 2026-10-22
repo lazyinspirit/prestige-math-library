@@ -1,0 +1,59 @@
+{
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "phase": "gate",
+  "round": 1,
+  "unit": "3",
+  "input_sha256": "7933dd85f4bd117fd3edba8fa9e7c687e8aa47914b0c0896a5f8e8667ddf6d10",
+  "decisions": [],
+  "reviews": [],
+  "created_items": [],
+  "downstream": [],
+  "gate_resolutions": [
+    {
+      "index": 2,
+      "status": "operator-required",
+      "resolved": false,
+      "reason": "Diagnosed the owner-held defect-ledger runtime failure; no item subjects are assigned. Frozen output ends inside the outside-findings JSON and lacks the required liveness summary despite exit zero. A current pipe-capture reproduction likewise loses the summary, whereas regular-file capture returns the complete output and reports 626 defect rows checked with zero errors. The checker writes a large exclusion record and immediately calls process.exit(); the gate captures stdout through a pipe. Repair requires an operator-authorized workflow change to preserve complete output before exit. This task forbids workflow-code edits, so diagnostic 2 remains unresolved. Outside findings remain excluded, not passed; no ledger or content correction is warranted by this diagnostic.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "supporting_evidence": {
+    "research/physics-non-fluid-129-2026-10-21-r2-step5-v2/gate-1.json": "4fc6f354d7a86e16f7cc401fced4449dea84870071a721e9306ff9f18fcd6172",
+    "research/physics-non-fluid-129-2026-10-21-r2-step5-v2/step5-v2-gate-r1-u3.gate-diagnostics.json": "260743fccb449161b302e969e011091c14b72047705107a1c0219bf786a5e6f3"
+  },
+  "repair_notes": {
+    "scope": "assignments[\"3\"] is empty; gateAssignments[\"3\"] contains only index 2, defect-ledger, with subjects [] and ownerHeld true. No items, shared metadata, workflow code, original reports, baselines or certificates were edited. No judges or full gate battery were launched.",
+    "source_locators": [
+      "tools/physics-support/defect-ledger.mjs:695-697: exclusion output, summary output, then immediate process.exit",
+      "tools/physics-autopilot/src/gates.mts:54-96: piped stdout collection and fail-closed liveness check",
+      "tools/physics-support/step5-frontier-gate.mjs:100-110: raw-output preservation and frontier argument",
+      "tools/physics-autopilot/stages/mathlib.mts:901-910: checker arguments and nonempty liveness requirement"
+    ],
+    "focused_runtime_probe": {
+      "command": "node tools/physics-support/defect-ledger.mjs check --run physics-non-fluid-129-2026-10-21-r2 --adjudications research/physics-non-fluid-129-2026-10-21-r2-judge-adjudications.jsonl --reader-decisions research/physics-non-fluid-129-2026-10-21-r2-step5-alert-decisions.jsonl --closure research/physics-non-fluid-129-2026-10-21-r2-judge-closure.json --frontier research/physics-non-fluid-129-2026-10-21-r2-step5-v2/frontier.json",
+      "method": "Python subprocess.run invoked the same command twice: first with stdout/stderr PIPE, then with stdout/stderr bound to temporary regular files. Temporary files were removed on close; only bounded summaries were displayed.",
+      "pipe": {
+        "exit_code": 0,
+        "stdout_bytes": 65536,
+        "stderr_bytes": 0,
+        "stdout_sha256": "f329e829fc45d8816c74186296476ba269cb12edb76ad5f485d2737944eeb446",
+        "liveness_summary_present": false
+      },
+      "regular_file": {
+        "exit_code": 0,
+        "stdout_bytes": 153414,
+        "stderr_bytes": 0,
+        "stdout_sha256": "e22cc25fa7202fd0c7822b7bdba7a83fdd180d88b62ce72e25b15d429c5bf974",
+        "summary": "defect-ledger: 626 defect row(s) checked for physics-non-fluid-129-2026-10-21-r2, 0 error(s)",
+        "complete_exclusion_records": 94
+      },
+      "qualification": "This is focused runtime evidence, not native gate acceptance, mathematical acceptance, independent source review or certification. The frozen failure remains preserved. Excluded records were checked as a complete output envelope, not reviewed as mathematical assignments. Exact lost byte counts can vary with pipe scheduling."
+    },
+    "blockers": [
+      "Diagnostic 2 remains unresolved because its necessary workflow-code repair is outside this dispatch's authorized write scope."
+    ],
+    "next_action": "Operator repairs output flushing/completion in the checker or its capture path without removing liveness or exclusion evidence; after all writers drain, the controller performs fresh owner preparation and reruns the complete scoped battery. No gate waiver or canonical ledger closure is claimed."
+  }
+}

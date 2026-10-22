@@ -1,0 +1,753 @@
+[
+  {
+    "order": 891,
+    "id": "csm-frontier-planar-critical-point",
+    "kind": "A",
+    "category": "classical-statistical-mechanics",
+    "library": "physics",
+    "title": "Planar random clusters, sharpness and the exact square-lattice critical point",
+    "companion": "csm-frontier-planar-critical-point-examples",
+    "requires": [
+      "csm-frontier-fk-loop-algebra",
+      "csm-frontier-quantitative-dlr"
+    ],
+    "items": [
+      {
+        "id": "def-csm-frontier-fk-real-boundaries",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Finite FK random-cluster weights for real q and boundary partitions",
+        "statement": "Let $G=(V,E,\\partial)$ be a finite undirected multigraph: $V$ and the edge-label set $E$ are finite, and each $e\\in E$ has a singleton or two-element endpoint set $\\partial e\\subseteq V$. Distinct labels may have the same endpoint set. Let $B\\subseteq V$ be a designated boundary set and let $\\xi$ be an equivalence relation on $B$; vertices in each $\\xi$-class are wired together, while vertices outside $B$ remain separate. For $A\\subseteq E$, let $k_\\xi(A)$ be the number of connected components, including isolated vertices, after wiring the $\\xi$-classes and opening exactly the edges in $A$. A loop does not join distinct vertices.\n\nFor $q\\in[1,\\infty)$ and $p\\in(0,1)$, the finite FK weight of $A$ and its partition function are\n\n$$w_{G,p,q}^{\\xi}(A):=p^{|A|}(1-p)^{|E\\setminus A|}q^{k_\\xi(A)},\\qquad Z_{G,p,q}^{\\xi}:=\\sum_{A\\subseteq E}w_{G,p,q}^{\\xi}(A).$$\n\nThe finite FK random-cluster probability is $\\phi_{G,p,q}^{\\xi}(A):=w_{G,p,q}^{\\xi}(A)/Z_{G,p,q}^{\\xi}$. Every weight is positive and finite, and the finite sum $Z_{G,p,q}^{\\xi}$ is positive and finite. The free boundary condition is the identity partition on $B$; the wired boundary condition identifies all vertices of $B$ in one class.\n\nWhen $G$ is a finite simple graph with the Potts/FK convention of the earlier finite Potts definition, $\\xi$ is free, $q=Q$ is an integer at least two, and every activity equals $v=p/(1-p)$, this definition gives the same normalized FK law, since $w_{FK}(A)=(1-p)^{-|E|}w_{G,p,Q}^{\\xi}(A)$.",
+        "strategy": "Finite mathematical definition.",
+        "deps": [
+          "def-csm-frontier-finite-potts-fk",
+          "def-multigraph-loop-and-digraph"
+        ],
+        "dependency_roles": {
+          "def-csm-frontier-finite-potts-fk": "mathematical-premise",
+          "def-multigraph-loop-and-digraph": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "physical_scope": null,
+        "sources": {
+          "references": [
+            {
+              "title": "Vincent Beffara and Hugo Duminil-Copin, The self-dual point of the two-dimensional random-cluster model is critical for q >= 1",
+              "url": "https://arxiv.org/pdf/1006.5073",
+              "locator": "Section 1, finite random-cluster model and real cluster weight q >= 1."
+            },
+            {
+              "title": "Geoffrey Grimmett, The Random-Cluster Model, second edition",
+              "url": "https://www.statslab.cam.ac.uk/~grg/books/rcm1-1.pdf",
+              "locator": "Chapter 1, especially §§1.2–1.3: finite edge-subset law, component count, and boundary conditions."
+            }
+          ]
+        },
+        "dependency_level": 1,
+        "library": "physics"
+      },
+      {
+        "id": "def-csm-frontier-fk-infinite-volume-states",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Free, wired, and subsequential infinite-volume FK states on the square lattice",
+        "statement": "Let $E_\\infty$ be the nearest-neighbor edge set of $\\mathbb Z^2$, and let $\\Lambda_n=[-n,n]^2\\cap\\mathbb Z^2$. Let $E_n$ contain the edges with both endpoints in $\\Lambda_n$, and let $\\partial\\Lambda_n$ be the vertices of $\\Lambda_n$ adjacent to a vertex outside it. Fix $q\\geq1$ and $p\\in(0,1)$. For each boundary partition $\\xi_n$ on $\\partial\\Lambda_n$, let $\\phi_{n,p,q}^{\\xi_n}$ be the finite FK law on $(\\Lambda_n,E_n)$ with mass proportional to $p^{|A|}(1-p)^{|E_n\\setminus A|}q^{k_{\\xi_n}(A)}$ for $A\\subseteq E_n$, where $k_{\\xi_n}(A)$ counts components after wiring the partition classes and extend its configurations to $\\{0,1\\}^{E_\\infty}$ by setting all edges outside $E_n$ closed.\n\nAn **infinite-volume FK state** at $(p,q)$ is any probability measure on $\\{0,1\\}^{E_\\infty}$ that is a cylinder-probability limit of such extended finite-volume laws along a sequence $n_j\\to\\infty$ and boundary partitions $\\xi_{n_j}$. Cylinder-probability convergence means convergence of the probability of every assignment on every finite set of edges. When they exist, the **free FK state** and **wired FK state** are the cylinder limits for the identity and one-class partitions, respectively, at every $n$. Their existence and uniqueness as probability-measure cylinder limits are established by a later A-page lemma under its stated measure-extension hypothesis. For either state $\\phi^b_{p,q}$, $b\\in\\{0,1\\}$, define $\\theta^b(p,q):=\\phi^b_{p,q}(0\\leftrightarrow\\infty)$, where $0\\leftrightarrow\\infty$ means that the open cluster of the origin is not contained in any finite box, and define\n\n$$p_c^b(q):=\\inf\\{p\\in(0,1):\\theta^b(p,q)>0\\}.$$\n\nNo equality of free and wired states at $p=p_c$ is part of this definition.",
+        "strategy": "Finite mathematical definition.",
+        "deps": [
+          "def-csm-frontier-fk-real-boundaries"
+        ],
+        "dependency_roles": {
+          "def-csm-frontier-fk-real-boundaries": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "physical_scope": null,
+        "sources": {
+          "references": [
+            {
+              "title": "Vincent Beffara and Hugo Duminil-Copin, The self-dual point of the two-dimensional random-cluster model is critical for q >= 1",
+              "url": "https://arxiv.org/pdf/1006.5073",
+              "locator": "Section 1, infinite-volume FK measures and free/wired boundary conventions."
+            },
+            {
+              "title": "Geoffrey Grimmett, The Random-Cluster Model, second edition",
+              "url": "https://www.statslab.cam.ac.uk/~grg/books/rcm1-1.pdf",
+              "locator": "Chapter 4, free and wired random-cluster measures as limits of finite-volume laws."
+            }
+          ]
+        },
+        "dependency_level": 2,
+        "library": "physics"
+      },
+      {
+        "id": "lem-csm-frontier-fk-fkg-spatial-markov",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Finite FK association, spatial Markov property, and boundary monotonicity",
+        "statement": "For every finite undirected multigraph $G=(V,E,\\partial)$, boundary set $B\\subseteq V$, boundary partition $\\xi$ on $B$, $q\\geq1$, and $p\\in(0,1)$, the finite FK law defined by the stated finite weights is strictly positive and log-supermodular on the Boolean lattice $2^E$: for $A,C\\subseteq E$,\n\n$$\\phi_{G,p,q}^{\\xi}(A\\cup C)\\phi_{G,p,q}^{\\xi}(A\\cap C)\\geq\\phi_{G,p,q}^{\\xi}(A)\\phi_{G,p,q}^{\\xi}(C).$$\n\nConsequently it is positively associated: $\\phi(fg)\\geq\\phi(f)\\phi(g)$ for increasing real functions $f,g:2^E\\to\\mathbb R$. Conditioning on the states of all edges outside a finite edge set $F$ gives a finite FK law on $F$ whose boundary partition wires exactly the vertices joined by the fixed exterior open edges and the original partition $\\xi$. Given all other edge states, an edge is open with conditional probability $p$ if its endpoints are already connected, and $p/(p+q(1-p))$ otherwise. If $p_1\\leq p_2$ and $\\xi_1$ refines $\\xi_2$ (each $\\xi_1$-class lies in a $\\xi_2$-class), then $\\phi_{p_1,q}^{\\xi_1}\\leq_{st}\\phi_{p_2,q}^{\\xi_2}$.",
+        "strategy": "direct",
+        "deps": [
+          "def-csm-frontier-fk-real-boundaries",
+          "def-multigraph-loop-and-digraph"
+        ],
+        "dependency_roles": {
+          "def-csm-frontier-fk-real-boundaries": "mathematical-premise",
+          "def-multigraph-loop-and-digraph": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "physical_scope": null,
+        "sources": {
+          "references": [
+            {
+              "title": "Vincent Beffara and Hugo Duminil-Copin, The self-dual point of the two-dimensional random-cluster model is critical for q >= 1",
+              "url": "https://arxiv.org/pdf/1006.5073",
+              "locator": "Section 1, finite FK conditional laws and positive association; Section 3, monotonicity and influence formula."
+            },
+            {
+              "title": "Geoffrey Grimmett, The Random-Cluster Model, second edition",
+              "url": "https://www.statslab.cam.ac.uk/~grg/books/rcm1-1.pdf",
+              "locator": "Chapter 3 §§3.2–3.4, FKG association, differential formula, and comparison inequalities."
+            }
+          ]
+        },
+        "dependency_level": 2,
+        "library": "physics"
+      },
+      {
+        "id": "lem-csm-frontier-fk-planar-duality",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Planar FK duality with the free exterior-face convention",
+        "statement": "Let $G=(V,E)$ be a finite connected plane graph with a fixed embedding and $|V|\\geq1$. Use the free partition on all primal vertices, $B=V$. Its plane dual multigraph $G^*$ has one vertex for each face, including the unbounded face, and one dual edge $e^*$ crossing each primal edge $e$; use the identity partition on the dual face-vertices. The unbounded face is one dual vertex, so this convention retains the exterior-face connection in the dual. For a primal open set $A\\subseteq E$, let $A^*:=\\{e^*:e\\in E\\setminus A\\}$, so a dual edge is open exactly when its crossing primal edge is closed. For $q\\geq1$ and $p\\in(0,1)$ define $p^*\\in(0,1)$ by\n\n$$\\frac{p^*}{1-p^*}=q\\frac{1-p}{p}.$$\n\nThen complementing the primal edges sends the finite FK law $\\phi_{G,p,q}^{\\mathrm{free}}$ to the dual FK law $\\phi_{G^*,p^*,q}^{\\mathrm{free}}$: the random dual edge set $A^*$ has exactly that distribution. The unnormalized weight ratio is the configuration-independent factor $q^{|V|-1}((1-p)/p^*)^{|E|}$; the exponent $|V|-1$ includes the exterior-face contribution under this identity-partition convention.",
+        "strategy": "direct",
+        "deps": [
+          "def-csm-frontier-fk-real-boundaries",
+          "def-plane-graph-face-and-boundary",
+          "def-plane-dual-multigraph",
+          "cor-euler-formula-for-disconnected-plane-graphs",
+          "lem-plane-edge-face-incidence"
+        ],
+        "dependency_roles": {
+          "def-csm-frontier-fk-real-boundaries": "mathematical-premise",
+          "def-plane-graph-face-and-boundary": "mathematical-premise",
+          "def-plane-dual-multigraph": "mathematical-premise",
+          "cor-euler-formula-for-disconnected-plane-graphs": "mathematical-premise",
+          "lem-plane-edge-face-incidence": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "physical_scope": null,
+        "sources": {
+          "references": [
+            {
+              "title": "Vincent Beffara and Hugo Duminil-Copin, The self-dual point of the two-dimensional random-cluster model is critical for q >= 1",
+              "url": "https://arxiv.org/pdf/1006.5073",
+              "locator": "Section 1, complement-edge duality and the self-dual parameter."
+            },
+            {
+              "title": "Geoffrey Grimmett, The Random-Cluster Model, second edition",
+              "url": "https://www.statslab.cam.ac.uk/~grg/books/rcm1-1.pdf",
+              "locator": "Chapter 6 §6.1, especially the Euler component count and p-star relation."
+            }
+          ]
+        },
+        "dependency_level": 2,
+        "library": "physics"
+      },
+      {
+        "id": "lem-csm-frontier-fk-free-wired-limits",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Existence of the free and wired infinite-volume FK limits",
+        "statement": "For every $q\\geq1$ and $p\\in(0,1)$, the free finite-volume FK laws on $\\Lambda_n$ are stochastically increasing under restriction as $n$ grows, and the wired finite-volume FK laws are stochastically decreasing under restriction. The probabilities of every finite-coordinate atom therefore have unique nonnegative normalized consistent numerical limits. Under Countable Choice, each limiting family extends uniquely to a probability measure on the cylinder-generated Borel sigma-algebra of $\\{0,1\\}^{E_\\infty}$. Thus the free and wired infinite-volume states exist under this measure-extension hypothesis.",
+        "strategy": "direct",
+        "deps": [
+          "def-csm-frontier-fk-infinite-volume-states",
+          "lem-csm-frontier-fk-fkg-spatial-markov",
+          "lem-csm-lattice-product-and-measure-compactness",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "def-csm-frontier-fk-infinite-volume-states": "mathematical-premise",
+          "lem-csm-frontier-fk-fkg-spatial-markov": "mathematical-premise",
+          "lem-csm-lattice-product-and-measure-compactness": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "physical_scope": null,
+        "sources": {
+          "references": [
+            {
+              "title": "Geoffrey Grimmett, The Random-Cluster Model, second edition",
+              "url": "https://www.statslab.cam.ac.uk/~grg/books/rcm1-1.pdf",
+              "locator": "Chapter 4, finite-volume free/wired limits and stochastic boundary comparison."
+            },
+            {
+              "title": "Sascha Friedli and Yvan Velenik, Statistical Mechanics of Lattice Systems: A Concrete Mathematical Introduction",
+              "url": "https://www.unige.ch/math/folks/velenik/smbook/Statistical_Mechanics_of_Lattice_Systems.pdf",
+              "locator": "Chapter 3, compactness of finite-alphabet configuration laws and thermodynamic limits."
+            }
+          ]
+        },
+        "dependency_level": 3,
+        "library": "physics"
+      },
+      {
+        "id": "lem-csm-frontier-grid-crossings-intersect",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Opposite crossings of a rectangular grid intersect",
+        "statement": "Let $a,b\\geq1$ be integers and let $Q_{a,b}=\\{0,\\ldots,a\\}\\times\\{0,\\ldots,b\\}$ have its nearest-neighbor square-grid edges, drawn as unit horizontal and vertical segments. A left-to-right path is a finite edge path whose endpoints lie on the sides $x=0$ and $x=a$; a bottom-to-top path is defined analogously using $y=0$ and $y=b$. Every left-to-right path and every bottom-to-top path in $Q_{a,b}$ share a vertex.",
+        "strategy": "direct",
+        "deps": [
+          "thm-polygonal-jordan-curve"
+        ],
+        "dependency_roles": {
+          "thm-polygonal-jordan-curve": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "physical_scope": null,
+        "sources": {
+          "references": [
+            {
+              "title": "Vincent Beffara and Hugo Duminil-Copin, The self-dual point of the two-dimensional random-cluster model is critical for q >= 1",
+              "url": "https://arxiv.org/pdf/1006.5073",
+              "locator": "Section 2, Proposition 8, path-intersection and rectangle-gluing arguments."
+            },
+            {
+              "title": "Geoffrey Grimmett, The Random-Cluster Model, second edition",
+              "url": "https://www.statslab.cam.ac.uk/~grg/books/rcm1-1.pdf",
+              "locator": "Chapter 6 §6.1, planar crossing and dual-path separation convention."
+            }
+          ]
+        },
+        "dependency_level": 0,
+        "library": "physics"
+      },
+      {
+        "id": "lem-csm-frontier-finite-box-cube-max-fiber-influence",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Maximum endpoint influence for an increasing finite-box set",
+        "deps": [],
+        "dependency_roles": {},
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "physical_scope": null,
+        "sources": {
+          "references": [
+            {
+              "title": "Geoffrey Grimmett, Svante Janson, and James Norris, Influence in Product Spaces",
+              "url": "https://arxiv.org/pdf/1207.1780",
+              "locator": "Theorem 2.3 and Remark 2.1: influence bounds and the endpoint/nonconstant-fiber convention; the finite-box increasing-set specialization is proved here."
+            },
+            {
+              "title": "Ryan O'Donnell, Analysis of Boolean Functions",
+              "url": "https://arxiv.org/pdf/2105.10386",
+              "locator": "Section 9.3, Theorem 9.18, and Section 9.4: two-point hypercontractivity and its product extension. The scalar and tensor estimates needed here are proved locally."
+            }
+          ]
+        },
+        "dependency_level": 0,
+        "library": "physics",
+        "statement": "Let $n\\ge2$ be an integer and let $C\\subseteq[0,1]^n$ be coordinatewise increasing and a finite union of axis-parallel boxes, with specified open or closed endpoint conventions. Degenerate boxes are allowed. Let $v_r$ denote elementary $r$-dimensional box volume: a box has the product of its side lengths as volume, and finite unions are evaluated by a common coordinate-endpoint subdivision, with coordinate faces assigned volume zero. Put $f=\\mathbf1_C$, $a=v_n(C)$, and\n\n$$F_i=v_{n-1}\\{x_{-i}\\in[0,1]^{n-1}:f(x_{-i},1)-f(x_{-i},0)=1\\},\\qquad M=\\max_{1\\le i\\le n}F_i.$$\n\nIf $M=0$, then $a(1-a)=0$. If $M>0$, then\n\n$$a(1-a)\\le\\frac{2\\sum_{i=1}^nF_i}{1+\\log(1/M)}.$$\n\nIn every case,\n\n$$\\max_{1\\le i\\le n}F_i\\ge\\frac14a(1-a)\\frac{\\log n}{n}.$$\n\nLogarithms are natural. Endpoint influence uses the actual values on the faces. The assertion and proof use only finite box volumes, finite probability spaces and elementary real calculus; they require no countable product measure or choice principle.",
+        "strategy": "Direct local proof."
+      },
+      {
+        "id": "lem-csm-frontier-fk-torus-cellular-duality",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Cellular component counts and self-dual FK likelihoods on a finite square torus",
+        "deps": [
+          "def-csm-frontier-fk-real-boundaries"
+        ],
+        "dependency_roles": {
+          "def-csm-frontier-fk-real-boundaries": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "physical_scope": null,
+        "sources": {
+          "references": [
+            {
+              "title": "Vincent Beffara and Hugo Duminil-Copin, The self-dual point of the two-dimensional random-cluster model is critical for q >= 1",
+              "url": "https://arxiv.org/pdf/1006.5073",
+              "locator": "Section 1, printed p. 6, equations (1.5)--(1.6); the sector correction is formulated here using finite cellular matrices."
+            }
+          ]
+        },
+        "dependency_level": 2,
+        "library": "physics",
+        "statement": "For an integer $m\\geq1$, let $T_m$ be the labelled square cellulation obtained by quotienting the unit square cellulation of $\\mathbb R^2$ by $m\\mathbb Z^2$. Its vertices are $V=(\\mathbb Z/m\\mathbb Z)^2$. For every $(i,j)\\in V$, retain a horizontal edge label $h(i,j)$ from $(i,j)$ to $(i+1,j)$, a vertical edge label $v(i,j)$ from $(i,j)$ to $(i,j+1)$, and a square face label $f(i,j)$. All indices are modulo $m$. Distinct labels remain distinct even when their endpoints agree: for $m=2$ this retains parallel edges, and for $m=1$ it retains two loops. In a face boundary retain its four edge occurrences before reducing coefficients modulo two. Thus $|V|=|F|=m^2$ and $|E|=2m^2$. The dual has vertices $f(i,j)$ and a separate label $e^*$ crossing each primal label $e$; specifically $h(i,j)^*$ joins $f(i,j-1)$ to $f(i,j)$ and $v(i,j)^*$ joins $f(i-1,j)$ to $f(i,j)$. Its faces correspond to primal vertices and use the dual square cellulation.\n\nLet $\\mathbb F_2=\\{0,1\\}$ be the field with addition and multiplication modulo two. Let $C_0=\\mathbb F_2^V$, $C_1=\\mathbb F_2^E$, and $C_2=\\mathbb F_2^F$ have the indicated labelled bases. Define $\\partial_1:C_1\\to C_0$ by summing the two endpoint occurrences of each edge, so a loop has zero boundary, and define $\\partial_2:C_2\\to C_1$ by\n\n$$\\partial_2 f(i,j)=h(i,j)+v(i+1,j)+h(i,j+1)+v(i,j).$$\n\nThen $\\partial_1\\partial_2=0$ and $H:=\\ker\\partial_1/\\operatorname{im}\\partial_2$ has dimension two. For $A\\subseteq E$, let $C_1(A)$ be the coordinate subspace generated by its labels, put $Z(A)=C_1(A)\\cap\\ker\\partial_1$, and define\n\n$$r(A):=\\dim_{\\mathbb F_2}\\operatorname{im}\\bigl(Z(A)\\longrightarrow H\\bigr).$$\n\nLet $k(A)$ count all components of the spanning graph $(V,A)$, including isolated vertices. Let $A^*=\\{e^*:e\\in E\\setminus A\\}$, and let $k^*(A^*)$ count all components of this dual spanning graph. Define $r^*(A^*)$ by the same matrix construction on the dual cellulation. Then\n\n$$r(A)\\in\\{0,1,2\\},\\qquad k^*(A^*)-1=|A|-|V|+k(A)-r(A),\\qquad r^*(A^*)=2-r(A).$$\n\nFor every real $q\\geq1$, set $p=\\sqrt q/(1+\\sqrt q)$. Give both primal and dual graphs the finite FK law with parameter $(p,q)$ and identity boundary partition. Write $w(A)$ and $w^*(A^*)$ for their unnormalized weights, $\\phi$ and $\\phi^*$ for their laws, and $\\nu$ for the image of $\\phi$ under $A\\mapsto A^*$. Then\n\n$$\\frac{w(A)}{w^*(A^*)}=q^{r(A)-1}.$$\n\nFor every dual configuration $B\\subseteq E^*$, the two partition functions are equal and the exact normalized likelihood is\n\n$$\\frac{\\nu(B)}{\\phi^*(B)}=q^{1-r^*(B)}.$$\n\nIn particular this likelihood lies in $[q^{-1},q]$, and hence also in $[q^{-2},q^2]$. For every event $\\mathcal E\\subseteq2^{E^*}$,\n\n$$q^{-2}\\phi^*(\\mathcal E)\\leq\\nu(\\mathcal E)\\leq q^2\\phi^*(\\mathcal E).$$\n\nThe same event bounds hold after any labelled graph isomorphism identifying the dual torus with the primal torus.",
+        "strategy": "Direct local proof."
+      },
+      {
+        "id": "lem-csm-frontier-fk-cylinder-pressure-comparison",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Numerical FK cylinder limits and pressure comparison",
+        "deps": [
+          "def-csm-frontier-fk-real-boundaries",
+          "lem-csm-frontier-fk-fkg-spatial-markov"
+        ],
+        "dependency_roles": {
+          "def-csm-frontier-fk-real-boundaries": "mathematical-premise",
+          "lem-csm-frontier-fk-fkg-spatial-markov": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "physical_scope": null,
+        "sources": {
+          "references": [
+            {
+              "title": "Geoffrey Grimmett, The Random-Cluster Model",
+              "url": "https://www.statslab.cam.ac.uk/~grg/books/rcm1-1.pdf",
+              "locator": "Section 4.5, printed pp. 85–91, Theorems 4.58 and 4.63 and equations (4.54)–(4.78); the local proof separates numerical cylinder limits from measure extension."
+            }
+          ]
+        },
+        "dependency_level": 3,
+        "library": "physics",
+        "axiom_use": "No choice axiom is used: numerical cylinder limits and finite sums are constructed here, not a countably additive infinite-volume law.",
+        "statement": "Let $q\\geq1$ be a finite real number. On the nearest-neighbor square lattice let $\\Lambda_n=\\{-n,\\ldots,n\\}^2$, let $E_n$ consist of edges with both endpoints in $\\Lambda_n$, and let $B_n=\\{x\\in\\Lambda_n:\\|x\\|_\\infty=n\\}$. For $p\\in(0,1)$ and a partition $\\xi$ of $B_n$, give $A\\subseteq E_n$ probability proportional to $p^{|A|}(1-p)^{|E_n\\setminus A|}q^{k_\\xi(A)}$, where $k_\\xi$ counts components after the partition classes are identified. Write $\\phi^b_{n,p,q}$ for the free partition when $b=0$ and the one-class wired partition when $b=1$.\n\nFor every event $C$ determined by finitely many edge coordinates, the numerical limits\n$$\\pi^b_{p,q}(C):=\\lim_{n\\to\\infty}\\phi^b_{n,p,q}(C),\\qquad b\\in\\{0,1\\},$$\nexist. They are consistent, nonnegative normalized finite-coordinate probability families, invariant under translations and quarter-turns. On increasing cylinder events they are increasing in $p$, with $\\pi^0\\leq\\pi^1$. Every cylinder-probability limit of arbitrary boundary partitions lies between these two families on increasing cylinder events. There is an at most countable set $D_q\\subset(0,1)$ such that $\\pi^0_{p,q}(C)=\\pi^1_{p,q}(C)$ for every cylinder event $C$ whenever $p\\notin D_q$.\n\nLet $D_r$ be the event that actual open edges inside $\\Lambda_r$ join $0$ to $B_r$, and define the real numbers\n$$\\Theta_b(p,q)=\\inf_{r\\geq1}\\pi^b_{p,q}(D_r).$$\nThen $\\Theta_1(p,q)\\leq\\Theta_0(p',q)$ for $0<p<p'<1$, and\n$$\\lim_{n\\to\\infty}\\phi^1_{n,p,q}(0\\leftrightarrow B_n)=\\Theta_1(p,q).$$\nConnections here use actual edges, not artificial boundary-identification paths. These are statements about real limits and finite probability tables; existence of a countably additive probability on the infinite configuration space is not asserted.",
+        "strategy": "Direct local proof."
+      },
+      {
+        "id": "lem-csm-frontier-fk-mixed-reflection-gluing",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Finite mixed-boundary reflection and gluing on the rotated FK torus",
+        "deps": [
+          "def-csm-frontier-fk-real-boundaries",
+          "lem-csm-frontier-fk-torus-cellular-duality",
+          "lem-csm-frontier-fk-fkg-spatial-markov",
+          "thm-polygonal-jordan-curve"
+        ],
+        "dependency_roles": {
+          "def-csm-frontier-fk-real-boundaries": "mathematical-premise",
+          "lem-csm-frontier-fk-torus-cellular-duality": "mathematical-premise",
+          "lem-csm-frontier-fk-fkg-spatial-markov": "mathematical-premise",
+          "thm-polygonal-jordan-curve": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "physical_scope": null,
+        "sources": {
+          "references": [
+            {
+              "title": "Vincent Beffara and Hugo Duminil-Copin, The self-dual point of the two-dimensional random-cluster model is critical for q >= 1",
+              "url": "https://arxiv.org/pdf/1006.5073",
+              "locator": "Section 2, Lemmas 6--7 and Proposition 8, printed pp. 8--13; the local construction here uses closed rotated boxes and first intersection along the vertical path."
+            }
+          ]
+        },
+        "dependency_level": 3,
+        "library": "physics",
+        "statement": "Let $P$ have vertices $(u,v)\\in\\mathbb Z^2$ with $u\\equiv v\\pmod2$ and straight edges with displacement $(\\pm1,\\pm1)$. For a positive integer $m$, quotient its labelled cellulation by the periods $(m,m)$ and $(-m,m)$, retaining distinct edge labels even if endpoints agree. Give this torus the finite FK law $\\phi$ with identity boundary partition, real $q\\geq1$, and $p=\\sqrt q/(1+\\sqrt q)$. A closed coordinate rectangle means its induced primal graph on the indicated integer vertices. A horizontal crossing joins its extreme left and right coordinate layers; a vertical crossing joins its extreme bottom and top layers, using only its edges. Paths may be stopped at their first target-layer visit.\n\nPut\n\n$$r(q)=\\frac1{1+\\sqrt q},\\qquad a_0(q)=\\frac1{1+q^2},\\qquad a(q)=r(q)a_0(q),\\qquad b(q)=\\frac{a(q)^3}{2(1+q^2)}.$$\n\nFor every positive integer $N$ divisible by four and every $m>N$, the closed square $[0,N]^2$ has horizontal and vertical crossing probabilities at least $a(q)$. If additionally $m>3N/2$, the closed rectangle $[0,3N/2]\\times[0,N]$ has horizontal crossing probability at least $b(q)$, and the corresponding vertical crossing bound holds for $[0,N]\\times[0,3N/2]$. The same bounds hold after every translation by a vertex of $P$. Every rectangle in these conclusions embeds in the torus under its stated size condition. No restriction on $q$ beyond real $q\\geq1$ is imposed.",
+        "strategy": "Direct local proof."
+      },
+      {
+        "id": "thm-csm-frontier-fk-torus-rsw",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Periodic-torus RSW lower bounds at the FK self-dual point",
+        "statement": "For each $q\\geq1$ and aspect ratio $\\alpha>1$, there is a constant $c(\\alpha,q)>0$ such that the following holds. Let $n,m$ be positive integers with $m>\\lceil\\alpha n\\rceil$, let $T_m=(\\mathbb Z/m\\mathbb Z)^2$ with its nearest-neighbor horizontal and vertical edges and periodic boundary conditions, and give its edges the FK law with no boundary wiring, parameter $q$, and $p_{\\rm sd}(q)=\\sqrt q/(1+\\sqrt q)$. The probability of a horizontal open crossing of the vertex rectangle $\\{0,\\ldots,\\lceil\\alpha n\\rceil\\}\\times\\{0,\\ldots,n\\}$ is at least $c(\\alpha,q)$, uniformly in $n$ and $m$.",
+        "strategy": "direct",
+        "deps": [
+          "def-csm-frontier-fk-real-boundaries",
+          "lem-csm-frontier-fk-fkg-spatial-markov",
+          "lem-csm-frontier-fk-torus-cellular-duality",
+          "lem-csm-frontier-fk-mixed-reflection-gluing",
+          "thm-polygonal-jordan-curve"
+        ],
+        "dependency_roles": {
+          "def-csm-frontier-fk-real-boundaries": "mathematical-premise",
+          "lem-csm-frontier-fk-fkg-spatial-markov": "mathematical-premise",
+          "lem-csm-frontier-fk-torus-cellular-duality": "mathematical-premise",
+          "lem-csm-frontier-fk-mixed-reflection-gluing": "mathematical-premise",
+          "thm-polygonal-jordan-curve": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "physical_scope": null,
+        "sources": {
+          "references": [
+            {
+              "title": "Vincent Beffara and Hugo Duminil-Copin, The self-dual point of the two-dimensional random-cluster model is critical for q >= 1",
+              "url": "https://arxiv.org/pdf/1006.5073",
+              "locator": "Section 2, Theorem 5, Lemmas 6–7, and Proposition 8 (PDF pp. 6–13)."
+            },
+            {
+              "title": "Geoffrey Grimmett, The Random-Cluster Model, second edition",
+              "url": "https://www.statslab.cam.ac.uk/~grg/books/rcm1-1.pdf",
+              "locator": "Chapters 3 and 6, FKG, planar duality, and periodic crossing context."
+            }
+          ]
+        },
+        "dependency_level": 4,
+        "library": "physics"
+      },
+      {
+        "id": "lem-csm-frontier-fk-influence-threshold",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "A maximum conditional edge influence bound for finite FK measures",
+        "statement": "Let $G=(V,E,\\partial)$ be a finite undirected multigraph, let $B\\subseteq V$ have boundary partition $\\xi$, fix $q\\geq1$, $\\varepsilon\\in(0,1/2)$, and $p\\in[\\varepsilon,1-\\varepsilon]$, and let $\\phi=\\phi_{G,p,q}^{\\xi}$ be the finite FK law. For every increasing event $A\\subseteq2^E$ with $0<\\phi(A)<1$ and $|E|\\geq2$, define the conditional influence of edge $e$ by\n\n$$I_A(e):=\\phi(A\\mid \\omega_e=1)-\\phi(A\\mid\\omega_e=0).$$\n\nThere is a constant $c(q,\\varepsilon)>0$ such that\n\n$$\\max_{e\\in E}I_A(e)\\geq c(q,\\varepsilon)\\,\\phi(A)(1-\\phi(A))\\frac{\\log|E|}{|E|}.$$",
+        "strategy": "direct",
+        "deps": [
+          "def-csm-frontier-fk-real-boundaries",
+          "lem-csm-frontier-fk-fkg-spatial-markov",
+          "lem-csm-frontier-finite-box-cube-max-fiber-influence"
+        ],
+        "dependency_roles": {
+          "def-csm-frontier-fk-real-boundaries": "mathematical-premise",
+          "lem-csm-frontier-fk-fkg-spatial-markov": "mathematical-premise",
+          "lem-csm-frontier-finite-box-cube-max-fiber-influence": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "physical_scope": null,
+        "sources": {
+          "references": [
+            {
+              "title": "Benjamin Graham and Geoffrey Grimmett, Influence and sharp-threshold theorems for monotonic measures",
+              "url": "https://arxiv.org/pdf/math/0505057",
+              "locator": "Theorem 2.10 and its complete proof, PDF pp. 4–9: monotone conditional laws, sequential encoding and coordinate reordering."
+            },
+            {
+              "title": "Geoffrey Grimmett, Svante Janson, and James Norris, Influence in Product Spaces",
+              "url": "https://arxiv.org/pdf/1207.1780",
+              "locator": "Theorems 1.1 and 2.3, and Remark 2.1: product-space influence and the endpoint/nonconstant-fiber distinction. The needed finite-box estimate is proved locally."
+            }
+          ]
+        },
+        "dependency_level": 3,
+        "library": "physics"
+      },
+      {
+        "id": "lem-csm-frontier-fk-wired-annuli-and-numerical-threshold",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Wired FK annuli and the numerical self-dual threshold",
+        "deps": [
+          "lem-csm-frontier-fk-cylinder-pressure-comparison",
+          "lem-csm-frontier-fk-fkg-spatial-markov",
+          "thm-csm-frontier-fk-torus-rsw",
+          "lem-csm-frontier-fk-influence-threshold",
+          "lem-csm-frontier-fk-planar-duality",
+          "lem-csm-frontier-grid-crossings-intersect",
+          "thm-polygonal-jordan-curve"
+        ],
+        "dependency_roles": {
+          "lem-csm-frontier-fk-cylinder-pressure-comparison": "mathematical-premise",
+          "lem-csm-frontier-fk-fkg-spatial-markov": "mathematical-premise",
+          "thm-csm-frontier-fk-torus-rsw": "mathematical-premise",
+          "lem-csm-frontier-fk-influence-threshold": "mathematical-premise",
+          "lem-csm-frontier-fk-planar-duality": "mathematical-premise",
+          "lem-csm-frontier-grid-crossings-intersect": "mathematical-premise",
+          "thm-polygonal-jordan-curve": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "physical_scope": null,
+        "sources": {
+          "references": [
+            {
+              "title": "Beffara and Duminil-Copin, The self-dual point of the two-dimensional random-cluster model is critical for q >= 1",
+              "url": "https://arxiv.org/pdf/1006.5073",
+              "locator": "Sections 3–4, Proposition 10, Theorem 13, Lemmas 14–15 and Proposition 16; finite wired outer seed and numerical-limit formulation developed here."
+            }
+          ]
+        },
+        "dependency_level": 5,
+        "library": "physics",
+        "statement": "Let $q\\geq1$ be real, $p\\in(0,1)$, $\\Lambda_n=[-n,n]^2\\cap\\mathbb Z^2$, and $\\phi^b_{n,p,q}$ the finite square-lattice FK law with free boundary partition $b=0$ or wired partition $b=1$. All paths below use actual open lattice edges, not artificial wiring edges. For each cylinder event $A$ let $\\pi^b_{p,q}(A)=\\lim_{n\\to\\infty}\\phi^b_{n,p,q}(A)$ be its numerical cylinder limit. Put $p_s=\\sqrt q/(1+\\sqrt q)$ and let $D_r$ be the cylinder event that $0$ connects inside $\\Lambda_r$ to its vertex boundary. Then $a_n(p,q)=\\phi^1_{n,p,q}(D_n)$ decreases, and\n$$\\Theta^1(p,q):=\\lim_{n\\to\\infty}a_n(p,q)=\\inf_{r\\geq1}\\pi^1_{p,q}(D_r).$$\nFor $p>p_s$, $\\Theta^1(p,q)>0$; for $p<p_s$, $\\Theta^1(p,q)=0$. Consequently $\\inf\\{p\\in(0,1):\\Theta^1(p,q)>0\\}=p_s$. No value at $p_s$ is asserted. These numerical conclusions do not require Countable Choice or the extension of cylinder weights to an infinite-volume measure.\n\nMore precisely, fix $p>p_s$ and any real $\\alpha>1$. Put $r_k=\\lfloor\\alpha^k\\rfloor$. For all sufficiently large $k$, let $A_k$ be the cylinder event that an actual open simple circuit surrounds $\\Lambda_{r_k}$, lies outside $\\Lambda_{r_k}$ and strictly inside $\\Lambda_{r_{k+1}}$, and is connected inside $\\Lambda_{r_{k+2}}$ to its vertex boundary. There are $C,\\varepsilon>0$ and an integer $K$ such that $d_k=C e^{-\\varepsilon k}<1/2$ for $k\\geq K$ and, for every $n\\geq m\\geq N\\geq K$,\n$$\\phi^1_{r_{n+2},p,q}\\left(\\bigcap_{k=N}^{m}A_k\\right)\\geq\\prod_{k=N}^{n}(1-d_k),\\qquad \\pi^1_{p,q}\\left(\\bigcap_{k=N}^{m}A_k\\right)\\geq1-\\sum_{k=N}^{\\infty}d_k.$$\nFor $0<p<t<1$ and $H_n$ the finite Hamming distance to $D_n$, the finite cylinder expectation satisfies\n$$\\pi^1_{p,q}(D_n)\\leq\\exp\\{-4(t-p)\\mathbb E_{\\pi^1_{t,q}}H_n\\}.$$\nFor every $0<s<p_s$ and every $d>0$, there are $C_d,n_d$ such that $\\pi^1_{s,q}(D_n)\\leq C_d n^{-(2d+4)}$ for $n\\geq n_d$. The expectation here is a finite sum of cylinder atom weights.",
+        "strategy": "Direct local proof."
+      },
+      {
+        "id": "lem-csm-frontier-fk-independent-cluster-animal-envelope",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Independent connected-set envelopes and a greedy lattice-animal bound",
+        "deps": [
+          "def-tdmath-measure-integral",
+          "thm-tdmath-monotone-convergence"
+        ],
+        "dependency_roles": {
+          "def-tdmath-measure-integral": "mathematical-premise",
+          "thm-tdmath-monotone-convergence": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "physical_scope": null,
+        "sources": {
+          "references": [
+            {
+              "title": "Beffara and Duminil-Copin, The self-dual point of the two-dimensional random-cluster model is critical for q >= 1",
+              "url": "https://arxiv.org/pdf/1006.5073",
+              "locator": "Section 4, proof of Theorem 2, pp. 20–21, independent cluster envelopes and lattice animals; complete elementary replacements for the cited auxiliary animal results are proved here."
+            }
+          ]
+        },
+        "dependency_level": 0,
+        "library": "physics",
+        "statement": "Let $(\\Omega,\\mathcal F,P)$ be a given probability space. For each $y\\in\\mathbb Z^2$, let $S_y$ be a measurable random finite nearest-neighbor-connected vertex set containing $y$, with the discrete sigma-algebra on the countable collection of such sets. Assume the sets $S_y-y$ are independent and identically distributed and that $\\mathbb E|S_0|^r<\\infty$ for every real $r>0$. A lattice animal is a finite nearest-neighbor-connected vertex set containing $0$. Define the extended measurable envelope\n$$M_z=\\sup\\{|S_y|:y\\in\\mathbb Z^2,\\ z\\in S_y\\}.$$\nAlmost surely every $M_z$ is a finite maximum, and there is a deterministic finite constant $K_0$ such that, almost surely, every sufficiently large lattice animal $\\Gamma$ satisfies\n$$\\sum_{z\\in\\Gamma}M_z\\leq K_0|\\Gamma|.$$\nMore generally, for any given independent identically distributed field $X_y\\geq1$ with finite moments of every positive order, there is a deterministic finite $K$ such that almost surely $\\sum_{y\\in\\Gamma}X_y\\leq K|\\Gamma|$ for every sufficiently large lattice animal. The random cutoff may depend on the realization. This result assumes the stated random family on a probability space; it does not construct an infinite product law or require a choice axiom to supply that law.",
+        "strategy": "Direct local proof."
+      },
+      {
+        "id": "lem-csm-frontier-fk-subcritical-exponential-decay",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Subcritical FK exponential connectivity under Countable Choice",
+        "deps": [
+          "def-countable-choice",
+          "def-csm-frontier-fk-infinite-volume-states",
+          "lem-csm-frontier-fk-free-wired-limits",
+          "lem-csm-frontier-fk-cylinder-pressure-comparison",
+          "lem-csm-frontier-fk-fkg-spatial-markov",
+          "lem-csm-frontier-fk-wired-annuli-and-numerical-threshold",
+          "lem-csm-frontier-fk-independent-cluster-animal-envelope",
+          "lem-csm-lattice-product-and-measure-compactness",
+          "thm-tdmath-monotone-convergence",
+          "lem-tdmath-fatou"
+        ],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "def-csm-frontier-fk-infinite-volume-states": "mathematical-premise",
+          "lem-csm-frontier-fk-free-wired-limits": "mathematical-premise",
+          "lem-csm-frontier-fk-cylinder-pressure-comparison": "mathematical-premise",
+          "lem-csm-frontier-fk-fkg-spatial-markov": "mathematical-premise",
+          "lem-csm-frontier-fk-wired-annuli-and-numerical-threshold": "mathematical-premise",
+          "lem-csm-frontier-fk-independent-cluster-animal-envelope": "mathematical-premise",
+          "lem-csm-lattice-product-and-measure-compactness": "mathematical-premise",
+          "thm-tdmath-monotone-convergence": "mathematical-premise",
+          "lem-tdmath-fatou": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "physical_scope": null,
+        "sources": {
+          "references": [
+            {
+              "title": "Beffara and Duminil-Copin, The self-dual point of the two-dimensional random-cluster model is critical for q >= 1",
+              "url": "https://arxiv.org/pdf/1006.5073",
+              "locator": "Section 4, proof of Theorem 2, pp. 20–21; countable-kernel construction and the elementary envelope supplier are made explicit locally."
+            }
+          ]
+        },
+        "dependency_level": 6,
+        "library": "physics",
+        "statement": "Assume the Axiom of Countable Choice. For every real $q\\geq1$ and $0<p<\\sqrt q/(1+\\sqrt q)$, the square-lattice wired FK cluster $C_x$ has $\\mathbb E|C_x|^d<\\infty$ for every real $d>0$. There are constants $C(p,q),c(p,q)>0$ such that every probability measure $\\phi$ obtained as a cylinder limit of finite-volume FK laws on boxes with arbitrary boundary partitions satisfies\n$$\\phi(x\\leftrightarrow y)\\leq C(p,q)e^{-c(p,q)\\lVert x-y\\rVert_2}\\qquad(x,y\\in\\mathbb Z^2).$$\nHere $x\\leftrightarrow y$ means connection by a finite path of actual open lattice edges. In particular every such state has zero probability of an infinite cluster at a given vertex. The constants are uniform over all these cylinder-limit states at the fixed $(p,q)$. No conclusion at the self-dual parameter or equality of the critical free and wired measures is asserted. Countable Choice is used for probability-law extension and selection of countably many coupling kernels in this proof; it is not a premise of the separate numerical finite-volume threshold theorem.",
+        "strategy": "Direct local proof."
+      },
+      {
+        "id": "lem-csm-frontier-fk-crossing-amplification",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Crossing sharpness and subcritical decay for square-lattice FK",
+        "statement": "Assume Countable Choice. For every real $q\\geq1$, put $p_{\\rm sd}(q)=\\sqrt q/(1+\\sqrt q)$. The square-lattice free and wired cylinder-limit FK probability laws exist. For every $p>p_{\\rm sd}(q)$, both have positive percolation probability. For every $p<p_{\\rm sd}(q)$, there are $C(p,q),c(p,q)>0$ such that every arbitrary-boundary cylinder-limit FK state $\\phi$ satisfies\n$$\\phi(x\\leftrightarrow y)\\leq C(p,q)e^{-c(p,q)\\lVert x-y\\rVert_2}\\qquad(x,y\\in\\mathbb Z^2).$$\nIn particular, both percolation probabilities vanish below $p_{\\rm sd}(q)$ and $p_c^0(q)=p_c^1(q)=p_{\\rm sd}(q)$. These conclusions do not identify the free and wired measures at the critical parameter.",
+        "strategy": "direct",
+        "deps": [
+          "def-countable-choice",
+          "def-csm-frontier-fk-infinite-volume-states",
+          "lem-csm-frontier-fk-free-wired-limits",
+          "lem-csm-frontier-fk-cylinder-pressure-comparison",
+          "lem-csm-frontier-fk-wired-annuli-and-numerical-threshold",
+          "lem-csm-frontier-fk-subcritical-exponential-decay"
+        ],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "def-csm-frontier-fk-infinite-volume-states": "mathematical-premise",
+          "lem-csm-frontier-fk-free-wired-limits": "mathematical-premise",
+          "lem-csm-frontier-fk-cylinder-pressure-comparison": "mathematical-premise",
+          "lem-csm-frontier-fk-wired-annuli-and-numerical-threshold": "mathematical-premise",
+          "lem-csm-frontier-fk-subcritical-exponential-decay": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "physical_scope": null,
+        "sources": {
+          "references": [
+            {
+              "title": "Vincent Beffara and Hugo Duminil-Copin, The self-dual point of the two-dimensional random-cluster model is critical for q >= 1",
+              "url": "https://arxiv.org/pdf/1006.5073",
+              "locator": "Sections 3–4: Theorems 12–13, Propositions 10 and 16, Lemmas 14–15, and the proof of Theorem 2."
+            },
+            {
+              "title": "Geoffrey Grimmett, The Random-Cluster Model, second edition",
+              "url": "https://www.statslab.cam.ac.uk/~grg/books/rcm1-1.pdf",
+              "locator": "Chapters 4 and 6: free/wired limits, planar sharpness route, and subcritical finite-size estimates."
+            }
+          ]
+        },
+        "dependency_level": 7,
+        "library": "physics"
+      },
+      {
+        "id": "thm-csm-frontier-fk-square-critical-point",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Exact square-lattice FK critical point and subcritical decay",
+        "statement": "Assume Countable Choice. For every real $q\\geq1$, put $p_{\\rm sd}(q)=\\sqrt q/(1+\\sqrt q)$. For every $p>p_{\\rm sd}(q)$, the wired state has $\\theta^1(p,q)>0$; for every $p<p_{\\rm sd}(q)$, both free and wired states have zero percolation probability and the free and wired critical thresholds defined in [[def-csm-frontier-fk-infinite-volume-states]] equal $p_{\\rm sd}(q)$. For every $p<p_{\\rm sd}(q)$, there are constants $C(p,q),c(p,q)>0$ such that every cylinder-limit FK state $\\phi$ on $\\mathbb Z^2$ satisfies\n$$\\phi(x\\leftrightarrow y)\\leq C(p,q)e^{-c(p,q)\\lVert x-y\\rVert_2}\\qquad(x,y\\in\\mathbb Z^2).$$\nNo equality of the free and wired measures at $p=p_{\\rm sd}(q)$, critical exponent, or order of transition is asserted.",
+        "strategy": "direct",
+        "deps": [
+          "def-countable-choice",
+          "def-csm-frontier-fk-infinite-volume-states",
+          "lem-csm-frontier-fk-crossing-amplification"
+        ],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "def-csm-frontier-fk-infinite-volume-states": "mathematical-premise",
+          "lem-csm-frontier-fk-crossing-amplification": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "physical_scope": null,
+        "sources": {
+          "references": [
+            {
+              "title": "Vincent Beffara and Hugo Duminil-Copin, The self-dual point of the two-dimensional random-cluster model is critical for q >= 1",
+              "url": "https://arxiv.org/pdf/1006.5073",
+              "locator": "Theorems 1–2 and Section 4: the exact square-lattice threshold and subcritical exponential connectivity decay."
+            },
+            {
+              "title": "Geoffrey Grimmett, The Random-Cluster Model, second edition",
+              "url": "https://www.statslab.cam.ac.uk/~grg/books/rcm1-1.pdf",
+              "locator": "Chapters 4 and 6: infinite-volume free/wired states, planar duality, and the square-lattice critical-point route."
+            }
+          ]
+        },
+        "dependency_level": 8,
+        "library": "physics"
+      },
+      {
+        "id": "thm-csm-frontier-potts-square-critical-temperature",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Square-lattice Potts critical inverse temperature",
+        "statement": "Let $Q\\geq2$ be an integer, $J>0$, and $\\beta>0$. On $\\Lambda_n=[-n,n]^2\\cap\\mathbb Z^2$, let $B_n=\\{x\\in\\Lambda_n:\\lVert x\\rVert_\\infty=n\\}$ and let $E_n$ be the nearest-neighbor edges with both endpoints in $\\Lambda_n$. The $Q$-state Potts model has spins $\\sigma:\\Lambda_n\\to\\{1,\\ldots,Q\\}$, fixed plus boundary $\\sigma|_{B_n}=1$, and finite-volume Gibbs probabilities proportional to $e^{-\\beta H_n(\\sigma)}$, where\n$$H_n(\\sigma)=-J\\sum_{\\{x,y\\}\\in E_n}\\mathbf1_{\\{\\sigma_x=\\sigma_y\\}}.$$\nDefine its plus-boundary order parameter by\n$$m_Q^+(\\beta):=\\lim_{n\\to\\infty}\\mathbb P_{\\beta,n}^+(\\sigma_0=1)-Q^{-1},$$\nwhen the limit exists, and define $\\beta_c:=\\inf\\{\\beta>0:m_Q^+(\\beta)>0\\}$. Then the limit exists and\n$$\\beta_c J=\\log(1+\\sqrt Q).$$\nThis is a numerical limit of finite-volume probabilities; no infinite-volume probability-law extension is required.",
+        "strategy": "direct",
+        "deps": [
+          "def-csm-frontier-finite-potts-fk",
+          "def-csm-frontier-fk-real-boundaries",
+          "thm-csm-frontier-edwards-sokal",
+          "lem-csm-frontier-fk-wired-annuli-and-numerical-threshold"
+        ],
+        "dependency_roles": {
+          "def-csm-frontier-finite-potts-fk": "mathematical-premise",
+          "def-csm-frontier-fk-real-boundaries": "mathematical-premise",
+          "thm-csm-frontier-edwards-sokal": "mathematical-premise",
+          "lem-csm-frontier-fk-wired-annuli-and-numerical-threshold": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "physical_scope": null,
+        "sources": {
+          "references": [
+            {
+              "title": "Vincent Beffara and Hugo Duminil-Copin, The self-dual point of the two-dimensional random-cluster model is critical for q >= 1",
+              "url": "https://arxiv.org/pdf/1006.5073",
+              "locator": "Theorem 3 and Section 1: finite Potts/FK coupling and the square-lattice critical-temperature formula."
+            },
+            {
+              "title": "Geoffrey Grimmett, The Random-Cluster Model, second edition",
+              "url": "https://www.statslab.cam.ac.uk/~grg/books/rcm1-1.pdf",
+              "locator": "Chapter 1 §§1.2–1.4, finite Potts/FK coupling, and Chapter 6, square-lattice critical point."
+            }
+          ]
+        },
+        "dependency_level": 6,
+        "library": "physics"
+      }
+    ]
+  },
+  {
+    "order": 892,
+    "id": "csm-frontier-planar-critical-point-examples",
+    "kind": "B",
+    "category": "classical-statistical-mechanics",
+    "library": "physics",
+    "title": "Planar random clusters, sharpness and the exact square-lattice critical point — Examples",
+    "companion": "csm-frontier-planar-critical-point",
+    "requires": [
+      "csm-frontier-planar-critical-point"
+    ],
+    "items": [
+      {
+        "id": "ex-csm-frontier-ising-coupling-conversion",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "Square-lattice Ising critical coupling from the two-state Potts model",
+        "statement": "On $\\Lambda_n=[-n,n]^2\\cap\\mathbb Z^2$, let $E_n$ be the nearest-neighbor edges with both endpoints in $\\Lambda_n$ and fix plus boundary spins $\\sigma_x=+1$ whenever $\\lVert x\\rVert_\\infty=n$. For $\\sigma_x\\in\\{-1,+1\\}$, define the finite-volume Ising Hamiltonian and Gibbs law by\n$$H_{I,n}(\\sigma)=-J_I\\sum_{\\{x,y\\}\\in E_n}\\sigma_x\\sigma_y,\\qquad \\mathbb P_{\\beta,n}^{I,+}(\\sigma)\\propto e^{-\\beta H_{I,n}(\\sigma)},\\quad J_I>0.$$\nDefine $m_I^+(\\beta):=\\lim_{n\\to\\infty}\\mathbb P_{\\beta,n}^{I,+}(\\sigma_0=+1)-1/2$ when the limit exists, and $\\beta_c^I:=\\inf\\{\\beta>0:m_I^+(\\beta)>0\\}$. The limit exists and\n$$\\beta_c^I J_I=\\tfrac12\\log(1+\\sqrt2).$$",
+        "strategy": "direct",
+        "deps": [
+          "thm-csm-frontier-potts-square-critical-temperature"
+        ],
+        "dependency_roles": {
+          "thm-csm-frontier-potts-square-critical-temperature": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "physical_scope": null,
+        "sources": {
+          "references": [
+            {
+              "title": "Vincent Beffara and Hugo Duminil-Copin, The self-dual point of the two-dimensional random-cluster model is critical for q >= 1",
+              "url": "https://arxiv.org/pdf/1006.5073",
+              "locator": "Theorem 3, q=2 Potts critical inverse temperature."
+            },
+            {
+              "title": "Geoffrey Grimmett, The Random-Cluster Model, second edition",
+              "url": "https://www.statslab.cam.ac.uk/~grg/books/rcm1-1.pdf",
+              "locator": "Chapter 1 §§1.2–1.4: Potts/Ising interaction and finite FK coupling conventions."
+            }
+          ]
+        },
+        "dependency_level": 7,
+        "library": "physics"
+      }
+    ]
+  }
+]

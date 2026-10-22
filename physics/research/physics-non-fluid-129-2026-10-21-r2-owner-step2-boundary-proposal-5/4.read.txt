@@ -1,0 +1,183 @@
+{
+  "id": "pthm-emx-classical-visibility",
+  "boundaries": [
+    {
+      "case": "empty",
+      "status": "checked",
+      "evidence": "The Statement fixes a common probability space of total mass one; second moments are defined under its finite-moment hypothesis and F1."
+    },
+    {
+      "case": "zero",
+      "status": "checked",
+      "evidence": "The Statement defines visibility only for I1+I2>0; at zero total intensity positivity forces both channels and \u039312 to vanish."
+    },
+    {
+      "case": "one",
+      "status": "checked",
+      "evidence": "When \u039312=0 the cross term is constant and both extrema equal I1+I2; see step 2.1."
+    },
+    {
+      "case": "degenerate",
+      "status": "checked",
+      "evidence": "If either channel intensity is zero, F2 forces \u039312=0 and V=0 when the other intensity is positive; see step 3.1."
+    },
+    {
+      "case": "endpoints",
+      "status": "checked",
+      "evidence": "The full phase circle includes factors giving both signs of |\u039312|; see step 2.1."
+    },
+    {
+      "case": "nonempty-choice",
+      "status": "not_applicable",
+      "reason": "The extrema are attained by explicit phases; no choice principle is used."
+    },
+    {
+      "case": "iff-forward",
+      "status": "not_applicable",
+      "reason": "No biconditional is asserted."
+    },
+    {
+      "case": "iff-reverse",
+      "status": "not_applicable",
+      "reason": "No biconditional is asserted."
+    }
+  ],
+  "reference_flags": [],
+  "audit_flags": []
+}
+---
+id: pthm-emx-classical-visibility
+kind: physics-theorem
+title: Visibility bound in a specified two-beam model
+status: draft
+origin: pipeline
+domain: physics
+library: physics
+dependency_level: 5
+deps:
+  - cor-expectation-linearity-monotonicity-and-modulus-bound
+  - def-complex-conjugate-real-imaginary-part-and-modulus
+  - def-emx-coherency-matrix
+  - pthm-emx-stokes-positivity
+dependency_roles:
+  cor-expectation-linearity-monotonicity-and-modulus-bound: mathematical-premise
+  def-complex-conjugate-real-imaginary-part-and-modulus: mathematical-premise
+  def-emx-coherency-matrix: formulation-prerequisite
+  pthm-emx-stokes-positivity: physical-result
+proof_strategy: direct
+physical_scope: >-
+  Conditional result for an ideal scalar two-beam classical phasor model with a
+  common ensemble, finite second moments, a controllable full relative-phase
+  sweep, and mean-square amplitude as the detector-response model. The
+  $\Gamma_{12}$ here is the cross-moment between two beam channels; it is not
+  the transverse-polarization cross-component of one beam. The visibility is
+  the model contrast, not a finite-sample estimate. No detector calibration,
+  noise model, empirical observation, or unconditional claim about measured
+  fringe visibility is made.
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+sources:
+  references:
+    - title: "José J. Gil, Polarimetric Characterization of Light and Media, §2.1–2.3, author-revised 2020 version of Eur. Phys. J. Appl. Phys. 40 (2007)"
+      url: "https://arxiv.org/pdf/2002.04105"
+      locator: "§2.1–2.3, PDF pp. 6–10: second-moment coherency matrices and their positive-semidefinite/Stokes constraints; the local item applies this matrix construction to two beam channels without identifying them with polarization axes."
+    - title: "Optics Lectures, University of Oxford, 2012, sections on coherence and interferometers"
+      url: "https://users.physics.ox.ac.uk/~Foot/C2/pdf/optics-lectures-2012.pdf"
+      locator: "PDF pp. 9–10, 'Coherence' and 'Interferometers': slow-detector mean intensity, cross-correlation term, phase extrema, and fringe-visibility formula."
+    - title: "A. Hemmerich, Lectures on Classical Optics, Part III (2023)"
+      url: "https://www.physik.uni-hamburg.de/en/iqp/hemmerich/teaching-hemmerich/pdfs/opticspart3.pdf"
+      locator: "PDF pp. 2–4, 'The concept of coherence' and 'Interference visibility': normalized pair correlation, mean intensity, visibility, and the equal-intensity special case."
+verification:
+  precheck: pending
+---
+
+## Statement
+
+Let $A_1,A_2:\Xi\to\mathbb C$ be jointly measurable classical phasor amplitudes
+at one fixed observation point for a single selected scalar field component,
+on one probability space, each in V m$^{-1}$, with
+$\mathbb E(|A_1|^2+|A_2|^2)<\infty$. Define
+$I_j:=\mathbb E[|A_j|^2]$ and
+$\Gamma_{12}:=\mathbb E[A_1\overline{A_2}]$. Adopt the ideal scalar
+two-beam model with a phase multiplier ranging over the full unit circle
+$\mathbb T:=\{\zeta\in\mathbb C:|\zeta|=1\}$. For each $\zeta\in\mathbb T$,
+set $A_\zeta:=A_2+\zeta A_1$ and $I(\zeta):=\mathbb E[|A_\zeta|^2]$.
+The quantities $I_j$ and $I(\zeta)$
+are mean-square field coordinates in (V m$^{-1}$)$^2$, not calibrated
+irradiances. Set
+$I_{\max}:=\max_{\zeta\in\mathbb T}I(\zeta)$ and
+$I_{\min}:=\min_{\zeta\in\mathbb T}I(\zeta)$. When $I_1+I_2>0$, define the
+model visibility by
+$$V:=\frac{I_{\max}-I_{\min}}{I_{\max}+I_{\min}}.$$
+Then
+$$I(\zeta)=I_1+I_2+2\operatorname{Re}(\zeta\Gamma_{12}),\qquad V=\frac{2|\Gamma_{12}|}{I_1+I_2}\le1.$$
+
+## Statement references
+
+[[def-emx-coherency-matrix]]
+
+[[pthm-emx-stokes-positivity]]
+
+## Facts & Assumptions
+
+**Given:** The common probability space, square-integrable beam amplitudes
+$A_1,A_2$, a full controllable phase sweep, and the ideal mean-square detector
+model stated above.
+
+[F1] [[def-emx-coherency-matrix]]: applying its second-moment construction to
+$W=(A_1,A_2)^{\mathsf T}$ gives $\Gamma_{11}=I_1$,
+$\Gamma_{22}=I_2$, and $\Gamma_{12}=\mathbb E[A_1\overline{A_2}]$. Here the
+coordinates are distinct beam channels, not polarization components.
+
+[F2] [[pthm-emx-stokes-positivity]]: every such second-moment matrix is
+positive semidefinite, so its entries obey
+$I_1I_2\ge|\Gamma_{12}|^2$.
+
+[F3] [[cor-expectation-linearity-monotonicity-and-modulus-bound]]: expectation
+of the integrable cross terms is linear and commutes with complex conjugation
+under the componentwise complex-integral convention.
+
+[F4] [[def-complex-conjugate-real-imaginary-part-and-modulus]]: write a complex
+number as $a+ib$, take its conjugate as $a-ib$, and define its modulus by
+$\sqrt{a^2+b^2}$.
+
+[A1] The ideal detector output is the ensemble mean of the squared modulus of
+the coherently summed phasor; no finite-sample or noisy detector response is
+assumed.
+
+## Proof
+
+1.1 Expanding the squared modulus in [A1] gives
+$|A_\zeta|^2=|A_2|^2+|A_1|^2+
+\zeta A_1\overline{A_2}+\overline\zeta A_2\overline{A_1}$.
+Taking expectations, using [F1] and [F3], yields
+$I(\zeta)=I_1+I_2+2\operatorname{Re}(\zeta\Gamma_{12})$.
+[given, F1, F3, A1, algebra]
+
+2.1 Put $S=I_1+I_2$ and $c=\Gamma_{12}$. Write
+$\zeta=a+ib$ and $c=u+iv$. Since $\zeta\in\mathbb T$,
+$a^2+b^2=1$. By [F4], $|c|^2=u^2+v^2$ and
+$\operatorname{Re}(\zeta c)=au-bv$. Therefore
+$$|c|^2-\bigl(\operatorname{Re}(\zeta c)\bigr)^2=(a^2+b^2)(u^2+v^2)-(au-bv)^2=(av+bu)^2\ge0,$$
+so each $\operatorname{Re}(\zeta c)$ lies in $[-|c|,|c|]$. If $c\ne0$,
+set $r:=|c|=\sqrt{u^2+v^2}>0$ and $\zeta_0:=(u-iv)/r$. Then
+$|\zeta_0|^2=(u^2+v^2)/r^2=1$, so $\zeta_0\in\mathbb T$, and direct
+multiplication gives $\zeta_0c=r$ while $(-\zeta_0)c=-r$. Both endpoints
+are therefore attained. If $c=0$, the cross term is identically zero. Hence
+$I_{\max}=S+2|c|$ and $I_{\min}=S-2|c|$.
+[step 1.1, given, F4, algebra]
+
+3.1 By [F2],
+$S^2-4|c|^2=(I_1-I_2)^2+4(I_1I_2-|c|^2)\ge0$; since $S\ge0$, this gives
+$2|c|\le S$. Under the given $S>0$ condition,
+$I_{\max}+I_{\min}=2S>0$, so substitution of step 2.1 into the visibility
+definition gives $V=2|c|/S\le1$.
+[given, step 2.1, F2, algebra] ∎
+
+## Remarks
+
+The displayed $V$ is a phase-extremized ensemble-model contrast. A finite set
+of detector readings need not attain it; estimating visibility from data
+requires separate sampling, calibration, uncertainty, and detector-response
+assumptions. This theorem supplies none of those empirical inputs.

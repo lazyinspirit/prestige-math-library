@@ -1,0 +1,218 @@
+--- baseline/def-qftx-heavy-gaussian-data
++++ current/def-qftx-heavy-gaussian-data
+@@ -16,6 +16,7 @@
+   - lem-unbounded-adjoint-is-well-defined-and-closed
+   - thm-cauchy-schwarz-in-an-inner-product-space
+   - thm-qftx-positive-unbounded-spectral-calculus
++  - thm-pvm-integral-is-a-star-homomorphism
+   - lem-qftx-finite-heavy-gaussian-square
+ justified_by: []
+ forward_refs: []
+@@ -28,6 +29,7 @@
+   lem-unbounded-adjoint-is-well-defined-and-closed: mathematical-premise
+   thm-cauchy-schwarz-in-an-inner-product-space: mathematical-premise
+   thm-qftx-positive-unbounded-spectral-calculus: mathematical-premise
++  thm-pvm-integral-is-a-star-homomorphism: mathematical-premise
+   lem-qftx-finite-heavy-gaussian-square: mathematical-premise
+ physical_scope: Pure mathematics; no physical premises or physical claim.
+ proof_strategy: direct
+@@ -51,9 +53,21 @@
+ 
+ ## Definition
+ 
+-Assume AC. Let $H$ be a nonzero complex Hilbert space ([[def-hilbert-space]]), let $A:D(A)\subseteq H\to H$ be densely defined, self-adjoint and nonnegative, and let $M>0$. Set $K=M^2I+A$ on $D(A)$ and let $E_A$ be the spectral measure supplied by [[thm-qftx-positive-unbounded-spectral-calculus]]. Define $f_M(a)=(M^2+a)^{-1}$ for $a\ge0$. The bounded spectral operator $f_M(A)$ is the inverse $K^{-1}$ and satisfies $\|K^{-1}\|\le M^{-2}$. For $J\in H$ define the matched quadratic effective-action contribution
++Assume AC. Let $H$ be a nonzero complex Hilbert space, let $A:D(A)\subseteq H\to H$ be densely defined, self-adjoint and nonnegative, and let $M>0$. Set $K=M^2I+A$ on $D(A)$ and let $E_A$ be the spectral measure of $A$. Define $f_M(a)=(M^2+a)^{-1}$ for $a\ge0$. The bounded spectral operator $f_M(A)$ is the inverse $K^{-1}$ and satisfies $\|K^{-1}\|\le M^{-2}$. For $J\in H$ define the matched quadratic effective-action contribution
+ $$\Delta S_{\mathrm{eff}}(J):=-\tfrac12\langle J,K^{-1}J\rangle.$$
+-The inner product is the complex Hilbert pairing of [[def-real-and-complex-inner-product-space]], linear in its first variable; the displayed quadratic form is real and nonpositive. In natural units $\hbar=c=1$, $A$ and $K$ have mass-squared units; normalize the source/pairing so $\langle J,K^{-1}J\rangle$ is dimensionless, hence $\|J\|^2$ has mass-squared units. In a finite real regulator, integration of $\exp[-\tfrac12\chi^TK\chi+j^T\chi]$ divided by the zero-source Gaussian integral yields $\exp[\tfrac12j^TK^{-1}j]$ by [[lem-qftx-finite-heavy-gaussian-square]], so the corresponding effective action changes by $-\tfrac12j^TK^{-1}j$. Taking $-\log$ of that normalized integral uses [[def-natural-logarithm]]. Determinants and Lebesgue integration are finite-regulator quantities only; this definition supplies no infinite-dimensional Gaussian measure or determinant.
++The inner product is the complex Hilbert pairing, linear in its first variable; the displayed quadratic form is real and nonpositive. In natural units $\hbar=c=1$, $A$ and $K$ have mass-squared units; normalize the source/pairing so $\langle J,K^{-1}J\rangle$ is dimensionless, hence $\|J\|^2$ has mass-squared units. In a finite real regulator, integration of $\exp[-\tfrac12\chi^TK\chi+j^T\chi]$ divided by the zero-source Gaussian integral yields $\exp[\tfrac12j^TK^{-1}j]$, so the corresponding effective action changes by $-\tfrac12j^TK^{-1}j$. Since $\log$ is the inverse of $\exp$ on positive reals, taking $-\log$ of that normalized integral gives this effective-action contribution. Determinants and Lebesgue integration are finite-regulator quantities only; this definition supplies no infinite-dimensional Gaussian measure or determinant.
++
++## Definition references
++
++[[def-hilbert-space]]
++
++[[def-real-and-complex-inner-product-space]]
++
++[[thm-qftx-positive-unbounded-spectral-calculus]]
++
++[[lem-qftx-finite-heavy-gaussian-square]]
++
++[[def-natural-logarithm]]
+ 
+ ## Facts & Assumptions
+ 
+@@ -63,7 +77,7 @@
+ 
+ [A2] [[lem-ac-supplies-sequential-choices-for-probability-constructions]]: AC implies countable choice.
+ 
+-[F1] [[thm-qftx-positive-unbounded-spectral-calculus]]: for nonnegative self-adjoint $A$, the spectral measure is supported on $[0,\infty)$ and bounded Borel functions define bounded operators with norm at most their supremum.
++[F1] [[thm-qftx-positive-unbounded-spectral-calculus]]: the spectral PVM $E_A$ is supported on $[0,\infty)$, $A=\int_{[0,\infty)}a\,dE_A(a)$ with domain $D(A)=\{u\in H:\int_{[0,\infty)}a^2\,d\mu_u(a)<\infty\}$, where $\mu_u(S)=\langle E_A(S)u,u\rangle$, and every bounded Borel $h$ defines $h(A)=\int h\,dE_A$ with $\|h(A)\|\le\sup_{a\ge0}|h(a)|$.
+ 
+ [F2] [[thm-cauchy-schwarz-in-an-inner-product-space]]: $|\langle x,y\rangle|\le\|x\|\|y\|$.
+ 
+@@ -71,11 +85,13 @@
+ 
+ [F4] [[lem-qftx-finite-heavy-gaussian-square]]: the normalized finite Gaussian source-shift ratio is $\exp(\tfrac12j^TK^{-1}j)$ for symmetric positive-definite $K$.
+ 
++[F5] [[thm-pvm-integral-is-a-star-homomorphism]]: for bounded Borel functions $h,k$ and the same PVM $E_A$, $\bigl(\int h\,dE_A\bigr)\bigl(\int k\,dE_A\bigr)=\int hk\,dE_A$; the bounded PVM integral is multiplicative, unital, and adjoint preserving. Its Countable Choice hypothesis is supplied by [A1]–[A2].
++
+ [A3] [[def-hilbert-space]]: a complex Hilbert space is a complete complex inner-product space.
+ 
+ [A4] [[def-real-and-complex-inner-product-space]]: the complex inner product is linear in the first variable and conjugate-linear in the second.
+ 
+-[F5] [[def-natural-logarithm]]: $\log$ is defined on $(0,\infty)$ as the inverse of $\exp$.
++[F6] [[def-natural-logarithm]]: $\log$ is defined on $(0,\infty)$ as the inverse of $\exp$.
+ 
+ ## Proof
+ 
+@@ -85,6 +101,6 @@
+ 
+ 1.1 The actual proof of [F1] uses Cauchy–Schwarz for its resolvent lower bound and closedness of $A$ for its resolvent graph argument. [F2] supplies the former. By [A1]–[A2] countable choice is available, so [F3] applies and self-adjointness gives $A=A^*$, hence $A$ is closed. This records the actual inputs of [F1]'s proof; the carrier's complete conditional proof was inspected. [A1, A2, F1, F2, F3]
+ 
+-2.1 Let $g_M(a)=(M^2+a)^{-1}$. By [F1], $g_M(A)$ is bounded with norm at most $M^{-2}$. Moreover, $\int a^2g_M(a)^2\,d\langle E_A(a)u,u\rangle\le\|u\|^2$ for every $u\in H$, so the domain formula for $A$ puts $g_M(A)u$ in $D(A)$. For any $u\in H$, truncate the spectral integrals to $[0,n]$; on each truncation the bounded Borel calculus is multiplicative, and the domain criterion just verified gives the graph limit $A g_M(A)u=\int a g_M(a)\,dE_A(a)u$. Hence $(M^2I+A)g_M(A)u=\int(M^2+a)g_M(a)\,dE_A(a)u=u$. For $v\in D(A)$, the same truncation and scalar multiplication give $g_M(A)(M^2I+A)v=\int g_M(a)(M^2+a)\,dE_A(a)v=v$. Thus $K^{-1}=g_M(A)$ and $\|K^{-1}\|\le M^{-2}$. Finally, the positive scalar multiplier gives $\langle J,K^{-1}J\rangle=\int g_M(a)\,d\langle E_A(a)J,J\rangle\ge0$, so the quadratic form is real. [A3, A4, F1, step 1.1, algebra]
++2.1 Set $g_M(a)=(M^2+a)^{-1}$ and $\mu_u(S)=\langle E_A(S)u,u\rangle$. By [F1], $g_M(A)$ is bounded with norm at most $M^{-2}$. Since $0\le ag_M(a)\le1$, $\int a^2g_M(a)^2\,d\mu_u(a)\le\mu_u([0,\infty))=\|u\|^2$ for every $u\in H$, so the domain formula in [F1] gives $g_M(A)u\in D(A)$. To see the left-inverse identity, let $x=g_M(A)u$ and $x_n=E_A([0,n])x$. The domain formula gives $x_n\to x$ and $Ax_n\to Ax$ in $H$. The spectral representation in [F1] and the multiplicativity in [F5] applied to bounded truncations give $(M^2I+A)x_n=\int_{[0,n]}(M^2+a)g_M(a)\,dE_A(a)u=E_A([0,n])u$; hence $(M^2I+A)g_M(A)u=u$. For the right-inverse identity, if $v\in D(A)$, set $v_n=E_A([0,n])v$. Then $v_n\to v$ and $(M^2I+A)v_n\to(M^2I+A)v$ in $H$. The same spectral representation and multiplicativity give $g_M(A)(M^2I+A)v_n=\int_{[0,n]}g_M(a)(M^2+a)\,dE_A(a)v=v_n$, and boundedness of $g_M(A)$ gives $g_M(A)(M^2I+A)v=v$. Thus $K^{-1}=g_M(A)$ and $\|K^{-1}\|\le M^{-2}$. Finally, the positive scalar multiplier gives $\langle J,K^{-1}J\rangle=\int g_M(a)\,d\mu_J(a)\ge0$, so the quadratic form is real. [A3, A4, F1, F5, step 1.1, algebra]
+ 
+-3.1 In a finite real regulator with symmetric positive-definite matrix $K$, [F4] gives the normalized source integral $\exp(\tfrac12j^TK^{-1}j)$. Taking its negative logarithm using [F5] gives the effective-action shift $-\tfrac12j^TK^{-1}j$. No determinant or Lebesgue integral beyond that finite regulator enters the definition. [F4, F5, given, algebra] ∎
++3.1 In a finite real regulator with symmetric positive-definite matrix $K$, [F4] gives the normalized source integral $\exp(\tfrac12j^TK^{-1}j)$. Taking its negative logarithm using [F6] gives the effective-action shift $-\tfrac12j^TK^{-1}j$. No determinant or Lebesgue integral beyond that finite regulator enters the definition. [F4, F6, given, algebra] ∎
+--- baseline/thm-qftx-heavy-derivative-bound
++++ current/thm-qftx-heavy-derivative-bound
+@@ -42,13 +42,17 @@
+ 
+ ## Statement
+ 
+-Assume the hypotheses and notation of [[def-qftx-heavy-gaussian-data]]. Let $E\ge0$ be an energy and let $P_E:=E_A([0,E^2])$ be the spectral projection of $A$. For $J=P_EJ\in H$ and an integer $N\ge0$, define
++Assume the hypotheses and notation of the positive heavy-mode Gaussian matching data. Let $E\ge0$ be an energy and let $P_E:=E_A([0,E^2])$ be the spectral projection of $A$. For $J=P_EJ\in H$ and an integer $N\ge0$, define
+ $$S_NJ:=M^{-2}\sum_{r=0}^{N}(-A/M^2)^rJ,$$
+ which is well-defined since $J$ has bounded spectral support. Put $R_NJ:=K^{-1}J-S_NJ$. Then
+ $$\|R_NJ\|\le M^{-2}(E^2/M^2)^{N+1}\|J\|,$$
+ and
+ $$\left|\Delta S_{\mathrm{eff}}(J)+\tfrac12\langle J,S_NJ\rangle\right| =\tfrac12|\langle J,R_NJ\rangle| \le \frac{\|J\|^2}{2M^2}(E^2/M^2)^{N+1}.$$
+-Use natural units $\hbar=c=1$: $A$ has units of mass squared, $E,M$ have mass units, and $E^2/M^2$ is dimensionless. Under the source normalization of [[def-qftx-heavy-gaussian-data]], $\|J\|^2/M^2$ and the action remainder are dimensionless. These are exact conditional bounds for every $E\ge0$; the truncation is small/useful when $E<M$. No claim is made for unrestricted sources or arbitrary interacting matching.
++Use natural units $\hbar=c=1$: $A$ has units of mass squared, $E,M$ have mass units, and $E^2/M^2$ is dimensionless. Under the source normalization of the positive heavy-mode Gaussian matching data, $\|J\|^2/M^2$ and the action remainder are dimensionless. These are exact conditional bounds for every $E\ge0$; the truncation is small/useful when $E<M$. No claim is made for unrestricted sources or arbitrary interacting matching.
++
++## Statement references
++
++[[def-qftx-heavy-gaussian-data]]
+ 
+ ## Facts & Assumptions
+ 
+--- baseline/prop-qftx-finite-gaussian-shell-semigroup
++++ current/prop-qftx-finite-gaussian-shell-semigroup
+@@ -44,11 +44,15 @@
+ 
+ ## Statement
+ 
+-Assume AC. Let $d\ge1$, let $C_1,C_2$ be real symmetric positive-semidefinite $d\times d$ covariance matrices, and let $f:\mathbb R^d\to[0,\infty]$ be Borel. With $T_C$ as in [[def-qftx-finite-gaussian-shell-transform]],
++Assume AC. Let $d\ge1$, let $C_1,C_2$ be real symmetric positive-semidefinite $d\times d$ covariance matrices, and let $f:\mathbb R^d\to[0,\infty]$ be Borel. With $T_C$ the normalized finite Gaussian shell transform,
+ $$T_{C_2}(T_{C_1}f)(x)=T_{C_1+C_2}f(x)\qquad(x\in\mathbb R^d),$$
+ as an equality in $[0,\infty]$. In particular, for every finite nonnegative Borel potential $V$,
+ $$\exp[-(V_{C_1})_{C_2}(x)]=\exp[-V_{C_1+C_2}(x)].$$
+-The Gaussian measures are normalized probabilities, so no determinant/vacuum constant appears; changing to unnormalized Gaussian weights requires carrying their normalization factors. This is an exact finite-regulator semigroup identity. Differentiating it to obtain a Polchinski-type flow is not asserted and would require a differentiable covariance path and separate differentiability/integrability hypotheses.
++The Gaussian measures are normalized probabilities, so no determinant/vacuum constant appears; changing to unnormalized Gaussian weights requires carrying their normalization factors. This is an exact finite-regulator semigroup identity. The proposition does not assert any equation for the derivative with respect to $t$ of $V_{C(t)}(x)$ along a parameterized covariance $C(t)$; deriving such an equation would require a specified differentiable covariance path and separate differentiability and integrability hypotheses.
++
++## Statement references
++
++[[def-qftx-finite-gaussian-shell-transform]]
+ 
+ ## Facts & Assumptions
+ 
+@@ -82,4 +86,4 @@
+ $$\int\left(\int f(x+z+y)\,d\gamma_{C_1}(y)\right)d\gamma_{C_2}(z) =\int f(x+w)\,d\gamma_{C_1+C_2}(w),$$
+ including the value $+\infty$. By [F1] this is exactly $T_{C_2}(T_{C_1}f)(x)=T_{C_1+C_2}f(x)$. [F1, F6, step 1.1, given]
+ 
+-3.1 For finite nonnegative Borel $V$, [F1] gives $\exp[-V_{C_1}(x)]=T_{C_1}(e^{-V})(x)$ and the corresponding identity after applying $C_2$. Substituting $f=e^{-V}$ into step 2.1 proves the stated potential-weight identity. Since the normalized Gaussian integrals are expectations under probability laws, no determinant factor occurs. No differentiation or covariance-path limit was used. [F1, step 2.1, algebra] ∎+3.1 For finite nonnegative Borel $V$, [F1] gives $\exp[-V_{C_1}(x)]=T_{C_1}(e^{-V})(x)$ and the corresponding identity after applying $C_2$. Substituting $f=e^{-V}$ into step 2.1 proves the stated potential-weight identity. Since the normalized Gaussian integrals are expectations under probability laws, no determinant factor occurs. No differentiation or covariance-path limit was used. [F1, step 2.1, algebra] ∎
+--- baseline/cex-qftx-eft-outside-band
++++ current/cex-qftx-eft-outside-band
+@@ -42,13 +42,17 @@
+ 
+ ## Statement
+ 
+-Assume AC. Let $H=L^2(\mathbb R,dp;\mathbb C)$ with pairing $\langle u,v\rangle=\int_\mathbb R u(p)\overline{v(p)}\,dp$, let
++Assume AC. Let $dp$ denote Lebesgue measure on the momentum line $\mathbb R$, and let $H=L^2(\mathbb R,dp;\mathbb C)$ be the space of equivalence classes modulo Lebesgue-a.e. equality of complex measurable functions $u$ satisfying $\int_\mathbb R|u(p)|^2\,dp<\infty$, with pairing $\langle u,v\rangle=\int_\mathbb R u(p)\overline{v(p)}\,dp$, linear in its first variable, and induced norm $\|u\|_2=(\int_\mathbb R|u(p)|^2\,dp)^{1/2}$. Define the multiplication operator $A$ by
+ $$A=M_{p^2},\qquad D(A)=\{u\in H:p^2u\in H\},$$
+-and fix $M>0$, $0\le E<M$, and $N\in\mathbb N_0$. This is the no-band case for the estimate in [[thm-qftx-heavy-derivative-bound]]: the polynomial approximation to $(M^2+p^2)^{-1}$ has multiplier remainder
++with $(Au)(p)=p^2u(p)$ almost everywhere. For each integer $r\ge1$, let $A^r$ be multiplication by $p^{2r}$ on $D(A^r):=\{u\in H:p^{2r}u\in H\}$; set $A^0=I$ with $D(A^0)=H$. Fix $M>0$, $0\le E<M$, and let $N$ be a nonnegative integer. This is the no-band case for the low-energy remainder estimate: the polynomial approximation to $(M^2+p^2)^{-1}$ has multiplier remainder
+ $$r_N(p^2)=M^{-2}\frac{(-p^2/M^2)^{N+1}}{1+p^2/M^2}.$$
+-Let $r_N(A)$ denote multiplication by $r_N(p^2)$ on its maximal $L^2$ domain. There is a unit vector $u\in\bigcap_{r=0}^{N+1}D(A^r)$ for which
++Let $r_N(A)$ denote multiplication by $r_N(p^2)$ on the maximal domain $D(r_N(A)):=\{u\in H:r_N(p^2)u\in H\}$. There is a unit vector $u\in\bigcap_{r=0}^{N+1}D(A^r)$ for which
+ $$\|r_N(A)u\|>M^{-2}(E^2/M^2)^{N+1}.$$
+-Thus the derivative estimate's low-energy factor cannot hold uniformly on the full momentum spectrum. Here $p,M,E$ have mass units, $dp$ has mass units, $A$ has mass-squared units, and $\hbar=c=1$. This is a mathematical counterexample to removing the spectral-band hypothesis; it is not a measured physical failure.
++Thus the low-energy factor in the remainder estimate cannot hold uniformly on the full momentum spectrum. Here $p,M,E$ have mass units, $dp$ has mass units, $A$ has mass-squared units, and $\hbar=c=1$. This is a mathematical counterexample to removing the spectral-band hypothesis; it is not a measured physical failure.
++
++## Statement references
++
++[[thm-qftx-heavy-derivative-bound]]
+ 
+ ## Facts & Assumptions
+ 
+--- baseline/thm-qftx-truncated-rg-ode
++++ current/thm-qftx-truncated-rg-ode
+@@ -36,15 +36,15 @@
+ 
+ ## Statement
+ 
+-Let $t=\log\rho\in\mathbb R$ be the dimensionless logarithmic scale parameter associated with $\rho>0$. Take $g(t)$ to be a dimensionless real coupling, and prescribe dimensionless constants $b,g_0\in\mathbb R$ in the truncated scalar initial-value problem
++Let $\rho>0$ be a dimensionless scale and put $t=\log\rho\in\mathbb R$. Take $I\subseteq\mathbb R$ to be an interval containing $0$. Let $g:I\to\mathbb R$ be a differentiable real coupling and let $b,g_0\in\mathbb R$ be dimensionless constants; require $g$ to satisfy the truncated scalar initial-value problem
+ $$\frac{dg}{dt}=bg^2,\qquad g(0)=g_0.$$
+-If $c:=bg_0=0$, its unique maximal real solution is $g(t)=g_0$ on $\mathbb R$. If $c\ne0$, its unique maximal solution through $t=0$ is
++A solution through $(0,g_0)$ is **maximal** if there is no strictly larger interval $J\supsetneq I$ and solution $G:J\to\mathbb R$ of the same initial-value problem with $G|_I=g$. If $c:=bg_0=0$, the unique maximal real solution is $g(t)=g_0$ on $\mathbb R$. If $c\ne0$, the unique maximal solution through $t=0$ is
+ $$g(t)=\frac{g_0}{1-bg_0t}$$
+ on $(-\infty,c^{-1})$ when $c>0$ and on $(c^{-1},\infty)$ when $c<0$.
+ 
+-For the formal beta series $\beta(g)=bg^2+O(g^3)$, let $\widetilde g=\Phi(g)=g+ag^2+O(g^3)$ be an invertible formal change of dimensionless coupling, with dimensionless $a\in\mathbb R$. Here $O(g^k)$ denotes a formal power series whose terms have degree at least $k$, and $\Phi'$ is the termwise formal derivative. The transformed vector field is
+-$$\widetilde\beta(\widetilde g)=\bigl(\Phi'(g)\beta(g)\bigr)\big|_{g=\Phi^{-1}(\widetilde g)}.$$
+-Its quadratic coefficient is $b$. The real ODE is exact only for the displayed truncation; neither it nor the formal scheme-change statement determines $b$ from a QFT graph or bounds omitted higher-order terms. Its pole is a property of this truncated equation, not a theorem about an ultraviolet completion.
++For the formal beta-series calculation, let $u$ be an indeterminate and work in $\mathbb R[[u]]$. Write $\beta(u)=bu^2+O(u^3)$ and let $\Phi(u)=u+au^2+O(u^3)$ be an invertible formal change of dimensionless coupling, with dimensionless $a\in\mathbb R$. The notation $O(u^k)$ means an element of $u^k\mathbb R[[u]]$, so its terms have degree at least $k$; the real trajectory $g(t)$ is distinct from the formal indeterminate $u$. Put $\widetilde u=\Phi(u)$, let $\Phi'$ be the termwise formal derivative, and define the transformed formal vector field in $\mathbb R[[\widetilde u]]$ by
++$$\widetilde\beta(\widetilde u)=\bigl(\Phi'(u)\beta(u)\bigr)\big|_{u=\Phi^{-1}(\widetilde u)}.$$
++The quadratic coefficient of $\widetilde\beta$ is $b$. The real ODE is exact only for the displayed truncation; neither it nor the formal scheme-change statement determines $b$ from a QFT graph or bounds omitted higher-order terms. Its pole is a property of this truncated equation, not a theorem about an ultraviolet completion.
+ 
+ ## Statement references
+ 
+@@ -52,13 +52,13 @@
+ 
+ ## Facts & Assumptions
+ 
+-**Given:** $b,g_0\in\mathbb R$, $c=bg_0$, the convention $t=\log\rho$ for $\rho>0$, and the formal change $\Phi(g)=g+ag^2+O(g^3)$.
++**Given:** $b,g_0\in\mathbb R$, $c=bg_0$, dimensionless $\rho>0$ with $t=\log\rho$, and the formal change $\Phi(u)=u+au^2+O(u^3)$ in $\mathbb R[[u]]$.
+ 
+ [A1] The vector field is the prescribed truncation $F(t,g)=bg^2$ on $D=\mathbb R^2$; no higher-order beta coefficients or measured coupling are specified.
+ 
+-[A2] The formal beta transformation is defined by push-forward under the invertible formal series $\Phi$; formal power series are manipulated coefficientwise and are not assumed to converge.
++[A2] The formal beta transformation is defined in $\mathbb R[[u]]$ by push-forward under the invertible formal series $\Phi$; its termwise derivatives and substitutions are coefficientwise, and no formal series is assumed to converge.
+ 
+-[F1] The Statement defines $\rho>0$ and $t=\log\rho$ as dimensionless scale coordinates. The scalar coefficient $b$ is prescribed independently; no renormalization cocycle or QFT coefficient calculation is assumed.
++[F1] The Statement takes $\rho>0$ dimensionless and $t=\log\rho$, and separates the real trajectory $g(t)$ from the formal indeterminate $u\in\mathbb R[[u]]$. The scalar coefficient $b$ is prescribed independently; no renormalization cocycle or QFT coefficient calculation is assumed.
+ 
+ [F2] [[def-first-order-ode-initial-value-problem-and-solution]]: a solution on an interval is a differentiable real function satisfying the stated equation and initial condition.
+ 
+@@ -78,9 +78,9 @@
+ 
+ 2.1 The vector field $F(t,x)=bx^2$ is continuous on the open domain $D=\mathbb R^2$. On any compact time-state cylinder with $|x|,|y|\le R$,
+ $$|F(t,x)-F(t,y)|=|b||x-y||x+y|\le2|b|R|x-y|,$$
+-so it is locally Lipschitz in the state variable by [F3]. Uniqueness from [F4] shows that every solution through $(0,g_0)$ agrees with step 1.1 on its common interval. If an extension crossed $c^{-1}$ when $c\ne0$, differentiability at $c^{-1}$ would make $(g(t)-g(c^{-1}))/(t-c^{-1})$ bounded near $c^{-1}$, so $|g(t)-g(c^{-1})|$ would tend to zero. This contradicts the divergence of $|\gamma(t)|$ from within the common interval. When $c=0$, the constant solution already exists on all of $\mathbb R$. These facts establish the stated maximal intervals. [A1, F2, F3, F4, step 1.1]
++so it is locally Lipschitz in the state variable by [F3]. Uniqueness from [F4] shows that every solution through $(0,g_0)$ agrees with step 1.1 on its common interval. If $c\ne0$, any strictly larger interval containing the stated interval must contain $c^{-1}$. A solution $G$ on such an interval would be continuous at $c^{-1}$, while uniqueness forces $G=\gamma$ on the original interval and $|\gamma(t)|\to\infty$ as $t$ approaches $c^{-1}$ from within it, a contradiction. When $c=0$, the constant solution already exists on all of $\mathbb R$. These facts establish the stated maximal intervals. [A1, F2, F3, F4, step 1.1]
+ 
+-3.1 Termwise differentiation gives $\Phi'(g)=1+2ag+O(g^2)$. Since $\Phi$ is invertible with linear term $g$, coefficient comparison gives $\Phi^{-1}(\widetilde g)=\widetilde g+O(\widetilde g^2)$, hence $g^2=\widetilde g^2+O(\widetilde g^3)$. Therefore $\Phi'(g)\beta(g)=bg^2+O(g^3)$ and re-expression in $\widetilde g$ yields $\widetilde\beta(\widetilde g)=b\widetilde g^2+O(\widetilde g^3)$. The coefficient $b$ is unchanged; no coefficient at higher order is determined here. [A2, algebra] ∎
++3.1 Termwise differentiation in $\mathbb R[[u]]$ gives $\Phi'(u)=1+2au+O(u^2)$. Since $\Phi$ has linear term $u$, recursive coefficient matching gives $\Phi^{-1}(\widetilde u)=\widetilde u+O(\widetilde u^2)$, hence $u^2=\widetilde u^2+O(\widetilde u^3)$. Therefore $\Phi'(u)\beta(u)=bu^2+O(u^3)$ and re-expression in $\widetilde u$ yields $\widetilde\beta(\widetilde u)=b\widetilde u^2+O(\widetilde u^3)$. The coefficient $b$ is unchanged; no coefficient at higher order is determined here. [A2, algebra] ∎
+ 
+ ## Remarks
+ 
+--- baseline/ex-qftx-truncation-landau-pole
++++ current/ex-qftx-truncation-landau-pole
+@@ -32,7 +32,7 @@
+ 
+ ## Example
+ 
+-For dimensionless $b>0$ and $g_0>0$, the truncated equation $dg/dt=bg^2$ with $g(0)=g_0$ has maximal solution $g(t)=g_0/(1-bg_0t)$ for $t<t_*:=(bg_0)^{-1}$, and $g(t)\to+\infty$ as $t\uparrow t_*$. This is a divergence of the exact solution to the stated truncated equation. The calculation supplies no estimate for omitted higher-order beta terms near $t_*$ and implies no nonexistence result for a continuum theory.
++For dimensionless $b>0$ and $g_0>0$, the truncated equation $dg/dt=bg^2$ with $g(0)=g_0$ has maximal solution $g(t)=g_0/(1-bg_0t)$ for $t<t_*:=(bg_0)^{-1}$, and $g(t)\to+\infty$ as $t\uparrow t_*$. Here “truncated Landau pole” means this finite endpoint $t_*$ of the exact solution to the truncated equation, where the real coupling diverges. The calculation supplies no estimate for omitted higher-order beta terms near $t_*$ and implies no nonexistence result for a continuum theory.
+ 
+ ## Example references
+ 
+@@ -44,7 +44,7 @@
+ 
+ [A1] The example concerns only the real truncated initial-value problem; no omitted beta coefficients or ultraviolet completion are specified.
+ 
+-[F1] [[thm-qftx-truncated-rg-ode]]: for the stated prescribed scalar model, the unique maximal solution is $g(t)=g_0/(1-bg_0t)$ on $(-\infty,t_*)$ for $bg_0>0$.
++[F1] [[thm-qftx-truncated-rg-ode]]: for the stated prescribed scalar model, the unique maximal solution is $g(t)=g_0/(1-bg_0t)$ on $(-\infty,t_*)$ for $bg_0>0$; maximal means that the IVP solution has no extension to a strictly larger interval as an IVP solution.
+ 
+ ## Verification
+ 

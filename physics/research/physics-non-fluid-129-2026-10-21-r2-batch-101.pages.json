@@ -1,0 +1,219 @@
+[
+  {
+    "order": 899,
+    "id": "qsmx-entropy-entanglement",
+    "kind": "A",
+    "category": "quantum-statistical-mechanics",
+    "library": "physics",
+    "title": "Entropy inequalities, recovery boundaries and thermal entanglement",
+    "companion": "qsmx-entropy-entanglement-examples",
+    "requires": [
+      "qsm-states-ensembles",
+      "quantum-information-measures",
+      "quantum-relative-entropy-data-processing-and-strong-subadditivity",
+      "qsm-dt-channels"
+    ],
+    "items": [
+      {
+        "id": "def-qsmx-information-conventions",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Dimensionless entropy, mutual and conditional information",
+        "reference": "research/frontier-expansion-2026-10-19/quantum-statistical-mechanics/prose-scaffold.md#def-qsmx-information-conventions",
+        "design_state": "draft-research",
+        "dependency_level": 0,
+        "deps": [
+          "def-qc-density-operator",
+          "def-it-von-neumann-entropy",
+          "def-it-finite-dimensional-quantum-relative-entropy",
+          "def-qc-partial-trace",
+          "def-qc-first-factor-partial-trace",
+          "lem-it-partial-traces-of-a-state-are-states"
+        ],
+        "dependency_roles": {
+          "def-qc-density-operator": "mathematical-premise",
+          "def-it-von-neumann-entropy": "mathematical-premise",
+          "def-it-finite-dimensional-quantum-relative-entropy": "mathematical-premise",
+          "def-qc-partial-trace": "mathematical-premise",
+          "def-qc-first-factor-partial-trace": "mathematical-premise",
+          "lem-it-partial-traces-of-a-state-are-states": "mathematical-premise"
+        },
+        "physical_scope": null,
+        "statement": "All Hilbert spaces in this item are nonzero and finite-dimensional over $\\mathbb C$. A density operator $\\rho$ on $H$ is a Hermitian positive semidefinite endomorphism with $\\operatorname{Tr}\\rho=1$. Its dimensionless von Neumann entropy, in nats, is\n\n$$S(\\rho):=-\\operatorname{Tr}(\\rho\\log\\rho)=-\\sum_{j:\\lambda_j>0}\\lambda_j\\log\\lambda_j,$$\n\nwhere $\\lambda_j$ are the eigenvalues of $\\rho$, the logarithm is natural, and $0\\log0:=0$. For any positive semidefinite endomorphisms $X,Y$ on one finite-dimensional $H$, let $\\operatorname{supp}X:=(\\ker X)^\\perp$. Define\n\n$$D(X\\|Y):=\\operatorname{Tr}(X\\log X)-\\operatorname{Tr}(X\\log Y)$$\n\nwhen $\\operatorname{supp}X\\subseteq\\operatorname{supp}Y$, taking each logarithm spectrally on its positive support and setting zero-eigenvalue contributions to zero; set $D(X\\|Y):=+\\infty$ otherwise. For density operators this is the finite-dimensional quantum relative entropy in nats.\n\nFor a density operator $\\rho_{AB}$ on the ordered product $H_A\\otimes H_B$, define $\\rho_A:=\\operatorname{Tr}_B\\rho_{AB}$ and $\\rho_B:=\\operatorname{Tr}_A\\rho_{AB}$, where in orthonormal product bases $\\bigl(\\operatorname{Tr}_B R\\bigr)_{ii'}=\\sum_jR_{(i,j),(i',j)}$ and the first factor is retained. Define\n\n$$I(A:B)_\\rho:=S(\\rho_A)+S(\\rho_B)-S(\\rho_{AB}).$$\n\nFor a density operator $\\rho_{ABC}$ on $H_A\\otimes H_B\\otimes H_C$, define\n\n$$\\rho_{AB}:=\\operatorname{Tr}_C\\rho_{ABC},\\qquad \\rho_{BC}:=\\operatorname{Tr}_A\\rho_{ABC},\\qquad \\rho_B:=\\operatorname{Tr}_A(\\operatorname{Tr}_C\\rho_{ABC}),$$\n\nwhere each partial trace contracts the indicated tensor factor and retains the other factors in their displayed order.\n\n$$I(A:C\\mid B)_\\rho:=S(\\rho_{AB})+S(\\rho_{BC})-S(\\rho_B)-S(\\rho_{ABC}),$$\n\nusing the partial traces in the displayed factor order. For any fixed positive conversion factor $k_B$ with units J/K, the corresponding physical entropy is $S_{\\mathrm{phys}}(\\rho):=k_BS(\\rho)$; no numerical value of $k_B$ is specified here.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information, Chapter 5, §5.2.1, author-hosted manuscript",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.5.pdf"
+            },
+            {
+              "title": "Mark M. Wilde, From Classical to Quantum Shannon Theory, Chapter 11, §§11.1 and 11.6, second-edition prepublication full text",
+              "url": "https://arxiv.org/pdf/1106.1445v8"
+            }
+          ]
+        },
+        "library": "physics"
+      },
+      {
+        "id": "thm-qsmx-cmi-and-channel-dpi",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Conditional mutual information and finite channel monotonicity",
+        "reference": "research/frontier-expansion-2026-10-19/quantum-statistical-mechanics/prose-scaffold.md#thm-qsmx-cmi-and-channel-dpi",
+        "design_state": "draft-research",
+        "dependency_level": 1,
+        "deps": [
+          "def-qsmx-information-conventions",
+          "def-qsm-dt-channel-definition",
+          "def-qc-partial-trace",
+          "def-it-finite-dimensional-quantum-relative-entropy",
+          "lem-qsm-matrix-state-calculus",
+          "thm-it-finite-strong-subadditivity",
+          "thm-it-quantum-relative-entropy-partial-trace-data-processing",
+          "thm-qsm-dt-choi-kraus"
+        ],
+        "dependency_roles": {
+          "def-qsmx-information-conventions": "mathematical-premise",
+          "def-qsm-dt-channel-definition": "mathematical-premise",
+          "def-qc-partial-trace": "mathematical-premise",
+          "def-it-finite-dimensional-quantum-relative-entropy": "mathematical-premise",
+          "lem-qsm-matrix-state-calculus": "mathematical-premise",
+          "thm-it-finite-strong-subadditivity": "mathematical-premise",
+          "thm-it-quantum-relative-entropy-partial-trace-data-processing": "mathematical-premise",
+          "thm-qsm-dt-choi-kraus": "mathematical-premise"
+        },
+        "physical_scope": null,
+        "statement": "Let $H_A,H_B,H_C$ be nonzero finite-dimensional complex inner-product spaces and let $\\rho_{ABC}$ be a density operator on $H_A\\otimes H_B\\otimes H_C$. With dimensionless entropy $S$ and conditional mutual information $I(A:C\\mid B)$ defined by the conventions below,\n\n$$I(A:C\\mid B)_\\rho=S(\\rho_{AB})+S(\\rho_{BC})-S(\\rho_B)-S(\\rho_{ABC})\\ge0.$$\n\nAlso let $d,e\\ge1$ and let $\\Phi:M_d(\\mathbb C)\\to M_e(\\mathbb C)$ be a finite completely positive trace-preserving map. For all positive semidefinite $X,Y\\in M_d(\\mathbb C)$,\n\n$$D(\\Phi(X)\\|\\Phi(Y))\\le D(X\\|Y),$$\n\nwhere $D$ is the support-sensitive finite-dimensional quantum relative entropy: it equals $\\operatorname{Tr}(X\\log X)-\\operatorname{Tr}(X\\log Y)$ when $\\operatorname{supp}X\\subseteq\\operatorname{supp}Y$, and $+\\infty$ otherwise. These are finite-dimensional mathematical statements. The channel inequality is one-sided and asserts no equality condition, recovery map, or infinite-dimensional extension.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information, Chapter 5, Theorem 5.35 and proof; Theorem 5.36 and proof, author-hosted manuscript",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.5.pdf"
+            },
+            {
+              "title": "Mark M. Wilde, From Classical to Quantum Shannon Theory, Chapter 11, Theorems 11.7.1 and 11.8.1; Corollary 11.9.1, second-edition prepublication full text",
+              "url": "https://arxiv.org/pdf/1106.1445v8"
+            }
+          ]
+        },
+        "library": "physics"
+      },
+      {
+        "id": "thm-qsmx-thermal-mutual-information-bound",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Boundary energy bounds thermal mutual information",
+        "reference": "research/frontier-expansion-2026-10-19/quantum-statistical-mechanics/prose-scaffold.md#thm-qsmx-thermal-mutual-information-bound",
+        "design_state": "draft-research",
+        "dependency_level": 1,
+        "deps": [
+          "def-axiom-of-choice",
+          "def-qsmx-information-conventions",
+          "def-qsm-relative-entropy-domain",
+          "def-qc-partial-trace",
+          "lem-it-partial-traces-of-a-state-are-states",
+          "lem-qsm-matrix-state-calculus",
+          "thm-qsm-finite-entropy-composition",
+          "thm-nrqm-composites-finite-partial-trace-and-schmidt",
+          "thm-qsm-finite-gibbs-variational"
+        ],
+        "dependency_roles": {
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-qsmx-information-conventions": "mathematical-premise",
+          "def-qsm-relative-entropy-domain": "mathematical-premise",
+          "def-qc-partial-trace": "mathematical-premise",
+          "lem-it-partial-traces-of-a-state-are-states": "mathematical-premise",
+          "lem-qsm-matrix-state-calculus": "mathematical-premise",
+          "thm-qsm-finite-entropy-composition": "mathematical-premise",
+          "thm-nrqm-composites-finite-partial-trace-and-schmidt": "mathematical-premise",
+          "thm-qsm-finite-gibbs-variational": "mathematical-premise"
+        },
+        "physical_scope": null,
+        "statement": "Assume the Axiom of Choice. Let $\\mathcal H_A,\\mathcal H_B$ be nonzero finite-dimensional complex inner-product spaces. Let $H_A=H_A^*$ act on $\\mathcal H_A$, let $H_B=H_B^*$ act on $\\mathcal H_B$, and let $H_{\\partial}=H_{\\partial}^*$ act on $\\mathcal H_A\\otimes\\mathcal H_B$. Set\n\n$$H:=H_A\\otimes I_B+I_A\\otimes H_B+H_{\\partial}.$$\n\nFor $\\beta>0$, define $Z_\\beta:=\\operatorname{Tr}(e^{-\\beta H})$ and the finite Gibbs density $\\rho_\\beta:=e^{-\\beta H}/Z_\\beta$. Then\n\n$$I(A:B)_{\\rho_\\beta}\\le 2\\beta\\|H_{\\partial}\\|_{\\mathrm{op}},$$\n\nwhere $I(A:B)$ uses dimensionless entropy in nats and $\\|K\\|_{\\mathrm{op}}:=\\sup_{\\|v\\|=1}\\|Kv\\|$ is the operator norm.\n\nFor the optional lattice-family conclusion, fix $m\\ge1$. For each member $s$ of a specified family, take a finite site set $\\Lambda_s\\subseteq\\mathbb Z^m$, a partition $\\Lambda_s=A_s\\sqcup B_s$, and nonzero finite-dimensional complex inner-product spaces $\\mathcal K_{s,x}$ for $x\\in\\Lambda_s$. Use the lexicographic order on $\\mathbb Z^m$ in $\\mathcal H_{s,X}:=\\bigotimes_{x\\in X}\\mathcal K_{s,x}$, with the empty tensor product defined as $\\mathbb C$, and identify $\\mathcal H_{s,\\Lambda_s}$ with $\\mathcal H_{s,A_s}\\otimes\\mathcal H_{s,B_s}$ in the displayed factor order. Let $J_s$ be a finite set of interaction labels with nonempty supports $X_{s,j}\\subseteq\\Lambda_s$ and self-adjoint terms $h_{s,j}$ on $\\mathcal H_{s,X_{s,j}}$. For $Y\\in\\{\\Lambda_s,A_s,B_s\\}$ containing $X_{s,j}$, write $\\widehat h^{Y}_{s,j}$ for the extension of $h_{s,j}$ to $\\mathcal H_{s,Y}$ by the identity on every factor in $Y\\setminus X_{s,j}$. The crossing-label set is\n\n$$J_{\\partial,s}:=\\{j\\in J_s:X_{s,j}\\cap A_s\\ne\\varnothing\\text{ and }X_{s,j}\\cap B_s\\ne\\varnothing\\},\\qquad |\\partial A_s|:=|J_{\\partial,s}|.$$\n\nLet $J_{A,s}:=\\{j\\in J_s:X_{s,j}\\subseteq A_s\\}$ and $J_{B,s}:=\\{j\\in J_s:X_{s,j}\\subseteq B_s\\}$. Set $H_{A_s}:=\\sum_{j\\in J_{A,s}}\\widehat h^{A_s}_{s,j}$, $H_{B_s}:=\\sum_{j\\in J_{B,s}}\\widehat h^{B_s}_{s,j}$, and $H_{\\partial,s}:=\\sum_{j\\in J_{\\partial,s}}\\widehat h^{\\Lambda_s}_{s,j}$. Under the stated identification these give the displayed Hamiltonian decomposition. For each $s$, assume $\\beta_s>0$ and define $\\rho_{\\beta_s}$ by the Gibbs formula above. If one specified $C\\ge0$ satisfies $\\|H_{\\partial,s}\\|_{\\mathrm{op}}\\le C|\\partial A_s|$ for every family member, the bound gives $I(A_s:B_s)_{\\rho_{\\beta_s}}\\le2\\beta_sC|\\partial A_s|$ memberwise. No finite-range condition or additional geometric scaling assumption is used. When $H_{\\partial,s}$ and each interaction term are measured in joules, $\\beta_s$ has units J$^{-1}$ and $C$ has units J, so the bound is dimensionless.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael M. Wolf, Frank Verstraete, Matthew B. Hastings, and J. Ignacio Cirac, Area laws in quantum systems: mutual information and correlations, arXiv:0704.3906v2, ‘Area laws for classical and quantum systems,’ Eq. (3)",
+              "url": "https://arxiv.org/pdf/0704.3906v2"
+            },
+            {
+              "title": "Pieter Naaijkens, Quantum Spin Systems on Infinite Lattices, §3.4, finite-dimensional entropy and Gibbs free-energy identity",
+              "url": "https://arxiv.org/pdf/1311.2717v2"
+            },
+            {
+              "title": "John Watrous, The Theory of Quantum Information, Chapter 5, §§5.2.1–5.2.3, author-hosted manuscript",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.5.pdf"
+            }
+          ]
+        },
+        "library": "physics"
+      }
+    ]
+  },
+  {
+    "order": 900,
+    "id": "qsmx-entropy-entanglement-examples",
+    "kind": "B",
+    "category": "quantum-statistical-mechanics",
+    "library": "physics",
+    "title": "Entropy inequalities, recovery boundaries and thermal entanglement — Examples",
+    "companion": "qsmx-entropy-entanglement",
+    "requires": [
+      "qsmx-entropy-entanglement"
+    ],
+    "items": [
+      {
+        "id": "ex-qsmx-bell-and-classical-information",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "Identical marginals and unequal quantum information",
+        "reference": "research/frontier-expansion-2026-10-19/quantum-statistical-mechanics/prose-scaffold.md#ex-qsmx-bell-and-classical-information",
+        "design_state": "draft-research",
+        "dependency_level": 1,
+        "deps": [
+          "def-qsmx-information-conventions",
+          "def-qc-partial-trace",
+          "def-qc-first-factor-partial-trace",
+          "lem-it-partial-traces-of-a-state-are-states"
+        ],
+        "dependency_roles": {
+          "def-qsmx-information-conventions": "mathematical-premise",
+          "def-qc-partial-trace": "mathematical-premise",
+          "def-qc-first-factor-partial-trace": "mathematical-premise",
+          "lem-it-partial-traces-of-a-state-are-states": "mathematical-premise"
+        },
+        "physical_scope": null,
+        "statement": "Let $H_A=H_B=\\mathbb C^2$ with the fixed orthonormal basis $|0\\rangle,|1\\rangle$ on each factor. Define the Bell density\n\n$$\\rho_\\Phi=|\\Phi\\rangle\\langle\\Phi|,\\qquad |\\Phi\\rangle=(|00\\rangle+|11\\rangle)/\\sqrt2,$$\n\nand the computational-basis-dephased density\n\n$$\\rho_{\\mathrm{diag}}=\\tfrac12|00\\rangle\\langle00|+\\tfrac12|11\\rangle\\langle11|.$$\n\nBoth have marginals $I_2/2$, but their dimensionless mutual informations differ: $I(A:B)_{\\rho_\\Phi}=2\\log2$ and $I(A:B)_{\\rho_{\\mathrm{diag}}}=\\log2$. The displayed formula defines the dephased state; no measurement or experimental outcome is asserted.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information, Chapter 5, §5.2, author-hosted manuscript",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.5.pdf"
+            },
+            {
+              "title": "Mark M. Wilde, From Classical to Quantum Shannon Theory, Chapter 11, §11.6, second-edition prepublication full text",
+              "url": "https://arxiv.org/pdf/1106.1445v8"
+            }
+          ]
+        },
+        "library": "physics"
+      }
+    ]
+  }
+]

@@ -7,7 +7,7 @@ origin: pipeline
 domain: physics
 library: physics
 physical_scope: A constructed one-component, two-phase separated mixture with additive volume and fixed total amount; no coexistence data or measured material values are asserted.
-dependency_level: 9
+dependency_level: 1
 deps:
   - def-td-phase-and-coexistence-domain
   - def-finite-sum
@@ -42,7 +42,13 @@ verification:
 
 ## Example
 
-At a stipulated common $T,p$, let one mole of a component occupy phase $\alpha$ with molar volume $v_\alpha=1.0\times10^{-3}\,\mathrm{m^3\,mol^{-1}}$ or phase $\beta$ with $v_\beta=4.0\times10^{-3}\,\mathrm{m^3\,mol^{-1}}$. For this constructed model, additionally adopt amount-independent molar volumes at this fixed $(T,p)$: $V_i=n_iv_i$ for every admitted amount of phase $i$, with $v_i$ equal to the displayed one-mole value. This is an explicit constitutive scaling assumption, separate from additivity between phases. Consider a separated mixture of total amount $N=2\,\mathrm{mol}$ and total volume $V=5.0\times10^{-3}\,\mathrm{m^3}$; use the volume convention of [[def-td-phase-and-coexistence-domain]] and additivity of [[post-td-bulk-additivity]].
+At a stipulated common $T,p$, let one mole of a component occupy phase $\alpha$ with molar volume $v_\alpha=1.0\times10^{-3}\,\mathrm{m^3\,mol^{-1}}$ or phase $\beta$ with $v_\beta=4.0\times10^{-3}\,\mathrm{m^3\,mol^{-1}}$. For this constructed model, additionally adopt amount-independent molar volumes at this fixed $(T,p)$: $V_i=n_iv_i$ for every admitted amount of phase $i$, with $v_i$ equal to the displayed one-mole value. This is an explicit constitutive scaling assumption, separate from additivity between phases. Consider a separated mixture of total amount $N=2\,\mathrm{mol}$ and total volume $V=5.0\times10^{-3}\,\mathrm{m^3}$; use the volume convention of *Phase branches and coexistence domains* and additivity of *Additive separated systems and tagged bulk scaling*.
+
+## Example references
+
+[[def-td-phase-and-coexistence-domain]]
+
+[[post-td-bulk-additivity]]
 
 ## Facts & Assumptions
 

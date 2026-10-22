@@ -1,0 +1,153 @@
+---
+verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-finite-sum.json
+id: def-finite-sum
+kind: definition
+title: "Finite sums and finite products, by recursion"
+status: published
+origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
+deps: [thm-recursion, thm-induction-principle, def-ordered-field, def-natural-numbers, def-nat-addition, def-nat-order, lem-nat-add-commutative, lem-nat-add-cancellative, def-field, def-complete-ordered-field, lem-of-naturals-positive, lem-of-q-embeds]
+justified_by: []
+aliases: [def-finite-product]
+landmark: false
+sources:
+  scraped: []
+  references:
+    - title: "J. Aspnes, Summation Notation"
+      url: "https://www.cs.yale.edu/homes/aspnes/pinewiki/SummationNotation.html"
+    - title: "M. Fochler, Recursive sums, products, and powers"
+      url: "https://people.math.binghamton.edu/mfochler/bu-mfx/bu-math-arv/math-330-arv/math-330-2019-08/html/lec-notes/bu-ln-330-m330-solns-2019-12-03.pdf"
+    - title: "Empty sum (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Empty_sum"
+    - title: "T. Tao, Analysis I, 3rd ed., §7.1"
+      url: "https://terrytao.wordpress.com/books/analysis-i/"
+    - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 1"
+      url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+pipeline_run: null
+---
+
+## Definition
+
+Throughout this page $\mathbb{R}$ is the complete ordered field
+(Complete ordered field (least-upper-bound property)), in particular an ordered field
+(Ordered field) and a field (Field), and $\mathbb{N}$ is the set
+of natural numbers (The natural numbers $\mathbb{N}$ (von Neumann)) with successor $\sigma(n) = n + 1$
+(Addition of natural numbers).
+
+Let $a : \mathbb{N} \to \mathbb{R}$ be a sequence of reals, written $a_k$ for
+$a(k)$. **Finite sums and finite products of $a$ are defined by recursion on the
+upper index**, which is legitimate because of the recursion theorem
+(The recursion theorem). That theorem produces a function of one variable, so the
+running index has to be carried along inside the value: applying it to the set
+$A = \mathbb{N} \times \mathbb{R}$, the starting element $(0, 0)$ and the function
+$f(n, s) = (\sigma(n),\, s + a_n)$ gives a unique
+$g : \mathbb{N} \to \mathbb{N} \times \mathbb{R}$ with
+
+$$g(0) = (0, 0), \qquad g(\sigma(n)) = f(g(n)) \quad (n \in \mathbb{N}).$$
+
+Write $g(n) = \big(\pi_1(g(n)),\, \Sigma_n\big)$ for its two coordinates.
+
+**The first coordinate is the index itself, and that is a small induction, not an
+observation** (The principle of mathematical induction). Indeed $\pi_1(g(0)) = 0$; and if
+$\pi_1(g(n)) = n$, then
+$g(\sigma(n)) = f\big(\pi_1(g(n)), \Sigma_n\big) = \big(\sigma(\pi_1(g(n))),\, \Sigma_n + a_{\pi_1(g(n))}\big) = \big(\sigma(n),\, \Sigma_n + a_n\big)$,
+so $\pi_1(g(\sigma(n))) = \sigma(n)$. By induction $\pi_1(g(n)) = n$ for every
+$n \in \mathbb{N}$. Only now may the second coordinate of the two displayed
+clauses be read off, and doing so gives
+
+$$\Sigma_0 = 0, \qquad \Sigma_{\sigma(n)} = \Sigma_n + a_n .$$
+
+$\Sigma$ is moreover the **unique** function $\mathbb{N} \to \mathbb{R}$ with those
+two properties: if $\Sigma'$ also has them then $n \mapsto (n, \Sigma'_n)$ satisfies
+the two clauses defining $g$, hence equals $g$ by the uniqueness clause of
+The recursion theorem, so $\Sigma' = \Sigma$.
+
+We write $\sum_{k < n} a_k := \Sigma_n$. The same construction with starting
+element $(0, 1)$ and $f(n, p) = (\sigma(n),\, p \cdot a_n)$, with the same
+induction on the first coordinate and the same uniqueness argument, gives the
+unique $\Pi : \mathbb{N} \to \mathbb{R}$ with
+
+$$\Pi_0 = 1, \qquad \Pi_{\sigma(n)} = \Pi_n \cdot a_n ,$$
+
+and we write $\prod_{k < n} a_k := \Pi_n$.
+
+**Notation.** For $m, n \in \mathbb{N}$ we abbreviate
+
+$$\sum_{k=0}^{n} a_k := \sum_{k < n+1} a_k, \qquad \prod_{k=0}^{n} a_k := \prod_{k < n+1} a_k,$$
+
+and, for a general lower index $m$ with $m \le n + 1$, let $d$ be the
+unique natural number satisfying $m+d=n+1$. Existence is the definition of
+natural order (Order on the natural numbers); if $m+d=m+e$, commutativity
+(Addition is commutative) gives $d+m=e+m$, so cancellation
+(Addition is cancellative) gives $d=e$. On these admissible bounds only,
+we may write this unique additive gap as $d=n+1-m$; no total natural subtraction
+operation is presupposed. With $d$ thus fixed, define
+
+$$\sum_{k=m}^{n} a_k := \sum_{j < d} a_{m+j}, \qquad \prod_{k=m}^{n} a_k := \prod_{j < d} a_{m+j} .$$
+
+When $m = n + 1$ we have $d = 0$ and the sum is **empty**, with value $0$, while
+the empty product has value $1$. In the same spirit $\sum_{k=0}^{-1} a_k$ is
+notation for the empty sum $\Sigma_0 = 0$ and $\prod_{k=0}^{-1} a_k$ for the
+empty product $\Pi_0 = 1$; the index $-1$ never occurs as an element of
+$\mathbb{N}$ and is only a way of writing "no terms".
+
+Equivalently, for naturals $m \le r$, the half-open endpoint notation
+$\sum_{k=m}^{r-1}a_k$ and $\prod_{k=m}^{r-1}a_k$ means
+$\sum_{j<d}a_{m+j}$ and $\prod_{j<d}a_{m+j}$, respectively, where $d$ is the
+unique natural with $m+d=r$. Here $r-1$ is an endpoint label for the terms
+before $r$, so this notation needs no total subtraction operation. For $m=r$,
+the unique gap is $0$ because $m+0=m$, giving the empty sum and product; the
+case $m=r=0$ is the $-1$ endpoint convention just stipulated.
+
+Only finitely many values of $a$ enter $\sum_{k<n} a_k$, so the notation
+$\sum_{k<n} a_k$ and $\prod_{k<n} a_k$ is also used for a list
+$a_0, \dots, a_{n-1}$ of reals given without reference to any extension of the
+list to all of $\mathbb{N}$: extend the list by $a_k = 0$ (respectively
+$a_k = 1$) for $k \ge n$ and apply the definition above.
+
+## Definition references
+
+[[def-complete-ordered-field]]
+
+[[def-ordered-field]]
+
+[[def-field]]
+
+[[def-natural-numbers]]
+
+[[def-nat-addition]]
+
+[[thm-recursion]]
+
+[[thm-induction-principle]]
+
+[[def-nat-order]]
+
+[[lem-nat-add-commutative]]
+
+[[lem-nat-add-cancellative]]
+
+## Remarks
+
+- **Why recursion and not "$a_0 + a_1 + \cdots + a_{n-1}$".** The dots are not a
+  definition: they presuppose that the displayed pattern determines a value for
+  every $n$, which is exactly what the recursion theorem
+  ([[thm-recursion]]) supplies, and its uniqueness clause is what makes
+  $\sum_{k<n} a_k$ a single well-determined real rather than a family of choices.
+  Associativity and commutativity of addition are *not* used in the definition;
+  they are used in the laws proved from it ([[lem-finite-sum-laws]]).
+- **Naturals and rationals inside $\mathbb{R}$ (a convention used on the whole
+  page).** A natural number $n$ and a rational number $r$ are not literally
+  elements of $\mathbb{R}$: they enter $\mathbb{R}$ through the canonical
+  embedding $\iota : \mathbb{Q} \to \mathbb{R}$, which is an injective,
+  order-preserving field homomorphism ([[lem-of-q-embeds]]), restricting on
+  positive naturals to $n \mapsto n \cdot 1_{\mathbb{R}} = 1_\mathbb{R} + \cdots + 1_\mathbb{R}$
+  ([[lem-of-naturals-positive]]). Following ordinary practice, and only where no
+  confusion is possible, we write the same symbols $n$ and $r$ for their canonical images in $\mathbb{R}$. Thus $\frac{1}{n}\sum_{k<n}a_k$ means the inverse of the field element $n\cdot1_{\mathbb{R}}$, multiplied by that real sum; this is defined for $n\ge1$ because $n\cdot1_{\mathbb{R}}>0$. Index bounds remain natural numbers. Likewise the exponent in $a^n$ or $a^r$ remains a natural, integer or rational ([[def-integer-power]], [[def-rational-power]]); it is not replaced by a real exponent.
+- The two indexings are related by $\sum_{k=0}^{n} a_k = \sum_{k < n+1} a_k$, so
+  a statement proved for one is available for the other. Sums over $k < n$ are
+  the primitive form here because $\Sigma_0$, the empty sum, is then the base
+  case of every induction, and no index outside $\mathbb{N}$ is ever needed.

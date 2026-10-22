@@ -1,0 +1,188 @@
+[
+  {
+    "order": 903,
+    "id": "qsmx-matrix-product-states",
+    "kind": "A",
+    "category": "quantum-statistical-mechanics",
+    "library": "physics",
+    "title": "Schmidt truncation, transfer operators and parent Hamiltonians",
+    "companion": "qsmx-matrix-product-states-examples",
+    "requires": [
+      "qsmx-entropy-entanglement",
+      "qsm-quasilocal-states",
+      "pure-and-mixed-states-ensembles-and-schmidt-decomposition"
+    ],
+    "items": [
+      {
+        "id": "def-qsmx-mps-and-transfer",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Finite open MPS and injective translation invariant tensor",
+        "reference": "research/frontier-expansion-2026-10-19/quantum-statistical-mechanics/prose-scaffold.md#def-qsmx-mps-and-transfer",
+        "design_state": "draft-research",
+        "dependency_level": 0,
+        "deps": [
+          "thm-qc-schmidt-decomposition",
+          "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases"
+        ],
+        "dependency_roles": {
+          "thm-qc-schmidt-decomposition": "mathematical-premise",
+          "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases": "mathematical-premise"
+        },
+        "physical_scope": null,
+        "statement": "Let $N\\ge1$ and $d_1,\\ldots,d_N,D_0,\\ldots,D_N\\ge1$ be integers. Give each site $j$ the Hilbert space $H_j=\\mathbb C^{d_j}$ with standard inner product $\\langle x,y\\rangle:=\\sum_{i=1}^{d_j}x_i\\overline{y_i}$, linear in its first argument, and its fixed ordered standard basis $(|i_j\\rangle)_{i_j=1}^{d_j}$. Tensor products use the ordered product basis and the product inner product. For every site and physical index choose a matrix $A_j^{i_j}\\in M_{D_{j-1}\\times D_j}(\\mathbb C)$, a boundary column $\\ell\\in\\mathbb C^{D_0}$, and a boundary column $r\\in\\mathbb C^{D_N}$. Here $M_{m\\times n}(\\mathbb C)$ is the space of $m$-by-$n$ complex matrices and $A^*$ denotes conjugate transpose. The associated finite open matrix product state (MPS) is the vector\n\n$$|\\psi_A\\rangle:=\\sum_{i_1=1}^{d_1}\\cdots\\sum_{i_N=1}^{d_N}\\ell^*A_1^{i_1}\\cdots A_N^{i_N}r\\,|i_1\\rangle\\otimes\\cdots\\otimes|i_N\\rangle\\in H_1\\otimes\\cdots\\otimes H_N.$$\n\nThe dimensions $D_j$ are the bond dimensions; the virtual indices between adjacent matrices are matrix indices summed in their product. The zero vector is allowed. A nonzero vector is normalized by division by its norm, and normalization is defined only when $\\langle\\psi_A,\\psi_A\\rangle>0$. Every vector in $H_1\\otimes\\cdots\\otimes H_N$ has an exact open MPS representation for some choice of bond dimensions, with $D_0=D_N=1$ and $\\ell=r=(1)$; the internal dimensions are chosen in the construction, rather than prescribed arbitrarily.\n\nFor a translation invariant tensor, let $d,D\\ge1$ and use one family $A^i\\in M_D(\\mathbb C)$ for every site. Its transfer map is the completely positive linear map\n\n$$\\mathcal E:M_D(\\mathbb C)\\to M_D(\\mathbb C),\\qquad \\mathcal E(X):=\\sum_{i=1}^d A^iXA^{i*}.$$\n\nHere complete positivity means that for every integer $q\\ge1$, the amplified map $\\operatorname{id}_{M_q}\\otimes\\mathcal E$ sends positive semidefinite matrices to positive semidefinite matrices; a matrix is positive semidefinite when it is Hermitian and has nonnegative quadratic form on every vector.\n\nThe tensor is injective at length $L\\ge1$ when the matrices $A^{i_1}\\cdots A^{i_L}$, over all $i_1,\\ldots,i_L\\in\\{1,\\ldots,d\\}$, span the full vector space $M_D(\\mathbb C)$. No injectivity or transfer-spectrum condition is assumed by this definition.\n\nFor each block length $L\\ge1$, define the blocked boundary map\n\n$$\\Gamma_L:M_D(\\mathbb C)\\to(\\mathbb C^d)^{\\otimes L},\\qquad \\Gamma_L(X):=\\sum_{i_1,\\ldots,i_L=1}^d\\operatorname{tr}(XA^{i_1}\\cdots A^{i_L})\\,|i_1\\rangle\\otimes\\cdots\\otimes|i_L\\rangle,$$\n\nwhere $\\operatorname{tr}(Y):=\\sum_{a=1}^D Y_{aa}$. Let $P_L$ be the orthogonal projection onto $\\operatorname{im}\\Gamma_L$, set $h_L:=I-P_L$, and, for $N\\ge L$, define the open-chain parent Hamiltonian\n\n$$H_{N,L}:=\\sum_{j=1}^{N-L+1}I^{\\otimes(j-1)}\\otimes h_L\\otimes I^{\\otimes(N-j-L+1)}.$$\n\nFor a positive semidefinite operator $K$ on a nonzero finite-dimensional inner-product space, define its ground energy by\n\n$$E_0(K):=\\inf\\{\\langle Kv,v\\rangle:\\|v\\|=1\\}.$$\n\nA **ground-state vector** of $K$ is a nonzero vector $\\psi$ with $\\langle K\\psi,\\psi\\rangle/\\|\\psi\\|^2=E_0(K)$. It is a **zero-energy ground-state vector** when $K\\psi=0$; positivity then gives $E_0(K)=0$.\n\nEach local term is positive semidefinite with kernel $\\operatorname{im}\\Gamma_L$, and $H_{N,L}$ annihilates every finite open MPS formed from the same translation invariant tensor. Every nonzero such vector is a zero-energy ground-state vector of $H_{N,L}$. This definition asserts no uniqueness of that ground state and no spectral-gap bound."
+      },
+      {
+        "id": "def-qsmx-transfer-infinite-state",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Transfer-generated infinite-chain state and correlations",
+        "reference": "research/frontier-expansion-2026-10-19/quantum-statistical-mechanics/prose-scaffold.md#qsmx-matrix-product-states",
+        "design_state": "draft-research",
+        "dependency_level": 1,
+        "deps": [
+          "def-qsmx-mps-and-transfer",
+          "def-qsm-local-spin-algebras",
+          "def-qsm-quasilocal-spin-algebra",
+          "def-qsm-infinite-algebraic-state",
+          "lem-qsm-finite-matrix-cstar-and-state-duality",
+          "lem-qsm-matrix-state-calculus",
+          "lem-qsm-consistent-local-states",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "def-qsmx-mps-and-transfer": "mathematical-premise",
+          "def-qsm-local-spin-algebras": "mathematical-premise",
+          "def-qsm-quasilocal-spin-algebra": "mathematical-premise",
+          "def-qsm-infinite-algebraic-state": "mathematical-premise",
+          "lem-qsm-finite-matrix-cstar-and-state-duality": "mathematical-premise",
+          "lem-qsm-matrix-state-calculus": "mathematical-premise",
+          "lem-qsm-consistent-local-states": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "physical_scope": null,
+        "statement": "Fix integers $d,D\\ge1$ and a translation invariant tensor $A^1,\\ldots,A^d\\in M_D(\\mathbb C)$ with transfer map $\\mathcal E(X):=\\sum_iA^iXA^{i*}$. A matrix is positive semidefinite when it is Hermitian with nonnegative quadratic form on every vector. Let $\\rho,\\ell\\in M_D(\\mathbb C)$ be positive semidefinite matrices satisfying\n\n$$\\operatorname{tr}\\rho=1,\\qquad \\mathcal E(\\rho)=\\rho,\\qquad \\mathcal E^*(\\ell)=\\ell,\\qquad \\operatorname{tr}(\\ell\\rho)=1,$$\n\nwhere $\\mathcal E^*(Y):=\\sum_iA^{i*}YA^i$, equivalently the trace-pairing adjoint determined by $\\operatorname{tr}(Y\\mathcal E(X))=\\operatorname{tr}(\\mathcal E^*(Y)X)$. For a contiguous block of $k\\ge1$ sites, write $I=(i_1,\\ldots,i_k)$ and $J=(j_1,\\ldots,j_k)$ for physical multi-indices, let $e_I$ be its ordered standard product basis, put $O_{I,J}:=\\langle Oe_J,e_I\\rangle$ for $O\\in M_{d^k}(\\mathbb C)$, and set $A^I:=A^{i_1}\\cdots A^{i_k}$. Define the transfer insertion map and local expectation by\n\n$$\\mathcal E_O(X):=\\sum_{I,J}O_{I,J}A^JX(A^I)^*,\\qquad \\omega_k(O):=\\operatorname{tr}(\\ell\\mathcal E_O(\\rho)).$$\n\nFor any finite nonempty $\\Lambda\\subset\\mathbb Z$ and local observable $O\\in\\mathcal A_\\Lambda$, embed $O$ into the interval $[\\min\\Lambda,\\max\\Lambda]$ by inserting identities at missing sites and evaluate the same formula. For the empty region set $\\omega_\\varnothing(cI):=c$. These definitions give compatible positive normalized local functionals. Their unique density matrices $\\rho_\\Lambda$ obey $\\operatorname{Tr}_{\\Lambda'\\setminus\\Lambda}(\\rho_{\\Lambda'})=\\rho_\\Lambda$ whenever $\\Lambda\\subseteq\\Lambda'$. Assume Countable Choice. The transfer-generated infinite-chain state is the unique infinite algebraic state $\\omega$ on the norm-completed quasi-local spin algebra whose restriction to every finite region is the defined local functional. No infinite tensor-product Hilbert space is selected.\n\nFor observables $O_A\\in M_{d^a}(\\mathbb C)$ and $O_B\\in M_{d^b}(\\mathbb C)$ on two fixed consecutive blocks, with $g\\ge0$ identity sites between the blocks, the connected correlation is\n\n$$\\omega(O_A\\otimes I^{\\otimes g}\\otimes O_B)-\\omega(O_A)\\omega(O_B).$$"
+      },
+      {
+        "id": "alg-qsmx-schmidt-mps-truncation",
+        "kind": "algorithm",
+        "domain": "mathematics",
+        "title": "Sequential Schmidt truncation",
+        "reference": "research/frontier-expansion-2026-10-19/quantum-statistical-mechanics/prose-scaffold.md#alg-qsmx-schmidt-mps-truncation",
+        "design_state": "draft-research",
+        "dependency_level": 1,
+        "deps": [
+          "def-qsmx-mps-and-transfer",
+          "thm-qc-schmidt-decomposition"
+        ],
+        "dependency_roles": {
+          "def-qsmx-mps-and-transfer": "mathematical-premise",
+          "thm-qc-schmidt-decomposition": "mathematical-premise"
+        },
+        "physical_scope": null,
+        "statement": "Input an integer $N\\ge1$, nonzero finite-dimensional complex inner-product spaces $H_1,\\ldots,H_N$ with fixed ordered orthonormal bases, a normalized vector $\\psi\\in H_1\\otimes\\cdots\\otimes H_N$ with exact coefficients in those bases, and integer rank caps $D_k\\ge1$ for $1\\le k<N$. For $N=1$ the cap list is empty. The algorithm performs the following exact finite procedure.\n\n1. Set the current remainder to $\\psi^{(0)}:=\\psi$, the retained left space before the first cut to $S_0:=\\mathbb C$, and an empty list of site tensors and discarded squared norms.\n\n2. For each $k=1,\\ldots,N-1$, reshape the current remainder as a matrix whose row index is the retained left index in $S_{k-1}$ together with the physical basis index in $H_k$, and whose column index is the ordered product basis of $H_{k+1}\\otimes\\cdots\\otimes H_N$. Compute an exact singular value decomposition. Order the positive singular values nonincreasingly. Within each repeated positive singular value, form a deterministic orthonormal basis of its left singular subspace by projecting the row-coordinate standard basis vectors in lexicographic order and applying Gram\u2013Schmidt, discarding zero residuals; obtain the corresponding right singular vector as $M^*u/s$ for singular value $s>0$. Retain the first $m_k:=\\min(D_k,r_k)$ positive singular directions, where $r_k$ is the number of positive singular values, and record $\\delta_k:=\\sum_{j=m_k+1}^{r_k}s_{k,j}^2$ from this current unnormalized remainder. Reshape the retained left singular vectors into a site tensor $A_k^{i_k}$ with left index in $S_{k-1}$ and right index in $S_k:=\\mathbb C^{m_k}$; pass the retained singular values times the adjoints of the retained right singular vectors as the next current remainder $\\psi^{(k)}$. Since the input has norm one and $D_k\\ge1$, every current remainder is nonzero and each $m_k\\ge1$.\n\n3. After the last cut, reshape the remaining array as the final site tensor $A_N^{i_N}$, use outer bond dimensions $D_0=D_N=1$ with scalar boundary columns $\\ell=r=(1)$, and return the resulting unnormalized open MPS $\\phi=\\psi^{(N-1)}$, the list $(\\delta_1,\\ldots,\\delta_{N-1})$, and the bond dimensions $(m_1,\\ldots,m_{N-1})$. For $N=1$, return $\\phi=\\psi$ and empty lists with the same scalar boundaries. If $\\|\\phi\\|^2=0$, return a norm-zero flag and do not normalize. Otherwise an optional normalized copy is $\\phi/\\|\\phi\\|$; the returned $\\phi$ and discarded norms always refer to the unnormalized sweep output.\n\nAll coefficients and SVDs are exact mathematical objects; no floating-point threshold is used. The tie rule fixes a choice even when a rank cap cuts through a degenerate singular-value subspace."
+      },
+      {
+        "id": "thm-qsmx-schmidt-mps-error",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Finite sweep termination and computable norm error",
+        "reference": "research/frontier-expansion-2026-10-19/quantum-statistical-mechanics/prose-scaffold.md#thm-qsmx-schmidt-mps-error",
+        "design_state": "draft-research",
+        "dependency_level": 2,
+        "deps": [
+          "alg-qsmx-schmidt-mps-truncation",
+          "def-qsmx-mps-and-transfer",
+          "thm-qc-schmidt-decomposition",
+          "thm-singular-value-decomposition",
+          "def-qsmx-information-conventions",
+          "cor-mean-value-theorem",
+          "thm-logarithm-derivative-and-integral",
+          "thm-natural-logarithm-laws"
+        ],
+        "dependency_roles": {
+          "alg-qsmx-schmidt-mps-truncation": "mathematical-premise",
+          "def-qsmx-mps-and-transfer": "mathematical-premise",
+          "thm-qc-schmidt-decomposition": "mathematical-premise",
+          "thm-singular-value-decomposition": "mathematical-premise",
+          "def-qsmx-information-conventions": "mathematical-premise",
+          "cor-mean-value-theorem": "mathematical-premise",
+          "thm-logarithm-derivative-and-integral": "mathematical-premise",
+          "thm-natural-logarithm-laws": "mathematical-premise"
+        },
+        "physical_scope": null,
+        "statement": "Let $N\\ge1$, let $H_j=\\mathbb C^{d_j}$ be nonzero finite-dimensional complex inner-product spaces with fixed ordered orthonormal bases, and let $\\psi\\in H_1\\otimes\\cdots\\otimes H_N$ have norm one. For integer caps $D_k\\ge1$ at cuts $1\\le k<N$, run the exact sequential Schmidt truncation algorithm on $\\psi$ and let $\\phi$ be its unnormalized output and $\\delta_k$ the discarded squared singular-value sum measured from the current unnormalized remainder at cut $k$. The sweep uses exactly $N-1$ SVDs and\n\n$$\\|\\psi-\\phi\\|^2=\\sum_{k=1}^{N-1}\\delta_k.$$\n\nIn particular, $\\|\\psi-\\phi\\|^2\\le\\sum_k\\delta_k$. This is a current-sweep error statement; the $\\delta_k$ are not asserted to be the Schmidt tails of the original input at the same cuts. If $\\psi$ is represented exactly as an open MPS with bond dimension $D_k$ at cut $k$, then its Schmidt rank at that cut is at most $D_k$, and the dimensionless von Neumann entropy in nats of the reduced density $\\rho_{1\\cdots k}:=\\operatorname{Tr}_{k+1,\\ldots,N}|\\psi\\rangle\\langle\\psi|$ satisfies\n\n$$S(\\rho_{1\\cdots k})=-\\operatorname{tr}(\\rho_{1\\cdots k}\\log\\rho_{1\\cdots k})\\le\\log D_k,$$\n\nwith zero eigenvalues contributing $0\\log0:=0$ and the natural logarithm convention."
+      },
+      {
+        "id": "thm-qsmx-primitive-transfer-clustering",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Certified transfer gap gives exponential MPS clustering",
+        "reference": "research/frontier-expansion-2026-10-19/quantum-statistical-mechanics/prose-scaffold.md#thm-qsmx-primitive-transfer-clustering",
+        "design_state": "draft-research",
+        "dependency_level": 2,
+        "deps": [
+          "def-qsmx-mps-and-transfer",
+          "def-qsmx-transfer-infinite-state",
+          "def-countable-choice",
+          "def-eigenvalue-eigenvector-eigenspace-and-spectrum",
+          "def-characteristic-polynomial-of-an-operator",
+          "def-algebraic-and-geometric-multiplicity-of-an-eigenvalue",
+          "thm-geometric-multiplicity-does-not-exceed-algebraic-multiplicity",
+          "thm-fundamental-theorem-of-algebra-minimum-modulus-proof",
+          "thm-jordan-canonical-form-from-pid-module-structure",
+          "lem-qsm-matrix-state-calculus"
+        ],
+        "dependency_roles": {
+          "def-qsmx-mps-and-transfer": "mathematical-premise",
+          "def-qsmx-transfer-infinite-state": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-eigenvalue-eigenvector-eigenspace-and-spectrum": "mathematical-premise",
+          "def-characteristic-polynomial-of-an-operator": "mathematical-premise",
+          "def-algebraic-and-geometric-multiplicity-of-an-eigenvalue": "mathematical-premise",
+          "thm-geometric-multiplicity-does-not-exceed-algebraic-multiplicity": "mathematical-premise",
+          "thm-fundamental-theorem-of-algebra-minimum-modulus-proof": "mathematical-premise",
+          "thm-jordan-canonical-form-from-pid-module-structure": "mathematical-premise",
+          "lem-qsm-matrix-state-calculus": "mathematical-premise"
+        },
+        "physical_scope": null,
+        "statement": "Assume Countable Choice. Fix integers $d,D\\ge1$, matrices $A^i\\in M_D(\\mathbb C)$, and the transfer map $\\mathcal E(X)=\\sum_{i=1}^dA^iXA^{i*}$. Let $\\rho,\\ell\\in M_D(\\mathbb C)$ be Hermitian and satisfy $\\langle\\rho v,v\\rangle>0$ and $\\langle\\ell v,v\\rangle>0$ for every nonzero $v\\in\\mathbb C^D$, together with $\\operatorname{tr}\\rho=1$, $\\mathcal E(\\rho)=\\rho$, $\\mathcal E^*(\\ell)=\\ell$, and $\\operatorname{tr}(\\ell\\rho)=1$. Assume that $1$ is a root of multiplicity one of the characteristic polynomial of $\\mathcal E$, and define\n\n$$q:=\\max\\bigl(\\{ |\\lambda|: \\lambda\\in\\sigma_{\\mathbb C}(\\mathcal E),\\ \\lambda\\ne1\\}\\cup\\{0\\}\\bigr)<1.$$\n\nLet $a,b\\ge1$ and fix local observables $O_A\\in M_{d^a}(\\mathbb C)$ and $O_B\\in M_{d^b}(\\mathbb C)$. For each integer $g\\ge0$, place $O_A$ on sites $1,\\ldots,a$, place $O_B$ on sites $a+g+1,\\ldots,a+g+b$, and place identities on the $g$ intervening sites. The transfer-generated infinite-chain state determined by $A^i,\\rho,\\ell$ has connected correlation\n\n$$C_g:=\\operatorname{tr}\\bigl(\\ell\\,\\mathcal E_{O_A}\\mathcal E^g\\mathcal E_{O_B}(\\rho)\\bigr)-\\operatorname{tr}\\bigl(\\ell\\,\\mathcal E_{O_A}(\\rho)\\bigr)\\operatorname{tr}\\bigl(\\ell\\,\\mathcal E_{O_B}(\\rho)\\bigr).$$\n\nFor every real $r$ with $q<r<1$, there is a finite constant $C=C(A,\\rho,\\ell,O_A,O_B,r)\\ge0$, independent of $g$, such that $|C_g|\\le Cr^g$ for every $g\\ge0$. The multiplicity-one hypothesis is algebraic simplicity; no diagonalizability assumption is made."
+      }
+    ]
+  },
+  {
+    "order": 904,
+    "id": "qsmx-matrix-product-states-examples",
+    "kind": "B",
+    "category": "quantum-statistical-mechanics",
+    "library": "physics",
+    "title": "Schmidt truncation, transfer operators and parent Hamiltonians \u2014 Examples",
+    "companion": "qsmx-matrix-product-states",
+    "requires": [
+      "qsmx-matrix-product-states"
+    ],
+    "items": [
+      {
+        "id": "ex-qsmx-ghz-noninjective",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "GHZ transfer has persistent connected correlations",
+        "reference": "research/frontier-expansion-2026-10-19/quantum-statistical-mechanics/prose-scaffold.md#ex-qsmx-ghz-noninjective",
+        "design_state": "draft-research",
+        "dependency_level": 2,
+        "deps": [
+          "def-qsmx-mps-and-transfer",
+          "def-qsmx-transfer-infinite-state",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "def-qsmx-mps-and-transfer": "mathematical-premise",
+          "def-qsmx-transfer-infinite-state": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "physical_scope": null,
+        "statement": "Assume Countable Choice. Use the standard inner product on $\\mathbb C^2$ and its ordered basis $|0\\rangle,|1\\rangle$. For $i,j\\in\\{0,1\\}$, let $E_{ij}\\in M_2(\\mathbb C)$ have entry $1$ in row $i$, column $j$, and entry $0$ elsewhere, with rows and columns ordered $0,1$. For each integer $N\\ge2$, index the factors cyclically modulo $N$ and let $A^0=|0\\rangle\\langle0|=E_{00}=\\begin{pmatrix}1&0\\\\0&0\\end{pmatrix}$ and $A^1=|1\\rangle\\langle1|=E_{11}=\\begin{pmatrix}0&0\\\\0&1\\end{pmatrix}$. The periodic trace contraction has amplitude $\\operatorname{tr}(A^{i_1}\\cdots A^{i_N})$ on basis vector $|i_1\\cdots i_N\\rangle$ and equals $|0^N\\rangle+|1^N\\rangle$; after normalization it is the GHZ vector $(|0^N\\rangle+|1^N\\rangle)/\\sqrt2$. The transfer map fixes $E_{00}$ and $E_{11}$ and annihilates $E_{01}$ and $E_{10}$. With $\\rho=I_2/2$ and $\\ell=I_2$, the associated infinite transfer state has $\\omega(Z_1)=0$ and $\\omega(Z_1I^{\\otimes g}Z_{g+2})=1$ for every integer gap $g\\ge0$, where $Z=|0\\rangle\\langle0|-|1\\rangle\\langle1|$ acts on one site. Thus its connected $Z$ correlation is exactly $1$ at every gap and does not decay."
+      }
+    ]
+  }
+]

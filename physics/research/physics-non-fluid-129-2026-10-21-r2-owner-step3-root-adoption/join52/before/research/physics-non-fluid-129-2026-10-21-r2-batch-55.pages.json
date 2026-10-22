@@ -1,0 +1,562 @@
+[
+  {
+    "order": 807,
+    "id": "nrqmx-floquet-control",
+    "kind": "A",
+    "category": "non-relativistic-quantum-mechanics-mathematics",
+    "library": "mathematics",
+    "title": "Periodic finite dynamics, quasienergy and controlled truncation",
+    "companion": "nrqmx-floquet-control-examples",
+    "requires": [
+      "qm-math-controlled-dynamics",
+      "nrqmx-form-spectral-methods",
+      "unbounded-self-adjoint-operators-and-stones-theorem"
+    ],
+    "items": [
+      {
+        "id": "def-nrqmx-finite-hermitian-matrix-exponential",
+        "kind": "definition",
+        "domain": "mathematics",
+        "library": "mathematics",
+        "title": "Finite-dimensional matrix exponential",
+        "reference": "research/frontier-expansion-2026-10-19/non-relativistic-quantum-mechanics/prose-scaffold.md#nrqmx-floquet-control",
+        "design_state": "Scaffolder-added local A-page prerequisite; complete definition or proof is authored in this batch.",
+        "dependency_level": 0,
+        "deps": [
+          "def-complex-exponential",
+          "def-operator-norm",
+          "def-real-and-complex-inner-product-space",
+          "lem-complex-exponential-series-converges-everywhere",
+          "thm-complex-plane-is-complete",
+          "thm-finite-dimensional-norm-equivalence-over-a-complete-valued-field"
+        ],
+        "dependency_roles": {
+          "def-complex-exponential": "mathematical-premise",
+          "def-operator-norm": "mathematical-premise",
+          "def-real-and-complex-inner-product-space": "mathematical-premise",
+          "lem-complex-exponential-series-converges-everywhere": "mathematical-premise",
+          "thm-complex-plane-is-complete": "mathematical-premise",
+          "thm-finite-dimensional-norm-equivalence-over-a-complete-valued-field": "mathematical-premise"
+        },
+        "inventory_expansion_required": true,
+        "statement": "Let $d\\ge1$. Regard $\\mathbb C^d$ as column vectors with the standard complex inner product\n$$\\langle x,y\\rangle:=\\sum_{j=1}^d x_j\\overline{y_j},$$\nlinear in the first argument, and induced norm $\\|x\\|=(\\sum_{j=1}^d|x_j|^2)^{1/2}$. A matrix $A=(a_{ij})\\in M_d(\\mathbb C)$ acts by $(Ax)_i=\\sum_{j=1}^d a_{ij}x_j$, and its adjoint for this inner product is $A^*=\\overline A^{\\mathsf T}$.\n\nFor $A\\in M_d(\\mathbb C)$ and $z\\in\\mathbb C$, define the finite-dimensional matrix exponential by\n$$e^{zA}:=\\sum_{k=0}^{\\infty}\\frac{z^kA^k}{k!},\\qquad A^0=I_d.$$\nThe scalar exponential convention is $\\exp w=\\sum_{k\\ge0}w^k/k!$.\n\nEvery matrix $B=(b_{ij})\\in M_d(\\mathbb C)$ is bounded on $\\mathbb C^d$: since $|x_j|\\le\\|x\\|$, one has\n$$\\|Bx\\|^2\\le\\sum_{i=1}^d\\left(\\sum_{j=1}^d|b_{ij}|\\right)^2\\|x\\|^2.$$\nThus its operator norm is defined by the unit-ball supremum in the operator-norm definition listed in Definition references. For $B,C\\in M_d(\\mathbb C)$ and $\\|x\\|\\le1$, the operator-norm bound gives $\\|BCx\\|\\le\\|B\\|\\|Cx\\|\\le\\|B\\|\\|C\\|$; taking the supremum proves $\\|BC\\|\\le\\|B\\|\\|C\\|$. Since $d\\ge1$, the coordinate vector $e_1$ with first entry $1$ and other entries $0$ is a unit vector, so $\\|I_d\\|=1$. Homogeneity and the triangle inequality follow from the unit-ball supremum, and $\\|B\\|=0$ forces $Be_j=0$ for each coordinate vector $e_j$ (with entry $1$ at $j$ and $0$ elsewhere), hence $B=0$. Therefore $M_d(\\mathbb C)$ with this operator norm is a normed $\\mathbb C$-vector space; the matrices $E_{ij}$ with entry $1$ at $(i,j)$ and $0$ elsewhere form a basis of size $d^2$.\n\nCompleteness of the complex plane and finite-dimensional norm equivalence (the two theorems in Definition references) make $M_d(\\mathbb C)$ complete in this operator norm. By induction and submultiplicativity, $\\|A^k\\|\\le\\|A\\|^k$ for every $k\\ge1$, while $\\|A^0\\|=1$. The scalar series $\\sum_{k\\ge0}(|z|\\|A\\|)^k/k!$ converges by the scalar exponential convergence lemma in Definition references. Hence for $m>n$,\n$$\\left\\|\\sum_{k=n+1}^{m}\\frac{z^kA^k}{k!}\\right\\|\\le\\sum_{k=n+1}^{m}\\frac{(|z|\\|A\\|)^k}{k!}\\longrightarrow0\\quad(n\\to\\infty).$$\nThe partial sums are Cauchy, so completeness gives their operator-norm limit; the same estimate proves absolute convergence in operator norm.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Konrad Viebahn, Introduction to Floquet theory, lecture notes (2020)",
+              "url": "https://boulderschool.yale.edu/sites/default/files/files/floquetlecture_Konrad%20Viebahn.pdf",
+              "locator": "Section II, equations (15)-(19), finite-dimensional Floquet Hamiltonian and propagator exponentials."
+            },
+            {
+              "title": "André Eckardt and Egidijus Anisimovas, High-frequency approximation for periodically driven quantum systems from a Floquet-space perspective, New Journal of Physics 17 (2015), 093039",
+              "url": "https://arxiv.org/pdf/1502.06477",
+              "locator": "Section 2.2, equations (8)-(13), Floquet Hamiltonian and finite-dimensional exponentials."
+            }
+          ]
+        },
+        "source_refs": [
+          "viebahn-2020",
+          "eckardt-anisimovas-2015"
+        ]
+      },
+      {
+        "id": "lem-nrqmx-finite-hermitian-matrix-exponential",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "library": "mathematics",
+        "title": "Unitarity and differentiation of the finite Hermitian matrix exponential",
+        "reference": "research/frontier-expansion-2026-10-19/non-relativistic-quantum-mechanics/prose-scaffold.md#nrqmx-floquet-control",
+        "design_state": "Scaffolder-added local A-page prerequisite; complete definition or proof is authored in this batch.",
+        "dependency_level": 1,
+        "deps": [
+          "def-nrqmx-finite-hermitian-matrix-exponential",
+          "def-self-adjoint-and-normal-endomorphism",
+          "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "thm-complex-exponential-is-entire-with-derivative-itself",
+          "thm-complex-exponential-addition-and-real-extension",
+          "thm-chain-rule-for-total-derivatives",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity"
+        ],
+        "dependency_roles": {
+          "def-nrqmx-finite-hermitian-matrix-exponential": "mathematical-premise",
+          "def-self-adjoint-and-normal-endomorphism": "mathematical-premise",
+          "thm-complex-spectral-theorem-for-normal-endomorphisms": "mathematical-premise",
+          "thm-complex-exponential-is-entire-with-derivative-itself": "mathematical-premise",
+          "thm-complex-exponential-addition-and-real-extension": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity": "mathematical-premise"
+        },
+        "inventory_expansion_required": true,
+        "statement": "Let $d\\ge1$, let $A=A^*$ be an endomorphism of $\\mathbb C^d$ with its standard complex inner product, and let $\\hbar>0$. For real $t$, define $E_A(t):=e^{-itA/\\hbar}$ by the finite-dimensional matrix exponential defined on this page. Then $E_A(t)$ is unitary, $E_A(t+s)=E_A(t)E_A(s)$ for all real $s,t$, and its operator-norm derivative is\n$$\\frac{d}{dt}E_A(t)=-\\frac{i}{\\hbar}AE_A(t)= -\\frac{i}{\\hbar}E_A(t)A.$$",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Konrad Viebahn, Introduction to Floquet theory, lecture notes (2020)",
+              "url": "https://boulderschool.yale.edu/sites/default/files/files/floquetlecture_Konrad%20Viebahn.pdf",
+              "locator": "Section II, equations (15)-(19), finite-dimensional Floquet Hamiltonian and unitary propagator exponentials."
+            },
+            {
+              "title": "André Eckardt and Egidijus Anisimovas, High-frequency approximation for periodically driven quantum systems from a Floquet-space perspective, New Journal of Physics 17 (2015), 093039",
+              "url": "https://arxiv.org/pdf/1502.06477",
+              "locator": "Section 2.2, equations (8)-(13), Floquet Hamiltonian and finite-dimensional exponentials."
+            }
+          ]
+        },
+        "source_refs": [
+          "viebahn-2020",
+          "eckardt-anisimovas-2015"
+        ],
+        "proof_strategy": "direct",
+        "verification": {
+          "precheck": "pass"
+        },
+        "proof_route": "Diagonalize a finite Hermitian matrix, reduce to scalar exponentials, and prove unitarity, the group law, and operator-norm differentiability."
+      },
+      {
+        "id": "thm-nrqmx-finite-floquet-normal-form",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "library": "mathematics",
+        "title": "Finite Floquet unitary normal form",
+        "reference": "research/frontier-expansion-2026-10-19/non-relativistic-quantum-mechanics/prose-scaffold.md#nrqmx-floquet-control",
+        "design_state": "Assigned design item; complete current statement and argument are recorded in its item carrier.",
+        "dependency_level": 2,
+        "deps": [
+          "def-countable-choice",
+          "def-self-adjoint-and-normal-endomorphism",
+          "thm-nrqm-controlled-dynamics-norm-dyson-series-and-uniqueness",
+          "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "thm-sine-and-cosine-parametrize-the-unit-circle",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "thm-kernel-and-fibres-of-complex-exponential",
+          "def-nrqmx-finite-hermitian-matrix-exponential",
+          "lem-nrqmx-finite-hermitian-matrix-exponential"
+        ],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "def-self-adjoint-and-normal-endomorphism": "mathematical-premise",
+          "thm-nrqm-controlled-dynamics-norm-dyson-series-and-uniqueness": "mathematical-premise",
+          "thm-complex-spectral-theorem-for-normal-endomorphisms": "mathematical-premise",
+          "thm-sine-and-cosine-parametrize-the-unit-circle": "mathematical-premise",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity": "mathematical-premise",
+          "thm-kernel-and-fibres-of-complex-exponential": "mathematical-premise",
+          "def-nrqmx-finite-hermitian-matrix-exponential": "mathematical-premise",
+          "lem-nrqmx-finite-hermitian-matrix-exponential": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume Countable Choice. Let $d\\ge1$, $T>0$, $\\hbar>0$, $\\omega=2\\pi/T$, and let $H:\\mathbb R\\to M_d(\\mathbb C)$ be continuous, $T$-periodic, and Hermitian at every time. Let $U(t,s)$ be the unitary propagator solving $i\\hbar\\,\\partial_tU(t,s)=H(t)U(t,s)$ and $U(s,s)=I_d$. There are an orthonormal basis $v_1,\\ldots,v_d$ and real numbers $\\varepsilon_1,\\ldots,\\varepsilon_d$ such that\n$$U(T,0)v_j=e^{-iT\\varepsilon_j/\\hbar}v_j\\qquad(1\\le j\\le d).$$\nDefine the Hermitian matrix $H_Fv_j=\\varepsilon_jv_j$ and the quasienergy classes $\\varepsilon_j+\\hbar\\omega\\mathbb Z$. With $P(t):=U(t,0)e^{itH_F/\\hbar}$, $P(t)$ is a $T$-periodic unitary matrix and\n$$U(t,0)=P(t)e^{-itH_F/\\hbar}\\qquad(t\\in\\mathbb R).$$\nThe real representative $\\varepsilon_j$ may be changed by any integer multiple of $\\hbar\\omega$ without changing its eigenphase; no preferred real branch is asserted.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Konrad Viebahn, Introduction to Floquet theory, lecture notes (2020)",
+              "url": "https://boulderschool.yale.edu/sites/default/files/files/floquetlecture_Konrad%20Viebahn.pdf",
+              "locator": "Section II, equations (10)-(20), period propagator, Hermitian Floquet Hamiltonian, and periodic micromotion."
+            },
+            {
+              "title": "André Eckardt and Egidijus Anisimovas, High-frequency approximation for periodically driven quantum systems from a Floquet-space perspective, New Journal of Physics 17 (2015), 093039",
+              "url": "https://arxiv.org/pdf/1502.06477",
+              "locator": "Sections 2.1-2.3, equations (1)-(20), and Appendix A, equations (A.1)-(A.6), Floquet modes, quasienergy branches, and the period propagator."
+            }
+          ]
+        },
+        "source_refs": [
+          "viebahn-2020",
+          "eckardt-anisimovas-2015"
+        ],
+        "proof_strategy": "direct",
+        "verification": {
+          "precheck": "pass"
+        },
+        "proof_route": "Use the unique unitary propagator, diagonalize the one-period unitary, choose real phase lifts, and prove the micromotion is periodic."
+      },
+      {
+        "id": "thm-nrqmx-finite-level-duhamel-error",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "library": "mathematics",
+        "title": "Finite-level truncation with bounded coupling error",
+        "reference": "research/frontier-expansion-2026-10-19/non-relativistic-quantum-mechanics/prose-scaffold.md#nrqmx-floquet-control",
+        "design_state": "Assigned design item; complete current statement and argument are recorded in its item carrier.",
+        "dependency_level": 2,
+        "deps": [
+          "def-countable-choice",
+          "def-self-adjoint-and-normal-endomorphism",
+          "def-bounded-linear-operator",
+          "def-operator-norm",
+          "def-nrqmx-finite-hermitian-matrix-exponential",
+          "lem-nrqmx-finite-hermitian-matrix-exponential",
+          "lem-fundamental-theorem-of-calculus-for-banach-valued-continuous-curves",
+          "lem-bochner-integral-norm-inequality"
+        ],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "def-self-adjoint-and-normal-endomorphism": "mathematical-premise",
+          "def-bounded-linear-operator": "mathematical-premise",
+          "def-operator-norm": "mathematical-premise",
+          "def-nrqmx-finite-hermitian-matrix-exponential": "mathematical-premise",
+          "lem-nrqmx-finite-hermitian-matrix-exponential": "mathematical-premise",
+          "lem-fundamental-theorem-of-calculus-for-banach-valued-continuous-curves": "mathematical-premise",
+          "lem-bochner-integral-norm-inequality": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume Countable Choice. Let $d\\ge1$, $\\hbar>0$, let $H=H^*$ on $\\mathbb C^d$, and let $P=P^*=P^2$ be an orthogonal projection. Use the operator norm induced by the standard inner product. Put $P^\\perp=I_d-P$, $H_D=PHP+P^\\perp HP^\\perp$, and $V=H-H_D$. With finite matrix exponentials as defined on this page, for every $t\\in\\mathbb R$,\n$$\\left\\|e^{-itH/\\hbar}-e^{-itH_D/\\hbar}\\right\\|\\le\\frac{|t|}{\\hbar}\\|V\\|,\\qquad \\left\\|P^\\perp e^{-itH/\\hbar}P\\right\\|\\le\\frac{|t|}{\\hbar}\\|V\\|.$$\nThe second inequality bounds amplitude leakage from the retained subspace $\\operatorname{ran}P$; it asserts no convergence for an unbounded coupling.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Konrad Viebahn, Introduction to Floquet theory, lecture notes (2020)",
+              "url": "https://boulderschool.yale.edu/sites/default/files/files/floquetlecture_Konrad%20Viebahn.pdf",
+              "locator": "Section II, equations (10)-(20), finite-dimensional unitary propagation and exact Floquet factorization; the bounded Duhamel estimate is proved locally."
+            },
+            {
+              "title": "André Eckardt and Egidijus Anisimovas, High-frequency approximation for periodically driven quantum systems from a Floquet-space perspective, New Journal of Physics 17 (2015), 093039",
+              "url": "https://arxiv.org/pdf/1502.06477",
+              "locator": "Section 2.1, equations (5)-(7), period propagator and Floquet modes; the finite coupling estimate is proved locally."
+            }
+          ]
+        },
+        "source_refs": [
+          "viebahn-2020",
+          "eckardt-anisimovas-2015"
+        ],
+        "proof_strategy": "direct",
+        "verification": {
+          "precheck": "pass"
+        },
+        "proof_route": "Differentiate the two-propagator product, integrate the bounded coupling in operator norm, and project away the block-diagonal evolution."
+      },
+      {
+        "id": "thm-nrqmx-floquet-sambe-domain",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "library": "mathematics",
+        "title": "Finite-level Sambe operator with Fourier domain",
+        "reference": "research/frontier-expansion-2026-10-19/non-relativistic-quantum-mechanics/prose-scaffold.md#nrqmx-floquet-control",
+        "design_state": "Assigned design item; complete current statement and argument are recorded in its item carrier.",
+        "dependency_level": 3,
+        "deps": [
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "thm-nrqmx-finite-floquet-normal-form",
+          "def-nrqmx-finite-hermitian-matrix-exponential",
+          "lem-nrqmx-finite-hermitian-matrix-exponential",
+          "thm-kato-rellich",
+          "def-relative-boundedness-with-respect-to-an-operator",
+          "def-bounded-linear-operator",
+          "def-operator-norm",
+          "def-adjoint-of-a-densely-defined-unbounded-operator",
+          "def-symmetric-self-adjoint-and-essentially-self-adjoint",
+          "thm-euclidean-heine-borel-pseudocompactness-and-extreme-values",
+          "thm-nrqm-intervals-twisted-periodic-momentum-domain",
+          "def-nrqm-intervals-hilbert-sobolev-spaces",
+          "lem-classical-derivatives-are-weak-derivatives",
+          "thm-algebra-of-derivatives"
+        ],
+        "dependency_roles": {
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "thm-nrqmx-finite-floquet-normal-form": "mathematical-premise",
+          "def-nrqmx-finite-hermitian-matrix-exponential": "mathematical-premise",
+          "lem-nrqmx-finite-hermitian-matrix-exponential": "mathematical-premise",
+          "thm-kato-rellich": "mathematical-premise",
+          "def-relative-boundedness-with-respect-to-an-operator": "mathematical-premise",
+          "def-bounded-linear-operator": "mathematical-premise",
+          "def-operator-norm": "mathematical-premise",
+          "def-adjoint-of-a-densely-defined-unbounded-operator": "mathematical-premise",
+          "def-symmetric-self-adjoint-and-essentially-self-adjoint": "mathematical-premise",
+          "thm-euclidean-heine-borel-pseudocompactness-and-extreme-values": "mathematical-premise",
+          "thm-nrqm-intervals-twisted-periodic-momentum-domain": "mathematical-premise",
+          "def-nrqm-intervals-hilbert-sobolev-spaces": "mathematical-premise",
+          "lem-classical-derivatives-are-weak-derivatives": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume the Axiom of Choice and Countable Choice. Let $d\\ge1$, $T>0$, $\\omega=2\\pi/T$, $\\hbar>0$, and let $H:\\mathbb R\\to M_d(\\mathbb C)$ be $C^1$, $T$-periodic, and Hermitian at every time. On $\\mathscr H_T=L^2((0,T),dt;\\mathbb C^d)$ define\n$$D(K)=\\{f=(f_1,\\ldots,f_d): f_a\\in H^1(0,T)\\text{ for every }a,\\ f(0)=f(T)\\},\\qquad (Kf)(t)=H(t)f(t)-i\\hbar f'(t).$$\nHere each $H^1(0,T)$ function is represented by its unique absolutely continuous representative, so endpoint values are its traces, and $f'$ is its componentwise weak derivative. Then $K$ is self-adjoint on exactly $D(K)$. Choose $v_j$ and $\\varepsilon_j$ from the finite Floquet normal form, so $H_Fv_j=\\varepsilon_jv_j$ and $P(t)$ is its periodic unitary. The functions\n$$\\phi_{jn}(t)=T^{-1/2}e^{in\\omega t}P(t)v_j\\qquad(1\\le j\\le d,\\ n\\in\\mathbb Z)$$\nform an orthonormal basis of $\\mathscr H_T$ and satisfy $K\\phi_{jn}=(\\varepsilon_j+n\\hbar\\omega)\\phi_{jn}$.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Konrad Viebahn, Introduction to Floquet theory, lecture notes (2020)",
+              "url": "https://boulderschool.yale.edu/sites/default/files/files/floquetlecture_Konrad%20Viebahn.pdf",
+              "locator": "Section IV, equations (55)-(60), periodic modes and the infinite Fourier-sector matrix; the local proof supplies the exact periodic H1 domain and self-adjointness."
+            },
+            {
+              "title": "André Eckardt and Egidijus Anisimovas, High-frequency approximation for periodically driven quantum systems from a Floquet-space perspective, New Journal of Physics 17 (2015), 093039",
+              "url": "https://arxiv.org/pdf/1502.06477",
+              "locator": "Section 2.3, equations (17)-(20) and (22), and Appendix B, equations (B.1)-(B.3), quasienergy operator and Fourier blocks; the local proof supplies the exact domain and self-adjointness."
+            }
+          ]
+        },
+        "source_refs": [
+          "viebahn-2020",
+          "eckardt-anisimovas-2015"
+        ],
+        "proof_strategy": "direct",
+        "verification": {
+          "precheck": "pass"
+        },
+        "proof_route": "Realize the periodic derivative on its exact H1 domain, use Kato–Rellich for self-adjointness, then use Fourier modes and the periodic micromotion to obtain the eigenbasis."
+      },
+      {
+        "id": "alg-nrqmx-floquet-fourier-galerkin",
+        "kind": "algorithm",
+        "domain": "mathematics",
+        "library": "mathematics",
+        "title": "Floquet Fourier–Galerkin assembly",
+        "reference": "research/frontier-expansion-2026-10-19/non-relativistic-quantum-mechanics/prose-scaffold.md#nrqmx-floquet-control",
+        "design_state": "Assigned design item; complete current statement and argument are recorded in its item carrier.",
+        "dependency_level": 4,
+        "deps": [
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-nrqmx-finite-hermitian-matrix-exponential",
+          "thm-nrqmx-floquet-sambe-domain"
+        ],
+        "dependency_roles": {
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-nrqmx-finite-hermitian-matrix-exponential": "mathematical-premise",
+          "thm-nrqmx-floquet-sambe-domain": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume the Axiom of Choice and Countable Choice. Fix integers $d\\ge1$, $b,N\\ge0$, and real numbers $\\hbar>0$, $\\omega>0$, and $\\tau>0$. On every coordinate space $\\mathbb C^r$ used below, use the standard inner product $\\langle x,y\\rangle:=\\sum_{a=1}^{r}x_a\\overline{y_a}$, linear in the first argument, and induced norm $\\|x\\|=(\\sum_{a=1}^{r}|x_a|^2)^{1/2}$, as fixed in the finite-dimensional matrix exponential definition; matrix adjoints are conjugate transposes. Let $H_k\\in M_d(\\mathbb C)$ for $-b\\le k\\le b$ satisfy $H_{-k}=H_k^*$; set $H_k=0$ when $|k|>b$. Thus $H(t)=\\sum_{k=-b}^{b}H_ke^{ik\\omega t}$ is a finite Fourier polynomial with period $T=2\\pi/\\omega$. Put $q=(2N+1)d$ and use this coordinate inner product and norm on $\\mathbb C^q$. Let $S_\\tau$ be a caller-supplied total classical routine on $\\{M\\in M_q(\\mathbb C):M=M^*\\}$ whose declared interface, on input $M$, returns real numbers $\\widetilde\\lambda_1,\\ldots,\\widetilde\\lambda_q$, an orthonormal basis $x_1,\\ldots,x_q$ for this inner product, and residuals $r_j=\\|Mx_j-\\widetilde\\lambda_jx_j\\|\\le\\tau$ for $1\\le j\\le q$. This algorithm returns that finite record unchanged and does not independently certify its residual claims.\n\nThe algorithm takes $(d,b,N,\\hbar,\\omega,(H_k)_{|k|\\le b},\\tau,S_\\tau)$ and returns a matrix $K_N$ and the eigensolver's output record:\n\n1. Order the Fourier indices as $-N,-N+1,\\ldots,N$ and allocate a $(2N+1)d$ by $(2N+1)d$ block matrix.\n\n2. For each ordered pair $n,m\\in\\{-N,\\ldots,N\\}$, assign the $d$ by $d$ block\n$$ (K_N)_{nm}:=H_{n-m}+n\\hbar\\omega\\,\\delta_{nm}I_d,$$\nwhere $\\delta_{nm}=1$ if $n=m$ and $0$ otherwise.\n\n3. Set $R:=S_\\tau(K_N)$ by one call, then return $(K_N,R)$.",
+        "justified_by": [
+          "thm-nrqmx-floquet-galerkin-correctness"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Konrad Viebahn, Introduction to Floquet theory, lecture notes (2020)",
+              "url": "https://boulderschool.yale.edu/sites/default/files/files/floquetlecture_Konrad%20Viebahn.pdf",
+              "locator": "Section IV, equations (55)-(60), Fourier-sector representation and finite truncation discussion."
+            },
+            {
+              "title": "André Eckardt and Egidijus Anisimovas, High-frequency approximation for periodically driven quantum systems from a Floquet-space perspective, New Journal of Physics 17 (2015), 093039",
+              "url": "https://arxiv.org/pdf/1502.06477",
+              "locator": "Section 2.3, equation (22), and Appendix B, equations (B.1)-(B.3), Fourier block convention for the quasienergy operator."
+            }
+          ]
+        },
+        "source_refs": [
+          "viebahn-2020",
+          "eckardt-anisimovas-2015"
+        ]
+      },
+      {
+        "id": "thm-nrqmx-floquet-galerkin-correctness",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "library": "mathematics",
+        "title": "Fourier–Galerkin assembly correctness and termination",
+        "reference": "research/frontier-expansion-2026-10-19/non-relativistic-quantum-mechanics/prose-scaffold.md#nrqmx-floquet-control",
+        "design_state": "Assigned design item; complete current statement and argument are recorded in its item carrier.",
+        "dependency_level": 5,
+        "deps": [
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "alg-nrqmx-floquet-fourier-galerkin",
+          "thm-nrqmx-floquet-sambe-domain",
+          "thm-nrqm-intervals-twisted-periodic-momentum-domain"
+        ],
+        "dependency_roles": {
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "alg-nrqmx-floquet-fourier-galerkin": "mathematical-premise",
+          "thm-nrqmx-floquet-sambe-domain": "mathematical-premise",
+          "thm-nrqm-intervals-twisted-periodic-momentum-domain": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume the Axiom of Choice and Countable Choice. Let $d\\ge1$, $b,N\\ge0$, $\\hbar>0$, $\\omega>0$, and $T=2\\pi/\\omega$. Let $H_k\\in M_d(\\mathbb C)$ for $|k|\\le b$ satisfy $H_{-k}=H_k^*$, set $H_k=0$ for $|k|>b$, and put $H(t)=\\sum_{|k|\\le b}H_ke^{ik\\omega t}$. Set $q=(2N+1)d$. Fix $\\tau>0$ and a total routine $S_\\tau$ on $\\{M\\in M_q(\\mathbb C):M=M^*\\}$ with the standard inner product on $\\mathbb C^q$, that for each input $M$ returns real numbers $\\widetilde\\lambda_1,\\ldots,\\widetilde\\lambda_q$, an orthonormal basis $x_1,\\ldots,x_q$, and residuals $r_j=\\|Mx_j-\\widetilde\\lambda_jx_j\\|\\le\\tau$ as in the algorithm Definition. Let $\\mathscr H_T=L^2((0,T),dt;\\mathbb C^d)$ with its componentwise $L^2$ inner product, and let $Kf=H(t)f-i\\hbar f'(t)$ on the domain of vectors whose components lie in $H^1(0,T)$ and have equal endpoint traces. Let $\\mathcal S_N$ be the span of $T^{-1/2}e^{in\\omega t}v$ with $-N\\le n\\le N$ and $v\\in\\mathbb C^d$, and let $\\Pi_N$ be its orthogonal projection. The matrix with blocks $(K_N)_{nm}=H_{n-m}+n\\hbar\\omega\\delta_{nm}I_d$ is exactly the matrix of $\\Pi_NK|_{\\mathcal S_N}$ in the ordered Fourier basis and is Hermitian. The block-assembly portion of the algorithm terminates after exactly $(2N+1)^2$ block assignments. The complete procedure is well-defined and terminates, because it then calls $S_\\tau$ once on the Hermitian matrix $K_N$. This is an exact compression result only; it asserts no convergence or spectral-accuracy guarantee for finite-section eigenvalues and no residual guarantee beyond the stipulated solver interface.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Konrad Viebahn, Introduction to Floquet theory, lecture notes (2020)",
+              "url": "https://boulderschool.yale.edu/sites/default/files/files/floquetlecture_Konrad%20Viebahn.pdf",
+              "locator": "Section IV, equations (57)-(60), exact Fourier-sector matrix and finite truncation discussion."
+            },
+            {
+              "title": "André Eckardt and Egidijus Anisimovas, High-frequency approximation for periodically driven quantum systems from a Floquet-space perspective, New Journal of Physics 17 (2015), 093039",
+              "url": "https://arxiv.org/pdf/1502.06477",
+              "locator": "Section 2.3, equations (17)-(20) and (22), and Appendix B, equations (B.1)-(B.3), Fourier matrix elements of the quasienergy operator."
+            }
+          ]
+        },
+        "source_refs": [
+          "viebahn-2020",
+          "eckardt-anisimovas-2015"
+        ],
+        "proof_strategy": "direct",
+        "verification": {
+          "precheck": "pass"
+        },
+        "proof_route": "Compute each Fourier matrix coefficient of multiplication and derivative, use Hermitian symmetry, and count finite assignments."
+      }
+    ]
+  },
+  {
+    "order": 808,
+    "id": "nrqmx-floquet-control-examples",
+    "kind": "B",
+    "category": "non-relativistic-quantum-mechanics-mathematics",
+    "library": "mathematics",
+    "title": "Periodic finite dynamics, quasienergy and controlled truncation — Examples",
+    "companion": "nrqmx-floquet-control",
+    "requires": [
+      "nrqmx-floquet-control"
+    ],
+    "items": [
+      {
+        "id": "ex-nrqmx-driven-two-level-floquet",
+        "kind": "example",
+        "domain": "mathematics",
+        "library": "mathematics",
+        "title": "Commuting longitudinal drive",
+        "reference": "research/frontier-expansion-2026-10-19/non-relativistic-quantum-mechanics/prose-scaffold.md#nrqmx-floquet-control",
+        "design_state": "Assigned design item; complete current statement and argument are recorded in its item carrier.",
+        "dependency_level": 3,
+        "deps": [
+          "def-countable-choice",
+          "thm-nrqm-controlled-dynamics-norm-dyson-series-and-uniqueness",
+          "thm-nrqmx-finite-floquet-normal-form",
+          "def-nrqmx-finite-hermitian-matrix-exponential",
+          "lem-nrqmx-finite-hermitian-matrix-exponential",
+          "thm-sine-and-cosine-derivatives",
+          "thm-sine-cosine-zero-sets-and-fundamental-period",
+          "thm-chain-rule-for-total-derivatives"
+        ],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "thm-nrqm-controlled-dynamics-norm-dyson-series-and-uniqueness": "mathematical-premise",
+          "thm-nrqmx-finite-floquet-normal-form": "mathematical-premise",
+          "def-nrqmx-finite-hermitian-matrix-exponential": "mathematical-premise",
+          "lem-nrqmx-finite-hermitian-matrix-exponential": "mathematical-premise",
+          "thm-sine-and-cosine-derivatives": "mathematical-premise",
+          "thm-sine-cosine-zero-sets-and-fundamental-period": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume Countable Choice. On $\\mathbb C^2$ let $\\sigma_z=\\operatorname{diag}(1,-1)$, choose real $E_0,A$, and choose $\\hbar>0$, $\\omega>0$, and $T=2\\pi/\\omega$. For $H(t)=(E_0+A\\cos(\\omega t))\\sigma_z$, the unique propagator from time $0$ is\n$$U(t,0)=\\exp\\!\\left[-\\frac{i}{\\hbar}\\left(E_0t+\\frac{A}{\\omega}\\sin(\\omega t)\\right)\\sigma_z\\right].$$\nOne Floquet normal form is $H_F=E_0\\sigma_z$ and $P(t)=\\exp[-iA\\sin(\\omega t)\\sigma_z/(\\hbar\\omega)]$.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Konrad Viebahn, Introduction to Floquet theory, lecture notes (2020)",
+              "url": "https://boulderschool.yale.edu/sites/default/files/files/floquetlecture_Konrad%20Viebahn.pdf",
+              "locator": "Sections II-III for the Floquet normal form and driven two-level examples, and Section IV for the Fourier-sector representation."
+            },
+            {
+              "title": "André Eckardt and Egidijus Anisimovas, High-frequency approximation for periodically driven quantum systems from a Floquet-space perspective, New Journal of Physics 17 (2015), 093039",
+              "url": "https://arxiv.org/pdf/1502.06477",
+              "locator": "Sections 2.1-2.3 for Floquet states, period propagation, and quasienergy conventions; the commuting longitudinal calculation is supplied locally."
+            }
+          ]
+        },
+        "source_refs": [
+          "viebahn-2020",
+          "eckardt-anisimovas-2015"
+        ],
+        "proof_strategy": "direct",
+        "verification": {
+          "precheck": "pass"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "proof_route": "Integrate the commuting diagonal Hamiltonian and verify its periodic micromotion."
+      },
+      {
+        "id": "cex-nrqmx-quasienergy-no-order",
+        "kind": "counterexample",
+        "domain": "mathematics",
+        "library": "mathematics",
+        "title": "Quasienergy has no canonical ground value",
+        "reference": "research/frontier-expansion-2026-10-19/non-relativistic-quantum-mechanics/prose-scaffold.md#nrqmx-floquet-control",
+        "design_state": "Assigned design item; complete current statement and argument are recorded in its item carrier.",
+        "dependency_level": 3,
+        "deps": [
+          "def-countable-choice",
+          "thm-nrqm-controlled-dynamics-norm-dyson-series-and-uniqueness",
+          "thm-nrqmx-finite-floquet-normal-form",
+          "def-nrqmx-finite-hermitian-matrix-exponential",
+          "thm-kernel-and-fibres-of-complex-exponential"
+        ],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "thm-nrqm-controlled-dynamics-norm-dyson-series-and-uniqueness": "mathematical-premise",
+          "thm-nrqmx-finite-floquet-normal-form": "mathematical-premise",
+          "def-nrqmx-finite-hermitian-matrix-exponential": "mathematical-premise",
+          "thm-kernel-and-fibres-of-complex-exponential": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "The one-period unitary of a finite-dimensional periodic system determines a distinguished least real quasienergy that is independent of the chosen Hermitian logarithm.",
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Konrad Viebahn, Introduction to Floquet theory, lecture notes (2020)",
+              "url": "https://boulderschool.yale.edu/sites/default/files/files/floquetlecture_Konrad%20Viebahn.pdf",
+              "locator": "Section II, equations (15)-(20), Hermitian logarithm choices for the period unitary."
+            },
+            {
+              "title": "André Eckardt and Egidijus Anisimovas, High-frequency approximation for periodically driven quantum systems from a Floquet-space perspective, New Journal of Physics 17 (2015), 093039",
+              "url": "https://arxiv.org/pdf/1502.06477",
+              "locator": "Section 2.3, equations (14)-(16), quasienergies differing by integer multiples of $\\hbar\\omega$."
+            }
+          ]
+        },
+        "source_refs": [
+          "viebahn-2020",
+          "eckardt-anisimovas-2015"
+        ],
+        "proof_strategy": "direct",
+        "verification": {
+          "precheck": "pass"
+        },
+        "generation": {
+          "role": "counterexample"
+        },
+        "proof_route": "Compare distinct scalar Hermitian logarithm branches of the same zero monodromy."
+      }
+    ]
+  }
+]

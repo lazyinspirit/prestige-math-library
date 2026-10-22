@@ -1,0 +1,32 @@
+--- a/tools/physics-autopilot/stages/refuter-continuations.mts
++++ b/tools/physics-autopilot/stages/refuter-continuations.mts
+@@ -41,6 +41,17 @@
+     const old = JSON.parse(archive.toString());
+     if (String(old.batch) !== unit || !Array.isArray(old.opened) || !Array.isArray(old.not_opened)
+       || !Array.isArray(old.flagged) || typeof previous.tail !== 'string') reject();
++    // Optional exact-attempt message binds a complete native report when the
++    // last 40 stdout lines no longer include the report's coverage headers.
++    let originalLastMessageBound = false;
++    if (entry.original_last_message !== undefined) {
++      if (!Number.isSafeInteger(previous.attempt) || previous.attempt < 1
++        || previous.evidence_tag !== `.attempt-${previous.attempt}`
++        || entry.original_last_message?.path !== `research/${ctx.run}-dispatch/refuter-refute-${unit}.attempt-${previous.attempt}.last-message.json`) reject();
++      const message = JSON.parse(bound(entry.original_last_message).toString());
++      if (JSON.stringify(message) !== JSON.stringify(old)) reject();
++      originalLastMessageBound = true;
++    }
+     let parsedTail: any, tailParsed = false;
+     try { parsedTail = JSON.parse(previous.tail); tailParsed = true; } catch {}
+     if (tailParsed) {
+@@ -49,8 +60,9 @@
+       // Native receipts retain only the last 40 stdout lines. Authenticate a
+       // clipped diagnostic against the immutable raw report, never its claims.
+       const tail = previous.tail.trimEnd();
+-      if (tail.length < 256 || !/"not_opened"\s*:/.test(tail) || !/"flagged"\s*:/.test(tail)
+-        || !archive.toString().trimEnd().endsWith(tail)) reject();
++      if (tail.length < 256 || !archive.toString().trimEnd().endsWith(tail)
++        || (!originalLastMessageBound
++          && (!/"not_opened"\s*:/.test(tail) || !/"flagged"\s*:/.test(tail)))) reject();
+     }
+     bound(entry.task);
+     if (beforeDispatch) {

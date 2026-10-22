@@ -1,0 +1,20 @@
+# Six collected native-impact correction proposals
+
+The genuine `impact-initial-1-collected.json` has zero errors, 116 reviews, six changed subjects, three restated subjects and no created item. Each of the six requested native `repaired` reviews matches its collected row and collected post fingerprint exactly and belongs to its actual assigned native owner. All three successful Sol 6.1 high repair dispatches are bound in `evidence-guards.json`.
+
+`adoption-proposal.json` contains the minimal six proposed fixed native-impact corrections, their exact original observations, current source/report guards, actual repaired reviews and raw repair-notes reconciliation entries. `canonical-row-templates.json` supplies six row templates, deliberately **not append-ready**: none of the originating observations provides canonical class/subclass; Root must supply class, subclass and canonical location. Native severity and defect-type labels are preserved without inventing new classifications. No original judge tuple or synthetic confirmed-fatal adjudication is added.
+
+| Subject | Authentic origin | Actual recorded classification |
+|---|---|---|
+| `cex-emg-fx-constant-radius-rigidity` | initial-u18 `/ledger_updates/3`; impact-u1 repaired review | Initial nonfatal form-degree label referral; now repaired |
+| `thm-csm-frontier-finite-rate-forward-equation` | initial-u94 `/ledger_updates/defect_ledger/3`; impact-u1 repaired review | Initial nonfatal second-FTC citation referral; now repaired |
+| `thm-csm-frontier-finite-jarzynski` | initial-u94 `/ledger_updates/defect_ledger/2`; impact-u3 repaired review and ledger reconciliation | Initial nonfatal second-FTC citation referral; now repaired |
+| `pthm-emx-weak-poynting-uniqueness` | initial-u4 `/repair_notes/owner_referrals/0` and `/ledger_updates/3`; impact-u2 repaired review and nested ledger update | Initial `logic` referral with no explicit severity; actual impact update says `confirmed_nonfatal`, fixed |
+| `pthm-emx-lorentz-reciprocity` | initial-u6 `/repair_notes/downstream_reviews/1`; supplier-impact routing; impact-u2 repaired review and nested ledger update | Initial consumer was explicitly **unaffected**, not a defect referral. Actual impact update confirms nonfatal finite-band qualification omission and repairs it |
+| `pthm-emx-uniaxial-dispersion` | initial-u6 `/repair_notes/downstream_reviews/0`; supplier-impact routing; impact-u3 repaired review and ledger reconciliation | Initial consumer was explicitly **unaffected**, not a defect referral. Actual impact reconciliation records a nonfatal physical-band qualification repair |
+
+The initial-u6 supplier's own adjudication remains context, not a consumer adjudication. Its earlier sound-use observations are retained verbatim, with the two new consumer omissions attributed to the actual impact owners. This avoids inventing an earlier referral, rejected tuple or consumer classification.
+
+None of these six exact defects is currently in the canonical ledger. Two same-subject Step-3 rows exist: reciprocity's source-page locator correction and uniaxial dispersion's rank clarification. They concern different issues and must remain unchanged. The proposed new rows have no `supersedes`; their evidence retains the actual prior history rather than duplicating or closing unrelated defects. The original collection has `ledger_updates: []`; the actual owners placed reconciliation inside `repair_notes`, so those genuine nested entries are bound separately rather than claimed as merged collection updates.
+
+This is bookkeeping only. The six source carriers were archived/hashed for currency; no proof investigation, new mathematical classification, external retrieval, source-reading claim, audit or source edit was performed. Root should recheck the guards and same-defect absence at the drained adoption boundary, supply the three canonical taxonomy fields, and append the six attributed fixed rows if still needed. Current source/report changes or a new canonical same-defect record require reconciliation before adoption.

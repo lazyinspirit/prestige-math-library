@@ -7,7 +7,7 @@ origin: pipeline
 domain: physics
 library: physics
 physical_scope: A constructed smooth local two-phase Gibbs model with one formal internal reaction, used to verify the local equation-map nonsingular-minor hypothesis only; no stable or realized coexistence claim, empirical system, or chemical data are made.
-dependency_level: 9
+dependency_level: 1
 deps:
   - thm-ck-euclidean-maps-closed-under-algebra-and-composition
   - thm-real-power-continuity-and-derivatives
@@ -57,7 +57,11 @@ g^\gamma(T,p,x)=-s_0(T-T_0)-\frac{c}{2T_0}(T-T_0)^2+v_0(p-p_0)-\frac{\kappa}{2}(
 $$
 Set $G^\gamma=m_\gamma g^\gamma$ on each fixed-tag branch and adopt the natural Gibbs assignments $S=-G_T$, $V=G_p$, and $\mu_j=G_{n_j}$, with $U=G+TS-pV$. These smooth charts are scale-invariant in amount. Near the centered point the volumes are positive, and the $(U,V)$ chart Jacobian at fixed composition and amount is nonsingular: $U_T=m_\gamma c$, $V_p=-m_\gamma\kappa$, and $V_T=0$ there, so its determinant is $-m_\gamma^2c\kappa\ne0$. The reaction vector is $\nu=(-1,-1/2,1)^{\mathsf T}$, of rank $R=1$. At $(T_0,p_0,x_1,x_2)=(T_0,p_0,1/3,1/3)$, both phases have $\mu^\gamma=(0,0,0)$, so the phase-equality equations and reaction affinity vanish.
 
-For each branch, fix a reference amount $m_*>0$ in moles. Choose an open neighborhood $\mathcal O$ of $(T_0,p_0,1/3,1/3,m_*)$ in $(0,\infty)^2\times\{(x_1,x_2):x_1,x_2>0,\ x_1+x_2<1\}\times(0,\infty)$, using $n=(mx_1,mx_2,m(1-x_1-x_2))$. Shrink this neighborhood to the inverse-function patch verified below; all component amounts remain positive. The constructed branch's local physical state map is $\chi:(T,p,x_1,x_2,m)\mapsto(U,V,mx_1,mx_2,m(1-x_1-x_2))$, on the positive amount and interior composition domain just specified. On the inverse patch verified below, define its numerical domain $O_c=\Phi_c^{-1}(\chi(\mathcal O))$ and declare this patch to be the local model's $D_c$ patch, where $\Phi_c(\hat U,\hat V,\hat n_1,\hat n_2,\hat n_3)=(\hat U\,\mathrm J,\hat V\,\mathrm{m^3},\hat n_1\,\mathrm{mol},\hat n_2\,\mathrm{mol},\hat n_3\,\mathrm{mol})$ is the unit map of [[def-td-temperature-pressure-chemical-potential]]. Define the numerical entropy by $S_c=S^{\rm SI}\circ\Phi_c$, with $S^{\rm SI}$ supplied by the Gibbs assignments through this inverse. Thus the displayed derivatives are derivatives in physical SI coordinates on $\Phi_c(O_c)$; the model patch is not an empirical claim about an independently specified material domain.
+For each branch, fix a reference amount $m_*>0$ in moles. Choose an open neighborhood $\mathcal O$ of $(T_0,p_0,1/3,1/3,m_*)$ in $(0,\infty)^2\times\{(x_1,x_2):x_1,x_2>0,\ x_1+x_2<1\}\times(0,\infty)$, using $n=(mx_1,mx_2,m(1-x_1-x_2))$. Shrink this neighborhood to the inverse-function patch verified below; all component amounts remain positive. The constructed branch's local physical state map is $\chi:(T,p,x_1,x_2,m)\mapsto(U,V,mx_1,mx_2,m(1-x_1-x_2))$, on the positive amount and interior composition domain just specified. On the inverse patch verified below, define its numerical domain $O_c=\Phi_c^{-1}(\chi(\mathcal O))$ and declare this patch to be the local model's $D_c$ patch, where $\Phi_c(\hat U,\hat V,\hat n_1,\hat n_2,\hat n_3)=(\hat U\,\mathrm J,\hat V\,\mathrm{m^3},\hat n_1\,\mathrm{mol},\hat n_2\,\mathrm{mol},\hat n_3\,\mathrm{mol})$ is the unit map of *Entropic temperature, pressure, and molar chemical potentials*. Define the numerical entropy by $S_c=S^{\rm SI}\circ\Phi_c$, with $S^{\rm SI}$ supplied by the Gibbs assignments through this inverse. Thus the displayed derivatives are derivatives in physical SI coordinates on $\Phi_c(O_c)$; the model patch is not an empirical claim about an independently specified material domain.
+
+## Example references
+
+[[def-td-temperature-pressure-chemical-potential]]
 
 ## Facts & Assumptions
 

@@ -1,0 +1,414 @@
+--- a/tools/physics-support/step5-workflow.mjs
++++ b/tools/physics-support/step5-workflow.mjs
+@@ -9,6 +9,7 @@
+ import { spawnSync } from 'node:child_process';
+ import { freezeFrontier, validateFrontier, readLibraryItems, discoverDownstream, assessFatalThreshold } from './step5-rounds.mjs';
+ import { isPublishedItem } from './published-repair-policy.mjs';
++import { publishedMaintenance, isPublishedMaintenance } from './step5-published-maintenance.mjs';
+ import { itemHashGuard } from './item-hash.mjs';
+ import { currentHashesMany } from './step5-terminal-resolution.mjs';
+ import { MODELS } from './models.mjs';
+@@ -399,7 +400,7 @@
+   }
+ }
+ 
+-export function validateReports(pack,reports,now,{root=null,scientificCorrection=null,ownerFindingCorrection=null}={}) {
++export function validateReports(pack,reports,now,{root=null,scientificCorrection=null,ownerFindingCorrection=null,publishedLocalMaintenance=null}={}) {
+   const childReview=id=>ownerFindingCorrection?.token===ownerFindingCollectionToken
+     ?ownerFindingCorrection.reviews.find(row=>row.id===id):null;
+   const corrected=id=>(scientificCorrection?.token===scientificValidationToken&&scientificCorrection.subject===id)||!!childReview(id);
+@@ -450,6 +451,9 @@
+     for(const id of diff(pack.before_statements,statements))errors.push(`formatting continuation changed public interface ${id}`);
+   }
+   for(const id of changed) {
++    // Authentic local published receipts are a separate policy state. Ordinary
++    // draft repairs retain their exact assigned review and decision checks.
++    if(isPublishedMaintenance(publishedLocalMaintenance)&&publishedLocalMaintenance.guards[id]===now[id])continue;
+     if(pack.repair_scope==='frontier'&&!pack.frontier_ids?.includes(id)&&pack.before[id])errors.push(`out-of-frontier consumer cannot be repaired by Step 5: ${id}`);
+     const created=creatorById.get(id),review=childReview(id)??reviews.find(r=>r.id===id&&r.disposition===(created?'authored':'repaired'));
+     if(!now[id]||!review||review.post_sha256!==now[id]||(!created&&!pack.before[id]))errors.push(`unlicensed or unreviewed change ${id}`);
+@@ -814,6 +818,7 @@
+       if(!deferImpactClosure)return verifyClosedOwnerCollection(root,run,phase,round,collectedPath,prior);
+     }
+     verifyHistoricalEvidence(root,run,prior.evidence);
++    if(prior.published_local_repairs?.length)publishedMaintenance(root,run,readPack(root,run,phase,round),hashes(root),{replay:prior.published_local_repairs});
+     if(phase==='initial'){verifyPageCorrectionReplay(root,run,round,prior);verifyReviewCorrectionReplay(root,run,prior);}
+     syncMaintenance(root,run,prior.statement_events??[]);return prior;
+   }
+@@ -892,7 +897,8 @@
+       decisions:report.decisions.map(row=>decisions.get(key(row))??row),
+       reviews:report.reviews.map(row=>reviews.get(row.id)??row)}));
+   }
+-  const result=validateReports(pack,effectiveReports,reported,{root,
++  const publishedLocalMaintenance=phase==='initial'&&round===1?publishedMaintenance(root,run,pack,current):null;
++  const result=validateReports(pack,effectiveReports,reported,{root,publishedLocalMaintenance,
+     scientificCorrection:scientificAdopted?{token:scientificValidationToken,subject:scientificAdopted.subject}:null,
+     ownerFindingCorrection:ownerCompletion?{token:ownerFindingCollectionToken,reviews:ownerCompletion.reviews}:null});
+   if(ownerCompletion){
+@@ -924,7 +930,7 @@
+   const scientificContexts=collectionItems?reviewContexts(collectionItems):null;
+   const scientificCompletion=scientificRepairCompletion(pack,reports,current,
+     row=>scientificContexts.matches(row,current));
+-  const evidence={...(pack.input_evidence??{}),...external.evidence,[packPath(root,run,phase,round)]:digest(readFileSync(packPath(root,run,phase,round),'utf8'))};
++  const evidence={...(pack.input_evidence??{}),...external.evidence,...(publishedLocalMaintenance?.evidence??{}),[packPath(root,run,phase,round)]:digest(readFileSync(packPath(root,run,phase,round),'utf8'))};
+   verifyEvidence(evidence);
+   const creationAuthors=new Map();
+   for(const unit of pack.units) {
+@@ -976,6 +982,7 @@
+     for(const row of reports.find(value=>String(value.unit)===unit)?.created_items??[])creationAuthors.set(row.id,basename(dispatch));
+   }
+   const receipt={...result,created_items:result.created_items.map(row=>({...row,author_result:creationAuthors.get(row.id)})),version:2,run,phase,round,evidence,post:hashes(root),downstream:[...new Set(reports.flatMap(row=>row.downstream))],ledger_updates:reports.flatMap(row=>row.ledger_updates??[])};
++  if(publishedLocalMaintenance?.repairs.length)receipt.published_local_repairs=publishedLocalMaintenance.repairs;
+   if(external.repairs.length)receipt.external_owner_repairs=external.repairs;
+   if(scientificCompletion)receipt.scientific_repair_completion=scientificCompletion;
+   if(correction){
+--- a/tools/physics-support/consumer-maintenance.mjs
++++ b/tools/physics-support/consumer-maintenance.mjs
+@@ -6,6 +6,7 @@
+ import {readLibraryItems,discoverDownstream,partitionImpacts,validateFrontier} from './step5-rounds.mjs';
+ import {itemHashGuard} from './item-hash.mjs';
+ import {statementHash} from './step5-statement.mjs';
++import {isPublishedItem} from './published-repair-policy.mjs';
+ 
+ const hash=value=>createHash('sha256').update(typeof value==='string'?value:JSON.stringify(value)).digest('hex');
+ const check=(value,message)=>{if(!value)throw new Error(`consumer maintenance: ${message}`);};
+@@ -23,7 +24,7 @@
+ }
+ function save(root,run,state){const dir=directory(root,run);mkdirSync(dir,{recursive:true});const temp=join(dir,`state.${process.pid}.tmp`);writeFileSync(temp,JSON.stringify(state,null,2)+'\n');renameSync(temp,join(dir,'state.json'));}
+ function immutable(path,value){const text=JSON.stringify(value,null,2)+'\n';if(existsSync(path)){check(readFileSync(path,'utf8')===text,`immutable artifact differs: ${path}`);return;}writeFileSync(path,text,{flag:'wx'});}
+-function frontier(root,run){const path=join(root,'research',`${run}-step5-v2`,'frontier.json');check(existsSync(path),'missing immutable frontier');const frozen=validateFrontier(read(path));check(frozen.run===run,'frontier run mismatch');return new Set(frozen.ids);}
++function frontier(root,run){const path=join(root,'research',`${run}-step5-v2`,'frontier.json');check(existsSync(path),'missing immutable frontier');const frozen=validateFrontier(read(path));check(frozen.run===run,'frontier run mismatch');return new Set(frozen.ids.filter(id=>!isPublishedItem(root,id)));}
+ function verifyPack(root,run,state,id){const dir=directory(root,run),binding=state.bindings?.[id];check(binding,'missing frozen pack binding');for(const [path,expected] of Object.entries(binding))check(hash(readFileSync(join(root,path),'utf8'))===expected,`frozen input changed: ${path}`);return read(join(dir,`${id}.json`));}
+ function enqueue(root,run,state,events,items){
+   const eligible=frontier(root,run,items),byId=new Map(items.map(i=>[i.id,i]));
+--- /dev/null
++++ b/tools/physics-support/step5-published-maintenance.mjs
+@@ -0,0 +1,90 @@
++// Root-scoped local published maintenance; never a native review or decision.
++import {readFileSync,existsSync,realpathSync} from 'node:fs';
++import {join,resolve,relative,isAbsolute} from 'node:path';
++import {createHash} from 'node:crypto';
++import {recordedPublishedRepair} from './published-repair-policy.mjs';
++import {itemHashGuard} from './item-hash.mjs';
++import {statementHash} from './step5-statement.mjs';
++import {validateFrontier} from './step5-rounds.mjs';
++
++const hash=value=>createHash('sha256').update(value).digest('hex');
++const read=path=>JSON.parse(readFileSync(path,'utf8'));
++const need=(ok,message)=>{if(!ok)throw Error('published maintenance: '+message);};
++const authenticated=new WeakSet();
++const scalar=(text,key)=>new RegExp(`^${key}:\\s*["']?([^\\n"']+?)["']?\\s*$`,'m').exec(/^---\r?\n([\s\S]*?)\r?\n---/.exec(text)?.[1]??'')?.[1];
++export const isPublishedMaintenance=value=>value!==null&&typeof value==='object'&&authenticated.has(value);
++
++/** Explicit root opt-in for first local corrections against the original frozen
++ * initial snapshot. Existing policy validates real claims, audits, ledger and
++ * focused checks. This route supplies neither author/reviewer nor judge tuples.
++ * Receipt/preimage/owner evidence are immutable; canonical ledger marker and
++ * exact claim row are checked separately, so unrelated appends remain legal. */
++export function publishedMaintenance(root,run,pack,current,{replay=null}={}){
++  const dir=join(root,'research',run+'-step5-v2'),path=join(dir,'owner-published-maintenance.json');
++  if(!existsSync(path)){
++    need(!replay?.length,'missing bound owner request');
++    return {repairs:[],guards:{},evidence:{}};
++  }
++  need(pack.run===run&&pack.phase==='initial'&&pack.round===1&&Array.isArray(pack.rejected)
++    &&pack.repair_scope==='frontier','only original initial adjudication is eligible');
++  const request=read(path),evidence={},guards={},repairs=[];
++  need(request.version===1&&request.run===run&&request.phase==='initial'&&request.round===1
++    &&request.reviewer==='/root'&&request.native_review===false&&request.native_adjudication===false
++    &&typeof request.reason==='string'&&request.reason.trim().length>=40
++    &&Array.isArray(request.entries)&&request.entries.length>0,'invalid root-scoped request');
++  const bound=ref=>{
++    need(ref&&typeof ref.path==='string'&&!isAbsolute(ref.path)&&/^[a-f0-9]{64}$/.test(ref.sha256??''),'invalid evidence reference');
++    const file=resolve(root,ref.path),rel=relative(realpathSync(join(root,'research')),realpathSync(file));
++    need(!isAbsolute(rel)&&!rel.startsWith('..')&&rel.startsWith(run+'-'),'evidence is outside run research');
++    need(hash(readFileSync(file))===ref.sha256,'evidence changed: '+ref.path);
++    evidence[file]=ref.sha256;return file;
++  };
++  const state=read(bound(request.drained_state));
++  need(state.run===run&&state.stage==='5.1-adjudicate'&&state.paused===true&&!state.finishedAt
++    &&!state.stages?.['5.1-adjudicate']?.doneAt&&state.dispatches&&typeof state.dispatches==='object'
++    &&Object.values(state.dispatches).every(row=>!row.startedAt||row.endedAt),'not an actual paused/drained initial boundary');
++  if(!replay){
++    const live=read(join(root,'.physics-autopilot',run,'state.json'));
++    need(live.run===run&&live.stage==='5.1-adjudicate'&&!live.finishedAt
++      &&!live.stages?.['5.1-adjudicate']?.doneAt&&live.dispatches&&typeof live.dispatches==='object'
++      &&Object.values(live.dispatches).every(row=>!row.startedAt||row.endedAt)
++      &&!existsSync(join(root,'.physics-autopilot','step5-shared-write.lock')),'initial writers are not drained');
++  }
++  const frontierPath=join(dir,'frontier.json'),frontier=validateFrontier(read(frontierPath));
++  need(frontier.run===run&&JSON.stringify(pack.frontier_ids)===JSON.stringify(frontier.ids),'wrong frozen frontier');
++  const importsPath=join(root,'research/math-imports.json');
++  const imported=new Set(existsSync(importsPath)?read(importsPath).files.map(row=>row.path):[]);
++  const assigned=new Set(Object.values(pack.assignments).flat().map(row=>typeof row==='string'?row:row.id)),seen=new Set();
++  for(const entry of request.entries){
++    const id=entry.id;
++    need(typeof id==='string'&&!seen.has(id)&&frontier.ids.includes(id)&&pack.frontier_ids?.includes(id)
++      &&pack.before[id]&&!assigned.has(id)&&!imported.has('items/'+id+'.md'),'duplicate, outside, new, imported or assigned published target: '+id);seen.add(id);
++    const text=readFileSync(join(root,'items',id+'.md'),'utf8'),receiptPath=bound(entry.receipt),receipt=read(receiptPath);
++    need(scalar(text,'status')==='published'&&scalar(text,'id')===id,
++      'not the current published carrier: '+id);
++    // Read repair only inside verification; unrelated frontmatter cannot supply it.
++    const verification=/^verification:[ \t]*\r?\n((?:[ \t]+[^\n]*\n?)*)/m.exec(/^---\r?\n([\s\S]*?)\r?\n---/.exec(text)?.[1]??'')?.[1]??'';
++    const repair=/^ {2}repair:[ \t]*["']?([^\n"']+?)["']?[ \t]*$/m.exec(verification)?.[1];
++    need(repair===entry.receipt.path&&!/^ {2}(?:audited|verified):/m.test(verification),
++      'receipt is not the sole current publication repair evidence: '+id);
++    const policy=recordedPublishedRepair(root,id,text,repair);
++    need(policy.ok,`${id}: ${policy.reason??'local repair rejected'}`);
++    const beforeFile=bound({path:receipt.before_file,sha256:receipt.before_raw_sha256}),before=readFileSync(beforeFile,'utf8');
++    need(receipt.run===run&&receipt.group===entry.group&&receipt.pre_sha256===pack.before[id]
++      &&itemHashGuard(before)===pack.before[id]&&statementHash(before)===pack.before_statements?.[id]
++      &&current[id]===receipt.content_sha256&&current[id]===itemHashGuard(text)
++      &&current[id]!==pack.before[id],'wrong original/current source or ownership: '+id);
++    need(Array.isArray(entry.scientific_evidence)&&entry.scientific_evidence.length>0,'missing actual scientific evidence: '+id);
++    entry.scientific_evidence.forEach(bound);
++    const claims=readFileSync(join(root,'research',run+'-step3-published-claims.jsonl'),'utf8').split(/\r?\n/).filter(Boolean).map(JSON.parse);
++    const claim=claims.find(row=>row.id===id);
++    repairs.push({id,group:receipt.group,receipt:entry.receipt,before_sha256:pack.before[id],after_sha256:current[id],
++      claim_sha256:hash(JSON.stringify(claim)),ledger_marker:receipt.ledger_marker,ledger_sha256:receipt.ledger_sha256,
++      attribution:'Recorded local published repair only; no native review or adjudication'});
++    guards[id]=current[id];
++  }
++  if(replay)need(JSON.stringify(repairs)===JSON.stringify(replay),'recorded published repair/claim changed');
++  evidence[path]=hash(readFileSync(path));evidence[frontierPath]=hash(readFileSync(frontierPath));
++  repairs.forEach(Object.freeze);Object.freeze(repairs);Object.freeze(guards);Object.freeze(evidence);
++  const result=Object.freeze({repairs,guards,evidence});authenticated.add(result);return result;
++}
+--- /dev/null
++++ b/tools/physics-support/step5-published-maintenance.test.mjs
+@@ -0,0 +1,188 @@
++// All generated claims/checks/dispatches here are synthetic test fixtures.
++// Fixtures model the two-sided-feasibility correction without asserting science.
++import {test} from 'node:test';
++import assert from 'node:assert/strict';
++import {mkdtempSync,mkdirSync,writeFileSync,readFileSync,rmSync,existsSync,symlinkSync} from 'node:fs';
++import {join,resolve,dirname} from 'node:path';
++import {fileURLToPath} from 'node:url';
++import {publishedMaintenance} from './step5-published-maintenance.mjs';
++import {itemHashGuard} from './item-hash.mjs';
++import {statementHash} from './step5-statement.mjs';
++import {freezeFrontier,readLibraryItems} from './step5-rounds.mjs';
++import {validateReports,collect,closeEmptyAdjudication,digest,workerReport,reviewContextHashes,reviewMatchesCurrent} from './step5-workflow.mjs';
++import {syncMaintenance,prepareMaintenance,maintenanceStatus} from './consumer-maintenance.mjs';
++import {MODELS} from './models.mjs';
++import {tmpdir} from 'node:os';
++
++const actualId='pthm-td-intensive-coexistence-conditions',run='fixture';
++const json=(file,value)=>{mkdirSync(dirname(file),{recursive:true});writeFileSync(file,JSON.stringify(value,null,2)+'\n');};
++const text=(id,status,body,deps=[])=>`---\nid: ${id}\nkind: theorem\nstatus: ${status}\ndeps: [${deps.join(', ')}]\n---\n## Statement\n${body}\n`;
++const guards=root=>Object.fromEntries(readLibraryItems(root).map(row=>[row.id,itemHashGuard(readFileSync(join(root,'items',row.id+'.md'),'utf8'))]));
++function fixture(t){
++  const root=mkdtempSync(join(tmpdir(),'step5-published-maintenance-'));t.after(()=>rmSync(root,{recursive:true,force:true}));
++  const dir=join(root,'research',run+'-step5-v2');
++  mkdirSync(join(root,'items'),{recursive:true});mkdirSync(dir,{recursive:true});mkdirSync(join(root,'research',run+'-dispatch'),{recursive:true});
++  const before=`---\nid: ${actualId}\nkind: physics-theorem\nstatus: published\nverification:\n  verified:\n    date: 2026-10-15\n---\n## Statement\nBoth transfer signs are feasible.\n## Proof\nDifferentiate along an assumed feasible interval.\n`;
++  const candidate=before.replace('Both transfer signs are feasible.','Arbitrarily small pure transfers of each sign are feasible.').replace('Differentiate along an assumed feasible interval.','Use differentiability and difference quotients along the feasible sequences.');
++  const receiptPath='research/fixture-local-repair.json';
++  const current=candidate.replace(/^verification:[ \t]*\n(?:[ \t]+[^\n]*\n)*/m,`verification:\n  repair: ${receiptPath}\n`);
++  writeFileSync(join(root,'items',actualId+'.md'),before);
++  writeFileSync(join(root,'items/thm-draft.md'),text('thm-draft','draft','An unrelated draft remains unchanged.'));
++  const frontier=freezeFrontier({run,batches:[{id:'1',items:[actualId]},{id:'2',items:['thm-draft']}]});
++  json(join(dir,'frontier.json'),frontier);
++  const judgeInput=join(dir,'step4-verdicts.json');
++  json(judgeInput,[{id:actualId,model:MODELS.luna.id,keep:false,context_sha256:'a'.repeat(64)},
++    {id:'thm-draft',model:MODELS.luna.id,keep:true,context_sha256:'b'.repeat(64)}]);
++  const pack={version:2,adjudicationSchemaVersion:1,repair_scope:'frontier',frontier_ids:frontier.ids,run,phase:'initial',round:1,
++    judge_model:MODELS.luna.id,units:['1','2'],assignments:{'1':[],'2':[]},dependency_levels:{},before:guards(root),
++    before_statements:Object.fromEntries(readLibraryItems(root).map(row=>[row.id,row.statement_sha256])),before_aliases:{},home_pages:{},rejected:[],
++    input_evidence:{[judgeInput]:digest(readFileSync(judgeInput,'utf8'))}};
++  json(join(dir,'initial-1.json'),pack);
++  const reports=pack.units.map(unit=>closeEmptyAdjudication(root,run,'initial',1,unit,digest(pack)));
++  for(const unit of pack.units)json(join(root,'research',run+'-dispatch','tool-step5-v2-empty-initial-r1-u'+unit+'.result.json'),
++    {run,role:'tool',label:'step5-v2-empty-initial-r1-u'+unit,covers:[unit],ok:true,written_by:'autopilot',ended_at:'2026-10-22T00:00:00Z'});
++  const beforeFile='research/fixture-before.md';writeFileSync(join(root,beforeFile),before);
++  const claim={version:1,run,id:actualId,group:'td',pre_sha256:itemHashGuard(before),claimed_at:'2026-10-22T00:00:00Z'};
++  const claimFile=join(root,'research',run+'-step3-published-claims.jsonl');writeFileSync(claimFile,JSON.stringify(claim)+'\n');
++  writeFileSync(join(root,'items',actualId+'.md'),current);
++  const content=itemHashGuard(current),ledgerMarker='fixture:'+actualId;
++  const ledgerEvidence=`\n${actualId}: actual source/proposed scientific delta fixture, canonical current ${content}.\n`;
++  const ledgerFile=join(root,'research/published-consumer-supplier-ledger.md');
++  writeFileSync(ledgerFile,`<!-- local-published-repair:${ledgerMarker}:begin -->${ledgerEvidence}<!-- local-published-repair:${ledgerMarker}:end -->\n`);
++  const receipt={version:1,kind:'recorded-local-published-repair',id:actualId,run,group:'td',correction:'Test fixture for the actual arbitrarily-small-transfer repair.',content_sha256:content,
++    before_file:beforeFile,before_raw_sha256:digest(before),pre_sha256:itemHashGuard(before),recorded_at:'2026-10-22T00:02:00Z',ledger_marker:ledgerMarker,ledger_sha256:digest(ledgerEvidence),
++    local_checks:Object.fromEntries(['precheck','rendercheck'].map(tool=>[tool,{checked_at:'2026-10-22T00:01:00Z',content_sha256:content,exit_code:0,
++      command:['node',`tools/physics-support/${tool}${tool==='precheck'?'.mts':'.mjs'}`,`items/${actualId}.md`],
++      output:tool==='precheck'?`PASS items/${actualId}.md\n1 checked, 0 failing`:'OK — 1 file(s)'}]))};
++  json(join(root,receiptPath),receipt);
++  const state={run,stage:'5.1-adjudicate',paused:true,dispatches:{done:{startedAt:'2026-10-22T00:00:00Z',endedAt:'2026-10-22T00:01:00Z'}},stages:{}};
++  const stateArchive='research/fixture-drained-state.json';json(join(root,stateArchive),state);json(join(root,'.physics-autopilot',run,'state.json'),state);
++  const scientificPath='research/fixture-science.md';writeFileSync(join(root,scientificPath),'Synthetic same-owner scientific evidence, never real scientific acceptance.');
++  const request={version:1,run,phase:'initial',round:1,reviewer:'/root',native_review:false,native_adjudication:false,
++    reason:'Explicit test-only root request: preserve every original native obligation and receipt.',
++    drained_state:{path:stateArchive,sha256:digest(readFileSync(join(root,stateArchive),'utf8'))},entries:[{id:actualId,group:'td',
++      receipt:{path:receiptPath,sha256:digest(readFileSync(join(root,receiptPath),'utf8'))},scientific_evidence:[{path:scientificPath,sha256:digest(readFileSync(join(root,scientificPath),'utf8'))}]}]};
++  const requestFile=join(dir,'owner-published-maintenance.json');
++  const putRequest=()=>json(requestFile,request);
++  const putReceipt=()=>{json(join(root,receiptPath),receipt);request.entries[0].receipt.sha256=digest(readFileSync(join(root,receiptPath),'utf8'));putRequest();};
++  putRequest();
++  return {root,dir,pack,reports,before,current,receipt,receiptPath,request,requestFile,claim,claimFile,ledgerFile,state,putReceipt,putRequest,
++    load:()=>publishedMaintenance(root,run,pack,guards(root)),validate:()=>validateReports(pack,reports,guards(root),{root,publishedLocalMaintenance:publishedMaintenance(root,run,pack,guards(root))})};
++}
++
++test('published delta retains ordinary failure without root request and receives local-only exception',t=>{
++  const f=fixture(t),old=validateReports(f.pack,f.reports,guards(f.root),{root:f.root});
++  assert.ok(old.errors.includes('unlicensed or unreviewed change '+actualId));
++  assert.ok(old.errors.includes('change without confirmed adjudication '+actualId));
++  assert.deepEqual(f.validate().errors,[]);
++  assert.deepEqual(f.validate().reviews,[]);assert.deepEqual(f.validate().decisions,[]);
++  const originalPack=readFileSync(join(f.dir,'initial-1.json'),'utf8'),originalReports=f.pack.units.map(unit=>readFileSync(workerReport(f.root,run,'initial',1,unit),'utf8'));
++  const result=collect(f.root,run,'initial',1);
++  assert.equal(result.published_local_repairs.length,1);assert.deepEqual(result.reviews,[]);assert.deepEqual(result.decisions,[]);
++  assert.ok(result.statement_events.some(row=>row.id===actualId));
++  assert.equal(readFileSync(join(f.dir,'initial-1.json'),'utf8'),originalPack);
++  assert.deepEqual(f.pack.units.map(unit=>readFileSync(workerReport(f.root,run,'initial',1,unit),'utf8')),originalReports);
++  assert.equal(existsSync(join(f.root,'research',run+'-judge-adjudications.jsonl')),false);
++  assert.deepEqual(collect(f.root,run,'initial',1),result);
++});
++for(const defect of ['missing-request','missing-receipt','tampered-receipt','before-bytes','before-canonical','wrong-status','wrong-source','wrong-group','wrong-run','missing-claim','claim-owner','ledger','stale-check','failed-check','missing-check','wrong-original-statement','assigned-published','outside-frontier','not-drained','shared-lock','changed-science','imported-target','new-audit']){
++ test('initial published maintenance blocks '+defect,t=>{
++  const f=fixture(t);
++  if(defect==='missing-request')rmSync(f.requestFile);
++  if(defect==='missing-receipt')rmSync(join(f.root,f.receiptPath));
++  if(defect==='tampered-receipt')writeFileSync(join(f.root,f.receiptPath),JSON.stringify({...f.receipt,correction:'tampered'}));
++  if(defect==='before-bytes')writeFileSync(join(f.root,f.receipt.before_file),f.before+'\n');
++  if(defect==='before-canonical')f.pack.before[actualId]='c'.repeat(64);
++  if(defect==='wrong-status')writeFileSync(join(f.root,'items',actualId+'.md'),f.current.replace('status: published','status: draft'));
++  if(defect==='wrong-source')writeFileSync(join(f.root,'items',actualId+'.md'),f.current+'Changed.');
++  if(defect==='wrong-group'){f.request.entries[0].group='wrong';f.putRequest();}
++  if(defect==='wrong-run'){f.receipt.run='different';f.putReceipt();}
++  if(defect==='missing-claim')rmSync(f.claimFile);
++  if(defect==='claim-owner')writeFileSync(f.claimFile,JSON.stringify({...f.claim,group:'wrong'}));
++  if(defect==='ledger')writeFileSync(f.ledgerFile,readFileSync(f.ledgerFile,'utf8').replace('actual source','tampered source'));
++  if(defect==='stale-check'){f.receipt.local_checks.precheck.content_sha256='e'.repeat(64);f.putReceipt();}
++  if(defect==='failed-check'){f.receipt.local_checks.rendercheck.exit_code=1;f.putReceipt();}
++  if(defect==='missing-check'){delete f.receipt.local_checks;f.putReceipt();}
++  if(defect==='wrong-original-statement')f.pack.before_statements[actualId]='d'.repeat(64);
++  if(defect==='assigned-published')f.pack.assignments['1']=[{id:actualId}];
++  if(defect==='outside-frontier')f.pack.frontier_ids=f.pack.frontier_ids.filter(id=>id!==actualId);
++  if(defect==='not-drained')json(join(f.root,'.physics-autopilot',run,'state.json'),{...f.state,dispatches:{running:{startedAt:'2026-10-22T00:00:00Z'}}});
++  if(defect==='shared-lock')writeFileSync(join(f.root,'.physics-autopilot/step5-shared-write.lock'),'locked');
++  if(defect==='imported-target')json(join(f.root,'research/math-imports.json'),{files:[{path:'items/'+actualId+'.md'}]});
++  if(defect==='new-audit')writeFileSync(join(f.root,'items',actualId+'.md'),f.current.replace('verification:\n','verification:\n  audited: 2026-10-22\n'));
++  if(defect==='changed-science')writeFileSync(join(f.root,f.request.entries[0].scientific_evidence[0].path),'tampered');
++  if(defect==='missing-request')assert.ok(f.validate().errors.includes('unlicensed or unreviewed change '+actualId));
++  else assert.throws(f.load);
++ });
++}
++test('unassigned draft write remains blocking beside a valid published repair',t=>{
++ const f=fixture(t);writeFileSync(join(f.root,'items/thm-draft.md'),text('thm-draft','draft','Unauthorized edit.'));
++ const result=f.validate();assert.ok(result.errors.includes('unlicensed or unreviewed change thm-draft'));assert.ok(result.errors.includes('change without confirmed adjudication thm-draft'));
++ assert.throws(()=>collect(f.root,run,'initial',1),/unlicensed or unreviewed change thm-draft/);
++});
++test('a forged guard object cannot bypass any ordinary changed-item checks',t=>{
++ const f=fixture(t);
++ const result=validateReports(f.pack,f.reports,guards(f.root),{root:f.root,publishedLocalMaintenance:{guards:{[actualId]:itemHashGuard(f.current)}}});
++ assert.ok(result.errors.includes('unlicensed or unreviewed change '+actualId));
++});
++test('authenticated maintenance guards cannot be extended to draft writes',t=>{
++ const f=fixture(t),local=f.load();
++ assert.throws(()=>{local.guards['thm-draft']='x';},TypeError);
++});
++test('replay rejects modified receipts, claims, ledger, scientific evidence and source',t=>{
++ for(const defect of ['receipt','claim','ledger','science','source']){
++  const f=fixture(t);collect(f.root,run,'initial',1);
++  if(defect==='receipt')writeFileSync(join(f.root,f.receiptPath),JSON.stringify({...f.receipt,correction:'tampered'}));
++  if(defect==='claim')writeFileSync(f.claimFile,JSON.stringify({...f.claim,claimed_at:'2026-10-21T23:59:00Z'}));
++  if(defect==='ledger')writeFileSync(f.ledgerFile,readFileSync(f.ledgerFile,'utf8').replace('actual source','tampered source'));
++  if(defect==='science')writeFileSync(join(f.root,f.request.entries[0].scientific_evidence[0].path),'tampered');
++  if(defect==='source')writeFileSync(join(f.root,'items',actualId+'.md'),f.current+'Changed.');
++  assert.throws(()=>collect(f.root,run,'initial',1),undefined,defect);
++ }
++});
++test('unrelated append-only claims/ledger entries do not rewrite or invalidate a bound repair',t=>{
++ const f=fixture(t),result=collect(f.root,run,'initial',1);
++ writeFileSync(f.claimFile,readFileSync(f.claimFile,'utf8')+JSON.stringify({id:'unrelated'})+'\n');
++ writeFileSync(f.ledgerFile,readFileSync(f.ledgerFile,'utf8')+'Unrelated later maintenance.\n');
++ json(join(f.root,'.physics-autopilot',run,'state.json'),{run,stage:'5.2-impact',paused:false,dispatches:{},stages:{}});
++ assert.deepEqual(collect(f.root,run,'initial',1),result);
++});
++test('published consumers retained in frozen frontier enter maintenance, draft consumers enter native frontier',t=>{
++ const f=fixture(t),published='thm-published-consumer';
++ writeFileSync(join(f.root,'items',published+'.md'),text(published,'published','Uses supplier.',[actualId]));
++ writeFileSync(join(f.root,'items/thm-draft.md'),text('thm-draft','draft','Uses supplier.',[actualId]));
++ const frontier=freezeFrontier({run,batches:[{id:'1',items:[actualId,published]},{id:'2',items:['thm-draft']}]});json(join(f.dir,'frontier.json'),frontier);
++ const event={id:actualId,before_statement_sha256:statementHash(f.before),after_statement_sha256:statementHash(f.current)};
++ const after=syncMaintenance(f.root,run,[event]);
++ assert.equal(after.frontier_events.some(row=>row.consumer_id===published),false);
++ assert.ok(after.frontier_events.some(row=>row.consumer_id==='thm-draft'));
++ assert.ok(after.pending.some(row=>row.id===published));
++ const pack=prepareMaintenance(f.root,run).pack;assert.deepEqual(pack.ids,[published]);
++ assert.equal(maintenanceStatus(f.root,run).complete,false);
++});
++test('published repair never makes stale ordinary consumer review current',t=>{
++ const f=fixture(t);writeFileSync(join(f.root,'items/thm-draft.md'),text('thm-draft','draft','Uses supplier.',[actualId]));
++ const beforeContext=reviewContextHashes(f.root,['thm-draft'])['thm-draft'];
++ const consumerHash=itemHashGuard(readFileSync(join(f.root,'items/thm-draft.md'),'utf8'));
++ const review={id:'thm-draft',post_sha256:consumerHash,review_context_sha256:beforeContext.review_context_sha256};
++ assert.equal(reviewMatchesCurrent(readLibraryItems(f.root),guards(f.root),review),true);
++ writeFileSync(join(f.root,'items',actualId+'.md'),f.current.replace('## Statement\n','## Statement\nA later unreviewed supplier interface change.\n'));
++ assert.equal(reviewMatchesCurrent(readLibraryItems(f.root),guards(f.root),review),false);
++});
++
++test('resumed initial collection retains the paused application archive',t=>{
++ const f=fixture(t);json(join(f.root,'.physics-autopilot',run,'state.json'),{...f.state,paused:false});
++ assert.equal(collect(f.root,run,'initial',1).published_local_repairs.length,1);
++});
++test('resumed collection cannot hide an active writer behind a tool label',t=>{
++ const f=fixture(t);
++ json(join(f.root,'.physics-autopilot',run,'state.json'),{...f.state,paused:false,dispatches:{...f.state.dispatches,
++  '5.1-adjudicate:fake-collect':{role:'tool',stage:'5.1-adjudicate',label:'fake-collect',startedAt:'2026-10-22T00:03:00Z',endedAt:null}}});
++ assert.throws(f.load,/writers are not drained/);
++});
++
++test('ordinary remaining native units may finish after the archived application boundary',t=>{
++ const f=fixture(t);json(join(f.root,'.physics-autopilot',run,'state.json'),{...f.state,paused:false,dispatches:{...f.state.dispatches,
++  later:{role:'alpha-adjudicate',stage:'5.1-adjudicate',startedAt:'2026-10-22T00:03:00Z',endedAt:'2026-10-22T00:04:00Z'}}});
++ assert.equal(collect(f.root,run,'initial',1).published_local_repairs.length,1);
++});
+--- a/physics/WORKFLOW.md
++++ b/physics/WORKFLOW.md
+@@ -345,6 +345,44 @@
+ workers verify current arguments and bind only immutable evidence actually used.
+ Versioned root-published `RUN-owner-step5-support-supplement-*.json` supplies
+ later evidence without modifying indexes already used by workers.
++For an already-published local carrier excluded from original initial
++adjudication assignments, Root may bind a separate, genuine local correction
++through `research/RUN-step5-v2/owner-published-maintenance.json`. The version-1
++request has `run`, `phase: "initial"`, `round: 1`, `reviewer: "/root"`,
++`native_review: false`, `native_adjudication: false`, a concrete `reason`,
++`drained_state: {path, sha256}`, and nonempty `entries`. Each entry has `id`,
++the actual published claim `group`, `receipt: {path, sha256}`, and nonempty
++`scientific_evidence: [{path, sha256}, ...]`. Evidence paths are relative,
++run-local research paths; hashes bind exact raw bytes. Root explicitly adopts
++the actual scientific owner's focused repair and affected-consumer review in
++the request, without claiming a native worker performed that review.
++
++The source-application snapshot must be an actual paused, drained, unfinished
++`5.1-adjudicate` state. Apply only after source writers drain and preserve the
++published source with its prior audit before claiming and editing. At native
++collection, the current run must still be at unfinished `5.1-adjudicate`, every
++source dispatch must be drained, and no shared writer lock may exist. Collection
++may run after resume; the native `step5-wave-evidence` gate is an untracked
++read-only subprocess, not a source dispatch. Remaining original units may finish
++normally after the archived application boundary.
++
++Only an unassigned, nonimported published carrier in the exact frozen original
++frontier is eligible. Its policy-valid `verification.repair` receipt must match
++the actual run and claim group, original initial content and public-interface
++hashes, durable audited preimage, current source, canonical ledger marker and
++actual current successful focused checks. Current audit stamps are replaced by
++this local repair state. Collection binds the immutable request, receipt,
++preimage and scientific evidence, records the exact claim-row and ledger-block
++hashes, and revalidates them on replay. Unrelated canonical claim/ledger appends
++remain legal. No native author, review, decision, judge tuple or gate authority
++is created. Every unlisted source change retains ordinary licensing checks.
++Published interface changes still produce normal consumer events; published
++consumers remain in separate maintenance even when their IDs occur in the
++frozen frontier. Draft consumer inventory, genuine current native reviews,
++context checks, owner recertification and the complete gate battery remain
++required. The initial pack, original reports and mechanical zero-work results
++stay immutable.
++
+ The native Sol 6.1 high worker identity is independent of the Step-4 judge lineup.
+ Coverage gates retain the singleton original Step-4 lineup bound by the frozen
+ `step4-verdicts.json` and initial adjudication pack. Before Step 5 is frozen,

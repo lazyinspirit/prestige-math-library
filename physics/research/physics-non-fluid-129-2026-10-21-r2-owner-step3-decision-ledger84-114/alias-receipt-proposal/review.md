@@ -1,0 +1,7 @@
+# Actual root-approved page alias receipt proposal
+
+The prospective canonical alias receipt uses root's actual scientific classification record, raw SHA256 `959b084d0879dee494b1e94eed0a778f469cba4be5110daaee7f7dc823d20958`, unchanged. Both original finding labels and severities remain bound. Its authentic old page archive matches the immutable pre snapshot, whose file/manifest fingerprint matches both native observations; the current library path, guarded manifest, exact source excerpts and used supplier are also bound.
+
+`canonical-alias-receipt.proposal.json` has raw SHA256 `c42bf80991a61f1956b043c559fbe770005762de9bdbf9470e09e528362b1d8a`. `decision-field-patch.proposal.json` adds that exact raw receipt hash to the existing flagged106 decision, preserving its verdict, single existing defect ID, source-carrier stamp and all unrelated fields. If root combines more aliases into one receipt, its final raw hash must be recalculated and every referencing decision rebound.
+
+The isolated candidate-helper preflight passed with this exact actual root record and prospective receipt. All nine receipt input guards and the current decision guard matched. The item-only baseline rejects this page receipt as expected; changing the root record inside the isolated fixture also causes candidate rejection. No live receipt, native decision, root classification record, source or canonical helper was written. Outside-helper approval and root adoption/current certification remain pending.

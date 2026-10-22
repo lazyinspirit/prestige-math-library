@@ -1,0 +1,80 @@
+--- a/tools/physics-support/physics-content.mjs
++++ b/tools/physics-support/physics-content.mjs
+@@ -1,6 +1,7 @@
+-// Physics-only content policy. Pure functions are shared by planning and gates.
+-import { readFileSync, readdirSync, existsSync } from 'node:fs';
+-import { join, basename } from 'node:path';
++// Physics-only content policy shared by planning and gates.
++import { readFileSync, readdirSync, existsSync, realpathSync } from 'node:fs';
++import { join, basename, resolve } from 'node:path';
++import { recordedPublishedRepair } from './published-repair-policy.mjs';
+ import { parseFrontmatter, referenceUrls, openProblemErrors } from './content-policy-lib.mjs';
+ import { splitFrontmatter, sectionText } from './facts-block.mjs';
+ import { readOriginalItemIdentity } from './original-item-index.mjs';
+@@ -17,6 +18,26 @@
+ const text = value => typeof value === 'string' && value.trim();
+ const object = value => value && typeof value === 'object' && !Array.isArray(value);
+ 
++// Loader provenance is filesystem context only, never publication acceptance.
++// Every use rechecks the actual current carrier and authoritative repair policy.
++const repositorySources = new WeakMap();
++function recordedLocalPublication(item, sourceContext) {
++  const context = sourceContext && repositorySources.get(sourceContext);
++  if (!context || !text(item.verification?.repair) || context.importedIds.has(item.id)) return false;
++  try {
++    const file = join(context.root, 'items', `${item.id}.md`);
++    if (!/^[a-z][a-z0-9-]*$/.test(item.id) || resolve(item.file) !== file || realpathSync(file) !== file) return false;
++    const importsFile = join(context.root, 'research/math-imports.json');
++    const importsRaw = existsSync(importsFile) ? readFileSync(importsFile, 'utf8') : null;
++    if (importsRaw !== context.importsRaw) return false;
++    const current = readItem(file);
++    // Planned overlays and caller-modified metadata cannot borrow the audited
++    // history of different source bytes or a different parsed carrier.
++    if (current.raw !== item.raw || JSON.stringify(current) !== JSON.stringify(item)) return false;
++    return recordedPublishedRepair(context.root, item.id, current.raw, current.verification?.repair).ok === true;
++  } catch { return false; }
++}
++
+ export function readItem(file) {
+   const raw = readFileSync(file, 'utf8');
+   const { fm, body } = splitFrontmatter(raw);
+@@ -27,7 +48,7 @@
+   return readdirSync(dir, { withFileTypes: true }).flatMap(e => e.isDirectory() ? markdownFiles(join(dir, e.name)) : e.name.endsWith('.md') ? [join(dir, e.name)] : []);
+ }
+ 
+-export function validatePhysicsContent({ items, pages = [], importedIds = new Set(), requireBodies = true, selectedItems = null, selectedPages = null, importedReferenceContext = null }) {
++export function validatePhysicsContent({ items, pages = [], importedIds = new Set(), requireBodies = true, selectedItems = null, selectedPages = null, importedReferenceContext = null, sourceContext = null }) {
+   const errors = [];
+   const graphContext = new Set();
+   const structural = new Set(['edge-shape', 'edge-unresolved', 'math-physics-dependency', 'item-cycle', 'item-frontmatter-invalid', 'domain-required', 'physical-kind-domain', 'mathematical-kind-domain', 'role-supplier', 'mathematical-role', 'open-problem-dependency']);
+@@ -149,7 +170,8 @@
+       if (!sectionText(item.body, 'Statement').trim() || !sectionText(item.body, 'Proof').trim() || !text(item.proof_strategy)) error('physical-proof', item.id, 'require Statement, Proof, and proof_strategy');
+       if (['not-applicable', 'not-supplied', undefined].includes(item.provenance?.proof)) error('physical-proof-provenance', item.id, 'physical conclusions require proof provenance');
+       if (item.proved_here === false) error('physical-proof-omitted', item.id, 'physics theorem and thought experiment must have complete arguments');
+-      if (item.status === 'published' && !item.verification?.audited && !object(item.verification?.verified)) error('physical-publication', item.id, 'publication requires proof audit');
++      if (item.status === 'published' && !item.verification?.audited && !object(item.verification?.verified)
++        && !recordedLocalPublication(item, sourceContext)) error('physical-publication', item.id, 'publication requires proof audit');
+     }
+   }
+   // Prerequisites are acyclic; relations are intentionally excluded.
+@@ -195,7 +217,9 @@
+ }
+ 
+ export function loadPhysicsRepository(root, plan = null, selectedPages = null) {
+-  const imports = existsSync(join(root, 'research/math-imports.json')) ? JSON.parse(readFileSync(join(root, 'research/math-imports.json'), 'utf8')) : { files: [] };
++  root = realpathSync(resolve(root));
++  const importsRaw = existsSync(join(root, 'research/math-imports.json')) ? readFileSync(join(root, 'research/math-imports.json'), 'utf8') : null;
++  const imports = importsRaw === null ? { files: [] } : JSON.parse(importsRaw);
+   const importedIds = new Set(imports.files.filter(f => f.path.startsWith('items/')).map(f => basename(f.path, '.md')));
+   const items = markdownFiles(join(root, 'items')).map(file => {
+     try { return readItem(file); }
+@@ -258,5 +282,7 @@
+       throw Error(`imported nonlogical original identity changed during lookup: ${token}`);
+     return { ...original, domain: original.domain ?? 'mathematics' };
+   };
+-  return { items, pages, importedIds, importedReferenceContext };
+-}
++  const sourceContext = Object.freeze({});
++  repositorySources.set(sourceContext, { root, importsRaw, importedIds: new Set(importedIds) });
++  return { items, pages, importedIds, importedReferenceContext, sourceContext };
++}

@@ -1,0 +1,95 @@
+{
+  "id": "def-tgrx-finite-fusion-count-model",
+  "boundaries": [
+    {
+      "case": "empty",
+      "status": "checked",
+      "evidence": "Definition requires a finite nonempty label set I; the empty label set is outside the carrier."
+    },
+    {
+      "case": "zero",
+      "status": "checked",
+      "evidence": "Definition assigns no normalized operator when D_n=0; no zero-dimensional density matrix is claimed."
+    },
+    {
+      "case": "one",
+      "status": "checked",
+      "evidence": "Definition permits D_n=1, for which H_n is one-dimensional and rho_n is the identity."
+    },
+    {
+      "case": "degenerate",
+      "status": "checked",
+      "evidence": "Definition permits repeated transition copies; N_ab records their multiplicity without requiring distinct label values."
+    },
+    {
+      "case": "endpoints",
+      "status": "checked",
+      "evidence": "Definition includes n=0; D_0=(N^0)_00=1."
+    },
+    {
+      "case": "nonempty-choice",
+      "status": "checked",
+      "evidence": "Definition supplies finite label and matrix data; the construction uses finite sums and no arbitrary-family choice."
+    },
+    {
+      "case": "iff-forward",
+      "status": "not_applicable",
+      "reason": "The Statement gives explicit definitions or one-way conclusions and contains no biconditional."
+    },
+    {
+      "case": "iff-reverse",
+      "status": "not_applicable",
+      "reason": "The Statement gives explicit definitions or one-way conclusions and contains no biconditional."
+    }
+  ],
+  "reference_flags": [],
+  "audit_flags": []
+}
+---
+id: def-tgrx-finite-fusion-count-model
+kind: definition
+title: Finite fusion transfer count model
+status: draft
+origin: pipeline
+pipeline_run: physics-non-fluid-129-2026-10-21-r2
+domain: mathematics
+library: mathematics
+dependency_level: 0
+deps:
+  - def-inner-product-space
+dependency_roles:
+  def-inner-product-space: mathematical-premise
+justified_by: []
+aliases: []
+forward_refs: []
+physical_scope: null
+provenance:
+  statement: ai-altered
+  proof: not-applicable
+verification:
+  precheck: pending
+sources:
+  references:
+    - title: Daniel Harlow, The Ryu-Takayanagi Formula from Quantum Error Correction, complete paper, Appendix A.7.2-A.7.3
+      url: https://arxiv.org/pdf/1607.03901
+      locator: Complete 62-page paper; Appendix A.7.2-A.7.3, PDF pp. 52-54, finite-dimensional sectors and entropy conventions.
+    - title: John Watrous, The Theory of Quantum Information, complete author-hosted book manuscript
+      url: https://jhwatrous.github.io/TQI.pdf
+      locator: Complete 598-page book manuscript; Section 5.2, finite-dimensional entropy and density matrices.
+---
+
+## Definition
+
+A **finite fusion transfer count model** consists of a finite nonempty label set $I$, a distinguished label $0\in I$, and an explicitly supplied matrix $N=(N_{ab})_{a,b\in I}$ whose entries lie in $\{0,1,2,\ldots\}$. The entry $N_{ab}$ is the multiplicity of elementary transitions from label $b$ to label $a$; formally, the transition copies from $b$ to $a$ are the triples $(b,a,j)$ with integer $1\leq j\leq N_{ab}$. A length-$n$ path is a sequence of $n+1$ labels together with a chosen transition copy between each consecutive pair. View each natural-number entry as a real number under the usual inclusion $\mathbb N\subset\mathbb R$. For a finite set $J$ and $F=\mathbb R$ or $\mathbb C$, $F^J$ means the functions $J\to F$, with pointwise addition $(x+y)_j=x_j+y_j$ and scalar multiplication $(\lambda x)_j=\lambda x_j$. For real matrices $A,B$ indexed by $I$, define $(A+B)_{ab}:=A_{ab}+B_{ab}$. Their action on $x\in\mathbb R^I$ is $(Ax)_a:=\sum_{b\in I}A_{ab}x_b$. Matrix multiplication is $(AB)_{ac}:=\sum_{b\in I}A_{ab}B_{bc}$; it is associative by regrouping finite sums. These definitions are compatible because $((AB)x)_a=\sum_{b,c\in I}A_{ab}B_{bc}x_c=\sum_{b\in I}A_{ab}(Bx)_b=(A(Bx))_a$, and $((A+B)C)_{ac}=\sum_b(A_{ab}+B_{ab})C_{bc}=(AC)_{ac}+(BC)_{ac}$. Thus the natural-entry powers can also act on real vectors and the addition used below distributes over matrix multiplication. Let $I_I$ be the identity matrix with entries $(I_I)_{ab}=1$ if $a=b$ and $0$ otherwise, and use the power convention $N^0:=I_I$ and $N^{n+1}:=NN^n$ for $n\geq0$. Define the vacuum-return count $D_n:=(N^n)_{00}$. If $D_n>0$, set $H_n:=\mathbb C^{D_n}$, with coordinates $x=(x_1,\ldots,x_{D_n})$ and inner product $\langle x,y\rangle:=\sum_{j=1}^{D_n}x_j\overline{y_j}$, linear in the first argument. This pairing satisfies the inner-product axioms of [[def-inner-product-space]]: finite distributivity gives $\langle\alpha x+\beta z,y\rangle=\alpha\langle x,y\rangle+\beta\langle z,y\rangle$, and conjugating the finite sum gives $\overline{\langle y,x\rangle}=\sum_j\overline{y_j}x_j=\langle x,y\rangle$. Writing $x_j=a_j+ib_j$ with real $a_j,b_j$ gives $\langle x,x\rangle=\sum_j(a_j^2+b_j^2)\geq0$; if this sum is zero, each nonnegative summand is zero, hence every $a_j=b_j=0$ and $x=0$. Conversely $x=0$ gives zero. The conjugation identities used here follow directly from $\overline{a+ib}=a-ib$ and finite distributivity. Therefore $H_n$ is a finite-dimensional complex inner-product space; its coordinate unit vectors form a basis since every $x$ equals their linear combination with coefficients $x_j$, and a zero combination forces every coefficient to vanish. Let $I_{H_n}$ be its identity endomorphism and define $\rho_n:=D_n^{-1}I_{H_n}$. If $D_n=0$, no normalized operator $\rho_n$ is assigned. The matrix $N$ is model data; no fusion category, quantum group, or representation is presumed to realize it.
+
+## Definition references
+
+[[def-inner-product-space]]
+
+[Daniel Harlow, The Ryu-Takayanagi Formula from Quantum Error Correction](https://arxiv.org/pdf/1607.03901)
+
+[John Watrous, The Theory of Quantum Information](https://jhwatrous.github.io/TQI.pdf)
+
+## Remarks
+
+The definition records a finite matrix count only. It does not assert the existence of a fusion category or identify $D_n$ with a gravitational state count.

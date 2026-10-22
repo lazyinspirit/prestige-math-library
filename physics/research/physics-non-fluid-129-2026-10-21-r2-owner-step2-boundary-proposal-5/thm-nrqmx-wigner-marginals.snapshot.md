@@ -1,0 +1,98 @@
+---
+id: thm-nrqmx-wigner-marginals
+kind: theorem
+domain: mathematics
+library: mathematics
+title: Wigner pairing and marginals
+status: draft
+origin: pipeline
+dependency_level: 1
+deps:
+  - def-nrqmx-weyl-symbol-wigner
+  - def-schwartz-space-and-its-seminorms
+  - thm-fourier-transform-maps-schwartz-space-continuously-to-itself
+  - thm-fourier-inversion-on-schwartz-space
+  - thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces
+  - cor-c-one-change-of-variables-for-l-one-functions
+  - lem-euclidean-gaussian-fourier-transform-with-two-pi-normalization
+  - lem-complex-integration-by-parts-on-intervals-and-decaying-lines
+  - def-countable-choice
+dependency_roles:
+  def-nrqmx-weyl-symbol-wigner: mathematical-premise
+  def-schwartz-space-and-its-seminorms: mathematical-premise
+  thm-fourier-transform-maps-schwartz-space-continuously-to-itself: mathematical-premise
+  thm-fourier-inversion-on-schwartz-space: mathematical-premise
+  thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces: mathematical-premise
+  cor-c-one-change-of-variables-for-l-one-functions: mathematical-premise
+  lem-euclidean-gaussian-fourier-transform-with-two-pi-normalization: mathematical-premise
+  lem-complex-integration-by-parts-on-intervals-and-decaying-lines: mathematical-premise
+  def-countable-choice: mathematical-premise
+justified_by: []
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+sources:
+  references:
+    - title: Gianfausto Dell’Antonio, Lectures on the Mathematics of Quantum Mechanics, Volume II (2016)
+      url: https://people.sissa.it/~gianfa/sito-web/%20Dell%27Antonio%20%20Mathematics%20of%20Quantum%20Mechanics%20II%20.pdf
+      locator: Lecture 1, §1, printed pp. 15–18; Lemma 1.2 states the two marginals but omits its proof
+    - title: Stéphane Nonnenmacher, Introduction to Semiclassical Analysis, lecture notes (2019)
+      url: https://www.imo.universite-paris-saclay.fr/~stephane.nonnenmacher/enseign/Cours-Semiclassical-Analysis2019-lecture1-8.pdf
+      locator: Weyl quantization convention, §3.3, printed pp. 16–17
+    - title: Lawrence C. Evans and Maciej Zworski, Lectures on Semiclassical Analysis
+      url: https://math.mit.edu/~vwg/semiclassicalEvansZworski.pdf
+      locator: Chapter 4, §4.2, printed pp. 58–65
+verification:
+  precheck: pending
+---
+
+## Statement
+
+Assume the Axiom of Countable Choice. Let $d\geq1$, $\epsilon>0$, $a\in\mathcal S(\mathbb R^{2d})$, and $u\in\mathcal S(\mathbb R^d)$ satisfy $\|u\|_2=1$. With the definitions of [def-nrqmx-weyl-symbol-wigner], the Wigner distribution $W_\epsilon[u]$ is real and integrable, and
+
+$$ \langle\operatorname{Op}^W_\epsilon(a)u,u\rangle=\int_{\mathbb R^{2d}}a(x,\xi)W_\epsilon[u](x,\xi)\,dx\,d\xi , $$
+
+$$ \int_{\mathbb R^d}W_\epsilon[u](x,\xi)\,d\xi=|u(x)|^2,\qquad \int_{\mathbb R^d}W_\epsilon[u](x,\xi)\,dx=|(\mathcal F_\epsilon u)(\xi)|^2. $$
+
+The Wigner distribution need not be nonnegative.
+
+## Statement references
+
+[[def-nrqmx-weyl-symbol-wigner]]
+
+## Facts & Assumptions
+
+**Given:** Countable Choice, $d\geq1$, $\epsilon>0$, $a\in\mathcal S(\mathbb R^{2d})$, and normalized $u\in\mathcal S(\mathbb R^d)$.
+
+[A1] Assume the Axiom of Countable Choice $\mathrm{AC}_\omega$ ([[def-countable-choice]]).
+
+[F1] The space $\mathcal S(\mathbb R^n)$ consists of smooth functions whose polynomially weighted derivatives are bounded ([[def-schwartz-space-and-its-seminorms]]).
+
+[F2] The Weyl kernel and Wigner formula, the inner product convention, and the scaled Fourier transform are exactly those of [[def-nrqmx-weyl-symbol-wigner]].
+
+[F3] The negative-sign Fourier transform preserves Schwartz space ([[thm-fourier-transform-maps-schwartz-space-continuously-to-itself]]).
+
+[F4] Fourier inversion holds pointwise for Schwartz functions, with absolutely convergent inverse integral ([[thm-fourier-inversion-on-schwartz-space]]).
+
+[F5] Absolutely integrable functions on a sigma-finite product may be integrated in either order ([[thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces]]).
+
+[F6] The normalized Gaussian Fourier integral is $\int e^{-y^2/(4\epsilon)}e^{-iy\xi/\epsilon}\,dy=2\sqrt{\pi\epsilon}\,e^{-\xi^2/\epsilon}$ in dimension one ([[lem-euclidean-gaussian-fourier-transform-with-two-pi-normalization]]).
+
+[F7] Integration by parts on the real line is valid for integrable derivative products with vanishing endpoint products ([[lem-complex-integration-by-parts-on-intervals-and-decaying-lines]]).
+
+[F8] If $T:U\to V$ is a $C^1$ diffeomorphism of open Euclidean sets and $f\in L^1(V;\mathbb C)$, then $\int_V f=\int_U(f\circ T)|\det DT|$. The affine maps used below (linear changes, reflection, and positive scaling on $\mathbb R^n$) are such diffeomorphisms; every transformed integrand is Schwartz or a product of Schwartz functions and is therefore in $L^1$ ([[cor-c-one-change-of-variables-for-l-one-functions]]).
+
+## Proof
+**Given:** The data of the Statement and [A1]–[F8].
+
+1.1 The map $(x,y)\mapsto((x+y)/2,x-y)$ is an invertible linear map with absolute determinant $1$. The product of $a$, $u$, and $\overline u$ in the Weyl pairing is Schwartz in the transformed variables, so it is absolutely integrable. Fubini [F5] and change of variables [F8] give $$ \langle\operatorname{Op}^W_\epsilon(a)u,u\rangle=(2\pi\epsilon)^{-d}\int e^{ir\cdot\xi/\epsilon}a(q,\xi)u(q-r/2)\overline{u(q+r/2)}\,dq\,dr\,d\xi . $$ Applying [F8] to the reflection $y=-r$ turns the last two factors and the exponential into the defining integrand of $W_\epsilon[u]$; hence the pairing identity follows. [given, A1, F2, F5, F8, algebra]
+
+1.2 The function $g(x,y):=u(x+y/2)\overline{u(x-y/2)}$ is Schwartz on $\mathbb R^{2d}$, because $(x,y)\mapsto(x+y/2,x-y/2)$ is invertible linear and products of Schwartz functions are Schwartz. Its full negative-sign $2\pi$ Fourier transform $\widehat g(\eta,\zeta)$ is Schwartz by [F3]; applying inverse Fourier transformation in $\eta$ by [F4] gives the partial transform $\int e^{-2\pi i y\cdot\zeta}g(x,y)\,dy$, Schwartz jointly in $(x,\zeta)$. The desired partial transform with phase $e^{-iy\cdot\zeta'}$ is this function at $\zeta=\zeta'/(2\pi)$; frequency dilation preserves Schwartz space. Replacing $\zeta'$ by $\xi/\epsilon$ and multiplying by $(2\pi\epsilon)^{-d}$ therefore gives $W_\epsilon[u]\in\mathcal S(\mathbb R^{2d})\subset L^1$. Conjugating the defining integral and applying [F8] to the reflection $y\mapsto-y$ returns the same integral, so $W_\epsilon[u]$ is real. [given, A1, F1, F3, F4, F8, algebra]
+
+1.3 Fix $x$ and set $f_x(y):=u(x+y/2)\overline{u(x-y/2)}$. The integrand $\widehat f_x$ is Schwartz and hence in $L^1$. Apply [F8] to the positive scaling $\eta\mapsto\xi=\epsilon\eta$, whose Jacobian is $\epsilon^d$, to obtain the substitution $\eta=\xi/\epsilon$ and $d\xi=\epsilon^d d\eta$. Write $\widehat f_x(\eta)=\int e^{-iy\cdot\eta}f_x(y)\,dy$, the rescaled negative-sign $2\pi$ transform. Then $$ \int W_\epsilon[u](x,\xi)\,d\xi=(2\pi)^{-d}\int\widehat{f_x}(\eta)\,d\eta=f_x(0)=|u(x)|^2, $$ where the middle equality follows from [F4] at zero after the change from the library frequency $\eta/(2\pi)$ to $\eta$, also covered by [F8]. All integrals are absolutely convergent because $f_x,\widehat{f_x}\in\mathcal S$. [given, A1, F3, F4, F8, algebra]
+
+1.4 For the momentum marginal, $u\in\mathcal S\subseteq L^1$, so the double integral in $x,y$ is absolutely integrable by Fubini [F5]. The affine change $(x,y)\mapsto(q,r)=(x+y/2,x-y/2)$ has absolute determinant $1$ and $q-r=y$; [F8] therefore gives $$ \int W_\epsilon[u](x,\xi)\,dx=(2\pi\epsilon)^{-d}\int e^{-i(q-r)\cdot\xi/\epsilon}u(q)\overline{u(r)}\,dq\,dr=|(\mathcal F_\epsilon u)(\xi)|^2. $$ The last equality is the product of the scaled Fourier integral with its complex conjugate. [given, A1, F2, F5, F8, algebra]
+
+2.1 To see that nonnegativity fails, set $v_\epsilon(x)=\sqrt{2/\epsilon}(\pi\epsilon)^{-1/4}x e^{-x^2/(2\epsilon)}$. Substituting $x=\sqrt\epsilon\,s$ and applying [F6] at Gaussian parameter $1/4$ gives $\int e^{-s^2}ds=\sqrt\pi$; one integration by parts [F7] then gives $\int s^2e^{-s^2}ds=\sqrt\pi/2$, hence $\int x^2e^{-x^2/\epsilon}dx=\sqrt\pi\,\epsilon^{3/2}/2$ and $\|v_\epsilon\|_2=1$. At the origin, $$ W_\epsilon[v_\epsilon](0,0)=-(2\pi\epsilon)^{-1}\frac{1}{2\epsilon\sqrt{\pi\epsilon}}\int y^2e^{-y^2/(4\epsilon)}\,dy=-\frac1{\pi\epsilon}<0. $$ Here the Gaussian second moment is obtained from [F6] at $\xi=0$ by one integration by parts [F7]. Thus $W_\epsilon[v_\epsilon]$ is a normalized Schwartz Wigner distribution with a negative value. [given, A1, F6, F7, algebra] ∎ 
+

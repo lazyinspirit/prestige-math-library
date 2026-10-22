@@ -1,0 +1,721 @@
+{
+  "version": 1,
+  "scope": [
+    "def-emg-fx-cochain-maxwell",
+    "alg-emg-fx-leapfrog-cochains",
+    "prop-emg-fx-discrete-gauss-preservation",
+    "lem-emg-fx-finite-step-termination",
+    "cex-emg-fx-cfl-discrete-growth"
+  ],
+  "contracts": {
+    "def-emg-fx-cochain-maxwell": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition permits zero-dimensional C^k and explicitly uses the unique empty inverse."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition gives zero constraints and zero energy at b=d=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition includes n_k=1 without changing any matrix-shape condition."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition permits D_1=0 but requires each positive-dimensional mass matrix to remain positive definite."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The definition specifies trajectories on an open interval and asserts no endpoint extension."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition supplies the bases, matrices and state coordinates as input; it makes no selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition contains no converse claim."
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "lem-cm-positive-definite-matrix-square-roots",
+          "carrier": "items/lem-cm-positive-definite-matrix-square-roots.md",
+          "status": "Current supplier interface inspected for this item; no additional review approval asserted.",
+          "source_section": "Statement",
+          "exact_statement": "Let $n\\ge1$ and let $M\\in M_n(\\mathbb R)$ be symmetric and positive definite, that is $v^{\\mathsf T}Mv>0$ for every nonzero $v\\in\\mathbb R^n$; identify $\\mathbb R^n$ with its standard real inner product space ([[def-euclidean-inner-product]]). Then:\n\n1. $M$ is invertible and $M^{-1}$ is symmetric and positive definite;\n2. there is a unique symmetric positive definite matrix $M^{1/2}$ with $(M^{1/2})^2=M$;\n3. $M^{-1/2}:=(M^{1/2})^{-1}$ is symmetric and positive definite, satisfies $(M^{-1/2})^2=M^{-1}$, and $M^{-1/2}MM^{-1/2}=I_n$;\n4. for every symmetric matrix $K$ that is non-negative, that is $v^{\\mathsf T}Kv\\ge0$ for all $v$, the matrix $S:=M^{-1/2}KM^{-1/2}$ is symmetric and non-negative, and $S$ is positive definite if and only if $K$ is.",
+          "relevant_hypotheses_and_conventions": "The statement assumes a real symmetric positive-definite matrix in positive finite dimension. Its zero-dimensional case is supplied explicitly by the consumer.",
+          "supplier_proof_status": "published; exact current interface and complete supplied proof inspected; no independent approval inferred.",
+          "consumer_use": "Used only for the stated finite-data or well-definedness interface."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-25 author self-review",
+        "notes": "Checked the finite spaces, dual maps, zero-composition assumptions, mass-map types, state equations and explicit absence of a continuum or symplectic claim."
+      },
+      "finite_checks": [
+        {
+          "name": "zero-dimensional blocks",
+          "inputs": [
+            "Definition"
+          ],
+          "expected": "The empty inverse is the unique map on the zero-dimensional space, and the state equations and constraints retain their declared types."
+        }
+      ]
+    },
+    "alg-emg-fx-leapfrog-cochains": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition and algorithm instructions explicitly cover this case: The algorithm explicitly treats n_1=0 by the empty inverse and empty elimination loop."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition and algorithm instructions explicitly cover this case: For N=0 the output is exactly the supplied initial state, with no update."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition and algorithm instructions explicitly cover this case: For n_1=1 the pivot loop has one column and one finite row search."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition and algorithm instructions explicitly cover this case: Positive definiteness excludes a singular M_1; the termination lemma proves the error branch is unreachable."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition and algorithm instructions explicitly cover this case: The output includes both n=0 and n=N, including the N=0 case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition and algorithm instructions use a fixed coordinate order and make no arbitrary selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The algorithm states no biconditional property."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The algorithm states no converse property."
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "def-emg-fx-cochain-maxwell",
+          "carrier": "items/def-emg-fx-cochain-maxwell.md",
+          "status": "Current supplier interface inspected for this item; no additional review approval asserted.",
+          "source_section": "Definition",
+          "exact_statement": "Fix nonnegative integers $n_0,n_1,n_2,n_3$ and ordered coordinate bases, and put $C^k:=\\mathbb R^{n_k}$ for $k=0,1,2,3$. The dual space $(C^k)^*$ is the vector space of linear functionals $C^k\\to\\mathbb R$, with the dual basis to the chosen coordinate basis. Let $D_0\\in\\mathbb R^{n_1\\times n_0}$, $D_1\\in\\mathbb R^{n_2\\times n_1}$, and $D_2\\in\\mathbb R^{n_3\\times n_2}$ be linear maps satisfying $D_1D_0=0$ and $D_2D_1=0$. This data is a finite cochain complex. The transpose $D_k^{\\mathsf T}$ denotes the representing matrix of the dual linear map in the dual bases. Let $M_1\\in\\mathbb R^{n_1\\times n_1}$ and $M_2\\in\\mathbb R^{n_2\\times n_2}$ be symmetric positive-definite matrices: $v^{\\mathsf T}M_kv>0$ for each nonzero $v\\in C^k$. They represent linear maps $M_1:C^1\\to(C^1)^*$ and $M_2:C^2\\to(C^2)^*$ in the chosen bases; in positive dimensions their inverses exist by the finite-dimensional positive-matrix result cited below, and the unique map on a zero-dimensional space is its own inverse.\n\nThe finite state space is $\\mathcal X:=C^2\\oplus(C^1)^*$, with state $(b,d)$, where $b$ is a column of $C^2$ coordinates and $d$ is a column in the dual basis of $(C^1)^*$. In this item, “phase space” means this finite-dimensional state space only; no symplectic form is asserted. On an open interval $J\\subseteq\\mathbb R$, a semidiscrete trajectory is a continuously differentiable map $t\\mapsto(b(t),d(t))\\in\\mathcal X$ satisfying\n\n$$\\dot b(t)=-D_1M_1^{-1}d(t),\\qquad \\dot d(t)=D_1^{\\mathsf T}M_2b(t).$$\n\nIts two discrete constraints are $D_2b(t)=0$ in $C^3$ and $D_0^{\\mathsf T}d(t)=0$ in $(C^0)^*$. The associated quadratic energy is\n\n$$\\mathcal E(b,d):=\\tfrac12\\left(b^{\\mathsf T}M_2b+d^{\\mathsf T}M_1^{-1}d\\right).$$\n\nAll objects here are finite-dimensional real linear-algebra data. The term “Maxwell” names this algebraic model and does not identify it with a continuum Maxwell or Einstein–Maxwell solution.",
+          "relevant_hypotheses_and_conventions": "The supplier assumes finite real coordinate spaces in fixed ordered bases and states both zero-composition identities and symmetric positive-definite mass maps. Its phase-space term means only the state space; no symplectic or continuum structure is claimed.",
+          "supplier_proof_status": "draft; exact current Definition inspected; no deductive proof section is supplied.",
+          "consumer_use": "Used by the Definition for the exact finite spaces, matrix shapes and state types."
+        },
+        {
+          "supplier": "lem-emg-fx-finite-step-termination",
+          "carrier": "items/lem-emg-fx-finite-step-termination.md",
+          "status": "Current supplier interface inspected for this item; no additional review approval asserted.",
+          "source_section": "Statement",
+          "exact_statement": "For rational admissible input matrices and initial state, positive rational step size $\\tau$, and finite $N\\geq0$, the specified finite leapfrog algorithm returns after finitely many exact rational arithmetic operations, with the stated $N+1$ states and the exact rational inverse $M_1^{-1}$. A dense implementation uses $O(n_1^3)$ rational arithmetic operations for the one-time elimination and $O(n_1^2+n_1n_2+n_2^2)$ per update. Retaining all input matrices $D_0,D_1,D_2,M_1,M_2$, the computed inverse, and all $N+1$ states uses $O(n_1n_0+n_1^2+n_1n_2+n_2^2+n_2n_3+(N+1)(n_1+n_2))$ rational entries. These are arithmetic-operation and storage counts only; they give no bound on rational bit growth, floating-point roundoff, linear-solve residuals, or continuum accuracy.",
+          "relevant_hypotheses_and_conventions": "The exact supplier hypotheses and conventions are stated in the quoted current interface.",
+          "supplier_proof_status": "draft; exact current Statement and complete supplied proof inspected; no independent approval inferred.",
+          "consumer_use": "The justified-by lemma proves that the fixed no-row-swap schedule terminates and returns the exact inverse."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-25 author self-review",
+        "notes": "Checked the input domain, fixed no-row-swap schedule, exact rational operations, step ordering, output count and N=0 behavior against its well-definedness lemma."
+      },
+      "finite_checks": [
+        {
+          "name": "zero update count",
+          "inputs": [
+            "Definition"
+          ],
+          "expected": "For N=0 the output is exactly the initial (b_0,d_{1/2}) state."
+        },
+        {
+          "name": "deterministic pivot",
+          "inputs": [
+            "Definition"
+          ],
+          "expected": "For admissible positive-definite M_1, the fixed no-row-swap schedule has a positive pivot at every column; no pivot failure occurs."
+        }
+      ]
+    },
+    "prop-emg-fx-discrete-gauss-preservation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-emg-fx-cochain-maxwell",
+          "source_section": "Definition",
+          "quote": "Fix nonnegative integers $n_0,n_1,n_2,n_3$ and ordered coordinate bases, and put $C^k:=\\mathbb R^{n_k}$ for $k=0,1,2,3$. The dual space $(C^k)^*$ is the vector space of linear functionals $C^k\\to\\mathbb R$, with the dual basis to the chosen coordinate basis. Let $D_0\\in\\mathbb R^{n_1\\times n_0}$, $D_1\\in\\mathbb R^{n_2\\times n_1}$, and $D_2\\in\\mathbb R^{n_3\\times n_2}$ be linear maps satisfying $D_1D_0=0$ and $D_2D_1=0$. This data is a finite cochain complex. The transpose $D_k^{\\mathsf T}$ denotes the representing matrix of the dual linear map in the dual bases. Let $M_1\\in\\mathbb R^{n_1\\times n_1}$ and $M_2\\in\\mathbb R^{n_2\\times n_2}$ be symmetric positive-definite matrices: $v^{\\mathsf T}M_kv>0$ for each nonzero $v\\in C^k$. They represent linear maps $M_1:C^1\\to(C^1)^*$ and $M_2:C^2\\to(C^2)^*$ in the chosen bases; in positive dimensions their inverses exist by the finite-dimensional positive-matrix result cited below, and the unique map on a zero-dimensional space is its own inverse.\n\nThe finite state space is $\\mathcal X:=C^2\\oplus(C^1)^*$, with state $(b,d)$, where $b$ is a column of $C^2$ coordinates and $d$ is a column in the dual basis of $(C^1)^*$. In this item, “phase space” means this finite-dimensional state space only; no symplectic form is asserted. On an open interval $J\\subseteq\\mathbb R$, a semidiscrete trajectory is a continuously differentiable map $t\\mapsto(b(t),d(t))\\in\\mathcal X$ satisfying\n\n$$\\dot b(t)=-D_1M_1^{-1}d(t),\\qquad \\dot d(t)=D_1^{\\mathsf T}M_2b(t).$$\n\nIts two discrete constraints are $D_2b(t)=0$ in $C^3$ and $D_0^{\\mathsf T}d(t)=0$ in $(C^0)^*$. The associated quadratic energy is\n\n$$\\mathcal E(b,d):=\\tfrac12\\left(b^{\\mathsf T}M_2b+d^{\\mathsf T}M_1^{-1}d\\right).$$\n\nAll objects here are finite-dimensional real linear-algebra data. The term “Maxwell” names this algebraic model and does not identify it with a continuum Maxwell or Einstein–Maxwell solution.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-emg-fx-leapfrog-cochains",
+          "source_section": "Definition",
+          "quote": "Use the finite cochain data fixed by the preceding definition item, namely finite real coordinate spaces $C^0,C^1,C^2,C^3$, maps $D_0,D_1,D_2$ with $D_1D_0=D_2D_1=0$, and symmetric positive-definite mass maps $M_1,M_2$. Inputs are rational matrices $D_0,D_1,D_2,M_1,M_2$, rational initial coordinates $b_0\\in C^2$ and $d_{1/2}\\in(C^1)^*$, a positive rational step size $\\tau$, and an integer $N\\geq0$. The matrices and states use the fixed ordered bases and dual bases from that definition. All arithmetic is exact over $\\mathbb Q$; floating-point arithmetic is not part of this algorithm.\n\nFirst compute $R=M_1^{-1}$ once by fixed-order, no-row-swap Gauss–Jordan elimination of the augmented matrix $[M_1\\mid I_{n_1}]$. For each pivot column $j=1,\\ldots,n_1$, let $p$ be the current entry in position $(j,j)$. If $p=0$, return an inconsistency error. Otherwise divide row $j$ by $p$ and, for every $k\\neq j$, replace row $k$ by row $k$ minus its current column-$j$ entry times row $j$. After all columns are processed, let $R$ be the right block. For $n_1=0$, take the unique empty matrix for $R$ and perform no elimination.\n\nSet $(b,d):=(b_0,d_{1/2})$ and record this initial state. For each $n=0,\\ldots,N-1$, in the stated order compute\n\n$$b_{\\mathrm{new}}:=b-\\tau D_1Rd,\\qquad d_{\\mathrm{new}}:=d+\\tau D_1^{\\mathsf T}M_2b_{\\mathrm{new}}.$$\n\nAppend $(b_{\\mathrm{new}},d_{\\mathrm{new}})$ to the output list and then set $(b,d):=(b_{\\mathrm{new}},d_{\\mathrm{new}})$. The output consists of the $N+1$ states $(b_n,d_{n+1/2})$ for $0\\leq n\\leq N$. The error branch is unreachable on admissible inputs; the separate finite-step termination lemma proves this and the exact inverse output.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-cm-positive-definite-matrix-square-roots",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$ and let $M\\in M_n(\\mathbb R)$ be symmetric and positive definite, that is $v^{\\mathsf T}Mv>0$ for every nonzero $v\\in\\mathbb R^n$; identify $\\mathbb R^n$ with its standard real inner product space ([[def-euclidean-inner-product]]). Then:\n\n1. $M$ is invertible and $M^{-1}$ is symmetric and positive definite;\n2. there is a unique symmetric positive definite matrix $M^{1/2}$ with $(M^{1/2})^2=M$;\n3. $M^{-1/2}:=(M^{1/2})^{-1}$ is symmetric and positive definite, satisfies $(M^{-1/2})^2=M^{-1}$, and $M^{-1/2}MM^{-1/2}=I_n$;\n4. for every symmetric matrix $K$ that is non-negative, that is $v^{\\mathsf T}Kv\\ge0$ for all $v$, the matrix $S:=M^{-1/2}KM^{-1/2}$ is symmetric and non-negative, and $S$ is positive definite if and only if $K$ is.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-operator-norm-is-the-largest-singular-value",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces.\n\nIf $V=0$, then\n\n$$\\lVert T\\rVert=0.$$\n\nIf $V\\ne0$ and $s_1$ is the largest singular value of $T$, then\n\n$$\\lVert T\\rVert=s_1.$$\n\nIn the nonzero case, the maximum in\nThe operator norm is zero on the zero domain and otherwise is max_{||v||=1} ||Tv|| is attained at\na right-singular vector for $s_1$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+          "source_section": "Statement",
+          "quote": "For vectors $u,v$ in a real or complex inner product space,\n\n$$|\\langle u,v\\rangle|\\le\\lVert u\\rVert\\lVert v\\rVert.$$\n\nEquality holds if and only if $u$ and $v$ are linearly dependent, including the case in which either vector is zero.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For one update, the complex identities give\n$D_2b_{n+1}=D_2b_n-\\tau D_2D_1M_1^{-1}d_{n+1/2}=D_2b_n$ and\n$D_0^{\\mathsf T}d_{n+3/2}=D_0^{\\mathsf T}d_{n+1/2}+\\tau(D_1D_0)^{\\mathsf T}M_2b_{n+1}=D_0^{\\mathsf T}d_{n+1/2}$.\nThus both constraints are preserved, with no restriction on $\\tau$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For a semidiscrete solution, symmetry of $M_2$ and $M_1^{-1}$ gives\n$\\frac{d}{dt}\\mathcal E=\\dot b^{\\mathsf T}M_2b+\\dot d^{\\mathsf T}M_1^{-1}d\n=-d^{\\mathsf T}M_1^{-1}D_1^{\\mathsf T}M_2b+d^{\\mathsf T}M_1^{-1}D_1^{\\mathsf T}M_2b=0$.\nTherefore $\\mathcal E$ is constant on the solution interval.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "In positive dimensions set $x_n=M_2^{1/2}b_n$, $y_{n+1/2}=M_1^{-1/2}d_{n+1/2}$, and $S=M_2^{1/2}D_1M_1^{-1/2}$. By [F3], the update becomes $x_{n+1}=x_n-\\tau Sy_{n+1/2}$ and $y_{n+3/2}=y_{n+1/2}+\\tau S^{\\mathsf T}x_{n+1}$. Write $x=x_n$, $y=y_{n+1/2}$, and $x'=x_{n+1}=x-\\tau Sy$. Then\n$\\lVert y+\\tau S^{\\mathsf T}x'\\rVert_2^2\n=\\lVert y\\rVert_2^2+2\\tau x'^{\\mathsf T}Sy+\\tau^2\\lVert S^{\\mathsf T}x'\\rVert_2^2$\nand\n$-\\tau x'^{\\mathsf T}S(y+\\tau S^{\\mathsf T}x')\n=-\\tau x'^{\\mathsf T}Sy-\\tau^2\\lVert S^{\\mathsf T}x'\\rVert_2^2$.\nAdding these to $\\lVert x'\\rVert_2^2$ cancels the squared terms and leaves $\\lVert x'\\rVert_2^2+\\lVert y\\rVert_2^2+\\tau x'^{\\mathsf T}Sy$. Finally,\n$\\lVert x'\\rVert_2^2+\\tau x'^{\\mathsf T}Sy\n=\\lVert x-\\tau Sy\\rVert_2^2+\\tau(x-\\tau Sy)^{\\mathsf T}Sy\n=\\lVert x\\rVert_2^2-\\tau x^{\\mathsf T}Sy$,\nso $Q_{n+1}=Q_n$. If either coordinate space is zero-dimensional, the cross term vanishes and the update leaves the squared Euclidean norm on the remaining state space unchanged.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F4] and [F5],\n$|x^{\\mathsf T}Sy|\\leq\\lVert x\\rVert_2\\lVert Sy\\rVert_2\\leq\\sigma\\lVert x\\rVert_2\\lVert y\\rVert_2\n\\leq\\frac{\\sigma}{2}(\\lVert x\\rVert_2^2+\\lVert y\\rVert_2^2)$.\nHence $Q_n\\geq(1-\\tau\\sigma/2)(\\lVert x_n\\rVert_2^2+\\lVert y_{n+1/2}\\rVert_2^2)$, which is strictly positive for every nonzero state when $\\tau\\sigma<2$. If $\\sigma=0$ or a coordinate space is zero, the cross term vanishes and the same conclusion holds for every $\\tau>0$.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 handles zero-dimensional coordinate spaces directly; the cross term is then zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 gives zero derivative for the zero state, and step 2.1 preserves its zero invariant."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 use matrix identities valid for one-dimensional coordinate blocks."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 requires no rank condition on D_1; step 3.1 covers sigma=0."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement assumes a trajectory on its interval and makes no endpoint-extension claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof steps use only supplied finite coordinate vectors and make no selections."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The proposition makes only a sufficient positivity claim, not an iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse positivity implication is asserted."
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "def-emg-fx-cochain-maxwell",
+          "carrier": "items/def-emg-fx-cochain-maxwell.md",
+          "status": "Current supplier interface inspected for this item; no additional review approval asserted.",
+          "source_section": "Definition",
+          "exact_statement": "Fix nonnegative integers $n_0,n_1,n_2,n_3$ and ordered coordinate bases, and put $C^k:=\\mathbb R^{n_k}$ for $k=0,1,2,3$. The dual space $(C^k)^*$ is the vector space of linear functionals $C^k\\to\\mathbb R$, with the dual basis to the chosen coordinate basis. Let $D_0\\in\\mathbb R^{n_1\\times n_0}$, $D_1\\in\\mathbb R^{n_2\\times n_1}$, and $D_2\\in\\mathbb R^{n_3\\times n_2}$ be linear maps satisfying $D_1D_0=0$ and $D_2D_1=0$. This data is a finite cochain complex. The transpose $D_k^{\\mathsf T}$ denotes the representing matrix of the dual linear map in the dual bases. Let $M_1\\in\\mathbb R^{n_1\\times n_1}$ and $M_2\\in\\mathbb R^{n_2\\times n_2}$ be symmetric positive-definite matrices: $v^{\\mathsf T}M_kv>0$ for each nonzero $v\\in C^k$. They represent linear maps $M_1:C^1\\to(C^1)^*$ and $M_2:C^2\\to(C^2)^*$ in the chosen bases; in positive dimensions their inverses exist by the finite-dimensional positive-matrix result cited below, and the unique map on a zero-dimensional space is its own inverse.\n\nThe finite state space is $\\mathcal X:=C^2\\oplus(C^1)^*$, with state $(b,d)$, where $b$ is a column of $C^2$ coordinates and $d$ is a column in the dual basis of $(C^1)^*$. In this item, “phase space” means this finite-dimensional state space only; no symplectic form is asserted. On an open interval $J\\subseteq\\mathbb R$, a semidiscrete trajectory is a continuously differentiable map $t\\mapsto(b(t),d(t))\\in\\mathcal X$ satisfying\n\n$$\\dot b(t)=-D_1M_1^{-1}d(t),\\qquad \\dot d(t)=D_1^{\\mathsf T}M_2b(t).$$\n\nIts two discrete constraints are $D_2b(t)=0$ in $C^3$ and $D_0^{\\mathsf T}d(t)=0$ in $(C^0)^*$. The associated quadratic energy is\n\n$$\\mathcal E(b,d):=\\tfrac12\\left(b^{\\mathsf T}M_2b+d^{\\mathsf T}M_1^{-1}d\\right).$$\n\nAll objects here are finite-dimensional real linear-algebra data. The term “Maxwell” names this algebraic model and does not identify it with a continuum Maxwell or Einstein–Maxwell solution.",
+          "relevant_hypotheses_and_conventions": "The supplier assumes finite real coordinate spaces in fixed ordered bases and states both zero-composition identities and symmetric positive-definite mass maps. Its phase-space term means only the state space; no symplectic or continuum structure is claimed.",
+          "supplier_proof_status": "draft; exact current Definition inspected; no deductive proof section is supplied.",
+          "consumer_use": "Used in proof steps 1.1, 1.2, 2.1 and 3.1 for the cochain identities, mass maps, equations and state typing."
+        },
+        {
+          "supplier": "alg-emg-fx-leapfrog-cochains",
+          "carrier": "items/alg-emg-fx-leapfrog-cochains.md",
+          "status": "Current supplier interface inspected for this item; no additional review approval asserted.",
+          "source_section": "Definition",
+          "exact_statement": "Use the finite cochain data fixed by the preceding definition item, namely finite real coordinate spaces $C^0,C^1,C^2,C^3$, maps $D_0,D_1,D_2$ with $D_1D_0=D_2D_1=0$, and symmetric positive-definite mass maps $M_1,M_2$. Inputs are rational matrices $D_0,D_1,D_2,M_1,M_2$, rational initial coordinates $b_0\\in C^2$ and $d_{1/2}\\in(C^1)^*$, a positive rational step size $\\tau$, and an integer $N\\geq0$. The matrices and states use the fixed ordered bases and dual bases from that definition. All arithmetic is exact over $\\mathbb Q$; floating-point arithmetic is not part of this algorithm.\n\nFirst compute $R=M_1^{-1}$ once by fixed-order, no-row-swap Gauss–Jordan elimination of the augmented matrix $[M_1\\mid I_{n_1}]$. For each pivot column $j=1,\\ldots,n_1$, let $p$ be the current entry in position $(j,j)$. If $p=0$, return an inconsistency error. Otherwise divide row $j$ by $p$ and, for every $k\\neq j$, replace row $k$ by row $k$ minus its current column-$j$ entry times row $j$. After all columns are processed, let $R$ be the right block. For $n_1=0$, take the unique empty matrix for $R$ and perform no elimination.\n\nSet $(b,d):=(b_0,d_{1/2})$ and record this initial state. For each $n=0,\\ldots,N-1$, in the stated order compute\n\n$$b_{\\mathrm{new}}:=b-\\tau D_1Rd,\\qquad d_{\\mathrm{new}}:=d+\\tau D_1^{\\mathsf T}M_2b_{\\mathrm{new}}.$$\n\nAppend $(b_{\\mathrm{new}},d_{\\mathrm{new}})$ to the output list and then set $(b,d):=(b_{\\mathrm{new}},d_{\\mathrm{new}})$. The output consists of the $N+1$ states $(b_n,d_{n+1/2})$ for $0\\leq n\\leq N$. The error branch is unreachable on admissible inputs; the separate finite-step termination lemma proves this and the exact inverse output.",
+          "relevant_hypotheses_and_conventions": "The supplier applies to rational admissible matrices, rational initial coordinates, positive rational tau and finite N. It uses exact rational elimination and the ordered state (b_n,d_{n+1/2}).",
+          "supplier_proof_status": "draft; exact current Definition inspected; no deductive proof section is supplied.",
+          "consumer_use": "Used in proof steps 1.1 and 2.1 for the exact update and time staggering."
+        },
+        {
+          "supplier": "lem-cm-positive-definite-matrix-square-roots",
+          "carrier": "items/lem-cm-positive-definite-matrix-square-roots.md",
+          "status": "Current supplier interface inspected for this item; no additional review approval asserted.",
+          "source_section": "Statement",
+          "exact_statement": "Let $n\\ge1$ and let $M\\in M_n(\\mathbb R)$ be symmetric and positive definite, that is $v^{\\mathsf T}Mv>0$ for every nonzero $v\\in\\mathbb R^n$; identify $\\mathbb R^n$ with its standard real inner product space ([[def-euclidean-inner-product]]). Then:\n\n1. $M$ is invertible and $M^{-1}$ is symmetric and positive definite;\n2. there is a unique symmetric positive definite matrix $M^{1/2}$ with $(M^{1/2})^2=M$;\n3. $M^{-1/2}:=(M^{1/2})^{-1}$ is symmetric and positive definite, satisfies $(M^{-1/2})^2=M^{-1}$, and $M^{-1/2}MM^{-1/2}=I_n$;\n4. for every symmetric matrix $K$ that is non-negative, that is $v^{\\mathsf T}Kv\\ge0$ for all $v$, the matrix $S:=M^{-1/2}KM^{-1/2}$ is symmetric and non-negative, and $S$ is positive definite if and only if $K$ is.",
+          "relevant_hypotheses_and_conventions": "The statement assumes a real symmetric positive-definite matrix in positive finite dimension. Its zero-dimensional case is supplied explicitly by the consumer.",
+          "supplier_proof_status": "published; exact current interface and complete supplied proof inspected; no independent approval inferred.",
+          "consumer_use": "Used in proof steps 2.1 and 3.1 for symmetric positive square roots and inverse square roots."
+        },
+        {
+          "supplier": "thm-operator-norm-is-the-largest-singular-value",
+          "carrier": "items/thm-operator-norm-is-the-largest-singular-value.md",
+          "status": "Current supplier interface inspected for this item; no additional review approval asserted.",
+          "source_section": "Statement",
+          "exact_statement": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces.\n\nIf $V=0$, then\n\n$$\\lVert T\\rVert=0.$$\n\nIf $V\\ne0$ and $s_1$ is the largest singular value of $T$, then\n\n$$\\lVert T\\rVert=s_1.$$\n\nIn the nonzero case, the maximum in\nThe operator norm is zero on the zero domain and otherwise is max_{||v||=1} ||Tv|| is attained at\na right-singular vector for $s_1$.",
+          "relevant_hypotheses_and_conventions": "The statement concerns a linear map between finite-dimensional real or complex inner-product spaces, with a separate zero-domain case.",
+          "supplier_proof_status": "published; exact current interface and complete supplied proof inspected; no independent approval inferred.",
+          "consumer_use": "Used in proof step 3.1 to identify the induced Euclidean norm with sigma."
+        },
+        {
+          "supplier": "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+          "carrier": "items/thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces.md",
+          "status": "Current supplier interface inspected for this item; no additional review approval asserted.",
+          "source_section": "Statement",
+          "exact_statement": "For vectors $u,v$ in a real or complex inner product space,\n\n$$|\\langle u,v\\rangle|\\le\\lVert u\\rVert\\lVert v\\rVert.$$\n\nEquality holds if and only if $u$ and $v$ are linearly dependent, including the case in which either vector is zero.",
+          "relevant_hypotheses_and_conventions": "The statement applies to vectors in real or complex inner-product spaces; the consumer uses its real Euclidean specialization.",
+          "supplier_proof_status": "published; exact current interface and complete supplied proof inspected; no independent approval inferred.",
+          "consumer_use": "Used in proof step 3.1 for the Euclidean inner-product bound."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-25 author self-review",
+        "notes": "Checked the dual-space matrix types, both constraint products, the sign in the b-first update, cancellation in the staggered invariant, zero-dimensional cases and the strict positivity estimate."
+      },
+      "finite_checks": [
+        {
+          "name": "zero curl map",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ],
+          "expected": "When D_1=0, both constraints remain fixed, the staggered cross term vanishes, and Q equals twice the semidiscrete energy."
+        },
+        {
+          "name": "strict positivity boundary",
+          "inputs": [
+            "step 3.1"
+          ],
+          "expected": "For a nonzero singular mode with tau sigma=2, the lower-bound coefficient is zero; the proposition asserts positivity only for tau sigma<2."
+        }
+      ]
+    },
+    "lem-emg-fx-finite-step-termination": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-emg-fx-cochain-maxwell",
+          "source_section": "Definition",
+          "quote": "Fix nonnegative integers $n_0,n_1,n_2,n_3$ and ordered coordinate bases, and put $C^k:=\\mathbb R^{n_k}$ for $k=0,1,2,3$. The dual space $(C^k)^*$ is the vector space of linear functionals $C^k\\to\\mathbb R$, with the dual basis to the chosen coordinate basis. Let $D_0\\in\\mathbb R^{n_1\\times n_0}$, $D_1\\in\\mathbb R^{n_2\\times n_1}$, and $D_2\\in\\mathbb R^{n_3\\times n_2}$ be linear maps satisfying $D_1D_0=0$ and $D_2D_1=0$. This data is a finite cochain complex. The transpose $D_k^{\\mathsf T}$ denotes the representing matrix of the dual linear map in the dual bases. Let $M_1\\in\\mathbb R^{n_1\\times n_1}$ and $M_2\\in\\mathbb R^{n_2\\times n_2}$ be symmetric positive-definite matrices: $v^{\\mathsf T}M_kv>0$ for each nonzero $v\\in C^k$. They represent linear maps $M_1:C^1\\to(C^1)^*$ and $M_2:C^2\\to(C^2)^*$ in the chosen bases; in positive dimensions their inverses exist by the finite-dimensional positive-matrix result cited below, and the unique map on a zero-dimensional space is its own inverse.\n\nThe finite state space is $\\mathcal X:=C^2\\oplus(C^1)^*$, with state $(b,d)$, where $b$ is a column of $C^2$ coordinates and $d$ is a column in the dual basis of $(C^1)^*$. In this item, “phase space” means this finite-dimensional state space only; no symplectic form is asserted. On an open interval $J\\subseteq\\mathbb R$, a semidiscrete trajectory is a continuously differentiable map $t\\mapsto(b(t),d(t))\\in\\mathcal X$ satisfying\n\n$$\\dot b(t)=-D_1M_1^{-1}d(t),\\qquad \\dot d(t)=D_1^{\\mathsf T}M_2b(t).$$\n\nIts two discrete constraints are $D_2b(t)=0$ in $C^3$ and $D_0^{\\mathsf T}d(t)=0$ in $(C^0)^*$. The associated quadratic energy is\n\n$$\\mathcal E(b,d):=\\tfrac12\\left(b^{\\mathsf T}M_2b+d^{\\mathsf T}M_1^{-1}d\\right).$$\n\nAll objects here are finite-dimensional real linear-algebra data. The term “Maxwell” names this algebraic model and does not identify it with a continuum Maxwell or Einstein–Maxwell solution.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-emg-fx-leapfrog-cochains",
+          "source_section": "Definition",
+          "quote": "Use the finite cochain data fixed by the preceding definition item, namely finite real coordinate spaces $C^0,C^1,C^2,C^3$, maps $D_0,D_1,D_2$ with $D_1D_0=D_2D_1=0$, and symmetric positive-definite mass maps $M_1,M_2$. Inputs are rational matrices $D_0,D_1,D_2,M_1,M_2$, rational initial coordinates $b_0\\in C^2$ and $d_{1/2}\\in(C^1)^*$, a positive rational step size $\\tau$, and an integer $N\\geq0$. The matrices and states use the fixed ordered bases and dual bases from that definition. All arithmetic is exact over $\\mathbb Q$; floating-point arithmetic is not part of this algorithm.\n\nFirst compute $R=M_1^{-1}$ once by fixed-order, no-row-swap Gauss–Jordan elimination of the augmented matrix $[M_1\\mid I_{n_1}]$. For each pivot column $j=1,\\ldots,n_1$, let $p$ be the current entry in position $(j,j)$. If $p=0$, return an inconsistency error. Otherwise divide row $j$ by $p$ and, for every $k\\neq j$, replace row $k$ by row $k$ minus its current column-$j$ entry times row $j$. After all columns are processed, let $R$ be the right block. For $n_1=0$, take the unique empty matrix for $R$ and perform no elimination.\n\nSet $(b,d):=(b_0,d_{1/2})$ and record this initial state. For each $n=0,\\ldots,N-1$, in the stated order compute\n\n$$b_{\\mathrm{new}}:=b-\\tau D_1Rd,\\qquad d_{\\mathrm{new}}:=d+\\tau D_1^{\\mathsf T}M_2b_{\\mathrm{new}}.$$\n\nAppend $(b_{\\mathrm{new}},d_{\\mathrm{new}})$ to the output list and then set $(b,d):=(b_{\\mathrm{new}},d_{\\mathrm{new}})$. The output consists of the $N+1$ states $(b_n,d_{n+1/2})$ for $0\\leq n\\leq N$. The error branch is unreachable on admissible inputs; the separate finite-step termination lemma proves this and the exact inverse output.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $n_1>0$, the initial trailing block $S_1=M_1$ is symmetric positive definite by [F1]. After eliminating the first $j-1$ columns without row swaps, the left augmented block has form $\\begin{pmatrix}I_{j-1}&A\\\\0&S_j\\end{pmatrix}$, where $S_j$ is the remaining Schur complement. Write $S_j=\\begin{pmatrix}p&r^{\\mathsf T}\\\\r&C\\end{pmatrix}$. Since $S_j$ is positive definite, $p>0$, so the prescribed diagonal pivot is nonzero. The row operations in column $j$ replace the remaining block by $S_{j+1}=C-rp^{-1}r^{\\mathsf T}$. For any nonzero $y$, put $x=-p^{-1}r^{\\mathsf T}y$; then $(x,y)\\neq0$ and $y^{\\mathsf T}S_{j+1}y=(x,y)^{\\mathsf T}S_j(x,y)>0$. Hence $S_{j+1}$ is positive definite. Induction proves that every no-row-swap pivot is positive and the error branch is unreachable. Each row operation is invertible; after the last column the left block is the identity, so the right block is exactly $M_1^{-1}$. For $n_1=0$, the inverse is the unique empty matrix and there are no pivot steps.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The input entries are rational. Each row operation uses addition, subtraction, multiplication, or division by a nonzero rational pivot from step 1.1, so every intermediate entry and the final inverse remain rational. The elimination loop has exactly $n_1$ finite iterations; consequently it terminates with an exact rational output.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Dense no-row-swap Gauss–Jordan elimination performs $O(n_1^2)$ row-entry updates per pivot column and hence $O(n_1^3)$ arithmetic operations. Each evolution step uses matrix-vector products with costs $O(n_1^2)$ for $M_1^{-1}d$, $O(n_1n_2)$ for each multiplication by $D_1$ or $D_1^{\\mathsf T}$, and $O(n_2^2)$ for $M_2b$. There are exactly $N$ such steps. The matrices $D_0,D_1,D_2,M_1,M_2$ have respectively $n_1n_0,n_1n_2,n_3n_2,n_1^2,n_2^2$ entries; the inverse adds $n_1^2$, and the $N+1$ states add $(N+1)(n_1+n_2)$ entries. Their total is bounded by the stated storage order. When $N=0$, the initial state is returned without an update; when $n_1=0$ or $n_2=0$, the corresponding empty products and loops are finite and the same bounds remain valid. No bit-size or floating-point estimate follows from an arithmetic-operation count.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 handles n_1=0 using the empty inverse and no pivots."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 handles N=0 and returns the initial state."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 proves the pivot exists for each positive dimension, including n_1=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 assumes positive definiteness and proves every no-row-swap pivot is positive; zero dimension is handled separately."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement specifies N+1 outputs, including the first and last state."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 follows a fixed no-row-swap schedule and uses no selection from a family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma states no converse claim."
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "def-emg-fx-cochain-maxwell",
+          "carrier": "items/def-emg-fx-cochain-maxwell.md",
+          "status": "Current supplier interface inspected for this item; no additional review approval asserted.",
+          "source_section": "Definition",
+          "exact_statement": "Fix nonnegative integers $n_0,n_1,n_2,n_3$ and ordered coordinate bases, and put $C^k:=\\mathbb R^{n_k}$ for $k=0,1,2,3$. The dual space $(C^k)^*$ is the vector space of linear functionals $C^k\\to\\mathbb R$, with the dual basis to the chosen coordinate basis. Let $D_0\\in\\mathbb R^{n_1\\times n_0}$, $D_1\\in\\mathbb R^{n_2\\times n_1}$, and $D_2\\in\\mathbb R^{n_3\\times n_2}$ be linear maps satisfying $D_1D_0=0$ and $D_2D_1=0$. This data is a finite cochain complex. The transpose $D_k^{\\mathsf T}$ denotes the representing matrix of the dual linear map in the dual bases. Let $M_1\\in\\mathbb R^{n_1\\times n_1}$ and $M_2\\in\\mathbb R^{n_2\\times n_2}$ be symmetric positive-definite matrices: $v^{\\mathsf T}M_kv>0$ for each nonzero $v\\in C^k$. They represent linear maps $M_1:C^1\\to(C^1)^*$ and $M_2:C^2\\to(C^2)^*$ in the chosen bases; in positive dimensions their inverses exist by the finite-dimensional positive-matrix result cited below, and the unique map on a zero-dimensional space is its own inverse.\n\nThe finite state space is $\\mathcal X:=C^2\\oplus(C^1)^*$, with state $(b,d)$, where $b$ is a column of $C^2$ coordinates and $d$ is a column in the dual basis of $(C^1)^*$. In this item, “phase space” means this finite-dimensional state space only; no symplectic form is asserted. On an open interval $J\\subseteq\\mathbb R$, a semidiscrete trajectory is a continuously differentiable map $t\\mapsto(b(t),d(t))\\in\\mathcal X$ satisfying\n\n$$\\dot b(t)=-D_1M_1^{-1}d(t),\\qquad \\dot d(t)=D_1^{\\mathsf T}M_2b(t).$$\n\nIts two discrete constraints are $D_2b(t)=0$ in $C^3$ and $D_0^{\\mathsf T}d(t)=0$ in $(C^0)^*$. The associated quadratic energy is\n\n$$\\mathcal E(b,d):=\\tfrac12\\left(b^{\\mathsf T}M_2b+d^{\\mathsf T}M_1^{-1}d\\right).$$\n\nAll objects here are finite-dimensional real linear-algebra data. The term “Maxwell” names this algebraic model and does not identify it with a continuum Maxwell or Einstein–Maxwell solution.",
+          "relevant_hypotheses_and_conventions": "The supplier assumes finite real coordinate spaces in fixed ordered bases and states both zero-composition identities and symmetric positive-definite mass maps. Its phase-space term means only the state space; no symplectic or continuum structure is claimed.",
+          "supplier_proof_status": "draft; exact current Definition inspected; no deductive proof section is supplied.",
+          "consumer_use": "Used in proof step 1.1 for finite dimensions, matrix shapes and positive definiteness."
+        },
+        {
+          "supplier": "alg-emg-fx-leapfrog-cochains",
+          "carrier": "items/alg-emg-fx-leapfrog-cochains.md",
+          "status": "Current supplier interface inspected for this item; no additional review approval asserted.",
+          "source_section": "Definition",
+          "exact_statement": "Use the finite cochain data fixed by the preceding definition item, namely finite real coordinate spaces $C^0,C^1,C^2,C^3$, maps $D_0,D_1,D_2$ with $D_1D_0=D_2D_1=0$, and symmetric positive-definite mass maps $M_1,M_2$. Inputs are rational matrices $D_0,D_1,D_2,M_1,M_2$, rational initial coordinates $b_0\\in C^2$ and $d_{1/2}\\in(C^1)^*$, a positive rational step size $\\tau$, and an integer $N\\geq0$. The matrices and states use the fixed ordered bases and dual bases from that definition. All arithmetic is exact over $\\mathbb Q$; floating-point arithmetic is not part of this algorithm.\n\nFirst compute $R=M_1^{-1}$ once by fixed-order, no-row-swap Gauss–Jordan elimination of the augmented matrix $[M_1\\mid I_{n_1}]$. For each pivot column $j=1,\\ldots,n_1$, let $p$ be the current entry in position $(j,j)$. If $p=0$, return an inconsistency error. Otherwise divide row $j$ by $p$ and, for every $k\\neq j$, replace row $k$ by row $k$ minus its current column-$j$ entry times row $j$. After all columns are processed, let $R$ be the right block. For $n_1=0$, take the unique empty matrix for $R$ and perform no elimination.\n\nSet $(b,d):=(b_0,d_{1/2})$ and record this initial state. For each $n=0,\\ldots,N-1$, in the stated order compute\n\n$$b_{\\mathrm{new}}:=b-\\tau D_1Rd,\\qquad d_{\\mathrm{new}}:=d+\\tau D_1^{\\mathsf T}M_2b_{\\mathrm{new}}.$$\n\nAppend $(b_{\\mathrm{new}},d_{\\mathrm{new}})$ to the output list and then set $(b,d):=(b_{\\mathrm{new}},d_{\\mathrm{new}})$. The output consists of the $N+1$ states $(b_n,d_{n+1/2})$ for $0\\leq n\\leq N$. The error branch is unreachable on admissible inputs; the separate finite-step termination lemma proves this and the exact inverse output.",
+          "relevant_hypotheses_and_conventions": "The supplier applies to rational admissible matrices, rational initial coordinates, positive rational tau and finite N. It uses exact rational elimination and the ordered state (b_n,d_{n+1/2}).",
+          "supplier_proof_status": "draft; exact current Definition inspected; no deductive proof section is supplied.",
+          "consumer_use": "Used in proof steps 1.1, 2.1 and 3.1 for the fixed no-row-swap elimination, update loop and output format."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-25 author self-review",
+        "notes": "Checked the no-row-swap pivot argument by positive Schur complements, rationality of row operations, finite loop bounds, arithmetic-operation counts and zero-size cases."
+      },
+      "finite_checks": [
+        {
+          "name": "one-dimensional solve",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ],
+          "expected": "For M_1=[2], Gauss-Jordan returns the exact rational inverse [1/2] after one pivot."
+        },
+        {
+          "name": "zero update count",
+          "inputs": [
+            "step 3.1"
+          ],
+          "expected": "For N=0 the algorithm returns only the initial state and performs no evolution update."
+        }
+      ]
+    },
+    "cex-emg-fx-cfl-discrete-growth": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-emg-fx-cochain-maxwell",
+          "source_section": "Definition",
+          "quote": "Fix nonnegative integers $n_0,n_1,n_2,n_3$ and ordered coordinate bases, and put $C^k:=\\mathbb R^{n_k}$ for $k=0,1,2,3$. The dual space $(C^k)^*$ is the vector space of linear functionals $C^k\\to\\mathbb R$, with the dual basis to the chosen coordinate basis. Let $D_0\\in\\mathbb R^{n_1\\times n_0}$, $D_1\\in\\mathbb R^{n_2\\times n_1}$, and $D_2\\in\\mathbb R^{n_3\\times n_2}$ be linear maps satisfying $D_1D_0=0$ and $D_2D_1=0$. This data is a finite cochain complex. The transpose $D_k^{\\mathsf T}$ denotes the representing matrix of the dual linear map in the dual bases. Let $M_1\\in\\mathbb R^{n_1\\times n_1}$ and $M_2\\in\\mathbb R^{n_2\\times n_2}$ be symmetric positive-definite matrices: $v^{\\mathsf T}M_kv>0$ for each nonzero $v\\in C^k$. They represent linear maps $M_1:C^1\\to(C^1)^*$ and $M_2:C^2\\to(C^2)^*$ in the chosen bases; in positive dimensions their inverses exist by the finite-dimensional positive-matrix result cited below, and the unique map on a zero-dimensional space is its own inverse.\n\nThe finite state space is $\\mathcal X:=C^2\\oplus(C^1)^*$, with state $(b,d)$, where $b$ is a column of $C^2$ coordinates and $d$ is a column in the dual basis of $(C^1)^*$. In this item, “phase space” means this finite-dimensional state space only; no symplectic form is asserted. On an open interval $J\\subseteq\\mathbb R$, a semidiscrete trajectory is a continuously differentiable map $t\\mapsto(b(t),d(t))\\in\\mathcal X$ satisfying\n\n$$\\dot b(t)=-D_1M_1^{-1}d(t),\\qquad \\dot d(t)=D_1^{\\mathsf T}M_2b(t).$$\n\nIts two discrete constraints are $D_2b(t)=0$ in $C^3$ and $D_0^{\\mathsf T}d(t)=0$ in $(C^0)^*$. The associated quadratic energy is\n\n$$\\mathcal E(b,d):=\\tfrac12\\left(b^{\\mathsf T}M_2b+d^{\\mathsf T}M_1^{-1}d\\right).$$\n\nAll objects here are finite-dimensional real linear-algebra data. The term “Maxwell” names this algebraic model and does not identify it with a continuum Maxwell or Einstein–Maxwell solution.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-emg-fx-leapfrog-cochains",
+          "source_section": "Definition",
+          "quote": "Use the finite cochain data fixed by the preceding definition item, namely finite real coordinate spaces $C^0,C^1,C^2,C^3$, maps $D_0,D_1,D_2$ with $D_1D_0=D_2D_1=0$, and symmetric positive-definite mass maps $M_1,M_2$. Inputs are rational matrices $D_0,D_1,D_2,M_1,M_2$, rational initial coordinates $b_0\\in C^2$ and $d_{1/2}\\in(C^1)^*$, a positive rational step size $\\tau$, and an integer $N\\geq0$. The matrices and states use the fixed ordered bases and dual bases from that definition. All arithmetic is exact over $\\mathbb Q$; floating-point arithmetic is not part of this algorithm.\n\nFirst compute $R=M_1^{-1}$ once by fixed-order, no-row-swap Gauss–Jordan elimination of the augmented matrix $[M_1\\mid I_{n_1}]$. For each pivot column $j=1,\\ldots,n_1$, let $p$ be the current entry in position $(j,j)$. If $p=0$, return an inconsistency error. Otherwise divide row $j$ by $p$ and, for every $k\\neq j$, replace row $k$ by row $k$ minus its current column-$j$ entry times row $j$. After all columns are processed, let $R$ be the right block. For $n_1=0$, take the unique empty matrix for $R$ and perform no elimination.\n\nSet $(b,d):=(b_0,d_{1/2})$ and record this initial state. For each $n=0,\\ldots,N-1$, in the stated order compute\n\n$$b_{\\mathrm{new}}:=b-\\tau D_1Rd,\\qquad d_{\\mathrm{new}}:=d+\\tau D_1^{\\mathsf T}M_2b_{\\mathrm{new}}.$$\n\nAppend $(b_{\\mathrm{new}},d_{\\mathrm{new}})$ to the output list and then set $(b,d):=(b_{\\mathrm{new}},d_{\\mathrm{new}})$. The output consists of the $N+1$ states $(b_n,d_{n+1/2})$ for $0\\leq n\\leq N$. The error branch is unreachable on admissible inputs; the separate finite-step termination lemma proves this and the exact inverse output.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-emg-fx-discrete-gauss-preservation",
+          "source_section": "Statement",
+          "quote": "Use the finite cochain data and exact update specified in the definition and algorithm items cited immediately below, with step size $\\tau>0$. Every update preserves both constraints $D_2b=0$ and $D_0^{\\mathsf T}d=0$. Every continuously differentiable semidiscrete solution conserves $\\mathcal E(b,d)$. For the staggered sequence, define\n\n$$Q_n:=b_n^{\\mathsf T}M_2b_n+d_{n+1/2}^{\\mathsf T}M_1^{-1}d_{n+1/2}-\\tau b_n^{\\mathsf T}M_2D_1M_1^{-1}d_{n+1/2}.$$\n\nThen $Q_n$ is exactly invariant under the update. If $S:=M_2^{1/2}D_1M_1^{-1/2}$, set $\\sigma:=0$ when the domain of $S$ is zero and otherwise set $\\sigma:=\\max_{\\lVert y\\rVert_2=1}\\lVert Sy\\rVert_2$; for a nonzero domain this is the largest singular value of $S$. Then $Q_n$ is positive definite whenever $\\tau\\sigma<2$.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The matrices in [A1] are the signed boundary-incidence maps of one oriented tetrahedron, with edges ordered $01,02,03,12,13,23$, faces ordered $012,013,023,123$, and cell orientation $0123$. Matrix multiplication gives $D_1D_0=0_{4\\times4}$ and $D_2D_1=0_{1\\times6}$. Also $D_2x=-1+1=0$ and $D_0^{\\mathsf T}d_{1/2}=0_{1\\times1}$, so the initial state satisfies both constraints.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Put $c:=(-1,1,-1,1)^{\\mathsf T}$, so $D_2=c^{\\mathsf T}$. Direct multiplication gives\n$$D_1D_1^{\\mathsf T}=\\begin{pmatrix}3&1&-1&1\\\\1&3&1&-1\\\\-1&1&3&1\\\\1&-1&1&3\\end{pmatrix}=4I_4-cc^{\\mathsf T}.$$\nFor every $z\\in\\mathbb R^4$, this gives $\\lVert D_1^{\\mathsf T}z\\rVert_2^2=4\\lVert z\\rVert_2^2-(c^{\\mathsf T}z)^2\\leq4\\lVert z\\rVert_2^2$. Hence, by Cauchy–Schwarz, $\\lVert D_1v\\rVert_2=\\max_{\\lVert z\\rVert_2=1}|z^{\\mathsf T}D_1v|\\leq2\\lVert v\\rVert_2$ for every $v\\in\\mathbb R^6$. Since $c^{\\mathsf T}x=0$, $e:=x/\\sqrt2$ is unit and $D_1D_1^{\\mathsf T}e=4e$; consequently $f:=D_1^{\\mathsf T}e/2$ is unit and $D_1f=2e$. Thus the operator norm of $D_1$ is exactly $2$, attained at $f$. Here $M_1=M_2=I$, so the $\\sigma$ defined in [F3] is $2$. For a state $b=ue$, $d=vf$, the update in [F2] with $\\tau=2$ gives $u^+=u-4v$ and $v^+=v+4u^+=4u-15v$, hence the invariant two-dimensional subspace has matrix $\\begin{pmatrix}1&-4\\\\4&-15\\end{pmatrix}$. The initial state has modal coordinates $(u,v)=(\\sqrt2,0)$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The matrix in step 2.1 has trace $-14$, determinant $1$, and eigenvalues $\\lambda_-=-7-4\\sqrt3$ and $\\lambda_+=-7+4\\sqrt3$, found by solving $\\lambda^2+14\\lambda+1=0$. Since $6<4\\sqrt3<7$, $\\lambda_-<-1$ and $-1<\\lambda_+<0$. Direct substitution gives eigenvectors $v_-=(1,2+\\sqrt3)^{\\mathsf T}$ and $v_+=(1,2-\\sqrt3)^{\\mathsf T}$; their determinant is $-2\\sqrt3\\neq0$, so write the initial modal vector as $(\\sqrt2,0)^{\\mathsf T}=a v_-+b v_+$. The coefficient $a$ is nonzero, since otherwise $(\\sqrt2,0)^{\\mathsf T}$ would be a multiple of $v_+$, whose second coordinate $2-\\sqrt3$ is nonzero. The first modal coordinate after $n$ steps is therefore $u_n=a\\lambda_-^n+b\\lambda_+^n$. If $u_n$ were bounded, then $b\\lambda_+^n$ would be bounded because $|\\lambda_+|<1$, so their difference $a\\lambda_-^n$ would be bounded, contradicting $a\\neq0$ and $|\\lambda_-|>1$. Since $\\lVert b_n\\rVert_2\\geq|u_n|$, the state orbit is unbounded.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "By [F3], each update preserves both constraints, and step 1.1 sets them to zero initially. Explicitly, $D_2b^+=D_2b-\\tau D_2D_1M_1^{-1}d=D_2b$ and $D_0^{\\mathsf T}d^+=D_0^{\\mathsf T}d+\\tau(D_1D_0)^{\\mathsf T}M_2b^+=D_0^{\\mathsf T}d$, so induction gives zero constraints at every iterate. Thus exact constraint preservation holds at every step although this rational finite-complex algorithm has an unbounded orbit for $\\tau\\sigma=4>2$. This refutes the stated bounded-orbit claim.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "A1",
+            "step 1.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample explicitly requires a tetrahedral complex with four vertices and nonzero spaces."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 records a nonzero initial magnetic cochain; the zero state itself would not witness growth."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The witness uses the four face coordinates of a tetrahedron and a two-dimensional invariant state subspace."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 uses identity positive mass matrices; D_1 has a nonzero singular mode and may have other null modes."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.1 include the initial state n=0 and all subsequent integer iterates."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 lists every incidence matrix and initial coordinate explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The refuted claim is a bounded-orbit universal statement, not an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The refuted claim has no reverse direction."
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "def-emg-fx-cochain-maxwell",
+          "carrier": "items/def-emg-fx-cochain-maxwell.md",
+          "status": "Current supplier interface inspected for this item; no additional review approval asserted.",
+          "source_section": "Definition",
+          "exact_statement": "Fix nonnegative integers $n_0,n_1,n_2,n_3$ and ordered coordinate bases, and put $C^k:=\\mathbb R^{n_k}$ for $k=0,1,2,3$. The dual space $(C^k)^*$ is the vector space of linear functionals $C^k\\to\\mathbb R$, with the dual basis to the chosen coordinate basis. Let $D_0\\in\\mathbb R^{n_1\\times n_0}$, $D_1\\in\\mathbb R^{n_2\\times n_1}$, and $D_2\\in\\mathbb R^{n_3\\times n_2}$ be linear maps satisfying $D_1D_0=0$ and $D_2D_1=0$. This data is a finite cochain complex. The transpose $D_k^{\\mathsf T}$ denotes the representing matrix of the dual linear map in the dual bases. Let $M_1\\in\\mathbb R^{n_1\\times n_1}$ and $M_2\\in\\mathbb R^{n_2\\times n_2}$ be symmetric positive-definite matrices: $v^{\\mathsf T}M_kv>0$ for each nonzero $v\\in C^k$. They represent linear maps $M_1:C^1\\to(C^1)^*$ and $M_2:C^2\\to(C^2)^*$ in the chosen bases; in positive dimensions their inverses exist by the finite-dimensional positive-matrix result cited below, and the unique map on a zero-dimensional space is its own inverse.\n\nThe finite state space is $\\mathcal X:=C^2\\oplus(C^1)^*$, with state $(b,d)$, where $b$ is a column of $C^2$ coordinates and $d$ is a column in the dual basis of $(C^1)^*$. In this item, “phase space” means this finite-dimensional state space only; no symplectic form is asserted. On an open interval $J\\subseteq\\mathbb R$, a semidiscrete trajectory is a continuously differentiable map $t\\mapsto(b(t),d(t))\\in\\mathcal X$ satisfying\n\n$$\\dot b(t)=-D_1M_1^{-1}d(t),\\qquad \\dot d(t)=D_1^{\\mathsf T}M_2b(t).$$\n\nIts two discrete constraints are $D_2b(t)=0$ in $C^3$ and $D_0^{\\mathsf T}d(t)=0$ in $(C^0)^*$. The associated quadratic energy is\n\n$$\\mathcal E(b,d):=\\tfrac12\\left(b^{\\mathsf T}M_2b+d^{\\mathsf T}M_1^{-1}d\\right).$$\n\nAll objects here are finite-dimensional real linear-algebra data. The term “Maxwell” names this algebraic model and does not identify it with a continuum Maxwell or Einstein–Maxwell solution.",
+          "relevant_hypotheses_and_conventions": "The supplier assumes finite real coordinate spaces in fixed ordered bases and states both zero-composition identities and symmetric positive-definite mass maps. Its phase-space term means only the state space; no symplectic or continuum structure is claimed.",
+          "supplier_proof_status": "draft; exact current Definition inspected; no deductive proof section is supplied.",
+          "consumer_use": "Used in proof steps 1.1, 2.1 and 4.1 for the matrix types, complex identities and constraints."
+        },
+        {
+          "supplier": "alg-emg-fx-leapfrog-cochains",
+          "carrier": "items/alg-emg-fx-leapfrog-cochains.md",
+          "status": "Current supplier interface inspected for this item; no additional review approval asserted.",
+          "source_section": "Definition",
+          "exact_statement": "Use the finite cochain data fixed by the preceding definition item, namely finite real coordinate spaces $C^0,C^1,C^2,C^3$, maps $D_0,D_1,D_2$ with $D_1D_0=D_2D_1=0$, and symmetric positive-definite mass maps $M_1,M_2$. Inputs are rational matrices $D_0,D_1,D_2,M_1,M_2$, rational initial coordinates $b_0\\in C^2$ and $d_{1/2}\\in(C^1)^*$, a positive rational step size $\\tau$, and an integer $N\\geq0$. The matrices and states use the fixed ordered bases and dual bases from that definition. All arithmetic is exact over $\\mathbb Q$; floating-point arithmetic is not part of this algorithm.\n\nFirst compute $R=M_1^{-1}$ once by fixed-order, no-row-swap Gauss–Jordan elimination of the augmented matrix $[M_1\\mid I_{n_1}]$. For each pivot column $j=1,\\ldots,n_1$, let $p$ be the current entry in position $(j,j)$. If $p=0$, return an inconsistency error. Otherwise divide row $j$ by $p$ and, for every $k\\neq j$, replace row $k$ by row $k$ minus its current column-$j$ entry times row $j$. After all columns are processed, let $R$ be the right block. For $n_1=0$, take the unique empty matrix for $R$ and perform no elimination.\n\nSet $(b,d):=(b_0,d_{1/2})$ and record this initial state. For each $n=0,\\ldots,N-1$, in the stated order compute\n\n$$b_{\\mathrm{new}}:=b-\\tau D_1Rd,\\qquad d_{\\mathrm{new}}:=d+\\tau D_1^{\\mathsf T}M_2b_{\\mathrm{new}}.$$\n\nAppend $(b_{\\mathrm{new}},d_{\\mathrm{new}})$ to the output list and then set $(b,d):=(b_{\\mathrm{new}},d_{\\mathrm{new}})$. The output consists of the $N+1$ states $(b_n,d_{n+1/2})$ for $0\\leq n\\leq N$. The error branch is unreachable on admissible inputs; the separate finite-step termination lemma proves this and the exact inverse output.",
+          "relevant_hypotheses_and_conventions": "The supplier applies to rational admissible matrices, rational initial coordinates, positive rational tau and finite N. It uses exact rational elimination and the ordered state (b_n,d_{n+1/2}).",
+          "supplier_proof_status": "draft; exact current Definition inspected; no deductive proof section is supplied.",
+          "consumer_use": "Used in proof steps 2.1 and 4.1 for the one-step update and exact rational input convention."
+        },
+        {
+          "supplier": "prop-emg-fx-discrete-gauss-preservation",
+          "carrier": "items/prop-emg-fx-discrete-gauss-preservation.md",
+          "status": "Current supplier interface inspected for this item; no additional review approval asserted.",
+          "source_section": "Statement",
+          "exact_statement": "Use the finite cochain data and exact update specified in the definition and algorithm items cited immediately below, with step size $\\tau>0$. Every update preserves both constraints $D_2b=0$ and $D_0^{\\mathsf T}d=0$. Every continuously differentiable semidiscrete solution conserves $\\mathcal E(b,d)$. For the staggered sequence, define\n\n$$Q_n:=b_n^{\\mathsf T}M_2b_n+d_{n+1/2}^{\\mathsf T}M_1^{-1}d_{n+1/2}-\\tau b_n^{\\mathsf T}M_2D_1M_1^{-1}d_{n+1/2}.$$\n\nThen $Q_n$ is exactly invariant under the update. If $S:=M_2^{1/2}D_1M_1^{-1/2}$, set $\\sigma:=0$ when the domain of $S$ is zero and otherwise set $\\sigma:=\\max_{\\lVert y\\rVert_2=1}\\lVert Sy\\rVert_2$; for a nonzero domain this is the largest singular value of $S$. Then $Q_n$ is positive definite whenever $\\tau\\sigma<2$.",
+          "relevant_hypotheses_and_conventions": "The supplier is conditional on the finite cochain identities, positive mass matrices, and the exact staggered update; it makes no continuum claim.",
+          "supplier_proof_status": "draft; exact current Statement and complete supplied proof inspected; no independent approval inferred.",
+          "consumer_use": "Used in proof step 4.1 for the general constraint-preservation interface; the step also verifies preservation directly for this witness."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-25 author self-review",
+        "notes": "Checked the oriented tetrahedron incidence signs, both zero products, the singular mode, exact rational tau=2, the eigenvalues and the preserved constraints. The source scheme is only context."
+      },
+      "finite_checks": [
+        {
+          "name": "tetrahedral incidence products and constraints",
+          "inputs": [
+            "step 1.1"
+          ],
+          "expected": "D_1D_0=0, D_2D_1=0, D_2b_0=0, and D_0^T d_{1/2}=0."
+        },
+        {
+          "name": "unstable invariant mode",
+          "inputs": [
+            "step 2.1",
+            "step 3.1"
+          ],
+          "expected": "tau sigma=4; the update matrix has eigenvalues -7-4sqrt(3) and -7+4sqrt(3), so the exact orbit from (sqrt(2),0) is unbounded."
+        }
+      ]
+    }
+  }
+}

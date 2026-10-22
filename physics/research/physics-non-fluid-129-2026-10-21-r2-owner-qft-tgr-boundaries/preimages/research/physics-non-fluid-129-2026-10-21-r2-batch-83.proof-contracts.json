@@ -1,0 +1,423 @@
+{
+  "version": 1,
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "batch": 83,
+  "level": "physics-non-fluid-129-2026-10-21-r2",
+  "scope": [
+    "def-qftx-joint-spectrum-input",
+    "thm-qftx-spectral-tube-holomorphy",
+    "def-qftx-cpt-spin-statistics-interface",
+    "ex-qftx-positive-frequency-tube"
+  ],
+  "contracts": {
+    "def-qftx-joint-spectrum-input": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: the empty Borel set is assigned the zero projection and the full space is assigned the identity."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: translation invariance makes the fixed vacuum vector a zero-momentum state; p=0 belongs to the closed future cone."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "This definition has no integer count or one-object exception."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition explicitly includes lightlike boundary momenta in the closed cone; the open future displacement remains separately strict."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval parameter or limiting endpoint occurs in this definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The definition declares AC_omega as a premise for the PVM and bounded Borel integral suppliers; no other choice use is asserted."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition gives data and conventions, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition gives data and conventions, not a biconditional."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-83 author",
+        "notes": "The PVM, Fourier sign, cone, cyclic vector, and optional bounded local-operator assignment are explicit. Joint PVM support is additional input, not derived from qft-mc02."
+      }
+    },
+    "thm-qftx-spectral-tube-holomorphy": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qftx-joint-spectrum-input",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $\\mathcal H$ be a nonzero complex Hilbert space\nwith inner product $(\\cdot,\\cdot)$ linear in its first argument. Use\n$p\\cdot a:=p^0a^0-\\mathbf p\\cdot\\mathbf a$ on $\\mathbb R^4$, the convention\nof the proper-orthochronous Poincaré supplier, and put\n$$\\overline V_+:=\\{p=(p^0,\\mathbf p)\\in\\mathbb R^4:p^0\\ge|\\mathbf p|\\},\\qquad\nV_+:=\\{b=(b^0,\\mathbf b)\\in\\mathbb R^4:b^0>|\\mathbf b|\\}.$$\nFor estimates only, write\n$|p|_{\\mathrm E}:=\\sqrt{(p^0)^2+|\\mathbf p|^2}$.\n\nLet $E$ be a projection-valued measure on the Borel subsets of $\\mathbb R^4$:\neach $E(S)$ is an orthogonal projection, $E(\\varnothing)=0$,\n$E(\\mathbb R^4)=I$, $E(S\\cap T)=E(S)E(T)$, and for every disjoint sequence\n$(S_n)$, $E(\\bigcup_nS_n)\\xi=\\sum_nE(S_n)\\xi$ in norm for each\n$\\xi\\in\\mathcal H$. For a bounded Borel function $g$, write\n$\\Phi_E(g):=\\int g(p)\\,dE(p)$ for its bounded spectral integral, defined by\nuniform simple-function approximation. Let\n$U:\\mathbb R^4\\to\\mathcal B(\\mathcal H)$ be a strongly continuous unitary\nrepresentation of translations: $U(0)=I$, $U(a+a')=U(a)U(a')$, every $U(a)$\nis a surjective linear isometry, and $a\\mapsto U(a)\\xi$ is norm-continuous for\neach $\\xi\\in\\mathcal H$. The **positive-energy joint spectral input** is the\nadditional data and condition\n$$U(a)=\\Phi_E\\bigl(p\\mapsto e^{ip\\cdot a}\\bigr),\\qquad\nE(\\mathbb R^4\\setminus\\overline V_+)=0.$$\n\nFix a translation-invariant unit vector $\\Omega\\in\\mathcal H$, so $U(a)\\Omega=\\Omega$ for every $a\\in\\mathbb R^4$, and a specified unital $*$-subalgebra\n$\\mathfrak A\\subseteq\\mathcal B(\\mathcal H)$ such that\n$\\overline{\\{A\\Omega:A\\in\\mathfrak A\\}}=\\mathcal H$; this is the meaning of\ncyclic vacuum here. If local bounded operators are used, their assignment\n$O\\mapsto\\mathfrak A(O)\\subseteq\\mathfrak A$ for bounded open\n$O\\subseteq\\mathbb R^4$ is separately specified. This input asserts no\nlocality, isotony, covariance, or field-domain property for that assignment.\nThe PVM and its joint support are input; separate generators or a\nmatrix-coefficient Fourier-support condition do not replace this additional\ndata.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-bounded-borel-pvm-integral",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $(X,\\Sigma)$ be a measurable space, let $H$ be a\nnonzero complex Hilbert space, let $E$ be a projection valued measure on\n$(X,\\Sigma)$, and let $f:X\\to\\mathbb C$ be bounded and $\\Sigma$-measurable\n([[def-measurable-function-between-measurable-spaces]]). Then:\n\n1. there is a unique operator $\\Phi_E(f)\\in\\mathcal B(H)$ with\n   $$\\langle\\Phi_E(f)x,y\\rangle=\\int f\\,dE_{x,y}\\qquad(x,y\\in H),$$\n   and for every sequence $(s_n)$ of complex simple functions with\n   $\\|f-s_n\\|_\\infty\\to0$ one has $\\|\\Phi_E(f)-\\int s_n\\,dE\\|\\to0$: the integral\n   is obtained from uniform simple approximations and is independent of the\n   approximating sequence;\n2. $\\|\\Phi_E(f)\\|\\le\\|f\\|_\\infty$, and for every $x\\in H$\n$$\\langle\\Phi_E(f)x,x\\rangle=\\int f\\,dE_x,\\qquad \\|\\Phi_E(f)x\\|^2=\\int|f|^2\\,dE_x ;$$\n3. the exact norm is the **$E$-essential supremum**\n$$\\|f\\|_{E,\\infty}:=\\sup\\bigl\\{\\|f\\|_{\\infty,E_x}:\\ x\\in H,\\ \\|x\\|=1\\bigr\\}, \\qquad \\|\\Phi_E(f)\\|=\\|f\\|_{E,\\infty},$$\n   where $\\|f\\|_{\\infty,E_x}$ denotes the essential supremum of the real measurable function $|f|$ with respect to\n   the finite measure $E_x$ ([[def-essential-supremum-with-respect-to-a-measure]]).\n\n",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-cm-complex-phase-domains-and-holomorphic-maps",
+          "source_section": "Definition",
+          "quote": "**Holomorphic maps.** Let $m,p\\ge1$ and let $D\\subseteq\\mathbb C^m$ be open. Write each coordinate $z_k=x_k+iy_k$ and identify $D$ with the corresponding open subset of $\\mathbb R^{2m}$ by $(z_1,\\dots,z_m)\\mapsto(x_1,y_1,\\dots,x_m,y_m)$. A map $F:D\\to\\mathbb C^p$ is **complex differentiable at** $a\\in D$ when there is a map $L:\\mathbb C^m\\to\\mathbb C^p$ that is $\\mathbb C$-linear — $L(u+v)=L(u)+L(v)$ and $L(\\lambda u)=\\lambda L(u)$ for $\\lambda\\in\\mathbb C$ ([[def-linear-map]], [[def-euclidean-linear-map]], [[thm-complex-numbers-form-a-field]]) — with\n\n$$F(a+v)=F(a)+L(v)+r(v),\\qquad \\frac{\\lVert r(v)\\rVert}{\\lVert v\\rVert}\\longrightarrow0\\ \\ (v\\to0),$$\n\nthe norm being the Euclidean norm of $\\mathbb R^{2m}$ and $\\mathbb R^{2p}$ ([[def-total-derivative-in-euclidean-space]]). Such an $L$ is unique by the argument of [[def-complex-differentiability-holomorphic-and-entire]], applied componentwise; it is denoted $DF(a)$. The map $F$ is **holomorphic on** $D$ when it is complex differentiable at every point of $D$; for $m=p=1$ this is the notion of [[def-complex-differentiability-holomorphic-and-entire]]. For holomorphic $F$ and $k\\le m$ put $\\partial_{z_k}F(a):=DF(a)(e_k)$, the $k$-th coordinate derivative; for $p=1$ this is the partial derivative of [[def-directional-and-partial-derivatives]] in the complex coordinate direction.\n\n**Real analytic functions.** Let $N\\ge1$ and let $V\\subseteq\\mathbb R^N$ be open. A function $\\varphi:V\\to\\mathbb R$ is **real analytic at** $x\\in V$ when there are an open set $W\\subseteq\\mathbb C^N$ with $x\\in W$ and a holomorphic $F:W\\to\\mathbb C$ with $F(\\xi)=\\varphi(\\xi)$ for every $\\xi\\in W\\cap V$; $\\varphi$ is **real analytic on** $V$ when it is real analytic at every point of $V$. Thus real analyticity is defined here exactly as *admitting a local holomorphic extension*.\n\n**Polydiscs.** For $a\\in\\mathbb C^m$ and a polyradius $\\rho=(\\rho_1,\\dots,\\rho_m)$ with $0<\\rho_k\\le\\infty$ put\n\n$$\\Delta_\\rho(a):=\\{\\,z\\in\\mathbb C^m:\\ |z_k-a_k|<\\rho_k\\ \\text{for all }k\\,\\},$$\n\nthe open **polydisc**, which is open and convex ([[def-metric-ball]], [[def-metric-topology]]). If every $\\rho_k$ is finite, its **distinguished boundary** is\n\n$$\\Gamma_\\rho(a):=\\{\\,z\\in\\mathbb C^m:\\ |z_k-a_k|=\\rho_k\\ \\text{for all }k\\,\\}.$$\n\nWhen any radius is infinite, no distinguished boundary is defined.\n\n**Complex phase domains.** Let $d\\ge1$. A **complex phase domain** is a nonempty open $D\\subseteq\\mathbb C^{2d}$ whose points are written $Z=(z,w)$ with $z=(z^1,\\dots,z^d)$, $w=(w_1,\\dots,w_d)\\in\\mathbb C^d$. In these coordinates, $\\partial_{z^i}$ and $\\partial_{w_i}$ denote the coordinate derivatives defined above for the corresponding entries of $Z$. On $D$ define the **complexified canonical two-form** and the **complexified Poisson bracket** of holomorphic functions $f,g:D\\to\\mathbb C$ by\n\n$$\\omega_{\\mathbb C}:=\\sum_{i=1}^d dz^i\\wedge dw_i,\\qquad \\{f,g\\}:=\\sum_{i=1}^d\\bigl(\\partial_{z^i}f\\,\\partial_{w_i}g-\\partial_{w_i}f\\,\\partial_{z^i}g\\bigr),$$\n\nand for a holomorphic $f:D\\to\\mathbb C$ its **complex Hamiltonian field** $X_f:=J\\nabla f$, where the same entries of $J=\\begin{pmatrix}0_d&I_d\\\\-I_d&0_d\\end{pmatrix}$ from [[def-cm-phase-domain-and-standard-symplectic-two-form]] are regarded as a matrix in $M_{2d}(\\mathbb C)$, and $\\nabla f=(\\partial_{z^1}f,\\dots,\\partial_{z^d}f,\\partial_{w_1}f,\\dots,\\partial_{w_d}f)$ is the gradient column of coordinate derivatives. If $D_{\\mathbb R}:=D\\cap\\mathbb R^{2d}$ is nonempty, it is open in $\\mathbb R^{2d}$, and the restrictions of $\\omega_{\\mathbb C}$ and $J$ to $D_{\\mathbb R}$ are exactly the standard two-form and matrix of [[def-cm-phase-domain-and-standard-symplectic-two-form]].\n\n**Distance domains.** For a nonempty $U\\subseteq\\mathbb R^{2d}$ and $r>0$ put\n\n$$D(r):=\\{\\,\\zeta\\in\\mathbb C^{2d}:\\ \\operatorname{dist}(\\zeta,\\overline U)<r\\,\\},\\qquad \\operatorname{dist}(\\zeta,\\overline U):=\\inf\\{\\lVert\\zeta-x\\rVert:x\\in\\overline U\\},$$\n\nwhere $\\overline U$ is the closure of $U$ in $\\mathbb R^{2d}$ and the norm is the Euclidean norm of $\\mathbb C^{2d}\\cong\\mathbb R^{4d}$. Each $D(r)$ is open, contains $U$, and $D(r)\\subseteq D(r')$ for $r\\le r'$; if $U$ is star-shaped with respect to $0$ ([[def-star-shaped-open-subset-of-rn]]), then every $D(r)$ is star-shaped with respect to $0$ as well.\n\n",
+          "uses": [
+            "2.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.\n\n",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "cone-nonnegative-pairing",
+          "claim": "For p in the closed future cone and b in the closed future cone, the Minkowski pairing p dot b is nonnegative.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "bounded-extension",
+          "claim": "The cone-restricted exponential multiplier is bounded by one; its PVM integral is a contraction and agrees with the given translation operator at the real boundary.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "strong-boundary-continuity",
+          "claim": "Truncating the PVM to bounded-energy balls gives uniform continuity on each spectral truncation; strong countable additivity controls the omitted vector tail.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "step 2.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "compact-subcone-damping",
+          "claim": "On each compact subset of the open future cone, p dot b has a uniform positive lower bound proportional to the Euclidean norm of p on the closed future cone.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "single-factor-holomorphy",
+          "claim": "The exponentially damped PVM multiplier has a complex-linear first derivative and an operator-norm quadratic remainder, so every scalar matrix coefficient is holomorphic.",
+          "step": "2.2",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "bounded-insertion-product-holomorphy",
+          "claim": "A finite product of the operator-valued factors and fixed bounded insertions has the sum of its single-factor derivatives as total derivative; the remainder is quadratic.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F2",
+            "F3",
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement quantifies n>=1 and makes no assertion about a zero-factor product."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 allows p=0; then p dot b=0 and the spectral multiplier has modulus one, so the contraction bound includes equality."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For n=1 the product has no bounded insertions; step 4.1 remains valid and the single-factor case is established in step 2.2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 includes nonzero null p in the closed cone; p dot b remains positive for b in the open future cone. If b is lightlike boundary, step 1.1 gives a nonnegative pairing and the norm bound remains valid."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 proves strong continuity as b approaches the real boundary; holomorphy is asserted only on the open tube."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 2.1, 2.2, 3.1, and 4.1 use the exact AC_omega premise stated in A1 for the bounded PVM calculus supplier F2."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement gives direct operator bounds and holomorphy, not an iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement gives direct operator bounds and holomorphy, not an iff claim."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "zero momentum and norm equality",
+          "status": "checked",
+          "evidence": "For p=(0,0,0,0), p dot b=0 and |e^{ip dot (a+ib)}|=1; the bound is non-strict and sharp."
+        },
+        {
+          "name": "null spectrum boundary",
+          "status": "checked",
+          "evidence": "For p=(1,1,0,0) and b=(1,0,0,0), p dot b=1 and the modulus is e^{-1}. For p=b=(1,1,0,0), both vectors are null and p dot b=0, so the closed-tube contraction remains one."
+        },
+        {
+          "name": "single factor and two bounded insertions",
+          "status": "checked",
+          "evidence": "At n=1 the product is one U factor; at n=2 it is U(z1)B1U(z2). The derivative expansion in step 3.1 applies with respectively zero or one insertion and has no empty-factor exception."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-83 author",
+        "notes": "The scalar spectral support is restricted to the closed future cone; exponential damping is uniform only on compact subsets of the open cone. Boundary continuity is proved strongly by spectral truncation. No operator-norm boundary continuity, unbounded-field domain result, locality, CPT theorem, or spin-statistics theorem is claimed."
+      }
+    },
+    "def-qftx-cpt-spin-statistics-interface": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The interface does not assert a theorem for an empty field multiplet; its finite component space is specified as nonempty by the selected theorem."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: The joint-spectrum input permits p=0; any theorem using it must retain that boundary case and state whether its vacuum vector is the only zero-momentum state."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: The scalar one-component case is included; any spinor or larger multiplet must separately state its representation and component phases."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: The interface requires the selected theorem to specify reducibility, central spin parity, field grading, and any mixed-parity exclusions; it does not infer a single sign for mixed multiplets."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint parameter occurs in this proof-interface definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: The interface carries AC_omega through the joint PVM and bounded spectral calculus; no further choice principle is asserted."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition is a checklist of data and proof duties, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition is a checklist of data and proof duties, not a biconditional."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-83 author",
+        "notes": "This is a minimum-interface definition only. It supplies no Wightman, CPT, spin-statistics, complex-Lorentz-extension, or edge-of-the-wedge theorem."
+      }
+    },
+    "ex-qftx-positive-frequency-tube": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qftx-joint-spectrum-input",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $\\mathcal H$ be a nonzero complex Hilbert space\nwith inner product $(\\cdot,\\cdot)$ linear in its first argument. Use\n$p\\cdot a:=p^0a^0-\\mathbf p\\cdot\\mathbf a$ on $\\mathbb R^4$, the convention\nof the proper-orthochronous Poincaré supplier, and put\n$$\\overline V_+:=\\{p=(p^0,\\mathbf p)\\in\\mathbb R^4:p^0\\ge|\\mathbf p|\\},\\qquad\nV_+:=\\{b=(b^0,\\mathbf b)\\in\\mathbb R^4:b^0>|\\mathbf b|\\}.$$\nFor estimates only, write\n$|p|_{\\mathrm E}:=\\sqrt{(p^0)^2+|\\mathbf p|^2}$.\n\nLet $E$ be a projection-valued measure on the Borel subsets of $\\mathbb R^4$:\neach $E(S)$ is an orthogonal projection, $E(\\varnothing)=0$,\n$E(\\mathbb R^4)=I$, $E(S\\cap T)=E(S)E(T)$, and for every disjoint sequence\n$(S_n)$, $E(\\bigcup_nS_n)\\xi=\\sum_nE(S_n)\\xi$ in norm for each\n$\\xi\\in\\mathcal H$. For a bounded Borel function $g$, write\n$\\Phi_E(g):=\\int g(p)\\,dE(p)$ for its bounded spectral integral, defined by\nuniform simple-function approximation. Let\n$U:\\mathbb R^4\\to\\mathcal B(\\mathcal H)$ be a strongly continuous unitary\nrepresentation of translations: $U(0)=I$, $U(a+a')=U(a)U(a')$, every $U(a)$\nis a surjective linear isometry, and $a\\mapsto U(a)\\xi$ is norm-continuous for\neach $\\xi\\in\\mathcal H$. The **positive-energy joint spectral input** is the\nadditional data and condition\n$$U(a)=\\Phi_E\\bigl(p\\mapsto e^{ip\\cdot a}\\bigr),\\qquad\nE(\\mathbb R^4\\setminus\\overline V_+)=0.$$\n\nFix a translation-invariant unit vector $\\Omega\\in\\mathcal H$, so $U(a)\\Omega=\\Omega$ for every $a\\in\\mathbb R^4$, and a specified unital $*$-subalgebra\n$\\mathfrak A\\subseteq\\mathcal B(\\mathcal H)$ such that\n$\\overline{\\{A\\Omega:A\\in\\mathfrak A\\}}=\\mathcal H$; this is the meaning of\ncyclic vacuum here. If local bounded operators are used, their assignment\n$O\\mapsto\\mathfrak A(O)\\subseteq\\mathfrak A$ for bounded open\n$O\\subseteq\\mathbb R^4$ is separately specified. This input asserts no\nlocality, isotony, covariance, or field-domain property for that assignment.\nThe PVM and its joint support are input; separate generators or a\nmatrix-coefficient Fourier-support condition do not replace this additional\ndata.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qftx-spectral-tube-holomorphy",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and the positive-energy joint spectral input of\n[[def-qftx-joint-spectrum-input]] on $\\mathcal H$. Put\n$\\mathcal T_+:=\\{a+ib:a\\in\\mathbb R^4,\\ b\\in V_+\\}$ and, for\n$z=a+ib\\in\\mathcal T_+$, define\n$$U(z):=\\Phi_E\\bigl(p\\mapsto\\mathbf1_{\\overline V_+}(p)e^{ip\\cdot z}\\bigr),\n\\qquad p\\cdot z:=p^0z^0-\\mathbf p\\cdot\\mathbf z.$$\nThen $U(z)$ is a bounded operator with $\\|U(z)\\|\\le1$; the same formula\nextends it to a strongly continuous contraction-valued map on\n$\\mathbb R^4+i\\overline V_+$ and agrees with the given $U(a)$ when $b=0$.\nHolomorphic means complex differentiable as a map of the full complex\ncoordinate vector, with a complex-linear total derivative and remainder\n$o(\\|h\\|)$.\n\nFor every integer $n\\ge1$, every $B_1,\\ldots,B_{n-1}\\in\\mathcal B(\\mathcal H)$,\nand every $\\psi,\\phi\\in\\mathcal H$, the matrix coefficient\n$$F(z_1,\\ldots,z_n):=\n\\bigl(U(z_1)B_1U(z_2)\\cdots B_{n-1}U(z_n)\\psi,\\phi\\bigr)$$\nis holomorphic on $\\mathcal T_+^n$, where each\n$\\operatorname{Im}z_j\\in V_+$. No locality assumption on the bounded\ninsertions is used. This result concerns bounded operators; it asserts no\ndomain, product, or holomorphy claim for unbounded Wightman fields.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "point-pvm-is-joint-spectrum-input",
+          "claim": "The two-point PVM at 0 and p is strongly countably additive and cone-supported, the diagonal translation representation is strongly continuous, and the zero-mode vector is invariant and cyclic.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "positive-frequency-damping",
+          "claim": "The spectral integral is diagonal with vacuum eigenvalue one and nonzero-frequency eigenvalue e^{ip dot a}e^{-p dot b}; the latter decays for b in the open future cone.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "fourier-sign-reverses-tube",
+          "claim": "Reversing the exponential sign changes the nonzero-frequency modulus to e^{p dot b}, which grows in the future direction and decays in the past direction; the zero vacuum mode remains one.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No interval, empty family, or limiting endpoint occurs in the scalar-frequency example."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 includes the zero vacuum spectral mode; its positive and reversed exponential phases both have modulus one."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: there is exactly one nonzero frequency p in addition to the zero vacuum mode, and step 1.1 verifies the two-dimensional joint input."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 treats nonzero null p: with b in the open future cone, p dot b remains strictly positive, so the nonzero mode still grows or decays according to the Fourier sign."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: at b=0 both exponential signs have modulus one on both spectral modes; strict growth or decay is only asserted for timelike imaginary displacement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The example states AC_omega because its PVM integral supplier requires it; the point PVM itself is explicitly constructed without further choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies a direct exponential identity, not an iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example verifies a direct exponential identity, not an iff claim."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "timelike momentum and displacement",
+          "status": "checked",
+          "evidence": "With p=(2,0,0,0), b=(1,0,0,0), the positive-sign eigenvalue on e1 has modulus e^{-2} and the reversed-sign eigenvalue has modulus e^2; the vacuum eigenvalue on e0 remains one."
+        },
+        {
+          "name": "zero and null boundary",
+          "status": "checked",
+          "evidence": "The e0 vacuum mode at zero momentum always has modulus one. For nonzero null p=(1,1,0,0) and timelike b=(1,0,0,0), p dot b=1, so the e1 eigenvalue has positive-sign modulus e^{-1} and reversed-sign modulus e."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-83 author",
+        "notes": "This is a finite two-mode representation with a zero-momentum cyclic vacuum and one nonzero positive-energy frequency. The vacuum mode keeps the full operator norm equal to one; the damping/growth claim is made on the nonzero-frequency subspace only. It neither reconstructs a general QFT representation nor asserts a physical field, measurement, or discrete-symmetry theorem."
+      }
+    }
+  }
+}

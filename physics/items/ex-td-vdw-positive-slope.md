@@ -7,7 +7,7 @@ origin: pipeline
 domain: physics
 library: physics
 physical_scope: An exact derivative calculation in the dimensionless reduced van der Waals model below its model critical temperature; no real-fluid measurement or universal equation of state is asserted.
-dependency_level: 9
+dependency_level: 1
 deps:
   - def-td-phase-and-coexistence-domain
 dependency_roles:

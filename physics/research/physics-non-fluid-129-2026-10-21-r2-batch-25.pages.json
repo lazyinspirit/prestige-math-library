@@ -1,0 +1,236 @@
+[
+  {
+    "order": 747,
+    "id": "emg-fx10",
+    "kind": "A",
+    "category": "einstein-maxwell-models-mathematics",
+    "library": "mathematics",
+    "title": "Compatible discrete Maxwell constraints and finite algorithms",
+    "companion": "emg-fx10-examples",
+    "requires": [
+      "emg-cp02",
+      "emg-fx09"
+    ],
+    "items": [
+      {
+        "id": "def-emg-fx-cochain-maxwell",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Finite cochain Maxwell phase space",
+        "reference": "research/plan-einstein-maxwell-models-frontier-expansion-track.md#emg-fx10-compatible-discrete-maxwell-constraints-and-finite-algorithms",
+        "design_state": "Step 1 authored draft; readiness recorded separately.",
+        "dependency_level": 0,
+        "deps": [
+          "lem-cm-positive-definite-matrix-square-roots"
+        ],
+        "dependency_roles": {
+          "lem-cm-positive-definite-matrix-square-roots": "mathematical-premise"
+        },
+        "physical_scope": null,
+        "inventory_expansion_required": false,
+        "statement": "Fix nonnegative integers $n_0,n_1,n_2,n_3$ and ordered coordinate bases, and put $C^k:=\\mathbb R^{n_k}$ for $k=0,1,2,3$. The dual space $(C^k)^*$ is the vector space of linear functionals $C^k\\to\\mathbb R$, with the dual basis to the chosen coordinate basis. Let $D_0\\in\\mathbb R^{n_1\\times n_0}$, $D_1\\in\\mathbb R^{n_2\\times n_1}$, and $D_2\\in\\mathbb R^{n_3\\times n_2}$ be linear maps satisfying $D_1D_0=0$ and $D_2D_1=0$. This data is a finite cochain complex. The transpose $D_k^{\\mathsf T}$ denotes the representing matrix of the dual linear map in the dual bases. Let $M_1\\in\\mathbb R^{n_1\\times n_1}$ and $M_2\\in\\mathbb R^{n_2\\times n_2}$ be symmetric positive-definite matrices: $v^{\\mathsf T}M_kv>0$ for each nonzero $v\\in C^k$. They represent linear maps $M_1:C^1\\to(C^1)^*$ and $M_2:C^2\\to(C^2)^*$ in the chosen bases; in positive dimensions their inverses exist by the finite-dimensional positive-matrix result cited below, and the unique map on a zero-dimensional space is its own inverse.\n\nThe finite state space is $\\mathcal X:=C^2\\oplus(C^1)^*$, with state $(b,d)$, where $b$ is a column of $C^2$ coordinates and $d$ is a column in the dual basis of $(C^1)^*$. In this item, “phase space” means this finite-dimensional state space only; no symplectic form is asserted. On an open interval $J\\subseteq\\mathbb R$, a semidiscrete trajectory is a continuously differentiable map $t\\mapsto(b(t),d(t))\\in\\mathcal X$ satisfying\n\n$$\\dot b(t)=-D_1M_1^{-1}d(t),\\qquad \\dot d(t)=D_1^{\\mathsf T}M_2b(t).$$\n\nIts two discrete constraints are $D_2b(t)=0$ in $C^3$ and $D_0^{\\mathsf T}d(t)=0$ in $(C^0)^*$. The associated quadratic energy is\n\n$$\\mathcal E(b,d):=\\tfrac12\\left(b^{\\mathsf T}M_2b+d^{\\mathsf T}M_1^{-1}d\\right).$$\n\nAll objects here are finite-dimensional real linear-algebra data. The term “Maxwell” names this algebraic model and does not identify it with a continuum Maxwell or Einstein–Maxwell solution.",
+        "library": "mathematics",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ralf Hiptmair, Maxwell’s Equations: Continuous and Discrete, ETH Research Report 2015-18",
+              "url": "https://www.sam.math.ethz.ch/sam_reports/reports_final/reports2015/2015-18.pdf",
+              "locator": "Complete 56-page report inspected. §§3.1–3.3, printed pp. 23–26 (PDF pp. 24–27): finite cochains, signed incidence matrices, D_{k+1}D_k=0, and the separate scope of cochain sampling."
+            },
+            {
+              "title": "Davit Harutyunyan, Adaptive Vector Finite Element Methods for the Maxwell Equations, University of Twente dissertation (2007)",
+              "url": "https://ris.utwente.nl/ws/portalfiles/portal/6041555/thesis_Harutyunyan.pdf",
+              "locator": "Complete 210-page dissertation inspected. Ch. 6, §§6.4–6.9, printed pp. 161–174 (PDF pp. 171–184): bounded-domain Maxwell system, positive material forms, finite-element mass matrices, staggered leapfrog and discrete divergence."
+            }
+          ]
+        }
+      },
+      {
+        "id": "alg-emg-fx-leapfrog-cochains",
+        "kind": "algorithm",
+        "domain": "mathematics",
+        "title": "Finite compatible leapfrog evolution",
+        "reference": "research/plan-einstein-maxwell-models-frontier-expansion-track.md#emg-fx10-compatible-discrete-maxwell-constraints-and-finite-algorithms",
+        "design_state": "Step 1 authored draft; readiness recorded separately.",
+        "dependency_level": 1,
+        "deps": [
+          "def-emg-fx-cochain-maxwell"
+        ],
+        "dependency_roles": {
+          "def-emg-fx-cochain-maxwell": "mathematical-premise"
+        },
+        "physical_scope": null,
+        "inventory_expansion_required": false,
+        "statement": "Use the finite cochain data fixed by the preceding definition item, namely finite real coordinate spaces $C^0,C^1,C^2,C^3$, maps $D_0,D_1,D_2$ with $D_1D_0=D_2D_1=0$, and symmetric positive-definite mass maps $M_1,M_2$. Inputs are rational matrices $D_0,D_1,D_2,M_1,M_2$, rational initial coordinates $b_0\\in C^2$ and $d_{1/2}\\in(C^1)^*$, a positive rational step size $\\tau$, and an integer $N\\geq0$. The matrices and states use the fixed ordered bases and dual bases from that definition. All arithmetic is exact over $\\mathbb Q$; floating-point arithmetic is not part of this algorithm.\n\nFirst compute $R=M_1^{-1}$ once by fixed-order, no-row-swap Gauss–Jordan elimination of the augmented matrix $[M_1\\mid I_{n_1}]$. For each pivot column $j=1,\\ldots,n_1$, let $p$ be the current entry in position $(j,j)$. If $p=0$, return an inconsistency error. Otherwise divide row $j$ by $p$ and, for every $k\\neq j$, replace row $k$ by row $k$ minus its current column-$j$ entry times row $j$. After all columns are processed, let $R$ be the right block. For $n_1=0$, take the unique empty matrix for $R$ and perform no elimination.\n\nSet $(b,d):=(b_0,d_{1/2})$ and record this initial state. For each $n=0,\\ldots,N-1$, in the stated order compute\n\n$$b_{\\mathrm{new}}:=b-\\tau D_1Rd,\\qquad d_{\\mathrm{new}}:=d+\\tau D_1^{\\mathsf T}M_2b_{\\mathrm{new}}.$$\n\nAppend $(b_{\\mathrm{new}},d_{\\mathrm{new}})$ to the output list and then set $(b,d):=(b_{\\mathrm{new}},d_{\\mathrm{new}})$. After the loop, return $R$ together with the list of the $N+1$ states $(b_n,d_{n+1/2})$ for $0\\leq n\\leq N$. The error branch is unreachable on admissible inputs; the separate finite-step termination lemma proves this and the exact inverse output.",
+        "library": "mathematics",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ralf Hiptmair, Maxwell’s Equations: Continuous and Discrete, ETH Research Report 2015-18",
+              "url": "https://www.sam.math.ethz.ch/sam_reports/reports_final/reports2015/2015-18.pdf",
+              "locator": "Complete 56-page report inspected. §§3.1–3.3, printed pp. 23–26 (PDF pp. 24–27): incidence cochains and topological identities; this algorithm is specified separately in exact rational arithmetic."
+            },
+            {
+              "title": "Davit Harutyunyan, Adaptive Vector Finite Element Methods for the Maxwell Equations, University of Twente dissertation (2007)",
+              "url": "https://ris.utwente.nl/ws/portalfiles/portal/6041555/thesis_Harutyunyan.pdf",
+              "locator": "Complete 210-page dissertation inspected. Ch. 6, §§6.7–6.9, printed pp. 169–174 (PDF pp. 179–184): matrix semidiscretization, the staggered leapfrog update, a CFL condition, and discrete Gauss constraints."
+            }
+          ]
+        },
+        "justified_by": [
+          "lem-emg-fx-finite-step-termination"
+        ]
+      },
+      {
+        "id": "prop-emg-fx-discrete-gauss-preservation",
+        "kind": "proposition",
+        "domain": "mathematics",
+        "title": "Exact discrete constraints and semidiscrete and staggered energy",
+        "reference": "research/plan-einstein-maxwell-models-frontier-expansion-track.md#emg-fx10-compatible-discrete-maxwell-constraints-and-finite-algorithms",
+        "design_state": "Step 1 authored draft; readiness recorded separately.",
+        "dependency_level": 2,
+        "deps": [
+          "def-emg-fx-cochain-maxwell",
+          "alg-emg-fx-leapfrog-cochains",
+          "lem-cm-positive-definite-matrix-square-roots",
+          "thm-operator-norm-is-the-largest-singular-value",
+          "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces"
+        ],
+        "dependency_roles": {
+          "def-emg-fx-cochain-maxwell": "mathematical-premise",
+          "alg-emg-fx-leapfrog-cochains": "mathematical-premise",
+          "lem-cm-positive-definite-matrix-square-roots": "mathematical-premise",
+          "thm-operator-norm-is-the-largest-singular-value": "mathematical-premise",
+          "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces": "mathematical-premise"
+        },
+        "physical_scope": null,
+        "inventory_expansion_required": false,
+        "statement": "Use finite-dimensional real cochain data as in the definition item and fix $\\tau>0$. For a state $(b,d)\\in\\mathcal X$, define the real one-step map $T_\\tau:\\mathcal X\\to\\mathcal X$ by\n\n$$b^+:=b-\\tau D_1M_1^{-1}d,\\qquad d^+:=d+\\tau D_1^{\\mathsf T}M_2b^+,\\qquad T_\\tau(b,d):=(b^+,d^+).$$\n\nOn rational admissible matrices, rational initial coordinates, and rational $\\tau>0$, this is the one-step update used by the exact rational algorithm; the algorithm's input domain is the rational one stated in its Definition. For every real input state, $D_2b^+=D_2b$ and $D_0^{\\mathsf T}d^+=D_0^{\\mathsf T}d$, so an input satisfying both zero constraints maps to a state satisfying both. Every continuously differentiable semidiscrete solution conserves $\\mathcal E(b,d)$. For any sequence $(b_n,d_{n+1/2})_{n\\geq0}$ with $(b_{n+1},d_{n+3/2})=T_\\tau(b_n,d_{n+1/2})$, define\n\n$$Q_\\tau(b,d):=b^{\\mathsf T}M_2b+d^{\\mathsf T}M_1^{-1}d-\\tau b^{\\mathsf T}M_2D_1M_1^{-1}d,\\qquad Q_n:=Q_\\tau(b_n,d_{n+1/2}).$$\n\nThen $Q_n$ is exactly invariant under $T_\\tau$. Equip coordinate and dual-coordinate columns with their standard Euclidean inner products, so $\\langle x,y\\rangle=x^{\\mathsf T}y$ and $\\lVert x\\rVert_2=(x^{\\mathsf T}x)^{1/2}$. Regard $S:=M_2^{1/2}D_1M_1^{-1/2}$ as a real linear map from the dual-coordinate columns of $(C^1)^*$ to the coordinate columns of $C^2$. Set $\\sigma:=0$ when its domain $(C^1)^*$ is zero; otherwise set $\\sigma:=\\max_{\\lVert y\\rVert_2=1}\\lVert Sy\\rVert_2$. For a nonzero domain this is the largest singular value of $S$. The quadratic form $Q_\\tau$ is positive definite on $\\mathcal X$ whenever $\\tau\\sigma<2$.",
+        "library": "mathematics",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ralf Hiptmair, Maxwell’s Equations: Continuous and Discrete, ETH Research Report 2015-18",
+              "url": "https://www.sam.math.ethz.ch/sam_reports/reports_final/reports2015/2015-18.pdf",
+              "locator": "Complete 56-page report inspected. §§3.1–3.3, printed pp. 23–26 (PDF pp. 24–27): signed incidence identities and the algebraic preservation of cochain Maxwell constraints."
+            },
+            {
+              "title": "Davit Harutyunyan, Adaptive Vector Finite Element Methods for the Maxwell Equations, University of Twente dissertation (2007)",
+              "url": "https://ris.utwente.nl/ws/portalfiles/portal/6041555/thesis_Harutyunyan.pdf",
+              "locator": "Complete 210-page dissertation inspected. Ch. 6, §§6.7–6.9, printed pp. 169–174 (PDF pp. 179–184): exact staggered energy in a Whitney finite-element scheme and a separate discrete-divergence construction."
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-emg-fx-finite-step-termination",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Finite arithmetic termination and cost",
+        "reference": "research/plan-einstein-maxwell-models-frontier-expansion-track.md#emg-fx10-compatible-discrete-maxwell-constraints-and-finite-algorithms",
+        "design_state": "Step 1 authored draft; readiness recorded separately.",
+        "dependency_level": 2,
+        "deps": [
+          "def-emg-fx-cochain-maxwell",
+          "alg-emg-fx-leapfrog-cochains"
+        ],
+        "dependency_roles": {
+          "def-emg-fx-cochain-maxwell": "mathematical-premise",
+          "alg-emg-fx-leapfrog-cochains": "mathematical-premise"
+        },
+        "physical_scope": null,
+        "inventory_expansion_required": false,
+        "statement": "For rational admissible input matrices and initial state, positive rational step size $\\tau$, and finite $N\\geq0$, the specified finite leapfrog algorithm returns after finitely many exact rational arithmetic operations, with the stated $N+1$ states and the exact rational inverse $M_1^{-1}$. A dense implementation uses $O(n_1^3)$ rational arithmetic operations for the one-time elimination and $O(n_1^2+n_1n_2+n_2^2)$ per update. Retaining all input matrices $D_0,D_1,D_2,M_1,M_2$, the computed inverse, and all $N+1$ states uses $O(n_1n_0+n_1^2+n_1n_2+n_2^2+n_2n_3+(N+1)(n_1+n_2))$ rational entries. These are arithmetic-operation and storage counts only; they give no bound on rational bit growth, floating-point roundoff, linear-solve residuals, or continuum accuracy.",
+        "library": "mathematics",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ralf Hiptmair, Maxwell’s Equations: Continuous and Discrete, ETH Research Report 2015-18",
+              "url": "https://www.sam.math.ethz.ch/sam_reports/reports_final/reports2015/2015-18.pdf",
+              "locator": "Complete 56-page report inspected. §§3.1–3.3, printed pp. 23–26 (PDF pp. 24–27), for the finite-coordinate cochain setting; the operation-count proof here is local."
+            },
+            {
+              "title": "Davit Harutyunyan, Adaptive Vector Finite Element Methods for the Maxwell Equations, University of Twente dissertation (2007)",
+              "url": "https://ris.utwente.nl/ws/portalfiles/portal/6041555/thesis_Harutyunyan.pdf",
+              "locator": "Complete 210-page dissertation inspected. Ch. 6, §§6.7–6.9, printed pp. 169–174 (PDF pp. 179–184), for the finite matrix evolution context; the exact rational termination and arithmetic count are proved here."
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      }
+    ]
+  },
+  {
+    "order": 748,
+    "id": "emg-fx10-examples",
+    "kind": "B",
+    "category": "einstein-maxwell-models-mathematics",
+    "library": "mathematics",
+    "title": "Compatible discrete Maxwell constraints and finite algorithms — Examples",
+    "companion": "emg-fx10",
+    "requires": [
+      "emg-fx10"
+    ],
+    "items": [
+      {
+        "id": "cex-emg-fx-cfl-discrete-growth",
+        "kind": "counterexample",
+        "domain": "mathematics",
+        "title": "Constraint preservation does not imply bounded leapfrog evolution",
+        "reference": "research/plan-einstein-maxwell-models-frontier-expansion-track.md#emg-fx10-compatible-discrete-maxwell-constraints-and-finite-algorithms",
+        "design_state": "Step 1 authored draft; readiness recorded separately.",
+        "dependency_level": 3,
+        "deps": [
+          "def-emg-fx-cochain-maxwell",
+          "alg-emg-fx-leapfrog-cochains",
+          "prop-emg-fx-discrete-gauss-preservation"
+        ],
+        "dependency_roles": {
+          "def-emg-fx-cochain-maxwell": "mathematical-premise",
+          "alg-emg-fx-leapfrog-cochains": "mathematical-premise",
+          "prop-emg-fx-discrete-gauss-preservation": "mathematical-premise"
+        },
+        "physical_scope": null,
+        "inventory_expansion_required": false,
+        "statement": "The statement refuted is: for every finite cochain datum of the type defined in the item named “Finite cochain Maxwell phase space,” every positive rational step size in the item named “Finite compatible leapfrog evolution,” and every initial state satisfying $D_2b_0=0$ and $D_0^{\\mathsf T}d_{1/2}=0$, repeated application of its one-step map has a bounded orbit. Here “bounded orbit” means that the Euclidean norm of the coordinate vector $(b_n,d_{n+1/2})$ has finite supremum over all integers $n\\geq0$.",
+        "library": "mathematics",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ralf Hiptmair, Maxwell’s Equations: Continuous and Discrete, ETH Research Report 2015-18",
+              "url": "https://www.sam.math.ethz.ch/sam_reports/reports_final/reports2015/2015-18.pdf",
+              "locator": "Complete 56-page report inspected. §§3.1–3.3, printed pp. 23–26 (PDF pp. 24–27): incidence complexes and exact topological identities; it supplies no time-step stability claim for this example."
+            },
+            {
+              "title": "Davit Harutyunyan, Adaptive Vector Finite Element Methods for the Maxwell Equations, University of Twente dissertation (2007)",
+              "url": "https://ris.utwente.nl/ws/portalfiles/portal/6041555/thesis_Harutyunyan.pdf",
+              "locator": "Complete 210-page dissertation inspected. Ch. 6, §6.8, printed pp. 171–172 (PDF pp. 181–182): a different Whitney finite-element leapfrog with a matrix-dependent CFL bound and a separately stated discrete energy."
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      }
+    ]
+  }
+]

@@ -1,0 +1,938 @@
+{
+  "version": 1,
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "scope": [
+    "def-qsmx-rational-monodromy",
+    "lem-qsmx-monodromy-rtt",
+    "lem-qsmx-transfer-regular-point",
+    "thm-qsmx-transfer-commutativity",
+    "thm-qsmx-transfer-heisenberg-charge",
+    "def-qsmx-regular-bethe-data",
+    "thm-qsmx-regular-bethe-eigenpair",
+    "ex-qsmx-one-magnon"
+  ],
+  "contracts": {
+    "def-qsmx-rational-monodromy": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Definition explicitly requires N>=3; no empty chain is defined."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition includes u=0 in its domain C and defines R(0)=iP by substitution in the displayed formula."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "N=1 and N=2 are outside the declared N>=3 domain."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Definition supplies R(u) at every complex u and asserts no global invertibility; u=±i remains in the domain."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: The cyclic shift U and ordered periodic site factors include the wrap from site N to site 1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice operation or selection from a nonempty family is used in this finite definition."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a definition, not a forward equivalence claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is a definition, not a reverse equivalence claim."
+        }
+      ]
+    },
+    "lem-qsmx-monodromy-rtt": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qsmx-rational-monodromy",
+          "source_section": "Definition",
+          "quote": "Fix an integer $N\\ge3$. Let $V=\\mathbb C^2$ with ordered basis\n$e_\\uparrow,e_\\downarrow$, let $V_N=V^{\\otimes N}$ in left-to-right site\norder, and let $V_a=V$ be an auxiliary copy. For $u\\in\\mathbb C$, define\n$R_{aj}(u)=uI_{aj}+iP_{aj}$ on $V_a\\otimes V_N$, where $P_{aj}$ swaps the\nauxiliary factor and site $j$. Define\n$$T_a(u)=R_{aN}(u)\\cdots R_{a1}(u),\\qquad t(u)=\\operatorname{tr}_a T_a(u),$$\nwhere products mean composition with the rightmost factor acting first, and\n$\\operatorname{tr}_a$ is the ordinary finite-dimensional trace over $V_a$.\nFor distinct sites $j,k$, $P_{jk}$ swaps those two tensor factors. Define the\noriented cyclic shift by\n$$U(v_1\\otimes\\cdots\\otimes v_N)=v_N\\otimes v_1\\otimes\\cdots\\otimes v_{N-1}.$$\nThe spectral parameter $u$ is dimensionless. All operators in this definition\nare finite-dimensional complex-linear endomorphisms.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-hh-rational-spectral-r-matrix-satisfies-yang-baxter",
+          "source_section": "Statement",
+          "quote": "Let $V$, $R(u)$, $R_{ij}(u)$, and $\\check R_j(u)$ be as in [[def-hh-rational-spectral-r-matrix]]. For arbitrary $x,y,z\\in\\mathbb C$, set $u=x-y$, $v=y-z$, and $w=x-z=u+v$. In $\\operatorname{End}_{\\mathbb C}(V^{\\otimes3})$ the un-checked operators satisfy\n\n$$R_{12}(u)R_{13}(w)R_{23}(v)=R_{23}(v)R_{13}(w)R_{12}(u).$$\n\nThe checked operators also satisfy the braid-form spectral identity\n\n$$\\check R_1(u)\\check R_2(w)\\check R_1(v)=\\check R_2(v)\\check R_1(w)\\check R_2(u).$$\n\n",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "Yang–Baxter specialization gives the local auxiliary/site intertwining identity.",
+          "step": "1.1",
+          "inputs": [
+            "F2"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "claim": "Induction across disjoint sites lifts the local identity to the ordered monodromy RTT relation.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "The induction endpoint is the stated full-chain RTT identity without invertibility restrictions.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes N>=3; an empty site set is outside scope."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 allows arbitrary u,v, including zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "N=1 and N=2 are excluded by the N>=3 hypothesis."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 3.1 uses the local identity without R^{-1}, so singular auxiliary differences are included."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 2.1 inducts through every site including the periodic chain endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses finite tensor products and induction, not a choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma asserts one operator identity, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma asserts one operator identity, not a converse."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "N=3 RTT at ordinary and singular auxiliary differences",
+          "inputs": [
+            "N=3",
+            "u=0,v=2",
+            "u=i,v=0"
+          ],
+          "expected": "Direct 16-dimensional auxiliary/chain matrix multiplication gives zero residual for both RTT identities; the second case has u-v=i and does not use an inverse.",
+          "result": "PASS: exact integer/Gaussian-integer matrix residual 0.0 for both N=3 cases u=0,v=2 and u=i,v=0."
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "def-qsmx-rational-monodromy",
+          "carrier": "items/def-qsmx-rational-monodromy.md",
+          "status": "Current supplier interface inspected for this assigned item; no independent supplier certification asserted.",
+          "source_section": "Definition",
+          "exact_statement": "Fix an integer $N\\ge3$. Let $V=\\mathbb C^2$ with ordered basis\n$e_\\uparrow,e_\\downarrow$, let $V_N=V^{\\otimes N}$ in left-to-right site\norder, and let $V_a=V$ be an auxiliary copy. For $u\\in\\mathbb C$, define\n$R_{aj}(u)=uI_{aj}+iP_{aj}$ on $V_a\\otimes V_N$, where $P_{aj}$ swaps the\nauxiliary factor and site $j$. Define\n$$T_a(u)=R_{aN}(u)\\cdots R_{a1}(u),\\qquad t(u)=\\operatorname{tr}_a T_a(u),$$\nwhere products mean composition with the rightmost factor acting first, and\n$\\operatorname{tr}_a$ is the ordinary finite-dimensional trace over $V_a$.\nFor distinct sites $j,k$, $P_{jk}$ swaps those two tensor factors. Define the\noriented cyclic shift by\n$$U(v_1\\otimes\\cdots\\otimes v_N)=v_N\\otimes v_1\\otimes\\cdots\\otimes v_{N-1}.$$\nThe spectral parameter $u$ is dimensionless. All operators in this definition\nare finite-dimensional complex-linear endomorphisms.\n\n",
+          "relevant_hypotheses_and_conventions": "Fix an integer $N\\ge3$. Let $V=\\mathbb C^2$ with ordered basis\n$e_\\uparrow,e_\\downarrow$, let $V_N=V^{\\otimes N}$ in left-to-right site\norder, and let $V_a=V$ be an auxiliary copy. For $u\\in\\mathbb C$, define\n$R_{aj}(u)=uI_{aj}+iP_{aj}$ on $V_a\\otimes V_N$, where $P_{aj}$ swaps the\nauxiliary factor and site $j$. Define\n$$T_a(u)=R_{aN}(u)\\cdots R_{a1}(u),\\qquad t(u)=\\operatorname{tr}_a T_a(u),$$\nwhere products mean composition with the rightmost factor acting first, and\n$\\operatorname{tr}_a$ is the ordinary finite-dimensional trace over $V_a$.\nFor distinct sites $j,k$, $P_{jk}$ swaps those two tensor factors. Define the\noriented cyclic shift by\n$$U(v_1\\otimes\\cdots\\otimes v_N)=v_N\\otimes v_1\\otimes\\cdots\\otimes v_{N-1}.$$\nThe spectral parameter $u$ is dimensionless. All operators in this definition\nare finite-dimensional complex-linear endomorphisms.\n\n",
+          "supplier_proof_status": "Current Step 1 definition interface inspected; proof is not applicable and independent acceptance is not asserted.",
+          "consumer_use": "step 2.1 uses the exact ordered site factors and their disjoint tensor supports."
+        },
+        {
+          "supplier": "lem-hh-rational-spectral-r-matrix-satisfies-yang-baxter",
+          "carrier": "items/lem-hh-rational-spectral-r-matrix-satisfies-yang-baxter.md",
+          "status": "Current supplier interface inspected for this assigned item; no independent supplier certification asserted.",
+          "source_section": "Statement",
+          "exact_statement": "Let $V$, $R(u)$, $R_{ij}(u)$, and $\\check R_j(u)$ be as in [[def-hh-rational-spectral-r-matrix]]. For arbitrary $x,y,z\\in\\mathbb C$, set $u=x-y$, $v=y-z$, and $w=x-z=u+v$. In $\\operatorname{End}_{\\mathbb C}(V^{\\otimes3})$ the un-checked operators satisfy\n\n$$R_{12}(u)R_{13}(w)R_{23}(v)=R_{23}(v)R_{13}(w)R_{12}(u).$$\n\nThe checked operators also satisfy the braid-form spectral identity\n\n$$\\check R_1(u)\\check R_2(w)\\check R_1(v)=\\check R_2(v)\\check R_1(w)\\check R_2(u).$$\n\n",
+          "relevant_hypotheses_and_conventions": "Let $V$, $R(u)$, $R_{ij}(u)$, and $\\check R_j(u)$ be as in [[def-hh-rational-spectral-r-matrix]]. For arbitrary $x,y,z\\in\\mathbb C$, set $u=x-y$, $v=y-z$, and $w=x-z=u+v$. In $\\operatorname{End}_{\\mathbb C}(V^{\\otimes3})$ the un-checked operators satisfy\n\n$$R_{12}(u)R_{13}(w)R_{23}(v)=R_{23}(v)R_{13}(w)R_{12}(u).$$\n\nThe checked operators also satisfy the braid-form spectral identity\n\n$$\\check R_1(u)\\check R_2(w)\\check R_1(v)=\\check R_2(v)\\check R_1(w)\\check R_2(u).$$\n\n",
+          "supplier_proof_status": "Published carrier; complete current proof inspected against the actual statement and hypotheses.",
+          "consumer_use": "step 1.1 specializes the supplier Yang–Baxter identity with x=u, y=v, z=0."
+        }
+      ]
+    },
+    "lem-qsmx-transfer-regular-point": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qsmx-rational-monodromy",
+          "source_section": "Definition",
+          "quote": "Fix an integer $N\\ge3$. Let $V=\\mathbb C^2$ with ordered basis\n$e_\\uparrow,e_\\downarrow$, let $V_N=V^{\\otimes N}$ in left-to-right site\norder, and let $V_a=V$ be an auxiliary copy. For $u\\in\\mathbb C$, define\n$R_{aj}(u)=uI_{aj}+iP_{aj}$ on $V_a\\otimes V_N$, where $P_{aj}$ swaps the\nauxiliary factor and site $j$. Define\n$$T_a(u)=R_{aN}(u)\\cdots R_{a1}(u),\\qquad t(u)=\\operatorname{tr}_a T_a(u),$$\nwhere products mean composition with the rightmost factor acting first, and\n$\\operatorname{tr}_a$ is the ordinary finite-dimensional trace over $V_a$.\nFor distinct sites $j,k$, $P_{jk}$ swaps those two tensor factors. Define the\noriented cyclic shift by\n$$U(v_1\\otimes\\cdots\\otimes v_N)=v_N\\otimes v_1\\otimes\\cdots\\otimes v_{N-1}.$$\nThe spectral parameter $u$ is dimensionless. All operators in this definition\nare finite-dimensional complex-linear endomorphisms.\n\n",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "The regular transfer value is i^N times the oriented cyclic shift and is invertible.",
+          "step": "1.1",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "claim": "Differentiating one factor at a time gives the omitted-swap traces U P_{m-1,m}.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "derive-1-3",
+          "claim": "Conjugating cyclic bonds yields the periodic exchange logarithmic derivative with the stated sign.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires N>=3."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 evaluates the transfer matrix at the regular spectral point u=0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The N=1 and N=2 counting conventions are outside the declared domain."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: No inverse of R(u) at general u is used; t(0) is proved invertible from the cyclic permutation U."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 2.1 handles the wrap bond P_{N,1} and step 3.1 closes the periodic index convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Only finite sums and explicit basis calculations are used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma proves identities and asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma proves identities and asserts no converse."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "N=3 regular point and periodic derivative",
+          "inputs": [
+            "N=3"
+          ],
+          "expected": "Exact 8x8 matrices satisfy t(0)=i^3 U and i tprime(0)t(0)^-1=P12+P23+P31.",
+          "result": "PASS: exact integer/Gaussian-integer residual 0.0 for t(0)=i^3 U and i tprime(0)t(0)^-1=P12+P23+P31 at N=3."
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "def-qsmx-rational-monodromy",
+          "carrier": "items/def-qsmx-rational-monodromy.md",
+          "status": "Current supplier interface inspected for this assigned item; no independent supplier certification asserted.",
+          "source_section": "Definition",
+          "exact_statement": "Fix an integer $N\\ge3$. Let $V=\\mathbb C^2$ with ordered basis\n$e_\\uparrow,e_\\downarrow$, let $V_N=V^{\\otimes N}$ in left-to-right site\norder, and let $V_a=V$ be an auxiliary copy. For $u\\in\\mathbb C$, define\n$R_{aj}(u)=uI_{aj}+iP_{aj}$ on $V_a\\otimes V_N$, where $P_{aj}$ swaps the\nauxiliary factor and site $j$. Define\n$$T_a(u)=R_{aN}(u)\\cdots R_{a1}(u),\\qquad t(u)=\\operatorname{tr}_a T_a(u),$$\nwhere products mean composition with the rightmost factor acting first, and\n$\\operatorname{tr}_a$ is the ordinary finite-dimensional trace over $V_a$.\nFor distinct sites $j,k$, $P_{jk}$ swaps those two tensor factors. Define the\noriented cyclic shift by\n$$U(v_1\\otimes\\cdots\\otimes v_N)=v_N\\otimes v_1\\otimes\\cdots\\otimes v_{N-1}.$$\nThe spectral parameter $u$ is dimensionless. All operators in this definition\nare finite-dimensional complex-linear endomorphisms.\n\n",
+          "relevant_hypotheses_and_conventions": "Fix an integer $N\\ge3$. Let $V=\\mathbb C^2$ with ordered basis\n$e_\\uparrow,e_\\downarrow$, let $V_N=V^{\\otimes N}$ in left-to-right site\norder, and let $V_a=V$ be an auxiliary copy. For $u\\in\\mathbb C$, define\n$R_{aj}(u)=uI_{aj}+iP_{aj}$ on $V_a\\otimes V_N$, where $P_{aj}$ swaps the\nauxiliary factor and site $j$. Define\n$$T_a(u)=R_{aN}(u)\\cdots R_{a1}(u),\\qquad t(u)=\\operatorname{tr}_a T_a(u),$$\nwhere products mean composition with the rightmost factor acting first, and\n$\\operatorname{tr}_a$ is the ordinary finite-dimensional trace over $V_a$.\nFor distinct sites $j,k$, $P_{jk}$ swaps those two tensor factors. Define the\noriented cyclic shift by\n$$U(v_1\\otimes\\cdots\\otimes v_N)=v_N\\otimes v_1\\otimes\\cdots\\otimes v_{N-1}.$$\nThe spectral parameter $u$ is dimensionless. All operators in this definition\nare finite-dimensional complex-linear endomorphisms.\n\n",
+          "supplier_proof_status": "Current Step 1 definition interface inspected; proof is not applicable and independent acceptance is not asserted.",
+          "consumer_use": "Steps 1.1–1.3 use the exact R, trace, site-swap and cyclic-shift conventions."
+        }
+      ]
+    },
+    "thm-qsmx-transfer-commutativity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qsmx-rational-monodromy",
+          "source_section": "Definition",
+          "quote": "Fix an integer $N\\ge3$. Let $V=\\mathbb C^2$ with ordered basis\n$e_\\uparrow,e_\\downarrow$, let $V_N=V^{\\otimes N}$ in left-to-right site\norder, and let $V_a=V$ be an auxiliary copy. For $u\\in\\mathbb C$, define\n$R_{aj}(u)=uI_{aj}+iP_{aj}$ on $V_a\\otimes V_N$, where $P_{aj}$ swaps the\nauxiliary factor and site $j$. Define\n$$T_a(u)=R_{aN}(u)\\cdots R_{a1}(u),\\qquad t(u)=\\operatorname{tr}_a T_a(u),$$\nwhere products mean composition with the rightmost factor acting first, and\n$\\operatorname{tr}_a$ is the ordinary finite-dimensional trace over $V_a$.\nFor distinct sites $j,k$, $P_{jk}$ swaps those two tensor factors. Define the\noriented cyclic shift by\n$$U(v_1\\otimes\\cdots\\otimes v_N)=v_N\\otimes v_1\\otimes\\cdots\\otimes v_{N-1}.$$\nThe spectral parameter $u$ is dimensionless. All operators in this definition\nare finite-dimensional complex-linear endomorphisms.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qsmx-transfer-regular-point",
+          "source_section": "Statement",
+          "quote": "Let $t(u)$ and $U$ be the transfer matrix and cyclic shift defined by the\nordered monodromy construction. Use the periodic convention\n$P_{N,N+1}:=P_{N,1}$. Then\n$$t(0)=i^N U,\\qquad i\\,t'(0)t(0)^{-1}=\\sum_{j=1}^N P_{j,j+1}.$$\nIn particular, $t(0)$ is invertible. The derivative is with respect to the\ndimensionless complex parameter $u$.\n\n",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qsmx-monodromy-rtt",
+          "source_section": "Statement",
+          "quote": "For the ordered periodic monodromies\n$$T_a(u):=R_{aN}(u)\\cdots R_{a1}(u),\\qquad T_b(v):=R_{bN}(v)\\cdots R_{b1}(v),$$\nthe finite-dimensional operator identity\n$$R_{ab}(u-v)T_a(u)T_b(v)=T_b(v)T_a(u)R_{ab}(u-v)$$\nholds on $V_a\\otimes V_b\\otimes V_N$ for every $u,v\\in\\mathbb C$.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-2",
+          "claim": "For nonsingular auxiliary R, finite auxiliary trace cyclicity gives commuting transfers.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3"
+          ]
+        },
+        {
+          "id": "derive-1-3",
+          "claim": "Polynomial identity extends commutativity to every spectral difference.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "The normalized local matrix logarithm exists and its Taylor coefficients commute with each other and all transfers.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The chain domain is N>=3; empty chains are not asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 extends the generic commutator identity to all complex u,v, including u=v and u=0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "N=1 and N=2 are excluded from this periodic counting convention."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the inverse only for u-v not equal to ±i; step 2.1 extends the polynomial identity to those differences."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 covers every complex spectral parameter; step 3.1 defines the analytic logarithm near u=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No selection or choice from an arbitrary nonempty family occurs."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is a one-way commutation assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse characterization of commuting transfers is asserted."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "N=3 transfer commutator at regular and singular differences",
+          "inputs": [
+            "N=3,u=0,v=2",
+            "N=3,u=i,v=0"
+          ],
+          "expected": "Exact 8x8 matrix commutators vanish in both cases, including the singular auxiliary difference u-v=i.",
+          "result": "PASS: exact integer/Gaussian-integer 8x8 commutator residual 0.0 for N=3 at (u,v)=(0,2) and (i,0), including u-v=i."
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "def-qsmx-rational-monodromy",
+          "carrier": "items/def-qsmx-rational-monodromy.md",
+          "status": "Current supplier interface inspected for this assigned item; no independent supplier certification asserted.",
+          "source_section": "Definition",
+          "exact_statement": "Fix an integer $N\\ge3$. Let $V=\\mathbb C^2$ with ordered basis\n$e_\\uparrow,e_\\downarrow$, let $V_N=V^{\\otimes N}$ in left-to-right site\norder, and let $V_a=V$ be an auxiliary copy. For $u\\in\\mathbb C$, define\n$R_{aj}(u)=uI_{aj}+iP_{aj}$ on $V_a\\otimes V_N$, where $P_{aj}$ swaps the\nauxiliary factor and site $j$. Define\n$$T_a(u)=R_{aN}(u)\\cdots R_{a1}(u),\\qquad t(u)=\\operatorname{tr}_a T_a(u),$$\nwhere products mean composition with the rightmost factor acting first, and\n$\\operatorname{tr}_a$ is the ordinary finite-dimensional trace over $V_a$.\nFor distinct sites $j,k$, $P_{jk}$ swaps those two tensor factors. Define the\noriented cyclic shift by\n$$U(v_1\\otimes\\cdots\\otimes v_N)=v_N\\otimes v_1\\otimes\\cdots\\otimes v_{N-1}.$$\nThe spectral parameter $u$ is dimensionless. All operators in this definition\nare finite-dimensional complex-linear endomorphisms.\n\n",
+          "relevant_hypotheses_and_conventions": "Fix an integer $N\\ge3$. Let $V=\\mathbb C^2$ with ordered basis\n$e_\\uparrow,e_\\downarrow$, let $V_N=V^{\\otimes N}$ in left-to-right site\norder, and let $V_a=V$ be an auxiliary copy. For $u\\in\\mathbb C$, define\n$R_{aj}(u)=uI_{aj}+iP_{aj}$ on $V_a\\otimes V_N$, where $P_{aj}$ swaps the\nauxiliary factor and site $j$. Define\n$$T_a(u)=R_{aN}(u)\\cdots R_{a1}(u),\\qquad t(u)=\\operatorname{tr}_a T_a(u),$$\nwhere products mean composition with the rightmost factor acting first, and\n$\\operatorname{tr}_a$ is the ordinary finite-dimensional trace over $V_a$.\nFor distinct sites $j,k$, $P_{jk}$ swaps those two tensor factors. Define the\noriented cyclic shift by\n$$U(v_1\\otimes\\cdots\\otimes v_N)=v_N\\otimes v_1\\otimes\\cdots\\otimes v_{N-1}.$$\nThe spectral parameter $u$ is dimensionless. All operators in this definition\nare finite-dimensional complex-linear endomorphisms.\n\n",
+          "supplier_proof_status": "Current Step 1 definition interface inspected; proof is not applicable and independent acceptance is not asserted.",
+          "consumer_use": "Step 1.1 uses the finite R/P tensor ordering in the auxiliary trace computation."
+        },
+        {
+          "supplier": "lem-qsmx-transfer-regular-point",
+          "carrier": "items/lem-qsmx-transfer-regular-point.md",
+          "status": "Current supplier interface inspected for this assigned item; no independent supplier certification asserted.",
+          "source_section": "Statement",
+          "exact_statement": "Let $t(u)$ and $U$ be the transfer matrix and cyclic shift defined by the\nordered monodromy construction. Use the periodic convention\n$P_{N,N+1}:=P_{N,1}$. Then\n$$t(0)=i^N U,\\qquad i\\,t'(0)t(0)^{-1}=\\sum_{j=1}^N P_{j,j+1}.$$\nIn particular, $t(0)$ is invertible. The derivative is with respect to the\ndimensionless complex parameter $u$.\n\n",
+          "relevant_hypotheses_and_conventions": "Let $t(u)$ and $U$ be the transfer matrix and cyclic shift defined by the\nordered monodromy construction. Use the periodic convention\n$P_{N,N+1}:=P_{N,1}$. Then\n$$t(0)=i^N U,\\qquad i\\,t'(0)t(0)^{-1}=\\sum_{j=1}^N P_{j,j+1}.$$\nIn particular, $t(0)$ is invertible. The derivative is with respect to the\ndimensionless complex parameter $u$.\n\n",
+          "supplier_proof_status": "Current Step 1 draft; complete authored proof inspected; independent acceptance is not asserted.",
+          "consumer_use": "Step 3.1 uses the invertibility of t(0) to define M(u) and its analytic logarithm."
+        },
+        {
+          "supplier": "lem-qsmx-monodromy-rtt",
+          "carrier": "items/lem-qsmx-monodromy-rtt.md",
+          "status": "Current supplier interface inspected for this assigned item; no independent supplier certification asserted.",
+          "source_section": "Statement",
+          "exact_statement": "For the ordered periodic monodromies\n$$T_a(u):=R_{aN}(u)\\cdots R_{a1}(u),\\qquad T_b(v):=R_{bN}(v)\\cdots R_{b1}(v),$$\nthe finite-dimensional operator identity\n$$R_{ab}(u-v)T_a(u)T_b(v)=T_b(v)T_a(u)R_{ab}(u-v)$$\nholds on $V_a\\otimes V_b\\otimes V_N$ for every $u,v\\in\\mathbb C$.\n\n",
+          "relevant_hypotheses_and_conventions": "For the ordered periodic monodromies\n$$T_a(u):=R_{aN}(u)\\cdots R_{a1}(u),\\qquad T_b(v):=R_{bN}(v)\\cdots R_{b1}(v),$$\nthe finite-dimensional operator identity\n$$R_{ab}(u-v)T_a(u)T_b(v)=T_b(v)T_a(u)R_{ab}(u-v)$$\nholds on $V_a\\otimes V_b\\otimes V_N$ for every $u,v\\in\\mathbb C$.\n\n",
+          "supplier_proof_status": "Current Step 1 draft; complete authored proof inspected; independent acceptance is not asserted.",
+          "consumer_use": "Step 1.1 uses the exact monodromy RTT identity."
+        }
+      ]
+    },
+    "thm-qsmx-transfer-heisenberg-charge": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qsmx-rational-monodromy",
+          "source_section": "Definition",
+          "quote": "Fix an integer $N\\ge3$. Let $V=\\mathbb C^2$ with ordered basis\n$e_\\uparrow,e_\\downarrow$, let $V_N=V^{\\otimes N}$ in left-to-right site\norder, and let $V_a=V$ be an auxiliary copy. For $u\\in\\mathbb C$, define\n$R_{aj}(u)=uI_{aj}+iP_{aj}$ on $V_a\\otimes V_N$, where $P_{aj}$ swaps the\nauxiliary factor and site $j$. Define\n$$T_a(u)=R_{aN}(u)\\cdots R_{a1}(u),\\qquad t(u)=\\operatorname{tr}_a T_a(u),$$\nwhere products mean composition with the rightmost factor acting first, and\n$\\operatorname{tr}_a$ is the ordinary finite-dimensional trace over $V_a$.\nFor distinct sites $j,k$, $P_{jk}$ swaps those two tensor factors. Define the\noriented cyclic shift by\n$$U(v_1\\otimes\\cdots\\otimes v_N)=v_N\\otimes v_1\\otimes\\cdots\\otimes v_{N-1}.$$\nThe spectral parameter $u$ is dimensionless. All operators in this definition\nare finite-dimensional complex-linear endomorphisms.\n\n",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qsmx-transfer-regular-point",
+          "source_section": "Statement",
+          "quote": "Let $t(u)$ and $U$ be the transfer matrix and cyclic shift defined by the\nordered monodromy construction. Use the periodic convention\n$P_{N,N+1}:=P_{N,1}$. Then\n$$t(0)=i^N U,\\qquad i\\,t'(0)t(0)^{-1}=\\sum_{j=1}^N P_{j,j+1}.$$\nIn particular, $t(0)$ is invertible. The derivative is with respect to the\ndimensionless complex parameter $u$.\n\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qsmx-transfer-commutativity",
+          "source_section": "Statement",
+          "quote": "For every $u,v\\in\\mathbb C$, the transfer matrices $t(u),t(v)$ of the ordered\nperiodic monodromy on $V_N=(\\mathbb C^2)^{\\otimes N}$ satisfy\n$$[t(u),t(v)]=0.$$\nNear $u=0$, $M(u):=t(0)^{-1}t(u)$ has the analytic matrix logarithm with\n$\\log M(0)=0$. Its Taylor-coefficient matrices commute pairwise and commute\nwith every $t(v)$.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "Differentiating pairwise transfer commutation and using invertibility yields a commuting normalized derivative.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "claim": "The regular-point lemma identifies that derivative with periodic exchange, so H_N commutes.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "The finite swap is Hermitian and equals the displayed Pauli expression on a basis.",
+          "step": "3.1",
+          "inputs": [
+            "F1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires N>=3."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "J=0 and c=0 give H_N=0 and remain covered by the scalar-linear commutation proof in step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement excludes N=1 and N=2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The finite matrix identity and Hermiticity hold for every real J,c, including degenerate scalar choices."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The periodic bond P_{N,1} is included in the sum and its wrap is verified through the shift convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof is a finite matrix calculation and uses no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem proves a commutation implication, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse from commutation to a Hamiltonian form is asserted."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "N=3 Pauli swap and one-down-spin invariant subspace",
+          "inputs": [
+            "basis dimension 4 for two sites",
+            "N=3"
+          ],
+          "expected": "The four basis actions give P=(I+X tensor X+Y tensor Y+Z tensor Z)/2; the three-site one-down-spin sector has H=J times the all-ones matrix.",
+          "result": "PASS: exact 4x4 Pauli/swap residual 0.0; N=3 one-down-spin sector is J times the all-ones matrix."
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "def-qsmx-rational-monodromy",
+          "carrier": "items/def-qsmx-rational-monodromy.md",
+          "status": "Current supplier interface inspected for this assigned item; no independent supplier certification asserted.",
+          "source_section": "Definition",
+          "exact_statement": "Fix an integer $N\\ge3$. Let $V=\\mathbb C^2$ with ordered basis\n$e_\\uparrow,e_\\downarrow$, let $V_N=V^{\\otimes N}$ in left-to-right site\norder, and let $V_a=V$ be an auxiliary copy. For $u\\in\\mathbb C$, define\n$R_{aj}(u)=uI_{aj}+iP_{aj}$ on $V_a\\otimes V_N$, where $P_{aj}$ swaps the\nauxiliary factor and site $j$. Define\n$$T_a(u)=R_{aN}(u)\\cdots R_{a1}(u),\\qquad t(u)=\\operatorname{tr}_a T_a(u),$$\nwhere products mean composition with the rightmost factor acting first, and\n$\\operatorname{tr}_a$ is the ordinary finite-dimensional trace over $V_a$.\nFor distinct sites $j,k$, $P_{jk}$ swaps those two tensor factors. Define the\noriented cyclic shift by\n$$U(v_1\\otimes\\cdots\\otimes v_N)=v_N\\otimes v_1\\otimes\\cdots\\otimes v_{N-1}.$$\nThe spectral parameter $u$ is dimensionless. All operators in this definition\nare finite-dimensional complex-linear endomorphisms.\n\n",
+          "relevant_hypotheses_and_conventions": "Fix an integer $N\\ge3$. Let $V=\\mathbb C^2$ with ordered basis\n$e_\\uparrow,e_\\downarrow$, let $V_N=V^{\\otimes N}$ in left-to-right site\norder, and let $V_a=V$ be an auxiliary copy. For $u\\in\\mathbb C$, define\n$R_{aj}(u)=uI_{aj}+iP_{aj}$ on $V_a\\otimes V_N$, where $P_{aj}$ swaps the\nauxiliary factor and site $j$. Define\n$$T_a(u)=R_{aN}(u)\\cdots R_{a1}(u),\\qquad t(u)=\\operatorname{tr}_a T_a(u),$$\nwhere products mean composition with the rightmost factor acting first, and\n$\\operatorname{tr}_a$ is the ordinary finite-dimensional trace over $V_a$.\nFor distinct sites $j,k$, $P_{jk}$ swaps those two tensor factors. Define the\noriented cyclic shift by\n$$U(v_1\\otimes\\cdots\\otimes v_N)=v_N\\otimes v_1\\otimes\\cdots\\otimes v_{N-1}.$$\nThe spectral parameter $u$ is dimensionless. All operators in this definition\nare finite-dimensional complex-linear endomorphisms.\n\n",
+          "supplier_proof_status": "Current Step 1 definition interface inspected; proof is not applicable and independent acceptance is not asserted.",
+          "consumer_use": "step 3.1 uses the site-swap matrix and its finite tensor action."
+        },
+        {
+          "supplier": "lem-qsmx-transfer-regular-point",
+          "carrier": "items/lem-qsmx-transfer-regular-point.md",
+          "status": "Current supplier interface inspected for this assigned item; no independent supplier certification asserted.",
+          "source_section": "Statement",
+          "exact_statement": "Let $t(u)$ and $U$ be the transfer matrix and cyclic shift defined by the\nordered monodromy construction. Use the periodic convention\n$P_{N,N+1}:=P_{N,1}$. Then\n$$t(0)=i^N U,\\qquad i\\,t'(0)t(0)^{-1}=\\sum_{j=1}^N P_{j,j+1}.$$\nIn particular, $t(0)$ is invertible. The derivative is with respect to the\ndimensionless complex parameter $u$.\n\n",
+          "relevant_hypotheses_and_conventions": "Let $t(u)$ and $U$ be the transfer matrix and cyclic shift defined by the\nordered monodromy construction. Use the periodic convention\n$P_{N,N+1}:=P_{N,1}$. Then\n$$t(0)=i^N U,\\qquad i\\,t'(0)t(0)^{-1}=\\sum_{j=1}^N P_{j,j+1}.$$\nIn particular, $t(0)$ is invertible. The derivative is with respect to the\ndimensionless complex parameter $u$.\n\n",
+          "supplier_proof_status": "Current Step 1 draft; complete authored proof inspected; independent acceptance is not asserted.",
+          "consumer_use": "Steps 1.1–1.2 use the regular-point inverse and exchange derivative."
+        },
+        {
+          "supplier": "thm-qsmx-transfer-commutativity",
+          "carrier": "items/thm-qsmx-transfer-commutativity.md",
+          "status": "Current supplier interface inspected for this assigned item; no independent supplier certification asserted.",
+          "source_section": "Statement",
+          "exact_statement": "For every $u,v\\in\\mathbb C$, the transfer matrices $t(u),t(v)$ of the ordered\nperiodic monodromy on $V_N=(\\mathbb C^2)^{\\otimes N}$ satisfy\n$$[t(u),t(v)]=0.$$\nNear $u=0$, $M(u):=t(0)^{-1}t(u)$ has the analytic matrix logarithm with\n$\\log M(0)=0$. Its Taylor-coefficient matrices commute pairwise and commute\nwith every $t(v)$.\n\n",
+          "relevant_hypotheses_and_conventions": "For every $u,v\\in\\mathbb C$, the transfer matrices $t(u),t(v)$ of the ordered\nperiodic monodromy on $V_N=(\\mathbb C^2)^{\\otimes N}$ satisfy\n$$[t(u),t(v)]=0.$$\nNear $u=0$, $M(u):=t(0)^{-1}t(u)$ has the analytic matrix logarithm with\n$\\log M(0)=0$. Its Taylor-coefficient matrices commute pairwise and commute\nwith every $t(v)$.\n\n",
+          "supplier_proof_status": "Current Step 1 draft; complete authored proof inspected; independent acceptance is not asserted.",
+          "consumer_use": "step 1.1 differentiates pairwise transfer commutativity."
+        }
+      ]
+    },
+    "def-qsmx-regular-bethe-data": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Definition explicitly handles M=0 using empty products and Psi=Omega."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: The root conditions exclude denominator poles but do not exclude lambda_j=0 when the equations and nonzero-vector test hold."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Definition includes M=1 and states the empty product in its single-root equation."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: Repeated roots, shifted poles and differences ±i are excluded by the regularity interface; singular-root regularizations are explicitly outside scope."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: The stated M domain includes M=0 and M=N; M=0 is assigned explicitly and M=N retains the nonzero-vector condition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The Definition introduces no choice operation."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition does not state a characterization by equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition does not state a converse characterization."
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "def-qsmx-rational-monodromy",
+          "carrier": "items/def-qsmx-rational-monodromy.md",
+          "status": "Current supplier interface inspected for this assigned item; no independent supplier certification asserted.",
+          "source_section": "Definition",
+          "exact_statement": "Fix an integer $N\\ge3$. Let $V=\\mathbb C^2$ with ordered basis\n$e_\\uparrow,e_\\downarrow$, let $V_N=V^{\\otimes N}$ in left-to-right site\norder, and let $V_a=V$ be an auxiliary copy. For $u\\in\\mathbb C$, define\n$R_{aj}(u)=uI_{aj}+iP_{aj}$ on $V_a\\otimes V_N$, where $P_{aj}$ swaps the\nauxiliary factor and site $j$. Define\n$$T_a(u)=R_{aN}(u)\\cdots R_{a1}(u),\\qquad t(u)=\\operatorname{tr}_a T_a(u),$$\nwhere products mean composition with the rightmost factor acting first, and\n$\\operatorname{tr}_a$ is the ordinary finite-dimensional trace over $V_a$.\nFor distinct sites $j,k$, $P_{jk}$ swaps those two tensor factors. Define the\noriented cyclic shift by\n$$U(v_1\\otimes\\cdots\\otimes v_N)=v_N\\otimes v_1\\otimes\\cdots\\otimes v_{N-1}.$$\nThe spectral parameter $u$ is dimensionless. All operators in this definition\nare finite-dimensional complex-linear endomorphisms.\n\n",
+          "relevant_hypotheses_and_conventions": "Fix an integer $N\\ge3$. Let $V=\\mathbb C^2$ with ordered basis\n$e_\\uparrow,e_\\downarrow$, let $V_N=V^{\\otimes N}$ in left-to-right site\norder, and let $V_a=V$ be an auxiliary copy. For $u\\in\\mathbb C$, define\n$R_{aj}(u)=uI_{aj}+iP_{aj}$ on $V_a\\otimes V_N$, where $P_{aj}$ swaps the\nauxiliary factor and site $j$. Define\n$$T_a(u)=R_{aN}(u)\\cdots R_{a1}(u),\\qquad t(u)=\\operatorname{tr}_a T_a(u),$$\nwhere products mean composition with the rightmost factor acting first, and\n$\\operatorname{tr}_a$ is the ordinary finite-dimensional trace over $V_a$.\nFor distinct sites $j,k$, $P_{jk}$ swaps those two tensor factors. Define the\noriented cyclic shift by\n$$U(v_1\\otimes\\cdots\\otimes v_N)=v_N\\otimes v_1\\otimes\\cdots\\otimes v_{N-1}.$$\nThe spectral parameter $u$ is dimensionless. All operators in this definition\nare finite-dimensional complex-linear endomorphisms.\n\n",
+          "supplier_proof_status": "Current Step 1 definition interface inspected; proof is not applicable and independent acceptance is not asserted.",
+          "consumer_use": "Definition fixes the underlying finite chain, R family and ordered factors."
+        },
+        {
+          "supplier": "thm-qsmx-transfer-commutativity",
+          "carrier": "items/thm-qsmx-transfer-commutativity.md",
+          "status": "Current supplier interface inspected for this assigned item; no independent supplier certification asserted.",
+          "source_section": "Statement",
+          "exact_statement": "For every $u,v\\in\\mathbb C$, the transfer matrices $t(u),t(v)$ of the ordered\nperiodic monodromy on $V_N=(\\mathbb C^2)^{\\otimes N}$ satisfy\n$$[t(u),t(v)]=0.$$\nNear $u=0$, $M(u):=t(0)^{-1}t(u)$ has the analytic matrix logarithm with\n$\\log M(0)=0$. Its Taylor-coefficient matrices commute pairwise and commute\nwith every $t(v)$.\n\n",
+          "relevant_hypotheses_and_conventions": "For every $u,v\\in\\mathbb C$, the transfer matrices $t(u),t(v)$ of the ordered\nperiodic monodromy on $V_N=(\\mathbb C^2)^{\\otimes N}$ satisfy\n$$[t(u),t(v)]=0.$$\nNear $u=0$, $M(u):=t(0)^{-1}t(u)$ has the analytic matrix logarithm with\n$\\log M(0)=0$. Its Taylor-coefficient matrices commute pairwise and commute\nwith every $t(v)$.\n\n",
+          "supplier_proof_status": "Current Step 1 draft; complete authored proof inspected; independent acceptance is not asserted.",
+          "consumer_use": "Definition records these data for the established commuting transfer family."
+        }
+      ]
+    },
+    "thm-qsmx-regular-bethe-eigenpair": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qsmx-rational-monodromy",
+          "source_section": "Definition",
+          "quote": "Fix an integer $N\\ge3$. Let $V=\\mathbb C^2$ with ordered basis\n$e_\\uparrow,e_\\downarrow$, let $V_N=V^{\\otimes N}$ in left-to-right site\norder, and let $V_a=V$ be an auxiliary copy. For $u\\in\\mathbb C$, define\n$R_{aj}(u)=uI_{aj}+iP_{aj}$ on $V_a\\otimes V_N$, where $P_{aj}$ swaps the\nauxiliary factor and site $j$. Define\n$$T_a(u)=R_{aN}(u)\\cdots R_{a1}(u),\\qquad t(u)=\\operatorname{tr}_a T_a(u),$$\nwhere products mean composition with the rightmost factor acting first, and\n$\\operatorname{tr}_a$ is the ordinary finite-dimensional trace over $V_a$.\nFor distinct sites $j,k$, $P_{jk}$ swaps those two tensor factors. Define the\noriented cyclic shift by\n$$U(v_1\\otimes\\cdots\\otimes v_N)=v_N\\otimes v_1\\otimes\\cdots\\otimes v_{N-1}.$$\nThe spectral parameter $u$ is dimensionless. All operators in this definition\nare finite-dimensional complex-linear endomorphisms.\n\n",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qsmx-regular-bethe-data",
+          "source_section": "Definition",
+          "quote": "For the ordered monodromy on $V_N$ with $V=\\mathbb C^2$, define the shifted\nsite operator $L_{aj}(u):=R_{aj}(u-i/2)$, shifted monodromy\n$T_a^L(u):=L_{aN}(u)\\cdots L_{a1}(u)$, and shifted transfer matrix\n$\\tau(u):=\\operatorname{tr}_aT_a^L(u)$. In the ordered auxiliary basis\n$e_\\uparrow,e_\\downarrow$, write\n$$T_a^L(u)=\\begin{pmatrix}A(u)&B(u)\\\\C(u)&D(u)\\end{pmatrix}_a, \\qquad \\Omega:=e_\\uparrow^{\\otimes N}.$$\nFor an integer $M$ with $0\\le M\\le N$, a **regular on-shell Bethe datum** is\na tuple of finite complex numbers $\\lambda_1,\\ldots,\\lambda_M$ satisfying all\nof the following conditions:\n\n1. The roots are pairwise distinct, none equals $i/2$ or $-i/2$, and no\n   difference $\\lambda_j-\\lambda_k$ for $j\\ne k$ equals $i$ or $-i$.\n2. For each $j=1,\\ldots,M$,\n   $$\\left(\\frac{\\lambda_j+i/2}{\\lambda_j-i/2}\\right)^N =\\prod_{k\\ne j}\\frac{\\lambda_j-\\lambda_k+i}{\\lambda_j-\\lambda_k-i}.$$\n3. The associated vector\n   $$\\Psi(\\lambda_1,\\ldots,\\lambda_M):= B(\\lambda_1)\\cdots B(\\lambda_M)\\Omega$$\n   is nonzero.\n\nFor $M=0$ the root tuple and products are empty and $\\Psi=\\Omega$. This\ndefinition records regular solutions and nonzero vectors only; it makes no\nclaim of completeness, covers no singular-root regularization, and does not\ninclude descendants generated from other reference vectors.\n\n",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qsmx-monodromy-rtt",
+          "source_section": "Statement",
+          "quote": "For the ordered periodic monodromies\n$$T_a(u):=R_{aN}(u)\\cdots R_{a1}(u),\\qquad T_b(v):=R_{bN}(v)\\cdots R_{b1}(v),$$\nthe finite-dimensional operator identity\n$$R_{ab}(u-v)T_a(u)T_b(v)=T_b(v)T_a(u)R_{ab}(u-v)$$\nholds on $V_a\\otimes V_b\\otimes V_N$ for every $u,v\\in\\mathbb C$.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "The shifted monodromy inherits RTT because the two spectral shifts cancel in the difference.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "claim": "Auxiliary matrix entries of RTT give the A/B, D/B and B/B exchange relations.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "The all-up reference vector has explicit A and D eigenvalues and is annihilated by C.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "derive-2-2",
+          "claim": "Induction derives the complete wanted/unwanted A and D actions on products of creation entries.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "Bethe equations cancel every unwanted term and leave the stated transfer eigenvalue.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "step 1.2",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "derive-3-2",
+          "claim": "Bethe equations remove every apparent pole; polynomial identity extends the eigenvector equation to all u.",
+          "step": "5.1",
+          "inputs": [
+            "F2",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The M=0 action formulas follow from the reference-vector calculation in step 1.2; step 4.1 has no unwanted coefficients, and Q=1 in step 5.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Regular roots may include zero when the displayed conditions hold; polynomial cancellation extends the eigenvalue formula in step 5.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The induction base M=0 and the first nonempty case M=1 are handled in step 3.1 using step 1.2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Repeated and singular roots are excluded in the statement; the theorem makes no claim about their regularization."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The allowed M range includes 0 and N; the proof is conditional on the nonzero-vector hypothesis at both endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof is finite-dimensional algebra and uses no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem proves Bethe data imply an eigenvector; the converse is expressly not claimed."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No completeness or reverse eigenvector characterization is asserted."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "N=3 one-root regular Bethe vector",
+          "inputs": [
+            "N=3,M=1,lambda=1/(2 sqrt(3))",
+            "N=3,M=1,lambda=-1/(2 sqrt(3))"
+          ],
+          "expected": "Both roots satisfy the one-root Bethe equation; direct transfer action on the nonzero B(lambda)Omega vector gives the stated polynomial eigenvalue.",
+          "result": "PASS: N=3,M=1 roots ±1/(2√3) had one-root equation residual 5.47e-16, nonzero vector norm 0.577, and transfer-eigenvector residuals 1.26e-15 and 9.94e-16 at u=2+0.3i (double-precision finite check only)."
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "def-qsmx-rational-monodromy",
+          "carrier": "items/def-qsmx-rational-monodromy.md",
+          "status": "Current supplier interface inspected for this assigned item; no independent supplier certification asserted.",
+          "source_section": "Definition",
+          "exact_statement": "Fix an integer $N\\ge3$. Let $V=\\mathbb C^2$ with ordered basis\n$e_\\uparrow,e_\\downarrow$, let $V_N=V^{\\otimes N}$ in left-to-right site\norder, and let $V_a=V$ be an auxiliary copy. For $u\\in\\mathbb C$, define\n$R_{aj}(u)=uI_{aj}+iP_{aj}$ on $V_a\\otimes V_N$, where $P_{aj}$ swaps the\nauxiliary factor and site $j$. Define\n$$T_a(u)=R_{aN}(u)\\cdots R_{a1}(u),\\qquad t(u)=\\operatorname{tr}_a T_a(u),$$\nwhere products mean composition with the rightmost factor acting first, and\n$\\operatorname{tr}_a$ is the ordinary finite-dimensional trace over $V_a$.\nFor distinct sites $j,k$, $P_{jk}$ swaps those two tensor factors. Define the\noriented cyclic shift by\n$$U(v_1\\otimes\\cdots\\otimes v_N)=v_N\\otimes v_1\\otimes\\cdots\\otimes v_{N-1}.$$\nThe spectral parameter $u$ is dimensionless. All operators in this definition\nare finite-dimensional complex-linear endomorphisms.\n\n",
+          "relevant_hypotheses_and_conventions": "Fix an integer $N\\ge3$. Let $V=\\mathbb C^2$ with ordered basis\n$e_\\uparrow,e_\\downarrow$, let $V_N=V^{\\otimes N}$ in left-to-right site\norder, and let $V_a=V$ be an auxiliary copy. For $u\\in\\mathbb C$, define\n$R_{aj}(u)=uI_{aj}+iP_{aj}$ on $V_a\\otimes V_N$, where $P_{aj}$ swaps the\nauxiliary factor and site $j$. Define\n$$T_a(u)=R_{aN}(u)\\cdots R_{a1}(u),\\qquad t(u)=\\operatorname{tr}_a T_a(u),$$\nwhere products mean composition with the rightmost factor acting first, and\n$\\operatorname{tr}_a$ is the ordinary finite-dimensional trace over $V_a$.\nFor distinct sites $j,k$, $P_{jk}$ swaps those two tensor factors. Define the\noriented cyclic shift by\n$$U(v_1\\otimes\\cdots\\otimes v_N)=v_N\\otimes v_1\\otimes\\cdots\\otimes v_{N-1}.$$\nThe spectral parameter $u$ is dimensionless. All operators in this definition\nare finite-dimensional complex-linear endomorphisms.\n\n",
+          "supplier_proof_status": "Current Step 1 definition interface inspected; proof is not applicable and independent acceptance is not asserted.",
+          "consumer_use": "Steps 1.1–1.2 and 2.1 use the finite R/P convention and tensor order."
+        },
+        {
+          "supplier": "def-qsmx-regular-bethe-data",
+          "carrier": "items/def-qsmx-regular-bethe-data.md",
+          "status": "Current supplier interface inspected for this assigned item; no independent supplier certification asserted.",
+          "source_section": "Definition",
+          "exact_statement": "For the ordered monodromy on $V_N$ with $V=\\mathbb C^2$, define the shifted\nsite operator $L_{aj}(u):=R_{aj}(u-i/2)$, shifted monodromy\n$T_a^L(u):=L_{aN}(u)\\cdots L_{a1}(u)$, and shifted transfer matrix\n$\\tau(u):=\\operatorname{tr}_aT_a^L(u)$. In the ordered auxiliary basis\n$e_\\uparrow,e_\\downarrow$, write\n$$T_a^L(u)=\\begin{pmatrix}A(u)&B(u)\\\\C(u)&D(u)\\end{pmatrix}_a, \\qquad \\Omega:=e_\\uparrow^{\\otimes N}.$$\nFor an integer $M$ with $0\\le M\\le N$, a **regular on-shell Bethe datum** is\na tuple of finite complex numbers $\\lambda_1,\\ldots,\\lambda_M$ satisfying all\nof the following conditions:\n\n1. The roots are pairwise distinct, none equals $i/2$ or $-i/2$, and no\n   difference $\\lambda_j-\\lambda_k$ for $j\\ne k$ equals $i$ or $-i$.\n2. For each $j=1,\\ldots,M$,\n   $$\\left(\\frac{\\lambda_j+i/2}{\\lambda_j-i/2}\\right)^N =\\prod_{k\\ne j}\\frac{\\lambda_j-\\lambda_k+i}{\\lambda_j-\\lambda_k-i}.$$\n3. The associated vector\n   $$\\Psi(\\lambda_1,\\ldots,\\lambda_M):= B(\\lambda_1)\\cdots B(\\lambda_M)\\Omega$$\n   is nonzero.\n\nFor $M=0$ the root tuple and products are empty and $\\Psi=\\Omega$. This\ndefinition records regular solutions and nonzero vectors only; it makes no\nclaim of completeness, covers no singular-root regularization, and does not\ninclude descendants generated from other reference vectors.\n\n",
+          "relevant_hypotheses_and_conventions": "For the ordered monodromy on $V_N$ with $V=\\mathbb C^2$, define the shifted\nsite operator $L_{aj}(u):=R_{aj}(u-i/2)$, shifted monodromy\n$T_a^L(u):=L_{aN}(u)\\cdots L_{a1}(u)$, and shifted transfer matrix\n$\\tau(u):=\\operatorname{tr}_aT_a^L(u)$. In the ordered auxiliary basis\n$e_\\uparrow,e_\\downarrow$, write\n$$T_a^L(u)=\\begin{pmatrix}A(u)&B(u)\\\\C(u)&D(u)\\end{pmatrix}_a, \\qquad \\Omega:=e_\\uparrow^{\\otimes N}.$$\nFor an integer $M$ with $0\\le M\\le N$, a **regular on-shell Bethe datum** is\na tuple of finite complex numbers $\\lambda_1,\\ldots,\\lambda_M$ satisfying all\nof the following conditions:\n\n1. The roots are pairwise distinct, none equals $i/2$ or $-i/2$, and no\n   difference $\\lambda_j-\\lambda_k$ for $j\\ne k$ equals $i$ or $-i$.\n2. For each $j=1,\\ldots,M$,\n   $$\\left(\\frac{\\lambda_j+i/2}{\\lambda_j-i/2}\\right)^N =\\prod_{k\\ne j}\\frac{\\lambda_j-\\lambda_k+i}{\\lambda_j-\\lambda_k-i}.$$\n3. The associated vector\n   $$\\Psi(\\lambda_1,\\ldots,\\lambda_M):= B(\\lambda_1)\\cdots B(\\lambda_M)\\Omega$$\n   is nonzero.\n\nFor $M=0$ the root tuple and products are empty and $\\Psi=\\Omega$. This\ndefinition records regular solutions and nonzero vectors only; it makes no\nclaim of completeness, covers no singular-root regularization, and does not\ninclude descendants generated from other reference vectors.\n\n",
+          "supplier_proof_status": "Current Step 1 definition interface inspected; proof is not applicable and independent acceptance is not asserted.",
+          "consumer_use": "Steps 2.1, 2.1, 3.1 and 3.2 use the root regularity, Bethe equations, reference vector and nonzero-vector condition."
+        },
+        {
+          "supplier": "lem-qsmx-monodromy-rtt",
+          "carrier": "items/lem-qsmx-monodromy-rtt.md",
+          "status": "Current supplier interface inspected for this assigned item; no independent supplier certification asserted.",
+          "source_section": "Statement",
+          "exact_statement": "For the ordered periodic monodromies\n$$T_a(u):=R_{aN}(u)\\cdots R_{a1}(u),\\qquad T_b(v):=R_{bN}(v)\\cdots R_{b1}(v),$$\nthe finite-dimensional operator identity\n$$R_{ab}(u-v)T_a(u)T_b(v)=T_b(v)T_a(u)R_{ab}(u-v)$$\nholds on $V_a\\otimes V_b\\otimes V_N$ for every $u,v\\in\\mathbb C$.\n\n",
+          "relevant_hypotheses_and_conventions": "For the ordered periodic monodromies\n$$T_a(u):=R_{aN}(u)\\cdots R_{a1}(u),\\qquad T_b(v):=R_{bN}(v)\\cdots R_{b1}(v),$$\nthe finite-dimensional operator identity\n$$R_{ab}(u-v)T_a(u)T_b(v)=T_b(v)T_a(u)R_{ab}(u-v)$$\nholds on $V_a\\otimes V_b\\otimes V_N$ for every $u,v\\in\\mathbb C$.\n\n",
+          "supplier_proof_status": "Current Step 1 draft; complete authored proof inspected; independent acceptance is not asserted.",
+          "consumer_use": "step 1.1 shifts the exact monodromy RTT identity."
+        }
+      ]
+    },
+    "ex-qsmx-one-magnon": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-qsmx-transfer-heisenberg-charge",
+          "source_section": "Statement",
+          "quote": "Use the periodic convention $P_{N,N+1}:=P_{N,1}$. The rational transfer\nmatrix satisfies\n$$i\\,t'(0)t(0)^{-1}=\\sum_{j=1}^N P_{j,j+1}.$$\nConsequently, for real $J,c$, the finite matrix\n$$H_N:=J\\sum_{j=1}^N P_{j,j+1}+cI$$\nis Hermitian and commutes with every $t(u)$. If $H_N$ is interpreted as a\nphysical energy in the stated QSM convention, $J$ and $c$ are in joules.\nFor the Pauli matrices\n$$X=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix},\\qquad Y=\\begin{pmatrix}0&-i\\\\i&0\\end{pmatrix},\\qquad Z=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix},$$\nthe adjacent swap on $V\\otimes V$ is\n$$P=\\frac{I+X\\otimes X+Y\\otimes Y+Z\\otimes Z}{2}.$$\n\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "A periodic bond fixes a parallel pair and moves a single down spin across an incident bond.",
+          "step": "1.1",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "Periodic reindexing makes each Fourier vector a nonzero eigenvector with the stated eigenvalue.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Example: The mode m=0 is included and gives the uniform nonzero Fourier vector."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example: J=0 gives the zero operator and the formula returns eigenvalue zero for every mode."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "N=1 is outside the declared N>=3 ring convention."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example: Modes m=0 and m=N/2 when N is even are included; the formula remains valid at coincident band edges."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "m=0 and m=N-1 are included and periodic reindexing in step 2.1 uses e^{ikN}=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice operation is used; the finite mode index is explicitly enumerated."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example proves a direct eigenpair calculation, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse classification of one-down-spin eigenvectors is claimed."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "N=3 exact Fourier modes",
+          "inputs": [
+            "N=3,m=0,1,2"
+          ],
+          "expected": "The three Fourier vectors have eigenvalues 3J, 0, 0 for H=J(P12+P23+P31), matching J(1+2 cos(2 pi m/3)).",
+          "result": "PASS: N=3 modes m=0,1,2 gave eigenvalues/J 3,0,0; direct double-precision matrix residuals were 0, 6.72e-16 and 1.25e-15."
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "thm-qsmx-transfer-heisenberg-charge",
+          "carrier": "items/thm-qsmx-transfer-heisenberg-charge.md",
+          "status": "Current supplier interface inspected for this assigned item; no independent supplier certification asserted.",
+          "source_section": "Statement",
+          "exact_statement": "Use the periodic convention $P_{N,N+1}:=P_{N,1}$. The rational transfer\nmatrix satisfies\n$$i\\,t'(0)t(0)^{-1}=\\sum_{j=1}^N P_{j,j+1}.$$\nConsequently, for real $J,c$, the finite matrix\n$$H_N:=J\\sum_{j=1}^N P_{j,j+1}+cI$$\nis Hermitian and commutes with every $t(u)$. If $H_N$ is interpreted as a\nphysical energy in the stated QSM convention, $J$ and $c$ are in joules.\nFor the Pauli matrices\n$$X=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix},\\qquad Y=\\begin{pmatrix}0&-i\\\\i&0\\end{pmatrix},\\qquad Z=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix},$$\nthe adjacent swap on $V\\otimes V$ is\n$$P=\\frac{I+X\\otimes X+Y\\otimes Y+Z\\otimes Z}{2}.$$\n\n",
+          "relevant_hypotheses_and_conventions": "Use the periodic convention $P_{N,N+1}:=P_{N,1}$. The rational transfer\nmatrix satisfies\n$$i\\,t'(0)t(0)^{-1}=\\sum_{j=1}^N P_{j,j+1}.$$\nConsequently, for real $J,c$, the finite matrix\n$$H_N:=J\\sum_{j=1}^N P_{j,j+1}+cI$$\nis Hermitian and commutes with every $t(u)$. If $H_N$ is interpreted as a\nphysical energy in the stated QSM convention, $J$ and $c$ are in joules.\nFor the Pauli matrices\n$$X=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix},\\qquad Y=\\begin{pmatrix}0&-i\\\\i&0\\end{pmatrix},\\qquad Z=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix},$$\nthe adjacent swap on $V\\otimes V$ is\n$$P=\\frac{I+X\\otimes X+Y\\otimes Y+Z\\otimes Z}{2}.$$\n\n",
+          "supplier_proof_status": "Current Step 1 draft; complete authored proof inspected; independent acceptance is not asserted.",
+          "consumer_use": "Steps 1.1–2.1 use the periodic exchange operator and swap convention."
+        }
+      ]
+    }
+  }
+}

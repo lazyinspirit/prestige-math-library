@@ -1,0 +1,41 @@
+--- owner-preimage
++++ owner-final
+@@ -45,9 +45,9 @@
+ 
+ ## Statement
+ 
+-Assume the finite-mode assignment with two modes and its ideal number PVM. Let $t,r\in\mathbb C$ be dimensionless amplitudes with $|t|^2+|r|^2=1$, and fix the complete unitary mode matrix $C=\begin{pmatrix}t&-\overline r\\r&\overline t\end{pmatrix}$. Use the state-action convention that the passive unitary $U_C$ satisfies $U_C\Omega=\Omega$, $U_Ca_1^*U_C^*=t a_1^*+r a_2^*$, and $U_Ca_2^*U_C^*=-\overline r\,a_1^*+\overline t\,a_2^*$ on the finite-particle core. Put $\eta:=|t|^2$. For $n\in\mathbb N_0$ and $0\le k\le n$, write $\binom nk:=n!/(k!(n-k)!)$. For input $|n,0\rangle$ and $0<\eta<1$, the joint output count law is
++Assume the finite-mode assignment with two modes and its ideal number PVM, with AC and $\mathrm{AC}_\omega$ as required by the implementer and completed Fock/tensor suppliers. Write $\mathcal F^{(2)}=\mathcal F_s(\mathbb C^2)$ in the ordered mode basis $(1,0),(0,1)$ and $\mathcal F=\mathcal F_s(\mathbb C)$. The mode-factorization map is the unitary $\mathcal J:\mathcal F^{(2)}\to\mathcal F\widehat\otimes\mathcal F$ determined by $\mathcal J|m,n\rangle=|m\rangle\otimes|n\rangle$. Here $\widehat\otimes$ is the completed Hilbert tensor product, and the one-mode occupation vectors and their products use the same vacuum and mode order. Its unitary extension is proved below. Let $t,r\in\mathbb C$ be dimensionless amplitudes with $|t|^2+|r|^2=1$, and fix the complete unitary mode matrix $C=\begin{pmatrix}t&-\overline r\\r&\overline t\end{pmatrix}$. Use the state-action convention that the passive unitary $U_C$ satisfies $U_C\Omega=\Omega$, $U_Ca_1^*U_C^*=t a_1^*+r a_2^*$, and $U_Ca_2^*U_C^*=-\overline r\,a_1^*+\overline t\,a_2^*$ on the finite-particle core. Put $\eta:=|t|^2$. For $n\in\mathbb N_0$ and $0\le k\le n$, write $\binom nk:=n!/(k!(n-k)!)$. For input $|n,0\rangle$ and $0<\eta<1$, the joint output count law is
+ $$\mathbb P(k,\ell)=\begin{cases}\binom nk\eta^k(1-\eta)^{n-k},&\ell=n-k,\ 0\le k\le n,\\0,&\text{otherwise}.\end{cases}$$
+-At $\eta=0$ and $\eta=1$ the joint laws are respectively point masses at $(0,n)$ and $(n,0)$. Thus the first output count is binomial with parameters $(n,\eta)$. For a dimensionless coherent input $|\alpha,0\rangle$ with $|\alpha\rangle=e^{-|\alpha|^2/2}\sum_{n\ge0}\alpha^n|n\rangle/\sqrt{n!}$, the output state is $|t\alpha\rangle\otimes|r\alpha\rangle$.
++At $\eta=0$ and $\eta=1$ the joint laws are respectively point masses at $(0,n)$ and $(n,0)$. Thus the first output count is binomial with parameters $(n,\eta)$. For a dimensionless coherent input $|\alpha,0\rangle$ with $|\alpha\rangle=e^{-|\alpha|^2/2}\sum_{n\ge0}\alpha^n|n\rangle/\sqrt{n!}$, define $|\alpha,0\rangle=\mathcal J^*(|\alpha\rangle\otimes|0\rangle)$, equivalently $e^{-|\alpha|^2/2}\sum_{n\ge0}\alpha^n|n,0\rangle/\sqrt{n!}$. The output state under this fixed mode factorization is $\mathcal J U_C|\alpha,0\rangle=|t\alpha\rangle\otimes|r\alpha\rangle$; on $\mathcal F^{(2)}$ it is $\mathcal J^*(|t\alpha\rangle\otimes|r\alpha\rangle)$.
+ 
+ ## Statement references
+ 
+@@ -64,6 +64,8 @@
+ [[def-axiom-of-choice]]
+ 
+ [[def-countable-choice]]
++
++[[lem-nrqm-composites-hilbert-tensor-construction]]
+ 
+ ## Facts & Assumptions
+ 
+@@ -84,6 +86,8 @@
+ 
+ [F4] The ideal outcome law for a declared PVM $P(B)$ is $\mathbb P(B)=\operatorname{tr}(\rho P(B))$; no apparatus realization follows ([[def-nrqm-measurement-framework-declared-measurements-and-instruments]]).
+ 
++[F5] Under $\mathrm{AC}_\omega$, the completed Hilbert tensor product of two complex Hilbert spaces exists, elementary tensors have norm $\|u\otimes v\|=\|u\|\|v\|$, and products of complete orthonormal families form a complete orthonormal family. [[lem-nrqm-composites-hilbert-tensor-construction]]
++
+ ## Proof
+ 
+ 1.1 The matrix $C$ is unitary because $C^*C=I_2$ follows from $|t|^2+|r|^2=1$. Its transpose $S=C^T$ is also unitary, so $U=S,V=0$ satisfy $UU^*-VV^*=I_2$ and $UV^T=VU^T$. By [F2] the finite-mode Bogoliubov statement supplies an implementer $M$ with $M^*aM=Sa$. Multiplying by $M$ and $M^*$ gives $MaM^*=S^{-1}a$; taking adjoints gives $Ma^*M^*=\overline{S}^{-1}a^*=S^Ta^*=Ca^*$ because $S$ is unitary and $S^T=C$. These identities hold on the transported finite-particle core. [given, A2, F2, construct, algebra]
+@@ -94,7 +98,7 @@
+ 
+ 4.1 Orthogonality of the output occupation basis makes the joint ideal number-count probability the squared modulus of the coefficient in step 3.1. Since $|t|^2=\eta$ and $|r|^2=1-\eta$, for $0<\eta<1$ this is the displayed binomial law; at the endpoints the expansion has a single surviving basis vector. The declared number PVM and its Born rule [A1, F4] assign these probabilities. [A1, F4, step 3.1, algebra]
+ 
+-5.1 For the coherent input, each output occupation coefficient has only one contributing input total $n=k+\ell$. By step 3.1 that coefficient is $e^{-|\alpha|^2/2}\alpha^{k+\ell}t^kr^\ell/\sqrt{k!\ell!}$. The product coherent vector $|t\alpha\rangle\otimes|r\alpha\rangle$ has the same coefficient because $|t\alpha|^2+|r\alpha|^2=|\alpha|^2$; completeness of the occupation basis [F1] therefore gives equality of the two output vectors. [F1, F3, step 3.1, algebra] ∎
++5.1 By [F1, F3, F5], the families $|m,n\rangle$ and $|m\rangle\otimes|n\rangle$ are complete orthonormal families in $\mathcal F^{(2)}$ and $\mathcal F\widehat\otimes\mathcal F$, respectively. On finite sums define $\mathcal J_0\sum c_{mn}|m,n\rangle=\sum c_{mn}|m\rangle\otimes|n\rangle$; orthonormality makes its squared norm $\sum|c_{mn}|^2$, so it is well defined and inner-product preserving. For $\psi\in\mathcal F^{(2)}$, approximate by finite sums $\psi_j$ and define $\mathcal J\psi=\lim_j\mathcal J_0\psi_j$. The norm identity makes the images Cauchy in the complete product and the limit independent of the approximating sequence; it preserves linearity, norm and inner product. Its range is closed: if $\mathcal J\psi_j$ converges, the same norm identity makes $\psi_j$ Cauchy in the complete Fock space, so its limit maps to that range limit. The range contains the complete product family and hence is dense, so it is the whole product. This proves that $\mathcal J$ is unitary, uniquely fixed by the occupation map, with $\mathcal J\Omega=|0\rangle\otimes|0\rangle$. The coherent input series converges by [F3] and this unitary identification. Apply the bounded unitary $U_C$ to its norm-convergent partial sums. Each output occupation coefficient has only one contributing input total $n=k+\ell$; step 3.1 gives it as $e^{-|\alpha|^2/2}\alpha^{k+\ell}t^kr^\ell/\sqrt{k!\ell!}$. The product of the two norm-convergent coherent series exists in the completed product by [F5]; approximating each factor by finite partial sums is legitimate since $\|u\otimes v-u'\otimes v'\|\le\|u-u'\|\|v\|+\|u'\|\|v-v'\|$. Its product-basis coefficients are the same, because $|t\alpha|^2+|r\alpha|^2=|\alpha|^2$. Completeness of that basis therefore proves $\mathcal J U_C|\alpha,0\rangle=|t\alpha\rangle\otimes|r\alpha\rangle$, retaining the exact vacuum phase and port convention. [A2, F1, F3, F5, step 3.1, algebra] ∎
+ 
+ ## Remarks
+ 

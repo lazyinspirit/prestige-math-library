@@ -7,7 +7,7 @@ origin: pipeline
 domain: physics
 library: physics
 physical_scope: Mixtures of a compact set of declared phase-generator states with continuous entropy and a fixed barycenter; every feasible Borel probability mixture is included, while no attainment claim is made for noncompact domains or a different physical normalization.
-dependency_level: 9
+dependency_level: 1
 deps:
   - def-td-phase-and-coexistence-domain
   - post-td-concave-fundamental-entropy
@@ -66,7 +66,11 @@ verification:
 
 Let $d\ge1$ and let $K\subseteq\mathbb R^d$ be a nonempty compact set of dimensionless generator coordinates. Each $x\in K$ labels one model-specified phase-generator state; the model assigns it entropy per mole $s(x)\in\mathrm{J\,mol^{-1}K^{-1}}$, and $s:K\to\mathbb R$ is continuous, using the numerical entropy value in that fixed unit. Define $\operatorname{conv}K$ to be the set of all finite convex combinations of points of $K$, and fix $\bar x\in\operatorname{conv}K$. Use the Borel sigma algebra relative to $K$. A Borel probability mixture is a countably additive probability measure $P$ on that sigma algebra; its barycenter and entropy per mole are the coordinatewise integrals $\int_Kx\,dP$ and $\int_Ks\,dP$. For $x\in K$, define the unit point mass $\delta_x$ by $\delta_x(A)=1$ if $x\in A$ and $\delta_x(A)=0$ otherwise, for Borel $A\subseteq K$. Assume every Borel probability mixture with barycenter $\bar x$ is feasible and has entropy per mole $\int_Ks\,dP$. Then there are $m\le d+1$, points $x_1,\ldots,x_m\in K$, and weights $\theta_i\ge0$ with $\sum_{i=1}^m\theta_i=1$ such that $P_*:=\sum_{i=1}^m\theta_i\delta_{x_i}$ is a feasible Borel probability mixture and $\int_Ks\,dP_*\ge\int_Ks\,dP$ for every feasible mixture $P$.
 
-Here integrals use the measure convention of [[def-tdmath-measure-integral]]. The entropy map is part of the model; this theorem derives neither its microscopic meaning nor compactness of a physical phase domain.
+Here integrals use the measure convention of *Measure space and integral*. The entropy map is part of the model; this theorem derives neither its microscopic meaning nor compactness of a physical phase domain.
+
+## Statement references
+
+[[def-tdmath-measure-integral]]
 
 ## Facts & Assumptions
 

@@ -1,0 +1,146 @@
+--- baseline/def-tgrx-exponential-ray-channel
++++ current/def-tgrx-exponential-ray-channel
+@@ -69,7 +69,7 @@
+ 
+ [A1] Assume the Axiom of Countable Choice, and no stronger choice principle. [[def-countable-choice]]
+ 
+-[F1] [[lem-tgr-exponential-current]] defines the positive-frequency Fock current on compact smooth tests, gives its vacuum covariance $C_\ell(s)=-\frac{1}{4\pi}(s-i0)^{-2}$ as a positive-type distribution, and constructs the canonical exponential-coordinate current with its exact lower-boundary pullback.
++[F1] [[lem-tgr-exponential-current]] defines the positive-frequency Fock current on compact smooth tests, gives its vacuum covariance $C_\ell(s)=-\frac{1}{4\pi}(s-i0)^{-2}$ as a positive-type distribution, and constructs the canonical coordinate $U_\kappa(\tau)=-\kappa^{-1}e^{-\kappa\tau}$ from $\mathbb R$ onto $(-\infty,0)$, with smooth inverse $U_\kappa^{-1}(X)=-\kappa^{-1}\log(-\kappa X)$ and derivative $U_\kappa'(\tau)=e^{-\kappa\tau}>0$. Its proof establishes this diffeomorphism and its lower-boundary pullback in step 4.1.
+ 
+ [F2] [[def-qft-fock-and-test-spaces]] fixes the bosonic Fock vacuum, the finite-particle domain, and the creation and annihilation formulas; its construction assumes Countable Choice.
+ 
+@@ -79,7 +79,7 @@
+ 
+ ## Proof
+ 
+-1.1 The derivative $\ell'(u)=\chi Ak e^{-ku}$ is positive, and $\ell(u)$ has limits $-\infty$ and $\ell_H$ at the two ends of $\mathbb R$. The inverse function theorem therefore gives a smooth inverse on $(-\infty,\ell_H)$. If $\operatorname{supp}g\subseteq[a,b]$, then $\operatorname{supp}f_g\subseteq[\ell(a),\ell(b)]\subset(-\infty,\ell_H)$, so the zero extension is smooth and compactly supported. Thus $J(f_g)$ is defined by [F1]–[F2]. [given, A1, F1, F2, construct, algebra]
++1.1 Put $\tau=\chi u$, $\kappa=k/\chi$, $x_H=\chi U_H$, and $\lambda=Ak>0$. In the length coordinate $\tau$, the map $x(\tau):=\ell(\tau/\chi)$ satisfies $x(\tau)=x_H+\lambda U_\kappa(\tau)$, since $\lambda U_\kappa(\tau)=-\chi A e^{-\kappa\tau}$. By [F1], $U_\kappa$ is a smooth increasing diffeomorphism from $\mathbb R$ onto $(-\infty,0)$; the positive affine map $y\mapsto x_H+\lambda y$ is a smooth diffeomorphism from $(-\infty,0)$ onto $(-\infty,x_H)$. Since $u\mapsto\tau=\chi u$ is also a positive linear diffeomorphism, $\ell$ is a smooth increasing diffeomorphism from $\mathbb R$ onto $(-\infty,\ell_H)$, with smooth inverse $u_\ell(x)=\chi^{-1}U_\kappa^{-1}((x-x_H)/\lambda)$. Differentiating the supplied coordinate formula gives $\ell'(u)=\chi\lambda e^{-\kappa\chi u}=\chi Ak e^{-ku}$ and hence $U'(u)=Ak e^{-ku}>0$. If $\operatorname{supp}g\subseteq[a,b]$, then $\operatorname{supp}f_g\subseteq[\ell(a),\ell(b)]\subset(-\infty,\ell_H)$, so the zero extension is smooth and compactly supported. Thus $J(f_g)$ is defined by [F1]–[F2]. [given, A1, F1, F2, construct, algebra]
+ 
+ 2.1 The map $(u,v)\mapsto(\ell(u),\ell(v))$ is a smooth diffeomorphism, so [F4] transports the two-variable test pairing with Jacobian $\ell'(u)\ell'(v)$. Since $\ell=\chi U$, the regularized identity $\chi^2[-(4\pi)^{-1}(\chi s-i\epsilon)^{-2}]=-(4\pi)^{-1}(s-i\epsilon/\chi)^{-2}$ shows that the positive unit scale cancels in the boundary distribution, giving the stated seconds-coordinate kernel. Positivity is the supplied Fock norm identity $W(g,g)=\|h_{f_g}\|_2^2\ge0$ from [F1]. [A1, F1, F4, step 1.1, algebra]
+ 
+--- baseline/prop-tgrx-collapse-channel-spectrum
++++ current/prop-tgrx-collapse-channel-spectrum
+@@ -10,6 +10,7 @@
+ dependency_level: 1
+ deps:
+   - def-countable-choice
++  - lem-nonnegative-square-root-exists-and-unique
+   - def-tgrx-exponential-ray-channel
+   - lem-tgr-exponential-current
+   - lem-tgr-thermal-contour-spectrum
+@@ -22,6 +23,7 @@
+   - lem-mean-value-theorem-on-closed-interval
+ dependency_roles:
+   def-countable-choice: mathematical-premise
++  lem-nonnegative-square-root-exists-and-unique: mathematical-premise
+   def-tgrx-exponential-ray-channel: mathematical-premise
+   lem-tgr-exponential-current: mathematical-premise
+   lem-tgr-thermal-contour-spectrum: mathematical-premise
+@@ -57,10 +59,13 @@
+ $$S_k(\omega)=\frac{\omega}{2(e^{2\pi\omega/k}-1)}\quad(\omega\ne0),\qquad S_k(0)=\frac{k}{4\pi}.$$
+ Thus the precise detailed-balance relation at strip width $\theta=2\pi/k$ seconds is $S_k(-\omega)=e^{\theta\omega}S_k(\omega)$ for every $\omega>0$. No measured temperature is assigned.
+ 
+-Separately, for each fixed $\omega>0$, take $\mathcal F_s(\mathbb C)\widehat\otimes\mathcal F_s(\mathbb C)$ with the normalized one-particle vector $1\in\mathbb C$ in each factor, and let $a=a_{\mathbb C}(1)\otimes I$ and $e=I\otimes a_{\mathbb C}(1)$ be the signal and environment annihilation operators. Let $\psi_\omega$ be a normalized signal vector in the domain of $a_{\mathbb C}(1)$ and put the environment in its unit vacuum vector $\Omega_e$. Let $\Gamma:(0,\infty)\to[0,1]$ be any pointwise transmissivity function; no measurability is needed because all claims are mode-by-mode. For each $\omega$, define the passive mode mixing
++Separately, for each fixed $\omega>0$, give $\mathbb C$ the second-variable-linear Hilbert inner product $\langle z,w\rangle_{\mathbb C}=\bar z w$, so $1\in\mathbb C$ is a unit vector, and put $\mathcal F=\mathcal F_s(\mathbb C)$. Write $|m\rangle$ for the normalized vector in its $m$-particle sector, with $|0\rangle=\Omega$; the annihilation map satisfies $a_{\mathbb C}(1)|m\rangle=\sqrt m\,|m-1\rangle$ on finite-particle vectors. Its maximal closed domain is
++$$D(a_{\mathbb C}(1))=\left\{\sum_{m\ge0}\psi_m|m\rangle:\sum_{m\ge0}m|\psi_m|^2<\infty\right\}.$$
++Let $\Gamma:(0,\infty)\to[0,1]$ be any pointwise transmissivity function; no measurability is needed because every assertion below is mode-by-mode. Every square root below denotes the unique nonnegative real square root, which exists for each nonnegative argument in the usual Dedekind-complete ordered field $\mathbb R$. Let $\mathcal H=\mathcal F\widehat\otimes\mathcal F$ with product basis $|m,n\rangle=|m\rangle\otimes|n\rangle$. The tensor-factor annihilation operators $a=a_{\mathbb C}(1)\otimes I$ and $e=I\otimes a_{\mathbb C}(1)$ act on basis vectors by $a|m,n\rangle=\sqrt m\,|m-1,n\rangle$ and $e|m,n\rangle=\sqrt n\,|m,n-1\rangle$, with a zero result when the corresponding index is zero, and have domains
++$$D(a)=\left\{\sum_{m,n\ge0}c_{mn}|m,n\rangle:\sum_{m,n\ge0}m|c_{mn}|^2<\infty\right\},\qquad D(e)=\left\{\sum_{m,n\ge0}c_{mn}|m,n\rangle:\sum_{m,n\ge0}n|c_{mn}|^2<\infty\right\}.$$
++On their common domain $D:=D(a)\cap D(e)$ define, for each $\omega$, the two output operators by the following linear transformation, with $D(b_\omega)=D(d_\omega)=D$:
+ $$b_\omega=\sqrt{\Gamma(\omega)}\,a+\sqrt{1-\Gamma(\omega)}\,e.$$
+-The complementary output is $d_\omega=-\sqrt{1-\Gamma(\omega)}\,a+\sqrt{\Gamma(\omega)}\,e$.
+-Write $\Psi_\omega=\psi_\omega\otimes\Omega_e$ and $n_\omega=\|a\psi_\omega\|^2<\infty$. Define the output occupation as the quadratic-form expectation $\mathfrak n_{\rm out}(\omega):=\|b_\omega\Psi_\omega\|^2$ of the number operator $b_\omega^\dagger b_\omega$. Then $\mathfrak n_{\rm out}(\omega)=\Gamma(\omega)n_\omega$. For the Planck occupation function $n_\theta(\omega)=(\exp(\theta\omega)-1)^{-1}$ with width $\theta>0$ measured in seconds, one has $n_\theta(\omega)>0$ for every $\omega>0$. Consequently, a filter preserving this same width at every positive frequency must satisfy $\Gamma(\omega)n_\theta(\omega)=n_\theta(\omega)$ and hence $\Gamma(\omega)=1$ at every $\omega$. Frequency-dependent filtering can nevertheless preserve Planck form at another width: $\Gamma_*(\omega)=(\exp(\theta\omega)+1)^{-1}$ lies in $(0,1)$ and varies with $\omega$, while $\Gamma_*(\omega)n_\theta(\omega)=n_{2\theta}(\omega)$. This is an algebraic channel statement; it does not identify $\Gamma$ with a four-dimensional black-hole scattering coefficient.
++The complementary output is $d_\omega=-\sqrt{1-\Gamma(\omega)}\,a+\sqrt{\Gamma(\omega)}\,e$, also defined on $D$. Let $\mathscr D_{\rm fin}=\operatorname{span}\{|m,n\rangle:m,n\in\mathbb N_0\}$ be the algebraic finite-particle subspace. It is contained in $D$ and invariant under $a,e$ and their creation operators; on it define $b_\omega^\dagger=\sqrt{\Gamma(\omega)}\,a^\dagger+\sqrt{1-\Gamma(\omega)}\,e^\dagger$ and $d_\omega^\dagger=-\sqrt{1-\Gamma(\omega)}\,a^\dagger+\sqrt{\Gamma(\omega)}\,e^\dagger$ as the corresponding creation combinations. Let $\psi_\omega\in D(a_{\mathbb C}(1))$ be a normalized signal vector and put the environment in its unit vacuum vector $\Omega_e=|0\rangle$. Then $\Psi_\omega:=\psi_\omega\otimes\Omega_e$ lies in $D$: if $\psi_\omega=\sum_m\psi_m|m\rangle$, the $a$-domain sum is $\sum_m m|\psi_m|^2<\infty$ and the $e$-domain sum is zero. Put $n_\omega=\|a_{\mathbb C}(1)\psi_\omega\|^2<\infty$ and define the output occupation by the quadratic form $\mathfrak n_{\rm out}(\omega):=\|b_\omega\Psi_\omega\|^2$. Then $\mathfrak n_{\rm out}(\omega)=\Gamma(\omega)n_\omega$. For the Planck occupation function $n_\theta(\omega)=(\exp(\theta\omega)-1)^{-1}$ with width $\theta>0$ measured in seconds, one has $n_\theta(\omega)>0$ for every $\omega>0$. Consequently, a filter preserving this same width at every positive frequency must satisfy $\Gamma(\omega)n_\theta(\omega)=n_\theta(\omega)$ and hence $\Gamma(\omega)=1$ at every $\omega$. Frequency-dependent filtering can nevertheless preserve Planck form at another width: $\Gamma_*(\omega)=(\exp(\theta\omega)+1)^{-1}$ lies in $(0,1)$ and varies with $\omega$, while $\Gamma_*(\omega)n_\theta(\omega)=n_{2\theta}(\omega)$. This is an algebraic channel statement; it does not identify $\Gamma$ with a four-dimensional black-hole scattering coefficient.
+ 
+ ## Statement references
+ 
+@@ -69,6 +74,8 @@
+ [[lem-tgr-exponential-current]]
+ 
+ [[lem-tgr-thermal-contour-spectrum]]
++
++[[lem-nonnegative-square-root-exists-and-unique]]
+ 
+ [[def-countable-choice]]
+ 
+@@ -113,9 +120,9 @@
+ 
+ [F3] [[lem-tgr-thermal-contour-spectrum]] gives the spectrum $S_{A,b}(\Omega)=2\pi(A/b^2)\Omega/(e^{\pi\Omega/b}-1)$, its removable value at zero, and $S_{A,b}(-\Omega)=e^{(\pi/b)\Omega}S_{A,b}(\Omega)$ for $\Omega>0$.
+ 
+-[F4] [[def-qft-fock-and-test-spaces]] defines the bosonic creation and annihilation operators, vacuum, and finite-particle domain.
++[F4] [[def-qft-fock-and-test-spaces]] defines $\mathcal F_s(H)$ as the square-summable direct sum of symmetric particle sectors, its vacuum, and the finite-particle subspace, with the bosonic creation and annihilation sector maps on that subspace.
+ 
+-[F5] [[lem-qft-fock-ccr-car]] gives the canonical commutation relation on the finite-particle domain.
++[F5] [[lem-qft-fock-ccr-car]] gives the maximal closed domain $D(a(h))=\{\Psi:\sum_{m\ge1}\|a_m(h)\Psi_m\|^2<\infty\}$ for each bosonic annihilation operator, states that the finite-particle subspace is a graph core, and gives the canonical commutation relations there. For $H=\mathbb C$ and $h=1$, its sector formulas yield $a_{\mathbb C}(1)|m\rangle=\sqrt m|m-1\rangle$ and the displayed weighted-square-summability domain; on the tensor product, applying the same factor operator in every second-factor sector gives the displayed domain of $a$, and likewise for $e$.
+ 
+ [F6] [[def-real-exponential-function-and-e]] defines the real exponential and gives $\exp(0)=1$.
+ 
+@@ -127,6 +134,8 @@
+ 
+ [F10] [[thm-exponential-addition-formula]] gives $\exp(x+y)=\exp(x)\exp(y)$.
+ 
++[F11] [[lem-nonnegative-square-root-exists-and-unique]]: in the usual Dedekind-complete ordered field $\mathbb R$, every nonnegative real has a unique nonnegative square root. The real coefficients $\Gamma(\omega)$ and $1-\Gamma(\omega)$ satisfy its nonnegativity hypothesis.
++
+ ## Proof
+ 
+ 1.1 Put $\tau=\chi u$, $x(\tau)=\chi U(\tau/\chi)$, and $\kappa=k/\chi$. Then
+@@ -135,11 +144,11 @@
+ $$C_k(s)=\chi^2C_\kappa(\chi s)=-\frac{k^2}{16\pi}\operatorname{csch}^2\left(\frac{k}{2}(s-i0)\right).$$
+ [A1, F1, F2, algebra]
+ 
+-1.2 Fix $\omega$ and write $\Gamma=\Gamma(\omega)$. The matrix
++1.2 Fix $\omega$ and write $\Gamma=\Gamma(\omega)$, $\alpha=\sqrt{\Gamma}$, and $\beta=\sqrt{1-\Gamma}$. By [F11], $\alpha,\beta\in\mathbb R$ are the unique nonnegative roots and $\alpha^2+\beta^2=\Gamma+(1-\Gamma)=1$. Hence the matrix
+ $$\begin{pmatrix}\sqrt{\Gamma}&\sqrt{1-\Gamma}\\-\sqrt{1-\Gamma}&\sqrt{\Gamma}\end{pmatrix}$$
+-is real orthogonal. The operators on the two tensor factors commute with one another; expanding the commutators and applying [F5] gives $[b,b^\dagger]=[d,d^\dagger]=I$ and $[b,d^\dagger]=[b,d]=0$ on the finite-particle core. On the product vector,
+-$$b\Psi_\omega=\sqrt{\Gamma}(a\psi_\omega)\otimes\Omega_e+\sqrt{1-\Gamma}\,\psi_\omega\otimes(e\Omega_e).$$
+-Expanding its squared norm, the environment summand and the cross term vanish because $e\Omega_e=0$. Therefore $\mathfrak n_{\rm out}(\omega)=\|b\Psi_\omega\|^2=\Gamma\|a\psi_\omega\|^2=\Gamma n_\omega$ by the quadratic-form definition in the Statement. [A1, given, F4, F5, algebra]
++is real orthogonal. The tensor-factor operators commute on $\mathscr D_{\rm fin}$; expanding their commutators and applying [F5] gives $[b,b^\dagger]=[d,d^\dagger]=I$ and $[b,d^\dagger]=[b,d]=0$ on that core. Since $\Psi_\omega\in D$, the operator $b\Psi_\omega$ is defined, and
++$$b\Psi_\omega=\alpha(a_{\mathbb C}(1)\psi_\omega)\otimes\Omega_e+\beta\,\psi_\omega\otimes(e\Omega_e).$$
++The environment term vanishes because $e\Omega_e=0$. Therefore $\mathfrak n_{\rm out}(\omega)=\|b\Psi_\omega\|^2=\alpha^2\|a_{\mathbb C}(1)\psi_\omega\|^2=\Gamma n_\omega$, by the quadratic-form definition in the Statement. [A1, given, F4, F5, F11, algebra]
+ 
+ 2.1 In [F3] take $A=\kappa^2/(16\pi)$ and $b=\kappa/2$. For the seconds-frequency variable, Fourier change of variables gives $S_k(\omega)=\chi S_\kappa(\omega/\chi)$, hence $S_k(\omega)=\omega/[2(e^{2\pi\omega/k}-1)]$ away from zero and $S_k(0)=\chi\kappa/(4\pi)=k/(4\pi)$. Substitution of $-\omega$ and cancellation of the common factor gives $S_k(-\omega)=e^{2\pi\omega/k}S_k(\omega)$ for $\omega>0$. [A1, F3, step 1.1, algebra]
+ 
+--- baseline/ex-tgrx-greybody-nonplanck
++++ current/ex-tgrx-greybody-nonplanck
+@@ -27,7 +27,7 @@
+ 
+ ## Example
+ 
+-Let $\omega_1,\omega_2>0$ be distinct angular frequencies measured in seconds$^{-1}$ and choose a channel transmissivity with $\Gamma(\omega_1)=1$ and $\Gamma(\omega_2)=0$. For input occupation $n_\theta(\omega)=(\exp(\theta\omega)-1)^{-1}$ with $\theta>0$ measured in seconds, the output is positive at $\omega_1$ and zero at $\omega_2$. No single Planck occupation $n_{\theta'}(\omega)$ with finite $\theta'>0$ measured in seconds has both values. This is a constructed mathematical filter, not a claim about an actual black-hole potential.
++Let $\omega_1,\omega_2>0$ be distinct angular frequencies measured in seconds$^{-1}$, let $\theta>0$ be measured in seconds, and choose a pointwise channel transmissivity $\Gamma:(0,\infty)\to[0,1]$ with $\Gamma(\omega_1)=1$ and $\Gamma(\omega_2)=0$. Define the numerical Planck occupation profile $n_\theta(\omega)=(\exp(\theta\omega)-1)^{-1}$ and its filtered profile $m_\Gamma(\omega):=\Gamma(\omega)n_\theta(\omega)$. The proposition's modewise multiplier formula motivates this pointwise profile map; this example does not assert that one normalized Fock-state family realizes the full profile. Then $m_\Gamma$ is positive at $\omega_1$ and zero at $\omega_2$. No single Planck occupation $n_{\theta'}(\omega)$ with finite $\theta'>0$ measured in seconds has both values. This is a constructed mathematical filter, not a claim about an actual black-hole potential.
+ 
+ ## Example references
+ 
+@@ -41,10 +41,10 @@
+ 
+ [F1] [[prop-tgrx-collapse-channel-spectrum]] gives $n_{\theta}(\omega)>0$ for every $\theta>0$ and $\omega>0$.
+ 
+-[F2] [[prop-tgrx-collapse-channel-spectrum]] defines the output occupation by the loss-channel identity $\mathfrak n_{\rm out}(\omega)=\Gamma(\omega)n_\omega$.
++[F2] [[prop-tgrx-collapse-channel-spectrum]] proves the loss-channel identity $\mathfrak n_{\rm out}(\omega)=\Gamma(\omega)n_\omega$ for each fixed-frequency normalized signal vector in the stated annihilation-operator domain and a vacuum environment. The profile $m_\Gamma$ here is only the numerical pointwise multiplier of $n_\theta$; no state-family realization is asserted.
+ 
+ ## Verification
+ 
+-1.1 Applying [F1] and [F2] at the two selected frequencies gives $\mathfrak n_{\rm out}(\omega_1)=1\cdot n_\theta(\omega_1)>0$ and $\mathfrak n_{\rm out}(\omega_2)=0\cdot n_\theta(\omega_2)=0$. [given, A1, F1, F2, algebra]
++1.1 From the definition of $m_\Gamma$ and [F1], $m_\Gamma(\omega_1)=1\cdot n_\theta(\omega_1)>0$ and $m_\Gamma(\omega_2)=0\cdot n_\theta(\omega_2)=0$. [given, A1, F1, algebra]
+ 
+-2.1 If one finite $\theta'>0$ Planck function fitted both values, it would have $n_{\theta'}(\omega_2)>0$ by [F1], contradicting $\mathfrak n_{\rm out}(\omega_2)=0$ from step 1.1. Thus no such common width exists. [A1, F1, step 1.1, algebra] ∎
++2.1 If one finite $\theta'>0$ Planck function fitted both values, it would have $n_{\theta'}(\omega_2)>0$ by [F1], contradicting $m_\Gamma(\omega_2)=0$ from step 1.1. Thus no such common width exists. [A1, F1, step 1.1, algebra] ∎
+--- baseline/pthm-tgrx-conditional-hawking-occupation
++++ current/pthm-tgrx-conditional-hawking-occupation
+@@ -65,7 +65,7 @@
+ 
+ [F1] [[prop-tgrx-collapse-channel-spectrum]] proves that the exponential channel has frequency spectrum $S_k(\omega)=\omega/[2(e^{2\pi\omega/k}-1)]$ for $\omega>0$.
+ 
+-[F2] [[prop-tgrx-collapse-channel-spectrum]] proves that the passive two-mode map with an independent vacuum satisfies $\mathfrak n_{\rm out}(\omega)=\Gamma(\omega)n_\omega$ for each positive frequency.
++[F2] [[prop-tgrx-collapse-channel-spectrum]] proves $\mathfrak n_{\rm out}(\omega)=\Gamma(\omega)n_\omega$ for a normalized signal vector in the stated annihilation domain and a vacuum environment, with occupation defined by the squared norm of the output annihilation image. Its real two-mode coefficients agree with the map adopted in [A2]. The calculation for the adopted mixed-state packet number forms is given directly in step 1.1.
+ 
+ [F3] [[prop-tgrx-collapse-channel-spectrum]] states that the Planck occupation $n_\theta(\omega)=(e^{\theta\omega}-1)^{-1}$ is positive for every $\omega>0$ when $\theta>0$.
+ 
+@@ -73,7 +73,7 @@
+ 
+ ## Proof
+ 
+-1.1 Fix $\ell$ and a normalized $f$ supported in $K$. The postulate identifies the near-horizon occupation with $2S_k(\omega)/\omega$ at each $\omega\in K$. By [F1] and $\theta=2\pi/k$, this is $2S_k(\omega)/\omega=1/(e^{\theta\omega}-1)=n_\theta(\omega)$. For a mixed input state with this finite mode occupation and an independent vacuum environment, expanding $b^*b$ from the passive map gives $\varpi(b^*b)=\Gamma_\ell(\omega)\varpi(a^*a)$: the environment number term vanishes in its vacuum and the two cross terms vanish by independence and zero vacuum one-point function. Thus [F2] applies to this mixed-state channel as well. Since [A2] makes the limiting packet form the direct integral of these frequency-diagonal mode forms, its diagonal value is $\int_K|f(\omega)|^2\Gamma_\ell(\omega)n_\theta(\omega)d\omega$. [given, A1, A2, F1, F2, algebra]
++1.1 Fix $\ell$ and a normalized $f$ supported in $K$. The postulate identifies the near-horizon occupation with $2S_k(\omega)/\omega$; by [F1] and $\theta=2\pi/k$, this is $n_\theta(\omega)$. Work with the joint incoming number quadratic form supplied by the direct-integral Fock channel in [A2]. Write $q_K$ for its conjugate-linear-first, linear-second polarization on $\mathcal H_K\oplus\mathcal H_K$, with the first summand the signal and the second the incoming vacuum; its diagonal is the adopted input occupation. The frequency-diagonal signal form is $q_K((g,0),(h,0))=\int_K\overline{g(\omega)}h(\omega)n_\theta(\omega)d\omega$. It is bounded, since $n_\theta$ is continuous and bounded on the compact positive-frequency band $K$. The vacuum condition gives $q_K((0,h),(0,h))=0$. These are the quadratic-moment data of the two input channels already adopted in [A2]; they require neither a pure signal vector nor a normal density-matrix representation, and no assertion that a monochromatic annihilator belongs to the compactly smeared field algebra is used. To see that there is no additional cross-moment assumption, put $F=(g,0)$ and $E=(0,h)$. Positivity and sesquilinearity give $0\le q_K(F+zE,F+zE)=q_K(F,F)+2\operatorname{Re}(zq_K(F,E))$ for every $z\in\mathbb C$. Unless $q_K(F,E)=0$, a suitable phase and arbitrarily large modulus of $z$ make this negative. Hence both cross pairings vanish. In quadratic-moment Hilbert-space language, quotienting the input form by its null vectors and completing sends every vacuum annihilation label $E$ to the zero vector; its pairing with every finite signal annihilation image is therefore zero. Thus all cross pairings are fixed by positivity, with no operator product-domain or extra finite-cross-moment axiom. The passive map in [A2], with the same real coefficients as [F2], sends the output packet label to $J_\ell f=(\sqrt{\Gamma_\ell}\,f,\sqrt{1-\Gamma_\ell}\,f)$. The coefficients are bounded measurable functions on $K$, so $J_\ell$ is defined on $\mathcal H_K$ and $\|J_\ell f\|^2=\|f\|^2$. Pulling back the adopted input number form gives $B_{\ell,\infty}(f,f)=q_K(J_\ell f,J_\ell f)=\int_K|f(\omega)|^2\Gamma_\ell(\omega)n_\theta(\omega)d\omega$. This calculates the diagonal of the adopted packet form directly, rather than treating $b^*b$ as an unbounded operator on an unspecified domain or extending [F2]'s vector theorem by assertion. [given, A1, A2, F1, F2, algebra]
+ 
+ 2.1 Operator-norm convergence in [A2] implies $|B_{\ell,s}(f,f)-B_{\ell,\infty}(f,f)|\le\|B_{\ell,s}-B_{\ell,\infty}\|\|f\|_2^2\to0$; using $\|f\|_2=1$ and the value computed in step 1.1 proves the finite-packet limit. [A2, step 1.1, algebra]
+ 

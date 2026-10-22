@@ -1,0 +1,357 @@
+{
+  "version": 1,
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "batch": "124",
+  "level": 3,
+  "scope": [
+    "post-tgrx-linearized-horizon-model",
+    "pthm-tgrx-linearized-area-modular-moment",
+    "rem-tgrx-qnec-qfc-status"
+  ],
+  "contracts": {
+    "post-tgrx-linearized-horizon-model": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [],
+      "finite_checks": [],
+      "finite_checks_disposition": "The item is an adopted physical model postulate; no finite numerical check can establish its physical applicability.",
+      "supplier_excerpts": [
+        {
+          "supplier": "post-tgrx-semiclassical-equation",
+          "carrier": "items/post-tgrx-semiclassical-equation.md",
+          "status": "Current draft Postulate inspected. step1Decision reports that its fresh readiness record is missing; its displayed interface is used conditionally and is not treated as proved.",
+          "source_section": "Postulate",
+          "exact_statement": "Adopt the equation $G_{ab}+\\Lambda_{\\mathrm{cc}}g_{ab}+\\alpha H^{(R^2)}_{ab}+\\beta H^{(\\operatorname{Ric}^2)}_{ab}=(8\\pi G/c^4)T^{\\mathrm{ren}}_{ab}[g,\\omega]$ on that domain, in the stated regime below $E_{\\mathrm{cut}}$. This is an adopted effective model equation.",
+          "relevant_hypotheses_and_conventions": "Smooth globally hyperbolic Lorentzian four-manifold, signature (-,+,+,+), fixed Hadamard state and stress prescription, and the displayed curvature/index convention. The present Postulate selects the allowed Einstein-Hilbert subcase alpha=beta=0 and converts the source to c=hbar=1 units.",
+          "supplier_proof_status": "Adopted physical Postulate with no deductive Proof section; current Step 1 readiness is missing.",
+          "consumer_use": "Supplies the fixed-background semiclassical stress model and Einstein-Hilbert submodel formulation, not a solution-existence theorem."
+        },
+        {
+          "supplier": "def-tgr-horizon-screen-family",
+          "carrier": "items/def-tgr-horizon-screen-family.md",
+          "status": "Published mathematical Definition inspected; its justified_by lemma lem-tgr-null-screen-quotient-positive and complete proof were read.",
+          "source_section": "Definition",
+          "exact_statement": "A smooth affine null generator field on H is a smooth vector field k along H such that k_p is a nonzero future-directed section of the radical and nabla_k k=0. The screen space is S_p=k_p^perp/R k_p; its metric is g_p on representatives, its screen deformation form is B([X],[Y])=g(nabla_X k,Y), and its expansion is theta=tr_bar-g B.",
+          "relevant_hypotheses_and_conventions": "A smooth embedded null hypersurface in a smooth Lorentzian four-manifold; the generator is future-directed and affine. Lemma lem-tgr-null-screen-quotient-positive proves the quotient is a smooth positive rank-two bundle and B is well-defined.",
+          "supplier_proof_status": "Published Definition with its well-definedness lemma and proof inspected.",
+          "consumer_use": "Defines the null hypersurface, affine generators, screen metric, deformation form and expansion used by the adopted model."
+        },
+        {
+          "supplier": "pthm-tgr-restricted-classical-area",
+          "carrier": "items/pthm-tgr-restricted-classical-area.md",
+          "status": "Published conditional physical theorem; complete current proof inspected. It is linked only as nonlogical motivation through relations.motivated_by.",
+          "source_section": "Statement and scope",
+          "exact_statement": "Under the stated smooth classical Einstein-Maxwell model, future-complete affine null flow, persistent compact spacelike cuts, null energy condition and AC_omega, the expansion and area are nonnegative/nondecreasing.",
+          "relevant_hypotheses_and_conventions": "Its NEC, countable-choice, complete-flow and Einstein-Maxwell assumptions are distinct from this Postulate; none is adopted here as an area-monotonicity premise.",
+          "supplier_proof_status": "Published physical theorem with a complete conditional proof; no independent proof-review claim is added here.",
+          "consumer_use": "Provides classical-area context only; its NEC conclusion is explicitly not used."
+        }
+      ],
+      "physics_review": {
+        "formulation": {
+          "verdict": "pass",
+          "evidence": "The Postulate specifies the Lorentzian geometry, null hypersurface, affine flow, compact spacelike cuts, stationary screen condition, stress type, natural units, renormalization-scale dimension, energy-cutoff dimension, first-order equation, integrability and future boundary value."
+        },
+        "scope": {
+          "verdict": "pass",
+          "evidence": "The item is restricted to the Einstein-Hilbert submodel and first perturbative order; it asserts no NEC, entropy inequality, higher-curvature result, solution existence or empirical applicability."
+        },
+        "sources": {
+          "verdict": "pass",
+          "evidence": "Wall's full article and Reall's complete lecture notes were inspected independently for the linearized focusing route and the exact Raychaudhuri convention; full locators and per-result dispositions are in batch-124.coverage.json."
+        },
+        "non_derivation": {
+          "verdict": "pass",
+          "evidence": "The first-order equation and future boundary condition are explicitly adopted model premises; no proof that a state, semiclassical solution or physical horizon realizes them is claimed."
+        }
+      }
+    },
+    "pthm-tgrx-linearized-area-modular-moment": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "post-tgrx-linearized-horizon-model",
+          "source_section": "Postulate",
+          "quote": "Adopt, only to first order in $\\epsilon$, the linearized focusing equation and future boundary condition",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-tgr-horizon-screen-family",
+          "source_section": "Definition",
+          "quote": "Its **expansion** is $\\theta:=\\operatorname{tr}_{\\bar g}B$ and its **shear** is $\\sigma:=B-\\frac12\\theta\\bar g$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "In a local chart $y^A$ on $C$, write $E_A=d\\Phi_\\epsilon(\\partial_{y^A})$ and $q_{AB}=g_\\epsilon(E_A,E_B)$. The flow coordinates give $[k_\\epsilon,E_A]=0$, so torsion freedom yields $\\nabla_{k_\\epsilon}E_A=\\nabla_{E_A}k_\\epsilon$. Metric compatibility then gives $\\partial_\\lambda q_{AB}=B_{AB}+B_{BA}$, where $B_{AB}=g_\\epsilon(\\nabla_{E_A}k_\\epsilon,E_B)$ is evaluated on the screen. The cut is spacelike and transverse, so its tangent plane maps isometrically onto the screen quotient in [F2], and $q^{AB}B_{AB}=\\theta_\\epsilon$. Differentiating the positive determinant explicitly gives $\\partial_\\lambda\\sqrt{\\det q}=\\frac12\\sqrt{\\det q}\\,q^{AB}\\partial_\\lambda q_{AB}=\\theta_\\epsilon\\sqrt{\\det q}$. At $\\epsilon=0$, $B_0=0$ makes $\\partial_\\lambda q_{0,AB}=0$, so $\\mu_{0,\\lambda}=dA_0$ for every $\\lambda$. Integrate the density identity from $\\lambda_0$ to $\\lambda$ on any finite slab; joint $C^1$ dependence and compactness of $C$ permit differentiation under this finite integral in $\\epsilon$. At $\\epsilon=0$, $\\theta_0=0$ and $\\mu_{0,u}=dA_0$, writing $\\delta\\mu_\\lambda:=\\left.\\partial_\\epsilon\\mu_{\\epsilon,\\lambda}\\right|_0$ for the varied area density, we obtain the density identity $\\delta\\mu_\\lambda-\\delta\\mu_{\\lambda_0}=\\int_{\\lambda_0}^{\\lambda}\\delta\\theta(u,\\cdot)\\,dA_0\\,du$ on $C$. Thus $\\partial_\\lambda\\delta\\mu_\\lambda=\\delta\\theta(\\lambda,\\cdot)\\,dA_0$, and differentiating its integral over compact $C$ gives $\\delta A'(\\lambda)=\\int_C\\delta\\theta(\\lambda,y)\\,dA_0(y)$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "For fixed $y\\in C$, integrate [F1] from $\\lambda$ to $R>\\lambda$: $\\delta\\theta(R,y)-\\delta\\theta(\\lambda,y)=-8\\pi G_N\\int_\\lambda^R\\delta T_{kk}(v,y)\\,dv$. Letting $R\\to\\infty$ is justified by [F1] and [A2], and the future boundary condition gives $\\delta\\theta(\\lambda,y)=8\\pi G_N\\int_\\lambda^\\infty\\delta T_{kk}(v,y)\\,dv$.",
+          "inputs": [
+            "given",
+            "F1",
+            "A2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Substitute step 1.2 into the area variation from step 1.1. The resulting absolutely convergent integral is $\\delta A'(u)=8\\pi G_N\\int_C dA_0(y)\\int_u^\\infty\\delta T_{kk}(v,y)\\,dv$.",
+          "inputs": [
+            "given",
+            "A1",
+            "A2",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "By [A2] and step 2.1, $\\int_\\lambda^\\infty|\\delta A'(u)|\\,du\\le8\\pi G_N\\int_CdA_0\\int_\\lambda^\\infty(v-\\lambda)|\\delta T_{kk}(v,y)|\\,dv<\\infty$. Thus $\\delta A(R)$ has a finite limit as $R\\to\\infty$. Fubini's theorem applies to the absolute first moment in [A2], so integrating step 2.1 from $u=\\lambda$ to $\\infty$ and reversing the order of integration gives $\\delta A_\\infty-\\delta A(\\lambda)=8\\pi G_N\\int_CdA_0\\int_\\lambda^\\infty\\delta T_{kk}(v,y)\\bigl(\\int_\\lambda^vdu\\bigr)dv=8\\pi G_NM_\\lambda$.",
+          "inputs": [
+            "given",
+            "A2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "Since $G_N>0$, divide the equality in step 3.1 by $4G_N$ to obtain $(\\delta A_\\infty-\\delta A(\\lambda))/(4G_N)=2\\pi M_\\lambda$. This is an identity for the signed first-order stress moment; no positivity or entropy interpretation follows.",
+          "inputs": [
+            "given",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement requires a nonempty compact cut C; hence it does not assert an empty-cut density construction. Proof1.1 integrates on that fixed compact surface, and the stress source may still vanish as covered by the zero case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If delta T_kk is identically zero, step 1.2 and the future boundary force delta-theta=0; steps 1.1 and 2.1 then give zero area difference."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No count or one-element-family assertion is made."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: every cut metric is positive definite; caustic or degenerate cuts are outside the stated flow."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement includes lambda=lambda_0; step 3.1 uses absolute first-moment integrability to prove the finite future area-variation limit."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The entire metric/state/stress/flow family and labelled cuts are supplied as the postulate’s model data. Proof1.1 chooses charts only locally, and1.2–3.1 integrate those fixed data; no new global state selection or family-choice theorem is claimed beyond inherited model premises."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No iff statement is made."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse statement is made."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "The conclusion is a continuous integral identity; no finite numerical check certifies its hypotheses or substitutes for the proof.",
+      "supplier_excerpts": [
+        {
+          "supplier": "post-tgrx-linearized-horizon-model",
+          "carrier": "items/post-tgrx-linearized-horizon-model.md",
+          "status": "Current Postulate interface inspected after the reader clarified the natural-unit dimensions of the renormalization scale and energy cutoff; the consumer use was rechecked in this report. Earlier same-owner interface evidence remains historical.",
+          "source_section": "Postulate",
+          "exact_statement": "Use natural units $c=\\hbar=k_B=1$, metric signature $(-,+,+,+)$, and the\ncurvature convention\n$R(X,Y)Z=\\nabla_X\\nabla_YZ-\\nabla_Y\\nabla_XZ-\\nabla_{[X,Y]}Z$ with\n$\\operatorname{Ric}_{bd}=g^{ac}R_{abcd}$. Let $M$ be a fixed Hausdorff,\nsecond-countable, oriented smooth four-manifold. For each dimensionless\n$\\epsilon$ in an open interval about $0$, supply a smooth Lorentzian metric\n$g_\\epsilon$ on $M$ with the stated signature and a time orientation (a chosen\nfuture timelike cone). Each $(M,g_\\epsilon)$ is globally hyperbolic: it is\nstrongly causal, meaning every point has arbitrarily small neighborhoods that\neach causal curve meets in a connected parameter interval, and each causal\ndiamond $J^+(p)\\cap J^-(q)$ is compact. Here causal curves are piecewise\n$C^1$ with consistently future- or past-directed causal tangent, and\n$J^\\pm(p)$ denote points reachable from or reaching $p$ by such curves.\n\nFor each $\\epsilon$, let $H_\\epsilon\\subset M$ be a smooth embedded\nthree-dimensional submanifold whose induced metric has a one-dimensional\nradical at every point. Its smooth nowhere-zero future null generator field\n$k_\\epsilon$ spans that radical and is affine,\n$\\nabla^{g_\\epsilon}_{k_\\epsilon}k_\\epsilon=0$. At $p\\in H_\\epsilon$ define\nthe screen space $\\mathcal S_{\\epsilon,p}:=k_\\epsilon^\\perp/\\mathbb R\nk_\\epsilon$, where $k_\\epsilon^\\perp$ is taken in $T_pM$. Its positive screen\nmetric is $\\bar g_\\epsilon([X],[Y]):=g_\\epsilon(X,Y)$, its screen deformation\nform is\n$$B_\\epsilon([X],[Y]):=g_\\epsilon(\\nabla^{g_\\epsilon}_Xk_\\epsilon,Y),$$\nand its expansion and shear are $\\theta_\\epsilon:=\\operatorname{tr}_{\\bar\ng_\\epsilon}B_\\epsilon$ and $\\sigma_\\epsilon:=B_\\epsilon-\\frac12\\theta_\\epsilon\n\\bar g_\\epsilon$, respectively. These are the supplied smooth null-screen\nconventions. The word “horizon” below denotes only $H_\\epsilon$; no causal- or\nevent-horizon property is assumed.\n\nFix a nonempty compact smooth two-manifold $C$ and $\\lambda_0\\in\\mathbb R$.\nFor each $\\epsilon$, supply a smooth map\n$$\\Phi_\\epsilon:[\\lambda_0,\\infty)\\times C\\to H_\\epsilon$$\nsuch that $\\partial_\\lambda\\Phi_\\epsilon=k_\\epsilon\\circ\\Phi_\\epsilon$, and\nevery $\\Phi_{\\epsilon,\\lambda}:C\\to H_\\epsilon$ is an embedding with spacelike\nimage. The family supplies a fixed identification of generator labels and\naffine normalization across $\\epsilon$. With $[\\lambda]=L$, this\nparameterization gives $[k_\\epsilon]=1$ in length coordinates.\n\nWrite $q_{\\epsilon,\\lambda}:=\\Phi_{\\epsilon,\\lambda}^*g_\\epsilon$ for the\npositive-definite induced metric on $C$, and let $\\mu_{\\epsilon,\\lambda}$ be\nits Riemannian area density. On each finite parameter slab, the pulled-back\nmetric, area density, screen deformation form, expansion, and shear are jointly\n$C^1$ in $(\\epsilon,\\lambda)$ and smooth in $y$; the underlying metric and\nembedding family has the corresponding $\\epsilon$-regularity and spatial\nderivatives needed to define them. Call the reference geometry stationary in\nthis model when $B_0=0$ along every generator; then $\\theta_0=\\sigma_0=0$.\nDefine $\\delta\\theta:=\\left.\\partial_\\epsilon\\theta_\\epsilon\\right|_0$.\n\nFor each $\\epsilon$, supply a positive normalized state $\\omega_\\epsilon$ on\nthe selected free scalar-field algebra. Its two-point distribution $W_\\epsilon$\nis a bisolution of the selected Klein–Gordon operator and has the supplied\nHadamard wavefront relation $\\mathcal C^+_{g_\\epsilon}$: pairs of future-null\ncovectors related by parallel propagation along a future-directed null\ngeodesic with common positive scale and opposite sign in the second slot,\nincluding the coincident-point case. Supply a state-independent Hadamard\nsingular bidistribution\n$H_{\\mu,\\epsilon}$ such that $W_\\epsilon-H_{\\mu,\\epsilon}$ is smooth, and one\nfixed local stress prescription across the family,\n$$T^{\\mathrm{ren},\\epsilon}_{ab}(x)=\\lim_{x'\\to x}D^{\\epsilon}_{ab}(x,x')\\bigl(W_\\epsilon-H_{\\mu,\\epsilon}\\bigr)(x,x')+C_{ab}[g_\\epsilon;\\mu,\\mathbf c](x),$$\nwhere $D^{\\epsilon}_{ab}$ is the supplied finite-order bidifferential\noperator and $C_{ab}$ the supplied state-independent local curvature\ncorrection with the supplier's fixed positive renormalization scale $\\mu$\n($[\\mu]=L^{-1}$ in these natural units) and finite renormalization conditions\n$\\mathbf c$. Thus the coincidence limit acts on a smooth difference, not on\nthe singular distributions separately. The family\n$$F_\\epsilon(\\lambda,y):=(T^{\\mathrm{ren},\\epsilon}_{ab}k_\\epsilon^ak_\\epsilon^b)\\bigl(\\Phi_\\epsilon(\\lambda,y)\\bigr)$$\nis jointly $C^1$ in $\\epsilon$ and continuous in $(\\lambda,y)$ on each finite\nparameter slab. No independent graviton-fluctuation source is included.\n\nRestrict every model input to the admissible domain supplied with its chosen\neffective-model instance and to the regime below the supplier's positive energy\ncutoff $E_{\\mathrm{cut}}$. The supplier's SI cutoff is measured in joules; in\nthe natural units fixed here, $[E_{\\mathrm{cut}}]=L^{-1}$. Neither the cutoff\nvalue nor its admissible input domain is chosen here. Keep any prescribed\nretarded data as supplied inputs, without\nimposing a collapse geometry or scattering history. Select the\nEinstein-Hilbert submodel by setting the supplier's curvature-squared couplings\nto zero. Write $G_N$ for the supplier's Newton's constant $G$ in the natural-unit\nconvention $c=\\hbar=k_B=1$, so $G_N>0$ has dimension $L^2$. Define\n$$\\delta T_{kk}(\\lambda,y):=\\left.\\partial_\\epsilon F_\\epsilon(\\lambda,y)\\right|_0.$$\nThen $[\\lambda]=L$, $[k_\\epsilon]=1$, $[\\delta T_{kk}]=L^{-4}$, and\n$[\\delta\\theta]=L^{-1}$.\nAssume $\\delta T_{kk}$ is continuous, its tail is absolutely integrable on\neach generator, and\n$$\\int_C dA_0\\int_{\\lambda_0}^{\\infty}(v-\\lambda_0)|\\delta T_{kk}(v,y)|\\,dv<\\infty,$$\nwhere $dA_0:=\\mu_{0,\\lambda_0}$ is the reference background area density.\nAdopt, only to first order in $\\epsilon$, the linearized focusing equation and\nfuture boundary condition\n$$\\partial_\\lambda\\delta\\theta(\\lambda,y)=-8\\pi G_N\\delta T_{kk}(\\lambda,y),\\qquad \\lim_{\\lambda\\to\\infty}\\delta\\theta(\\lambda,y)=0.$$\nTerms quadratic in expansion or shear are omitted only at this first\nperturbative order: both vanish in the stationary reference geometry and are\nof order $\\epsilon$ in the supplied family, so their squares are of order\n$\\epsilon^2$.\nThis postulate is an adopted model equation; it neither asserts that the model\ndescribes nature nor identifies its null-stress moment with modular energy or\nentropy.",
+          "relevant_hypotheses_and_conventions": "Natural units; stationary reference screen B_0=0; smooth compact cuts and affinely normalized future generators; fixed Einstein-Hilbert submodel; signed source; absolute first moment. The supplied energy cutoff has dimension L^{-1} and the fixed renormalization scale mu has dimension L^{-1} in the adopted natural units.",
+          "supplier_proof_status": "draft; this exact-quote refresh does not grant independent proof acceptance",
+          "consumer_use": "Supplies the signed linearized ODE and future boundary condition.",
+          "historical_source_interface": {
+            "source_section": "Postulate",
+            "exact_statement": "Adopt, only to first order in epsilon, partial_lambda delta-theta=-8 pi G_N delta-T_kk and lim_{lambda to infinity}delta-theta=0.",
+            "status": "Current authored draft Postulate. Its exact interface is used conditionally; its upstream semiclassical supplier has no current readiness record.",
+            "supplier_proof_status": "Adopted physical Postulate without a deductive Proof section; current Step 1 readiness is escalated for its missing in-run supplier readiness."
+          }
+        },
+        {
+          "supplier": "def-tgr-horizon-screen-family",
+          "carrier": "items/def-tgr-horizon-screen-family.md",
+          "status": "Exact current public interface transcribed by root at the drained Step2 join; original substantive source-use review retained in historical_source_interface and native/same-owner reports. No renewed full supplier-proof reading asserted.",
+          "source_section": "Definition",
+          "exact_statement": "Let $(\\mathcal M,g,N)$ be a time-oriented smooth Lorentzian four-manifold of signature $(-,+,+,+)$, with the metric-selected connection $\\nabla$ of [[thm-gr-nondegenerate-levi-civita-and-tensor-derivative]]. Here $N$ is the supplied smooth future timelike vector field defining the time orientation; it is not a coordinate frame or a tetrad.\n\nA **smooth null hypersurface** is a smooth embedded three-dimensional submanifold $H\\subset\\mathcal M$ such that, at every $p\\in H$, the restriction of $g_p$ to $T_pH$ has a one-dimensional radical\n$$L_p:=\\{v\\in T_pH:g_p(v,w)=0\\text{ for every }w\\in T_pH\\}.$$\nWrite $i:H\\hookrightarrow\\mathcal M$ for the inclusion, and let $\\pi:T\\mathcal M\\to\\mathcal M$ be the tangent-bundle projection. A smooth vector field $V$ along $H$ means a smooth map $V:H\\to T\\mathcal M$ with $\\pi\\circ V=i$, equivalently a smooth section of\n$$i^*T\\mathcal M=\\{(p,v):p\\in H,\\ v\\in T_p\\mathcal M\\}.$$\nFor a smooth tangent field $X$ on $H$, the notation $\\nabla_XV$ means $(i^*\\nabla)_XV$, using the pullback connection of [[def-pullback-connection]] for the ambient metric-selected connection $\\nabla$; its prescription in a pulled-back frame and frame-independent well-definedness are given by [[thm-pullback-connection-is-well-defined-and-functorial]]. It agrees with restricting $\\nabla_{\\widetilde X}\\widetilde V$ for any local smooth ambient extensions when $V$ and $X$ are restricted to $H$. Such extensions exist in the slice coordinates of [[def-embedded-submanifold-and-slice-chart]] by extending coordinate coefficients smoothly off the slice. For tangent $X,Y$, extending their tangential coordinate coefficients independently of the transverse coordinate and setting their transverse components to zero makes the ambient bracket restrict to the intrinsic bracket on $H$. Restricting the ambient metric-compatibility and torsion-free identities therefore gives, for tangent $X,Y$ on $H$ and fields $V,W$ along $H$,\n$$Xg(V,W)=g(\\nabla_XV,W)+g(V,\\nabla_XW),\\qquad \\nabla_XY-\\nabla_YX=[X,Y].$$\nPullback functoriality along any integral curve $\\gamma$ in $H$ identifies the curve derivative with the pullback of $i^*\\nabla$; accordingly $\\nabla_k k=0$ means the tangent field is parallel along its generator with this affine parameter.\n\nA **smooth affine null generator field** on $H$ is a smooth vector field $k$ along $H$ such that $k_p$ is a nonzero future-directed section of $L_p$ and $\\nabla_k k=0$ along $H$. Thus $k$ is both tangent and normal to $H$, and its integral-curve parameter is affine.\n\nFor each $p\\in H$, the **screen space** is the quotient vector space\n$$\\mathcal S_p:=k_p^\\perp/\\mathbb R k_p,\\qquad k_p^\\perp:=\\{v\\in T_p\\mathcal M:g_p(v,k_p)=0\\}.$$\nIts candidate **screen metric** is $\\bar g_p([X],[Y]):=g_p(X,Y)$. The result [[lem-tgr-null-screen-quotient-positive]] establishes that these spaces form a smooth rank-two vector bundle over $H$ and that $\\bar g$ is a well-defined positive-definite metric on it.\n\nFor smooth local screen sections represented by smooth fields $X,Y$ tangent to $H$, define the **screen deformation form**\n$$B([X],[Y]):=g(\\nabla_X k,Y).$$\nThe same lemma establishes that this form is well defined on the quotient. Its **expansion** is $\\theta:=\\operatorname{tr}_{\\bar g}B$ and its **shear** is $\\sigma:=B-\\frac12\\theta\\bar g$. In the area theorem below, $B$ is proved symmetric, so $\\sigma$ is a symmetric trace-free form on each screen space.\n\nIndependently, let\n$$\\mathcal P:=\\{(m,a,q)\\in\\mathbb R^3:m>0,\\ m^2>a^2+q^2\\}.$$\nThese are real mathematical parameters with no physical units assigned here. On this open parameter domain set\n$$s:=\\sqrt{m^2-a^2-q^2},\\quad r_+:=m+s,\\quad D:=r_+^2+a^2,$$\n$$A:=4\\pi D,\\quad j:=ma,\\quad \\kappa_{\\rm KN}:=\\frac{r_+-m}{D},\\quad \\Omega_{\\rm KN}:=\\frac{a}{D},\\quad \\Phi_{\\rm KN}:=\\frac{qr_+}{D}.$$\nBecause the radicand and $D$ are strictly positive on $\\mathcal P$, these are smooth real-valued functions there: the repeated derivative formula for $x^{1/2}$ on $(0,\\infty)$ and the chain rule are given in [[def-gr-smooth-lorentzian-objects]], Facts [F2]. This definition assigns no geometric or thermodynamic interpretation to these functions and asserts no event-horizon existence, formation, uniqueness or thermodynamic-identification theorem.",
+          "relevant_hypotheses_and_conventions": "Smooth Lorentzian four-manifold, smooth embedded null hypersurface, future affine nonzero generator; a spacelike cut transverse to k identifies its tangent plane isometrically with the screen quotient.",
+          "supplier_proof_status": "published; this exact-quote refresh does not grant independent proof acceptance",
+          "consumer_use": "Defines the screen expansion and the cut/screen identification used in the local area-variation calculation.",
+          "historical_source_interface": {
+            "source_section": "Definition",
+            "exact_statement": "For the smooth affine null generator, define the screen quotient k-perp/Rk with its positive screen metric, the screen deformation form B([X],[Y])=g(nabla_X k,Y), and theta=tr_bar-g B.",
+            "status": "Published mathematical Definition inspected with its justified_by lemma and complete proof.",
+            "supplier_proof_status": "Published mathematical Definition; the complete positive-screen well-definedness lemma proof was read."
+          }
+        }
+      ],
+      "current_boundary_worksheet": {
+        "proposal": "research/physics-non-fluid-129-2026-10-21-r2-owner-step2-boundary-proposal-3/proposal.json",
+        "source_sha256": "8aed2a56963970cb2150302e70d296bfdf8da46c5c8783b25d69c271873e716b",
+        "qualification": "Released complete current source/eight-case semantic worksheet; root transcribed exact current rows. No independent acceptance or finite computation asserted."
+      },
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-124",
+        "notes": "Independently read all five current proof steps and direct Postulate/screen suppliers including the positive-screen lemma. The cut tangent space injects into the rank-two quotient and hence is isometric onto it. Commuting local flow fields and metric compatibility give the determinant-area derivative; integrate first on a finite slab before epsilon differentiation, justified by joint C1 regularity and compact C. B0=0 fixes the background density. The affine future boundary fixes the sign of the stress tail. Continuity on a compact initial slab plus the absolute first-moment bound controls the transverse unweighted tail even at lambda0; Tonelli on its absolute value then justifies Fubini and the finite area limit. Zero stress yields constant varied area; signed stress need not yield positive area difference. No entropy or modular identification, NEC, empirical inference, choice selection or converse is used. Wall §2.2 and Reall §§4.6/4.8 are source context; the argument is locally explicit."
+      }
+    },
+    "rem-tgrx-qnec-qfc-status": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The remark does quantify over admissible deformation families, including V_tau. It reports pointwise source formulations at supplied evaluation data: QNEC selects p in Sigma, QFC uses actual generator labels y_1,y_2 of its cut/null segment, and the JT branch uses a moving cut point. No entropy construction or aggregate over an arbitrary possibly empty family is asserted; a universal formulation with no admissible evaluation labels is vacuous rather than an existence claim. In d=2 the transverse coordinate tuple has length zero, while cut-point variations and area counting remain as explicitly specified. This does not impose a blanket nonempty-surface hypothesis on every source formulation.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root adopting /root/supplier_cycle",
+            "reason": "Root adopts /root/supplier_cycle current case review in research/physics-non-fluid-129-2026-10-21-r2-owner-step3-boundary-current-supplier_cycle/proposal.json: The item reports source formulations over admissible deformation families. QNEC chooses p in Sigma, so its pointwise evaluation has an actual point. QFC compares functional derivatives at actual generator labels y_1,y_2 of a supplied cut/null segment and quantifies over admissible one-parameter V_tau with nonnegative derivative. It performs no sum or limit over an arbitrary possibly empty family of models. A d=2 transverse coordinate tuple has length zero, but the item explicitly uses individual cut-point displacements and counting measure; it does not mean no generator. No prohibition on every empty surface is warranted. A universal assertion over no admissible evaluation labels would be vacuous, not a new entropy construction or existence result. Source reading limits and exact support remain in the sealed proposal; no independent native proof acceptance is asserted.",
+            "item_sha256": "53d6bdfd161577304c94633129043acda15781c08e8bf080de37b54006c3c9ef",
+            "row_sha256": "4ceae74c66b678993718f2ec06cba13538bf532f0c50350ccc4ab7a354fc84dc"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root adopting /root/supplier_cycle",
+            "reason": "Root adopts /root/supplier_cycle current case review in research/physics-non-fluid-129-2026-10-21-r2-owner-step3-boundary-current-supplier_cycle/proposal.json: The item reports source formulations over admissible deformation families. QNEC chooses p in Sigma, so its pointwise evaluation has an actual point. QFC compares functional derivatives at actual generator labels y_1,y_2 of a supplied cut/null segment and quantifies over admissible one-parameter V_tau with nonnegative derivative. It performs no sum or limit over an arbitrary possibly empty family of models. A d=2 transverse coordinate tuple has length zero, but the item explicitly uses individual cut-point displacements and counting measure; it does not mean no generator. No prohibition on every empty surface is warranted. A universal assertion over no admissible evaluation labels would be vacuous, not a new entropy construction or existence result. Source reading limits and exact support remain in the sealed proposal; no independent native proof acceptance is asserted.",
+            "item_sha256": "53d6bdfd161577304c94633129043acda15781c08e8bf080de37b54006c3c9ef",
+            "row_sha256": "4ceae74c66b678993718f2ec06cba13538bf532f0c50350ccc4ab7a354fc84dc"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-field or zero-entropy case is asserted."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-element counting claim is made."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The QNEC statement is limited to cited field-theory and stationary-null-surface hypotheses; no degenerate-cut extension is asserted."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The remark makes no endpoint or limiting-sequence claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No selection or choice principle occurs."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No equivalence is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse is asserted.",
+          "historical_template_review": {
+            "upheld": true,
+            "by": "same-owner-qft-green-maps scoped boundary review",
+            "reason": "The statement reports source-limited QNEC results, a general conjectural QFC and theory-specific counterexamples. The local linearized horizon model defines no entropy shape derivative, and no reverse implication from those reported conditions to that model is asserted.",
+            "item_sha256": "50ba8a0a3a5bae9a49e0237a8dbdc56dd65aa965022e2bac5e041be95b2de769",
+            "row_sha256": "63c0624b31860178065110cba75a4a05ce1609b19bf0a520753c0d6a1db43c5f"
+          }
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "The item reports source-scoped status and contains no numerical or deductive claim to finitely check.",
+      "supplier_excerpts": [
+        {
+          "supplier": "post-tgrx-linearized-horizon-model",
+          "carrier": "items/post-tgrx-linearized-horizon-model.md",
+          "status": "Current Postulate interface inspected after the reader clarified the natural-unit dimensions of the renormalization scale and energy cutoff; the consumer use was rechecked in this report. Earlier same-owner interface evidence remains historical.",
+          "source_section": "Postulate",
+          "exact_statement": "Use natural units $c=\\hbar=k_B=1$, metric signature $(-,+,+,+)$, and the\ncurvature convention\n$R(X,Y)Z=\\nabla_X\\nabla_YZ-\\nabla_Y\\nabla_XZ-\\nabla_{[X,Y]}Z$ with\n$\\operatorname{Ric}_{bd}=g^{ac}R_{abcd}$. Let $M$ be a fixed Hausdorff,\nsecond-countable, oriented smooth four-manifold. For each dimensionless\n$\\epsilon$ in an open interval about $0$, supply a smooth Lorentzian metric\n$g_\\epsilon$ on $M$ with the stated signature and a time orientation (a chosen\nfuture timelike cone). Each $(M,g_\\epsilon)$ is globally hyperbolic: it is\nstrongly causal, meaning every point has arbitrarily small neighborhoods that\neach causal curve meets in a connected parameter interval, and each causal\ndiamond $J^+(p)\\cap J^-(q)$ is compact. Here causal curves are piecewise\n$C^1$ with consistently future- or past-directed causal tangent, and\n$J^\\pm(p)$ denote points reachable from or reaching $p$ by such curves.\n\nFor each $\\epsilon$, let $H_\\epsilon\\subset M$ be a smooth embedded\nthree-dimensional submanifold whose induced metric has a one-dimensional\nradical at every point. Its smooth nowhere-zero future null generator field\n$k_\\epsilon$ spans that radical and is affine,\n$\\nabla^{g_\\epsilon}_{k_\\epsilon}k_\\epsilon=0$. At $p\\in H_\\epsilon$ define\nthe screen space $\\mathcal S_{\\epsilon,p}:=k_\\epsilon^\\perp/\\mathbb R\nk_\\epsilon$, where $k_\\epsilon^\\perp$ is taken in $T_pM$. Its positive screen\nmetric is $\\bar g_\\epsilon([X],[Y]):=g_\\epsilon(X,Y)$, its screen deformation\nform is\n$$B_\\epsilon([X],[Y]):=g_\\epsilon(\\nabla^{g_\\epsilon}_Xk_\\epsilon,Y),$$\nand its expansion and shear are $\\theta_\\epsilon:=\\operatorname{tr}_{\\bar\ng_\\epsilon}B_\\epsilon$ and $\\sigma_\\epsilon:=B_\\epsilon-\\frac12\\theta_\\epsilon\n\\bar g_\\epsilon$, respectively. These are the supplied smooth null-screen\nconventions. The word “horizon” below denotes only $H_\\epsilon$; no causal- or\nevent-horizon property is assumed.\n\nFix a nonempty compact smooth two-manifold $C$ and $\\lambda_0\\in\\mathbb R$.\nFor each $\\epsilon$, supply a smooth map\n$$\\Phi_\\epsilon:[\\lambda_0,\\infty)\\times C\\to H_\\epsilon$$\nsuch that $\\partial_\\lambda\\Phi_\\epsilon=k_\\epsilon\\circ\\Phi_\\epsilon$, and\nevery $\\Phi_{\\epsilon,\\lambda}:C\\to H_\\epsilon$ is an embedding with spacelike\nimage. The family supplies a fixed identification of generator labels and\naffine normalization across $\\epsilon$. With $[\\lambda]=L$, this\nparameterization gives $[k_\\epsilon]=1$ in length coordinates.\n\nWrite $q_{\\epsilon,\\lambda}:=\\Phi_{\\epsilon,\\lambda}^*g_\\epsilon$ for the\npositive-definite induced metric on $C$, and let $\\mu_{\\epsilon,\\lambda}$ be\nits Riemannian area density. On each finite parameter slab, the pulled-back\nmetric, area density, screen deformation form, expansion, and shear are jointly\n$C^1$ in $(\\epsilon,\\lambda)$ and smooth in $y$; the underlying metric and\nembedding family has the corresponding $\\epsilon$-regularity and spatial\nderivatives needed to define them. Call the reference geometry stationary in\nthis model when $B_0=0$ along every generator; then $\\theta_0=\\sigma_0=0$.\nDefine $\\delta\\theta:=\\left.\\partial_\\epsilon\\theta_\\epsilon\\right|_0$.\n\nFor each $\\epsilon$, supply a positive normalized state $\\omega_\\epsilon$ on\nthe selected free scalar-field algebra. Its two-point distribution $W_\\epsilon$\nis a bisolution of the selected Klein–Gordon operator and has the supplied\nHadamard wavefront relation $\\mathcal C^+_{g_\\epsilon}$: pairs of future-null\ncovectors related by parallel propagation along a future-directed null\ngeodesic with common positive scale and opposite sign in the second slot,\nincluding the coincident-point case. Supply a state-independent Hadamard\nsingular bidistribution\n$H_{\\mu,\\epsilon}$ such that $W_\\epsilon-H_{\\mu,\\epsilon}$ is smooth, and one\nfixed local stress prescription across the family,\n$$T^{\\mathrm{ren},\\epsilon}_{ab}(x)=\\lim_{x'\\to x}D^{\\epsilon}_{ab}(x,x')\\bigl(W_\\epsilon-H_{\\mu,\\epsilon}\\bigr)(x,x')+C_{ab}[g_\\epsilon;\\mu,\\mathbf c](x),$$\nwhere $D^{\\epsilon}_{ab}$ is the supplied finite-order bidifferential\noperator and $C_{ab}$ the supplied state-independent local curvature\ncorrection with the supplier's fixed positive renormalization scale $\\mu$\n($[\\mu]=L^{-1}$ in these natural units) and finite renormalization conditions\n$\\mathbf c$. Thus the coincidence limit acts on a smooth difference, not on\nthe singular distributions separately. The family\n$$F_\\epsilon(\\lambda,y):=(T^{\\mathrm{ren},\\epsilon}_{ab}k_\\epsilon^ak_\\epsilon^b)\\bigl(\\Phi_\\epsilon(\\lambda,y)\\bigr)$$\nis jointly $C^1$ in $\\epsilon$ and continuous in $(\\lambda,y)$ on each finite\nparameter slab. No independent graviton-fluctuation source is included.\n\nRestrict every model input to the admissible domain supplied with its chosen\neffective-model instance and to the regime below the supplier's positive energy\ncutoff $E_{\\mathrm{cut}}$. The supplier's SI cutoff is measured in joules; in\nthe natural units fixed here, $[E_{\\mathrm{cut}}]=L^{-1}$. Neither the cutoff\nvalue nor its admissible input domain is chosen here. Keep any prescribed\nretarded data as supplied inputs, without\nimposing a collapse geometry or scattering history. Select the\nEinstein-Hilbert submodel by setting the supplier's curvature-squared couplings\nto zero. Write $G_N$ for the supplier's Newton's constant $G$ in the natural-unit\nconvention $c=\\hbar=k_B=1$, so $G_N>0$ has dimension $L^2$. Define\n$$\\delta T_{kk}(\\lambda,y):=\\left.\\partial_\\epsilon F_\\epsilon(\\lambda,y)\\right|_0.$$\nThen $[\\lambda]=L$, $[k_\\epsilon]=1$, $[\\delta T_{kk}]=L^{-4}$, and\n$[\\delta\\theta]=L^{-1}$.\nAssume $\\delta T_{kk}$ is continuous, its tail is absolutely integrable on\neach generator, and\n$$\\int_C dA_0\\int_{\\lambda_0}^{\\infty}(v-\\lambda_0)|\\delta T_{kk}(v,y)|\\,dv<\\infty,$$\nwhere $dA_0:=\\mu_{0,\\lambda_0}$ is the reference background area density.\nAdopt, only to first order in $\\epsilon$, the linearized focusing equation and\nfuture boundary condition\n$$\\partial_\\lambda\\delta\\theta(\\lambda,y)=-8\\pi G_N\\delta T_{kk}(\\lambda,y),\\qquad \\lim_{\\lambda\\to\\infty}\\delta\\theta(\\lambda,y)=0.$$\nTerms quadratic in expansion or shear are omitted only at this first\nperturbative order: both vanish in the stationary reference geometry and are\nof order $\\epsilon$ in the supplied family, so their squares are of order\n$\\epsilon^2$.\nThis postulate is an adopted model equation; it neither asserts that the model\ndescribes nature nor identifies its null-stress moment with modular energy or\nentropy.",
+          "relevant_hypotheses_and_conventions": "The item defines no outside von Neumann entropy, generalized-entropy functional or entropy shape derivative. The supplied energy cutoff has dimension L^{-1} and the fixed renormalization scale mu has dimension L^{-1} in the adopted natural units.",
+          "supplier_proof_status": "draft; this exact-quote refresh does not grant independent proof acceptance",
+          "consumer_use": "Fixes the local model boundary for the status remark.",
+          "historical_source_interface": {
+            "source_section": "Postulate",
+            "exact_statement": "This is an adopted first-order horizon focusing model and does not identify its stress moment with modular energy or entropy.",
+            "status": "Current authored draft Postulate, inspected.",
+            "supplier_proof_status": "Adopted physical Postulate; no deductive Proof section is required."
+          }
+        }
+      ],
+      "source_status_review": [
+        {
+          "source": "https://arxiv.org/pdf/1509.02542",
+          "result": "QNEC formulation and fixed-background proof scope are recorded separately; the superrenormalizable extension is qualified by the paper’s conditional preservation assumptions. Alpha checked the d>2 transverse-patch limit separately from §5 equation (5.5), with no transverse A->0 limit in d=2."
+        },
+        {
+          "source": "https://arxiv.org/pdf/1506.02669",
+          "result": "The Einstein-gravity QFC is recorded with the source-prescribed finite generalized-entropy functional and its assumption of finiteness/cutoff independence, not as a general theorem."
+        },
+        {
+          "source": "https://arxiv.org/pdf/1705.03161",
+          "result": "Weak-curvature, locally stationary EHGB counterexamples are limited to the paper’s d >= 5 construction, either coupling sign, and its transverse-localization/effective-cutoff qualification."
+        },
+        {
+          "source": "https://arxiv.org/pdf/2510.13961",
+          "result": "The rQFC is distinguished from the full QFC; the JT proof and matter-dominated QFC counterexamples retain their model scope and no-uplift caveat. Alpha checked §3 equations (3.9)–(3.15): positive total dilaton, two-dimensional QNEC and dilaton-normalized expansion are now explicit."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-124",
+        "notes": "Read the complete current remark, its local-model supplier, original reader/refuter artifacts, QNEC v2 abstract/outline and §§2,3.1,4.5–5, QFC v1 §§3.1–3.3, Fu–Koeller–Marolf v2 §2 and §4 including v2 note, and Franken et al. v3 Introduction and §3. Confirmed missing ambient arbitrary-dimensional geometry and Cauchy definition; repaired with local typed geometry, causal curves, cuts, affine generators, expansion/shear and regulated entropy definitions. The A->0 transverse limit is now d>2 only; d=2 uses the separate source inequality, with discrete cut/counting conventions for the generic QFC. The JT expansion now uses positive total dilaton, source-renormalized matter entropy, fixed other endpoints and the exact 4G/Phi normalization; QNEC and positive-dilaton restrictions are explicit. Free-field scope and conditional interaction extension, conjectural full QFC, higher-curvature dimension/localization caveat, rQFC zero-expansion condition and no-uplift caveat retained. No full external proof audit or universal gravity/empirical claim. No choice construction, reverse implication, or inference from finite data occurs. No item consumers of the remark were found; its B-page placement asserts no extra result."
+      },
+      "geometry_review": {
+        "verdict": "pass",
+        "evidence": "Local arbitrary-dimensional Lorentzian metric, time orientation, causal vectors/curves, Cauchy splitting, affine null generators, induced metric, and d>2 expansion/shear are now defined before source use; no four-dimensional supplier is asserted to define the d-dimensional source geometry."
+      }
+    }
+  }
+}

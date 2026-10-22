@@ -1,0 +1,77 @@
+---
+id: prop-gr-fx-bianchi-shear-decay
+kind: proposition
+title: "Diagonal-source shear equation and isotropic-source decay"
+status: draft
+origin: pipeline
+domain: mathematics
+dependency_level: 3
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+proof_strategy: direct
+deps:
+  - def-gr-fx-bianchi-i-data
+  - def-gr-fx-bianchi-i-curvature
+  - lem-gr-fx-bianchi-i-curvature-components
+  - cor-zero-derivative-implies-constant
+dependency_roles:
+  def-gr-fx-bianchi-i-data: mathematical-premise
+  def-gr-fx-bianchi-i-curvature: mathematical-premise
+  lem-gr-fx-bianchi-i-curvature-components: mathematical-premise
+  cor-zero-derivative-implies-constant: mathematical-premise
+sources:
+  references:
+    - title: "Diego L. Cáceres, Leonardo Castañeda, and Juan M. Tejeiro, Shear Dynamics in Bianchi I Cosmology, arXiv:1003.3491v1 (2010), Section 2, equations (2.1)–(2.2), and Section 2.1, equations (1.6), (2.8)–(2.17), printed pp. 2–4 (PDF pp. 3–5)"
+      url: "https://arxiv.org/pdf/1003.3491"
+verification:
+  precheck: pending
+---
+
+## Statement
+
+For a diagonal Bianchi I datum, let $\Lambda$ be a constant in $\mathrm{m}^{-2}$ and let $Q_i:I\to\mathbb R$ be continuous functions in $\mathrm{m}^{-2}$. Suppose the spatial diagonal equations
+
+$$G^i{}_i+\Lambda=Q_i(t)\qquad(i=1,2,3;\ \text{no sum over }i)$$
+
+hold, where $G^i{}_i$ is defined by the local $C^2$ curvature convention on this page. With $\Delta_{ij}:=H_i-H_j$ and $H_\Sigma:=3H$, subtracting the equations gives
+
+$$\dot\Delta_{ij}+3H\Delta_{ij}=c^2\bigl(Q_i-Q_j\bigr).$$
+
+If the diagonal source is isotropic, meaning $Q_1=Q_2=Q_3$, then $V\Delta_{ij}$ is constant for each pair, and there is a constant $C\ge0$ such that $\sigma^2=C\,V^{-2}$ throughout $I$. For unequal diagonal sources the right-hand side remains; this proposition makes no unsourced $V^{-2}$ claim in that case.
+
+## Statement references
+
+[[def-gr-fx-bianchi-i-data]]
+
+[[def-gr-fx-bianchi-i-curvature]]
+
+[[lem-gr-fx-bianchi-i-curvature-components]]
+
+## Facts & Assumptions
+
+**Given:** A diagonal Bianchi I datum on $I$, its $H_i$, $H$, $V$ and $\sigma^2$, a constant $\Lambda$, and the stated spatial diagonal equations with functions $Q_i$.
+
+[A1] The Bianchi I product and quotient construction carries $\mathrm{AC}_\omega$ and no stronger choice principle ([[def-gr-fx-bianchi-i-data]]).
+
+[A2] The diagonal equations $G^i{}_i+\Lambda=Q_i(t)$ are explicit mathematical hypotheses of this proposition; when $Q_i\ne Q_j$, their difference is retained as a source term.
+
+[F1] $H_i=\dot a_i/a_i$, $H=\frac13\sum_iH_i$, $V=a_1a_2a_3$, $\sigma^2=\frac12\sum_i(H_i-H)^2$, and all $a_i$ are positive $C^2$ functions ([[def-gr-fx-bianchi-i-data]]).
+
+[F2] The local Einstein components are defined by $G_{ab}=\operatorname{Ric}_{ab}-\frac12\mathcal Rg_{ab}$ and the stated raising convention ([[def-gr-fx-bianchi-i-curvature]]).
+
+[F3] $\operatorname{Ric}_{ii}=a_i^2(\dot H_i+H_iH_\Sigma)/c^2$ and the off-diagonal Ricci components vanish ([[lem-gr-fx-bianchi-i-curvature-components]]).
+
+[F4] If a real-valued function is continuous on an interval and differentiable at every interior point with zero derivative there, then it is constant on the interval ([[cor-zero-derivative-implies-constant]]).
+
+## Proof
+
+**Proof technique:** subtract the diagonal equations, apply the product rule, and use the zero-derivative constancy result.
+
+1.1 Work under the inherited $\mathrm{AC}_\omega$ context [A1]; no choice is used in the component subtraction. Raising the first spatial index in [F3] gives $\operatorname{Ric}^i{}_i=c^{-2}(\dot H_i+H_iH_\Sigma)$. By [F2], $G^i{}_i=\operatorname{Ric}^i{}_i-\frac12\mathcal R$; therefore $G^i{}_i-G^j{}_j=c^{-2}\bigl(\dot H_i-\dot H_j+H_\Sigma(H_i-H_j)\bigr)$. [given, A1, A2, F2, F3, algebra]
+
+2.1 Subtract the $j$ equation in [A2] from the $i$ equation. The constant $\Lambda$ and common scalar-curvature term cancel, so step 1.1 gives $\dot\Delta_{ij}+H_\Sigma\Delta_{ij}=c^2(Q_i-Q_j)$. Since $H_\Sigma=3H$, this is the displayed sourced shear-difference equation. In particular the source vanishes exactly when the two diagonal source functions agree. [step 1.1, A2, F1, algebra]
+
+3.1 Differentiating $V=a_1a_2a_3$ gives $\dot V=V\sum_k\dot a_k/a_k=VH_\Sigma$. Multiplying the equation in step 2.1 by $V$ and applying the product rule yields $\frac{d}{dt}(V\Delta_{ij})=c^2V(Q_i-Q_j)$. Each $H_i$ is $C^1$ because $a_i$ is positive and $C^2$, so $V\Delta_{ij}$ is continuous on $I$ and differentiable at every point of $I$. When the diagonal source is isotropic its derivative vanishes; [F4] then makes $V\Delta_{ij}$ constant on $I$. For unequal sources the displayed derivative retains the stated forcing term. [step 2.1, F1, F4, algebra]
+
+4.1 Put $d_i:=H_i-H$. Then $\sum_j\Delta_{ij}=3H_i-H_\Sigma=3d_i$, so $Vd_i=\frac13\sum_jV\Delta_{ij}$ is constant in the isotropic-source case by step 3.1. Consequently $V^2\sigma^2=\frac12\sum_i(Vd_i)^2$ is a constant $C\ge0$, which is equivalent to $\sigma^2=C\,V^{-2}$ because $V>0$. [step 3.1, F1, algebra] ∎

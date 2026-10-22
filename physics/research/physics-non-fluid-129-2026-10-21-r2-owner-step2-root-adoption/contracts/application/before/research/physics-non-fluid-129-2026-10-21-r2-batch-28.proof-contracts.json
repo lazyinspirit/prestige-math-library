@@ -1,0 +1,699 @@
+{
+  "version": 1,
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "scope": [
+    "def-emg-fx-charged-scalar-stress-tensor",
+    "lem-emg-fx-asymptotic-scalar-energy-flux",
+    "post-emg-fx-test-field-regime",
+    "post-emg-fx-classical-constitutive-adoption",
+    "pthm-emg-fx-conditional-model-flux",
+    "texp-emg-fx-test-to-coupled-error"
+  ],
+  "contracts": {
+    "def-emg-fx-charged-scalar-stress-tensor": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition acts on supplied smooth manifold and field data; it asserts no existence theorem."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: if $psi=0$, then $Dpsi=0$ and the assigned tensor is zero; the formula remains defined."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-dimensional classification or count parameter occurs in the definition."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The definition assumes a nondegenerate Lorentzian metric of signature $(-,+,+,+)."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint claim occurs in the definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: the metric, one-form, coupling and scalar are supplied data; the construction selects no element from a family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition assigns a tensor and states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition assigns a tensor and states no converse."
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "def-emg-lorentzian-forms",
+          "carrier": "items/def-emg-lorentzian-forms.md",
+          "status": "Current carrier section inspected; status=published; kind=definition; provenance.proof=ai-altered; verification={\"verified\":{\"model\":\"gpt-6-luna, gpt-6.1-sol, and delegated Codex review/repair agents; see completed run evidence\",\"verdict\":\"Owner accepted completed review and adjudication evidence for publication\",\"date\":\"2026-10-15\",\"scope\":\"Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report.\",\"evidence\":\"research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json\",\"publication\":\"research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json\",\"delegated_by\":\"owner; publication instruction 2026-10-15\"}}.",
+          "source_section": "Definition",
+          "exact_statement": "Let $(M,g,N)$ be a smooth, Hausdorff, second-countable four-manifold without boundary, with smooth Lorentzian metric $g$ of signature $(-,+,+,+)$ and smooth time-orientation field $N$, as in [[def-gr-smooth-lorentzian-objects]]. Supply an independent orientation $o$ of $M$ in the sense of [[def-oriented-smooth-manifold-and-oriented-chart]]. The metric and time orientation do not select $o$. Write $\\mathrm{vol}_g$ for the oriented metric volume form of [[def-gr-metric-volume-form-and-current-flux]]; in any positively oriented chart it has components $\\sqrt{|\\det(g_{ab})|}\\,dx^0\\wedge dx^1\\wedge dx^2\\wedge dx^3$.\n\nA smooth real $k$-form is a smooth section of $\\bigwedge^kT^*M$, and its space is denoted $\\Omega^k(M)$, as in [[def-smooth-differential-k-form]]. In this page, $F\\in\\Omega^2(M)$ means an arbitrary smooth real two-form. No equation such as $dF=0$, no global potential, and no physical field law is included in this definition.\n\nAn **observer at $p\\in M$** is a vector $n\\in T_pM$ with $g_p(n,n)=-1$ and $g_p(n,N_p)<0$; its **rest space** is $n^\\perp=\\{v:g_p(v,n)=0\\}$, as in [[def-gr-observer-and-rest-space]]. A smooth **observer congruence** on an open set $U\\subseteq M$ is a smooth vector field whose value at every point is an observer. Its observer curves are the maximal integral curves, and a chart is adapted to it when its three spatial coordinate functions are constant along those curves, as in [[def-gr-observer-congruence-and-adapted-charts]]. Such a congruence need not be hypersurface-orthogonal.\n\nA **local frame field** on $U$ is an ordered smooth basis field of $TM|_U$. A **coordinate frame** is the basis of coordinate vector fields supplied by a chart. A **tetrad field** is a local frame $(E_0,E_1,E_2,E_3)$ with $g(E_A,E_B)=\\operatorname{diag}(-1,1,1,1)_{AB}$; it is future-directed when $E_0$ is future-directed, as in [[def-gr-local-frame-and-tetrad-fields]]. These are distinct objects: an observer congruence is a vector field, an adapted chart is a coordinate chart, and a tetrad is a basis field. A tetrad field is not presumed to be a coordinate frame. For every observer congruence $n$, each point has a neighborhood carrying an $n$-adapted tetrad; this is a local assertion only.\n\nA **worldline** on this Lorentzian manifold means a $C^1$ or piecewise-$C^1$ regular curve with future-timelike tangent and specified interval domain, as defined precisely in [[def-gr-timelike-worldline-and-proper-time]]. Its parameter is arbitrary; the proper-time and four-velocity constructions of that definition apply under their stated hypotheses. A worldline is a mathematical curve here and does not assert the existence or motion of a physical body.\n\nFor coordinate bookkeeping only, when a chart is chosen with all four coordinate values assigned the metre, write $x^0=ct$, where $t$ is assigned seconds and $c>0$ is the corresponding scale in $\\mathrm m\\,\\mathrm s^{-1}$. Then $g_{ab}$ is recorded as dimensionless. This is a unit convention on a chart, not a claim that the chart is inertial, orthonormal, global, or physically realized; $c$ in this mathematical convention has no asserted measured value.\n\nUse the unique torsion-free metric-compatible connection $\\nabla^g$ and the curvature convention of [[def-gr-metric-selected-connection]] and [[thm-gr-curvature-tensoriality-and-coordinate-formula]]. In a length-coordinate chart, the displayed Christoffel formula differentiates dimensionless metric components once, so $\\Gamma^a{}_{bc}$ is recorded in $\\mathrm m^{-1}$. The curvature coordinate formula contains one derivative of $\\Gamma$ or a product of two $\\Gamma$ components, so $R^a{}_{bcd}$ and its Ricci and scalar contractions are recorded in $\\mathrm m^{-2}$. These component assignments apply only in length-coordinate charts; other coordinate units transform by their Jacobians.",
+          "relevant_hypotheses_and_conventions": "The excerpt is the complete current Definition section. Preserve its stated hypotheses, units, sign/gauge conventions, and conditional status.",
+          "supplier_proof_status": "Carrier metadata: status=published; kind=definition; provenance.proof=ai-altered; verification={\"verified\":{\"model\":\"gpt-6-luna, gpt-6.1-sol, and delegated Codex review/repair agents; see completed run evidence\",\"verdict\":\"Owner accepted completed review and adjudication evidence for publication\",\"date\":\"2026-10-15\",\"scope\":\"Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report.\",\"evidence\":\"research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json\",\"publication\":\"research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json\",\"delegated_by\":\"owner; publication instruction 2026-10-15\"}}. Outside this run; no local readiness assertion is made. No independent acceptance is inferred.",
+          "consumer_use": "Supplies the oriented, time-oriented Lorentzian geometry and length-coordinate conventions used in the tensor assignment."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-28 author self-review",
+        "notes": "Reviewed the supplied smooth data, global-trivialization convention, Lorentzian sign convention, component units, and distinction between a mathematical tensor assignment and a physical stress-energy interpretation."
+      },
+      "finite_checks": []
+    },
+    "lem-emg-fx-asymptotic-scalar-energy-flux": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-emg-fx-charged-radial-scattering",
+          "source_section": "Definition",
+          "quote": "Let $M>0$ and $Q\\in\\mathbb R$ satisfy $0<|Q|<M$. Put\n$$r_\\pm:=M\\pm\\sqrt{M^2-Q^2},\\qquad f(r):=1-\\frac{2M}{r}+\\frac{Q^2}{r^2},\\qquad r>r_+.$$\nUse the static exterior\n$\\mathcal M_{\\mathrm{ext}}=\\mathbb R_t\\times(r_+,\\infty)_r\\times S^2$\nwith the electric specialization $q_e=Q$, $q_m=0$, and $t=x^0$ of the\nReissner--Nordström metric and potential fixed in the preceding definition.\nThus\n$$g=-f\\,dt^2+f^{-1}dr^2+r^2\\gamma_{S^2},\\qquad A=-\\frac Qr\\,dt,\\qquad A_t\\longrightarrow0\\quad(r\\longrightarrow\\infty).$$\nHere $r_+$ is the positive outer root in the selected local model, not a claim\nabout an event horizon in a maximal spacetime. Set\n$\\Phi_H:=Q/r_+=A_t(\\infty)-A_t(r_+)$ for this gauge.\n\nFor a complex scalar function $\\psi$ in this fixed trivialization and a real\ncoupling $e$, put $D_a\\psi:=(\\partial_a-ieA_a)\\psi$. Define the massless\ncharged wave operator in the static chart by\n$$\\Box_{g,A}\\psi:=-f^{-1}D_t^2\\psi+\\frac1{r^2}\\partial_r\\!\\left(r^2f\\,\\partial_r\\psi\\right)+\\frac1{r^2}\\Delta_{\\gamma_{S^2}}\\psi,\\qquad D_t=\\partial_t+\\frac{ieQ}{r}.$$\nThe equation used here is $\\Box_{g,A}\\psi=0$; it is a fixed-background,\nminimally coupled test-field equation and does not evolve or source $g$ or $A$.\n\nLet $e\\in\\mathbb R$, $\\omega>0$, and $\\ell\\in\\mathbb N_0$. Supply a smooth\nreal function $Y:S^2\\to\\mathbb R$ satisfying\n$$\\int_{S^2}Y^2\\,d\\omega_{S^2}=1,\\qquad \\Delta_{\\gamma_{S^2}}Y=-\\ell(\\ell+1)Y.$$\nNo existence assertion about $Y$ is made. Use the tortoise coordinate\n$$r_*(r):=\\int_{2r_+}^{r}f(\\rho)^{-1}\\,d\\rho,$$\nwhich is strictly increasing because $f>0$ on the exterior. Under the\nsubextremal hypotheses the supplied RN scalar-coordinate result proves that\n$r_*$ is a smooth coordinate from $(r_+,\\infty)$ onto $\\mathbb R$; hence\n$r_*\\to-\\infty$ as $r\\downarrow r_+$ and $r_*\\to+\\infty$ as $r\\to\\infty$.\nA separated mode has the form\n$$\\psi(t,r,\\Omega)=A_{\\mathrm{in}}e^{-i\\omega t}Y(\\Omega)\\frac{u(r_*)}{r},$$\nwhere $A_{\\mathrm{in}}\\ne0$ is a fixed incident amplitude with units\n$[\\psi]\\,\\mathrm m$, and the normalized complex radial function $u$ and its\nreflection and transmission coefficients are dimensionless.\n\nWrite $\\omega_H:=\\omega-e\\Phi_H=\\omega-eQ/r_+$ and, for any reference length\n$L>0$, define the Coulomb phase\n$$\\Theta(r_*):=\\omega r_*-eQ\\log(r/L),\\qquad \\Theta'(r_*):=\\omega-\\frac{eQf(r)}r.$$\nA normalized scattering solution is a smooth radial solution of\n$\\Box_{g,A}\\psi=0$ for which, for some $R,T\\in\\mathbb C$,\n$$u=e^{-i\\Theta}+R e^{i\\Theta}+o(1),\\qquad \\partial_{r_*}u=-i\\Theta'e^{-i\\Theta}+i\\Theta'R e^{i\\Theta}+o(1)\\quad(r\\longrightarrow\\infty),$$\nand\n$$u=T e^{-i\\omega_Hr_*}+o(1),\\qquad \\partial_{r_*}u=-i\\omega_HTe^{-i\\omega_Hr_*}+o(1)\\quad(r\\downarrow r_+).$$\nThe error terms tend to zero in the indicated limits. These boundary\nconditions prescribe unit incoming amplitude at infinity and only the\ningoing branch at the future horizon. They define admissible scattering data;\nthey assert neither existence nor uniqueness of such a solution.\n\nThe logarithm in $\\Theta$ is required by the long-range term\n$-2\\omega eQ/r$ in the asymptotic radial coefficient. Changing $L$ changes\nconstant phases, not flux magnitudes. A constant gauge shift changes the\nfrequency label, so the threshold uses the potential difference\n$\\Phi_H$, not an absolute value of $A_t$.\n\nUse geometric units $G=c=1$ and length coordinates, with\n$[t]=[r]=[r_*]=[M]=[Q]=[L]=\\mathrm m$,\n$[e]=[\\omega]=\\mathrm m^{-1}$, $f$ dimensionless, and $A_t$ dimensionless;\nthen $\\Theta$ is dimensionless and each term in $\\Box_{g,A}$ has units\n$[\\psi]\\,\\mathrm m^{-2}$. The coupling $e$ is the charge coupling in the\nchosen field normalization; restoring SI units requires restoring the\ncorresponding field normalization and the charge-over-$\\hbar$ coupling.\nThis definition excludes scalar mass, magnetic charge, mirrors, anti-de Sitter\nboundaries, bound states, and complex-frequency quasinormal boundary conditions.\nA scalar mass would change the propagating infinity wave number to\n$\\sqrt{\\omega^2-\\mu^2}$ and requires a different scattering normalization.\nComplex-frequency quasinormal modes form a distinct non-self-adjoint spectral\nproblem and are not covered by the real-frequency Wronskian identity.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-emg-fx-charged-scalar-stress-tensor",
+          "source_section": "Definition",
+          "quote": "Let $(M,g,N,o)$ have the smooth, boundaryless, oriented and time-oriented Lorentzian four-manifold structure, signature $(-,+,+,+)$, metric-selected connection $\\nabla^g$, and length-coordinate convention of [[def-emg-lorentzian-forms]]. Let $A\\in\\Omega^1(M)$ be a supplied smooth real one-form, let $e\\in\\mathbb R$ be a fixed real coupling, and let $\\psi\\in C^\\infty(M,\\mathbb C)$ be a smooth complex-valued function. In the length-coordinate convention, assign dimensionless components to $A_a$ and unit $\\mathrm m^{-1}$ to $e$, so $eA_a$ has derivative unit $\\mathrm m^{-1}$; assign $\\psi$ an arbitrary fixed unit $[\\psi]$. Define the complex covector\n\n$$D_a\\psi:=\\nabla^g_a\\psi-ieA_a\\psi.$$\n\nSince $\\psi$ is a scalar, $\\nabla^g_a\\psi=\\partial_a\\psi$. Define the real symmetric covariant tensor\n\n$$\\mathsf T_{ab}[\\psi;g,A,e]:=\\overline{D_a\\psi}\\,D_b\\psi+\\overline{D_b\\psi}\\,D_a\\psi-g_{ab}g^{cd}\\overline{D_c\\psi}\\,D_d\\psi,$$\n\nwith indices raised using $g^{-1}$. Its covariant components have unit $[\\psi]^2\\mathrm m^{-2}$. This is a mathematical tensor assignment. Its interpretation as a stress-energy tensor, and any field equation or conservation law, require a separate physical model.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1-deduction",
+          "step": "1.1",
+          "claim": "Since $A_t=-Q/r$ and $\\omega>0$, the time derivative satisfies $D_t\\psi=-i\\omega\\psi+o(r^{-1})$. Using $D^r=f\\partial_r=\\partial_{r_*}$ and $\\partial_{r_*}(u/r)=u'/r-fu/r^2$, the differentiated asymptotics and $\\Theta'\\to\\omega$ give\n$$\\psi=\\frac{A_{\\mathrm{in}}e^{-i\\omega t}Y}{r}\\left(e^{-i\\Theta}+Re^{i\\Theta}\\right)+o(r^{-1}),\\qquad D^r\\psi=\\frac{A_{\\mathrm{in}}e^{-i\\omega t}Y}{r}\\left(-i\\omega e^{-i\\Theta}+i\\omega Re^{i\\Theta}\\right)+o(r^{-1}).$$",
+          "inputs": [
+            "given",
+            "F1",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1-deduction",
+          "step": "2.1",
+          "claim": "Since $g^r{}_t=0$, [F2] gives $\\mathsf T^r{}_t=2\\operatorname{Re}(\\overline{D^r\\psi}D_t\\psi)$. Substitution of step 1.1 gives the diagonal terms $\\omega^2(1-|R|^2)$; the cross terms are $z-\\overline z$ for $z=\\omega^2R e^{2i\\Theta}$ and have zero real part. Integrating $Y^2$ over the sphere and taking $r\\to\\infty$ therefore gives the net outward flux $\\mathcal P(r)\\to2\\omega^2|A_{\\mathrm{in}}|^2(|R|^2-1)$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1-deduction",
+          "step": "3.1",
+          "claim": "For the incoming component, $D^r\\psi_{\\mathrm{in}}=-i\\omega\\psi_{\\mathrm{in}}+o(r^{-1})$ and $D_t\\psi_{\\mathrm{in}}=-i\\omega\\psi_{\\mathrm{in}}+o(r^{-1})$, so $\\mathsf T^r{}_t[\\psi_{\\mathrm{in}}]=2\\omega^2|\\psi_{\\mathrm{in}}|^2+o(r^{-2})$; its positive inward magnitude is $2\\omega^2|A_{\\mathrm{in}}|^2$ after sphere integration. For the reflected component, $D^r\\psi_{\\mathrm{ref}}=i\\omega\\psi_{\\mathrm{ref}}+o(r^{-1})$ while $D_t\\psi_{\\mathrm{ref}}=-i\\omega\\psi_{\\mathrm{ref}}+o(r^{-1})$, so its positive outward magnitude is $2\\omega^2|A_{\\mathrm{in}}|^2|R|^2$. Their ratio is $|R|^2$ because $\\omega>0$ and $A_{\\mathrm{in}}\\ne0$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The conditional statement assumes an admitted mode with nonzero incident amplitude."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The hypotheses require $omega>0$ and $A_{\\mathrm{in}}\\ne0$; zero incident frequency/amplitude is excluded."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At the unit-reflection boundary $|R|=1$, step 3.1 gives equal positive incoming and reflected magnitudes, hence ratio one."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The fixed subextremal exterior is nondegenerate in the stated open region and $omega>0$ keeps the incident flux positive."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement assumes $omega>0$ and makes no zero-frequency limit claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The mode and harmonic are supplied; steps 1.1–3.1 make no selection from a family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item proves a flux formula, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item proves a flux formula, not a converse."
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "def-emg-fx-charged-radial-scattering",
+          "carrier": "items/def-emg-fx-charged-radial-scattering.md",
+          "status": "Current carrier section inspected; status=draft; kind=definition; provenance.proof=not-applicable; verification={\"precheck\":\"n/a\"}.",
+          "source_section": "Definition",
+          "exact_statement": "Let $M>0$ and $Q\\in\\mathbb R$ satisfy $0<|Q|<M$. Put\n$$r_\\pm:=M\\pm\\sqrt{M^2-Q^2},\\qquad f(r):=1-\\frac{2M}{r}+\\frac{Q^2}{r^2},\\qquad r>r_+.$$\nUse the static exterior\n$\\mathcal M_{\\mathrm{ext}}=\\mathbb R_t\\times(r_+,\\infty)_r\\times S^2$\nwith the electric specialization $q_e=Q$, $q_m=0$, and $t=x^0$ of the\nReissner--Nordström metric and potential fixed in the preceding definition.\nThus\n$$g=-f\\,dt^2+f^{-1}dr^2+r^2\\gamma_{S^2},\\qquad A=-\\frac Qr\\,dt,\\qquad A_t\\longrightarrow0\\quad(r\\longrightarrow\\infty).$$\nHere $r_+$ is the positive outer root in the selected local model, not a claim\nabout an event horizon in a maximal spacetime. Set\n$\\Phi_H:=Q/r_+=A_t(\\infty)-A_t(r_+)$ for this gauge.\n\nFor a complex scalar function $\\psi$ in this fixed trivialization and a real\ncoupling $e$, put $D_a\\psi:=(\\partial_a-ieA_a)\\psi$. Define the massless\ncharged wave operator in the static chart by\n$$\\Box_{g,A}\\psi:=-f^{-1}D_t^2\\psi+\\frac1{r^2}\\partial_r\\!\\left(r^2f\\,\\partial_r\\psi\\right)+\\frac1{r^2}\\Delta_{\\gamma_{S^2}}\\psi,\\qquad D_t=\\partial_t+\\frac{ieQ}{r}.$$\nThe equation used here is $\\Box_{g,A}\\psi=0$; it is a fixed-background,\nminimally coupled test-field equation and does not evolve or source $g$ or $A$.\n\nLet $e\\in\\mathbb R$, $\\omega>0$, and $\\ell\\in\\mathbb N_0$. Supply a smooth\nreal function $Y:S^2\\to\\mathbb R$ satisfying\n$$\\int_{S^2}Y^2\\,d\\omega_{S^2}=1,\\qquad \\Delta_{\\gamma_{S^2}}Y=-\\ell(\\ell+1)Y.$$\nNo existence assertion about $Y$ is made. Use the tortoise coordinate\n$$r_*(r):=\\int_{2r_+}^{r}f(\\rho)^{-1}\\,d\\rho,$$\nwhich is strictly increasing because $f>0$ on the exterior. Under the\nsubextremal hypotheses the supplied RN scalar-coordinate result proves that\n$r_*$ is a smooth coordinate from $(r_+,\\infty)$ onto $\\mathbb R$; hence\n$r_*\\to-\\infty$ as $r\\downarrow r_+$ and $r_*\\to+\\infty$ as $r\\to\\infty$.\nA separated mode has the form\n$$\\psi(t,r,\\Omega)=A_{\\mathrm{in}}e^{-i\\omega t}Y(\\Omega)\\frac{u(r_*)}{r},$$\nwhere $A_{\\mathrm{in}}\\ne0$ is a fixed incident amplitude with units\n$[\\psi]\\,\\mathrm m$, and the normalized complex radial function $u$ and its\nreflection and transmission coefficients are dimensionless.\n\nWrite $\\omega_H:=\\omega-e\\Phi_H=\\omega-eQ/r_+$ and, for any reference length\n$L>0$, define the Coulomb phase\n$$\\Theta(r_*):=\\omega r_*-eQ\\log(r/L),\\qquad \\Theta'(r_*):=\\omega-\\frac{eQf(r)}r.$$\nA normalized scattering solution is a smooth radial solution of\n$\\Box_{g,A}\\psi=0$ for which, for some $R,T\\in\\mathbb C$,\n$$u=e^{-i\\Theta}+R e^{i\\Theta}+o(1),\\qquad \\partial_{r_*}u=-i\\Theta'e^{-i\\Theta}+i\\Theta'R e^{i\\Theta}+o(1)\\quad(r\\longrightarrow\\infty),$$\nand\n$$u=T e^{-i\\omega_Hr_*}+o(1),\\qquad \\partial_{r_*}u=-i\\omega_HTe^{-i\\omega_Hr_*}+o(1)\\quad(r\\downarrow r_+).$$\nThe error terms tend to zero in the indicated limits. These boundary\nconditions prescribe unit incoming amplitude at infinity and only the\ningoing branch at the future horizon. They define admissible scattering data;\nthey assert neither existence nor uniqueness of such a solution.\n\nThe logarithm in $\\Theta$ is required by the long-range term\n$-2\\omega eQ/r$ in the asymptotic radial coefficient. Changing $L$ changes\nconstant phases, not flux magnitudes. A constant gauge shift changes the\nfrequency label, so the threshold uses the potential difference\n$\\Phi_H$, not an absolute value of $A_t$.\n\nUse geometric units $G=c=1$ and length coordinates, with\n$[t]=[r]=[r_*]=[M]=[Q]=[L]=\\mathrm m$,\n$[e]=[\\omega]=\\mathrm m^{-1}$, $f$ dimensionless, and $A_t$ dimensionless;\nthen $\\Theta$ is dimensionless and each term in $\\Box_{g,A}$ has units\n$[\\psi]\\,\\mathrm m^{-2}$. The coupling $e$ is the charge coupling in the\nchosen field normalization; restoring SI units requires restoring the\ncorresponding field normalization and the charge-over-$\\hbar$ coupling.\nThis definition excludes scalar mass, magnetic charge, mirrors, anti-de Sitter\nboundaries, bound states, and complex-frequency quasinormal boundary conditions.\nA scalar mass would change the propagating infinity wave number to\n$\\sqrt{\\omega^2-\\mu^2}$ and requires a different scattering normalization.\nComplex-frequency quasinormal modes form a distinct non-self-adjoint spectral\nproblem and are not covered by the real-frequency Wronskian identity.",
+          "relevant_hypotheses_and_conventions": "The excerpt is the complete current Definition section. Preserve its stated hypotheses, units, sign/gauge conventions, and conditional status.",
+          "supplier_proof_status": "Carrier metadata: status=draft; kind=definition; provenance.proof=not-applicable; verification={\"precheck\":\"n/a\"}. Outside this run; no local readiness assertion is made. No independent acceptance is inferred.",
+          "consumer_use": "Supplies the precise electric RN gauge, charged derivative, tortoise coordinate and Coulomb-phase asymptotics used by this conditional calculation."
+        },
+        {
+          "supplier": "def-emg-fx-charged-scalar-stress-tensor",
+          "carrier": "items/def-emg-fx-charged-scalar-stress-tensor.md",
+          "status": "Current carrier section inspected; status=draft; kind=definition; provenance.proof=not-applicable; verification={\"precheck\":\"n/a\"}.",
+          "source_section": "Definition",
+          "exact_statement": "Let $(M,g,N,o)$ have the smooth, boundaryless, oriented and time-oriented Lorentzian four-manifold structure, signature $(-,+,+,+)$, metric-selected connection $\\nabla^g$, and length-coordinate convention of [[def-emg-lorentzian-forms]]. Let $A\\in\\Omega^1(M)$ be a supplied smooth real one-form, let $e\\in\\mathbb R$ be a fixed real coupling, and let $\\psi\\in C^\\infty(M,\\mathbb C)$ be a smooth complex-valued function. In the length-coordinate convention, assign dimensionless components to $A_a$ and unit $\\mathrm m^{-1}$ to $e$, so $eA_a$ has derivative unit $\\mathrm m^{-1}$; assign $\\psi$ an arbitrary fixed unit $[\\psi]$. Define the complex covector\n\n$$D_a\\psi:=\\nabla^g_a\\psi-ieA_a\\psi.$$\n\nSince $\\psi$ is a scalar, $\\nabla^g_a\\psi=\\partial_a\\psi$. Define the real symmetric covariant tensor\n\n$$\\mathsf T_{ab}[\\psi;g,A,e]:=\\overline{D_a\\psi}\\,D_b\\psi+\\overline{D_b\\psi}\\,D_a\\psi-g_{ab}g^{cd}\\overline{D_c\\psi}\\,D_d\\psi,$$\n\nwith indices raised using $g^{-1}$. Its covariant components have unit $[\\psi]^2\\mathrm m^{-2}$. This is a mathematical tensor assignment. Its interpretation as a stress-energy tensor, and any field equation or conservation law, require a separate physical model.",
+          "relevant_hypotheses_and_conventions": "The excerpt is the complete current Definition section. Preserve its stated hypotheses, units, sign/gauge conventions, and conditional status.",
+          "supplier_proof_status": "Carrier metadata: status=draft; kind=definition; provenance.proof=not-applicable; verification={\"precheck\":\"n/a\"}. In-run Step-1 record at contract-generation time: {\"version\":1,\"run\":\"physics-non-fluid-129-2026-10-21-r2\",\"item\":\"def-emg-fx-charged-scalar-stress-tensor\",\"decision\":\"ready\",\"owner\":false,\"reason\":\"Definition and mathematical supplier interface are complete; scoped checks and contract review pass.\",\"dependencies\":[\"def-emg-lorentzian-forms\"],\"sha256\":\"167ea49064d115317b75369484aeb0589651c2315ecc292871e3bcb80d55c6a4\",\"at\":\"2026-10-21T14:07:12.747Z\"}. No independent acceptance is inferred.",
+          "consumer_use": "Supplies the exact gauge-covariant tensor formula whose radial-time component is evaluated."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-28 author self-review",
+        "notes": "Reviewed every conditional hypothesis, the exact supplier interface, sign and normalization conventions, and the stated limits on existence, observation, or physical interpretation."
+      },
+      "finite_checks": []
+    },
+    "post-emg-fx-test-field-regime": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [],
+      "supplier_excerpts": [
+        {
+          "supplier": "post-emg-background-maxwell-test",
+          "carrier": "items/post-emg-background-maxwell-test.md",
+          "status": "Current carrier section inspected; status=published; kind=postulate; provenance.proof=not-applicable; verification={\"precheck\":\"n/a\"}.",
+          "source_section": "Postulate",
+          "exact_statement": "On an open region of the oriented, time-oriented Lorentzian spacetime and length-coordinate SI conventions of [[def-emg-matter-observables]], adopt a prescribed-background Maxwell model. The metric $g$ is fixed input. Choose a real $C^2$ electromagnetic two-form $F$ and either adopt the source-free equations $dF=0$ and $d(\\star_gF)=0$, or supply a $C^1$ current $j$ and adopt $dF=0$ and $\\nabla_aF^{ab}=-\\mu_0j^b$, with the exact signs and units of that definition. The source current is prescribed independently of the probe; this postulate does not impose an Einstein equation, matter evolution equation, or field equation for the sources on the unchanged metric.\n\nFor a massive charged probe, use the adopted local action and finite-curve conditions of [[post-rpm-external-charge-action]]: $m>0$ and $q$ are constant, the path is a $C^2$ future-directed timelike segment parameterized by proper time, and its endpoints are fixed in variations supported in a local potential domain $V$ with a supplied $C^2$ one-form $A$ satisfying $dA=F$. The potential and metric are external data independent of the path. Under the exact hypotheses of [[pthm-rpm-external-charge-action-equivalence]], action stationarity is equivalent to $m\\nabla_UU=qF^\\sharp(U)$; that theorem's $\\mathrm{AC}_\\omega$ assumption is inherited only when this equivalent force-law formulation is used. No global potential or trajectory is included.\n\nThe probe's own singular field and self-gravity are excluded. No radiation reaction, variable mass or charge, finite-body model, or backreaction estimate is adopted. In particular, calling $g$ or $F$ a test background records this model's omission of their response; it does not claim that the unchanged pair solves the coupled Einstein–Maxwell equations or is close to a coupled solution.\n\nWhen geometric optics is invoked, it is restricted to the exact $C^4$ real phase, $C^3$ complex amplitudes, four pointwise ansatz constraints, and fixed compact-chart coefficient bounds of [[lem-emg-controlled-maxwell-wkb]]. That result supplies finite residual and leading-field estimates, local null rays, and a polarization quotient; it supplies no convergent series, global transport through caustics, exact-solution error estimate, or backreaction theorem.\n\nThis is a separately adopted physical model with no empirical premise. The Maxwell and probe assumptions are not deductions from one another, from mathematical axioms, or from source authority.",
+          "relevant_hypotheses_and_conventions": "The excerpt is the complete current Postulate section. Preserve its stated hypotheses, units, sign/gauge conventions, and conditional status.",
+          "supplier_proof_status": "Carrier metadata: status=published; kind=postulate; provenance.proof=not-applicable; verification={\"precheck\":\"n/a\"}. Outside this run; no local readiness assertion is made. No independent acceptance is inferred.",
+          "consumer_use": "Supplies only the prescribed-background Maxwell modeling convention; it does not impose an Einstein equation."
+        },
+        {
+          "supplier": "def-emg-xs-rn-data",
+          "carrier": "items/def-emg-xs-rn-data.md",
+          "status": "Current carrier section inspected; status=published; kind=definition; provenance.proof=not-applicable; verification={}.",
+          "source_section": "Definition",
+          "exact_statement": "Let $M,q_e,q_m\\in\\mathbb R$ be length parameters and put\n$Q^2:=q_e^2+q_m^2$. Let $J\\subset(0,\\infty)$ be open and require\n$$f(r):=1-\\frac{2M}{r}+\\frac{Q^2}{r^2}\\ne0\\qquad(r\\in J).$$\nOn the smooth product $\\mathcal M_J:=\\mathbb R_{x^0}\\times J_r\\times S^2$,\nuse $S^2=\\{(X,Y,Z)\\in\\mathbb R^3:X^2+Y^2+Z^2=1\\}$ with its subspace\ntopology ([[def-euclidean-spheres-and-closed-balls]]). Specify the smooth\nstructure by the sphere atlas of [[def-gr-schwarzschild-exterior-model]],\nDefinition (b): for $\\varepsilon=\\pm1$, delete $p_\\varepsilon=(0,0,\\varepsilon)$\nand use $\\sigma_\\varepsilon(X,Y,Z)=(X,Y)/(1-\\varepsilon Z)$.\nFor $u=(u_1,u_2)$ and $h=u_1^2+u_2^2$, its inverse is\n$\\sigma_\\varepsilon^{-1}(u)=(2u_1,2u_2,\\varepsilon(h-1))/(1+h)$;\nthe transition is $u\\mapsto u/h$ on $h>0$. These rational maps are smooth\non their domains. The product atlas consists of\n$(x^0,r,p)\\mapsto(x^0,r,\\sigma_\\varepsilon(p))$ on\n$\\mathbb R\\times J\\times(S^2\\setminus\\{p_\\varepsilon\\})$;\nits transitions leave $x^0,r$ fixed and apply the displayed sphere transition.\nThe product is Hausdorff and second countable by the subspace topology from\n$\\mathbb R^2\\times\\mathbb R^3$, whose rational balls give a countable basis.\nThese charts specify its maximal smooth atlas, including when $J$ is empty.\nThe inclusion of $S^2$ into $\\mathbb R^3$ is smooth with injective differential\nin these parametrizations; its induced unit round metric is $\\gamma_{S^2}$\n([[ex-the-round-metric-on-the-sphere-as-an-induced-metric]]).\nOrient $S^2$ by its outward unit normal: for $p\\in S^2$ and\n$u,v\\in T_pS^2$, define\n$$ (\\omega_{S^2})_p(u,v):=\\det(p,u,v). $$\nThus $\\omega_{S^2}$ is the positive area form of $\\gamma_{S^2}$, and in the\npolar chart $X=\\sin\\theta\\cos\\phi$, $Y=\\sin\\theta\\sin\\phi$,\n$Z=\\cos\\theta$ it is $\\sin\\theta\\,d\\theta\\wedge d\\phi$. The **dyonic RN\ndatum** is\n$$g=-f(r)\\,dx^0\\otimes dx^0+f(r)^{-1}\\,dr\\otimes dr+r^2\\gamma_{S^2}, \\qquad \\mathcal F=-\\frac{q_e}{r^2}\\,dx^0\\wedge dr+q_m\\omega_{S^2}.$$\nHere $x^0$ and $r$ have units of metres, angles on $S^2$ are dimensionless,\nand $M,q_e,q_m$ have units of metres. The metric components are dimensionless\nin length coordinates; the nonzero coordinate components of $\\mathcal F$ have\nunits inherited from their coordinate Jacobians. Use the orientation\n$dx^0\\wedge dr\\wedge\\omega_{S^2}$.\n\nThe set $J$ may have several connected components. On $\\{f>0\\}$ choose the\ntime orientation $\\partial_{x^0}$; on $\\{f<0\\}$ choose $\\partial_r$. These\nare smooth timelike fields on their respective open subsets because\n$g(\\partial_{x^0},\\partial_{x^0})=-f<0$ when $f>0$ and\n$g(\\partial_r,\\partial_r)=f^{-1}<0$ when $f<0$. Since $f$ has no zero on\n$\\mathcal M_J$, this defines a smooth time orientation on the whole product.\nThe sphere area form and the displayed two-form are global on $S^2$.\n\nLet $N,S$ denote the north and south poles. On\n$U_N:=S^2\\setminus\\{S\\}$ and $U_S:=S^2\\setminus\\{N\\}$, respectively,\nlocal potential one-forms are\n$$\\mathcal A_N=-\\frac{q_e}{r}\\,dx^0+q_m(1-\\cos\\theta)\\,d\\phi,\\qquad \\mathcal A_S=-\\frac{q_e}{r}\\,dx^0-q_m(1+\\cos\\theta)\\,d\\phi.$$\nEach displayed potential extends smoothly over its named included pole:\n$(1-\\cos\\theta)d\\phi$ is smooth at $N$ and\n$(1+\\cos\\theta)d\\phi$ is smooth at $S$. Direct differentiation gives\n$d\\mathcal A_N=d\\mathcal A_S=\\mathcal F$ on the respective patches. Their\noverlap difference is $2q_m\\,d\\phi$; it is local potential data, not a global\nreal gauge function on the entire sphere. The definition assumes no $U(1)$\nbundle or charge quantization. To verify pole smoothness, use local coordinates\n$u=X,v=Y$ near each pole. There\n$d\\phi=(u\\,dv-v\\,du)/(u^2+v^2)$. Near $N$,\n$1-\\cos\\theta=(u^2+v^2)/(1+Z)$, so\n$(1-\\cos\\theta)d\\phi=(u\\,dv-v\\,du)/(1+Z)$ is smooth. Near $S$,\n$1+\\cos\\theta=(u^2+v^2)/(1-Z)$, so\n$(1+\\cos\\theta)d\\phi=(u\\,dv-v\\,du)/(1-Z)$ is smooth. The denominators are\nnonzero on the respective named patches.",
+          "relevant_hypotheses_and_conventions": "The excerpt is the complete current Definition section. Preserve its stated hypotheses, units, sign/gauge conventions, and conditional status.",
+          "supplier_proof_status": "Carrier metadata: status=published; kind=definition; provenance.proof=not-applicable; verification={}. Outside this run; no local readiness assertion is made. No independent acceptance is inferred.",
+          "consumer_use": "Supplies the fixed RN background data and conventions adopted by the scalar model."
+        },
+        {
+          "supplier": "prop-emg-xs-rn-horizon-data",
+          "carrier": "items/prop-emg-xs-rn-horizon-data.md",
+          "status": "Current carrier section inspected; status=published; kind=proposition; provenance.proof=ai-altered; verification={\"judge\":{\"model\":\"gpt-6-luna\",\"verdict\":\"pass\",\"date\":\"2026-10-17\"}}.",
+          "source_section": "Statement",
+          "exact_statement": "Let $M>0$, $Q^2=q_e^2+q_m^2>0$, and use\n$f(r)=1-2M/r+Q^2/r^2$ on the selected ingoing RN model. If $M^2\\ge Q^2$,\nthe positive roots\n$$r_\\pm=M\\pm\\sqrt{M^2-Q^2}$$\nare null constant-$r$ hypersurfaces. For the Killing field $\\xi=\\partial_v$\nnormalized by the displayed coordinate for which\n$g(\\xi,\\xi)\\to-1$ as $r\\to\\infty$, each is a Killing horizon in the\nlocal sense of\n[[def-emg-causal-solution-and-horizon-vocabulary]], with signed surface\ngravity\n$$\\kappa_\\pm=\\frac{f'(r_\\pm)}2 =\\frac{r_\\pm-r_\\mp}{2r_\\pm^2}.$$\nAt extremality $M^2=Q^2$, the coincident root is $r_H=M$ and\n$\\kappa_H=0$. If $M^2<Q^2$, $f$ has no positive root and no constant-$r$\nnull hypersurface of this form. These are local properties of the selected\nmetric; they do not classify event horizons in a maximal spacetime.",
+          "relevant_hypotheses_and_conventions": "The excerpt is the complete current Statement section. Preserve its stated hypotheses, units, sign/gauge conventions, and conditional status.",
+          "supplier_proof_status": "Carrier metadata: status=published; kind=proposition; provenance.proof=ai-altered; verification={\"judge\":{\"model\":\"gpt-6-luna\",\"verdict\":\"pass\",\"date\":\"2026-10-17\"}}. Outside this run; no local readiness assertion is made. No independent acceptance is inferred.",
+          "consumer_use": "Supplies the horizon-data statement under its exact hypotheses; the consumer uses only the stated model interface."
+        },
+        {
+          "supplier": "def-emg-fx-charged-radial-scattering",
+          "carrier": "items/def-emg-fx-charged-radial-scattering.md",
+          "status": "Current carrier section inspected; status=draft; kind=definition; provenance.proof=not-applicable; verification={\"precheck\":\"n/a\"}.",
+          "source_section": "Definition",
+          "exact_statement": "Let $M>0$ and $Q\\in\\mathbb R$ satisfy $0<|Q|<M$. Put\n$$r_\\pm:=M\\pm\\sqrt{M^2-Q^2},\\qquad f(r):=1-\\frac{2M}{r}+\\frac{Q^2}{r^2},\\qquad r>r_+.$$\nUse the static exterior\n$\\mathcal M_{\\mathrm{ext}}=\\mathbb R_t\\times(r_+,\\infty)_r\\times S^2$\nwith the electric specialization $q_e=Q$, $q_m=0$, and $t=x^0$ of the\nReissner--Nordström metric and potential fixed in the preceding definition.\nThus\n$$g=-f\\,dt^2+f^{-1}dr^2+r^2\\gamma_{S^2},\\qquad A=-\\frac Qr\\,dt,\\qquad A_t\\longrightarrow0\\quad(r\\longrightarrow\\infty).$$\nHere $r_+$ is the positive outer root in the selected local model, not a claim\nabout an event horizon in a maximal spacetime. Set\n$\\Phi_H:=Q/r_+=A_t(\\infty)-A_t(r_+)$ for this gauge.\n\nFor a complex scalar function $\\psi$ in this fixed trivialization and a real\ncoupling $e$, put $D_a\\psi:=(\\partial_a-ieA_a)\\psi$. Define the massless\ncharged wave operator in the static chart by\n$$\\Box_{g,A}\\psi:=-f^{-1}D_t^2\\psi+\\frac1{r^2}\\partial_r\\!\\left(r^2f\\,\\partial_r\\psi\\right)+\\frac1{r^2}\\Delta_{\\gamma_{S^2}}\\psi,\\qquad D_t=\\partial_t+\\frac{ieQ}{r}.$$\nThe equation used here is $\\Box_{g,A}\\psi=0$; it is a fixed-background,\nminimally coupled test-field equation and does not evolve or source $g$ or $A$.\n\nLet $e\\in\\mathbb R$, $\\omega>0$, and $\\ell\\in\\mathbb N_0$. Supply a smooth\nreal function $Y:S^2\\to\\mathbb R$ satisfying\n$$\\int_{S^2}Y^2\\,d\\omega_{S^2}=1,\\qquad \\Delta_{\\gamma_{S^2}}Y=-\\ell(\\ell+1)Y.$$\nNo existence assertion about $Y$ is made. Use the tortoise coordinate\n$$r_*(r):=\\int_{2r_+}^{r}f(\\rho)^{-1}\\,d\\rho,$$\nwhich is strictly increasing because $f>0$ on the exterior. Under the\nsubextremal hypotheses the supplied RN scalar-coordinate result proves that\n$r_*$ is a smooth coordinate from $(r_+,\\infty)$ onto $\\mathbb R$; hence\n$r_*\\to-\\infty$ as $r\\downarrow r_+$ and $r_*\\to+\\infty$ as $r\\to\\infty$.\nA separated mode has the form\n$$\\psi(t,r,\\Omega)=A_{\\mathrm{in}}e^{-i\\omega t}Y(\\Omega)\\frac{u(r_*)}{r},$$\nwhere $A_{\\mathrm{in}}\\ne0$ is a fixed incident amplitude with units\n$[\\psi]\\,\\mathrm m$, and the normalized complex radial function $u$ and its\nreflection and transmission coefficients are dimensionless.\n\nWrite $\\omega_H:=\\omega-e\\Phi_H=\\omega-eQ/r_+$ and, for any reference length\n$L>0$, define the Coulomb phase\n$$\\Theta(r_*):=\\omega r_*-eQ\\log(r/L),\\qquad \\Theta'(r_*):=\\omega-\\frac{eQf(r)}r.$$\nA normalized scattering solution is a smooth radial solution of\n$\\Box_{g,A}\\psi=0$ for which, for some $R,T\\in\\mathbb C$,\n$$u=e^{-i\\Theta}+R e^{i\\Theta}+o(1),\\qquad \\partial_{r_*}u=-i\\Theta'e^{-i\\Theta}+i\\Theta'R e^{i\\Theta}+o(1)\\quad(r\\longrightarrow\\infty),$$\nand\n$$u=T e^{-i\\omega_Hr_*}+o(1),\\qquad \\partial_{r_*}u=-i\\omega_HTe^{-i\\omega_Hr_*}+o(1)\\quad(r\\downarrow r_+).$$\nThe error terms tend to zero in the indicated limits. These boundary\nconditions prescribe unit incoming amplitude at infinity and only the\ningoing branch at the future horizon. They define admissible scattering data;\nthey assert neither existence nor uniqueness of such a solution.\n\nThe logarithm in $\\Theta$ is required by the long-range term\n$-2\\omega eQ/r$ in the asymptotic radial coefficient. Changing $L$ changes\nconstant phases, not flux magnitudes. A constant gauge shift changes the\nfrequency label, so the threshold uses the potential difference\n$\\Phi_H$, not an absolute value of $A_t$.\n\nUse geometric units $G=c=1$ and length coordinates, with\n$[t]=[r]=[r_*]=[M]=[Q]=[L]=\\mathrm m$,\n$[e]=[\\omega]=\\mathrm m^{-1}$, $f$ dimensionless, and $A_t$ dimensionless;\nthen $\\Theta$ is dimensionless and each term in $\\Box_{g,A}$ has units\n$[\\psi]\\,\\mathrm m^{-2}$. The coupling $e$ is the charge coupling in the\nchosen field normalization; restoring SI units requires restoring the\ncorresponding field normalization and the charge-over-$\\hbar$ coupling.\nThis definition excludes scalar mass, magnetic charge, mirrors, anti-de Sitter\nboundaries, bound states, and complex-frequency quasinormal boundary conditions.\nA scalar mass would change the propagating infinity wave number to\n$\\sqrt{\\omega^2-\\mu^2}$ and requires a different scattering normalization.\nComplex-frequency quasinormal modes form a distinct non-self-adjoint spectral\nproblem and are not covered by the real-frequency Wronskian identity.",
+          "relevant_hypotheses_and_conventions": "The excerpt is the complete current Definition section. Preserve its stated hypotheses, units, sign/gauge conventions, and conditional status.",
+          "supplier_proof_status": "Carrier metadata: status=draft; kind=definition; provenance.proof=not-applicable; verification={\"precheck\":\"n/a\"}. Outside this run; no local readiness assertion is made. No independent acceptance is inferred.",
+          "consumer_use": "Supplies the precise electric RN gauge, charged derivative, tortoise coordinate and Coulomb-phase asymptotics used by this conditional calculation."
+        },
+        {
+          "supplier": "def-emg-fx-charged-scalar-stress-tensor",
+          "carrier": "items/def-emg-fx-charged-scalar-stress-tensor.md",
+          "status": "Current carrier section inspected; status=draft; kind=definition; provenance.proof=not-applicable; verification={\"precheck\":\"n/a\"}.",
+          "source_section": "Definition",
+          "exact_statement": "Let $(M,g,N,o)$ have the smooth, boundaryless, oriented and time-oriented Lorentzian four-manifold structure, signature $(-,+,+,+)$, metric-selected connection $\\nabla^g$, and length-coordinate convention of [[def-emg-lorentzian-forms]]. Let $A\\in\\Omega^1(M)$ be a supplied smooth real one-form, let $e\\in\\mathbb R$ be a fixed real coupling, and let $\\psi\\in C^\\infty(M,\\mathbb C)$ be a smooth complex-valued function. In the length-coordinate convention, assign dimensionless components to $A_a$ and unit $\\mathrm m^{-1}$ to $e$, so $eA_a$ has derivative unit $\\mathrm m^{-1}$; assign $\\psi$ an arbitrary fixed unit $[\\psi]$. Define the complex covector\n\n$$D_a\\psi:=\\nabla^g_a\\psi-ieA_a\\psi.$$\n\nSince $\\psi$ is a scalar, $\\nabla^g_a\\psi=\\partial_a\\psi$. Define the real symmetric covariant tensor\n\n$$\\mathsf T_{ab}[\\psi;g,A,e]:=\\overline{D_a\\psi}\\,D_b\\psi+\\overline{D_b\\psi}\\,D_a\\psi-g_{ab}g^{cd}\\overline{D_c\\psi}\\,D_d\\psi,$$\n\nwith indices raised using $g^{-1}$. Its covariant components have unit $[\\psi]^2\\mathrm m^{-2}$. This is a mathematical tensor assignment. Its interpretation as a stress-energy tensor, and any field equation or conservation law, require a separate physical model.",
+          "relevant_hypotheses_and_conventions": "The excerpt is the complete current Definition section. Preserve its stated hypotheses, units, sign/gauge conventions, and conditional status.",
+          "supplier_proof_status": "Carrier metadata: status=draft; kind=definition; provenance.proof=not-applicable; verification={\"precheck\":\"n/a\"}. In-run Step-1 record at contract-generation time: {\"version\":1,\"run\":\"physics-non-fluid-129-2026-10-21-r2\",\"item\":\"def-emg-fx-charged-scalar-stress-tensor\",\"decision\":\"ready\",\"owner\":false,\"reason\":\"Definition and mathematical supplier interface are complete; scoped checks and contract review pass.\",\"dependencies\":[\"def-emg-lorentzian-forms\"],\"sha256\":\"167ea49064d115317b75369484aeb0589651c2315ecc292871e3bcb80d55c6a4\",\"at\":\"2026-10-21T14:07:12.747Z\"}. No independent acceptance is inferred.",
+          "consumer_use": "Supplies the exact gauge-covariant tensor formula whose radial-time component is evaluated."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-28 author self-review",
+        "notes": "Reviewed the model as an adopted postulate, checked its carrier definitions and units, and retained the explicit scope exclusions; no empirical or solution-existence claim is added."
+      },
+      "finite_checks": [],
+      "physics_review": {
+        "formulation": {
+          "verdict": "pass",
+          "evidence": "The Postulate section displays the exact adopted model and its mathematical constitutive or field assignment. It is presented as an adopted premise, not a derived result."
+        },
+        "scope": {
+          "verdict": "pass",
+          "evidence": "The frontmatter physical_scope and Postulate section state the domain, background/model restrictions, units or parameter regime, and excluded conclusions."
+        },
+        "sources": {
+          "verdict": "pass",
+          "evidence": "The item records Richard Brito, Vitor Cardoso, and Paolo Pani, Superradiance -- the 2020 Edition, Lecture Notes in Physics 971, complete 281-page edition (2020) (https://arxiv.org/pdf/1501.06570; §4.4, equations (4.50)–(4.53), fixed-background test fields and mode scattering; §4.6.1, equations (4.54)–(4.56), the charged Reissner–Nordström scalar regime and threshold. The local gauge convention and Coulomb phase are taken from the exact mathematical supplier.); Visakan Balakumar, Aspects of quantum charged scalar field theory in curved spacetime: Black hole superradiance and Hadamard renormalisation, PhD thesis, complete 307-page text (2022) (https://inspirehep.net/files/c9d9d32ca091d580007a1fee1bb44dc0; Chapter 3, §§3.1–3.2.4, equations (3.1)–(3.59), classical massless charged scalar field and radial equation on a prescribed Reissner–Nordström background. Quantum-state claims are not adopted.)."
+        },
+        "non_derivation": {
+          "verdict": "pass",
+          "evidence": "The item explicitly labels the model as adopted and does not claim that its assumptions follow from experiment or from the mathematical supplier."
+        }
+      }
+    },
+    "post-emg-fx-classical-constitutive-adoption": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [],
+      "supplier_excerpts": [
+        {
+          "supplier": "def-emg-fx-nonlinear-lagrangian",
+          "carrier": "items/def-emg-fx-nonlinear-lagrangian.md",
+          "status": "Current carrier section inspected; status=draft; kind=definition; provenance.proof=ai-generated; verification={\"precheck\":\"pass\"}.",
+          "source_section": "Definition",
+          "exact_statement": "Let $(M,g,N,o)$ be a smooth, Hausdorff, second-countable, boundaryless, oriented and time-oriented Lorentzian four-manifold with signature $(-,+,+,+)$, independent orientation $o$, and the torsion-free metric-compatible connection $\nabla$ selected by $g$. Fix a smooth principal $U(1)$ bundle sector and a smooth connection $mathcal A$ in that sector. In the inherited physical-curvature normalization, its curvature is a smooth real two-form $F\\in\\Omega^2(M)$ with $dF=0$. A permitted variation is $mathcal A_\\epsilon=\\mathcal A+\\epsilon a$, where $a\\in\\Omega^1(M)$ is smooth and compactly supported; the same-sector convention gives $F_\\epsilon=F+\\epsilon da$. No global potential is required.\n\nRaise indices with $g^{-1}$ and let $\\star_g$ be the Hodge map determined by $g$ and $o$. Define the scalar invariants\n$$X:=-\\frac14 F_{ab}F^{ab},\\qquad Y:=-\\frac14F_{ab}(\\star_gF)^{ab}.$$\nLet $L:\\mathbb R^2\\to\\mathbb R$ be $C^2$, and write $L_X,L_Y$ for its first partial derivatives evaluated at $(X,Y)$. Define the contravariant antisymmetric tensor\n$$H^{ab}:=L_XF^{ab}+L_Y(\\star_gF)^{ab}.$$\nThe source-free local action density is $L(X,Y)\\,\\mathrm{vol}_g$. Its relative action difference under a compact variation is the integral of $[L(X(F_\\epsilon),Y(F_\\epsilon))-L(X(F),Y(F))]\\,\\mathrm{vol}_g$; this difference has compact support even when the unvaried integral over $M$ is not finite. The connection is stationary when the derivative of this relative action at $\\epsilon=0$ vanishes for every permitted $a$.\n\nIn the mathematical normalization, $L=X$ is the Maxwell quadratic term. If units are attached, the components of $F$ have a fixed unit $\\mathfrak F$, $X,Y,L$ have unit $\\mathfrak F^2$, and coefficients $\\alpha,\\beta$ in $L=X+\\alpha X^2+\\beta Y^2$ have unit $\\mathfrak F^{-2}$, so $\\alpha X$ and $\\beta Y$ are dimensionless. This normalization is not an SI action prefactor. The coefficients are arbitrary parameters, not QED coefficients. This definition supplies no quantum origin, source coupling, characteristic-cone condition, hyperbolicity, causality, or solution-existence claim.",
+          "relevant_hypotheses_and_conventions": "The excerpt is the complete current Definition section. Preserve its stated hypotheses, units, sign/gauge conventions, and conditional status.",
+          "supplier_proof_status": "Carrier metadata: status=draft; kind=definition; provenance.proof=ai-generated; verification={\"precheck\":\"pass\"}. Outside this run; no local readiness assertion is made. No independent acceptance is inferred.",
+          "consumer_use": "Supplies the invariant, Hodge-star, bundle, and constitutive-tensor conventions for the adopted classical Lagrangian."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-28 author self-review",
+        "notes": "Reviewed the model as an adopted postulate, checked its carrier definitions and units, and retained the explicit scope exclusions; no empirical or solution-existence claim is added."
+      },
+      "finite_checks": [],
+      "physics_review": {
+        "formulation": {
+          "verdict": "pass",
+          "evidence": "The Postulate section displays the exact adopted model and its mathematical constitutive or field assignment. It is presented as an adopted premise, not a derived result."
+        },
+        "scope": {
+          "verdict": "pass",
+          "evidence": "The frontmatter physical_scope and Postulate section state the domain, background/model restrictions, units or parameter regime, and excluded conclusions."
+        },
+        "sources": {
+          "verdict": "pass",
+          "evidence": "The item records Dmitri P. Sorokin, Introductory Notes on Non-linear Electrodynamics and its Applications, arXiv:2112.12118v3 (2022), complete 26-page review (https://arxiv.org/pdf/2112.12118; §3.2, equations (3.4)–(3.7), the two Lorentz invariants and generic L(S,P) model; §3.1 distinguishes the Heisenberg–Euler coefficients and their low-energy quantum origin. No such coefficients are adopted here.); Gerald V. Dunne, Heisenberg-Euler Effective Lagrangians: Basics and Extensions, complete 82-page lecture review (2004) (https://arxiv.org/pdf/hep-th/0406216; §1.1, the constant-background one-loop QED effective action; §§1.2.4 and 1.3, the low-energy and weak-field expansions and derivative corrections. These support the scope boundary only; no QED coefficient is imported.)."
+        },
+        "non_derivation": {
+          "verdict": "pass",
+          "evidence": "The item explicitly labels the model as adopted and does not claim that its assumptions follow from experiment or from the mathematical supplier."
+        }
+      }
+    },
+    "pthm-emg-fx-conditional-model-flux": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "post-emg-fx-test-field-regime",
+          "source_section": "Postulate",
+          "quote": "Adopt the following classical test-scalar model in the geometric length-coordinate convention of the charged radial-scattering definition. Let $M>0$ and $Q\\in\\mathbb R$ satisfy $0<|Q|\\le M$, put\n\n$$r_\\pm:=M\\pm\\sqrt{M^2-Q^2},\\qquad f(r):=1-\\frac{2M}{r}+\\frac{Q^2}{r^2},\\qquad U:=\\mathbb R_t\\times(r_+,\\infty)_r\\times S^2.$$\n\nOn $U$ prescribe\n\n$$g=-f(r)\\,dt^2+f(r)^{-1}dr^2+r^2\\gamma_{S^2},\\qquad A=-\\frac Qr\\,dt,\\qquad F=dA=-\\frac{Q}{r^2}\\,dt\\wedge dr.$$\n\nHere $\\gamma_{S^2}$ is the unit round metric, $A_t\\to0$ at infinity, and $r_+$ is the larger positive root; in the extremal case $Q^2=M^2$ both roots equal $M$. The factorization $f(r)=(r-r_+)(r-r_-)/r^2$ makes $f>0$ on this open exterior. The larger root is a null constant-$r$ Killing horizon in the selected ingoing RN model; it is not an event-horizon assertion about a maximal spacetime. Orient the product by $dt\\wedge dr\\wedge\\omega_{S^2}$, where $\\omega_{S^2}$ is the outward area form of the unit round sphere; $\\star_g$ denotes the corresponding Lorentzian Hodge map. Adopt the source-free background Maxwell branch $dF=0$ and $d(\\star_gF)=0$ on $U$. The fields are prescribed on the open exterior only. No maximal extension, coupled Einstein equation, or actual astrophysical object is asserted by this postulate.\n\nIn the chosen global electric gauge, let $\\psi:U\\to\\mathbb C$ be a smooth complex scalar and let $e\\in\\mathbb R$ be its fixed charge-coupling parameter. Define $D_a\\psi:=\\partial_a\\psi-ieA_a\\psi$, so $D_t=\\partial_t+ieQ/r$. The scalar Laplace–Beltrami operator on the unit sphere is $\\Delta_{\\gamma_{S^2}}=\\frac1{\\sin\\theta}\\partial_\\theta(\\sin\\theta\\,\\partial_\\theta)+\\frac1{\\sin^2\\theta}\\partial_\\phi^2$ in the standard polar chart, with smooth global extension. Adopt the massless, minimally coupled equation\n\n$$\\Box_{g,A}\\psi:=-f^{-1}D_t^2\\psi+\\frac1{r^2}\\partial_r\\!\\left(r^2f\\,\\partial_r\\psi\\right)+\\frac1{r^2}\\Delta_{\\gamma_{S^2}}\\psi=0.$$\n\nFor its energy bookkeeping, adopt the symmetric tensor assignment $\\mathsf T_{ab}[\\psi;g,A,e]$ defined by the exact mathematical stress-tensor formula linked below. The scalar's stress is omitted from the equations for the prescribed background, and no scalar source is added to its Maxwell equation. This is a test-field model: omission of the scalar response is a modeling choice, not an estimate that the response is small.\n\nCoordinates $t,r,M,Q$ have unit metres; $f$ and $A_t$ are dimensionless; $e$ has unit $\\mathrm m^{-1}$; $F_{tr}$ has unit $\\mathrm m^{-1}$; and the scalar field has a specified but otherwise arbitrary unit $[\\psi]$. The tensor assignment $\\mathsf T_{ab}$ has component unit $[\\psi]^2\\mathrm m^{-2}$ in this geometric normalization. For the subextremal branch, define the gauge-normalized outer-root potential difference by $\\Phi_H:=A_t(\\infty)-A_t(r_+)=Q/r_+$. The separate mathematical scalar model on the Einstein–Maxwell page uses SI bookkeeping and its own coupling parameters; no identification with those parameters is made here.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-emg-fx-charged-radial-scattering",
+          "source_section": "Definition",
+          "quote": "Let $M>0$ and $Q\\in\\mathbb R$ satisfy $0<|Q|<M$. Put\n$$r_\\pm:=M\\pm\\sqrt{M^2-Q^2},\\qquad f(r):=1-\\frac{2M}{r}+\\frac{Q^2}{r^2},\\qquad r>r_+.$$\nUse the static exterior\n$\\mathcal M_{\\mathrm{ext}}=\\mathbb R_t\\times(r_+,\\infty)_r\\times S^2$\nwith the electric specialization $q_e=Q$, $q_m=0$, and $t=x^0$ of the\nReissner--Nordström metric and potential fixed in the preceding definition.\nThus\n$$g=-f\\,dt^2+f^{-1}dr^2+r^2\\gamma_{S^2},\\qquad A=-\\frac Qr\\,dt,\\qquad A_t\\longrightarrow0\\quad(r\\longrightarrow\\infty).$$\nHere $r_+$ is the positive outer root in the selected local model, not a claim\nabout an event horizon in a maximal spacetime. Set\n$\\Phi_H:=Q/r_+=A_t(\\infty)-A_t(r_+)$ for this gauge.\n\nFor a complex scalar function $\\psi$ in this fixed trivialization and a real\ncoupling $e$, put $D_a\\psi:=(\\partial_a-ieA_a)\\psi$. Define the massless\ncharged wave operator in the static chart by\n$$\\Box_{g,A}\\psi:=-f^{-1}D_t^2\\psi+\\frac1{r^2}\\partial_r\\!\\left(r^2f\\,\\partial_r\\psi\\right)+\\frac1{r^2}\\Delta_{\\gamma_{S^2}}\\psi,\\qquad D_t=\\partial_t+\\frac{ieQ}{r}.$$\nThe equation used here is $\\Box_{g,A}\\psi=0$; it is a fixed-background,\nminimally coupled test-field equation and does not evolve or source $g$ or $A$.\n\nLet $e\\in\\mathbb R$, $\\omega>0$, and $\\ell\\in\\mathbb N_0$. Supply a smooth\nreal function $Y:S^2\\to\\mathbb R$ satisfying\n$$\\int_{S^2}Y^2\\,d\\omega_{S^2}=1,\\qquad \\Delta_{\\gamma_{S^2}}Y=-\\ell(\\ell+1)Y.$$\nNo existence assertion about $Y$ is made. Use the tortoise coordinate\n$$r_*(r):=\\int_{2r_+}^{r}f(\\rho)^{-1}\\,d\\rho,$$\nwhich is strictly increasing because $f>0$ on the exterior. Under the\nsubextremal hypotheses the supplied RN scalar-coordinate result proves that\n$r_*$ is a smooth coordinate from $(r_+,\\infty)$ onto $\\mathbb R$; hence\n$r_*\\to-\\infty$ as $r\\downarrow r_+$ and $r_*\\to+\\infty$ as $r\\to\\infty$.\nA separated mode has the form\n$$\\psi(t,r,\\Omega)=A_{\\mathrm{in}}e^{-i\\omega t}Y(\\Omega)\\frac{u(r_*)}{r},$$\nwhere $A_{\\mathrm{in}}\\ne0$ is a fixed incident amplitude with units\n$[\\psi]\\,\\mathrm m$, and the normalized complex radial function $u$ and its\nreflection and transmission coefficients are dimensionless.\n\nWrite $\\omega_H:=\\omega-e\\Phi_H=\\omega-eQ/r_+$ and, for any reference length\n$L>0$, define the Coulomb phase\n$$\\Theta(r_*):=\\omega r_*-eQ\\log(r/L),\\qquad \\Theta'(r_*):=\\omega-\\frac{eQf(r)}r.$$\nA normalized scattering solution is a smooth radial solution of\n$\\Box_{g,A}\\psi=0$ for which, for some $R,T\\in\\mathbb C$,\n$$u=e^{-i\\Theta}+R e^{i\\Theta}+o(1),\\qquad \\partial_{r_*}u=-i\\Theta'e^{-i\\Theta}+i\\Theta'R e^{i\\Theta}+o(1)\\quad(r\\longrightarrow\\infty),$$\nand\n$$u=T e^{-i\\omega_Hr_*}+o(1),\\qquad \\partial_{r_*}u=-i\\omega_HTe^{-i\\omega_Hr_*}+o(1)\\quad(r\\downarrow r_+).$$\nThe error terms tend to zero in the indicated limits. These boundary\nconditions prescribe unit incoming amplitude at infinity and only the\ningoing branch at the future horizon. They define admissible scattering data;\nthey assert neither existence nor uniqueness of such a solution.\n\nThe logarithm in $\\Theta$ is required by the long-range term\n$-2\\omega eQ/r$ in the asymptotic radial coefficient. Changing $L$ changes\nconstant phases, not flux magnitudes. A constant gauge shift changes the\nfrequency label, so the threshold uses the potential difference\n$\\Phi_H$, not an absolute value of $A_t$.\n\nUse geometric units $G=c=1$ and length coordinates, with\n$[t]=[r]=[r_*]=[M]=[Q]=[L]=\\mathrm m$,\n$[e]=[\\omega]=\\mathrm m^{-1}$, $f$ dimensionless, and $A_t$ dimensionless;\nthen $\\Theta$ is dimensionless and each term in $\\Box_{g,A}$ has units\n$[\\psi]\\,\\mathrm m^{-2}$. The coupling $e$ is the charge coupling in the\nchosen field normalization; restoring SI units requires restoring the\ncorresponding field normalization and the charge-over-$\\hbar$ coupling.\nThis definition excludes scalar mass, magnetic charge, mirrors, anti-de Sitter\nboundaries, bound states, and complex-frequency quasinormal boundary conditions.\nA scalar mass would change the propagating infinity wave number to\n$\\sqrt{\\omega^2-\\mu^2}$ and requires a different scattering normalization.\nComplex-frequency quasinormal modes form a distinct non-self-adjoint spectral\nproblem and are not covered by the real-frequency Wronskian identity.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-emg-fx-superradiant-wronskian",
+          "source_section": "Statement",
+          "quote": "Let $u$ be any scattering solution as defined on the fixed subextremal electric\nRN exterior, with real $\\omega>0$, real $e,Q$, unit incoming amplitude, and\nreflection and transmission coefficients $R,T$. Then its radial Wronskian\nflux $j:=\\operatorname{Im}(\\overline u\\,\\partial_{r_*}u)$ is constant and\n$$|R|^2=1-\\frac{\\omega-eQ/r_+}{\\omega}|T|^2.$$\nConsequently, if $0<\\omega<eQ/r_+$ and $T\\ne0$, the reflected radial flux\nmagnitude exceeds the incident radial flux magnitude, since their ratio is\n$|R|^2>1$. This is conditional on an admitted scattering solution and does not\nassert its existence, a complex-frequency mode, or a nonlinear instability.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-emg-fx-asymptotic-scalar-energy-flux",
+          "source_section": "Statement",
+          "quote": "Use the fixed subextremal electric Reissner–Nordström exterior, gauge, charged derivative, real normalized spherical harmonic $Y$, and mode conventions of [[def-emg-fx-charged-radial-scattering]]. Let $\\psi=A_{\\mathrm{in}}e^{-i\\omega t}Y(\\Omega)u(r_*)/r$ be any admitted real-frequency scattering mode with $\\omega>0$ and $A_{\\mathrm{in}}\\ne0$, and let $R$ be its reflection coefficient. Form $\\mathsf T_{ab}[\\psi;g,A,e]$ by the gauge-covariant scalar stress-tensor definition. With $\\xi=\\partial_t$, define the outward radial flux through the sphere of radius $r$ by\n\n$$\\mathcal P(r):=-\\int_{S^2}r^2\\mathsf T^r{}_t[\\psi;g,A,e]\\,d\\omega_{S^2}.$$\n\nLet $\\psi_{\\mathrm{in}}:=A_{\\mathrm{in}}e^{-i\\omega t}Y e^{-i\\Theta}/r$ and $\\psi_{\\mathrm{ref}}:=A_{\\mathrm{in}}e^{-i\\omega t}YRe^{i\\Theta}/r$ be the two leading asymptotic components. Define their positive directional flux magnitudes by\n\n$$\\mathcal P_{\\mathrm{in}}:=\\lim_{r\\to\\infty}\\int_{S^2}r^2\\mathsf T^r{}_t[\\psi_{\\mathrm{in}};g,A,e]\\,d\\omega_{S^2},\\qquad \\mathcal P_{\\mathrm{ref}}:=-\\lim_{r\\to\\infty}\\int_{S^2}r^2\\mathsf T^r{}_t[\\psi_{\\mathrm{ref}};g,A,e]\\,d\\omega_{S^2}.$$\n\nThen\n\n$$\\mathcal P_{\\mathrm{in}}=2\\omega^2|A_{\\mathrm{in}}|^2,\\qquad \\mathcal P_{\\mathrm{ref}}=2\\omega^2|A_{\\mathrm{in}}|^2|R|^2,\\qquad \\frac{\\mathcal P_{\\mathrm{ref}}}{\\mathcal P_{\\mathrm{in}}}=|R|^2.$$\n\nThis is a conditional tensor calculation for the specified mode asymptotics; it asserts neither that such a mode exists nor that its flux has been observed.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1-deduction",
+          "step": "1.1",
+          "claim": "By [F2] and $\\Phi_H=Q/r_+$ from [F1],\n$$|R|^2=1-\\frac{\\omega-e\\Phi_H}{\\omega}|T|^2=1+\\frac{e\\Phi_H-\\omega}{\\omega}|T|^2.$$\nThe band condition in [A2] makes both $(e\\Phi_H-\\omega)/\\omega$ and $|T|^2$ strictly positive, so $|R|^2>1$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "A2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1-deduction",
+          "step": "2.1",
+          "claim": "By [F3], $\\mathcal P_{\\mathrm{ref}}/\\mathcal P_{\\mathrm{in}}=|R|^2>1$ and $\\mathcal P_{\\mathrm{in}}>0$. Multiplying by the positive incident flux gives $\\mathcal P_{\\mathrm{ref}}>\\mathcal P_{\\mathrm{in}}$. This is a deduction in the stated fixed-background model.",
+          "inputs": [
+            "given",
+            "A1",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The conclusion is conditional on a given admitted mode and nonzero transmission."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Statement assumes omega>0, incident amplitude nonzero and transmission T nonzero; its RN exterior has positive r_+. Proof 1.1 divides only by omega, and proof 2.1 uses P_in=2 omega^2 |A_in|^2>0. The zero-frequency or zero-incident limits are not asserted.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/supplier_cycle, Step 1 escalation owner",
+            "reason": "Statement assumes omega>0, incident amplitude nonzero and transmission T nonzero; its RN exterior has positive r_+. Proof 1.1 divides only by omega, and proof 2.1 uses P_in=2 omega^2 |A_in|^2>0. The zero-frequency or zero-incident limits are not asserted. The flagged surface expression does not introduce the excluded empty or zero case; this is an item-specific source-use review, not an independent proof acceptance."
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At threshold $omega=ePhi_H>0$, the Wronskian identity in [F2] gives $|R|^2=1$; the Statement excludes this endpoint."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "When transmission is zero, [F2] gives unit reflection; the Statement requires nonzero transmission for a strict conclusion."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the strict inequalities $0<omega<ePhi_H$; the lower endpoint is excluded and the threshold case has ratio one by [F2]."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement supplies an admitted mode conditionally; step 1.1 makes no choice and no existence claim is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item proves a one-way conditional flux conclusion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse from amplification to frequency-band membership is asserted."
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "post-emg-fx-test-field-regime",
+          "carrier": "items/post-emg-fx-test-field-regime.md",
+          "status": "Current carrier section inspected; status=draft; kind=postulate; provenance.proof=not-applicable; verification={\"precheck\":\"n/a\"}.",
+          "source_section": "Postulate",
+          "exact_statement": "Adopt the following classical test-scalar model in the geometric length-coordinate convention of the charged radial-scattering definition. Let $M>0$ and $Q\\in\\mathbb R$ satisfy $0<|Q|\\le M$, put\n\n$$r_\\pm:=M\\pm\\sqrt{M^2-Q^2},\\qquad f(r):=1-\\frac{2M}{r}+\\frac{Q^2}{r^2},\\qquad U:=\\mathbb R_t\\times(r_+,\\infty)_r\\times S^2.$$\n\nOn $U$ prescribe\n\n$$g=-f(r)\\,dt^2+f(r)^{-1}dr^2+r^2\\gamma_{S^2},\\qquad A=-\\frac Qr\\,dt,\\qquad F=dA=-\\frac{Q}{r^2}\\,dt\\wedge dr.$$\n\nHere $\\gamma_{S^2}$ is the unit round metric, $A_t\\to0$ at infinity, and $r_+$ is the larger positive root; in the extremal case $Q^2=M^2$ both roots equal $M$. The factorization $f(r)=(r-r_+)(r-r_-)/r^2$ makes $f>0$ on this open exterior. The larger root is a null constant-$r$ Killing horizon in the selected ingoing RN model; it is not an event-horizon assertion about a maximal spacetime. Orient the product by $dt\\wedge dr\\wedge\\omega_{S^2}$, where $\\omega_{S^2}$ is the outward area form of the unit round sphere; $\\star_g$ denotes the corresponding Lorentzian Hodge map. Adopt the source-free background Maxwell branch $dF=0$ and $d(\\star_gF)=0$ on $U$. The fields are prescribed on the open exterior only. No maximal extension, coupled Einstein equation, or actual astrophysical object is asserted by this postulate.\n\nIn the chosen global electric gauge, let $\\psi:U\\to\\mathbb C$ be a smooth complex scalar and let $e\\in\\mathbb R$ be its fixed charge-coupling parameter. Define $D_a\\psi:=\\partial_a\\psi-ieA_a\\psi$, so $D_t=\\partial_t+ieQ/r$. The scalar Laplace–Beltrami operator on the unit sphere is $\\Delta_{\\gamma_{S^2}}=\\frac1{\\sin\\theta}\\partial_\\theta(\\sin\\theta\\,\\partial_\\theta)+\\frac1{\\sin^2\\theta}\\partial_\\phi^2$ in the standard polar chart, with smooth global extension. Adopt the massless, minimally coupled equation\n\n$$\\Box_{g,A}\\psi:=-f^{-1}D_t^2\\psi+\\frac1{r^2}\\partial_r\\!\\left(r^2f\\,\\partial_r\\psi\\right)+\\frac1{r^2}\\Delta_{\\gamma_{S^2}}\\psi=0.$$\n\nFor its energy bookkeeping, adopt the symmetric tensor assignment $\\mathsf T_{ab}[\\psi;g,A,e]$ defined by the exact mathematical stress-tensor formula linked below. The scalar's stress is omitted from the equations for the prescribed background, and no scalar source is added to its Maxwell equation. This is a test-field model: omission of the scalar response is a modeling choice, not an estimate that the response is small.\n\nCoordinates $t,r,M,Q$ have unit metres; $f$ and $A_t$ are dimensionless; $e$ has unit $\\mathrm m^{-1}$; $F_{tr}$ has unit $\\mathrm m^{-1}$; and the scalar field has a specified but otherwise arbitrary unit $[\\psi]$. The tensor assignment $\\mathsf T_{ab}$ has component unit $[\\psi]^2\\mathrm m^{-2}$ in this geometric normalization. For the subextremal branch, define the gauge-normalized outer-root potential difference by $\\Phi_H:=A_t(\\infty)-A_t(r_+)=Q/r_+$. The separate mathematical scalar model on the Einstein–Maxwell page uses SI bookkeeping and its own coupling parameters; no identification with those parameters is made here.",
+          "relevant_hypotheses_and_conventions": "The excerpt is the complete current Postulate section. Preserve its stated hypotheses, units, sign/gauge conventions, and conditional status.",
+          "supplier_proof_status": "Carrier metadata: status=draft; kind=postulate; provenance.proof=not-applicable; verification={\"precheck\":\"n/a\"}. In-run Step-1 record at contract-generation time: {\"version\":1,\"run\":\"physics-non-fluid-129-2026-10-21-r2\",\"item\":\"post-emg-fx-test-field-regime\",\"decision\":\"ready\",\"owner\":false,\"reason\":\"The fixed RN data, horizon context, gauge and scalar tensor inputs are current and inspected; adopted scope and units are complete.\",\"dependencies\":[\"def-emg-fx-charged-radial-scattering\",\"def-emg-fx-charged-scalar-stress-tensor\",\"def-emg-xs-rn-data\",\"post-emg-background-maxwell-test\",\"prop-emg-xs-rn-horizon-data\"],\"sha256\":\"d05a98e64b98fe50e22004ee50ba16ece354e25eac98a3456e849e82f767b6fc\",\"at\":\"2026-10-21T14:07:50.992Z\"}. No independent acceptance is inferred.",
+          "consumer_use": "Supplies the adopted massless charged-scalar fixed-background regime and stress assignment."
+        },
+        {
+          "supplier": "def-emg-fx-charged-radial-scattering",
+          "carrier": "items/def-emg-fx-charged-radial-scattering.md",
+          "status": "Current carrier section inspected; status=draft; kind=definition; provenance.proof=not-applicable; verification={\"precheck\":\"n/a\"}.",
+          "source_section": "Definition",
+          "exact_statement": "Let $M>0$ and $Q\\in\\mathbb R$ satisfy $0<|Q|<M$. Put\n$$r_\\pm:=M\\pm\\sqrt{M^2-Q^2},\\qquad f(r):=1-\\frac{2M}{r}+\\frac{Q^2}{r^2},\\qquad r>r_+.$$\nUse the static exterior\n$\\mathcal M_{\\mathrm{ext}}=\\mathbb R_t\\times(r_+,\\infty)_r\\times S^2$\nwith the electric specialization $q_e=Q$, $q_m=0$, and $t=x^0$ of the\nReissner--Nordström metric and potential fixed in the preceding definition.\nThus\n$$g=-f\\,dt^2+f^{-1}dr^2+r^2\\gamma_{S^2},\\qquad A=-\\frac Qr\\,dt,\\qquad A_t\\longrightarrow0\\quad(r\\longrightarrow\\infty).$$\nHere $r_+$ is the positive outer root in the selected local model, not a claim\nabout an event horizon in a maximal spacetime. Set\n$\\Phi_H:=Q/r_+=A_t(\\infty)-A_t(r_+)$ for this gauge.\n\nFor a complex scalar function $\\psi$ in this fixed trivialization and a real\ncoupling $e$, put $D_a\\psi:=(\\partial_a-ieA_a)\\psi$. Define the massless\ncharged wave operator in the static chart by\n$$\\Box_{g,A}\\psi:=-f^{-1}D_t^2\\psi+\\frac1{r^2}\\partial_r\\!\\left(r^2f\\,\\partial_r\\psi\\right)+\\frac1{r^2}\\Delta_{\\gamma_{S^2}}\\psi,\\qquad D_t=\\partial_t+\\frac{ieQ}{r}.$$\nThe equation used here is $\\Box_{g,A}\\psi=0$; it is a fixed-background,\nminimally coupled test-field equation and does not evolve or source $g$ or $A$.\n\nLet $e\\in\\mathbb R$, $\\omega>0$, and $\\ell\\in\\mathbb N_0$. Supply a smooth\nreal function $Y:S^2\\to\\mathbb R$ satisfying\n$$\\int_{S^2}Y^2\\,d\\omega_{S^2}=1,\\qquad \\Delta_{\\gamma_{S^2}}Y=-\\ell(\\ell+1)Y.$$\nNo existence assertion about $Y$ is made. Use the tortoise coordinate\n$$r_*(r):=\\int_{2r_+}^{r}f(\\rho)^{-1}\\,d\\rho,$$\nwhich is strictly increasing because $f>0$ on the exterior. Under the\nsubextremal hypotheses the supplied RN scalar-coordinate result proves that\n$r_*$ is a smooth coordinate from $(r_+,\\infty)$ onto $\\mathbb R$; hence\n$r_*\\to-\\infty$ as $r\\downarrow r_+$ and $r_*\\to+\\infty$ as $r\\to\\infty$.\nA separated mode has the form\n$$\\psi(t,r,\\Omega)=A_{\\mathrm{in}}e^{-i\\omega t}Y(\\Omega)\\frac{u(r_*)}{r},$$\nwhere $A_{\\mathrm{in}}\\ne0$ is a fixed incident amplitude with units\n$[\\psi]\\,\\mathrm m$, and the normalized complex radial function $u$ and its\nreflection and transmission coefficients are dimensionless.\n\nWrite $\\omega_H:=\\omega-e\\Phi_H=\\omega-eQ/r_+$ and, for any reference length\n$L>0$, define the Coulomb phase\n$$\\Theta(r_*):=\\omega r_*-eQ\\log(r/L),\\qquad \\Theta'(r_*):=\\omega-\\frac{eQf(r)}r.$$\nA normalized scattering solution is a smooth radial solution of\n$\\Box_{g,A}\\psi=0$ for which, for some $R,T\\in\\mathbb C$,\n$$u=e^{-i\\Theta}+R e^{i\\Theta}+o(1),\\qquad \\partial_{r_*}u=-i\\Theta'e^{-i\\Theta}+i\\Theta'R e^{i\\Theta}+o(1)\\quad(r\\longrightarrow\\infty),$$\nand\n$$u=T e^{-i\\omega_Hr_*}+o(1),\\qquad \\partial_{r_*}u=-i\\omega_HTe^{-i\\omega_Hr_*}+o(1)\\quad(r\\downarrow r_+).$$\nThe error terms tend to zero in the indicated limits. These boundary\nconditions prescribe unit incoming amplitude at infinity and only the\ningoing branch at the future horizon. They define admissible scattering data;\nthey assert neither existence nor uniqueness of such a solution.\n\nThe logarithm in $\\Theta$ is required by the long-range term\n$-2\\omega eQ/r$ in the asymptotic radial coefficient. Changing $L$ changes\nconstant phases, not flux magnitudes. A constant gauge shift changes the\nfrequency label, so the threshold uses the potential difference\n$\\Phi_H$, not an absolute value of $A_t$.\n\nUse geometric units $G=c=1$ and length coordinates, with\n$[t]=[r]=[r_*]=[M]=[Q]=[L]=\\mathrm m$,\n$[e]=[\\omega]=\\mathrm m^{-1}$, $f$ dimensionless, and $A_t$ dimensionless;\nthen $\\Theta$ is dimensionless and each term in $\\Box_{g,A}$ has units\n$[\\psi]\\,\\mathrm m^{-2}$. The coupling $e$ is the charge coupling in the\nchosen field normalization; restoring SI units requires restoring the\ncorresponding field normalization and the charge-over-$\\hbar$ coupling.\nThis definition excludes scalar mass, magnetic charge, mirrors, anti-de Sitter\nboundaries, bound states, and complex-frequency quasinormal boundary conditions.\nA scalar mass would change the propagating infinity wave number to\n$\\sqrt{\\omega^2-\\mu^2}$ and requires a different scattering normalization.\nComplex-frequency quasinormal modes form a distinct non-self-adjoint spectral\nproblem and are not covered by the real-frequency Wronskian identity.",
+          "relevant_hypotheses_and_conventions": "The excerpt is the complete current Definition section. Preserve its stated hypotheses, units, sign/gauge conventions, and conditional status.",
+          "supplier_proof_status": "Carrier metadata: status=draft; kind=definition; provenance.proof=not-applicable; verification={\"precheck\":\"n/a\"}. Outside this run; no local readiness assertion is made. No independent acceptance is inferred.",
+          "consumer_use": "Supplies the precise electric RN gauge, charged derivative, tortoise coordinate and Coulomb-phase asymptotics used by this conditional calculation."
+        },
+        {
+          "supplier": "prop-emg-fx-superradiant-wronskian",
+          "carrier": "items/prop-emg-fx-superradiant-wronskian.md",
+          "status": "Current carrier section inspected; status=draft; kind=proposition; provenance.proof=ai-generated; verification={\"precheck\":\"pass\"}.",
+          "source_section": "Statement",
+          "exact_statement": "Let $u$ be any scattering solution as defined on the fixed subextremal electric\nRN exterior, with real $\\omega>0$, real $e,Q$, unit incoming amplitude, and\nreflection and transmission coefficients $R,T$. Then its radial Wronskian\nflux $j:=\\operatorname{Im}(\\overline u\\,\\partial_{r_*}u)$ is constant and\n$$|R|^2=1-\\frac{\\omega-eQ/r_+}{\\omega}|T|^2.$$\nConsequently, if $0<\\omega<eQ/r_+$ and $T\\ne0$, the reflected radial flux\nmagnitude exceeds the incident radial flux magnitude, since their ratio is\n$|R|^2>1$. This is conditional on an admitted scattering solution and does not\nassert its existence, a complex-frequency mode, or a nonlinear instability.",
+          "relevant_hypotheses_and_conventions": "The excerpt is the complete current Statement section. Preserve its stated hypotheses, units, sign/gauge conventions, and conditional status.",
+          "supplier_proof_status": "Carrier metadata: status=draft; kind=proposition; provenance.proof=ai-generated; verification={\"precheck\":\"pass\"}. Outside this run; no local readiness assertion is made. No independent acceptance is inferred.",
+          "consumer_use": "Supplies the conserved radial Wronskian identity for each admitted scattering mode."
+        },
+        {
+          "supplier": "lem-emg-fx-asymptotic-scalar-energy-flux",
+          "carrier": "items/lem-emg-fx-asymptotic-scalar-energy-flux.md",
+          "status": "Current carrier section inspected; status=draft; kind=lemma; provenance.proof=ai-generated; verification={\"precheck\":\"pending\"}.",
+          "source_section": "Statement",
+          "exact_statement": "Use the fixed subextremal electric Reissner–Nordström exterior, gauge, charged derivative, real normalized spherical harmonic $Y$, and mode conventions of [[def-emg-fx-charged-radial-scattering]]. Let $\\psi=A_{\\mathrm{in}}e^{-i\\omega t}Y(\\Omega)u(r_*)/r$ be any admitted real-frequency scattering mode with $\\omega>0$ and $A_{\\mathrm{in}}\\ne0$, and let $R$ be its reflection coefficient. Form $\\mathsf T_{ab}[\\psi;g,A,e]$ by the gauge-covariant scalar stress-tensor definition. With $\\xi=\\partial_t$, define the outward radial flux through the sphere of radius $r$ by\n\n$$\\mathcal P(r):=-\\int_{S^2}r^2\\mathsf T^r{}_t[\\psi;g,A,e]\\,d\\omega_{S^2}.$$\n\nLet $\\psi_{\\mathrm{in}}:=A_{\\mathrm{in}}e^{-i\\omega t}Y e^{-i\\Theta}/r$ and $\\psi_{\\mathrm{ref}}:=A_{\\mathrm{in}}e^{-i\\omega t}YRe^{i\\Theta}/r$ be the two leading asymptotic components. Define their positive directional flux magnitudes by\n\n$$\\mathcal P_{\\mathrm{in}}:=\\lim_{r\\to\\infty}\\int_{S^2}r^2\\mathsf T^r{}_t[\\psi_{\\mathrm{in}};g,A,e]\\,d\\omega_{S^2},\\qquad \\mathcal P_{\\mathrm{ref}}:=-\\lim_{r\\to\\infty}\\int_{S^2}r^2\\mathsf T^r{}_t[\\psi_{\\mathrm{ref}};g,A,e]\\,d\\omega_{S^2}.$$\n\nThen\n\n$$\\mathcal P_{\\mathrm{in}}=2\\omega^2|A_{\\mathrm{in}}|^2,\\qquad \\mathcal P_{\\mathrm{ref}}=2\\omega^2|A_{\\mathrm{in}}|^2|R|^2,\\qquad \\frac{\\mathcal P_{\\mathrm{ref}}}{\\mathcal P_{\\mathrm{in}}}=|R|^2.$$\n\nThis is a conditional tensor calculation for the specified mode asymptotics; it asserts neither that such a mode exists nor that its flux has been observed.",
+          "relevant_hypotheses_and_conventions": "The excerpt is the complete current Statement section. Preserve its stated hypotheses, units, sign/gauge conventions, and conditional status.",
+          "supplier_proof_status": "Carrier metadata: status=draft; kind=lemma; provenance.proof=ai-generated; verification={\"precheck\":\"pending\"}. In-run Step-1 record at contract-generation time: {\"version\":1,\"run\":\"physics-non-fluid-129-2026-10-21-r2\",\"item\":\"lem-emg-fx-asymptotic-scalar-energy-flux\",\"decision\":\"ready\",\"owner\":false,\"reason\":\"The current scattering and tensor definitions supply every hypothesis; the asymptotic component calculation, boundary cases and contract pass.\",\"dependencies\":[\"def-emg-fx-charged-radial-scattering\",\"def-emg-fx-charged-scalar-stress-tensor\"],\"sha256\":\"2a5304211f40030c262cf8a4e8b5655ae8c19795c1454b4adf9d94ff9b967b0f\",\"at\":\"2026-10-21T14:08:03.672Z\"}. No independent acceptance is inferred.",
+          "consumer_use": "Supplies the identification of the reflected-to-incident stress-flux ratio with $|R|^2$."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-28 author self-review",
+        "notes": "Reviewed every conditional hypothesis, the exact supplier interface, sign and normalization conventions, and the stated limits on existence, observation, or physical interpretation."
+      },
+      "finite_checks": []
+    },
+    "texp-emg-fx-test-to-coupled-error": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "post-emg-background-maxwell-test",
+          "source_section": "Postulate",
+          "quote": "On an open region of the oriented, time-oriented Lorentzian spacetime and length-coordinate SI conventions of [[def-emg-matter-observables]], adopt a prescribed-background Maxwell model. The metric $g$ is fixed input. Choose a real $C^2$ electromagnetic two-form $F$ and either adopt the source-free equations $dF=0$ and $d(\\star_gF)=0$, or supply a $C^1$ current $j$ and adopt $dF=0$ and $\\nabla_aF^{ab}=-\\mu_0j^b$, with the exact signs and units of that definition. The source current is prescribed independently of the probe; this postulate does not impose an Einstein equation, matter evolution equation, or field equation for the sources on the unchanged metric.\n\nFor a massive charged probe, use the adopted local action and finite-curve conditions of [[post-rpm-external-charge-action]]: $m>0$ and $q$ are constant, the path is a $C^2$ future-directed timelike segment parameterized by proper time, and its endpoints are fixed in variations supported in a local potential domain $V$ with a supplied $C^2$ one-form $A$ satisfying $dA=F$. The potential and metric are external data independent of the path. Under the exact hypotheses of [[pthm-rpm-external-charge-action-equivalence]], action stationarity is equivalent to $m\\nabla_UU=qF^\\sharp(U)$; that theorem's $\\mathrm{AC}_\\omega$ assumption is inherited only when this equivalent force-law formulation is used. No global potential or trajectory is included.\n\nThe probe's own singular field and self-gravity are excluded. No radiation reaction, variable mass or charge, finite-body model, or backreaction estimate is adopted. In particular, calling $g$ or $F$ a test background records this model's omission of their response; it does not claim that the unchanged pair solves the coupled Einstein–Maxwell equations or is close to a coupled solution.\n\nWhen geometric optics is invoked, it is restricted to the exact $C^4$ real phase, $C^3$ complex amplitudes, four pointwise ansatz constraints, and fixed compact-chart coefficient bounds of [[lem-emg-controlled-maxwell-wkb]]. That result supplies finite residual and leading-field estimates, local null rays, and a polarization quotient; it supplies no convergent series, global transport through caustics, exact-solution error estimate, or backreaction theorem.\n\nThis is a separately adopted physical model with no empirical premise. The Maxwell and probe assumptions are not deductions from one another, from mathematical axioms, or from source authority.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "prop-emg-test-field-residual-order",
+          "source_section": "Statement",
+          "quote": "Let $U$ be a smooth Lorentzian four-dimensional chart domain with metric $g$ as in [[def-emg-lorentzian-forms]], and let $\\Lambda\\in\\mathbb R$ be constant. Write $\\Omega^k(U)$ for the smooth real $k$-forms on $U$. Here $d:\\Omega^k(U)\\to\\Omega^{k+1}(U)$, $0\\le k\\le3$, is the exterior derivative with coordinate formula $(d\\beta)_{a_0\\ldots a_k}=(k+1)\\partial_{[a_0}\\beta_{a_1\\ldots a_k]}$, and $\\star_g:\\Omega^2(U)\\to\\Omega^2(U)$ is the Lorentzian Hodge map characterized by $\\alpha\\wedge\\star_g\\beta=\\frac12\\alpha_{ab}\\beta^{ab}\\,\\operatorname{vol}_g$ for $\\alpha,\\beta\\in\\Omega^2(U)$, as in [[lem-emg-lorentz-hodge-calculus]]. Both operators are real-linear. Suppose $G_{ab}(g)+\\Lambda g_{ab}=0$. Let $F_1\\in\\Omega^2(U)$ satisfy $dF_1=0$ and $d(\\star_gF_1)=0$. For any real dimensionless $\\varepsilon$, put $F_\\varepsilon:=\\varepsilon F_1$ and define\n\n$$T^{(1)}_{ab}:=\\mu_0^{-1}\\mathcal Q_{ab}(g,F_1),\\qquad \\mathscr R_{ab}(g,F;\\Lambda):=G_{ab}(g)+\\Lambda g_{ab}-\\frac{\\kappa}{\\mu_0}\\mathcal Q_{ab}(g,F),$$\n\nusing $\\kappa,\\mu_0,\\mathcal Q$ of [[def-emg-geometric-scaling]] and [[thm-emg-field-normalization-equivalence]]. Then $F_\\varepsilon$ remains an exact source-free Maxwell field on the fixed metric and\n\n$$\\mathscr R_{ab}(g,F_\\varepsilon;\\Lambda)=-\\kappa\\varepsilon^2T^{(1)}_{ab}.$$\n\nFor a smooth covariant two-tensor $S$ and compact $K\\subset U$, define the chart component norm of its restriction by $\\|S\\|_{K}:=\\max_{0\\le a,b\\le3}\\sup_{p\\in K}|S_{ab}(p)|$ when $K\\ne\\varnothing$. In this estimate and its applications, use $\\sup_{p\\in\\varnothing}f(p):=0$ for nonnegative component functions $f$; equivalently, the empty restriction has $\\|S\\|_{\\varnothing}:=0$. It is finite for smooth $S$ and satisfies\n\n$$\\|\\mathscr R(g,F_\\varepsilon;\\Lambda)\\|_K=\\kappa\\varepsilon^2\\|T^{(1)}\\|_K.$$\n\nIf $\\varepsilon\\ne0$ and $T^{(1)}$ is not identically zero on $K$, the fixed pair $(g,F_\\varepsilon)$ is not an exact coupled Einstein–Maxwell solution on $K$. This is a residual estimate only; it gives no nearby metric, solution-distance bound, point-source solution or backreaction limit.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-emg-geometric-scaling",
+          "source_section": "Definition",
+          "quote": "Use the smooth oriented, time-oriented Lorentzian four-manifold, metric signature $(-,+,+,+)$, and arbitrary smooth real two-form $F$ of [[def-emg-lorentzian-forms]]. In a chart using the coordinate convention $x^0=ct$ with all four coordinates assigned metres, assign the SI component unit tesla to $F_{ab}$; the two-form $F=\\frac12F_{ab}\\,dx^a\\wedge dx^b$ then has unit weber.\n\nFor this conversion dictionary, take $c>0$, $G>0$, and $\\mu_0>0$ as numerical input parameters, with SI dimensions\n\n$$[c]=\\mathrm{m\\,s^{-1}},\\qquad [G]=\\mathrm{m^3\\,kg^{-1}\\,s^{-2}},\\qquad [\\mu_0]=\\mathrm{kg\\,m\\,C^{-2}}.$$\n\nDefine the derived parameters\n\n$$\\varepsilon_0:=\\frac{1}{\\mu_0c^2},\\qquad \\kappa:=\\frac{8\\pi G}{c^4},\\qquad \\alpha:=\\sqrt{\\frac{\\kappa}{2\\mu_0}},\\qquad \\mathcal F:=\\alpha F.$$\n\nThus $\\varepsilon_0$ has unit $\\mathrm{C^2\\,s^2\\,kg^{-1}\\,m^{-3}}$, $\\kappa$ has unit $\\mathrm{m\\,J^{-1}}$, $\\alpha$ has unit $\\mathrm{C\\,s\\,kg^{-1}\\,m^{-1}}$, and the components $\\mathcal F_{ab}$ have unit $\\mathrm{m^{-1}}$. In modern SI, $c$ is fixed exactly by the definition of the metre; $\\mu_0$ is not fixed exactly and its numerical value is determined experimentally. Here the equations use only the positive symbolic parameters above, not a selected numerical value.\n\nFor a physical mass $M_{\\!p}>0$ in kilograms, signed charge $Q_e$ in coulombs, and angular momentum $J_{\\mathrm{ang}}$ in $\\mathrm{kg\\,m^2\\,s^{-1}}$, define the geometric length parameters\n\n$$m_{\\mathrm{geo}}:=\\frac{GM_{\\!p}}{c^2},\\qquad q_{\\mathrm{geo}}:=\\sqrt{\\frac{G}{4\\pi\\varepsilon_0c^4}}\\,Q_e,\\qquad a_{\\mathrm{geo}}:=\\frac{J_{\\mathrm{ang}}}{M_{\\!p}c}.$$\n\nFor a supplied magnetic-flux parameter $\\Phi_B$ in webers, also define $p_{\\mathrm{geo}}:=\\alpha\\Phi_B/(4\\pi)$ in metres. This is only a conversion of an already specified flux value; it asserts neither a global potential nor a magnetic source. The inverse parameter maps are $M_{\\!p}=c^2m_{\\mathrm{geo}}/G$, $Q_e=\\sqrt{4\\pi\\varepsilon_0c^4/G}\\,q_{\\mathrm{geo}}$, $J_{\\mathrm{ang}}=M_{\\!p}c\\,a_{\\mathrm{geo}}$, and $\\Phi_B=4\\pi p_{\\mathrm{geo}}/\\alpha$.\n\nThe mass, charge, angular momentum and flux are inputs to this dictionary; their primitive or derived status in any physical model is framework-specific. No field equation, Maxwell postulate, matter law, or empirical value is part of this definition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-emg-field-normalization-equivalence",
+          "source_section": "Statement",
+          "quote": "Let $(M,g,N,o)$, $F$, $\\kappa$, $\\mu_0$, $\\alpha$ and $\\mathcal F=\\alpha F$ be as in [[def-emg-geometric-scaling]], with curvature tensors defined by [[def-gr-curvature-tensor-and-derived-tensors]]. Let $\\Lambda\\in\\mathbb R$ be a constant. Define the quadratic tensor\n\n$$\\mathcal Q_{ab}(g,F):=F_{ac}F_b{}^c-\\frac14g_{ab}F_{cd}F^{cd},$$\n\nwhere indices are raised with $g^{-1}$. Then the following equations for the same metric and two-form are equivalent:\n\n$$G_{ab}(g)+\\Lambda g_{ab}=\\frac{\\kappa}{\\mu_0}\\mathcal Q_{ab}(g,F),$$\n\n$$G_{ab}(g)+\\Lambda g_{ab}=2\\mathcal Q_{ab}(g,\\mathcal F),$$\n\n$$\\operatorname{Ric}_{ab}(g)-\\Lambda g_{ab}=2\\mathcal Q_{ab}(g,\\mathcal F).$$\n\nThese are algebraic equivalences between tensor equations. No Maxwell equation, matter model, limiting procedure or physical solution is assumed.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-gr-curvature-tensor-and-derived-tensors",
+          "source_section": "Definition",
+          "quote": "Let $(M,g,N)$ be a time-oriented smooth Lorentzian four-manifold\n([[def-gr-smooth-lorentzian-objects]]) with metric-selected connection\n$\\nabla$ ([[def-gr-metric-selected-connection]]), whose existence and\nuniqueness are supplied by\n[[thm-gr-nondegenerate-levi-civita-and-tensor-derivative]]; that theorem also\nextends $\\nabla$ to a derivative on tensor fields commuting with contractions\nand annihilating $g$ and $g^{-1}$. Let $U\\subseteq M$ be open and let\n$X,Y,Z$ be smooth vector fields on $U$; brackets are those of\n[[def-lie-bracket-of-smooth-vector-fields]], and contractions those of\n[[def-contraction-of-a-mixed-tensor]].\n\n**(a) The curvature operator.** The **curvature operator** of $\\nabla$ is the\nassignment\n\n$$R(X,Y)Z:=\\nabla_X\\nabla_YZ-\\nabla_Y\\nabla_XZ-\\nabla_{[X,Y]}Z .$$\n\nThe right-hand side is a smooth vector field on $U$: $\\nabla_YZ$ is smooth\nbecause $\\nabla$ is an affine connection\n([[def-affine-connection-on-a-smooth-manifold]]), $[X,Y]$ is smooth, and\n$\\nabla_X(\\cdot)$ and $\\nabla_{[X,Y]}(\\cdot)$ preserve smoothness. The\nassignment is defined for the given smooth fields; that its value at a point\ndepends only on the values of $X,Y,Z$ at that point, so that $R$ is a smooth\ntensor field of type $(1,3)$, is the content of\n[[thm-gr-curvature-tensoriality-and-coordinate-formula]] clause (a), and\nlikewise the algebraic symmetries used below are proved in\n[[thm-gr-curvature-algebraic-symmetries]].\n\n**(b) Component functions.** Let $(V,x)$ be a smooth chart of $M$ and let\n$\\Gamma^a{}_{bc}$ be the Christoffel symbols of $\\nabla$ in this chart,\ncharacterized by $\\nabla_{\\partial_b}\\partial_c=\\sum_a\\Gamma^a{}_{bc}\\partial_a$\n([[def-christoffel-symbols-of-an-affine-connection]]); the coordinate fields\ncommute, so $\\nabla_{\\partial_c}\\partial_d$ and $\\nabla_{\\partial_d}\\partial_c$\nare obtained from the same symbols. The **components** of the curvature in the\nchart are the smooth functions $R^a{}_{bcd}$ on $V$ defined by\n\n$$R(\\partial_c,\\partial_d)\\partial_b=\\sum_a R^a{}_{bcd}\\,\\partial_a .$$\n\nThe first index is the output slot, the second is the differentiated slot and\nthe last two are the two directions of the loop; indices are $a,b,c,d=0,1,2,3$\nand the Einstein summation convention of\n[[def-gr-smooth-lorentzian-objects]] applies.\n\n**(c) Lowered tensor, Ricci tensor, scalar curvature, Einstein tensor.** On\nthe chart domain define, using the inverse metric\n$g^{ab}$ of [[def-gr-inverse-metric-and-musical-isomorphisms]],\n\n$$R_{abcd}:=\\sum_e g_{ae}R^e{}_{bcd},\\qquad \\operatorname{Ric}_{bd}:=\\sum_{a,c}g^{ac}R_{abcd},\\qquad S:=\\sum_{b,d}g^{bd}\\operatorname{Ric}_{bd},\\qquad G_{ab}:=\\operatorname{Ric}_{ab}-\\tfrac12 S\\,g_{ab}.$$\n\nThe fields $R_{abcd}$, $\\operatorname{Ric}_{ab}$, $S$ and $G_{ab}$ are called\nthe **Riemann tensor with lowered indices**, the **Ricci tensor**, the\n**scalar curvature** and the **Einstein tensor** of the metric-selected\nconnection. Tensoriality of $R$ is proved in\n[[thm-gr-curvature-tensoriality-and-coordinate-formula]] clause (a).\nLowering its output slot with the smooth metric and contracting with the\nsmooth inverse metric are intrinsic tensor operations\n([[def-gr-tensor-fields-and-components]] clauses (b)-(c),\n[[def-contraction-of-a-mixed-tensor]]). Thus these formulas give smooth\nfields of types $(0,4)$, $(0,2)$, $(0,0)$ and $(0,2)$, respectively,\nindependent of the chart. Symmetry of $\\operatorname{Ric}$ and $G$ is proved\nseparately in [[thm-gr-curvature-algebraic-symmetries]] clause (d).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1-deduction",
+          "step": "1.1",
+          "claim": "The hypotheses in [A3] and [A5] put the fixed pair in the scope of [F1]. Because $K_\\tau=[0,\\tau]\\times K_0$ and there are finitely many components, the max-component norm on $K_\\tau$ equals $\\sup_{0\\le t\\le\\tau}\\|\\mathscr R_\\varepsilon(t)\\|_{K_0}$. By [F1], this is $\\kappa\\varepsilon^2\\|T^{(1)}\\|_{K_\\tau}=C\\varepsilon^2$, with $C\\ge0$ by [F2] and nonnegativity of the norm. The adopted model in [A1] leaves the metric and Maxwell field prescribed, while the vacuum and source-free conditions required by [F1] are stated separately in [A3]. [F3] and [F4] identify the same tensor and curvature normalizations. The only inherited choice convention is [A2]; this step uses the exact proposition as stated and introduces no stronger choice assumption.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "A2",
+            "A3",
+            "A5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1-deduction",
+          "step": "2.1",
+          "claim": "For each $t\\in[0,\\tau]$, apply [A4] and then step 1.1:\n$$\\|z_\\varepsilon(t)-\\widetilde z_\\varepsilon(t)\\|_{\\mathcal X}\\le K(\\tau)\\int_0^t\\|\\mathscr R_\\varepsilon(s)\\|_{K_0}\\,ds\\le K(\\tau)\\int_0^t C\\varepsilon^2\\,ds=K(\\tau)Ct\\varepsilon^2\\le K(\\tau)C\\tau\\varepsilon^2.$$\nTaking the supremum over the interval proves the stated bound. If $\\varepsilon=0$ or $C=0$, the same inequality gives zero error under the assumed stability bound; no claim about the existence of that bound is made.",
+          "inputs": [
+            "given",
+            "A4",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes a nonempty compact spatial chart set $K_0$."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 gives zero error bound if $\u000barepsilon=0$ or $C=0$, under the separately assumed stability estimate."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No dimension-one or singleton conclusion is asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "At $t=0$, the integral in [A4] is zero; step 2.1 also covers $C=0$ and finite $K(\tau)=0$."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 applies for all $tin[0,\tau]$: the bound is zero at $t=0$ and reaches the stated upper bound at $t=\tau$."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The region, fields and compared solution pair are supplied; no choice from a family is made in steps 1.1–2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a conditional upper-bound argument, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse implication from small error to a residual bound is asserted."
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "post-emg-background-maxwell-test",
+          "carrier": "items/post-emg-background-maxwell-test.md",
+          "status": "Current carrier section inspected; status=published; kind=postulate; provenance.proof=not-applicable; verification={\"precheck\":\"n/a\"}.",
+          "source_section": "Postulate",
+          "exact_statement": "On an open region of the oriented, time-oriented Lorentzian spacetime and length-coordinate SI conventions of [[def-emg-matter-observables]], adopt a prescribed-background Maxwell model. The metric $g$ is fixed input. Choose a real $C^2$ electromagnetic two-form $F$ and either adopt the source-free equations $dF=0$ and $d(\\star_gF)=0$, or supply a $C^1$ current $j$ and adopt $dF=0$ and $\\nabla_aF^{ab}=-\\mu_0j^b$, with the exact signs and units of that definition. The source current is prescribed independently of the probe; this postulate does not impose an Einstein equation, matter evolution equation, or field equation for the sources on the unchanged metric.\n\nFor a massive charged probe, use the adopted local action and finite-curve conditions of [[post-rpm-external-charge-action]]: $m>0$ and $q$ are constant, the path is a $C^2$ future-directed timelike segment parameterized by proper time, and its endpoints are fixed in variations supported in a local potential domain $V$ with a supplied $C^2$ one-form $A$ satisfying $dA=F$. The potential and metric are external data independent of the path. Under the exact hypotheses of [[pthm-rpm-external-charge-action-equivalence]], action stationarity is equivalent to $m\\nabla_UU=qF^\\sharp(U)$; that theorem's $\\mathrm{AC}_\\omega$ assumption is inherited only when this equivalent force-law formulation is used. No global potential or trajectory is included.\n\nThe probe's own singular field and self-gravity are excluded. No radiation reaction, variable mass or charge, finite-body model, or backreaction estimate is adopted. In particular, calling $g$ or $F$ a test background records this model's omission of their response; it does not claim that the unchanged pair solves the coupled Einstein–Maxwell equations or is close to a coupled solution.\n\nWhen geometric optics is invoked, it is restricted to the exact $C^4$ real phase, $C^3$ complex amplitudes, four pointwise ansatz constraints, and fixed compact-chart coefficient bounds of [[lem-emg-controlled-maxwell-wkb]]. That result supplies finite residual and leading-field estimates, local null rays, and a polarization quotient; it supplies no convergent series, global transport through caustics, exact-solution error estimate, or backreaction theorem.\n\nThis is a separately adopted physical model with no empirical premise. The Maxwell and probe assumptions are not deductions from one another, from mathematical axioms, or from source authority.",
+          "relevant_hypotheses_and_conventions": "The excerpt is the complete current Postulate section. Preserve its stated hypotheses, units, sign/gauge conventions, and conditional status.",
+          "supplier_proof_status": "Carrier metadata: status=published; kind=postulate; provenance.proof=not-applicable; verification={\"precheck\":\"n/a\"}. Outside this run; no local readiness assertion is made. No independent acceptance is inferred.",
+          "consumer_use": "Supplies only the prescribed-background Maxwell modeling convention; it does not impose an Einstein equation."
+        },
+        {
+          "supplier": "prop-emg-test-field-residual-order",
+          "carrier": "items/prop-emg-test-field-residual-order.md",
+          "status": "Current carrier section inspected; status=published; kind=proposition; provenance.proof=ai-altered; verification={\"verified\":{\"model\":\"gpt-6-luna, gpt-6.1-sol, and delegated Codex review/repair agents; see completed run evidence\",\"verdict\":\"Owner accepted completed review and adjudication evidence for publication\",\"date\":\"2026-10-15\",\"scope\":\"Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report.\",\"evidence\":\"research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json\",\"publication\":\"research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json\",\"delegated_by\":\"owner; publication instruction 2026-10-15\"}}.",
+          "source_section": "Statement",
+          "exact_statement": "Let $U$ be a smooth Lorentzian four-dimensional chart domain with metric $g$ as in [[def-emg-lorentzian-forms]], and let $\\Lambda\\in\\mathbb R$ be constant. Write $\\Omega^k(U)$ for the smooth real $k$-forms on $U$. Here $d:\\Omega^k(U)\\to\\Omega^{k+1}(U)$, $0\\le k\\le3$, is the exterior derivative with coordinate formula $(d\\beta)_{a_0\\ldots a_k}=(k+1)\\partial_{[a_0}\\beta_{a_1\\ldots a_k]}$, and $\\star_g:\\Omega^2(U)\\to\\Omega^2(U)$ is the Lorentzian Hodge map characterized by $\\alpha\\wedge\\star_g\\beta=\\frac12\\alpha_{ab}\\beta^{ab}\\,\\operatorname{vol}_g$ for $\\alpha,\\beta\\in\\Omega^2(U)$, as in [[lem-emg-lorentz-hodge-calculus]]. Both operators are real-linear. Suppose $G_{ab}(g)+\\Lambda g_{ab}=0$. Let $F_1\\in\\Omega^2(U)$ satisfy $dF_1=0$ and $d(\\star_gF_1)=0$. For any real dimensionless $\\varepsilon$, put $F_\\varepsilon:=\\varepsilon F_1$ and define\n\n$$T^{(1)}_{ab}:=\\mu_0^{-1}\\mathcal Q_{ab}(g,F_1),\\qquad \\mathscr R_{ab}(g,F;\\Lambda):=G_{ab}(g)+\\Lambda g_{ab}-\\frac{\\kappa}{\\mu_0}\\mathcal Q_{ab}(g,F),$$\n\nusing $\\kappa,\\mu_0,\\mathcal Q$ of [[def-emg-geometric-scaling]] and [[thm-emg-field-normalization-equivalence]]. Then $F_\\varepsilon$ remains an exact source-free Maxwell field on the fixed metric and\n\n$$\\mathscr R_{ab}(g,F_\\varepsilon;\\Lambda)=-\\kappa\\varepsilon^2T^{(1)}_{ab}.$$\n\nFor a smooth covariant two-tensor $S$ and compact $K\\subset U$, define the chart component norm of its restriction by $\\|S\\|_{K}:=\\max_{0\\le a,b\\le3}\\sup_{p\\in K}|S_{ab}(p)|$ when $K\\ne\\varnothing$. In this estimate and its applications, use $\\sup_{p\\in\\varnothing}f(p):=0$ for nonnegative component functions $f$; equivalently, the empty restriction has $\\|S\\|_{\\varnothing}:=0$. It is finite for smooth $S$ and satisfies\n\n$$\\|\\mathscr R(g,F_\\varepsilon;\\Lambda)\\|_K=\\kappa\\varepsilon^2\\|T^{(1)}\\|_K.$$\n\nIf $\\varepsilon\\ne0$ and $T^{(1)}$ is not identically zero on $K$, the fixed pair $(g,F_\\varepsilon)$ is not an exact coupled Einstein–Maxwell solution on $K$. This is a residual estimate only; it gives no nearby metric, solution-distance bound, point-source solution or backreaction limit.",
+          "relevant_hypotheses_and_conventions": "The excerpt is the complete current Statement section. Preserve its stated hypotheses, units, sign/gauge conventions, and conditional status.",
+          "supplier_proof_status": "Carrier metadata: status=published; kind=proposition; provenance.proof=ai-altered; verification={\"verified\":{\"model\":\"gpt-6-luna, gpt-6.1-sol, and delegated Codex review/repair agents; see completed run evidence\",\"verdict\":\"Owner accepted completed review and adjudication evidence for publication\",\"date\":\"2026-10-15\",\"scope\":\"Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report.\",\"evidence\":\"research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json\",\"publication\":\"research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json\",\"delegated_by\":\"owner; publication instruction 2026-10-15\"}}. Outside this run; no local readiness assertion is made. No independent acceptance is inferred.",
+          "consumer_use": "Supplies the exact $O(\u000barepsilon^2)$ residual identity only; the consumer assumes a separate finite-time stability inequality."
+        },
+        {
+          "supplier": "def-emg-geometric-scaling",
+          "carrier": "items/def-emg-geometric-scaling.md",
+          "status": "Current carrier section inspected; status=published; kind=definition; provenance.proof=not-applicable; verification={\"verified\":{\"model\":\"gpt-6-luna, gpt-6.1-sol, and delegated Codex review/repair agents; see completed run evidence\",\"verdict\":\"Owner accepted completed review and adjudication evidence for publication\",\"date\":\"2026-10-15\",\"scope\":\"Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report.\",\"evidence\":\"research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json\",\"publication\":\"research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json\",\"delegated_by\":\"owner; publication instruction 2026-10-15\"}}.",
+          "source_section": "Definition",
+          "exact_statement": "Use the smooth oriented, time-oriented Lorentzian four-manifold, metric signature $(-,+,+,+)$, and arbitrary smooth real two-form $F$ of [[def-emg-lorentzian-forms]]. In a chart using the coordinate convention $x^0=ct$ with all four coordinates assigned metres, assign the SI component unit tesla to $F_{ab}$; the two-form $F=\\frac12F_{ab}\\,dx^a\\wedge dx^b$ then has unit weber.\n\nFor this conversion dictionary, take $c>0$, $G>0$, and $\\mu_0>0$ as numerical input parameters, with SI dimensions\n\n$$[c]=\\mathrm{m\\,s^{-1}},\\qquad [G]=\\mathrm{m^3\\,kg^{-1}\\,s^{-2}},\\qquad [\\mu_0]=\\mathrm{kg\\,m\\,C^{-2}}.$$\n\nDefine the derived parameters\n\n$$\\varepsilon_0:=\\frac{1}{\\mu_0c^2},\\qquad \\kappa:=\\frac{8\\pi G}{c^4},\\qquad \\alpha:=\\sqrt{\\frac{\\kappa}{2\\mu_0}},\\qquad \\mathcal F:=\\alpha F.$$\n\nThus $\\varepsilon_0$ has unit $\\mathrm{C^2\\,s^2\\,kg^{-1}\\,m^{-3}}$, $\\kappa$ has unit $\\mathrm{m\\,J^{-1}}$, $\\alpha$ has unit $\\mathrm{C\\,s\\,kg^{-1}\\,m^{-1}}$, and the components $\\mathcal F_{ab}$ have unit $\\mathrm{m^{-1}}$. In modern SI, $c$ is fixed exactly by the definition of the metre; $\\mu_0$ is not fixed exactly and its numerical value is determined experimentally. Here the equations use only the positive symbolic parameters above, not a selected numerical value.\n\nFor a physical mass $M_{\\!p}>0$ in kilograms, signed charge $Q_e$ in coulombs, and angular momentum $J_{\\mathrm{ang}}$ in $\\mathrm{kg\\,m^2\\,s^{-1}}$, define the geometric length parameters\n\n$$m_{\\mathrm{geo}}:=\\frac{GM_{\\!p}}{c^2},\\qquad q_{\\mathrm{geo}}:=\\sqrt{\\frac{G}{4\\pi\\varepsilon_0c^4}}\\,Q_e,\\qquad a_{\\mathrm{geo}}:=\\frac{J_{\\mathrm{ang}}}{M_{\\!p}c}.$$\n\nFor a supplied magnetic-flux parameter $\\Phi_B$ in webers, also define $p_{\\mathrm{geo}}:=\\alpha\\Phi_B/(4\\pi)$ in metres. This is only a conversion of an already specified flux value; it asserts neither a global potential nor a magnetic source. The inverse parameter maps are $M_{\\!p}=c^2m_{\\mathrm{geo}}/G$, $Q_e=\\sqrt{4\\pi\\varepsilon_0c^4/G}\\,q_{\\mathrm{geo}}$, $J_{\\mathrm{ang}}=M_{\\!p}c\\,a_{\\mathrm{geo}}$, and $\\Phi_B=4\\pi p_{\\mathrm{geo}}/\\alpha$.\n\nThe mass, charge, angular momentum and flux are inputs to this dictionary; their primitive or derived status in any physical model is framework-specific. No field equation, Maxwell postulate, matter law, or empirical value is part of this definition.",
+          "relevant_hypotheses_and_conventions": "The excerpt is the complete current Definition section. Preserve its stated hypotheses, units, sign/gauge conventions, and conditional status.",
+          "supplier_proof_status": "Carrier metadata: status=published; kind=definition; provenance.proof=not-applicable; verification={\"verified\":{\"model\":\"gpt-6-luna, gpt-6.1-sol, and delegated Codex review/repair agents; see completed run evidence\",\"verdict\":\"Owner accepted completed review and adjudication evidence for publication\",\"date\":\"2026-10-15\",\"scope\":\"Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report.\",\"evidence\":\"research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json\",\"publication\":\"research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json\",\"delegated_by\":\"owner; publication instruction 2026-10-15\"}}. Outside this run; no local readiness assertion is made. No independent acceptance is inferred.",
+          "consumer_use": "Supplies $kappa>0$ and its geometric normalization."
+        },
+        {
+          "supplier": "thm-emg-field-normalization-equivalence",
+          "carrier": "items/thm-emg-field-normalization-equivalence.md",
+          "status": "Current carrier section inspected; status=published; kind=theorem; provenance.proof=ai-altered; verification={\"verified\":{\"model\":\"gpt-6-luna, gpt-6.1-sol, and delegated Codex review/repair agents; see completed run evidence\",\"verdict\":\"Owner accepted completed review and adjudication evidence for publication\",\"date\":\"2026-10-15\",\"scope\":\"Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report.\",\"evidence\":\"research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json\",\"publication\":\"research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json\",\"delegated_by\":\"owner; publication instruction 2026-10-15\"}}.",
+          "source_section": "Statement",
+          "exact_statement": "Let $(M,g,N,o)$, $F$, $\\kappa$, $\\mu_0$, $\\alpha$ and $\\mathcal F=\\alpha F$ be as in [[def-emg-geometric-scaling]], with curvature tensors defined by [[def-gr-curvature-tensor-and-derived-tensors]]. Let $\\Lambda\\in\\mathbb R$ be a constant. Define the quadratic tensor\n\n$$\\mathcal Q_{ab}(g,F):=F_{ac}F_b{}^c-\\frac14g_{ab}F_{cd}F^{cd},$$\n\nwhere indices are raised with $g^{-1}$. Then the following equations for the same metric and two-form are equivalent:\n\n$$G_{ab}(g)+\\Lambda g_{ab}=\\frac{\\kappa}{\\mu_0}\\mathcal Q_{ab}(g,F),$$\n\n$$G_{ab}(g)+\\Lambda g_{ab}=2\\mathcal Q_{ab}(g,\\mathcal F),$$\n\n$$\\operatorname{Ric}_{ab}(g)-\\Lambda g_{ab}=2\\mathcal Q_{ab}(g,\\mathcal F).$$\n\nThese are algebraic equivalences between tensor equations. No Maxwell equation, matter model, limiting procedure or physical solution is assumed.",
+          "relevant_hypotheses_and_conventions": "The excerpt is the complete current Statement section. Preserve its stated hypotheses, units, sign/gauge conventions, and conditional status.",
+          "supplier_proof_status": "Carrier metadata: status=published; kind=theorem; provenance.proof=ai-altered; verification={\"verified\":{\"model\":\"gpt-6-luna, gpt-6.1-sol, and delegated Codex review/repair agents; see completed run evidence\",\"verdict\":\"Owner accepted completed review and adjudication evidence for publication\",\"date\":\"2026-10-15\",\"scope\":\"Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report.\",\"evidence\":\"research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json\",\"publication\":\"research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json\",\"delegated_by\":\"owner; publication instruction 2026-10-15\"}}. Outside this run; no local readiness assertion is made. No independent acceptance is inferred.",
+          "consumer_use": "Supplies the quadratic Maxwell tensor and the $kappa/mu_0$ normalization."
+        },
+        {
+          "supplier": "def-gr-curvature-tensor-and-derived-tensors",
+          "carrier": "items/def-gr-curvature-tensor-and-derived-tensors.md",
+          "status": "Current carrier section inspected; status=published; kind=definition; provenance.proof=not-applicable; verification={\"precheck\":\"n/a\"}.",
+          "source_section": "Definition",
+          "exact_statement": "Let $(M,g,N)$ be a time-oriented smooth Lorentzian four-manifold\n([[def-gr-smooth-lorentzian-objects]]) with metric-selected connection\n$\\nabla$ ([[def-gr-metric-selected-connection]]), whose existence and\nuniqueness are supplied by\n[[thm-gr-nondegenerate-levi-civita-and-tensor-derivative]]; that theorem also\nextends $\\nabla$ to a derivative on tensor fields commuting with contractions\nand annihilating $g$ and $g^{-1}$. Let $U\\subseteq M$ be open and let\n$X,Y,Z$ be smooth vector fields on $U$; brackets are those of\n[[def-lie-bracket-of-smooth-vector-fields]], and contractions those of\n[[def-contraction-of-a-mixed-tensor]].\n\n**(a) The curvature operator.** The **curvature operator** of $\\nabla$ is the\nassignment\n\n$$R(X,Y)Z:=\\nabla_X\\nabla_YZ-\\nabla_Y\\nabla_XZ-\\nabla_{[X,Y]}Z .$$\n\nThe right-hand side is a smooth vector field on $U$: $\\nabla_YZ$ is smooth\nbecause $\\nabla$ is an affine connection\n([[def-affine-connection-on-a-smooth-manifold]]), $[X,Y]$ is smooth, and\n$\\nabla_X(\\cdot)$ and $\\nabla_{[X,Y]}(\\cdot)$ preserve smoothness. The\nassignment is defined for the given smooth fields; that its value at a point\ndepends only on the values of $X,Y,Z$ at that point, so that $R$ is a smooth\ntensor field of type $(1,3)$, is the content of\n[[thm-gr-curvature-tensoriality-and-coordinate-formula]] clause (a), and\nlikewise the algebraic symmetries used below are proved in\n[[thm-gr-curvature-algebraic-symmetries]].\n\n**(b) Component functions.** Let $(V,x)$ be a smooth chart of $M$ and let\n$\\Gamma^a{}_{bc}$ be the Christoffel symbols of $\\nabla$ in this chart,\ncharacterized by $\\nabla_{\\partial_b}\\partial_c=\\sum_a\\Gamma^a{}_{bc}\\partial_a$\n([[def-christoffel-symbols-of-an-affine-connection]]); the coordinate fields\ncommute, so $\\nabla_{\\partial_c}\\partial_d$ and $\\nabla_{\\partial_d}\\partial_c$\nare obtained from the same symbols. The **components** of the curvature in the\nchart are the smooth functions $R^a{}_{bcd}$ on $V$ defined by\n\n$$R(\\partial_c,\\partial_d)\\partial_b=\\sum_a R^a{}_{bcd}\\,\\partial_a .$$\n\nThe first index is the output slot, the second is the differentiated slot and\nthe last two are the two directions of the loop; indices are $a,b,c,d=0,1,2,3$\nand the Einstein summation convention of\n[[def-gr-smooth-lorentzian-objects]] applies.\n\n**(c) Lowered tensor, Ricci tensor, scalar curvature, Einstein tensor.** On\nthe chart domain define, using the inverse metric\n$g^{ab}$ of [[def-gr-inverse-metric-and-musical-isomorphisms]],\n\n$$R_{abcd}:=\\sum_e g_{ae}R^e{}_{bcd},\\qquad \\operatorname{Ric}_{bd}:=\\sum_{a,c}g^{ac}R_{abcd},\\qquad S:=\\sum_{b,d}g^{bd}\\operatorname{Ric}_{bd},\\qquad G_{ab}:=\\operatorname{Ric}_{ab}-\\tfrac12 S\\,g_{ab}.$$\n\nThe fields $R_{abcd}$, $\\operatorname{Ric}_{ab}$, $S$ and $G_{ab}$ are called\nthe **Riemann tensor with lowered indices**, the **Ricci tensor**, the\n**scalar curvature** and the **Einstein tensor** of the metric-selected\nconnection. Tensoriality of $R$ is proved in\n[[thm-gr-curvature-tensoriality-and-coordinate-formula]] clause (a).\nLowering its output slot with the smooth metric and contracting with the\nsmooth inverse metric are intrinsic tensor operations\n([[def-gr-tensor-fields-and-components]] clauses (b)-(c),\n[[def-contraction-of-a-mixed-tensor]]). Thus these formulas give smooth\nfields of types $(0,4)$, $(0,2)$, $(0,0)$ and $(0,2)$, respectively,\nindependent of the chart. Symmetry of $\\operatorname{Ric}$ and $G$ is proved\nseparately in [[thm-gr-curvature-algebraic-symmetries]] clause (d).",
+          "relevant_hypotheses_and_conventions": "The excerpt is the complete current Definition section. Preserve its stated hypotheses, units, sign/gauge conventions, and conditional status.",
+          "supplier_proof_status": "Carrier metadata: status=published; kind=definition; provenance.proof=not-applicable; verification={\"precheck\":\"n/a\"}. Outside this run; no local readiness assertion is made. No independent acceptance is inferred.",
+          "consumer_use": "Supplies the Einstein-tensor and curvature sign convention."
+        },
+        {
+          "supplier": "def-countable-choice",
+          "carrier": "items/def-countable-choice.md",
+          "status": "Current carrier section inspected; status=published; kind=definition; provenance.proof=not-applicable; verification={\"repair\":\"research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-countable-choice.json\"}.",
+          "source_section": "Definition",
+          "exact_statement": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "relevant_hypotheses_and_conventions": "The excerpt is the complete current Definition section. Preserve its stated hypotheses, units, sign/gauge conventions, and conditional status.",
+          "supplier_proof_status": "Carrier metadata: status=published; kind=definition; provenance.proof=not-applicable; verification={\"repair\":\"research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-countable-choice.json\"}. Outside this run; no local readiness assertion is made. No independent acceptance is inferred.",
+          "consumer_use": "Records the exact inherited $mathrm{AC}_omega$ convention of the residual supplier, without strengthening it to full choice."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-28 author self-review",
+        "notes": "Reviewed every conditional hypothesis, the exact supplier interface, sign and normalization conventions, and the stated limits on existence, observation, or physical interpretation."
+      },
+      "finite_checks": []
+    }
+  }
+}

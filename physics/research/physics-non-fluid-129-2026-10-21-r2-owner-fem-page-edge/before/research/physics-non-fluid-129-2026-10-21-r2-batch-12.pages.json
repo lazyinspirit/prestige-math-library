@@ -1,0 +1,336 @@
+[
+  {
+    "order": 721,
+    "id": "emx-compatible-finite-elements",
+    "kind": "A",
+    "category": "classical-electromagnetism",
+    "library": "physics",
+    "title": "Compatible finite elements, constraints and coercive error control",
+    "companion": "emx-compatible-finite-elements-examples",
+    "requires": [
+      "discrete-de-rham-complexes-and-edge-elements",
+      "emx-compatible-matrix-evolution",
+      "emx-weak-boundary-energy",
+      "lax-milgram-and-weak-elliptic-solutions"
+    ],
+    "items": [
+      {
+        "id": "def-emx-whitney-semidescretization",
+        "kind": "definition",
+        "domain": "physics",
+        "library": "physics",
+        "title": "PEC Whitney edge-face Maxwell semidiscretization",
+        "deps": [
+          "def-countable-choice",
+          "def-em-si-conventions",
+          "def-emx-finite-energy-boundary-model",
+          "def-emx-matrix-maxwell-system",
+          "def-na-hcurl-space",
+          "def-na-hdiv-space",
+          "def-na-lowest-order-whitney-de-rham-spaces",
+          "def-na-zero-tangential-hcurl",
+          "def-sobolev-space-wkp-and-its-norm",
+          "thm-na-lowest-order-discrete-de-rham-cohomology-and-harmonic-modes"
+        ],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "def-em-si-conventions": "formulation-prerequisite",
+          "def-emx-finite-energy-boundary-model": "formulation-prerequisite",
+          "def-emx-matrix-maxwell-system": "mathematical-premise",
+          "def-na-hcurl-space": "mathematical-premise",
+          "def-na-hdiv-space": "mathematical-premise",
+          "def-na-lowest-order-whitney-de-rham-spaces": "mathematical-premise",
+          "def-na-zero-tangential-hcurl": "mathematical-premise",
+          "def-sobolev-space-wkp-and-its-norm": "mathematical-premise",
+          "thm-na-lowest-order-discrete-de-rham-cohomology-and-harmonic-modes": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Long Chen, Finite Element Methods for Maxwell Equations, complete University of California, Irvine lecture notes, updated May 17 2024",
+              "url": "https://www.math.uci.edu/~chenlong/226/FEMMaxwell.pdf",
+              "locator": "Entire 10-page PDF inspected. Sections 1.1-1.3, PDF pp. 1-6: lowest-order Nedelec edge basis and circulations, RT0 face fluxes, Stokes commuting identity, and the limitation of canonical moments to sufficiently smooth fields. Section 2, PDF pp. 6-8: PEC H0(curl) variational formulation."
+            },
+            {
+              "title": "Ralf Hiptmair, Finite elements in computational electromagnetism, Acta Numerica 11 (2002), pp. 237-339, complete author-hosted PDF",
+              "url": "https://people.math.ethz.ch/~hiptmair/Courses/CEM/HIP02.pdf",
+              "locator": "Entire 103-page PDF inspected. Sections 2.3-2.4, printed pp. 248-252: weak material laws and H(curl) graph-space conventions. Sections 3.1-3.3, printed pp. 255-268: oriented cochains, Whitney edge/face spaces, incidence matrices, cohomology, and Galerkin mass matrices."
+            },
+            {
+              "title": "Douglas N. Arnold, Richard S. Falk, and Ragnar Winther, Finite element exterior calculus: from Hodge theory to numerical stability, Bulletin of the American Mathematical Society 47 (2010), pp. 281-354",
+              "url": "https://sites.math.rutgers.edu/~falk/papers/bulletin-orig.pdf",
+              "locator": "Entire 70-page PDF inspected. Sections 5.2-5.3, PDF pp. 49-53: degrees of freedom, conforming assembly, and Whitney forms; Section 5.6, PDF pp. 57-60: discrete de Rham complexes and cohomology."
+            }
+          ]
+        },
+        "dependency_level": 1,
+        "physical_scope": "A finite-dimensional, lowest-order, PEC edge-face Galerkin model of linear Maxwell evolution in a bounded laboratory polyhedron. Static measurable uniformly positive symmetric permittivity and permeability, and an optional bounded symmetric nonnegative conductivity field, are explicit model data in SI units. The definition asserts no continuum convergence, no existence of a continuum solution, no arbitrary H(curl) edge trace, and no empirical claim.",
+        "aliases": [],
+        "statement": "Assume Countable Choice as in the real L^2 and weak-derivative conventions. Let I be a nonempty open interval in R, and let Omega be a nonempty bounded Lipschitz polyhedron in one SI laboratory frame under [[def-em-si-conventions]]. Let T be a finite matching affine tetrahedral mesh with realization closure(Omega), with mesh and orientation conventions as in [[def-na-lowest-order-whitney-de-rham-spaces]]. Use the real graph space H(curl;Omega) of [[def-na-hcurl-space]] and define H_0(curl;Omega) by the closure of C_c^\\infty(Omega;R^3) in that graph norm, as in [[def-na-zero-tangential-hcurl]]. Define H_0^1(Omega) as the closure of C_c^\\infty(Omega;R) in W^{1,2}(Omega;R), using the norm and closure conventions of [[def-sobolev-space-wkp-and-its-norm]].\n\nLet W_h^0 be the continuous piecewise P1 scalar space, where P1(K) is the real scalar-polynomial space of total degree at most one on tetrahedron K. On K with barycentric coordinates lambda_0,...,lambda_3, the lowest-order Whitney edge space is spanned by phi_ij=lambda_i grad(lambda_j)-lambda_j grad(lambda_i) for its six oriented edges. Globally N_h^1 consists of these piecewise fields with one common oriented circulation integral_e u dot t_e ds on each shared edge e, where t_e is its chosen unit tangent; it is H(curl)-conforming. The face space N_h^2 consists of piecewise RT0 fields, RT0(K)={x -> a+c x:a in R3,c in R}, with one common oriented flux integral_F u dot n_F dS on each shared face F, where n_F is its oriented unit normal; it is H(div)-conforming in the graph space [[def-na-hdiv-space]]. N_h^3 consists of cellwise constants. These spaces are the full spaces in [[def-na-lowest-order-whitney-de-rham-spaces]]. Set S_h := W_h^0 intersect H_0^1(Omega), V_h := N_h^1 intersect H_0(curl;Omega), and M_h := N_h^2. The finite-dimensional map grad:S_h -> V_h is well-defined: for q in S_h, its weak gradient is L^2, curl(grad q)=0 distributionally, and a sequence from C_c^\\infty converging to q in W^{1,2} has gradients converging to grad q in H(curl); also, on each tetrahedron grad q is constant and its common edge circulation is the endpoint difference of the single continuous function q. Take the canonical full-space nodal and edge reference bases from [[def-na-lowest-order-whitney-de-rham-spaces]]. Since S_h and V_h are finite-dimensional subspaces of the full nodal and edge spaces, choose any bases chi_1,...,chi_ng of S_h and phi_1,...,phi_ne of V_h obtained by dimensionless real linear combinations of those reference bases. Choose psi_1,...,psi_nb for M_h dual to all oriented face-flux degrees of freedom, and theta_1,...,theta_nc for N_h^3 dual to the cell-integral degrees of freedom, with theta_l=|K_l|^-1 on cell K_l and zero on the other cells. Thus chi_j is dimensionless, phi_i has units m^-1, psi_alpha has units m^-2, and theta_l has units m^-3. Define the real coordinate matrices C,D,G by curl(phi_i)=sum_alpha C_{alpha i} psi_alpha, div(psi_alpha)=sum_l D_{l alpha} theta_l, and grad(chi_j)=sum_i G_{ij} phi_i. These matrices are dimensionless representations of the oriented differentials; D is the face-to-cell incidence matrix in the face-moment basis, and changes of basis in S_h,V_h give the corresponding matrices for their PEC subspaces. Because curl grad=0 and div curl=0 on the full finite-element complex, DC=0 and CG=0. Here D denotes only the magnetic face-to-cell incidence matrix.\n\nWrite Sym_3(R) for the real symmetric 3 by 3 matrices. Let epsilon,mu:Omega -> Sym_3(R) be measurable, essentially bounded, time-independent coefficient fields with constants 0<a_epsilon<=b_epsilon<infinity and 0<a_mu<=b_mu<infinity such that almost everywhere\n\n$$a_\\varepsilon |v|^2\\le v\\cdot\\varepsilon(x)v\\le b_\\varepsilon |v|^2,\\qquad a_\\mu |v|^2\\le v\\cdot\\mu(x)v\\le b_\\mu |v|^2\\quad(v\\in\\mathbb R^3).$$\n\nTheir units are F m^-1 and H m^-1. Pointwise inversion makes mu^-1 measurable, symmetric and essentially bounded, with eigenvalues between b_mu^-1 and a_mu^-1. These coefficient fields are explicit local model data; no material-realization or constitutive derivation is asserted. Let sigma:Omega -> Sym_3(R) be another measurable, essentially bounded, time-independent field with sigma(x) positive semidefinite almost everywhere and units S m^-1. Let J_ext:I -> L^2(Omega;R^3) be continuous in time and have units A m^-2.\n\nDefine the real matrices and current-load vector by\n\n$$ (M_e)_{ij}:=\\int_\\Omega \\phi_i\\cdot\\varepsilon\\phi_j\\,dx,\\qquad (M_b)_{\\alpha\\beta}:=\\int_\\Omega \\psi_\\alpha\\cdot\\mu^{-1}\\psi_\\beta\\,dx,\\qquad S_{ij}:=\\int_\\Omega\\phi_i\\cdot\\sigma\\phi_j\\,dx,\\qquad j_i(t):=\\int_\\Omega\\phi_i\\cdot J_{\\rm ext}(x,t)\\,dx.$$\n\nAll integrals are finite because the mesh is finite, its basis functions are piecewise polynomial, and the coefficient fields are essentially bounded. M_e and M_b are symmetric positive definite on nonzero basis spaces: their quadratic forms are the positive coefficient-weighted L^2 norms of the represented fields; if a basis space is zero-dimensional, the positive-definiteness condition is vacuous. S is symmetric positive semidefinite. The oriented matrices satisfy DC=CG=0. The edge coefficients e_i have units V and the edge basis functions units m^-1; the face coefficients b_alpha have units Wb and the face basis functions units m^-2. The incidence matrices C,D,G are dimensionless, M_e has units F, M_b has units H^-1, S has units S, and j has units A.\n\nFor C1 coefficient vectors e:I -> R^ne and b:I -> R^nb, define E_h(t):=sum_i e_i(t)phi_i and B_h(t):=sum_alpha b_alpha(t)psi_alpha, and put H_h:=mu^-1 B_h in L^2. The perfect-electric-conductor (PEC) semidiscrete model is the weak Galerkin system\n\n$$\\int_\\Omega \\bigl(\\varepsilon\\,\\partial_t E_h+\\sigma E_h+J_{\\rm ext}\\bigr)\\cdot v_h\\,dx=\\int_\\Omega H_h\\cdot\\operatorname{curl}v_h\\,dx\\quad(v_h\\in V_h),\\qquad \\partial_t B_h=-\\operatorname{curl}E_h\\quad\\text{in }M_h.$$\n\nHere H_h is required only to be L^2; no H(curl) regularity or boundary trace for it is asserted. Testing the first identity against the edge basis and expanding the second in the face basis gives exactly M_e dot e=C^T M_b b-Se-j and dot b=-Ce, the finite compatible matrix system. The quadratic semidiscrete energy is the finite Joule-valued quantity one-half times the integral of E_h dot epsilon E_h plus B_h dot mu^-1 B_h."
+      },
+      {
+        "id": "pthm-emx-discrete-maxwell-balance",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "library": "physics",
+        "title": "Discrete Maxwell energy balance and exact incidence constraints",
+        "deps": [
+          "def-countable-choice",
+          "def-emx-whitney-semidescretization",
+          "thm-emx-matrix-energy-constraints"
+        ],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "def-emx-whitney-semidescretization": "formulation-prerequisite",
+          "thm-emx-matrix-energy-constraints": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Long Chen, Finite Element Methods for Maxwell Equations, complete University of California, Irvine lecture notes, updated May 17 2024",
+              "url": "https://www.math.uci.edu/~chenlong/226/FEMMaxwell.pdf",
+              "locator": "Entire 10-page PDF inspected. Section 2, PDF pp. 6-8: the weak Maxwell finite-element formulation and the need to distinguish discrete divergence constraints; Section 3, PDF pp. 8-10: the compatible de Rham complex."
+            },
+            {
+              "title": "Ralf Hiptmair, Finite elements in computational electromagnetism, Acta Numerica 11 (2002), pp. 237-339, complete author-hosted PDF",
+              "url": "https://people.math.ethz.ch/~hiptmair/Courses/CEM/HIP02.pdf",
+              "locator": "Entire 103-page PDF inspected. Sections 2.3 and 3.1-3.3, printed pp. 248-268: material-weighted weak forms, incidence coboundaries, Whitney spaces, and the resulting Galerkin mass matrices."
+            },
+            {
+              "title": "Douglas N. Arnold, Richard S. Falk, and Ragnar Winther, Finite element exterior calculus: from Hodge theory to numerical stability, Bulletin of the American Mathematical Society 47 (2010), pp. 281-354",
+              "url": "https://sites.math.rutgers.edu/~falk/papers/bulletin-orig.pdf",
+              "locator": "Entire 70-page PDF inspected. Sections 3.3-3.5 and 5.2, 5.6, PDF pp. 23-27, 49-52, 57-60: compatible subcomplexes, local degrees of freedom, commuting projections, and cohomology."
+            }
+          ]
+        },
+        "dependency_level": 2,
+        "physical_scope": "A conditional finite-dimensional Galerkin deduction for the lowest-order PEC Maxwell semidiscretization defined on a matching tetrahedral mesh with static symmetric uniformly positive material tensors, a symmetric nonnegative conductivity form, continuous forcing, and the stated compatible incidence maps. It gives exact semidiscrete energy and constraint identities, but no continuum convergence claim, no automatic charge-deposition scheme, no claim about actual materials, and no empirical conclusion.",
+        "aliases": [],
+        "statement": "Assume Countable Choice and the semidiscrete model of [[def-emx-whitney-semidescretization]] on a nonempty open time interval I. For every t0 in I, initial vectors e(t0)=e0 and b(t0)=b0, and continuous forcing J_ext:I -> L^2(Omega;R3), the finite compatible matrix system for the edge and face coefficients has a unique C1 solution on all of I. Define\n\n$$W_h(t):=\\frac12\\int_\\Omega\\left(E_h(x,t)\\cdot\\varepsilon(x)E_h(x,t)+B_h(x,t)\\cdot\\mu(x)^{-1}B_h(x,t)\\right)\\,dx,\\qquad q(t):=-G^TM_e e(t).$$\n\nThen for every t in I,\n\n$$\\frac{d}{dt}W_h(t)=-e(t)^TSe(t)-e(t)^Tj(t),\\qquad D b(t)=D b(t_0),\\qquad \\dot q(t)=G^T(Se(t)+j(t)).$$\n\nThe first identity is the exact semidiscrete field-energy balance in joules; e^T S e and e^T j have units watts, representing discrete conductivity loss and source work. The conserved vector D b has units webers and is the face-to-cell magnetic-divergence coordinate. The coordinate q has units coulombs and is the weak discrete-divergence quantity defined by the finite matrix system; dot q has units amperes. This theorem does not infer a nodal charge-deposition method from it.",
+        "strategy": "direct"
+      },
+      {
+        "id": "pthm-emx-coercive-maxwell-galerkin",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "library": "physics",
+        "title": "Coercive shifted Maxwell Galerkin approximation",
+        "deps": [
+          "def-countable-choice",
+          "def-emx-finite-energy-boundary-model",
+          "def-emx-whitney-semidescretization",
+          "def-na-hcurl-space",
+          "def-na-lowest-order-whitney-de-rham-spaces",
+          "def-na-zero-tangential-hcurl",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "thm-lax-milgram",
+          "thm-na-uniformly-bounded-commuting-cochain-projection"
+        ],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "def-emx-finite-energy-boundary-model": "formulation-prerequisite",
+          "def-emx-whitney-semidescretization": "formulation-prerequisite",
+          "def-na-hcurl-space": "mathematical-premise",
+          "def-na-lowest-order-whitney-de-rham-spaces": "mathematical-premise",
+          "def-na-zero-tangential-hcurl": "mathematical-premise",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space": "mathematical-premise",
+          "thm-lax-milgram": "mathematical-premise",
+          "thm-na-uniformly-bounded-commuting-cochain-projection": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Long Chen, Finite Element Methods for Maxwell Equations, complete University of California, Irvine lecture notes, updated May 17 2024",
+              "url": "https://www.math.uci.edu/~chenlong/226/FEMMaxwell.pdf",
+              "locator": "Entire 10-page PDF inspected. Section 2, PDF pp. 6-8: the PEC H0(curl) variational formulation, discrete Poincare argument, and a different saddle-point error estimate; Section 3, PDF pp. 8-10: commuting finite-element subcomplexes."
+            },
+            {
+              "title": "Ralf Hiptmair, Finite elements in computational electromagnetism, Acta Numerica 11 (2002), pp. 237-339, complete author-hosted PDF",
+              "url": "https://people.math.ethz.ch/~hiptmair/Courses/CEM/HIP02.pdf",
+              "locator": "Entire 103-page PDF inspected. Sections 5.1-5.2, printed pp. 307-310: real-frequency Maxwell resonance, failure of coercivity for the indefinite form, and discrete inf-sup error control. The present positive-shift form has a separate local Lax-Milgram proof."
+            },
+            {
+              "title": "Douglas N. Arnold, Richard S. Falk, and Ragnar Winther, Finite element exterior calculus: from Hodge theory to numerical stability, Bulletin of the American Mathematical Society 47 (2010), pp. 281-354",
+              "url": "https://sites.math.rutgers.edu/~falk/papers/bulletin-orig.pdf",
+              "locator": "Entire 70-page PDF inspected. Sections 3.3-3.5 and 5.4-5.5, PDF pp. 23-27 and 54-57: bounded commuting cochain projections, approximation, and the canonical moment-domain limitation."
+            }
+          ]
+        },
+        "dependency_level": 2,
+        "physical_scope": "A conditional static-coefficient, lossless positive-shift weak Maxwell model on a bounded Lipschitz polyhedron with closure-defined PEC electric space and a shape-regular refining family of conforming lowest-order edge spaces. The theorem gives well-posedness and best-approximation convergence in a dimensionally scaled graph norm. It gives no real-frequency uniqueness, no error rate without further regularity, no assertion that any actual material satisfies the model, and no empirical claim.",
+        "aliases": [],
+        "statement": "Let Omega be a nonempty bounded Lipschitz polyhedron in R3 in one SI laboratory frame. Use the real space V:=H_0(curl;Omega), where H_0(curl;Omega) is the graph closure of compactly supported smooth vector fields as defined by the mathematical supplier. Let epsilon,mu:Omega -> Sym_3(R) be static measurable essentially bounded fields with units F m^-1 and H m^-1 and constants 0<a_epsilon<=b_epsilon<infinity and 0<a_mu<=b_mu<infinity such that, almost everywhere,\n\n$$a_\\varepsilon |v|^2\\le v\\cdot\\varepsilon(x)v\\le b_\\varepsilon |v|^2,\\qquad a_\\mu |v|^2\\le v\\cdot\\mu(x)v\\le b_\\mu |v|^2\\quad(v\\in\\mathbb R^3).$$\n\nTake the lossless branch sigma=0 of the semidiscrete Maxwell model. Fix a reference length ell_0>0 in metres, and equip V with the equivalent, dimensionally homogeneous graph norm\n\n$$\\|v\\|_{V,\\ell_0}^2:=\\|v\\|_{L^2(\\Omega)}^2+\\ell_0^2\\|\\operatorname{curl}v\\|_{L^2(\\Omega)}^2.$$\n\nLet s>0 be a real frequency-shift parameter in s^-1, let F:V -> R be a bounded real linear functional scaled so that F(v) has units W s^-1 when v has electric-field units V m^-1, and define\n\n$$a_s(u,v):=\\int_\\Omega\\left(\\mu^{-1}\\operatorname{curl}u\\cdot\\operatorname{curl}v+s^2\\varepsilon u\\cdot v\\right)\\,dx.$$\n\nLet {T_n}_{n>=1} be a shape-regular family of matching affine tetrahedral meshes of closure(Omega), with h_n:=max_{K in T_n} diam(K) tending to zero. For each mesh set V_n:=N_{h_n}^1 intersect H_0(curl;Omega), using the PEC Whitney edge space of [[def-emx-whitney-semidescretization]]. Let\n\n$$\\alpha:=\\min\\{(b_\\mu\\ell_0^2)^{-1},\\,s^2a_\\varepsilon\\},\\qquad M:=\\max\\{(a_\\mu\\ell_0^2)^{-1},\\,s^2b_\\varepsilon\\}.$$\n\nThen there is a unique u in V satisfying a_s(u,v)=F(v) for every v in V. For each n there is a unique Galerkin solution u_n in V_n satisfying a_s(u_n,v_n)=F(v_n) for every v_n in V_n. For every n,\n\n$$\\|u-u_n\\|_{V,\\ell_0}\\le \\frac{M}{\\alpha}\\inf_{v_n\\in V_n}\\|u-v_n\\|_{V,\\ell_0},$$\n\nand u_n converges to u in the V,ell_0 norm as n tends to infinity. Both alpha and M have units (H m)^-1, so their ratio is dimensionless.",
+        "strategy": "direct"
+      },
+      {
+        "id": "pthm-emx-topological-zero-modes",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "library": "physics",
+        "title": "Absolute and PEC-relative discrete Maxwell zero modes",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-dependent-choice",
+          "def-emx-whitney-semidescretization",
+          "def-na-lowest-order-whitney-de-rham-spaces",
+          "lem-na-full-dirichlet-hcurl-regular-decomposition",
+          "thm-na-discrete-compactness-and-poincare-lowest-order-nedelec",
+          "thm-na-lowest-order-discrete-de-rham-cohomology-and-harmonic-modes",
+          "thm-na-uniformly-bounded-commuting-cochain-projection"
+        ],
+        "dependency_roles": {
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-dependent-choice": "mathematical-premise",
+          "def-emx-whitney-semidescretization": "formulation-prerequisite",
+          "def-na-lowest-order-whitney-de-rham-spaces": "mathematical-premise",
+          "lem-na-full-dirichlet-hcurl-regular-decomposition": "mathematical-premise",
+          "thm-na-discrete-compactness-and-poincare-lowest-order-nedelec": "mathematical-premise",
+          "thm-na-lowest-order-discrete-de-rham-cohomology-and-harmonic-modes": "mathematical-premise",
+          "thm-na-uniformly-bounded-commuting-cochain-projection": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Long Chen, Finite Element Methods for Maxwell Equations, complete University of California, Irvine lecture notes, updated May 17 2024",
+              "url": "https://www.math.uci.edu/~chenlong/226/FEMMaxwell.pdf",
+              "locator": "Entire 10-page PDF inspected. Section 3, PDF pp. 8-10: the full finite-element de Rham complex, cohomology, and the caution that exactness depends on domain topology; relative boundary complexes are separately identified."
+            },
+            {
+              "title": "Ralf Hiptmair, Finite elements in computational electromagnetism, Acta Numerica 11 (2002), pp. 237-339, complete author-hosted PDF",
+              "url": "https://people.math.ethz.ch/~hiptmair/Courses/CEM/HIP02.pdf",
+              "locator": "Entire 103-page PDF inspected. Sections 2.4 and 3.1-3.2, printed pp. 251-263: H(curl) kernels, absolute and relative continuous cohomology, oriented cochains, Whitney forms, and the full-complex Betti count."
+            },
+            {
+              "title": "Douglas N. Arnold, Richard S. Falk, and Ragnar Winther, Finite element exterior calculus: from Hodge theory to numerical stability, Bulletin of the American Mathematical Society 47 (2010), pp. 281-354",
+              "url": "https://sites.math.rutgers.edu/~falk/papers/bulletin-orig.pdf",
+              "locator": "Entire 70-page PDF inspected. Sections 3.3-3.5 and 5.6-6.2, PDF pp. 23-27 and 57-61: harmonic spaces, cohomology preservation by bounded cochain projections, full Whitney cohomology, and the distinct complex with essential boundary conditions."
+            }
+          ]
+        },
+        "dependency_level": 2,
+        "physical_scope": "A conditional mathematical statement about the full absolute Whitney mesh complex and the separate closure-defined PEC relative edge complex used by the semidiscrete Maxwell model. The full-complex mode count uses Countable Choice; the relative-family compactness and quotient bound require the stronger choice, regular-decomposition, projection, domain, and mesh assumptions stated. It makes no empirical claim and does not identify relative PEC modes with absolute Betti numbers.",
+        "aliases": [],
+        "statement": "Let T be a finite matching affine tetrahedral mesh whose realization is closure(Omega), with Omega a nonempty bounded Lipschitz polyhedron. Let W_h^0,N_h^1,N_h^2,N_h^3 be the full lowest-order Whitney de Rham spaces of [[def-na-lowest-order-whitney-de-rham-spaces]], and use their real L^2 inner products. Define\n\n$$\\mathcal H_h^1:=\\ker(\\operatorname{curl}|_{N_h^1})\\cap(\\nabla W_h^0)^\\perp,\\qquad \\mathcal H_h^2:=\\ker(\\operatorname{div}|_{N_h^2})\\cap(\\operatorname{curl}N_h^1)^\\perp,\\qquad \\beta_k:=\\dim_{\\mathbb R}H_k(|\\mathcal T|;\\mathbb R)\\quad(k=1,2).$$\n\nUnder Countable Choice, dim_R H_h^1=beta_1 and dim_R H_h^2=beta_2 for the full complex. These are the harmonic complements for the full, absolute finite-element complex.\n\nFor the separate PEC-relative family, assume the full Axiom of Choice, including its Countable Choice and Dependent Choice consequences, and let {T_h} be a shape-regular family of matching affine tetrahedral meshes of the same Omega with h=max_K diam(K)->0. Assume also the exact full-Dirichlet H(curl) regular decomposition and the relative commuting-projection hypotheses stated in Facts & Assumptions below. For each mesh write V_h:=N_h^1 intersect H_0(curl;Omega), S_h:=W_h^0 intersect H_0^1(Omega), K_h:=ker(curl|_{V_h}), B_h:=grad S_h, and H_h^rel:=K_h intersect B_h^\\perp, with orthogonality in real L^2. Put\n\n$$X_h:=\\{v_h\\in V_h:(v_h,\\nabla q_h)_{L^2}=0\\ \\text{for every }q_h\\in S_h\\},\\qquad Z_h:=V_h\\cap K_h^\\perp.$$\n\nThen K_h=B_h direct-sum H_h^rel, every sequence v_h in X_h bounded in H(curl;Omega) has an L^2-convergent subsequence, and there is a constant C independent of h such that ||v_h||_2<=C||curl v_h||_2 for every v_h in Z_h; the constant C has units metres when v_h is an electric field. If H_h^rel contains a nonzero vector for a mesh, that vector lies in X_h and has zero curl, so no curl Poincare inequality holds on that X_h. The full-complex absolute Betti count in the first clause is not asserted for this relative PEC kernel.",
+        "strategy": "direct"
+      }
+    ]
+  },
+  {
+    "order": 722,
+    "id": "emx-compatible-finite-elements-examples",
+    "kind": "B",
+    "category": "classical-electromagnetism",
+    "library": "physics",
+    "title": "Compatible finite elements, constraints and coercive error control — Examples",
+    "companion": "emx-compatible-finite-elements",
+    "requires": [
+      "emx-compatible-finite-elements",
+      "discrete-de-rham-complexes-and-edge-elements",
+      "em-waveguides-and-cavities"
+    ],
+    "items": [
+      {
+        "id": "cex-emx-edge-moment-domain-failure",
+        "kind": "counterexample",
+        "domain": "physics",
+        "library": "physics",
+        "title": "Raw edge sampling is not defined on every H(curl) class",
+        "deps": [
+          "def-emx-whitney-semidescretization",
+          "def-na-hcurl-space",
+          "def-na-lowest-order-whitney-de-rham-spaces",
+          "thm-na-uniformly-bounded-commuting-cochain-projection"
+        ],
+        "dependency_roles": {
+          "def-emx-whitney-semidescretization": "formulation-prerequisite",
+          "def-na-hcurl-space": "mathematical-premise",
+          "def-na-lowest-order-whitney-de-rham-spaces": "mathematical-premise",
+          "thm-na-uniformly-bounded-commuting-cochain-projection": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Long Chen, Finite Element Methods for Maxwell Equations, complete University of California, Irvine lecture notes, updated May 17 2024",
+              "url": "https://www.math.uci.edu/~chenlong/226/FEMMaxwell.pdf",
+              "locator": "Entire 10-page PDF inspected. Section 1.3, PDF pp. 4-5, Remark 1.4: canonical edge and face interpolation require more regularity than H(curl) alone because an edge trace need not be defined."
+            },
+            {
+              "title": "Douglas N. Arnold, Richard S. Falk, and Ragnar Winther, Finite element exterior calculus: from Hodge theory to numerical stability, Bulletin of the American Mathematical Society 47 (2010), pp. 281-354",
+              "url": "https://sites.math.rutgers.edu/~falk/papers/bulletin-orig.pdf",
+              "locator": "Entire 70-page PDF inspected. Sections 5.2 and 5.4-5.5, PDF pp. 49-57: canonical moments use lower-dimensional traces, while bounded cochain projections require a separately smoothed construction."
+            }
+          ]
+        },
+        "dependency_level": 2,
+        "physical_scope": "A counterexample about representative-dependent line sampling of arbitrary real H(curl) equivalence classes along an interior segment, including interior tetrahedral-mesh edges. It does not deny the well-defined polynomial edge degrees of freedom of the Whitney space or the existence of separate smoothed projections under their mesh hypotheses. No measurement or continuum approximation claim is made.",
+        "aliases": [],
+        "statement": "Let Omega be a nonempty open subset of R3 and let e be a closed straight segment of positive length contained in Omega, with an orientation and unit tangent t_e. (This includes any mesh edge contained in the interior of a tetrahedral mesh.) The false claim is that for every real H(curl;Omega) equivalence class [u], the value integral_e u dot t_e ds is independent of the representative and therefore defines raw line sampling on all of H(curl;Omega).",
+        "strategy": "direct"
+      },
+      {
+        "id": "ex-emx-resonance-outside-coercivity",
+        "kind": "example",
+        "domain": "physics",
+        "library": "physics",
+        "title": "A rectangular PEC resonance is outside the positive-shift estimate",
+        "deps": [
+          "def-na-hcurl-space",
+          "def-na-zero-tangential-hcurl",
+          "pthm-em-rectangular-mode-candidates",
+          "pthm-emx-coercive-maxwell-galerkin"
+        ],
+        "dependency_roles": {
+          "def-na-hcurl-space": "mathematical-premise",
+          "def-na-zero-tangential-hcurl": "mathematical-premise",
+          "pthm-em-rectangular-mode-candidates": "physical-result",
+          "pthm-emx-coercive-maxwell-galerkin": "physical-result"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ralf Hiptmair, Finite elements in computational electromagnetism, Acta Numerica 11 (2002), pp. 237-339, complete author-hosted PDF",
+              "url": "https://people.math.ethz.ch/~hiptmair/Courses/CEM/HIP02.pdf",
+              "locator": "Entire 103-page PDF inspected. Section 5.1, printed pp. 307-309: the real-frequency Maxwell source form is indefinite and the nonresonance condition is required for uniqueness."
+            },
+            {
+              "title": "Long Chen, Finite Element Methods for Maxwell Equations, complete University of California, Irvine lecture notes, updated May 17 2024",
+              "url": "https://www.math.uci.edu/~chenlong/226/FEMMaxwell.pdf",
+              "locator": "Entire 10-page PDF inspected. Sections 1.1 and 2, PDF pp. 1-3 and 6-8: explicit lowest-order edge elements and the PEC Maxwell variational setting. The concrete cavity field and kernel calculation are verified locally."
+            }
+          ]
+        },
+        "dependency_level": 3,
+        "physical_scope": "An exact lossless, constant-coefficient rectangular PEC cavity example at one explicitly computed real resonance. The example proves its electric eigenfield lies in the closure-defined H_0(curl) space and is a nonzero kernel vector of the real-frequency weak operator. It does not claim that the positive-shift theorem fails under its stated s>0 hypothesis, nor any empirical cavity measurement.",
+        "aliases": [],
+        "statement": "Let Omega=(0,a) x (0,b) x (0,d) with a,b,d>0 metres, set e_z:=(0,0,1), and take constant scalar epsilon>0 in F m^-1 and mu>0 in H m^-1, with zero conductivity and zero forcing. For integers m,n>=1 define\n\n$$f_{mn}(x,y):=\\sin\\frac{m\\pi x}{a}\\sin\\frac{n\\pi y}{b},\\qquad k_{mn}^2:=\\left(\\frac{m\\pi}{a}\\right)^2+\\left(\\frac{n\\pi}{b}\\right)^2,\\qquad \\omega_{mn}:=\\frac{k_{mn}}{\\sqrt{\\varepsilon\\mu}}>0.$$\n\nFix E_*>0 in V m^-1 and set u(x,y,z):=E_* f_{mn}(x,y)e_z, the spatial electric amplitude. This is the beta=0 TM member of the already verified rectangular mode family; its real time-dependent electric field is u cos(omega_mn t), with the associated magnetic field given by that mode. It satisfies the PEC tangential condition on the four side walls because f_mn vanishes there, and on the end walls because u is parallel to their normal e_z. Define V:=closure(C_c^\\infty(Omega;R3)) in the real H(curl;Omega) graph norm and, for w,v in V, define the real-frequency form\n\n$$a_{\\omega_{mn}}(w,v):=\\int_\\Omega\\left(\\mu^{-1}\\operatorname{curl}w\\cdot\\operatorname{curl}v-\\omega_{mn}^2\\varepsilon w\\cdot v\\right)\\,dx.$$\n\nThis is the weak operator obtained by replacing +s^2 epsilon in the positive-shift problem by -omega_mn^2 epsilon. It has a nonzero kernel at omega_mn.",
+        "strategy": "direct"
+      }
+    ]
+  }
+]

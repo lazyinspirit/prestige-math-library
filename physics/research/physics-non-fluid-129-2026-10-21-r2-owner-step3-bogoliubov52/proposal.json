@@ -1,0 +1,118 @@
+{
+  "version": 1,
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "defect": "reader:57:1 / refuter:57:1, same coordinate-order mismatch",
+  "phase": "read-only diagnosis and concrete source proposal; awaiting root release",
+  "supplier": "thm-nrqmx-finite-mode-bogoliubov",
+  "supplier_original_raw_sha256": "5edfcb6dd512648c4af36e7ec2dd4950fa2bdcc34de3596c39b7e9dd629f8152",
+  "confirmed_defect": "The supplier imports interleaved R,W but writes grouped Sg times R in F2/Proof2.1 and writes W(Sg^Tz) in Statement without defining relabeled Wg. Proof3.1 names Rg,Wg but never defines them. This makes the public Weyl clause false for r=2.",
+  "counterexample": {
+    "r": 2,
+    "U": "diag(1,i)",
+    "V": "0",
+    "grouped_Sg": [
+      [
+        1,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        -1
+      ],
+      [
+        0,
+        0,
+        1,
+        0
+      ],
+      [
+        0,
+        1,
+        0,
+        0
+      ]
+    ],
+    "interleaved_Si": [
+      [
+        1,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        -1
+      ],
+      [
+        0,
+        0,
+        1,
+        0
+      ]
+    ],
+    "e2_test": "a1prime=a1 forces Q1,P1 fixed, so the correct covariance fixes W(e2), the mode1 momentum-label translation. Printed Sg^T e2=-e4 instead requests the negative mode2 momentum-label translation. The explicit Weyl translation formula distinguishes them, e.g. on the product Gaussian."
+  },
+  "proposed_body_changes": [
+    {
+      "item": "thm-nrqmx-finite-mode-bogoliubov",
+      "location": "Statement before Sg",
+      "change": "Define fixed permutation Pi(q1,p1,...,qr,pr)=(q1,...,qr,p1,...,pr), Rg=Pi R, J0=Pi J Pi^T=[[0,I],[-I,0]], and Wg(w)=W(Pi^T w). Use these exact grouped quantities throughout."
+    },
+    {
+      "item": "thm-nrqmx-finite-mode-bogoliubov",
+      "location": "Statement unitary covariance",
+      "change": "State M^*aM=a_prime, M^*RgM=Sg Rg, M^*Wg(w)M=Wg(Sg^T w), and equivalently M^*W(z)M=W((Pi^T Sg Pi)^T z). Keep vacuum number trace(VV*) and all finite-mode/domain/AC claims."
+    },
+    {
+      "item": "thm-nrqmx-finite-mode-bogoliubov",
+      "location": "F2/Proof2.1",
+      "change": "Replace Sg R by Sg Rg and define Q/P block selection from Rg. Compute commutators of transformed grouped quadratures against J0. From Sg J0 Sg^T=J0, invertibility follows by determinants (det Sg)^2 det J0=det J0!=0, and equivalently Sg^T J0 Sg=J0."
+    },
+    {
+      "item": "thm-nrqmx-finite-mode-bogoliubov",
+      "location": "Proof3.1",
+      "change": "Use the same Pi and Si=Pi^T Sg Pi. Apply correct metaplectic interleaved covariance, then M^*Wg(w)M=M^*W(Pi^T w)M=W(Si^T Pi^T w)=W(Pi^T Sg^T w)=Wg(Sg^T w); conjugate R similarly and recombine grouped Q/P. Keep Schwartz preservation and existing vacuum calculation unchanged."
+    },
+    {
+      "item": "thm-nrqmx-gaussian-covariance-uncertainty",
+      "location": "F4 only",
+      "change": "Explicitly identify the interleaved matrix S=Pi^T Sg Pi when invoking Bogoliubov U,V, so the carrier\u2019s existing R,J,W transformation formulas are used in their actual order. No Statement or proof conclusion changes."
+    }
+  ],
+  "consumer_cone": {
+    "current": 12,
+    "old_current_union": 12,
+    "old_basis": "Actual Step2 baseline item dependency/nonlogical/alias edges unioned with current graph; same twelve consumers. Step3 observed producer bytes match current supplier.",
+    "full_current_consumer_reviews": {
+      "cex-nrqmx-infinite-mode-vacuum-warning": "Complete Statement/Facts/proof read. Uses only finite annihilator/vacuum number identity for diagonal U=cosh(s)I,V=sinh(s)I and explicit coordinate dilations. No use of mixed grouped Weyl clause; unchanged with repair.",
+      "cex-qsmx-bogoliubov-zero-mode": "Complete source read. Uses positive-frequency partition theorem only for its exclusion of zero frequency; explicit full occupation sum diverges. No coordinate/Weyl use.",
+      "def-nrqmx-finite-mode-g2-statistic": "Complete Definition read. Uses finite one-mode assignment and count distribution only, all mode ordering r=1. No Weyl relabeling use.",
+      "ex-nrqmx-jc-vacuum-rabi": "Complete source read. Uses unchanged Jaynes\u2013Cummings2x2 eigenblock and fixed autonomous model evolution. No Bogoliubov/Weyl clause.",
+      "ex-nrqmx-single-mode-squeezing": "Complete source read. Explicit one-mode dilation proof, r=1 where grouped and interleaved order coincide. Its Q/P orientation and positive/negative squeeze are unchanged.",
+      "ex-nrqmx-single-photon-antibunching": "Complete source read. Ladder factorial moment and corrected beam-splitter one-quantum output only. Retains ideal count model and no empirical claim.",
+      "post-nrqmx-finite-mode-light-matter-model": "Complete Postulate and Remarks read. Part(c) takes exactly U,V CCR identities and finite unitary implementation; no coordinate-labeled Weyl equality is used. Particle-number/unbounded-domain qualifications remain; no postulate rewrite proposed.",
+      "pthm-nrqmx-beam-splitter-count-statistics": "Complete current Statement/Facts/proof/diagram read. Current proof already uses S=C and state-action creators C^T after conjugating M^*aM=Ca; no additional transpose fix required. Passive V=0 makes mean number of Mvacuum zero, then vacuum phase fixed. Full number/coherent laws and tensor-factorization argument unchanged.",
+      "pthm-nrqmx-finite-mode-loss-channel": "Complete source read. Uses corrected passive beam-splitter number/coherent outputs and full trace-class partial trace with finite-ancilla CP, including endpoints eta=0,1. No grouped Weyl call.",
+      "pthm-nrqmx-jaynes-cummings-blocks": "Complete source read. Uses finite-mode assignment only for model data and RWA choice, then explicit ladders, invariant excitation blocks and self-adjoint direct sum. No Weyl coordinate use.",
+      "thm-nrqmx-gaussian-covariance-uncertainty": "Complete current source read. Uses interleaved R,J,W throughout. F3 metaplectic supplier already supplies correct covariance for any interleaved S; F4 and final sentence of2.1 say same interface for finite U,V without identifying S=Pi^T Sg Pi. Propose proof-only F4 clarification to spell out this conversion after supplier correction; Statement unchanged. Full uncertainty, Gaussian existence, moments and characteristic functions retained.",
+      "thm-qsmx-finite-boson-stability": "Complete source read, plus complete quadratic-certificate Definition. Already explicitly grouped Rg,Jg and certificate Sg; F2 and1.1 use M^*RgM=SgRg correctly. Supplier repair makes this exact cited interface unambiguous. No source rewrite necessary; finite positive-frequency Gibbs and domain conclusions preserved."
+    }
+  },
+  "supplier_reading": "Complete Bogoliubov source, complete finite-mode quadrature/Weyl definition and its proof, complete current metaplectic proof, complete Fock\u2013Schr\u00f6dinger identification proof, and complete grouped boson certificate Definition read. Metaplectic Statement/Facts already fully read in earlier same-owner tasks; current proof reread here. No original/imported mathematics edited and no new external full-text audit asserted.",
+  "writer_condition": "Initial native-state observation has ended52 source jobs but live batch57 alpha task. No production edit performed. Fresh all-native prepared.write_files and root external-owner source scopes must have no overlap at release; then supplier first, optional covariance F4 next, all twelve consumer bindings refreshed.",
+  "ownership": "Same owner retains supplier, all old/current consumers, and any necessary focused repairs; root owns metadata/contracts/guards/recertification/native resolution.",
+  "requested_root_release": "Release only supplier body and covariance F4 clarification, preserving exact current frontmatter, after fresh overlap guard. No source edits until explicit root release.",
+  "no_acceptance_claim": true
+}

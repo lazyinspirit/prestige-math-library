@@ -7,7 +7,7 @@ origin: pipeline
 domain: physics
 library: physics
 physical_scope: A constructed units-labelled tangent-cone optimization illustration with one zero-amount boundary; it makes no thermodynamic-equilibrium, material, or empirical claim.
-dependency_level: 1
+dependency_level: 0
 deps:
   - lem-tdmath-stoichiometric-tangent-cone
 dependency_roles:

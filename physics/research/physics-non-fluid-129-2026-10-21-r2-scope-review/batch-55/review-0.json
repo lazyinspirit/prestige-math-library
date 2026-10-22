@@ -1,0 +1,92 @@
+{
+  "version": 1,
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "batch": "55",
+  "round": 0,
+  "reviewed_items": [
+    "def-nrqmx-finite-hermitian-matrix-exponential",
+    "lem-nrqmx-finite-hermitian-matrix-exponential",
+    "thm-nrqmx-finite-floquet-normal-form",
+    "thm-nrqmx-finite-level-duhamel-error",
+    "thm-nrqmx-floquet-sambe-domain",
+    "alg-nrqmx-floquet-fourier-galerkin",
+    "thm-nrqmx-floquet-galerkin-correctness",
+    "ex-nrqmx-driven-two-level-floquet",
+    "cex-nrqmx-quasienergy-no-order"
+  ],
+  "reviewed_pages": [
+    "nrqmx-floquet-control",
+    "nrqmx-floquet-control-examples"
+  ],
+  "decision": "repair",
+  "reason": "The full batch, approved scope, page prerequisites, and used supplier statements and proofs were reviewed. The conditional Floquet and Sambe arguments are supported; the cited Floquet treatments agree with the normal form and Fourier block conventions. Two local definition issues remain.",
+  "findings": [
+    {
+      "id": "def-nrqmx-finite-hermitian-matrix-exponential",
+      "type": "local",
+      "reason": "The convergence justification uses ||A^k||≤||A||^k without deriving submultiplicativity from the operator-norm definition or noting ||I_d||=1. Add that short derivation in the Definition; the stated exponential and its interface need not change."
+    },
+    {
+      "id": "alg-nrqmx-floquet-fourier-galerkin",
+      "type": "local",
+      "reason": "The Definition includes termination and exact-compression properties, while the algorithm rules require these properties to be established in separate result items. Its total solver call also needs to be covered by a separate termination result, since the current correctness theorem establishes only finite block assembly termination. Clarify the single call by storing its returned record before returning it."
+    },
+    {
+      "id": "alg-nrqmx-floquet-fourier-galerkin",
+      "type": "prerequisite",
+      "reason": "S_tau is specified only on finite Hermitian matrices, so the call requires K_N to be Hermitian. The assigned correctness theorem proves this and depends on the algorithm; use it as justified_by for well-definedness, not as a reverse deps edge."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "lem-nrqmx-finite-hermitian-matrix-exponential",
+      "decision": "accept",
+      "reason": "Its use of the matrix exponential remains valid after adding the missing norm estimate derivation."
+    },
+    {
+      "id": "thm-nrqmx-finite-floquet-normal-form",
+      "decision": "accept",
+      "reason": "Its matrix-exponential use and carried propagator hypotheses remain valid."
+    },
+    {
+      "id": "thm-nrqmx-finite-level-duhamel-error",
+      "decision": "accept",
+      "reason": "Its exponential derivative, unitarity, and integral estimates remain valid."
+    },
+    {
+      "id": "thm-nrqmx-floquet-sambe-domain",
+      "decision": "accept",
+      "reason": "Its exponential differentiability use remains valid; its actual domain and self-adjointness prerequisites were checked."
+    },
+    {
+      "id": "alg-nrqmx-floquet-galerkin",
+      "decision": "accept",
+      "reason": "Its indirect use of the matrix exponential through the Sambe supplier remains valid."
+    },
+    {
+      "id": "ex-nrqmx-driven-two-level-floquet",
+      "decision": "accept",
+      "reason": "The exact propagator and Floquet factorization use remain valid."
+    },
+    {
+      "id": "cex-nrqmx-quasienergy-no-order",
+      "decision": "accept",
+      "reason": "The matrix-exponential branch calculation remains valid."
+    },
+    {
+      "id": "thm-nrqmx-floquet-galerkin-correctness",
+      "decision": "repair",
+      "reason": "Direct consumer of the algorithm. Its existing proof establishes Hermiticity and block assembly termination, but should also establish termination of the complete procedure under the declared totality of S_tau and support the algorithm's justified_by relation."
+    },
+    {
+      "id": "nrqmx-floquet-control",
+      "decision": "accept",
+      "reason": "The page placement remains valid; the proposed definition clarification preserves the item interface."
+    },
+    {
+      "id": "nrqmx-floquet-control-examples",
+      "decision": "accept",
+      "reason": "Its example placements remain valid; the proposed definition clarification preserves the item interface."
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+
+## Example
+
+Let $X=\{-1,+1\}$, $w(-1)=w(+1)=1$, and $T(\sigma)=\sigma$. For a finite field $h\in\mathbb R$, the Gibbs probabilities are
+$$\pi_h(+1)=\frac{e^h}{e^h+e^{-h}},\qquad \pi_h(-1)=\frac{e^{-h}}{e^h+e^{-h}}.$$
+For a sample of $n\ge1$ spins all equal to $+1$, the log likelihood is
+$$\ell(h)=n\left(h-\log(e^h+e^{-h})\right).$$
+It is strictly increasing at every finite $h$, so the likelihood has no finite maximizer. The empirical statistic mean is $1$, a boundary point of $\operatorname{conv}\{-1,+1\}=[-1,1]$.
+
+## Example references
+
+[[thm-csm-frontier-finite-mle-existence]]
+
+[[def-csm-frontier-inverse-finite-exponential]]
+
+## Facts & Assumptions
+
+**Given:** The finite two-state Gibbs family and the hypothetical realized sample $x_i=+1$ for all $i$.
+
+[A1] The sample is a fixed finite IID-model outcome; it is a mathematical example, not an empirical report.
+
+[F1] [[def-csm-frontier-inverse-finite-exponential]]: the normalized mass at field $h$ is proportional to $e^{hT(\sigma)}$.
+
+[F2] [[thm-csm-frontier-finite-mle-existence]]: in a minimal finite exponential family, a finite IID MLE exists exactly when the empirical statistic mean lies in the relative interior of the convex support, and is unique when it exists.
+
+[F3] [[thm-derivative-of-exponential]]: $\exp$ is differentiable on $\mathbb R$ with derivative $\exp$.
+
+[F4] [[thm-logarithm-derivative-and-integral]]: for $s>0$, $\log$ is differentiable with derivative $1/s$.
+
+[F5] [[thm-chain-rule]]: derivatives of scalar compositions obey $(f\circ g)'(h)=f'(g(h))g'(h)$ under the stated differentiability and limit-point hypotheses.
+
+[F6] [[thm-algebra-of-derivatives]]: derivatives of sums and scalar multiples are respectively the sums and scalar multiples of the derivatives.
+
+## Verification
+
+**Given:** The finite family and all-plus sample in the Example.
+
+1.1 The two statistic values are $-1$ and $+1$, so their affine hull is $\mathbb R$, the family is minimal, the convex hull is $[-1,1]$, and the sample mean is $1$, which is not in its interior $(-1,1)$. Hence [F2] already implies there is no finite MLE. [A1, F1, F2, algebra]
+
+2.1 Let $S(h)=e^h+e^{-h}$, which is positive by [F1]. By [F3] and [F5], the two exponential terms have derivatives $e^h$ and $-e^{-h}$; [F6] therefore gives $S'(h)=e^h-e^{-h}$. The identity function has derivative $1$ directly from its difference quotient. Applying the logarithm derivative [F4] and chain rule [F5] to $\ell(h)=n(h-\log S(h))$ gives
+$\ell'(h)=n\left(1-\frac{e^h-e^{-h}}{e^h+e^{-h}}\right)
+=\frac{2ne^{-h}}{e^h+e^{-h}}>0$
+for every finite $h$. Thus each finite $h$ admits a larger likelihood at a slightly greater field, and no finite $h$ maximizes it. [A1, F1, F3, F4, F5, F6, step 1.1, algebra] ∎

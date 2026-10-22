@@ -1,0 +1,11 @@
+Boundary worksheet proposal for physics-non-fluid-129-2026-10-21-r2
+
+40 current scoped carriers and the eight old boundary rows per carrier were inspected. This proposal contains 320 dispositions and current raw SHA-256 guards. It changes only the two files in this proposal directory. Prior contracts, row provenance, historical reviews and source carriers are untouched. No external texts were newly retrieved, and no mathematical acceptance or workflow coverage is asserted.
+
+The proposal maps each source step reference to the actual numbered argument. A reference-audit candidate can be valid as a source anchor while absent from the old contract derivation inventory; root must reconcile that inventory rather than delete the reference. Exact excerpts accompany those flagged rows.
+
+Substantive worksheet repairs include the punctured-domain epsilon limit and impossible singleton barycenter; the explicit fixed temporal endpoints of the band-action variations; critical beta J=1 and both directions of the Curie–Weiss minimizer classification; zero expansion/isotropic Bianchi data; repeated auxiliary spectral values in the C2 projector proof; the excluded invertible-B terminal chart for K=0 in phase parity; and the actual positivity of every FK ratio denominator. The holonomy empty-family heuristic is upheld only because its coordinate sum has four fixed indices and the exponential series has its identity constant term; this explanation is confined to that exact row.
+
+The modular scalar normalization anchors are corrected to the current step 2.2. The high-temperature variance and zero-range anchors are corrected to steps 8.1 and 4.1. Choice rows distinguish explicitly carried AC/CC assumptions from finite explicit selections. Generic absent-biconditional explanations were replaced by claim-specific distinctions; the interval classification, variational Euler equivalence under interior-compact variations, and Curie–Weiss classification retain actual two-direction checks.
+
+No additional scientific-source repair is proposed here. This boundary-only inspection does not certify full proofs or external suppliers. Source bytes may change under separately owned scientific repairs; root must compare the guards and refresh affected proposals before adoption. No recertification or acceptance stamps are supplied.

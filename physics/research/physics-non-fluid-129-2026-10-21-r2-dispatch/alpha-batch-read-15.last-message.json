@@ -1,0 +1,193 @@
+{
+  "group": "e",
+  "batches": ["15"],
+  "pages_read": [
+    "emx-waveguide-scattering-channels",
+    "emx-waveguide-scattering-channels-examples"
+  ],
+  "items_read": [
+    "def-emx-port-scattering-model",
+    "pthm-emx-scattering-contraction",
+    "pthm-emx-scattering-reciprocity",
+    "ex-emx-single-port-lossless-reflection",
+    "ex-emx-omitted-channel-subunitarity"
+  ],
+  "conventions": [
+    {
+      "convention": "Use SI units, real ω > 0, the exp(−iωt) phasor convention, a bounded C1 device region, and C1 phasors extending to a neighborhood of its closure.",
+      "fixed_by": "def-emx-port-scattering-model",
+      "matters_for": [
+        "pthm-emx-scattering-contraction",
+        "pthm-emx-scattering-reciprocity"
+      ]
+    },
+    {
+      "convention": "Port normals point outward from the device. Incoming and outgoing amplitudes have units W^(1/2), and net outward port power is ||b||² − ||a||². Passive-wall power and all unlisted outgoing power are added separately; there is no unlisted incoming power.",
+      "fixed_by": "def-emx-port-scattering-model",
+      "matters_for": [
+        "pthm-emx-scattering-contraction",
+        "pthm-emx-scattering-reciprocity",
+        "ex-emx-single-port-lossless-reflection",
+        "ex-emx-omitted-channel-subunitarity"
+      ]
+    },
+    {
+      "convention": "The finite square scattering map b = Sa assumes a unique linear solution map and the declared finite channel interface. Existence, modal completeness, resonance exclusion, and exact finite truncation of evanescent matching modes are not proved.",
+      "fixed_by": "def-emx-port-scattering-model",
+      "matters_for": [
+        "pthm-emx-scattering-contraction",
+        "pthm-emx-scattering-reciprocity",
+        "ex-emx-single-port-lossless-reflection"
+      ]
+    },
+    {
+      "convention": "Reciprocity uses ordinary transpose and unconjugated bilinear products, with the explicitly assumed boundary pairing a₁ᵀb₂ − b₁ᵀa₂. Power uses a distinct conjugated Hermitian pairing; power normalization alone does not establish reciprocal normalization.",
+      "fixed_by": "def-emx-port-scattering-model",
+      "matters_for": [
+        "pthm-emx-scattering-reciprocity"
+      ]
+    },
+    {
+      "convention": "The contraction deduction uses smooth periodic source-free fields and exactly the stated homogeneous finite Lorentz or Drude closure. Unitarity requires material, wall, and unlisted-output powers to vanish for every input.",
+      "fixed_by": "pthm-emx-scattering-contraction",
+      "matters_for": [
+        "pthm-emx-scattering-reciprocity",
+        "ex-emx-single-port-lossless-reflection",
+        "ex-emx-omitted-channel-subunitarity"
+      ]
+    },
+    {
+      "convention": "P_bulk is a signed operational net cycle-averaged material transfer, not a general local-passivity assertion. Its vanishing, together with vanishing wall and unlisted-output powers for every input, gives unitarity.",
+      "fixed_by": "pthm-emx-scattering-reciprocity",
+      "matters_for": [
+        "pthm-emx-scattering-reciprocity"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-emx-port-scattering-model",
+      "statement": "For each incoming vector a ∈ C^N, assume a unique solution of the adopted linear source-free Maxwell boundary problem and a unique outgoing vector b. The finite scattering matrix is the unique S(ω) ∈ C^(N×N) such that b = S(ω)a, with the stated power bookkeeping and, for reciprocal use, the additional exact bilinear boundary pairing.",
+      "used_by": [
+        "pthm-emx-scattering-contraction",
+        "pthm-emx-scattering-reciprocity",
+        "ex-emx-single-port-lossless-reflection",
+        "ex-emx-omitted-channel-subunitarity"
+      ]
+    },
+    {
+      "id": "pthm-emx-scattering-contraction",
+      "statement": "Under AC_ω, the finite-port assumptions, smooth periodic source-free Maxwell fields, and one stated homogeneous Lorentz or Drude branch, ||a||² − ||S(ω)a||² = P_mat(a) + P_∂(a) + P_other(a) ≥ 0. Consequently S is contractive; if all three powers vanish for every incoming vector, the square matrix S is unitary.",
+      "used_by": [
+        "pthm-emx-scattering-reciprocity",
+        "ex-emx-single-port-lossless-reflection",
+        "ex-emx-omitted-channel-subunitarity"
+      ]
+    },
+    {
+      "id": "pthm-emx-scattering-reciprocity",
+      "statement": "Under AC_ω and the finite-port model, common continuous transpose-symmetric coefficient maps and source-free C1 scattering solutions satisfying the stipulated reciprocal pairing for every pair of inputs imply S(ω)ᵀ = S(ω). The operational phasor power balance implies that S is also unitary when P_bulk(a), P_∂(a), and P_other(a) vanish for every input.",
+      "used_by": []
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-countable-choice",
+      "used_for": "The explicit AC_ω assumption carried into bounded-domain integration and reciprocity.",
+      "opened": true
+    },
+    {
+      "id": "def-euclidean-inner-product",
+      "used_for": "Real componentwise inner products and squared norms in the field and oscillator energy calculation; complex amplitude conventions are defined locally.",
+      "opened": true
+    },
+    {
+      "id": "lem-the-divergence-and-curl-of-a-cross-product",
+      "used_for": "The real C1 divergence identity used in Poynting balance; the reciprocity arguments explicitly extend it complex-bilinearly.",
+      "opened": true
+    },
+    {
+      "id": "thm-algebra-of-derivatives",
+      "used_for": "Componentwise product rules for field and oscillator quadratic energies.",
+      "opened": true
+    },
+    {
+      "id": "thm-divergence-theorem-for-bounded-c-one-euclidean-domains",
+      "used_for": "Conversion of smooth volume divergence to outward boundary flux on the bounded C1 device, under AC_ω.",
+      "opened": true
+    },
+    {
+      "id": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+      "used_for": "Exchange of spatial and temporal integration for continuous integrands on the bounded device over one finite period.",
+      "opened": true
+    },
+    {
+      "id": "pthm-em-macroscopic-maxwell",
+      "used_for": "The smooth macroscopic curl equations, with the batch explicitly imposing zero free current and charge and smooth material states.",
+      "opened": true
+    },
+    {
+      "id": "post-em-material-closure",
+      "used_for": "The precise stationary material-rest-frame convention and the distinction between adopted constitutive branches and deductions.",
+      "opened": true
+    },
+    {
+      "id": "def-em-si-conventions",
+      "used_for": "Field, coefficient, energy, and power units inherited by the phasor and oscillator models.",
+      "opened": true
+    },
+    {
+      "id": "def-em-lab-geometry",
+      "used_for": "The inertial-frame spatial and temporal coordinate interpretation behind the material-rest-frame convention.",
+      "opened": true
+    },
+    {
+      "id": "def-na-hcurl-space",
+      "used_for": "Checking the weak-boundary supplier's real graph-space and distributional-curl conventions; no ordinary L2 boundary trace is inferred.",
+      "opened": true
+    },
+    {
+      "id": "def-na-zero-tangential-hcurl",
+      "used_for": "Checking that the weak-boundary supplier uses the closure-defined PEC space rather than an unsupported trace-kernel identification.",
+      "opened": true
+    },
+    {
+      "id": "cor-cauchy-schwarz-inequality-for-l-two",
+      "used_for": "Checking the weak-boundary supplier's limiting pairings in its PEC energy argument.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "pthm-emx-scattering-contraction",
+      "concern": "The Statement initially fixes one incoming amplitude a and imposes smooth periodic field and material-state hypotheses for that solution, but subsequently concludes contractivity 'for every a'. Make explicit that those solution hypotheses hold for every input of the same scattering map before passing from the fixed-input power balance to a matrix-wide conclusion. The reciprocity theorem already states its corresponding sufficient-case hypotheses with this all-input quantifier.",
+      "severity": "gap-a-reader-closes"
+    },
+    {
+      "id": "ex-emx-single-port-lossless-reflection",
+      "concern": "The Example contains the inline hyperlink 'assume the solution satisfies all hypotheses of [[pthm-emx-scattering-contraction]]'. This violates the statement-first-v1 requirement for an uninterrupted hyperlink-free description; the supplier is already listed in the following Statement references section.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "emx-waveguide-scattering-channels",
+      "to": "emx-anisotropic-reciprocal-optics",
+      "faithful": true,
+      "note": "Checked the reciprocal-phasor definition and Lorentz theorem against their scattering uses. The consumer preserves common continuous coefficients, bounded C1 geometry, C1 phasors, AC_ω, ordinary transpose symmetry, and unconjugated products. The source-free boundary integral is correctly zero; neither passivity nor time reversal is inferred."
+    },
+    {
+      "from": "emx-waveguide-scattering-channels",
+      "to": "emx-passive-dispersive-materials",
+      "faithful": true,
+      "note": "Checked both oscillator postulates. The contraction proof uses their exact constant positive parameters and nonnegative damping, adds its own spatial smoothness and periodicity assumptions, and derives the energy identity locally. The reciprocal theorem's harmonic sufficient cases retain nonzero Lorentz denominators and match the same port-model coefficients."
+    },
+    {
+      "from": "emx-waveguide-scattering-channels",
+      "to": "emx-weak-boundary-energy",
+      "faithful": true,
+      "note": "Checked the finite-energy boundary definition and weak energy theorem. The port definition adopts classical smooth tangential restrictions and derives its impedance-wall power directly. It expressly declines to infer L2 traces from H(curl), and does not use the weak theorem to establish dispersive scattering existence or frequency-domain uniqueness. The port-orientation diagram agrees with the outward-flux convention."
+    }
+  ]
+}

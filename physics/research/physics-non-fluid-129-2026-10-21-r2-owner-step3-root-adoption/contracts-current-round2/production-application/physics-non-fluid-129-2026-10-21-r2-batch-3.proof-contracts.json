@@ -1,0 +1,1520 @@
+{
+  "version": 1,
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "batch": "3",
+  "scope": [
+    "def-emx-continuous-chain-integral",
+    "def-emx-excitation-form",
+    "lem-emx-c1-stokes-on-standard-3-simplex",
+    "pthm-emx-exterior-maxwell",
+    "pthm-emx-duality-vacuum",
+    "ex-emx-topological-flux-sector",
+    "ex-emx-duality-pec-failure"
+  ],
+  "contracts": {
+    "def-emx-continuous-chain-integral": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-smooth-singular-simplex",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a smooth manifold, possibly with boundary. For $k\\ge0$, put\n$$A^k=\\{(t_0,\\ldots,t_k)\\in\\mathbb R^{k+1}:\\textstyle\\sum_i t_i=1\\}.$$\nA **smooth singular $k$-simplex** in $M$ is a map $\\sigma:\\Delta^k\\to M$ for which there are an open set $O\\subseteq A^k$ containing $\\Delta^k$ and a smooth map $\\bar\\sigma:O\\to M$ with $\\bar\\sigma|_{\\Delta^k}=\\sigma$. The simplex and its face maps are [[def-standard-topological-simplex-and-its-affine-face-maps]]. Smoothness into a boundary target is that of [[def-smooth-map-between-manifolds-with-boundary]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-pullback-of-a-differential-form",
+          "source_section": "Definition",
+          "quote": "Let $F:M\\to N$ be smooth, and let $\\omega\\in\\Omega^k(N)$. The **pullback**\n$F^*\\omega$ is the pullback of $\\omega$ viewed as an alternating covariant\n$k$-tensor field:",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-pullback-of-a-covariant-tensor-field",
+          "source_section": "Definition",
+          "quote": "Let $F:M\\to N$ be smooth, and let $T$ be a covariant $k$-tensor field on $N$.\nIts **pullback** $F^*T$ is the covariant $k$-tensor field on $M$ defined by",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-smooth-differential-k-form",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a smooth manifold and $k\\ge 0$. A **smooth differential $k$-form**\non $M$ is a smooth section of $\\bigwedge^kT^*M\\to M$. The space of such forms\nis denoted $\\Omega^k(M)$, and $\\Omega^0(M)=C^\\infty(M)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-continuous-map-top",
+          "source_section": "Definition",
+          "quote": "**Preimage, not image.** $f^{-1}[V] = \\{\\, x \\in X : f(x) \\in V \\,\\}$\nis the preimage in the sense of [[def-injection-surjection-bijection]] and is\ndefined for every function, invertible or not; no inverse function is being\nasserted to exist. Continuity is a condition on preimages throughout, and the\ncorresponding conditions on images define the *open* and *closed* maps of a later\nitem, which are different notions.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-topological-spaces-and-continuous-maps-form-category-top",
+          "source_section": "Statement",
+          "quote": "Topological spaces and continuous maps form a large locally small category\n$\\mathbf{Top}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-standard-topological-simplex-and-its-affine-face-maps",
+          "source_section": "Definition",
+          "quote": "For each integer $n\\geq 0$, the **standard topological $n$-simplex** is\n$$\\Delta^n:=\\left\\{(t_0,\\dots,t_n)\\in\\mathbb R^{n+1}: t_i\\geq 0\\text{ for all }i,\\ \\sum_{i=0}^n t_i=1\\right\\},$$\nwith the subspace topology from $\\mathbb R^{n+1}$. Its vertices are the\nstandard basis vectors $v_0,\\dots,v_n$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-standard-orientation-of-the-affine-simplex",
+          "source_section": "Definition",
+          "quote": "For $k\\ge1$, orient the affine span of the standard simplex $\\Delta^k=[v_0,\\ldots,v_k]$ by the ordered basis\n$$E_1=v_1-v_0,\\ldots,E_k=v_k-v_0.$$\nThe ordered face opposite $v_i$ has the remaining vertices in their original order. Its outward-normal-first boundary orientation is $(-1)^i$ times that ordered orientation. Thus the oriented boundary convention is $\\partial[v_0,\\ldots,v_k]=\\sum_{i=0}^k(-1)^i[v_0,\\ldots,\\widehat v_i,\\ldots,v_k]$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-heine-borel-rn",
+          "source_section": "Statement",
+          "quote": "1. **Closed boxes are compact.** For reals $a_k \\le b_k$ $(k < n)$ the box\n   $Q = \\{\\, x \\in \\mathbb{R}^n : a_k \\le x_k \\le b_k \\text{ for every } k < n \\,\\}$\n   is a compact subset of $(\\mathbb{R}^n, d_2)$ (Open cover, subcover, compact metric space, and compact subset of a metric space).\n2. **Heine-Borel.** A subset $K \\subseteq \\mathbb{R}^n$ is a compact subset of\n   $(\\mathbb{R}^n, d_2)$ if and only if $K$ is closed in $\\mathbb{R}^n$\n   (The metric topology: a set is open when every one of its points has a ball around it inside the set; closed means open complement) and bounded\n   (Bounded subset, diameter, distance from a point to a set, and distance between two sets in a metric space).\n3. **The real line.** A subset $K \\subseteq \\mathbb{R}$ is a compact subset of\n   $(\\mathbb{R}, d_{\\mathbb{R}})$, the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   (The absolute value makes $\\mathbb{R}$ a metric space: $d(x,y) = |x-y|$ is a metric, its open balls are the intervals $(x-r, x+r)$, and it is unbounded), if and only if $K$ is closed in\n   $\\mathbb{R}$ and bounded.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-graph-of-continuous-function-on-a-compact-set-has-content-zero",
+          "source_section": "Statement",
+          "quote": "The graph of every continuous $f:C\\to\\mathbb R$ on a compact set $C\\subseteq\\mathbb R^m$ has content zero in $\\mathbb R^{m+1}$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-null-and-content-zero-in-rn",
+          "source_section": "Definition",
+          "quote": "Fix $m\\ge1$. A **closed cube** is a rectangle $\\prod_{j<m}[a_j,a_j+\\ell]$ with $\\ell\\ge0$; its volume is $\\ell^m$. A set $E\\subseteq\\mathbb R^m$ is **null** when, for every $\\varepsilon>0$, it is covered by a sequence of closed cubes whose nonnegative volume series converges with sum at most $\\varepsilon$. It has **content zero** when such a cover can be finite.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-finite-sum-laws",
+          "source_section": "Statement",
+          "quote": "Let $a, b, c : \\mathbb{N} \\to \\mathbb{R}$ be sequences of reals, let\n$\\lambda \\in \\mathbb{R}$, and let $m, n \\in \\mathbb{N}$, with finite sums and\nfinite products as in Finite sums and finite products, by recursion. Then:",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-jordan-boundary-criterion",
+          "source_section": "Statement",
+          "quote": "A metric-bounded set $E\\subseteq\\mathbb R^m$ is Jordan measurable if and only\nif its boundary $\\partial E$ is null, equivalently has content zero.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-standard-orientation-of-the-affine-simplex",
+          "source_section": "Definition",
+          "quote": "Orient $\\Delta^0$ as a positive point. It has no faces. For an interval, the displayed boundary is its positive terminal point minus its positive initial point. These coefficients record determinant-line signs on zero-dimensional faces; they do not assert that a one-vertex abstract simplex has two vertex orderings. Boundary orientation is computed at the relative interior of each face, where the simplex is locally a half-space; no smooth structure on general manifolds with corners is used.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-riemann-integral-over-a-jordan-set",
+          "source_section": "Definition",
+          "quote": "Let $E\\subseteq\\mathbb R^m$ be bounded in the metric sense of\n[[def-metric-bounded-diameter]] and Jordan measurable, and let\n$f:E\\to\\mathbb R$ be bounded. Choose a nondegenerate rectangle\n$Q\\supseteq E$, whose existence follows from\n[[def-jordan-inner-and-outer-content]], and define the zero extension\n$$\\widetilde f_Q(x):=\\begin{cases}f(x),&x\\in E,\\\\0,&x\\in Q\\setminus E.\\end{cases}$$\nThe function $f$ is **Riemann integrable over $E$** when $\\widetilde f_Q$ is integrable over $Q$, and then\n$$\\int_Ef:=\\int_Q\\widetilde f_Q.$$\nIndependence of the bounding rectangle, for both integrability and value, is proved in [[lem-jordan-set-integral-well-defined]] and recorded as the definition's forward justification. For $f=1$, the zero extension is $1_E$, so [[thm-jordan-content-and-indicator-integrability]] gives $\\int_E1=\\operatorname{cont}(E)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-continuous-functions-on-compact-jordan-sets-are-integrable",
+          "source_section": "Statement",
+          "quote": "Every continuous real function on a compact Jordan measurable set $E\\subseteq\\mathbb R^m$ is Riemann integrable over $E$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-smooth-singular-chain-and-cochain-complexes",
+          "source_section": "Definition",
+          "quote": "Define the **smooth singular cochain complex** by\n$$C_\\infty^k(M;\\mathbb R)=\\operatorname{Hom}_{\\mathbb R}(C_k^\\infty(M;\\mathbb R),\\mathbb R),\\qquad \\delta\\varphi=\\varphi\\partial.$$\nAs for [[def-real-singular-cochain-complex]], these are arbitrary real functions on the supplied smooth-simplex basis, evaluated by finite sums. Precomposition gives $\\delta^2\\varphi=\\varphi\\partial^2=0$. Define $H_k^\\infty(M;\\mathbb R)=\\ker\\partial_k/\\operatorname{im}\\partial_{k+1}$ and $H_\\infty^k(M;\\mathbb R)=\\ker\\delta^k/\\operatorname{im}\\delta^{k-1}$; both quotients are licensed by square-zero.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-finite-sum",
+          "source_section": "Definition",
+          "quote": "Let $a : \\mathbb{N} \\to \\mathbb{R}$ be a sequence of reals, written $a_k$ for\n$a(k)$. **Finite sums and finite products of $a$ are defined by recursion on the\nupper index**, which is legitimate because of the recursion theorem\n(The recursion theorem). That theorem produces a function of one variable, so the\nrunning index has to be carried along inside the value: applying it to the set\n$A = \\mathbb{N} \\times \\mathbb{R}$, the starting element $(0, 0)$ and the function\n$f(n, s) = (\\sigma(n),\\, s + a_n)$ gives a unique\n$g : \\mathbb{N} \\to \\mathbb{N} \\times \\mathbb{R}$ with",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-multidimensional-integral-properties",
+          "source_section": "Statement",
+          "quote": "Let $Q=\\prod_{j<m}[a_j,b_j]$ be nondegenerate. For integrable\n$f,g:Q\\to\\mathbb R$ and scalars $\\alpha,\\beta$, the function\n$\\alpha f+\\beta g$ is integrable and its integral is\n$\\alpha\\int_Qf+\\beta\\int_Qg$. If $f\\le g$, then\n$\\int_Qf\\le\\int_Qg$. Also $|f|$ is integrable and\n$|\\int_Qf|\\le\\int_Q|f|$. If $a_r<c<b_r$, cutting $Q$ at the coordinate\nhyperplane $x_r=c$ gives two nondegenerate subrectangles; integrability on\n$Q$ is equivalent to integrability on both restrictions, and their integral\nvalues add to the integral over $Q$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-integral-of-a-form-over-a-smooth-singular-simplex",
+          "source_section": "Definition",
+          "quote": "Let $\\sigma:\\Delta^k\\to M$ be a smooth singular simplex and let $\\omega$ be a smooth $k$-form on an open neighbourhood of its image in $M$. For $k\\ge1$ put\n$$T_k=\\{x\\in\\mathbb R^k:x_j\\ge0,\\ \\sum_jx_j\\le1\\},\\qquad a(x)=v_0+\\sum_{j=1}^kx_j(v_j-v_0).$$\nTake a smooth extension $\\bar\\sigma$ near $\\Delta^k$, restrict its domain so that $\\omega$ is defined on its image, and write $a^*\\bar\\sigma^*\\omega=f(x)\\,dx_1\\wedge\\cdots\\wedge dx_k$. Define\n$$\\int_\\sigma\\omega:=\\int_{T_k}f(x)\\,dx.$$\nThe right side is the Jordan-set Riemann integral. In degree zero define $\\int_\\sigma\\omega=\\omega(\\sigma(v_0))$. This fixes the positive point convention. Reversing the domain orientation negates the integral. Independence of other positive affine coordinates is the forward justification [[lem-simplex-integrals-are-independent-of-affine-coordinate-identification]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-c-one-map-and-local-inverse",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be open and $f:U\\to\\mathbb R^n$. The map $f$ is\n**continuously differentiable**, or of class $C^1$, when it is totally\ndifferentiable at every point of $U$ and the entries of its derivative matrix\nare continuous functions on $U$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In coordinates, each pullback coefficient is the finite sum of products described in [F2]. Every form coefficient composed with $\\sigma$ is continuous by [F1] and [F3], and each derivative of $\\sigma$ is continuous by [F1]. Finite sums of continuous real functions are continuous by the triangle inequality. For a product $fg$ at a point $u_0$, first restrict to a neighbourhood where $|g(u)-g(u_0)|<1$, so $|g(u)|\\le |g(u_0)|+1$, then use $|f(u)g(u)-f(u_0)g(u_0)|\\le |f(u)-f(u_0)|(|g(u_0)|+1)+|f(u_0)||g(u)-g(u_0)|$. Continuity of $f$ and $g$ makes the right side arbitrarily small. Induction proves continuity for every finite product, hence $g_\\sigma$ is continuous on $\\Delta^k$. If two smooth extensions of $\\sigma$ are chosen, they agree as functions on the relative interior of $\\Delta^k$, which is open in its affine span; hence their tangential derivatives and pullback coefficients agree there. For any boundary point $u$, the points $u_s=(1-s)u+s b$, where $b=(1/(k+1),\\ldots,1/(k+1))$ and $0<s\\le1$, have all coordinates positive and coordinate sum below $1$, so they lie in the relative interior and converge to $u$. Continuity of both coefficient functions makes them equal at $u$ too. Thus $g_\\sigma$ is independent of the extension. No immersion is needed; when $D\\sigma_u$ has rank below $k$, alternation makes the pullback coefficient zero at $u$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The set $\\Delta^k$ in [F4] is closed and bounded, hence compact by [F5]. Its boundary consists of its coordinate faces $u_i=0$ and its upper face $\\sum_i u_i=1$. If $k=1$, these are the two endpoints $0,1$, covered by two intervals of arbitrarily small total length, so the boundary has content zero by [F7]. If $k\\ge2$, each coordinate face is the graph of the constant zero function over its closed bounded coordinate projection, and the upper face is the graph of $u_k=1-\\sum_{i<k}u_i$ over the closed bounded simplex $\\{u_i\\ge0,\\sum_{i<k}u_i\\le1\\}$. These bases are compact by [F5]. The upper-face function is continuous because $|\\sum_{i<k}(u_i-v_i)|\\le(k-1)\\|u-v\\|_2$, and the lower-face functions are constant; [F6] therefore makes each face content zero. Given $\\varepsilon>0$, cover each of the finitely many faces by a finite cube family with total volume less than $\\varepsilon/(k+1)$; their union is a finite cover of the boundary with total volume less than $\\varepsilon$ by [F7]. Thus $\\partial\\Delta^k$ has content zero, and [F7] makes the bounded set $\\Delta^k$ Jordan measurable.",
+          "step": "1.2",
+          "inputs": [
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F9], the continuous coefficient $g_\\sigma$ is Riemann integrable on the compact Jordan simplex from step 1.2, so each simplex integral in the Definition is finite.",
+          "step": "2.1",
+          "inputs": [
+            "F9",
+            "step 1.1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "A finite chain has finitely many nonzero coefficients by [F10]. Its integral is therefore a finite sum of finite real numbers; the zero chain has the empty sum, equal to $0$ by [F10]. If a chain is presented with repeated copies of the same simplex, [F10] and linearity combine their coefficients without changing the result. The positive affine parameter orientation is fixed by [F8]. The Definition covers $C^1$ coefficient forms and the continuous coefficients of their first exterior derivatives by [F12]. For smooth $\\omega$, the coefficient and affine parameter integral are exactly those in [F11], so the two integral conventions agree.",
+          "step": "3.1",
+          "inputs": [
+            "F8",
+            "F10",
+            "F11",
+            "F12",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [],
+      "finite_checks_disposition": "No separate finite or computational check applies; the complete argument is analytic in the numbered steps.",
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 3.1 assigns the empty chain its empty sum, which is 0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 gives zero pullback coefficient for the zero form; step 3.1 gives zero for the zero chain."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement defines the integral of one simplex before extending it to finite chains."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition and step 1.1 require no immersion; alternation makes the coefficient vanish at rank-deficient points."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 1.2 proves integrability on the closed simplex including its faces."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.2 covers only the finite list of k+1 faces, and step 3.1 uses a finite chain."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item defines an integral and asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item defines an integral and asserts no equivalence."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-3",
+        "notes": "Reviewed all four proof steps and the 21 exact direct supplier statements. The slot coefficient is continuous by finite product estimates; extension independence follows on the affine interior and then its closure. For k=1 endpoints have content zero; for k>=2 the compact face graphs have content zero and finite union yields the Jordan boundary criterion. Compact-Jordan integrability supplies finite values, including zero chains and rank-deficient maps. Integral linearity on Jordan domains follows by zero extension to one common rectangle. No AC or physical assumptions are used. The reader title specifies the existing Euclidean domain without changing the Definition."
+      }
+    },
+    "def-emx-excitation-form": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-em-lab-geometry",
+          "source_section": "Definition",
+          "quote": "(b) [Slices and spatial structure] For each $t\\in I$ the slice\n$U_t:=\\{p\\in U:t(p)=t\\}$ is carried bijectively onto $\\Omega$ by $r$; the\nconstant vector $n=e_0$ is future unit timelike, and $(e_1,e_2,e_3)$ is the\n$\\delta$-orthonormal positively oriented basis of $n^\\perp$ in which the\ncoordinates of $r$ are expressed.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-em-electromagnetic-tensor",
+          "source_section": "Definition",
+          "quote": "(a) [Components] For a field pair $(E,B)$ of class $C^k$, $k\\ge1$, define the\ncovariant components of the **electromagnetic two-form** $F$ in the chart by\n$F_{00}=0$, $F_{0i}:=-E_i/c$, $F_{ij}:=\\epsilon_{ijk}B_k$\n($i,j,k\\in\\{1,2,3\\}$) and $F_{ab}:=-F_{ba}$, the index-raised components being\n$F^{0i}=E_i/c$, $F^{i0}=-E_i/c$ and $F^{ij}=\\epsilon_{ijk}B_k$. Here\n$\\epsilon_{ijk}$ is the spatial permutation symbol of\n[[def-oriented-minkowski-volume-form]]. Then $F$ is a $C^k$ type-$(0,2)$\ntensor field on $U$ in the sense of\n[[def-ck-tensor-field-on-minkowski-space]], alternating at every event, and the\ncomponents above are exactly its component functions: at $p\\in U$ the tensor\n$F(p)$ is the bilinear form $F(p)(u,w)=F_{ab}(p)u^aw^b$ on $V$ in the\ncoordinates $u^a,w^b$ of $u,w$ in $(e_0,e_1,e_2,e_3)$. Indeed each $F_{ab}$ is\na finite sum of products of the $C^k$ functions $E_i,B_k$ of the chart\ncoordinates with the constants $c,\\epsilon_{ijk}$, hence a $C^k$ function of\n$x(p)$, and the component criterion of\n[[def-ck-tensor-field-on-minkowski-space]] applies.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-em-polarization-magnetization",
+          "source_section": "Definition",
+          "quote": "**(c) [Free sources]** Define $\\rho_f:=\\rho-\\rho_b$ and $J_f:=J-J_b$, in the same units as $\\rho$ and $J$; these are the free charge and free current densities of the model. The decomposition $\\rho=\\rho_f+\\rho_b$, $J=J_f+J_b$ is part of the chosen material model: the same total pair $(\\rho,J)$ with a different pair $(P,M)$ is a different model.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-em-si-conventions",
+          "source_section": "Definition",
+          "quote": "Adopt the SI system of units for this framework, with the following quantity\ntable and conventions; every symbol is a quantity of this framework and the\nlaboratory structure is that of [[def-em-lab-geometry]].",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-emx-lorentz-star",
+          "source_section": "Definition",
+          "quote": "Let $V=\\mathbb R^4$ with ordered coframe $e^0=dx^0,e^1=dx^1,e^2=dx^2,e^3=dx^3$, bilinear form $\\eta=\\operatorname{diag}(-1,1,1,1)$, inverse $\\eta^{-1}=\\eta$, and volume form $\\mathrm{vol}_\\eta=e^0\\wedge e^1\\wedge e^2\\wedge e^3$. For $0\\le k\\le4$, give $\\Lambda^kV^*$ the induced bilinear pairing $\\langle\\alpha,\\beta\\rangle_\\eta:=\\frac1{k!}\\alpha_{\\mu_1\\cdots\\mu_k}\\beta^{\\mu_1\\cdots\\mu_k}$, with indices raised by $\\eta^{-1}$. The Lorentzian Hodge star is the unique linear map $\\star_\\eta:\\Lambda^kV^*\\to\\Lambda^{4-k}V^*$ satisfying $\\alpha\\wedge\\star_\\eta\\beta=\\langle\\alpha,\\beta\\rangle_\\eta\\,\\mathrm{vol}_\\eta$ for all $\\alpha,\\beta\\in\\Lambda^kV^*$. For an increasing index set $I\\subseteq\\{0,1,2,3\\}$, write $e^I$ for the corresponding wedge, $I^c$ for its increasing complement, $s(I,I^c)$ for the sign of the concatenation $(I,I^c)$ relative to $(0,1,2,3)$, and $\\epsilon_I:=\\prod_{i\\in I}\\epsilon_i$, where $\\epsilon_0=-1$ and $\\epsilon_1=\\epsilon_2=\\epsilon_3=1$. The equivalent basis formula is $\\star_\\eta e^I=\\epsilon_I s(I,I^c)e^{I^c}$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-local-coordinate-formula-for-the-exterior-derivative",
+          "source_section": "Statement",
+          "quote": "Let $(U,x^1,\\ldots,x^n)$ be a smooth chart on a smooth manifold and\n$\\omega$ a smooth $k$-form on $U$, with $k\\ge0$. Summing over increasing\n$k$-tuples $I$, and writing $dx^I=dx^{i_1}\\wedge\\cdots\\wedge dx^{i_k}$, if $\\omega=\\sum_I\\omega_I\\,dx^I$, then $$d\\omega=\\sum_I d\\omega_I\\wedge dx^I.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-standard-orientation-of-the-affine-simplex",
+          "source_section": "Definition",
+          "quote": "Orient $\\Delta^0$ as a positive point. It has no faces. For an interval, the displayed boundary is its positive terminal point minus its positive initial point. These coefficients record determinant-line signs on zero-dimensional faces; they do not assert that a one-vertex abstract simplex has two vertex orderings. Boundary orientation is computed at the relative interior of each face, where the simplex is locally a half-space; no smooth structure on general manifolds with corners is used.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-smooth-singular-simplex",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a smooth manifold, possibly with boundary. For $k\\ge0$, put\n$$A^k=\\{(t_0,\\ldots,t_k)\\in\\mathbb R^{k+1}:\\textstyle\\sum_i t_i=1\\}.$$\nA **smooth singular $k$-simplex** in $M$ is a map $\\sigma:\\Delta^k\\to M$ for which there are an open set $O\\subseteq A^k$ containing $\\Delta^k$ and a smooth map $\\bar\\sigma:O\\to M$ with $\\bar\\sigma|_{\\Delta^k}=\\sigma$. The simplex and its face maps are [[def-standard-topological-simplex-and-its-affine-face-maps]]. Smoothness into a boundary target is that of [[def-smooth-map-between-manifolds-with-boundary]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-smooth-singular-chain-and-cochain-complexes",
+          "source_section": "Definition",
+          "quote": "For a smooth manifold $M$, possibly with boundary, let\n$$C_k^\\infty(M;\\mathbb R)=\\mathbb R^{(S_k^\\infty(M))}\\quad(k\\ge0),\\qquad C_k^\\infty(M;\\mathbb R)=0\\quad(k<0),$$\nusing [[def-smooth-singular-simplex]]. It is the subspace of [[def-real-singular-chain-complex]] spanned by the smooth simplices, with the same signed face differential.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-emx-continuous-chain-integral",
+          "source_section": "Definition",
+          "quote": "For a finite real smooth singular $k$-chain $c=\\sum_\\sigma a_\\sigma\\sigma$, define $\\int_c\\omega:=\\sum_\\sigma a_\\sigma\\int_\\sigma\\omega$. The orientation is the fixed standard affine orientation; reversing a chain coefficient reverses its contribution. This definition applies to every continuous form, including forms with continuous first derivatives and their continuous exterior derivatives; $C^1$ means [[def-c-one-map-and-local-inverse]]. For smooth $\\omega$, this is the same affine pullback integral used in [[def-integral-of-a-form-over-a-smooth-singular-simplex]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-integral-of-a-form-over-a-smooth-singular-simplex",
+          "source_section": "Definition",
+          "quote": "Let $\\sigma:\\Delta^k\\to M$ be a smooth singular simplex and let $\\omega$ be a smooth $k$-form on an open neighbourhood of its image in $M$. For $k\\ge1$ put\n$$T_k=\\{x\\in\\mathbb R^k:x_j\\ge0,\\ \\sum_jx_j\\le1\\},\\qquad a(x)=v_0+\\sum_{j=1}^kx_j(v_j-v_0).$$\nTake a smooth extension $\\bar\\sigma$ near $\\Delta^k$, restrict its domain so that $\\omega$ is defined on its image, and write $a^*\\bar\\sigma^*\\omega=f(x)\\,dx_1\\wedge\\cdots\\wedge dx_k$. Define\n$$\\int_\\sigma\\omega:=\\int_{T_k}f(x)\\,dx.$$\nThe right side is the Jordan-set Riemann integral. In degree zero define $\\int_\\sigma\\omega=\\omega(\\sigma(v_0))$. This fixes the positive point convention. Reversing the domain orientation negates the integral. Independence of other positive affine coordinates is the forward justification [[lem-simplex-integrals-are-independent-of-affine-coordinate-identification]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-riemann-integral-over-a-jordan-set",
+          "source_section": "Definition",
+          "quote": "Let $E\\subseteq\\mathbb R^m$ be bounded in the metric sense of\n[[def-metric-bounded-diameter]] and Jordan measurable, and let\n$f:E\\to\\mathbb R$ be bounded. Choose a nondegenerate rectangle\n$Q\\supseteq E$, whose existence follows from\n[[def-jordan-inner-and-outer-content]], and define the zero extension\n$$\\widetilde f_Q(x):=\\begin{cases}f(x),&x\\in E,\\\\0,&x\\in Q\\setminus E.\\end{cases}$$\nThe function $f$ is **Riemann integrable over $E$** when $\\widetilde f_Q$ is integrable over $Q$, and then\n$$\\int_Ef:=\\int_Q\\widetilde f_Q.$$\nIndependence of the bounding rectangle, for both integrability and value, is proved in [[lem-jordan-set-integral-well-defined]] and recorded as the definition's forward justification. For $f=1$, the zero extension is $1_E$, so [[thm-jordan-content-and-indicator-integrability]] gives $\\int_E1=\\operatorname{cont}(E)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-continuous-functions-on-compact-jordan-sets-are-integrable",
+          "source_section": "Statement",
+          "quote": "Every continuous real function on a compact Jordan measurable set $E\\subseteq\\mathbb R^m$ is Riemann integrable over $E$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-c-one-map-and-local-inverse",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be open and $f:U\\to\\mathbb R^n$. The map $f$ is\n**continuously differentiable**, or of class $C^1$, when it is totally\ndifferentiable at every point of $U$ and the entries of its derivative matrix\nare continuous functions on $U$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Each displayed spatial form is an alternating covector field because the coordinate 1-forms are a basis and wedge products are alternating. Since $dt=dx^0/c$, the time-space part of $F$ has $F_{0i}=-E_i/c$, and its spatial part has $F_{ij}=\\epsilon_{ijk}B_k$; hence it matches the existing electromagnetic two-form components. The definitions of $D,H,\\rho_f,J_f$ give exactly the coefficient fields used in $G$ and $\\mathcal J$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "On an oriented spatial 2-surface, the coefficients of $\\mathcal B$ and $\\mathcal D$ have units T and C m$^{-2}$, respectively, so their integrals have units T m$^2$ = Wb and C. The time-space terms have units (s)(V m$^{-1}$)(m) = V s = Wb for $dt\\wedge\\mathcal E$, and (s)(A m$^{-1}$)(m) = A s = C for $dt\\wedge\\mathcal H$. Likewise $\\rho_f\\,vol_3$ and $dt\\wedge\\mathcal J_{\\mathrm{sp}}$ each integrate with units C.",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "A smooth singular simplex has compact Jordan parameter domain $\\Delta^2$ and its pullback coefficient is continuous, so [F8] gives a finite Riemann integral. The same local convention gives finite integrals for continuous spacetime 2-forms and 3-forms on their respective compact parameter simplices. For a smooth form this agrees with the usual simplex integral of [F8]. For $C^1$ coefficients as in [F9], the coordinate formula for $d$ agrees with the standard one on smooth coefficients by [F6]. The definitions assign $F$ and $G$ independently from the field and excitation data; [F5] is not applied as a constitutive law here.",
+          "step": "2.1",
+          "inputs": [
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [],
+      "finite_checks_disposition": "No separate finite or computational check applies; the complete argument is analytic in the numbered steps.",
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Definition requires nonempty open time and spatial domains."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: zero field and source coefficients make the displayed forms zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 identifies each displayed basis coefficient term by term."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: continuous-chain integration permits degenerate smooth simplex maps."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: chain integrals use the entire compact parameter simplex, including its faces."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 2.1 defines a finite sum over the supplied finite chain."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition makes no equivalence claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition makes no equivalence claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-3",
+        "notes": "Reviewed all three steps and every direct prerequisite. The independent F, G and current forms match F0i=-Ei/c with dt=dx0/c; the free/bound decomposition is the supplied C2 material convention. Wedge components carry Wb or C after integration. Continuous coefficients use the level-0 integral; the C1 coordinate derivative is explicitly defined rather than obtained from the smooth-only supplier. No constitutive or current-conservation theorem is asserted by this definition. Title correction removes unsupported conserved; public Definition and scope unchanged. No empirical input or AC."
+      }
+    },
+    "lem-emx-c1-stokes-on-standard-3-simplex": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-emx-continuous-chain-integral",
+          "source_section": "Definition",
+          "quote": "In the fixed positive affine coordinates $u_1,\\ldots,u_k$ on its standard parameter simplex, write the resulting continuous pullback as $\\sigma^*\\omega=g_\\sigma(u)\\,du_1\\wedge\\cdots\\wedge du_k$. Define",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-standard-orientation-of-the-affine-simplex",
+          "source_section": "Definition",
+          "quote": "For $k\\ge1$, orient the affine span of the standard simplex $\\Delta^k=[v_0,\\ldots,v_k]$ by the ordered basis\n$$E_1=v_1-v_0,\\ldots,E_k=v_k-v_0.$$\nThe ordered face opposite $v_i$ has the remaining vertices in their original order. Its outward-normal-first boundary orientation is $(-1)^i$ times that ordered orientation. Thus the oriented boundary convention is $\\partial[v_0,\\ldots,v_k]=\\sum_{i=0}^k(-1)^i[v_0,\\ldots,\\widehat v_i,\\ldots,v_k]$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-newton-leibniz-with-interior-derivative",
+          "source_section": "Statement",
+          "quote": "No derivative of $G$ at either endpoint is assumed, and the two endpoint values assigned to the integrable extension $f$ do not enter the conclusion.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-jordan-fubini-by-sections",
+          "source_section": "Statement",
+          "quote": "Let $E\\subseteq\\mathbb R^{p+q}$ be a bounded Jordan set and let $g:E\\to\\mathbb R$ be Riemann integrable. Suppose that for all $x$ outside a content-zero set $N\\subseteq\\mathbb R^p$, the section $E_x$ is Jordan measurable and $g_x$ is integrable over it. Put $h(x)=\\int_{E_x}g_x$ there and assign arbitrary bounded values to $h$ on $N$, with empty-section integral equal to $0$. Then $h$ is integrable on any rectangle containing the projection of $E$, its integral is independent of that rectangle and of the values on $N$, and\n$$\\int_Eg=\\int h(x)\\,dx.$$\nThe symmetric assertion holds for the other coordinate block.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-change-of-variables-for-compact-jordan-sets",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, let $g:U\\to\\mathbb R^n$ be injective and $C^1$, and suppose $Dg(x)$ is invertible for every $x\\in U$. Let $K\\subseteq U$ be compact and Jordan measurable. For a bounded function $f:g(K)\\to\\mathbb R$, the following are equivalent:",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-multidimensional-integral-properties",
+          "source_section": "Statement",
+          "quote": "Let $Q=\\prod_{j<m}[a_j,b_j]$ be nondegenerate. For integrable\n$f,g:Q\\to\\mathbb R$ and scalars $\\alpha,\\beta$, the function\n$\\alpha f+\\beta g$ is integrable and its integral is\n$\\alpha\\int_Qf+\\beta\\int_Qg$. If $f\\le g$, then\n$\\int_Qf\\le\\int_Qg$. Also $|f|$ is integrable and\n$|\\int_Qf|\\le\\int_Q|f|$. If $a_r<c<b_r$, cutting $Q$ at the coordinate\nhyperplane $x_r=c$ gives two nondegenerate subrectangles; integrability on\n$Q$ is equivalent to integrability on both restrictions, and their integral\nvalues add to the integral over $Q$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-directional-and-partial-derivatives",
+          "source_section": "Definition",
+          "quote": "For a standard basis vector $e_j$ (The standard list $e : n \\to F^{n}$ with $e_i(i) = 1_F$ and $e_i(j) = 0_F$ for $j \\ne i$ is an ordered basis of $F^{n}$; hence $\\dim_F F^{n} = n$, and $F^{0}$ is the zero space with basis $\\varnothing$ and dimension $0$), $D_{e_j}f(a)$ is the **$j$th partial derivative**, written $\\partial_jf(a)$. For $n\\ge1$, these are ordinary vector-valued one-variable derivatives in the sense of The derivative and the Riemann integral of a vector-valued function: an intrinsic derivative and a componentwise integral.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-c-one-map-and-local-inverse",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be open and $f:U\\to\\mathbb R^n$. The map $f$ is\n**continuously differentiable**, or of class $C^1$, when it is totally\ndifferentiable at every point of $U$ and the entries of its derivative matrix\nare continuous functions on $U$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-emx-continuous-chain-integral",
+          "source_section": "Definition",
+          "quote": "Each standard parameter simplex is compact Jordan, so every integral in the Definition exists; this is verified below.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Each $D_i=\\{u_j\\ge0:j\\ne i,\\ \\sum_{j\\ne i}u_j\\le1\\}$ is the standard two-simplex up to a coordinate permutation, and $T$ is the standard three-simplex, so [F9] gives that all are compact Jordan. The coefficient functions $f_i$ and $\\partial_i f_i$ are continuous on them by the $C^1$ hypothesis [F8], so their integrals exist by [F9]. Fix $i$ and fix the other two coordinates in $D_i$. The $u_i$-section of $T$ is $[0,1-\\sum_{j\\ne i}u_j]$. If $1-\\sum_{j\\ne i}u_j>0$, [F3] makes its integral of $\\partial_i f_i$ the upper endpoint value of $f_i$ minus the lower endpoint value. If the upper endpoint is $0$, the section is a singleton: its bounded integrand has zero integral (cover the point by intervals of arbitrarily small length), and the endpoint difference is also zero. Thus the same identity holds for every section. Integrating this identity over $D_i$ by [F4], then summing over $i$, writes $\\int_Td\\eta$ as the sum of all upper endpoint terms minus all lower endpoint terms.",
+          "step": "1.1",
+          "inputs": [
+            "F9",
+            "F3",
+            "F4",
+            "F7",
+            "F8",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "On the three lower faces, in increasing order of their remaining coordinates, the induced boundary integrals are $-\\int f_1du^2\\wedge du^3$ on $u_1=0$, $-\\int f_2du^1\\wedge du^3$ on $u_2=0$, and $-\\int f_3du^1\\wedge du^2$ on $u_3=0$. The first and third signs are the boundary signs in [F2]; the middle face has positive signed face but the restriction of $\\eta$ is already $-f_2du^1\\wedge du^3$. Thus the lower endpoint terms from step 1.1 are exactly the three lower-face contributions to $\\int_{\\partial T}\\eta$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "On the upper face, set $u_1=1-u_2-u_3$. Substitution gives $\\eta|_{u_1+u_2+u_3=1}=(f_1+f_2+f_3)du^2\\wedge du^3$. Its outward normal is proportional to $(1,1,1)$, while the ordered tangent vectors $(-1,1,0),(-1,0,1)$ have cross product $(1,1,1)$, so $(u_2,u_3)$ gives the positive face orientation. The ordered affine face parameters differ from $(u_2,u_3)$ by an affine map with determinant of absolute value $1$; [F5] therefore identifies the upper endpoint sum in step 1.1 with the upper-face integral. Adding the four face contributions using [F6] proves $\\int_Td\\eta=\\int_{\\partial T}\\eta$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5",
+            "F6",
+            "step 1.1",
+            "step 2.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [],
+      "finite_checks_disposition": "No separate finite or computational check applies; the complete argument is analytic in the numbered steps.",
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement fixes the nonempty standard three-simplex T."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: for eta=0 both integrals vanish."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 treats the three coordinate contributions separately."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The result is stated directly on the fixed parameter simplex and has no singular-map rank hypothesis."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 1.1 includes both section endpoints; steps 2.1 and 3.1 account for all four boundary faces."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 2.1 uses the fixed finite face list and finite cube covers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Lemma is an integral identity, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Lemma is an integral identity, not an equivalence."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-3",
+        "notes": "Reviewed all three steps against the eight direct suppliers. Compact Jordan domains are supplied by the level-0 proof; continuous section integrands meet Fubini. Confirmed refuter:3:2 as nonfatal: Newton-Leibniz requires a<b. Added the explicit zero-width singleton case; no claim changes. Lower faces have contributions -f1, -f2, -f3 in increasing remaining coordinates, and the upper (u2,u3) pullback is f1+f2+f3 with positive outward orientation and unit absolute affine Jacobian. All cases, including the collapsed sections, are now covered. No AC or physics premises."
+      }
+    },
+    "pthm-emx-exterior-maxwell": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "post-em-vacuum-maxwell",
+          "source_section": "Postulate",
+          "quote": "(c) [Scope] The postulate contains no magnetic charge: $\\operatorname{div}B=0$\nand no magnetic-source term appears in $\\operatorname{curl}E$. Sources that\nare not locally integrable functions (point or sheet sources) are covered by\nneither branch and require their own definition. The equations are adopted\nclassical vacuum physics in the named inertial chart; they are not deduced from\ncharge conservation, from empirical agreement or from the special-relativity\npostulates, and this item by itself asserts no covariance under changes of\ninertial frame.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-em-polarization-magnetization",
+          "source_section": "Definition",
+          "quote": "$$\\rho_b:=-\\operatorname{div}P,\\qquad J_b:=\\partial_tP+\\operatorname{curl}M.$$",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-emx-excitation-form",
+          "source_section": "Definition",
+          "quote": "When the coefficients are smooth this is the usual exterior derivative. For a continuous spatial 2-form $\\beta_t$ and a finite real smooth singular 2-cycle $z=\\sum_\\sigma c_\\sigma\\sigma$ in $\\Omega$, define its cycle flux at time $t$ by $\\Phi_z(t)=\\sum_\\sigma c_\\sigma\\int_{\\Delta^2}\\sigma^*\\beta_t$, using the standard affine orientation and continuous-chain integral convention of [[def-emx-continuous-chain-integral]].",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-em-si-conventions",
+          "source_section": "Definition",
+          "quote": "Adopt the SI system of units for this framework, with the following quantity\ntable and conventions; every symbol is a quantity of this framework and the\nlaboratory structure is that of [[def-em-lab-geometry]].",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-emx-lorentz-star",
+          "source_section": "Definition",
+          "quote": "Let $V=\\mathbb R^4$ with ordered coframe $e^0=dx^0,e^1=dx^1,e^2=dx^2,e^3=dx^3$, bilinear form $\\eta=\\operatorname{diag}(-1,1,1,1)$, inverse $\\eta^{-1}=\\eta$, and volume form $\\mathrm{vol}_\\eta=e^0\\wedge e^1\\wedge e^2\\wedge e^3$. For $0\\le k\\le4$, give $\\Lambda^kV^*$ the induced bilinear pairing $\\langle\\alpha,\\beta\\rangle_\\eta:=\\frac1{k!}\\alpha_{\\mu_1\\cdots\\mu_k}\\beta^{\\mu_1\\cdots\\mu_k}$, with indices raised by $\\eta^{-1}$. The Lorentzian Hodge star is the unique linear map $\\star_\\eta:\\Lambda^kV^*\\to\\Lambda^{4-k}V^*$ satisfying $\\alpha\\wedge\\star_\\eta\\beta=\\langle\\alpha,\\beta\\rangle_\\eta\\,\\mathrm{vol}_\\eta$ for all $\\alpha,\\beta\\in\\Lambda^kV^*$. For an increasing index set $I\\subseteq\\{0,1,2,3\\}$, write $e^I$ for the corresponding wedge, $I^c$ for its increasing complement, $s(I,I^c)$ for the sign of the concatenation $(I,I^c)$ relative to $(0,1,2,3)$, and $\\epsilon_I:=\\prod_{i\\in I}\\epsilon_i$, where $\\epsilon_0=-1$ and $\\epsilon_1=\\epsilon_2=\\epsilon_3=1$. The equivalent basis formula is $\\star_\\eta e^I=\\epsilon_I s(I,I^c)e^{I^c}$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-emx-lorentz-star-square",
+          "source_section": "Statement",
+          "quote": "For the orientation and signature $\\eta=\\operatorname{diag}(-1,1,1,1)$ fixed in [[def-emx-lorentz-star]], the Hodge star satisfies $\\star_\\eta^2=(-1)^{k(4-k)+1}\\operatorname{id}$ on $k$-forms, $0\\le k\\le4$. In particular, on two-forms $\\star_\\eta^2=-\\operatorname{id}$, $\\star_\\eta(dx^0\\wedge dx^1)=-dx^2\\wedge dx^3$, and $\\star_\\eta(dx^2\\wedge dx^3)=dx^0\\wedge dx^1$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-directional-and-partial-derivatives",
+          "source_section": "Definition",
+          "quote": "For a standard basis vector $e_j$ (The standard list $e : n \\to F^{n}$ with $e_i(i) = 1_F$ and $e_i(j) = 0_F$ for $j \\ne i$ is an ordered basis of $F^{n}$; hence $\\dim_F F^{n} = n$, and $F^{0}$ is the zero space with basis $\\varnothing$ and dimension $0$), $D_{e_j}f(a)$ is the **$j$th partial derivative**, written $\\partial_jf(a)$. For $n\\ge1$, these are ordinary vector-valued one-variable derivatives in the sense of The derivative and the Riemann integral of a vector-valued function: an intrinsic derivative and a componentwise integral.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-clairaut-schwarz-mixed-partials",
+          "source_section": "Statement",
+          "quote": "If $f$ is $C^2$ on an open subset of $\\mathbb R^m$, then $\\partial_i\\partial_j f=\\partial_j\\partial_i f$ for every pair of coordinate indices.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-standard-orientation-of-the-affine-simplex",
+          "source_section": "Definition",
+          "quote": "For $k\\ge1$, orient the affine span of the standard simplex $\\Delta^k=[v_0,\\ldots,v_k]$ by the ordered basis\n$$E_1=v_1-v_0,\\ldots,E_k=v_k-v_0.$$\nThe ordered face opposite $v_i$ has the remaining vertices in their original order. Its outward-normal-first boundary orientation is $(-1)^i$ times that ordered orientation. Thus the oriented boundary convention is $\\partial[v_0,\\ldots,v_k]=\\sum_{i=0}^k(-1)^i[v_0,\\ldots,\\widehat v_i,\\ldots,v_k]$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-smooth-singular-simplex",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a smooth manifold, possibly with boundary. For $k\\ge0$, put\n$$A^k=\\{(t_0,\\ldots,t_k)\\in\\mathbb R^{k+1}:\\textstyle\\sum_i t_i=1\\}.$$\nA **smooth singular $k$-simplex** in $M$ is a map $\\sigma:\\Delta^k\\to M$ for which there are an open set $O\\subseteq A^k$ containing $\\Delta^k$ and a smooth map $\\bar\\sigma:O\\to M$ with $\\bar\\sigma|_{\\Delta^k}=\\sigma$. The simplex and its face maps are [[def-standard-topological-simplex-and-its-affine-face-maps]]. Smoothness into a boundary target is that of [[def-smooth-map-between-manifolds-with-boundary]].",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-smooth-singular-chain-and-cochain-complexes",
+          "source_section": "Definition",
+          "quote": "For a smooth manifold $M$, possibly with boundary, let\n$$C_k^\\infty(M;\\mathbb R)=\\mathbb R^{(S_k^\\infty(M))}\\quad(k\\ge0),\\qquad C_k^\\infty(M;\\mathbb R)=0\\quad(k<0),$$\nusing [[def-smooth-singular-simplex]]. It is the subspace of [[def-real-singular-chain-complex]] spanned by the smooth simplices, with the same signed face differential.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-emx-c1-stokes-on-standard-3-simplex",
+          "source_section": "Statement",
+          "quote": "Using the continuous-form chain integral of [[def-emx-continuous-chain-integral]],",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-emx-continuous-chain-integral",
+          "source_section": "Definition",
+          "quote": "Let $V\\subseteq\\mathbb R^n$ be open, let $1\\le k\\le n$, let $\\omega$ be a continuous $k$-form on $V$, and let $\\sigma:\\Delta^k\\to V$ be a smooth singular simplex. Here a continuous $k$-form is a field of alternating covariant $k$-tensors with continuous coordinate coefficient functions; for smooth forms this is the usual type of [[def-smooth-differential-k-form]]. No injectivity or immersion is required. Extend pullback to this regularity by the slot formula",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Expand in the fixed chart. The spatial part of $dF$ is $(\\operatorname{div}B)vol_3$ and its $dt$ part is $dt\\wedge(\\partial_t\\mathcal B+d_\\Omega\\mathcal E)$, where $d_\\Omega\\mathcal E=(\\partial_2E_3-\\partial_3E_2)dx^2\\wedge dx^3+(\\partial_3E_1-\\partial_1E_3)dx^3\\wedge dx^1+(\\partial_1E_2-\\partial_2E_1)dx^1\\wedge dx^2$. Thus $d_\\Omega\\mathcal E$ has the curl components in the ordered spatial 2-form basis. Likewise, the spatial part of $dG$ is $(\\operatorname{div}D)vol_3$ and its $dt$ part is $dt\\wedge(\\partial_t\\mathcal D-d_\\Omega\\mathcal H)$, where $d_\\Omega\\mathcal H$ is given by the same curl formula with $H$ in place of $E$; $\\mathcal J=\\rho_f vol_3-dt\\wedge\\mathcal J_{\\mathrm{sp}}$. These coefficient identities follow by applying the $C^1$ component formula of [F1] to each displayed wedge term. Equality of the independent spatial and $dt$ coefficients therefore gives both directions of the claimed equivalence.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "In vacuum $P=M=0$, so $D=\\epsilon_0E$ and $H=\\mu_0^{-1}B$ by [A2]. Applying the basis formula [F3] to the six terms of $F$ gives $\\star_\\eta F=c\\,dt\\wedge(B_1dx^1+B_2dx^2+B_3dx^3)+c^{-1}(E_1dx^2\\wedge dx^3+E_2dx^3\\wedge dx^1+E_3dx^1\\wedge dx^2)$. Using $\\epsilon_0\\mu_0c^2=1$, this equals $\\mu_0cG$. The Lorentzian sign check $\\star_\\eta^2=-\\operatorname{id}$ on 2-forms is [F4], so the closure has the stated signature convention.",
+          "step": "1.2",
+          "inputs": [
+            "A2",
+            "F2",
+            "F3",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "From [A1] and [A2], $\\operatorname{div}D=\\epsilon_0\\operatorname{div}E+\\operatorname{div}P=\\rho+\\operatorname{div}P=\\rho-\\rho_b=\\rho_f$. Also, $\\operatorname{curl}H=\\mu_0^{-1}\\operatorname{curl}B-\\operatorname{curl}M=J+(\\mu_0c^2)^{-1}\\partial_tE-\\operatorname{curl}M=J+\\epsilon_0\\partial_tE-\\operatorname{curl}M$. Since $J_f=J-\\partial_tP-\\operatorname{curl}M$ and $\\partial_tD=\\epsilon_0\\partial_tE+\\partial_tP$, this is $\\operatorname{curl}H=J_f+\\partial_tD$. The two remaining component equations, $\\operatorname{div}B=0$ and $\\operatorname{curl}E=-\\partial_tB$, are unchanged from [A1]. Thus the component equations hold, and step 1.1 gives $dF=0$ and $dG=\\mathcal J$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Under the additional $C^2$ hypothesis, $\\mathcal J=dG$ is $C^1$ and $d\\mathcal J$ is defined by [F1]. In repeated-index notation, $d(dG)=\\frac12\\partial_\\kappa\\partial_\\lambda G_{\\mu\\nu}\\,dx^\\kappa\\wedge dx^\\lambda\\wedge dx^\\mu\\wedge dx^\\nu$. Terms with $\\kappa=\\lambda$ vanish by alternation; for each $\\kappa\\ne\\lambda$, exchanging the derivative indices leaves the coefficient unchanged by [F6] and reverses the wedge sign. Thus all terms cancel and $d\\mathcal J=d(dG)=0$. From the definition $\\mathcal J=\\rho_f vol_3-dt\\wedge\\mathcal J_{\\mathrm{sp}}$ in [F1], its coefficient along $dt\\wedge vol_3$ is $\\partial_t\\rho_f+\\operatorname{div}J_f$; setting this coefficient to zero gives the stated continuity equation.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F6",
+            "given",
+            "algebra",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Take $t_0<t_1$ in $I$ and let $e_0,e_1,e_2$ be the ordered vertices of $\\Delta^2$. The product prism has the oriented triangulation $P=\\tau_0-\\tau_1+\\tau_2$, with $\\tau_0=[(t_0,e_0),(t_1,e_0),(t_1,e_1),(t_1,e_2)]$, $\\tau_1=[(t_0,e_0),(t_0,e_1),(t_1,e_1),(t_1,e_2)]$, and $\\tau_2=[(t_0,e_0),(t_0,e_1),(t_0,e_2),(t_1,e_2)]$. In coordinates $(t,u^1,u^2)$, their ordered vertex determinants are $t_1-t_0,-(t_1-t_0),t_1-t_0$, so the coefficients orient all three simplices consistently. Applying the signed-face formula [F7] cancels their internal faces and gives $\\partial P=\\iota_{t_1\\#}\\Delta^2-\\iota_{t_0\\#}\\Delta^2-P(\\partial\\Delta^2)$, where $\\iota_t(u)=(t,u)$ and $P(\\partial\\Delta^2)=P([e_1,e_2])-P([e_0,e_2])+P([e_0,e_1])$, with $P([e_a,e_b])=[(t_0,e_a),(t_1,e_a),(t_1,e_b)]-[(t_0,e_a),(t_0,e_b),(t_1,e_b)]$. For each singular simplex $\\sigma$ in $z$, compose these parameter maps with $q_\\sigma(t,u)=(t,\\sigma(u))$. The top and bottom chains become the time-slice copies of $z$; after summing with the real coefficients of $z$, side terms cancel because $\\partial z=0$. Each composite $q=q_\\sigma\\circ\\tau_i$ is a smooth singular 3-simplex into $U$: the affine parameter maps and the smooth-simplex extensions of $\\sigma$ give an extension to a neighbourhood, which may be restricted so its image lies in the open set $U$. Hence $q^*F$ is a $C^1$ two-form on a neighbourhood of its standard parameter simplex. Write $F=\\frac12F_{\\mu\\nu}(y)dy^\\mu\\wedge dy^\\nu$ in laboratory coordinates. By [F10], the pullback coefficients are $\\eta_{ij}=F_{\\mu\\nu}(q)\\partial_iq^\\mu\\partial_jq^\\nu$, so $(d\\eta)_{kij}=\\partial_k\\eta_{ij}+\\partial_i\\eta_{jk}+\\partial_j\\eta_{ki}$. By [F9], the terms differentiating $F_{\\mu\\nu}$ are $(\\partial_\\lambda F_{\\mu\\nu})(q)(\\partial_kq^\\lambda\\partial_iq^\\mu\\partial_jq^\\nu+\\partial_iq^\\lambda\\partial_jq^\\mu\\partial_kq^\\nu+\\partial_jq^\\lambda\\partial_kq^\\mu\\partial_iq^\\nu)$, which is exactly $(dF)_{\\lambda\\mu\\nu}(q)\\partial_kq^\\lambda\\partial_iq^\\mu\\partial_jq^\\nu$. The remaining terms are $F_{\\mu\\nu}(q)(\\partial_{ki}q^\\mu\\partial_jq^\\nu+\\partial_iq^\\mu\\partial_{kj}q^\\nu+\\partial_{ij}q^\\mu\\partial_kq^\\nu+\\partial_jq^\\mu\\partial_{ik}q^\\nu+\\partial_{jk}q^\\mu\\partial_iq^\\nu+\\partial_kq^\\mu\\partial_{ji}q^\\nu)$. The first and fourth cancel after interchanging $\\mu,\\nu$ and using $\\partial_{ki}q=\\partial_{ik}q$; the second and fifth cancel by $\\partial_{kj}q=\\partial_{jk}q$; the third and sixth cancel by $\\partial_{ij}q=\\partial_{ji}q$. Each cancellation uses $F_{\\mu\\nu}=-F_{\\nu\\mu}$ and [F6]. Thus $d(q^*F)=q^*(dF)=0$ by step 2.1. The $C^1$ Stokes identity [F8] applies to each pullback on the standard parameter 3-simplex, so the boundary integrals sum to zero. The top and bottom terms are $\\Phi_z(t_1)$ and $-\\Phi_z(t_0)$ because the time-slice pullback of $F=\\mathcal B-dt\\wedge\\mathcal E$ is $\\mathcal B$ by [F1]. Finite-chain linearity in [F1] gives $\\Phi_z(t_1)-\\Phi_z(t_0)=0$. Hence the cycle flux is constant.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "step 2.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [],
+      "finite_checks_disposition": "No separate finite or computational check applies; the complete argument is analytic in the numbered steps.",
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes nonempty open I and Omega."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1 and 2.1 include the zero-field, zero-source solution."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 4.1 applies to every finite cycle, including any one-term cycle whose boundary is zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 4.1 uses smooth simplex maps without an immersion or rank assumption."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 4.1 compares arbitrary t0<t1 inside the open interval and claims no boundary-of-I value."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 4.1 uses only the finite supplied chain and its signed boundary."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "step 1.1 extracts the independent coefficients of dF and dG to obtain the component equations."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "step 1.1 reconstructs dF=0 and dG=calJ from those same component coefficients."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-3",
+        "notes": "Reviewed every coefficient and all four proof phases against all direct suppliers. Both directions use independent spatial and dt coefficients: dF has dt wedge (partial_t B+dE), dG has dt wedge (partial_t D-dH), matching the negative current term. Bound/free algebra yields Maxwell without material closure. Six Hodge basis terms give star F=mu0 c G; C2 alone licenses mixed-partial cancellation in d(dG). The prism uses identical ordered face maps with coefficients +,-,+, so internal faces and then cycle side faces cancel as maps. Smooth extensions into open U exist and pullback naturality follows from the displayed chain rule and six second-derivative cancellations, permitting the repaired C1 Stokes lemma. t0<t1 covers all distinct times in an interval; equality is trivial. No AC, moving-cycle assertion, singular sources or empirical inputs. Accepted reader title and smooth-extension repair; Statement unchanged."
+      }
+    },
+    "pthm-emx-duality-vacuum": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "post-em-vacuum-maxwell",
+          "source_section": "Postulate",
+          "quote": "(c) [Scope] The postulate contains no magnetic charge: $\\operatorname{div}B=0$\nand no magnetic-source term appears in $\\operatorname{curl}E$. Sources that\nare not locally integrable functions (point or sheet sources) are covered by\nneither branch and require their own definition. The equations are adopted\nclassical vacuum physics in the named inertial chart; they are not deduced from\ncharge conservation, from empirical agreement or from the special-relativity\npostulates, and this item by itself asserts no covariance under changes of\ninertial frame.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "pthm-emx-exterior-maxwell",
+          "source_section": "Statement",
+          "quote": "Let $I$ be a nonempty open time interval and $\\Omega$ a nonempty open spatial region in the fixed oriented SI laboratory chart. Suppose $E$ and $B$ are jointly $C^1$, $P$ and $M$ are jointly $C^2$, and the fields satisfy the adopted smooth vacuum Maxwell equations. Define $D,H,\\rho_f,J_f,F,G$, and the free-current form $\\mathcal J$ by the framework material definitions and the excitation-form definition. Then $dF=0$ and $dG=\\mathcal J$ are equivalent to the four macroscopic component equations",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-emx-lorentz-star",
+          "source_section": "Definition",
+          "quote": "Let $V=\\mathbb R^4$ with ordered coframe $e^0=dx^0,e^1=dx^1,e^2=dx^2,e^3=dx^3$, bilinear form $\\eta=\\operatorname{diag}(-1,1,1,1)$, inverse $\\eta^{-1}=\\eta$, and volume form $\\mathrm{vol}_\\eta=e^0\\wedge e^1\\wedge e^2\\wedge e^3$. For $0\\le k\\le4$, give $\\Lambda^kV^*$ the induced bilinear pairing $\\langle\\alpha,\\beta\\rangle_\\eta:=\\frac1{k!}\\alpha_{\\mu_1\\cdots\\mu_k}\\beta^{\\mu_1\\cdots\\mu_k}$, with indices raised by $\\eta^{-1}$. The Lorentzian Hodge star is the unique linear map $\\star_\\eta:\\Lambda^kV^*\\to\\Lambda^{4-k}V^*$ satisfying $\\alpha\\wedge\\star_\\eta\\beta=\\langle\\alpha,\\beta\\rangle_\\eta\\,\\mathrm{vol}_\\eta$ for all $\\alpha,\\beta\\in\\Lambda^kV^*$. For an increasing index set $I\\subseteq\\{0,1,2,3\\}$, write $e^I$ for the corresponding wedge, $I^c$ for its increasing complement, $s(I,I^c)$ for the sign of the concatenation $(I,I^c)$ relative to $(0,1,2,3)$, and $\\epsilon_I:=\\prod_{i\\in I}\\epsilon_i$, where $\\epsilon_0=-1$ and $\\epsilon_1=\\epsilon_2=\\epsilon_3=1$. The equivalent basis formula is $\\star_\\eta e^I=\\epsilon_I s(I,I^c)e^{I^c}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-emx-lorentz-star-square",
+          "source_section": "Statement",
+          "quote": "For the orientation and signature $\\eta=\\operatorname{diag}(-1,1,1,1)$ fixed in [[def-emx-lorentz-star]], the Hodge star satisfies $\\star_\\eta^2=(-1)^{k(4-k)+1}\\operatorname{id}$ on $k$-forms, $0\\le k\\le4$. In particular, on two-forms $\\star_\\eta^2=-\\operatorname{id}$, $\\star_\\eta(dx^0\\wedge dx^1)=-dx^2\\wedge dx^3$, and $\\star_\\eta(dx^2\\wedge dx^3)=dx^0\\wedge dx^1$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By linearity of $d$ and [F1], $dF_\\theta=\\cos(\\theta)dF+\\sin(\\theta)d\\star_\\eta F=0$. By [F2] and [F3], $\\star_\\eta F_\\theta=\\cos(\\theta)\\star_\\eta F-\\sin(\\theta)F$, so $d\\star_\\eta F_\\theta=\\cos(\\theta)d\\star_\\eta F-\\sin(\\theta)dF=0$. Thus the rotated form solves both source-free vacuum equations.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "In a vacuum region with nonzero free-current form $\\mathcal J$, [F1] gives $d\\star_\\eta F=\\mu_0c\\mathcal J$. Therefore $dF_\\theta=\\sin(\\theta)\\mu_0c\\mathcal J$, which is nonzero whenever $\\sin(\\theta)\\mathcal J$ is nonzero. It then fails the adopted equation $dF_\\theta=0$; restoring a duality symmetry would require changing the source sector, which this framework does not adopt. The theorem makes no claim that any material closure or boundary condition is preserved.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [],
+      "finite_checks_disposition": "No separate finite or computational check applies; the complete argument is analytic in the numbered steps.",
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: on an empty region the differential equations are vacuous."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 sends F=0 to F_theta=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 includes theta=0, which is the identity rotation."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and step 1.1 impose no rank or nonvanishing condition on F."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The rotation parameter is any real constant, with no interval endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1 uses only pointwise linear operations and selects no auxiliary objects."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement gives an implication for solutions, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement gives an implication for solutions, not an equivalence."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-3",
+        "notes": "Reviewed both steps and all four prerequisites. The adopted smooth vacuum postulate is carried through the exterior-Maxwell supplier; field-strength here is a Maxwell solution under that postulate. C1 regularity is preserved by the fixed constant-coefficient star. Constant theta permits linearity of d, and star squared=-id gives both rotated equations. For nonzero current dFtheta=sin(theta) mu0 c J; theta with zero sine is correctly excluded from that failure assertion. No material or boundary invariance is inferred, and no empirical inputs or AC occur. Unchanged carrier; risk-only obligation, no decision added."
+      }
+    },
+    "ex-emx-topological-flux-sector": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-emx-excitation-form",
+          "source_section": "Definition",
+          "quote": "When the coefficients are smooth this is the usual exterior derivative. For a continuous spatial 2-form $\\beta_t$ and a finite real smooth singular 2-cycle $z=\\sum_\\sigma c_\\sigma\\sigma$ in $\\Omega$, define its cycle flux at time $t$ by $\\Phi_z(t)=\\sum_\\sigma c_\\sigma\\int_{\\Delta^2}\\sigma^*\\beta_t$, using the standard affine orientation and continuous-chain integral convention of [[def-emx-continuous-chain-integral]].",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "pthm-emx-exterior-maxwell",
+          "source_section": "Statement",
+          "quote": "Let $I$ be a nonempty open time interval and $\\Omega$ a nonempty open spatial region in the fixed oriented SI laboratory chart. Suppose $E$ and $B$ are jointly $C^1$, $P$ and $M$ are jointly $C^2$, and the fields satisfy the adopted smooth vacuum Maxwell equations. Define $D,H,\\rho_f,J_f,F,G$, and the free-current form $\\mathcal J$ by the framework material definitions and the excitation-form definition. Then $dF=0$ and $dG=\\mathcal J$ are equivalent to the four macroscopic component equations",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-smooth-singular-chain-and-cochain-complexes",
+          "source_section": "Definition",
+          "quote": "For a smooth manifold $M$, possibly with boundary, let\n$$C_k^\\infty(M;\\mathbb R)=\\mathbb R^{(S_k^\\infty(M))}\\quad(k\\ge0),\\qquad C_k^\\infty(M;\\mathbb R)=0\\quad(k<0),$$\nusing [[def-smooth-singular-simplex]]. It is the subspace of [[def-real-singular-chain-complex]] spanned by the smooth simplices, with the same signed face differential.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-standard-orientation-of-the-affine-simplex",
+          "source_section": "Definition",
+          "quote": "Orient $\\Delta^0$ as a positive point. It has no faces. For an interval, the displayed boundary is its positive terminal point minus its positive initial point. These coefficients record determinant-line signs on zero-dimensional faces; they do not assert that a one-vertex abstract simplex has two vertex orderings. Boundary orientation is computed at the relative interior of each face, where the simplex is locally a half-space; no smooth structure on general manifolds with corners is used.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-integral-of-a-form-over-a-smooth-singular-simplex",
+          "source_section": "Definition",
+          "quote": "Let $\\sigma:\\Delta^k\\to M$ be a smooth singular simplex and let $\\omega$ be a smooth $k$-form on an open neighbourhood of its image in $M$. For $k\\ge1$ put\n$$T_k=\\{x\\in\\mathbb R^k:x_j\\ge0,\\ \\sum_jx_j\\le1\\},\\qquad a(x)=v_0+\\sum_{j=1}^kx_j(v_j-v_0).$$\nTake a smooth extension $\\bar\\sigma$ near $\\Delta^k$, restrict its domain so that $\\omega$ is defined on its image, and write $a^*\\bar\\sigma^*\\omega=f(x)\\,dx_1\\wedge\\cdots\\wedge dx_k$. Define\n$$\\int_\\sigma\\omega:=\\int_{T_k}f(x)\\,dx.$$\nThe right side is the Jordan-set Riemann integral. In degree zero define $\\int_\\sigma\\omega=\\omega(\\sigma(v_0))$. This fixes the positive point convention. Reversing the domain orientation negates the integral. Independence of other positive affine coordinates is the forward justification [[lem-simplex-integrals-are-independent-of-affine-coordinate-identification]].",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-local-coordinate-formula-for-the-exterior-derivative",
+          "source_section": "Statement",
+          "quote": "Let $(U,x^1,\\ldots,x^n)$ be a smooth chart on a smooth manifold and\n$\\omega$ a smooth $k$-form on $U$, with $k\\ge0$. Summing over increasing\n$k$-tuples $I$, and writing $dx^I=dx^{i_1}\\wedge\\cdots\\wedge dx^{i_k}$, if $\\omega=\\sum_I\\omega_I\\,dx^I$, then $$d\\omega=\\sum_I d\\omega_I\\wedge dx^I.$$",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-divergence-and-curl-of-a-c1-vector-field",
+          "source_section": "Definition",
+          "quote": "Now let $n=3$ and let $F:U\\to\\mathbb R^3$ be $C^1$ on an open $U\\subseteq\\mathbb R^3$. Following [[def-cross-product-in-r3]], write the three coordinates of a point and of a vector as $x,y,z$ rather than $0,1,2$, so that $F=(F_x,F_y,F_z)$ means $F=(F_0,F_1,F_2)$ and $\\partial_x,\\partial_y,\\partial_z$ are $\\partial_0,\\partial_1,\\partial_2$. With that naming, the **curl** of $F$ is $\\operatorname{curl}F:=(\\partial_yF_z-\\partial_zF_y,\\ \\partial_zF_x-\\partial_xF_z,\\ \\partial_xF_y-\\partial_yF_x)$, a map $U\\to\\mathbb R^3$ each of whose coordinates is continuous on $U$. In this naming the divergence reads $\\operatorname{div}F=\\partial_xF_x+\\partial_yF_y+\\partial_zF_z$.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-real-power-continuity-and-derivatives",
+          "source_section": "Statement",
+          "quote": "For $a>0$, the function $x\\mapsto a^x$ is continuous on $\\mathbb R$ and\n$$(a^x)'=a^x\\log a.$$\nFor $\\alpha\\in\\mathbb R$, the function $x\\mapsto x^\\alpha$ is continuous and differentiable on $(0,\\infty)$, with\n$$(x^\\alpha)'=\\alpha x^{\\alpha-1}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$\n(Limit point, isolated point, adherent point, derived set, and dense subset of $\\mathbb{R}$), let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$\n(The derivative $f'(c) = \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c}$ of $f : A \\to \\mathbb{R}$ at a point $c \\in A$ that is a limit point of $A$, and differentiability on a set) and let $\\alpha \\in \\mathbb{R}$. Then:",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-clairaut-schwarz-mixed-partials",
+          "source_section": "Statement",
+          "quote": "If $f$ is $C^2$ on an open subset of $\\mathbb R^m$, then $\\partial_i\\partial_j f=\\partial_j\\partial_i f$ for every pair of coordinate indices.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-emx-unit-sphere-radial-flux",
+          "source_section": "Statement",
+          "quote": "Let $S^2=\\{p\\in\\mathbb R^3:\\|p\\|_2=1\\}$ have its standard embedded smooth structure and outward orientation, let $X(p)=p$, and let $\\omega$ be its outward area form, $\\omega_p(v,w)=p\\cdot(v\\times w)$ for tangent vectors $v,w\\in T_pS^2$. Put $D=[0,\\pi]\\times[0,2\\pi]$ and\n$$\n\\Phi(\\theta,\\phi)=(\\sin\\theta\\cos\\phi,\\sin\\theta\\sin\\phi,\\cos\\theta).\n$$\nThe map $\\Phi$ presents $S^2$ as a regular parametrized surface patch, with boundary seam and poles allowed by the patch convention. The outward flux of $X$ is\n$$\n\\int_D (X\\circ\\Phi)\\cdot(\\Phi_\\theta\\times\\Phi_\\phi)\\,d\\theta\\,d\\phi=4\\pi.\n$$\nEquivalently, the oriented top-form integral is $\\int_{S^2}\\omega=4\\pi$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-heine-borel-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions\n$n \\to \\mathbb{R}$ and let $d_2$ be the Euclidean metric on it\n($\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it). Then:",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "prop-integration-of-top-forms-by-finite-parametrizations",
+          "source_section": "Statement",
+          "quote": "Let $n\\geq1$, let $M^n$ be oriented, and let $\\omega\\in\\Omega_c^n(M)$. For $1\\leq i\\leq m$ let $D_i\\subset\\mathbb R^n$ be bounded open Jordan domains and $F_i:\\overline D_i\\to M$ continuous and smooth up to the boundary in target coordinates: near each parameter point, a target coordinate representative extends smoothly to a Euclidean neighborhood. Suppose $F_i|_{D_i}$ is an orientation-preserving diffeomorphism onto an open $W_i\\subset M$, the $W_i$ are pairwise disjoint, and $\\operatorname{supp}\\omega\\subset\\bigcup_i\\overline W_i$. Then\n$$\\int_M\\omega=\\sum_{i=1}^m\\int_{D_i}F_i^*\\omega.$$\nAn empty family is allowed when the support is empty. No nonsingularity of $DF_i$ on $\\partial D_i$, and no $M$-valued extension across a genuine target boundary, is assumed.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-emx-local-potential-homotopy",
+          "source_section": "Statement",
+          "quote": "Then $dA=F$. On any smooth manifold $M$, possibly with boundary, a smooth closed two-form $F$ has a globally defined smooth one-form potential $A$ with $dA=F$ if and only if its de Rham class $[F]\\in H^2_{\\mathrm{dR}}(M)$ is zero. If a finite smooth singular two-cycle $z$ has nonzero period $\\int_zF$, then $F$ is not globally exact.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-poincare-lemma-for-differential-forms-on-star-shaped-domains",
+          "source_section": "Statement",
+          "quote": "Every closed smooth $k$-form on a star-shaped open domain is exact for $k\\ge1$. For centre $0$, one primitive is $\\eta_x(v_1,\\ldots,v_{k-1})=\\int_0^1t^{k-1}\\omega_{tx}(x,v_1,\\ldots,v_{k-1})\\,dt$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-stokes-theorem-for-smooth-singular-chains",
+          "source_section": "Statement",
+          "quote": "Let $M$ be a smooth manifold, possibly with boundary. For $k\\ge1$, $c\\in C_k^\\infty(M;\\mathbb R)$ and $\\omega\\in\\Omega^{k-1}(M)$, define integration over a chain by the finite linear sum of its simplex integrals. Then\n$$\\int_c d\\omega=\\int_{\\partial c}\\omega.$$\nThe zero chain has integral zero. In degree zero the boundary is zero; no degree-minus-one form is required by this statement.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-change-of-variables-for-compact-jordan-sets",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, let $g:U\\to\\mathbb R^n$ be injective and $C^1$, and suppose $Dg(x)$ is invertible for every $x\\in U$. Let $K\\subseteq U$ be compact and Jordan measurable. For a bounded function $f:g(K)\\to\\mathbb R$, the following are equivalent:\n\n1. $f$ is Riemann integrable on $g(K)$;\n2. $x\\mapsto f(g(x))|\\det Dg(x)|$ is Riemann integrable on $K$.\n\nWhen either condition holds,\n$$\\int_{g(K)}f(y)\\,dy=\\int_K f(g(x))|\\det Dg(x)|\\,dx.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "lem-riemann-integral-unchanged-by-content-zero-modification",
+          "source_section": "Statement",
+          "quote": "Let $E\\subseteq\\mathbb R^m$ be bounded and Jordan measurable, let $f,g:E\\to\\mathbb R$ be bounded, and suppose $\\{x\\in E:f(x)\\ne g(x)\\}$ has content zero. Then $f$ is Riemann integrable over $E$ if and only if $g$ is, and when they are integrable their integrals are equal.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $C=\\Phi/(4\\pi)$. On $r>0$, $F=C\\beta$ is the smooth static magnetic 2-form, where $\\beta=(x_1dx^2\\wedge dx^3+x_2dx^3\\wedge dx^1+x_3dx^1\\wedge dx^2)/r^3$. By [F4], $d\\beta=(\\sum_i\\partial_i(x_ir^{-3}))vol_3$. By [F5], $\\partial_i(x_ir^{-3})=r^{-3}-3x_i^2r^{-5}$, so their sum is $3r^{-3}-3r^2r^{-5}=0$. Also, $B=-C\\nabla(r^{-1})$, so $\\operatorname{curl}B=0$ by [F6]. With $E=0$, $P=M=0$, and $\\rho=J=0$, all four adopted vacuum Maxwell equations hold on $\\Omega$; [F2] therefore gives $dF=0$ and $dG=0$ there.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F4",
+            "F5",
+            "F6",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The origin is the barycenter of the four tetrahedron vertices, hence lies strictly inside $T$, and each face lies in a plane $n\\cdot p=h$ with outward unit normal $n$ and $h>0$. Each face avoids the origin, so $q_a$ is smooth on a neighborhood of it. Convexity and $0$ in the interior imply each ray from $0$ meets the boundary of $T$ once; therefore $q_a$ maps the four face interiors bijectively onto disjoint open patches of the radius-$a$ sphere whose closures cover that sphere. On a face patch, the inverse radial map is $x\\mapsto h x/(n\\cdot x)$, which is smooth because $n\\cdot x>0$ there; thus each face restriction is a diffeomorphism. For face tangent vectors $v,w$ in the outward orientation, put $u=p/\\|p\\|$. Then $D(q_a)_p(v)=(a/\\|p\\|)(v-(u\\cdot v)u)$ and $u\\cdot(D(q_a)_p(v)\\times D(q_a)_p(w))=(a^2/\\|p\\|^3)p\\cdot(v\\times w)>0$, because $p$ has positive normal component $h n$. The ordered tetrahedron has determinant $\\det(v_1-v_0,v_2-v_0,v_3-v_0)=-16a^3$, so its positive outward boundary has coefficients $\\varepsilon_i=(-1)^{i+1}$ on the ordered faces $\\sigma_i$. The radial map preserves their induced outward orientations by the preceding calculation. For $i<j$, the edge omitting $v_i,v_j$ occurs with coefficient $(-1)^{i+1}(-1)^{j-1}=(-1)^{i+j}$ from face $i$ and $(-1)^{j+1}(-1)^i=(-1)^{i+j+1}$ from face $j$. Both edge maps list the two surviving vertices in the same order, so their radial composites are identical maps with opposite coefficients. Thus [F3] gives $\\partial z=0$.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The scaling map $\\psi_a:S^2\\to S_a^2$, $\\psi_a(u)=au$, satisfies $\\psi_a^*(\\beta|_{S_a^2})=\\omega$, since the numerator and denominator in $\\beta$ both scale by $a^3$. For each $i$, use $q_a\\circ\\sigma_i$ if $\\varepsilon_i=1$, and precompose it with the affine transposition $r(u_1,u_2)=(u_2,u_1)$ of $\\Delta^2$ if $\\varepsilon_i=-1$. The resulting four parametrizations are orientation-preserving diffeomorphisms on the open simplex interiors onto the disjoint patches of step 1.2, with closures covering the compact sphere. They extend smoothly near the closed parameter simplex into the sphere because their affine faces avoid the origin. By [F11], transposition negates the form integral, so each new integral is $\\varepsilon_i\\int_{q_a\\circ\\sigma_i}\\beta$. By [F12] these compact parameter integrals equal the interior integrals in [F8]. Hence [F8] applies, and the compact oriented surface integral is the one evaluated in [F7]. Hence $\\int_z\\beta=\\int_{S_a^2}\\beta=\\int_{S^2}\\omega=4\\pi$, so the cycle flux of $F$ is $\\Phi_z(t)=C\\int_z\\beta=\\Phi$ for every $t$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F7",
+            "F8",
+            "F11",
+            "F12",
+            "step 1.2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The embedded cycle $z_t$ is a finite smooth singular 2-cycle in $I\\times\\Omega$. Its inclusion pullback of $F$ is $C\\beta$, which is smooth and closed on $\\Omega$ by step 1.1 and has nonzero period $\\Phi$ by step 2.1. Therefore $F$ is a smooth closed 2-form on $I\\times\\Omega$ with nonzero period on $z_t$. Applying [F9] shows that no globally defined smooth 1-form $A$ on $I\\times\\Omega$ satisfies $dA=F$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F9",
+            "step 1.1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Suppose a smooth divergence-free magnetic field on $\\mathbb R^3$ agreed with $B$ on $S_a^2$. Its spatial 2-form $\\widetilde\\beta=\\widetilde B_1dx^2\\wedge dx^3+\\widetilde B_2dx^3\\wedge dx^1+\\widetilde B_3dx^1\\wedge dx^2$ would be smooth and closed by [F4], and would agree with $C\\beta$ on $S_a^2$. Since $\\mathbb R^3$ is star-shaped, [F10] gives $\\widetilde\\beta=dA$ for a global smooth 1-form $A$. Stokes and $\\partial z=0$ from step 1.2 then give $\\int_z\\widetilde\\beta=\\int_{\\partial z}A=0$, while step 2.1 gives $\\int_z\\widetilde\\beta=4\\pi C=\\Phi\\ne0$. This contradiction excludes a smooth divergence-free full-space extension; it does not turn the exterior field into a magnetic-charge source law.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "F4",
+            "F10",
+            "step 1.2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [
+        {
+          "name": "tetrahedral flux normalization",
+          "status": "checked",
+          "step": "2.1",
+          "method": "exact radial pullback and unit-sphere period",
+          "calculation": "psi_a^*(beta)=omega; the four orientation-preserving face patches cover S_a^2; integral_z beta=integral_S2 omega=4 pi and C=Phi/(4 pi).",
+          "result": "The cycle flux is exactly Phi and is nonzero."
+        },
+        {
+          "name": "cycle boundary cancellation",
+          "status": "checked",
+          "step": "1.2",
+          "method": "signed-face formula",
+          "calculation": "For i<j, deleting i then j-1 gives coefficient (-1)^(i+j); deleting j then i gives (-1)^(i+j+1). Surviving vertices have identical order in both maps. The common radial map preserves equality.",
+          "result": "The constructed finite chain z satisfies partial z=0."
+        }
+      ],
+      "finite_checks_disposition": "The exact finite geometric or basis calculation is recorded as a scoped check; the complete proof remains the justification.",
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example fixes a nonempty open I, the punctured nonempty region, and four faces."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The Example assumes Phi is nonzero and makes no zero-flux obstruction claim."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 2.1 evaluates the exact period 4 pi and the normalization C=Phi/(4 pi)."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The four tetrahedron faces and their radial images are nondegenerate in the stated setup."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example and step 2.1 state the flux value for every t in the open interval I."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.2 uses the explicitly finite set of four face maps."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example states an obstruction and gives no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example states an obstruction and gives no equivalence."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-3",
+        "notes": "Confirmed refuter:3:1 as fatal for the pre-repair cycle: distinct reversed simplex maps do not cancel in the free singular chain space. Replaced the all-positive outward parametrizations by the signed boundary of the fixed ordered tetrahedron (determinant -16 a^3), radially mapped facewise; double omissions now cancel identical ordered edge maps. Rechecked radial inverse, differential sign, and smooth extensions away from zero. Added exact affine-change and content-zero suppliers to pass from signed compact-simplex integrals to positive open patches in the finite-parametrization theorem. Scaling gives beta period 4 pi and Phi flux for either sign of nonzero Phi. The smooth closed period obstruction applies to z_t; smooth closed full-space extension is excluded by Poincare plus Stokes. No source value at zero or measured input is introduced. Finite explicit construction uses no AC. The only external reference consumer is the assigned companion page, whose actual flux/potential assertions remain correct without editing."
+      }
+    },
+    "ex-emx-duality-pec-failure": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-emx-excitation-form",
+          "source_section": "Definition",
+          "quote": "Thus $F_{0i}=-E_i/c$ in $x^0=ct$ coordinates, consistently with the framework electromagnetic tensor. The integral of $F$ over an oriented spacetime 2-surface has units Wb; the integral of $G$ over such a surface and of $\\mathcal J$ over an oriented spacetime 3-chain has units C. No relation between $G$ and the Lorentzian Hodge dual of $F$ is part of this definition; the vacuum closure is proved only in the separate vacuum branch.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "pthm-emx-duality-vacuum",
+          "source_section": "Statement",
+          "quote": "again satisfies $dF_\\theta=0$ and $d\\star_\\eta F_\\theta=0$. This is a symmetry of the source-free vacuum equations only. With nonzero free-current form $\\mathcal J$, a rotation with $\\sin(\\theta)\\ne0$ generally fails the same no-magnetic-source equation; no duality invariance is asserted for a material closure or boundary condition without a separate compatibility proof. The companion conductor example gives a concrete boundary failure. No magnetic charge sector is adopted.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-emx-lorentz-star",
+          "source_section": "Definition",
+          "quote": "Let $V=\\mathbb R^4$ with ordered coframe $e^0=dx^0,e^1=dx^1,e^2=dx^2,e^3=dx^3$, bilinear form $\\eta=\\operatorname{diag}(-1,1,1,1)$, inverse $\\eta^{-1}=\\eta$, and volume form $\\mathrm{vol}_\\eta=e^0\\wedge e^1\\wedge e^2\\wedge e^3$. For $0\\le k\\le4$, give $\\Lambda^kV^*$ the induced bilinear pairing $\\langle\\alpha,\\beta\\rangle_\\eta:=\\frac1{k!}\\alpha_{\\mu_1\\cdots\\mu_k}\\beta^{\\mu_1\\cdots\\mu_k}$, with indices raised by $\\eta^{-1}$. The Lorentzian Hodge star is the unique linear map $\\star_\\eta:\\Lambda^kV^*\\to\\Lambda^{4-k}V^*$ satisfying $\\alpha\\wedge\\star_\\eta\\beta=\\langle\\alpha,\\beta\\rangle_\\eta\\,\\mathrm{vol}_\\eta$ for all $\\alpha,\\beta\\in\\Lambda^kV^*$. For an increasing index set $I\\subseteq\\{0,1,2,3\\}$, write $e^I$ for the corresponding wedge, $I^c$ for its increasing complement, $s(I,I^c)$ for the sign of the concatenation $(I,I^c)$ relative to $(0,1,2,3)$, and $\\epsilon_I:=\\prod_{i\\in I}\\epsilon_i$, where $\\epsilon_0=-1$ and $\\epsilon_1=\\epsilon_2=\\epsilon_3=1$. The equivalent basis formula is $\\star_\\eta e^I=\\epsilon_I s(I,I^c)e^{I^c}$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-em-si-conventions",
+          "source_section": "Definition",
+          "quote": "Adopt the SI system of units for this framework, with the following quantity\ntable and conventions; every symbol is a quantity of this framework and the\nlaboratory structure is that of [[def-em-lab-geometry]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "post-em-vacuum-maxwell",
+          "source_section": "Postulate",
+          "quote": "(c) [Scope] The postulate contains no magnetic charge: $\\operatorname{div}B=0$\nand no magnetic-source term appears in $\\operatorname{curl}E$. Sources that\nare not locally integrable functions (point or sheet sources) are covered by\nneither branch and require their own definition. The equations are adopted\nclassical vacuum physics in the named inertial chart; they are not deduced from\ncharge conservation, from empirical agreement or from the special-relativity\npostulates, and this item by itself asserts no covariance under changes of\ninertial frame.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The fields are constant, so all their spatial and time derivatives vanish. With $P=M=0$ and $\\rho=J=0$, they satisfy the four vacuum Maxwell equations on $\\Omega$ by [F5]. The original tangential electric field is $E_\\parallel=0$, so it satisfies the imposed PEC condition [A1].",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The field form is $F=B_0dx^2\\wedge dx^3$. By [F3], $\\star_\\eta F=B_0dx^0\\wedge dx^1=cB_0dt\\wedge dx^1$. Comparing with the defining form $\\mathcal B_\\theta-dt\\wedge\\mathcal E_\\theta$ in [F1] gives $E_\\theta=-cB_0(1,0,0)$. Since $E_\\theta\\cdot n=0$, its tangential component equals $E_\\theta$ and is nonzero. Hence the rotated vacuum solution from [F2] fails the same PEC boundary condition. The unit $cB_0$ is V m$^{-1}$, as required for an electric field by [F4].",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [
+        {
+          "name": "quarter-turn basis calculation",
+          "status": "checked",
+          "step": "2.1",
+          "method": "fixed Lorentzian Hodge-star basis formula",
+          "calculation": "star_eta(dx2 wedge dx3)=dx0 wedge dx1 and x0=ct, so star_eta F=c B0 dt wedge dx1; comparison with Btheta-dt wedge Etheta gives Etheta=-c B0 e1.",
+          "result": "Etheta is nonzero and tangential to Pi, so the same PEC condition fails."
+        }
+      ],
+      "finite_checks_disposition": "The exact finite geometric or basis calculation is recorded as a scoped check; the complete proof remains the justification.",
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example fixes a nonempty half-space and its nonempty planar boundary."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The Example assumes B0 is nonzero; zero field does not exhibit failure."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 2.1 computes the quarter-turn theta=pi/2 case exactly."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The Example uses a constant smooth field and makes no singular or rank-degenerate claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example specifies the constant field trace on Pi, and step 2.1 checks the boundary value."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The Example is a fixed explicit field calculation and selects no auxiliary data."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example is a counterexample to boundary invariance, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example is a counterexample to boundary invariance, not an equivalence."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-3",
+        "notes": "Reviewed both steps against all five direct suppliers. Constant smooth E=0 and B=B0 e1 solve zero-source vacuum Maxwell on the half-space and extend continuously to its plane boundary. The stipulated PEC condition is exactly the tangential-electric projection, not a finite-conductivity law. star(dx2 wedge dx3)=dx0 wedge dx1 and dt=dx0/c give Etheta=-c B0 e1 at the quarter-turn. It is tangential, nonzero by B0!=0 and c>0, with correct V/m units. The duality supplier applies to the source-free interior; boundary invariance is independently disproved. No AC or observations. Reader title correction accurately restricts the claim and leaves the Example unchanged."
+      }
+    }
+  }
+}

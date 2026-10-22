@@ -1,0 +1,5 @@
+Proposal only; no production contract, stamp or source write. Exact source guard 5a943aa21e3633bc19c97fbb401c0351b0fc0900496efd2a7b50495b1b77318e; contract guard 53516f711427ea9256df124d773c026918209041c32a7d972ef25cc34ab28978.
+
+contract-semantic-proposal.json contains exact before/after formulation, sources and risk rows. Apply only the three evidence/notes fields listed. Existing native source evidence is retained as an exact prefix; outside-owner and root readings are explicitly attributed additions. Wald was not reread by this owner. Historical pass/status/reviewer/confidence values are carried as historical metadata, not new acceptance stamps; root owns current adoption/review identity and certification.
+
+The false universal outgoing D_fin assertion is replaced by the actual common-algebra and chosen-realization distinction, with exact packet/tau/delta/operator-equality, strong conditional norm-premise, comparison-witness and arbitrary-positive-state qualifications. Native129 alpha remains active; its two consumers and final eleven bindings are therefore not sealed. No consumer scientific edit is currently indicated.

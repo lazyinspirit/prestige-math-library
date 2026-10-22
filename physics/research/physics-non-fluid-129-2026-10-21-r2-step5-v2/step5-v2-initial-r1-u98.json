@@ -1,0 +1,122 @@
+{
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "phase": "initial",
+  "round": 1,
+  "unit": "98",
+  "input_sha256": "eaf0a68d231b0a7d0d042df337974eaab597dfd3432daa3ad0aaeebd32fe188c",
+  "decisions": [
+    {
+      "id": "alg-csm-frontier-interval-finite-partition",
+      "model": "gpt-6-luna",
+      "context_sha256": "ec8ddcd4ad2481599a63a0fdf7b2ba66505fc984aac4e64c0a1c967405d7af3a",
+      "outcome": "confirmed_fatal",
+      "defect_type": "other",
+      "reason": "The Definition fails to determine an evaluation DAG for its rounded sums. In the supplier format p=2, e_min=0, e_max=4, singleton weights 4,1,1 accumulated as ((4+1)+1) give [4,8], whereas (4+(1+1)) gives [6,6], with all operations finite. An enumeration alone does not specify grouping. Repaired by explicit zero-initialized left-to-right recurrences for both sums, fixed multiplication/addition order, and rounding at every operation. This is a missing procedure instruction, rather than a false enclosure theorem or missing dependency.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "alg-csm-frontier-interval-finite-partition",
+      "disposition": "repaired",
+      "post_sha256": "d02499a454a82530ff340a5e63dd9302a0107e848f1d8869a04ce85f3bb5e6bc",
+      "review_context_sha256": "a6bc0b3a4d6e3444cfbb6cac8a1468a662325e67e0e1fc02786abd8576c7edaa",
+      "reason": "Reviewed the complete Definition and all five direct supplier statements and relevant proofs. Finite rational endpoint conversion, multiplication, addition, positive-denominator division and failure statuses retain the existing enclosure guarantees. The new recurrences specify a unique finite acyclic graph from the supplied enumeration, without additional choice or physical premises. This is review of my repair, not independent acceptance.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "thm-csm-frontier-interval-partition-certificate"
+  ],
+  "gate_resolutions": [],
+  "ledger_updates": [
+    {
+      "ledger": "defect-ledger",
+      "id": "alg-csm-frontier-interval-finite-partition",
+      "outcome": "confirmed_fatal",
+      "defect_type": "other",
+      "status": "fixed",
+      "reason": "Both outward-rounded sums lacked a specified grouping; explicit enumeration-ordered left folds repair the procedure without weakening its inputs or outputs."
+    },
+    {
+      "ledger": "published-consumer-ledger",
+      "id": "lem-directed-dyadic-rounding-enclosure-and-error",
+      "status": "maintenance",
+      "reason": "Confirmed the existing Step-4 digest alert: proof step 2.1 contains N_max<x<+infty with a missing backslash. Its Statement and actual overflow argument remain sound. Imported published supplier is read-only; route the presentation correction to mathematics maintenance."
+    }
+  ],
+  "repair_notes": {
+    "claim_and_conventions": "Pure mathematics; enumerated finite nonempty state space, strictly positive finite exact weights, finite real observable, certified rational input intervals, fixed finite dyadic format. Both sums now use zero-initialized left folds with one rounded product per state. No empirical or AC premise is introduced.",
+    "sources_inspected": [
+      "items/def-dyadic-floating-point-format-and-directed-rounding.md: Definition",
+      "items/def-intervals-rectangles-and-complex-balls.md: Definition",
+      "items/def-outward-rounded-interval-and-ball-operations.md: Definition and Well-definedness",
+      "items/lem-directed-dyadic-rounding-enclosure-and-error.md: Statement and complete Proof",
+      "items/lem-real-interval-arithmetic-preserves-enclosure.md: Statement and complete Proof"
+    ],
+    "source_reading_limits": "No external URLs retrieved; the decision uses direct exact arithmetic and current local supplier arguments. Existing literature-reading claims in source metadata belong to prior authors. The support index has no entry for this subject; no outside support proposal was reused.",
+    "consumer_uses": [
+      {
+        "id": "thm-csm-frontier-interval-partition-certificate",
+        "path": "items/thm-csm-frontier-interval-partition-certificate.md",
+        "affected_use": "Statement invokes this algorithm; F1 specifies endpoint conversion, finite interval sums and positive-denominator quotient; proof steps 1.1, 2.1 and 3.1 use its finite DAG, enclosure operations and return branches.",
+        "disposition": "unchanged_sound",
+        "reason": "The explicit left folds form the finite DAG required by the existing induction. Zero constants are exactly represented, each product and partial sum encloses the corresponding exact value, and the quotient and finite termination arguments are unchanged. No consumer interface change is necessary."
+      }
+    ],
+    "page_uses": [
+      {
+        "path": "library/classical-statistical-mechanics/csm-frontier-rare-event-numerics.md",
+        "affected_use": "Frontmatter items list places the algorithm immediately before its certificate theorem; page body is empty.",
+        "disposition": "unchanged_sound"
+      }
+    ],
+    "metadata": "Synchronized only the assigned algorithm statement field in research/physics-non-fluid-129-2026-10-21-r2-batch-98.pages.json under the shared write lock, rereading and checking the current owning file inside the guarded script. No page or consumer carrier was edited. The certificate theorem owner should refresh its historical supplier_excerpts exact_statement and relevant_hypotheses_and_conventions to the explicit recurrences when handling its new supplier context; no mathematical consumer repair is required.",
+    "validation": [
+      {
+        "command": "node tools/physics-support/rendercheck.mjs items/alg-csm-frontier-interval-finite-partition.md --json",
+        "exit_code": 0,
+        "result": "1 checked; no errors or warnings."
+      },
+      {
+        "command": "node tools/physics-support/tsx-run.mjs tools/physics-support/precheck.mts items/alg-csm-frontier-interval-finite-partition.md --json",
+        "exit_code": 0,
+        "result": "1 file; proof checking not applicable; zero failures."
+      },
+      {
+        "command": "node tools/physics-support/proof-layout.mjs items/alg-csm-frontier-interval-finite-partition.md",
+        "exit_code": 0,
+        "result": "1 item, 0 proof steps, 0 defects. Run after the final item edit."
+      },
+      {
+        "command": "node tools/physics-support/depcheck.mjs --items-file /tmp/physics-step5-u98-items.txt --json",
+        "exit_code": 0,
+        "result": "Explicit JSON selection contains only the assigned algorithm. Focused item/page and actual prerequisite checks: zero errors, zero warnings; 12 dependency-closure items."
+      },
+      {
+        "command": "node tools/physics-support/step5-workflow.mjs review-contexts --run physics-non-fluid-129-2026-10-21-r2 --items alg-csm-frontier-interval-finite-partition",
+        "exit_code": 0,
+        "result": "Copied both hashes immediately after completing the mathematical review. Subsequent changes only synchronize the manifest mirror and write this report; no supplier edited."
+      },
+      {
+        "command": "Python SHA-256 comparison against research/math-imports.json for all five direct supplier item files",
+        "exit_code": 0,
+        "result": "All five current imported supplier files match their recorded raw-byte pins."
+      }
+    ],
+    "unresolved_obligations": [],
+    "next_action": "Handoff the completed decision and current review to the controller. The explicit Definition change requires ordinary direct-consumer routing; no judge, gate battery, central stamp or certification was launched.",
+    "tooling_notes": "An unavailable python executable was replaced with python3. Initial proof-contracts.mjs lookup found no such module; the actual tool is proof-contract.mjs and the assigned algorithm has no proof contract. Direct Node execution of .mts failed and was corrected using tsx-run.mjs. The first manifest script failed its prewrite equality assertion because JavaScript replacement strings interpret dollar pairs; it wrote nothing and released the lock. A replacement callback fixed that issue and the guarded update passed. The first depcheck selection was plain text and rejected before checks; rerun with an explicit JSON array passed."
+  },
+  "supporting_evidence": {
+    "research/physics-non-fluid-129-2026-10-21-r2-batch-98-step5-context.json": "431c67d26950a021159efa02087c17f9dbf0ee947a7ce41034e566def8e93354"
+  },
+  "downstream_uses": {
+    "thm-csm-frontier-interval-partition-certificate": "Statement and F1 invoke the finite partition procedure; proof steps 1.1–3.1 use its finite DAG, outward enclosure operations, quotient branch and finite operation count. Explicit left folds preserve each use."
+  }
+}

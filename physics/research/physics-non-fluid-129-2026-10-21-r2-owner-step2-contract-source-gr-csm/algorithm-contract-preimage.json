@@ -1,0 +1,145 @@
+{
+  "citations": [
+    {
+      "fact": "F1",
+      "source": "lem-csm-frontier-schur-complement-positive",
+      "source_section": "Statement",
+      "quote": "Let $r\\ge0$ and $s\\ge1$ be integers, and let\n\n$$K=\\begin{pmatrix}A&B\\\\B^{\\mathsf T}&C\\end{pmatrix}\\in\\mathbb R^{(r+s)\\times(r+s)}$$\n\nbe symmetric positive definite, with $A\\in\\mathbb R^{r\\times r}$ and $C\\in\\mathbb R^{s\\times s}$. Then $C$ is symmetric positive definite, $\\det C>0$, and $C^{-1}$ exists. The Schur complement $S:=A-BC^{-1}B^{\\mathsf T}$ is symmetric positive definite when $r\\ge1$; when $r=0$, $S$ is the empty $0\\times0$ matrix. For all $x\\in\\mathbb R^r$ and $y\\in\\mathbb R^s$,\n\n$$\\begin{pmatrix}x\\\\y\\end{pmatrix}^{\\mathsf T}K\\begin{pmatrix}x\\\\y\\end{pmatrix}=x^{\\mathsf T}Sx+(y+C^{-1}B^{\\mathsf T}x)^{\\mathsf T}C(y+C^{-1}B^{\\mathsf T}x).$$\n\nFor $r=0$, the first term and $S$ are interpreted on the singleton space $\\mathbb R^0$.\n\n",
+      "uses": [
+        "1.1"
+      ]
+    },
+    {
+      "fact": "F2",
+      "source": "def-natural-logarithm",
+      "source_section": "Definition",
+      "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because The exponential is a continuous bijection from $\\mathbb{R}$ onto $(0,\\infty)$ states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.\n\n",
+      "uses": [
+        "1.1"
+      ]
+    }
+  ],
+  "derivations": [
+    {
+      "id": "1.1",
+      "step": "1.1",
+      "claim": "At any stage with a nonempty eliminated set $E_j$, the current matrix is positive definite by induction, beginning with the input $K_0$. Its principal block $C_j$ is positive definite because any nonzero vector supported on $E_j$ extends by zeros to a nonzero vector for the full quadratic form. Therefore [F1] gives $\\det C_j>0$ and invertibility, so the linear system has a unique solution, the output is the stated Schur complement, and $\\ell_j$ is a real number by [F2]. The same fact gives positive definiteness of $K_j$ when $R_j$ is nonempty; for empty $R_j$, the specified empty-matrix convention applies. An empty eliminated set leaves the current positive-definite matrix unchanged. Thus every stage is well-defined.",
+      "inputs": [
+        "given",
+        "F1",
+        "F2",
+        "algebra"
+      ]
+    },
+    {
+      "id": "2.1",
+      "step": "2.1",
+      "claim": "Each of the $q$ stages applies a finite number of real matrix operations and then advances the stage index by one. Since $q$ is finite, after exactly $q$ stages the procedure terminates with the displayed output; if $q=0$ it returns $(K_0)$ with an empty list of increments.",
+      "inputs": [
+        "given",
+        "step 1.1",
+        "algebra"
+      ]
+    }
+  ],
+  "routine_steps": [],
+  "boundaries": [
+    {
+      "case": "empty",
+      "status": "checked",
+      "evidence": "An empty retained set uses the unique 0\u00d70 matrix and determinant 1 by the Statement and step 1.1."
+    },
+    {
+      "case": "zero",
+      "status": "checked",
+      "evidence": "When q=0, step 2.1 returns the input with an empty increment list and no update."
+    },
+    {
+      "case": "one",
+      "status": "checked",
+      "evidence": "A single retained or eliminated coordinate is allowed by N\u22651 and the SPD block check in step 1.1."
+    },
+    {
+      "case": "degenerate",
+      "status": "checked",
+      "evidence": "An empty eliminated set takes the explicit no-op branch in step 1.1."
+    },
+    {
+      "case": "endpoints",
+      "status": "checked",
+      "evidence": "The chain may have q=0 or end with Rq empty; steps 1.1\u20132.1 prove both legal endpoints."
+    },
+    {
+      "case": "nonempty-choice",
+      "status": "not_applicable",
+      "reason": "The procedure uses finite sets and unique linear-system solutions, not a choice axiom."
+    },
+    {
+      "case": "iff-forward",
+      "status": "not_applicable",
+      "reason": "The algorithm defines a procedure and has no biconditional statement."
+    },
+    {
+      "case": "iff-reverse",
+      "status": "not_applicable",
+      "reason": "The algorithm defines a procedure and has no biconditional statement."
+    }
+  ],
+  "finite_checks": [
+    {
+      "name": "no-op and full-elimination branches",
+      "status": "checked",
+      "evidence": "q=0 returns K0 with no factors; a one-coordinate full elimination has r=0 and a positive scalar determinant, as specified in steps 1.1\u20132.1."
+    }
+  ],
+  "supplier_excerpts": [
+    {
+      "supplier": "def-csm-frontier-gaussian-lattice",
+      "carrier": "items/def-csm-frontier-gaussian-lattice.md",
+      "status": "draft",
+      "source_section": "Definition",
+      "exact_statement": "Assume the Axiom of Countable Choice from [[def-countable-choice]]. Let integers $d,L\\ge1$ specify the periodic lattice $\\Lambda_{d,L}=(\\mathbb Z/L\\mathbb Z)^d$ and let $m^2>0$ and $\\kappa>0$ be dimensionless real parameters in lattice units. On the real coordinate space $\\mathbb R^{\\Lambda_{d,L}}$, let\n\n$$K_{d,L,m,\\kappa}:=m^2I+\\kappa(-\\Delta),$$\n\nwhere $-\\Delta$ is the periodic Laplacian of [[lem-csm-frontier-periodic-laplacian-spectrum]]. Its eigenvalues are\n\n$$m^2+4\\kappa\\sum_{j=1}^d\\sin^2(\\pi r_j/L),\\qquad r\\in\\{0,\\ldots,L-1\\}^d,$$\n\nso it is symmetric positive definite. The finite periodic Gaussian lattice field is the centered probability $\\gamma_{K_{d,L,m,\\kappa}}$ of [[def-csm-frontier-finite-gaussian-precision]], with density proportional to $\\exp(-z^{\\mathsf T}K_{d,L,m,\\kappa}z/2)$ against Lebesgue measure on $\\mathbb R^{L^d}$ and covariance $K_{d,L,m,\\kappa}^{-1}$ by [[thm-csm-examples-quadratic-covariance]] at $\\beta=1$.\n\nThe lattice coordinates $z_x$ and the quadratic exponent are dimensionless. A physical model may set $z_x=\\Phi_x/\\Phi_*$ and divide its energy by $k_BT$, where $\\Phi_*$ is a declared field unit and $T>0$ is temperature; this definition itself makes no empirical claim. At $m^2=0$, the constant field is a zero mode, so this full-space positive-precision definition does not apply. A finite-volume massless model must first specify a restriction such as the subspace $\\sum_{x\\in\\Lambda_{d,L}}z_x=0$ before inverting the Laplacian.\n\n",
+      "relevant_hypotheses_and_conventions": "Declared in the consumer Statement or context; no additional proof-step hypothesis is taken from this supplier.",
+      "supplier_proof_status": "Draft supplier; current interface and complete argument where present were inspected. Step 1 readiness is a separate record and does not equal independent approval.",
+      "consumer_use": [
+        "Declared in Statement/context; not cited as a separate proof-step fact."
+      ]
+    },
+    {
+      "supplier": "def-csm-frontier-finite-gaussian-precision",
+      "carrier": "items/def-csm-frontier-finite-gaussian-precision.md",
+      "status": "draft",
+      "source_section": "Definition",
+      "exact_statement": "Assume the Axiom of Countable Choice: every sequence $(X_n)_{n\\in\\mathbb N}$ of nonempty sets has a function $f$ with $f(n)\\in X_n$ for every $n$. For $N\\ge1$, a real symmetric positive-definite matrix $K\\in\\mathbb R^{N\\times N}$ (meaning $z^{\\mathsf T}Kz>0$ for every nonzero $z\\in\\mathbb R^N$) defines the finite centered Gaussian probability $\\gamma_K$ on $\\mathbb R^N$ by\n\n$$Z_K:=\\int_{\\mathbb R^N}e^{-z^{\\mathsf T}Kz/2}\\,d\\lambda_N(z),\\qquad \\gamma_K(dz):=Z_K^{-1}e^{-z^{\\mathsf T}Kz/2}\\,d\\lambda_N(z).$$\n\nUnder the stated Axiom of Countable Choice, $Z_K=(2\\pi)^{N/2}(\\det K)^{-1/2}$, $\\mathbb E_{\\gamma_K}[z]=0$, and $\\operatorname{Cov}_{\\gamma_K}(z)=K^{-1}$; these identities are the positive-quadratic-form Gaussian theorem of the mathematical supplier. Here $K$ is called the precision matrix because it appears in the quadratic exponent, and the covariance is its inverse. For $N=0$, define $\\mathbb R^0$ to be the singleton containing the empty vector and define $\\gamma_{\\varnothing}$ to put mass one on that point; its partition factor and empty determinant are both $1$.\n\nThe variables $z_i$ and exponent $z^{\\mathsf T}Kz/2$ are dimensionless in this mathematical definition. In a physical quadratic model, if $\\Phi_i$ has field unit $\\Phi_*$ and $H(\\Phi)=\\frac12\\Phi^{\\mathsf T}K_{\\rm phys}\\Phi$, then each entry of $K_{\\rm phys}$ has units $\\mathrm J/(\\Phi_*)^2$. With $\\beta=(k_BT)^{-1}$ in $\\mathrm J^{-1}$ and $z_i=\\Phi_i/\\Phi_*$, the dimensionless precision is $K=\\beta\\Phi_*^2K_{\\rm phys}$. This dimensional conversion does not assert an empirical model.\n\n",
+      "relevant_hypotheses_and_conventions": "Declared in the consumer Statement or context; no additional proof-step hypothesis is taken from this supplier.",
+      "supplier_proof_status": "Draft supplier; current interface and complete argument where present were inspected. Step 1 readiness is a separate record and does not equal independent approval.",
+      "consumer_use": [
+        "Declared in Statement/context; not cited as a separate proof-step fact."
+      ]
+    },
+    {
+      "supplier": "lem-csm-frontier-schur-complement-positive",
+      "carrier": "items/lem-csm-frontier-schur-complement-positive.md",
+      "status": "draft",
+      "source_section": "Statement",
+      "exact_statement": "Let $r\\ge0$ and $s\\ge1$ be integers, and let\n\n$$K=\\begin{pmatrix}A&B\\\\B^{\\mathsf T}&C\\end{pmatrix}\\in\\mathbb R^{(r+s)\\times(r+s)}$$\n\nbe symmetric positive definite, with $A\\in\\mathbb R^{r\\times r}$ and $C\\in\\mathbb R^{s\\times s}$. Then $C$ is symmetric positive definite, $\\det C>0$, and $C^{-1}$ exists. The Schur complement $S:=A-BC^{-1}B^{\\mathsf T}$ is symmetric positive definite when $r\\ge1$; when $r=0$, $S$ is the empty $0\\times0$ matrix. For all $x\\in\\mathbb R^r$ and $y\\in\\mathbb R^s$,\n\n$$\\begin{pmatrix}x\\\\y\\end{pmatrix}^{\\mathsf T}K\\begin{pmatrix}x\\\\y\\end{pmatrix}=x^{\\mathsf T}Sx+(y+C^{-1}B^{\\mathsf T}x)^{\\mathsf T}C(y+C^{-1}B^{\\mathsf T}x).$$\n\nFor $r=0$, the first term and $S$ are interpreted on the singleton space $\\mathbb R^0$.\n\n",
+      "relevant_hypotheses_and_conventions": "Consumer facts preserve the exact current supplier interface and hypotheses: [F1] For a symmetric positive-definite block matrix, the eliminated principal block is invertible with positive determinant, and its Schur complement is positive definite unless its size is zero ([[lem-csm-frontier-schur-complement-positive]]).",
+      "supplier_proof_status": "Draft supplier; current interface and complete argument where present were inspected. Step 1 readiness is a separate record and does not equal independent approval.",
+      "consumer_use": [
+        "F1 in 1.1"
+      ]
+    },
+    {
+      "supplier": "def-natural-logarithm",
+      "carrier": "items/def-natural-logarithm.md",
+      "status": "published",
+      "source_section": "Definition",
+      "exact_statement": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because The exponential is a continuous bijection from $\\mathbb{R}$ onto $(0,\\infty)$ states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.\n\n",
+      "relevant_hypotheses_and_conventions": "Consumer facts preserve the exact current supplier interface and hypotheses: [F2] The natural logarithm is defined on positive real numbers ([[def-natural-logarithm]]).",
+      "supplier_proof_status": "Published supplier; current statement and available proof inspected. This records source status, not a new independent approval.",
+      "consumer_use": [
+        "F2 in 1.1"
+      ]
+    }
+  ]
+}

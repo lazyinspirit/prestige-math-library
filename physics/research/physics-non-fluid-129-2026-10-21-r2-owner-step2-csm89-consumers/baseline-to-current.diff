@@ -1,0 +1,340 @@
+--- baseline/def-csm-frontier-infinite-volume-criticality
++++ current/def-csm-frontier-infinite-volume-criticality
+@@ -33,9 +33,9 @@
+ 
+ ## Definition
+ 
+-Let $I\subseteq\mathbb R$ be a nonempty open interval of values of a scalar control parameter $\theta$, expressed in one fixed unit if it is dimensional. Let $(N_n)_{n\ge1}$ be positive integers with $N_n\to\infty$, interpreted as finite system sizes such as site counts. A finite-volume partition-function sequence on $I$ is a sequence of real-analytic functions $Z_n:I\to(0,\infty)$. For each $n$, define its dimensionless log partition density per site by $p_n(\theta):=N_n^{-1}\log Z_n(\theta)$, where $\log$ is the natural logarithm. If the pointwise limit $p(\theta):=\lim_{n\to\infty}p_n(\theta)$ exists as a finite real number for every $\theta\in I$, call $p$ the infinite-volume pressure associated with this sequence. A point $\theta_c\in I$ is critical under the nonanalytic-pressure criterion exactly when there do not exist $\epsilon>0$ with $(\theta_c-\epsilon,\theta_c+\epsilon)\subseteq I$ and real coefficients $(a_k)_{k\ge0}$ such that $p(\theta)=\sum_{k=0}^{\infty}a_k(\theta-\theta_c)^k$ throughout that interval. Finite-volume analyticity and a finite-size maximum of a derivative do not, by themselves, establish criticality under this definition.
++Let $I\subseteq\mathbb R$ be a nonempty open interval of values of a scalar control parameter $\theta$, expressed in one fixed unit if it is dimensional. A function $g:I\to\mathbb R$ is **real analytic** if for every $\theta_0\in I$ there are $\epsilon>0$ and real coefficients $(a_k)_{k\ge0}$ such that $(\theta_0-\epsilon,\theta_0+\epsilon)\subseteq I$, the series $\sum_{k=0}^{\infty}a_k(\theta-\theta_0)^k$ converges there, and its sum equals $g(\theta)$ throughout that interval. Let $(N_n)_{n\ge1}$ be positive integers with $N_n\to\infty$, interpreted as finite system sizes such as site counts. A finite-volume partition-function sequence on $I$ is a sequence of real-analytic functions $Z_n:I\to(0,\infty)$. For each $n$, define its dimensionless log partition density per site by $p_n(\theta):=N_n^{-1}\log Z_n(\theta)$, where $\log$ is the natural logarithm. If the pointwise limit $p(\theta):=\lim_{n\to\infty}p_n(\theta)$ exists as a finite real number for every $\theta\in I$, call $p$ the infinite-volume pressure associated with this sequence. A point $\theta_c\in I$ is critical under the nonanalytic-pressure criterion exactly when there do not exist $\epsilon>0$ with $(\theta_c-\epsilon,\theta_c+\epsilon)\subseteq I$ and real coefficients $(a_k)_{k\ge0}$ such that $\sum_{k=0}^{\infty}a_k(\theta-\theta_c)^k$ converges and equals $p(\theta)$ throughout that interval.
+ 
+-This is one precise thermodynamic criticality criterion; it makes no claim that a particular interacting model satisfies it. A divergent correlation length is a separate criterion and is not identified with pressure nonanalyticity without an additional theorem.
++This definition specifies only the nonanalytic-pressure criterion and makes no claim that a particular model satisfies it.
+ 
+ ## Definition references
+ 
+--- baseline/lem-csm-frontier-periodic-laplacian-spectrum
++++ current/lem-csm-frontier-periodic-laplacian-spectrum
+@@ -10,20 +10,30 @@
+ dependency_level: 0
+ deps:
+   - def-integers-modulo-n
++  - thm-standard-representatives-modulo-n
++  - def-addition-and-multiplication-modulo-n
++  - thm-integers-modulo-n-basic-algebra
+   - lem-orthogonality-of-characters-on-a-finite-cyclic-group
+   - lem-finite-sum-reindexing-and-fubini
++  - def-complex-exponential
+   - thm-complex-exponential-addition-and-real-extension
+   - thm-kernel-and-fibres-of-complex-exponential
+   - cor-complex-exponential-cartesian-form-modulus-and-eulers-identity
++  - lem-complex-conjugation-and-modulus-laws
+   - thm-sine-and-cosine-addition-formulas
+   - thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions
+ dependency_roles:
+   def-integers-modulo-n: mathematical-premise
++  thm-standard-representatives-modulo-n: mathematical-premise
++  def-addition-and-multiplication-modulo-n: mathematical-premise
++  thm-integers-modulo-n-basic-algebra: mathematical-premise
+   lem-orthogonality-of-characters-on-a-finite-cyclic-group: mathematical-premise
+   lem-finite-sum-reindexing-and-fubini: mathematical-premise
++  def-complex-exponential: mathematical-premise
+   thm-complex-exponential-addition-and-real-extension: mathematical-premise
+   thm-kernel-and-fibres-of-complex-exponential: mathematical-premise
+   cor-complex-exponential-cartesian-form-modulus-and-eulers-identity: mathematical-premise
++  lem-complex-conjugation-and-modulus-laws: mathematical-premise
+   thm-sine-and-cosine-addition-formulas: mathematical-premise
+   thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions: mathematical-premise
+ justified_by: []
+@@ -47,42 +57,78 @@
+ 
+ ## Statement
+ 
+-Let $d\ge1$ and $L\ge1$ be integers, let $\Lambda_{d,L}:=(\mathbb Z/L\mathbb Z)^d$, and represent every residue coordinate by its unique value in $\{0,\ldots,L-1\}$. Write $e_j$ for the $j$th coordinate class, and count the two terms $x+e_j$ and $x-e_j$ separately even when they coincide for $L=1$ or $L=2$. For a real function $f$ on $\Lambda_{d,L}$, define
++Let $d,L\ge1$ be integers and let $\Lambda_{d,L}:=(\mathbb Z/L\mathbb Z)^d$, where $\mathbb Z/L\mathbb Z$ is the quotient set of integers modulo $L$. Use the quotient addition $[a]_L+[b]_L=[a+b]_L$ and additive inverse $-[a]_L=[-a]_L$, and define these operations coordinatewise on $\Lambda_{d,L}$. For $x\in\Lambda_{d,L}$, write $\widetilde x=(\widetilde x_1,\ldots,\widetilde x_d)\in\{0,\ldots,L-1\}^d$ for its unique coordinate representatives. For $1\le j\le d$, let $e_j\in\Lambda_{d,L}$ have coordinate $[1]_L$ in position $j$ and $[0]_L$ elsewhere. Count the two terms $x+e_j$ and $x-e_j$ separately even when they coincide for $L=1$ or $L=2$.
++
++For a real-valued function $f:\Lambda_{d,L}\to\mathbb R$, define
+ 
+ $$(-\Delta f)(x):=\sum_{j=1}^d\bigl(2f(x)-f(x+e_j)-f(x-e_j)\bigr).$$
+ 
+-Extend $-\Delta$ complex-linearly. For $r=(r_1,\ldots,r_d)\in\{0,\ldots,L-1\}^d$, define $\chi_r(x):=\exp(2\pi i\,r\cdot x/L)$. With inner product $\langle f,g\rangle=L^{-d}\sum_{x\in\Lambda_{d,L}}f(x)\overline{g(x)}$, the $L^d$ characters $\chi_r$ form an orthonormal basis of $\mathbb C^{\Lambda_{d,L}}$ and satisfy
++For a complex-valued function, use the same formula for $-\Delta$, which is its complex-linear extension. Write $\mathbb C^{\Lambda_{d,L}}$ for the complex-valued functions on $\Lambda_{d,L}$ with pointwise vector operations. For $r=(r_1,\ldots,r_d)\in\{0,\ldots,L-1\}^d$, define the function $\chi_r:\Lambda_{d,L}\to\mathbb C$ by
+ 
+-$$-\Delta\chi_r=\lambda_r\chi_r,\qquad \lambda_r=4\sum_{j=1}^d\sin^2(\pi r_j/L).$$
++$$\chi_r(x):=\exp\!\left(\frac{2\pi i}{L}\sum_{j=1}^d r_j\widetilde x_j\right).$$
+ 
+-Consequently $-\Delta$ is real symmetric positive semidefinite, and for $m^2>0$ and $\kappa>0$ the matrix $m^2I_{\Lambda_{d,L}}+\kappa(-\Delta)$ is real symmetric positive definite with eigenvalues $m^2+4\kappa\sum_j\sin^2(\pi r_j/L)>0$.
++Use the inner product $\langle f,g\rangle:=L^{-d}\sum_{x\in\Lambda_{d,L}}f(x)\overline{g(x)}$. Identify real functions with coordinate vectors using the lexicographic order on the representatives $\widetilde x$, and let $I_{\Lambda_{d,L}}$ be the identity operator on those functions. A real matrix $A$ is symmetric when $A^{\mathsf T}=A$; a real symmetric matrix is positive semidefinite when $v^{\mathsf T}Av\ge0$ for every real vector $v$, and positive definite when $v^{\mathsf T}Av>0$ for every nonzero real vector $v$. For all $r,s\in\{0,\ldots,L-1\}^d$, the inner products satisfy $\langle\chi_r,\chi_s\rangle=1$ if $r=s$ and $0$ otherwise; every complex-valued function on $\Lambda_{d,L}$ is a unique linear combination of the functions $\chi_r$.
++
++For each $r$, the equation $-\Delta\chi_r=\lambda_r\chi_r$ holds with $\lambda_r:=4\sum_{j=1}^d\sin^2(\pi r_j/L)$; this scalar is the eigenvalue associated with $\chi_r$.
++
++Consequently $-\Delta$ is real symmetric positive semidefinite, and for real $m^2>0$ and $\kappa>0$ the matrix $m^2I_{\Lambda_{d,L}}+\kappa(-\Delta)$ is real symmetric positive definite with eigenvalues $m^2+4\kappa\sum_{j=1}^d\sin^2(\pi r_j/L)>0$.
+ 
+ ## Statement references
+ 
+ [[def-integers-modulo-n]]
+ 
++[[thm-standard-representatives-modulo-n]]
++
++[[def-addition-and-multiplication-modulo-n]]
++
++[[thm-integers-modulo-n-basic-algebra]]
++
++[[lem-orthogonality-of-characters-on-a-finite-cyclic-group]]
++
++[[lem-finite-sum-reindexing-and-fubini]]
++
++[[def-complex-exponential]]
++
++[[thm-complex-exponential-addition-and-real-extension]]
++
++[[thm-kernel-and-fibres-of-complex-exponential]]
++
++[[cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]]
++
++[[lem-complex-conjugation-and-modulus-laws]]
++
++[[thm-sine-and-cosine-addition-formulas]]
++
++[[thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions]]
++
+ ## Facts & Assumptions
+ 
+-**Given:** Integers $d,L\ge1$, the periodic lattice and discrete Laplacian of the Statement, and the canonical representatives $0,\ldots,L-1$.
++**Given:** Integers $d,L\ge1$, the coordinatewise quotient operations, canonical representatives, and discrete Laplacian of the Statement.
+ 
+-[F1] For $N\ge1$ and integers $k,\ell$, $\sum_{x=0}^{N-1}e^{2\pi i(k-\ell)x/N}$ is $N$ if $k\equiv\ell\pmod N$ and is $0$ otherwise ([[lem-orthogonality-of-characters-on-a-finite-cyclic-group]]).
++[F1] Every class in $\mathbb Z/L\mathbb Z$ has a unique representative in $\{0,\ldots,L-1\}$ ([[def-integers-modulo-n]], [[thm-standard-representatives-modulo-n]]).
+ 
+-[F2] Finite sums over product index sets may be factored and evaluated in either order ([[lem-finite-sum-reindexing-and-fubini]]).
++[F2] Quotient addition is $[a]_L+[b]_L=[a+b]_L$ and is independent of representatives; $\mathbb Z/L\mathbb Z$ with this operation is an additive abelian group, with inverse $-[a]_L=[-a]_L$ ([[def-addition-and-multiplication-modulo-n]], [[thm-integers-modulo-n-basic-algebra]]).
+ 
+-[F3] $\exp(z+w)=\exp z\exp w$ and $\exp z=1$ exactly when $z\in2\pi i\mathbb Z$ ([[thm-complex-exponential-addition-and-real-extension]], [[thm-kernel-and-fibres-of-complex-exponential]]).
++[F3] For $N\ge1$ and integers $k,\ell$, $\sum_{u=0}^{N-1}e^{2\pi i(k-\ell)u/N}$ is $N$ if $k\equiv\ell\pmod N$ and is $0$ otherwise ([[lem-orthogonality-of-characters-on-a-finite-cyclic-group]]).
+ 
+-[F4] $e^{it}=\cos t+i\sin t$ for real $t$, and $2-2\cos t=4\sin^2(t/2)$ ([[cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]], [[thm-sine-and-cosine-addition-formulas]]).
++[F4] Finite sums over product index sets may be factored and evaluated in either order ([[lem-finite-sum-reindexing-and-fubini]]).
+ 
+-[F5] Sine is odd and cosine is even, so $e^{-it}+e^{it}=2\cos t$ for real $t$ ([[thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions]], [[cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]]).
++[F5] $\exp(z+w)=\exp z\exp w$ and $\exp z=1$ exactly when $z\in2\pi i\mathbb Z$ ([[def-complex-exponential]], [[thm-complex-exponential-addition-and-real-extension]], [[thm-kernel-and-fibres-of-complex-exponential]]).
++
++[F6] For real $t$, $e^{it}=\cos t+i\sin t$ and $\cos(2t)=\cos^2t-\sin^2t$ ([[cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]], [[thm-sine-and-cosine-addition-formulas]]).
++
++[F7] For real $t$, $\sin^2t+\cos^2t=1$, $\sin(-t)=-\sin t$, and $\cos(-t)=\cos t$ ([[thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions]]).
++
++[F8] Complex conjugation fixes real numbers and sends $i$ to $-i$ ([[lem-complex-conjugation-and-modulus-laws]]); together with [F6] and [F7], this gives $\overline{e^{it}}=e^{-it}$ for real $t$.
+ 
+ ## Proof
+ 
+-1.1 For $r\in\{0,\ldots,L-1\}^d$, the character is periodic in each coordinate: adding or subtracting $L$ in coordinate $j$ multiplies it by $\exp(2\pi i r_j)=1$ by [F3]. Therefore $\chi_r(x+e_j)=e^{2\pi i r_j/L}\chi_r(x)$ and $\chi_r(x-e_j)=e^{-2\pi i r_j/L}\chi_r(x)$, including coordinate wraparound. [given, F3, algebra]
++1.1 Fix $x\in\Lambda_{d,L}$ and put $a_j=\widetilde x_j$. By [F1]–[F2], the $j$th representative of $x+e_j$ is $a_j+1-L\epsilon_j$, where $\epsilon_j=1$ if $a_j=L-1$ and $0$ otherwise; the $j$th representative of $x-e_j$ is $a_j-1+L\eta_j$, where $\eta_j=1$ if $a_j=0$ and $0$ otherwise. All other representatives are unchanged. Substitution into the definition of $\chi_r$, followed by the exponential addition law and $\exp(2\pi i n)=1$ for integers $n$ from [F5], gives $\chi_r(x+e_j)=e^{2\pi i r_j/L}\chi_r(x)$ and $\chi_r(x-e_j)=e^{-2\pi i r_j/L}\chi_r(x)$. This also holds for $L=1$ and $L=2$. [given, F1, F2, F5, algebra]
+ 
+-2.1 For $r,s\in\{0,\ldots,L-1\}^d$, finite-sum factorization [F2] gives $\langle\chi_r,\chi_s\rangle=\prod_{j=1}^d L^{-1}\sum_{x_j=0}^{L-1}e^{2\pi i(r_j-s_j)x_j/L}$. By [F1], each factor is $1$ if $r_j=s_j$ and $0$ otherwise; hence these characters are orthonormal. [F1, F2, step 1.1, algebra]
++2.1 For $r,s\in\{0,\ldots,L-1\}^d$, finite-sum factorization [F4] and the conjugation identity [F8] give $\langle\chi_r,\chi_s\rangle=\prod_{j=1}^d L^{-1}\sum_{u=0}^{L-1}e^{2\pi i(r_j-s_j)u/L}$. By [F1], distinct canonical representatives are incongruent modulo $L$, so [F3] makes each factor $1$ when $r_j=s_j$ and $0$ otherwise. This is the inner-product identity stated above. [F1, F3, F4, F8, algebra]
+ 
+-2.2 Substituting the shift identities of step 1.1 into the definition of $-\Delta$ gives $-\Delta\chi_r=\sum_j(2-e^{2\pi i r_j/L}-e^{-2\pi i r_j/L})\chi_r$. By Euler's identity [F4] and parity [F5], each coefficient is $2-2\cos(2\pi r_j/L)$; the double-angle identity in [F4] makes this $4\sin^2(\pi r_j/L)$, proving the displayed eigenvalue formula. [F4, F5, step 1.1, algebra]
++2.2 Substituting the shift identities of step 1.1 into $-\Delta$ gives $-\Delta\chi_r=\sum_{j=1}^d(2-e^{2\pi i r_j/L}-e^{-2\pi i r_j/L})\chi_r$. By [F6]–[F7], each coefficient equals $2-2\cos(2\pi r_j/L)=4\sin^2(\pi r_j/L)$, proving the eigenvalue formula. [F6, F7, step 1.1, algebra]
+ 
+-3.1 For any $f:\Lambda_{d,L}\to\mathbb C$, set $\widehat f(r)=L^{-d}\sum_{y\in\Lambda_{d,L}}f(y)\overline{\chi_r(y)}$. Applying [F1] in the frequency coordinates and using the unique representatives for the residue classes ([[def-integers-modulo-n]]) gives $\sum_r\chi_r(x)\overline{\chi_r(y)}=L^d$ when $x=y$ in $\Lambda_{d,L}$ and $0$ otherwise. Thus $\sum_r\widehat f(r)\chi_r(x)=L^{-d}\sum_y f(y)\sum_r\chi_r(x)\overline{\chi_r(y)}=f(x)$ for every $x$, so the characters span and the orthonormal family is a basis. [F1, F2, step 2.1, algebra]
++3.1 For any $f:\Lambda_{d,L}\to\mathbb C$, set $\widehat f(r)=L^{-d}\sum_{y\in\Lambda_{d,L}}f(y)\overline{\chi_r(y)}$. By [F4] and [F8], the frequency sum factors as $\sum_r\chi_r(x)\overline{\chi_r(y)}=\prod_{j=1}^d\sum_{r_j=0}^{L-1}e^{2\pi i r_j(\widetilde x_j-\widetilde y_j)/L}$. The canonical-representative theorem [F1] and orthogonality [F3] make this product $L^d$ if $x=y$ in $\Lambda_{d,L}$ and $0$ otherwise. Therefore $\sum_r\widehat f(r)\chi_r(x)=L^{-d}\sum_y f(y)\sum_r\chi_r(x)\overline{\chi_r(y)}=f(x)$ for every $x$. If a linear combination $\sum_r c_r\chi_r$ vanishes, taking its inner product with $\chi_s$ and applying step 2.1 gives $c_s=0$ for each $s$, so the expansion is unique. [F1, F3, F4, F8, step 2.1, algebra]
+ 
+-4.1 For every real $f$, reindexing the finite sums gives $\sum_xf(x)(-\Delta f)(x)=\sum_{j=1}^d\sum_x(f(x+e_j)-f(x))^2\ge0$, so $-\Delta$ is positive semidefinite; its displayed matrix is symmetric because each neighbor term is paired with its reverse. Hence for nonzero $f$, $$f^{\mathsf T}(m^2I+\kappa(-\Delta))f=m^2\sum_xf(x)^2+\kappa\sum_{j=1}^d\sum_x(f(x+e_j)-f(x))^2>0,$$ since $m^2>0$ and $\kappa>0$. The characters form a basis by step 3.1, and their eigenvalues for $-\Delta$ are given by step 2.2, so the combined operator has the stated eigenvalues. Therefore it is symmetric positive definite with the displayed spectrum. [given, F2, step 2.2, step 3.1, algebra] ∎
++4.1 For every real $f$, the translations $x\mapsto x+e_j$ are bijections with inverses $x\mapsto x-e_j$, so reindexing the finite sums [F4] gives $\sum_xf(x)(-\Delta f)(x)=\sum_{j=1}^d\sum_x(f(x+e_j)-f(x))^2\ge0$. Thus $-\Delta$ is positive semidefinite; its matrix is symmetric because every shift term is paired with its inverse shift. For nonzero $f$, $$f^{\mathsf T}(m^2I+\kappa(-\Delta))f=m^2\sum_xf(x)^2+\kappa\sum_{j=1}^d\sum_x(f(x+e_j)-f(x))^2>0,$$ since $m^2>0$ and $\kappa>0$. By steps 2.2 and 3.1, the spanning functions $\chi_r$ satisfy the eigenvalue equations in the Statement, so the combined operator has the displayed eigenvalues. [given, F2, F4, step 2.2, step 3.1, algebra] ∎
+--- baseline/lem-csm-frontier-massless-torus-normalization-diverges
++++ current/lem-csm-frontier-massless-torus-normalization-diverges
+@@ -66,7 +66,7 @@
+ 
+ **Given:** $\mathrm{AC}_\omega$, integers $d,L\ge1$, the periodic site set $\Lambda_{d,L}$ with $N=L^d$, and $\kappa>0$.
+ 
+-[F1] The periodic operator $-\Delta$ is real symmetric and annihilates the constant vector $\mathbf1$; its zero-frequency character is the constant function ([[lem-csm-frontier-periodic-laplacian-spectrum]]).
++[F1] The periodic operator $-\Delta$ is real symmetric and annihilates the constant vector $\mathbf1$; the $r=0$ function $\chi_0(x)=1$ for every $x$ is that constant vector ([[lem-csm-frontier-periodic-laplacian-spectrum]]).
+ 
+ [F2] Under $\mathrm{AC}_\omega$, a $C^1$ diffeomorphism changes a nonnegative Lebesgue integral by its absolute Jacobian ([[def-countable-choice]], [[thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions]]).
+ 
+--- baseline/thm-csm-frontier-gaussian-massless-dimension
++++ current/thm-csm-frontier-gaussian-massless-dimension
+@@ -11,8 +11,10 @@
+ deps:
+   - def-csm-frontier-gaussian-lattice
+   - lem-csm-frontier-sine-comparison
++  - def-countable-choice
+   - def-lebesgue-measure-and-the-lebesgue-sigma-algebra
+   - def-nonnegative-lebesgue-integral
++  - def-integrable-real-and-complex-functions-and-their-integrals
+   - thm-lebesgue-measure-of-a-box-of-every-kind
+   - thm-continuous-preimages-of-borel-sets-are-borel
+   - prop-order-and-scalar-rules-for-the-nonnegative-integral
+@@ -23,8 +25,10 @@
+ dependency_roles:
+   def-csm-frontier-gaussian-lattice: mathematical-premise
+   lem-csm-frontier-sine-comparison: mathematical-premise
++  def-countable-choice: mathematical-premise
+   def-lebesgue-measure-and-the-lebesgue-sigma-algebra: mathematical-premise
+   def-nonnegative-lebesgue-integral: mathematical-premise
++  def-integrable-real-and-complex-functions-and-their-integrals: mathematical-premise
+   thm-lebesgue-measure-of-a-box-of-every-kind: mathematical-premise
+   thm-continuous-preimages-of-borel-sets-are-borel: mathematical-premise
+   prop-order-and-scalar-rules-for-the-nonnegative-integral: mathematical-premise
+@@ -35,6 +39,7 @@
+ justified_by: []
+ aliases: []
+ proof_strategy: direct
++axiom_use: "Uses ACω as the hypothesis of the Lebesgue box-volume premise: the dyadic layers and outer bounded region in proof steps 2.1–2.2 are assigned their Lebesgue measures using that theorem; the same choice-qualified Lebesgue measure and integral framework is used in Facts F2–F4."
+ physical_scope: null
+ provenance:
+   statement: literature-derived
+@@ -53,33 +58,45 @@
+ 
+ ## Statement
+ 
+-For integer $d\ge1$, coupling $\kappa>0$, and $k=(k_1,\ldots,k_d)\in[-\pi,\pi]^d$, put
++Assume the Axiom of Countable Choice $\mathrm{AC}_\omega$, meaning every sequence $(X_n)_{n\in\mathbb N}$ of nonempty sets has a function $f$ with $f(n)\in X_n$ for every $n$. For integer $d\ge1$, coupling $\kappa>0$, and $k=(k_1,\ldots,k_d)\in[-\pi,\pi]^d$, put
+ 
+ $$D_d(k):=4\sum_{j=1}^d\sin^2(k_j/2).$$
+ 
+-For $x\in\mathbb Z^d$, define the massless infinite-lattice Green integral when it is finite by
++Here $\lambda_d$ is $d$-dimensional Lebesgue measure restricted to the cube. For a measurable function $h:[-\pi,\pi]^d\to\mathbb R$, write $h^+=\max\{h,0\}$ and $h^-=\max\{-h,0\}$; its signed Lebesgue integral is $\int h^+\,d\lambda_d-\int h^-\,d\lambda_d$ when at most one of these two integrals is infinite, and $h$ is integrable when $\int |h|\,d\lambda_d<+\infty$. For $x\in\mathbb Z^d$, define the massless infinite-lattice Green integral when it is finite by
+ 
+ $$G_{d,\kappa}(x):=(2\pi)^{-d}\int_{[-\pi,\pi]^d}\frac{\cos(k\cdot x)}{\kappa D_d(k)}\,d\lambda_d(k),$$
+ 
+-where the integrand is assigned value $0$ at $k=0$, which does not affect the Lebesgue integral. If $d>2$, this integral is absolutely finite for every fixed $x\in\mathbb Z^d$. If $1\le d\le2$, the diagonal integral with $x=0$ is $+\infty$. Thus the dimension threshold concerns this free Gaussian Fourier integral; it does not assert an interacting critical exponent or a continuum scaling limit.
++where the integrand is assigned value $0$ at $k=0$, a choice that does not affect the integral because a singleton has Lebesgue measure zero. If $d>2$, this integral is absolutely finite for every fixed $x\in\mathbb Z^d$. If $1\le d\le2$, the nonnegative diagonal integral with $x=0$ is $+\infty$. Thus the dimension threshold concerns this free Gaussian Fourier integral; it does not assert an interacting critical exponent or a continuum scaling limit.
+ 
+ ## Statement references
+ 
++[[def-countable-choice]]
++
+ [[def-csm-frontier-gaussian-lattice]]
++
++[[def-lebesgue-measure-and-the-lebesgue-sigma-algebra]]
++
++[[def-nonnegative-lebesgue-integral]]
++
++[[def-integrable-real-and-complex-functions-and-their-integrals]]
++
++[[thm-lebesgue-measure-of-a-box-of-every-kind]]
+ 
+ ## Facts & Assumptions
+ 
+-**Given:** An integer $d\ge1$, $\kappa>0$, $x\in\mathbb Z^d$, the cube $[-\pi,\pi]^d$ with Euclidean Lebesgue measure, and $D_d$ as in the Statement.
++**Given:** $\mathrm{AC}_\omega$, an integer $d\ge1$, $\kappa>0$, $x\in\mathbb Z^d$, the cube $[-\pi,\pi]^d$ with Euclidean Lebesgue measure, and $D_d$ as in the Statement.
+ 
+ [F1] For $|u|\le\pi/2$, $2|u|/\pi\le|\sin u|\le|u|$ ([[lem-csm-frontier-sine-comparison]]).
+ 
+-[F2] A box $\prod_{j=1}^d[a_j,b_j]$ has Lebesgue measure $\prod_j(b_j-a_j)$, and Lebesgue measure is complete and countably additive ([[def-lebesgue-measure-and-the-lebesgue-sigma-algebra]], [[thm-lebesgue-measure-of-a-box-of-every-kind]]).
++[F2] Under $\mathrm{AC}_\omega$, boxes are Lebesgue measurable with measure equal to the product of their side lengths, and Lebesgue measure is complete and countably additive ([[def-countable-choice]], [[def-lebesgue-measure-and-the-lebesgue-sigma-algebra]], [[thm-lebesgue-measure-of-a-box-of-every-kind]]).
+ 
+ [F3] The nonnegative Lebesgue integral is monotone and additive for finite sums; increasing nonnegative measurable functions pass to their limit under the integral ([[prop-order-and-scalar-rules-for-the-nonnegative-integral]], [[cor-additivity-of-the-nonnegative-lebesgue-integral]], [[thm-monotone-convergence-for-the-integral]]).
+ 
+ [F4] A continuous real function is Borel measurable, and a geometric series with ratio in $(0,1)$ has finite sum ([[thm-continuous-preimages-of-borel-sets-are-borel]], [[thm-geometric-series]]).
+ 
+ [F5] $|\cos t|\le1$ for every real $t$ ([[thm-sine-cosine-signs-monotonicity-and-ranges]]).
++
++[F6] The real signed Lebesgue integral and the criterion $\int|h|\,d\lambda_d<+\infty$ for finite integrability are as stated in the real-integral definition linked above; the nonnegative integrals used in the comparison are those of [[def-nonnegative-lebesgue-integral]].
+ 
+ ## Proof
+ 
+@@ -95,4 +112,4 @@
+ $$\int_{Q_j}(\kappa D_d(k))^{-1}\,d\lambda_d(k)\ge \frac{1}{\kappa d}(2^d-1)2^{(2-d)j}.$$
+ The right side is bounded below by the positive constant $(2^d-1)/(\kappa d)$ for all $j\ge0$ when $d\le2$. Since the $Q_j$ are disjoint, finite additivity in [F3] shows that the integral over their first $M+1$ layers is at least $(M+1)(2^d-1)/(\kappa d)$; letting $M\to\infty$ and using monotonicity gives $\int(\kappa D_d)^{-1}=+\infty$. [given, F3, step 1.1, algebra]
+ 
+-3.1 If $d>2$, then $|\cos(k\cdot x)|(\kappa D_d(k))^{-1}\le(\kappa D_d(k))^{-1}$ away from the origin by [F5], and step 2.1 proves absolute integrability; multiplication by the finite constant $(2\pi)^{-d}$ preserves it. If $x=0$ and $d\le2$, the cosine is $1$, so step 2.2 gives the stated infinite diagonal integral. [given, F5, step 2.1, step 2.2, algebra] ∎
++3.1 If $d>2$, then $|\cos(k\cdot x)|(\kappa D_d(k))^{-1}\le(\kappa D_d(k))^{-1}$ away from the origin by [F5], and step 2.1 proves $\int |h_x|\,d\lambda_d<+\infty$; hence the signed integral in the Statement is finite by [F6], and multiplication by the finite constant $(2\pi)^{-d}$ preserves it. If $x=0$ and $d\le2$, the cosine is $1$, so step 2.2 gives the stated infinite nonnegative diagonal integral. [given, F5, F6, step 2.1, step 2.2, algebra] ∎
+--- baseline/alg-csm-frontier-gaussian-block-rg
++++ current/alg-csm-frontier-gaussian-block-rg
+@@ -9,22 +9,20 @@
+ library: physics
+ dependency_level: 3
+ deps:
+-  - def-csm-frontier-gaussian-lattice
+   - def-csm-frontier-finite-gaussian-precision
+   - lem-csm-frontier-schur-complement-positive
+   - def-natural-logarithm
+ dependency_roles:
+-  def-csm-frontier-gaussian-lattice: mathematical-premise
+   def-csm-frontier-finite-gaussian-precision: mathematical-premise
+   lem-csm-frontier-schur-complement-positive: mathematical-premise
+   def-natural-logarithm: mathematical-premise
+-justified_by: []
++justified_by:
++  - thm-csm-frontier-gaussian-block-rg-correct
+ aliases: []
+-proof_strategy: direct
+ physical_scope: null
+ provenance:
+   statement: literature-derived
+-  proof: ai-altered
++  proof: not-applicable
+ sources:
+   references:
+     - title: David Tong, Statistical Field Theory, complete Cambridge lecture notes
+@@ -35,11 +33,11 @@
+       locator: §§25.1.4–25.1.5, printed pp. 135–136 / PDF pp. 141–142, block partitioning and positive Schur complements.
+ ---
+ 
+-## Statement
++## Definition
+ 
+ The exact Gaussian block-elimination algorithm has input:
+ 
+-- an integer $N\ge1$ and a real symmetric positive-definite precision matrix $K_0\in\mathbb R^{N\times N}$;
++- an integer $N\ge1$ and a real matrix $K_0\in\mathbb R^{N\times N}$ satisfying $K_0^{\mathsf T}=K_0$ and $v^{\mathsf T}K_0v>0$ for every nonzero $v\in\mathbb R^N$. In the finite Gaussian convention, $K_0$ is the precision because it appears in the density proportional to $\exp(-z^{\mathsf T}K_0z/2)$;
+ - an integer $q\ge0$ and nested retained coordinate sets
+   $$R_0=\{1,\ldots,N\}\supseteq R_1\supseteq\cdots\supseteq R_q,$$
+   each given in increasing coordinate order.
+@@ -47,31 +45,18 @@
+ It starts at stage $0$ with the ordered coordinates $R_0$ and matrix $K_0$. For each $j=1,\ldots,q$, let $E_j=R_{j-1}\setminus R_j$ be the coordinates to eliminate at that stage.
+ 
+ 1. If $E_j=\varnothing$, set $K_j=K_{j-1}$ and $\ell_j=0$.
+-2. If $E_j\ne\varnothing$, reorder the current coordinates as $R_j$ followed by $E_j$ and write the correspondingly permuted matrix
++2. If $E_j\ne\varnothing$, reorder the current coordinates as the increasing list of $R_j$ followed by the increasing list of $E_j$, and write the correspondingly permuted matrix
+    $$K_{j-1}=\begin{pmatrix}A_j&B_j\\B_j^{\mathsf T}&C_j\end{pmatrix}.$$
+    Solve the nonsingular system $C_jX_j=B_j^{\mathsf T}$, set
+    $$K_j:=A_j-B_jX_j,\qquad \ell_j:=\frac{|E_j|}{2}\ln(2\pi)-\frac12\ln(\det C_j).$$
++   Interpret $K_j$ in the increasing coordinate order on $R_j$.
+ 
+-The output is $(K_q,\ell_1,\ldots,\ell_q)$, with the accumulated log normalization $\sum_{j=1}^q\ell_j$. When $R_j=\varnothing$, $K_j$ is the unique empty $0\times0$ matrix and its determinant is defined to be $1$. This is an exact-arithmetic procedure on finite matrices. When $K_0$ is a precision of [[def-csm-frontier-gaussian-lattice]], the log increments are intended to record the normalization changes from eliminating the stated coordinates; a separate correctness theorem proves that finite-dimensional Gaussian identity.
++The output is $(K_q,\ell_1,\ldots,\ell_q)$, with the accumulated log normalization $\sum_{j=1}^q\ell_j$. If $q=0$, this output means $K_0$ and an empty list of increments. When $R_j=\varnothing$, $K_j$ is the unique empty $0\times0$ matrix and its determinant is defined to be $1$. This is an exact-arithmetic procedure on finite matrices.
+ 
+-## Statement references
+-
+-[[def-csm-frontier-gaussian-lattice]]
++## Definition references
+ 
+ [[def-csm-frontier-finite-gaussian-precision]]
+ 
+ [[lem-csm-frontier-schur-complement-positive]]
+ 
+-## Facts & Assumptions
+-
+-**Given:** A finite real symmetric positive-definite matrix $K_0$ and a finite nested list of retained coordinate sets as in the Statement.
+-
+-[F1] For a symmetric positive-definite block matrix, the eliminated principal block is invertible with positive determinant, and its Schur complement is positive definite unless its size is zero ([[lem-csm-frontier-schur-complement-positive]]).
+-
+-[F2] The natural logarithm is defined on positive real numbers ([[def-natural-logarithm]]).
+-
+-## Proof
+-
+-1.1 At any stage with a nonempty eliminated set $E_j$, the current matrix is positive definite by induction, beginning with the input $K_0$. Its principal block $C_j$ is positive definite because any nonzero vector supported on $E_j$ extends by zeros to a nonzero vector for the full quadratic form. Therefore [F1] gives $\det C_j>0$ and invertibility, so the linear system has a unique solution, the output is the stated Schur complement, and $\ell_j$ is a real number by [F2]. The same fact gives positive definiteness of $K_j$ when $R_j$ is nonempty; for empty $R_j$, the specified empty-matrix convention applies. An empty eliminated set leaves the current positive-definite matrix unchanged. Thus every stage is well-defined. [given, F1, F2, algebra]
+-
+-2.1 Each of the $q$ stages applies a finite number of real matrix operations and then advances the stage index by one. Since $q$ is finite, after exactly $q$ stages the procedure terminates with the displayed output; if $q=0$ it returns $(K_0)$ with an empty list of increments. [given, step 1.1, algebra] ∎
++[[def-natural-logarithm]]
+--- baseline/lem-csm-frontier-quartic-engineering-scaling
++++ current/lem-csm-frontier-quartic-engineering-scaling
+@@ -35,7 +35,7 @@
+ 
+ ## Statement
+ 
+-Let integer $d\ge1$, dimensionless scale factor $b>0$, and real smooth compactly supported field $\varphi'\in C_c^\infty(\mathbb R^d)$ be given. Define
++Assume the Axiom of Countable Choice $\mathrm{AC}_\omega$, meaning every sequence $(X_n)_{n\in\mathbb N}$ of nonempty sets has a function $f$ with $f(n)\in X_n$ for every $n$. Let integer $d\ge1$, dimensionless scale factor $b>0$, and real smooth compactly supported field $\varphi'\in C_c^\infty(\mathbb R^d)$ be given. Define
+ 
+ $$\varphi_b(x):=b^{-(d-2)/2}\varphi'(x/b),\qquad x\in\mathbb R^d.$$
+ 
+@@ -50,6 +50,8 @@
+ Consequently a coefficient $g$ multiplying $Q_4$ transforms to $g'=b^{4-d}g$ when the action is re-expressed in the rescaled coordinate $x'=x/b$. This is engineering power counting on smooth test fields; it neither constructs an interacting probability measure nor proves an interacting critical exponent.
+ 
+ ## Statement references
++
++[[def-countable-choice]]
+ 
+ [[thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions]]
+ 

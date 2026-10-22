@@ -1,0 +1,398 @@
+[
+  {
+    "order": 879,
+    "id": "csm-frontier-hydrodynamic-ssep",
+    "kind": "A",
+    "category": "classical-statistical-mechanics",
+    "library": "physics",
+    "title": "Diffusive hydrodynamics from the symmetric exclusion process",
+    "companion": "csm-frontier-hydrodynamic-ssep-examples",
+    "requires": [
+      "csm-stochastic-response",
+      "csm-frontier-probability-interfaces"
+    ],
+    "items": [
+      {
+        "id": "def-csm-frontier-ssep-weak-heat-solution",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Weak heat solutions on the continuum torus",
+        "statement": "Assume the Axiom of Countable Choice ($\\mathrm{AC}_\\omega$), meaning every at most countable family of nonempty sets has a choice function. Let $d\\ge1$, let $\\mathbb T^d=(\\mathbb R/\\mathbb Z)^d$ carry the normalized product Haar measure $dx$ with $dx(\\mathbb T^d)=1$, and let $\\rho_0$ be a real measurable function on $\\mathbb T^d$ with $0\\le\\rho_0\\le1$ almost everywhere. For a finite $T\\ge0$, a **weak heat solution with datum $\\rho_0$** is a family $(u_t)_{0\\le t\\le T}$ of real essentially bounded measurable-function classes (elements of $L^\\infty(\\mathbb T^d,dx;\\mathbb R)$), with $u_0=\\rho_0$ as a function class, such that for every complex-valued smooth periodic test function $G$, the map $t\\mapsto\\int_{\\mathbb T^d}u_t(x)G(x)\\,dx$ is continuous and\n\n$$\\int_{\\mathbb T^d}u_t(x)G(x)\\,dx=\\int_{\\mathbb T^d}\\rho_0(x)G(x)\\,dx+\\int_0^t\\int_{\\mathbb T^d}u_s(x)\\Delta G(x)\\,dx\\,ds$$\n\nfor every $0\\le t\\le T$. Here $\\Delta=\\sum_{i=1}^d\\partial_{x_i}^2$ is the periodic Laplacian; equality of function classes means equality almost everywhere with respect to $dx$. For the Fourier convention on this torus, set $e_k(x)=\\exp(2\\pi i k\\cdot x)$ for $k\\in\\mathbb Z^d$ and $\\widehat f(k)=\\int_{\\mathbb T^d}f(x)e_{-k}(x)\\,dx$ for $f\\in L^1(\\mathbb T^d,dx)$.",
+        "deps": [
+          "def-countable-choice",
+          "def-fourier-coefficients-and-trigonometric-polynomials"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "def-fourier-coefficients-and-trigonometric-polynomials": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "physical_scope": null,
+        "sources": {
+          "references": [
+            {
+              "title": "S. R. S. Varadhan, Hydrodynamic Scaling, Chapter 4 lecture notes",
+              "url": "https://math.nyu.edu/~varadhan/Spring2012/Chapter4.pdf",
+              "locator": "Section 4.3, Theorem 4.3.1: weak heat-equation formulation on the continuum torus."
+            },
+            {
+              "title": "Claudio Landim, Hydrodynamic Limit of Interacting Particle Systems, complete lecture notes",
+              "url": "https://math.arizona.edu/~sethuram/588/Landim.pdf",
+              "locator": "Chapter 2, Section 2.3, equation (2.6): integral weak formulation of the heat equation."
+            }
+          ]
+        },
+        "dependency_level": 0,
+        "library": "physics",
+        "proof_route": "Define the weak heat equation by its integral identity against smooth periodic tests.",
+        "source_refs": [
+          "S. R. S. Varadhan, Hydrodynamic Scaling, Chapter 4 lecture notes",
+          "Claudio Landim, Hydrodynamic Limit of Interacting Particle Systems, complete lecture notes"
+        ]
+      },
+      {
+        "id": "lem-csm-frontier-ssep-sector-connectivity",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Connectedness of fixed-occupancy exclusion sectors",
+        "statement": "Let $G=(V,E)$ be a finite connected simple undirected graph with $m:=|V|\\ge1$. For $0\\le k\\le m$, let $\\mathcal C_k(G)$ be the set of all $k$-element subsets of $V$. Join distinct $A,B\\in\\mathcal C_k(G)$ when there is an edge $\\{x,y\\}\\in E$ with $x\\in A$, $y\\notin A$, and $B=(A\\setminus\\{x\\})\\cup\\{y\\}$. Then this graph on $\\mathcal C_k(G)$ is connected.",
+        "deps": [],
+        "justified_by": [],
+        "dependency_roles": {},
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "physical_scope": null,
+        "sources": {
+          "references": [
+            {
+              "title": "Shiba Biswal and Nicolas Lanchier, The simple exclusion process on finite connected graphs",
+              "url": "https://arxiv.org/pdf/1906.01752",
+              "locator": "Section 3, Lemmas 5–6 and proof: fixed-particle configurations are communicating classes. The statement here is graph-theoretic and is proved locally."
+            }
+          ]
+        },
+        "dependency_level": 0,
+        "library": "physics",
+        "proof_route": "Construct a spanning tree and prove connectivity of each k-subset graph by leaf induction.",
+        "source_refs": [
+          "Shiba Biswal and Nicolas Lanchier, The simple exclusion process on finite connected graphs"
+        ]
+      },
+      {
+        "id": "lem-csm-frontier-ssep-heat-flow",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Fourier heat flow on the continuum torus",
+        "statement": "Assume the Axiom of Countable Choice. Let $d\\ge1$ and let $\\rho_0:\\mathbb T^d\\to\\mathbb R$ be measurable with $0\\le\\rho_0\\le1$ almost everywhere, using normalized product Haar measure $dx$. For $k\\in\\mathbb Z^d$ define $e_k(x)=\\exp(2\\pi i k\\cdot x)$ and $\\widehat f(k)=\\int_{\\mathbb T^d}f(x)e_{-k}(x)\\,dx$. For $t>0$ set\n\n$$\\rho_t(x):=\\sum_{k\\in\\mathbb Z^d}e^{-4\\pi^2|k|^2t}\\widehat\\rho_0(k)e_k(x),$$\n\nand at $t=0$ set $\\rho_t=\\rho_0$ as an almost-everywhere class. For smooth periodic $G$, define\n\n$$P_tG(x):=\\sum_{k\\in\\mathbb Z^d}e^{-4\\pi^2|k|^2t}\\widehat G(k)e_k(x)\\quad(t>0),\\qquad P_0G:=G.$$\n\nThen on every strip $[\\epsilon,T]\\times\\mathbb T^d$ with $0<\\epsilon<T<\\infty$, the series for $\\rho_t$ and all its space and time derivatives converge absolutely and uniformly; in particular $\\rho_t$ is real and smooth for each $t>0$ and $\\partial_t\\rho_t=\\Delta\\rho_t$. For every finite $T$ and every smooth $G$, $P_tG$ is smooth on $[0,T]\\times\\mathbb T^d$, satisfies $\\partial_tP_tG=\\Delta P_tG$, has uniformly bounded derivatives of every fixed order there, and $P_tG\\to G$ uniformly as $t\\downarrow0$. Moreover\n\n$$\\int_{\\mathbb T^d}\\rho_tG\\,dx=\\int_{\\mathbb T^d}\\rho_0P_tG\\,dx,$$\n\nso $(\\rho_t)_{0\\le t\\le T}$ is the unique weak heat solution with datum $\\rho_0$ in the stated weak formulation. It preserves $0\\le\\rho_t\\le1$ almost everywhere and the mass $\\int\\rho_t\\,dx=\\int\\rho_0\\,dx$.",
+        "deps": [
+          "def-countable-choice",
+          "def-csm-frontier-ssep-weak-heat-solution",
+          "def-fourier-coefficients-and-trigonometric-polynomials",
+          "thm-fourier-basis-and-parseval-on-the-n-torus"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "def-csm-frontier-ssep-weak-heat-solution": "mathematical-premise",
+          "def-fourier-coefficients-and-trigonometric-polynomials": "mathematical-premise",
+          "thm-fourier-basis-and-parseval-on-the-n-torus": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "physical_scope": null,
+        "sources": {
+          "references": [
+            {
+              "title": "S. R. S. Varadhan, Hydrodynamic Scaling, Chapter 4 lecture notes",
+              "url": "https://math.nyu.edu/~varadhan/Spring2012/Chapter4.pdf",
+              "locator": "Section 4.3, Theorem 4.3.1 and proof, printed pp. 54–56: heat equation on the torus and uniqueness."
+            },
+            {
+              "title": "Claudio Landim, Hydrodynamic Limit of Interacting Particle Systems, complete lecture notes",
+              "url": "https://math.arizona.edu/~sethuram/588/Landim.pdf",
+              "locator": "Chapter 2, Section 2.4, printed p. 83: Gaussian heat-kernel formula and weak-solution uniqueness discussion."
+            }
+          ]
+        },
+        "dependency_level": 1,
+        "library": "physics",
+        "proof_route": "Construct the Fourier heat multiplier and prove smoothness, weak formulation, maximum principle, mass conservation, and uniqueness.",
+        "source_refs": [
+          "S. R. S. Varadhan, Hydrodynamic Scaling, Chapter 4 lecture notes",
+          "Claudio Landim, Hydrodynamic Limit of Interacting Particle Systems, complete lecture notes"
+        ]
+      },
+      {
+        "id": "def-csm-frontier-ssep-diffusive-model",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Symmetric exclusion process under diffusive scaling",
+        "statement": "Assume the Axiom of Choice, meaning every family of nonempty sets has a choice function. Fix an integer $d\\ge1$ and an integer $N\\ge3$. Let $\\Lambda_N=(\\mathbb Z/N\\mathbb Z)^d$, with each coordinate represented by $0,1,\\ldots,N-1$, and let $\\mathcal E_N$ be the set of unordered nearest-neighbor bonds $\\{x,x+e_i\\}$, where $1\\le i\\le d$ and addition is modulo $N$. The condition $N\\ge3$ makes this a simple graph with each bond listed once as $x$ ranges over $\\Lambda_N$. The site graph is connected because any two coordinate tuples are joined by finitely many steps of $+e_i$ or $-e_i$.\n\nThe configuration space is $\\Omega_N=\\{\\eta:\\Lambda_N\\to\\{0,1\\}\\}$, ordered lexicographically by its binary occupation vector in the fixed site order; this labels it as a finite set $\\{1,\\ldots,2^{N^d}\\}$. The occupation $\\eta_x$ is $1$ for an occupied site and $0$ for a vacant site. For $b=\\{x,y\\}\\in\\mathcal E_N$, let $\\eta^b$ be the configuration obtained by swapping $\\eta_x$ and $\\eta_y$.\n\nThe coordinates $x/N$ have dimensionless spacing $1/N$ on the unit torus, and $t$ is dimensionless diffusive time: it is the microscopic unit-rate bond clock accelerated by the factor $N^2$. Thus the continuum heat equation below has normalized diffusion coefficient $D=1$.\n\nDefine a rate matrix $L_N$ on $\\Omega_N$ by giving each distinct state change $\\eta\\to\\eta^b\\ne\\eta$ rate $N^2$ and setting the diagonal entry to the negative sum of the off-diagonal row. If the two occupations on a bond agree, swapping them produces no state change and contributes no off-diagonal transition. On a column observable $f:\\Omega_N\\to\\mathbb R$, use the row-generator convention $(L_Nf)(\\eta)=\\sum_{\\xi\\ne\\eta}L_N(\\eta,\\xi)(f(\\xi)-f(\\eta))$; a row probability vector evolves by $p'=pL_N$. The **symmetric simple exclusion process (SSEP)** is the uniformized finite-state chain with rate matrix $L_N$ and any specified initial probability vector. The finite-generator existence result supplies its all-pairs transition matrices $e^{tL_N}$ and càdlàg paths. Every jump conserves $\\sum_{x\\in\\Lambda_N}\\eta_x$.\n\nFor $k=0,1,\\ldots,N^d$, the fixed-occupancy sector is $\\Omega_{N,k}=\\{\\eta\\in\\Omega_N:\\sum_x\\eta_x=k\\}$. When $0<k<N^d$, this sector has at least two states and its transition graph is connected by the fixed-occupancy connectivity lemma. Setting every sector energy to $0$, $\\beta=1$, and each allowed transition rate to $N^2$ makes this sector a finite reversible stochastic rate model with uniform stationary weights. The sectors $k=0$ and $k=N^d$ are singleton constant chains. The full SSEP state graph is reducible across particle-number sectors; the generic finite rate-matrix construction, not the irreducible reversible-model definition, defines the full process.\n\nLet $\\mathbb T^d=(\\mathbb R/\\mathbb Z)^d$ with normalized Haar measure $dx$. For $x\\in\\Lambda_N$, write $x/N\\in\\mathbb T^d$ for the point with coordinates represented in $[0,1)$. The empirical measure and its action on a smooth periodic test function $G$ are\n\n$$\\pi_t^N:=N^{-d}\\sum_{x\\in\\Lambda_N}\\eta_x(t)\\,\\delta_{x/N},\\qquad \\langle\\pi_t^N,G\\rangle:=\\int_{\\mathbb T^d}G\\,d\\pi_t^N=N^{-d}\\sum_{x\\in\\Lambda_N}\\eta_x(t)G(x/N).$$\n\nHere $\\delta_y$ denotes unit point mass at $y$. Thus $\\pi_t^N$ is a finite positive measure of total mass at most $1$, not necessarily a probability measure. For a smooth periodic $G$, define its discrete Laplacian on grid points by\n\n$$\\Delta_NG(x/N):=N^2\\sum_{i=1}^d\\bigl[G((x+e_i)/N)+G((x-e_i)/N)-2G(x/N)\\bigr].$$",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-csm-dk-finite-reversible-rate-model",
+          "def-csm-frontier-finite-generator-chain",
+          "lem-csm-frontier-finite-generator-chain-existence",
+          "lem-csm-frontier-ssep-sector-connectivity"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-csm-dk-finite-reversible-rate-model": "mathematical-premise",
+          "def-csm-frontier-finite-generator-chain": "mathematical-premise",
+          "lem-csm-frontier-finite-generator-chain-existence": "mathematical-premise",
+          "lem-csm-frontier-ssep-sector-connectivity": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "physical_scope": null,
+        "sources": {
+          "references": [
+            {
+              "title": "S. R. S. Varadhan, Hydrodynamic Scaling, Chapter 4 lecture notes",
+              "url": "https://math.nyu.edu/~varadhan/Spring2012/Chapter4.pdf",
+              "locator": "Section 4.3, printed pp. 53–54: symmetric exclusion generator, time acceleration N^2, and empirical measure normalization N^-d."
+            },
+            {
+              "title": "Claudio Landim, Hydrodynamic Limit of Interacting Particle Systems, complete lecture notes",
+              "url": "https://math.arizona.edu/~sethuram/588/Landim.pdf",
+              "locator": "Chapter 2, Section 2.1, printed pp. 72–74: finite torus exclusion generator, configuration sectors, and symmetric rates."
+            },
+            {
+              "title": "Shiba Biswal and Nicolas Lanchier, The simple exclusion process on finite connected graphs",
+              "url": "https://arxiv.org/pdf/1906.01752",
+              "locator": "Section 3, Lemmas 5–6: fixed-particle configuration classes on a finite connected graph."
+            }
+          ]
+        },
+        "dependency_level": 2,
+        "library": "physics",
+        "proof_route": "Define the finite rate matrix, diffusive scaling, empirical measure, and reversible fixed-particle sectors.",
+        "source_refs": [
+          "S. R. S. Varadhan, Hydrodynamic Scaling, Chapter 4 lecture notes",
+          "Claudio Landim, Hydrodynamic Limit of Interacting Particle Systems, complete lecture notes",
+          "Shiba Biswal and Nicolas Lanchier, The simple exclusion process on finite connected graphs"
+        ]
+      },
+      {
+        "id": "lem-csm-frontier-ssep-bracket",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "SSEP empirical-field martingale and bracket",
+        "statement": "Assume the Axiom of Choice. Let $d\\ge1$, $N\\ge3$, $T\\ge0$, and let $(\\eta_t)_{0\\le t\\le T}$ be the SSEP from the diffusive-model definition with any initial probability vector. For a real smooth periodic $G:\\mathbb T^d\\to\\mathbb R$, set\n\n$$M_t^{N,G}:=\\langle\\pi_t^N,G\\rangle-\\langle\\pi_0^N,G\\rangle-\\int_0^t\\langle\\pi_s^N,\\Delta_NG\\rangle\\,ds.$$\n\nThen $M^{N,G}$ is a square-integrable martingale. Its continuous predictable bracket is\n\n$$A_t^{N,G}=N^{2-2d}\\int_0^t\\sum_{i=1}^d\\sum_{x\\in\\Lambda_N}(\\eta_{x+e_i}(s)-\\eta_x(s))^2\\bigl(G((x+e_i)/N)-G(x/N)\\bigr)^2\\,ds,$$\n\nin the continuous predictable compensator convention of the finite-chain martingale supplier. In particular,\n\n$$A_T^{N,G}\\le T N^{-d}\\sum_{i=1}^d\\|\\partial_iG\\|_\\infty^2.$$",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-csm-frontier-ssep-diffusive-model",
+          "lem-csm-frontier-finite-chain-martingale"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-csm-frontier-ssep-diffusive-model": "mathematical-premise",
+          "lem-csm-frontier-finite-chain-martingale": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "physical_scope": null,
+        "sources": {
+          "references": [
+            {
+              "title": "S. R. S. Varadhan, Hydrodynamic Scaling, Chapter 4 lecture notes",
+              "url": "https://math.nyu.edu/~varadhan/Spring2012/Chapter4.pdf",
+              "locator": "Section 4.3, printed pp. 54–56: empirical-field generator, martingale, and quadratic-variation estimate."
+            },
+            {
+              "title": "Claudio Landim, Hydrodynamic Limit of Interacting Particle Systems, complete lecture notes",
+              "url": "https://math.arizona.edu/~sethuram/588/Landim.pdf",
+              "locator": "Chapter 2, Sections 2.3–2.4, printed pp. 77–82: weak empirical equation and martingale bracket scale."
+            }
+          ]
+        },
+        "dependency_level": 3,
+        "library": "physics",
+        "proof_route": "Compute the discrete generator by summation by parts and bound the squared bond jumps.",
+        "source_refs": [
+          "S. R. S. Varadhan, Hydrodynamic Scaling, Chapter 4 lecture notes",
+          "Claudio Landim, Hydrodynamic Limit of Interacting Particle Systems, complete lecture notes"
+        ]
+      },
+      {
+        "id": "lem-csm-frontier-ssep-time-dependent-martingale",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "SSEP martingale for time-dependent test functions",
+        "statement": "Assume the Axiom of Choice. Let $d\\ge1$, $N\\ge3$, $T\\ge0$, and let $(\\eta_t)_{0\\le t\\le T}$ be the SSEP from the diffusive-model definition. Let $H:[0,T]\\times\\mathbb T^d\\to\\mathbb R$ be smooth up to the time endpoints, meaning all time and space derivatives used below extend continuously to $[0,T]\\times\\mathbb T^d$. Define\n\n$$F_s^N(\\eta):=N^{-d}\\sum_{x\\in\\Lambda_N}\\eta_xH(s,x/N),\\qquad 0\\le s\\le T.$$\n\nThen\n\n$$M_t^N:=F_t^N(\\eta_t)-F_0^N(\\eta_0)-\\int_0^t\\langle\\pi_s^N,\\partial_sH(s,\\cdot)+\\Delta_NH(s,\\cdot)\\rangle\\,ds$$\n\nis a square-integrable martingale, and\n\n$$A_t^N:=N^{2-2d}\\int_0^t\\sum_{i=1}^d\\sum_{x\\in\\Lambda_N}(\\eta_{x+e_i}(s)-\\eta_x(s))^2\\bigl(H(s,(x+e_i)/N)-H(s,x/N)\\bigr)^2\\,ds$$\n\nis a continuous predictable increasing process with $(M_t^N)^2-A_t^N$ a martingale. In particular,\n\n$$A_T^N\\le T N^{-d}\\sum_{i=1}^d\\sup_{0\\le s\\le T}\\|\\partial_iH(s,\\cdot)\\|_\\infty^2.$$",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-csm-frontier-ssep-diffusive-model",
+          "def-progressively-measurable-and-predictable-process",
+          "lem-csm-frontier-finite-chain-martingale",
+          "lem-csm-frontier-finite-generator-chain-existence"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-csm-frontier-ssep-diffusive-model": "mathematical-premise",
+          "def-progressively-measurable-and-predictable-process": "mathematical-premise",
+          "lem-csm-frontier-finite-chain-martingale": "mathematical-premise",
+          "lem-csm-frontier-finite-generator-chain-existence": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "physical_scope": null,
+        "sources": {
+          "references": [
+            {
+              "title": "S. R. S. Varadhan, Hydrodynamic Scaling, Chapter 4 lecture notes",
+              "url": "https://math.nyu.edu/~varadhan/Spring2012/Chapter4.pdf",
+              "locator": "Section 4.3, printed pp. 54–56: SSEP generator martingale and bracket calculation."
+            },
+            {
+              "title": "Claudio Landim, Hydrodynamic Limit of Interacting Particle Systems, complete lecture notes",
+              "url": "https://math.arizona.edu/~sethuram/588/Landim.pdf",
+              "locator": "Chapter 2, Section 2.4, printed pp. 81–82: time-dependent test functions and martingale bracket."
+            }
+          ]
+        },
+        "dependency_level": 3,
+        "library": "physics",
+        "proof_route": "Extend the finite-state generator martingale and bracket calculation to smooth time-dependent tests.",
+        "source_refs": [
+          "S. R. S. Varadhan, Hydrodynamic Scaling, Chapter 4 lecture notes",
+          "Claudio Landim, Hydrodynamic Limit of Interacting Particle Systems, complete lecture notes"
+        ]
+      },
+      {
+        "id": "thm-csm-frontier-ssep-heat-limit",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Diffusive heat limit for symmetric exclusion",
+        "statement": "Assume the Axiom of Choice. Fix $d\\ge1$, $T\\ge0$, and for each integer $N\\ge3$ let $(\\eta_t^N)_{0\\le t\\le T}$ be the SSEP on $\\Lambda_N=(\\mathbb Z/N\\mathbb Z)^d$ with rate $N^2$ on each unordered nearest-neighbor bond, started from any initial probability vector on a probability space $(\\Xi_N,\\mathcal A_N,\\mathbb P_N)$. Write $\\pi_t^N=N^{-d}\\sum_{x\\in\\Lambda_N}\\eta_x^N(t)\\delta_{x/N}$ for its empirical measure. Suppose a measurable $\\rho_0:\\mathbb T^d\\to[0,1]$ satisfies, for every real-valued smooth periodic $G$ and every $\\epsilon>0$,\n\n$$\\mathbb P_N\\!\\left(\\left|\\langle\\pi_0^N,G\\rangle-\\int_{\\mathbb T^d}\\rho_0(x)G(x)\\,dx\\right|>\\epsilon\\right)\\longrightarrow0\\qquad(N\\to\\infty),$$\n\nwhere the probability spaces may depend on $N$. Let $\\rho_t$ be the unique weak heat solution on $\\mathbb T^d$ with initial datum $\\rho_0$, defined by the Fourier heat profile. Then for every real-valued smooth periodic $G$ and every $\\epsilon>0$,\n\n$$\\mathbb P_N\\!\\left(\\sup_{0\\le t\\le T}\\left|\\langle\\pi_t^N,G\\rangle-\\int_{\\mathbb T^d}\\rho_t(x)G(x)\\,dx\\right|>\\epsilon\\right)\\longrightarrow0\\qquad(N\\to\\infty).$$",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-csm-frontier-ssep-diffusive-model",
+          "lem-csm-frontier-finite-doob-bound",
+          "lem-csm-frontier-ssep-bracket",
+          "lem-csm-frontier-ssep-heat-flow",
+          "lem-csm-frontier-ssep-time-dependent-martingale"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-csm-frontier-ssep-diffusive-model": "mathematical-premise",
+          "lem-csm-frontier-finite-doob-bound": "mathematical-premise",
+          "lem-csm-frontier-ssep-bracket": "mathematical-premise",
+          "lem-csm-frontier-ssep-heat-flow": "mathematical-premise",
+          "lem-csm-frontier-ssep-time-dependent-martingale": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "physical_scope": null,
+        "sources": {
+          "references": [
+            {
+              "title": "S. R. S. Varadhan, Hydrodynamic Scaling, Chapter 4 lecture notes",
+              "url": "https://math.nyu.edu/~varadhan/Spring2012/Chapter4.pdf",
+              "locator": "Section 4.3, Theorem 4.3.1 and proof, printed pp. 53–56: SSEP empirical-field hydrodynamic limit."
+            },
+            {
+              "title": "Claudio Landim, Hydrodynamic Limit of Interacting Particle Systems, complete lecture notes",
+              "url": "https://math.arizona.edu/~sethuram/588/Landim.pdf",
+              "locator": "Chapter 2, Theorems 2.4–2.5, printed pp. 80–83: SSEP heat-equation limit, initial empirical-profile condition, and fixed-time convergence in probability."
+            },
+            {
+              "title": "Lorenzo Bertini, Alberto De Sole, Davide Gabrielli, Giovanni Jona-Lasinio and Claudio Landim, Macroscopic fluctuation theory",
+              "url": "https://arxiv.org/pdf/1404.6466",
+              "locator": "Sections II.1 and V.4: diffusive model conventions and separately scoped boundary-driven SSEP transport coefficients."
+            }
+          ]
+        },
+        "dependency_level": 4,
+        "library": "physics",
+        "proof_route": "Use backward heat tests, bracket bounds, and a finite time mesh to prove uniform-in-time convergence in probability.",
+        "source_refs": [
+          "S. R. S. Varadhan, Hydrodynamic Scaling, Chapter 4 lecture notes",
+          "Claudio Landim, Hydrodynamic Limit of Interacting Particle Systems, complete lecture notes",
+          "Lorenzo Bertini, Alberto De Sole, Davide Gabrielli, Giovanni Jona-Lasinio and Claudio Landim, Macroscopic fluctuation theory"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 880,
+    "id": "csm-frontier-hydrodynamic-ssep-examples",
+    "kind": "B",
+    "category": "classical-statistical-mechanics",
+    "library": "physics",
+    "title": "Diffusive hydrodynamics from the symmetric exclusion process — Examples",
+    "companion": "csm-frontier-hydrodynamic-ssep",
+    "requires": [
+      "csm-frontier-hydrodynamic-ssep"
+    ],
+    "items": [
+      {
+        "id": "ex-csm-frontier-ssep-density-mode",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "A single Fourier density mode under SSEP hydrodynamics",
+        "statement": "Fix $d\\ge1$, $k\\in\\mathbb Z^d$, $a\\in[0,1]$, and $b\\in\\mathbb R$ with $|b|\\le\\min(a,1-a)$. For initial density $\\rho_0(x)=a+b\\cos(2\\pi k\\cdot x)$, the continuum heat profile is\n\n$$\\rho_t(x)=a+b\\exp(-4\\pi^2|k|^2t)\\cos(2\\pi k\\cdot x),\\qquad t\\ge0.$$\n\nFor any sequence of SSEP initial laws whose empirical measures converge in probability against every smooth periodic test to this $\\rho_0(x)\\,dx$, the empirical-field conclusion of the diffusive heat-limit theorem holds uniformly for $0\\le t\\le T$ for each finite $T$. This is a conditional model prediction, not a measured diffusion profile.",
+        "deps": [
+          "def-axiom-of-choice",
+          "lem-csm-frontier-ssep-heat-flow",
+          "thm-csm-frontier-ssep-heat-limit"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-axiom-of-choice": "mathematical-premise",
+          "lem-csm-frontier-ssep-heat-flow": "mathematical-premise",
+          "thm-csm-frontier-ssep-heat-limit": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "physical_scope": null,
+        "sources": {
+          "references": [
+            {
+              "title": "S. R. S. Varadhan, Hydrodynamic Scaling, Chapter 4 lecture notes",
+              "url": "https://math.nyu.edu/~varadhan/Spring2012/Chapter4.pdf",
+              "locator": "Section 4.3, Theorem 4.3.1: SSEP empirical measures converge to the heat profile under the stated initial-profile condition."
+            },
+            {
+              "title": "Claudio Landim, Hydrodynamic Limit of Interacting Particle Systems, complete lecture notes",
+              "url": "https://math.arizona.edu/~sethuram/588/Landim.pdf",
+              "locator": "Chapter 2, Theorem 2.5, printed pp. 83–84: convergence in probability from initial empirical-profile convergence."
+            }
+          ]
+        },
+        "dependency_level": 5,
+        "library": "physics",
+        "proof_route": "Diagonalize the continuum Laplacian on one Fourier mode and apply the SSEP heat-limit theorem.",
+        "source_refs": [
+          "S. R. S. Varadhan, Hydrodynamic Scaling, Chapter 4 lecture notes",
+          "Claudio Landim, Hydrodynamic Limit of Interacting Particle Systems, complete lecture notes"
+        ],
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

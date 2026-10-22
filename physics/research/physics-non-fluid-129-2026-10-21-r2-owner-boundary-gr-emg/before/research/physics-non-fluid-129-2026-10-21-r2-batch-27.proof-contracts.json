@@ -1,0 +1,963 @@
+{
+  "version": 1,
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "scope": [
+    "def-emg-fx-matrix-harmonic-problem",
+    "lem-emg-fx-mazur-comparison",
+    "def-emg-fx-stationary-axisymmetric-setup",
+    "rem-emg-fx-stationary-spacetime-obligations",
+    "ex-emg-fx-diagonal-harmonic-maps"
+  ],
+  "contracts": {
+    "def-emg-fx-matrix-harmonic-problem": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition requires a nonempty domain."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The zero matrix is excluded from the positive determinant-one target."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The definition permits n=1; positivity and determinant one then leave the single target matrix [1], as stated in the Definition."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Singular matrices are excluded by det=1 and positive definiteness."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval-parameter conclusion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The definition fixes one domain and supplied matrix fields; it selects no representatives or family elements."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition states an equation and boundary problem, not an equivalence theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition states an equation and boundary problem, not a converse theorem."
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "def-matrix-space",
+          "carrier": "items/def-matrix-space.md",
+          "status": "Current supplier interface inspected for this item; no additional review approval asserted.",
+          "source_section": "Definition",
+          "exact_statement": "Let $F$ be a field ([[def-field]]) and let $m, n \\in \\mathbb{N}$. Recall that a\nnatural number is a von Neumann natural ([[def-natural-numbers]]), so\n$m = \\{0, \\dots, m-1\\}$ and $n = \\{0, \\dots, n-1\\}$\n([[lem-nat-order-is-membership]]), and let $m \\times n$ be their cartesian\nproduct. An **$m$ by $n$ matrix over $F$** is an element of the function space\n$F^{\\,m \\times n}$ ([[def-function-space]]), that is a function\n$a : m \\times n \\to F$; we write\n\n$$a_{ij} \\;:=\\; a(i,j) \\qquad (i < m,\\; j < n)$$\n\nfor its **entries**, $i$ being the **row index** and $j$ the **column index**.\nWrite\n\n$$M_{m \\times n}(F) \\;:=\\; F^{\\,m \\times n},$$\n\nand $M_n(F) := M_{n \\times n}(F)$ for the square case.\n\nSince $M_{m \\times n}(F)$ *is* the function space $F^{\\,m \\times n}$, it is a\nvector space over $F$ with the pointwise operations of [[def-function-space]],\nwhich read **entrywise**:\n\n$$(a + b)_{ij} = a_{ij} + b_{ij}, \\qquad (\\lambda a)_{ij} = \\lambda\\, a_{ij} \\qquad (i < m,\\; j < n),$$\n\nand the zero of $M_{m \\times n}(F)$ is the matrix all of whose entries are $0_F$.\nNo verification is needed beyond that already carried out in\n[[def-function-space]] for an arbitrary index set: this is the case\n$X = m \\times n$.\n\n**Both indices start at $0$.** The rows are indexed by $i \\in m = \\{0,\\dots,m-1\\}$\nand the columns by $j \\in n = \\{0,\\dots,n-1\\}$, so the entries of a $2$ by $3$\nmatrix are $a_{00}, a_{01}, a_{02}, a_{10}, a_{11}, a_{12}$.\n\n**The degenerate shapes.** $\\mathbb{N}$ contains $0$, so $m = 0$ and $n = 0$ are\ngenuine cases. If $m = 0$ or $n = 0$ then $m \\times n = \\varnothing$, so\n$M_{m \\times n}(F)$ has exactly one element, the empty function, and is the zero\nspace; there is no matrix of shape $0$ by $n$ other than that one.",
+          "relevant_hypotheses_and_conventions": "This exact current supplier section is a declared mathematical prerequisite; no additional claim is inferred.",
+          "supplier_proof_status": "Carrier metadata: status=published; provenance.proof=not-applicable; verification={precheck=\"n/a\"; audited=\"2026-07-28\"; judge={\"model\":\"z-ai/glm-5.2\",\"verdict\":\"pass\",\"date\":\"2026-07-28\"}}. No additional approval is inferred.",
+          "consumer_use": "This exact current supplier section is a declared mathematical prerequisite; no additional claim is inferred."
+        },
+        {
+          "supplier": "def-matrix-product-and-identity-matrix",
+          "carrier": "items/def-matrix-product-and-identity-matrix.md",
+          "status": "Current supplier interface inspected for this item; no additional review approval asserted.",
+          "source_section": "Definition",
+          "exact_statement": "Let $F$ be a field, let $m,n,p\\in\\mathbb N$, and let\n$A=(a_{ij})\\in M_{m\\times n}(F)$ and\n$B=(b_{jk})\\in M_{n\\times p}(F)$. Their **matrix product** is the matrix\n$AB\\in M_{m\\times p}(F)$ whose entries are\n\n$$(AB)_{ik}:=\\sum_{j\\in n}a_{ij}b_{jk}.$$\n\nThe sum is the finite sum in the additive commutative monoid of $F$. If $n=0$,\nit is the empty sum, so $AB$ is the zero matrix of shape $m$ by $p$.\n\nThe **identity matrix** $I_n\\in M_n(F)$ has entry $1$ when $i=j$ and entry $0$\nwhen $i\\ne j$. In particular, $I_0$ is the unique empty matrix in $M_0(F)$.",
+          "relevant_hypotheses_and_conventions": "Fixes entrywise matrix products and identity matrices used in the derivative and trace calculations.",
+          "supplier_proof_status": "Carrier metadata: status=published; provenance.proof=not-applicable; verification={precheck=\"n/a\"; audited=\"2026-08-11\"}. No additional approval is inferred.",
+          "consumer_use": "Fixes entrywise matrix products and identity matrices used in the derivative and trace calculations."
+        },
+        {
+          "supplier": "def-invertible-matrix-and-general-linear-group",
+          "carrier": "items/def-invertible-matrix-and-general-linear-group.md",
+          "status": "Current supplier interface inspected for this item; no additional review approval asserted.",
+          "source_section": "Definition",
+          "exact_statement": "A matrix $A\\in M_n(F)$ is **invertible** when there is a matrix $B\\in M_n(F)$\nsuch that\n\n$$AB=I_n=BA.$$\n\nSuch a $B$ is unique and is denoted $A^{-1}$. The **general linear set** is\n\n$$\\operatorname{GL}_n(F):=\\{A\\in M_n(F):A\\text{ is invertible}\\}.$$\n\nIt is the set of units of the ring $M_n(F)$. The fact that it is a group under\nmatrix multiplication is $\\operatorname{GL}_n(F)$ is a group under matrix multiplication, including the trivial group $\\operatorname{GL}_0(F)$. For $n=0$,\nthe unique empty matrix is $I_0$ and is its own inverse.",
+          "relevant_hypotheses_and_conventions": "This exact current supplier section is a declared mathematical prerequisite; no additional claim is inferred.",
+          "supplier_proof_status": "Carrier metadata: status=published; provenance.proof=not-applicable; verification={precheck=\"n/a\"; audited=\"2026-08-11\"; repair=\"research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-invertible-matrix-and-general-linear-group.json\"}. No additional approval is inferred.",
+          "consumer_use": "This exact current supplier section is a declared mathematical prerequisite; no additional claim is inferred."
+        },
+        {
+          "supplier": "def-determinant-of-a-square-matrix",
+          "carrier": "items/def-determinant-of-a-square-matrix.md",
+          "status": "Current supplier interface inspected for this item; no additional review approval asserted.",
+          "source_section": "Definition",
+          "exact_statement": "Let $R$ be a commutative ring, let $n\\ge1$, and let $A=(a_{ij})\\in M_n(R)$. Its **determinant** is\n$$\\det(A):=\\sum_{\\sigma\\in S_n}\\operatorname{sgn}(\\sigma)\\prod_{i<n}a_{\\sigma(i),i}.$$\nThe sum is finite because $S_n$ has $n!$ elements. The product is taken in $R$, so the signs $1$ and $-1$ act through the ring identities. The formula uses columns indexed by $i<n$ and rows indexed by $\\sigma(i)$.\n\nWhen $A$ is real, $|\\det A|$ means the ordinary real absolute value of its real determinant. It is not alternate notation for the determinant itself.",
+          "relevant_hypotheses_and_conventions": "This exact current supplier section is a declared mathematical prerequisite; no additional claim is inferred.",
+          "supplier_proof_status": "Carrier metadata: status=published; provenance.proof=not-applicable; verification={precheck=\"n/a\"; audited=\"2026-08-11\"}. No additional approval is inferred.",
+          "consumer_use": "This exact current supplier section is a declared mathematical prerequisite; no additional claim is inferred."
+        },
+        {
+          "supplier": "cor-square-matrix-invertible-iff-determinant-is-a-unit",
+          "carrier": "items/cor-square-matrix-invertible-iff-determinant-is-a-unit.md",
+          "status": "Current supplier interface inspected for this item; no additional review approval asserted.",
+          "source_section": "Statement",
+          "exact_statement": "Let $R$ be a commutative ring, $n\\geq1$, and $A\\in M_n(R)$. Then $A$ is\ninvertible if and only if $\\det(A)$ is a unit of $R$.",
+          "relevant_hypotheses_and_conventions": "This exact current supplier section is a declared mathematical prerequisite; no additional claim is inferred.",
+          "supplier_proof_status": "Carrier metadata: status=published; provenance.proof=ai-altered; verification={precheck=\"pass\"; audited=\"2026-08-13\"}. No additional approval is inferred.",
+          "consumer_use": "This exact current supplier section is a declared mathematical prerequisite; no additional claim is inferred."
+        },
+        {
+          "supplier": "cor-inverse-matrix-by-adjugate",
+          "carrier": "items/cor-inverse-matrix-by-adjugate.md",
+          "status": "Current supplier interface inspected for this item; no additional review approval asserted.",
+          "source_section": "Statement",
+          "exact_statement": "If $R$ is a commutative ring, $n\\geq1$, $A\\in M_n(R)$, and $\\det(A)$ is a\nunit, then\n\n$$A^{-1}=\\det(A)^{-1}\\operatorname{adj}(A).$$",
+          "relevant_hypotheses_and_conventions": "This exact current supplier section is a declared mathematical prerequisite; no additional claim is inferred.",
+          "supplier_proof_status": "Carrier metadata: status=published; provenance.proof=ai-altered; verification={precheck=\"pass\"; audited=\"2026-08-13\"}. No additional approval is inferred.",
+          "consumer_use": "This exact current supplier section is a declared mathematical prerequisite; no additional claim is inferred."
+        },
+        {
+          "supplier": "def-ck-euclidean-maps-and-diffeomorphisms",
+          "carrier": "items/def-ck-euclidean-maps-and-diffeomorphisms.md",
+          "status": "Current supplier interface inspected for this item; no additional review approval asserted.",
+          "source_section": "Definition",
+          "exact_statement": "Let $k\\in\\mathbb N$, let $m,q\\ge1$, let $U\\subseteq\\mathbb R^m$ be open, and let $f:U\\to\\mathbb R^q$. A map $f:U\\to\\mathbb R^q$ is of class $C^k$ when each component is of class $C^k$. Each scalar component uses the word-derivative convention of [[def-ck-and-multi-index-notation-in-several-variables]], whose source dimension is positive. The map is **smooth**, or $C^\\infty$, when it is $C^k$ for every $k\\in\\mathbb N$.\n\nLet $n\\ge1$ and let $U,V\\subseteq\\mathbb R^n$ be open. A bijection $f:U\\to V$ is a **$C^k$ diffeomorphism** when both $f$ and $f^{-1}$ are $C^k$. For $k\\ge1$, a **local $C^k$ diffeomorphism at $a\\in U$** is a restriction $f|_P:P\\to Q$ between open neighbourhoods of $a$ and $f(a)$ that is a $C^k$ diffeomorphism. At $k=1$ this agrees with [[def-c-one-map-and-local-inverse]]: continuous first partial derivatives give the required total derivative by [[thm-continuous-partial-derivatives-imply-total-differentiability]], while continuity of the total derivative gives continuity of its matrix entries and hence of the first partial derivatives.",
+          "relevant_hypotheses_and_conventions": "This exact current supplier section is a declared mathematical prerequisite; no additional claim is inferred.",
+          "supplier_proof_status": "Carrier metadata: status=published; provenance.proof=not-applicable; verification={precheck=\"n/a\"; audited=\"2026-08-21\"; judge={\"model\":\"deepseek-v4-pro + gpt-5.6-terra\",\"verdict\":\"pass\",\"date\":\"2026-08-21\"}}. No additional approval is inferred.",
+          "consumer_use": "This exact current supplier section is a declared mathematical prerequisite; no additional claim is inferred."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-27 author self-review",
+        "notes": "Checked the matrix type, adjoint and positivity conventions, determinant-one invertibility, smooth inverse, Cartesian divergence and full-boundary data. No spacetime or physical claim is included."
+      },
+      "finite_checks": []
+    },
+    "lem-emg-fx-mazur-comparison": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-emg-fx-matrix-harmonic-problem",
+          "source_section": "Definition",
+          "quote": "Let $d,n\\in\\mathbb N$ with $d,n\\ge1$. Let $\\Omega\\subseteq\\mathbb R^d$ be a nonempty bounded connected open set whose boundary is locally the graph of a smooth function. Here $C^\\infty(\\overline\\Omega)$ means restriction of a smooth function on an open neighborhood of $\\overline\\Omega$. Use the matrix spaces $M_n(\\mathbb C)$ and ordinary matrix multiplication. For $A\\in M_n(\\mathbb C)$ write $A^\\dagger:=\\overline A^{\\mathsf T}$, and write $\\operatorname{tr}A:=\\sum_{j<n}A_{jj}$. A matrix $\\Phi$ is **positive definite Hermitian** when $\\Phi^\\dagger=\\Phi$ and $v^\\dagger\\Phi v$ is a positive real number for every nonzero $v\\in\\mathbb C^n$. Define\n\n$$\\mathcal P_n:=\\{\\Phi\\in M_n(\\mathbb C):\\Phi\\text{ is positive definite Hermitian and }\\det\\Phi=1\\}.$$\n\nThe determinant is the determinant over $\\mathbb C$. Every $\\Phi\\in\\mathcal P_n$ is invertible because $\\det\\Phi=1$ is a unit; its inverse is smooth when $\\Phi$ is a smooth matrix field because the adjugate formula reduces to polynomial entries when $\\det\\Phi=1$.\n\nFor a smooth map $\\Phi:\\overline\\Omega\\to\\mathcal P_n$, define the matrix-valued one-form $d\\Phi=\\sum_{a=1}^d(\\partial_a\\Phi)\\,dx^a$ by differentiating entries, and put $J:=\\Phi^{-1}d\\Phi=\\sum_{a=1}^d J_a\\,dx^a$. Its **matrix harmonic-map equation** in this item means exactly\n\n$$\\operatorname{div}J:=\\sum_{a=1}^d\\partial_aJ_a=0\\quad\\text{on }\\Omega.$$\n\nThe positive matrix boundary problem is to compare two such maps $\\Phi_0,\\Phi_1$ satisfying this equation and prescribed values on all of $\\partial\\Omega$. The Euclidean coordinates, matrix size, determinant normalization, and divergence convention are part of the definition. No spacetime metric, symmetry reduction, physical postulate, or spacetime uniqueness theorem is included.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qsm-matrix-state-calculus",
+          "source_section": "Statement",
+          "quote": "Use the following conventions on a complex inner-product space $H$ of dimension $D\\geq1$, with inner product linear in its first argument. For an endomorphism $A$, define $\\operatorname{Tr}A:=\\sum_{j=1}^D\\langle Ae_j,e_j\\rangle$ in an orthonormal basis; step 3.1 proves basis independence. For any Hermitian $M$, its **positive spectral subspace** (called its positive support here) is $S_M:=\\bigoplus_{\\lambda>0}\\ker(M-\\lambda I)$; when $M\\geq0$ this equals $(\\ker M)^\\perp$. Its support logarithm is $\\log(M|_{S_M}):=\\sum_{\\lambda>0}(\\log\\lambda)P_\\lambda|_{S_M}$, where $P_\\lambda$ is the orthogonal projection onto that eigenspace. No value $\\log0$ is assigned; for $M=0$ this is the unique endomorphism of the zero space. For the set $\\mathcal D(H)$ of positive semidefinite Hermitian endomorphisms with trace one, a point $\\rho$ is **extreme** if every equality $\\rho=t\\sigma+(1-t)\\tau$ with $\\sigma,\\tau\\in\\mathcal D(H)$ and $0<t<1$ implies $\\sigma=\\tau=\\rho$.\n\nLet $H$ be a complex inner-product space of finite dimension $D\\geq1$, with inner product linear in its first argument. Every Hermitian endomorphism $M$ has an orthonormal eigenbasis with real eigenvalues. For a real function $f$ on its finite spectrum, define $f(M)$ by its spectral projections; this definition is independent of the choice of eigenbasis. In particular positive square roots, exponentials, and logarithms on positive supports are well defined.\n\nFor a density matrix $\\rho$ on $H$, meaning a Hermitian positive semidefinite operator with $\\operatorname{Tr}\\rho=1$, $\\operatorname{Tr}(\\rho A)=\\sum_jp_j\\langle Au_j,u_j\\rangle$ for bounded $A$, where $\\rho=\\sum_jp_j|u_j\\rangle\\langle u_j|$. The weighted form $(X,Y)_\\rho=\\operatorname{Tr}(\\rho X^*Y)$ satisfies Cauchy–Schwarz, $|(X,Y)_\\rho|^2\\leq(X,X)_\\rho(Y,Y)_\\rho$. Finally, $\\operatorname{Tr}(\\rho^2)\\leq1$, with equality exactly for rank-one densities, and those are exactly the extreme points of the finite density-matrix set.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-determinant-multiplicative",
+          "source_section": "Statement",
+          "quote": "For $n\\ge1$ and $A,B\\in M_n(R)$ over a commutative ring,\n$$\\det(AB)=\\det(A)\\det(B).$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-am-gm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$ and let $a_0, \\dots, a_{n-1} \\in \\mathbb{R}$\nwith $a_k \\ge 0$ for every $k < n$. Write\n\n$$A := \\frac{1}{n}\\sum_{k<n} a_k, \\qquad G := \\Big(\\prod_{k<n} a_k\\Big)^{1/n},$$\n\nthe **arithmetic mean** and the **geometric mean**, where the $n$-th root exists\nbecause $\\prod_{k<n} a_k \\ge 0$ ([[thm-nth-roots-exist]],\n[[lem-finite-sum-laws]]) and $n$ denotes the canonical field image\n$n\\cdot1_{\\mathbb{R}}$ of the natural number n, which is invertible since $n \\ge 1$\n([[lem-of-naturals-positive]], [[lem-of-q-embeds]]). Then\n\n$$\\prod_{k<n} a_k \\le A^{n}, \\qquad \\text{equivalently} \\qquad G \\le A,$$\n\nand equality holds in either form if and only if $a_0 = a_1 = \\dots = a_{n-1}$.\n\nThe proof is **Cauchy's forward-backward induction**: the statement is proved\nfirst along a doubling sequence, by doubling, and then pulled back from a member\nof that sequence to every smaller $n$ by a descent that replaces the missing\nentry with the arithmetic mean of the others. That is why the induction below\nruns over the doubling scheme and not over $n$ directly.\n\nOne point of hygiene decides how the doubling scheme is written. The doubling\nindex has to be a **natural number**, because it is used as the length of a list,\nas a bound on an index, and as the starting point of a descent. The symbol $2^{j}$\nwould not do: [[def-integer-power]] defines powers of a *real* base, so $2^{j}$\ndenotes a power of the real field element $2\\cdot1_{\\mathbb{R}}$ under that definition, rather than a natural-number-valued operation, and so cannot\nindex anything. The doubling sequence is therefore defined inside $\\mathbb{N}$,\nby recursion ([[thm-recursion]]):\n\n$$N_0 = 1, \\qquad N_{j+1} = N_j + N_j \\quad (j \\in \\mathbb{N}),$$\n\nand the induction below runs over $j$, with $N_j$ as the list length. No\nidentity relating $N_j$ to any real power is needed anywhere, and none is claimed.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-matrix-product-and-identity-matrix",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field, let $m,n,p\\in\\mathbb N$, and let\n$A=(a_{ij})\\in M_{m\\times n}(F)$ and\n$B=(b_{jk})\\in M_{n\\times p}(F)$. Their **matrix product** is the matrix\n$AB\\in M_{m\\times p}(F)$ whose entries are\n\n$$(AB)_{ik}:=\\sum_{j\\in n}a_{ij}b_{jk}.$$\n\nThe sum is the finite sum in the additive commutative monoid of $F$. If $n=0$,\nit is the empty sum, so $AB$ is the zero matrix of shape $m$ by $p$.\n\nThe **identity matrix** $I_n\\in M_n(F)$ has entry $1$ when $i=j$ and entry $0$\nwhen $i\\ne j$. In particular, $I_0$ is the unique empty matrix in $M_0(F)$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$\n(Limit point, isolated point, adherent point, derived set, and dense subset of $\\mathbb{R}$), let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$\n(The derivative $f'(c) = \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c}$ of $f : A \\to \\mathbb{R}$ at a point $c \\in A$ that is a limit point of $A$, and differentiability on a set) and let $\\alpha \\in \\mathbb{R}$. Then:\n\n1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$;\n2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;\n3. $fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and is a limit point of $A_0$, the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is differentiable\n   at $c$ as a function on $A_0$, and\n   $$\\bigl((f/g)|_{A_0}\\bigr)'(c) \\;=\\; \\frac{f'(c)\\,g(c) - f(c)\\,g'(c)}{g(c)^{2}} .$$\n\nEach claim asserts two things: that the derivative on the left exists, and that\nit has the stated value. Both are proved.\n\n**Why claim 4 is stated on $A_0$.** The function $f/g$ is not defined where $g$\nvanishes, and $g$ may vanish at points of $A$ far from $c$; restricting to $A_0$\nis forced. That the restriction still has $c$ as a limit point, so that a\nderivative there means anything at all, is not free either, and it is the last\nclaim of If $\\lim_{x \\to c} f(x) = L \\ne 0$ then $|f| > |L|/2$ on a punctured neighbourhood of $c$; in particular if $L > 0$ then $f > L/2 > 0$ there applied to $g$. The hypothesis\nis $g(c) \\ne 0$, not \"$g$ vanishes nowhere\".\n\n**Everything is proved through\nCarathéodory's characterisation: $f$ is differentiable at $c$ if and only if there is $\\varphi : A \\to \\mathbb{R}$, continuous at $c$, with $f(x) - f(c) = \\varphi(x)(x - c)$ for every $x \\in A$, and then $\\varphi$ is unique and $\\varphi(c) = f'(c)$.** No difference quotient is estimated and\nno limit theorem beyond continuity is used, so no choice principle is spent.\nThe four identities are four algebraic rearrangements of an increment, each\nfollowed by a reading of Sums, scalar multiples, products, absolute values, maxima, minima and quotients with nonvanishing denominator of continuous functions are continuous, as are constants, the identity and every polynomial function.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-directional-and-partial-derivatives",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^m$, $a\\in U$, $v\\in\\mathbb R^m$, and $f:U\\to\\mathbb R^n$. If the line map $t\\mapsto f(a+tv)$ is defined near $0$, its derivative at $0$ is the **directional derivative**\n\n$$D_vf(a):=\\lim_{t\\to0}\\frac{f(a+tv)-f(a)}{t}.$$\n\nFor a standard basis vector $e_j$ (The standard list $e : n \\to F^{n}$ with $e_i(i) = 1_F$ and $e_i(j) = 0_F$ for $j \\ne i$ is an ordered basis of $F^{n}$; hence $\\dim_F F^{n} = n$, and $F^{0}$ is the zero space with basis $\\varnothing$ and dimension $0$), $D_{e_j}f(a)$ is the **$j$th partial derivative**, written $\\partial_jf(a)$. For $n\\ge1$, these are ordinary vector-valued one-variable derivatives in the sense of The derivative and the Riemann integral of a vector-valued function: an intrinsic derivative and a componentwise integral.\n\nFor $n=0$, use the zero-space case directly, without invoking that supplier's positive-codomain standing hypothesis. The space $\\mathbb R^0$ has only its zero vector and carries the zero Euclidean norm and its induced metric (The standard list $e : n \\to F^{n}$ with $e_i(i) = 1_F$ and $e_i(j) = 0_F$ for $j \\ne i$ is an ordered basis of $F^{n}$; hence $\\dim_F F^{n} = n$, and $F^{0}$ is the zero space with basis $\\varnothing$ and dimension $0$ clause 5, The Euclidean inner product $\\langle x,y\\rangle = \\sum_{k<n} x_k y_k$ on $\\mathbb{R}^n$, A norm on a real vector space, the induced metric, and the dictionary with the metric axioms). Whenever the line map is defined near $0$, every difference quotient for real $t\\ne0$ is this zero vector; define $D_vf(a)=0$. This is the unique possible derivative value, and its normwise difference-quotient error is exactly zero for all such $t$, so the real parameter still approaches an actual limit point. Every existing coordinate direction therefore has $\\partial_jf(a)=0$; these zero-valued partial maps are continuous in the induced norm metrics. If the source dimension is zero, there are no partial indices and the sole direction is $v=0$; its constant line map is defined near $0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-heine-borel-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions\n$n \\to \\mathbb{R}$ and let $d_2$ be the Euclidean metric on it\n($\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it). Then:\n\n1. **Closed boxes are compact.** For reals $a_k \\le b_k$ $(k < n)$ the box\n   $Q = \\{\\, x \\in \\mathbb{R}^n : a_k \\le x_k \\le b_k \\text{ for every } k < n \\,\\}$\n   is a compact subset of $(\\mathbb{R}^n, d_2)$ (Open cover, subcover, compact metric space, and compact subset of a metric space).\n2. **Heine-Borel.** A subset $K \\subseteq \\mathbb{R}^n$ is a compact subset of\n   $(\\mathbb{R}^n, d_2)$ if and only if $K$ is closed in $\\mathbb{R}^n$\n   (The metric topology: a set is open when every one of its points has a ball around it inside the set; closed means open complement) and bounded\n   (Bounded subset, diameter, distance from a point to a set, and distance between two sets in a metric space).\n3. **The real line.** A subset $K \\subseteq \\mathbb{R}$ is a compact subset of\n   $(\\mathbb{R}, d_{\\mathbb{R}})$, the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   (The absolute value makes $\\mathbb{R}$ a metric space: $d(x,y) = |x-y|$ is a metric, its open balls are the intervals $(x-r, x+r)$, and it is unbounded), if and only if $K$ is closed in\n   $\\mathbb{R}$ and bounded.\n\n**No choice principle is used.** The bisection below halves one coordinate at a\ntime and takes the **left** half whenever the left half still fails to be finitely\ncovered, the right half otherwise: a rule with two outcomes, decided by a\nproperty of the box, not a selection. That is the whole reason the theorem is\navailable in ZF, while the general \"complete and totally bounded implies compact\"\n(A complete, totally bounded metric space is compact, proved from countable choice used exactly once) is not.\n\nThe hypothesis $n \\ge 1$ is inherited from $\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it, which defines\n$\\mathbb{R}^n$ and its metrics only there; the last remark below records what\nhappens at $n = 0$.",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-extreme-value-metric",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a nonempty compact metric space (Open cover, subcover, compact metric space, and compact subset of a metric space,\nMetric space: $d(x,y) = 0$ iff $x = y$, symmetry, and the triangle inequality; pseudometric and ultrametric) and let $f : X \\to \\mathbb{R}$ be continuous\n(Continuity of a map between metric spaces, at a point and globally, in the $\\varepsilon$-$\\delta$ form), $\\mathbb{R}$ carrying its usual metric\n$d_{\\mathbb{R}}(s,t) = |s-t|$ (The absolute value makes $\\mathbb{R}$ a metric space: $d(x,y) = |x-y|$ is a metric, its open balls are the intervals $(x-r, x+r)$, and it is unbounded). Then the\nimage $f[X]$ is bounded above and below (Lower bound, bounded below, bounded set), and it has a\nmaximum and a minimum (Maximum and minimum of a set): there are points\n$x_{\\max}, x_{\\min} \\in X$ with\n\n$$f(x_{\\min}) \\;\\le\\; f(x) \\;\\le\\; f(x_{\\max}) \\qquad \\text{for every } x \\in X,$$\n\nand then $f(x_{\\max}) = \\sup f[X]$ and $f(x_{\\min}) = \\inf f[X]$\n(Complete ordered field (least-upper-bound property), Greatest lower bound (infimum)).\n\nNonemptiness of $X$ is a hypothesis and not an oversight: for $X = \\emptyset$ the\nimage is empty and has neither a supremum nor a maximum. No choice principle is\nused.",
+          "uses": [
+            "3.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "relative-current-derivative",
+          "step": "1.1",
+          "claim": "Put $u:=\\operatorname{tr}\\Psi$. The inverse formula in [F1] makes each $\\Phi_i^{-1}$ smooth on $\\overline\\Omega$, so $u$ is smooth there. Differentiating $\\Phi_i\\Phi_i^{-1}=I_n$ entrywise and using the product rule gives $\\partial_a\\Phi_i^{-1}=-\\Phi_i^{-1}(\\partial_a\\Phi_i)\\Phi_i^{-1}=-J_{i,a}\\Phi_i^{-1}$. Since $\\partial_a\\Phi_i=\\Phi_iJ_{i,a}$, it follows that $\\partial_a\\Psi=\\Phi_1\\Delta J_a\\Phi_0^{-1}$. The two divergence equations imply $\\sum_a\\partial_a\\Delta J_a=0$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "positive-trace-laplacian",
+          "step": "2.1",
+          "claim": "By [F2], each positive definite Hermitian $\\Phi_i$ has a positive Hermitian square root $\\Phi_i^{1/2}$. Its eigenvalues are the positive square roots of the positive eigenvalues of $\\Phi_i$, so $\\Phi_i^{1/2}$ is invertible; define $\\Phi_i^{-1/2}:=(\\Phi_i^{1/2})^{-1}$. Differentiate the identity in step 1.1, sum over $a$, take traces, and discard the term $\\operatorname{tr}(\\Phi_1(\\sum_a\\partial_a\\Delta J_a)\\Phi_0^{-1})=0$. This gives $\\Delta u=\\sum_a\\operatorname{tr}\\bigl(\\Phi_1(J_{1,a}\\Delta J_a-\\Delta J_aJ_{0,a})\\Phi_0^{-1}\\bigr)$. Because $\\Phi_i$ and $\\partial_a\\Phi_i$ are Hermitian, $J_{i,a}^\\dagger=\\Phi_iJ_{i,a}\\Phi_i^{-1}$. Substituting this relation and cyclically permuting factors inside the trace rewrites each summand as $\\operatorname{tr}((\\Delta J_a)^\\dagger\\Phi_1\\Delta J_a\\Phi_0^{-1})$. With $M_a:=\\Phi_1^{1/2}\\Delta J_a\\Phi_0^{-1/2}$, this trace equals $\\operatorname{tr}(M_a^\\dagger M_a)=\\sum_{i,j}|(M_a)_{ij}|^2\\ge0$. Hence $\\Delta u\\ge0$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "positive-trace-gap",
+          "step": "3.1",
+          "claim": "The Hermitian matrix $C:=\\Phi_0^{-1/2}\\Phi_1\\Phi_0^{-1/2}$ is positive definite: for $v\\ne0$, $v^\\dagger Cv=(\\Phi_0^{-1/2}v)^\\dagger\\Phi_1(\\Phi_0^{-1/2}v)>0$. Let $\\mu_0,\\ldots,\\mu_{n-1}>0$ be the eigenvalues of $\\Phi_0$. In an orthonormal eigenbasis, determinant multiplicativity and $\\det(U^\\dagger U)=\\det I_n=1$ for the unitary change-of-basis matrix $U$ give $\\det\\Phi_0=\\prod_j\\mu_j=1$; hence $\\det(\\Phi_0^{-1/2})=\\prod_j\\mu_j^{-1/2}=1$. Therefore determinant multiplicativity gives $\\det C=\\det(\\Phi_0^{-1/2})^2\\det\\Phi_1=1$. For the positive eigenvalues $\\lambda_0,\\ldots,\\lambda_{n-1}$ of $C$, orthonormal diagonalization gives $\\det C=\\prod_j\\lambda_j$ and $\\operatorname{tr}C=\\sum_j\\lambda_j$. Cyclicity of trace gives $\\operatorname{tr}C=\\operatorname{tr}(\\Phi_1\\Phi_0^{-1})$, and [F4] gives $1=(\\prod_j\\lambda_j)^{1/n}\\le\\frac1n\\sum_j\\lambda_j=\\operatorname{tr}C/n$, so $u=\\operatorname{tr}C-n\\ge0$. Equality $u=0$ forces equality in AM-GM, hence all $\\lambda_j=1$ and $C=I_n$; multiplying by $\\Phi_0^{1/2}$ on both sides gives $\\Phi_1=\\Phi_0$. Therefore $u=0$ holds exactly when $\\Phi_1=\\Phi_0$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "bounded-domain-maximum",
+          "step": "3.2",
+          "claim": "Suppose $\\Phi_1=\\Phi_0$ on $\\partial\\Omega$, so $u=0$ there. Since $\\Omega$ is nonempty and bounded, $\\overline\\Omega$ is nonempty, closed and bounded, hence compact by [F6]; choose $R>0$ with $\\overline\\Omega\\subseteq\\{x:|x|\\le R\\}$. For each $\\epsilon>0$, the continuous function $u_\\epsilon(x):=u(x)+\\epsilon|x|^2$ attains a maximum on $\\overline\\Omega$ by [F6]. Since $\\Delta u_\\epsilon=\\Delta u+2d\\epsilon>0$, this maximum cannot occur at an interior point: at any interior local maximum $x$, each symmetric second difference $[u_\\epsilon(x+he_a)+u_\\epsilon(x-he_a)-2u_\\epsilon(x)]/h^2$ is nonpositive for sufficiently small $h$, so taking $h\\to0$ gives $\\partial_a^2u_\\epsilon(x)\\le0$ for every $a$ and hence $\\Delta u_\\epsilon(x)\\le0$, a contradiction. The maximum is therefore on the boundary, where $u_\\epsilon\\le\\epsilon R^2$. Thus $u(x)\\le\\epsilon R^2$ for every $x\\in\\Omega$; letting $\\epsilon\\downarrow0$ gives $u\\le0$.",
+          "inputs": [
+            "given",
+            "F6",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "comparison-conclusion",
+          "step": "4.1",
+          "claim": "Step 3.1 gives $u\\ge0$, whereas step 3.2 gives $u\\le0$. Hence $u=0$ on $\\Omega$ and, by continuity, on $\\overline\\Omega$. The equality case in step 3.1 then yields $\\Phi_1=\\Phi_0$ throughout $\\overline\\Omega$.",
+          "inputs": [
+            "step 3.1",
+            "step 3.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement requires a nonempty domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "When Phi_1=Phi_0, Psi and DeltaJ vanish and the identity in step 2.1 has both sides zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For n=1, positivity and det(Phi_i)=1 force Phi_i=[1]; the identity and uniqueness conclusion reduce to zero, as covered by step 3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Singular matrices are outside P_n; invertibility is part of the definition and is required in steps 1.1–3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The imposed Dirichlet equality covers all of partial Omega and is used in step 3.2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The proof uses spectral decompositions of fixed finite matrices and a maximum on one compact closure; it makes no choice from an arbitrary family (steps 2.1–3.2)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is a conditional uniqueness statement, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem asserts no converse classification."
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "def-emg-fx-matrix-harmonic-problem",
+          "carrier": "items/def-emg-fx-matrix-harmonic-problem.md",
+          "status": "Current supplier interface inspected for this item; no additional review approval asserted.",
+          "source_section": "Definition",
+          "exact_statement": "Let $d,n\\in\\mathbb N$ with $d,n\\ge1$. Let $\\Omega\\subseteq\\mathbb R^d$ be a nonempty bounded connected open set whose boundary is locally the graph of a smooth function. Here $C^\\infty(\\overline\\Omega)$ means restriction of a smooth function on an open neighborhood of $\\overline\\Omega$. Use the matrix spaces $M_n(\\mathbb C)$ and ordinary matrix multiplication. For $A\\in M_n(\\mathbb C)$ write $A^\\dagger:=\\overline A^{\\mathsf T}$, and write $\\operatorname{tr}A:=\\sum_{j<n}A_{jj}$. A matrix $\\Phi$ is **positive definite Hermitian** when $\\Phi^\\dagger=\\Phi$ and $v^\\dagger\\Phi v$ is a positive real number for every nonzero $v\\in\\mathbb C^n$. Define\n\n$$\\mathcal P_n:=\\{\\Phi\\in M_n(\\mathbb C):\\Phi\\text{ is positive definite Hermitian and }\\det\\Phi=1\\}.$$\n\nThe determinant is the determinant over $\\mathbb C$. Every $\\Phi\\in\\mathcal P_n$ is invertible because $\\det\\Phi=1$ is a unit; its inverse is smooth when $\\Phi$ is a smooth matrix field because the adjugate formula reduces to polynomial entries when $\\det\\Phi=1$.\n\nFor a smooth map $\\Phi:\\overline\\Omega\\to\\mathcal P_n$, define the matrix-valued one-form $d\\Phi=\\sum_{a=1}^d(\\partial_a\\Phi)\\,dx^a$ by differentiating entries, and put $J:=\\Phi^{-1}d\\Phi=\\sum_{a=1}^d J_a\\,dx^a$. Its **matrix harmonic-map equation** in this item means exactly\n\n$$\\operatorname{div}J:=\\sum_{a=1}^d\\partial_aJ_a=0\\quad\\text{on }\\Omega.$$\n\nThe positive matrix boundary problem is to compare two such maps $\\Phi_0,\\Phi_1$ satisfying this equation and prescribed values on all of $\\partial\\Omega$. The Euclidean coordinates, matrix size, determinant normalization, and divergence convention are part of the definition. No spacetime metric, symmetry reduction, physical postulate, or spacetime uniqueness theorem is included.",
+          "relevant_hypotheses_and_conventions": "Fixes the exact bounded Euclidean domain, positive determinant-one matrix target, componentwise current and full-boundary condition used in the proof.",
+          "supplier_proof_status": "Carrier metadata: status=draft; provenance.proof=not-applicable; verification={}. No additional approval is inferred.",
+          "consumer_use": "Fixes the exact bounded Euclidean domain, positive determinant-one matrix target, componentwise current and full-boundary condition used in the proof."
+        },
+        {
+          "supplier": "lem-qsm-matrix-state-calculus",
+          "carrier": "items/lem-qsm-matrix-state-calculus.md",
+          "status": "Current supplier interface inspected for this item; no additional review approval asserted.",
+          "source_section": "Statement",
+          "exact_statement": "Use the following conventions on a complex inner-product space $H$ of dimension $D\\geq1$, with inner product linear in its first argument. For an endomorphism $A$, define $\\operatorname{Tr}A:=\\sum_{j=1}^D\\langle Ae_j,e_j\\rangle$ in an orthonormal basis; step 3.1 proves basis independence. For any Hermitian $M$, its **positive spectral subspace** (called its positive support here) is $S_M:=\\bigoplus_{\\lambda>0}\\ker(M-\\lambda I)$; when $M\\geq0$ this equals $(\\ker M)^\\perp$. Its support logarithm is $\\log(M|_{S_M}):=\\sum_{\\lambda>0}(\\log\\lambda)P_\\lambda|_{S_M}$, where $P_\\lambda$ is the orthogonal projection onto that eigenspace. No value $\\log0$ is assigned; for $M=0$ this is the unique endomorphism of the zero space. For the set $\\mathcal D(H)$ of positive semidefinite Hermitian endomorphisms with trace one, a point $\\rho$ is **extreme** if every equality $\\rho=t\\sigma+(1-t)\\tau$ with $\\sigma,\\tau\\in\\mathcal D(H)$ and $0<t<1$ implies $\\sigma=\\tau=\\rho$.\n\nLet $H$ be a complex inner-product space of finite dimension $D\\geq1$, with inner product linear in its first argument. Every Hermitian endomorphism $M$ has an orthonormal eigenbasis with real eigenvalues. For a real function $f$ on its finite spectrum, define $f(M)$ by its spectral projections; this definition is independent of the choice of eigenbasis. In particular positive square roots, exponentials, and logarithms on positive supports are well defined.\n\nFor a density matrix $\\rho$ on $H$, meaning a Hermitian positive semidefinite operator with $\\operatorname{Tr}\\rho=1$, $\\operatorname{Tr}(\\rho A)=\\sum_jp_j\\langle Au_j,u_j\\rangle$ for bounded $A$, where $\\rho=\\sum_jp_j|u_j\\rangle\\langle u_j|$. The weighted form $(X,Y)_\\rho=\\operatorname{Tr}(\\rho X^*Y)$ satisfies Cauchy–Schwarz, $|(X,Y)_\\rho|^2\\leq(X,X)_\\rho(Y,Y)_\\rho$. Finally, $\\operatorname{Tr}(\\rho^2)\\leq1$, with equality exactly for rank-one densities, and those are exactly the extreme points of the finite density-matrix set.",
+          "relevant_hypotheses_and_conventions": "Supplies finite Hermitian diagonalization, positive square roots, basis-independent trace and cyclicity in steps 2.1–3.1.",
+          "supplier_proof_status": "Carrier metadata: status=published; provenance.proof=ai-altered; verification={judge={\"model\":\"gpt-6-luna\",\"verdict\":\"pass\",\"date\":\"2026-10-17\"}}. No additional approval is inferred.",
+          "consumer_use": "Supplies finite Hermitian diagonalization, positive square roots, basis-independent trace and cyclicity in steps 2.1–3.1."
+        },
+        {
+          "supplier": "thm-determinant-multiplicative",
+          "carrier": "items/thm-determinant-multiplicative.md",
+          "status": "Current supplier interface inspected for this item; no additional review approval asserted.",
+          "source_section": "Statement",
+          "exact_statement": "For $n\\ge1$ and $A,B\\in M_n(R)$ over a commutative ring,\n$$\\det(AB)=\\det(A)\\det(B).$$",
+          "relevant_hypotheses_and_conventions": "Supplies multiplicativity used to compute the determinant of the congruence matrix in step 3.1.",
+          "supplier_proof_status": "Carrier metadata: status=published; provenance.proof=ai-altered; verification={precheck=\"pass\"; audited=\"2026-08-11\"}. No additional approval is inferred.",
+          "consumer_use": "Supplies multiplicativity used to compute the determinant of the congruence matrix in step 3.1."
+        },
+        {
+          "supplier": "thm-am-gm",
+          "carrier": "items/thm-am-gm.md",
+          "status": "Current supplier interface inspected for this item; no additional review approval asserted.",
+          "source_section": "Statement",
+          "exact_statement": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$ and let $a_0, \\dots, a_{n-1} \\in \\mathbb{R}$\nwith $a_k \\ge 0$ for every $k < n$. Write\n\n$$A := \\frac{1}{n}\\sum_{k<n} a_k, \\qquad G := \\Big(\\prod_{k<n} a_k\\Big)^{1/n},$$\n\nthe **arithmetic mean** and the **geometric mean**, where the $n$-th root exists\nbecause $\\prod_{k<n} a_k \\ge 0$ ([[thm-nth-roots-exist]],\n[[lem-finite-sum-laws]]) and $n$ denotes the canonical field image\n$n\\cdot1_{\\mathbb{R}}$ of the natural number n, which is invertible since $n \\ge 1$\n([[lem-of-naturals-positive]], [[lem-of-q-embeds]]). Then\n\n$$\\prod_{k<n} a_k \\le A^{n}, \\qquad \\text{equivalently} \\qquad G \\le A,$$\n\nand equality holds in either form if and only if $a_0 = a_1 = \\dots = a_{n-1}$.\n\nThe proof is **Cauchy's forward-backward induction**: the statement is proved\nfirst along a doubling sequence, by doubling, and then pulled back from a member\nof that sequence to every smaller $n$ by a descent that replaces the missing\nentry with the arithmetic mean of the others. That is why the induction below\nruns over the doubling scheme and not over $n$ directly.\n\nOne point of hygiene decides how the doubling scheme is written. The doubling\nindex has to be a **natural number**, because it is used as the length of a list,\nas a bound on an index, and as the starting point of a descent. The symbol $2^{j}$\nwould not do: [[def-integer-power]] defines powers of a *real* base, so $2^{j}$\ndenotes a power of the real field element $2\\cdot1_{\\mathbb{R}}$ under that definition, rather than a natural-number-valued operation, and so cannot\nindex anything. The doubling sequence is therefore defined inside $\\mathbb{N}$,\nby recursion ([[thm-recursion]]):\n\n$$N_0 = 1, \\qquad N_{j+1} = N_j + N_j \\quad (j \\in \\mathbb{N}),$$\n\nand the induction below runs over $j$, with $N_j$ as the list length. No\nidentity relating $N_j$ to any real power is needed anywhere, and none is claimed.",
+          "relevant_hypotheses_and_conventions": "Supplies the trace lower bound and exact equality case for positive eigenvalues in step 3.1.",
+          "supplier_proof_status": "Carrier metadata: status=published; provenance.proof=ai-altered; verification={precheck=\"pass\"; verified={\"model\":\"claude-opus-5\",\"verdict\":\"certify\",\"date\":\"2026-07-26\",\"scope\":\"page\",\"delegated_by\":\"owner\"}; judge={\"model\":\"z-ai/glm-5.2\",\"verdict\":\"pass\",\"date\":\"2026-07-26\"}}. No additional approval is inferred.",
+          "consumer_use": "Supplies the trace lower bound and exact equality case for positive eigenvalues in step 3.1."
+        },
+        {
+          "supplier": "def-matrix-product-and-identity-matrix",
+          "carrier": "items/def-matrix-product-and-identity-matrix.md",
+          "status": "Current supplier interface inspected for this item; no additional review approval asserted.",
+          "source_section": "Definition",
+          "exact_statement": "Let $F$ be a field, let $m,n,p\\in\\mathbb N$, and let\n$A=(a_{ij})\\in M_{m\\times n}(F)$ and\n$B=(b_{jk})\\in M_{n\\times p}(F)$. Their **matrix product** is the matrix\n$AB\\in M_{m\\times p}(F)$ whose entries are\n\n$$(AB)_{ik}:=\\sum_{j\\in n}a_{ij}b_{jk}.$$\n\nThe sum is the finite sum in the additive commutative monoid of $F$. If $n=0$,\nit is the empty sum, so $AB$ is the zero matrix of shape $m$ by $p$.\n\nThe **identity matrix** $I_n\\in M_n(F)$ has entry $1$ when $i=j$ and entry $0$\nwhen $i\\ne j$. In particular, $I_0$ is the unique empty matrix in $M_0(F)$.",
+          "relevant_hypotheses_and_conventions": "Fixes entrywise matrix products and identity matrices used in the derivative and trace calculations.",
+          "supplier_proof_status": "Carrier metadata: status=published; provenance.proof=not-applicable; verification={precheck=\"n/a\"; audited=\"2026-08-11\"}. No additional approval is inferred.",
+          "consumer_use": "Fixes entrywise matrix products and identity matrices used in the derivative and trace calculations."
+        },
+        {
+          "supplier": "thm-algebra-of-derivatives",
+          "carrier": "items/thm-algebra-of-derivatives.md",
+          "status": "Current supplier interface inspected for this item; no additional review approval asserted.",
+          "source_section": "Statement",
+          "exact_statement": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$\n(Limit point, isolated point, adherent point, derived set, and dense subset of $\\mathbb{R}$), let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$\n(The derivative $f'(c) = \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c}$ of $f : A \\to \\mathbb{R}$ at a point $c \\in A$ that is a limit point of $A$, and differentiability on a set) and let $\\alpha \\in \\mathbb{R}$. Then:\n\n1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$;\n2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;\n3. $fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and is a limit point of $A_0$, the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is differentiable\n   at $c$ as a function on $A_0$, and\n   $$\\bigl((f/g)|_{A_0}\\bigr)'(c) \\;=\\; \\frac{f'(c)\\,g(c) - f(c)\\,g'(c)}{g(c)^{2}} .$$\n\nEach claim asserts two things: that the derivative on the left exists, and that\nit has the stated value. Both are proved.\n\n**Why claim 4 is stated on $A_0$.** The function $f/g$ is not defined where $g$\nvanishes, and $g$ may vanish at points of $A$ far from $c$; restricting to $A_0$\nis forced. That the restriction still has $c$ as a limit point, so that a\nderivative there means anything at all, is not free either, and it is the last\nclaim of If $\\lim_{x \\to c} f(x) = L \\ne 0$ then $|f| > |L|/2$ on a punctured neighbourhood of $c$; in particular if $L > 0$ then $f > L/2 > 0$ there applied to $g$. The hypothesis\nis $g(c) \\ne 0$, not \"$g$ vanishes nowhere\".\n\n**Everything is proved through\nCarathéodory's characterisation: $f$ is differentiable at $c$ if and only if there is $\\varphi : A \\to \\mathbb{R}$, continuous at $c$, with $f(x) - f(c) = \\varphi(x)(x - c)$ for every $x \\in A$, and then $\\varphi$ is unique and $\\varphi(c) = f'(c)$.** No difference quotient is estimated and\nno limit theorem beyond continuity is used, so no choice principle is spent.\nThe four identities are four algebraic rearrangements of an increment, each\nfollowed by a reading of Sums, scalar multiples, products, absolute values, maxima, minima and quotients with nonvanishing denominator of continuous functions are continuous, as are constants, the identity and every polynomial function.",
+          "relevant_hypotheses_and_conventions": "Supplies the componentwise product rule used when differentiating matrix products in steps 1.1–2.1.",
+          "supplier_proof_status": "Carrier metadata: status=published; provenance.proof=ai-altered; verification={precheck=\"pass\"; verified={\"model\":\"gpt-6-sol\",\"verdict\":\"locally-reviewed\",\"date\":\"2026-09-23\",\"scope\":\"Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-06-receipts.jsonl (thm-algebra-of-derivatives). No independent judge or whole-closure certification.\",\"delegated_by\":\"owner\"}; repair=\"research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/thm-algebra-of-derivatives.json\"}. No additional approval is inferred.",
+          "consumer_use": "Supplies the componentwise product rule used when differentiating matrix products in steps 1.1–2.1."
+        },
+        {
+          "supplier": "def-directional-and-partial-derivatives",
+          "carrier": "items/def-directional-and-partial-derivatives.md",
+          "status": "Current supplier interface inspected for this item; no additional review approval asserted.",
+          "source_section": "Definition",
+          "exact_statement": "Let $U\\subseteq\\mathbb R^m$, $a\\in U$, $v\\in\\mathbb R^m$, and $f:U\\to\\mathbb R^n$. If the line map $t\\mapsto f(a+tv)$ is defined near $0$, its derivative at $0$ is the **directional derivative**\n\n$$D_vf(a):=\\lim_{t\\to0}\\frac{f(a+tv)-f(a)}{t}.$$\n\nFor a standard basis vector $e_j$ (The standard list $e : n \\to F^{n}$ with $e_i(i) = 1_F$ and $e_i(j) = 0_F$ for $j \\ne i$ is an ordered basis of $F^{n}$; hence $\\dim_F F^{n} = n$, and $F^{0}$ is the zero space with basis $\\varnothing$ and dimension $0$), $D_{e_j}f(a)$ is the **$j$th partial derivative**, written $\\partial_jf(a)$. For $n\\ge1$, these are ordinary vector-valued one-variable derivatives in the sense of The derivative and the Riemann integral of a vector-valued function: an intrinsic derivative and a componentwise integral.\n\nFor $n=0$, use the zero-space case directly, without invoking that supplier's positive-codomain standing hypothesis. The space $\\mathbb R^0$ has only its zero vector and carries the zero Euclidean norm and its induced metric (The standard list $e : n \\to F^{n}$ with $e_i(i) = 1_F$ and $e_i(j) = 0_F$ for $j \\ne i$ is an ordered basis of $F^{n}$; hence $\\dim_F F^{n} = n$, and $F^{0}$ is the zero space with basis $\\varnothing$ and dimension $0$ clause 5, The Euclidean inner product $\\langle x,y\\rangle = \\sum_{k<n} x_k y_k$ on $\\mathbb{R}^n$, A norm on a real vector space, the induced metric, and the dictionary with the metric axioms). Whenever the line map is defined near $0$, every difference quotient for real $t\\ne0$ is this zero vector; define $D_vf(a)=0$. This is the unique possible derivative value, and its normwise difference-quotient error is exactly zero for all such $t$, so the real parameter still approaches an actual limit point. Every existing coordinate direction therefore has $\\partial_jf(a)=0$; these zero-valued partial maps are continuous in the induced norm metrics. If the source dimension is zero, there are no partial indices and the sole direction is $v=0$; its constant line map is defined near $0$.",
+          "relevant_hypotheses_and_conventions": "Supplies coordinate partial derivatives in the commutator formula.",
+          "supplier_proof_status": "Carrier metadata: status=published; provenance.proof=not-applicable; verification={repair=\"research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-directional-and-partial-derivatives.json\"}. No additional approval is inferred.",
+          "consumer_use": "Supplies coordinate partial derivatives in the commutator formula."
+        },
+        {
+          "supplier": "thm-heine-borel-rn",
+          "carrier": "items/thm-heine-borel-rn.md",
+          "status": "Current supplier interface inspected for this item; no additional review approval asserted.",
+          "source_section": "Statement",
+          "exact_statement": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions\n$n \\to \\mathbb{R}$ and let $d_2$ be the Euclidean metric on it\n($\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it). Then:\n\n1. **Closed boxes are compact.** For reals $a_k \\le b_k$ $(k < n)$ the box\n   $Q = \\{\\, x \\in \\mathbb{R}^n : a_k \\le x_k \\le b_k \\text{ for every } k < n \\,\\}$\n   is a compact subset of $(\\mathbb{R}^n, d_2)$ (Open cover, subcover, compact metric space, and compact subset of a metric space).\n2. **Heine-Borel.** A subset $K \\subseteq \\mathbb{R}^n$ is a compact subset of\n   $(\\mathbb{R}^n, d_2)$ if and only if $K$ is closed in $\\mathbb{R}^n$\n   (The metric topology: a set is open when every one of its points has a ball around it inside the set; closed means open complement) and bounded\n   (Bounded subset, diameter, distance from a point to a set, and distance between two sets in a metric space).\n3. **The real line.** A subset $K \\subseteq \\mathbb{R}$ is a compact subset of\n   $(\\mathbb{R}, d_{\\mathbb{R}})$, the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   (The absolute value makes $\\mathbb{R}$ a metric space: $d(x,y) = |x-y|$ is a metric, its open balls are the intervals $(x-r, x+r)$, and it is unbounded), if and only if $K$ is closed in\n   $\\mathbb{R}$ and bounded.\n\n**No choice principle is used.** The bisection below halves one coordinate at a\ntime and takes the **left** half whenever the left half still fails to be finitely\ncovered, the right half otherwise: a rule with two outcomes, decided by a\nproperty of the box, not a selection. That is the whole reason the theorem is\navailable in ZF, while the general \"complete and totally bounded implies compact\"\n(A complete, totally bounded metric space is compact, proved from countable choice used exactly once) is not.\n\nThe hypothesis $n \\ge 1$ is inherited from $\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it, which defines\n$\\mathbb{R}^n$ and its metrics only there; the last remark below records what\nhappens at $n = 0$.",
+          "relevant_hypotheses_and_conventions": "Supplies compactness of the nonempty closed bounded closure of the Euclidean domain in step 3.2.",
+          "supplier_proof_status": "Carrier metadata: status=published; provenance.proof=ai-generated; verification={precheck=\"pass\"; audited=\"2026-07-27\"; judge={\"model\":\"z-ai/glm-5.2\",\"verdict\":\"pass\",\"date\":\"2026-07-27\"}; repair=\"research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/thm-heine-borel-rn.json\"}. No additional approval is inferred.",
+          "consumer_use": "Supplies compactness of the nonempty closed bounded closure of the Euclidean domain in step 3.2."
+        },
+        {
+          "supplier": "thm-extreme-value-metric",
+          "carrier": "items/thm-extreme-value-metric.md",
+          "status": "Current supplier interface inspected for this item; no additional review approval asserted.",
+          "source_section": "Statement",
+          "exact_statement": "Let $(X,d)$ be a nonempty compact metric space (Open cover, subcover, compact metric space, and compact subset of a metric space,\nMetric space: $d(x,y) = 0$ iff $x = y$, symmetry, and the triangle inequality; pseudometric and ultrametric) and let $f : X \\to \\mathbb{R}$ be continuous\n(Continuity of a map between metric spaces, at a point and globally, in the $\\varepsilon$-$\\delta$ form), $\\mathbb{R}$ carrying its usual metric\n$d_{\\mathbb{R}}(s,t) = |s-t|$ (The absolute value makes $\\mathbb{R}$ a metric space: $d(x,y) = |x-y|$ is a metric, its open balls are the intervals $(x-r, x+r)$, and it is unbounded). Then the\nimage $f[X]$ is bounded above and below (Lower bound, bounded below, bounded set), and it has a\nmaximum and a minimum (Maximum and minimum of a set): there are points\n$x_{\\max}, x_{\\min} \\in X$ with\n\n$$f(x_{\\min}) \\;\\le\\; f(x) \\;\\le\\; f(x_{\\max}) \\qquad \\text{for every } x \\in X,$$\n\nand then $f(x_{\\max}) = \\sup f[X]$ and $f(x_{\\min}) = \\inf f[X]$\n(Complete ordered field (least-upper-bound property), Greatest lower bound (infimum)).\n\nNonemptiness of $X$ is a hypothesis and not an oversight: for $X = \\emptyset$ the\nimage is empty and has neither a supremum nor a maximum. No choice principle is\nused.",
+          "relevant_hypotheses_and_conventions": "Supplies attainment of the maximum of the continuous perturbed trace on the compact closure in step 3.2.",
+          "supplier_proof_status": "Carrier metadata: status=published; provenance.proof=ai-generated; verification={precheck=\"pass\"; repair=\"research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/thm-extreme-value-metric.json\"}. No additional approval is inferred.",
+          "consumer_use": "Supplies attainment of the maximum of the continuous perturbed trace on the compact closure in step 3.2."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-27 author self-review",
+        "notes": "Checked the order of noncommuting factors, the Hermitian adjoint identity, determinant-one congruence, AM-GM equality case and the bounded-domain maximum argument. All conclusions are conditional on the displayed smoothness and full Dirichlet data."
+      },
+      "finite_checks": [
+        {
+          "case": "constant n=2 determinant-one matrices",
+          "inputs": "Any admissible bounded Euclidean domain; Phi_0=I_2 and Phi_1=diag(2,1/2) as constant maps.",
+          "calculation": "Both currents and Delta J are zero, so both sides of the pointwise identity equal zero. Also tr(Phi_1 Phi_0^{-1})-2=2+1/2-2=1/2>0.",
+          "result": "The identity and nonnegative trace agree in this exact n=2 case. Boundary data are unequal, so no uniqueness conclusion is tested."
+        }
+      ],
+      "finite_checks_disposition": "This exact finite calculation checks the algebraic identity and lower-bound sign for one constant n=2 example. The spectral argument and maximum principle in the proof establish the full arbitrary-n and arbitrary-domain claims."
+    },
+    "def-emg-fx-stationary-axisymmetric-setup": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition requires a nonempty open region U."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement (axis definition): each group element fixes every point of A, so theta -> rho(e^{i theta},p) is constant for p in A and differentiation gives m_p=0. The positive-norm condition is imposed only on U\\A."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The definition is for a four-dimensional Lorentzian manifold and makes no lower-dimensional claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The metric is required to be Lorentzian and nondegenerate."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint statement occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The action and vector fields are supplied data; the definition constructs no choices."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition specifies geometric data and a circularity condition, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition specifies geometric data and a circularity condition, not a converse."
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "def-emg-lorentzian-forms",
+          "carrier": "items/def-emg-lorentzian-forms.md",
+          "status": "Current supplier interface inspected for this item; no additional review approval asserted.",
+          "source_section": "Definition",
+          "exact_statement": "Let $(M,g,N)$ be a smooth, Hausdorff, second-countable four-manifold without boundary, with smooth Lorentzian metric $g$ of signature $(-,+,+,+)$ and smooth time-orientation field $N$, as in [[def-gr-smooth-lorentzian-objects]]. Supply an independent orientation $o$ of $M$ in the sense of [[def-oriented-smooth-manifold-and-oriented-chart]]. The metric and time orientation do not select $o$. Write $\\mathrm{vol}_g$ for the oriented metric volume form of [[def-gr-metric-volume-form-and-current-flux]]; in any positively oriented chart it has components $\\sqrt{|\\det(g_{ab})|}\\,dx^0\\wedge dx^1\\wedge dx^2\\wedge dx^3$.\n\nA smooth real $k$-form is a smooth section of $\\bigwedge^kT^*M$, and its space is denoted $\\Omega^k(M)$, as in [[def-smooth-differential-k-form]]. In this page, $F\\in\\Omega^2(M)$ means an arbitrary smooth real two-form. No equation such as $dF=0$, no global potential, and no physical field law is included in this definition.\n\nAn **observer at $p\\in M$** is a vector $n\\in T_pM$ with $g_p(n,n)=-1$ and $g_p(n,N_p)<0$; its **rest space** is $n^\\perp=\\{v:g_p(v,n)=0\\}$, as in [[def-gr-observer-and-rest-space]]. A smooth **observer congruence** on an open set $U\\subseteq M$ is a smooth vector field whose value at every point is an observer. Its observer curves are the maximal integral curves, and a chart is adapted to it when its three spatial coordinate functions are constant along those curves, as in [[def-gr-observer-congruence-and-adapted-charts]]. Such a congruence need not be hypersurface-orthogonal.\n\nA **local frame field** on $U$ is an ordered smooth basis field of $TM|_U$. A **coordinate frame** is the basis of coordinate vector fields supplied by a chart. A **tetrad field** is a local frame $(E_0,E_1,E_2,E_3)$ with $g(E_A,E_B)=\\operatorname{diag}(-1,1,1,1)_{AB}$; it is future-directed when $E_0$ is future-directed, as in [[def-gr-local-frame-and-tetrad-fields]]. These are distinct objects: an observer congruence is a vector field, an adapted chart is a coordinate chart, and a tetrad is a basis field. A tetrad field is not presumed to be a coordinate frame. For every observer congruence $n$, each point has a neighborhood carrying an $n$-adapted tetrad; this is a local assertion only.\n\nA **worldline** on this Lorentzian manifold means a $C^1$ or piecewise-$C^1$ regular curve with future-timelike tangent and specified interval domain, as defined precisely in [[def-gr-timelike-worldline-and-proper-time]]. Its parameter is arbitrary; the proper-time and four-velocity constructions of that definition apply under their stated hypotheses. A worldline is a mathematical curve here and does not assert the existence or motion of a physical body.\n\nFor coordinate bookkeeping only, when a chart is chosen with all four coordinate values assigned the metre, write $x^0=ct$, where $t$ is assigned seconds and $c>0$ is the corresponding scale in $\\mathrm m\\,\\mathrm s^{-1}$. Then $g_{ab}$ is recorded as dimensionless. This is a unit convention on a chart, not a claim that the chart is inertial, orthonormal, global, or physically realized; $c$ in this mathematical convention has no asserted measured value.\n\nUse the unique torsion-free metric-compatible connection $\\nabla^g$ and the curvature convention of [[def-gr-metric-selected-connection]] and [[thm-gr-curvature-tensoriality-and-coordinate-formula]]. In a length-coordinate chart, the displayed Christoffel formula differentiates dimensionless metric components once, so $\\Gamma^a{}_{bc}$ is recorded in $\\mathrm m^{-1}$. The curvature coordinate formula contains one derivative of $\\Gamma$ or a product of two $\\Gamma$ components, so $R^a{}_{bcd}$ and its Ricci and scalar contractions are recorded in $\\mathrm m^{-2}$. These component assignments apply only in length-coordinate charts; other coordinate units transform by their Jacobians.",
+          "relevant_hypotheses_and_conventions": "Supplies the smooth oriented and time-oriented Lorentzian four-manifold convention and signature.",
+          "supplier_proof_status": "Carrier metadata: status=published; provenance.proof=ai-altered; verification={verified={\"model\":\"gpt-6-luna, gpt-6.1-sol, and delegated Codex review/repair agents; see completed run evidence\",\"verdict\":\"Owner accepted completed review and adjudication evidence for publication\",\"date\":\"2026-10-15\",\"scope\":\"Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report.\",\"evidence\":\"research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json\",\"publication\":\"research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json\",\"delegated_by\":\"owner; publication instruction 2026-10-15\"}}. No additional approval is inferred.",
+          "consumer_use": "Supplies the smooth oriented and time-oriented Lorentzian four-manifold convention and signature."
+        },
+        {
+          "supplier": "def-gr-killing-field",
+          "carrier": "items/def-gr-killing-field.md",
+          "status": "Current supplier interface inspected for this item; no additional review approval asserted.",
+          "source_section": "Definition",
+          "exact_statement": "Let $(M,g,N)$ be a time-oriented smooth Lorentzian four-manifold\n([[def-gr-smooth-lorentzian-objects]]) and let $\\xi$ be a smooth vector field\non $M$ ([[def-smooth-vector-field-as-a-tangent-bundle-section]]). The **Lie\nderivative of the metric along $\\xi$**, written $\\mathcal L_\\xi g$, is the\nsmooth symmetric covariant $2$-tensor field obtained by the flow definition of\n[[def-lie-derivative-of-a-tensor-field]] applied to $g$: for the local flow\n$\\Phi_t$ of $\\xi$,\n\n$$\\mathcal L_\\xi g:=\\frac{d}{dt}\\Big|_{t=0}\\Phi_t^*g .$$\n\nThe field $\\xi$ is a **Killing field** of $(M,g)$ (an **isometry generator**,\nor a **Killing vector**) when\n\n$$\\mathcal L_\\xi g=0 .$$\n\nThe equivalent local characterization\n\n$$\\mathcal L_\\xi g=0\\quad\\Longleftrightarrow\\quad\\nabla_a\\xi_b+\\nabla_b\\xi_a=0,$$\n\nwhere $\\nabla$ is the metric-selected connection of $g$\n([[def-gr-metric-selected-connection]],\n[[thm-gr-nondegenerate-levi-civita-and-tensor-derivative]]) and\n$\\xi_b:=g_{bc}\\xi^c$ is the lowered field, is proved in\n[[thm-gr-killing-and-on-shell-matter-identities]] clause (a); the definition\nitself asserts neither direction. Whether a given metric has Killing fields is\na property of that metric: neither existence nor uniqueness of a Killing field\nis asserted here, and a general metric has none beyond the trivial field\n$\\xi=0$.",
+          "relevant_hypotheses_and_conventions": "Defines a Killing field by the vanishing metric Lie derivative.",
+          "supplier_proof_status": "Carrier metadata: status=published; provenance.proof=not-applicable; verification={precheck=\"n/a\"}. No additional approval is inferred.",
+          "consumer_use": "Defines a Killing field by the vanishing metric Lie derivative."
+        },
+        {
+          "supplier": "def-emg-causal-solution-and-horizon-vocabulary",
+          "carrier": "items/def-emg-causal-solution-and-horizon-vocabulary.md",
+          "status": "Current supplier interface inspected for this item; no additional review approval asserted.",
+          "source_section": "Definition",
+          "exact_statement": "Let $(M,g,N)$ be a smooth Hausdorff second-countable boundaryless four-manifold with smooth Lorentz metric of signature $(-,+,+,+)$ and smooth time orientation. All definitions below are mathematical. A solution of a specified covariant field system is a tuple of fields of the regularity stated by that system satisfying its equations on its stated domain; this terminology alone supplies neither existence nor a global electromagnetic potential.\n\n**(a) Global causal and Cauchy conventions.** Use exactly [[def-gr-causal-curves-and-reachability]]: a future causal curve is locally absolutely continuous in coordinate charts, has nonzero future causal derivative almost everywhere, and has no constant subinterval. Inextendibility and causal reachability $J^\\pm$ have that item's endpoint-extension meanings. A Cauchy set meets every inextendible causal curve at exactly one parameter value: its inverse image under each such curve is a singleton, as in [[def-gr-spacelike-hypersurfaces-and-cauchy-sets]]. A spacelike hypersurface is a smooth embedded codimension-one submanifold with positive-definite induced metric; this local condition does not assert the global Cauchy property. Strong causality has the small-neighborhood no-leaving-and-reentering meaning of [[def-gr-causal-conditions-and-global-hyperbolicity]]. Global hyperbolicity means strong causality and compactness of every $J^+(p)\\cap J^-(q)$, exactly as there; no equivalence theorem is added here.\n\n**(b) Null and Killing horizons.** Here a **hypersurface** in $M$ is a smooth embedded three-dimensional submanifold, using the slice-chart convention recorded in [[def-gr-spacelike-hypersurfaces-and-cauchy-sets]] clause (a); that clause's positive-definiteness condition is not imposed unless “spacelike” is stated. A smooth embedded hypersurface $H\\subset M$ is **null** when at every $p\\in H$ the radical $\\{v\\in T_pH:g_p(v,X)=0\\text{ for every }X\\in T_pH\\}$ is nonzero. Equivalently, the slice-chart definition supplies near each point a smooth local defining function $f$ with $H=\\{f=0\\}$ and $df\\ne0$ on $H$, and $g^{-1}(df,df)=0$ on $H$. A specified smooth vector field $\\xi$ is **Killing** when $\\mathcal L_\\xi g=0$, equivalently $\\nabla_{(a}\\xi_{b)}=0$, using [[def-gr-killing-field]] and [[thm-gr-killing-and-on-shell-matter-identities]]. A **Killing horizon for $\\xi$** is a null hypersurface whose nonzero-generator part $H_*:=\\{p\\in H:\\xi_p\\ne0\\}$ is nonempty and dense in $H$, and on that part the specified field is tangent, null and normal: $\\xi_p\\in T_pH$ and $g(\\xi_p,X)=0$ for every $X\\in T_pH$. A generator parameter or asymptotic normalization, when required, must be specified separately.\n\nOn $H_*$ the **signed surface gravity** for this precise $\\xi$ is the unique smooth scalar $\\kappa_H$ such that\n\n$$d\\bigl(g(\\xi,\\xi)\\bigr)_p=-2\\kappa_H(p)\\,\\xi^\\flat_p\\quad(p\\in H_*).$$\n\nThis is an equality of ambient covectors at points of $H$, not merely of their pullbacks to $TH$. No constancy or positivity is asserted. Under a nonzero constant rescaling $\\xi'=a\\xi$, $\\kappa'_H=a\\kappa_H$. A **bifurcation surface** for $\\xi$ consists of a specified smooth spacelike embedded two-dimensional submanifold $B\\subset M$ on which $\\xi=0$, together with two distinct specified smooth embedded null hypersurfaces $H_+$ and $H_-$ in a common neighborhood of $B$, each a Killing horizon for $\\xi$, such that near each $p\\in B$ their intersection is $B$ and $T_pH_+\\cap T_pH_-=T_pB$. Write $H_{\\pm,*}:=\\{q\\in H_\\pm:\\xi_q\\ne0\\}$. At $p\\in B$, a surface-gravity value is defined only if the two branch scalars on $H_{+,*}$ and $H_{-,*}$ each extend smoothly to a neighborhood of $p$ in their respective hypersurfaces and those extensions agree at $p$; the value is their common value. Such a value is unique whenever it exists, since each $H_{\\pm,*}$ is dense in its horizon branch. No bifurcation surface or such extension is asserted to exist, and the defining equation at $\\xi=0$ alone determines no value.\n\n**(c) Sections, area and ergoregions.** A **horizon section** is a specified smooth spacelike embedded two-dimensional submanifold $S$ of the horizon, with positive induced metric $h$. Its area density is $\\mu_h=\\sqrt{\\det(h_{ij})}\\,|dy^1dy^2|$ of [[def-riemannian-volume-density]]. Assume Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]) for intrinsic density integration, as in [[def-riemannian-volume-of-a-compactly-supported-smooth-density]]. Its possibly infinite area is the nonnegative extended value\n\n$$\\operatorname{Area}_g(S):=\\sup\\left\\{\\int_S\\chi\\mu_h:\\chi\\in C_c^\\infty(S),\\ 0\\le\\chi\\le1\\right\\}\\in[0,+\\infty],$$\n\nwith the extended order of [[def-extended-reals]]. On compact $S$ this is $\\int_S\\mu_h$; orientation is unnecessary. The density glues by [[lem-the-riemannian-volume-density-is-coordinate-independent]]. A stationary field here is a specified Killing field timelike on a specified nonempty open region; no normalization is inferred from this adjective. Its **ergoregion** in the chosen model is $\\{g(\\xi,\\xi)>0\\}$, its **stationary-limit set** is $\\{g(\\xi,\\xi)=0\\}$, and its **ergosurface** is the relative boundary of its ergoregion. Every ergosurface point lies in the stationary-limit set; the converse requires a separate sign-change argument. Nullness, Killing-horizon status and escape-boundary status are separate claims; a coordinate root alone proves none of them.\n\n**(d) Selected-model escape.** Fix a specified open spacetime model $U\\subseteq M$ and specified smooth radius observable $r:U\\to\\mathbb R$. An admissible escape path from $p$ is a continuous map $\\gamma:[0,T)\\to U$, $0<T\\le+\\infty$, with $\\gamma(0)=p$, such that for every compact interval $[a,b]\\subset[0,T)$ there is a finite subdivision $a=t_0<\\cdots<t_m=b$ and, for each $j$, a spacetime chart $(V_j,x_j)$ with $\\gamma([t_{j-1},t_j])\\subset V_j$ for which $x_j\\circ\\gamma$ is $C^1$ on $[t_{j-1},t_j]$; its derivative is required to be nonzero and future causal in the chart interior and in the one-sided sense at subdivision endpoints. Define\n\n$$\\mathcal E_{U,r}:=\\left\\{p\\in U:\\exists\\gamma\\text{ admissible from }p\\ \\forall R>0\\ \\exists t\\in[0,T):r(\\gamma(t))>R\\right\\}.$$\n\nThe **selected escape boundary** is $\\partial_U\\mathcal E_{U,r}$ in the relative topology of $U$. This explicitly selected piecewise-$C^1$ path class is contained in the global causal-curve class of (a); it does not replace that class in Cauchy definitions. The definition includes no completion of $U$ or extension of $M$.\n\n**(e) Approached metric extensions and curvature obstructions.** A $C^2$ nondegenerate metric extension of an open model $(U,g)$ consists of a smooth Hausdorff second-countable four-manifold $\\widetilde M$, a $C^2$ Lorentz metric $\\widetilde g$ of the same signature, and a smooth open embedding $j:U\\to\\widetilde M$ with $j^*\\widetilde g=g$. An **approached added point** is specified either by $p\\in\\widetilde M\\setminus j(U)$ and a sequence $x_n\\in U$ with $j(x_n)\\to p$, or by such a $p$ and a continuous curve $\\sigma:[0,1)\\to U$ with $j(\\sigma(t))\\to p$ as $t\\uparrow1$. An **extension obstruction at specified approach data** means no such extension and added point realize that same sequence or curve limit. A **polynomial complete curvature contraction** is a scalar formed from a finite sum of tensor products of copies of the Riemann curvature tensor and the inverse metric, with every tensor index contracted. If its absolute values are unbounded along the specified sequence (as $n\\to\\infty$), or along the specified curve (as $t\\uparrow1$), then that approach obstructs a $C^2$ nondegenerate metric extension. This criterion concerns curvature without its covariant derivatives. A smooth metric extension is the same definition with smooth $\\widetilde g$. These definitions assert no field equation and no additional global extension property.\n\n**(f) Observers and spatial fields.** Observers, smooth observer congruences and their integral curves, adapted charts and tetrads retain the distinct meanings of [[def-emg-lorentzian-forms]]. Relative to a future unit observer $n$, an electric or magnetic spatial covector is identified with a spatial vector only by raising with the positive rest metric $h=g+n^\\flat\\otimes n^\\flat$ on $n^\\perp$. Such spatial vectors $e,b$ are not tetrad basis vectors. No singular-source product or action is defined by this vocabulary.",
+          "relevant_hypotheses_and_conventions": "Supplies the selected stationary-field convention: a specified Killing field timelike on a declared nonempty open region, with no normalization inferred.",
+          "supplier_proof_status": "Carrier metadata: status=published; provenance.proof=ai-altered; verification={precheck=\"pending\"}. No additional approval is inferred.",
+          "consumer_use": "Supplies the selected stationary-field convention: a specified Killing field timelike on a declared nonempty open region, with no normalization inferred."
+        },
+        {
+          "supplier": "def-c-r-and-smooth-maps-between-smooth-manifolds",
+          "carrier": "items/def-c-r-and-smooth-maps-between-smooth-manifolds.md",
+          "status": "Current supplier interface inspected for this item; no additional review approval asserted.",
+          "source_section": "Definition",
+          "exact_statement": "Let $M$ and $N$ be smooth manifolds, let $F:M\\to N$ be a map, let $p\\in M$ and\nlet $r\\in\\mathbb N_0\\cup\\{\\infty\\}$, where $\\mathbb N_0=\\{0,1,2,\\ldots\\}$.\nFor $m,q\\in\\mathbb N_0$ and an open set $E\\subseteq\\mathbb R^m$, a map\n$g:E\\to\\mathbb R^q$ is **of class $C^r$** as follows. When $m=0$, every such\nmap is declared $C^r$. When $m\\ge1$, each component $g_l$ with $l<q$ must be\n$C^r$ in the sense of\n[[def-ck-and-multi-index-notation-in-several-variables]]; when $q=0$ this\ncomponent condition is vacuous.\nSuppose $F$ is continuous at $p$. Then $F$ is **of class $C^r$ at $p$** when\nthere are smooth charts $(U,\\varphi)$ of $M$ at $p$ and $(V,\\psi)$ of $N$ at\n$F(p)$ with $F(U)\\subseteq V$ such that the coordinate representative\n\n$$\\psi\\circ F\\circ\\varphi^{-1}:\\varphi(U)\\longrightarrow\\psi(V)$$\n\n([[def-coordinate-representation-of-a-map]]) is of class $C^r$ on a\nneighbourhood of $\\varphi(p)$ in this componentwise Euclidean sense. By\n[[lem-chart-independence-of-c-r-smoothness]], this condition is independent of\nthe chosen charts: if one such representative is $C^r$, then every one is, so\n\"some charts\" may be read as \"any charts\". A map is **$C^r$ on an open set**\n$W\\subseteq M$ when it is continuous on $W$ and $C^r$ at every point of $W$. A\nmap that is $C^r$ for every finite $r$ — equivalently $C^\\infty$ — is called\n**smooth**; the term **$C^r$ map between smooth manifolds** is reserved for the\ncase where $F$ is continuous and the representative condition holds at every\npoint of $M$.",
+          "relevant_hypotheses_and_conventions": "Supplies the smooth-map convention for the group action on the manifold.",
+          "supplier_proof_status": "Carrier metadata: status=published; provenance.proof=not-applicable; verification={precheck=\"n/a\"; audited=\"2026-08-29\"}. No additional approval is inferred.",
+          "consumer_use": "Supplies the smooth-map convention for the group action on the manifold."
+        },
+        {
+          "supplier": "def-lie-derivative-of-a-tensor-field",
+          "carrier": "items/def-lie-derivative-of-a-tensor-field.md",
+          "status": "Current supplier interface inspected for this item; no additional review approval asserted.",
+          "source_section": "Definition",
+          "exact_statement": "If $X$ has local flow $\\Phi_t$ and $T$ is a smooth tensor field of type $(r,s)$, its Lie derivative is $$\\mathcal L_XT=\\left.\\frac d{dt}\\right|_{t=0}\\Phi_t^*T,$$ on every local flow domain where this derivative is defined. Here the pullback by the local diffeomorphism $\\Phi_t$ acts by $d\\Phi_{-t}$ on each contravariant slot and by $d\\Phi_t$ on each covariant slot.",
+          "relevant_hypotheses_and_conventions": "Supplies the Lie-derivative convention used for isometries and Killing fields.",
+          "supplier_proof_status": "Carrier metadata: status=published; provenance.proof=not-applicable; verification={audited=\"2026-09-06\"; judge={\"model\":\"gpt-5.6-terra\",\"verdict\":\"pass\",\"date\":\"2026-09-06\"}}. No additional approval is inferred.",
+          "consumer_use": "Supplies the Lie-derivative convention used for isometries and Killing fields."
+        },
+        {
+          "supplier": "def-directional-and-partial-derivatives",
+          "carrier": "items/def-directional-and-partial-derivatives.md",
+          "status": "Current supplier interface inspected for this item; no additional review approval asserted.",
+          "source_section": "Definition",
+          "exact_statement": "Let $U\\subseteq\\mathbb R^m$, $a\\in U$, $v\\in\\mathbb R^m$, and $f:U\\to\\mathbb R^n$. If the line map $t\\mapsto f(a+tv)$ is defined near $0$, its derivative at $0$ is the **directional derivative**\n\n$$D_vf(a):=\\lim_{t\\to0}\\frac{f(a+tv)-f(a)}{t}.$$\n\nFor a standard basis vector $e_j$ (The standard list $e : n \\to F^{n}$ with $e_i(i) = 1_F$ and $e_i(j) = 0_F$ for $j \\ne i$ is an ordered basis of $F^{n}$; hence $\\dim_F F^{n} = n$, and $F^{0}$ is the zero space with basis $\\varnothing$ and dimension $0$), $D_{e_j}f(a)$ is the **$j$th partial derivative**, written $\\partial_jf(a)$. For $n\\ge1$, these are ordinary vector-valued one-variable derivatives in the sense of The derivative and the Riemann integral of a vector-valued function: an intrinsic derivative and a componentwise integral.\n\nFor $n=0$, use the zero-space case directly, without invoking that supplier's positive-codomain standing hypothesis. The space $\\mathbb R^0$ has only its zero vector and carries the zero Euclidean norm and its induced metric (The standard list $e : n \\to F^{n}$ with $e_i(i) = 1_F$ and $e_i(j) = 0_F$ for $j \\ne i$ is an ordered basis of $F^{n}$; hence $\\dim_F F^{n} = n$, and $F^{0}$ is the zero space with basis $\\varnothing$ and dimension $0$ clause 5, The Euclidean inner product $\\langle x,y\\rangle = \\sum_{k<n} x_k y_k$ on $\\mathbb{R}^n$, A norm on a real vector space, the induced metric, and the dictionary with the metric axioms). Whenever the line map is defined near $0$, every difference quotient for real $t\\ne0$ is this zero vector; define $D_vf(a)=0$. This is the unique possible derivative value, and its normwise difference-quotient error is exactly zero for all such $t$, so the real parameter still approaches an actual limit point. Every existing coordinate direction therefore has $\\partial_jf(a)=0$; these zero-valued partial maps are continuous in the induced norm metrics. If the source dimension is zero, there are no partial indices and the sole direction is $v=0$; its constant line map is defined near $0$.",
+          "relevant_hypotheses_and_conventions": "Supplies coordinate partial derivatives in the commutator formula.",
+          "supplier_proof_status": "Carrier metadata: status=published; provenance.proof=not-applicable; verification={repair=\"research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-directional-and-partial-derivatives.json\"}. No additional approval is inferred.",
+          "consumer_use": "Supplies coordinate partial derivatives in the commutator formula."
+        },
+        {
+          "supplier": "def-emg-local-potentials-and-circle-data",
+          "carrier": "items/def-emg-local-potentials-and-circle-data.md",
+          "status": "Current published definition inspected for this item; the exact smooth circle-group structure and 2π phase convention are cited, with no additional approval inferred.",
+          "source_section": "Definition",
+          "exact_statement": "Identify $\\mathbb C$ with $\\mathbb R^2$ by $z=x+iy$ and set $U(1)=S^1:=\\{(x,y)\\in\\mathbb R^2:x^2+y^2=1\\}$. Its topology is the subspace topology. Specify its smooth structure by the four charts\n\n$$V_{x,\\epsilon}=\\{(x,y)\\in S^1:\\epsilon x>0\\},\\quad (x,y)\\mapsto y,\\quad y\\mapsto(\\epsilon\\sqrt{1-y^2},y),$$\n\nand\n\n$$V_{y,\\epsilon}=\\{(x,y)\\in S^1:\\epsilon y>0\\},\\quad (x,y)\\mapsto x,\\quad x\\mapsto(x,\\epsilon\\sqrt{1-x^2}),$$\n\nfor $\\epsilon\\in\\{-1,1\\}$, with each coordinate range $(-1,1)$. They cover $S^1$; their transition maps are restrictions of the positive square-root branch and coordinate projections, hence are smooth by [[lem-emg-positive-square-root-smoothness]] and [[thm-ck-euclidean-maps-closed-under-algebra-and-composition]]. In these coordinates multiplication is the restriction of $(x,y)(u,v)=(xu-yv,xv+yu)$ and inversion is $(x,y)\\mapsto(x,-y)$, so both are smooth; they are also continuous for the stated topology. Thus this is a smooth Lie group and, in particular, a topological group as required by [[def-principal-g-bundle-and-associated-fiber-bundle]].\n\nLet $E:\\mathbb R\\to U(1)$ be $E(t)=e^{it}=(\\cos t,\\sin t)$; the Cartesian formula is [[cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]]. The trigonometric derivative identities of [[thm-sine-and-cosine-derivatives]], iterated, show that $E$ is smooth in the $C^\\infty$ sense of [[def-ck-euclidean-maps-and-diffeomorphisms]]: every derivative of either coordinate is $\\pm\\sin$ or $\\pm\\cos$, and these functions are continuous by [[cor-differentiable-implies-continuous]]. Surjectivity is [[thm-sine-and-cosine-parametrize-the-unit-circle]]. If $E(t)\\in V_{x,\\epsilon}$, the chart coordinate $\\sin t$ has derivative $\\cos t=x\\ne0$; if $E(t)\\in V_{y,\\epsilon}$, the coordinate $\\cos t$ has derivative $-\\sin t=-y\\ne0$. The smooth inverse-function theorem [[lem-choice-free-smooth-inverse-function-theorem-in-euclidean-space]] therefore makes $E$ a diffeomorphism from some open interval about $t$ onto an open circle arc. Every smooth map from an open subset of $M$ to $U(1)$ consequently has, near each point, a smooth real phase lift obtained by composing with such a local inverse.",
+          "relevant_hypotheses_and_conventions": "U(1) is identified with S1 in R2, equipped with the four stated smooth charts; multiplication and inversion are smooth, and E(t)=e^{it} has period 2π.",
+          "supplier_proof_status": "Carrier metadata: status=published; provenance.proof=not-applicable. No proof is applicable and no additional approval is inferred.",
+          "consumer_use": "Provides the smooth structure on U(1) required for the smooth axial action and its 2π-periodic generator."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-27 author self-review",
+        "notes": "Checked that stationarity, the periodic axial action, commutation and circularity are separate supplied conditions; the item asserts no existence, global quotient, field equation or regularity theorem."
+      },
+      "finite_checks": []
+    },
+    "rem-emg-fx-stationary-spacetime-obligations": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item defines a carrier for a supplied domain and makes no existence theorem about an empty space."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item is a definition or scope remark and makes no zero-input proof claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No dimension-one classification theorem is asserted by this definition or remark."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The definition excludes degenerate Lorentzian or singular matrix data by its stated domain conditions."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No parameter interval or endpoint conclusion appears in this definition or remark."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item makes no choice from a family of nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no converse or biconditional claim."
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "def-emg-fx-matrix-harmonic-problem",
+          "carrier": "items/def-emg-fx-matrix-harmonic-problem.md",
+          "status": "Current supplier interface inspected for this item; no additional review approval asserted.",
+          "source_section": "Definition",
+          "exact_statement": "Let $d,n\\in\\mathbb N$ with $d,n\\ge1$. Let $\\Omega\\subseteq\\mathbb R^d$ be a nonempty bounded connected open set whose boundary is locally the graph of a smooth function. Here $C^\\infty(\\overline\\Omega)$ means restriction of a smooth function on an open neighborhood of $\\overline\\Omega$. Use the matrix spaces $M_n(\\mathbb C)$ and ordinary matrix multiplication. For $A\\in M_n(\\mathbb C)$ write $A^\\dagger:=\\overline A^{\\mathsf T}$, and write $\\operatorname{tr}A:=\\sum_{j<n}A_{jj}$. A matrix $\\Phi$ is **positive definite Hermitian** when $\\Phi^\\dagger=\\Phi$ and $v^\\dagger\\Phi v$ is a positive real number for every nonzero $v\\in\\mathbb C^n$. Define\n\n$$\\mathcal P_n:=\\{\\Phi\\in M_n(\\mathbb C):\\Phi\\text{ is positive definite Hermitian and }\\det\\Phi=1\\}.$$\n\nThe determinant is the determinant over $\\mathbb C$. Every $\\Phi\\in\\mathcal P_n$ is invertible because $\\det\\Phi=1$ is a unit; its inverse is smooth when $\\Phi$ is a smooth matrix field because the adjugate formula reduces to polynomial entries when $\\det\\Phi=1$.\n\nFor a smooth map $\\Phi:\\overline\\Omega\\to\\mathcal P_n$, define the matrix-valued one-form $d\\Phi=\\sum_{a=1}^d(\\partial_a\\Phi)\\,dx^a$ by differentiating entries, and put $J:=\\Phi^{-1}d\\Phi=\\sum_{a=1}^d J_a\\,dx^a$. Its **matrix harmonic-map equation** in this item means exactly\n\n$$\\operatorname{div}J:=\\sum_{a=1}^d\\partial_aJ_a=0\\quad\\text{on }\\Omega.$$\n\nThe positive matrix boundary problem is to compare two such maps $\\Phi_0,\\Phi_1$ satisfying this equation and prescribed values on all of $\\partial\\Omega$. The Euclidean coordinates, matrix size, determinant normalization, and divergence convention are part of the definition. No spacetime metric, symmetry reduction, physical postulate, or spacetime uniqueness theorem is included.",
+          "relevant_hypotheses_and_conventions": "Fixes the exact bounded Euclidean domain, positive determinant-one matrix target, componentwise current and full-boundary condition used in the proof.",
+          "supplier_proof_status": "Carrier metadata: status=draft; provenance.proof=not-applicable; verification={}. No additional approval is inferred.",
+          "consumer_use": "Fixes the exact bounded Euclidean domain, positive determinant-one matrix target, componentwise current and full-boundary condition used in the proof."
+        },
+        {
+          "supplier": "lem-emg-fx-mazur-comparison",
+          "carrier": "items/lem-emg-fx-mazur-comparison.md",
+          "status": "Current supplier interface inspected for this item; no additional review approval asserted.",
+          "source_section": "Statement",
+          "exact_statement": "Let $d,n\\ge1$ and let $\\Omega\\subseteq\\mathbb R^d$ be the nonempty bounded connected smooth domain of [[def-emg-fx-matrix-harmonic-problem]]. Let $\\Phi_0,\\Phi_1\\in C^\\infty(\\overline\\Omega,\\mathcal P_n)$ satisfy $\\operatorname{div}J_i=0$, where $J_i:=\\Phi_i^{-1}d\\Phi_i=\\sum_{a=1}^dJ_{i,a}\\,dx^a$ and $\\operatorname{div}J_i:=\\sum_a\\partial_aJ_{i,a}$. Define\n\n$$\\Psi:=\\Phi_1\\Phi_0^{-1}-I_n,\\qquad \\Delta J_a:=J_{1,a}-J_{0,a}.$$\n\nThen, pointwise on $\\Omega$,\n\n$$\\Delta\\operatorname{tr}\\Psi=\\sum_{a=1}^d\\operatorname{tr}\\!\\left((\\Delta J_a)^\\dagger\\Phi_1\\Delta J_a\\Phi_0^{-1}\\right)\\ge0,$$\n\nwhere $\\Delta=\\sum_a\\partial_a^2$ is the Euclidean Laplacian. If $\\Phi_1=\\Phi_0$ on the entire boundary $\\partial\\Omega$, then $\\Phi_1=\\Phi_0$ on $\\overline\\Omega$. This is an abstract bounded-domain uniqueness result for the stated positive matrix equation.",
+          "relevant_hypotheses_and_conventions": "Supplies the proved bounded-Euclidean-domain positive-matrix comparison and full-Dirichlet uniqueness result.",
+          "supplier_proof_status": "Carrier metadata: status=draft; provenance.proof=ai-altered; verification={precheck=\"pending\"}. No additional approval is inferred.",
+          "consumer_use": "Supplies the proved bounded-Euclidean-domain positive-matrix comparison and full-Dirichlet uniqueness result."
+        },
+        {
+          "supplier": "def-emg-fx-stationary-axisymmetric-setup",
+          "carrier": "items/def-emg-fx-stationary-axisymmetric-setup.md",
+          "status": "Current supplier interface inspected for this item; no additional review approval asserted.",
+          "source_section": "Definition",
+          "exact_statement": "Let $(M,g,N,o)$ be a smooth, Hausdorff, second-countable, boundaryless, oriented and time-oriented Lorentzian four-manifold of signature $(-,+,+,+)$, with smooth future timelike time-orientation field $N$, and let $U\\subseteq M$ be a nonempty connected open set. A **stationary field on $U$** is a specified smooth Killing field $k$ that is timelike on a specified nonempty open subset of $U$; no normalization or global timelikeness is inferred.\n\nHere $U(1)=\\{z\\in\\mathbb C:|z|=1\\}$ with complex multiplication and the smooth circle-group structure fixed in [[def-emg-local-potentials-and-circle-data]]. An **axial $U(1)$ action on $U$** is a specified smooth map $\\rho:U(1)\\times U\\to U$ satisfying $\\rho(1,p)=p$ and $\\rho(z_1z_2,p)=\\rho(z_1,\\rho(z_2,p))$, with $\\rho(z,\\cdot)^*g=g$ for every $z$; effective means that only $z=1$ acts identically on all of $U$. Its generator is the smooth vector field $m$ defined by $m_p=\\frac{d}{d\\theta}|_{\\theta=0}\\rho(e^{i\\theta},p)$; the parameter has period $2\\pi$. Its **axis** is the fixed-point set $\\mathcal A:=\\{p\\in U:\\rho(z,p)=p\\text{ for every }z\\in U(1)\\}$. For this page, an **axisymmetric region** is a region supplied with such an effective action and satisfying $g(m,m)>0$ on $U\\setminus\\mathcal A$. A stationary field and axial generator **commute** when their Lie bracket vanishes; in coordinates this means $\\sum_a(k^a\\partial_a m^b-m^a\\partial_a k^b)=0$ for every component $b$.\n\nDefine\n\n$$U_*:=\\{p\\in U\\setminus\\mathcal A:k_p,m_p\\text{ are linearly independent and }g_p|_{\\operatorname{span}\\{k_p,m_p\\}}\\text{ is nondegenerate}\\}.$$\n\nBecause $M$ is Hausdorff, each fixed set $\\{p:\\rho(z,p)=p\\}$ is closed in $U$: it is the preimage of the closed diagonal in $U\\times U$ under $p\\mapsto(\\rho(z,p),p)$. Their intersection $\\mathcal A$ is closed, so $U\\setminus\\mathcal A$ is open. In a chart, linear independence is witnessed by a nonzero $2\\times2$ minor of the $4\\times2$ coordinate matrix with columns $k$ and $m$, and nondegeneracy is $\\det G\\ne0$ for the continuous Gram matrix $G_{ij}:=g(K_i,K_j)$, where $K_1:=k$ and $K_2:=m$. These are open conditions, so $U_*$ is open. On $U_*$ the matrix $G$ is invertible. Its inverse entries are smooth by the cofactor-over-determinant formula. The smooth map\n\n$$\\Pi_p(v):=\\sum_{i,j=1}^2K_i(p)(G(p)^{-1})_{ij}g_p(K_j(p),v)$$\n\nis a projection onto $\\operatorname{span}\\{k,m\\}$, since it fixes each $K_i$ and $v-\\Pi_p(v)$ is orthogonal to both generators. Therefore\n\n$$\\mathcal D_p:=\\ker\\Pi_p=\\{v\\in T_pM:g_p(v,k_p)=g_p(v,m_p)=0\\}$$\n\nis a smooth rank-two distribution on $U_*$: the projection has rank two in each tangent space, and its kernel has dimension $4-2=2$. The kernel varies smoothly because, locally, a nonzero two-by-two minor lets one solve its two linear equations smoothly for two components in terms of the other two.\n\nAn **immersed surface through $p$** here means the image of a smooth immersion $\\sigma:S\\to U_*$ from a two-dimensional smooth manifold $S$, with $p\\in\\sigma(S)$; immersion means that $d\\sigma_q:T_qS\\to T_{\\sigma(q)}U_*$ is injective for every $q\\in S$. Its tangent plane at $\\sigma(q)$ is $d\\sigma_q(T_qS)$. **Circularity on $U_*$** means that through every point of $U_*$ there is such a local immersed surface with $d\\sigma_q(T_qS)=\\mathcal D_{\\sigma(q)}$ at every point of its domain.\n\nThese are supplied geometric data and definitions. They assert no existence of a second Killing field, no symmetry inheritance from matter equations, no integrability of $\\mathcal D$, no global smooth quotient or orbit-space boundary structure, and no Einstein–Maxwell solution. Any use of the causal or horizon terms follows [[def-emg-causal-solution-and-horizon-vocabulary]]. A future spacetime theorem must state any extra asymptotic, horizon, axis-regularity, analyticity, connectedness and nondegeneracy hypotheses it uses.",
+          "relevant_hypotheses_and_conventions": "Supplies this page’s exact conventions for stationary and axial generators, commutation and circularity.",
+          "supplier_proof_status": "Carrier metadata: status=draft; provenance.proof=not-applicable; verification={}. No additional approval is inferred.",
+          "consumer_use": "Supplies this page’s exact conventions for stationary and axial generators, commutation and circularity."
+        },
+        {
+          "supplier": "thm-emg-fx-local-charged-birkhoff",
+          "carrier": "items/thm-emg-fx-local-charged-birkhoff.md",
+          "status": "Current supplier interface inspected for this item; no additional review approval asserted.",
+          "source_section": "Statement",
+          "exact_statement": "Assume $\\mathrm{AC}_\\omega$ and let an exact spherical Einstein–Maxwell–$\\Lambda$\ndatum be given on a connected patch. Suppose $dr$ is nowhere zero and\n$z=q^{-1}(dr,dr)$ is nowhere zero. Then the charged mass function $\\varpi$ is\nconstant, say $m$. Around each point there are local\ncoordinates $(t,r)$ on the quotient in which\n$$g=-f(r)\\,dt^2+f(r)^{-1}\\,dr^2+r^2\\gamma_{S^2},\\qquad f(r)=1-\\frac{2m}{r}+\\frac{q_e^2+q_m^2}{r^2}-\\frac{\\Lambda r^2}{3},$$\nand\n$$\\mathcal F=-\\frac{q_e}{r^2}\\,dt\\wedge dr+q_m\\omega_{S^2}.$$\nThe vector $\\partial_t$ is Killing and has squared norm $-f$: it is timelike\nwhere $f>0$ and spacelike where $f<0$; its time orientation is inherited from\nthe given time orientation on the orbit patch. For $\\Lambda=0$ this is the\ndyonic Reissner–Nordström local form in the stated source convention.\nConstant-radius and null-gradient patches, points with $f=0$, global\nextensions, asymptotic flatness, positive mass, and black-hole uniqueness are\noutside the claim.",
+          "relevant_hypotheses_and_conventions": "Supplies only the current conditional spherical local classification with dr and q^{-1}(dr,dr) nowhere zero; its local conclusion explicitly excludes global uniqueness.",
+          "supplier_proof_status": "Carrier metadata: status=draft; provenance.proof=ai-generated; verification={precheck=\"pass\"}. No additional approval is inferred.",
+          "consumer_use": "Supplies only the current conditional spherical local classification with dr and q^{-1}(dr,dr) nowhere zero; its local conclusion explicitly excludes global uniqueness."
+        },
+        {
+          "supplier": "ex-emg-fx-flat-holonomy-circle",
+          "carrier": "items/ex-emg-fx-flat-holonomy-circle.md",
+          "status": "Current supplier interface inspected for this item; no additional review approval asserted.",
+          "source_section": "Example",
+          "exact_statement": "Assume $\\mathrm{AC}_\\omega$ for the smooth principal-connection and gauge-action convention. Let $M_0=\\mathbb R_t\\times U(1)_w\\times\\mathbb R^2_{x,y}$ have the product smooth structure and flat product Lorentzian metric $g=-dt^2+R^2d\\phi^2+dx^2+dy^2$, where $R>0$ is a length and $\\phi$ is the angular coordinate modulo $2\\pi$. Give it time orientation $\\partial_t$ and product orientation $dt\\wedge R\\nu\\wedge dx\\wedge dy$. Let $\\nu=-iw^{-1}dw=d\\phi$ be the global real angular one-form on the base circle, normalized by $\\int_{U(1)}\\nu=2\\pi$, and let $P=M_0\\times U(1)_z$ have projection $\\pi(x,z)=x$ and right action $(x,z)\\cdot\\zeta=(x,z\\zeta)$. On the fibre let $\\eta=-iz^{-1}dz$. For a dimensionless real parameter $\\theta$, the normalized connection $\\omega_\\theta=\\eta+\\theta\\pi^*\\nu$ has zero curvature. For the fixed normalization $\\kappa_0>0$ in webers, its physical local potential is $A_\\theta=\\kappa_0\\theta\\nu$; in the length coordinate $s=R\\phi$ its component is $\\kappa_0\\theta/R$ in $\\mathrm{Wb}\\,\\mathrm m^{-1}$. For the positive base loop $\\gamma(\\phi)=(0,e^{i\\phi},0,0)$, $\\phi\\in[0,2\\pi]$, define principal holonomy as the fibre multiplier of the horizontal lift; it is $e^{-2\\pi i\\theta}$. The inverse Wilson-loop convention $W(\\gamma):=\\exp(i\\int_\\gamma\\theta\\nu)$ gives $e^{2\\pi i\\theta}$. Under the pushforward action on horizontal distributions, this connection is gauge-equivalent to $\\eta$ exactly when $\\theta\\in\\mathbb Z$. The circle is an ideal topological factor of a smooth background; no monopole, charge quantization, or empirical claim is made.",
+          "relevant_hypotheses_and_conventions": "Supplies the current exact example of zero curvature with nontrivial principal holonomy for a nonintegral parameter.",
+          "supplier_proof_status": "Carrier metadata: status=draft; provenance.proof=ai-generated; verification={}. No additional approval is inferred.",
+          "consumer_use": "Supplies the current exact example of zero curvature with nontrivial principal holonomy for a nonintegral parameter."
+        },
+        {
+          "supplier": "def-emg-local-potentials-and-circle-data",
+          "carrier": "items/def-emg-local-potentials-and-circle-data.md",
+          "status": "Current supplier interface inspected for this item; no additional review approval asserted.",
+          "source_section": "Definition",
+          "exact_statement": "Let $(M,g,N,o)$ be the smooth, Hausdorff, second-countable, boundaryless oriented and time-oriented Lorentzian four-manifold of [[def-emg-lorentzian-forms]]. Its smooth real $k$-forms are sections of $\\bigwedge^kT^*M$, written $\\Omega^k(M)$, and $d$ is the exterior derivative of [[lem-emg-lorentz-hodge-calculus]]. A smooth two-form $F$ is **closed** when $dF=0$ and **exact** when $F=dA$ for some smooth real one-form $A$ on the whole base.\n\nBy [[def-de-rham-cohomology]], $H^2_{\\mathrm{dR}}(M)=Z^2(M)/B^2(M)$, where $Z^2(M)$ is the vector space of closed smooth two-forms and $B^2(M)$ is the vector space of exact smooth two-forms. Thus, for closed $F$, the statement $[F]=0$ means exactly that $F=dA$ for a global smooth one-form $A$. This equivalence is the quotient definition; it does not assert that every closed form is exact.\n\nIdentify $\\mathbb C$ with $\\mathbb R^2$ by $z=x+iy$ and set $U(1)=S^1:=\\{(x,y)\\in\\mathbb R^2:x^2+y^2=1\\}$. Its topology is the subspace topology. Specify its smooth structure by the four charts\n\n$$V_{x,\\epsilon}=\\{(x,y)\\in S^1:\\epsilon x>0\\},\\quad (x,y)\\mapsto y,\\quad y\\mapsto(\\epsilon\\sqrt{1-y^2},y),$$\n\nand\n\n$$V_{y,\\epsilon}=\\{(x,y)\\in S^1:\\epsilon y>0\\},\\quad (x,y)\\mapsto x,\\quad x\\mapsto(x,\\epsilon\\sqrt{1-x^2}),$$\n\nfor $\\epsilon\\in\\{-1,1\\}$, with each coordinate range $(-1,1)$. They cover $S^1$; their transition maps are restrictions of the positive square-root branch and coordinate projections, hence are smooth by [[lem-emg-positive-square-root-smoothness]] and [[thm-ck-euclidean-maps-closed-under-algebra-and-composition]]. In these coordinates multiplication is the restriction of $(x,y)(u,v)=(xu-yv,xv+yu)$ and inversion is $(x,y)\\mapsto(x,-y)$, so both are smooth; they are also continuous for the stated topology. Thus this is a smooth Lie group and, in particular, a topological group as required by [[def-principal-g-bundle-and-associated-fiber-bundle]].\n\nLet $E:\\mathbb R\\to U(1)$ be $E(t)=e^{it}=(\\cos t,\\sin t)$; the Cartesian formula is [[cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]]. The trigonometric derivative identities of [[thm-sine-and-cosine-derivatives]], iterated, show that $E$ is smooth in the $C^\\infty$ sense of [[def-ck-euclidean-maps-and-diffeomorphisms]]: every derivative of either coordinate is $\\pm\\sin$ or $\\pm\\cos$, and these functions are continuous by [[cor-differentiable-implies-continuous]]. Surjectivity is [[thm-sine-and-cosine-parametrize-the-unit-circle]]. If $E(t)\\in V_{x,\\epsilon}$, the chart coordinate $\\sin t$ has derivative $\\cos t=x\\ne0$; if $E(t)\\in V_{y,\\epsilon}$, the coordinate $\\cos t$ has derivative $-\\sin t=-y\\ne0$. The smooth inverse-function theorem [[lem-choice-free-smooth-inverse-function-theorem-in-euclidean-space]] therefore makes $E$ a diffeomorphism from some open interval about $t$ onto an open circle arc. Every smooth map from an open subset of $M$ to $U(1)$ consequently has, near each point, a smooth real phase lift obtained by composing with such a local inverse.\n\nA **normalized circle-connection datum** on $M$ consists of a supplied countable open cover $(U_i)_{i\\in I}$, smooth transition maps $g_{ij}:U_i\\cap U_j\\to U(1)$, smooth real one-forms $a_i\\in\\Omega^1(U_i)$, and a fixed constant $\\kappa_0>0$. Require $g_{ii}=1$ and $g_{ij}g_{jk}=g_{ik}$ on every triple intersection. Around each point of $U_i\\cap U_j$, take any smooth real phase lift $f_{ij}$ with $g_{ij}=e^{if_{ij}}$; require\n\n$$\na_j=a_i+df_{ij}\n$$\n\non every such phase-lift neighborhood. If $f$ and $\\widetilde f$ are two lifts on a connected neighborhood, [[thm-kernel-and-fibres-of-complex-exponential]] gives $f-\\widetilde f\\in2\\pi\\mathbb Z$ pointwise; continuity makes this difference constant, so $df=d\\widetilde f$. Thus the compatibility condition is independent of the chosen lift. The globally defined form $\\lambda(g):=-i\\,g^{-1}dg$ is real, and [[thm-complex-exponential-is-entire-with-derivative-itself]] together with [[thm-chain-rule-for-total-derivatives]] gives $\\lambda(g)=df$ on every phase-lift neighborhood. Hence the equivalent lift-free condition is $a_j=a_i+\\lambda(g_{ij})$.\n\nThe right principal $U(1)$-bundle convention is as defined in [[def-principal-g-bundle-and-associated-fiber-bundle]]: it has a continuous right action and locally trivial equivariant product charts, with free and transitive action on each fibre. The compatible transition functions are the gluing data for such a bundle, in the convention that a point with fibre coordinate $z_i$ in chart $i$ has coordinate $z_j=g_{ij}^{-1}z_i$ in chart $j$. No global real-valued angle on $U(1)$ is assumed.\n\nThe constant $\\kappa_0$ is a chosen normalization with units of webers; it is not Planck's constant and is not a unit of electric charge. On a chart whose coordinates have length units, the normalized connection components $a_i$ have units $\\mathrm m^{-1}$; the corresponding local potential $A_i:=\\kappa_0a_i$ has components $\\mathrm{Wb}\\,\\mathrm m^{-1}$, and its curvature $F_i:=dA_i=\\kappa_0\\,da_i$ has components $\\mathrm{Wb}\\,\\mathrm m^{-2}$. This definition imposes no flux or charge quantization.",
+          "relevant_hypotheses_and_conventions": "Supplies the smooth unit-circle group convention and local potential/transition data.",
+          "supplier_proof_status": "Carrier metadata: status=published; provenance.proof=not-applicable; verification={}. No additional approval is inferred.",
+          "consumer_use": "Supplies the smooth unit-circle group convention and local potential/transition data."
+        },
+        {
+          "supplier": "lem-emg-sphere-flux-holonomy",
+          "carrier": "items/lem-emg-sphere-flux-holonomy.md",
+          "status": "Carrier metadata: status=published; provenance.proof=ai-altered; no verification field is present. Current proof steps 1.2 and 4.1 provide the cited product-circle calculation; no additional independent approval is inferred.",
+          "source_section": "Statement",
+          "exact_statement": "There is also a flat example with nontrivial holonomy. On $M_0=\\mathbb R\\times S^1\\times\\mathbb R^2$ with product smooth structure, take $S^1=U(1)$ with the smooth structure defined above. Write $w\\in S^1$ for the base-circle coordinate and let $\\nu=-i w^{-1}dw$ be its global real angular one-form, normalized by $\\int_{S^1}\\nu=2\\pi$. For dimensionless $a\\in\\mathbb R$, set $A=\\kappa_0 a\\,\\nu$. On the product bundle $P_0=M_0\\times U(1)$ with projection $\\pi(x,z)=x$ and right action $(x,z)\\cdot\\zeta=(x,z\\zeta)$, use $\\omega=\\vartheta+a\\pi^*\\nu$, where $z\\in U(1)$ is the fibre coordinate and $\\vartheta=-i z^{-1}dz$ is its real angular form. Holonomy means the fibre multiplier of the horizontal lift around the indicated base loop; gauge trivial means gauge-equivalent to $\\vartheta$ under a smooth bundle map $G_u(x,z)=(x,z u(x))$ covering the identity. Then $F=dA=0$ but holonomy around the circle is $e^{-2\\pi ia}$, so this connection is gauge trivial exactly when $a\\in\\mathbb Z$. If $b$ and $\\kappa_0$ are assigned physical units, both are measured in webers; the ratio $2b/\\kappa_0$ is dimensionless. No general classification of circle bundles is asserted.",
+          "relevant_hypotheses_and_conventions": "The exact product-circle case uses M0=R×S1×R2, the normalized trivial-bundle connection eta+a*pi^*nu, a dimensionless real parameter a, and the fixed angular one-form with integral 2*pi.",
+          "supplier_proof_status": "Carrier metadata: status=published; provenance.proof=ai-altered; verification field absent. Proof step 1.2 computes flatness and horizontal-lift holonomy; step 4.1 proves the integer gauge-triviality criterion. No additional independent approval is inferred.",
+          "consumer_use": "Supports only the stated mathematical boundary example that zero curvature can coexist with nontrivial principal holonomy; it makes no spacetime-uniqueness or empirical claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-27 author self-review",
+        "notes": "Compared each scope warning with the inspected current supplier statement and the three full-text treatments. The remark explicitly separates the local matrix theorem, the spherical local theorem, and global stationary-axisymmetric hypotheses; it asserts no uniqueness or current open/solved status."
+      },
+      "finite_checks": []
+    },
+    "ex-emg-fx-diagonal-harmonic-maps": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-emg-fx-matrix-harmonic-problem",
+          "source_section": "Definition",
+          "quote": "Let $d,n\\in\\mathbb N$ with $d,n\\ge1$. Let $\\Omega\\subseteq\\mathbb R^d$ be a nonempty bounded connected open set whose boundary is locally the graph of a smooth function. Here $C^\\infty(\\overline\\Omega)$ means restriction of a smooth function on an open neighborhood of $\\overline\\Omega$. Use the matrix spaces $M_n(\\mathbb C)$ and ordinary matrix multiplication. For $A\\in M_n(\\mathbb C)$ write $A^\\dagger:=\\overline A^{\\mathsf T}$, and write $\\operatorname{tr}A:=\\sum_{j<n}A_{jj}$. A matrix $\\Phi$ is **positive definite Hermitian** when $\\Phi^\\dagger=\\Phi$ and $v^\\dagger\\Phi v$ is a positive real number for every nonzero $v\\in\\mathbb C^n$. Define\n\n$$\\mathcal P_n:=\\{\\Phi\\in M_n(\\mathbb C):\\Phi\\text{ is positive definite Hermitian and }\\det\\Phi=1\\}.$$\n\nThe determinant is the determinant over $\\mathbb C$. Every $\\Phi\\in\\mathcal P_n$ is invertible because $\\det\\Phi=1$ is a unit; its inverse is smooth when $\\Phi$ is a smooth matrix field because the adjugate formula reduces to polynomial entries when $\\det\\Phi=1$.\n\nFor a smooth map $\\Phi:\\overline\\Omega\\to\\mathcal P_n$, define the matrix-valued one-form $d\\Phi=\\sum_{a=1}^d(\\partial_a\\Phi)\\,dx^a$ by differentiating entries, and put $J:=\\Phi^{-1}d\\Phi=\\sum_{a=1}^d J_a\\,dx^a$. Its **matrix harmonic-map equation** in this item means exactly\n\n$$\\operatorname{div}J:=\\sum_{a=1}^d\\partial_aJ_a=0\\quad\\text{on }\\Omega.$$\n\nThe positive matrix boundary problem is to compare two such maps $\\Phi_0,\\Phi_1$ satisfying this equation and prescribed values on all of $\\partial\\Omega$. The Euclidean coordinates, matrix size, determinant normalization, and divergence convention are part of the definition. No spacetime metric, symmetry reduction, physical postulate, or spacetime uniqueness theorem is included.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-emg-fx-mazur-comparison",
+          "source_section": "Statement",
+          "quote": "Let $d,n\\ge1$ and let $\\Omega\\subseteq\\mathbb R^d$ be the nonempty bounded connected smooth domain of [[def-emg-fx-matrix-harmonic-problem]]. Let $\\Phi_0,\\Phi_1\\in C^\\infty(\\overline\\Omega,\\mathcal P_n)$ satisfy $\\operatorname{div}J_i=0$, where $J_i:=\\Phi_i^{-1}d\\Phi_i=\\sum_{a=1}^dJ_{i,a}\\,dx^a$ and $\\operatorname{div}J_i:=\\sum_a\\partial_aJ_{i,a}$. Define\n\n$$\\Psi:=\\Phi_1\\Phi_0^{-1}-I_n,\\qquad \\Delta J_a:=J_{1,a}-J_{0,a}.$$\n\nThen, pointwise on $\\Omega$,\n\n$$\\Delta\\operatorname{tr}\\Psi=\\sum_{a=1}^d\\operatorname{tr}\\!\\left((\\Delta J_a)^\\dagger\\Phi_1\\Delta J_a\\Phi_0^{-1}\\right)\\ge0,$$\n\nwhere $\\Delta=\\sum_a\\partial_a^2$ is the Euclidean Laplacian. If $\\Phi_1=\\Phi_0$ on the entire boundary $\\partial\\Omega$, then $\\Phi_1=\\Phi_0$ on $\\overline\\Omega$. This is an abstract bounded-domain uniqueness result for the stated positive matrix equation.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define\n$$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$\nprovided by the all-real convergence proved in The exponential series converges absolutely for every real argument. Here $n!\\in\\mathbb N$ is the factorial of The factorial $n!$ and the falling factorial $n^{\\underline{k}}$, defined by recursion in $\\mathbb{N}$, $\\iota(n!)$ is its nonzero real image (The canonical natural $\\iota(n) = n \\cdot 1_F$ of a field, Canonical naturals are positive and strictly increasing), and powers and series are those of Integer powers $a^m$ and Series, partial sums, convergence and the sum, divergence, and the tail series.\n\nThis is a real power series centred at $0$ (A real power series about a centre, its interval of convergence, and its radius in $[0,+\\infty]$). No logarithm, irrational power, or differential equation enters the definition.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-derivative-of-exponential",
+          "source_section": "Statement",
+          "quote": "The real exponential function is $C^\\infty$, and for every $m\\in\\mathbb N$,\n$$\\exp^{(m)}=\\exp.$$\nIn particular $(\\exp)'=\\exp$.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and\n$$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-exponential-is-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "The exponential function is continuous and strictly increasing on $\\mathbb R$.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-ck-euclidean-maps-closed-under-algebra-and-composition",
+          "source_section": "Statement",
+          "quote": "Let $k\\in\\mathbb N$. Finite componentwise sums and products of $C^k$ Euclidean maps are $C^k$, and a composite of composable $C^k$ Euclidean maps is $C^k$. Scalar multiples are included among the finite componentwise operations. The assertions remain valid on an empty open domain.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "admissible-diagonal-field",
+          "step": "1.1",
+          "claim": "By [F3], the diagonal entries are positive and $e^ue^{-u}=1$; by the chain rule their derivatives are $e^u\\partial_au$ and $-e^{-u}\\partial_au$. Since the exponential is smooth and compositions of smooth maps are smooth by [F4], $\\Phi_u$ is a smooth admissible matrix field. Direct multiplication gives $\\Phi_u^{-1}\\partial_a\\Phi_u=\\operatorname{diag}(\\partial_au,-\\partial_au)$.",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "scalar-harmonic-equivalence",
+          "step": "2.1",
+          "claim": "Taking the componentwise divergence gives $\\operatorname{div}(\\Phi_u^{-1}d\\Phi_u)=\\operatorname{diag}(\\sum_a\\partial_a^2u,-\\sum_a\\partial_a^2u)=\\operatorname{diag}(\\Delta u,-\\Delta u)$. This matrix vanishes exactly when $\\Delta u=0$.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "dirichlet-uniqueness",
+          "step": "3.1",
+          "claim": "Let $u,v$ be harmonic and suppose $\\Phi_u=\\Phi_v$ at every point of $\\partial\\Omega$. Applying steps 1.1–2.1 to each function shows that both maps satisfy the positive matrix equation; they have the same full Dirichlet data, so [F2] gives $\\Phi_u=\\Phi_v$ on $\\overline\\Omega$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "scalar-uniqueness",
+          "step": "4.1",
+          "claim": "Equality of the first diagonal entries gives $e^{u(x)}=e^{v(x)}$ for every $x\\in\\overline\\Omega$. Strict increase of the exponential in [F3] implies $u(x)=v(x)$ throughout $\\overline\\Omega$.",
+          "inputs": [
+            "F3",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example requires a nonempty domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For u=0, Phi_u=I_2 and J=0, so both the matrix equation and harmonicity hold (steps 1.1–2.1)."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example fixes matrix size n=2; it makes no n=1 claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The displayed matrices are positive definite; singular or indefinite matrices are outside the example."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Equality is imposed on every point of the boundary and used in step 3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The example uses supplied smooth functions and a fixed finite matrix; it selects no family elements."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The forward implication from div J=0 to Delta u=0 is the first diagonal entry in step 2.1."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The reverse implication follows because Delta u=0 makes both diagonal entries in step 2.1 vanish."
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "def-emg-fx-matrix-harmonic-problem",
+          "carrier": "items/def-emg-fx-matrix-harmonic-problem.md",
+          "status": "Current supplier interface inspected for this item; no additional review approval asserted.",
+          "source_section": "Definition",
+          "exact_statement": "Let $d,n\\in\\mathbb N$ with $d,n\\ge1$. Let $\\Omega\\subseteq\\mathbb R^d$ be a nonempty bounded connected open set whose boundary is locally the graph of a smooth function. Here $C^\\infty(\\overline\\Omega)$ means restriction of a smooth function on an open neighborhood of $\\overline\\Omega$. Use the matrix spaces $M_n(\\mathbb C)$ and ordinary matrix multiplication. For $A\\in M_n(\\mathbb C)$ write $A^\\dagger:=\\overline A^{\\mathsf T}$, and write $\\operatorname{tr}A:=\\sum_{j<n}A_{jj}$. A matrix $\\Phi$ is **positive definite Hermitian** when $\\Phi^\\dagger=\\Phi$ and $v^\\dagger\\Phi v$ is a positive real number for every nonzero $v\\in\\mathbb C^n$. Define\n\n$$\\mathcal P_n:=\\{\\Phi\\in M_n(\\mathbb C):\\Phi\\text{ is positive definite Hermitian and }\\det\\Phi=1\\}.$$\n\nThe determinant is the determinant over $\\mathbb C$. Every $\\Phi\\in\\mathcal P_n$ is invertible because $\\det\\Phi=1$ is a unit; its inverse is smooth when $\\Phi$ is a smooth matrix field because the adjugate formula reduces to polynomial entries when $\\det\\Phi=1$.\n\nFor a smooth map $\\Phi:\\overline\\Omega\\to\\mathcal P_n$, define the matrix-valued one-form $d\\Phi=\\sum_{a=1}^d(\\partial_a\\Phi)\\,dx^a$ by differentiating entries, and put $J:=\\Phi^{-1}d\\Phi=\\sum_{a=1}^d J_a\\,dx^a$. Its **matrix harmonic-map equation** in this item means exactly\n\n$$\\operatorname{div}J:=\\sum_{a=1}^d\\partial_aJ_a=0\\quad\\text{on }\\Omega.$$\n\nThe positive matrix boundary problem is to compare two such maps $\\Phi_0,\\Phi_1$ satisfying this equation and prescribed values on all of $\\partial\\Omega$. The Euclidean coordinates, matrix size, determinant normalization, and divergence convention are part of the definition. No spacetime metric, symmetry reduction, physical postulate, or spacetime uniqueness theorem is included.",
+          "relevant_hypotheses_and_conventions": "Fixes the exact bounded Euclidean domain, positive determinant-one matrix target, componentwise current and full-boundary condition used in the proof.",
+          "supplier_proof_status": "Carrier metadata: status=draft; provenance.proof=not-applicable; verification={}. No additional approval is inferred.",
+          "consumer_use": "Fixes the exact bounded Euclidean domain, positive determinant-one matrix target, componentwise current and full-boundary condition used in the proof."
+        },
+        {
+          "supplier": "lem-emg-fx-mazur-comparison",
+          "carrier": "items/lem-emg-fx-mazur-comparison.md",
+          "status": "Current supplier interface inspected for this item; no additional review approval asserted.",
+          "source_section": "Statement",
+          "exact_statement": "Let $d,n\\ge1$ and let $\\Omega\\subseteq\\mathbb R^d$ be the nonempty bounded connected smooth domain of [[def-emg-fx-matrix-harmonic-problem]]. Let $\\Phi_0,\\Phi_1\\in C^\\infty(\\overline\\Omega,\\mathcal P_n)$ satisfy $\\operatorname{div}J_i=0$, where $J_i:=\\Phi_i^{-1}d\\Phi_i=\\sum_{a=1}^dJ_{i,a}\\,dx^a$ and $\\operatorname{div}J_i:=\\sum_a\\partial_aJ_{i,a}$. Define\n\n$$\\Psi:=\\Phi_1\\Phi_0^{-1}-I_n,\\qquad \\Delta J_a:=J_{1,a}-J_{0,a}.$$\n\nThen, pointwise on $\\Omega$,\n\n$$\\Delta\\operatorname{tr}\\Psi=\\sum_{a=1}^d\\operatorname{tr}\\!\\left((\\Delta J_a)^\\dagger\\Phi_1\\Delta J_a\\Phi_0^{-1}\\right)\\ge0,$$\n\nwhere $\\Delta=\\sum_a\\partial_a^2$ is the Euclidean Laplacian. If $\\Phi_1=\\Phi_0$ on the entire boundary $\\partial\\Omega$, then $\\Phi_1=\\Phi_0$ on $\\overline\\Omega$. This is an abstract bounded-domain uniqueness result for the stated positive matrix equation.",
+          "relevant_hypotheses_and_conventions": "Supplies the proved bounded-Euclidean-domain positive-matrix comparison and full-Dirichlet uniqueness result.",
+          "supplier_proof_status": "Carrier metadata: status=draft; provenance.proof=ai-altered; verification={precheck=\"pending\"}. No additional approval is inferred.",
+          "consumer_use": "Supplies the proved bounded-Euclidean-domain positive-matrix comparison and full-Dirichlet uniqueness result."
+        },
+        {
+          "supplier": "def-real-exponential-function-and-e",
+          "carrier": "items/def-real-exponential-function-and-e.md",
+          "status": "Current supplier interface inspected for this item; no additional review approval asserted.",
+          "source_section": "Definition",
+          "exact_statement": "For $x\\in\\mathbb R$, define\n$$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$\nprovided by the all-real convergence proved in The exponential series converges absolutely for every real argument. Here $n!\\in\\mathbb N$ is the factorial of The factorial $n!$ and the falling factorial $n^{\\underline{k}}$, defined by recursion in $\\mathbb{N}$, $\\iota(n!)$ is its nonzero real image (The canonical natural $\\iota(n) = n \\cdot 1_F$ of a field, Canonical naturals are positive and strictly increasing), and powers and series are those of Integer powers $a^m$ and Series, partial sums, convergence and the sum, divergence, and the tail series.\n\nThis is a real power series centred at $0$ (A real power series about a centre, its interval of convergence, and its radius in $[0,+\\infty]$). No logarithm, irrational power, or differential equation enters the definition.",
+          "relevant_hypotheses_and_conventions": "Defines the real exponential used in the diagonal matrices.",
+          "supplier_proof_status": "Carrier metadata: status=published; provenance.proof=not-applicable; verification={precheck=\"n/a\"; audited=\"2026-08-01\"; repair=\"research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-real-exponential-function-and-e.json\"}. No additional approval is inferred.",
+          "consumer_use": "Defines the real exponential used in the diagonal matrices."
+        },
+        {
+          "supplier": "cor-exponential-reciprocal-and-positivity",
+          "carrier": "items/cor-exponential-reciprocal-and-positivity.md",
+          "status": "Current supplier interface inspected for this item; no additional review approval asserted.",
+          "source_section": "Statement",
+          "exact_statement": "For every real $x$, $\\exp(x)>0$ and\n$$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "relevant_hypotheses_and_conventions": "Supplies positivity and exp(-x)=1/exp(x), proving admissibility and determinant one in step 1.1.",
+          "supplier_proof_status": "Carrier metadata: status=published; provenance.proof=ai-altered; verification={precheck=\"pass\"; verified={\"model\":\"gpt-5.6-terra-codex-subscription\",\"verdict\":\"certify\",\"date\":\"2026-08-10\",\"scope\":\"published-audit\",\"delegated_by\":\"owner\"}}. No additional approval is inferred.",
+          "consumer_use": "Supplies positivity and exp(-x)=1/exp(x), proving admissibility and determinant one in step 1.1."
+        },
+        {
+          "supplier": "thm-ck-euclidean-maps-closed-under-algebra-and-composition",
+          "carrier": "items/thm-ck-euclidean-maps-closed-under-algebra-and-composition.md",
+          "status": "Current supplier interface inspected for this item; no additional review approval asserted.",
+          "source_section": "Statement",
+          "exact_statement": "Let $k\\in\\mathbb N$. Finite componentwise sums and products of $C^k$ Euclidean maps are $C^k$, and a composite of composable $C^k$ Euclidean maps is $C^k$. Scalar multiples are included among the finite componentwise operations. The assertions remain valid on an empty open domain.",
+          "relevant_hypotheses_and_conventions": "Supplies smoothness of the exponential composition with the smooth scalar field in step 1.1.",
+          "supplier_proof_status": "Carrier metadata: status=published; provenance.proof=ai-generated; verification={precheck=\"pass\"; audited=\"2026-08-21\"}. No additional approval is inferred.",
+          "consumer_use": "Supplies smoothness of the exponential composition with the smooth scalar field in step 1.1."
+        },
+        {
+          "supplier": "thm-exponential-is-strictly-increasing",
+          "carrier": "items/thm-exponential-is-strictly-increasing.md",
+          "status": "Current supplier interface inspected for this item; no additional review approval asserted.",
+          "source_section": "Statement",
+          "exact_statement": "The exponential function is continuous and strictly increasing on $\\mathbb R$.",
+          "relevant_hypotheses_and_conventions": "Supplies injectivity of the exponential in step 4.1.",
+          "supplier_proof_status": "Carrier metadata: status=published; provenance.proof=ai-altered; verification={precheck=\"pass\"; verified={\"model\":\"gpt-5.6-terra-codex-subscription\",\"verdict\":\"certify\",\"date\":\"2026-08-10\",\"scope\":\"published-audit\",\"delegated_by\":\"owner\"}}. No additional approval is inferred.",
+          "consumer_use": "Supplies injectivity of the exponential in step 4.1."
+        },
+        {
+          "supplier": "thm-derivative-of-exponential",
+          "carrier": "items/thm-derivative-of-exponential.md",
+          "status": "Current supplier interface inspected for this item; no additional review approval asserted.",
+          "source_section": "Statement",
+          "exact_statement": "The real exponential function is $C^\\infty$, and for every $m\\in\\mathbb N$,\n$$\\exp^{(m)}=\\exp.$$\nIn particular $(\\exp)'=\\exp$.",
+          "relevant_hypotheses_and_conventions": "Supplies the smoothness and derivative of the real exponential in step 1.1.",
+          "supplier_proof_status": "Carrier metadata: status=published; provenance.proof=ai-altered; verification={precheck=\"pass\"; audited=\"2026-08-01\"}. No additional approval is inferred.",
+          "consumer_use": "Supplies the smoothness and derivative of the real exponential in step 1.1."
+        },
+        {
+          "supplier": "thm-chain-rule-for-total-derivatives",
+          "carrier": "items/thm-chain-rule-for-total-derivatives.md",
+          "status": "Current supplier interface inspected for this item; no additional review approval asserted.",
+          "source_section": "Statement",
+          "exact_statement": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "relevant_hypotheses_and_conventions": "Supplies the derivative of exp composed with the scalar field in step 1.1.",
+          "supplier_proof_status": "Carrier metadata: status=published; provenance.proof=ai-generated; verification={repair=\"research/numerical-optimization-dynamics-2026-10-16-ROOT-step3-zero-domain/thm-chain-rule-for-total-derivatives/application/repair.json\"}. No additional approval is inferred.",
+          "consumer_use": "Supplies the derivative of exp composed with the scalar field in step 1.1."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-27 author self-review",
+        "notes": "Checked the determinant, signs in the diagonal current, both directions of the harmonic-equation equivalence, the full-boundary hypothesis and the exponential injectivity step."
+      },
+      "finite_checks": [
+        {
+          "name": "zero scalar field",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ],
+          "expected": "u=0 gives Phi_u=I_2, J=0 and Delta u=0."
+        },
+        {
+          "name": "constant scalar field",
+          "inputs": [
+            "step 2.1"
+          ],
+          "expected": "Any constant u gives J=0 and a harmonic scalar field."
+        }
+      ]
+    }
+  }
+}

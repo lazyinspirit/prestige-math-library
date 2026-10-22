@@ -1,0 +1,1 @@
+import fs from'node:fs';import{consumers}from'../../tools/physics-support/batch-scope-review.mjs';const rows=consumers(process.cwd(),['lem-gr-fx-null-focal-boundary-exclusion']);fs.writeFileSync('research/physics-non-fluid-129-2026-10-21-r2-owner-step2-focal-smooth-successor/consumer-cone.json',JSON.stringify(rows,null,2)+'\n');console.log(rows);

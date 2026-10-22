@@ -1,0 +1,284 @@
+[
+  {
+    "order": 713,
+    "id": "emx-radiation-reaction-models",
+    "kind": "A",
+    "category": "classical-electromagnetism",
+    "library": "physics",
+    "title": "Radiation reaction as a singular model reduction",
+    "companion": "emx-radiation-reaction-models-examples",
+    "requires": [
+      "em-primitives-and-postulates",
+      "em-retarded-fields-and-radiation",
+      "emx-radiation-multipoles"
+    ],
+    "items": [
+      {
+        "id": "post-emx-abraham-lorentz-model",
+        "kind": "postulate",
+        "domain": "physics",
+        "library": "physics",
+        "title": "The nonrelativistic Abraham–Lorentz equation as a restricted effective model",
+        "dependency_level": 0,
+        "deps": [
+          "def-em-lab-geometry",
+          "def-em-si-conventions",
+          "def-em-sources",
+          "post-em-lorentz-coupling",
+          "rem-em-radiation-reaction-limits"
+        ],
+        "dependency_roles": {
+          "def-em-lab-geometry": "formulation-prerequisite",
+          "def-em-si-conventions": "formulation-prerequisite",
+          "def-em-sources": "formulation-prerequisite",
+          "post-em-lorentz-coupling": "formulation-prerequisite",
+          "rem-em-radiation-reaction-limits": "formulation-prerequisite"
+        },
+        "statement": "Work in one named laboratory chart with spatial coordinate space $\\mathbb R^3$ and time coordinate $t\\in\\mathbb R$. Let $q\\in\\mathbb R\\setminus\\{0\\}$ be the framework charge parameter, let $m>0$ be an externally supplied mass parameter, and take the SI constants $c>0$ and $\\varepsilon_0>0$ of the electromagnetic framework. Define the positive time constant\n\n$$\\tau:=\\frac{q^2}{6\\pi\\varepsilon_0mc^3}>0.$$\n\nThe units are $[q]=\\mathrm C$, $[m]=\\mathrm{kg}$, $[c]=\\mathrm{m\\,s^{-1}}$, and $[\\varepsilon_0]=\\mathrm{F\\,m^{-1}}$, so $[\\tau]=\\mathrm s$. A prescribed external force is a continuous map $f:\\mathbb R\\to\\mathbb R^3$ with units $\\mathrm N$. A particle trajectory in this model is a map $x:\\mathbb R\\to\\mathbb R^3$ with three continuous time derivatives; its velocity and acceleration are $v(t):=\\dot x(t)$ and $a(t):=\\ddot x(t)$, with units $\\mathrm{m\\,s^{-1}}$ and $\\mathrm{m\\,s^{-2}}$. The term point particle means that the model assigns one position $x(t)$ and no spatial extent.\n\nAdopt, as an additional effective model postulate, the equation\n\n$$m\\bigl(a(t)-\\tau\\dot a(t)\\bigr)=f(t)\\qquad(t\\in\\mathbb R).$$\n\nBoth $ma$ and $m\\tau\\dot a$ have units of force. The dot on $a$ means differentiation with respect to the laboratory time. This equation is not obtained by evaluating the particle's singular Maxwell self-field in the adopted Lorentz force law. The previously developed prescribed-source radiation model does not define that self-interaction; this postulate introduces a separate effective equation.\n\nFor physical use on a compact interval $I\\subset\\mathbb R$, assume $f$ is continuously differentiable there, choose dimensionless tolerances $\\eta,\\delta\\in(0,1)$ and a positive force scale $F_*$ with units $\\mathrm N$, and state the chosen values. In this item, low-speed at tolerance $\\eta$ means $\\sup_{t\\in I}|v(t)|\\le\\eta c$, and slowly varying relative to $\\tau$ at tolerance $\\delta$ means $\\tau\\sup_{t\\in I}|\\dot f(t)|\\le\\delta F_*$. These are explicit regime conventions for an application, not universal empirical thresholds. The ODE is an exact adopted equation on its mathematical domain; its physical interpretation is restricted to applications that state their regime and tolerances.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Fritz Rohrlich, The Dynamics of a Charged Particle, arXiv:0804.4614 (complete 11-page full-text paper)",
+              "url": "https://arxiv.org/pdf/0804.4614",
+              "locator": "Sections 1–2, PDF pp. 2–6: the finite-size/slow-force restriction, the nonrelativistic third-order equation, and its first-order reduction. The Gaussian-unit coefficient is converted to the stated SI convention; the paper's broader 'physically correct' conclusions are not adopted."
+            },
+            {
+              "title": "Jack Vanderlinde, Classical Electromagnetic Theory, Fundamental Theories of Physics, Springer (2004), complete 426-page book PDF",
+              "url": "https://eva.fcien.udelar.edu.uy/pluginfile.php/220397/mod_page/content/2/Classical%20Electromagnetic%20Theory%20%28Fundamental%20Theories%20of%20Physics%29%20-%20Jack%20Vanderlinde%20%282004%29.pdf",
+              "locator": "Chapter 12, §§12.2–12.4, printed pp. 333–339 (PDF pp. 340–346): the energy-balance and rigid-sphere routes to the Abraham–Lorentz coefficient, the mass-renormalized effective equation, and the runaway/future-boundary branches. The text explicitly notes that its rigid extended sphere is inconsistent with special relativity; its derivation is not used as the proof of the postulate."
+            }
+          ]
+        },
+        "physical_scope": "An additional restricted nonrelativistic effective model for a point particle represented by one trajectory in a named laboratory chart, driven by a prescribed external force. The equation is adopted rather than derived from the Maxwell self-field or the external Lorentz-coupling postulate. Its physical interpretation is limited to intervals and force profiles explicitly declared to be low-speed and slowly varying; this item sets no universal empirical cutoff and reports no experiment."
+      },
+      {
+        "id": "pthm-emx-runaway-preacceleration",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "library": "physics",
+        "title": "Runaway and bounded-future branches of the Abraham–Lorentz equation",
+        "dependency_level": 1,
+        "deps": [
+          "cor-exponential-reciprocal-and-positivity",
+          "cor-mean-value-theorem",
+          "def-real-exponential-function-and-e",
+          "def-oriented-integral",
+          "lem-smooth-bump-between-concentric-euclidean-balls",
+          "post-emx-abraham-lorentz-model",
+          "thm-algebra-of-derivatives",
+          "thm-chain-rule",
+          "thm-continuous-implies-integrable",
+          "thm-derivative-of-exponential",
+          "thm-ftc-first-part",
+          "thm-linearity-of-the-integral",
+          "thm-monotonicity-of-the-integral"
+        ],
+        "dependency_roles": {
+          "cor-exponential-reciprocal-and-positivity": "mathematical-premise",
+          "cor-mean-value-theorem": "mathematical-premise",
+          "def-real-exponential-function-and-e": "mathematical-premise",
+          "def-oriented-integral": "mathematical-premise",
+          "lem-smooth-bump-between-concentric-euclidean-balls": "mathematical-premise",
+          "post-emx-abraham-lorentz-model": "physical-assumption",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "thm-chain-rule": "mathematical-premise",
+          "thm-continuous-implies-integrable": "mathematical-premise",
+          "thm-derivative-of-exponential": "mathematical-premise",
+          "thm-ftc-first-part": "mathematical-premise",
+          "thm-linearity-of-the-integral": "mathematical-premise",
+          "thm-monotonicity-of-the-integral": "mathematical-premise"
+        },
+        "statement": "Use the equation and constants of the preceding postulate, with $m,\\tau>0$. Let $f:\\mathbb R\\to\\mathbb R^3$ be bounded and continuous, and let a solution mean a continuously differentiable map $a:\\mathbb R\\to\\mathbb R^3$ satisfying $m(a-\\tau\\dot a)=f$ at every real time. Bounded for a vector map means each of its three real coordinates is bounded; in $\\mathbb R^3$ this is equivalent to bounded Euclidean norm. The vector improper Riemann integral below is taken componentwise, with $\\int_t^\\infty h(s)\\,ds:=\\lim_{R\\to\\infty}\\int_t^R h(s)\\,ds$ when that limit exists. Then the integral converges absolutely, and\n\n$$a_*(t):=\\frac{1}{m\\tau}\\int_t^\\infty \\exp\\!\\left(-\\frac{s-t}{\\tau}\\right)f(s)\\,ds$$\n\nis a bounded solution. For any fixed $t_0\\in\\mathbb R$, every solution has the form\n\n$$a(t)=a_*(t)+C\\exp\\!\\left(\\frac{t-t_0}{\\tau}\\right),\\qquad C\\in\\mathbb R^3$$\n\nHere $C$ is a constant acceleration vector with units $\\mathrm{m\\,s^{-2}}$.\n\nThe only solution bounded on a future half-line $[T,\\infty)$, for any finite $T$, is $a_*$. A nonzero $C$ gives an exponentially growing acceleration branch, called a runaway branch in this item. Moreover, there is a bounded smooth force that vanishes for $t\\le0$, is nonzero for some $t\\in(0,1)$, and for which $a_*(t)\\ne0$ for every $t<0$. Preacceleration means this nonzero acceleration before the force begins; it is a property of the selected ODE branch, not an observation about a physical particle.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Fritz Rohrlich, The Dynamics of a Charged Particle, arXiv:0804.4614 (complete 11-page full-text paper)",
+              "url": "https://arxiv.org/pdf/0804.4614",
+              "locator": "Sections 1–2, PDF pp. 2–6: the nonrelativistic Abraham–Lorentz equation and discussion of its runaway and pre-acceleration branches. The complete branch classification and bounded-future proof here are local."
+            },
+            {
+              "title": "Jack Vanderlinde, Classical Electromagnetic Theory, Fundamental Theories of Physics, Springer (2004), complete 426-page book PDF",
+              "url": "https://eva.fcien.udelar.edu.uy/pluginfile.php/220397/mod_page/content/2/Classical%20Electromagnetic%20Theory%20%28Fundamental%20Theories%20of%20Physics%29%20-%20Jack%20Vanderlinde%20%282004%29.pdf",
+              "locator": "Chapter 12, §12.4, printed pp. 338–339 (PDF pp. 345–346), equations (12–38)–(12–41): the homogeneous exponential runaway and the future-weighted solution selected by a future boundary condition. The item independently proves the exact ODE statement for every bounded continuous force."
+            }
+          ]
+        },
+        "physical_scope": "Exact conditional properties of the adopted nonrelativistic prescribed-force ODE for bounded continuous forces: every acceleration solution, the unique solution bounded on a future half-line, and an explicit smooth future force for which that selected branch accelerates before the force begins. The proof concerns the formal effective equation only; it asserts no measured preacceleration, no self-consistent Maxwell–Lorentz trajectory, and no empirical validity outside the stated model regime.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "pthm-emx-reduction-order-error",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "library": "physics",
+        "title": "First-order reduction of order with an explicit residual and error bound",
+        "dependency_level": 2,
+        "deps": [
+          "cor-exponential-reciprocal-and-positivity",
+          "cor-mean-value-theorem",
+          "def-real-exponential-function-and-e",
+          "pthm-emx-runaway-preacceleration",
+          "thm-algebra-of-derivatives",
+          "thm-chain-rule",
+          "thm-continuous-implies-integrable",
+          "thm-derivative-of-exponential",
+          "thm-ftc-first-part",
+          "thm-linearity-of-the-integral",
+          "thm-monotonicity-of-the-integral",
+          "def-euclidean-inner-product",
+          "thm-cauchy-schwarz-and-the-euclidean-norm"
+        ],
+        "dependency_roles": {
+          "cor-exponential-reciprocal-and-positivity": "mathematical-premise",
+          "cor-mean-value-theorem": "mathematical-premise",
+          "def-real-exponential-function-and-e": "mathematical-premise",
+          "pthm-emx-runaway-preacceleration": "physical-result",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "thm-chain-rule": "mathematical-premise",
+          "thm-continuous-implies-integrable": "mathematical-premise",
+          "thm-derivative-of-exponential": "mathematical-premise",
+          "thm-ftc-first-part": "mathematical-premise",
+          "thm-linearity-of-the-integral": "mathematical-premise",
+          "thm-monotonicity-of-the-integral": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "thm-cauchy-schwarz-and-the-euclidean-norm": "mathematical-premise"
+        },
+        "statement": "Assume the equation and bounded-force hypotheses of the preceding theorem: $m,\\tau>0$, $f:\\mathbb R\\to\\mathbb R^3$ is bounded and twice continuously differentiable, and the unique bounded-future solution $a_*$ is used. Suppose\n\n$$M_2:=\\sup_{t\\in\\mathbb R}|f''(t)|<\\infty.$$\n\nSince $f$ has units $\\mathrm N$ and $t$ has units $\\mathrm s$, $M_2$ has units $\\mathrm{N\\,s^{-2}}$.\n\nDefine the first-order reduction-of-order approximation by\n\n$$a_{\\mathrm{RO}}(t):=\\frac{f(t)+\\tau f'(t)}{m}.$$\n\nIts residual when substituted into the adopted equation is exactly\n\n$$m\\bigl(a_{\\mathrm{RO}}(t)-\\tau a_{\\mathrm{RO}}'(t)\\bigr)-f(t)=-\\tau^2 f''(t).$$\n\nOn the bounded-future branch the acceleration error obeys\n\n$$|a_*(t)-a_{\\mathrm{RO}}(t)|\\le\\frac{\\tau^2 M_2}{m}\\qquad(t\\in\\mathbb R).$$\n\nThe residual and bound are exact conditional statements about the prescribed-force ODE; they do not assert that a nonlinear self-consistent particle trajectory is approximated by $a_{\\mathrm{RO}}$.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Fritz Rohrlich, The Dynamics of a Charged Particle, arXiv:0804.4614 (complete 11-page full-text paper)",
+              "url": "https://arxiv.org/pdf/0804.4614",
+              "locator": "Section 2, PDF pp. 4–6, equations (3a), (5a) and the first-order-in-$\\tau_0$ discussion: the nonrelativistic reduction-of-order form and its slow-force restriction. The exact residual and uniform bound here are proved locally."
+            },
+            {
+              "title": "Jack Vanderlinde, Classical Electromagnetic Theory, Fundamental Theories of Physics, Springer (2004), complete 426-page book PDF",
+              "url": "https://eva.fcien.udelar.edu.uy/pluginfile.php/220397/mod_page/content/2/Classical%20Electromagnetic%20Theory%20%28Fundamental%20Theories%20of%20Physics%29%20-%20Jack%20Vanderlinde%20%282004%29.pdf",
+              "locator": "Chapter 12, §§12.3–12.4, printed pp. 335–339 (PDF pp. 342–346): the Abraham–Lorentz coefficient, the mass-renormalized ODE, and its future-boundary solution. The item independently proves an explicit second-derivative error bound for the prescribed-force model."
+            }
+          ]
+        },
+        "physical_scope": "Exact residual and an absolute acceleration-error bound for the first-order reduction of order of the adopted prescribed-force ODE, on the unique bounded-future branch and for bounded twice continuously differentiable forces with bounded second derivative. The result is conditional on the effective model; it is not a bound for nonlinear self-consistent Maxwell–Lorentz trajectories, and it gives no experimental validation.",
+        "proof_strategy": "direct"
+      }
+    ]
+  },
+  {
+    "order": 714,
+    "id": "emx-radiation-reaction-models-examples",
+    "kind": "B",
+    "category": "classical-electromagnetism",
+    "library": "physics",
+    "title": "Radiation reaction as a singular model reduction — Examples",
+    "companion": "emx-radiation-reaction-models",
+    "requires": [
+      "emx-radiation-reaction-models"
+    ],
+    "items": [
+      {
+        "id": "ex-emx-free-runaway",
+        "kind": "example",
+        "domain": "physics",
+        "library": "physics",
+        "title": "Zero force leaves an exponentially growing acceleration branch",
+        "dependency_level": 2,
+        "deps": [
+          "def-real-exponential-function-and-e",
+          "pthm-emx-runaway-preacceleration",
+          "thm-algebra-of-derivatives",
+          "thm-chain-rule",
+          "thm-derivative-of-exponential"
+        ],
+        "dependency_roles": {
+          "def-real-exponential-function-and-e": "mathematical-premise",
+          "pthm-emx-runaway-preacceleration": "physical-result",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "thm-chain-rule": "mathematical-premise",
+          "thm-derivative-of-exponential": "mathematical-premise"
+        },
+        "statement": "In the adopted equation, set $f=0$ and fix any $t_0\\in\\mathbb R$. For every constant acceleration vector $C\\in\\mathbb R^3$ with units $\\mathrm{m\\,s^{-2}}$, the acceleration $a_C(t)=C\\exp((t-t_0)/\\tau)$ is a solution. For any fixed position $x_0$ and velocity $v_0$ at $t_0$, a trajectory with that acceleration is\n\n$$x_C(t)=x_0+v_0(t-t_0)+C\\tau^2\\left(\\exp((t-t_0)/\\tau)-1-\\frac{t-t_0}{\\tau}\\right).$$\n\nThus the same position and velocity at $t_0$ admit different acceleration branches; $C\\ne0$ grows exponentially as $t\\to\\infty$. This does not establish that any physical charge follows such a trajectory.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Fritz Rohrlich, The Dynamics of a Charged Particle, arXiv:0804.4614 (complete 11-page full-text paper)",
+              "url": "https://arxiv.org/pdf/0804.4614",
+              "locator": "Section 1, PDF pp. 2–3: the runaway solution of the nonrelativistic Abraham–Lorentz equation."
+            },
+            {
+              "title": "Jack Vanderlinde, Classical Electromagnetic Theory, Fundamental Theories of Physics, Springer (2004), complete 426-page book PDF",
+              "url": "https://eva.fcien.udelar.edu.uy/pluginfile.php/220397/mod_page/content/2/Classical%20Electromagnetic%20Theory%20%28Fundamental%20Theories%20of%20Physics%29%20-%20Jack%20Vanderlinde%20%282004%29.pdf",
+              "locator": "Chapter 12, §12.4, printed pp. 338–339 (PDF pp. 345–346), equation (12–38) and the homogeneous solutions."
+            }
+          ]
+        },
+        "physical_scope": "A constructed mathematical example in the adopted Abraham–Lorentz ODE: zero prescribed force admits an exponentially growing acceleration branch, and position plus velocity at one time do not select it. This is a model property, not an observed particle trajectory or an empirical claim.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-emx-force-frequency-regime",
+        "kind": "example",
+        "domain": "physics",
+        "library": "physics",
+        "title": "Harmonic forcing gives an exact error criterion for reduction of order",
+        "dependency_level": 3,
+        "deps": [
+          "pthm-emx-runaway-preacceleration",
+          "pthm-emx-reduction-order-error",
+          "def-euclidean-inner-product",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "thm-sine-and-cosine-derivatives",
+          "thm-chain-rule",
+          "thm-algebra-of-derivatives"
+        ],
+        "dependency_roles": {
+          "pthm-emx-runaway-preacceleration": "physical-result",
+          "pthm-emx-reduction-order-error": "physical-result",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-complex-conjugate-real-imaginary-part-and-modulus": "mathematical-premise",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity": "mathematical-premise",
+          "thm-sine-and-cosine-derivatives": "mathematical-premise",
+          "thm-chain-rule": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise"
+        },
+        "statement": "Use the adopted equation $m(a-\\tau\\dot a)=f$ with positive constants $m>0$ and $\\tau>0$, of units $\\mathrm{kg}$ and $\\mathrm s$, respectively, and the laboratory conventions of the bounded-future branch theorem.\n\nA phasor coefficient at frequency $\\omega\\in\\mathbb R$ is a complex vector $g_0=g_R+ig_I\\in\\mathbb C^3$, with $g_R,g_I\\in\\mathbb R^3$, representing a real map $g:\\mathbb R\\to\\mathbb R^3$ by the real-part representation\n\n$$g(t)=\\operatorname{Re}\\!\\left(g_0\\exp(-i\\omega t)\\right)=g_R\\cos(\\omega t)+g_I\\sin(\\omega t).$$\n\nAt $\\omega=0$ this representation determines only $g_R$. Adopt the canonical static convention $g_0=G+i0$ for the constant function $g(t)\\equiv G\\in\\mathbb R^3$; in particular the static force below has $v=0$ and $f_0=u+i0$. Static acceleration phasors use the same convention.\n\nLet $\\omega\\in\\mathbb R$ and $f_0=u+iv\\in\\mathbb C^3$, with $u,v\\in\\mathbb R^3$. For any $z=u+iv\\in\\mathbb C^3$, define $|z|:=\\bigl(\\sum_{j=0}^2|u_j|^2+\\sum_{j=0}^2|v_j|^2\\bigr)^{1/2}$, the Euclidean norm of its six real coordinates. The force amplitude $f_0$ has units N, $\\omega$ has units $\\mathrm{s}^{-1}$, and acceleration phasors have units $\\mathrm{m\\,s^{-2}}$. Prescribe the real force\n\n$$f(t):=\\operatorname{Re}\\!\\left(f_0\\exp(-i\\omega t)\\right),$$\n\nwhere real part is taken componentwise. The bounded-future acceleration has complex phasor amplitude\n\n$$a_{*,0}=\\frac{f_0}{m(1+i\\omega\\tau)}.$$\n\nThe first-order reduction-of-order acceleration $a_{\\mathrm{RO}}=(f+\\tau f')/m$ has phasor amplitude $a_{\\mathrm{RO},0}=f_0(1-i\\omega\\tau)/m$. For $f_0\\ne0$, the absolute amplitude error relative to the force acceleration scale $|f_0|/m$ is\n\n$$\\frac{|a_{*,0}-a_{\\mathrm{RO},0}|}{|f_0|/m}=\\frac{(\\omega\\tau)^2}{\\sqrt{1+(\\omega\\tau)^2}}.$$\n\nFor any chosen tolerance $0<\\epsilon<1$, this relative amplitude error is at most $\\epsilon$ exactly when\n\n$$|\\omega\\tau|\\le\\sqrt{\\frac{\\epsilon^2+\\sqrt{\\epsilon^4+4\\epsilon^2}}{2}}.$$\n\nHence small error at a small prescribed tolerance requires small $|\\omega\\tau|$; no universal numerical cutoff or experimental frequency response is asserted.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Fritz Rohrlich, The Dynamics of a Charged Particle, arXiv:0804.4614 (complete 11-page full-text paper)",
+              "url": "https://arxiv.org/pdf/0804.4614",
+              "locator": "Section 2, PDF pp. 4–6, equations (1)–(2) and (5a): the small-$\\tau_0$ and slowly varying-force context for first-order reduction."
+            },
+            {
+              "title": "Jack Vanderlinde, Classical Electromagnetic Theory, Fundamental Theories of Physics, Springer (2004), complete 426-page book PDF",
+              "url": "https://eva.fcien.udelar.edu.uy/pluginfile.php/220397/mod_page/content/2/Classical%20Electromagnetic%20Theory%20%28Fundamental%20Theories%20of%20Physics%29%20-%20Jack%20Vanderlinde%20%282004%29.pdf",
+              "locator": "Chapter 12, §12.4 and problem 12-2, printed pp. 338–342 (PDF pp. 345–349): the future-weighted branch and a harmonic-oscillator application. The exact response and tolerance criterion here are calculated locally."
+            }
+          ]
+        },
+        "physical_scope": "An exact harmonic-forcing calculation for the adopted prescribed-force ODE. It quantifies the model's absolute phasor-amplitude error for first-order reduction of order and shows that a fixed small tolerance requires small $|\\omega\\tau|$. It is not an empirical frequency-response measurement or a validation of a self-consistent radiation-reaction law.",
+        "proof_strategy": "direct"
+      }
+    ]
+  }
+]

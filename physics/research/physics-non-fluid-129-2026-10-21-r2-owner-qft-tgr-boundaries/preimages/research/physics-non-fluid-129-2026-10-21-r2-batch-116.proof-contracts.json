@@ -1,0 +1,583 @@
+{
+  "version": 1,
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "batch": "116",
+  "level": 1,
+  "scope": [
+    "def-tgrx-static-hydrostatic-data",
+    "post-tgrx-hydrostatic-effective-model",
+    "pthm-tgrx-hydrostatic-variation",
+    "ex-tgrx-entropy-does-not-close-hydrodynamics"
+  ],
+  "contracts": {
+    "def-tgrx-static-hydrostatic-data": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-smooth-manifold",
+          "source_section": "Definition",
+          "quote": "A **smooth $n$-manifold** is a pair $(M,\\mathcal S)$ in which $M$ is a topological $n$-manifold",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-cartesian-product",
+          "source_section": "Definition",
+          "quote": "Its elements are exactly the ordered pairs $(a,b)$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-products-of-smooth-manifolds-have-a-canonical-product-smooth-structure",
+          "source_section": "Statement",
+          "quote": "This maximal atlas is the **product smooth structure** of $M\\times N$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-riemannian-metric-and-riemannian-manifold",
+          "source_section": "Definition",
+          "quote": "A **Riemannian metric** on a Hausdorff second-countable smooth manifold $M$ is a smooth symmetric covariant two-tensor $g$ such that",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-gr-smooth-lorentzian-objects",
+          "source_section": "Definition",
+          "quote": "The field $g$ is a **Lorentzian metric of signature $(-,+,+,+)$** on $M$ when it is symmetric and nondegenerate",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-gr-killing-field",
+          "source_section": "Definition",
+          "quote": "The field $\\xi$ is a **Killing field** of $(M,g)$ (an **isometry generator**,\nor a **Killing vector**) when",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-riemannian-volume-density",
+          "source_section": "Definition",
+          "quote": "The **Riemannian volume density** is $\\mu_g=\\sqrt{\\det G_x}\\,|dx^1\\cdots dx^n|$ in coordinates.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-the-riemannian-volume-density-is-coordinate-independent",
+          "source_section": "Statement",
+          "quote": "The local Riemannian volume densities glue to a positive smooth density independent of coordinates.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-tgr-framework-units",
+          "source_section": "Definition",
+          "quote": "For physical unit assignments use length coordinates $x^0=ct_{\\rm phys}$ and spatial coordinates in metres",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-tgr-framework-units",
+          "source_section": "Definition",
+          "quote": "when a global stationary potential is actually defined, $\\Phi_\\xi:=-cA_a\\xi^a$ has volts and $q\\Phi_\\xi$ has joules.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-tgr-framework-units",
+          "source_section": "Definition",
+          "quote": "Define the lapse $N_\\xi:=\\sqrt{-g(\\xi,\\xi)}>0$ and unit observer $u_\\xi:=\\xi/N_\\xi$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "By [F1] and [F2], $M=\\mathbb R\\times\\Sigma$ is the Cartesian product equipped with the smooth product structure of [F3], hence is a smooth four-manifold. The tensor $g=-N^2 dx^0\\otimes dx^0+h$ is smooth and symmetric. At each $(x^0,y)$ the tangent space splits as $\\mathbb R\\partial_{x^0}\\oplus T_y\\Sigma$, and for $a\\in\\mathbb R$ and $v\\in T_y\\Sigma$ its quadratic form is $-N(y)^2a^2+h_y(v,v)$. Since $N(y)>0$ and $h_y$ is positive definite by [F4], this form has one negative direction and three positive directions, and its direct-sum matrix is nondegenerate; hence it has signature $(-,+,+,+)$ by [F5].",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "The field $\\partial_{x^0}$ is smooth and has squared norm $-N^2<0$, so it is future timelike for the selected time orientation. Its local flow translates $x^0$ and fixes $y\\in\\Sigma$; since $N$ and $h$ are independent of $x^0$, this flow pulls $g$ back to itself and hence $\\mathcal L_{\\partial_{x^0}}g=0$ by [F6]. Thus the field is Killing, and its lapse equals the prescribed $N$ by [F10].",
+          "inputs": [
+            "given",
+            "F5",
+            "F6",
+            "algebra",
+            "F10"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "By [F7], $dV_h$ is a globally defined positive smooth density, so the integral measure does not depend on an orientation or chart. Each point has a coordinate ball whose closure is compact inside a chart; compactness supplies a finite subcover by such balls. On each closure the smooth density coefficient is bounded and the coordinate ball has finite Euclidean volume, so $dV_h(\\Sigma)<\\infty$. The profiles $T=T_0/N$ and $\\mu=(\\mu_0-q\\Phi)/N$ are smooth because $N$ is smooth and strictly positive. Their length-coordinate conventions follow from [F8], while $q\\Phi$ has energy units by [F9]. This establishes that all prescribed data and the volume density used by the hydrostatic functional are well defined.",
+          "inputs": [
+            "given",
+            "F7",
+            "F8",
+            "F9",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The definition requires nonempty Σ and step 1.1 constructs the four-dimensional product from that input."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 uses N>0 and h positive definite; step 2.1 uses N>0 to define both profiles."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-valued algebraic branch or singleton normalization case occurs in this definition."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 proves the direct-sum metric is nondegenerate from N>0 and positive-definite h."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The definition makes no endpoint or limiting assertion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses a fixed two-factor product and its canonical smooth structure; it makes no indexed selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition states no biconditional."
+        }
+      ],
+      "finite_checks": [],
+      "supplier_excerpts": [
+        {
+          "supplier": "prop-products-of-smooth-manifolds-have-a-canonical-product-smooth-structure",
+          "carrier": "items/prop-products-of-smooth-manifolds-have-a-canonical-product-smooth-structure.md",
+          "status": "Published imported mathematical supplier; complete statement and proof inspected.",
+          "source_section": "Statement",
+          "exact_statement": "This maximal atlas is the **product smooth structure** of $M\\times N$.",
+          "relevant_hypotheses_and_conventions": "The factors are smooth manifolds of dimensions 1 and 3; the product has the canonical product smooth structure.",
+          "supplier_proof_status": "Published mathematical item with supplied complete proof.",
+          "consumer_use": "Used in step 1.1 to place the prescribed product M=R×Σ in the smooth-manifold category."
+        },
+        {
+          "supplier": "def-riemannian-volume-density",
+          "carrier": "items/def-riemannian-volume-density.md",
+          "status": "Published imported mathematical definition; statement and its well-definedness supplier inspected.",
+          "source_section": "Definition",
+          "exact_statement": "The **Riemannian volume density** is $\\mu_g=\\sqrt{\\det G_x}\\,|dx^1\\cdots dx^n|$ in coordinates.",
+          "relevant_hypotheses_and_conventions": "The matrix is that of a Riemannian metric and the coordinate-independent gluing is supplied by the exact lemma also listed in deps.",
+          "supplier_proof_status": "Published definition; coordinate independence is proved by the listed lemma.",
+          "consumer_use": "Used in step 2.1 to specify the positive integration density dV_h."
+        }
+      ]
+    },
+    "post-tgrx-hydrostatic-effective-model": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [],
+      "supplier_excerpts": [
+        {
+          "supplier": "def-tgrx-static-hydrostatic-data",
+          "carrier": "items/def-tgrx-static-hydrostatic-data.md",
+          "status": "Current same-batch prerequisite authored before this consumer; no independent acceptance asserted.",
+          "source_section": "Definition",
+          "exact_statement": "Let $D\\subset(0,\\infty)\\times\\mathbb R$ be an open domain for the pair $(T,\\mu)$, measured in kelvins and joules, and let $p:D\\to\\mathbb R$ be a supplied $C^2$ pressure function with values in pascals. Require $(T(x),\\mu(x))\\in D$ at every $x\\in\\Sigma$. The function $p$ is model input; this definition does not derive an equation of state or assert that the prescribed data have a material realization.",
+          "relevant_hypotheses_and_conventions": "Compact nonempty smooth three-manifold without boundary, smooth Riemannian h, positive lapse N, fixed SI gauge and length-coordinate convention.",
+          "supplier_proof_status": "Current draft definition with an explicit local well-definedness proof; scoped checks and readiness are recorded separately.",
+          "consumer_use": "Supplies the typed geometric, electrochemical, thermodynamic and measure inputs in the adopted functional."
+        },
+        {
+          "supplier": "def-tgrx-thermal-vorticity",
+          "carrier": "items/def-tgrx-thermal-vorticity.md",
+          "status": "Current batch-115 draft inspected; loadStep1Record/step1Decision reports a current ready record. This does not assert independent proof acceptance.",
+          "source_section": "Definition",
+          "exact_statement": "$$T:=\\frac{1}{k_B\\sqrt{-g(\\beta,\\beta)}},\\qquad u:=k_BT\\,\\beta,\\qquad \\varpi_{ab}:=-\\frac12(\\nabla_a\\beta_b-\\nabla_b\\beta_a).$$",
+          "relevant_hypotheses_and_conventions": "A smooth future-directed timelike Killing field and the length-coordinate convention x⁰=ct; the definition asserts no thermal state or material realization.",
+          "supplier_proof_status": "Draft carrier with complete inspected proof and current Step 1 readiness; independent review remains later work.",
+          "consumer_use": "Supplies the thermal-geometry convention for interpreting the static temperature profile."
+        },
+        {
+          "supplier": "post-tgr-local-material-thermodynamics",
+          "carrier": "items/post-tgr-local-material-thermodynamics.md",
+          "status": "Published adopted physical postulate; actual statement inspected.",
+          "source_section": "Postulate",
+          "exact_statement": "For a selected fixed-composition, single-material branch, adopt a local-equilibrium description on an open state domain $D\\subset(0,\\infty)\\times\\mathbb R$ with a supplied function $e\\in C^2(D,\\mathbb R)$ and $T:=\\partial_{\\sigma_p}e>0$. Here $v$ is the rest volume per selected material marker, $\\sigma_p$ is entropy per marker, and $e$ is energy per marker, including the rest-energy contribution; their types and SI units are those in [[def-tgr-local-fluid-state]] and [[def-tgr-framework-units]]. Here “comoving” means that local state values are referred to the observer-congruence rest spaces of [[def-tgr-local-fluid-state]]; no orthogonal rest-slice foliation or finite-region volume integral is presupposed. For an admissible local continuum parcel, let $N_p>0$ be its real marker amount, $V>0$ its supplied proper-volume parameter, and $S\\in\\mathbb R$ its supplied total entropy, with $(V/N_p,S/N_p)\\in D$. The quantities $V/N_p$ and $S/N_p$ have the per-marker state meanings and units of [[def-tgr-local-fluid-state]]. This model assigns energy $E=N_p e(V/N_p,S/N_p)$. Treating the real marker amount as a particle count is part of the fixed-composition continuum model, not a claim about discrete microscopic transitions or a consequence of the mathematical marker definition.",
+          "relevant_hypotheses_and_conventions": "This is local constitutive input and makes no microscopic derivation or global-gravity additivity assertion.",
+          "supplier_proof_status": "Published postulate; no deductive proof is claimed by its class.",
+          "consumer_use": "Physical formulation context only; no identity between the separately supplied p(T,μ) and a local energy-derived pressure is asserted."
+        }
+      ],
+      "physics_review": {
+        "formulation": {
+          "verdict": "pass",
+          "evidence": "The item defines the dimensionless functional on a compact smooth static SI background, fixes the local T and electrochemical-potential profiles and an open parameter interval, and records the units of p, kB and T0."
+        },
+        "scope": {
+          "verdict": "pass",
+          "evidence": "The model is explicitly a zero-derivative hydrostatic truncation with an application-supplied microscopic length, relaxation time and background scale; any time-dependent extension has its own declared time scale. It asserts no error bound, convergence, microscopic trace or material realization."
+        },
+        "sources": {
+          "verdict": "pass",
+          "evidence": "Banerjee et al. and Kovtun are recorded as distinct full-text treatments with exact inspected sections, supported items, limitations and successful fetch stamps in batch-116.coverage.json."
+        },
+        "non_derivation": {
+          "verdict": "pass",
+          "evidence": "The functional is adopted as an effective model. The item does not derive it from a Gibbs trace, microscopic dynamics, the local energy state function or measurements."
+        }
+      }
+    },
+    "pthm-tgrx-hydrostatic-variation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "post-tgrx-hydrostatic-effective-model",
+          "source_section": "Postulate",
+          "quote": "$$W_{\\rm hs}(T_0,r;h,N,\\Phi,q,p):=\\log Z_{\\rm eff}=\\frac{1}{k_BT_0}\\int_\\Sigma N(x)\\,p\\!\\left(\\frac{T_0}{N(x)},\\frac{r-q\\Phi(x)}{N(x)}\\right)dV_h(x),$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-tgrx-static-hydrostatic-data",
+          "source_section": "Definition",
+          "quote": "and let $p:D\\to\\mathbb R$ be a supplied $C^2$ pressure function with values in pascals.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-riemannian-volume-density",
+          "source_section": "Definition",
+          "quote": "The **Riemannian volume density** is $\\mu_g=\\sqrt{\\det G_x}\\,|dx^1\\cdots dx^n|$ in coordinates.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Choose a closed interval $I_0\\subset U$ whose interior contains $\\mu_0$, and for $r\\in I_0$ define $f(r,x)=N(x)p(T_0/N(x),(r-q\\Phi(x))/N(x))/(k_BT_0)$. The image of $I_0\\times\\Sigma$ in $D$ is compact, so $p_\\mu$ and $p_{\\mu\\mu}$ are bounded and uniformly continuous there. Since $N$ is continuous and positive on compact $\\Sigma$, its image has a minimum $N_{\\min}>0$; also $dV_h(\\Sigma)<\\infty$. The one-variable mean value theorem and uniform continuity of $\\partial_r f$ make the difference quotients of $f$ converge uniformly in $x$ to $\\partial_r f=p_\\mu(T_0/N,(r-q\\Phi)/N)/(k_BT_0)$. For these quotients $q_h$, the estimate $|\\int_\\Sigma q_h\\,dV_h-\\int_\\Sigma\\partial_r f\\,dV_h|\\le dV_h(\\Sigma)\\sup_x|q_h(x)-\\partial_r f(r,x)|$ tends to zero. Thus differentiation passes through the finite-volume integral and yields $\\partial_{\\mu_0}W_{\\rm hs}=\\int_\\Sigma p_\\mu/(k_BT_0)\\,dV_h$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Applying the same uniform difference-quotient argument to $\\partial_r f$, whose derivative is $\\partial_r^2 f=p_{\\mu\\mu}(T_0/N,(r-q\\Phi)/N)/(N k_BT_0)$, gives $\\partial_{\\mu_0}^2W_{\\rm hs}=\\int_\\Sigma p_{\\mu\\mu}/(N k_BT_0)\\,dV_h$. The factors $N$ cancel once in the first derivative, while the second derivative retains the positive factor $1/N$.",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "By [A1], each integrand value in the second formula is nonnegative because $N(x)>0$, $k_B>0$, and $T_0>0$. By [F3], the Riemannian volume density is positive, so its integral is nonnegative and therefore $\\chi_{\\rm hs}\\ge0$.",
+          "inputs": [
+            "step 2.1",
+            "F3",
+            "A1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The statement requires nonempty Σ and step 1.1 integrates over that prescribed domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement and step 3.1 permit pμμ=0, yielding χhs=0 rather than claiming strict positivity."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-valued algebraic branch or singleton-normalization case occurs."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The argument uses no matrix spectrum or eigenvalue degeneracy."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 selects a closed interval strictly inside the open parameter domain; no endpoint derivative is asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no selection from an indexed family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "constant lapse and quadratic pressure",
+          "inputs": "N=Nc>0, Φ=0, Vol_h(Σ)=V, and p(T,μ)=a(T)+b(T)μ+(κ/2)μ² with κ≥0",
+          "expected": "∂²μ0 Whs=Vκ/(Nc kB T0)",
+          "result": "Direct differentiation of V Nc p(T0/Nc, μ0/Nc)/(kB T0) gives Vκ/(Nc kB T0), matching the general formula.",
+          "scope": "Algebraic model check only; not a measurement or physical equation-of-state claim."
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "post-tgrx-hydrostatic-effective-model",
+          "carrier": "items/post-tgrx-hydrostatic-effective-model.md",
+          "status": "Current same-batch prerequisite; conditional model postulate, not independently proof-approved.",
+          "source_section": "Postulate",
+          "exact_statement": "$$W_{\\rm hs}(T_0,r;h,N,\\Phi,q,p):=\\log Z_{\\rm eff}=\\frac{1}{k_BT_0}\\int_\\Sigma N(x)\\,p\\!\\left(\\frac{T_0}{N(x)},\\frac{r-q\\Phi(x)}{N(x)}\\right)dV_h(x),$$",
+          "relevant_hypotheses_and_conventions": "p is C² on an open domain containing the profiles for r in a neighborhood of μ0; all spatial fields and units are fixed.",
+          "supplier_proof_status": "Adopted draft postulate; its scope and source review are recorded, without a proof claim.",
+          "consumer_use": "Defines the functional differentiated in steps 1.1 and 1.2."
+        },
+        {
+          "supplier": "def-tgrx-static-hydrostatic-data",
+          "carrier": "items/def-tgrx-static-hydrostatic-data.md",
+          "status": "Current same-batch definition; inspected with its local well-definedness proof.",
+          "source_section": "Definition",
+          "exact_statement": "Let $D\\subset(0,\\infty)\\times\\mathbb R$ be an open domain for the pair $(T,\\mu)$, measured in kelvins and joules, and let $p:D\\to\\mathbb R$ be a supplied $C^2$ pressure function with values in pascals. Require $(T(x),\\mu(x))\\in D$ at every $x\\in\\Sigma$. The function $p$ is model input; this definition does not derive an equation of state or assert that the prescribed data have a material realization.",
+          "relevant_hypotheses_and_conventions": "The profiles T0/N and (r-qΦ)/N remain inside D on the parameter interval; volume is finite.",
+          "supplier_proof_status": "Draft definition with explicit proof and scoped readiness pending final checks.",
+          "consumer_use": "Supplies the differentiability, positivity and compactness hypotheses for differentiation under the integral and the sign conclusion."
+        },
+        {
+          "supplier": "def-riemannian-volume-density",
+          "carrier": "items/def-riemannian-volume-density.md",
+          "status": "Published imported mathematical definition; actual coordinate formula inspected.",
+          "source_section": "Definition",
+          "exact_statement": "The **Riemannian volume density** is $\\mu_g=\\sqrt{\\det G_x}\\,|dx^1\\cdots dx^n|$ in coordinates.",
+          "relevant_hypotheses_and_conventions": "The density is defined by a positive Riemannian metric and its coordinate independence is established by its separately supplied well-definedness lemma.",
+          "supplier_proof_status": "Published definition; coordinate independence is supplied by the listed lemma.",
+          "consumer_use": "Supplies positivity of the integration density in step 3.1."
+        }
+      ]
+    },
+    "ex-tgrx-entropy-does-not-close-hydrodynamics": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "post-tgrx-hydrostatic-effective-model",
+          "source_section": "Postulate",
+          "quote": "$$W_{\\rm hs}(T_0,r;h,N,\\Phi,q,p):=\\log Z_{\\rm eff}=\\frac{1}{k_BT_0}\\int_\\Sigma N(x)\\,p\\!\\left(\\frac{T_0}{N(x)},\\frac{r-q\\Phi(x)}{N(x)}\\right)dV_h(x),$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "post-tgr-first-order-dissipation",
+          "source_section": "Postulate",
+          "quote": "$$\\Pi=-\\zeta c\\theta,\\qquad \\pi^{ab}=-2\\eta c\\sigma^{ab},\\qquad Q^a=-\\frac{\\kappa}{c}\\Delta^{ab}Y_b,\\qquad V^a=-L\\Delta^{ab}Z_b.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "post-tgr-first-order-dissipation",
+          "source_section": "Postulate",
+          "quote": "$$\\Delta^a{}_b=\\delta^a{}_b+u^a u_b,\\qquad \\Delta^{ab}=g^{ab}+u^a u^b,\\qquad D=u^a\\nabla_a,\\qquad \\theta=\\nabla_a u^a,\\qquad a_b=u^c\\nabla_c u_b,$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "post-tgr-first-order-dissipation",
+          "source_section": "Postulate",
+          "quote": "Here $c>0$ has units $\\mathrm{m\\,s^{-1}}$; $\\theta$, $a_b$ and $\\sigma_{ab}$ have inverse-length components; $\\Pi$, $\\pi^{ab}$ and $Q^a$ have units Pa; $\\zeta,\\eta\\in C^1(O)$ have units Pa s",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The two instances have the same $T_0,\\mu_0,h,N,\\Phi,q$ and $p(T,\\mu)$ by [A1]. The formula in [F1] therefore has exactly the same integrand and integration measure for both instances; changing $\\zeta$ does not alter $W_{\\rm hs}$.",
+          "inputs": [
+            "given",
+            "F1",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "The constants $\\zeta_1=\\zeta_*$ and $\\zeta_2=2\\zeta_*$ are $C^1$ and nonnegative because $\\zeta_*>0$. By [F2], at the common input in [A2] their corrections satisfy $\\Pi_2-\\Pi_1=-(2\\zeta_*)c\\theta-(-\\zeta_*c\\theta)=-\\zeta_*c\\theta$, which is nonzero since $\\zeta_*,c>0$ and $\\theta\\ne0$; $\\theta$ has the definition in [F3] and the units are pascals by [F4].",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "A2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Thus the same hydrostatic functional is compatible with two distinct bulk-pressure responses under the declared constitutive assumptions, so the functional alone does not identify $\\zeta$. This conclusion is conditional on the stated model identification and local input; it is not a claim about a measured fluid or an actual solution.",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "A1",
+            "A2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The example statement is conditional on the common input in A2; absent such an input no response conclusion is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 explicitly requires θ≠0; at θ=0 the displayed difference is zero and is excluded."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 uses any ζ*>0 and compares the finite pair ζ*,2ζ*; no special normalization is assumed."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example involves no matrix spectrum or eigenvalue degeneracy."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no parameter interval endpoint or limiting claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The comparison makes no selection from an indexed family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "two coefficient substitutions",
+          "inputs": "ζ*=1 Pa s, c=299792458 m s⁻¹ (exact SI value), θ=1 m⁻¹",
+          "expected": "Π1=−299792458 Pa, Π2=−599584916 Pa, difference=−299792458 Pa",
+          "result": "Direct substitution into Π=−ζ c θ gives the stated pressure values and nonzero difference.",
+          "scope": "Finite arithmetic check only; these chosen values assert no hydrodynamic applicability, measurement or solution existence."
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "post-tgrx-hydrostatic-effective-model",
+          "carrier": "items/post-tgrx-hydrostatic-effective-model.md",
+          "status": "Current same-batch adopted model inspected; no independent acceptance asserted.",
+          "source_section": "Postulate",
+          "exact_statement": "$$W_{\\rm hs}(T_0,r;h,N,\\Phi,q,p):=\\log Z_{\\rm eff}=\\frac{1}{k_BT_0}\\int_\\Sigma N(x)\\,p\\!\\left(\\frac{T_0}{N(x)},\\frac{r-q\\Phi(x)}{N(x)}\\right)dV_h(x),$$",
+          "relevant_hypotheses_and_conventions": "The same static data and pressure function are held fixed in both instances.",
+          "supplier_proof_status": "Adopted draft postulate; no proof is claimed.",
+          "consumer_use": "Shows the static functional has no ζ input, used in step 1.1."
+        },
+        {
+          "supplier": "post-tgr-first-order-dissipation",
+          "carrier": "items/post-tgr-first-order-dissipation.md",
+          "status": "Published adopted constitutive postulate; actual full statement inspected.",
+          "source_section": "Postulate",
+          "exact_statement": "$$\\Delta^a{}_b=\\delta^a{}_b+u^a u_b,\\qquad \\Delta^{ab}=g^{ab}+u^a u^b,\\qquad D=u^a\\nabla_a,\\qquad \\theta=\\nabla_a u^a,\\qquad a_b=u^c\\nabla_c u_b,$$",
+          "relevant_hypotheses_and_conventions": "The stress is evaluated in the declared frame and pointwise regularity regime; the example assumes a shared local input with θ≠0 and asserts no solution existence.",
+          "supplier_proof_status": "Published postulate; no deductive proof is claimed by its class.",
+          "consumer_use": "Supplies the local constitutive formula evaluated in step 1.2."
+        }
+      ]
+    }
+  }
+}

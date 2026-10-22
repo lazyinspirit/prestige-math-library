@@ -1,0 +1,942 @@
+{
+  "version": 1,
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "batch": "15",
+  "scope": [
+    "def-emx-port-scattering-model",
+    "pthm-emx-scattering-contraction",
+    "pthm-emx-scattering-reciprocity",
+    "ex-emx-single-port-lossless-reflection",
+    "ex-emx-omitted-channel-subunitarity"
+  ],
+  "contracts": {
+    "def-emx-port-scattering-model": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition permits the finite channel list to have N=0: C^0 is the zero space, both channel norm sums are empty and equal zero, and the scattering matrix is the unique 0-by-0 map conditional on the same assumed well-posed solution interface."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: the finite vector convention includes a=0 and b=S0=0 by linearity; the port power difference is then 0 W."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The definition permits N=1; its flux convention specializes to P_ports=|b_1|^2-|a_1|^2 in W."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "At cutoff beta=0 is excluded by beta_alpha>0; degenerate cutoff modes are outside the declared channel list."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The definition requires omega>0 and beta_alpha>0, so zero-frequency and cutoff endpoints are excluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No mode is selected from a family in this definition; AC_omega is stated only for the reciprocal identity when used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition specifies model data and makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition specifies model data and makes no biconditional claim."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "One-port flux orientation",
+          "status": "checked",
+          "evidence": "With a=1 W^(1/2), b=0, P_ports=-1 W is inward; with a=0, b=1 W^(1/2), P_ports=+1 W is outward, matching the stated signs."
+        }
+      ],
+      "finite_checks_disposition": "The listed finite calculation checks a boundary case or concrete specialization; the numbered argument supplies the general conditional proof and is not replaced by the check.",
+      "supplier_excerpts": [
+        {
+          "supplier": "def-countable-choice",
+          "carrier": "items/def-countable-choice.md",
+          "status": "Published supplier; exact current statement/definition section inspected and matched to the use.",
+          "source_section": "Definition",
+          "exact_statement": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.\n\n"
+        },
+        {
+          "supplier": "def-emx-reciprocal-phasor-medium",
+          "carrier": "items/def-emx-reciprocal-phasor-medium.md",
+          "status": "Draft supplier with current hash-valid Step 1 decision ready; complete current statement and proof inspected and matched. This is not independent proof approval.",
+          "source_section": "Definition",
+          "exact_statement": "Fix a real angular frequency $\\omega\\in\\mathbb R$ and a bounded open region $\\Omega\\subset\\mathbb R^3$ with $C^1$ boundary in a material-rest frame. Here a material-rest frame is the inertial frame in which every modelled material element has fixed spatial coordinates, as stipulated by the framework's material-closure postulate. A map in $C^1(\\overline\\Omega)$ means the restriction of a $C^1$ map on an open neighborhood of $\\overline\\Omega$. Let $\\varepsilon,\\mu:\\overline\\Omega\\to\\mathbb C^{3\\times3}$ be continuous coefficient fields with units $\\mathrm{F\\,m^{-1}}$ and $\\mathrm{H\\,m^{-1}}$. They may be spatially varying and complex. Let $E_j,H_j\\in C^1(\\overline\\Omega;\\mathbb C^3)$ and $J_j\\in C^0(\\overline\\Omega;\\mathbb C^3)$, for $j=1,2$, be phasor amplitudes with SI units $\\mathrm{V\\,m^{-1}}$, $\\mathrm{A\\,m^{-1}}$, and $\\mathrm{A\\,m^{-2}}$. The corresponding real fields use $e^{-i\\omega t}$, for example $E_j^{\\mathrm{real}}(x,t)=\\operatorname{Re}(E_j(x)e^{-i\\omega t})$. Their displacement and magnetic-induction amplitudes are $D_j=\\varepsilon E_j$ in $\\mathrm{C\\,m^{-2}}$ and $B_j=\\mu H_j$ in $\\mathrm T$.\n\nThe fixed-frequency constitutive and source equations are\n\n$$D_j=\\varepsilon E_j,\\qquad B_j=\\mu H_j,\\qquad \\operatorname{curl}E_j=i\\omega B_j,\\qquad \\operatorname{curl}H_j=J_j-i\\omega D_j.$$\n\nAll operators act componentwise on the spatial variable. For $u,v\\in\\mathbb C^3$, define the **bilinear** dot product $u\\cdot v=\\sum_{r=1}^3u_rv_r$ and the complex-bilinear cross product by the usual right-handed component formula. Neither product conjugates either input. The transpose $T$ is the ordinary matrix transpose, without complex conjugation. This definition calls the coefficient model **reciprocal** when $\\varepsilon(x)^T=\\varepsilon(x)$ and $\\mu(x)^T=\\mu(x)$ at every $x\\in\\overline\\Omega$. It places no Hermitian, positive-definite, or passivity condition on these complex matrices.\n\nThis is a fixed-frequency phasor data class. Its possibly complex coefficients are not inferred from the framework's real, instantaneous material branch; a separate response model is required to justify any such interpretation.\n\n"
+        },
+        {
+          "supplier": "pthm-emx-lorentz-reciprocity",
+          "carrier": "items/pthm-emx-lorentz-reciprocity.md",
+          "status": "Draft supplier with current hash-valid Step 1 decision ready; complete current statement and proof inspected and matched. This is not independent proof approval.",
+          "source_section": "Statement",
+          "exact_statement": "Assume $\\mathrm{AC}_\\omega$. Let $\\Omega\\subset\\mathbb R^3$ be a bounded domain with $C^1$ boundary and outward unit normal $n$. Fix a real angular frequency $\\omega$ in $\\mathrm{s^{-1}}$. Let $E_j,H_j\\in C^1(\\overline\\Omega;\\mathbb C^3)$ and $J_j\\in C^0(\\overline\\Omega;\\mathbb C^3)$, for $j=1,2$, be phasor fields and electric-current densities in $\\mathrm{V\\,m^{-1}}$, $\\mathrm{A\\,m^{-1}}$, and $\\mathrm{A\\,m^{-2}}$, respectively. Suppose both pairs solve the fixed-frequency Maxwell equations there with the same continuous coefficient maps $\\varepsilon,\\mu:\\overline\\Omega\\to\\mathbb C^{3\\times3}$ and $\\varepsilon(x)^T=\\varepsilon(x)$, $\\mu(x)^T=\\mu(x)$ at every $x$. Use Euclidean volume measure $dV$ and boundary area measure $dS$. Then\n\n$$\\int_{\\partial\\Omega}n\\cdot(E_1\\times H_2-E_2\\times H_1)\\,dS=\\int_\\Omega(E_2\\cdot J_1-E_1\\cdot J_2)\\,dV.$$\n\nThe dot and cross products in this identity are the complex-bilinear products defined in the reciprocal phasor model; no complex conjugation occurs. Both integrals have units W. In particular, the real symmetric positive permittivity tensor and positive scalar permeability of the lossless anisotropic plane-wave model satisfy these reciprocal-coefficient hypotheses, so the identity applies to any two such phasor solutions restricted to a bounded $C^1$ subdomain.\n\n"
+        },
+        {
+          "supplier": "pthm-emx-weak-poynting-uniqueness",
+          "carrier": "items/pthm-emx-weak-poynting-uniqueness.md",
+          "status": "Draft supplier with current hash-valid Step 1 decision ready; complete current statement and proof inspected and matched. This is not independent proof approval.",
+          "source_section": "Statement",
+          "exact_statement": "Use the finite-energy boundary model defined earlier on the nonempty open time interval $I$ and bounded Lipschitz polyhedron $\\Omega$. Thus $\\varepsilon,\\mu$ are time-independent real symmetric essentially bounded coefficient fields with uniform positive lower bounds, $E,H\\in C^1(I;L^2(\\Omega;\\mathbb R^3))\\cap C(I;H(\\operatorname{curl};\\Omega))$, $J\\in C(I;L^2(\\Omega;\\mathbb R^3))$, and\n\n$$\\varepsilon\\partial_tE=\\operatorname{curl}H-J,\\qquad\\mu\\partial_tH=-\\operatorname{curl}E$$\n\nhold as $L^2$ identities for every $t\\in I$. Define\n\n$$W(t):=\\frac12\\int_\\Omega\\bigl(E\\cdot\\varepsilon E+H\\cdot\\mu H\\bigr)\\,d\\lambda_3.$$\n\nFor every $s<t$ in $I$, the closure-defined PEC branch satisfies\n\n$$W(t)-W(s)=-\\int_s^t\\int_\\Omega E\\cdot J\\,d\\lambda_3\\,dr.$$\n\nFor the Green-compatible impedance branch, where $H_\\tau=Y(n\\times E_\\tau)$, it satisfies\n\n$$W(t)-W(s)=-\\int_s^t\\int_\\Omega E\\cdot J\\,d\\lambda_3\\,dr-\\int_s^t\\int_{\\partial\\Omega}Y|E_\\tau|^2\\,dS\\,dr.$$\n\nHere $E_\\tau,H_\\tau$ and the Green identity are exactly the $L^2$ boundary data and admissibility condition in the model definition; no trace is inferred from H(curl) membership alone. The work density $E\\cdot J$ has SI units $\\mathrm{W\\,m^{-3}}$; the boundary term has units $\\mathrm{W\\,m^{-2}}$ per unit area and is nonnegative in the impedance branch. If $J=0$ and $E(t_0)=H(t_0)=0$ in $L^2$, the only admissible solution is zero for $t\\ge t_0$. Uniqueness is forward from the specified initial time; no backward uniqueness is asserted for a dissipative boundary.\n\n"
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-15-step1-author",
+        "notes": "The unique solution map, finite propagating basis, power orthogonality, and reciprocal bilinear port pairing are explicit model inputs. The open-scattering existence theorem is not supplied by guide completeness or weak Poynting uniqueness."
+      }
+    },
+    "pthm-emx-scattering-contraction": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "post-emx-lorentz-medium",
+          "source_section": "Postulate",
+          "quote": "Work in a material rest frame: an inertial frame in whose coordinates each modelled material element has fixed spatial position $x$ and history $t\\mapsto(ct,x)$, as defined by the framework's earlier material-closure formulation. Let $\\Omega\\subseteq\\mathbb R^3$ be the material region in that frame and $I\\subseteq\\mathbb R$ a nonempty open time interval. The electric field $E:\\Omega\\times I\\to\\mathbb R^3$, polarization fields $P_\\ell:\\Omega\\times I\\to\\mathbb R^3$, and magnetic fields $B,H:\\Omega\\times I\\to\\mathbb R^3$ are real spatial-vector fields in that frame. At every fixed $x\\in\\Omega$, require $E(x,\\cdot)\\in C^0(I;\\mathbb R^3)$ and $P_\\ell(x,\\cdot)\\in C^2(I;\\mathbb R^3)$ for each $1\\le\\ell\\le N$, so the displayed time derivatives are classical. These are time-regularity conditions only; this postulate imposes no spatial regularity, which must be stated separately wherever a consuming field-equation result requires it. In SI, $E$ is in V m$^{-1}$, $P_\\ell$ in C m$^{-2}$, $B$ in T and $H$ in A m$^{-1}$.\n\nFor a fixed finite integer $N\\ge1$, adopt at every material point $x$ the constitutive equations\n\n$$D(x,t)=\\varepsilon_\\infty E(x,t)+\\sum_{\\ell=1}^{N}P_\\ell(x,t),\\qquad B(x,t)=\\mu H(x,t),$$\n\n$$\\partial_t^2P_\\ell(x,t)+\\gamma_\\ell\\partial_tP_\\ell(x,t)+\\omega_\\ell^2P_\\ell(x,t)=a_\\ell E(x,t)\\qquad (1\\le\\ell\\le N).$$\n\nHere $\\varepsilon_\\infty>0$ is a constant scalar with units F m$^{-1}$, $\\mu>0$ is a constant scalar with units H m$^{-1}$, $a_\\ell>0$ are constant parameters with units F m$^{-1}$ s$^{-2}$, $\\omega_\\ell>0$ are constant angular frequencies with units s$^{-1}$, and $\\gamma_\\ell\\ge0$ are constant damping rates with units s$^{-1}$. The parameters are independent of position and time; this is the meaning of homogeneous in this model. The model is linear because all displayed field and oscillator relations are linear with fixed coefficients, and spatially local because the oscillator equation at $x$ uses only the field and oscillator state at that same $x$. The magnetic law has only the constant scalar coefficient $\\mu$ and no independent magnetic polarization variable; this is the nonmagnetic oscillator model adopted here.\n\nThe word nonmagnetic here means that the oscillator sector has no dynamic magnetic response; the fixed scalar coefficient $\\mu$ can still encode a separate static constitutive response. To identify the displayed quantities with the framework's macroscopic definitions, stipulate $P_{\\mathrm{tot}}=(\\varepsilon_\\infty-\\varepsilon_0)E+\\sum_{\\ell=1}^N P_\\ell$ and $M_{\\mathrm{tot}}=(\\mu_0^{-1}-\\mu^{-1})B$. Then $D=\\varepsilon_0E+P_{\\mathrm{tot}}=\\varepsilon_\\infty E+\\sum P_\\ell$ and $H=\\mu_0^{-1}B-M_{\\mathrm{tot}}=\\mu^{-1}B$. This is a constitutive identification in the model, not a microscopic decomposition.\n\nAt an initial time $t_0\\in I$, the oscillator state consists of $P_\\ell(x,t_0)$ and $\\partial_tP_\\ell(x,t_0)$. For a selected causal zero-past branch, choose an onset $\\tau\\in I$ and require $E(x,t)=0$ and $P_\\ell(x,t)=\\partial_tP_\\ell(x,t)=0$ for every $t\\in I$ with $t\\le\\tau$. Continuity gives $E(x,\\tau)=0$, and the equation gives $\\partial_t^2P_\\ell(x,\\tau)=0$, consistent with the $C^2$ zero extension through onset. For $t\\ge\\tau$ this branch is the retarded initial-value equation with those data, so its value at time $t$ uses the applied field only on $[\\tau,t]$. If $\\gamma_\\ell=0$, no decaying stationary impulse response is assumed; in particular, this is not an absolutely integrable convolution for arbitrary bounded histories. This postulate does not assert that any actual material realizes the equations.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "post-emx-drude-current-closure",
+          "source_section": "Postulate",
+          "quote": "Use a material rest frame: an inertial frame in whose coordinates each modelled material element has fixed spatial position $x$ and history $t\\mapsto(ct,x)$, as defined by the framework's earlier material-closure formulation. In that frame, let $E,P:\\Omega\\times I\\to\\mathbb R^3$ be the electric field and polarization, and let $V:\\Omega\\times I\\to\\mathbb R^3$ be a free-carrier current density. At every fixed $x\\in\\Omega$, require $E(x,\\cdot)\\in C^0(I;\\mathbb R^3)$ and $P(x,\\cdot),V(x,\\cdot)\\in C^1(I;\\mathbb R^3)$, so the displayed time derivatives are classical. These are time-regularity conditions only; this postulate imposes no spatial regularity, which must be stated separately wherever a consuming field-equation result requires it. In SI, $E$ is V m$^{-1}$, $P$ is C m$^{-2}$, and $V$ is A m$^{-2}$. Adopt\n\n$$\\partial_tP(x,t)=V(x,t),\\qquad \\partial_tV(x,t)+\\gamma V(x,t)=aE(x,t),$$\n\n$$D(x,t)=\\varepsilon_\\infty E(x,t)+P(x,t),\\qquad B(x,t)=\\mu H(x,t).$$\n\nThe constant scalar parameters satisfy $\\varepsilon_\\infty>0$, $\\mu>0$, $a>0$ and $\\gamma\\ge0$. Their units are respectively F m$^{-1}$, H m$^{-1}$, F m$^{-1}$ s$^{-2}$ and s$^{-1}$. The fields $V$ and $P$ have units A m$^{-2}$ and C m$^{-2}$. All coefficients are independent of $x$ and $t$, and the equation at $x$ depends only on the state and electric field at $x$; these clauses define the homogeneous, linear, spatially local closure used here. To identify these constitutive quantities with the framework's macroscopic definitions, stipulate $P_{\\mathrm{tot}}=(\\varepsilon_\\infty-\\varepsilon_0)E+P$ and $M_{\\mathrm{tot}}=(\\mu_0^{-1}-\\mu^{-1})B$. Then $D=\\varepsilon_0E+P_{\\mathrm{tot}}=\\varepsilon_\\infty E+P$ and $H=\\mu_0^{-1}B-M_{\\mathrm{tot}}=\\mu^{-1}B$. This is a constitutive identification within the model, not a microscopic decomposition.\n\nAt an initial time $t_0\\in I$, $P(x,t_0)$ and $V(x,t_0)$ are state data. A constant polarization offset is fixed with the Gauss-law data and is not determined by the current equation alone. The branch $\\gamma=0$ is the collisionless model; it has no decaying stationary impulse kernel, and its zero-frequency response is not part of this postulate. This is a phenomenological closure, not a derivation of carrier mass, density, collision statistics or any actual material response.",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "pthm-em-macroscopic-maxwell",
+          "source_section": "Statement",
+          "quote": "Assume the smooth branch of the vacuum Maxwell postulate [[post-em-vacuum-maxwell]] on the laboratory region $U\\cong I\\times\\Omega$ of [[def-em-lab-geometry]]: fields $E,B:\\Omega\\times I\\to\\mathbb R^3$ jointly of class $C^1$ with the additional derivatives required by each equation existing and continuous, and continuous source densities $\\rho,J$ of [[def-em-sources]]. Let $P,M$ and the derived objects $\\rho_b,J_b,\\rho_f,J_f,D,H$ be those of [[def-em-polarization-magnetization]], with $P,M$ of class $C^2$, and use the operators of [[def-divergence-and-curl-of-a-c1-vector-field]] and [[def-directional-and-partial-derivatives]]. Then:\n\n**(a) [Bound-source conservation]** $\\partial_t\\rho_b+\\operatorname{div}J_b=0$ on $\\Omega\\times I$. Assume $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]) for the regular-distribution and classical-compatibility interfaces below. Identify continuous sources with their regular distributions using [[def-regular-distribution-from-a-locally-integrable-function]] and [[thm-locally-integrable-functions-embed-in-distributions]]. Then\n\n$$\\partial_t\\rho_f+\\operatorname{div}J_f=\\partial_t\\rho+\\operatorname{div}J$$\n\nas distributions on $U$, with derivatives as in [[def-distributional-derivative]]: the free pair is distributionally conserved exactly when the total pair is. Under the adopted four vacuum equations both sides are zero distributions, by [[thm-distributional-differentiation-is-continuous-and-commutes]]. These statements do not require classical derivatives of $\\rho,J$. Where the partial derivatives $\\partial_t\\rho$ and $\\partial_{x_i}J_i$ exist, the same identity holds pointwise by differentiating the free/bound decomposition; in particular, if these derivatives are continuous on $U$, both pairs satisfy the classical pointwise continuity equation. The bound-source conservation equation remains classical and uses only $P,M\\in C^2$.\n\n**(b) [Macroscopic equations]** On $\\Omega\\times I$,\n\n$$\\operatorname{div}D=\\rho_f,\\qquad \\operatorname{div}B=0,\\qquad \\operatorname{curl}E=-\\partial_tB,\\qquad \\operatorname{curl}H=J_f+\\partial_tD.$$\n\n**(c) [Interpretation and scope]** Equations (b) are an exact rewriting of the adopted vacuum equations under the decomposition of [[def-em-polarization-magnetization]]: the two equations written in $E$ and $B$ are unchanged, and the $D$ and $H$ equations hold for every $C^2$ pair $(P,M)$, independently of any constitutive law. The classical bound identity of (a) uses the exchange of $\\partial_t$ with $\\operatorname{div}$ for $C^2$ data; the free/total identity is distributional in the stated continuous-source class, with its classical interpretation only under the additional derivatives stated in (a). The distributional conservation conclusion embeds the adopted smooth solution only; no macroscopic field-equation claim is made for the weak branch of the Maxwell postulate, for singular or sheet sources or for discontinuous $(P,M)$; no constitutive relation and no empirical statement is made.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-the-divergence-and-curl-of-a-cross-product",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb R^3$ be open and let $F,G:U\\to\\mathbb R^3$ be $C^1$. Then $F\\times G$ is $C^1$ on $U$ and\n\n$$\\operatorname{div}(F\\times G)=\\langle\\operatorname{curl}F,G\\rangle-\\langle F,\\operatorname{curl}G\\rangle,$$\n\n$$\\operatorname{curl}(F\\times G)=(\\operatorname{div}G)F-(\\operatorname{div}F)G+DF\\,G-DG\\,F.$$\n\nHere $DF\\,G$ denotes the map $U\\to\\mathbb R^3$ whose $i$th coordinate at $p$ is $\\sum_{j<3}\\partial_jF_i(p)\\,G_j(p)$, that is, the Jacobian matrix of $F$ at $p$ applied to the vector $G(p)$, and $DG\\,F$ is defined the same way with the roles of $F$ and $G$ exchanged. The operators are those of [[def-divergence-and-curl-of-a-c1-vector-field]], the cross product is that of [[def-cross-product-in-r3]], the inner product that of [[def-euclidean-inner-product]] and the Jacobian matrix that of [[def-jacobian-matrix-and-gradient]].\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$\n(Limit point, isolated point, adherent point, derived set, and dense subset of $\\mathbb{R}$), let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$\n(The derivative $f'(c) = \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c}$ of $f : A \\to \\mathbb{R}$ at a point $c \\in A$ that is a limit point of $A$, and differentiability on a set) and let $\\alpha \\in \\mathbb{R}$. Then:\n\n1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$;\n2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;\n3. $fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and is a limit point of $A_0$, the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is differentiable\n   at $c$ as a function on $A_0$, and\n   $$\\bigl((f/g)|_{A_0}\\bigr)'(c) \\;=\\; \\frac{f'(c)\\,g(c) - f(c)\\,g'(c)}{g(c)^{2}} .$$\n\nEach claim asserts two things: that the derivative on the left exists, and that\nit has the stated value. Both are proved.\n\n**Why claim 4 is stated on $A_0$.** The function $f/g$ is not defined where $g$\nvanishes, and $g$ may vanish at points of $A$ far from $c$; restricting to $A_0$\nis forced. That the restriction still has $c$ as a limit point, so that a\nderivative there means anything at all, is not free either, and it is the last\nclaim of If $\\lim_{x \\to c} f(x) = L \\ne 0$ then $|f| > |L|/2$ on a punctured neighbourhood of $c$; in particular if $L > 0$ then $f > L/2 > 0$ there applied to $g$. The hypothesis\nis $g(c) \\ne 0$, not \"$g$ vanishes nowhere\".\n\n**Everything is proved through\nCarathéodory's characterisation: $f$ is differentiable at $c$ if and only if there is $\\varphi : A \\to \\mathbb{R}$, continuous at $c$, with $f(x) - f(c) = \\varphi(x)(x - c)$ for every $x \\in A$, and then $\\varphi$ is unique and $\\varphi(c) = f'(c)$.** No difference quotient is estimated and\nno limit theorem beyond continuity is used, so no choice principle is spent.\nThe four identities are four algebraic rearrangements of an increment, each\nfollowed by a reading of Sums, scalar multiples, products, absolute values, maxima, minima and quotients with nonvanishing denominator of continuous functions are continuous, as are constants, the identity and every polynomial function.\n\n",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ (The natural numbers $\\mathbb{N}$ (von Neumann),\nOn $\\mathbb{N}$ the order is membership: $m < n \\iff m \\in n$), so\n\n$$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n \\to \\mathbb{R} \\,\\}$$\n\nis the function space of The vector space $F^{X}$ of all functions $X \\to F$ with pointwise operations, and $F^{n}$ as the case $X = n = \\{0, 1, \\dots, n-1\\}$ at $F = \\mathbb{R}$ and $X = n$,\na vector space over $\\mathbb{R}$ under the pointwise operations\n(Vector space over a field). We write $x_k := x(k)$ for $k < n$, and two elements of\n$\\mathbb{R}^{n}$ are equal exactly when they agree at every $k < n$. This is the\nsame set that $\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it calls $\\mathbb{R}^{n}$.\n\nThe **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number\n\n$$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$\n\nthe finite sum of Finite sums and finite products, by recursion applied to the list $k \\mapsto x_k y_k$\n(extended by $0$ beyond $n$, as every finite list in this library is). The\n**Euclidean norm** of $x$ is\n\n$$\\lVert x\\rVert_2 \\;:=\\; \\sqrt{\\langle x, x\\rangle},$$\n\nwhich is defined because $\\langle x,x\\rangle = \\sum_{k<n} x_k^{2} \\ge 0$ (a sum\nof nonnegative terms, Laws of finite sums and finite products clause 4 and\nSquares of nonzero elements are positive, the case $x_k = 0$ giving $x_k^2 = 0$ by\nInteger powers $a^m$) and every nonnegative real has a unique nonnegative square\nroot (Square roots exist: a unique $\\sqrt{a} \\ge 0$ with $(\\sqrt{a})^2 = a$; the positives are $\\{x^2 : x \\neq 0\\}$).\n\n### Both are defined for every $n$, including $n = 0$\n\nAt $n = 0$ the set $\\mathbb{R}^{0}$ has exactly one element, the empty function,\nand it is the zero vector space (The standard list $e : n \\to F^{n}$ with $e_i(i) = 1_F$ and $e_i(j) = 0_F$ for $j \\ne i$ is an ordered basis of $F^{n}$; hence $\\dim_F F^{n} = n$, and $F^{0}$ is the zero space with basis $\\varnothing$ and dimension $0$ clause 5); the sum\nabove is the empty sum, so $\\langle x,y\\rangle = 0$ and $\\lVert x\\rVert_2 = 0$.\n**This is the first place on this page where the two index regimes diverge, and\nthe divergence is deliberate.** The published metrics $d_1$, $d_2$, $d_\\infty$ of\n$\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it are defined only for $n \\ge 1$, because $d_\\infty$ would\notherwise be a maximum over the empty index set; the algebra above needs no such\nrestriction. The boundary in this page runs between the algebra and the metric,\nnot where a reader would guess, and Conventions of this page, the standing $n \\ge 1$ hypothesis, and what is taken up elsewhere in the reading order lists\nexactly which items inherit $n \\ge 1$.\n\n### The algebra of the inner product\n\nFor all $x, y, z \\in \\mathbb{R}^{n}$ and $\\lambda \\in \\mathbb{R}$:\n\n1. **Symmetry.** $\\langle x,y\\rangle = \\langle y,x\\rangle$, since $x_ky_k = y_kx_k$\n   termwise.\n2. **Additivity in the first argument.**\n   $\\langle x + y, z\\rangle = \\langle x,z\\rangle + \\langle y,z\\rangle$: the list\n   $k \\mapsto (x_k+y_k)z_k$ is the termwise sum of $k \\mapsto x_kz_k$ and\n   $k \\mapsto y_kz_k$, so Laws of finite sums and finite products clause 1 applies.\n3. **Homogeneity in the first argument.**\n   $\\langle \\lambda x, y\\rangle = \\lambda\\langle x,y\\rangle$, by\n   Laws of finite sums and finite products clause 2.\n4. **Bilinearity.** Clauses 2 and 3 together with symmetry give the same two laws\n   in the second argument.\n5. **Positive definiteness.** $\\langle x,x\\rangle \\ge 0$, and\n   $\\langle x,x\\rangle = 0$ if and only if $x = 0$. Indeed a vanishing sum of\n   nonnegative terms has every term $0$ (Laws of finite sums and finite products clause 4), so\n   $x_k^{2} = 0$ for every $k < n$, and a nonzero real has a positive square\n   (Squares of nonzero elements are positive), whence $x_k = 0$ for every $k < n$ and $x = 0$.\n6. **Agreement with the published Euclidean metric.** For $n \\ge 1$ and\n   $x, y \\in \\mathbb{R}^{n}$,\n   $\\lVert x - y\\rVert_2 = \\sqrt{\\sum_{k<n}(x_k-y_k)^{2}} = d_2(x,y)$, the two\n   sides being the same expression ($\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it). In particular\n   $\\lVert x\\rVert_2 = d_2(x, 0)$.\n\nThat $\\lVert\\cdot\\rVert_2$ is a norm in the sense of A norm on a real vector space, the induced metric, and the dictionary with the metric axioms\nis proved in Cauchy-Schwarz $\\lvert\\langle x,y\\rangle\\rvert \\le \\lVert x\\rVert_2\\lVert y\\rVert_2$ with its equality case, the triangle inequality for $\\lVert\\cdot\\rVert_2$, the parallelogram law and polarisation, where the triangle\ninequality is obtained from the Cauchy-Schwarz inequality; it is not assumed\nhere.\n\n",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-divergence-theorem-for-bounded-c-one-euclidean-domains",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. For $n\\ge2$, a bounded $C^1$ domain Omega and $F\\in C^1(\\overline\\Omega;\\mathbb R^n)$, $\\int_\\Omega\\operatorname{div}F\\,dx=\\int_{\\partial\\Omega}F\\cdot\\nu\\,dS$. Both integrals are finite, with the continuous interior derivative convention and the outward normal on every boundary component.\n\n",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to \\mathbb C$ belong to\n$L^1(\\mu \\times \\nu)$. Then:\n\n1. for $\\mu$-almost every $x$, the section $f_x$ belongs to $L^1(\\nu)$;\n2. for $\\nu$-almost every $y$, the section $f^y$ belongs to $L^1(\\mu)$;\n3. after assigning the value $0$ on the exceptional parameter sets, the\n   section-integral functions are integrable; and\n4. the three integrals agree:\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$\n\n",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-emx-port-scattering-model",
+          "source_section": "Definition",
+          "quote": "Fix a real angular frequency $\\omega>0$ in $\\mathrm{s^{-1}}$ and use the $e^{-i\\omega t}$ convention and SI field units of the fixed-frequency reciprocal-phasor model. Let $\\Omega\\subset\\mathbb R^3$ be a bounded device region with $C^1$ boundary in one stationary material-rest frame. Its continuous phasor coefficient maps are $\\varepsilon,\\mu:\\overline\\Omega\\to\\mathbb C^{3\\times3}$ in $\\mathrm{F\\,m^{-1}}$ and $\\mathrm{H\\,m^{-1}}$, respectively. The complex phasor fields $\\widetilde E,\\widetilde H\\in C^1(\\overline\\Omega;\\mathbb C^3)$ have units $\\mathrm{V\\,m^{-1}}$ and $\\mathrm{A\\,m^{-1}}$. They satisfy the fixed-frequency Maxwell equations of the reciprocal-phasor data class, with no impressed volume current or charge in $\\Omega$. The corresponding real fields are $E(x,t)=\\operatorname{Re}(\\widetilde E(x)e^{-i\\omega t})$ and $H(x,t)=\\operatorname{Re}(\\widetilde H(x)e^{-i\\omega t})$, with period $T=2\\pi/\\omega$. Assume $\\mathrm{AC}_\\omega$ as defined by the countable-choice axiom when the reciprocal boundary identity below is used.\n\nAn **admissible port** consists of a bounded connected $C^1$ cross-section $\\Sigma_j$ in a plane perpendicular to a fixed unit guide axis $\\widehat z_j$, together with a uniform lossless straight reference guide extending from that section. The outward normal $n_j$ on the port points from $\\Omega$ into the guide. The reference-guide phasor coefficients and wall conditions are independent of distance along $\\widehat z_j$. A propagating channel mode is a pair of $C^1$ complex transverse profiles $(e_{j\\alpha},h_{j\\alpha})$ whose associated source-free phasor fields in the guide solve the fixed-frequency Maxwell equations and have longitudinal factor $e^{\\pm i\\beta_\\alpha s_j}$ with real $\\beta_\\alpha>0$ in $\\mathrm{m^{-1}}$. The profiles are normalized per unit amplitude in $\\mathrm{W^{1/2}}$, so the resulting fields have units $\\mathrm{V\\,m^{-1}}$ and $\\mathrm{A\\,m^{-1}}$. The plus and minus signs are assigned according to whether energy travels toward or away from $\\Omega$. At $\\omega$, assume a finite list of $N$ propagating mode channels in total and that this list is complete for the propagating channels represented by the finite interface. Any outgoing radiation continuum or omitted propagating channel is separately recorded as nonnegative outward power $P_{\\mathrm{other}}$. Evanescent modes may be required in the exact near-port matching field, but are not entries of the propagating amplitude vectors; no finite truncation of such matching modes is asserted to be exact.\n\nLet $a=(a_1,\\ldots,a_N)^T\\in\\mathbb C^N$ and $b=(b_1,\\ldots,b_N)^T\\in\\mathbb C^N$ be the incoming and outgoing amplitudes. Choose the mode shapes and amplitude convention so that each coefficient has units $\\mathrm{W^{1/2}}$, the Hermitian norm is $\\|a\\|_2^2=\\sum_{\\alpha=1}^N|a_\\alpha|^2$ in W, and the total time-averaged outward power through the port sections is\n\n$$P_{\\mathrm{ports}}=\\|b\\|_2^2-\\|a\\|_2^2.$$\n\nThis equality, including the vanishing of cross terms in the real-power pairing, is a port-mode normalization hypothesis. For complex phasor fields the time-averaged Poynting vector is $\\boldsymbol\\Pi=\\tfrac12\\operatorname{Re}(\\widetilde E\\times\\widetilde H^*)$ in $\\mathrm{W\\,m^{-2}}$, where $*$ denotes componentwise conjugation before the bilinear cross product. This Hermitian power pairing is distinct from the unconjugated Lorentz bilinear pairing.\n\nOn the non-port wall $\\Gamma_w$, the model prescribes either a smooth PEC condition $E_\\tau(t)=0$, giving zero outward wall power, or a passive wall condition with explicitly specified nonnegative cycle-averaged outward power $P_\\partial\\ge0$. Here $E_\\tau(t)=E(t)-(n\\cdot E(t))n$ and $H_\\tau(t)=H(t)-(n\\cdot H(t))n$ are the classical tangential restrictions of the smooth real fields. A smooth impedance wall is one such condition: for a real scalar surface admittance $Y\\ge0$ in siemens and $H_\\tau(t)=Y(n\\times E_\\tau(t))$, its instantaneous outward power density is $n\\cdot(E_\\tau(t)\\times H_\\tau(t))=Y|E_\\tau(t)|^2\\ge0$, so its cycle-averaged outward power is nonnegative. For phasor amplitude $\\widetilde E_\\tau$, that average is $\\tfrac12Y|\\widetilde E_\\tau|^2$. This is a smooth-field model assumption; no $L^2$ trace is inferred from membership in $H(\\operatorname{curl})$.\n\nThe total cycle-averaged outward boundary power is the port contribution $\\|b\\|_2^2-\\|a\\|_2^2$, plus $P_\\partial$ and any unlisted outgoing power $P_{\\mathrm{other}}$. No unlisted incoming power is included.\n\nFor each $a$, assume the adopted linear source-free Maxwell boundary problem has a unique time-harmonic solution and a unique outgoing vector $b$. The model assumes no incoming wave in unlisted channels. By linearity of the phasor equations and uniqueness, the map $a\\mapsto b$ is complex-linear: a linear combination of two solutions solves the problem for the same linear combination of their incoming data, and uniqueness identifies its outgoing data. The **finite scattering matrix** is the unique matrix $S(\\omega)\\in\\mathbb C^{N\\times N}$ such that $b=S(\\omega)a$. The definition assumes this well-posed solution map; it does not prove its existence, uniqueness, modal completeness, or absence of resonances.\n\nFor reciprocal use, the incoming and outgoing modal phases are additionally chosen so that for every pair of source-free solutions with incoming vectors $a_1,a_2$ and outgoing vectors $b_1,b_2$, the Lorentz boundary pairing reduces to\n\n$$\\int_{\\partial\\Omega}n\\cdot(\\widetilde E_1\\times\\widetilde H_2-\\widetilde E_2\\times\\widetilde H_1)\\,dS=a_1^Tb_2-b_1^Ta_2.$$\n\nThis is an explicit reciprocal-normalization condition, using the complex-bilinear products of the reciprocal-phasor model and the bounded-$C^1$ reciprocity identity of the Lorentz reciprocity theorem. Power normalization alone does not imply this bilinear pairing for arbitrary complex reference impedances. Rephasing a port is allowed only when the declared reciprocal pairing is preserved.\n\n",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "A3",
+          "source": "def-emx-port-scattering-model",
+          "source_section": "Definition",
+          "quote": "Fix a real angular frequency $\\omega>0$ in $\\mathrm{s^{-1}}$ and use the $e^{-i\\omega t}$ convention and SI field units of the fixed-frequency reciprocal-phasor model. Let $\\Omega\\subset\\mathbb R^3$ be a bounded device region with $C^1$ boundary in one stationary material-rest frame. Its continuous phasor coefficient maps are $\\varepsilon,\\mu:\\overline\\Omega\\to\\mathbb C^{3\\times3}$ in $\\mathrm{F\\,m^{-1}}$ and $\\mathrm{H\\,m^{-1}}$, respectively. The complex phasor fields $\\widetilde E,\\widetilde H\\in C^1(\\overline\\Omega;\\mathbb C^3)$ have units $\\mathrm{V\\,m^{-1}}$ and $\\mathrm{A\\,m^{-1}}$. They satisfy the fixed-frequency Maxwell equations of the reciprocal-phasor data class, with no impressed volume current or charge in $\\Omega$. The corresponding real fields are $E(x,t)=\\operatorname{Re}(\\widetilde E(x)e^{-i\\omega t})$ and $H(x,t)=\\operatorname{Re}(\\widetilde H(x)e^{-i\\omega t})$, with period $T=2\\pi/\\omega$. Assume $\\mathrm{AC}_\\omega$ as defined by the countable-choice axiom when the reciprocal boundary identity below is used.\n\nAn **admissible port** consists of a bounded connected $C^1$ cross-section $\\Sigma_j$ in a plane perpendicular to a fixed unit guide axis $\\widehat z_j$, together with a uniform lossless straight reference guide extending from that section. The outward normal $n_j$ on the port points from $\\Omega$ into the guide. The reference-guide phasor coefficients and wall conditions are independent of distance along $\\widehat z_j$. A propagating channel mode is a pair of $C^1$ complex transverse profiles $(e_{j\\alpha},h_{j\\alpha})$ whose associated source-free phasor fields in the guide solve the fixed-frequency Maxwell equations and have longitudinal factor $e^{\\pm i\\beta_\\alpha s_j}$ with real $\\beta_\\alpha>0$ in $\\mathrm{m^{-1}}$. The profiles are normalized per unit amplitude in $\\mathrm{W^{1/2}}$, so the resulting fields have units $\\mathrm{V\\,m^{-1}}$ and $\\mathrm{A\\,m^{-1}}$. The plus and minus signs are assigned according to whether energy travels toward or away from $\\Omega$. At $\\omega$, assume a finite list of $N$ propagating mode channels in total and that this list is complete for the propagating channels represented by the finite interface. Any outgoing radiation continuum or omitted propagating channel is separately recorded as nonnegative outward power $P_{\\mathrm{other}}$. Evanescent modes may be required in the exact near-port matching field, but are not entries of the propagating amplitude vectors; no finite truncation of such matching modes is asserted to be exact.\n\nLet $a=(a_1,\\ldots,a_N)^T\\in\\mathbb C^N$ and $b=(b_1,\\ldots,b_N)^T\\in\\mathbb C^N$ be the incoming and outgoing amplitudes. Choose the mode shapes and amplitude convention so that each coefficient has units $\\mathrm{W^{1/2}}$, the Hermitian norm is $\\|a\\|_2^2=\\sum_{\\alpha=1}^N|a_\\alpha|^2$ in W, and the total time-averaged outward power through the port sections is\n\n$$P_{\\mathrm{ports}}=\\|b\\|_2^2-\\|a\\|_2^2.$$\n\nThis equality, including the vanishing of cross terms in the real-power pairing, is a port-mode normalization hypothesis. For complex phasor fields the time-averaged Poynting vector is $\\boldsymbol\\Pi=\\tfrac12\\operatorname{Re}(\\widetilde E\\times\\widetilde H^*)$ in $\\mathrm{W\\,m^{-2}}$, where $*$ denotes componentwise conjugation before the bilinear cross product. This Hermitian power pairing is distinct from the unconjugated Lorentz bilinear pairing.\n\nOn the non-port wall $\\Gamma_w$, the model prescribes either a smooth PEC condition $E_\\tau(t)=0$, giving zero outward wall power, or a passive wall condition with explicitly specified nonnegative cycle-averaged outward power $P_\\partial\\ge0$. Here $E_\\tau(t)=E(t)-(n\\cdot E(t))n$ and $H_\\tau(t)=H(t)-(n\\cdot H(t))n$ are the classical tangential restrictions of the smooth real fields. A smooth impedance wall is one such condition: for a real scalar surface admittance $Y\\ge0$ in siemens and $H_\\tau(t)=Y(n\\times E_\\tau(t))$, its instantaneous outward power density is $n\\cdot(E_\\tau(t)\\times H_\\tau(t))=Y|E_\\tau(t)|^2\\ge0$, so its cycle-averaged outward power is nonnegative. For phasor amplitude $\\widetilde E_\\tau$, that average is $\\tfrac12Y|\\widetilde E_\\tau|^2$. This is a smooth-field model assumption; no $L^2$ trace is inferred from membership in $H(\\operatorname{curl})$.\n\nThe total cycle-averaged outward boundary power is the port contribution $\\|b\\|_2^2-\\|a\\|_2^2$, plus $P_\\partial$ and any unlisted outgoing power $P_{\\mathrm{other}}$. No unlisted incoming power is included.\n\nFor each $a$, assume the adopted linear source-free Maxwell boundary problem has a unique time-harmonic solution and a unique outgoing vector $b$. The model assumes no incoming wave in unlisted channels. By linearity of the phasor equations and uniqueness, the map $a\\mapsto b$ is complex-linear: a linear combination of two solutions solves the problem for the same linear combination of their incoming data, and uniqueness identifies its outgoing data. The **finite scattering matrix** is the unique matrix $S(\\omega)\\in\\mathbb C^{N\\times N}$ such that $b=S(\\omega)a$. The definition assumes this well-posed solution map; it does not prove its existence, uniqueness, modal completeness, or absence of resonances.\n\nFor reciprocal use, the incoming and outgoing modal phases are additionally chosen so that for every pair of source-free solutions with incoming vectors $a_1,a_2$ and outgoing vectors $b_1,b_2$, the Lorentz boundary pairing reduces to\n\n$$\\int_{\\partial\\Omega}n\\cdot(\\widetilde E_1\\times\\widetilde H_2-\\widetilde E_2\\times\\widetilde H_1)\\,dS=a_1^Tb_2-b_1^Ta_2.$$\n\nThis is an explicit reciprocal-normalization condition, using the complex-bilinear products of the reciprocal-phasor model and the bounded-$C^1$ reciprocity identity of the Lorentz reciprocity theorem. Power normalization alone does not imply this bilinear pairing for arbitrary complex reference impedances. Rephasing a port is allowed only when the declared reciprocal pairing is preserved.\n\n",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "In the Lorentz branch set $J_{\\mathrm{tot}}=J_f+\\sum_{\\ell=1}^M\\partial_tP_\\ell$, and in the Drude branch set $J_{\\mathrm{tot}}=J_f+V$. From [L1] and [A1] or [A2], respectively, the field and constitutive equations give $\\varepsilon_\\infty\\partial_tE=\\operatorname{curl}H-J_{\\mathrm{tot}}$ and $\\mu\\partial_tH=-\\operatorname{curl}E$.",
+          "inputs": [
+            "given",
+            "A1",
+            "A2",
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "In the Lorentz branch, dot the $\\ell$th oscillator equation [A1] with $\\partial_tP_\\ell/a_\\ell$. Since $a_\\ell>0$, the division is valid; the product rule in [F2] gives $E\\cdot\\partial_tP_\\ell=\\partial_t\\!\\left((|\\partial_tP_\\ell|^2+\\omega_\\ell^2|P_\\ell|^2)/(2a_\\ell)\\right)+(\\gamma_\\ell/a_\\ell)|\\partial_tP_\\ell|^2$. The last term is nonnegative because $\\gamma_\\ell\\ge0$.",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "step": "1.3",
+          "claim": "In the Drude branch, dot $\\partial_tV+\\gamma V=aE$ from [A2] with $V/a$. The product rule and $a>0$ give $E\\cdot V=\\partial_t(|V|^2/(2a))+(\\gamma/a)|V|^2$, whose last term is nonnegative because $\\gamma\\ge0$.",
+          "inputs": [
+            "given",
+            "A2",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Define the field energy density $u_f:\\overline\\Omega\\times\\mathbb R\\to[0,\\infty)$ by $u_f=(\\varepsilon_\\infty|E|^2+\\mu|H|^2)/2$. Differentiate it componentwise using [F2] and the field equations of step 1.1. This gives $\\partial_tu_f=E\\cdot\\operatorname{curl}H-E\\cdot J_{\\mathrm{tot}}-H\\cdot\\operatorname{curl}E$. Applying [F1] yields $-\\operatorname{div}(E\\times H)-E\\cdot J_f-\\sum E\\cdot\\partial_tP_\\ell$ in the Lorentz branch and $-\\operatorname{div}(E\\times H)-E\\cdot J_f-E\\cdot V$ in the Drude branch.",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Define the total field-plus-material energy density $u:\\overline\\Omega\\times\\mathbb R\\to[0,\\infty)$ branchwise: in the Lorentz branch, $u:=u_f+\\sum_{\\ell=1}^M\\bigl(|\\partial_tP_\\ell|^2+\\omega_\\ell^2|P_\\ell|^2\\bigr)/(2a_\\ell)$; in the Drude branch, $u:=u_f+|V|^2/(2a)$. All terms are nonnegative, have SI units $\\mathrm{J\\,m^{-3}}$, and are jointly smooth and $T$-periodic under the Statement's hypotheses. Substituting step 1.2 into the Lorentz field balance of step 2.1 cancels every $E\\cdot\\partial_tP_\\ell$ term; substituting step 1.3 into its Drude balance cancels $E\\cdot V$. Since the given source-free condition has $J_f=0$, each branch therefore satisfies $\\partial_tu+\\operatorname{div}(E\\times H)=-\\ell$ with exactly the loss density $\\ell$ in the Statement.",
+          "inputs": [
+            "given",
+            "step 1.2",
+            "step 1.3",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "Integrate the local identity of step 3.1 over $\\Omega$ at each time and apply [F3] to $E\\times H$. Then integrate in time from $0$ to $T$. The integrand $\\partial_tu$ is continuous and integrable on the finite product domain, so [F4] permits integration first in time: $\\int_\\Omega\\int_0^T\\partial_tu\\,dt\\,dV=\\int_\\Omega(u(x,T)-u(x,0))\\,dV=0$ by periodicity. Hence the time-integrated outward boundary flux equals $-T P_{\\mathrm{mat}}$.",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "step": "5.1",
+          "claim": "Divide step 4.1 by $T$ and use the total boundary-flux decomposition [F5]. The port term is $\\|b\\|_2^2-\\|a\\|_2^2$, the wall term is $P_\\partial\\ge0$ by [A3], and the remaining outgoing term is $P_{\\mathrm{other}}\\ge0$. Rearrangement gives the power balance in the Statement.",
+          "inputs": [
+            "given",
+            "A3",
+            "F5",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "step": "6.1",
+          "claim": "Since each of $P_{\\mathrm{mat}},P_\\partial,P_{\\mathrm{other}}$ is nonnegative, step 5.1 gives $\\|Sa\\|_2^2\\le\\|a\\|_2^2$ for every $a$; taking nonnegative square roots proves contractivity. If all three powers vanish for every $a$, set $K:=I_N-S^\\dagger S$. Then $K^\\dagger=K$ because $(S^\\dagger S)^\\dagger=S^\\dagger S$, and the power balance gives $a^\\dagger Ka=\\|a\\|_2^2-\\|Sa\\|_2^2=0$ for every $a$. Let $e_j$ denote the $j$th coordinate vector of $\\mathbb C^N$. Testing $a=e_j$ gives $K_{jj}=0$; for $j<k$, testing $a=e_j+e_k$ gives $2\\operatorname{Re}K_{jk}=0$, while testing $a=e_j+i e_k$ gives $-2\\operatorname{Im}K_{jk}=0$. Hence every entry of $K$ is zero, so $S^\\dagger S=I_N$. The square matrix $S$ is injective, hence surjective by finite-dimensional rank-nullity; therefore $S^{-1}=S^\\dagger$ and $SS^\\dagger=I_N$ as well. Thus $S$ is unitary.",
+          "inputs": [
+            "given",
+            "step 5.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "If N=0, the unique 0-by-0 map is contractive vacuously and its lossless unitary identity is the empty matrix identity; steps 5.1–6.1 remain valid with no coordinates."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For a=0 the unique linear scattering map has Sa=0, and step 5.1 balances nonnegative terms summing to zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For N=1, step 6.1 reduces to the scalar inequality |S_{11}a|^2<=|a|^2 and the zero-loss equality |S_{11}|=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: the endpoint damping values gamma=0 and gamma_l=0 are admitted; steps 1.2–1.3 give zero loss density without division by damping."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The theorem assumes omega>0 and T=2pi/omega; static omega=0 is excluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No family selection is made in the proof; AC_omega is an explicit analytic premise for the divergence theorem."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is a one-way power inequality and has no equivalence claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem is a one-way power inequality and has no converse claim."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "Zero-damping closure limit",
+          "status": "checked",
+          "evidence": "Setting every gamma_l=0 in the Lorentz branch, or gamma=0 in the Drude branch, makes the corresponding local material loss density ell identically zero in steps 1.2–1.3; no strict-damping claim is used."
+        }
+      ],
+      "finite_checks_disposition": "The listed finite calculation checks a boundary case or concrete specialization; the numbered argument supplies the general conditional proof and is not replaced by the check.",
+      "supplier_excerpts": [
+        {
+          "supplier": "def-countable-choice",
+          "carrier": "items/def-countable-choice.md",
+          "status": "Published supplier; exact current statement/definition section inspected and matched to the use.",
+          "source_section": "Definition",
+          "exact_statement": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.\n\n"
+        },
+        {
+          "supplier": "def-emx-port-scattering-model",
+          "carrier": "items/def-emx-port-scattering-model.md",
+          "status": "Same-batch finished carrier text inspected directly; readiness is recorded after final scoped checks.",
+          "source_section": "Definition",
+          "exact_statement": "Fix a real angular frequency $\\omega>0$ in $\\mathrm{s^{-1}}$ and use the $e^{-i\\omega t}$ convention and SI field units of the fixed-frequency reciprocal-phasor model. Let $\\Omega\\subset\\mathbb R^3$ be a bounded device region with $C^1$ boundary in one stationary material-rest frame. Its continuous phasor coefficient maps are $\\varepsilon,\\mu:\\overline\\Omega\\to\\mathbb C^{3\\times3}$ in $\\mathrm{F\\,m^{-1}}$ and $\\mathrm{H\\,m^{-1}}$, respectively. The complex phasor fields $\\widetilde E,\\widetilde H\\in C^1(\\overline\\Omega;\\mathbb C^3)$ have units $\\mathrm{V\\,m^{-1}}$ and $\\mathrm{A\\,m^{-1}}$. They satisfy the fixed-frequency Maxwell equations of the reciprocal-phasor data class, with no impressed volume current or charge in $\\Omega$. The corresponding real fields are $E(x,t)=\\operatorname{Re}(\\widetilde E(x)e^{-i\\omega t})$ and $H(x,t)=\\operatorname{Re}(\\widetilde H(x)e^{-i\\omega t})$, with period $T=2\\pi/\\omega$. Assume $\\mathrm{AC}_\\omega$ as defined by the countable-choice axiom when the reciprocal boundary identity below is used.\n\nAn **admissible port** consists of a bounded connected $C^1$ cross-section $\\Sigma_j$ in a plane perpendicular to a fixed unit guide axis $\\widehat z_j$, together with a uniform lossless straight reference guide extending from that section. The outward normal $n_j$ on the port points from $\\Omega$ into the guide. The reference-guide phasor coefficients and wall conditions are independent of distance along $\\widehat z_j$. A propagating channel mode is a pair of $C^1$ complex transverse profiles $(e_{j\\alpha},h_{j\\alpha})$ whose associated source-free phasor fields in the guide solve the fixed-frequency Maxwell equations and have longitudinal factor $e^{\\pm i\\beta_\\alpha s_j}$ with real $\\beta_\\alpha>0$ in $\\mathrm{m^{-1}}$. The profiles are normalized per unit amplitude in $\\mathrm{W^{1/2}}$, so the resulting fields have units $\\mathrm{V\\,m^{-1}}$ and $\\mathrm{A\\,m^{-1}}$. The plus and minus signs are assigned according to whether energy travels toward or away from $\\Omega$. At $\\omega$, assume a finite list of $N$ propagating mode channels in total and that this list is complete for the propagating channels represented by the finite interface. Any outgoing radiation continuum or omitted propagating channel is separately recorded as nonnegative outward power $P_{\\mathrm{other}}$. Evanescent modes may be required in the exact near-port matching field, but are not entries of the propagating amplitude vectors; no finite truncation of such matching modes is asserted to be exact.\n\nLet $a=(a_1,\\ldots,a_N)^T\\in\\mathbb C^N$ and $b=(b_1,\\ldots,b_N)^T\\in\\mathbb C^N$ be the incoming and outgoing amplitudes. Choose the mode shapes and amplitude convention so that each coefficient has units $\\mathrm{W^{1/2}}$, the Hermitian norm is $\\|a\\|_2^2=\\sum_{\\alpha=1}^N|a_\\alpha|^2$ in W, and the total time-averaged outward power through the port sections is\n\n$$P_{\\mathrm{ports}}=\\|b\\|_2^2-\\|a\\|_2^2.$$\n\nThis equality, including the vanishing of cross terms in the real-power pairing, is a port-mode normalization hypothesis. For complex phasor fields the time-averaged Poynting vector is $\\boldsymbol\\Pi=\\tfrac12\\operatorname{Re}(\\widetilde E\\times\\widetilde H^*)$ in $\\mathrm{W\\,m^{-2}}$, where $*$ denotes componentwise conjugation before the bilinear cross product. This Hermitian power pairing is distinct from the unconjugated Lorentz bilinear pairing.\n\nOn the non-port wall $\\Gamma_w$, the model prescribes either a smooth PEC condition $E_\\tau(t)=0$, giving zero outward wall power, or a passive wall condition with explicitly specified nonnegative cycle-averaged outward power $P_\\partial\\ge0$. Here $E_\\tau(t)=E(t)-(n\\cdot E(t))n$ and $H_\\tau(t)=H(t)-(n\\cdot H(t))n$ are the classical tangential restrictions of the smooth real fields. A smooth impedance wall is one such condition: for a real scalar surface admittance $Y\\ge0$ in siemens and $H_\\tau(t)=Y(n\\times E_\\tau(t))$, its instantaneous outward power density is $n\\cdot(E_\\tau(t)\\times H_\\tau(t))=Y|E_\\tau(t)|^2\\ge0$, so its cycle-averaged outward power is nonnegative. For phasor amplitude $\\widetilde E_\\tau$, that average is $\\tfrac12Y|\\widetilde E_\\tau|^2$. This is a smooth-field model assumption; no $L^2$ trace is inferred from membership in $H(\\operatorname{curl})$.\n\nThe total cycle-averaged outward boundary power is the port contribution $\\|b\\|_2^2-\\|a\\|_2^2$, plus $P_\\partial$ and any unlisted outgoing power $P_{\\mathrm{other}}$. No unlisted incoming power is included.\n\nFor each $a$, assume the adopted linear source-free Maxwell boundary problem has a unique time-harmonic solution and a unique outgoing vector $b$. The model assumes no incoming wave in unlisted channels. By linearity of the phasor equations and uniqueness, the map $a\\mapsto b$ is complex-linear: a linear combination of two solutions solves the problem for the same linear combination of their incoming data, and uniqueness identifies its outgoing data. The **finite scattering matrix** is the unique matrix $S(\\omega)\\in\\mathbb C^{N\\times N}$ such that $b=S(\\omega)a$. The definition assumes this well-posed solution map; it does not prove its existence, uniqueness, modal completeness, or absence of resonances.\n\nFor reciprocal use, the incoming and outgoing modal phases are additionally chosen so that for every pair of source-free solutions with incoming vectors $a_1,a_2$ and outgoing vectors $b_1,b_2$, the Lorentz boundary pairing reduces to\n\n$$\\int_{\\partial\\Omega}n\\cdot(\\widetilde E_1\\times\\widetilde H_2-\\widetilde E_2\\times\\widetilde H_1)\\,dS=a_1^Tb_2-b_1^Ta_2.$$\n\nThis is an explicit reciprocal-normalization condition, using the complex-bilinear products of the reciprocal-phasor model and the bounded-$C^1$ reciprocity identity of the Lorentz reciprocity theorem. Power normalization alone does not imply this bilinear pairing for arbitrary complex reference impedances. Rephasing a port is allowed only when the declared reciprocal pairing is preserved.\n\n"
+        },
+        {
+          "supplier": "def-euclidean-inner-product",
+          "carrier": "items/def-euclidean-inner-product.md",
+          "status": "Published supplier; exact current statement/definition section inspected and matched to the use.",
+          "source_section": "Definition",
+          "exact_statement": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ (The natural numbers $\\mathbb{N}$ (von Neumann),\nOn $\\mathbb{N}$ the order is membership: $m < n \\iff m \\in n$), so\n\n$$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n \\to \\mathbb{R} \\,\\}$$\n\nis the function space of The vector space $F^{X}$ of all functions $X \\to F$ with pointwise operations, and $F^{n}$ as the case $X = n = \\{0, 1, \\dots, n-1\\}$ at $F = \\mathbb{R}$ and $X = n$,\na vector space over $\\mathbb{R}$ under the pointwise operations\n(Vector space over a field). We write $x_k := x(k)$ for $k < n$, and two elements of\n$\\mathbb{R}^{n}$ are equal exactly when they agree at every $k < n$. This is the\nsame set that $\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it calls $\\mathbb{R}^{n}$.\n\nThe **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number\n\n$$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$\n\nthe finite sum of Finite sums and finite products, by recursion applied to the list $k \\mapsto x_k y_k$\n(extended by $0$ beyond $n$, as every finite list in this library is). The\n**Euclidean norm** of $x$ is\n\n$$\\lVert x\\rVert_2 \\;:=\\; \\sqrt{\\langle x, x\\rangle},$$\n\nwhich is defined because $\\langle x,x\\rangle = \\sum_{k<n} x_k^{2} \\ge 0$ (a sum\nof nonnegative terms, Laws of finite sums and finite products clause 4 and\nSquares of nonzero elements are positive, the case $x_k = 0$ giving $x_k^2 = 0$ by\nInteger powers $a^m$) and every nonnegative real has a unique nonnegative square\nroot (Square roots exist: a unique $\\sqrt{a} \\ge 0$ with $(\\sqrt{a})^2 = a$; the positives are $\\{x^2 : x \\neq 0\\}$).\n\n### Both are defined for every $n$, including $n = 0$\n\nAt $n = 0$ the set $\\mathbb{R}^{0}$ has exactly one element, the empty function,\nand it is the zero vector space (The standard list $e : n \\to F^{n}$ with $e_i(i) = 1_F$ and $e_i(j) = 0_F$ for $j \\ne i$ is an ordered basis of $F^{n}$; hence $\\dim_F F^{n} = n$, and $F^{0}$ is the zero space with basis $\\varnothing$ and dimension $0$ clause 5); the sum\nabove is the empty sum, so $\\langle x,y\\rangle = 0$ and $\\lVert x\\rVert_2 = 0$.\n**This is the first place on this page where the two index regimes diverge, and\nthe divergence is deliberate.** The published metrics $d_1$, $d_2$, $d_\\infty$ of\n$\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it are defined only for $n \\ge 1$, because $d_\\infty$ would\notherwise be a maximum over the empty index set; the algebra above needs no such\nrestriction. The boundary in this page runs between the algebra and the metric,\nnot where a reader would guess, and Conventions of this page, the standing $n \\ge 1$ hypothesis, and what is taken up elsewhere in the reading order lists\nexactly which items inherit $n \\ge 1$.\n\n### The algebra of the inner product\n\nFor all $x, y, z \\in \\mathbb{R}^{n}$ and $\\lambda \\in \\mathbb{R}$:\n\n1. **Symmetry.** $\\langle x,y\\rangle = \\langle y,x\\rangle$, since $x_ky_k = y_kx_k$\n   termwise.\n2. **Additivity in the first argument.**\n   $\\langle x + y, z\\rangle = \\langle x,z\\rangle + \\langle y,z\\rangle$: the list\n   $k \\mapsto (x_k+y_k)z_k$ is the termwise sum of $k \\mapsto x_kz_k$ and\n   $k \\mapsto y_kz_k$, so Laws of finite sums and finite products clause 1 applies.\n3. **Homogeneity in the first argument.**\n   $\\langle \\lambda x, y\\rangle = \\lambda\\langle x,y\\rangle$, by\n   Laws of finite sums and finite products clause 2.\n4. **Bilinearity.** Clauses 2 and 3 together with symmetry give the same two laws\n   in the second argument.\n5. **Positive definiteness.** $\\langle x,x\\rangle \\ge 0$, and\n   $\\langle x,x\\rangle = 0$ if and only if $x = 0$. Indeed a vanishing sum of\n   nonnegative terms has every term $0$ (Laws of finite sums and finite products clause 4), so\n   $x_k^{2} = 0$ for every $k < n$, and a nonzero real has a positive square\n   (Squares of nonzero elements are positive), whence $x_k = 0$ for every $k < n$ and $x = 0$.\n6. **Agreement with the published Euclidean metric.** For $n \\ge 1$ and\n   $x, y \\in \\mathbb{R}^{n}$,\n   $\\lVert x - y\\rVert_2 = \\sqrt{\\sum_{k<n}(x_k-y_k)^{2}} = d_2(x,y)$, the two\n   sides being the same expression ($\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it). In particular\n   $\\lVert x\\rVert_2 = d_2(x, 0)$.\n\nThat $\\lVert\\cdot\\rVert_2$ is a norm in the sense of A norm on a real vector space, the induced metric, and the dictionary with the metric axioms\nis proved in Cauchy-Schwarz $\\lvert\\langle x,y\\rangle\\rvert \\le \\lVert x\\rVert_2\\lVert y\\rVert_2$ with its equality case, the triangle inequality for $\\lVert\\cdot\\rVert_2$, the parallelogram law and polarisation, where the triangle\ninequality is obtained from the Cauchy-Schwarz inequality; it is not assumed\nhere.\n\n"
+        },
+        {
+          "supplier": "lem-the-divergence-and-curl-of-a-cross-product",
+          "carrier": "items/lem-the-divergence-and-curl-of-a-cross-product.md",
+          "status": "Published supplier; exact current statement/definition section inspected and matched to the use.",
+          "source_section": "Statement",
+          "exact_statement": "Let $U\\subseteq\\mathbb R^3$ be open and let $F,G:U\\to\\mathbb R^3$ be $C^1$. Then $F\\times G$ is $C^1$ on $U$ and\n\n$$\\operatorname{div}(F\\times G)=\\langle\\operatorname{curl}F,G\\rangle-\\langle F,\\operatorname{curl}G\\rangle,$$\n\n$$\\operatorname{curl}(F\\times G)=(\\operatorname{div}G)F-(\\operatorname{div}F)G+DF\\,G-DG\\,F.$$\n\nHere $DF\\,G$ denotes the map $U\\to\\mathbb R^3$ whose $i$th coordinate at $p$ is $\\sum_{j<3}\\partial_jF_i(p)\\,G_j(p)$, that is, the Jacobian matrix of $F$ at $p$ applied to the vector $G(p)$, and $DG\\,F$ is defined the same way with the roles of $F$ and $G$ exchanged. The operators are those of [[def-divergence-and-curl-of-a-c1-vector-field]], the cross product is that of [[def-cross-product-in-r3]], the inner product that of [[def-euclidean-inner-product]] and the Jacobian matrix that of [[def-jacobian-matrix-and-gradient]].\n\n"
+        },
+        {
+          "supplier": "post-emx-drude-current-closure",
+          "carrier": "items/post-emx-drude-current-closure.md",
+          "status": "Exact current public interface transcribed by root at the drained Step2 join; original substantive source-use review retained in historical_source_interface and native/same-owner reports. No renewed full supplier-proof reading asserted.",
+          "source_section": "Postulate",
+          "exact_statement": "Use a material rest frame: an inertial frame in whose coordinates each modelled material element has fixed spatial position $x$ and history $t\\mapsto(ct,x)$, as defined by the framework's earlier material-closure formulation. In that frame, let $E,P:\\Omega\\times I\\to\\mathbb R^3$ be the electric field and polarization, and let $V:\\Omega\\times I\\to\\mathbb R^3$ be a free-carrier current density. At every fixed $x\\in\\Omega$, require $E(x,\\cdot)\\in C^0(I;\\mathbb R^3)$ and $P(x,\\cdot),V(x,\\cdot)\\in C^1(I;\\mathbb R^3)$, so the displayed time derivatives are classical. These are time-regularity conditions only; this postulate imposes no spatial regularity, which must be stated separately wherever a consuming field-equation result requires it. In SI, $E$ is V m$^{-1}$, $P$ is C m$^{-2}$, and $V$ is A m$^{-2}$. Adopt\n\n$$\\partial_tP(x,t)=V(x,t),\\qquad \\partial_tV(x,t)+\\gamma V(x,t)=aE(x,t),$$\n\n$$D(x,t)=\\varepsilon_\\infty E(x,t)+P(x,t),\\qquad B(x,t)=\\mu H(x,t).$$\n\nThe constant scalar parameters satisfy $\\varepsilon_\\infty>0$, $\\mu>0$, $a>0$ and $\\gamma\\ge0$. Their units are respectively F m$^{-1}$, H m$^{-1}$, F m$^{-1}$ s$^{-2}$ and s$^{-1}$. The fields $V$ and $P$ have units A m$^{-2}$ and C m$^{-2}$. All coefficients are independent of $x$ and $t$, and the equation at $x$ depends only on the state and electric field at $x$; these clauses define the homogeneous, linear, spatially local closure used here. To identify these constitutive quantities with the framework's macroscopic definitions, stipulate $P_{\\mathrm{tot}}=(\\varepsilon_\\infty-\\varepsilon_0)E+P$ and $M_{\\mathrm{tot}}=(\\mu_0^{-1}-\\mu^{-1})B$. Then $D=\\varepsilon_0E+P_{\\mathrm{tot}}=\\varepsilon_\\infty E+P$ and $H=\\mu_0^{-1}B-M_{\\mathrm{tot}}=\\mu^{-1}B$. This is a constitutive identification within the model, not a microscopic decomposition.\n\nAt an initial time $t_0\\in I$, $P(x,t_0)$ and $V(x,t_0)$ are state data. A constant polarization offset is fixed with the Gauss-law data and is not determined by the current equation alone. The branch $\\gamma=0$ is the collisionless model; it has no decaying stationary impulse kernel, and its zero-frequency response is not part of this postulate. This is a phenomenological closure, not a derivation of carrier mass, density, collision statistics or any actual material response.",
+          "historical_source_interface": {
+            "source_section": "Postulate",
+            "exact_statement": "Use a material rest frame: an inertial frame in whose coordinates each modelled material element has fixed spatial position $x$ and history $t\\mapsto(ct,x)$, as defined by the framework's earlier material-closure formulation. In that frame, let $E,P:\\Omega\\times I\\to\\mathbb R^3$ be the electric field and polarization, and let $V:\\Omega\\times I\\to\\mathbb R^3$ be a free-carrier current density. In SI, $E$ is V m$^{-1}$, $P$ is C m$^{-2}$, and $V$ is A m$^{-2}$. Adopt\n\n$$\\partial_tP(x,t)=V(x,t),\\qquad \\partial_tV(x,t)+\\gamma V(x,t)=aE(x,t),$$\n\n$$D(x,t)=\\varepsilon_\\infty E(x,t)+P(x,t),\\qquad B(x,t)=\\mu H(x,t).$$\n\nThe constant scalar parameters satisfy $\\varepsilon_\\infty>0$, $\\mu>0$, $a>0$ and $\\gamma\\ge0$. Their units are respectively F m$^{-1}$, H m$^{-1}$, F m$^{-1}$ s$^{-2}$ and s$^{-1}$. The fields $V$ and $P$ have units A m$^{-2}$ and C m$^{-2}$. All coefficients are independent of $x$ and $t$, and the equation at $x$ depends only on the state and electric field at $x$; these clauses define the homogeneous, linear, spatially local closure used here. To identify these constitutive quantities with the framework's macroscopic definitions, stipulate $P_{\\mathrm{tot}}=(\\varepsilon_\\infty-\\varepsilon_0)E+P$ and $M_{\\mathrm{tot}}=(\\mu_0^{-1}-\\mu^{-1})B$. Then $D=\\varepsilon_0E+P_{\\mathrm{tot}}=\\varepsilon_\\infty E+P$ and $H=\\mu_0^{-1}B-M_{\\mathrm{tot}}=\\mu^{-1}B$. This is a constitutive identification within the model, not a microscopic decomposition.\n\nAt an initial time $t_0$, $P(x,t_0)$ and $V(x,t_0)$ are state data. A constant polarization offset is fixed with the Gauss-law data and is not determined by the current equation alone. The branch $\\gamma=0$ is the collisionless model; it has no decaying stationary impulse kernel, and its zero-frequency response is not part of this postulate. This is a phenomenological closure, not a derivation of carrier mass, density, collision statistics or any actual material response.\n\n",
+            "status": "Draft supplier with current hash-valid Step 1 decision ready; complete current statement and proof inspected and matched. This is not independent proof approval."
+          },
+          "supplier_proof_status": "draft; this exact-quote refresh does not grant independent proof acceptance"
+        },
+        {
+          "supplier": "post-emx-lorentz-medium",
+          "carrier": "items/post-emx-lorentz-medium.md",
+          "status": "Exact current public interface transcribed by root at the drained Step2 join; original substantive source-use review retained in historical_source_interface and native/same-owner reports. No renewed full supplier-proof reading asserted.",
+          "source_section": "Postulate",
+          "exact_statement": "Work in a material rest frame: an inertial frame in whose coordinates each modelled material element has fixed spatial position $x$ and history $t\\mapsto(ct,x)$, as defined by the framework's earlier material-closure formulation. Let $\\Omega\\subseteq\\mathbb R^3$ be the material region in that frame and $I\\subseteq\\mathbb R$ a nonempty open time interval. The electric field $E:\\Omega\\times I\\to\\mathbb R^3$, polarization fields $P_\\ell:\\Omega\\times I\\to\\mathbb R^3$, and magnetic fields $B,H:\\Omega\\times I\\to\\mathbb R^3$ are real spatial-vector fields in that frame. At every fixed $x\\in\\Omega$, require $E(x,\\cdot)\\in C^0(I;\\mathbb R^3)$ and $P_\\ell(x,\\cdot)\\in C^2(I;\\mathbb R^3)$ for each $1\\le\\ell\\le N$, so the displayed time derivatives are classical. These are time-regularity conditions only; this postulate imposes no spatial regularity, which must be stated separately wherever a consuming field-equation result requires it. In SI, $E$ is in V m$^{-1}$, $P_\\ell$ in C m$^{-2}$, $B$ in T and $H$ in A m$^{-1}$.\n\nFor a fixed finite integer $N\\ge1$, adopt at every material point $x$ the constitutive equations\n\n$$D(x,t)=\\varepsilon_\\infty E(x,t)+\\sum_{\\ell=1}^{N}P_\\ell(x,t),\\qquad B(x,t)=\\mu H(x,t),$$\n\n$$\\partial_t^2P_\\ell(x,t)+\\gamma_\\ell\\partial_tP_\\ell(x,t)+\\omega_\\ell^2P_\\ell(x,t)=a_\\ell E(x,t)\\qquad (1\\le\\ell\\le N).$$\n\nHere $\\varepsilon_\\infty>0$ is a constant scalar with units F m$^{-1}$, $\\mu>0$ is a constant scalar with units H m$^{-1}$, $a_\\ell>0$ are constant parameters with units F m$^{-1}$ s$^{-2}$, $\\omega_\\ell>0$ are constant angular frequencies with units s$^{-1}$, and $\\gamma_\\ell\\ge0$ are constant damping rates with units s$^{-1}$. The parameters are independent of position and time; this is the meaning of homogeneous in this model. The model is linear because all displayed field and oscillator relations are linear with fixed coefficients, and spatially local because the oscillator equation at $x$ uses only the field and oscillator state at that same $x$. The magnetic law has only the constant scalar coefficient $\\mu$ and no independent magnetic polarization variable; this is the nonmagnetic oscillator model adopted here.\n\nThe word nonmagnetic here means that the oscillator sector has no dynamic magnetic response; the fixed scalar coefficient $\\mu$ can still encode a separate static constitutive response. To identify the displayed quantities with the framework's macroscopic definitions, stipulate $P_{\\mathrm{tot}}=(\\varepsilon_\\infty-\\varepsilon_0)E+\\sum_{\\ell=1}^N P_\\ell$ and $M_{\\mathrm{tot}}=(\\mu_0^{-1}-\\mu^{-1})B$. Then $D=\\varepsilon_0E+P_{\\mathrm{tot}}=\\varepsilon_\\infty E+\\sum P_\\ell$ and $H=\\mu_0^{-1}B-M_{\\mathrm{tot}}=\\mu^{-1}B$. This is a constitutive identification in the model, not a microscopic decomposition.\n\nAt an initial time $t_0\\in I$, the oscillator state consists of $P_\\ell(x,t_0)$ and $\\partial_tP_\\ell(x,t_0)$. For a selected causal zero-past branch, choose an onset $\\tau\\in I$ and require $E(x,t)=0$ and $P_\\ell(x,t)=\\partial_tP_\\ell(x,t)=0$ for every $t\\in I$ with $t\\le\\tau$. Continuity gives $E(x,\\tau)=0$, and the equation gives $\\partial_t^2P_\\ell(x,\\tau)=0$, consistent with the $C^2$ zero extension through onset. For $t\\ge\\tau$ this branch is the retarded initial-value equation with those data, so its value at time $t$ uses the applied field only on $[\\tau,t]$. If $\\gamma_\\ell=0$, no decaying stationary impulse response is assumed; in particular, this is not an absolutely integrable convolution for arbitrary bounded histories. This postulate does not assert that any actual material realizes the equations.",
+          "historical_source_interface": {
+            "source_section": "Postulate",
+            "exact_statement": "Work in a material rest frame: an inertial frame in whose coordinates each modelled material element has fixed spatial position $x$ and history $t\\mapsto(ct,x)$, as defined by the framework's earlier material-closure formulation. Let $\\Omega\\subseteq\\mathbb R^3$ be the material region in that frame and $I\\subseteq\\mathbb R$ a nonempty open time interval. The electric field $E:\\Omega\\times I\\to\\mathbb R^3$, polarization fields $P_\\ell:\\Omega\\times I\\to\\mathbb R^3$, and magnetic fields $B,H:\\Omega\\times I\\to\\mathbb R^3$ are real spatial-vector fields in that frame. In SI, $E$ is in V m$^{-1}$, $P_\\ell$ in C m$^{-2}$, $B$ in T and $H$ in A m$^{-1}$.\n\nFor a fixed finite integer $N\\ge1$, adopt at every material point $x$ the constitutive equations\n\n$$D(x,t)=\\varepsilon_\\infty E(x,t)+\\sum_{\\ell=1}^{N}P_\\ell(x,t),\\qquad B(x,t)=\\mu H(x,t),$$\n\n$$\\partial_t^2P_\\ell(x,t)+\\gamma_\\ell\\partial_tP_\\ell(x,t)+\\omega_\\ell^2P_\\ell(x,t)=a_\\ell E(x,t)\\qquad (1\\le\\ell\\le N).$$\n\nHere $\\varepsilon_\\infty>0$ is a constant scalar with units F m$^{-1}$, $\\mu>0$ is a constant scalar with units H m$^{-1}$, $a_\\ell>0$ are constant parameters with units F m$^{-1}$ s$^{-2}$, $\\omega_\\ell>0$ are constant angular frequencies with units s$^{-1}$, and $\\gamma_\\ell\\ge0$ are constant damping rates with units s$^{-1}$. The parameters are independent of position and time; this is the meaning of homogeneous in this model. The model is linear because all displayed field and oscillator relations are linear with fixed coefficients, and spatially local because the oscillator equation at $x$ uses only the field and oscillator state at that same $x$. The magnetic law has only the constant scalar coefficient $\\mu$ and no independent magnetic polarization variable; this is the nonmagnetic oscillator model adopted here.\n\nThe word nonmagnetic here means that the oscillator sector has no dynamic magnetic response; the fixed scalar coefficient $\\mu$ can still encode a separate static constitutive response. To identify the displayed quantities with the framework's macroscopic definitions, stipulate $P_{\\mathrm{tot}}=(\\varepsilon_\\infty-\\varepsilon_0)E+\\sum_{\\ell=1}^N P_\\ell$ and $M_{\\mathrm{tot}}=(\\mu_0^{-1}-\\mu^{-1})B$. Then $D=\\varepsilon_0E+P_{\\mathrm{tot}}=\\varepsilon_\\infty E+\\sum P_\\ell$ and $H=\\mu_0^{-1}B-M_{\\mathrm{tot}}=\\mu^{-1}B$. This is a constitutive identification in the model, not a microscopic decomposition.\n\nThe oscillator state at a time $t_0\\in I$ includes both $P_\\ell(x,t_0)$ and $\\partial_tP_\\ell(x,t_0)$. For a causal zero-past response, the oscillator state vanishes before the declared onset of the applied field and the solution at $t$ depends only on that past field history. If $\\gamma_\\ell=0$, no decaying stationary impulse response is assumed; the zero-past branch is the retarded solution of the initial-value equation, not an absolutely integrable convolution for arbitrary bounded histories. This postulate does not assert that any actual material realizes the equations.\n\n",
+            "status": "Draft supplier with current hash-valid Step 1 decision ready; complete current statement and proof inspected and matched. This is not independent proof approval."
+          },
+          "supplier_proof_status": "draft; this exact-quote refresh does not grant independent proof acceptance"
+        },
+        {
+          "supplier": "pthm-em-macroscopic-maxwell",
+          "carrier": "items/pthm-em-macroscopic-maxwell.md",
+          "status": "Published supplier; exact current statement/definition section inspected and matched to the use.",
+          "source_section": "Statement",
+          "exact_statement": "Assume the smooth branch of the vacuum Maxwell postulate [[post-em-vacuum-maxwell]] on the laboratory region $U\\cong I\\times\\Omega$ of [[def-em-lab-geometry]]: fields $E,B:\\Omega\\times I\\to\\mathbb R^3$ jointly of class $C^1$ with the additional derivatives required by each equation existing and continuous, and continuous source densities $\\rho,J$ of [[def-em-sources]]. Let $P,M$ and the derived objects $\\rho_b,J_b,\\rho_f,J_f,D,H$ be those of [[def-em-polarization-magnetization]], with $P,M$ of class $C^2$, and use the operators of [[def-divergence-and-curl-of-a-c1-vector-field]] and [[def-directional-and-partial-derivatives]]. Then:\n\n**(a) [Bound-source conservation]** $\\partial_t\\rho_b+\\operatorname{div}J_b=0$ on $\\Omega\\times I$. Assume $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]) for the regular-distribution and classical-compatibility interfaces below. Identify continuous sources with their regular distributions using [[def-regular-distribution-from-a-locally-integrable-function]] and [[thm-locally-integrable-functions-embed-in-distributions]]. Then\n\n$$\\partial_t\\rho_f+\\operatorname{div}J_f=\\partial_t\\rho+\\operatorname{div}J$$\n\nas distributions on $U$, with derivatives as in [[def-distributional-derivative]]: the free pair is distributionally conserved exactly when the total pair is. Under the adopted four vacuum equations both sides are zero distributions, by [[thm-distributional-differentiation-is-continuous-and-commutes]]. These statements do not require classical derivatives of $\\rho,J$. Where the partial derivatives $\\partial_t\\rho$ and $\\partial_{x_i}J_i$ exist, the same identity holds pointwise by differentiating the free/bound decomposition; in particular, if these derivatives are continuous on $U$, both pairs satisfy the classical pointwise continuity equation. The bound-source conservation equation remains classical and uses only $P,M\\in C^2$.\n\n**(b) [Macroscopic equations]** On $\\Omega\\times I$,\n\n$$\\operatorname{div}D=\\rho_f,\\qquad \\operatorname{div}B=0,\\qquad \\operatorname{curl}E=-\\partial_tB,\\qquad \\operatorname{curl}H=J_f+\\partial_tD.$$\n\n**(c) [Interpretation and scope]** Equations (b) are an exact rewriting of the adopted vacuum equations under the decomposition of [[def-em-polarization-magnetization]]: the two equations written in $E$ and $B$ are unchanged, and the $D$ and $H$ equations hold for every $C^2$ pair $(P,M)$, independently of any constitutive law. The classical bound identity of (a) uses the exchange of $\\partial_t$ with $\\operatorname{div}$ for $C^2$ data; the free/total identity is distributional in the stated continuous-source class, with its classical interpretation only under the additional derivatives stated in (a). The distributional conservation conclusion embeds the adopted smooth solution only; no macroscopic field-equation claim is made for the weak branch of the Maxwell postulate, for singular or sheet sources or for discontinuous $(P,M)$; no constitutive relation and no empirical statement is made.\n\n"
+        },
+        {
+          "supplier": "thm-algebra-of-derivatives",
+          "carrier": "items/thm-algebra-of-derivatives.md",
+          "status": "Published supplier; exact current statement/definition section inspected and matched to the use.",
+          "source_section": "Statement",
+          "exact_statement": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$\n(Limit point, isolated point, adherent point, derived set, and dense subset of $\\mathbb{R}$), let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$\n(The derivative $f'(c) = \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c}$ of $f : A \\to \\mathbb{R}$ at a point $c \\in A$ that is a limit point of $A$, and differentiability on a set) and let $\\alpha \\in \\mathbb{R}$. Then:\n\n1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$;\n2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;\n3. $fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and is a limit point of $A_0$, the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is differentiable\n   at $c$ as a function on $A_0$, and\n   $$\\bigl((f/g)|_{A_0}\\bigr)'(c) \\;=\\; \\frac{f'(c)\\,g(c) - f(c)\\,g'(c)}{g(c)^{2}} .$$\n\nEach claim asserts two things: that the derivative on the left exists, and that\nit has the stated value. Both are proved.\n\n**Why claim 4 is stated on $A_0$.** The function $f/g$ is not defined where $g$\nvanishes, and $g$ may vanish at points of $A$ far from $c$; restricting to $A_0$\nis forced. That the restriction still has $c$ as a limit point, so that a\nderivative there means anything at all, is not free either, and it is the last\nclaim of If $\\lim_{x \\to c} f(x) = L \\ne 0$ then $|f| > |L|/2$ on a punctured neighbourhood of $c$; in particular if $L > 0$ then $f > L/2 > 0$ there applied to $g$. The hypothesis\nis $g(c) \\ne 0$, not \"$g$ vanishes nowhere\".\n\n**Everything is proved through\nCarathéodory's characterisation: $f$ is differentiable at $c$ if and only if there is $\\varphi : A \\to \\mathbb{R}$, continuous at $c$, with $f(x) - f(c) = \\varphi(x)(x - c)$ for every $x \\in A$, and then $\\varphi$ is unique and $\\varphi(c) = f'(c)$.** No difference quotient is estimated and\nno limit theorem beyond continuity is used, so no choice principle is spent.\nThe four identities are four algebraic rearrangements of an increment, each\nfollowed by a reading of Sums, scalar multiples, products, absolute values, maxima, minima and quotients with nonvanishing denominator of continuous functions are continuous, as are constants, the identity and every polynomial function.\n\n"
+        },
+        {
+          "supplier": "thm-divergence-theorem-for-bounded-c-one-euclidean-domains",
+          "carrier": "items/thm-divergence-theorem-for-bounded-c-one-euclidean-domains.md",
+          "status": "Published supplier; exact current statement/definition section inspected and matched to the use.",
+          "source_section": "Statement",
+          "exact_statement": "Assume $\\mathrm{AC}_\\omega$. For $n\\ge2$, a bounded $C^1$ domain Omega and $F\\in C^1(\\overline\\Omega;\\mathbb R^n)$, $\\int_\\Omega\\operatorname{div}F\\,dx=\\int_{\\partial\\Omega}F\\cdot\\nu\\,dS$. Both integrals are finite, with the continuous interior derivative convention and the outward normal on every boundary component.\n\n"
+        },
+        {
+          "supplier": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "carrier": "items/thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces.md",
+          "status": "Published supplier; exact current statement/definition section inspected and matched to the use.",
+          "source_section": "Statement",
+          "exact_statement": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to \\mathbb C$ belong to\n$L^1(\\mu \\times \\nu)$. Then:\n\n1. for $\\mu$-almost every $x$, the section $f_x$ belongs to $L^1(\\nu)$;\n2. for $\\nu$-almost every $y$, the section $f^y$ belongs to $L^1(\\mu)$;\n3. after assigning the value $0$ on the exceptional parameter sets, the\n   section-integral functions are integrable; and\n4. the three integrals agree:\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$\n\n"
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-15-step1-author",
+        "notes": "The local proof derives the power balance only for the stated homogeneous Lorentz oscillator or Drude closures, smooth periodic fields, zero free-current work, passive walls, and counted unlisted output. It does not generalize to arbitrary passive dispersive laws."
+      }
+    },
+    "pthm-emx-scattering-reciprocity": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.\n\n",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-emx-port-scattering-model",
+          "source_section": "Definition",
+          "quote": "Fix a real angular frequency $\\omega>0$ in $\\mathrm{s^{-1}}$ and use the $e^{-i\\omega t}$ convention and SI field units of the fixed-frequency reciprocal-phasor model. Let $\\Omega\\subset\\mathbb R^3$ be a bounded device region with $C^1$ boundary in one stationary material-rest frame. Its continuous phasor coefficient maps are $\\varepsilon,\\mu:\\overline\\Omega\\to\\mathbb C^{3\\times3}$ in $\\mathrm{F\\,m^{-1}}$ and $\\mathrm{H\\,m^{-1}}$, respectively. The complex phasor fields $\\widetilde E,\\widetilde H\\in C^1(\\overline\\Omega;\\mathbb C^3)$ have units $\\mathrm{V\\,m^{-1}}$ and $\\mathrm{A\\,m^{-1}}$. They satisfy the fixed-frequency Maxwell equations of the reciprocal-phasor data class, with no impressed volume current or charge in $\\Omega$. The corresponding real fields are $E(x,t)=\\operatorname{Re}(\\widetilde E(x)e^{-i\\omega t})$ and $H(x,t)=\\operatorname{Re}(\\widetilde H(x)e^{-i\\omega t})$, with period $T=2\\pi/\\omega$. Assume $\\mathrm{AC}_\\omega$ as defined by the countable-choice axiom when the reciprocal boundary identity below is used.\n\nAn **admissible port** consists of a bounded connected $C^1$ cross-section $\\Sigma_j$ in a plane perpendicular to a fixed unit guide axis $\\widehat z_j$, together with a uniform lossless straight reference guide extending from that section. The outward normal $n_j$ on the port points from $\\Omega$ into the guide. The reference-guide phasor coefficients and wall conditions are independent of distance along $\\widehat z_j$. A propagating channel mode is a pair of $C^1$ complex transverse profiles $(e_{j\\alpha},h_{j\\alpha})$ whose associated source-free phasor fields in the guide solve the fixed-frequency Maxwell equations and have longitudinal factor $e^{\\pm i\\beta_\\alpha s_j}$ with real $\\beta_\\alpha>0$ in $\\mathrm{m^{-1}}$. The profiles are normalized per unit amplitude in $\\mathrm{W^{1/2}}$, so the resulting fields have units $\\mathrm{V\\,m^{-1}}$ and $\\mathrm{A\\,m^{-1}}$. The plus and minus signs are assigned according to whether energy travels toward or away from $\\Omega$. At $\\omega$, assume a finite list of $N$ propagating mode channels in total and that this list is complete for the propagating channels represented by the finite interface. Any outgoing radiation continuum or omitted propagating channel is separately recorded as nonnegative outward power $P_{\\mathrm{other}}$. Evanescent modes may be required in the exact near-port matching field, but are not entries of the propagating amplitude vectors; no finite truncation of such matching modes is asserted to be exact.\n\nLet $a=(a_1,\\ldots,a_N)^T\\in\\mathbb C^N$ and $b=(b_1,\\ldots,b_N)^T\\in\\mathbb C^N$ be the incoming and outgoing amplitudes. Choose the mode shapes and amplitude convention so that each coefficient has units $\\mathrm{W^{1/2}}$, the Hermitian norm is $\\|a\\|_2^2=\\sum_{\\alpha=1}^N|a_\\alpha|^2$ in W, and the total time-averaged outward power through the port sections is\n\n$$P_{\\mathrm{ports}}=\\|b\\|_2^2-\\|a\\|_2^2.$$\n\nThis equality, including the vanishing of cross terms in the real-power pairing, is a port-mode normalization hypothesis. For complex phasor fields the time-averaged Poynting vector is $\\boldsymbol\\Pi=\\tfrac12\\operatorname{Re}(\\widetilde E\\times\\widetilde H^*)$ in $\\mathrm{W\\,m^{-2}}$, where $*$ denotes componentwise conjugation before the bilinear cross product. This Hermitian power pairing is distinct from the unconjugated Lorentz bilinear pairing.\n\nOn the non-port wall $\\Gamma_w$, the model prescribes either a smooth PEC condition $E_\\tau(t)=0$, giving zero outward wall power, or a passive wall condition with explicitly specified nonnegative cycle-averaged outward power $P_\\partial\\ge0$. Here $E_\\tau(t)=E(t)-(n\\cdot E(t))n$ and $H_\\tau(t)=H(t)-(n\\cdot H(t))n$ are the classical tangential restrictions of the smooth real fields. A smooth impedance wall is one such condition: for a real scalar surface admittance $Y\\ge0$ in siemens and $H_\\tau(t)=Y(n\\times E_\\tau(t))$, its instantaneous outward power density is $n\\cdot(E_\\tau(t)\\times H_\\tau(t))=Y|E_\\tau(t)|^2\\ge0$, so its cycle-averaged outward power is nonnegative. For phasor amplitude $\\widetilde E_\\tau$, that average is $\\tfrac12Y|\\widetilde E_\\tau|^2$. This is a smooth-field model assumption; no $L^2$ trace is inferred from membership in $H(\\operatorname{curl})$.\n\nThe total cycle-averaged outward boundary power is the port contribution $\\|b\\|_2^2-\\|a\\|_2^2$, plus $P_\\partial$ and any unlisted outgoing power $P_{\\mathrm{other}}$. No unlisted incoming power is included.\n\nFor each $a$, assume the adopted linear source-free Maxwell boundary problem has a unique time-harmonic solution and a unique outgoing vector $b$. The model assumes no incoming wave in unlisted channels. By linearity of the phasor equations and uniqueness, the map $a\\mapsto b$ is complex-linear: a linear combination of two solutions solves the problem for the same linear combination of their incoming data, and uniqueness identifies its outgoing data. The **finite scattering matrix** is the unique matrix $S(\\omega)\\in\\mathbb C^{N\\times N}$ such that $b=S(\\omega)a$. The definition assumes this well-posed solution map; it does not prove its existence, uniqueness, modal completeness, or absence of resonances.\n\nFor reciprocal use, the incoming and outgoing modal phases are additionally chosen so that for every pair of source-free solutions with incoming vectors $a_1,a_2$ and outgoing vectors $b_1,b_2$, the Lorentz boundary pairing reduces to\n\n$$\\int_{\\partial\\Omega}n\\cdot(\\widetilde E_1\\times\\widetilde H_2-\\widetilde E_2\\times\\widetilde H_1)\\,dS=a_1^Tb_2-b_1^Ta_2.$$\n\nThis is an explicit reciprocal-normalization condition, using the complex-bilinear products of the reciprocal-phasor model and the bounded-$C^1$ reciprocity identity of the Lorentz reciprocity theorem. Power normalization alone does not imply this bilinear pairing for arbitrary complex reference impedances. Rephasing a port is allowed only when the declared reciprocal pairing is preserved.\n\n",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "pthm-emx-lorentz-reciprocity",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. Let $\\Omega\\subset\\mathbb R^3$ be a bounded domain with $C^1$ boundary and outward unit normal $n$. Fix a real angular frequency $\\omega$ in $\\mathrm{s^{-1}}$. Let $E_j,H_j\\in C^1(\\overline\\Omega;\\mathbb C^3)$ and $J_j\\in C^0(\\overline\\Omega;\\mathbb C^3)$, for $j=1,2$, be phasor fields and electric-current densities in $\\mathrm{V\\,m^{-1}}$, $\\mathrm{A\\,m^{-1}}$, and $\\mathrm{A\\,m^{-2}}$, respectively. Suppose both pairs solve the fixed-frequency Maxwell equations there with the same continuous coefficient maps $\\varepsilon,\\mu:\\overline\\Omega\\to\\mathbb C^{3\\times3}$ and $\\varepsilon(x)^T=\\varepsilon(x)$, $\\mu(x)^T=\\mu(x)$ at every $x$. Use Euclidean volume measure $dV$ and boundary area measure $dS$. Then\n\n$$\\int_{\\partial\\Omega}n\\cdot(E_1\\times H_2-E_2\\times H_1)\\,dS=\\int_\\Omega(E_2\\cdot J_1-E_1\\cdot J_2)\\,dV.$$\n\nThe dot and cross products in this identity are the complex-bilinear products defined in the reciprocal phasor model; no complex conjugation occurs. Both integrals have units W. In particular, the real symmetric positive permittivity tensor and positive scalar permeability of the lossless anisotropic plane-wave model satisfy these reciprocal-coefficient hypotheses, so the identity applies to any two such phasor solutions restricted to a bounded $C^1$ subdomain.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "pthm-emx-scattering-contraction",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. Fix the finite port model at a real angular frequency $\\omega>0$, period $T=2\\pi/\\omega$, incoming amplitude $a\\in\\mathbb C^N$, and unique outgoing amplitude $b=S(\\omega)a$. Here $\\Omega$ is the bounded $C^1$ device region in that port model. The real fields $E,H,D,B:\\overline\\Omega\\times\\mathbb R\\to\\mathbb R^3$ and the material states are jointly $C^\\infty$ and $T$-periodic, satisfy the smooth source-free macroscopic Maxwell equations, and have free charge and current $\\rho_f=0$ and $J_f=0$. Their units are respectively $\\mathrm{V\\,m^{-1}}$, $\\mathrm{A\\,m^{-1}}$, $\\mathrm{C\\,m^{-2}}$, and $\\mathrm T$. Use one of the following two homogeneous material branches with constant coefficients.\n\nFor real vectors $v,w\\in\\mathbb R^3$, the Euclidean product is $v\\cdot w:=\\sum_{r=1}^3v_rw_r$ and $|v|^2:=v\\cdot v$.\n\nThe port model uses incoming and outgoing vectors $a,b\\in\\mathbb C^N$ with amplitude units $\\mathrm{W^{1/2}}$; for either vector $z$, $\\|z\\|_2^2:=\\sum_{\\alpha=1}^N|z_\\alpha|^2$ is its power in W, and the net outward port power is $\\|b\\|_2^2-\\|a\\|_2^2$.\n\n**Finite Lorentz branch.** For a finite $M\\ge1$, each $P_\\ell:\\overline\\Omega\\times\\mathbb R\\to\\mathbb R^3$ has units $\\mathrm{C\\,m^{-2}}$, $D=\\varepsilon_\\infty E+\\sum_{\\ell=1}^M P_\\ell$, $B=\\mu H$, and $\\partial_t^2P_\\ell+\\gamma_\\ell\\partial_tP_\\ell+\\omega_\\ell^2P_\\ell=a_\\ell E$, where $\\varepsilon_\\infty,\\mu,a_\\ell,\\omega_\\ell>0$ and $\\gamma_\\ell\\ge0$.\n\n**Drude branch.** $P,V:\\overline\\Omega\\times\\mathbb R\\to\\mathbb R^3$ have units $\\mathrm{C\\,m^{-2}}$ and $\\mathrm{A\\,m^{-2}}$, respectively; $D=\\varepsilon_\\infty E+P$, $B=\\mu H$, $\\partial_tP=V$, and $\\partial_tV+\\gamma V=aE$, where $\\varepsilon_\\infty,\\mu,a>0$ and $\\gamma\\ge0$.\n\nThe constants have the SI units of the respective adopted closure: $\\varepsilon_\\infty$ in $\\mathrm{F\\,m^{-1}}$, $\\mu$ in $\\mathrm{H\\,m^{-1}}$, each $a_\\ell$ or $a$ in $\\mathrm{F\\,m^{-1}\\,s^{-2}}$, and each $\\omega_\\ell$ or damping rate in $\\mathrm{s^{-1}}$. In the Lorentz branch define the loss-density map $\\ell:\\overline\\Omega\\times\\mathbb R\\to[0,\\infty)$ by $\\ell=\\sum_{\\ell=1}^M(\\gamma_\\ell/a_\\ell)|\\partial_tP_\\ell|^2$; in the Drude branch define it by $\\ell=(\\gamma/a)|V|^2$. These have units $\\mathrm{W\\,m^{-3}}$. For the solution with the fixed input $a$, set $P_{\\mathrm{mat}}(a):=T^{-1}\\int_0^T\\int_\\Omega\\ell\\,dV\\,dt$. Let $P_\\partial(a)\\ge0$ be its cycle-averaged outward power at passive physical walls, and let $P_{\\mathrm{other}}(a)\\ge0$ be all its outgoing radiation or propagating-channel power not represented in $b$, as defined by the port model. For brevity, in the proof write these three quantities as $P_{\\mathrm{mat}}$, $P_\\partial$, and $P_{\\mathrm{other}}$. Then\n\n$$\\|a\\|_2^2-\\|S(\\omega)a\\|_2^2=P_{\\mathrm{mat}}(a)+P_\\partial(a)+P_{\\mathrm{other}}(a)\\ge0.$$\n\nFor complex vectors and matrices, an overline denotes componentwise complex conjugation and a superscript ${}^{\\mathsf T}$ denotes ordinary transpose; set $z^\\dagger:=\\overline z^{\\,\\mathsf T}$ for $z\\in\\mathbb C^N$ and $A^\\dagger:=\\overline A^{\\,\\mathsf T}$ for $A\\in\\mathbb C^{N\\times N}$. A matrix is **Hermitian** when $A^\\dagger=A$, and is **unitary** when $A^\\dagger A=AA^\\dagger=I_N$, where $I_N$ is the identity matrix on $\\mathbb C^N$.\n\nConsequently $S(\\omega)$ is contractive: $\\|Sa\\|_2\\le\\|a\\|_2$ for every $a$. If $P_{\\mathrm{mat}}(a)=P_\\partial(a)=P_{\\mathrm{other}}(a)=0$ for every incoming vector $a$, then $S^\\dagger S=I_N$; because the defined map is square, $S$ is unitary. The exact equality and unitarity are conditional deductions of this model, not existence claims about arbitrary scatterers.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-the-divergence-and-curl-of-a-cross-product",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb R^3$ be open and let $F,G:U\\to\\mathbb R^3$ be $C^1$. Then $F\\times G$ is $C^1$ on $U$ and\n\n$$\\operatorname{div}(F\\times G)=\\langle\\operatorname{curl}F,G\\rangle-\\langle F,\\operatorname{curl}G\\rangle,$$\n\n$$\\operatorname{curl}(F\\times G)=(\\operatorname{div}G)F-(\\operatorname{div}F)G+DF\\,G-DG\\,F.$$\n\nHere $DF\\,G$ denotes the map $U\\to\\mathbb R^3$ whose $i$th coordinate at $p$ is $\\sum_{j<3}\\partial_jF_i(p)\\,G_j(p)$, that is, the Jacobian matrix of $F$ at $p$ applied to the vector $G(p)$, and $DG\\,F$ is defined the same way with the roles of $F$ and $G$ exchanged. The operators are those of [[def-divergence-and-curl-of-a-c1-vector-field]], the cross product is that of [[def-cross-product-in-r3]], the inner product that of [[def-euclidean-inner-product]] and the Jacobian matrix that of [[def-jacobian-matrix-and-gradient]].",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-divergence-theorem-for-bounded-c-one-euclidean-domains",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. For $n\\ge2$, a bounded $C^1$ domain Omega and $F\\in C^1(\\overline\\Omega;\\mathbb R^n)$, $\\int_\\Omega\\operatorname{div}F\\,dx=\\int_{\\partial\\Omega}F\\cdot\\nu\\,dS$. Both integrals are finite, with the continuous interior derivative convention and the outward normal on every boundary component.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Choose arbitrary $a_1,a_2\\in\\mathbb C^N$, and let $(\\widetilde E_j,\\widetilde H_j)$ be their unique source-free scattering solutions. The coefficient transpose equalities and the hypotheses in [L1] imply $\\int_{\\partial\\Omega}n\\cdot(\\widetilde E_1\\times\\widetilde H_2-\\widetilde E_2\\times\\widetilde H_1)\\,dS=0$.",
+          "inputs": [
+            "given",
+            "A1",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "For any input $a$, abbreviate its phasors by $e=\\widetilde E$ and $h=\\widetilde H$. The source-free equations are $\\operatorname{curl}e=i\\omega\\mu h$ and $\\operatorname{curl}h=-i\\omega\\varepsilon e$. Expanding [F2] into real and imaginary parts and then substituting these equations gives $\\operatorname{div}(e\\times\\overline h)=i\\omega\\big(h^\\dagger\\mu h-\\overline{e^\\dagger\\varepsilon e}\\big)$. Therefore the real $C^1$ field $\\boldsymbol\\Pi=\\tfrac12\\operatorname{Re}(e\\times\\overline h)$ satisfies $\\operatorname{div}\\boldsymbol\\Pi=-\\tfrac\\omega2\\operatorname{Im}(h^\\dagger\\mu h+e^\\dagger\\varepsilon e)$. The bounded $C^1$ domain and field regularity required by [F3] are precisely those in the port model. Its finite-integral conclusion applies to this identity and yields $\\int_{\\partial\\Omega}n\\cdot\\boldsymbol\\Pi\\,dS=-P_{\\mathrm{bulk}}(a)$. Substituting the model's outward-power convention proves $\\|a\\|_2^2-\\|Sa\\|_2^2=P_{\\mathrm{bulk}}(a)+P_\\partial(a)+P_{\\mathrm{other}}(a)$, with no unlisted incoming term.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Substitute [F1] and $b_j=Sa_j$ into step 1.1. Since $(Sa_1)^T=a_1^TS^T$, the result is $a_1^T(S-S^T)a_2=0$ for every $a_1,a_2\\in\\mathbb C^N$.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "For any coordinate vectors $e_j,e_k$, step 2.1 gives $e_j^T(S-S^T)e_k=S_{jk}-S_{kj}=0$. This holds for every pair $j,k$, hence every entry of $S-S^T$ is zero and $S^T=S$. No complex conjugation is introduced.",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "If these three powers vanish for every $a$, step 1.2 gives $a^\\dagger Q a=0$ for every $a$, where $Q=I_N-S^\\dagger S$ is Hermitian. Taking $a=e_j$ gives $Q_{jj}=0$. For $j\\ne k$, taking $a=e_j+e_k$ and $a=e_j+i e_k$ gives respectively $2\\operatorname{Re}Q_{jk}=0$ and $-2\\operatorname{Im}Q_{jk}=0$, so $Q=0$. Thus $S^\\dagger S=I_N$. Its $N$ columns are orthonormal and hence linearly independent; in the $N$-dimensional space they form a basis. For $x=Sy$ this gives $SS^\\dagger x=SS^\\dagger Sy=Sy=x$, so also $SS^\\dagger=I_N$. Combining with step 3.1 proves the symmetric-unitary conclusion. For Hermitian coefficients, $\\overline{e^\\dagger\\varepsilon e}=e^\\dagger\\varepsilon^\\dagger e=e^\\dagger\\varepsilon e$ and likewise for $h$, so their imaginary parts and $P_{\\mathrm{bulk}}$ vanish. No time-reversal conclusion is used.",
+          "inputs": [
+            "given",
+            "step 3.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "step": "5.1",
+          "claim": "In the stated Lorentz sufficient case, set $d_j=\\omega_j^2-\\omega^2-i\\gamma_j\\omega\\ne0$; the harmonic closure gives $\\widetilde P_j=a_j e/d_j$. Hence $\\operatorname{Im}(e^\\dagger\\varepsilon_{\\mathrm L}e)=\\sum_j a_j\\gamma_j\\omega |e|^2/|d_j|^2$, while the magnetic quadratic form is real. Direct averaging of the real sinusoid gives $T^{-1}\\int_0^T|\\partial_t P_j|^2dt=\\omega^2|\\widetilde P_j|^2/2$. Thus its loss density average equals $\\tfrac\\omega2\\operatorname{Im}(e^\\dagger\\varepsilon_{\\mathrm L}e)$. For the Drude case, $\\widetilde V=a e/(\\gamma-i\\omega)$ gives $T^{-1}\\int_0^T|V|^2dt=a^2|e|^2/[2(\\gamma^2+\\omega^2)]$, and $\\operatorname{Im}(e^\\dagger\\varepsilon_{\\mathrm D}e)=a\\gamma |e|^2/[\\omega(\\gamma^2+\\omega^2)]$. Multiplication by $\\gamma/a$ gives the same equality with $\\omega/2$ times this imaginary part. The formulas remain valid at zero damping, and the Lorentz nonzero-denominator condition is retained. Integrating in space proves $P_{\\mathrm{mat}}=P_{\\mathrm{bulk}}$ in both branches. Their stipulated smooth periodic fields make these finite integrals legitimate, as also assured by their contraction power balance. Consequently their all-input zero-loss case satisfies step 4.1, consistently with [L2].",
+          "inputs": [
+            "given",
+            "L2",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For N=0, S^T=S is the empty matrix identity; the coordinate test in step 3.1 has no entries to check."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The bilinear identity in step 2.1 holds when either incoming vector is zero, by linearity and the stated zero-source solution."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For N=1, every 1-by-1 matrix equals its transpose; steps 2.1–3.1 yield this scalar case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: no lossless or positive-loss assumption enters the symmetry proof; ordinary transpose symmetry of the coefficients suffices even with damping."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The theorem is stated at fixed omega>0; no zero-frequency endpoint claim is made."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof selects two arbitrary given inputs, not an element from a family; AC_omega is inherited as a premise."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem asserts a direct symmetry implication, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem asserts no converse from a symmetric matrix to reciprocal coefficients."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "Two-channel coordinate test",
+          "status": "checked",
+          "evidence": "For N=2, step 3.1 with (j,k)=(1,2) gives S_12=S_21 and with (2,1) gives S_21=S_12; the diagonal tests are identities."
+        }
+      ],
+      "finite_checks_disposition": "The listed finite calculation checks a boundary case or concrete specialization; the numbered argument supplies the general conditional proof and is not replaced by the check.",
+      "supplier_excerpts": [
+        {
+          "supplier": "def-countable-choice",
+          "carrier": "items/def-countable-choice.md",
+          "status": "Published supplier; exact current statement/definition section inspected and matched to the use.",
+          "source_section": "Definition",
+          "exact_statement": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.\n\n"
+        },
+        {
+          "supplier": "def-emx-port-scattering-model",
+          "carrier": "items/def-emx-port-scattering-model.md",
+          "status": "Same-batch finished carrier text inspected directly; readiness is recorded after final scoped checks.",
+          "source_section": "Definition",
+          "exact_statement": "Fix a real angular frequency $\\omega>0$ in $\\mathrm{s^{-1}}$ and use the $e^{-i\\omega t}$ convention and SI field units of the fixed-frequency reciprocal-phasor model. Let $\\Omega\\subset\\mathbb R^3$ be a bounded device region with $C^1$ boundary in one stationary material-rest frame. Its continuous phasor coefficient maps are $\\varepsilon,\\mu:\\overline\\Omega\\to\\mathbb C^{3\\times3}$ in $\\mathrm{F\\,m^{-1}}$ and $\\mathrm{H\\,m^{-1}}$, respectively. The complex phasor fields $\\widetilde E,\\widetilde H\\in C^1(\\overline\\Omega;\\mathbb C^3)$ have units $\\mathrm{V\\,m^{-1}}$ and $\\mathrm{A\\,m^{-1}}$. They satisfy the fixed-frequency Maxwell equations of the reciprocal-phasor data class, with no impressed volume current or charge in $\\Omega$. The corresponding real fields are $E(x,t)=\\operatorname{Re}(\\widetilde E(x)e^{-i\\omega t})$ and $H(x,t)=\\operatorname{Re}(\\widetilde H(x)e^{-i\\omega t})$, with period $T=2\\pi/\\omega$. Assume $\\mathrm{AC}_\\omega$ as defined by the countable-choice axiom when the reciprocal boundary identity below is used.\n\nAn **admissible port** consists of a bounded connected $C^1$ cross-section $\\Sigma_j$ in a plane perpendicular to a fixed unit guide axis $\\widehat z_j$, together with a uniform lossless straight reference guide extending from that section. The outward normal $n_j$ on the port points from $\\Omega$ into the guide. The reference-guide phasor coefficients and wall conditions are independent of distance along $\\widehat z_j$. A propagating channel mode is a pair of $C^1$ complex transverse profiles $(e_{j\\alpha},h_{j\\alpha})$ whose associated source-free phasor fields in the guide solve the fixed-frequency Maxwell equations and have longitudinal factor $e^{\\pm i\\beta_\\alpha s_j}$ with real $\\beta_\\alpha>0$ in $\\mathrm{m^{-1}}$. The profiles are normalized per unit amplitude in $\\mathrm{W^{1/2}}$, so the resulting fields have units $\\mathrm{V\\,m^{-1}}$ and $\\mathrm{A\\,m^{-1}}$. The plus and minus signs are assigned according to whether energy travels toward or away from $\\Omega$. At $\\omega$, assume a finite list of $N$ propagating mode channels in total and that this list is complete for the propagating channels represented by the finite interface. Any outgoing radiation continuum or omitted propagating channel is separately recorded as nonnegative outward power $P_{\\mathrm{other}}$. Evanescent modes may be required in the exact near-port matching field, but are not entries of the propagating amplitude vectors; no finite truncation of such matching modes is asserted to be exact.\n\nLet $a=(a_1,\\ldots,a_N)^T\\in\\mathbb C^N$ and $b=(b_1,\\ldots,b_N)^T\\in\\mathbb C^N$ be the incoming and outgoing amplitudes. Choose the mode shapes and amplitude convention so that each coefficient has units $\\mathrm{W^{1/2}}$, the Hermitian norm is $\\|a\\|_2^2=\\sum_{\\alpha=1}^N|a_\\alpha|^2$ in W, and the total time-averaged outward power through the port sections is\n\n$$P_{\\mathrm{ports}}=\\|b\\|_2^2-\\|a\\|_2^2.$$\n\nThis equality, including the vanishing of cross terms in the real-power pairing, is a port-mode normalization hypothesis. For complex phasor fields the time-averaged Poynting vector is $\\boldsymbol\\Pi=\\tfrac12\\operatorname{Re}(\\widetilde E\\times\\widetilde H^*)$ in $\\mathrm{W\\,m^{-2}}$, where $*$ denotes componentwise conjugation before the bilinear cross product. This Hermitian power pairing is distinct from the unconjugated Lorentz bilinear pairing.\n\nOn the non-port wall $\\Gamma_w$, the model prescribes either a smooth PEC condition $E_\\tau(t)=0$, giving zero outward wall power, or a passive wall condition with explicitly specified nonnegative cycle-averaged outward power $P_\\partial\\ge0$. Here $E_\\tau(t)=E(t)-(n\\cdot E(t))n$ and $H_\\tau(t)=H(t)-(n\\cdot H(t))n$ are the classical tangential restrictions of the smooth real fields. A smooth impedance wall is one such condition: for a real scalar surface admittance $Y\\ge0$ in siemens and $H_\\tau(t)=Y(n\\times E_\\tau(t))$, its instantaneous outward power density is $n\\cdot(E_\\tau(t)\\times H_\\tau(t))=Y|E_\\tau(t)|^2\\ge0$, so its cycle-averaged outward power is nonnegative. For phasor amplitude $\\widetilde E_\\tau$, that average is $\\tfrac12Y|\\widetilde E_\\tau|^2$. This is a smooth-field model assumption; no $L^2$ trace is inferred from membership in $H(\\operatorname{curl})$.\n\nThe total cycle-averaged outward boundary power is the port contribution $\\|b\\|_2^2-\\|a\\|_2^2$, plus $P_\\partial$ and any unlisted outgoing power $P_{\\mathrm{other}}$. No unlisted incoming power is included.\n\nFor each $a$, assume the adopted linear source-free Maxwell boundary problem has a unique time-harmonic solution and a unique outgoing vector $b$. The model assumes no incoming wave in unlisted channels. By linearity of the phasor equations and uniqueness, the map $a\\mapsto b$ is complex-linear: a linear combination of two solutions solves the problem for the same linear combination of their incoming data, and uniqueness identifies its outgoing data. The **finite scattering matrix** is the unique matrix $S(\\omega)\\in\\mathbb C^{N\\times N}$ such that $b=S(\\omega)a$. The definition assumes this well-posed solution map; it does not prove its existence, uniqueness, modal completeness, or absence of resonances.\n\nFor reciprocal use, the incoming and outgoing modal phases are additionally chosen so that for every pair of source-free solutions with incoming vectors $a_1,a_2$ and outgoing vectors $b_1,b_2$, the Lorentz boundary pairing reduces to\n\n$$\\int_{\\partial\\Omega}n\\cdot(\\widetilde E_1\\times\\widetilde H_2-\\widetilde E_2\\times\\widetilde H_1)\\,dS=a_1^Tb_2-b_1^Ta_2.$$\n\nThis is an explicit reciprocal-normalization condition, using the complex-bilinear products of the reciprocal-phasor model and the bounded-$C^1$ reciprocity identity of the Lorentz reciprocity theorem. Power normalization alone does not imply this bilinear pairing for arbitrary complex reference impedances. Rephasing a port is allowed only when the declared reciprocal pairing is preserved.\n\n"
+        },
+        {
+          "supplier": "pthm-emx-lorentz-reciprocity",
+          "carrier": "items/pthm-emx-lorentz-reciprocity.md",
+          "status": "Draft supplier with current hash-valid Step 1 decision ready; complete current statement and proof inspected and matched. This is not independent proof approval.",
+          "source_section": "Statement",
+          "exact_statement": "Assume $\\mathrm{AC}_\\omega$. Let $\\Omega\\subset\\mathbb R^3$ be a bounded domain with $C^1$ boundary and outward unit normal $n$. Fix a real angular frequency $\\omega$ in $\\mathrm{s^{-1}}$. Let $E_j,H_j\\in C^1(\\overline\\Omega;\\mathbb C^3)$ and $J_j\\in C^0(\\overline\\Omega;\\mathbb C^3)$, for $j=1,2$, be phasor fields and electric-current densities in $\\mathrm{V\\,m^{-1}}$, $\\mathrm{A\\,m^{-1}}$, and $\\mathrm{A\\,m^{-2}}$, respectively. Suppose both pairs solve the fixed-frequency Maxwell equations there with the same continuous coefficient maps $\\varepsilon,\\mu:\\overline\\Omega\\to\\mathbb C^{3\\times3}$ and $\\varepsilon(x)^T=\\varepsilon(x)$, $\\mu(x)^T=\\mu(x)$ at every $x$. Use Euclidean volume measure $dV$ and boundary area measure $dS$. Then\n\n$$\\int_{\\partial\\Omega}n\\cdot(E_1\\times H_2-E_2\\times H_1)\\,dS=\\int_\\Omega(E_2\\cdot J_1-E_1\\cdot J_2)\\,dV.$$\n\nThe dot and cross products in this identity are the complex-bilinear products defined in the reciprocal phasor model; no complex conjugation occurs. Both integrals have units W. In particular, the real symmetric positive permittivity tensor and positive scalar permeability of the lossless anisotropic plane-wave model satisfy these reciprocal-coefficient hypotheses, so the identity applies to any two such phasor solutions restricted to a bounded $C^1$ subdomain.\n\n"
+        },
+        {
+          "supplier": "pthm-emx-scattering-contraction",
+          "carrier": "items/pthm-emx-scattering-contraction.md",
+          "status": "Exact current public interface transcribed by root at the drained Step2 join; original substantive source-use review retained in historical_source_interface and native/same-owner reports. No renewed full supplier-proof reading asserted.",
+          "source_section": "Statement",
+          "exact_statement": "Assume $\\mathrm{AC}_\\omega$. Fix the finite port model at a real angular frequency $\\omega>0$, period $T=2\\pi/\\omega$, incoming amplitude $a\\in\\mathbb C^N$, and unique outgoing amplitude $b=S(\\omega)a$. Here $\\Omega$ is the bounded $C^1$ device region in that port model. The real fields $E,H,D,B:\\overline\\Omega\\times\\mathbb R\\to\\mathbb R^3$ and the material states are jointly $C^\\infty$ and $T$-periodic, satisfy the smooth source-free macroscopic Maxwell equations, and have free charge and current $\\rho_f=0$ and $J_f=0$. Their units are respectively $\\mathrm{V\\,m^{-1}}$, $\\mathrm{A\\,m^{-1}}$, $\\mathrm{C\\,m^{-2}}$, and $\\mathrm T$. Use one of the following two homogeneous material branches with constant coefficients.\n\nFor real vectors $v,w\\in\\mathbb R^3$, the Euclidean product is $v\\cdot w:=\\sum_{r=1}^3v_rw_r$ and $|v|^2:=v\\cdot v$.\n\nThe port model uses incoming and outgoing vectors $a,b\\in\\mathbb C^N$ with amplitude units $\\mathrm{W^{1/2}}$; for either vector $z$, $\\|z\\|_2^2:=\\sum_{\\alpha=1}^N|z_\\alpha|^2$ is its power in W, and the net outward port power is $\\|b\\|_2^2-\\|a\\|_2^2$.\n\n**Finite Lorentz branch.** For a finite $M\\ge1$, each $P_\\ell:\\overline\\Omega\\times\\mathbb R\\to\\mathbb R^3$ has units $\\mathrm{C\\,m^{-2}}$, $D=\\varepsilon_\\infty E+\\sum_{\\ell=1}^M P_\\ell$, $B=\\mu H$, and $\\partial_t^2P_\\ell+\\gamma_\\ell\\partial_tP_\\ell+\\omega_\\ell^2P_\\ell=a_\\ell E$, where $\\varepsilon_\\infty,\\mu,a_\\ell,\\omega_\\ell>0$ and $\\gamma_\\ell\\ge0$.\n\n**Drude branch.** $P,V:\\overline\\Omega\\times\\mathbb R\\to\\mathbb R^3$ have units $\\mathrm{C\\,m^{-2}}$ and $\\mathrm{A\\,m^{-2}}$, respectively; $D=\\varepsilon_\\infty E+P$, $B=\\mu H$, $\\partial_tP=V$, and $\\partial_tV+\\gamma V=aE$, where $\\varepsilon_\\infty,\\mu,a>0$ and $\\gamma\\ge0$.\n\nThe constants have the SI units of the respective adopted closure: $\\varepsilon_\\infty$ in $\\mathrm{F\\,m^{-1}}$, $\\mu$ in $\\mathrm{H\\,m^{-1}}$, each $a_\\ell$ or $a$ in $\\mathrm{F\\,m^{-1}\\,s^{-2}}$, and each $\\omega_\\ell$ or damping rate in $\\mathrm{s^{-1}}$. In the Lorentz branch define the loss-density map $\\ell:\\overline\\Omega\\times\\mathbb R\\to[0,\\infty)$ by $\\ell=\\sum_{\\ell=1}^M(\\gamma_\\ell/a_\\ell)|\\partial_tP_\\ell|^2$; in the Drude branch define it by $\\ell=(\\gamma/a)|V|^2$. These have units $\\mathrm{W\\,m^{-3}}$. For the solution with the fixed input $a$, set $P_{\\mathrm{mat}}(a):=T^{-1}\\int_0^T\\int_\\Omega\\ell\\,dV\\,dt$. Let $P_\\partial(a)\\ge0$ be its cycle-averaged outward power at passive physical walls, and let $P_{\\mathrm{other}}(a)\\ge0$ be all its outgoing radiation or propagating-channel power not represented in $b$, as defined by the port model. For brevity, in the proof write these three quantities as $P_{\\mathrm{mat}}$, $P_\\partial$, and $P_{\\mathrm{other}}$. Then\n\n$$\\|a\\|_2^2-\\|S(\\omega)a\\|_2^2=P_{\\mathrm{mat}}(a)+P_\\partial(a)+P_{\\mathrm{other}}(a)\\ge0.$$\n\nFor complex vectors and matrices, an overline denotes componentwise complex conjugation and a superscript ${}^{\\mathsf T}$ denotes ordinary transpose; set $z^\\dagger:=\\overline z^{\\,\\mathsf T}$ for $z\\in\\mathbb C^N$ and $A^\\dagger:=\\overline A^{\\,\\mathsf T}$ for $A\\in\\mathbb C^{N\\times N}$. A matrix is **Hermitian** when $A^\\dagger=A$, and is **unitary** when $A^\\dagger A=AA^\\dagger=I_N$, where $I_N$ is the identity matrix on $\\mathbb C^N$.\n\nConsequently $S(\\omega)$ is contractive: $\\|Sa\\|_2\\le\\|a\\|_2$ for every $a$. If $P_{\\mathrm{mat}}(a)=P_\\partial(a)=P_{\\mathrm{other}}(a)=0$ for every incoming vector $a$, then $S^\\dagger S=I_N$; because the defined map is square, $S$ is unitary. The exact equality and unitarity are conditional deductions of this model, not existence claims about arbitrary scatterers.",
+          "historical_source_interface": {
+            "source_section": "Statement",
+            "exact_statement": "Assume $\\mathrm{AC}_\\omega$. Fix the finite port model at a real angular frequency $\\omega>0$, period $T=2\\pi/\\omega$, incoming amplitude $a\\in\\mathbb C^N$, and unique outgoing amplitude $b=S(\\omega)a$. Here $\\Omega$ is the bounded $C^1$ device region in that port model. The real fields $E,H,D,B:\\overline\\Omega\\times\\mathbb R\\to\\mathbb R^3$ and the material states are jointly $C^\\infty$ and $T$-periodic, satisfy the smooth source-free macroscopic Maxwell equations, and have free charge and current $\\rho_f=0$ and $J_f=0$. Their units are respectively $\\mathrm{V\\,m^{-1}}$, $\\mathrm{A\\,m^{-1}}$, $\\mathrm{C\\,m^{-2}}$, and $\\mathrm T$. Use one of the following two homogeneous material branches with constant coefficients.\n\n**Finite Lorentz branch.** For a finite $M\\ge1$, each $P_\\ell:\\overline\\Omega\\times\\mathbb R\\to\\mathbb R^3$ has units $\\mathrm{C\\,m^{-2}}$, $D=\\varepsilon_\\infty E+\\sum_{\\ell=1}^M P_\\ell$, $B=\\mu H$, and $\\partial_t^2P_\\ell+\\gamma_\\ell\\partial_tP_\\ell+\\omega_\\ell^2P_\\ell=a_\\ell E$, where $\\varepsilon_\\infty,\\mu,a_\\ell,\\omega_\\ell>0$ and $\\gamma_\\ell\\ge0$.\n\n**Drude branch.** $P,V:\\overline\\Omega\\times\\mathbb R\\to\\mathbb R^3$ have units $\\mathrm{C\\,m^{-2}}$ and $\\mathrm{A\\,m^{-2}}$, respectively; $D=\\varepsilon_\\infty E+P$, $B=\\mu H$, $\\partial_tP=V$, and $\\partial_tV+\\gamma V=aE$, where $\\varepsilon_\\infty,\\mu,a>0$ and $\\gamma\\ge0$.\n\nThe constants have the SI units of the respective adopted closure: $\\varepsilon_\\infty$ in $\\mathrm{F\\,m^{-1}}$, $\\mu$ in $\\mathrm{H\\,m^{-1}}$, each $a_\\ell$ or $a$ in $\\mathrm{F\\,m^{-1}\\,s^{-2}}$, and each $\\omega_\\ell$ or damping rate in $\\mathrm{s^{-1}}$. In the Lorentz branch define $\\ell=\\sum_{\\ell=1}^M(\\gamma_\\ell/a_\\ell)|\\partial_tP_\\ell|^2$; in the Drude branch define $\\ell=(\\gamma/a)|V|^2$. These are nonnegative loss densities in $\\mathrm{W\\,m^{-3}}$, and let $P_{\\mathrm{mat}}=T^{-1}\\int_0^T\\int_\\Omega\\ell\\,dV\\,dt$. Let $P_\\partial\\ge0$ be the cycle-averaged outward power of the passive physical walls, and let $P_{\\mathrm{other}}\\ge0$ be all outgoing radiation or propagating-channel power not represented in $b$, as defined by the port model. Then\n\n$$\\|a\\|_2^2-\\|S(\\omega)a\\|_2^2=P_{\\mathrm{mat}}+P_\\partial+P_{\\mathrm{other}}\\ge0.$$\n\nConsequently $S(\\omega)$ is contractive: $\\|Sa\\|_2\\le\\|a\\|_2$ for every $a$. If all material loss, wall loss, and unlisted outward power vanish for every incoming vector, then $S^\\dagger S=I_N$; because the defined map is square, $S$ is unitary. The exact equality and unitarity are conditional deductions of this model, not existence claims about arbitrary scatterers.\n\n",
+            "status": "Same-batch finished carrier text inspected directly; readiness is recorded after final scoped checks."
+          },
+          "supplier_proof_status": "draft; this exact-quote refresh does not grant independent proof acceptance"
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-15-step1-author",
+        "notes": "Matrix symmetry depends on the exact unconjugated reciprocal port pairing; power normalization alone is insufficient, especially for lossy reference guides. The proof does not assert time-reversal symmetry."
+      }
+    },
+    "ex-emx-single-port-lossless-reflection": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-emx-port-scattering-model",
+          "source_section": "Definition",
+          "quote": "Fix a real angular frequency $\\omega>0$ in $\\mathrm{s^{-1}}$ and use the $e^{-i\\omega t}$ convention and SI field units of the fixed-frequency reciprocal-phasor model. Let $\\Omega\\subset\\mathbb R^3$ be a bounded device region with $C^1$ boundary in one stationary material-rest frame. Its continuous phasor coefficient maps are $\\varepsilon,\\mu:\\overline\\Omega\\to\\mathbb C^{3\\times3}$ in $\\mathrm{F\\,m^{-1}}$ and $\\mathrm{H\\,m^{-1}}$, respectively. The complex phasor fields $\\widetilde E,\\widetilde H\\in C^1(\\overline\\Omega;\\mathbb C^3)$ have units $\\mathrm{V\\,m^{-1}}$ and $\\mathrm{A\\,m^{-1}}$. They satisfy the fixed-frequency Maxwell equations of the reciprocal-phasor data class, with no impressed volume current or charge in $\\Omega$. The corresponding real fields are $E(x,t)=\\operatorname{Re}(\\widetilde E(x)e^{-i\\omega t})$ and $H(x,t)=\\operatorname{Re}(\\widetilde H(x)e^{-i\\omega t})$, with period $T=2\\pi/\\omega$. Assume $\\mathrm{AC}_\\omega$ as defined by the countable-choice axiom when the reciprocal boundary identity below is used.\n\nAn **admissible port** consists of a bounded connected $C^1$ cross-section $\\Sigma_j$ in a plane perpendicular to a fixed unit guide axis $\\widehat z_j$, together with a uniform lossless straight reference guide extending from that section. The outward normal $n_j$ on the port points from $\\Omega$ into the guide. The reference-guide phasor coefficients and wall conditions are independent of distance along $\\widehat z_j$. A propagating channel mode is a pair of $C^1$ complex transverse profiles $(e_{j\\alpha},h_{j\\alpha})$ whose associated source-free phasor fields in the guide solve the fixed-frequency Maxwell equations and have longitudinal factor $e^{\\pm i\\beta_\\alpha s_j}$ with real $\\beta_\\alpha>0$ in $\\mathrm{m^{-1}}$. The profiles are normalized per unit amplitude in $\\mathrm{W^{1/2}}$, so the resulting fields have units $\\mathrm{V\\,m^{-1}}$ and $\\mathrm{A\\,m^{-1}}$. The plus and minus signs are assigned according to whether energy travels toward or away from $\\Omega$. At $\\omega$, assume a finite list of $N$ propagating mode channels in total and that this list is complete for the propagating channels represented by the finite interface. Any outgoing radiation continuum or omitted propagating channel is separately recorded as nonnegative outward power $P_{\\mathrm{other}}$. Evanescent modes may be required in the exact near-port matching field, but are not entries of the propagating amplitude vectors; no finite truncation of such matching modes is asserted to be exact.\n\nLet $a=(a_1,\\ldots,a_N)^T\\in\\mathbb C^N$ and $b=(b_1,\\ldots,b_N)^T\\in\\mathbb C^N$ be the incoming and outgoing amplitudes. Choose the mode shapes and amplitude convention so that each coefficient has units $\\mathrm{W^{1/2}}$, the Hermitian norm is $\\|a\\|_2^2=\\sum_{\\alpha=1}^N|a_\\alpha|^2$ in W, and the total time-averaged outward power through the port sections is\n\n$$P_{\\mathrm{ports}}=\\|b\\|_2^2-\\|a\\|_2^2.$$\n\nThis equality, including the vanishing of cross terms in the real-power pairing, is a port-mode normalization hypothesis. For complex phasor fields the time-averaged Poynting vector is $\\boldsymbol\\Pi=\\tfrac12\\operatorname{Re}(\\widetilde E\\times\\widetilde H^*)$ in $\\mathrm{W\\,m^{-2}}$, where $*$ denotes componentwise conjugation before the bilinear cross product. This Hermitian power pairing is distinct from the unconjugated Lorentz bilinear pairing.\n\nOn the non-port wall $\\Gamma_w$, the model prescribes either a smooth PEC condition $E_\\tau(t)=0$, giving zero outward wall power, or a passive wall condition with explicitly specified nonnegative cycle-averaged outward power $P_\\partial\\ge0$. Here $E_\\tau(t)=E(t)-(n\\cdot E(t))n$ and $H_\\tau(t)=H(t)-(n\\cdot H(t))n$ are the classical tangential restrictions of the smooth real fields. A smooth impedance wall is one such condition: for a real scalar surface admittance $Y\\ge0$ in siemens and $H_\\tau(t)=Y(n\\times E_\\tau(t))$, its instantaneous outward power density is $n\\cdot(E_\\tau(t)\\times H_\\tau(t))=Y|E_\\tau(t)|^2\\ge0$, so its cycle-averaged outward power is nonnegative. For phasor amplitude $\\widetilde E_\\tau$, that average is $\\tfrac12Y|\\widetilde E_\\tau|^2$. This is a smooth-field model assumption; no $L^2$ trace is inferred from membership in $H(\\operatorname{curl})$.\n\nThe total cycle-averaged outward boundary power is the port contribution $\\|b\\|_2^2-\\|a\\|_2^2$, plus $P_\\partial$ and any unlisted outgoing power $P_{\\mathrm{other}}$. No unlisted incoming power is included.\n\nFor each $a$, assume the adopted linear source-free Maxwell boundary problem has a unique time-harmonic solution and a unique outgoing vector $b$. The model assumes no incoming wave in unlisted channels. By linearity of the phasor equations and uniqueness, the map $a\\mapsto b$ is complex-linear: a linear combination of two solutions solves the problem for the same linear combination of their incoming data, and uniqueness identifies its outgoing data. The **finite scattering matrix** is the unique matrix $S(\\omega)\\in\\mathbb C^{N\\times N}$ such that $b=S(\\omega)a$. The definition assumes this well-posed solution map; it does not prove its existence, uniqueness, modal completeness, or absence of resonances.\n\nFor reciprocal use, the incoming and outgoing modal phases are additionally chosen so that for every pair of source-free solutions with incoming vectors $a_1,a_2$ and outgoing vectors $b_1,b_2$, the Lorentz boundary pairing reduces to\n\n$$\\int_{\\partial\\Omega}n\\cdot(\\widetilde E_1\\times\\widetilde H_2-\\widetilde E_2\\times\\widetilde H_1)\\,dS=a_1^Tb_2-b_1^Ta_2.$$\n\nThis is an explicit reciprocal-normalization condition, using the complex-bilinear products of the reciprocal-phasor model and the bounded-$C^1$ reciprocity identity of the Lorentz reciprocity theorem. Power normalization alone does not imply this bilinear pairing for arbitrary complex reference impedances. Rephasing a port is allowed only when the declared reciprocal pairing is preserved.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "pthm-emx-scattering-contraction",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. Fix the finite port model at a real angular frequency $\\omega>0$, period $T=2\\pi/\\omega$, incoming amplitude $a\\in\\mathbb C^N$, and unique outgoing amplitude $b=S(\\omega)a$. Here $\\Omega$ is the bounded $C^1$ device region in that port model. The real fields $E,H,D,B:\\overline\\Omega\\times\\mathbb R\\to\\mathbb R^3$ and the material states are jointly $C^\\infty$ and $T$-periodic, satisfy the smooth source-free macroscopic Maxwell equations, and have free charge and current $\\rho_f=0$ and $J_f=0$. Their units are respectively $\\mathrm{V\\,m^{-1}}$, $\\mathrm{A\\,m^{-1}}$, $\\mathrm{C\\,m^{-2}}$, and $\\mathrm T$. Use one of the following two homogeneous material branches with constant coefficients.\n\nFor real vectors $v,w\\in\\mathbb R^3$, the Euclidean product is $v\\cdot w:=\\sum_{r=1}^3v_rw_r$ and $|v|^2:=v\\cdot v$.\n\nThe port model uses incoming and outgoing vectors $a,b\\in\\mathbb C^N$ with amplitude units $\\mathrm{W^{1/2}}$; for either vector $z$, $\\|z\\|_2^2:=\\sum_{\\alpha=1}^N|z_\\alpha|^2$ is its power in W, and the net outward port power is $\\|b\\|_2^2-\\|a\\|_2^2$.\n\n**Finite Lorentz branch.** For a finite $M\\ge1$, each $P_\\ell:\\overline\\Omega\\times\\mathbb R\\to\\mathbb R^3$ has units $\\mathrm{C\\,m^{-2}}$, $D=\\varepsilon_\\infty E+\\sum_{\\ell=1}^M P_\\ell$, $B=\\mu H$, and $\\partial_t^2P_\\ell+\\gamma_\\ell\\partial_tP_\\ell+\\omega_\\ell^2P_\\ell=a_\\ell E$, where $\\varepsilon_\\infty,\\mu,a_\\ell,\\omega_\\ell>0$ and $\\gamma_\\ell\\ge0$.\n\n**Drude branch.** $P,V:\\overline\\Omega\\times\\mathbb R\\to\\mathbb R^3$ have units $\\mathrm{C\\,m^{-2}}$ and $\\mathrm{A\\,m^{-2}}$, respectively; $D=\\varepsilon_\\infty E+P$, $B=\\mu H$, $\\partial_tP=V$, and $\\partial_tV+\\gamma V=aE$, where $\\varepsilon_\\infty,\\mu,a>0$ and $\\gamma\\ge0$.\n\nThe constants have the SI units of the respective adopted closure: $\\varepsilon_\\infty$ in $\\mathrm{F\\,m^{-1}}$, $\\mu$ in $\\mathrm{H\\,m^{-1}}$, each $a_\\ell$ or $a$ in $\\mathrm{F\\,m^{-1}\\,s^{-2}}$, and each $\\omega_\\ell$ or damping rate in $\\mathrm{s^{-1}}$. In the Lorentz branch define the loss-density map $\\ell:\\overline\\Omega\\times\\mathbb R\\to[0,\\infty)$ by $\\ell=\\sum_{\\ell=1}^M(\\gamma_\\ell/a_\\ell)|\\partial_tP_\\ell|^2$; in the Drude branch define it by $\\ell=(\\gamma/a)|V|^2$. These have units $\\mathrm{W\\,m^{-3}}$. For the solution with the fixed input $a$, set $P_{\\mathrm{mat}}(a):=T^{-1}\\int_0^T\\int_\\Omega\\ell\\,dV\\,dt$. Let $P_\\partial(a)\\ge0$ be its cycle-averaged outward power at passive physical walls, and let $P_{\\mathrm{other}}(a)\\ge0$ be all its outgoing radiation or propagating-channel power not represented in $b$, as defined by the port model. For brevity, in the proof write these three quantities as $P_{\\mathrm{mat}}$, $P_\\partial$, and $P_{\\mathrm{other}}$. Then\n\n$$\\|a\\|_2^2-\\|S(\\omega)a\\|_2^2=P_{\\mathrm{mat}}(a)+P_\\partial(a)+P_{\\mathrm{other}}(a)\\ge0.$$\n\nFor complex vectors and matrices, an overline denotes componentwise complex conjugation and a superscript ${}^{\\mathsf T}$ denotes ordinary transpose; set $z^\\dagger:=\\overline z^{\\,\\mathsf T}$ for $z\\in\\mathbb C^N$ and $A^\\dagger:=\\overline A^{\\,\\mathsf T}$ for $A\\in\\mathbb C^{N\\times N}$. A matrix is **Hermitian** when $A^\\dagger=A$, and is **unitary** when $A^\\dagger A=AA^\\dagger=I_N$, where $I_N$ is the identity matrix on $\\mathbb C^N$.\n\nConsequently $S(\\omega)$ is contractive: $\\|Sa\\|_2\\le\\|a\\|_2$ for every $a$. If $P_{\\mathrm{mat}}(a)=P_\\partial(a)=P_{\\mathrm{other}}(a)=0$ for every incoming vector $a$, then $S^\\dagger S=I_N$; because the defined map is square, $S$ is unitary. The exact equality and unitarity are conditional deductions of this model, not existence claims about arbitrary scatterers.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Choose any nonzero incoming amplitude $a\\in\\mathbb C$. By [F1], $|ra|^2=|a|^2$, so $|r|^2|a|^2=|a|^2$. Divide by $|a|^2>0$ to obtain $|r|^2=1$, hence $|r|=1$.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "For every $\\omega\\in\\mathcal I$, $|e^{i\\phi(\\omega)}|^2=e^{i\\phi(\\omega)}e^{-i\\phi(\\omega)}=1$. If $\\mathcal I$ contains distinct $\\omega_1,\\omega_2$, define $\\phi(\\omega_1)=0$, $\\phi(\\omega_2)=\\pi$, and $\\phi=0$ elsewhere; then $r_\\phi$ takes the distinct values $1$ and $-1$, while both obey step 1.1. Thus the modulus condition leaves phase variation algebraically possible on a multi-frequency set.",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "If the admissible frequency set I is empty, the per-frequency statement is vacuous; no frequency or phase realization is inferred."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The verification chooses a nonzero incident amplitude because the zero input alone cannot determine r; such an amplitude exists in C."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The model is exactly one channel; step 1.1 gives |r|=1 from the one-dimensional unitary identity."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The case r=0 is ruled out by step 1.1, which forces |r|=1; no device realization is asserted."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The admissible set is constrained by I subset (0,infinity); zero frequency is excluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The phase function phi is arbitrary supplied data and the argument makes no choice from a nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example proves a modulus constraint and gives no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A unit-modulus phase family is an algebraic illustration, not a converse physical realization claim."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "Unit-modulus phase sample",
+          "status": "checked",
+          "evidence": "The algebraic values r=1 and r=i both satisfy |r|=1 while having distinct phases; r=0 fails the step 1.1 modulus constraint."
+        }
+      ],
+      "finite_checks_disposition": "The listed finite calculation checks a boundary case or concrete specialization; the numbered argument supplies the general conditional proof and is not replaced by the check.",
+      "supplier_excerpts": [
+        {
+          "supplier": "def-countable-choice",
+          "carrier": "items/def-countable-choice.md",
+          "status": "Published supplier; exact current statement/definition section inspected and matched to the use.",
+          "source_section": "Definition",
+          "exact_statement": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.\n\n"
+        },
+        {
+          "supplier": "def-emx-port-scattering-model",
+          "carrier": "items/def-emx-port-scattering-model.md",
+          "status": "Same-batch finished carrier text inspected directly; readiness is recorded after final scoped checks.",
+          "source_section": "Definition",
+          "exact_statement": "Fix a real angular frequency $\\omega>0$ in $\\mathrm{s^{-1}}$ and use the $e^{-i\\omega t}$ convention and SI field units of the fixed-frequency reciprocal-phasor model. Let $\\Omega\\subset\\mathbb R^3$ be a bounded device region with $C^1$ boundary in one stationary material-rest frame. Its continuous phasor coefficient maps are $\\varepsilon,\\mu:\\overline\\Omega\\to\\mathbb C^{3\\times3}$ in $\\mathrm{F\\,m^{-1}}$ and $\\mathrm{H\\,m^{-1}}$, respectively. The complex phasor fields $\\widetilde E,\\widetilde H\\in C^1(\\overline\\Omega;\\mathbb C^3)$ have units $\\mathrm{V\\,m^{-1}}$ and $\\mathrm{A\\,m^{-1}}$. They satisfy the fixed-frequency Maxwell equations of the reciprocal-phasor data class, with no impressed volume current or charge in $\\Omega$. The corresponding real fields are $E(x,t)=\\operatorname{Re}(\\widetilde E(x)e^{-i\\omega t})$ and $H(x,t)=\\operatorname{Re}(\\widetilde H(x)e^{-i\\omega t})$, with period $T=2\\pi/\\omega$. Assume $\\mathrm{AC}_\\omega$ as defined by the countable-choice axiom when the reciprocal boundary identity below is used.\n\nAn **admissible port** consists of a bounded connected $C^1$ cross-section $\\Sigma_j$ in a plane perpendicular to a fixed unit guide axis $\\widehat z_j$, together with a uniform lossless straight reference guide extending from that section. The outward normal $n_j$ on the port points from $\\Omega$ into the guide. The reference-guide phasor coefficients and wall conditions are independent of distance along $\\widehat z_j$. A propagating channel mode is a pair of $C^1$ complex transverse profiles $(e_{j\\alpha},h_{j\\alpha})$ whose associated source-free phasor fields in the guide solve the fixed-frequency Maxwell equations and have longitudinal factor $e^{\\pm i\\beta_\\alpha s_j}$ with real $\\beta_\\alpha>0$ in $\\mathrm{m^{-1}}$. The profiles are normalized per unit amplitude in $\\mathrm{W^{1/2}}$, so the resulting fields have units $\\mathrm{V\\,m^{-1}}$ and $\\mathrm{A\\,m^{-1}}$. The plus and minus signs are assigned according to whether energy travels toward or away from $\\Omega$. At $\\omega$, assume a finite list of $N$ propagating mode channels in total and that this list is complete for the propagating channels represented by the finite interface. Any outgoing radiation continuum or omitted propagating channel is separately recorded as nonnegative outward power $P_{\\mathrm{other}}$. Evanescent modes may be required in the exact near-port matching field, but are not entries of the propagating amplitude vectors; no finite truncation of such matching modes is asserted to be exact.\n\nLet $a=(a_1,\\ldots,a_N)^T\\in\\mathbb C^N$ and $b=(b_1,\\ldots,b_N)^T\\in\\mathbb C^N$ be the incoming and outgoing amplitudes. Choose the mode shapes and amplitude convention so that each coefficient has units $\\mathrm{W^{1/2}}$, the Hermitian norm is $\\|a\\|_2^2=\\sum_{\\alpha=1}^N|a_\\alpha|^2$ in W, and the total time-averaged outward power through the port sections is\n\n$$P_{\\mathrm{ports}}=\\|b\\|_2^2-\\|a\\|_2^2.$$\n\nThis equality, including the vanishing of cross terms in the real-power pairing, is a port-mode normalization hypothesis. For complex phasor fields the time-averaged Poynting vector is $\\boldsymbol\\Pi=\\tfrac12\\operatorname{Re}(\\widetilde E\\times\\widetilde H^*)$ in $\\mathrm{W\\,m^{-2}}$, where $*$ denotes componentwise conjugation before the bilinear cross product. This Hermitian power pairing is distinct from the unconjugated Lorentz bilinear pairing.\n\nOn the non-port wall $\\Gamma_w$, the model prescribes either a smooth PEC condition $E_\\tau(t)=0$, giving zero outward wall power, or a passive wall condition with explicitly specified nonnegative cycle-averaged outward power $P_\\partial\\ge0$. Here $E_\\tau(t)=E(t)-(n\\cdot E(t))n$ and $H_\\tau(t)=H(t)-(n\\cdot H(t))n$ are the classical tangential restrictions of the smooth real fields. A smooth impedance wall is one such condition: for a real scalar surface admittance $Y\\ge0$ in siemens and $H_\\tau(t)=Y(n\\times E_\\tau(t))$, its instantaneous outward power density is $n\\cdot(E_\\tau(t)\\times H_\\tau(t))=Y|E_\\tau(t)|^2\\ge0$, so its cycle-averaged outward power is nonnegative. For phasor amplitude $\\widetilde E_\\tau$, that average is $\\tfrac12Y|\\widetilde E_\\tau|^2$. This is a smooth-field model assumption; no $L^2$ trace is inferred from membership in $H(\\operatorname{curl})$.\n\nThe total cycle-averaged outward boundary power is the port contribution $\\|b\\|_2^2-\\|a\\|_2^2$, plus $P_\\partial$ and any unlisted outgoing power $P_{\\mathrm{other}}$. No unlisted incoming power is included.\n\nFor each $a$, assume the adopted linear source-free Maxwell boundary problem has a unique time-harmonic solution and a unique outgoing vector $b$. The model assumes no incoming wave in unlisted channels. By linearity of the phasor equations and uniqueness, the map $a\\mapsto b$ is complex-linear: a linear combination of two solutions solves the problem for the same linear combination of their incoming data, and uniqueness identifies its outgoing data. The **finite scattering matrix** is the unique matrix $S(\\omega)\\in\\mathbb C^{N\\times N}$ such that $b=S(\\omega)a$. The definition assumes this well-posed solution map; it does not prove its existence, uniqueness, modal completeness, or absence of resonances.\n\nFor reciprocal use, the incoming and outgoing modal phases are additionally chosen so that for every pair of source-free solutions with incoming vectors $a_1,a_2$ and outgoing vectors $b_1,b_2$, the Lorentz boundary pairing reduces to\n\n$$\\int_{\\partial\\Omega}n\\cdot(\\widetilde E_1\\times\\widetilde H_2-\\widetilde E_2\\times\\widetilde H_1)\\,dS=a_1^Tb_2-b_1^Ta_2.$$\n\nThis is an explicit reciprocal-normalization condition, using the complex-bilinear products of the reciprocal-phasor model and the bounded-$C^1$ reciprocity identity of the Lorentz reciprocity theorem. Power normalization alone does not imply this bilinear pairing for arbitrary complex reference impedances. Rephasing a port is allowed only when the declared reciprocal pairing is preserved.\n\n"
+        },
+        {
+          "supplier": "pthm-emx-scattering-contraction",
+          "carrier": "items/pthm-emx-scattering-contraction.md",
+          "status": "Exact current public interface transcribed by root at the drained Step2 join; original substantive source-use review retained in historical_source_interface and native/same-owner reports. No renewed full supplier-proof reading asserted.",
+          "source_section": "Statement",
+          "exact_statement": "Assume $\\mathrm{AC}_\\omega$. Fix the finite port model at a real angular frequency $\\omega>0$, period $T=2\\pi/\\omega$, incoming amplitude $a\\in\\mathbb C^N$, and unique outgoing amplitude $b=S(\\omega)a$. Here $\\Omega$ is the bounded $C^1$ device region in that port model. The real fields $E,H,D,B:\\overline\\Omega\\times\\mathbb R\\to\\mathbb R^3$ and the material states are jointly $C^\\infty$ and $T$-periodic, satisfy the smooth source-free macroscopic Maxwell equations, and have free charge and current $\\rho_f=0$ and $J_f=0$. Their units are respectively $\\mathrm{V\\,m^{-1}}$, $\\mathrm{A\\,m^{-1}}$, $\\mathrm{C\\,m^{-2}}$, and $\\mathrm T$. Use one of the following two homogeneous material branches with constant coefficients.\n\nFor real vectors $v,w\\in\\mathbb R^3$, the Euclidean product is $v\\cdot w:=\\sum_{r=1}^3v_rw_r$ and $|v|^2:=v\\cdot v$.\n\nThe port model uses incoming and outgoing vectors $a,b\\in\\mathbb C^N$ with amplitude units $\\mathrm{W^{1/2}}$; for either vector $z$, $\\|z\\|_2^2:=\\sum_{\\alpha=1}^N|z_\\alpha|^2$ is its power in W, and the net outward port power is $\\|b\\|_2^2-\\|a\\|_2^2$.\n\n**Finite Lorentz branch.** For a finite $M\\ge1$, each $P_\\ell:\\overline\\Omega\\times\\mathbb R\\to\\mathbb R^3$ has units $\\mathrm{C\\,m^{-2}}$, $D=\\varepsilon_\\infty E+\\sum_{\\ell=1}^M P_\\ell$, $B=\\mu H$, and $\\partial_t^2P_\\ell+\\gamma_\\ell\\partial_tP_\\ell+\\omega_\\ell^2P_\\ell=a_\\ell E$, where $\\varepsilon_\\infty,\\mu,a_\\ell,\\omega_\\ell>0$ and $\\gamma_\\ell\\ge0$.\n\n**Drude branch.** $P,V:\\overline\\Omega\\times\\mathbb R\\to\\mathbb R^3$ have units $\\mathrm{C\\,m^{-2}}$ and $\\mathrm{A\\,m^{-2}}$, respectively; $D=\\varepsilon_\\infty E+P$, $B=\\mu H$, $\\partial_tP=V$, and $\\partial_tV+\\gamma V=aE$, where $\\varepsilon_\\infty,\\mu,a>0$ and $\\gamma\\ge0$.\n\nThe constants have the SI units of the respective adopted closure: $\\varepsilon_\\infty$ in $\\mathrm{F\\,m^{-1}}$, $\\mu$ in $\\mathrm{H\\,m^{-1}}$, each $a_\\ell$ or $a$ in $\\mathrm{F\\,m^{-1}\\,s^{-2}}$, and each $\\omega_\\ell$ or damping rate in $\\mathrm{s^{-1}}$. In the Lorentz branch define the loss-density map $\\ell:\\overline\\Omega\\times\\mathbb R\\to[0,\\infty)$ by $\\ell=\\sum_{\\ell=1}^M(\\gamma_\\ell/a_\\ell)|\\partial_tP_\\ell|^2$; in the Drude branch define it by $\\ell=(\\gamma/a)|V|^2$. These have units $\\mathrm{W\\,m^{-3}}$. For the solution with the fixed input $a$, set $P_{\\mathrm{mat}}(a):=T^{-1}\\int_0^T\\int_\\Omega\\ell\\,dV\\,dt$. Let $P_\\partial(a)\\ge0$ be its cycle-averaged outward power at passive physical walls, and let $P_{\\mathrm{other}}(a)\\ge0$ be all its outgoing radiation or propagating-channel power not represented in $b$, as defined by the port model. For brevity, in the proof write these three quantities as $P_{\\mathrm{mat}}$, $P_\\partial$, and $P_{\\mathrm{other}}$. Then\n\n$$\\|a\\|_2^2-\\|S(\\omega)a\\|_2^2=P_{\\mathrm{mat}}(a)+P_\\partial(a)+P_{\\mathrm{other}}(a)\\ge0.$$\n\nFor complex vectors and matrices, an overline denotes componentwise complex conjugation and a superscript ${}^{\\mathsf T}$ denotes ordinary transpose; set $z^\\dagger:=\\overline z^{\\,\\mathsf T}$ for $z\\in\\mathbb C^N$ and $A^\\dagger:=\\overline A^{\\,\\mathsf T}$ for $A\\in\\mathbb C^{N\\times N}$. A matrix is **Hermitian** when $A^\\dagger=A$, and is **unitary** when $A^\\dagger A=AA^\\dagger=I_N$, where $I_N$ is the identity matrix on $\\mathbb C^N$.\n\nConsequently $S(\\omega)$ is contractive: $\\|Sa\\|_2\\le\\|a\\|_2$ for every $a$. If $P_{\\mathrm{mat}}(a)=P_\\partial(a)=P_{\\mathrm{other}}(a)=0$ for every incoming vector $a$, then $S^\\dagger S=I_N$; because the defined map is square, $S$ is unitary. The exact equality and unitarity are conditional deductions of this model, not existence claims about arbitrary scatterers.",
+          "historical_source_interface": {
+            "source_section": "Statement",
+            "exact_statement": "Assume $\\mathrm{AC}_\\omega$. Fix the finite port model at a real angular frequency $\\omega>0$, period $T=2\\pi/\\omega$, incoming amplitude $a\\in\\mathbb C^N$, and unique outgoing amplitude $b=S(\\omega)a$. Here $\\Omega$ is the bounded $C^1$ device region in that port model. The real fields $E,H,D,B:\\overline\\Omega\\times\\mathbb R\\to\\mathbb R^3$ and the material states are jointly $C^\\infty$ and $T$-periodic, satisfy the smooth source-free macroscopic Maxwell equations, and have free charge and current $\\rho_f=0$ and $J_f=0$. Their units are respectively $\\mathrm{V\\,m^{-1}}$, $\\mathrm{A\\,m^{-1}}$, $\\mathrm{C\\,m^{-2}}$, and $\\mathrm T$. Use one of the following two homogeneous material branches with constant coefficients.\n\n**Finite Lorentz branch.** For a finite $M\\ge1$, each $P_\\ell:\\overline\\Omega\\times\\mathbb R\\to\\mathbb R^3$ has units $\\mathrm{C\\,m^{-2}}$, $D=\\varepsilon_\\infty E+\\sum_{\\ell=1}^M P_\\ell$, $B=\\mu H$, and $\\partial_t^2P_\\ell+\\gamma_\\ell\\partial_tP_\\ell+\\omega_\\ell^2P_\\ell=a_\\ell E$, where $\\varepsilon_\\infty,\\mu,a_\\ell,\\omega_\\ell>0$ and $\\gamma_\\ell\\ge0$.\n\n**Drude branch.** $P,V:\\overline\\Omega\\times\\mathbb R\\to\\mathbb R^3$ have units $\\mathrm{C\\,m^{-2}}$ and $\\mathrm{A\\,m^{-2}}$, respectively; $D=\\varepsilon_\\infty E+P$, $B=\\mu H$, $\\partial_tP=V$, and $\\partial_tV+\\gamma V=aE$, where $\\varepsilon_\\infty,\\mu,a>0$ and $\\gamma\\ge0$.\n\nThe constants have the SI units of the respective adopted closure: $\\varepsilon_\\infty$ in $\\mathrm{F\\,m^{-1}}$, $\\mu$ in $\\mathrm{H\\,m^{-1}}$, each $a_\\ell$ or $a$ in $\\mathrm{F\\,m^{-1}\\,s^{-2}}$, and each $\\omega_\\ell$ or damping rate in $\\mathrm{s^{-1}}$. In the Lorentz branch define $\\ell=\\sum_{\\ell=1}^M(\\gamma_\\ell/a_\\ell)|\\partial_tP_\\ell|^2$; in the Drude branch define $\\ell=(\\gamma/a)|V|^2$. These are nonnegative loss densities in $\\mathrm{W\\,m^{-3}}$, and let $P_{\\mathrm{mat}}=T^{-1}\\int_0^T\\int_\\Omega\\ell\\,dV\\,dt$. Let $P_\\partial\\ge0$ be the cycle-averaged outward power of the passive physical walls, and let $P_{\\mathrm{other}}\\ge0$ be all outgoing radiation or propagating-channel power not represented in $b$, as defined by the port model. Then\n\n$$\\|a\\|_2^2-\\|S(\\omega)a\\|_2^2=P_{\\mathrm{mat}}+P_\\partial+P_{\\mathrm{other}}\\ge0.$$\n\nConsequently $S(\\omega)$ is contractive: $\\|Sa\\|_2\\le\\|a\\|_2$ for every $a$. If all material loss, wall loss, and unlisted outward power vanish for every incoming vector, then $S^\\dagger S=I_N$; because the defined map is square, $S$ is unitary. The exact equality and unitarity are conditional deductions of this model, not existence claims about arbitrary scatterers.\n\n",
+            "status": "Same-batch finished carrier text inspected directly; readiness is recorded after final scoped checks."
+          },
+          "supplier_proof_status": "draft; this exact-quote refresh does not grant independent proof acceptance"
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-15-step1-author",
+        "notes": "The argument derives only the scalar modulus from the lossless finite-channel theorem; the displayed phase family is algebraic and is not a claim of Maxwell realization."
+      }
+    },
+    "ex-emx-omitted-channel-subunitarity": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-emx-port-scattering-model",
+          "source_section": "Definition",
+          "quote": "Fix a real angular frequency $\\omega>0$ in $\\mathrm{s^{-1}}$ and use the $e^{-i\\omega t}$ convention and SI field units of the fixed-frequency reciprocal-phasor model. Let $\\Omega\\subset\\mathbb R^3$ be a bounded device region with $C^1$ boundary in one stationary material-rest frame. Its continuous phasor coefficient maps are $\\varepsilon,\\mu:\\overline\\Omega\\to\\mathbb C^{3\\times3}$ in $\\mathrm{F\\,m^{-1}}$ and $\\mathrm{H\\,m^{-1}}$, respectively. The complex phasor fields $\\widetilde E,\\widetilde H\\in C^1(\\overline\\Omega;\\mathbb C^3)$ have units $\\mathrm{V\\,m^{-1}}$ and $\\mathrm{A\\,m^{-1}}$. They satisfy the fixed-frequency Maxwell equations of the reciprocal-phasor data class, with no impressed volume current or charge in $\\Omega$. The corresponding real fields are $E(x,t)=\\operatorname{Re}(\\widetilde E(x)e^{-i\\omega t})$ and $H(x,t)=\\operatorname{Re}(\\widetilde H(x)e^{-i\\omega t})$, with period $T=2\\pi/\\omega$. Assume $\\mathrm{AC}_\\omega$ as defined by the countable-choice axiom when the reciprocal boundary identity below is used.\n\nAn **admissible port** consists of a bounded connected $C^1$ cross-section $\\Sigma_j$ in a plane perpendicular to a fixed unit guide axis $\\widehat z_j$, together with a uniform lossless straight reference guide extending from that section. The outward normal $n_j$ on the port points from $\\Omega$ into the guide. The reference-guide phasor coefficients and wall conditions are independent of distance along $\\widehat z_j$. A propagating channel mode is a pair of $C^1$ complex transverse profiles $(e_{j\\alpha},h_{j\\alpha})$ whose associated source-free phasor fields in the guide solve the fixed-frequency Maxwell equations and have longitudinal factor $e^{\\pm i\\beta_\\alpha s_j}$ with real $\\beta_\\alpha>0$ in $\\mathrm{m^{-1}}$. The profiles are normalized per unit amplitude in $\\mathrm{W^{1/2}}$, so the resulting fields have units $\\mathrm{V\\,m^{-1}}$ and $\\mathrm{A\\,m^{-1}}$. The plus and minus signs are assigned according to whether energy travels toward or away from $\\Omega$. At $\\omega$, assume a finite list of $N$ propagating mode channels in total and that this list is complete for the propagating channels represented by the finite interface. Any outgoing radiation continuum or omitted propagating channel is separately recorded as nonnegative outward power $P_{\\mathrm{other}}$. Evanescent modes may be required in the exact near-port matching field, but are not entries of the propagating amplitude vectors; no finite truncation of such matching modes is asserted to be exact.\n\nLet $a=(a_1,\\ldots,a_N)^T\\in\\mathbb C^N$ and $b=(b_1,\\ldots,b_N)^T\\in\\mathbb C^N$ be the incoming and outgoing amplitudes. Choose the mode shapes and amplitude convention so that each coefficient has units $\\mathrm{W^{1/2}}$, the Hermitian norm is $\\|a\\|_2^2=\\sum_{\\alpha=1}^N|a_\\alpha|^2$ in W, and the total time-averaged outward power through the port sections is\n\n$$P_{\\mathrm{ports}}=\\|b\\|_2^2-\\|a\\|_2^2.$$\n\nThis equality, including the vanishing of cross terms in the real-power pairing, is a port-mode normalization hypothesis. For complex phasor fields the time-averaged Poynting vector is $\\boldsymbol\\Pi=\\tfrac12\\operatorname{Re}(\\widetilde E\\times\\widetilde H^*)$ in $\\mathrm{W\\,m^{-2}}$, where $*$ denotes componentwise conjugation before the bilinear cross product. This Hermitian power pairing is distinct from the unconjugated Lorentz bilinear pairing.\n\nOn the non-port wall $\\Gamma_w$, the model prescribes either a smooth PEC condition $E_\\tau(t)=0$, giving zero outward wall power, or a passive wall condition with explicitly specified nonnegative cycle-averaged outward power $P_\\partial\\ge0$. Here $E_\\tau(t)=E(t)-(n\\cdot E(t))n$ and $H_\\tau(t)=H(t)-(n\\cdot H(t))n$ are the classical tangential restrictions of the smooth real fields. A smooth impedance wall is one such condition: for a real scalar surface admittance $Y\\ge0$ in siemens and $H_\\tau(t)=Y(n\\times E_\\tau(t))$, its instantaneous outward power density is $n\\cdot(E_\\tau(t)\\times H_\\tau(t))=Y|E_\\tau(t)|^2\\ge0$, so its cycle-averaged outward power is nonnegative. For phasor amplitude $\\widetilde E_\\tau$, that average is $\\tfrac12Y|\\widetilde E_\\tau|^2$. This is a smooth-field model assumption; no $L^2$ trace is inferred from membership in $H(\\operatorname{curl})$.\n\nThe total cycle-averaged outward boundary power is the port contribution $\\|b\\|_2^2-\\|a\\|_2^2$, plus $P_\\partial$ and any unlisted outgoing power $P_{\\mathrm{other}}$. No unlisted incoming power is included.\n\nFor each $a$, assume the adopted linear source-free Maxwell boundary problem has a unique time-harmonic solution and a unique outgoing vector $b$. The model assumes no incoming wave in unlisted channels. By linearity of the phasor equations and uniqueness, the map $a\\mapsto b$ is complex-linear: a linear combination of two solutions solves the problem for the same linear combination of their incoming data, and uniqueness identifies its outgoing data. The **finite scattering matrix** is the unique matrix $S(\\omega)\\in\\mathbb C^{N\\times N}$ such that $b=S(\\omega)a$. The definition assumes this well-posed solution map; it does not prove its existence, uniqueness, modal completeness, or absence of resonances.\n\nFor reciprocal use, the incoming and outgoing modal phases are additionally chosen so that for every pair of source-free solutions with incoming vectors $a_1,a_2$ and outgoing vectors $b_1,b_2$, the Lorentz boundary pairing reduces to\n\n$$\\int_{\\partial\\Omega}n\\cdot(\\widetilde E_1\\times\\widetilde H_2-\\widetilde E_2\\times\\widetilde H_1)\\,dS=a_1^Tb_2-b_1^Ta_2.$$\n\nThis is an explicit reciprocal-normalization condition, using the complex-bilinear products of the reciprocal-phasor model and the bounded-$C^1$ reciprocity identity of the Lorentz reciprocity theorem. Power normalization alone does not imply this bilinear pairing for arbitrary complex reference impedances. Rephasing a port is allowed only when the declared reciprocal pairing is preserved.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "pthm-emx-scattering-contraction",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. Fix the finite port model at a real angular frequency $\\omega>0$, period $T=2\\pi/\\omega$, incoming amplitude $a\\in\\mathbb C^N$, and unique outgoing amplitude $b=S(\\omega)a$. Here $\\Omega$ is the bounded $C^1$ device region in that port model. The real fields $E,H,D,B:\\overline\\Omega\\times\\mathbb R\\to\\mathbb R^3$ and the material states are jointly $C^\\infty$ and $T$-periodic, satisfy the smooth source-free macroscopic Maxwell equations, and have free charge and current $\\rho_f=0$ and $J_f=0$. Their units are respectively $\\mathrm{V\\,m^{-1}}$, $\\mathrm{A\\,m^{-1}}$, $\\mathrm{C\\,m^{-2}}$, and $\\mathrm T$. Use one of the following two homogeneous material branches with constant coefficients.\n\nFor real vectors $v,w\\in\\mathbb R^3$, the Euclidean product is $v\\cdot w:=\\sum_{r=1}^3v_rw_r$ and $|v|^2:=v\\cdot v$.\n\nThe port model uses incoming and outgoing vectors $a,b\\in\\mathbb C^N$ with amplitude units $\\mathrm{W^{1/2}}$; for either vector $z$, $\\|z\\|_2^2:=\\sum_{\\alpha=1}^N|z_\\alpha|^2$ is its power in W, and the net outward port power is $\\|b\\|_2^2-\\|a\\|_2^2$.\n\n**Finite Lorentz branch.** For a finite $M\\ge1$, each $P_\\ell:\\overline\\Omega\\times\\mathbb R\\to\\mathbb R^3$ has units $\\mathrm{C\\,m^{-2}}$, $D=\\varepsilon_\\infty E+\\sum_{\\ell=1}^M P_\\ell$, $B=\\mu H$, and $\\partial_t^2P_\\ell+\\gamma_\\ell\\partial_tP_\\ell+\\omega_\\ell^2P_\\ell=a_\\ell E$, where $\\varepsilon_\\infty,\\mu,a_\\ell,\\omega_\\ell>0$ and $\\gamma_\\ell\\ge0$.\n\n**Drude branch.** $P,V:\\overline\\Omega\\times\\mathbb R\\to\\mathbb R^3$ have units $\\mathrm{C\\,m^{-2}}$ and $\\mathrm{A\\,m^{-2}}$, respectively; $D=\\varepsilon_\\infty E+P$, $B=\\mu H$, $\\partial_tP=V$, and $\\partial_tV+\\gamma V=aE$, where $\\varepsilon_\\infty,\\mu,a>0$ and $\\gamma\\ge0$.\n\nThe constants have the SI units of the respective adopted closure: $\\varepsilon_\\infty$ in $\\mathrm{F\\,m^{-1}}$, $\\mu$ in $\\mathrm{H\\,m^{-1}}$, each $a_\\ell$ or $a$ in $\\mathrm{F\\,m^{-1}\\,s^{-2}}$, and each $\\omega_\\ell$ or damping rate in $\\mathrm{s^{-1}}$. In the Lorentz branch define the loss-density map $\\ell:\\overline\\Omega\\times\\mathbb R\\to[0,\\infty)$ by $\\ell=\\sum_{\\ell=1}^M(\\gamma_\\ell/a_\\ell)|\\partial_tP_\\ell|^2$; in the Drude branch define it by $\\ell=(\\gamma/a)|V|^2$. These have units $\\mathrm{W\\,m^{-3}}$. For the solution with the fixed input $a$, set $P_{\\mathrm{mat}}(a):=T^{-1}\\int_0^T\\int_\\Omega\\ell\\,dV\\,dt$. Let $P_\\partial(a)\\ge0$ be its cycle-averaged outward power at passive physical walls, and let $P_{\\mathrm{other}}(a)\\ge0$ be all its outgoing radiation or propagating-channel power not represented in $b$, as defined by the port model. For brevity, in the proof write these three quantities as $P_{\\mathrm{mat}}$, $P_\\partial$, and $P_{\\mathrm{other}}$. Then\n\n$$\\|a\\|_2^2-\\|S(\\omega)a\\|_2^2=P_{\\mathrm{mat}}(a)+P_\\partial(a)+P_{\\mathrm{other}}(a)\\ge0.$$\n\nFor complex vectors and matrices, an overline denotes componentwise complex conjugation and a superscript ${}^{\\mathsf T}$ denotes ordinary transpose; set $z^\\dagger:=\\overline z^{\\,\\mathsf T}$ for $z\\in\\mathbb C^N$ and $A^\\dagger:=\\overline A^{\\,\\mathsf T}$ for $A\\in\\mathbb C^{N\\times N}$. A matrix is **Hermitian** when $A^\\dagger=A$, and is **unitary** when $A^\\dagger A=AA^\\dagger=I_N$, where $I_N$ is the identity matrix on $\\mathbb C^N$.\n\nConsequently $S(\\omega)$ is contractive: $\\|Sa\\|_2\\le\\|a\\|_2$ for every $a$. If $P_{\\mathrm{mat}}(a)=P_\\partial(a)=P_{\\mathrm{other}}(a)=0$ for every incoming vector $a$, then $S^\\dagger S=I_N$; because the defined map is square, $S$ is unitary. The exact equality and unitarity are conditional deductions of this model, not existence claims about arbitrary scatterers.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The matrix is real and symmetric, so $S^\\dagger=S$. Direct multiplication gives $S^\\dagger S=S^2=I_2$; for $a=Ae_1$ we have $Sa=Ae_2$ and $\\|Ae_2\\|_2^2=|A|^2=1\\,\\mathrm W=\\|Ae_1\\|_2^2$. Thus this stipulated full-channel matrix satisfies the algebraic unitary condition that [F1] gives for a physical lossless model under its separate smooth Lorentz/Drude hypotheses; no such physical realization is asserted.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Since $Pe_1=e_1$ and $Pe_2=0$, the restriction $S_{\\mathrm{obs}}=PS|_{\\operatorname{ran}P}$ sends the basis vector $e_1$ to $PS e_1=0$; its one-dimensional matrix is $[0]$. Hence $S_{\\mathrm{obs}}^\\dagger S_{\\mathrm{obs}}=[0]\\ne I_1$, so the observed one-channel map is not unitary.",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "For the chosen input, the omitted component is $Ae_2$ and has squared norm $|A|^2=1\\,\\mathrm W$, equal to the incident power. The retained component vanishes, but the full lossless map sends all power to channel 2; therefore the vanishing observed output is not evidence of material absorption.",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes a nonempty 2-by-2 channel matrix and a rank-one observation."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The displayed input is normalized to 1 W, so it is nonzero; zero input is not the example under consideration."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 identifies S_obs=PS restricted to ran P as the one-by-one zero matrix, which is not unitary."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The swap matrix is nonsingular and the example has no degenerating parameter."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No frequency endpoint or limiting process occurs in this finite matrix example."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No selection from a family is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies a counterexample to reduced-map unitarity; it states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example makes no converse claim about when a reduced map is unitary."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "Exact two-channel matrix product",
+          "status": "checked",
+          "evidence": "For S=[[0,1],[1,0]], direct multiplication gives S^dagger S=I_2; on ran P=span{e_1}, S_obs=PS|_{ran P} is [0], so S_obs^dagger S_obs=[0]!=I_1, as in steps 1.1–2.1."
+        }
+      ],
+      "finite_checks_disposition": "The listed finite calculation checks a boundary case or concrete specialization; the numbered argument supplies the general conditional proof and is not replaced by the check.",
+      "supplier_excerpts": [
+        {
+          "supplier": "def-countable-choice",
+          "carrier": "items/def-countable-choice.md",
+          "status": "Published supplier; exact current statement/definition section inspected and matched to the use.",
+          "source_section": "Definition",
+          "exact_statement": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.\n\n"
+        },
+        {
+          "supplier": "def-emx-port-scattering-model",
+          "carrier": "items/def-emx-port-scattering-model.md",
+          "status": "Same-batch finished carrier text inspected directly; readiness is recorded after final scoped checks.",
+          "source_section": "Definition",
+          "exact_statement": "Fix a real angular frequency $\\omega>0$ in $\\mathrm{s^{-1}}$ and use the $e^{-i\\omega t}$ convention and SI field units of the fixed-frequency reciprocal-phasor model. Let $\\Omega\\subset\\mathbb R^3$ be a bounded device region with $C^1$ boundary in one stationary material-rest frame. Its continuous phasor coefficient maps are $\\varepsilon,\\mu:\\overline\\Omega\\to\\mathbb C^{3\\times3}$ in $\\mathrm{F\\,m^{-1}}$ and $\\mathrm{H\\,m^{-1}}$, respectively. The complex phasor fields $\\widetilde E,\\widetilde H\\in C^1(\\overline\\Omega;\\mathbb C^3)$ have units $\\mathrm{V\\,m^{-1}}$ and $\\mathrm{A\\,m^{-1}}$. They satisfy the fixed-frequency Maxwell equations of the reciprocal-phasor data class, with no impressed volume current or charge in $\\Omega$. The corresponding real fields are $E(x,t)=\\operatorname{Re}(\\widetilde E(x)e^{-i\\omega t})$ and $H(x,t)=\\operatorname{Re}(\\widetilde H(x)e^{-i\\omega t})$, with period $T=2\\pi/\\omega$. Assume $\\mathrm{AC}_\\omega$ as defined by the countable-choice axiom when the reciprocal boundary identity below is used.\n\nAn **admissible port** consists of a bounded connected $C^1$ cross-section $\\Sigma_j$ in a plane perpendicular to a fixed unit guide axis $\\widehat z_j$, together with a uniform lossless straight reference guide extending from that section. The outward normal $n_j$ on the port points from $\\Omega$ into the guide. The reference-guide phasor coefficients and wall conditions are independent of distance along $\\widehat z_j$. A propagating channel mode is a pair of $C^1$ complex transverse profiles $(e_{j\\alpha},h_{j\\alpha})$ whose associated source-free phasor fields in the guide solve the fixed-frequency Maxwell equations and have longitudinal factor $e^{\\pm i\\beta_\\alpha s_j}$ with real $\\beta_\\alpha>0$ in $\\mathrm{m^{-1}}$. The profiles are normalized per unit amplitude in $\\mathrm{W^{1/2}}$, so the resulting fields have units $\\mathrm{V\\,m^{-1}}$ and $\\mathrm{A\\,m^{-1}}$. The plus and minus signs are assigned according to whether energy travels toward or away from $\\Omega$. At $\\omega$, assume a finite list of $N$ propagating mode channels in total and that this list is complete for the propagating channels represented by the finite interface. Any outgoing radiation continuum or omitted propagating channel is separately recorded as nonnegative outward power $P_{\\mathrm{other}}$. Evanescent modes may be required in the exact near-port matching field, but are not entries of the propagating amplitude vectors; no finite truncation of such matching modes is asserted to be exact.\n\nLet $a=(a_1,\\ldots,a_N)^T\\in\\mathbb C^N$ and $b=(b_1,\\ldots,b_N)^T\\in\\mathbb C^N$ be the incoming and outgoing amplitudes. Choose the mode shapes and amplitude convention so that each coefficient has units $\\mathrm{W^{1/2}}$, the Hermitian norm is $\\|a\\|_2^2=\\sum_{\\alpha=1}^N|a_\\alpha|^2$ in W, and the total time-averaged outward power through the port sections is\n\n$$P_{\\mathrm{ports}}=\\|b\\|_2^2-\\|a\\|_2^2.$$\n\nThis equality, including the vanishing of cross terms in the real-power pairing, is a port-mode normalization hypothesis. For complex phasor fields the time-averaged Poynting vector is $\\boldsymbol\\Pi=\\tfrac12\\operatorname{Re}(\\widetilde E\\times\\widetilde H^*)$ in $\\mathrm{W\\,m^{-2}}$, where $*$ denotes componentwise conjugation before the bilinear cross product. This Hermitian power pairing is distinct from the unconjugated Lorentz bilinear pairing.\n\nOn the non-port wall $\\Gamma_w$, the model prescribes either a smooth PEC condition $E_\\tau(t)=0$, giving zero outward wall power, or a passive wall condition with explicitly specified nonnegative cycle-averaged outward power $P_\\partial\\ge0$. Here $E_\\tau(t)=E(t)-(n\\cdot E(t))n$ and $H_\\tau(t)=H(t)-(n\\cdot H(t))n$ are the classical tangential restrictions of the smooth real fields. A smooth impedance wall is one such condition: for a real scalar surface admittance $Y\\ge0$ in siemens and $H_\\tau(t)=Y(n\\times E_\\tau(t))$, its instantaneous outward power density is $n\\cdot(E_\\tau(t)\\times H_\\tau(t))=Y|E_\\tau(t)|^2\\ge0$, so its cycle-averaged outward power is nonnegative. For phasor amplitude $\\widetilde E_\\tau$, that average is $\\tfrac12Y|\\widetilde E_\\tau|^2$. This is a smooth-field model assumption; no $L^2$ trace is inferred from membership in $H(\\operatorname{curl})$.\n\nThe total cycle-averaged outward boundary power is the port contribution $\\|b\\|_2^2-\\|a\\|_2^2$, plus $P_\\partial$ and any unlisted outgoing power $P_{\\mathrm{other}}$. No unlisted incoming power is included.\n\nFor each $a$, assume the adopted linear source-free Maxwell boundary problem has a unique time-harmonic solution and a unique outgoing vector $b$. The model assumes no incoming wave in unlisted channels. By linearity of the phasor equations and uniqueness, the map $a\\mapsto b$ is complex-linear: a linear combination of two solutions solves the problem for the same linear combination of their incoming data, and uniqueness identifies its outgoing data. The **finite scattering matrix** is the unique matrix $S(\\omega)\\in\\mathbb C^{N\\times N}$ such that $b=S(\\omega)a$. The definition assumes this well-posed solution map; it does not prove its existence, uniqueness, modal completeness, or absence of resonances.\n\nFor reciprocal use, the incoming and outgoing modal phases are additionally chosen so that for every pair of source-free solutions with incoming vectors $a_1,a_2$ and outgoing vectors $b_1,b_2$, the Lorentz boundary pairing reduces to\n\n$$\\int_{\\partial\\Omega}n\\cdot(\\widetilde E_1\\times\\widetilde H_2-\\widetilde E_2\\times\\widetilde H_1)\\,dS=a_1^Tb_2-b_1^Ta_2.$$\n\nThis is an explicit reciprocal-normalization condition, using the complex-bilinear products of the reciprocal-phasor model and the bounded-$C^1$ reciprocity identity of the Lorentz reciprocity theorem. Power normalization alone does not imply this bilinear pairing for arbitrary complex reference impedances. Rephasing a port is allowed only when the declared reciprocal pairing is preserved.\n\n"
+        },
+        {
+          "supplier": "pthm-emx-scattering-contraction",
+          "carrier": "items/pthm-emx-scattering-contraction.md",
+          "status": "Exact current public interface transcribed by root at the drained Step2 join; original substantive source-use review retained in historical_source_interface and native/same-owner reports. No renewed full supplier-proof reading asserted.",
+          "source_section": "Statement",
+          "exact_statement": "Assume $\\mathrm{AC}_\\omega$. Fix the finite port model at a real angular frequency $\\omega>0$, period $T=2\\pi/\\omega$, incoming amplitude $a\\in\\mathbb C^N$, and unique outgoing amplitude $b=S(\\omega)a$. Here $\\Omega$ is the bounded $C^1$ device region in that port model. The real fields $E,H,D,B:\\overline\\Omega\\times\\mathbb R\\to\\mathbb R^3$ and the material states are jointly $C^\\infty$ and $T$-periodic, satisfy the smooth source-free macroscopic Maxwell equations, and have free charge and current $\\rho_f=0$ and $J_f=0$. Their units are respectively $\\mathrm{V\\,m^{-1}}$, $\\mathrm{A\\,m^{-1}}$, $\\mathrm{C\\,m^{-2}}$, and $\\mathrm T$. Use one of the following two homogeneous material branches with constant coefficients.\n\nFor real vectors $v,w\\in\\mathbb R^3$, the Euclidean product is $v\\cdot w:=\\sum_{r=1}^3v_rw_r$ and $|v|^2:=v\\cdot v$.\n\nThe port model uses incoming and outgoing vectors $a,b\\in\\mathbb C^N$ with amplitude units $\\mathrm{W^{1/2}}$; for either vector $z$, $\\|z\\|_2^2:=\\sum_{\\alpha=1}^N|z_\\alpha|^2$ is its power in W, and the net outward port power is $\\|b\\|_2^2-\\|a\\|_2^2$.\n\n**Finite Lorentz branch.** For a finite $M\\ge1$, each $P_\\ell:\\overline\\Omega\\times\\mathbb R\\to\\mathbb R^3$ has units $\\mathrm{C\\,m^{-2}}$, $D=\\varepsilon_\\infty E+\\sum_{\\ell=1}^M P_\\ell$, $B=\\mu H$, and $\\partial_t^2P_\\ell+\\gamma_\\ell\\partial_tP_\\ell+\\omega_\\ell^2P_\\ell=a_\\ell E$, where $\\varepsilon_\\infty,\\mu,a_\\ell,\\omega_\\ell>0$ and $\\gamma_\\ell\\ge0$.\n\n**Drude branch.** $P,V:\\overline\\Omega\\times\\mathbb R\\to\\mathbb R^3$ have units $\\mathrm{C\\,m^{-2}}$ and $\\mathrm{A\\,m^{-2}}$, respectively; $D=\\varepsilon_\\infty E+P$, $B=\\mu H$, $\\partial_tP=V$, and $\\partial_tV+\\gamma V=aE$, where $\\varepsilon_\\infty,\\mu,a>0$ and $\\gamma\\ge0$.\n\nThe constants have the SI units of the respective adopted closure: $\\varepsilon_\\infty$ in $\\mathrm{F\\,m^{-1}}$, $\\mu$ in $\\mathrm{H\\,m^{-1}}$, each $a_\\ell$ or $a$ in $\\mathrm{F\\,m^{-1}\\,s^{-2}}$, and each $\\omega_\\ell$ or damping rate in $\\mathrm{s^{-1}}$. In the Lorentz branch define the loss-density map $\\ell:\\overline\\Omega\\times\\mathbb R\\to[0,\\infty)$ by $\\ell=\\sum_{\\ell=1}^M(\\gamma_\\ell/a_\\ell)|\\partial_tP_\\ell|^2$; in the Drude branch define it by $\\ell=(\\gamma/a)|V|^2$. These have units $\\mathrm{W\\,m^{-3}}$. For the solution with the fixed input $a$, set $P_{\\mathrm{mat}}(a):=T^{-1}\\int_0^T\\int_\\Omega\\ell\\,dV\\,dt$. Let $P_\\partial(a)\\ge0$ be its cycle-averaged outward power at passive physical walls, and let $P_{\\mathrm{other}}(a)\\ge0$ be all its outgoing radiation or propagating-channel power not represented in $b$, as defined by the port model. For brevity, in the proof write these three quantities as $P_{\\mathrm{mat}}$, $P_\\partial$, and $P_{\\mathrm{other}}$. Then\n\n$$\\|a\\|_2^2-\\|S(\\omega)a\\|_2^2=P_{\\mathrm{mat}}(a)+P_\\partial(a)+P_{\\mathrm{other}}(a)\\ge0.$$\n\nFor complex vectors and matrices, an overline denotes componentwise complex conjugation and a superscript ${}^{\\mathsf T}$ denotes ordinary transpose; set $z^\\dagger:=\\overline z^{\\,\\mathsf T}$ for $z\\in\\mathbb C^N$ and $A^\\dagger:=\\overline A^{\\,\\mathsf T}$ for $A\\in\\mathbb C^{N\\times N}$. A matrix is **Hermitian** when $A^\\dagger=A$, and is **unitary** when $A^\\dagger A=AA^\\dagger=I_N$, where $I_N$ is the identity matrix on $\\mathbb C^N$.\n\nConsequently $S(\\omega)$ is contractive: $\\|Sa\\|_2\\le\\|a\\|_2$ for every $a$. If $P_{\\mathrm{mat}}(a)=P_\\partial(a)=P_{\\mathrm{other}}(a)=0$ for every incoming vector $a$, then $S^\\dagger S=I_N$; because the defined map is square, $S$ is unitary. The exact equality and unitarity are conditional deductions of this model, not existence claims about arbitrary scatterers.",
+          "historical_source_interface": {
+            "source_section": "Statement",
+            "exact_statement": "Assume $\\mathrm{AC}_\\omega$. Fix the finite port model at a real angular frequency $\\omega>0$, period $T=2\\pi/\\omega$, incoming amplitude $a\\in\\mathbb C^N$, and unique outgoing amplitude $b=S(\\omega)a$. Here $\\Omega$ is the bounded $C^1$ device region in that port model. The real fields $E,H,D,B:\\overline\\Omega\\times\\mathbb R\\to\\mathbb R^3$ and the material states are jointly $C^\\infty$ and $T$-periodic, satisfy the smooth source-free macroscopic Maxwell equations, and have free charge and current $\\rho_f=0$ and $J_f=0$. Their units are respectively $\\mathrm{V\\,m^{-1}}$, $\\mathrm{A\\,m^{-1}}$, $\\mathrm{C\\,m^{-2}}$, and $\\mathrm T$. Use one of the following two homogeneous material branches with constant coefficients.\n\n**Finite Lorentz branch.** For a finite $M\\ge1$, each $P_\\ell:\\overline\\Omega\\times\\mathbb R\\to\\mathbb R^3$ has units $\\mathrm{C\\,m^{-2}}$, $D=\\varepsilon_\\infty E+\\sum_{\\ell=1}^M P_\\ell$, $B=\\mu H$, and $\\partial_t^2P_\\ell+\\gamma_\\ell\\partial_tP_\\ell+\\omega_\\ell^2P_\\ell=a_\\ell E$, where $\\varepsilon_\\infty,\\mu,a_\\ell,\\omega_\\ell>0$ and $\\gamma_\\ell\\ge0$.\n\n**Drude branch.** $P,V:\\overline\\Omega\\times\\mathbb R\\to\\mathbb R^3$ have units $\\mathrm{C\\,m^{-2}}$ and $\\mathrm{A\\,m^{-2}}$, respectively; $D=\\varepsilon_\\infty E+P$, $B=\\mu H$, $\\partial_tP=V$, and $\\partial_tV+\\gamma V=aE$, where $\\varepsilon_\\infty,\\mu,a>0$ and $\\gamma\\ge0$.\n\nThe constants have the SI units of the respective adopted closure: $\\varepsilon_\\infty$ in $\\mathrm{F\\,m^{-1}}$, $\\mu$ in $\\mathrm{H\\,m^{-1}}$, each $a_\\ell$ or $a$ in $\\mathrm{F\\,m^{-1}\\,s^{-2}}$, and each $\\omega_\\ell$ or damping rate in $\\mathrm{s^{-1}}$. In the Lorentz branch define $\\ell=\\sum_{\\ell=1}^M(\\gamma_\\ell/a_\\ell)|\\partial_tP_\\ell|^2$; in the Drude branch define $\\ell=(\\gamma/a)|V|^2$. These are nonnegative loss densities in $\\mathrm{W\\,m^{-3}}$, and let $P_{\\mathrm{mat}}=T^{-1}\\int_0^T\\int_\\Omega\\ell\\,dV\\,dt$. Let $P_\\partial\\ge0$ be the cycle-averaged outward power of the passive physical walls, and let $P_{\\mathrm{other}}\\ge0$ be all outgoing radiation or propagating-channel power not represented in $b$, as defined by the port model. Then\n\n$$\\|a\\|_2^2-\\|S(\\omega)a\\|_2^2=P_{\\mathrm{mat}}+P_\\partial+P_{\\mathrm{other}}\\ge0.$$\n\nConsequently $S(\\omega)$ is contractive: $\\|Sa\\|_2\\le\\|a\\|_2$ for every $a$. If all material loss, wall loss, and unlisted outward power vanish for every incoming vector, then $S^\\dagger S=I_N$; because the defined map is square, $S$ is unitary. The exact equality and unitarity are conditional deductions of this model, not existence claims about arbitrary scatterers.\n\n",
+            "status": "Same-batch finished carrier text inspected directly; readiness is recorded after final scoped checks."
+          },
+          "supplier_proof_status": "draft; this exact-quote refresh does not grant independent proof acceptance"
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-15-step1-author",
+        "notes": "The swap matrix is a finite-dimensional consistency example. The lost observed power exits into the omitted channel and is not material absorption or an experimental report."
+      }
+    }
+  }
+}

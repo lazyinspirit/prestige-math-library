@@ -1,0 +1,125 @@
+---
+id: thm-qftx-kz-flatness
+kind: theorem
+title: "Infinitesimal braid identities imply KZ flatness and braid monodromy"
+status: draft
+origin: pipeline
+pipeline_run: physics-non-fluid-129-2026-10-21-r2
+dependency_level: 1
+domain: mathematics
+library: mathematics
+deps:
+  - def-qftx-kz-connection
+  - lem-qftx-casimir-tensor-diagonal-invariance
+  - thm-a-flat-connection-admits-local-parallel-frames
+  - def-parallel-transport-along-a-piecewise-smooth-curve
+  - thm-existence-and-uniqueness-of-parallel-sections
+  - def-based-loops-and-fundamental-group
+  - def-ordered-configuration-space
+  - def-pure-braid-group-from-ordered-configurations
+  - def-unordered-configuration-space
+  - thm-ordered-configurations-cover-unordered-configurations-regularly
+  - def-braid-group-from-unordered-configurations
+dependency_roles:
+  def-qftx-kz-connection: mathematical-premise
+  lem-qftx-casimir-tensor-diagonal-invariance: mathematical-premise
+  thm-a-flat-connection-admits-local-parallel-frames: mathematical-premise
+  def-parallel-transport-along-a-piecewise-smooth-curve: mathematical-premise
+  thm-existence-and-uniqueness-of-parallel-sections: mathematical-premise
+  def-based-loops-and-fundamental-group: mathematical-premise
+  def-ordered-configuration-space: mathematical-premise
+  def-pure-braid-group-from-ordered-configurations: mathematical-premise
+  def-unordered-configuration-space: mathematical-premise
+  thm-ordered-configurations-cover-unordered-configurations-regularly: mathematical-premise
+  def-braid-group-from-unordered-configurations: mathematical-premise
+justified_by: []
+proof_strategy: direct
+axiom_use: "No choice axiom is used; sums are finite, the symmetric group is finite, and the homotopy subdivision uses compactness of the square."
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+sources:
+  references:
+    - title: "Toshitake Kohno, Monodromy representations of braid groups and Yang-Baxter equations"
+      url: "https://www.numdam.org/item/10.5802/aif.1114.pdf"
+      locator: "§1.1, printed pp. 141–142: infinitesimal pure-braid relations, flatness, pure monodromy, and the equal-representation full-braid descent."
+    - title: "Pavel I. Etingof, Igor B. Frenkel, and Alexander A. Kirillov Jr., Lectures on Representation Theory and Knizhnik-Zamolodchikov Equations"
+      url: "https://djvu.online/file/elCdJNnaapAuA"
+      locator: "Lecture 3, §3.5, printed pp. 36–37, Theorem 3.5.1; Lecture 8, §8.1, printed pp. 113–115: KZ flatness, local-system monodromy, and equal-module braid action."
+verification:
+  precheck: pending
+---
+
+## Statement
+
+Let $n\ge2$, let $\mathfrak g$ be a finite-dimensional complex semisimple Lie algebra with Killing form $B$, let $V_i$ be finite-dimensional complex $\mathfrak g$-modules, and let $\kappa\in\mathbb C\setminus\{0\}$. Fix a basepoint $q\in F_n(\mathbb C)$. On $F_n(\mathbb C)=\{(z_1,\ldots,z_n):z_i\ne z_j\text{ for }i\ne j\}$ let $\nabla^{\mathrm{KZ}}_\kappa=d-\kappa^{-1}\sum_{i<j}\Omega_{ij}\eta_{ij}$ be the connection defined from the pairwise Casimir tensors $\Omega_{ij}=\sum_a\rho_i(x_a)^{(i)}\rho_j(x^a)^{(j)}$ and forms $\eta_{ij}=(dz_i-dz_j)/(z_i-z_j)$, using $B$-dual bases. Then $\nabla^{\mathrm{KZ}}_\kappa$ is flat. Its sheaf of local horizontal sections is a local system with right monodromy action $T$ of the fundamental group of the ordered configuration space based at $q$. With the library convention that $[\alpha][\beta]$ traverses $\alpha$ first and $\beta$ second, the associated left representation is $[\gamma]\mapsto T_{[\gamma]}^{-1}$; on piecewise smooth loops, $T_{[\gamma]}$ is horizontal parallel transport $P_\gamma$. The homeomorphism $z\mapsto z/(1+|z|)$ identifies this fundamental group with the configuration pure braid group. If all $V_i$ are the same module with the same action, simultaneous label and tensor-factor permutation makes the connection equivariant: for $\sigma\in S_n$, set $\sigma\cdot(z_1,\ldots,z_n)=(z_{\sigma^{-1}(1)},\ldots,z_{\sigma^{-1}(n)})$ and $\tau_\sigma(v_1\otimes\cdots\otimes v_n)=v_{\sigma^{-1}(1)}\otimes\cdots\otimes v_{\sigma^{-1}(n)}$, and use $\sigma\cdot(z,v)=(\sigma\cdot z,\tau_\sigma v)$. The quotient bundle is $(F_n(\mathbb C)\times V^{\otimes n})/S_n$ under this action, and the connection descends to the unordered configuration space, giving the corresponding full configuration braid-group representation based at $[q]$. No unitarity or equivalence with a quantum-group ribbon category is asserted.
+
+## Statement references
+
+[[def-qftx-kz-connection]]
+
+[[lem-qftx-casimir-tensor-diagonal-invariance]]
+
+[[thm-a-flat-connection-admits-local-parallel-frames]]
+
+[[def-parallel-transport-along-a-piecewise-smooth-curve]]
+
+[[def-based-loops-and-fundamental-group]]
+
+[[def-ordered-configuration-space]]
+
+[[def-pure-braid-group-from-ordered-configurations]]
+
+[[def-unordered-configuration-space]]
+
+[[thm-ordered-configurations-cover-unordered-configurations-regularly]]
+
+[[def-braid-group-from-unordered-configurations]]
+
+## Facts & Assumptions
+
+**Given:** $n\ge2$, finite-dimensional complex semisimple $\mathfrak g$ with its Killing form, finite-dimensional representations $\rho_i$ on $V_i$, $\kappa\ne0$, and the KZ connection as in the Statement.
+
+[F1] [[def-qftx-kz-connection]]: on $F_n(\mathbb C)$ the trivial bundle with fiber $V_1\otimes\cdots\otimes V_n$ has connection $\nabla=d-\kappa^{-1}\sum_{i<j}\Omega_{ij}\eta_{ij}$, with $\Omega_{ij}$ the pairwise Casimir tensor actions and $\eta_{ij}=(dz_i-dz_j)/(z_i-z_j)$.
+
+[F2] [[lem-qftx-casimir-tensor-diagonal-invariance]]: the Casimir tensor obeys $\sum_a[x,x_a]\otimes x^a+x_a\otimes[x,x^a]=0$ for every $x\in\mathfrak g$.
+
+[F3] [[thm-a-flat-connection-admits-local-parallel-frames]]: a connection on a finite-rank smooth vector bundle is flat exactly when every point has a neighborhood with a frame of parallel sections.
+
+[F4] [[def-parallel-transport-along-a-piecewise-smooth-curve]]: parallel transport along a piecewise smooth curve sends an initial vector to the endpoint of the unique parallel section along that curve.
+
+[F5] [[thm-existence-and-uniqueness-of-parallel-sections]]: on a piecewise smooth curve, an initial vector determines exactly one continuous piecewise parallel section, with continuity at corners.
+
+[F6] [[def-based-loops-and-fundamental-group]]: $[\alpha][\beta]=[\alpha*\beta]$, where the first-then-second loop product traverses $\alpha$ first and $\beta$ second.
+
+[F7] [[def-ordered-configuration-space]]: $F_n(X)$ consists of ordered $n$-tuples in $X$ with pairwise distinct coordinates.
+
+[F8] [[def-pure-braid-group-from-ordered-configurations]]: $PB_n=\pi_1(F_n(D^2),q)$, and the open-disc model induces the same fundamental group at the corresponding base configuration.
+
+[F9] [[def-unordered-configuration-space]]: $C_n(X)=F_n(X)/S_n$ with the quotient topology under coordinate permutation.
+
+[F10] [[thm-ordered-configurations-cover-unordered-configurations-regularly]]: for a connected Hausdorff manifold of dimension at least two, the ordered-to-unordered configuration projection is a regular covering with deck transformations induced by the free $S_n$ coordinate-permutation action.
+
+[F11] [[def-braid-group-from-unordered-configurations]]: $B_n^{\mathrm{conf}}=\pi_1(C_n(D^2),[q])$, with its open-disc configuration-space model.
+
+## Proof
+
+**Proof technique:** direct curvature expansion followed by the local-system monodromy construction.
+
+1.1 If $\{i,j\}$ and $\{k,l\}$ are disjoint pairs, then $\Omega_{ij}$ and $\Omega_{kl}$ act on disjoint tensor factors. Each factorwise operator commutes with every operator on the other factors, so $[\Omega_{ij},\Omega_{kl}]=0$. [F1, given, algebra]
+
+1.2 For three distinct indices $i,j,k$, write $\Omega=\sum_a x_a\otimes x^a$. Apply [F2] with $x=x_b$, place its two tensor factors in slots $i,j$, apply $\rho_i\otimes\rho_j$, multiply on slot $k$ by $\rho_k(x^b)$, and sum over $b$. The first resulting sum is $- [\Omega_{ij},\Omega_{ik}]$ and the second is $-[\Omega_{ij},\Omega_{jk}]$, because $[x_b,x_a]=-[x_a,x_b]$ and $[x_b,x^a]=-[x^a,x_b]$. Hence $[\Omega_{ij},\Omega_{ik}+\Omega_{jk}]=0$. [F2, given, algebra]
+
+1.3 Set $u=z_i-z_j$ and $v=z_j-z_k$, so $z_i-z_k=u+v$. Then $\eta_{ij}=du/u$, $\eta_{jk}=dv/v$, and $\eta_{ik}=(du+dv)/(u+v)$. Direct expansion gives $\eta_{ij}\wedge\eta_{jk}+\eta_{jk}\wedge\eta_{ik}+\eta_{ik}\wedge\eta_{ij}=\left(1/(uv)-1/(v(u+v))-1/(u(u+v))\right)du\wedge dv=0$, since the numerator after taking a common denominator is $(u+v)-u-v=0$. [F1, algebra]
+
+2.1 Put $B_0:=\sum_{i<j}\Omega_{ij}\eta_{ij}$, so $\nabla=d-\kappa^{-1}B_0$. Each $\eta_{ij}$ is closed because $d(dw/w)=0$ on $w\ne0$, hence $dB_0=0$, and the curvature is $R^\nabla=\kappa^{-2}B_0\wedge B_0$. Expanding the wedge product groups terms by disjoint pairs and by triples. The disjoint terms vanish by step 1.1. For $i<j<k$, the triple contribution is $C_{ijk}(\eta_{ij}\wedge\eta_{ik}-\eta_{ij}\wedge\eta_{jk}+\eta_{ik}\wedge\eta_{jk})$, where $C_{ijk}:=[\Omega_{ij},\Omega_{ik}]$: step 1.2 gives the other two commutators as $-C_{ijk}$ and $C_{ijk}$. This form is the negative of the zero Arnold sum in step 1.3, so every triple contribution vanishes and $R^\nabla=0$. [F1, step 1.1, step 1.2, step 1.3, algebra]
+
+3.1 By [F3], every point has a neighborhood with a parallel frame. A parallel section has constant coordinates in that frame. On an overlap, if one parallel frame is the other times a smooth matrix $G(x)$, the connection equation gives $dG=0$, so $G$ is constant on each connected component of the overlap. These charts therefore define a locally constant sheaf of horizontal sections; define its transport along a continuous path by subdividing the path into chart intervals and retaining the same frame coordinates. For a piecewise smooth path this agrees with differential parallel transport by [F4] and uniqueness in [F5]. [F3, F4, F5, step 2.1, construct]
+
+3.2 Suppose $V_i=V_0$ and $\rho_i=\rho_0$ for every $i$. The coordinate-permutation action from [F7] lifts to the same permutation of tensor factors. Since $\eta_{ij}$ is symmetric in $i,j$, and the factor permutation sends $\Omega_{ij}$ to the correspondingly relabeled $\Omega$, it preserves the connection. The action is free on $F_n(\mathbb C)$ by [F7]. The usual $\mathbb C$ is a connected Hausdorff real 2-manifold, so [F10] makes the quotient map a regular covering; the equivariant bundle and connection therefore descend to the associated vector bundle over $C_n(\mathbb C)$, with descended fiber identified with $V_0^{\otimes n}$ after choosing the representative $q$. [F1, F7, F9, F10, step 2.1, algebra]
+
+4.1 For an endpoint-fixed homotopy of paths, pull back the parallel-frame neighborhoods to the compact square. A finite subcover has a positive Lebesgue number: choose finitely many smaller metric balls covering the square whose doubled balls lie in cover members, and take the minimum radius $\delta$ of those smaller balls. Choose a rectangular grid whose cell diameters are less than $\delta$; every cell then maps into one parallel-frame neighborhood. Transport around each cell is the identity because its four edges use one constant frame. Multiplying the cell identities cancels every interior edge with its reverse, so the boundary paths have identical local-system transport. By concatenating the unique parallel sections on successive path segments, [F5] gives $P_{\alpha*\beta}=P_\beta P_\alpha$; reversing a parallel section gives $P_{\bar\alpha}=P_\alpha^{-1}$. The same composition and inverse rules hold for local-system transport by its subdivision definition. [F3, F4, F5, step 3.1, construct]
+
+5.1 Let $T_\gamma$ denote the local-system transport for a continuous path. Step 4.1 makes it depend only on the path-homotopy class. Under [F6], the first-then-second product satisfies $T_{\alpha*\beta}=T_\beta T_\alpha$, so $\rho([\gamma]):=T_\gamma^{-1}$ is a left representation because $\rho([\alpha][\beta])=(T_\beta T_\alpha)^{-1}=T_\alpha^{-1}T_\beta^{-1}$. On piecewise smooth loops $T_\gamma=P_\gamma$ by step 3.1. The map $h(z)=z/(1+|z|)$ has inverse $h^{-1}(w)=w/(1-|w|)$ from $D^\circ$ to $\mathbb C$; its coordinatewise product restricts to a homeomorphism of ordered configuration spaces. It induces an isomorphism of fundamental groups, and [F8] identifies the resulting group with $PB_n$. [F4, F5, F6, F7, F8, step 3.1, step 4.1, algebra]
+
+6.1 The descended connection is flat because its pullback is the flat connection of step 2.1. Applying the local-system monodromy construction of steps 3.1 and 5.1 on the quotient gives its left monodromy representation of $\pi_1(C_n(\mathbb C),[q])$. The coordinatewise homeomorphism $h$ is $S_n$-equivariant, so it descends to a homeomorphism of unordered configuration spaces; [F11] identifies that fundamental group with the full configuration braid group. No identification with any quantum-group ribbon representation follows from this construction. [F6, F9, F11, step 2.1, step 3.1, step 5.1, step 3.2] ∎

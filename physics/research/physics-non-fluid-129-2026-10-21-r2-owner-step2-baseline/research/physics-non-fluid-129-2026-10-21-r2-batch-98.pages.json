@@ -1,0 +1,269 @@
+[
+  {
+    "order": 893,
+    "id": "csm-frontier-rare-event-numerics",
+    "kind": "A",
+    "category": "classical-statistical-mechanics",
+    "library": "physics",
+    "title": "Rare-event reweighting, overlap and certified partition ratios",
+    "companion": "csm-frontier-rare-event-numerics-examples",
+    "requires": [
+      "csm-frontier-sampling-certificates",
+      "csm-frontier-inverse-gibbs",
+      "importance-sampling-and-weight-diagnostics",
+      "interval-newton-krawczyk-and-polynomial-root-isolation",
+      "outward-rounded-interval-and-ball-arithmetic"
+    ],
+    "items": [
+      {
+        "id": "thm-csm-frontier-partition-ratio-overlap",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Finite partition-ratio estimator and overlap variance",
+        "statement": "Let $\\mathsf X$ be a finite nonempty set equipped with counting measure. For $a\\in\\{0,1\\}$, let $w_a:\\mathsf X\\to(0,\\infty)$ be a finite positive weight, define $Z_a=\\sum_{x\\in\\mathsf X}w_a(x)$, and define the probability mass function $\\pi_a(x)=w_a(x)/Z_a$. For an integer $n\\geq1$, let $X_1,\\ldots,X_n$ be independent random variables with common law $\\pi_0$. Define $R(x)=w_1(x)/w_0(x)$, $\\widehat r_n=n^{-1}\\sum_{j=1}^nR(X_j)$, and $\\chi^2(\\pi_1\\Vert\\pi_0)=\\sum_{x\\in\\mathsf X}\\pi_0(x)(\\pi_1(x)/\\pi_0(x)-1)^2$. Then\n\n$$\\mathbb E_{\\pi_0}[\\widehat r_n]=\\frac{Z_1}{Z_0},\\qquad \\frac{\\operatorname{Var}_{\\pi_0}(\\widehat r_n)}{(Z_1/Z_0)^2}=\\frac{\\chi^2(\\pi_1\\Vert\\pi_0)}{n}.$$\n\nThe estimator uses only the finite raw-weight ratios $w_1(X_j)/w_0(X_j)$; the partition sums define the target ratio and probability laws but are not inputs to its computation.",
+        "strategy": "direct",
+        "deps": [
+          "alg-importance-sampling",
+          "thm-ordinary-importance-sampling-finite-variance-under-weighted-second-moment"
+        ],
+        "dependency_roles": {
+          "alg-importance-sampling": "mathematical-premise",
+          "thm-ordinary-importance-sampling-finite-variance-under-weighted-second-moment": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "physical_scope": null,
+        "sources": {
+          "references": [
+            {
+              "title": "Art B. Owen, Monte Carlo Theory, Methods and Examples, Chapter 9 §9.1, Theorem 9.1 and equations (9.3)–(9.4)",
+              "url": "https://artowen.su.domains/mc/Ch-var-is.pdf",
+              "locator": "Chapter 9 §9.1, printed pp. 3–5 (PDF pp. 3–5): support condition, weighted sample mean, and its unbiasedness and finite-variance formula. §9.2, printed pp. 8–9, distinguishes the unknown-normalizer ratio estimator."
+            },
+            {
+              "title": "Xiao-Li Meng and Wing Hung Wong, Simulating Ratios of Normalizing Constants via a Simple Identity: A Theoretical Exploration",
+              "url": "https://www3.stat.sinica.edu.tw/statistica/oldpdf/a6n43.pdf",
+              "locator": "§§1–3, printed pp. 831–837 (PDF pp. 1–6): normalizing-constant ratios, common-support identity, independent draws, and relative-error analysis. Their ratio-estimator asymptotics are not imported as this finite IID theorem."
+            }
+          ]
+        },
+        "dependency_level": 0,
+        "library": "physics"
+      },
+      {
+        "id": "alg-csm-frontier-independent-bridge-ratios",
+        "kind": "algorithm",
+        "domain": "mathematics",
+        "title": "Independent finite bridge-ratio estimator",
+        "statement": "Input a finite nonempty state space $\\mathsf X$, an integer $K\\geq1$, positive finite weights $w_0,\\ldots,w_K:\\mathsf X\\to(0,\\infty)$, positive integers $n_0,\\ldots,n_{K-1}$, and arrays of supplied random samples $X_{k,1},\\ldots,X_{k,n_k}$ such that for each $k$ the samples are IID with law $\\pi_k(x)=w_k(x)/Z_k$, where $Z_k=\\sum_{x\\in\\mathsf X}w_k(x)$, and all samples across distinct stages are mutually independent. These exact IID draws are inputs, not outputs of this procedure; approximate Gibbs draws, correlated trajectories, and adaptively chosen bridges are outside its contract.\n\nFor each $k=0,\\ldots,K-1$, compute $\\overline R_k=n_k^{-1}\\sum_{j=1}^{n_k}w_{k+1}(X_{k,j})/w_k(X_{k,j})$. Return $\\widehat R=\\prod_{k=0}^{K-1}\\overline R_k$. The procedure evaluates only raw-weight ratios; it neither computes nor requires any $Z_k$ as a numeric input.",
+        "strategy": "Exact IID raw-weight bridge procedure.",
+        "deps": [
+          "thm-csm-frontier-partition-ratio-overlap"
+        ],
+        "dependency_roles": {
+          "thm-csm-frontier-partition-ratio-overlap": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "physical_scope": null,
+        "sources": {
+          "references": [
+            {
+              "title": "Art B. Owen, Monte Carlo Theory, Methods and Examples, Chapter 10 §10.9, Bridge, Umbrella and Path Sampling",
+              "url": "https://artowen.su.domains/mc/Ch-var-adv.pdf",
+              "locator": "Chapter 10 §10.9, printed pp. 39–45 (PDF pp. 39–45): ratios of normalizing constants, independent importance estimates, and path sampling through intermediate distributions. The local algorithm imposes exact IID draws and independent stages."
+            },
+            {
+              "title": "Xiao-Li Meng and Wing Hung Wong, Simulating Ratios of Normalizing Constants via a Simple Identity: A Theoretical Exploration",
+              "url": "https://www3.stat.sinica.edu.tw/statistica/oldpdf/a6n43.pdf",
+              "locator": "§§2–3, printed pp. 834–837 (PDF pp. 4–6): bridge identities and independent-draw ratio analysis. Their ratio estimators and asymptotic calculations are not substituted for this explicit procedure."
+            }
+          ]
+        },
+        "dependency_level": 1,
+        "library": "physics"
+      },
+      {
+        "id": "thm-csm-frontier-bridge-ratio-variance",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Mean and relative second moment of independent bridge ratios",
+        "statement": "Let $\\mathsf X$ be a finite nonempty set, let $K\\geq1$, and let $w_0,\\ldots,w_K:\\mathsf X\\to(0,\\infty)$ be finite positive weights. For each $k$, set $Z_k=\\sum_{x\\in\\mathsf X}w_k(x)$ and $\\pi_k(x)=w_k(x)/Z_k$. For positive probability mass functions $\\nu,\\mu$ on a finite set, define $\\chi^2(\\nu\\Vert\\mu)=\\sum_x\\mu(x)(\\nu(x)/\\mu(x)-1)^2$. For each $k=0,\\ldots,K-1$, take $n_k\\geq1$ IID exact samples with law $\\pi_k$, with all samples across distinct stages independent, and form the output of alg-csm-frontier-independent-bridge-ratios. Then\n\n$$\\mathbb E[\\widehat R]=\\frac{Z_K}{Z_0},\\qquad \\frac{\\mathbb E[\\widehat R^2]}{(Z_K/Z_0)^2}=\\prod_{k=0}^{K-1}\\left(1+\\frac{\\chi^2(\\pi_{k+1}\\Vert\\pi_k)}{n_k}\\right).$$\n\nConsequently, $\\operatorname{Var}(\\widehat R)/(Z_K/Z_0)^2$ is the displayed product minus $1$. This is an exact finite-sample result under independent exact draws; it gives no claim for reused trajectories, approximate Gibbs draws, or adaptively selected bridges.",
+        "strategy": "direct",
+        "deps": [
+          "alg-csm-frontier-independent-bridge-ratios",
+          "thm-csm-frontier-partition-ratio-overlap"
+        ],
+        "dependency_roles": {
+          "alg-csm-frontier-independent-bridge-ratios": "mathematical-premise",
+          "thm-csm-frontier-partition-ratio-overlap": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "physical_scope": null,
+        "sources": {
+          "references": [
+            {
+              "title": "Art B. Owen, Monte Carlo Theory, Methods and Examples, Chapter 10 §10.9, Bridge, Umbrella and Path Sampling",
+              "url": "https://artowen.su.domains/mc/Ch-var-adv.pdf",
+              "locator": "Chapter 10 §10.9, printed pp. 39–45 (PDF pp. 39–45): bridge and path estimates of normalizing-constant ratios and the requirement for intermediate overlap. The theorem here proves an exact finite independent-stage formula for its simpler raw-ratio procedure."
+            },
+            {
+              "title": "Xiao-Li Meng and Wing Hung Wong, Simulating Ratios of Normalizing Constants via a Simple Identity: A Theoretical Exploration",
+              "url": "https://www3.stat.sinica.edu.tw/statistica/oldpdf/a6n43.pdf",
+              "locator": "§§2–3, printed pp. 834–837 (PDF pp. 4–6): bridge identities and independent-draw relative-error analysis. Their ratio-estimator variance is first-order/asymptotic; no such ratio approximation is used in this finite proof."
+            }
+          ]
+        },
+        "dependency_level": 2,
+        "library": "physics"
+      },
+      {
+        "id": "alg-csm-frontier-interval-finite-partition",
+        "kind": "algorithm",
+        "domain": "mathematics",
+        "title": "Certified finite partition and expectation enclosure",
+        "statement": "Input a finite nonempty set $\\mathsf X$ with an explicit enumeration, an exact positive finite weight $w(x)$ and a real observable $f(x)$ for each $x\\in\\mathsf X$, a finite rational interval $W_x=[a_x,b_x]$ containing $w(x)$, a finite rational interval $F_x=[c_x,d_x]$ containing $f(x)$, and a selected finite dyadic format $\\mathbb F$ with directed roundings. The interval assertions are certified input premises; this procedure does not derive them from energies or evaluate an exponential or logarithm.\n\nFor each input interval, convert its lower rational endpoint by directed rounding down and its upper rational endpoint by directed rounding up into $\\mathbb F$. If any conversion overflows, return unresolved-overflow and no finite enclosure claim. Using the resulting dyadic intervals and the outward-rounded operations, construct the finite expression DAG for\n\n$$\\mathcal Z=\\sum_{x\\in\\mathsf X}W_x,\\qquad \\mathcal N=\\sum_{x\\in\\mathsf X}W_xF_x.$$\n\nEvery addition and multiplication uses the outward-rounded interval operations; division is used only for a denominator interval excluding zero. If any operation returns a non-finite status, return unresolved-operation and no finite enclosure claim. Otherwise return the finite intervals $\\mathcal Z$ and $\\mathcal N$. If the lower endpoint of $\\mathcal Z$ is strictly positive, also return the outward interval quotient $\\mathcal E=\\mathcal N/\\mathcal Z$; if that endpoint is nonpositive, return unresolved-denominator and no normalized-expectation enclosure.\n\nThis is finite enumeration and can require exponentially many operations in the model size. It certifies arithmetic from supplied weight intervals; it does not certify how those intervals were obtained.",
+        "strategy": "Finite outward-rounded interval enumeration with explicit unresolved statuses.",
+        "deps": [
+          "def-dyadic-floating-point-format-and-directed-rounding",
+          "def-intervals-rectangles-and-complex-balls",
+          "def-outward-rounded-interval-and-ball-operations",
+          "lem-directed-dyadic-rounding-enclosure-and-error",
+          "lem-real-interval-arithmetic-preserves-enclosure"
+        ],
+        "dependency_roles": {
+          "def-dyadic-floating-point-format-and-directed-rounding": "mathematical-premise",
+          "def-intervals-rectangles-and-complex-balls": "mathematical-premise",
+          "def-outward-rounded-interval-and-ball-operations": "mathematical-premise",
+          "lem-directed-dyadic-rounding-enclosure-and-error": "mathematical-premise",
+          "lem-real-interval-arithmetic-preserves-enclosure": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "physical_scope": null,
+        "sources": {
+          "references": [
+            {
+              "title": "Warwick Tucker, Validated Numerics: A Short Introduction to Rigorous Computations, Chapter 1 §§1.3–1.5",
+              "url": "https://pup-assets.imgix.net/onix/images/9780691247656/9780691247656.pdf?fm=pdf",
+              "locator": "Chapter 1 §§1.3–1.5, printed pp. 5–18 (PDF pp. 6–19): finite floating formats, directed rounding, outward endpoints, and overflow/domain-status conventions. The available book excerpt contains the complete cited chapter."
+            },
+            {
+              "title": "R. B. Kearfott, Interval Computations: Introduction, Uses, and Resources",
+              "url": "https://interval.louisiana.edu/preprints/survey.pdf",
+              "locator": "§1, printed pp. 95–97 (PDF pp. 1–3): interval arithmetic as exact range enclosures for basic operations, endpoint formulas, expression evaluation, and outward rounding."
+            }
+          ]
+        },
+        "dependency_level": 0,
+        "library": "physics"
+      },
+      {
+        "id": "thm-csm-frontier-interval-partition-certificate",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Soundness and termination of finite partition enclosures",
+        "statement": "Let $\\mathsf X$ be finite and nonempty, let $w:\\mathsf X\\to(0,\\infty)$ be an exact finite positive weight, and let $f:\\mathsf X\\to\\mathbb R$ be a finite observable. Suppose the finite rational input intervals in the definition of alg-csm-frontier-interval-finite-partition contain every exact $w(x)$ and $f(x)$. The algorithm terminates after finitely many operations. If it returns finite intervals $\\mathcal Z$ and $\\mathcal N$, then they contain $Z=\\sum_{x\\in\\mathsf X}w(x)$ and $N=\\sum_{x\\in\\mathsf X}w(x)f(x)$, respectively. If it also returns an expectation interval $\\mathcal E$, then its denominator interval has positive lower endpoint and $\\mathcal E$ contains the exact normalized expectation $\\sum_x\\pi(x)f(x)=N/Z$, where $\\pi(x)=w(x)/Z$. An overflow, non-finite operation, or nonpositive denominator lower endpoint produces an unresolved status and carries no normalized-expectation enclosure claim.",
+        "strategy": "direct",
+        "deps": [
+          "alg-csm-frontier-interval-finite-partition",
+          "def-dyadic-floating-point-format-and-directed-rounding",
+          "def-intervals-rectangles-and-complex-balls",
+          "def-outward-rounded-interval-and-ball-operations",
+          "lem-directed-dyadic-rounding-enclosure-and-error",
+          "lem-real-interval-arithmetic-preserves-enclosure"
+        ],
+        "dependency_roles": {
+          "alg-csm-frontier-interval-finite-partition": "mathematical-premise",
+          "def-dyadic-floating-point-format-and-directed-rounding": "mathematical-premise",
+          "def-intervals-rectangles-and-complex-balls": "mathematical-premise",
+          "def-outward-rounded-interval-and-ball-operations": "mathematical-premise",
+          "lem-directed-dyadic-rounding-enclosure-and-error": "mathematical-premise",
+          "lem-real-interval-arithmetic-preserves-enclosure": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "physical_scope": null,
+        "sources": {
+          "references": [
+            {
+              "title": "Warwick Tucker, Validated Numerics: A Short Introduction to Rigorous Computations, Chapter 1 §§1.3–1.5",
+              "url": "https://pup-assets.imgix.net/onix/images/9780691247656/9780691247656.pdf?fm=pdf",
+              "locator": "Chapter 1 §§1.3–1.5, printed pp. 5–18 (PDF pp. 6–19): directed endpoint rounding and a complete finite summation enclosure example. The source supports the numerical enclosure context; this theorem's finite DAG argument is local."
+            },
+            {
+              "title": "R. B. Kearfott, Interval Computations: Introduction, Uses, and Resources",
+              "url": "https://interval.louisiana.edu/preprints/survey.pdf",
+              "locator": "§1, printed pp. 95–97 (PDF pp. 1–3): exact interval images for elementary operations and outward-rounded enclosures of composed expressions."
+            }
+          ]
+        },
+        "dependency_level": 1,
+        "library": "physics"
+      }
+    ]
+  },
+  {
+    "order": 894,
+    "id": "csm-frontier-rare-event-numerics-examples",
+    "kind": "B",
+    "category": "classical-statistical-mechanics",
+    "library": "physics",
+    "title": "Rare-event reweighting, overlap and certified partition ratios — Examples",
+    "companion": "csm-frontier-rare-event-numerics",
+    "requires": [
+      "csm-frontier-rare-event-numerics"
+    ],
+    "items": [
+      {
+        "id": "ex-csm-frontier-product-overlap-explosion",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "Product-law overlap explosion",
+        "statement": "Let $\\mathsf S$ be a finite nonempty set and let $p_0,p_1:\\mathsf S\\to(0,1]$ be distinct probability mass functions. For positive laws $\\nu,\\mu$ on a finite set, define $\\chi^2(\\nu\\Vert\\mu)=\\sum_x\\mu(x)(\\nu(x)/\\mu(x)-1)^2$. For each integer $m\\geq1$, define the positive product laws $\\pi_i^{(m)}=p_i^{\\otimes m}$ on $\\mathsf S^m$. Then\n\n$$1+\\chi^2(\\pi_1^{(m)}\\Vert\\pi_0^{(m)})=\\left(1+\\chi^2(p_1\\Vert p_0)\\right)^m.$$\n\nFor $N\\geq1$ IID draws $X_1,\\ldots,X_N\\sim\\pi_0^{(m)}$, define the one-stage raw-ratio estimator $\\widehat r=N^{-1}\\sum_{j=1}^N\\pi_1^{(m)}(X_j)/\\pi_0^{(m)}(X_j)$. Its relative variance is $\\big((1+\\chi^2(p_1\\Vert p_0))^m-1\\big)/N$. Since $p_0\\ne p_1$, keeping this relative variance at most a fixed $\\varepsilon>0$ requires $N\\geq((1+\\chi^2(p_1\\Vert p_0))^m-1)/\\varepsilon$, an exponential sample-size bound for this one-stage estimator.",
+        "strategy": "direct",
+        "deps": [
+          "thm-csm-frontier-partition-ratio-overlap"
+        ],
+        "dependency_roles": {
+          "thm-csm-frontier-partition-ratio-overlap": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "physical_scope": null,
+        "sources": {
+          "references": [
+            {
+              "title": "Art B. Owen, Monte Carlo Theory, Methods and Examples, Chapter 9 §9.1",
+              "url": "https://artowen.su.domains/mc/Ch-var-is.pdf",
+              "locator": "Chapter 9 §9.1, printed pp. 3–5 (PDF pp. 3–5): support conditions and the weighted-sample variance identity used as a comparison for the local product calculation."
+            },
+            {
+              "title": "Xiao-Li Meng and Wing Hung Wong, Simulating Ratios of Normalizing Constants via a Simple Identity: A Theoretical Exploration",
+              "url": "https://www3.stat.sinica.edu.tw/statistica/oldpdf/a6n43.pdf",
+              "locator": "§§2–3, printed pp. 834–837 (PDF pp. 4–6): overlap between target/reference laws and relative mean-square error under independent draws. The exact product-law identity and finite bound are proved here."
+            }
+          ]
+        },
+        "dependency_level": 1,
+        "library": "physics",
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

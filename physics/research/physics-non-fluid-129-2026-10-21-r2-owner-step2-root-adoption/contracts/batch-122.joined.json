@@ -1,0 +1,1039 @@
+{
+  "version": 1,
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "scope": [
+    "lem-tgrx-finite-matrix-entropy-variation",
+    "prop-tgrx-finite-modular-balance",
+    "prop-tgrx-entropy-first-variation",
+    "ex-tgrx-qubit-first-variation"
+  ],
+  "contracts": {
+    "lem-tgrx-finite-matrix-entropy-variation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-qsm-matrix-state-calculus",
+          "source_section": "Statement",
+          "quote": "Use the following conventions on a complex inner-product space $H$ of dimension $D\\geq1$, with inner product linear in its first argument. For an endomorphism $A$, define $\\operatorname{Tr}A:=\\sum_{j=1}^D\\langle Ae_j,e_j\\rangle$ in an orthonormal basis; step 3.1 proves basis independence. For any Hermitian $M$, its **positive spectral subspace** (called its positive support here) is $S_M:=\\bigoplus_{\\lambda>0}\\ker(M-\\lambda I)$; when $M\\geq0$ this equals $(\\ker M)^\\perp$. Its support logarithm is $\\log(M|_{S_M}):=\\sum_{\\lambda>0}(\\log\\lambda)P_\\lambda|_{S_M}$, where $P_\\lambda$ is the orthogonal projection onto that eigenspace. No value $\\log0$ is assigned; for $M=0$ this is the unique endomorphism of the zero space. For the set $\\mathcal D(H)$ of positive semidefinite Hermitian endomorphisms with trace one, a point $\\rho$ is **extreme** if every equality $\\rho=t\\sigma+(1-t)\\tau$ with $\\sigma,\\tau\\in\\mathcal D(H)$ and $0<t<1$ implies $\\sigma=\\tau=\\rho$.\n\nLet $H$ be a complex inner-product space of finite dimension $D\\geq1$, with inner product linear in its first argument. Every Hermitian endomorphism $M$ has an orthonormal eigenbasis with real eigenvalues. For a real function $f$ on its finite spectrum, define $f(M)$ by its spectral projections; this definition is independent of the choice of eigenbasis. In particular positive square roots, exponentials, and logarithms on positive supports are well defined.\n\nFor a density matrix $\\rho$ on $H$, meaning a Hermitian positive semidefinite operator with $\\operatorname{Tr}\\rho=1$, $\\operatorname{Tr}(\\rho A)=\\sum_jp_j\\langle Au_j,u_j\\rangle$ for bounded $A$, where $\\rho=\\sum_jp_j|u_j\\rangle\\langle u_j|$. The weighted form $(X,Y)_\\rho=\\operatorname{Tr}(\\rho X^*Y)$ satisfies Cauchy–Schwarz, $|(X,Y)_\\rho|^2\\leq(X,X)_\\rho(Y,Y)_\\rho$. Finally, $\\operatorname{Tr}(\\rho^2)\\leq1$, with equality exactly for rank-one densities, and those are exactly the extreme points of the finite density-matrix set.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-trace-of-an-endomorphism",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a finite-dimensional vector space over $F$ and let $T:V\\to V$ be\nlinear. Choose any ordered basis $\\mathcal B$ of $V$ and define the **trace of\nthe endomorphism $T$** by\n\n$$\\operatorname{tr}(T):=\\operatorname{tr}([T]_{\\mathcal B}^{\\mathcal B}).$$\n\nThis is independent of the chosen basis: matrices of the same endomorphism in\ntwo ordered bases are similar, and similar matrices have equal trace. When\n$V$ is the zero space, the empty basis gives trace $0$.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because The exponential is a continuous bijection from $\\mathbb{R}$ onto $(0,\\infty)$ states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "2.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "1.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-geometric-series",
+          "source_section": "Statement",
+          "quote": "Let $r \\in \\mathbb{R}$ and let $r^k$ be the integer power (Integer powers $a^m$),\nso that $r^0 = 1$ for every $r$, including $r = 0$.\n\n1. If $|r| < 1$ then the series $\\sum r^k$ converges (Series, partial sums, convergence and the sum, divergence, and the tail series) and\n   $$\\sum_{k=0}^{\\infty} r^{k} \\;=\\; \\frac{1}{1-r} .$$\n2. If $|r| \\ge 1$ then $\\sum r^k$ diverges.\n\nThe series starts at $k = 0$ and its first term is $r^0 = 1$; in particular\n$\\sum_{k=0}^{\\infty} 2^{-k} = 2$, while the series starting at $k = 1$ sums to\n$1$. Which starting index is meant has to be said, and it is said here.",
+          "uses": [
+            "1.1",
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-termwise-differentiation-of-a-real-power-series",
+          "source_section": "Statement",
+          "quote": "Let\n\n$$f(x)=\\sum_{n=0}^{\\infty}a_n(x-c)^n$$\n\nhave radius $R$. For every $x$ with $|x-c|<R$, the function $f$ is differentiable at $x$ ([[def-derivative]]) and\n\n$$f'(x)=\\sum_{n=0}^{\\infty}\\iota(n+1)a_{n+1}(x-c)^n.$$\n\nThe differentiated series has the same radius $R$.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "cor-zero-derivative-implies-constant",
+          "source_section": "Statement",
+          "quote": "Let $I \\subseteq \\mathbb{R}$ be order-convex (Intervals of $\\mathbb{R}$: the nine order-convex forms, nondegeneracy, and length) and let\n$f : I \\to \\mathbb{R}$ be continuous on $I$ (Continuity of $f : A \\to \\mathbb{R}$ at a point of $A$ and on $A$: the $\\varepsilon$-$\\delta$ condition, its agreement with $\\lim_{x \\to c} f(x) = f(c)$ at a limit point, and continuity at an isolated point) and\ndifferentiable at every point of $I$ that is interior to $I$\n(Interior, closure, boundary and exterior of a subset of $\\mathbb{R}$, The derivative $f'(c) = \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c}$ of $f : A \\to \\mathbb{R}$ at a point $c \\in A$ that is a limit point of $A$, and differentiability on a set), with\n\n$$f'(x) = 0 \\qquad \\text{at every interior point } x \\text{ of } I .$$\n\nThen $f$ is constant on $I$: there is a real $k$ with $f(x) = k$ for every\n$x \\in I$.\n\nConsequently, if $f, g : I \\to \\mathbb{R}$ are both continuous on $I$ and both\ndifferentiable at every interior point of $I$, with $f'(x) = g'(x)$ at every\ninterior point $x$, then there is a real $k$ with\n\n$$f(x) \\;=\\; g(x) + k \\qquad \\text{for every } x \\in I .$$\n\n**Order-convexity of $I$ is essential and is not a convenience.** The\nconclusion is false on a domain that falls into separate pieces, since a\nfunction may be constant on each piece with different constants; nothing in the\nproof would survive, because the mean value theorem is applied to the segment\njoining two points of the domain and that segment must lie in the domain.\n\n**The hypothesis is imposed only at interior points.** At an endpoint of $I$\nnothing is asked at all: $f$ need not be differentiable there, and the proof\nnever evaluates a difference quotient at an endpoint, since it applies the mean\nvalue theorem on a segment $[u,v] \\subseteq I$ and uses the derivative only at\npoints of $(u,v)$, all of which are interior to $I$. What is *not* meant is that\nthe derivative at an endpoint is free to be nonzero: once $f$ is known to be\nconstant its difference quotient at an endpoint is constantly $0$, so wherever\n$f'$ exists at an endpoint it is $0$ too. That is a consequence of the theorem,\nnot a hypothesis of it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-derivative",
+          "source_section": "Definition",
+          "quote": "Throughout, $\\mathbb{R}$ is the complete ordered field\n(Complete ordered field (least-upper-bound property)), neighbourhoods are those of\nThe $\\varepsilon$-neighbourhood and the punctured $\\varepsilon$-neighbourhood of a point of $\\mathbb{R}$ and limit points those of Limit point, isolated point, adherent point, derived set, and dense subset of $\\mathbb{R}$.\n\nLet $A \\subseteq \\mathbb{R}$, let $f : A \\to \\mathbb{R}$ and let $c \\in A$ be a\n**limit point of $A$**. The **difference quotient of $f$ at $c$** is the function\n\n$$q_{f,c} : A \\setminus \\{c\\} \\to \\mathbb{R}, \\qquad q_{f,c}(x) := \\frac{f(x) - f(c)}{x - c} .$$\n\nThe division is legitimate at every point of the domain, since $x \\ne c$ gives\n$x - c \\ne 0$.\n\n**The point $c$ is a limit point of $A \\setminus \\{c\\}$, not merely of $A$.**\nFor every real $\\varepsilon > 0$ the punctured neighbourhood\n$N^{*}_{\\varepsilon}(c)$ omits $c$, so\n\n$$N^{*}_{\\varepsilon}(c) \\cap A \\;=\\; N^{*}_{\\varepsilon}(c) \\cap (A \\setminus \\{c\\}) ,$$\n\nand the left-hand side is nonempty because $c$ is a limit point of $A$. So\n$q_{f,c}$ is a function on a set having $c$ as a limit point, and\n$\\lim_{x \\to c} q_{f,c}(x)$ is a notion that The $\\varepsilon$-$\\delta$ limit $\\lim_{x \\to c} f(x) = L$ of $f : A \\to \\mathbb{R}$ at a limit point $c$ of $A$ defines.\n\n$f$ is **differentiable at $c$** when that limit exists, and then the\n**derivative of $f$ at $c$** is\n\n$$f'(c) \\;:=\\; \\lim_{x \\to c} q_{f,c}(x) \\;=\\; \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c} .$$\n\n**Two obligations are carried by that notation, and both are discharged here.**\n\n1. **Uniqueness.** Writing $f'(c)$ treats the right-hand side as a name for a\n   single real number. That is legitimate: $c$ is a limit point of the domain\n   $A \\setminus \\{c\\}$ of $q_{f,c}$, so at most one real can satisfy the\n   $\\varepsilon$-$\\delta$ condition, by At a limit point of the domain a function has at most one limit applied to\n   $q_{f,c}$. Two reals both meeting the condition are therefore equal, and the\n   symbol denotes.\n2. **Meaningfulness.** The hypothesis that $c$ is a limit point of $A$ is not\n   decoration. At an **isolated** point of $A$ the punctured condition\n   $0 < |x - c| < \\delta$ is met by no point of the domain at all, so the\n   $\\varepsilon$-$\\delta$ formula is satisfied vacuously by *every* real at\n   once; this is why The $\\varepsilon$-$\\delta$ limit $\\lim_{x \\to c} f(x) = L$ of $f : A \\to \\mathbb{R}$ at a limit point $c$ of $A$ leaves the limit undefined there,\n   and it is why this library defines $f'(c)$ only at a limit point of $A$. At\n   an isolated point of its domain a function is neither differentiable nor\n   non-differentiable here: the question is not posed.\n\n**The limit sees only $A \\setminus \\{c\\}$, so how the difference quotient is\nextended to $c$ is irrelevant.** Let $Q : A \\to \\mathbb{R}$ agree with\n$q_{f,c}$ at every point of $A \\setminus \\{c\\}$, and let $L \\in \\mathbb{R}$.\nThen $\\lim_{x \\to c} Q(x) = L$ if and only if $\\lim_{x \\to c} q_{f,c}(x) = L$.\nBoth conditions read: for every real $\\varepsilon > 0$ there is a real\n$\\delta > 0$ such that every point $x$ of the relevant domain with\n$0 < |x - c| < \\delta$ satisfies $|{\\cdot} - L| < \\varepsilon$\n(The $\\varepsilon$-$\\delta$ limit $\\lim_{x \\to c} f(x) = L$ of $f : A \\to \\mathbb{R}$ at a limit point $c$ of $A$). The clause $0 < |x - c|$ removes $x = c$ from both\nquantifiers, so in both cases the points quantified over are exactly the\n$x \\in A \\setminus \\{c\\}$ with $0 < |x - c| < \\delta$, at which $Q$ and\n$q_{f,c}$ take the same value. The two conditions are the same condition.\n\n**Differentiability on a set.** For $S \\subseteq A$, $f$ is **differentiable on\n$S$** when it is differentiable at every $c \\in S$; implicit in that phrase is\nthat every point of $S$ is a limit point of $A$. $f$ is **differentiable** when\nit is differentiable on the whole of $A$.\n\n**Restriction of the domain.** Let $B \\subseteq A$, let $c \\in B$ and suppose\n$c$ is a limit point of $B$. If $f$ is differentiable at $c$, then so is the\nrestriction $f|_B : B \\to \\mathbb{R}$, and\n\n$$(f|_B)'(c) \\;=\\; f'(c) .$$\n\nIndeed $B \\setminus \\{c\\} \\subseteq A \\setminus \\{c\\}$; the displayed identity\nof punctured neighbourhoods above, applied to $B$, shows that $c$ is a limit\npoint of $B \\setminus \\{c\\}$; the difference quotient $q_{f|_B, c}$ is the\nrestriction of $q_{f,c}$ to $B \\setminus \\{c\\}$, since $f|_B(c) = f(c)$; and\nclaim 2 of The limit at $c$ depends only on the restriction of $f$ to a punctured neighbourhood of $c$, and passes to any subset of the domain having $c$ as a limit point carries the limit to that restriction.\n\n**Every point of a nondegenerate interval is a limit point of it.** Let\n$J \\subseteq \\mathbb{R}$ be order-convex (Intervals of $\\mathbb{R}$: the nine order-convex forms, nondegeneracy, and length) with at least two\nelements and let $p \\in J$. Choose $q \\in J$ with $q \\ne p$, and let a real\n$\\varepsilon > 0$ be given. If $p < q$, put $y := p + \\tfrac{1}{2}\\min\\{\\varepsilon,\\ q - p\\}$;\nthen $p < y$, and $y - p \\le \\tfrac{1}{2}(q-p) < q - p$, so $p < y < q$ and\norder-convexity gives $y \\in J$, while $0 < |y - p| < \\varepsilon$. If $q < p$,\nthe point $y := p - \\tfrac{1}{2}\\min\\{\\varepsilon,\\ p - q\\}$ serves in the same\nway. So $N^{*}_{\\varepsilon}(p) \\cap J \\ne \\varnothing$ for every real\n$\\varepsilon > 0$, that is, $p$ is a limit point of $J$\n(Limit point, isolated point, adherent point, derived set, and dense subset of $\\mathbb{R}$).\n\nConsequently, for $f$ defined on a nondegenerate interval $I$, the symbol\n$f'(c)$ is meaningful at **every** $c \\in I$, endpoints included. At an endpoint\nthe difference quotient is taken over the points of $I$ lying on the one side\nthat is available, so what other texts call a one-sided derivative is, here,\nsimply the derivative of $f$ on $I$.",
+          "uses": [
+            "2.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-operator-norm",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be normed spaces over the same scalar field, and let\n$T:X\\to Y$ be bounded in the sense of [[def-bounded-linear-operator]]. The\n**operator norm** of $T$ is\n\n$$\\|T\\| := \\sup\\{\\|Tx\\| : x \\in X,\\ \\|x\\| \\le 1\\}.$$\n\nThe set on the right contains $0$ and every bound $C$ for $T$ bounds it\nabove. Thus its finite real supremum exists by the proved least-upper-bound\nproperty of the library's real field ([[cor-cauchy-reals-lub-complete]]).\nIn particular every number strictly below the supremum is exceeded by a\nmember of this set; otherwise it would be a smaller upper bound. No choice\nprinciple is used for this assertion.\n\nThe same number is the least bound of $T$:\n\n$$\\|T\\| = \\inf\\{C \\ge 0 : \\|Tx\\| \\le C\\|x\\| \\text{ for all } x \\in X\\}.$$\n\nIf $X \\ne \\{0\\}$, positive homogeneity also gives\n\n$$\\|T\\| = \\sup\\{\\|Tx\\| : \\|x\\| = 1\\}.$$\n\nWhen $X = \\{0\\}$, the unit sphere is empty and the unit-ball supremum is $0$,\nso $\\|T\\| = 0$.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1",
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "cor-triangle-inequality-for-inner-product-norm",
+          "source_section": "Statement",
+          "quote": "The function induced by an inner product satisfies, for all vectors $u,v$ and scalars $\\lambda$,\n\n$$\\lVert v\\rVert\\ge0,\\qquad \\lVert v\\rVert=0\\Longleftrightarrow v=0,$$\n\n$$\\lVert\\lambda v\\rVert=|\\lambda|\\lVert v\\rVert,\\qquad \\lVert u+v\\rVert\\le\\lVert u\\rVert+\\lVert v\\rVert.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+          "source_section": "Statement",
+          "quote": "For vectors $u,v$ in a real or complex inner product space,\n\n$$|\\langle u,v\\rangle|\\le\\lVert u\\rVert\\lVert v\\rVert.$$\n\nEquality holds if and only if $u$ and $v$ are linearly dependent, including the case in which either vector is zero.",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "For $|x|<1$, the power series $P(x):=\\sum_{n=1}^{\\infty}x^n/n$ converges absolutely because it is termwise bounded in absolute value by the geometric series in [F5]. Its radius is therefore at least $1$, and [F6] gives $P'(x)=\\sum_{n=1}^{\\infty}x^{n-1}=1/(1-x)$. The difference quotient for $\\log$ in [F4], with increment $-h$, gives $\\frac{d}{dx}[-\\log(1-x)]=1/(1-x)$. Since both functions vanish at $0$ by [F3], [F7] applied to their difference yields $\\sum_{n=1}^{\\infty}x^n/n=-\\log(1-x)$ for every $|x|<1$.",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "Write $d:=\\dim H$. For any endomorphism $T$, let $M:=\\max_{i,j}|T_{ij}|$ in the fixed orthonormal basis. If $x=\\sum_jx_je_j$ is a unit vector, Cauchy–Schwarz [F12] applied in these coordinates to $(T_{ij})_j$ and $(\\overline{x_j})_j$ gives $|(Tx)_i|=|\\sum_jT_{ij}x_j|\\le(\\sum_j|T_{ij}|^2)^{1/2}(\\sum_j|x_j|^2)^{1/2}\\le\\sqrt dM$ for each $i$, hence $\\|Tx\\|\\le dM$, and the supremum definition [F9] gives $\\|T\\|_{\\mathrm{op}}\\le dM$; in particular every endomorphism of $H$ has finite operator norm. For any endomorphisms $S,T$, [F9] then gives $\\|STx\\|\\le\\|S\\|_{\\mathrm{op}}\\|Tx\\|\\le\\|S\\|_{\\mathrm{op}}\\|T\\|_{\\mathrm{op}}\\|x\\|$ for every vector $x$. Taking the supremum over unit $x$ proves $\\|ST\\|_{\\mathrm{op}}\\le\\|S\\|_{\\mathrm{op}}\\|T\\|_{\\mathrm{op}}$.",
+          "inputs": [
+            "F9",
+            "F12",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Put $A_0:=A(t_0)$ and let $\\lambda_{\\max}$ and $\\lambda_{\\min}$ be its largest and smallest eigenvalues. They satisfy $0<\\lambda_{\\min}\\le\\lambda_{\\max}$ by [F1] and the hypothesis. Set $c:=2\\lambda_{\\max}$ and $B:=I_H-A_0/c$. The eigenvalues of $B$ lie in $[1/2,1-\\lambda_{\\min}/c]$. In an orthonormal eigenbasis of $B$, writing its eigenvalues as $b_j$, the definition [F9] gives $\\|B\\|_{\\mathrm{op}}=\\max_j|b_j|$: for $x=\\sum_jx_je_j$, $\\|Bx\\|^2=\\sum_j|b_j|^2|x_j|^2\\le(\\max_j|b_j|)^2\\|x\\|^2$, with equality on an eigenvector for a largest $|b_j|$. Hence $q:=\\|B\\|_{\\mathrm{op}}<1$ by [F1]. Choose $r$ with $q<r<1$. By [F8], every entry of $A(t)-A_0$ tends to zero as $t\\to t_0$. Since there are finitely many entries, $M(t):=\\max_{i,j}|(A(t)-A_0)_{ij}|\\to0$, and the matrix bound in step 1.2 gives $\\|A(t)-A_0\\|_{\\mathrm{op}}\\to0$, so choose a neighborhood where $\\|A(t)-A_0\\|_{\\mathrm{op}}/c<(r-q)/2$. For every unit vector $x$, the inner-product norm triangle inequality [F11] and [F9] give $\\|B_tx\\|\\le\\|Bx\\|+\\|(A(t)-A_0)x\\|/c\\le q+\\|A(t)-A_0\\|_{\\mathrm{op}}/c<r$; taking the supremum proves $\\|B_t\\|_{\\mathrm{op}}<r$. For such $t$, the scalar identity in step 1.1 applied to each eigenvalue of $B_t$, the product law [F10], and spectral calculus [F1] give $\\log A(t)=(\\log c)I_H-\\sum_{n=1}^{\\infty}B_t^n/n$, with convergence in operator norm because repeated application of step 1.2 gives $\\|B_t^n\\|_{\\mathrm{op}}\\le\\|B_t\\|_{\\mathrm{op}}^n<r^n$ and $\\sum r^n/n\\le\\sum r^n<\\infty$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F8",
+            "F9",
+            "F10",
+            "F11",
+            "step 1.1",
+            "step 1.2",
+            "choose",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "For $t$ sufficiently near $t_0$, put $E:=A(t)-A_0$, $Z:=-E/c$, and $z:=\\|Z\\|_{\\mathrm{op}}$. Then $B_t=B+Z$. The supremum definition gives $z=\\|E\\|_{\\mathrm{op}}/c$, so $z\\to0$ as $t\\to t_0$; shrink the neighborhood so that $q+z\\le r$. Distributivity writes $(B+Z)^n=B^n+S_n+R_n$, where $S_n:=\\sum_{j=0}^{n-1}B^j ZB^{n-1-j}$ contains the terms with exactly one $Z$, and $R_n$ contains all terms with at least two $Z$ factors. The submultiplicative bound in step 1.2 gives $\\|S_n\\|_{\\mathrm{op}}\\le nq^{n-1}z$. For $R_n$, each word with exactly $k$ factors $Z$ has norm at most $q^{n-k}z^k$, and there are $\\binom nk$ such words, so $\\|R_n\\|_{\\mathrm{op}}\\le\\sum_{k=2}^n\\binom nkq^{n-k}z^k\\le\\binom n2z^2(q+z)^{n-2}\\le\\binom n2z^2r^{n-2}$. The middle bound follows from $\\binom nk\\le\\binom n2\\binom{n-2}{k-2}$ for $k\\ge2$.",
+          "inputs": [
+            "given",
+            "F9",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "Substituting the series of step 2.1 into $G(A):=\\operatorname{tr}(A\\log A)$, and using step 3.1, yields\n$$G(A_0+E)-G(A_0)=(\\log c)\\operatorname{tr}E-\\sum_{n=1}^{\\infty}\\frac{\\operatorname{tr}(EB^n)+\\operatorname{tr}(A_0S_n)}{n}+R(E),$$\nwhere $|R(E)|\\le C\\|E\\|^2$ for a constant $C$ independent of sufficiently small $E$. Indeed, the omitted terms are $\\operatorname{tr}(A_0R_n)$, $\\operatorname{tr}(ES_n)$, and $\\operatorname{tr}(ER_n)$; for each orthonormal basis vector $e_i$, the $i$th coordinate of $Te_i$ is $\\langle Te_i,e_i\\rangle$ and [F12] gives its magnitude at most $\\|Te_i\\|\\|e_i\\|=\\|Te_i\\|\\le\\|T\\|_{\\mathrm{op}}$ by [F9], since $\\|e_i\\|=1$, so [F2] gives $|\\operatorname{tr}T|\\le d\\|T\\|_{\\mathrm{op}}$ with $d=\\dim H$, and the bounds in step 3.1 make their series after division by $n$ bounded by constants times $z^2\\sum_{n\\ge2}nr^{n-2}$, $z^2\\sum_{n\\ge1}q^{n-1}$, and $z^3\\sum_{n\\ge2}nr^{n-2}$, respectively. Each geometric derivative sum is finite by [F5]–[F6], and step 3.1 gives $z=\\|E\\|_{\\mathrm{op}}/c$.",
+          "inputs": [
+            "F2",
+            "F5",
+            "F6",
+            "F9",
+            "F12",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-2",
+          "step": "4.2",
+          "claim": "The linear matrix-log term read from the series in steps 2.1 and 3.1 is\n$$L(E):=\\frac1c\\sum_{n=1}^{\\infty}\\frac1n\\sum_{j=0}^{n-1}B^jEB^{n-1-j}.$$\nIts series converges in operator norm because the $n$th summand has norm at most $q^{n-1}\\|E\\|_{\\mathrm{op}}/c$. The remainder in the logarithm series is bounded by $\\sum_{n=2}^{\\infty}\\binom n2 z^2r^{n-2}/n=(z^2/2)\\sum_{n=2}^{\\infty}(n-1)r^{n-2}=O(\\|E\\|_{\\mathrm{op}}^2)$, so $L(E)$ is the full first-order term of $\\log(A_0+E)$. In an orthonormal eigenbasis of $A_0$, write $A_0e_i=\\lambda_i e_i$ and $b_i:=1-\\lambda_i/c$. Then\n$$L(E)_{ik}=\\frac{E_{ik}}c\\sum_{n=1}^{\\infty}\\frac1n\\sum_{j=0}^{n-1}b_i^jb_k^{n-1-j}.$$\nIf $b_i\\ne b_k$, the inner sum is $(b_i^n-b_k^n)/(b_i-b_k)$, so its coefficient is\n$\\frac1c\\frac{\\sum_{n=1}^{\\infty}(b_i^n-b_k^n)/n}{b_i-b_k}=\\frac{\\log(1-b_k)-\\log(1-b_i)}{c(b_i-b_k)}=\\frac{\\log\\lambda_i-\\log\\lambda_k}{\\lambda_i-\\lambda_k},$\nwhere step 1.1 evaluates the series and [F10] gives $\\log\\lambda_j=\\log c+\\log(1-b_j)$, while $\\lambda_i-\\lambda_k=c(b_k-b_i)$. If $b_i=b_k$, the coefficient is $c^{-1}\\sum_{n=1}^{\\infty}b_i^{n-1}=1/(c(1-b_i))=1/\\lambda_i=\\log'(\\lambda_i)$ by [F4] and [F5]. Defining $\\log^{[1]}(x,y):=(\\log x-\\log y)/(x-y)$ for $x\\ne y$ and $\\log^{[1]}(x,x):=1/x$, we have $L(E)_{ik}=\\log^{[1]}(\\lambda_i,\\lambda_k)E_{ik}$: this is the divided-difference derivative of the matrix logarithm.",
+          "inputs": [
+            "F4",
+            "F5",
+            "F9",
+            "F10",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "step": "5.1",
+          "claim": "In a fixed basis, [F2] gives $\\operatorname{tr}(XY)=\\sum_{i,j}X_{ij}Y_{ji}=\\sum_{i,j}Y_{ji}X_{ij}=\\operatorname{tr}(YX)$, so trace is cyclic. Since $A_0$ commutes with $B$ and $Z=-E/c$, cycling each term gives $\\operatorname{tr}(A_0S_n)=-(n/c)\\operatorname{tr}(A_0B^{n-1}E)$. Thus the $A_0S_n$ terms in step 4.1 sum to $\\operatorname{tr}(A_0L(E))$. In the eigenbasis used in step 4.2, $L(E)_{ii}=E_{ii}/\\lambda_i$, so $\\operatorname{tr}(A_0L(E))=\\sum_i\\lambda_iL(E)_{ii}=\\operatorname{tr}E$. The remaining linear terms in step 4.1 are $\\operatorname{tr}(E\\log A_0)$ by the spectral series in step 2.1. Therefore $G(A_0+E)-G(A_0)=\\operatorname{tr}(E(\\log A_0+I_H))+O(\\|E\\|_{\\mathrm{op}}^2)$.",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "step 4.1",
+            "step 4.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "step": "6.1",
+          "claim": "By [F8], for $h\\to0$ the path increment is $E=A(t_0+h)-A_0=hA'(t_0)+o(h)$ entrywise. The finite-coordinate bound in step 2.1 gives $\\|E\\|_{\\mathrm{op}}=O(|h|)$. Dividing the expansion in step 5.1 by $h$ makes its $O(\\|E\\|_{\\mathrm{op}}^2)$ remainder tend to $0$ and its linear term tend to $\\operatorname{tr}(A'(t_0)(\\log A(t_0)+I_H))$. This is the stated derivative.",
+          "inputs": [
+            "given",
+            "F8",
+            "step 2.1",
+            "step 5.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "not applicable to the excluded zero-dimensional space; the statement requires H nonzero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "A zero path derivative makes the formula vanish by step 6.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The spectral-series proof specializes to a positive scalar when dim H=1; see step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 4.2 explicitly separates unequal eigenvalues from b_i=b_k; on the repeated-eigenvalue diagonal the divided-difference coefficient is 1/lambda_i. Positivity keeps this finite, so neither a spectral simplicity assumption nor a zero-denominator division is needed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The derivative is two-sided at the interior point t0 because J is open; see step 6.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The bound q<1 permits the explicit choice q<r<1 in step 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The faithful finite matrix path has the stated trace-entropy derivative; the identity does not characterize differentiability or positivity of a general operator path."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The faithful finite matrix path has the stated trace-entropy derivative; the identity does not characterize differentiability or positivity of a general operator path."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "one-dimensional positive scalar path",
+          "inputs": "H=C and A(t)=a+bt with a>0 and t near 0",
+          "expected": "G'(0)=b(log(a)+1)",
+          "result": "The statement specializes to G(t)=(a+bt)log(a+bt), whose scalar product rule gives b(log(a)+1).",
+          "scope": "Exact scalar specialization; it checks the matrix formula in dimension one but does not replace the proof."
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "lem-qsm-matrix-state-calculus",
+          "carrier": "items/lem-qsm-matrix-state-calculus.md",
+          "status": "Local Step 1 carrier; exact interface and complete proof inspected; no independent acceptance claimed.",
+          "source_section": "Statement",
+          "exact_statement": "Use the following conventions on a complex inner-product space $H$ of dimension $D\\geq1$, with inner product linear in its first argument. For an endomorphism $A$, define $\\operatorname{Tr}A:=\\sum_{j=1}^D\\langle Ae_j,e_j\\rangle$ in an orthonormal basis; step 3.1 proves basis independence. For any Hermitian $M$, its **positive spectral subspace** (called its positive support here) is $S_M:=\\bigoplus_{\\lambda>0}\\ker(M-\\lambda I)$; when $M\\geq0$ this equals $(\\ker M)^\\perp$. Its support logarithm is $\\log(M|_{S_M}):=\\sum_{\\lambda>0}(\\log\\lambda)P_\\lambda|_{S_M}$, where $P_\\lambda$ is the orthogonal projection onto that eigenspace. No value $\\log0$ is assigned; for $M=0$ this is the unique endomorphism of the zero space. For the set $\\mathcal D(H)$ of positive semidefinite Hermitian endomorphisms with trace one, a point $\\rho$ is **extreme** if every equality $\\rho=t\\sigma+(1-t)\\tau$ with $\\sigma,\\tau\\in\\mathcal D(H)$ and $0<t<1$ implies $\\sigma=\\tau=\\rho$.\n\nLet $H$ be a complex inner-product space of finite dimension $D\\geq1$, with inner product linear in its first argument. Every Hermitian endomorphism $M$ has an orthonormal eigenbasis with real eigenvalues. For a real function $f$ on its finite spectrum, define $f(M)$ by its spectral projections; this definition is independent of the choice of eigenbasis. In particular positive square roots, exponentials, and logarithms on positive supports are well defined.\n\nFor a density matrix $\\rho$ on $H$, meaning a Hermitian positive semidefinite operator with $\\operatorname{Tr}\\rho=1$, $\\operatorname{Tr}(\\rho A)=\\sum_jp_j\\langle Au_j,u_j\\rangle$ for bounded $A$, where $\\rho=\\sum_jp_j|u_j\\rangle\\langle u_j|$. The weighted form $(X,Y)_\\rho=\\operatorname{Tr}(\\rho X^*Y)$ satisfies Cauchy–Schwarz, $|(X,Y)_\\rho|^2\\leq(X,X)_\\rho(Y,Y)_\\rho$. Finally, $\\operatorname{Tr}(\\rho^2)\\leq1$, with equality exactly for rank-one densities, and those are exactly the extreme points of the finite density-matrix set.",
+          "relevant_hypotheses_and_conventions": "[[lem-qsm-matrix-state-calculus]]: every Hermitian endomorphism has an orthonormal eigenbasis with real eigenvalues; applying any real function to its finite spectrum defines a basis-independent endomorphism, including the logarithm on positive eigenvalues.",
+          "supplier_proof_status": "Complete conditional proof present in this batch; readiness is a separate Step 1 record and does not claim independent proof approval.",
+          "consumer_use": "Used in 2.1."
+        },
+        {
+          "supplier": "def-trace-of-an-endomorphism",
+          "carrier": "items/def-trace-of-an-endomorphism.md",
+          "status": "Local Step 1 carrier; exact interface and complete proof inspected; no independent acceptance claimed.",
+          "source_section": "Definition",
+          "exact_statement": "Let $V$ be a finite-dimensional vector space over $F$ and let $T:V\\to V$ be\nlinear. Choose any ordered basis $\\mathcal B$ of $V$ and define the **trace of\nthe endomorphism $T$** by\n\n$$\\operatorname{tr}(T):=\\operatorname{tr}([T]_{\\mathcal B}^{\\mathcal B}).$$\n\nThis is independent of the chosen basis: matrices of the same endomorphism in\ntwo ordered bases are similar, and similar matrices have equal trace. When\n$V$ is the zero space, the empty basis gives trace $0$.",
+          "relevant_hypotheses_and_conventions": "[[def-trace-of-an-endomorphism]]: in any ordered basis, the trace of an endomorphism is the sum of the diagonal entries of its matrix, and this value is basis-independent.",
+          "supplier_proof_status": "Complete conditional proof present in this batch; readiness is a separate Step 1 record and does not claim independent proof approval.",
+          "consumer_use": "Used in 4.1, 5.1."
+        },
+        {
+          "supplier": "def-natural-logarithm",
+          "carrier": "items/def-natural-logarithm.md",
+          "status": "Local Step 1 carrier; exact interface and complete proof inspected; no independent acceptance claimed.",
+          "source_section": "Definition",
+          "exact_statement": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because The exponential is a continuous bijection from $\\mathbb{R}$ onto $(0,\\infty)$ states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "relevant_hypotheses_and_conventions": "[[def-natural-logarithm]]: for $x>0$, $\\log x$ is the unique real $y$ with $\\exp(y)=x$; in particular $\\log1=0$.",
+          "supplier_proof_status": "Complete conditional proof present in this batch; readiness is a separate Step 1 record and does not claim independent proof approval.",
+          "consumer_use": "Used in 1.1."
+        },
+        {
+          "supplier": "thm-natural-logarithm-laws",
+          "carrier": "items/thm-natural-logarithm-laws.md",
+          "status": "Local Step 1 carrier; exact interface and complete proof inspected; no independent acceptance claimed.",
+          "source_section": "Statement",
+          "exact_statement": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "relevant_hypotheses_and_conventions": "[[thm-natural-logarithm-laws]]: for positive $x,y$, $\\log(xy)=\\log x+\\log y$.",
+          "supplier_proof_status": "Complete conditional proof present in this batch; readiness is a separate Step 1 record and does not claim independent proof approval.",
+          "consumer_use": "Used in 2.1, 4.2."
+        },
+        {
+          "supplier": "thm-logarithm-derivative-and-integral",
+          "carrier": "items/thm-logarithm-derivative-and-integral.md",
+          "status": "Local Step 1 carrier; exact interface and complete proof inspected; no independent acceptance claimed.",
+          "source_section": "Statement",
+          "exact_statement": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "relevant_hypotheses_and_conventions": "[[thm-logarithm-derivative-and-integral]]: for $x>0$, $\\log$ is differentiable and $\\log'(x)=1/x$.",
+          "supplier_proof_status": "Complete conditional proof present in this batch; readiness is a separate Step 1 record and does not claim independent proof approval.",
+          "consumer_use": "Used in 1.1, 4.2."
+        },
+        {
+          "supplier": "thm-geometric-series",
+          "carrier": "items/thm-geometric-series.md",
+          "status": "Local Step 1 carrier; exact interface and complete proof inspected; no independent acceptance claimed.",
+          "source_section": "Statement",
+          "exact_statement": "Let $r \\in \\mathbb{R}$ and let $r^k$ be the integer power (Integer powers $a^m$),\nso that $r^0 = 1$ for every $r$, including $r = 0$.\n\n1. If $|r| < 1$ then the series $\\sum r^k$ converges (Series, partial sums, convergence and the sum, divergence, and the tail series) and\n   $$\\sum_{k=0}^{\\infty} r^{k} \\;=\\; \\frac{1}{1-r} .$$\n2. If $|r| \\ge 1$ then $\\sum r^k$ diverges.\n\nThe series starts at $k = 0$ and its first term is $r^0 = 1$; in particular\n$\\sum_{k=0}^{\\infty} 2^{-k} = 2$, while the series starting at $k = 1$ sums to\n$1$. Which starting index is meant has to be said, and it is said here.",
+          "relevant_hypotheses_and_conventions": "[[thm-geometric-series]]: for real $x$ with $|x|<1$, $\\sum_{n=0}^{\\infty}x^n=1/(1-x)$.",
+          "supplier_proof_status": "Complete conditional proof present in this batch; readiness is a separate Step 1 record and does not claim independent proof approval.",
+          "consumer_use": "Used in 1.1, 4.1, 4.2."
+        },
+        {
+          "supplier": "thm-termwise-differentiation-of-a-real-power-series",
+          "carrier": "items/thm-termwise-differentiation-of-a-real-power-series.md",
+          "status": "Local Step 1 carrier; exact interface and complete proof inspected; no independent acceptance claimed.",
+          "source_section": "Statement",
+          "exact_statement": "Let\n\n$$f(x)=\\sum_{n=0}^{\\infty}a_n(x-c)^n$$\n\nhave radius $R$. For every $x$ with $|x-c|<R$, the function $f$ is differentiable at $x$ ([[def-derivative]]) and\n\n$$f'(x)=\\sum_{n=0}^{\\infty}\\iota(n+1)a_{n+1}(x-c)^n.$$\n\nThe differentiated series has the same radius $R$.",
+          "relevant_hypotheses_and_conventions": "[[thm-termwise-differentiation-of-a-real-power-series]]: a real power series can be differentiated term by term at every point strictly inside its radius of convergence.",
+          "supplier_proof_status": "Complete conditional proof present in this batch; readiness is a separate Step 1 record and does not claim independent proof approval.",
+          "consumer_use": "Used in 1.1, 4.1."
+        },
+        {
+          "supplier": "cor-zero-derivative-implies-constant",
+          "carrier": "items/cor-zero-derivative-implies-constant.md",
+          "status": "Local Step 1 carrier; exact interface and complete proof inspected; no independent acceptance claimed.",
+          "source_section": "Statement",
+          "exact_statement": "Let $I \\subseteq \\mathbb{R}$ be order-convex (Intervals of $\\mathbb{R}$: the nine order-convex forms, nondegeneracy, and length) and let\n$f : I \\to \\mathbb{R}$ be continuous on $I$ (Continuity of $f : A \\to \\mathbb{R}$ at a point of $A$ and on $A$: the $\\varepsilon$-$\\delta$ condition, its agreement with $\\lim_{x \\to c} f(x) = f(c)$ at a limit point, and continuity at an isolated point) and\ndifferentiable at every point of $I$ that is interior to $I$\n(Interior, closure, boundary and exterior of a subset of $\\mathbb{R}$, The derivative $f'(c) = \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c}$ of $f : A \\to \\mathbb{R}$ at a point $c \\in A$ that is a limit point of $A$, and differentiability on a set), with\n\n$$f'(x) = 0 \\qquad \\text{at every interior point } x \\text{ of } I .$$\n\nThen $f$ is constant on $I$: there is a real $k$ with $f(x) = k$ for every\n$x \\in I$.\n\nConsequently, if $f, g : I \\to \\mathbb{R}$ are both continuous on $I$ and both\ndifferentiable at every interior point of $I$, with $f'(x) = g'(x)$ at every\ninterior point $x$, then there is a real $k$ with\n\n$$f(x) \\;=\\; g(x) + k \\qquad \\text{for every } x \\in I .$$\n\n**Order-convexity of $I$ is essential and is not a convenience.** The\nconclusion is false on a domain that falls into separate pieces, since a\nfunction may be constant on each piece with different constants; nothing in the\nproof would survive, because the mean value theorem is applied to the segment\njoining two points of the domain and that segment must lie in the domain.\n\n**The hypothesis is imposed only at interior points.** At an endpoint of $I$\nnothing is asked at all: $f$ need not be differentiable there, and the proof\nnever evaluates a difference quotient at an endpoint, since it applies the mean\nvalue theorem on a segment $[u,v] \\subseteq I$ and uses the derivative only at\npoints of $(u,v)$, all of which are interior to $I$. What is *not* meant is that\nthe derivative at an endpoint is free to be nonzero: once $f$ is known to be\nconstant its difference quotient at an endpoint is constantly $0$, so wherever\n$f'$ exists at an endpoint it is $0$ too. That is a consequence of the theorem,\nnot a hypothesis of it.",
+          "relevant_hypotheses_and_conventions": "[[cor-zero-derivative-implies-constant]]: a continuous function on an interval with zero derivative at every interior point is constant on that interval.",
+          "supplier_proof_status": "Complete conditional proof present in this batch; readiness is a separate Step 1 record and does not claim independent proof approval.",
+          "consumer_use": "Used in 1.1."
+        },
+        {
+          "supplier": "def-derivative",
+          "carrier": "items/def-derivative.md",
+          "status": "Local Step 1 carrier; exact interface and complete proof inspected; no independent acceptance claimed.",
+          "source_section": "Definition",
+          "exact_statement": "Throughout, $\\mathbb{R}$ is the complete ordered field\n(Complete ordered field (least-upper-bound property)), neighbourhoods are those of\nThe $\\varepsilon$-neighbourhood and the punctured $\\varepsilon$-neighbourhood of a point of $\\mathbb{R}$ and limit points those of Limit point, isolated point, adherent point, derived set, and dense subset of $\\mathbb{R}$.\n\nLet $A \\subseteq \\mathbb{R}$, let $f : A \\to \\mathbb{R}$ and let $c \\in A$ be a\n**limit point of $A$**. The **difference quotient of $f$ at $c$** is the function\n\n$$q_{f,c} : A \\setminus \\{c\\} \\to \\mathbb{R}, \\qquad q_{f,c}(x) := \\frac{f(x) - f(c)}{x - c} .$$\n\nThe division is legitimate at every point of the domain, since $x \\ne c$ gives\n$x - c \\ne 0$.\n\n**The point $c$ is a limit point of $A \\setminus \\{c\\}$, not merely of $A$.**\nFor every real $\\varepsilon > 0$ the punctured neighbourhood\n$N^{*}_{\\varepsilon}(c)$ omits $c$, so\n\n$$N^{*}_{\\varepsilon}(c) \\cap A \\;=\\; N^{*}_{\\varepsilon}(c) \\cap (A \\setminus \\{c\\}) ,$$\n\nand the left-hand side is nonempty because $c$ is a limit point of $A$. So\n$q_{f,c}$ is a function on a set having $c$ as a limit point, and\n$\\lim_{x \\to c} q_{f,c}(x)$ is a notion that The $\\varepsilon$-$\\delta$ limit $\\lim_{x \\to c} f(x) = L$ of $f : A \\to \\mathbb{R}$ at a limit point $c$ of $A$ defines.\n\n$f$ is **differentiable at $c$** when that limit exists, and then the\n**derivative of $f$ at $c$** is\n\n$$f'(c) \\;:=\\; \\lim_{x \\to c} q_{f,c}(x) \\;=\\; \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c} .$$\n\n**Two obligations are carried by that notation, and both are discharged here.**\n\n1. **Uniqueness.** Writing $f'(c)$ treats the right-hand side as a name for a\n   single real number. That is legitimate: $c$ is a limit point of the domain\n   $A \\setminus \\{c\\}$ of $q_{f,c}$, so at most one real can satisfy the\n   $\\varepsilon$-$\\delta$ condition, by At a limit point of the domain a function has at most one limit applied to\n   $q_{f,c}$. Two reals both meeting the condition are therefore equal, and the\n   symbol denotes.\n2. **Meaningfulness.** The hypothesis that $c$ is a limit point of $A$ is not\n   decoration. At an **isolated** point of $A$ the punctured condition\n   $0 < |x - c| < \\delta$ is met by no point of the domain at all, so the\n   $\\varepsilon$-$\\delta$ formula is satisfied vacuously by *every* real at\n   once; this is why The $\\varepsilon$-$\\delta$ limit $\\lim_{x \\to c} f(x) = L$ of $f : A \\to \\mathbb{R}$ at a limit point $c$ of $A$ leaves the limit undefined there,\n   and it is why this library defines $f'(c)$ only at a limit point of $A$. At\n   an isolated point of its domain a function is neither differentiable nor\n   non-differentiable here: the question is not posed.\n\n**The limit sees only $A \\setminus \\{c\\}$, so how the difference quotient is\nextended to $c$ is irrelevant.** Let $Q : A \\to \\mathbb{R}$ agree with\n$q_{f,c}$ at every point of $A \\setminus \\{c\\}$, and let $L \\in \\mathbb{R}$.\nThen $\\lim_{x \\to c} Q(x) = L$ if and only if $\\lim_{x \\to c} q_{f,c}(x) = L$.\nBoth conditions read: for every real $\\varepsilon > 0$ there is a real\n$\\delta > 0$ such that every point $x$ of the relevant domain with\n$0 < |x - c| < \\delta$ satisfies $|{\\cdot} - L| < \\varepsilon$\n(The $\\varepsilon$-$\\delta$ limit $\\lim_{x \\to c} f(x) = L$ of $f : A \\to \\mathbb{R}$ at a limit point $c$ of $A$). The clause $0 < |x - c|$ removes $x = c$ from both\nquantifiers, so in both cases the points quantified over are exactly the\n$x \\in A \\setminus \\{c\\}$ with $0 < |x - c| < \\delta$, at which $Q$ and\n$q_{f,c}$ take the same value. The two conditions are the same condition.\n\n**Differentiability on a set.** For $S \\subseteq A$, $f$ is **differentiable on\n$S$** when it is differentiable at every $c \\in S$; implicit in that phrase is\nthat every point of $S$ is a limit point of $A$. $f$ is **differentiable** when\nit is differentiable on the whole of $A$.\n\n**Restriction of the domain.** Let $B \\subseteq A$, let $c \\in B$ and suppose\n$c$ is a limit point of $B$. If $f$ is differentiable at $c$, then so is the\nrestriction $f|_B : B \\to \\mathbb{R}$, and\n\n$$(f|_B)'(c) \\;=\\; f'(c) .$$\n\nIndeed $B \\setminus \\{c\\} \\subseteq A \\setminus \\{c\\}$; the displayed identity\nof punctured neighbourhoods above, applied to $B$, shows that $c$ is a limit\npoint of $B \\setminus \\{c\\}$; the difference quotient $q_{f|_B, c}$ is the\nrestriction of $q_{f,c}$ to $B \\setminus \\{c\\}$, since $f|_B(c) = f(c)$; and\nclaim 2 of The limit at $c$ depends only on the restriction of $f$ to a punctured neighbourhood of $c$, and passes to any subset of the domain having $c$ as a limit point carries the limit to that restriction.\n\n**Every point of a nondegenerate interval is a limit point of it.** Let\n$J \\subseteq \\mathbb{R}$ be order-convex (Intervals of $\\mathbb{R}$: the nine order-convex forms, nondegeneracy, and length) with at least two\nelements and let $p \\in J$. Choose $q \\in J$ with $q \\ne p$, and let a real\n$\\varepsilon > 0$ be given. If $p < q$, put $y := p + \\tfrac{1}{2}\\min\\{\\varepsilon,\\ q - p\\}$;\nthen $p < y$, and $y - p \\le \\tfrac{1}{2}(q-p) < q - p$, so $p < y < q$ and\norder-convexity gives $y \\in J$, while $0 < |y - p| < \\varepsilon$. If $q < p$,\nthe point $y := p - \\tfrac{1}{2}\\min\\{\\varepsilon,\\ p - q\\}$ serves in the same\nway. So $N^{*}_{\\varepsilon}(p) \\cap J \\ne \\varnothing$ for every real\n$\\varepsilon > 0$, that is, $p$ is a limit point of $J$\n(Limit point, isolated point, adherent point, derived set, and dense subset of $\\mathbb{R}$).\n\nConsequently, for $f$ defined on a nondegenerate interval $I$, the symbol\n$f'(c)$ is meaningful at **every** $c \\in I$, endpoints included. At an endpoint\nthe difference quotient is taken over the points of $I$ lying on the one side\nthat is available, so what other texts call a one-sided derivative is, here,\nsimply the derivative of $f$ on $I$.",
+          "relevant_hypotheses_and_conventions": "[[def-derivative]]: differentiability at $t_0$ means the difference quotient has a limit, hence $A(t_0+h)=A(t_0)+hA'(t_0)+o(h)$ entrywise.",
+          "supplier_proof_status": "Complete conditional proof present in this batch; readiness is a separate Step 1 record and does not claim independent proof approval.",
+          "consumer_use": "Used in 2.1, 6.1."
+        },
+        {
+          "supplier": "def-operator-norm",
+          "carrier": "items/def-operator-norm.md",
+          "status": "Local Step 1 carrier; exact interface and complete proof inspected; no independent acceptance claimed.",
+          "source_section": "Definition",
+          "exact_statement": "Let $X$ and $Y$ be normed spaces over the same scalar field, and let\n$T:X\\to Y$ be bounded in the sense of [[def-bounded-linear-operator]]. The\n**operator norm** of $T$ is\n\n$$\\|T\\| := \\sup\\{\\|Tx\\| : x \\in X,\\ \\|x\\| \\le 1\\}.$$\n\nThe set on the right contains $0$ and every bound $C$ for $T$ bounds it\nabove. Thus its finite real supremum exists by the proved least-upper-bound\nproperty of the library's real field ([[cor-cauchy-reals-lub-complete]]).\nIn particular every number strictly below the supremum is exceeded by a\nmember of this set; otherwise it would be a smaller upper bound. No choice\nprinciple is used for this assertion.\n\nThe same number is the least bound of $T$:\n\n$$\\|T\\| = \\inf\\{C \\ge 0 : \\|Tx\\| \\le C\\|x\\| \\text{ for all } x \\in X\\}.$$\n\nIf $X \\ne \\{0\\}$, positive homogeneity also gives\n\n$$\\|T\\| = \\sup\\{\\|Tx\\| : \\|x\\| = 1\\}.$$\n\nWhen $X = \\{0\\}$, the unit sphere is empty and the unit-ball supremum is $0$,\nso $\\|T\\| = 0$.",
+          "relevant_hypotheses_and_conventions": "[[def-operator-norm]]: $\\|T\\|_{\\mathrm{op}}$ is the supremum of $\\|Tv\\|$ over unit vectors, and therefore $\\|Tv\\|\\le\\|T\\|_{\\mathrm{op}}\\|v\\|$ for every vector $v$ by rescaling.",
+          "supplier_proof_status": "Complete conditional proof present in this batch; readiness is a separate Step 1 record and does not claim independent proof approval.",
+          "consumer_use": "Used in 2.1, 3.1, 4.1, 4.2."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-122-beta-self-review",
+        "notes": "Self-review checked the stated hypotheses, finite-dimensional scope, cited interfaces, and each numbered proof step. This record is authoring evidence, not independent proof approval."
+      },
+      "current_boundary_worksheet": {
+        "proposal": "research/physics-non-fluid-129-2026-10-21-r2-owner-step2-boundary-proposal-1/proposal.json",
+        "source_sha256": "8c14bae4a011b01578525830f2da7e0795bad416954d553305267b1d8c7c1734",
+        "qualification": "Released complete current source/eight-case semantic worksheet; root transcribed exact current rows. No independent acceptance or finite computation asserted."
+      }
+    },
+    "prop-tgrx-finite-modular-balance": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-it-finite-dimensional-quantum-relative-entropy",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a finite-dimensional complex inner-product space and let $A,B:H\\to H$ be non-negative operators. For such an operator $A$, set $\\operatorname{supp}(A):=(\\ker A)^\\perp$, where $\\ker A$ is the kernel of a linear map ([[def-kernel-and-image-of-a-linear-map]]); this extends the density-operator support convention in [[def-qc-density-operator]]. If $\\operatorname{supp}(A)\\subseteq\\operatorname{supp}(B)$, define\n\n$$D(A\\|B):=\\operatorname{tr}(A\\ln A)-\\operatorname{tr}(A\\ln B).$$\n\nHere $\\ln A$ is defined spectrally on the positive eigenspaces of $A$ with $0\\ln0:=0$, and $\\ln B$ in the cross term is restricted to $\\operatorname{supp}(B)$; the support condition ensures that $A$ vanishes on $\\ker B$, so the omitted kernel contributes zero. If $\\operatorname{supp}(A)\\nsubseteq\\operatorname{supp}(B)$, set $D(A\\|B):=+\\infty$. In particular, $D(0\\|B)=0$. For density operators this is the finite-dimensional **quantum relative entropy**. The logarithms are natural, so the value is in nats; the base-two value is $D_2(A\\|B):=D(A\\|B)/\\ln2$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-it-von-neumann-entropy",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space, with the root convention that its inner product is linear in the first argument, and let $\\rho$ be a density operator on $H$ ([[def-qc-density-operator]]). If $\\lambda_1,\\ldots,\\lambda_d$ are its eigenvalues counted with multiplicity, define its **von Neumann entropy** by\n\n$$S(\\rho):=-\\operatorname{tr}(\\rho\\ln\\rho):=-\\sum_{j:\\lambda_j>0}\\lambda_j\\ln\\lambda_j.$$\n\nThe trace is the finite-dimensional endomorphism trace ([[def-trace-of-an-endomorphism]]), and the spectral definition makes the expression independent of the eigenbasis. The term for a zero eigenvalue is defined to be $0\\ln0:=0$. The default unit is nats, using the natural logarithm ([[def-natural-logarithm]]); the entropy in bits is $S_2(\\rho):=S(\\rho)/\\ln2$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-trace-of-an-endomorphism",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a finite-dimensional vector space over $F$ and let $T:V\\to V$ be\nlinear. Choose any ordered basis $\\mathcal B$ of $V$ and define the **trace of\nthe endomorphism $T$** by\n\n$$\\operatorname{tr}(T):=\\operatorname{tr}([T]_{\\mathcal B}^{\\mathcal B}).$$\n\nThis is independent of the chosen basis: matrices of the same endomorphism in\ntwo ordered bases are similar, and similar matrices have equal trace. When\n$V$ is the zero space, the empty basis gives trace $0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qc-partial-trace",
+          "source_section": "Definition",
+          "quote": "For a complex vector space $H$, write $\\operatorname{End}(H)$ for the set of\nlinear maps $H\\to H$ ([[def-linear-map]]).\n\nLet $H_A,H_B$ be finite-dimensional complex inner-product spaces with fixed\nordered orthonormal bases $(e_i)_{i<a}$ and $(f_j)_{j<b}$, respectively. The\nordered product basis of $H_A\\otimes H_B$ has the $A$ index first. For\n$R\\in\\operatorname{End}(H_A\\otimes H_B)$ define\n$\\operatorname{Tr}_B(R)\\in\\operatorname{End}(H_A)$ by\n\n$$\\bigl(\\operatorname{Tr}_B(R)\\bigr)_{i i'}:=\\sum_{j<b}R_{(i,j),(i',j)}.$$\n\nRows are output coordinates and columns are input coordinates, as in\n[[def-coordinate-column-and-matrix-of-a-linear-map]]. If $b=0$, the sum is\nempty and equals $0$. The notation $\\operatorname{Tr}_B$ means that the second\nfactor is contracted; the first factor and its order are retained.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-it-quantum-relative-entropy-partial-trace-data-processing",
+          "source_section": "Statement",
+          "quote": "Let $H_A,H_B$ be nonzero finite-dimensional complex inner-product spaces, let $d=\\dim H_B\\ge1$, and let $A,B$ be non-negative operators on $H_A\\otimes H_B$. Then\n\n$$D(\\operatorname{Tr}_B A\\|\\operatorname{Tr}_B B)\\le D(A\\|B).$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Since $\\sigma$ has only positive eigenvalues, $\\operatorname{supp}(\\sigma)=H$ and hence $\\operatorname{supp}(\\rho)\\subseteq\\operatorname{supp}(\\sigma)$. By [F1], $D(\\rho\\|\\sigma)$ is finite and equals $\\operatorname{tr}(\\rho\\log\\rho)-\\operatorname{tr}(\\rho\\log\\sigma)=-s(\\rho)+\\operatorname{tr}(\\rho K_\\sigma)$. The same definition gives $D(\\sigma\\|\\sigma)=0$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "By [F2] and $K_\\sigma=-\\log\\sigma$, $s(\\sigma)=\\operatorname{tr}(\\sigma K_\\sigma)$. Linearity of trace [F3] then gives $\\Delta_K(\\rho,\\sigma)-(s(\\rho)-s(\\sigma))=\\operatorname{tr}(\\rho K_\\sigma)-\\operatorname{tr}(\\sigma K_\\sigma)-s(\\rho)+s(\\sigma)=\\operatorname{tr}(\\rho K_\\sigma)-s(\\rho)=D(\\rho\\|\\sigma)$ by step 1.1. This proves the finite modular-energy identity.",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "With the finite identity established in step 2.1, apply [F5] for the separate partial-trace claim to the nonnegative endomorphisms $\\rho,\\sigma$ on $H_A\\otimes H_B$, with the partial trace defined in [F4], to obtain the displayed inequality. Any finite nesting of tensor factors is covered by grouping all traced factors into $H_B$ and applying the same theorem once.",
+          "inputs": [
+            "given",
+            "F4",
+            "F5",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The space H and each tensor factor are required nonzero in the statement; see steps 1.1 and 2.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero eigenvalues of rho are allowed and are covered by the finite entropy convention in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For dim H=1 both density operators equal the identity and the identity reduces to 0=0 in step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The proof uses support and spectral definitions, with no distinct-eigenvalue assumption; see step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement is a pointwise finite-state identity and contains no path or endpoint limit."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "No selection argument is needed; the partial-trace inequality applies directly to the supplied states in step 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Neither the identity nor the data-processing inequality is stated as an iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Neither the identity nor the data-processing inequality is stated as an iff claim."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "diagonal two-state identity",
+          "inputs": "sigma=diag(1/3,2/3), rho=diag(1/2,1/2)",
+          "expected": "D(rho||sigma)=Delta_K-(s(rho)-s(sigma))=ln(3/(2 sqrt(2)))",
+          "result": "Direct spectral summation gives D=(1/2)ln(3/2)+(1/2)ln(3/4); the modular-energy and entropy terms simplify to the same value.",
+          "scope": "Finite arithmetic check of the identity only."
+        },
+        {
+          "case": "partial-trace inequality on four diagonal eigenvalues",
+          "inputs": "rho=diag(2/5,1/10,1/10,2/5), sigma=I_4/4, trace over the second C^2 factor",
+          "expected": "D(Tr_B rho||Tr_B sigma)=0 <= D(rho||sigma)=(4/5)ln(8/5)+(1/5)ln(2/5)",
+          "result": "Both marginals equal I_2/2. The full relative entropy is ln((8/5)^(4/5)(2/5)^(1/5)); its argument is greater than 1 because 8^4*2=8192>5^5=3125.",
+          "scope": "Exact diagonal-state check of the inequality, not a proof of general data processing."
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "def-it-finite-dimensional-quantum-relative-entropy",
+          "carrier": "items/def-it-finite-dimensional-quantum-relative-entropy.md",
+          "status": "Local Step 1 carrier; exact interface and complete proof inspected; no independent acceptance claimed.",
+          "source_section": "Definition",
+          "exact_statement": "Let $H$ be a finite-dimensional complex inner-product space and let $A,B:H\\to H$ be non-negative operators. For such an operator $A$, set $\\operatorname{supp}(A):=(\\ker A)^\\perp$, where $\\ker A$ is the kernel of a linear map ([[def-kernel-and-image-of-a-linear-map]]); this extends the density-operator support convention in [[def-qc-density-operator]]. If $\\operatorname{supp}(A)\\subseteq\\operatorname{supp}(B)$, define\n\n$$D(A\\|B):=\\operatorname{tr}(A\\ln A)-\\operatorname{tr}(A\\ln B).$$\n\nHere $\\ln A$ is defined spectrally on the positive eigenspaces of $A$ with $0\\ln0:=0$, and $\\ln B$ in the cross term is restricted to $\\operatorname{supp}(B)$; the support condition ensures that $A$ vanishes on $\\ker B$, so the omitted kernel contributes zero. If $\\operatorname{supp}(A)\\nsubseteq\\operatorname{supp}(B)$, set $D(A\\|B):=+\\infty$. In particular, $D(0\\|B)=0$. For density operators this is the finite-dimensional **quantum relative entropy**. The logarithms are natural, so the value is in nats; the base-two value is $D_2(A\\|B):=D(A\\|B)/\\ln2$.",
+          "relevant_hypotheses_and_conventions": "[[def-it-finite-dimensional-quantum-relative-entropy]]: for nonnegative endomorphisms $A,B$, if $\\operatorname{supp}(A)\\subseteq\\operatorname{supp}(B)$ then $D(A\\|B)=\\operatorname{tr}(A\\log A)-\\operatorname{tr}(A\\log B)$ using spectral logarithms on positive supports; otherwise $D(A\\|B)=+\\infty$.",
+          "supplier_proof_status": "Complete conditional proof present in this batch; readiness is a separate Step 1 record and does not claim independent proof approval.",
+          "consumer_use": "Used in 1.1."
+        },
+        {
+          "supplier": "def-it-von-neumann-entropy",
+          "carrier": "items/def-it-von-neumann-entropy.md",
+          "status": "Local Step 1 carrier; exact interface and complete proof inspected; no independent acceptance claimed.",
+          "source_section": "Definition",
+          "exact_statement": "Let $H$ be a nonzero finite-dimensional complex inner-product space, with the root convention that its inner product is linear in the first argument, and let $\\rho$ be a density operator on $H$ ([[def-qc-density-operator]]). If $\\lambda_1,\\ldots,\\lambda_d$ are its eigenvalues counted with multiplicity, define its **von Neumann entropy** by\n\n$$S(\\rho):=-\\operatorname{tr}(\\rho\\ln\\rho):=-\\sum_{j:\\lambda_j>0}\\lambda_j\\ln\\lambda_j.$$\n\nThe trace is the finite-dimensional endomorphism trace ([[def-trace-of-an-endomorphism]]), and the spectral definition makes the expression independent of the eigenbasis. The term for a zero eigenvalue is defined to be $0\\ln0:=0$. The default unit is nats, using the natural logarithm ([[def-natural-logarithm]]); the entropy in bits is $S_2(\\rho):=S(\\rho)/\\ln2$.",
+          "relevant_hypotheses_and_conventions": "[[def-it-von-neumann-entropy]]: for a finite-dimensional density endomorphism $\\tau$, $s(\\tau)=-\\operatorname{tr}(\\tau\\log\\tau)$ is the finite spectral sum in nats, with $0\\log0:=0$.",
+          "supplier_proof_status": "Complete conditional proof present in this batch; readiness is a separate Step 1 record and does not claim independent proof approval.",
+          "consumer_use": "Used in 1.1, 2.1."
+        },
+        {
+          "supplier": "def-trace-of-an-endomorphism",
+          "carrier": "items/def-trace-of-an-endomorphism.md",
+          "status": "Local Step 1 carrier; exact interface and complete proof inspected; no independent acceptance claimed.",
+          "source_section": "Definition",
+          "exact_statement": "Let $V$ be a finite-dimensional vector space over $F$ and let $T:V\\to V$ be\nlinear. Choose any ordered basis $\\mathcal B$ of $V$ and define the **trace of\nthe endomorphism $T$** by\n\n$$\\operatorname{tr}(T):=\\operatorname{tr}([T]_{\\mathcal B}^{\\mathcal B}).$$\n\nThis is independent of the chosen basis: matrices of the same endomorphism in\ntwo ordered bases are similar, and similar matrices have equal trace. When\n$V$ is the zero space, the empty basis gives trace $0$.",
+          "relevant_hypotheses_and_conventions": "[[def-trace-of-an-endomorphism]]: $\\operatorname{tr}(T)$ is the basis-independent trace of a finite-dimensional endomorphism, given by the sum of diagonal matrix entries in any basis; it is linear by this finite-sum definition.",
+          "supplier_proof_status": "Complete conditional proof present in this batch; readiness is a separate Step 1 record and does not claim independent proof approval.",
+          "consumer_use": "Used in 2.1."
+        },
+        {
+          "supplier": "def-qc-partial-trace",
+          "carrier": "items/def-qc-partial-trace.md",
+          "status": "Local Step 1 carrier; exact interface and complete proof inspected; no independent acceptance claimed.",
+          "source_section": "Definition",
+          "exact_statement": "For a complex vector space $H$, write $\\operatorname{End}(H)$ for the set of\nlinear maps $H\\to H$ ([[def-linear-map]]).\n\nLet $H_A,H_B$ be finite-dimensional complex inner-product spaces with fixed\nordered orthonormal bases $(e_i)_{i<a}$ and $(f_j)_{j<b}$, respectively. The\nordered product basis of $H_A\\otimes H_B$ has the $A$ index first. For\n$R\\in\\operatorname{End}(H_A\\otimes H_B)$ define\n$\\operatorname{Tr}_B(R)\\in\\operatorname{End}(H_A)$ by\n\n$$\\bigl(\\operatorname{Tr}_B(R)\\bigr)_{i i'}:=\\sum_{j<b}R_{(i,j),(i',j)}.$$\n\nRows are output coordinates and columns are input coordinates, as in\n[[def-coordinate-column-and-matrix-of-a-linear-map]]. If $b=0$, the sum is\nempty and equals $0$. The notation $\\operatorname{Tr}_B$ means that the second\nfactor is contracted; the first factor and its order are retained.",
+          "relevant_hypotheses_and_conventions": "[[def-qc-partial-trace]]: for nonnegative $R$ on $H_A\\otimes H_B$, the partial trace $\\operatorname{Tr}_B R$ is the endomorphism of $H_A$ whose product-basis entries are $(\\operatorname{Tr}_B R)_{ii'}=\\sum_j R_{(i,j),(i',j)}$.",
+          "supplier_proof_status": "Complete conditional proof present in this batch; readiness is a separate Step 1 record and does not claim independent proof approval.",
+          "consumer_use": "Used in 3.1."
+        },
+        {
+          "supplier": "thm-it-quantum-relative-entropy-partial-trace-data-processing",
+          "carrier": "items/thm-it-quantum-relative-entropy-partial-trace-data-processing.md",
+          "status": "Local Step 1 carrier; exact interface and complete proof inspected; no independent acceptance claimed.",
+          "source_section": "Statement",
+          "exact_statement": "Let $H_A,H_B$ be nonzero finite-dimensional complex inner-product spaces, let $d=\\dim H_B\\ge1$, and let $A,B$ be non-negative operators on $H_A\\otimes H_B$. Then\n\n$$D(\\operatorname{Tr}_B A\\|\\operatorname{Tr}_B B)\\le D(A\\|B).$$",
+          "relevant_hypotheses_and_conventions": "[[thm-it-quantum-relative-entropy-partial-trace-data-processing]]: for nonnegative $A,B$ on a finite tensor product $H_A\\otimes H_B$, $D(\\operatorname{Tr}_{B}A\\|\\operatorname{Tr}_{B}B)\\le D(A\\|B)$.",
+          "supplier_proof_status": "Complete conditional proof present in this batch; readiness is a separate Step 1 record and does not claim independent proof approval.",
+          "consumer_use": "Used in 3.1."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-122-beta-self-review",
+        "notes": "Self-review checked the stated hypotheses, finite-dimensional scope, cited interfaces, and each numbered proof step. This record is authoring evidence, not independent proof approval."
+      }
+    },
+    "prop-tgrx-entropy-first-variation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-tgrx-finite-matrix-entropy-variation",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space with a fixed orthonormal basis, let $J\\subseteq\\mathbb R$ be an open interval, and let $t_0\\in J$. Suppose $A:J\\to\\operatorname{End}(H)$ has real and imaginary matrix entries in the fixed basis differentiable at $t_0$ and is self-adjoint with strictly positive eigenvalues on a neighborhood of $t_0$. Define $\\log A(t)$ by applying the natural logarithm to the eigenvalues of $A(t)$ in its spectral decomposition, let $\\operatorname{tr}$ be the finite-dimensional trace, and let $\\|T\\|_{\\mathrm{op}}:=\\sup_{\\|v\\|=1}\\|Tv\\|$ be the operator norm. Then $G(t):=\\operatorname{tr}(A(t)\\log A(t))$ is differentiable at $t_0$ and\n\n$$G'(t_0)=\\operatorname{tr}\\!\\left(A'(t_0)(\\log A(t_0)+I_H)\\right),$$\n\nwhere $I_H$ is the identity endomorphism of $H$ and $A'(t_0)$ is obtained by differentiating the matrix entries in the fixed basis.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-tgrx-finite-modular-balance",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space. Let $\\rho,\\sigma:H\\to H$ be self-adjoint linear maps with nonnegative eigenvalues and trace one, and suppose every eigenvalue of $\\sigma$ is strictly positive. Define $K_\\sigma:=-\\log\\sigma$ by spectral calculus, and for any self-adjoint $\\tau:H\\to H$ with nonnegative eigenvalues and trace one define $s(\\tau):=-\\operatorname{tr}(\\tau\\log\\tau)=-\\sum_{\\lambda_j(\\tau)>0}\\lambda_j(\\tau)\\log\\lambda_j(\\tau)$, with the zero-eigenvalue term $0\\log0:=0$ and natural logarithms, so the entropy is in nats. Define the modular-energy difference relative to $\\sigma$ by $\\Delta_K(\\rho,\\sigma):=\\operatorname{tr}((\\rho-\\sigma)K_\\sigma)$. Then\n\n$$D(\\rho\\|\\sigma)=\\Delta_K(\\rho,\\sigma)-(s(\\rho)-s(\\sigma)).$$\n\nFor any nonzero finite-dimensional complex inner-product spaces $H_A,H_B$ with $H=H_A\\otimes H_B$, partial tracing both states over $H_B$ cannot increase relative entropy:\n\n$$D(\\operatorname{Tr}_{B}\\rho\\|\\operatorname{Tr}_{B}\\sigma)\\le D(\\rho\\|\\sigma).$$\n\nThe identity and inequality are finite-dimensional mathematical statements; no Hamiltonian, physical energy, physical units, continuum limit, or gravitational entropy is assumed.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qsm-matrix-state-calculus",
+          "source_section": "Statement",
+          "quote": "Use the following conventions on a complex inner-product space $H$ of dimension $D\\geq1$, with inner product linear in its first argument. For an endomorphism $A$, define $\\operatorname{Tr}A:=\\sum_{j=1}^D\\langle Ae_j,e_j\\rangle$ in an orthonormal basis; step 3.1 proves basis independence. For any Hermitian $M$, its **positive spectral subspace** (called its positive support here) is $S_M:=\\bigoplus_{\\lambda>0}\\ker(M-\\lambda I)$; when $M\\geq0$ this equals $(\\ker M)^\\perp$. Its support logarithm is $\\log(M|_{S_M}):=\\sum_{\\lambda>0}(\\log\\lambda)P_\\lambda|_{S_M}$, where $P_\\lambda$ is the orthogonal projection onto that eigenspace. No value $\\log0$ is assigned; for $M=0$ this is the unique endomorphism of the zero space. For the set $\\mathcal D(H)$ of positive semidefinite Hermitian endomorphisms with trace one, a point $\\rho$ is **extreme** if every equality $\\rho=t\\sigma+(1-t)\\tau$ with $\\sigma,\\tau\\in\\mathcal D(H)$ and $0<t<1$ implies $\\sigma=\\tau=\\rho$.\n\nLet $H$ be a complex inner-product space of finite dimension $D\\geq1$, with inner product linear in its first argument. Every Hermitian endomorphism $M$ has an orthonormal eigenbasis with real eigenvalues. For a real function $f$ on its finite spectrum, define $f(M)$ by its spectral projections; this definition is independent of the choice of eigenbasis. In particular positive square roots, exponentials, and logarithms on positive supports are well defined.\n\nFor a density matrix $\\rho$ on $H$, meaning a Hermitian positive semidefinite operator with $\\operatorname{Tr}\\rho=1$, $\\operatorname{Tr}(\\rho A)=\\sum_jp_j\\langle Au_j,u_j\\rangle$ for bounded $A$, where $\\rho=\\sum_jp_j|u_j\\rangle\\langle u_j|$. The weighted form $(X,Y)_\\rho=\\operatorname{Tr}(\\rho X^*Y)$ satisfies Cauchy–Schwarz, $|(X,Y)_\\rho|^2\\leq(X,X)_\\rho(Y,Y)_\\rho$. Finally, $\\operatorname{Tr}(\\rho^2)\\leq1$, with equality exactly for rank-one densities, and those are exactly the extreme points of the finite density-matrix set.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-trace-of-an-endomorphism",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a finite-dimensional vector space over $F$ and let $T:V\\to V$ be\nlinear. Choose any ordered basis $\\mathcal B$ of $V$ and define the **trace of\nthe endomorphism $T$** by\n\n$$\\operatorname{tr}(T):=\\operatorname{tr}([T]_{\\mathcal B}^{\\mathcal B}).$$\n\nThis is independent of the chosen basis: matrices of the same endomorphism in\ntwo ordered bases are similar, and similar matrices have equal trace. When\n$V$ is the zero space, the empty basis gives trace $0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-operator-norm",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be normed spaces over the same scalar field, and let\n$T:X\\to Y$ be bounded in the sense of [[def-bounded-linear-operator]]. The\n**operator norm** of $T$ is\n\n$$\\|T\\| := \\sup\\{\\|Tx\\| : x \\in X,\\ \\|x\\| \\le 1\\}.$$\n\nThe set on the right contains $0$ and every bound $C$ for $T$ bounds it\nabove. Thus its finite real supremum exists by the proved least-upper-bound\nproperty of the library's real field ([[cor-cauchy-reals-lub-complete]]).\nIn particular every number strictly below the supremum is exceeded by a\nmember of this set; otherwise it would be a smaller upper bound. No choice\nprinciple is used for this assertion.\n\nThe same number is the least bound of $T$:\n\n$$\\|T\\| = \\inf\\{C \\ge 0 : \\|Tx\\| \\le C\\|x\\| \\text{ for all } x \\in X\\}.$$\n\nIf $X \\ne \\{0\\}$, positive homogeneity also gives\n\n$$\\|T\\| = \\sup\\{\\|Tx\\| : \\|x\\| = 1\\}.$$\n\nWhen $X = \\{0\\}$, the unit sphere is empty and the unit-ball supremum is $0$,\nso $\\|T\\| = 0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+          "source_section": "Statement",
+          "quote": "For vectors $u,v$ in a real or complex inner product space,\n\n$$|\\langle u,v\\rangle|\\le\\lVert u\\rVert\\lVert v\\rVert.$$\n\nEquality holds if and only if $u$ and $v$ are linearly dependent, including the case in which either vector is zero.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Let $m>0$ be the smallest eigenvalue of $\\sigma$ from [F3]. Since $\\rho$ is entrywise continuous at $0$, its finite matrix difference $T(\\varepsilon):=\\rho(\\varepsilon)-\\sigma$ tends to zero in operator norm: in a fixed orthonormal basis, if every entry of $T$ has magnitude at most $M$, then for a unit vector $x$ $\\sum_j|x_j|^2=1$ makes each coordinate of $x$ have magnitude at most $1$, and each coordinate of $Tx$ has magnitude at most $dM$, and therefore $\\|Tx\\|\\le d^{3/2}M$, where $d=\\dim H$. Choose $\\delta>0$ so that $\\|T(\\varepsilon)\\|_{\\mathrm{op}}<m/2$ for $|\\varepsilon|<\\delta$. For each $v\\in H$, $\\langle\\sigma v,v\\rangle\\ge m\\|v\\|^2$ by spectral decomposition, while [F5] and [F6] give $|\\langle T(\\varepsilon)v,v\\rangle|\\le\\|T(\\varepsilon)\\|_{\\mathrm{op}}\\|v\\|^2$. Hence $\\langle\\rho(\\varepsilon)v,v\\rangle>(m/2)\\|v\\|^2$ for nonzero $v$. Thus $\\rho(\\varepsilon)$ is positive definite near $0$ and [F1] applies.",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F5",
+            "F6",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Apply [F1] to $\\rho$ at $0$: $\\left.\\frac{d}{d\\varepsilon}s(\\rho(\\varepsilon))\\right|_{\\varepsilon=0}=-\\operatorname{tr}(\\rho'(0)(\\log\\sigma+I))$. Because $\\operatorname{tr}(\\rho(\\varepsilon))=1$ on the whole interval, in the fixed basis [F4] gives $\\operatorname{tr}(\\rho'(0))=\\sum_i\\rho'_{ii}(0)=\\lim_{h\\to0}\\sum_i(\\rho_{ii}(h)-\\rho_{ii}(0))/h=\\lim_{h\\to0}(1-1)/h=0$; the finite sum commutes with this limit. Therefore $\\left.\\frac{d}{d\\varepsilon}s(\\rho(\\varepsilon))\\right|_0=-\\operatorname{tr}(\\rho'(0)\\log\\sigma)=\\operatorname{tr}(\\rho'(0)K_\\sigma)$, as claimed.",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "The identity [F2] holds for every $\\rho(\\varepsilon)$ in the path. Its right-hand side is differentiable at $0$ by linearity of trace and step 2.1, so differentiating gives $\\left.\\frac{d}{d\\varepsilon}D(\\rho(\\varepsilon)\\|\\sigma)\\right|_0=\\operatorname{tr}(\\rho'(0)K_\\sigma)-\\left.\\frac{d}{d\\varepsilon}s(\\rho(\\varepsilon))\\right|_0=0$. The additional twice continuously differentiable hypothesis ensures the differentiability required here.",
+          "inputs": [
+            "given",
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The statement excludes H={0}; its density path is on a nonzero finite-dimensional space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If rho'(0)=0, both displayed first variations vanish by steps 2.1 and 3.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "In dimension one the trace-one path is constant, so its derivative and entropy variation vanish by steps 1.1–2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Repeated eigenvalues of the faithful reference are allowed; step 1.1 needs only its positive minimum eigenvalue."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The open interval I contains 0, so the derivative at 0 is two-sided; see step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Continuity and m>0 provide a positive delta in step 1.1, ensuring the path is faithful near 0."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Proof 2.1 gives the entropy tangent formula and 3.1 cancels the relative-entropy derivative. These are equalities at the faithful reference, with no converse characterization of paths."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Proof 2.1 gives the entropy tangent formula and 3.1 cancels the relative-entropy derivative. These are equalities at the faithful reference, with no converse characterization of paths."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "traceless diagonal qubit tangent",
+          "inputs": "sigma=diag(1/3,2/3), rho(epsilon)=diag(1/3+epsilon,2/3-epsilon) near epsilon=0",
+          "expected": "s'(0)=ln(2) and D'(rho(epsilon)||sigma)|0=0",
+          "result": "The tangent is diag(1,-1), so tr(rho'(0)(-ln sigma))=ln(3/2)-ln(1/3)=ln(2); the relative-entropy derivative cancels by the modular identity.",
+          "scope": "Exact finite-dimensional path check."
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "lem-tgrx-finite-matrix-entropy-variation",
+          "carrier": "items/lem-tgrx-finite-matrix-entropy-variation.md",
+          "status": "Local Step 1 carrier; exact interface and complete proof inspected; no independent acceptance claimed.",
+          "source_section": "Statement",
+          "exact_statement": "Let $H$ be a nonzero finite-dimensional complex inner-product space with a fixed orthonormal basis, let $J\\subseteq\\mathbb R$ be an open interval, and let $t_0\\in J$. Suppose $A:J\\to\\operatorname{End}(H)$ has real and imaginary matrix entries in the fixed basis differentiable at $t_0$ and is self-adjoint with strictly positive eigenvalues on a neighborhood of $t_0$. Define $\\log A(t)$ by applying the natural logarithm to the eigenvalues of $A(t)$ in its spectral decomposition, let $\\operatorname{tr}$ be the finite-dimensional trace, and let $\\|T\\|_{\\mathrm{op}}:=\\sup_{\\|v\\|=1}\\|Tv\\|$ be the operator norm. Then $G(t):=\\operatorname{tr}(A(t)\\log A(t))$ is differentiable at $t_0$ and\n\n$$G'(t_0)=\\operatorname{tr}\\!\\left(A'(t_0)(\\log A(t_0)+I_H)\\right),$$\n\nwhere $I_H$ is the identity endomorphism of $H$ and $A'(t_0)$ is obtained by differentiating the matrix entries in the fixed basis.",
+          "relevant_hypotheses_and_conventions": "[[lem-tgrx-finite-matrix-entropy-variation]]: for a differentiable path of self-adjoint positive-definite matrices, $\\frac{d}{d\\varepsilon}\\operatorname{tr}(\\rho\\log\\rho)=\\operatorname{tr}(\\rho'(\\log\\rho+I))$.",
+          "supplier_proof_status": "Complete conditional proof present in this batch; readiness is a separate Step 1 record and does not claim independent proof approval.",
+          "consumer_use": "Used in 1.1, 2.1."
+        },
+        {
+          "supplier": "prop-tgrx-finite-modular-balance",
+          "carrier": "items/prop-tgrx-finite-modular-balance.md",
+          "status": "Local Step 1 carrier; exact interface and complete proof inspected; no independent acceptance claimed.",
+          "source_section": "Statement",
+          "exact_statement": "Let $H$ be a nonzero finite-dimensional complex inner-product space. Let $\\rho,\\sigma:H\\to H$ be self-adjoint linear maps with nonnegative eigenvalues and trace one, and suppose every eigenvalue of $\\sigma$ is strictly positive. Define $K_\\sigma:=-\\log\\sigma$ by spectral calculus, and for any self-adjoint $\\tau:H\\to H$ with nonnegative eigenvalues and trace one define $s(\\tau):=-\\operatorname{tr}(\\tau\\log\\tau)=-\\sum_{\\lambda_j(\\tau)>0}\\lambda_j(\\tau)\\log\\lambda_j(\\tau)$, with the zero-eigenvalue term $0\\log0:=0$ and natural logarithms, so the entropy is in nats. Define the modular-energy difference relative to $\\sigma$ by $\\Delta_K(\\rho,\\sigma):=\\operatorname{tr}((\\rho-\\sigma)K_\\sigma)$. Then\n\n$$D(\\rho\\|\\sigma)=\\Delta_K(\\rho,\\sigma)-(s(\\rho)-s(\\sigma)).$$\n\nFor any nonzero finite-dimensional complex inner-product spaces $H_A,H_B$ with $H=H_A\\otimes H_B$, partial tracing both states over $H_B$ cannot increase relative entropy:\n\n$$D(\\operatorname{Tr}_{B}\\rho\\|\\operatorname{Tr}_{B}\\sigma)\\le D(\\rho\\|\\sigma).$$\n\nThe identity and inequality are finite-dimensional mathematical statements; no Hamiltonian, physical energy, physical units, continuum limit, or gravitational entropy is assumed.",
+          "relevant_hypotheses_and_conventions": "[[prop-tgrx-finite-modular-balance]]: for each density endomorphism $\\tau$ and the fixed faithful reference $\\sigma$, $D(\\tau\\|\\sigma)=\\operatorname{tr}((\\tau-\\sigma)K_\\sigma)-(s(\\tau)-s(\\sigma))$.",
+          "supplier_proof_status": "Complete conditional proof present in this batch; readiness is a separate Step 1 record and does not claim independent proof approval.",
+          "consumer_use": "Used in 3.1."
+        },
+        {
+          "supplier": "lem-qsm-matrix-state-calculus",
+          "carrier": "items/lem-qsm-matrix-state-calculus.md",
+          "status": "Local Step 1 carrier; exact interface and complete proof inspected; no independent acceptance claimed.",
+          "source_section": "Statement",
+          "exact_statement": "Use the following conventions on a complex inner-product space $H$ of dimension $D\\geq1$, with inner product linear in its first argument. For an endomorphism $A$, define $\\operatorname{Tr}A:=\\sum_{j=1}^D\\langle Ae_j,e_j\\rangle$ in an orthonormal basis; step 3.1 proves basis independence. For any Hermitian $M$, its **positive spectral subspace** (called its positive support here) is $S_M:=\\bigoplus_{\\lambda>0}\\ker(M-\\lambda I)$; when $M\\geq0$ this equals $(\\ker M)^\\perp$. Its support logarithm is $\\log(M|_{S_M}):=\\sum_{\\lambda>0}(\\log\\lambda)P_\\lambda|_{S_M}$, where $P_\\lambda$ is the orthogonal projection onto that eigenspace. No value $\\log0$ is assigned; for $M=0$ this is the unique endomorphism of the zero space. For the set $\\mathcal D(H)$ of positive semidefinite Hermitian endomorphisms with trace one, a point $\\rho$ is **extreme** if every equality $\\rho=t\\sigma+(1-t)\\tau$ with $\\sigma,\\tau\\in\\mathcal D(H)$ and $0<t<1$ implies $\\sigma=\\tau=\\rho$.\n\nLet $H$ be a complex inner-product space of finite dimension $D\\geq1$, with inner product linear in its first argument. Every Hermitian endomorphism $M$ has an orthonormal eigenbasis with real eigenvalues. For a real function $f$ on its finite spectrum, define $f(M)$ by its spectral projections; this definition is independent of the choice of eigenbasis. In particular positive square roots, exponentials, and logarithms on positive supports are well defined.\n\nFor a density matrix $\\rho$ on $H$, meaning a Hermitian positive semidefinite operator with $\\operatorname{Tr}\\rho=1$, $\\operatorname{Tr}(\\rho A)=\\sum_jp_j\\langle Au_j,u_j\\rangle$ for bounded $A$, where $\\rho=\\sum_jp_j|u_j\\rangle\\langle u_j|$. The weighted form $(X,Y)_\\rho=\\operatorname{Tr}(\\rho X^*Y)$ satisfies Cauchy–Schwarz, $|(X,Y)_\\rho|^2\\leq(X,X)_\\rho(Y,Y)_\\rho$. Finally, $\\operatorname{Tr}(\\rho^2)\\leq1$, with equality exactly for rank-one densities, and those are exactly the extreme points of the finite density-matrix set.",
+          "relevant_hypotheses_and_conventions": "[[lem-qsm-matrix-state-calculus]]: finite-dimensional Hermitian endomorphisms have orthonormal spectral decompositions, and the eigenvalues of a strictly positive one have a positive minimum.",
+          "supplier_proof_status": "Complete conditional proof present in this batch; readiness is a separate Step 1 record and does not claim independent proof approval.",
+          "consumer_use": "Used in 1.1."
+        },
+        {
+          "supplier": "def-trace-of-an-endomorphism",
+          "carrier": "items/def-trace-of-an-endomorphism.md",
+          "status": "Local Step 1 carrier; exact interface and complete proof inspected; no independent acceptance claimed.",
+          "source_section": "Definition",
+          "exact_statement": "Let $V$ be a finite-dimensional vector space over $F$ and let $T:V\\to V$ be\nlinear. Choose any ordered basis $\\mathcal B$ of $V$ and define the **trace of\nthe endomorphism $T$** by\n\n$$\\operatorname{tr}(T):=\\operatorname{tr}([T]_{\\mathcal B}^{\\mathcal B}).$$\n\nThis is independent of the chosen basis: matrices of the same endomorphism in\ntwo ordered bases are similar, and similar matrices have equal trace. When\n$V$ is the zero space, the empty basis gives trace $0$.",
+          "relevant_hypotheses_and_conventions": "[[def-trace-of-an-endomorphism]]: trace is the finite sum of diagonal entries and therefore is linear.",
+          "supplier_proof_status": "Complete conditional proof present in this batch; readiness is a separate Step 1 record and does not claim independent proof approval.",
+          "consumer_use": "Used in 2.1."
+        },
+        {
+          "supplier": "def-operator-norm",
+          "carrier": "items/def-operator-norm.md",
+          "status": "Local Step 1 carrier; exact interface and complete proof inspected; no independent acceptance claimed.",
+          "source_section": "Definition",
+          "exact_statement": "Let $X$ and $Y$ be normed spaces over the same scalar field, and let\n$T:X\\to Y$ be bounded in the sense of [[def-bounded-linear-operator]]. The\n**operator norm** of $T$ is\n\n$$\\|T\\| := \\sup\\{\\|Tx\\| : x \\in X,\\ \\|x\\| \\le 1\\}.$$\n\nThe set on the right contains $0$ and every bound $C$ for $T$ bounds it\nabove. Thus its finite real supremum exists by the proved least-upper-bound\nproperty of the library's real field ([[cor-cauchy-reals-lub-complete]]).\nIn particular every number strictly below the supremum is exceeded by a\nmember of this set; otherwise it would be a smaller upper bound. No choice\nprinciple is used for this assertion.\n\nThe same number is the least bound of $T$:\n\n$$\\|T\\| = \\inf\\{C \\ge 0 : \\|Tx\\| \\le C\\|x\\| \\text{ for all } x \\in X\\}.$$\n\nIf $X \\ne \\{0\\}$, positive homogeneity also gives\n\n$$\\|T\\| = \\sup\\{\\|Tx\\| : \\|x\\| = 1\\}.$$\n\nWhen $X = \\{0\\}$, the unit sphere is empty and the unit-ball supremum is $0$,\nso $\\|T\\| = 0$.",
+          "relevant_hypotheses_and_conventions": "[[def-operator-norm]]: $\\|Tv\\|\\le\\|T\\|_{\\mathrm{op}}\\|v\\|$ for every vector $v$.",
+          "supplier_proof_status": "Complete conditional proof present in this batch; readiness is a separate Step 1 record and does not claim independent proof approval.",
+          "consumer_use": "Used in 1.1."
+        },
+        {
+          "supplier": "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+          "carrier": "items/thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces.md",
+          "status": "Local Step 1 carrier; exact interface and complete proof inspected; no independent acceptance claimed.",
+          "source_section": "Statement",
+          "exact_statement": "For vectors $u,v$ in a real or complex inner product space,\n\n$$|\\langle u,v\\rangle|\\le\\lVert u\\rVert\\lVert v\\rVert.$$\n\nEquality holds if and only if $u$ and $v$ are linearly dependent, including the case in which either vector is zero.",
+          "relevant_hypotheses_and_conventions": "[[thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces]]: $|\\langle u,v\\rangle|\\le\\|u\\|\\|v\\|$ for vectors in a complex inner-product space.",
+          "supplier_proof_status": "Complete conditional proof present in this batch; readiness is a separate Step 1 record and does not claim independent proof approval.",
+          "consumer_use": "Used in 1.1."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-122-beta-self-review",
+        "notes": "Self-review checked the stated hypotheses, finite-dimensional scope, cited interfaces, and each numbered proof step. This record is authoring evidence, not independent proof approval."
+      },
+      "current_boundary_worksheet": {
+        "proposal": "research/physics-non-fluid-129-2026-10-21-r2-owner-step2-boundary-proposal-2/proposal.json",
+        "source_sha256": "169b378c2c8b1deb7ca7fc8055730ca024649385bc6d373f23c7c242cf1bbc8e",
+        "qualification": "Released complete current source/eight-case semantic worksheet; root transcribed exact current rows. No independent acceptance or finite computation asserted."
+      }
+    },
+    "ex-tgrx-qubit-first-variation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "prop-tgrx-entropy-first-variation",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space and let $I\\subseteq\\mathbb R$ be an open interval containing $0$. Let $\\rho:I\\to\\operatorname{End}(H)$ be a path whose real and imaginary matrix entries are continuously differentiable on $I$, such that each $\\rho(\\varepsilon)$ is self-adjoint with nonnegative eigenvalues and trace one. Suppose $\\rho(0)=\\sigma$ and every eigenvalue of $\\sigma$ is strictly positive. Define $K_\\sigma:=-\\log\\sigma$ by spectral calculus and let $s(\\tau):=-\\operatorname{tr}(\\tau\\log\\tau)$ with the finite spectral convention $0\\log0:=0$. Then\n\n$$\\left.\\frac{d}{d\\varepsilon}s(\\rho(\\varepsilon))\\right|_{\\varepsilon=0}=\\operatorname{tr}(\\rho'(0)K_\\sigma).$$\n\nIf, in addition, the real and imaginary matrix entries of $\\rho$ are twice continuously differentiable on $I$, then the finite relative entropy $D(\\rho(\\varepsilon)\\|\\sigma)$ has zero first derivative at $\\varepsilon=0$. These are finite-dimensional mathematical statements and make no continuum or gravitational claim.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$\n(Limit point, isolated point, adherent point, derived set, and dense subset of $\\mathbb{R}$), let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$\n(The derivative $f'(c) = \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c}$ of $f : A \\to \\mathbb{R}$ at a point $c \\in A$ that is a limit point of $A$, and differentiability on a set) and let $\\alpha \\in \\mathbb{R}$. Then:\n\n1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$;\n2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;\n3. $fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and is a limit point of $A_0$, the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is differentiable\n   at $c$ as a function on $A_0$, and\n   $$\\bigl((f/g)|_{A_0}\\bigr)'(c) \\;=\\; \\frac{f'(c)\\,g(c) - f(c)\\,g'(c)}{g(c)^{2}} .$$\n\nEach claim asserts two things: that the derivative on the left exists, and that\nit has the stated value. Both are proved.\n\n**Why claim 4 is stated on $A_0$.** The function $f/g$ is not defined where $g$\nvanishes, and $g$ may vanish at points of $A$ far from $c$; restricting to $A_0$\nis forced. That the restriction still has $c$ as a limit point, so that a\nderivative there means anything at all, is not free either, and it is the last\nclaim of If $\\lim_{x \\to c} f(x) = L \\ne 0$ then $|f| > |L|/2$ on a punctured neighbourhood of $c$; in particular if $L > 0$ then $f > L/2 > 0$ there applied to $g$. The hypothesis\nis $g(c) \\ne 0$, not \"$g$ vanishes nowhere\".\n\n**Everything is proved through\nCarathéodory's characterisation: $f$ is differentiable at $c$ if and only if there is $\\varphi : A \\to \\mathbb{R}$, continuous at $c$, with $f(x) - f(c) = \\varphi(x)(x - c)$ for every $x \\in A$, and then $\\varphi$ is unique and $\\varphi(c) = f'(c)$.** No difference quotient is estimated and\nno limit theorem beyond continuity is used, so no choice principle is spent.\nThe four identities are four algebraic rearrangements of an increment, each\nfollowed by a reading of Sums, scalar multiples, products, absolute values, maxima, minima and quotients with nonvanishing denominator of continuous functions are continuous, as are constants, the identity and every polynomial function.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because The exponential is a continuous bijection from $\\mathbb{R}$ onto $(0,\\infty)$ states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The bounds on $\\varepsilon$ imply $p+\\varepsilon>0$ and $1-p-\\varepsilon>0$, and their sum is $1$. Thus $\\rho(\\varepsilon)$ is a positive diagonal trace-one matrix, $\\sigma=\\rho(0)$ is strictly positive, and the path satisfies the finite-dimensional hypotheses in [F1].",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "The eigenvalues give $s(\\rho(\\varepsilon))=-(p+\\varepsilon)\\log(p+\\varepsilon)-(1-p-\\varepsilon)\\log(1-p-\\varepsilon)$. By the difference-quotient formula in [F2], $\\frac{d}{d\\varepsilon}\\log(p+\\varepsilon)=1/(p+\\varepsilon)$ and, after replacing the increment by its negative, $\\frac{d}{d\\varepsilon}\\log(1-p-\\varepsilon)=-1/(1-p-\\varepsilon)$. The product rule [F4] therefore gives $\\frac{d}{d\\varepsilon}s(\\rho(\\varepsilon))=\\log(1-p-\\varepsilon)-\\log(p+\\varepsilon)$; at $0$, [F3] turns this into $\\log((1-p)/p)$.",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Directly, $\\rho'(0)=\\operatorname{diag}(1,-1)$ and $-\\log\\sigma=\\operatorname{diag}(-\\log p,-\\log(1-p))$, so $\\operatorname{tr}(\\rho'(0)(-\\log\\sigma))=\\log(1-p)-\\log p=\\log((1-p)/p)$. This agrees with the local calculation and the general result [F1].",
+          "inputs": [
+            "F1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The parameter condition p in (0,1) excludes the empty or singular endpoint cases; see step 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At epsilon=0 the derivative equals log((1-p)/p) by step 1.2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At p=1/2 the two eigenvalues coincide and the derivative is 0, as step 1.2 gives."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The p=1/2 case has a degenerate reference spectrum and is covered by the direct scalar calculation in step 1.2."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The interval is open and its singular endpoints are excluded; positivity holds throughout the stated interval by step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Since p and 1-p are positive, min(p,1-p)>0 and the allowed epsilon interval is nonempty; see step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example states a derivative value, not an iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example states a derivative value, not an iff claim."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "balanced reference",
+          "inputs": "p=1/2",
+          "expected": "s'(0)=0",
+          "result": "The formula gives ln((1-p)/p)=ln(1)=0; the two eigenvalue contributions cancel.",
+          "scope": "Exact symmetric qubit check."
+        },
+        {
+          "case": "biased reference",
+          "inputs": "p=1/3",
+          "expected": "s'(0)=ln(2)",
+          "result": "The formula gives ln((2/3)/(1/3))=ln(2), agreeing with direct differentiation of the two eigenvalue terms.",
+          "scope": "Exact scalar check."
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "prop-tgrx-entropy-first-variation",
+          "carrier": "items/prop-tgrx-entropy-first-variation.md",
+          "status": "Exact current public interface transcribed by root at the drained Step2 join; original substantive source-use review retained in historical_source_interface and native/same-owner reports. No renewed full supplier-proof reading asserted.",
+          "source_section": "Statement",
+          "exact_statement": "Let $H$ be a nonzero finite-dimensional complex inner-product space and let $I\\subseteq\\mathbb R$ be an open interval containing $0$. Let $\\rho:I\\to\\operatorname{End}(H)$ be a path whose real and imaginary matrix entries are continuously differentiable on $I$, such that each $\\rho(\\varepsilon)$ is self-adjoint with nonnegative eigenvalues and trace one. Suppose $\\rho(0)=\\sigma$ and every eigenvalue of $\\sigma$ is strictly positive. Define $K_\\sigma:=-\\log\\sigma$ by spectral calculus and let $s(\\tau):=-\\operatorname{tr}(\\tau\\log\\tau)$ with the finite spectral convention $0\\log0:=0$. Then\n\n$$\\left.\\frac{d}{d\\varepsilon}s(\\rho(\\varepsilon))\\right|_{\\varepsilon=0}=\\operatorname{tr}(\\rho'(0)K_\\sigma).$$\n\nIf, in addition, the real and imaginary matrix entries of $\\rho$ are twice continuously differentiable on $I$, then the finite relative entropy $D(\\rho(\\varepsilon)\\|\\sigma)$ has zero first derivative at $\\varepsilon=0$. These are finite-dimensional mathematical statements and make no continuum or gravitational claim.",
+          "relevant_hypotheses_and_conventions": "[[prop-tgrx-entropy-first-variation]]: for a differentiable density path through a faithful finite-dimensional reference, $s'(0)=\\operatorname{tr}(\\rho'(0)(-\\log\\sigma))$.",
+          "supplier_proof_status": "draft; this exact-quote refresh does not grant independent proof acceptance",
+          "consumer_use": "Used in 1.1, 2.1.",
+          "historical_source_interface": {
+            "source_section": "Statement",
+            "exact_statement": "Let $H$ be a nonzero finite-dimensional complex inner-product space and let $I\\subseteq\\mathbb R$ be an open interval containing $0$. Let $\\rho:I\\to\\operatorname{End}(H)$ be a path whose real and imaginary matrix entries are twice continuously differentiable, such that each $\\rho(\\varepsilon)$ is self-adjoint with nonnegative eigenvalues and trace one. Suppose $\\rho(0)=\\sigma$ and every eigenvalue of $\\sigma$ is strictly positive. Define $K_\\sigma:=-\\log\\sigma$ by spectral calculus and let $s(\\tau):=-\\operatorname{tr}(\\tau\\log\\tau)$ with the finite spectral convention $0\\log0:=0$. Then\n\n$$\\left.\\frac{d}{d\\varepsilon}s(\\rho(\\varepsilon))\\right|_{\\varepsilon=0}=\\operatorname{tr}(\\rho'(0)K_\\sigma).$$\n\nThe finite relative entropy $D(\\rho(\\varepsilon)\\|\\sigma)$ has zero first derivative at $\\varepsilon=0$. These are finite-dimensional mathematical statements and make no continuum or gravitational claim.",
+            "status": "Local Step 1 carrier; exact interface and complete proof inspected; no independent acceptance claimed.",
+            "supplier_proof_status": "Complete conditional proof present in this batch; readiness is a separate Step 1 record and does not claim independent proof approval."
+          }
+        },
+        {
+          "supplier": "thm-logarithm-derivative-and-integral",
+          "carrier": "items/thm-logarithm-derivative-and-integral.md",
+          "status": "Local Step 1 carrier; exact interface and complete proof inspected; no independent acceptance claimed.",
+          "source_section": "Statement",
+          "exact_statement": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "relevant_hypotheses_and_conventions": "[[thm-logarithm-derivative-and-integral]]: $\\log$ is differentiable on $(0,\\infty)$ with $\\log'(x)=1/x$.",
+          "supplier_proof_status": "Complete conditional proof present in this batch; readiness is a separate Step 1 record and does not claim independent proof approval.",
+          "consumer_use": "Used in 1.2."
+        },
+        {
+          "supplier": "thm-natural-logarithm-laws",
+          "carrier": "items/thm-natural-logarithm-laws.md",
+          "status": "Local Step 1 carrier; exact interface and complete proof inspected; no independent acceptance claimed.",
+          "source_section": "Statement",
+          "exact_statement": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "relevant_hypotheses_and_conventions": "[[thm-natural-logarithm-laws]]: for $a,b>0$, $\\log(a)-\\log(b)=\\log(a/b)$.",
+          "supplier_proof_status": "Complete conditional proof present in this batch; readiness is a separate Step 1 record and does not claim independent proof approval.",
+          "consumer_use": "Used in 1.2."
+        },
+        {
+          "supplier": "thm-algebra-of-derivatives",
+          "carrier": "items/thm-algebra-of-derivatives.md",
+          "status": "Local Step 1 carrier; exact interface and complete proof inspected; no independent acceptance claimed.",
+          "source_section": "Statement",
+          "exact_statement": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$\n(Limit point, isolated point, adherent point, derived set, and dense subset of $\\mathbb{R}$), let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$\n(The derivative $f'(c) = \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c}$ of $f : A \\to \\mathbb{R}$ at a point $c \\in A$ that is a limit point of $A$, and differentiability on a set) and let $\\alpha \\in \\mathbb{R}$. Then:\n\n1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$;\n2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;\n3. $fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and is a limit point of $A_0$, the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is differentiable\n   at $c$ as a function on $A_0$, and\n   $$\\bigl((f/g)|_{A_0}\\bigr)'(c) \\;=\\; \\frac{f'(c)\\,g(c) - f(c)\\,g'(c)}{g(c)^{2}} .$$\n\nEach claim asserts two things: that the derivative on the left exists, and that\nit has the stated value. Both are proved.\n\n**Why claim 4 is stated on $A_0$.** The function $f/g$ is not defined where $g$\nvanishes, and $g$ may vanish at points of $A$ far from $c$; restricting to $A_0$\nis forced. That the restriction still has $c$ as a limit point, so that a\nderivative there means anything at all, is not free either, and it is the last\nclaim of If $\\lim_{x \\to c} f(x) = L \\ne 0$ then $|f| > |L|/2$ on a punctured neighbourhood of $c$; in particular if $L > 0$ then $f > L/2 > 0$ there applied to $g$. The hypothesis\nis $g(c) \\ne 0$, not \"$g$ vanishes nowhere\".\n\n**Everything is proved through\nCarathéodory's characterisation: $f$ is differentiable at $c$ if and only if there is $\\varphi : A \\to \\mathbb{R}$, continuous at $c$, with $f(x) - f(c) = \\varphi(x)(x - c)$ for every $x \\in A$, and then $\\varphi$ is unique and $\\varphi(c) = f'(c)$.** No difference quotient is estimated and\nno limit theorem beyond continuity is used, so no choice principle is spent.\nThe four identities are four algebraic rearrangements of an increment, each\nfollowed by a reading of Sums, scalar multiples, products, absolute values, maxima, minima and quotients with nonvanishing denominator of continuous functions are continuous, as are constants, the identity and every polynomial function.",
+          "relevant_hypotheses_and_conventions": "[[thm-algebra-of-derivatives]]: sums, scalar multiples, and products of differentiable real functions have the usual sum, scalar, and product derivatives.",
+          "supplier_proof_status": "Complete conditional proof present in this batch; readiness is a separate Step 1 record and does not claim independent proof approval.",
+          "consumer_use": "Used in 1.2."
+        },
+        {
+          "supplier": "def-natural-logarithm",
+          "carrier": "items/def-natural-logarithm.md",
+          "status": "Local Step 1 carrier; exact interface and complete proof inspected; no independent acceptance claimed.",
+          "source_section": "Definition",
+          "exact_statement": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because The exponential is a continuous bijection from $\\mathbb{R}$ onto $(0,\\infty)$ states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "relevant_hypotheses_and_conventions": "[[def-natural-logarithm]]: $\\log$ is the real inverse of the exponential on $(0,\\infty)$.",
+          "supplier_proof_status": "Complete conditional proof present in this batch; readiness is a separate Step 1 record and does not claim independent proof approval.",
+          "consumer_use": "Used in 1.2."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-122-beta-self-review",
+        "notes": "Self-review checked the stated hypotheses, finite-dimensional scope, cited interfaces, and each numbered proof step. This record is authoring evidence, not independent proof approval."
+      }
+    }
+  }
+}

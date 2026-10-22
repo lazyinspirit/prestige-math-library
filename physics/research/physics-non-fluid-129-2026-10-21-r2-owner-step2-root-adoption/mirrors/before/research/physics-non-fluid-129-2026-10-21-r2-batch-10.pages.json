@@ -1,0 +1,426 @@
+[
+  {
+    "order": 717,
+    "id": "emx-paraxial-optics",
+    "kind": "A",
+    "category": "classical-electromagnetism",
+    "library": "physics",
+    "title": "Angular-spectrum optics and controlled paraxial limits",
+    "companion": "emx-paraxial-optics-examples",
+    "requires": [
+      "em-scattering-and-scalar-diffraction",
+      "emx-classical-helicity-angular-momentum",
+      "schwartz-space-and-the-plancherel-theorem"
+    ],
+    "items": [
+      {
+        "id": "lem-emx-paraxial-phase-multiplier-bound",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "library": "physics",
+        "title": "Uniform phase-multiplier bound for the square-root dispersion law",
+        "reference": "research/plan-classical-electromagnetism-frontier-expansion-track.md#angular-spectrum-optics-and-controlled-paraxial-limits",
+        "design_state": "local mathematical prerequisite proved on the A page; independent review pending",
+        "dependency_level": 0,
+        "deps": [
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "cor-differentiable-implies-continuous",
+          "cor-mean-value-theorem",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "def-complex-exponential",
+          "def-limit-point-r",
+          "lem-of-square-monotone",
+          "thm-complex-exponential-addition-and-real-extension",
+          "thm-reals-cauchy-complete",
+          "thm-of-square-roots",
+          "thm-sine-and-cosine-derivatives"
+        ],
+        "justified_by": [],
+        "inventory_expansion_required": true,
+        "statement": "Let $k_0>0$, $0<\\delta<1$, $z\\in\\mathbb R$, and $s\\in[0,\\delta^2]$. Define\n\n$$R(s):=1-\\frac{s}{2}-\\sqrt{1-s}.$$\n\nThen\n\n$$R(s)=\\frac{s^2}{4\\left(1-\\frac{s}{2}+\\sqrt{1-s}\\right)},\\qquad 0\\le R(s)\\le\\frac{s^2}{8(1-\\delta^2)^{3/2}},$$\n\nand\n\n$$\\left|e^{izk_0\\sqrt{1-s}}-e^{izk_0(1-s/2)}\\right| \\le \\frac{|z|k_0s^2}{8(1-\\delta^2)^{3/2}}.$$\n\nMore generally, for all real $a,b$,\n$$|e^{ia}-e^{ib}|\\le|a-b|.$$",
+        "strategy": "direct",
+        "dependency_roles": {
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity": "mathematical-premise",
+          "cor-differentiable-implies-continuous": "mathematical-premise",
+          "cor-mean-value-theorem": "mathematical-premise",
+          "def-complex-conjugate-real-imaginary-part-and-modulus": "mathematical-premise",
+          "def-complex-exponential": "mathematical-premise",
+          "def-limit-point-r": "mathematical-premise",
+          "lem-of-square-monotone": "mathematical-premise",
+          "thm-complex-exponential-addition-and-real-extension": "mathematical-premise",
+          "thm-reals-cauchy-complete": "mathematical-premise",
+          "thm-of-square-roots": "mathematical-premise",
+          "thm-sine-and-cosine-derivatives": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Konijnenberg, Adam and Urbach, BSc Optics, §6.3 Angular Spectrum Method",
+              "url": "https://phys.libretexts.org/Bookshelves/Optics/BSc_Optics_%28Konijnenberg_Adam_and_Urbach%29/06%3A_Scalar_diffraction_optics/6.04%3A_Angular_Spectrum_Method",
+              "locator": "§6.3, angular-spectrum propagation and the positive square-root longitudinal wave number; the present uniform remainder estimate is proved locally."
+            },
+            {
+              "title": "Alexander Cerjan and Charles Cerjan, Orbital angular momentum of Laguerre–Gaussian beams beyond the paraxial approximation, JOSA A 28 (2011)",
+              "url": "https://alexcerjan.com/documents/papers/cerjan_JOSA_2011.pdf",
+              "locator": "§2, equations (2), (8), and (11), PDF pp. 2253–2254: angular-spectrum data and the square-root dispersion factor; the uniform inequality here is proved locally."
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-emx-angular-spectrum",
+        "kind": "definition",
+        "domain": "physics",
+        "library": "physics",
+        "title": "Forward angular-spectrum beam",
+        "reference": "research/plan-classical-electromagnetism-frontier-expansion-track.md#angular-spectrum-optics-and-controlled-paraxial-limits",
+        "design_state": "completed-local-argument; authored for batch 10; independent review pending",
+        "dependency_level": 1,
+        "deps": [
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "def-complex-exponential",
+          "def-countable-choice",
+          "def-em-lab-geometry",
+          "def-em-complex-plane-wave",
+          "def-em-si-conventions",
+          "def-emx-transverse-fourier-field",
+          "lem-emx-paraxial-phase-multiplier-bound",
+          "lem-of-square-monotone",
+          "post-em-scalar-aperture-model",
+          "post-em-vacuum-maxwell",
+          "thm-fourier-inversion-on-schwartz-space",
+          "thm-plancherel",
+          "thm-reals-cauchy-complete",
+          "thm-of-square-roots"
+        ],
+        "justified_by": [],
+        "inventory_expansion_required": false,
+        "statement": "Fix a named positively oriented inertial laboratory chart with coordinates\n$(x,y,z,t)$, spatial domain $\\mathbb R^3$, and time domain $\\mathbb R$. Adopt SI\nunits, a vacuum speed $c>0$, an angular frequency $\\omega>0$, and\n$k_0:=\\omega/c$ (so $[k_0]=\\mathrm{m}^{-1}$). Let\n$\\mathbf x_\\perp:=(x,y)\\in\\mathbb R^2$. Use the unitary two-dimensional\nFourier transform $\\mathcal F_2$ whose Schwartz-space convention is\n$$\\widehat f(\\boldsymbol\\xi)=\\int_{\\mathbb R^2}f(\\mathbf x_\\perp) e^{-2\\pi i\\mathbf x_\\perp\\cdot\\boldsymbol\\xi}\\,d^2\\mathbf x_\\perp,$$\nand whose inverse is its unitary $L^2$ extension. The variable\n$\\boldsymbol\\xi$ is in cycles per metre; its associated angular spatial\nwavevector is $\\mathbf q:=2\\pi\\boldsymbol\\xi$ in $\\mathrm{m}^{-1}$, with\n$|\\mathbf q|^2:=q_x^2+q_y^2$.\n\nChoose $0<\\delta<1$ and $u_0\\in L^2(\\mathbb R^2;\\mathbb C)$ with\n$\\mathcal F_2u_0$ supported, up to null sets, in\n$D_\\delta:=\\{\\boldsymbol\\xi:|2\\pi\\boldsymbol\\xi|\\le\\delta k_0\\}$.\nFor $z\\in\\mathbb R$ put\n$$k_z(\\boldsymbol\\xi):=\\sqrt{k_0^2-|2\\pi\\boldsymbol\\xi|^2},$$\nwhich is real and strictly positive on $D_\\delta$, and define the exact scalar\nand paraxial scalar propagators as the $L^2$ equivalence classes\n$$u_{\\mathrm{exact}}(z):=\\mathcal F_2^{-1}\\!\\left[ e^{izk_z(\\boldsymbol\\xi)}\\,\\mathcal F_2u_0(\\boldsymbol\\xi)\\right],\\qquad u_{\\mathrm{par}}(z):=e^{ik_0z}\\mathcal F_2^{-1}\\!\\left[ e^{-iz|2\\pi\\boldsymbol\\xi|^2/(2k_0)}\\,\\mathcal F_2u_0(\\boldsymbol\\xi)\\right].$$\nThe associated real scalar fields are the real parts of these phasors multiplied\nby $e^{-i\\omega t}$. If $u_0$ carries $\\mathrm{V\\,m^{-1}}$, both propagated\nfields carry the same unit. “Exact” here names the exact positive axial\ndispersion multiplier inside this scalar model; it does not assert exact\nMaxwell validity. Forward propagation is $z\\ge0$; the formulas also define the\nmathematical continuation to negative $z$.\n\nAt a fixed $\\boldsymbol\\xi\\in D_\\delta$, write\n$\\mathbf K(\\boldsymbol\\xi):=(2\\pi\\xi_x,2\\pi\\xi_y,k_z(\\boldsymbol\\xi))$.\nA candidate monochromatic vector plane-wave mode at frequency $\\omega$ has\ncomplex amplitudes $\\mathbf e,\\mathbf b\\in\\mathbb C^3$ in the real-field\nencoding $e^{i(\\mathbf K\\cdot(x,y,z)-\\omega t)}$. It is called an exact\nsource-free vacuum mode only when its associated real fields satisfy the\nadopted source-free vacuum Maxwell equations. The longitudinal electric\ncoefficient is $e_z$, and\n$\\mathbf e_\\perp:=(e_x,e_y)$ has norm\n$|\\mathbf e_\\perp|^2:=|e_x|^2+|e_y|^2$. No scalar/vector polarization\nfactorization is part of this definition.",
+        "strategy": "direct",
+        "physical_scope": "Idealized classical scalar optics in a fixed inertial laboratory chart and SI units, for square-integrable plane data whose two-dimensional spatial-frequency support lies in a forward propagating cone strictly inside the vacuum light cone. The compact-aperture postulate supplies scalar-optics context but does not imply that every compact-aperture output belongs to this band-limited finite-energy class. The scalar propagation operators are not asserted to be exact Maxwell fields; exact vector plane-wave modes are treated separately. No empirical claim, measurement, or quantization is made.",
+        "dependency_roles": {
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity": "mathematical-premise",
+          "def-complex-conjugate-real-imaginary-part-and-modulus": "mathematical-premise",
+          "def-complex-exponential": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-em-lab-geometry": "formulation-prerequisite",
+          "def-em-complex-plane-wave": "formulation-prerequisite",
+          "def-em-si-conventions": "formulation-prerequisite",
+          "def-emx-transverse-fourier-field": "formulation-prerequisite",
+          "lem-emx-paraxial-phase-multiplier-bound": "mathematical-premise",
+          "lem-of-square-monotone": "mathematical-premise",
+          "post-em-scalar-aperture-model": "formulation-prerequisite",
+          "post-em-vacuum-maxwell": "physical-assumption",
+          "thm-fourier-inversion-on-schwartz-space": "mathematical-premise",
+          "thm-plancherel": "mathematical-premise",
+          "thm-reals-cauchy-complete": "mathematical-premise",
+          "thm-of-square-roots": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Konijnenberg, Adam and Urbach, BSc Optics, §6.3 Angular Spectrum Method",
+              "url": "https://phys.libretexts.org/Bookshelves/Optics/BSc_Optics_%28Konijnenberg_Adam_and_Urbach%29/06%3A_Scalar_diffraction_optics/6.04%3A_Angular_Spectrum_Method",
+              "locator": "Complete §6.3: two-dimensional Fourier decomposition, positive square-root longitudinal wave number for forward propagation with $e^{-i\\omega t}$, and the propagating/evanescent split."
+            },
+            {
+              "title": "Niklas Beisert, Elektrodynamik, ETH Zürich 2024 FS lecture notes",
+              "url": "https://people.phys.ethz.ch/~nbeisert/lectures/ED-24FS-Skript.pdf",
+              "locator": "§11.1 'Fourier-Raum', equations (11.5)–(11.10), PDF pp. 121–122: source-free Maxwell Fourier modes, dispersion, transversality, and the electric/magnetic amplitude relation."
+            },
+            {
+              "title": "Alexander Cerjan and Charles Cerjan, Orbital angular momentum of Laguerre–Gaussian beams beyond the paraxial approximation, JOSA A 28 (2011)",
+              "url": "https://alexcerjan.com/documents/papers/cerjan_JOSA_2011.pdf",
+              "locator": "§2, equations (2), (8), PDF pp. 2253–2254: angular-spectrum data and the positive propagation branch; no arbitrary compact-aperture data are inferred."
+            }
+          ]
+        }
+      },
+      {
+        "id": "pthm-emx-paraxial-error",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "library": "physics",
+        "title": "Paraxial phase and longitudinal-field bounds",
+        "reference": "research/plan-classical-electromagnetism-frontier-expansion-track.md#angular-spectrum-optics-and-controlled-paraxial-limits",
+        "design_state": "completed-local-argument; authored for batch 10; independent review pending",
+        "dependency_level": 2,
+        "deps": [
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "def-countable-choice",
+          "def-em-complex-plane-wave",
+          "def-directional-and-partial-derivatives",
+          "def-em-si-conventions",
+          "def-emx-angular-spectrum",
+          "def-euclidean-inner-product",
+          "lem-of-square-monotone",
+          "lem-emx-paraxial-phase-multiplier-bound",
+          "post-em-vacuum-maxwell",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-complex-exponential-is-entire-with-derivative-itself",
+          "thm-plancherel",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity"
+        ],
+        "justified_by": [],
+        "inventory_expansion_required": false,
+        "statement": "Let $k_0>0$, $0<\\delta<1$, and $z\\in\\mathbb R$. For every\n$u_0\\in L^2(\\mathbb R^2;\\mathbb C)$ whose Fourier transform is supported, up\nto null sets, in\n$D_\\delta:=\\{\\boldsymbol\\xi:|2\\pi\\boldsymbol\\xi|\\le\\delta k_0\\}$,\n\n$$\\left\\|u_{\\mathrm{exact}}(z)-u_{\\mathrm{par}}(z)\\right\\|_{L^2(\\mathbb R^2)} \\le \\frac{|z|k_0\\delta^4}{8(1-\\delta^2)^{3/2}}\\left\\|u_0\\right\\|_{L^2(\\mathbb R^2)},$$\n\nwhere the propagated fields are exactly those of the angular-spectrum\nDefinition. For a source-free monochromatic vacuum plane-wave mode with\n$\\mathbf q:=2\\pi\\boldsymbol\\xi$, $|\\mathbf q|\\le\\delta k_0$,\n$k_z:=\\sqrt{k_0^2-|\\mathbf q|^2}$, and complex electric amplitude\n$\\mathbf e=(\\mathbf e_\\perp,e_z)$, use the complex-bilinear convention\n$\\mathbf q\\cdot\\mathbf e_\\perp:=q_xe_x+q_ye_y$ with no conjugation,\n\n$$e_z=-\\frac{\\mathbf q\\cdot\\mathbf e_\\perp}{k_z},\\qquad |e_z|\\le\\frac{\\delta}{\\sqrt{1-\\delta^2}}|\\mathbf e_\\perp|.$$",
+        "strategy": "direct",
+        "physical_scope": "Conditional result for the ideal band-limited scalar angular-spectrum model and smooth source-free monochromatic vacuum plane-wave modes in the same fixed inertial chart and SI convention. It bounds the scalar Helmholtz phase approximation and the longitudinal electric amplitude only; it does not say that finite-aperture data have the required band limit, that the scalar model is exact Maxwell theory, or that a finite sample or measurement obeys the bound. No empirical conclusion or angular-momentum decomposition is asserted.",
+        "dependency_roles": {
+          "def-complex-conjugate-real-imaginary-part-and-modulus": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-em-complex-plane-wave": "formulation-prerequisite",
+          "def-directional-and-partial-derivatives": "mathematical-premise",
+          "def-em-si-conventions": "formulation-prerequisite",
+          "def-emx-angular-spectrum": "formulation-prerequisite",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "lem-of-square-monotone": "mathematical-premise",
+          "lem-emx-paraxial-phase-multiplier-bound": "mathematical-premise",
+          "post-em-vacuum-maxwell": "physical-assumption",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "thm-complex-exponential-is-entire-with-derivative-itself": "mathematical-premise",
+          "thm-plancherel": "mathematical-premise",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Konijnenberg, Adam and Urbach, BSc Optics, §6.3 Angular Spectrum Method",
+              "url": "https://phys.libretexts.org/Bookshelves/Optics/BSc_Optics_%28Konijnenberg_Adam_and_Urbach%29/06%3A_Scalar_diffraction_optics/6.04%3A_Angular_Spectrum_Method",
+              "locator": "Complete §6.3, especially the propagating-wave multiplier and the final vector-transversality remark; the uniform $L^2$ error bound is proved locally."
+            },
+            {
+              "title": "Niklas Beisert, Elektrodynamik, ETH Zürich 2024 FS lecture notes",
+              "url": "https://people.phys.ethz.ch/~nbeisert/lectures/ED-24FS-Skript.pdf",
+              "locator": "§11.1 'Fourier-Raum', equations (11.5)–(11.10), PDF pp. 121–122: source-free Maxwell mode constraints and amplitude relations."
+            },
+            {
+              "title": "Alexander Cerjan and Charles Cerjan, Orbital angular momentum of Laguerre–Gaussian beams beyond the paraxial approximation, JOSA A 28 (2011)",
+              "url": "https://alexcerjan.com/documents/papers/cerjan_JOSA_2011.pdf",
+              "locator": "§2 equation (8), §4 equations (22), (29), and (37), PDF pp. 2254–2257: exact angular-spectrum phase and longitudinal vector-field components; this item proves a separate uniform cone estimate."
+            }
+          ]
+        }
+      },
+      {
+        "id": "pthm-emx-scalar-vortex-eigenvalue",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "library": "physics",
+        "title": "Paraxial orbital winding in its exact scalar domain",
+        "reference": "research/plan-classical-electromagnetism-frontier-expansion-track.md#angular-spectrum-optics-and-controlled-paraxial-limits",
+        "design_state": "completed-local-argument; authored for batch 10; independent review pending",
+        "dependency_level": 2,
+        "deps": [
+          "def-complex-exponential",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "def-directional-and-partial-derivatives",
+          "def-em-si-conventions",
+          "def-emx-angular-spectrum",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-complex-exponential-is-entire-with-derivative-itself"
+        ],
+        "justified_by": [],
+        "inventory_expansion_required": false,
+        "statement": "Fix a propagation plane $z$ and let $u_z\\in C^\\infty(\\mathbb R^2;\\mathbb C)\n\\cap L^2(\\mathbb R^2;\\mathbb C)$ be a scalar field in the paraxial model.\nAssume $u_z$ is nonzero as an $L^2$ equivalence class. For $r>0$ write\n$u_z(r\\cos\\phi,r\\sin\\phi)=f(r)e^{i\\ell\\phi}$, where\n$\\ell\\in\\mathbb Z$ and $\\phi$ is read modulo $2\\pi$. Require a smooth\naxis extension; explicitly, assume there are $\\epsilon>0$ and a smooth\ncomplex-valued $g:(-\\epsilon,\\epsilon)\\to\\mathbb C$ such that\n$f(r)=r^{|\\ell|}g(r^2)$ for $0<r<\\sqrt\\epsilon$. Define\n$L_z^{\\mathrm{sc}}:=-i(-y\\partial_x+x\\partial_y)$ and use the\nfirst-variable-linear $L^2$ pairing\n$$\\langle v,w\\rangle_2:=\\int_{\\mathbb R^2}v(x,y)\\overline{w(x,y)}\\,d^2x.$$\nThen the normalized scalar angular-generator expectation is\n$$\\frac{\\langle L_z^{\\mathrm{sc}}u_z,u_z\\rangle_2} {\\langle u_z,u_z\\rangle_2}=\\ell.$$",
+        "strategy": "direct",
+        "physical_scope": "Conditional identity for a smooth, finite-transverse-norm scalar paraxial field in the specified angular-spectrum model, at a fixed propagation plane. The dimensionless scalar rotation generator is not identified with torque, total electromagnetic angular momentum, a photon angular momentum, or a general exact-vector spin/orbital decomposition. No empirical claim is made.",
+        "dependency_roles": {
+          "def-complex-exponential": "mathematical-premise",
+          "def-complex-conjugate-real-imaginary-part-and-modulus": "mathematical-premise",
+          "def-directional-and-partial-derivatives": "mathematical-premise",
+          "def-em-si-conventions": "formulation-prerequisite",
+          "def-emx-angular-spectrum": "formulation-prerequisite",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "thm-complex-exponential-is-entire-with-derivative-itself": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Alexander Cerjan and Charles Cerjan, Orbital angular momentum of Laguerre–Gaussian beams beyond the paraxial approximation, JOSA A 28 (2011)",
+              "url": "https://alexcerjan.com/documents/papers/cerjan_JOSA_2011.pdf",
+              "locator": "§1 and §5, PDF pp. 2253 and 2257–2258: the paraxial scalar winding parameter and the scope limits of its relation to full vector angular-momentum flux."
+            },
+            {
+              "title": "Konijnenberg, Adam and Urbach, BSc Optics, §6.3 Angular Spectrum Method",
+              "url": "https://phys.libretexts.org/Bookshelves/Optics/BSc_Optics_%28Konijnenberg_Adam_and_Urbach%29/06%3A_Scalar_diffraction_optics/6.04%3A_Angular_Spectrum_Method",
+              "locator": "§6.3: scalar plane propagation and the separate transversality requirement for vector fields; the scalar generator identity is proved locally."
+            },
+            {
+              "title": "Niklas Beisert, Elektrodynamik, ETH Zürich 2024 FS lecture notes",
+              "url": "https://people.phys.ethz.ch/~nbeisert/lectures/ED-24FS-Skript.pdf",
+              "locator": "§11.1 equations (11.5)–(11.10), PDF pp. 121–122: exact source-free vector-mode constraints; no photon interpretation is imported."
+            }
+          ]
+        }
+      }
+    ],
+    "examples": []
+  },
+  {
+    "order": 718,
+    "id": "emx-paraxial-optics-examples",
+    "kind": "B",
+    "category": "classical-electromagnetism",
+    "library": "physics",
+    "title": "Angular-spectrum optics and controlled paraxial limits — Examples",
+    "companion": "emx-paraxial-optics",
+    "requires": [
+      "emx-paraxial-optics"
+    ],
+    "items": [
+      {
+        "id": "cex-emx-paraxial-distance-failure",
+        "kind": "counterexample",
+        "domain": "physics",
+        "library": "physics",
+        "title": "A small angular cone can accumulate order-one phase error",
+        "reference": "research/plan-classical-electromagnetism-frontier-expansion-track.md#angular-spectrum-optics-and-controlled-paraxial-limits",
+        "design_state": "completed-local-argument; authored for batch 10; independent review pending",
+        "dependency_level": 3,
+        "deps": [
+          "def-countable-choice",
+          "def-emx-angular-spectrum",
+          "def-multidimensional-rectangle-and-volume",
+          "lem-emx-paraxial-phase-multiplier-bound",
+          "pthm-emx-paraxial-error",
+          "thm-complex-exponential-addition-and-real-extension",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "thm-plancherel"
+        ],
+        "justified_by": [],
+        "inventory_expansion_required": false,
+        "statement": "For every sequence $(\\delta_n)_{n\\ge1}$ with $\\delta_n\\in(0,1)$ and\n$\\delta_n\\to0$, every fixed $k_0>0$, every nonzero scalar input\n$u_{0,n}\\in L^2(\\mathbb R^2;\\mathbb C)$\nwhose Fourier support lies in $|2\\pi\\boldsymbol\\xi|\\le\\delta_n k_0$, and every\nsequence of forward distances $z_n>0$ satisfying\n$z_nk_0\\delta_n^4=8\\pi$, the relative exact-to-paraxial error tends to zero:\n\n$$\\frac{\\|u_{\\mathrm{exact},n}(z_n)-u_{\\mathrm{par},n}(z_n)\\|_2} {\\|u_{0,n}\\|_2}\\longrightarrow0.$$",
+        "strategy": "direct",
+        "physical_scope": "Counterexample inside the ideal band-limited scalar angular-spectrum model in a fixed inertial chart and SI units. Its spectra are square-integrable plane data and are not asserted to be outputs of a compact finite aperture. It is a conditional model calculation, not an observed optical result.",
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "def-emx-angular-spectrum": "formulation-prerequisite",
+          "def-multidimensional-rectangle-and-volume": "mathematical-premise",
+          "lem-emx-paraxial-phase-multiplier-bound": "mathematical-premise",
+          "pthm-emx-paraxial-error": "physical-result",
+          "thm-complex-exponential-addition-and-real-extension": "mathematical-premise",
+          "thm-lebesgue-measure-of-a-box-of-every-kind": "mathematical-premise",
+          "thm-plancherel": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Konijnenberg, Adam and Urbach, BSc Optics, §6.3 Angular Spectrum Method",
+              "url": "https://phys.libretexts.org/Bookshelves/Optics/BSc_Optics_%28Konijnenberg_Adam_and_Urbach%29/06%3A_Scalar_diffraction_optics/6.04%3A_Angular_Spectrum_Method",
+              "locator": "§6.3: exact square-root propagating multiplier; this counterexample constructs its own supported $L^2$ spectra."
+            },
+            {
+              "title": "Alexander Cerjan and Charles Cerjan, Orbital angular momentum of Laguerre–Gaussian beams beyond the paraxial approximation, JOSA A 28 (2011)",
+              "url": "https://alexcerjan.com/documents/papers/cerjan_JOSA_2011.pdf",
+              "locator": "§2 equation (8) and discussion of the positive propagation root and excluded evanescent components, PDF p. 2254; the annular sequence and phase limit here are proved locally."
+            },
+            {
+              "title": "Niklas Beisert, Elektrodynamik, ETH Zürich 2024 FS lecture notes",
+              "url": "https://people.phys.ethz.ch/~nbeisert/lectures/ED-24FS-Skript.pdf",
+              "locator": "§11.1 Fourier-space solution, equations (11.5)–(11.10), PDF pp. 121–122; no vector angular-momentum claim is made in this scalar counterexample."
+            }
+          ]
+        },
+        "generation": {
+          "role": "counterexample"
+        }
+      },
+      {
+        "id": "ex-emx-longitudinal-focused-field",
+        "kind": "example",
+        "domain": "physics",
+        "library": "physics",
+        "title": "Tight focusing changes polarization bookkeeping",
+        "reference": "research/plan-classical-electromagnetism-frontier-expansion-track.md#angular-spectrum-optics-and-controlled-paraxial-limits",
+        "design_state": "completed-local-argument; authored for batch 10; independent review pending",
+        "dependency_level": 3,
+        "deps": [
+          "def-cross-product-in-r3",
+          "def-directional-and-partial-derivatives",
+          "def-divergence-and-curl-of-a-c1-vector-field",
+          "def-euclidean-inner-product",
+          "def-em-fields",
+          "def-em-lab-geometry",
+          "def-em-sources",
+          "def-em-si-conventions",
+          "def-em-complex-plane-wave",
+          "def-emx-angular-spectrum",
+          "post-em-vacuum-maxwell",
+          "pthm-emx-paraxial-error",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-complex-exponential-is-entire-with-derivative-itself"
+        ],
+        "justified_by": [],
+        "inventory_expansion_required": false,
+        "statement": "Let $0<\\kappa\\le\\delta k_0$, $\\mathbf q=(\\kappa,0)$,\n$k_z:=\\sqrt{k_0^2-\\kappa^2}$, and choose a real $E_0\\ne0$ in\n$\\mathrm{V\\,m^{-1}}$. Put\n$$\\mathbf e:=(E_0,0,-\\kappa E_0/k_z),\\qquad \\mathbf b:=\\left(0,\\frac{k_0^2E_0}{\\omega k_z},0\\right),\\qquad \\phi(\\mathbf x,t):=\\kappa x+k_z z-\\omega t.$$\nThe real fields $E(\\mathbf x,t):=\\operatorname{Re}(\\mathbf e e^{i\\phi(\\mathbf x,t)})$\nand $B(\\mathbf x,t):=\\operatorname{Re}(\\mathbf b e^{i\\phi(\\mathbf x,t)})$ are an exact, forward,\nsource-free vacuum plane-wave mode. In particular,\n$$e_z=-\\frac{\\kappa E_0}{\\sqrt{k_0^2-\\kappa^2}}\\ne0,\\qquad \\frac{|e_z|}{|E_0|}=\\frac{\\kappa}{\\sqrt{k_0^2-\\kappa^2}} \\le\\frac{\\delta}{\\sqrt{1-\\delta^2}}.$$\nThus setting $e_z=0$ while keeping this transverse amplitude would not give an\nexact Maxwell mode.",
+        "strategy": "direct",
+        "physical_scope": "Exact plane-wave example in the smooth, source-free vacuum Maxwell model and the propagating cone of the ideal angular-spectrum model. It illustrates the longitudinal component required by Maxwell's equations; it asserts no measured field, focal apparatus, or torque.",
+        "dependency_roles": {
+          "def-cross-product-in-r3": "mathematical-premise",
+          "def-directional-and-partial-derivatives": "mathematical-premise",
+          "def-divergence-and-curl-of-a-c1-vector-field": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-em-fields": "formulation-prerequisite",
+          "def-em-lab-geometry": "formulation-prerequisite",
+          "def-em-sources": "formulation-prerequisite",
+          "def-em-si-conventions": "formulation-prerequisite",
+          "def-em-complex-plane-wave": "formulation-prerequisite",
+          "def-emx-angular-spectrum": "formulation-prerequisite",
+          "post-em-vacuum-maxwell": "physical-assumption",
+          "pthm-emx-paraxial-error": "physical-result",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "thm-complex-exponential-is-entire-with-derivative-itself": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Konijnenberg, Adam and Urbach, BSc Optics, §6.3 Angular Spectrum Method",
+              "url": "https://phys.libretexts.org/Bookshelves/Optics/BSc_Optics_%28Konijnenberg_Adam_and_Urbach%29/06%3A_Scalar_diffraction_optics/6.04%3A_Angular_Spectrum_Method",
+              "locator": "§6.3 final vector-field remark: longitudinal electric components are fixed by the momentum-space transversality condition."
+            },
+            {
+              "title": "Alexander Cerjan and Charles Cerjan, Orbital angular momentum of Laguerre–Gaussian beams beyond the paraxial approximation, JOSA A 28 (2011)",
+              "url": "https://alexcerjan.com/documents/papers/cerjan_JOSA_2011.pdf",
+              "locator": "§4 equations (22), (29), and (37), PDF pp. 2256–2257: longitudinal electric field is reconstructed from transverse data under Maxwell transversality."
+            },
+            {
+              "title": "Niklas Beisert, Elektrodynamik, ETH Zürich 2024 FS lecture notes",
+              "url": "https://people.phys.ethz.ch/~nbeisert/lectures/ED-24FS-Skript.pdf",
+              "locator": "§11.1 Fourier-Raum, equations (11.5)–(11.10), PDF pp. 121–122: the exact vector amplitude satisfies $\\mathbf k\\cdot\\mathbf e=0$."
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      }
+    ],
+    "examples": []
+  }
+]

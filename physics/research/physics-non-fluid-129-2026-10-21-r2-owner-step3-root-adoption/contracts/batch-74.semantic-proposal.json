@@ -1,0 +1,633 @@
+{
+  "version": 1,
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "batch": 74,
+  "level": "run",
+  "scope": [
+    "lem-qftx-mode-number-pvm",
+    "post-qftx-ideal-wavepacket-counting",
+    "pthm-qftx-mode-g-two",
+    "pthm-qftx-binomial-detector-thinning",
+    "ex-qftx-single-photon-antibunching"
+  ],
+  "contracts": {
+    "lem-qftx-mode-number-pvm": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qft-fock-and-test-spaces",
+          "source_section": "Definition",
+          "quote": "For an integer $d\\ge1$, let $\\mathcal S(\\mathbb R^d)$ be the complex Schwartz space with seminorms\n$p_{\\alpha\\beta}(f)=\\sup_{x\\in\\mathbb R^d}|x^\\alpha\\partial^\\beta f(x)|$\nfor all multi-indices $\\alpha,\\beta$; this is exactly\n[[def-schwartz-space-and-its-seminorms]]. Let\n$\\mathcal D(\\mathbb R^d)=C_c^\\infty(\\mathbb R^d;\\mathbb C)$ with the support convention of\n[[def-test-function-space-d-of-an-open-set]] and the locally convex LF topology of\n[[def-test-function-topology]]. The tempered-distribution space $\\mathcal S'(\\mathbb R^d)$\nis the space of continuous complex-linear functionals on this topological\n$\\mathcal S(\\mathbb R^d)$, paired bilinearly with test functions, as in\n[[def-tempered-distribution]].\n\nFor every complex Hilbert space $H$, use the second-variable-linear pairing\n$\\langle u,v\\rangle_2:=(v,u)_1$, where $(\\cdot,\\cdot)_1$ is the first-variable-linear\nHilbert pairing of [[def-real-and-complex-inner-product-space]]. Thus\n$\\langle u,v\\rangle_2$ is linear in $v$ and conjugate-linear in $u$.\nFor each tensor product, use the same norm completion as\n[[lem-nrqm-composites-hilbert-tensor-construction]], but equip it with the\nsecond-variable-linear pairing obtained by conjugating that supplier's\nfirst-variable-linear pairing. This leaves the norm and completion unchanged;\non elementary tensors it gives the product of the second-variable pairings.\nLet $H^{\\widehat\\otimes n}$ be the iterated Hilbert tensor completion, with\n$H^{\\widehat\\otimes0}:=\\mathbb C$; the tensor inner product is the product of\nthe factor pairings. Identify parenthesizations by the isometry fixing\nelementary tensors: the product pairing is the same on their dense span,\nso the map and its inverse extend to the completions. For $n\\ge1$, let\n$P_{s,n}=n!^{-1}\\sum_{\\pi\\in S_n}U_\\pi$ and\n$P_{a,n}=n!^{-1}\\sum_{\\pi\\in S_n}\\operatorname{sgn}(\\pi)U_\\pi$, using the\npermutation action and the orthogonal projections of\n[[lem-nrqm-composites-permutation-sector-projections]]. Define\n$H_s^{(n)}=\\operatorname{ran}P_{s,n}$ and\n$H_a^{(n)}=\\operatorname{ran}P_{a,n}$, with\n$H_s^{(0)}=H_a^{(0)}=\\mathbb C$. These are the symmetric and antisymmetric\n$n$-particle sectors.\n\nThe bosonic and fermionic Fock Hilbert spaces are the square-summable direct\nsums\n$\\mathcal F_s(H)=\\{(\\Psi_n)_{n\\ge0}:\\Psi_n\\in H_s^{(n)},\\\n\\sum_n\\|\\Psi_n\\|^2<\\infty\\}$ and\n$\\mathcal F_a(H)=\\{(\\Psi_n)_{n\\ge0}:\\Psi_n\\in H_a^{(n)},\\\n\\sum_n\\|\\Psi_n\\|^2<\\infty\\}$, with the componentwise inner product.\nTheir vacuum is $\\Omega=(1,0,0,\\ldots)$. The finite-particle subspace\n$\\mathcal D_{\\rm fin}$ consists of sequences with only finitely many nonzero\ncomponents.\n\nFor $h\\in H$, the map $C_h:H\\to\\mathbb C$, $C_h(v)=\\langle h,v\\rangle_2$, is linear and bounded:\n$|C_h(v)|=|(v,h)_1|\\le\\|h\\|\\,\\|v\\|$ by\n[[thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces]].\nFor any Hilbert space $K$, identify $\\mathbb C\\widehat\\otimes K$ with $K$\nby $J_K(z\\otimes v)=zv$. Every algebraic tensor is $1\\otimes w$;\nthe tensor norm is then $\\|w\\|$, so $J_K$ extends to a surjective isometry\non the completion (with inverse $w\\mapsto1\\otimes w$).\nThroughout the following formulas, $C_h\\otimes I^{\\otimes(n-1)}$ means\n$J_{H^{\\widehat\\otimes(n-1)}}\\circ(C_h\\widehat\\otimes I)$, with\n$I$ the identity on $H^{\\widehat\\otimes(n-1)}$.\nThe bounded tensor-map supplier therefore applies and gives norm at most\n$\\|h\\|$. This includes $n=1$, where $H^{\\widehat\\otimes0}=\\mathbb C$.\nContraction commutes with permutations of the remaining $n-1$ factors,\nso it takes symmetric or antisymmetric tensors to the corresponding\n$(n-1)$-particle sector (and to $\\mathbb C$ for $n=1$).\n\nFor $n\\ge0$, bosonic creation on sector $n$ is\n$a_n^\\dagger(h)\\Psi_n=\\sqrt{n+1}P_{s,n+1}(h\\otimes\\Psi_n)$; for $n\\ge1$,\nbosonic annihilation is\n$a_n(h)\\Psi_n=\\sqrt n(C_h\\otimes I^{\\otimes(n-1)})\\Psi_n$, where\n$C_h$ is the bounded functional above, its tensor extension is supplied by\n[[lem-nrqm-composites-bounded-tensor-maps]], and $a(h)\\Omega=0$. Define fermionic creation\nby $c_n^\\dagger(h)\\Psi_n=\\sqrt{n+1}P_{a,n+1}(h\\otimes\\Psi_n)$; for $n\\ge1$,\nfermionic annihilation is the corresponding first-factor contraction\n$c_n(h)\\Psi_n=\\sqrt n(C_h\\otimes I^{\\otimes(n-1)})\\Psi_n$, and\n$c(h)\\Omega=0$. The annihilation maps are conjugate-linear in $h$; the\ncreation maps are linear in $h$. These formulas define sector maps on the\nfinite-particle subspace; their maximal closed domains and operator relations are proved in\n[[lem-qft-fock-ccr-car]]. No physical statistics assignment or spin–statistics\ntheorem is part of these mathematical definitions.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qft-fock-one-mode-splitting",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice [[def-countable-choice]]. Let $H$ be a complex\nHilbert space, let $e\\in H$ have norm one, and put\n$K=e^\\perp=\\{v\\in H:\\langle e,v\\rangle_2=0\\}$. For\n$\\psi_m\\in K_s^{(m)}$ and $k,m\\ge0$, write\n$|k\\rangle:=e^{\\otimes k}\\in(\\mathbb Ce)_s^{(k)}$ (with $|0\\rangle=1$),\nand define\n\n$$J_{k,m}(|k\\rangle\\otimes\\psi_m) =\\sqrt{\\binom{k+m}{k}}\\, P_{s,k+m}(e^{\\otimes k}\\otimes\\psi_m).$$\n\nThe map $J_{k,m}$ extends over the sector Hilbert tensor products and the\northogonal direct sums to a unitary\n\n$$J:\\mathcal F_s(\\mathbb Ce)\\widehat\\otimes\\mathcal F_s(K) \\longrightarrow\\mathcal F_s(H).$$\n\nUnder this unitary, bosonic creation and annihilation by $e$ act on the first\nfactor as the one-mode ladder maps\n$|k\\rangle\\mapsto\\sqrt{k+1}|k+1\\rangle$ and\n$|k\\rangle\\mapsto\\sqrt{k}|k-1\\rangle$, respectively, tensored with the\nidentity on $\\mathcal F_s(K)$, on finite-particle vectors.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.3",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qft-fock-ccr-car",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice [[def-countable-choice]] and let $H$ be a complex\nHilbert space with the second-variable-linear convention of\n[[def-qft-fock-and-test-spaces]]. On $\\mathcal D_{\\rm fin}$ define the bosonic\ncreation and annihilation maps $a^\\dagger(h)$ and $a(h)$ and the fermionic maps\n$c^\\dagger(h)$ and $c(h)$ as in\n[[def-qft-fock-and-test-spaces]]. Write $a_n(h)$ and $a_n^\\dagger(h)$ for\ntheir restrictions to the $n$th bosonic sector. For bosons set\n\n$$D(a(h))=\\{\\Psi\\in\\mathcal F_s(H):\\sum_{n\\ge1}\\|a_n(h)\\Psi_n\\|^2<\\infty\\},\\qquad D(a^\\dagger(h))=\\{\\Psi\\in\\mathcal F_s(H):\\sum_{n\\ge0}\\|a_n^\\dagger(h)\\Psi_n\\|^2<\\infty\\}.$$\n\nThen $\\mathcal F_s(H)$ and $\\mathcal F_a(H)$ are Hilbert spaces,\n$\\mathcal D_{\\rm fin}$ is dense, and it is a graph core for both maximal\nbosonic sector maps. The bosonic operators on their displayed domains are\nclosed and mutually adjoint, and on $\\mathcal D_{\\rm fin}$ satisfy\n\n$$[a(h),a^\\dagger(k)]=\\langle h,k\\rangle_2I,\\qquad [a(h),a(k)]=[a^\\dagger(h),a^\\dagger(k)]=0.$$\n\nThe fermionic $c(h)$ and $c^\\dagger(h)$ extend to bounded operators on the\nwhole Fock space, with norms $\\|h\\|$, and satisfy on the whole space\n\n$$\\{c(h),c^\\dagger(k)\\}=\\langle h,k\\rangle_2I,\\qquad \\{c(h),c(k)\\}=\\{c^\\dagger(h),c^\\dagger(k)\\}=0.$$\n\nThis is a mathematical construction of the two Fock representations; it does\nnot assign particle statistics to a physical species.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-projection-valued-measure",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $(X,\\Sigma)$ be a measurable space\n([[def-measurable-space]], [[def-sigma-algebra]]) and let $H$ be a complex\nHilbert space ([[def-hilbert-space]]). A **projection valued measure** (PVM) on\n$(X,\\Sigma)$ is a map\n\n$$E:\\Sigma\\longrightarrow\\mathcal B(H),\\qquad B\\longmapsto E(B),$$\n\nsuch that:\n\n1. $E(B)$ is an **orthogonal projection** for every $B\\in\\Sigma$, that is, a\n   bounded operator with $E(B)^2=E(B)=E(B)^*$; there is no finite-dimensional\n   restriction;\n2. $E(\\varnothing)=0$ and $E(X)=I$;\n3. $E(B\\cap C)=E(B)E(C)$ for all $B,C\\in\\Sigma$;\n4. for every pairwise disjoint sequence $(B_n)_{n\\in\\mathbb N}$ in $\\Sigma$ with\n   union $B$ and every $x\\in H$, the series $\\sum_nE(B_n)x$ converges in norm\n   to $E(B)x$, that is\n   $$E(B)x=\\sum_{n=0}^{\\infty}E(B_n)x .$$\n\nClause 4 is **strong countable additivity**. A PVM is called **regular** when\n$X$ is a locally compact Hausdorff space ([[def-locally-compact-space]]), the\n$\\sigma$-algebra is the Borel $\\sigma$-algebra, and every one of the finite\npositive measures\n\n$$E_x(B):=\\langle E(B)x,x\\rangle,\\qquad x\\in H,\\ B\\in\\Sigma,$$\n\nis a regular Borel measure ([[def-regular-borel-measure-on-an-lch-space]]). Inner\nproducts are linear in the first variable and conjugate-linear in the second\n([[def-real-and-complex-inner-product-space]]); this fixed convention is the one\nused for every pairing $E_{x,y}(B)=\\langle E(B)x,y\\rangle$ on this page.\n\n**Well-definedness: the projection clause.** The conditions $P^2=P=P^*$ are\nsimultaneously meaningful and describe exactly the Hilbert orthogonal\nprojections, with no hidden finite-dimensional hypothesis. Indeed, for a\nbounded $P$ with $P^2=P=P^*$ the range $\\operatorname{ran}P$ is a linear\nsubspace, and for $y=Pw$ one has\n$\\langle x-Px,y\\rangle=\\langle P(x-Px),w\\rangle=\\langle Px-P^2x,w\\rangle=0$, so\n$x-Px\\perp\\operatorname{ran}P$; conversely $\\langle Pz,Pz\\rangle=\\langle z,P^*Pz\\rangle=\\langle z,Pz\\rangle=0$\nfor $z\\perp\\operatorname{ran}P$, so $z\\in\\ker P$, while\n$\\langle z,Px\\rangle=\\langle Pz,x\\rangle=0$ for $z\\in\\ker P$ gives\n$\\ker P=(\\operatorname{ran}P)^\\perp$\n([[thm-hilbert-adjoint-properties]],\n[[def-real-and-complex-inner-product-space]]). Hence\n$\\operatorname{ran}P=(\\ker P)^\\perp$ is closed, and the two defining properties\n$Px\\in\\operatorname{ran}P$, $x-Px\\in(\\operatorname{ran}P)^\\perp$ of\n[[def-hilbert-orthogonal-projection]] show that $P=P_{\\operatorname{ran}P}$ is\nthe Hilbert orthogonal projection onto a closed subspace, and conversely every\nsuch $P_M$ is idempotent and self-adjoint by\n[[lem-orthogonal-projection-is-linear-self-adjoint-contractive]] and\n[[thm-orthogonal-decomposition-by-a-closed-subspace]]. Finally $P$ is\ncontractive: from $\\langle Px,x\\rangle=\\langle Px,Px\\rangle=\\|Px\\|^2$ and\nCauchy–Schwarz, $\\|Px\\|^2\\le\\|Px\\|\\,\\|x\\|$, so $\\|Px\\|\\le\\|x\\|$ for all $x$,\nand $\\langle Px,x\\rangle=\\|Px\\|^2\\ge0$ is a nonnegative real number.\n\n**Well-definedness: the regularity clause.** For an orthogonal projection value\nthe pairing $E_x(B)=\\langle E(B)x,x\\rangle$ is a nonnegative real number and\n$E_x(X)=\\langle x,x\\rangle=\\|x\\|^2<+\\infty$, so every $E_x$ is a finite\nnonnegative set function and the regularity requirement is a meaningful\ncondition on it; that each $E_x$ is genuinely a countably additive measure of\ntotal mass $\\|x\\|^2$, and that the polarized pairings $E_{x,y}$ are finite\ncomplex measures, is proved as\n[[lem-scalar-and-complex-measures-from-a-pvm]] before either is used.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-unbounded-linear-operator-domain-and-graph",
+          "source_section": "Definition",
+          "quote": "Throughout this page $H$ is a complex Hilbert space ([[def-hilbert-space]]) with\ninner product linear in the first variable and conjugate-linear in the second\n([[def-real-and-complex-inner-product-space]]).\n\nA **(possibly unbounded) linear operator on $H$** is a linear map\n$T:D(T)\\to H$ ([[def-linear-map]]) whose **domain** $D(T)\\subseteq H$ is a linear\nsubspace ([[def-linear-subspace]]). The domain is part of the data: $T=S$ means\n$D(T)=D(S)$ and $Tx=Sx$ for all $x\\in D(T)$. One writes $T\\subseteq S$, and\ncalls $S$ an **extension** of $T$, when $D(T)\\subseteq D(S)$ and $Sx=Tx$ for\nevery $x\\in D(T)$.\n\nThe **graph** of $T$ is\n$$\\Gamma(T):=\\{(x,Tx):x\\in D(T)\\}\\subseteq H\\oplus H .$$\nThe direct sum $H\\oplus H$ is read as the complex vector space of pairs with\ncoordinatewise operations and the inner product\n$\\langle (x,y),(u,v)\\rangle=\\langle x,u\\rangle+\\langle y,v\\rangle$, whose induced\nnorm is\n$$\\|(x,y)\\|=(\\|x\\|^2+\\|y\\|^2)^{1/2};$$\nit is complete because $H$ is ([[def-complete-metric-space]]). The **graph norm**\non $D(T)$ is\n$$\\|x\\|_T:=(\\|x\\|^2+\\|Tx\\|^2)^{1/2},$$\nso that $x\\mapsto(x,Tx)$ is an isometric isomorphism of $(D(T),\\|\\cdot\\|_T)$\nonto $\\Gamma(T)$ with the norm restricted from $H\\oplus H$.\n\n$T$ is **closed** when $\\Gamma(T)$ is a closed subset of $H\\oplus H$. A linear\noperator is determined by its graph, and the following elementary translations\nare used silently below: $\\Gamma(T)$ is a linear subspace of $H\\oplus H$;\n$\\Gamma(T)\\cap(\\{0\\}\\oplus H)=\\{(0,0)\\}$; the image of $\\Gamma(T)$ under the\nfirst coordinate projection is $D(T)$; and $T\\subseteq S$ if and only if\n$\\Gamma(T)\\subseteq\\Gamma(S)$. In particular a closed operator is exactly one\nwhose graph is a closed subspace of $H\\oplus H$.\n\n**Notation.** No boundedness of $T$ is assumed, and $T$ is frequently called\n*unbounded* to stress this; a bounded everywhere defined operator on $H$ is the\nspecial case $D(T)=H$ in which $\\Gamma(T)$ is a closed subspace by continuity.\nThe letter $I$ denotes the identity operator on $H$ with domain $H$.\n\n**Completeness of $H\\oplus H$.** If $(x_n,y_n)$ is a Cauchy sequence in\n$H\\oplus H$, then $\\|x_n-x_m\\|\\le\\|(x_n-x_m,y_n-y_m)\\|$ and\n$\\|y_n-y_m\\|\\le\\|(x_n-x_m,y_n-y_m)\\|$ show that $(x_n)$ and $(y_n)$ are Cauchy\nin $H$; let $x,y$ be their limits. Then\n$\\|(x_n,y_n)-(x,y)\\|^2=\\|x_n-x\\|^2+\\|y_n-y\\|^2\\to0$, so $H\\oplus H$ is\ncomplete. Consequently a sequence in $H\\oplus H$ converges exactly when its two\ncoordinate sequences converge in $H$.",
+          "uses": [
+            "2.1",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-symmetric-self-adjoint-and-essentially-self-adjoint",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $T$ be a densely defined linear operator on $H$.\n\n- $T$ is **symmetric** when $T\\subseteq T^*$, that is, $D(T)\\subseteq D(T^*)$ and\n  $Tx=T^*x$ for all $x\\in D(T)$; equivalently\n  $\\langle Tx,y\\rangle=\\langle x,Ty\\rangle$ for all $x,y\\in D(T)$.\n- $T$ is **self-adjoint** when $T=T^*$, that is, the domains and the values\n  agree.\n- $T$ is **essentially self-adjoint** when its closure $\\overline T$ is\n  self-adjoint; by [[thm-closable-iff-adjoint-domain-is-dense]] this presupposes\n  that $T$ is closable.\n\n**Consequences, with proofs.** These are part of the content of the definition.\n\n1. *A symmetric $T$ is closable.* $T\\subseteq T^*$ and $T^*$ is closed\n   ([[lem-unbounded-adjoint-is-well-defined-and-closed]]), so $T^*$ is a closed\n   extension of $T$. In particular the closure $\\overline T$ exists and\n   $\\overline T\\subseteq T^*$.\n2. *The closure of a symmetric operator is symmetric.* If $T\\subseteq T^*$,\n   the inclusion reversal of\n   [[lem-unbounded-adjoint-is-well-defined-and-closed]] applied to\n   $T\\subseteq T^*$ gives $(T^*)^*\\subseteq T^*$, that is\n   $T^{**}\\subseteq T^*$. Applying it once more to the inclusion\n   $T^{**}\\subseteq T^*$ gives $(T^*)^*\\subseteq(T^{**})^*$, that is\n   $T^{**}\\subseteq T^{***}$. Since $\\overline T=T^{**}$ and\n   $(\\overline T)^*=T^{***}$\n   ([[thm-closable-iff-adjoint-domain-is-dense]]), this reads\n   $\\overline T\\subseteq(\\overline T)^*$: the closure is symmetric. (Each\n   application is legitimate because the adjoint is defined once its operator\n   is densely defined, and $D(T^{**})$ is dense because\n   $T\\subseteq T^{**}=\\overline T$, so that $D(T^{**})$ contains the dense\n   domain $D(T)$.)\n3. *A self-adjoint operator has no proper symmetric extension.* If $T=T^*$ and\n   $T\\subseteq S\\subseteq S^*$, then $S^*\\subseteq T^*$ by inclusion reversal,\n   so $T\\subseteq S\\subseteq S^*\\subseteq T^*=T$ and all inclusions are\n   equalities.\n4. *A self-adjoint operator is closed*, being equal to the adjoint $T^*$ of the\n   densely defined $T$, and *an essentially self-adjoint operator has exactly\n   one self-adjoint extension*, namely $\\overline T$: a self-adjoint extension\n   $S$ of $T$ is closed, hence contains the least closed extension\n   $\\overline T$, and then $S\\subseteq S^*\\subseteq(\\overline T)^*=\\overline T$\n   by item 2 and symmetry, so $S=\\overline T$.",
+          "uses": [
+            "2.1",
+            "2.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Under the unitary $J_u$ of [F2], the one-dimensional $n$th sector of $\\mathcal F_s(\\mathbb C u)$ is spanned by the unit vector $e_n$. Therefore $Q_n$ are mutually orthogonal projections and their strong sum is the identity on $\\mathcal F_s(\\mathbb C u)$. Tensoring with the identity on $\\mathcal F_s(K)$ and conjugating by $J_u$ shows that each $P_n$ is an orthogonal projection, $P_nP_m=0$ for $n\\ne m$, and $\\sum_{n\\ge0}P_n\\Psi=\\Psi$ in norm for every $\\Psi\\in\\mathcal F_s(H)$.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Under $J_u$, write $\\Psi=\\bigoplus_{n\\ge0}e_n\\otimes\\phi_n$ with $\\phi_n\\in\\mathcal F_s(K)$, and put $m_n=n(n-1)$. The composition $N_u(N_u-I)$ acts diagonally by $m_n$ and has exactly the stated domain: $\\sum_nm_n^2\\|\\phi_n\\|^2<\\infty$ implies $\\Psi\\in D(N_u)$ because $n^2\\le m_n^2$ for $n\\ge2$ and the $n=0,1$ block contributions are finite, and it gives $(N_u-I)\\Psi\\in D(N_u)$; conversely, membership in the composition domain gives this sum. This domain contains $\\mathcal D_{\\rm fin}$, dense by truncation of the square-summable Fock sum in [F1], and the operator is symmetric because each $m_n$ is real. If $\\Phi\\in D(M_u^*)$ and $\\Xi=M_u^*\\Phi$, testing the adjoint identity on vectors supported in one $n$th block forces $\\Xi_n=m_n\\Phi_n$; square summability gives $\\Phi\\in D(M_u)$. Conversely, for $\\Phi\\in D(M_u)$, Cauchy–Schwarz on the block sum gives the adjoint identity with value $M_u\\Phi$. Hence $M_u=M_u^*$ and is self-adjoint, therefore closed, by [F5].",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "step": "2.2",
+          "claim": "For Borel $B$, the orthogonal sum defining $E_u(B)$ converges strongly because $\\sum_n\\|P_n\\Psi\\|^2=\\|\\Psi\\|^2$. It is an orthogonal projection, $E_u(\\varnothing)=0$, $E_u(\\mathbb R)=I$, and orthogonality gives $E_u(B)E_u(C)=E_u(B\\cap C)$. For pairwise disjoint Borel sets $B_j$, their intersections with $\\mathbb N_0$ partition $B\\cap\\mathbb N_0$, so the corresponding orthogonal series gives $E_u(\\bigcup_jB_j)\\Psi=\\sum_jE_u(B_j)\\Psi$ in norm. Thus $E_u$ is a PVM supported on $\\mathbb N_0$, and $E_u(\\{n\\})=P_n$.",
+          "inputs": [
+            "A1",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-3",
+          "step": "2.3",
+          "claim": "Under $J_u$, $N_u$ is the diagonal operator $(\\Psi_n)_{n\\ge0}\\mapsto(n\\Psi_n)_{n\\ge0}$ with domain $\\sum_n n^2\\|\\Psi_n\\|^2<\\infty$. It is symmetric because every diagonal coefficient $n$ is real. If $\\Phi$ lies in its adjoint domain with adjoint value $\\Xi$, testing the adjoint identity on vectors supported in a single sector forces $\\Xi_n=n\\Phi_n$ for every $n$. Since $\\Xi$ is square-summable, $\\sum_n n^2\\|\\Phi_n\\|^2<\\infty$, so $\\Phi\\in D(N_u)$. Conversely, for $\\Phi\\in D(N_u)$, Cauchy–Schwarz on the sector sum gives the adjoint identity with value $N_u\\Phi$. Hence $D(N_u^*)=D(N_u)$ and $N_u^*=N_u$, and its projections are the constructed $E_u(\\{n\\})=P_n$.",
+          "inputs": [
+            "F2",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "By [F2], on a one-mode occupation vector $e_n\\otimes\\phi$ one has $a(u)(e_n\\otimes\\phi)=\\sqrt n\\,e_{n-1}\\otimes\\phi$ and $a^\\dagger(u)(e_n\\otimes\\phi)=\\sqrt{n+1}\\,e_{n+1}\\otimes\\phi$; thus $a^\\dagger(u)a(u)=N_u$ on finite-particle vectors, including the $n=0$ sector. On the same invariant subspace, [F3] gives $a(u)a^\\dagger(u)=a^\\dagger(u)a(u)+I$. Consequently $$N_u(N_u-I)=a^\\dagger(u)a(u)a^\\dagger(u)a(u)-a^\\dagger(u)a(u)=a^\\dagger(u)^2a(u)^2$$ on $\\mathcal D_{\\rm fin}$, by substitution of the CCR and cancellation of the two $a^\\dagger(u)a(u)$ terms.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "step 2.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "Truncate any $\\Psi\\in D(M_u)$ to $\\Psi^{(M)}=\\sum_{n=0}^{M}P_n\\Psi$; its squared graph-norm tail is $\\sum_{n>M}(1+m_n^2)\\|P_n\\Psi\\|^2\\to0$. For fixed $M$, write each $P_n\\Psi$ under $J_u^{-1}$ as $e_n\\otimes\\phi_n$ and approximate each of the finitely many $\\phi_n$ by finite-particle vectors in $\\mathcal F_s(K)$, which are dense by [F1]. The one-mode unitary preserves norm and the finitely many multipliers $m_n$ are bounded, so these approximations converge in graph norm and their images have finite total particle number. Thus $\\mathcal D_{\\rm fin}$ is a graph core for $M_u$; its restriction is $a^\\dagger(u)^2a(u)^2$ by step 3.1, and its closure is $M_u$ because $M_u$ is closed by step 2.1.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 3.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.2 proves E_u(∅)=0 by the empty orthogonal sum."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: step 3.1 includes n=0 and the annihilation coefficient is √0=0; step 4.1 controls the graph core for the multiplier n(n−1), which vanishes at n=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: step 3.1 includes n=1; both sides of the second identity vanish and the first identity has eigenvalue one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: the selected mode is explicitly unit norm; the orthogonal complement may be {0}, and steps 1.1–4.1 use the Fock factorization without requiring its dimension to be positive."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval parameter with endpoint cases; convergence and graph-domain boundaries are checked in steps 2.1–2.3 and 4.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement assumes ACω; step 1.1 uses the supplied one-mode unitary and step 4.1 makes only finitely many approximations after truncating at M."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement gives a construction and identities, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement gives a construction and identities, not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "occupation eigenvalues n=0,1,2",
+          "status": "checked",
+          "evidence": "The displayed diagonal multiplier n(n−1) is 0 at n=0 and n=1 and 2 at n=2; step 3.1 has the same values from a†²a²."
+        },
+        {
+          "name": "truncated graph norm",
+          "status": "checked",
+          "evidence": "Step 4.1 computes the tail as Σ_{n>M}(1+n²(n−1)²)||P_nΨ||², which tends to zero by the stated operator-domain summability."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-74",
+        "notes": "Independently checked all six steps and direct suppliers: second-variable-linear Fock pairing, unit mode and K=u-perp, orthogonal strong sums, real diagonal adjoint tests for N and M, exact composition domain using n²<=n²(n-1)² for n>=2 with n=0,1 handled separately, and two-stage graph-core truncation in occupation and orthogonal-mode particle number. K={0}, vacuum, n=1, empty B and arbitrary Borel unions are valid. CCR is used only on the invariant finite-particle domain. Countable Choice is inherited from the Fock/tensor and PVM suppliers; no arbitrary orthonormal basis is chosen. Read the reader repair against its hash-matched baseline and refuter no-finding report. Steck §16.4.2.2 supplies normalized-pulse context only; the PVM/domain/closure are proved locally. Accepted the explicit self-adjointness repair; no remaining mathematical defect found."
+      }
+    },
+    "post-qftx-ideal-wavepacket-counting": {
+      "physics_review": {
+        "formulation": {
+          "verdict": "pass",
+          "evidence": "The Postulate explicitly defines the normalized transverse wavepacket, the mode count PVM, trace probabilities, factorial moments and dimensionless g² statistic."
+        },
+        "scope": {
+          "verdict": "pass",
+          "evidence": "The postulate limits itself to one ideal normalized wavepacket mode, unit efficiency and no mismatch/background/dark counts; it excludes time response, point-field products and empirical outcomes."
+        },
+        "sources": {
+          "verdict": "pass",
+          "evidence": "The item cites the current host revision 0.16.10 (title page dated 27 June 2026); its full text at Chapter 2 §§2.6.1–2.6.2 (PDF pp. 74–76) and Chapter 16 §§16.1–16.4.2.2 (PDF pp. 685–692) was inspected. These passages support context while preserving the local mode assumptions. The existing coverage record still names revision 0.16.7 and was not changed in this reader scope."
+        },
+        "non_derivation": {
+          "verdict": "pass",
+          "evidence": "The Postulate states the detector law is an additional adopted physical assumption, not deduced from CCR or free-field equations; the existing finite-instrument supplier is not claimed to imply a countable-outcome instrument."
+        }
+      },
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-74",
+        "notes": "Independently checked the complete Postulate, reader/refuter reports, all nine direct suppliers and cited source passages. H_T is explicitly the transverse subspace of L², per its exact definition; the weighted space omits k=0. W multiplies by (2|k|)^(-1/2), is onto and norm preserving because the measures have the same null sets off zero, and converts metre units to m^(3/2). Count probabilities use only density supplier (a),(b) under Countable Choice. The repaired local PVM supplies the self-adjoint factorial closure; unbounded moments are scalar sums, with no undefined rho times unbounded operator. Positive finite mean is required for normalization; vacuum has no g². Glauber §§II–III and Steck §§16.1,16.4.2.2–.3 motivate normal ordering and pulse modes but do not derive this countable detector law. Unit efficiency, mode selection and absence of background/dark counts are adopted apparatus assumptions, with no data, precision or empirical inference. The free-photon supplier is used only for its selected Fock model, not its local-Weyl claims. Source revision independently read on PDF page 4, hash 694893f57d1e700d03c2299f0f5638e6d0ae9c86f2a64c65f5bb1908b079bb25. No substantive defect found; citation correction is metadata."
+      }
+    },
+    "pthm-qftx-mode-g-two": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "post-qftx-ideal-wavepacket-counting",
+          "source_section": "Postulate",
+          "quote": "Assume Countable Choice and use the positive transverse free-photon model whose one-particle space is $\\mathcal H_T=L^2(\\mathbb R^3,d^3\\mathbf k;\\mathbb C^3)$ with its transverse condition and whose state space is the bosonic Fock space $\\mathcal F_s(\\mathcal H_T)$. In the unit convention where $\\mathbf k$ has unit $\\mathrm m^{-1}$, let $u\\in\\mathcal H_T^\\nu$ be a normalized transverse wavepacket for the invariant measure $d\\nu=d^3\\mathbf k/(2|\\mathbf k|)$, so that $u(\\mathbf k)$ has unit metre and $\\int|u|^2d\\nu=1$. Let $v=Wu$, where $Wf(\\mathbf k)=f(\\mathbf k)/\\sqrt{2|\\mathbf k|}$; then $v\\in\\mathcal H_T$, $v(\\mathbf k)$ has unit $\\mathrm m^{3/2}$, and $\\|v\\|_2=1$. In the Fock factorization $\\mathcal F_s(\\mathcal H_T)\\cong\\mathcal F_s(\\mathbb C v)\\widehat\\otimes\\mathcal F_s(v^\\perp)$, $P_n(v)$ is the orthogonal projection onto mode occupation $n$ tensored with the identity on the orthogonal-mode Fock factor. These projections are mutually orthogonal and have strong sum $I$; their count PVM is $E_v(B)=\\sum_{n\\in B\\cap\\mathbb N_0}P_n(v)$, and $N_v=\\sum_n nP_n(v)$ on the domain $\\sum_n n^2\\|P_n(v)\\Psi\\|^2<\\infty$. A density operator $\\rho$ means a positive self-adjoint trace-class operator with $\\operatorname{tr}\\rho=1$, using the trace pairing obtained from the Fock space's second-variable-linear convention by conjugation. For $n\\in\\mathbb N_0$, put $p_n=\\operatorname{tr}(\\rho P_n(v))$. The mathematical density/PVM result makes $(p_n)$ a countably additive probability law under the stated Countable Choice hypothesis.\n\nAdopt as the ideal detector postulate that this law is the model probability for recording exactly $n$ photons in the selected mode. The detector is number resolving, has unit mode efficiency, and has no mode mismatch, background counts or dark counts. This is an additional physical measurement assumption; it is not deduced from the CCR or from the free-field equations.\n\nWhen $\\sum_n np_n<\\infty$ and $\\sum_n n(n-1)p_n<\\infty$, define the first number moment and normally ordered second factorial moment by\n$$\\mu_v(\\rho):=\\sum_{n=0}^{\\infty}np_n,\\qquad F^{(2)}_v(\\rho):=\\sum_{n=0}^{\\infty}n(n-1)p_n.$$\nThe PVM sums define the unbounded-state moments. In this ideal mode model, define the normally ordered second-mode correlation to be the spectral factorial expectation $F^{(2)}_v(\\rho)$. The self-adjoint closure of the finite-particle operator $a^\\dagger(v)^2a(v)^2$ is $N_v(N_v-I)$ by [[lem-qftx-mode-number-pvm]], so this definition agrees with the normally ordered operator on its finite-particle core and uses the spectral expectation for states outside that core. It does not assert a trace product of $\\rho$ with an unbounded operator. If $\\mu_v(\\rho)>0$, define the dimensionless same-mode zero-delay statistic\n$$g_v^{(2)}(0):=\\frac{F^{(2)}_v(\\rho)}{\\mu_v(\\rho)^2}.$$\nHere $0$ is the conventional zero-delay label for this same-mode statistic; no temporal detector response or pointwise product of electric-field distributions is defined.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-qftx-mode-number-pvm",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $H$ be a complex Hilbert space with the second-variable-linear pairing used for bosonic Fock space, and let $u\\in H$ satisfy $\\|u\\|=1$. Put $K=u^\\perp$. Let $J_u:\\mathcal F_s(\\mathbb C u)\\widehat\\otimes\\mathcal F_s(K)\\to\\mathcal F_s(H)$ be the one-mode Fock unitary, and for $n\\in\\mathbb N_0$ let $e_n=u^{\\otimes n}\\in(\\mathbb C u)_s^{(n)}$, with $e_0=1$. On $\\mathcal F_s(\\mathbb C u)$ define $Q_n z=\\langle e_n,z\\rangle_2e_n$, and on $\\mathcal F_s(H)$ put\n$$P_n:=J_u(Q_n\\otimes I)J_u^{-1}.$$\nFor every Borel set $B\\subseteq\\mathbb R$, define the strong sum\n$$E_u(B):=\\sum_{n\\in B\\cap\\mathbb N_0}P_n.$$\nDefine the mode number operator\n$$N_u:=\\sum_{n=0}^{\\infty}nP_n,\\qquad D(N_u):=\\left\\{\\Psi\\in\\mathcal F_s(H):\\sum_{n=0}^{\\infty}n^2\\|P_n\\Psi\\|^2<\\infty\\right\\}.$$\nThen $(P_n)_{n\\ge0}$ are mutually orthogonal projections with strong sum $I$, $E_u$ is a projection-valued measure supported on $\\mathbb N_0$, and $N_u$ is self-adjoint with these spectral projections. Define $M_u\\Psi:=\\sum_{n=0}^{\\infty}n(n-1)P_n\\Psi$ on\n$$D(M_u):=\\left\\{\\Psi\\in\\mathcal F_s(H):\\sum_{n=0}^{\\infty}n^2(n-1)^2\\|P_n\\Psi\\|^2<\\infty\\right\\}.$$\nThen $M_u=N_u(N_u-I)$ is self-adjoint, and $\\mathcal D_{\\rm fin}$ is a graph core for it. On the finite-particle subspace,\n$$N_u=a^\\dagger(u)a(u),\\qquad M_u=N_u(N_u-I)=a^\\dagger(u)^2a(u)^2.$$\nThus the finite-particle restriction of $a^\\dagger(u)^2a(u)^2$ is essentially self-adjoint with closure $M_u$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define\n$$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$\nprovided by the all-real convergence proved in The exponential series converges absolutely for every real argument. Here $n!\\in\\mathbb N$ is the factorial of The factorial $n!$ and the falling factorial $n^{\\underline{k}}$, defined by recursion in $\\mathbb{N}$, $\\iota(n!)$ is its nonzero real image (The canonical natural $\\iota(n) = n \\cdot 1_F$ of a field, Canonical naturals are positive and strictly increasing), and powers and series are those of Integer powers $a^m$ and Series, partial sums, convergence and the sum, divergence, and the tail series.\n\nThis is a real power series centred at $0$ (A real power series about a centre, its interval of convergence, and its radius in $[0,+\\infty]$). No logarithm, irrational power, or differential equation enters the definition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-factorial-and-falling-factorial",
+          "source_section": "Definition",
+          "quote": "**The factorial.** By the recursion theorem (The recursion theorem) applied to the\nset $\\mathbb{N}\\times\\mathbb{N}$, the starting element $(0,1)$ and the function\n$f(k, v) = (\\sigma(k),\\, v \\cdot \\sigma(k))$, and by the same induction on the\nfirst coordinate as in Finite sums and finite products of natural numbers, $\\sum_{k<n} a_k$ and $\\prod_{k<n} a_k$ in $\\mathbb{N}$, there is a unique\n$F : \\mathbb{N} \\to \\mathbb{N}$ with\n\n$$F(0) = 1, \\qquad F(\\sigma(n)) = F(n)\\cdot\\sigma(n) \\quad (n \\in \\mathbb{N}).$$\n\nWe write $n! := F(n)$. Thus $0! = 1$, $1! = 0!\\cdot 1 = 1$, $2! = 1!\\cdot 2 = 2$,\n$3! = 6$, $4! = 24$, $5! = 120$, $6! = 720$.\n\n**$0! = 1$ is the base clause of this recursion**, not a convention imported from\nelsewhere. Nothing about empty products is presupposed; the agreement with the\nempty product is proved below, in clause (a), rather than assumed.\n\n**Truncated difference.** Throughout, $n - k$ is the operation fixed in\nFinite sums and finite products of natural numbers, $\\sum_{k<n} a_k$ and $\\prod_{k<n} a_k$ in $\\mathbb{N}$: the unique $j$ with $k + j = n$ when\n$k \\le n$, and $0$ when $n < k$.\n\n**The falling factorial.** For $n \\in \\mathbb{N}$ define $n^{\\underline{k}}$ by\nrecursion on $k$, by the recursion theorem applied to\n$\\mathbb{N}\\times\\mathbb{N}$ with starting element $(0,1)$ and\n$f(k, v) = (\\sigma(k),\\, v \\cdot (n-k))$:\n\n$$n^{\\underline{0}} = 1, \\qquad n^{\\underline{\\sigma(k)}} = n^{\\underline{k}}\\cdot(n-k) .$$\n\nSo $n^{\\underline{1}} = 1\\cdot(n-0) = n$ and $n^{\\underline{2}} = n\\,(n-1)$, and\nfor $k \\le n$ the value is the product $n(n-1)\\cdots(n-k+1)$ of the $k$ topmost\nfactors.\n\n**Four facts, proved here because the page uses each of them.**\n\n**(a) The factorial is the product of the first $n$ positive naturals.**\n$n! = \\prod_{j<n}\\sigma(j) = \\prod_{j<n}(j+1)$, the $\\mathbb{N}$-valued product of\nFinite sums and finite products of natural numbers, $\\sum_{k<n} a_k$ and $\\prod_{k<n} a_k$ in $\\mathbb{N}$. Induction (The principle of mathematical induction): at\n$n = 0$ both sides are $1$, the empty product and the base clause agreeing; and\n$\\prod_{j<\\sigma(n)}\\sigma(j) = \\big(\\prod_{j<n}\\sigma(j)\\big)\\cdot\\sigma(n) = n!\\cdot\\sigma(n) = \\sigma(n)!$.\n**So the empty-product reading and the base-clause reading are the same reading**,\nand neither was assumed.\n\n**(b) $n! \\ne 0$, and $\\iota(n!) = \\prod^{\\mathbb{R}}_{j<n}\\iota(j+1)$.** For the\nfirst, $0! = 1 \\ne 0$ (The von Neumann naturals form a Peano system) and\n$\\sigma(n)! = n!\\cdot\\sigma(n)$ is a product of two nonzero naturals, which is\nnonzero: if $xy = 0$ with $y \\ne 0$ then $xy = 0\\cdot y$\n(Zero and one under multiplication) and cancellation gives $x = 0$\n(Cancellation for multiplication by a nonzero factor). So $n! \\ne 0$ for every $n$ by induction. For the second, apply the bridge clause\n6 of that lemma to clause (a) above. This is what makes the factorial of this\npage and the real-valued product $\\prod_{j<n}(j+1)$ used elsewhere in the library\n**one object seen twice**, rather than two unrelated notions.\n\n**(c) $n^{\\underline{k}}\\cdot(n-k)! = n!$ for $k \\le n$.** Induction on $k$, for\nall $n$ at once. At $k = 0$ this reads $1 \\cdot n! = n!$. Assume it at $k$ and\nlet $\\sigma(k) \\le n$; then $k \\le n$, and writing $d := n - k$ we have\n$k + d = n$ and $d \\ne 0$, since $k + 0 = k \\ne n$; so $d = \\sigma(e)$ for a\nunique $e$ (Every nonzero natural number is a successor), and $\\sigma(k) + e = n$, that is\n$e = n - \\sigma(k)$ (Addition is cancellative). Therefore\n$n^{\\underline{\\sigma(k)}}\\cdot\\big(n-\\sigma(k)\\big)! = n^{\\underline{k}}\\cdot(n-k)\\cdot e! = n^{\\underline{k}}\\cdot\\big(e!\\cdot\\sigma(e)\\big) = n^{\\underline{k}}\\cdot\\sigma(e)! = n^{\\underline{k}}\\cdot(n-k)! = n!$,\nusing commutativity and associativity of multiplication\n(Multiplication is associative, Multiplication is commutative) and the recursion\nclause for the factorial.\n\n**(d) Boundary values.** $n^{\\underline{0}} = 1$ for every $n$, by the base\nclause; $n^{\\underline{n}} = n!$, since clause (c) at $k = n$ gives\n$n^{\\underline{n}}\\cdot 0! = n!$ and $0! = 1$; and\n$n^{\\underline{k}} = 0$ whenever $k > n$. For the last, $n - n = 0$ gives\n$n^{\\underline{\\sigma(n)}} = n^{\\underline{n}}\\cdot 0 = 0$, the clause\n$x \\cdot 0 = 0$ being definitional (Multiplication of natural numbers), and if\n$n^{\\underline{k}} = 0$ then\n$n^{\\underline{\\sigma(k)}} = 0$ as well, so $n^{\\underline{k}} = 0$ for every\n$k \\ge \\sigma(n)$ by induction.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-geometric-series",
+          "source_section": "Statement",
+          "quote": "Let $r \\in \\mathbb{R}$ and let $r^k$ be the integer power (Integer powers $a^m$),\nso that $r^0 = 1$ for every $r$, including $r = 0$.\n\n1. If $|r| < 1$ then the series $\\sum r^k$ converges (Series, partial sums, convergence and the sum, divergence, and the tail series) and\n   $$\\sum_{k=0}^{\\infty} r^{k} \\;=\\; \\frac{1}{1-r} .$$\n2. If $|r| \\ge 1$ then $\\sum r^k$ diverges.\n\nThe series starts at $k = 0$ and its first term is $r^0 = 1$; in particular\n$\\sum_{k=0}^{\\infty} 2^{-k} = 2$, while the series starting at $k = 1$ sums to\n$1$. Which starting index is meant has to be said, and it is said here.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand\n\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-nrqm-composites-density-and-scalar-spectral-probability",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]) and let $H$ be a nonzero complex Hilbert space ([[def-hilbert-space]]). Recall that $T_{u,v}\\in\\mathcal B(H)$ denotes the rank-one operator $T_{u,v}x=\\langle x,v\\rangle u$ ([[lem-nrqm-composites-rank-one-operator-calculus]]).\n\n(a) A **density operator** on $H$ is a self-adjoint positive trace-class operator $\\rho$ with $\\operatorname{tr}\\rho=1$ ([[def-trace-class-operator]], [[def-trace-of-a-trace-class-operator]], [[def-self-adjoint-positive-unitary-and-normal-operator]]). If $(u_n)_{n\\in J}$ is a finite or countable orthonormal family, with $J$ a finite initial segment of the positive integers or all positive integers, and $w_n\\ge0$ with $\\sum_nw_n=1$, then the sum $\\rho:=\\sum_nw_nT_{u_n,u_n}$ converges in trace norm to a density operator with $\\operatorname{tr}\\rho=\\sum_nw_n=1$. Conversely every density operator $\\rho$ admits such an expansion whose weights are its positive eigenvalues counted with multiplicity and whose vectors are orthonormal eigenvectors; distinct expansions of the same $\\rho$ exist when a positive eigenspace has dimension at least two.\n\n(b) Let $E$ be a projection-valued measure on a measurable space $(X,\\Sigma)$ acting on $H$ ([[def-projection-valued-measure]]). Then $\\mu_\\rho(B):=\\operatorname{tr}(\\rho E(B))$ is a well-defined probability measure on $(X,\\Sigma)$ ([[def-measure]], [[def-probability-measure]]); it is given by the absolutely convergent series $\\mu_\\rho(B)=\\sum_nw_n\\|E(B)u_n\\|^2$ in every expansion of (a), and reduces to $\\mu_\\rho(B)=\\|E(B)u\\|^2$ for a pure density operator $\\rho=T_{u,u}$ with $\\|u\\|=1$.\n\n(c) Assume in addition the Axiom of Choice ([[def-axiom-of-choice]]). Let $A$ be a self-adjoint operator with projection-valued measure $E_A$ ([[thm-spectral-theorem-for-unbounded-self-adjoint-operators]]) and let $\\psi\\in H$ have $\\|\\psi\\|=1$ and $\\psi\\in D(A)$. Here $|A|^{1/2}$ denotes the unbounded PVM integral $f(E_A)$ for $f(\\lambda)=|\\lambda|^{1/2}$, with domain $D(f(E_A))=\\{\\psi:\\int |\\lambda|\\,dE_{A,\\psi}<\\infty\\}$ as in [[def-unbounded-integral-against-a-pvm]]. Then\n\n$$\\int_{\\mathbb R}\\lambda\\,dE_{A,\\psi}(\\lambda)=\\langle A\\psi,\\psi\\rangle,\\qquad \\int_{\\mathbb R}\\lambda^2\\,dE_{A,\\psi}(\\lambda)=\\|A\\psi\\|^2 ,$$\n\nwhere $E_{A,\\psi}(B)=\\langle E_A(B)\\psi,\\psi\\rangle$ ([[lem-scalar-and-complex-measures-from-a-pvm]]); moreover $\\int_{\\mathbb R}|\\lambda|\\,dE_{A,\\psi}(\\lambda)<\\infty$ exactly when $\\psi\\in D(|A|^{1/2})$, and then the mean $\\int\\lambda\\,dE_{A,\\psi}$ is finite. No product $A\\rho$ of an unbounded operator with a density operator is used, and no physical interpretation of $\\mu_\\rho$ or of the moments is asserted.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The coefficients of $\\psi_\\alpha$ are square-summable because their squared norms sum to $Z_\\lambda^{-1}\\sum_n\\lambda^n/n!=1$ by [F2]; the orthogonal one-mode sectors therefore make $\\psi_\\alpha$ a unit vector and [F6] makes its rank-one state a density operator. Its count probabilities are $p_n=Z_\\lambda^{-1}\\lambda^n/n!$ by [A1] and [F1]. Shifting indices in the nonnegative exponential series gives\n$$\\mu=Z_\\lambda^{-1}\\sum_{n\\ge1}\\frac{n\\lambda^n}{n!}=\\lambda,\\qquad F_2=Z_\\lambda^{-1}\\sum_{n\\ge2}\\frac{n(n-1)\\lambda^n}{n!}=\\lambda^2,$$\nso $g_v^{(2)}(0)=1$. The same calculation shows both required moments are finite.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For $\\psi_m$, [F1] gives $p_n=\\mathbf1_{n=m}$, hence $\\mu=m$ and $F_2=m(m-1)$. Since $m\\ge1$, the denominator is positive, and substitution into [A1] gives $g_v^{(2)}(0)=m(m-1)/m^2=1-1/m$.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The weights $(1-r)r^n$ are nonnegative and sum to one by [F4], so [F6] makes $\\rho_r$ a density operator and [A1] gives the geometric count law $p_n=(1-r)r^n$. By Tonelli [F5],\n$$\\left(\\sum_{j\\ge0}r^j\\right)^2=\\sum_{i,j\\ge0}r^{i+j}=\\sum_{n\\ge0}(n+1)r^n.$$\nTherefore $\\sum_{n\\ge0}nr^n=(1-r)^{-2}-(1-r)^{-1}=r/(1-r)^2$. Applying Tonelli to the triple product and counting the $(i,j,k)\\in\\mathbb N_0^3$ with $i+j+k=n-2$ gives\n$$r^2\\left(\\sum_{j\\ge0}r^j\\right)^3=\\sum_{n\\ge2}\\frac{n(n-1)}2r^n,$$\nbecause that finite set has $\\sum_{i=0}^{n-2}(n-1-i)=n(n-1)/2$ elements. Hence $\\sum_{n\\ge0}n(n-1)r^n=2r^2/(1-r)^3$. Multiplying by $1-r$ gives $\\mu=r/(1-r)>0$ and $F_2=2r^2/(1-r)^2<\\infty$, so [A1] yields $g_v^{(2)}(0)=2$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F4",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: the number-state preparation has m≥1, coherent preparation has λ>0, and geometric preparation has 0<r<1, so each stated law is normalized and nonempty as shown in steps 1.1–2.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: p₀ is included in the coherent and geometric laws; steps 1.1 and 2.1 retain it while its number and factorial-moment weights are zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: m=1 is allowed; step 1.2 gives μ=1 and F₂=0, hence g²(0)=0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: α=0 and r∈{0,1} are expressly excluded because they make the coherent/thermal parameter or denominator invalid; step 1.2 covers the nondegenerate m≥1 number states."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The theorem has no time or parameter endpoint limit; r=0 and r=1 are excluded in the Statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement assumes the postulate’s ACω density and count-law conventions; step 1.1 uses a pure state, and step 2.1 uses the countable diagonal density supplier only under its ACω clauses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The three displayed state-specific predictions are implications, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The three displayed state-specific predictions are implications, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "coherent first terms",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the index shifts n/n! = 1/(n−1)! and n(n−1)/n! = 1/(n−2)! for the exact first and second factorial moments."
+        },
+        {
+          "name": "number-state boundary m=1",
+          "status": "checked",
+          "evidence": "Step 1.2 gives μ=1 and F₂=0, so the normalized value is defined and equals zero."
+        },
+        {
+          "name": "geometric first terms",
+          "status": "checked",
+          "evidence": "Step 2.1 includes n=0,1 with zero factorial weight and derives the n≥2 multiplicity n(n−1)/2 by counting triples."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-74",
+        "notes": "Independently traced every step and all seven direct suppliers, with reader/refuter evidence and the hash-matched pre-reader item. The unit vectors psi_n are orthogonal mode-occupation states; density supplier (a),(b), not full-Choice clause (c), supports pure and geometric states. The real exponential supplier proves finite positive Z_lambda for lambda=|alpha|²>0. Index shifts give mu=lambda,F2=lambda². Number m>=1 gives mu=m,F2=m(m-1), including m=1 with zero factorial moment. For 0<r<1, geometric normalization and sigma-finite counting-measure Tonelli on two/triple products give mu=r/(1-r),F2=2r²/(1-r)², both finite. The triple coefficient is (n choose 2); no differentiation/interchange is hidden. alpha=0,r=0 and vacuum are excluded because g² is undefined; r=1 is not normalizable. Read Glauber §IV factorization context and Steck §2.6.1 Gaussian thermal assumption, keeping this theorem restricted to the expressly defined geometric quantum state and ideal counting law. No measured inputs, statistical inference or universal radiation classification are asserted. Source-title update is metadata; current proof has no defect."
+      }
+    },
+    "pthm-qftx-binomial-detector-thinning": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "pthm-qftx-mode-g-two",
+          "source_section": "Statement",
+          "quote": "Assume the ideal wavepacket counting postulate for a normalized mode $v$, and let $p_n$ be the resulting count law of a prepared state. Write\n$$\\mu:=\\sum_{n=0}^{\\infty}np_n,\\qquad F_2:=\\sum_{n=0}^{\\infty}n(n-1)p_n,\\qquad g_v^{(2)}(0):=F_2/\\mu^2$$\nwhen $0<\\mu<\\infty$ and $F_2<\\infty$. Let $J_v:\\mathcal F_s(\\mathbb C v)\\widehat\\otimes\\mathcal F_s(v^\\perp)\\to\\mathcal F_s(\\mathcal H_T)$ be the one-mode Fock unitary, let $|n\\rangle_v=v^{\\otimes n}$ with $|0\\rangle_v=1$, and let $\\Omega_{v^\\perp}$ be the vacuum in $\\mathcal F_s(v^\\perp)$. Put $\\psi_n:=J_v(|n\\rangle_v\\otimes\\Omega_{v^\\perp})$. For a unit vector $\\psi$, $g_v^{(2)}(0;\\psi)$ denotes the postulate's value for the pure density operator $|\\psi\\rangle\\langle\\psi|$. For $\\alpha\\in\\mathbb C\\setminus\\{0\\}$ put $\\lambda=|\\alpha|^2$, $Z_\\lambda=\\sum_{n=0}^{\\infty}\\lambda^n/n!$, and define the coherent-mode vector\n$$\\psi_\\alpha:=Z_\\lambda^{-1/2}\\sum_{n=0}^{\\infty}\\frac{\\alpha^n}{\\sqrt{n!}}\\psi_n.$$\nFor $m\\ge1$, the number preparation is $\\psi_m$. For $0<r<1$, the geometric one-mode state is\n$$\\rho_r:=(1-r)\\sum_{n=0}^{\\infty}r^n|\\psi_n\\rangle\\langle\\psi_n|.$$\nThen the ideal model predictions are\n$$g_v^{(2)}(0;\\psi_\\alpha)=1,\\qquad g_v^{(2)}(0;\\psi_m)=1-\\frac1m,\\qquad g_v^{(2)}(0;\\rho_r)=2.$$\nThe final state has the specified single-mode geometric occupation law; these conclusions do not classify all radiation as coherent, number, or thermal.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand\n\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Fix $n\\in\\mathbb N_0$ and average on its finite fiber using $Q_n$. For each $j\\le n$, factorization gives $\\sum_xQ_n(\\{x\\})X_{n,j}(x)=\\eta$, and for distinct $i,j\\le n$ it gives $\\sum_xQ_n(\\{x\\})X_{n,i}(x)X_{n,j}(x)=\\eta^2$. Since $K(n,x)=\\sum_{j=1}^nX_{n,j}(x)$ and $K(n,x)(K(n,x)-1)=\\sum_{i\\ne j}X_{n,i}(x)X_{n,j}(x)$ for zero-one coordinates, it follows that $\\sum_xQ_n(\\{x\\})K(n,x)=n\\eta$ and $\\sum_xQ_n(\\{x\\})K(n,x)(K(n,x)-1)=n(n-1)\\eta^2$. For $n=0$ or $n=1$ the relevant sums are empty and the same formulas hold.",
+          "inputs": [
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Using the Statement's encoding, identify $\\Omega$ with a subset of $\\mathbb N_0\\times\\mathbb N_0$. For either $Y=K$ or $Y=K(K-1)$, extend $f_Y(n,m):=p_nQ_n(\\{x\\})Y(n,x)$ by zero outside that subset. Counting measure on $\\mathbb N_0$ is sigma-finite, so [F2] applied to the product of the two counting-measure spaces permits the nonnegative sum to be regrouped over the finite fibers. Using step 1.1 gives $\\mathbb E K=\\sum_np_n n\\eta=\\eta\\mu$ and $\\mathbb E[K(K-1)]=\\sum_np_n n(n-1)\\eta^2=\\eta^2F_2$. Both are finite by hypothesis. Since $\\eta\\mu>0$, division gives $g_K^{(2)}(0)=\\eta^2F_2/(\\eta\\mu)^2=F_2/\\mu^2=g_N^{(2)}(0)=g_v^{(2)}(0)$ by [F1].",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: n=0 has no incoming photons; step 1.1 treats the empty sums and step 2.1 gives zero conditional contribution."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement permits F₂=0; step 2.1 then gives zero registered factorial moment while ημ remains positive."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly verifies n=1, where the factorial sum is empty and its value is 0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and step 2.1 exclude eta=0 or mu=0 before normalizing. They permit F_2=0, and n=0,1 fibers have zero factorial contribution by step 1.1. At eta=1 zero weights for missed-record outcomes are allowed and do not obstruct the countable sum."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement includes η=1; step 1.1 gives the identity channel moments when η=1, so the normalized statistic remains unchanged."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses conditional finite Bernoulli sums and nonnegative countable averaging, with no selection from a nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Independent constant-efficiency recording implies the two moment identities and preserved normalized correlation; preservation alone is not claimed to imply independent binomial recording."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Independent constant-efficiency recording implies the two moment identities and preserved normalized correlation; preservation alone is not claimed to imply independent binomial recording."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "conditional counts n=0,1",
+          "status": "checked",
+          "evidence": "Step 1.1 checks the empty sums for n=0 and n=1, yielding conditional means ηn and factorial moments η²n(n−1)."
+        },
+        {
+          "name": "unit efficiency endpoint",
+          "status": "checked",
+          "evidence": "At η=1 the identities in steps 1.1–2.1 reduce to E[K]=μ and E[K(K−1)]=F₂."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-74-author-self-check",
+        "notes": "Authoring consistency review checked every numbered argument against its named facts, exact supplier interface, stated domains and boundary assumptions. This record is not independent proof approval."
+      },
+      "current_boundary_worksheet": {
+        "proposal": "research/physics-non-fluid-129-2026-10-21-r2-owner-step2-boundary-proposal-1/proposal.json",
+        "source_sha256": "249a188b35184957b6cffd1a5bd709a156ed246d529b417380e4b4a5c26aeb5c",
+        "qualification": "Released complete current source/eight-case semantic worksheet; root transcribed exact current rows. No independent acceptance or finite computation asserted."
+      }
+    },
+    "ex-qftx-single-photon-antibunching": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "pthm-qftx-mode-g-two",
+          "source_section": "Statement",
+          "quote": "Assume the ideal wavepacket counting postulate for a normalized mode $v$, and let $p_n$ be the resulting count law of a prepared state. Write\n$$\\mu:=\\sum_{n=0}^{\\infty}np_n,\\qquad F_2:=\\sum_{n=0}^{\\infty}n(n-1)p_n,\\qquad g_v^{(2)}(0):=F_2/\\mu^2$$\nwhen $0<\\mu<\\infty$ and $F_2<\\infty$. Let $J_v:\\mathcal F_s(\\mathbb C v)\\widehat\\otimes\\mathcal F_s(v^\\perp)\\to\\mathcal F_s(\\mathcal H_T)$ be the one-mode Fock unitary, let $|n\\rangle_v=v^{\\otimes n}$ with $|0\\rangle_v=1$, and let $\\Omega_{v^\\perp}$ be the vacuum in $\\mathcal F_s(v^\\perp)$. Put $\\psi_n:=J_v(|n\\rangle_v\\otimes\\Omega_{v^\\perp})$. For a unit vector $\\psi$, $g_v^{(2)}(0;\\psi)$ denotes the postulate's value for the pure density operator $|\\psi\\rangle\\langle\\psi|$. For $\\alpha\\in\\mathbb C\\setminus\\{0\\}$ put $\\lambda=|\\alpha|^2$, $Z_\\lambda=\\sum_{n=0}^{\\infty}\\lambda^n/n!$, and define the coherent-mode vector\n$$\\psi_\\alpha:=Z_\\lambda^{-1/2}\\sum_{n=0}^{\\infty}\\frac{\\alpha^n}{\\sqrt{n!}}\\psi_n.$$\nFor $m\\ge1$, the number preparation is $\\psi_m$. For $0<r<1$, the geometric one-mode state is\n$$\\rho_r:=(1-r)\\sum_{n=0}^{\\infty}r^n|\\psi_n\\rangle\\langle\\psi_n|.$$\nThen the ideal model predictions are\n$$g_v^{(2)}(0;\\psi_\\alpha)=1,\\qquad g_v^{(2)}(0;\\psi_m)=1-\\frac1m,\\qquad g_v^{(2)}(0;\\rho_r)=2.$$\nThe final state has the specified single-mode geometric occupation law; these conclusions do not classify all radiation as coherent, number, or thermal.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "pthm-qftx-binomial-detector-thinning",
+          "source_section": "Statement",
+          "quote": "Assume the ideal wavepacket-counting postulate for a selected mode $v\\in\\mathcal H_T$ with $\\|v\\|=1$, and let $\\rho$ be the incoming density operator on $\\mathcal F_s(\\mathcal H_T)$ (a positive self-adjoint trace-class operator with trace one). By that postulate, $P_n(v)$ are the mode-count projections and $p_n=\\operatorname{tr}(\\rho P_n(v))$ are the count probabilities, so $p_n\\ge0$ and $\\sum_{n=0}^{\\infty}p_n=1$. Define the incoming mean and second factorial moment by\n$$\\mu:=\\sum_{n=0}^{\\infty}np_n,\\qquad F_2:=\\sum_{n=0}^{\\infty}n(n-1)p_n,$$\nand assume $0<\\mu<\\infty$ and $F_2<\\infty$. Define $g_N^{(2)}(0):=F_2/\\mu^2$; for this input state $\\rho$, the postulate denotes the same statistic by $g_v^{(2)}(0)$.\n\nLet $0<\\eta\\le1$ be a dimensionless fixed efficiency and assume no background or dark counts. To specify independent recording, put $b_\\eta(0)=1-\\eta$, $b_\\eta(1)=\\eta$, and\n$$\\Omega:=\\{(n,x):n\\in\\mathbb N_0,\\ x=(x_1,\\ldots,x_n)\\in\\{0,1\\}^n\\},\\qquad \\mathcal A:=\\mathcal P(\\Omega).$$\nThis is countable under the explicit encoding $(n,x)\\mapsto(n,\\sum_{j=1}^{n}x_j2^{j-1})$. Give the space the point masses\n$$\\mathbb P(\\{(n,x)\\}):=p_n\\prod_{j=1}^{n}b_\\eta(x_j),$$\nwhere the empty product for $n=0$ is $1$. For each fixed $n$, the product factors define the conditional product law $Q_n$ on $\\{0,1\\}^n$; hence its coordinates are independent Bernoulli variables with success probability $\\eta$. Since $\\sum_{x\\in\\{0,1\\}^n}Q_n(\\{x\\})=(\\eta+(1-\\eta))^n=1$, these point masses sum to one and define a probability measure $\\mathbb P$ on $(\\Omega,\\mathcal A)$. Define $N(n,x):=n$ and $K(n,x):=\\sum_{j=1}^n x_j$. For every nonnegative random variable $Y$ on this space, use the expectation\n$$\\mathbb E Y:=\\sum_{(n,x)\\in\\Omega}Y(n,x)\\,\\mathbb P(\\{(n,x)\\}).$$\nThe marginal law of $N$ is $(p_n)$, and the conditional count law of $K$ given $N=n$ is the binomial law induced by $Q_n$. If $\\mathbb E K>0$, define $g_K^{(2)}(0):=\\mathbb E[K(K-1)]/(\\mathbb E K)^2$. Then\n$$\\mathbb E K=\\eta\\mu,\\qquad \\mathbb E[K(K-1)]=\\eta^2F_2.$$\nConsequently the normalized zero-delay factorial correlation is unchanged:\n$$g_K^{(2)}(0)=\\frac{\\mathbb E[K(K-1)]}{(\\mathbb E K)^2}=\\frac{F_2}{\\mu^2}=g_N^{(2)}(0)=g_v^{(2)}(0).$$\nThis is a model deduction conditional on independent constant-efficiency thinning; it is not a universal property of real detectors.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The statement of [F1] at $m=1$ gives $\\mu=1$ and $F_2=1(1-1)=0$, so the postulate's denominator is positive and $g_N^{(2)}(0)=0$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F2], conditional on the certain incoming count $N=1$, the only possible registered counts are $K=0$ and $K=1$, with probabilities $1-\\eta$ and $\\eta$. Thus $\\mathbb E K=\\eta>0$ and $\\mathbb E[K(K-1)]=0$, giving $g_K^{(2)}(0)=0$; this conclusion concerns the selected ideal mode and the stated apparatus assumptions only.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example fixes exactly one incoming photon, so an empty preparation is outside its stated setup."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example: the second factorial moment is zero; step 1.1 computes this directly and step 2.1 shows loss preserves it."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example and step 1.1 are exactly the one-photon case; step 2.1 enumerates the two possible registered counts."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The stated efficiency obeys 0<η≤1, so the zero-efficiency case with undefined normalized statistic is excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example includes η=1; step 2.1 then yields K=1 surely and g²(0)=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The example selects one explicitly specified normalized mode and invokes only the already stated theorem results."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example is a one-way conditional calculation, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example is a one-way conditional calculation, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "one-photon loss outcomes",
+          "status": "checked",
+          "evidence": "Step 2.1 enumerates K=0,1 with probabilities 1−η,η and computes mean η and second factorial moment zero."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-74-author-self-check",
+        "notes": "Authoring consistency review checked every numbered argument against its named facts, exact supplier interface, stated domains and boundary assumptions. This record is not independent proof approval."
+      }
+    }
+  }
+}

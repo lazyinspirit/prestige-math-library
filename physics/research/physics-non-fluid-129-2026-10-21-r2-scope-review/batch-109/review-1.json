@@ -1,0 +1,42 @@
+{
+  "version": 1,
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "batch": "109",
+  "round": 1,
+  "reviewed_items": [
+    "def-qsmx-secular-thermal-generator",
+    "thm-qsmx-secular-gibbs-stationarity",
+    "thm-qsmx-spohn-finite-inequality",
+    "cex-qsmx-stationarity-without-relaxation"
+  ],
+  "reviewed_pages": [
+    "qsmx-open-entropy-production",
+    "qsmx-open-entropy-production-examples"
+  ],
+  "decision": "escalate",
+  "reason": "The round-0 definition findings are resolved, and I checked the affected consumers and current item uses; no outside item consumers were found. The remaining CEX units omission is local, but this is the final review round. The mathematical supplier chain is otherwise sound: the KMS stationarity/no-relaxation scope matches [Rivas–Huelga §6.2.8](https://arxiv.org/pdf/1104.5242) and [Lin §3](https://ruizhezhang.com/teaching_2025/Lindblad_Notes.pdf), and the DPI input matches [Watrous, Theorem 5.35](https://cs.uwaterloo.ca/~watrous/TQI/TQI.5.pdf).",
+  "findings": [
+    {
+      "id": "cex-qsmx-stationarity-without-relaxation",
+      "type": "local",
+      "reason": "The Statement defines the Gibbs density using a Hermitian H and real β but gives no units; the Given later assigns β units J⁻¹ without specifying H’s energy units. State that H has entries in joules and β is in J⁻¹, and specify H=0 joules in the example so βH is dimensionless."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "thm-qsmx-secular-gibbs-stationarity",
+      "decision": "accept",
+      "reason": "The only current item consumer of the repaired generator Definition now states the rate-matrix positivity criterion and correctly uses it in the GKSL factorization and stationarity proof."
+    },
+    {
+      "id": "cex-qsmx-stationarity-without-relaxation",
+      "decision": "accept",
+      "reason": "The current counterexample consumer of the clarified Spohn statement explicitly defines density, faithful, Gibbs, and stationary. Its use of Spohn’s monotonicity result and its nonconvergence deduction are sound; the separate units issue is reported above."
+    },
+    {
+      "id": "thm-qsmx-spohn-finite-inequality",
+      "decision": "accept",
+      "reason": "The cross-batch DPI supplier covers the finite-channel map and positive-semidefinite inputs used in the proof. The supplier remains explicitly identified as a draft with independent proof review pending."
+    }
+  ]
+}

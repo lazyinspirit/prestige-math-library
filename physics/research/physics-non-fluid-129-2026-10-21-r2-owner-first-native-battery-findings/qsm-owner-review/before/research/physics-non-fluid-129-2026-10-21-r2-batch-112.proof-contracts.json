@@ -1,0 +1,1022 @@
+{
+  "version": 1,
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "batch": "112",
+  "level": 3,
+  "scope": [
+    "def-qsmx-transverse-ising-majoranas",
+    "lem-qsmx-transverse-ising-majorana-car",
+    "lem-qsmx-real-skew-orthogonal-normal-form",
+    "thm-qsmx-open-ising-quadratic",
+    "lem-qsmx-l2-fourier-unitarity",
+    "thm-qsmx-ising-bulk-symbol-gap",
+    "ex-qsmx-ising-classical-and-field-limits"
+  ],
+  "contracts": {
+    "def-qsmx-transverse-ising-majoranas": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qsm-pauli-two-qubit-conventions",
+          "source_section": "Definition",
+          "quote": "For two $2\\times2$ matrices $A,B$, their tensor product acts by $(A\\otimes B)(u\\otimes v)=Au\\otimes Bv$ and is extended linearly.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The Pauli matrices on each fixed tensor factor are everywhere-defined finite-dimensional endomorphisms of the product Hilbert space.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The finite products defining the strings and Majorana operators, and the finite sums defining the Hamiltonian, are well-defined matrices; the bond sum stops at N-1 and has no periodic edge.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "N is required to be at least one."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: For N=1, S_0 is the identity and the bond sum is empty."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: At N=1, both gamma operators are exactly X_1 and Y_1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The definition asserts no eigenvalue multiplicity claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The bond range 1<=j<N excludes a bond from N to 1 for every N."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Only a fixed finite tensor product is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition asserts no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "one-site chain",
+          "inputs": "N=1",
+          "calculation": "S_0=I, H_1=-hZ_1, and the interaction sum has no terms.",
+          "result": "The construction is defined without a periodic boundary term."
+        }
+      ]
+    },
+    "lem-qsmx-transverse-ising-majorana-car": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qsmx-transverse-ising-majoranas",
+          "source_section": "Definition",
+          "quote": "The ordered Majorana operators are $$\\gamma_{2j-1}=S_{j-1}X_j,\\qquad \\gamma_{2j}=S_{j-1}Y_j\\qquad(1\\le j\\le N).$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qsm-pauli-two-qubit-conventions",
+          "source_section": "Definition",
+          "quote": "Direct conjugate-transpose and multiplication of the displayed matrices give $\\sigma_x^*=\\sigma_x$, $\\sigma_y^*=\\sigma_y$, $\\sigma_z^*=\\sigma_z$, and $\\sigma_x^2=\\sigma_y^2=\\sigma_z^2=I_2$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Each string commutes with its final-site X or Y factor, is Hermitian, and squares to identity; hence each gamma is Hermitian and squares to identity.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The two Majoranas at one site anticommute because XY=iZ and YX=-iZ.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For distinct sites, the later Jordan-Wigner string contains exactly one Z factor at the earlier site, producing exactly one minus sign; all distinct-site factors otherwise commute.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "N>=1 is assumed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The square relation gives {gamma_a,gamma_a}=2I."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: For N=1 the only distinct pair is X_1,Y_1 and XY+YX=0."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The result concerns operator relations, not eigenvalue multiplicities."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The same string argument applies to the first and last sites; strings stop at the listed site index."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All products are finite and fixed by the site order."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No biconditional is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No biconditional is asserted."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "same-site pair",
+          "inputs": "gamma_(2j-1), gamma_(2j)",
+          "calculation": "Their products in opposite orders are iZ_j and -iZ_j.",
+          "result": "Their anticommutator is zero."
+        },
+        {
+          "case": "different-site pair",
+          "inputs": "j<ell",
+          "calculation": "Exactly one Z_j in the later string anticommutes with X_j or Y_j.",
+          "result": "The two gamma operators anticommute."
+        }
+      ]
+    },
+    "lem-qsmx-real-skew-orthogonal-normal-form": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-qsm-matrix-state-calculus",
+          "source_section": "Statement",
+          "quote": "Every Hermitian endomorphism $M$ has an orthonormal eigenbasis with real eigenvalues.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The complexification iA is Hermitian, so its finite real spectrum has an orthonormal eigenbasis; real conjugation pairs each positive eigenvalue with its negative.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The real and imaginary parts of a normalized positive-eigenvalue vector form an orthogonal equal-norm pair that realizes the displayed 2x2 skew block.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The positive eigenspace pairs give mutually orthogonal real planes; the remaining real kernel has even dimension and pairs into zero blocks.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "step 2.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The singular values are epsilon_r repeated twice on each block, so each positive block energy lists one positive singular value.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The matrix size is 2N with N>=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: A=0 has N zero blocks and a 2N-dimensional kernel."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: For N=1, every real 2x2 skew matrix already has the stated block form after choosing its orientation."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: An orthonormal basis is chosen within each repeated eigenspace, and all resulting real planes remain orthogonal."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no limiting parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Only finite-dimensional orthonormal bases are chosen."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No biconditional is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No biconditional is asserted."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "zero matrix",
+          "inputs": "A=0 in M_(2N)(R)",
+          "calculation": "Every block has epsilon_r=0.",
+          "result": "The kernel is paired into N zero blocks."
+        },
+        {
+          "case": "single nonzero plane",
+          "inputs": "A=[[0,a],[-a,0]]",
+          "calculation": "Choose epsilon=|a| and, if needed, reverse one basis vector.",
+          "result": "The canonical block is [[0,epsilon],[-epsilon,0]]."
+        }
+      ]
+    },
+    "thm-qsmx-open-ising-quadratic": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following statement.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qsmx-transverse-ising-majoranas",
+          "source_section": "Definition",
+          "quote": "The upper limit $N-1$ is the open-boundary convention: no term couples site $N$ to site $1$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qsmx-transverse-ising-majorana-car",
+          "source_section": "Statement",
+          "quote": "Then each $\\gamma_a$ is Hermitian and $$\\gamma_a\\gamma_b+\\gamma_b\\gamma_a=2\\delta_{ab}I_{\\mathcal H_N}\\qquad(1\\le a,b\\le2N).$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qsmx-real-skew-orthogonal-normal-form",
+          "source_section": "Statement",
+          "quote": "For every integer $N\\ge1$ and real skew-symmetric matrix $A\\in M_{2N}(\\mathbb R)$, there are an orthogonal real matrix $O$ and numbers $\\epsilon_1,\\ldots,\\epsilon_N\\ge0$ such that $$OAO^{\\mathsf T}=\\bigoplus_{r=1}^N\\begin{pmatrix}0&\\epsilon_r\\\\-\\epsilon_r&0\\end{pmatrix}.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qsm-models-diagonal-occupation-trace",
+          "source_section": "Statement",
+          "quote": "\\Xi_F=\\operatorname{Tr}G_{\\beta,\\mu}=\\prod_j(1+q_j)<\\infty.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-qsm-matrix-state-calculus",
+          "source_section": "Statement",
+          "quote": "Every Hermitian endomorphism $M$ has an orthonormal eigenbasis with real eigenvalues.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The adjacent Majorana bilinears reproduce the field and open bond terms with the stated signs; the missing j=N bond is absent.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The skew coefficient entries 2h and 2J give exactly H=(i/4) gamma^T A_N gamma.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The real orthogonal change of Majoranas preserves CAR and block-diagonalizes the matrix expression from the preceding step into epsilon_r(n_r-1/2).",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "algebra",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The commuting occupation projections have 2^N one-dimensional joint eigenspaces, giving the finite fermionic occupation basis on the spin space.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "The finite fermionic trace supplier and the scalar energy shift yield the product of 2 cosh factors, with factor two for zero modes.",
+          "step": "5.1",
+          "inputs": [
+            "A1",
+            "F4",
+            "F5",
+            "step 3.1",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "N>=1 is required."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: For epsilon_r=0 the mode has two occupations with equal zero energy and contributes 2 cosh(0)=2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: For N=1 the bond sum is empty and the trace is 2 cosh(beta |h|)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Repeated positive block energies are counted once per two-dimensional block, hence with the correct Fock multiplicity."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The open chain has bonds only for 1<=j<N; no parity-dependent wraparound term occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The mode set is finite; Countable Choice is retained only because the selected trace supplier assumes it."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No biconditional is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No biconditional is asserted."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "one-site chain",
+          "inputs": "N=1, epsilon_1=2|h|",
+          "calculation": "Z=2 cosh(beta epsilon_1/2).",
+          "result": "Z=2 cosh(beta |h|), equal to Tr(exp(beta h Z_1))."
+        },
+        {
+          "case": "zero Hamiltonian",
+          "inputs": "h=J=0",
+          "calculation": "All N block energies vanish.",
+          "result": "Z=2^N, the dimension of the spin Hilbert space."
+        }
+      ]
+    },
+    "lem-qsmx-l2-fourier-unitarity": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following statement.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-the-one-dimensional-torus-and-normalized-haar-integral",
+          "source_section": "Definition",
+          "quote": "Thus $(\\mathbb T,\\mathcal B(\\mathbb T),m_{\\mathbb T})$ is a probability measure space",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-square-summable-family-on-an-arbitrary-index-set",
+          "source_section": "Definition",
+          "quote": "\\ell^2(I,\\mathbb F):=\\{\\,a=(a_i)_{i\\in I} : \\|a\\|_2<+\\infty\\,\\}.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-fourier-basis-and-parseval-on-the-n-torus",
+          "source_section": "Statement",
+          "quote": "the Fourier coefficient map is a surjective linear isometry of $L^2(\\mathbb T^n)$ onto $\\ell^2(\\mathbb Z^n,\\mathbb C)",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Orthogonality of the torus characters gives exact preservation of inner products for finite-support two-component sequences.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The inverse coefficient isometry is the finite Fourier polynomial on finite support and supplies the unique unitary completion; truncation proves uniqueness on a dense domain.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: The zero sequence maps to the zero L2 class."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The norm identity holds when all coefficients vanish."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: A single coefficient x_j maps to x_j e^{ijk}, whose L2 norm equals ||x_j||."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The lemma asserts a unitary map, not a spectral multiplicity statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no limiting parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Countable Choice is explicitly stated and matches the Fourier-basis supplier hypothesis."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No biconditional is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No biconditional is asserted."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "one-site support",
+          "inputs": "x_j=w and x_l=0 for l!=j",
+          "calculation": "F_0 x(k)=w e^{ijk} and the normalized torus integral of |e^{ijk}|^2 is 1.",
+          "result": "The Fourier map preserves the norm of this sequence."
+        },
+        {
+          "case": "two distinct sites",
+          "inputs": "x_j=w, y_l=z with j!=l",
+          "calculation": "The integral of e^{i(j-l)k} is zero.",
+          "result": "Distinct lattice coordinates remain orthogonal."
+        }
+      ]
+    },
+    "thm-qsmx-ising-bulk-symbol-gap": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following statement.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qsmx-transverse-ising-majoranas",
+          "source_section": "Definition",
+          "quote": "For real $h,J$ measured in joules define the finite open-chain matrix $$H_N(h,J)=-h\\sum_{j=1}^N Z_j-J\\sum_{j=1}^{N-1}X_jX_{j+1}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-qsmx-open-ising-quadratic",
+          "source_section": "Statement",
+          "quote": "The chain is open throughout; no periodic Jordan–Wigner parity boundary term is included.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qsmx-l2-fourier-unitarity",
+          "source_section": "Statement",
+          "quote": "Then $\\mathcal F_0$ preserves inner products on finitely supported sequences and has a unique extension to a unitary $\\mathcal F:\\ell^2(\\mathbb Z;\\mathbb C^2)\\to L^2(\\mathbb T;\\mathbb C^2)$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-square-summable-family-on-an-arbitrary-index-set",
+          "source_section": "Definition",
+          "quote": "\\ell^2(I,\\mathbb F):=\\{\\,a=(a_i)_{i\\in I} : \\|a\\|_2<+\\infty\\,\\}.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-bounded-linear-operator",
+          "source_section": "Definition",
+          "quote": "A $\\mathbb K$-linear map $T:X\\to Y$ ([[def-linear-map]]) is a **bounded linear operator** when there is a real constant $C \\ge 0$ such that $$\\|Tx\\| \\le C\\|x\\| \\qquad \\text{for all } x \\in X.$$",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-resolvent-and-spectrum-of-a-closed-unbounded-operator",
+          "source_section": "Definition",
+          "quote": "the **spectrum** is $\\sigma(T):=\\mathbb C\\setminus\\rho(T)$.",
+          "uses": [
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-hilbert-space-adjoint",
+          "source_section": "Definition",
+          "quote": "It is the unique map $K\\to H$ satisfying the displayed identity",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The shift block form gives the Hilbert adjoints, makes A bounded and skew-adjoint, and hence makes K=iA bounded with K*=K.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fourier transforms of the two lattice shifts yield the displayed 2x2 convolution symbol.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The Hermitian symbol has eigenvalues plus and minus 2 times the modulus of h-J exp(ik), giving the displayed dispersion.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Outside the continuous band union, the dispersion identity and a uniformly bounded matrix inverse give the multiplication operator a bounded resolvent inverse.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F4",
+            "F5",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-2",
+          "claim": "Normalized Fourier packets supported on shrinking arcs are approximate eigenvectors, placing every band value in the spectrum.",
+          "step": "4.2",
+          "inputs": [
+            "A1",
+            "F2",
+            "F5",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "The two spectral inclusions give the exact spectrum, and minimizing the dispersion gives 2||h|-|J|| and the exact gap-closing condition.",
+          "step": "5.1",
+          "inputs": [
+            "step 3.1",
+            "step 4.1",
+            "step 4.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The lattice is indexed by all integers."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: If h=J=0 then M(k)=0 for every k and the spectrum is {0}."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The operator is an infinite translation-invariant lattice operator."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: At a=0 both symbol eigenvalues are zero; the packet argument uses any fixed unit vector."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: For hJ>0 the minimum occurs at k=0; for hJ<0 it occurs at k=pi; if hJ=0 the dispersion is constant."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Countable Choice is explicitly carried from the Fourier-unitarity theorem."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Statement: The computed nonnegative minimum is zero when |h|=|J|."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Statement: If the minimum vanishes then (|h|-|J|)^2=0, hence |h|=|J|."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "zero field",
+          "inputs": "h=0, J real",
+          "calculation": "epsilon(k)=2|J| for all k.",
+          "result": "The positive band is gapped unless J=0."
+        },
+        {
+          "case": "zero interaction",
+          "inputs": "J=0, h real",
+          "calculation": "epsilon(k)=2|h| for all k.",
+          "result": "The positive band is gapped unless h=0."
+        },
+        {
+          "case": "positive critical line",
+          "inputs": "h=J>0",
+          "calculation": "epsilon(0)=0.",
+          "result": "The bulk band closes."
+        },
+        {
+          "case": "negative critical line",
+          "inputs": "h=-J with hJ<0 and |h|=|J|",
+          "calculation": "epsilon(pi)=0.",
+          "result": "The bulk band closes at the shifted momentum."
+        }
+      ]
+    },
+    "ex-qsmx-ising-classical-and-field-limits": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following statement.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "thm-qsmx-open-ising-quadratic",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qsmx-transverse-ising-majoranas",
+          "source_section": "Definition",
+          "quote": "For real $h,J$ measured in joules define the finite open-chain matrix $$H_N(h,J)=-h\\sum_{j=1}^N Z_j-J\\sum_{j=1}^{N-1}X_jX_{j+1}.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qsmx-open-ising-quadratic",
+          "source_section": "Statement",
+          "quote": "its finite Gibbs trace is $$Z_N(\\beta;h,J):=\\operatorname{Tr}_{\\mathcal H_N}(e^{-\\beta H_N(h,J)})=\\prod_{r=1}^N2\\cosh\\!\\left(\\frac{\\beta\\epsilon_r}{2}\\right).$$",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qsm-matrix-state-calculus",
+          "source_section": "Statement",
+          "quote": "Every Hermitian endomorphism $M$ has an orthonormal eigenbasis with real eigenvalues.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In the X basis the interaction-only energy is minimized exactly by the two constant spin configurations, including the N=1 case.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "In the Z basis each nonzero field term has one unique minimizing sign, giving the unique polarized product configuration.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "The finite trace product follows from the open-chain reduction for beta>0.",
+          "step": "1.3",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The finite matrix exponential is entire in its parameters by locally uniform convergence of its power series, and its real trace is strictly positive by the finite Hermitian spectral decomposition.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "N>=1 is assumed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: At h=J=0 all 2^N configurations have zero energy and Z_N=2^N."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: At N=1 there are no bonds; for h=0 both X configurations minimize, and for h!=0 one Z configuration minimizes."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: At h=0,J>0 the only minimizing X configurations are the two globally aligned ones."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The h=0 and J=0 parameter axes are evaluated directly."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The endpoint energy calculations are finite; Countable Choice is present only through the cited trace theorem."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No biconditional is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No biconditional is asserted."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "N=1 field-only",
+          "inputs": "J=0, h>0",
+          "calculation": "The two energies are -h and +h.",
+          "result": "There is one ground configuration and Z_1=2 cosh(beta h)."
+        },
+        {
+          "case": "N=2 interaction-only",
+          "inputs": "h=0, J>0",
+          "calculation": "The four X configurations have energies -J,-J,+J,+J.",
+          "result": "Exactly the two aligned configurations are ground configurations."
+        }
+      ]
+    }
+  }
+}

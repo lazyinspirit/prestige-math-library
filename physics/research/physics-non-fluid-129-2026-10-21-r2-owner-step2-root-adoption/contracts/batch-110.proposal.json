@@ -1,0 +1,876 @@
+{
+  "version": 1,
+  "run": "physics-non-fluid-129-2026-10-21-r2",
+  "batch": "110",
+  "scope": [
+    "def-qsmx-lattice-current-and-limits",
+    "lem-qsmx-lattice-current-continuity",
+    "thm-qsmx-finite-mazur-bound",
+    "thm-qsmx-conditional-diffusive-green-kubo",
+    "cex-qsmx-dc-order-of-limits"
+  ],
+  "contracts": {
+    "def-qsmx-lattice-current-and-limits": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Open chains have L≥2 and rings L≥3, so their site and existing-bond index sets are nonempty. The Hilbert space is now explicitly nonzero for Gibbs normalization; absent open boundary currents are individually defined as zero, rather than an empty-chain extension.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/qsm_boundary (scientific owner; no independent acceptance)",
+            "reason": "Open chains have L≥2 and rings L≥3, so their site and existing-bond index sets are nonempty. The Hilbert space is now explicitly nonzero for Gibbs normalization; absent open boundary currents are individually defined as zero, rather than an empty-chain extension."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: setting each q_j=0 gives every bond current and connected correlation equal to zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A one-site system is outside the explicitly stated open-chain and periodic-ring domains."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: no nondegeneracy assumption on H_L or its energy levels is imposed; all finite Hermitian H_L are allowed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: absent open-chain boundary currents are zero, while the periodic bond across the ring boundary is included."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: all spaces, site data, finite sums and thermal matrices are explicitly specified; no selection principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition asserts no equivalence.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/qsm_boundary (scientific owner; no independent acceptance)",
+            "reason": "Local charge conservation and a fixed bond orientation define a Hermitian current and its connected Gibbs correlation. This convention also requires a declared order of limits for transport, but asserts no equivalence between a correlation formula and existence of a transport coefficient.",
+            "item_sha256": "0cc3ce2f1afc3d6083a3f8268b13d09a311daa92c685a691c407399c9256232f",
+            "row_sha256": "2cc16007e6be1414ef1525c804a25610ac5fdfcad63267dab19022494492ade8"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition asserts no equivalence.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/qsm_boundary (scientific owner; no independent acceptance)",
+            "reason": "Local charge conservation and a fixed bond orientation define a Hermitian current and its connected Gibbs correlation. This convention also requires a declared order of limits for transport, but asserts no equivalence between a correlation formula and existence of a transport coefficient.",
+            "item_sha256": "0cc3ce2f1afc3d6083a3f8268b13d09a311daa92c685a691c407399c9256232f",
+            "row_sha256": "d59dac98d80743100c5b8017a4ab2349de1afd3a52f7743a3aed53e3cf24b9c8"
+          }
+        }
+      ],
+      "finite_checks": [],
+      "supplier_excerpts": [
+        {
+          "supplier": "thm-qsm-dt-finite-kubo",
+          "carrier": "items/thm-qsm-dt-finite-kubo.md",
+          "status": "Exact current statement interface inspected; readiness/proof acceptance is not inferred from the carrier label.",
+          "source_section": "Statement",
+          "exact_statement": "Let $\\mathcal H$ be a complex Hilbert space of finite dimension $d\\ge1$, $H=H^*$ with energy unit J, $\\hbar>0$ with unit J s, $\\beta>0$ with unit J$^{-1}$, and let $\\sigma=Z_\\beta^{-1}e^{-\\beta H}$ be the stationary Gibbs density from [[thm-qsm-dt-finite-unitary]]. Let $A=A^*$ and $B=B^*$ be matrices, let $T>0$ be finite in s, let $h:[0,T]\\to\\mathbb R$ be continuous, and let $\\epsilon\\in\\mathbb R$ be dimensionless; $h(t)B$ has unit J. Put $U_0(t)=e^{-itH/\\hbar}$ for time $t$ in s, $\\alpha_t(A)=U_0(t)^*AU_0(t)$, and $B_t=\\alpha_t(B)$. Let $W_\\epsilon$ solve\n$$W_\\epsilon'(t)=\\frac{i\\epsilon h(t)}{\\hbar}B_tW_\\epsilon(t),\\qquad W_\\epsilon(0)=I,$$\nand set $U_\\epsilon(t)=U_0(t)W_\\epsilon(t)$ and $\\rho_I(t)=W_\\epsilon(t)\\sigma W_\\epsilon(t)^*$. Then $U_\\epsilon$ solves $i\\hbar U_\\epsilon'(t)=(H-\\epsilon h(t)B)U_\\epsilon(t)$, $U_\\epsilon(0)=I$, and $\\rho_\\epsilon(t):=U_\\epsilon(t)\\sigma U_\\epsilon(t)^*$ satisfies $\\operatorname{Tr}(\\rho_\\epsilon(t)A)=\\operatorname{Tr}(\\rho_I(t)\\alpha_t(A))$. Define\n$$R_{AB}(u)=\\frac{i}{\\hbar}\\operatorname{Tr}\\!\\left(\\sigma[\\alpha_u(A),B]\\right),\\qquad C_T=\\frac{2}{\\hbar}\\int_0^T|h(s)|\\,\\|B\\|\\,ds.$$\nThen $W_\\epsilon(t)$ is unitary and, for $0\\le t\\le T$,\n$$\\operatorname{Tr}(\\rho_I(t)\\alpha_t(A))=\\operatorname{Tr}(\\sigma\\alpha_t(A))+\\epsilon\\int_0^t h(s)R_{AB}(t-s)\\,ds+r_\\epsilon(t),\\qquad |r_\\epsilon(t)|\\le\\|A\\|\\frac{(|\\epsilon|C_T)^2e^{|\\epsilon|C_T}}2.$$\nThe initial Gibbs matrix is fixed as $\\epsilon$ varies. The result is an exact finite-time first variation with a controlled remainder, not a static derivative of a re-prepared Gibbs family. $C_T$ and $\\epsilon$ are dimensionless, and $R_{AB}$ has units $[A][B]/(\\mathrm J\\,\\mathrm s)$.",
+          "relevant_hypotheses_and_conventions": "Let $\\mathcal H$ be a complex Hilbert space of finite dimension $d\\ge1$, $H=H^*$ with energy unit J, $\\hbar>0$ with unit J s, $\\beta>0$ with unit J$^{-1}$, and let $\\sigma=Z_\\beta^{-1}e^{-\\beta H}$ be the stationary Gibbs density from [[thm-qsm-dt-finite-unitary]]. Let $A=A^*$ and $B=B^*$ be matrices, let $T>0$ be finite in s, let $h:[0,T]\\to\\mathbb R$ be continuous, and let $\\epsilon\\in\\mathbb R$ be dimensionless; $h(t)B$ has unit J. Put $U_0(t)=e^{-itH/\\hbar}$ for time $t$ in s, $\\alpha_t(A)=U_0(t)^*AU_0(t)$, and $B_t=\\alpha_t(B)$. Let $W_\\epsilon$ solve\n$$W_\\epsilon'(t)=\\frac{i\\epsilon h(t)}{\\hbar}B_tW_\\epsilon(t),\\qquad W_\\epsilon(0)=I,$$\nand set $U_\\epsilon(t)=U_0(t)W_\\epsilon(t)$ and $\\rho_I(t)=W_\\epsilon(t)\\sigma W_\\epsilon(t)^*$. Then $U_\\epsilon$ solves $i\\hbar U_\\epsilon'(t)=(H-\\epsilon h(t)B)U_\\epsilon(t)$, $U_\\epsilon(0)=I$, and $\\rho_\\epsilon(t):=U_\\epsilon(t)\\sigma U_\\epsilon(t)^*$ satisfies $\\operatorname{Tr}(\\rho_\\epsilon(t)A)=\\operatorname{Tr}(\\rho_I(t)\\alpha_t(A))$. Define\n$$R_{AB}(u)=\\frac{i}{\\hbar}\\operatorname{Tr}\\!\\left(\\sigma[\\alpha_u(A),B]\\right),\\qquad C_T=\\frac{2}{\\hbar}\\int_0^T|h(s)|\\,\\|B\\|\\,ds.$$\nThen $W_\\epsilon(t)$ is unitary and, for $0\\le t\\le T$,\n$$\\operatorname{Tr}(\\rho_I(t)\\alpha_t(A))=\\operatorname{Tr}(\\sigma\\alpha_t(A))+\\epsilon\\int_0^t h(s)R_{AB}(t-s)\\,ds+r_\\epsilon(t),\\qquad |r_\\epsilon(t)|\\le\\|A\\|\\frac{(|\\epsilon|C_T)^2e^{|\\epsilon|C_T}}2.$$\nThe initial Gibbs matrix is fixed as $\\epsilon$ varies. The result is an exact finite-time first variation with a controlled remainder, not a static derivative of a re-prepared Gibbs family. $C_T$ and $\\epsilon$ are dimensionless, and $R_{AB}$ has units $[A][B]/(\\mathrm J\\,\\mathrm s)$.",
+          "supplier_proof_status": "Published supplier statement and complete proof inspected in the local mathematical supplier; its publication status does not certify this consumer.",
+          "consumer_use": "Declared mathematical prerequisite for the exact conventions and finite-response interface used by this definition."
+        }
+      ]
+    },
+    "lem-qsmx-lattice-current-continuity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qsmx-lattice-current-and-limits",
+          "source_section": "Definition",
+          "quote": "Fix either a finite open chain with sites $\\{1,\\ldots,L\\}$, $L\\ge2$, or a periodic chain with sites $\\mathbb Z/L\\mathbb Z$, $L\\ge3$, and denote its site set by $\\Lambda_L$. Let $\\mathcal H_L$ be a nonzero finite-dimensional complex Hilbert space. For each site $j$, let $q_j=q_j^*$ be a bounded charge observable, with physical unit $\\mathsf Q$. For each oriented nearest-neighbor bond $(j,j+1)$, let $h_{j,j+1}=h_{j,j+1}^*$ be an energy operator in joules. Require $[h_{k,k+1},q_j]=0$ whenever $j\\notin\\{k,k+1\\}$, and require local charge conservation $[h_{j,j+1},q_j+q_{j+1}]=0$. On an open chain set $H_L=\\sum_{j=1}^{L-1}h_{j,j+1}$; on a ring set $H_L=\\sum_{j\\in\\mathbb Z/L\\mathbb Z}h_{j,j+1}$ with periodic indices. For an open chain define the absent boundary currents $j_{0,1}=j_{L,L+1}=0$. Use $\\hbar>0$ in joule-seconds. These finite local data may be realized on a tensor-product spin space or on a finite fixed-particle site space, provided the stated commutation conditions hold.\n\nThe oriented bond current from $j$ to $j+1$ is\n$$j_{j,j+1}:=\\frac{i}{\\hbar}[h_{j,j+1},q_{j+1}].$$\nIt has unit $\\mathsf Q\\,\\mathrm{s}^{-1}$. The total current is the sum over existing bonds, $J_L:=\\sum_{(j,j+1)}j_{j,j+1}$, and its Heisenberg evolution for $t\\in\\mathbb R$ is $J_L(t):=e^{iH_Lt/\\hbar}J_Le^{-iH_Lt/\\hbar}$. For finite inverse temperature $\\beta>0$ in joules$^{-1}$, define $\\rho_{\\beta,L}:=e^{-\\beta H_L}/\\operatorname{Tr}(e^{-\\beta H_L})$ and $\\omega_{\\beta,L}(A):=\\operatorname{Tr}(\\rho_{\\beta,L}A)$. Write $J_L^\\circ:=J_L-\\omega_{\\beta,L}(J_L)I$ and $J_L^\\circ(t):=e^{iH_Lt/\\hbar}J_L^\\circ e^{-iH_Lt/\\hbar}$. Define the real, connected, symmetrized correlation per site by\n$$C_L(t):=\\frac{1}{L}\\operatorname{Re}\\,\\omega_{\\beta,L}\\!\\left(J_L^\\circ(t)J_L^\\circ\\right)=\\frac{1}{2L}\\omega_{\\beta,L}\\!\\left(J_L^\\circ(t)J_L^\\circ+J_L^\\circ J_L^\\circ(t)\\right).$$\nThe correlation has unit $\\mathsf Q^2\\,\\mathrm{s}^{-2}$ per site.\n\nThis definition assigns no transport coefficient by itself. Any proposed finite-volume or thermodynamic transport quantity must additionally state its time cutoff, frequency regulator (for example $e^{-\\eta t}$ with $\\eta>0$ in seconds$^{-1}$), spatial normalization, and the exact order in which $L\\to\\infty$, the time cutoff tends to infinity, and any regulator is removed. Existence of those limits is not part of this definition.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Since $h_{j,j+1}$ and $q_{j+1}$ are self-adjoint, $[h_{j,j+1},q_{j+1}]^*=-[h_{j,j+1},q_{j+1}]$. Thus $j_{j,j+1}=(i/\\hbar)[h_{j,j+1},q_{j+1}]$ is self-adjoint.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "The Heisenberg derivative is $\\dot q_j=(i/\\hbar)\\sum_k[h_{k,k+1},q_j]$. By [A1], only the existing bonds immediately to the left and right of $j$ can contribute. The left contribution is $(i/\\hbar)[h_{j-1,j},q_j]=j_{j-1,j}$ when that bond exists, and is zero by the open-boundary convention otherwise.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "step": "1.3",
+          "claim": "For the right contribution, [A2] gives $[h_{j,j+1},q_j]=-[h_{j,j+1},q_{j+1}]$, so $(i/\\hbar)[h_{j,j+1},q_j]=-j_{j,j+1}$ when that bond exists. If it is absent at the open right endpoint, both terms are zero by convention.",
+          "inputs": [
+            "given",
+            "A1",
+            "A2",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Combining steps 1.2 and 1.3 proves $\\dot q_j=j_{j-1,j}-j_{j,j+1}$. Summing over $j\\in\\Lambda_L$ cancels every existing open-chain or periodic bond once with each sign, so $\\dot Q_L=0$, equivalently $[H_L,Q_L]=0$.",
+          "inputs": [
+            "step 1.2",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Its supplier admits only open chains with at least two sites or rings with at least three, on a nonzero finite Hilbert space. The total-charge sum is therefore over a nonempty site set;1.2–1.3 separately handle each absent endpoint bond.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/qsm_boundary (scientific owner; no independent acceptance)",
+            "reason": "Its supplier admits only open chains with at least two sites or rings with at least three, on a nonzero finite Hilbert space. The total-charge sum is therefore over a nonempty site set;1.2–1.3 separately handle each absent endpoint bond."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 and the local identity remain valid when the charge or bond terms vanish."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The one-site case is excluded by the finite-chain definition."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement imposes no spectral nondegeneracy condition; the commutator proof applies unchanged."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.2, 1.3 and 2.1 explicitly use zero absent open-boundary currents and cancel each existing bond once."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement gives finite sums of specified bond commutators, and the proof uses no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma asserts an identity and conservation, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma asserts an identity and conservation, not an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "supplier_excerpts": [
+        {
+          "supplier": "def-qsmx-lattice-current-and-limits",
+          "carrier": "items/def-qsmx-lattice-current-and-limits.md",
+          "status": "Exact current public interface transcribed by root at the drained Step2 join; original substantive source-use review retained in historical_source_interface and native/same-owner reports. No renewed full supplier-proof reading asserted.",
+          "source_section": "Definition",
+          "exact_statement": "Fix either a finite open chain with sites $\\{1,\\ldots,L\\}$, $L\\ge2$, or a periodic chain with sites $\\mathbb Z/L\\mathbb Z$, $L\\ge3$, and denote its site set by $\\Lambda_L$. Let $\\mathcal H_L$ be a nonzero finite-dimensional complex Hilbert space. For each site $j$, let $q_j=q_j^*$ be a bounded charge observable, with physical unit $\\mathsf Q$. For each oriented nearest-neighbor bond $(j,j+1)$, let $h_{j,j+1}=h_{j,j+1}^*$ be an energy operator in joules. Require $[h_{k,k+1},q_j]=0$ whenever $j\\notin\\{k,k+1\\}$, and require local charge conservation $[h_{j,j+1},q_j+q_{j+1}]=0$. On an open chain set $H_L=\\sum_{j=1}^{L-1}h_{j,j+1}$; on a ring set $H_L=\\sum_{j\\in\\mathbb Z/L\\mathbb Z}h_{j,j+1}$ with periodic indices. For an open chain define the absent boundary currents $j_{0,1}=j_{L,L+1}=0$. Use $\\hbar>0$ in joule-seconds. These finite local data may be realized on a tensor-product spin space or on a finite fixed-particle site space, provided the stated commutation conditions hold.\n\nThe oriented bond current from $j$ to $j+1$ is\n$$j_{j,j+1}:=\\frac{i}{\\hbar}[h_{j,j+1},q_{j+1}].$$\nIt has unit $\\mathsf Q\\,\\mathrm{s}^{-1}$. The total current is the sum over existing bonds, $J_L:=\\sum_{(j,j+1)}j_{j,j+1}$, and its Heisenberg evolution for $t\\in\\mathbb R$ is $J_L(t):=e^{iH_Lt/\\hbar}J_Le^{-iH_Lt/\\hbar}$. For finite inverse temperature $\\beta>0$ in joules$^{-1}$, define $\\rho_{\\beta,L}:=e^{-\\beta H_L}/\\operatorname{Tr}(e^{-\\beta H_L})$ and $\\omega_{\\beta,L}(A):=\\operatorname{Tr}(\\rho_{\\beta,L}A)$. Write $J_L^\\circ:=J_L-\\omega_{\\beta,L}(J_L)I$ and $J_L^\\circ(t):=e^{iH_Lt/\\hbar}J_L^\\circ e^{-iH_Lt/\\hbar}$. Define the real, connected, symmetrized correlation per site by\n$$C_L(t):=\\frac{1}{L}\\operatorname{Re}\\,\\omega_{\\beta,L}\\!\\left(J_L^\\circ(t)J_L^\\circ\\right)=\\frac{1}{2L}\\omega_{\\beta,L}\\!\\left(J_L^\\circ(t)J_L^\\circ+J_L^\\circ J_L^\\circ(t)\\right).$$\nThe correlation has unit $\\mathsf Q^2\\,\\mathrm{s}^{-2}$ per site.\n\nThis definition assigns no transport coefficient by itself. Any proposed finite-volume or thermodynamic transport quantity must additionally state its time cutoff, frequency regulator (for example $e^{-\\eta t}$ with $\\eta>0$ in seconds$^{-1}$), spatial normalization, and the exact order in which $L\\to\\infty$, the time cutoff tends to infinity, and any regulator is removed. Existence of those limits is not part of this definition.",
+          "relevant_hypotheses_and_conventions": "Fix either a finite open chain with sites $\\{1,\\ldots,L\\}$, $L\\ge2$, or a periodic chain with sites $\\mathbb Z/L\\mathbb Z$, $L\\ge3$, and denote its site set by $\\Lambda_L$. Let $\\mathcal H_L$ be a finite-dimensional complex Hilbert space. For each site $j$, let $q_j=q_j^*$ be a bounded charge observable, with physical unit $\\mathsf Q$. For each oriented nearest-neighbor bond $(j,j+1)$, let $h_{j,j+1}=h_{j,j+1}^*$ be an energy operator in joules. Require $[h_{k,k+1},q_j]=0$ whenever $j\\notin\\{k,k+1\\}$, and require local charge conservation $[h_{j,j+1},q_j+q_{j+1}]=0$. On an open chain set $H_L=\\sum_{j=1}^{L-1}h_{j,j+1}$; on a ring set $H_L=\\sum_{j\\in\\mathbb Z/L\\mathbb Z}h_{j,j+1}$ with periodic indices. For an open chain define the absent boundary currents $j_{0,1}=j_{L,L+1}=0$. Use $\\hbar>0$ in joule-seconds. These finite local data may be realized on a tensor-product spin space or on a finite fixed-particle site space, provided the stated commutation conditions hold.\n\nThe oriented bond current from $j$ to $j+1$ is\n$$j_{j,j+1}:=\\frac{i}{\\hbar}[h_{j,j+1},q_{j+1}].$$\nIt has unit $\\mathsf Q\\,\\mathrm{s}^{-1}$. The total current is the sum over existing bonds, $J_L:=\\sum_{(j,j+1)}j_{j,j+1}$, and its Heisenberg evolution for $t\\in\\mathbb R$ is $J_L(t):=e^{iH_Lt/\\hbar}J_Le^{-iH_Lt/\\hbar}$. For finite inverse temperature $\\beta>0$ in joules$^{-1}$, define $\\rho_{\\beta,L}:=e^{-\\beta H_L}/\\operatorname{Tr}(e^{-\\beta H_L})$ and $\\omega_{\\beta,L}(A):=\\operatorname{Tr}(\\rho_{\\beta,L}A)$. Write $J_L^\\circ:=J_L-\\omega_{\\beta,L}(J_L)I$ and $J_L^\\circ(t):=e^{iH_Lt/\\hbar}J_L^\\circ e^{-iH_Lt/\\hbar}$. Define the real, connected, symmetrized correlation per site by\n$$C_L(t):=\\frac{1}{L}\\operatorname{Re}\\,\\omega_{\\beta,L}\\!\\left(J_L^\\circ(t)J_L^\\circ\\right)=\\frac{1}{2L}\\omega_{\\beta,L}\\!\\left(J_L^\\circ(t)J_L^\\circ+J_L^\\circ J_L^\\circ(t)\\right).$$\nThe correlation has unit $\\mathsf Q^2\\,\\mathrm{s}^{-2}$ per site.\n\nThis definition assigns no transport coefficient by itself. Any proposed finite-volume or thermodynamic transport quantity must additionally state its time cutoff, frequency regulator (for example $e^{-\\eta t}$ with $\\eta>0$ in seconds$^{-1}$), spatial normalization, and the exact order in which $L\\to\\infty$, the time cutoff tends to infinity, and any regulator is removed. Existence of those limits is not part of this definition.",
+          "supplier_proof_status": "draft; this exact-quote refresh does not grant independent proof acceptance",
+          "consumer_use": "Cited at F1.",
+          "historical_source_interface": {
+            "source_section": "Definition",
+            "exact_statement": "Fix either a finite open chain with sites $\\{1,\\ldots,L\\}$, $L\\ge2$, or a periodic chain with sites $\\mathbb Z/L\\mathbb Z$, $L\\ge3$, and denote its site set by $\\Lambda_L$. Let $\\mathcal H_L$ be a finite-dimensional complex Hilbert space. For each site $j$, let $q_j=q_j^*$ be a bounded charge observable, with physical unit $\\mathsf Q$. For each oriented nearest-neighbor bond $(j,j+1)$, let $h_{j,j+1}=h_{j,j+1}^*$ be an energy operator in joules. Require $[h_{k,k+1},q_j]=0$ whenever $j\\notin\\{k,k+1\\}$, and require local charge conservation $[h_{j,j+1},q_j+q_{j+1}]=0$. On an open chain set $H_L=\\sum_{j=1}^{L-1}h_{j,j+1}$; on a ring set $H_L=\\sum_{j\\in\\mathbb Z/L\\mathbb Z}h_{j,j+1}$ with periodic indices. For an open chain define the absent boundary currents $j_{0,1}=j_{L,L+1}=0$. Use $\\hbar>0$ in joule-seconds. These finite local data may be realized on a tensor-product spin space or on a finite fixed-particle site space, provided the stated commutation conditions hold.\n\nThe oriented bond current from $j$ to $j+1$ is\n$$j_{j,j+1}:=\\frac{i}{\\hbar}[h_{j,j+1},q_{j+1}].$$\nIt has unit $\\mathsf Q\\,\\mathrm{s}^{-1}$. The total current is the sum over existing bonds, $J_L:=\\sum_{(j,j+1)}j_{j,j+1}$, and its Heisenberg evolution for $t\\in\\mathbb R$ is $J_L(t):=e^{iH_Lt/\\hbar}J_Le^{-iH_Lt/\\hbar}$. For finite inverse temperature $\\beta>0$ in joules$^{-1}$, define $\\rho_{\\beta,L}:=e^{-\\beta H_L}/\\operatorname{Tr}(e^{-\\beta H_L})$ and $\\omega_{\\beta,L}(A):=\\operatorname{Tr}(\\rho_{\\beta,L}A)$. Write $J_L^\\circ:=J_L-\\omega_{\\beta,L}(J_L)I$ and $J_L^\\circ(t):=e^{iH_Lt/\\hbar}J_L^\\circ e^{-iH_Lt/\\hbar}$. Define the real, connected, symmetrized correlation per site by\n$$C_L(t):=\\frac{1}{L}\\operatorname{Re}\\,\\omega_{\\beta,L}\\!\\left(J_L^\\circ(t)J_L^\\circ\\right)=\\frac{1}{2L}\\omega_{\\beta,L}\\!\\left(J_L^\\circ(t)J_L^\\circ+J_L^\\circ J_L^\\circ(t)\\right).$$\nThe correlation has unit $\\mathsf Q^2\\,\\mathrm{s}^{-2}$ per site.\n\nThis definition assigns no transport coefficient by itself. Any proposed finite-volume or thermodynamic transport quantity must additionally state its time cutoff, frequency regulator (for example $e^{-\\eta t}$ with $\\eta>0$ in seconds$^{-1}$), spatial normalization, and the exact order in which $L\\to\\infty$, the time cutoff tends to infinity, and any regulator is removed. Existence of those limits is not part of this definition.",
+            "status": "Exact current definition interface inspected; readiness/proof acceptance is not inferred from the carrier label.",
+            "supplier_proof_status": "Current exact definition statement inspected; proof is not applicable; no independent acceptance is implied."
+          }
+        }
+      ]
+    },
+    "thm-qsmx-finite-mazur-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qsmx-lattice-current-and-limits",
+          "source_section": "Definition",
+          "quote": "Fix either a finite open chain with sites $\\{1,\\ldots,L\\}$, $L\\ge2$, or a periodic chain with sites $\\mathbb Z/L\\mathbb Z$, $L\\ge3$, and denote its site set by $\\Lambda_L$. Let $\\mathcal H_L$ be a nonzero finite-dimensional complex Hilbert space. For each site $j$, let $q_j=q_j^*$ be a bounded charge observable, with physical unit $\\mathsf Q$. For each oriented nearest-neighbor bond $(j,j+1)$, let $h_{j,j+1}=h_{j,j+1}^*$ be an energy operator in joules. Require $[h_{k,k+1},q_j]=0$ whenever $j\\notin\\{k,k+1\\}$, and require local charge conservation $[h_{j,j+1},q_j+q_{j+1}]=0$. On an open chain set $H_L=\\sum_{j=1}^{L-1}h_{j,j+1}$; on a ring set $H_L=\\sum_{j\\in\\mathbb Z/L\\mathbb Z}h_{j,j+1}$ with periodic indices. For an open chain define the absent boundary currents $j_{0,1}=j_{L,L+1}=0$. Use $\\hbar>0$ in joule-seconds. These finite local data may be realized on a tensor-product spin space or on a finite fixed-particle site space, provided the stated commutation conditions hold.\n\nThe oriented bond current from $j$ to $j+1$ is\n$$j_{j,j+1}:=\\frac{i}{\\hbar}[h_{j,j+1},q_{j+1}].$$\nIt has unit $\\mathsf Q\\,\\mathrm{s}^{-1}$. The total current is the sum over existing bonds, $J_L:=\\sum_{(j,j+1)}j_{j,j+1}$, and its Heisenberg evolution for $t\\in\\mathbb R$ is $J_L(t):=e^{iH_Lt/\\hbar}J_Le^{-iH_Lt/\\hbar}$. For finite inverse temperature $\\beta>0$ in joules$^{-1}$, define $\\rho_{\\beta,L}:=e^{-\\beta H_L}/\\operatorname{Tr}(e^{-\\beta H_L})$ and $\\omega_{\\beta,L}(A):=\\operatorname{Tr}(\\rho_{\\beta,L}A)$. Write $J_L^\\circ:=J_L-\\omega_{\\beta,L}(J_L)I$ and $J_L^\\circ(t):=e^{iH_Lt/\\hbar}J_L^\\circ e^{-iH_Lt/\\hbar}$. Define the real, connected, symmetrized correlation per site by\n$$C_L(t):=\\frac{1}{L}\\operatorname{Re}\\,\\omega_{\\beta,L}\\!\\left(J_L^\\circ(t)J_L^\\circ\\right)=\\frac{1}{2L}\\omega_{\\beta,L}\\!\\left(J_L^\\circ(t)J_L^\\circ+J_L^\\circ J_L^\\circ(t)\\right).$$\nThe correlation has unit $\\mathsf Q^2\\,\\mathrm{s}^{-2}$ per site.\n\nThis definition assigns no transport coefficient by itself. Any proposed finite-volume or thermodynamic transport quantity must additionally state its time cutoff, frequency regulator (for example $e^{-\\eta t}$ with $\\eta>0$ in seconds$^{-1}$), spatial normalization, and the exact order in which $L\\to\\infty$, the time cutoff tends to infinity, and any regulator is removed. Existence of those limits is not part of this definition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qsmx-lattice-current-continuity",
+          "source_section": "Statement",
+          "quote": "Use the finite open or periodic chain and bond-current definition in [[def-qsmx-lattice-current-and-limits]]. Each $j_{j,j+1}$ is self-adjoint, and with $\\dot q_j:=(i/\\hbar)[H_L,q_j]$ the exact local identity\n$$\\dot q_j=j_{j-1,j}-j_{j,j+1}$$\nholds at every site. Consequently the total charge $Q_L:=\\sum_{j\\in\\Lambda_L}q_j$, where $\\Lambda_L$ is the open-chain site set or periodic site set from the definition, is conserved: $[H_L,Q_L]=0$. The current orientation is from $j$ to $j+1$, so positive outgoing current lowers the charge at site $j$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qsm-dt-cesaro-dephasing",
+          "source_section": "Statement",
+          "quote": "Under the finite-dimensional unitary dynamics of [[thm-qsm-dt-finite-unitary]], let $P_E$ be the orthogonal spectral projection of $H$ for its distinct energy $E$. For every density matrix $\\rho$,\n\n$$\\frac1T\\int_0^T U(t)\\rho U(t)^*\\,dt\\longrightarrow\\sum_E P_E\\rho P_E$$\n\nin trace norm as $T\\to\\infty$. The diagonal energy blocks, including all blocks within degenerate eigenspaces, remain. This is Cesaro convergence of the averaged state; pointwise convergence of $U(t)\\rho U(t)^*$ is not asserted.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qsm-matrix-state-calculus",
+          "source_section": "Statement",
+          "quote": "Use the following conventions on a complex inner-product space $H$ of dimension $D\\geq1$, with inner product linear in its first argument. For an endomorphism $A$, define $\\operatorname{Tr}A:=\\sum_{j=1}^D\\langle Ae_j,e_j\\rangle$ in an orthonormal basis; step 3.1 proves basis independence. For any Hermitian $M$, its **positive spectral subspace** (called its positive support here) is $S_M:=\\bigoplus_{\\lambda>0}\\ker(M-\\lambda I)$; when $M\\geq0$ this equals $(\\ker M)^\\perp$. Its support logarithm is $\\log(M|_{S_M}):=\\sum_{\\lambda>0}(\\log\\lambda)P_\\lambda|_{S_M}$, where $P_\\lambda$ is the orthogonal projection onto that eigenspace. No value $\\log0$ is assigned; for $M=0$ this is the unique endomorphism of the zero space. For the set $\\mathcal D(H)$ of positive semidefinite Hermitian endomorphisms with trace one, a point $\\rho$ is **extreme** if every equality $\\rho=t\\sigma+(1-t)\\tau$ with $\\sigma,\\tau\\in\\mathcal D(H)$ and $0<t<1$ implies $\\sigma=\\tau=\\rho$.\n\nLet $H$ be a complex inner-product space of finite dimension $D\\geq1$, with inner product linear in its first argument. Every Hermitian endomorphism $M$ has an orthonormal eigenbasis with real eigenvalues. For a real function $f$ on its finite spectrum, define $f(M)$ by its spectral projections; this definition is independent of the choice of eigenbasis. In particular positive square roots, exponentials, and logarithms on positive supports are well defined.\n\nFor a density matrix $\\rho$ on $H$, meaning a Hermitian positive semidefinite operator with $\\operatorname{Tr}\\rho=1$, $\\operatorname{Tr}(\\rho A)=\\sum_jp_j\\langle Au_j,u_j\\rangle$ for bounded $A$, where $\\rho=\\sum_jp_j|u_j\\rangle\\langle u_j|$. The weighted form $(X,Y)_\\rho=\\operatorname{Tr}(\\rho X^*Y)$ satisfies Cauchy–Schwarz, $|(X,Y)_\\rho|^2\\leq(X,X)_\\rho(Y,Y)_\\rho$. Finally, $\\operatorname{Tr}(\\rho^2)\\leq1$, with equality exactly for rank-one densities, and those are exactly the extreme points of the finite density-matrix set.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The lattice-current definition fixes $J_L=\\sum_jj_{j,j+1}$, and the local-current lemma gives $J_L=J_L^*$. Subtracting its real mean $\\omega(J_L)$ preserves self-adjointness, so $J$ is a matrix observable in $\\mathcal B(\\mathcal H)$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "On $\\mathcal B(\\mathcal H)$ define $(A,B)_\\rho:=\\operatorname{Tr}(\\rho A^*B)$, linear in its second argument. It is positive definite: if $(A,A)_\\rho=0$, then $\\rho\\ge cI$ for some $c>0$ in finite dimension, so $0=\\operatorname{Tr}(\\rho A^*A)\\ge c\\operatorname{Tr}(A^*A)$ and hence $A=0$. The invariance $[\\rho,H]=0$ gives $(\\alpha_t(A),\\alpha_t(B))_\\rho=(A,B)_\\rho$ by cyclicity of the finite trace, so $\\alpha_t$ is unitary on this finite-dimensional Hilbert space of matrices.",
+          "inputs": [
+            "given",
+            "A1",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Write $H=\\sum_E E P_E$ over its distinct eigenvalues. Then $\\alpha_t(J)=\\sum_{E,F}e^{it(E-F)/\\hbar}P_EJP_F$. For $E\\ne F$,\n$$\\left|\\frac1T\\int_0^T e^{it(E-F)/\\hbar}\\,dt\\right|\\le\\frac{2\\hbar}{T|E-F|}\\longrightarrow0,$$\nwhile for $E=F$ the coefficient is $1$. The sum is finite, so $M_TJ:=T^{-1}\\int_0^T\\alpha_t(J)\\,dt$ converges in matrix norm to $PJ:=\\sum_E P_EJP_E$. This block map is the orthogonal projection onto $\\mathcal N:=\\{A:[H,A]=0\\}$ in $(\\cdot,\\cdot)_\\rho$: $PJ\\in\\mathcal N$, and each off-diagonal block of $J-PJ$ has zero weighted trace pairing with a block-diagonal matrix because $\\rho$ is block diagonal. It is the same energy-block projection as the density-matrix dephasing in [F3]; [F3] states the density-matrix version, while the explicit finite expansion here proves the observable version used.",
+          "inputs": [
+            "given",
+            "A1",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Since $J=J^*$, $(\\alpha_t(J),J)_\\rho=\\omega(\\alpha_t(J)J)$. Norm convergence in step 2.1 therefore gives\n$$\\lim_{T\\to\\infty}\\frac1T\\int_0^T\\operatorname{Re}\\,\\omega(\\alpha_t(J)J)\\,dt=\\operatorname{Re}(PJ,J)_\\rho=\\|PJ\\|_\\rho^2,$$\nbecause $J-PJ$ is orthogonal to $\\mathcal N$ and $PJ\\in\\mathcal N$.",
+          "inputs": [
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "Set $S:=\\operatorname{span}\\{Q_1,\\ldots,Q_m\\}\\subseteq\\mathcal N$, and let $P_S$ be its orthogonal projection. Then $P_SJ=P_SPJ$, so $\\|PJ\\|_\\rho^2\\ge\\|P_SJ\\|_\\rho^2$. The Gram matrix $G$ is positive definite by linear independence and the positive-definite inner product. Writing $P_SJ=\\sum_a c_aQ_a$, orthogonality gives $Gc=v$, so $c=G^{-1}v$ and $\\|P_SJ\\|_\\rho^2=c^*Gc=v^*G^{-1}v$. Together with step 3.1 this proves the bound.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "step 1.2",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes m>=1 and a nonempty linearly independent family of conserved matrices."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement permits J=0; then v=0 and the lower bound is equality at zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement includes m=1; linear independence makes G_11>0 and the inverse is defined."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 keeps every equal-energy block, including blocks inside degenerate eigenspaces."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Cesaro integral is defined for every T>0 and its finite-dimensional limit is established in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement supplies finite-dimensional spaces and a finite conserved family; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The result is an inequality, not an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The result is an inequality, not an if-and-only-if assertion."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "Three-site ring conserved-current equality case",
+          "inputs": [
+            "H=-S-S*",
+            "J=i(S-S*)",
+            "rho=I/3",
+            "Q_1=J"
+          ],
+          "expected": "The exact 3x3 matrices satisfy [H,J]=0 and the Cesaro correlation and Gram lower bound are both Tr(J^2)/3=2.",
+          "result": "PASS: exact matrix multiplication gave commutator residual 0, Tr(J^2)=6, and both sides 2 for g=hbar=1."
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "def-qsmx-lattice-current-and-limits",
+          "carrier": "items/def-qsmx-lattice-current-and-limits.md",
+          "status": "Exact current public interface transcribed by root at the drained Step2 join; original substantive source-use review retained in historical_source_interface and native/same-owner reports. No renewed full supplier-proof reading asserted.",
+          "source_section": "Definition",
+          "exact_statement": "Fix either a finite open chain with sites $\\{1,\\ldots,L\\}$, $L\\ge2$, or a periodic chain with sites $\\mathbb Z/L\\mathbb Z$, $L\\ge3$, and denote its site set by $\\Lambda_L$. Let $\\mathcal H_L$ be a nonzero finite-dimensional complex Hilbert space. For each site $j$, let $q_j=q_j^*$ be a bounded charge observable, with physical unit $\\mathsf Q$. For each oriented nearest-neighbor bond $(j,j+1)$, let $h_{j,j+1}=h_{j,j+1}^*$ be an energy operator in joules. Require $[h_{k,k+1},q_j]=0$ whenever $j\\notin\\{k,k+1\\}$, and require local charge conservation $[h_{j,j+1},q_j+q_{j+1}]=0$. On an open chain set $H_L=\\sum_{j=1}^{L-1}h_{j,j+1}$; on a ring set $H_L=\\sum_{j\\in\\mathbb Z/L\\mathbb Z}h_{j,j+1}$ with periodic indices. For an open chain define the absent boundary currents $j_{0,1}=j_{L,L+1}=0$. Use $\\hbar>0$ in joule-seconds. These finite local data may be realized on a tensor-product spin space or on a finite fixed-particle site space, provided the stated commutation conditions hold.\n\nThe oriented bond current from $j$ to $j+1$ is\n$$j_{j,j+1}:=\\frac{i}{\\hbar}[h_{j,j+1},q_{j+1}].$$\nIt has unit $\\mathsf Q\\,\\mathrm{s}^{-1}$. The total current is the sum over existing bonds, $J_L:=\\sum_{(j,j+1)}j_{j,j+1}$, and its Heisenberg evolution for $t\\in\\mathbb R$ is $J_L(t):=e^{iH_Lt/\\hbar}J_Le^{-iH_Lt/\\hbar}$. For finite inverse temperature $\\beta>0$ in joules$^{-1}$, define $\\rho_{\\beta,L}:=e^{-\\beta H_L}/\\operatorname{Tr}(e^{-\\beta H_L})$ and $\\omega_{\\beta,L}(A):=\\operatorname{Tr}(\\rho_{\\beta,L}A)$. Write $J_L^\\circ:=J_L-\\omega_{\\beta,L}(J_L)I$ and $J_L^\\circ(t):=e^{iH_Lt/\\hbar}J_L^\\circ e^{-iH_Lt/\\hbar}$. Define the real, connected, symmetrized correlation per site by\n$$C_L(t):=\\frac{1}{L}\\operatorname{Re}\\,\\omega_{\\beta,L}\\!\\left(J_L^\\circ(t)J_L^\\circ\\right)=\\frac{1}{2L}\\omega_{\\beta,L}\\!\\left(J_L^\\circ(t)J_L^\\circ+J_L^\\circ J_L^\\circ(t)\\right).$$\nThe correlation has unit $\\mathsf Q^2\\,\\mathrm{s}^{-2}$ per site.\n\nThis definition assigns no transport coefficient by itself. Any proposed finite-volume or thermodynamic transport quantity must additionally state its time cutoff, frequency regulator (for example $e^{-\\eta t}$ with $\\eta>0$ in seconds$^{-1}$), spatial normalization, and the exact order in which $L\\to\\infty$, the time cutoff tends to infinity, and any regulator is removed. Existence of those limits is not part of this definition.",
+          "relevant_hypotheses_and_conventions": "Fix either a finite open chain with sites $\\{1,\\ldots,L\\}$, $L\\ge2$, or a periodic chain with sites $\\mathbb Z/L\\mathbb Z$, $L\\ge3$, and denote its site set by $\\Lambda_L$. Let $\\mathcal H_L$ be a finite-dimensional complex Hilbert space. For each site $j$, let $q_j=q_j^*$ be a bounded charge observable, with physical unit $\\mathsf Q$. For each oriented nearest-neighbor bond $(j,j+1)$, let $h_{j,j+1}=h_{j,j+1}^*$ be an energy operator in joules. Require $[h_{k,k+1},q_j]=0$ whenever $j\\notin\\{k,k+1\\}$, and require local charge conservation $[h_{j,j+1},q_j+q_{j+1}]=0$. On an open chain set $H_L=\\sum_{j=1}^{L-1}h_{j,j+1}$; on a ring set $H_L=\\sum_{j\\in\\mathbb Z/L\\mathbb Z}h_{j,j+1}$ with periodic indices. For an open chain define the absent boundary currents $j_{0,1}=j_{L,L+1}=0$. Use $\\hbar>0$ in joule-seconds. These finite local data may be realized on a tensor-product spin space or on a finite fixed-particle site space, provided the stated commutation conditions hold.\n\nThe oriented bond current from $j$ to $j+1$ is\n$$j_{j,j+1}:=\\frac{i}{\\hbar}[h_{j,j+1},q_{j+1}].$$\nIt has unit $\\mathsf Q\\,\\mathrm{s}^{-1}$. The total current is the sum over existing bonds, $J_L:=\\sum_{(j,j+1)}j_{j,j+1}$, and its Heisenberg evolution for $t\\in\\mathbb R$ is $J_L(t):=e^{iH_Lt/\\hbar}J_Le^{-iH_Lt/\\hbar}$. For finite inverse temperature $\\beta>0$ in joules$^{-1}$, define $\\rho_{\\beta,L}:=e^{-\\beta H_L}/\\operatorname{Tr}(e^{-\\beta H_L})$ and $\\omega_{\\beta,L}(A):=\\operatorname{Tr}(\\rho_{\\beta,L}A)$. Write $J_L^\\circ:=J_L-\\omega_{\\beta,L}(J_L)I$ and $J_L^\\circ(t):=e^{iH_Lt/\\hbar}J_L^\\circ e^{-iH_Lt/\\hbar}$. Define the real, connected, symmetrized correlation per site by\n$$C_L(t):=\\frac{1}{L}\\operatorname{Re}\\,\\omega_{\\beta,L}\\!\\left(J_L^\\circ(t)J_L^\\circ\\right)=\\frac{1}{2L}\\omega_{\\beta,L}\\!\\left(J_L^\\circ(t)J_L^\\circ+J_L^\\circ J_L^\\circ(t)\\right).$$\nThe correlation has unit $\\mathsf Q^2\\,\\mathrm{s}^{-2}$ per site.\n\nThis definition assigns no transport coefficient by itself. Any proposed finite-volume or thermodynamic transport quantity must additionally state its time cutoff, frequency regulator (for example $e^{-\\eta t}$ with $\\eta>0$ in seconds$^{-1}$), spatial normalization, and the exact order in which $L\\to\\infty$, the time cutoff tends to infinity, and any regulator is removed. Existence of those limits is not part of this definition.",
+          "supplier_proof_status": "draft; this exact-quote refresh does not grant independent proof acceptance",
+          "consumer_use": "Cited at F1.",
+          "historical_source_interface": {
+            "source_section": "Definition",
+            "exact_statement": "Fix either a finite open chain with sites $\\{1,\\ldots,L\\}$, $L\\ge2$, or a periodic chain with sites $\\mathbb Z/L\\mathbb Z$, $L\\ge3$, and denote its site set by $\\Lambda_L$. Let $\\mathcal H_L$ be a finite-dimensional complex Hilbert space. For each site $j$, let $q_j=q_j^*$ be a bounded charge observable, with physical unit $\\mathsf Q$. For each oriented nearest-neighbor bond $(j,j+1)$, let $h_{j,j+1}=h_{j,j+1}^*$ be an energy operator in joules. Require $[h_{k,k+1},q_j]=0$ whenever $j\\notin\\{k,k+1\\}$, and require local charge conservation $[h_{j,j+1},q_j+q_{j+1}]=0$. On an open chain set $H_L=\\sum_{j=1}^{L-1}h_{j,j+1}$; on a ring set $H_L=\\sum_{j\\in\\mathbb Z/L\\mathbb Z}h_{j,j+1}$ with periodic indices. For an open chain define the absent boundary currents $j_{0,1}=j_{L,L+1}=0$. Use $\\hbar>0$ in joule-seconds. These finite local data may be realized on a tensor-product spin space or on a finite fixed-particle site space, provided the stated commutation conditions hold.\n\nThe oriented bond current from $j$ to $j+1$ is\n$$j_{j,j+1}:=\\frac{i}{\\hbar}[h_{j,j+1},q_{j+1}].$$\nIt has unit $\\mathsf Q\\,\\mathrm{s}^{-1}$. The total current is the sum over existing bonds, $J_L:=\\sum_{(j,j+1)}j_{j,j+1}$, and its Heisenberg evolution for $t\\in\\mathbb R$ is $J_L(t):=e^{iH_Lt/\\hbar}J_Le^{-iH_Lt/\\hbar}$. For finite inverse temperature $\\beta>0$ in joules$^{-1}$, define $\\rho_{\\beta,L}:=e^{-\\beta H_L}/\\operatorname{Tr}(e^{-\\beta H_L})$ and $\\omega_{\\beta,L}(A):=\\operatorname{Tr}(\\rho_{\\beta,L}A)$. Write $J_L^\\circ:=J_L-\\omega_{\\beta,L}(J_L)I$ and $J_L^\\circ(t):=e^{iH_Lt/\\hbar}J_L^\\circ e^{-iH_Lt/\\hbar}$. Define the real, connected, symmetrized correlation per site by\n$$C_L(t):=\\frac{1}{L}\\operatorname{Re}\\,\\omega_{\\beta,L}\\!\\left(J_L^\\circ(t)J_L^\\circ\\right)=\\frac{1}{2L}\\omega_{\\beta,L}\\!\\left(J_L^\\circ(t)J_L^\\circ+J_L^\\circ J_L^\\circ(t)\\right).$$\nThe correlation has unit $\\mathsf Q^2\\,\\mathrm{s}^{-2}$ per site.\n\nThis definition assigns no transport coefficient by itself. Any proposed finite-volume or thermodynamic transport quantity must additionally state its time cutoff, frequency regulator (for example $e^{-\\eta t}$ with $\\eta>0$ in seconds$^{-1}$), spatial normalization, and the exact order in which $L\\to\\infty$, the time cutoff tends to infinity, and any regulator is removed. Existence of those limits is not part of this definition.",
+            "status": "Exact current definition interface inspected; readiness/proof acceptance is not inferred from the carrier label.",
+            "supplier_proof_status": "Current exact definition statement inspected; proof is not applicable; no independent acceptance is implied."
+          }
+        },
+        {
+          "supplier": "lem-qsmx-lattice-current-continuity",
+          "carrier": "items/lem-qsmx-lattice-current-continuity.md",
+          "status": "Exact current statement interface inspected; readiness/proof acceptance is not inferred from the carrier label.",
+          "source_section": "Statement",
+          "exact_statement": "Use the finite open or periodic chain and bond-current definition in [[def-qsmx-lattice-current-and-limits]]. Each $j_{j,j+1}$ is self-adjoint, and with $\\dot q_j:=(i/\\hbar)[H_L,q_j]$ the exact local identity\n$$\\dot q_j=j_{j-1,j}-j_{j,j+1}$$\nholds at every site. Consequently the total charge $Q_L:=\\sum_{j\\in\\Lambda_L}q_j$, where $\\Lambda_L$ is the open-chain site set or periodic site set from the definition, is conserved: $[H_L,Q_L]=0$. The current orientation is from $j$ to $j+1$, so positive outgoing current lowers the charge at site $j$.",
+          "relevant_hypotheses_and_conventions": "Use the finite open or periodic chain and bond-current definition in [[def-qsmx-lattice-current-and-limits]]. Each $j_{j,j+1}$ is self-adjoint, and with $\\dot q_j:=(i/\\hbar)[H_L,q_j]$ the exact local identity\n$$\\dot q_j=j_{j-1,j}-j_{j,j+1}$$\nholds at every site. Consequently the total charge $Q_L:=\\sum_{j\\in\\Lambda_L}q_j$, where $\\Lambda_L$ is the open-chain site set or periodic site set from the definition, is conserved: $[H_L,Q_L]=0$. The current orientation is from $j$ to $j+1$, so positive outgoing current lowers the charge at site $j$.",
+          "supplier_proof_status": "Current draft supplier statement and complete proof inspected; no independent proof acceptance is implied.",
+          "consumer_use": "Cited at F2."
+        },
+        {
+          "supplier": "thm-qsm-dt-cesaro-dephasing",
+          "carrier": "items/thm-qsm-dt-cesaro-dephasing.md",
+          "status": "Exact current statement interface inspected; readiness/proof acceptance is not inferred from the carrier label.",
+          "source_section": "Statement",
+          "exact_statement": "Under the finite-dimensional unitary dynamics of [[thm-qsm-dt-finite-unitary]], let $P_E$ be the orthogonal spectral projection of $H$ for its distinct energy $E$. For every density matrix $\\rho$,\n\n$$\\frac1T\\int_0^T U(t)\\rho U(t)^*\\,dt\\longrightarrow\\sum_E P_E\\rho P_E$$\n\nin trace norm as $T\\to\\infty$. The diagonal energy blocks, including all blocks within degenerate eigenspaces, remain. This is Cesaro convergence of the averaged state; pointwise convergence of $U(t)\\rho U(t)^*$ is not asserted.",
+          "relevant_hypotheses_and_conventions": "Under the finite-dimensional unitary dynamics of [[thm-qsm-dt-finite-unitary]], let $P_E$ be the orthogonal spectral projection of $H$ for its distinct energy $E$. For every density matrix $\\rho$,\n\n$$\\frac1T\\int_0^T U(t)\\rho U(t)^*\\,dt\\longrightarrow\\sum_E P_E\\rho P_E$$\n\nin trace norm as $T\\to\\infty$. The diagonal energy blocks, including all blocks within degenerate eigenspaces, remain. This is Cesaro convergence of the averaged state; pointwise convergence of $U(t)\\rho U(t)^*$ is not asserted.",
+          "supplier_proof_status": "Published supplier statement and complete proof inspected in the local mathematical supplier; its publication status does not certify this consumer.",
+          "consumer_use": "Cited at F3."
+        },
+        {
+          "supplier": "lem-qsm-matrix-state-calculus",
+          "carrier": "items/lem-qsm-matrix-state-calculus.md",
+          "status": "Exact current statement interface inspected; readiness/proof acceptance is not inferred from the carrier label.",
+          "source_section": "Statement",
+          "exact_statement": "Use the following conventions on a complex inner-product space $H$ of dimension $D\\geq1$, with inner product linear in its first argument. For an endomorphism $A$, define $\\operatorname{Tr}A:=\\sum_{j=1}^D\\langle Ae_j,e_j\\rangle$ in an orthonormal basis; step 3.1 proves basis independence. For any Hermitian $M$, its **positive spectral subspace** (called its positive support here) is $S_M:=\\bigoplus_{\\lambda>0}\\ker(M-\\lambda I)$; when $M\\geq0$ this equals $(\\ker M)^\\perp$. Its support logarithm is $\\log(M|_{S_M}):=\\sum_{\\lambda>0}(\\log\\lambda)P_\\lambda|_{S_M}$, where $P_\\lambda$ is the orthogonal projection onto that eigenspace. No value $\\log0$ is assigned; for $M=0$ this is the unique endomorphism of the zero space. For the set $\\mathcal D(H)$ of positive semidefinite Hermitian endomorphisms with trace one, a point $\\rho$ is **extreme** if every equality $\\rho=t\\sigma+(1-t)\\tau$ with $\\sigma,\\tau\\in\\mathcal D(H)$ and $0<t<1$ implies $\\sigma=\\tau=\\rho$.\n\nLet $H$ be a complex inner-product space of finite dimension $D\\geq1$, with inner product linear in its first argument. Every Hermitian endomorphism $M$ has an orthonormal eigenbasis with real eigenvalues. For a real function $f$ on its finite spectrum, define $f(M)$ by its spectral projections; this definition is independent of the choice of eigenbasis. In particular positive square roots, exponentials, and logarithms on positive supports are well defined.\n\nFor a density matrix $\\rho$ on $H$, meaning a Hermitian positive semidefinite operator with $\\operatorname{Tr}\\rho=1$, $\\operatorname{Tr}(\\rho A)=\\sum_jp_j\\langle Au_j,u_j\\rangle$ for bounded $A$, where $\\rho=\\sum_jp_j|u_j\\rangle\\langle u_j|$. The weighted form $(X,Y)_\\rho=\\operatorname{Tr}(\\rho X^*Y)$ satisfies Cauchy–Schwarz, $|(X,Y)_\\rho|^2\\leq(X,X)_\\rho(Y,Y)_\\rho$. Finally, $\\operatorname{Tr}(\\rho^2)\\leq1$, with equality exactly for rank-one densities, and those are exactly the extreme points of the finite density-matrix set.",
+          "relevant_hypotheses_and_conventions": "Use the following conventions on a complex inner-product space $H$ of dimension $D\\geq1$, with inner product linear in its first argument. For an endomorphism $A$, define $\\operatorname{Tr}A:=\\sum_{j=1}^D\\langle Ae_j,e_j\\rangle$ in an orthonormal basis; step 3.1 proves basis independence. For any Hermitian $M$, its **positive spectral subspace** (called its positive support here) is $S_M:=\\bigoplus_{\\lambda>0}\\ker(M-\\lambda I)$; when $M\\geq0$ this equals $(\\ker M)^\\perp$. Its support logarithm is $\\log(M|_{S_M}):=\\sum_{\\lambda>0}(\\log\\lambda)P_\\lambda|_{S_M}$, where $P_\\lambda$ is the orthogonal projection onto that eigenspace. No value $\\log0$ is assigned; for $M=0$ this is the unique endomorphism of the zero space. For the set $\\mathcal D(H)$ of positive semidefinite Hermitian endomorphisms with trace one, a point $\\rho$ is **extreme** if every equality $\\rho=t\\sigma+(1-t)\\tau$ with $\\sigma,\\tau\\in\\mathcal D(H)$ and $0<t<1$ implies $\\sigma=\\tau=\\rho$.\n\nLet $H$ be a complex inner-product space of finite dimension $D\\geq1$, with inner product linear in its first argument. Every Hermitian endomorphism $M$ has an orthonormal eigenbasis with real eigenvalues. For a real function $f$ on its finite spectrum, define $f(M)$ by its spectral projections; this definition is independent of the choice of eigenbasis. In particular positive square roots, exponentials, and logarithms on positive supports are well defined.\n\nFor a density matrix $\\rho$ on $H$, meaning a Hermitian positive semidefinite operator with $\\operatorname{Tr}\\rho=1$, $\\operatorname{Tr}(\\rho A)=\\sum_jp_j\\langle Au_j,u_j\\rangle$ for bounded $A$, where $\\rho=\\sum_jp_j|u_j\\rangle\\langle u_j|$. The weighted form $(X,Y)_\\rho=\\operatorname{Tr}(\\rho X^*Y)$ satisfies Cauchy–Schwarz, $|(X,Y)_\\rho|^2\\leq(X,X)_\\rho(Y,Y)_\\rho$. Finally, $\\operatorname{Tr}(\\rho^2)\\leq1$, with equality exactly for rank-one densities, and those are exactly the extreme points of the finite density-matrix set.",
+          "supplier_proof_status": "Published supplier statement and complete proof inspected in the local mathematical supplier; its publication status does not certify this consumer.",
+          "consumer_use": "Cited at F4."
+        }
+      ]
+    },
+    "thm-qsmx-conditional-diffusive-green-kubo": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "thm-qsm-dt-variance-green-kubo",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and the finite-matrix C$^*$-identity hypothesis used by [[thm-qsm-dt-algebraic-kubo]]. Use its finite-range spin algebra $\\mathcal A$, strongly continuous automorphism group $\\alpha_t$, and invariant state $\\phi$ obtained from consistent local densities. Let $V=V^*\\in\\mathcal A$ satisfy $\\phi(V)=0$, and define\n$$X_T=\\int_0^T\\alpha_t(V)\\,dt,\\qquad G(t)=\\operatorname{Re}\\phi(V\\alpha_t(V)).$$\nIf $G\\in L^1([0,\\infty))$, then\n$$\\lim_{T\\to\\infty}\\frac{\\phi(X_T^2)}{2T}=D:=\\int_0^\\infty G(t)\\,dt\\ge0.$$\nFor a finite list of centered self-adjoint observables $V_1,\\ldots,V_m$, if each symmetrized covariance $G_{ab}(t)=\\tfrac12(\\operatorname{Re}\\phi(V_a\\alpha_t(V_b))+\\operatorname{Re}\\phi(V_b\\alpha_t(V_a)))$ is absolutely integrable on $[0,\\infty)$, then $D_{ab}=\\int_0^\\infty G_{ab}(t)dt$ is a real positive semidefinite matrix. For a velocity observable measured in m s$^{-1}$, $D$ has units m$^2$ s$^{-1}$; for general $V$, its units are $[V]^2$ s. The result is a variance of a time-integrated observable, not a joint classical trajectory or a universal transport law.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qsmx-lattice-current-and-limits",
+          "source_section": "Definition",
+          "quote": "Fix either a finite open chain with sites $\\{1,\\ldots,L\\}$, $L\\ge2$, or a periodic chain with sites $\\mathbb Z/L\\mathbb Z$, $L\\ge3$, and denote its site set by $\\Lambda_L$. Let $\\mathcal H_L$ be a nonzero finite-dimensional complex Hilbert space. For each site $j$, let $q_j=q_j^*$ be a bounded charge observable, with physical unit $\\mathsf Q$. For each oriented nearest-neighbor bond $(j,j+1)$, let $h_{j,j+1}=h_{j,j+1}^*$ be an energy operator in joules. Require $[h_{k,k+1},q_j]=0$ whenever $j\\notin\\{k,k+1\\}$, and require local charge conservation $[h_{j,j+1},q_j+q_{j+1}]=0$. On an open chain set $H_L=\\sum_{j=1}^{L-1}h_{j,j+1}$; on a ring set $H_L=\\sum_{j\\in\\mathbb Z/L\\mathbb Z}h_{j,j+1}$ with periodic indices. For an open chain define the absent boundary currents $j_{0,1}=j_{L,L+1}=0$. Use $\\hbar>0$ in joule-seconds. These finite local data may be realized on a tensor-product spin space or on a finite fixed-particle site space, provided the stated commutation conditions hold.\n\nThe oriented bond current from $j$ to $j+1$ is\n$$j_{j,j+1}:=\\frac{i}{\\hbar}[h_{j,j+1},q_{j+1}].$$\nIt has unit $\\mathsf Q\\,\\mathrm{s}^{-1}$. The total current is the sum over existing bonds, $J_L:=\\sum_{(j,j+1)}j_{j,j+1}$, and its Heisenberg evolution for $t\\in\\mathbb R$ is $J_L(t):=e^{iH_Lt/\\hbar}J_Le^{-iH_Lt/\\hbar}$. For finite inverse temperature $\\beta>0$ in joules$^{-1}$, define $\\rho_{\\beta,L}:=e^{-\\beta H_L}/\\operatorname{Tr}(e^{-\\beta H_L})$ and $\\omega_{\\beta,L}(A):=\\operatorname{Tr}(\\rho_{\\beta,L}A)$. Write $J_L^\\circ:=J_L-\\omega_{\\beta,L}(J_L)I$ and $J_L^\\circ(t):=e^{iH_Lt/\\hbar}J_L^\\circ e^{-iH_Lt/\\hbar}$. Define the real, connected, symmetrized correlation per site by\n$$C_L(t):=\\frac{1}{L}\\operatorname{Re}\\,\\omega_{\\beta,L}\\!\\left(J_L^\\circ(t)J_L^\\circ\\right)=\\frac{1}{2L}\\omega_{\\beta,L}\\!\\left(J_L^\\circ(t)J_L^\\circ+J_L^\\circ J_L^\\circ(t)\\right).$$\nThe correlation has unit $\\mathsf Q^2\\,\\mathrm{s}^{-2}$ per site.\n\nThis definition assigns no transport coefficient by itself. Any proposed finite-volume or thermodynamic transport quantity must additionally state its time cutoff, frequency regulator (for example $e^{-\\eta t}$ with $\\eta>0$ in seconds$^{-1}$), spatial normalization, and the exact order in which $L\\to\\infty$, the time cutoff tends to infinity, and any regulator is removed. Existence of those limits is not part of this definition.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qsm-dt-variance-green-kubo",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and the finite-matrix C$^*$-identity hypothesis used by [[thm-qsm-dt-algebraic-kubo]]. Use its finite-range spin algebra $\\mathcal A$, strongly continuous automorphism group $\\alpha_t$, and invariant state $\\phi$ obtained from consistent local densities. Let $V=V^*\\in\\mathcal A$ satisfy $\\phi(V)=0$, and define\n$$X_T=\\int_0^T\\alpha_t(V)\\,dt,\\qquad G(t)=\\operatorname{Re}\\phi(V\\alpha_t(V)).$$\nIf $G\\in L^1([0,\\infty))$, then\n$$\\lim_{T\\to\\infty}\\frac{\\phi(X_T^2)}{2T}=D:=\\int_0^\\infty G(t)\\,dt\\ge0.$$\nFor a finite list of centered self-adjoint observables $V_1,\\ldots,V_m$, if each symmetrized covariance $G_{ab}(t)=\\tfrac12(\\operatorname{Re}\\phi(V_a\\alpha_t(V_b))+\\operatorname{Re}\\phi(V_b\\alpha_t(V_a)))$ is absolutely integrable on $[0,\\infty)$, then $D_{ab}=\\int_0^\\infty G_{ab}(t)dt$ is a real positive semidefinite matrix. For a velocity observable measured in m s$^{-1}$, $D$ has units m$^2$ s$^{-1}$; for general $V$, its units are $[V]^2$ s. The result is a variance of a time-integrated observable, not a joint classical trajectory or a universal transport law.",
+          "uses": [
+            "2.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-riemann-fubini-on-product-rectangles",
+          "source_section": "Statement",
+          "quote": "Let $A\\subseteq\\mathbb R^p$ and $B\\subseteq\\mathbb R^q$ be nondegenerate closed rectangles, and let $f:A\\times B\\to\\mathbb R$ be Riemann integrable. Then the four lower and upper section-integral functions of [[def-sections-and-iterated-riemann-integrals]] are Riemann integrable and\n$$\\int_A\\ell_B=\\int_Au_B=\\int_{A\\times B}f=\\int_B\\ell_A=\\int_Bu_A.$$\n\nIf the $B$-sections are integrable outside a content-zero set $N\\subseteq A$, every bounded exceptionally completed function $h$ with $h(x)=\\int_Bf_x$ for $x\\notin N$ is integrable and\n$$\\int_{A\\times B}f=\\int_Ah.$$\nThe same assertion holds with the coordinate blocks exchanged. In particular, when every section in an order is integrable, the ordinary iterated integral in that order exists and equals the multiple integral. The theorem does not assert that every section of an integrable function is integrable.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-substitution",
+          "source_section": "Statement",
+          "quote": "Let $c < d$ be reals and let $\\varphi : [c,d] \\to \\mathbb{R}$ be differentiable\nat every point of $[c,d]$ as a function on $[c,d]$ (The derivative $f'(c) = \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c}$ of $f : A \\to \\mathbb{R}$ at a point $c \\in A$ that is a limit point of $A$, and differentiability on a set), with\n$\\varphi'$ integrable on $[c,d]$ (The lower and upper Darboux integrals of a bounded $f$ on $[a,b]$ as $\\sup_P L(f,P)$ and $\\inf_P U(f,P)$, Darboux integrability as their equality, and the notation $\\int_a^b f$). Let\n$J \\subseteq \\mathbb{R}$ be order-convex with at least two elements\n(Intervals of $\\mathbb{R}$: the nine order-convex forms, nondegeneracy, and length) with $\\varphi[\\,[c,d]\\,] \\subseteq J$, and let $f : J \\to\n\\mathbb{R}$ be continuous on $J$ (Continuity of $f : A \\to \\mathbb{R}$ at a point of $A$ and on $A$: the $\\varepsilon$-$\\delta$ condition, its agreement with $\\lim_{x \\to c} f(x) = f(c)$ at a limit point, and continuity at an isolated point).\n\nThen $(f\\circ\\varphi)\\,\\varphi'$ is integrable on $[c,d]$ and\n\n$$\\int_{\\varphi(c)}^{\\varphi(d)} f \\;=\\; \\int_c^d (f\\circ\\varphi)\\,\\varphi' ,$$\n\nthe left-hand integral being the oriented one of The integral with oriented limits: $\\int_a^a f := 0$ and $\\int_b^a f := -\\int_a^b f$.\n\n**Neither injectivity nor monotonicity of $\\varphi$ is assumed**, and that is\nexactly why the left-hand side is written with oriented limits: $\\varphi(d)$ may\nlie below $\\varphi(c)$, and $\\varphi$ may return to the same value many times.\nThe proof runs through a primitive of $f$ and the chain rule, and no inverse\nfunction is ever formed.\n\n**Continuity of $f$ is a hypothesis and cannot be weakened to integrability.**\nWith $f$ merely integrable the composite $f \\circ \\varphi$ need not be\nintegrable at all, so the right-hand side need not exist; that is\nthe false statement that weakens it on the companion page.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-ftc-second-part",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals, let $G : [a,b] \\to \\mathbb{R}$ be differentiable at every\npoint of $[a,b]$ as a function on $[a,b]$ (The derivative $f'(c) = \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c}$ of $f : A \\to \\mathbb{R}$ at a point $c \\in A$ that is a limit point of $A$, and differentiability on a set; at $a$ and $b$\nthis is the one-sided derivative), let $f := G'$, and suppose $f$ is integrable\non $[a,b]$ (The lower and upper Darboux integrals of a bounded $f$ on $[a,b]$ as $\\sup_P L(f,P)$ and $\\inf_P U(f,P)$, Darboux integrability as their equality, and the notation $\\int_a^b f$). Then\n\n$$\\int_a^b f \\;=\\; G(b) - G(a) .$$\n\n**Both hypotheses are needed and neither is removable.** A function may be\ndifferentiable everywhere with $G'$ not integrable — then the left-hand side does\nnot exist (an everywhere differentiable function with unbounded derivative) — and an\nintegrable $f$ need not be the derivative of anything\n(the sign function); both witnesses are on the\ncompanion page.\n\n**No continuity of $f$ is assumed**, which is what makes this the working form:\nthe theorem evaluates $\\int_a^b f$ for every integrable derivative, not only for\ncontinuous integrands.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-cm-integral-and-ftc-for-continuous-normed-space-curves",
+          "source_section": "Statement",
+          "quote": "Let $X$ be a real vector space ([[def-vector-space]]) with a norm $\\|\\cdot\\|$ ([[def-norm-and-normed-space]]) whose metric $d(x,y):=\\|x-y\\|$ is complete ([[def-complete-metric-space]]). Let $a<b$ be reals ([[def-interval]]) and let $g:[a,b]\\to X$ be continuous ([[def-metric-continuity]]). For endpoints $c,d\\in[a,b]$, set $\\int_c^c g:=0_X$ and, when $c>d$, set $\\int_c^d g:=-\\int_d^c g$; for $c<d$ use the Riemann-sum construction below on the restriction to $[c,d]$. Then:\n\n1. **Integral.** For every sequence of tagged partitions of $[a,b]$ whose mesh tends to $0$, the Riemann sums $\\sum_i(t_{i+1}-t_i)\\,g(s_i)$ converge in $X$; the limit, written $\\int_a^b g$, is independent of the sequence, and\n$$\\Bigl\\|\\int_a^b g\\Bigr\\|\\;\\le\\;(b-a)\\sup_{t\\in[a,b]}\\|g(t)\\| .$$\n2. **Fundamental theorem.** The curve $G:[a,b]\\to X$, $G(t):=\\int_a^t g$, is well defined, satisfies $\\|G(t)-G(s)\\|\\le(t-s)\\sup_{[s,t]}\\|g\\|$ for $a\\le s\\le t\\le b$, and is differentiable with $G'=g$ on $[a,b]$ in the one-sided sense at the endpoints.\n3. **Linearity.** For continuous $g,h:[a,b]\\to X$ and reals $\\alpha,\\beta$: $\\int_a^b(\\alpha g+\\beta h)=\\alpha\\int_a^b g+\\beta\\int_a^b h$; and for $a\\le c\\le b$, $\\int_a^b g=\\int_a^c g+\\int_c^b g$.\n4. **Bounded linear images.** If $Y$ is a normed real vector space and $T:X\\to Y$ is linear with $\\|Tx\\|\\le C\\|x\\|$ for some $C<+\\infty$ and all $x$, then $T\\circ g$ is continuous and $T\\bigl(\\int_a^b g\\bigr)=\\int_a^b (T\\circ g)$; in particular, for every real-linear functional $\\Lambda:X\\to\\mathbb R$ with $|\\Lambda x|\\le C\\|x\\|$, $\\Lambda\\bigl(\\int_a^b g\\bigr)=\\int_a^b\\Lambda\\circ g$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-ftc-first-part",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals, let $f : [a,b] \\to \\mathbb{R}$ be integrable\n(The lower and upper Darboux integrals of a bounded $f$ on $[a,b]$ as $\\sup_P L(f,P)$ and $\\inf_P U(f,P)$, Darboux integrability as their equality, and the notation $\\int_a^b f$), let $F$ be its integral function\n(The integral function $F(x) := \\int_a^x f$ of an integrable $f$), and let $c \\in [a,b]$ be a point at which $f$ is\ncontinuous (Continuity of $f : A \\to \\mathbb{R}$ at a point of $A$ and on $A$: the $\\varepsilon$-$\\delta$ condition, its agreement with $\\lim_{x \\to c} f(x) = f(c)$ at a limit point, and continuity at an isolated point). Then $F$ is differentiable at $c$ as a\nfunction on $[a,b]$ (The derivative $f'(c) = \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c}$ of $f : A \\to \\mathbb{R}$ at a point $c \\in A$ that is a limit point of $A$, and differentiability on a set) and\n\n$$F'(c) \\;=\\; f(c) .$$\n\nAt $c = a$ and $c = b$ this is the one-sided statement, which is what\nThe derivative $f'(c) = \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c}$ of $f : A \\to \\mathbb{R}$ at a point $c \\in A$ that is a limit point of $A$, and differentiability on a set means at those points: every point of a nondegenerate interval\nis a limit point of it, so $F'(c)$ is a meaningful symbol at every $c \\in [a,b]$,\nand the difference quotient is taken over $[a,b] \\setminus \\{c\\}$.\n\n**Consequently, if $f$ is continuous on the whole of $[a,b]$, then $F$ is a\nprimitive of $f$ there**: $F' = f$ at every point of $[a,b]$.\n\n**Continuity at $c$ is a hypothesis and it cannot be dropped.** For an integrable\n$f$ that is discontinuous at $c$, $F'(c)$ may fail to exist, and it may exist and\ndiffer from $f(c)$; both are exhibited on the companion page, by\nan integrable function with no primitive and by a false\nstatement about the integral function.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "In the classical alternative fix $T>0$ and use Lebesgue measure on $[0,T]$ for the Bochner integral. For each $n\\ge1$, let $J_n:[0,T]\\to L^2(\\Omega,\\mathcal F,\\mathbb P)$ take the value $J(kT/n)$ on $[kT/n,(k+1)T/n)$ for $0\\le k<n$ and the value $J(T)$ at $T$. Each $J_n$ is a measurable simple function. Uniform continuity of $J$ on $[0,T]$ gives $\\sup_{t\\in[0,T]}\\|J_n(t)-J(t)\\|_2\\to0$, and hence $\\int_0^T\\|J_n(t)-J(t)\\|_2\\,dt\\to0$. Thus $J$ is strongly measurable (an almost-everywhere limit of measurable simple functions), and $\\int_0^T\\|J(t)\\|_2\\,dt<\\infty$ because $J$ is bounded. By the definition of the Bochner integral as the $L^1$-norm limit of integrals of simple functions, $J$ is Bochner integrable. The Bochner integrals of $J_n$ are the left-endpoint Riemann sums for $J$; they converge both to the Bochner integral by the $L^1$ approximation and to the norm-Riemann integral by [F6]. Hence these integrals agree. The expectation functional $\\Lambda(Y):=\\mathbb E[Y]=\\langle Y,1\\rangle_{L^2}$ is bounded since $|\\Lambda(Y)|=|\\langle Y,1\\rangle_{L^2}|\\le\\|Y\\|_2\\|1\\|_2=\\|Y\\|_2$. Applying the bounded-linear-map clause of [F6] gives $\\mathbb E[X_T]=\\int_0^T\\mathbb E[J(t)]\\,dt=0$, so $\\operatorname{Var}(X_T)=\\mathbb E[X_T^2]$.",
+          "inputs": [
+            "given",
+            "F6",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The spatially normalized current convention is fixed by [F1]. In the quantum alternative, [A1] and [F2] apply to the exact $\\alpha_t$, invariant state $\\phi$, and centered self-adjoint $V$ in the Statement, so the supplier gives the variance identity and limit. The evenness asserted in the Statement follows from $C(-t)=\\operatorname{Re}\\phi(V\\alpha_{-t}(V))=\\operatorname{Re}\\phi(\\alpha_t(V)V)=\\operatorname{Re}\\overline{\\phi(V\\alpha_t(V))}=C(t)$, using invariance and self-adjointness. In the classical alternative, continuity of the inner product makes $(s,t)\\mapsto\\mathbb E[J(s)J(t)]=C(t-s)$ continuous on $[0,T]^2$. Riemann sums for $X_T$ converge in $L^2$, so continuity of the inner product makes the expectations of their squared norms converge to $\\mathbb E[X_T^2]$; each squared-sum expectation is a product Riemann sum for this continuous kernel. Thus [F3] gives $\\mathbb E[X_T^2]=\\int_0^T\\int_0^T C(t-s)\\,ds\\,dt$, which equals $\\operatorname{Var}(X_T)$ by step 1.1. The integrand is symmetric because $C$ is even. The diagonal has zero area: it lies in strips of width $\\delta$ and area at most $2T\\delta+\\delta^2$, tending to zero, so a bounded continuous integrand contributes zero there. Off the diagonal the two triangular restrictions are continuous; on a grid meeting the diagonal their upper-lower gap is bounded by the kernel oscillation away from the diagonal plus twice its supremum times the diagonal-strip area. Hence the product of the triangular indicator with the kernel is Riemann integrable. Each section has at most one jump and is therefore Riemann integrable. For the upper triangle, $g(t):=\\int_0^t C(t-s)\\,ds$ satisfies $|g(t)-g(t\\prime)|\\le T\\omega_C(|t-t\\prime|)+\\|C\\|_\\infty|t-t\\prime|$, where $\\omega_C(\\delta):=\\sup_{|u-v|\\le\\delta}|C(u)-C(v)|\\to0$; hence its outer integral is continuous. The lower triangle has the same estimate with reversed limits. Splitting the square into its two triangles and applying [F3] to each gives $2\\int_0^T\\int_0^t C(t-s)\\,ds\\,dt$.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F6",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "For the classical alternative, apply [F4] to $\\varphi(s)=t-s$ on $[0,t]$. It gives $\\int_t^0 C(u)\\,du=-\\int_0^t C(t-s)\\,ds$; reversing the oriented endpoints yields $\\int_0^t C(t-s)\\,ds=F(t)$, where $F(t):=\\int_0^t C(u)\\,du$. By [F7], $F'=C$; the product rule gives $(tF(t))'=F(t)+tC(t)$, a continuous derivative. Applying [F5] to $tF(t)$ and using $F(T)=\\int_0^T C(u)\\,du$ yields $\\int_0^T F(t)\\,dt=\\int_0^T(T-u)C(u)\\,du$. Thus step 2.1 gives $\\operatorname{Var}(X_T)/(2T)=\\int_0^T(1-u/T)C(u)\\,du$.",
+          "inputs": [
+            "step 2.1",
+            "F4",
+            "F5",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "In the classical alternative, put $K:=\\int_0^\\infty|C(u)|\\,du<\\infty$. For $T>R>0$, the difference between step 3.1 and the improper integral is bounded by\n$$\\left|\\int_0^T(1-u/T)C(u)\\,du-\\int_0^\\infty C(u)\\,du\\right|\\le\\frac{R}{T}K+2\\int_R^\\infty|C(u)|\\,du.$$\nFirst choose $R$ so the tail is arbitrarily small, then let $T\\to\\infty$; this proves the classical limit. The quantum limit is supplied by [F2].",
+          "inputs": [
+            "given",
+            "F2",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "step": "5.1",
+          "claim": "In the classical alternative every finite-time variance is nonnegative, so its limit is nonnegative; in the quantum alternative nonnegativity is part of [F2]. The limit therefore has the stated sign in either case.",
+          "inputs": [
+            "F2",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes a nonempty time interval T>0 and a defined stationary process or observable."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement with C identically zero has variance and claimed coefficient both equal to zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement is scalar and applies to one current observable; it makes no multi-observable matrix claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement imposes no spectral nondegeneracy condition in the quantum alternative."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 treat the square and triangular time domains including their measure-zero endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement quantum branch explicitly assumes Countable Choice; the classical proof uses none, as step 1.1 shows. Full Choice is not used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is a conditional limit assertion, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem is a conditional limit assertion, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "Exponential stationary covariance",
+          "inputs": [
+            "C(t)=exp(-lambda*t)",
+            "lambda>0",
+            "T>0"
+          ],
+          "expected": "Var(X_T)/(2T)=1/lambda-(1-exp(-lambda*T))/(lambda^2*T), tending to integral_0^infinity C(t)dt=1/lambda.",
+          "result": "PASS: direct integration gives Var(X_T)=2*(T/lambda-(1-exp(-lambda*T))/lambda^2), so the normalized limit is 1/lambda."
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "def-qsmx-lattice-current-and-limits",
+          "carrier": "items/def-qsmx-lattice-current-and-limits.md",
+          "status": "Exact current public interface transcribed by root at the drained Step2 join; original substantive source-use review retained in historical_source_interface and native/same-owner reports. No renewed full supplier-proof reading asserted.",
+          "source_section": "Definition",
+          "exact_statement": "Fix either a finite open chain with sites $\\{1,\\ldots,L\\}$, $L\\ge2$, or a periodic chain with sites $\\mathbb Z/L\\mathbb Z$, $L\\ge3$, and denote its site set by $\\Lambda_L$. Let $\\mathcal H_L$ be a nonzero finite-dimensional complex Hilbert space. For each site $j$, let $q_j=q_j^*$ be a bounded charge observable, with physical unit $\\mathsf Q$. For each oriented nearest-neighbor bond $(j,j+1)$, let $h_{j,j+1}=h_{j,j+1}^*$ be an energy operator in joules. Require $[h_{k,k+1},q_j]=0$ whenever $j\\notin\\{k,k+1\\}$, and require local charge conservation $[h_{j,j+1},q_j+q_{j+1}]=0$. On an open chain set $H_L=\\sum_{j=1}^{L-1}h_{j,j+1}$; on a ring set $H_L=\\sum_{j\\in\\mathbb Z/L\\mathbb Z}h_{j,j+1}$ with periodic indices. For an open chain define the absent boundary currents $j_{0,1}=j_{L,L+1}=0$. Use $\\hbar>0$ in joule-seconds. These finite local data may be realized on a tensor-product spin space or on a finite fixed-particle site space, provided the stated commutation conditions hold.\n\nThe oriented bond current from $j$ to $j+1$ is\n$$j_{j,j+1}:=\\frac{i}{\\hbar}[h_{j,j+1},q_{j+1}].$$\nIt has unit $\\mathsf Q\\,\\mathrm{s}^{-1}$. The total current is the sum over existing bonds, $J_L:=\\sum_{(j,j+1)}j_{j,j+1}$, and its Heisenberg evolution for $t\\in\\mathbb R$ is $J_L(t):=e^{iH_Lt/\\hbar}J_Le^{-iH_Lt/\\hbar}$. For finite inverse temperature $\\beta>0$ in joules$^{-1}$, define $\\rho_{\\beta,L}:=e^{-\\beta H_L}/\\operatorname{Tr}(e^{-\\beta H_L})$ and $\\omega_{\\beta,L}(A):=\\operatorname{Tr}(\\rho_{\\beta,L}A)$. Write $J_L^\\circ:=J_L-\\omega_{\\beta,L}(J_L)I$ and $J_L^\\circ(t):=e^{iH_Lt/\\hbar}J_L^\\circ e^{-iH_Lt/\\hbar}$. Define the real, connected, symmetrized correlation per site by\n$$C_L(t):=\\frac{1}{L}\\operatorname{Re}\\,\\omega_{\\beta,L}\\!\\left(J_L^\\circ(t)J_L^\\circ\\right)=\\frac{1}{2L}\\omega_{\\beta,L}\\!\\left(J_L^\\circ(t)J_L^\\circ+J_L^\\circ J_L^\\circ(t)\\right).$$\nThe correlation has unit $\\mathsf Q^2\\,\\mathrm{s}^{-2}$ per site.\n\nThis definition assigns no transport coefficient by itself. Any proposed finite-volume or thermodynamic transport quantity must additionally state its time cutoff, frequency regulator (for example $e^{-\\eta t}$ with $\\eta>0$ in seconds$^{-1}$), spatial normalization, and the exact order in which $L\\to\\infty$, the time cutoff tends to infinity, and any regulator is removed. Existence of those limits is not part of this definition.",
+          "relevant_hypotheses_and_conventions": "Fix either a finite open chain with sites $\\{1,\\ldots,L\\}$, $L\\ge2$, or a periodic chain with sites $\\mathbb Z/L\\mathbb Z$, $L\\ge3$, and denote its site set by $\\Lambda_L$. Let $\\mathcal H_L$ be a finite-dimensional complex Hilbert space. For each site $j$, let $q_j=q_j^*$ be a bounded charge observable, with physical unit $\\mathsf Q$. For each oriented nearest-neighbor bond $(j,j+1)$, let $h_{j,j+1}=h_{j,j+1}^*$ be an energy operator in joules. Require $[h_{k,k+1},q_j]=0$ whenever $j\\notin\\{k,k+1\\}$, and require local charge conservation $[h_{j,j+1},q_j+q_{j+1}]=0$. On an open chain set $H_L=\\sum_{j=1}^{L-1}h_{j,j+1}$; on a ring set $H_L=\\sum_{j\\in\\mathbb Z/L\\mathbb Z}h_{j,j+1}$ with periodic indices. For an open chain define the absent boundary currents $j_{0,1}=j_{L,L+1}=0$. Use $\\hbar>0$ in joule-seconds. These finite local data may be realized on a tensor-product spin space or on a finite fixed-particle site space, provided the stated commutation conditions hold.\n\nThe oriented bond current from $j$ to $j+1$ is\n$$j_{j,j+1}:=\\frac{i}{\\hbar}[h_{j,j+1},q_{j+1}].$$\nIt has unit $\\mathsf Q\\,\\mathrm{s}^{-1}$. The total current is the sum over existing bonds, $J_L:=\\sum_{(j,j+1)}j_{j,j+1}$, and its Heisenberg evolution for $t\\in\\mathbb R$ is $J_L(t):=e^{iH_Lt/\\hbar}J_Le^{-iH_Lt/\\hbar}$. For finite inverse temperature $\\beta>0$ in joules$^{-1}$, define $\\rho_{\\beta,L}:=e^{-\\beta H_L}/\\operatorname{Tr}(e^{-\\beta H_L})$ and $\\omega_{\\beta,L}(A):=\\operatorname{Tr}(\\rho_{\\beta,L}A)$. Write $J_L^\\circ:=J_L-\\omega_{\\beta,L}(J_L)I$ and $J_L^\\circ(t):=e^{iH_Lt/\\hbar}J_L^\\circ e^{-iH_Lt/\\hbar}$. Define the real, connected, symmetrized correlation per site by\n$$C_L(t):=\\frac{1}{L}\\operatorname{Re}\\,\\omega_{\\beta,L}\\!\\left(J_L^\\circ(t)J_L^\\circ\\right)=\\frac{1}{2L}\\omega_{\\beta,L}\\!\\left(J_L^\\circ(t)J_L^\\circ+J_L^\\circ J_L^\\circ(t)\\right).$$\nThe correlation has unit $\\mathsf Q^2\\,\\mathrm{s}^{-2}$ per site.\n\nThis definition assigns no transport coefficient by itself. Any proposed finite-volume or thermodynamic transport quantity must additionally state its time cutoff, frequency regulator (for example $e^{-\\eta t}$ with $\\eta>0$ in seconds$^{-1}$), spatial normalization, and the exact order in which $L\\to\\infty$, the time cutoff tends to infinity, and any regulator is removed. Existence of those limits is not part of this definition.",
+          "supplier_proof_status": "draft; this exact-quote refresh does not grant independent proof acceptance",
+          "consumer_use": "Cited at F1.",
+          "historical_source_interface": {
+            "source_section": "Definition",
+            "exact_statement": "Fix either a finite open chain with sites $\\{1,\\ldots,L\\}$, $L\\ge2$, or a periodic chain with sites $\\mathbb Z/L\\mathbb Z$, $L\\ge3$, and denote its site set by $\\Lambda_L$. Let $\\mathcal H_L$ be a finite-dimensional complex Hilbert space. For each site $j$, let $q_j=q_j^*$ be a bounded charge observable, with physical unit $\\mathsf Q$. For each oriented nearest-neighbor bond $(j,j+1)$, let $h_{j,j+1}=h_{j,j+1}^*$ be an energy operator in joules. Require $[h_{k,k+1},q_j]=0$ whenever $j\\notin\\{k,k+1\\}$, and require local charge conservation $[h_{j,j+1},q_j+q_{j+1}]=0$. On an open chain set $H_L=\\sum_{j=1}^{L-1}h_{j,j+1}$; on a ring set $H_L=\\sum_{j\\in\\mathbb Z/L\\mathbb Z}h_{j,j+1}$ with periodic indices. For an open chain define the absent boundary currents $j_{0,1}=j_{L,L+1}=0$. Use $\\hbar>0$ in joule-seconds. These finite local data may be realized on a tensor-product spin space or on a finite fixed-particle site space, provided the stated commutation conditions hold.\n\nThe oriented bond current from $j$ to $j+1$ is\n$$j_{j,j+1}:=\\frac{i}{\\hbar}[h_{j,j+1},q_{j+1}].$$\nIt has unit $\\mathsf Q\\,\\mathrm{s}^{-1}$. The total current is the sum over existing bonds, $J_L:=\\sum_{(j,j+1)}j_{j,j+1}$, and its Heisenberg evolution for $t\\in\\mathbb R$ is $J_L(t):=e^{iH_Lt/\\hbar}J_Le^{-iH_Lt/\\hbar}$. For finite inverse temperature $\\beta>0$ in joules$^{-1}$, define $\\rho_{\\beta,L}:=e^{-\\beta H_L}/\\operatorname{Tr}(e^{-\\beta H_L})$ and $\\omega_{\\beta,L}(A):=\\operatorname{Tr}(\\rho_{\\beta,L}A)$. Write $J_L^\\circ:=J_L-\\omega_{\\beta,L}(J_L)I$ and $J_L^\\circ(t):=e^{iH_Lt/\\hbar}J_L^\\circ e^{-iH_Lt/\\hbar}$. Define the real, connected, symmetrized correlation per site by\n$$C_L(t):=\\frac{1}{L}\\operatorname{Re}\\,\\omega_{\\beta,L}\\!\\left(J_L^\\circ(t)J_L^\\circ\\right)=\\frac{1}{2L}\\omega_{\\beta,L}\\!\\left(J_L^\\circ(t)J_L^\\circ+J_L^\\circ J_L^\\circ(t)\\right).$$\nThe correlation has unit $\\mathsf Q^2\\,\\mathrm{s}^{-2}$ per site.\n\nThis definition assigns no transport coefficient by itself. Any proposed finite-volume or thermodynamic transport quantity must additionally state its time cutoff, frequency regulator (for example $e^{-\\eta t}$ with $\\eta>0$ in seconds$^{-1}$), spatial normalization, and the exact order in which $L\\to\\infty$, the time cutoff tends to infinity, and any regulator is removed. Existence of those limits is not part of this definition.",
+            "status": "Exact current definition interface inspected; readiness/proof acceptance is not inferred from the carrier label.",
+            "supplier_proof_status": "Current exact definition statement inspected; proof is not applicable; no independent acceptance is implied."
+          }
+        },
+        {
+          "supplier": "thm-qsm-dt-variance-green-kubo",
+          "carrier": "items/thm-qsm-dt-variance-green-kubo.md",
+          "status": "Exact current statement interface inspected; readiness/proof acceptance is not inferred from the carrier label.",
+          "source_section": "Statement",
+          "exact_statement": "Assume Countable Choice and the finite-matrix C$^*$-identity hypothesis used by [[thm-qsm-dt-algebraic-kubo]]. Use its finite-range spin algebra $\\mathcal A$, strongly continuous automorphism group $\\alpha_t$, and invariant state $\\phi$ obtained from consistent local densities. Let $V=V^*\\in\\mathcal A$ satisfy $\\phi(V)=0$, and define\n$$X_T=\\int_0^T\\alpha_t(V)\\,dt,\\qquad G(t)=\\operatorname{Re}\\phi(V\\alpha_t(V)).$$\nIf $G\\in L^1([0,\\infty))$, then\n$$\\lim_{T\\to\\infty}\\frac{\\phi(X_T^2)}{2T}=D:=\\int_0^\\infty G(t)\\,dt\\ge0.$$\nFor a finite list of centered self-adjoint observables $V_1,\\ldots,V_m$, if each symmetrized covariance $G_{ab}(t)=\\tfrac12(\\operatorname{Re}\\phi(V_a\\alpha_t(V_b))+\\operatorname{Re}\\phi(V_b\\alpha_t(V_a)))$ is absolutely integrable on $[0,\\infty)$, then $D_{ab}=\\int_0^\\infty G_{ab}(t)dt$ is a real positive semidefinite matrix. For a velocity observable measured in m s$^{-1}$, $D$ has units m$^2$ s$^{-1}$; for general $V$, its units are $[V]^2$ s. The result is a variance of a time-integrated observable, not a joint classical trajectory or a universal transport law.",
+          "relevant_hypotheses_and_conventions": "Assume Countable Choice and the finite-matrix C$^*$-identity hypothesis used by [[thm-qsm-dt-algebraic-kubo]]. Use its finite-range spin algebra $\\mathcal A$, strongly continuous automorphism group $\\alpha_t$, and invariant state $\\phi$ obtained from consistent local densities. Let $V=V^*\\in\\mathcal A$ satisfy $\\phi(V)=0$, and define\n$$X_T=\\int_0^T\\alpha_t(V)\\,dt,\\qquad G(t)=\\operatorname{Re}\\phi(V\\alpha_t(V)).$$\nIf $G\\in L^1([0,\\infty))$, then\n$$\\lim_{T\\to\\infty}\\frac{\\phi(X_T^2)}{2T}=D:=\\int_0^\\infty G(t)\\,dt\\ge0.$$\nFor a finite list of centered self-adjoint observables $V_1,\\ldots,V_m$, if each symmetrized covariance $G_{ab}(t)=\\tfrac12(\\operatorname{Re}\\phi(V_a\\alpha_t(V_b))+\\operatorname{Re}\\phi(V_b\\alpha_t(V_a)))$ is absolutely integrable on $[0,\\infty)$, then $D_{ab}=\\int_0^\\infty G_{ab}(t)dt$ is a real positive semidefinite matrix. For a velocity observable measured in m s$^{-1}$, $D$ has units m$^2$ s$^{-1}$; for general $V$, its units are $[V]^2$ s. The result is a variance of a time-integrated observable, not a joint classical trajectory or a universal transport law.",
+          "supplier_proof_status": "Published supplier statement and complete proof inspected in the local mathematical supplier; its publication status does not certify this consumer.",
+          "consumer_use": "Cited at F2."
+        },
+        {
+          "supplier": "thm-riemann-fubini-on-product-rectangles",
+          "carrier": "items/thm-riemann-fubini-on-product-rectangles.md",
+          "status": "Exact current statement interface inspected; readiness/proof acceptance is not inferred from the carrier label.",
+          "source_section": "Statement",
+          "exact_statement": "Let $A\\subseteq\\mathbb R^p$ and $B\\subseteq\\mathbb R^q$ be nondegenerate closed rectangles, and let $f:A\\times B\\to\\mathbb R$ be Riemann integrable. Then the four lower and upper section-integral functions of [[def-sections-and-iterated-riemann-integrals]] are Riemann integrable and\n$$\\int_A\\ell_B=\\int_Au_B=\\int_{A\\times B}f=\\int_B\\ell_A=\\int_Bu_A.$$\n\nIf the $B$-sections are integrable outside a content-zero set $N\\subseteq A$, every bounded exceptionally completed function $h$ with $h(x)=\\int_Bf_x$ for $x\\notin N$ is integrable and\n$$\\int_{A\\times B}f=\\int_Ah.$$\nThe same assertion holds with the coordinate blocks exchanged. In particular, when every section in an order is integrable, the ordinary iterated integral in that order exists and equals the multiple integral. The theorem does not assert that every section of an integrable function is integrable.",
+          "relevant_hypotheses_and_conventions": "Let $A\\subseteq\\mathbb R^p$ and $B\\subseteq\\mathbb R^q$ be nondegenerate closed rectangles, and let $f:A\\times B\\to\\mathbb R$ be Riemann integrable. Then the four lower and upper section-integral functions of [[def-sections-and-iterated-riemann-integrals]] are Riemann integrable and\n$$\\int_A\\ell_B=\\int_Au_B=\\int_{A\\times B}f=\\int_B\\ell_A=\\int_Bu_A.$$\n\nIf the $B$-sections are integrable outside a content-zero set $N\\subseteq A$, every bounded exceptionally completed function $h$ with $h(x)=\\int_Bf_x$ for $x\\notin N$ is integrable and\n$$\\int_{A\\times B}f=\\int_Ah.$$\nThe same assertion holds with the coordinate blocks exchanged. In particular, when every section in an order is integrable, the ordinary iterated integral in that order exists and equals the multiple integral. The theorem does not assert that every section of an integrable function is integrable.",
+          "supplier_proof_status": "Published supplier statement and complete proof inspected in the local mathematical supplier; its publication status does not certify this consumer.",
+          "consumer_use": "Cited at F3."
+        },
+        {
+          "supplier": "thm-substitution",
+          "carrier": "items/thm-substitution.md",
+          "status": "Exact current statement interface inspected; readiness/proof acceptance is not inferred from the carrier label.",
+          "source_section": "Statement",
+          "exact_statement": "Let $c < d$ be reals and let $\\varphi : [c,d] \\to \\mathbb{R}$ be differentiable\nat every point of $[c,d]$ as a function on $[c,d]$ (The derivative $f'(c) = \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c}$ of $f : A \\to \\mathbb{R}$ at a point $c \\in A$ that is a limit point of $A$, and differentiability on a set), with\n$\\varphi'$ integrable on $[c,d]$ (The lower and upper Darboux integrals of a bounded $f$ on $[a,b]$ as $\\sup_P L(f,P)$ and $\\inf_P U(f,P)$, Darboux integrability as their equality, and the notation $\\int_a^b f$). Let\n$J \\subseteq \\mathbb{R}$ be order-convex with at least two elements\n(Intervals of $\\mathbb{R}$: the nine order-convex forms, nondegeneracy, and length) with $\\varphi[\\,[c,d]\\,] \\subseteq J$, and let $f : J \\to\n\\mathbb{R}$ be continuous on $J$ (Continuity of $f : A \\to \\mathbb{R}$ at a point of $A$ and on $A$: the $\\varepsilon$-$\\delta$ condition, its agreement with $\\lim_{x \\to c} f(x) = f(c)$ at a limit point, and continuity at an isolated point).\n\nThen $(f\\circ\\varphi)\\,\\varphi'$ is integrable on $[c,d]$ and\n\n$$\\int_{\\varphi(c)}^{\\varphi(d)} f \\;=\\; \\int_c^d (f\\circ\\varphi)\\,\\varphi' ,$$\n\nthe left-hand integral being the oriented one of The integral with oriented limits: $\\int_a^a f := 0$ and $\\int_b^a f := -\\int_a^b f$.\n\n**Neither injectivity nor monotonicity of $\\varphi$ is assumed**, and that is\nexactly why the left-hand side is written with oriented limits: $\\varphi(d)$ may\nlie below $\\varphi(c)$, and $\\varphi$ may return to the same value many times.\nThe proof runs through a primitive of $f$ and the chain rule, and no inverse\nfunction is ever formed.\n\n**Continuity of $f$ is a hypothesis and cannot be weakened to integrability.**\nWith $f$ merely integrable the composite $f \\circ \\varphi$ need not be\nintegrable at all, so the right-hand side need not exist; that is\nthe false statement that weakens it on the companion page.",
+          "relevant_hypotheses_and_conventions": "Let $c < d$ be reals and let $\\varphi : [c,d] \\to \\mathbb{R}$ be differentiable\nat every point of $[c,d]$ as a function on $[c,d]$ (The derivative $f'(c) = \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c}$ of $f : A \\to \\mathbb{R}$ at a point $c \\in A$ that is a limit point of $A$, and differentiability on a set), with\n$\\varphi'$ integrable on $[c,d]$ (The lower and upper Darboux integrals of a bounded $f$ on $[a,b]$ as $\\sup_P L(f,P)$ and $\\inf_P U(f,P)$, Darboux integrability as their equality, and the notation $\\int_a^b f$). Let\n$J \\subseteq \\mathbb{R}$ be order-convex with at least two elements\n(Intervals of $\\mathbb{R}$: the nine order-convex forms, nondegeneracy, and length) with $\\varphi[\\,[c,d]\\,] \\subseteq J$, and let $f : J \\to\n\\mathbb{R}$ be continuous on $J$ (Continuity of $f : A \\to \\mathbb{R}$ at a point of $A$ and on $A$: the $\\varepsilon$-$\\delta$ condition, its agreement with $\\lim_{x \\to c} f(x) = f(c)$ at a limit point, and continuity at an isolated point).\n\nThen $(f\\circ\\varphi)\\,\\varphi'$ is integrable on $[c,d]$ and\n\n$$\\int_{\\varphi(c)}^{\\varphi(d)} f \\;=\\; \\int_c^d (f\\circ\\varphi)\\,\\varphi' ,$$\n\nthe left-hand integral being the oriented one of The integral with oriented limits: $\\int_a^a f := 0$ and $\\int_b^a f := -\\int_a^b f$.\n\n**Neither injectivity nor monotonicity of $\\varphi$ is assumed**, and that is\nexactly why the left-hand side is written with oriented limits: $\\varphi(d)$ may\nlie below $\\varphi(c)$, and $\\varphi$ may return to the same value many times.\nThe proof runs through a primitive of $f$ and the chain rule, and no inverse\nfunction is ever formed.\n\n**Continuity of $f$ is a hypothesis and cannot be weakened to integrability.**\nWith $f$ merely integrable the composite $f \\circ \\varphi$ need not be\nintegrable at all, so the right-hand side need not exist; that is\nthe false statement that weakens it on the companion page.",
+          "supplier_proof_status": "Published supplier statement and complete proof inspected in the local mathematical supplier; its publication status does not certify this consumer.",
+          "consumer_use": "Cited at F4."
+        },
+        {
+          "supplier": "thm-ftc-second-part",
+          "carrier": "items/thm-ftc-second-part.md",
+          "status": "Exact current statement interface inspected; readiness/proof acceptance is not inferred from the carrier label.",
+          "source_section": "Statement",
+          "exact_statement": "Let $a < b$ be reals, let $G : [a,b] \\to \\mathbb{R}$ be differentiable at every\npoint of $[a,b]$ as a function on $[a,b]$ (The derivative $f'(c) = \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c}$ of $f : A \\to \\mathbb{R}$ at a point $c \\in A$ that is a limit point of $A$, and differentiability on a set; at $a$ and $b$\nthis is the one-sided derivative), let $f := G'$, and suppose $f$ is integrable\non $[a,b]$ (The lower and upper Darboux integrals of a bounded $f$ on $[a,b]$ as $\\sup_P L(f,P)$ and $\\inf_P U(f,P)$, Darboux integrability as their equality, and the notation $\\int_a^b f$). Then\n\n$$\\int_a^b f \\;=\\; G(b) - G(a) .$$\n\n**Both hypotheses are needed and neither is removable.** A function may be\ndifferentiable everywhere with $G'$ not integrable — then the left-hand side does\nnot exist (an everywhere differentiable function with unbounded derivative) — and an\nintegrable $f$ need not be the derivative of anything\n(the sign function); both witnesses are on the\ncompanion page.\n\n**No continuity of $f$ is assumed**, which is what makes this the working form:\nthe theorem evaluates $\\int_a^b f$ for every integrable derivative, not only for\ncontinuous integrands.",
+          "relevant_hypotheses_and_conventions": "Let $a < b$ be reals, let $G : [a,b] \\to \\mathbb{R}$ be differentiable at every\npoint of $[a,b]$ as a function on $[a,b]$ (The derivative $f'(c) = \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c}$ of $f : A \\to \\mathbb{R}$ at a point $c \\in A$ that is a limit point of $A$, and differentiability on a set; at $a$ and $b$\nthis is the one-sided derivative), let $f := G'$, and suppose $f$ is integrable\non $[a,b]$ (The lower and upper Darboux integrals of a bounded $f$ on $[a,b]$ as $\\sup_P L(f,P)$ and $\\inf_P U(f,P)$, Darboux integrability as their equality, and the notation $\\int_a^b f$). Then\n\n$$\\int_a^b f \\;=\\; G(b) - G(a) .$$\n\n**Both hypotheses are needed and neither is removable.** A function may be\ndifferentiable everywhere with $G'$ not integrable — then the left-hand side does\nnot exist (an everywhere differentiable function with unbounded derivative) — and an\nintegrable $f$ need not be the derivative of anything\n(the sign function); both witnesses are on the\ncompanion page.\n\n**No continuity of $f$ is assumed**, which is what makes this the working form:\nthe theorem evaluates $\\int_a^b f$ for every integrable derivative, not only for\ncontinuous integrands.",
+          "supplier_proof_status": "Published supplier statement and complete proof inspected in the local mathematical supplier; its publication status does not certify this consumer.",
+          "consumer_use": "Cited at F5."
+        },
+        {
+          "supplier": "lem-cm-integral-and-ftc-for-continuous-normed-space-curves",
+          "carrier": "items/lem-cm-integral-and-ftc-for-continuous-normed-space-curves.md",
+          "status": "Exact current statement interface inspected; readiness/proof acceptance is not inferred from the carrier label.",
+          "source_section": "Statement",
+          "exact_statement": "Let $X$ be a real vector space ([[def-vector-space]]) with a norm $\\|\\cdot\\|$ ([[def-norm-and-normed-space]]) whose metric $d(x,y):=\\|x-y\\|$ is complete ([[def-complete-metric-space]]). Let $a<b$ be reals ([[def-interval]]) and let $g:[a,b]\\to X$ be continuous ([[def-metric-continuity]]). For endpoints $c,d\\in[a,b]$, set $\\int_c^c g:=0_X$ and, when $c>d$, set $\\int_c^d g:=-\\int_d^c g$; for $c<d$ use the Riemann-sum construction below on the restriction to $[c,d]$. Then:\n\n1. **Integral.** For every sequence of tagged partitions of $[a,b]$ whose mesh tends to $0$, the Riemann sums $\\sum_i(t_{i+1}-t_i)\\,g(s_i)$ converge in $X$; the limit, written $\\int_a^b g$, is independent of the sequence, and\n$$\\Bigl\\|\\int_a^b g\\Bigr\\|\\;\\le\\;(b-a)\\sup_{t\\in[a,b]}\\|g(t)\\| .$$\n2. **Fundamental theorem.** The curve $G:[a,b]\\to X$, $G(t):=\\int_a^t g$, is well defined, satisfies $\\|G(t)-G(s)\\|\\le(t-s)\\sup_{[s,t]}\\|g\\|$ for $a\\le s\\le t\\le b$, and is differentiable with $G'=g$ on $[a,b]$ in the one-sided sense at the endpoints.\n3. **Linearity.** For continuous $g,h:[a,b]\\to X$ and reals $\\alpha,\\beta$: $\\int_a^b(\\alpha g+\\beta h)=\\alpha\\int_a^b g+\\beta\\int_a^b h$; and for $a\\le c\\le b$, $\\int_a^b g=\\int_a^c g+\\int_c^b g$.\n4. **Bounded linear images.** If $Y$ is a normed real vector space and $T:X\\to Y$ is linear with $\\|Tx\\|\\le C\\|x\\|$ for some $C<+\\infty$ and all $x$, then $T\\circ g$ is continuous and $T\\bigl(\\int_a^b g\\bigr)=\\int_a^b (T\\circ g)$; in particular, for every real-linear functional $\\Lambda:X\\to\\mathbb R$ with $|\\Lambda x|\\le C\\|x\\|$, $\\Lambda\\bigl(\\int_a^b g\\bigr)=\\int_a^b\\Lambda\\circ g$.",
+          "relevant_hypotheses_and_conventions": "Let $X$ be a real vector space ([[def-vector-space]]) with a norm $\\|\\cdot\\|$ ([[def-norm-and-normed-space]]) whose metric $d(x,y):=\\|x-y\\|$ is complete ([[def-complete-metric-space]]). Let $a<b$ be reals ([[def-interval]]) and let $g:[a,b]\\to X$ be continuous ([[def-metric-continuity]]). For endpoints $c,d\\in[a,b]$, set $\\int_c^c g:=0_X$ and, when $c>d$, set $\\int_c^d g:=-\\int_d^c g$; for $c<d$ use the Riemann-sum construction below on the restriction to $[c,d]$. Then:\n\n1. **Integral.** For every sequence of tagged partitions of $[a,b]$ whose mesh tends to $0$, the Riemann sums $\\sum_i(t_{i+1}-t_i)\\,g(s_i)$ converge in $X$; the limit, written $\\int_a^b g$, is independent of the sequence, and\n$$\\Bigl\\|\\int_a^b g\\Bigr\\|\\;\\le\\;(b-a)\\sup_{t\\in[a,b]}\\|g(t)\\| .$$\n2. **Fundamental theorem.** The curve $G:[a,b]\\to X$, $G(t):=\\int_a^t g$, is well defined, satisfies $\\|G(t)-G(s)\\|\\le(t-s)\\sup_{[s,t]}\\|g\\|$ for $a\\le s\\le t\\le b$, and is differentiable with $G'=g$ on $[a,b]$ in the one-sided sense at the endpoints.\n3. **Linearity.** For continuous $g,h:[a,b]\\to X$ and reals $\\alpha,\\beta$: $\\int_a^b(\\alpha g+\\beta h)=\\alpha\\int_a^b g+\\beta\\int_a^b h$; and for $a\\le c\\le b$, $\\int_a^b g=\\int_a^c g+\\int_c^b g$.\n4. **Bounded linear images.** If $Y$ is a normed real vector space and $T:X\\to Y$ is linear with $\\|Tx\\|\\le C\\|x\\|$ for some $C<+\\infty$ and all $x$, then $T\\circ g$ is continuous and $T\\bigl(\\int_a^b g\\bigr)=\\int_a^b (T\\circ g)$; in particular, for every real-linear functional $\\Lambda:X\\to\\mathbb R$ with $|\\Lambda x|\\le C\\|x\\|$, $\\Lambda\\bigl(\\int_a^b g\\bigr)=\\int_a^b\\Lambda\\circ g$.",
+          "supplier_proof_status": "Published supplier statement and complete proof inspected in the local mathematical supplier; its publication status does not certify this consumer.",
+          "consumer_use": "Cited at F6."
+        },
+        {
+          "supplier": "thm-ftc-first-part",
+          "carrier": "items/thm-ftc-first-part.md",
+          "status": "Exact current statement interface inspected; readiness/proof acceptance is not inferred from the carrier label.",
+          "source_section": "Statement",
+          "exact_statement": "Let $a < b$ be reals, let $f : [a,b] \\to \\mathbb{R}$ be integrable\n(The lower and upper Darboux integrals of a bounded $f$ on $[a,b]$ as $\\sup_P L(f,P)$ and $\\inf_P U(f,P)$, Darboux integrability as their equality, and the notation $\\int_a^b f$), let $F$ be its integral function\n(The integral function $F(x) := \\int_a^x f$ of an integrable $f$), and let $c \\in [a,b]$ be a point at which $f$ is\ncontinuous (Continuity of $f : A \\to \\mathbb{R}$ at a point of $A$ and on $A$: the $\\varepsilon$-$\\delta$ condition, its agreement with $\\lim_{x \\to c} f(x) = f(c)$ at a limit point, and continuity at an isolated point). Then $F$ is differentiable at $c$ as a\nfunction on $[a,b]$ (The derivative $f'(c) = \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c}$ of $f : A \\to \\mathbb{R}$ at a point $c \\in A$ that is a limit point of $A$, and differentiability on a set) and\n\n$$F'(c) \\;=\\; f(c) .$$\n\nAt $c = a$ and $c = b$ this is the one-sided statement, which is what\nThe derivative $f'(c) = \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c}$ of $f : A \\to \\mathbb{R}$ at a point $c \\in A$ that is a limit point of $A$, and differentiability on a set means at those points: every point of a nondegenerate interval\nis a limit point of it, so $F'(c)$ is a meaningful symbol at every $c \\in [a,b]$,\nand the difference quotient is taken over $[a,b] \\setminus \\{c\\}$.\n\n**Consequently, if $f$ is continuous on the whole of $[a,b]$, then $F$ is a\nprimitive of $f$ there**: $F' = f$ at every point of $[a,b]$.\n\n**Continuity at $c$ is a hypothesis and it cannot be dropped.** For an integrable\n$f$ that is discontinuous at $c$, $F'(c)$ may fail to exist, and it may exist and\ndiffer from $f(c)$; both are exhibited on the companion page, by\nan integrable function with no primitive and by a false\nstatement about the integral function.",
+          "relevant_hypotheses_and_conventions": "Let $a < b$ be reals, let $f : [a,b] \\to \\mathbb{R}$ be integrable\n(The lower and upper Darboux integrals of a bounded $f$ on $[a,b]$ as $\\sup_P L(f,P)$ and $\\inf_P U(f,P)$, Darboux integrability as their equality, and the notation $\\int_a^b f$), let $F$ be its integral function\n(The integral function $F(x) := \\int_a^x f$ of an integrable $f$), and let $c \\in [a,b]$ be a point at which $f$ is\ncontinuous (Continuity of $f : A \\to \\mathbb{R}$ at a point of $A$ and on $A$: the $\\varepsilon$-$\\delta$ condition, its agreement with $\\lim_{x \\to c} f(x) = f(c)$ at a limit point, and continuity at an isolated point). Then $F$ is differentiable at $c$ as a\nfunction on $[a,b]$ (The derivative $f'(c) = \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c}$ of $f : A \\to \\mathbb{R}$ at a point $c \\in A$ that is a limit point of $A$, and differentiability on a set) and\n\n$$F'(c) \\;=\\; f(c) .$$\n\nAt $c = a$ and $c = b$ this is the one-sided statement, which is what\nThe derivative $f'(c) = \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c}$ of $f : A \\to \\mathbb{R}$ at a point $c \\in A$ that is a limit point of $A$, and differentiability on a set means at those points: every point of a nondegenerate interval\nis a limit point of it, so $F'(c)$ is a meaningful symbol at every $c \\in [a,b]$,\nand the difference quotient is taken over $[a,b] \\setminus \\{c\\}$.\n\n**Consequently, if $f$ is continuous on the whole of $[a,b]$, then $F$ is a\nprimitive of $f$ there**: $F' = f$ at every point of $[a,b]$.\n\n**Continuity at $c$ is a hypothesis and it cannot be dropped.** For an integrable\n$f$ that is discontinuous at $c$, $F'(c)$ may fail to exist, and it may exist and\ndiffer from $f(c)$; both are exhibited on the companion page, by\nan integrable function with no primitive and by a false\nstatement about the integral function.",
+          "supplier_proof_status": "Published supplier statement and complete proof inspected in the local mathematical supplier; its publication status does not certify this consumer.",
+          "consumer_use": "Cited at F7."
+        }
+      ]
+    },
+    "cex-qsmx-dc-order-of-limits": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qsmx-lattice-current-and-limits",
+          "source_section": "Definition",
+          "quote": "Fix either a finite open chain with sites $\\{1,\\ldots,L\\}$, $L\\ge2$, or a periodic chain with sites $\\mathbb Z/L\\mathbb Z$, $L\\ge3$, and denote its site set by $\\Lambda_L$. Let $\\mathcal H_L$ be a nonzero finite-dimensional complex Hilbert space. For each site $j$, let $q_j=q_j^*$ be a bounded charge observable, with physical unit $\\mathsf Q$. For each oriented nearest-neighbor bond $(j,j+1)$, let $h_{j,j+1}=h_{j,j+1}^*$ be an energy operator in joules. Require $[h_{k,k+1},q_j]=0$ whenever $j\\notin\\{k,k+1\\}$, and require local charge conservation $[h_{j,j+1},q_j+q_{j+1}]=0$. On an open chain set $H_L=\\sum_{j=1}^{L-1}h_{j,j+1}$; on a ring set $H_L=\\sum_{j\\in\\mathbb Z/L\\mathbb Z}h_{j,j+1}$ with periodic indices. For an open chain define the absent boundary currents $j_{0,1}=j_{L,L+1}=0$. Use $\\hbar>0$ in joule-seconds. These finite local data may be realized on a tensor-product spin space or on a finite fixed-particle site space, provided the stated commutation conditions hold.\n\nThe oriented bond current from $j$ to $j+1$ is\n$$j_{j,j+1}:=\\frac{i}{\\hbar}[h_{j,j+1},q_{j+1}].$$\nIt has unit $\\mathsf Q\\,\\mathrm{s}^{-1}$. The total current is the sum over existing bonds, $J_L:=\\sum_{(j,j+1)}j_{j,j+1}$, and its Heisenberg evolution for $t\\in\\mathbb R$ is $J_L(t):=e^{iH_Lt/\\hbar}J_Le^{-iH_Lt/\\hbar}$. For finite inverse temperature $\\beta>0$ in joules$^{-1}$, define $\\rho_{\\beta,L}:=e^{-\\beta H_L}/\\operatorname{Tr}(e^{-\\beta H_L})$ and $\\omega_{\\beta,L}(A):=\\operatorname{Tr}(\\rho_{\\beta,L}A)$. Write $J_L^\\circ:=J_L-\\omega_{\\beta,L}(J_L)I$ and $J_L^\\circ(t):=e^{iH_Lt/\\hbar}J_L^\\circ e^{-iH_Lt/\\hbar}$. Define the real, connected, symmetrized correlation per site by\n$$C_L(t):=\\frac{1}{L}\\operatorname{Re}\\,\\omega_{\\beta,L}\\!\\left(J_L^\\circ(t)J_L^\\circ\\right)=\\frac{1}{2L}\\omega_{\\beta,L}\\!\\left(J_L^\\circ(t)J_L^\\circ+J_L^\\circ J_L^\\circ(t)\\right).$$\nThe correlation has unit $\\mathsf Q^2\\,\\mathrm{s}^{-2}$ per site.\n\nThis definition assigns no transport coefficient by itself. Any proposed finite-volume or thermodynamic transport quantity must additionally state its time cutoff, frequency regulator (for example $e^{-\\eta t}$ with $\\eta>0$ in seconds$^{-1}$), spatial normalization, and the exact order in which $L\\to\\infty$, the time cutoff tends to infinity, and any regulator is removed. Existence of those limits is not part of this definition.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qsmx-lattice-current-continuity",
+          "source_section": "Statement",
+          "quote": "Use the finite open or periodic chain and bond-current definition in [[def-qsmx-lattice-current-and-limits]]. Each $j_{j,j+1}$ is self-adjoint, and with $\\dot q_j:=(i/\\hbar)[H_L,q_j]$ the exact local identity\n$$\\dot q_j=j_{j-1,j}-j_{j,j+1}$$\nholds at every site. Consequently the total charge $Q_L:=\\sum_{j\\in\\Lambda_L}q_j$, where $\\Lambda_L$ is the open-chain site set or periodic site set from the definition, is conserved: $[H_L,Q_L]=0$. The current orientation is from $j$ to $j+1$, so positive outgoing current lowers the charge at site $j$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qsmx-finite-mazur-bound",
+          "source_section": "Statement",
+          "quote": "Take the finite-chain data of the current definition on $\\mathcal H_L$ and identify $\\mathcal H:=\\mathcal H_L$. Let $H=H^*$ have energy unit joules, let $\\hbar>0$ have unit joule-seconds, and let $\\rho$ be a positive-definite trace-one matrix satisfying $[\\rho,H]=0$. Define $\\omega(A):=\\operatorname{Tr}(\\rho A)$ and $\\alpha_t(A):=e^{iHt/\\hbar}Ae^{-iHt/\\hbar}$. Let $J_L$ be the total lattice current of the finite-volume current definition and center it with respect to this same $\\rho$, setting $J:=J_L-\\omega(J_L)I$. With no identification of $H$ and $H_L$, the estimate below is an abstract bound for this observable under $\\alpha_t$. Its lattice-transport specialization further takes $H=H_L$; then the Gibbs density $\\rho_{\\beta,L}$ in that definition is stationary and is an admissible choice of $\\rho$. More generally, $\\rho_{\\beta,L}$ can be used with another $H$ exactly when it also satisfies $[\\rho_{\\beta,L},H]=0$. Then $J=J^*$, as established by the local continuity result. For $m\\ge1$, let $Q_1,\\ldots,Q_m$ be linearly independent conserved matrices, $[H,Q_a]=0$. Put\n$$G_{ab}:=\\operatorname{Tr}(\\rho Q_a^*Q_b),\\qquad v_a:=\\operatorname{Tr}(\\rho Q_a^*J).$$\nThen $G$ is positive definite, the finite Cesàro limit exists, and\n$$\\lim_{T\\to\\infty}\\frac1T\\int_0^T\\operatorname{Re}\\,\\omega\\!\\left(\\alpha_t(J)J\\right)\\,dt\\;\\ge\\;v^*G^{-1}v\\;\\ge0.$$\nThis is a finite-dimensional persistent-correlation bound. It does not identify a thermodynamic Drude weight or assert that either volume/time order of limits exists.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Each $h_{j,j+1}$ acts only on the span of $|j\\rangle,|j+1\\rangle$, so it commutes with every $q_k$ outside those two sites and with $q_j+q_{j+1}$. The definition [F1] therefore applies. By [F2], each bond current is self-adjoint, so $J_3=J_3^*$. Direct multiplication gives $H_3=-g(S+S^*)$ and $J_3=(ig/\\hbar)(S-S^*)$. Since $S$ is unitary, $S$ commutes with $S^*$; hence $[H_3,J_3]=0$, and $J_3\\ne0$.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "In the Fourier basis of the three-cycle, $H_3$ has eigenvalues $-2g,g,g$, while $J_3$ has eigenvalues $0,\\sqrt3g/\\hbar,-\\sqrt3g/\\hbar$ in the corresponding order. The two states with energy $g$ have equal Gibbs weight, so $\\omega_{\\beta,3}(J_3)=0$. Positive definiteness of $\\rho_{\\beta,3}$ and $J_3\\ne0$ give $c:=\\omega_{\\beta,3}(J_3^2)>0$.",
+          "inputs": [
+            "given",
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Because $[H_3,J_3]=0$, Heisenberg evolution fixes $J_3$ for all $t$. Thus $J_3^\\circ=J_3$ and $C_3(t)=c/3$ is a positive constant. Therefore $\\int_0^\\infty|C_3(t)|\\,dt=+\\infty$, refuting the statement.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "In the finite Mazur bound [F3], choose the single conserved operator $Q_1=J_3$. Then $G_{11}=v_1=c$, so the lower bound on the Cesàro average of the unnormalized autocorrelation $\\operatorname{Re}\\omega_{\\beta,3}(\\alpha_t(J_3)J_3)$ is $c>0$. The per-site convention in the definition gives $C_3(t)=\\frac13\\operatorname{Re}\\omega_{\\beta,3}(\\alpha_t(J_3)J_3)$, so the Mazur contribution for the Cesàro average of $C_3$ is $c/3$, equal to the constant correlation found in step 3.1. This remains a finite-volume obstruction only; no thermodynamic Drude weight is inferred.",
+          "inputs": [
+            "F3",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample is a specified nonempty three-site periodic ring."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The chosen g is strictly positive and step 2.1 proves c>0; a zero current would not be a counterexample."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The example uses the single conserved operator Q_1=J_3 in step 4.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The two energy-g states are degenerate and have equal Gibbs weight in step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The periodic bond (2,0) closes the ring and is included in the Hamiltonian and current in step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement explicitly lists three basis vectors and all matrices, so no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a counterexample refuting universal integrability, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is a counterexample refuting universal integrability, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "Exact three-site thermal ring",
+          "inputs": [
+            "L=3",
+            "g>0",
+            "hbar>0",
+            "beta>0"
+          ],
+          "expected": "[H_3,J_3]=0, Tr(rho J_3)=0, c=6g^2/(hbar^2*(exp(3*beta*g)+2))>0, and C_3(t)=c/3.",
+          "result": "PASS: exact 3x3 matrices give commutator residual 0 and continuity residual 0; diagonalization yields the stated Gibbs mean and c."
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "def-qsmx-lattice-current-and-limits",
+          "carrier": "items/def-qsmx-lattice-current-and-limits.md",
+          "status": "Exact current public interface transcribed by root at the drained Step2 join; original substantive source-use review retained in historical_source_interface and native/same-owner reports. No renewed full supplier-proof reading asserted.",
+          "source_section": "Definition",
+          "exact_statement": "Fix either a finite open chain with sites $\\{1,\\ldots,L\\}$, $L\\ge2$, or a periodic chain with sites $\\mathbb Z/L\\mathbb Z$, $L\\ge3$, and denote its site set by $\\Lambda_L$. Let $\\mathcal H_L$ be a nonzero finite-dimensional complex Hilbert space. For each site $j$, let $q_j=q_j^*$ be a bounded charge observable, with physical unit $\\mathsf Q$. For each oriented nearest-neighbor bond $(j,j+1)$, let $h_{j,j+1}=h_{j,j+1}^*$ be an energy operator in joules. Require $[h_{k,k+1},q_j]=0$ whenever $j\\notin\\{k,k+1\\}$, and require local charge conservation $[h_{j,j+1},q_j+q_{j+1}]=0$. On an open chain set $H_L=\\sum_{j=1}^{L-1}h_{j,j+1}$; on a ring set $H_L=\\sum_{j\\in\\mathbb Z/L\\mathbb Z}h_{j,j+1}$ with periodic indices. For an open chain define the absent boundary currents $j_{0,1}=j_{L,L+1}=0$. Use $\\hbar>0$ in joule-seconds. These finite local data may be realized on a tensor-product spin space or on a finite fixed-particle site space, provided the stated commutation conditions hold.\n\nThe oriented bond current from $j$ to $j+1$ is\n$$j_{j,j+1}:=\\frac{i}{\\hbar}[h_{j,j+1},q_{j+1}].$$\nIt has unit $\\mathsf Q\\,\\mathrm{s}^{-1}$. The total current is the sum over existing bonds, $J_L:=\\sum_{(j,j+1)}j_{j,j+1}$, and its Heisenberg evolution for $t\\in\\mathbb R$ is $J_L(t):=e^{iH_Lt/\\hbar}J_Le^{-iH_Lt/\\hbar}$. For finite inverse temperature $\\beta>0$ in joules$^{-1}$, define $\\rho_{\\beta,L}:=e^{-\\beta H_L}/\\operatorname{Tr}(e^{-\\beta H_L})$ and $\\omega_{\\beta,L}(A):=\\operatorname{Tr}(\\rho_{\\beta,L}A)$. Write $J_L^\\circ:=J_L-\\omega_{\\beta,L}(J_L)I$ and $J_L^\\circ(t):=e^{iH_Lt/\\hbar}J_L^\\circ e^{-iH_Lt/\\hbar}$. Define the real, connected, symmetrized correlation per site by\n$$C_L(t):=\\frac{1}{L}\\operatorname{Re}\\,\\omega_{\\beta,L}\\!\\left(J_L^\\circ(t)J_L^\\circ\\right)=\\frac{1}{2L}\\omega_{\\beta,L}\\!\\left(J_L^\\circ(t)J_L^\\circ+J_L^\\circ J_L^\\circ(t)\\right).$$\nThe correlation has unit $\\mathsf Q^2\\,\\mathrm{s}^{-2}$ per site.\n\nThis definition assigns no transport coefficient by itself. Any proposed finite-volume or thermodynamic transport quantity must additionally state its time cutoff, frequency regulator (for example $e^{-\\eta t}$ with $\\eta>0$ in seconds$^{-1}$), spatial normalization, and the exact order in which $L\\to\\infty$, the time cutoff tends to infinity, and any regulator is removed. Existence of those limits is not part of this definition.",
+          "relevant_hypotheses_and_conventions": "Fix either a finite open chain with sites $\\{1,\\ldots,L\\}$, $L\\ge2$, or a periodic chain with sites $\\mathbb Z/L\\mathbb Z$, $L\\ge3$, and denote its site set by $\\Lambda_L$. Let $\\mathcal H_L$ be a finite-dimensional complex Hilbert space. For each site $j$, let $q_j=q_j^*$ be a bounded charge observable, with physical unit $\\mathsf Q$. For each oriented nearest-neighbor bond $(j,j+1)$, let $h_{j,j+1}=h_{j,j+1}^*$ be an energy operator in joules. Require $[h_{k,k+1},q_j]=0$ whenever $j\\notin\\{k,k+1\\}$, and require local charge conservation $[h_{j,j+1},q_j+q_{j+1}]=0$. On an open chain set $H_L=\\sum_{j=1}^{L-1}h_{j,j+1}$; on a ring set $H_L=\\sum_{j\\in\\mathbb Z/L\\mathbb Z}h_{j,j+1}$ with periodic indices. For an open chain define the absent boundary currents $j_{0,1}=j_{L,L+1}=0$. Use $\\hbar>0$ in joule-seconds. These finite local data may be realized on a tensor-product spin space or on a finite fixed-particle site space, provided the stated commutation conditions hold.\n\nThe oriented bond current from $j$ to $j+1$ is\n$$j_{j,j+1}:=\\frac{i}{\\hbar}[h_{j,j+1},q_{j+1}].$$\nIt has unit $\\mathsf Q\\,\\mathrm{s}^{-1}$. The total current is the sum over existing bonds, $J_L:=\\sum_{(j,j+1)}j_{j,j+1}$, and its Heisenberg evolution for $t\\in\\mathbb R$ is $J_L(t):=e^{iH_Lt/\\hbar}J_Le^{-iH_Lt/\\hbar}$. For finite inverse temperature $\\beta>0$ in joules$^{-1}$, define $\\rho_{\\beta,L}:=e^{-\\beta H_L}/\\operatorname{Tr}(e^{-\\beta H_L})$ and $\\omega_{\\beta,L}(A):=\\operatorname{Tr}(\\rho_{\\beta,L}A)$. Write $J_L^\\circ:=J_L-\\omega_{\\beta,L}(J_L)I$ and $J_L^\\circ(t):=e^{iH_Lt/\\hbar}J_L^\\circ e^{-iH_Lt/\\hbar}$. Define the real, connected, symmetrized correlation per site by\n$$C_L(t):=\\frac{1}{L}\\operatorname{Re}\\,\\omega_{\\beta,L}\\!\\left(J_L^\\circ(t)J_L^\\circ\\right)=\\frac{1}{2L}\\omega_{\\beta,L}\\!\\left(J_L^\\circ(t)J_L^\\circ+J_L^\\circ J_L^\\circ(t)\\right).$$\nThe correlation has unit $\\mathsf Q^2\\,\\mathrm{s}^{-2}$ per site.\n\nThis definition assigns no transport coefficient by itself. Any proposed finite-volume or thermodynamic transport quantity must additionally state its time cutoff, frequency regulator (for example $e^{-\\eta t}$ with $\\eta>0$ in seconds$^{-1}$), spatial normalization, and the exact order in which $L\\to\\infty$, the time cutoff tends to infinity, and any regulator is removed. Existence of those limits is not part of this definition.",
+          "supplier_proof_status": "draft; this exact-quote refresh does not grant independent proof acceptance",
+          "consumer_use": "Cited at F1.",
+          "historical_source_interface": {
+            "source_section": "Definition",
+            "exact_statement": "Fix either a finite open chain with sites $\\{1,\\ldots,L\\}$, $L\\ge2$, or a periodic chain with sites $\\mathbb Z/L\\mathbb Z$, $L\\ge3$, and denote its site set by $\\Lambda_L$. Let $\\mathcal H_L$ be a finite-dimensional complex Hilbert space. For each site $j$, let $q_j=q_j^*$ be a bounded charge observable, with physical unit $\\mathsf Q$. For each oriented nearest-neighbor bond $(j,j+1)$, let $h_{j,j+1}=h_{j,j+1}^*$ be an energy operator in joules. Require $[h_{k,k+1},q_j]=0$ whenever $j\\notin\\{k,k+1\\}$, and require local charge conservation $[h_{j,j+1},q_j+q_{j+1}]=0$. On an open chain set $H_L=\\sum_{j=1}^{L-1}h_{j,j+1}$; on a ring set $H_L=\\sum_{j\\in\\mathbb Z/L\\mathbb Z}h_{j,j+1}$ with periodic indices. For an open chain define the absent boundary currents $j_{0,1}=j_{L,L+1}=0$. Use $\\hbar>0$ in joule-seconds. These finite local data may be realized on a tensor-product spin space or on a finite fixed-particle site space, provided the stated commutation conditions hold.\n\nThe oriented bond current from $j$ to $j+1$ is\n$$j_{j,j+1}:=\\frac{i}{\\hbar}[h_{j,j+1},q_{j+1}].$$\nIt has unit $\\mathsf Q\\,\\mathrm{s}^{-1}$. The total current is the sum over existing bonds, $J_L:=\\sum_{(j,j+1)}j_{j,j+1}$, and its Heisenberg evolution for $t\\in\\mathbb R$ is $J_L(t):=e^{iH_Lt/\\hbar}J_Le^{-iH_Lt/\\hbar}$. For finite inverse temperature $\\beta>0$ in joules$^{-1}$, define $\\rho_{\\beta,L}:=e^{-\\beta H_L}/\\operatorname{Tr}(e^{-\\beta H_L})$ and $\\omega_{\\beta,L}(A):=\\operatorname{Tr}(\\rho_{\\beta,L}A)$. Write $J_L^\\circ:=J_L-\\omega_{\\beta,L}(J_L)I$ and $J_L^\\circ(t):=e^{iH_Lt/\\hbar}J_L^\\circ e^{-iH_Lt/\\hbar}$. Define the real, connected, symmetrized correlation per site by\n$$C_L(t):=\\frac{1}{L}\\operatorname{Re}\\,\\omega_{\\beta,L}\\!\\left(J_L^\\circ(t)J_L^\\circ\\right)=\\frac{1}{2L}\\omega_{\\beta,L}\\!\\left(J_L^\\circ(t)J_L^\\circ+J_L^\\circ J_L^\\circ(t)\\right).$$\nThe correlation has unit $\\mathsf Q^2\\,\\mathrm{s}^{-2}$ per site.\n\nThis definition assigns no transport coefficient by itself. Any proposed finite-volume or thermodynamic transport quantity must additionally state its time cutoff, frequency regulator (for example $e^{-\\eta t}$ with $\\eta>0$ in seconds$^{-1}$), spatial normalization, and the exact order in which $L\\to\\infty$, the time cutoff tends to infinity, and any regulator is removed. Existence of those limits is not part of this definition.",
+            "status": "Exact current definition interface inspected; readiness/proof acceptance is not inferred from the carrier label.",
+            "supplier_proof_status": "Current exact definition statement inspected; proof is not applicable; no independent acceptance is implied."
+          }
+        },
+        {
+          "supplier": "lem-qsmx-lattice-current-continuity",
+          "carrier": "items/lem-qsmx-lattice-current-continuity.md",
+          "status": "Exact current statement interface inspected; readiness/proof acceptance is not inferred from the carrier label.",
+          "source_section": "Statement",
+          "exact_statement": "Use the finite open or periodic chain and bond-current definition in [[def-qsmx-lattice-current-and-limits]]. Each $j_{j,j+1}$ is self-adjoint, and with $\\dot q_j:=(i/\\hbar)[H_L,q_j]$ the exact local identity\n$$\\dot q_j=j_{j-1,j}-j_{j,j+1}$$\nholds at every site. Consequently the total charge $Q_L:=\\sum_{j\\in\\Lambda_L}q_j$, where $\\Lambda_L$ is the open-chain site set or periodic site set from the definition, is conserved: $[H_L,Q_L]=0$. The current orientation is from $j$ to $j+1$, so positive outgoing current lowers the charge at site $j$.",
+          "relevant_hypotheses_and_conventions": "Use the finite open or periodic chain and bond-current definition in [[def-qsmx-lattice-current-and-limits]]. Each $j_{j,j+1}$ is self-adjoint, and with $\\dot q_j:=(i/\\hbar)[H_L,q_j]$ the exact local identity\n$$\\dot q_j=j_{j-1,j}-j_{j,j+1}$$\nholds at every site. Consequently the total charge $Q_L:=\\sum_{j\\in\\Lambda_L}q_j$, where $\\Lambda_L$ is the open-chain site set or periodic site set from the definition, is conserved: $[H_L,Q_L]=0$. The current orientation is from $j$ to $j+1$, so positive outgoing current lowers the charge at site $j$.",
+          "supplier_proof_status": "Current draft supplier statement and complete proof inspected; no independent proof acceptance is implied.",
+          "consumer_use": "Cited at F2."
+        },
+        {
+          "supplier": "thm-qsmx-finite-mazur-bound",
+          "carrier": "items/thm-qsmx-finite-mazur-bound.md",
+          "status": "Exact current public interface transcribed by root at the drained Step2 join; original substantive source-use review retained in historical_source_interface and native/same-owner reports. No renewed full supplier-proof reading asserted.",
+          "source_section": "Statement",
+          "exact_statement": "Take the finite-chain data of the current definition on $\\mathcal H_L$ and identify $\\mathcal H:=\\mathcal H_L$. Let $H=H^*$ have energy unit joules, let $\\hbar>0$ have unit joule-seconds, and let $\\rho$ be a positive-definite trace-one matrix satisfying $[\\rho,H]=0$. Define $\\omega(A):=\\operatorname{Tr}(\\rho A)$ and $\\alpha_t(A):=e^{iHt/\\hbar}Ae^{-iHt/\\hbar}$. Let $J_L$ be the total lattice current of the finite-volume current definition and center it with respect to this same $\\rho$, setting $J:=J_L-\\omega(J_L)I$. With no identification of $H$ and $H_L$, the estimate below is an abstract bound for this observable under $\\alpha_t$. Its lattice-transport specialization further takes $H=H_L$; then the Gibbs density $\\rho_{\\beta,L}$ in that definition is stationary and is an admissible choice of $\\rho$. More generally, $\\rho_{\\beta,L}$ can be used with another $H$ exactly when it also satisfies $[\\rho_{\\beta,L},H]=0$. Then $J=J^*$, as established by the local continuity result. For $m\\ge1$, let $Q_1,\\ldots,Q_m$ be linearly independent conserved matrices, $[H,Q_a]=0$. Put\n$$G_{ab}:=\\operatorname{Tr}(\\rho Q_a^*Q_b),\\qquad v_a:=\\operatorname{Tr}(\\rho Q_a^*J).$$\nThen $G$ is positive definite, the finite Cesàro limit exists, and\n$$\\lim_{T\\to\\infty}\\frac1T\\int_0^T\\operatorname{Re}\\,\\omega\\!\\left(\\alpha_t(J)J\\right)\\,dt\\;\\ge\\;v^*G^{-1}v\\;\\ge0.$$\nThis is a finite-dimensional persistent-correlation bound. It does not identify a thermodynamic Drude weight or assert that either volume/time order of limits exists.",
+          "relevant_hypotheses_and_conventions": "Let $\\mathcal H$ have finite dimension, let $H=H^*$ have energy unit joules, let $\\hbar>0$ have unit joule-seconds, and let $\\rho$ be a positive-definite trace-one matrix satisfying $[\\rho,H]=0$. Define $\\omega(A):=\\operatorname{Tr}(\\rho A)$ and $\\alpha_t(A):=e^{iHt/\\hbar}Ae^{-iHt/\\hbar}$. Let $J_L$ be the total lattice current of the finite-volume current definition and center it with respect to this same $\\rho$, setting $J:=J_L-\\omega(J_L)I$. In particular, one may take the finite-temperature Gibbs density in the definition. Then $J=J^*$, as established by the local continuity result. For $m\\ge1$, let $Q_1,\\ldots,Q_m$ be linearly independent conserved matrices, $[H,Q_a]=0$. Put\n$$G_{ab}:=\\operatorname{Tr}(\\rho Q_a^*Q_b),\\qquad v_a:=\\operatorname{Tr}(\\rho Q_a^*J).$$\nThen $G$ is positive definite, the finite Cesàro limit exists, and\n$$\\lim_{T\\to\\infty}\\frac1T\\int_0^T\\operatorname{Re}\\,\\omega\\!\\left(\\alpha_t(J)J\\right)\\,dt\\;\\ge\\;v^*G^{-1}v\\;\\ge0.$$\nThis is a finite-dimensional persistent-correlation bound. It does not identify a thermodynamic Drude weight or assert that either volume/time order of limits exists.",
+          "supplier_proof_status": "draft; this exact-quote refresh does not grant independent proof acceptance",
+          "consumer_use": "Cited at F3.",
+          "historical_source_interface": {
+            "source_section": "Statement",
+            "exact_statement": "Let $\\mathcal H$ have finite dimension, let $H=H^*$ have energy unit joules, let $\\hbar>0$ have unit joule-seconds, and let $\\rho$ be a positive-definite trace-one matrix satisfying $[\\rho,H]=0$. Define $\\omega(A):=\\operatorname{Tr}(\\rho A)$ and $\\alpha_t(A):=e^{iHt/\\hbar}Ae^{-iHt/\\hbar}$. Let $J_L$ be the total lattice current of the finite-volume current definition and center it with respect to this same $\\rho$, setting $J:=J_L-\\omega(J_L)I$. In particular, one may take the finite-temperature Gibbs density in the definition. Then $J=J^*$, as established by the local continuity result. For $m\\ge1$, let $Q_1,\\ldots,Q_m$ be linearly independent conserved matrices, $[H,Q_a]=0$. Put\n$$G_{ab}:=\\operatorname{Tr}(\\rho Q_a^*Q_b),\\qquad v_a:=\\operatorname{Tr}(\\rho Q_a^*J).$$\nThen $G$ is positive definite, the finite Cesàro limit exists, and\n$$\\lim_{T\\to\\infty}\\frac1T\\int_0^T\\operatorname{Re}\\,\\omega\\!\\left(\\alpha_t(J)J\\right)\\,dt\\;\\ge\\;v^*G^{-1}v\\;\\ge0.$$\nThis is a finite-dimensional persistent-correlation bound. It does not identify a thermodynamic Drude weight or assert that either volume/time order of limits exists.",
+            "status": "Exact current statement interface inspected; readiness/proof acceptance is not inferred from the carrier label.",
+            "supplier_proof_status": "Current draft supplier statement and complete proof inspected; no independent proof acceptance is implied."
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,134 @@
+{
+  "phase": "repair",
+  "round": 1,
+  "role": "scope-repairer",
+  "label": "scope-repair-28-1",
+  "inventory": {
+    "pages": [
+      "emg-fx13",
+      "emg-fx13-examples"
+    ],
+    "items": [
+      "def-emg-fx-charged-scalar-stress-tensor",
+      "post-emg-fx-classical-constitutive-adoption",
+      "post-emg-fx-test-field-regime",
+      "lem-emg-fx-asymptotic-scalar-energy-flux",
+      "pthm-emg-fx-conditional-model-flux",
+      "texp-emg-fx-test-to-coupled-error"
+    ],
+    "pairs": [
+      "emg-fx13"
+    ]
+  },
+  "simple_loop": true,
+  "write_files": [
+    "items/def-emg-fx-charged-scalar-stress-tensor.md",
+    "items/post-emg-fx-classical-constitutive-adoption.md",
+    "items/post-emg-fx-test-field-regime.md",
+    "items/lem-emg-fx-asymptotic-scalar-energy-flux.md",
+    "items/pthm-emg-fx-conditional-model-flux.md",
+    "items/texp-emg-fx-test-to-coupled-error.md",
+    "library/einstein-maxwell-models/emg-fx13.md",
+    "library/einstein-maxwell-models/emg-fx13-examples.md"
+  ],
+  "write_batches": [
+    "28"
+  ],
+  "consumer_scope": [
+    {
+      "id": "lem-emg-fx-asymptotic-scalar-energy-flux",
+      "path": [
+        "def-emg-fx-charged-scalar-stress-tensor",
+        "lem-emg-fx-asymptotic-scalar-energy-flux"
+      ],
+      "paths": [
+        [
+          "def-emg-fx-charged-scalar-stress-tensor",
+          "lem-emg-fx-asymptotic-scalar-energy-flux"
+        ]
+      ]
+    },
+    {
+      "id": "post-emg-fx-test-field-regime",
+      "path": [
+        "def-emg-fx-charged-scalar-stress-tensor",
+        "post-emg-fx-test-field-regime"
+      ],
+      "paths": [
+        [
+          "def-emg-fx-charged-scalar-stress-tensor",
+          "post-emg-fx-test-field-regime"
+        ]
+      ]
+    },
+    {
+      "id": "pthm-emg-fx-conditional-model-flux",
+      "path": [
+        "def-emg-fx-charged-scalar-stress-tensor",
+        "lem-emg-fx-asymptotic-scalar-energy-flux",
+        "pthm-emg-fx-conditional-model-flux"
+      ],
+      "paths": [
+        [
+          "def-emg-fx-charged-scalar-stress-tensor",
+          "lem-emg-fx-asymptotic-scalar-energy-flux",
+          "pthm-emg-fx-conditional-model-flux"
+        ],
+        [
+          "post-emg-fx-test-field-regime",
+          "pthm-emg-fx-conditional-model-flux"
+        ],
+        [
+          "lem-emg-fx-asymptotic-scalar-energy-flux",
+          "pthm-emg-fx-conditional-model-flux"
+        ]
+      ]
+    }
+  ],
+  "before_interfaces": {
+    "def-emg-fx-charged-scalar-stress-tensor": [
+      null,
+      "## Definition\n\nLet $(M,g,N,o)$ have the smooth, boundaryless, oriented and time-oriented Lorentzian four-manifold structure, signature $(-,+,+,+)$, metric-selected connection $\\nabla^g$, and length-coordinate convention of [[def-emg-lorentzian-forms]]. Let $A\\in\\Omega^1(M)$ be a supplied smooth real one-form, let $e\\in\\mathbb R$ be a fixed real coupling, and let $\\psi\\in C^\\infty(M,\\mathbb C)$ be a smooth complex-valued function. In the length-coordinate convention, assign dimensionless components to $A_a$ and unit $\\mathrm m^{-1}$ to $e$, so $eA_a$ has derivative unit $\\mathrm m^{-1}$; assign $\\psi$ an arbitrary fixed unit $[\\psi]$. Define the complex covector\n\n$$D_a\\psi:=\\nabla^g_a\\psi-ieA_a\\psi.$$\n\nSince $\\psi$ is a scalar, $\\nabla^g_a\\psi=\\partial_a\\psi$. Define the real symmetric covariant tensor\n\n$$\\mathsf T_{ab}[\\psi;g,A,e]:=\\overline{D_a\\psi}\\,D_b\\psi+\\overline{D_b\\psi}\\,D_a\\psi-g_{ab}g^{cd}\\overline{D_c\\psi}\\,D_d\\psi,$$\n\nwith indices raised using $g^{-1}$. Its covariant components have unit $[\\psi]^2\\mathrm m^{-2}$. This is a mathematical tensor assignment. Its interpretation as a stress-energy tensor, and any field equation or conservation law, require a separate physical model."
+    ],
+    "post-emg-fx-classical-constitutive-adoption": [
+      {
+        "kind": "postulate",
+        "domain": "physics",
+        "physical_scope": "A phenomenological source-free classical constitutive model on a fixed smooth Lorentzian background, restricted to a declared small-invariant domain for one selected polynomial Lagrangian. No QED coefficient matching, derivative expansion, hyperbolicity, causality, solution existence, gravitational backreaction, measurement, or empirical validity is asserted.\n",
+        "empirical_premises": []
+      },
+      "## Postulate\n\nUse a smooth, boundaryless, oriented and time-oriented Lorentzian four-manifold $(M,g,N,o)$ with signature $(-,+,+,+)$, the metric-selected connection and the independent orientation $o$, and a fixed bundle sector with smooth connection and smooth real curvature two-form $F$ satisfying $dF=0$, as in the nonlinear constitutive definition linked below. Define its invariants\n\n$$X:=-\\frac14F_{ab}F^{ab},\\qquad Y:=-\\frac14F_{ab}(\\star_gF)^{ab},$$\n\nand fixed-bundle convention of the nonlinear constitutive definition linked below. Choose fixed real parameters $(\\alpha,\\beta)\\ne(0,0)$ and a dimensionless $\\delta\\in(0,1)$. Adopt, as a classical source-free constitutive model on field configurations whose invariant values lie in\n\n$$\\mathcal D_{\\alpha,\\beta,\\delta}:=\\{(X,Y)\\in\\mathbb R^2:\\ |\\alpha X|+|\\beta Y|<\\delta\\},$$\n\nthe Lagrangian density\n\n$$L_{\\mathrm{eff}}(X,Y):=X+\\alpha X^2+\\beta Y^2.$$\n\nThe corresponding constitutive tensor in the supplier's convention is\n\n$$H^{ab}=(1+2\\alpha X)F^{ab}+2\\beta Y(\\star_gF)^{ab}.$$\n\nHere $\\star_g$ is the Hodge map determined by the metric and independent orientation of the Lorentzian geometry. This postulate adopts the displayed constitutive assignment, but does not adopt or assert a solution of a nonlinear field equation.\n\nThe pair $(\\alpha,\\beta)$ is fixed within a selected model but otherwise arbitrary; this item assigns no numerical values. If the components of $F$ have unit $\\mathfrak F$, then $X,Y,L_{\\mathrm{eff}}$ have unit $\\mathfrak F^2$ and $\\alpha,\\beta$ have unit $\\mathfrak F^{-2}$, making the domain condition dimensionless. This is the mathematical normalization of the supplier, not an SI action prefactor.\n\nThe domain $\\mathcal D_{\\alpha,\\beta,\\delta}$ is an adopted regime label, not a proved error bound. No quantum origin, QED matching, coefficient value, derivative-correction control, characteristic-cone condition, hyperbolicity, causality, or solution-existence claim is included. The formal nonlinear field equations, if separately derived under the supplier's compact-variation hypotheses, do not establish that this model describes nature."
+    ],
+    "post-emg-fx-test-field-regime": [
+      {
+        "kind": "postulate",
+        "domain": "physics",
+        "physical_scope": "A massless, minimally coupled classical complex scalar on a prescribed electric Reissner–Nordström-form static exterior with subextremal or extremal parameters. The background metric and electric field are fixed data; no scalar source, stress backreaction, global extension, scattering-solution existence, astrophysical identification, measurement, or empirical validity is asserted.\n",
+        "empirical_premises": []
+      },
+      "## Postulate\n\nAdopt the following classical test-scalar model in the geometric length-coordinate convention of the charged radial-scattering definition. Let $M>0$ and $Q\\in\\mathbb R$ satisfy $0<|Q|\\le M$, put\n\n$$r_\\pm:=M\\pm\\sqrt{M^2-Q^2},\\qquad f(r):=1-\\frac{2M}{r}+\\frac{Q^2}{r^2},\\qquad U:=\\mathbb R_t\\times(r_+,\\infty)_r\\times S^2.$$\n\nOn $U$ prescribe\n\n$$g=-f(r)\\,dt^2+f(r)^{-1}dr^2+r^2\\gamma_{S^2},\\qquad A=-\\frac Qr\\,dt,\\qquad F=dA=-\\frac{Q}{r^2}\\,dt\\wedge dr.$$\n\nHere $\\gamma_{S^2}$ is the unit round metric, $A_t\\to0$ at infinity, and $r_+$ is the larger positive root; in the extremal case $Q^2=M^2$ both roots equal $M$. The factorization $f(r)=(r-r_+)(r-r_-)/r^2$ makes $f>0$ on this open exterior. The larger root is a null constant-$r$ Killing horizon in the selected ingoing RN model; it is not an event-horizon assertion about a maximal spacetime. Orient the product by $dt\\wedge dr\\wedge\\omega_{S^2}$, where $\\omega_{S^2}$ is the outward area form of the unit round sphere; $\\star_g$ denotes the corresponding Lorentzian Hodge map. Adopt the source-free background Maxwell branch $dF=0$ and $d(\\star_gF)=0$ on $U$. The fields are prescribed on the open exterior only. No maximal extension, coupled Einstein equation, or actual astrophysical object is asserted by this postulate.\n\nIn the chosen global electric gauge, let $\\psi:U\\to\\mathbb C$ be a smooth complex scalar and let $e\\in\\mathbb R$ be its fixed charge-coupling parameter. Define $D_a\\psi:=\\partial_a\\psi-ieA_a\\psi$, so $D_t=\\partial_t+ieQ/r$. The scalar Laplace–Beltrami operator on the unit sphere is $\\Delta_{\\gamma_{S^2}}=\\frac1{\\sin\\theta}\\partial_\\theta(\\sin\\theta\\,\\partial_\\theta)+\\frac1{\\sin^2\\theta}\\partial_\\phi^2$ in the standard polar chart, with smooth global extension. Adopt the massless, minimally coupled equation\n\n$$\\Box_{g,A}\\psi:=-f^{-1}D_t^2\\psi+\\frac1{r^2}\\partial_r\\!\\left(r^2f\\,\\partial_r\\psi\\right)+\\frac1{r^2}\\Delta_{\\gamma_{S^2}}\\psi=0.$$\n\nFor its energy bookkeeping, adopt the symmetric tensor assignment $\\mathsf T_{ab}[\\psi;g,A,e]$ defined by the exact mathematical stress-tensor formula linked below. The scalar's stress is omitted from the equations for the prescribed background, and no scalar source is added to its Maxwell equation. This is a test-field model: omission of the scalar response is a modeling choice, not an estimate that the response is small.\n\nCoordinates $t,r,M,Q$ have unit metres; $f$ and $A_t$ are dimensionless; $e$ has unit $\\mathrm m^{-1}$; $F_{tr}$ has unit $\\mathrm m^{-1}$; and the scalar field has a specified but otherwise arbitrary unit $[\\psi]$. The tensor assignment $\\mathsf T_{ab}$ has component unit $[\\psi]^2\\mathrm m^{-2}$ in this geometric normalization. For the subextremal branch, define the gauge-normalized outer-root potential difference by $\\Phi_H:=A_t(\\infty)-A_t(r_+)=Q/r_+$. The separate mathematical scalar model on the Einstein–Maxwell page uses SI bookkeeping and its own coupling parameters; no identification with those parameters is made here."
+    ],
+    "lem-emg-fx-asymptotic-scalar-energy-flux": [
+      null,
+      "## Statement\n\nUse the fixed subextremal electric Reissner–Nordström exterior, gauge, charged derivative, real normalized spherical harmonic $Y$, and mode conventions of [[def-emg-fx-charged-radial-scattering]]. Let $\\psi=A_{\\mathrm{in}}e^{-i\\omega t}Y(\\Omega)u(r_*)/r$ be any admitted real-frequency scattering mode with $\\omega>0$ and $A_{\\mathrm{in}}\\ne0$, and let $R$ be its reflection coefficient. Form $\\mathsf T_{ab}[\\psi;g,A,e]$ by the gauge-covariant scalar stress-tensor definition. With $\\xi=\\partial_t$, define the outward radial flux through the sphere of radius $r$ by\n\n$$\\mathcal P(r):=-\\int_{S^2}r^2\\mathsf T^r{}_t[\\psi;g,A,e]\\,d\\omega_{S^2}.$$\n\nLet $\\psi_{\\mathrm{in}}:=A_{\\mathrm{in}}e^{-i\\omega t}Y e^{-i\\Theta}/r$ and $\\psi_{\\mathrm{ref}}:=A_{\\mathrm{in}}e^{-i\\omega t}YRe^{i\\Theta}/r$ be the two leading asymptotic components. Define their positive directional flux magnitudes by\n\n$$\\mathcal P_{\\mathrm{in}}:=\\lim_{r\\to\\infty}\\int_{S^2}r^2\\mathsf T^r{}_t[\\psi_{\\mathrm{in}};g,A,e]\\,d\\omega_{S^2},\\qquad \\mathcal P_{\\mathrm{ref}}:=-\\lim_{r\\to\\infty}\\int_{S^2}r^2\\mathsf T^r{}_t[\\psi_{\\mathrm{ref}};g,A,e]\\,d\\omega_{S^2}.$$\n\nThen\n\n$$\\mathcal P_{\\mathrm{in}}=2\\omega^2|A_{\\mathrm{in}}|^2,\\qquad \\mathcal P_{\\mathrm{ref}}=2\\omega^2|A_{\\mathrm{in}}|^2|R|^2,\\qquad \\frac{\\mathcal P_{\\mathrm{ref}}}{\\mathcal P_{\\mathrm{in}}}=|R|^2.$$\n\nThis is a conditional tensor calculation for the specified mode asymptotics; it asserts neither that such a mode exists nor that its flux has been observed."
+    ],
+    "pthm-emg-fx-conditional-model-flux": [
+      {
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "physical_scope": "A conditional linear fixed-background statement for an admitted real-frequency massless charged-scalar scattering mode on the specified subextremal electric Reissner–Nordström exterior. It concerns only the declared asymptotic time-translation energy-flux normalization and makes no claim of mode existence, astrophysical efficiency, measured amplification, quantum pair-production, coupled evolution, or nonlinear instability.\n",
+        "empirical_premises": []
+      },
+      "## Statement\n\nWithin the adopted fixed-background charged-scalar model, consider any admitted real-frequency scattering mode on a subextremal electric Reissner–Nordström exterior with incident amplitude $A_{\\mathrm{in}}\\ne0$, reflection coefficient $R$, and transmission coefficient $T\\ne0$. Let $\\Phi_H=Q/r_+$ be the gauge-normalized potential difference and let $\\mathcal P_{\\mathrm{in}},\\mathcal P_{\\mathrm{ref}}$ be the positive incoming and reflected time-translation energy-flux magnitudes defined by the adopted stress tensor. If\n\n$$0<\\omega<e\\Phi_H,$$\n\nthen\n\n$$\\frac{\\mathcal P_{\\mathrm{ref}}}{\\mathcal P_{\\mathrm{in}}}=|R|^2=1+\\frac{e\\Phi_H-\\omega}{\\omega}|T|^2>1.$$\n\nThus the reflected asymptotic mode flux magnitude exceeds the incident magnitude in this frequency band, conditional on an admitted scattering solution with nonzero transmission. The statement asserts neither existence nor uniqueness of such a solution."
+    ],
+    "texp-emg-fx-test-to-coupled-error": [
+      {
+        "kind": "thought-experiment",
+        "domain": "physics",
+        "physical_scope": "A conditional finite-time comparison for a smooth source-free Maxwell test field on a fixed vacuum background over one compact chart cylinder. It assumes an exact residual estimate and a separate solution-error inequality. Existence of the compared state curves and availability of that inequality are not asserted; no infinite-time or empirical backreaction claim is made.\n",
+        "empirical_premises": []
+      },
+      "## Statement\nLet $U$ be a smooth four-dimensional Lorentzian chart domain with length coordinate $t$, let $\\Lambda\\in\\mathbb R$, and suppose $G_{ab}(g)+\\Lambda g_{ab}=0$ on $U$, using the Einstein tensor and curvature convention of [[def-gr-curvature-tensor-and-derived-tensors]]. Let $F_1$ be a smooth real Maxwell two-form with $dF_1=0$ and $d(\\star_gF_1)=0$ on this fixed metric. For dimensionless $\\varepsilon\\in\\mathbb R$, put $F_\\varepsilon:=\\varepsilon F_1$. Use the common geometric normalization of the current mathematical suppliers:\n\n$$\\mathcal Q_{ab}(g,F):=F_{ac}F_b{}^c-\\frac14g_{ab}F_{cd}F^{cd},\\qquad \\mathscr R_{ab}(g,F;\\Lambda):=G_{ab}+\\Lambda g_{ab}-\\frac{\\kappa}{\\mu_0}\\mathcal Q_{ab}(g,F).$$\n\nThe tensor $\\mathcal Q$ is the quadratic Maxwell tensor in that normalization. This residual uses the Maxwell tensor; the charged scalar model on the A page is a separate model.\n\nFor a smooth covariant two-tensor $S$ and nonempty compact chart set $K$, use the component norm $\\|S\\|_K:=\\max_{0\\le a,b\\le3}\\sup_{p\\in K}|S_{ab}(p)|$, as in [[prop-emg-test-field-residual-order]]. Fix $\\tau>0$ and a nonempty compact spatial chart set $K_0$ such that $K_\\tau:=[0,\\tau]\\times K_0$ is a compact subset of $U$. Let $\\mathscr R_\\varepsilon(t)$ denote the restriction to $K_0$ of $\\mathscr R(g,F_\\varepsilon;\\Lambda)$ at time $t$.\n\nLet $(\\mathcal X,\\|\\cdot\\|_{\\mathcal X})$ be a specified normed space. Let $z_\\varepsilon,\\widetilde z_\\varepsilon:[0,\\tau]\\to\\mathcal X$ be any two supplied state curves, interpreted in an intended application as a coupled state and its test-field approximation. No existence or regularity theorem for these curves is asserted. Assume the separate stability inequality\n\n$$\\|z_\\varepsilon(t)-\\widetilde z_\\varepsilon(t)\\|_{\\mathcal X}\\le K(\\tau)\\int_0^t\\|\\mathscr R_\\varepsilon(s)\\|_{K_0}\\,ds\\qquad(0\\le t\\le\\tau),$$\n\nwith a specified finite $K(\\tau)\\ge0$. Set\n\n$$T^{(1)}_{ab}:=\\mu_0^{-1}\\mathcal Q_{ab}(g,F_1),\\qquad C:=\\kappa\\|T^{(1)}\\|_{K_\\tau}.$$\n\nThe exact test-field residual proposition gives $\\|\\mathscr R(g,F_\\varepsilon;\\Lambda)\\|_{K_\\tau}=C\\varepsilon^2$. Since $K_\\tau=[0,\\tau]\\times K_0$ and there are finitely many components, this equals $\\sup_{0\\le t\\le\\tau}\\|\\mathscr R_\\varepsilon(t)\\|_{K_0}$. Consequently,\n\n$$\\sup_{0\\le t\\le\\tau}\\|z_\\varepsilon(t)-\\widetilde z_\\varepsilon(t)\\|_{\\mathcal X}\\le K(\\tau)C\\tau\\varepsilon^2.$$\n\nIn the geometric normalization, $[\\kappa T^{(1)}_{ab}]=\\mathrm m^{-2}$ and $[C]=\\mathrm m^{-2}$; $[\\tau]=\\mathrm m$. If solution-error norm values have fixed unit $\\mathsf u_{\\mathcal X}$, then the assumed coefficient has unit $[K(\\tau)]=\\mathsf u_{\\mathcal X}\\,\\mathrm m$. The estimate is conditional on the supplied curves and stability inequality; it proves neither their existence nor the availability of that inequality."
+    ]
+  }
+}
