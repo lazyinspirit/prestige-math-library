@@ -236,7 +236,7 @@ test('native temporary-Git transaction loads supporting policy and commits 164 r
   assert.equal(projection.index_foreign_raw_sha256, hash(planForeignResidual(f.index, ids)));
 });
 
-function additionFixture(t) {
+function additionFixture(t, { ownedAnchor = false } = {}) {
   const f = fixture(t), oldRows = new Map(planDocument(f.head).rows.map(row => [row.id,row.raw]));
   for (const suffix of ['third','fourth']) {
     const id='support-'+suffix, row={id,kind:'A',category:'test-category',requires:[],items:['def-'+suffix]};
@@ -244,10 +244,10 @@ function additionFixture(t) {
     f.spec.supporting_pages.push({id,path,sha256:hash(source),ownership_evidence:f.ownership});f.owner.owned_paths.push({path,sha256:hash(source)});f.additionalPaths.push({path,sha256:hash(source),ownership_evidence:f.ownership,reason:'Commit this exact accepted outside page repair.'});oldRows.set(id,JSON.stringify(row));
   }
   f.resealOwner();
-  const added=f.selectedIds.slice(62), anchor='foreign-anchor', owned=new Set([...f.selectedIds,...f.support.map(r=>r.id)]);
+  const added=f.selectedIds.slice(62), anchor=ownedAnchor?f.selectedIds[61]:'foreign-anchor', foreignAnchor='foreign-anchor', owned=new Set([...f.selectedIds,...f.support.map(r=>r.id)]);
   const raw=rows=>rows.map(row=>typeof row==='string'?row:JSON.stringify(row));
-  const original=label=>raw([oldRows.get('support-left'),...f.selectedIds.slice(0,62).map(id=>oldRows.get(id)),...f.support.slice(1).map(r=>oldRows.get(r.id)),` { "id" : "${anchor}", "items" : [], "memo" : "${label} anchor body" }`]);
-  const target=raw([f.support[0],...f.selected.slice(0,62),...f.support.slice(1),` { "id" : "${anchor}", "items" : [], "memo" : "WORKING anchor body" }`,...f.selected.slice(62)]);
+  const original=label=>raw([oldRows.get('support-left'),...f.selectedIds.slice(0,62).map(id=>oldRows.get(id)),...f.support.slice(1).map(r=>oldRows.get(r.id)),` { "id" : "${foreignAnchor}", "items" : [], "memo" : "${label} anchor body" }`]);
+  const target=raw(ownedAnchor ? [f.support[0],...f.selected,...f.support.slice(1),` { "id" : "${foreignAnchor}", "items" : [], "memo" : "WORKING anchor body" }`] : [f.support[0],...f.selected.slice(0,62),...f.support.slice(1),` { "id" : "${foreignAnchor}", "items" : [], "memo" : "WORKING anchor body" }`,...f.selected.slice(62)]);
   const foreign=label=>[` { "id" : "foreign-later-one", "items" : [], "memo" : "${label} first \u03b1 { raw }" } `,` { "id" : "foreign-later-two", "items" : [], "memo" : "${label} second" } `];
   const doc=(rows,label)=>'{\n "foreign_top" : '+JSON.stringify(label)+',\n "pages" : [\n  '+rows.join(',\n  ')+'\n ]\n}\n';
   const head=doc(original('HEAD'),'HEAD original'),index=doc(original('INDEX'),'INDEX original'),working=doc([...target,...foreign('WORKING')],'WORKING current');
@@ -263,10 +263,10 @@ test('V2 authenticates 100 absent selected rows, 66 existing rows and four suppo
  const f=additionFixture(t),v=f.validate();assert.equal(v.pageIds.length,162);assert.equal(v.supportingPageIds.length,4);assert.equal(v.addedPageIds.length,100);assert.equal(f.spec.base_head_owned_rows.length,66);assert.equal(f.spec.target_owned_rows.length,166);
  for(const [kind,base]of [['head',f.currentHead],['index',f.currentIndex]]){const out=composePlanProjection(base,f.spec,kind),ids=planProjectionPageIds(f.spec);assert.equal(out.replacements.length,66);assert.equal(out.insertions.length,1);assert.equal(planForeignResidual(out.text,ids,f.spec.insertions),planForeignResidual(base,ids,f.spec.insertions));assert.ok(out.text.includes(kind==='head'?'HEAD first':'INDEX first'));assert.ok(!out.text.includes('WORKING first'));assert.deepEqual(composePlanProjection(out.text,f.spec,kind),{text:out.text,already_integrated:true,replacements:[],insertions:[]});}
 });
-for(const mode of ['missing-anchor','owned-anchor','duplicate-added','duplicate-block','unknown-added','one-original-present','reordered-added','payload-space','payload-comma','payload-foreign-row'])test(`V2 rejects ${mode}`,t=>{
+for(const mode of ['missing-anchor','nonadjacent-owned-anchor','duplicate-added','duplicate-block','unknown-added','one-original-present','reordered-added','payload-space','payload-comma','payload-foreign-row'])test(`V2 rejects ${mode}`,t=>{
  const f=additionFixture(t);
  if(mode==='missing-anchor')f.spec.insertions[0].after_page_id='absent-anchor';
- if(mode==='owned-anchor')f.spec.insertions[0].after_page_id=f.selectedIds[0];
+ if(mode==='nonadjacent-owned-anchor')f.spec.insertions[0].after_page_id=f.selectedIds[0];
  if(mode==='duplicate-added')f.spec.added_page_ids.push(f.added[0]);
  if(mode==='duplicate-block')f.spec.insertions.push(clone(f.spec.insertions[0]));
  if(mode==='unknown-added')f.spec.added_page_ids[0]='foreign-later-one';
@@ -299,4 +299,29 @@ test('native V2 temporary-Git transaction inserts only 100 owned rows and preser
  assert.equal(preflightStep6(f.root,f.run).planProjections.length,1);const result=commitStep6(f.root,f.run,{assertValidated(){}});assert.equal(git(['rev-parse','HEAD']),result.commit);
  assert.equal(git(['show','HEAD:research/plan-spec.json'])+'\n',composePlanProjection(f.currentHead,f.spec,'head').text);assert.equal(git(['show',':research/plan-spec.json'])+'\n',composePlanProjection(f.currentIndex,f.spec,'index').text);assert.equal(readFileSync(join(f.root,'research/plan-spec.json'),'utf8'),f.working);assert.equal(git(['ls-files','--stage','--','foreign.md']),foreignIndex);assert.equal(readFileSync(join(f.root,'foreign.md'),'utf8'),'Independent working foreign file\n');
  const receipt=JSON.parse(readFileSync(join(f.root,'research/demo-dispatch/tool-step6-finalize-v3.result.json')));assert.equal(receipt.closeout_scope.plan_projections[0].added_page_ids.length,100);assert.equal(receipt.closeout_scope.plan_projections[0].supporting_page_ids.length,4);
+});
+test('native V2 existing-selected-anchor transaction inserts only 100 owned rows and preserves separate foreign HEAD/index/working',t=>{
+ const f=additionFixture(t,{ownedAnchor:true}),git=args=>{const r=spawnSync('git',args,{cwd:f.root,encoding:'utf8'});assert.equal(r.status,0,r.stderr);return r.stdout.trimEnd();};
+ git(['init','-b','main']);git(['config','user.name','Projection fixture']);git(['config','user.email','fixture@example.invalid']);mkdirSync(join(f.root,'empty-hooks'));git(['config','core.hooksPath',join(f.root,'empty-hooks')]);
+ f.put('research/plan-spec.json',f.head);f.put('foreign.md','Original foreign file\n');git(['add','--','research/plan-spec.json','foreign.md']);git(['commit','-m','genuine absent-row original']);f.spec.original_head=git(['rev-parse','HEAD']);
+ f.put('research/plan-spec.json',f.index);git(['add','--','research/plan-spec.json']);f.spec.original_index_blob=git(['rev-parse',':research/plan-spec.json']);
+ // A genuine unrelated commit adds foreign rows after the preserved anchor.
+ f.put('research/plan-spec.json',f.currentHead);git(['add','--','research/plan-spec.json']);git(['commit','-m','unrelated foreign plan additions']);f.put('research/plan-spec.json',f.currentIndex);f.put('foreign.md','Separately staged foreign file\n');git(['add','--','research/plan-spec.json','foreign.md']);const foreignIndex=git(['ls-files','--stage','--','foreign.md']);
+ f.put('research/plan-spec.json',f.working);f.put('foreign.md','Independent working foreign file\n');
+ for(const row of f.selected){const id=row.items[0].id;f.put(`library/test-category/${row.id}.md`,`---\npage: ${row.id}\nitems: [${id}]\nexamples: []\n---\n`);f.put(`items/${id}.md`,`---\nid: ${id}\ndeps: []\n---\n## Statement\nFixture only.\n`);}
+ f.put('research/published-consumer-supplier-ledger.md','');f.put('research/defect-ledger.jsonl','');for(const suffix of ['proof-layout.json','publication-readiness.json','step6-evidence.json','step6-report-integrity.json','step6-report.response.json','step6-report.md','pathway-closure.json','judge-closure.json'])f.put(`research/demo-${suffix}`,'{}');
+ const authority='research/demo-plan-projection.json';f.put(authority,f.spec);f.put('research/demo-closeout-scope.json',{version:1,run:f.run,authorized_by:'owner',authorization:'Authorize exact selected and explicitly owned supporting plan rows only.',additional_paths:f.additionalPaths,plan_projection:{path:'research/plan-spec.json',authority,sha256:hash(readFileSync(join(f.root,authority)))}});
+ assert.equal(preflightStep6(f.root,f.run).planProjections.length,1);const result=commitStep6(f.root,f.run,{assertValidated(){}});assert.equal(git(['rev-parse','HEAD']),result.commit);
+ assert.equal(git(['show','HEAD:research/plan-spec.json'])+'\n',composePlanProjection(f.currentHead,f.spec,'head').text);assert.equal(git(['show',':research/plan-spec.json'])+'\n',composePlanProjection(f.currentIndex,f.spec,'index').text);assert.equal(readFileSync(join(f.root,'research/plan-spec.json'),'utf8'),f.working);assert.equal(git(['ls-files','--stage','--','foreign.md']),foreignIndex);assert.equal(readFileSync(join(f.root,'foreign.md'),'utf8'),'Independent working foreign file\n');
+ const receipt=JSON.parse(readFileSync(join(f.root,'research/demo-dispatch/tool-step6-finalize-v3.result.json')));assert.equal(receipt.closeout_scope.plan_projections[0].added_page_ids.length,100);assert.equal(receipt.closeout_scope.plan_projections[0].supporting_page_ids.length,4);
+});
+
+test('V2 existing selected anchor survives changed row lengths and preserves both foreign bases',t=>{
+ const f=additionFixture(t,{ownedAnchor:true});f.validate();const before=planDocument(f.head).rows.find(r=>r.id===f.anchor),target=planDocument(f.working).rows.find(r=>r.id===f.anchor);assert.notEqual(before.raw.length,target.raw.length);
+ for(const [kind,base]of [['head',f.currentHead],['index',f.currentIndex]]){const out=composePlanProjection(base,f.spec,kind),ids=planProjectionPageIds(f.spec);assert.equal(out.insertions.length,1);assert.equal(planForeignResidual(out.text,ids,f.spec.insertions),planForeignResidual(base,ids,f.spec.insertions));assert.deepEqual(composePlanProjection(out.text,f.spec,kind),{text:out.text,already_integrated:true,replacements:[],insertions:[]});assert.ok(!out.text.includes('WORKING first'));}
+});
+for(const mode of ['new-anchor','support-anchor','missing-head-anchor','missing-index-anchor','nonadjacent-anchor','duplicate-anchor','payload-drift'])test(`V2 selected anchor rejects ${mode}`,t=>{
+ const f=additionFixture(t,{ownedAnchor:true});
+ if(mode==='new-anchor')f.spec.insertions[0].after_page_id=f.added[0];if(mode==='support-anchor')f.spec.insertions[0].after_page_id=f.support[0].id;if(mode==='nonadjacent-anchor')f.spec.insertions[0].after_page_id=f.selectedIds[0];if(mode==='duplicate-anchor')f.spec.insertions.push(clone(f.spec.insertions[0]));if(mode==='payload-drift')f.spec.insertions[0].raw=f.spec.insertions[0].raw.replace(',\n  ', ',\n   ');
+ if(mode==='missing-head-anchor'||mode==='missing-index-anchor'){const base=mode==='missing-head-anchor'?f.head:f.index,doc=planDocument(base),row=doc.rows.find(r=>r.id===f.anchor),changed=base.slice(0,row.start)+row.raw.replace(f.anchor,'replaced-foreign-anchor')+base.slice(row.end);assert.throws(()=>mode==='missing-head-anchor'?f.validate(changed):f.validate(f.head,changed));}else assert.throws(f.validate);
 });

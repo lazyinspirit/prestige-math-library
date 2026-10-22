@@ -201,7 +201,7 @@ remain. Add exactly these fields:
 {
   "added_page_ids": ["new-selected-page-id"],
   "insertions": [{
-    "after_page_id": "existing-unowned-page-id",
+    "after_page_id": "existing-page-id",
     "page_ids": ["new-selected-page-id"],
     "raw": ",\n  {\"id\":\"new-selected-page-id\",\"items\":[] }"
   }]
@@ -210,14 +210,21 @@ remain. Add exactly these fields:
 
 `added_page_ids` is the exact ordered selected-only addition set; it never
 contains supporting or outside pages. Every listed page must be absent from
-**both** immutable original HEAD and original index plans. The two base row
+**both** immutable original HEAD and original index plans. An insertion anchor may be an existing unowned page or an existing selected
+page, but must occur uniquely in both original bases and the current target.
+An added page or an owned supporting page cannot serve as an anchor. The
+current raw insertion span must follow that exact anchor immediately. Selected
+anchor row replacements remain authenticated by the same exact original/target
+row inventories; composition reparses replaced rows before locating the anchor,
+and inversion removes additions before undoing replacements. Foreign bytes
+retain their separate HEAD/index residuals. The two base row
 arrays contain only genuinely existing owned rows, without fabricated empty or
 placeholder originals. Their ordered IDs must equal the target owned IDs with
 the additions removed. The target still contains the complete exact selected
 and explicitly owned support union. Existing supporting pages keep their
 items-only, actual-frontmatter-order guard.
 
-Each insertion names a unique unowned page present in both original plans and
+Each insertion names a unique existing unowned or selected page present in both original plans and
 the current target. In the actual working document its added rows must immediately
 and consecutively follow that anchor, in exact declared order. `raw` is the exact
 substring from the anchor object's token end through the last added object's

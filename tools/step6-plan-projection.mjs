@@ -95,9 +95,10 @@ function insertionAuthority(spec, pageIds) {
   const owned = new Set(pageIds), anchors = new Set();
   for (const block of blocks) {
     if (!keys(block, ['after_page_id', 'page_ids', 'raw']) || typeof block.after_page_id !== 'string'
-      || owned.has(block.after_page_id) || anchors.has(block.after_page_id)
+      || added.includes(block.after_page_id)
+      || (owned.has(block.after_page_id) && !spec.page_ids.includes(block.after_page_id)) || anchors.has(block.after_page_id)
       || !Array.isArray(block.page_ids) || !block.page_ids.length || typeof block.raw !== 'string'
-      || !block.raw.startsWith(',')) fail('invalid unowned insertion anchor/payload');
+      || !block.raw.startsWith(',')) fail('invalid existing insertion anchor/payload');
     anchors.add(block.after_page_id);
     const rows = planDocument('{"pages":[' + block.raw.slice(1) + ']}').rows.map(({id,raw}) => ({id,raw}));
     if (!same(rows.map(row => row.id), block.page_ids)
@@ -259,6 +260,8 @@ export function validatePlanProjection(spec, run, scopePages, working, originalH
     fail('owned relative order changed, addition is not absent in both originals, or an owned page is missing');
   for (const block of blocks) {
     if (documents.some(doc => !doc.rows.some(row => row.id === block.after_page_id))) fail('insertion anchor missing from an original or target');
+    if (ids.has(block.after_page_id) && !originalIds.includes(block.after_page_id))
+      fail('selected insertion anchor must exist in both original owned inventories');
   }
   if (blocks.length) removePlanInsertions(working, blocks);
   if (!same(observed[0], spec.base_head_owned_rows) || !same(observed[1], spec.base_index_owned_rows)
