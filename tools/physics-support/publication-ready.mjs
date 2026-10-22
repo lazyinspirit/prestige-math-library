@@ -57,6 +57,11 @@ try { scope = runScope(run, root); } catch (error) { blockers.push(String(error.
 // Reused published files retain owner-approved status; new publication still
 // fails. The scope pins an exact pre-run commit; dates cannot establish history.
 const git = (...args) => spawnSync('git', args, { cwd: root, encoding: 'utf8' });
+// Baseline object paths are Git-root-relative; physics carriers are local.
+const prefixResult = git('rev-parse', '--show-prefix');
+const workspacePrefix = prefixResult.stdout?.trim();
+if (prefixResult.status !== 0 || workspacePrefix !== 'physics/')
+  throw Error('publication-ready: unexpected physics domain root');
 const baseline = scope && JSON.parse(readFileSync(join(root, scope.ledger), 'utf8')).baseline_commit;
 const publishedBaseline = typeof baseline === 'string' && /^[a-f0-9]{40,64}$/.test(baseline)
   && git('merge-base', '--is-ancestor', baseline, 'HEAD').status === 0 ? baseline : null;
@@ -68,12 +73,13 @@ if (scope) {
     const status = frontmatter.match(/^status:\s*(\S+)\s*$/m)?.[1]
       ?.replace(/^['"]|['"]$/g, '');
     if (status === 'published' && publishedBaseline) {
-      const prior = git('show', `${publishedBaseline}:${row.file}`);
+      const prior = git('show', `${publishedBaseline}:${workspacePrefix}${row.file}`);
       if (prior.status === 0) {
         const fm = splitFrontmatter(prior.stdout).frontmatter;
         const key = row.file.startsWith('items/') ? 'id' : 'page';
         const identity = fm.match(new RegExp(`^${key}:\\s*([^\\n]+?)\\s*$`, 'm'))?.[1]?.replace(/^['"]|['"]$/g, '');
-        if (identity === row.id && /^status:\s*published\s*$/m.test(fm)) continue;
+        const priorStatus = fm.match(/^status:\s*(\S+)\s*$/m)?.[1]?.replace(/^['"]|['"]$/g, '');
+        if (identity === row.id && priorStatus === 'published') continue;
       }
     }
     if (status !== 'draft') blockers.push(`${row.file}: expected status:draft pending owner approval, found ${status ?? 'missing'}`);

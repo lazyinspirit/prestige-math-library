@@ -961,6 +961,12 @@ the TypeScript fallback resolves configured project path aliases and missing
 extensionless relative TypeScript imports; ordinary package resolution retains
 Node export-map checks. These runtime details do not change renderer analysis.
 
+Readiness permits a selected carrier to retain `status: published` only when
+the exact pre-run ancestor commit contains the same item/page identity with
+published status at its `physics/` Git path. Plain and quoted status scalars
+are equivalent. A draft or absent baseline carrier grants no new publication
+permission; current source, repair, review and context guards remain independent.
+
 Physics v3 closeout may opt into exact shared-plan page-row projection through
 the run-local closeout scope policy. Authority binds only the exact current
 scope ledger and all current batch manifests, with separate original HEAD/index
