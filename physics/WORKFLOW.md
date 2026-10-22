@@ -283,6 +283,15 @@ page path and excerpts, and a root-approved scientific classification receipt.
 Only this page route treats absent and null consumer fields alike; a different
 consumer still fails. Existing item aliases keep their original requirements.
 
+A `legacy-v2-same-source-distinct-carrier` alias authenticates assigned item
+findings that predate `observed_source`. It binds the unchanged pre/post
+snapshots, original raw source and manifest archives, the archived contract
+that reproduces the refuter fingerprint, and the genuine native continuation
+authorization for that raw source. Root records the same-issue classification
+and current repair excerpts. Both original observations remain unchanged and
+share one actual defect row. This legacy route normalizes absent/null consumer
+fields only within its guarded class; current item-alias rules remain intact.
+
 A same-batch touched or page repair may share its actual defect with a refuter
 of the frozen reader-result carrier. Both obligations remain explicit. Sharing
 requires an accepted or amended repair with confidence 1, a confirmed refuter
