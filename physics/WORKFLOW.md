@@ -1179,6 +1179,24 @@ pass. Pre-author items bind their actual manifest and explicitly absent carrier;
 check their scaffold structure and metadata without inventing an authored body.
 An item gate cannot authorize an empty subject selection.
 
+## Imported mathematical pages in plan validation
+
+The private physics `validate-plan` adapter resolves a missing plan-catalogue
+page only when the current frontier reaches it through declared prerequisites
+or actual supplier page edges. Resolution requires one published mathematical
+page with the exact ID, one unambiguous regular local carrier, and matching
+immutable `math-imports.json` bytes. Unknown, unpinned, changed, draft, physical,
+malformed or ambiguous carriers remain blocking. Unrelated imports are not
+added or validated as subjects.
+
+The resolved page is an in-memory prerequisite-only P declaration: it does not
+change the plan, manifests, source pages or selected frontier. It retains an
+explicit source order, or uses the existing published-P default of zero when no
+order is stored. Its actual declared prerequisites and reached item edges remain
+in closure and cycle checks; ordinary ordering, undeclared-prerequisite and
+examples-page leaf protections remain active. The adapter never fabricates an
+item inventory or imports new source bytes.
+
 ## Reviewed original mathematics maintenance
 
 An authored run may encounter a relevant published mathematics original whose

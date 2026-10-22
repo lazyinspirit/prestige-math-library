@@ -10,7 +10,7 @@ function fixture(t) {
   const repo = mkdtempSync(join(tmpdir(), 'frontier-plan-'));
   t.after(() => rmSync(repo, { recursive: true, force: true }));
   for (const dir of ['tools/physics-support', 'items', 'library/test', 'research']) mkdirSync(join(repo, dir), { recursive: true });
-  for (const file of ['frontier-item-gate.mjs', 'validate-plan.mjs', 'paths.mjs', 'frontmatter-list.mjs', 'frontier-gate-scope.mjs', 'run-manifest-pages.mjs'])
+  for (const file of ['frontier-item-gate.mjs', 'validate-plan.mjs', 'paths.mjs', 'frontmatter-list.mjs', 'frontier-gate-scope.mjs', 'run-manifest-pages.mjs', 'imported-plan-pages.mjs', 'pathway-lib.mjs'])
     copyFileSync(new URL(file, import.meta.url), join(repo, 'tools/physics-support', file));
   const pages = [
     { id: 'supplier', order: 1, kind: 'P', category: 'test', requires: [], items: [] },

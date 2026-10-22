@@ -57,6 +57,7 @@ import { join, relative } from 'node:path';
 import { REPO } from './paths.mjs';
 import { frontmatterList } from './frontmatter-list.mjs';
 import { frontierGateScope } from './frontier-gate-scope.mjs';
+import { importedPlanPage } from './imported-plan-pages.mjs';
 import { readRunManifestPages } from './run-manifest-pages.mjs';
 
 const args = process.argv.slice(2);
@@ -75,7 +76,8 @@ if (selectionFlags.length) {
   selectedPages = new Set(ids);
   args.splice(i, 2);
 }
-const selectedPage = id => selectedPages === null || selectedPages.has(id);
+const importedContextPages = new Set();
+const selectedPage = id => !importedContextPages.has(id) && (selectedPages === null || selectedPages.has(id));
 const valueFlags = new Set(['--repo', '--max-items', '--rehomed', '--run']);
 const specPath = args.find((a, i) => !a.startsWith('--') && !valueFlags.has(args[i - 1]));
 const repo = argVal('--repo') ?? REPO;
@@ -139,7 +141,8 @@ const PREFIX_OF_KIND = {
 // ---------------------------------------------------------------- load
 
 const spec = JSON.parse(readFileSync(specPath, 'utf8'));
-const importedIds = new Set((existsSync(join(repo, 'research/math-imports.json')) ? JSON.parse(readFileSync(join(repo, 'research/math-imports.json'), 'utf8')).files : []).filter(f => f.path.startsWith('items/')).map(f => f.path.split('/').at(-1).replace(/\.md$/, '')));
+const importReceipt = existsSync(join(repo, 'research/math-imports.json')) ? JSON.parse(readFileSync(join(repo, 'research/math-imports.json'), 'utf8')) : { files: [] };
+const importedIds = new Set(importReceipt.files.filter(f => f.path.startsWith('items/')).map(f => f.path.split('/').at(-1).replace(/\.md$/, '')));
 
 /** ids already published/drafted in the repo, plus their aliases */
 const existing = new Set();
@@ -277,6 +280,7 @@ for (const p of pages) {
 const publishedPageItems = new Set();
 const homePageOf = new Map();          // itemId -> the page id in library/ that lists it
 const itemsOnHomePage = new Map();     // pageId -> actual item ids, including P pages
+const pageCopiesOf = new Map();        // pageId -> all local relative carriers
 const pageLocationOf = new Map();      // pageId -> top-level category and relative file path
 try {
   const libraryRoot = join(repo, 'library');
@@ -291,6 +295,8 @@ try {
         const rawPageId = src.match(/^page:\s*(\S+)/m)?.[1];
         const pageId = rawPageId?.replace(/^(['"])(.*)\1$/, '$2') ?? e.name.slice(0, -3);
         const rel = relative(libraryRoot, fp);
+        if (!pageCopiesOf.has(pageId)) pageCopiesOf.set(pageId, []);
+        pageCopiesOf.get(pageId).push(rel);
         pageLocationOf.set(pageId, { category: rel.split(/[\\/]/)[0], file: rel });
         const pageItems = [];
         for (const key of ['items', 'examples']) {
@@ -461,6 +467,38 @@ const pageRoots = selectedPages === null ? pages.map(p => p.id)
 // ------------------------------------------- checks 12-17: declared page prereqs
 
 const pageById = new Map(pages.map((p) => [p.id, p]));
+
+// A physics run can require newly published mathematical pages omitted from its
+// older plan catalogue. Resolve only pages actually reached from this frontier,
+// using exact pinned local imports; never widen the selected authoring scope.
+const resolutionQueue = [...pageRoots], resolvedPages = new Set();
+try {
+  for (let cursor = 0; cursor < resolutionQueue.length; cursor++) {
+    const id = resolutionQueue[cursor];
+    if (resolvedPages.has(id)) continue;
+    resolvedPages.add(id);
+    if (!pageById.has(id)) {
+      const imported = importedPlanPage(repo, id, importReceipt, pageCopiesOf.get(id) ?? []);
+      if (imported) {
+        pages.push(imported); pageById.set(id, imported);
+        kindOfPage.set(id, imported.importedKind); importedContextPages.add(id);
+      }
+    }
+    resolutionQueue.push(...(pageById.get(id)?.requires ?? []), ...pageSucc(id));
+  }
+} catch (error) { die(`imported page resolution: ${error.message}`); }
+// Rebuild the ordinary order index after adding context-only published pages.
+// Their explicit source order, or the existing P-page default zero, is retained.
+pages.sort((a, b) => a.order - b.order);
+pageOrder.clear(); pages.forEach((page, index) => pageOrder.set(page.id, index));
+// An imported carrier can explicitly mark an examples page without using the
+// conventional suffix. The earlier b-leaf pass could not know that new kind.
+for (const page of pages) if (selectedPage(page.id)) for (const item of page.items ?? [])
+  for (const dep of item.deps ?? []) {
+    const home = homePageOf.get(dep);
+    if (home && importedContextPages.has(home) && !home.endsWith('-examples') && isBPage(home))
+      err('b-leaf', `${item.id} (${page.id}) depends on published ${dep}, which is homed on examples page ${home}; B pages must be leaves`);
+  }
 
 // Long-lived track designs feed several later plan splices, so their category
 // contracts must stay executable. Check documented ids, each present A page's
