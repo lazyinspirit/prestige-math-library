@@ -27,6 +27,9 @@ hash-bound protocol documented in `../autopilot/REFUTER-COVERAGE-CONTINUATIONS.m
 The new native refuter performs all scoped reads independently; original
 coverage assertions are not accepted as proof of reading. The original report
 and receipt remain archived, and normal collection and closure checks apply.
+The Step-3 owner gate snapshot binds the continuation authority, original native
+receipt/report/final-message evidence, and exact correction task. Dispatch-time
+subject hashes remain historical; the snapshot separately binds live sources.
 
 If an independently running producer changes a source after a reader observed
 its current bytes, the private split helper can authenticate that historical

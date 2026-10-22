@@ -231,6 +231,15 @@ export function gateReviewSnapshot(ctx, gates, stages) {
     for (const step of [3, 5, 7]) for (const kind of ['baseline', 'certifications'])
       implicit.push(`${ctx.run}-step${step}-auditor-${kind}.json`);
   }
+  // Coverage routing consumes this authority outside the gate argv. Its live
+  // subjects are already frontier inputs; dispatch-time hashes stay historical.
+  const continuations = join(research, `${ctx.run}-step3-refuter-continuations.json`);
+  if (stages.some(stage => stage.startsWith('3a-')) && existsSync(continuations)) {
+    bind(continuations);
+    for (const entry of readJSON(continuations).continuations ?? [])
+      for (const key of ['previous_result', 'original_report', 'original_last_message', 'task'])
+        if (typeof entry[key]?.path === 'string') bindNativePath(entry[key].path);
+  }
   const names = readdirSync(research).sort();
   if (toolNames.has('step3-scope.mjs')) implicit.push(`${ctx.run}-step3-owner-same-defect-aliases.json`,
     `${ctx.run}-step3-owner-external-context.json`);

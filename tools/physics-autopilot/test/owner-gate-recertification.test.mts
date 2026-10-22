@@ -52,6 +52,30 @@ test('Step-3 observed-current authority and its immutable evidence are gate inpu
   writeFileSync(join(f.repo, archive), 'Changed evidence invalidates the owner snapshot.');
   assert.notEqual(gateReviewSnapshot(f.ctx, gates, ['3a-split']).sha256, first.sha256);
 });
+test('Step-3 continuation authority and immutable references invalidate stale snapshots', t => {
+  const f = fixture(t);
+  const authority = 'research/demo-step3-refuter-continuations.json';
+  const refs = ['previous_result', 'original_report', 'original_last_message', 'task'];
+  const entry: any = {};
+  for (const key of refs) {
+    const path = `research/demo-original-${key}.json`;
+    writeFileSync(join(f.repo, path), '{}');
+    entry[key] = { path, sha256: sha('{}') };
+  }
+  writeFileSync(join(f.repo, authority), JSON.stringify({ continuations: [entry] }));
+  let snapshot = gateReviewSnapshot(f.ctx, f.gates, ['3a-refute']);
+  assert.ok(snapshot.inputs.some((row: any) => row.path.endsWith(authority)));
+  for (const key of refs) {
+    assert.ok(snapshot.inputs.some((row: any) => row.path.endsWith(entry[key].path)));
+    writeFileSync(join(f.repo, entry[key].path), '{"changed":true}');
+    const next = gateReviewSnapshot(f.ctx, f.gates, ['3a-refute']);
+    assert.notEqual(next.sha256, snapshot.sha256); snapshot = next;
+  }
+  writeFileSync(join(f.repo, 'research/demo-owner-observer.json'), '{}');
+  assert.equal(gateReviewSnapshot(f.ctx, f.gates, ['3a-refute']).sha256, snapshot.sha256);
+  writeFileSync(join(f.repo, authority), JSON.stringify({ continuations: [] }));
+  assert.notEqual(gateReviewSnapshot(f.ctx, f.gates, ['3a-refute']).sha256, snapshot.sha256);
+});
 test('missing receipt holds; ordered complete current owner receipt authorizes once', t => {
   const f = fixture(t);
   assert.equal(authorizeOwnerGate(f.args).ok, false);
