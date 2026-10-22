@@ -575,6 +575,17 @@ immutable collection before any OPEN-request intake, avoiding stale-input
 recertification and reauthentication of findings already closed. This technical
 handoff neither attempts nor waives the ordinary full gate battery.
 
+A retained owner-finding advertisement from an earlier wave is ignored at new
+intake only after authenticating that exact request, frozen progress and pack,
+original bound inputs, completed native lane reports and dispatches, and the
+child/parent collection under the earlier sealed impact certificate. Historical
+repairs may have later source successors; their old reviews are never rebound
+to current sources. A fresh, unconsumed, same-wave or future mismatched request
+keeps the ordinary blocking checks. Root may advertise a genuine later queue
+without changing the earlier request or collection. A consumed parent replays
+its own immutable bound queue evidence through ordinary collection validation;
+it does not reinterpret the newer advertisement as its historical authority.
+
 An earlier collected single-subject correction remains bound to its genuine
 collected `post` snapshot and immutable native evidence. Later source differences
 are permitted only for the exact subjects of a separately authenticated completed

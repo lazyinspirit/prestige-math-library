@@ -744,7 +744,14 @@ export function advanceAdjudicationCorrection(root,run,phase,round) {
   }
   const queueProgress=ownerFindingProgressPath(root,run,phase,round);
   if(existsSync(queueProgress)){
-    const prior=read(queueProgress),pointer=read(join(workflowDir(root,run),'owner-finding-queue-request.json'));
+    const prior=read(queueProgress);
+    requireValue(prior.run===run&&prior.phase===phase&&prior.round===round,'frozen owner finding queue identity changed');
+    if(existsSync(join(workflowDir(root,run),phase+'-'+round+'-collected.json'))){
+      // Replay this consumed wave from its immutable parent, which binds its
+      // own queue request/progress. A newer advertisement belongs to new intake.
+      collect(root,run,phase,round);return {...prior,parent_collected:true};
+    }
+    const pointer=read(join(workflowDir(root,run),'owner-finding-queue-request.json'));
     requireValue(prior.run===run&&prior.phase===phase&&prior.round===round
       &&resolve(root,pointer.request.path)===prior.request.path&&pointer.request.sha256===prior.request.sha256,
       'frozen owner finding queue authority changed');
