@@ -694,6 +694,10 @@ if (cmd === 'check') {
   if (errs.length) for (const e of errs) console.error(`ERROR ${e}`);
   if (given('frontier')) console.log(`Step 5 outside findings excluded, not passed: ${JSON.stringify(excluded)}`);
   console.log(`defect-ledger: ${mine.length} defect row(s) checked for ${run}, ${errs.length} error(s)`);
+  // stdout/stderr are asynchronous when piped to the native gate executor.
+  // Flush both queues before exiting, including full excluded-finding evidence.
+  await Promise.all([process.stdout, process.stderr].map(stream =>
+    new Promise(resolve => stream.write('', resolve))));
   process.exit(errs.length ? 1 : 0);
 }
 

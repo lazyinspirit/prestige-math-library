@@ -342,7 +342,11 @@ maintenance, frozen frontier guards and its complete gate battery. Its final
 frontier adapter recognizes every schema item prefix, including `op-` open
 problems, while retaining frozen identity/hash checks and the ordinary published
 maintenance distinction. An owned open-problem finding remains blocking;
-outside findings retain raw evidence and are excluded without being passed. An
+outside findings retain raw evidence and are excluded without being passed. Boundary-audit
+JSON and defect-ledger check output drain fully through native pipes before
+exit, preserving every diagnostic, strict failure status and genuine liveness
+summary. Complete transport does not uphold boundary candidates or waive
+current review bindings. An
 optional run-local `RUN-owner-step5-support-index.json` points native workers to
 outside proposals and genuine prior focused checks as read-only evidence.
 It grants no source ownership, review authority, or transition permission;

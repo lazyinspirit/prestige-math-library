@@ -425,4 +425,6 @@ if (asJson) {
   console.log('\nEvery line above is a candidate for a human read, not a verdict.');
 }
 
-process.exit((failOnContradicted && contradicted.length) || (failOnTemplate && templates.length) ? 1 : 0);
+// Large JSON diagnostics must drain completely when the native gate pipes stdout.
+// Preserve the strict failure predicate while letting Node flush before exiting.
+process.exitCode = (failOnContradicted && contradicted.length) || (failOnTemplate && templates.length) ? 1 : 0;
