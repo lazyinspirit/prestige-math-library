@@ -49269,3 +49269,71 @@ Published supplier def-invertible-matrix-and-general-linear-group: Delete duplic
 <!-- local-published-repair:inverse-problems-knot-theory-all-109-2026-10-19:step4:thm-riesz-fischer-completeness-of-l-p:begin -->
 Published supplier thm-riesz-fischer-completeness-of-l-p: Replace supplier-title fragments by their exact intended norm/complete-metric/a.e. predicates. Countable Choice/AC, arbitrary measure space and 1≤p≤∞ hypotheses and full Facts/proof unchanged; existing three Statement references retained. Current canonical content SHA256 66c24278d1b97b06116c614cc0333269dfcf8231bd4d665ca7167f0c3197e2c3. Focused source/use review: research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step4-supervision/published-four-context-alerts/review-report.json. Original source and earlier repair lineage preserved in research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step4-supervision/root-three-published-repairs/thm-riesz-fischer-completeness-of-l-p.before.md. No mathematical interface change, new whole-item audit, native review coverage, or initial publication is claimed.
 <!-- local-published-repair:inverse-problems-knot-theory-all-109-2026-10-19:step4:thm-riesz-fischer-completeness-of-l-p:end -->
+
+<!-- step5-v2-impact-initial-r1-u2:begin -->
+
+## Step 5 impact-initial round 1, lane 2 — 2026-10-22
+
+All 128 assigned carriers and all direct consumers of the fourteen changed Statement/Definition sections are draft. No published item was edited or newly found mathematically defective in these exact uses. Existing published presentation referrals retain their original dispositions; this entry is not an audit or acceptance of those carriers.
+
+The lane repaired componentwise sutured Spin-c homology, the semilinear second-input reversal and tensor/unit state-space conventions, positive sequence indices, packet phase normalization, stationary-phase notation, explicit inherited Countable Choice premises, and cycle representatives for torsion linking. The branched-cover chart-independence repair changes only the proof and dependencies. Exact guarded reviews, source-reading limits, diagrams and contract checks are recorded in `research/inverse-problems-knot-theory-all-109-2026-10-19-step5-v2/step5-v2-impact-initial-r1-u2.json`.
+
+The draft pairing lemma `lem-root-handlebody-pairing-nondegeneracy-and-gluing` needs its second quotient/conjugate-space convention aligned with the explicit same-boundary filling and reversal. The draft `cex-knot-kt-42-boundary-case` needs the inherited Countable Choice premise for its universal grid-value clause; its finite refutation remains valid. These are frontier-owner referrals, not published-maintenance repairs. The source open problem's positive-index Fourier-space omission is separately reported without editing that unassigned carrier. Outside-frontier draft helper uses remain separate maintenance examinations. No verdict, certification or completed independent review of these referrals is asserted.
+<!-- step5-v2-impact-initial-r1-u2:end -->
+
+
+<!-- inverse-problems-knot-theory-all-109-2026-10-19-impact-initial-r1-u3:begin -->
+## Knot/inverse-problem frontier: bounded supplier-use findings
+
+The current findings and exact guarded reviews are in [the unit 3 repair report](inverse-problems-knot-theory-all-109-2026-10-19-step5-v2/step5-v2-impact-initial-r1-u3.json). All assigned carriers and the direct consumers of the twelve changed Statement/Definition interfaces are draft frozen-frontier items. No published carrier was edited or found newly mathematically defective; no publication audit or independent acceptance of these repairs is asserted.
+
+`lem-alternating-state-adequacy-and-jones-span`, F2 and Proof 1.1, still invoke bracket adequacy/span for a possibly empty connected projection. Its repaired supplier `lem-connected-diagram-bracket-span-bound-and-alternating-equality` requires a nonempty diagram because the raw bracket convention has that domain. The ordinary frontier owner must add nonemptiness or provide a separate justified empty branch. Its knot-only competitor clause is already nonempty. The crossing-minimization theorem separately handles its empty case and needs no repair from this event.
+
+`lem-kontsevich-configuration-integral-convergence-needle-estimates` remains unresolved. Its existing uniform needle claim lacks uniform separation: the fixed Morse cap z=s, t=-s² with |s|≤epsilon/2 and another strand z=i epsilon gives mixed degree-one contribution arctan(1/2)/pi, independent of epsilon. The proposed local-cap amendment also needs a justified treatment of short chords outside the shrinking cap; its nested proof currently puts every short parameter below the cap cutoff. The consulted CDM §8.6.2 and Bar-Natan–Stoimenow §2.5.3 use opposite-branch cancellation and a special sharp-tail geometry. No repaired uniform estimate or confident completed review is recorded for this item. Fixed-tangle convergence is a separate assertion.
+<!-- inverse-problems-knot-theory-all-109-2026-10-19-impact-initial-r1-u3:end -->
+
+<!-- step5-v2-impact-initial-pass-2-r1-u2:begin -->
+
+## Step 5 impact-initial-pass-2, lane 2 — 2026-10-22
+
+The two draft frontier referrals from lane 2's prior pass are now repaired by the same reviewer: `cex-knot-kt-42-boundary-case` assumes Countable Choice only for its universal grid-value clause and its application of `thm-grid-upsilon-equals-oss-upsilon`; `lem-root-handlebody-pairing-nondegeneracy-and-gluing` takes its second quotient before semilinear reversal, with its conjugate realizing the opposite side. The latter Statement is unchanged. The six other assigned draft consumers retain sound exact uses of the revised state-space, stationary-phase and sutured interfaces; necessary citation/step contract mirrors were reconciled separately from item disposition.
+
+No published item was edited or newly found defective in these exact uses, and no new published audit is claimed. Historical referrals and reports remain unchanged. Current guarded reviews, sources actually read and focused checks are in `research/inverse-problems-knot-theory-all-109-2026-10-19-step5-v2/step5-v2-impact-initial-pass-2-r1-u2.json`. These owner reviews supply no independent judgment or central certification.
+<!-- step5-v2-impact-initial-pass-2-r1-u2:end -->
+
+
+<!-- inverse-problems-knot-theory-all-109-2026-10-19-impact-initial-pass-2-r1-u3:begin -->
+## Knot/inverse-problem frontier: current owner closure of exact supplier uses
+
+All 38 assigned carriers in this pass are draft frontier items. Current guarded owner reviews are recorded in `research/inverse-problems-knot-theory-all-109-2026-10-19-step5-v2/step5-v2-impact-initial-pass-2-r1-u3.json`; earlier reports and referrals above remain historical and unchanged. No published carrier was edited or newly audited.
+
+The adequacy referral above is repaired: `lem-alternating-state-adequacy-and-jones-span` now explicitly assumes the nonempty raw-bracket domain in its Statement, Given and supplier fact. Its sole direct item consumer is the knot-only Jones-span corollary, whose diagrams are already nonempty. The crossing-minimality theorem retains its full Statement and empty case; only its bracket fact is aligned.
+
+`thm-ip-boundary-determination-of-scalar-conductivity` now exposes the finite direct-sum full-DN convention already proved componentwise. The connected DN and Alessandrini suppliers apply to each smooth compact component with nonempty boundary; every original boundary-jet conclusion and both Choice hypotheses remain intact. Its two direct consumers use unchanged jet conclusions. All three direct consumers of these two changed Statements are draft frontier items and are inventoried for the ordinary owners; no consumer item outside this lane was edited.
+
+The old unresolved needle finding above was completed in the separate native needle-completion report: fixed-tangle convergence remains, the controlled cap estimate retains outer short chords and permits logarithmic factors under explicit separation and derivative controls, and exact special-critical-movement invariance is an identified external input. All fourteen pending same-owner consumer duties are examined in the present pass. The frozen isotopy F3 and principal-symbol F5 already contain the guarded corrections; no duplicate carrier repair was made. Necessary stale quotation mirrors and the boundary theorem step map were refreshed only in assigned contract rows.
+
+These are repair-owner mathematical findings and supplier-use checks, not independent judgment, publication acceptance or central certification. Other-lane adjudicator proposals and outside-maintenance findings retain their existing routing.
+<!-- inverse-problems-knot-theory-all-109-2026-10-19-impact-initial-pass-2-r1-u3:end -->
+
+
+<!-- inverse-problems-knot-theory-all-109-2026-10-19-impact-repeat-r1-u3:begin -->
+## BMW converted output: current consumer repair
+
+The draft supplier `alg-kauffman-polynomial-from-bmw-braid-closure` now returns the converted Kauffman value in `T_K`, with `a=-iA,z=iZ`. The assigned draft procedure-properties theorem and Kauffman–Dubrovnik conversion theorem still asserted the previous unconverted output; both are repaired at those exact uses, preserving finite termination, the full-AC representation premise, the fixed-diagram qualification and the inverse conversion. The two coefficient relations and both curl signs were checked algebraically against the declared conventions and Kauffman, printed p.466.
+
+The properties theorem has two direct reference/dependency consumers: the algorithm links to its termination/output result and already agrees; the conversion theorem uses the result in F4/Proof1.1 and is repaired. The conversion theorem has no other current item consumer. Both changed Statements, all inventoried consumers and all nineteen assigned carriers are draft. No published consumer defect or outside maintenance repair is established by this event; no published audit, independent judgment or certification is claimed. Current owner reviews, exact guards and source-reading limits are in `research/inverse-problems-knot-theory-all-109-2026-10-19-step5-v2/step5-v2-impact-repeat-r1-u3.json`. Historical entries and other owners' proposals remain unchanged.
+<!-- inverse-problems-knot-theory-all-109-2026-10-19-impact-repeat-r1-u3:end -->
+
+
+<!-- scoped-supplier-review:inverse-problems-knot-theory-all-109-2026-10-19-impact-repeat-r1-u2 -->
+
+## Inverse problems and knot theory: repeat consumer owner 2
+
+Run: inverse-problems-knot-theory-all-109-2026-10-19. Dispatch: step5-v2-impact-repeat-r1-u2. All 20 assigned carriers are draft. These are focused current owner examinations and one local repair; engine certification and judgment remain pending. No independent acceptance or published-item audit is claimed.
+
+The actual consumer defect is in `ex-knot-kt-30-worked-cases`, supplied by `alg-kauffman-polynomial-from-bmw-braid-closure`. Its F3 and Proof 1.1/3.1 still named the unconverted return formula and F(ia,-iz), and its Example placed all outputs in the original Dubrovnik ring. FIXED: use the algorithm's converted formula -i^w(-1)^c A^(-w) phi(d^(n-1) tau_n), identify the output as F(A,Z), and distinguish R_D from T_K. The substitution a=-iA,z=iZ fixes d and transports both coefficient relations; the worked values 1 and -d, both curl cancellations and the disjoint-circle diagram are retained. The owning batch-83 manifest and contract were synchronized. Neither an original Statement nor Definition section changes, so this repair creates no downstream interface event.
+
+Nineteen assigned item carriers remain unchanged. Ten of those needed only quotation reconciliation: two strong-MAP examples use the unchanged global-ball convention; four analytic lemmas use distribution type, conormal sign or analytic coordinate/projection maps, which satisfy the new smooth-pushforward hypothesis; three Wirtinger consumers use the unchanged valid-code generator/relator scan, and their inputs satisfy the corrected subdivision-endpoint rule; the order-three lens-space computation already assumes Countable Choice and verifies zero normalized periodic lattice in every sector. Their stale full supplier quotations were refreshed in owning batches 19, 39, 56, 100 and 107. The remaining analytic, finite-sample, truncation, flip-ribbon, local-movie, genus-bound and Kontsevich uses require no item correction. The FNO copied question already contains the proposed empty-class conventions at the frozen before guard, so no repair is claimed for that proposal.
+
+No new prerequisite, changed Statement/Definition, published-consumer mathematical defect or additional outside consumer was identified in this lane's interface examinations. Existing outside findings from earlier reports retain their separate maintenance routes and are not new assignments here. Exact item-specific reasons, fresh review hashes, source reading limits and checks are recorded in [the owner report](inverse-problems-knot-theory-all-109-2026-10-19-step5-v2/step5-v2-impact-repeat-r1-u2.json). Strict contracts pass for all 20 assigned items; the edited example passes precheck, rendering and final proof layout (three steps, zero defects). These local checks do not replace the engine's complete scoped battery.

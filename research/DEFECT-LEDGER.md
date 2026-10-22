@@ -1,12 +1,12 @@
 # Defect ledger — generated view
 
-> GENERATED from `research/defect-ledger.jsonl` @ 9a3d436bc9d8 by `tools/defect-ledger.mjs render` — do not edit.
+> GENERATED from `research/defect-ledger.jsonl` @ 073ca0e6bed4 by `tools/defect-ledger.mjs render` — do not edit.
 
 ## What the numbers mean, first
 
 | | |
 |---|---|
-| defects caught before publication | 21458 |
+| defects caught before publication | 21560 |
 | now mechanically prevented | 387 |
 | escaped to publication | 7 |
 | still open | 123 |
@@ -976,39 +976,39 @@
 | invalid-inference | 1 |  |
 | citation-missing | 1 |  |
 
-## inverse-problems-knot-theory-all-109-2026-10-19 — 556 row(s)
+## inverse-problems-knot-theory-all-109-2026-10-19 — 658 row(s)
 
-| subclass | 3a-adjudicate |
-|---|---|
-| ill-formed | 192 |
-| citation-inaccurate | 92 |
-| missing-hypothesis | 45 |
-| unlicensed-inference | 37 |
-| ill-typed-construction | 25 |
-| invalid-inference | 19 |
-| unsupported-inference | 18 |
-| citation-missing | 18 |
-| false-or-overstrong-statement | 15 |
-| citation-misattributed | 13 |
-| false-or-overstrong-title | 11 |
-| undefined-notation | 10 |
-| ill-typed-claim | 9 |
-| reader-repair | 8 |
-| invalid-witness | 6 |
-| contract-mismatch | 4 |
-| other | 4 |
-| missing-choice-scope | 4 |
-| citation-truncated | 4 |
-| arithmetic-error | 3 |
-| citation-inflated | 3 |
-| citation-corrupted | 3 |
-| invalid-refutation | 3 |
-| false-claim | 2 |
-| missing-case | 2 |
-| false-computation | 2 |
-| false-boundary-disposition | 2 |
-| overstrong-statement | 1 |
-| incorrect-step-reference | 1 |
+| subclass | 3a-adjudicate | 5-adjudicate |
+|---|---|---|
+| ill-formed | 192 |  |
+| other | 4 | 99 |
+| citation-inaccurate | 92 |  |
+| missing-hypothesis | 45 |  |
+| unlicensed-inference | 37 |  |
+| ill-typed-construction | 25 |  |
+| unsupported-inference | 18 | 3 |
+| invalid-inference | 19 |  |
+| citation-missing | 18 |  |
+| false-or-overstrong-statement | 15 |  |
+| citation-misattributed | 13 |  |
+| false-or-overstrong-title | 11 |  |
+| undefined-notation | 10 |  |
+| ill-typed-claim | 9 |  |
+| reader-repair | 8 |  |
+| invalid-witness | 6 |  |
+| contract-mismatch | 4 |  |
+| missing-choice-scope | 4 |  |
+| citation-truncated | 4 |  |
+| arithmetic-error | 3 |  |
+| citation-inflated | 3 |  |
+| citation-corrupted | 3 |  |
+| invalid-refutation | 3 |  |
+| false-claim | 2 |  |
+| missing-case | 2 |  |
+| false-computation | 2 |  |
+| false-boundary-disposition | 2 |  |
+| overstrong-statement | 1 |  |
+| incorrect-step-reference | 1 |  |
 
 ## machine-learning-all-101-2026-10-19 — 549 row(s)
 
