@@ -1,8 +1,9 @@
 // Missing plan declarations may resolve only to authenticated published imports.
 // These are prerequisite context, never additional authored frontier subjects.
 import { readFileSync, lstatSync, realpathSync } from 'node:fs';
-import { resolve } from 'node:path';
+import { resolve, relative as relativePath } from 'node:path';
 import { createHash } from 'node:crypto';
+import { execFileSync } from 'node:child_process';
 import { yaml } from './pathway-lib.mjs';
 const slug = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 export function importedPlanPage(root, id, receipt, copies = []) {
@@ -16,11 +17,31 @@ export function importedPlanPage(root, id, receipt, copies = []) {
   if (!new RegExp(`^library/[a-z0-9]+(?:-[a-z0-9]+)*/${id}\\.md$`).test(pin.path)
     || !/^[a-f0-9]{64}$/.test(pin.sha256 ?? '')) fail('invalid pin path/hash');
   const relative = pin.path.slice('library/'.length);
-  if (copies.length !== 1 || copies[0] !== relative) fail('missing/ambiguous local identity');
+  if (![1, 2].includes(copies.length) || new Set(copies).size !== copies.length || !copies.includes(relative))
+    fail('missing/ambiguous local identity');
   const path = resolve(root, pin.path);
   if (!lstatSync(path).isFile() || realpathSync(path) !== path) fail('not a regular local snapshot');
   const bytes = readFileSync(path);
   if (createHash('sha256').update(bytes).digest('hex') !== pin.sha256) fail('snapshot differs from immutable pin');
+  if (copies.length === 2) {
+    // A historical tracked placement can survive beside a later import path.
+    // Equality alone never licenses an untracked/staged-only extra carrier.
+    const alternate = copies.find(copy => copy !== relative);
+    if (!new RegExp(`^[a-z0-9]+(?:-[a-z0-9]+)*/${id}\\.md$`).test(alternate)) fail('ambiguous alternate path');
+    const full = resolve(root, 'library', alternate);
+    if (!lstatSync(full).isFile() || realpathSync(full) !== full) fail('alternate is not a regular local snapshot');
+    if (!readFileSync(full).equals(bytes)) fail('alternate differs from immutable pin');
+    try {
+      const gitRoot = execFileSync('git', ['-C', root, 'rev-parse', '--show-toplevel'], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).trim();
+      const tracked = relativePath(gitRoot, full).split('\\').join('/');
+      if (!tracked || tracked.startsWith('../')) fail('alternate outside repository');
+      const tree = execFileSync('git', ['-C', gitRoot, 'ls-tree', '-z', 'HEAD', '--', tracked], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] });
+      if (!/^(?:100644|100755) blob [a-f0-9]+\t/.test(tree) || tree.split('\t')[1] !== tracked + '\0') fail('alternate is not a regular HEAD-tracked placement');
+      const before = execFileSync('git', ['-C', gitRoot, 'show', `HEAD:${tracked}`], { stdio: ['ignore', 'pipe', 'ignore'] });
+      if (!before.equals(bytes)) fail('historical tracked placement differs from immutable pin');
+    } catch (error) { fail(`ambiguous alternate lacks exact HEAD authority (${error.message})`); }
+  }
+
   const match = bytes.toString('utf8').match(/^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/);
   if (!match) fail('missing frontmatter');
   const doc = yaml().parseDocument(match[1], { uniqueKeys: true });

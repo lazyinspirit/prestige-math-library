@@ -1187,7 +1187,12 @@ or actual supplier page edges. Resolution requires one published mathematical
 page with the exact ID, one unambiguous regular local carrier, and matching
 immutable `math-imports.json` bytes. Unknown, unpinned, changed, draft, physical,
 malformed or ambiguous carriers remain blocking. Unrelated imports are not
-added or validated as subjects.
+added or validated as subjects. One historical category placement may coexist
+with the current pinned path only when both regular, nonsymlinked files have
+exactly the pin's raw bytes and the alternate's exact path and bytes already
+exist as a regular file in repository `HEAD`. Staged-only/untracked extras,
+third carriers, alternate historical bytes and any metadata/body differences
+remain ambiguous. The current pin's category remains the prerequisite context.
 
 The resolved page is an in-memory prerequisite-only P declaration: it does not
 change the plan, manifests, source pages or selected frontier. It retains an

@@ -5,7 +5,8 @@ import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { createHash } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
-import { spawnSync } from 'node:child_process';
+import { spawnSync, execFileSync } from 'node:child_process';
+import { importedPlanPage } from './imported-plan-pages.mjs';
 const hash = bytes => createHash('sha256').update(bytes).digest('hex');
 const output = result => result.stdout + result.stderr;
 function fixture(t) {
@@ -106,4 +107,43 @@ test('unrelated bad imported pages and stale unrelated plan declarations stay ou
   f.pages.push({ id: 'unrelated-plan', category: 'math', kind: 'A', order: 9, requires: ['unrelated'], items: [] });
   const checked = f.run(); assert.equal(checked.status, 0, output(checked));
   assert.match(checked.stdout, /scope: 2 selected pages;/);
+});
+
+
+function trackedPlacement(f, { before, commit = true } = {}) {
+  const path = join(f.root, 'library/other/foreign.md');
+  const bytes = readFileSync(join(f.root, 'library/math/foreign.md'));
+  writeFileSync(path, before ?? bytes);
+  const git = (...args) => execFileSync('git', ['-C', f.root, ...args], { stdio: 'pipe' });
+  git('init', '--quiet');
+  git('-c', 'user.name=Fixture', '-c', 'user.email=fixture@example.invalid', 'commit', '--allow-empty', '--quiet', '-m', 'Empty fixture baseline');
+  git('add', '--', 'library/other/foreign.md');
+  if (commit) git('-c', 'user.name=Fixture', '-c', 'user.email=fixture@example.invalid', 'commit', '--quiet', '-m', 'Historical canonical placement');
+  return { path, bytes, git };
+}
+test('an exact regular HEAD-tracked historical placement may coexist with its immutable import path', t => {
+  const f = fixture(t), history = trackedPlacement(f);
+  const checked = f.run(); assert.equal(checked.status, 0, output(checked));
+  const resolved = importedPlanPage(f.root, 'foreign', f.receipt, ['other/foreign.md', 'math/foreign.md']);
+  assert.equal(resolved.category, 'math', 'the current pin remains the context category');
+  assert.equal(resolved.kind, 'P');
+  assert.deepEqual(readFileSync(history.path), history.bytes);
+  assert.deepEqual(readFileSync(join(f.root, 'library/math/foreign.md')), history.bytes);
+});
+test('staged-only or historically different same-byte alternate placements remain ambiguous', t => {
+  for (const kind of ['staged', 'different-history']) {
+    const f = fixture(t), bytes = readFileSync(join(f.root, 'library/math/foreign.md'));
+    const history = trackedPlacement(f, kind === 'staged' ? { commit: false } : { before: bytes.toString().replace('status: published', 'status: draft') });
+    writeFileSync(history.path, bytes);
+    const checked = f.run(); assert.notEqual(checked.status, 0); assert.match(output(checked), /HEAD|historical tracked placement/);
+  }
+});
+test('tracked relocation authority never permits changed bytes, symlinks or a third carrier', t => {
+  for (const kind of ['changed', 'symlink', 'third']) {
+    const f = fixture(t), history = trackedPlacement(f);
+    if (kind === 'changed') writeFileSync(history.path, history.bytes.toString().replace('status: published', 'status: draft'));
+    if (kind === 'symlink') { rmSync(history.path); symlinkSync(join(f.root, 'library/math/foreign.md'), history.path); }
+    if (kind === 'third') { mkdirSync(join(f.root, 'library/third')); writeFileSync(join(f.root, 'library/third/foreign.md'), history.bytes); }
+    const checked = f.run(); assert.notEqual(checked.status, 0); assert.match(output(checked), /alternate|ambiguous/);
+  }
 });
