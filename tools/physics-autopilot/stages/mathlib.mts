@@ -20,7 +20,7 @@
 import { readdirSync, existsSync, readFileSync, writeFileSync, statSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
-import { join, relative, resolve } from 'node:path';
+import { join, relative, resolve, isAbsolute } from 'node:path';
 import { itemHashGuard, shortHash } from '../../physics-support/item-hash.mjs';
 import { isPublishedItem } from '../../physics-support/published-repair-policy.mjs';
 import { MODEL_PROFILE_NAMES } from '../../physics-support/models.mjs';
@@ -1181,9 +1181,47 @@ export const stages = [
     artifacts: (ctx: any, unit: string) => [...scaffoldArtifacts(ctx, unit), ...authorArtifacts(ctx, unit)],
     // Anchored and exact ON PURPOSE: an unanchored `beta-batch-` also matches
     // `beta-fix-batch-3.result.json`, which belongs to a different stage.
-    pattern: /^beta-(?:beta-)?batch-\d+\.result\.json$/,
+    pattern: /^beta-(?:beta-)?batch-\d+(?:-refresh-[a-zA-Z0-9-]{1,80})?\.result\.json$/,
     labelFor: (u) => `batch-${u}`,
     concurrency: MAX_RUN_BATCHES,
+    refreshPlan: (ctx: any, unit: string, request: any) => {
+      // Explicit owner continuation of an authentic successful process that
+      // left construction unfinished. Its original result remains immutable.
+      const manifest = JSON.parse(readFileSync(R(ctx, 'research', `${ctx.run}-batch-${unit}.pages.json`), 'utf8'));
+      if (!Array.isArray(manifest) || !manifest.length) throw Error('Continuation requires the original nonempty page assignment');
+      const missingInventory = manifest.some((page: any) => !Array.isArray(page.items) || !page.items.length);
+      const missingCarrier = authorArtifacts(ctx, unit).some(path => !existsSync(R(ctx, path)));
+      if (!missingInventory && !missingCarrier)
+        throw Error('Continuation requires absent authored carriers; complete authoring belongs to normal owner reconciliation');
+      const originalPath = join(ctx.dispatchDir, `beta-batch-${unit}.result.json`);
+      const originalBytes = readFileSync(originalPath, 'utf8');
+      const original = JSON.parse(originalBytes);
+      if (original.run !== ctx.run || original.role !== 'beta' || original.label !== `batch-${unit}`
+        || original.ok !== true || original.written_by === 'autopilot'
+        || original.covers?.length !== 1 || original.covers[0] !== unit || !original.prompt)
+        throw Error('Continuation requires the genuine original successful native author result and prompt');
+      const originalPrompt = readFileSync(isAbsolute(original.prompt) ? original.prompt : R(ctx, original.prompt), 'utf8');
+      if (!originalPrompt.trim()) throw Error('Continuation requires a nonempty genuine original native prompt');
+      const direction = `research/${ctx.run}-owner-authoring-direction.md`;
+      const ownerDirection = readFileSync(R(ctx, direction), 'utf8');
+      if (!ownerDirection.trim()) throw Error('Continuation requires current explicit owner authoring directions');
+      const label = `batch-${unit}-refresh-${request.id}`;
+      const task = `research/${ctx.run}-${label}.task.md`;
+      if (existsSync(R(ctx, task))) throw Error('Continuation task identity already exists');
+      writeFileSync(R(ctx, task), [
+        `# Owner-requested Step-1 continuation: batch ${unit}`,
+        `Request: ${request.id}; requested at ${request.requestedAt}.`,
+        `Owner reason: ${request.reason}`,
+        `Original native result: ${originalPath}; original session: ${original.session_id ?? 'unavailable'}.`,
+        `Original result SHA-256: ${createHash('sha256').update(originalBytes).digest('hex')}; original prompt SHA-256: ${createHash('sha256').update(originalPrompt).digest('hex')}.`,
+        'Continue the original assigned authoring against current sources. Preserve all completed sound work and original native evidence. This is the single operational continuation; report genuine mathematical or physical blockers precisely to the owner. A successful process or hold report is not completed authoring. Complete actual item/page carriers, manifests, contracts and current readiness under the full original assignment.',
+        '', '# Full original assignment (historical input)', originalPrompt,
+        '', `# Current owner directions (${direction})`, ownerDirection,
+        '', 'Re-read the current owner direction file before acting. Current explicit owner releases supersede historical operational holds only; all mathematical, physical-scope, empirical, source, authored-carrier and readiness obligations remain mandatory.',
+      ].join('\n'));
+      return { role: 'beta', label, job: 'scaffolding', covers: [unit],
+        brief: 'briefs/beta-scaffold.md', task, timeout: 14400 };
+    },
     onProgress: ({ ctx, executor, stage }: any) => {
       if (!ctx.doctor && !executor.inflight.size && !executor.adoptedUnits(stage).size)
         writeBatchDependencyLevels(ctx.repo, ctx.run);

@@ -109,7 +109,9 @@ export async function doctor({ repo, run, stagesPath, config = {} as any }: { re
   const notes: any[] = [];
   const ok: any[] = [];
 
-  const mod = await import(stagesPath);
+  const imported = await import(stagesPath);
+  const mod = { ...imported, stages: typeof imported.stagesForRun === 'function'
+    ? imported.stagesForRun({ repo, run }) : imported.stages };
   // Plans may depend on artifacts produced by earlier stages. `doctor` asks
   // them only for command descriptors, before those artifacts exist.
   const ctx = { run, repo, dispatchDir: join(repo, 'research', `${run}-dispatch`), config, doctor: true };

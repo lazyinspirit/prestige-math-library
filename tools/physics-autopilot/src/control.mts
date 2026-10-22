@@ -20,6 +20,7 @@
 //   echo '{"command":"pause-at","stage":"1-scaffold"}' > .physics-autopilot/control.json
 //   echo '{"command":"skip","stage":"4-judge"}'   > .physics-autopilot/control.json
 //   echo '{"command":"retry","unit":"3"}'         > .physics-autopilot/control.json
+//   `autopilot refresh` writes an exact run/stage/unit/reason request with a fresh requestId.
 //   echo '{"command":"stop"}'                     > .physics-autopilot/control.json
 //   echo '{"command":"report"}'                   > .physics-autopilot/control.json
 
@@ -27,7 +28,7 @@ import { readFileSync, writeFileSync, existsSync, unlinkSync, mkdirSync } from '
 import type { Control, ControlCommand } from './types.mts';
 import { dirname, join } from 'node:path';
 
-export const COMMANDS = new Set(['pause', 'resume', 'skip', 'retry', 'stop', 'report', 'pause-at']);
+export const COMMANDS = new Set(['pause', 'resume', 'skip', 'retry', 'stop', 'report', 'pause-at', 'refresh']);
 
 export function controlPath(dir: string): string { return join(dir, 'control.json'); }
 

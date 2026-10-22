@@ -28,6 +28,7 @@ export interface Ctx {
   stageRounds?: Record<string, number>;
   /** Latest routed failure for each gate stage, retained through repeat resets. */
   stageFailures?: Record<string, GateResult>;
+  nativeRefreshes?: NativeRefresh[];
 }
 
 /**
@@ -108,6 +109,20 @@ export interface GateResult {
   exhaustedItems?: string[];
 }
 
+/** Explicit native work refresh within an active, unclosed stage. */
+export interface NativeRefresh {
+  id: string;
+  run: string;
+  stage: string;
+  unit: Unit;
+  reason: string;
+  requestedAt: string;
+  /** Frozen request-specific plan: retries retain this label and budget. */
+  plan: Plan;
+  completedAt?: string;
+  resultFile?: string;
+}
+
 export interface Stage {
   id: string;
   label: string;
@@ -183,6 +198,8 @@ export interface Stage {
   maxAttempts?: number;
   fallbackCount?: number;
   plan?: (ctx: Ctx, pending: Unit[], slots?: number) => Plan[];
+  /** Opt-in native refresh; never authorizes reopening a completed stage. */
+  refreshPlan?: (ctx: Ctx, unit: Unit, request: Pick<NativeRefresh, 'id' | 'reason' | 'requestedAt'>) => Plan;
   /** Dispatch ready item handoffs while the owning stage's workers wait. */
   onProgress?: (args: { ctx: Ctx; executor: any; stage: Stage }) => void | Promise<void>;
   gates?: (ctx: Ctx) => Gate[];
@@ -359,6 +376,7 @@ export interface StateData {
   transitions?: Array<{ from: string; to: string; round: number;
     outcome: 'passed' | 'failed'; at: string; failure?: GateResult }>;
   stageFailures?: Record<string, GateResult>;
+  nativeRefreshes?: NativeRefresh[];
   blockers: Blocker[];
   lastReportAt: string | null;
   paused: boolean;
@@ -433,5 +451,5 @@ export interface Adapter {
     opts?: { signal?: AbortSignal; timeoutMs?: number; killGraceMs?: number }) => Promise<InvokeResult>;
 }
 
-export type ControlCommand = 'pause' | 'resume' | 'skip' | 'retry' | 'stop' | 'report' | 'pause-at';
-export interface Control { command: ControlCommand | null; stage?: string; unit?: string; error?: string; }
+export type ControlCommand = 'pause' | 'resume' | 'skip' | 'retry' | 'stop' | 'report' | 'pause-at' | 'refresh';
+export interface Control { command: ControlCommand | null; stage?: string; unit?: string; run?: string; requestId?: string; reason?: string; error?: string; }

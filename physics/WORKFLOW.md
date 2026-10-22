@@ -117,6 +117,38 @@ a nonempty explicit item selection; a bare invocation checks the whole library.
 before loading renderers or collecting content. Pass explicit item/page paths
 to keep a render check within the current scope.
 
+## Owner-requested Step-1 author continuation
+
+An operationally successful author process can leave actual inventory or authored
+carriers missing. For the active, unclosed `1-scaffold` stage only, the owner may
+request one native continuation per unit after that unit and its exclusive cohort
+writers drain. Independently scoped sibling authors may continue. This is an
+explicit recovery request, not automatic redispatch of successful workers:
+
+```bash
+node tools/tsx-run.mjs tools/physics-autopilot/bin/autopilot.mts refresh \
+  --run RUN --state-dir .physics-autopilot/RUN --stage 1-scaffold --unit N \
+  --reason 'Concrete operational cause, its resolution, and unfinished authoring'
+```
+
+Before requesting, write current explicit authoring directions to
+`research/RUN-owner-authoring-direction.md`. The controller requires the exact
+existing run, a successful original native `beta-batch-N.result.json` and its
+nonempty original prompt, and missing authored carriers or inventory. It preserves
+that evidence and creates a request-specific task containing the complete original
+prompt, current directions and owner reason. The continuation retains the physics
+author model, scheduling, scope, physical qualifications and all proof obligations.
+
+A fresh `batch-N-refresh-REQUEST_ID` label has the ordinary bounded process retry
+budget; duplicate pending requests retain the same label. Only an engine-started,
+matching fresh successful native result discharges the request. Coverage masks that
+unit until then, including after restart; siblings keep their coverage. Actual
+artifacts and the complete ordinary Step-1 battery remain required. A second
+continuation for the same unit is refused, and an unresolved result escalates to
+the owner. Closed stages cannot be reopened by this command. The CLI only writes a
+control request; upgrading controller code and supervising restart/resume remain
+owner operations.
+
 ## Cross-batch dependency inputs
 
 Each batch writes `research/RUN-batch-N.cross-batch-dependencies.json` as an
