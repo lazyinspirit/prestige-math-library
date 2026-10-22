@@ -4,7 +4,7 @@ kind: lemma
 domain: mathematics
 library: mathematics
 title: Plancherel identity for the scaled semiclassical Fourier transform
-status: draft
+status: published
 origin: pipeline
 dependency_level: 1
 deps:
@@ -28,11 +28,13 @@ sources:
       url: https://www.imo.universite-paris-saclay.fr/~stephane.nonnenmacher/enseign/Cours-Semiclassical-Analysis2019-lecture1-8.pdf
       locator: §1.1.2, printed p. 4, definition of the semiclassical Fourier transform with factor \((2\pi\hbar)^{-d/2}\); its exact \(L^2\) normalization is proved locally here
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

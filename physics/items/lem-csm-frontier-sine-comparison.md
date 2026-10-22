@@ -2,7 +2,7 @@
 id: lem-csm-frontier-sine-comparison
 kind: lemma
 title: Chord and Lipschitz bounds for sine
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -39,7 +39,13 @@ sources:
       url: https://dlmf.nist.gov/4.18
       locator: "Equations 4.18.1 and 4.18.3: Jordan's chord inequality and the sine-to-argument bounds; the global Lipschitz estimate is proved locally from the mean value theorem."
 verification:
-  precheck: pending
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

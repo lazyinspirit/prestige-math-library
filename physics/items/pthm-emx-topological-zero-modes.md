@@ -2,7 +2,7 @@
 id: pthm-emx-topological-zero-modes
 kind: physics-theorem
 title: Absolute and PEC-relative discrete Maxwell zero modes
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 dependency_level: 2
@@ -31,11 +31,13 @@ dependency_roles:
   thm-na-uniformly-bounded-commuting-cochain-projection: mathematical-premise
 aliases: []
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 provenance:
   statement: ai-altered
   proof: ai-altered

@@ -2,7 +2,7 @@
 id: lem-csm-frontier-ssep-sector-connectivity
 kind: lemma
 title: "Connectedness of fixed-occupancy exclusion sectors"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics
@@ -20,11 +20,13 @@ sources:
       url: "https://arxiv.org/pdf/1906.01752"
       locator: "Section 3, Lemmas 5–6 and proof: fixed-particle configurations are communicating classes. The statement here is graph-theoretic and is proved locally."
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

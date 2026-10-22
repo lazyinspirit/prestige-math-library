@@ -2,7 +2,7 @@
 id: thm-qftx-photon-projected-commutators
 kind: theorem
 title: Projected angular parts are not two independent rotation algebras
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -34,10 +34,12 @@ sources:
       locator: Full 66-page arXiv:2308.11147v2; §V.3, equations 213–228, for the total and helicity-projected vector operators and their non-so(3) commutation relations.
 verification:
   precheck: pass
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

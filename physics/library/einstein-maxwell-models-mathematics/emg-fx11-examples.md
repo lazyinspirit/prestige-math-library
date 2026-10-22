@@ -1,7 +1,7 @@
 ---
 page: emg-fx11-examples
 title: Effective nonlinear electromagnetism and semiclassical consistency — Examples
-status: draft
+status: published
 library: mathematics
 items: []
 examples:

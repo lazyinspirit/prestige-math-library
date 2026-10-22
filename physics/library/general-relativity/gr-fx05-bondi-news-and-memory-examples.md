@@ -1,7 +1,7 @@
 ---
 page: gr-fx05-bondi-news-and-memory-examples
 title: "Null infinity, Bondi news and classical memory — Examples"
-status: draft
+status: published
 library: physics
 requires:
   - gr-fx05-bondi-news-and-memory

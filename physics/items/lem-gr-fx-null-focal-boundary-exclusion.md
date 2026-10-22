@@ -2,7 +2,7 @@
 id: lem-gr-fx-null-focal-boundary-exclusion
 kind: lemma
 title: "Null focal points exclude later horismos generators"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics
@@ -62,7 +62,13 @@ sources:
         Institute lecture notes, full 106-page PDF: §§8.2 and 8.4-8.5"
       url: "https://www.claymath.org/wp-content/uploads/2022/03/WittenLectures.pdf"
 verification:
-  precheck: pending
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

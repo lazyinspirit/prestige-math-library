@@ -2,7 +2,7 @@
 id: def-qftx-cpt-spin-statistics-interface
 kind: definition
 title: CPT and spin-statistics proof interface
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -44,11 +44,13 @@ sources:
       url: https://arxiv.org/pdf/hep-th/0305093
       locator: "§4, PDF pp. 12–19: the scalar noncommutative CPT proof interface, including tube/complex-group continuation and weak locality; §4.3 records limits on spin-statistics. Used as a scoped analytic comparison, not as a general scalar/spinor theorem."
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Definition

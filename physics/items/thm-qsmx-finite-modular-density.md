@@ -2,7 +2,7 @@
 id: thm-qsmx-finite-modular-density
 kind: theorem
 title: Faithful matrix modular flow and Gibbs time
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics
@@ -31,10 +31,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 sources:
   references:
     - title: Edward Witten, Notes on Some Entanglement Properties of Quantum Field Theory

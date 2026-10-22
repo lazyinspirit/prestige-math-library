@@ -4,7 +4,7 @@ kind: lemma
 domain: mathematics
 library: mathematics
 title: Explicit Gaussian continuation of a free resolvent matrix element
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 dependency_level: 1
@@ -35,10 +35,12 @@ provenance:
   statement: ai-altered
   proof: ai-generated
 verification:
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 sources:
   references:
     - title: "M. E. Taylor, Introduction to Analysis in Several Variables, §3.1"

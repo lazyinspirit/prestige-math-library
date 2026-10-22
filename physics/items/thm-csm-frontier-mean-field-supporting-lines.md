@@ -2,7 +2,7 @@
 id: thm-csm-frontier-mean-field-supporting-lines
 kind: theorem
 title: Finite-alphabet mean-field ensembles and upper supporting lines
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -42,11 +42,13 @@ sources:
       url: https://www.ceremade.dauphine.fr/~poisat/files/M2-largedeviations/lecturenotes.pdf
       locator: Section 2, Theorem 2.1, printed pp. 4–6; Sections 3.1 and 3.4, printed pp. 8–11.
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: thm-qsmx-ising-bulk-symbol-gap
 kind: theorem
 title: Translation-invariant Ising Majorana symbol and bulk gap
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics
@@ -37,6 +37,13 @@ sources:
       url: "https://arxiv.org/pdf/2009.09208"
     - title: "Pieter Claeys, Quench dynamics in the Transverse Field Ising Model, Many-body Quantum Dynamics @ TU Dresden lecture notes, §6, equations (65)–(68)"
       url: "https://www.pks.mpg.de/fileadmin/user_upload/MPIPKS/group_pages/DQI/TFIM_2024.pdf"
+verification:
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

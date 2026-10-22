@@ -1,7 +1,7 @@
 ---
 page: emg-fx08-examples
 title: Charged test-scalar scattering and superradiant flux — Examples
-status: draft
+status: published
 library: mathematics
 requires:
   - emg-fx08

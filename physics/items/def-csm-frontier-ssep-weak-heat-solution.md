@@ -2,7 +2,7 @@
 id: def-csm-frontier-ssep-weak-heat-solution
 kind: definition
 title: "Weak heat solutions on the continuum torus"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics
@@ -26,11 +26,13 @@ sources:
       url: "https://math.arizona.edu/~sethuram/588/Landim.pdf"
       locator: "Chapter 2, Section 2.3, equation (2.6): integral weak formulation of the heat equation."
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Definition

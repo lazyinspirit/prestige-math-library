@@ -1,7 +1,7 @@
 ---
 page: csm-frontier-polymer-continuum
 title: "Polymer analyticity and dilute continuum correlations"
-status: draft
+status: published
 library: physics
 requires:
   - csm-continuum-limits

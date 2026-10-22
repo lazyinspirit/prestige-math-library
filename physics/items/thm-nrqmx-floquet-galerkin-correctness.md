@@ -4,7 +4,7 @@ kind: theorem
 domain: mathematics
 library: mathematics
 title: Fourier–Galerkin assembly correctness and termination
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 dependency_level: 5
@@ -34,6 +34,12 @@ sources:
       locator: Section 2.3, equations (17)-(20) and (22), and Appendix B, equations (B.1)-(B.3), Fourier matrix elements of the quasienergy operator.
 verification:
   precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

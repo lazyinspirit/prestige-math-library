@@ -1,7 +1,7 @@
 ---
 page: emx-lorentz-form-algebra
 title: Lorentzian forms and relative topology
-status: draft
+status: published
 library: mathematics
 items:
   - def-emx-lorentz-star

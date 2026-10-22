@@ -2,7 +2,7 @@
 id: lem-csm-frontier-fk-mixed-reflection-gluing
 kind: lemma
 title: "Finite mixed-boundary reflection and gluing on the rotated FK torus"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -32,6 +32,12 @@ sources:
       locator: "Section 2, Lemmas 6--7 and Proposition 8, printed pp. 8--13; the local construction here uses closed rotated boxes and first intersection along the vertical path."
 verification:
   precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

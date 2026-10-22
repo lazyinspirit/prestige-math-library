@@ -2,7 +2,7 @@
 id: def-nrqmx-finite-channel-families
 kind: definition
 title: Finite channel families, semigroups, and CP-divisibility
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics
@@ -15,10 +15,12 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 sources:
   references:
     - title: "Lin Lin and Nathan Wiebe, Quantum Algorithms for Scientific Computation, Chapter 21, §21.1"

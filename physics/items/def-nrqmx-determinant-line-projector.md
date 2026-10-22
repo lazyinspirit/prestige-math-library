@@ -4,7 +4,7 @@ kind: definition
 domain: mathematics
 library: mathematics
 title: Determinant line and its projector
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 dependency_level: 1
@@ -30,6 +30,13 @@ sources:
     - title: Keith Conrad, Exterior Powers
       url: https://kconrad.math.uconn.edu/blurbs/linmultialg/extmod.pdf
       locator: Sections 3, 4, and 6, especially Theorem 6.1.
+verification:
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Definition

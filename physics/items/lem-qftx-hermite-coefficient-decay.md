@@ -4,7 +4,7 @@ kind: lemma
 domain: mathematics
 library: mathematics
 title: Rapid Hermite coefficient decay for Schwartz functions
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 deps:
@@ -33,10 +33,12 @@ sources:
       locator: "Chapter 3, printed pp.21–24: the one-dimensional Hermite oscillator and its eigenfunctions."
 verification:
   precheck: pass
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

@@ -1,7 +1,7 @@
 ---
 page: qftx-reflection-positive-limits
 title: Euclidean positivity, controlled limits and reconstruction boundaries
-status: draft
+status: published
 library: mathematics
 items:
   - lem-qftx-tempered-tensor-products

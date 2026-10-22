@@ -2,7 +2,7 @@
 id: def-qftx-finite-flat-connection-groupoid
 kind: definition
 title: "Finite flat connection groupoid on a cell complex"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 dependency_level: 1
@@ -36,11 +36,13 @@ sources:
       url: "https://arxiv.org/pdf/gr-qc/9905087"
       locator: "§7, PDF pp. 29–30, Remark 2, for the finite-group BF sum over flat bundles and the distinction from continuous-group integrals."
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Definition

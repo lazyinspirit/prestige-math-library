@@ -2,7 +2,7 @@
 id: lem-qftx-anyonic-vacuum-reverse-adjacent-relation
 kind: lemma
 title: "Vacuum projectors obey the reverse adjacent Temperley–Lieb relation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 dependency_level: 0
@@ -39,10 +39,12 @@ sources:
       locator: "§2.2, Remark 2.2.3 states both adjacent relations for the abstract Temperley–Lieb generators. The local vacuum-projector relation in this item is proved from the supplied normalized anyonic F-coefficient."
 verification:
   precheck: pass
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

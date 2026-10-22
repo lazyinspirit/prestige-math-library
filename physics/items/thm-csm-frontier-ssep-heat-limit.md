@@ -2,7 +2,7 @@
 id: thm-csm-frontier-ssep-heat-limit
 kind: theorem
 title: "Diffusive heat limit for symmetric exclusion"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics
@@ -38,11 +38,13 @@ sources:
       url: "https://arxiv.org/pdf/1404.6466"
       locator: "Sections II.1 and V.4: diffusive model conventions and separately scoped boundary-driven SSEP transport coefficients."
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

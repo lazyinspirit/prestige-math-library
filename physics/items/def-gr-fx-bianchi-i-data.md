@@ -2,7 +2,7 @@
 id: def-gr-fx-bianchi-i-data
 kind: definition
 title: "Diagonal Bianchi I model"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 0
@@ -26,11 +26,13 @@ sources:
     - title: "Diego L. Cáceres, Leonardo Castañeda, and Juan M. Tejeiro, Shear Dynamics in Bianchi I Cosmology, arXiv:1003.3491v1 (2010), Section 2, equations (2.1)–(2.2), printed p. 2 (PDF p. 3)"
       url: "https://arxiv.org/pdf/1003.3491"
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Definition

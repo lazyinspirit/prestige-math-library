@@ -2,7 +2,7 @@
 id: lem-emg-fx-spherical-maxwell-reduction
 kind: lemma
 title: Source-free rotational Maxwell fields have constant fluxes
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -30,6 +30,12 @@ sources:
       locator: "Section 6.2.1, printed pp. 259–260 (PDF pp. 266–267): electric and magnetic flux conventions for the Reissner–Nordström field."
 verification:
   precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

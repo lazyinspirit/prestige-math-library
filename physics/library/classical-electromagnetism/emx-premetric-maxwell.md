@@ -1,7 +1,7 @@
 ---
 page: emx-premetric-maxwell
 title: Metric dependence, flux sectors and constitutive geometry
-status: draft
+status: published
 library: physics
 items:
   - def-emx-continuous-chain-integral

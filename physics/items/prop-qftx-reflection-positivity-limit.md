@@ -2,7 +2,7 @@
 id: prop-qftx-reflection-positivity-limit
 kind: proposition
 title: Reflection positivity passes to a distributional limit
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 dependency_level: 1
@@ -26,6 +26,12 @@ sources:
       locator: "PDF pp. 5–6, equations (8)–(9): the free-field reflected form and preservation of positivity under appropriate cutoff limits."
 verification:
   precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

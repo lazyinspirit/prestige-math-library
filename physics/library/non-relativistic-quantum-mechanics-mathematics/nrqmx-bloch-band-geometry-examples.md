@@ -1,7 +1,7 @@
 ---
 page: nrqmx-bloch-band-geometry-examples
 title: Single-particle Bloch bundles and band topology — Examples
-status: draft
+status: published
 library: mathematics
 items: []
 examples:

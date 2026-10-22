@@ -2,7 +2,7 @@
 id: ex-csm-frontier-ising-coupling-conversion
 kind: example
 title: "Square-lattice Ising critical coupling from the two-state Potts model"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -29,10 +29,12 @@ sources:
       locator: "Chapter 1 §§1.2–1.4: Potts/Ising interaction and finite FK coupling conventions."
 verification:
   precheck: pass
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Example

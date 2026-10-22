@@ -2,7 +2,7 @@
 id: thm-csm-frontier-monotone-cftp-exact
 kind: theorem
 title: Exactness and almost-sure termination of finite monotone CFTP
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -28,11 +28,13 @@ sources:
       url: https://pages.uoregon.edu/dlevin/MARKOV/mcmt2e.pdf
       locator: "Chapter 25, §§25.1–25.3, printed pp. 347–355 (PDF pp. 363–371): monotone coupling from the past and the need to reuse the same maps on overlapping horizons. The local proof below supplies its finite positive-block termination argument and stationary-law identification."
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

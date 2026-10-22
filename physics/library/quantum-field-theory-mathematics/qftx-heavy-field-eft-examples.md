@@ -1,7 +1,7 @@
 ---
 page: qftx-heavy-field-eft-examples
 title: Gaussian matching and a rigorous derivative-expansion remainder — Examples
-status: draft
+status: published
 library: mathematics
 requires:
   - qftx-heavy-field-eft

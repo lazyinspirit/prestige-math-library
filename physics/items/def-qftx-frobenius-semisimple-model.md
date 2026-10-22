@@ -2,7 +2,7 @@
 id: def-qftx-frobenius-semisimple-model
 kind: definition
 title: "Semisimple closed two-dimensional TQFT data"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 dependency_level: 0
@@ -30,10 +30,12 @@ sources:
       locator: "§§3.3–3.7 and 4 (PDF pp. 18–42), for the open-closed generators, normal form, symmetric monoidal equivalence, and closed-sector Corollary 4.6."
 verification:
   precheck: pass
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Definition

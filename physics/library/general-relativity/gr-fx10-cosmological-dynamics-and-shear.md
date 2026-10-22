@@ -1,7 +1,7 @@
 ---
 page: gr-fx10-cosmological-dynamics-and-shear
 title: "Cosmological dynamics and anisotropic shear"
-status: draft
+status: published
 library: physics
 requires:
   - gr-homogeneous-cosmology

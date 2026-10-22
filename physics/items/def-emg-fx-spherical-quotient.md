@@ -2,7 +2,7 @@
 id: def-emg-fx-spherical-quotient
 kind: definition
 title: Spherical electrovacuum quotient and charged mass
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -31,6 +31,12 @@ sources:
       locator: "Sections 6.2.1 and 6.2.5, printed pp. 259–260 and 266–268 (PDF pp. 266–267 and 273–275): dyonic RN flux conventions and the Bertotti–Robinson exceptional product."
 verification:
   precheck: n/a
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Definition

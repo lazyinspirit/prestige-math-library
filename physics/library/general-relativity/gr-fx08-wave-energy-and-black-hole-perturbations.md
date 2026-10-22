@@ -1,7 +1,7 @@
 ---
 page: gr-fx08-wave-energy-and-black-hole-perturbations
 title: "Wave energy and black-hole perturbation interfaces"
-status: draft
+status: published
 library: physics
 requires:
   - gr-fx07-kerr-and-hidden-symmetry

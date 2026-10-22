@@ -1,7 +1,7 @@
 ---
 page: csm-frontier-fk-loop-algebra
 title: Classical Potts random clusters and planar loop transfer
-status: draft
+status: published
 library: physics
 items:
   - def-csm-frontier-finite-potts-fk

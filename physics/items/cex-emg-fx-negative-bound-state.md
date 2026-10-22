@@ -2,7 +2,7 @@
 id: cex-emg-fx-negative-bound-state
 kind: counterexample
 title: A negative mode defeats a symmetric-potential bound
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -28,10 +28,12 @@ sources:
       locator: "Sections 1.2–1.4 and 8.1.2, PDF pp. 3–7 and 56–57, show that actual coupled Einstein–Maxwell equations require an explicitly derived system. They do not supply the negative-potential example below."
 verification:
   precheck: pass
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement refuted

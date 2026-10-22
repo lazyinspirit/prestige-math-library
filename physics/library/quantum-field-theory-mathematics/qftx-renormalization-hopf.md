@@ -1,7 +1,7 @@
 ---
 page: qftx-renormalization-hopf
 title: Rooted forests, Hopf antipodes and subtraction recursion
-status: draft
+status: published
 library: mathematics
 items:
   - def-qftx-rooted-forest-hopf

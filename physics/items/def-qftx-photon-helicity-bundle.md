@@ -2,7 +2,7 @@
 id: def-qftx-photon-helicity-bundle
 kind: definition
 title: Transverse one-photon space and helicity projectors
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -40,11 +40,13 @@ sources:
       url: https://arxiv.org/pdf/1006.3876
       locator: Full 8-page PDF retrieved; section I and equations 1 and 6–9, with the source's stated hbar=c=1 convention.
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Definition

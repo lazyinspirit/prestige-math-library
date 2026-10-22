@@ -1,7 +1,7 @@
 ---
 page: qftx-photon-counting
 title: Wavepacket photodetection and normally ordered correlations
-status: draft
+status: published
 library: physics
 items:
   - lem-qftx-mode-number-pvm

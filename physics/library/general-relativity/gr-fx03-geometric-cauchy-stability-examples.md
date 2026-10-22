@@ -1,7 +1,7 @@
 ---
 page: gr-fx03-geometric-cauchy-stability-examples
 title: "Finite-slab geometric Cauchy stability — Examples"
-status: draft
+status: published
 library: physics
 requires:
   - gr-fx03-geometric-cauchy-stability

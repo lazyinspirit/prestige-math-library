@@ -4,7 +4,7 @@ kind: theorem
 domain: mathematics
 library: mathematics
 title: "The finite isotropic spin-half exchange Hamiltonian is a Temperley–Lieb element"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 dependency_level: 2
@@ -26,6 +26,13 @@ sources:
   references:
     - title: "Yacine Ikhlef, Jesper Lykke Jacobsen, and Hubert Saleur, A Temperley–Lieb quantum chain with two- and three-site interactions, Introduction and §2"
       url: "https://arxiv.org/pdf/0901.4685"
+verification:
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

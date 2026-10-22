@@ -2,7 +2,7 @@
 id: def-gr-fx-nondegenerate-local-energy-estimate
 kind: definition
 title: "Nondegenerate integrated local energy estimate near the Schwarzschild photon sphere"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics
@@ -33,10 +33,12 @@ sources:
       url: "https://arxiv.org/pdf/1311.2477"
 verification:
   precheck: n/a
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Definition

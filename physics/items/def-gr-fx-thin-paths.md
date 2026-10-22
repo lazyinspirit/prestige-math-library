@@ -2,7 +2,7 @@
 id: def-gr-fx-thin-paths
 kind: definition
 title: Piecewise-smooth paths and thin homotopies
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics
@@ -32,10 +32,12 @@ sources:
       locator: "PDF pp. 6–7, smooth paths, fixed-endpoint homotopies, and the rank-at-most-one condition. This item uses the same thinness condition for piecewise-smooth path representatives."
 verification:
   precheck: pass
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Definition

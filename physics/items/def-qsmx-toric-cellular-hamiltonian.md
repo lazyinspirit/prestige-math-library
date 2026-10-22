@@ -2,7 +2,7 @@
 id: def-qsmx-toric-cellular-hamiltonian
 kind: definition
 title: Toric-code edge spins on closed-surface cellulations
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -28,6 +28,13 @@ sources:
     - title: "John Preskill, Lecture Notes for Physics 219: Quantum Computation, Chapter 9"
       url: https://www.preskill.caltech.edu/ph219/topological.pdf
       locator: §9.7, PDF pp. 20–21; square-torus Hamiltonian and stabilizer conventions.
+verification:
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Definition

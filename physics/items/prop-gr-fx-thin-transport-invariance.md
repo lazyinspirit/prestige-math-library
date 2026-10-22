@@ -2,7 +2,7 @@
 id: prop-gr-fx-thin-transport-invariance
 kind: proposition
 title: Connection transport is invariant under thin homotopy
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics
@@ -42,6 +42,12 @@ sources:
       locator: "§3.3.3 relates path dependence of parallel transport to curvature."
 verification:
   precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

@@ -1,7 +1,7 @@
 ---
 page: qsmx-open-entropy-production-examples
 title: Noncommuting entropy production and thermal secular models — Examples
-status: draft
+status: published
 library: physics
 items: []
 examples:

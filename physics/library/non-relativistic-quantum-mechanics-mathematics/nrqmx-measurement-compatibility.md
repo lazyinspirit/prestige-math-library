@@ -1,7 +1,7 @@
 ---
 page: nrqmx-measurement-compatibility
 title: Measurement compatibility, dilation and identifiable tomography
-status: draft
+status: published
 library: mathematics
 items:
   - def-nrqmx-finite-hermitian-frame-and-gram-pseudoinverse

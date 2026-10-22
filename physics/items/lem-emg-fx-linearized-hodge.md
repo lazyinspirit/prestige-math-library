@@ -2,7 +2,7 @@
 id: lem-emg-fx-linearized-hodge
 kind: lemma
 title: Variation of the Lorentzian Hodge map and the linearized Maxwell equation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -27,7 +27,13 @@ sources:
       url: "https://arxiv.org/pdf/gr-qc/9712019v1"
       locator: "PDF pp. 30–31 (printed pp. 23–24): Hodge star from the metric and orientation, its Lorentzian signature factor, and the exterior-form Maxwell equations. The variation formula below is derived locally by differentiating the component definition."
 verification:
-  precheck: pending
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

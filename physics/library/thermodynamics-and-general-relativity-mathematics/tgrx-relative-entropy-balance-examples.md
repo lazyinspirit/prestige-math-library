@@ -1,7 +1,7 @@
 ---
 page: tgrx-relative-entropy-balance-examples
 title: Finite modular energy and entropy balance — Examples
-status: draft
+status: published
 library: mathematics
 requires:
   - tgrx-relative-entropy-balance

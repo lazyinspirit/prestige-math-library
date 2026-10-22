@@ -4,7 +4,7 @@ kind: definition
 domain: mathematics
 library: mathematics
 title: C2 projector bundles and Kato transport
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 deps:
@@ -30,6 +30,13 @@ sources:
       url: https://www.damtp.cam.ac.uk/user/tong/aqm/aqm.pdf
     - title: J. E. Avron, R. Seiler, and L. G. Yaffe, Adiabatic Theorems and Applications to the Quantum Hall Effect
       url: https://phsites.technion.ac.il/avron/wp-content/uploads/sites/3/2013/05/commun_math_phys_110_33-49_1987.pdf
+verification:
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Definition

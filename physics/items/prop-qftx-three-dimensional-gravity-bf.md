@@ -2,7 +2,7 @@
 id: prop-qftx-three-dimensional-gravity-bf
 kind: proposition
 title: "Invertible triads identify zero-cosmological-constant three-dimensional BF gravity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -36,11 +36,13 @@ sources:
       url: "https://www.math.utoronto.ca/khesin/papers/Lecture_notes.pdf"
       locator: "§3.2, printed pp. 184–186: flat-connection equations and the Chern–Simons classical solution space."
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

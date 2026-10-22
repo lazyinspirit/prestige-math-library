@@ -1,7 +1,7 @@
 ---
 page: qftx-massive-scattering-estimates
 title: Cook limits, massive wavepackets and scattering obligations
-status: draft
+status: published
 library: mathematics
 items:
   - def-qftx-scattering-approximant-contract

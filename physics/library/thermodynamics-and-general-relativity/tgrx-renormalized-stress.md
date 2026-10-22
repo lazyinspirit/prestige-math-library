@@ -1,7 +1,7 @@
 ---
 page: tgrx-renormalized-stress
 title: Hadamard subtraction and semiclassical model contracts
-status: draft
+status: published
 library: physics
 items:
   - def-tgrx-curvature-squared-variation-tensors

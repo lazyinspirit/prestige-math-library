@@ -2,7 +2,7 @@
 id: thm-qftx-photon-rotations-helicity
 kind: theorem
 title: Transverse rotations preserve helicity and generate total angular momentum
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -44,11 +44,13 @@ sources:
       url: https://arxiv.org/pdf/1006.3876
       locator: Full 8-page PDF retrieved; section I, equation 1, and section II, equations 6–9, for the total vector angular-momentum expression and helicity Berry connection. The source sets hbar=c=1.
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

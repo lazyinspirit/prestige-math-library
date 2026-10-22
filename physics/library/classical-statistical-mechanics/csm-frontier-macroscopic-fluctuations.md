@@ -1,7 +1,7 @@
 ---
 page: csm-frontier-macroscopic-fluctuations
 title: "Hydrodynamic fluctuation action and nonequilibrium quasipotential"
-status: draft
+status: published
 items:
   - def-csm-frontier-ssep-current-action
   - def-csm-frontier-bernoulli-relative-free-energy

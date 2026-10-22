@@ -2,7 +2,7 @@
 id: ex-gr-fx03-2
 kind: example
 title: "Finite-slab dependence need not have a uniform exponential constant"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 3
@@ -35,11 +35,13 @@ sources:
     - title: "J. K. Hunter, Notes on Partial Differential Equations, UC Davis lecture notes, revised 18 June 2014, Chapter 8, Sections 8.1 and 8.3: symmetric-system energy estimates on fixed intervals"
       url: "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf"
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

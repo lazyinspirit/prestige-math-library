@@ -2,7 +2,7 @@
 id: ex-qsmx-one-magnon
 kind: example
 title: One down-spin Fourier dispersion
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -27,10 +27,12 @@ sources:
       locator: "Section 4, PDF p. 15, equations (108)–(112): one-particle momentum and dispersion for H_source=(1/2) sum(P-I); the present H_N=J sum P has energy E=2J epsilon+JN."
 verification:
   precheck: pass
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Example

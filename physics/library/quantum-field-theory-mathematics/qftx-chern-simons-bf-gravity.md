@@ -1,7 +1,7 @@
 ---
 page: qftx-chern-simons-bf-gravity
 title: "Chern–Simons boundary geometry and the three-dimensional gravity interface"
-status: draft
+status: published
 library: mathematics
 items:
   - def-qftx-cs-bf-actions

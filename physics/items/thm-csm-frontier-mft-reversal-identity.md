@@ -2,7 +2,7 @@
 id: thm-csm-frontier-mft-reversal-identity
 kind: theorem
 title: "Equilibrium action time-reversal identity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -33,7 +33,13 @@ sources:
       url: "https://arxiv.org/pdf/2505.15618"
       locator: "Sections 9 and 14.1: the current action and the time-reversed equilibrium relaxation route."
 verification:
-  precheck: pending
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

@@ -1,7 +1,7 @@
 ---
 page: nrqmx-exchange-representations-examples
 title: Exchange symmetry, Schur–Weyl and Temperley–Lieb spin algebra — Examples
-status: draft
+status: published
 library: mathematics
 items: []
 examples:

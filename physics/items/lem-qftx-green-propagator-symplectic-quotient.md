@@ -2,7 +2,7 @@
 id: lem-qftx-green-propagator-symplectic-quotient
 kind: lemma
 title: Causal propagator induces the free scalar symplectic quotient
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -31,7 +31,13 @@ sources:
       url: https://arxiv.org/pdf/1904.04051v2
       locator: §4.2, equations (24)–(29), causal propagator pairing and the quotient by the field equation, printed pp. 14–16.
 verification:
-  precheck: pending
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

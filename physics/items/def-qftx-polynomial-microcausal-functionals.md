@@ -2,7 +2,7 @@
 id: def-qftx-polynomial-microcausal-functionals
 kind: definition
 title: Compactly supported polynomial microcausal functionals
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -29,7 +29,13 @@ sources:
       url: https://arxiv.org/pdf/math-ph/9903028
       locator: Full 38-page paper, printed pp. 7–9, Section 2.1, closed conic wavefront sets and the positive-frequency cone convention.
 verification:
-  precheck: pending
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Definition

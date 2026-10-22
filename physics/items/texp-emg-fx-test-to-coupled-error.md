@@ -2,7 +2,7 @@
 id: texp-emg-fx-test-to-coupled-error
 kind: thought-experiment
 title: A finite-time bound from a test-field residual
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: physics
@@ -39,11 +39,13 @@ sources:
       url: "https://arxiv.org/pdf/1501.06570"
       locator: "§4.4, fixed-background test-field scope and the distinction between linear test propagation and the later nonlinear response. No solution-error estimate is imported; that estimate is an explicit premise of this thought experiment."
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

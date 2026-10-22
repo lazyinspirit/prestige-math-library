@@ -3,7 +3,7 @@ id: thm-nrqmx-spin-cover-projective-rotations
 kind: theorem
 domain: mathematics
 title: "Spin rotations and projective $SO(3)$"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 deps:
@@ -39,10 +39,12 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 sources:
   references:
     - title: "Peter Bongaarts, Quantum Theory: A Mathematical Approach, Chapter 24,

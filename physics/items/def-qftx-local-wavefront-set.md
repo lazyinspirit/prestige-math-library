@@ -2,7 +2,7 @@
 id: def-qftx-local-wavefront-set
 kind: definition
 title: Local Fourier definition of a wavefront set
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -25,7 +25,13 @@ sources:
       url: https://arxiv.org/pdf/math-ph/9903028
       locator: Full 38-page paper, printed pp. 7–8, Section 2.1, local Fourier definition.
 verification:
-  precheck: pending
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Definition

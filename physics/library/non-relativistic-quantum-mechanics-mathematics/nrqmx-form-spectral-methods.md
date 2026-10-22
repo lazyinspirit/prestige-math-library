@@ -1,7 +1,7 @@
 ---
 page: nrqmx-form-spectral-methods
 title: Semibounded forms, variational spectra and Birman–Schwinger
-status: draft
+status: published
 library: mathematics
 requires:
   - nrqmx-operator-realizations

@@ -1,7 +1,7 @@
 ---
 page: qsmx-lieb-robinson-spectral-flow
 title: Lieb–Robinson locality, clustering and gapped spectral transport
-status: draft
+status: published
 library: physics
 items:
   - def-qsmx-summable-interaction-norm

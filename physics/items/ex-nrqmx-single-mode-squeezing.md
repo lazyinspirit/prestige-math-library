@@ -3,7 +3,7 @@ id: ex-nrqmx-single-mode-squeezing
 kind: example
 domain: mathematics
 title: Single-mode squeeze statistics
-status: draft
+status: published
 origin: pipeline
 dependency_level: 6
 deps: [lem-nrqm-oscillator-closed-ladder-domains, thm-nrqm-fock-and-equilibrium-closed-adjoint-sector-domains, thm-nrqmx-gaussian-covariance-uncertainty, def-nrqmx-finite-mode-symplectic-data, lem-nrqmx-finite-mode-fock-schr-identification, lem-nrqm-fock-and-equilibrium-creation-contraction-bounds, cor-c-one-change-of-variables-for-l-one-functions, lem-euclidean-gaussian-fourier-transform-with-two-pi-normalization, lem-complex-integration-by-parts-on-intervals-and-decaying-lines, thm-exponential-beats-every-polynomial, def-axiom-of-choice]
@@ -29,6 +29,13 @@ sources:
       url: "https://arxiv.org/pdf/1110.3234"
     - title: "Phan Thành Nam, Mathematical Quantum Mechanics II, §6.3, pp. 146–151"
       url: "https://www.math.lmu.de/~nam/LectureNotesMQM2020.pdf"
+verification:
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Example

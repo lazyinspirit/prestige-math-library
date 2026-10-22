@@ -1,7 +1,7 @@
 ---
 page: qftx-microlocal-products
 title: Wavefront sets, Hadamard kernels and admissible local products
-status: draft
+status: published
 items:
   - def-qftx-distributions-on-smooth-manifolds
   - def-qftx-local-wavefront-set

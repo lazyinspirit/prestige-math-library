@@ -2,7 +2,7 @@
 id: def-qsmx-finite-group-lattice-operators
 kind: definition
 title: Oriented finite-group lattice gauge operators
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -25,6 +25,13 @@ sources:
     - title: Alexander Cowtan and Shahn Majid, Quantum Double Aspects of Surface Code Models
       url: https://arxiv.org/pdf/2107.04411
       locator: "§3, PDF pp. 7–9; oriented group-valued edge states, vertex and face actions, and extension from square to irregular cellulations."
+verification:
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Definition

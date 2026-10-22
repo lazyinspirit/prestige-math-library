@@ -1,7 +1,7 @@
 ---
 page: emx-radiation-multipoles-examples
 title: "Radiation asymptotics and controlled multipole expansion — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples:

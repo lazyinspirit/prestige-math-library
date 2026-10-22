@@ -1,7 +1,7 @@
 ---
 page: qftx-kz-chiral-interface
 title: Casimir connections, braid monodromy and chiral WZW interfaces
-status: draft
+status: published
 library: mathematics
 items:
   - lem-qftx-casimir-tensor-diagonal-invariance

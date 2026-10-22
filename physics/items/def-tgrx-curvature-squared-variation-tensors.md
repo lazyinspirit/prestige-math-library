@@ -2,7 +2,7 @@
 id: def-tgrx-curvature-squared-variation-tensors
 kind: definition
 title: Curvature-squared counterterm variation tensors
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: physics
@@ -28,6 +28,12 @@ sources:
       locator: "Complete 77-page review retrieved; §3.1, PDF pp. 38–45, for local curvature ambiguities in locally covariant stress observables."
 verification:
   precheck: n/a
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Definition

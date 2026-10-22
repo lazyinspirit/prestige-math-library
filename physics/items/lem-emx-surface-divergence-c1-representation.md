@@ -2,7 +2,7 @@
 id: lem-emx-surface-divergence-c1-representation
 kind: lemma
 title: "Continuous density of the weak surface divergence for a C1 tangent field"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 1
@@ -31,6 +31,12 @@ dependency_roles:
   thm-integration-by-parts: mathematical-premise
 verification:
   precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 provenance:
   statement: ai-altered
   proof: ai-altered

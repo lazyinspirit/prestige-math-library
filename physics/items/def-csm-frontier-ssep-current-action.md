@@ -2,7 +2,7 @@
 id: def-csm-frontier-ssep-current-action
 kind: definition
 title: "Normalized SSEP macroscopic fluctuation action"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -24,11 +24,13 @@ sources:
       url: "https://arxiv.org/pdf/2505.15618"
       locator: "Sections 8.1–9, equations (90)–(97) and (112)–(130): SSEP transport coefficients and the diffusive current action."
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Definition

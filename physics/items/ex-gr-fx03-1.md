@@ -2,7 +2,7 @@
 id: ex-gr-fx03-1
 kind: example
 title: "A small diffeomorphism changes metric components but preserves proper time"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 3
@@ -50,10 +50,12 @@ sources:
       url: "https://arxiv.org/pdf/1309.7591"
 verification:
   precheck: pass
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

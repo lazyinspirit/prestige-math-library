@@ -1,7 +1,7 @@
 ---
 page: emg-fx09
 title: "Connection sectors, holonomy and presymplectic boundaries"
-status: draft
+status: published
 library: mathematics
 items:
   - prop-emg-fx-affine-connection-sector

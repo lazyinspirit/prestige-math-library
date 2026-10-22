@@ -1,7 +1,7 @@
 ---
 page: emg-fx01-examples
 title: Conformal constraint weights and charged time-symmetric data — Examples
-status: draft
+status: published
 library: mathematics
 requires:
   - emg-fx01

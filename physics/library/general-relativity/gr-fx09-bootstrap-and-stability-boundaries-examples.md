@@ -1,7 +1,7 @@
 ---
 page: gr-fx09-bootstrap-and-stability-boundaries-examples
 title: "Bootstrap closure and nonlinear stability boundaries — Examples"
-status: draft
+status: published
 library: physics
 requires:
   - gr-fx09-bootstrap-and-stability-boundaries

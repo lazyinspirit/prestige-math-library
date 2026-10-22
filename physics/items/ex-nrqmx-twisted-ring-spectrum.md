@@ -2,7 +2,7 @@
 id: ex-nrqmx-twisted-ring-spectrum
 kind: example
 title: Twisted circle momentum and its interval boundary matrix
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -42,6 +42,12 @@ sources:
       locator: "Appendix A, printed pp.19–20: anti-diagonal interval boundary matrix and pseudo-periodic conditions"
 verification:
   precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Example

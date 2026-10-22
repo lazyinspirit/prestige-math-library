@@ -1,7 +1,7 @@
 ---
 page: tgrx-gaussian-wedge
 title: Free scalar wedge modular geometry
-status: draft
+status: published
 library: physics
 items:
   - lem-tgrx-modular-kms-time-rescaling

@@ -1,7 +1,7 @@
 ---
 page: tgr-phs05
 title: Regulated generalized-entropy model
-status: draft
+status: published
 library: physics
 requires:
   - tgr-i01

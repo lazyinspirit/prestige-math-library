@@ -2,7 +2,7 @@
 id: prop-qftx-local-projection-no-signal
 kind: proposition
 title: Local trace-preserving operations preserve commuting expectations
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -38,11 +38,13 @@ sources:
       url: https://cs.uwaterloo.ca/~watrous/TQI/TQI.2.pdf
       locator: §2.3.1, Kraus representations and measurements, equations 2.199–2.202; §2.3.2, partial measurements, equations 2.224–2.228.
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

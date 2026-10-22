@@ -2,7 +2,7 @@
 id: rem-tgrx-three-black-hole-states
 kind: remark
 title: Boulware, Unruh and Hartle-Hawking states are distinct
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: physics
@@ -24,6 +24,13 @@ sources:
     - title: "Robert M. Wald, The Thermodynamics of Black Holes"
       url: "https://arxiv.org/pdf/gr-qc/9912119"
       locator: "Complete 46-page review; §3, PDF pp. 10–13: collapse radiation, stationary equilibrium, and the different physical inputs in the Hawking and Unruh settings."
+verification:
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Remark

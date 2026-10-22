@@ -2,7 +2,7 @@
 id: lem-emg-fx-holder-cubic-map
 kind: lemma
 title: Positive Hölder cubic map is continuously differentiable
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -40,6 +40,12 @@ sources:
       locator: "Chapter XII, the Banach calculus and operator-norm framework preceding Theorem 12.8, printed pp. 248-254."
 verification:
   precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

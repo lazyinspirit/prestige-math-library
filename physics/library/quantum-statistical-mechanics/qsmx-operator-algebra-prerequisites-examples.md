@@ -1,7 +1,7 @@
 ---
 page: qsmx-operator-algebra-prerequisites-examples
 title: Von Neumann closure, standard vectors and modular analytic tools — Examples
-status: draft
+status: published
 library: physics
 items: []
 examples:

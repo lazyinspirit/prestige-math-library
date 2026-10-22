@@ -2,7 +2,7 @@
 id: lem-csm-frontier-stable-mayer-tree-bound
 kind: lemma
 title: "Stable continuum Mayer coefficients obey an integrated tree bound"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics
@@ -83,10 +83,12 @@ provenance:
 physical_scope: null
 empirical_premises: []
 verification:
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 sources:
   references:
     - title: "Suren Poghosyan and Daniel Ueltschi, Abstract cluster expansion with applications to statistical mechanical systems"

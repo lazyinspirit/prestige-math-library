@@ -2,7 +2,7 @@
 id: thm-qftx-cw-fundamental-group-presentation
 kind: theorem
 title: "A finite connected CW complex has the edge-and-2-cell presentation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 dependency_level: 0
@@ -35,7 +35,13 @@ sources:
       url: "https://pi.math.cornell.edu/~hatcher/AT/AT%2B.pdf"
       locator: "Proposition 1.26, PDF pp. 49–51, for attaching 2-cells and higher cells; Proposition 1A.2, PDF pp. 83–85, for the maximal-tree basis."
 verification:
-  precheck: pending
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

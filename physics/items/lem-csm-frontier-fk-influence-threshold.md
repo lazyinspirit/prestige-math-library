@@ -2,7 +2,7 @@
 id: lem-csm-frontier-fk-influence-threshold
 kind: lemma
 title: "A maximum conditional edge influence bound for finite FK measures"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -33,10 +33,12 @@ sources:
       locator: "Theorems 1.1 and 2.3, and Remark 2.1: product-space influence and the endpoint/nonconstant-fiber distinction. The needed finite-box estimate is proved locally."
 verification:
   precheck: pass
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

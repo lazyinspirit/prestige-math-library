@@ -2,7 +2,7 @@
 id: thm-csm-frontier-heat-bath-tv-bound
 kind: theorem
 title: Finite Dobrushin bound for random-scan heat-bath sampling
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -29,11 +29,13 @@ sources:
       url: https://pages.uoregon.edu/dlevin/MARKOV/mcmt2e.pdf
       locator: "Chapter 3, §3.3.2, printed pp. 42–43; Chapter 14, §14.2, printed pp. 203–205; and Chapter 15, §15.1, printed pp. 215–217. The local proof supplies the finite influence estimate and its constants."
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

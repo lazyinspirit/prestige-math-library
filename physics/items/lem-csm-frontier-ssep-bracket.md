@@ -2,7 +2,7 @@
 id: lem-csm-frontier-ssep-bracket
 kind: lemma
 title: "SSEP empirical-field martingale and bracket"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics
@@ -29,7 +29,13 @@ sources:
       url: "https://math.arizona.edu/~sethuram/588/Landim.pdf"
       locator: "Chapter 2, Sections 2.3–2.4, printed pp. 77–82: weak empirical equation and martingale bracket scale."
 verification:
-  precheck: pending
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

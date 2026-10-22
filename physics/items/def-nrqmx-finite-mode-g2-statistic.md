@@ -2,7 +2,7 @@
 id: def-nrqmx-finite-mode-g2-statistic
 kind: definition
 title: Ideal single-mode normally ordered second factorial statistic
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics
@@ -40,10 +40,12 @@ sources:
       locator: "The number-basis PVM E_n=|n><n| and the distinction between ideal number measurement and inefficient avalanche detection."
 verification:
   precheck: n/a
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Definition

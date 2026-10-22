@@ -4,7 +4,7 @@ kind: proposition
 domain: mathematics
 library: mathematics
 title: Summing unresolved coherent emissions removes the lower cutoff
-status: draft
+status: published
 origin: pipeline
 dependency_level: 2
 deps:
@@ -40,10 +40,12 @@ sources:
       locator: "Chapter 26, printed pp. 167–171; detector resolution and the distinction between exclusive and unresolved final states in a different scalar-field calculation. It is context only, not a QED cancellation proof."
 verification:
   precheck: pass
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

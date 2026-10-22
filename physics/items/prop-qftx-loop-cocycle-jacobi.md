@@ -2,7 +2,7 @@
 id: prop-qftx-loop-cocycle-jacobi
 kind: proposition
 title: The Schwinger term obeys the Lie cocycle condition
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -27,10 +27,12 @@ sources:
       locator: §6, equations (50)–(55), PDF pp. 8–9; residue cocycle on Laurent-polynomial loops and central bracket.
 verification:
   precheck: pass
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

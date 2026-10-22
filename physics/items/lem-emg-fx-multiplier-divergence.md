@@ -2,7 +2,7 @@
 id: lem-emg-fx-multiplier-divergence
 kind: lemma
 title: Exact potential-wave multiplier identity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -38,10 +38,12 @@ sources:
       locator: "Section 1.2, PDF pp. 3–6, and Sections 8.1.2 and 8.4, PDF pp. 56–60: coupled wave systems in the Einstein–Maxwell application. The scalar identity below is proved directly and is not used as a substitute for those systems."
 verification:
   precheck: pass
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

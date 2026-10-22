@@ -1,7 +1,7 @@
 ---
 page: emx-classical-helicity-angular-momentum
 title: Transverse fields, helicity and angular momentum
-status: draft
+status: published
 library: physics
 items:
   - def-emx-transverse-fourier-field

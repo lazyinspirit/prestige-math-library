@@ -4,7 +4,7 @@ kind: counterexample
 domain: mathematics
 library: mathematics
 title: A first excited oscillator state has negative Wigner values
-status: draft
+status: published
 origin: pipeline
 dependency_level: 2
 deps:
@@ -37,11 +37,13 @@ sources:
       url: https://www.imo.universite-paris-saclay.fr/~stephane.nonnenmacher/enseign/Cours-Semiclassical-Analysis2019-lecture1-8.pdf
       locator: Definition 3.10 (Weyl quantization convention), printed pp. 16–17; the Wigner formula and negativity calculation are established locally
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement refuted

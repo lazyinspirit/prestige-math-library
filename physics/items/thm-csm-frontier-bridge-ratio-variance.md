@@ -2,7 +2,7 @@
 id: thm-csm-frontier-bridge-ratio-variance
 kind: theorem
 title: Mean and relative second moment of independent bridge ratios
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 dependency_level: 2
@@ -19,11 +19,13 @@ provenance:
   statement: ai-altered
   proof: ai-generated
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 sources:
   references:
     - title: "Art B. Owen, Monte Carlo Theory, Methods and Examples, Chapter 10 §10.9, Bridge, Umbrella and Path Sampling"

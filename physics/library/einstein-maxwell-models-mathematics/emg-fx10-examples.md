@@ -1,7 +1,7 @@
 ---
 page: emg-fx10-examples
 title: "Compatible discrete Maxwell constraints and finite algorithms — Examples"
-status: draft
+status: published
 library: mathematics
 items: []
 examples:

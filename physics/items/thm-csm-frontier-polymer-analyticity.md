@@ -2,7 +2,7 @@
 id: thm-csm-frontier-polymer-analyticity
 kind: theorem
 title: "A strict polymer majorant gives a zero-free finite partition function"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics
@@ -39,10 +39,12 @@ provenance:
 physical_scope: null
 empirical_premises: []
 verification:
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 sources:
   references:
     - title: "Sacha Friedli and Yvan Velenik, Statistical Mechanics of Lattice Systems: A Concrete Mathematical Introduction, Chapter 5, Cluster Expansion"

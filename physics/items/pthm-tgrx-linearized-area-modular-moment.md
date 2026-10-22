@@ -2,7 +2,7 @@
 id: pthm-tgrx-linearized-area-modular-moment
 kind: physics-theorem
 title: Linearized horizon area difference is a weighted signed null-stress moment
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: physics
@@ -37,11 +37,13 @@ sources:
       url: "https://www.damtp.cam.ac.uk/user/hsr1000/black_holes_lectures_2024.pdf"
       locator: "Complete 149-page lecture notes; §§4.6 and 4.8, equations (4.26)–(4.40), for the screen deformation, area expansion and exact null Raychaudhuri equation. No area theorem or entropy identification is imported."
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

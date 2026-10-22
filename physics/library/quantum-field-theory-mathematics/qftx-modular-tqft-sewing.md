@@ -1,7 +1,7 @@
 ---
 page: qftx-modular-tqft-sewing
 title: "Weighted Reshetikhin–Turaev sewing, framing anomaly and state dimensions"
-status: draft
+status: published
 library: mathematics
 items:
   - def-qftx-weighted-topological-model

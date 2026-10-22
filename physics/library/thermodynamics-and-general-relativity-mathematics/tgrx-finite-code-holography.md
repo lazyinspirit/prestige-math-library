@@ -1,7 +1,7 @@
 ---
 page: tgrx-finite-code-holography
 title: Exact finite algebra entropy identities and holography boundaries
-status: draft
+status: published
 library: mathematics
 requires:
   - tgrx-relative-entropy-balance

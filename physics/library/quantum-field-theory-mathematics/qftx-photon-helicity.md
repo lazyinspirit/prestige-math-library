@@ -1,7 +1,7 @@
 ---
 page: qftx-photon-helicity
 title: Photon helicity bundles and exact transverse rotations
-status: draft
+status: published
 library: mathematics
 items:
   - lem-qftx-photon-invariant-measure-isometry

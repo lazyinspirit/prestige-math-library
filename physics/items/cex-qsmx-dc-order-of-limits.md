@@ -2,7 +2,7 @@
 id: cex-qsmx-dc-order-of-limits
 kind: counterexample
 title: A conserved finite current obstructs an integrable dc correlation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -24,10 +24,12 @@ provenance:
   proof: ai-generated
 verification:
   precheck: pass
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 sources:
   references:
     - title: "J. Sirker, Transport in one-dimensional integrable quantum systems, SciPost Physics Lecture Notes 17 (2020), §2.1, equations (2.9)–(2.14), and §2.2"

@@ -1,7 +1,7 @@
 ---
 page: qsmx-operator-algebra-prerequisites
 title: Von Neumann closure, standard vectors and modular analytic tools
-status: draft
+status: published
 library: physics
 items:
   - def-qsmx-von-neumann-algebra

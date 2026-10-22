@@ -1,7 +1,7 @@
 ---
 page: qsmx-quasifree-gases-examples
 title: Finite quasifree CAR states and positive quadratic Bose Hamiltonians — Examples
-status: draft
+status: published
 library: physics
 items: []
 examples:

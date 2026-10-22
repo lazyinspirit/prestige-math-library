@@ -2,7 +2,7 @@
 id: post-tgrx-wedge-modular-model
 kind: postulate
 title: Free scalar wedge data and modular-geometric bridge
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics
@@ -38,10 +38,10 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
+  sources_checked:
     date: 2026-10-22
+    scope: Completed native formulation/status, source-evidence and applicability review; exact evidence and reading limits in research/physics-non-fluid-129-2026-10-21-r2-publication.json. No new retrieval, measurement or solution is claimed.
+    by: owner-authorized native reviewers (gpt-6.1-sol)
 sources:
   references:
     - title: "Joseph J. Bisognano and Eyvind H. Wichmann, On the duality condition for a Hermitian scalar field, Journal of Mathematical Physics 16 (1975), 985–1007"

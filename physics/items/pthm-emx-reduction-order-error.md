@@ -2,7 +2,7 @@
 id: pthm-emx-reduction-order-error
 kind: physics-theorem
 title: "First-order reduction of order with an explicit residual and error bound"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics
@@ -42,10 +42,12 @@ provenance:
 physical_scope: "Exact residual and an absolute acceleration-error bound for the first-order reduction of order of the adopted prescribed-force ODE, on the unique bounded-future branch and for bounded twice continuously differentiable forces with bounded second derivative. The result is conditional on the effective model; it is not a bound for nonlinear self-consistent Maxwell–Lorentz trajectories, and it gives no experimental validation."
 verification:
   precheck: pass
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 sources:
   references:
     - title: "Fritz Rohrlich, The Dynamics of a Charged Particle, arXiv:0804.4614 (complete 11-page full-text paper)"

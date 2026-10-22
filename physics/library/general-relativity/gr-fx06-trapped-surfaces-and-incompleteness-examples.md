@@ -1,7 +1,7 @@
 ---
 page: gr-fx06-trapped-surfaces-and-incompleteness-examples
 title: "Trapped surfaces and Penrose incompleteness — Examples"
-status: draft
+status: published
 library: physics
 requires:
   - gr-fx06-trapped-surfaces-and-incompleteness

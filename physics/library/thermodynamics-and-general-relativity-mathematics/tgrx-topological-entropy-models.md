@@ -1,7 +1,7 @@
 ---
 page: tgrx-topological-entropy-models
 title: Topological boundary state counts without universal gravity claims
-status: draft
+status: published
 library: mathematics
 requires:
   - tgrx-finite-code-holography

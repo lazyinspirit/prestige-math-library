@@ -3,7 +3,7 @@ id: lem-nrqmx-schwartz-joint-quadrature-graph-core
 kind: lemma
 domain: mathematics
 title: Schwartz density in the joint quadrature graph norm
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 deps: [def-countable-choice, def-schwartz-space-and-its-seminorms, thm-fourier-characterisation-of-integer-order-hilbert-sobolev-spaces, cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn, lem-smooth-bump-between-concentric-euclidean-balls, lem-weak-leibniz-rule-with-a-smooth-factor, thm-dominated-convergence, thm-plancherel]
@@ -21,10 +21,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 sources:
   references:
     - title: "Juha Kinnunen, Sobolev Spaces, §1.8, Theorem 1.21 and Remark 1.22"

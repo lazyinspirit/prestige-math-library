@@ -4,7 +4,7 @@ kind: theorem
 domain: mathematics
 library: physics
 title: "Spin-half exchange realizes Temperley-Lieb at loop two"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 dependency_level: 2
@@ -19,10 +19,12 @@ provenance:
   statement: literature-derived
   proof: ai-generated
 verification:
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 sources:
   references:
     - title: "Yacine Ikhlef, Jesper Lykke Jacobsen, and Hubert Saleur, A Temperley-Lieb quantum chain with two- and three-site interactions, §2"

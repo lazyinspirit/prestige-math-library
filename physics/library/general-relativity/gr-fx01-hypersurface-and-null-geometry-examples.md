@@ -1,7 +1,7 @@
 ---
 page: gr-fx01-hypersurface-and-null-geometry-examples
 title: "Hypersurface and null geometry — Examples"
-status: draft
+status: published
 library: physics
 requires:
   - gr-fx01-hypersurface-and-null-geometry

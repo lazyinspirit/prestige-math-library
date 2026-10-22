@@ -2,7 +2,7 @@
 id: ex-nrqmx-single-photon-antibunching
 kind: example
 title: Ideal single-mode factorial moment
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics
@@ -42,11 +42,13 @@ sources:
       url: "https://arxiv.org/pdf/1110.3234"
       locator: "Passive beam splitter transformation and ideal number-basis PVM; the local result is a finite-mode state calculation."
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Example

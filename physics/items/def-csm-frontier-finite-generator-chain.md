@@ -2,7 +2,7 @@
 id: def-csm-frontier-finite-generator-chain
 kind: definition
 title: "Finite-state generator chain"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics
@@ -28,11 +28,13 @@ sources:
       locator: "Section 4.1, printed pp. 25–26: càdlàg paths; Section 4.3, printed pp.
         26–27: all-pairs continuous-time Markov martingales."
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 justified_by:
   - lem-csm-frontier-finite-generator-chain-existence
 ---

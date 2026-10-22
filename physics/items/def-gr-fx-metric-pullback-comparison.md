@@ -2,7 +2,7 @@
 id: def-gr-fx-metric-pullback-comparison
 kind: definition
 title: "Pullback comparison of a Lorentzian metric"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 0
@@ -25,7 +25,13 @@ sources:
     - title: "J. Sbierski, On the Existence of a Maximal Cauchy Development for the Einstein Equations — a Dezornification, arXiv:1309.7591v3 (2015), Section 2, Definition 2.1 and Remark 2.5: pullback of induced metric data and diffeomorphism-invariance convention"
       url: "https://arxiv.org/pdf/1309.7591"
 verification:
-  precheck: pending
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Definition

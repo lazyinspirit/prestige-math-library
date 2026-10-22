@@ -1,7 +1,7 @@
 ---
 page: qftx-constructive-wick-two-dimensions
 title: Two-dimensional Wick limits and a constructive interaction interface
-status: draft
+status: published
 library: mathematics
 requires:
   - qftx-reflection-positive-limits

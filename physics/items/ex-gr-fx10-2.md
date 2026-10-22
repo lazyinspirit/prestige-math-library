@@ -2,7 +2,7 @@
 id: ex-gr-fx10-2
 kind: example
 title: "A locally flat Kasner coordinate branch"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 4
@@ -27,11 +27,13 @@ sources:
     - title: "Rishabh Jha, Introduction to Hamiltonian Formulation of General Relativity and Homogeneous Cosmologies, SciPost Physics Lecture Notes 73 (2023), arXiv:2204.03537v2, Section 4.3.1, equations (159)–(172), printed pp. 36–38 (PDF pp. 37–39)"
       url: "https://arxiv.org/pdf/2204.03537"
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Example

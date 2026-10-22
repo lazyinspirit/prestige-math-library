@@ -1,7 +1,7 @@
 ---
 page: emx-compatible-finite-elements-examples
 title: Compatible finite elements, constraints and coercive error control — Examples
-status: draft
+status: published
 items: []
 examples:
   - cex-emx-edge-moment-domain-failure

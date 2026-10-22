@@ -1,7 +1,7 @@
 ---
 page: qsmx-transverse-ising-spectral-examples
 title: Transverse Ising Majorana reduction and bulk gap closing — Examples
-status: draft
+status: published
 library: physics
 requires:
   - qsmx-transverse-ising-spectral

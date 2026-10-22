@@ -1,7 +1,7 @@
 ---
 page: tgrx-relative-entropy-balance
 title: Finite modular energy and entropy balance
-status: draft
+status: published
 library: mathematics
 requires:
   - tgr-mhs05

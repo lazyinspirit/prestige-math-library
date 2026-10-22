@@ -2,7 +2,7 @@
 id: ex-csm-frontier-singular-local-limit
 kind: example
 title: "A fixed label vanishes locally while a spatial mark stays random"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics
@@ -29,10 +29,12 @@ sources:
       locator: "Chapter 4, Theorem 4.19 and Lemma 4.20, printed pp. 75–77: vague tests and escape of mass."
 verification:
   precheck: pass
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Example

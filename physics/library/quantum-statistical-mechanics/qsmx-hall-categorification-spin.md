@@ -1,7 +1,7 @@
 ---
 page: qsmx-hall-categorification-spin
 title: Lie and Hall algebra actions with controlled decategorification
-status: draft
+status: published
 library: physics
 items:
   - def-qsmx-spin-weight-and-hall-realization

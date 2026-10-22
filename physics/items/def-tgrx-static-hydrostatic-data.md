@@ -2,7 +2,7 @@
 id: def-tgrx-static-hydrostatic-data
 kind: definition
 title: Static hydrostatic background and equation-of-state data
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: physics
@@ -44,6 +44,12 @@ sources:
       url: https://arxiv.org/pdf/1203.3544
 verification:
   precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Definition

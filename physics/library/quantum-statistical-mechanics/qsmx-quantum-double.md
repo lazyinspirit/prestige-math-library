@@ -1,7 +1,7 @@
 ---
 page: qsmx-quantum-double
 title: Finite-group Hopf algebra and lattice quantum-double sectors
-status: draft
+status: published
 library: physics
 items:
   - def-qsmx-finite-group-double

@@ -2,7 +2,7 @@
 id: thm-qsmx-gapped-ground-state-clustering
 kind: theorem
 title: "Exponential connected clustering from a unique infinite-volume ground-state gap"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -62,11 +62,13 @@ sources:
     - title: "Pieter Naaijkens, Quantum Spin Systems on Infinite Lattices, section 4.4, Theorem 4.4.1, PDF pp. 105–106; statement and uniqueness qualification read, no clustering proof supplied there or imported here."
       url: "https://arxiv.org/pdf/1311.2717"
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

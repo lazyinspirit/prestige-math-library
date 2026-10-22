@@ -2,7 +2,7 @@
 id: pthm-tgrx-wedge-unruh-clock
 kind: physics-theorem
 title: Wedge modular bridge implies the Unruh clock temperature
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics
@@ -27,10 +27,12 @@ provenance:
   proof: ai-altered
 verification:
   precheck: pass
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 sources:
   references:
     - title: "Joseph J. Bisognano and Eyvind H. Wichmann, On the duality condition for a Hermitian scalar field, Journal of Mathematical Physics 16 (1975), 985–1007"

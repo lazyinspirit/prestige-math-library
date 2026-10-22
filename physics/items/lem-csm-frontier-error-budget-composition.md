@@ -2,7 +2,7 @@
 id: lem-csm-frontier-error-budget-composition
 kind: lemma
 title: Additive composition of finite sampling error budgets
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -23,7 +23,13 @@ sources:
       url: https://pages.uoregon.edu/dlevin/MARKOV/mcmt2e.pdf
       locator: "Chapter 4, §§4.1–4.2, printed pp. 47–49 (PDF pp. 62–64): total variation as a metric and finite-law error comparisons. The scalar four-term decomposition below is proved locally."
 verification:
-  precheck: pending
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

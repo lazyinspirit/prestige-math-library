@@ -2,7 +2,7 @@
 id: lem-emg-fx-warped-curvature
 kind: lemma
 title: Warped two-sphere curvature and charged mass conservation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -36,6 +36,12 @@ sources:
       locator: "Sections 3.2.2 and 3.4.1, printed pp. 105–108 and 130–131 (PDF pp. 112–115 and 137–138): curvature sign, Ricci contraction, and curvature identities."
 verification:
   precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

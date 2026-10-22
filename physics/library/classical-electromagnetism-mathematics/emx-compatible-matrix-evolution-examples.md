@@ -1,7 +1,7 @@
 ---
 page: emx-compatible-matrix-evolution-examples
 title: Compatible matrix evolution and time stepping — Examples
-status: draft
+status: published
 items: []
 examples:
   - cex-emx-explicit-euler-growth

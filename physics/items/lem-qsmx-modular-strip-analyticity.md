@@ -2,7 +2,7 @@
 id: lem-qsmx-modular-strip-analyticity
 kind: lemma
 title: Spectral analyticity on the modular strip
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics
@@ -40,6 +40,13 @@ sources:
     - title: Gerald Teschl, Mathematical Methods in Quantum Mechanics, second edition
       url: https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe2.pdf
       locator: Section 3.1, equations (3.26)–(3.30), printed pp. 103–104
+verification:
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

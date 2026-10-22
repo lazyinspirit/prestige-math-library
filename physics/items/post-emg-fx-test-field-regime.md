@@ -2,7 +2,7 @@
 id: post-emg-fx-test-field-regime
 kind: postulate
 title: Fixed-background charged scalar regime
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: physics
@@ -34,6 +34,10 @@ provenance:
   proof: not-applicable
 verification:
   precheck: n/a
+  sources_checked:
+    date: 2026-10-22
+    scope: Completed native formulation/status, source-evidence and applicability review; exact evidence and reading limits in research/physics-non-fluid-129-2026-10-21-r2-publication.json. No new retrieval, measurement or solution is claimed.
+    by: owner-authorized native reviewers (gpt-6.1-sol)
 sources:
   references:
     - title: "Richard Brito, Vitor Cardoso, and Paolo Pani, Superradiance -- the 2020 Edition, Lecture Notes in Physics 971, complete 281-page edition (2020)"

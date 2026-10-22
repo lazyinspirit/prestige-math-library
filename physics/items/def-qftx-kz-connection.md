@@ -2,7 +2,7 @@
 id: def-qftx-kz-connection
 kind: definition
 title: "Casimir KZ connection on ordered configurations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 dependency_level: 0
@@ -35,11 +35,13 @@ sources:
       url: "https://djvu.online/file/elCdJNnaapAuA"
       locator: "Lecture 3, §§3.2 and 3.5, printed pp. 30–37: the KZ differential system and its Casimir operators."
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Definition

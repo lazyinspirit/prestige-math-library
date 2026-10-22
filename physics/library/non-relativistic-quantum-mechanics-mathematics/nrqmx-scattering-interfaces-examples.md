@@ -1,7 +1,7 @@
 ---
 page: nrqmx-scattering-interfaces-examples
 title: Scattering channels, stationary resolvents and time delay — Examples
-status: draft
+status: published
 library: mathematics
 requires:
   - nrqmx-scattering-interfaces

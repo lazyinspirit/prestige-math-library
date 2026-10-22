@@ -2,7 +2,7 @@
 id: post-tgrx-hydrostatic-effective-model
 kind: postulate
 title: Restricted hydrostatic effective functional
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: physics
@@ -27,6 +27,11 @@ sources:
       url: https://arxiv.org/pdf/1203.3544
     - title: "Pavel Kovtun, Lectures on hydrodynamic fluctuations in relativistic theories, complete lecture notes, §§1.3 and 2.6 (2012)"
       url: https://arxiv.org/pdf/1205.5040
+verification:
+  sources_checked:
+    date: 2026-10-22
+    scope: Completed native formulation/status, source-evidence and applicability review; exact evidence and reading limits in research/physics-non-fluid-129-2026-10-21-r2-publication.json. No new retrieval, measurement or solution is claimed.
+    by: owner-authorized native reviewers (gpt-6.1-sol)
 ---
 
 ## Postulate

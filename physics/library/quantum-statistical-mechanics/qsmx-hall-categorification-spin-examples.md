@@ -1,7 +1,7 @@
 ---
 page: qsmx-hall-categorification-spin-examples
 title: Lie and Hall algebra actions with controlled decategorification — Examples
-status: draft
+status: published
 library: physics
 items: []
 examples:

@@ -2,7 +2,7 @@
 id: lem-emg-fx-local-linear-wave-control
 kind: lemma
 title: Finite-slab energy control and subsidiary propagation for the linearized electrovacuum system
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -44,11 +44,13 @@ sources:
       url: "https://arxiv.org/pdf/1904.04926"
       locator: "PDF pp. 1–4 and 43–55: the coupled metric/electromagnetic perturbation system, pure-gauge and parameter modes, and the substantially stronger asymptotically flat decay theorem. Only the local perturbation conventions and its explicit limitations inform this finite-slab result."
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

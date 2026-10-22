@@ -2,7 +2,7 @@
 id: ex-qftx-su2-level-dimensions
 kind: example
 title: "$SU(2)$ level $k$ has $k+1$ torus states"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -30,11 +30,13 @@ sources:
       url: "https://arxiv.org/pdf/math/0308281"
       locator: "§6, PDF pp. 24–27: root-of-unity ribbon quotient and modularity theorem; the present exact $sl_2$ data are taken from the current supplier."
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Example

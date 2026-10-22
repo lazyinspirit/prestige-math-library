@@ -2,7 +2,7 @@
 id: prop-emg-fx-semiclassical-consistency
 kind: proposition
 title: "Necessary Ward consistency of coupled sources"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -25,10 +25,12 @@ provenance:
   proof: ai-generated
 verification:
   precheck: pass
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 sources:
   references:
     - title: "David Tong, General Relativity, Cambridge Part III lecture notes (2019), §§4.1.3 and 4.5.2–4.5.3"

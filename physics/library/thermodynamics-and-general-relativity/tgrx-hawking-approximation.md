@@ -1,7 +1,7 @@
 ---
 page: tgrx-hawking-approximation
 title: Free collapse Hawking approximation and its proof obligations
-status: draft
+status: published
 library: physics
 companion: tgrx-hawking-approximation-examples
 requires:

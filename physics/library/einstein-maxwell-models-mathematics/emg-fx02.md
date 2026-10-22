@@ -1,7 +1,7 @@
 ---
 page: emg-fx02
 title: Local nonlinear constraint construction with explicit analytic obligations
-status: draft
+status: published
 library: mathematics
 requires:
   - emg-fx01

@@ -2,7 +2,7 @@
 id: pthm-nrqmx-amplitude-damping-model
 kind: physics-theorem
 title: Amplitude damping with operational time units
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics
@@ -34,10 +34,12 @@ provenance:
   statement: ai-altered
   proof: ai-generated
 verification:
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 sources:
   references:
     - title: "Lin Lin and Nathan Wiebe, Quantum Algorithms for Scientific Computation, Chapter 21, §21.1"

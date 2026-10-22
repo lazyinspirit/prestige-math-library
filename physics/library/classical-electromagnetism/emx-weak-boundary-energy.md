@@ -1,7 +1,7 @@
 ---
 page: emx-weak-boundary-energy
 title: Weak fields, boundary power and dissipative uniqueness
-status: draft
+status: published
 items:
   - def-emx-finite-energy-boundary-model
   - def-emx-surface-divergence

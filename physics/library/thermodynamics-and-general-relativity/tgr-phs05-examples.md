@@ -1,7 +1,7 @@
 ---
 page: tgr-phs05-examples
 title: Regulated generalized-entropy model — Examples
-status: draft
+status: published
 library: physics
 requires:
   - tgr-phs05

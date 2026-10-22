@@ -1,7 +1,7 @@
 ---
 page: gr-fx10-cosmological-dynamics-and-shear-examples
 title: "Cosmological dynamics and anisotropic shear — Examples"
-status: draft
+status: published
 library: physics
 requires:
   - gr-fx10-cosmological-dynamics-and-shear

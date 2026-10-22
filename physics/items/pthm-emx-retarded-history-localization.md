@@ -3,7 +3,7 @@ id: pthm-emx-retarded-history-localization
 kind: physics-theorem
 title: "Retarded Maxwell fields for spatially compact smooth histories"
 domain: physics
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 deps:
@@ -54,10 +54,12 @@ provenance:
   proof: ai-altered
 physical_scope: "The smooth retarded solution branch of classical vacuum electromagnetism for conserved volume sources supported in one fixed spatial ball at every time, including histories that are not compactly supported in time. The result establishes local finiteness, smoothness, the sourced wave equations, Lorenz gauge and the smooth Maxwell system for the selected retarded potentials. Point, sheet and other singular sources, self-force, radiation reaction, finite-energy claims and empirical claims are excluded."
 verification:
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 sources:
   references:
     - title: "Niklas Beisert, Elektrodynamik, Vorlesungsskript, ETH Zürich 2024 FS, complete 176-page course script"

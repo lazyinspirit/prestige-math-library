@@ -2,7 +2,7 @@
 id: pthm-emx-runaway-preacceleration
 kind: physics-theorem
 title: "Runaway and bounded-future branches of the Abraham–Lorentz equation"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics
@@ -42,6 +42,12 @@ provenance:
 physical_scope: "Exact conditional properties of the adopted nonrelativistic prescribed-force ODE for bounded continuous forces: every acceleration solution, the unique solution bounded on a future half-line, and an explicit smooth future force for which that selected branch accelerates before the force begins. The proof concerns the formal effective equation only; it asserts no measured preacceleration, no self-consistent Maxwell–Lorentz trajectory, and no empirical validity outside the stated model regime."
 verification:
   precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 sources:
   references:
     - title: "Fritz Rohrlich, The Dynamics of a Charged Particle, arXiv:0804.4614 (complete 11-page full-text paper)"

@@ -2,7 +2,7 @@
 id: ex-qftx-positive-frequency-tube
 kind: example
 title: One positive frequency decays in the future imaginary direction
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -32,11 +32,13 @@ sources:
       url: https://www.ufjf.br/fisica/files/2022/03/AQFT.pdf
       locator: "§1.3, PDF pp. 8–9, equation (22), and §2.1, Theorem 2.8, PDF pp. 18–19: the positive-energy Fourier convention and the sign of the distributional tube."
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Example

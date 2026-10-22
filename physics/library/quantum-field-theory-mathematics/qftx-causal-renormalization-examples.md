@@ -1,7 +1,7 @@
 ---
 page: qftx-causal-renormalization-examples
 title: All-order scalar causal extension and finite renormalization — Examples
-status: draft
+status: published
 library: mathematics
 items: []
 examples:

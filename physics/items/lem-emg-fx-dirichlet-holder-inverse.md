@@ -2,7 +2,7 @@
 id: lem-emg-fx-dirichlet-holder-inverse
 kind: lemma
 title: Dirichlet Hölder inverse required by the constraint branch
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -59,10 +59,12 @@ sources:
       locator: "§1, Theorem 1 and Theorem 1-prime, printed pp. 1-3; the half-ball theorem starts with a classical solution. The local lifting and reflection details are proved in the owned helpers."
 verification:
   precheck: pass
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: prop-gr-fx-su2-compact
 kind: proposition
 title: SU(2) is a compact Hausdorff matrix group
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics
@@ -34,10 +34,12 @@ sources:
       locator: "§2, finite graph variables valued in a compact structure group and representation spaces."
 verification:
   precheck: pass
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

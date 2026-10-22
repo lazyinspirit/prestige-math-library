@@ -1,7 +1,7 @@
 ---
 page: qsmx-transport-and-drude
 title: Current continuity, Drude obstructions and conditional diffusion
-status: draft
+status: published
 library: physics
 items:
   - def-qsmx-lattice-current-and-limits

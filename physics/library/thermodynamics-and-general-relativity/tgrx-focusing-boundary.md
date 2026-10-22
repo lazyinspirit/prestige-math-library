@@ -1,7 +1,7 @@
 ---
 page: tgrx-focusing-boundary
 title: Linearized focusing and quantum entropy inequalities
-status: draft
+status: published
 library: physics
 requires:
   - tgrx-regulated-second-law

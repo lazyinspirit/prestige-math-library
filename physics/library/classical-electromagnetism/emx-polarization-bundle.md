@@ -1,7 +1,7 @@
 ---
 page: emx-polarization-bundle
 title: Helicity bundles, rotations and Berry curvature
-status: draft
+status: published
 library: physics
 items:
   - def-emx-helicity-line-bundle

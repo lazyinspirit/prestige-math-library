@@ -3,7 +3,7 @@ id: thm-nrqmx-finite-mode-bogoliubov
 kind: theorem
 domain: mathematics
 title: Finite Bogoliubov implementability
-status: draft
+status: published
 origin: pipeline
 dependency_level: 4
 deps: [def-nrqmx-finite-mode-symplectic-data, thm-nrqmx-finite-metaplectic-construction, lem-nrqmx-finite-mode-fock-schr-identification, lem-nrqm-fock-and-equilibrium-creation-contraction-bounds, def-axiom-of-choice]
@@ -18,10 +18,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 sources:
   references:
     - title: "Phan Thành Nam, Mathematical Quantum Mechanics II, §6.3, pp. 146–156"

@@ -2,7 +2,7 @@
 id: thm-csm-frontier-high-temperature-susceptibility
 kind: theorem
 title: "High-temperature susceptibility, correlation summability, and spatial-average concentration"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics
@@ -36,10 +36,12 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 sources:
   references:
     - title: "Sascha Friedli and Yvan Velenik, Statistical Mechanics of Lattice Systems: A Concrete Mathematical Introduction (complete author-hosted book, revised 2017)"

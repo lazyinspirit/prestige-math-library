@@ -1,7 +1,7 @@
 ---
 page: emg-fx04-examples
 title: Charged photon trapping and extremal scaling — Examples
-status: draft
+status: published
 library: mathematics
 requires:
   - emg-fx04

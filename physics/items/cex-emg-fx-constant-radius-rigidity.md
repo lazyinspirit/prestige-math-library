@@ -2,7 +2,7 @@
 id: cex-emg-fx-constant-radius-rigidity
 kind: counterexample
 title: Constant-radius Bertotti–Robinson data are outside areal-coordinate rigidity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -36,6 +36,12 @@ sources:
       locator: "Section 4, PDF pp. 3–4: the separate constant-radius branch and the conditions needed for any additional symmetry."
 verification:
   precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement refuted

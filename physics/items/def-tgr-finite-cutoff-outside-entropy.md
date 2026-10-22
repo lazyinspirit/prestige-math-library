@@ -2,7 +2,7 @@
 id: def-tgr-finite-cutoff-outside-entropy
 kind: definition
 title: Finite-regulator outside density and entropy
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -37,11 +37,13 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 sources:
   references:
     - title: John Watrous, The Theory of Quantum Information, Chapter 2, section 2.1.3

@@ -4,7 +4,7 @@ kind: algorithm
 domain: mathematics
 library: mathematics
 title: Floquet Fourier–Galerkin assembly
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 dependency_level: 4
@@ -31,6 +31,13 @@ sources:
     - title: André Eckardt and Egidijus Anisimovas, High-frequency approximation for periodically driven quantum systems from a Floquet-space perspective, New Journal of Physics 17 (2015), 093039
       url: https://arxiv.org/pdf/1502.06477
       locator: Section 2.3, equation (22), and Appendix B, equations (B.1)-(B.3), Fourier block convention for the quasienergy operator.
+verification:
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Definition

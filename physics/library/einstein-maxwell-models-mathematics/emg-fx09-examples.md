@@ -1,7 +1,7 @@
 ---
 page: emg-fx09-examples
 title: "Connection sectors, holonomy and presymplectic boundaries — Examples"
-status: draft
+status: published
 library: mathematics
 items: []
 examples:

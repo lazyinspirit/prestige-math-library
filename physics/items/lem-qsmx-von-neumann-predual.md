@@ -2,7 +2,7 @@
 id: lem-qsmx-von-neumann-predual
 kind: lemma
 title: Trace-class quotient predual and normal functionals
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics
@@ -63,6 +63,13 @@ sources:
     - title: "Claire Anantharaman and Sorin Popa, An Introduction to II1 Factors"
       url: "https://www.idpoisson.fr/anantharaman/publications/IIun.pdf"
       locator: "Chapter 7, §7.4, Theorem 7.4.5, printed pp. 114–116, tracial standard representation"
+verification:
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

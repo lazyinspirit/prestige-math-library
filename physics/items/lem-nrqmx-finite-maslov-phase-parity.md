@@ -3,7 +3,7 @@ id: lem-nrqmx-finite-maslov-phase-parity
 kind: lemma
 domain: mathematics
 title: Maslov phase parity in a finite generating chart
-status: draft
+status: published
 origin: pipeline
 dependency_level: 2
 deps: [def-nrqmx-finite-mode-symplectic-data, lem-nrqmx-finite-symplectic-implementers, lem-nrqmx-finite-symplectic-generator-factorization, def-fourier-transform-on-l-one-of-rn, thm-plancherel, cor-fourier-transform-is-a-topological-automorphism-of-schwartz-space, cor-c-one-change-of-variables-for-l-one-functions, def-absolutely-continuous-function, thm-choice-implies-dependent-implies-countable-choice, thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions, thm-first-fundamental-theorem-of-calculus-for-l-one, def-axiom-of-choice]
@@ -25,10 +25,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 sources:
   references:
     - title: "Joel Robbin and Dietmar Salamon, Feynman path integrals on phase space and the metaplectic representation, §§5, 6.4, 8.5"

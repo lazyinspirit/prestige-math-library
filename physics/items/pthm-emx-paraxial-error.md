@@ -2,7 +2,7 @@
 id: pthm-emx-paraxial-error
 kind: physics-theorem
 title: Paraxial phase and longitudinal-field bounds
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics
@@ -67,7 +67,13 @@ sources:
       url: "https://alexcerjan.com/documents/papers/cerjan_JOSA_2011.pdf"
       locator: "§2 equation (8), §4 equations (22), (29), and (37), PDF pp. 2254–2257: exact angular-spectrum phase and longitudinal vector-field components; this item proves a separate uniform cone estimate."
 verification:
-  precheck: pending
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

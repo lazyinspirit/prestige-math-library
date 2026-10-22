@@ -3,7 +3,7 @@ id: cex-nrqmx-finite-matrix-ccr
 kind: counterexample
 domain: mathematics
 title: Finite matrices cannot satisfy exact canonical commutation relations
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 deps: []
@@ -13,10 +13,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 sources:
   references:
     - title: Anthony W. Knapp, Advanced Real Analysis, Digital Second Edition, Chapter II, §5, trace-class definitions and cyclicity exercise, pp. 49–52 (the proof here is the explicit finite sum)

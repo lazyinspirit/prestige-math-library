@@ -1,7 +1,7 @@
 ---
 page: nrqmx-bloch-band-geometry
 title: Single-particle Bloch bundles and band topology
-status: draft
+status: published
 library: mathematics
 items:
   - def-nrqmx-bloch-fiber-model

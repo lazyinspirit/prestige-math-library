@@ -1,7 +1,7 @@
 ---
 page: qftx-photon-paraxial
 title: Controlled paraxial spin–orbital labels and nonparaxial corrections
-status: draft
+status: published
 library: mathematics
 companion: qftx-photon-paraxial-examples
 requires:

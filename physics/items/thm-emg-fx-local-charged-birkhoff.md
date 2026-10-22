@@ -2,7 +2,7 @@
 id: thm-emg-fx-local-charged-birkhoff
 kind: theorem
 title: Local charged Birkhoff rigidity away from critical areal gradients
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -47,6 +47,12 @@ sources:
       locator: "Section 5.3, PDF pp. 27–28: its black-hole-domain Birkhoff statement is global context only and is not used as the proof of this local theorem."
 verification:
   precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

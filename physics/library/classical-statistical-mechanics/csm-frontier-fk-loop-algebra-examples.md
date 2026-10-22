@@ -1,7 +1,7 @@
 ---
 page: csm-frontier-fk-loop-algebra-examples
 title: Classical Potts random clusters and planar loop transfer — Examples
-status: draft
+status: published
 library: physics
 items: []
 examples:

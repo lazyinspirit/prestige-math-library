@@ -2,7 +2,7 @@
 id: thm-qftx-truncated-rg-ode
 kind: theorem
 title: One-coupling truncated RG flow and leading beta-coefficient invariance
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -32,10 +32,12 @@ sources:
       locator: Printed pages 1–2, equations (2)–(9), beta-series transformation under a finite coupling redefinition; the local proof uses only the leading coefficient.
 verification:
   precheck: pass
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

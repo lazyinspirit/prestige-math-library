@@ -2,7 +2,7 @@
 id: cex-emg-fx-eft-order-does-not-control-derivatives
 kind: counterexample
 title: "Small invariants do not alone control derivative corrections"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -21,10 +21,12 @@ provenance:
   proof: ai-generated
 verification:
   precheck: pass
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 sources:
   references:
     - title: "Dmitri P. Sorokin, Introductory Notes on Non-linear Electrodynamics and its Applications, arXiv:2112.12118v3 (2022)"

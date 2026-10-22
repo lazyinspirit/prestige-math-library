@@ -1,7 +1,7 @@
 ---
 page: nrqmx-finite-mode-gaussian
 title: Finite-mode Fock, Gaussian and Bogoliubov foundations
-status: draft
+status: published
 library: mathematics
 items:
   - lem-nrqmx-finite-mode-fock-schr-identification

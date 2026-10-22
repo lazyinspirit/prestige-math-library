@@ -1,7 +1,7 @@
 ---
 page: csm-frontier-sampling-certificates
 title: Gibbs sampling, exact coupling and finite-error certificates
-status: draft
+status: published
 library: physics
 requires:
   - csm-frontier-quantitative-dlr

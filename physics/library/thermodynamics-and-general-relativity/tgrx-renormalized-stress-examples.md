@@ -1,7 +1,7 @@
 ---
 page: tgrx-renormalized-stress-examples
 title: Hadamard subtraction and semiclassical model contracts — Examples
-status: draft
+status: published
 library: physics
 items: []
 examples:

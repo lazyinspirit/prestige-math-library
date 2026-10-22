@@ -2,7 +2,7 @@
 id: cex-qftx-isometries-different-ranges
 kind: counterexample
 title: Abstract isometries can give a nonunitary comparison
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -27,11 +27,13 @@ sources:
       url: https://www.physik.uni-hamburg.de/th2/ag-fredenhagen/dokumente/qft09-10.pdf
       locator: "Chapter IV §3, PDF p. 85: isometric wave maps need not be unitary without range information."
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 proof_strategy: direct
 ---
 

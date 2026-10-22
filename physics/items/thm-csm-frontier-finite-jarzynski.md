@@ -2,7 +2,7 @@
 id: thm-csm-frontier-finite-jarzynski
 kind: theorem
 title: Jarzynski identity for a finite-state driven rate process
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -46,6 +46,13 @@ sources:
     - title: Gavin E. Crooks, Entropy production fluctuation theorem and the nonequilibrium work relation for free energy differences
       url: https://journals.aps.org/pre/pdf/10.1103/PhysRevE.60.2721
       locator: Sections I–III, PDF pp. 1–3, work relation under microscopic reversibility and time-reversed driving.
+verification:
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

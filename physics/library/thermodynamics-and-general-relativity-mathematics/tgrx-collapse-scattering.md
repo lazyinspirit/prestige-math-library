@@ -1,7 +1,7 @@
 ---
 page: tgrx-collapse-scattering
 title: Collapse ray tracing and greybody separation
-status: draft
+status: published
 library: mathematics
 requires:
   - tgr-mhs02

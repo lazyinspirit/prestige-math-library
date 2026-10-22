@@ -2,7 +2,7 @@
 id: def-qftx-distributions-on-smooth-manifolds
 kind: definition
 title: Scalar distributions on smooth manifolds
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -28,7 +28,13 @@ sources:
       url: https://arxiv.org/html/1208.1428
       locator: Full-text Appendix A, especially the definition of distributions in local coordinates; the density convention on manifolds is specified here.
 verification:
-  precheck: pending
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Definition

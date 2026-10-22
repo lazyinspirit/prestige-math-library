@@ -2,7 +2,7 @@
 id: def-emx-surface-divergence
 kind: definition
 title: "Weak surface divergence of a tangential field"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 0
@@ -16,10 +16,12 @@ dependency_roles:
   def-euclidean-inner-product: mathematical-premise
 verification:
   precheck: n/a
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 provenance:
   statement: ai-altered
   proof: not-applicable

@@ -2,7 +2,7 @@
 id: prop-gr-fx-s1-loop-noncontractible
 kind: proposition
 title: The once-around circle path is not thin-contractible
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics
@@ -43,6 +43,12 @@ sources:
       locator: "PDF pp. 6–7, fixed-endpoint thin homotopies and the thin path groupoid; the circle obstruction below is proved locally by Stokes."
 verification:
   precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

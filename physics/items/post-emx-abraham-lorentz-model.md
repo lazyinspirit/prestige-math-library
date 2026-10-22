@@ -2,7 +2,7 @@
 id: post-emx-abraham-lorentz-model
 kind: postulate
 title: "The nonrelativistic Abraham–Lorentz equation as a restricted effective model"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics
@@ -25,10 +25,10 @@ provenance:
 physical_scope: "An additional restricted nonrelativistic effective model for a point particle represented by one trajectory in a named laboratory chart, driven by a prescribed external force. The equation is adopted rather than derived from the Maxwell self-field or the external Lorentz-coupling postulate. Its physical interpretation is limited to intervals and force profiles explicitly declared to be low-speed and slowly varying; this item sets no universal empirical cutoff and reports no experiment."
 verification:
   precheck: n/a
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
+  sources_checked:
     date: 2026-10-22
+    scope: Completed native formulation/status, source-evidence and applicability review; exact evidence and reading limits in research/physics-non-fluid-129-2026-10-21-r2-publication.json. No new retrieval, measurement or solution is claimed.
+    by: owner-authorized native reviewers (gpt-6.1-sol)
 sources:
   references:
     - title: "Fritz Rohrlich, The Dynamics of a Charged Particle, arXiv:0804.4614 (complete 11-page full-text paper)"

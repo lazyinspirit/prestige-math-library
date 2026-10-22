@@ -1,7 +1,7 @@
 ---
 page: emx-passive-dispersive-materials-examples
 title: Causal oscillator media and passivity — Examples
-status: draft
+status: published
 library: physics
 items: []
 examples:

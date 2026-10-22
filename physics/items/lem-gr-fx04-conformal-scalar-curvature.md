@@ -2,7 +2,7 @@
 id: lem-gr-fx04-conformal-scalar-curvature
 kind: lemma
 title: "Scalar curvature of a conformally Euclidean three-metric"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics
@@ -25,6 +25,12 @@ sources:
       url: "https://www.ias.edu/sites/default/files/NR_notes.pdf"
 verification:
   precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

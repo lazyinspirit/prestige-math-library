@@ -2,7 +2,7 @@
 id: lem-csm-frontier-finite-response-covariance
 kind: lemma
 title: "Finite Gibbs response of an observable is $\\beta$ times its covariance with the field-coupled observable"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics
@@ -29,6 +29,13 @@ sources:
     - title: "Patrick Rebeschini and Ramon van Handel, Comparison Theorems for Gibbs Measures"
       url: "https://arxiv.org/pdf/1308.4117"
       locator: "§2.1, finite conditional distributions and Gibbs specifications; the response derivative itself is proved locally here."
+verification:
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

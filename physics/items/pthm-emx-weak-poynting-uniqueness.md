@@ -2,7 +2,7 @@
 id: pthm-emx-weak-poynting-uniqueness
 kind: physics-theorem
 title: "Energy balance and zero-data forward uniqueness for admissible weak Maxwell fields"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 1
@@ -21,6 +21,12 @@ dependency_roles:
   cor-cauchy-schwarz-inequality-for-l-two: mathematical-premise
 verification:
   precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 provenance:
   statement: ai-altered
   proof: ai-altered

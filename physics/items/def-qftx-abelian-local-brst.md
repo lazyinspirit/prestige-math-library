@@ -2,7 +2,7 @@
 id: def-qftx-abelian-local-brst
 kind: definition
 title: Abelian local jet BRST differential
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -27,6 +27,13 @@ sources:
     - title: Rudolf Schmid, Local cohomology in gauge theories, BRST transformations and anomalies
       url: https://deferentialgeometry.org/papers/localbrst.pdf
       locator: Sections 2–3; infinite-jet local forms and BRST transformations of a connection and ghost.
+verification:
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Definition

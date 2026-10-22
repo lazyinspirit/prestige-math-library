@@ -4,7 +4,7 @@ kind: definition
 domain: mathematics
 library: mathematics
 title: Normalized finite Gaussian shell transform
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 deps:
@@ -35,7 +35,13 @@ sources:
       url: "https://arxiv.org/pdf/1902.08652"
       locator: "§11.2, printed pp.44–48: finite-dimensional Gaussian laws and generating functions."
 verification:
-  precheck: pending
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Definition

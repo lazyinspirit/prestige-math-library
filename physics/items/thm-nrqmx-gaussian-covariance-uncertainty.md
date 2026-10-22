@@ -3,7 +3,7 @@ id: thm-nrqmx-gaussian-covariance-uncertainty
 kind: theorem
 domain: mathematics
 title: Gaussian covariance and uncertainty
-status: draft
+status: published
 origin: pipeline
 dependency_level: 5
 deps: [def-nrqmx-finite-mode-symplectic-data, thm-nrqmx-finite-mode-bogoliubov, thm-nrqmx-finite-metaplectic-construction, lem-nrqmx-finite-mode-fock-schr-identification, lem-nrqm-fock-and-equilibrium-creation-contraction-bounds, lem-nrqmx-williamson-normal-form, lem-nrqmx-schwartz-joint-quadrature-graph-core, lem-nrqm-composites-density-and-scalar-spectral-probability, lem-euclidean-gaussian-fourier-transform-with-two-pi-normalization, lem-complex-integration-by-parts-on-intervals-and-decaying-lines, thm-exponential-beats-every-polynomial, def-polar-surface-measure-on-the-unit-sphere, thm-polar-coordinates-formula-for-lebesgue-measure, thm-linear-change-of-variables-for-lebesgue-measure, cor-volume-of-the-unit-n-ball, thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces, thm-dominated-convergence, thm-stone-one-parameter-unitary-groups, def-countable-choice, def-axiom-of-choice, lem-tdmath-fatou, thm-spectral-theorem-for-unbounded-self-adjoint-operators]
@@ -35,10 +35,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 sources:
   references:
     - title: "Christian Weedbrook et al., Gaussian Quantum Information, §§II.A and II.C.1, pp. 4–9"

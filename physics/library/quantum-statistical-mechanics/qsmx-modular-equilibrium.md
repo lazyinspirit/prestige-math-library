@@ -1,7 +1,7 @@
 ---
 page: qsmx-modular-equilibrium
 title: Modular automorphisms and physical-time KMS conversion
-status: draft
+status: published
 library: physics
 items:
   - lem-qsmx-modular-strip-analyticity

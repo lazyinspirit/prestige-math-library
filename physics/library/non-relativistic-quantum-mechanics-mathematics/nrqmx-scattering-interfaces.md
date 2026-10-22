@@ -1,7 +1,7 @@
 ---
 page: nrqmx-scattering-interfaces
 title: Scattering channels, stationary resolvents and time delay
-status: draft
+status: published
 library: mathematics
 requires:
   - nrqmx-form-spectral-methods

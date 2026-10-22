@@ -2,7 +2,7 @@
 id: lem-nrqmx-bernoulli-hoeffding
 kind: lemma
 title: "Two-sided Hoeffding bound for Bernoulli frequencies"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -16,10 +16,12 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 sources:
   references:
     - title: "Dmitry Panchenko, MIT OpenCourseWare 18.465, Lecture 07: Hoeffding’s inequality, Spring 2007"

@@ -2,7 +2,7 @@
 id: def-csm-frontier-boltzmann-grad-scaling
 kind: definition
 title: Periodic hard-sphere Boltzmann–Grad scaling convention
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -18,6 +18,13 @@ sources:
     - title: "Isabelle Gallagher, Laure Saint-Raymond and Benjamin Texier, From Newton to Boltzmann: Hard Spheres and Short-Range Potentials, arXiv:1208.5753v2, 2013"
       url: "https://arxiv.org/pdf/1208.5753"
       locator: "Chapter 1, §1.0, equations (1.0.1)–(1.0.2), and §1.3, pp. 5–9: hard-sphere free flight/reflection and the N ε^(d−1) Boltzmann–Grad scaling."
+verification:
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Definition

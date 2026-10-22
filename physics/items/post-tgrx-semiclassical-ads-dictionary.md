@@ -2,7 +2,7 @@
 id: post-tgrx-semiclassical-ads-dictionary
 kind: postulate
 title: Restricted semiclassical entropy dictionary
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: physics
@@ -33,10 +33,10 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
+  sources_checked:
     date: 2026-10-22
+    scope: Completed native formulation/status, source-evidence and applicability review; exact evidence and reading limits in research/physics-non-fluid-129-2026-10-21-r2-publication.json. No new retrieval, measurement or solution is claimed.
+    by: owner-authorized native reviewers (gpt-6.1-sol)
 sources:
   references:
     - title: "Daniel Harlow, Jerusalem Lectures on Black Holes and Quantum Information, §§6.2.3 and 6.10"

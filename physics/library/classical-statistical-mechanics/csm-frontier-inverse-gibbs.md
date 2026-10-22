@@ -1,7 +1,7 @@
 ---
 page: csm-frontier-inverse-gibbs
 title: Inverse Gibbs models, identifiability and correlated uncertainty
-status: draft
+status: published
 library: physics
 requires:
   - csm-frontier-sampling-certificates

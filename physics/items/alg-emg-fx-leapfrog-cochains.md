@@ -2,7 +2,7 @@
 id: alg-emg-fx-leapfrog-cochains
 kind: algorithm
 title: "Finite compatible leapfrog evolution"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -26,6 +26,13 @@ sources:
     - title: "Davit Harutyunyan, Adaptive Vector Finite Element Methods for the Maxwell Equations, University of Twente dissertation (2007)"
       url: "https://ris.utwente.nl/ws/portalfiles/portal/6041555/thesis_Harutyunyan.pdf"
       locator: "Complete 210-page dissertation inspected. Ch. 6, §§6.7–6.9, printed pp. 169–174 (PDF pp. 179–184): matrix semidiscretization, the staggered leapfrog update, a CFL condition, and discrete Gauss constraints."
+verification:
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Definition

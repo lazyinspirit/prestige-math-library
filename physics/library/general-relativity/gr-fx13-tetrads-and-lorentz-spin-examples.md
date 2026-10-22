@@ -1,7 +1,7 @@
 ---
 page: gr-fx13-tetrads-and-lorentz-spin-examples
 title: Tetrads, Lorentz connections and spin interfaces — Examples
-status: draft
+status: published
 library: physics
 items: []
 examples:

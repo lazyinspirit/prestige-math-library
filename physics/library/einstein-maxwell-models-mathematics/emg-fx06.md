@@ -1,7 +1,7 @@
 ---
 page: emg-fx06
 title: Energy currents and conditional stability estimates
-status: draft
+status: published
 library: mathematics
 requires:
   - emg-fx04

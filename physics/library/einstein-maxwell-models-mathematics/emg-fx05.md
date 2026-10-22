@@ -1,7 +1,7 @@
 ---
 page: emg-fx05
 title: Linearized coupled equations and gauge identities
-status: draft
+status: published
 library: mathematics
 items:
   - def-emg-fx-linearized-electrovac

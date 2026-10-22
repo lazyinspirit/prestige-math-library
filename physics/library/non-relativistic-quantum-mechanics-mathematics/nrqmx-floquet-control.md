@@ -1,7 +1,7 @@
 ---
 page: nrqmx-floquet-control
 title: Periodic finite dynamics, quasienergy and controlled truncation
-status: draft
+status: published
 library: mathematics
 requires:
   - qm-math-controlled-dynamics

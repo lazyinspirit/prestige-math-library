@@ -1,7 +1,7 @@
 ---
 page: qftx-inclusive-soft-model
 title: "Soft coherent radiation, resolution and inclusive cancellation"
-status: draft
+status: published
 library: mathematics
 companion: qftx-inclusive-soft-model-examples
 requires:

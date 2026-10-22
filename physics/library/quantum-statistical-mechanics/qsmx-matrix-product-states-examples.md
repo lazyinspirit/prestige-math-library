@@ -1,7 +1,7 @@
 ---
 page: qsmx-matrix-product-states-examples
 title: Schmidt truncation, transfer operators and parent Hamiltonians — Examples
-status: draft
+status: published
 library: physics
 items: []
 examples:

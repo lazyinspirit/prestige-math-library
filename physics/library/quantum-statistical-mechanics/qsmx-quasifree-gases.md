@@ -1,7 +1,7 @@
 ---
 page: qsmx-quasifree-gases
 title: Finite quasifree CAR states and positive quadratic Bose Hamiltonians
-status: draft
+status: published
 library: physics
 items:
   - def-qsmx-quasifree-finite-covariance

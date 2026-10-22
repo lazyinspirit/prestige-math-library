@@ -1,7 +1,7 @@
 ---
 page: qsmx-transport-and-drude-examples
 title: Current continuity, Drude obstructions and conditional diffusion — Examples
-status: draft
+status: published
 library: physics
 items: []
 examples:

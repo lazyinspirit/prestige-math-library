@@ -2,7 +2,7 @@
 id: lem-gr-fx-differentiation-under-finite-chain-integral
 kind: lemma
 title: Differentiation of a smooth family of finite-chain integrals
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 0
@@ -29,7 +29,13 @@ dependency_roles:
   thm-heine-cantor-metric: mathematical-premise
   thm-newton-leibniz-with-interior-derivative: mathematical-premise
 verification:
-  precheck: pending
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 sources:
   references:
   - title: Peter S. Park, Proof of de Rham's Theorem

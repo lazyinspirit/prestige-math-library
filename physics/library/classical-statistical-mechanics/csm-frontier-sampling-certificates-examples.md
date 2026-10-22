@@ -1,7 +1,7 @@
 ---
 page: csm-frontier-sampling-certificates-examples
 title: Gibbs sampling, exact coupling and finite-error certificates — Examples
-status: draft
+status: published
 library: physics
 requires:
   - csm-frontier-sampling-certificates

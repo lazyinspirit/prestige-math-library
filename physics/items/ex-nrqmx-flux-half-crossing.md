@@ -4,7 +4,7 @@ kind: example
 domain: physics
 library: physics
 title: Half-flux ground-state crossing on the ring
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 dependency_level: 5
@@ -35,10 +35,12 @@ sources:
       url: "https://nair.ccny.cuny.edu/Notes-QM.pdf"
 verification:
   precheck: pass
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Example

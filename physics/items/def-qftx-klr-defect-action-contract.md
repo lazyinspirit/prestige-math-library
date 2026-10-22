@@ -2,7 +2,7 @@
 id: def-qftx-klr-defect-action-contract
 kind: definition
 title: "KLR categorical action contract for line-changing data"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 dependency_level: 0
@@ -25,10 +25,12 @@ sources:
       locator: "§3.1, printed pp. 20–22, and §3.4, printed pp. 38–39, for the graded 2-category and its 2-representations; §3.6, printed pp. 42–43, for split-Grothendieck decategorification"
 verification:
   precheck: n/a
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Definition

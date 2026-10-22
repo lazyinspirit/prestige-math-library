@@ -1,7 +1,7 @@
 ---
 page: csm-frontier-kinetic-scaling
 title: "Kinetic relaxation, diffusive scaling and entropy dissipation"
-status: draft
+status: published
 library: physics
 requires:
   - csm-collision-transport

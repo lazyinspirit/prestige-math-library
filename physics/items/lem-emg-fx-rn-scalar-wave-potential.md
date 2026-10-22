@@ -2,7 +2,7 @@
 id: lem-emg-fx-rn-scalar-wave-potential
 kind: lemma
 title: Subextremal RN scalar mode potential and conditional energy
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -38,10 +38,12 @@ sources:
       locator: "Sections 1.2–1.3 and 8.1.2–8.4, PDF pp. 3–6 and 56–60: the coupled Einstein–Maxwell master systems, transformations and low-mode distinctions. Those results are not used to identify the scalar test equation with a coupled perturbation system."
 verification:
   precheck: pass
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

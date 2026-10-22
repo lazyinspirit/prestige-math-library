@@ -2,7 +2,7 @@
 id: lem-qftx-free-weyl-functoriality
 kind: lemma
 title: Green morphisms induce algebraic Weyl maps
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -39,7 +39,13 @@ sources:
       url: https://arxiv.org/pdf/1904.04051v2
       locator: §4.2, equations (31)–(33), the Weyl relations and their dependence on the symplectic quotient, printed pp. 17–18.
 verification:
-  precheck: pending
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

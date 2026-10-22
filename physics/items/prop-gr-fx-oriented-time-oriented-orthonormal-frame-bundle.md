@@ -2,7 +2,7 @@
 id: prop-gr-fx-oriented-time-oriented-orthonormal-frame-bundle
 kind: proposition
 title: Oriented time-oriented orthonormal frame bundle
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics
@@ -43,6 +43,12 @@ sources:
       locator: "§3.1.2, tetrads at a point, and §3.4.2, orthonormal-frame connection conventions."
 verification:
   precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 physical_scope: null
 ---
 

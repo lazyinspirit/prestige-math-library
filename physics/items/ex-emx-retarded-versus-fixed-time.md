@@ -3,7 +3,7 @@ id: ex-emx-retarded-versus-fixed-time
 kind: example
 title: "The radiation limit depends on the observation-time path"
 domain: physics
-status: draft
+status: published
 origin: pipeline
 dependency_level: 3
 deps:
@@ -42,6 +42,13 @@ sources:
     - title: "Richard Fitzpatrick, Classical Electromagnetism: An intermediate level course, University of Texas at Austin, complete author-hosted HTML lecture notes"
       url: "https://farside.ph.utexas.edu/teaching/em/lectures/node50.html"
       locator: "Chapter 4, node 50, “Retarded potentials”: the potential integral uses the source at $t-|x-y|/c$, fixing the retarded-time convention used in the example."
+verification:
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Example

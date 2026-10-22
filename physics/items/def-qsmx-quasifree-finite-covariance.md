@@ -2,7 +2,7 @@
 id: def-qsmx-quasifree-finite-covariance
 kind: definition
 title: Finite CAR quasifree states and covariance
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -26,11 +26,13 @@ sources:
     - title: "Jacopo Surace and Luca Tagliacozzo, Fermionic Gaussian States: An Introduction to Numerical Approaches, §§3.1–3.7"
       url: "https://arxiv.org/pdf/2111.08343"
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Definition

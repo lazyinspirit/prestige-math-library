@@ -2,7 +2,7 @@
 id: ex-qftx-two-vertex-log
 kind: example
 title: Two-vertex scalar logarithm and its local ambiguity
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -36,6 +36,12 @@ sources:
       locator: Sections 5.1–5.2, printed pp. 21–25, the scaling-degree-four scalar graph and its local delta ambiguity.
 verification:
   precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Example

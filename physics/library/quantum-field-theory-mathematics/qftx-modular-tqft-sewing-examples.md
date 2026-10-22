@@ -1,7 +1,7 @@
 ---
 page: qftx-modular-tqft-sewing-examples
 title: "Weighted Reshetikhin–Turaev sewing, framing anomaly and state dimensions — Examples"
-status: draft
+status: published
 library: mathematics
 items: []
 examples:

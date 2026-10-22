@@ -2,7 +2,7 @@
 id: ex-qftx-vortex-paraxial-label
 kind: example
 title: A finite-energy vortex packet and its cone-bounded labels
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -45,10 +45,12 @@ sources:
       locator: "Full author-hosted Chapter 6 HTML retrieved; §6.2.1 Eqs. 6.511–6.523 read in full; other sections not harvested."
 verification:
   precheck: pass
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Example

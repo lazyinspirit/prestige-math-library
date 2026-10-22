@@ -2,7 +2,7 @@
 id: def-qftx-free-weyl-net
 kind: definition
 title: Algebraic free Weyl net on Green backgrounds
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -38,10 +38,12 @@ sources:
       locator: §4.2, equations (31)–(33), algebraic Weyl relations and the symplectic quotient, printed pp. 17–18.
 verification:
   precheck: n/a
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Definition

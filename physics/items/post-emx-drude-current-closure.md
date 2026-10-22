@@ -2,7 +2,7 @@
 id: post-emx-drude-current-closure
 kind: postulate
 title: "Drude current closure and collisionless limit"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 0
@@ -20,10 +20,10 @@ dependency_roles:
   def-em-si-conventions: formulation-prerequisite
 verification:
   precheck: n/a
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
+  sources_checked:
     date: 2026-10-22
+    scope: Completed native formulation/status, source-evidence and applicability review; exact evidence and reading limits in research/physics-non-fluid-129-2026-10-21-r2-publication.json. No new retrieval, measurement or solution is claimed.
+    by: owner-authorized native reviewers (gpt-6.1-sol)
 provenance:
   statement: ai-altered
   proof: not-applicable

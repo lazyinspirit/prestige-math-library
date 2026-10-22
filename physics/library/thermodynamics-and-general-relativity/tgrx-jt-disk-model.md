@@ -1,7 +1,7 @@
 ---
 page: tgrx-jt-disk-model
 title: JT disk spectral preparation and ensemble boundaries
-status: draft
+status: published
 library: physics
 requires:
   - tgrx-ads-effective-boundaries

@@ -2,7 +2,7 @@
 id: cex-emg-fx-cfl-discrete-growth
 kind: counterexample
 title: "Constraint preservation does not imply bounded leapfrog evolution"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -29,6 +29,13 @@ sources:
     - title: "Davit Harutyunyan, Adaptive Vector Finite Element Methods for the Maxwell Equations, University of Twente dissertation (2007)"
       url: "https://ris.utwente.nl/ws/portalfiles/portal/6041555/thesis_Harutyunyan.pdf"
       locator: "Complete 210-page dissertation inspected. Ch. 6, §6.8, printed pp. 171–172 (PDF pp. 181–182): a different Whitney finite-element leapfrog with a matrix-dependent CFL bound and a separately stated discrete energy."
+verification:
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement refuted

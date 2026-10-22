@@ -3,7 +3,7 @@ id: thm-qftx-green-hyperbolic-existence
 kind: theorem
 title: Existence and uniqueness of continuous scalar Green maps on smooth globally
   hyperbolic spacetimes
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -36,7 +36,13 @@ sources:
       pp. 85–89. Local analytic construction here instead uses the explicitly cited
       published symmetric-hyperbolic suppliers.
 verification:
-  precheck: pending
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

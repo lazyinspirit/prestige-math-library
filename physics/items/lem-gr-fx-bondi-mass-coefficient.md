@@ -2,7 +2,7 @@
 id: lem-gr-fx-bondi-mass-coefficient
 kind: lemma
 title: "Bondi mass-aspect constraint coefficient"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics
@@ -30,7 +30,13 @@ sources:
     - title: "Andrew Strominger, Lectures on the Infrared Structure of Gravity and Gauge Theory, Princeton University Press (2018), full lecture notes arXiv:1703.05448: §5.2.1, Eqs. (5.2.8)-(5.2.9)"
       url: "https://arxiv.org/pdf/1703.05448"
 verification:
-  precheck: pending
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

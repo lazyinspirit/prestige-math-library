@@ -1,7 +1,7 @@
 ---
 page: tgr-mhs05-examples
 title: Finite-regulator entropy mathematics — Examples
-status: draft
+status: published
 library: mathematics
 requires:
   - tgr-mhs05

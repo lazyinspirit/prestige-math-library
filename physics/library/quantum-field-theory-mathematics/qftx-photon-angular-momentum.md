@@ -1,7 +1,7 @@
 ---
 page: qftx-photon-angular-momentum
 title: Projected spin, orbital angular momentum and gauge-aware generators
-status: draft
+status: published
 library: mathematics
 companion: qftx-photon-angular-momentum-examples
 requires:

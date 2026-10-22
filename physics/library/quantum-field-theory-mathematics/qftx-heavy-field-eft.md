@@ -1,7 +1,7 @@
 ---
 page: qftx-heavy-field-eft
 title: Gaussian matching and a rigorous derivative-expansion remainder
-status: draft
+status: published
 library: mathematics
 requires:
   - qft-ir02

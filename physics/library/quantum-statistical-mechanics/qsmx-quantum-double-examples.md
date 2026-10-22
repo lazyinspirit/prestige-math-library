@@ -1,7 +1,7 @@
 ---
 page: qsmx-quantum-double-examples
 title: Finite-group Hopf algebra and lattice quantum-double sectors — Examples
-status: draft
+status: published
 library: physics
 items: []
 examples:

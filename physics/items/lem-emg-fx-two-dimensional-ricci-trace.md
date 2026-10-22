@@ -2,7 +2,7 @@
 id: lem-emg-fx-two-dimensional-ricci-trace
 kind: lemma
 title: Ricci tensor and volume form on a Lorentzian surface
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -36,6 +36,12 @@ sources:
       locator: "Section 5.3, PDF pp. 27–28: the local spherical electrovac Birkhoff scope; no two-dimensional curvature calculation is imported."
 verification:
   precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

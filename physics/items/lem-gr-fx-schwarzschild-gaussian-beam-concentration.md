@@ -2,7 +2,7 @@
 id: lem-gr-fx-schwarzschild-gaussian-beam-concentration
 kind: lemma
 title: Exact Schwarzschild waves concentrated in a photon-sphere annulus
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -33,6 +33,12 @@ sources:
       url: "https://arxiv.org/pdf/0802.3942"
 verification:
   precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

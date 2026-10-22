@@ -2,7 +2,7 @@
 id: def-qsmx-von-neumann-algebra
 kind: definition
 title: Concrete von Neumann algebra and faithful vector
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics
@@ -45,6 +45,13 @@ sources:
       url: "https://arxiv.org/pdf/1803.04993"
       locator: "§3.1, printed pp. 18–19 (PDF pp. 19–20), equations (3.1)–(3.9) and footnote 15"
 proof_strategy: direct
+verification:
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Definition

@@ -2,7 +2,7 @@
 id: thm-qftx-subtraction-character-factorization
 kind: theorem
 title: Laurent subtraction factors a character into counterterm and finite characters
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -30,10 +30,12 @@ sources:
       locator: "Section II.5, Theorem II.5.1 and its proof, printed pp. 35–37: degree-recursive Birkhoff decomposition, projection recursion, and character preservation under the Laurent splitting."
 verification:
   precheck: pass
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

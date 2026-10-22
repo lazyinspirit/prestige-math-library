@@ -2,7 +2,7 @@
 id: def-qftx-euclidean-limit-data
 kind: definition
 title: Euclidean Schwinger hierarchies and controlled limit data
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 dependency_level: 0
@@ -29,6 +29,12 @@ sources:
       locator: "PDF pp. 2–3, 14–16: reflection-positive forms and the quotient/semigroup route; PDF pp. 20–22: the reflection-positive distribution definition and massive resolvent example."
 verification:
   precheck: n/a
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Definition

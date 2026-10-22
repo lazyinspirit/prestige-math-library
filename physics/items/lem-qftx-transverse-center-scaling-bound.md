@@ -2,7 +2,7 @@
 id: lem-qftx-transverse-center-scaling-bound
 kind: lemma
 title: Positive scaling bounds for products transverse at the scaling center
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -45,6 +45,12 @@ sources:
       locator: Section 6.2, Lemma 6.6, directional product estimate; the positive-bound, fixed-center variant and its ordinary-to-directional upgrade are proved locally below.
 verification:
   precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

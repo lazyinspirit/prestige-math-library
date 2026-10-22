@@ -2,7 +2,7 @@
 id: lem-emg-fx-conformal-constraints
 kind: lemma
 title: Exact conformal electrovacuum constraint transformation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -32,10 +32,12 @@ sources:
       locator: "Sections 6.2.3-6.4.2, equations (6.14)-(6.52) and (6.81), derive the metric, divergence, scalar-curvature, and trace-free-curvature conformal identities."
 verification:
   precheck: pass
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

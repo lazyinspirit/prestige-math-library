@@ -1,7 +1,7 @@
 ---
 page: nrqmx-quantum-optics-models
 title: Finite-mode light–matter models and detection statistics
-status: draft
+status: published
 library: physics
 items:
   - post-nrqmx-finite-mode-light-matter-model

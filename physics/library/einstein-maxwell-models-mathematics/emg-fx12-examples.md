@@ -1,7 +1,7 @@
 ---
 page: emg-fx12-examples
 title: "Reduced stationary uniqueness and explicit research boundaries — Examples"
-status: draft
+status: published
 library: mathematics
 items: []
 examples:

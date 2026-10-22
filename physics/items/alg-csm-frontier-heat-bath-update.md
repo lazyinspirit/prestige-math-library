@@ -2,7 +2,7 @@
 id: alg-csm-frontier-heat-bath-update
 kind: algorithm
 title: Finite-spin random-scan heat-bath update
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -25,7 +25,13 @@ sources:
       url: https://pages.uoregon.edu/dlevin/MARKOV/mcmt2e.pdf
       locator: "Chapter 3, §3.3.2, printed pp. 42–43, and Chapter 25, §25.2, printed pp. 348–350: finite single-site conditional resampling and the Ising heat-bath randomization."
 verification:
-  precheck: pending
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Definition

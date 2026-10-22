@@ -2,7 +2,7 @@
 id: prop-qftx-hadamard-wick-change
 kind: proposition
 title: Smooth Hadamard changes intertwine the polynomial microcausal products
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -51,7 +51,13 @@ sources:
         positive-frequency Hadamard wavefront relation and admissible
         contractions.
 verification:
-  precheck: pending
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

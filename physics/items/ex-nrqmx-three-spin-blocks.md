@@ -4,7 +4,7 @@ kind: example
 domain: mathematics
 library: mathematics
 title: "Three spin-half factors: the quartet and the two exchange-coupled doublets"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 dependency_level: 3
@@ -32,6 +32,13 @@ sources:
       url: "https://arxiv.org/pdf/0901.4685"
     - title: "Representation Theory, CT, Lent 2005, complete course notes, Chapters 23–24"
       url: "https://math.uchicago.edu/~margalit/repthy/RepThry.pdf"
+verification:
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Example

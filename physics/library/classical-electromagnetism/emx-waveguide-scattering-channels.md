@@ -1,7 +1,7 @@
 ---
 page: emx-waveguide-scattering-channels
 title: Power-normalized scattering and passivity
-status: draft
+status: published
 library: physics
 requires:
   - em-waveguides-and-cavities

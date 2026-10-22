@@ -2,7 +2,7 @@
 id: def-qftx-photon-projected-angular
 kind: definition
 title: Projected photon spin and orbital operators
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -33,10 +33,12 @@ sources:
       locator: Full author-hosted HTML chapter inspected; section 6.2.1, equations 6.511–6.523, for the free photon modes and transverse projector used as input here.
 verification:
   precheck: pass
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Definition

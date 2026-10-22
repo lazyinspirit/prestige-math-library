@@ -2,7 +2,7 @@
 id: def-csm-frontier-fk-real-boundaries
 kind: definition
 title: "Finite FK random-cluster weights for real q and boundary partitions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -27,11 +27,13 @@ sources:
       url: https://www.statslab.cam.ac.uk/~grg/books/rcm1-1.pdf
       locator: "Chapter 1, especially §§1.2–1.3: finite edge-subset law, component count, and boundary conditions."
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Definition

@@ -2,7 +2,7 @@
 id: thm-qftx-cut-hopf-antipode
 kind: theorem
 title: Admissible cuts give a connected graded Hopf algebra and recursive antipode
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -27,10 +27,12 @@ sources:
       locator: "Section II.3, Corollary II.3.2, printed p. 32, for the finite convolution-series antipode of a connected filtered bialgebra; Section II.9.3, printed pp. 42–44, for the compatible two-level-cut coassociativity argument."
 verification:
   precheck: pass
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

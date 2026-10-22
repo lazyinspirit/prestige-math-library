@@ -1,7 +1,7 @@
 ---
 page: emx-waveguide-scattering-channels-examples
 title: Power-normalized scattering and passivity — Examples
-status: draft
+status: published
 library: physics
 requires:
   - emx-waveguide-scattering-channels

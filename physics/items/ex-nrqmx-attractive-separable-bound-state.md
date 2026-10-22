@@ -4,7 +4,7 @@ kind: example
 domain: mathematics
 library: mathematics
 title: Rank-one attractive perturbation has at most one negative eigenvalue
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 dependency_level: 1
@@ -39,10 +39,12 @@ sources:
         resolvent scalar denominator used for the exact separable model."
 verification:
   precheck: pass
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

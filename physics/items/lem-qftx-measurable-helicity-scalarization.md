@@ -2,7 +2,7 @@
 id: lem-qftx-measurable-helicity-scalarization
 kind: lemma
 title: Measurable scalarization of the transverse helicity fibers
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -25,10 +25,12 @@ sources:
       locator: Full 66-page arXiv:2308.11147v2; §II constructs the transverse photon bundle, while §III, Definition 14 and Theorem 16 define and establish the two circular-helicity line subbundles. This item constructs only Borel unit sections, not global smooth sections.
 verification:
   precheck: pass
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

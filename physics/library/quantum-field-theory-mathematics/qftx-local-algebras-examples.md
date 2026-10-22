@@ -1,7 +1,7 @@
 ---
 page: qftx-local-algebras-examples
 title: Causal propagators, time slice and algebraic locality — Examples
-status: draft
+status: published
 requires:
   - qftx-local-algebras
 items:

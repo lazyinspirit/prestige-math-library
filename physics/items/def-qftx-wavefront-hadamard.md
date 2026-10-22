@@ -2,7 +2,7 @@
 id: def-qftx-wavefront-hadamard
 kind: definition
 title: Wavefront and positive-frequency Hadamard data
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -31,7 +31,13 @@ sources:
       url: https://arxiv.org/pdf/math-ph/9903028
       locator: Full 38-page paper, printed pp. 7–9, Section 2.1, wavefront-set definition and the positive-frequency Hadamard relation.
 verification:
-  precheck: pending
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Definition

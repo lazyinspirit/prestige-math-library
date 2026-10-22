@@ -1,7 +1,7 @@
 ---
 page: nrqmx-certified-spectral-computation
 title: Variational approximation, residual certificates and propagation errors
-status: draft
+status: published
 library: mathematics
 requires:
   - nrqmx-form-spectral-methods

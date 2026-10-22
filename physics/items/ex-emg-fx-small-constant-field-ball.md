@@ -2,7 +2,7 @@
 id: ex-emg-fx-small-constant-field-ball
 kind: example
 title: Constant-field branch on a ball
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -72,6 +72,12 @@ sources:
       locator: "Section 11.3, Proposition 11.13 and Remark 11.14, printed pp. 157-159; integer-order Sobolev extension on smooth graph domains."
 verification:
   precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Example

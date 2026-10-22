@@ -4,7 +4,7 @@ kind: example
 domain: physics
 library: physics
 title: Longitudinal free motion turns Landau levels into bands
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 dependency_level: 4
@@ -54,10 +54,12 @@ sources:
         cf4b7af37d2cdff550fc0f71_MIT8_06S16_chap4.pdf"
 verification:
   precheck: pass
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Example

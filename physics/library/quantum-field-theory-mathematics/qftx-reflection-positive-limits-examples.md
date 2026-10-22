@@ -1,7 +1,7 @@
 ---
 page: qftx-reflection-positive-limits-examples
 title: Euclidean positivity, controlled limits and reconstruction boundaries — Examples
-status: draft
+status: published
 library: mathematics
 items: []
 examples:

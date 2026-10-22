@@ -2,7 +2,7 @@
 id: def-emg-fx-semiclassical-source-contract
 kind: definition
 title: "Conditional semiclassical Einstein–Maxwell source contract"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -21,6 +21,12 @@ provenance:
   proof: ai-generated
 verification:
   precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 sources:
   references:
     - title: "L. H. Ford, Quantum Field Theory in Curved Spacetime, lecture notes (1997), Chapter 3 and §5.1"

@@ -2,7 +2,7 @@
 id: def-qftx-p-phi-two-construction-contract
 kind: definition
 title: Stable $P(φ)_2$ construction contract
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 dependency_level: 5
@@ -40,6 +40,13 @@ sources:
     - title: "Barry Simon, The P(φ)₂ Euclidean (Quantum) Field Theory, Chapter I, §1.1 (publisher preview)"
       url: "https://api.pageplace.de/preview/DT0400.9781400868759_A26063613/preview-9781400868759_A26063613.pdf"
       locator: "PDF pp. 24–33, printed pp. 4–13: Gaussian fields and measure-dependent Wick powers. The stronger interaction construction obligations are stated explicitly here."
+verification:
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Definition

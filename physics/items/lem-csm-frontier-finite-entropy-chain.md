@@ -2,7 +2,7 @@
 id: lem-csm-frontier-finite-entropy-chain
 kind: lemma
 title: "Finite relative-entropy chain rule and event grouping"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics
@@ -29,10 +29,12 @@ sources:
       locator: "Chapter 6, Section 6.9, printed pp. 298–300: finite relative entropy and coarse-graining."
 verification:
   precheck: pass
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

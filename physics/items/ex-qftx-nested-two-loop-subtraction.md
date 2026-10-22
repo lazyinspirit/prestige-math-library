@@ -2,7 +2,7 @@
 id: ex-qftx-nested-two-loop-subtraction
 kind: example
 title: Nested subdivergence has a nontrivial convolution counterterm
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -31,10 +31,12 @@ sources:
       locator: "Section II.9.3, printed pp. 42–44, for the two-level cut and antipode recursion; Section II.5, Theorem II.5.1, for Laurent character subtraction."
 verification:
   precheck: pass
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Example

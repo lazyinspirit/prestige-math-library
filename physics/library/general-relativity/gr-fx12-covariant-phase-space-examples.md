@@ -3,7 +3,7 @@ requires:
   - gr-fx12-covariant-phase-space
 page: gr-fx12-covariant-phase-space-examples
 title: Covariant phase space and boundary ambiguities — Examples
-status: draft
+status: published
 library: physics
 items: []
 examples:

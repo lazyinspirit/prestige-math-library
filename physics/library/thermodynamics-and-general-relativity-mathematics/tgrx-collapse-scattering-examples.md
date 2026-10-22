@@ -1,7 +1,7 @@
 ---
 page: tgrx-collapse-scattering-examples
 title: Collapse ray tracing and greybody separation — Examples
-status: draft
+status: published
 library: mathematics
 requires:
   - tgrx-collapse-scattering

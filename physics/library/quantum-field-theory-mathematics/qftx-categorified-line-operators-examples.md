@@ -1,7 +1,7 @@
 ---
 page: qftx-categorified-line-operators-examples
 title: "Categorified braid lines, grading and decategorification — Examples"
-status: draft
+status: published
 library: mathematics
 items: []
 examples:

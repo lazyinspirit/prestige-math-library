@@ -1,7 +1,7 @@
 ---
 page: csm-frontier-planar-critical-point
 title: Planar random clusters, sharpness and the exact square-lattice critical point
-status: draft
+status: published
 library: physics
 items:
   - def-csm-frontier-fk-real-boundaries

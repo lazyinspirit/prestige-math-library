@@ -4,7 +4,7 @@ kind: lemma
 domain: mathematics
 library: mathematics
 title: C2 projector curvature has integral Chern number
-status: draft
+status: published
 origin: pipeline
 dependency_level: 3
 deps:
@@ -54,6 +54,12 @@ dependency_roles:
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 provenance:
   statement: literature-derived
   proof: ai-altered

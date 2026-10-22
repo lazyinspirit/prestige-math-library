@@ -2,7 +2,7 @@
 id: lem-csm-frontier-finite-chain-martingale
 kind: lemma
 title: "Martingale and predictable bracket for a finite-state chain"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics
@@ -43,6 +43,12 @@ sources:
       locator: "Section 4.4, Theorem 4.4.4 and proof, printed pp. 236–237; Section 5.2 for conditional Markov transitions."
 verification:
   precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

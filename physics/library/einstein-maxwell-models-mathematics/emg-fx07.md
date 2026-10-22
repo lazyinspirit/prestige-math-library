@@ -1,7 +1,7 @@
 ---
 page: emg-fx07
 title: Extremal horizon conservation and conditional derivative growth
-status: draft
+status: published
 library: mathematics
 requires:
   - emg-fx04

@@ -2,7 +2,7 @@
 id: def-emg-fx-continuous-compact-top-form-integral
 kind: definition
 title: Continuous compact-support integration for the constitutive action
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -49,6 +49,13 @@ sources:
       locator: The existing pinned smooth integration definitions cite pp. 404–406.
         Their formula is extended to continuous coefficients by the local proof
         below; no new external full-text reading is claimed.
+verification:
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Definition

@@ -1,7 +1,7 @@
 ---
 page: tgrx-research-boundaries-examples
 title: "Precisely isolated horizon research questions — Examples"
-status: draft
+status: published
 library: physics
 requires:
   - tgrx-research-boundaries

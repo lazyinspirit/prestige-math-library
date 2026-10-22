@@ -1,7 +1,7 @@
 ---
 page: qftx-anomaly-cocycles-examples
 title: Current-algebra cocycles and conditional chiral anomaly cancellation — Examples
-status: draft
+status: published
 library: mathematics
 items: []
 examples:

@@ -2,7 +2,7 @@
 id: def-csm-frontier-bernoulli-relative-free-energy
 kind: definition
 title: "Bernoulli relative free-energy functional"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -26,11 +26,13 @@ sources:
       url: "https://arxiv.org/pdf/2505.15618"
       locator: "Section 13.1, equations (145)–(148): equilibrium density rate functional in terms of the free-energy density."
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Definition

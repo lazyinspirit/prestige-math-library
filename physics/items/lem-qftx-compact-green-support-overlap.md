@@ -2,7 +2,7 @@
 id: lem-qftx-compact-green-support-overlap
 kind: lemma
 title: Compactness of closed advanced-retarded support overlaps under Countable Choice
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -36,7 +36,13 @@ sources:
       The local proof uses only finite compact-diamond enclosures and ambient-closed
       subsets, without invoking the source's closed-causal-relation theorem.
 verification:
-  precheck: pending
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: def-emx-continuous-chain-integral
 kind: definition
 title: Continuous differential-form integrals over smooth singular chains in Euclidean domains
-status: draft
+status: published
 origin: session
 domain: mathematics
 library: mathematics
@@ -57,10 +57,12 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 verification:
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 sources:
   references:
   - title: Peter S. Park, Proof of de Rham's Theorem

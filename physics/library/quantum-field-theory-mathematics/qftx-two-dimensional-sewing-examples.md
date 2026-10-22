@@ -1,7 +1,7 @@
 ---
 page: qftx-two-dimensional-sewing-examples
 title: "Frobenius sewing and exact two-dimensional topological amplitudes — Examples"
-status: draft
+status: published
 library: mathematics
 requires:
   - qftx-two-dimensional-sewing

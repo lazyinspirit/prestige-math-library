@@ -2,7 +2,7 @@
 id: post-nrqmx-finite-mode-light-matter-model
 kind: postulate
 title: Finite-mode dipole and detector assignment
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics
@@ -57,10 +57,10 @@ sources:
       locator: "§2.1.3, printed pp. 67–69, finite partial trace; §2.2.2, Theorem 2.22, printed pp. 82–84, finite Choi/Kraus/Stinespring forms. Used only for finite-dimensional detector-environment context, not for the infinite-dimensional oscillator channel."
 verification:
   precheck: n/a
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
+  sources_checked:
     date: 2026-10-22
+    scope: Completed native formulation/status, source-evidence and applicability review; exact evidence and reading limits in research/physics-non-fluid-129-2026-10-21-r2-publication.json. No new retrieval, measurement or solution is claimed.
+    by: owner-authorized native reviewers (gpt-6.1-sol)
 ---
 
 ## Postulate

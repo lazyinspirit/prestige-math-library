@@ -1,7 +1,7 @@
 ---
 page: emx-radiation-multipoles
 title: "Radiation asymptotics and controlled multipole expansion"
-status: draft
+status: published
 library: physics
 items:
   - pthm-emx-retarded-history-localization

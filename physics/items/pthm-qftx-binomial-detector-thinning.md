@@ -4,7 +4,7 @@ kind: physics-theorem
 domain: physics
 library: physics
 title: "Ideal independent loss preserves normalized factorial correlation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 dependency_level: 4
@@ -29,11 +29,13 @@ sources:
       url: "https://journals.aps.org/pr/pdf/10.1103/PhysRev.130.2529"
       locator: "§II equations (2.16)–(2.18), printed pp. 2531–2532, for coincidence-count correlation functions. No loss or efficiency law is imported from this paper."
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

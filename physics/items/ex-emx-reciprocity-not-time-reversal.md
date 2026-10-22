@@ -2,7 +2,7 @@
 id: ex-emx-reciprocity-not-time-reversal
 kind: example
 title: "Loss and reciprocity coexist"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics
@@ -20,6 +20,12 @@ dependency_roles:
   def-countable-choice: mathematical-premise
 verification:
   precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 provenance:
   statement: ai-altered
   proof: ai-altered

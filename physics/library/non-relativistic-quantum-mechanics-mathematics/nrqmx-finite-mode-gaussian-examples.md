@@ -1,7 +1,7 @@
 ---
 page: nrqmx-finite-mode-gaussian-examples
 title: Finite-mode Fock, Gaussian and Bogoliubov foundations — Examples
-status: draft
+status: published
 library: mathematics
 items: []
 examples:

@@ -2,7 +2,7 @@
 id: lem-qftx-laurent-negative-projection-rota-baxter
 kind: lemma
 title: Laurent pole projection satisfies the weight-minus-one identity
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -24,10 +24,12 @@ sources:
       locator: "Section II.5, Theorem II.5.1 proof, printed pp. 36–37: projection identity for a Laurent splitting, proved by decomposing each input into negative and nonnegative parts."
 verification:
   precheck: pass
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

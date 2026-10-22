@@ -2,7 +2,7 @@
 id: pthm-emx-classical-visibility
 kind: physics-theorem
 title: Visibility bound in a specified two-beam model
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics
@@ -42,11 +42,13 @@ sources:
       url: "https://www.physik.uni-hamburg.de/en/iqp/hemmerich/teaching-hemmerich/pdfs/opticspart3.pdf"
       locator: "PDF pp. 2–4, 'The concept of coherence' and 'Interference visibility': normalized pair correlation, mean intensity, visibility, and the equal-intensity special case."
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

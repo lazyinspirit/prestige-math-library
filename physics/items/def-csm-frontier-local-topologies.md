@@ -2,7 +2,7 @@
 id: def-csm-frontier-local-topologies
 kind: definition
 title: "Finite-spin product and local topologies"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics
@@ -23,11 +23,13 @@ sources:
       url: "https://www.statslab.cam.ac.uk/~jrn10/Lectures/ap.pdf"
       locator: "Section 5.1, printed pp. 30–31: weak convergence of probability measures on metric spaces."
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Definition

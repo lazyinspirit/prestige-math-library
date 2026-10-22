@@ -4,7 +4,7 @@ kind: lemma
 domain: mathematics
 library: mathematics
 title: Finite-dimensional Lorentz normalization cocycles split
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 deps:
@@ -37,6 +37,12 @@ sources:
       locator: "§3.2.4, printed pp.44–46: First Whitehead Lemma for finite-dimensional semisimple modules; its cohomological proof is context only, while the proof below supplies the Lorentz case directly."
 verification:
   precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

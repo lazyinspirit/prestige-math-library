@@ -3,7 +3,7 @@ id: def-nrqmx-finite-mode-symplectic-data
 kind: definition
 domain: mathematics
 title: Finite-mode quadratures and symplectic data
-status: draft
+status: published
 origin: pipeline
 dependency_level: 1
 deps: [lem-nrqmx-finite-mode-fock-schr-identification, lem-nrqm-fock-and-equilibrium-creation-contraction-bounds, thm-nrqm-fock-and-equilibrium-closed-adjoint-sector-domains, lem-schrodinger-weyl-system-is-regular-and-irreducible, thm-stone-von-neumann-for-finite-dimensional-weyl-systems, lem-nrqm-composites-density-and-scalar-spectral-probability, def-fourier-transform-on-l-one-of-rn, thm-plancherel, cor-fourier-transform-is-a-topological-automorphism-of-schwartz-space, cor-c-one-change-of-variables-for-l-one-functions, def-inner-product-space, def-countable-choice, def-axiom-of-choice, def-schwartz-space-and-its-seminorms]
@@ -27,10 +27,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 sources:
   references:
     - title: "Christian Weedbrook et al., Gaussian Quantum Information, §§II.A–II.C.1, pp. 4–9"

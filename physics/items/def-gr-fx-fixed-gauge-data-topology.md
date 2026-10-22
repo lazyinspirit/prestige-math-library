@@ -2,7 +2,7 @@
 id: def-gr-fx-fixed-gauge-data-topology
 kind: definition
 title: "Fixed-gauge finite-slab data and solution topology"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 0
@@ -31,7 +31,13 @@ sources:
     - title: "G. Métivier, The Mathematics of Nonlinear Optics (2009), Chapter 3, Sections 3.1 and 3.3–3.4: symmetric-hyperbolic Cauchy theory, stability and continuation"
       url: "https://www.math.u-bordeaux.fr/~gmetivie/NLO2008.pdf"
 verification:
-  precheck: pending
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Definition

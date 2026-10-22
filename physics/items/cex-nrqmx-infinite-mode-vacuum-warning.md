@@ -3,7 +3,7 @@ id: cex-nrqmx-infinite-mode-vacuum-warning
 kind: counterexample
 domain: mathematics
 title: Finite-mode implementability does not supply an infinite-mode limit
-status: draft
+status: published
 origin: pipeline
 dependency_level: 5
 deps: [thm-nrqmx-finite-mode-bogoliubov, def-nrqmx-finite-mode-symplectic-data, lem-nrqmx-finite-mode-fock-schr-identification, cor-c-one-change-of-variables-for-l-one-functions, lem-euclidean-gaussian-fourier-transform-with-two-pi-normalization, lem-complex-integration-by-parts-on-intervals-and-decaying-lines, thm-exponential-beats-every-polynomial, def-axiom-of-choice]
@@ -21,10 +21,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 sources:
   references:
     - title: "Phan Thành Nam, Mathematical Quantum Mechanics II, §6.3, pp. 146–156"

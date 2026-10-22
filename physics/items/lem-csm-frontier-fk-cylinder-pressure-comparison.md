@@ -2,7 +2,7 @@
 id: lem-csm-frontier-fk-cylinder-pressure-comparison
 kind: lemma
 title: "Numerical FK cylinder limits and pressure comparison"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -29,6 +29,12 @@ sources:
       locator: "Section 4.5, printed pp. 85–91, Theorems 4.58 and 4.63 and equations (4.54)–(4.78); the local proof separates numerical cylinder limits from measure extension."
 verification:
   precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

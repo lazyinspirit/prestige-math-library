@@ -1,7 +1,7 @@
 ---
 page: nrqmx-quantum-optics-models-examples
 title: Finite-mode light–matter models and detection statistics — Examples
-status: draft
+status: published
 library: physics
 items: []
 examples:

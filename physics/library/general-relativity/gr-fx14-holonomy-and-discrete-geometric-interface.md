@@ -1,7 +1,7 @@
 ---
 page: gr-fx14-holonomy-and-discrete-geometric-interface
 title: Holonomy and discrete geometric interfaces
-status: draft
+status: published
 library: physics
 items:
   - thm-qftx-cw-fundamental-group-presentation

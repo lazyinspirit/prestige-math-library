@@ -1,7 +1,7 @@
 ---
 page: emx-paraxial-optics-examples
 title: Angular-spectrum optics and controlled paraxial limits — Examples
-status: draft
+status: published
 library: physics
 requires:
   - emx-paraxial-optics

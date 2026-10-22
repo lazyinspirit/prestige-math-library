@@ -1,7 +1,7 @@
 ---
 page: tgrx-thermal-geometry
 title: Thermal vorticity and global equilibrium obstructions
-status: draft
+status: published
 library: mathematics
 items:
   - def-tgrx-thermal-vorticity

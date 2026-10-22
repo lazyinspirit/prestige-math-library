@@ -1,7 +1,7 @@
 ---
 page: emg-fx03
 title: Spherical electrovacuum mass and local rigidity
-status: draft
+status: published
 library: mathematics
 requires:
   - emg-ms01

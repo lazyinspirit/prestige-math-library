@@ -1,7 +1,7 @@
 ---
 page: csm-frontier-polymer-continuum-examples
 title: "Polymer analyticity and dilute continuum correlations — Examples"
-status: draft
+status: published
 library: physics
 requires:
   - csm-frontier-polymer-continuum

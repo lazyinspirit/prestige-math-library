@@ -2,7 +2,7 @@
 id: ex-tgrx-quasistatic-is-not-backreaction
 kind: example
 title: Emitter diagnostic does not bound a coupled equation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: physics
@@ -33,6 +33,12 @@ sources:
       locator: "Complete 59-page lecture-note PDF retrieved; §4.5, PDF pp. 16–17, equations (4.29)–(4.30), for the distinction between a fixed-background stress expectation and a semiclassical gravitational equation. Used for scope context only."
 verification:
   precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Example

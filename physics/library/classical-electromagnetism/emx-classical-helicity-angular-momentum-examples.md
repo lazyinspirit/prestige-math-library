@@ -1,7 +1,7 @@
 ---
 page: emx-classical-helicity-angular-momentum-examples
 title: Transverse fields, helicity and angular momentum — Examples
-status: draft
+status: published
 library: physics
 items: []
 examples:

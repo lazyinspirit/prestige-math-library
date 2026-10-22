@@ -2,7 +2,7 @@
 id: ex-csm-frontier-nonexposed-energy
 kind: example
 title: A strictly convex entropy interval with no canonical energies
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -39,11 +39,13 @@ sources:
       url: https://www.ceremade.dauphine.fr/~poisat/files/M2-largedeviations/lecturenotes.pdf
       locator: "Section 3.4, Theorem 3.8 and Exercise 19, printed pp. 10–11: continuous exponential tilting and mean-field variational criteria."
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Example

@@ -3,7 +3,7 @@ id: ex-emx-dipole-dark-direction
 kind: example
 title: "A dipole node does not control the relative multipole error"
 domain: physics
-status: draft
+status: published
 origin: pipeline
 dependency_level: 4
 deps:
@@ -44,6 +44,13 @@ sources:
     - title: "Steven Errede, UIUC Physics 436 EM Fields & Sources II, Lecture Notes 14.5, complete 44-page PDF"
       url: "https://hep.physics.illinois.edu/home/serrede/P436/Lecture_Notes/P436_Lect_14p5.pdf"
       locator: "Printed pp. 6–8 (PDF pp. 5–7): E1 dipole angular power proportional to sin² of the angle from the dipole axis, the axis-angle definition, and the retarded-time dipole term; the constructed smooth source adds a nonzero higher retarded-current moment."
+verification:
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Example

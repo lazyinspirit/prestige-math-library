@@ -2,7 +2,7 @@
 id: thm-csm-frontier-finite-mle-existence
 kind: theorem
 title: Exact finite-MLE criterion for a minimal finite exponential Gibbs family
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -52,6 +52,12 @@ sources:
       locator: "§§2, 3.2, and 4.6.3, printed pp. 1–2, 8–9, and 55–56 / PDF pp. 0–1, 8–9, and 56–57: boundary observations can place the MLE at infinity and the relative-interior distinction."
 verification:
   precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

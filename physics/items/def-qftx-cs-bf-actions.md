@@ -2,7 +2,7 @@
 id: def-qftx-cs-bf-actions
 kind: definition
 title: "Chern–Simons and BF action data"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -27,11 +27,13 @@ sources:
       url: "https://arxiv.org/pdf/gr-qc/9905087"
       locator: "§2, pp. 4–6: the invariant-pairing BF action and classical field conventions."
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Definition

@@ -2,7 +2,7 @@
 id: pthm-emx-helicity-berry-curvature
 kind: physics-theorem
 title: Curvature and the obstruction to a global polarization basis
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics
@@ -38,11 +38,13 @@ sources:
       url: "https://www.damtp.cam.ac.uk/user/tong/qhe/qhe.pdf"
       locator: "§1.5.1–1.5.2, printed pp. 28–34: gauge changes, curvature, surface phase, and the spin-in-a-field monopole calculation. Tong uses the opposite connection sign and a spin-1/2 quantum model; neither is imported as a premise."
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

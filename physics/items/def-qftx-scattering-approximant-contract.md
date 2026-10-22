@@ -2,7 +2,7 @@
 id: def-qftx-scattering-approximant-contract
 kind: definition
 title: Massive scattering packets and Cook approximant contract
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -52,11 +52,13 @@ sources:
       url: https://www.physik.uni-hamburg.de/th2/ag-fredenhagen/dokumente/qft09-10.pdf
       locator: "Chapter IV §3, PDF pp. 82–85: upper mass gap, almost-local generators, velocity support, the two-particle Haag–Ruelle approximant and its stated proof limitation."
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Definition

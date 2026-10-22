@@ -2,7 +2,7 @@
 id: thm-gr-fx-leapfrog-mode-stability
 kind: theorem
 title: "Fourier-mode stability of the periodic leapfrog benchmark"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -77,11 +77,13 @@ sources:
         complete 40-page author PDF"
       url: "https://people.maths.ox.ac.uk/trefethen/4all.pdf"
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

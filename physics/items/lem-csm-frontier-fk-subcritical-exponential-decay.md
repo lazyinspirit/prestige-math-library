@@ -2,7 +2,7 @@
 id: lem-csm-frontier-fk-subcritical-exponential-decay
 kind: lemma
 title: "Subcritical FK exponential connectivity under Countable Choice"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -44,10 +44,12 @@ sources:
       locator: "Section 4, proof of Theorem 2, pp. 20–21; countable-kernel construction and the elementary envelope supplier are made explicit locally."
 verification:
   precheck: pass
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

@@ -1,7 +1,7 @@
 ---
 page: nrqmx-operator-realizations
 title: Operator domains, deficiency spaces and boundary realizations
-status: draft
+status: published
 library: mathematics
 items:
   - def-nrqmx-extension-data

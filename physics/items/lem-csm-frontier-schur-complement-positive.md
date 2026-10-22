@@ -2,7 +2,7 @@
 id: lem-csm-frontier-schur-complement-positive
 kind: lemma
 title: Positive Schur complements for finite Gaussian precisions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -34,11 +34,13 @@ sources:
       url: https://nhigham.com/2023/06/01/what-is-the-schur-complement-of-a-matrix/
       locator: Block factorization and positive-definite Schur-complement criterion; the present statement fixes the real symmetric convention used here.
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

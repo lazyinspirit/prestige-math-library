@@ -2,7 +2,7 @@
 id: thm-qsmx-toric-ground-space
 kind: theorem
 title: Commuting stabilizers and topological degeneracy
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -20,6 +20,12 @@ physical_scope: Pure finite-dimensional mathematics for the stated unperturbed H
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 provenance:
   statement: literature-derived
   proof: ai-altered

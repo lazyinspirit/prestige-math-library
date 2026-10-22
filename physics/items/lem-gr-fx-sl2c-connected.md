@@ -2,7 +2,7 @@
 id: lem-gr-fx-sl2c-connected
 kind: lemma
 title: Path-connectedness of SL(2,C)
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics
@@ -24,10 +24,12 @@ sources:
       locator: "§2.3.1, PDF pp. 24–25"
 verification:
   precheck: pass
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 physical_scope: null
 ---
 

@@ -2,7 +2,7 @@
 id: pthm-emx-stokes-positivity
 kind: physics-theorem
 title: Stokes cone and deterministic Jones transformations
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics
@@ -30,11 +30,13 @@ sources:
       url: "https://arxiv.org/pdf/2002.04105"
       locator: "§2.1–2.3, PDF pp. 6–10: Hermitian 2×2 coherency matrices, Pauli/Stokes coordinates, positivity cone and rank-one purity. The local proof derives each inequality directly and fixes its $S_3$ sign from the repository phasor convention."
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

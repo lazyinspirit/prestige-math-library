@@ -2,7 +2,7 @@
 id: ex-gr-fx02-1
 kind: example
 title: "Flat-torus vacuum data from a constant TT tensor"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -43,10 +43,12 @@ sources:
       locator: "Full 34-page review chapter retrieved; complete relevant §4.1 inspected, including equations (47)–(56). The displayed torus constants are checked directly."
 verification:
   precheck: pass
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Example

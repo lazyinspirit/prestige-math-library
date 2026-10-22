@@ -4,7 +4,7 @@ kind: lemma
 domain: mathematics
 library: mathematics
 title: Unitarity and differentiation of the finite Hermitian matrix exponential
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 dependency_level: 1
@@ -38,10 +38,12 @@ sources:
       locator: Section 2.2, equations (8)-(13), Floquet Hamiltonian and finite-dimensional exponentials.
 verification:
   precheck: pass
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

@@ -1,7 +1,7 @@
 ---
 page: nrqmx-finite-open-dynamics-examples
 title: Finite reduced dynamics, memory and quantum trajectories — Examples
-status: draft
+status: published
 library: physics
 items: []
 examples:

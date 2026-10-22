@@ -2,7 +2,7 @@
 id: lem-csm-frontier-finite-jump-path-density
 kind: lemma
 title: Path densities and finite jump counts for bounded finite-state rates
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -43,6 +43,13 @@ sources:
     - title: Joel L. Lebowitz and Herbert Spohn, A Gallavotti-Cohen Type Symmetry in the Large Deviation Functional for Stochastic Dynamics
       url: https://arxiv.org/pdf/cond-mat/9811220
       locator: Section 2.1, PDF pp. 3–4, exponential holding times and finite-state jump rates.
+verification:
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

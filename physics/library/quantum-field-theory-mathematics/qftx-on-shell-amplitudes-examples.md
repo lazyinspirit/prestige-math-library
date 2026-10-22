@@ -1,7 +1,7 @@
 ---
 page: qftx-on-shell-amplitudes-examples
 title: Spinor helicity, rational factorization and tree recursion — Examples
-status: draft
+status: published
 library: mathematics
 items: []
 examples:

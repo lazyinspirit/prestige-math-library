@@ -2,7 +2,7 @@
 id: def-qftx-wzw-conformal-block-interface
 kind: definition
 title: "Integrable affine modules and conformal-block completion contract"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 dependency_level: 2
@@ -43,11 +43,13 @@ sources:
       url: "https://www.numdam.org/item/10.5802/aif.1114.pdf"
       locator: "§§1.1–1.2, printed pp. 141–143, for the distinction between KZ monodromy and its quantum-group description."
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Definition

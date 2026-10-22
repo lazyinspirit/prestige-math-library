@@ -1,7 +1,7 @@
 ---
 page: gr-fx04-asymptotic-ends-and-adm-examples
 title: "Asymptotic ends and ADM surface integrals — Examples"
-status: draft
+status: published
 library: physics
 requires:
   - gr-fx04-asymptotic-ends-and-adm

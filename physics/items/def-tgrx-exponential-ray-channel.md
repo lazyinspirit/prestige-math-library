@@ -2,7 +2,7 @@
 id: def-tgrx-exponential-ray-channel
 kind: definition
 title: Specified chiral collapse channel
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -35,6 +35,12 @@ sources:
       locator: Section 2.2(c), PDF pp. 27–32, equations (52)–(60); context for the collapse assumptions, exponential coordinate, and absorption-filtered spectrum only.
 verification:
   precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Definition

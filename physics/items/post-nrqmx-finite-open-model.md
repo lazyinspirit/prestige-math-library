@@ -2,7 +2,7 @@
 id: post-nrqmx-finite-open-model
 kind: postulate
 title: Finite system-environment and Markov model assignments
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics
@@ -25,10 +25,10 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
+  sources_checked:
     date: 2026-10-22
+    scope: Completed native formulation/status, source-evidence and applicability review; exact evidence and reading limits in research/physics-non-fluid-129-2026-10-21-r2-publication.json. No new retrieval, measurement or solution is claimed.
+    by: owner-authorized native reviewers (gpt-6.1-sol)
 sources:
   references:
     - title: "John Watrous, The Theory of Quantum Information, Chapter 2, §§2.1.3 and 2.2.2"

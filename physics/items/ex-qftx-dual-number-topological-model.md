@@ -2,7 +2,7 @@
 id: ex-qftx-dual-number-topological-model
 kind: example
 title: "Nonsemisimple Frobenius sewing is also possible"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 dependency_level: 0
@@ -30,10 +30,12 @@ sources:
       locator: "§§3.3–3.7 and 4 (PDF pp. 18–42), for the closed-sector TQFT classification and its no-free-boundary convention."
 verification:
   precheck: pass
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Example

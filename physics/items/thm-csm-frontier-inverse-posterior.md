@@ -2,7 +2,7 @@
 id: thm-csm-frontier-inverse-posterior
 kind: theorem
 title: Posterior kernel and dominated formula for a latent Gibbs observation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -37,10 +37,12 @@ sources:
       locator: "§§2.1.1–2.1.2 and 2.3.5–2.4, full chapter: the prior, likelihood, marginal normalizer, and normalized posterior formula in the finite/data-density case."
 verification:
   precheck: pass
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

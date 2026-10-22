@@ -2,7 +2,7 @@
 id: lem-qftx-finite-graph-scaling-degree
 kind: lemma
 title: Scalar graph coefficients have finite upper scaling bounds
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -42,6 +42,12 @@ sources:
       locator: Sections 4–7, printed pp. 18–25 and 26–33, causal graph expansion, local microlocal scaling-degree product bound and extension across partial diagonals. Their final discussion restricts the displayed power-counting formula to undifferentiated monomials; finite-jet derivative bounds are supplied here.
 verification:
   precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

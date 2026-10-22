@@ -2,7 +2,7 @@
 id: ex-qsmx-double-z2
 kind: example
 title: The four electric and magnetic sectors of $D(\mathbb Z_2)$
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -36,6 +36,12 @@ sources:
       locator: "§2.1, PDF pp. 44–45, for flux and centralizer-charge labels."
 verification:
   precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Example

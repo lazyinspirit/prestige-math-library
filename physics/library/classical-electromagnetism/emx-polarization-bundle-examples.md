@@ -1,7 +1,7 @@
 ---
 page: emx-polarization-bundle-examples
 title: Helicity bundles, rotations and Berry curvature — Examples
-status: draft
+status: published
 library: physics
 items: []
 examples:

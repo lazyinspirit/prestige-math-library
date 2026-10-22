@@ -2,7 +2,7 @@
 id: ex-nrqmx-finite-environment-recurrence
 kind: example
 title: A finite bath revives coherence
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics
@@ -37,6 +37,13 @@ sources:
     - title: "Lin Lin and Nathan Wiebe, Quantum Algorithms for Scientific Computation, Chapter 21, §21.1"
       url: "https://math.berkeley.edu/~linlin/qasc/live_notes_0315.pdf"
       locator: "Printed pp. 307–311: finite GKSL dynamics and channel semigroups, used as comparison model context."
+verification:
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Example

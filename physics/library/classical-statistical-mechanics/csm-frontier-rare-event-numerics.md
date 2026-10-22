@@ -1,7 +1,7 @@
 ---
 page: csm-frontier-rare-event-numerics
 title: Rare-event reweighting, overlap and certified partition ratios
-status: draft
+status: published
 library: physics
 requires:
   - csm-frontier-sampling-certificates

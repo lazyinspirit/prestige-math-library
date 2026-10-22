@@ -2,7 +2,7 @@
 id: def-emg-fx-spherical-orbit-geometry
 kind: definition
 title: Spherical orbit geometry and rotational invariance
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -25,6 +25,12 @@ sources:
       locator: "Section 6.1.1, printed pp. 234–236 (PDF pp. 241–243): the local spherical quotient metric, its areal-radius function, and the restrictions of the coordinate argument."
 verification:
   precheck: n/a
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Definition

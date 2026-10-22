@@ -2,7 +2,7 @@
 id: def-qftx-finite-bordism-state-span
 kind: definition
 title: "Finite gauge state spaces and bordism spans"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 dependency_level: 2
@@ -30,11 +30,13 @@ sources:
       url: "https://www.math.ru.nl/~mueger/TQFT/FQ.pdf"
       locator: "§2, PDF pp. 8–11, for automorphism-weighted boundary state spaces, amplitudes, and their finite gluing measure."
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Definition

@@ -1,7 +1,7 @@
 ---
 page: qftx-spectral-tube-analyticity
 title: Positive-energy tube analyticity and discrete-symmetry proof interfaces
-status: draft
+status: published
 library: mathematics
 items:
   - def-qftx-joint-spectrum-input

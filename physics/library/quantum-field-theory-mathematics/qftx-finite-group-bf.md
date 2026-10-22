@@ -1,7 +1,7 @@
 ---
 page: qftx-finite-group-bf
 title: "Finite-group BF state sums, gauge groupoids and gluing"
-status: draft
+status: published
 library: mathematics
 requires:
   - qftx-two-dimensional-sewing

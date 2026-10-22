@@ -1,7 +1,7 @@
 ---
 page: emg-fx03-examples
 title: Spherical electrovacuum mass and local rigidity — Examples
-status: draft
+status: published
 library: mathematics
 requires:
   - emg-fx03

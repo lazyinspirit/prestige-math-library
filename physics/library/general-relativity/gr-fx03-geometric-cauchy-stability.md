@@ -1,7 +1,7 @@
 ---
 page: gr-fx03-geometric-cauchy-stability
 title: "Finite-slab geometric Cauchy stability"
-status: draft
+status: published
 library: physics
 requires:
   - gr-gr14-full-high-regularity-symmetric-hyperbolic-proof

@@ -1,7 +1,7 @@
 ---
 page: gr-fx02-conformal-constraint-construction
 title: "Conformal construction of constrained initial data"
-status: draft
+status: published
 library: physics
 requires:
   - gr-fx01-hypersurface-and-null-geometry

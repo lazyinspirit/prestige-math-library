@@ -4,7 +4,7 @@ kind: definition
 domain: mathematics
 library: mathematics
 title: Positive heavy-mode Gaussian matching data
-status: draft
+status: published
 origin: pipeline
 dependency_level: 1
 deps:
@@ -48,11 +48,13 @@ sources:
       url: "https://arxiv.org/pdf/hep-th/0701053"
       locator: "§§1.1, 2.2.1, 2.2.4, printed pp.20–24: scale separation, local expansion, and power counting."
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Definition

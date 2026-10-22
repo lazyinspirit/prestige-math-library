@@ -2,7 +2,7 @@
 id: rem-tgrx-jt-completion-notunique
 kind: remark
 title: The JT disk density does not determine a unique nonperturbative completion
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: physics
@@ -31,6 +31,13 @@ sources:
     - title: "Thomas G. Mertens and Gustavo J. Turiaci, Solvable models of quantum black holes: a review on Jackiw–Teitelboim gravity, §§4.3.1–4.4 and 5.2"
       url: "https://arxiv.org/html/2210.10846"
       locator: "Full-text review; §§4.3.1–4.4 discuss the SSS matrix-integral duality, density corrections, and nonperturbative limitations; §5.2 addresses factorization, discreteness, and ensemble averaging."
+verification:
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

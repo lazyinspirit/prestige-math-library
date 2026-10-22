@@ -1,7 +1,7 @@
 ---
 page: csm-frontier-critical-gaussian-rg
 title: Criticality, Gaussian fields and exact block renormalization
-status: draft
+status: published
 library: physics
 items:
   - def-csm-frontier-infinite-volume-criticality

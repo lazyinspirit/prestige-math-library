@@ -2,7 +2,7 @@
 id: thm-nrqmx-instrument-stinespring-register
 kind: theorem
 title: "Finite instrument dilation with an outcome register"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -18,10 +18,12 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 sources:
   references:
     - title: "John Watrous, The Theory of Quantum Information, Chapter 2, §2.2.2, Theorem 2.22"

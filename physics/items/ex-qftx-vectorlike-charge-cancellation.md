@@ -2,7 +2,7 @@
 id: ex-qftx-vectorlike-charge-cancellation
 kind: example
 title: Vectorlike charges cancel cubic and linear sums
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -27,6 +27,12 @@ sources:
       locator: “Non Abelian Anomaly in 4 Dimensions,” equations (54)–(57), PDF pp. 10–11; left-minus-right chiral traces and cubic-index cancellation.
 verification:
   precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Example

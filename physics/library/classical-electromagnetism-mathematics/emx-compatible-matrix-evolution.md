@@ -1,7 +1,7 @@
 ---
 page: emx-compatible-matrix-evolution
 title: Compatible matrix evolution and time stepping
-status: draft
+status: published
 items:
   - def-emx-matrix-maxwell-system
   - thm-emx-matrix-energy-constraints

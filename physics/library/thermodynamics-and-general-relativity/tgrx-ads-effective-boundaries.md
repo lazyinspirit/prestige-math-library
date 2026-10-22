@@ -1,7 +1,7 @@
 ---
 page: tgrx-ads-effective-boundaries
 title: AdS gravity entropy dictionary and quantum extremal surfaces
-status: draft
+status: published
 library: physics
 requires:
   - tgrx-finite-code-holography

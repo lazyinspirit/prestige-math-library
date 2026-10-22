@@ -2,7 +2,7 @@
 id: def-emx-angular-spectrum
 kind: definition
 title: Forward angular-spectrum beam
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics
@@ -67,11 +67,13 @@ sources:
       url: "https://alexcerjan.com/documents/papers/cerjan_JOSA_2011.pdf"
       locator: "§2, equations (2), (8), PDF pp. 2253–2254: angular-spectrum data and the positive propagation branch; no arbitrary compact-aperture data are inferred."
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Definition

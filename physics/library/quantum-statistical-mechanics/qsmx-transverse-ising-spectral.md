@@ -1,7 +1,7 @@
 ---
 page: qsmx-transverse-ising-spectral
 title: Transverse Ising Majorana reduction and bulk gap closing
-status: draft
+status: published
 library: physics
 requires:
   - qsm-bose-fermi-gases

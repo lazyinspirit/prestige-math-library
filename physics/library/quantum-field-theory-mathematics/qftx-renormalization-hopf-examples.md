@@ -1,7 +1,7 @@
 ---
 page: qftx-renormalization-hopf-examples
 title: Rooted forests, Hopf antipodes and subtraction recursion — Examples
-status: draft
+status: published
 library: mathematics
 items: []
 examples:

@@ -2,7 +2,7 @@
 id: lem-tgrx-finite-matrix-entropy-variation
 kind: lemma
 title: Finite matrix entropy derivative at a faithful state
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -41,11 +41,13 @@ provenance:
   statement: ai-altered
   proof: ai-generated
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 sources:
   references:
     - title: John Watrous, The Theory of Quantum Information, author-hosted complete book manuscript, §5.2.1

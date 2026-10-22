@@ -1,7 +1,7 @@
 ---
 page: csm-frontier-kinetic-scaling-examples
 title: "Kinetic relaxation, diffusive scaling and entropy dissipation — Examples"
-status: draft
+status: published
 library: physics
 requires:
   - csm-frontier-kinetic-scaling

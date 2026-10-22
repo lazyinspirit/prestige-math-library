@@ -2,7 +2,7 @@
 id: ex-emx-free-runaway
 kind: example
 title: "Zero force leaves an exponentially growing acceleration branch"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics
@@ -26,10 +26,12 @@ provenance:
 physical_scope: "A constructed mathematical example in the adopted Abraham–Lorentz ODE: zero prescribed force admits an exponentially growing acceleration branch, and position plus velocity at one time do not select it. This is a model property, not an observed particle trajectory or an empirical claim."
 verification:
   precheck: pass
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 sources:
   references:
     - title: "Fritz Rohrlich, The Dynamics of a Charged Particle, arXiv:0804.4614 (complete 11-page full-text paper)"

@@ -1,7 +1,7 @@
 ---
 page: emg-fx11
 title: Effective nonlinear electromagnetism and semiclassical consistency
-status: draft
+status: published
 library: mathematics
 items:
   - def-emg-fx-continuous-compact-top-form-integral

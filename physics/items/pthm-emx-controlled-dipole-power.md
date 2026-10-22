@@ -3,7 +3,7 @@ id: pthm-emx-controlled-dipole-power
 kind: physics-theorem
 title: "Finite multipole expansion with an absolute dipole-power error"
 domain: physics
-status: draft
+status: published
 origin: pipeline
 dependency_level: 3
 deps:
@@ -60,10 +60,12 @@ provenance:
   proof: ai-altered
 physical_scope: "Finite Taylor truncations of the retarded current moment and their far-field and radiated-power errors for smooth conserved volume sources supported in a fixed spatial ball. The first truncation is the electric-dipole term and has an explicit absolute source-time-variation error. No relative estimate at angular nodes, unconditional frequency or ka approximation, empirical measurement, point-source field, self-force or radiation-reaction claim is made."
 verification:
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 sources:
   references:
     - title: "Niklas Beisert, Elektrodynamik, Vorlesungsskript, ETH Zürich 2024 FS, complete 176-page course script"

@@ -1,7 +1,7 @@
 ---
 page: emg-fx01
 title: Conformal constraint weights and charged time-symmetric data
-status: draft
+status: published
 library: mathematics
 requires:
   - emg-cp01

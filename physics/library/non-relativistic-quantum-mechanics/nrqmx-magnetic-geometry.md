@@ -1,7 +1,7 @@
 ---
 page: nrqmx-magnetic-geometry
 title: "Uniform magnetic fields, flux topology and Pauli coupling"
-status: draft
+status: published
 library: physics
 items:
   - def-nrqmx-magnetic-form-data

@@ -2,7 +2,7 @@
 id: lem-qsmx-separable-positive-generator-spectral-measures
 kind: lemma
 title: "Scalar spectral measures of a separable positive generator under countable choice"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -52,11 +52,13 @@ sources:
     - title: "Pieter Naaijkens, Quantum Spin Systems on Infinite Lattices, section 2.3, Theorems 2.3.12 and 2.3.19, PDF pp. 31–34; standard spectral-interface context only. The separable Countable-Choice scalar construction is proved locally. Downloaded full PDF, read these pages for this interface."
       url: "https://arxiv.org/pdf/1311.2717"
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

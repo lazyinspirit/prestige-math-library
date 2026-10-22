@@ -2,7 +2,7 @@
 id: def-qftx-rooted-forest-hopf
 kind: definition
 title: Admissible-cut Hopf algebra for subdivergence forests
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -26,10 +26,12 @@ sources:
       locator: "Section II.9.3, printed pp. 42–44: admissible cuts, crown/trunk, and coassociativity by compatible two-level cuts; the present item fixes the Connes–Kreimer root orientation and commutative forest product."
 verification:
   precheck: n/a
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Definition

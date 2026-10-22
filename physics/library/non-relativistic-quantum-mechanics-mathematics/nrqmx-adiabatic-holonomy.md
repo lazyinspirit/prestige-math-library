@@ -1,7 +1,7 @@
 ---
 page: nrqmx-adiabatic-holonomy
 title: Projector geometry, adiabatic transport and Berry curvature
-status: draft
+status: published
 library: mathematics
 items:
   - def-nrqmx-smooth-projector-bundle

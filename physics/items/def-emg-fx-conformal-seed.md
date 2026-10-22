@@ -2,7 +2,7 @@
 id: def-emg-fx-conformal-seed
 kind: definition
 title: Conformal electrovacuum seed data
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -26,11 +26,13 @@ sources:
       url: "https://arxiv.org/pdf/gr-qc/0703035"
       locator: "Sections 6.2.3 and 6.4.2, equations (6.14)-(6.22) and (6.81), give the spatial metric and trace-free-curvature conformal decompositions."
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Definition

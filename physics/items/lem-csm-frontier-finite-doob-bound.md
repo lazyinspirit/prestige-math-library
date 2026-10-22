@@ -2,7 +2,7 @@
 id: lem-csm-frontier-finite-doob-bound
 kind: lemma
 title: "Finite-horizon L2 maximal bound for martingales with right-continuous paths and left limits"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics
@@ -38,7 +38,13 @@ sources:
       url: "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
       locator: "Section 4.4, printed pp. 235–237: martingale maximal inequalities and finite-time arguments."
 verification:
-  precheck: pending
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

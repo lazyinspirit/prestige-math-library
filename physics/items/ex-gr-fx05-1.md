@@ -2,7 +2,7 @@
 id: ex-gr-fx05-1
 kind: example
 title: "A compact Bondi-news pulse with prescribed shear memory"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics
@@ -37,7 +37,13 @@ sources:
         arXiv:1703.05448: §§5.2.1 and 6"
       url: "https://arxiv.org/pdf/1703.05448"
 verification:
-  precheck: pending
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Example

@@ -1,7 +1,7 @@
 ---
 page: qftx-ribbon-braid-representations
 title: "Quantum doubles, Hecke quotients and physical braid operators"
-status: draft
+status: published
 library: mathematics
 items:
   - def-qftx-braided-line-model

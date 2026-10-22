@@ -2,7 +2,7 @@
 id: ex-csm-frontier-pseudolikelihood-not-joint
 kind: example
 title: Two-spin pseudo-likelihood is not the exact joint posterior input
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -32,10 +32,12 @@ sources:
       locator: "§3.3, printed p. 190, equation (3.2): the product of site-conditional probabilities is not the true sample likelihood except for independent variables; the two-spin posterior calculation below is local."
 verification:
   precheck: pass
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Example

@@ -4,7 +4,7 @@ kind: counterexample
 domain: mathematics
 library: mathematics
 title: A derivative truncation needs its energy band
-status: draft
+status: published
 origin: pipeline
 dependency_level: 3
 deps:
@@ -37,11 +37,13 @@ sources:
       url: "https://arxiv.org/pdf/hep-th/0701053"
       locator: "§§2.2.1 and 2.2.4, printed pp.20–24: local inverse-mass expansions are truncations with scale power counting."
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

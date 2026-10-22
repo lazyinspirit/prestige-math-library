@@ -1,7 +1,7 @@
 ---
 page: qsmx-open-entropy-production
 title: Noncommuting entropy production and thermal secular models
-status: draft
+status: published
 library: physics
 items:
   - def-qsmx-secular-thermal-generator

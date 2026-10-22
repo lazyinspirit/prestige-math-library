@@ -2,7 +2,7 @@
 id: def-qftx-local-time-ordered-system
 kind: definition
 title: Local scalar time-ordered product contract
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -44,6 +44,12 @@ sources:
       locator: Sections 3–4, printed pp. 14–21, local S-matrix axioms, causal factorization, causal cover and off-diagonal products.
 verification:
   precheck: n/a
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Definition

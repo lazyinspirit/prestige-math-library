@@ -2,7 +2,7 @@
 id: op-tgrx-continuum-generalized-entropy
 kind: open-problem
 title: "Continuum generalized entropy beyond the regulated model"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: physics
@@ -39,6 +39,10 @@ provenance:
   proof: not-applicable
 verification:
   precheck: n/a
+  sources_checked:
+    date: 2026-10-22
+    scope: Completed native formulation/status, source-evidence and applicability review; exact evidence and reading limits in research/physics-non-fluid-129-2026-10-21-r2-publication.json. No new retrieval, measurement or solution is claimed.
+    by: owner-authorized native reviewers (gpt-6.1-sol)
 sources:
   references:
     - title: "Aron C. Wall, A proof of the generalized second law for rapidly changing fields and arbitrary horizon slices, Physical Review D 85, 104049 (2012), arXiv:1105.3445v6"

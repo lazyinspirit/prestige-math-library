@@ -2,7 +2,7 @@
 id: cex-qsmx-degenerate-gap-not-clustering
 kind: counterexample
 title: "A degenerate gapped Ising ground mixture does not cluster"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -46,11 +46,13 @@ sources:
     - title: "Bruno Nachtergaele and Robert Sims, Lieb–Robinson Bounds and the Exponential Clustering Theorem, arXiv:math-ph/0506030v3; section 4, PDF pp. 10–11, degenerate-ground-space qualification as context only; the Ising example and its cyclic representation are constructed locally. Full 12-page article retrieved and read."
       url: "https://arxiv.org/pdf/math-ph/0506030v3"
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement refuted

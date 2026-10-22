@@ -2,7 +2,7 @@
 id: lem-gr-fx-cauchy-slices-are-diffeomorphic
 kind: lemma
 title: "A complete temporal flow identifies smooth Cauchy slices"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics
@@ -28,7 +28,13 @@ sources:
     - title: "Edward Witten, Light Rays, Singularities, and All That, Clay Mathematics Institute lecture notes, arXiv:1901.03928v6 (2023), §5.6, latest v6 PDF (107 pages)."
       url: "https://arxiv.org/pdf/1901.03928v6"
 verification:
-  precheck: pending
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

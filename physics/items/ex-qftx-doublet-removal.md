@@ -2,7 +2,7 @@
 id: ex-qftx-doublet-removal
 kind: example
 title: Gauge-fixing doublets cannot create a new polynomial class
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -22,10 +22,12 @@ provenance:
   statement: ai-generated
   proof: ai-generated
 verification:
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 sources:
   references:
     - title: Glenn Barnich, Friedemann Brandt and Marc Henneaux, Local BRST cohomology in gauge theories

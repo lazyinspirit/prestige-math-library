@@ -1,7 +1,7 @@
 ---
 page: emg-fx12
 title: "Reduced stationary uniqueness and explicit research boundaries"
-status: draft
+status: published
 library: mathematics
 items:
   - def-emg-fx-matrix-harmonic-problem

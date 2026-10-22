@@ -4,7 +4,7 @@ kind: theorem
 domain: mathematics
 library: mathematics
 title: "Unitary exchange blocks for collective spins"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 dependency_level: 0
@@ -43,10 +43,12 @@ provenance:
   statement: literature-derived
   proof: ai-generated
 verification:
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 sources:
   references:
     - title: "Representation Theory, CT, Lent 2005, sections 23.14–24.9, complete course notes"

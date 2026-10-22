@@ -2,7 +2,7 @@
 id: thm-emg-fx-coupled-potential-energy
 kind: theorem
 title: Positive matrix-potential wave system energy
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -28,10 +28,12 @@ sources:
       locator: "Section 1.2, PDF pp. 3–6, and Sections 8.1.2 and 8.4, PDF pp. 56–60, exhibit the extra structure in actual coupled Einstein–Maxwell wave systems. This theorem assumes an abstract symmetric nonnegative potential and does not assert that those fields satisfy its hypotheses."
 verification:
   precheck: pass
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

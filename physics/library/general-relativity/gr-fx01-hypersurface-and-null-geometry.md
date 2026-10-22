@@ -1,7 +1,7 @@
 ---
 page: gr-fx01-hypersurface-and-null-geometry
 title: "Hypersurface and null geometry"
-status: draft
+status: published
 library: physics
 requires:
   - gr-causal-and-initial-value-boundaries

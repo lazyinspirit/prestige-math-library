@@ -2,7 +2,7 @@
 id: lem-csm-frontier-fk-independent-cluster-animal-envelope
 kind: lemma
 title: "Independent connected-set envelopes and a greedy lattice-animal bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -28,10 +28,12 @@ sources:
       locator: "Section 4, proof of Theorem 2, pp. 20–21, independent cluster envelopes and lattice animals; complete elementary replacements for the cited auxiliary animal results are proved here."
 verification:
   precheck: pass
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

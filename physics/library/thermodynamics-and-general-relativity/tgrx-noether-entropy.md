@@ -1,7 +1,7 @@
 ---
 page: tgrx-noether-entropy
 title: Covariant stationary Noether charge and Wald entropy
-status: draft
+status: published
 library: physics
 requires:
   - gr-fx12-covariant-phase-space

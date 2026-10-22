@@ -1,7 +1,7 @@
 ---
 page: csm-frontier-quantitative-dlr
 title: "Quantitative DLR uniqueness, concentration and spatial response"
-status: draft
+status: published
 library: physics
 requires:
   - csm-gibbs-lattice

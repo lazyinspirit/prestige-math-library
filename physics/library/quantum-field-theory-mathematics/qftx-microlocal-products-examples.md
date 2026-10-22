@@ -1,7 +1,7 @@
 ---
 page: qftx-microlocal-products-examples
 title: Wavefront sets, Hadamard kernels and admissible local products — Examples
-status: draft
+status: published
 items: []
 examples:
   - cex-qftx-square-delta

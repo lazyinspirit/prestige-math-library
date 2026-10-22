@@ -1,7 +1,7 @@
 ---
 page: csm-frontier-macroscopic-fluctuations-examples
 title: "Hydrodynamic fluctuation action and nonequilibrium quasipotential — Examples"
-status: draft
+status: published
 items:
   - ex-csm-frontier-mft-nonlocal-warning
 examples: []

@@ -1,7 +1,7 @@
 ---
 page: gr-fx06-trapped-surfaces-and-incompleteness
 title: "Trapped surfaces and Penrose incompleteness"
-status: draft
+status: published
 library: physics
 requires:
   - gr-fx01-hypersurface-and-null-geometry

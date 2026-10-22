@@ -1,7 +1,7 @@
 ---
 page: qftx-hall-bps-wall-crossing
 title: "Hall factorization, stability chambers and conditional BPS spectrum generators"
-status: draft
+status: published
 library: mathematics
 items:
   - def-qftx-hall-spectrum-generator

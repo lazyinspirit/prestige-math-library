@@ -10,7 +10,7 @@ requires:
   - the-riemann-integral-in-rn-and-jordan-content
 page: gr-fx12-covariant-phase-space
 title: Covariant phase space and boundary ambiguities
-status: draft
+status: published
 library: physics
 items:
   - def-gr-fx-covariant-field-variations

@@ -2,7 +2,7 @@
 id: thm-gr-fx-finite-slab-stability
 kind: theorem
 title: "Finite-slab stability in a fixed hyperbolic gauge"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 1
@@ -56,10 +56,12 @@ sources:
       url: "https://www.math.u-bordeaux.fr/~gmetivie/NLO2008.pdf"
 verification:
   precheck: pass
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

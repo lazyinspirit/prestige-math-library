@@ -1,7 +1,7 @@
 ---
 page: tgrx-research-boundaries
 title: "Precisely isolated horizon research questions"
-status: draft
+status: published
 library: physics
 requires:
   - tgrx-regulated-second-law

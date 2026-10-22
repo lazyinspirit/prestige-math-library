@@ -1,7 +1,7 @@
 ---
 page: emg-fx08
 title: Charged test-scalar scattering and superradiant flux
-status: draft
+status: published
 library: mathematics
 requires:
   - emg-ms02

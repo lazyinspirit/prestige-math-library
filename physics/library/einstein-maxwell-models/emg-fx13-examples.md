@@ -1,7 +1,7 @@
 ---
 page: emg-fx13-examples
 title: "Adopted charged-background and effective-model regimes — Examples"
-status: draft
+status: published
 library: physics
 items:
   - texp-emg-fx-test-to-coupled-error

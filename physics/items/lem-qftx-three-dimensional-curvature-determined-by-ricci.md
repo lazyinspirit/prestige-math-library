@@ -2,7 +2,7 @@
 id: lem-qftx-three-dimensional-curvature-determined-by-ricci
 kind: lemma
 title: "Three-dimensional curvature is determined by Ricci curvature"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -22,11 +22,13 @@ sources:
       url: "https://arxiv.org/pdf/gr-qc/0409039"
       locator: "§2.1, equation (2.1.1): the three-dimensional algebraic Riemann–Ricci identity."
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

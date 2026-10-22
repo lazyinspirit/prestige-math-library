@@ -2,7 +2,7 @@
 id: lem-qftx-mode-number-pvm
 kind: lemma
 title: "One-mode photon number operator and count PVM"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -35,11 +35,13 @@ sources:
       url: "https://atomoptics.uoregon.edu/~dsteck/teaching/quantum-optics/quantum-optics-notes.pdf"
       locator: "Author-hosted complete course text, §16.4.2.2, PDF pp. 691–692, for normalized pulse-mode creation operators. The count PVM and operator domains below are constructed locally."
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

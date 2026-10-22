@@ -2,7 +2,7 @@
 id: lem-gr-fx-so-plus-connected
 kind: lemma
 title: Connectedness of the proper orthochronous Lorentz group
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics
@@ -26,10 +26,12 @@ sources:
       locator: "§§1.5–1.6, standard boost-rotation decomposition and connected components; §2.3, PDF pp. 24–27"
 verification:
   precheck: pass
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 physical_scope: null
 ---
 

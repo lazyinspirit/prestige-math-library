@@ -1,7 +1,7 @@
 ---
 page: emx-paraxial-optics
 title: Angular-spectrum optics and controlled paraxial limits
-status: draft
+status: published
 library: physics
 requires:
   - em-scattering-and-scalar-diffraction

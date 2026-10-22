@@ -4,7 +4,7 @@ kind: lemma
 domain: mathematics
 library: mathematics
 title: Cubic Weyl commutator remainder for a smooth potential
-status: draft
+status: published
 origin: pipeline
 dependency_level: 3
 deps:
@@ -50,11 +50,13 @@ sources:
       url: https://math.mit.edu/~vwg/semiclassicalEvansZworski.pdf
       locator: Chapter 4, Weyl composition and bounded-symbol estimates, printed pp. 64–67
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

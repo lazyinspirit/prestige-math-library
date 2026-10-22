@@ -1,7 +1,7 @@
 ---
 page: emx-polarization-coherence-examples
 title: Classical coherence matrices and measurement scope — Examples
-status: draft
+status: published
 library: physics
 requires:
   - emx-polarization-coherence

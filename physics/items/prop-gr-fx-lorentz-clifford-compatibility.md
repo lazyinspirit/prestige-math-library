@@ -2,7 +2,7 @@
 id: prop-gr-fx-lorentz-clifford-compatibility
 kind: proposition
 title: Local spin-connection Clifford compatibility
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics
@@ -29,10 +29,12 @@ sources:
       locator: "§4.5.6, spinor covariant derivative and gamma-matrix Lorentz conventions."
 verification:
   precheck: pass
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 physical_scope: null
 ---
 

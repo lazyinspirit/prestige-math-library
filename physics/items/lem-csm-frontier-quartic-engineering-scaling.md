@@ -2,7 +2,7 @@
 id: lem-csm-frontier-quartic-engineering-scaling
 kind: lemma
 title: Engineering scaling of the Gaussian gradient and quartic actions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -30,11 +30,13 @@ sources:
       url: https://www.damtp.cam.ac.uk/user/tong/sft/sft.pdf
       locator: §§3.1–3.2, printed pp. 59–69 / PDF pp. 63–73, Gaussian scaling dimensions and engineering power counting.
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

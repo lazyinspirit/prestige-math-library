@@ -2,7 +2,7 @@
 id: ex-gr-fx06-1
 kind: example
 title: "Minkowski round spheres are not future trapped"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics
@@ -38,7 +38,13 @@ sources:
 generation:
   role: example
 verification:
-  precheck: pending
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Example

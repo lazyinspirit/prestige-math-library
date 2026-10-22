@@ -1,7 +1,7 @@
 ---
 page: emg-fx13
 title: "Adopted charged-background and effective-model regimes"
-status: draft
+status: published
 library: physics
 items:
   - def-emg-fx-charged-scalar-stress-tensor

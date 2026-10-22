@@ -2,7 +2,7 @@
 id: thm-nrqmx-sharp-joint-measurability
 kind: theorem
 title: "Sharp finite joint measurability forces commutation"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -23,6 +23,13 @@ sources:
       url: "https://arxiv.org/pdf/0811.0783"
     - title: "John Watrous, The Theory of Quantum Information, Chapter 2, §2.1.3"
       url: "https://cs.uwaterloo.ca/~watrous/TQI/TQI.2.pdf"
+verification:
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

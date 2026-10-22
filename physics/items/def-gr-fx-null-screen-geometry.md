@@ -2,7 +2,7 @@
 id: def-gr-fx-null-screen-geometry
 kind: definition
 title: "Null normal pairs and screen geometry"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics
@@ -32,6 +32,12 @@ sources:
       url: "https://www.claymath.org/wp-content/uploads/2022/03/WittenLectures.pdf"
 verification:
   precheck: n/a
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Definition

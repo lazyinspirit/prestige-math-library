@@ -1,7 +1,7 @@
 ---
 page: qsmx-modular-equilibrium-examples
 title: Modular automorphisms and physical-time KMS conversion — Examples
-status: draft
+status: published
 library: physics
 items: []
 examples:

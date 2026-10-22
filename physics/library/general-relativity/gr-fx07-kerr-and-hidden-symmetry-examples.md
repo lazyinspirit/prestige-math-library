@@ -1,7 +1,7 @@
 ---
 page: gr-fx07-kerr-and-hidden-symmetry-examples
 title: "Kerr geometry and hidden symmetry — Examples"
-status: draft
+status: published
 library: physics
 requires:
   - gr-fx07-kerr-and-hidden-symmetry

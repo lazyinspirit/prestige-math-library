@@ -4,7 +4,7 @@ kind: lemma
 domain: mathematics
 library: mathematics
 title: Finite-dimensional heavy Gaussian source shift
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 deps:
@@ -37,11 +37,13 @@ sources:
       url: "https://arxiv.org/pdf/1902.08652"
       locator: "§11.2, printed pp.44–48: finite-dimensional Gaussian laws and generating functions."
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

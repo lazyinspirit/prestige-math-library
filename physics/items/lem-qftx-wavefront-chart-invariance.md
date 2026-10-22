@@ -2,7 +2,7 @@
 id: lem-qftx-wavefront-chart-invariance
 kind: lemma
 title: Wavefront sets are invariant under smooth coordinate changes
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -45,7 +45,13 @@ sources:
       url: https://arxiv.org/pdf/math-ph/9903028
       locator: Full 38-page paper, printed pp. 7–8, Section 2.1, local Fourier definition and lift to manifolds.
 verification:
-  precheck: pending
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

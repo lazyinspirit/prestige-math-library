@@ -1,7 +1,7 @@
 ---
 page: csm-frontier-inverse-gibbs-examples
 title: Inverse Gibbs models, identifiability and correlated uncertainty — Examples
-status: draft
+status: published
 library: physics
 requires:
   - csm-frontier-inverse-gibbs

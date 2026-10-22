@@ -2,7 +2,7 @@
 id: def-qftx-laurent-subtraction-target
 kind: definition
 title: Laurent-series target and pole projection for subtraction
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -22,10 +22,12 @@ sources:
       locator: "Section II.5, printed p. 35: the Laurent-series target, its splitting into negative and nonnegative powers, and projection onto the negative part."
 verification:
   precheck: n/a
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Definition

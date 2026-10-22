@@ -1,7 +1,7 @@
 ---
 page: qftx-on-shell-amplitudes
 title: Spinor helicity, rational factorization and tree recursion
-status: draft
+status: published
 library: mathematics
 items:
   - def-qftx-spinor-helicity

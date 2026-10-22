@@ -1,7 +1,7 @@
 ---
 page: nrqmx-weyl-galilei-representations-examples
 title: Regular Weyl systems, projective symmetry and massive particles — Examples
-status: draft
+status: published
 library: mathematics
 items: []
 examples:

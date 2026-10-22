@@ -2,7 +2,7 @@
 id: def-qftx-green-hyperbolic-interface
 kind: definition
 title: Green-hyperbolic free scalar interface
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -38,6 +38,12 @@ sources:
       locator: §4.2, free scalar field, causal propagator, test-function quotient and local Weyl generators, printed pp. 14–18.
 verification:
   precheck: n/a
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Definition

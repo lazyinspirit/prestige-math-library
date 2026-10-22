@@ -1,7 +1,7 @@
 ---
 page: tgrx-thermal-geometry-examples
 title: Thermal vorticity and global equilibrium obstructions — Examples
-status: draft
+status: published
 library: mathematics
 items: []
 examples:

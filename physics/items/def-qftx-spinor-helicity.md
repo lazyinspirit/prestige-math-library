@@ -2,7 +2,7 @@
 id: def-qftx-spinor-helicity
 kind: definition
 title: Complex null momenta and helicity weights
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -18,10 +18,12 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 sources:
   references:
     - title: Henriette Elvang and Yu-tin Huang, Scattering Amplitudes

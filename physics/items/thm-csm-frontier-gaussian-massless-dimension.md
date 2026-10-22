@@ -2,7 +2,7 @@
 id: thm-csm-frontier-gaussian-massless-dimension
 kind: theorem
 title: Dimension threshold for the infinite-lattice massless Gaussian Green integral
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -53,11 +53,13 @@ sources:
       url: https://www.unige.ch/math/folks/velenik/smbook/Statistical_Mechanics_of_Lattice_Systems.pdf
       locator: Chapter 8, §§8.2–8.4, printed pp. 385–395, discrete Green kernels and dimension-dependent finiteness.
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

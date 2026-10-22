@@ -2,7 +2,7 @@
 id: def-tgr-regulated-generalized-entropy
 kind: definition
 title: Specified regulated generalized entropy
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: physics
@@ -38,11 +38,13 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 sources:
   references:
     - title: "H. S. Reall, Part III Black Holes, University of Cambridge lecture notes (2024)"

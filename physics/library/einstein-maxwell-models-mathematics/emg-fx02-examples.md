@@ -2,7 +2,7 @@
 page: emg-fx02-examples
 title: Local nonlinear constraint construction with explicit analytic
   obligations — Examples
-status: draft
+status: published
 library: mathematics
 requires:
   - emg-fx02

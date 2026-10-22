@@ -1,7 +1,7 @@
 ---
 page: gr-fx07-kerr-and-hidden-symmetry
 title: "Kerr geometry and hidden symmetry"
-status: draft
+status: published
 library: physics
 requires:
   - gr-spherical-vacuum-model

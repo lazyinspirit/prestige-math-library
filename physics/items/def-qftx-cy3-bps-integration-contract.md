@@ -2,7 +2,7 @@
 id: def-qftx-cy3-bps-integration-contract
 kind: definition
 title: "CY3, CoHA, and protected-state extension contract"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 dependency_level: 2
@@ -37,11 +37,13 @@ sources:
       url: "https://arxiv.org/pdf/1611.03696"
       locator: "Section 3.5 and the scope distinction in Sections 4.4–4.6: CY3 integration/orientation-data premises are separate from finite-field hereditary Hall factorization."
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Definition

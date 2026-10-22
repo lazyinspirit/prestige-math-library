@@ -2,7 +2,7 @@
 id: prop-gr-fx-positive-linearized-constraint
 kind: proposition
 title: "Positive Fourier inverse for the linearized CMC constraint"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -43,6 +43,12 @@ sources:
       locator: "Full 34-page review chapter retrieved; the relevant §4.1 discussion and equations (47)–(56) were inspected for the CMC scalar equation and the distinction between its formula and solvability analysis."
 verification:
   precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

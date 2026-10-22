@@ -2,7 +2,7 @@
 id: lem-qftx-microcausal-contraction-compatibility
 kind: lemma
 title: "Canonical compatibility of microcausal cross contractions and smooth self contractions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -47,7 +47,13 @@ sources:
       url: "https://arxiv.org/pdf/1208.1428"
       locator: "Section5, PDF pp.21\u201323, equations52\u201365, microcausal cone condition and normal-ordering conventions. Retrieved complete42-page PDF and read these pages; the finite singular-cross/smooth-self matching construction and compatibility proof are local, not imported from the regular-functional formulas."
 verification:
-  precheck: pending
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

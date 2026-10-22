@@ -1,7 +1,7 @@
 ---
 page: qsmx-entropy-entanglement-examples
 title: Entropy inequalities, recovery boundaries and thermal entanglement — Examples
-status: draft
+status: published
 library: physics
 items: []
 examples:

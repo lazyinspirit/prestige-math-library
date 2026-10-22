@@ -1,7 +1,7 @@
 ---
 page: qsmx-topological-lattice-examples
 title: Toric-code Hamiltonians and local indistinguishability — Examples
-status: draft
+status: published
 library: physics
 items: []
 examples:

@@ -2,7 +2,7 @@
 id: ex-emx-gauge-boundary-term
 kind: example
 title: Charged configurations retain an additional term
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics
@@ -69,11 +69,13 @@ sources:
       url: "https://people.phys.ethz.ch/~nbeisert/lectures/ED-24FS-Skript.pdf"
       locator: "§8.2, equations (8.15) and (8.18), and §8.3 'Drehimpuls, Schwerpunkt', equations (8.19)–(8.20): field momentum and origin-relative angular momentum; the charge-supported correction is derived locally."
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Example

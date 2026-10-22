@@ -2,7 +2,7 @@
 id: pthm-tgrx-state-difference-stress
 kind: physics-theorem
 title: State differences remove common local subtraction
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: physics
@@ -31,6 +31,12 @@ sources:
       locator: "Complete 44-page lecture-note PDF retrieved; §3, PDF pp. 19–21, for Hadamard point splitting, state dependence, and the common local counterterm ambiguity. Its differing curvature conventions are not used in the local proof."
 verification:
   precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

@@ -1,7 +1,7 @@
 ---
 page: gr-fx08-wave-energy-and-black-hole-perturbations-examples
 title: "Wave energy and black-hole perturbation interfaces — Examples"
-status: draft
+status: published
 library: physics
 requires:
   - gr-fx08-wave-energy-and-black-hole-perturbations

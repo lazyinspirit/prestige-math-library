@@ -1,7 +1,7 @@
 ---
 page: csm-frontier-hydrodynamic-ssep
 title: "Diffusive hydrodynamics from the symmetric exclusion process"
-status: draft
+status: published
 requires:
   - csm-stochastic-response
   - csm-frontier-probability-interfaces

@@ -2,7 +2,7 @@
 id: prop-qftx-modular-dimension-sewing
 kind: proposition
 title: "Modular dimensions follow from exact sewing"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -44,7 +44,13 @@ sources:
       url: "https://ncatlab.org/nlab/files/BakalovKirillovChapter5.pdf"
       locator: "§5.5, printed pp. 117–120: modular-functor construction and the closed-genus dimension formula exercise; context only."
 verification:
-  precheck: pending
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

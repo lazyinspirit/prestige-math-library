@@ -1,7 +1,7 @@
 ---
 page: emx-polarization-coherence
 title: Classical coherence matrices and measurement scope
-status: draft
+status: published
 library: physics
 requires:
   - em-vacuum-waves-and-polarization

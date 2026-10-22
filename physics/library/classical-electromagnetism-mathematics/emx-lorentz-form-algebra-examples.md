@@ -1,7 +1,7 @@
 ---
 page: emx-lorentz-form-algebra-examples
 title: Lorentzian forms and relative topology — Examples
-status: draft
+status: published
 library: mathematics
 items: []
 examples:

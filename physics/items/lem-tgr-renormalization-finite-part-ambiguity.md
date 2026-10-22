@@ -2,7 +2,7 @@
 id: lem-tgr-renormalization-finite-part-ambiguity
 kind: lemma
 title: Finite subtraction ambiguity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -17,11 +17,13 @@ provenance:
   statement: ai-altered
   proof: ai-generated
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 sources:
   references:
     - title: MIT OpenCourseWare 18.100B Real Analysis, Spring 2025 full lecture notes, Lecture 3, sequence convergence definition

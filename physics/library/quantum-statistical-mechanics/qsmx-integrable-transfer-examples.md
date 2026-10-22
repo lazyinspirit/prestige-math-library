@@ -1,7 +1,7 @@
 ---
 page: qsmx-integrable-transfer-examples
 title: Rational Yang–Baxter transfer matrices and Heisenberg charges — Examples
-status: draft
+status: published
 library: physics
 items: []
 examples:

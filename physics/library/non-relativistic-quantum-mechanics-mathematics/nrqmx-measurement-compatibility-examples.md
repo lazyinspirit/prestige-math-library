@@ -1,7 +1,7 @@
 ---
 page: nrqmx-measurement-compatibility-examples
 title: Measurement compatibility, dilation and identifiable tomography — Examples
-status: draft
+status: published
 library: mathematics
 items: []
 examples:

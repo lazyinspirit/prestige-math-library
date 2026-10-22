@@ -2,7 +2,7 @@
 id: def-qftx-chiral-anomaly-interface
 kind: definition
 title: Four-dimensional chiral anomaly coefficient interface
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -36,6 +36,13 @@ sources:
       locator: §1, PDF pp. 2–3, on perturbative local anomalies and the separate
         existence of global nonperturbative anomalies; the notes explicitly
         limit their treatment to local anomalies.
+verification:
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Definition

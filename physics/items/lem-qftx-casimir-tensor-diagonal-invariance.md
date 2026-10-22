@@ -2,7 +2,7 @@
 id: lem-qftx-casimir-tensor-diagonal-invariance
 kind: lemma
 title: "The Casimir tensor is invariant under the diagonal adjoint action"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 dependency_level: 0
@@ -29,11 +29,13 @@ sources:
       url: "https://djvu.online/file/elCdJNnaapAuA"
       locator: "Lecture 2, §2.5, printed pp. 19–20: the Casimir tensor, its basis independence, and its adjoint invariance."
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

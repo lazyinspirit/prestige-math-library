@@ -3,7 +3,7 @@ id: thm-nrqmx-finite-weyl-uniqueness-interface
 kind: theorem
 domain: mathematics
 title: Finite canonical representation interface
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 deps: [thm-stone-von-neumann-for-finite-dimensional-weyl-systems, def-axiom-of-choice]
@@ -15,10 +15,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 sources:
   references:
     - title: Roland Speicher, Mathematical Aspects of Quantum Mechanics, Lecture Notes, Chapter VIII, pp. 43–47

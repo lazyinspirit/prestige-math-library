@@ -4,7 +4,7 @@ kind: lemma
 domain: mathematics
 library: mathematics
 title: Orthogonal frequency bands in the coherent soft model have independent Poisson counts
-status: draft
+status: published
 origin: pipeline
 dependency_level: 1
 deps:
@@ -54,10 +54,12 @@ sources:
       locator: "PDF p. 3, subsection 'Photon statistics of coherent states': Eq. (12) gives the mean photon number; the following unnumbered display gives the normalized single-mode Poisson probabilities."
 verification:
   precheck: pass
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

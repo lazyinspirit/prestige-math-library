@@ -4,7 +4,7 @@ kind: physics-theorem
 domain: physics
 library: physics
 title: "Ideal one-mode intensity correlations separate model states"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 dependency_level: 3
@@ -39,11 +39,13 @@ sources:
       url: "https://atomoptics.uoregon.edu/~dsteck/teaching/quantum-optics/quantum-optics-notes.pdf"
       locator: "Author-hosted complete course text, Chapter 2 §§2.6.1–2.6.2, PDF pp. 74–76, for second-order coherence, the explicit Gaussian thermal-field assumption and its g^(2)(0)=2 consequence; Chapter 16 §16.1, PDF pp. 685–686, for normal ordering. The local theorem separately proves the quantum geometric-mode calculation."
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

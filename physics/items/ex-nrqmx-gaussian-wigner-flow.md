@@ -4,7 +4,7 @@ kind: example
 domain: mathematics
 library: mathematics
 title: Exact harmonic-oscillator transport of a Gaussian Wigner density
-status: draft
+status: published
 origin: pipeline
 dependency_level: 5
 deps:
@@ -50,11 +50,13 @@ sources:
       url: https://math.mit.edu/~vwg/semiclassicalEvansZworski.pdf
       locator: Chapter 4, Weyl convention and bounded-symbol context, printed pp. 54–67
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Example

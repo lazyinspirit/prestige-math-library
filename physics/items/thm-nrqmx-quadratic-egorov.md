@@ -4,7 +4,7 @@ kind: theorem
 domain: mathematics
 library: mathematics
 title: Fixed-time Weyl Egorov estimate for subquadratic potentials
-status: draft
+status: published
 origin: pipeline
 dependency_level: 4
 deps:
@@ -58,7 +58,13 @@ sources:
       url: https://people.sissa.it/~gianfa/sito-web/%20Dell%27Antonio%20%20Mathematics%20of%20Quantum%20Mechanics%20II%20.pdf
       locator: Lecture 2, §§2.5–2.6, Wigner evolution and Heisenberg dynamics, printed pp. 50–54
 verification:
-  precheck: pending
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

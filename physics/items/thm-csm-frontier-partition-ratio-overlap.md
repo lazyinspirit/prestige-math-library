@@ -2,7 +2,7 @@
 id: thm-csm-frontier-partition-ratio-overlap
 kind: theorem
 title: Finite partition-ratio estimator and overlap variance
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 dependency_level: 0
@@ -19,11 +19,13 @@ provenance:
   statement: ai-altered
   proof: ai-generated
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 sources:
   references:
     - title: "Art B. Owen, Monte Carlo Theory, Methods and Examples, Chapter 9 §9.1, Theorem 9.1 and equations (9.3)–(9.4)"

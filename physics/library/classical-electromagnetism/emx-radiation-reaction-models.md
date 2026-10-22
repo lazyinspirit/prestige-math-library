@@ -1,7 +1,7 @@
 ---
 page: emx-radiation-reaction-models
 title: "Radiation reaction as a singular model reduction"
-status: draft
+status: published
 library: physics
 items:
   - post-emx-abraham-lorentz-model

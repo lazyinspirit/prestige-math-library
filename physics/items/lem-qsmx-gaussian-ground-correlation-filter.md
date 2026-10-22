@@ -2,7 +2,7 @@
 id: lem-qsmx-gaussian-ground-correlation-filter
 kind: lemma
 title: "Gaussian frequency separation of connected ground correlations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -38,11 +38,13 @@ sources:
     - title: "Bruno Nachtergaele and Robert Sims, Lieb–Robinson Bounds and the Exponential Clustering Theorem, arXiv:math-ph/0506030v3; section 3.2, PDF pp. 7–10, Gaussian separation and Lemma 1; the scalar regularization proof is reconstructed locally. Full 12-page article retrieved and read."
       url: "https://arxiv.org/pdf/math-ph/0506030v3"
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

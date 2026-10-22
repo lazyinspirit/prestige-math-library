@@ -2,7 +2,7 @@
 id: lem-csm-frontier-periodic-laplacian-spectrum
 kind: lemma
 title: Fourier spectrum and positivity of the periodic lattice Laplacian
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -52,11 +52,13 @@ sources:
       url: https://www.damtp.cam.ac.uk/user/tong/sft/sft.pdf
       locator: §2.2.2, printed pp. 44–46 / PDF pp. 45–47, Fourier representation of the Gaussian Green kernel.
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

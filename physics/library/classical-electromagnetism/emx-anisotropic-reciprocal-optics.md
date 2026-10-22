@@ -1,7 +1,7 @@
 ---
 page: emx-anisotropic-reciprocal-optics
 title: Anisotropic waves and reciprocity
-status: draft
+status: published
 library: physics
 items:
   - def-emx-anisotropic-plane-symbol

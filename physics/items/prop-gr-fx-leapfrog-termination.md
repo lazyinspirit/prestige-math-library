@@ -2,7 +2,7 @@
 id: prop-gr-fx-leapfrog-termination
 kind: proposition
 title: "Termination and operation count of the periodic wave benchmark"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -24,11 +24,13 @@ sources:
     - title: "Lloyd N. Trefethen, Finite Difference and Spectral Methods for Ordinary and Partial Differential Equations, unpublished text (1996), Chapter 3, complete 37-page author PDF"
       url: "https://people.maths.ox.ac.uk/trefethen/3all.pdf"
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

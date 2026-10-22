@@ -1,7 +1,7 @@
 ---
 page: qsmx-topological-lattice
 title: Toric-code Hamiltonians and local indistinguishability
-status: draft
+status: published
 library: physics
 items:
   - def-qsmx-toric-cellular-hamiltonian

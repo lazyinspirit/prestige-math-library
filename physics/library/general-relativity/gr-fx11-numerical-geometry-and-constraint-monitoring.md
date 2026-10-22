@@ -1,7 +1,7 @@
 ---
 page: gr-fx11-numerical-geometry-and-constraint-monitoring
 title: "Numerical geometry and constraint monitoring"
-status: draft
+status: published
 library: physics
 requires:
   - gr-fx03-geometric-cauchy-stability

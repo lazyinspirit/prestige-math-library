@@ -2,7 +2,7 @@
 id: def-qsmx-transverse-ising-majoranas
 kind: definition
 title: Open transverse Ising chain and ordered Majorana operators
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics
@@ -16,10 +16,12 @@ provenance:
   statement: ai-altered
   proof: ai-generated
 verification:
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 sources:
   references:
     - title: "G. B. Mbeng, A. Russomanno, and G. E. Santoro, The quantum Ising chain for beginners, arXiv:2009.09208v2, §§1–2 and 6.2"

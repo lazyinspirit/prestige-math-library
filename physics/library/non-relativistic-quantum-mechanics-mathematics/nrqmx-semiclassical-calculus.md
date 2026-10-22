@@ -1,7 +1,7 @@
 ---
 page: nrqmx-semiclassical-calculus
 title: "Weyl quantization, Wigner functions and finite-time classical limits"
-status: draft
+status: published
 library: mathematics
 items:
   - def-nrqmx-weyl-symbol-wigner

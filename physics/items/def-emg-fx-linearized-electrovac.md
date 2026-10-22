@@ -2,7 +2,7 @@
 id: def-emg-fx-linearized-electrovac
 kind: definition
 title: Linearized geometric electrovacuum operator and gauge equivalence
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -31,11 +31,13 @@ sources:
       url: "https://arxiv.org/pdf/1904.04926"
       locator: "Sections 1 and 6.1–6.2, PDF pp. 1–4 and 43–55: the coupled Einstein–Maxwell perturbation equations, residual pure-gauge solutions, and the linearized Kerr–Newman parameter family. The paper's decay theorem has additional small-charge, asymptotically flat and Bondi-gauge hypotheses and is not asserted here."
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Definition

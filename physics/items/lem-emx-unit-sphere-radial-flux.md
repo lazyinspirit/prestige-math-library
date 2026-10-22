@@ -2,7 +2,7 @@
 id: lem-emx-unit-sphere-radial-flux
 kind: lemma
 title: Unit-sphere area form and outward radial flux
-status: draft
+status: published
 origin: session
 domain: mathematics
 library: mathematics
@@ -54,10 +54,12 @@ provenance:
   statement: ai-altered
   proof: ai-generated
 verification:
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 sources:
   references:
     - title: University of Toronto MAT237 notes, Section 5.3, Surface Integrals

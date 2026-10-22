@@ -1,7 +1,7 @@
 ---
 page: gr-fx05-bondi-news-and-memory
 title: "Null infinity, Bondi news and classical memory"
-status: draft
+status: published
 library: physics
 requires:
   - gr-fx01-hypersurface-and-null-geometry

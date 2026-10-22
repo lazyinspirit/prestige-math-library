@@ -1,7 +1,7 @@
 ---
 page: tgrx-regulated-second-law
 title: A conditional regulated generalized second law
-status: draft
+status: published
 library: physics
 requires:
   - tgrx-relative-entropy-balance

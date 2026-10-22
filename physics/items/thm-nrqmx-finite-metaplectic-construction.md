@@ -3,7 +3,7 @@ id: thm-nrqmx-finite-metaplectic-construction
 kind: theorem
 domain: mathematics
 title: Finite symplectic implementation by quadratic generators
-status: draft
+status: published
 origin: pipeline
 dependency_level: 3
 deps: [def-nrqmx-finite-mode-symplectic-data, thm-nrqmx-finite-weyl-uniqueness-interface, lem-nrqmx-finite-mode-fock-schr-identification, lem-nrqmx-finite-symplectic-implementers, lem-nrqmx-finite-symplectic-generator-factorization, lem-nrqmx-finite-maslov-phase-parity, thm-nrqm-oscillator-multidimensional-oscillator-completeness, thm-stone-von-neumann-for-finite-dimensional-weyl-systems, def-countable-choice, def-axiom-of-choice]
@@ -30,6 +30,13 @@ sources:
       url: "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/robbsala2.pdf"
     - title: "Arvind, B. Dutta, N. Mukunda and R. Simon, The Real Symplectic Groups in Quantum Mechanics and Optics, §§IV–VI"
       url: "https://arxiv.org/pdf/quant-ph/9509002"
+verification:
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

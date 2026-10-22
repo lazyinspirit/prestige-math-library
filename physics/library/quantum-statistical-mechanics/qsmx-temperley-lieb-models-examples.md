@@ -1,7 +1,7 @@
 ---
 page: qsmx-temperley-lieb-models-examples
 title: "Temperley–Lieb, Hecke normalization and quantum Potts chains — Examples"
-status: draft
+status: published
 library: physics
 requires:
   - qsmx-temperley-lieb-models

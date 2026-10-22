@@ -2,7 +2,7 @@
 id: ex-qftx-nonparaxial-spin-projection
 kind: example
 title: A conical helicity packet has reduced axial spin projection
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -52,10 +52,12 @@ sources:
         helicity-projected vector and its non-so(3) interpretation.
 verification:
   precheck: pass
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Example

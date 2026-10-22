@@ -2,7 +2,7 @@
 id: thm-qftx-free-time-slice
 kind: theorem
 title: The free Weyl algebra obeys time slice
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -37,11 +37,13 @@ sources:
       url: https://arxiv.org/pdf/1904.04051v2
       locator: §4.1 A5 and §4.2, time-slice axiom and free scalar quotient, printed pp. 13–17.
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

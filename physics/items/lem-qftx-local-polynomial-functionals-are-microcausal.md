@@ -2,7 +2,7 @@
 id: lem-qftx-local-polynomial-functionals-are-microcausal
 kind: lemma
 title: Local polynomial functionals are microcausal
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -32,10 +32,12 @@ sources:
       locator: Section 2.1, printed pp. 7–9, wavefront covectors of local functionals and the future/past cone exclusion.
 verification:
   precheck: pass
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

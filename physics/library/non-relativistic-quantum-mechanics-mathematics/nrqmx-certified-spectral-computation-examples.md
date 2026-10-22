@@ -1,7 +1,7 @@
 ---
 page: nrqmx-certified-spectral-computation-examples
 title: Variational approximation, residual certificates and propagation errors — Examples
-status: draft
+status: published
 library: mathematics
 requires:
   - nrqmx-certified-spectral-computation

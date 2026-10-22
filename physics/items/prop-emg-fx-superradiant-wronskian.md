@@ -2,7 +2,7 @@
 id: prop-emg-fx-superradiant-wronskian
 kind: proposition
 title: Exact charged scattering Wronskian flux identity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -28,6 +28,12 @@ sources:
       locator: "Chapter 3, Sections 3.3.1-3.3.4, equations (3.76)-(3.84): the four mode boundary conditions and their Wronskian relations, including classical charge superradiance."
 verification:
   precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

@@ -1,7 +1,7 @@
 ---
 page: qftx-bv-brst
 title: Off-shell gauge complexes, BRST doublets and anomaly obstructions
-status: draft
+status: published
 library: mathematics
 items:
   - def-qftx-abelian-local-brst

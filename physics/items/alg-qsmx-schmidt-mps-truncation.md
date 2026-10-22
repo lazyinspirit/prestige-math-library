@@ -2,7 +2,7 @@
 id: alg-qsmx-schmidt-mps-truncation
 kind: algorithm
 title: Sequential Schmidt truncation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -23,6 +23,13 @@ sources:
       url: https://arxiv.org/pdf/quant-ph/0608197
     - title: Grégoire Misguich, Introduction to matrix-product states and tensor networks, §2.4.4 and Appendix A.1
       url: https://arxiv.org/pdf/2606.24803
+verification:
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Definition

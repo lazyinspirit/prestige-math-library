@@ -1,7 +1,7 @@
 ---
 page: gr-fx14-holonomy-and-discrete-geometric-interface-examples
 title: Holonomy and discrete geometric interfaces — Examples
-status: draft
+status: published
 library: physics
 items: []
 examples:

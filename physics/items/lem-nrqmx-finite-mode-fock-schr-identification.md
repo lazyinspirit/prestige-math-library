@@ -3,7 +3,7 @@ id: lem-nrqmx-finite-mode-fock-schr-identification
 kind: lemma
 domain: mathematics
 title: Finite-mode Fock to Schrödinger identification
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 deps: [thm-nrqm-fock-and-equilibrium-hilbert-direct-sum-construction, lem-nrqm-fock-and-equilibrium-creation-contraction-bounds, thm-nrqm-oscillator-multidimensional-oscillator-completeness, thm-nrqm-oscillator-hermite-recurrence, lem-nrqm-oscillator-closed-ladder-domains, def-countable-choice]
@@ -19,10 +19,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 sources:
   references:
     - title: "Phan Thành Nam, Mathematical Quantum Mechanics II, Chapter 5 §§5.1–5.2, pp. 114–124"

@@ -1,7 +1,7 @@
 ---
 page: qftx-photon-helicity-examples
 title: Photon helicity bundles and exact transverse rotations — Examples
-status: draft
+status: published
 library: mathematics
 items: []
 examples:

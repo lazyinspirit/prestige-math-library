@@ -2,7 +2,7 @@
 id: def-tgrx-hadamard-stress-contract
 kind: definition
 title: Hadamard and renormalized stress contract
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: physics
@@ -32,6 +32,12 @@ sources:
       locator: "Complete 44-page lecture-note PDF retrieved; §3, PDF pp. 19–21, equations (3.6)–(3.12), for Hadamard point splitting and state-independent curvature ambiguities. Ford uses signature (+---); no curvature-variation signs are imported."
 verification:
   precheck: n/a
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Definition

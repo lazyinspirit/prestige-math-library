@@ -1,7 +1,7 @@
 ---
 page: emx-radiation-reaction-models-examples
 title: "Radiation reaction as a singular model reduction — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples:

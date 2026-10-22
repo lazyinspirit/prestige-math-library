@@ -2,7 +2,7 @@
 id: pthm-tgrx-noether-charge-decomposition
 kind: physics-theorem
 title: Noether charge decomposition for algebraic-curvature Lagrangians
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics
@@ -36,7 +36,13 @@ sources:
     - title: "Daniel Harlow and Jie-qiang Wu, Covariant phase space with boundaries, §§2.2–2.4"
       url: "https://arxiv.org/pdf/1906.08616"
 verification:
-  precheck: pending
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

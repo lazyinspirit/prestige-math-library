@@ -1,7 +1,7 @@
 ---
 page: qsmx-integrable-transfer
 title: Rational Yang–Baxter transfer matrices and Heisenberg charges
-status: draft
+status: published
 library: physics
 items:
   - def-qsmx-rational-monodromy

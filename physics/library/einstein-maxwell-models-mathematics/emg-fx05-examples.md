@@ -1,7 +1,7 @@
 ---
 page: emg-fx05-examples
 title: Linearized coupled equations and gauge identities — Examples
-status: draft
+status: published
 library: mathematics
 items: []
 examples:

@@ -2,7 +2,7 @@
 id: def-qftx-off-shell-local-polynomial-functionals
 kind: definition
 title: Off-shell local polynomial scalar functionals
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -28,6 +28,12 @@ sources:
       locator: Section 3.1, printed pp. 14–16, local interaction functionals and causal construction.
 verification:
   precheck: n/a
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Definition

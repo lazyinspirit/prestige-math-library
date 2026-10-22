@@ -2,7 +2,7 @@
 id: thm-gr-fx-kerr-hamilton-jacobi-separation
 kind: theorem
 title: "Local Kerr Hamilton-Jacobi separation"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics
@@ -33,7 +33,13 @@ sources:
     - title: "H. S. Reall, Black Holes (Part III lecture notes, 15 March 2024), §7.5, especially equations (7.18) and (7.33)-(7.36), PDF pp. 99-103"
       url: "https://www.damtp.cam.ac.uk/user/hsr1000/black_holes_lectures_2024.pdf"
 verification:
-  precheck: pending
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

@@ -1,7 +1,7 @@
 ---
 page: csm-frontier-fluctuation-theorems
 title: Path entropy production, fluctuation symmetry and work identities
-status: draft
+status: published
 library: physics
 requires:
   - csm-stochastic-response

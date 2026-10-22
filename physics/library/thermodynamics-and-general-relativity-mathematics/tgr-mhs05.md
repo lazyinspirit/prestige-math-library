@@ -1,7 +1,7 @@
 ---
 page: tgr-mhs05
 title: Finite-regulator entropy mathematics
-status: draft
+status: published
 library: mathematics
 requires:
   - linear-maps-rank-nullity-and-quotient-spaces

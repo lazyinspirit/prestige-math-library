@@ -2,7 +2,7 @@
 id: thm-qftx-tl-hecke-braid
 kind: theorem
 title: "Temperley–Lieb projectors give a Hecke braid representation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 dependency_level: 1
@@ -41,10 +41,12 @@ sources:
       locator: "§§8.1–8.3: the braided-category hexagons, adjacent braid action, and quasitriangular Hopf conventions."
 verification:
   precheck: pass
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

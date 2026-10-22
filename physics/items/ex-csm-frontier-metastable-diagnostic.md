@@ -2,7 +2,7 @@
 id: ex-csm-frontier-metastable-diagnostic
 kind: example
 title: A finite Metropolis chain can equilibrate within a well and remain far from equilibrium
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -45,11 +45,13 @@ sources:
       url: https://pages.uoregon.edu/dlevin/MARKOV/mcmt2e.pdf
       locator: "Chapter 3, §3.2, printed pp. 38–41: finite-state Metropolis transitions and the proposal-acceptance ratio. The five-state transition and all bottleneck bounds below are proved directly."
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Example

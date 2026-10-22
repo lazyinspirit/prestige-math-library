@@ -2,7 +2,7 @@
 id: cex-emg-fx-neutral-no-amplification
 kind: counterexample
 title: A charged RN background does not amplify a neutral test scalar
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -32,10 +32,12 @@ sources:
       locator: "Chapter 3, Section 3.3.4, equations (3.83)-(3.84): classical charge superradiance requires the sign-changing product of field and black-hole charges. The exact neutral case below follows from the local flux identity."
 verification:
   precheck: pass
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement refuted

@@ -1,7 +1,7 @@
 ---
 page: nrqmx-weyl-galilei-representations
 title: Regular Weyl systems, projective symmetry and massive particles
-status: draft
+status: published
 library: mathematics
 items:
   - thm-nrqmx-finite-weyl-uniqueness-interface

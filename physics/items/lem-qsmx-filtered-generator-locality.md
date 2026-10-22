@@ -2,7 +2,7 @@
 id: lem-qsmx-filtered-generator-locality
 kind: lemma
 title: Filtered spectral generators have summable local shells
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -42,6 +42,13 @@ sources:
       url: "https://arxiv.org/pdf/1102.0842"
     - title: "Pieter Naaijkens, Quantum Spin Systems on Infinite Lattices, §§4.1–4.2"
       url: "https://arxiv.org/pdf/1311.2717"
+verification:
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

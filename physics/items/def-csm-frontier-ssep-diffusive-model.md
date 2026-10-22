@@ -2,7 +2,7 @@
 id: def-csm-frontier-ssep-diffusive-model
 kind: definition
 title: "Symmetric exclusion process under diffusive scaling"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics
@@ -35,11 +35,13 @@ sources:
       url: "https://arxiv.org/pdf/1906.01752"
       locator: "Section 3, Lemmas 5–6: fixed-particle configuration classes on a finite connected graph."
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Definition

@@ -2,7 +2,7 @@
 id: cex-emx-zero-intensity-degree
 kind: counterexample
 title: Normalized polarization is undefined at darkness
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics
@@ -25,11 +25,13 @@ sources:
       url: "https://arxiv.org/pdf/2002.04105"
       locator: "§2.1–2.6, PDF pp. 6–11: coherency matrices, Stokes coordinates and intensity/purity normalization. The zero-field boundary case is computed locally."
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement refuted

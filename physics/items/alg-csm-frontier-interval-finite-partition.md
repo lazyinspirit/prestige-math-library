@@ -2,7 +2,7 @@
 id: alg-csm-frontier-interval-finite-partition
 kind: algorithm
 title: Certified finite partition and expectation enclosure
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 dependency_level: 0
@@ -24,7 +24,13 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
-  precheck: pending
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 sources:
   references:
     - title: "Warwick Tucker, Validated Numerics: A Short Introduction to Rigorous Computations, Chapter 1 §§1.3–1.5"

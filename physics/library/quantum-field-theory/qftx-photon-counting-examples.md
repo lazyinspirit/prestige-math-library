@@ -1,7 +1,7 @@
 ---
 page: qftx-photon-counting-examples
 title: Wavepacket photodetection and normally ordered correlations — Examples
-status: draft
+status: published
 library: physics
 items: []
 examples:

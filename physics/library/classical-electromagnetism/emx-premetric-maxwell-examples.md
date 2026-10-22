@@ -1,7 +1,7 @@
 ---
 page: emx-premetric-maxwell-examples
 title: Metric dependence, flux sectors and constitutive geometry — Examples
-status: draft
+status: published
 library: physics
 items: []
 examples:

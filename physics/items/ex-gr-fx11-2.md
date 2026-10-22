@@ -2,7 +2,7 @@
 id: ex-gr-fx11-2
 kind: example
 title: "Zero sampled constraint residual with unresolved smooth data"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -52,7 +52,13 @@ sources:
     - title: "José Luis Jaramillo, Juan Antonio Valiente Kroon and Éric Gourgoulhon, From Geometry to Numerics, arXiv:0712.2332v2 (2008), §§3.2, 4.1–4.2 and 5.1; complete 72-page review"
       url: "https://arxiv.org/pdf/0712.2332"
 verification:
-  precheck: pending
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Example

@@ -2,7 +2,7 @@
 id: thm-qsmx-double-hopf-structure
 kind: theorem
 title: Hopf-* structure of the finite-group double
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -33,10 +33,12 @@ sources:
       locator: "§3, PDF p. 7, for the crossed-product double and antipode convention; all Hopf-* identities below are verified directly."
 verification:
   precheck: pass
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

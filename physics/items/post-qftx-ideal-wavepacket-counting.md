@@ -4,7 +4,7 @@ kind: postulate
 domain: physics
 library: physics
 title: "Ideal wavepacket number counting"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 dependency_level: 2
@@ -41,11 +41,11 @@ sources:
       url: "https://atomoptics.uoregon.edu/~dsteck/teaching/quantum-optics/quantum-optics-notes.pdf"
       locator: "Author-hosted complete course text, Chapter 16 §§16.1 and 16.4.2.2–16.4.2.3, PDF pp. 685–693, for photodetection, normalized pulse modes and time-window counting. Its narrowband and finite-window assumptions are not imported as exact claims here."
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
+  precheck: pass
+  sources_checked:
     date: 2026-10-22
+    scope: Completed native formulation/status, source-evidence and applicability review; exact evidence and reading limits in research/physics-non-fluid-129-2026-10-21-r2-publication.json. No new retrieval, measurement or solution is claimed.
+    by: owner-authorized native reviewers (gpt-6.1-sol)
 ---
 
 ## Postulate

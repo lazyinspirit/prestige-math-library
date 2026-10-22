@@ -2,7 +2,7 @@
 id: ex-gr-fx12-1
 kind: example
 title: Scalar-field potential and Cauchy-data pairing
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 4
@@ -37,7 +37,13 @@ sources:
     - title: "Vivek Iyer and Robert M. Wald, Some Properties of Noether Charge and a Proposal for Dynamical Black Hole Entropy, §3"
       url: "https://arxiv.org/pdf/gr-qc/9403028"
 verification:
-  precheck: pending
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Example

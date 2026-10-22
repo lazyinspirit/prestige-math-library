@@ -1,7 +1,7 @@
 ---
 page: tgrx-gaussian-wedge-examples
 title: Free scalar wedge modular geometry — Examples
-status: draft
+status: published
 library: physics
 items: []
 examples:

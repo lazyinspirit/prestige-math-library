@@ -1,7 +1,7 @@
 ---
 page: qftx-analytic-prerequisites
 title: Spectral calculus, Gaussian fields and covariance normalization prerequisites
-status: draft
+status: published
 library: mathematics
 requires:
   - spectral-measures-and-borel-functional-calculus

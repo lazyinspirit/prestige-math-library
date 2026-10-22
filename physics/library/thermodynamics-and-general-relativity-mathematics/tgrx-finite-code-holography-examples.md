@@ -1,7 +1,7 @@
 ---
 page: tgrx-finite-code-holography-examples
 title: Exact finite algebra entropy identities and holography boundaries — Examples
-status: draft
+status: published
 library: mathematics
 requires:
   - tgrx-finite-code-holography

@@ -2,7 +2,7 @@
 id: def-gr-fx-thin-path-groupoid
 kind: definition
 title: Thin path groupoid
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics
@@ -28,10 +28,12 @@ sources:
       locator: "PDF p. 7, the category of points and thin-homotopy classes of smooth paths. This definition uses the piecewise-smooth quotient whose groupoid laws are proved in the local proposition."
 verification:
   precheck: pass
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Definition

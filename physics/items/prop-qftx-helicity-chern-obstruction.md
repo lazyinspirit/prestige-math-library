@@ -2,7 +2,7 @@
 id: prop-qftx-helicity-chern-obstruction
 kind: proposition
 title: Helicity line bundles have nonzero Chern number
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -36,11 +36,13 @@ sources:
       url: https://www.damtp.cam.ac.uk/user/tong/qft/qfthtml/S6.html
       locator: Full author-hosted HTML chapter; section 6.2.1, equations 6.513–6.514 on the transverse polarization plane and the real-frame hairy-ball obstruction.
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

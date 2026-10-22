@@ -2,7 +2,7 @@
 id: pthm-emx-helicity-rotation-weight
 kind: physics-theorem
 title: SO(2) helicity character and geometric phase
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics
@@ -38,11 +38,13 @@ sources:
       url: "https://www.damtp.cam.ac.uk/user/tong/qhe/qhe.pdf"
       locator: "§1.5.1, printed pp. 28–31: parallel transport, local Berry connection, gauge transformation and surface-curvature phase. The classical connection convention here is recalculated explicitly."
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

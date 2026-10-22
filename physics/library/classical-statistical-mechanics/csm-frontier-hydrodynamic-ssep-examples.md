@@ -1,7 +1,7 @@
 ---
 page: csm-frontier-hydrodynamic-ssep-examples
 title: "Diffusive hydrodynamics from the symmetric exclusion process — Examples"
-status: draft
+status: published
 requires:
   - csm-frontier-hydrodynamic-ssep
 items: []

@@ -1,7 +1,7 @@
 ---
 page: tgrx-hydrostatic-functional-examples
 title: Hydrostatic generating functionals and derivative-expansion boundaries — Examples
-status: draft
+status: published
 library: physics
 items: []
 examples:

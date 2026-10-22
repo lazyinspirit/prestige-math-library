@@ -4,7 +4,7 @@ kind: theorem
 domain: mathematics
 library: mathematics
 title: Compact-support short-range scattering closure
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 dependency_level: 1
@@ -36,6 +36,13 @@ sources:
     - title: "B. Zwiebach, Quantum Physics III, Chapter 7: Scattering, MIT OpenCourseWare (Spring 2018)"
       url: "https://ocw.mit.edu/courses/8-06-quantum-physics-iii-spring-2018/45dbd7038c3e969491eceeae86c44d42_MIT8_06S18ch7.pdf"
       locator: "§§7.1 and 7.3, PDF pp.1–4 and 12–15: positive-energy finite-range scattering setup, outgoing Green function, and integral scattering equation; it does not prove operator-theoretic completeness."
+verification:
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

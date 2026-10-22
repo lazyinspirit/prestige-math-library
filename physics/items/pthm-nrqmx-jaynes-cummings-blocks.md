@@ -2,7 +2,7 @@
 id: pthm-nrqmx-jaynes-cummings-blocks
 kind: physics-theorem
 title: Jaynes–Cummings invariant blocks and Rabi frequency
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics
@@ -41,11 +41,13 @@ sources:
       url: "https://arxiv.org/pdf/2203.13206"
       locator: "The rotating-wave Jaynes–Cummings Hamiltonian and excitation sectors, Eqs. (267)–(271). The local proof fixes a different coupling phase and completes the operator-domain argument."
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

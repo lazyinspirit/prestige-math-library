@@ -1,7 +1,7 @@
 ---
 page: qftx-causal-renormalization
 title: All-order scalar causal extension and finite renormalization
-status: draft
+status: published
 library: mathematics
 items:
   - def-qftx-off-shell-local-polynomial-functionals

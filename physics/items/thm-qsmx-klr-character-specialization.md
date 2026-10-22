@@ -2,7 +2,7 @@
 id: thm-qsmx-klr-character-specialization
 kind: theorem
 title: KLR grading gives integral multiplicity bookkeeping
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -42,6 +42,12 @@ sources:
       locator: "§9.1, Theorem 9.1, printed pp. 39–40: an independent symmetric-group/Hecke realization of the divided-power isomorphism on the graded projective Grothendieck group."
 verification:
   precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: ex-gr-fx07-2
 kind: example
 title: "Negative stationary Killing density in the Kerr ergoregion"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics
@@ -41,7 +41,13 @@ sources:
     - title: "M. Visser, The Kerr spacetime: A brief introduction, introductory book chapter, arXiv:0706.0622v3 (2008), §10, PDF pp. 30-31"
       url: "https://arxiv.org/pdf/0706.0622"
 verification:
-  precheck: pending
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Example

@@ -2,7 +2,7 @@
 id: thm-csm-frontier-edwards-sokal
 kind: theorem
 title: "Finite Edwards–Sokal coupling and correlation identity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -28,11 +28,13 @@ sources:
       url: https://www.ihes.fr/~duminil/publi/Courspeccot2.pdf
       locator: "Chapter 3, §3.2, printed pp. 24–26: conditional cluster coloring and the finite Potts/connectivity relation."
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

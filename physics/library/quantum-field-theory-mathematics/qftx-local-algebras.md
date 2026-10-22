@@ -1,7 +1,7 @@
 ---
 page: qftx-local-algebras
 title: Causal propagators, time slice and algebraic locality
-status: draft
+status: published
 requires:
   - qft-mf02
   - qftx-microlocal-products

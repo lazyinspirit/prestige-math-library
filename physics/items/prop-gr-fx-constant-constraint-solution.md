@@ -2,7 +2,7 @@
 id: prop-gr-fx-constant-constraint-solution
 kind: proposition
 title: "Exact positive constant solution of the CMC constraint equation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -35,10 +35,12 @@ sources:
       locator: "Full 34-page review chapter retrieved; the relevant §4.1 discussion and equations (47)–(56) were inspected for the vacuum CMC Lichnerowicz equation and the caution that general free data need not yield a solution."
 verification:
   precheck: pass
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

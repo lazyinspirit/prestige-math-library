@@ -1,7 +1,7 @@
 ---
 page: nrqmx-operator-realizations-examples
 title: Operator domains, deficiency spaces and boundary realizations — Examples
-status: draft
+status: published
 library: mathematics
 items: []
 examples:

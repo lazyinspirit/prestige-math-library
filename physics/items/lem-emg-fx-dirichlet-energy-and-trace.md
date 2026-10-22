@@ -2,7 +2,7 @@
 id: lem-emg-fx-dirichlet-energy-and-trace
 kind: lemma
 title: Local energy and zero-boundary closure for the charged constraint problem
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -35,7 +35,13 @@ sources:
     - title: "John K. Hunter, Notes on Partial Differential Equations (2014), Chapter 4, zero-boundary Poincare and trace arguments"
       url: "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf"
 verification:
-  precheck: pending
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

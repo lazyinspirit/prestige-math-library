@@ -2,7 +2,7 @@
 id: lem-qftx-tempered-tensor-products
 kind: lemma
 title: Tensor products of tempered distributions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 dependency_level: 0
@@ -33,10 +33,12 @@ sources:
       locator: "Chapter 7.1, Theorem 7.1, printed pp. 77–79; Chapter 11.1, Exercise 11.5(b), printed p. 135. The notes construct distribution tensor products and state the tempered case as an exercise; the global Schwartz-seminorm estimate is proved locally here."
 verification:
   precheck: pass
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

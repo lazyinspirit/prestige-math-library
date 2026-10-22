@@ -2,7 +2,7 @@
 id: ex-tgrx-greybody-nonplanck
 kind: example
 title: Frequency filtering changes a thermal spectrum
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -23,10 +23,12 @@ generation:
   role: example
 verification:
   precheck: pass
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Example

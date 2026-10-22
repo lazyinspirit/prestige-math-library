@@ -2,7 +2,7 @@
 id: def-emx-coherency-matrix
 kind: definition
 title: Classical two-component coherency matrix
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics
@@ -43,11 +43,13 @@ sources:
       url: "https://arxiv.org/pdf/2002.04105"
       locator: "§2.1, PDF pp. 6–7: 2×2 coherency matrix from two complex field components and time versus ensemble averaging; §2.2–2.6, PDF pp. 7–11: Stokes coordinates, the positive-semidefinite cone and rank/purity. The local definition uses an ensemble expectation directly and does not import the source's zero-mean analytic-signal or stationary-ergodic interpretation as an extra assumption."
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Definition

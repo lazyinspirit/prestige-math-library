@@ -1,7 +1,7 @@
 ---
 page: emx-anisotropic-reciprocal-optics-examples
 title: Anisotropic waves and reciprocity — Examples
-status: draft
+status: published
 library: physics
 items: []
 examples:

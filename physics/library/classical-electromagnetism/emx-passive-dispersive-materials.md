@@ -1,7 +1,7 @@
 ---
 page: emx-passive-dispersive-materials
 title: Causal oscillator media and passivity
-status: draft
+status: published
 library: physics
 items:
   - post-emx-lorentz-medium

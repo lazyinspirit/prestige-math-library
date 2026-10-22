@@ -2,7 +2,7 @@
 id: thm-csm-frontier-equilibrium-quasipotential
 kind: theorem
 title: "Equilibrium SSEP quasi-potential on a torus"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -41,11 +41,13 @@ sources:
       url: "https://arxiv.org/pdf/2505.15618"
       locator: "Sections 13.1 and 14.1, equations (145)–(148) and (158)–(160): the equilibrium density functional and time-reversed diffusive relaxation."
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

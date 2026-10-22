@@ -2,7 +2,7 @@
 id: prop-gr-fx-spin-double-cover
 kind: proposition
 title: The Lorentzian spin double cover from Hermitian matrices
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics
@@ -45,6 +45,12 @@ sources:
       locator: "§4.5.6, local Lorentz spinor conventions and the Lorentzian spin group."
 verification:
   precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 physical_scope: null
 ---
 

@@ -2,7 +2,7 @@
 id: thm-gr-fx-penrose-incompleteness
 kind: theorem
 title: "Penrose null geodesic incompleteness"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics
@@ -64,11 +64,13 @@ sources:
     - title: "José Luis Jaramillo, Juan Antonio Valiente Kroon, and Éric Gourgoulhon, From Geometry to Numerics: Interdisciplinary Aspects in Mathematical and Numerical Relativity, arXiv:0712.2332v2 (2008), §§2.1–2.2, full 72-page PDF."
       url: "https://arxiv.org/pdf/0712.2332"
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

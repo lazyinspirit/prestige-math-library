@@ -2,7 +2,7 @@
 id: post-tgrx-semiclassical-equation
 kind: postulate
 title: Semiclassical equation with fixed counterterms and state
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: physics
@@ -36,6 +36,10 @@ sources:
       locator: "Complete 44-page lecture-note PDF retrieved; §3, PDF pp. 19–21, equations (3.7)–(3.10), for curvature-squared counterterms and the semiclassical equation; §5.1, PDF pp. 32–33, for higher-derivative and fluctuation limitations. Ford uses signature (+---); this item defines its own variation signs."
 verification:
   precheck: n/a
+  sources_checked:
+    date: 2026-10-22
+    scope: Completed native formulation/status, source-evidence and applicability review; exact evidence and reading limits in research/physics-non-fluid-129-2026-10-21-r2-publication.json. No new retrieval, measurement or solution is claimed.
+    by: owner-authorized native reviewers (gpt-6.1-sol)
 ---
 
 ## Postulate

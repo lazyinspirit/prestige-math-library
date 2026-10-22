@@ -2,7 +2,7 @@
 id: lem-qftx-balanced-local-functional-representatives
 kind: lemma
 title: Balanced jets give unique local functional representatives
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -27,10 +27,12 @@ sources:
       locator: Section 3.2, printed pp. 24–25, equations (3.3)–(3.4), Proposition 2 and the following derivative-compatible extension construction; the uniqueness and support arguments are supplied locally.
 verification:
   precheck: pass
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

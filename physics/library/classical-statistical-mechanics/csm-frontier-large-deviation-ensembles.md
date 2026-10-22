@@ -1,7 +1,7 @@
 ---
 page: csm-frontier-large-deviation-ensembles
 title: Large-deviation variational mechanics and ensemble inequivalence
-status: draft
+status: published
 library: physics
 items:
   - def-csm-frontier-mean-field-ensemble

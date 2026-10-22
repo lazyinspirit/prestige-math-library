@@ -1,7 +1,7 @@
 ---
 page: qsmx-entropy-entanglement
 title: Entropy inequalities, recovery boundaries and thermal entanglement
-status: draft
+status: published
 library: physics
 items:
   - def-qsmx-information-conventions

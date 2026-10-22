@@ -2,7 +2,7 @@
 id: lem-qftx-global-microlocal-pullback
 kind: lemma
 title: "Canonical global microlocal pullback by controlled local Fourier construction"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -51,7 +51,13 @@ sources:
       url: "https://arxiv.org/pdf/1208.1428"
       locator: "Appendix A, PDF pp.35\u201338, especially Theorem A.7, which explicitly gives only a proof idea. Retrieved complete42-page PDF and read these complete appendix pages; controlled approximation, all local estimates and gluing are proved locally here."
 verification:
-  precheck: pending
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

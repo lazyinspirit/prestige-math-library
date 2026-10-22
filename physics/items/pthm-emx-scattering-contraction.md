@@ -2,7 +2,7 @@
 id: pthm-emx-scattering-contraction
 kind: physics-theorem
 title: "Passivity gives a contractive scattering matrix"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics
@@ -31,7 +31,13 @@ dependency_roles:
   thm-divergence-theorem-for-bounded-c-one-euclidean-domains: mathematical-premise
   thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces: mathematical-premise
 verification:
-  precheck: pending
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 provenance:
   statement: ai-altered
   proof: ai-altered

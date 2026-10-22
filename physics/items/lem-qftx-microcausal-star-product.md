@@ -2,7 +2,7 @@
 id: lem-qftx-microcausal-star-product
 kind: lemma
 title: Hadamard contractions preserve microcausal polynomial functionals
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -40,7 +40,13 @@ sources:
       locator: Full 38-page paper, printed pp. 7–13, Sections 2.1–2.2, criterion M1
         and the future-directed Hadamard covector relation.
 verification:
-  precheck: pending
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

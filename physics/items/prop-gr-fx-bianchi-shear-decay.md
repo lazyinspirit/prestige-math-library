@@ -2,7 +2,7 @@
 id: prop-gr-fx-bianchi-shear-decay
 kind: proposition
 title: "Diagonal-source shear equation and isotropic-source decay"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 3
@@ -25,11 +25,13 @@ sources:
     - title: "Diego L. Cáceres, Leonardo Castañeda, and Juan M. Tejeiro, Shear Dynamics in Bianchi I Cosmology, arXiv:1003.3491v1 (2010), Section 2, equations (2.1)–(2.2), and Section 2.1, equations (1.6), (2.8)–(2.17), printed pp. 2–4 (PDF pp. 3–5)"
       url: "https://arxiv.org/pdf/1003.3491"
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: post-tgrx-linearized-horizon-model
 kind: postulate
 title: Linearized future horizon focusing model
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: physics
@@ -43,10 +43,10 @@ sources:
       locator: "Complete 149-page lecture notes; §§4.6 and 4.8, especially equations (4.26)–(4.40), for affine null generators, screen expansion/shear and the exact null Raychaudhuri equation. The local model adopts only its stated first-order specialization."
 verification:
   precheck: n/a
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
+  sources_checked:
     date: 2026-10-22
+    scope: Completed native formulation/status, source-evidence and applicability review; exact evidence and reading limits in research/physics-non-fluid-129-2026-10-21-r2-publication.json. No new retrieval, measurement or solution is claimed.
+    by: owner-authorized native reviewers (gpt-6.1-sol)
 ---
 
 ## Postulate

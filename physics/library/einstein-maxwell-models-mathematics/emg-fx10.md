@@ -1,7 +1,7 @@
 ---
 page: emg-fx10
 title: "Compatible discrete Maxwell constraints and finite algorithms"
-status: draft
+status: published
 library: mathematics
 items:
   - def-emg-fx-cochain-maxwell

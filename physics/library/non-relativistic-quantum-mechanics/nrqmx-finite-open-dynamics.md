@@ -1,7 +1,7 @@
 ---
 page: nrqmx-finite-open-dynamics
 title: Finite reduced dynamics, memory and quantum trajectories
-status: draft
+status: published
 library: physics
 items:
   - def-nrqmx-finite-channel-families

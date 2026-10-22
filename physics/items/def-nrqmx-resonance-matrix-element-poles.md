@@ -4,7 +4,7 @@ kind: definition
 domain: mathematics
 library: mathematics
 title: Continued resolvent matrix elements and resonance poles
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 dependency_level: 0
@@ -27,6 +27,13 @@ sources:
     - title: "M. Gadella and G. Pronko, The Friedrichs Model and its Use in Resonance Phenomena, §1.1 and §2"
       url: "https://arxiv.org/pdf/1106.5782"
       locator: "PDF pp.2–4: resonance through analytic continuation of resolvent matrix elements and the reduced resolvent in the Friedrichs model."
+verification:
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Definition

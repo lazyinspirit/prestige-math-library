@@ -2,7 +2,7 @@
 id: ex-emx-force-frequency-regime
 kind: example
 title: "Harmonic forcing gives an exact error criterion for reduction of order"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics
@@ -32,6 +32,12 @@ provenance:
 physical_scope: "An exact harmonic-forcing calculation for the adopted prescribed-force ODE. It quantifies the model's absolute phasor-amplitude error for first-order reduction of order and shows that a fixed small tolerance requires small $|\\omega\\tau|$. It is not an empirical frequency-response measurement or a validation of a self-consistent radiation-reaction law."
 verification:
   precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 sources:
   references:
     - title: "Fritz Rohrlich, The Dynamics of a Charged Particle, arXiv:0804.4614 (complete 11-page full-text paper)"

@@ -1,7 +1,7 @@
 ---
 page: gr-fx04-asymptotic-ends-and-adm
 title: "Asymptotic ends and ADM surface integrals"
-status: draft
+status: published
 library: physics
 requires:
   - gr-fx01-hypersurface-and-null-geometry

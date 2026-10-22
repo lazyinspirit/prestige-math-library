@@ -1,7 +1,7 @@
 ---
 page: nrqmx-exchange-representations
 title: Exchange symmetry, Schur–Weyl and Temperley–Lieb spin algebra
-status: draft
+status: published
 library: mathematics
 items:
   - def-nrqmx-spin-half-tensor-chain

@@ -1,5 +1,0 @@
-// Read completed native reports only; classifications are reported, not gate acceptance.
-import {readFileSync,existsSync} from 'node:fs';
-const r='physics-non-fluid-129-2026-10-21-r2',state=JSON.parse(readFileSync(`.physics-autopilot/${r}/state.json`)),outcomes={},uncertain=[],created=[],reports=[];
-for(const v of Object.values(state.dispatches)){if(v.stage!==state.stage||!['alpha-adjudicate','alpha-repair'].includes(v.role)||!v.endedAt||v.lastExitOk!==true)continue;const p=`research/${r}-step5-v2/${v.label}.json`;if(!existsSync(p))continue;const d=JSON.parse(readFileSync(p));reports.push(v.label);for(const x of d.decisions??[])outcomes[x.outcome??'unknown']=(outcomes[x.outcome??'unknown']??0)+1;for(const x of [...(d.decisions??[]),...(d.reviews??[]),...(d.gate_resolutions??[])])if(x.uncertain===true)uncertain.push({report:p,id:x.id,reason:x.reason});for(const x of d.created_items??[])created.push(typeof x==='string'?x:x.id??x.item??'unnamed');}
-console.log(JSON.stringify({at:new Date().toISOString(),stage:state.stage,completed_substantive_reports:reports.length,reported_outcomes:outcomes,reported_uncertainties:uncertain,reported_created_ids:created}));

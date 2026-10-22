@@ -2,7 +2,7 @@
 id: thm-qsmx-regular-bethe-eigenpair
 kind: theorem
 title: Regular Bethe data give transfer-family eigenpairs
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -32,10 +32,12 @@ sources:
       locator: "Sections 15.3–15.6, Lemma 15.5, Proposition 15.6, Lemma 15.8 and Theorem 15.7: reference state, exchange relations and eigenvalue formula."
 verification:
   precheck: pass
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: cex-qsmx-stationarity-without-relaxation
 kind: counterexample
 title: A two-level generator fixes many states
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -34,10 +34,12 @@ sources:
       url: https://ruizhezhang.com/teaching_2025/Lindblad_Notes.pdf
 verification:
   precheck: pass
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement refuted

@@ -2,7 +2,7 @@
 id: lem-qftx-photon-invariant-measure-isometry
 kind: lemma
 title: The mass-shell weighted transverse space matches the Lebesgue transverse space
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -31,11 +31,13 @@ sources:
       url: https://arxiv.org/pdf/2308.11147
       locator: Full 66-page PDF retrieved; §II, Eq. 14, p. 7 gives a Coulomb-gauge field expansion with the factor $1/\sqrt{2|\mathbf k|}$ and $d^3\mathbf k$; the later Hilbert-space discussion, Eqs. (173) and (185), PDF pp. 47 and 51, uses the Lorentz-invariant volume form $d^3\mathbf k/|\mathbf k|$. This is normalization context; the $d^3\mathbf k/(2|\mathbf k|)$ convention and the unitary map $W$ are proved here.
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

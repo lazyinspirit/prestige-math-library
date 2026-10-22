@@ -1,7 +1,7 @@
 ---
 page: nrqmx-form-spectral-methods-examples
 title: Semibounded forms, variational spectra and Birman–Schwinger — Examples
-status: draft
+status: published
 library: mathematics
 requires:
   - nrqmx-form-spectral-methods

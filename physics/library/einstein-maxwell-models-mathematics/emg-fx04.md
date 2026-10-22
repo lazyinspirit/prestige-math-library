@@ -1,7 +1,7 @@
 ---
 page: emg-fx04
 title: Charged photon trapping and extremal scaling
-status: draft
+status: published
 library: mathematics
 requires:
   - emg-ms02

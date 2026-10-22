@@ -2,7 +2,7 @@
 id: thm-qftx-kz-flatness
 kind: theorem
 title: "Infinitesimal braid identities imply KZ flatness and braid monodromy"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 dependency_level: 1
@@ -47,11 +47,13 @@ sources:
       url: "https://djvu.online/file/elCdJNnaapAuA"
       locator: "Lecture 3, §3.5, printed pp. 36–37, Theorem 3.5.1; Lecture 8, §8.1, printed pp. 113–115: KZ flatness, local-system monodromy, and equal-module braid action."
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

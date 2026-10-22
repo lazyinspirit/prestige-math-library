@@ -1,7 +1,7 @@
 ---
 page: qftx-categorified-line-operators
 title: "Categorified braid lines, grading and decategorification"
-status: draft
+status: published
 library: mathematics
 items:
   - def-qftx-categorified-line-model

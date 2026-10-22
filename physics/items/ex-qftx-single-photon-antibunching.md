@@ -4,7 +4,7 @@ kind: example
 domain: physics
 library: physics
 title: "One-photon wavepacket has zero ideal same-mode factorial correlation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 dependency_level: 5
@@ -28,11 +28,13 @@ sources:
       url: "https://journals.aps.org/pr/pdf/10.1103/PhysRev.130.2529"
       locator: "§II equations (2.16)–(2.18), printed pp. 2531–2532, for the normal-ordered two-count correlation that vanishes when fewer than two photons are available."
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Example

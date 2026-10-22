@@ -1,7 +1,7 @@
 ---
 page: qftx-anomaly-cocycles
 title: Current-algebra cocycles and conditional chiral anomaly cancellation
-status: draft
+status: published
 library: mathematics
 items:
   - def-qftx-loop-current-cocycle

@@ -1,7 +1,7 @@
 ---
 page: nrqmx-floquet-control-examples
 title: Periodic finite dynamics, quasienergy and controlled truncation — Examples
-status: draft
+status: published
 library: mathematics
 requires:
   - nrqmx-floquet-control

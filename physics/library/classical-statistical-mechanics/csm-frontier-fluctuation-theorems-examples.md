@@ -1,7 +1,7 @@
 ---
 page: csm-frontier-fluctuation-theorems-examples
 title: Path entropy production, fluctuation symmetry and work identities — Examples
-status: draft
+status: published
 library: physics
 requires:
   - csm-frontier-fluctuation-theorems

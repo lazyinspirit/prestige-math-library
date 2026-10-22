@@ -1,7 +1,7 @@
 ---
 page: csm-frontier-probability-interfaces
 title: "Local topology, entropy compactness and path-space estimates"
-status: draft
+status: published
 items:
   - def-csm-frontier-local-topologies
   - def-csm-frontier-vague-topology

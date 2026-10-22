@@ -2,7 +2,7 @@
 id: def-csm-frontier-stationary-path-entropy
 kind: definition
 title: Stationary path entropy for a finite-state jump process
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -31,6 +31,13 @@ sources:
     - title: Joel L. Lebowitz and Herbert Spohn, A Gallavotti-Cohen Type Symmetry in the Large Deviation Functional for Stochastic Dynamics
       url: https://arxiv.org/pdf/cond-mat/9811220
       locator: Sections 2.1–2.2, PDF pp. 3–7, the finite-state jump action and stationary time reversal.
+verification:
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Definition

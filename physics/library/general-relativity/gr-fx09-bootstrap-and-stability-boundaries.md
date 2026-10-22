@@ -1,7 +1,7 @@
 ---
 page: gr-fx09-bootstrap-and-stability-boundaries
 title: "Bootstrap closure and nonlinear stability boundaries"
-status: draft
+status: published
 library: physics
 requires:
   - gr-fx03-geometric-cauchy-stability

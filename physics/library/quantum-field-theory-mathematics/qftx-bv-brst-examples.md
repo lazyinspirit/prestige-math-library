@@ -1,7 +1,7 @@
 ---
 page: qftx-bv-brst-examples
 title: Off-shell gauge complexes, BRST doublets and anomaly obstructions — Examples
-status: draft
+status: published
 library: mathematics
 items: []
 examples:

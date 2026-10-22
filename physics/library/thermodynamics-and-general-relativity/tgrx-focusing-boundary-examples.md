@@ -1,7 +1,7 @@
 ---
 page: tgrx-focusing-boundary-examples
 title: Linearized focusing and quantum entropy inequalities — Examples
-status: draft
+status: published
 library: physics
 requires:
   - tgrx-focusing-boundary

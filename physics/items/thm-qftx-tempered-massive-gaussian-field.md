@@ -4,7 +4,7 @@ kind: theorem
 domain: mathematics
 library: mathematics
 title: A massive Euclidean Gaussian generalized field exists
-status: draft
+status: published
 origin: pipeline
 dependency_level: 1
 deps:
@@ -64,10 +64,12 @@ sources:
       locator: "Chapter 14: Theorem 14.7, printed p.382, gives Gaussian-regularized L1 Fourier inversion; Lemma 14.9, printed p.383, gives the L2 norm identity when f and its transform are L1; Theorem 14.10, printed p.383, gives the unitary L2 extension. The source uses symmetric Fourier normalization; the proof below uses the explicitly stated 2pi convention."
 verification:
   precheck: pass
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

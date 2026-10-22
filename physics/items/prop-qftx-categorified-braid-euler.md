@@ -2,7 +2,7 @@
 id: prop-qftx-categorified-braid-euler
 kind: proposition
 title: "The exact grading shift survives braid decategorification"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 dependency_level: 1
@@ -41,11 +41,13 @@ sources:
       url: "https://arxiv.org/pdf/math/0409593"
       locator: "§§3.2.1–3.3.2, arXiv pp. 6–11; the exact $v$-normalization is taken from the inspected local proposition cited in [F1]"
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

@@ -1,7 +1,7 @@
 ---
 page: qftx-scale-cocycles-examples
 title: Scale cocycles, finite scheme changes and controlled RG equations — Examples
-status: draft
+status: published
 library: mathematics
 items: []
 examples:

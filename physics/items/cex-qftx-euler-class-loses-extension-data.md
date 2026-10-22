@@ -2,7 +2,7 @@
 id: cex-qftx-euler-class-loses-extension-data
 kind: counterexample
 title: "A vanishing Euler class does not imply contractibility of a Soergel complex"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 dependency_level: 1
@@ -32,11 +32,13 @@ sources:
       url: "https://arxiv.org/pdf/2108.10356"
       locator: "§3.1, the homotopy category of bounded Soergel complexes and Rouquier complexes, printed pp. 544–545"
 verification:
-  precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement refuted

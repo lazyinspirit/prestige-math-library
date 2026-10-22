@@ -1,7 +1,7 @@
 ---
 page: qsmx-temperley-lieb-models
 title: "Temperley–Lieb, Hecke normalization and quantum Potts chains"
-status: draft
+status: published
 library: physics
 requires:
   - qsm-interacting-exact-models

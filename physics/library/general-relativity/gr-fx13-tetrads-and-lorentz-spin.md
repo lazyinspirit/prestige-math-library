@@ -1,7 +1,7 @@
 ---
 page: gr-fx13-tetrads-and-lorentz-spin
 title: Tetrads, Lorentz connections and spin interfaces
-status: draft
+status: published
 library: physics
 items:
   - def-gr-fx-tetrad-spin-connection

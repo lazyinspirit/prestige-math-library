@@ -2,7 +2,7 @@
 id: ex-gr-fx02-2
 kind: example
 title: "A flat-torus zero mode defeats uniqueness and coercivity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-non-fluid-129-2026-10-21-r2
 domain: mathematics
@@ -35,10 +35,12 @@ sources:
       locator: "Full 34-page review chapter retrieved; complete relevant §4.1 inspected, including equations (47)–(56) and the warning that not all free data are solvable."
 verification:
   precheck: pass
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/physics-non-fluid-129-2026-10-21-r2-publication.json.
+    delegated_by: owner
 ---
 
 ## Example

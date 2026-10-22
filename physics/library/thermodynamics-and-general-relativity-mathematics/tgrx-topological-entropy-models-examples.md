@@ -1,7 +1,7 @@
 ---
 page: tgrx-topological-entropy-models-examples
 title: Topological boundary state counts without universal gravity claims — Examples
-status: draft
+status: published
 library: mathematics
 requires:
   - tgrx-topological-entropy-models

@@ -1,7 +1,7 @@
 ---
 page: gr-fx11-numerical-geometry-and-constraint-monitoring-examples
 title: "Numerical geometry and constraint monitoring — Examples"
-status: draft
+status: published
 library: physics
 requires:
   - gr-fx11-numerical-geometry-and-constraint-monitoring
