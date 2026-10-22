@@ -70,3 +70,6 @@ node --test tools/step5-pnp-classification-migration.test.mjs tools/step5-pnp-cl
 node --test tools/step5-pnp-classification-lifecycle.test.mjs
 node --test tools/step5-original-slot-reclassification.test.mjs tools/step6-original-slot-integration.test.mjs
 ```
+
+An already frozen handoff may retain the original live merged-contract path with the exact root-migration preimage hash. New collection evidence materializes only that authenticated PnP preimage as its immutable receipt-bound before archive, without rewriting the saved input pack or collection. It rejects unknown hashes, changed archives and conflicting pins. Newly collected global merged-contract supporting evidence is archived just like batch metadata. This preserves historical evidence only; ordinary current contract checks, native current reviews, certification, Sol and gates remain required.
+The bounded inherited-reference recovery also requires the live merged file to remain exactly the reviewed migration endpoint when it first materializes that old pin. Subsequent collection and certificate evidence carry only immutable history, so later ordinary deterministic merged-contract rebuilds do not need that initial endpoint to remain current. Saved source receipts retain their original bytes; they are never relabeled as current metadata review.

@@ -7,9 +7,10 @@ import {runScope} from './step6-lib.mjs';
 import {scopedReadinessTree} from './step6-scoped-tree.mjs';
 import {preflightStep6} from './step6-commit.mjs';
 import {createHash} from 'node:crypto';
+import {fileURLToPath} from 'node:url';
 import {createOriginalSlotFixture} from './step5-original-slot-reclassification.test.mjs';
 import {createPnpMigrationFixture} from './step5-pnp-classification-migration.test.mjs';
-import {collect,prepareImpact,prepareAdjudication,closeEmptyAdjudication,certify,judge,verifyCertification,reviewContextHashes} from './step5-workflow.mjs';
+import {collect,prepareImpact,prepareAdjudication,closeEmptyAdjudication,certify,judge,verifyCertification,verifyWave,reviewContextHashes} from './step5-workflow.mjs';
 import {PNP_RUN as run,PNP_OLD as old,PNP_CURRENT as current,PNP_CONSUMERS as consumers,pnpSourceCandidate,recordPnpClassificationMigration,loadPnpClassificationMigration,licensedPnpReplacement} from './step5-pnp-classification-migration.mjs';
 import {projectedOriginalIds} from './step5-original-slot-reclassification.mjs';
 import {itemHashGuard,itemHashJudge} from './item-hash.mjs';
@@ -29,6 +30,7 @@ test('composed originalslot lifecycle preserves original1472/109/344/331/36/679 
   put(root,reportPath,report);const role=adjudicate?'alpha-adjudicate':'alpha-repair',base=`research/${run}-dispatch/${role}-${label}`,receipt={run,role,label,covers:[unit],ok:true,model:'gpt-6.1-sol',provider_effort:'high',attempt:1,evidence_tag:'.attempt-1',started_at:'2026-10-21T22:00:00Z',ended_at:'2026-10-21T22:01:00Z',exit_code:0,process_exit_code:0,timed_out:false,prompt:join(root,base+'.attempt-1.prompt.md'),log:join(root,base+'.attempt-1.log'),terminal_summary:{task_completed:true,task_aborted:false,final_response_present:true,error_events:0}};
   put(root,base+'.result.json',receipt);put(root,base+'.attempt-1.result.json',receipt);writeFileSync(receipt.prompt,`run: ${run}\noutput: ${reportPath}\nunit:"${unit}" input_sha256:"${sha(pack)}"\n`);writeFileSync(receipt.log,`native routing fixture\ncodex\n${JSON.stringify(report)}\ntokens used\n1000\n`);return {stage:'5.5-adjudicate',role,label,covers:[unit],attempt:1,startedAt:receipt.started_at,endedAt:receipt.ended_at,lastExitOk:true};
  };
+ const cwd=process.cwd();process.chdir(root);
  try{
   f.install();collect(root,run,'initial',1);const first=prepareImpact(root,run,'impact-initial',1);for(const unit of first.units)native(first,unit);
   const prior=certify(root,run,'impact-initial',1,{contextHasher});assert.equal(prior.items.length,679);assert.equal(prior.changed.length,331);
@@ -41,16 +43,28 @@ test('composed originalslot lifecycle preserves original1472/109/344/331/36/679 
   for(const id of consumers){const a=readFileSync(join(root,`items/${id}.md`),'utf8');add(`items/${id}.md`,a,a.replaceAll(old,current));}
   add(`library/inverse-problems/${home}.md`,`---\npage: ${home}\nitems: [${old}, ${consumers.join(', ')}]\n---\n`,`---\npage: ${home}\nitems: [${current}, ${consumers.join(', ')}]\n---\n`);
   add(`research/${run}-batch-49.pages.json`,[{id:home,category:'inverse-problems',items:[{id:old,kind:'definition'},...consumers.map(id=>({id,kind:'example',deps:[old]}))]}],[{id:home,category:'inverse-problems',items:[{id:current,kind:'algorithm'},...consumers.map(id=>({id,kind:'example',deps:[current]}))]}]);
-  add(`research/${run}-batch-49.proof-contracts.json`,{scope:[old],contracts:{[old]:{}}},{scope:[current],contracts:{[current]:{}}});
+  add(`research/${run}-batch-49.proof-contracts.json`,{version:1,scope:[old],contracts:{[old]:{}}},{version:1,scope:[current],contracts:{[current]:{}}});
   for(const path of [`research/${run}-proof-contracts.json`,'research/plan-spec.json']){const a=get(root,path);if(path.endsWith('plan-spec.json'))a.pages.push({id:home,items:[{id:old,kind:'definition'}]});else {a.scope.push(old);a.contracts[old]={};}const b=JSON.parse(JSON.stringify(a).replaceAll(old,current));if(path.endsWith('plan-spec.json'))b.pages.find(p=>p.id===home).items[0].kind='algorithm';add(path,a,b);}
+  // Real u95-style native support includes the GLOBAL merged carrier.
+  const merged=`research/${run}-proof-contracts.json`,supportGlobal=get(root,`${d}/step5-v2-repeat-r1-u49.json`);
+  supportGlobal.supporting_evidence={[join(root,merged)]:sha(readFileSync(join(root,merged),'utf8'))};put(root,`${d}/step5-v2-repeat-r1-u49.json`,supportGlobal);
   const report=get(root,`${d}/step5-v2-repeat-r1-u49.json`),math='research/pnp-math.json',review='research/pnp-acceptance.json';put(root,math,{run,native_credit_claimed:false,new_prerequisites:[],native49_binding:{outcome:'confirmed_nonfatal',raw_sha256:sha(readFileSync(join(root,d,'step5-v2-repeat-r1-u49.json'),'utf8'))},classification:{minimal_migration:{old_id:old,new_id:current}},consumer_inventory:{current_direct:consumers}});
   put(root,review,{accepted:true,reviewer_identity:'/root/independent',current_review_granted:false,native_execution_coverage_adopted:false,before_source_sha256:sha(before),after_source_sha256:sha(after),carrier_bindings:carriers.map(c=>({path:c.path,before_sha256:sha(readFileSync(join(root,c.before_file),'utf8')),after_sha256:sha(readFileSync(join(root,c.current_file),'utf8'))}))});
   const request={version:1,kind:'owner-pnp-classification-migration',run,owner_identity:'/root',repairer_identity:'/root',original_id:old,current_id:current,batch:'49',home_page:home,current_review_granted:false,native_execution_coverage_adopted:false,historical_only:true,original_outcome:'confirmed_nonfatal',entry,carriers,root_math_review:math,independent_review:review,consumer_ids:consumers};put(root,'research/pnp-request.json',request);
   const historical=readFileSync(join(root,d,'certification-impact-initial-1.json'),'utf8');rmSync(join(root,`items/${old}.md`));put(root,`items/${current}.md`,after);for(const c of carriers)put(root,c.path,readFileSync(join(root,c.current_file),'utf8'));recordPnpClassificationMigration(root,run,'research/pnp-request.json');
   assert.equal(projectedOriginalIds(root,run,f.frontier.ids).length,1472);assert.equal(licensedPnpReplacement(root,run,old,current,prior),false);
   const result=collect(root,run,'repeat',1);assert.equal(result.decisions.length,36);assert.equal(result.decisions.find(r=>r.id===old).outcome,'confirmed_nonfatal');assert.equal(result.reviews.some(r=>r.id===old||r.id===current),false);assert.equal(result.historical_pnp_classification_reviews[0].post_sha256,report.reviews[0].post_sha256);
+  assert.equal(Object.hasOwn(result.evidence,merged),false,'new collections freeze global support');
+  const oldMergedHash=sha(readFileSync(join(root,carriers.find(c=>c.path===merged).before_file),'utf8'));
+  // Preserve a pre-fix frozen receipt exactly, including its historical live pin.
+  const legacy={...result,evidence:{...result.evidence,[merged]:oldMergedHash}};put(root,`${d}/repeat-1-collected.json`,legacy);
+  const frozenLegacy=readFileSync(join(root,d,'repeat-1-collected.json'),'utf8');
   const pack=prepareImpact(root,run,'impact-repeat',1),lane=pack.units.find(u=>pack.assignments[u].includes(current));assert.ok([current,...consumers].every(id=>pack.assignments[lane].includes(id)));for(const unit of pack.units)native(pack,unit);
-  const cert=certify(root,run,'impact-repeat',1,{contextHasher});assert.ok(licensedPnpReplacement(root,run,old,current,cert));assert.ok(cert.items.some(r=>r.id==='ex-ip-exact-adaptive-credible-coverage-by-posterior-null-deletion'));assert.ok(!cert.items.some(r=>r.id===old));verifyCertification(root,run,{current:true});assert.equal(readFileSync(join(root,d,'certification-impact-initial-1.json'),'utf8'),historical);
+  assert.equal(pack.input_evidence[merged],oldMergedHash);const frozenPack=readFileSync(join(root,d,'impact-repeat-1.json'),'utf8');
+  const cert=certify(root,run,'impact-repeat',1,{contextHasher});assert.equal(readFileSync(join(root,d,'repeat-1-collected.json'),'utf8'),frozenLegacy);assert.equal(readFileSync(join(root,d,'impact-repeat-1.json'),'utf8'),frozenPack);assert.equal(Object.hasOwn(cert.evidence,merged),false);assert.ok(licensedPnpReplacement(root,run,old,current,cert));assert.ok(cert.items.some(r=>r.id==='ex-ip-exact-adaptive-credible-coverage-by-posterior-null-deletion'));assert.ok(!cert.items.some(r=>r.id===old));verifyCertification(root,run,{current:true});const cachedCert=certify(root,run,'impact-repeat',1,{contextHasher});assert.equal(cachedCert.sha256,cert.sha256);assert.equal(Object.hasOwn(get(root,`${d}/impact-repeat-1-collected.json`).evidence,merged),false);assert.equal(Object.hasOwn(get(root,`${d}/impact-repeat-1-closed.json`).evidence,merged),false);assert.equal(readFileSync(join(root,d,'certification-impact-initial-1.json'),'utf8'),historical);
+  // Run the real deterministic merger over the two fixture-native batch carriers.
+  const mergedBefore=readFileSync(join(root,merged),'utf8');execFileSync(process.execPath,[fileURLToPath(new URL('./merge-proof-contracts.mjs',import.meta.url)),'--level',run,merged,`research/${run}-batch-21.proof-contracts.json`,`research/${run}-batch-49.proof-contracts.json`],{cwd:root});assert.notEqual(readFileSync(join(root,merged),'utf8'),mergedBefore);
+  assert.equal(verifyCertification(root,run,{current:true}).sha256,cert.sha256);assert.equal(verifyWave(root,run,{contextHasher}).sha256,cert.sha256);assert.equal(certify(root,run,'impact-repeat',1,{contextHasher}).sha256,cert.sha256);assert.deepEqual(collect(root,run,'impact-repeat',1).errors,[]);assert.equal(readFileSync(join(root,d,'repeat-1-collected.json'),'utf8'),frozenLegacy);assert.equal(readFileSync(join(root,d,'impact-repeat-1.json'),'utf8'),frozenPack);
   assert.throws(()=>judge(root,run,1,{contextHasher}),/pre-migration|certification/);
   const second=judge(root,run,2,{contextHasher,runSweep:({ids,ledger})=>{writeFileSync(ledger,readFileSync(ledger,'utf8')+ids.map(id=>JSON.stringify({id,model:'gpt-6.1-sol',keep:true,...contextHasher(root,[id]).get(id)})).join('\n')+'\n');return {status:0};}});assert.ok(second.verdicts.some(r=>r.id===current));
   const h=loadPnpClassificationMigration(root,run,{current:true});assert.equal(h.targets.length,5);
@@ -63,5 +77,5 @@ test('composed originalslot lifecycle preserves original1472/109/344/331/36/679 
   const tree=scopedReadinessTree(run,root,{scope,includeRows:true,ownedPaths:owned});assert.ok(tree.protected_tree_projections.includes(`items/${old}.md#original-slot-deletion`));assert.ok(tree.protected_tree_projections.includes(`items/${oldExample}.md#original-slot-deletion`));
   assert.ok(preflightStep6(root,run).localPaths.includes(`items/${old}.md`));git('update-index','--cacheinfo',`100644,${object('unlicensed old source')},items/${old}.md`);assert.throws(()=>preflightStep6(root,run),/Git preimage/);
 
- }finally{f.cleanup();}
+ }finally{process.chdir(cwd);f.cleanup();}
 });

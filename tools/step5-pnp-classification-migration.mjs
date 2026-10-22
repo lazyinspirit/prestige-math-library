@@ -137,6 +137,20 @@ function validate(root,run,row,{current=false,virtual=new Map(),receiptBytes=nul
 export function loadPnpClassificationMigration(root,run,{current=false}={}){const path=pnpClassificationMigrationPath(root,run);if(!existsSync(path))return null;const bytes=readFileSync(path,'utf8');return validate(root,run,JSON.parse(bytes),{current,receiptBytes:bytes});}
 export function projectPnpOriginalIds(root,run,ids){const h=loadPnpClassificationMigration(root,run,{current:true});if(!h)return [...ids];const normalized=list=>list.map(id=>id==='op-ip-honest-coverage-over-ill-posed-truth-classes'?'ex-ip-exact-adaptive-credible-coverage-by-posterior-null-deletion':id).sort();need(ids.length===1472&&same(normalized(ids),normalized(h.frontier.ids))&&ids.includes(PNP_OLD)&&!ids.includes(PNP_CURRENT),'projection requires exact original slots');const result=ids.map(id=>id===PNP_OLD?PNP_CURRENT:id);need(new Set(result).size===1472,'nonbijective projection');return result;}
 export function supportingPnpClassificationHistory(context,path,expected){if(!context?.root||!context?.run)return null;const h=loadPnpClassificationMigration(context.root,context.run);if(!h)return null;const c=h.metadata.get(relative(resolve(context.root),resolve(context.root,path)));if(c&&sha(readFileSync(resolve(context.root,c.before_file),'utf8'))===expected)return {archive:resolve(context.root,c.before_file),marker:h.path,evidence:h.evidence};return null;}
+// Recover only the exact root-migration preimage inherited by an already
+// frozen handoff. The returned archive remains historical, never current review.
+export function materializePnpMergedHistoricalEvidence(root,run,input){
+ const evidence={...input},path=`research/${PNP_RUN}-proof-contracts.json`;
+ if(run!==PNP_RUN||!Object.hasOwn(evidence,path)||sha(readFileSync(resolve(root,path),'utf8'))===evidence[path])return evidence;
+ const h=loadPnpClassificationMigration(root,run),carrier=h?.metadata.get(path);
+ need(carrier&&sha(readFileSync(resolve(root,carrier.before_file),'utf8'))===evidence[path],'unlicensed inherited merged-contract preimage');
+ const history={archive:resolve(root,carrier.before_file),marker:h.path,evidence:h.evidence};
+ need(sha(readFileSync(resolve(root,path),'utf8'))===sha(readFileSync(resolve(root,carrier.current_file),'utf8')),'inherited merged-contract current endpoint changed');
+ const frozen={...history.evidence,[history.archive]:evidence[path]};
+ delete evidence[path];
+ for(const [p,h]of Object.entries(frozen)){need(!Object.hasOwn(evidence,p)||evidence[p]===h,'inherited merged-contract evidence collision');evidence[p]=h;}
+ return evidence;
+}
 export function isPnpClassificationMigration(h,pack,now){return authenticated.has(h)&&same(h.pack,pack)&&!Object.hasOwn(now,PNP_OLD)&&now[PNP_CURRENT]===h.after_guard;}
 export function pnpHistoricalCertificate(h,certificate){return authenticated.has(h)&&same(h.prior_certificate,certificate);}
 function currentReviewMatches(root,review){

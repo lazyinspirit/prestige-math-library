@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import {loadPnpClassificationMigration,isPnpClassificationMigration,supportingPnpClassificationHistory,pnpHistoricalCertificate,pnpCurrentNativeReviews,PNP_OLD,PNP_CURRENT} from './step5-pnp-classification-migration.mjs';
+import {loadPnpClassificationMigration,isPnpClassificationMigration,supportingPnpClassificationHistory,materializePnpMergedHistoricalEvidence,pnpHistoricalCertificate,pnpCurrentNativeReviews,PNP_OLD,PNP_CURRENT,PNP_RUN} from './step5-pnp-classification-migration.mjs';
 import {loadSuccessorUncertaintyContinuation,successorSchedulingView} from './step5-successor-uncertainty-continuation.mjs';
 import {loadUnit3NeedleCompletion,completedNeedleReport,completedNeedleReportView,NEEDLE_ID,NEEDLE_LABEL} from './step5-unit3-needle-completion.mjs';
 // Round-based Step 5. Mathematical workers write evidence; only the controller
@@ -325,8 +325,9 @@ function frozenSupportingEvidence(root,run,supporting) {
     requireValue(evidenceFileDigest(path)===hash||!gateAggregationEvidenceReference({root,run},path,hash),
       `supporting metadata preimage unavailable: ${path}`);
     // Keep ordinary immutable evidence at its original path. Only batch
-    // metadata and shared ledgers need durable historical carriers.
+    // metadata, the merged contract carrier and shared ledgers need durable historical carriers.
     if(!new RegExp(`^${run}-batch-\\d+\\.(?:pages|proof-contracts)\\.json$`).test(basename(path))
+      && !(run===PNP_RUN&&resolve(root,path)===resolve(root,`research/${run}-proof-contracts.json`))
       && !['research/defect-ledger.jsonl','research/DEFECT-LEDGER.md','research/published-consumer-supplier-ledger.md'].includes(path)){
       evidence[path]=hash;continue;
     }
@@ -1421,7 +1422,7 @@ export function collect(root,run,phase,round,{deferImpactClosure=false}={}) {
   const result=validateReports(pack,reports,reported,{root,ownerSupplement,currentRepairs,operationalSupplement,supplierRepairs,publishedMaintenance,reclassification,factAlertRepairs,classificationMigration});
   if(result.errors.length)throw Error(result.errors.join('\n'));
   if(classificationMigration)result.changed=[...new Set([...result.changed,...classificationMigration.targets])];
-  const evidence={...(pack.input_evidence??{}),[packPath(root,run,phase,round)]:digest(readFileSync(packPath(root,run,phase,round),'utf8'))};
+  const evidence={...materializePnpMergedHistoricalEvidence(root,run,pack.input_evidence??{}),[packPath(root,run,phase,round)]:digest(readFileSync(packPath(root,run,phase,round),'utf8'))};
   if(needleCompletion)Object.assign(evidence,completedNeedleReport(needleCompletion,{current:true}).evidence);
   Object.assign(evidence,ownerSupplement?.evidence??{},currentRepairs?.evidence??{},operationalSupplement?.evidence??{},supplierRepairs?.evidence??{},metadataHistory?.evidence??{},publishedMaintenance?.evidence??{},reclassification?.evidence??{},classificationMigration?.evidence??{});
   for(const [p,h]of Object.entries(withdrawal?.evidence??{})){requireValue(!evidence[p]||evidence[p]===h,'withdrawal evidence collision');evidence[p]=h;}
@@ -2512,7 +2513,7 @@ export function certify(root,run,phase,round,{contextHasher=currentHashesMany}={
   if(diff(rawBefore,rawHashes(root,run)).some(id=>stable.has(id)))throw Error('relevant item writer overlapped certification');
   const aggregation=phase==='gate'?loadGateAggregationHistory(root,run):null;
   const stagedAggregation=aggregation&&round>=2?stageCertifiedContractAggregation(root,run,round,prior):null;
-  const evidence={...(prior?.evidence??{}),...(sourceResult?.evidence??{}),...result.evidence,...maintenance.evidence,...publishedBaseline?.evidence,...aggregation?.evidence,...stagedAggregation?.evidence};
+  const evidence={...(prior?.evidence??{}),...materializePnpMergedHistoricalEvidence(root,run,sourceResult?.evidence??{}),...result.evidence,...maintenance.evidence,...publishedBaseline?.evidence,...aggregation?.evidence,...stagedAggregation?.evidence};
   if(aggregation)evidence[resolve(root,aggregation.cache)]=stagedAggregation?.record.after.sha256??digest(readFileSync(resolve(root,aggregation.cache),'utf8'));
   // Retain the original relative pin as historical evidence; the new exact
   // current cache pin and immutable transition are separately bound above.
