@@ -31,7 +31,7 @@ import { verifyInitialPublishedBaselineExclusions } from './step5-initial-publis
 import { step5JudgePolicy } from './step5-judge-policy.mjs';
 import { adjudicationTypeResolver } from './step5-adjudication-compat.mjs';
 import { isPublishedItem } from './published-repair-policy.mjs';
-import { parseFrontmatter, nested } from './content-policy-lib.mjs';
+import { parseFrontmatter, nested, reviewedLocalLemmaAcceptance } from './content-policy-lib.mjs';
 
 const REPO = join(fileURLToPath(new URL('.', import.meta.url)), '..');
 const argv = process.argv.slice(2);
@@ -158,6 +158,7 @@ for (const file of readdirSync(join(REPO, 'items')).sort()) {
     id,
     file: `items/${file}`,
     body,
+    metadata,
     frontmatterError,
     provenance: {
       statement: nested(metadata, 'provenance', 'statement'),
@@ -219,6 +220,18 @@ if (judgeTargetsPath) {
   }
 }
 if (excludePublished && !selectiveStep5Run) judgeScope = judgeScope.filter((id) => !isPublishedItem(REPO, id));
+// Reuse the exact root-owned eight-lemma preservation policy. This changes
+// dependency eligibility only; it grants no provenance, review or judge credit.
+const localAcceptance = new Map();
+function acceptedLocalLemma(item) {
+  if (!localAcceptance.has(item.id)) {
+    const result = reviewedLocalLemmaAcceptance(item.metadata, item.body, REPO);
+    localAcceptance.set(item.id, result.eligible);
+    for (const message of result.errors)
+      error('local-proof-acceptance-invalid', `${item.file}: ${message}`, item.id);
+  }
+  return localAcceptance.get(item.id);
+}
 for (const id of scope) {
   const item = items.get(resolve(id) ?? id);
   if (!item) error('scope-item-missing', `${id} is declared by a batch but has no item file`, id);
@@ -235,10 +248,10 @@ for (const id of scope) {
     // A final independent backstop for the future-scope policy: a dependency
     // consumes the target's claim, not its proof. Therefore an AI-generated
     // proof is immaterial here, but an AI-generated Statement/Construction is
-    // never eligible as a deps target.
+    // eligible as a deps target only under the exact reviewed-local policy.
     for (const raw of item.deps) {
       const target = items.get(resolve(raw) ?? raw);
-      if (target?.provenance.statement === 'ai-generated') {
+      if (target?.provenance.statement === 'ai-generated' && !acceptedLocalLemma(target)) {
         const report = auditMode ? warn : error;
         report(
           'ai-generated-statement-dependency',

@@ -382,3 +382,11 @@ Existing mixed-case IDs remain exact filenames and manifest identities; no
 normalization, alias inference, or scope widening occurs. All ownership,
 manifest/page agreement, input/dependency fingerprints and coverage checks remain
 required. The independent physics receipt helper is unchanged.
+
+Level coverage applies the same `reviewedLocalLemmaAcceptance` helper as content
+policy and proof contracts to AI-generated statement dependency targets. Only
+the exact eight root-preserved local lemmas qualify, with unchanged run, role,
+root decision, evidence existence and exact accepted body binding. Invalid
+requested acceptance remains an error; ordinary generated statements retain
+the dependency prohibition (and the existing legacy audit warning policy).
+This adapter adds no source attribution, proof review, judgment or gate credit.
