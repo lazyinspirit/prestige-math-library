@@ -59,6 +59,8 @@ Only the root source application deletes the old canonical file. The receipt nev
 
 Collection authenticates the exact migration before validating old physical reviews against their historical source guards. It preserves the real old decision/review, separately attributes root classification repair, excludes old review credit, and emits five mandatory current review targets. The native5.6 pack binds this receipt/collection and assigns the algorithm and four consumers together, in supplier-first order, to one actual owner lane. Later repairs still trigger ordinary context invalidation and continuation.
 
+Each receipt load hashes its freshly parsed native pack once and reuses that local digest for the report and prompt comparisons. All bound files, historical reports and current canonical identities are still read and checked on every load. This uses no global cache, cross-call cache, stat-only trust or reduced review coverage.
+
 New certification requires actual successful native owner reports, immutable attempt results, exact assignments, prompt/final logs, current guards and supplier-interface review contexts for all five subjects. The old679-row certificate is readable only as its exact historical input; current closure rejects it. The projected algorithm cannot be a creation. Current Sol judgment is mandatory; a pre-migration judge cache is rejected. Protected deletion, selective judge policy, frontier gates and Step6 source selection, ownership, sealed deletion preimages and Git preflight all recognize only this authenticated pair, alongside the unchanged batch21 pair. Other deletions, alias substitutions and arbitrary renames remain forbidden.
 
 Focused tests run against the reviewed integration candidate:
