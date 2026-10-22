@@ -425,6 +425,21 @@ intermediate historical parent validations and final validation, without project
 away those changes. Normal current-context closure, certification, rejudgment,
 owner recertification and complete gates remain required.
 
+An unchanged assigned consumer may retain `confirmed_nonfatal` after its exact
+citation defect is resolved by a supplier repair in the same native adjudication
+unit. The consumer review remains `unaffected` with `metadata_repair_only: true`.
+Collection requires the original frozen tuple and original native decision,
+review and exact consumer-use evidence, unique same-unit ownership, an actually
+changed direct logical supplier interface, that supplier's own confirmed
+adjudication and repaired current post hash, and current native review contexts
+for both carriers. The frozen objection must identify that supplier explicitly.
+A metadata flag alone, an unchanged fatal consumer, an unrelated or separately
+owned supplier, stale review or absent interface change grants no exception.
+Separately authenticated corrections to other subjects in the same unit may
+compose; target supplier/consumer rows still equal the original report. This
+route preserves the original reports, decisions and all ordinary source-change,
+contract, dispatch, downstream, certification and gate checks.
+
 The native Sol 6.1 high worker identity is independent of the Step-4 judge lineup.
 Coverage gates retain the singleton original Step-4 lineup bound by the frozen
 `step4-verdicts.json` and initial adjudication pack. Before Step 5 is frozen,
