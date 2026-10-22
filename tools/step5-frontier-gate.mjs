@@ -7,7 +7,7 @@ import { validateFrontier } from './step5-rounds.mjs';
 import { verifyCertification } from './step5-workflow.mjs';
 import { loadOriginalSlotReclassification, projectedOriginalIds, licensedOriginalSlotReplacement } from './step5-original-slot-reclassification.mjs';
 
-const ITEM = '(?:alg|def|lem|thm|prop|cor|ex|cex|fs|rem|op)-[a-z0-9]+(?:-[a-z0-9]+)*';
+const ITEM = '(?:alg|def|lem|thm|prop|cor|ex|cex|fs|rem|op)-[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*';
 const itemId = new RegExp(`^${ITEM}$`);
 const itemFile = new RegExp(`^(?:.*?/)?items/(${ITEM})\\.md:`);
 const native = new Set(['precheck', 'rendercheck', 'prosecheck']);
