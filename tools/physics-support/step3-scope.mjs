@@ -1388,10 +1388,59 @@ if (command === 'check') {
             && decision.causal_subject === prior.id
             && typeof decision.same_defect_evidence === 'string'
             && decision.same_defect_evidence.trim();
-          if (prior && !sharedFinding && !sharedCausalAddition) error('ledger-double-owned', `${defectId} is referenced by incompatible decisions`);
+          // A refuter may independently flag the reader-result carrier that
+          // the same-batch owner repairs. Retain both exact obligations for
+          // that one defect, without manufacturing a second ledger row.
+          const explicitShared = prior && [
+            [decision.same_defect_as, prior.obligation, decision.same_defect_evidence],
+            [prior.same_defect_as, decision.obligation, prior.same_defect_evidence],
+          ].some(([reference, obligation, evidence]) => reference === obligation
+            && typeof evidence === 'string' && evidence.trim().length >= 40);
+          const currentDecision = { ...decision, target };
+          const refuted = decision.route === 'flagged' ? currentDecision : prior?.route === 'flagged' ? prior : null;
+          const repairedDecision = refuted === currentDecision ? prior : currentDecision;
+          const refuterMatch = /^refuter:([1-9]\d*):([1-9]\d*)$/.exec(refuted?.obligation ?? '');
+          const pageRepair = repairedDecision?.route === 'page';
+          let sharedPostReaderRepair = false;
+          if (prior && prior.id === decision.id && explicitShared && refuterMatch
+            && ['confirmed_fatal', 'confirmed_nonfatal'].includes(refuted.verdict)
+            && ['touched', 'page'].includes(repairedDecision?.route)
+            && ['accepted_repair', 'amended_repair'].includes(repairedDecision.verdict)
+            && repairedDecision.repair_confidence === 1
+            && repairedDecision.target?.batch === refuterMatch[1]
+            && repairedDecision.obligation === `${pageRepair ? 'page' : 'touched'}:${refuterMatch[1]}:${decision.id}`) {
+            const refuterBatch = refuterMatch[1];
+            const actualScope = scopes[refuterBatch] ?? readJson(scopePath(refuterBatch), 'refuter scope');
+            const actualFinding = actualScope.refuter_findings?.find(row => row.obligation === refuted.obligation);
+            const { route: _route, ...findingTarget } = refuted.target ?? {};
+            const postReader = readJson(hashPath(refuterBatch, 'post'), 'post-reader snapshot');
+            const observed = pageRepair ? postReader.page_hashes?.[decision.id] : postReader.hashes?.[decision.id];
+            const typedCarrier = pageRepair
+              ? (actualScope.pages_touched ?? []).includes(decision.id)
+                && (actualScope.page_manifest_post ?? []).includes(decision.id)
+                && (postReader.page_manifest ?? []).includes(decision.id)
+                && observed && typeof observed === 'object'
+                && ['file_sha256', 'manifest_sha256']
+                  .every(key => /^[a-f0-9]{64}$/.test(observed[key] ?? ''))
+              : (postReader.manifest ?? []).includes(decision.id)
+                && ['item_sha256', 'contract_sha256', 'manifest_sha256']
+                  .every(key => /^[a-f0-9]{64}$/.test(observed?.[key] ?? ''));
+            sharedPostReaderRepair = actualScope.version === 2 && actualScope.run === run
+              && String(actualScope.batch) === refuterBatch
+              && actualFinding?.id === decision.id
+              && hashValue(actualFinding) === hashValue(findingTarget)
+              && hashSnapshotErrors(postReader, refuterBatch, 'post').length === 0
+              && typedCarrier
+              // Refuters use an unanchored page carrier, even when the page
+              // repair decision retains its separate item-order anchor.
+              && actualFinding.observed_sha256 === hashValue(pageRepair ? pageCarrier(observed) : observed);
+          }
+          if (prior && !sharedFinding && !sharedCausalAddition && !sharedPostReaderRepair) error('ledger-double-owned', `${defectId} is referenced by incompatible decisions`);
           if (!prior) referenced.set(defectId, {
             obligation: decision.obligation, id: decision.id, route: decision.route, verdict: decision.verdict, target,
             historical_delta_unknown: decision.historical_delta_unknown, owner_resolution: decision.owner_resolution,
+            same_defect_as: decision.same_defect_as, same_defect_evidence: decision.same_defect_evidence,
+            repair_confidence: decision.repair_confidence,
           });
           const row = mine.find((candidate) => candidate.defect_id === defectId);
           if (!row) { error('ledger-ref-missing', `[${decision.id}] ${decision.obligation} names absent ${defectId}`); continue; }

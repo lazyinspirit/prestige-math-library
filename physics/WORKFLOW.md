@@ -276,6 +276,31 @@ and carrier bindings, and guarded current source excerpts. All ordinary shared
 finding, ledger and current-content checks still apply. It does not rewrite
 observations, accept source content, or combine unrelated defects. Native owner
 recertification binds this receipt and its evidence inputs before the battery.
+A `same-page-carrier-classification` alias preserves different original labels
+or severities for one page finding. It binds both frozen reports and findings,
+the original page snapshot and matching raw archive, the current manifest-derived
+page path and excerpts, and a root-approved scientific classification receipt.
+Only this page route treats absent and null consumer fields alike; a different
+consumer still fails. Existing item aliases keep their original requirements.
+
+A same-batch touched or page repair may share its actual defect with a refuter
+of the frozen reader-result carrier. Both obligations remain explicit. Sharing
+requires an accepted or amended repair with confidence 1, a confirmed refuter
+finding, an exact original finding and typed post-reader snapshot, and an
+explicit same-defect reference with substantive evidence. Independent ledger,
+severity, current-content and application checks remain mandatory.
+
+One bounded refuter coverage correction may be authorized through
+`research/RUN-step3-refuter-continuations.json`. When the native receipt's
+40-line diagnostic clips the coverage headers, `original_last_message` can bind
+the exact prior positive-attempt native message file. Its parsed complete report
+must equal the immutable report archive; receipt identity, archive hashes and
+the diagnostic suffix still authenticate the original process. Current scope,
+task and subject guards are checked before the single fresh dispatch. This
+authenticates history only: fresh complete reads, collection, adjudication and
+the ordinary gates remain required. The original report and receipt are never
+rewritten to manufacture coverage.
+
 A later same-owner external-context refresh may be bound separately through
 `RUN-step3-historical-context-transition.json`. Its immutable Root receipt must
 bind genuine frozen/current decisions and context preimages, the exact owner
