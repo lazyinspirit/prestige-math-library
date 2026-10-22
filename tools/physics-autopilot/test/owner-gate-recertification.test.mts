@@ -39,6 +39,19 @@ function fixture(t: any) {
   }
   return { repo, config, ctx, gates, stages, args, receipt };
 }
+test('Step-3 observed-current authority and its immutable evidence are gate inputs', t => {
+  const f = fixture(t);
+  const archive = 'research/demo-observed-source.md';
+  writeFileSync(join(f.repo, archive), 'Actual archived source bytes.');
+  const authority = 'research/demo-step3-observed-current-history-1.json';
+  writeFileSync(join(f.repo, authority), JSON.stringify({ inputs: { [archive]: sha('Actual archived source bytes.') } }));
+  const gates = [{ id: 'routing', argv: ['node', 'tools/step3-scope.mjs', 'check', '--run', 'demo'] }];
+  const first = gateReviewSnapshot(f.ctx, gates, ['3a-split']);
+  assert.ok(first.inputs.some((row: any) => row.path.endsWith(authority)));
+  assert.ok(first.inputs.some((row: any) => row.path.endsWith(archive)));
+  writeFileSync(join(f.repo, archive), 'Changed evidence invalidates the owner snapshot.');
+  assert.notEqual(gateReviewSnapshot(f.ctx, gates, ['3a-split']).sha256, first.sha256);
+});
 test('missing receipt holds; ordered complete current owner receipt authorizes once', t => {
   const f = fixture(t);
   assert.equal(authorizeOwnerGate(f.args).ok, false);
