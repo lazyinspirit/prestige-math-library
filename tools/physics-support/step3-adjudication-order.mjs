@@ -8,7 +8,7 @@ export function prepareStep3AdjudicationOrder(root, run, group) {
   const ordered = orderedItems(runPages(root, run), { validateLabels: false });
   const owned = ordered.filter(row => batches.includes(row.batch));
   const byId = new Map(owned.map(row => [row.id, row]));
-  const routed = new Map(), otherWork = [];
+  const routed = new Map(), otherWork = [], downstreamWork = [];
   for (const batch of batches) {
     const path = join(root, 'research', `${run}-step3-scope-${batch}.json`);
     const scope = JSON.parse(readFileSync(path, 'utf8'));
@@ -25,7 +25,10 @@ export function prepareStep3AdjudicationOrder(root, run, group) {
     for (const id of scope.high_risk ?? []) add(id, 'risk review');
     for (const id of scope.pages_touched ?? []) add(id, 'page');
     if (scope.version === 3) for (const id of scope.pages ?? []) add(id, 'page');
-    for (const row of scope.reader_findings ?? []) add(row.id, row.obligation ?? 'reader');
+    for (const row of scope.reader_findings ?? []) {
+      add(row.id, row.obligation ?? 'reader');
+      if (row.downstream_handoff) downstreamWork.push(`${row.obligation}: ${row.id}, owner_batch ${row.downstream_handoff.owner_batch}; Root-authorized downstream consumer, original reader observation unbound. Retain owner_batch and historical_delta_unknown:true plus a substantive owner_resolution in each decision. Open current consumer, its contract and manifest; preserve original evidence and independently review current content. This carrier remains outside your edit scope: unresolved defects require Root/owning-batch repair, never automatic acceptance.`);
+    }
     for (const row of scope.refuter_findings ?? []) add(row.id, row.obligation ?? 'refuter');
   }
   const itemRows = owned.filter(row => routed.has(`${row.batch}:${row.id}`));
@@ -36,7 +39,9 @@ export function prepareStep3AdjudicationOrder(root, run, group) {
     'Adjudicate and complete each routed item from lowest dependency level to highest within the dispatched batches. Finish all obligations and the risk review for an item before moving to a higher level. The scope files remain authoritative for exact decisions; this list does not add obligations.',
     'Items in order:',
     ...(itemRows.length ? itemRows.map(row => `- level ${row.level}: batch ${row.batch}, ${row.id} — ${[...routed.get(`${row.batch}:${row.id}`)].join(', ')}`) : ['- none']),
-    'Other routed obligations (pages and published dependencies; review them as required by the scope):',
+    'Guarded downstream obligations (ordinary refuter, adjudication and ledger duties remain mandatory):',
+    ...(downstreamWork.length ? downstreamWork.map(row => `- ${row}`) : ['- none']),
+    'Other routed obligations (pages and outside carriers; review them as required by the scope):',
     ...(otherWork.length ? otherWork.map(row => `- ${row}`) : ['- none']),
   ].join('\n\n') + '\n';
   writeFileSync(join(root, path), body);

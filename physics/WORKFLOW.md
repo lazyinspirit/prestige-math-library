@@ -1423,3 +1423,58 @@ the general theorem, Fourier conductivity, thermodynamic hypotheses or empirical
 fluid behavior. Owners add its actual item-specific contract obligation and bind
 current inputs through the ordinary workflow; registration alone adds no run
 coverage or readiness evidence.
+
+### Guarded downstream in-run consumer findings in Step 3
+
+A reader's genuine observation of a downstream draft consumer in another batch
+cannot be relabelled as an upstream `in-run-dependency` or a published supplier.
+Root may authorize only exact original findings through
+`research/RUN-step3-downstream-handoff-BATCH.json`. Original report bytes and
+finding fields remain unchanged; split adds separate `downstream_handoff`
+metadata. The consumer enters the originating batch's ordinary refuter scope
+and each original reader/refuter obligation still needs adjudication and ledger
+closure. This grants no source-edit permission outside the adjudicator's batch;
+Root resolves the owning-batch repair after overlapping source writers drain.
+
+The version-1 receipt has `run`, string `batch`,
+`kind: "downstream-in-run-consumer"`, `authorized_by: "/root"`, a substantive
+`reason`, and these evidence bindings, each `{path, sha256}`:
+
+- `native_receipt`: the exact native
+  `research/RUN-dispatch/reader-reader-BATCH.result.json`, plus its identical
+  immutable `native_receipt_archive`;
+- `original_report`: immutable raw archive identical to the unchanged live
+  reader-findings file and the genuinely completed positive-attempt native final
+  JSON message. If the native tail is clipped, `original_last_message` may bind
+  the exact complete original JSON message instead;
+- `inputs`: a path-to-raw-SHA256 map containing **every** bound evidence path,
+  so ordinary owner-gate snapshots retain all receipt inputs;
+- `findings`: exact authorized entries of this form:
+
+```json
+{
+  "finding_index": 1,
+  "original_finding": {"id": "consumer-id", "subject_type": "in-flight-item", "consumer_id": null, "observed_source": null, "location": "exact original location", "defect": "ill-formed", "evidence": "exact original evidence", "severity": "nonfatal"},
+  "owner_batch": "13",
+  "owner_pre_snapshot": {"path": "research/RUN-step3-hash-13-pre.json", "sha256": "RAW_SHA256"},
+  "current_source_observation": {"path": "research/immutable-consumer-before.md", "sha256": "RAW_SHA256"},
+  "excerpts": ["actual sufficiently long excerpt from that source"],
+  "dependency_path": ["consumer-id", "assigned-supplier-id"]
+}
+```
+
+Unique current-run draft ownership, native pre-reader consumer fingerprints,
+regular local carriers without symlinks, and each actual `deps`/`justified_by`
+edge from that consumer to an assigned supplier are mandatory. A reference or
+reversed edge cannot establish reachability. Split requires the root-observed
+archive to match current source bytes exactly. Later checks retain this archive
+while independently checking current ownership and reachability; genuine
+repairs require fresh ordinary decision stamps. Receipt changes invalidate the
+stored handoff. Unauthorized additional findings remain errors.
+
+The root-observed current archive never asserts which bytes the original reader
+saw. Decisions retain `owner_batch`, `historical_delta_unknown: true`, and a
+substantive `owner_resolution`; ordinary verdict, ledger, current-carrier,
+unchanged-repair and exact refuter-coverage checks still apply. Do not dispatch
+recovery, manufacture a receipt, or alter existing observations to use this
+route. Root owns the actual authorization, guarded recovery and recertification.

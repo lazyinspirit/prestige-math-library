@@ -28,6 +28,25 @@ The new native refuter performs all scoped reads independently; original
 coverage assertions are not accepted as proof of reading. The original report
 and receipt remain archived, and normal collection and closure checks apply.
 
+If an independently running producer changes a source after a reader observed
+its current bytes, the private split helper can authenticate that historical
+observation through `research/RUN-step3-observed-current-history-BATCH.json`.
+This requires explicit Root authority, exact original finding objects, immutable
+raw-source/report/receipt/attempt-log/final-message bindings, a native logged
+source digest and source excerpts, and the ordinary live producer/reachability
+route. Every evidence binding also appears in its `inputs` map, which the native
+owner gate snapshot follows. The archived split-current source must equal the live source at split.
+The original `observed_source` remains unchanged; the old raw-source-only
+fingerprint is kept separate from the current producer/contract fingerprints.
+The complete native receipt tail must authenticate the original report; clipped
+tails are not supported by this bounded route. Ordinary current refutation,
+adjudication, evidence bindings and gates remain required; this grants no source
+edit permission or mathematical acceptance. Immutable evidence is rechecked
+after split, while legitimate later repairs may change the live source.
+`recoverLoggedSource` is a pure recovery aid for numbered native source output:
+it accepts a proposed unchanged prefix only when the complete recovered bytes
+reproduce the exact native logged raw SHA256. It writes no archive or authority.
+
 Freshly planned namespaces now use `physics-six-step-v1-statement-first` through the composed
 `mathlib.statement-first.mts` table. Every item class presents uninterrupted
 statements/descriptions and separate following reference lines. Existing runs

@@ -26,6 +26,8 @@ import { loadAuditorCreatedCertifications } from './auditor-created-items.mjs';
 import { taxonomyOwnership } from './defect-ledger-taxonomy.mjs';
 import { publishedPageDependencies, publishedPageCarrier } from './step3-published-pages.mjs';
 import { ownerReviewedFindingAlias } from './step3-owner-finding-alias.mjs';
+import { downstreamHandoffs } from './step3-downstream-handoff.mjs';
+import { observedCurrentHistory } from './step3-observed-current-history.mjs';
 
 const argv = process.argv.slice(2);
 const command = argv[0];
@@ -217,6 +219,7 @@ function pageCarrier(value, orderAnchor = null) {
 }
 
 function currentDecisionCarrier(decision, target, live) {
+  if (target?.downstream_handoff) return producerCarrier(target.id, target.downstream_handoff.owner_batch);
   if (target?.subject_type === 'in-run-dependency') return producerCarrier(target.id, target.producer_batch);
   if (decision.verdict === 'context_accepted') {
     const context = externalContextReceipt(ROOT, run, decision, target);
@@ -634,6 +637,17 @@ function bindInRunFinding(finding, batch, dependencies, reportError) {
     };
     carrier = finding.producer_post_snapshot.carrier;
   }
+  if (observed?.snapshot === 'current' && observed.item_sha256 !== carrier.item_sha256) {
+    try {
+      const binding = observedCurrentHistory(ROOT, run, batch, finding, dependencies, { atSplit: true });
+      if (binding) {
+        finding.historical_current_observation = binding;
+        finding.observation_basis = 'historical-current';
+        finding.observed_sha256 = hashValue(binding.observed_carrier);
+        return;
+      }
+    } catch (cause) { reportError(`${finding.obligation}: ${cause.message}`); return; }
+  }
   if (observed && observed.item_sha256 !== carrier.item_sha256) reportError(`${finding.obligation} observed_source does not match its declared producer snapshot`);
   finding.observation_basis = observed?.snapshot ?? 'unbound';
   finding.observed_sha256 = observed ? hashValue(carrier) : null;
@@ -672,21 +686,42 @@ function validateInRunFinding(finding, batch, dependencies, reportError) {
   const carrier = finding.producer_carrier_at_split;
   if (carrier?.producer_batch !== finding.producer_batch || !['item_sha256', 'contract_sha256', 'manifest_sha256']
     .every(key => /^[a-f0-9]{64}$/.test(carrier?.[key] ?? ''))) reportError(`${finding.obligation} has invalid split producer carrier`);
-  const observedCarrier = finding.observation_basis === 'pre' ? finding.producer_pre_snapshot?.carrier
+  let history = null;
+  if (finding.historical_current_observation !== undefined || finding.observation_basis === 'historical-current') {
+    try {
+      history = observedCurrentHistory(ROOT, run, batch, finding, dependencies);
+      if (!history || hashValue(history) !== hashValue(finding.historical_current_observation))
+        reportError(`${finding.obligation} immutable historical-current observation changed`);
+    } catch (cause) { reportError(`${finding.obligation}: ${cause.message}`); }
+  }
+  const observedCarrier = history ? history.observed_carrier
+    : finding.observation_basis === 'pre' ? finding.producer_pre_snapshot?.carrier
     : finding.observation_basis === 'post' ? finding.producer_post_snapshot?.carrier : carrier;
-  if (finding.observation_basis !== (finding.observed_source?.snapshot ?? 'unbound')
+  if (finding.observation_basis !== (history ? 'historical-current' : finding.observed_source?.snapshot ?? 'unbound')
     || (finding.observation_basis === 'unbound' ? finding.observed_sha256 !== null
       : finding.observed_source?.item_sha256 !== observedCarrier?.item_sha256 || finding.observed_sha256 !== hashValue(observedCarrier))) {
     reportError(`${finding.obligation} conflates original observation and current producer`);
   }
 }
 
+function downstreamRoutes(batch, report, manifests, reportError, atSplit = false) {
+  try { return downstreamHandoffs(ROOT, run, batch, report, manifests, { atSplit }); }
+  catch (cause) { reportError(cause.message); return new Map(); }
+}
+function validateDownstreamFinding(finding, binding, reportError) {
+  const carrier = finding.downstream_carrier_at_split;
+  if (!binding || hashValue(finding.downstream_handoff) !== hashValue(binding)
+    || carrier?.producer_batch !== binding.owner_batch
+    || carrier?.item_sha256 !== binding.root_observed_item_sha256
+    || !['item_sha256', 'contract_sha256', 'manifest_sha256'].every(key => /^[a-f0-9]{64}$/.test(carrier?.[key] ?? ''))
+    || finding.observed_sha256 !== hashValue(carrier)) reportError(`${finding.obligation} invalid downstream handoff binding`);
+}
 function reportOnlyFinding(finding, refuter = false) {
   const { observed_sha256: _observed, pre_sha256: _pre,
     producer_batch: _producer, dependency_path: _path,
     producer_carrier_at_split: _current, producer_pre_snapshot: _historical, producer_post_snapshot: _observedPost,
-    observation_basis: _basis, owner_page_repair: _ownerPageRepair,
-    carrier_kind: _kind, page_dependency: _pageDependency, ...row } = finding;
+    observation_basis: _basis, historical_current_observation: _history, owner_page_repair: _ownerPageRepair,
+    carrier_kind: _kind, page_dependency: _pageDependency, downstream_handoff: _handoff, downstream_carrier_at_split: _downstreamCarrier, ...row } = finding;
   if (refuter && finding.subject_type === 'in-run-dependency') {
     delete row.subject_type; delete row.consumer_id; delete row.observed_source;
   }
@@ -887,11 +922,20 @@ if (command === 'split') {
   const inRun = findingDependencies(batch, derived.manifestPost, Array.isArray(readerReport.findings) ? readerReport.findings : []);
   const publishedPages = publishedPageDependencies(ROOT, readerReport.findings ?? [], published,
     Object.values(manifestPages()).flat().map(page => page.id));
-  const readerAllowed = new Set([...derived.manifestPost, ...derived.pageManifestPost, ...published.keys(), ...publishedPages.keys(), ...inRun.keys()]);
+  const downstream = downstreamRoutes(batch, readerReport, manifestItems(), readerError, true);
+  const readerAllowed = new Set([...downstream.values()].map(binding => readerReport.findings[binding.finding_index - 1].id).concat([...derived.manifestPost, ...derived.pageManifestPost, ...published.keys(), ...publishedPages.keys(), ...inRun.keys()]));
   const readerFindings = normalizeFindings(Array.isArray(readerReport.findings) ? readerReport.findings : [],
     batch, readerAllowed, readerError, 'reader');
   const live = liveFingerprints(batch);
-  for (const finding of readerFindings) {
+  for (const [index, finding] of readerFindings.entries()) {
+    const handoff = downstream.get(index + 1);
+    if (handoff) {
+      finding.downstream_handoff = handoff;
+      finding.downstream_carrier_at_split = producerCarrier(finding.id, handoff.owner_batch);
+      finding.observed_sha256 = hashValue(finding.downstream_carrier_at_split);
+      validateDownstreamFinding(finding, handoff, readerError);
+      continue;
+    }
     const expectedType = derived.manifestPost.includes(finding.id) ? 'in-flight-item'
       : derived.pageManifestPost.includes(finding.id) ? 'page' : inRun.has(finding.id) ? 'in-run-dependency' : 'published-dependency';
     if (finding.subject_type !== expectedType) readerError(`${finding.obligation} must use subject_type ${expectedType}`);
@@ -924,7 +968,7 @@ if (command === 'split') {
   if (readerErrors.length) fail(`step3-scope: batch ${batch} reader findings invalid: ${readerErrors.join('; ')}`, 1);
   const refuterPages = [...derived.pageManifestPost].sort();
   const refuterScope = [...new Set([...derived.untouched, ...highRisk, ...refuterPages,
-    ...readerFindings.filter(row => row.subject_type === 'in-run-dependency').map(row => row.id)])].sort();
+    ...readerFindings.filter(row => (row.subject_type === 'in-run-dependency' || row.downstream_handoff)).map(row => row.id)])].sort();
   const group = groups().byBatch[batch];
   if (!group) fail(`step3-scope: batch ${batch} has no Alpha group`);
   const scope = {
@@ -978,8 +1022,19 @@ if (command === 'collect') {
   for (const finding of scope.reader_findings ?? []) if (finding.subject_type === 'in-run-dependency') {
     validateInRunFinding(finding, batch, inRun, error);
   }
+  const downstream = downstreamRoutes(batch, readJson(readerFindingsPath(batch), 'reader report'), manifestItems(), error);
+  for (const finding of scope.reader_findings ?? []) if (finding.downstream_handoff)
+    validateDownstreamFinding(finding, downstream.get(finding.downstream_handoff.finding_index), error);
   const refuterFindings = normalizeRefuterFindings(findings, batch, openedSet, error)
     .map((finding) => {
+      const handed = (scope.reader_findings ?? []).find(row => row.id === finding.id && row.downstream_handoff);
+      if (handed) {
+        finding.downstream_handoff = handed.downstream_handoff;
+        // Refuter observed current consumer bytes, separately from original reader/root observations.
+        finding.downstream_carrier_at_split = producerCarrier(finding.id, handed.downstream_handoff.owner_batch);
+        finding.observed_sha256 = hashValue(finding.downstream_carrier_at_split);
+        return finding;
+      }
       const source = (scope.reader_findings ?? []).find(row => row.id === finding.id && row.subject_type === 'in-run-dependency');
       if (source) {
         const carrier = producerCarrier(source.id, source.producer_batch);
@@ -1148,11 +1203,13 @@ if (command === 'check') {
             [...(Array.isArray(report.findings) ? report.findings : []), ...(scope.reader_findings ?? [])], manifests, scope, reportError);
           const publishedPages = publishedPageDependencies(ROOT, report.findings ?? [], published,
             Object.values(pages).flat().map(page => page.id));
+          const downstream = downstreamRoutes(batch, report, manifests, reportError);
           const normalized = normalizeFindings(Array.isArray(report.findings) ? report.findings : [], batch,
-            new Set([...derived.manifestPost, ...derived.pageManifestPost, ...published.keys(), ...publishedPages.keys(), ...inRun.keys()]), reportError, 'reader');
+            new Set([...derived.manifestPost, ...derived.pageManifestPost, ...published.keys(), ...publishedPages.keys(), ...inRun.keys(), ...[...downstream.keys()].map(index => report.findings[index - 1].id)]), reportError, 'reader');
           const stored = (scope.reader_findings ?? []).map(finding => reportOnlyFinding(finding));
           if (JSON.stringify(normalized) !== JSON.stringify(stored)) reportError('findings no longer match the routed obligations');
           for (const finding of scope.reader_findings ?? []) {
+            if (finding.downstream_handoff) { validateDownstreamFinding(finding, downstream.get(Number(finding.obligation.split(':').at(-1))), reportError); continue; }
             if (finding.subject_type === 'in-run-dependency') { validateInRunFinding(finding, batch, inRun, reportError); continue; }
             if (inRun.has(finding.id)) reportError(`${finding.obligation} must retain subject_type in-run-dependency`);
             if (!/^[a-f0-9]{64}$/.test(finding.observed_sha256 ?? '')) reportError(`${finding.obligation} has no valid observed carrier hash`);
@@ -1194,6 +1251,14 @@ if (command === 'check') {
           if (JSON.stringify(normalized) !== JSON.stringify(stored)) reportError('findings no longer match the collected obligations');
           const inRun = reviewedHistoricalDependencies(batch, scope.manifest_post ?? [], scope.reader_findings ?? [], manifests, scope, reportError);
           for (const finding of scope.refuter_findings ?? []) {
+            if (finding.downstream_handoff) {
+              const original = (scope.reader_findings ?? []).find(row => row.id === finding.id && row.downstream_handoff);
+              if (!original || hashValue(original.downstream_handoff) !== hashValue(finding.downstream_handoff)
+                || finding.downstream_carrier_at_split?.producer_batch !== original.downstream_handoff.owner_batch
+                || !['item_sha256', 'contract_sha256', 'manifest_sha256'].every(key => /^[a-f0-9]{64}$/.test(finding.downstream_carrier_at_split?.[key] ?? ''))
+                || finding.observed_sha256 !== hashValue(finding.downstream_carrier_at_split)) reportError('invalid downstream refuter carrier');
+              continue;
+            }
             if (finding.subject_type === 'in-run-dependency') { validateInRunFinding(finding, batch, inRun, reportError); continue; }
             if (!/^[a-f0-9]{64}$/.test(finding.observed_sha256 ?? '')) reportError(`${finding.obligation} has no valid observed carrier hash`);
           }
@@ -1201,7 +1266,7 @@ if (command === 'check') {
         } catch (cause) { error('refuter-invalid', `batch ${batch} report is invalid JSON (${cause.message})`); }
       }
       const expectedRefuterScope = [...new Set([...(scope.untouched ?? []), ...(scope.high_risk ?? []), ...derived.pageManifestPost,
-        ...(scope.reader_findings ?? []).filter(row => row.subject_type === 'in-run-dependency').map(row => row.id)])];
+        ...(scope.reader_findings ?? []).filter(row => (row.subject_type === 'in-run-dependency' || row.downstream_handoff)).map(row => row.id)])];
       if (!sameSet(scope.refuter_scope ?? [], expectedRefuterScope)) error('refuter-scope', `batch ${batch} refuter scope is stale`);
       if (!sameSet(scope.opened ?? [], scope.refuter_scope ?? [])) error('refuter-coverage', `batch ${batch} did not open every routed refuter item`);
       if ((scope.not_opened ?? []).length) error('refuter-incomplete', `batch ${batch} retains unopened items`);
@@ -1295,6 +1360,9 @@ if (command === 'check') {
         if (target && (decision.id !== target.id || decision.route !== target.route)) error('decision-route', `[${target.id}] ${decision.obligation} has wrong id or route`);
         if (target?.carrier_kind === 'page' && decision.consumer_id !== target.consumer_id)
           error('decision-consumer-binding', `${decision.obligation} must retain exact owned consumer_id`);
+        if (target?.downstream_handoff && (decision.owner_batch !== target.downstream_handoff.owner_batch
+          || decision.historical_delta_unknown !== true || typeof decision.owner_resolution !== 'string'
+          || decision.owner_resolution.trim().length < 40)) error('decision-downstream-binding', `${decision.obligation} must retain owner_batch and resolve the originally unbound reader observation explicitly`);
         if (target?.subject_type === 'in-run-dependency') {
           if (decision.producer_batch !== target.producer_batch || decision.consumer_id !== target.consumer_id) {
             error('decision-producer-binding', `${decision.obligation} must retain exact producer_batch and consumer_id`);
