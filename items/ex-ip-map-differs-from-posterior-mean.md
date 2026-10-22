@@ -2,7 +2,7 @@
 id: ex-ip-map-differs-from-posterior-mean
 kind: example
 title: The posterior mean need not be a small-ball MAP
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 4
@@ -32,6 +32,13 @@ sources:
 axiom_use: "No choice axiom is used after the uniform Borel probability is supplied as part of the model. Its interval probabilities are explicit, and the required polynomial moments follow from finite partitions."
 generation:
   role: example
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Example

@@ -2,7 +2,7 @@
 id: def-ip-nullspace-property
 kind: definition
 title: "The strict nullspace property"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 0
@@ -23,6 +23,12 @@ sources:
     - title: "Afonso S. Bandeira, Ten Lectures and Forty-Two Open Problems in the Mathematics of Data Science, §6.3"
       url: "https://www.ocw.mit.edu/courses/18-s096-topics-in-mathematics-of-data-science-fall-2015/5f0f7205d1cf274e80d77345a7edbf2a_MIT18_S096F15_TenLec.pdf"
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
   precheck: n/a
   judge:
     model: "gpt-6-luna"

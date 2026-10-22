@@ -2,7 +2,7 @@
 id: lem-uniform-circular-distortion-gives-planar-quasiconformality
 kind: lemma
 title: Uniform circular distortion gives planar quasiconformality by difference quotients
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps:
@@ -24,6 +24,13 @@ sources:
       url: https://doi.org/10.1017/S0027763000024272
       locator: The stronger uniform all-circle hypothesis used here is proved directly by the local difference-quotient argument, without invoking the externally cited qualitative infinitesimal criterion
 dependency_level: 0
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

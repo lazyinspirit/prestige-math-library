@@ -1,7 +1,7 @@
 ---
 page: hellinger-posterior-stability-and-discretization-examples
 title: Hellinger stability and posterior discretization — Examples and Counterexamples
-status: draft
+status: published
 items: []
 examples:
   - cex-ip-equal-posterior-means-do-not-control-hellinger

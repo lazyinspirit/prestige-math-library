@@ -2,7 +2,7 @@
 id: ex-borromean-link-milnor-triple-invariant
 kind: example
 title: The Borromean string link has nonzero triple Milnor invariant
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 6
@@ -36,6 +36,13 @@ sources:
     - title: Eric W. Weisstein, Braid Word, Wolfram MathWorld
       url: https://mathworld.wolfram.com/BraidWord.html
       locator: The table at lines 21–24 lists sigma_1 inverse sigma_2 repeated three times as a Borromean braid word; used only to identify the matching closure
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Example

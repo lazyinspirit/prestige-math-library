@@ -1,7 +1,7 @@
 ---
 page: linear-gaussian-inverse-posteriors-and-tikhonov
 title: Linear Gaussian inverse posteriors and Tikhonov
-status: draft
+status: published
 items:
   - lem-ip-singular-gaussian-support-and-pseudoinverse
   - thm-ip-finite-linear-gaussian-posterior

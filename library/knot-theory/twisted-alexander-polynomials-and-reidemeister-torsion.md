@@ -1,7 +1,7 @@
 ---
 page: twisted-alexander-polynomials-and-reidemeister-torsion
 title: "Twisted Alexander polynomials and Reidemeister torsion"
-status: draft
+status: published
 requires:
   - wirtinger-presentations-and-knot-groups
   - knot-exteriors-and-peripheral-systems

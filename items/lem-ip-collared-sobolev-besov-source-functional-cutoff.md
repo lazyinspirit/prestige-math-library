@@ -2,7 +2,7 @@
 id: lem-ip-collared-sobolev-besov-source-functional-cutoff
 kind: lemma
 title: Besov smoothness gives the exact collared Sobolev penalty a cutoff source bound
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps:
@@ -24,6 +24,13 @@ sources:
       url: https://univerlag.uni-goettingen.de/bitstream/handle/3/isbn-978-3-86395-411-6/weidling.pdf?sequence=1
       locator: Theorem 6.12; the present proof treats the intrinsic quadratic Sobolev pairing directly
 dependency_level: 0
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

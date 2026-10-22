@@ -2,7 +2,7 @@
 id: thm-unknotting-number-at-least-half-levine-tristram-signature
 kind: theorem
 title: The classical signature bounds unknotting number
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 16
@@ -30,6 +30,13 @@ sources:
     - title: "Anthony Conway, The Levine–Tristram signature: a survey"
       url: "https://arxiv.org/pdf/1903.04477"
       locator: "§§2.1 and 2.4, printed pp. 3–7, Hermitian form and signature convention"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

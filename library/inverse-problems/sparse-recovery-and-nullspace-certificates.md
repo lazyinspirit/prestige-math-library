@@ -1,7 +1,7 @@
 ---
 page: sparse-recovery-and-nullspace-certificates
 title: "Sparse recovery and nullspace certificates"
-status: draft
+status: published
 items:
   - def-ip-nullspace-property
   - thm-ip-basis-pursuit-exact-recovery-under-nsp

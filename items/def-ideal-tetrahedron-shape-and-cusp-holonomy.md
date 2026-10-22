@@ -2,7 +2,7 @@
 id: def-ideal-tetrahedron-shape-and-cusp-holonomy
 kind: definition
 title: "Ideal tetrahedron shape and cusp holonomy"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 0
@@ -22,6 +22,12 @@ sources:
       url: "https://library.slmath.org/nonmsri/gt3m/PDF/4.pdf"
       locator: "Chapter 4, §§4.1–4.3, ideal edge parameters and cusp completeness"
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
   precheck: n/a
 ---
 

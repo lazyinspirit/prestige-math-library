@@ -2,7 +2,7 @@
 id: lem-ip-simple-geometry-global-eikonal-geometric-optics
 kind: lemma
 title: Finite-order geometric optics along a maximal ray in simple geometry
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 4
@@ -25,6 +25,13 @@ sources:
       url: "https://arxiv.org/pdf/2311.06020v2"
       locator: "§§4.1–4.4, PDF pp. 20–22: eikonal and transport calculations and the Euclidean correction estimate; the variable-metric chart and normalization terms must be supplied locally."
 proof_strategy: polar eikonal and transport expansion with energy correction
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

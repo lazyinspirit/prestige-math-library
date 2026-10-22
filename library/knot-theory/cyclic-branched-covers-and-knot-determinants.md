@@ -1,7 +1,7 @@
 ---
 page: cyclic-branched-covers-and-knot-determinants
 title: "Cyclic branched covers and knot determinants"
-status: draft
+status: published
 requires:
   - knot-exteriors-and-peripheral-systems
   - seifert-matrices-and-the-alexander-module

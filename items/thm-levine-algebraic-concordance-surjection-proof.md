@@ -2,7 +2,7 @@
 id: thm-levine-algebraic-concordance-surjection-proof
 kind: theorem
 title: The algebraic concordance map is a surjective homomorphism
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 11
@@ -42,6 +42,13 @@ sources:
     - title: Arunima Ray, Slice Knots and Knot Concordance
       url: https://numdam.org/item/10.5802/wbln.39.pdf
       locator: "Course II, §3, Definitions 3.1/3.5 and Proposition 3.6, printed II–11–II–12; explicit topological algebraic-concordance map on II–12; external TOP group-law input"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

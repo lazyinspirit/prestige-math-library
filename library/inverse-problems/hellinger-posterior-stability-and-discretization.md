@@ -1,7 +1,7 @@
 ---
 page: hellinger-posterior-stability-and-discretization
 title: Hellinger stability and posterior discretization
-status: draft
+status: published
 items:
   - lem-ip-prior-support-has-full-measure
   - thm-ip-hellinger-data-stability

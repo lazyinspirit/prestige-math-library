@@ -2,7 +2,7 @@
 id: def-smooth-slice-disk-exterior
 kind: definition
 title: Exterior of a smooth proper disk
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 1
@@ -23,6 +23,13 @@ sources:
       locator: Printed pp.190–194, covering-space/slice-disk-exterior setup and Theorem2 proof; baseline for the local smooth disk-exterior and meridional cover conventions. The detailed coordinate, collar and covering formulations here are local definitions, not verbatim assertions attributed to the source.
   attribution_boundary: Existing authoritative subject baseline and local formulation/proof refinement, not a verbatim external theorem; the actual accepted local argument and exact hypotheses remain unchanged.
   reading_limits: URL and locator drawn from existing canonical source metadata/Statement-reference bibliography only. No source was fetched or newly read for this metadata repair; retained author reading limits remain unchanged and are not transferred into a new whole-source reading claim.
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Definition

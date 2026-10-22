@@ -2,7 +2,7 @@
 id: cex-knot-kt-23-boundary-case
 kind: counterexample
 title: "The trefoil fails both algebraic sliceness tests"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 17
@@ -33,6 +33,13 @@ sources:
     - title: "Anthony Conway, The Levine–Tristram Signature: A Survey"
       url: "https://arxiv.org/pdf/1903.04477"
       locator: "§2.1 and Remark 2.10, printed pp. 3–5: the Hermitian signature and metabolic vanishing."
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement refuted

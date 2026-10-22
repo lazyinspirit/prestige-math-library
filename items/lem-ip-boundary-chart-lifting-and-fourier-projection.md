@@ -2,7 +2,7 @@
 id: lem-ip-boundary-chart-lifting-and-fourier-projection
 kind: lemma
 title: Boundary chart lifting and compact-uniform Fourier projections
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 0
@@ -25,6 +25,13 @@ sources:
     - title: "M. Xu, Math 205B notes from a course by R. Mazzeo"
       url: "https://math.berkeley.edu/~moorxu/oldsite/notes/205b/205bmain.pdf"
       locator: "Theorem 9.3, compact Hausdorff topology and finite subcover arguments."
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

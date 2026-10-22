@@ -2,7 +2,7 @@
 id: lem-ideal-tetrahedron-shape-parameter-relations
 kind: lemma
 title: "Shape parameters of an ideal tetrahedron"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 1
@@ -19,6 +19,13 @@ sources:
     - title: "Jessica S. Purcell, Hyperbolic Knot Theory"
       url: "https://users.monash.edu/~jpurcell/book/HypKnotTheory.pdf"
       locator: "§4.2, Lemma 4.6, printed pp.70–71"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

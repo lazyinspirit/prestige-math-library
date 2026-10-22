@@ -1,7 +1,7 @@
 ---
 page: smooth-and-topological-knot-concordance
 title: Smooth and topological knot concordance
-status: draft
+status: published
 requires:
   - seifert-surfaces-and-knot-genus
   - connected-sums-and-prime-decomposition

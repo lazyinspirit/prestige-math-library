@@ -1,7 +1,7 @@
 ---
 page: minimax-testing-and-detection-rates-examples
 title: Minimax signal detection and separation rates — Examples and Counterexamples
-status: draft
+status: published
 requires:
   - minimax-testing-and-detection-rates
 items: []

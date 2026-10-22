@@ -2,7 +2,7 @@
 id: thm-exact-bracket-output-bit-growth-bound
 kind: theorem
 title: "Exact bracket output bit-growth bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 3
@@ -29,6 +29,12 @@ sources:
       url: "https://math.uchicago.edu/~dannyc/notes/knot_theory.pdf"
       locator: "§5.1, bracket skein definition and unlink values."
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
   precheck: pass
 ---
 

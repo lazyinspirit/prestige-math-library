@@ -2,7 +2,7 @@
 id: def-knot-exterior
 kind: definition
 title: "Knot exterior"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 0
@@ -26,6 +26,12 @@ sources:
       url: "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
       locator: "Theorem 3.44 and Corollary 3.45, pp. 254-256"
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
   precheck: n/a
   judge:
     model: "gpt-6-luna"

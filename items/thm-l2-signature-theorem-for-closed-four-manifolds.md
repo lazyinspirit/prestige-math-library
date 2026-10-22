@@ -2,7 +2,7 @@
 id: thm-l2-signature-theorem-for-closed-four-manifolds
 kind: theorem
 title: "The L²-signature of a closed manifold equals its ordinary signature"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 7
@@ -23,6 +23,13 @@ sources:
     - title: "Wolfgang Lück and Thomas Schick, “Various L²-signatures and a topological L²-signature theorem”"
       url: "https://arxiv.org/pdf/math/0209161"
       locator: "§1, Theorem 1.3 and its proof; Atiyah/Hilsum inputs"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

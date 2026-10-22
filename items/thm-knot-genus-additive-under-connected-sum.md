@@ -2,7 +2,7 @@
 id: thm-knot-genus-additive-under-connected-sum
 kind: theorem
 title: "Knot genus is additive under connected sum"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 4
@@ -32,6 +32,13 @@ sources:
     - title: "Alessia Cattabriga and Stefano Francaviglia, Knot Theory and Applications: Lecture Notes"
       url: "https://poisson.phc.dm.unipi.it/~camponovo/libri/knot.pdf"
       locator: "§4.3, Theorem 4.3.6, printed pp.21–23"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

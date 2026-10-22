@@ -2,7 +2,7 @@
 id: thm-seifert-s-equivalence-and-conway-arf-bridge
 kind: theorem
 title: "Seifert S-equivalence and the Conway–Arf bridge"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 16
@@ -34,6 +34,13 @@ sources:
     - title: "Nikolai Saveliev, Lectures on the Topology of 3-Manifolds, 2nd revised edition"
       url: "https://poisson.phc.dm.unipi.it/~camponovo/libri/3mani.pdf"
       locator: "§9.2, printed pp. 112–114 (PDF pp. 124–126): quadratic refinement, Arf invariant, and Alexander-polynomial coefficient; complete 220-page book inspected."
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 ## Statement
 

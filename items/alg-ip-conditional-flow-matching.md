@@ -2,7 +2,7 @@
 id: alg-ip-conditional-flow-matching
 kind: algorithm
 title: Conditional flow matching for inverse posteriors
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 4
@@ -45,6 +45,13 @@ sources:
     - title: "Percy S. Zhai, So Won Jeong, and Veronika Ročková, Conditional Flow Matching for Bayesian Posterior Inference"
       url: "https://arxiv.org/pdf/2510.09534"
       locator: "§3.1, Theorem 1 and Assumptions 1–2: finite-dimensional posterior Wasserstein accuracy under a learned-field objective error and flow regularity; §3.2, Theorem 2: consistency under compact bounded domains and Sobolev regularity."
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Definition

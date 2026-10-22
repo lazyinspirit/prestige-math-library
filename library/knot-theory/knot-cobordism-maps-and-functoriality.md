@@ -1,7 +1,7 @@
 ---
 page: knot-cobordism-maps-and-functoriality
 title: Knot cobordism maps and functoriality
-status: draft
+status: published
 items:
   - def-barnatan-tangle-cobordism-category
   - def-decorated-link-cobordism-and-floer-target

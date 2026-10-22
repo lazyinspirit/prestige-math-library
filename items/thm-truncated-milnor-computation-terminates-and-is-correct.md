@@ -2,7 +2,7 @@
 id: thm-truncated-milnor-computation-terminates-and-is-correct
 kind: theorem
 title: Truncated Milnor computation terminates and matches peripheral quotients
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 7
@@ -34,6 +34,13 @@ sources:
       url: https://scholarworks.iu.edu/iuswrrest/api/core/bitstreams/54c7d68f-d982-4e1f-9550-e54140ada5ea/content
       locator: §2.5, printed pp. 16–18 (PDF pp. 24–26), coefficient definition and
         quotient dependence
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

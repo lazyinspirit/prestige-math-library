@@ -2,7 +2,7 @@
 id: cex-knot-kt-51-boundary-case
 kind: counterexample
 title: "The unknot defeats a universal coefficient-bound extension"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 6
@@ -26,6 +26,13 @@ sources:
       url: "https://arxiv.org/pdf/2606.22410v1"
     - title: "Justin Roberts, Knots Knotes, §4.4.8"
       url: "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/knotes.pdf"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement refuted

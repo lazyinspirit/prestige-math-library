@@ -2,7 +2,7 @@
 id: lem-ip-gaussian-series-norm-tail-and-fourth-moment
 kind: lemma
 title: Gaussian series norm tails and fourth moments
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 0
@@ -22,6 +22,12 @@ axiom_use: Countable Choice is assumed; the independent normal coordinates are
   countable monotone limits, with no construction of a new product measure or
   arbitrary-index choice.
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
   judge:
     model: "gpt-6-luna"
     verdict: pass

@@ -1,7 +1,7 @@
 ---
 page: alexander-polynomial-from-seifert-matrices
 title: "Alexander polynomials from Seifert matrices"
-status: draft
+status: published
 requires:
   - seifert-matrices-and-the-alexander-module
   - connected-sums-and-prime-decomposition

@@ -1,7 +1,7 @@
 ---
 page: connected-sums-and-prime-decomposition
 title: Connected sums and prime decomposition
-status: draft
+status: published
 requires:
   - knot-exteriors-and-peripheral-systems
   - seifert-surfaces-and-knot-genus

@@ -1,7 +1,7 @@
 ---
 page: ribbon-categories-and-reshetikhin-turaev-knot-invariants-examples
 title: "Ribbon categories and Reshetikhin–Turaev knot invariants — Examples and Counterexamples"
-status: draft
+status: published
 requires:
   - ribbon-categories-and-reshetikhin-turaev-knot-invariants
 items: []

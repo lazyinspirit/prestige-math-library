@@ -2,7 +2,7 @@
 id: lem-ip-best-s-term-l1-sparse-vector-formulation
 kind: lemma
 title: "The coordinate-tail and sparse-vector formulations of best s-term error agree"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 2
@@ -24,6 +24,13 @@ sources:
       url: "https://www.mat.uniroma2.it/~speleers/cime2024/material/book_rauhut.pdf"
     - title: "Shahar Mendelson, Holger Rauhut, and Rachel Ward, Improved Bounds for Sparse Recovery from Subsampled Random Convolutions, §2.1"
       url: "https://www.mathc.rwth-aachen.de/~rauhut/files/circulant-independent.pdf"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

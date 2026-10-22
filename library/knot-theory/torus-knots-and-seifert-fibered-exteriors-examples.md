@@ -1,7 +1,7 @@
 ---
 page: torus-knots-and-seifert-fibered-exteriors-examples
 title: Torus knots and Seifert-fibered exteriors — Examples and Counterexamples
-status: draft
+status: published
 requires:
   - torus-knots-and-seifert-fibered-exteriors
 items: []

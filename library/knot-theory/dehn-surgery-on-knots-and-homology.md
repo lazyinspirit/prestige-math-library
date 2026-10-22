@@ -1,7 +1,7 @@
 ---
 page: dehn-surgery-on-knots-and-homology
 title: Dehn surgery on knots and homology
-status: draft
+status: published
 items:
   - def-oriented-slope-and-knot-dehn-filling
   - lem-knot-surgery-first-homology-mayer-vietoris

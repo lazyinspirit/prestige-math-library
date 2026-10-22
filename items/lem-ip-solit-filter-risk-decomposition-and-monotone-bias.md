@@ -2,7 +2,7 @@
 id: lem-ip-solit-filter-risk-decomposition-and-monotone-bias
 kind: lemma
 title: Risk decomposition and monotone bias for ordered spectral filters
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 4
@@ -27,6 +27,13 @@ sources:
       url: https://arxiv.org/pdf/2304.10356
     - title: "Christian Clason, Regularization of Inverse Problems, complete lecture notes, Chapter 5 §5.1"
       url: https://imsc.uni-graz.at/clason/preprints/InverseNotes.pdf
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

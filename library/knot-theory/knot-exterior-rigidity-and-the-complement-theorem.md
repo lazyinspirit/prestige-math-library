@@ -1,7 +1,7 @@
 ---
 page: knot-exterior-rigidity-and-the-complement-theorem
 title: The knot-complement theorem
-status: draft
+status: published
 items:
   - def-instanton-surgery-triangle-data
   - lem-trefoil-knot-group-is-nonabelian-with-abelianization-z

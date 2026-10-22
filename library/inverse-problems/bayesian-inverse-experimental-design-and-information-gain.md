@@ -1,7 +1,7 @@
 ---
 page: bayesian-inverse-experimental-design-and-information-gain
 title: Bayesian measurement design and information gain
-status: draft
+status: published
 items:
   - def-ip-design-indexed-inverse-experiment
   - def-ip-expected-information-gain

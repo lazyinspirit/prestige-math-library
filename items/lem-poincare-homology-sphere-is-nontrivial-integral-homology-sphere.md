@@ -2,7 +2,7 @@
 id: lem-poincare-homology-sphere-is-nontrivial-integral-homology-sphere
 kind: lemma
 title: "The Poincaré sphere is a nontrivial integral homology sphere"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps:
@@ -30,6 +30,12 @@ sources:
       url: "https://adebray.github.io/lecture_notes/group_actions_on_s3.pdf"
       locator: "§§1–2, pp.1–2; the binary icosahedral subgroup of the unit quaternions, its order and presentation, its free left action, and the quotient covering"
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
   precheck: pass
   judge:
     model: "gpt-6-luna"

@@ -1,7 +1,7 @@
 ---
 page: tau-invariant-and-the-four-ball-genus
 title: The tau invariant and four-ball genus
-status: draft
+status: published
 requires:
   - smooth-and-topological-knot-concordance
   - grid-homology-and-combinatorial-knot-floer-theory

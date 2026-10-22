@@ -2,7 +2,7 @@
 id: thm-benard-florens-rodau-logarithmic-gauss-formula
 kind: theorem
 title: Bénard–Florens–Rodau logarithmic Gauss formula and ideal-point slope
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 13
@@ -28,6 +28,13 @@ sources:
       url: https://arxiv.org/pdf/2103.14151
     - title: Allen Hatcher, Boundary slopes of incompressible surfaces
       url: https://www.math.unl.edu/~mbrittenham2/classwk/990s08/public/hatcher.bdyslopes.pdf
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

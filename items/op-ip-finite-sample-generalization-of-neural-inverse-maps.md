@@ -2,7 +2,7 @@
 id: op-ip-finite-sample-generalization-of-neural-inverse-maps
 kind: open-problem
 title: Finite-sample generalization of learned inverse maps
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 12
@@ -49,6 +49,11 @@ sources:
       locator: "Theorems 3.20 and 3.22, Lemma 3.21, approximation-space hypotheses and Appendix B.6,
         PDF pp.23–28 and 40–41: sampling lower bounds for specified ReLU
         neural-operator classes and input measures."
+verification:
+  sources_checked:
+    date: "2026-10-22"
+    scope: "Formulation and unresolved status reviewed in the completed delegated build; source-reading limits and evidence remain recorded in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    by: "gpt-6.1-sol delegated native review; publication authorized by owner"
 ---
 
 ## Open problem

@@ -1,7 +1,7 @@
 ---
 page: bridge-presentations-and-unknotting-number-examples
 title: Bridge presentations and unknotting number — Examples and Counterexamples
-status: draft
+status: published
 items: []
 requires:
   - bridge-presentations-and-unknotting-number

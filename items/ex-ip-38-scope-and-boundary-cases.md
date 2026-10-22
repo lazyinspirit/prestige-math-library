@@ -2,7 +2,7 @@
 id: ex-ip-38-scope-and-boundary-cases
 kind: example
 title: "Simple disk, trapped annulus, and conjugate-point cancellation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps:
@@ -27,6 +27,13 @@ sources:
       url: "https://users.jyu.fi/~jojapeil/opetus/mats4120k26/mats4120-v2.pdf"
       locator: "Chapter 8, §§8.1–8.2, Jacobi fields and conjugate points; Chapter 13, §§13.1–13.4, the surface transform examples and proof."
 proof_strategy: direct
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Example

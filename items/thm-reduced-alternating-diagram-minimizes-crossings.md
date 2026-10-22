@@ -2,7 +2,7 @@
 id: thm-reduced-alternating-diagram-minimizes-crossings
 kind: theorem
 title: Reduced alternating diagrams minimize crossing number
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 4
@@ -30,6 +30,13 @@ sources:
     - title: Louis H. Kauffman, New Invariants in the Theory of Knots, Astérisque
         163–164 (1988), §III, printed pp. 164–168
       url: https://www.numdam.org/item/AST_1988__163-164__137_0.pdf
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

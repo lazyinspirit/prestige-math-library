@@ -1,7 +1,7 @@
 ---
 page: milnor-invariants-and-link-peripheral-nilpotent-quotients
 title: Milnor invariants and link peripheral nilpotent quotients
-status: draft
+status: published
 items:
   - lem-classifying-maps-are-natural-under-group-homomorphisms
   - lem-h2-classifying-map-is-surjective

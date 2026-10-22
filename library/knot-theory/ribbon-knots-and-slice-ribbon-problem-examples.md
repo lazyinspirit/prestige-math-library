@@ -1,7 +1,7 @@
 ---
 page: ribbon-knots-and-slice-ribbon-problem-examples
 title: Ribbon knots and the slice-ribbon problem — Examples and Counterexamples
-status: draft
+status: published
 requires:
   - ribbon-knots-and-slice-ribbon-problem
 items: []

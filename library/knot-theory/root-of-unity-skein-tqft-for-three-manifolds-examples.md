@@ -1,7 +1,7 @@
 ---
 page: root-of-unity-skein-tqft-for-three-manifolds-examples
 title: Root-of-unity skein TQFT for 3-manifolds — Examples and Counterexamples
-status: draft
+status: published
 requires:
   - root-of-unity-skein-tqft-for-three-manifolds
 items: []

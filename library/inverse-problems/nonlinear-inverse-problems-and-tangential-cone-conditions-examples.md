@@ -1,7 +1,7 @@
 ---
 page: nonlinear-inverse-problems-and-tangential-cone-conditions-examples
 title: Nonlinear maps and tangential cone control — Examples and Counterexamples
-status: draft
+status: published
 items: []
 examples:
   - cex-ip-smooth-map-fails-tcc

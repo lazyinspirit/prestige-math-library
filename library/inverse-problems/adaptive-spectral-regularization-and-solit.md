@@ -1,7 +1,7 @@
 ---
 page: adaptive-spectral-regularization-and-solit
 title: Adaptive spectral regularization by SOLIT
-status: draft
+status: published
 items:
   - lem-ip-gaussian-series-norm-tail-and-fourth-moment
   - def-ip-ordered-filter-grid-and-source-index

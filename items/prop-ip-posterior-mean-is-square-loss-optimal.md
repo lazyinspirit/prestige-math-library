@@ -2,7 +2,7 @@
 id: prop-ip-posterior-mean-is-square-loss-optimal
 kind: proposition
 title: The posterior mean is the unique squared-loss Bayes action in a Hilbert target
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 0
@@ -47,6 +47,12 @@ sources:
       url: "https://arxiv.org/pdf/1302.6989v4"
       locator: "§3.2, Theorem 3.4 and proof, for an inverse posterior as a data-indexed conditional law; §4.1, Theorem 4.3 and proof, for posterior propriety and data-version hypotheses. Context only: the Hilbert-risk proof assumes a probability kernel directly and does not import this source proof."
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
   precheck: pass
   judge:
     model: "gpt-6-luna"

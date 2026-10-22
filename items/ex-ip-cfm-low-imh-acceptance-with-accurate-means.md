@@ -2,7 +2,7 @@
 id: ex-ip-cfm-low-imh-acceptance-with-accurate-means
 kind: example
 title: Posterior summaries close to DRAM with low independent-MH acceptance
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 0
@@ -28,6 +28,13 @@ sources:
     - title: "Gareth O. Roberts and Jeffrey S. Rosenthal, General State Space Markov Chains and MCMC Algorithms"
       url: "https://probability.ca/jeff/ftpdir/probsurv.pdf"
       locator: "§2.1 and Proposition 2: independent Metropolis–Hastings acceptance and invariant target-flow construction."
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Example

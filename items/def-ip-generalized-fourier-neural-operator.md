@@ -2,7 +2,7 @@
 id: def-ip-generalized-fourier-neural-operator
 kind: definition
 title: Generalized Fourier neural operator on a compact manifold
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 1
@@ -20,6 +20,13 @@ sources:
     - title: "Nikola Kovachki et al., Neural Operator: Learning Maps Between Function Spaces"
       url: "https://www.jmlr.org/papers/volume24/21-1524/21-1524.pdf"
       locator: "§4.4, Fourier neural-operator architecture, Fourier multiplier, finite mode cutoff and real-valued conjugate-symmetry convention, printed pp. 20–23."
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Definition

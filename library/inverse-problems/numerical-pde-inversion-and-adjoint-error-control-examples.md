@@ -1,7 +1,7 @@
 ---
 page: numerical-pde-inversion-and-adjoint-error-control-examples
 title: PDE-constrained inversion and adjoint error control — Examples and Counterexamples
-status: draft
+status: published
 items: []
 examples:
   - ex-ip-pde-cfl-invalid-iterate

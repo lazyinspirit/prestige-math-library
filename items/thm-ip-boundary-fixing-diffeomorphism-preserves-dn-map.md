@@ -2,7 +2,7 @@
 id: thm-ip-boundary-fixing-diffeomorphism-preserves-dn-map
 kind: theorem
 title: A boundary-fixing diffeomorphism preserves the anisotropic DN map
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 5
@@ -30,6 +30,13 @@ sources:
       url: "https://library.slmath.org/books/Book60/files/30salo.pdf"
     - title: "Thierry Daudé, Niky Kamran, and François Nicoleau, A survey of non-uniqueness results for the anisotropic Calderón problem with disjoint data (2018)"
       url: "https://arxiv.org/pdf/1803.00910"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

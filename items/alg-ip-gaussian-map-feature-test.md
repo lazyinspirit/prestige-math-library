@@ -2,7 +2,7 @@
 id: alg-ip-gaussian-map-feature-test
 kind: algorithm
 title: Gaussian MAP feature test
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 2
@@ -20,6 +20,13 @@ sources:
       url: https://arxiv.org/pdf/2402.00686
     - title: "Andrew M. Stuart, Inverse problems: A Bayesian perspective, §6.3"
       url: https://web.stanford.edu/class/ee378a/REFS/stuart.pdf
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Definition

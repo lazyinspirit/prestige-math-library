@@ -2,7 +2,7 @@
 id: ex-ip-integrated-score-error-misses-euler-grid-times
 kind: example
 title: Integrated score error can miss every Euler evaluation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 0
@@ -18,6 +18,12 @@ generation:
 axiom_use: No additional choice axiom is used; the laws, finite predictors and
   explicit constructions are supplied.
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
   judge:
     model: "gpt-6-luna"
     verdict: pass

@@ -1,7 +1,7 @@
 ---
 page: nonlinear-tikhonov-existence-and-stability-examples
 title: Nonlinear Tikhonov existence and stability — Examples and Counterexamples
-status: draft
+status: published
 items: []
 examples:
   - ex-ip-nonlinear-tikhonov-has-two-global-minimizers

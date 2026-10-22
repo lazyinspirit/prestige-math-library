@@ -2,7 +2,7 @@
 id: ex-ip-closure-only-feature-is-not-exactly-estimable
 kind: example
 title: A compact diagonal map has a closure-only feature
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 2
@@ -33,6 +33,13 @@ sources:
       url: https://www.statslab.cam.ac.uk/~rn289/Site/__files/FULLPDF.pdf
     - title: "Kretschmann and Werner, Maximum a posteriori testing in statistical inverse problems, §1.1"
       url: https://arxiv.org/pdf/2402.00686
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Example

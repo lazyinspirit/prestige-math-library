@@ -1,7 +1,7 @@
 ---
 page: plug-and-play-mmse-regularization-examples
 title: Plug-and-play MMSE denoisers and stationarity — Examples and Counterexamples
-status: draft
+status: published
 requires:
   - plug-and-play-mmse-regularization
 items: []

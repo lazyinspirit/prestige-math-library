@@ -1,7 +1,7 @@
 ---
 page: knot-exteriors-and-peripheral-systems-examples
 title: "Knot exteriors and peripheral systems — Examples and Counterexamples"
-status: draft
+status: published
 requires:
   - knot-exteriors-and-peripheral-systems
 items: []

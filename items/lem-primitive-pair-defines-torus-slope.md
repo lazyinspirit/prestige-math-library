@@ -2,7 +2,7 @@
 id: lem-primitive-pair-defines-torus-slope
 kind: lemma
 title: "Primitive pairs define unique unoriented slopes on a torus"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 0
@@ -25,6 +25,12 @@ sources:
       url: "https://pagine.dm.unipi.it/~a019210/Farb%20Magalit_Primer%20on%20Teichmuller%20theory.pdf"
       locator: "Chapter 1, §§1.2.4–1.2.6, Lemma 1.8 and Propositions 1.7 and 1.10, printed pp.31–38; torus classification Proposition 1.5, printed pp.27–28"
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
   precheck: pending
 ---
 

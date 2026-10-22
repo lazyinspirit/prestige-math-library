@@ -1,7 +1,7 @@
 ---
 page: factorized-and-composite-linear-inversion-examples
 title: Factorized and composite linear inversion — Examples and Counterexamples
-status: draft
+status: published
 items: []
 examples:
   - ex-ip-composite-linear-inversion-commuting-diagonal

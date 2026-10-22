@@ -1,7 +1,7 @@
 ---
 page: khovanov-to-floer-spectral-sequence
 title: The Khovanov to Floer spectral sequence
-status: draft
+status: published
 items:
   - def-double-branched-cover-of-an-oriented-link
   - lem-os-filtered-convergence-and-invariance-scope

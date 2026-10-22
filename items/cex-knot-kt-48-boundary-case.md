@@ -2,7 +2,7 @@
 id: cex-knot-kt-48-boundary-case
 kind: counterexample
 title: "A finite failed move search is not a negative certificate"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 8
@@ -36,6 +36,12 @@ sources:
       url: "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/knotes.pdf"
       locator: "§2.3, move sequences and unbounded crossing excursions; §3.3, 3-coloring counts."
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
   precheck: pass
   judge:
     model: "gpt-6-luna"

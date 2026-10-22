@@ -1,7 +1,7 @@
 ---
 page: radon-transform-and-fourier-slice-reconstruction
 title: Euclidean Radon transform and filtered backprojection
-status: draft
+status: published
 requires:
   - tempered-distributions-and-the-fourier-transform
   - bochner-inversion-and-plancherel-on-lca-groups

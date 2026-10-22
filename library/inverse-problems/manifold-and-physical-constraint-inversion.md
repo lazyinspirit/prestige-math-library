@@ -1,7 +1,7 @@
 ---
 page: manifold-and-physical-constraint-inversion
 title: Physical constraints and manifold-valued inversion
-status: draft
+status: published
 requires:
   - inverse-problems-identifiability-and-stability
   - nonlinear-inverse-problems-and-tangential-cone-conditions

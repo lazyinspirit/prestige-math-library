@@ -2,7 +2,7 @@
 id: ex-trefoil-bridge-and-unknotting-numbers
 kind: example
 title: Bridge and unknotting numbers of the trefoil
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 9
@@ -45,6 +45,13 @@ sources:
     - title: "Danny Calegari, Introduction to Knot Theory"
       url: "https://math.uchicago.edu/~dannyc/notes/knot_theory.pdf"
       locator: "§4.2, printed pp. 34–36, trefoil Wirtinger presentation"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Example

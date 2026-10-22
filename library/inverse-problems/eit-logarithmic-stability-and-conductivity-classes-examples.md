@@ -1,7 +1,7 @@
 ---
 page: eit-logarithmic-stability-and-conductivity-classes-examples
 title: Logarithmic EIT stability on explicit conductivity classes — Examples and Counterexamples
-status: draft
+status: published
 items: []
 examples:
   - ex-ip-calderon-smooth-c1alpha-conductivity-class

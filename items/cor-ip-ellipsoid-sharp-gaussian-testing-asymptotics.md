@@ -2,7 +2,7 @@
 id: cor-ip-ellipsoid-sharp-gaussian-testing-asymptotics
 kind: corollary
 title: Sharp Gaussian asymptotics under a vanishing largest weight
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 6
@@ -36,6 +36,13 @@ sources:
       url: https://www.statslab.cam.ac.uk/~rn289/Site/__files/FULLPDF.pdf
     - title: "Clément Marteau and Theofanis Sapatinas, A unified treatment for non-asymptotic and asymptotic approaches to minimax signal detection, §§3.1–3.2"
       url: https://arxiv.org/pdf/1406.5387
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

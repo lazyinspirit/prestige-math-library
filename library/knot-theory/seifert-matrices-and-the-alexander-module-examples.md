@@ -1,7 +1,7 @@
 ---
 page: seifert-matrices-and-the-alexander-module-examples
 title: "Seifert matrices and the Alexander module — Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples:
   - cex-knot-kt-06-boundary-case

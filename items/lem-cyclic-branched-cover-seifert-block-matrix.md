@@ -2,7 +2,7 @@
 id: lem-cyclic-branched-cover-seifert-block-matrix
 kind: lemma
 title: "Seifert block presentation of cyclic branched-cover homology"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 7
@@ -29,6 +29,13 @@ sources:
     - title: "Jozef H. Przytycki and Akira Yasuhara, Linking Numbers in Rational Homology 3-Spheres, Cyclic Branched Covers and Infinite Cyclic Covers"
       url: "https://arxiv.org/pdf/math/0111203v1"
       locator: "Section 3, printed pp. 12–14; block matrix M_{q,V}, whose surgery presentation is attributed to Akbulut–Kirby"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

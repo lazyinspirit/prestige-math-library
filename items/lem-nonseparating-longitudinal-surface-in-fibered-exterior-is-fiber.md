@@ -2,7 +2,7 @@
 id: lem-nonseparating-longitudinal-surface-in-fibered-exterior-is-fiber
 kind: lemma
 title: A nonseparating incompressible longitudinal surface in a fibered exterior is a fiber
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 5
@@ -39,6 +39,13 @@ sources:
       url: https://arxiv.org/pdf/2405.19197v2
     - title: F. Waldhausen, On irreducible 3-manifolds which are sufficiently large, Annals of Mathematics 87 (1968), Corollary 5.5
       url: https://doi.org/10.2307/1970594
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

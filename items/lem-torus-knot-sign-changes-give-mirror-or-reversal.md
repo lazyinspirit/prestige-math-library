@@ -2,7 +2,7 @@
 id: lem-torus-knot-sign-changes-give-mirror-or-reversal
 kind: lemma
 title: "Sign changes of torus-knot parameters give mirror and reversal"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 3
@@ -21,6 +21,12 @@ sources:
       url: "https://poisson.phc.dm.unipi.it/~camponovo/libri/knot.pdf"
       locator: "Proposition 5.1.4 and Lemma 5.1.5, printed pp. 27–28"
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
   precheck: pass
 ---
 

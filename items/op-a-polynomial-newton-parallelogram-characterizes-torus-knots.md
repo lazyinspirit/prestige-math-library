@@ -2,7 +2,7 @@
 id: op-a-polynomial-newton-parallelogram-characterizes-torus-knots
 kind: open-problem
 title: A-polynomial Newton parallelogram characterization
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 10
@@ -25,6 +25,11 @@ sources:
     - title: John A. Baldwin and Steven Sivek, Torus knots, the A-polynomial, and
         SL(2,C), Question 1.6
       url: https://arxiv.org/pdf/2405.19197v2
+verification:
+  sources_checked:
+    date: "2026-10-22"
+    scope: "Formulation and unresolved status reviewed in the completed delegated build; source-reading limits and evidence remain recorded in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    by: "gpt-6.1-sol delegated native review; publication authorized by owner"
 ---
 
 ## Open problem

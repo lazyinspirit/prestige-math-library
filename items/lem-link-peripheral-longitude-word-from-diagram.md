@@ -2,7 +2,7 @@
 id: lem-link-peripheral-longitude-word-from-diagram
 kind: lemma
 title: Diagram word for a preferred peripheral longitude
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 4
@@ -27,6 +27,13 @@ sources:
     - title: Mohamed Elhamdadi, Mustafa Hajij, and Kyle Istvan, Framed Knots
       url: https://arxiv.org/pdf/1910.10257v6
       locator: §3, blackboard framing and writhe correction, printed pp. 3–9
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

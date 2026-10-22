@@ -1,7 +1,7 @@
 ---
 page: wirtinger-presentations-and-knot-groups-examples
 title: Wirtinger presentations and knot groups — Examples and Counterexamples
-status: draft
+status: published
 items: []
 examples:
   - ex-knot-kt-01-worked-cases

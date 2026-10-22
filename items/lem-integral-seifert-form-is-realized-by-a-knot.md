@@ -2,7 +2,7 @@
 id: lem-integral-seifert-form-is-realized-by-a-knot
 kind: lemma
 title: "Every integral Seifert form is realized by a knot"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 8
@@ -30,6 +30,13 @@ sources:
     - title: "Dale Rolfsen, Knots and Links"
       url: "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/rolfsen.pdf"
       locator: "§8.A, printed pp. 200–203"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

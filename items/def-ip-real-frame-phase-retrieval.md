@@ -2,7 +2,7 @@
 id: def-ip-real-frame-phase-retrieval
 kind: definition
 title: Real phase retrieval via finite real measurements
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 2
@@ -29,6 +29,12 @@ sources:
     - title: "Radu Balan, Frames and Phaseless Reconstruction, full lecture notes (2015)"
       url: "https://www.norbertwiener.umd.edu/Education/IMA2015/t4/lecture.pdf"
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
   precheck: n/a
   judge:
     model: "gpt-6-luna"

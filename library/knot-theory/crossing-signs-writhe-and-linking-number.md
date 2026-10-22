@@ -1,7 +1,7 @@
 ---
 page: crossing-signs-writhe-and-linking-number
 title: "Crossing signs, writhe, and linking number"
-status: draft
+status: published
 requires:
   - geometric-braids-and-artin-generators
   - oriented-links-braid-closures-and-markov-equivalence

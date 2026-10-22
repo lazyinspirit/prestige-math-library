@@ -2,7 +2,7 @@
 id: ex-ip-approximate-cnn-mmse-denoiser
 kind: example
 title: "A biased one-pixel CNN approximates but is not the exact MMSE denoiser"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 7
@@ -35,6 +35,13 @@ sources:
     - title: "Neal Parikh and Stephen Boyd, Proximal Algorithms, Foundations and Trends in Optimization 1(3) (2014)"
       url: "https://web.stanford.edu/~boyd/papers/pdf/prox_algs.pdf"
       locator: "§4.2, proximal-gradient update; the exact-MMSE stationarity conclusion requires the local theorem's stricter denoiser hypothesis."
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Example

@@ -1,7 +1,7 @@
 ---
 page: epsilon-and-upsilon-concordance-invariants-examples
 title: Epsilon and Upsilon concordance invariants — Examples and Counterexamples
-status: draft
+status: published
 requires:
   - epsilon-and-upsilon-concordance-invariants
 items: []

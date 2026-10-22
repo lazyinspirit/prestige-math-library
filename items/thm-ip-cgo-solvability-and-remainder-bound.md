@@ -2,7 +2,7 @@
 id: thm-ip-cgo-solvability-and-remainder-bound
 kind: theorem
 title: "CTA complex geometrical optics solvability and remainder bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps:
@@ -30,6 +30,13 @@ sources:
     - title: "V. A. Sharafutdinov, Integral Geometry of Tensor Fields (1994)"
       url: "https://api.pageplace.de/preview/DT0400.9783110900095_A19984419/preview-9783110900095_A19984419.pdf"
       locator: "Publisher preview contents, Chapter 4 §4.9, printed p. 138, titled 'Bibliographical remarks'; used to check the target of reference [27] in the 2009 paper."
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: lem-ip-tv-level-set-uniform-density-and-hausdorff
 kind: lemma
 title: Uniform density and Hausdorff convergence of TV level-set boundaries
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 8
@@ -51,6 +51,13 @@ sources:
         version 1.6
       url: https://www.ime.usp.br/~glaucio/mat6704/textos/GMTLecureNotes.pdf
       locator: §§5.3 and 7.4–7.6
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

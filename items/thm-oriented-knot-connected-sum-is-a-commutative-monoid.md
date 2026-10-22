@@ -2,7 +2,7 @@
 id: thm-oriented-knot-connected-sum-is-a-commutative-monoid
 kind: theorem
 title: "Oriented knot connected sum is a commutative monoid"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 2
@@ -25,6 +25,13 @@ sources:
     - title: "Stefan Friedl, Introduction to Knots and Links, 2024 lecture notes"
       url: "https://friedl.app.uni-regensburg.de/papers/2024_knot-theory-final.pdf"
       locator: "Proposition 2.14, printed pp.24–25"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

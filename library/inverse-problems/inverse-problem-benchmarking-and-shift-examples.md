@@ -1,7 +1,7 @@
 ---
 page: inverse-problem-benchmarking-and-shift-examples
 title: Benchmarks, prior shift, and solver admissibility — Examples and Counterexamples
-status: draft
+status: published
 items: []
 examples:
   - ex-ip-inversebench-first-born-scattering

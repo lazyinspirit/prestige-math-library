@@ -2,7 +2,7 @@
 id: ex-ip-inversebench-full-waveform-inversion
 kind: example
 title: Full waveform inversion benchmark
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 7
@@ -33,6 +33,13 @@ sources:
     - title: "Devito v4.8.12 source, devito/types/dense.py"
       url: "https://raw.githubusercontent.com/devitocodes/devito/v4.8.12/devito/types/dense.py"
       locator: "Lines 84–115 and 141–155: a default initializer=None field allocation fills its data with zeros."
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Example

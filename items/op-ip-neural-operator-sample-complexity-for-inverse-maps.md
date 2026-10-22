@@ -2,7 +2,7 @@
 id: op-ip-neural-operator-sample-complexity-for-inverse-maps
 kind: open-problem
 title: Joint sample and mesh rates for neural inverse maps
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 0
@@ -12,6 +12,10 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  sources_checked:
+    date: "2026-10-22"
+    scope: "Formulation and unresolved status reviewed in the completed delegated build; source-reading limits and evidence remain recorded in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    by: "gpt-6.1-sol delegated native review; publication authorized by owner"
   precheck: n/a
 axiom_use: No choice axiom is used; all classes, sampling laws, discretizations, and risks are specified.
 sources:

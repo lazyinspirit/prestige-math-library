@@ -2,7 +2,7 @@
 id: lem-conway-polynomial-from-seifert-determinant
 kind: lemma
 title: "Seifert determinant constructs the normalized Conway polynomial"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 14
@@ -37,6 +37,13 @@ sources:
     - title: "W. B. Raymond Lickorish, An Introduction to Knot Theory, Graduate Texts in Mathematics 175, Springer (1997)"
       url: "https://ebooks.karbust.me/Mathematics/W.%20B.%20Raymond%20Lickorish%20-%20An%20Introduction%20to%20Knot%20Theory%20%281997%29%20%5B978-1-4612-0691-0%5D.pdf"
       locator: "Chapter 8, Theorems 8.5–8.6, printed pp. 82–83: determinant invariance and skein characterization. The local Hopf chart below fixes the sign for the stated positive-push and crossing conventions; the all-links determinant uses the inverse variable on the first matrix."
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 ## Statement
 

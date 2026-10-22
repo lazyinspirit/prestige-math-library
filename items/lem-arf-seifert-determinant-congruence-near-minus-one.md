@@ -2,7 +2,7 @@
 id: lem-arf-seifert-determinant-congruence-near-minus-one
 kind: lemma
 title: "The Seifert determinant detects Arf parity near minus one"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 15
@@ -31,6 +31,13 @@ sources:
     - title: "W. B. Raymond Lickorish, An Introduction to Knot Theory, Graduate Texts in Mathematics 175, Springer (1997)"
       url: "https://link.springer.com/chapter/10.1007/978-1-4612-0691-0_11"
       locator: "Printed Chapter 10, Definition 10.3, Proposition 10.4 and Theorem 10.7, printed pp. 105–108; complete argument read in full-text PDF copy; publisher chapter record inspected."
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 ## Statement
 

@@ -1,7 +1,7 @@
 ---
 page: vassiliev-invariants-and-chord-diagrams
 title: Vassiliev invariants and chord diagrams
-status: draft
+status: published
 requires:
   - crossing-signs-writhe-and-linking-number
 items:

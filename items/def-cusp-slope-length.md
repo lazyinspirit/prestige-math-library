@@ -2,7 +2,7 @@
 id: def-cusp-slope-length
 kind: definition
 title: "Euclidean length of a slope on a horospherical cusp section"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 5
@@ -24,6 +24,12 @@ sources:
       url: "https://math.uchicago.edu/~dannyc/courses/kleinian_groups_2015/kleinian_groups.pdf"
       locator: "§§2.3.2–2.4.1, horospherical cusp sections, peripheral bases and slope equations"
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
   precheck: n/a
 ---
 

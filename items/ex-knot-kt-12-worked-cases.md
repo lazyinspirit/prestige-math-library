@@ -2,7 +2,7 @@
 id: ex-knot-kt-12-worked-cases
 kind: example
 title: "Trefoil and figure-eight Levine–Tristram and Arf calculations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 18
@@ -32,6 +32,13 @@ sources:
     - title: "R. Robertello, An Invariant of Knot Cobordism, Communications on Pure and Applied Mathematics 18 (1965), 543–555"
       url: "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/robertel.pdf"
       locator: "§§3–5, pp. 546–552: Seifert quadratic form, Arf basis formula, and determinant expansion modulo (2,(1+t)^4); all seven scanned pages visually inspected."
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 ## Example
 

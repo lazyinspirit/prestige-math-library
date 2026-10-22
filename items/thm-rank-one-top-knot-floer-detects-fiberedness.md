@@ -2,7 +2,7 @@
 id: thm-rank-one-top-knot-floer-detects-fiberedness
 kind: theorem
 title: "Rank-one top knot Floer homology detects fibering"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps:
@@ -32,6 +32,12 @@ sources:
       url: "https://arxiv.org/pdf/math/0609779v3"
       locator: "Author version Theorem 9.11 pp.38–39; published Geometry & Topology 12 (2008), Theorem 9.11 p.348, with Theorems 1.5 and 9.7"
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
   precheck: n/a
 ---
 

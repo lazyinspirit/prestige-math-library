@@ -2,7 +2,7 @@
 id: thm-finite-pl-schoenflies-in-dimension-three
 kind: theorem
 title: "Finite piecewise linear Schoenflies in dimension three"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps: [ lem-no-saddle-polyhedral-two-spheres-bound-parametrized-pl-balls, lem-innermost-critical-height-loops-admit-strict-pl-cap-reduction, lem-parametrized-pl-balls-absorb-standard-boundary-windows, lem-finite-convex-cell-complexes-admit-compatible-triangulations ]
@@ -12,6 +12,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
   judge:
     model: "gpt-6-luna"
     verdict: pass

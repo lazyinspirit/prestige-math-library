@@ -1,7 +1,7 @@
 ---
 page: feature-inference-and-map-testing-examples
 title: Linear feature identifiability and Gaussian MAP tests — Examples and Counterexamples
-status: draft
+status: published
 items: []
 examples:
   - ex-ip-adjoint-range-feature-is-estimable

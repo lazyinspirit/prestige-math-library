@@ -1,7 +1,7 @@
 ---
 page: epsilon-and-upsilon-concordance-invariants
 title: Epsilon and Upsilon concordance invariants
-status: draft
+status: published
 requires:
   - grid-homology-and-combinatorial-knot-floer-theory
   - tau-invariant-and-the-four-ball-genus

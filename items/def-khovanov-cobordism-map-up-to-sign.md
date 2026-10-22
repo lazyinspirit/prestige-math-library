@@ -2,7 +2,7 @@
 id: def-khovanov-cobordism-map-up-to-sign
 kind: definition
 title: "The Khovanov map assigned to a generic surface movie"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps:
@@ -36,6 +36,13 @@ sources:
     - title: "Dror Bar-Natan, Khovanov's homology for tangles and cobordisms, §§7–8"
       url: "https://arxiv.org/pdf/math/0410495v2"
       locator: "Printed pp.1470–1480; Frobenius TQFT and the movie-level construction"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Definition

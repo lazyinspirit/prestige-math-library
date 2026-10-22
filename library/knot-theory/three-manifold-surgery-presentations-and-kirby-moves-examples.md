@@ -1,7 +1,7 @@
 ---
 page: three-manifold-surgery-presentations-and-kirby-moves-examples
 title: Three-manifold surgery presentations and Kirby moves — Examples and Counterexamples
-status: draft
+status: published
 requires:
   - three-manifold-surgery-presentations-and-kirby-moves
 items: []

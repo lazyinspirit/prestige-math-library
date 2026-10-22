@@ -1,7 +1,7 @@
 ---
 page: compressed-sensing-with-noise-and-model-selection
 title: "Stable compressed sensing with noise"
-status: draft
+status: published
 items:
   - lem-ip-bpdn-dual-certificates
   - lem-ip-bpdn-objectives-proper-closed-convex

@@ -2,7 +2,7 @@
 id: lem-ip-one-sided-analytic-support-continuation
 kind: lemma
 title: One-sided support forces its analytic conormal wavefront
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps:
@@ -28,6 +28,13 @@ sources:
       locator: §8, Theorems 8.2–8.3 and the complete flat-hyperplane proof, printed
         pp. 52–55.
 proof_strategy: direct
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

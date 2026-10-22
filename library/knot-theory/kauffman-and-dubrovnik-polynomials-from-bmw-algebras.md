@@ -1,7 +1,7 @@
 ---
 page: kauffman-and-dubrovnik-polynomials-from-bmw-algebras
 title: Kauffman and Dubrovnik polynomials from BMW algebras
-status: draft
+status: published
 requires:
   - crossing-signs-writhe-and-linking-number
   - kauffman-bracket-state-sum-and-jones-polynomial

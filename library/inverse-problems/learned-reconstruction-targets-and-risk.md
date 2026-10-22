@@ -1,7 +1,7 @@
 ---
 page: learned-reconstruction-targets-and-risk
 title: Learned reconstruction targets and risk
-status: draft
+status: published
 items:
   - prop-ip-posterior-mean-is-square-loss-optimal
   - def-ip-learned-reconstruction-estimator

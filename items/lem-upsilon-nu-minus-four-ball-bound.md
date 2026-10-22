@@ -2,7 +2,7 @@
 id: lem-upsilon-nu-minus-four-ball-bound
 kind: lemma
 title: "The auxiliary nu-minus threshold is bounded by smooth slice genus"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps:
@@ -32,6 +32,13 @@ sources:
     - title: "Jennifer Hom and Zhongtao Wu, Four-ball genus bounds and a refinement of the Ozsvath-Szabo tau-invariant"
       url: "https://arxiv.org/pdf/1401.1565"
       locator: "Propositions 2.1, 2.3–2.4; definition of nu-plus, nonnegativity, and the four-ball genus bound"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

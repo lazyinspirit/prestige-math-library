@@ -2,7 +2,7 @@
 id: thm-asd-deformation-complex-index-formula
 kind: theorem
 title: Index formula for the sign-fixed self-dual deformation operator
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 2
@@ -30,6 +30,13 @@ sources:
     - title: Simon K. Donaldson, An Application of Gauge Theory to the Topology of 4-Manifolds
       url: https://webhomes.maths.ed.ac.uk/~v1ranick/papers/donaldson.pdf
       locator: §§I.2 and II.1, printed pp. 282–287; the index-five case for $c_2(P)[X]=-1$ and $b_1=b_-=0$
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

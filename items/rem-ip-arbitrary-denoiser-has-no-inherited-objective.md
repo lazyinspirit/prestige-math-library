@@ -2,7 +2,7 @@
 id: rem-ip-arbitrary-denoiser-has-no-inherited-objective
 kind: remark
 title: "An arbitrary denoiser does not inherit the exact-MMSE objective"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 6
@@ -29,6 +29,13 @@ sources:
     - title: "Neal Parikh and Stephen Boyd, Proximal Algorithms, Foundations and Trends in Optimization 1(3) (2014)"
       url: "https://web.stanford.edu/~boyd/papers/pdf/prox_algs.pdf"
       locator: "§1.1, p. 124: standard convex proximal-map definition and its convexity scope."
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Remark

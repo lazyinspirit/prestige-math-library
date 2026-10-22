@@ -1,7 +1,7 @@
 ---
 page: regularized-gauss-newton-and-levenberg-marquardt
 title: Regularized nonlinear Levenberg–Marquardt
-status: draft
+status: published
 items:
   - def-ip-product-tangential-cone-condition
   - lem-ip-lm-product-condition-implies-range-approximation

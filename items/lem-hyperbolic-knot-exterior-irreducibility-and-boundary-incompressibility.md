@@ -2,7 +2,7 @@
 id: lem-hyperbolic-knot-exterior-irreducibility-and-boundary-incompressibility
 kind: lemma
 title: "Atoroidal non-Seifert knot exteriors have the required topological hypotheses"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 7
@@ -27,6 +27,13 @@ sources:
     - title: "Allen Hatcher, Notes on Basic 3-Manifold Topology"
       url: "https://pi.math.cornell.edu/~hatcher/3M/3M.pdf"
       locator: "Chapter 1, irreducibility and torus decomposition conventions"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: lem-simply-connected-pl-end-has-spherical-compact-neighborhoods
 kind: lemma
 title: "A simply connected PL end has compact cores with one spherical frontier"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps: [ thm-loop-theorem-for-finitely-triangulated-orientable-pl-three-manifolds, lem-finite-subpolyhedra-have-compact-pl-manifold-neighborhoods, lem-compact-locally-collared-pl-subpolyhedron-has-pl-collar, lem-finite-polygonal-disk-and-collar-surgery, lem-finite-triangulated-surface-reduces-to-a-one-polygon-schema, lem-polygonal-schema-reduction-moves, thm-finite-simplicial-approximation-for-maps-of-pairs ]
@@ -20,6 +20,13 @@ sources:
       url: "https://pi.math.cornell.edu/~hatcher/3M/3M.pdf"
       locator: "§3.1, Corollary 3.3, printed p.48, the innermost-preimage-circle reduction to a boundary loop theorem"
 dependency_level: 4
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

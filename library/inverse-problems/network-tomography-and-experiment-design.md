@@ -1,7 +1,7 @@
 ---
 page: network-tomography-and-experiment-design
 title: "Active network tomography and identifiability by design"
-status: draft
+status: published
 items:
   - def-ip-tree-probing-experiment
   - def-ip-network-tomography-design-criterion

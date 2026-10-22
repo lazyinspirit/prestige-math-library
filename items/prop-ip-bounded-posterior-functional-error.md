@@ -2,7 +2,7 @@
 id: prop-ip-bounded-posterior-functional-error
 kind: proposition
 title: Bounded posterior functionals and stationary sample error
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 1
@@ -42,6 +42,13 @@ sources:
     - title: "Aki Vehtari et al., Rank-normalization, folding, and localization: An improved R-hat for assessing convergence of MCMC"
       url: https://arxiv.org/pdf/1903.08008v5
       locator: "§3.2, equations (7)–(9) (PDF pp. 6–7): autocorrelation ESS for one functional and its distinction from MCSE and other functionals."
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

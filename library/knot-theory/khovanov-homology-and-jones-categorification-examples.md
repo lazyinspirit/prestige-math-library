@@ -1,7 +1,7 @@
 ---
 page: khovanov-homology-and-jones-categorification-examples
 title: Khovanov homology and Jones categorification — Examples and Counterexamples
-status: draft
+status: published
 requires:
   - khovanov-homology-and-jones-categorification
 items: []

@@ -2,7 +2,7 @@
 id: def-grid-upsilon-from-grid-complex
 kind: definition
 title: "Grid Upsilon from the diagonal grid complex"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps:
@@ -29,6 +29,13 @@ sources:
     - title: "Peter S. Ozsvath, Andras I. Stipsicz, and Zoltan Szabo, Grid Homology for Knots and Links, §13.2 and Lemma 14.1.11"
       url: "https://web.math.princeton.edu/~petero/GridHomologyBook.pdf"
       locator: "Printed pp.252–254 and Lemma 14.1.11; identifying marking variables and the two-dimensional W factor"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Definition

@@ -2,7 +2,7 @@
 id: thm-mostow-prasad-rigidity-for-standard-finite-volume-cusped-three-manifolds
 kind: theorem
 title: Mostow–Prasad rigidity for complete finite-volume hyperbolic three-manifolds
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps:
@@ -24,6 +24,13 @@ sources:
       url: https://www.maths.gla.ac.uk/~mpowell/Prasad-on-Mostow-rigidity.pdf
       locator: Theorems A–C and complete proof of C; the required specialized equivariant map and conformal-boundary argument are proved locally in the stated suppliers
 dependency_level: 6
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

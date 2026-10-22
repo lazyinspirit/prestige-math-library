@@ -2,7 +2,7 @@
 id: cex-ip-calderon-logarithmic-modulus-not-lipschitz
 kind: counterexample
 title: A shrinking inclusion rules out uniform Lipschitz stability on the BV class
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 6
@@ -23,6 +23,13 @@ sources:
     - title: "Mikko Salo, Calderón problem (University of Helsinki lecture notes, Spring 2008)"
       url: "https://users.jyu.fi/~salomi/lecturenotes/calderon_lectures.pdf"
       locator: "Chapter 4, explicit concentric-disk inclusion example, printed pp. 29–30; exact operator estimate is derived locally here."
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement refuted

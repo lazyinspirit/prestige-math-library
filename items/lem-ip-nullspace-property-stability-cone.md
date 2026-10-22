@@ -2,7 +2,7 @@
 id: lem-ip-nullspace-property-stability-cone
 kind: lemma
 title: "A uniform stability margin for the nullspace cone"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 1
@@ -29,6 +29,13 @@ sources:
   references:
     - title: "Simon Foucart and Holger Rauhut, A Mathematical Introduction to Compressive Sensing, §4.2, Definition 4.11 and Remark 4.16"
       url: "https://www.mat.uniroma2.it/~speleers/cime2024/material/book_rauhut.pdf"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

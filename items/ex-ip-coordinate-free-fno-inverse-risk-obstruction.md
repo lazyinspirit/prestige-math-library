@@ -2,7 +2,7 @@
 id: ex-ip-coordinate-free-fno-inverse-risk-obstruction
 kind: example
 title: Coordinate-free Fourier inverse maps have an odd-mesh risk floor
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 0
@@ -45,6 +45,13 @@ sources:
       locator: "§1.1 and §4.4: parameter sharing, discretization invariance, Fourier
         neural-operator layers, and continuum approximation; these statements
         give no finite-sample inverse-risk rate."
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Example

@@ -2,7 +2,7 @@
 id: ex-ip-inversebench-first-born-scattering
 kind: example
 title: First-Born optical scattering benchmark
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 7
@@ -27,6 +27,13 @@ sources:
     - title: "InverseBench source implementation, pinned revision 1db5932bc2995504491663d1e2c498e7317c5404, inverse_problems/inverse_scatter.py"
       url: "https://raw.githubusercontent.com/devzhk/InverseBench/1db5932bc2995504491663d1e2c498e7317c5404/inverse_problems/inverse_scatter.py"
       locator: "Lines 326–445: fixed incident field is passed to `full_propagate_to_sensor`; the cached matrix is formed from that field and the sensor Green function."
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Example

@@ -1,7 +1,7 @@
 ---
 page: cyclic-branched-covers-and-knot-determinants-examples
 title: "Cyclic branched covers and knot determinants — Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples:
   - ex-knot-kt-11-worked-cases

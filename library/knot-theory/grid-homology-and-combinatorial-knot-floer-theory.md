@@ -1,7 +1,7 @@
 ---
 page: grid-homology-and-combinatorial-knot-floer-theory
 title: Grid homology and combinatorial knot Floer theory
-status: draft
+status: published
 items:
   - def-admissible-pointed-heegaard-floer-data
   - def-grid-diagram-for-an-oriented-knot

@@ -2,7 +2,7 @@
 id: ex-ip-visible-conormal-under-bolker
 kind: example
 title: "A visible Euclidean Radon conormal satisfies Bolker"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps:
@@ -27,6 +27,13 @@ sources:
       url: "https://users.jyu.fi/~salomi/pub/RICAM_notes_v1.pdf"
       locator: "§2.1, printed pp. 4–7, Radon incidence and conormal direction."
 proof_strategy: direct
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Example

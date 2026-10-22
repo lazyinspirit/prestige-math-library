@@ -3,7 +3,7 @@ id: lem-finite-disk-band-knot-longitudes-lie-in-the-second-derived-subgroup
 kind: lemma
 title: Preferred longitudes of finite disk-band knots lie in the second derived
   subgroup
-status: draft
+status: published
 origin: pipeline
 deps:
   - thm-seifert-van-kampen
@@ -15,6 +15,12 @@ provenance:
   statement: literature-derived
   proof: ai-generated
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
   judge:
     model: "gpt-6-luna"
     verdict: pass

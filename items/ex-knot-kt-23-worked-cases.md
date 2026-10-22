@@ -2,7 +2,7 @@
 id: ex-knot-kt-23-worked-cases
 kind: example
 title: "The square-knot Seifert form is metabolic"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 12
@@ -34,6 +34,13 @@ sources:
     - title: "Charles Livingston, A Survey of Classical Knot Concordance"
       url: "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/living.pdf"
       locator: "§2.1, printed p. 323: the inverse knot is the reverse mirror and its sum with the original is slice."
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Example

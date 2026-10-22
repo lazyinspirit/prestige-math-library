@@ -1,7 +1,7 @@
 ---
 page: nonlinear-tikhonov-existence-and-stability
 title: Nonlinear Tikhonov existence and stability
-status: draft
+status: published
 items:
   - def-ip-weakly-closed-nonlinear-forward-map
   - def-ip-nonlinear-tikhonov-functional

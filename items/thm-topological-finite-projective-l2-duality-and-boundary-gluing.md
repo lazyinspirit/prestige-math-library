@@ -2,7 +2,7 @@
 id: thm-topological-finite-projective-l2-duality-and-boundary-gluing
 kind: theorem
 title: Topological finite-projective L2 duality and whole-component boundary gluing
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-axiom-of-choice
@@ -40,6 +40,13 @@ sources:
       locator: AppendixA.8–A.12, finite domination rather than a triangulation claim
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 4
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

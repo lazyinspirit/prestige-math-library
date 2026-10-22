@@ -2,7 +2,7 @@
 id: lem-seifert-surfaces-of-same-link-are-related-by-arc-surgeries
 kind: lemma
 title: Seifert surfaces of the same link are connected by arc surgeries
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 5
@@ -39,6 +39,13 @@ sources:
       url: https://ebooks.karbust.me/Mathematics/W.%20B.%20Raymond%20Lickorish%20-%20An%20Introduction%20to%20Knot%20Theory%20%281997%29%20%5B978-1-4612-0691-0%5D.pdf
       locator: Chapter 8, Definition 8.1 and Theorem 8.2, printed pp. 79–81; the
         complete source section was inspected in the full 213-page book PDF.
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 ## Statement
 

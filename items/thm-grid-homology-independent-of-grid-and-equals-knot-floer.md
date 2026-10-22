@@ -2,7 +2,7 @@
 id: thm-grid-homology-independent-of-grid-and-equals-knot-floer
 kind: theorem
 title: "Grid homology is independent of the grid and computes knot Floer homology"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps:
@@ -51,6 +51,13 @@ sources:
     - title: "Peter S. Ozsvath and Zoltan Szabo, Holomorphic disks and knot invariants"
       url: "https://arxiv.org/pdf/math/0209056"
       locator: "§3.4, printed p.18; the Alexander summand indexed by half the first-Chern-class pairing with the capped-off Seifert surface"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

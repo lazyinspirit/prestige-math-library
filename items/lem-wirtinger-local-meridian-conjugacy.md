@@ -2,7 +2,7 @@
 id: lem-wirtinger-local-meridian-conjugacy
 kind: lemma
 title: "Local meridian conjugacy at a Wirtinger crossing"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 2
@@ -26,7 +26,18 @@ sources:
       url: "https://homepages.math.uic.edu/~kauffman/Stillwell.pdf"
     - title: "Stefan Friedl, Knot Theory, §5.3, proof of the Wirtinger Presentation Proposition"
       url: "https://friedl.app.uni-regensburg.de/papers/2024_knot-theory-final.pdf"
-verification: {precheck: pass, judge: {model: "gpt-6-luna", verdict: pass, date: 2026-10-22}}
+verification:
+  precheck: pass
+  judge:
+    model: gpt-6-luna
+    verdict: pass
+    date: 2026-10-22
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: def-ip-hyperbolic-dirichlet-to-neumann-map
 kind: definition
 title: Time-dependent Dirichlet-to-Neumann map for the wave equation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 3
@@ -27,6 +27,13 @@ sources:
       url: https://arxiv.org/pdf/2311.06020v2
       locator: §§2.4 and 3.3, PDF pp. 9 and 17–18, for the time-dependent boundary
         pairing and normal derivative convention.
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Definition

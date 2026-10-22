@@ -1,7 +1,7 @@
 ---
 page: analytic-double-fibration-and-bolker-visibility-examples
 title: Analytic double fibrations and Bolker visibility — Examples and Counterexamples
-status: draft
+status: published
 requires:
   - analytic-double-fibration-and-bolker-visibility
   - constant-rank-submersions-and-regular-level-sets

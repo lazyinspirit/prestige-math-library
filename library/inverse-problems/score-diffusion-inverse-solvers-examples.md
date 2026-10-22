@@ -1,7 +1,7 @@
 ---
 page: score-diffusion-inverse-solvers-examples
 title: Score and diffusion methods for inverse data — Examples and Counterexamples
-status: draft
+status: published
 requires:
   - score-diffusion-inverse-solvers
 items: []

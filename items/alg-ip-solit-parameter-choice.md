@@ -2,7 +2,7 @@
 id: alg-ip-solit-parameter-choice
 kind: algorithm
 title: SOLIT parameter choice on a geometric-variance grid
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 5
@@ -20,6 +20,12 @@ provenance:
   proof: not-applicable
 axiom_use: "Countable Choice is inherited through the fixed SVD coordinates in the sequence model; the finite selector search and minimum-index choice are otherwise choice-free."
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
   precheck: n/a
 sources:
   references:

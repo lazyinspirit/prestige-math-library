@@ -2,7 +2,7 @@
 id: cex-ip-real-failed-complement-partition
 kind: counterexample
 title: A two-vector real family with a failed partition and an ambiguous pair
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 4
@@ -26,6 +26,13 @@ sources:
       url: "https://arxiv.org/pdf/math/0412411"
     - title: "Radu Balan, Frames and Phaseless Reconstruction, full lecture notes (2015), Theorem 3.2 proof"
       url: "https://www.norbertwiener.umd.edu/Education/IMA2015/t4/lecture.pdf"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement refuted

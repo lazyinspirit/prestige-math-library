@@ -1,7 +1,7 @@
 ---
 page: regularized-gauss-newton-and-levenberg-marquardt-examples
 title: Regularized nonlinear Levenberg–Marquardt — Examples and Counterexamples
-status: draft
+status: published
 items: []
 examples:
   - ex-ip-lm-scalar-regularized-step-stability

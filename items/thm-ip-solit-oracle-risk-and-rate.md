@@ -2,7 +2,7 @@
 id: thm-ip-solit-oracle-risk-and-rate
 kind: theorem
 title: SOLIT oracle risk bound and spectral rates
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 6
@@ -34,6 +34,13 @@ sources:
       url: https://arxiv.org/pdf/1507.05034
     - title: "Christian Clason, Regularization of Inverse Problems, complete lecture notes, Chapter 5 §5.2"
       url: https://imsc.uni-graz.at/clason/preprints/InverseNotes.pdf
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

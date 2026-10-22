@@ -2,7 +2,7 @@
 id: thm-enhanced-a-polynomial-newton-edge-is-strict-boundary-slope
 kind: theorem
 title: Enhanced A-polynomial Newton edges give strict boundary slopes
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 12
@@ -31,6 +31,13 @@ sources:
     - title: D. Cooper, M. Culler, H. Gillet, D. D. Long, and P. B. Shalen, Plane
         curves associated to character varieties of 3-manifolds, §3
       url: https://homepages.math.uic.edu/~culler/papers/PlaneCurves/curves.pdf
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: def-knot-twisted-chain-complex-and-reidemeister-torsion
 kind: definition
 title: "Twisted chain complex and based Reidemeister torsion for link exteriors"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 4
@@ -34,6 +34,12 @@ sources:
       url: "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/torsion.pdf"
       locator: "Complete 10-page lecture notes, printed pp. 3–5; torsion of based acyclic complexes and finite CW complexes."
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
   precheck: n/a
   judge:
     model: "gpt-6-luna"

@@ -2,7 +2,7 @@
 id: thm-os-spectral-sequence-for-a-fixed-link-diagram
 kind: theorem
 title: "The Ozsváth–Szabó spectral sequence for a fixed link diagram"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 8
@@ -27,6 +27,13 @@ sources:
       url: "https://arxiv.org/pdf/math/0309170v1"
     - title: "Lipshitz, Heegaard Floer Homologies, §5.3"
       url: "https://floer.wiki/more/courses/floer-homology/2024/lipshitz_heegaard_floer_homology.pdf"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

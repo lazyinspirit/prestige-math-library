@@ -1,7 +1,7 @@
 ---
 page: terminating-computations-for-classical-knot-invariants-examples
 title: Terminating computations for classical knot invariants — Examples and Counterexamples
-status: draft
+status: published
 requires:
   - terminating-computations-for-classical-knot-invariants
 items: []

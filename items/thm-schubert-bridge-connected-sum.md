@@ -2,7 +2,7 @@
 id: thm-schubert-bridge-connected-sum
 kind: theorem
 title: Bridge number is additive under connected sum minus one
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 9
@@ -35,6 +35,13 @@ sources:
     - title: "Seiya Negami and Kazuo Okita, The Splittability and Triviality of 3-Bridge Links"
       url: "https://www.researchgate.net/publication/243080042_The_splittability_and_triviality_of_3-bridge_links"
       locator: "§3, Proposition 3-5 and Corollary 3-6, printed pp. 262–263"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

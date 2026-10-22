@@ -1,7 +1,7 @@
 ---
 page: open-questions-in-knot-polynomials-and-surgery
 title: Open questions in knot polynomials and surgery
-status: draft
+status: published
 requires:
   - kauffman-bracket-state-sum-and-jones-polynomial
   - vassiliev-invariants-and-chord-diagrams

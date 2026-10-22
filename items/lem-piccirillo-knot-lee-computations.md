@@ -2,7 +2,7 @@
 id: lem-piccirillo-knot-lee-computations
 kind: lemma
 title: "Lee computations for the Conway knot and its Piccirillo partner"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 9
@@ -40,6 +40,13 @@ sources:
     - title: "Dirk Schuetz, KnotJob, author-distributed program and source"
       url: "https://www.maths.dur.ac.uk/users/dirk.schuetz/KnotJob.zip"
       locator: "Characteristic-zero unreduced Khovanov calculation on the direct Figure 1 and Figure 2 transcriptions; independent calculation, not imported knot-table values"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

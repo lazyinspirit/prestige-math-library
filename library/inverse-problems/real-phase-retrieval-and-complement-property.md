@@ -1,7 +1,7 @@
 ---
 page: real-phase-retrieval-and-complement-property
 title: Real phase retrieval and phaseless ambiguity
-status: draft
+status: published
 requires:
   - the-moore-penrose-pseudoinverse-and-regularised-least-squares
   - hilbert-space-geometry-and-riesz-representation

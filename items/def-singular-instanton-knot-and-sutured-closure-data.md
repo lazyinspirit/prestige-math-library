@@ -2,7 +2,7 @@
 id: def-singular-instanton-knot-and-sutured-closure-data
 kind: definition
 title: "Singular instanton knot and sutured closure data"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 2
@@ -30,6 +30,13 @@ sources:
       url: "https://arxiv.org/pdf/0807.4891v2"
     - title: "P. B. Kronheimer and T. S. Mrowka, Knots, three-manifolds and instantons, §§4.3 and 5.1–5.2"
       url: "https://math.pku.edu.cn/puremath/docs/2018-10/20181010175415114589.pdf"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Definition

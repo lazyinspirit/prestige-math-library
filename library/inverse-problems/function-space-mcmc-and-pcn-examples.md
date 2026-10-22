@@ -1,7 +1,7 @@
 ---
 page: function-space-mcmc-and-pcn-examples
 title: Function-space pCN and invariant posterior kernels — Examples and Counterexamples
-status: draft
+status: published
 items: []
 examples:
   - cex-ip-infinite-dimensional-random-walk-reverse-flow-singular

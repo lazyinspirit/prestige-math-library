@@ -2,7 +2,7 @@
 id: ex-knot-kt-01-worked-cases
 kind: example
 title: "Worked Wirtinger presentations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 6
@@ -27,7 +27,14 @@ sources:
       url: "https://site.uvm.edu/cmcharbo/files/2021/12/knot-group-1.pdf"
     - title: "Stefan Friedl, Knot Theory, §§5.2–5.4, printed pp. 68–74"
       url: "https://friedl.app.uni-regensburg.de/papers/2024_knot-theory-final.pdf"
-verification: {precheck: pass}
+verification:
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json.
+    delegated_by: owner
 ---
 
 ## Example

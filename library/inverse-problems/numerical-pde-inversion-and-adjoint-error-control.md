@@ -1,7 +1,7 @@
 ---
 page: numerical-pde-inversion-and-adjoint-error-control
 title: PDE-constrained inversion and adjoint error control
-status: draft
+status: published
 items:
   - def-ip-pde-solver-admissibility-contract
   - lem-ip-finite-element-reduced-gradient-from-discrete-adjoint

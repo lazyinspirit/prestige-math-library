@@ -1,7 +1,7 @@
 ---
 page: kontsevich-integral-and-universal-finite-type-invariants-examples
 title: The Kontsevich integral and universality — Examples and Counterexamples
-status: draft
+status: published
 requires:
   - kontsevich-integral-and-universal-finite-type-invariants
 items: []

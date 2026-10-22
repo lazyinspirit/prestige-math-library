@@ -2,7 +2,7 @@
 id: cex-ip-pnp-iterative-awgn-error-model
 kind: counterexample
 title: "Gaussian measurement noise need not remain Gaussian at later PnP-ISTA inputs"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 5
@@ -31,6 +31,13 @@ sources:
     - title: "Neal Parikh and Stephen Boyd, Proximal Algorithms, Foundations and Trends in Optimization 1(3) (2014)"
       url: "https://web.stanford.edu/~boyd/papers/pdf/prox_algs.pdf"
       locator: "§4.2, equation (4.6), gradient-step structure used in the scalar model."
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement refuted

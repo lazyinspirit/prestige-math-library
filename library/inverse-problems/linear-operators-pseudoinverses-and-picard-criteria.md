@@ -1,7 +1,7 @@
 ---
 page: linear-operators-pseudoinverses-and-picard-criteria
 title: Compact linear inverse maps and the Picard criterion
-status: draft
+status: published
 items:
   - def-ip-unbounded-hilbert-moore-penrose-inverse
   - def-ip-compact-linear-inverse-model

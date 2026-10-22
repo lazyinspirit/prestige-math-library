@@ -2,7 +2,7 @@
 id: def-satellite-pattern-companion-and-winding-number
 kind: definition
 title: "Satellite pattern, companion, and winding number"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 2
@@ -25,6 +25,12 @@ sources:
       url: "https://pi.math.cornell.edu/~hatcher/3M/3M.pdf"
       locator: "§1.2, torus decomposition conventions, printed pp.11–23"
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
   precheck: n/a
 ---
 

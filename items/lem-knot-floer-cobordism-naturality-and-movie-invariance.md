@@ -2,7 +2,7 @@
 id: lem-knot-floer-cobordism-naturality-and-movie-invariance
 kind: lemma
 title: "Naturality and movie invariance of the decorated knot Floer map"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps:
@@ -26,6 +26,13 @@ sources:
     - title: "Andras Juhasz, Cobordisms of sutured manifolds and the functoriality of link Floer homology, §§8 and 11.3"
       url: "https://arxiv.org/pdf/0910.4382v5"
       locator: "PDF pp.43–54 and 77–79; hat-version cobordism maps and their functoriality"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

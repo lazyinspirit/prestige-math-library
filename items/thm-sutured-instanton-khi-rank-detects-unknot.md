@@ -2,7 +2,7 @@
 id: thm-sutured-instanton-khi-rank-detects-unknot
 kind: theorem
 title: Sutured instanton knot homology detects the unknot
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 6
@@ -34,6 +34,13 @@ sources:
     - title: P. B. Kronheimer and T. S. Mrowka, Khovanov homology is an
         unknot-detector, §§1.1–1.2 and 5.4
       url: https://people.math.harvard.edu/~kronheim/khovanov-unknot.pdf
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

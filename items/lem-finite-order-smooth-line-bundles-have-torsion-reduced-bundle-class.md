@@ -2,7 +2,7 @@
 id: lem-finite-order-smooth-line-bundles-have-torsion-reduced-bundle-class
 kind: lemma
 title: Finite-order smooth line bundles have torsion reduced bundle class
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-axiom-of-choice
@@ -12,6 +12,12 @@ provenance:
   statement: ai-altered
   proof: ai-generated
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
   judge:
     model: "gpt-6-luna"
     verdict: pass

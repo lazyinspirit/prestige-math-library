@@ -1,7 +1,7 @@
 ---
 page: statistical-inverse-experiments-and-white-noise-examples
 title: "Statistical inverse experiments and white noise — Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples:
   - ex-ip-white-noise-direct-functionals

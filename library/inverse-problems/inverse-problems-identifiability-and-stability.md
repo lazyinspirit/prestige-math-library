@@ -1,7 +1,7 @@
 ---
 page: inverse-problems-identifiability-and-stability
 title: Inverse maps, identifiability, and stability
-status: draft
+status: published
 requires:
   - hilbert-space-geometry-and-riesz-representation
 items:

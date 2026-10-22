@@ -2,7 +2,7 @@
 id: alg-ip-nonlinear-landweber-discrepancy
 kind: algorithm
 title: Nonlinear Landweber iteration with discrepancy stopping
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 3
@@ -28,6 +28,12 @@ sources:
     - title: "S. Hubmer, E. Sherina, S. Kindermann, and K. Raik, A numerical comparison of some heuristic stopping rules for nonlinear Landweber iteration, §2.1"
       url: "https://epub.oeaw.ac.at/0xc1aa5576_0x003dd6da.pdf"
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
   precheck: n/a
   judge:
     model: "gpt-6-luna"

@@ -2,7 +2,7 @@
 id: cex-knot-kt-49-boundary-case
 kind: counterexample
 title: A boundary-parallel disk fails the meridian test
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 3
@@ -16,6 +16,12 @@ provenance:
   statement: ai-altered
   proof: ai-generated
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
   judge:
     model: "gpt-6-luna"
     verdict: pass

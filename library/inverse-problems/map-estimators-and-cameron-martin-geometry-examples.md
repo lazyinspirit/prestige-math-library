@@ -1,7 +1,7 @@
 ---
 page: map-estimators-and-cameron-martin-geometry-examples
 title: Small-ball MAP and Cameron–Martin geometry — Examples and Counterexamples
-status: draft
+status: published
 items: []
 examples:
   - ex-ip-finite-dimensional-small-ball-map-equals-density-mode

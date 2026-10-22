@@ -2,7 +2,7 @@
 id: ex-ip-outside-neumann-norm-ball
 kind: example
 title: A compactly supported contrast with volume-operator norm greater than two
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 1
@@ -35,6 +35,12 @@ sources:
       url: "https://www.csc.univie.ac.at/files/InverseProblems_SS15/InverseProblems_full.pdf"
       locator: "Chapter 5, §5.2.6, printed pp. 79–82: inhomogeneous-medium volume equation"
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
   precheck: pass
   judge:
     model: "gpt-6-luna"

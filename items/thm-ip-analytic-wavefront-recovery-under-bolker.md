@@ -2,7 +2,7 @@
 id: thm-ip-analytic-wavefront-recovery-under-bolker
 kind: theorem
 title: "Analytic wavefront recovery under Bolker"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps:
@@ -31,6 +31,13 @@ sources:
       url: "https://www.numdam.org/item/AST_1982__95__R3_0.pdf"
       locator: "§6, Proposition 6.2 and proof, printed pp. 37–38, for analytic packet independence."
 proof_strategy: direct
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

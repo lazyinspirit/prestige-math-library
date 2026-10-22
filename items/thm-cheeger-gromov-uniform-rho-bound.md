@@ -2,7 +2,7 @@
 id: thm-cheeger-gromov-uniform-rho-bound
 kind: theorem
 title: "Cheeger–Gromov uniform bound for rho invariants"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 9
@@ -24,6 +24,13 @@ sources:
     - title: "Jeff Cheeger and Mikhael Gromov, “Bounds on the von Neumann dimension of L²-cohomology and the Gauss–Bonnet theorem for open manifolds”"
       url: "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/cheegergr.pdf"
       locator: "§4, eta-invariant variation and uniform bound"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

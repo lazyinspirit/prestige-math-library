@@ -1,7 +1,7 @@
 ---
 page: kauffman-bracket-state-sum-and-jones-polynomial
 title: "Kauffman bracket state sum and the Jones polynomial"
-status: draft
+status: published
 requires:
   - hecke-markov-traces-and-polynomial-link-invariants
   - crossing-signs-writhe-and-linking-number

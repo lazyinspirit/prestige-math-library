@@ -2,7 +2,7 @@
 id: lem-mirroring-preserves-primality-of-a-knot
 kind: lemma
 title: "Mirroring preserves primeness of an oriented knot"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 2
@@ -21,6 +21,13 @@ sources:
     - title: "Burde and Zieschang, Knots, 2nd revised and extended edition"
       url: "https://www.maths.ed.ac.uk/~v1ranick/papers/burdzies.pdf"
       locator: "Chapter 7, §§7.1–7.3 and Definition 7.6, printed pp.91–94"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

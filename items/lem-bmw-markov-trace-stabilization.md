@@ -2,7 +2,7 @@
 id: lem-bmw-markov-trace-stabilization
 kind: lemma
 title: BMW closure trace and stabilization scalars
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 5
@@ -25,6 +25,13 @@ sources:
     - title: "Louis H. Kauffman, An Invariant of Regular Isotopy, Transactions of the AMS 318(2) (1990), §§VI–VII"
       url: "https://homepages.math.uic.edu/~kauffman/IRH.pdf"
       locator: "PDF pp. 38–54/printed pp. 453–469: regular-isotopy closure evaluation and curl factors"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

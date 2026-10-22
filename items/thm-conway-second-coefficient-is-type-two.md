@@ -2,7 +2,7 @@
 id: thm-conway-second-coefficient-is-type-two
 kind: theorem
 title: The second Conway coefficient is a degree-two finite-type invariant
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 provenance:
@@ -22,6 +22,13 @@ sources:
       url: https://www.math.cinvestav.mx/~mostovoy/cdbook/cdbook-as-submitted.pdf
     - title: Polyak–Viro Formulas for Coefficients of the Conway Polynomial, §§3.4–4.2
       url: https://math.osu.edu/~chmutov.1/preprints/chmutov-khoury-rossi.pdf
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

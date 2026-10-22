@@ -2,7 +2,7 @@
 id: lem-ip-planar-dn-to-scattering-lipschitz-estimate
 kind: lemma
 title: Uniform DN-to-scattering stability for planar conductivities
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps:
@@ -25,6 +25,13 @@ sources:
       url: "https://www.mis.mpg.de/preprints/2006/preprint2006_5.pdf"
       locator: "Section 4.2, Theorem 4.6, Lemmas 4.7–4.9 and full proof, preprint printed pp. 28–31 (PDF pp. 30–33). The proof here computes the exterior Wronskian by Laurent residues."
 dependency_level: 6
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

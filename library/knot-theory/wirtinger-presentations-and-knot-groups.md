@@ -1,7 +1,7 @@
 ---
 page: wirtinger-presentations-and-knot-groups
 title: Wirtinger presentations and knot groups
-status: draft
+status: published
 items:
   - def-knot-planar-code
   - lem-compact-knot-has-choice-free-tube

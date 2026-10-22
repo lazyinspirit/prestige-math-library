@@ -1,7 +1,7 @@
 ---
 page: planar-diagram-codes-and-knot-table-enumeration
 title: Planar-diagram codes and knot-table enumeration
-status: draft
+status: published
 items:
   - lem-connected-plane-multigraph-euler-formula
   - def-planar-diagram-gauss-and-dowker-codes

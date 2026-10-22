@@ -2,7 +2,7 @@
 id: alg-kauffman-polynomial-from-bmw-braid-closure
 kind: algorithm
 title: Compute the Kauffman polynomial from a BMW braid closure
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 6
@@ -35,6 +35,13 @@ sources:
     - title: "Loïc Poulain d’Andecy, Fusion for the Yang–Baxter Equation and the Braid Group, Winter Braids Lecture Notes 7 (2020), §2.2"
       url: "https://proceedings.centre-mersenne.org/item/10.5802/wbln.35.pdf"
       locator: "PDF pp. 14–15: BMW braid-generator convention"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Definition

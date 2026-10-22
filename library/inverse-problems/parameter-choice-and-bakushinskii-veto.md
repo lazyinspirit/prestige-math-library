@@ -1,7 +1,7 @@
 ---
 page: parameter-choice-and-bakushinskii-veto
 title: Parameter rules and the noise-free veto
-status: draft
+status: published
 items:
   - def-ip-noise-level-free-parameter-rule
   - thm-ip-bakushinskii-veto

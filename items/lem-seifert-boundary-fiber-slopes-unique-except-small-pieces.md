@@ -2,7 +2,7 @@
 id: lem-seifert-boundary-fiber-slopes-unique-except-small-pieces
 kind: lemma
 title: "Boundary fiber slopes are unique outside the small Seifert exceptions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 8
@@ -25,6 +25,13 @@ sources:
     - title: "Walter Neumann and Gadde Swarup, Canonical decompositions of 3-manifolds"
       url: "https://arxiv.org/pdf/math/9712227"
       locator: "§3, uniqueness and matching of Seifert boundary fibrations"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: thm-arf-equals-second-conway-coefficient-mod-two
 kind: theorem
 title: "The Arf invariant is the second Conway coefficient modulo two"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 17
@@ -22,6 +22,13 @@ sources:
     - title: "W. B. Raymond Lickorish, An Introduction to Knot Theory, Graduate Texts in Mathematics 175, Springer (1997)"
       url: "https://ebooks.karbust.me/Mathematics/W.%20B.%20Raymond%20Lickorish%20-%20An%20Introduction%20to%20Knot%20Theory%20%281997%29%20%5B978-1-4612-0691-0%5D.pdf"
       locator: "Printed Chapter 10, Definition 10.3, Proposition 10.4 and Theorem 10.7, printed pp. 105–108; complete argument read in full-text PDF copy; publisher chapter record inspected."
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 ## Statement
 

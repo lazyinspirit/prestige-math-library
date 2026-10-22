@@ -2,7 +2,7 @@
 id: op-ip-stable-limited-angle-reconstruction
 kind: open-problem
 title: Sharp deterministic stability for limited-angle reconstruction
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 5
@@ -34,6 +34,10 @@ sources:
       url: "https://www3.stat.sinica.edu.tw/statistica/oldpdf/A26n17s.pdf"
       locator: "Appendix A.1, proof of Theorem 3.1 and supporting Lemma A.4."
 verification:
+  sources_checked:
+    date: "2026-10-22"
+    scope: "Formulation and unresolved status reviewed in the completed delegated build; source-reading limits and evidence remain recorded in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    by: "gpt-6.1-sol delegated native review; publication authorized by owner"
   precheck: n/a
 ---
 

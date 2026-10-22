@@ -1,7 +1,7 @@
 ---
 page: terminating-computations-for-classical-knot-invariants
 title: Terminating computations for classical knot invariants
-status: draft
+status: published
 requires:
   - fox-colorings-and-quandle-invariants
   - kauffman-bracket-state-sum-and-jones-polynomial

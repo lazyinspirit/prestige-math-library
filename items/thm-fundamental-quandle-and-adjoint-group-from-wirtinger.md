@@ -2,7 +2,7 @@
 id: thm-fundamental-quandle-and-adjoint-group-from-wirtinger
 kind: theorem
 title: "Diagram fundamental quandles and adjoint groups from Wirtinger data"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps: [ def-rack-fundamental-quandle-and-adjoint-group, def-group-presentation, thm-oriented-reidemeister-equivalence-theorem, def-countable-choice, def-oriented-link-in-s-three-and-ambient-isotopy, def-knot-planar-code, alg-knot-wirtinger-presentation-from-code, thm-knot-wirtinger-presentation-correctness ]
@@ -19,6 +19,13 @@ sources:
     - title: "J. Scott Carter, A Survey of Quandle Ideas, §§2.1–2.2, arXiv:1002.4429v2, pp. 3–8"
       url: "https://arxiv.org/pdf/1002.4429"
 dependency_level: 5
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: lem-general-3manifold-skein-quotient-isotopy-and-gluing
 kind: lemma
 title: "Functoriality and boundary-collar action for the three-manifold skein quotient"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 2
@@ -24,6 +24,13 @@ sources:
       url: "https://categorified.net/RTinvariants/Jan29-Feb3.pdf"
     - title: "Thang T. Q. Lê, The Colored Jones Polynomial and the AJ Conjecture, §6.1, printed pp. 30–31"
       url: "https://letu.math.gatech.edu/Papers/Lectures_Luminy_2014_new.pdf"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

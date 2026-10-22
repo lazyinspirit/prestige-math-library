@@ -1,7 +1,7 @@
 ---
 page: kauffman-bracket-state-sum-and-jones-polynomial-examples
 title: "Kauffman bracket state sum and the Jones polynomial — Examples and Counterexamples"
-status: draft
+status: published
 requires:
   - kauffman-bracket-state-sum-and-jones-polynomial
   - temperley-lieb-diagram-algebra-and-catalan-basis

@@ -2,7 +2,7 @@
 id: thm-cochran-davis-ray-strong-winding-injectivity
 kind: theorem
 title: "Cochran–Davis–Ray satellite injectivity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 8
@@ -33,6 +33,13 @@ sources:
     - title: "Tim D. Cochran, Bridget D. Franklin, Matthew Hedden, and Peter D. Horn, “Knot concordance and homology cobordism”"
       url: "https://arxiv.org/pdf/1102.5730"
       locator: "Theorem 2.1, localized homology cobordism hypothesis"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

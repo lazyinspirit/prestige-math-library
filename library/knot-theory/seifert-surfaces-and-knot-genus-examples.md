@@ -1,7 +1,7 @@
 ---
 page: seifert-surfaces-and-knot-genus-examples
 title: "Seifert surfaces and knot genus — Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples:
   - ex-knot-kt-04-worked-cases

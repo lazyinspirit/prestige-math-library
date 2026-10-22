@@ -2,7 +2,7 @@
 id: lem-zero-surgery-cyclic-cover-homology-splitting
 kind: lemma
 title: Homology splitting for the cyclic cover of zero surgery
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 6
@@ -32,6 +32,13 @@ sources:
     - title: Anthony Conway, Algebraic Concordance and Casson–Gordon Invariants
       url: https://web.archive.org/web/20240101000000id_/https://www.unige.ch/math/folks/conway/Notes/AlgebraicConcordanceCassonGordon.pdf
       locator: §2.6, Lemma 2.31, printed pp. 23–24; complete Mayer–Vietoris proof read, with the meridian retraction made explicit locally
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

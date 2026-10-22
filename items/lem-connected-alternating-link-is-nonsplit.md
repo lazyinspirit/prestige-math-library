@@ -2,7 +2,7 @@
 id: lem-connected-alternating-link-is-nonsplit
 kind: lemma
 title: Connected alternating diagrams represent nonsplit links
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 3
@@ -27,6 +27,13 @@ sources:
       url: https://people.maths.ox.ac.uk/lackenby/Fox.pdf
     - title: Thomas Kindred, A geometric proof of the flyping theorem, §2.1, Fact 2.4
       url: https://arxiv.org/pdf/2008.06490v3
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

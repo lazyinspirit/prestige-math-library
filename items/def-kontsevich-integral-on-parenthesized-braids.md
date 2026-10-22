@@ -2,7 +2,7 @@
 id: def-kontsevich-integral-on-parenthesized-braids
 kind: definition
 title: The Kontsevich integral on parenthesized braids
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -15,6 +15,12 @@ justified_by:
   - lem-kontsevich-configuration-integral-convergence-needle-estimates
 dependency_level: 3
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
   precheck: n/a
 sources:
   references:

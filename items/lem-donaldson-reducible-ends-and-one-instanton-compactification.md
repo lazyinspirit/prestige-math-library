@@ -2,7 +2,7 @@
 id: lem-donaldson-reducible-ends-and-one-instanton-compactification
 kind: lemma
 title: Reducible ends and compactification of the one-instanton moduli space
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 5
@@ -27,6 +27,13 @@ sources:
     - title: Simon K. Donaldson, An Application of Gauge Theory to the Topology of 4-Manifolds
       url: https://webhomes.maths.ed.ac.uk/~v1ranick/papers/donaldson.pdf
       locator: §§II.1–II.4 and III.3–III.4, printed pp. 287–294 and 302–315; reducible slices, spectral flow, and Taubes end
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

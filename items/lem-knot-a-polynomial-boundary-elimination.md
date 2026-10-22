@@ -2,7 +2,7 @@
 id: lem-knot-a-polynomial-boundary-elimination
 kind: lemma
 title: Boundary eigenvalue curve elimination for the A-polynomial
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 10
@@ -25,6 +25,13 @@ sources:
       url: https://homepages.math.uic.edu/~culler/papers/PlaneCurves/curves.pdf
     - title: Stephan Tillmann, Varieties associated to 3-manifolds, §7
       url: https://www.maths.usyd.edu.au/u/tillmann/papers/course.pdf
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

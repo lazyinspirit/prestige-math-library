@@ -1,7 +1,7 @@
 ---
 page: knot-cobordism-maps-and-functoriality-examples
 title: Knot cobordism maps and functoriality — Examples and Counterexamples
-status: draft
+status: published
 items: []
 examples:
   - ex-knot-kt-40-worked-cases

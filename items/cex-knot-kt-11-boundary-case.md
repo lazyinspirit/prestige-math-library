@@ -2,7 +2,7 @@
 id: cex-knot-kt-11-boundary-case
 kind: counterexample
 title: "A higher cyclic branched cover can have infinite first homology"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 14
@@ -30,6 +30,13 @@ sources:
     - title: "Shin’ichi Saeki, Knot Theory Lecture Notes, Chapter 7: Seifert Matrices and Derived Invariants"
       url: "https://www2.math.kyushu-u.ac.jp/~saeki/Lee-Lectures.pdf"
       locator: "Chapter 7, Example 7.4; right-handed trefoil Seifert matrix"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement refuted

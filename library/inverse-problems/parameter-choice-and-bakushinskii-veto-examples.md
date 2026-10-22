@@ -1,7 +1,7 @@
 ---
 page: parameter-choice-and-bakushinskii-veto-examples
 title: Parameter rules and the noise-free veto — Examples and Counterexamples
-status: draft
+status: published
 items: []
 examples:
   - ex-ip-discrete-grid-l-curve-parameter-choice

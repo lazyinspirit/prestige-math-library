@@ -1,7 +1,7 @@
 ---
 page: open-frontiers-in-learned-inverse-problems
 title: Open frontiers in calibrated and robust learned inversion
-status: draft
+status: published
 items:
   - op-ip-calibration-under-score-and-solver-error
   - op-ip-neural-operator-sample-complexity-for-inverse-maps

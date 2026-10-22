@@ -2,7 +2,7 @@
 id: lem-isometry-preserves-finite-volume-integral
 kind: lemma
 title: "An isometry preserves the finite hyperbolic volume integral"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 5
@@ -27,6 +27,13 @@ sources:
     - title: "John M. Lee, Introduction to Smooth Manifolds, second edition"
       url: "https://dokumen.pub/introduction-to-smooth-manifolds-2nd-ed-9781441999818-9781441999825-1441999817-1441999825.html"
       locator: "Propositions 15.29–15.33 and Corollary 15.34, Riemannian volume density"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

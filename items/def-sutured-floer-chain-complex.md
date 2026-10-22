@@ -2,7 +2,7 @@
 id: def-sutured-floer-chain-complex
 kind: definition
 title: "Sutured Floer chain complexes and homology notation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps:
@@ -24,6 +24,12 @@ sources:
       url: "https://arxiv.org/pdf/math/0607156v4"
       locator: "Printed pp.5–7; the sutured Floer invariant associated to a sutured manifold and its diagram-independence construction"
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
   precheck: n/a
 ---
 

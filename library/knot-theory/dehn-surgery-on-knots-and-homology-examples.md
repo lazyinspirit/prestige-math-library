@@ -1,7 +1,7 @@
 ---
 page: dehn-surgery-on-knots-and-homology-examples
 title: Dehn surgery on knots and homology — Examples and Counterexamples
-status: draft
+status: published
 items: []
 examples:
   - ex-knot-kt-13-worked-cases

@@ -1,7 +1,7 @@
 ---
 page: three-manifold-surgery-presentations-and-kirby-moves
 title: Three-manifold surgery presentations and Kirby moves
-status: draft
+status: published
 requires:
   - knot-exteriors-and-peripheral-systems
   - dehn-surgery-on-knots-and-homology

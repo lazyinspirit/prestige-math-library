@@ -1,7 +1,7 @@
 ---
 page: unrolled-inverse-solvers-and-generalization-examples
 title: "Unrolled reconstruction and finite-iteration limits — Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples:
   - ex-ip-truncated-landweber-versus-learned-unrolling

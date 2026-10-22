@@ -2,7 +2,7 @@
 id: lem-vassiliev-framing-one-term-relation
 kind: lemma
 title: The one-term relation and framing
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 provenance:
@@ -30,6 +30,13 @@ sources:
     - title: "Mohamed Elhamdadi, Mustafa Hajij, and Kyle Istvan, Framed Knots, arXiv:1910.10257v6 (2020)"
       url: "https://arxiv.org/pdf/1910.10257v6"
       locator: "§3, PDF pp. 7–9; §6, PDF pp. 15–16"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

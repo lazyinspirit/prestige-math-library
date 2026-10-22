@@ -1,7 +1,7 @@
 ---
 page: casson-gordon-invariants-and-sliceness-obstructions
 title: Casson–Gordon invariants and sliceness obstructions
-status: draft
+status: published
 requires:
   - cyclic-branched-covers-and-knot-determinants
   - levine-tristram-signatures-and-arf-invariant

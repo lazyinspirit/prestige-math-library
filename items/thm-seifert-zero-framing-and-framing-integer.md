@@ -2,7 +2,7 @@
 id: thm-seifert-zero-framing-and-framing-integer
 kind: theorem
 title: "A Seifert framing has zero self-linking"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps:
@@ -38,6 +38,13 @@ sources:
     - title: "Mohamed Elhamdadi, Mustafa Hajij, and Kyle Istvan, Framed Knots, arXiv:1910.10257v6, §§3, 5–6, pp.5–9 and 15–18"
       url: "https://arxiv.org/pdf/1910.10257v6"
       locator: "Seifert zero framing, self-linking as a push-off linking number, and framing classes via SO(2)"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

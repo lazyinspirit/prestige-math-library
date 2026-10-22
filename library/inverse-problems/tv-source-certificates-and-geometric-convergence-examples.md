@@ -1,7 +1,7 @@
 ---
 page: tv-source-certificates-and-geometric-convergence-examples
 title: TV source certificates and level-set convergence — Examples and Counterexamples
-status: draft
+status: published
 items: []
 examples:
   - cex-ip-tv-minimum-truth-without-source-certificate

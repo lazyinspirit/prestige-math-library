@@ -2,7 +2,7 @@
 id: lem-right-trefoil-is-prime
 kind: lemma
 title: The right trefoil is prime
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 6
@@ -28,6 +28,13 @@ sources:
     - title: The right-trefoil genus-one proof in this batch
       url: https://www.maths.ed.ac.uk/~v1ranick/papers/burdzies.pdf
       locator: Theorem 7.4 together with the local exact-genus argument
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

@@ -1,7 +1,7 @@
 ---
 page: zero-traces-and-conway-nonsliceness
 title: Zero traces and the Conway nonsliceness theorem
-status: draft
+status: published
 items:
   - def-piccirillo-conway-pair
   - def-smooth-zero-trace

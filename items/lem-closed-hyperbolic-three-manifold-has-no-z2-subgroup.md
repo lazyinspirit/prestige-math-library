@@ -2,7 +2,7 @@
 id: lem-closed-hyperbolic-three-manifold-has-no-z2-subgroup
 kind: lemma
 title: "Closed hyperbolic three-manifold groups contain no Z-squared subgroup"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 5
@@ -32,6 +32,12 @@ sources:
       url: "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf"
       locator: "§24.1, Proposition 24.1.1 and Corollary 24.1.2, printed pp.174–175; §24.3, Theorem 24.3.1 and proof, printed pp.178–179"
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
   precheck: pending
 ---
 

@@ -2,7 +2,7 @@
 id: def-asd-moduli-fredholm-index-and-lattice-setup
 kind: definition
 title: Sign-fixed self-dual moduli and deformation setup
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 1
@@ -20,6 +20,12 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
   judge:
     model: "gpt-6-luna"
     verdict: pass

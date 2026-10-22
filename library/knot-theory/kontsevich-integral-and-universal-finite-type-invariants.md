@@ -1,7 +1,7 @@
 ---
 page: kontsevich-integral-and-universal-finite-type-invariants
 title: The Kontsevich integral and universality
-status: draft
+status: published
 requires:
   - vassiliev-invariants-and-chord-diagrams
 items:

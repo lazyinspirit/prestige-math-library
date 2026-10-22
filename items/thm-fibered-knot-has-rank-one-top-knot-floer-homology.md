@@ -2,7 +2,7 @@
 id: thm-fibered-knot-has-rank-one-top-knot-floer-homology
 kind: theorem
 title: "A fibered knot has rank-one top knot Floer homology"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps:
@@ -36,6 +36,13 @@ sources:
     - title: "Ciprian Manolescu, An Introduction to Knot Floer Homology, Theorem 2.5"
       url: "https://web.stanford.edu/~cm5/hfk.pdf"
       locator: "Printed p.5; the S3 fibered-knot rank-one equivalence"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

@@ -1,7 +1,7 @@
 ---
 page: dynamic-data-identifiability-and-system-realization-examples
 title: Dynamical observations and finite system realization — Examples and Counterexamples
-status: draft
+status: published
 requires:
   - dynamic-data-identifiability-and-system-realization
 items: []

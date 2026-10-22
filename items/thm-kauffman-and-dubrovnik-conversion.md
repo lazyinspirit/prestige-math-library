@@ -2,7 +2,7 @@
 id: thm-kauffman-and-dubrovnik-conversion
 kind: theorem
 title: The Kauffman and Dubrovnik polynomials agree under the stated conversion
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 8
@@ -30,6 +30,13 @@ sources:
     - title: "Joan S. Birman and Tara E. Brendle, Braids: A Survey, Handbook of Knot Theory chapter, Theorems 2 and 4"
       url: "https://www.math.columbia.edu/~jb/Handbook-21.pdf"
       locator: "Printed pp. 13–19: Alexander and Markov theorems used for the braid-closure realization"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

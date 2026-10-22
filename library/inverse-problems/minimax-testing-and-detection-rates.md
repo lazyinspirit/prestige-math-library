@@ -1,7 +1,7 @@
 ---
 page: minimax-testing-and-detection-rates
 title: Minimax signal detection and separation rates
-status: draft
+status: published
 requires:
   - statistical-inverse-experiments-and-white-noise
   - gaussian-sequence-models-and-risk-decomposition

@@ -2,7 +2,7 @@
 id: lem-finite-pl-level-collars-give-global-band-products
 kind: lemma
 title: "Finite piecewise linear level collars give global band products"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps: [ lem-compact-locally-collared-pl-subpolyhedron-has-pl-collar, lem-finite-convex-cell-complexes-admit-compatible-triangulations, lem-pl-embedded-polyhedron-admits-compatible-subcomplex-triangulation ]
@@ -17,6 +17,13 @@ sources:
       url: "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/rsplx.pdf"
       locator: "Printed pp.57–59, 4.21–4.24; full extending-collars, collar-leveling, and finite interval-pasting proofs. The precise height-band formulation below is proved directly."
 dependency_level: 3
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

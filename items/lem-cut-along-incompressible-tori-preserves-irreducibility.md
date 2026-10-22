@@ -2,7 +2,7 @@
 id: lem-cut-along-incompressible-tori-preserves-irreducibility
 kind: lemma
 title: "Cutting an irreducible manifold along incompressible tori preserves irreducibility"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 4
@@ -26,6 +26,13 @@ sources:
     - title: "Ryan Budney, JSJ-decompositions of knot and link complements in the 3-sphere"
       url: "https://arxiv.org/pdf/math/0506523"
       locator: "§1, incompressible tori and irreducible cut pieces, PDF pp.2–4"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

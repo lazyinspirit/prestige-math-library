@@ -2,7 +2,7 @@
 id: lem-grid-diagram-is-admissible
 kind: lemma
 title: "A knot grid diagram is admissible"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps:
@@ -20,6 +20,13 @@ sources:
     - title: "Ciprian Manolescu, Peter Ozsvath, and Sucharit Sarkar, A combinatorial description of knot Floer homology, §3"
       url: "https://arxiv.org/pdf/math/0607691"
       locator: "Lemma 3.5 and its periodic-domain calculation for knot grids"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

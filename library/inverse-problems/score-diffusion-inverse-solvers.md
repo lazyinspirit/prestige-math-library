@@ -1,7 +1,7 @@
 ---
 page: score-diffusion-inverse-solvers
 title: Score and diffusion methods for inverse data
-status: draft
+status: published
 requires:
   - learned-reconstruction-targets-and-risk
   - unrolled-inverse-solvers-and-generalization

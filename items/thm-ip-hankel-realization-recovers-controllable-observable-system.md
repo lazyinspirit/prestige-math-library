@@ -2,7 +2,7 @@
 id: thm-ip-hankel-realization-recovers-controllable-observable-system
 kind: theorem
 title: Hankel realization recovers a controllable and observable system
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 2
@@ -32,6 +32,13 @@ sources:
     - title: "Sanjay Lall, Engr207c: Operator Theory and Linear Systems, State-Space Realization lecture notes"
       url: "https://lall.stanford.edu/engr207c/lectures/realization_2008_11_15_03.pdf"
       locator: "§9.2, Theorem 8, Hankel factorization and realization discussion, PDF pp. 5–6"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

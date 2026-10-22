@@ -2,7 +2,7 @@
 id: ex-knot-kt-15-worked-cases
 kind: example
 title: "A meridian-preserving longitude twist extends over a solid torus"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 1
@@ -22,6 +22,13 @@ sources:
       url: "https://poisson.phc.dm.unipi.it/~camponovo/libri/knot.pdf"
     - title: "Kimihiko Motegi, Dehn surgery on knots: survey, pp. 19–21"
       url: "https://www.math.tsukuba.ac.jp/~tange/diftop22/Dehn_surgery_survey.pdf"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Example

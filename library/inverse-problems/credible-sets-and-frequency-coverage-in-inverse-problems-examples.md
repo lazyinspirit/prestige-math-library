@@ -1,7 +1,7 @@
 ---
 page: credible-sets-and-frequency-coverage-in-inverse-problems-examples
 title: Credible sets and frequentist coverage — Examples and Counterexamples
-status: draft
+status: published
 items: []
 examples:
   - ex-ip-inverse-coordinate-credible-interval-undercoverage

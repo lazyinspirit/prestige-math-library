@@ -2,7 +2,7 @@
 id: lem-barnatan-carter-saito-movie-moves-up-to-sign
 kind: lemma
 title: "The even Khovanov map is unchanged up to sign by each movie move"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps:
@@ -39,6 +39,13 @@ sources:
     - title: "Mikhail Khovanov, A categorification of the Jones polynomial, §§6.3 and 7.1"
       url: "https://arxiv.org/pdf/math/9908171v2"
       locator: "§6.3, printed pp.39–40, gives the movie-level maps; §7.1 gives the c=0 integral specialization"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

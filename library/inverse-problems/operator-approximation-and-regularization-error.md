@@ -1,7 +1,7 @@
 ---
 page: operator-approximation-and-regularization-error
 title: Data, operator, discretization, and solve errors
-status: draft
+status: published
 items:
   - def-ip-error-budget-for-computed-inversion
   - prop-ip-regularized-output-error-splits-by-source

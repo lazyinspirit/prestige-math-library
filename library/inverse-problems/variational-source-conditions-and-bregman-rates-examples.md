@@ -1,7 +1,7 @@
 ---
 page: variational-source-conditions-and-bregman-rates-examples
 title: Bregman distances and variational source rates — Examples and Counterexamples
-status: draft
+status: published
 items: []
 examples:
   - cex-ip-vsc-unit-coefficient-does-not-control-bregman-error

@@ -1,7 +1,7 @@
 ---
 page: statistical-inverse-model-misspecification
 title: Unknown operators, model mismatch, and robustness limits
-status: draft
+status: published
 requires:
   - inverse-problems-identifiability-and-stability
   - statistical-inverse-experiments-and-white-noise

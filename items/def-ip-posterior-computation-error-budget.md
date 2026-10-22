@@ -2,7 +2,7 @@
 id: def-ip-posterior-computation-error-budget
 kind: definition
 title: Posterior computation error budget
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 0
@@ -35,6 +35,13 @@ sources:
     - title: "Charles J. Geyer, Markov Chain Monte Carlo Lecture Notes"
       url: https://www.stat.umn.edu/geyer/f05/8931/n1998.pdf
       locator: "§1.6.2, equation (1.9) and the following caution (printed pp. 8–11; PDF pp. 12–15): stationary-chain variance of a sample mean and limits on CLT conclusions."
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Definition

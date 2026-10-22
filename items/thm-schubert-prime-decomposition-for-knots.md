@@ -2,7 +2,7 @@
 id: thm-schubert-prime-decomposition-for-knots
 kind: theorem
 title: Existence and uniqueness of prime decomposition for oriented knots
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 6
@@ -33,6 +33,13 @@ sources:
       url: https://friedl.app.uni-regensburg.de/papers/2024_knot-theory-final.pdf
       locator: Chapter 11 §§11.4–11.5, printed pp.162–168; uniqueness deferred to
         Schubert
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

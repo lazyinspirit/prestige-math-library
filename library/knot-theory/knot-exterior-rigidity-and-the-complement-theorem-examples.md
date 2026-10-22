@@ -1,7 +1,7 @@
 ---
 page: knot-exterior-rigidity-and-the-complement-theorem-examples
 title: The knot-complement theorem — Examples and Counterexamples
-status: draft
+status: published
 items: []
 examples:
   - ex-knot-kt-15-worked-cases

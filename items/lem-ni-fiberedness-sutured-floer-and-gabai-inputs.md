@@ -2,7 +2,7 @@
 id: lem-ni-fiberedness-sutured-floer-and-gabai-inputs
 kind: lemma
 title: "Ni's sutured Floer and Gabai product criterion"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps:
@@ -45,6 +45,12 @@ sources:
       url: "https://arxiv.org/pdf/0808.0940"
       locator: "Author version pp.1–3: Theorem 4, Definitions 5–6, Theorem 6.2-prime, Corollary 7 and corrected proof of Theorem 1.1; maximal product pairs replace the original incorrect characteristic-product-region citation"
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
   precheck: n/a
 ---
 

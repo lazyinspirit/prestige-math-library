@@ -1,7 +1,7 @@
 ---
 page: open-questions-in-knot-polynomials-and-surgery-examples
 title: Open questions in knot polynomials and surgery — Examples and Counterexamples
-status: draft
+status: published
 requires:
   - open-questions-in-knot-polynomials-and-surgery
   - temperley-lieb-root-of-unity-and-modular-representation-theory

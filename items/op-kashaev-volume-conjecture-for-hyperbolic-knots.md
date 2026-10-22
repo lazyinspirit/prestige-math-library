@@ -2,7 +2,7 @@
 id: op-kashaev-volume-conjecture-for-hyperbolic-knots
 kind: open-problem
 title: Kashaev–Murakami–Murakami volume conjecture for hyperbolic knots
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 6
@@ -25,6 +25,11 @@ sources:
       url: https://ems.press/content/serial-article-files/51448
     - title: Shinichiro Kakuta, On the volume conjecture of the colored Jones invariants with arbitrary colors, version 3, §1
       url: https://arxiv.org/pdf/2604.10472v3
+verification:
+  sources_checked:
+    date: "2026-10-22"
+    scope: "Formulation and unresolved status reviewed in the completed delegated build; source-reading limits and evidence remain recorded in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    by: "gpt-6.1-sol delegated native review; publication authorized by owner"
 ---
 
 ## Open problem

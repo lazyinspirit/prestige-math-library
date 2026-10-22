@@ -3,7 +3,7 @@ id: lem-connected-normal-surface-chi-one-is-disk
 kind: lemma
 title: A connected triangulated surface with Euler characteristic one and
   boundary is a disk
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 1
@@ -28,6 +28,13 @@ sources:
       url: https://jeffe.cs.illinois.edu/teaching/comptop/2009/notes/normal-surfaces.pdf
       locator: §§14.1–14.4, complete six-page notes on normal disks, matching, normal
         surfaces and knots.
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

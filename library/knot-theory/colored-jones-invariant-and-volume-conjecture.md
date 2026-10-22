@@ -1,7 +1,7 @@
 ---
 page: colored-jones-invariant-and-volume-conjecture
 title: Colored Jones and the volume conjecture
-status: draft
+status: published
 requires:
   - hyperbolic-knot-complements-and-volume
   - ribbon-categories-and-reshetikhin-turaev-knot-invariants

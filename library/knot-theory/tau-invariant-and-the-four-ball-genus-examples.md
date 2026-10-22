@@ -1,7 +1,7 @@
 ---
 page: tau-invariant-and-the-four-ball-genus-examples
 title: The tau invariant and four-ball genus — Examples and Counterexamples
-status: draft
+status: published
 requires:
   - tau-invariant-and-the-four-ball-genus
 items: []

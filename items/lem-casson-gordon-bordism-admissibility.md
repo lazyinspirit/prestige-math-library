@@ -2,7 +2,7 @@
 id: lem-casson-gordon-bordism-admissibility
 kind: lemma
 title: Prime-power characters admit a multiple bounding bordism
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 8
@@ -30,6 +30,13 @@ sources:
     - title: A. J. Casson and C. McA. Gordon, Cobordism of Classical Knots (1986), with appendix by P. M. Gilmer
       url: https://webhomes.maths.ed.ac.uk/~v1ranick/papers/cassgord.pdf
       locator: Printed p. 189; finite Ω3(C_m × C∞) bordism is invoked without its proof
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

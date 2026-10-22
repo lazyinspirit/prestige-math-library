@@ -2,7 +2,7 @@
 id: thm-ip-analytic-stationary-phase-with-exponential-remainder
 kind: theorem
 title: "Analytic stationary phase with optimal truncation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps:
@@ -26,6 +26,13 @@ sources:
       url: "https://users.jyu.fi/~salomi/pub/MazzucchelliSaloTzou2023.pdf"
       locator: "§5.4, stationary-phase proof of Theorem 5.2, and §5.5, oscillatory-integral representation of the FBI packet kernel and proof of Proposition 5.4."
 proof_strategy: direct
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

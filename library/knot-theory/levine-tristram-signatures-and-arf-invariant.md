@@ -1,7 +1,7 @@
 ---
 page: levine-tristram-signatures-and-arf-invariant
 title: Levine–Tristram signatures and the Arf invariant
-status: draft
+status: published
 requires:
   - seifert-matrices-and-the-alexander-module
   - alexander-polynomial-from-seifert-matrices

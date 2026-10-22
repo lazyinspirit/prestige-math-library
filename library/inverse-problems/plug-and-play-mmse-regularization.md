@@ -1,7 +1,7 @@
 ---
 page: plug-and-play-mmse-regularization
 title: Plug-and-play MMSE denoisers and stationarity
-status: draft
+status: published
 requires:
   - learned-reconstruction-targets-and-risk
   - proximal-gradient-and-accelerated-composite-optimization

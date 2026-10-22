@@ -2,7 +2,7 @@
 id: lem-ip-planar-isoperimetric-inequality-for-finite-perimeter-sets
 kind: lemma
 title: Sharp planar isoperimetric inequality for finite-perimeter sets
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 4
@@ -31,6 +31,13 @@ sources:
     - title: "Gláucio Terra, Introduction to Geometric Measure Theory — Lecture Notes, version 1.6"
       url: "https://www.ime.usp.br/~glaucio/mat6704/textos/GMTLecureNotes.pdf"
       locator: "§7.6, planar finite-perimeter and isoperimetric results"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

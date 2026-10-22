@@ -2,7 +2,7 @@
 id: lem-link-diagram-upper-region-free-meridians
 kind: lemma
 title: The upper link-diagram region is free on strand meridians
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 4
@@ -26,6 +26,13 @@ sources:
       url: https://friedl.app.uni-regensburg.de/papers/2024_knot-theory-final.pdf
       locator: Claim 2 and the vertical-sheet decomposition, printed pp. 71–72, PDF
         pp. 72–73
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

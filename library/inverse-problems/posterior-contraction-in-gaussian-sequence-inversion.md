@@ -1,7 +1,7 @@
 ---
 page: posterior-contraction-in-gaussian-sequence-inversion
 title: "Posterior contraction in Gaussian sequence inversion"
-status: draft
+status: published
 items:
   - def-ip-posterior-contraction-rate
   - thm-ip-conjugate-gaussian-sequence-contraction

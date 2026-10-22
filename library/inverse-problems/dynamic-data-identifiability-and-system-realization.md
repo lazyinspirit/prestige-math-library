@@ -1,7 +1,7 @@
 ---
 page: dynamic-data-identifiability-and-system-realization
 title: Dynamical observations and finite system realization
-status: draft
+status: published
 requires:
   - bochner-inversion-and-plancherel-on-lca-groups
   - orthonormal-bases-parseval-and-fourier-series

@@ -2,7 +2,7 @@
 id: lem-figure-eight-complement-punctured-torus-bundle
 kind: lemma
 title: "The figure-eight complement is a punctured-torus bundle"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 1
@@ -25,6 +25,12 @@ sources:
       url: "https://www.math.miami.edu/~kenken/Baker-Diss-07-02-04.pdf"
       locator: "§3.1, Figure 3.2 and printed p.27; Appendix B, Figure B.1 and printed pp.142–143"
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
   precheck: pending
   judge:
     model: "gpt-6-luna"

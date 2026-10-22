@@ -1,7 +1,7 @@
 ---
 page: bayesian-inverse-experimental-design-and-information-gain-examples
 title: Bayesian measurement design and information gain — Examples and Counterexamples
-status: draft
+status: published
 items: []
 examples:
   - cex-ip-eig-cannot-identify-wrong-forward-operator

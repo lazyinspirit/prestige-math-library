@@ -1,7 +1,7 @@
 ---
 page: character-varieties-and-the-a-polynomial-examples
 title: Character varieties and the A-polynomial — Examples and Counterexamples
-status: draft
+status: published
 items: []
 examples:
   - cex-knot-kt-20-boundary-case

@@ -2,7 +2,7 @@
 id: lem-kontsevich-morse-isotopy-decomposition
 kind: lemma
 title: Generic isotopies have finite Morse movies
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 provenance:
@@ -23,7 +23,13 @@ sources:
       url: https://www.math.cinvestav.mx/~mostovoy/cdbook/cdbook-as-submitted.pdf
     - title: "Gualtieri, Topology I: Smooth Manifolds, §3.4, Theorem 3.26"
       url: https://www.math.toronto.edu/mgualt/courses/17-1300/docs/17-1300-notes-10.pdf
-
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

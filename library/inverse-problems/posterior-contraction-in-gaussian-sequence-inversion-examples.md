@@ -1,7 +1,7 @@
 ---
 page: posterior-contraction-in-gaussian-sequence-inversion-examples
 title: "Posterior contraction in Gaussian sequence inversion — Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples:
   - ex-ip-polynomial-singular-value-posterior-contraction

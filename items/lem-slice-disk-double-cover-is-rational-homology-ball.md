@@ -2,7 +2,7 @@
 id: lem-slice-disk-double-cover-is-rational-homology-ball
 kind: lemma
 title: "The smooth slice-disk double cover is a rational homology ball"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 page: branched-cover-correction-terms-and-sliceness
@@ -19,6 +19,12 @@ provenance:
   statement: literature-derived
   proof: ai-generated
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
   precheck: n/a
 sources:
   references:

@@ -2,7 +2,7 @@
 id: lem-dehn-filling-deformation-and-completeness
 kind: lemma
 title: Peripheral holonomy equations produce smooth hyperbolic fillings
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 6
@@ -34,6 +34,12 @@ sources:
       url: https://arxiv.org/pdf/math/9901045
       locator: Theorem 0.1 and §§1–3; Propositions 2.9 and 3.6
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
   precheck: pending
 ---
 

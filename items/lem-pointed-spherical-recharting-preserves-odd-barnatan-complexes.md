@@ -2,7 +2,7 @@
 id: lem-pointed-spherical-recharting-preserves-odd-barnatan-complexes
 kind: lemma
 title: Pointed spherical recharting preserves the integral odd and Bar–Natan complexes
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps:
@@ -19,6 +19,13 @@ sources:
       url: https://arxiv.org/pdf/0710.4300
       locator: Figure 2, Definition 1.1 and Lemmas 2.2–2.3; the spherical zero-face and marked comparison calculations are supplied below
 dependency_level: 2
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

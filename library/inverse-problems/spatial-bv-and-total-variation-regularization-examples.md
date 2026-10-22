@@ -1,7 +1,7 @@
 ---
 page: spatial-bv-and-total-variation-regularization-examples
 title: Spatial BV, finite perimeter, and TV conventions — Examples and Counterexamples
-status: draft
+status: published
 items: []
 examples:
   - ex-ip-bv-jump-across-smooth-curve

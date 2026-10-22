@@ -1,7 +1,7 @@
 ---
 page: normal-surface-unknot-recognition-examples
 title: Normal-surface unknot recognition examples
-status: draft
+status: published
 items: []
 examples:
   - cex-knot-kt-49-boundary-case

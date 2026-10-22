@@ -1,7 +1,7 @@
 ---
 page: neural-operator-eit-inverse-map
 title: Noise-robust neural-operator approximation for EIT
-status: draft
+status: published
 items:
   - lem-ip-boundary-chart-lifting-and-fourier-projection
   - lem-ip-finite-dimensional-neural-universal-approximation

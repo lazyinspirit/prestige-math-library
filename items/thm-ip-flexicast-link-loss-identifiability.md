@@ -2,7 +2,7 @@
 id: thm-ip-flexicast-link-loss-identifiability
 kind: theorem
 title: "Link-loss identifiability from split and coverage"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 2
@@ -23,6 +23,13 @@ sources:
     - title: "E. Lawrence, G. Michailidis, and V. N. Nair, Statistical Inverse Problems in Active Network Tomography, IMS Lecture Notes–Monograph Series 54 (2007), 24–44"
       url: "https://arxiv.org/pdf/0708.1079"
       locator: "§3.1, PDF pp. 5–6 (printed pp. 28–29), reported split/coverage criterion and its exact model scope"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

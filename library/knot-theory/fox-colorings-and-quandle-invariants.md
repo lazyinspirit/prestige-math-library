@@ -1,7 +1,7 @@
 ---
 page: fox-colorings-and-quandle-invariants
 title: Fox colorings and quandle invariants
-status: draft
+status: published
 requires:
   - wirtinger-presentations-and-knot-groups
   - crossing-signs-writhe-and-linking-number

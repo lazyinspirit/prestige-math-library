@@ -2,7 +2,7 @@
 id: thm-ip-no-uniform-recovery-under-unrestricted-operator-mismatch
 kind: theorem
 title: Equal observation laws force a metric-risk lower bound
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 2
@@ -33,6 +33,13 @@ sources:
     - title: "John Duchi, Lecture Notes on Statistics and Information Theory, Chapter 8, §§8.1–8.3"
       url: "https://web.stanford.edu/class/stats311/lecture-notes.pdf"
       locator: "§8.1 metric risk; Proposition 8.2.1 proof; §8.3, especially (8.3.1)–(8.3.3)"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

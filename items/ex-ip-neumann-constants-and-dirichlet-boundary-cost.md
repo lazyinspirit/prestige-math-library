@@ -2,7 +2,7 @@
 id: ex-ip-neumann-constants-and-dirichlet-boundary-cost
 kind: example
 title: Neumann constants and the Dirichlet boundary cost
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-countable-choice
@@ -21,6 +21,12 @@ provenance:
 generation:
   role: example
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
   judge:
     model: "gpt-6-luna"
     verdict: pass

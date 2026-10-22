@@ -1,7 +1,7 @@
 ---
 page: feature-inference-and-map-testing
 title: Linear feature identifiability and Gaussian MAP tests
-status: draft
+status: published
 items:
   - def-ip-feature-estimability-through-adjoint-range
   - thm-ip-isonormal-gaussian-posterior-law

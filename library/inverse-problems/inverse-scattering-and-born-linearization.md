@@ -1,7 +1,7 @@
 ---
 page: inverse-scattering-and-born-linearization
 title: Fixed-frequency inverse scattering and Born linearization
-status: draft
+status: published
 requires:
   - inverse-problems-identifiability-and-stability
   - linear-operators-pseudoinverses-and-picard-criteria

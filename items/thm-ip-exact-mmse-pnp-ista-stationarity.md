@@ -2,7 +2,7 @@
 id: thm-ip-exact-mmse-pnp-ista-stationarity
 kind: theorem
 title: "Exact-MMSE PnP-ISTA has monotone objective and vanishing gradient"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 5
@@ -31,6 +31,13 @@ sources:
     - title: "Neal Parikh and Stephen Boyd, Proximal Algorithms, Foundations and Trends in Optimization 1(3) (2014)"
       url: "https://web.stanford.edu/~boyd/papers/pdf/prox_algs.pdf"
       locator: "§4.2.1, equations (4.7)–(4.8), smooth quadratic majorizer for proximal-gradient descent; convex penalty assumptions do not cover h_{σ,γ}."
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

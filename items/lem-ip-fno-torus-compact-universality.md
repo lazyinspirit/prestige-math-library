@@ -2,7 +2,7 @@
 id: lem-ip-fno-torus-compact-universality
 kind: lemma
 title: Fourier neural operators approximate continuous maps uniformly on compact torus sets
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 2
@@ -23,6 +23,13 @@ sources:
     - title: "Nikola Kovachki et al., Neural Operator: Learning Maps Between Function Spaces"
       url: "https://arxiv.org/pdf/2108.08481"
       locator: "§4.4, the periodic Fourier multiplier layer, real-valued conjugate-symmetry convention and output reconstruction, printed pp. 20–23."
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

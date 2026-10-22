@@ -2,7 +2,7 @@
 id: ex-ip-failed-nsp-two-column-nonunique-basis-pursuit
 kind: example
 title: "A two-column matrix where basis pursuit is not unique"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 1
@@ -19,6 +19,12 @@ provenance:
 generation:
   role: example
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
   judge:
     model: "gpt-6-luna"
     verdict: pass

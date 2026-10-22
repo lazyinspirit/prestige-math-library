@@ -1,7 +1,7 @@
 ---
 page: knot-floer-genus-and-fiberedness-detection
 title: Knot Floer genus and fibering detection
-status: draft
+status: published
 items:
   - def-balanced-taut-sutured-manifold-and-product-region
   - lem-poincare-homology-sphere-is-nontrivial-integral-homology-sphere

@@ -2,7 +2,7 @@
 id: def-knot-floer-cobordism-map
 kind: definition
 title: "The decorated knot Floer cobordism map"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps:
@@ -29,6 +29,13 @@ sources:
     - title: "Andras Juhasz, Cobordisms of sutured manifolds and the functoriality of link Floer homology, §§8 and 11.3"
       url: "https://arxiv.org/pdf/0910.4382v5"
       locator: "PDF pp.43–54 and 77–79; hat link Floer cobordism maps and their composition scope"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Definition

@@ -2,7 +2,7 @@
 id: thm-kauffman-polynomial-from-bmw-braid-closure-procedure-properties
 kind: theorem
 title: The BMW braid-closure algorithm terminates and returns its stated value
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 7
@@ -31,6 +31,13 @@ sources:
     - title: "Louis H. Kauffman, An Invariant of Regular Isotopy, Transactions of the AMS 318(2) (1990), §§VI–VII"
       url: "https://homepages.math.uic.edu/~kauffman/IRH.pdf"
       locator: "PDF pp. 38–54/printed pp. 453–469: recursive Dubrovnik evaluation and conversion"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

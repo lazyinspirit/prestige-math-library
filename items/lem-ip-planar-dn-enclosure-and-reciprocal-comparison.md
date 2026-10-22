@@ -2,7 +2,7 @@
 id: lem-ip-planar-dn-enclosure-and-reciprocal-comparison
 kind: lemma
 title: Planar DN comparison under disk enclosure and conductivity reciprocation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps:
@@ -31,6 +31,13 @@ sources:
       url: "https://www.mis.mpg.de/preprints/2006/preprint2006_5.pdf"
       locator: "Section 2.2, Proposition 2.2 and the conjugate-function identity (2.23), preprint printed pp. 10–11 (PDF pp. 12–13)."
 dependency_level: 6
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

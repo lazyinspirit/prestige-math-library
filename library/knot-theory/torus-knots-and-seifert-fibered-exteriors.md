@@ -1,7 +1,7 @@
 ---
 page: torus-knots-and-seifert-fibered-exteriors
 title: Torus knots and Seifert-fibered exteriors
-status: draft
+status: published
 requires:
   - knot-exteriors-and-peripheral-systems
   - connected-sums-and-prime-decomposition

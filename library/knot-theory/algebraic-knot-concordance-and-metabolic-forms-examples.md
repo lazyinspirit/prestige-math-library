@@ -1,7 +1,7 @@
 ---
 page: algebraic-knot-concordance-and-metabolic-forms-examples
 title: Algebraic concordance and metabolic forms — Examples and Counterexamples
-status: draft
+status: published
 requires:
   - algebraic-knot-concordance-and-metabolic-forms
 items: []

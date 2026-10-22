@@ -1,7 +1,7 @@
 ---
 page: calderon-problem-and-cgo-uniqueness-examples
 title: Scalar Calderón maps and conditional uniqueness — Examples and Counterexamples
-status: draft
+status: published
 requires:
   - calderon-problem-and-cgo-uniqueness
 items: []

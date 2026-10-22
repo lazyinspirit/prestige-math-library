@@ -2,7 +2,7 @@
 id: lem-ip-local-bolker-positive-packet-estimate
 kind: lemma
 title: "Local Bolker incidence packets have a positive reduced phase"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps:
@@ -27,6 +27,13 @@ sources:
       url: "https://www.numdam.org/item/AST_1982__95__R3_0.pdf"
       locator: "§2, parameter stationary phase; §6, general positive packet criterion."
 dependency_level: 3
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

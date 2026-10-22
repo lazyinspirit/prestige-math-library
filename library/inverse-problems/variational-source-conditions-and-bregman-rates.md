@@ -1,7 +1,7 @@
 ---
 page: variational-source-conditions-and-bregman-rates
 title: Bregman distances and variational source rates
-status: draft
+status: published
 items:
   - def-ip-banach-convex-subgradient-and-dual-pairing
   - lem-ip-index-function-young-conjugate-bound

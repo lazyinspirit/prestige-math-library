@@ -2,7 +2,7 @@
 id: lem-finite-winding-zero-infection-towers-preserve-required-derived-quotients
 kind: lemma
 title: Finite winding-zero infection towers preserve the required derived quotients
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-standard-infection-cobordism-adjunction-kills-the-companion-longitude
@@ -21,6 +21,13 @@ sources:
       locator: Section5.2, Assertion1 and meridian-depth induction, preprint pages22–23
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 5
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

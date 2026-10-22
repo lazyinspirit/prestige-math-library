@@ -2,7 +2,7 @@
 id: lem-adjoint-twisted-slope-is-rational-on-a-character-component
 kind: lemma
 title: Rationality of the adjoint-twisted slope
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 11
@@ -32,6 +32,13 @@ sources:
       url: https://arxiv.org/pdf/2103.14151
     - title: Stephan Tillmann, Varieties associated to 3-manifolds, §§4.5–4.8
       url: https://www.maths.usyd.edu.au/u/tillmann/papers/course.pdf
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

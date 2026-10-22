@@ -2,7 +2,7 @@
 id: lem-general-knot-reverse-mirror-sum-is-ribbon
 kind: lemma
 title: "A knot summed with its reverse mirror bounds a ribbon disk"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps:
@@ -24,6 +24,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
   precheck: n/a
 sources:
   references:

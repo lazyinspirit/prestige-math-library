@@ -2,7 +2,7 @@
 id: lem-grid-rectangle-boundary-square-zero-and-filtration
 kind: lemma
 title: "Rectangle-boundary pairings and grading changes in grid complexes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps:
@@ -24,6 +24,13 @@ sources:
     - title: "Ciprian Manolescu, Peter Ozsvath, and Sucharit Sarkar, A combinatorial description of knot Floer homology, §1"
       url: "https://arxiv.org/pdf/math/0607691"
       locator: "Grid differential, bigradings, and the two-rectangle cancellation for the tilde complex"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

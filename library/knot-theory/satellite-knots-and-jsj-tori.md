@@ -1,7 +1,7 @@
 ---
 page: satellite-knots-and-jsj-tori
 title: Satellite knots and JSJ tori
-status: draft
+status: published
 requires:
   - knot-exteriors-and-peripheral-systems
   - connected-sums-and-prime-decomposition

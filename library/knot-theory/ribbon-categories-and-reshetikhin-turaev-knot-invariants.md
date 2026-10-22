@@ -1,7 +1,7 @@
 ---
 page: ribbon-categories-and-reshetikhin-turaev-knot-invariants
 title: "Ribbon categories and Reshetikhin–Turaev knot invariants"
-status: draft
+status: published
 requires:
   - yang-baxter-operators-and-quantum-braid-representations
   - kauffman-bracket-state-sum-and-jones-polynomial

@@ -2,7 +2,7 @@
 id: ex-ip-gaussian-series-at-besov-threshold
 kind: example
 title: "A Gaussian wavelet series at the Besov threshold"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 3
@@ -41,6 +41,13 @@ sources:
     - title: "E. Giné and R. Nickl, Mathematical Foundations of Infinite-Dimensional Statistical Models (Cambridge University Press, 2016)"
       url: "https://www.statslab.cam.ac.uk/~nickl/Site/__files/FULLPDF.pdf"
       locator: "§4.2, periodic orthonormal wavelet bases; §§4.3.4–4.3.5, Besov coefficient conventions; §4.4.1, random Gaussian wavelet series."
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Example

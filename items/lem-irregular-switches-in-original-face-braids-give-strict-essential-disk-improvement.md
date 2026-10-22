@@ -2,7 +2,7 @@
 id: lem-irregular-switches-in-original-face-braids-give-strict-essential-disk-improvement
 kind: lemma
 title: Irregular switches in original face braids strictly improve essential disks
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps:
@@ -26,6 +26,13 @@ sources:
         triangulation edge by a first-turnback argument in the actual face
         braid, rather than transferring the adapted F-number.
 dependency_level: 4
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

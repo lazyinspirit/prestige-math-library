@@ -1,7 +1,7 @@
 ---
 page: posterior-computation-error-and-diagnostics
 title: Posterior computation and error accounting
-status: draft
+status: published
 items:
   - def-ip-posterior-computation-error-budget
   - prop-ip-bounded-posterior-functional-error

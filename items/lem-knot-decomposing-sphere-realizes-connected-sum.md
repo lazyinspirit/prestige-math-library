@@ -2,7 +2,7 @@
 id: lem-knot-decomposing-sphere-realizes-connected-sum
 kind: lemma
 title: A decomposing sphere realizes a connected sum of knots
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 3
@@ -25,6 +25,13 @@ sources:
     - title: Allen Hatcher, Notes on Basic 3-Manifold Topology
       url: https://pi.math.cornell.edu/~hatcher/3M/3Mdoublepage.pdf
       locator: §1.1, Theorem 1.1, printed pp.1–3
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

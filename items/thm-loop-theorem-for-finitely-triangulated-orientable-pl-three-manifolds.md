@@ -2,7 +2,7 @@
 id: thm-loop-theorem-for-finitely-triangulated-orientable-pl-three-manifolds
 kind: theorem
 title: "The loop theorem for finitely triangulated orientable PL three-manifolds"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps: [ thm-finite-simplicial-approximation-for-maps-of-pairs, thm-covering-space-lifting-criterion, thm-homotopy-lifting-for-covering-maps, lem-finite-polygonal-disk-and-collar-surgery, lem-finite-subpolyhedra-have-compact-pl-manifold-neighborhoods, lem-compact-locally-collared-pl-subpolyhedron-has-pl-collar, lem-two-sheeted-pl-disk-immersion-has-essential-embedded-disk, lem-no-twofold-cover-forces-spherical-boundary-in-finite-pl-three-manifold ]
@@ -12,6 +12,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
   judge:
     model: "gpt-6-luna"
     verdict: pass

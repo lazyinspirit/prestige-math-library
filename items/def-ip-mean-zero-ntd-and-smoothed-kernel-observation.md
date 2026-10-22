@@ -2,7 +2,7 @@
 id: def-ip-mean-zero-ntd-and-smoothed-kernel-observation
 kind: definition
 title: Mean-zero NtD map and smoothed kernel observation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 4
@@ -26,6 +26,13 @@ sources:
     - title: "Pedro Caro, Andoni García and Juan Manuel Reyes, Stability of the Calderón problem for less regular conductivities"
       url: "https://arxiv.org/pdf/1205.2487"
       locator: "§1 defines the weak Dirichlet-to-Neumann map on trace spaces and states its C^{1,ε} stability theorem; it does not state the Neumann-to-Dirichlet convention defined here."
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Definition

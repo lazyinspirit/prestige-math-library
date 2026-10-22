@@ -2,7 +2,7 @@
 id: ex-knot-kt-08-worked-cases
 kind: example
 title: "Trefoil and unknot Fox-coloring counts"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps: [ alg-dihedral-fox-colorings, thm-dihedral-fox-colorings-terminate-and-are-correct, thm-quandle-colorings-are-reidemeister-invariant, def-countable-choice ]
@@ -19,6 +19,13 @@ sources:
     - title: "Józef H. Przytycki, 3-coloring and other elementary invariants of knots, §1, arXiv:math/0608172, pp. 2–3"
       url: "https://arxiv.org/pdf/math/0608172"
 dependency_level: 4
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Example

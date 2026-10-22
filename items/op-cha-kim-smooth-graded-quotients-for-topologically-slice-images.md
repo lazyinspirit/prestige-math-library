@@ -2,7 +2,7 @@
 id: op-cha-kim-smooth-graded-quotients-for-topologically-slice-images
 kind: open-problem
 title: "Smooth satellite filtrations with topologically slice images"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 6
@@ -23,6 +23,11 @@ sources:
     - title: "Jae Choon Cha and Taehee Kim, “Iterated satellite operators on the knot concordance group”"
       url: "https://arxiv.org/pdf/2402.04629v2"
       locator: "Remark 1.1, open smooth graded-quotient question"
+verification:
+  sources_checked:
+    date: "2026-10-22"
+    scope: "Formulation and unresolved status reviewed in the completed delegated build; source-reading limits and evidence remain recorded in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    by: "gpt-6.1-sol delegated native review; publication authorized by owner"
 ---
 
 ## Open problem

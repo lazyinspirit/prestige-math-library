@@ -2,7 +2,7 @@
 id: def-heegaard-splitting-of-closed-oriented-three-manifold
 kind: definition
 title: "Heegaard splitting of a closed oriented three-manifold"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 0
@@ -20,6 +20,12 @@ sources:
       url: "https://sschleimer.warwick.ac.uk/Teach/2021_3MFDS/References/2014notes_on_three-manifolds.pdf"
       locator: "Definitions 3.20–3.21, §3, printed pp. 22–23"
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
   precheck: n/a
 ---
 

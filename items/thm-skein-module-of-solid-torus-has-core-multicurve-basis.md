@@ -2,7 +2,7 @@
 id: thm-skein-module-of-solid-torus-has-core-multicurve-basis
 kind: theorem
 title: "The solid-torus skein module has a core-multicurve basis"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 3
@@ -29,6 +29,13 @@ sources:
       url: "https://categorified.net/RTinvariants/Jan29-Feb3.pdf"
     - title: "Thang T. Q. Lê, The Colored Jones Polynomial and the AJ Conjecture, §6.1, Proposition 6.2, and §6.2, Example 6.5, printed pp. 30–31"
       url: "https://letu.math.gatech.edu/Papers/Lectures_Luminy_2014_new.pdf"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

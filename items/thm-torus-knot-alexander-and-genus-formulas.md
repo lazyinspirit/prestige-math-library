@@ -2,7 +2,7 @@
 id: thm-torus-knot-alexander-and-genus-formulas
 kind: theorem
 title: "Torus-knot Alexander polynomial and genus formulas"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 13
@@ -38,6 +38,12 @@ sources:
       url: "https://msp.org/gt/2001/5-1/gt-v5-n1-p10-p.pdf"
       locator: "§2, torus-knot Hopf-plumbing construction, printed pp. 324–326"
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
   precheck: pass
 ---
 

@@ -1,7 +1,7 @@
 ---
 page: sparse-recovery-and-nullspace-certificates-examples
 title: "Sparse recovery and nullspace certificates — Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples:
   - ex-ip-failed-nsp-two-column-nonunique-basis-pursuit

@@ -2,7 +2,7 @@
 id: lem-ip-weighted-chi-square-triangular-array-limit
 kind: lemma
 title: Weighted chi-square triangular-array limit
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 0
@@ -19,6 +19,12 @@ provenance:
   proof: ai-altered
 axiom_use: The Axiom of Choice is used only through the published Lindeberg–Feller theorem. The finite row-moment and Lindeberg estimates are choice-free.
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
   judge:
     model: "gpt-6-luna"
     verdict: pass

@@ -1,7 +1,7 @@
 ---
 page: casson-gordon-invariants-and-sliceness-obstructions-examples
 title: "Casson–Gordon invariants and sliceness obstructions — Examples and Counterexamples"
-status: draft
+status: published
 requires:
   - casson-gordon-invariants-and-sliceness-obstructions
 items: []

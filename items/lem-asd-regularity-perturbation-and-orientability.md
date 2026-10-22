@@ -2,7 +2,7 @@
 id: lem-asd-regularity-perturbation-and-orientability
 kind: lemma
 title: Generic regularity and orientability for the sign-fixed self-dual moduli problem
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 3
@@ -24,6 +24,13 @@ sources:
     - title: Simon K. Donaldson, An Application of Gauge Theory to the Topology of 4-Manifolds
       url: https://webhomes.maths.ed.ac.uk/~v1ranick/papers/donaldson.pdf
       locator: §§II.1–II.4, printed pp.288–295; complete slice, bounded smoothing perturbation, and determinant orientation proofs
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

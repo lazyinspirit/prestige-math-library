@@ -1,7 +1,7 @@
 ---
 page: minimax-estimation-over-inverse-source-classes
 title: Minimax estimation over inverse source classes
-status: draft
+status: published
 items:
   - lem-ip-univariate-gaussian-projection-minimax-comparison
   - lem-ip-power-source-class-as-statistical-ellipsoid

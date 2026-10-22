@@ -2,7 +2,7 @@
 id: def-cyclic-zero-surgery-cover
 kind: definition
 title: Cyclic cover of zero surgery on a knot
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 5
@@ -25,6 +25,13 @@ sources:
       locator: §2.6, Lemma2.31, printed pp.23–24, zero-surgery cyclic-cover baseline. The specified meridian map and connected cover are local defining conventions; no new proof or reading extent is inferred.
   attribution_boundary: Existing authoritative subject baseline and local formulation/proof refinement, not a verbatim external theorem; the actual accepted local argument and exact hypotheses remain unchanged.
   reading_limits: URL and locator drawn from existing canonical source metadata/Statement-reference bibliography only. No source was fetched or newly read for this metadata repair; retained author reading limits remain unchanged and are not transferred into a new whole-source reading claim.
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 ## Definition
 

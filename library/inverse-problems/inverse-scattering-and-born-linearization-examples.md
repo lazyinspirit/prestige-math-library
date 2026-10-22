@@ -1,7 +1,7 @@
 ---
 page: inverse-scattering-and-born-linearization-examples
 title: Fixed-frequency inverse scattering and Born linearization — Examples and Counterexamples
-status: draft
+status: published
 requires:
   - inverse-scattering-and-born-linearization
 items: []

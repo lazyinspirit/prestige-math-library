@@ -1,7 +1,7 @@
 ---
 page: nonlinear-landweber-and-discrepancy-stopping
 title: Nonlinear Landweber with discrepancy stopping
-status: draft
+status: published
 items:
   - alg-ip-nonlinear-landweber-discrepancy
   - thm-ip-nonlinear-landweber-fejer-and-finite-stopping

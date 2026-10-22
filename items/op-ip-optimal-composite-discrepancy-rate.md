@@ -2,7 +2,7 @@
 id: op-ip-optimal-composite-discrepancy-rate
 kind: open-problem
 title: Optimal rate for composite double discrepancy
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 7
@@ -13,6 +13,10 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  sources_checked:
+    date: "2026-10-22"
+    scope: "Formulation and unresolved status reviewed in the completed delegated build; source-reading limits and evidence remain recorded in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    by: "gpt-6.1-sol delegated native review; publication authorized by owner"
   precheck: n/a
 sources:
   references:

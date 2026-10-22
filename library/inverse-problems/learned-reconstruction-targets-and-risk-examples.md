@@ -1,7 +1,7 @@
 ---
 page: learned-reconstruction-targets-and-risk-examples
 title: Learned reconstruction targets and risk — Examples and Counterexamples
-status: draft
+status: published
 items: []
 examples:
   - ex-ip-posterior-mean-outside-nonconvex-signal-class

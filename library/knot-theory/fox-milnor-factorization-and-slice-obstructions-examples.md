@@ -1,7 +1,7 @@
 ---
 page: fox-milnor-factorization-and-slice-obstructions-examples
 title: "Fox–Milnor factorization and slice obstructions — Examples and Counterexamples"
-status: draft
+status: published
 requires:
   - fox-milnor-factorization-and-slice-obstructions
 items: []

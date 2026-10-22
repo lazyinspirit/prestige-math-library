@@ -2,7 +2,7 @@
 id: ex-ip-eig-repeated-correlated-noise
 kind: example
 title: Repeated measurements with correlated noise
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 6
@@ -29,6 +29,13 @@ sources:
     - title: "David J. C. MacKay, Information-Based Objective Functions for Active Data Selection, Neural Computation 4(4) (1992), 590–604"
       url: "https://gwern.net/doc/reinforcement-learning/exploration/active-learning/1992-mackay.pdf"
       locator: "§3.1 and p. 594, information criteria with correlated or design-dependent noise."
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Example

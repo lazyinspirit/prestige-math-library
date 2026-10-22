@@ -1,7 +1,7 @@
 ---
 page: branched-cover-correction-terms-and-sliceness-examples
 title: "Branched-cover correction terms and sliceness — Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples:
   - ex-knot-kt-46-worked-cases

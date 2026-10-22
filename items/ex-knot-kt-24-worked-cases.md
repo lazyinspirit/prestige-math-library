@@ -2,7 +2,7 @@
 id: ex-knot-kt-24-worked-cases
 kind: example
 title: The square knot has a nontrivial character vanishing on a linking metabolizer
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 9
@@ -34,6 +34,13 @@ sources:
     - title: Dale Rolfsen, Knots and Links
       url: https://webhomes.maths.ed.ac.uk/~v1ranick/papers/rolfsen.pdf
       locator: Chapter 8.D, printed pp. 212–215; trefoil double-cover matrix calculation read
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 ## Example
 

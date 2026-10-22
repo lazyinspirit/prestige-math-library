@@ -2,7 +2,7 @@
 id: lem-knot-reverse-mirror-connected-sum-is-ribbon
 kind: lemma
 title: The trefoil sum with its reverse mirror is ribbon
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 2
@@ -34,6 +34,13 @@ sources:
       url: https://arxiv.org/pdf/2102.11778
       locator: Proposition 4.2; algorithm produces a band sequence for $-L\#L$ when
         $L$ is nonsplit alternating
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

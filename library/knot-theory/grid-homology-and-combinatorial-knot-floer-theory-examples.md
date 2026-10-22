@@ -1,7 +1,7 @@
 ---
 page: grid-homology-and-combinatorial-knot-floer-theory-examples
 title: Grid homology and combinatorial knot Floer theory — Examples and Counterexamples
-status: draft
+status: published
 items: []
 examples:
   - ex-knot-kt-39-worked-cases

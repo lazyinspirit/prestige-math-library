@@ -2,7 +2,7 @@
 id: lem-explicit-disk-band-knots-realize-arbitrarily-small-signature-bumps
 kind: lemma
 title: Explicit disk-band knots with arbitrarily small signature bumps
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-explicit-integral-seifert-matrices-realize-arbitrarily-small-signature-bumps
@@ -12,6 +12,12 @@ provenance:
   statement: literature-derived
   proof: ai-generated
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
   judge:
     model: "gpt-6-luna"
     verdict: pass

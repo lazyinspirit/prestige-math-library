@@ -2,7 +2,7 @@
 id: ex-ip-inversebench-black-hole-imaging
 kind: example
 title: Black-hole VLBI benchmark
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 7
@@ -27,6 +27,13 @@ sources:
     - title: "InverseBench source implementation, pinned revision 1db5932bc2995504491663d1e2c498e7317c5404, inverse_problems/blackhole.py"
       url: "https://raw.githubusercontent.com/devzhk/InverseBench/1db5932bc2995504491663d1e2c498e7317c5404/inverse_problems/blackhole.py"
       locator: "Lines 110–140: baseline-orientation flags and ordered triangle/quadrangle indices; lines 208–233: complex-conjugation correction and closure-phase argument; lines 241–260: ordered log-closure-amplitude ratio."
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Example

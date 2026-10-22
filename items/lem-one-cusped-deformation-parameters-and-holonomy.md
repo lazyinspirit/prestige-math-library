@@ -2,7 +2,7 @@
 id: lem-one-cusped-deformation-parameters-and-holonomy
 kind: lemma
 title: One-cusped deformation and peripheral logarithm coordinates
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 6
@@ -34,6 +34,12 @@ sources:
       locator: §§2.3.2–2.4.1, one-cusped holonomy deformation and slope equation, PDF
         pp.14–19
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
   precheck: pending
 ---
 

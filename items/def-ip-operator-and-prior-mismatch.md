@@ -2,7 +2,7 @@
 id: def-ip-operator-and-prior-mismatch
 kind: definition
 title: Operator, noise-law, and prior-support mismatch
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 1
@@ -36,6 +36,12 @@ sources:
       url: "https://arxiv.org/pdf/2503.11043"
       locator: "Full 29-page paper; scope caution from §§4.3–5 and Appendix C"
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
   precheck: n/a
   judge:
     model: "gpt-6-luna"

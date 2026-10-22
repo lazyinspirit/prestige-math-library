@@ -2,7 +2,7 @@
 id: ex-ip-stable-potential-posterior
 kind: example
 title: A stable two-point potential gives a Lipschitz posterior
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 5
@@ -42,6 +42,13 @@ sources:
     - title: "J. Latz, On the Well-posedness of Bayesian Inverse Problems, SIAM/ASA Journal on Uncertainty Quantification 8 (2020)"
       url: "https://arxiv.org/pdf/1902.10257"
       locator: "§3.4, Lemma 3.7 and proof: likelihood continuity gives Hellinger continuity under an integrable dominator."
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Example

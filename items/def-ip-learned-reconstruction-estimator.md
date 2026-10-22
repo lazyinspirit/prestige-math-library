@@ -2,7 +2,7 @@
 id: def-ip-learned-reconstruction-estimator
 kind: definition
 title: Learned inverse estimators and reconstruction targets
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 3
@@ -34,6 +34,12 @@ sources:
       url: "https://arxiv.org/pdf/1302.6989v4"
       locator: "§3.2, Theorem 3.4 and proof, for a supplied data-indexed posterior kernel and its evidence/version conventions; §4.1, Theorem 4.3, for posterior well-posedness under stated potential hypotheses."
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
   precheck: n/a
 axiom_use: "No choice axiom is required; all fitting laws, maps, and probability kernels are supplied as inputs."
 ---

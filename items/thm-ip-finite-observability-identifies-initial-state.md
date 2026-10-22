@@ -2,7 +2,7 @@
 id: thm-ip-finite-observability-identifies-initial-state
 kind: theorem
 title: Finite observability identifies the initial state
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 1
@@ -34,6 +34,13 @@ sources:
     - title: "Sanjay Lall, Engr207c: Operator Theory and Linear Systems, State-Space Realization lecture notes"
       url: "https://lall.stanford.edu/engr207c/lectures/realization_2008_11_15_03.pdf"
       locator: "§9.2, output stack and observability matrix, PDF p. 6"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

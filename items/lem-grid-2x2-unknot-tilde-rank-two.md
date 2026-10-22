@@ -2,7 +2,7 @@
 id: lem-grid-2x2-unknot-tilde-rank-two
 kind: lemma
 title: "The 2-by-2 unknot grid has tilde homology of rank two"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps:
@@ -24,6 +24,13 @@ sources:
     - title: "Ciprian Manolescu, Peter Ozsvath, and Sucharit Sarkar, A combinatorial description of knot Floer homology, §4"
       url: "https://arxiv.org/pdf/math/0607691"
       locator: "§1, printed pp.3–5 (rectangle differential and Theorem 1.1 stable factor); §4.1, printed pp.19–20 (example calculations). The rank-two calculation here is proved locally"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

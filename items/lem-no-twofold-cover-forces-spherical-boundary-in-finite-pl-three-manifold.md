@@ -2,7 +2,7 @@
 id: lem-no-twofold-cover-forces-spherical-boundary-in-finite-pl-three-manifold
 kind: lemma
 title: "The finite covering-tower endpoint has spherical boundary"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps: [ thm-cellular-homology-computes-singular-homology, thm-relative-cellular-homology-computes-relative-singular-homology, thm-long-exact-sequence-of-a-pair-in-singular-homology, lem-finite-triangulated-surface-reduces-to-a-one-polygon-schema, lem-polygonal-schema-reduction-moves, lem-finite-polygonal-disk-and-collar-surgery ]
@@ -12,6 +12,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
   judge:
     model: "gpt-6-luna"
     verdict: pass

@@ -2,7 +2,7 @@
 id: def-knot-bridge-position-and-unknotting-number
 kind: definition
 title: Bridge number and unknotting number of an oriented knot
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 7
@@ -28,6 +28,12 @@ sources:
       url: "https://web.math.princeton.edu/~petero/GridHomologyBook.pdf"
       locator: "§2.3, printed pp. 21–25, for the unknotting number and descending diagrams"
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
   precheck: n/a
 ---
 

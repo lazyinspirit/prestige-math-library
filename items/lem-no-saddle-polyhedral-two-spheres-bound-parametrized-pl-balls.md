@@ -2,7 +2,7 @@
 id: lem-no-saddle-polyhedral-two-spheres-bound-parametrized-pl-balls
 kind: lemma
 title: "Polyhedral two-spheres without height saddles bound parametrized piecewise linear balls"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps: [ lem-finite-polygonal-disk-and-collar-surgery, lem-finite-convex-cell-complexes-admit-compatible-triangulations, lem-pl-embedded-polyhedron-admits-compatible-subcomplex-triangulation, lem-parametrized-pl-balls-absorb-standard-boundary-windows, lem-regular-polyhedral-surface-cones-have-height-preserving-pl-straightenings, lem-finite-pl-level-collars-give-global-band-products ]
@@ -12,6 +12,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
   judge:
     model: "gpt-6-luna"
     verdict: pass

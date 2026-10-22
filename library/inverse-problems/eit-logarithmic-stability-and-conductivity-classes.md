@@ -1,7 +1,7 @@
 ---
 page: eit-logarithmic-stability-and-conductivity-classes
 title: Logarithmic EIT stability on explicit conductivity classes
-status: draft
+status: published
 items:
   - lem-ip-calderon-bourgain-cutoff-estimates
   - lem-ip-planar-cauchy-beurling-and-near-two-inversion

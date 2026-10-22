@@ -2,7 +2,7 @@
 id: lem-ip-planar-scattering-dbar-equation-and-parameter-bounds
 kind: lemma
 title: Planar scattering dbar equation and uniform parameter bounds
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps:
@@ -26,6 +26,13 @@ sources:
       url: "https://www.mis.mpg.de/preprints/2006/preprint2006_5.pdf"
       locator: "Theorem 3.12 and proof, preprint printed p. 25, for uniform parameter derivatives."
 dependency_level: 5
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

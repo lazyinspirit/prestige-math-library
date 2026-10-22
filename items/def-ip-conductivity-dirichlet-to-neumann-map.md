@@ -2,7 +2,7 @@
 id: def-ip-conductivity-dirichlet-to-neumann-map
 kind: definition
 title: "Scalar conductivity and Schrödinger Dirichlet-to-Neumann maps"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps:
@@ -38,6 +38,13 @@ sources:
     - title: "Feizmohammadi and Oksanen, An inverse problem for a semilinear elliptic equation in Riemannian geometries (2019)"
       url: "https://arxiv.org/pdf/1904.00608v3"
       locator: "Section 2, definition of the semilinear Dirichlet-to-Neumann map and its linear Schrödinger specialization."
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Definition

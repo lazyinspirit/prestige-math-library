@@ -1,7 +1,7 @@
 ---
 page: bridge-presentations-and-unknotting-number
 title: Bridge presentations and unknotting number
-status: draft
+status: published
 items:
   - lem-knot-admits-morse-height-representative
   - lem-one-extremum-arc-is-boundary-parallel

@@ -1,7 +1,7 @@
 ---
 page: inverse-wave-problems-and-finite-time-observability
 title: Hyperbolic inverse problems and finite-time visibility
-status: draft
+status: published
 requires:
   - geodesic-x-ray-transforms-on-simple-manifolds
   - wave-energy-finite-propagation-and-huygens

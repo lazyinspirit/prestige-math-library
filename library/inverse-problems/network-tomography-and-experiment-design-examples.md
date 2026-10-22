@@ -1,7 +1,7 @@
 ---
 page: network-tomography-and-experiment-design-examples
 title: "Active network tomography and identifiability by design — Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples:
   - ex-ip-independent-normal-delays-have-nonidentifiable-link-means

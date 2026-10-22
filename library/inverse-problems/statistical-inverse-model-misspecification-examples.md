@@ -1,7 +1,7 @@
 ---
 page: statistical-inverse-model-misspecification-examples
 title: Unknown operators, model mismatch, and robustness limits — Examples and Counterexamples
-status: draft
+status: published
 requires:
   - statistical-inverse-model-misspecification
 items: []

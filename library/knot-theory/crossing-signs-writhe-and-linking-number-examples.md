@@ -1,7 +1,7 @@
 ---
 page: crossing-signs-writhe-and-linking-number-examples
 title: "Crossing signs, writhe, and linking number — Examples and Counterexamples"
-status: draft
+status: published
 requires:
   - crossing-signs-writhe-and-linking-number
 items: []

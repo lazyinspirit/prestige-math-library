@@ -2,7 +2,7 @@
 id: thm-bracket-state-sum-matches-library-jones-specialization
 kind: theorem
 title: "The bracket state sum matches the library Jones specialization"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 4
@@ -38,6 +38,13 @@ sources:
       url: "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/knotes.pdf"
     - title: "François Funar, A Crash Course in Quantum Invariants of Knots and 3-Manifolds, Chapter 3, §§1.1–2.3"
       url: "https://www-fourier.univ-grenoble-alpes.fr/~funar/quantum.pdf"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

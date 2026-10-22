@@ -1,7 +1,7 @@
 ---
 page: vassiliev-invariants-and-chord-diagrams-examples
 title: Vassiliev invariants and chord diagrams — Examples and Counterexamples
-status: draft
+status: published
 requires:
   - vassiliev-invariants-and-chord-diagrams
 items: []

@@ -1,7 +1,7 @@
 ---
 page: nonlinear-inverse-problems-and-tangential-cone-conditions
 title: Nonlinear maps and tangential cone control
-status: draft
+status: published
 items:
   - def-ip-nonlinear-forward-map
   - def-ip-x0-minimum-norm-solution

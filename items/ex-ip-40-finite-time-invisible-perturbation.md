@@ -3,7 +3,7 @@ id: ex-ip-40-finite-time-invisible-perturbation
 kind: example
 title: A potential perturbation beyond the two-trip distance is invisible before
   time T
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 5
@@ -32,6 +32,13 @@ sources:
       locator: "§3.2, PDF p. 16: higher-dimensional finite-speed statement; its proof
         is supplied in the batch-40 domain-of-dependence carrier."
 proof_strategy: combine finite propagation, the Green identity, and separation by test traces
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Example

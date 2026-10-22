@@ -2,7 +2,7 @@
 id: cex-knot-kt-42-boundary-case
 kind: counterexample
 title: "A low-weight basis term does not define Upsilon"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps:
@@ -29,6 +29,13 @@ sources:
     - title: "Charles Livingston, Notes on the knot concordance invariant Upsilon, §§4–6"
       url: "https://www.maths.gla.ac.uk/~mpowell/Upsilon-revised.pdf"
       locator: "Finite minimax definition and staircase computation"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 ## Statement refuted
 

@@ -1,7 +1,7 @@
 ---
 page: freedman-theorem-and-topological-sliceness
 title: "Freedman’s theorem and topological sliceness"
-status: draft
+status: published
 requires:
   - alexander-polynomial-from-seifert-matrices
   - smooth-and-topological-knot-concordance

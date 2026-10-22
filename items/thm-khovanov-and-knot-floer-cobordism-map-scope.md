@@ -2,7 +2,7 @@
 id: thm-khovanov-and-knot-floer-cobordism-map-scope
 kind: theorem
 title: "Scope of the Khovanov and decorated knot Floer cobordism maps"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps:
@@ -30,6 +30,13 @@ sources:
     - title: "Magnus Jacobsson, An invariant of link cobordisms from Khovanov homology, §4.2"
       url: "https://arxiv.org/pdf/math/0206303"
       locator: "Printed pp.1235–1237; boundary-fixed isotopy scope and movie-move argument"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

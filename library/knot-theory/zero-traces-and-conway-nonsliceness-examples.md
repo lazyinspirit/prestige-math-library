@@ -1,7 +1,7 @@
 ---
 page: zero-traces-and-conway-nonsliceness-examples
 title: Zero traces and the Conway nonsliceness theorem — Examples and Counterexamples
-status: draft
+status: published
 items: []
 requires:
   - zero-traces-and-conway-nonsliceness

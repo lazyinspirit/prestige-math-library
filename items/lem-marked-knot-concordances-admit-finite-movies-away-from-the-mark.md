@@ -2,7 +2,7 @@
 id: lem-marked-knot-concordances-admit-finite-movies-away-from-the-mark
 kind: lemma
 title: Marked concordances admit finite movies with a protected mark
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps:
@@ -23,6 +23,13 @@ sources:
       url: https://arxiv.org/pdf/2406.18203v1
       locator: Sections3.1–3.6, actual finite-jet projection proof, used relatively to a protected exterior arc below. The marked-arc straightening is proved here, not asserted by that source.
 dependency_level: 2
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

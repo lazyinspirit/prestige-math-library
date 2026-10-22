@@ -2,7 +2,7 @@
 id: ex-knot-kt-05-worked-cases
 kind: example
 title: Connected-sum genus and ribbon examples
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 6
@@ -34,6 +34,13 @@ sources:
         Alternating Knots
       url: https://eprints.gla.ac.uk/287761/1/287761.pdf
       locator: Proposition 4.2, printed pp.21–22
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Example

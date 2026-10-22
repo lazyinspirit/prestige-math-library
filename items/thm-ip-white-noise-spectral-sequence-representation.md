@@ -2,7 +2,7 @@
 id: thm-ip-white-noise-spectral-sequence-representation
 kind: theorem
 title: White-noise spectral sequence representation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 1
@@ -25,6 +25,12 @@ provenance:
   proof: ai-altered
 axiom_use: Countable choice is used only for the Borel H(delta)-valued white-noise realization through the cited supplier lemma. The coefficient laws, mean-square reconstruction and cylinder-experiment equivalence use no choice principle once the process and indexed basis are supplied; the reconstruction indices are least natural numbers.
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
   judge:
     model: "gpt-6-luna"
     verdict: pass

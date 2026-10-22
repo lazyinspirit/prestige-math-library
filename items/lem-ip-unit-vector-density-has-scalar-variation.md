@@ -2,7 +2,7 @@
 id: lem-ip-unit-vector-density-has-scalar-variation
 kind: lemma
 title: A unit vector density has scalar variation measure
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-ip-vector-radon-variation-is-radon
@@ -20,6 +20,13 @@ sources:
       url: "https://www.ime.usp.br/~glaucio/mat6704/textos/GMTLecureNotes.pdf"
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 1
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

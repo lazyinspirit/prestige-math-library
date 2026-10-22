@@ -2,7 +2,7 @@
 id: lem-innermost-critical-height-loops-admit-strict-pl-cap-reduction
 kind: lemma
 title: "Innermost critical height loops admit strict piecewise linear cap reduction"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps: [ lem-finite-polygonal-disk-and-collar-surgery, lem-finite-convex-cell-complexes-admit-compatible-triangulations, lem-pl-embedded-polyhedron-admits-compatible-subcomplex-triangulation, lem-finite-pl-level-collars-give-global-band-products, lem-pl-height-product-caps-replace-by-one-extremum, lem-pointed-flat-pl-caps-admit-saddle-free-replacements, lem-three-disk-pl-severing-reassembles-parametrized-balls ]
@@ -17,6 +17,13 @@ sources:
       url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC1085499/"
       locator: "PNAS 10 (1924), pp.7–8, both critical cap cases; finite pointed layer, relative boundary model and ball-transfer constructions supplied explicitly below."
 dependency_level: 6
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

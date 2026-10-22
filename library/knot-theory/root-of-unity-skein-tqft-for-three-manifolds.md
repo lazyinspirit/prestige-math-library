@@ -1,7 +1,7 @@
 ---
 page: root-of-unity-skein-tqft-for-three-manifolds
 title: Root-of-unity skein TQFT for 3-manifolds
-status: draft
+status: published
 requires:
   - three-manifold-surgery-presentations-and-kirby-moves
   - skein-modules-for-links-in-three-manifolds

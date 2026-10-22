@@ -2,7 +2,7 @@
 id: lem-boundary-homology-cokernels-surject-under-excisive-bordism-gluing
 kind: lemma
 title: Boundary homology cokernels under bordism gluing
-status: draft
+status: published
 origin: pipeline
 deps:
   - thm-excision-and-mayer-vietoris-with-local-coefficients
@@ -11,6 +11,12 @@ provenance:
   statement: literature-derived
   proof: ai-generated
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
   judge:
     model: "gpt-6-luna"
     verdict: pass

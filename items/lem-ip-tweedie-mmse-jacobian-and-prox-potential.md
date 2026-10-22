@@ -2,7 +2,7 @@
 id: lem-ip-tweedie-mmse-jacobian-and-prox-potential
 kind: lemma
 title: "Tweedie identity, positive Jacobian, and the MMSE proximal potential"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 4
@@ -45,6 +45,13 @@ sources:
     - title: "Neal Parikh and Stephen Boyd, Proximal Algorithms, Foundations and Trends in Optimization 1(3) (2014)"
       url: "https://web.stanford.edu/~boyd/papers/pdf/prox_algs.pdf"
       locator: "§1.1, pp. 124–125: the standard definition is restricted to closed proper convex penalties; the nonconvex identity here is proved locally."
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

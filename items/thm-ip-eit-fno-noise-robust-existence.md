@@ -2,7 +2,7 @@
 id: thm-ip-eit-fno-noise-robust-existence
 kind: theorem
 title: Noise-robust existence of generalized FNO approximants for EIT
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 11
@@ -24,6 +24,13 @@ sources:
     - title: "Maarten V. de Hoop, Nikola B. Kovachki, Matti Lassas and Nicholas H. Nelsen, Extension and neural operator approximation of the electrical impedance tomography inverse map"
       url: "https://arxiv.org/pdf/2511.20361"
       locator: "Theorem 4.8 and its complete proof, §4.4, printed pp. 31–34."
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

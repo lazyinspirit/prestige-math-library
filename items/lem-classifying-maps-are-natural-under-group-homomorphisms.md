@@ -2,7 +2,7 @@
 id: lem-classifying-maps-are-natural-under-group-homomorphisms
 kind: lemma
 title: "Classifying maps are natural up to based homotopy"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 0
@@ -25,6 +25,13 @@ sources:
     - title: "Haynes Miller, MIT 18.906 Algebraic Topology II lecture notes"
       url: "https://ocw.mit.edu/courses/18-906-algebraic-topology-ii-spring-2020/e8a061a73ca1a451df8809c7a7fbc846_MIT18_906S20_notes.pdf"
       locator: "Lectures 13–14, Eilenberg–Mac Lane spaces and maps, printed pp. 42–44"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

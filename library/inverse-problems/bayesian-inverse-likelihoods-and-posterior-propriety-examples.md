@@ -1,7 +1,7 @@
 ---
 page: bayesian-inverse-likelihoods-and-posterior-propriety-examples
 title: Likelihood potentials and posterior propriety — Examples and Counterexamples
-status: draft
+status: published
 items: []
 examples:
   - ex-ip-proper-gaussian-likelihood-posterior-propriety

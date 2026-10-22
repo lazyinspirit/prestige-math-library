@@ -1,7 +1,7 @@
 ---
 page: spatial-bv-and-total-variation-regularization
 title: Spatial BV, finite perimeter, and TV conventions
-status: draft
+status: published
 items:
   - lem-ip-distributional-radon-representation-unique
   - lem-ip-vector-radon-variation-is-radon

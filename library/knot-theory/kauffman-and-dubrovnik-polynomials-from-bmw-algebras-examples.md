@@ -1,7 +1,7 @@
 ---
 page: kauffman-and-dubrovnik-polynomials-from-bmw-algebras-examples
 title: Kauffman and Dubrovnik polynomials from BMW algebras — Examples and Counterexamples
-status: draft
+status: published
 requires:
   - kauffman-and-dubrovnik-polynomials-from-bmw-algebras
 items: []

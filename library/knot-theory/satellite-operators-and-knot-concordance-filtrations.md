@@ -1,7 +1,7 @@
 ---
 page: satellite-operators-and-knot-concordance-filtrations
 title: Satellite operators and concordance filtrations
-status: draft
+status: published
 items:
   - lem-boundary-homology-cokernels-surject-under-excisive-bordism-gluing
   - lem-explicit-integral-seifert-matrices-realize-arbitrarily-small-signature-bumps

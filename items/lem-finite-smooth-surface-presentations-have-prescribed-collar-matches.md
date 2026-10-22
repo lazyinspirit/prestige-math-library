@@ -2,7 +2,7 @@
 id: lem-finite-smooth-surface-presentations-have-prescribed-collar-matches
 kind: lemma
 title: Finite smooth surface presentations admit prescribed collar matches
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps:
@@ -13,6 +13,12 @@ deps:
   - lem-boundary-connected-sum-with-a-disk-does-not-change-the-diffeomorphism-type
   - lem-isotopy-extension-for-a-compact-source-with-boundary
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
   judge:
     model: "gpt-6-luna"
     verdict: pass

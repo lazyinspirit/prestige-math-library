@@ -2,7 +2,7 @@
 id: def-ip-tangent-orientation-double-cover
 kind: definition
 title: "Tangent orientation double cover of a surface with boundary"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps:
@@ -20,6 +20,12 @@ sources:
       url: "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
       locator: "Printed pp. 234–235 (PDF pp. 50–51), local orientations and the two-sheeted orientation cover; the present definition uses the tangent determinant-line model and allows boundary charts."
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
   precheck: n/a
   judge:
     model: "gpt-6-luna"

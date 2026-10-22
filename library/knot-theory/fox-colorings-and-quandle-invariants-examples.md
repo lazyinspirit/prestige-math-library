@@ -1,7 +1,7 @@
 ---
 page: fox-colorings-and-quandle-invariants-examples
 title: Fox colorings and quandle invariants — Examples and Counterexamples
-status: draft
+status: published
 requires:
   - fox-colorings-and-quandle-invariants
 items: []

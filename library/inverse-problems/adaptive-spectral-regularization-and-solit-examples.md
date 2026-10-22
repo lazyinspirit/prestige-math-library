@@ -1,7 +1,7 @@
 ---
 page: adaptive-spectral-regularization-and-solit-examples
 title: Adaptive spectral regularization by SOLIT — Examples and Counterexamples
-status: draft
+status: published
 items: []
 examples:
   - ex-ip-solit-antiderivative

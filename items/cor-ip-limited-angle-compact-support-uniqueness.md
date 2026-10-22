@@ -2,7 +2,7 @@
 id: cor-ip-limited-angle-compact-support-uniqueness
 kind: corollary
 title: Compactly supported smooth functions are unique from any open set of Radon angles
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 2
@@ -24,6 +24,13 @@ sources:
     - title: "Venkataswaran P. Krishnan and Eric Todd Quinto, Microlocal Analysis in Tomography"
       url: "https://math.tifrbng.res.in/~vkrishnan/Papers/Microlocal_Analysis_Tomography.pdf"
       locator: "§1.3.2, pp. 13–14, Theorem 3 and full proof of limited-angle uniqueness for compact support."
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

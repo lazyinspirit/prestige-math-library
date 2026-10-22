@@ -1,7 +1,7 @@
 ---
 page: conditional-flow-matching-for-inverse-posteriors-examples
 title: Conditional flow matching for inverse posteriors — Examples and Counterexamples
-status: draft
+status: published
 items: []
 examples:
   - ex-ip-cfm-low-imh-acceptance-with-accurate-means

@@ -2,7 +2,7 @@
 id: thm-kontsevich-universal-associated-graded-proof
 kind: theorem
 title: The Kontsevich integral induces the identity on the associated graded
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 provenance:
@@ -24,6 +24,13 @@ sources:
       url: https://www.math.cinvestav.mx/~mostovoy/cdbook/cdbook-as-submitted.pdf
     - title: The Fundamental Theorem of Vassiliev Invariants, §2.6
       url: https://arxiv.org/pdf/q-alg/9702009v1
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

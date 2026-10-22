@@ -2,7 +2,7 @@
 id: lem-bridge-sphere-normalization
 kind: lemma
 title: Normalize a decomposing sphere relative to a bridge sphere
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 8
@@ -30,6 +30,13 @@ sources:
     - title: "William Jaco, Lectures on Three-Manifold Topology"
       url: "https://www.maths.gla.ac.uk/~mpowell/Lectures-3-mfld-topology_Jaco.pdf"
       locator: "Chapter II, Lemma II.8, printed p. 22, planar-surface hierarchy disk count"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: thm-tait-flyping-theorem
 kind: theorem
 title: Tait flyping theorem
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 5
@@ -33,6 +33,13 @@ sources:
       url: https://arxiv.org/pdf/2008.06490v3
     - title: "Bruce Fontaine, To the Chairman of Examiners for Part III Mathematics, §2.2, Definitions 2.8–2.9 and Theorem 2.10, pp. 11–12; full exposition of the flat pair maps and marked prime theorem"
       url: https://pi.math.cornell.edu/~bfontain/partiii.pdf
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

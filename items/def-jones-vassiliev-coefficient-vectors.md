@@ -2,7 +2,7 @@
 id: def-jones-vassiliev-coefficient-vectors
 kind: definition
 title: "Jones–Vassiliev coefficient vectors"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 5
@@ -29,6 +29,12 @@ sources:
     - title: "Dror Bar-Natan and Alexander Stoimenow, The Fundamental Theorem of Vassiliev Invariants, arXiv:q-alg/9702009v1, §1.1"
       url: "https://arxiv.org/pdf/q-alg/9702009v1"
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
   precheck: n/a
 ---
 

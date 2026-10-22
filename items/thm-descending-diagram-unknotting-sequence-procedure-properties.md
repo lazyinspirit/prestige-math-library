@@ -2,7 +2,7 @@
 id: thm-descending-diagram-unknotting-sequence-procedure-properties
 kind: theorem
 title: The descending-diagram procedure terminates on admissible finite codes
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 2
@@ -23,6 +23,13 @@ sources:
     - title: "Cole Charbonneau, Computing the Wirtinger Presentation of a Knot Group from a Knot Diagram"
       url: "https://site.uvm.edu/cmcharbo/files/2021/12/knot-group-1.pdf"
       locator: "§§1.2–3.2, finite diagram encodings and scans"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

@@ -1,7 +1,7 @@
 ---
 page: analytic-double-fibration-and-bolker-visibility
 title: Analytic double fibrations and Bolker visibility
-status: draft
+status: published
 requires:
   - radon-transform-and-fourier-slice-reconstruction
   - limited-angle-tomography-and-invisible-singularities

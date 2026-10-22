@@ -1,7 +1,7 @@
 ---
 page: calderon-problem-and-cgo-uniqueness
 title: Scalar Calderón maps and conditional uniqueness
-status: draft
+status: published
 requires:
   - geodesic-x-ray-transforms-on-simple-manifolds
   - inverse-wave-problems-and-finite-time-observability

@@ -2,7 +2,7 @@
 id: lem-ip-born-linearization-of-the-scattering-map
 kind: lemma
 title: The first Born data are the Fréchet linearization at zero contrast
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 2
@@ -38,6 +38,12 @@ sources:
       url: "https://math.mit.edu/~dyatlov/18.155/155-notes.pdf"
       locator: "§11.1.1, Definition 11.1, printed p. 119; frequency rescaling matches the library 2π convention"
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
   precheck: pass
   judge:
     model: "gpt-6-luna"

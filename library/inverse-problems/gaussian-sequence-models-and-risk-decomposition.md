@@ -1,7 +1,7 @@
 ---
 page: gaussian-sequence-models-and-risk-decomposition
 title: "Gaussian sequence inversion and exact risk"
-status: draft
+status: published
 items:
   - def-ip-gaussian-sequence-inverse-model
   - def-ip-statistical-ellipsoid-class

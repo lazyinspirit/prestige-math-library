@@ -2,7 +2,7 @@
 id: ex-knot-kt-28-worked-cases
 kind: example
 title: "The square knot is a nontrivial ribbon knot"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 9
@@ -38,6 +38,13 @@ sources:
     - title: "Brendan Owens, Knots and 4-Manifolds, Winter Braids IX lecture notes"
       url: "https://www.maths.gla.ac.uk/~bowens/papers/WB.pdf"
       locator: "Lecture 1, PDF pp.2–3, square-knot ribbon disk and push-in resolution"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Example

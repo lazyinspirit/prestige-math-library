@@ -1,7 +1,7 @@
 ---
 page: map-estimators-and-cameron-martin-geometry
 title: Small-ball MAP and Cameron–Martin geometry
-status: draft
+status: published
 items:
   - lem-ip-banach-gaussian-cm-shift-ball-bound
   - lem-ip-gaussian-shift-small-ball-ratio

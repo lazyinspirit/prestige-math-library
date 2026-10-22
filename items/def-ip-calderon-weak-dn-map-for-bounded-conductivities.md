@@ -2,7 +2,7 @@
 id: def-ip-calderon-weak-dn-map-for-bounded-conductivities
 kind: definition
 title: Weak Dirichlet-to-Neumann map for bounded conductivities
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 3
@@ -29,6 +29,13 @@ sources:
     - title: "Maarten V. de Hoop, Nikola B. Kovachki, Matti Lassas and Nicholas H. Nelsen, Extension and neural operator approximation of the electrical impedance tomography inverse map"
       url: "https://arxiv.org/pdf/2511.20361"
       locator: "Section 2.3, printed pp. 9–10: the weak Neumann-to-Dirichlet map and inverse Dirichlet-to-Neumann map on mean-zero trace classes."
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Definition

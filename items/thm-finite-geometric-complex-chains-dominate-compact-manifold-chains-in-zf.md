@@ -2,7 +2,7 @@
 id: thm-finite-geometric-complex-chains-dominate-compact-manifold-chains-in-zf
 kind: theorem
 title: Finite geometric chains and compact manifold chain domination without choice
-status: draft
+status: published
 origin: pipeline
 deps:
   - thm-excision-and-mayer-vietoris-with-local-coefficients
@@ -18,6 +18,13 @@ sources:
       locator: Small chains and simplicial comparison; Appendix A.8–A.12
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 1
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: op-ip-geodesic-xray-injectivity-with-conjugate-points
 kind: open-problem
 title: "Geodesic X-ray injectivity beyond the absence of conjugate points"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps:
@@ -28,6 +28,10 @@ sources:
       url: "https://ipwin.compute.dtu.dk/DTU_lectures_v3.pdf"
       locator: "§1.2, Question 1.1, PDF p. 6, listing injectivity on compact strictly convex nontrapping manifolds as open."
 verification:
+  sources_checked:
+    date: "2026-10-22"
+    scope: "Formulation and unresolved status reviewed in the completed delegated build; source-reading limits and evidence remain recorded in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    by: "gpt-6.1-sol delegated native review; publication authorized by owner"
   precheck: n/a
 ---
 

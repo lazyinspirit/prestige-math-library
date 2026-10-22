@@ -1,7 +1,7 @@
 ---
 page: minimax-estimation-over-inverse-source-classes-examples
 title: Minimax estimation over inverse source classes — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-ip-sobolev-minimax-rates

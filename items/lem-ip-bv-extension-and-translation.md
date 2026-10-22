@@ -2,7 +2,7 @@
 id: lem-ip-bv-extension-and-translation
 kind: lemma
 title: BV extension and translation bounds
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 deps:
@@ -18,6 +18,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
   judge:
     model: "gpt-6-luna"
     verdict: pass

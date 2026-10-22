@@ -1,7 +1,7 @@
 ---
 page: operator-approximation-and-regularization-error-examples
 title: Data, operator, discretization, and solve errors — Examples and Counterexamples
-status: draft
+status: published
 items: []
 examples:
   - ex-ip-mesh-sequence-small-singular-values

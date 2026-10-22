@@ -2,7 +2,7 @@
 id: def-blanchfield-pairing-and-higher-order-rho-invariant
 kind: definition
 title: Localized Blanchfield pairings and higher-order rho-invariants
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 6
@@ -29,6 +29,13 @@ sources:
     - title: Jae Choon Cha, “Amenable L²-Theoretic Methods and Knot Concordance”
       url: https://arxiv.org/pdf/1010.1058
       locator: "§2.2, printed p.5 (1010.1058v2), signature-defect convention; bounding data are supplied here and independence remains a separate theorem"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Definition

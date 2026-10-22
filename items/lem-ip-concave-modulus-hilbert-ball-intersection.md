@@ -2,7 +2,7 @@
 id: lem-ip-concave-modulus-hilbert-ball-intersection
 kind: lemma
 title: Concave-modulus intersection of Hilbert balls
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 0
@@ -28,6 +28,13 @@ sources:
       locator: Original attribution in Benyamini–Lindenstrauss Chapter 1 historical
         notes, printed p.33. The original article was identified but its full
         PDF was not retrieved; the complete argument below is local.
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

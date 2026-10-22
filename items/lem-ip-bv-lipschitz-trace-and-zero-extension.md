@@ -2,7 +2,7 @@
 id: lem-ip-bv-lipschitz-trace-and-zero-extension
 kind: lemma
 title: Trace formula and bounded zero extension on Lipschitz domains
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 deps:
@@ -25,6 +25,13 @@ sources:
       url: "https://www.ms.u-tokyo.ac.jp/publication/docs/lecturenotes15-rybka.pdf"
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 3
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

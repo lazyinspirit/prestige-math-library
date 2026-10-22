@@ -2,7 +2,7 @@
 id: thm-hat-heegaard-floer-is-a-closed-three-manifold-invariant
 kind: theorem
 title: "Hat Heegaard Floer homology is a closed three-manifold invariant"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 3
@@ -35,6 +35,13 @@ sources:
       url: "https://arxiv.org/pdf/math/0101206"
     - title: "Lipshitz, Heegaard Floer Homologies, §§2–5"
       url: "https://floer.wiki/more/courses/floer-homology/2024/lipshitz_heegaard_floer_homology.pdf"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

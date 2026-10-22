@@ -2,7 +2,7 @@
 id: ex-knot-kt-19-worked-cases
 kind: example
 title: "The figure-eight complement and its nonhyperbolic zero filling"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 7
@@ -32,6 +32,12 @@ sources:
       url: "https://library.slmath.org/nonmsri/gt3m/PDF/4.pdf"
       locator: "Chapter 4, §§4.1–4.4, regular ideal tetrahedra, edge equations and finite-volume cusp geometry"
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
   precheck: pending
 ---
 

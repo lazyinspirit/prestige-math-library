@@ -1,7 +1,7 @@
 ---
 page: hyperbolic-knot-complements-and-volume
 title: Hyperbolic knot complements and volume
-status: draft
+status: published
 requires:
   - knot-exteriors-and-peripheral-systems
   - satellite-knots-and-jsj-tori

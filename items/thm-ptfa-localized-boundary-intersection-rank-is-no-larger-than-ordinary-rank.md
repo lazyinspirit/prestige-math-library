@@ -2,7 +2,7 @@
 id: thm-ptfa-localized-boundary-intersection-rank-is-no-larger-than-ordinary-rank
 kind: theorem
 title: PTFA localized boundary intersection rank comparison
-status: draft
+status: published
 origin: pipeline
 deps:
   - thm-finite-geometric-complex-chains-dominate-compact-manifold-chains-in-zf
@@ -19,6 +19,12 @@ provenance:
   statement: literature-derived
   proof: ai-generated
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
   judge:
     model: "gpt-6-luna"
     verdict: pass

@@ -2,7 +2,7 @@
 id: lem-partial-projective-resolutions-determine-tensor-homology-in-degree-one
 kind: lemma
 title: Three projective degrees suffice for twisted first-homology comparison
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps:
@@ -17,6 +17,12 @@ provenance:
   statement: ai-altered
   proof: ai-generated
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
   judge:
     model: "gpt-6-luna"
     verdict: pass

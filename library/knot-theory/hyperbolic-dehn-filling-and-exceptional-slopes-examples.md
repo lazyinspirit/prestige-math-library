@@ -1,7 +1,7 @@
 ---
 page: hyperbolic-dehn-filling-and-exceptional-slopes-examples
 title: Hyperbolic Dehn filling and exceptional slopes — Examples and Counterexamples
-status: draft
+status: published
 items: []
 examples:
   - cex-knot-kt-19-boundary-case

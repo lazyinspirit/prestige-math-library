@@ -2,7 +2,7 @@
 id: ex-ip-finite-dimensional-small-ball-map-equals-density-mode
 kind: example
 title: Finite-dimensional small-ball MAP equals the density mode
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 4
@@ -38,6 +38,13 @@ sources:
 axiom_use: "AC is assumed for the repository's nondegenerate multivariate normal and density interfaces; it also supplies countable choice for the positive-finite Lebesgue ball-volume result. The ball-average limit itself uses continuity and translation-invariant ball volumes."
 generation:
   role: example
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Example

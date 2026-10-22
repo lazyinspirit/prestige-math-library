@@ -1,7 +1,7 @@
 ---
 page: real-phase-retrieval-and-complement-property-examples
 title: Real phase retrieval and phaseless ambiguity — Examples and Counterexamples
-status: draft
+status: published
 requires:
   - real-phase-retrieval-and-complement-property
 items: []

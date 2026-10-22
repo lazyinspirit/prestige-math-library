@@ -2,7 +2,7 @@
 id: thm-haken-normal-essential-disk-existence
 kind: theorem
 title: Haken normal essential-disk existence theorem
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 11
@@ -38,6 +38,13 @@ sources:
         pp.360–374. Chapter5 proves its fundamental-surface construction under
         the additional condition that every embedded sphere separates, in an
         adapted cell/normal decomposition.
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

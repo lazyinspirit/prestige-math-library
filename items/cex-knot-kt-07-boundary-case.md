@@ -2,7 +2,7 @@
 id: cex-knot-kt-07-boundary-case
 kind: counterexample
 title: "The knot-normalized Alexander fraction need not be a Laurent polynomial"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 13
@@ -38,6 +38,13 @@ sources:
     - title: "Alessia Cattabriga and Stefano Francaviglia, Knot Theory and Applications: Lecture Notes"
       url: "https://www.dm.unibo.it/~francavi/did/21-22/knot.pdf"
       locator: "§6.2.2–6.2.3, Example 6.2.11 and Proposition 6.2.12, printed pp. 42–47"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement refuted

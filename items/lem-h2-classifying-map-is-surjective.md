@@ -2,7 +2,7 @@
 id: lem-h2-classifying-map-is-surjective
 kind: lemma
 title: "Classifying maps are surjective on second homology"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 0
@@ -30,6 +30,13 @@ sources:
     - title: "Kenneth S. Brown, Lectures on the Cohomology of Groups"
       url: "https://pi.math.cornell.edu/~kbrown/papers/cohomology_hangzhou.pdf"
       locator: "Section 1, printed pp. 4–5 and 7: universal-cover cellular resolution (1.3), resolution comparison, Definition 1.4 and the following topological identification"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

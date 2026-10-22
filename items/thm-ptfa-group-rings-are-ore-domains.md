@@ -2,7 +2,7 @@
 id: thm-ptfa-group-rings-are-ore-domains
 kind: theorem
 title: PTFA group rings embed in skew fields of fractions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 2
@@ -27,6 +27,13 @@ sources:
         Whitney towers and L²-signatures”
       url: https://arxiv.org/pdf/math/9908117
       locator: §2.1, Proposition 2.5; the proof cites the PTFA group-ring Ore theorem
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

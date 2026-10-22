@@ -1,7 +1,7 @@
 ---
 page: knot-floer-genus-and-fiberedness-detection-examples
 title: Knot Floer genus and fibering detection — Examples and Counterexamples
-status: draft
+status: published
 items: []
 examples:
   - cex-knot-kt-43-boundary-case

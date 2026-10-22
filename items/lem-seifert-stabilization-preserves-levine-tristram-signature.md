@@ -2,7 +2,7 @@
 id: lem-seifert-stabilization-preserves-levine-tristram-signature
 kind: lemma
 title: "Seifert stabilization preserves the Levine–Tristram signature"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 15
@@ -27,6 +27,13 @@ sources:
     - title: "Anthony Conway, The Levine–Tristram signature: a survey, 2019–20 MATRIX Annals (2021), pp. 31–56 (arXiv:1903.04477)"
       url: "https://arxiv.org/pdf/1903.04477"
       locator: "§2.1, printed pp. 2–4: Hermitian form convention; §2.4, printed p. 6: averaged signature at roots; complete 18-page PDF inspected."
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 ## Statement
 

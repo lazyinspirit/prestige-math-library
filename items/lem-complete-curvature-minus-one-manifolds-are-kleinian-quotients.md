@@ -2,7 +2,7 @@
 id: lem-complete-curvature-minus-one-manifolds-are-kleinian-quotients
 kind: lemma
 title: Complete curvature minus one three-manifolds are Kleinian quotients
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps:
@@ -25,6 +25,13 @@ sources:
       url: https://www.math.ucdavis.edu/~kapovich/RFG/book.pdf
       locator: Chapter 3, models and isometries of hyperbolic space; the radial metric and matrix identification used here are proved directly
 dependency_level: 2
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

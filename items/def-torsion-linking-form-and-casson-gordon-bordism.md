@@ -2,7 +2,7 @@
 id: def-torsion-linking-form-and-casson-gordon-bordism
 kind: definition
 title: Torsion linking form and Casson–Gordon bordism data
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 7
@@ -25,6 +25,13 @@ sources:
     - title: Charles Livingston and Swatee Naik, Introduction to Knot Concordance
       url: https://chuck-livingston.github.io/math/Concordance_Book.pdf
       locator: Chapter 7, §7.6, pp. 140–141; Chapter 8, §8.1, pp. 164–166; complete relevant sections read
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Definition

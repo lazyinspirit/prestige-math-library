@@ -2,7 +2,7 @@
 id: def-ip-small-ball-map-estimator
 kind: definition
 title: Small-ball MAP conventions and Cameron–Martin relative modes
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 3
@@ -31,6 +31,13 @@ sources:
       url: "https://www.damtp.cam.ac.uk/research/cia/files/teaching/Inverse_Problems_2019/LectureNotes2019.pdf"
       locator: "§7.5, the opening MAP discussion and Theorems 7.5.2–7.5.3 for the small-ball and Onsager–Machlup ratio conventions."
 axiom_use: "The global strong-mode definition is choice-free; AC is assumed only for the covariance-induced Cameron–Martin notation in the relative-mode branch."
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Definition

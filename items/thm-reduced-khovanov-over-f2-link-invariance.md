@@ -2,7 +2,7 @@
 id: thm-reduced-khovanov-over-f2-link-invariance
 kind: theorem
 title: "Reduced Khovanov homology over F2 is an oriented link invariant"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 7
@@ -28,6 +28,13 @@ sources:
       url: "https://arxiv.org/pdf/math/0405474v2"
     - title: "Turner, A hitchhiker’s guide to Khovanov homology, §1.2"
       url: "https://www.i2m.univ-amu.fr/perso/luisa.paoluzzi/Turner1.pdf"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

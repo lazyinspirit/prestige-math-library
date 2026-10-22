@@ -2,7 +2,7 @@
 id: def-ip-weakly-closed-nonlinear-forward-map
 kind: definition
 title: Weakly closed nonlinear forward maps on Hilbert spaces
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 1
@@ -23,6 +23,12 @@ sources:
     - title: "Benedikt Wirth, Inverse Problems, Chapter 10"
       url: "https://www.uni-muenster.de/AMM/Veranstaltungen/WS21/InverseProblems/lecture2021.pdf"
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
   precheck: n/a
   judge:
     model: "gpt-6-luna"

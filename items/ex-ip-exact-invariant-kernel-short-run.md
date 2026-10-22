@@ -2,7 +2,7 @@
 id: ex-ip-exact-invariant-kernel-short-run
 kind: example
 title: An exact invariant kernel can be biased over a short run
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 2
@@ -35,6 +35,13 @@ sources:
     - title: "David A. Levin, Yuval Peres, and Elizabeth L. Wilmer, Markov Chains and Mixing Times, second edition"
       url: https://pages.uoregon.edu/dlevin/MARKOV/markovmixing.pdf
       locator: "§4.1, Example 4.1 and the total-variation discussion of the two-state chain."
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Example

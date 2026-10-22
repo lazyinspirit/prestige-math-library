@@ -2,7 +2,7 @@
 id: thm-knot-cyclic-cover-order-from-alexander-polynomial
 kind: theorem
 title: "Cyclic-cover homology order from the Alexander polynomial"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 13
@@ -32,6 +32,13 @@ sources:
     - title: "Charles Livingston, Seifert Forms and Concordance"
       url: "https://arxiv.org/pdf/math/0101035v3"
       locator: "Section 3, Theorem 3.1, printed pp. 406–407; root formula stated with Fox cited as source"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

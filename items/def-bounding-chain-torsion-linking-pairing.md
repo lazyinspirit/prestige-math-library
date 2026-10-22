@@ -2,7 +2,7 @@
 id: def-bounding-chain-torsion-linking-pairing
 kind: definition
 title: Bounding-chain expression for a torsion linking pairing
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 0
@@ -20,6 +20,13 @@ sources:
       locator: §1, printed pp.306–309, finite linking forms, metabolizers and finite characters of branched covers. This is the classical baseline for the local definition/conventions; no independence or obstruction proof is asserted by the definition alone.
   attribution_boundary: Existing authoritative subject baseline and local formulation/proof refinement, not a verbatim external theorem; the actual accepted local argument and exact hypotheses remain unchanged.
   reading_limits: URL and locator drawn from existing canonical source metadata/Statement-reference bibliography only. No source was fetched or newly read for this metadata repair; retained author reading limits remain unchanged and are not transferred into a new whole-source reading claim.
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Definition

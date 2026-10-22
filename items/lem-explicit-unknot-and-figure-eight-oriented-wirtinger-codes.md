@@ -2,7 +2,7 @@
 id: lem-explicit-unknot-and-figure-eight-oriented-wirtinger-codes
 kind: lemma
 title: Explicit unknot and figure-eight oriented Wirtinger codes
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps:
@@ -26,6 +26,13 @@ sources:
         The integer drawing, precise labels and signs used here are certified
         below.
 dependency_level: 5
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

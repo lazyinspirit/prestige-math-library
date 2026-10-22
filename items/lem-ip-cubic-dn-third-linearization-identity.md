@@ -2,7 +2,7 @@
 id: lem-ip-cubic-dn-third-linearization-identity
 kind: lemma
 title: "Third linearization identity for the cubic Dirichlet-to-Neumann map"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps:
@@ -29,6 +29,13 @@ sources:
     - title: "Feizmohammadi and Oksanen, An inverse problem for a semi-linear elliptic equation in Riemannian geometries (2019)"
       url: "https://arxiv.org/pdf/1904.00608v3"
       locator: "Section 2.2, multiple-fold linearization method, PDF pp. 9-12."
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

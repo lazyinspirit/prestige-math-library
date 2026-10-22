@@ -1,7 +1,7 @@
 ---
 page: posterior-computation-error-and-diagnostics-examples
 title: Posterior computation and error accounting — Examples and Counterexamples
-status: draft
+status: published
 items: []
 examples:
   - ex-ip-exact-invariant-kernel-short-run

@@ -1,7 +1,7 @@
 ---
 page: bayesian-inverse-likelihoods-and-posterior-propriety
 title: Likelihood potentials and posterior propriety
-status: draft
+status: published
 items:
   - def-ip-misfit-evidence-and-posterior-law
   - thm-ip-function-space-posterior-propriety

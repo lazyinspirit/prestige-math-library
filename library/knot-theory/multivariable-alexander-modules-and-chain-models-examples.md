@@ -1,7 +1,7 @@
 ---
 page: multivariable-alexander-modules-and-chain-models-examples
 title: "Multivariable Alexander modules and chain models — Examples and Counterexamples"
-status: draft
+status: published
 requires:
   - multivariable-alexander-modules-and-chain-models
 items: []

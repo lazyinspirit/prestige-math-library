@@ -2,7 +2,7 @@
 id: lem-ptfa-subgroup-scalar-extension-preserves-blanchfield-self-pairings
 kind: lemma
 title: PTFA subgroup extension preserves nonzero Blanchfield self-pairings
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-subgroup-group-ring-extension-is-faithfully-flat-and-preserves-fraction-quotients
@@ -18,6 +18,12 @@ provenance:
   statement: literature-derived
   proof: ai-generated
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
   judge:
     model: "gpt-6-luna"
     verdict: pass

@@ -2,7 +2,7 @@
 id: ex-ip-inversebench-multicoil-mri
 kind: example
 title: Multi-coil MRI benchmark
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 7
@@ -24,6 +24,13 @@ sources:
     - title: "Hongkai Zheng et al., InverseBench: Benchmarking Plug-and-Play Diffusion Priors for Inverse Problems in Physical Sciences, ICLR 2025, full paper and appendices"
       url: "https://proceedings.iclr.cc/paper_files/paper/2025/file/e297068f5ec7f483a017948715b591fb-Paper-Conference.pdf"
       locator: "§4.1, PDF p. 7, and Appendix B.2, PDF pp. 23–24: fastMRI raw knee data, ESPIRiT sensitivity maps, 320×320 preprocessing, and training/tuning/test counts; Table 4, PDF p. 20, reports metrics over 94 test cases."
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Example

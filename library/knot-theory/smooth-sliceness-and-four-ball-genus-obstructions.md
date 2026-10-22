@@ -1,7 +1,7 @@
 ---
 page: smooth-sliceness-and-four-ball-genus-obstructions
 title: Smooth sliceness and four-ball genus obstructions
-status: draft
+status: published
 requires:
   - knot-exteriors-and-peripheral-systems
   - cyclic-branched-covers-and-knot-determinants

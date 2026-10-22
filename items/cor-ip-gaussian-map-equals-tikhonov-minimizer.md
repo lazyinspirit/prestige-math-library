@@ -2,7 +2,7 @@
 id: cor-ip-gaussian-map-equals-tikhonov-minimizer
 kind: corollary
 title: "Finite Gaussian MAP, posterior mean, and support-restricted Tikhonov minimizer coincide"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 5
@@ -29,6 +29,13 @@ sources:
     - title: "M. Dashti and A. M. Stuart, The Bayesian Approach to Inverse Problems (full lecture notes, arXiv:1302.6989)"
       url: "https://arxiv.org/pdf/1302.6989"
       locator: "§§3.1–3.2 for the posterior density convention. The MAP/Tikhonov minimizer identity is derived locally for positive-definite noise covariance and singular finite prior covariance."
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

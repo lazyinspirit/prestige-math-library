@@ -2,7 +2,7 @@
 id: lem-epsilon-stable-equivalence-and-not-a-homomorphism
 kind: lemma
 title: "Epsilon is stable-equivalence invariant but not a homomorphism"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps:
@@ -45,6 +45,13 @@ sources:
     - title: "Jennifer Hom, A note on the concordance invariants epsilon and upsilon, §2"
       url: "https://arxiv.org/pdf/1407.8200"
       locator: "§2, PDF pp.2–4; explicit filtered summand and epsilon/Upsilon counterexample computations"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

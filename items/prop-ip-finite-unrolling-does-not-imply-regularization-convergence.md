@@ -2,7 +2,7 @@
 id: prop-ip-finite-unrolling-does-not-imply-regularization-convergence
 kind: proposition
 title: Finite unrolling alone gives no regularization convergence or risk guarantee
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 5
@@ -36,6 +36,13 @@ sources:
     - title: "Giannis Daras et al., A Survey on Diffusion Models for Inverse Problems"
       url: "https://arxiv.org/pdf/2410.00083v1"
       locator: "Full versioned 38-page survey, §3.3 opening and Conclusion: finite-computation limitations and method-specific asymptotic exactness; context only."
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

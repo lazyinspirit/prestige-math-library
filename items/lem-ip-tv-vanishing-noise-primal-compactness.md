@@ -2,7 +2,7 @@
 id: lem-ip-tv-vanishing-noise-primal-compactness
 kind: lemma
 title: Primal compactness and selection of a minimum-TV limit
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 7
@@ -41,6 +41,13 @@ sources:
         version 1.6
       url: https://www.ime.usp.br/~glaucio/mat6704/textos/GMTLecureNotes.pdf
       locator: Theorem 7.49 and proof; §§7.4–7.5 on extension and compactness
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

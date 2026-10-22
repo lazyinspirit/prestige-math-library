@@ -2,7 +2,7 @@
 id: thm-normal-surface-unknot-algorithm-terminates-and-is-correct
 kind: theorem
 title: Termination, correctness, and bounds of normal-surface unknot recognition
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 17
@@ -34,6 +34,13 @@ sources:
       url: https://jeffe.cs.illinois.edu/teaching/comptop/2009/notes/normal-surfaces.pdf
       locator: §§14.1–14.4, complete six-page note on normal surfaces and knot
         recognition.
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

@@ -3,7 +3,7 @@ id: alg-ip-pnp-ista-with-denoiser
 kind: algorithm
 aliases: [def-ip-pnp-ista-with-denoiser]
 title: "Plug-and-play ISTA with a denoiser"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 4
@@ -25,6 +25,12 @@ sources:
       url: "https://web.stanford.edu/~boyd/papers/pdf/prox_algs.pdf"
       locator: "§4.2, equation (4.6), proximal-gradient iteration before the proximal replacement."
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
   precheck: n/a
 ---
 

@@ -2,7 +2,7 @@
 id: lem-trefoil-double-branched-cover-is-lens-space-order-three
 kind: lemma
 title: "The trefoil double branched cover is a lens space of order three"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 4
@@ -23,6 +23,13 @@ sources:
   references:
     - title: "Ozsváth and Szabó, On the Heegaard Floer homology of branched double-covers, §3"
       url: "https://arxiv.org/pdf/math/0309170v1"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

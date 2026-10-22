@@ -1,7 +1,7 @@
 ---
 page: credible-sets-and-frequency-coverage-in-inverse-problems
 title: Credible sets and frequentist coverage
-status: draft
+status: published
 items:
   - def-ip-credible-set-and-frequency-coverage
   - ex-ip-exact-adaptive-credible-coverage-by-posterior-null-deletion

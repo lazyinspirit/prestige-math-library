@@ -2,7 +2,7 @@
 id: thm-cdr-concordance-categories-form-abelian-groups
 kind: theorem
 title: "The CDR concordance categories are abelian groups"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 4
@@ -35,6 +35,13 @@ sources:
     - title: "Tim D. Cochran, Christopher W. Davis, and Arunima Ray, Injectivity of satellite operators in knot concordance"
       url: "https://arxiv.org/pdf/1205.5058v3"
       locator: "Section 1, printed pp. 1–2: the four categories, their connected-sum groups, unknot identity and reverse-mirror inverse. TOP/exotic group construction imported externally."
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

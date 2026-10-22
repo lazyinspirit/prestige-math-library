@@ -2,7 +2,7 @@
 id: cex-knot-kt-03-boundary-case
 kind: counterexample
 title: "Writhe is not an invariant of an unframed knot"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 8
@@ -29,6 +29,13 @@ sources:
     - title: "Mohamed Elhamdadi, Mustafa Hajij, and Kyle Istvan, Framed Knots, arXiv:1910.10257v6 (2020), §3, pp. 3–9"
       url: "https://arxiv.org/pdf/1910.10257v6"
       locator: "§3, Definitions 3.7–3.8 and Proposition 3.9; type-I framing discussion, pp. 8–9"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement refuted

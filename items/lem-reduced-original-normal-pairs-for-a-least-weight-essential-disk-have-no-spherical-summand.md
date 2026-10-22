@@ -3,7 +3,7 @@ id: lem-reduced-original-normal-pairs-for-a-least-weight-essential-disk-have-no-
 kind: lemma
 title: A reduced original normal pair for a least-weight essential disk has no
   spherical summand
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps:
@@ -28,6 +28,13 @@ sources:
         original-face braid and the retained switch neighborhoods; it requires
         no global sphere-separation or sphere-bicollar input.
 dependency_level: 5
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

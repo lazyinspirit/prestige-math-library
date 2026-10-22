@@ -2,7 +2,7 @@
 id: ex-ip-pcn-normal-posterior-invariant
 kind: example
 title: A Gaussian pCN kernel leaves a normal posterior invariant
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 6
@@ -29,6 +29,13 @@ sources:
     - title: "S. L. Cotter, G. O. Roberts, A. M. Stuart, and D. White, MCMC Methods for Functions: Modifying Old Algorithms to Make Them Faster, Statistical Science 28(3) (2013)"
       url: "https://eprints.maths.manchester.ac.uk/2215/1/1202.0709v3.pdf"
       locator: "§4.2, equation (4.7), pCN proposal and potential-ratio acceptance."
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Example

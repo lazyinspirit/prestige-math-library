@@ -1,7 +1,7 @@
 ---
 page: knot-exteriors-and-peripheral-systems
 title: "Knot exteriors and peripheral systems"
-status: draft
+status: published
 requires:
   - pontryagin-thom-and-framed-cobordism
   - oriented-links-braid-closures-and-markov-equivalence

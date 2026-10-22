@@ -2,7 +2,7 @@
 id: thm-khovanov-homology-is-an-oriented-link-invariant
 kind: theorem
 title: Khovanov homology is an oriented link invariant
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 7
@@ -33,6 +33,13 @@ sources:
       url: https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/kaufmann.pdf
     - title: Melissa Zhang, Notes on Khovanov homology, arXiv:2501.03115v1, §§3.6–3.7
       url: https://arxiv.org/pdf/2501.03115v1
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

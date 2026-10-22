@@ -2,7 +2,7 @@
 id: def-ip-forward-map-and-solution-classes
 kind: definition
 title: Inverse-problem models and solution classes
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 0
@@ -21,6 +21,12 @@ sources:
     - title: "Tristan van Leeuwen and Christoph Brune, 10 Lectures on Inverse Problems and Imaging, Lecture 1 §§1.2–1.3"
       url: "https://tristanvanleeuwen.github.io/IP_and_Im_Lectures/what_is.html"
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
   precheck: n/a
   judge:
     model: "gpt-6-luna"

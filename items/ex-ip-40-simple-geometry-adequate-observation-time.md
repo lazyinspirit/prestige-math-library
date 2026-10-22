@@ -2,7 +2,7 @@
 id: ex-ip-40-simple-geometry-adequate-observation-time
 kind: example
 title: Adequate observation time on a simple surface
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 axiom_base: Countable Choice
@@ -23,6 +23,13 @@ sources:
       url: "https://sites.math.washington.edu/~gunther/publications/GIP2D_driver%20%2814%29.pdf"
       locator: "Chapter 4, §4.4, printed pp. 117–121: unweighted scalar X-ray injectivity on simple surfaces."
 proof_strategy: direct application of the finite-time uniqueness corollary
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Example

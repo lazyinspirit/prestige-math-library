@@ -2,7 +2,7 @@
 id: thm-ip-tcc-local-minimum-norm-identifiability
 kind: theorem
 title: Local uniqueness of an x₀-minimum-norm solution under TCC
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 4
@@ -29,6 +29,12 @@ sources:
     - title: "Barbara Kaltenbacher, Frank Schöpfer, and Thomas Schuster, Iterative methods for nonlinear ill-posed problems in Banach spaces, Proposition 1"
       url: "https://www.f08.uni-stuttgart.de/.content/media/downloads/Mathematik/mathematische_berichte/2008/2008-005.pdf"
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
   precheck: pass
   judge:
     model: "gpt-6-luna"

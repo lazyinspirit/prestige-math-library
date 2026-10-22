@@ -2,7 +2,7 @@
 id: lem-ip-variable-metric-domain-of-dependence
 kind: lemma
 title: Finite propagation for the wave equation on a Riemannian manifold
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 axiom_base: Countable Choice
@@ -38,6 +38,13 @@ sources:
       url: "https://arxiv.org/pdf/2312.08123v1"
       locator: "Theorems 3.1–3.2 and Remark 3.3, PDF pp. 21–22: static-potential ray transform, uniqueness, and the finite-time support threshold; the local Riemannian energy estimate is proved here."
 proof_strategy: weighted-energy-cutoff
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

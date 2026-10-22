@@ -1,7 +1,7 @@
 ---
 page: inverse-problem-benchmarking-and-shift
 title: Benchmarks, prior shift, and solver admissibility
-status: draft
+status: published
 items:
   - def-ip-benchmark-risk-and-compute-budget
   - rem-ip-inversebench-scoped-findings

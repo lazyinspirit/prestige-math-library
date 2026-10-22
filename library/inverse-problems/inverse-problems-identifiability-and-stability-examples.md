@@ -1,7 +1,7 @@
 ---
 page: inverse-problems-identifiability-and-stability-examples
 title: Inverse maps, identifiability, and stability — Examples and Counterexamples
-status: draft
+status: published
 requires:
   - inverse-problems-identifiability-and-stability
   - orthonormal-bases-parseval-and-fourier-series

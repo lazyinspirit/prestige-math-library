@@ -2,7 +2,7 @@
 id: thm-ip-generalized-fno-uniform-approximation-on-compact-sets
 kind: theorem
 title: Generalized FNO approximation on compact sets
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 3
@@ -24,6 +24,13 @@ sources:
     - title: "Nikola Kovachki et al., On Universal Approximation and Error Bounds for Fourier Neural Operators"
       url: "https://jmlr.org/papers/volume22/21-0806/21-0806.pdf"
       locator: "Theorem 5 and complete proof in Appendix D.1–D.4."
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

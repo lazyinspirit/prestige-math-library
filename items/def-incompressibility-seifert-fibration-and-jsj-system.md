@@ -2,7 +2,7 @@
 id: def-incompressibility-seifert-fibration-and-jsj-system
 kind: definition
 title: "Incompressibility, Seifert fibrations, and JSJ systems"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 3
@@ -26,6 +26,12 @@ sources:
       url: "https://arxiv.org/pdf/math/9712227"
       locator: "§§1–4, canonical surfaces and torus-boundary JSJ conventions"
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
   precheck: n/a
 ---
 

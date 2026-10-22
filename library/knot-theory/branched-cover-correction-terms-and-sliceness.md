@@ -1,7 +1,7 @@
 ---
 page: branched-cover-correction-terms-and-sliceness
 title: "Branched-cover correction terms and sliceness"
-status: draft
+status: published
 requires:
   - the-whitney-trick-and-surgery-below-the-middle-dimension
   - cyclic-branched-covers-and-knot-determinants

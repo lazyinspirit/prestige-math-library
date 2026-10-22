@@ -1,7 +1,7 @@
 ---
 page: function-space-priors-and-random-regularity-examples
 title: Function-space priors and sample regularity — Examples and Counterexamples
-status: draft
+status: published
 items: []
 examples:
   - ex-ip-prior-misses-uniform-ellipticity-domain

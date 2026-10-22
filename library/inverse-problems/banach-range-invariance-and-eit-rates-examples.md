@@ -1,7 +1,7 @@
 ---
 page: banach-range-invariance-and-eit-rates-examples
 title: Banach range invariance and EIT rates — Examples and Counterexamples
-status: draft
+status: published
 items: []
 examples:
   - ex-ip-partial-observation-range-invariance-without-tcc

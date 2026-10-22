@@ -1,7 +1,7 @@
 ---
 page: nonlinear-landweber-and-discrepancy-stopping-examples
 title: Nonlinear Landweber with discrepancy stopping — Examples and Counterexamples
-status: draft
+status: published
 items: []
 examples:
   - ex-ip-landweber-initial-discrepancy-stop

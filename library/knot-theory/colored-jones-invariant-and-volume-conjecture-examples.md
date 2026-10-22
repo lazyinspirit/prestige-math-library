@@ -1,7 +1,7 @@
 ---
 page: colored-jones-invariant-and-volume-conjecture-examples
 title: Colored Jones and the volume conjecture — Examples and Counterexamples
-status: draft
+status: published
 requires:
   - colored-jones-invariant-and-volume-conjecture
 items: []

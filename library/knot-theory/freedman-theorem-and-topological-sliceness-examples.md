@@ -1,7 +1,7 @@
 ---
 page: freedman-theorem-and-topological-sliceness-examples
 title: "Freedman’s theorem and topological sliceness — Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples:
   - cex-knot-kt-25-boundary-case

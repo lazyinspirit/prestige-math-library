@@ -1,7 +1,7 @@
 ---
 page: factorized-and-composite-linear-inversion
 title: Factorized and composite linear inversion
-status: draft
+status: published
 items:
   - def-ip-composite-double-regularization
   - thm-ip-double-discrepancy-conditional-convergence

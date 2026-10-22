@@ -1,7 +1,7 @@
 ---
 page: ribbon-knots-and-slice-ribbon-problem
 title: Ribbon knots and the slice-ribbon problem
-status: draft
+status: published
 requires:
   - smooth-and-topological-knot-concordance
   - terminating-computations-for-classical-knot-invariants

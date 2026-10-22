@@ -1,7 +1,7 @@
 ---
 page: geodesic-x-ray-transforms-on-simple-manifolds-examples
 title: "Geodesic X-ray transforms on simple surfaces — Examples and Counterexamples"
-status: draft
+status: published
 requires:
   - geodesic-x-ray-transforms-on-simple-manifolds
   - jacobi-fields-conjugate-points-and-the-cut-locus

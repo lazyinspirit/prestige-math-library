@@ -2,7 +2,7 @@
 id: lem-regular-link-diagram-admits-normalized-height-realization
 kind: lemma
 title: "A regular link diagram admits a normalized height realization"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 0
@@ -24,6 +24,13 @@ sources:
     - title: "John Milnor, Link Groups"
       url: "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/milnorlink.pdf"
       locator: "§§1–2, full paper PDF pp. 1–6, link and meridian context; the height normalization is proved locally."
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

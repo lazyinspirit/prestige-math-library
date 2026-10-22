@@ -1,7 +1,7 @@
 ---
 page: lee-deformation-and-rasmussen-s-invariant-examples
 title: Lee deformation and Rasmussen’s s-invariant — Examples and Counterexamples
-status: draft
+status: published
 requires:
   - lee-deformation-and-rasmussen-s-invariant
 items: []

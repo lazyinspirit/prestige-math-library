@@ -1,7 +1,7 @@
 ---
 page: fox-milnor-factorization-and-slice-obstructions
 title: "Fox–Milnor factorization and slice obstructions"
-status: draft
+status: published
 requires:
   - alexander-polynomial-from-seifert-matrices
   - levine-tristram-signatures-and-arf-invariant

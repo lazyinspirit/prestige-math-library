@@ -2,7 +2,7 @@
 id: op-ip-general-anisotropic-calderon-uniqueness
 kind: open-problem
 title: Smooth anisotropic Calderón uniqueness from one boundary patch
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 6
@@ -22,6 +22,10 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  sources_checked:
+    date: "2026-10-22"
+    scope: "Formulation and unresolved status reviewed in the completed delegated build; source-reading limits and evidence remain recorded in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    by: "gpt-6.1-sol delegated native review; publication authorized by owner"
   precheck: n/a
 sources:
   references:

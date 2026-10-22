@@ -2,7 +2,7 @@
 id: thm-smooth-group-signature-defects-are-independent-and-uniformly-bounded
 kind: theorem
 title: Smooth group signature defects are independent and uniformly bounded
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 aliases: []
@@ -43,6 +43,13 @@ sources:
       locator: Complete printed88–91 read; general collapse construction with retained
         coefficient labels is detailed below
 dependency_level: 6
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

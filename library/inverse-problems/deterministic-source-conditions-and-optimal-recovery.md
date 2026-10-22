@@ -1,7 +1,7 @@
 ---
 page: deterministic-source-conditions-and-optimal-recovery
 title: "Deterministic source classes and optimal recovery"
-status: draft
+status: published
 items:
   - def-ip-index-source-ball
   - def-ip-centered-modulus-of-continuity

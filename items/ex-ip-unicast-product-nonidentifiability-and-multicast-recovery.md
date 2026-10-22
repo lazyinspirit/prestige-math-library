@@ -2,7 +2,7 @@
 id: ex-ip-unicast-product-nonidentifiability-and-multicast-recovery
 kind: example
 title: "Unicast products lose link identifiability; multicast restores it"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 1
@@ -22,6 +22,13 @@ sources:
     - title: "B. Xi, G. Michailidis, and V. N. Nair, Estimating Network Loss Rates Using Active Tomography, Journal of the American Statistical Association 101 (2006), 1430–1448"
       url: "https://www.stat.purdue.edu/~xbw/research/xi_tomo_jasa1206.pdf"
       locator: "§3.2, two-leaf design discussion, PDF p. 5 (printed p. 1434)"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Example

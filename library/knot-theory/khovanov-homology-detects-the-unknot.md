@@ -1,7 +1,7 @@
 ---
 page: khovanov-homology-detects-the-unknot
 title: Khovanov homology detects the unknot
-status: draft
+status: published
 requires:
   - knot-exteriors-and-peripheral-systems
   - khovanov-homology-and-jones-categorification

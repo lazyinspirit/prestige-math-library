@@ -2,7 +2,7 @@
 id: thm-adjoint-logarithmic-gauss-slope-and-ideal-point
 kind: theorem
 title: "Adjoint logarithmic Gauss slope on an affine character component"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 12
@@ -25,6 +25,13 @@ sources:
       url: "https://arxiv.org/html/2103.14151"
     - title: "Marc Culler and Peter B. Shalen, Varieties of group representations and splittings of 3-manifolds, §2.1, Theorems 2.1.1–2.1.2 and Proposition 2.3.1, pp. 123–126"
       url: "https://marc-culler.info/static/home/papers/CharacterVarieties.pdf"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

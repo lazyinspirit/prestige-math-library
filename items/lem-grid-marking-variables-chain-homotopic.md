@@ -2,7 +2,7 @@
 id: lem-grid-marking-variables-chain-homotopic
 kind: lemma
 title: "Basepoint variables act chain homotopically on a knot grid"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps:
@@ -26,6 +26,13 @@ sources:
     - title: "Ciprian Manolescu, Peter Ozsvath, and Sucharit Sarkar, A combinatorial description of knot Floer homology, §1"
       url: "https://arxiv.org/pdf/math/0607691"
       locator: "Printed pp.2–4; basepoint variables and the full filtered grid complex"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

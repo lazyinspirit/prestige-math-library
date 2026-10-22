@@ -2,7 +2,7 @@
 id: lem-ni-holomorphic-disk-and-jsj-analytic-inputs
 kind: lemma
 title: "Analytic inputs for Ni's sutured knot Floer decompositions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps:
@@ -36,6 +36,13 @@ sources:
     - title: "Peter Ozsvath and Zoltan Szabo, Holomorphic disks and topological invariants for closed three-manifolds, arXiv:math/0101206"
       url: "https://arxiv.org/pdf/math/0101206"
       locator: "Printed pp.19–35; Fredholm regularity, energy bounds, compactness, and index-two boundary and gluing arguments"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: def-zero-surgery-on-a-knot
 kind: definition
 title: Zero-framed surgery on a knot
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 2
@@ -27,6 +27,13 @@ sources:
         “Knot concordance and homology cobordism”
       url: https://arxiv.org/pdf/1102.5730
       locator: Theorem 2.1 and proof, printed pp. 5–7
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Definition

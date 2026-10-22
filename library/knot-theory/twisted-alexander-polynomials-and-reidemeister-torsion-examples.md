@@ -1,7 +1,7 @@
 ---
 page: twisted-alexander-polynomials-and-reidemeister-torsion-examples
 title: "Twisted Alexander polynomials and Reidemeister torsion — Examples and Counterexamples"
-status: draft
+status: published
 requires:
   - twisted-alexander-polynomials-and-reidemeister-torsion
 items: []

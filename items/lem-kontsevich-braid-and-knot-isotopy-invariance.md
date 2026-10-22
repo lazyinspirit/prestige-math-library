@@ -2,7 +2,7 @@
 id: lem-kontsevich-braid-and-knot-isotopy-invariance
 kind: lemma
 title: Braid and knot isotopy invariance of the normalized integral
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 provenance:
@@ -35,6 +35,13 @@ sources:
       url: https://arxiv.org/pdf/q-alg/9702009v1
     - title: The Universal Vassiliev–Kontsevich Invariant for Framed Oriented Links, §§3–4
       url: https://letu.math.gatech.edu/Papers/UN_PAPER.pdf
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

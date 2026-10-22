@@ -3,7 +3,7 @@ id: lem-compatible-normal-vectors-admit-original-triangulation-regular-sum-diagr
 kind: lemma
 title: Compatible normal vectors admit regular sum diagrams in the original
   triangulation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps:
@@ -27,6 +27,13 @@ sources:
         regular switches. No identification of its adapted coordinates with the
         original seven coordinates is assumed here.
 dependency_level: 3
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

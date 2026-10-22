@@ -2,7 +2,7 @@
 id: lem-knot-exterior-irreducible-and-boundary-incompressible-kt18-local
 kind: lemma
 title: "Nontrivial knot exteriors are irreducible and boundary-incompressible"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 6
@@ -36,6 +36,12 @@ sources:
       url: "https://friedl.app.uni-regensburg.de/papers/2024_knot-theory-final.pdf"
       locator: "Chapter 11, Proposition 11.7, printed pp.160–162; genus zero iff unknot"
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
   precheck: pending
 ---
 

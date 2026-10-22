@@ -2,7 +2,7 @@
 id: lem-positive-hopf-plumbing-has-trefoil-seifert-matrix
 kind: lemma
 title: "A positive Hopf plumbing gives the trefoil Seifert matrix"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 8
@@ -27,6 +27,13 @@ sources:
     - title: "Alessia Cattabriga and Stefano Francaviglia, Knot Theory and Applications: Lecture Notes"
       url: "https://www.dm.unibo.it/~francavi/did/21-22/knot.pdf"
       locator: "§6.2.3, Example 6.2.11, printed pp. 45–46"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

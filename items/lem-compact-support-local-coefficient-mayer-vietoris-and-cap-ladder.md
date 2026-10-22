@@ -2,7 +2,7 @@
 id: lem-compact-support-local-coefficient-mayer-vietoris-and-cap-ladder
 kind: lemma
 title: Compact-support local Mayer–Vietoris and its cap ladder without choice
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-compactly-supported-cohomology-with-local-coefficients
@@ -20,6 +20,13 @@ sources:
       url: https://pi.math.cornell.edu/~hatcher/AT/AT.pdf
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 0
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

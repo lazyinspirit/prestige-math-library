@@ -1,7 +1,7 @@
 ---
 page: function-space-mcmc-and-pcn
 title: Function-space pCN and invariant posterior kernels
-status: draft
+status: published
 items:
   - lem-ip-separable-hilbert-borel-laws-determined-by-orthonormal-coordinates
   - alg-ip-prior-preserving-crank-nicolson

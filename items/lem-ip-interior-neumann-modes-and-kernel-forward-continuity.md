@@ -2,7 +2,7 @@
 id: lem-ip-interior-neumann-modes-and-kernel-forward-continuity
 kind: lemma
 title: Interior decay of Neumann modes and kernel forward continuity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 6
@@ -26,6 +26,13 @@ sources:
       locator: Full Theorem 4.2 proof and Remark 4.5, printed pp.405–406; the
         fixed-collar spectral argument below supplies the stronger kernel-norm
         conclusion locally.
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

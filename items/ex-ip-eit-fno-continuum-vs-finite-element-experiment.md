@@ -2,7 +2,7 @@
 id: ex-ip-eit-fno-continuum-vs-finite-element-experiment
 kind: example
 title: Continuum approximation theorem versus finite-element experiments
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 12
@@ -17,6 +17,13 @@ sources:
     - title: "Maarten V. de Hoop, Nikola B. Kovachki, Matti Lassas and Nicholas H. Nelsen, Extension and neural operator approximation of the electrical impedance tomography inverse map"
       url: "https://arxiv.org/pdf/2511.20361"
       locator: "Theorem 4.8, §5 numerical experiments and Appendix C, printed pp. 31–34 and 37–45; Appendix C starts on printed p. 61."
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Example

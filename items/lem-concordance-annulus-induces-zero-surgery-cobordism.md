@@ -2,7 +2,7 @@
 id: lem-concordance-annulus-induces-zero-surgery-cobordism
 kind: lemma
 title: "A concordance annulus gives a zero-surgery cobordism"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 3
@@ -24,6 +24,13 @@ sources:
     - title: 'Tim D. Cochran, Christopher W. Davis, and Arunima Ray, "Injectivity of satellite operators in knot concordance"'
       url: "https://arxiv.org/pdf/1205.5058v3"
       locator: "Proposition 3.2, zero-surgery concordance relation"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 ## Statement
 

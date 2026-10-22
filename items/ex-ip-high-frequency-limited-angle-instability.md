@@ -2,7 +2,7 @@
 id: ex-ip-high-frequency-limited-angle-instability
 kind: example
 title: Rapid oscillations make limited-angle data smaller than every power
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 4
@@ -24,6 +24,13 @@ sources:
     - title: "Mikko Salo, On geometric inverse problems and microlocal analysis, §2.1"
       url: "https://users.jyu.fi/~salomi/pub/RICAM_notes_v1.pdf"
       locator: "§2.1, pp. 4–5: line-normal Fourier geometry; the quantitative oscillatory estimate is proved locally."
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Example

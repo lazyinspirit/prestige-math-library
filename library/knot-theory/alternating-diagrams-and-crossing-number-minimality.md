@@ -1,7 +1,7 @@
 ---
 page: alternating-diagrams-and-crossing-number-minimality
 title: Alternating diagrams and crossing-number minimality
-status: draft
+status: published
 requires:
   - crossing-signs-writhe-and-linking-number
   - kauffman-bracket-state-sum-and-jones-polynomial

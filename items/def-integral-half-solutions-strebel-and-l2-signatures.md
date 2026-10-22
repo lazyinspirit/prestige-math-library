@@ -2,7 +2,7 @@
 id: def-integral-half-solutions-strebel-and-l2-signatures
 kind: definition
 title: Integral half-solutions, Strebel classes, and L²-signatures
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 5
@@ -27,6 +27,13 @@ sources:
         amenable groups”
       url: https://arxiv.org/pdf/0910.3700
       locator: §§6–7, amenable-group L² conventions
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Definition

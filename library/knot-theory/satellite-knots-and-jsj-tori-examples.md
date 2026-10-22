@@ -1,7 +1,7 @@
 ---
 page: satellite-knots-and-jsj-tori-examples
 title: Satellite knots and JSJ tori — Examples and Counterexamples
-status: draft
+status: published
 requires:
   - satellite-knots-and-jsj-tori
   - relative-smooth-triangulation-and-bundle-fitting

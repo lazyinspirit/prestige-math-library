@@ -1,7 +1,7 @@
 ---
 page: radon-transform-and-fourier-slice-reconstruction-examples
 title: Euclidean Radon transform and filtered backprojection — Examples and Counterexamples
-status: draft
+status: published
 requires:
   - radon-transform-and-fourier-slice-reconstruction
 items: []

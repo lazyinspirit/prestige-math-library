@@ -2,7 +2,7 @@
 id: thm-epsilon-upsilon-are-concordance-homomorphism-data
 kind: theorem
 title: "Epsilon and Upsilon concordance data"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps:
@@ -43,6 +43,13 @@ sources:
     - title: "Charles Livingston, Notes on the knot concordance invariant Upsilon, §§7–12"
       url: "https://www.maths.gla.ac.uk/~mpowell/Upsilon-revised.pdf"
       locator: "Additivity, mirror duality, concordance invariance, and the smooth four-genus bound"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

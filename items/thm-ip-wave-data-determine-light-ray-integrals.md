@@ -2,7 +2,7 @@
 id: thm-ip-wave-data-determine-light-ray-integrals
 kind: theorem
 title: Wave boundary data determine integrals along maximal geodesics shorter than T
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 axiom_base: Countable Choice
@@ -25,6 +25,13 @@ sources:
       url: "https://arxiv.org/pdf/2311.06020v2"
       locator: "§5.1, PDF pp. 22–23: high-frequency boundary solutions and the data-to-ray-integral limit; the local proof obligation is to give all beam error estimates."
 proof_strategy: Alessandrini identity and proved finite-order simple-geometry geometric optics
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

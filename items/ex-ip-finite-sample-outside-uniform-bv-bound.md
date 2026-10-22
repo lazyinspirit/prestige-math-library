@@ -2,7 +2,7 @@
 id: ex-ip-finite-sample-outside-uniform-bv-bound
 kind: example
 title: Finite samples outside a uniform BV bound
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 3
@@ -22,6 +22,13 @@ sources:
     - title: "Gláucio Terra, Introduction to Geometric Measure Theory — Lecture Notes, version 1.6"
       url: "https://www.ime.usp.br/~glaucio/mat6704/textos/GMTLecureNotes.pdf"
       locator: "§7.1, Definition 7.12, Proposition 7.16, Lemma 7.17 and Theorem 7.18 with complete proof, printed pp. 233–238: Gauss–Green and perimeter measure for Lipschitz domains."
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Example

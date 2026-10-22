@@ -2,7 +2,7 @@
 id: alg-knot-wirtinger-presentation-from-code
 kind: algorithm
 title: "Wirtinger presentation from a finite diagram code"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 3
@@ -17,7 +17,14 @@ sources:
       url: "https://site.uvm.edu/cmcharbo/files/2021/12/knot-group-1.pdf"
     - title: "Danny Calegari, Introduction to Knot Theory, §4.2, printed pp. 34–36"
       url: "https://math.uchicago.edu/~dannyc/notes/knot_theory.pdf"
-verification: {precheck: pass}
+verification:
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json.
+    delegated_by: owner
 ---
 
 ## Definition

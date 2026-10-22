@@ -1,7 +1,7 @@
 ---
 page: satellite-operators-and-knot-concordance-filtrations-examples
 title: Satellite operators and concordance filtrations — Examples and Counterexamples
-status: draft
+status: published
 requires:
   - satellite-operators-and-knot-concordance-filtrations
 items: []

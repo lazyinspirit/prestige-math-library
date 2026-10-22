@@ -1,7 +1,7 @@
 ---
 page: unrolled-inverse-solvers-and-generalization
 title: "Unrolled reconstruction and finite-iteration limits"
-status: draft
+status: published
 items:
   - lem-ip-unrolled-finite-domain-and-output-are-borel
   - def-ip-unrolled-regularization-architecture

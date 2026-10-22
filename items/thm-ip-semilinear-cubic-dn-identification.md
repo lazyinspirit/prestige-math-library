@@ -2,7 +2,7 @@
 id: thm-ip-semilinear-cubic-dn-identification
 kind: theorem
 title: "Cubic semilinear DN identification by third linearization"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps:
@@ -32,6 +32,13 @@ sources:
     - title: "Feizmohammadi and Oksanen, An inverse problem for a semi-linear elliptic equation in Riemannian geometries (2019)"
       url: "https://arxiv.org/pdf/1904.00608v3"
       locator: "Theorem 1 and proof, especially Proposition 6, PDF pp. 29-32."
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

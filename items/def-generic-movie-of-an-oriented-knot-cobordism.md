@@ -2,7 +2,7 @@
 id: def-generic-movie-of-an-oriented-knot-cobordism
 kind: definition
 title: A generic movie of an oriented knot cobordism
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps:
@@ -28,6 +28,13 @@ sources:
       url: https://arxiv.org/pdf/math/0206303
       locator: Printed pp.1220–1225 and 1235–1244; movies, equivalence, and the
         movie-move theorem's use
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Definition

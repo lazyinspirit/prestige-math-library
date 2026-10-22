@@ -1,7 +1,7 @@
 ---
 page: seifert-surfaces-and-knot-genus
 title: Seifert surfaces and knot genus
-status: draft
+status: published
 items:
   - alg-seifert-surface-from-diagram
   - def-oriented-seifert-surface

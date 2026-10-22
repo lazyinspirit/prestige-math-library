@@ -2,7 +2,7 @@
 id: lem-irreducible-sl2-character-components-have-specializing-quadratic-models
 kind: lemma
 title: A quadratic generic character model specializes on a dense principal open
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps:
@@ -31,6 +31,13 @@ sources:
         specializations and quadratic descent used below are supplied directly,
         rather than inferred from pointwise conjugacy.
 dependency_level: 10
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

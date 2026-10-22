@@ -2,7 +2,7 @@
 id: def-ip-distributions-conormal-kernels-and-cotangent-relation
 kind: definition
 title: "Distributions, conormal kernels, and cotangent relations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps:
@@ -34,6 +34,13 @@ sources:
       url: "https://www.numdam.org/item/AST_1982__95__R3_0.pdf"
       locator: "§6, Definition 6.1, printed p. 37, for local distribution pairings and cotangent coordinates."
 proof_strategy: direct
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Definition

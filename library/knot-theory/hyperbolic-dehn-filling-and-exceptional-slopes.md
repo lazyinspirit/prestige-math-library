@@ -1,7 +1,7 @@
 ---
 page: hyperbolic-dehn-filling-and-exceptional-slopes
 title: Hyperbolic Dehn filling and exceptional slopes
-status: draft
+status: published
 requires:
   - knot-exteriors-and-peripheral-systems
   - dehn-surgery-on-knots-and-homology

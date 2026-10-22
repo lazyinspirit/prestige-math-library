@@ -1,7 +1,7 @@
 ---
 page: conditional-flow-matching-for-inverse-posteriors
 title: Conditional flow matching for inverse posteriors
-status: draft
+status: published
 items:
   - lem-ip-gronwall-with-integrable-coefficient
   - lem-ip-lipschitz-ode-triangular-flow-and-c1-density

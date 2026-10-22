@@ -2,7 +2,7 @@
 id: lem-ip-weighted-coefficient-spaces-are-hilbert
 kind: lemma
 title: Weighted coefficient spaces form a Hilbert scale
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 0
@@ -31,6 +31,13 @@ sources:
     - title: "M. Dashti and A. M. Stuart, The Bayesian Approach to Inverse Problems (arXiv:1302.6989)"
       url: "https://arxiv.org/pdf/1302.6989"
       locator: "§2.3, coefficient summability in Besov-prior regularity."
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

@@ -1,7 +1,7 @@
 ---
 page: limited-angle-tomography-and-invisible-singularities
 title: "Limited-angle visibility and instability"
-status: draft
+status: published
 requires:
   - inverse-problems-identifiability-and-stability
   - radon-transform-and-fourier-slice-reconstruction

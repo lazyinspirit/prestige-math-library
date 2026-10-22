@@ -1,7 +1,7 @@
 ---
 page: multivariable-alexander-modules-and-chain-models
 title: Multivariable Alexander modules and chain models
-status: draft
+status: published
 requires:
   - hecke-markov-traces-and-polynomial-link-invariants
   - wirtinger-presentations-and-knot-groups

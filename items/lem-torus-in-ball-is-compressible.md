@@ -2,7 +2,7 @@
 id: lem-torus-in-ball-is-compressible
 kind: lemma
 title: "Every embedded torus in a ball is compressible"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 4
@@ -32,6 +32,13 @@ sources:
     - title: "Ryan Budney, JSJ-decompositions of knot and link complements in the 3-sphere"
       url: "https://arxiv.org/pdf/math/0506523"
       locator: "§1, incompressible tori and irreducible pieces, PDF pp.2–4"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

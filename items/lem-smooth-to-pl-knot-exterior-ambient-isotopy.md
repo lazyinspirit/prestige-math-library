@@ -2,7 +2,7 @@
 id: lem-smooth-to-pl-knot-exterior-ambient-isotopy
 kind: lemma
 title: Smooth-to-piecewise-linear knot exterior approximation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 2
@@ -32,6 +32,13 @@ sources:
       url: https://jeffe.cs.illinois.edu/teaching/comptop/2009/notes/normal-surfaces.pdf
       locator: §§14.1–14.4, complete six-page notes on normal disks, matching, normal
         surfaces and knots.
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

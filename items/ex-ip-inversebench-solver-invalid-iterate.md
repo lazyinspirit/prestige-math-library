@@ -2,7 +2,7 @@
 id: ex-ip-inversebench-solver-invalid-iterate
 kind: example
 title: A solver-invalid FWI iterate
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 7
@@ -25,6 +25,13 @@ sources:
     - title: "Hongkai Zheng et al., InverseBench: Benchmarking Plug-and-Play Diffusion Priors for Inverse Problems in Physical Sciences, ICLR 2025, full paper and appendices"
       url: "https://proceedings.iclr.cc/paper_files/paper/2025/file/e297068f5ec7f483a017948715b591fb-Paper-Conference.pdf"
       locator: "§4.3 and Figure 3, PDF pp. 8–9: DAPS step-size sensitivity and a reported FWI velocity map that violates the PDE solver's CFL condition; Appendix B.4, PDF p. 26: the particular FWI discretization and stable time step."
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Example

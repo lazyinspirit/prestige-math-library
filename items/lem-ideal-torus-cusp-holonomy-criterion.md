@@ -2,7 +2,7 @@
 id: lem-ideal-torus-cusp-holonomy-criterion
 kind: lemma
 title: "Cusp multipliers detect completeness"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 2
@@ -23,6 +23,13 @@ sources:
     - title: "William P. Thurston, The Geometry and Topology of Three-Manifolds"
       url: "https://library.slmath.org/nonmsri/gt3m/PDF/4.pdf"
       locator: "Chapter 4, §§4.2–4.4, edge and cusp completeness equations"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

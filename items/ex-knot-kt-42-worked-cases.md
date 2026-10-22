@@ -2,7 +2,7 @@
 id: ex-knot-kt-42-worked-cases
 kind: example
 title: "Epsilon and Upsilon for the trefoil and its mirror"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps:
@@ -32,6 +32,13 @@ sources:
     - title: "Peter S. Ozsvath, Andras I. Stipsicz, and Zoltan Szabo, Grid Homology for Knots and Links, §§4.1–4.6 and 13.2"
       url: "https://web.math.princeton.edu/~petero/GridHomologyBook.pdf"
       locator: "Grid staircase model, Maslov/Alexander gradings, and filtered grid-to-knot Floer comparison setup"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Example

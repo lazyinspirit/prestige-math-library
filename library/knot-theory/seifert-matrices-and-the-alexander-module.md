@@ -1,7 +1,7 @@
 ---
 page: seifert-matrices-and-the-alexander-module
 title: "Seifert matrices and the Alexander module"
-status: draft
+status: published
 requires:
   - hecke-markov-traces-and-polynomial-link-invariants
   - knot-exteriors-and-peripheral-systems

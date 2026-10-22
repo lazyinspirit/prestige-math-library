@@ -1,7 +1,7 @@
 ---
 page: skein-modules-for-links-in-three-manifolds
 title: "Skein modules for links in 3-manifolds"
-status: draft
+status: published
 requires:
   - kauffman-bracket-state-sum-and-jones-polynomial
 items:

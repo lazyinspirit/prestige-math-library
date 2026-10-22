@@ -1,7 +1,7 @@
 ---
 page: anisotropic-calderon-gauge-and-open-uniqueness
 title: Anisotropic gauge and unresolved uniqueness
-status: draft
+status: published
 requires:
   - calderon-problem-and-cgo-uniqueness
   - smooth-manifolds-and-smooth-maps

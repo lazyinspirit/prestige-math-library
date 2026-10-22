@@ -1,7 +1,7 @@
 ---
 page: compressed-sensing-with-noise-and-model-selection-examples
 title: "Stable compressed sensing with noise — Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples:
   - ex-ip-34-scope-and-boundary-cases

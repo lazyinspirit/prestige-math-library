@@ -1,7 +1,7 @@
 ---
 page: khovanov-homology-detects-the-unknot-examples
 title: Khovanov homology detects the unknot — Examples and Counterexamples
-status: draft
+status: published
 requires:
   - khovanov-homology-detects-the-unknot
 items: []

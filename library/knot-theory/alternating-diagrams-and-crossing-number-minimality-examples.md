@@ -1,7 +1,7 @@
 ---
 page: alternating-diagrams-and-crossing-number-minimality-examples
 title: Alternating diagrams and crossing-number minimality — Examples and Counterexamples
-status: draft
+status: published
 requires:
   - alternating-diagrams-and-crossing-number-minimality
 items: []

@@ -1,7 +1,7 @@
 ---
 page: connected-sums-and-prime-decomposition-examples
 title: Connected sums and prime decomposition — Examples and Counterexamples
-status: draft
+status: published
 requires:
   - connected-sums-and-prime-decomposition
 items: []

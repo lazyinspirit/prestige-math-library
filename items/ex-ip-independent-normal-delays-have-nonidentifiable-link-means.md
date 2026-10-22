@@ -2,7 +2,7 @@
 id: ex-ip-independent-normal-delays-have-nonidentifiable-link-means
 kind: example
 title: "A shared-link Gaussian tree with nonidentifiable link means"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 0
@@ -20,6 +20,13 @@ sources:
     - title: "E. Lawrence, G. Michailidis, and V. N. Nair, Statistical Inverse Problems in Active Network Tomography, IMS Lecture Notes–Monograph Series 54 (2007), 24–44"
       url: "https://arxiv.org/pdf/0708.1079"
       locator: "§1, Example 3, PDF p. 3 (printed p. 26): two-leaf additive Gaussian delay model and nonidentifiable means"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Example

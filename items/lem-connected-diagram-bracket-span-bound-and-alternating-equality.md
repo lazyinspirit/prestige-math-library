@@ -2,7 +2,7 @@
 id: lem-connected-diagram-bracket-span-bound-and-alternating-equality
 kind: lemma
 title: "Connected-diagram bracket span bound and alternating equality"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 2
@@ -32,6 +32,13 @@ sources:
     - title: "Kunio Murasugi, Knot Theory and Its Applications, Springer/Birkhäuser (1996), Proposition 4.4.1 and Chapter 11, Propositions 11.1.1 and 11.2.6"
       url: "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/murasug3.pdf"
       locator: "Chapter 4, Proposition 4.4.1; Chapter 11, Propositions 11.1.1 and 11.2.6. The stated proof arguments were read; other chapters were not audited."
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

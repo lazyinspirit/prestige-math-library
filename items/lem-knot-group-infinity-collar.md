@@ -2,7 +2,7 @@
 id: lem-knot-group-infinity-collar
 kind: lemma
 title: "Removing the point at infinity preserves the knot group"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 2
@@ -26,7 +26,18 @@ sources:
   references:
     - title: "Stefan Friedl, Knot Theory, §5.3, proof of the Wirtinger Presentation Proposition"
       url: "https://friedl.app.uni-regensburg.de/papers/2024_knot-theory-final.pdf"
-verification: {precheck: pass, judge: {model: "gpt-6-luna", verdict: pass, date: 2026-10-22}}
+verification:
+  precheck: pass
+  judge:
+    model: gpt-6-luna
+    verdict: pass
+    date: 2026-10-22
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-22
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

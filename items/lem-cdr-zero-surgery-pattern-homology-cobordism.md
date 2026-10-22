@@ -2,7 +2,7 @@
 id: lem-cdr-zero-surgery-pattern-homology-cobordism
 kind: lemma
 title: "The CDR pattern zero-surgery homology cobordism"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 6
@@ -37,6 +37,13 @@ sources:
     - title: "Michael H. Freedman and Frank Quinn, Topology of 4-Manifolds"
       url: "https://www.maths.ed.ac.uk/~v1ranick/papers/freedmanquinn.pdf"
       locator: "Theorem 9.3A, printed pp. 137–141: external actual normal vector neighborhood for a locally flat slice disk, relative to its boundary collar."
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

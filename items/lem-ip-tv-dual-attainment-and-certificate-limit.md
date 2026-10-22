@@ -2,7 +2,7 @@
 id: lem-ip-tv-dual-attainment-and-certificate-limit
 kind: lemma
 title: Dual attainment and convergence of TV source certificates
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 5
@@ -41,6 +41,13 @@ sources:
       url: https://carmamaths.org/jon/Preprints/Books/CUP/cup-final.pdf
       locator: §4.4, Exercise 4.4.1; inspection confirms it concerns convex conjugate
         examples and is not used in this projection proof.
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

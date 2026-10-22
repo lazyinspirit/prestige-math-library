@@ -2,7 +2,7 @@
 id: def-ip-analytic-wavefront-fbi-transform
 kind: definition
 title: "Analytic wavefront set by Gaussian FBI packets"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps:
@@ -22,6 +22,13 @@ sources:
       url: "https://users.jyu.fi/~salomi/pub/MazzucchelliSaloTzou2023.pdf"
       locator: "§5.1, FBI transform and wavefront convention, printed pp. 27–29."
 proof_strategy: direct
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Definition

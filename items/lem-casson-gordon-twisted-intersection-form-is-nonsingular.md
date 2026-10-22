@@ -2,7 +2,7 @@
 id: lem-casson-gordon-twisted-intersection-form-is-nonsingular
 kind: lemma
 title: Nonsingularity of the Casson–Gordon twisted intersection form
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 9
@@ -29,6 +29,13 @@ sources:
     - title: Patrick Gilmer, Slice Knots in S3
       url: https://www.maths.ed.ac.uk/~v1ranick/papers/gilmer3.pdf
       locator: §1, printed pp. 307–309; the relevant nonsingularity issue is cited but not proved
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

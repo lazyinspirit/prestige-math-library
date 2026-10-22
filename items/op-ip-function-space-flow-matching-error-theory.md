@@ -2,7 +2,7 @@
 id: op-ip-function-space-flow-matching-error-theory
 kind: open-problem
 title: Dimension-uniform conditional flow error for function-valued Bayesian posteriors
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 5
@@ -43,6 +43,11 @@ sources:
     - title: "Jannis Chemseddine, Paul Hagemann, Gabriele Steidl, and Christian Wald, Conditional Wasserstein Distances with Applications in Bayesian OT Flow Matching, Journal of Machine Learning Research 26(141) (2025)"
       url: "https://www.jmlr.org/papers/volume26/24-0586/24-0586.pdf"
       locator: "§2 and Proposition 1: finite-dimensional conditional Wasserstein distance equals expected conditional Wasserstein distance and supports Bayesian OT flow-matching constructions."
+verification:
+  sources_checked:
+    date: "2026-10-22"
+    scope: "Formulation and unresolved status reviewed in the completed delegated build; source-reading limits and evidence remain recorded in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    by: "gpt-6.1-sol delegated native review; publication authorized by owner"
 ---
 
 ## Open problem

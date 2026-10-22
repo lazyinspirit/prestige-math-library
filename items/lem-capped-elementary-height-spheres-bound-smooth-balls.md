@@ -2,7 +2,7 @@
 id: lem-capped-elementary-height-spheres-bound-smooth-balls
 kind: lemma
 title: "Capped elementary height pieces bound smooth balls"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 1
@@ -17,6 +17,13 @@ sources:
     - title: "Allen Hatcher, Notes on Basic 3-Manifold Topology"
       url: "https://pi.math.cornell.edu/~hatcher/3M/3M.pdf"
       locator: "Chapter 1, Lemma 1.2 and its proof, printed pp.2–3; all seven capped models"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

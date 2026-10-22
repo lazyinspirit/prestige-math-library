@@ -1,7 +1,7 @@
 ---
 page: limited-angle-tomography-and-invisible-singularities-examples
 title: "Limited-angle visibility and instability — Examples and Counterexamples"
-status: draft
+status: published
 requires:
   - limited-angle-tomography-and-invisible-singularities
 items: []

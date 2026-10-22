@@ -2,7 +2,7 @@
 id: lem-knot-genus-zero-iff-unknot
 kind: lemma
 title: "A knot has genus zero exactly when it is the unknot"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 4
@@ -27,6 +27,13 @@ sources:
     - title: "Stefan Friedl, Introduction to Knots and Links, 2024 lecture notes"
       url: "https://friedl.app.uni-regensburg.de/papers/2024_knot-theory-final.pdf"
       locator: "Chapter 11, Proposition 11.7, printed pp.160–162; source explicitly leaves smooth ball details to the reader"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

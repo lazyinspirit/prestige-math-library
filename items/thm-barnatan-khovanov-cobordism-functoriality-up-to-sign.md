@@ -2,7 +2,7 @@
 id: thm-barnatan-khovanov-cobordism-functoriality-up-to-sign
 kind: theorem
 title: "Functoriality of even integral Khovanov homology up to sign"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps:
@@ -34,6 +34,13 @@ sources:
     - title: "Mikhail Khovanov, A categorification of the Jones polynomial, §§6.3 and 7.1"
       url: "https://arxiv.org/pdf/math/9908171v2"
       locator: "§6.3, printed pp.39–40, gives the cobordism-map construction and functoriality conjecture; §7.1 gives the c=0 integral specialization"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

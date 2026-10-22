@@ -2,7 +2,7 @@
 id: cex-ip-smooth-map-fails-tcc
 kind: counterexample
 title: A smooth map can fail the tangential cone condition
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 3
@@ -28,6 +28,12 @@ sources:
     - title: "Christian Clason, Regularization of Inverse Problems, equation (9.6) and Theorem 9.9"
       url: "https://arxiv.org/pdf/2001.00617v2"
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
   precheck: pass
   judge:
     model: "gpt-6-luna"

@@ -2,7 +2,7 @@
 id: lem-compact-locally-collared-pl-subpolyhedron-has-pl-collar
 kind: lemma
 title: "A compact locally collared polyhedron has a piecewise linear collar"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps: [ lem-finite-convex-cell-complexes-admit-compatible-triangulations, lem-pl-embedded-polyhedron-admits-compatible-subcomplex-triangulation ]
@@ -17,6 +17,13 @@ sources:
       url: "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/rsplx.pdf"
       locator: "Theorem 2.25 and Corollary 2.26, printed pp.24–26; complete finite local-push proof"
 dependency_level: 2
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

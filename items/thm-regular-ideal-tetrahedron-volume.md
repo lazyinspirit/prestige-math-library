@@ -2,7 +2,7 @@
 id: thm-regular-ideal-tetrahedron-volume
 kind: theorem
 title: "Volume of the regular ideal tetrahedron"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 3
@@ -25,6 +25,13 @@ sources:
     - title: "William P. Thurston, The Geometry and Topology of Three-Manifolds"
       url: "https://library.slmath.org/nonmsri/gt3m/PDF/7.pdf"
       locator: "Chapter 7, ideal tetrahedron volume formula"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

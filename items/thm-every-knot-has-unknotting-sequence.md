@@ -2,7 +2,7 @@
 id: thm-every-knot-has-unknotting-sequence
 kind: theorem
 title: Every smooth knot has a finite crossing-change sequence to the unknot
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 6
@@ -25,6 +25,13 @@ sources:
     - title: "Cole Charbonneau, Computing the Wirtinger Presentation of a Knot Group from a Knot Diagram"
       url: "https://site.uvm.edu/cmcharbo/files/2021/12/knot-group-1.pdf"
       locator: "§§1.2–3.2, printed pp. 2–4, finite diagram records"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

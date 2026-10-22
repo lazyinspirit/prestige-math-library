@@ -2,7 +2,7 @@
 id: ex-ip-analytic-missing-angle-covector
 kind: example
 title: "A missing-angle covector has no data-side canonical pair"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps:
@@ -25,6 +25,13 @@ sources:
       url: "https://math.tifrbng.res.in/~vkrishnan/Papers/Microlocal_Analysis_Tomography.pdf"
       locator: "§1.5.1, printed pp. 34–35, visible directions for restricted Radon data."
 proof_strategy: direct
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Example

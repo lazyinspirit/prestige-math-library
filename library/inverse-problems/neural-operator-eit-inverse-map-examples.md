@@ -1,7 +1,7 @@
 ---
 page: neural-operator-eit-inverse-map-examples
 title: Noise-robust neural-operator approximation for EIT — Examples and Counterexamples
-status: draft
+status: published
 items: []
 examples:
   - ex-ip-finite-sample-outside-uniform-bv-bound

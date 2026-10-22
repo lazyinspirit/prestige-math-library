@@ -2,7 +2,7 @@
 id: prop-ip-discrete-adjoint-gradient-and-residual-status
 kind: proposition
 title: Certified discrete-adjoint residuals give sound finite statuses
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 4
@@ -31,6 +31,12 @@ sources:
     - title: "Fernando Gaspoz, Christian Kreuzer, Andreas Veeser, and Winnifried Wollner, A Posteriori Error Analysis for Optimization with PDE Constraints"
       url: "https://arxiv.org/pdf/2503.13170"
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
   precheck: pass
 ---
 

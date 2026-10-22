@@ -2,7 +2,7 @@
 id: ex-ip-01-scope-and-boundary-cases
 kind: example
 title: Kernel ambiguity, an unstable diagonal inverse, and a constrained class
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 3
@@ -33,6 +33,13 @@ sources:
       url: "https://tristanvanleeuwen.github.io/IP_and_Im_Lectures/what_is.html"
     - title: "Giannis Daras et al., A Survey on Diffusion Models for Inverse Problems, §1.2 (scope context)"
       url: "https://arxiv.org/pdf/2410.00083v1"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Example

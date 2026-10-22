@@ -2,7 +2,7 @@
 id: lem-ip-smooth-whitney-extension-on-compact-sets
 kind: lemma
 title: Smooth Whitney extension on compact sets
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 0
@@ -17,6 +17,13 @@ sources:
       url: https://www.jstor.org/stable/1989708
       locator: "Theorem I (1934). The full smooth extension is derived below from the library's proved finite-order construction, not assumed from this citation."
 proof_strategy: direct
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

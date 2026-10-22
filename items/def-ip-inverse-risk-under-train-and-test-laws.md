@@ -2,7 +2,7 @@
 id: def-ip-inverse-risk-under-train-and-test-laws
 kind: definition
 title: Inverse reconstruction risk under train and test laws
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 4
@@ -35,6 +35,12 @@ sources:
       url: "https://proceedings.iclr.cc/paper_files/paper/2025/file/e297068f5ec7f483a017948715b591fb-Paper-Conference.pdf"
       locator: "§4.3, subsection 'How well do PnPDP methods handle out-of-distribution sources?', PDF p. 10, for selected out-of-prior results; Appendix C, 'Robustness to prior mismatch,' PDF pp. 28–29, for the preliminary Figure 8 comparison. These empirical contexts do not establish a universal risk bound."
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
   precheck: n/a
   judge:
     model: "gpt-6-luna"

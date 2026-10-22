@@ -2,7 +2,7 @@
 id: def-quandle-and-knot-coloring
 kind: definition
 title: "Quandles and knot-diagram colorings"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps: [ def-regular-oriented-link-diagram ]
@@ -21,6 +21,12 @@ sources:
     - title: "Józef H. Przytycki, 3-coloring and other elementary invariants of knots, §§1–2, arXiv:math/0608172, pp. 2–11"
       url: "https://arxiv.org/pdf/math/0608172"
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
   precheck: n/a
   judge:
     model: "gpt-6-luna"

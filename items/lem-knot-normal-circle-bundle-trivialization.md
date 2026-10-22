@@ -2,7 +2,7 @@
 id: lem-knot-normal-circle-bundle-trivialization
 kind: lemma
 title: "The oriented normal bundle of a knot is trivial"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 0
@@ -26,6 +26,13 @@ sources:
     - title: "Allen Hatcher, Vector Bundles and K-Theory"
       url: "https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf"
       locator: "Section 1.2, Proposition 1.14 and the discussion of oriented bundles over $S^1$, printed pp. 25-26"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

@@ -1,7 +1,7 @@
 ---
 page: character-varieties-and-the-a-polynomial
 title: Character varieties and the A-polynomial
-status: draft
+status: published
 items:
   - lem-fixed-field-of-automorphisms-of-c-over-q-is-q
   - lem-two-commuting-complex-2x2-matrices-are-simultaneously-triangularizable

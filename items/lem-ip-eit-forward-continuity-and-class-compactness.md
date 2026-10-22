@@ -2,7 +2,7 @@
 id: lem-ip-eit-forward-continuity-and-class-compactness
 kind: lemma
 title: EIT forward continuity and compactness of conductivity classes
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 7
@@ -39,6 +39,13 @@ sources:
       locator: Theorem 4.2 and Remark 4.5, contextual forward NtD continuity in an
         $L^q$ coefficient norm via Meyers higher integrability, printed
         pp.405–406 (PDF pp.9–10); this paper denotes the NtD map by Lambda.
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: thm-ip-nonlinear-tikhonov-weak-cluster-stability
 kind: theorem
 title: Weak-cluster stability for fixed-parameter nonlinear Tikhonov regularization
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 3
@@ -32,6 +32,12 @@ sources:
     - title: "Benedikt Wirth, Inverse Problems, Theorem 86"
       url: "https://www.uni-muenster.de/AMM/Veranstaltungen/WS21/InverseProblems/lecture2021.pdf"
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
   precheck: pass
   judge:
     model: "gpt-6-luna"

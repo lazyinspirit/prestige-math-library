@@ -2,7 +2,7 @@
 id: lem-ip-collared-liouville-potential-and-hone-recovery
 kind: lemma
 title: Collared Sobolev conductivities have regular Liouville potentials and H1 recovery
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps:
@@ -28,6 +28,13 @@ sources:
       url: https://univerlag.uni-goettingen.de/bitstream/handle/3/isbn-978-3-86395-411-6/weidling.pdf?sequence=1
       locator: Lemmas 6.4–6.5 and the potential-to-conductivity estimate (6.9)
 dependency_level: 1
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

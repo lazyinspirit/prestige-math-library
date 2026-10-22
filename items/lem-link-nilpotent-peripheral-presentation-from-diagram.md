@@ -2,7 +2,7 @@
 id: lem-link-nilpotent-peripheral-presentation-from-diagram
 kind: lemma
 title: Finite nilpotent peripheral presentation from a link diagram
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps:
@@ -32,6 +32,13 @@ sources:
         generators for the reduced link group. The finite nilpotent version is
         proved below, without assuming reduced meridian commutativity.
 dependency_level: 6
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

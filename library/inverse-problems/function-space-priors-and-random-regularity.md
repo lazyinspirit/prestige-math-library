@@ -1,7 +1,7 @@
 ---
 page: function-space-priors-and-random-regularity
 title: Function-space priors and sample regularity
-status: draft
+status: published
 items:
   - lem-ip-weighted-coefficient-spaces-are-hilbert
   - lem-ip-coordinate-vectors-form-a-basis-of-ell-two

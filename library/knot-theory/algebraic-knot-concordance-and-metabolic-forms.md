@@ -1,7 +1,7 @@
 ---
 page: algebraic-knot-concordance-and-metabolic-forms
 title: Algebraic concordance and metabolic forms
-status: draft
+status: published
 requires:
   - seifert-matrices-and-the-alexander-module
   - alexander-polynomial-from-seifert-matrices

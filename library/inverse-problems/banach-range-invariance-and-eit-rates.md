@@ -1,7 +1,7 @@
 ---
 page: banach-range-invariance-and-eit-rates
 title: Banach range invariance and EIT rates
-status: draft
+status: published
 items:
   - lem-ip-collared-sobolev-besov-source-functional-cutoff
   - lem-ip-positive-sobolev-cgo-remainders-by-shifted-lattice

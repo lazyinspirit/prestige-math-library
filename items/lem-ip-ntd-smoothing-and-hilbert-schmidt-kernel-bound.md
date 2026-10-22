@@ -2,7 +2,7 @@
 id: lem-ip-ntd-smoothing-and-hilbert-schmidt-kernel-bound
 kind: lemma
 title: NtD smoothing and Hilbert–Schmidt kernel bounds
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 6
@@ -37,6 +37,13 @@ sources:
       locator: "Theorem 4.2 and Remark 4.5, printed pp.405–406 (PDF pp.9–10):
         contextual forward NtD continuity, with Lambda denoting the NtD map; the
         local stronger kernel continuity is proved separately."
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

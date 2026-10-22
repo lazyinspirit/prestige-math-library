@@ -1,7 +1,7 @@
 ---
 page: milnor-invariants-and-link-peripheral-nilpotent-quotients-examples
 title: Milnor invariants and link peripheral nilpotent quotients — Examples and Counterexamples
-status: draft
+status: published
 items: []
 examples:
   - ex-borromean-link-milnor-triple-invariant

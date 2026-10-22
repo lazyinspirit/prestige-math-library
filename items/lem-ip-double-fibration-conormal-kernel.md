@@ -2,7 +2,7 @@
 id: lem-ip-double-fibration-conormal-kernel
 kind: lemma
 title: "Incidence-coordinate conormal kernel and canonical relation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps:
@@ -23,6 +23,13 @@ sources:
       url: "https://www.numdam.org/item/AST_1982__95__R3_0.pdf"
       locator: "§6, Definition 6.1, printed p. 37, for local cotangent conventions."
 proof_strategy: direct
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

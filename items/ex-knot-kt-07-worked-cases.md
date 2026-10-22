@@ -2,7 +2,7 @@
 id: ex-knot-kt-07-worked-cases
 kind: example
 title: "Trefoil and figure-eight Alexander polynomials from Seifert matrices"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 13
@@ -42,6 +42,13 @@ sources:
     - title: "Knot Theory Lecture Notes, Chapter 7: Seifert Matrices and Derived Invariants"
       url: "https://www2.math.kyushu-u.ac.jp/~saeki/Lee-Lectures.pdf"
       locator: "Examples 7.4–7.5, printed pp. 78–79; alternate ordered-core sign convention"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Example

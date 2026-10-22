@@ -1,7 +1,7 @@
 ---
 page: tv-source-certificates-and-geometric-convergence
 title: TV source certificates and level-set convergence
-status: draft
+status: published
 items:
   - def-ip-tv-functional-on-l2-distributional-variation
   - def-ip-tv-level-set-representatives-and-boundaries

@@ -1,7 +1,7 @@
 ---
 page: normal-surface-unknot-recognition
 title: Normal-surface unknot recognition
-status: draft
+status: published
 items:
   - def-normal-surface-coordinate-box
   - def-finite-triangulated-compact-surface

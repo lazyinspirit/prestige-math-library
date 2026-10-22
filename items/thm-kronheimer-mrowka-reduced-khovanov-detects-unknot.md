@@ -2,7 +2,7 @@
 id: thm-kronheimer-mrowka-reduced-khovanov-detects-unknot
 kind: theorem
 title: "Reduced Khovanov cohomology detects the unknot"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 9
@@ -27,6 +27,13 @@ sources:
       url: "https://math.pku.edu.cn/puremath/docs/2018-10/20181010175415114589.pdf"
     - title: "Hongjian Yang, An Overview of Floer Homologies, §5.7"
       url: "https://web.stanford.edu/~cm5/286.pdf"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

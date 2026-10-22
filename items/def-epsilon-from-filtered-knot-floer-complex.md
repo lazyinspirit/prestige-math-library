@@ -2,7 +2,7 @@
 id: def-epsilon-from-filtered-knot-floer-complex
 kind: definition
 title: "Epsilon from the filtered knot Floer complex"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps:
@@ -28,6 +28,13 @@ sources:
     - title: "Jennifer Hom, A survey on Heegaard Floer homology and concordance, §3.1"
       url: "https://arxiv.org/pdf/1512.00383"
       locator: "§3.1, PDF pp.8–10; vertical/horizontal simplified bases and the epsilon cases"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Definition

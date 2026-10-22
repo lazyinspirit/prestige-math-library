@@ -2,7 +2,7 @@
 id: thm-ip-gaussian-small-ball-map-functional
 kind: theorem
 title: Gaussian posterior small-ball ratios and the Onsager–Machlup functional
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 4
@@ -40,6 +40,13 @@ sources:
       url: "https://www.damtp.cam.ac.uk/research/cia/files/teaching/Inverse_Problems_2019/LectureNotes2019.pdf"
       locator: "§7.5, Theorems 7.5.2–7.5.3 and their proofs/statements, and Theorem 7.5.6 with its compact-embedding minimizer proof."
 axiom_use: "AC supplies the Gaussian, compactness, and Fernique interfaces. HB and countable choice are hypotheses of the finite-projection ratio proof. The compactness-based minimizer argument uses a real bounded-sequence subsequence only; no global strong MAP is inferred from the pairwise ratio theorem."
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: lem-sl2-matrix-invariants-by-epsilon-contractions-and-traces
 kind: lemma
 title: SL2 matrix invariants from epsilon contractions and traces
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps:
@@ -18,6 +18,12 @@ provenance:
   statement: ai-altered
   proof: ai-generated
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
   judge:
     model: "gpt-6-luna"
     verdict: pass

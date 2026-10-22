@@ -1,7 +1,7 @@
 ---
 page: anisotropic-calderon-gauge-and-open-uniqueness-examples
 title: Anisotropic gauge and unresolved uniqueness — Examples and Counterexamples
-status: draft
+status: published
 requires:
   - anisotropic-calderon-gauge-and-open-uniqueness
 items: []

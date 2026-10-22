@@ -2,7 +2,7 @@
 id: lem-ip-coordinate-vectors-form-a-basis-of-ell-two
 kind: lemma
 title: Coordinate vectors form the Hilbert basis of real ell-two
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 0
@@ -26,6 +26,13 @@ sources:
     - title: "E. Giné and R. Nickl, Mathematical Foundations of Infinite-Dimensional Statistical Models (Cambridge University Press, 2016)"
       url: "https://www.statslab.cam.ac.uk/~nickl/Site/__files/FULLPDF.pdf"
       locator: "§4.2, orthonormal wavelet bases and finite coefficient truncations."
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

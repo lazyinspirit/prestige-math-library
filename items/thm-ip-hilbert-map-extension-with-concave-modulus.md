@@ -2,7 +2,7 @@
 id: thm-ip-hilbert-map-extension-with-concave-modulus
 kind: theorem
 title: Hilbert-valued extension with a concave modulus
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 9
@@ -25,6 +25,13 @@ sources:
     - title: "Maarten V. de Hoop, Nikola B. Kovachki, Matti Lassas and Nicholas H. Nelsen, Extension and neural operator approximation of the electrical impedance tomography inverse map"
       url: "https://arxiv.org/pdf/2511.20361"
       locator: "Proposition 3.8 and Theorem 3.9, PDF pp.21–22, in the actual 80-page version."
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

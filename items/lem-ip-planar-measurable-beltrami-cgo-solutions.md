@@ -2,7 +2,7 @@
 id: lem-ip-planar-measurable-beltrami-cgo-solutions
 kind: lemma
 title: Measurable-coefficient Beltrami CGO solutions and principal phases
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps:
@@ -30,6 +30,13 @@ sources:
       url: "https://arxiv.org/pdf/1701.06480"
       locator: "Section 3.4, Definition 3.6 and Theorem 3.7, printed pp. 12–13."
 dependency_level: 2
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

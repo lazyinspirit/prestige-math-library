@@ -2,7 +2,7 @@
 id: def-singular-knot-and-vassiliev-derivative
 kind: definition
 title: Singular knots and Vassiliev derivatives
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -15,6 +15,12 @@ deps:
 justified_by: []
 dependency_level: 1
 verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
   precheck: n/a
 sources:
   references:

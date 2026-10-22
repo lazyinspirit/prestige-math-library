@@ -1,7 +1,7 @@
 ---
 page: lee-deformation-and-rasmussen-s-invariant
 title: Lee deformation and Rasmussen’s s-invariant
-status: draft
+status: published
 requires:
   - spectral-sequences
   - smooth-and-topological-knot-concordance

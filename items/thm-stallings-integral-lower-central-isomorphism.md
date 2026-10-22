@@ -2,7 +2,7 @@
 id: thm-stallings-integral-lower-central-isomorphism
 kind: theorem
 title: "Integral Stallings theorem for finite lower-central quotients"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 3
@@ -22,6 +22,13 @@ sources:
     - title: "John McCleary, Nontrivial fundamental groups, §8bis.2"
       url: "https://pages.vassar.edu/mccleary/files/2011/04/MC08bis.fin_.pdf"
       locator: "Theorem 8bis.16 and proof, PDF p. 15"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

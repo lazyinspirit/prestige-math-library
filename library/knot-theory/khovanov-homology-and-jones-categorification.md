@@ -1,7 +1,7 @@
 ---
 page: khovanov-homology-and-jones-categorification
 title: Khovanov homology and Jones categorification
-status: draft
+status: published
 requires:
   - chain-complexes-and-homology
   - chain-homotopy-and-the-homotopy-category

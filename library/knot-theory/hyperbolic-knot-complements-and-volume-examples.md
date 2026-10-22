@@ -1,7 +1,7 @@
 ---
 page: hyperbolic-knot-complements-and-volume-examples
 title: Hyperbolic knot complements and volume — Examples and Counterexamples
-status: draft
+status: published
 requires:
   - hyperbolic-knot-complements-and-volume
 items: []

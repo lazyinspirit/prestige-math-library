@@ -1,7 +1,7 @@
 ---
 page: smooth-and-topological-knot-concordance-examples
 title: Smooth and topological knot concordance — Examples and Counterexamples
-status: draft
+status: published
 requires:
   - smooth-and-topological-knot-concordance
 items: []

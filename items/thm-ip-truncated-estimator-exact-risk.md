@@ -2,7 +2,7 @@
 id: thm-ip-truncated-estimator-exact-risk
 kind: theorem
 title: Exact worst-case risk of the truncated estimator
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 4
@@ -23,6 +23,13 @@ sources:
       url: https://arxiv.org/pdf/1707.01706
     - title: "Iain M. Johnstone, Gaussian estimation: Sequence and wavelet models, §3.2, equations (3.11)–(3.12), printed pp. 60–61"
       url: https://mathweb.ucsd.edu/~jbradic/math281a/Johnstone.pdf
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

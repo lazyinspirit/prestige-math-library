@@ -2,7 +2,7 @@
 id: lem-ip-gaussian-product-mixture-testing-bound
 kind: lemma
 title: Symmetric Gaussian product-mixture testing bound
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 4
@@ -28,6 +28,13 @@ sources:
       url: https://arxiv.org/pdf/1001.1853
     - title: "Evarist Giné and Richard Nickl, Mathematical Foundations of Infinite-Dimensional Statistical Models, §6.2.3, PDF pp. 506–508"
       url: https://www.statslab.cam.ac.uk/~rn289/Site/__files/FULLPDF.pdf
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: ex-knot-kt-17-worked-cases
 kind: example
 title: "A (2,1)-cable of the right trefoil"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 7
@@ -43,6 +43,13 @@ sources:
     - title: "Allen Hatcher, Notes on Basic 3-Manifold Topology"
       url: "https://pi.math.cornell.edu/~hatcher/3M/3M.pdf"
       locator: "§1.2, essential annuli and tori in Seifert pieces, printed pp.16–23"
+verification:
+  verified:
+    model: "gpt-6.1-sol"
+    verdict: "pass"
+    date: "2026-10-22"
+    scope: "Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/inverse-problems-knot-theory-all-109-2026-10-19-publication.json."
+    delegated_by: "owner"
 ---
 
 ## Example

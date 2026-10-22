@@ -1,7 +1,7 @@
 ---
 page: inverse-wave-problems-and-finite-time-observability-examples
 title: Hyperbolic inverse problems and finite-time visibility — Examples and Counterexamples
-status: draft
+status: published
 requires:
   - inverse-wave-problems-and-finite-time-observability
 items: []

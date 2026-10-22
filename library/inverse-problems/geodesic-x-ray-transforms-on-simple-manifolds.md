@@ -1,7 +1,7 @@
 ---
 page: geodesic-x-ray-transforms-on-simple-manifolds
 title: "Geodesic X-ray transforms on simple surfaces"
-status: draft
+status: published
 requires:
   - inverse-problems-identifiability-and-stability
   - radon-transform-and-fourier-slice-reconstruction
