@@ -54,6 +54,7 @@ import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { itemHashGuard } from './item-hash.mjs';
 import { validateCodexOutput } from './codex-output-schema.mjs';
+import { parseFrontmatter } from './content-policy-lib.mjs';
 import {
   exactSetProblems,
   loadStep5JudgeEvidence,
@@ -628,6 +629,28 @@ if (mode === 'render') {
   process.exit(0);
 }
 
+// Empty load-bearing lists are honest for batches consisting entirely of
+// remarks/open problems. Admit that case from the owned manifest AND current
+// source metadata, never from a reader's description of its own scope. Unknown,
+// missing or inconsistent classifications retain the ordinary nonvacuity rule.
+function hasOnlyNonlogicalItems(pages) {
+  if (!pages.every(page => Array.isArray(page.items))) return false;
+  const items = pages.flatMap(page => page.items);
+  if (!items.length) return false;
+  return items.every(item => {
+    if (!item || typeof item !== 'object' || Array.isArray(item)
+      || !['remark', 'open-problem'].includes(item.kind)
+      || typeof item.id !== 'string' || !/^[\w-]+$/.test(item.id)) return false;
+    try {
+      const text = readFileSync(R('items', `${item.id}.md`), 'utf8');
+      const fm = /^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/.exec(text)?.[1];
+      if (fm === undefined) return false;
+      const metadata = parseFrontmatter(fm);
+      return metadata.id === item.id && metadata.kind === item.kind;
+    } catch { return false; }
+  });
+}
+
 // ---- digests -----------------------------------------------------------------
 
 // The gate for the step-4 reading half. A read-only Alpha cannot write a file, so
@@ -677,7 +700,7 @@ if (mode === 'digests') {
     if (!(d.conventions ?? []).length) {
       bad.push(`batch ${g.label}: no conventions recorded — every page fixes at least one`);
     }
-    if (!(d.load_bearing ?? []).length) {
+    if (!(d.load_bearing ?? []).length && !hasOnlyNonlogicalItems(owned)) {
       bad.push(`batch ${g.label}: no load-bearing items recorded`);
     }
     // An alert is for ANOTHER batch. One aimed at an item the sender owns is a

@@ -325,7 +325,11 @@ Sol/medium. Step-4 read-only batch readers use GPT-6.1 Sol/medium, and the
 per-item judge sweep uses GPT-6 Luna/max.
 Source and empirical qualifications survive regeneration. Step 4's read-only
 batch digests use `RUN-batch-N-step5-context.json`; a digest from another batch
-cannot cover the inventory, and retries target only failing batches.
+cannot cover the inventory, and retries target only failing batches. An empty
+`load_bearing` list is allowed only when the nonempty owned manifest inventory
+consists entirely of remarks/open problems with matching current source IDs and
+kinds. Missing, malformed or inconsistent classification retains the nonempty
+requirement; mixed batches retain it as well.
 Cross-batch page alerts route to the page's owning group, like page concerns.
 Published supplier alerts remain in the original digest as read-only context;
 they do not acquire run ownership or authorize repairs to imported mathematics.
