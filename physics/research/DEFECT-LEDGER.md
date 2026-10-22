@@ -1,15 +1,15 @@
 # Defect ledger — generated view
 
-> GENERATED from `research/defect-ledger.jsonl` @ 1bab00927a43 by `tools/physics-support/defect-ledger.mjs render` — do not edit.
+> GENERATED from `research/defect-ledger.jsonl` @ c71bf3b7a446 by `tools/physics-support/defect-ledger.mjs render` — do not edit.
 
 ## What the numbers mean, first
 
 | | |
 |---|---|
-| defects caught before publication | 3546 |
+| defects caught before publication | 4267 |
 | now mechanically prevented | 0 |
 | escaped to publication | 0 |
-| still open | 95 |
+| still open | 115 |
 
 ## physics-cm-qm-gr-79-2026-10-11 — 1605 row(s)
 
@@ -131,6 +131,44 @@
 | page-all-mode-comparison | 1 |  |  |
 | missing-explicit-prerequisite | 1 |  |  |
 | missing-map | 1 |  |  |
+
+## physics-non-fluid-129-2026-10-21-r2 — 721 row(s)
+
+| subclass | 3a-adjudicate | 5-adjudicate |
+|---|---|---|
+| ill-formed | 154 | 2 |
+| citation-inaccurate | 90 | 26 |
+| undefined-notation | 67 | 10 |
+| unlicensed-inference | 69 | 6 |
+| missing-hypothesis | 35 | 28 |
+| false-or-overstrong-title | 27 | 6 |
+| ill-typed-construction | 14 | 8 |
+| invalid-inference | 10 | 11 |
+| citation-missing | 14 | 5 |
+| false-or-overstrong-statement | 11 | 7 |
+| ill-typed-claim | 11 | 5 |
+| citation-inflated | 4 | 11 |
+| false-claim | 12 |  |
+| unsupported-inference | 11 |  |
+| missing-choice-scope | 1 | 9 |
+| citation-truncated | 2 | 7 |
+| citation-misattributed | 3 | 4 |
+| frontmatter-schema | 6 |  |
+| arithmetic-error | 5 | 1 |
+| invalid-witness | 3 |  |
+| missing-case | 3 |  |
+| claim-mismatch | 3 |  |
+| reader-repair | 3 |  |
+| false-computation | 3 |  |
+| incorrect-citation | 3 |  |
+| proof-gap | 2 |  |
+| false-boundary-disposition | 1 | 1 |
+| missing-map |  | 2 |
+| incorrect-computation | 1 |  |
+| overstrong-title-or-statement | 1 |  |
+| citation-mismatch | 1 |  |
+| invalid-refutation | 1 |  |
+| other |  | 1 |
 
 ## physics-remaining-80-2026-10-17 — 429 row(s)
 
@@ -294,3 +332,23 @@
 - `physics-remaining-80-2026-10-17-owner-initial-normal-transport-speed` physics-remaining-80-2026-10-17 · invalid-inference · thm-emg-local-charged-barotropic-development
 - `physics-remaining-80-2026-10-17-owner-initial-u6-review-hash-transcription` physics-remaining-80-2026-10-17 · prompt-transcription · def-emg-periodic-high-sobolev-state
 - `physics-remaining-80-2026-10-17-owner-foreign-original-yaml-scope-open` physics-remaining-80-2026-10-17 · contract-mismatch · physics-content-original-supplier-loading
+- `physics-non-fluid-129-2026-10-21-r2-3a-batch-84-producer-algebra-open` physics-non-fluid-129-2026-10-21-r2 · undefined-notation · def-qftx-joint-spectrum-input
+- `physics-non-fluid-129-2026-10-21-r2-3a-b91-generator-justification-open` physics-non-fluid-129-2026-10-21-r2 · ill-formed · def-csm-frontier-finite-generator-chain
+- `physics-non-fluid-129-2026-10-21-r2-3a-batch-121-outgoing-packet-open` physics-non-fluid-129-2026-10-21-r2 · ill-formed · post-tgrx-free-collapse-scattering
+- `physics-non-fluid-129-2026-10-21-r2-owner-step5-referral-lem-qftx-wavefront-chart-invariance` physics-non-fluid-129-2026-10-21-r2 · missing-choice-scope · lem-qftx-wavefront-chart-invariance
+- `physics-non-fluid-129-2026-10-21-r2-owner-step5-referral-thm-qftx-wavefront-product` physics-non-fluid-129-2026-10-21-r2 · missing-choice-scope · thm-qftx-wavefront-product
+- `physics-non-fluid-129-2026-10-21-r2-owner-step5-referral-thm-qftx-scalar-eg-induction` physics-non-fluid-129-2026-10-21-r2 · citation-misattributed · thm-qftx-scalar-eg-induction
+- `physics-non-fluid-129-2026-10-21-r2-owner-step5-referral-lem-gr-fx-null-focal-boundary-exclusion` physics-non-fluid-129-2026-10-21-r2 · undefined-notation · lem-gr-fx-null-focal-boundary-exclusion
+- `physics-non-fluid-129-2026-10-21-r2-owner-step5-referral-ex-gr-fx01-1` physics-non-fluid-129-2026-10-21-r2 · missing-choice-scope · ex-gr-fx01-1
+- `physics-non-fluid-129-2026-10-21-r2-owner-step5-referral-prop-gr-fx-kerr-horizon-generator` physics-non-fluid-129-2026-10-21-r2 · unlicensed-inference · prop-gr-fx-kerr-horizon-generator
+- `physics-non-fluid-129-2026-10-21-r2-owner-step5-referral-pthm-tgrx-noether-charge-decomposition` physics-non-fluid-129-2026-10-21-r2 · unlicensed-inference · pthm-tgrx-noether-charge-decomposition
+- `physics-non-fluid-129-2026-10-21-r2-owner-step5-referral-thm-qsmx-schmidt-mps-error` physics-non-fluid-129-2026-10-21-r2 · missing-map · thm-qsmx-schmidt-mps-error
+- `physics-non-fluid-129-2026-10-21-r2-owner-step5-referral-def-qsmx-spin-weight-and-hall-realization` physics-non-fluid-129-2026-10-21-r2 · false-or-overstrong-statement · def-qsmx-spin-weight-and-hall-realization
+- `physics-non-fluid-129-2026-10-21-r2-owner-step5-referral-def-tgrx-exponential-ray-channel` physics-non-fluid-129-2026-10-21-r2 · citation-inaccurate · def-tgrx-exponential-ray-channel
+- `physics-non-fluid-129-2026-10-21-r2-owner-step5-referral-prop-tgrx-collapse-channel-spectrum` physics-non-fluid-129-2026-10-21-r2 · citation-inaccurate · prop-tgrx-collapse-channel-spectrum
+- `physics-non-fluid-129-2026-10-21-r2-owner-step5-referral-pthm-tgrx-conditional-hawking-occupation` physics-non-fluid-129-2026-10-21-r2 · citation-inaccurate · pthm-tgrx-conditional-hawking-occupation
+- `physics-non-fluid-129-2026-10-21-r2-owner-step5-referral-rem-tgrx-three-black-hole-states` physics-non-fluid-129-2026-10-21-r2 · ill-formed · rem-tgrx-three-black-hole-states
+- `physics-non-fluid-129-2026-10-21-r2-owner-step5-referral-op-tgrx-continuum-generalized-entropy` physics-non-fluid-129-2026-10-21-r2 · missing-hypothesis · op-tgrx-continuum-generalized-entropy
+- `physics-non-fluid-129-2026-10-21-r2-owner-step5-referral-thm-qftx-scalar-eg-induction-combined-module-detail` physics-non-fluid-129-2026-10-21-r2 · unlicensed-inference · thm-qftx-scalar-eg-induction
+- `physics-non-fluid-129-2026-10-21-r2-owner-step5-referral-rem-tgrx-three-black-hole-states-hawking-locator` physics-non-fluid-129-2026-10-21-r2 · citation-inaccurate · rem-tgrx-three-black-hole-states
+- `physics-non-fluid-129-2026-10-21-r2-owner-step5-repeat1-pthm-emx-runaway-preacceleration-coordinate-bound` physics-non-fluid-129-2026-10-21-r2 · ill-typed-construction · pthm-emx-runaway-preacceleration
