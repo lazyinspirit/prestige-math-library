@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync,writeFileSync,mkdirSync,rmSync} from 'node:fs';
 import {join,dirname} from 'node:path';
-import {execFileSync} from 'node:child_process';
+import {execFileSync,spawnSync} from 'node:child_process';
 import {collect as dependencyLedger} from './frontier-dependency-ledger.mjs';
 import {runScope} from './step6-lib.mjs';
 import {scopedReadinessTree} from './step6-scoped-tree.mjs';
@@ -14,7 +14,7 @@ import {createPnpMigrationFixture} from './step5-pnp-classification-migration.te
 import {collect,prepareImpact,prepareAdjudication,closeEmptyAdjudication,certify,judge,verifyCertification,verifyWave,reviewContextHashes} from './step5-workflow.mjs';
 import {PNP_RUN as run,PNP_OLD as old,PNP_CURRENT as current,PNP_CONSUMERS as consumers,pnpSourceCandidate,recordPnpClassificationMigration,loadPnpClassificationMigration,licensedPnpReplacement} from './step5-pnp-classification-migration.mjs';
 import {projectedOriginalIds} from './step5-original-slot-reclassification.mjs';
-import {itemHashGuard,itemHashJudge} from './item-hash.mjs';
+import {itemHashGuard,itemHashJudge,shortHash} from './item-hash.mjs';
 import {step6OwnedInputs} from './step6-owned-inputs.mjs';
 const sha=x=>createHash('sha256').update(typeof x==='string'?x:JSON.stringify(x)).digest('hex');
 const put=(root,p,v)=>{const path=join(root,p);mkdirSync(dirname(path),{recursive:true});writeFileSync(path,typeof v==='string'?v:JSON.stringify(v,null,2)+'\n');return path;};
@@ -75,6 +75,20 @@ test('composed originalslot lifecycle preserves original1472/109/344/331/36/679 
   const pack=prepareImpact(root,run,'impact-repeat',1),lane=pack.units.find(u=>pack.assignments[u].includes(current));assert.ok([current,...consumers].every(id=>pack.assignments[lane].includes(id)));for(const unit of pack.units)native(pack,unit);
   assert.equal(pack.input_evidence[merged],oldMergedHash);const frozenPack=readFileSync(join(root,d,'impact-repeat-1.json'),'utf8');
   const cert=certify(root,run,'impact-repeat',1,{contextHasher});assert.equal(readFileSync(join(root,d,'repeat-1-collected.json'),'utf8'),frozenLegacy);assert.equal(readFileSync(join(root,d,'impact-repeat-1.json'),'utf8'),frozenPack);assert.equal(Object.hasOwn(cert.evidence,merged),false);assert.ok(licensedPnpReplacement(root,run,old,current,cert));assert.ok(cert.items.some(r=>r.id==='ex-ip-exact-adaptive-credible-coverage-by-posterior-null-deletion'));assert.ok(!cert.items.some(r=>r.id===old));verifyCertification(root,run,{current:true});const cachedCert=certify(root,run,'impact-repeat',1,{contextHasher});assert.equal(cachedCert.sha256,cert.sha256);assert.equal(Object.hasOwn(get(root,`${d}/impact-repeat-1-collected.json`).evidence,merged),false);assert.equal(Object.hasOwn(get(root,`${d}/impact-repeat-1-closed.json`).evidence,merged),false);assert.equal(readFileSync(join(root,d,'certification-impact-initial-1.json'),'utf8'),historical);
+  // Exercise the real centralized guard CLI, including its comparison snapshot.
+  // Outside baseline-only inventory remains in both fixture snapshots; it is
+  // not manufactured as 37k filesystem deletions. Context transport uses the
+  // fixture's existing synthetic contextHasher, never actual native credit.
+  const baselineGuards=get(root,`${d}/baseline.json`),comparison={...baselineGuards};delete comparison[old];delete comparison['op-ip-honest-coverage-over-ill-posed-truth-classes'];
+  for(const id of projectedOriginalIds(root,run,f.frontier.ids))comparison[id]=itemHashGuard(readFileSync(join(root,`items/${id}.md`),'utf8'));
+  const touches={snapshots:[{label:'pre-step5',hashes:Object.fromEntries(Object.entries(baselineGuards).map(([id,h])=>[id,shortHash(h)]))},{label:'current',hashes:Object.fromEntries(Object.entries(comparison).map(([id,h])=>[id,shortHash(h)]))}]};put(root,'touches-guard.json',touches);put(root,'scope-guard.json',{run,by_item:Object.fromEntries(f.frontier.batches.flatMap(b=>b.items.map(id=>[id,b.id])))});
+  put(root,'tools/judge.mts',`console.log(${JSON.stringify(JSON.stringify({contexts:Object.fromEntries(cert.items.map(r=>[r.id,{item_sha256:r.item_sha256,context_sha256:r.context_sha256}]))}))});`);
+  const guard=()=>spawnSync(process.execPath,[fileURLToPath(new URL('./step5-guard.mjs',import.meta.url)),'--touches',join(root,'touches-guard.json'),'--baseline','pre-step5','--against','current','--scope',join(root,'scope-guard.json'),'--items-dir',join(root,'items'),'--workflow-root',root,'--judge-ledger',join(root,`research/${run}-judge.jsonl`),'--adjudications',join(root,'unused.jsonl'),'--json'],{encoding:'utf8',cwd:root});
+  const guarded=guard();assert.equal(guarded.status,0,guarded.stdout+guarded.stderr);const guardData=JSON.parse(guarded.stdout);assert.equal(guardData.summary.frontier_created,2);assert.equal(guardData.summary.protected_deleted,2);assert.equal(guardData.summary.licensed_original_slot_replacements,1);assert.equal(guardData.summary.errors,0);assert.equal((cert.creations??[]).some(r=>r.id===current),false);
+  const wrongSnapshot=structuredClone(touches);wrongSnapshot.snapshots[1].hashes[current]='0'.repeat(12);put(root,'touches-guard.json',wrongSnapshot);assert.equal(guard().status,1,'stale compared algorithm guard is not licensed');put(root,'touches-guard.json',touches);
+  const algoBytes=readFileSync(join(root,`items/${current}.md`),'utf8');put(root,`items/${current}.md`,algoBytes+'Later unreviewed algorithm edit.\n');assert.equal(guard().status,1,'later unreviewed algorithm body remains blocked');put(root,`items/${current}.md`,algoBytes);
+  put(root,migrationPath,'{}');assert.equal(guard().status,1,'forged migration cannot license an apparent creation');put(root,migrationPath,migrationBytes);
+  const currentReportPath=`${d}/step5-v2-impact-repeat-r1-u${lane}.json`,currentReportBytes=readFileSync(join(root,currentReportPath),'utf8');put(root,currentReportPath,{...get(root,currentReportPath),reviews:get(root,currentReportPath).reviews.filter(r=>r.id!==current)});assert.equal(guard().status,1,'missing current native algorithm review remains blocked');put(root,currentReportPath,currentReportBytes);
   // Run the real deterministic merger over the two fixture-native batch carriers.
   const mergedBefore=readFileSync(join(root,merged),'utf8');execFileSync(process.execPath,[fileURLToPath(new URL('./merge-proof-contracts.mjs',import.meta.url)),'--level',run,merged,`research/${run}-batch-21.proof-contracts.json`,`research/${run}-batch-49.proof-contracts.json`],{cwd:root});assert.notEqual(readFileSync(join(root,merged),'utf8'),mergedBefore);
   assert.equal(verifyCertification(root,run,{current:true}).sha256,cert.sha256);assert.equal(verifyWave(root,run,{contextHasher}).sha256,cert.sha256);assert.equal(certify(root,run,'impact-repeat',1,{contextHasher}).sha256,cert.sha256);assert.deepEqual(collect(root,run,'impact-repeat',1).errors,[]);assert.equal(readFileSync(join(root,d,'repeat-1-collected.json'),'utf8'),frozenLegacy);assert.equal(readFileSync(join(root,d,'impact-repeat-1.json'),'utf8'),frozenPack);

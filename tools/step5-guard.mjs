@@ -193,7 +193,10 @@ if (existsSync(workflowDirectory)) {
       current_id: transition.current_id, receipt: transition.path };
     for (const id of scopedDeleted) if (id === transition?.original_id && !replacementLicensed) error('step5-deletion',
       `${id}: deleting a frozen-frontier item or its logical supplier is not licensed at Step 5`, id);
-    if(classification&&!licensedPnpReplacement(workflowRoot,workflowScope.run,classification.original_id,classification.current_id,certificate))throw Error('Step 5 algorithm deletion lacks current native certification');
+    const classificationLicensed = classification && !Object.hasOwn(now, classification.original_id)
+      && shortHash(certificate.items.find(row => row.id === classification.current_id)?.guard_sha256 ?? '') === now[classification.current_id]
+      && licensedPnpReplacement(workflowRoot, workflowScope.run, classification.original_id, classification.current_id, certificate);
+    if(classification&&!classificationLicensed)throw Error('Step 5 algorithm deletion lacks current native certification');
     const original = JSON.parse(readFileSync(join(workflowDirectory, 'baseline.json'), 'utf8'));
     if (JSON.stringify(Object.keys(original).sort()) !== JSON.stringify(Object.keys(baseline.hashes ?? {}).sort())
       || Object.entries(original).some(([id, hash]) => !/^[a-f0-9]{64}$/.test(hash) || shortHash(hash) !== baseline.hashes[id]))
@@ -212,7 +215,8 @@ if (existsSync(workflowDirectory)) {
     }
     const creationRecords = new Map((certificate.creations ?? []).map(row => [row.id, row]));
     for (const id of scopedCreated) {
-      if (replacementLicensed && id === transition.current_id) { licensed++; continue; }
+      if ((replacementLicensed && id === transition.current_id)
+        || (classificationLicensed && id === classification.current_id)) { licensed++; continue; }
       const record = creationRecords.get(id);
       if (shortHash(certified.get(id)?.guard_sha256 ?? '') !== now[id] || !record)
         error('step5-creation', `${id}: created item lacks exact current centralized certification and creation provenance`, id);
