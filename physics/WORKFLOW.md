@@ -15,7 +15,14 @@ Freshly planned run namespaces now select the compact statement-first revision: 
 class has an uninterrupted statement/description with links afterward, one per
 line and paragraph. A/B summaries are not generated: authors write frontmatter-only pages. Code
 requires empty bodies and sets compact-layout metadata after initial authoring. Prerequisites render as a
-disclosure collapsed by default. The native six steps, models and repair limits remain.
+disclosure collapsed by default. The native six steps, models and repair limits remain. The physics compact adapter
+(`tools/physics-autopilot/src/page-layout.mts`) uses the private
+`tools/physics-support/page-layout.mjs` preparation/check helper. It accepts mixed
+locally authored mathematics and physics A/B frontiers only when each page's
+explicit `library` equals its current manifest's `mathematics` or `physics`
+classification. Pinned mathematical imports (including relocated page IDs),
+symlinked pages, summaries and unrelated pages remain outside its write scope;
+the drained-author join and native presentation gates retain their existing duties.
 Existing runs retain their selected stages and original policy, including after
 restart. See [activation and mechanical checks](../tools/STATEMENT-FIRST.md).
 
