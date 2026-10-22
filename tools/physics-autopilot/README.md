@@ -30,6 +30,10 @@ and receipt remain archived, and normal collection and closure checks apply.
 The Step-3 owner gate snapshot binds the continuation authority, original native
 receipt/report/final-message evidence, and exact correction task. Dispatch-time
 subject hashes remain historical; the snapshot separately binds live sources.
+For same-finding comparison, an optional exact `items/SUBJECT.md — ` locator
+prefix is ignored only for that same subject. Interior locations, defect labels,
+severity/verdict compatibility and explicit sharing evidence remain required;
+original locations and observed source fingerprints are never rewritten.
 
 If an independently running producer changes a source after a reader observed
 its current bytes, the private split helper can authenticate that historical

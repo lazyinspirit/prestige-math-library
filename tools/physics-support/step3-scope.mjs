@@ -25,7 +25,7 @@ import { step3Adjudicators } from './step3-adjudicators.mjs';
 import { loadAuditorCreatedCertifications } from './auditor-created-items.mjs';
 import { taxonomyOwnership } from './defect-ledger-taxonomy.mjs';
 import { publishedPageDependencies, publishedPageCarrier } from './step3-published-pages.mjs';
-import { ownerReviewedFindingAlias } from './step3-owner-finding-alias.mjs';
+import { ownerReviewedFindingAlias, sameFindingLocation } from './step3-owner-finding-alias.mjs';
 import { downstreamHandoffs } from './step3-downstream-handoff.mjs';
 import { observedCurrentHistory } from './step3-observed-current-history.mjs';
 
@@ -1436,7 +1436,7 @@ if (command === 'check') {
             continue;
           }
           const prior = referenced.get(defectId);
-          const sameLocation = (left, right) => String(left ?? '').trim().toLowerCase() === String(right ?? '').trim().toLowerCase();
+          const sameLocation = (left, right) => sameFindingLocation(left, right, decision.id);
           const sameObservedCarrier = /^[a-f0-9]{64}$/.test(prior?.target?.observed_sha256 ?? '')
             && prior.target.observed_sha256 === target?.observed_sha256;
           const reviewedFindingAlias = prior && ownerReviewedFindingAlias(ROOT, run, group.label, prior, decision, target, hashValue);

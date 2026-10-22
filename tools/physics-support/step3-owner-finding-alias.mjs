@@ -4,6 +4,17 @@ import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { createHash } from 'node:crypto';
 
+// An optional exact carrier path is a locator prefix, not a different place
+// inside that carrier. Keep all original finding strings and hashes untouched.
+export function sameFindingLocation(left, right, id) {
+  const prefix = `items/${id}.md — `;
+  const normal = value => {
+    const text = String(value ?? '').trim();
+    return (text.startsWith(prefix) ? text.slice(prefix.length) : text).trim().toLowerCase();
+  };
+  return normal(left) === normal(right);
+}
+
 export function ownerReviewedFindingAlias(root, run, group, prior, decision, target, hashValue) {
   try {
     if (!/^[a-z0-9-]+$/.test(run)) return false;
