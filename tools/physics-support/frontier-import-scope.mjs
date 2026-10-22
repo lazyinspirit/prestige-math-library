@@ -58,7 +58,11 @@ export function frontierMathematicsImportScope(root, run, { planning = false, re
     .map(file => [readItem(join(root, file.path)).id, file.path]));
   const owned = new Set(current.flatMap(page => page.items.map(item => item.id)).filter(id => !imported.has(id)));
   const directReferencedImports = new Set();
-  const relevant = new Set(), context = new Set(), references = new Map();
+  const relevant = new Set(), context = new Set(), references = new Map(), consumers = new Map();
+  const consumerEdge = (supplier, consumer) => {
+    if (!consumers.has(supplier)) consumers.set(supplier, new Set());
+    consumers.get(supplier).add(consumer);
+  };
   const queue = [];
   for (const page of current) for (const item of page.items) {
     if (!planning && !existsSync(join(root, 'items', `${item.id}.md`))) throw Error(`missing current item ${item.id}`);
@@ -73,6 +77,7 @@ export function frontierMathematicsImportScope(root, run, { planning = false, re
     for (const field of logicalEdges) for (const token of lists(item, field)) {
       const supplier = unique(local, token, item.id);
       references.set(token, supplier.id);
+      consumerEdge(supplier.id, item.id);
       queue.push(supplier);
     }
     // Imported suppliers may mention unpublished original context. Those
@@ -83,6 +88,7 @@ export function frontierMathematicsImportScope(root, run, { planning = false, re
       const target = unique(local, token, item.id);
       if (target.frontmatterError) throw Error(`invalid referenced carrier ${target.id}: ${target.frontmatterError}`);
       references.set(token, target.id);
+      consumerEdge(target.id, item.id);
       if (imported.has(target.id)) {
         directReferencedImports.add(target.id);
         relevant.add(imported.get(target.id));
@@ -156,5 +162,5 @@ export function frontierMathematicsImportScope(root, run, { planning = false, re
     const before = permissions(join(root, policyPath)), after = permissions(join(receipt.source_root, policyPath));
     if (JSON.stringify(before) !== JSON.stringify(after)) relevant.add(policyPath);
   }
-  return { paths: relevant, items: context, importedItems: relevantItemIds, pages: visitedPages };
+  return { paths: relevant, items: context, importedItems: relevantItemIds, pages: visitedPages, consumers, owned };
 }

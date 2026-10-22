@@ -62,6 +62,7 @@ test('native stages stay intact; preparation waits for authors and precedes gate
     onGateFailure:({executor,stage}:any)=>executor.start(stage,plan)};
   const stage=compactStages(ctx,[original],'physics')[0];
   assert.equal(stage.maxAttempts,2);
+  assert.equal(stage.gates!(ctx).find(x=>x.id==='statement-first')!.argv[1],'tools/physics-support/statement-first-check.mjs');
   assert.equal(stage.gates!(ctx).at(-1)!.argv[1],'tools/physics-support/page-layout.mjs');assert.deepEqual(stage.gates!(ctx).map(x=>x.id),['native','statement-first','page-layout']);
   const inflight=new Map([['author',{meta:{stage:'1-scaffold'}}]]);
   const executor:any={inflight,adoptedUnits:()=>new Set(),stageStatus:()=>({unitsDone:true})};

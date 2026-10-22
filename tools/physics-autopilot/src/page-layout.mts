@@ -4,7 +4,7 @@ import { createHash } from 'node:crypto';
 import { join, relative } from 'node:path';
 import { pageLayout } from '../../physics-support/page-layout.mjs';
 import { readStatementPolicy } from '../../statement-first-policy.mjs';
-import { statementFirstStages } from '../../autopilot/src/statement-first.mts';
+import { statementFirstStages } from './statement-first.mts';
 import type { Ctx, Plan, Stage } from './types.mts';
 const directions = `
 ## Page presentation: no summaries

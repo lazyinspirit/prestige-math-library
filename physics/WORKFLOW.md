@@ -23,6 +23,11 @@ explicit `library` equals its current manifest's `mathematics` or `physics`
 classification. Pinned mathematical imports (including relocated page IDs),
 symlinked pages, summaries and unrelated pages remain outside its write scope;
 the drained-author join and native presentation gates retain their existing duties.
+The physics-owned statement-first composer invokes
+`tools/physics-support/statement-first-check.mjs`, which calls the existing
+statement checker through a realpath-aware CLI boundary. This retains the
+manifest selection, imported-subject rejection, command flags, defect status and
+nonempty item-count liveness when invoked through this workspace's `tools` symlink.
 Existing runs retain their selected stages and original policy, including after
 restart. See [activation and mechanical checks](../tools/STATEMENT-FIRST.md).
 
@@ -1174,6 +1179,56 @@ pass. Pre-author items bind their actual manifest and explicitly absent carrier;
 check their scaffold structure and metadata without inventing an authored body.
 An item gate cannot authorize an empty subject selection.
 
+## Reviewed original mathematics maintenance
+
+An authored run may encounter a relevant published mathematics original whose
+bytes changed after the immutable local import was pinned. Root may review a
+strictly mechanical successor without replacing either source or pin, using
+`research/RUN-original-maintenance.json`. This is explicit outside scientific
+review, never native acceptance. Planning, unscoped verification and local
+snapshot integrity retain their existing guards. The ordinary authored
+`physics-check` and `run-commit --require-proof-layout` paths use the same check.
+
+The version-1 object has `run`, `reviewer: "/root"`, `native_review: false`, a
+concrete `reason` (at least 40 characters), `import_receipt_sha256`, `frontier`,
+`entries`, and `inputs`. `frontier` maps every exact current
+`research/RUN-batch-N.pages.json` path to its raw SHA-256; extra or missing
+manifests fail. Each entry contains:
+
+- `path`: the exact imported `items/ID.md`; `pinned_sha256` must equal its
+  unchanged import receipt and local bytes.
+- `original_path`: the absolute canonical original path;
+  `original_sha256`: its exact reviewed current raw SHA-256, different from the pin.
+- `evidence`: nonempty `{path, sha256}` rows naming actual run-local research
+  evidence, with paths beginning `research/RUN-`.
+- `consumers`: every reached authored consumer, with `id`, `decision:
+  "unaffected"`, and a concrete reviewed-use `reason` of at least 40 characters.
+  Alias-resolved logical/discharge edges and direct owned reference edges define
+  this selection; unrelated consumers cannot be substituted. `consumer_sha256`
+  maps exactly those consumer IDs to their actual reviewed raw source hashes.
+- `titles`: `{id, sha256}` rows for exactly the immutable pinned mathematical
+  supplier titles used in the reference move, or an empty array for a pure
+  repair-locator addition.
+
+`inputs` is the exact flat map of all those paths/hashes: import receipt,
+frontier manifests, local imported target, absolute original, scientific evidence,
+authored consumers and local title suppliers. Missing, stale, duplicate or
+unrelated receipt entries and extra input bindings fail. The owner gate snapshot
+binds receipt presence (including absence) and every declared input, so adding or
+changing authority or evidence requires fresh ordinary owner preparation.
+
+The machine guard allows only a newly added `verification.repair` JSON locator
+and/or this precise single-section Definition reference move: replace each
+original simple `[[ID]]` occurrence with its pinned supplier's exact title, then
+append `## Definition references` with the same wikilinks in their original order,
+one per paragraph. Every other parsed metadata field and all remaining body text
+must match; no changed hypothesis, equation, dependency, source, publication
+status, other section or added/removed reference qualifies. A successor outside
+this narrow shape requires separate owner resolution. All original identity,
+alias, page-home, classification and publication checks remain active, as do
+local pin checks, content gates and native transition ownership. The mechanism
+does not update imports or generate a review, receipt, stamp or gate result.
+
 ## Physics isolation and prompts
 
 The physics cwd, content and state are `physics/`; never point the physics engine
@@ -1323,3 +1378,19 @@ diagram for mathematical correctness, repair defects and add missing diagrams
 where needed. This includes commutative and string diagrams, Young tableaux,
 braids, Temperley–Lieb diagrams and other types. Existing write scopes,
 read-only roles and the requirement for proofs independent of diagrams remain.
+
+### Newtonian stress finite smoke check
+
+The private check `fd-newtonian-stress-admissibility` selects the coefficient
+assertion of `lem-fd-newtonian-admissibility` through the ordinary `finite_smoke`
+contract record and its exact `asserts` excerpt. It fixes `K=0`, `g=0`, `T=1`
+and directly contracts the stress matrix with each of the 729 symmetric matrices
+whose six independent entries lie in `{-1,0,1}`. For all 42 integer coefficient
+pairs `-2 <= mu <= 3`, `-3 <= lambda <= 3`, it compares the enumerated sign with
+`mu >= 0` and `2mu+3lambda >= 0`, including nonzero null strains on the two
+coefficient boundaries and negative witnesses outside the admissible region.
+This bounded algebraic check covers the stress slice only; it does not certify
+the general theorem, Fourier conductivity, thermodynamic hypotheses or empirical
+fluid behavior. Owners add its actual item-specific contract obligation and bind
+current inputs through the ordinary workflow; registration alone adds no run
+coverage or readiness evidence.

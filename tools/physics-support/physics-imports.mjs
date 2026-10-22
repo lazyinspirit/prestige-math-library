@@ -9,6 +9,7 @@ import { REPO } from './paths.mjs';
 import { frontierMathematicsImportScope } from './frontier-import-scope.mjs';
 import { parseFrontmatter } from './content-policy-lib.mjs';
 import { splitFrontmatter } from './facts-block.mjs';
+import { originalMaintenance } from './original-maintenance.mjs';
 import { readOriginalItemIdentity } from './original-item-index.mjs';
 const hash = bytes => createHash('sha256').update(bytes).digest('hex');
 // A source folder rename does not move the immutable local snapshot.
@@ -84,6 +85,7 @@ export function verifyMathematicsImports(root, { run = null, planning = false, f
   const sourcePages = run || proposedPages !== null ? markdownFiles(join(receipt.source_root, 'library'))
     .filter(file => !file.split('/').at(-1).startsWith('_')).map(file => ({ ...readItem(file), path: relative(receipt.source_root, file) })) : [];
   const scope = run || proposedPages !== null ? frontierMathematicsImportScope(root, run, { planning, receipt, originals: { items: originals, pages: sourcePages }, proposedPages }) : null;
+  const acceptedOriginals = originalMaintenance(root, run, { receipt, scope, planning });
   const localFiles = frontierOnly ? receipt.files.filter(file => scope.paths.has(file.path)) : receipt.files;
   for (const file of localFiles) {
     if (hash(readFileSync(join(root, file.path))) !== file.sha256)
@@ -114,7 +116,8 @@ export function verifyMathematicsImports(root, { run = null, planning = false, f
     const original = originalImportPath(receipt, file);
     if (!existsSync(original)) throw Error(`missing mathematics source original: ${file.path}`);
     let originalBytes = readFileSync(original);
-    if (hash(originalBytes) !== file.sha256)
+    const currentOriginalHash = hash(originalBytes);
+    if (currentOriginalHash !== file.sha256 && acceptedOriginals.get(file.path) !== currentOriginalHash)
       throw Error(`mathematics import changed: ${file.path}; reconcile and re-import before a new run`);
     if (file.path.startsWith('items/')) {
       const item = readItem(original);

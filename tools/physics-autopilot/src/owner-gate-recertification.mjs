@@ -6,6 +6,7 @@ import { createHash, randomUUID } from 'node:crypto';
 import { validateDriftOwnerResolutions } from '../../physics-support/drift-owner-resolutions.mjs';
 import { frontierGateScope } from '../../physics-support/frontier-gate-scope.mjs';
 import { markdownFiles, readItem } from '../../physics-support/physics-content.mjs';
+import { originalMaintenancePath } from '../../physics-support/original-maintenance.mjs';
 import { originalImportPath } from '../../physics-support/physics-imports.mjs';
 import { scanProofFiles } from '../../physics-support/proof-layout.mjs';
 import { runPages, dependencyLevels } from '../../physics-support/item-dependency-levels.mjs';
@@ -154,6 +155,8 @@ export function gateReviewSnapshot(ctx, gates, stages) {
   // Bind current originals of relevant pinned imports as well as local snapshots.
   const importsPath = join(research, 'math-imports.json');
   bind(importsPath);
+  // Explicit original-maintenance authority and every reviewed input stay current.
+  bindCertificateEvidence(originalMaintenancePath(ctx.repo, ctx.run), bind, ctx.repo);
   if (existsSync(importsPath)) {
     const imports = readJSON(importsPath);
     for (const row of imports.files ?? []) {

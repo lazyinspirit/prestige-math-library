@@ -87,6 +87,49 @@ function runSmoke(id, smoke) {
 }
 
 function makeChecks() { return {
+  'fd-newtonian-stress-admissibility': () => {
+    // Restrict the authored residual to K=0, g=0, T=1. Evaluate tau:D
+    // entry by entry, without using the proof's deviatoric decomposition.
+    // The integer grid contains both a trace-free shear and I, so it also
+    // detects negative shear/bulk coefficients, including equality cases.
+    const fail = summary => ({ ok: false, summary });
+    let comparisons = 0, negativePairs = 0;
+    let zeroShearWitness = false, zeroBulkWitness = false;
+    const minima = new Map();
+    for (let mu = -2; mu <= 3; mu++) for (let lambda = -3; lambda <= 3; lambda++) {
+      let minimum = Infinity;
+      for (let code = 0; code < 3 ** 6; code++) {
+        let digits = code;
+        const entries = Array.from({ length: 6 }, () => {
+          const value = digits % 3 - 1;
+          digits = Math.floor(digits / 3);
+          return value;
+        });
+        const [a, b, c, d, e, f] = entries;
+        const D = [[a, d, e], [d, b, f], [e, f, c]];
+        const trace = a + b + c;
+        let residual = 0;
+        for (let i = 0; i < 3; i++) for (let j = 0; j < 3; j++) {
+          const stress = 2 * mu * D[i][j] + (i === j ? lambda * trace : 0);
+          residual += stress * D[i][j];
+        }
+        minimum = Math.min(minimum, residual);
+        if (mu === 0 && lambda === 1 && a === 1 && b === -1 && c === 0 && d === 0 && e === 0 && f === 0)
+          zeroShearWitness = residual === 0;
+        if (mu === 3 && lambda === -2 && a === 1 && b === 1 && c === 1 && d === 0 && e === 0 && f === 0)
+          zeroBulkWitness = residual === 0;
+        comparisons++;
+      }
+      const admissible = mu >= 0 && 2 * mu + 3 * lambda >= 0;
+      if ((minimum >= 0) !== admissible)
+        return fail(`stress contraction minimum ${minimum} disagrees with coefficient conditions at mu=${mu}, lambda=${lambda}`);
+      if (!admissible) negativePairs++;
+      minima.set(`${mu},${lambda}`, minimum);
+    }
+    if (minima.get('0,0') !== 0 || !zeroShearWitness || !zeroBulkWitness)
+      return fail('zero, zero-shear or zero-bulk equality case was lost');
+    return { ok: true, summary: `checked ${comparisons} direct stress contractions: 729 symmetric integer matrices per 42 coefficient pairs, including nonzero null witnesses at mu=0 and 2mu+3lambda=0; found negative witnesses for all ${negativePairs} inadmissible pairs (K=0, g=0, T=1 only)` };
+  },
   'sr-guided-ring-sagnac-worked-reunions': ({
     expected_return_ticks = [20, 5],
     expected_chart_delay = [15, 4],
