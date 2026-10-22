@@ -108,6 +108,12 @@
   hash. Depcheck reports this state as `published-local-repair`; stale,
   missing or mismatched evidence remains an error. There is no item gate,
   rejudgment or adjudication duty for this recorded repair state.
+  The physics content publication check applies this same policy to existing
+  published physical proof carriers, with loader-bound current filesystem
+  identity, source bytes and parsed metadata. A standalone in-memory repair
+  field supplies no publication authority. Valid recorded maintenance adds no
+  whole-item audit and retains all ordinary physical proof, source and empirical
+  qualification checks; initial publication still requires its proof audit.
 
 ### Open problems
 
