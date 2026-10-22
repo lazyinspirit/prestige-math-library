@@ -338,7 +338,11 @@ frontmatter; unknown, draft, or ambiguous page targets still fail routing.
 Unknown targets and alerts about the sender's own batch still fail the digest gate.
 
 Step 5 retains the round-based adjudication/repair engine, supplier-before-consumer
-maintenance, frozen frontier guards and its complete gate battery. An
+maintenance, frozen frontier guards and its complete gate battery. Its final
+frontier adapter recognizes every schema item prefix, including `op-` open
+problems, while retaining frozen identity/hash checks and the ordinary published
+maintenance distinction. An owned open-problem finding remains blocking;
+outside findings retain raw evidence and are excluded without being passed. An
 optional run-local `RUN-owner-step5-support-index.json` points native workers to
 outside proposals and genuine prior focused checks as read-only evidence.
 It grants no source ownership, review authority, or transition permission;
