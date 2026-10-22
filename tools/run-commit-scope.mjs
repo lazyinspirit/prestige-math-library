@@ -623,7 +623,10 @@ function loadScope(root, run, finalReceipt, historyPaths = [], allowMissingRecei
   // Plan replacement ownership is separate from the addition-only ledger API.
   const planProjections = [];
   if (policy.plan_projection !== undefined) {
-    if (physics) throw Error('closeout: plan projection currently supports mathematics only');
+    // Git object paths are repository-relative; authority paths stay local.
+    const planPrefix = textGit(root, ['rev-parse', '--show-prefix']);
+    if (planPrefix !== (physics ? 'physics/' : ''))
+      throw Error('closeout: plan projection has unexpected domain root');
     const row = policy.plan_projection;
     if (finalReceipt !== `research/${run}-dispatch/tool-step6-finalize-v3.result.json`
       || !row || Object.keys(row).some(key => !['path', 'authority', 'sha256'].includes(key))
@@ -637,7 +640,7 @@ function loadScope(root, run, finalReceipt, historyPaths = [], allowMissingRecei
       || !/^[a-f0-9]{40,64}$/.test(spec.original_index_blob ?? ''))
       throw Error('closeout: invalid original plan Git bindings');
     git(root, ['--no-replace-objects', 'merge-base', '--is-ancestor', spec.original_head, 'HEAD']);
-    const originalHead = decodePlan(git(root, ['--no-replace-objects', 'show', spec.original_head + ':research/plan-spec.json']));
+    const originalHead = decodePlan(git(root, ['--no-replace-objects', 'show', spec.original_head + ':' + planPrefix + row.path]));
     const originalIndex = decodePlan(git(root, ['--no-replace-objects', 'cat-file', 'blob', spec.original_index_blob]));
     validatePlanProjection(spec, run, selected.pages, decodePlan(readFileSync(join(root, row.path))), originalHead, originalIndex, root,
       { additionalPaths: policy.additional_paths });

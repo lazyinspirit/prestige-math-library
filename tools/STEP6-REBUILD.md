@@ -119,7 +119,7 @@ formatting protections grant no verdict or currency beyond the native ledger.
 
 ### Replacement-only plan ownership
 
-Mathematics v3 closeout can bind one separate `plan_projection` object in its
+Mathematics and physics v3 closeout can bind one separate `plan_projection` object in its
 run-local closeout scope policy: `{path: "research/plan-spec.json", authority:
 "research/RUN-step6-plan-projection.json", sha256: "..."}`. This is page-record
 commit authority. It does not grant ownership of the complete shared working
@@ -250,7 +250,7 @@ also matches. V2 transaction receipts additionally record `added_page_ids`; the
 selected `page_ids` and supporting `supporting_page_ids` remain separate. The
 full working plan and every outside index entry remain untouched. This grants
 plan-row commit ownership only; it creates no item, publication, review or gate
-coverage and does not change legacy or physics behavior.
+coverage and does not change legacy behavior.
 
 The current working plan must contain the exact authorized target row bytes.
 Root creates this authority only after real writers and native splice updates
@@ -279,7 +279,13 @@ unconsumed published-ledger authority, archive that original authority and its
 original evidence/policy before truthfully authorizing the current successor
 against the same original HEAD/index ledger bases. Do not relabel it consumed,
 rewrite historical receipts, or broaden ledger additions into replacements.
-Physics and legacy closeout do not acquire this plan-replacement route.
+Physics uses the same exact authority and current scope-ledger/manifest checks
+from its `physics/` workspace. Git `original_head` plan lookups include the
+`physics/` prefix; authority and evidence paths remain workspace-relative.
+Domain/root mismatches fail closed. Imported mathematical carriers remain
+read-only and cannot become owned selected or supporting paths. Scientific
+context, preparation, validation and transaction compare-and-swap guards remain
+unchanged. Legacy closeout does not acquire this plan-replacement route.
 
 
 An explicitly authorized `published-local-repair-marker-additions` shared-ledger

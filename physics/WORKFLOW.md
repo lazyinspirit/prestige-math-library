@@ -961,6 +961,15 @@ the TypeScript fallback resolves configured project path aliases and missing
 extensionless relative TypeScript imports; ordinary package resolution retains
 Node export-map checks. These runtime details do not change renderer analysis.
 
+Physics v3 closeout may opt into exact shared-plan page-row projection through
+the run-local closeout scope policy. Authority binds only the exact current
+scope ledger and all current batch manifests, with separate original HEAD/index
+row tokens and target tokens. The nested Git lookup uses `physics/` while
+authority paths stay relative to this workspace. Foreign HEAD, index and working
+plan bytes remain separate; imported mathematical carriers remain read-only.
+This packaging authority grants no scientific acceptance or gate coverage. See
+[shared-plan ownership](../tools/STEP6-REBUILD.md#replacement-only-plan-ownership).
+
 Step-6 terminal defect-ledger gates use the run's frozen Step-5 frontier when
 present. Outside item findings remain recorded with their actual dispositions
 and are reported as excluded, not passed; original mathematical maintenance
