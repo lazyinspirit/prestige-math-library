@@ -345,6 +345,44 @@ It grants no source ownership, review authority, or transition permission;
 workers verify current arguments and bind only immutable evidence actually used.
 Versioned root-published `RUN-owner-step5-support-supplement-*.json` supplies
 later evidence without modifying indexes already used by workers.
+For an already-published local carrier excluded from original initial
+adjudication assignments, Root may bind a separate, genuine local correction
+through `research/RUN-step5-v2/owner-published-maintenance.json`. The version-1
+request has `run`, `phase: "initial"`, `round: 1`, `reviewer: "/root"`,
+`native_review: false`, `native_adjudication: false`, a concrete `reason`,
+`drained_state: {path, sha256}`, and nonempty `entries`. Each entry has `id`,
+the actual published claim `group`, `receipt: {path, sha256}`, and nonempty
+`scientific_evidence: [{path, sha256}, ...]`. Evidence paths are relative,
+run-local research paths; hashes bind exact raw bytes. Root explicitly adopts
+the actual scientific owner's focused repair and affected-consumer review in
+the request, without claiming a native worker performed that review.
+
+The source-application snapshot must be an actual paused, drained, unfinished
+`5.1-adjudicate` state. Apply only after source writers drain and preserve the
+published source with its prior audit before claiming and editing. At native
+collection, the current run must still be at unfinished `5.1-adjudicate`, every
+source dispatch must be drained, and no shared writer lock may exist. Collection
+may run after resume; the native `step5-wave-evidence` gate is an untracked
+read-only subprocess, not a source dispatch. Remaining original units may finish
+normally after the archived application boundary.
+
+Only an unassigned, nonimported published carrier in the exact frozen original
+frontier is eligible. Its policy-valid `verification.repair` receipt must match
+the actual run and claim group, original initial content and public-interface
+hashes, durable audited preimage, current source, canonical ledger marker and
+actual current successful focused checks. Current audit stamps are replaced by
+this local repair state. Collection binds the immutable request, receipt,
+preimage and scientific evidence, records the exact claim-row and ledger-block
+hashes, and revalidates them on replay. Unrelated canonical claim/ledger appends
+remain legal. No native author, review, decision, judge tuple or gate authority
+is created. Every unlisted source change retains ordinary licensing checks.
+Published interface changes still produce normal consumer events; published
+consumers remain in separate maintenance even when their IDs occur in the
+frozen frontier. Draft consumer inventory, genuine current native reviews,
+context checks, owner recertification and the complete gate battery remain
+required. The initial pack, original reports and mechanical zero-work results
+stay immutable.
+
 The native Sol 6.1 high worker identity is independent of the Step-4 judge lineup.
 Coverage gates retain the singleton original Step-4 lineup bound by the frozen
 `step4-verdicts.json` and initial adjudication pack. Before Step 5 is frozen,

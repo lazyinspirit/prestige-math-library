@@ -6,6 +6,7 @@ import {join,relative} from 'node:path';
 import {readLibraryItems,discoverDownstream,partitionImpacts,validateFrontier} from './step5-rounds.mjs';
 import {itemHashGuard} from './item-hash.mjs';
 import {statementHash} from './step5-statement.mjs';
+import {isPublishedItem} from './published-repair-policy.mjs';
 
 const hash=value=>createHash('sha256').update(typeof value==='string'?value:JSON.stringify(value)).digest('hex');
 const check=(value,message)=>{if(!value)throw new Error(`consumer maintenance: ${message}`);};
@@ -23,7 +24,7 @@ function load(root,run){
 }
 function save(root,run,state){const dir=directory(root,run);mkdirSync(dir,{recursive:true});const temp=join(dir,`state.${process.pid}.tmp`);writeFileSync(temp,JSON.stringify(state,null,2)+'\n');renameSync(temp,join(dir,'state.json'));}
 function immutable(path,value){const text=JSON.stringify(value,null,2)+'\n';if(existsSync(path)){check(readFileSync(path,'utf8')===text,`immutable artifact differs: ${path}`);return;}writeFileSync(path,text,{flag:'wx'});}
-function frontier(root,run){const path=join(root,'research',`${run}-step5-v2`,'frontier.json');check(existsSync(path),'missing immutable frontier');const frozen=validateFrontier(read(path));check(frozen.run===run,'frontier run mismatch');return new Set(frozen.ids);}
+function frontier(root,run){const path=join(root,'research',`${run}-step5-v2`,'frontier.json');check(existsSync(path),'missing immutable frontier');const frozen=validateFrontier(read(path));check(frozen.run===run,'frontier run mismatch');return new Set(frozen.ids.filter(id=>!isPublishedItem(root,id)));}
 function verifyPack(root,run,state,id){const dir=directory(root,run),binding=state.bindings?.[id];check(binding,'missing frozen pack binding');for(const [path,expected] of Object.entries(binding))check(hash(readFileSync(join(root,path),'utf8'))===expected,`frozen input changed: ${path}`);return read(join(dir,`${id}.json`));}
 function enqueue(root,run,state,events,items){
   const eligible=frontier(root,run,items),byId=new Map(items.map(i=>[i.id,i]));

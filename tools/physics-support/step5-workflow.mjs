@@ -9,6 +9,7 @@ import { createHash } from 'node:crypto';
 import { spawnSync } from 'node:child_process';
 import { freezeFrontier, validateFrontier, readLibraryItems, discoverDownstream, assessFatalThreshold } from './step5-rounds.mjs';
 import { isPublishedItem } from './published-repair-policy.mjs';
+import { publishedMaintenance, isPublishedMaintenance } from './step5-published-maintenance.mjs';
 import { itemHashGuard } from './item-hash.mjs';
 import { currentHashesMany } from './step5-terminal-resolution.mjs';
 import { MODELS } from './models.mjs';
@@ -399,7 +400,7 @@ function writeTasks(root,pack,mode) {
   }
 }
 
-export function validateReports(pack,reports,now,{root=null,scientificCorrection=null,ownerFindingCorrection=null}={}) {
+export function validateReports(pack,reports,now,{root=null,scientificCorrection=null,ownerFindingCorrection=null,publishedLocalMaintenance=null}={}) {
   const childReview=id=>ownerFindingCorrection?.token===ownerFindingCollectionToken
     ?ownerFindingCorrection.reviews.find(row=>row.id===id):null;
   const corrected=id=>(scientificCorrection?.token===scientificValidationToken&&scientificCorrection.subject===id)||!!childReview(id);
@@ -450,6 +451,9 @@ export function validateReports(pack,reports,now,{root=null,scientificCorrection
     for(const id of diff(pack.before_statements,statements))errors.push(`formatting continuation changed public interface ${id}`);
   }
   for(const id of changed) {
+    // Authentic local published receipts are a separate policy state. Ordinary
+    // draft repairs retain their exact assigned review and decision checks.
+    if(isPublishedMaintenance(publishedLocalMaintenance)&&publishedLocalMaintenance.guards[id]===now[id])continue;
     if(pack.repair_scope==='frontier'&&!pack.frontier_ids?.includes(id)&&pack.before[id])errors.push(`out-of-frontier consumer cannot be repaired by Step 5: ${id}`);
     const created=creatorById.get(id),review=childReview(id)??reviews.find(r=>r.id===id&&r.disposition===(created?'authored':'repaired'));
     if(!now[id]||!review||review.post_sha256!==now[id]||(!created&&!pack.before[id]))errors.push(`unlicensed or unreviewed change ${id}`);
@@ -814,6 +818,7 @@ export function collect(root,run,phase,round,{deferImpactClosure=false,correctio
       if(!deferImpactClosure)return verifyClosedOwnerCollection(root,run,phase,round,collectedPath,prior);
     }
     verifyHistoricalEvidence(root,run,prior.evidence);
+    if(prior.published_local_repairs?.length)publishedMaintenance(root,run,readPack(root,run,phase,round),hashes(root),{replay:prior.published_local_repairs});
     if(phase==='initial'){verifyPageCorrectionReplay(root,run,round,prior);verifyReviewCorrectionReplay(root,run,prior);}
     syncMaintenance(root,run,prior.statement_events??[]);return prior;
   }
@@ -892,7 +897,8 @@ export function collect(root,run,phase,round,{deferImpactClosure=false,correctio
       decisions:report.decisions.map(row=>decisions.get(key(row))??row),
       reviews:report.reviews.map(row=>reviews.get(row.id)??row)}));
   }
-  const result=validateReports(pack,effectiveReports,reported,{root,
+  const publishedLocalMaintenance=phase==='initial'&&round===1?publishedMaintenance(root,run,pack,current):null;
+  const result=validateReports(pack,effectiveReports,reported,{root,publishedLocalMaintenance,
     scientificCorrection:scientificAdopted?{token:scientificValidationToken,subject:scientificAdopted.subject}:null,
     ownerFindingCorrection:ownerCompletion?{token:ownerFindingCollectionToken,reviews:ownerCompletion.reviews}:null});
   if(ownerCompletion){
@@ -924,7 +930,7 @@ export function collect(root,run,phase,round,{deferImpactClosure=false,correctio
   const scientificContexts=collectionItems?reviewContexts(collectionItems):null;
   const scientificCompletion=scientificRepairCompletion(pack,reports,current,
     row=>scientificContexts.matches(row,current));
-  const evidence={...(pack.input_evidence??{}),...external.evidence,[packPath(root,run,phase,round)]:digest(readFileSync(packPath(root,run,phase,round),'utf8'))};
+  const evidence={...(pack.input_evidence??{}),...external.evidence,...(publishedLocalMaintenance?.evidence??{}),[packPath(root,run,phase,round)]:digest(readFileSync(packPath(root,run,phase,round),'utf8'))};
   verifyEvidence(evidence);
   const creationAuthors=new Map();
   for(const unit of pack.units) {
@@ -976,6 +982,7 @@ export function collect(root,run,phase,round,{deferImpactClosure=false,correctio
     for(const row of reports.find(value=>String(value.unit)===unit)?.created_items??[])creationAuthors.set(row.id,basename(dispatch));
   }
   const receipt={...result,created_items:result.created_items.map(row=>({...row,author_result:creationAuthors.get(row.id)})),version:2,run,phase,round,evidence,post:hashes(root),downstream:[...new Set(reports.flatMap(row=>row.downstream))],ledger_updates:reports.flatMap(row=>row.ledger_updates??[])};
+  if(publishedLocalMaintenance?.repairs.length)receipt.published_local_repairs=publishedLocalMaintenance.repairs;
   if(external.repairs.length)receipt.external_owner_repairs=external.repairs;
   if(scientificCompletion)receipt.scientific_repair_completion=scientificCompletion;
   if(correction){
