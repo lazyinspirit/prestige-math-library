@@ -28,6 +28,7 @@ import { publishedPageDependencies, publishedPageCarrier } from './step3-publish
 import { ownerReviewedFindingAlias, sameFindingLocation } from './step3-owner-finding-alias.mjs';
 import { downstreamHandoffs } from './step3-downstream-handoff.mjs';
 import { observedCurrentHistory } from './step3-observed-current-history.mjs';
+import { sharedCausalRepair } from './step3-shared-causal-repair.mjs';
 
 const argv = process.argv.slice(2);
 const command = argv[0];
@@ -1503,7 +1504,14 @@ if (command === 'check') {
               // repair decision retains its separate item-order anchor.
               && actualFinding.observed_sha256 === hashValue(pageRepair ? pageCarrier(observed) : observed);
           }
-          if (prior && !sharedFinding && !sharedCausalAddition && !sharedPostReaderRepair) error('ledger-double-owned', `${defectId} is referenced by incompatible decisions`);
+          const sharedCrossGroupCausalRepair = prior && target?.subject_type === 'in-run-dependency'
+            && /^[a-f0-9]{64}$/.test(decision.shared_causal_receipt_sha256 ?? '')
+            && sharedCausalRepair({ run, prior, decision, target,
+              canonicalRow: mine.find(row => row.defect_id === defectId),
+              currentCarrier: liveFor(String(target.producer_batch)).items[target.id],
+              readBytes: relative => readFileSync(R(relative)), hashValue });
+          if (prior && !sharedFinding && !sharedCausalAddition && !sharedPostReaderRepair
+            && !sharedCrossGroupCausalRepair) error('ledger-double-owned', `${defectId} is referenced by incompatible decisions`);
           if (!prior) referenced.set(defectId, {
             obligation: decision.obligation, id: decision.id, route: decision.route, verdict: decision.verdict, target,
             historical_delta_unknown: decision.historical_delta_unknown, owner_resolution: decision.owner_resolution,

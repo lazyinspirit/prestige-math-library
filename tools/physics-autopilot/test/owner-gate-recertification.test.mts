@@ -52,6 +52,19 @@ test('Step-3 observed-current authority and its immutable evidence are gate inpu
   writeFileSync(join(f.repo, archive), 'Changed evidence invalidates the owner snapshot.');
   assert.notEqual(gateReviewSnapshot(f.ctx, gates, ['3a-split']).sha256, first.sha256);
 });
+test('Step-3 cross-group causal authority and its repair evidence are gate inputs', t => {
+  const f = fixture(t);
+  const archive = 'research/demo-observed-source.md';
+  writeFileSync(join(f.repo, archive), 'Actual archived source bytes.');
+  const authority = 'research/demo-step3-cross-group-causal-repairs.json';
+  writeFileSync(join(f.repo, authority), JSON.stringify({ inputs: { [archive]: sha('Actual archived source bytes.') } }));
+  const gates = [{ id: 'routing', argv: ['node', 'tools/step3-scope.mjs', 'check', '--run', 'demo'] }];
+  const first = gateReviewSnapshot(f.ctx, gates, ['3a-split']);
+  assert.ok(first.inputs.some((row: any) => row.path.endsWith(authority)));
+  assert.ok(first.inputs.some((row: any) => row.path.endsWith(archive)));
+  writeFileSync(join(f.repo, archive), 'Changed evidence invalidates the owner snapshot.');
+  assert.notEqual(gateReviewSnapshot(f.ctx, gates, ['3a-split']).sha256, first.sha256);
+});
 test('Step-3 continuation authority and immutable references invalidate stale snapshots', t => {
   const f = fixture(t);
   const authority = 'research/demo-step3-refuter-continuations.json';

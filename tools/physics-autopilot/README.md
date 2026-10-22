@@ -58,3 +58,13 @@ Freshly planned namespaces now use `physics-six-step-v1-statement-first` through
 `mathlib.statement-first.mts` table. Every item class presents uninterrupted
 statements/descriptions and separate following reference lines. Existing runs
 keep their original revision and table. See [the editorial policy](../STATEMENT-FIRST.md).
+
+A Root-reviewed cross-group causal-repair receipt may consolidate duplicate
+producer/consumer defect records into one append-only successor. It requires the
+exact producer touched decision, two frozen consumer reader/refuter observations,
+both original row archives, all reports/pre/post snapshots, current supplier
+carrier, complete adjudication references and substantive final repair evidence.
+The private checker authenticates the receipt and decision cores; all ordinary
+route, severity, observation and current-carrier checks still apply. Stamp current
+decisions before binding the primary file, then add consumer receipt pointers.
+The owner gate snapshot follows this authority's exact evidence input map.
